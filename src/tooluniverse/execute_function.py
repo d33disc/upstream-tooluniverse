@@ -7,10 +7,10 @@ from .graphql_tool import OpentargetTool, OpentargetGeneticsTool, OpentargetTool
 from .openfda_tool import FDADrugLabelTool, FDADrugLabelSearchTool, FDADrugLabelSearchIDTool, FDADrugLabelGetDrugGenericNameTool
 from .restful_tool import MonarchTool, MonarchDiseasesForMultiplePhenoTool
 
-default_tool_files = {'opentarget': 'data/opentarget_tools.json',
-                        'fda_drug_label': 'data/fda_drug_labeling_tools.json',
-                        'special_tools': 'data/special_tools.json',
-                        'monarch': 'data/monarch_tools.json'}
+default_tool_files = {'opentarget': './data/opentarget_tools.json',
+                        'fda_drug_label': './data/fda_drug_labeling_tools.json',
+                        'special_tools': './data/special_tools.json',
+                        'monarch': './data/monarch_tools.json'}
 
 tool_type_mappings = {
     'OpenTarget': OpentargetTool,
