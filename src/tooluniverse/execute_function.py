@@ -7,10 +7,17 @@ from .graphql_tool import OpentargetTool, OpentargetGeneticsTool, OpentargetTool
 from .openfda_tool import FDADrugLabelTool, FDADrugLabelSearchTool, FDADrugLabelSearchIDTool, FDADrugLabelGetDrugGenericNameTool
 from .restful_tool import MonarchTool, MonarchDiseasesForMultiplePhenoTool
 
-default_tool_files = {'opentarget': './data/opentarget_tools.json',
-                        'fda_drug_label': './data/fda_drug_labeling_tools.json',
-                        'special_tools': './data/special_tools.json',
-                        'monarch': './data/monarch_tools.json'}
+import os
+
+# Determine the directory where the current file is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+default_tool_files = {
+    'opentarget': os.path.join(current_dir, 'data', 'opentarget_tools.json'),
+    'fda_drug_label': os.path.join(current_dir, 'data', 'fda_drug_labeling_tools.json'),
+    'special_tools': os.path.join(current_dir, 'data', 'special_tools.json'),
+    'monarch': os.path.join(current_dir, 'data', 'monarch_tools.json')
+}
 
 tool_type_mappings = {
     'OpenTarget': OpentargetTool,
