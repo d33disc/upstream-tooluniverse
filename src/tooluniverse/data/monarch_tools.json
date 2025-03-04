@@ -28,10 +28,14 @@
             }
         },
         "query_schema": {
-            "category": ["biolink:DiseaseToPhenotypicFeatureAssociation"],
+            "category": [
+                "biolink:DiseaseToPhenotypicFeatureAssociation"
+            ],
             "object": null,
             "compact": true,
-            "object_category": ["biolink:PhenotypicFeature"],
+            "object_category": [
+                "biolink:PhenotypicFeature"
+            ],
             "limit": 500,
             "offset": 0
         },
@@ -96,7 +100,9 @@
         },
         "query_schema": {
             "query": null,
-            "category": ["biolink:PhenotypicFeature"],
+            "category": [
+                "biolink:PhenotypicFeature"
+            ],
             "limit": 20,
             "offset": 0
         },

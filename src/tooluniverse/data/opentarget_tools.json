@@ -147,19 +147,6 @@
             }
         },
         "query_schema": "\n  query diseaseKnownDrugs($efoId: String!, $size: Int!, $freeTextQuery: String) {\n    disease(efoId: $efoId) {\n      id\n      name\n      knownDrugs(size: $size, freeTextQuery: $freeTextQuery) {\n        count\n        rows {\n          drug {\n            id\n            name\n            tradeNames\n            maximumClinicalTrialPhase\n            isApproved\n            hasBeenWithdrawn\n          }\n          phase\n          status\n          mechanismOfAction\n          target {\n            id\n            approvedSymbol\n          }\n        }\n      }\n    }\n  }\n  ",
-        "examples": [
-            {
-                "question": "Please list the drugs associated with the disease with efoId 'EFO_0005548' and filter by 'dopamine'.",
-                "query": {
-                    "name": "get_associated_drugs_by_disease_efoId",
-                    "arguments": {
-                        "efoId": "EFO_0005548",
-                        "size": 10,
-                        "freeTextQuery": "dopamine"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Disease",
@@ -433,35 +420,6 @@
             }
         },
         "query_schema": "\n      query targetGeneOntology($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneOntology {\n            aspect\n            evidence\n            geneProduct\n            source\n            term {\n              id\n              name\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the Gene Ontology annotations for the target with Ensembl ID 'ENSG00000136492'?",
-                "query": {
-                    "name": "get_target_gene_ontology_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000136492"
-                    }
-                }
-            },
-            {
-                "question": "What are the Gene Ontology annotations for the target identified by Ensembl ID 'ENSG00000138653'?",
-                "query": {
-                    "name": "get_target_gene_ontology_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000138653"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the Gene Ontology annotations for the target with Ensembl ID 'ENSG00000186162'.",
-                "query": {
-                    "name": "get_target_gene_ontology_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000186162"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "GeneOntology",
@@ -484,35 +442,6 @@
             }
         },
         "query_schema": "\n      query targetHomologues($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          homologues {\n            homologyType\n            queryPercentageIdentity\n            speciesId\n            speciesName\n            targetGeneId\n            targetGeneSymbol\n            targetPercentageIdentity\n            isHighConfidence\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you fetch homologues for the target with Ensembl ID 'ENSG00000100033'?",
-                "query": {
-                    "name": "get_target_homologues_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000100033"
-                    }
-                }
-            },
-            {
-                "question": "What are the homologues for the target identified by Ensembl ID 'ENSG00000288534'?",
-                "query": {
-                    "name": "get_target_homologues_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000288534"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the homologues for the target with Ensembl ID 'ENSG00000198937'.",
-                "query": {
-                    "name": "get_target_homologues_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000198937"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Target Information",
@@ -535,35 +464,6 @@
             }
         },
         "query_schema": "\n      query targetSafetyLiabilities($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          safetyLiabilities {\n            event\n            eventId\n            biosamples {\n              cellFormat\n              cellLabel\n              tissueLabel\n              tissueId\n            }\n            effects {\n              dosing\n              direction\n            }\n            studies {\n              name\n              type\n              description\n            }\n            datasource\n            literature\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the safety liabilities for the target with Ensembl ID 'ENSG00000175274'?",
-                "query": {
-                    "name": "target_safety_liabilities",
-                    "arguments": {
-                        "ensemblId": "ENSG00000175274"
-                    }
-                }
-            },
-            {
-                "question": "What are the known safety effects for the target identified by Ensembl ID 'ENSG00000226446'?",
-                "query": {
-                    "name": "target_safety_liabilities",
-                    "arguments": {
-                        "ensemblId": "ENSG00000226446"
-                    }
-                }
-            },
-            {
-                "question": "Please retrieve the safety risk information for the target with Ensembl ID 'ENSG00000151929'.",
-                "query": {
-                    "name": "target_safety_liabilities",
-                    "arguments": {
-                        "ensemblId": "ENSG00000151929"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "SafetyLiability",
@@ -588,26 +488,6 @@
             }
         },
         "query_schema": "\n      query fetchBiologicalModels($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          mousePhenotypes {\n            biologicalModels {\n              allelicComposition\n              geneticBackground\n              id\n              literature\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "What are the allelic compositions and genetic backgrounds for the target identified by Ensembl ID 'ENSG00000196639'?",
-                "query": {
-                    "name": "get_biological_mouse_models_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000196639"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the biological models for the target with the Ensembl ID 'ENSG00000171862'.",
-                "query": {
-                    "name": "get_biological_mouse_models_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000171862"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Target Information",
@@ -630,35 +510,6 @@
             }
         },
         "query_schema": "\n      query targetGenomicLocation($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          genomicLocation {\n            chromosome\n            start\n            end\n            strand\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the genomic location for the target with Ensembl ID 'ENSG00000114098'?",
-                "query": {
-                    "name": "get_target_genomic_location_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000114098"
-                    }
-                }
-            },
-            {
-                "question": "What is the genomic location data for the target identified by Ensembl ID 'ENSG00000231404'?",
-                "query": {
-                    "name": "get_target_genomic_location_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000231404"
-                    }
-                }
-            },
-            {
-                "question": "Please retrieve the genomic location information for the target with Ensembl ID 'ENSG00000167258'.",
-                "query": {
-                    "name": "get_target_genomic_location_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000167258"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "GenomicLocation",
@@ -681,35 +532,6 @@
             }
         },
         "query_schema": "\n      query targetSubcellularLocations($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          subcellularLocations {\n            location\n            source\n            termSL\n            labelSL\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the subcellular locations for the target with Ensembl ID 'ENSG00000121898'?",
-                "query": {
-                    "name": "get_target_subcellular_locations_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000121898"
-                    }
-                }
-            },
-            {
-                "question": "What are the subcellular locations for the target identified by Ensembl ID 'ENSG00000274286'?",
-                "query": {
-                    "name": "get_target_subcellular_locations_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000274286"
-                    }
-                }
-            },
-            {
-                "question": "Please retrieve the subcellular location information for the target with Ensembl ID 'ENSG00000171843'.",
-                "query": {
-                    "name": "get_target_subcellular_locations_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000171843"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "Subcellular Locations",
@@ -732,35 +554,6 @@
             }
         },
         "query_schema": "\n      query retrieveTargetSynonyms($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          synonyms {\n            label\n            source\n          }\n          symbolSynonyms {\n            label\n            source\n          }\n          nameSynonyms {\n            label\n            source\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve synonyms for the target with the Ensembl ID 'ENSG00000188986'?",
-                "query": {
-                    "name": "get_target_synonyms_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000188986"
-                    }
-                }
-            },
-            {
-                "question": "What are the alternative names and symbols for the target identified by Ensembl ID 'ENSG00000269335'?",
-                "query": {
-                    "name": "get_target_synonyms_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000269335"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the synonyms for the target with Ensembl ID 'ENSG00000141052'.",
-                "query": {
-                    "name": "get_target_synonyms_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000141052"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Target Information",
@@ -783,35 +576,6 @@
             }
         },
         "query_schema": "\n      query targetTractabilityAssessment($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          tractability {\n            label\n            modality\n            value\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the tractability assessment for the target with Ensembl ID 'ENSG00000141736'?",
-                "query": {
-                    "name": "get_target_tractability_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000141736"
-                    }
-                }
-            },
-            {
-                "question": "What are the tractability assessments for the target identified by Ensembl ID 'ENSG00000169249'?",
-                "query": {
-                    "name": "get_target_tractability_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000169249"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the tractability assessment details for the target with Ensembl ID 'ENSG00000122548'.",
-                "query": {
-                    "name": "get_target_tractability_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000122548"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "Tractability",
@@ -835,35 +599,6 @@
             }
         },
         "query_schema": "\n      query fetchTargetClasses($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          targetClass {\n            id\n            label\n            level\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the target classes for the target with Ensembl ID 'ENSG00000185324'?",
-                "query": {
-                    "name": "get_target_classes_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000185324"
-                    }
-                }
-            },
-            {
-                "question": "What are the target classes associated with the Ensembl ID 'ENSG00000141646'?",
-                "query": {
-                    "name": "get_target_classes_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000141646"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the target classes for the target identified by Ensembl ID 'ENSG00000141736'.",
-                "query": {
-                    "name": "get_target_classes_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000141736"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Target Information",
@@ -886,17 +621,6 @@
             }
         },
         "query_schema": "\n      query fetchTargetEnablingPackages($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          tep {\n            name\n            uri\n            therapeuticArea\n            description\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the Target Enabling Packages for the target with Ensembl ID 'ENSG00000167258'?",
-                "query": {
-                    "name": "get_target_enabling_packages_by_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000167258"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Target Information",
@@ -944,47 +668,6 @@
             }
         },
         "query_schema": "\n      query targetInteractions($ensemblId: String!, $page: Pagination!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          interactions(page: $page) {\n            count\n            rows {\n              intA\n              targetA {\n              id\n          approvedSymbol\n        }\n        intB\n        targetB {\n          id\n          approvedSymbol\n        }\n              score\n              sourceDatabase\n              evidences {\n                evidenceScore\n                pubmedId\n                interactionDetectionMethodShortName\n              }\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve interaction data for the target with Ensembl ID 'ENSG00000134508' from the source database 'BioGRID'?",
-                "query": {
-                    "name": "target_interactions",
-                    "arguments": {
-                        "ensemblId": "ENSG00000134508",
-                        "page": {
-                            "index": 1,
-                            "size": 10
-                        }
-                    }
-                }
-            },
-            {
-                "question": "What are the interaction partners and evidence for the target identified by Ensembl ID 'ENSG00000276601'?",
-                "query": {
-                    "name": "target_interactions",
-                    "arguments": {
-                        "ensemblId": "ENSG00000276601",
-                        "page": {
-                            "index": 2,
-                            "size": 5
-                        }
-                    }
-                }
-            },
-            {
-                "question": "Please provide the interaction data for the target with Ensembl ID 'ENSG00000287061' on the first page with 20 items per page.",
-                "query": {
-                    "name": "target_interactions",
-                    "arguments": {
-                        "ensemblId": "ENSG00000287061",
-                        "page": {
-                            "index": 1,
-                            "size": 20
-                        }
-                    }
-                }
-            }
-        ],
         "type": "OpenTarget"
     },
     {
@@ -1089,35 +772,6 @@
             }
         },
         "query_schema": "\n      query getDiseaseDetailsByEfoId($efoId: String!) {\n        disease(efoId: $efoId) {\n          id\n          name\n          description\n          dbXRefs\n          obsoleteTerms\n          isTherapeuticArea\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide detailed information about the disease with the EFO ID 'MONDO_0000030'?",
-                "query": {
-                    "name": "get_disease_description_by_efoId",
-                    "arguments": {
-                        "efoId": "MONDO_0000030"
-                    }
-                }
-            },
-            {
-                "question": "What are the details of the disease identified by the EFO ID 'EFO_0007468'?",
-                "query": {
-                    "name": "get_disease_description_by_efoId",
-                    "arguments": {
-                        "efoId": "EFO_0007468"
-                    }
-                }
-            },
-            {
-                "question": "Please retrieve information about the disease with the EFO ID 'Orphanet_217563'.",
-                "query": {
-                    "name": "get_disease_description_by_efoId",
-                    "arguments": {
-                        "efoId": "Orphanet_217563"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Disease",
@@ -1140,35 +794,6 @@
             }
         },
         "query_schema": "\n      query diseaseTherapeuticAreas($efoId: String!) {\n        disease(efoId: $efoId) {\n          id\n          name\n          therapeuticAreas {\n            id\n            name\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "What therapeutic areas are linked to the disease with the efoId 'MONDO_0016474'?",
-                "query": {
-                    "name": "get_disease_therapeutic_areas_by_efoId",
-                    "arguments": {
-                        "efoId": "MONDO_0016474"
-                    }
-                }
-            },
-            {
-                "question": "Can you provide the therapeutic areas associated with the disease identified by efoId 'Orphanet_2579'?",
-                "query": {
-                    "name": "get_disease_therapeutic_areas_by_efoId",
-                    "arguments": {
-                        "efoId": "Orphanet_2579"
-                    }
-                }
-            },
-            {
-                "question": "Please list the therapeutic areas for the disease with the efoId 'MONDO_0000873'.",
-                "query": {
-                    "name": "get_disease_therapeutic_areas_by_efoId",
-                    "arguments": {
-                        "efoId": "MONDO_0000873"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Disease",
@@ -1322,35 +947,6 @@
             }
         },
         "query_schema": "\n      query drugSynonyms($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          synonyms\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the synonyms for the drug with ChEMBL ID 'CHEMBL2021430'?",
-                "query": {
-                    "name": "drug_synget_drug_synonyms_by_chemblIdonyms",
-                    "arguments": {
-                        "chemblId": "CHEMBL2021430"
-                    }
-                }
-            },
-            {
-                "question": "What are the synonyms associated with the drug identified by ChEMBL ID 'CHEMBL295698'?",
-                "query": {
-                    "name": "get_drug_synonyms_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL295698"
-                    }
-                }
-            },
-            {
-                "question": "Please list the synonyms for the drug that has the ChEMBL ID 'CHEMBL1084617'.",
-                "query": {
-                    "name": "get_drug_synonyms_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1084617"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Drug Information",
@@ -1373,35 +969,6 @@
             }
         },
         "query_schema": "\n      query drugTradeNames($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          tradeNames\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "What are the trade names for the drug with ChEMBL ID 'CHEMBL25'?",
-                "query": {
-                    "name": "get_drug_trade_names_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL25"
-                    }
-                }
-            },
-            {
-                "question": "Can you provide the trade names associated with the drug identified by ChEMBL ID 'CHEMBL1201613'?",
-                "query": {
-                    "name": "get_drug_trade_names_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1201613"
-                    }
-                }
-            },
-            {
-                "question": "Please list the trade names for the drug that has the ChEMBL ID 'CHEMBL3182621'.",
-                "query": {
-                    "name": "get_drug_trade_names_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL3182621"
-                    }
-                }
-            }
-        ],
         "label": [
             "Drug",
             "OpenTarget",
@@ -1424,35 +991,6 @@
             }
         },
         "query_schema": "\n      query drugApprovalStatus($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          isApproved\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "What is the approval status of the drug with ChEMBL ID 'CHEMBL2103799'?",
-                "query": {
-                    "name": "get_drug_approval_status_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL2103799"
-                    }
-                }
-            },
-            {
-                "question": "Can you tell me if the drug identified by ChEMBL ID 'CHEMBL1684' is approved?",
-                "query": {
-                    "name": "get_drug_approval_status_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1684"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the approval status for the drug with ChEMBL ID 'CHEMBL1086997'.",
-                "query": {
-                    "name": "get_drug_approval_status_by_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1086997"
-                    }
-                }
-            }
-        ],
         "label": [
             "Drug",
             "Drug Information",
@@ -1475,35 +1013,6 @@
             }
         },
         "query_schema": "\n      query getTargetChemicalProbes($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          chemicalProbes {\n            id\n            control\n            drugId\n            mechanismOfAction\n            isHighQuality\n            origin\n            probeMinerScore\n            probesDrugsScore\n            scoreInCells\n            scoreInOrganisms\n            targetFromSourceId\n            urls {\n              niceName\n              url\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the chemical probes for the target with Ensembl ID 'ENSG00000163515'?",
-                "query": {
-                    "name": "get_chemical_probes_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000163515"
-                    }
-                }
-            },
-            {
-                "question": "What chemical probes are associated with the target identified by Ensembl ID 'ENSG00000157916'?",
-                "query": {
-                    "name": "get_chemical_probes_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000157916"
-                    }
-                }
-            },
-            {
-                "question": "Please list the chemical probes linked to the target with Ensembl ID 'ENSG00000253563'.",
-                "query": {
-                    "name": "get_chemical_probes_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000253563"
-                    }
-                }
-            }
-        ],
         "label": [
             "OpenTarget",
             "Drug Information",
@@ -1552,47 +1061,6 @@
             }
         },
         "query_schema": "\n      query drugPharmacogenomicsData($chemblId: String!, $page: Pagination!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          pharmacogenomics(page: $page) {\n            datasourceId\n            datatypeId\n            genotype\n            evidenceLevel\n            genotypeAnnotationText\n            genotypeId\n            haplotypeFromSourceId\n            haplotypeId\n            literature\n            pgxCategory\n            phenotypeFromSourceId\n            phenotypeText\n            studyId\n            targetFromSourceId\n            variantFunctionalConsequenceId\n            variantRsId\n            isDirectTarget\n            variantFunctionalConsequence {\n              id\n              label\n            }\n            drugs {\n              drugId\n              drug {\n        name\n      }\n            }\n            target {\n              id\n              approvedSymbol\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the pharmacogenomics data for the drug with ChEMBL ID 'CHEMBL23261'?",
-                "query": {
-                    "name": "drug_pharmacogenomics_data",
-                    "arguments": {
-                        "chemblId": "CHEMBL23261",
-                        "page": {
-                            "index": 1,
-                            "size": 10
-                        }
-                    }
-                }
-            },
-            {
-                "question": "What are the genotype annotations and evidence levels for the drug identified by ChEMBL ID 'CHEMBL1497'?",
-                "query": {
-                    "name": "drug_pharmacogenomics_data",
-                    "arguments": {
-                        "chemblId": "CHEMBL1497",
-                        "page": {
-                            "index": 2,
-                            "size": 5
-                        }
-                    }
-                }
-            },
-            {
-                "question": "Retrieve the pharmacogenomics data for the drug with ChEMBL ID 'CHEMBL4455124', including evidence levels.",
-                "query": {
-                    "name": "drug_pharmacogenomics_data",
-                    "arguments": {
-                        "chemblId": "CHEMBL4455124",
-                        "page": {
-                            "index": 3,
-                            "size": 15
-                        }
-                    }
-                }
-            }
-        ],
         "type": "OpenTarget"
     },
     {
@@ -1619,39 +1087,6 @@
             }
         },
         "query_schema": "\n      query targetKnownDrugs($ensemblId: String!, $size: Int!, $cursor: String) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          knownDrugs(size: $size, cursor: $cursor) {\n            count\n            rows {\n              drug {\n                id\n                name\n                tradeNames\n                maximumClinicalTrialPhase\n                isApproved\n                hasBeenWithdrawn\n              }\n              phase\n              status\n              mechanismOfAction\n              disease {\n                id\n                name\n              }\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve known drugs associated with the target having Ensembl ID 'ENSG00000141736' and fetch 10 entries?",
-                "query": {
-                    "name": "get_associated_drugs_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000141736",
-                        "size": 10
-                    }
-                }
-            },
-            {
-                "question": "What are the known drugs for the target with Ensembl ID 'ENSG00000184182', and can you provide 5 entries?",
-                "query": {
-                    "name": "get_associated_drugs_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000184182",
-                        "size": 5
-                    }
-                }
-            },
-            {
-                "question": "Please list the known drugs associated with the target identified by Ensembl ID 'ENSG00000104884', and fetch 15 entries. Use the cursor 'abc123' for pagination.",
-                "query": {
-                    "name": "get_associated_drugs_by_target_ensemblID",
-                    "arguments": {
-                        "ensemblId": "ENSG00000104884",
-                        "size": 15,
-                        "cursor": "abc123"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "Drug",
@@ -1676,35 +1111,6 @@
             }
         },
         "query_schema": "\n      query fetchLinkedDiseasesForDrug($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          linkedDiseases {\n            count\n            rows {\n              id\n              name\n              description\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the list of diseases linked to the drug with ChEMBL ID 'CHEMBL3137349'?",
-                "query": {
-                    "name": "get_associated_diseases_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL3137349"
-                    }
-                }
-            },
-            {
-                "question": "What diseases are associated with the drug identified by ChEMBL ID 'CHEMBL1389'?",
-                "query": {
-                    "name": "get_associated_diseases_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1389"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the diseases linked to the drug that has the ChEMBL ID 'CHEMBL2109266'.",
-                "query": {
-                    "name": "get_associated_diseases_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL2109266"
-                    }
-                }
-            }
-        ],
         "label": [
             "Drug",
             "Disease",
@@ -1728,35 +1134,6 @@
             }
         },
         "query_schema": "\n      query fetchLinkedTargetsForDrug($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          linkedTargets {\n            count\n            rows {\n              id\n              approvedSymbol\n              approvedName\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the list of targets linked to the drug with ChEMBL ID 'CHEMBL459008'?",
-                "query": {
-                    "name": "get_associated_targets_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL459008"
-                    }
-                }
-            },
-            {
-                "question": "What are the targets associated with the drug identified by ChEMBL ID 'CHEMBL1800955'?",
-                "query": {
-                    "name": "get_associated_targets_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL1800955"
-                    }
-                }
-            },
-            {
-                "question": "Please provide the list of targets for the drug with ChEMBL ID 'CHEMBL32'.",
-                "query": {
-                    "name": "get_associated_targets_by_drug_chemblId",
-                    "arguments": {
-                        "chemblId": "CHEMBL32"
-                    }
-                }
-            }
-        ],
         "label": [
             "Drug",
             "Target",
@@ -1805,53 +1182,6 @@
             }
         },
         "query_schema": "\n      query multiEntitySearch($queryString: String!, $entityNames: [String!], $page: Pagination) {\n        search(queryString: $queryString, entityNames: $entityNames, page: $page) {\n          total\n          hits {\n            id\n            entity\n            description\n            name\n            score\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you search for information on the drug 'Aspirin' and the disease 'Hypertension'?",
-                "query": {
-                    "name": "multi_entity_search_by_query_string",
-                    "arguments": {
-                        "queryString": "Aspirin Hypertension",
-                        "entityNames": [
-                            "drug",
-                            "disease"
-                        ],
-                        "page": {
-                            "index": 1,
-                            "size": 10
-                        }
-                    }
-                }
-            },
-            {
-                "question": "Please find details about the target 'BRCA1' with pagination settings of index 2 and size 5.",
-                "query": {
-                    "name": "multi_entity_search_by_query_string",
-                    "arguments": {
-                        "queryString": "BRCA1",
-                        "entityNames": [
-                            "target"
-                        ],
-                        "page": {
-                            "index": 2,
-                            "size": 5
-                        }
-                    }
-                }
-            },
-            {
-                "question": "What information is available for the disease 'Diabetes'?",
-                "query": {
-                    "name": "multi_entity_search_by_query_string",
-                    "arguments": {
-                        "queryString": "Diabetes",
-                        "entityNames": [
-                            "disease"
-                        ]
-                    }
-                }
-            }
-        ],
         "label": [
             "Search and Mapping Functions",
             "MultiEntitySearch",
@@ -1878,47 +1208,6 @@
             }
         },
         "query_schema": "\n      query fetchGeneOntologyTerms($goIds: [String!]!) {\n        geneOntologyTerms(goIds: $goIds) {\n          id\n          name\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve the Gene Ontology terms for the GO IDs 'GO:0008150' and 'GO:0003674'?",
-                "query": {
-                    "name": "fetch_gene_ontology_terms",
-                    "arguments": {
-                        "goIds": [
-                            "GO:0008150",
-                            "GO:0003674"
-                        ]
-                    }
-                }
-            },
-            {
-                "question": "What are the Gene Ontology terms associated with the GO IDs 'GO:0005575', 'GO:0003674', and 'GO:0008150'?",
-                "query": {
-                    "name": "fetch_gene_ontology_terms",
-                    "arguments": {
-                        "goIds": [
-                            "GO:0005575",
-                            "GO:0003674",
-                            "GO:0008150"
-                        ]
-                    }
-                }
-            },
-            {
-                "question": "Please provide the Gene Ontology terms for the following GO IDs: 'GO:0008150', 'GO:0003674', 'GO:0005575', and 'GO:0003677'.",
-                "query": {
-                    "name": "fetch_gene_ontology_terms",
-                    "arguments": {
-                        "goIds": [
-                            "GO:0008150",
-                            "GO:0003674",
-                            "GO:0005575",
-                            "GO:0003677"
-                        ]
-                    }
-                }
-            }
-        ],
         "label": [
             "GeneOntology",
             "Data Retrieval and Aggregation",
@@ -1941,35 +1230,6 @@
             }
         },
         "query_schema": "\n      query targetConstraintInfo($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneticConstraint {\n            constraintType\n            exp\n            obs\n            oe\n            oeLower\n            oeUpper\n            score\n            upperBin\n            upperBin6\n            upperRank\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you provide the genetic constraint information for the target with Ensembl ID 'ENSG00000135476'?",
-                "query": {
-                    "name": "target_constraint_info",
-                    "arguments": {
-                        "ensemblId": "ENSG00000135476"
-                    }
-                }
-            },
-            {
-                "question": "What are the expected and observed values, and scores for the target identified by Ensembl ID 'ENSG00000290763'?",
-                "query": {
-                    "name": "target_constraint_info",
-                    "arguments": {
-                        "ensemblId": "ENSG00000290763"
-                    }
-                }
-            },
-            {
-                "question": "Please retrieve the genetic constraint details for the target with Ensembl ID 'ENSG00000109906'.",
-                "query": {
-                    "name": "target_constraint_info",
-                    "arguments": {
-                        "ensemblId": "ENSG00000109906"
-                    }
-                }
-            }
-        ],
         "label": [
             "Target",
             "Constraint",
@@ -2021,17 +1281,6 @@
             }
         },
         "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        disease(efoId: $entityId) {\n          id\n          name\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n              sentences {\n                section\n                matches {\n                  mappedId\n                  matchedLabel\n                  sectionStart\n                  sectionEnd\n                  startInSentence\n                  endInSentence\n                  matchedType\n                }\n              }\n            }\n          }\n        }\n      }\n    ",
-        "examples": [
-            {
-                "question": "Can you retrieve publications related to the entity with ID 'EFO_0000400'?",
-                "query": {
-                    "name": "get_publications_by_disease_efoId",
-                    "arguments": {
-                        "entityId": "EFO_0000400"
-                    }
-                }
-            }
-        ],
         "label": [
             "Publications",
             "Data Retrieval and Aggregation",
@@ -2162,5 +1411,5 @@
             "GraphQL"
         ],
         "type": "OpenTarget"
-    } 
+    }
 ]
