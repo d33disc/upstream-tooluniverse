@@ -390,7 +390,7 @@ class FDADrugLabelGetDrugGenericNameTool(FDADrugLabelTool):
                 }
         
 
-        from data.fda_drugs_with_brand_generic_names_for_tool import drug_list
+        from .data.fda_drugs_with_brand_generic_names_for_tool import drug_list
         
         self.brand_to_generic = {drug['brand_name']: drug['generic_name'] for drug in drug_list}
         self.generic_to_brand = {drug['generic_name']: drug['brand_name'] for drug in drug_list}
