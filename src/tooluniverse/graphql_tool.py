@@ -108,7 +108,7 @@ class OpentargetToolDrugNameMatch(GraphQLTool):
                 print("No drug name found in the arguments.")
                 return None
             drug_name_results = self.drug_generic_tool.run(name_arguments)
-            if 'openfda.generic_name' in drug_name_results:
+            if drug_name_results is not None and 'openfda.generic_name' in drug_name_results:
                 arguments[each_args] = drug_name_results['openfda.generic_name']
                 print("Found generic name. Trying with the generic name: ", arguments[each_args])
                 results = execute_query(endpoint_url=self.endpoint_url, query=self.query_schema, variables=arguments)

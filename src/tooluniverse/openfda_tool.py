@@ -3,6 +3,7 @@ from .base_tool import BaseTool
 import copy
 import re
 import json
+import os
 
 def check_keys_present(api_capabilities_dict, keys):
     for key in keys:
@@ -219,7 +220,7 @@ class FDATool(BaseTool):
         if self.exists is None:
             self.exists = self.return_fields
         self.endpoint_url = endpoint_url
-        self.api_key = api_key
+        self.api_key = api_key or os.getenv('FDA_API_KEY')
 
     def run(self, arguments):
         arguments = copy.deepcopy(arguments)
