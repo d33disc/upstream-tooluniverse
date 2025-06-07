@@ -39,7 +39,7 @@ engine = ToolUniverse()
 engine.load_tools()
 
 result = engine.run_one_function({
-    "name": "get_active_ingredient_info_by_drug_name",
+    "name": "FDA_get_active_ingredient_info_by_drug_name",
     "arguments": {
         "drug_name": "Panadol",
         "limit": 5,
@@ -72,7 +72,7 @@ for name, desc in zip(tool_name_list, tool_desc_list):
 from tooluniverse import ToolUniverse
 tooluni = ToolUniverse()
 tooluni.load_tools()
-query = {"name": "get_indications_by_drug_name", "arguments": {"drug_name": "KISUNLA"}}
+query = {"name": "FDA_get_indications_by_drug_name", "arguments": {"drug_name": "KISUNLA"}}
 tooluni.run(query)
 ```
 
@@ -111,7 +111,7 @@ Use any HTTP client to send a JSON-RPC request to the MCP server.
 #### Example (using curl):
 
 ```bash
-curl -s -X POST http://localhost:9000/mcp/ -H "Content-Type: application/json" -H "Accept: application/json, text/event-stream" -d "{\"jsonrpc\":\"2.0\",\"id\":\"1\",\"method\":\"tools/call\",\"params\":{\"name\":\"get_active_ingredient_info_by_drug_name\",\"arguments\":{\"drug_name\":\"Panadol\",\"limit\":2,\"skip\":0}}}"
+curl -s -X POST http://localhost:9000/mcp/ -H "Content-Type: application/json" -H "Accept: application/json, text/event-stream" -d "{\"jsonrpc\":\"2.0\",\"id\":\"1\",\"method\":\"tools/call\",\"params\":{\"name\":\"FDA_get_active_ingredient_info_by_drug_name\",\"arguments\":{\"drug_name\":\"Panadol\",\"limit\":2,\"skip\":0}}}"
 ```
 
 This returns a JSON-formatted result containing the tool output.

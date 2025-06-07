@@ -86,16 +86,23 @@ def main():
         print(f" Tools found in {filename}: {count}")
 
     with open(OUTPUT_FILE, "w") as f:
-        f.write("# Auto-generated MCP wrappers\n")
-        f.write("from fastmcp import FastMCP\n")
-        f.write("from typing import List\n")
-        f.write("from tooluniverse.execute_function import ToolUniverse\n\n")
-        f.write("mcp = FastMCP('ToolUniverse MCP', stateless_http=True)\n")
-        f.write("engine = ToolUniverse()\n")
-        f.write("engine.load_tools()\n")
+        f.write(
+            "# Auto-generated MCP wrappers\n"
+            "from fastmcp import FastMCP\n"
+            "from typing import List\n"
+            "from tooluniverse.execute_function import ToolUniverse\n\n"
+            "mcp = FastMCP('ToolUniverse MCP', stateless_http=True)\n"
+            "engine = ToolUniverse()\n"
+            "engine.load_tools()\n"
+        )
         f.write("\n".join(all_functions))
-        f.write("\n\nif __name__ == '__main__':\n")
-        f.write("    mcp.run(transport='streamable-http', host='127.0.0.1', port=8000)\n")
+        f.write(
+            "\n\ndef run_server():\n"
+            "    mcp.run(transport='streamable-http', host='127.0.0.1', port=8000)\n\n"
+            "def run_claude_desktop():\n"
+            "    print(\"Starting ToolUniverse MCP server...\")\n"
+            "    mcp.run(transport='stdio')\n"
+        )
 
     print(f" Generated {len(all_functions)} MCP wrappers in {OUTPUT_FILE}")
 

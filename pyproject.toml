@@ -16,16 +16,18 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "fastmcp",
-    "pydantic"
+    "pydantic",
+    "pyyaml"
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 readme = "README.md"
 
 [project.urls]
 Homepage = "https://github.com/mims-harvard/TxAgent"
 
 [project.scripts]
-tooluniverse-mcp = "tooluniverse.mcp_server:main"
+tooluniverse-mcp = "tooluniverse.mcp_server:run_server"
+tooluniverse-mcp-claude = "tooluniverse.mcp_server:run_claude_desktop"
 generate-mcp-tools = "tooluniverse.generate_mcp_tools:run_generate"
 
 [tool.setuptools.packages.find]
