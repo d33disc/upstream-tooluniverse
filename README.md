@@ -94,6 +94,7 @@ ToolUniverse supports both a Python SDK and an MCP server interface.
 
 For more detailed usage examples, see the [README_USAGE](README_USAGE.md) page.
 
+For MCP integration with Claude Desktop App, see the [MCP for Claude Tutorial](doc/MCP_for_Claude.md).
 
 ## Citation
 
