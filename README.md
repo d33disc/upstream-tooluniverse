@@ -1,4 +1,4 @@
-# ToolUniverse
+# ToolUniverse: Scientific Model Context Protocol
 
 [![ProjectPage](https://img.shields.io/badge/Page-TxAgent-red)](https://zitniklab.hms.harvard.edu/TxAgent)
 [![PaperLink](https://img.shields.io/badge/Arxiv-TxAgent-red)](https://arxiv.org/pdf/2503.10970)
