@@ -79,7 +79,7 @@ html_theme_options = {
         },
         {
             "name": "Documentation",
-            "url": "https://zitniklab.hms.harvard.edu/bioagent/",
+            "url": "https://zitniklab.hms.harvard.edu/tooluniverse/",
             "icon": "fas fa-book",
             "type": "fontawesome",
         },
@@ -212,7 +212,7 @@ source_suffix = {
 master_doc = "index"
 
 # GitHub Pages configuration
-html_baseurl = "https://zitniklab.hms.harvard.edu/bioagent/"
+html_baseurl = "https://zitniklab.hms.harvard.edu/tooluniverse/"
 html_extra_path = []
 
 # Enhanced HTML options for modern look

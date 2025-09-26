@@ -11,7 +11,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPAutoLoaderTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "tool_prefix": "expert_"
         }
@@ -92,7 +92,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPClientTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "mcp_tool_name": "consult_human_expert"
         }
@@ -146,7 +146,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPClientTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "mcp_tool_name": "get_expert_response"
         }
@@ -226,7 +226,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPClientTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "mcp_tool_name": "get_expert_status"
         }
@@ -296,7 +296,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPClientTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "mcp_tool_name": "list_pending_expert_requests"
         }
@@ -350,7 +350,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "MCPClientTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/expert_feedback.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/expert_feedback.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/expert_feedback",
             "mcp_tool_name": "submit_expert_response"
         }

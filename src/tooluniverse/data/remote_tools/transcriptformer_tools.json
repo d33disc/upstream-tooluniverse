@@ -58,7 +58,7 @@
             "server_type": "SMCP",
             "transport": "http",
             "original_type": "TranscriptformerEmbeddingTool",
-            "url": "https://mims-harvard.github.io/bioagent/expand_tooluniverse/remote/transcriptformer.html",
+            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/transcriptformer.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/transcriptformer",
             "mcp_tool_name": "run_transcriptformer_embedding_retrieval"
         }
