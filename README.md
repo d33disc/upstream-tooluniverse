@@ -34,6 +34,7 @@ ToolUniverse is an ecosystem for creating AI scientist systems from any open or 
 
 [![YouTube Video](https://img.youtube.com/vi/fManSJlSs60/maxresdefault.jpg)](https://www.youtube.com/watch?v=fManSJlSs60)
 *Click the image above to watch the ToolUniverse demonstration*
+[(Also in Bilibili)](https://www.bilibili.com/video/BV1GynhzjEos/?share_source=copy_web&vd_source=b398f13447281e748f5c41057a2c6858)
 
 - **[Overview](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/index.html)**: Create AI scientists from any LLM
 - **[Claude Desktop Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/claude_desktop.html)**: Native MCP integration with Claude Desktop App
