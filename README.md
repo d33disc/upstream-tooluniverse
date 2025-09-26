@@ -47,7 +47,6 @@ ToolUniverse is an ecosystem for creating AI scientist systems from any open or 
 - **[GPT Codex CLI Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/codex_cli.html)**: Terminal-based research with OpenAI Codex
 - **[ChatGPT API Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/chatgpt_api.html)**: Programmatic research with ChatGPT function calling
 
-
 ## 🔬 What is ToolUniverse?
 
 AI scientists are emerging computational systems that serve as collaborative partners in discovery. However, these systems remain difficult to build because they are bespoke, tied to rigid workflows, and lack shared environments that unify tools, data, and analysts into a common ecosystem.
@@ -63,10 +62,10 @@ ToolUniverse addresses this challenge by providing a standardized ecosystem that
 - [**Continuous Expansion**](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/index.html): New tools can be easily registered locally or remotely without additional configuration
 - [**Multi-Agent Tool Creation & Optimization**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/scientific_workflows.html): Multi-agent powered tool construction and iterative tool optimization
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/eb15bd7c-4e73-464b-8d65-733877c96a51" width="888" />
+</p>
 
-
-
-<!-- ![TxAgent](img/TxAgent_ToolUniverse.jpg) -->
 
 ## 🚀 Quick Start
 
@@ -156,7 +155,9 @@ tooluniverse-smcp
 
 ---
 **Hypercholesterolemia Drug Discovery** [[Tutorial]](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/tooluniverse_case_study.html) [[Code]](https://colab.research.google.com/drive/1UwJ6RwyUoqI5risKQ365EeFdDQWOeOCv?usp=sharing)
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cc53e9b0-94d3-407d-a015-71762ddb9836" width="600" />
+</p>
 ---
 
 
