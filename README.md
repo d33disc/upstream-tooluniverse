@@ -3,7 +3,7 @@
 [![ToolUniverse-PIP](https://img.shields.io/badge/PyPI-ToolUniverse-blue)](https://pypi.org/project/tooluniverse/)
 [![ToolUniverse](https://img.shields.io/badge/Code-ToolUniverse-purple)](https://github.com/mims-harvard/ToolUniverse)
 [![Model context protocol (MCP)](https://img.shields.io/badge/Model_Context_Protocol_(MCP)_Supported-green)](README_USAGE.md#running-the-mcp-server)
-[![Documentation](https://img.shields.io/badge/Documentation-Available-green)](https://zitniklab.hms.harvard.edu/bioagent/)
+[![Documentation](https://img.shields.io/badge/Documentation-Available-green)](https://zitniklab.hms.harvard.edu/tooluniverse/)
 [![🌐Web Service](https://img.shields.io/badge/Web_Service-aiscientist.tools-blue)](https://aiscientist.tools)
 [![Slack](https://img.shields.io/badge/Slack-Join_Community-orange)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
 
@@ -18,26 +18,26 @@ ToolUniverse is an ecosystem for creating AI scientist systems from any open or 
 [![Visit Website](https://img.shields.io/badge/Visit_Website-AIScientist.Tools-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://aiscientist.tools)
 
 [![Join Slack Community](https://img.shields.io/badge/Join_Slack_Community-Get_Help_&_Connect-FF6B6B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
-[![Join WeChat Group](https://img.shields.io/badge/Join_WeChat_Group-Community_&_Discussion-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://zitniklab.hms.harvard.edu/bioagent/wechat_community.html)
+[![Join WeChat Group](https://img.shields.io/badge/Join_WeChat_Group-Community_&_Discussion-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://zitniklab.hms.harvard.edu/tooluniverse/wechat_community.html)
 
 [![Follow on LinkedIn](https://img.shields.io/badge/Follow_on_LinkedIn-Professional_Updates-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tooluniverse-at-harvard-b9aa88385/)
 [![Follow on X](https://img.shields.io/badge/Follow_on_X-Latest_Updates-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/ScientistTools)
 
 </div>
 
-→ **Complete Tool List**: [Available Tools](https://zitniklab.hms.harvard.edu/bioagent/tools/tools_config_index.html)
+→ **Complete Tool List**: [Available Tools](https://zitniklab.hms.harvard.edu/tooluniverse/tools/tools_config_index.html)
 
 → **Check our website for direct tool usage**: [AIScientist.Tools](https://aiscientist.tools/)
 
 
 ## 🤖 Building AI Scientists with ToolUniverse in 5 minutes
-- **[Overview](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/index.html)**: Create AI scientists from any LLM
-- **[Claude Desktop Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/claude_desktop.html)**: Native MCP integration with Claude Desktop App
-- **[Claude Code Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/claude_code.html)**: AI scientist development in Claude Code environment
-- **[Gemini CLI Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/gemini_cli.html)**: Command-line scientific research with Google Gemini
-- **[Qwen Code Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/qwen_code.html)**: AI scientist workflows in Qwen Code environment
-- **[GPT Codex CLI Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/codex_cli.html)**: Terminal-based research with OpenAI Codex
-- **[ChatGPT API Integration](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/chatgpt_api.html)**: Programmatic research with ChatGPT function calling
+- **[Overview](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/index.html)**: Create AI scientists from any LLM
+- **[Claude Desktop Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/claude_desktop.html)**: Native MCP integration with Claude Desktop App
+- **[Claude Code Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/claude_code.html)**: AI scientist development in Claude Code environment
+- **[Gemini CLI Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/gemini_cli.html)**: Command-line scientific research with Google Gemini
+- **[Qwen Code Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/qwen_code.html)**: AI scientist workflows in Qwen Code environment
+- **[GPT Codex CLI Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/codex_cli.html)**: Terminal-based research with OpenAI Codex
+- **[ChatGPT API Integration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/chatgpt_api.html)**: Programmatic research with ChatGPT function calling
 
 
 ## 🔬 What is ToolUniverse?
@@ -48,12 +48,12 @@ ToolUniverse addresses this challenge by providing a standardized ecosystem that
 
 **Key Features:**
 
-- [**AI-Tool Interaction Protocol**](https://zitniklab.hms.harvard.edu/bioagent/guide/interaction_protocol.html): Standardized interface governing how AI scientists issue tool requests and receive results
-- [**Universal AI Model Support**](https://zitniklab.hms.harvard.edu/bioagent/guide/building_ai_scientists/index.html): Works with any LLM, AI agent, or large reasoning model (GPT5, Claude, Gemini, Qwen, Deepseek, open models)
-- [**Easy to Load & Find & Call Tool**](https://zitniklab.hms.harvard.edu/bioagent/guide/index.html) (*[WebService](https://aiscientist.tools/), [PythonAPI](https://zitniklab.hms.harvard.edu/bioagent/api/modules.html), [MCP](https://zitniklab.hms.harvard.edu/bioagent/guide/mcp_support.html)*): Maps natural-language descriptions to tool specifications and executes tools with structured results 
-- [**Tool Composition & Scientific Workflows**](https://zitniklab.hms.harvard.edu/bioagent/guide/tool_composition.html): Chains tools for sequential or parallel execution in self-directed scientific workflows
-- [**Continuous Expansion**](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/index.html): New tools can be easily registered locally or remotely without additional configuration
-- [**Multi-Agent Tool Creation & Optimization**](https://zitniklab.hms.harvard.edu/bioagent/guide/scientific_workflows.html): Multi-agent powered tool construction and iterative tool optimization
+- [**AI-Tool Interaction Protocol**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/interaction_protocol.html): Standardized interface governing how AI scientists issue tool requests and receive results
+- [**Universal AI Model Support**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/building_ai_scientists/index.html): Works with any LLM, AI agent, or large reasoning model (GPT5, Claude, Gemini, Qwen, Deepseek, open models)
+- [**Easy to Load & Find & Call Tool**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/index.html) (*[WebService](https://aiscientist.tools/), [PythonAPI](https://zitniklab.hms.harvard.edu/tooluniverse/api/modules.html), [MCP](https://zitniklab.hms.harvard.edu/tooluniverse/guide/mcp_support.html)*): Maps natural-language descriptions to tool specifications and executes tools with structured results 
+- [**Tool Composition & Scientific Workflows**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/tool_composition.html): Chains tools for sequential or parallel execution in self-directed scientific workflows
+- [**Continuous Expansion**](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/index.html): New tools can be easily registered locally or remotely without additional configuration
+- [**Multi-Agent Tool Creation & Optimization**](https://zitniklab.hms.harvard.edu/tooluniverse/guide/scientific_workflows.html): Multi-agent powered tool construction and iterative tool optimization
 
 
 
@@ -87,7 +87,7 @@ result = tu.run({
 })
 ```
 
-→ **Complete Quick Start Tutorial**: [Quick Start Tutorial](https://zitniklab.hms.harvard.edu/bioagent/quickstart.html) [Getting Started Tutorial](https://zitniklab.hms.harvard.edu/bioagent/getting_started.html)
+→ **Complete Quick Start Tutorial**: [Quick Start Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/quickstart.html) [Getting Started Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/getting_started.html)
 
 
 ## 📦 Installation
@@ -98,7 +98,7 @@ result = tu.run({
 uv pip install tooluniverse
 ```
 
-→ **Complete Installation Tutorial**: [Installation Tutorial](https://zitniklab.hms.harvard.edu/bioagent/installation.html)
+→ **Complete Installation Tutorial**: [Installation Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/installation.html)
 
 ## 🔧 Usage & Integration
 
@@ -126,7 +126,7 @@ result = tu.run({
 })
 ```
 
-→ **Complete Tutorials**: [Installation Tutorial](https://zitniklab.hms.harvard.edu/bioagent/installation.html)
+→ **Complete Tutorials**: [Installation Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/installation.html)
 
 ### MCP Support
 
@@ -134,7 +134,7 @@ result = tu.run({
 # run one command to launch the tooluniverse mcp server
 tooluniverse-smcp
 ```
-→ **Complete Tutorial**: [MCP Support](https://zitniklab.hms.harvard.edu/bioagent/guide/mcp_support.html)
+→ **Complete Tutorial**: [MCP Support](https://zitniklab.hms.harvard.edu/tooluniverse/guide/mcp_support.html)
 
 
 ## 🚀 AI Scientists Projects Powered by ToolUniverse
@@ -147,7 +147,7 @@ tooluniverse-smcp
 
 
 ---
-**Hypercholesterolemia Drug Discovery** [[Tutorial]](https://zitniklab.hms.harvard.edu/bioagent/tutorials/tooluniverse_case_study.html) [[Code]](https://colab.research.google.com/drive/1UwJ6RwyUoqI5risKQ365EeFdDQWOeOCv?usp=sharing)
+**Hypercholesterolemia Drug Discovery** [[Tutorial]](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/tooluniverse_case_study.html) [[Code]](https://colab.research.google.com/drive/1UwJ6RwyUoqI5risKQ365EeFdDQWOeOCv?usp=sharing)
 
 ---
 
@@ -162,7 +162,7 @@ Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_i
 - **Report Issues**: [GitHub Issues](https://github.com/mims-harvard/ToolUniverse/issues)
 - **Join Discussions**: [Slack Channel](https://github.com/mims-harvard/ToolUniverse/discussions)
 - **Contact**: Reach out to [Shanghua Gao](shanghuagao@gmail.com)/[Marinka Zitnik](marinka@hms.harvard.edu)
-- **Contribute**: See our [Contributing Tutorial](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/comprehensive_tool_guide.html)
+- **Contribute**: See our [Contributing Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/comprehensive_tool_guide.html)
 
 
 
@@ -187,47 +187,47 @@ Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_i
 Our comprehensive documentation covers everything from quick start to advanced workflows:
 
 ### 🚀 Getting Started
-- **[Quick Start Tutorial](https://zitniklab.hms.harvard.edu/bioagent/quickstart.html)**: 5-minute setup and first query
-- **[Installation](https://zitniklab.hms.harvard.edu/bioagent/installation.html)**: Complete installation options
-- **[Getting Started](https://zitniklab.hms.harvard.edu/bioagent/getting_started.html)**: Step-by-step tutorial
-- **[AI-Tool Protocol](https://zitniklab.hms.harvard.edu/bioagent/guide/interaction_protocol.html)**: Understanding the interaction protocol
+- **[Quick Start Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/quickstart.html)**: 5-minute setup and first query
+- **[Installation](https://zitniklab.hms.harvard.edu/tooluniverse/installation.html)**: Complete installation options
+- **[Getting Started](https://zitniklab.hms.harvard.edu/tooluniverse/getting_started.html)**: Step-by-step tutorial
+- **[AI-Tool Protocol](https://zitniklab.hms.harvard.edu/tooluniverse/guide/interaction_protocol.html)**: Understanding the interaction protocol
 
 ### 📖 User Guides
-- **[Loading Tools](https://zitniklab.hms.harvard.edu/bioagent/guide/loading_tools.html)**: Complete Tutorial to loading tools
-- **[Tool Discovery](https://zitniklab.hms.harvard.edu/bioagent/tutorials/finding_tools.html)**: Find tools by keyword, LLM, and embedding search
-- **[Tool Caller](https://zitniklab.hms.harvard.edu/bioagent/guide/tool_caller.html)**: Primary execution engine
-- **[Tool Composition](https://zitniklab.hms.harvard.edu/bioagent/guide/tool_composition.html)**: Chain tools into workflows
-- **[Scientific Workflows](https://zitniklab.hms.harvard.edu/bioagent/guide/scientific_workflows.html)**: Real-world research scenarios
-- **[MCP Support](https://zitniklab.hms.harvard.edu/bioagent/guide/mcp_support.html)**: Model Context Protocol integration
-- **[Logging](https://zitniklab.hms.harvard.edu/bioagent/guide/logging.html)**: Comprehensive logging configuration
+- **[Loading Tools](https://zitniklab.hms.harvard.edu/tooluniverse/guide/loading_tools.html)**: Complete Tutorial to loading tools
+- **[Tool Discovery](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/finding_tools.html)**: Find tools by keyword, LLM, and embedding search
+- **[Tool Caller](https://zitniklab.hms.harvard.edu/tooluniverse/guide/tool_caller.html)**: Primary execution engine
+- **[Tool Composition](https://zitniklab.hms.harvard.edu/tooluniverse/guide/tool_composition.html)**: Chain tools into workflows
+- **[Scientific Workflows](https://zitniklab.hms.harvard.edu/tooluniverse/guide/scientific_workflows.html)**: Real-world research scenarios
+- **[MCP Support](https://zitniklab.hms.harvard.edu/tooluniverse/guide/mcp_support.html)**: Model Context Protocol integration
+- **[Logging](https://zitniklab.hms.harvard.edu/tooluniverse/guide/logging.html)**: Comprehensive logging configuration
 
 ### 🛠️ Advanced Features
-- **[Hooks System](https://zitniklab.hms.harvard.edu/bioagent/guide/hooks/index.html)**: Intelligent output processing
-  - **[Hook Configuration](https://zitniklab.hms.harvard.edu/bioagent/guide/hooks/hook_configuration.html)**: Configure hooks for different outputs
-  - **[File Save Hook](https://zitniklab.hms.harvard.edu/bioagent/guide/hooks/file_save_hook.html)**: Save tool outputs to files
-  - **[Summarization Hook](https://zitniklab.hms.harvard.edu/bioagent/guide/hooks/summarization_hook.html)**: Summarize tool outputs
-  - **[Server Stdio Hooks](https://zitniklab.hms.harvard.edu/bioagent/guide/hooks/server_stdio_hooks.html)**: Server communication hooks
-- **[Expert Feedback](https://zitniklab.hms.harvard.edu/bioagent/tutorials/expert_feedback.html)**: Human-in-the-loop consultation
-- **[Agentic Tools](https://zitniklab.hms.harvard.edu/bioagent/tutorials/agentic_tools_tutorial.html)**: AI-powered tool development
-- **[Case Study](https://zitniklab.hms.harvard.edu/bioagent/tutorials/tooluniverse_case_study.html)**: End-to-end drug discovery workflow
-- **[Tool Optimization](https://zitniklab.hms.harvard.edu/bioagent/tutorials/optimization/Tool_Description_Optimizer_Tutorial.html)**: Optimize tool descriptions for better performance
+- **[Hooks System](https://zitniklab.hms.harvard.edu/tooluniverse/guide/hooks/index.html)**: Intelligent output processing
+  - **[Hook Configuration](https://zitniklab.hms.harvard.edu/tooluniverse/guide/hooks/hook_configuration.html)**: Configure hooks for different outputs
+  - **[File Save Hook](https://zitniklab.hms.harvard.edu/tooluniverse/guide/hooks/file_save_hook.html)**: Save tool outputs to files
+  - **[Summarization Hook](https://zitniklab.hms.harvard.edu/tooluniverse/guide/hooks/summarization_hook.html)**: Summarize tool outputs
+  - **[Server Stdio Hooks](https://zitniklab.hms.harvard.edu/tooluniverse/guide/hooks/server_stdio_hooks.html)**: Server communication hooks
+- **[Expert Feedback](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/expert_feedback.html)**: Human-in-the-loop consultation
+- **[Agentic Tools](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/agentic_tools_tutorial.html)**: AI-powered tool development
+- **[Case Study](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/tooluniverse_case_study.html)**: End-to-end drug discovery workflow
+- **[Tool Optimization](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/optimization/Tool_Description_Optimizer_Tutorial.html)**: Optimize tool descriptions for better performance
 
 ### 🔧 Expanding ToolUniverse
-- **[Architecture](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/architecture.html)**: System architecture overview
-- **[Local Tool Registration](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/local_tool_registration.html)**: Create custom tools
-- **[Remote Tool Registration](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/remote_tool_registration.html)**: Integrate external services
-- **[Contributing Tools](https://zitniklab.hms.harvard.edu/bioagent/expand_tooluniverse/comprehensive_tool_guide.html)**: Complete contribution guide
-- **[Adding Tools Tutorial](https://zitniklab.hms.harvard.edu/bioagent/tutorials/addtools/Adding_Tools_Tutorial.html)**: Step-by-step tool addition guide
-- **[MCP Tool Registration](https://zitniklab.hms.harvard.edu/bioagent/tutorials/addtools/mcp_tool_registration_en.html)**: Register tools via MCP
+- **[Architecture](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/architecture.html)**: System architecture overview
+- **[Local Tool Registration](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/local_tool_registration.html)**: Create custom tools
+- **[Remote Tool Registration](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/remote_tool_registration.html)**: Integrate external services
+- **[Contributing Tools](https://zitniklab.hms.harvard.edu/tooluniverse/expand_tooluniverse/comprehensive_tool_guide.html)**: Complete contribution guide
+- **[Adding Tools Tutorial](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/addtools/Adding_Tools_Tutorial.html)**: Step-by-step tool addition guide
+- **[MCP Tool Registration](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/addtools/mcp_tool_registration_en.html)**: Register tools via MCP
 
 ### 📚 API Reference
-- **[API Directory](https://zitniklab.hms.harvard.edu/bioagent/api/modules.html)**: Complete module listing
-- **[Core Modules](https://zitniklab.hms.harvard.edu/bioagent/api/tooluniverse.html)**: Main ToolUniverse class and utilities
-- **[Tool Classes](https://zitniklab.hms.harvard.edu/bioagent/api/tooluniverse.base_tool.html)**: Base tool classes and implementations
-- **[Compose Scripts](https://zitniklab.hms.harvard.edu/bioagent/api/tooluniverse.compose_scripts.html)**: Tool composition utilities
-- **[MCP Integration](https://zitniklab.hms.harvard.edu/bioagent/api/tooluniverse.mcp_integration.html)**: Model Context Protocol support
+- **[API Directory](https://zitniklab.hms.harvard.edu/tooluniverse/api/modules.html)**: Complete module listing
+- **[Core Modules](https://zitniklab.hms.harvard.edu/tooluniverse/api/tooluniverse.html)**: Main ToolUniverse class and utilities
+- **[Tool Classes](https://zitniklab.hms.harvard.edu/tooluniverse/api/tooluniverse.base_tool.html)**: Base tool classes and implementations
+- **[Compose Scripts](https://zitniklab.hms.harvard.edu/tooluniverse/api/tooluniverse.compose_scripts.html)**: Tool composition utilities
+- **[MCP Integration](https://zitniklab.hms.harvard.edu/tooluniverse/api/tooluniverse.mcp_integration.html)**: Model Context Protocol support
 
-→ **Browse All Documentation**: [ToolUniverse Documentation](https://zitniklab.hms.harvard.edu/bioagent/)
+→ **Browse All Documentation**: [ToolUniverse Documentation](https://zitniklab.hms.harvard.edu/tooluniverse/)
 
 
 ### Citation
