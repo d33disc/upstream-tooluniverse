@@ -1,0 +1,246 @@
+name: Deploy ToolUniverse Documentation
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'ToolUniverse/docs/**'
+      - 'ToolUniverse/src/**'
+      - 'ToolUniverse/pyproject.toml'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        cd ToolUniverse
+        python -m pip install --upgrade pip
+        # Install the package with docs dependencies
+        pip install -e .[docs]
+        # Install theme dependencies directly
+        pip install furo pydata-sphinx-theme sphinx_rtd_theme sphinx-copybutton sphinx-tabs sphinx-design sphinx-notfound-page myst-parser linkify-it-py sphinx-autobuild docutils
+        
+    - name: Verify documentation setup
+      run: |
+        cd ToolUniverse
+        python -c "import sphinx; print(f'Sphinx version: {sphinx.__version__}')"
+        # Verify theme availability
+        python -c "import furo; print('✅ Furo theme available')"
+        python -c "import pydata_sphinx_theme; print('✅ PyData theme available')"
+        python -c "import sphinx_rtd_theme; print('✅ RTD theme available')"
+        python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
+        ls -la docs/
+        ls -la docs/conf*.py
+        # Check logo file availability
+        ls -la img/ || echo "⚠️ img directory not found"
+        ls -la img/tooluniverse_logo.png || echo "⚠️ Logo file not found"
+        
+    - name: Fix theme compatibility
+      run: |
+        cd ToolUniverse/docs
+        # Create fix script for CI environment
+        cat > fix_contents_ci.py << 'EOF'
+        import os
+        import re
+        import glob
+        
+        def fix_contents_directive(file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Pattern to match .. contents:: directive and its options
+                pattern = r'^\.\. contents::.*?(?=^\S|\Z)'
+                fixed_content = re.sub(pattern, '', content, flags=re.MULTILINE | re.DOTALL)
+                fixed_content = re.sub(r'\n\n\n+', '\n\n', fixed_content)
+                
+                if fixed_content != content:
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write(fixed_content)
+                    print(f"✅ Fixed: {file_path}")
+                    return True
+                return False
+            except Exception as e:
+                print(f"❌ Error processing {file_path}: {e}")
+                return False
+        
+        # Process all RST files
+        rst_files = glob.glob('**/*.rst', recursive=True)
+        fixed_count = 0
+        for file_path in rst_files:
+            if fix_contents_directive(file_path):
+                fixed_count += 1
+        
+        print(f"Fixed {fixed_count} files for Furo compatibility")
+        EOF
+        
+        python fix_contents_ci.py
+        
+    - name: Select and configure theme
+      run: |
+        cd ToolUniverse/docs
+        # Create theme selector script
+        cat > select_theme.py << 'EOF'
+        import importlib
+        import shutil
+        import os
+        
+        themes = [
+            ('furo', 'conf_furo.py', 'Furo'),
+            ('pydata_sphinx_theme', 'conf_pydata.py', 'PyData'),
+            ('sphinx_rtd_theme', 'conf.py', 'RTD Enhanced'),
+        ]
+        
+        selected_theme = None
+        for module, config, name in themes:
+            try:
+                importlib.import_module(module)
+                if os.path.exists(config):
+                    print(f"✅ Selecting {name} theme (config: {config})")
+                    shutil.copy2(config, 'conf.py')
+                    selected_theme = name
+                    break
+                else:
+                    print(f"⚠️ {name} theme module available but config {config} not found")
+            except ImportError:
+                print(f"❌ {name} theme not available")
+        
+        if not selected_theme:
+            print("❌ No suitable theme found! Build will fail.")
+            exit(1)
+        
+        print(f"🎨 Using {selected_theme} theme for documentation build")
+        EOF
+        
+        python select_theme.py
+        
+        # Update logo paths in configuration files to use both original and _static paths
+        cat > update_logo_path.py << 'EOF'
+        import re
+        
+        files_to_update = ['conf.py', 'conf_furo.py', 'conf_pydata.py']
+        
+        for file_name in files_to_update:
+            try:
+                with open(file_name, 'r') as f:
+                    content = f.read()
+                
+                # Update logo path to check multiple locations
+                logo_pattern = r"html_logo = '[^']*tooluniverse_logo\.png'[^']*"
+                new_logo = "html_logo = '../img/tooluniverse_logo.png' if os.path.exists('../img/tooluniverse_logo.png') else ('_static/tooluniverse_logo.png' if os.path.exists('_static/tooluniverse_logo.png') else None)"
+                
+                # Simple replacement for the logo line
+                content = re.sub(r"html_logo = '[^']*'[^']*else None", new_logo, content)
+                
+                with open(file_name, 'w') as f:
+                    f.write(content)
+                    
+                print(f"✅ Updated logo path in {file_name}")
+            except Exception as e:
+                print(f"⚠️ Could not update {file_name}: {e}")
+        EOF
+        
+        python update_logo_path.py
+        
+    - name: Prepare logo and assets
+      run: |
+        cd ToolUniverse/docs
+        # Ensure _static directory exists
+        mkdir -p _static
+        # Copy logo to _static directory to ensure it's available
+        if [ -f "../img/tooluniverse_logo.png" ]; then
+          cp ../img/tooluniverse_logo.png _static/
+          echo "✅ Logo copied to _static directory"
+        else
+          echo "⚠️ Logo file not found at ../img/tooluniverse_logo.png"
+        fi
+        # List _static contents
+        ls -la _static/
+        
+    - name: Build documentation
+      run: |
+        cd ToolUniverse/docs
+        rm -rf _build/*
+        make html
+        
+    - name: Check build output
+      run: |
+        ls -la ToolUniverse/docs/_build/html/
+        test -f ToolUniverse/docs/_build/html/index.html || (echo "index.html not found!" && exit 1)
+        # Check if logo was properly included in build
+        ls -la ToolUniverse/docs/_build/html/_static/ | grep -i logo || echo "⚠️ Logo not found in _static"
+        # Check if logo is referenced in HTML
+        grep -r "tooluniverse_logo" ToolUniverse/docs/_build/html/ || echo "⚠️ Logo not referenced in HTML"
+        
+    - name: Add .nojekyll file
+      run: |
+        touch ToolUniverse/docs/_build/html/.nojekyll
+        
+    - name: Create CNAME file for custom domain
+      run: |
+        echo "zitniklab.hms.harvard.edu" > ToolUniverse/docs/_build/html/CNAME
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './ToolUniverse/docs/_build/html'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  test-deployment:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: always()
+    
+    steps:
+    - name: Report deployment status
+      run: |
+        if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
+          echo "✅ Documentation deployment successful!"
+          echo "🎨 Modern theme with enhanced styling applied"
+          echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/bioagent/"
+          echo "🔗 Alternative URL: https://[github-username].github.io/bio/"
+          echo "🌟 Features:"
+          echo "   • Modern responsive design"
+          echo "   • Dark/light mode support (if Furo theme)"
+          echo "   • Enhanced code highlighting"
+          echo "   • Improved navigation"
+        else
+          echo "❌ Documentation deployment failed!"
+          echo "Build status: ${{ needs.build-and-deploy.result }}"
+          echo "📝 Common issues:"
+          echo "   • Missing theme dependencies (run: pip install -r docs/requirements_ci.txt)"
+          echo "   • Theme compatibility problems (check .. contents:: directives)"
+          echo "   • Configuration errors (verify conf*.py files)"
+          echo "💡 Check the build logs for specific error messages"
+          exit 1
+        fi
