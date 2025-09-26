@@ -4,9 +4,9 @@ on:
   push:
     branches: [main, master]
     paths:
-      - 'ToolUniverse/docs/**'
-      - 'ToolUniverse/src/**'
-      - 'ToolUniverse/pyproject.toml'
+      - 'docs/**'
+      - 'src/**'
+      - 'pyproject.toml'
       - '.github/workflows/deploy-docs.yml'
   workflow_dispatch:
 
@@ -37,7 +37,6 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd ToolUniverse
         python -m pip install --upgrade pip
         # Install the package with docs dependencies
         pip install -e .[docs]
@@ -46,7 +45,6 @@ jobs:
         
     - name: Verify documentation setup
       run: |
-        cd ToolUniverse
         python -c "import sphinx; print(f'Sphinx version: {sphinx.__version__}')"
         # Verify theme availability
         python -c "import furo; print('✅ Furo theme available')"
@@ -61,7 +59,7 @@ jobs:
         
     - name: Fix theme compatibility
       run: |
-        cd ToolUniverse/docs
+        cd docs
         # Create fix script for CI environment
         cat > fix_contents_ci.py << 'EOF'
         import os
@@ -102,7 +100,7 @@ jobs:
         
     - name: Select and configure theme
       run: |
-        cd ToolUniverse/docs
+        cd docs
         # Create theme selector script
         cat > select_theme.py << 'EOF'
         import importlib
@@ -168,7 +166,7 @@ jobs:
         
     - name: Prepare logo and assets
       run: |
-        cd ToolUniverse/docs
+        cd docs
         # Ensure _static directory exists
         mkdir -p _static
         # Copy logo to _static directory to ensure it's available
@@ -183,26 +181,26 @@ jobs:
         
     - name: Build documentation
       run: |
-        cd ToolUniverse/docs
+        cd docs
         rm -rf _build/*
         make html
         
     - name: Check build output
       run: |
-        ls -la ToolUniverse/docs/_build/html/
-        test -f ToolUniverse/docs/_build/html/index.html || (echo "index.html not found!" && exit 1)
+        ls -la docs/_build/html/
+        test -f docs/_build/html/index.html || (echo "index.html not found!" && exit 1)
         # Check if logo was properly included in build
-        ls -la ToolUniverse/docs/_build/html/_static/ | grep -i logo || echo "⚠️ Logo not found in _static"
+        ls -la docs/_build/html/_static/ | grep -i logo || echo "⚠️ Logo not found in _static"
         # Check if logo is referenced in HTML
-        grep -r "tooluniverse_logo" ToolUniverse/docs/_build/html/ || echo "⚠️ Logo not referenced in HTML"
+        grep -r "tooluniverse_logo" docs/_build/html/ || echo "⚠️ Logo not referenced in HTML"
         
     - name: Add .nojekyll file
       run: |
-        touch ToolUniverse/docs/_build/html/.nojekyll
+        touch docs/_build/html/.nojekyll
         
     - name: Create CNAME file for custom domain
       run: |
-        echo "zitniklab.hms.harvard.edu" > ToolUniverse/docs/_build/html/CNAME
+        echo "zitniklab.hms.harvard.edu" > docs/_build/html/CNAME
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -210,7 +208,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './ToolUniverse/docs/_build/html'
+        path: './docs/_build/html'
         
     - name: Deploy to GitHub Pages
       id: deployment
@@ -227,8 +225,7 @@ jobs:
         if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
           echo "✅ Documentation deployment successful!"
           echo "🎨 Modern theme with enhanced styling applied"
-          echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/bioagent/"
-          echo "🔗 Alternative URL: https://[github-username].github.io/bio/"
+          echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/ToolUniverse/"
           echo "🌟 Features:"
           echo "   • Modern responsive design"
           echo "   • Dark/light mode support (if Furo theme)"
