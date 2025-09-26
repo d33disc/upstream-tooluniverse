@@ -19,7 +19,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "USPTOPatentDocumentDownloader",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/uspto_downloader.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/uspto_downloader.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/uspto_downloader",
             "api_endpoint": "patent/applications/{applicationNumberText}/documents",
             "document": "ABST"
@@ -45,7 +45,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "USPTOPatentDocumentDownloader",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/uspto_downloader.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/uspto_downloader.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/uspto_downloader",
             "api_endpoint": "patent/applications/{applicationNumberText}/documents",
             "document": "CLM"
@@ -71,7 +71,7 @@
             "server_type": "MCP",
             "transport": "http",
             "original_type": "USPTOPatentDocumentDownloader",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/uspto_downloader.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/uspto_downloader.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/uspto_downloader",
             "api_endpoint": "patent/applications/{applicationNumberText}/documents",
             "document": "APP.TEXT"

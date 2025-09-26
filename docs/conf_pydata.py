@@ -53,7 +53,7 @@ html_theme_options = {
     "footer_start": ["copyright"],
     "footer_end": ["sphinx-version"],
     # GitHub integration
-    "github_url": "https://github.com/zitniklab/ToolUniverse",
+    "github_url": "https://github.com/mims-harvard/ToolUniverse",
     "use_edit_page_button": True,
     # Search
     "search_bar_text": "Search ToolUniverse docs...",
@@ -73,13 +73,13 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/zitniklab/ToolUniverse",
+            "url": "https://github.com/mims-harvard/ToolUniverse",
             "icon": "fab fa-github-square",
             "type": "fontawesome",
         },
         {
             "name": "Documentation",
-            "url": "https://zitniklab.hms.harvard.edu/tooluniverse/",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/",
             "icon": "fas fa-book",
             "type": "fontawesome",
         },
@@ -212,7 +212,7 @@ source_suffix = {
 master_doc = "index"
 
 # GitHub Pages configuration
-html_baseurl = "https://zitniklab.hms.harvard.edu/tooluniverse/"
+html_baseurl = "https://zitniklab.hms.harvard.edu/ToolUniverse/"
 html_extra_path = []
 
 # Enhanced HTML options for modern look

@@ -47,7 +47,7 @@
             "server_type": "SMCP",
             "transport": "http",
             "original_type": "PinnaclePPITool",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/pinnacle.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/pinnacle.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/pinnacle",
             "mcp_tool_name": "run_pinnacle_ppi_retrieval"
         }

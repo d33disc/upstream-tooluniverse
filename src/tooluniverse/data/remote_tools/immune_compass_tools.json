@@ -71,7 +71,7 @@
             "server_type": "SMCP",
             "transport": "http",
             "original_type": "CompassTool",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/immune_compass.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/immune_compass.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/immune_compass",
             "mcp_tool_name": "run_compass_prediction"
         }

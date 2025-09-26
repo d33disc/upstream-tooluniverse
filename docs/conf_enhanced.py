@@ -206,7 +206,7 @@ intersphinx_mapping = {
 }
 
 # GitHub Pages configuration
-html_baseurl = "https://zitniklab.hms.harvard.edu/tooluniverse/"
+html_baseurl = "https://zitniklab.hms.harvard.edu/ToolUniverse/"
 html_extra_path = []
 
 # Copy button configuration

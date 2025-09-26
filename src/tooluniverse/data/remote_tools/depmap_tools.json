@@ -85,7 +85,7 @@
             "server_type": "SMCP",
             "transport": "http",
             "original_type": "DepmapCorrelationTool",
-            "url": "https://mims-harvard.github.io/tooluniverse/expand_tooluniverse/remote/depmap_24q2.html",
+            "url": "https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/remote/depmap_24q2.html",
             "code_url": "https://github.com/mims-harvard/bioagent/tree/main/ToolUniverse/src/tooluniverse/remote/depmap_24q2",
             "mcp_tool_name": "compute_depmap24q2_gene_correlations"
         }
