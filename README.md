@@ -25,7 +25,7 @@ ToolUniverse is an ecosystem for creating AI scientist systems from any open or 
 
 </div>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/868ab360-e647-4b01-8227-5b887781bc03" width="800" />
+  <img src="https://github.com/user-attachments/assets/868ab360-e647-4b01-8227-5b887781bc03" width="600" />
 </p>
 
 → **Complete Tool List**: [Available Tools](https://zitniklab.hms.harvard.edu/tooluniverse/tools/tools_config_index.html)
