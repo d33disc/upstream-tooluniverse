@@ -253,11 +253,6 @@ Our comprehensive documentation covers everything from quick start to advanced w
 }
 ```
 
-
-### Acknowledgments
-
-ToolUniverse is developed by the [Zitnik Lab](https://zitniklab.hms.harvard.edu/) at Harvard Medical School in collaboration with MIT Lincoln Laboratory. We thank the scientific community for their valuable feedback and contributions.
-
 ---
 
 *Democratizing AI agents for science with ToolUniverse.*
