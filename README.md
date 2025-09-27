@@ -154,7 +154,7 @@ tooluniverse-smcp
 
 
 ---
-**Hypercholesterolemia Drug Discovery** [[Tutorial]](https://zitniklab.hms.harvard.edu/tooluniverse/tutorials/tooluniverse_case_study.html) [[Code]](https://colab.research.google.com/drive/1UwJ6RwyUoqI5risKQ365EeFdDQWOeOCv?usp=sharing)
+**Hypercholesterolemia Drug Discovery** [[Tutorial]](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/tooluniverse_case_study.html) [[Code]](https://colab.research.google.com/drive/1UwJ6RwyUoqI5risKQ365EeFdDQWOeOCv?usp=sharing)
 <p align="center">
   <img src="https://github.com/user-attachments/assets/cc53e9b0-94d3-407d-a015-71762ddb9836" width="600" />
 </p>
