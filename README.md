@@ -18,7 +18,7 @@ ToolUniverse is an ecosystem for creating AI scientist systems from any open or 
 [![Visit Website](https://img.shields.io/badge/Visit_Website-AIScientist.Tools-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://aiscientist.tools)
 
 [![Join Slack Community](https://img.shields.io/badge/Join_Slack_Community-Get_Help_&_Connect-FF6B6B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
-[![Join WeChat Group](https://img.shields.io/badge/Join_WeChat_Group-Community_&_Discussion-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://zitniklab.hms.harvard.edu/ToolUniverse/wechat_community.html)
+[![Join WeChat Group](https://img.shields.io/badge/Join_WeChat_Group-Community_&_Discussion-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://aiscientist.tools/wechat)
 
 [![Follow on LinkedIn](https://img.shields.io/badge/Follow_on_LinkedIn-Professional_Updates-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tooluniverse-at-harvard-b9aa88385/)
 [![Follow on X](https://img.shields.io/badge/Follow_on_X-Latest_Updates-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/ScientistTools)
