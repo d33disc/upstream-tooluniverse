@@ -46,11 +46,13 @@ Submodules
    tooluniverse.gwas_tool
    tooluniverse.hpa_tool
    tooluniverse.humanbase_tool
+   tooluniverse.llm_clients
    tooluniverse.logging_config
    tooluniverse.mcp_client_tool
    tooluniverse.mcp_integration
    tooluniverse.mcp_tool_registry
    tooluniverse.medlineplus_tool
+   tooluniverse.odphp_tool
    tooluniverse.openalex_tool
    tooluniverse.openfda_adv_tool
    tooluniverse.openfda_tool

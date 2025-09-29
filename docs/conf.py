@@ -28,6 +28,7 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.extlinks",
     "sphinx.ext.linkcode",
+    "sphinx_autodoc_typehints",
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_tabs.tabs",
@@ -167,6 +168,28 @@ autodoc_default_options = {
     "show-source": True,
 }
 
+# Render type hints in the description for better readability
+autodoc_typehints = "description"
+typehints_defaults = "comma"
+typehints_fully_qualified = False
+
+# Avoid importing heavy optional dependencies during docs build
+autodoc_mock_imports = [
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "chemprop",
+    "faiss",
+    "faiss_cpu",
+    "faiss-gpu",
+    "playwright",
+    "pygraphviz",
+    "graphviz",
+    "pydot",
+    "matplotlib",
+    "scipy",
+]
+
 # MyST parser settings
 myst_enable_extensions = [
     "deflist",
@@ -228,8 +251,8 @@ notfound_context = {
 
 # Source file suffixes
 source_suffix = {
-    ".rst": None,
-    ".md": None,
+    ".rst": "restructuredtext",
+    ".md": "markdown",
 }
 
 # Master document

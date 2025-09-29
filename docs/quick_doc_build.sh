@@ -27,6 +27,13 @@ NC='\033[0m'          # Reset color
 echo -e "${BLUE}🧬 ToolUniverse Documentation Generation System${NC}"
 echo "========================================"
 
+# Optional strict mode: treat warnings as errors when DOCS_STRICT=1
+SPHINX_FLAGS=""
+if [ "${DOCS_STRICT}" = "1" ]; then
+  SPHINX_FLAGS="-W"
+  echo -e "${YELLOW}Strict mode enabled: Sphinx warnings will be treated as errors (-W)${NC}"
+fi
+
 # ===========================================
 # Directory path settings
 # ===========================================
@@ -74,13 +81,24 @@ fi
 echo -e "\n${BLUE}📦 Installing enhanced documentation dependencies${NC}"
 cd "$PROJECT_ROOT"
 
-# Silently install Sphinx-related dependency packages
-# sphinx: documentation generation framework
-# sphinx-rtd-theme: Read the Docs theme
-# myst-parser: Markdown parser
-# sphinx-copybutton: code copy button
-# sphinx-autodoc-typehints: type hints support
-pip install -q sphinx sphinx-rtd-theme myst-parser sphinx-copybutton sphinx-autodoc-typehints 2>/dev/null || true
+# Prefer local virtualenv if exists; otherwise, create one for isolation
+if [ -d ".venv" ]; then
+  # shellcheck disable=SC1091
+  source .venv/bin/activate || true
+else
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -m venv .venv || true
+    # shellcheck disable=SC1091
+    source .venv/bin/activate || true
+  fi
+fi
+
+# Install via project extras if possible; fallback to explicit list
+if command -v uv >/dev/null 2>&1; then
+  uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+else
+  pip install -q -e '.[docs]' 2>/dev/null || pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+fi
 echo -e "${GREEN}✅ Dependencies installation completed${NC}"
 
 # ===========================================
@@ -212,13 +230,16 @@ fi
 # Use sphinx-build to convert RST documentation to HTML format
 echo -e "\n${BLUE}🔧 Building enhanced HTML documentation${NC}"
 
+# Ensure Python can import project sources when building
+export PYTHONPATH="$SRC_DIR:$PYTHONPATH"
+
 # Use sphinx-build to build HTML documentation
 # -b html: build HTML format
 # . : current directory (docs directory)
 # _build/html: output directory
 # --keep-going: continue building when encountering errors
 # -q: quiet mode
-sphinx-build -b html . _build/html --keep-going -q || true
+sphinx-build ${SPHINX_FLAGS} -b html . _build/html --keep-going -q || true
 
 # ===========================================
 # Check build results

@@ -40,8 +40,8 @@ Remote tools integrate external services, APIs, and specialized systems running 
 Overview
 -----------------------------
 
-* **Total Configuration Files**: 62
-* **Total Tools**: 647
+* **Total Configuration Files**: 63
+* **Total Tools**: 651
 
 Local Tools
 -----------
@@ -249,6 +249,11 @@ Builtin Tools
    :maxdepth: 1
 
    Monarch Tools <monarch_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Odphp Tools <odphp_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -929,6 +934,30 @@ Tools by Type
 
 *Local Tools:*
   * get_joint_associated_diseases_by_HPO_ID_list (from :doc:`monarch_tools`)
+
+**ODPHPItemList** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * odphp_itemlist (from :doc:`odphp_tools`)
+
+**ODPHPMyHealthfinder** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * odphp_myhealthfinder (from :doc:`odphp_tools`)
+
+**ODPHPOutlinkFetch** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * odphp_outlink_fetch (from :doc:`odphp_tools`)
+
+**ODPHPTopicSearch** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * odphp_topicsearch (from :doc:`odphp_tools`)
 
 **OpenAlexTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

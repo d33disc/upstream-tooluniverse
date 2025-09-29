@@ -27,6 +27,13 @@ NC='\033[0m'          # 重置颜色
 echo -e "${BLUE}🧬 ToolUniverse 文档生成系统${NC}"
 echo "========================================"
 
+# 可选严格模式：当 DOCS_STRICT=1 时，将 Sphinx 警告视为错误 (-W)
+SPHINX_FLAGS=""
+if [ "${DOCS_STRICT}" = "1" ]; then
+  SPHINX_FLAGS="-W"
+  echo -e "${YELLOW}已启用严格模式：Sphinx 警告将作为错误处理 (-W)${NC}"
+fi
+
 # ===========================================
 # 目录路径设置
 # ===========================================
@@ -74,13 +81,24 @@ fi
 echo -e "\n${BLUE}📦 安装增强文档依赖${NC}"
 cd "$PROJECT_ROOT"
 
-# 静默安装Sphinx相关依赖包
-# sphinx: 文档生成框架
-# sphinx-rtd-theme: Read the Docs主题
-# myst-parser: Markdown解析器
-# sphinx-copybutton: 代码复制按钮
-# sphinx-autodoc-typehints: 类型提示支持
-pip install -q sphinx sphinx-rtd-theme myst-parser sphinx-copybutton sphinx-autodoc-typehints 2>/dev/null || true
+# 优先使用本地虚拟环境；不存在则创建一个隔离环境
+if [ -d ".venv" ]; then
+  # shellcheck disable=SC1091
+  source .venv/bin/activate || true
+else
+  if command -v python3 >/dev/null 2>&1; then
+    python3 -m venv .venv || true
+    # shellcheck disable=SC1091
+    source .venv/bin/activate || true
+  fi
+fi
+
+# 优先通过项目 extras 安装；失败则回退到显式依赖列表
+if command -v uv >/dev/null 2>&1; then
+  uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+else
+  pip install -q -e '.[docs]' 2>/dev/null || pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+fi
 echo -e "${GREEN}✅ 依赖安装完成${NC}"
 
 # ===========================================
@@ -212,13 +230,16 @@ fi
 # 使用sphinx-build将RST文档转换为HTML格式
 echo -e "\n${BLUE}🔧 构建增强HTML文档${NC}"
 
+# 确保构建时可导入项目源码
+export PYTHONPATH="$SRC_DIR:$PYTHONPATH"
+
 # 使用sphinx-build构建HTML文档
 # -b html: 构建HTML格式
 # . : 当前目录（docs目录）
 # _build/html: 输出目录
 # --keep-going: 遇到错误时继续构建
 # -q: 静默模式
-sphinx-build -b html . _build/html --keep-going -q || true
+sphinx-build ${SPHINX_FLAGS} -b html . _build/html --keep-going -q || true
 
 # ===========================================
 # 检查构建结果
