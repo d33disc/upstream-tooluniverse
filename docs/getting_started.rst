@@ -35,7 +35,7 @@ Create a ToolUniverse instance and load scientific tools. This step sets up the 
    # Initialize ToolUniverse
    tu = ToolUniverse()
 
-   # Load all tools (this may take 10-15 seconds)
+   # Load all tools
    print("Loading scientific tools...")
    tu.load_tools()
 
