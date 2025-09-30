@@ -243,7 +243,7 @@ Our comprehensive documentation covers everything from quick start to advanced w
 ### Citation
 
 ```
-@misc{gao2025democratizingaiscientistsusing,
+@article{gao2025democratizingaiscientistsusing,
       title={Democratizing AI scientists using ToolUniverse}, 
       author={Shanghua Gao and Richard Zhu and Pengwei Sui and Zhenglun Kong and Sufian Aldogom and Yepeng Huang and Ayush Noori and Reza Shamji and Krishna Parvataneni and Theodoros Tsiligkaridis and Marinka Zitnik},
       year={2025},
@@ -253,7 +253,7 @@ Our comprehensive documentation covers everything from quick start to advanced w
       url={https://arxiv.org/abs/2509.23426}, 
 }
 
-@misc{gao2025txagent,
+@article{gao2025txagent,
       title={TxAgent: An AI Agent for Therapeutic Reasoning Across a Universe of Tools},
       author={Shanghua Gao and Richard Zhu and Zhenglun Kong and Ayush Noori and Xiaorui Su and Curtis Ginder and Theodoros Tsiligkaridis and Marinka Zitnik},
       year={2025},
