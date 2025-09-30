@@ -1,10 +1,11 @@
 # <img src="docs/_static/logo.png" alt="ToolUniverse Logo" height="28" style="vertical-align: middle; margin-right: 8px;" /> ToolUniverse: Democratizing AI scientists
 
+[![Paper](https://img.shields.io/badge/Paper-Arxiv-blue)](https://arxiv.org/abs/2509.23426)
 [![ToolUniverse-PIP](https://img.shields.io/badge/PyPI-ToolUniverse-blue)](https://pypi.org/project/tooluniverse/)
 [![ToolUniverse](https://img.shields.io/badge/Code-ToolUniverse-purple)](https://github.com/mims-harvard/ToolUniverse)
 [![Model context protocol (MCP)](https://img.shields.io/badge/Model_Context_Protocol_(MCP)_Supported-green)](README_USAGE.md#running-the-mcp-server)
 [![Documentation](https://img.shields.io/badge/Documentation-Available-green)](https://zitniklab.hms.harvard.edu/ToolUniverse/)
-[![🌐Web Service](https://img.shields.io/badge/Web_Service-aiscientist.tools-blue)](https://aiscientist.tools)
+[![🌐Web](https://img.shields.io/badge/Website-aiscientist.tools-blue)](https://aiscientist.tools)
 [![Slack](https://img.shields.io/badge/Slack-Join_Community-orange)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
 
 
