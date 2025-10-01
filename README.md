@@ -180,10 +180,10 @@ Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_i
 
 - **[Shanghua Gao](https://shgao.site)**
 - **[Richard Zhu](https://www.linkedin.com/in/richard-zhu-4236901a7/)**
-- **[Pengwei Sui](mailto:pengwei_sui@hms.harvard.edu)**
+- **[Pengwei Sui](https://psui3905.github.io/)**
 - **[Zhenglun Kong](https://zlkong.github.io/homepage/)**
 - **[Sufian Aldogom](mailto:saldogom@mit.edu)**
-- **[Yepeng Huang](mailto:yepeng_huang@hms.harvard.edu)**
+- **[Yepeng Huang](https://yepeng.notion.site/Yepeng-Huang-16ad8dd1740080c28d4bd3e3d7c1080c)**
 - **[Ayush Noori](https://www.ayushnoori.com/)**
 - **[Reza Shamji](mailto:reza_shamji@hms.harvard.edu)**
 - **[Krishna Parvataneni](mailto:krishna_parvataneni@hms.harvard.edu)**
@@ -243,7 +243,17 @@ Our comprehensive documentation covers everything from quick start to advanced w
 ### Citation
 
 ```
-@misc{gao2025txagent,
+@article{gao2025democratizingaiscientistsusing,
+      title={Democratizing AI scientists using ToolUniverse}, 
+      author={Shanghua Gao and Richard Zhu and Pengwei Sui and Zhenglun Kong and Sufian Aldogom and Yepeng Huang and Ayush Noori and Reza Shamji and Krishna Parvataneni and Theodoros Tsiligkaridis and Marinka Zitnik},
+      year={2025},
+      eprint={2509.23426},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2509.23426}, 
+}
+
+@article{gao2025txagent,
       title={TxAgent: An AI Agent for Therapeutic Reasoning Across a Universe of Tools},
       author={Shanghua Gao and Richard Zhu and Zhenglun Kong and Ayush Noori and Xiaorui Su and Curtis Ginder and Theodoros Tsiligkaridis and Marinka Zitnik},
       year={2025},
