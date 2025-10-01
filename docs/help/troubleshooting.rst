@@ -144,7 +144,7 @@ Tool not found errors
       correct_names = [
           "OpenTargets_get_associated_targets_by_disease_efoId",
           "PubChem_get_compound_info",
-          "UniProt_get_protein_info"
+          "UniProt_get_function_by_accession"
       ]
 
 2. **Verify tool is loaded:**
@@ -369,19 +369,19 @@ Slow query performance
 
    .. code-block:: python
 
-      # Instead of individual queries
-      gene_info = []
-      for gene in genes:
+      # Instead of individual queries by gene symbol, prefer accession-based queries
+      accession_info = []
+      for accession in accessions:
            info = tu.run({
-               "name": "UniProt_get_protein_info",
-               "arguments": {"gene_symbol": gene}
+               "name": "UniProt_get_function_by_accession",
+               "arguments": {"accession": accession}
            })
-           gene_info.append(info)
+           accession_info.append(info)
 
       # Use batch processing
       queries = [
-           {"name": "UniProt_get_protein_info", "arguments": {"gene_symbol": gene}}
-           for gene in genes
+           {"name": "UniProt_get_function_by_accession", "arguments": {"accession": accession}}
+           for accession in accessions
       ]
       results = tu.run_batch(queries)
 

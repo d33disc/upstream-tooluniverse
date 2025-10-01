@@ -15,8 +15,8 @@ ToolUniverse is a collection of 600+ scientific tools for AI agents, providing u
    tu.load_tools()
 
    result = tu.run({
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "BRCA1"}
+      "name": "UniProt_get_function_by_accession",
+      "arguments": {"accession": "P05067"}
    })
 
 How do I install it?

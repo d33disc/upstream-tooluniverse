@@ -129,9 +129,10 @@ tools = tu.run({
 
 # Execute tools
 result = tu.run({
-    "name": "UniProt_get_protein_info",
-    "arguments": {"gene_symbol": "BRCA1"}
+    "name": "UniProt_get_function_by_accession",
+    "arguments": {"accession": "P05067"}
 })
+
 ```
 
 → **Complete Tutorials**: [Installation Tutorial](https://zitniklab.hms.harvard.edu/ToolUniverse/installation.html)

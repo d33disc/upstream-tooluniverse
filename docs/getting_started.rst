@@ -85,7 +85,7 @@ Inspect tool specifications to understand their parameters and capabilities befo
 .. code-block:: python
 
    # Get tool specification by name
-   spec = tu.tool_specification("UniProt_get_protein_info")
+   spec = tu.tool_specification("UniProt_get_function_by_accession")
    print("Tool specification:")
    print(f"Name: {spec['name']}")
    print(f"Description: {spec['description']}")
@@ -137,10 +137,10 @@ Retrieve comprehensive protein and gene information from UniProt database. Get p
 .. code-block:: python
 
    # Get comprehensive gene information
-   gene_query = {
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "BRCA1"}
-   }
+   gene_query = tu.run({
+      "name": "UniProt_get_function_by_accession",
+      "arguments": {"accession": "P05067"}
+   })
    gene_info = tu.run(gene_query)
    print(gene_info)
 

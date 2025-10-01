@@ -66,10 +66,10 @@ Get comprehensive protein/gene information:
 
 .. code-block:: python
 
-   # Look up a gene
+   # Look up protein function by UniProt accession (BRCA1 → P38398)
    gene_query = {
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "BRCA1"}
+       "name": "UniProt_get_function_by_accession",
+       "arguments": {"accession": "P38398"}
    }
 
    protein_info = tu.run(gene_query)
@@ -256,10 +256,11 @@ Comprehensive gene analysis across multiple databases:
 
        analysis_results = {}
 
-       # 1. Basic protein information
+       # 1. Basic protein function annotation by accession
+       # Map your gene symbol to accession externally, then query by accession
        protein_query = {
-           "name": "UniProt_get_protein_info",
-           "arguments": {"gene_symbol": gene_symbol}
+           "name": "UniProt_get_function_by_accession",
+           "arguments": {"accession": "P38398" if gene_symbol == "BRCA1" else "P04637"}
        }
 
        protein_info = tu.run(protein_query)
@@ -889,7 +890,7 @@ Optimize for speed and efficiency:
    # Example usage
    batch_queries = [
        {"name": "FAERS_count_reactions_by_drug_event", "arguments": {"medicinalproduct": "aspirin"}},
-       {"name": "UniProt_get_protein_info", "arguments": {"gene_symbol": "BRCA1"}},
+       {"name": "UniProt_get_function_by_accession", "arguments": {"accession": "P38398"}},
        {"name": "PubTator_search_publications", "arguments": {"query": "cancer", "limit": 3}}
    ]
 

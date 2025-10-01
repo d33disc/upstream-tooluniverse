@@ -146,10 +146,10 @@ Tool returns empty results?
 
 .. code-block:: python
 
-   # Example: Check if gene symbol is valid
+   # Example: Retrieve UniProt function by accession
    query = {
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "BRCA1"}  # Use standard gene symbol
+       "name": "UniProt_get_function_by_accession",
+       "arguments": {"accession": "P38398"}  # BRCA1 accession
    }
 
 MCP Integration

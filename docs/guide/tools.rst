@@ -111,7 +111,7 @@ UniProt - Protein Information
 Access comprehensive protein and gene information.
 
 **Key Functions:**
-* ``UniProt_get_protein_info`` - Get detailed protein information by gene symbol
+* ``UniProt_get_function_by_accession`` - Get functional annotations by UniProt accession
 * ``UniProt_search_proteins`` - Search proteins by keywords
 * ``UniProt_get_protein_sequence`` - Retrieve protein sequences
 
@@ -120,8 +120,8 @@ Access comprehensive protein and gene information.
 .. code-block:: python
 
    query = {
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "BRCA1"}
+       "name": "UniProt_get_function_by_accession",
+       "arguments": {"accession": "P38398"}  # BRCA1 accession
    }
    result = tu.run(query)
 
@@ -656,10 +656,10 @@ Simple, focused queries for specific information:
 
 .. code-block:: python
 
-   # Get protein info
+   # Get protein function by accession (EGFR → P00533)
    protein_query = {
-       "name": "UniProt_get_protein_info",
-       "arguments": {"gene_symbol": "EGFR"}
+       "name": "UniProt_get_function_by_accession",
+       "arguments": {"accession": "P00533"}
    }
 
    # Search adverse events
@@ -707,12 +707,12 @@ Process multiple related queries efficiently:
    genes = ["BRCA1", "BRCA2", "TP53", "ATM"]
 
    results = {}
-   for gene in genes:
+   for accession in ["P38398", "P51587", "P04637", "Q13315"]:  # BRCA1, BRCA2, TP53, ATM
        query = {
-           "name": "UniProt_get_protein_info",
-           "arguments": {"gene_symbol": gene}
+           "name": "UniProt_get_function_by_accession",
+           "arguments": {"accession": accession}
        }
-       results[gene] = tu.run(query)
+       results[accession] = tu.run(query)
 
 Integration Patterns
 ~~~~~~~~~~~~~~~~~~~~
