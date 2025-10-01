@@ -15,7 +15,7 @@ This Tutorial gets you from zero to your first successful query in 5 minutes. Fo
    # 1. Install ToolUniverse
    pip install tooluniverse
 
-   # 2. Create AI scientist
+   # 2. Create AI scientist environment
    from tooluniverse import ToolUniverse
 
    tu = ToolUniverse()
@@ -24,7 +24,7 @@ This Tutorial gets you from zero to your first successful query in 5 minutes. Fo
    # 3. Query scientific databases
    result = tu.run({
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-       "arguments": {"efoId": "EFO_0000249"}  # Alzheimer's disease
+       "arguments": {"efoId": "EFO_0000537"}  # hypertension
    })
 
 **Success!** You now have access to 600+ scientific tools.

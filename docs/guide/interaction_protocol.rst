@@ -129,7 +129,7 @@ All tool interactions follow a uniform request format:
    # Direct tool execution
    result = tu.run({
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-       "arguments": {"efoId": "EFO_0000249"}
+       "arguments": {"efoId": "EFO_0000537"}  # hypertension
    })
 
 **Remote Communication** (MCP):
@@ -237,7 +237,7 @@ Database APIs
    # GraphQL database (OpenTargets)
    {
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-       "arguments": {"efoId": "EFO_0000249"}
+       "arguments": {"efoId": "EFO_0000537"}  # hypertension
    }
 
    # REST API (UniProt)

@@ -91,7 +91,7 @@ tools = tu.run({
 # 4. Use Call Tool operation to execute selected tool
 result = tu.run({
     "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-    "arguments": {"efoId": "EFO_0000249"}
+    "arguments": {"efoId": "EFO_0000537"}  # hypertension
 })
 ```
 

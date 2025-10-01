@@ -188,7 +188,7 @@ Comprehensive disease-target association data.
    # Get targets for Alzheimer's disease
    query = {
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-       "arguments": {"efoId": "EFO_0000249"}
+       "arguments": {"efoId": "EFO_0000537"}  # hypertension
    }
 
 EFO - Experimental Factor Ontology
