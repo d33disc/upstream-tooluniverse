@@ -85,7 +85,7 @@ tu.load_tools()  # Load 600+ scientific tools
 # 3. Use Find Tool operation to discover relevant tools
 tools = tu.run({
     "name": "Tool_Finder_Keyword",
-    "arguments": {"query": "disease target associations"}
+    "arguments": {"description": "disease target associations", "limit": 10}
 })
 
 # 4. Use Call Tool operation to execute selected tool
@@ -124,7 +124,7 @@ tu.load_tools()
 # Find relevant tools
 tools = tu.run({
     "name": "Tool_Finder_Keyword", # Tool_Finder (Embedding model, GPU required), Tool_Finder_LLM (LLM-based model)
-    "arguments": {"query": "protein structure prediction"}
+    "arguments": {"description": "protein structure prediction", "limit": 10}
 })
 
 # Execute tools

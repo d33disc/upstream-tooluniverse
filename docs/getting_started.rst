@@ -68,7 +68,7 @@ We support three search methods: keyword search, LLM-based search, and embedding
    protein_tools = tu.run({
        "name": "Tool_Finder_Keyword", # or Tool_Finder_LLM (LLM-API based) or Tool_Finder (Embedding-based)
        "arguments": {
-           "query": "protein structure",
+           "description": "protein structure",
            "limit": 5
        }
    })

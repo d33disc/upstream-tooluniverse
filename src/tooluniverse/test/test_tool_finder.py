@@ -14,7 +14,7 @@ test_queries = [
             "return_call_result": False,
         },
     },
-    {"name": "Tool_Finder_Keyword", "arguments": {"query": "disease", "limit": 5}},
+    {"name": "Tool_Finder_Keyword", "arguments": {"description": "disease", "limit": 5}},
 ]
 
 for idx, query in enumerate(test_queries):
