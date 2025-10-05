@@ -1389,7 +1389,7 @@ class SMCP(FastMCP):
                 self.tool_finder_available = True
                 self.tool_finder_type = "Tool_Finder_LLM"
                 self.logger.info(
-                    "✅ Tool_Finder_LLM (cost-optimized) available for advanced search"
+                    "✅ Tool_Finder_LLM available for advanced search"
                 )
                 return
 
@@ -1879,6 +1879,91 @@ class SMCP(FastMCP):
         except Exception:
             pass
 
+    def _print_tooluniverse_banner(self):
+        """Print ToolUniverse branding banner after FastMCP banner with dynamic information."""
+        # Get transport info if available
+        transport_display = getattr(self, '_transport_type', 'Unknown')
+        server_url = getattr(self, '_server_url', 'N/A')
+        tools_count = len(self._exposed_tools)
+        
+        # Map transport types to display names
+        transport_map = {
+            'stdio': 'STDIO',
+            'streamable-http': 'Streamable-HTTP',
+            'http': 'HTTP',
+            'sse': 'SSE'
+        }
+        transport_name = transport_map.get(transport_display, transport_display)
+        
+        # Format lines with proper alignment (matching FastMCP style)
+        # Each line should be exactly 75 characters (emoji takes 2 display widths but counts as 1 in len())
+        transport_line = f"                 📦 Transport:       {transport_name}"
+        server_line = f"                 🔗 Server URL:      {server_url}"
+        tools_line = f"                 🧰 Loaded Tools:    {tools_count}"
+        
+        # Pad to exactly 75 characters (emoji counts as 1 in len() but displays as 2)
+        transport_line = transport_line + " " * (75 - len(transport_line))
+        server_line = server_line + " " * (75 - len(server_line))
+        tools_line = tools_line + " " * (75 - len(tools_line))
+        
+        banner = f"""
+╭────────────────────────────────────────────────────────────────────────────╮
+│                                                                            │
+│                         🧬 ToolUniverse SMCP Server 🧬                     │
+│                                                                            │
+│            Bridging AI Agents with Scientific Computing Tools              │
+│                                                                            │
+│{transport_line}│
+│{server_line}│
+│{tools_line}│
+│                                                                            │
+│                 🌐 Website:  https://aiscientist.tools/                    │
+│                 💻 GitHub:   https://github.com/mims-harvard/ToolUniverse  │
+│                                                                            │
+╰────────────────────────────────────────────────────────────────────────────╯
+"""
+        print(banner)
+
+    def run(self, *args, **kwargs):
+        """
+        Override run method to display ToolUniverse banner after FastMCP banner.
+        
+        This method intercepts the parent's run() call to inject our custom banner
+        immediately after FastMCP displays its startup banner.
+        """
+        # Save transport information for banner display
+        transport = kwargs.get('transport', args[0] if args else 'unknown')
+        host = kwargs.get('host', '0.0.0.0')
+        port = kwargs.get('port', 7000)
+        
+        self._transport_type = transport
+        
+        # Build server URL based on transport
+        if transport == 'streamable-http' or transport == 'http':
+            self._server_url = f"http://{host}:{port}/mcp"
+        elif transport == 'sse':
+            self._server_url = f"http://{host}:{port}"
+        else:
+            self._server_url = "N/A (stdio mode)"
+        
+        # Use threading to print our banner shortly after FastMCP's banner
+        import threading
+        import time
+        
+        def delayed_banner():
+            """Print ToolUniverse banner with a small delay to appear after FastMCP banner."""
+            time.sleep(1.0)  # Delay to ensure FastMCP banner displays first
+            self._print_tooluniverse_banner()
+        
+        # Start banner thread only on first run
+        if not hasattr(self, '_tooluniverse_banner_shown'):
+            self._tooluniverse_banner_shown = True
+            banner_thread = threading.Thread(target=delayed_banner, daemon=True)
+            banner_thread.start()
+        
+        # Call parent's run method (blocking call)
+        return super().run(*args, **kwargs)
+
     def run_simple(
         self,
         transport: Literal["stdio", "http", "sse"] = "http",
@@ -2085,120 +2170,127 @@ class SMCP(FastMCP):
             func_params = []
             param_annotations = {}
 
-            for param_name, param_info in properties.items():
-                param_type = param_info.get("type", "string")
-                param_description = param_info.get(
-                    "description", f"{param_name} parameter"
-                )
-                is_required = param_name in required_params
+            # Process parameters in two phases: required first, then optional
+            # This ensures Python function signature validity (no default args before non-default)
+            for is_required_phase in [True, False]:
+                for param_name, param_info in properties.items():
+                    param_type = param_info.get("type", "string")
+                    param_description = param_info.get(
+                        "description", f"{param_name} parameter"
+                    )
+                    is_required = param_name in required_params
 
-                # Map JSON schema types to Python types and create appropriate Field
-                field_kwargs = {"description": param_description}
+                    # Skip if not in current phase
+                    if is_required != is_required_phase:
+                        continue
 
-                if param_type == "string":
-                    python_type = str
-                    # For string type, don't add json_schema_extra - let Pydantic handle it
-                elif param_type == "integer":
-                    python_type = int
-                    # For integer type, don't add json_schema_extra - let Pydantic handle it
-                elif param_type == "number":
-                    python_type = float
-                    # For number type, don't add json_schema_extra - let Pydantic handle it
-                elif param_type == "boolean":
-                    python_type = bool
-                    # For boolean type, don't add json_schema_extra - let Pydantic handle it
-                elif param_type == "array":
-                    python_type = list
-                    # Add array-specific schema information only for complex cases
-                    items_info = param_info.get("items", {})
-                    if items_info:
-                        # Clean up items definition - remove invalid fields
-                        cleaned_items = items_info.copy()
+                    # Map JSON schema types to Python types and create appropriate Field
+                    field_kwargs = {"description": param_description}
 
-                        # Remove 'required' field from items (not valid in JSON Schema for array items)
-                        if "required" in cleaned_items:
-                            cleaned_items.pop("required")
+                    if param_type == "string":
+                        python_type = str
+                        # For string type, don't add json_schema_extra - let Pydantic handle it
+                    elif param_type == "integer":
+                        python_type = int
+                        # For integer type, don't add json_schema_extra - let Pydantic handle it
+                    elif param_type == "number":
+                        python_type = float
+                        # For number type, don't add json_schema_extra - let Pydantic handle it
+                    elif param_type == "boolean":
+                        python_type = bool
+                        # For boolean type, don't add json_schema_extra - let Pydantic handle it
+                    elif param_type == "array":
+                        python_type = list
+                        # Add array-specific schema information only for complex cases
+                        items_info = param_info.get("items", {})
+                        if items_info:
+                            # Clean up items definition - remove invalid fields
+                            cleaned_items = items_info.copy()
 
-                        field_kwargs["json_schema_extra"] = {
-                            "type": "array",
-                            "items": cleaned_items,
-                        }
+                            # Remove 'required' field from items (not valid in JSON Schema for array items)
+                            if "required" in cleaned_items:
+                                cleaned_items.pop("required")
+
+                            field_kwargs["json_schema_extra"] = {
+                                "type": "array",
+                                "items": cleaned_items,
+                            }
+                        else:
+                            # If no items specified, default to string items
+                            field_kwargs["json_schema_extra"] = {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            }
+                    elif param_type == "object":
+                        python_type = dict
+                        # Add object-specific schema information
+                        object_props = param_info.get("properties", {})
+                        if object_props:
+                            # Clean up the nested object properties - fix common schema issues
+                            cleaned_props = {}
+                            nested_required = []
+
+                            for prop_name, prop_info in object_props.items():
+                                cleaned_prop = prop_info.copy()
+
+                                # Fix string "True"/"False" in required field (common ToolUniverse issue)
+                                if "required" in cleaned_prop:
+                                    req_value = cleaned_prop.pop("required")
+                                    if req_value in ["True", "true", True]:
+                                        nested_required.append(prop_name)
+                                    # Remove the individual required field as it should be at object level
+
+                                cleaned_props[prop_name] = cleaned_prop
+
+                            # Create proper JSON schema for nested object
+                            object_schema = {"type": "object", "properties": cleaned_props}
+
+                            # Add required array at object level if there are required fields
+                            if nested_required:
+                                object_schema["required"] = nested_required
+
+                            field_kwargs["json_schema_extra"] = object_schema
                     else:
-                        # If no items specified, default to string items
-                        field_kwargs["json_schema_extra"] = {
-                            "type": "array",
-                            "items": {"type": "string"},
-                        }
-                elif param_type == "object":
-                    python_type = dict
-                    # Add object-specific schema information
-                    object_props = param_info.get("properties", {})
-                    if object_props:
-                        # Clean up the nested object properties - fix common schema issues
-                        cleaned_props = {}
-                        nested_required = []
+                        # For unknown types, default to string and only add type info if it's truly unknown
+                        python_type = str
+                        if param_type not in [
+                            "string",
+                            "integer",
+                            "number",
+                            "boolean",
+                            "array",
+                            "object",
+                        ]:
+                            field_kwargs["json_schema_extra"] = {"type": param_type}
 
-                        for prop_name, prop_info in object_props.items():
-                            cleaned_prop = prop_info.copy()
+                    # Create Pydantic Field with enhanced schema information
+                    pydantic_field = Field(**field_kwargs)
 
-                            # Fix string "True"/"False" in required field (common ToolUniverse issue)
-                            if "required" in cleaned_prop:
-                                req_value = cleaned_prop.pop("required")
-                                if req_value in ["True", "true", True]:
-                                    nested_required.append(prop_name)
-                                # Remove the individual required field as it should be at object level
-
-                            cleaned_props[prop_name] = cleaned_prop
-
-                        # Create proper JSON schema for nested object
-                        object_schema = {"type": "object", "properties": cleaned_props}
-
-                        # Add required array at object level if there are required fields
-                        if nested_required:
-                            object_schema["required"] = nested_required
-
-                        field_kwargs["json_schema_extra"] = object_schema
-                else:
-                    # For unknown types, default to string and only add type info if it's truly unknown
-                    python_type = str
-                    if param_type not in [
-                        "string",
-                        "integer",
-                        "number",
-                        "boolean",
-                        "array",
-                        "object",
-                    ]:
-                        field_kwargs["json_schema_extra"] = {"type": param_type}
-
-                # Create Pydantic Field with enhanced schema information
-                pydantic_field = Field(**field_kwargs)
-
-                if is_required:
-                    # Required parameter with description and schema info
-                    annotated_type = Annotated[python_type, pydantic_field]
-                    param_annotations[param_name] = annotated_type
-                    func_params.append(
-                        inspect.Parameter(
-                            param_name,
-                            inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                            annotation=annotated_type,
+                    if is_required:
+                        # Required parameter with description and schema info
+                        annotated_type = Annotated[python_type, pydantic_field]
+                        param_annotations[param_name] = annotated_type
+                        func_params.append(
+                            inspect.Parameter(
+                                param_name,
+                                inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                                annotation=annotated_type,
+                            )
                         )
-                    )
-                else:
-                    # Optional parameter with description, schema info and default value
-                    annotated_type = Annotated[
-                        Union[python_type, type(None)], pydantic_field
-                    ]
-                    param_annotations[param_name] = annotated_type
-                    func_params.append(
-                        inspect.Parameter(
-                            param_name,
-                            inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                            default=None,
-                            annotation=annotated_type,
+                    else:
+                        # Optional parameter with description, schema info and default value
+                        annotated_type = Annotated[
+                            Union[python_type, type(None)], pydantic_field
+                        ]
+                        param_annotations[param_name] = annotated_type
+                        func_params.append(
+                            inspect.Parameter(
+                                param_name,
+                                inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                                default=None,
+                                annotation=annotated_type,
+                            )
                         )
-                    )
 
             # Create the async function with dynamic signature
             if not properties:
