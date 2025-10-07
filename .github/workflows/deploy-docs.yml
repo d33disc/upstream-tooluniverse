@@ -119,7 +119,8 @@ jobs:
                 importlib.import_module(module)
                 if os.path.exists(config):
                     print(f"✅ Selecting {name} theme (config: {config})")
-                    shutil.copy2(config, 'conf.py')
+                    if config != 'conf.py':
+                        shutil.copy2(config, 'conf.py')
                     selected_theme = name
                     break
                 else:
