@@ -92,6 +92,7 @@ AI Agent Interface:
 """
 
 import asyncio
+import functools
 import json
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Union, Callable, Literal
@@ -2292,93 +2293,122 @@ class SMCP(FastMCP):
                             )
                         )
 
-            # Create the async function with dynamic signature
-            if not properties:
-                # Tool has no parameters - create simple function
-                async def dynamic_tool_function() -> str:
-                    """Execute ToolUniverse tool with no arguments."""
-                    try:
-                        # Prepare function call with empty arguments
-                        function_call = {"name": tool_name, "arguments": {}}
+            # Add optional streaming parameter to signature
+            stream_field = Field(
+                description="Set to true to receive incremental streaming output (experimental)."
+            )
+            stream_annotation = Annotated[Union[bool, type(None)], stream_field]
+            param_annotations["_tooluniverse_stream"] = stream_annotation
+            func_params.append(
+                inspect.Parameter(
+                    "_tooluniverse_stream",
+                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                    default=None,
+                    annotation=stream_annotation,
+                )
+            )
 
-                        # Execute in thread pool to avoid blocking
-                        loop = asyncio.get_event_loop()
-                        result = await loop.run_in_executor(
-                            self.executor,
-                            self.tooluniverse.run_one_function,
-                            function_call,
+            # Optional FastMCP context injection for streaming callbacks
+            try:
+                from fastmcp.server.context import Context as MCPContext  # type: ignore
+            except Exception:  # pragma: no cover - context unavailable
+                MCPContext = None  # type: ignore
+
+            if MCPContext is not None:
+                func_params.append(
+                    inspect.Parameter(
+                        "ctx",
+                        inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                        default=None,
+                        annotation=MCPContext,
+                    )
+                )
+
+            async def dynamic_tool_function(**kwargs) -> str:
+                """Execute ToolUniverse tool with provided arguments."""
+                try:
+                    ctx = kwargs.pop("ctx", None)
+                    stream_flag = bool(kwargs.get("_tooluniverse_stream"))
+
+                    # Filter out None values for optional parameters (preserve streaming flag)
+                    args_dict = {
+                        k: v for k, v in kwargs.items() if v is not None
+                    }
+                    filtered_args = {
+                        k: v
+                        for k, v in args_dict.items()
+                        if k != "_tooluniverse_stream"
+                    }
+
+                    # Validate required parameters
+                    missing_required = [
+                        param for param in required_params if param not in filtered_args
+                    ]
+                    if missing_required:
+                        return json.dumps(
+                            {
+                                "error": f"Missing required parameters: {missing_required}",
+                                "required": required_params,
+                                "provided": list(filtered_args.keys()),
+                            },
+                            indent=2,
                         )
 
-                        # Format the result
-                        if isinstance(result, str):
-                            return result
-                        else:
-                            return json.dumps(result, indent=2, default=str)
+                    function_call = {"name": tool_name, "arguments": args_dict}
 
-                    except Exception as e:
-                        error_msg = f"Error executing {tool_name}: {str(e)}"
-                        self.logger.error(error_msg)
-                        return json.dumps({"error": error_msg}, indent=2)
+                    loop = asyncio.get_event_loop()
+                    stream_callback = None
 
-                # Set function metadata
-                dynamic_tool_function.__name__ = tool_name
-                dynamic_tool_function.__signature__ = inspect.Signature([])
-                dynamic_tool_function.__annotations__ = {"return": str}
+                    if stream_flag and ctx is not None and MCPContext is not None:
+                        def stream_callback(chunk: str) -> None:
+                            if not chunk:
+                                return
+                            try:
+                                future = asyncio.run_coroutine_threadsafe(
+                                    ctx.info(chunk), loop
+                                )
 
-            else:
-                # Tool has parameters - create function with dynamic signature
-                async def dynamic_tool_function(**kwargs) -> str:
-                    """Execute ToolUniverse tool with provided arguments."""
-                    try:
-                        # Filter out None values for optional parameters
-                        args_dict = {k: v for k, v in kwargs.items() if v is not None}
+                                def _log_future_result(fut) -> None:
+                                    exc = fut.exception()
+                                    if exc:
+                                        self.logger.debug(
+                                            f"Streaming callback error for {tool_name}: {exc}"
+                                        )
 
-                        # Validate required parameters
-                        missing_required = [
-                            param for param in required_params if param not in args_dict
-                        ]
-                        if missing_required:
-                            return json.dumps(
-                                {
-                                    "error": f"Missing required parameters: {missing_required}",
-                                    "required": required_params,
-                                    "provided": list(args_dict.keys()),
-                                },
-                                indent=2,
-                            )
+                                future.add_done_callback(_log_future_result)
+                            except Exception as cb_error:  # noqa: BLE001
+                                self.logger.debug(
+                                    f"Failed to dispatch stream chunk for {tool_name}: {cb_error}"
+                                )
 
-                        # Prepare function call
-                        function_call = {"name": tool_name, "arguments": args_dict}
+                        # Ensure downstream tools see the streaming flag
+                        if "_tooluniverse_stream" not in args_dict:
+                            args_dict["_tooluniverse_stream"] = True
 
-                        # Execute in thread pool to avoid blocking
-                        loop = asyncio.get_event_loop()
-                        result = await loop.run_in_executor(
-                            self.executor,
-                            self.tooluniverse.run_one_function,
-                            function_call,
-                        )
+                    run_callable = functools.partial(
+                        self.tooluniverse.run_one_function,
+                        function_call,
+                        stream_callback=stream_callback,
+                    )
 
-                        # Format the result
-                        if isinstance(result, str):
-                            return result
-                        else:
-                            return json.dumps(result, indent=2, default=str)
+                    result = await loop.run_in_executor(self.executor, run_callable)
 
-                    except Exception as e:
-                        error_msg = f"Error executing {tool_name}: {str(e)}"
-                        self.logger.error(error_msg)
-                        return json.dumps({"error": error_msg}, indent=2)
+                    if isinstance(result, str):
+                        return result
+                    else:
+                        return json.dumps(result, indent=2, default=str)
 
-                # Set function metadata
-                dynamic_tool_function.__name__ = tool_name
+                except Exception as e:
+                    error_msg = f"Error executing {tool_name}: {str(e)}"
+                    self.logger.error(error_msg)
+                    return json.dumps({"error": error_msg}, indent=2)
 
-                # Set function signature dynamically for tools with parameters
-                if func_params:
-                    dynamic_tool_function.__signature__ = inspect.Signature(func_params)
-
-                # Set annotations for type hints
-                dynamic_tool_function.__annotations__ = param_annotations.copy()
-                dynamic_tool_function.__annotations__["return"] = str
+            # Set function metadata
+            dynamic_tool_function.__name__ = tool_name
+            dynamic_tool_function.__signature__ = inspect.Signature(func_params)
+            annotations = param_annotations.copy()
+            annotations["return"] = str
+            dynamic_tool_function.__annotations__ = annotations
 
             # Create detailed docstring for internal use, but use clean description for FastMCP
             param_docs = []

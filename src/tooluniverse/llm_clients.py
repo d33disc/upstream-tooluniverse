@@ -21,6 +21,29 @@ class BaseLLMClient:
     ) -> Optional[str]:
         raise NotImplementedError
 
+    def infer_stream(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 5,
+        retry_delay: int = 5,
+    ):
+        """Default streaming implementation falls back to regular inference."""
+        result = self.infer(
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            return_json=return_json,
+            custom_format=custom_format,
+            max_retries=max_retries,
+            retry_delay=retry_delay,
+        )
+        if result is not None:
+            yield result
+
 
 class AzureOpenAIClient(BaseLLMClient):
     # Built-in defaults for model families (can be overridden by env)
@@ -305,6 +328,179 @@ class AzureOpenAIClient(BaseLLMClient):
         self.logger.error("Max retries exceeded. Unable to complete the request.")
         return None
 
+    def infer_stream(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 5,
+        retry_delay: int = 5,
+    ):
+        if return_json or custom_format is not None:
+            yield from super().infer_stream(
+                messages,
+                temperature,
+                max_tokens,
+                return_json,
+                custom_format,
+                max_retries,
+                retry_delay,
+            )
+            return
+
+        retries = 0
+        eff_max = (
+            max_tokens
+            if max_tokens is not None
+            else self._resolve_default_max_tokens(self.model_name)
+        )
+
+        while retries < max_retries:
+            try:
+                kwargs: Dict[str, Any] = {
+                    "model": self.model_name,
+                    "messages": messages,
+                    "stream": True,
+                }
+                if temperature is not None:
+                    kwargs["temperature"] = temperature
+                if eff_max is not None:
+                    kwargs["max_tokens"] = eff_max
+
+                stream = self.client.chat.completions.create(**kwargs)
+                for chunk in stream:
+                    text = AzureOpenAIClient._extract_text_from_chunk(chunk)  # type: ignore[attr-defined]
+                    if text:
+                        yield text
+                return
+            except self._openai.RateLimitError:  # type: ignore[attr-defined]
+                self.logger.warning(
+                    f"OpenRouter streaming rate limit hit. Retrying in {retry_delay} seconds..."
+                )
+                retries += 1
+                time.sleep(retry_delay * retries)
+            except Exception as e:  # noqa: BLE001
+                self.logger.error(f"OpenRouter streaming error: {e}")
+                break
+
+        yield from super().infer_stream(
+            messages,
+            temperature,
+            max_tokens,
+            return_json,
+            custom_format,
+            max_retries,
+            retry_delay,
+        )
+
+    @staticmethod
+    def _extract_text_from_chunk(chunk) -> Optional[str]:
+        try:
+            choices = getattr(chunk, "choices", None)
+        except Exception:
+            choices = None
+        if not choices:
+            return None
+
+        first_choice = choices[0]
+        delta = getattr(first_choice, "delta", None)
+        if delta is None and isinstance(first_choice, dict):
+            delta = first_choice.get("delta")
+        if delta is None:
+            return None
+
+        content = getattr(delta, "content", None)
+        if content is None and isinstance(delta, dict):
+            content = delta.get("content")
+        if not content:
+            return None
+
+        if isinstance(content, str):
+            return content
+
+        if isinstance(content, list):
+            fragments: List[str] = []
+            for item in content:
+                text = getattr(item, "text", None)
+                if text is None and isinstance(item, dict):
+                    text = item.get("text")
+                if text:
+                    fragments.append(text)
+            return "".join(fragments) if fragments else None
+
+        return None
+
+    def infer_stream(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 5,
+        retry_delay: int = 5,
+    ):
+        if return_json or custom_format is not None:
+            yield from super().infer_stream(
+                messages,
+                temperature,
+                max_tokens,
+                return_json,
+                custom_format,
+                max_retries,
+                retry_delay,
+            )
+            return
+
+        retries = 0
+        eff_temp = self._normalize_temperature(self.model_name, temperature)
+        eff_max = (
+            max_tokens
+            if max_tokens is not None
+            else self._resolve_default_max_tokens(self.model_name)
+        )
+
+        while retries < max_retries:
+            try:
+                kwargs: Dict[str, Any] = {
+                    "model": self.model_name,
+                    "messages": messages,
+                    "stream": True,
+                }
+                if eff_temp is not None:
+                    kwargs["temperature"] = eff_temp
+                if eff_max is not None:
+                    kwargs["max_tokens"] = eff_max
+
+                stream = self.client.chat.completions.create(**kwargs)
+                for chunk in stream:
+                    text = self._extract_text_from_chunk(chunk)
+                    if text:
+                        yield text
+                return
+            except self._openai.RateLimitError:  # type: ignore[attr-defined]
+                self.logger.warning(
+                    f"Rate limit exceeded. Retrying in {retry_delay} seconds (streaming)..."
+                )
+                retries += 1
+                time.sleep(retry_delay * retries)
+            except Exception as e:  # noqa: BLE001
+                self.logger.error(f"Streaming error: {e}")
+                break
+
+        # Fallback to non-streaming if streaming fails
+        yield from super().infer_stream(
+            messages,
+            temperature,
+            max_tokens,
+            return_json,
+            custom_format,
+            max_retries,
+            retry_delay,
+        )
+
 
 class GeminiClient(BaseLLMClient):
     def __init__(self, model_name: str, logger):
@@ -367,6 +563,96 @@ class GeminiClient(BaseLLMClient):
                 retries += 1
                 time.sleep(retry_delay * retries)
         return None
+
+    @staticmethod
+    def _extract_text_from_stream_chunk(chunk) -> Optional[str]:
+        if chunk is None:
+            return None
+        text = getattr(chunk, "text", None)
+        if text:
+            return text
+
+        candidates = getattr(chunk, "candidates", None)
+        if not candidates and isinstance(chunk, dict):
+            candidates = chunk.get("candidates")
+        if not candidates:
+            return None
+
+        candidate = candidates[0]
+        content = getattr(candidate, "content", None)
+        if content is None and isinstance(candidate, dict):
+            content = candidate.get("content")
+        if not content:
+            return None
+
+        parts = getattr(content, "parts", None)
+        if parts is None and isinstance(content, dict):
+            parts = content.get("parts")
+        if parts and isinstance(parts, list):
+            fragments: List[str] = []
+            for part in parts:
+                piece = getattr(part, "text", None)
+                if piece is None and isinstance(part, dict):
+                    piece = part.get("text")
+                if piece:
+                    fragments.append(piece)
+            return "".join(fragments) if fragments else None
+
+        final_text = getattr(content, "text", None)
+        if final_text is None and isinstance(content, dict):
+            final_text = content.get("text")
+        return final_text
+
+    def infer_stream(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 5,
+        retry_delay: int = 5,
+    ):
+        if return_json:
+            raise ValueError("Gemini JSON mode not supported here")
+
+        contents = ""
+        for m in messages:
+            if m["role"] in ("user", "system"):
+                contents += f"{m['content']}\n"
+
+        retries = 0
+        while retries < max_retries:
+            try:
+                gen_cfg: Dict[str, Any] = {
+                    "temperature": (temperature if temperature is not None else 0)
+                }
+                if max_tokens is not None:
+                    gen_cfg["max_output_tokens"] = max_tokens
+
+                model = self._build_model()
+                stream = model.generate_content(
+                    contents, generation_config=gen_cfg, stream=True
+                )
+                for chunk in stream:
+                    text = self._extract_text_from_stream_chunk(chunk)
+                    if text:
+                        yield text
+                return
+            except Exception as e:  # noqa: BLE001
+                self.logger.error(f"Gemini streaming error: {e}")
+                retries += 1
+                time.sleep(retry_delay * retries)
+
+        yield from super().infer_stream(
+            messages,
+            temperature,
+            max_tokens,
+            return_json,
+            custom_format,
+            max_retries,
+            retry_delay,
+        )
 
 
 class OpenRouterClient(BaseLLMClient):

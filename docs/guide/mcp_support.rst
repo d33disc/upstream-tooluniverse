@@ -53,6 +53,191 @@ Quick Start
 
 For basic MCP server setup and configuration, see the comprehensive guide in :ref:`mcp-server-functions`.
 
+CLI Options Reference
+---------------------
+
+The following are commonly used command-line flags for ToolUniverse MCP servers.
+
+.. code-block:: text
+
+   tooluniverse-smcp [OPTIONS]
+
+   --port INT                     Server port (HTTP/SSE). Default: 7000
+   --host TEXT                    Bind host for HTTP/SSE. Default: 127.0.0.1
+   --transport [http|stdio|sse]   Transport protocol. Default: http
+   --name TEXT                    Server display name
+   --max-workers INT              Worker pool size for tool execution
+   --verbose                      Enable verbose logs
+
+   # Tool selection
+   --categories STR...            Include only these categories
+   --exclude-categories STR...    Exclude these categories
+   --include-tools STR...         Include only these tool names
+   --tools-file PATH              File with one tool name per line
+   --include-tool-types STR...    Include only these tool types
+   --exclude-tool-types STR...    Exclude these tool types
+   --tool-config-files TEXT       Mapping like "custom:/path/to/custom.json"
+
+   # Hooks
+   --hooks-enabled/--no-hooks     Enable/disable hooks (stdio defaults to enabled)
+   --hook-type [SummarizationHook|FileSaveHook]
+   --hook-config-file PATH        JSON config for hooks
+
+.. code-block:: text
+
+   tooluniverse-smcp-stdio [OPTIONS]
+
+   --name TEXT                    Server display name
+   --categories STR...            Include only these categories
+   --include-tools STR...         Include only these tool names
+   --tools-file PATH              File with one tool name per line
+   --include-tool-types STR...    Include only these tool types
+   --exclude-tool-types STR...    Exclude these tool types
+   --hooks-enabled/--no-hooks     Enable/disable hooks (default: enabled)
+   --hook-type [SummarizationHook|FileSaveHook]
+   --hook-config-file PATH        JSON config for hooks
+
+Environment Variables
+---------------------
+
+You can configure defaults via environment variables. CLI flags take precedence.
+
+.. code-block:: bash
+
+   # Server basics
+   export TU_SMCP_PORT=8000
+   export TU_SMCP_HOST=0.0.0.0
+   export TU_SMCP_TRANSPORT=http        # http | stdio | sse
+   export TU_SMCP_NAME="My ToolUniverse Server"
+   export TU_SMCP_MAX_WORKERS=10
+   export TU_SMCP_VERBOSE=1             # any non-empty enables verbose
+
+   # Tool selection
+   export TU_SMCP_CATEGORIES="uniprot ChEMBL opentarget"
+   export TU_SMCP_EXCLUDE_CATEGORIES="mcp_auto_loader special_tools"
+   export TU_SMCP_INCLUDE_TOOLS="UniProt_get_entry_by_accession ChEMBL_get_molecule_by_chembl_id"
+   export TU_SMCP_TOOLS_FILE="/path/to/tools.txt"
+   export TU_SMCP_INCLUDE_TOOL_TYPES="OpenTarget ToolFinderEmbedding"
+   export TU_SMCP_EXCLUDE_TOOL_TYPES="ToolFinderLLM Unknown"
+   export TU_SMCP_TOOL_CONFIG_FILES="custom:/path/to/custom.json"
+
+   # Hooks
+   export TU_SMCP_HOOKS_ENABLED=1       # set empty or 0 to disable
+   export TU_SMCP_HOOK_TYPE=SummarizationHook
+   export TU_SMCP_HOOK_CONFIG_FILE="/path/to/hook_config.json"
+
+Configuration Files
+-------------------
+
+Example tools file (one tool per line, lines starting with # are comments):
+
+.. code-block:: text
+
+   # tools.txt
+   OpenTargets_get_associated_targets_by_disease_efoId
+   Tool_Finder_LLM
+   ChEMBL_search_similar_molecules
+   # Tool_Finder_Keyword
+
+Example hook config file:
+
+.. code-block:: json
+
+   {
+     "SummarizationHook": {
+       "max_tokens": 2048,
+       "summary_style": "concise"
+     },
+     "FileSaveHook": {
+       "output_dir": "/tmp/tu_outputs",
+       "filename_template": "{tool}_{timestamp}.json"
+     }
+   }
+
+Client Integration Examples
+---------------------------
+
+Python MCP client (conceptual) connecting to HTTP server:
+
+.. code-block:: python
+
+   import requests
+
+   # Discover tools
+   tools = requests.get("http://127.0.0.1:8000/mcp/tools").json()
+
+   # Execute a tool
+   payload = {
+       "name": "UniProt_get_entry_by_accession",
+       "arguments": {"accession": "P04637"}
+   }
+   result = requests.post("http://127.0.0.1:8000/mcp/run", json=payload).json()
+   print(result)
+
+JavaScript MCP client (conceptual) against HTTP server:
+
+.. code-block:: javascript
+
+   const fetch = require('node-fetch');
+
+   async function run() {
+     const toolsResp = await fetch('http://127.0.0.1:8000/mcp/tools');
+     const tools = await toolsResp.json();
+     console.log('Tools:', tools.length);
+
+     const resp = await fetch('http://127.0.0.1:8000/mcp/run', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+         name: 'UniProt_get_entry_by_accession',
+         arguments: { accession: 'P04637' }
+       })
+     });
+   const result = await resp.json();
+   console.log(result);
+ }
+  run();
+
+Streaming Output
+----------------
+
+All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` flag. When set to
+``true``, compatible tools send incremental text chunks as MCP log notifications while
+still returning the final result payload at completion. Example request payload:
+
+.. code-block:: json
+
+   {
+     "method": "tools/call",
+     "params": {
+       "name": "AgenticTool_example",
+       "arguments": {
+         "question": "Summarise recent literature",
+         "_tooluniverse_stream": true
+       }
+     }
+   }
+
+Make sure your client surfaces ``notifications/log`` (FastMCP ``ctx.info``) messages to
+display the streamed output.
+
+Claude Desktop stdio registration (example):
+
+.. code-block:: json
+
+   {
+     "mcpServers": {
+       "tooluniverse": {
+         "command": "tooluniverse-smcp-stdio",
+         "args": ["--categories", "uniprot", "ChEMBL", "opentarget"],
+         "env": {
+           "TU_SMCP_HOOKS_ENABLED": "1",
+           "TU_SMCP_HOOK_TYPE": "SummarizationHook"
+         }
+       }
+     }
+   }
+
 MCP Server Configuration
 -------------------------
 

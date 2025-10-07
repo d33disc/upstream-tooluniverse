@@ -50,7 +50,7 @@ run_stdio_server()
             if not line:
                 break
             print(f"启动日志: {line.strip()}")
-            if "Starting SMCP ToolUniverse Server" in line:
+            if "Starting ToolUniverse SMCP Server" in line:
                 break
 
         # 发送初始化请求

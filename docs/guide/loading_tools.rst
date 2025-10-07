@@ -126,6 +126,9 @@ MCP Server Functions
 
 ToolUniverse provides two main MCP server functions for different use cases:
 
+.. seealso::
+   For a comprehensive MCP overview, detailed configuration, best practices, and troubleshooting, see :doc:`mcp_support`.
+
 1. **`tooluniverse-mcp`** - Full-featured server with configurable transport (HTTP, SSE, stdio)
 2. **`tooluniverse-smcp-stdio`** - Specialized server for stdio transport (for desktop AI applications)
 

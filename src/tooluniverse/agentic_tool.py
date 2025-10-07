@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import json
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from .base_tool import BaseTool
 from .tool_registry import register_tool
@@ -29,6 +29,8 @@ API_KEY_ENV_VARS = {
 @register_tool("AgenticTool")
 class AgenticTool(BaseTool):
     """Generic wrapper around LLM prompting supporting JSON-defined configs with prompts and input arguments."""
+
+    STREAM_FLAG_KEY = "_tooluniverse_stream"
 
     @staticmethod
     def has_any_api_keys() -> bool:
@@ -250,8 +252,17 @@ class AgenticTool(BaseTool):
             raise ValueError("max_new_tokens must be positive or None")
 
     # ------------------------------------------------------------------ public API --------------
-    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    def run(
+        self,
+        arguments: Dict[str, Any],
+        stream_callback: Optional[Callable[[str], None]] = None,
+    ) -> Dict[str, Any]:
         start_time = datetime.now()
+
+        # Work on a copy so we can remove control flags without mutating caller data
+        arguments = dict(arguments or {})
+        stream_flag = bool(arguments.pop("_tooluniverse_stream", False))
+        streaming_requested = stream_flag or stream_callback is not None
 
         # Check if tool is available before attempting to run
         if not self._is_available:
@@ -300,15 +311,51 @@ class AgenticTool(BaseTool):
             custom_format = arguments.get("response_format", None)
 
             # Delegate to client; client handles provider-specific logic
-            response = self._llm_client.infer(
-                messages=messages,
-                temperature=self._temperature,
-                max_tokens=None,  # client resolves per-model defaults/env
-                return_json=self._return_json,
-                custom_format=custom_format,
-                max_retries=self._max_retries,
-                retry_delay=self._retry_delay,
+            response = None
+
+            streaming_permitted = (
+                streaming_requested and not self._return_json and custom_format is None
             )
+
+            if streaming_permitted and hasattr(self._llm_client, "infer_stream"):
+                try:
+                    chunks_collected: List[str] = []
+                    stream_iter = self._llm_client.infer_stream(
+                        messages=messages,
+                        temperature=self._temperature,
+                        max_tokens=None,
+                        return_json=self._return_json,
+                        custom_format=custom_format,
+                        max_retries=self._max_retries,
+                        retry_delay=self._retry_delay,
+                    )
+                    for chunk in stream_iter:
+                        if not chunk:
+                            continue
+                        chunks_collected.append(chunk)
+                        self._emit_stream_chunk(chunk, stream_callback)
+                    if chunks_collected:
+                        response = "".join(chunks_collected)
+                except Exception as stream_error:  # noqa: BLE001
+                    self.logger.warning(
+                        f"Streaming failed for tool '{self.name}': {stream_error}. Falling back to buffered response."
+                    )
+                    response = None
+
+            if response is None:
+                response = self._llm_client.infer(
+                    messages=messages,
+                    temperature=self._temperature,
+                    max_tokens=None,  # client resolves per-model defaults/env
+                    return_json=self._return_json,
+                    custom_format=custom_format,
+                    max_retries=self._max_retries,
+                    retry_delay=self._retry_delay,
+                )
+
+                if streaming_requested and response:
+                    for chunk in self._iter_chunks(response):
+                        self._emit_stream_chunk(chunk, stream_callback)
 
             end_time = datetime.now()
             execution_time = (end_time - start_time).total_seconds()
@@ -338,7 +385,8 @@ class AgenticTool(BaseTool):
                 }
             else:
                 return response
-        except Exception as e:
+
+        except Exception as e:  # noqa: BLE001
             end_time = datetime.now()
             execution_time = (end_time - start_time).total_seconds()
             self.logger.error(f"Error executing {self.name}: {str(e)}")
@@ -359,13 +407,35 @@ class AgenticTool(BaseTool):
                         "model_info": {
                             "api_type": self._api_type,
                             "model_id": self._model_id,
+                            "temperature": self._temperature,
+                            "max_new_tokens": self._max_new_tokens,
                         },
                         "execution_time_seconds": execution_time,
                         "timestamp": start_time.isoformat(),
                     },
                 }
             else:
-                return "error: " + str(e) + " error_type: " + type(e).__name__
+                return f"error: {str(e)} error_type: {type(e).__name__}"
+
+    @staticmethod
+    def _iter_chunks(text: str, size: int = 800):
+        if not text:
+            return
+        for idx in range(0, len(text), size):
+            yield text[idx : idx + size]
+
+    def _emit_stream_chunk(
+        self, chunk: Optional[str], stream_callback: Optional[Callable[[str], None]]
+    ) -> None:
+        if not stream_callback or not chunk:
+            return
+        try:
+            stream_callback(chunk)
+        except Exception as callback_error:  # noqa: BLE001
+            # Streaming callbacks should not break tool execution; log and continue
+            self.logger.debug(
+                f"Stream callback for tool '{self.name}' raised an exception: {callback_error}"
+            )
 
     # ------------------------------------------------------------------ helpers -----------------
     def _validate_arguments(self, arguments: Dict[str, Any]):

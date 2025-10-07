@@ -180,7 +180,7 @@ Complete Parameter Reference
    - ``--transport``: Transport protocol (stdio, http, sse) - default: http
    - ``--host``: Host to bind to - default: 0.0.0.0
    - ``--port``: Port to bind to - default: 7000
-   - ``--name``: Server name - default: "SMCP ToolUniverse Server"
+   - ``--name``: Server name - default: "ToolUniverse SMCP Server"
    - ``--max-workers``: Maximum worker threads - default: 5
    - ``--no-search``: Disable intelligent search functionality
    - ``--verbose``, ``-v``: Enable verbose logging
