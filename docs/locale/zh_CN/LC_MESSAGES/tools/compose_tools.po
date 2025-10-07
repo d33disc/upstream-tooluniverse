@@ -1,0 +1,451 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/compose_tools.rst:2 c68162a6d9a542cc8f9328ce1b8b006c
+msgid "Compose Tools"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:4 e9d1c846d3e54a2a92b5d8e3e8d5a7f1
+msgid ""
+"**Configuration File**: ``compose_tools.json`` **Tool Type**: Local "
+"**Tools Count**: 8"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:8 f5f42acd0e8f4d819341bc177431d6ed
+msgid ""
+"This page contains all tools defined in the ``compose_tools.json`` "
+"configuration file."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:11 2d9e8d2fa8504dd09dc32efa137b3e8d
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:14 5ff8a351e3a3401abd5c9a5fc1969d70
+msgid "**BiomarkerDiscoveryWorkflow** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:16 53eed01925af49ecaf2f6fb6db2d354d
+msgid ""
+"Discover and validate biomarkers for a specific disease condition using "
+"literature analysis, expr..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst 50c8dc2548b0419e80121fe1bcb57007
+msgid "BiomarkerDiscoveryWorkflow tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:20 ../../tools/compose_tools.rst:54
+#: ../../tools/compose_tools.rst:85 ../../tools/compose_tools.rst:122
+#: ../../tools/compose_tools.rst:153 ../../tools/compose_tools.rst:196
+#: ../../tools/compose_tools.rst:236 ../../tools/compose_tools.rst:276
+#: 03395d3051cd40a2835e36c68e4e3724 1904ca80004542c3a9e555f9b800a2ad
+#: 2846690766444495a19d2ef8bb9a73ec 2d0347a9e5a847e8a2176316c49de6be
+#: 6cdbbe6b14a1406291070f04f6bb9b82 77553de2ba7a4d47a3008b78b3f9ad2f
+#: 9a64c90ba2524282b81eb6d4a3b589ba e29d44cc20fc45eeacbcc18fc89eb118
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:22 adc4307ca2a64001bcfaea7afdec9a69
+msgid "**Name**: ``BiomarkerDiscoveryWorkflow``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:23 ../../tools/compose_tools.rst:57
+#: ../../tools/compose_tools.rst:88 ../../tools/compose_tools.rst:125
+#: ../../tools/compose_tools.rst:156 ../../tools/compose_tools.rst:199
+#: ../../tools/compose_tools.rst:239 ../../tools/compose_tools.rst:279
+#: 237497dd84a1426a850582e9e5385f44 2e1152ba7afa44dcb6e8b636ff2407d9
+#: 2e8043c3c7254e628f66c3ae7cbfee0a 3df16f2ea3d8451abdf7ee61a3547940
+#: 3fd0f260ceb54bd898208c2b85426481 4b647eaa6d57477782ff310be3218b4d
+#: 902c135587164dedaf4160a5e351755e aead93a9adb44bd99c82e630b33f05f7
+msgid "**Type**: ``ComposeTool``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:24 9b9168f8eb164fcba134f8649789c7dc
+msgid ""
+"**Description**: Discover and validate biomarkers for a specific disease "
+"condition using literature analysis, expression data, pathway enrichment,"
+" and clinical validation."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:26 ../../tools/compose_tools.rst:60
+#: ../../tools/compose_tools.rst:91 ../../tools/compose_tools.rst:128
+#: ../../tools/compose_tools.rst:159 ../../tools/compose_tools.rst:202
+#: ../../tools/compose_tools.rst:242 ../../tools/compose_tools.rst:282
+#: 483d1127b23d4fc99ccae91053501ad7 817bed44885e42ef898909d8c8991bba
+#: 890544f286ac4fe695fb7faf13d4e8da a298526a706343d995ec58620e38606b
+#: ab8bde055fd64092bb6fdaa36af320ff b49102c2608a4a2d96f59f7be808221c
+#: b545160682a44039a75884109ac6b3b2 e126c77fd1ae4acb83b6fa369a69ad3d
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:28 e01ff3a116b34538b72dc7493f0fa529
+msgid ""
+"``disease_condition`` (string) (required) The disease condition to "
+"discover biomarkers for (e.g., 'breast cancer', 'Alzheimer's disease')"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:31 d457932188874737ac8b30805f3635f6
+msgid ""
+"``sample_type`` (string) (optional) The type of sample to analyze (e.g., "
+"'blood', 'tissue', 'plasma')"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:34 ../../tools/compose_tools.rst:65
+#: ../../tools/compose_tools.rst:102 ../../tools/compose_tools.rst:133
+#: ../../tools/compose_tools.rst:176 ../../tools/compose_tools.rst:216
+#: ../../tools/compose_tools.rst:256 ../../tools/compose_tools.rst:296
+#: 11bddaeba44c43ef93ce3e1767b98a10 15e58f2622fc421ea65600670dbb5239
+#: 2f694228a70947f184265cc807128d35 44f9e93a54bb4908ad2f045bc3d7d9f5
+#: 6d4d942e23d8478b997dc8492d498ab4 96bde180905b4a438d2db9b637693928
+#: d416b11559924801adedfbca760ddc0d f91d851ef6b34f9c91100ea7f2b322b2
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:48 ec10965b1ba94b1b9cfb55241cbe8d38
+msgid "**ComprehensiveDrugDiscoveryPipeline** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:50 2ea487e454564de4bddb11b6de65d5a3
+msgid ""
+"Complete end-to-end drug discovery workflow from disease to optimized "
+"candidates. Identifies targ..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst 3474474f658e4819a8aa67ee47dc2c73
+msgid "ComprehensiveDrugDiscoveryPipeline tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:56 c1bd0d22090b4b13ad4d197306529238
+msgid "**Name**: ``ComprehensiveDrugDiscoveryPipeline``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:58 e130645c20564908a6a9340f520f0473
+msgid ""
+"**Description**: Complete end-to-end drug discovery workflow from disease"
+" to optimized candidates. Identifies targets, discovers lead compounds, "
+"screens for ADMET properties, assesses safety, and validates with "
+"literature."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:62 a0741bd9ec8c45ab880236b6e791dda1
+msgid ""
+"``disease_efo_id`` (string) (required) The EFO ID of the disease for drug"
+" discovery (e.g., 'EFO_0001074' for Alzheimer's disease)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:79 c03ade7953624695b5dc8fb947129c63
+msgid "**DrugSafetyAnalyzer** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:81 4b3a9090ad2b4ee0b8d21269ea738e61
+msgid ""
+"Comprehensive drug safety analysis combining adverse event data, "
+"literature review, and molecular..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst 977e0fbc4d14456f884eb4ac63faa60a
+msgid "DrugSafetyAnalyzer tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:87 0a37eadced164d80adc559caf184c874
+msgid "**Name**: ``DrugSafetyAnalyzer``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:89 4b6b61b23a274326bfe920ca1e09fcc8
+msgid ""
+"**Description**: Comprehensive drug safety analysis combining adverse "
+"event data, literature review, and molecular information"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:93 a6054e0c5d9941c488e94d3e724cbb15
+msgid "``drug_name`` (string) (required) Name of the drug to analyze"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:96 75ad1c251adc424fba8d8f8e90255529
+msgid "``patient_sex`` (string) (optional) Filter by patient sex (optional)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:99 657c6fa87bbf407290fcfd8f8ffa5382
+msgid ""
+"``serious_events_only`` (boolean) (optional) Focus only on serious "
+"adverse events"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:116 0a18e56f0edd4d04b4490a33d54b183e
+msgid "**LiteratureSearchTool** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:118 31a008e2b9534f25ad88064ef0771da7
+msgid ""
+"Comprehensive literature search and summary tool that searches multiple "
+"databases (EuropePMC, Ope..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst abae985e6d2d46e1ba4b8fff6188f693
+msgid "LiteratureSearchTool tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:124 2fb724d8b8724666a43eb23c223a4d23
+msgid "**Name**: ``LiteratureSearchTool``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:126 fa5ae10290564d058717ba5130400cc1
+msgid ""
+"**Description**: Comprehensive literature search and summary tool that "
+"searches multiple databases (EuropePMC, OpenAlex, PubTator) and generates"
+" AI-powered summaries of research findings"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:130 a601f3ef5cc1460fb550abaf64f728e8
+msgid ""
+"``research_topic`` (string) (required) The research topic or query to "
+"search for in the literature"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:147 98fa961ab8714241b416b80eebd1ea8e
+msgid "**ToolDescriptionOptimizer** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:149 2cfd556bf5fa4d189a285d58af5b7693
+msgid ""
+"Optimizes a tool's description and parameter descriptions by generating "
+"test cases, executing the..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst 021bad84995649d388a435daae925281
+msgid "ToolDescriptionOptimizer tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:155 b989cdf214654a8884b15bfe3ea1a77d
+msgid "**Name**: ``ToolDescriptionOptimizer``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:157 afeaafb9eac34834ab38437f8bd1746e
+msgid ""
+"**Description**: Optimizes a tool's description and parameter "
+"descriptions by generating test cases, executing them, analyzing the "
+"results, and suggesting improved descriptions for both the tool and its "
+"arguments. Optionally saves a comprehensive optimization report to a file"
+" without overwriting the original."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:161 c5099bd361694369839bfba76db0e63f
+msgid ""
+"``tool_config`` (object) (required) The full configuration of the tool to"
+" optimize."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:164 873626cb44ee4f2eb8de1f55f9b37916
+msgid ""
+"``save_to_file`` (boolean) (optional) If true, save the optimized "
+"description to a file (do not overwrite the original)."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:167 9f94b17ddc6d45bc835c5a8b341a5574
+msgid ""
+"``output_file`` (string) (optional) Optional file path to save the "
+"optimized description. If not provided, use "
+"'<tool_name>_optimized_description.txt'."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:170 6626c12696244fec827fbf3f3ff2a1d2
+msgid ""
+"``max_iterations`` (integer) (optional) Maximum number of optimization "
+"rounds to perform."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:173 5b7d1f64f9194377921af58ade1ad864
+msgid ""
+"``satisfaction_threshold`` (number) (optional) Quality score threshold "
+"(1-10) to consider optimization satisfactory."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:190 3066900cd13b4c77844309ba14ec5c4e
+msgid "**ToolDiscover** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:192 702545fec89a4c2dbe6436a41ac4e588
+msgid ""
+"Generates new ToolUniverse-compliant tools based on short descriptions "
+"through an intelligent dis..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst 4e17774745b24b3da57615ca6b0d1659
+msgid "ToolDiscover tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:198 98f32abdcc894a73b6e4484871e21fca
+msgid "**Name**: ``ToolDiscover``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:200 7703c52c5c5c4186bcd1117c2dcd9fc5
+msgid ""
+"**Description**: Generates new ToolUniverse-compliant tools based on "
+"short descriptions through an intelligent discovery and refinement "
+"process. Automatically determines the optimal tool type and category, "
+"discovers similar existing tools, generates initial specifications, and "
+"iteratively refines the tool configuration using agentic optimization "
+"tools until it meets quality standards."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:204 79e444b6e5914da2b8ece3bf351899ac
+msgid ""
+"``tool_description`` (string) (required) Short description of the desired"
+" tool functionality and purpose. Tool Discover will automatically analyze"
+" this to determine the optimal tool type (PackageTool, RESTTool, XMLTool,"
+" or AgenticTool) and appropriate category."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:207 0c5abc28c8da478fb79bd34682cfbbca
+msgid ""
+"``max_iterations`` (integer) (optional) Maximum number of refinement "
+"iterations to perform."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:210 c92491ebfa3142d4a422cf332f39713c
+msgid ""
+"``save_to_file`` (boolean) (optional) Whether to save the generated tool "
+"configuration and report to a file."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:213 48d59f78ee5948298082d821671bc123
+msgid ""
+"``output_file`` (string) (optional) Optional file path to save the "
+"generated tool. If not provided, uses auto-generated filename."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:230 d412dae438fa4563855dce4b225f755a
+msgid "**ToolGraphGenerationPipeline** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:232 556049a890714190b8bc90c886e3cd2a
+msgid ""
+"Generates a directed tool relationship graph among provided tool configs "
+"using ToolRelationshipDe..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst dc205889f0a440ee8d524283866bc66f
+msgid "ToolGraphGenerationPipeline tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:238 3edf399219294400ad9a831d80e77df5
+msgid "**Name**: ``ToolGraphGenerationPipeline``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:240 4b3e3ed9338142e5acc9ea248975cf61
+msgid ""
+"**Description**: Generates a directed tool relationship graph among "
+"provided tool configs using ToolRelationshipDetector to infer data-flow "
+"compatibility."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:244 116b10696d844df396d37cca97b0d2fc
+msgid "``tool_configs`` (array) (required) List of tool configuration objects"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:247 a57567b82a294c2e8c6ddeffc93ce789
+msgid ""
+"``max_tools`` (integer) (optional) Optional max number of tools to "
+"process (debug)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:250 e9936b62157f47ebb1768d60990af791
+msgid "``output_path`` (string) (optional) Path for output graph JSON"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:253 17f37a9f1bd04947b7a9025581db56ea
+msgid ""
+"``save_intermediate_every`` (integer) (optional) Checkpoint every N "
+"processed pairs"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:270 e540cb22b53040b0a84e0a11ca8be691
+msgid "**ToolMetadataGenerationPipeline** (Type: ComposeTool)"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:272 72ec48be43b24d9b880f71896418a14f
+msgid ""
+"Generates standardized metadata for a batch of ToolUniverse tool "
+"configurations by calling ToolMe..."
+msgstr ""
+
+#: ../../tools/compose_tools.rst ab91cce5b57c4fb3b265d64f107f06a7
+msgid "ToolMetadataGenerationPipeline tool specification"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:278 c305c9f4b6b94b738b7e232303f8a8af
+msgid "**Name**: ``ToolMetadataGenerationPipeline``"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:280 d5266ac560c64734b931fcc57abf6de7
+msgid ""
+"**Description**: Generates standardized metadata for a batch of "
+"ToolUniverse tool configurations by calling ToolMetadataGenerator, "
+"LabelGenerator, and ToolMetadataStandardizer for sources and tags."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:284 6a080c9fe9754016850c0e58b08072e0
+msgid ""
+"``tool_configs`` (array) (required) List of raw tool configuration JSON "
+"objects to extract and standardize metadata for"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:287 7d5f484f00b94323998824d786379c20
+#, python-brace-format
+msgid ""
+"``tool_type_mappings`` (object) (optional) Mapping of simplified toolType"
+" (keys) to lists of tool 'type' values belonging to each simplified "
+"category (e.g., {'Databases': ['XMLTool']})"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:290 673b3312bc304531ab69da7540659f80
+msgid ""
+"``add_existing_tooluniverse_labels`` (boolean) (optional) Whether to "
+"include labels from existing ToolUniverse tools when labeling the "
+"metadata configs of the new tools. It is strongly recommended that this "
+"is set to true to minimize the number of new labels created and the "
+"possibility of redundant labels."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:293 c2971324f6cc456babf5757c3a62e8a7
+msgid ""
+"``max_new_tooluniverse_labels`` (integer) (optional) The maximum number "
+"of new ToolUniverse labels to use in the metadata configs of the new "
+"tools. The existing ToolUniverse labels will be used first, and then new "
+"labels will be created as needed up to this limit. If the limit is "
+"reached, the least relevant new labels will be discarded. Please try to "
+"use as few new labels as possible to avoid excessive labels."
+msgstr ""
+
+#: ../../tools/compose_tools.rst:310 4dc580ca3a274f66a7c741f9d6cdac5d
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:312 d364efa81acb42d2ac1afce97856436f
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/compose_tools.rst:313 299c61efc30046618ca04faefa27c724
+msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
+msgstr ""
+

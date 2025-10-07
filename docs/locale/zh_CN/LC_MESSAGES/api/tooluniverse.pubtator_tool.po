@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.pubtator_tool.rst:2 f6e77516683546ec950df39cfa14219a
+msgid "tooluniverse.pubtator\\_tool module"
+msgstr ""
+
+#: ec1e2a9a00824a37a2f62eb083532e59 of
+#: tooluniverse.pubtator_tool.PubTatorTool:1
+msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
+msgstr ""
+
+#: 41a0e43107384fa3a1f27459098f4212 of
+#: tooluniverse.pubtator_tool.PubTatorTool:1
+msgid ""
+"Generic wrapper around a single PubTator 3 endpoint supporting JSON-"
+"defined configs."
+msgstr ""
+
+#: 04fe73b29361402794f6174a246996ab of
+#: tooluniverse.pubtator_tool.PubTatorTool.run:1
+msgid "Execute the tool."
+msgstr ""
+
+#: e349562f4b444fb083ffac20e43be34f of
+#: tooluniverse.pubtator_tool.PubTatorTool.run:3
+msgid ""
+"The default BaseTool implementation accepts an optional arguments mapping"
+" to align with most concrete tool implementations which expect a "
+"dictionary of inputs."
+msgstr ""
+
+#: ccace73d15424ef29e58629edf0b85d4 of
+#: tooluniverse.pubtator_tool.PubTatorTool._compose_url:1
+msgid "Substitute template vars & build full URL."
+msgstr ""
+
+#: 66f8cc5fa757424daafea992575edc1d of
+#: tooluniverse.pubtator_tool.PubTatorTool._query_params:1
+msgid "Translate caller arg names → API param names, drop Nones, serialise lists."
+msgstr ""
+
+#: ae703d4ffe3047edb639bf634ecd4e2a of
+#: tooluniverse.pubtator_tool.PubTatorTool._filter_search_results:1
+msgid ""
+"Filter PubTatorSearch results by score threshold and remove facet items "
+"that only have 'name', 'type', and 'value'."
+msgstr ""
+

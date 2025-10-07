@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/humanbase_tools.rst:2 b00e9387d7cb464fafdb4745051c56e1
+msgid "Humanbase Tools"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:4 89f1b39fffc942a68b3ac2a10f113b22
+msgid ""
+"**Configuration File**: ``humanbase_tools.json`` **Tool Type**: Local "
+"**Tools Count**: 1"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:8 61fe3f2fdcee43c9990c5e01500d457b
+msgid ""
+"This page contains all tools defined in the ``humanbase_tools.json`` "
+"configuration file."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:11 a53df1fb4a624d3e8242f0cb5f4d4f30
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:14 3eff575e5a4642ce8b4ff79baae97dd5
+msgid "**humanbase_ppi_analysis** (Type: HumanBaseTool)"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:16 8c2a5f56230848788c9cd99f829f59e7
+msgid ""
+"Retrieve tissue-specific protein-protein interactions and biological "
+"processes from HumanBase. Re..."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst 498cf5420a7f44fb8d685f2dd3bd1fff
+msgid "humanbase_ppi_analysis tool specification"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:20 098570961533450e8677fff7afea6529
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:22 f49e4cdde1e044cc9f41e1be85ec6e20
+msgid "**Name**: ``humanbase_ppi_analysis``"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:23 ddd4d3d4fd9d4979b7740c8072ae7c0b
+msgid "**Type**: ``HumanBaseTool``"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:24 f4aab87bef5a403f9075ff6d7f8f4a63
+msgid ""
+"**Description**: Retrieve tissue-specific protein-protein interactions "
+"and biological processes from HumanBase. Returns a NetworkX graph of "
+"tissue specific protein-protein interactions and a list of associated "
+"biological processes involeed by the given genes from Gene Ontology."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:26 1fe850dd567148d39c172de5a1178b63
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:28 7b9a5bb36b6e47ab9b5ebe644d1002a5
+msgid ""
+"``gene_list`` (array) (required) List of gene names or symbols to analyze"
+" for protein-protein interactions. The gene name should be the official "
+"gene symbol, not the synonym."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:31 217ff28c15ad4edba3deb28dc4bc8398
+msgid ""
+"``tissue`` (string) (optional) Tissue type for tissue-specific "
+"interactions. Examples: 'brain', 'heart', 'liver', 'kidney', etc."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:34 19d4dc6dd3584beb98d05a3f5664fbcf
+msgid ""
+"``max_node`` (integer) (optional) Maximum number of nodes to retrieve in "
+"the interaction network. Warning: the more nodes, the more time it takes "
+"to retrieve the data. Default is 10 (~30 seconds)."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:37 476bf1085ff24cb1884e23fba342cb9f
+msgid ""
+"``interaction`` (string) (optional) Specific interaction type to filter "
+"by. Available types: 'co-expression', 'interaction', 'tf-binding', 'gsea-"
+"microrna-targets', 'gsea-perturbations'. If not specified, all types will"
+" be included."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:40 6e0645f22d0f41bba58266d067f4e472
+msgid ""
+"``string_mode`` (boolean) (optional) Whether to return the result in "
+"string mode. If True, the result will be a string of the network graph "
+"and the biological processes. If False, the result will be a NetworkX "
+"graph and a list of biological processes."
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:43 cbc3be78e1a24cf88197195e61a8dcbd
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:57 84311b2a27564dac9d457d8d8e0429a6
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:59 7bd12fbf5e044fdba3f837e3cd13445c
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/humanbase_tools.rst:60 adfd6f11a34d4708adf08f625e8ef9d4
+msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
+msgstr ""
+

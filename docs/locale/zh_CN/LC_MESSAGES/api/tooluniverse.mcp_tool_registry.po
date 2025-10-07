@@ -1,0 +1,540 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.mcp_tool_registry.rst:2
+#: 673aaf53c41244838f01c466fb6b66d5
+msgid "tooluniverse.mcp\\_tool\\_registry module"
+msgstr ""
+
+#: c1da2bf9252c4306b123fd7bea83e299 of tooluniverse.mcp_tool_registry:1
+msgid "MCP Tool Registration System for ToolUniverse"
+msgstr ""
+
+#: 90dcc908f0744fcb9052e3ee79c9d32e of tooluniverse.mcp_tool_registry:3
+msgid ""
+"This module provides functionality to register local tools as MCP tools "
+"and enables automatic loading of these tools on remote servers via "
+"ToolUniverse integration."
+msgstr ""
+
+#: 9ee27f7ca55243649d946efa8e6c274a of tooluniverse.mcp_tool_registry:7
+msgid "Usage:"
+msgstr ""
+
+#: c6e38597cac547b4a2d361343adb38a5 of tooluniverse.mcp_tool_registry:9
+msgid ""
+"Server Side (Tool Provider): ```python from "
+"tooluniverse.mcp_tool_registry import register_mcp_tool, start_mcp_server"
+msgstr ""
+
+#: 84d8cab7ab6d4caaa4fd4cc0f9e52d57 of tooluniverse.mcp_tool_registry:13
+msgid "@register_mcp_tool("
+msgstr ""
+
+#: 65281bdd35ca4c62aa708e2f8b4a8f25 of tooluniverse.mcp_tool_registry:14
+msgid "tool_type_name=\"my_analysis_tool\", config={"
+msgstr ""
+
+#: 20666c644a5347dbaa86d8d9c558720b of tooluniverse.mcp_tool_registry:16
+msgid "\"description\": \"Performs custom data analysis\""
+msgstr ""
+
+#: ea0031db915641e09f6dcee8102abd96 of tooluniverse.mcp_tool_registry:17
+msgid "}, mcp_config={"
+msgstr ""
+
+#: 3684cab13ca24df49d382b8ddfab286a of tooluniverse.mcp_tool_registry:19
+msgid ""
+"\"server_name\": \"Custom Analysis Server\", \"host\": \"0.0.0.0\", "
+"\"port\": 8001"
+msgstr ""
+
+#: 0c4d9eb3e2bb4ba498bb776383694245 of tooluniverse.mcp_tool_registry:22
+msgid "}"
+msgstr ""
+
+#: 4d9c351b1ba14f469935c480eca29712 of tooluniverse.mcp_tool_registry:23
+msgid ") class MyAnalysisTool:"
+msgstr ""
+
+#: 1159bb3ea72c406ca5fc05f58165cf8d 6f6e1b16c9d145609014b81320dfd970 of
+#: tooluniverse.mcp_tool_registry:25
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:23
+msgid "def run(self, arguments):"
+msgstr ""
+
+#: 6e26445bc5f5425396f5a8a5204d6984 of tooluniverse.mcp_tool_registry:26
+#, python-brace-format
+msgid "return {\"result\": \"analysis complete\"}"
+msgstr ""
+
+#: 667af4e6c5bf483faea3bef300df0aae of tooluniverse.mcp_tool_registry:28
+msgid "# Start MCP server with registered tools start_mcp_server() ```"
+msgstr ""
+
+#: 021339219f7347718f1c00f1349e09dd of tooluniverse.mcp_tool_registry:32
+msgid ""
+"Client Side (Tool Consumer): ```python from tooluniverse import "
+"ToolUniverse"
+msgstr ""
+
+#: dd3c393a1b7f4e739ad78942dd9daf73 of tooluniverse.mcp_tool_registry:36
+msgid ""
+"# Auto-discover and load MCP tools from remote servers tu = "
+"ToolUniverse() tu.load_mcp_tools(server_urls=[\"http://localhost:8001\"])"
+msgstr ""
+
+#: 724d1625b0d449798d72e4814f33c9d7 of tooluniverse.mcp_tool_registry:40
+#, python-brace-format
+msgid ""
+"# Use the remote tool result = tu.run_tool(\"my_analysis_tool\", "
+"{\"data\": \"input\"}) ```"
+msgstr ""
+
+#: cf49627fc413423284b93b47b2178ac1 of
+#: tooluniverse.mcp_tool_registry._get_smcp:1
+msgid "Get SMCP class with delayed import to avoid circular import"
+msgstr ""
+
+#: 197f32bbffec4e33a09a91cc03afc076 of
+#: tooluniverse.mcp_tool_registry._get_tooluniverse:1
+msgid "Get ToolUniverse class with delayed import to avoid circular import"
+msgstr ""
+
+#: 556b38c14fe04aedad07388b494b2a5f of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:1
+msgid ""
+"Decorator to register a tool class exactly like register_tool, but also "
+"expose it as an MCP server."
+msgstr ""
+
+#: 1abbd03e9bb0465bb431c84440c7b8b6 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:3
+msgid ""
+"This decorator does everything that register_tool does, PLUS exposes the "
+"tool via SMCP protocol for remote access. The parameters and behavior are"
+" identical to register_tool, with an optional mcp_config parameter for "
+"server configuration."
+msgstr ""
+
+#: 76541b4c3c2b400085227b3dcbd147d7 8404b03f0a774a49ae3279e35126ea64
+#: 9065264325d741a385764bccdb51f7e6 c708cff581ab4a4d8e12e4ef1c9dc253
+#: e61c6f94106f4cbd899f0ce4696e63c4 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:4
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:8
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:9
+#: tooluniverse.mcp_tool_registry.start_mcp_server:4
+#: tooluniverse.mcp_tool_registry.stop_mcp_server:4
+msgid "Parameters:"
+msgstr ""
+
+#: d77c6eb55f344f6c86698459708ed3da of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:9
+msgid "tool_type_name"
+msgstr ""
+
+#: 4f37f53a5444448e936055c073de1f45 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:-1
+msgid "str, optional"
+msgstr ""
+
+#: 5391926a68b94abfa5fdff7bba467d94 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:10
+msgid "Custom name for the tool type. Same as register_tool."
+msgstr ""
+
+#: 8068f01f9b884858bbb7c18d779c5d0c affa7ea428904eec8665b27da48701e0 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:12
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:12
+msgid "config"
+msgstr ""
+
+#: 0694da5a2b324b0a9e95c9e753aa920b d967931190e74c2c895e8b9e5d0eb113 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:-1
+msgid "dict, optional"
+msgstr ""
+
+#: 38e28e53df434b9291403caee1ffb337 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:13
+msgid "Tool configuration dictionary. Same as register_tool."
+msgstr ""
+
+#: a378911980cb40b680de57fa9cb50edb of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:15
+msgid "mcp_config"
+msgstr ""
+
+#: 43044bd7775c42c6a23209feb83031c5 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:16
+msgid ""
+"Additional MCP server configuration. Can include: - server_name: Name of "
+"the MCP server - host: Server host (default: \"localhost\") - port: "
+"Server port (default: 8000) - transport: \"http\" or \"stdio\" (default: "
+"\"http\") - auto_start: Whether to auto-start server when tool is "
+"registered"
+msgstr ""
+
+#: 050da55e053d4e68ad651bd0230e946e of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:24
+msgid "Returns:"
+msgstr ""
+
+#: 41176d75e85346108b361f9e7161ea75 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:25
+msgid "function"
+msgstr ""
+
+#: df1e648813a54adb96f78014cbbeb3c1 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:26
+msgid ""
+"Decorator function that registers the tool class both locally and as MCP "
+"server."
+msgstr ""
+
+#: 27c6632e44514aa9bc2074f01b2cb059 3852ed55acd0428282d71d2d2323cf93
+#: 700fe8664810484b90f59a264f875b7c 8f5b63f2d7484636acc315cb5bf58a14 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:11
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:29
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:20
+#: tooluniverse.mcp_tool_registry.start_mcp_server:11
+msgid "Examples:"
+msgstr ""
+
+#: 49eb0da1833a43eaac0b341eb4a9f0af of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:31
+#, python-brace-format
+msgid ""
+"Same as register_tool, just with MCP exposure: ```python "
+"@register_mcp_tool('CustomToolName', config={...}, mcp_config={\"port\": "
+"8001}) class MyTool:"
+msgstr ""
+
+#: 90a7c817822d475e9c208f4a55bf9e42 fea986fdd0dd4f769f7cc7bf57ba4185 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:35
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:39
+msgid "pass"
+msgstr ""
+
+#: 354bfdc72cda4ae182b6b27984f29a4e of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:37
+msgid ""
+"@register_mcp_tool()  # Uses class name, default MCP config class "
+"AnotherTool:"
+msgstr ""
+
+#: 9258b12ee25945f19427fd64f4134ef2 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool:40
+msgid "```"
+msgstr ""
+
+#: e016d0d107e14aaf9d6f00f220483450 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:1
+msgid "Register an existing tool class as MCP tool using configuration."
+msgstr ""
+
+#: 834218427b784a059c2521996258f6d1 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:3
+msgid ""
+"This function provides a programmatic way to register tools as MCP tools "
+"without using decorators, useful for dynamic tool registration. Just like"
+" register_mcp_tool decorator, this does everything register_tool would do"
+" PLUS exposes the tool via MCP."
+msgstr ""
+
+#: 401c8fffd63541dc9c1c1c16c66967ba of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:10
+msgid "tool_class"
+msgstr ""
+
+#: 1643e626292c4044926934ede1691a54 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:-1
+msgid "type"
+msgstr ""
+
+#: 4f22aeb182944beb940fb426d0e94e41 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:11
+msgid "The tool class to register"
+msgstr ""
+
+#: e15490dd3313467e8e25e8084ca5eb54 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:-1
+msgid "dict"
+msgstr ""
+
+#: 0f91c6da50464e3b9169d3e35885c1d7 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:13
+msgid ""
+"Configuration containing: - name: Tool name (required) - description: "
+"Tool description - parameter_schema: JSON schema for parameters - "
+"mcp_config: MCP server configuration"
+msgstr ""
+
+#: 0fb044c9814e463c9046ec80e4e021ad of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:21
+msgid "```python class ExistingTool:"
+msgstr ""
+
+#: 87d8923f25fb4166a902abeb5b2e1cf7 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:24
+#, python-brace-format
+msgid "return {\"status\": \"processed\"}"
+msgstr ""
+
+#: 8de50b6b7efe497c924fc3ac4040c0d1 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:26
+msgid "register_mcp_tool_from_config(ExistingTool, {"
+msgstr ""
+
+#: d6a6698bc6134e2eb130401a17b6ff35 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:27
+#, python-brace-format
+msgid ""
+"\"name\": \"existing_tool\", \"description\": \"An existing tool exposed "
+"via MCP\", \"mcp_config\": {\"port\": 8002}"
+msgstr ""
+
+#: 3b575a757f204d75a5ad7cecb2d9a2c2 of
+#: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:31
+msgid "})"
+msgstr ""
+
+#: 700f534bde4c441faac9491e783ba9d7 of
+#: tooluniverse.mcp_tool_registry.get_mcp_tool_registry:1
+msgid "Get the current MCP tool registry."
+msgstr ""
+
+#: 7f6bbe4266d44ba6b0185a6b7f94d80f of
+#: tooluniverse.mcp_tool_registry.get_registered_tools:1
+msgid "Get a list of all registered MCP tools with their information."
+msgstr ""
+
+#: ../../api/tooluniverse.mcp_tool_registry.rst
+#: 0690965538614c20b905e125759dc320
+msgid "Returns"
+msgstr ""
+
+#: c23a822b5b1d4411a94292166e478c67 of
+#: tooluniverse.mcp_tool_registry.get_registered_tools:3
+msgid ""
+"List of dictionaries containing tool information including name, "
+"description, and port."
+msgstr ""
+
+#: ../../api/tooluniverse.mcp_tool_registry.rst
+#: 8128609ec9af4e119747aa76b1058053
+msgid "Return type"
+msgstr ""
+
+#: 29519fd570da44c68ede3d5b41ae878b of
+#: tooluniverse.mcp_tool_registry.get_mcp_server_configs:1
+msgid "Get the current MCP server configurations grouped by port."
+msgstr ""
+
+#: f58a278e72814891b2db697bbafccef9 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:1
+msgid "Start MCP server(s) for registered tools."
+msgstr ""
+
+#: a417874efa2743ebb89c50a4fef3d18b aedec39e780142079aae496088783717 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:5
+#: tooluniverse.mcp_tool_registry.stop_mcp_server:5
+msgid "port"
+msgstr ""
+
+#: 8eeebf4bbe35477782d5f5a080a4be33 c3f3e486699246aeb9872a9b7abdc545 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:-1
+#: tooluniverse.mcp_tool_registry.stop_mcp_server:-1
+msgid "int, optional"
+msgstr ""
+
+#: 4725ea8921ea428283d94304f2f20645 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:6
+msgid ""
+"Specific port to start server for. If None, starts servers for all "
+"registered tools."
+msgstr ""
+
+#: 08bd82ff1e824493ab820ce42f653244 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:7
+msgid "**kwargs"
+msgstr ""
+
+#: 815d2bb4d240412b973280b3af9c6a7e of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:8
+msgid "Additional arguments passed to SMCP server"
+msgstr ""
+
+#: 1ed62c8aba89414bbecc0251d5c79b62 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:12
+msgid "```python # Start server for specific port start_mcp_server(port=8001)"
+msgstr ""
+
+#: d9a67bf4e82b4fa392e1d5c1fe0c24e3 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:16
+msgid "# Start all servers start_mcp_server()"
+msgstr ""
+
+#: 77b1200eba4045db8a035c08a6ea8837 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server:19
+msgid ""
+"# Start with custom configuration start_mcp_server(max_workers=20, "
+"debug=True) ```"
+msgstr ""
+
+#: 8a84a0e1a8744f33998b637088619ee9 of
+#: tooluniverse.mcp_tool_registry._start_server_for_port:1
+msgid "Start SMCP server for tools on a specific port."
+msgstr ""
+
+#: e7ae1dd4dffc4edda168a76b1805e750 of
+#: tooluniverse.mcp_tool_registry._add_tool_to_smcp_server:1
+msgid ""
+"Add a registered tool to an SMCP server instance by reusing SMCP's proven"
+" method."
+msgstr ""
+
+#: eaa35ff3cf8248b594fc61629c58c2e3 of
+#: tooluniverse.mcp_tool_registry._create_mcp_tool_from_tooluniverse_with_instance:1
+msgid ""
+"Create an MCP tool from a ToolUniverse tool configuration using a tool "
+"instance."
+msgstr ""
+
+#: d856ff90371c49dbb3a31c0e2387b67a of
+#: tooluniverse.mcp_tool_registry._create_mcp_tool_from_tooluniverse_with_instance:3
+msgid ""
+"This method reuses the proven approach from SMCP's "
+"_create_mcp_tool_from_tooluniverse method, but adapts it to work with "
+"tool instances instead of ToolUniverse. It creates functions with proper "
+"parameter signatures that match the ToolUniverse tool schema, enabling "
+"FastMCP's automatic parameter validation."
+msgstr ""
+
+#: 6a6488924a5c46949296394a5252020f of
+#: tooluniverse.mcp_tool_registry._build_fastmcp_tool_function:1
+msgid ""
+"Build a FastMCP-compatible function with proper docstring and type "
+"annotations."
+msgstr ""
+
+#: 4b76672cd2e34b8b8ae53bcc340c2a27 of
+#: tooluniverse.mcp_tool_registry._build_fastmcp_tool_function:3
+msgid ""
+"FastMCP generates parameter schema from the function signature and "
+"docstring, so we need to create a function that matches the expected "
+"format exactly."
+msgstr ""
+
+#: ae4c67971ccd4be892504bf310a8f1b8 of
+#: tooluniverse.mcp_tool_registry.start_mcp_server_for_tool:1
+msgid "Start MCP server for a specific tool."
+msgstr ""
+
+#: 364316c0fcae4091b70f2a581fb7c362 of
+#: tooluniverse.mcp_tool_registry.stop_mcp_server:1
+msgid "Stop MCP server(s)."
+msgstr ""
+
+#: dc88ec21293c49a6a809ee45e0d5390f of
+#: tooluniverse.mcp_tool_registry.stop_mcp_server:6
+msgid "Specific port to stop server for. If None, stops all servers."
+msgstr ""
+
+#: faab016b079e48b7a2e5f9011e6fa6c6 of
+#: tooluniverse.mcp_tool_registry.list_mcp_tools:1
+msgid "List all registered MCP tools with their configurations."
+msgstr ""
+
+#: aaf379f6459d44f88c8781300456a70a of
+#: tooluniverse.mcp_tool_registry.get_mcp_tool_urls:1
+msgid "Get list of MCP server URLs for all registered tools."
+msgstr ""
+
+#: f680dc6ef5dc4095bb8e1aae4e3278ea of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:1
+msgid "Load MCP tools from servers into a ToolUniverse instance."
+msgstr ""
+
+#: bb09c5484e01460b916dbdd2cd438c16 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:5
+msgid "tu"
+msgstr ""
+
+#: c8acab97f3f14ccfa2dd633dac2980f8 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:-1
+msgid "ToolUniverse"
+msgstr ""
+
+#: b2b158f61fe542a8af1da145b8923c24 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:6
+msgid "ToolUniverse instance to load tools into"
+msgstr ""
+
+#: 95952b4dc813492d951a36bef05bcf0f of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:7
+msgid "server_urls"
+msgstr ""
+
+#: bb247694b3884aa78bc1652929445b3a of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:-1
+msgid "list of str, optional"
+msgstr ""
+
+#: ab93de3a6e26447aa0e1d57b0091224c of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:8
+msgid "List of MCP server URLs. If None, uses all registered local servers."
+msgstr ""
+
+#: 8069dd4d8be44da3829bbd5027f4f855 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:12
+msgid ""
+"```python from tooluniverse import ToolUniverse from "
+"tooluniverse.mcp_tool_registry import load_mcp_tools_to_tooluniverse"
+msgstr ""
+
+#: 52dbfa4e274f43259a9b24879dcaf01f of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:16
+msgid "tu = ToolUniverse()"
+msgstr ""
+
+#: 2fc84372caa04e7f82e6638820716b9e of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:18
+msgid "# Load from specific servers load_mcp_tools_to_tooluniverse(tu, ["
+msgstr ""
+
+#: b5b62fe67b934dcb8d50755e9f35ec4d of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:20
+msgid "\"http://localhost:8001\", \"http://analysis-server:8002\""
+msgstr ""
+
+#: 0187c5cf031840c0bf050a425a7b4153 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:22
+msgid "])"
+msgstr ""
+
+#: 42e5af4b625648e899f8c790fd782e14 of
+#: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:24
+msgid ""
+"# Load from all local registered servers "
+"load_mcp_tools_to_tooluniverse(tu) ```"
+msgstr ""
+

@@ -3,9 +3,9 @@ tooluniverse package
 
 .. automodule:: tooluniverse
    :members:
-   :private-members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
+   :private-members:
 
 Subpackages
 -----------

@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.tool_registry.rst:2 230bdaad2c46406e8d9b17f00301e1e3
+msgid "tooluniverse.tool\\_registry module"
+msgstr ""
+
+#: 60c9df4d8d8e423e87254eb6db8a4415 of tooluniverse.tool_registry:1
+msgid "Simplified tool registry for automatic tool discovery and registration."
+msgstr ""
+
+#: 4494facac4c34452a8253d677184263b of
+#: tooluniverse.tool_registry.register_tool:1
+msgid "Decorator to automatically register tool classes and their configs."
+msgstr ""
+
+#: 9016fc2b9abd4d6bb8ce7bbdedda63c7 of
+#: tooluniverse.tool_registry.register_tool:3
+msgid "Usage:"
+msgstr ""
+
+#: e89faa04951942f4b03381214410cd87 of
+#: tooluniverse.tool_registry.register_tool:4
+#, python-brace-format
+msgid "@register_tool('CustomToolName', config={...}) class MyTool:"
+msgstr ""
+
+#: 172fa26ec57e44f8b3243851af01f35c of
+#: tooluniverse.tool_registry.register_tool:6
+msgid "pass"
+msgstr ""
+
+#: 265fc86c1083492b9e0ae5c4969a70bb of
+#: tooluniverse.tool_registry.register_external_tool:1
+msgid "Allow external registration of tool classes."
+msgstr ""
+
+#: 188415321ca847bb8f012ceaee0bc49c of
+#: tooluniverse.tool_registry.register_config:1
+msgid "Register a config for a tool type."
+msgstr ""
+
+#: 3d8069c4078c4775ba019603758c0e84 of
+#: tooluniverse.tool_registry.get_tool_registry:1
+msgid "Get a copy of the current tool registry."
+msgstr ""
+
+#: ccf64940f62a43f198cccdcb3f0aa017 of
+#: tooluniverse.tool_registry.get_config_registry:1
+msgid "Get a copy of the current config registry."
+msgstr ""
+
+#: 79b7da5634524752a28b2b8855ead363 of
+#: tooluniverse.tool_registry.lazy_import_tool:1
+msgid ""
+"Lazily import a tool by name without importing all tool modules. Only "
+"imports the specific module containing the requested tool."
+msgstr ""
+
+#: 55196a3e24324ffa83b9ad2e9c953d9f of
+#: tooluniverse.tool_registry.build_lazy_registry:1
+msgid ""
+"Build a mapping of tool names to module names using config files and "
+"naming patterns. This is truly lazy - it doesn't import any modules, just"
+" creates the mapping."
+msgstr ""
+
+#: 2b82a87a9fb14e5aa18e804dd5217dd4 of
+#: tooluniverse.tool_registry._discover_from_configs:1
+msgid ""
+"Fully dynamic config file discovery - no hardcoded mappings. "
+"Automatically discovers config-to-module mappings by: 1. Finding all JSON"
+" config files 2. Finding all Python tool modules 3. Smart matching "
+"between config names and module names"
+msgstr ""
+
+#: fd026b213a3443beaab2592e4853481a of
+#: tooluniverse.tool_registry._get_available_tool_modules:1
+msgid "Get all available tool modules by scanning the tooluniverse package."
+msgstr ""
+
+#: 076ed428a8924929ae1c775800a3f98c of
+#: tooluniverse.tool_registry._smart_match_config_to_module:1
+msgid ""
+"Smart matching algorithm to find the best module for a config file. Uses "
+"multiple strategies in order of preference."
+msgstr ""
+
+#: 720dcfab84f242f78313a84099706f24 of
+#: tooluniverse.tool_registry.auto_discover_tools:1
+msgid ""
+"Automatically discover and import all tool modules. If lazy=True, only "
+"builds the mapping without importing any modules. If lazy=False, imports "
+"all tool modules immediately."
+msgstr ""
+
+#: e14ee56adb8e4a478d4ecc583cb26d2b of
+#: tooluniverse.tool_registry.get_tool_class_lazy:1
+msgid ""
+"Get a tool class by name, using lazy loading if possible. Only imports "
+"the specific module needed, not all modules."
+msgstr ""
+

@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.compose_tool.rst:2 ee9d9e7dd9884aabaf4b195f3fbadcbb
+msgid "tooluniverse.compose\\_tool module"
+msgstr ""
+
+#: af95925305fc4247a37fc5dc7c7a0b07 of tooluniverse.compose_tool:1
+msgid ""
+"ComposeTool - A tool that composes other tools using custom code logic. "
+"Supports intelligent dependency management with automatic tool loading."
+msgstr ""
+
+#: 5813572ee0694c66971d3e46f1e85794 of tooluniverse.compose_tool.ComposeTool:1
+msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
+msgstr ""
+
+#: 976c379678684b129354e9a1d8ad048b of tooluniverse.compose_tool.ComposeTool:1
+msgid ""
+"A flexible tool that can compose other tools using custom code logic. "
+"Supports both inline composition_code and external Python files. Features"
+" intelligent dependency management with automatic tool loading."
+msgstr ""
+
+#: ac1743b3ff6d4992b5684cb4a6b6b71d of
+#: tooluniverse.compose_tool.ComposeTool._discover_tool_dependencies:1
+msgid "Automatically discover tool dependencies from composition code."
+msgstr ""
+
+#: ../../api/tooluniverse.compose_tool.rst 0376bc21b7914ccf966c0a2826786b3d
+#: 1a3ddc7bb3bf457f9f220f0eb186ae9a 55f7fc0b22de4a278c12f704d9ab7bc1
+#: 64293d18c04c4f72817edb78802ee30a 82897f82e0cf4c25a9f0ac1a5d96c44e
+#: 88353f1911544a78b6b4e98f4476ef83 8b5db147c6374141aec60bca79001804
+#: d6f58dfb41ba4c2b986105fe95827cc4
+msgid "Returns"
+msgstr ""
+
+#: ab9188b6c1a5401e85dc4642138e2807 of
+#: tooluniverse.compose_tool.ComposeTool._discover_tool_dependencies:3
+msgid "Set of tool names that this composition calls"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_tool.rst 10cd00d434c94db8a78f346627f14b32
+#: 1a4ebb52c655454aad146b6ac74f9c2f 23f047451b8d4855845969c8f82c1240
+#: 37ff10d9ac9f469389a29dc67e4861d6 3aa39c3d0a7d48608e2c782c06d5dcb2
+#: 3cc0b1e3c1f346a885ae066a82b6c217 a70ebe8e01e548e7b5f327832b9250d6
+#: e7aca5a506e94f298afb410b33e0ced3
+msgid "Return type"
+msgstr ""
+
+#: 88eb707e1e1f47b39a2e8ffd151375b1 of
+#: tooluniverse.compose_tool.ComposeTool._get_tool_category_mapping:1
+msgid "Create a mapping from tool names to their categories."
+msgstr ""
+
+#: bd9b9829bcec42f7981a1a4374ac7619 of
+#: tooluniverse.compose_tool.ComposeTool._get_tool_category_mapping:3
+msgid "Mapping of tool names to category names"
+msgstr ""
+
+#: 493d1b5d8bf54b23a1d7fd919cb7967c of
+#: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:1
+msgid "Automatically load missing tool dependencies."
+msgstr ""
+
+#: ../../api/tooluniverse.compose_tool.rst 91f268e9c8774882a5d26724cbcce698
+#: 9e439d6a4ed346c6a4fe92c556a6cf3b b214fb3bbccb426684c3d066bb519a04
+#: b9db2a16578b4c2ba4f0ff412407f3b4 c2e0caa8875f49b1810671ab18cf5f4e
+msgid "Parameters"
+msgstr ""
+
+#: 4c914030b5e447aea8583dbd8721256b of
+#: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:3
+msgid "Set of missing tool names"
+msgstr ""
+
+#: 1fc6cc8166844d6fa43f75c780b0a909 of
+#: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:6
+msgid "(successfully_loaded, failed_to_load)"
+msgstr ""
+
+#: 33641a7186fc468aae7b181cb20c1490 of
+#: tooluniverse.compose_tool.ComposeTool._load_code_from_file:1
+msgid "Load composition code from external Python file."
+msgstr ""
+
+#: a3e8d956328b46e78465748933a65a36 of
+#: tooluniverse.compose_tool.ComposeTool._load_code_from_file:3
+msgid "The composition code as a string"
+msgstr ""
+
+#: 4690f9a563574cb096482e7275a0e783 of
+#: tooluniverse.compose_tool.ComposeTool.run:1
+msgid "Execute the composed tool with custom code logic."
+msgstr ""
+
+#: 8ab29ad5c7e04156b80e466c202e4c95 of
+#: tooluniverse.compose_tool.ComposeTool.run:3
+msgid "Input arguments for the composition"
+msgstr ""
+
+#: 009efdf9e3fd4c888d6cfea1e3d61bb4 5dac95170ec24d57b92a93ac1b740e56
+#: 9287cf76726e4ff69f12613ed85449e7 of
+#: tooluniverse.compose_tool.ComposeTool._execute_from_file:6
+#: tooluniverse.compose_tool.ComposeTool._execute_inline_code:6
+#: tooluniverse.compose_tool.ComposeTool.run:6
+msgid "Result from the composition execution"
+msgstr ""
+
+#: 7590dcf0e5564cbf918b8e7df13ed683 of
+#: tooluniverse.compose_tool.ComposeTool._execute_from_file:1
+msgid "Execute composition code from external file."
+msgstr ""
+
+#: 12bfc81ec8364f2795bf85aa08ce54f6 7d3068f325244bf28569ab123d81fbfc of
+#: tooluniverse.compose_tool.ComposeTool._execute_from_file:3
+#: tooluniverse.compose_tool.ComposeTool._execute_inline_code:3
+msgid "Input arguments"
+msgstr ""
+
+#: 4805a2b4529c4f0584fe2f8c08569943 of
+#: tooluniverse.compose_tool.ComposeTool._execute_inline_code:1
+msgid "Execute inline composition code (existing behavior)."
+msgstr ""
+
+#: d5d58020f14e4b369843b6fe92c43b1f of
+#: tooluniverse.compose_tool.ComposeTool._call_tool:1
+msgid "Helper function to call other tools from within composition code."
+msgstr ""
+
+#: da736cf489074988b4677f7bbc8bd028 of
+#: tooluniverse.compose_tool.ComposeTool._call_tool:3
+msgid "Name of the tool to call"
+msgstr ""
+
+#: fc341fdb873041cda0c3fab81ce5a55b of
+#: tooluniverse.compose_tool.ComposeTool._call_tool:5
+msgid "Arguments to pass to the tool"
+msgstr ""
+
+#: 731e1dde24a74982978baa5ffaee4901 of
+#: tooluniverse.compose_tool.ComposeTool._call_tool:8
+msgid "Result from the tool execution"
+msgstr ""
+

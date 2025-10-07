@@ -1,0 +1,234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/hooks/summarization_hook.rst:2 935e934d47bd460b890a90fb00dad911
+msgid "SummarizationHook"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:4 5d86208d000448858378250cef853e1d
+msgid "**AI-powered intelligent summarization of long tool outputs**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:6 bdec21386a954fcfbe30f3ac6ef1397a
+msgid ""
+"The SummarizationHook automatically summarizes long tool outputs using "
+"advanced AI models, preserving key findings and results while reducing "
+"length."
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:9 cfcb9c9436f14368a5b811efce3204f0
+msgid "Overview"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:11 d2018c4cc8844e7e8fd794d171e6ed4c
+msgid ""
+"**What it does:** - Analyzes tool outputs and identifies key information "
+"- Uses AI models to create concise summaries - Preserves important "
+"technical details and findings - Reduces output length while maintaining "
+"relevance"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:17 3b8599a7341e463c9d73b851c85e1c59
+msgid ""
+"**When to use:** - Large datasets from scientific databases - Complex "
+"research results and literature - Long-form tool outputs that exceed "
+"memory limits - When you need quick insights from detailed data"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:24 aee64417cfd2469dbf9218faf7c387c9
+msgid "Quick Start"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:26 073e1212a2144a5282cc191ab0d5d0e9
+msgid "**Simple Usage**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:48 11d1960131c945a9a41f0ed764f9b6d0
+msgid "**Advanced Configuration**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:74 b6758eb0258d41d08f0cba1db4c178ec
+msgid "Configuration Options"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:76 169ac271fd42408bbeef377424ad1e59
+msgid ""
+"**Chunk Size** - Controls the size of chunks for processing - Default: "
+"32000 characters - Range: 1000-5000 characters recommended"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:81 0ead72cf4fa84e12a5251703b7ad77f9
+msgid ""
+"**Focus Areas** - Specifies what to focus on during summarization - "
+"Default: \"key_findings_and_results\""
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:85 0aa0ead7ef4d41e7bb8b90afa37d0739
+msgid ""
+"**Maximum Summary Length** - Limits the length of the final summary - "
+"Default: 3000 characters"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:89 0df93695b7f5432b8ab3643d8a25695a
+msgid "**Focus Areas Options**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:91 f86a8018a25742179978bda6fafa8d5b
+msgid ""
+"General Focus Areas: - `key_findings_and_results`: General key findings "
+"and results - `consolidate_and_prioritize`: Merging multiple summaries - "
+"`technical_details`: Technical specifications and details - "
+"`main_conclusions`: Main conclusions and outcomes"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:97 1b696d61a60743e9a0c2dd09004754ba
+msgid ""
+"Domain-Specific Focus Areas: - `protein_function_and_structure`: Protein-"
+"specific information - `compound_properties_and_activity`: Chemical "
+"compound data - `key_findings_and_relevance`: Literature search results -"
+" `clinical_significance_and_drug_interactions`: Clinical data - "
+"`methodology_and_results`: Research methodology and findings"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:105
+#: 2458472b24294366bc5d80d4e1fc4dfe
+msgid "Examples"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:107
+#: 41c8d75f5bb24952843f4c9e6e78078f
+msgid "**Scientific Literature Analysis**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:127
+#: d8e150b462ec4c48928598e30e206477
+msgid "**Protein Data Summarization**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:165
+#: 5463a6249e4f47c4aeff148be88f7ba5
+msgid "**Compound Analysis Summarization**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:207
+#: a2a5f934ea154a859da7cff1c9608de7
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:209
+#: 923d03bd70454d6a9d27412b54a12339
+msgid ""
+"**Summarization Not Triggering** - Check threshold settings: Ensure "
+"output exceeds threshold - Verify hook is enabled: Check `enabled` field "
+"- Confirm tool name matching: Ensure exact tool name match - Review "
+"conditions: Check all condition parameters"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:215
+#: 364103e55b714aa0a34fbaa9d3b5d8aa
+msgid ""
+"**Poor Summarization Quality** - Adjust focus areas: Use more specific "
+"focus areas - Modify chunk size: Smaller chunks may provide better "
+"context - Increase max summary length: Allow more detailed summaries - "
+"Check query context: Ensure original query is captured"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:221
+#: 43b1e3e2b05f481babc9607f221e25ba
+msgid ""
+"**Performance Issues** - Increase thresholds: Process fewer outputs - "
+"Optimize chunk sizes: Balance processing time and quality - Use tool-"
+"specific hooks: More efficient than global hooks - Enable caching: Reduce"
+" redundant processing"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:227
+#: fd43963cd61b4f9cbc8c4654f8e8b4bc
+msgid "**Debugging**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:229
+#: 3eaa796f40a9496aa4be29978978296a
+msgid "Enable detailed logging for hook operations:"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:239
+#: 99ccf0f697c848899d289e9a83c80150
+msgid "**Validation**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:241
+#: a8569bd1598345df9ce7b03a89316cfb
+msgid "Verify hook configuration:"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:254
+#: a0732ccc69554aeba253dc5e0fe5d627
+msgid "Next Steps"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:256
+#: 8b707c4e4540476fa8c179a9b1315669
+msgid "**Learn More**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:258
+#: de680bf46b02422c9d75ca5a2d79ebed
+msgid "**FileSaveHook** → :doc:`file_save_hook` - File-based output processing"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:259
+#: bd8d31b217dd47f7b419fc2da679a278
+msgid ""
+"**Configuration** → :doc:`hook_configuration` - Advanced configuration "
+"options"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:260
+#: 45f8273ad48b48bb87292ea0b90f5371
+msgid "**Hooks Overview** → :doc:`index` - Complete hooks system Tutorial"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:262
+#: 72e8a83dd2cf4d2298c66cf3f5584fa1
+msgid "**Related Topics**"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:264
+#: a37bd7cb764a45c3a17aadd1cbb4197b
+msgid ""
+"**Tool Composition** → :doc:`../tool_composition` - Chain tools into "
+"workflows"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:265
+#: 010f3a82f2a64cacbb1222e614e3fabf
+msgid ""
+"**Best Practices** → :doc:`../best_practices` - Performance optimization "
+"tips"
+msgstr ""
+
+#: ../../guide/hooks/summarization_hook.rst:266
+#: af9f2320fe82471280be854836bf1d4d
+msgid "**Examples** → :doc:`../examples` - More usage examples"
+msgstr ""
+

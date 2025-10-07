@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.compose_scripts.output_summarizer.rst:2
+#: bc8e3162c95542039ce92799f7096152
+msgid "tooluniverse.compose\\_scripts.output\\_summarizer module"
+msgstr ""
+
+#: 45e8dd75d216451ab775b795feec0653 of
+#: tooluniverse.compose_scripts.output_summarizer:1
+msgid "Output Summarization Composer Script"
+msgstr ""
+
+#: 68110a354f0f4115a85b3d92805482b4 of
+#: tooluniverse.compose_scripts.output_summarizer:3
+msgid ""
+"This script handles the intelligent summarization of tool outputs by: 1. "
+"Chunking large outputs into manageable pieces 2. Processing each chunk "
+"with AI-powered summarization 3. Merging the summarized chunks into a "
+"coherent final summary"
+msgstr ""
+
+#: 6089ab7f0be84cb8894d41c1b647dd36 of
+#: tooluniverse.compose_scripts.output_summarizer:8
+msgid ""
+"The script leverages ToolUniverse's AgenticTool infrastructure to provide"
+" intelligent, context-aware summarization that focuses on information "
+"relevant to the original query."
+msgstr ""
+
+#: 980b78c2cadb4652a671a9bce1d76cd0 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:1
+msgid "Main composition function for output summarization."
+msgstr ""
+
+#: 8ba5f838a85b4fbeb61d4a00b3fca2f1 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:3
+msgid ""
+"This function orchestrates the complete summarization workflow: - Chunks "
+"the input text into manageable pieces - Summarizes each chunk using AI - "
+"Merges the summaries into a final coherent result"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.output_summarizer.rst
+#: 872e40d3ebf84a529914461dc09f04c6 8c64f5829bdd4aee8f37f5b3029539a6
+#: cd798ed15e314521893652edfead77f0 e13be8202b3a40829ee9880d17794c73
+msgid "Parameters"
+msgstr ""
+
+#: 012606af95a348a1b27ddbb0cfff57c4 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:8
+msgid ""
+"Dictionary containing: - tool_output (str): The original tool output to "
+"be summarized - query_context (str): Context about the original query - "
+"tool_name (str): Name of the tool that generated the output - chunk_size "
+"(int, optional): Size of each chunk for processing - focus_areas (str, "
+"optional): Areas to focus on in summarization - max_summary_length (int, "
+"optional): Maximum length of final summary"
+msgstr ""
+
+#: 3ae7a07f6f2547a0ab2e412c947ca291 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:16
+msgid "ToolUniverse instance for tool execution"
+msgstr ""
+
+#: b2cce3c42ec24946b599cb90e55e8732 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:17
+msgid "Function to call other tools within the composition"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.output_summarizer.rst
+#: 1a9d147931054b8a8db0868da75ac03f 1db285b39726465486f9bf78eb280855
+#: 30edd080bf1e46b48e2cb5c90db98491 76f11be445dc45db940f2a15eeec29e3
+msgid "Returns"
+msgstr ""
+
+#: 758ee4c3671e457eaafdb51dac30aade of
+#: tooluniverse.compose_scripts.output_summarizer.compose:19
+msgid ""
+"Dictionary containing:     - success (bool): Whether summarization was "
+"successful     - original_length (int): Length of original output     - "
+"summary_length (int): Length of final summary     - chunks_processed "
+"(int): Number of chunks processed     - summary (str): The summarized "
+"output     - tool_name (str): Name of the original tool     - error (str,"
+" optional): Error message if summarization failed"
+msgstr ""
+
+#: fd5ce9bf1479418caeb74cdb80e6b2a1 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:21
+msgid "Dictionary containing:"
+msgstr ""
+
+#: be3a24f1eab44fa6afb42a15d921c302 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:22
+msgid "success (bool): Whether summarization was successful"
+msgstr ""
+
+#: 600f00751d94455db60a25a9c0c9ecd7 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:23
+msgid "original_length (int): Length of original output"
+msgstr ""
+
+#: 3840a517861944f1af40ca19d94bf8f8 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:24
+msgid "summary_length (int): Length of final summary"
+msgstr ""
+
+#: 3f23e97bf02b4d778796331cf7f7fba1 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:25
+msgid "chunks_processed (int): Number of chunks processed"
+msgstr ""
+
+#: 89a205e42c3a4bb8a18bc21a830b892b of
+#: tooluniverse.compose_scripts.output_summarizer.compose:26
+msgid "summary (str): The summarized output"
+msgstr ""
+
+#: 9a10925710de4040aa589be04d957dad of
+#: tooluniverse.compose_scripts.output_summarizer.compose:27
+msgid "tool_name (str): Name of the original tool"
+msgstr ""
+
+#: 0358f641e2884f2bb7cc800c65f00a51 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:28
+msgid "error (str, optional): Error message if summarization failed"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.output_summarizer.rst
+#: 28ec8d3a34894a15a40c8e641faff075 7215f4dbd863460db6684a24f4b6b100
+#: b91267056cb74ebcaf11e0a0de584e6c d268587194504b6093b85aefc3e99da7
+msgid "Return type"
+msgstr ""
+
+#: 0034277b0658465b912623abbf29a38a of
+#: tooluniverse.compose_scripts.output_summarizer._chunk_output:1
+msgid ""
+"Split text into chunks of specified size with intelligent boundary "
+"detection."
+msgstr ""
+
+#: 0bfd43757f484ead851dd7eb0045efc4 of
+#: tooluniverse.compose_scripts.output_summarizer._chunk_output:3
+msgid ""
+"This function attempts to break text at natural boundaries (sentences) to"
+" maintain coherence within chunks while respecting the size limit."
+msgstr ""
+
+#: 6c0bf7803e834e6193cdfcc604710e9c of
+#: tooluniverse.compose_scripts.output_summarizer._chunk_output:6
+msgid "The text to be chunked"
+msgstr ""
+
+#: fe99d2b34608452b8e535e54a34aabf9 of
+#: tooluniverse.compose_scripts.output_summarizer._chunk_output:8
+msgid "Maximum size of each chunk"
+msgstr ""
+
+#: 304abf15d4064337af5223d5a6da3676 of
+#: tooluniverse.compose_scripts.output_summarizer._chunk_output:11
+msgid "List of text chunks"
+msgstr ""
+
+#: dfdc5dadc83c4c5daa584452188be92d of
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:1
+msgid "Summarize a single chunk using the AgenticTool summarizer."
+msgstr ""
+
+#: 8b0ae80562d249c4b0d28017f0e0fd62 of
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:3
+msgid "The text chunk to summarize"
+msgstr ""
+
+#: 3136149bfcf847a0867c0d64a9387a24 469e58ef0c114f6c907ec9ddbf59c4b1 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:8
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:5
+msgid "Context about the original query"
+msgstr ""
+
+#: 659aadfd44cf4a029fe6a1da9af9a7e2 dcc4e618136b47899ffcc0b6f6fd7234 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:10
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:7
+msgid "Name of the tool that generated the output"
+msgstr ""
+
+#: aec9b67061364d12817d266221f4038e of
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:9
+msgid "Areas to focus on during summarization"
+msgstr ""
+
+#: 1806ad0bebf84689852154ff930cf236 2aba5a72796d4d3aad97dbccf19964e6 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:14
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:11
+msgid "Function to call the summarizer tool"
+msgstr ""
+
+#: e84acc3498ee4df691c1666da9489633 of
+#: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:13
+msgid "Summarized chunk text, or empty string if summarization fails"
+msgstr ""
+
+#: 32649e0f92b3465ca0428d20d4fd847b of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:1
+msgid "Merge chunk summaries into a final coherent summary."
+msgstr ""
+
+#: 5852bedc059648019d97686a9dd1169f of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:3
+msgid ""
+"If the combined summaries exceed the maximum length, they are further "
+"summarized to create a concise final result."
+msgstr ""
+
+#: 9034ea49bda4419ea86593826c78d342 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:6
+msgid "List of summarized chunks"
+msgstr ""
+
+#: e211daffcacb4b1689d88afb71dac710 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:12
+msgid "Maximum length of final summary"
+msgstr ""
+
+#: 174919d0658a4f098de63be8315ad071 of
+#: tooluniverse.compose_scripts.output_summarizer._merge_summaries:16
+msgid "Final merged summary"
+msgstr ""
+

@@ -1,0 +1,612 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:1
+#: 939f305155d44ec58011ed5eec6ebd31
+msgid "Adding Tools to ToolUniverse - Complete Tutorial"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:3
+#: 3102f4f3a0f14151821778a8db7832fc
+msgid ""
+"This tutorial covers everything you need to know about adding custom "
+"tools to ToolUniverse using the new decorator-based auto-registration "
+"system."
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:5
+#: 24097036973848818e7e6de80eff8f35
+msgid "Table of Contents"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:6
+#: e772b136de5a4cf9ae17d5da4f9940d5
+msgid "[Overview](#overview)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:7
+#: 585a439ca1194c7c94b879ec81ccc904
+msgid "[Development Environment Setup](#development-environment-setup)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:8
+#: 9e51f61237e34ceeb9967dfeb69f37fd
+msgid "[Quick Start](#quick-start)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:9
+#: 7e302edaef9143a4813a1a2b9cab24f8
+msgid ""
+"[Method 1: Decorator Registration (Recommended)](#method-1-decorator-"
+"registration-recommended)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:10
+#: e2487c9058f044a0b3176b4b6a78702e
+msgid "[Method 2: Manual Registration](#method-2-manual-registration)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:11
+#: f72e8ebad59b4e97be838edfdc014681
+msgid "[Tool Configuration](#tool-configuration)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:12
+#: 2abd5d201832429a8c2724c218091771
+msgid "[Real-World Examples](#real-world-examples)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:13
+#: 0a453ba313264dfba6113ce907b92efa
+msgid "[Best Practices](#best-practices)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:14
+#: f74ebb5dfc3243a7845b7e5e9e81c220
+msgid "[Troubleshooting](#troubleshooting)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:16
+#: cf2fe9dde12f461c861bb11177f6e84a
+msgid "Overview"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:18
+#: 7ddbc9351a9549dd806270c080d4a6af
+msgid ""
+"ToolUniverse now supports **automatic tool discovery** through "
+"decorators. When you add a new tool, it's automatically registered and "
+"available without needing to manually edit core files."
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:20
+#: 4477bf5c422e4c2fa35423b4995532b3
+msgid "What You Can Add"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:21
+#: b67b81c7f9984be581826d591a857d54
+msgid "Custom API wrappers"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:22
+#: 302a544d95cd4a9f931bee0490fe36e8
+msgid "Data processing tools"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:23
+#: 4800a89a9a4c404c92bd8d02a7c2dc60
+msgid "File manipulation utilities"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:24
+#: 9689239d7d0a41009771f19d9bd174f5
+msgid "External service integrations"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:25
+#: 303996ea0c3e4d10ab919445226b95d8
+msgid "Analysis and computation tools"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:27
+#: 894b20e59e0f418a8721b1362df3bbfd
+msgid "What Changed"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:28
+#: 8ba24775972e48a8861865c8182226d2
+msgid "❌ **Before**: Manual imports and mappings in `execute_function.py`"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:29
+#: f93311b614424c97bbe18d9938f21010
+msgid "✅ **Now**: Simple decorator registration with auto-discovery"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:31
+#: 7596222454ef46b2ac69e088e11f4df0
+msgid "Development Environment Setup"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:33
+#: 050edebd08e44e76bdc5e58edd805e41
+msgid ""
+"Before adding tools, ensure you have the proper development environment "
+"set up:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:35
+#: 459d3c6955314c8394385248ea61c03d
+msgid "1. Clone and Install ToolUniverse"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:46
+#: 02dcdb4d57f54d60b3b175c807fbe051
+msgid "2. Set Up Pre-commit Hooks (Recommended)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:48
+#: 4c50af3ba4ac4c3d8e0cd999be14fe8e
+msgid "**Automatic Setup:**"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:54
+#: 697f43b124994d348d4704d13f364887
+msgid "**Manual Setup:**"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:66
+#: ab2a983024c94d63845491a5a7b4c8d3
+msgid "**Pre-commit Benefits:**"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:67
+#: 08629c7c56c14642b8cab9ead105fdf3
+msgid "✅ **Automatic code formatting** with Black"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:68
+#: 49fb3511944c49198fa207264044ff71
+msgid "✅ **Code linting** with flake8 and ruff"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:69
+#: ca0fc293b6004e47b1aafd87db6f29ae
+msgid "✅ **Import cleanup** with autoflake"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:70
+#: fd21bd44f0e24aeda236a4caf131b29e
+msgid "✅ **File validation** (YAML, TOML, AST checks)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:71
+#: 1edc8b699569411bb62aa96527d8f46e
+msgid "✅ **Runs on every commit** to ensure code quality"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:73
+#: d0185fb47aef4df7b784c45c5c24e2c8
+msgid "3. Verify Installation"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:83
+#: 0bc8547cc405465fb06d1e0b8a9fa0d7
+msgid "Quick Start"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:85
+#: 9938e795a93347649584a298bc3e7d04
+msgid "Here's the fastest way to add a new tool:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:128
+#: bb7797c196a74da9a656983538fe12cc
+msgid "That's it! Your tool is automatically discovered and ready to use."
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:130
+#: 96502d5dbf52415784f13b646514773d
+msgid "Method 1: Decorator Registration (Recommended)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:132
+#: d4f0de5b0dda4f7cb0891bb0f84aaf2d
+msgid "The decorator approach is the simplest and most powerful way to add tools."
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:134
+#: 85ab993d1ef84807bc8baafcc638a22f
+msgid "Basic Structure"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:150
+#: b370246f2ce64483bec5b7e8b0a3b40a
+msgid "Step-by-Step Tutorial"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:152
+#: 300a11308bb442038d57e07c55faa66e
+msgid "1. Create Your Tool File"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:153
+#: edf8c9552c0a4bcbade6621997d9ecc4
+msgid "Create a new Python file ending with `_tool.py` (e.g., `weather_tool.py`):"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:215
+#: 9a327738c8b54c5187459bdd9679f422
+msgid "2. Place in ToolUniverse Package"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:216
+#: 9b5f1ceabea14f68b6b660aa37f13259
+msgid "Move your file to the ToolUniverse source directory:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:221
+#: bc3a451ba41440d49406a6168b8401fa
+msgid "3. Use Your Tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:222
+#: 0c9461d33a7c49caa05af04f1373beca
+msgid "Your tool is automatically discovered:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:239
+#: f5c9328a4ce0475eb0e8bec97241bb46
+msgid "Configuration Options"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:241
+#: 885eb2371478455dba2c52136549799a
+msgid ""
+"The `config` parameter in the decorator supports all standard "
+"ToolUniverse configuration:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:278
+#: da7ffad401c5471e83a1a2c48df008c1
+msgid "Method 2: Manual Registration"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:280
+#: 3341a39e108e4829b97928b3eda522ab
+msgid "For dynamic tools or special cases, you can register tools at runtime:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:324
+#: 978cf72cc2d74989837d86bfae06b031
+msgid "Tool Configuration"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:326
+#: 6b0c365e6cab4a728466c79c4a72f760
+msgid "Required Fields"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:327
+#: 42f721ed045f426eb721dd953e7476ee
+msgid "`name`: Unique identifier for your tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:328
+#: 20e62ff12ef145059f4d96111c3cd999
+msgid "`type`: Class name (must match decorator parameter)"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:329
+#: 55e36d4c5d5b44c8aa217131242cde20
+msgid "`description`: Human-readable description"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:330
+#: e4bd0cee93ec4082876f5771adf2ea35
+msgid "`parameter`: JSON Schema defining input parameters"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:332
+#: 355a68be1cbf42c3893cf753cdd79bc1
+msgid "Optional Fields"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:333
+#: 9400d40aea3e40539b26df9a7154cb2b
+msgid "`settings`: Tool-specific configuration"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:334
+#: cd2a504a734b4eb3b3f6528f227eb7fc
+msgid "`version`: Tool version"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:335
+#: 6a224b5e47524c648a5206bf28f55f96
+msgid "`tags`: Categorization tags"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:336
+#: 7a2c4a45b9ad48f6a19f175d020cfcdb
+msgid "`examples`: Usage examples"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:338
+#: 5674a2ee26824464ae3d2fa5acf28682
+msgid "Parameter Schema Examples"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:340
+#: 9740a353cc3e4407aa7d86eee64d6f5e
+msgid "Simple Parameters"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:352
+#: ad1eec191aa44f93bc672c86bc3e1349
+msgid "Complex Parameters"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:379
+#: 2068b3dda0554e97a0e45712ff4f8a2b
+msgid "Real-World Examples"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:381
+#: 6c8645bfb7d747de976b2b03dd94cf7c
+msgid "Example 1: Database Query Tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:454
+#: b4020bd6b14648c6bc6775eeb2c2d06b
+msgid "Example 2: File Processing Tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:551
+#: 11091c9a883f4751ad5fddebd5e31dcc
+msgid "Example 3: API Integration Tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:638
+#: e270052bdabb4df794d0e6520c0ca075
+msgid "Best Practices"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:640
+#: 65d0b3fb8e7647f9bcc0ee401e421383
+msgid "1. File Naming"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:641
+#: da625fafdeb342a8a25a3242b518ef83
+msgid "Name your tool files with `_tool.py` suffix"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:642
+#: 80f9ea412855422b8c088b5ccdc7c151
+msgid "Use descriptive names: `weather_tool.py`, `database_tool.py`"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:644
+#: 0921f24bf49f4c9eb1fd602da1c1ca5c
+msgid "2. Class Design"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:664
+#: 90466635e99f495d8406e2f518614441
+msgid "3. Error Handling"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:679
+#: efef807efea6444ea3fc340928ad2388
+msgid "4. Configuration Management"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:700
+#: 95d5210838d3430b87a984137eac97d6
+msgid "5. Return Format Consistency"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:701
+#: 87dbbd7df52c40c8833f2978e111e570
+msgid "Always return dictionaries with consistent structure:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:718
+#: 1769f88c1e5a41438436414b8b2d12a0
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:720
+#: dfcde8a900c94cd6b115d5228ceae4ca
+msgid "Tool Not Found"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:721
+#: cb610ed036d44032bb6b9219c4e4ad79
+msgid "**Problem**: Your tool isn't being discovered **Solutions**:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:723
+#: 6b8405ce9cdf4d89b2612854ebac7add
+msgid "Ensure file ends with `_tool.py`"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:724
+#: 05d1da0bfa5342c4a01d745bfd96ce8f
+msgid "Check file is in the correct directory"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:725
+#: 288b75cd06b743bdbdae2780c71aaa0f
+msgid "Verify the import doesn't fail:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:730
+#: b2c4daf0b87242ea9f1172953737cc26
+msgid "Import Errors"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:731
+#: 934612c3c0bd4967ab3ccfce010b61fb
+msgid "**Problem**: Module import fails during auto-discovery **Solutions**:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:733
+#: 466e87cdf5944d53a18874593e83e20e
+msgid "Check all dependencies are installed"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:734
+#: b646c403dee34b4c8c4f9e000f34acec
+msgid "Ensure relative imports use proper syntax"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:735
+#: d1d6a2b9dcbe424e9aa558fde8fbb604
+msgid "Test import manually:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:742
+#: 9b21dadb7d604a789ca51ebd95b42dc3
+msgid "Configuration Issues"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:743
+#: bd714d18f9994a0e8324f2ed542a8021
+msgid "**Problem**: Tool config not loading properly **Solutions**:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:745
+#: 0b9ab4abb65c4240ae4d3a419235b768
+msgid "Validate JSON syntax in config"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:746
+#: de36fddcbdfb4cdaa580b5ad123e0e77
+msgid "Check required fields are present"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:747
+#: 4edf4f1c19a049349d5cbd878945cb91
+msgid "Test config separately:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:754
+#: 508d525193b8462f834c9cc421df0ae8
+msgid "Runtime Errors"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:755
+#: 8a994b0511a04422bb3f7603113cb73f
+msgid "**Problem**: Tool fails during execution **Solutions**:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:757
+#: b0746634156f49e792795c54af23a7e7
+msgid "Add comprehensive error handling"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:758
+#: e7f7a1785ee94f658b2a912bce427687
+msgid "Validate all inputs in `run()` method"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:759
+#: 3c7af744ddd142c1930b43e38fa56f82
+msgid "Return error details:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:769
+#: e8e577f9dedf4fda9f530befb2cc94b2
+msgid "Testing Your Tool"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:770
+#: c73a1ff9b6944107a65534ece8ecae0d
+msgid "Create a simple test script:"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:793
+#: c7ad67c0e793477d9f4b71b257019419
+msgid "Next Steps"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:795
+#: d04b9fcd05644983b9edc41a98b36aba
+msgid "**Start Simple**: Begin with a basic tool using the quick start example"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:796
+#: 36c9a4f315d2458398834fe24b134c4f
+msgid "**Add Complexity**: Gradually add more features and configuration"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:797
+#: 9021974f505e4a87ada98559ee9f2058
+msgid "**Test Thoroughly**: Create test cases for different scenarios"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:798
+#: d78beecec9f54439ad5a3df427fa70be
+msgid "**Document**: Add clear descriptions and examples"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:799
+#: 8699ad544e2146a6b263dec7460090e6
+msgid "**Share**: Consider contributing useful tools back to the community"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:801
+#: 9ace0b4fb08b492894a38ec8f35df9c5
+msgid "Need Help?"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:803
+#: cec818aa0ef2498f834aacc4be80157a
+msgid "Check existing tools in the ToolUniverse codebase for examples"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:804
+#: 05a73e2eeb0944ee9955072d718ca047
+msgid "Review the configuration schemas of similar tools"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:805
+#: ffb277c3a7464282847e370a2c78799f
+msgid "Test incrementally - start with basic functionality"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:806
+#: 164c28cc29b741efa657b94d29e8154d
+msgid "Use the troubleshooting Tutorial for common issues"
+msgstr ""
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:808
+#: e432c07b0b284c6eb3ea49c0b6fe5671
+msgid ""
+"The decorator-based system makes adding tools straightforward while "
+"maintaining all the power and flexibility of ToolUniverse. Happy tool "
+"building! 🛠️"
+msgstr ""
+

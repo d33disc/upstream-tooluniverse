@@ -1,0 +1,402 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/scientific_workflows.rst:2 8b43d2e792eb46849b4499a1f5d49179
+msgid "Scientific Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:4 5d6c0acae4a34589ab05ff93d424503e
+msgid ""
+"**Build comprehensive research workflows using ToolUniverse's compose "
+"tools and individual tools for real-world scientific scenarios.**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:6 ad2bc69358ac42b68212a4bb2dfe2515
+msgid ""
+"This Tutorial demonstrates how to create sophisticated scientific "
+"workflows that combine multiple tools to solve complex research problems."
+" Learn to build reproducible, efficient analysis pipelines using "
+"ToolUniverse's composition capabilities."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:9 fd9927e1a3794442b415558a819d8f51
+msgid "🎯 What You'll Learn"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:11 29b4da67a93e4d148840f1d6776759be
+msgid "Design multi-tool research workflows using compose tools"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:12 f2af3a9ba3f8450f9790edd8416f9f3b
+msgid "Combine data from different scientific databases and APIs"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:13 0dae8f8533c04056a2e5676930fec92b
+msgid "Build reproducible analysis pipelines with error handling"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:14 bc2c50a0f7fa487eaf64992d223a2963
+msgid "Create agentic workflows with AI-guided decision making"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:15 cc993dc3210644d5bb4bee42d410ce90
+msgid "Optimize workflows for efficiency and accuracy"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:18 e96806214d12400cb2fcd3fb0cef4280
+msgid "📋 Prerequisites"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:20 a03f56a6144c4b6490b8716c1f742e5b
+msgid "Familiarity with ToolUniverse tools (:doc:`../guide/tools`)"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:21 ee782fb8df0847d09a8672fe595d1b12
+msgid "Understanding of scientific databases and concepts"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:22 88d49e08623841df984c648fae7df55d
+msgid "Basic Python programming for workflow automation"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:23 2f8a684ce2c743b9b0922b08d1517139
+msgid "Knowledge of tool composition (:doc:`../guide/tool_composition`)"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:26 587e37964c194affa12d0c4e29787770
+msgid "Workflow Architecture Overview"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:28 e971305ed0c347b282ab4aa28881df9c
+msgid "ToolUniverse supports two approaches for building scientific workflows:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:30 81011452460a4d0faf1e921ca0bac6fd
+msgid ""
+"**Compose Tools**: Pre-built, reusable workflows that combine multiple "
+"tools"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:31 25e1eadd729b48ecbd9367cfac444003
+msgid ""
+"**Custom Workflows**: Ad-hoc combinations of individual tools for "
+"specific needs"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:33 45238e99965c43e5b3e8f747acd6663d
+msgid ""
+"**Compose Tool Benefits**: - **Reusability**: Share workflows across "
+"research projects - **Reliability**: Built-in error handling and fallback"
+" mechanisms - **Efficiency**: Optimized tool loading and execution - "
+"**Maintainability**: Centralized workflow logic"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:40 09d6ec0ffddc4971aa7610925392f238
+msgid "🧬 Drug Discovery & Development Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:43 90ebbc6429594e078567b1b0ea9c6047
+msgid "Target Identification Pipeline"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:45 81cf249f97c34201ab6058fd14acc2ac
+msgid ""
+"**Scenario**: Identify and validate potential therapeutic targets for a "
+"disease using a compose tool."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:47 9b1525df3b0448b69b219190f6d444ad
+msgid "**Using Compose Tool Approach**:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:107 6f96af3f521e487fb6b285e3a7b1e232
+msgid "**Custom Workflow Approach** (for specific needs):"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:159 498b74ef5ad94a11b1794812ed4af63f
+msgid "Drug Repositioning Analysis"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:161 7077efb1a1434d0d871c93c08e5594c7
+msgid ""
+"**Scenario**: Find existing drugs that could be repurposed for a new "
+"indication using heterogeneous data sources."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:239 45c37f45a59a4172a807e535431eef73
+msgid "Comprehensive Drug Discovery Pipeline"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:241 9b5c6450c9764ed49220c5f989ccbc0f
+msgid ""
+"**Complete end-to-end drug discovery workflow from disease to optimized "
+"candidates**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:243 402dffd6219247c898d0c21069244c3c
+msgid ""
+"This advanced workflow demonstrates how to create a compose tool that "
+"orchestrates multiple phases of drug discovery:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:399
+#: ../../guide/scientific_workflows.rst:969 5e60332a0ece4bd9bfa94805e38409af
+#: d0828f215d154d869f4f25b1049f2dad
+msgid "**Using the Compose Tool**:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:421 f61d6c706f35412b8179d2c1bc14080c
+msgid "🛡️ Drug Safety & Pharmacovigilance Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:424 eb1a05fcc4064d84b2d7f69b0f83de34
+msgid "Comprehensive Safety Assessment"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:426 8e6e96e00ed3490d9d7af77199c23f86
+msgid ""
+"**Scenario**: Conduct thorough safety evaluation of a marketed drug using"
+" multiple data sources."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:529 6c02591c527f432684509b444a6cb889
+msgid "📚 Literature Research & Meta-Analysis Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:532 d279ea8a5c4746ca81e3eb9680a11373
+msgid "Systematic Literature Review"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:534 fa1518fbc75c4361ab1eeb1652bba4a1
+msgid ""
+"**Scenario**: Conduct systematic review of literature on a specific "
+"research topic using compose tools."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:641 e135522e9e1549b6b41a37a6af580b7b
+msgid "🧬 Genomics Research Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:644 bea7343273b047b687792d1434705c31
+msgid "Variant Analysis Pipeline"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:646 d5e0c4a8da0d4a24909ab30f44532a57
+msgid ""
+"**Scenario**: Analyze genetic variants and their functional impact using "
+"multiple genomic databases."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:718 bbe7f66483564c99ac4c98db080dddcb
+msgid "Biomarker Discovery Workflow"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:720 9438da691bf4495dac561c62bb60292c
+msgid ""
+"**Scenario**: Discover and validate biomarkers for a specific disease "
+"condition using compose tools."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:994 a67a76eca4ae44cfb58e52b3c6604872
+msgid "🧪 Clinical Research Workflows"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:997 27b53b6a579c4fcd88af081a803dff39
+msgid "Clinical Trial Analysis Pipeline"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:999 e50c690b5629444fb76d80dc23179e01
+msgid ""
+"**Scenario**: Comprehensive analysis of clinical trials for a specific "
+"condition."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1083 9e0dcc1a961f42f98708dfb3598bacba
+msgid "🤖 Agentic Workflows with AI Integration"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1086 b3dae8fab07341559a3dba26d089b19e
+msgid "Intelligent Research Assistant"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1088 450df6620ca34a3da39a8a7bc98d4d42
+msgid ""
+"**Scenario**: Create an AI-guided workflow that adapts based on "
+"intermediate results."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1160 59b42f0208174ab3a607f692372aedfe
+msgid "Current Working Compose Tools"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1162 a119c608e2c74b5eacbb006e37f00df4
+msgid ""
+"ToolUniverse provides several production-ready compose tools that "
+"implement the workflows described in this Tutorial:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1164 3ddf7c7d700044c4bc4ca5dee9134382
+msgid "**✅ Verified Working Compose Tools**:"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1166 f6e3bfb06a50451fb53cf3b1a357ecce
+msgid "**LiteratureSearchTool**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1168 2f74382cad75439e9ce2bb75f0e287b2
+msgid "**Purpose**: Comprehensive literature research and synthesis"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1169 5c0cccd3851b49bc9e7cb115695b1eed
+msgid "**Workflow**: Broadcasting pattern across EuropePMC, OpenAlex, PubTator"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1170 9940b5de7e864b158e2a1436b495af8e
+msgid ""
+"**AI Integration**: MedicalLiteratureReviewer for intelligent "
+"summarization"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1172 02ab932101de4dd59cfbf9e9846e2a88
+msgid "**ComprehensiveDrugDiscoveryPipeline**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1174 2d5b6621f88c45a5822bd53810510662
+msgid "**Purpose**: End-to-end drug discovery from disease to candidates"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1175 e1d149d9329248ddac85ecbab4376f16
+msgid "**Workflow**: Sequential chaining with tool integration"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1176 d0cebd314cc643059508172dbbd24077
+msgid ""
+"**Phases**: Target identification → Lead discovery → Safety assessment → "
+"Literature validation"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1177 d58ece6964c54246a4c808372795ee73
+msgid "**Tool Chaining**: OpenTargets → PubChem → ADMETAI → LiteratureSearchTool"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1179 ce4aea39542a48faa413ca97e11f04eb
+msgid "**BiomarkerDiscoveryWorkflow**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1181 d544c759bc8042308c7eb66b352d6ca7
+msgid "**Purpose**: Biomarker discovery and validation for diseases"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1182 fae62ad6650b45aa87be8b08a52e0f26
+msgid "**Workflow**: Multi-strategy approach with comprehensive fallbacks"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1183 a4ea213f15ed4f3e9717adbafa56f2b1
+msgid ""
+"**Steps**: Literature search → Gene discovery → Pathway analysis → "
+"Clinical validation"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1184 40656504ca774b14b765e389bd62eee7
+msgid ""
+"**Multi-tool Analysis**: HPA biological processes, protein interactions, "
+"cancer prognostics"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1187 edd4e254ab2643cba0f395e80ec1baa1
+msgid "**DrugSafetyAnalyzer**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1189 cc11b5dadf0d4e0797bcdcb1272a249c
+msgid "**Purpose**: Comprehensive drug safety assessment"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1190 90e6568958a2413a818b5873fe0526f3
+msgid "**Workflow**: Safety-focused data integration"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1191 f4e635834bcd4720b3e650e0ee4d0967
+msgid "**Components**: PubChem compound data, EuropePMC literature search"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1192 91f119d347314df5b6dc4429f92749ef
+msgid "**Status**: ✅ Fully functional with real safety data processing"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1194 c9e6f64691ae403b8e2ec41441dfead5
+msgid "**ToolDescriptionOptimizer**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1196 518f6a71d8024d7d8adbbcf5ed1de39d
+msgid "**Purpose**: AI-powered tool description optimization"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1197 2fd970daac654a57aac6765a5c6968f1
+msgid "**Workflow**: Agentic optimization loops with quality evaluation"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1198 590c5dc211c3467aba549fd52a82589b
+msgid "**Features**: Test case generation, iterative improvement, quality scoring"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1200 acff90d603b4411f85a7c115c6301b37
+msgid "**ToolDiscover**"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1202 280880f98f5045e387bcfab159831ee1
+msgid "**Purpose**: AI-powered tool creation from natural language descriptions"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1203 43a2013479e248e58459c9fea88f03b4
+msgid "**Workflow**: Advanced agentic workflows with iterative code improvement"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1204 8ce946b9bd294563b254481b932f4eaf
+msgid ""
+"**Features**: Tool specification generation, code implementation, quality"
+" analysis"
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1209 d419fdaff5fa4ec69cf8ded0de0f11e8
+msgid ""
+"**Workflow Strategy**: Start with compose tools for common patterns, then"
+" build custom workflows for specific research needs. Always implement "
+"error handling and consider performance optimization for large-scale "
+"analyses."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1212 b284cf45f079424f897ad6626b7122c1
+msgid ""
+"**Compose vs Custom**: Use compose tools for reusable patterns and custom"
+" workflows for specific research questions. Compose tools provide better "
+"reliability and maintainability, while custom workflows offer maximum "
+"flexibility."
+msgstr ""
+
+#: ../../guide/scientific_workflows.rst:1215 41a108d924954790937995377f9bdf34
+msgid ""
+"**Heterogeneous Integration**: ToolUniverse excels at combining tools "
+"from different scientific databases and APIs. Leverage this capability to"
+" build comprehensive research pipelines that would be impossible with "
+"individual tools alone."
+msgstr ""
+

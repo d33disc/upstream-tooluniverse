@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.agentic_tool.rst:2 8a8bcf07de844a5980f24e9e27cdd608
+msgid "tooluniverse.agentic\\_tool module"
+msgstr ""
+
+#: 0cba1972b06a4dfe9c7c714734322bdd of tooluniverse.agentic_tool.AgenticTool:1
+msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
+msgstr ""
+
+#: a217255ba9e94eadbedf196ea31004a8 of tooluniverse.agentic_tool.AgenticTool:1
+msgid ""
+"Generic wrapper around LLM prompting supporting JSON-defined configs with"
+" prompts and input arguments."
+msgstr ""
+
+#: ee38d404e22948578f616408621c7f78 of
+#: tooluniverse.agentic_tool.AgenticTool.has_any_api_keys:1
+msgid "Check if any API keys are available across all supported API types."
+msgstr ""
+
+#: ../../api/tooluniverse.agentic_tool.rst 0b880c24b29a48d8ba3a37f61303c70f
+msgid "Returns"
+msgstr ""
+
+#: ed4e9ebff923438c86e867c60d8cacbb of
+#: tooluniverse.agentic_tool.AgenticTool.has_any_api_keys:3
+msgid "True if at least one API type has all required keys, False otherwise"
+msgstr ""
+
+#: ../../api/tooluniverse.agentic_tool.rst 6bdf777a7103448298a2dfe8ed283c9a
+msgid "Return type"
+msgstr ""
+
+#: f7c1123a5ac340be95ef4de31c370ce1 of
+#: tooluniverse.agentic_tool.AgenticTool._get_global_fallback_chain:1
+msgid "Get the global fallback chain from environment or use default."
+msgstr ""
+
+#: 57f181fc10e74e76b8b674fe88989be4 of
+#: tooluniverse.agentic_tool.AgenticTool._try_initialize_api:1
+msgid "Try to initialize the primary API, fallback to secondary if configured."
+msgstr ""
+
+#: 33acae2c28184b529414b8ee60176ca8 of
+#: tooluniverse.agentic_tool.AgenticTool._try_api:1
+msgid "Try to initialize a specific API and model."
+msgstr ""
+
+#: e0d92e17d39243f2a793063fa9a2e5ee of
+#: tooluniverse.agentic_tool.AgenticTool.run:1
+msgid "Execute the tool."
+msgstr ""
+
+#: f68f48d5b147429cad40ef8e67f1e2b8 of
+#: tooluniverse.agentic_tool.AgenticTool.run:3
+msgid ""
+"The default BaseTool implementation accepts an optional arguments mapping"
+" to align with most concrete tool implementations which expect a "
+"dictionary of inputs."
+msgstr ""
+
+#: 82a76e88951845668cf1cd627acd6967 of
+#: tooluniverse.agentic_tool.AgenticTool.is_available:1
+msgid "Check if the tool is available for use."
+msgstr ""
+
+#: c7d5dd3046774750ad79d07dab0ed5cd of
+#: tooluniverse.agentic_tool.AgenticTool.get_availability_status:1
+msgid "Get detailed availability status of the tool."
+msgstr ""
+
+#: 042d5b3baec94a6e8717218be0e69ed1 of
+#: tooluniverse.agentic_tool.AgenticTool.retry_initialization:1
+msgid "Attempt to reinitialize the tool (useful if API keys were updated)."
+msgstr ""
+

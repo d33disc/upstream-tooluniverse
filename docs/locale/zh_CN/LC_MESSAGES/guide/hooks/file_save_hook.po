@@ -1,0 +1,240 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/hooks/file_save_hook.rst:2 f56b441ed87b46f685043dbe2cae75d1
+msgid "FileSaveHook"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:4 4bfa0553007741f49c6f6915baa362f6
+msgid "**File-based output processing and archiving**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:6 93d65b36aef44736a67539ea66361684
+msgid ""
+"The FileSaveHook saves tool outputs to temporary files and returns file "
+"information instead of the original output. This is ideal for handling "
+"large outputs or when you need to process outputs as files."
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:9 c765777f7c5848adbe6678eaae2a15dd
+msgid "Overview"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:11 284e5bb1d0564fe99457f19a9870c6a9
+msgid ""
+"**What it does:** - Saves tool outputs to temporary files - Analyzes data"
+" format and structure automatically - Returns file metadata (path, size, "
+"format, structure) - Supports automatic cleanup of old files"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:17 418ebbcb748a45808585779a08cbbb66
+msgid ""
+"**When to use:** - Very large outputs that exceed memory limits - "
+"Processing outputs as files for external tools - Archiving tool outputs "
+"for later analysis - Reducing memory usage in long-running processes"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:24 cd9b58ff281b49929227bdfd876d61ec
+msgid "Quick Start"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:26 5d414cd92fb244cfada5fbc9d9fb99cf
+msgid "**Simple Usage**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:46 4181604a506749c289a44065ca7f6390
+msgid "**Advanced Configuration**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:74 8dec29f6992347319a03d48421a3a190
+msgid "Configuration Options"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:76 e569d98e0a484161b726443d51f322bb
+msgid ""
+"**Temp Directory** - Directory where files are saved - Default: System "
+"temporary directory - Use absolute paths for custom locations"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:81 fb9431bf5518491a9b62ebb00fadf5c3
+msgid ""
+"**File Prefix** - Prefix for generated filenames - Default: "
+"\"tool_output\" - Helps organize files by purpose"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:86 dddd3a761f784feb81a1430748db521a
+msgid ""
+"**Include Metadata** - Whether to include file metadata in response - "
+"Default: True - Provides file information and context"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:91 84c1122382fc43a5b2f9437ee7b5192a
+msgid ""
+"**Auto Cleanup** - Automatically remove old files - Default: False - "
+"Helps manage disk space"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:96 4aef94fcba1849c1913472641b36a782
+msgid ""
+"**Cleanup Age Hours** - Age threshold for automatic cleanup - Default: 24"
+" hours - Files older than this are removed"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:102 e800fd6cbd5a4bc9a22f80daae66a58b
+msgid "Data Format Detection"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:104 cb261e47d06e4840b62f9751cb26f834
+msgid "The hook automatically detects and handles different data types:"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:106 ca70366afea549e0851ee98cb7d354a1
+msgid ""
+"**JSON Data** - Dictionaries, lists, JSON strings - Saved as `.json` "
+"files - Structure: \"dict with X keys\", \"list with X items\""
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:111 f3f49845c7af45b5b947ffb6d160fe96
+msgid ""
+"**Text Data** - Plain text, strings - Saved as `.txt` files - Structure: "
+"\"text\", \"string\""
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:116 1cd66c1848c547a9a71f68d8154fe970
+msgid ""
+"**Binary Data** - Non-text data - Saved as `.bin` files - Structure: "
+"\"binary\", \"data\""
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:121 6b738cd70dbb4a64afe516c5d7580cd2
+msgid ""
+"**Other Formats** - Custom data types - Saved with appropriate extensions"
+" - Structure: \"custom\", \"unknown\""
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:127 6b09cadf92494ce78cfae098e0f885f8
+msgid "Examples"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:129 4b4d35170f4a43be93b7ce243678da80
+msgid "**Large Dataset Processing**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:153 404b5256b9a64b8c8add68a8509f5371
+msgid "**Custom Directory and Cleanup**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:177 02c1ace1dde045f3876c9321d04c5e1c
+msgid "**External Tool Integration**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:197 f7eaa06ad6d24a02a192c5d64e177e7b
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:199 11f50c771d6a4bc79d5616f333d2bcdd
+msgid ""
+"**File Permission Errors** - Ensure directory exists and is writable - "
+"Check file permissions and ownership - Use absolute paths for temp "
+"directories"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:204 3f01e62f48c94f6cb03c912463f858d9
+msgid ""
+"**Memory Issues** - Use FileSaveHook for large outputs - Enable auto-"
+"cleanup for temporary files - Monitor disk space usage"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:209 db6db42cdc0f4a47a9d2e2d3753c27b2
+msgid ""
+"**Hook Not Triggering** - Check trigger conditions and thresholds - "
+"Verify hook configuration and enabled status - Review hook priority "
+"settings"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:214 26e2e7d861834a95a2685cbc763312f3
+msgid ""
+"**Performance Problems** - Use tool-specific hooks instead of global "
+"hooks - Set appropriate thresholds to avoid unnecessary processing - "
+"Monitor hook execution times"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:219 7b4a9c855c7f4f038f485147242e0936
+msgid "**Debugging**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:221 71db5265a347404a974d0e76bef3e232
+msgid "Enable detailed logging for hook operations:"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:231 aab88441203546eebc4eea4c2a030cbf
+msgid "**Validation**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:233 0c83a3c1f40b4a0f969a9aa4ca2c6c89
+msgid "Verify hook configuration:"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:246 0ed4e54eec3a48ea9c49b2c2673f3ea9
+msgid "Next Steps"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:248 2530ee09581444d2802f23d39697f15c
+msgid "**Learn More**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:250 05059819d5ea4bcd86fdf66118a28427
+msgid ""
+"**SummarizationHook** → :doc:`summarization_hook` - AI-powered output "
+"summarization"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:251 a4cb7cf891f646dfae2aa59768675100
+msgid ""
+"**Configuration** → :doc:`hook_configuration` - Advanced configuration "
+"options"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:252 544a9457423640e9ae82cebed9bd3034
+msgid "**Hooks Overview** → :doc:`index` - Complete hooks system Tutorial"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:254 358fb5e2fbb247f4ac0ad0849e06fe13
+msgid "**Related Topics**"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:256 bfc7e822feb64eafb517cbcf78c331a3
+msgid ""
+"**Tool Composition** → :doc:`../tool_composition` - Chain tools into "
+"workflows"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:257 a993bb97c41b4e1c9045fff8596fbd53
+msgid ""
+"**Best Practices** → :doc:`../best_practices` - Performance optimization "
+"tips"
+msgstr ""
+
+#: ../../guide/hooks/file_save_hook.rst:258 fc085cc320d0458a9d42b1c86032ec63
+msgid "**Examples** → :doc:`../examples` - More usage examples"
+msgstr ""
+

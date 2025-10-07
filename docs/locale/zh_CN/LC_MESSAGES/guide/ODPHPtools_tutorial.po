@@ -1,0 +1,242 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/ODPHPtools_tutorial.md:1 e8ce15079e874b47bd9083e803c204bc
+msgid "ODPHP Tools (MyHealthfinder + ItemList + TopicSearch + Outlink Fetch)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:3 6e8cef2c30da4caeb6f514f30b3d3171
+msgid ""
+"**What it is.** A fast, agent-aligned interface to the U.S. Office of "
+"Disease Prevention and Health Promotion (ODPHP) **MyHealthfinder API**:"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:5 1e29c896cd5341a084332fe992c61182
+msgid ""
+"**Personalized preventive-care recommendations** (`odphp_myhealthfinder`)"
+" given demographics (age, sex, pregnancy status)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:6 03734759399a40c7a144073455a71fdc
+msgid "**Catalog browsing** (`odphp_itemlist`) for all topics and categories."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:7 fa7738732bea48d4a58e3a0dfe0f728b
+msgid ""
+"**Targeted topic lookup** (`odphp_topicsearch`) by keyword, topicId, or "
+"categoryId."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:8 08d8dc2dd9fc48e1bd3663b1e4c48967
+msgid ""
+"**Full content dereferencing** (`odphp_outlink_fetch`) to retrieve the "
+"actual article text or PDF from AccessibleVersion/RelatedItems links."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:9 093b8fe5546747ab9c3cc3b5ac392ff3
+msgid "Exposed to ToolUniverse as **4 agent-visible tools** via JSON config."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:13 9d05bdb9aa0d4c168b84ffad631169b6
+msgid "Files & flow"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:21 9b074f06de534f489e8cf96d321ff71e
+msgid "**Adapters**"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:23 0b4ab93d8c64468c9ac90e3e73169699
+msgid ""
+"`ODPHPMyHealthfinder`: queries `/myhealthfinder.json` (demographic inputs"
+" to preventive care resources)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:24 593a2d1ecf354c15834fa46a03bc5aad
+msgid "`ODPHPItemList`: queries `/itemlist.json` (topics & categories)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:25 e7fd9106cbe4420d9a8cf46812e6d0be
+msgid ""
+"`ODPHPTopicSearch`: queries `/topicsearch.json` (keyword/IDs to detailed "
+"topic pages)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:26 776e5324f1e44aba90947b743ba7371c
+msgid ""
+"`ODPHPOutlinkFetch`: dereferences article links (HTML/PDF to text + "
+"metadata)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:30 c4fef0396134450c9a5cd3327ee73dd0
+msgid "How to use (from Python)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:56 b7a0f67e4db44dd7a5968b9cb5805d6b
+msgid "When to use what"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:58 66e9b80606774fd696810c8001b4cccb
+msgid ""
+"Use **`odphp_myhealthfinder`** when the user gives **demographics** (age,"
+" sex, pregnant) or asks *“what screenings/vaccines/checkups do I need?”*."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:59 d9435fb4e49b4a72a6feac721de122a8
+msgid ""
+"Use **`odphp_itemlist`** to **browse all topics or categories** (like a "
+"table of contents)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:60 42e07d892e394af19c2b93bfb8eceb0f
+msgid ""
+"Use **`odphp_topicsearch`** when the user says a **condition/keyword** "
+"(“folic acid”, “blood pressure”) or when you already have IDs."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:61 98901c3e4fc7443bb1e9202a4f2e51a9
+msgid ""
+"Use **`odphp_outlink_fetch`** when you need the **actual article text or "
+"PDF** (AccessibleVersion, RelatedItems)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:65 5015dbe398f143018260b590bd7461f2
+msgid "End-to-end pipeline (MyHealthfinder to Outlink Fetch)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:67 5158bc9b74df4da08dcf7f2189bf3061
+msgid "The tools are designed to be chained:"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:69 f5465157e9c84f259cfb0841d967fef0
+msgid "**Demographic query** (`odphp_myhealthfinder`)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:71 dfb44010ade84fedb80b1f78fae18a2f
+msgid "Input: demographics (age, sex, pregnant) + language."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:72 d0f4e50266084261bcce2f424173d6ef
+msgid "Output: resources with metadata and AccessibleVersion links."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:95 5ae90889101345ecb71aef83f16a5bde
+msgid "**Outlink dereference** (`odphp_outlink_fetch`)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:97 3b7b496865674a5983bc301b06b13922
+msgid "Input: 1–3 URLs from AccessibleVersion or RelatedItems."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:98 21d97c284bcc4812888d4d0ef4182dbb
+msgid "Output: cleaned article text, with metadata and PDF detection."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:114 2db224c3912044d2a0ff918f386f0f5e
+msgid "Content types:"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:116 d79f8c315f2a47dcb554660e1755c06a
+msgid "`text/html`: text extracted via BeautifulSoup (or regex fallback)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:117 3b7e0105f24644acb8b39670c23382ea
+msgid "`application/pdf`: metadata + link returned."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:118 ab40f23e2139422994757a0ebabef742
+msgid "Other: link + best-effort handling."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:120 6d5fa37e316143b79d67da8c61e55277
+msgid "**Next steps for an agent**"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:122 0f7a3d72c85144b1ab348109f9244a96
+msgid ""
+"If user asked for “full details” then feed `text` into summarizer or "
+"directly quote."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:123 1aa9e16792dd496c8c157b67a7a84b6e
+msgid "If PDF returned then pass to PDF reader tool."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:124 f6e6427e614d48c6bb1efc3717d77de4
+msgid ""
+"If broken/outdated link then fallback to RelatedItems or report "
+"unavailability."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:128 2c0a6aa50f5c4980a8162eb2040e835d
+msgid "Tests (smoke & shape)"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:130 46a8855c0a64498cbdc8fdd2751240fa
+msgid "**src/tooluniverse/test/test\\_odphp\\_tool.py** includes:"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:132 d3579f9bc07c49afa9bf9df457e779d8
+msgid "Valid demographic query (age 35 female pregnant=no)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:133 151725bf17344307a4613957dccbd977
+msgid "Keyword/topic search (e.g., “cancer”)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:134 1d90269fac3742e59f67a2391c98dadd
+msgid "Category browsing (topics vs categories)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:135 ae88f23a2e7d45e0ad145062dfb2f4f4
+msgid "Outlink fetch for HTML and PDFs (Pregnancy Fact Sheet)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:136 71a7e88e1e95486cbd110cc706c15afc
+msgid "Spanish topics (`lang=\"es\"`)."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:137 1d695bccb0a3422390dc60950423caf4
+msgid "Edge cases: invalid params, schema compliance, HTML stripping."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:141 cdff2efa119743eb884282a0a518e3d9
+msgid "Agent rubric"
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:143 f485fbb8faa24ef2b1d3dce539d24eb1
+msgid "Start with **MyHealthfinder** when demographics are known."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:144 64b82392dac04bdbaf8afadd24fe0054
+msgid "Use **TopicSearch** when keywords or IDs are given."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:145 76b361bffc0a4c419fb5e5eb2b87d852
+msgid "Use **ItemList** to explore available topics/categories."
+msgstr ""
+
+#: ../../guide/ODPHPtools_tutorial.md:146 a3a1ea675e084334b2577f2290e0ca36
+msgid ""
+"Always use **OutlinkFetch** to **close the loop** from metadata to "
+"actionable content."
+msgstr ""
+

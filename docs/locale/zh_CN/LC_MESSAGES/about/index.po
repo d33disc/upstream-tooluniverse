@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../about/index.rst:2 aa647c23ee2640f29ee4b8afa574e2cb
+msgid "About ToolUniverse"
+msgstr ""
+
+#: ../../about/index.rst:4 cf52613076ef450b81dc0a92b5d48ceb
+msgid "**Project information, development, and community resources.**"
+msgstr ""
+
+#: ../../about/index.rst:15 4cdc59f742914e1484717d6617334710
+msgid "📋 Project Information"
+msgstr ""
+
+#: ../../about/index.rst:17 847b74b2931443979d2a76b0114aa98a
+msgid "**Version**: 0.3.0"
+msgstr ""
+
+#: ../../about/index.rst:19 be576ef495a1490481e4840695363968
+msgid "**License**: MIT License"
+msgstr ""
+
+#: ../../about/index.rst:21 5bcc153cfb00494587e91dd3677d7bcf
+msgid "**Repository**: `GitHub <https://github.com/mims-harvard/ToolUniverse>`_"
+msgstr ""
+
+#: ../../about/index.rst:23 16f0f3d2c95343c5ae0c397d8645a513
+msgid "**Documentation**: You're reading it!"
+msgstr ""
+
+#: ../../about/index.rst:26 4a7cac630dea46efb0e246ff6f1b8374
+msgid "🎯 Project Goals"
+msgstr ""
+
+#: ../../about/index.rst:28 802767abc71f49f9b88172e1a4516064
+msgid "ToolUniverse aims to:"
+msgstr ""
+
+#: ../../about/index.rst:30 6dcaec3612bc4ffd819aa75d3f8e806c
+msgid ""
+"**Democratize scientific data access** - Make 50+ databases accessible "
+"through one interface"
+msgstr ""
+
+#: ../../about/index.rst:31 e6d389237cd7497d99df23d2dcea88af
+msgid "**Enable AI-driven research** - Seamless integration with AI assistants"
+msgstr ""
+
+#: ../../about/index.rst:32 f422a48c6cf441b09bc707c0c23f9faf
+msgid "**Accelerate discovery** - Reduce time from question to insight"
+msgstr ""
+
+#: ../../about/index.rst:33 77794dc887f54768ab00b213bba1f5c5
+msgid "**Foster collaboration** - Community-driven tool development"
+msgstr ""
+
+#: ../../about/index.rst:36 1c3157b7b0b547c28441a14981a4565d
+msgid "👥 Community"
+msgstr ""
+
+#: ../../about/index.rst:38 496c9cdd70c14310a183638f897eb62a
+msgid "**Contributors**: Scientists, developers, and researchers worldwide"
+msgstr ""
+
+#: ../../about/index.rst:39 d68d4129263a4c8ba20cbfb8173f9678
+msgid "**Maintainers**: MIMS Lab at Harvard Medical School"
+msgstr ""
+
+#: ../../about/index.rst:40 d08410f88ca043e98f5fc1dae8b5788a
+msgid "**Users**: Research institutions, pharmaceutical companies, academic labs"
+msgstr ""
+
+#: ../../about/index.rst:43 d073eb2cdc4c4d66bd6c931272f0d033
+msgid "📈 Development"
+msgstr ""
+
+#: ../../about/index.rst:45 0a4235d16ed349c3a237915c583dd279
+msgid ":doc:`contributing` - How to contribute code, tools, and documentation"
+msgstr ""
+
+#: ../../about/index.rst:46 5b3f624d6b674273a6498b6be7ad02b6
+msgid ":doc:`deployment` - Production deployment Tutorial"
+msgstr ""
+
+#: ../../about/index.rst:47 110771bc9e3d4bc7b9152d1fa7c950c6
+msgid ":doc:`changelog` - Version history and updates"
+msgstr ""
+
+#: ../../about/index.rst:50 3d2a4170fc724b5cb93eee73ff6c48bd
+msgid "📄 Legal"
+msgstr ""
+
+#: ../../about/index.rst:52 6e5605aab6794d9baa7de478aa4dfd18
+msgid ":doc:`license` - MIT License terms and data source licenses"
+msgstr ""
+
+#: ../../about/index.rst:55 09bfceba682f402aa290610e715454c3
+msgid "🙏 Acknowledgments"
+msgstr ""
+
+#: ../../about/index.rst:57 cf319371e66a4b63b5aa09330e21b4f6
+msgid "ToolUniverse is built on the work of many scientific databases and APIs:"
+msgstr ""
+
+#: ../../about/index.rst:59 20443588f5044e238d90e5b432ff9da7
+msgid "**OpenTargets** - Disease-target associations"
+msgstr ""
+
+#: ../../about/index.rst:60 e1e023dcfd8a4d77b905ae4ada53c88f
+msgid "**FDA/FAERS** - Drug safety and regulatory data"
+msgstr ""
+
+#: ../../about/index.rst:61 ee42a761082e48e08ef426b5626f2ed2
+msgid "**PubMed/PubTator** - Biomedical literature"
+msgstr ""
+
+#: ../../about/index.rst:62 d4379bb0a56a429f9f191ec579a42515
+msgid "**ChEMBL** - Chemical bioactivity data"
+msgstr ""
+
+#: ../../about/index.rst:63 459c7a8581704c63aaa6dc70697a54ed
+msgid "**UniProt** - Protein information"
+msgstr ""
+
+#: ../../about/index.rst:64 bde5d19dea8c4b30a73c5795c43c9c85
+msgid "And many more..."
+msgstr ""
+
+#: ../../about/index.rst:66 126681f2790441809eb5450415573d43
+msgid ""
+"Special thanks to the scientific community for making their data "
+"accessible and the developers who maintain these valuable resources."
+msgstr ""
+

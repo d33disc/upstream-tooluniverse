@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/index.rst:2 6c21ba428df74a7fb72c88a1187ee77b
+msgid "Tutorial Navigation"
+msgstr ""
+
+#: ../../guide/index.rst:5 78a2515424554aa0b87748cb39cff54e
+msgid ""
+"This comprehensive tutorial takes you from basic concepts to advanced AI "
+"scientist workflows, with everything you need to democratize AI agents "
+"for scientific discovery."
+msgstr ""
+
+#: ../../guide/index.rst:7 3b2075d1e0394b4cafc3f46f3319ffff
+msgid "Choose the section that matches your current needs:"
+msgstr ""
+
+#: ../../guide/index.rst:9 5eba454b8e264ff99e6d9361e214a6ce
+msgid ""
+"💡 **For Python API documentation**, see the dedicated :doc:`../api/index`"
+" section."
+msgstr ""
+
+#: ../../guide/index.rst:12 4704e5347daa4e3290d8de6989fc7a9d
+msgid "Core Concepts"
+msgstr ""
+
+#: ../../guide/index.rst:14 ae539f927baa4392b60e138fb0e1353c
+msgid ""
+"**⚙️ Loading Tools** → :doc:`loading_tools` - Complete tutorial to "
+"loading tools with Python API and MCP terminal commands"
+msgstr ""
+
+#: ../../guide/index.rst:15 9d2fa098e31e42a6ac05b6eb5c92f39e
+msgid ""
+"**📋 Listing Tools** → :doc:`listing_tools` - Discover and filter tools by"
+" capability, domain, and IO"
+msgstr ""
+
+#: ../../guide/index.rst:16 b8d8c31079fa4806b1ad2c79ae7b9f15
+msgid ""
+"**🔧 Tool Caller** → :doc:`tool_caller` - Primary execution engine with "
+"dynamic loading, validation, and MCP server integration"
+msgstr ""
+
+#: ../../guide/index.rst:17 be40e9b10d1849da8bfda5db5009ae81
+msgid ""
+"**🔗 Tool Composition** → :doc:`tool_composition` - Chain ToolUniverse's "
+"600+ tools into powerful scientific workflows using Tool Composer"
+msgstr ""
+
+#: ../../guide/index.rst:18 49e8ca3b4ec6424a829c6f258dacae89
+msgid ""
+"**🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world "
+"research scenarios: drug discovery, safety analysis, literature review"
+msgstr ""
+
+#: ../../guide/index.rst:19 e17d82c121e049ee81ae2ae626725965
+msgid ""
+"**📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol "
+"integration and server setup"
+msgstr ""
+
+#: ../../guide/index.rst:20 828d48bf1f554fd8b2e95d801741f0c6
+msgid ""
+"**🔊 Streaming Tools** → :doc:`streaming_tools` - Real-time streaming "
+"output and custom tool integration"
+msgstr ""
+
+#: ../../guide/index.rst:21 4bf3fd9c45c641a09a76ac5142929832
+msgid ""
+"**📝 Logging** → :doc:`logging` - Comprehensive logging configuration and "
+"debugging"
+msgstr ""
+
+#: ../../guide/index.rst:22 ca5c9ebd6f864973a890a8d11413f134
+msgid ""
+"**🔗 Interaction Protocol** → :doc:`interaction_protocol` - Understanding "
+"tool interaction patterns"
+msgstr ""
+
+#: ../../guide/index.rst:25 dad6dcc3e4564bdf8fdf985da01280d8
+msgid "Tool Discovery & Usage"
+msgstr ""
+
+#: ../../guide/index.rst:27 ca9569bb6bfe415699f3b89048a653a9
+msgid ""
+"**🔍 Tool Discovery** → :doc:`../tutorials/finding_tools` - Tutorial to "
+"ToolUniverse's three tool finder methods: keyword, LLM, and embedding "
+"search"
+msgstr ""
+
+#: ../../guide/index.rst:28 80f27a1415a34587a6aa25371f0052fc
+msgid ""
+"**📚 Tools Overview** → :doc:`tools` - Comprehensive overview of all "
+"available tools"
+msgstr ""
+
+#: ../../guide/index.rst:31 8ad76d88010d481a9e02363335211dda
+msgid "Building AI Scientists"
+msgstr ""
+
+#: ../../guide/index.rst:33 b8c8441dd6604e30b13435fb00cb0c4e
+msgid ""
+"**🤖 Building AI Scientists** → :doc:`building_ai_scientists/index` - "
+"Create AI research assistants from LLMs, reasoning models, and agentic "
+"systems"
+msgstr ""
+
+#: ../../guide/index.rst:35 624d02ea9f214b97bd1663fce6f9922b
+msgid ""
+"**🖥️ Claude Desktop** → :doc:`building_ai_scientists/claude_desktop` - "
+"Integrate ToolUniverse with Claude Desktop App through MCP"
+msgstr ""
+
+#: ../../guide/index.rst:36 13c80d39c03d48db8c45b4ad39f29685
+msgid ""
+"**💻 Claude Code** → :doc:`building_ai_scientists/claude_code` - Build AI "
+"scientists using Claude Code environment"
+msgstr ""
+
+#: ../../guide/index.rst:37 d1c750f4bffb44a1bc68253bb00a485e
+msgid ""
+"**🔮 Gemini CLI** → :doc:`building_ai_scientists/gemini_cli` - Command-"
+"line based scientific research with Gemini CLI"
+msgstr ""
+
+#: ../../guide/index.rst:38 c46643a00f494c8e83486fab76914d94
+msgid ""
+"**🧠 Qwen Code** → :doc:`building_ai_scientists/qwen_code` - AI scientist "
+"integration with Qwen Code environment"
+msgstr ""
+
+#: ../../guide/index.rst:39 7ce63467e6cb45b3a888418102bb0cbf
+msgid ""
+"**⚡ Codex CLI** → :doc:`building_ai_scientists/codex_cli` - Terminal-"
+"based AI scientist with Codex CLI"
+msgstr ""
+
+#: ../../guide/index.rst:40 dd3b8f804b914506aa3d37f019814ae0
+msgid ""
+"**🎯 ChatGPT API** → :doc:`building_ai_scientists/chatgpt_api` - "
+"Programmatic scientific research with ChatGPT function calling"
+msgstr ""
+
+#: ../../guide/index.rst:43 3b5f499773884a86b7eed0eb08a8ccd1
+msgid "Advanced Features"
+msgstr ""
+
+#: ../../guide/index.rst:45 6ea85e74465d482abfab6190dfdebee9
+msgid ""
+"**🔗 Hooks System** → :doc:`hooks/index` - Intelligent output processing "
+"with AI-powered hooks"
+msgstr ""
+
+#: ../../guide/index.rst:47 6af7dcaab3bf4284a85de3471aa5c967
+msgid ""
+"**🤖 SummarizationHook** → :doc:`hooks/summarization_hook` - AI-powered "
+"output summarization"
+msgstr ""
+
+#: ../../guide/index.rst:48 a25887b6760945528fc8b8f0a73e95e1
+msgid ""
+"**💾 FileSaveHook** → :doc:`hooks/file_save_hook` - File-based output "
+"processing and archiving"
+msgstr ""
+
+#: ../../guide/index.rst:49 449a24a80e2349b9ae2f35e14949738d
+msgid ""
+"**⚙️ Hook Configuration** → :doc:`hooks/hook_configuration` - Advanced "
+"configuration and customization"
+msgstr ""
+
+#: ../../guide/index.rst:50 f77fbc795edc4806883066a6f26d2845
+msgid ""
+"**🖥️ Server & Stdio Hooks** → :doc:`hooks/server_stdio_hooks` - Using "
+"hooks with server and stdio interfaces"
+msgstr ""
+
+#: ../../guide/index.rst:53 43b92fcf62ca433eb6e76fe6f41fc6d5
+msgid ""
+"**New to ToolUniverse?** Start with the :doc:`../quickstart` Tutorial for"
+" a 5-minute introduction, then come back here for in-depth learning."
+msgstr ""
+

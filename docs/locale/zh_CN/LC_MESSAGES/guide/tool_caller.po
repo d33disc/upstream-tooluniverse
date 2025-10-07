@@ -1,0 +1,493 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/tool_caller.rst:2 819a6c97125a4c969bab843ff10ae065
+msgid "Tool Caller Tutorial"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:4 2cdcc8a3b02a4b9da87179c01fe4c92b
+msgid ""
+"The Tool Caller is the primary execution engine in ToolUniverse. It is "
+"responsible for instantiating tools, validating requests, and dispatching"
+" calls. Upon initialization, the Tool Caller is configured with a "
+"manifest of available tools, including their specifications and settings."
+" To mitigate the significant system overhead associated with loading all "
+"tools simultaneously, it employs a dynamic loading strategy. A specific "
+"tool is loaded into memory only upon its first request and is then cached"
+" for a duration to efficiently handle subsequent calls."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:6 58301ae04812473cb0e72752741adceb
+msgid ""
+"When a tool execution request is received, the Tool Caller first parses "
+"it to extract the tool name and arguments. It then performs a rigorous "
+"validation check, ensuring the provided arguments conform to the data "
+"types and structural requirements defined in the tool's specification. "
+"Once validated, the Tool Caller dispatches the arguments to the tool's "
+"primary execution method, such as ``run()``. The resulting output is then"
+" returned to the client through ToolUniverse's communication protocols. "
+"If any step in this process fails, from loading to validation or "
+"execution, the system generates and returns a descriptive error message."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:8 38628d1e9ce84528bc4861f23fc97ab9
+msgid "This Tutorial covers the main approaches to using the Tool Caller:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:10 4039af8016384282989492dbbe2a4901
+msgid ""
+"**Direct API Usage**: Using ToolUniverse's Python API to call tools "
+"programmatically"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:11 f6b6d69567e64de0b5b44a33f65e92bc
+msgid ""
+"**MCP Server Integration**: Setting up and using MCP (Model Context "
+"Protocol) servers for AI agent integration"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:14 d5cb3b07ad6d4c38b4ac0372a55e2c11
+msgid "Direct API Usage"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:16 d6b289dc9636407098774ca63a01be27
+msgid ""
+"The ToolUniverse class provides the core Tool Caller functionality "
+"through its execution methods."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:19 15ed2d3ad59e4414ac26a932a5c5b909
+msgid "Basic Tool Execution"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:37 ec171a903e884df1a75373885e897c60
+msgid ""
+"The ``run`` method is the primary execution engine that handles both "
+"single and multiple function calls."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:40 ../../guide/tool_caller.rst:48
+#: ../../guide/tool_caller.rst:56 ../../guide/tool_caller.rst:98
+#: 76ac5638058946e7ac240cca811e6b8a abdeb7f464b14c718fd93bf1f38a0ad8
+#: bb6070233bb34706a8312890a3bfe1be fb69aedffb4940ada57953328fd38faf
+msgid ""
+"For complete API documentation, see :doc:`../api_comprehensive` - "
+"ToolUniverse class and methods"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:43 d4413cfa86754a56a46ef7066e93a7a0
+msgid "Tool Initialization and Caching"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:45 55a8a47e346c420baeb239ce3ad7497e
+msgid "Tools are dynamically loaded and cached for performance:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:51 4c138c2bc58d4d0fb5cc594536a2ae45
+msgid "Internal Execution Method"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:53 2a27ac329e6b479b9a7b29f2d563c052
+msgid ""
+"The ``run`` method internally uses ``run_one_function`` for individual "
+"tool execution:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:59 d55071c3458044a5b8e5df4393de98c0
+msgid ""
+"While ``run_one_function`` is available for direct use, the ``run`` "
+"method is the recommended interface as it provides better error handling,"
+" supports multiple function calls, and offers more flexible input parsing"
+" options."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:62 8029e5f1adc844208d8e78574b08fe39
+msgid "Advanced Tool Execution"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:64 7e76450b43684500b355503ce347613a
+msgid "The ``run`` method supports various input formats and execution modes:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:93 ad5cc0d00491476ba02b76e915431c46
+msgid "Tool Validation"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:95 741b841b62194b7ea11ab4b8c79fb725
+msgid "The Tool Caller performs comprehensive validation before execution:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:103 54dbcc0fe2324dc1808bac2e32aa8d6d
+msgid "MCP Server Integration"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:105 15fa983f85f540a98d2a52338ced3802
+msgid ""
+"ToolUniverse provides comprehensive MCP (Model Context Protocol) server "
+"capabilities through the SMCP (Scientific Model Context Protocol) "
+"implementation. This allows AI agents to discover and execute tools "
+"through a standardized protocol."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:108 adf347f596cd49b2b353bc8e8783561d
+msgid "SMCP Server Overview"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:110 8a129ca590504a4c802fe60fd54d4639
+msgid ""
+"The SMCP server extends standard MCP capabilities with scientific domain "
+"expertise, intelligent tool discovery, and optimized configurations for "
+"research applications. It automatically handles the complex task of "
+"exposing hundreds of specialized tools through a consistent, well-"
+"documented interface."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:113 5b8717e156854229881116bf20319f12
+msgid ""
+"For complete SMCP API documentation, see :doc:`../api_comprehensive` - "
+"SMCP class"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:115 476923fdb389413ba93b997d60207d65
+msgid ""
+"Key Features: - **Scientific Tool Integration**: Native access to 350+ "
+"specialized tools - **AI-Powered Tool Discovery**: Multi-tiered "
+"intelligent search system - **Full MCP Protocol Support**: Complete "
+"implementation of MCP specification - **High-Performance Architecture**: "
+"Production-ready features"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:122 b3725f3a86c643688630e50e90acaf49
+msgid "Server Setup"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:125 ea1fa340b15d483a93ee6cb41ff60cee
+msgid "Python Configuration"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:147 c2700ce4d8744417b155be66c8b7201c
+msgid "Command Line Setup"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:166 677756fbd2b24358858b52fd904b7b59
+msgid "Complete Parameter Reference"
+msgstr ""
+
+#: ../../guide/tool_caller.rst df7c98ca91454a60b278b531541f4b4f
+msgid "Complete SMCP Command Line Parameters"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:170 637e58939bf74aaa98df76d9b1ccd20b
+msgid "The ``tooluniverse-smcp`` command supports the following parameters:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:172 afe158c1b16e4f44b64db66ec1f665b5
+msgid ""
+"**Tool Selection:** - ``--categories``: Load specific tool categories "
+"(e.g., uniprot ChEMBL opentarget) - ``--include-tools``: Load only "
+"specific tools by name - ``--exclude-tools``: Exclude specific tools by "
+"name - ``--exclude-categories``: Exclude entire tool categories - "
+"``--tools-file``: Load tools from a text file (one tool name per line)"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:179 17e44ce7ef6446bf9c381a955abd7c7d
+msgid ""
+"**Server Configuration:** - ``--transport``: Transport protocol (stdio, "
+"http, sse) - default: http - ``--host``: Host to bind to - default: "
+"0.0.0.0 - ``--port``: Port to bind to - default: 7000 - ``--name``: "
+"Server name - default: \"ToolUniverse SMCP Server\" - ``--max-workers``: "
+"Maximum worker threads - default: 5 - ``--no-search``: Disable "
+"intelligent search functionality - ``--verbose``, ``-v``: Enable verbose "
+"logging"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:188 bff5194631ba4200af64320e6844b53f
+msgid ""
+"**Information Commands:** - ``--list-tools``: List all available tools "
+"and exit - ``--list-categories``: List all available tool categories and "
+"exit"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:193 a935d77a51744758880f62399117854e
+msgid ""
+"For complete SMCP server documentation, see "
+":doc:`../tutorials/aiscientists/adding_mcp_tools_en`"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:198 2302858420794677a5bbd617acb2b8cb
+msgid "MCP Client Integration"
+msgstr ""
+
+#: ../../guide/tool_caller.rst 55831bc63aa849de9bdc191e425cf0da
+msgid "Python MCP Client Examples"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:202 b10fc9d34adf4dd1963e5285e199c050
+msgid "**STDIO Client:**"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:240 8859c12749c04a66abf133692543c0e6
+msgid "**HTTP Client:**"
+msgstr ""
+
+#: ../../guide/tool_caller.rst b548ae6cc71b4c1cb0acfb9853339851
+msgid "cURL Client Examples"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:271 b3aad5528d0c46969b874e6662cc293a
+msgid ""
+"You can also interact with ToolUniverse MCP servers directly using cURL "
+"commands:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:303 4d7b5361a8c64b3b918e6eb7e215b8c0
+msgid ""
+"For detailed MCP integration tutorials, see "
+":doc:`../tutorials/aiscientists/adding_mcp_tools_en`"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:306 658984ff83c3443b9108cf7154f5626e
+msgid "Important Notes for MCP Clients"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:308 2921d5674a6e483785620215f23f3fe6
+msgid ""
+"**Required Headers**: ToolUniverse MCP servers use the streamable-http "
+"protocol, which requires: - `Content-Type: application/json` - `Accept: "
+"application/json, text/event-stream`"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:312 f7b22ff55e154d44a6ab5987e6ce0567
+msgid ""
+"**JSON-RPC 2.0 Format**: All requests must follow the JSON-RPC 2.0 "
+"specification with: - `jsonrpc: \"2.0\"` - `id`: Unique request "
+"identifier - `method`: The MCP method to call - `params`: Method "
+"parameters"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:318 4a2a4e7edbdb4d5597364f26277bc556
+msgid ""
+"**Tool Arguments**: When calling tools, arguments must match the tool's "
+"parameter schema exactly."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:321 1c3f8781ae634acfa58556af9b889435
+msgid "Tool Execution Flow"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:323 d7841410ff634074a9e56504797af9db
+msgid "The Tool Caller follows a systematic execution flow:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:325 0f984418645d43c58a65be88404f5580
+msgid ""
+"**Request Parsing**: The ``run()`` method parses input and extracts "
+"function call data"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:326 86724c46acec4e058d2394de209b5904
+msgid ""
+"**Format Detection**: Determines if input is single function call or "
+"multiple calls"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:327 9c858a69e6184dfa82a87d37e2beb787
+msgid ""
+"**Tool Validation**: ``run_one_function()`` validates the tool exists and"
+" arguments are valid"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:328 f3627d18b7b645ef9a735447dbf7d9d8
+msgid ""
+"**Dynamic Loading**: Load the tool if not already cached using "
+"``init_tool()``"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:329 b73301c99cbe4b52a621cdc64e56aeda
+msgid ""
+"**Configuration Injection**: Inject necessary configurations (API keys, "
+"endpoints)"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:330 7aa2bb22ff6744f0ab6beb8625065d0e
+msgid "**Execution**: Call the tool's ``run()`` method"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:331 d5d42d32e93f47218a0ad9edcf75f7ac
+msgid "**Result Processing**: Format and return the result"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:332 53bb102351a94a93b174d48044cbaa68
+msgid "**Error Handling**: Generate descriptive error messages if any step fails"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:334 72b7e3859efb4164af45e1cba7b90969
+msgid ""
+"For multiple function calls, the ``run()`` method iterates through each "
+"call and uses ``run_one_function()`` internally."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:339 0b06bbfd29d54569bd8537f70a7749ac
+msgid "Error Handling and Validation"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:341 3647581b44d94b15b7a3127fbf3e08ce
+msgid "The Tool Caller provides comprehensive error handling:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:366 85bc10315e9c441a9e9e788d6f43050c
+msgid "Performance Optimization"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:369 db4abf06a9b24059b504c74e55b61d6c
+msgid "Dynamic Loading Strategy"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:371 ec6dd63a29a84759865a2eca665f6999
+msgid "The Tool Caller uses lazy loading to optimize performance:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:373 303a5d4aa41247809bf6a8bc897245a5
+msgid "Tools are loaded only when first requested"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:374 6381af551e344254914ea8d9f0e18d9a
+msgid "Loaded tools are cached for subsequent calls"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:375 cd99668b8e8b4ecf8cea28228d4283f5
+msgid "Memory usage is minimized by not loading all tools at startup"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:376 c2bce5f96ef04f3ca9efae1dfffde5ce
+msgid "Cache duration can be configured based on usage patterns"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:379 5c7e0b5711a14f7cb49c96365af6efcf
+msgid "Thread Pool Execution"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:381 421087921ecb4601a61fc4b0a93d1ca6
+msgid "For MCP servers, tools execute in thread pools to prevent blocking:"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:394 d87f839652234c81a8711d7d91576fd3
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:397 42f18dadcec84e03a1d81c5f66d84cfe
+msgid "Common Issues"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:399 ../../guide/tool_caller.rst:429
+#: 4759e9cabefc4f91af356fcfc8a31d65 ab77db7a95d14181aeb25633ed2e360b
+msgid "**Tool Not Found**: Ensure the tool name is correct and the tool is loaded"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:400 ../../guide/tool_caller.rst:430
+#: 34b70007dc834ea49202bcdb59b73759 c9d732eaa42d486f8071e08dfb868171
+msgid "**Invalid Arguments**: Check that all required parameters are provided"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:401 ../../guide/tool_caller.rst:431
+#: 82989a2a6638469cb6614ed364e29f5f a3554b21ece9435bb49519abaa380ee2
+msgid "**API Key Issues**: Verify that necessary API keys are configured"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:402 ../../guide/tool_caller.rst:432
+#: 7c2dd01c22eb4a0784a11034f5fd024c f5947e7003994647853b31f4360990c4
+msgid "**Network Errors**: Check connectivity to external services"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:403 ../../guide/tool_caller.rst:433
+#: 1a21e563ccb846d49c1b9390c77269c4 fc68c1ff90b1425fadd498199dce58a2
+msgid ""
+"**Memory Issues**: Reduce the number of loaded tools or increase "
+"available memory"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:406 22807725e65c4d9ea9dadb33caa791ee
+msgid "Debugging Tips"
+msgstr ""
+
+#: ../../guide/tool_caller.rst e3a1d5555f1b499c82b4fde36a40589d
+msgid "Debugging and Troubleshooting"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:410 054d30ec13294a4e92f3f56d160f0d93
+msgid "**Enable Debug Logging:**"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:427 fa45bead89c542d39f204f31f4ab03ac
+msgid "**Common Issues and Solutions:**"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:436 b27c9cefe18647978d09998f35814996
+msgid ""
+"For comprehensive troubleshooting Tutorial, see "
+":doc:`../help/troubleshooting`"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:439 9426330dab324b97990e571221a1eaeb
+msgid "Summary"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:441 8f7118e77ba04ba085571e1882d19ce6
+msgid ""
+"This comprehensive Tutorial covers both direct API usage and MCP server "
+"integration for the Tool Caller. The Tool Caller's dynamic loading "
+"strategy, validation system, and error handling make it a robust "
+"execution engine for ToolUniverse's extensive collection of scientific "
+"tools."
+msgstr ""
+
+#: ../../guide/tool_caller.rst:443 7b8209c5be6d45fe893b02b780837502
+msgid "**Key Takeaways:**"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:445 bff33ead22354086beb7954e1633bcdf
+msgid "Use the ``run()`` method for all tool execution needs"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:446 fd587a4af6594aaba04885a87ff5b651
+msgid "Tools are dynamically loaded and cached for optimal performance"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:447 575e206bc18c42a4ad68ef707af390e6
+msgid "MCP servers provide standardized AI agent integration"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:448 c124fb411a434844a8f18dc96ecdd69b
+msgid "Comprehensive error handling and validation ensure reliable operation"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:449 fdfd7475b4e9473e8098549b652d787d
+msgid "Debug logging and troubleshooting tools help resolve issues quickly"
+msgstr ""
+
+#: ../../guide/tool_caller.rst:451 244597e613074bbc816955ed014275f0
+msgid ""
+"For more detailed information, refer to the :doc:`../api_comprehensive` "
+"documentation and :doc:`../tutorials/aiscientists/adding_mcp_tools_en` "
+"tutorials."
+msgstr ""
+

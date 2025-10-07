@@ -1,0 +1,316 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.tool_finder_embedding.rst:2
+#: a7eb5217f1c44c3f9410722a7bbdcb78
+msgid "tooluniverse.tool\\_finder\\_embedding module"
+msgstr ""
+
+#: 64b42168bfc048ffa1f61d43eb2149ea of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:1
+msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
+msgstr ""
+
+#: 8fe2d09251954143a56bef758dffcbec of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:1
+msgid ""
+"A tool finder model that uses RAG (Retrieval-Augmented Generation) to "
+"find relevant tools based on user queries using semantic similarity "
+"search."
+msgstr ""
+
+#: e6df0c80561a44228990d078611af043 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:4
+msgid ""
+"This class leverages sentence transformers to encode tool descriptions "
+"and find the most relevant tools for a given query through embedding-"
+"based similarity matching."
+msgstr ""
+
+#: 6645bcd37be2458b9f42f685d73fc88f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:9
+msgid "Name of the sentence transformer model for embeddings"
+msgstr ""
+
+#: 32475ef354cd45a5b9f03cb8243fe351 4083051f5a8842f3b12caac031351daf
+#: 4ec01b802dc04a60b6e9e5d18b64c125 a9444eaadcde4c409cb6d13deeca41ff
+#: e34cb6bb117649c29213b950d1cdcfe3 ec26182c758c46829363f83462af1a06 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding
+msgid "type"
+msgstr ""
+
+#: 076f20e5913542a9bb8617f58ab596bc c7b70e1f45f9445d9a9c253a5fe1188f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:11
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:35
+msgid ":py:class:`str`"
+msgstr ""
+
+#: ea13ea1e6ab8464fa42ae74fe06325e2 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:15
+msgid "The loaded sentence transformer model"
+msgstr ""
+
+#: 192ef5af61e94fffa80e837de60bfa00 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:17
+msgid ":py:class:`SentenceTransformer`"
+msgstr ""
+
+#: da331a1d1ac1474090e7bbe3b3e5b64c of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:21
+msgid "Cached embeddings of tool descriptions"
+msgstr ""
+
+#: f8500a1acf60450c9940d0196986412b of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:23
+msgid ":py:class:`torch.Tensor`"
+msgstr ""
+
+#: 2bf2552e7e2c4c93a64965489306797f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:27
+msgid "List of available tool names"
+msgstr ""
+
+#: 7e9a2a7ee4524c9cb724d2165d823f08 9721fffa4d2a4edc9111f40102a4079e of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:29
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:41
+msgid ":py:class:`list`"
+msgstr ""
+
+#: d3ab253bdbb64959939fec0b234a8238 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:33
+msgid "Path to cached tool embeddings file"
+msgstr ""
+
+#: db6ce52f7e5c4e75a8c779b6ecdf2cab of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:39
+msgid "List of special tools to exclude from results"
+msgstr ""
+
+#: c75337712ff24b0b8d8620315e185ff9 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:45
+msgid "Reference to the tool universe containing all tools"
+msgstr ""
+
+#: e407c55708044cf7a703cb9ebee1a63f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.__init__:1
+msgid "Initialize the ToolFinderEmbedding with configuration and RAG model."
+msgstr ""
+
+#: ../../api/tooluniverse.tool_finder_embedding.rst
+#: 274f9010a15b4c5e9c149f5ac26ea2dd 31ff7b1ef74a404aaa72cc587681f469
+#: 8f7371f8a0c84408a90418d35e9424b0 a3f58c2d4419455d984f6d4b038e02c1
+#: e8fc8f62a6cc442ba873e125c76fff7e
+msgid "Parameters"
+msgstr ""
+
+#: afcbf82ac83a4927a794b831a23b9499 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.__init__:3
+msgid "Configuration dictionary for the tool"
+msgstr ""
+
+#: 7074d2f8a4d34a939d537915e898a243 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_rag_model:1
+msgid "Load the sentence transformer model for RAG-based tool retrieval."
+msgstr ""
+
+#: 9ca6ebcbea41495dbeabb339d6700d69 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_rag_model:3
+msgid ""
+"Configures the model with appropriate sequence length and tokenizer "
+"settings for optimal performance in tool description encoding."
+msgstr ""
+
+#: f0fd10ad2bc2460789de922c2b842567 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:1
+msgid "Load or generate embeddings for tool descriptions from the tool universe."
+msgstr ""
+
+#: 68314d7d3ce74340b6469bf5f4158a64 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:3
+msgid ""
+"This method either loads cached embeddings from disk or generates new "
+"ones by encoding all tool descriptions. Embeddings are cached to disk for"
+" faster subsequent loads. Memory is properly cleaned up after embedding "
+"generation to avoid OOM issues."
+msgstr ""
+
+#: 120968b4b83e47d9821ae5b54d9b1050 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:7
+msgid "ToolUniverse instance containing all available tools"
+msgstr ""
+
+#: 5bf66e38655e4567993160d375d487e3 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:8
+msgid "Specific tool names to include"
+msgstr ""
+
+#: 81fd468368bc4284b069aef3f39035bb of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:10
+msgid "Tool names to exclude"
+msgstr ""
+
+#: 7407f73d6d1e48cea216697d30d7faeb of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:12
+msgid "Tool categories to include"
+msgstr ""
+
+#: 3c5c05c3fb5e4b0b8cd22156f4c19d92 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:14
+msgid "Tool categories to exclude"
+msgstr ""
+
+#: de2aa228b2814e94a09f67c6ecd3363c of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:1
+msgid "Perform RAG inference to find the most relevant tools for a given query."
+msgstr ""
+
+#: b9474c82706f453e9b6cf7d74c1d339a of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:3
+msgid ""
+"Uses semantic similarity between the query embedding and pre-computed "
+"tool embeddings to identify the most relevant tools."
+msgstr ""
+
+#: 8a5c7ebb18c9474797ff9d9bcdf8cc9d of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:6
+msgid "User query or description of desired functionality"
+msgstr ""
+
+#: 54fd880d69414ec380102e9b65a6d66f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:8
+msgid "Number of top tools to return. Defaults to 5."
+msgstr ""
+
+#: ../../api/tooluniverse.tool_finder_embedding.rst
+#: 352e0cd2727e496fb0df40ecea31af65 4189c7ed8c1b4f3b9286e2161cee3076
+msgid "Returns"
+msgstr ""
+
+#: ef7c066e80a149709b8911c4c1a92d16 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:11
+msgid "List of top-k tool names ranked by relevance to the query"
+msgstr ""
+
+#: ../../api/tooluniverse.tool_finder_embedding.rst
+#: 78dd01fb5e564a67ace6eac078bfb665 8c728a89303e4c16bccc97f1a2414435
+msgid "Return type"
+msgstr ""
+
+#: ../../api/tooluniverse.tool_finder_embedding.rst
+#: a2ce7eb85294448bb544e79cb310e1e5 a47c44ecffaa4705b33fa8e764d9ddb5
+msgid "Raises"
+msgstr ""
+
+#: e2d98bbd4de6433dac3cee315f3b3625 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:14
+msgid "If tool_desc_embedding is not loaded"
+msgstr ""
+
+#: 62924162234245e686a96bf43a8e320e of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:1
+msgid "Find relevant tools based on a message or pre-selected tool names."
+msgstr ""
+
+#: 8d69caebe6e64932b6e5195b669fff95 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:3
+msgid ""
+"This method either uses RAG inference to find tools based on a message or"
+" processes a list of pre-selected tool names. It filters out special "
+"tools and returns tool prompts suitable for use in agent workflows."
+msgstr ""
+
+#: a463c2cbbd7b4699acbe767d3384d553 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:7
+msgid "Query message to find tools for. Required if picked_tool_names is None."
+msgstr ""
+
+#: f6d4d817449142648f1608bbc32c247b of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:9
+msgid "Pre-selected tool names to process. Required if message is None."
+msgstr ""
+
+#: 720ed3a4d9df488bb44d0fcb76e35a9b of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:11
+msgid "Number of tools to return after filtering. Defaults to 5."
+msgstr ""
+
+#: 54b16d91f99042b2839d5ecf6101f92d of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:13
+msgid "If True, returns both prompts and tool names. Defaults to False."
+msgstr ""
+
+#: 9c2de34c3b7648108211424c120dcc2f of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:15
+msgid ""
+"List of tool categories to filter by. Currently not implemented for "
+"embedding-based search."
+msgstr ""
+
+#: c1b07515137446eab1f63f3ed1d1a0b2 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:18
+msgid ""
+"- If return_call_result is False: Tool prompts as a formatted string - If"
+" return_call_result is True: Tuple of (tool_prompts, tool_names)"
+msgstr ""
+
+#: 4da177ab8f5f4960920a1a53ae611342 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:18
+msgid "If return_call_result is False: Tool prompts as a formatted string"
+msgstr ""
+
+#: 0d0dfaa40cd4430c9ff6aafe349fedeb of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:19
+msgid "If return_call_result is True: Tuple of (tool_prompts, tool_names)"
+msgstr ""
+
+#: ada2e617465446948c346288a0217cc5 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:22
+msgid "If both message and picked_tool_names are None"
+msgstr ""
+
+#: d0e6ae4938cc4ec3b1ae5525c69a5ffe of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:1
+msgid ""
+"Run the tool finder with given arguments following the standard tool "
+"interface."
+msgstr ""
+
+#: 9a0516a69c00421d9c3db98cba87cfe3 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:3
+msgid ""
+"This is the main entry point for using ToolFinderEmbedding as a standard "
+"tool. It extracts parameters from the arguments dictionary and delegates "
+"to find_tools()."
+msgstr ""
+
+#: ed753b6bf42e43e9ade2a984296e95d5 of
+#: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:6
+msgid ""
+"Dictionary containing: - description (str, optional): Query message to "
+"find tools for (maps to 'message') - limit (int, optional): Number of "
+"tools to return (maps to 'rag_num'). Defaults to 5. - picked_tool_names "
+"(list, optional): Pre-selected tool names to process - return_call_result"
+" (bool, optional): Whether to return both prompts and names. Defaults to "
+"False. - categories (list, optional): List of tool categories to filter "
+"by"
+msgstr ""
+

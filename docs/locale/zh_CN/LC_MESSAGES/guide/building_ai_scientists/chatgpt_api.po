@@ -1,0 +1,474 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:2
+#: 497fab9bb9124e5e8b58631c7f2e945f
+msgid "ChatGPT API"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:4
+#: a57e4dd55e714dbf8e92096cbb22154e
+msgid "**Building AI Scientists with ChatGPT API and ToolUniverse**"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:7
+#: c70575b2823b44acae4fdb1336380e63
+msgid "Overview"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:9
+#: 8f76edca5bc14ab9a3f563d1b52d4439
+msgid ""
+"ChatGPT API integration enables powerful programmatic scientific research"
+" through OpenAI's function calling capabilities. This approach provides a"
+" scalable, automatable interface for research while leveraging ChatGPT's "
+"reasoning and ToolUniverse's comprehensive scientific tools ecosystem."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:29
+#: 5481a98401354bd9a5b2a113ce492f53
+msgid "**Benefits of ChatGPT API Integration**:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:31
+#: 7cf1ad21156649e08a1ce1919a8ff7bf
+msgid ""
+"**Function Calling**: Structured tool selection and execution with JSON "
+"arguments"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:32
+#: 4c5fda6fa9e64751bdb5bb74ff787c68
+msgid ""
+"**Iterative Reasoning**: Feedback loop using tool results to refine "
+"subsequent steps"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:33
+#: 3a146aedea80480599253dcda63a3bdf
+msgid "**Scalability**: Dynamically grow the function list with discovered tools"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:34
+#: 1fe751a56866427a8017dea377c16a0c
+msgid "**Automation**: Build research workflows and batch processing systems"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:35
+#: c43b0af36e42454fa5ec93f8a03fe7bb
+msgid "**Reusability**: Clear system prompt and minimal boilerplate for new tasks"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:38
+#: b99811f01a5346c7a5e0bbdc6fd4aafa
+msgid "Prerequisites"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:40
+#: b9f186715a90415ea9f208a3f3d493cb
+msgid "Before setting up ChatGPT API integration, ensure you have:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:42
+#: 95481d13a60e4431b7a63b6423d03fb9
+msgid "**OpenAI API Key**: Valid API key with function calling access"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:43
+#: 937ce75554014410b1adcff3613a1bc7
+msgid "**ToolUniverse**: Installed"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:44
+#: 03ee57dc5f304f3598137102e40b2347
+msgid "**Python 3.10+**: For ToolUniverse and OpenAI SDK"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:45
+#: 5d2ea67358df41dda99ace96fc8b4415
+msgid ""
+"**API Keys**: For specific tools or optional hooks (if required by your "
+"research domain)"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:48
+#: 20af7e88fba64798a57b3c4287ad2711
+msgid "Installation and Setup"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:51
+#: 2f7c2f56f6e846acbb447fd027a10bfe
+msgid "Step 1: Install Required Packages"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:53
+#: 017e2b8fe4534ec7bfc340bc3beed7c9
+msgid "Install ToolUniverse and OpenAI SDK:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:59
+#: cddc9c571bcf4da096c115682a0427eb
+msgid "Verify installation:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:66
+#: c0674783aa2947a4aa7608b14e70cf87
+msgid "Step 2: Set Up API Key"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:68
+#: 5249865e9fa5412bb02b82241c552ed2
+msgid "Configure your OpenAI API key:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:74
+#: 6c94aef188184f9aad9b8a70c899146b
+msgid "Or in Python:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:82
+#: fe689e218ae245f4b808ab8310e002e0
+msgid "Step 3: Initialize ToolUniverse"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:97
+#: 2a33cd0550de4cc0be575ba2223d78b2
+msgid "Step 4: Configure System Prompt"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:99
+#: 651088d1b6fe4be8aeaf1041d82b463d
+msgid "Define the system prompt for iterative tool discovery and usage:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:123
+#: 99508a71f42444dda28fba9ecf77f6be
+msgid "Step 5: Set Up Dynamic Tool Discovery"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:125
+#: aa88b9eb0e17427fb4215315ab90e0dd
+msgid "Start with the tool finder and expand functions dynamically:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:134
+#: ea54abd55dcd4c5d962207a10e26d60f
+msgid "Step 6: Implement Chat Loop"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:136
+#: 1323edaac3744c76ae8fd368034fcaf8
+msgid "Create the iterative chat loop with function calling:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:182
+#: 8ace544ba0b5421eb5ce363ec8b4779b
+msgid "Step 7: Verify Integration"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:184
+#: 694c414c2eba4655865a656daf5fd1a4
+msgid "Test the integration with a simple research query:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:193
+#: 31e1da9d3e4049a6bce0d97536cd15c1
+msgid "Scientific Research Capabilities"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:196
+#: c87e123774e741399b569e31b5140134
+msgid "Drug Discovery and Development"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:198
+#: eb7749113fed415983cf76e88b627e9c
+msgid ""
+"ChatGPT API with ToolUniverse enables comprehensive drug discovery "
+"workflows:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:200
+#: d3776f49f0684af29d60c9fad3d818d9
+msgid ""
+"**Target Identification**: - Disease analysis and EFO ID lookup - Target "
+"discovery and validation - Literature-based target assessment"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:205
+#: fcd4c6e0b0f444468d47c5df74a8a0f5
+msgid ""
+"**Drug Analysis**: - Drug information retrieval from multiple databases -"
+" Safety profile analysis - Drug interaction checking - Clinical trial "
+"data access"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:211
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:234
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:254
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:275
+#: 2f60032eafa04125ba4eb50089207f26 ade51412b78f4ea993e59da071d68de7
+#: dd252dc94981435684b1d780f9ea88f2 dde8b9ad48b24d0593f36dfececde94a
+msgid "**Example Workflow**:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:218
+#: 41fcecbe5f994ba3b7ad81e3301631c0
+msgid "Genomics and Molecular Biology"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:220
+#: 27cd7aa194ea4d34acf2f3eb9c7d0e87
+msgid "Access comprehensive genomics tools for molecular research:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:222
+#: ec9928288edd43a9a86b50630354f0bd
+msgid ""
+"**Gene Analysis**: - Gene information from UniProt - Protein structure "
+"analysis - Expression pattern analysis - Pathway involvement"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:228
+#: 6cda050c894a4058ab0340f1076c76da
+msgid ""
+"**Molecular Interactions**: - Protein-protein interactions - Drug-target "
+"interactions - Pathway analysis - Functional annotation"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:241
+#: d6d163960b48448ca403baa66e5af4f7
+msgid "Literature Research and Analysis"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:243
+#: 534b83a085b945bf964e5b26e7dabdf9
+msgid "Comprehensive literature search and analysis capabilities:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:245
+#: 03c2fa726baf41edbefa36e463bd206f
+msgid ""
+"**Literature Search**: - PubMed, Europe PMC, and Semantic Scholar - "
+"Citation analysis and trend detection"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:249
+#: 4acfcfd54ab9430ab783a80bab2fb495
+msgid ""
+"**Content Analysis**: - Abstract summarization - Key finding extraction -"
+" Gap identification"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:261
+#: 89c4fc32872b4a1386c4038df5f25505
+msgid "Clinical Research and Trials"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:263
+#: d5c8839613ee4570873e831fcc6efb81
+msgid "Access clinical trial data and regulatory information:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:265
+#: 6987ee183d654c5b8749f42d70f675a2
+msgid ""
+"**Clinical Trials**: - ClinicalTrials.gov searches - Trial status and "
+"results analysis - Patient population assessment"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:270
+#: 272739f096374aeeb40317a97cee387f
+msgid ""
+"**Regulatory Information**: - FDA drug approvals - Safety warnings and "
+"adverse events - Labeling information"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:282
+#: 70bd225c477a4a5ab4964f6b4a8ab76e
+msgid "Multi-Step Research Workflows"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:284
+#: 972cf468af664ebb8c8fd1af09c81265
+msgid "ChatGPT API excels at complex, multi-step research workflows:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:286
+#: 7469d0238b8643a29571cb1911d9caed
+msgid ""
+"**Hypothesis-Driven Research**: 1. Formulate research hypothesis 2. "
+"Design experimental approach 3. Gather supporting evidence 4. Validate "
+"findings 5. Generate conclusions"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:293
+#: 6b208200d4da43ada5b4fd42a7cc321b
+msgid ""
+"**Comparative Analysis**: 1. Identify comparison targets 2. Gather data "
+"for each target 3. Perform comparative analysis 4. Identify differences "
+"and similarities 5. Draw conclusions"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:301
+#: ac946fa1d7bf4e3ebcfda0143c80ea7d
+msgid "Settings and Configuration"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:304
+#: 2fe889b6465a412db2b41442c3229ff8
+msgid "Tool Discovery Options"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:306
+#: d00638c990894b10b6b2c5bf0c02e05d
+msgid "ToolUniverse offers multiple discovery methods:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:332
+#: d4f4c09a59b74f79b3acfd53a6647fcf
+msgid "Advanced Configuration"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:334
+#: 6a4ee1171722437a92b7e55206e8e269
+msgid "**Batch Processing**: Handle multiple research tasks efficiently:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:345
+#: 626485effb4f4dd3bb1fcd7e39faf46e
+msgid "**Periodic Tool Discovery**: Re-run the finder on intermediate results:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:359
+#: 49bef60a73cc4564891b8bbe218cf84a
+msgid "**Custom Tool Sets**: Load specific tools for focused research:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:371
+#: b7ec1c703f7c449aad71e105d72cf908
+msgid "**Full Example (All Steps Combined)**:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:450
+#: 5fd4cdbb233c41239609622d26ed761c
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:453
+#: 015ab573cd444d499b19e56d8385ca7d
+msgid "Common Issues and Solutions"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:455
+#: 516af08187c84d848a2a3294e6e8266f
+msgid ""
+"**API Key Errors**: - Ensure `OPENAI_API_KEY` is set correctly - Verify "
+"your API key has function calling access - Check your OpenAI account "
+"billing status"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:460
+#: 2e107cde00214fc4bac0bcc4e003c964
+msgid ""
+"**Tool Not Found**: - Use the tool finder to discover available tools - "
+"Verify tool names match exactly - Check if tools require specific API "
+"keys"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:465
+#: f3f466aeef254c2c81ddede49e63b8e4
+msgid ""
+"**Function Call Errors**: - Inspect tool parameter schemas using "
+"`tu.tool_specification(\"tool_name\")` - Ensure JSON arguments are "
+"properly formatted - Handle missing required parameters gracefully"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:470
+#: 10398b24583b4c43926c0b24cf78f89a
+msgid ""
+"**Performance Issues**: - Limit the number of tools added to the function"
+" list - Use `Tool_Finder_Keyword` instead of `Tool_Finder_LLM` for faster"
+" discovery - Implement timeout handling for long-running tools"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:475
+#: f20fbc48ab254ccb96e6e5048623a196
+msgid "**Debug Mode**:"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:484
+#: 29518ba3515f4065a339b93339459678
+msgid "Tips"
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:486
+#: b0c571eef9d04a1cbe09890782c4eb3b
+msgid ""
+"**Tool Selection**: Start with the tool finder, then add discovered tools"
+" incrementally."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:488
+#: f65ae29953e34b46b499d85d473540bc
+msgid ""
+"**Error Handling**: Always wrap tool execution in try-catch blocks for "
+"production use."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:490
+#: bd53d0aa2a484d2fb36ceeda04d2a296
+msgid ""
+"**Prompt Engineering**: Customize the system prompt for domain-specific "
+"research tasks."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:492
+#: 954cf41627254488b287da877b9e7ea2
+msgid ""
+"**Batch Processing**: Use the pattern for processing multiple queries "
+"efficiently."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:494
+#: c44adf8eb6624d2a8f332045c94c0a06
+msgid ""
+"**Rate Limiting**: Implement delays between API calls if you hit OpenAI "
+"rate limits."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:497
+#: 33e54f6e9e5943e4895ecd8fe1e2fffe
+msgid ""
+"**Start Simple**: Begin with basic research queries to understand the "
+"integration, then progress to complex multi-step workflows as you become "
+"familiar with the capabilities."
+msgstr ""
+
+#: ../../guide/building_ai_scientists/chatgpt_api.rst:500
+#: 64acf2b22ba5403eb5ba4eadba869027
+msgid ""
+"**Function Calling**: ChatGPT API provides a powerful programmatic "
+"interface for scientific research, enabling both interactive exploration "
+"and automated batch processing of research tasks."
+msgstr ""
+

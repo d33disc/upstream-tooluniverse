@@ -17,7 +17,7 @@ Core Concepts
 * **🔗 Tool Composition** → :doc:`tool_composition` - Chain ToolUniverse's 600+ tools into powerful scientific workflows using Tool Composer
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol integration and server setup
-* **🔊 Streaming Tools** → :doc:`streaming_tools_en` - Real-time streaming output and custom tool integration
+* **🔊 Streaming Tools** → :doc:`streaming_tools` - Real-time streaming output and custom tool integration
 * **📝 Logging** → :doc:`logging` - Comprehensive logging configuration and debugging
 * **🔗 Interaction Protocol** → :doc:`interaction_protocol` - Understanding tool interaction patterns
 

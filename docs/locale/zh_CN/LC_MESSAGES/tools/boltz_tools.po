@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/boltz_tools.rst:2 9fd476e9006b4bbfacf0cbbc65e741b7
+msgid "Boltz Tools"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:4 03c644cba3f941d0925c79298c67a6c4
+msgid ""
+"**Configuration File**: ``remote_tools/boltz_tools.json`` **Tool Type**: "
+"Remote **Tools Count**: 1"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:8 6085d8809a1046d697ee4a836baeabda
+msgid ""
+"This page contains all tools defined in the ``boltz_tools.json`` "
+"configuration file."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:11 cf9d9fcecf254164bb42cd6f860f1ecc
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:14 23eb2957c9864c39bdd13549cee00218
+msgid "**boltz2_docking** (Type: RemoteTool)"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:16 a3197ff7b0e54745b93d76195daa725f
+msgid ""
+"Perform protein-ligand docking via Boltz-2: input a protein sequence plus"
+" one or more ligands (SM..."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst eacf473a8f97427aa1cd1fe764a2f99a
+msgid "boltz2_docking tool specification"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:20 321c31cfbd934dd08e01a8855d08fb97
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:22 8b8b97e23585426782b4eb70994ac49d
+msgid "**Name**: ``boltz2_docking``"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:23 f72be481a43940a9af4ed3b143318410
+msgid "**Type**: ``RemoteTool``"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:24 dd969c98ded8496b9c248e118cc8bd9e
+msgid ""
+"**Description**: Perform protein-ligand docking via Boltz-2: input a "
+"protein sequence plus one or more ligands (SMILES), get back predicted "
+"structures and confidence scores."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:26 cb0d1887a7f84f1a999c54e292d29a41
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:28 bd7e888dc55c47d9b36db40f5370be5f
+msgid ""
+"``sequence`` (string) (required) One-letter amino acid sequence of the "
+"target protein (FASTA format, without header)."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:31 68dae21e45714ca78f6d9e24a8f7f00c
+msgid ""
+"``ligands`` (array) (required) List of ligand definitions to dock against"
+" the protein."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:34 ca76e0fcdd744da4b5c34681a84e4f05
+msgid ""
+"``recycling_steps`` (integer) (optional) Number of recycling steps "
+"(overfold iterations)."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:37 81972eaeb50b44359ba254b0c14318be
+msgid ""
+"``sampling_steps`` (integer) (optional) Number of sampling steps for "
+"diffusion process."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:40 881c1ee5f8ff49a3a3aa1b59475f5033
+msgid ""
+"``diffusion_samples`` (integer) (optional) How many diffusion-sampled "
+"structures to generate."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:43 071034e1d2b842f08d00b8e28d05b4d3
+msgid "``step_scale`` (number) (optional) Scaling factor for diffusion step size."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:46 85ddc609d6e143b1af64a5e592d04919
+msgid ""
+"``use_potentials`` (boolean) (optional) If true, omit external force-"
+"field potentials from the diffusion process."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:49 325e831e0ec74b5bae0193c0f0c26366
+msgid ""
+"``return_structure`` (boolean) (optional) If false, the predicted "
+"structure will not be read or returned. Defaults to false."
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:52 81b0fb33838f428fa71d8205a57529bf
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:67 20c39933470b4859bd65de3f986ec3eb
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:69 29f8462d9eb04f84ac5826ef8252e547
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/boltz_tools.rst:70 3918cd330c1440d3bf3088ccfab93484
+msgid ":doc:`remote_tools` - Remote Tools Setup"
+msgstr ""
+

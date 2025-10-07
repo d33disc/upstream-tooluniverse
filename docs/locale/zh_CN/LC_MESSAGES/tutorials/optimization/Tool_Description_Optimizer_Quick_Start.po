@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:1
+#: 3459327fb7844d9ca6e2589ffa57d987
+msgid "Tool Description Optimizer - Quick Start Tutorial"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:3
+#: a3110f394aff45b69118863b7538d0e3
+msgid "🚀 Quick Start"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:5
+#: 5b1d674558214a4e9320eb22f4424f77
+msgid "Want to improve your tool descriptions in minutes? Here's how:"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:7
+#: 6d0fdd73ad194c5fb68de256f399fd9b
+msgid "1. Basic Usage"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:28
+#: cae35a2c3dd14fa9b342bf50676e2b7f
+msgid "2. Real Example"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:44
+#: 47012b0f0094497b9e34cf8c9e43a830
+msgid "3. What You Get"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:46
+#: c6b0984479244c619ee768ca3bd87070
+msgid "✅ **Improved Descriptions**: More accurate and clear tool documentation"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:47
+#: cec43c38820d466bb188e1520f84cecb
+msgid ""
+"✅ **Quality Scores**: Objective metrics for description quality (1-10 "
+"scale)"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:48
+#: 1156fe2d62c249e8ae95c233966594f2
+msgid "✅ **Detailed Report**: Complete optimization history saved to file"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:49
+#: b73a0fe073a041299aa7fcaae6892fee
+msgid "✅ **Test Results**: Real tool execution data used for optimization"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:51
+#: 7a3f35553ad84f51914781cfa69bab99
+msgid "4. Key Parameters"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 2b0fddb972144c0f9aced87ce88a2da4
+msgid "Parameter"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: f0d8e11ea2284b6799ba5615f4af316f
+msgid "Default"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 990b7d238e1046b59e9221bb2636d698
+msgid "Description"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: d6a7f664a18b49a5a0b19dc5cd4ecb70
+msgid "`max_iterations`"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 44f82c157c824b31b60b44ddb724c34e
+msgid "3"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: ea84e5e16f0942ef862ad512e36626c7
+msgid "Number of optimization rounds"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 89a966debf36428dbd8b14e0e8431b1d
+msgid "`satisfaction_threshold`"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 5543d8c8f2754929a1b09d6d835ce205
+msgid "8.0"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 8bd4f894060d4752a4eb073de6537600
+msgid "Quality score target (1-10)"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: efe6354adc864224979de63d7453f212
+msgid "`output_file`"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 8b43a30d135b4d03aa315005ce03fd8d
+msgid "auto"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md
+#: 71d6609f748e49978f24c1518f6fed46
+msgid "Where to save the report"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:59
+#: 8a936869594a40a8ad24d9c0e50f99cd
+msgid "5. Example Results"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:61
+#: 1b72199e640f42568e65b37d45217095
+msgid "**Before Optimization:**"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:66
+#: fca45c3e6cd14195a48220901ee9c02c
+msgid "**After Optimization:**"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:72
+#: cd6e221554b54a34addc92de1f00ce9b
+msgid "📊 What Gets Optimized"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:74
+#: 6455c6f2362741dd96dde988ae8bb88f
+msgid "The optimizer improves:"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:75
+#: ae5cf862ad3c496595b0773a66ef759e
+msgid "**Tool Description**: Overall purpose and functionality"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:76
+#: 92f4eb93e6394059b49b35f48188df0f
+msgid "**Parameter Descriptions**: Input requirements and constraints"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:77
+#: c170d4aa79bd48e0baa985b69187d382
+msgid "**Clarity**: Easy to understand language"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:78
+#: d002ebaac7434c0daa2dc09bb528b7f0
+msgid "**Accuracy**: Matches actual tool behavior"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:79
+#: c33f488f0e924221af6502c5bc0e9844
+msgid "**Conciseness**: Removes redundancy and filler"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:81
+#: 0f8a96fd683d47f4b030325201dd7e07
+msgid "🔧 Common Use Cases"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:105
+#: 0024995af0fc43908ca39e878a5009a7
+msgid "📋 Complete Example Script"
+msgstr ""
+
+#: ../../tutorials/optimization/Tool_Description_Optimizer_Quick_Start.md:132
+#: 2df6396c4c1846b9a673db0d671ceb9d
+msgid ""
+"That's it! For detailed documentation, see the [full "
+"tutorial](Tool_Description_Optimizer_Tutorial.md)."
+msgstr ""
+

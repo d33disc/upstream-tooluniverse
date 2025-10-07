@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/interaction_protocol.rst:2 4baeca73fd924c1f95a6b34dbc8c6f5d
+msgid "AI-Tool Interaction Protocol"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:4 09d42ace94b34dd781cc56a456243b37
+msgid ""
+"**The foundation that makes ToolUniverse's 600+ tools universally "
+"accessible to any AI system**"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:7 d912be93cc274ef5afdf7601a52417c4
+msgid "Overview"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:9 ce854ac0dd714706871855e2b6a25b10
+msgid ""
+"Just as HTTP standardizes client-server communication across the web, "
+"ToolUniverse implements an **AI-Tool Interaction Protocol** that "
+"standardizes how AI models interact with scientific tools. This protocol "
+"abstracts away the complexity of 600+ heterogeneous tools (machine "
+"learning models, databases, APIs, robotics systems) behind a unified "
+"interface."
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:32 5dc59c4dec004aa38bf6c11962f318dd
+msgid "Protocol Components"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:34 d6fa67e91be740b49767e22ad947253a
+msgid "The AI-Tool Interaction Protocol comprises three essential elements:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:36 e30a022e46ee4d22b941fce2fa8dd144
+msgid "**Specification Schema** - How tools describe themselves"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:37 deb5a553dd9349f5aba5fdf5fdd98d0f
+msgid "**Interaction Schema** - How to request tool execution"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:38 6733afb5887f4e2e93f486c83940768e
+msgid "**Communication Methods** - Local Python and remote MCP"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:41 34a997b279a849e4871986ab228f2993
+msgid "1. Tool Specification Schema"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:43 cd35e5a47b2d4a8e93c93ba6afcd5db8
+msgid ""
+"Every tool in ToolUniverse exposes itself through a standardized "
+"specification:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:66 a1ab7fc11b714e9d872897bf1ec4d70e
+msgid "**Schema Components:**"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:68 8f5ffcec238247ab8544f0443728b82f
+msgid ""
+"**Name**: Unique tool identifier following `Database_action_description` "
+"format"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:69 50ff34968cae49cfaca27989d6941019
+msgid "**Description**: Clear explanation of tool's purpose and functionality"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:70 4ffe9e983e054709b83eb5950fcfdda6
+msgid ""
+"**Parameters**: Detailed argument specifications with types and "
+"requirements"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:71 681fca5e595c4a43ac6229db7bd85662
+msgid "**Return Schema**: Structure of expected output data"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:74 fdf5511f2afe47558f2d3f5d8d99560e
+msgid "2. Interaction Schema"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:76 a97c2054f9134b87b13074a2d0605246
+msgid "All tool interactions follow a uniform request format:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:88 d1c9f39f1dfc49d980868aa794c2f3f0
+msgid "**Example Requests:**"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:118 c1dd822286234e7e9f4d31e47ea585fe
+msgid "3. Communication Methods"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:120 6f42da0f965a4615bdf3fa7e14c2c995
+msgid "**Local Communication** (Python):"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:135 070cca74288c43bba90bd5fd96047106
+msgid "**Remote Communication** (MCP):"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:146 5d425075f19e43929b012a662398cf2d
+msgid "Core Operations"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:148 1505be838b324406a2041f4d638a1b5f
+msgid ""
+"The protocol defines two fundamental operations that AI systems use to "
+"interact with ToolUniverse:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:151 b495c90f652942b8b272c7c31c9e4bb3
+msgid "Find Tool Operation"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:153 1157d8e0216b4949b9dd3f536a14cb3e
+msgid ""
+"**Purpose**: Discover relevant tools based on natural language "
+"descriptions"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:155 25d9b653a6714f05897de57c474710fb
+msgid "**Input**: Natural language query describing desired functionality"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:157 d1fdc26b1bd34a01aabacf9384facb7b
+msgid "**Output**: List of relevant tool specifications"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:171 cad944317bc4415ab75335cb13531d1d
+msgid "**Implementation Methods:**"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:173 4532ae801eb344cda7dd661bb89f46cb
+msgid "**Keyword Search**: Fast TF-IDF matching with morphological processing"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:174 cce2b37206654d3e9c4fefdb334cf5c7
+msgid "**LLM-based Search**: Contextual reasoning for complex queries"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:175 ed1d3e27dc6342d49d42c505fea95a7d
+msgid "**Embedding Search**: Semantic similarity using fine-tuned models"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:178 9da4b66ff3c44b51a3e63e547867c86b
+msgid "Call Tool Operation"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:180 82d94bb361da49d5ab1cc0ae92599ffe
+msgid "**Purpose**: Execute a selected tool with specified arguments"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:182 4d8eb561f7684ff7993544b08e801cc0
+msgid "**Input**: Tool name and structured arguments"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:184 302e01a55c7049ceab74ae619bc65e91
+msgid "**Output**: Structured results from tool execution"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:211 c531dd7b42584c8ab38e107f59a8318a
+msgid "Tool Types & Backend Abstraction"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:213 cdb656d687f64c4aa6e8a66ccd7583b1
+msgid "The protocol successfully abstracts diverse tool backends:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:216 a0aebd3b1fa44ecabb5f81eabcd73241
+msgid "Machine Learning Models"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:233 6ec4ed0623ad4800aa6b380da8f2ab6f
+msgid "Database APIs"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:250 c62ecde8a9814e0cb838cca56d395526
+msgid "Scientific Software Packages"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:267 076308bbdddf45fe93e821d285ff182d
+msgid "AI Agents & Tools"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:284 99f4ebb9a5bc4ed88c342a734c128447
+msgid "Error Handling & Validation"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:286 fdb255e2b51640cbbc89d7f4e7b64b7c
+msgid "The protocol includes robust error handling:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:289 049532d8fa5749b7a6b48d331cc2f690
+msgid "Input Validation"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:314 05fff9458cf842bb9fcb08148929a245
+msgid "Protocol Extensions"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:317 54073a032a7b4115a69513a8d7e219ee
+msgid "Tool Composition"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:319 babb4eb8fd4f48d59442d2597fad03dc
+msgid "The protocol supports chaining tools for complex workflows:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:338 c5e0561f358748a180d520f278d9e9fe
+msgid "Human-in-the-Loop"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:340 a4d3cc905e0a466792023e96bc2f0224
+msgid "Expert feedback integration through the protocol:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:355 8d4766a30880489cbc6234ee512e6860
+msgid "Remote Tool Integration"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:357 e33314790cd243ada567fe6870207ca2
+msgid "MCP-based remote tool registration:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:371 6092e27be7e94534be9dd73712beb642
+msgid "Protocol Benefits"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:373 f10a2294d93448eebb534769f4da7d37
+msgid ""
+"**For AI Developers:** - Single interface for 600+ diverse tools - No "
+"tool-specific integration work required - Automatic error handling and "
+"validation - Consistent response formats"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:379 e91943e59dd34147920949eddbc760e9
+msgid ""
+"**For Scientists:** - Focus on research logic, not technical "
+"implementation - Reproducible workflows across different tools - Easy "
+"tool discovery and experimentation - Human expertise integration when "
+"needed"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:385 7bb1254eb44b4ddda3d59ea6c2ae244f
+msgid ""
+"**For Tool Creators:** - Standardized way to expose functionality - "
+"Automatic AI compatibility - Built-in documentation and validation - "
+"Community discoverability"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:392 6acb298a9b264614b018bc161eecad2b
+msgid "Implementation Details"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:394 ce8cbd54b6634e8299bffea64e304620
+msgid "The protocol is implemented through ToolUniverse's core components:"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:396 126658c7eec44450937ff8398ea08c7c
+msgid "**Tool Registry**: Maps tool names to implementation classes"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:397 cdead133777b4e35bb34d483a8deec91
+msgid "**Tool Caller**: Handles protocol parsing and execution"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:398 caf73972a58c4078bb3f02a923be3c49
+msgid "**Tool Finder**: Implements the three discovery strategies"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:399 b539126545a2424e84c5fc3555a17718
+msgid "**Tool Manager**: Manages local and remote tool registration"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:400 e1f92fb4eeb4487f9d09e0bb629c0209
+msgid "**Validation Engine**: Ensures request/response compliance"
+msgstr ""
+
+#: ../../guide/interaction_protocol.rst:403 586c74b16a1c44a5bf06aaf2805410b8
+msgid ""
+"**The protocol makes ToolUniverse unique**: While other frameworks "
+"provide tool orchestration, ToolUniverse creates a universal language for"
+" AI-tool interaction, similar to how HTTP enabled the modern web."
+msgstr ""
+

@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 11:08-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.compose_scripts.tool_graph_generation.rst:2
+#: 1ffba946b44f4eebb0f43e7d813181e5
+msgid "tooluniverse.compose\\_scripts.tool\\_graph\\_generation module"
+msgstr ""
+
+#: d7bdd7e9f02b4455a87e1281ff8c066a of
+#: tooluniverse.compose_scripts.tool_graph_generation:1
+msgid "Tool Graph Generation Compose Script"
+msgstr ""
+
+#: 0989188aaa574bf09ef0baeb93b95c1b of
+#: tooluniverse.compose_scripts.tool_graph_generation:3
+msgid ""
+"Efficiently evaluates directional data-flow relationships between all "
+"unique pairs of provided tool configs using one agentic tool:"
+msgstr ""
+
+#: 2106e4c622ae4999b5122324cc808df0 of
+#: tooluniverse.compose_scripts.tool_graph_generation:5
+msgid "ToolRelationshipDetector"
+msgstr ""
+
+#: 3a73e82da8344b469185fa7cd256ef83 of
+#: tooluniverse.compose_scripts.tool_graph_generation:7
+msgid ""
+"Outputs a graph structure with edges representing valid directional "
+"relationships. Each edge stores: source, target, rationale."
+msgstr ""
+
+#: 7757f85f9bc14b9a93bfbdf33b63b9f8 of
+#: tooluniverse.compose_scripts.tool_graph_generation:10
+msgid "Performance considerations:"
+msgstr ""
+
+#: bdcaa85fac5e44f4ade8eecc53fec3cc of
+#: tooluniverse.compose_scripts.tool_graph_generation:11
+msgid "Iterates i<j once (O(N^2/2) pairs)"
+msgstr ""
+
+#: ce4fb264f1014c79a041787f5688dc46 of
+#: tooluniverse.compose_scripts.tool_graph_generation:12
+msgid "Lightweight JSON serialization of minimal fields"
+msgstr ""
+
+#: 31d6340ae31649a8abb8726ca707aee9 of
+#: tooluniverse.compose_scripts.tool_graph_generation:13
+msgid ""
+"Optional batching hook (currently sequential because call_tool likely "
+"remote)"
+msgstr ""
+
+#: 5fa1bcbe9b0140fcbc87268d18882142 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param tool_configs"
+msgstr ""
+
+#: 1b314c4607d243bc8c9776036ff666a4 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type tool_configs"
+msgstr ""
+
+#: 4c53016d83574d37aa3d7a7208f03123 of
+#: tooluniverse.compose_scripts.tool_graph_generation:16
+msgid ":py:class:`list[dict]`"
+msgstr ""
+
+#: d2f64af77b964a3586407e1c5cb046d6 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param max_tools"
+msgstr ""
+
+#: 952e28914b9b480ca30faea6cb87e661 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type max_tools"
+msgstr ""
+
+#: 1cb6a3e8928349659398ae4f7506cc37 of
+#: tooluniverse.compose_scripts.tool_graph_generation:18
+msgid ":py:class:`int`"
+msgstr ""
+
+#: d3d531614a064c82b3bbffdf8b44e899 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param output_path"
+msgstr ""
+
+#: 1f33eaea073d4433985a1c175d025947 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type output_path"
+msgstr ""
+
+#: f263dc47b23249c6ab45c56a87593b58 of
+#: tooluniverse.compose_scripts.tool_graph_generation:20
+msgid ""
+":py:class:`str) path to write resulting graph JSON (default "
+"'./tool_relationship_graph.json'`"
+msgstr ""
+
+#: 300c37d8d449405687742d98233f0063 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param save_intermediate_every"
+msgstr ""
+
+#: d4b1930524e54f478a7ffed1334f7f3a of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type save_intermediate_every"
+msgstr ""
+
+#: 9788d5d1d3224ff987f225496276878c of
+#: tooluniverse.compose_scripts.tool_graph_generation:22
+msgid ":py:class:`int) checkpoint frequency (default 5000 pairs processed`"
+msgstr ""
+
+#: 12f24149e5f140d988826f89a7503689 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "returns"
+msgstr ""
+
+#: 95c76189c3684d5c99348e6d2bfaa63b of
+#: tooluniverse.compose_scripts.tool_graph_generation:24
+msgid "nodes, edges, stats"
+msgstr ""
+
+#: 618919a9770d44d998831fa94a53c808 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "rtype"
+msgstr ""
+
+#: 0314e35d738f4c1abf7d5a59f7d5d58d of
+#: tooluniverse.compose_scripts.tool_graph_generation:25
+msgid "dict with keys"
+msgstr ""
+
+#~ msgid ""
+#~ ":py:class:`str) path` to write resulting "
+#~ "graph JSON (default "
+#~ "``'./tool_relationship_graph.json'``"
+#~ msgstr ""
+

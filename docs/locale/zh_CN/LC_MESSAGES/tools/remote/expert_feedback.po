@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/remote/expert_feedback.md:1 d6ee85fe7765443bafc7c398558ed3b4
+msgid "Human Expert Feedback System"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:2 1dcd2fd632334d979bd1f6e6e37b0010
+msgid "![Web UI](ui.jpg)"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:2 70220935c2fc442fb8c7d8368b3b07c8
+msgid "Web UI"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:3 9a295ee0bef54d41be253f16f496196f
+msgid "📖 Overview"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:5 ba91e0444e4a459b9bdbb7931a3e9921
+msgid ""
+"The Human Expert Feedback System is a sophisticated **human-in-the-loop**"
+" consultation platform designed for ToolUniverse. It enables AI systems "
+"to seamlessly consult with human experts when encountering complex "
+"decisions, particularly in medical and scientific domains where expert "
+"knowledge is crucial."
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:7 606e7559c3e24cb2b804ba233fd0c329
+msgid "🎯 Key Capabilities"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:9 490a8189c12f401e96e43c160bf5803f
+msgid ""
+"**🔄 Real-time Consultation**: Submit questions to human experts and "
+"receive responses in real-time"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:10 5182dcdb7cc64da9b19ec81c7f8ad9c4
+msgid ""
+"**🌐 Modern Web Interface**: Beautiful, responsive dashboard with auto-"
+"refresh for expert interactions"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:11 42d2f9f5cccc469394b7d07c0d06458f
+msgid ""
+"**⚡ MCP Integration**: Built on Model Context Protocol for seamless "
+"ToolUniverse integration"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:12 9b2565cd2d944fac89ab4e27a7d044d2
+msgid ""
+"**🎨 Priority Management**: Support for normal, high, and urgent priority "
+"requests with visual indicators"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:13 b1621d4d42fb407cab8d9a4c548b89ff
+msgid ""
+"**📱 Multi-Interface**: Web-based and terminal-based interfaces for "
+"different user preferences"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:14 f83d7b7cd0f14f7e9beefcaaa215058b
+msgid ""
+"**🔌 Flexible Deployment**: Auto-port discovery and custom configuration "
+"options"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:16 84f9100eb9784e22927c7d40c4ac5bdf
+msgid "🩺 Use Cases"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:18 cf4601b2e4d64648a05333549b48796d
+msgid "**Medical AI**: Get expert medical opinions for complex patient cases"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:19 f1c3579b03ea4b469a5e11df2a9e64d0
+msgid ""
+"**Scientific Research**: Consult domain experts for research methodology "
+"and analysis"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:20 8f1b5dd575b94760865b24168db763f1
+msgid ""
+"**Drug Discovery**: Expert review of molecular compounds and drug "
+"interactions"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:21 f091b56d417a4c4eb81e9dfadd829e5c
+msgid ""
+"**Clinical Decision Support**: Real-time consultation for treatment "
+"recommendations"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:22 d5b697f7a9e74d14b5548a8c645f5362
+msgid ""
+"**Research Validation**: Expert validation of AI-generated hypotheses and"
+" findings"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 4777a76c52b34cf184e334fd1e5cb740
+msgid "image"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:26 35e73545a73744f3a5d5607857226ce4
+msgid "🚀 Quick Start"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:28 70044c77d8c448cda2d154f651b91009
+msgid "Install Package"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:33 f747e3bc0ac141c5bf4b125e7e4cd70c
+msgid "Start Expert Feedback Server"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:41 2d1ee6b4d663475a9266e949ca42a32f
+msgid "Start Web Interface (On Expert Side)"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:52 e6372c188ffc4d3bafa4db59721df0ff
+msgid "**Interactive Setup Process:**"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:53 6d6ab97f04124996a9308a483f5bcb0b
+msgid "Run `tooluniverse-expert-feedback-web`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:54 212748c0758e4d8b8c65c75994178660
+msgid "Enter Router-Expert server IP (or press Enter for localhost)"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:55 350bde5cb74f4215be02edfe14f726b9
+msgid "Enter Router-Expert server port (or press Enter for 9877)"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:56 2196d70e21714bb68ae71d66b10376c9
+msgid "Web interface opens automatically at http://localhost:8090"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:58 bcca69323b2b42df99fe01f148db3a7c
+msgid "🏗️ Architecture"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:60 193feb8b787a42c193750c60c6f079e9
+msgid "**Dual Server Design:**"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:61 ba68eb1dfd4e45b2b3e91adcc201f25d
+msgid ""
+"**Router-ToolUniverse Server (Port 9876)**: Handles ToolUniverse tool "
+"calls"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:62 ea7313d0c5ea4cff9f6ca61fc5531e2c
+msgid ""
+"**Router-Expert Server (Port 9877)**: Handles expert web interface "
+"communication"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:63 5e0ceffa44db4cbe8bc5424bed15ec5e
+msgid "**Shared Data**: Both servers access the same expert system instance"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:66 8b6b158900ee4426927811970a6159b9
+msgid "💻 Usage in ToolUniverse"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:68 d2210397b42548ba8ff6823dac4275d7
+msgid "**Set Environment Variable:**"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:70 96fbc683139a49528d7cceff80a41a4a
+msgid "In the environment where agent runs tools:"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:92 63e24f19de2c4e14872883caa2ee0387
+msgid "🔧 Available Tools"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 083e0fc8ea9549ff8eac9fb6582dedc2
+msgid "Tool"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 e0dc71b220ba4026bb676ead5c3b5cea
+msgid "Purpose"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 00f6c8f4442549398d59cad809d9a0a0
+msgid "`consult_human_expert`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 0b92607d80424c05863a67d95f7c1602
+msgid "Submit questions to experts"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 b4fbb79ef46148ebb752c2f824f1c635
+msgid "`get_expert_response`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 c76afc9439d94a9180440e0d8835f3a0
+msgid "Check for expert responses"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 cca85d6b62af4329b4438902f0e92149
+msgid "`list_pending_expert_requests`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 ce5918dcae6f4a9aa3cfa67587cf811d
+msgid "View pending requests"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 7c6a02d407724d76b6f787309b05e801
+msgid "`submit_expert_response`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 6b2299afdfc34abca51f7d24a6b82db0
+msgid "Submit expert responses"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 da1ea1b9ecd44d35b5e5855355ce204b
+msgid "`get_expert_status`"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:24 e89885cbb6704f489a540424d65a0ec8
+msgid "Get system status"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:102 30e53a5140e6459eae6786096391e7e8
+msgid "⚙️ Command Options"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:115 2c108aafd60e40d4b5d79297b6bd23a8
+msgid "📁 Files"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:117 4074cfa5054c40a3a3b6fc483caa1c2d
+msgid "**`tooluniverse-expert-feedback`** -  Router server"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:118 4f8cfea8b34d40b5ac04f259c18bb567
+msgid ""
+"**`tooluniverse-expert-feedback-web`** - Launcher Router-Expert with "
+"auto-detection"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:119 200d62b6d4694f6c81c468f3c4fd1fa9
+msgid "**`simple_test.py`** - Basic test script"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:121 1f32328fb52f4d8494836cb083faba83
+msgid "🎨 Web Interface Features"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:123 aac97a539fc040a7974e866787f43c69
+msgid "**Modern UI**: Gradient backgrounds, card layouts, responsive design"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:124 d524ee81e86f49b1936996b0ad0f8c01
+msgid "**Auto-refresh**: 15-second updates with countdown timer"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:125 86f79c37404c4bc38ec885ca817fd3b4
+msgid ""
+"**Priority colors**: Normal (blue), High (orange), Urgent (red + "
+"animation)"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:126 4653caaa013a44d1945569192772ca75
+msgid "**Real-time notifications**: Toast messages for user actions"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:127 5e69e3f0d29641249e52287327a6080b
+msgid "**Mobile-friendly**: Works on all screen sizes"
+msgstr ""
+
+#: ../../tools/remote/expert_feedback.md:131 49569ab0f2674ab0b179b1b475208525
+msgid "*🧑‍⚕️ Built for professionals and AI systems*"
+msgstr ""
+

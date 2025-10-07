@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.graphql_tool.rst:2 dfa8805910864115a87e91b3f6d0babe
+msgid "tooluniverse.graphql\\_tool module"
+msgstr ""
+
+#: 4c5b2279583e42bb8b32a633591c4ed5 of
+#: tooluniverse.graphql_tool.remove_none_and_empty_values:1
+msgid "Remove all key-value pairs where the value is None or an empty list"
+msgstr ""
+
+#: 84b12bd46ca440aba5ab67881261b09f of tooluniverse.graphql_tool.GraphQLTool:1
+msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
+msgstr ""
+
+#: 3980e9852fce413c8b542a53777c5125 84707eb53a75476b99a1e11d02e67e90
+#: da8ffd6aa1524bd694143a2c9d472075 of
+#: tooluniverse.graphql_tool.GraphQLTool.run:1
+#: tooluniverse.graphql_tool.OpentargetTool.run:1
+#: tooluniverse.graphql_tool.OpentargetToolDrugNameMatch.run:1
+msgid "Execute the tool."
+msgstr ""
+
+#: 57e7e64136ba4b78b697e22a1531d62a 7f791e9be7a24fe2b78021f9d2c3bf47
+#: e1d4279e1577496fab6c3b968124efbc of
+#: tooluniverse.graphql_tool.GraphQLTool.run:3
+#: tooluniverse.graphql_tool.OpentargetTool.run:3
+#: tooluniverse.graphql_tool.OpentargetToolDrugNameMatch.run:3
+msgid ""
+"The default BaseTool implementation accepts an optional arguments mapping"
+" to align with most concrete tool implementations which expect a "
+"dictionary of inputs."
+msgstr ""
+
+#: 0b7ad522afb34328af9aace52bd0e310 43728d74d44847769bf74c7144e47fdf
+#: 9a09231d4b4c41f393ed4647af033bc0 f07628b6d82748a99c2a5fc3b052d5b6 of
+#: tooluniverse.graphql_tool.DiseaseTargetScoreTool:1
+#: tooluniverse.graphql_tool.OpentargetGeneticsTool:1
+#: tooluniverse.graphql_tool.OpentargetTool:1
+#: tooluniverse.graphql_tool.OpentargetToolDrugNameMatch:1
+msgid "Bases: :py:class:`~tooluniverse.graphql_tool.GraphQLTool`"
+msgstr ""
+
+#: b9964bf462ca4e3da24b61c9b815dbc3 of
+#: tooluniverse.graphql_tool.DiseaseTargetScoreTool:1
+msgid ""
+"Tool to extract disease-target association scores from specific data "
+"sources"
+msgstr ""
+
+#: bde700e75be940858c5545f739921e65 of
+#: tooluniverse.graphql_tool.DiseaseTargetScoreTool.run:1
+msgid ""
+"Extract disease-target scores for a specific datasource Arguments should "
+"contain: efoId, datasourceId (optional), pageSize (optional)"
+msgstr ""
+

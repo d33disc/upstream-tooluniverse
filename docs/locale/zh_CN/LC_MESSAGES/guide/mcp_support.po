@@ -1,0 +1,740 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/mcp_support.rst:2 2820fb0ef15b4841b5e2e647dea01b2c
+msgid "MCP Support"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:4 d4d742bf3de541d7b866b7733ef03f9b
+msgid ""
+"**Complete guide to Model Context Protocol (MCP) integration with "
+"ToolUniverse**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:6 65ac8463481c4adc96d8df0adfe04ed3
+msgid ""
+"ToolUniverse provides comprehensive support for the Model Context "
+"Protocol (MCP), enabling seamless integration with AI assistants, "
+"reasoning models, and agentic systems. This guide covers everything you "
+"need to know about using ToolUniverse through MCP."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:9 ede69f44143141f1922398e33134772d
+msgid "What is MCP?"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:11 a5f458908c2d4283a4f40b7608b17b63
+msgid ""
+"The Model Context Protocol (MCP) is a standardized protocol that enables "
+"AI assistants to securely connect to external tools and data sources. "
+"ToolUniverse implements MCP through the Scientific Model Context Protocol"
+" (SMCP), extending standard MCP capabilities with scientific domain "
+"expertise."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:13 c495d284a0854341bfe5fd21d849fdf1
+msgid ""
+"Key Benefits: - **Standardized Integration**: Connect to any MCP-"
+"compatible AI assistant - **Scientific Tool Access**: Direct access to "
+"600+ scientific tools - **Intelligent Discovery**: AI-powered tool search"
+" and recommendation - **Secure Communication**: Standardized protocol "
+"ensures secure tool execution - **Production Ready**: High-performance "
+"architecture for real-world applications"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:21 0e781d00cf7f41778b5a56fc5a4697ad
+msgid "MCP Architecture Overview"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:42 8dbc5dfa09724023b82085301a1c4923
+msgid "ToolUniverse MCP Implementation"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:44 df276e5d00504a76a251f2dfd827dff4
+msgid "ToolUniverse provides two main MCP server implementations:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:46 e8ac9bbb6d3841eb9fe2b741e7c3bb81
+msgid ""
+"**`tooluniverse-smcp`** - Full-featured server with configurable "
+"transport (HTTP, SSE, stdio)"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:47 69424a0242ab41d2a7162e37fa963fe3
+msgid ""
+"**`tooluniverse-smcp-stdio`** - Specialized server for stdio transport "
+"(optimized for desktop AI applications)"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:49 3d34817885bb497ab2369b68e0355ea8
+msgid ""
+"Both servers expose the same comprehensive set of scientific tools "
+"through the MCP protocol."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:52 dee55fe984cb40e99ce5abb35754b4b6
+msgid "Quick Start"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:54 caf2cf1ea9a14329872601b25c7ec59a
+msgid ""
+"For basic MCP server setup and configuration, see the comprehensive guide"
+" in :ref:`mcp-server-functions`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:57 d9f4b0d3a2594979a07a9df1687e82d5
+msgid "CLI Options Reference"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:59 ef688a9b5c3341b195f3ce2af68c57fe
+msgid ""
+"The following are commonly used command-line flags for ToolUniverse MCP "
+"servers."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:101 70af602a241c4ab9bdcb3472b297ee06
+msgid "Environment Variables"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:103 f75f184f81d241a48c7c968a7f1c0e5a
+msgid ""
+"You can configure defaults via environment variables. CLI flags take "
+"precedence."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:130 1f951bf579de4b45ab7363d53456677d
+msgid "Configuration Files"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:132 6b50f0f8b71344abaf85336f5772c8b4
+msgid ""
+"Example tools file (one tool per line, lines starting with # are "
+"comments):"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:142 753c7299ce2e48ab8db3589af5f416d0
+msgid "Example hook config file:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:158 2c8a246d4afc449ea3a713d208822504
+msgid "Client Integration Examples"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:160 9f4315dbbec34c7384449d3a3c0ced9a
+msgid "Python MCP client (conceptual) connecting to HTTP server:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:177 2b265c1a9f4f404d9af658d5f11bbd27
+msgid "JavaScript MCP client (conceptual) against HTTP server:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:202 bfdab5d4a276466cb3167e6a7b39301b
+msgid "Streaming Output"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:204 43a4505e25ba452eb48c6c7b022eb3e3
+msgid ""
+"All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` "
+"flag. When set to ``true``, compatible tools send incremental text chunks"
+" as MCP log notifications while still returning the final result payload "
+"at completion. Example request payload:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:221 bd3ab5758bfd4fa3bda5eb9c3a3ebaec
+msgid ""
+"Make sure your client surfaces ``notifications/log`` (FastMCP "
+"``ctx.info``) messages to display the streamed output."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:224 787e3fc4f0974ca18cb3aeb365d41345
+msgid "Claude Desktop stdio registration (example):"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:242 afcbaf50483f4eebaea5b1a7226e1129
+msgid "MCP Server Configuration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:245 434ae0fa424f4969bb4b170c2523bedb
+msgid "Transport Options"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:247 1ac3fd92c204445db294650a7a23caa3
+msgid "ToolUniverse MCP servers support multiple transport protocols:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:249 10126dbe2dc74bf7ae9cf4027e2979b8
+msgid "**HTTP Transport** (Default)"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:250 8463ced70a034a9c91d3a03dabb95a8b
+msgid "Best for web-based applications and remote access"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:251 2b1879c6f129437f8c6d4255d84bc953
+msgid "Supports RESTful API endpoints"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:252 47553c70fe624847a1799ef287a45200
+msgid "Configurable host and port"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:254 a4a30288ce52455196a704683141ea45
+msgid "**STDIO Transport**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:255 68d8a4aae9c544ef9cca6a2031f7e11d
+msgid "Optimized for desktop AI applications"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:256 7e41659553cc44f69e8517d73f4f8d3a
+msgid "Direct process communication"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:257 63996bdee0e24ae7bfd1de89f5d12bee
+msgid "Lower latency for local applications"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:259 87ae1920af834241b8f9fafbec54989a
+msgid "**Server-Sent Events (SSE)**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:260 67f3951c2a784bac83c8d0faee736a59
+msgid "Real-time streaming capabilities"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:261 327c5c4486a640aa968117ee989a17e8
+msgid "Suitable for interactive applications"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:262 a2d92306f667428a90106d363f4f6554
+msgid "Supports long-running operations"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:265 d380ce6ffd3c4041b8d7c9c5a4909bce
+msgid "Tool Selection"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:267 d10680fb2fd549e2aa52a03093371c61
+msgid ""
+"Configure which tools are available through the MCP server. For detailed "
+"configuration options including category-based loading, tool-specific "
+"loading, and type-based filtering, see :ref:`category-based-loading`, "
+":ref:`tool-specific-loading`, and :ref:`type-based-filtering`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:270 dfcf30d38fca4e12be5c5cb125b8a54e
+msgid "Advanced Configuration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:273 4750b00d7af84fb2ac4fde72a89f8f55
+msgid "Hook Configuration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:275 a6126d1ae6de4eb49f0272de5996a8e1
+msgid ""
+"Enable intelligent output processing hooks for MCP servers. For "
+"comprehensive hook configuration including SummarizationHook and "
+"FileSaveHook, see :ref:`hook-configuration`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:278 c637ff8c3d904ebcaa71a18404c87355
+msgid "Performance Tuning"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:280 820a3d4006ad48dab32b42595edf9664
+msgid ""
+"Optimize server performance for your use case. For detailed performance "
+"configuration options, see :ref:`server-configuration`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:283 ../../guide/mcp_support.rst:444
+#: a3598372e50148438bac7b1ce7f0687c d81b1d35a33c4c0f90e68b73df382f3f
+msgid "AI Assistant Integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:285 4200ea87923447c39226b207553b65c0
+msgid ""
+"ToolUniverse MCP servers are compatible with major AI assistants and "
+"platforms:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:288 4a72167d52024097a2e12fccb04260cc
+msgid "Claude Desktop"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:290 c04c95b246e94560b60193bcf7dd3301
+msgid ""
+"Integrate ToolUniverse with Claude Desktop for powerful desktop-based "
+"scientific research."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:293 b96201ae97f24b458b10c1eebc1598d6
+msgid ""
+"For complete Claude Desktop integration, see "
+":doc:`building_ai_scientists/claude_desktop`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:296 8b63238cfa404517b841d8825f471a1f
+msgid "ChatGPT API"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:298 319e98ec243b424291e9a702464c9b8a
+msgid ""
+"Connect ToolUniverse to ChatGPT API for programmatic AI-scientist "
+"workflows."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:301 6ed1785a05304fe1ad9e0bdd89b7aad0
+msgid "For ChatGPT API integration, see :doc:`building_ai_scientists/chatgpt_api`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:304 d60fcd5a5b9d43a78a7b9eddb274a680
+msgid "Gemini CLI"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:306 aa9b90bace3a40fdb7c431bdd19b44a4
+msgid "Use ToolUniverse with Gemini CLI for command-line scientific research."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:309 75f87dcc903949e8ade71a67f5dbc299
+msgid "For Gemini CLI integration, see :doc:`building_ai_scientists/gemini_cli`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:312 da103e8d5f8546ce83a8d831f93caf8b
+msgid "Claude Code"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:314 6e0827adeda649de9fd8124e6bf70d91
+msgid ""
+"Integrate ToolUniverse with Claude Code for IDE-based scientific "
+"development."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:317 d37b29af7fc24645b3a63559fa75343f
+msgid "For Claude Code integration, see :doc:`building_ai_scientists/claude_code`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:320 6297d9f46fd948e49d014c76ec42b013
+msgid "Qwen Code"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:322 bf62f23b54ba4186ad87ef0180608a5c
+msgid "Connect ToolUniverse to Qwen Code for terminal-based scientific workflows."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:325 0d4846f6a6654e7e8f1275359f300f22
+msgid "For Qwen Code integration, see :doc:`building_ai_scientists/qwen_code`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:328 5836b2c0c0e34337b6e1b26b63a5918b
+msgid "GPT Codex CLI"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:330 d1717d07e1794f9da29b9c33b892504a
+msgid ""
+"Use ToolUniverse with GPT Codex CLI for advanced command-line research "
+"capabilities."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:333 4c716e8e58d7416c826cd46f4041c672
+msgid "For GPT Codex CLI integration, see :doc:`building_ai_scientists/codex_cli`"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:336 cd856454ccba4732b2bc8c5035bdca06
+msgid "MCP Protocol Details"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:339 6f130dc1da60471f835bae4eef8cbbb8
+msgid "Tool Discovery"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:341 8362b4d53105418693aaf4c7abf4c8c1
+msgid ""
+"MCP clients can discover available tools through the standard MCP "
+"protocol. For detailed tool discovery methods and examples, see :ref"
+":`mcp-server-integration`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:344 9add3082e29a4bcf9585f763546f9b0c
+msgid "Tool Execution"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:346 4735c04f49a743ff9da9494734975061
+msgid ""
+"Execute tools through the MCP protocol. For comprehensive tool execution "
+"patterns and MCP client examples, see :ref:`mcp-client-integration`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:349 d1f4fc307f4a4cb495e6658b39e8704e
+msgid "Error Handling"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:351 f67de73992ed4891b53c5478e46a30df
+msgid ""
+"MCP provides standardized error handling. For detailed error handling "
+"patterns and troubleshooting, see :ref:`error-handling-validation`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:354 de981c0f7f844e6caef6907314818b9c
+msgid "MCP Server Management"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:357 0602c3c978134309ae60766ecc90fa63
+msgid "Server Status"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:359 ce926cf57d9f4bf09a0bf3950a86a5de
+msgid ""
+"Monitor MCP server status and health. For server management commands and "
+"status monitoring, see :ref:`discovery-commands`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:362 121d4adab9364a739cfb99b7ea221fba
+msgid "Logging and Debugging"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:364 001627cbe25a4f0ab75bc241533a31d0
+msgid ""
+"Enable comprehensive logging for debugging. For detailed logging "
+"configuration and debugging options, see :ref:`tooluniverse-logging-"
+"configuration`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:367 2c93932c68c54a3897bbba770a57a034
+msgid "Performance Monitoring"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:369 3437dbc497dc4a569664047e92494894
+msgid ""
+"Monitor MCP server performance. For performance monitoring and "
+"optimization, see :ref:`performance-optimization`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:372 5bc0fec907fc4730b4b26309ec9f8d3f
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:375 9e718ead571f44afbd5f7c003ac0f667
+msgid "Common Issues"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:377 b4a0e79a6cb34e71b0c5b7b9bea9f0e5
+msgid "**MCP Server Not Starting**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:378 9d448875031142818408de1e1727ae66
+msgid "Check if port is available"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:379 2983e330ac75403e9945f450eced9b42
+msgid "Verify ToolUniverse installation"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:380 f4b16a96740d44e29118293bdd7489c6
+msgid "Check server logs for error messages"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:382 e5ec02a8de254247b7ca012d90f2bdea
+msgid "**Tools Not Available**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:383 2764cb11a60d4bcf84f2eff0ad852b11
+msgid "Verify tool categories are loaded"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:384 a7127166bbc44b51a45377529e2e5da3
+msgid "Check tool names are correct"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:385 061c839f4d8f46438fae976a60faa51c
+msgid "Ensure tools are not excluded"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:387 25157f5a381846fc9c8cf44ce5fab51f
+msgid "**Connection Issues**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:388 1267a6ce656a48b88adeefe8fab89aa6
+msgid "Verify transport protocol matches client expectations"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:389 fd19409287b94944928c44d9494cdf5c
+msgid "Check firewall settings for HTTP transport"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:390 c078c0e5a92f409fb5d288bc63a1737a
+msgid "Ensure proper authentication for remote connections"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:392 127624c8ecac43dc9e3be9394c7ebdd2
+msgid "**Performance Issues**"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:393 08c0cae96ec8400888a8ef35d566f098
+msgid "Increase worker threads"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:394 f8287c96f58347269b86af37e9c6d13d
+msgid "Enable caching for repeated tool calls"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:395 bd2f60a6fdf44fe49f32ce6ff1f6eebd
+msgid "Use specific tool categories instead of loading all tools"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:397 217dedb8e6f74d1f958ea42abdcec75b
+msgid "For comprehensive troubleshooting guide, see :ref:`troubleshooting`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:400 f72b6191e46a498eaadab45f70160048
+msgid "Debug Commands"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:402 086c2956d1ce4b96be24afcda5ca06c1
+msgid ""
+"Useful debugging commands and validation methods. For complete debugging "
+"command reference, see :ref:`discovery-commands`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:405 5ef4b3c62b214f9a8a2cd64d521e74e7
+msgid "Best Practices"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:408 95868ae4904846ab91a40eefb32e697a
+msgid "Security"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:410 1d56094ddcff45338edac5ed39dcfb65
+msgid "Use HTTPS in production environments"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:411 43411490b5f34388ad3aadf1be0f0b62
+msgid "Implement proper authentication and authorization"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:412 cf0839de4e7e4709b92274b7ee1179f0
+msgid "Regularly update ToolUniverse and MCP dependencies"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:413 41b4a8e0856944a485c5c7bfbb6aa2f5
+msgid "Monitor server logs for suspicious activity"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:416 23107c8b5fc94e3a8e16093bcf2d30cb
+msgid "Performance"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:418 ea82d7bd3ccf4a97bf2a593904324933
+msgid "Load only necessary tool categories"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:419 a42de2bce22d4591a58789f58d1cc3e6
+msgid "Use appropriate worker thread counts"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:420 17944e58abd847f0bcd6982a08471d47
+msgid "Enable caching for frequently used tools"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:421 19e1d6cb39874ab48f7cbc3a3ff2b5f5
+msgid "Monitor server metrics and adjust configuration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:424 99d6bc25e6004feebf70c811b8729046
+msgid "Reliability"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:426 91556d7dd3ca4c8da973a7d7898dbce0
+msgid "Implement proper error handling in MCP clients"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:427 57c50f24e3fd45829763a92a3acf8c13
+msgid "Use retry mechanisms for transient failures"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:428 f808facc43044b4d87bbffe10dead07d
+msgid "Monitor server health and restart if needed"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:429 a0340a7cf05c4a2d90cd58c04f0e4769
+msgid "Keep backup configurations for critical deployments"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:431 e448f7f7a6be4b758100d0fc5894001e
+msgid ""
+"For detailed best practices and production deployment guidance, see :ref"
+":`performance-optimization`."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:434 b8d5d000209b401b880a2e0f06913c76
+msgid "Related Documentation"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:437 f4f36d641dbf4c5b954143c0d0a0fc27
+msgid "Core MCP Components"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:439 c757c00e3db740e9a594992d7af3d60b
+msgid ":doc:`tool_caller` - Tool execution engine and MCP server implementation"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:440 db361a213ffc4717aafdda332c562af2
+msgid ":doc:`loading_tools` - Tool loading and MCP server configuration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:441 63da9ac39ed94a259351718986a86ee3
+msgid ""
+":doc:`interaction_protocol` - ToolUniverse interaction protocol and MCP "
+"schema"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:446 ac4bdc58e4e14484bbc3d496d1efd5f5
+msgid ""
+":doc:`building_ai_scientists/index` - Complete guide to building AI "
+"scientists"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:447 1edbc6291ff3493f806954f01472bc7c
+msgid ":doc:`building_ai_scientists/claude_desktop` - Claude Desktop integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:448 ad0970acf376483cb2cd1cebb99cae95
+msgid ":doc:`building_ai_scientists/chatgpt_api` - ChatGPT API integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:449 98b868a62dc84ea19437709a6435ae06
+msgid ":doc:`building_ai_scientists/gemini_cli` - Gemini CLI integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:450 94e62ba3aa494f7f8855c87c660f6bd0
+msgid ":doc:`building_ai_scientists/claude_code` - Claude Code integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:451 0762c6e471b543f2b90cdcb73faee41e
+msgid ":doc:`building_ai_scientists/qwen_code` - Qwen Code integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:452 bada4439217f4586a7faff6b20f8cdf2
+msgid ":doc:`building_ai_scientists/codex_cli` - GPT Codex CLI integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:455 84da7d756dc3413c87ae5cb8848d690e
+msgid "Advanced Features"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:457 1679d3c5af2d496db2e88549af9f8a62
+msgid ":doc:`hooks/index` - Output processing hooks for MCP servers"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:458 87b6d914b862474c9fde83a5110ccb38
+msgid ":doc:`scientific_workflows` - Building complex workflows with MCP"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:459 1be7ce14fac647b1b2dd0fdab8a6627b
+msgid ":doc:`tool_composition` - Composing tools for advanced research"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:462 8e04b998e8a247f999714e3525eed172
+msgid "Examples and Tutorials"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:464 7d00454f54764b4587d29257630717b9
+msgid ":doc:`examples` - Practical MCP usage examples"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:465 91a3dcf95d614bdfa5cb7cbbb072f670
+msgid ":doc:`../tutorials/index` - Comprehensive tutorials for MCP integration"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:468 740d08ec847d4471bdbec24db9c6963a
+msgid "API Reference"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:470 5dbdb8bdbfcc46ab8608c24b395d8c5c
+msgid ":doc:`../api_comprehensive` - Complete SMCP API documentation"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:471 f27b59f775b54b929da585c77cf16c98
+msgid ":doc:`../api_quick_reference` - Quick reference for common MCP operations"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:474 62955442e4e343079aee813cfdf1c81a
+msgid "External Resources"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:476 cb8381bff1624cb0a232fc45eca98389
+msgid "`Model Context Protocol Specification <https://modelcontextprotocol.io/>`_"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:477 ffd790aff5964609a5d8331bccce0757
+msgid "`MCP GitHub Repository <https://github.com/modelcontextprotocol>`_"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:478 edac73cf6ec148b5b4d179449ba38417
+msgid ""
+"`ToolUniverse GitHub Repository "
+"<https://github.com/tooluniverse/tooluniverse>`_"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:481 2677eb3ad79a4f1abde350b9f8a10bc4
+msgid "Summary"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:483 76cbffb5ec1b46509bafc346954db1a6
+msgid ""
+"ToolUniverse's MCP support provides a powerful, standardized way to "
+"integrate scientific tools with AI assistants. The SMCP implementation "
+"extends standard MCP capabilities with scientific domain expertise, "
+"making it easy to build sophisticated AI-scientist workflows."
+msgstr ""
+
+#: ../../guide/mcp_support.rst:485 9d57c8e02b8f415f8e33877cbee30eba
+msgid "Key takeaways:"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:487 d59fa84006fa43c0b840d0b6891b8e55
+msgid "**Easy Integration**: Simple setup with major AI assistants"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:488 df6917cf18f34e83a04fa8f90b352571
+msgid "**Comprehensive Tools**: Access to 600+ scientific tools through MCP"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:489 d35e5e450a0242a4a631920b94abb4f6
+msgid "**Flexible Configuration**: Multiple transport options and tool selection"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:490 bbbba600305640d784004d11f313adb6
+msgid "**Production Ready**: High-performance, secure, and reliable"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:491 fe27ea878fa04564be58c5df4010f3ed
+msgid "**Extensive Documentation**: Complete guides for all major AI platforms"
+msgstr ""
+
+#: ../../guide/mcp_support.rst:493 0fa935db2aac462da79d62b0c3d1e54d
+msgid ""
+"Start with the :doc:`building_ai_scientists/index` guide to begin "
+"building your AI scientist, or explore specific integrations for your "
+"preferred AI assistant."
+msgstr ""
+
