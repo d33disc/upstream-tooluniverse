@@ -183,7 +183,7 @@ jobs:
       run: |
         cd docs
         rm -rf _build/*
-        make html
+        DOC_LANGUAGES="en,zh_CN" DOC_SKIP_SERVER_PROMPT=1 ./quick_doc_build.sh
         
     - name: Check build output
       run: |

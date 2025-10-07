@@ -6,7 +6,7 @@ This comprehensive tutorial demonstrates how to use the literature search tools 
 Overview
 --------
 
-ToolUniverse provides 14 powerful literature search tools that cover different aspects of academic research:
+ToolUniverse provides 15 powerful literature search tools that cover different aspects of academic research:
 
 **Preprint Archives:**
 - ArXiv - Physics, mathematics, computer science, and other fields
@@ -27,6 +27,7 @@ ToolUniverse provides 14 powerful literature search tools that cover different a
 - Unpaywall - Open access status checker
 - CORE - World's largest open access research papers collection
 - PMC - PubMed Central full-text biomedical literature
+- Zenodo - Open research data and publications repository
 
 Tool Overview Table
 ~~~~~~~~~~~~~~~~~~~
@@ -100,7 +101,8 @@ First, let's initialize ToolUniverse and load the literature search tools:
         "openalex_literature_search",
         "EuropePMC_search_articles",
         "CORE_search_papers",
-        "PMC_search_papers"
+        "PMC_search_papers",
+        "Zenodo_search_records"
     ]
     
     for tool in literature_tools:
@@ -815,6 +817,41 @@ Search PubMed Central full-text biomedical literature:
         }
     })
 
+Zenodo Search
+~~~~~~~~~~~~~
+
+Search Zenodo for research data, publications, and datasets:
+
+.. code-block:: python
+
+    # Basic Zenodo search
+    result = tu.run({
+        "name": "Zenodo_search_records",
+        "arguments": {
+            "query": "machine learning",
+            "max_results": 5
+        }
+    })
+
+    # Zenodo search with community filter
+    result = tu.run({
+        "name": "Zenodo_search_records",
+        "arguments": {
+            "query": "climate change",
+            "max_results": 3,
+            "community": "zenodo"
+        }
+    })
+
+    # Zenodo search for COVID-19 datasets
+    result = tu.run({
+        "name": "Zenodo_search_records",
+        "arguments": {
+            "query": "COVID-19 dataset",
+            "max_results": 5
+        }
+    })
+
 Tool Selection Guide
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -828,3 +865,4 @@ Choose the right tool for your research field:
 6. **Open Access**: DOAJ, Unpaywall, CORE
 7. **Full-Text Biomedical**: PMC
 8. **Comprehensive Open Access**: CORE
+9. **Research Data & Datasets**: Zenodo
