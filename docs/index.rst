@@ -134,6 +134,7 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    tutorials/tooluniverse_case_study
    tutorials/agentic_tools_tutorial
    tutorials/literature_search_tools_tutorial
+   tutorials/literature_search_web_ui_tutorial
    guide/tool_composition
    guide/scientific_workflows
    tutorials/expert_feedback

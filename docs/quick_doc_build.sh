@@ -313,6 +313,10 @@ for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
     continue
   fi
   TARGET_DIR="$OUTPUT_DIR/${DOC_LANGUAGE//_/-}"
+  # Special handling for zh_CN to use zh-CN format
+  if [ "$DOC_LANGUAGE" = "zh_CN" ]; then
+    TARGET_DIR="$OUTPUT_DIR/zh-CN"
+  fi
   echo -e "${YELLOW}🌐 Building language: ${DOC_LANGUAGE} -> ${TARGET_DIR}${NC}"
   sphinx-build ${SPHINX_FLAGS} -b html -D language="$DOC_LANGUAGE" . "$TARGET_DIR" --keep-going -q || true
 
@@ -440,6 +444,10 @@ DEFAULT_LANG="${LANGUAGES[0]}"
 # Server should start from html root directory, not language subdirectory
 SERVER_DIR="$SCRIPT_DIR/_build/html"
 DEFAULT_DIR="$SCRIPT_DIR/_build/html/${DEFAULT_LANG//_/-}"
+# Special handling for zh_CN to use zh-CN format
+if [ "$DEFAULT_LANG" = "zh_CN" ]; then
+  DEFAULT_DIR="$SCRIPT_DIR/_build/html/zh-CN"
+fi
 
 echo -e "\n${BLUE}📂 Access documentation:${NC}"
 
@@ -453,6 +461,10 @@ fi
 # Show individual language links
 for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
   TARGET_DIR="$SCRIPT_DIR/_build/html/${DOC_LANGUAGE//_/-}"
+  # Special handling for zh_CN to use zh-CN format
+  if [ "$DOC_LANGUAGE" = "zh_CN" ]; then
+    TARGET_DIR="$SCRIPT_DIR/_build/html/zh-CN"
+  fi
   if [ -f "$TARGET_DIR/index.html" ]; then
     case "$DOC_LANGUAGE" in
       en)
