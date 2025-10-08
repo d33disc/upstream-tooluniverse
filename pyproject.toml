@@ -56,6 +56,7 @@ dev = [
 docs = [
     "sphinx>=4.0",
     "furo>=2024.8.6",
+    "pydata-sphinx-theme>=0.15.0",
     "sphinx-rtd-theme>=1.0",
     "myst-parser>=0.18",
     "linkify-it-py>=2.0.0",
@@ -98,6 +99,8 @@ generate-mcp-tools = "tooluniverse.generate_mcp_tools:run_generate"
 # Human Expert Feedback System
 tooluniverse-expert-feedback = "tooluniverse.remote.expert_feedback.human_expert_mcp_tools:main"
 tooluniverse-expert-feedback-web = "tooluniverse.remote.expert_feedback.start_web_interface:main"
+# Wide Research Web UI
+tooluniverse-wide-research = "tooluniverse.web_tools.literature_search_ui.simple_app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

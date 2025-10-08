@@ -161,6 +161,8 @@ msgid ""
 "**PubMed/NCBI** - Public domain - No attribution required - Terms: "
 "https://www.ncbi.nlm.nih.gov/home/about/policies/"
 msgstr ""
+"**PubMed/NCBI** - 公共领域 - 无需署名 - "
+"条款：https://www.ncbi.nlm.nih.gov/home/about/policies/"
 
 #: ../../about/license.rst:91 87a3089e782c41fb82bbae3410e3062e
 msgid ""
@@ -168,33 +170,38 @@ msgid ""
 "License - Attribution required - Terms: https://chembl.gitbook.io/chembl-"
 "interface-documentation/about"
 msgstr ""
+"**ChEMBL** - 许可协议：知识共享署名-相同方式共享 3.0 未本地化许可协议 - 需署名 - "
+"条款：https://chembl.gitbook.io/chembl-interface-documentation/about"
 
 #: ../../about/license.rst:96 4885aedd54064b1bb0788a7086dd792c
 msgid ""
 "**ClinicalTrials.gov** - Public domain - No attribution required - Terms: "
 "https://clinicaltrials.gov/ct2/about-site/terms-conditions"
 msgstr ""
+"**ClinicalTrials.gov** - 公共领域 - 无需署名 - "
+"条款：https://clinicaltrials.gov/ct2/about-site/terms-conditions"
 
 #: ../../about/license.rst:101 3793cb3104c6447d92262b96efa758ff
 msgid ""
 "**Europe PMC** - License: Creative Commons - Attribution requirements vary "
 "by source - Terms: https://europepmc.org/TermsOfUse"
 msgstr ""
+"**Europe PMC** - 许可协议：知识共享 - 署名要求因来源而异 - 条款：https://europepmc.org/TermsOfUse"
 
 #: ../../about/license.rst:107 faa78fbbe2504143adc53d058c401d3d
 msgid "Contact Information"
-msgstr ""
+msgstr "联系信息"
 
 #: ../../about/license.rst:109 9cd75ed1c6b24c74866a40c9bd95895b
 msgid ""
 "For licensing questions or permissions beyond the scope of this license, "
 "please contact:"
-msgstr ""
+msgstr "如有许可相关问题或需超出本许可范围的权限，请联系："
 
 #: ../../about/license.rst:111 bd87df30336c4a4aa8700ab3b26e65b4
 msgid "**Email**: shanghuagao@gmail.com"
-msgstr ""
+msgstr "**电子邮件**：shanghuagao@gmail.com"
 
 #: ../../about/license.rst:112 cca2e85ae2044ec18be52be8720e7655
 msgid "**GitHub**: https://github.com/mims-harvard/TxAgent"
-msgstr ""
+msgstr "**GitHub**：https://github.com/mims-harvard/TxAgent"

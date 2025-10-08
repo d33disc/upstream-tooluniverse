@@ -225,42 +225,42 @@ msgstr "生成输出的工具名称"
 #: aec9b67061364d12817d266221f4038e of
 #: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:9
 msgid "Areas to focus on during summarization"
-msgstr ""
+msgstr "总结时需重点关注的领域"
 
 #: 1806ad0bebf84689852154ff930cf236 2aba5a72796d4d3aad97dbccf19964e6 of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:14
 #: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:11
 msgid "Function to call the summarizer tool"
-msgstr ""
+msgstr "调用摘要工具的函数"
 
 #: e84acc3498ee4df691c1666da9489633 of
 #: tooluniverse.compose_scripts.output_summarizer._summarize_chunk:13
 msgid "Summarized chunk text, or empty string if summarization fails"
-msgstr ""
+msgstr "总结的文本块，若摘要失败则为空字符串"
 
 #: 32649e0f92b3465ca0428d20d4fd847b of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:1
 msgid "Merge chunk summaries into a final coherent summary."
-msgstr ""
+msgstr "将各部分摘要合并为最终连贯的总结。"
 
 #: 5852bedc059648019d97686a9dd1169f of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:3
 msgid ""
 "If the combined summaries exceed the maximum length, they are further "
 "summarized to create a concise final result."
-msgstr ""
+msgstr "如果合并后的摘要超过最大长度，则会进一步进行摘要，以生成简洁的最终结果。"
 
 #: 9034ea49bda4419ea86593826c78d342 of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:6
 msgid "List of summarized chunks"
-msgstr ""
+msgstr "汇总块列表"
 
 #: e211daffcacb4b1689d88afb71dac710 of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:12
 msgid "Maximum length of final summary"
-msgstr ""
+msgstr "最终摘要的最大长度"
 
 #: 174919d0658a4f098de63be8315ad071 of
 #: tooluniverse.compose_scripts.output_summarizer._merge_summaries:16
 msgid "Final merged summary"
-msgstr ""
+msgstr "最终合并摘要"

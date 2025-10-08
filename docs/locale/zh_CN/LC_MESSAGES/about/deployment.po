@@ -149,83 +149,83 @@ msgstr "自动重新加载开发"
 
 #: ../../about/deployment.rst:91 89cbe6a626e64e1f8ea72eea537554b8
 msgid "Use sphinx-autobuild for live reloading during development:"
-msgstr ""
+msgstr "在开发过程中使用 sphinx-autobuild 实现实时重载："
 
 #: ../../about/deployment.rst:102 1fd4314b5a084068842e4d08c2698c5f
 msgid "The server will automatically rebuild when files change."
-msgstr ""
+msgstr "当文件发生更改时，服务器将自动重建。"
 
 #: ../../about/deployment.rst:105 ffd76ae040904e878fb0dfa6432963ad
 msgid "Production Server"
-msgstr ""
+msgstr "生产服务器"
 
 #: ../../about/deployment.rst:107 9580746bfe444331a8b58b11b3bfa2d0
 msgid "For production hosting, use a proper web server:"
-msgstr ""
+msgstr "对于生产环境托管，请使用合适的 Web 服务器："
 
 #: ../../about/deployment.rst:109 32f29cabbfcf4933a91e9c4fb32e7462
 msgid "**Nginx example:**"
-msgstr ""
+msgstr "**Nginx 示例：**"
 
 #: ../../about/deployment.rst:124 54f49d5ea6f34e21a0741174c8be92a1
 msgid "**Apache example:**"
-msgstr ""
+msgstr "**Apache 示例：**"
 
 #: ../../about/deployment.rst:135 c70377948c3147d9947306329fd7857e
 msgid "Docker Deployment"
-msgstr ""
+msgstr "Docker 部署"
 
 #: ../../about/deployment.rst:138 5900e3c95acf49f2a169d94246bb6d0c
 msgid "Dockerfile for Nginx"
-msgstr ""
+msgstr "Nginx 的 Dockerfile"
 
 #: ../../about/deployment.rst:140 01a3ffc7ed3245758b595ef008019c67
 msgid "Create ``Dockerfile`` in docs directory:"
-msgstr ""
+msgstr "在 docs 目录中创建 ``Dockerfile``："
 
 #: ../../about/deployment.rst:148 da95825dd4304c8ab520b93c66e7c38f
 msgid "Build and run:"
-msgstr ""
+msgstr "构建并运行："
 
 #: ../../about/deployment.rst:158 59a0db802f87402fbc710db3d07cd547
 msgid "Multi-stage Build"
-msgstr ""
+msgstr "多阶段构建"
 
 #: ../../about/deployment.rst:160 fc34aeee83dc4ebe85453d8dda113d8f
 msgid "For smaller images with build included:"
-msgstr ""
+msgstr "对于包含构建的小型镜像："
 
 #: ../../about/deployment.rst:177 57ee0d5129004dcd93e3baa68c74533d
 msgid "Continuous Integration"
-msgstr ""
+msgstr "持续集成"
 
 #: ../../about/deployment.rst:180 5130fa1272a64319b478086a2e8f5765
 msgid "GitHub Actions"
-msgstr ""
+msgstr "GitHub 操作"
 
 #: ../../about/deployment.rst:182 a00153e666994e2f848e7cbbb7d82faf
 msgid "The ``.github/workflows/docs.yml`` workflow:"
-msgstr ""
+msgstr "``.github/workflows/docs.yml`` 工作流："
 
 #: ../../about/deployment.rst:184 d4b5b9b1a5d54c499eef549853b677fa
 msgid "**Triggers**: Push to main, pull requests"
-msgstr ""
+msgstr "**触发器**：推送到主分支，拉取请求"
 
 #: ../../about/deployment.rst:185 80ab8034f8944d8fa05732a540549556
 msgid "**Builds**: HTML and PDF documentation"
-msgstr ""
+msgstr "**构建**：HTML 和 PDF 文档"
 
 #: ../../about/deployment.rst:186 904b6010420f4b1cacf24d5cc567e943
 msgid "**Deploys**: To GitHub Pages (on main branch)"
-msgstr ""
+msgstr "**部署**：部署到 GitHub Pages（主分支）"
 
 #: ../../about/deployment.rst:187 b8602673c78d40248f9404c875af3838
 msgid "**Tests**: Link checking, validation"
-msgstr ""
+msgstr "**测试**：链接检查，验证"
 
 #: ../../about/deployment.rst:189 242e618a9cb246b7ac434b6c73266780
 msgid "View workflow status in repository **Actions** tab."
-msgstr ""
+msgstr "在仓库的 **Actions** 选项卡中查看工作流状态。"
 
 #: ../../about/deployment.rst:192 08071e2a99084e6aaf94d6ab4edb2c91
 msgid "Custom CI/CD"

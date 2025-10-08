@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 21:40-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/osf_preprints_tools.rst:2 efa41a5345fe4c289059bef1146bb777
+msgid "Osf Preprints Tools"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:4 a46f7596e0d949b187f525aa586a9ae9
+msgid ""
+"**Configuration File**: ``osf_preprints_tools.json`` **Tool Type**: Local"
+" **Tools Count**: 1"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:8 9897bb107ad34ebc92e63db77db09740
+msgid ""
+"This page contains all tools defined in the ``osf_preprints_tools.json`` "
+"configuration file."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:11 8863c7eaf780478db0c04eb1af1fdc07
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:14 1e640e7d4d2446238c8ce0c1f2854b89
+msgid "**OSF_search_preprints** (Type: OSFPreprintsTool)"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:16 e2dc6346f5f84a1fb0b24915092dae73
+msgid ""
+"Search OSF (Open Science Framework) Preprints for research preprints and "
+"working papers. OSF Prep..."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst 4bede9a1d28b4fd59996696343bedc29
+msgid "OSF_search_preprints tool specification"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:20 b9df7e649fea4591a448d7291ce71942
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:22 14f9a8f2eecc46f6985d3f46ae1debf8
+msgid "**Name**: ``OSF_search_preprints``"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:23 cd5ca0562f4b4888a8abc3031d3ea3ef
+msgid "**Type**: ``OSFPreprintsTool``"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:24 a242ac54f09e4504a35e6e9cb35313fa
+msgid ""
+"**Description**: Search OSF (Open Science Framework) Preprints for "
+"research preprints and working papers. OSF Preprints aggregates preprints"
+" from multiple providers including OSF, PsyArXiv, and others."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:26 a512b0f13ae543eead0182b1a4f94754
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:28 115f6abbaf504423891d5c5c7947cecd
+msgid ""
+"``query`` (string) (required) Search query for OSF preprints. Use "
+"keywords to search across titles and abstracts."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:31 ce57f8ec03174c4eb068b167f18e5864
+msgid ""
+"``max_results`` (integer) (optional) Maximum number of results to return."
+" Default is 10, maximum is 100."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:34 6a052a9c82fb4077a97c6a8b63a6abc1
+msgid ""
+"``provider`` (string) (optional) Optional preprint provider filter (e.g.,"
+" 'osf', 'psyarxiv', 'socarxiv'). If not specified, searches all "
+"providers."
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:37 f2907989d56646898242967e091227fb
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:51 5dd6b017ec5b45b482a6932496642391
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:53 3a358aa1e99f4f1c933d4ac18efba7fd
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/osf_preprints_tools.rst:54 d3e79e43445a43bebda8a5ce0bc7ec4e
+msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
+msgstr ""
+

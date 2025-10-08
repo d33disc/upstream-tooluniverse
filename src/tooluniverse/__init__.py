@@ -224,6 +224,19 @@ if not LAZY_LOADING_ENABLED:
         ODPHPTopicSearch,
         ODPHPOutlinkFetch,
     )
+    # Literature search tools
+    from .arxiv_tool import ArXivTool
+    from .crossref_tool import CrossrefTool
+    from .dblp_tool import DBLPTool
+    from .pubmed_tool import PubMedTool
+    from .doaj_tool import DOAJTool
+    from .unpaywall_tool import UnpaywallTool
+    from .biorxiv_tool import BioRxivTool
+    from .medrxiv_tool import MedRxivTool
+    from .hal_tool import HALTool
+    from .core_tool import CoreTool
+    from .pmc_tool import PMCTool
+    from .zenodo_tool import ZenodoTool
 else:
     # With lazy loading, create lazy import proxies that import modules only when accessed
     MonarchTool = _LazyImportProxy("restful_tool", "MonarchTool")
@@ -305,6 +318,19 @@ else:
     ODPHPMyHealthfinder = _LazyImportProxy("odphp_tool", "ODHPHPMyHealthfinder")
     ODPHPTopicSearch = _LazyImportProxy("odphp_tool", "ODPHPTopicSearch")
     ODPHPOutlinkFetch = _LazyImportProxy("odphp_tool", "ODPHPOutlinkFetch")
+    # Literature search tools
+    ArXivTool = _LazyImportProxy("arxiv_tool", "ArXivTool")
+    CrossrefTool = _LazyImportProxy("crossref_tool", "CrossrefTool")
+    DBLPTool = _LazyImportProxy("dblp_tool", "DBLPTool")
+    PubMedTool = _LazyImportProxy("pubmed_tool", "PubMedTool")
+    DOAJTool = _LazyImportProxy("doaj_tool", "DOAJTool")
+    UnpaywallTool = _LazyImportProxy("unpaywall_tool", "UnpaywallTool")
+    BioRxivTool = _LazyImportProxy("biorxiv_tool", "BioRxivTool")
+    MedRxivTool = _LazyImportProxy("medrxiv_tool", "MedRxivTool")
+    HALTool = _LazyImportProxy("hal_tool", "HALTool")
+    CoreTool = _LazyImportProxy("core_tool", "CoreTool")
+    PMCTool = _LazyImportProxy("pmc_tool", "PMCTool")
+    ZenodoTool = _LazyImportProxy("zenodo_tool", "ZenodoTool")
 
 __all__ = [
     "__version__",
@@ -376,4 +402,17 @@ __all__ = [
     "ODPHPItemList",
     "ODPHPTopicSearch",
     "ODPHPOutlinkFetch",
+    # Literature search tools
+    "ArXivTool",
+    "CrossrefTool",
+    "DBLPTool",
+    "PubMedTool",
+    "DOAJTool",
+    "UnpaywallTool",
+    "BioRxivTool",
+    "MedRxivTool",
+    "HALTool",
+    "CoreTool",
+    "PMCTool",
+    "ZenodoTool",
 ]

@@ -217,12 +217,12 @@ msgstr "请提供需要翻译的具体文本，我将为您提供符合要求的
 #: bb6e6a0f7c3642af8be296638a4002db of
 #: tooluniverse.extended_hooks.FormattingHook._format_list:1
 msgid "Format list data."
-msgstr ""
+msgstr "格式化列表数据。"
 
 #: a4800712aa0745b59ca174b8dfb0ed9d of
 #: tooluniverse.extended_hooks.ValidationHook:1
 msgid "Hook for validating tool outputs against schemas or rules."
-msgstr ""
+msgstr "用于根据模式或规则验证工具输出的钩子。"
 
 #: 252a467b06b442dc8cc99459699772e1 of
 #: tooluniverse.extended_hooks.ValidationHook:3
@@ -230,51 +230,55 @@ msgid ""
 "This hook can be used to: - Validate JSON against schemas - Check required "
 "fields - Ensure data quality"
 msgstr ""
+"此钩子可用于：  \n"
+"- 根据模式验证 JSON  \n"
+"- 检查必填字段  \n"
+"- 确保数据质量"
 
 #: 6708aead1d2f4bcbb9f550c4394f3ecc of
 #: tooluniverse.extended_hooks.ValidationHook:8
 msgid "Hook configuration containing validation settings"
-msgstr ""
+msgstr "包含验证设置的钩子配置"
 
 #: 43b50f052ec14ec4bbbc1dc43ad30f7b of
 #: tooluniverse.extended_hooks.ValidationHook:10
 msgid "Optional ToolUniverse instance (not used for validation)"
-msgstr ""
+msgstr "可选的 ToolUniverse 实例（不用于验证）"
 
 #: 68a450737c4d4c4f96e3547138479447 of
 #: tooluniverse.extended_hooks.ValidationHook.__init__:1
 msgid "Initialize the validation hook with configuration."
-msgstr ""
+msgstr "使用配置初始化验证钩子。"
 
 #: 7ddb7011e02346d18ec2201a43cf869d of
 #: tooluniverse.extended_hooks.ValidationHook.process:1
 msgid "Apply validation to the tool output."
-msgstr ""
+msgstr "对工具输出应用验证。"
 
 #: 01254900b2f749eaaede8d514d782f67 of
 #: tooluniverse.extended_hooks.ValidationHook.process:3
 msgid "The tool output to validate"
-msgstr ""
+msgstr "工具输出验证"
 
 #: 1c158e013d94431dbd0ae0269496e240 of
 #: tooluniverse.extended_hooks.ValidationHook.process:12
 msgid "The validated output, or original output if validation fails"
-msgstr ""
+msgstr "经过验证的输出，或验证失败时的原始输出"
 
 #: dda4f27eb55747ed8205d90244653ab4 of
 #: tooluniverse.extended_hooks.ValidationHook._validate_output:1
 msgid "Validate the output against configured rules."
-msgstr ""
+msgstr "根据配置的规则验证输出。"
 
 #: 4b0f09137d6f4141b1b12ea6a1e54c72 of
 #: tooluniverse.extended_hooks.ValidationHook._fix_output:1
 msgid "Attempt to fix validation errors."
-msgstr ""
+msgstr "尝试修复验证错误。"
 
 #: aef3e6dbad514fdda6a57f558815e387 of
 #: tooluniverse.extended_hooks.LoggingHook:1
 msgid "Hook for logging tool outputs and execution details."
-msgstr ""
+msgstr "用于记录工具输出和执行详情的钩子。"
 
 #: fa3749792f4146788248b5e99986ac0c of
 #: tooluniverse.extended_hooks.LoggingHook:3
@@ -282,41 +286,45 @@ msgid ""
 "This hook can be used to: - Log all tool outputs - Track execution metrics -"
 " Audit tool usage"
 msgstr ""
+"此钩子可用于：  \n"
+"- 记录所有工具输出  \n"
+"- 跟踪执行指标  \n"
+"- 审计工具使用情况"
 
 #: c5b2f5f90b964b5385c3094137cf9fd7 of
 #: tooluniverse.extended_hooks.LoggingHook:8
 msgid "Hook configuration containing logging settings"
-msgstr ""
+msgstr "包含日志设置的钩子配置"
 
 #: 3b32818cee834fbfb479a23e99dc7225 of
 #: tooluniverse.extended_hooks.LoggingHook:10
 msgid "Optional ToolUniverse instance (not used for logging)"
-msgstr ""
+msgstr "可选的 ToolUniverse 实例（不用于日志记录）"
 
 #: e0855a68fcfc4b739f196c18a8f899f8 of
 #: tooluniverse.extended_hooks.LoggingHook.__init__:1
 msgid "Initialize the logging hook with configuration."
-msgstr ""
+msgstr "使用配置初始化日志钩子。"
 
 #: 2a7ddcbc3baa4c21acb229f96a2f6f81 of
 #: tooluniverse.extended_hooks.LoggingHook.process:1
 msgid "Log the tool output and execution details."
-msgstr ""
+msgstr "记录工具输出和执行详情。"
 
 #: 0715e23f965c4bbaa5597dedf89dc0aa of
 #: tooluniverse.extended_hooks.LoggingHook.process:3
 msgid "The tool output to log"
-msgstr ""
+msgstr "工具输出到日志"
 
 #: 424faa2e759840a5a39ef60c26228ce6 of
 #: tooluniverse.extended_hooks.LoggingHook.process:12
 msgid "The original output (logging doesn't modify the output)"
-msgstr ""
+msgstr "原始输出（日志记录不会修改输出）"
 
 #: d3915df63e594f0f8652118511a13738 of
 #: tooluniverse.extended_hooks.LoggingHook._create_log_entry:1
 msgid "Create a log entry for the tool execution."
-msgstr ""
+msgstr "为工具执行创建日志条目。"
 
 #: 0c2397a82bf3408d8c45f2e381484f73 of
 #: tooluniverse.extended_hooks.LoggingHook._write_log:1

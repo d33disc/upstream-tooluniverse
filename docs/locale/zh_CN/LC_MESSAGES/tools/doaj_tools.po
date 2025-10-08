@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 21:40-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/doaj_tools.rst:2 35c5569fda514803a75abb4cb74001f8
+msgid "Doaj Tools"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:4 c1225115919a47ac98470ca925707cfe
+msgid ""
+"**Configuration File**: ``doaj_tools.json`` **Tool Type**: Local **Tools "
+"Count**: 1"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:8 a88d37447ac349eba327809862570a44
+msgid ""
+"This page contains all tools defined in the ``doaj_tools.json`` "
+"configuration file."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:11 696933a46557403a92d9bdcce62eb999
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:14 70595b87e42f4300ba32556c3a57b21d
+msgid "**DOAJ_search_articles** (Type: DOAJTool)"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:16 147a319f4c8e4dedbf4a6acaf70cb74d
+msgid ""
+"Search DOAJ (Directory of Open Access Journals) for open-access articles."
+" Returns articles with t..."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst 39d1636ea203469a93bbd7725f4c7720
+msgid "DOAJ_search_articles tool specification"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:20 43c35d5c37054edaa278a81829803bd1
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:22 27ecaa23f66f480d90a16b42393d0654
+msgid "**Name**: ``DOAJ_search_articles``"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:23 891cb1d55cda4bd9a67565615daf2115
+msgid "**Type**: ``DOAJTool``"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:24 2f1ccc9b33ba4af29b9fb206f7461c5c
+msgid ""
+"**Description**: Search DOAJ (Directory of Open Access Journals) for "
+"open-access articles. Returns articles with title, authors, year, DOI, "
+"venue, and URL."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:26 8bc3542b51b148c39453934aa56416d5
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:28 4602b73a6486489a921f00285b30f46f
+msgid ""
+"``query`` (string) (required) Search query for DOAJ articles. Supports "
+"Lucene syntax for advanced queries."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:31 c0c79300646d4f418d8d01127546032c
+msgid ""
+"``max_results`` (integer) (optional) Maximum number of articles to "
+"return. Default is 10, maximum is 100."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:34 c28c95db758846fa9c3cd2f6203bce4e
+msgid ""
+"``type`` (string) (optional) Type of search: 'articles' or 'journals'. "
+"Default is 'articles'."
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:37 b53156c85f4542bcb73d52a14472dd8e
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:51 e1dd6d9a3b3f43ad96ebe0d2a6df8f22
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:53 c167995b305c49ca9f44f1035d4ca755
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/doaj_tools.rst:54 e649b4bdcd7543f08883d368f5172e50
+msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
+msgstr ""
+

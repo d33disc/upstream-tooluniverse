@@ -82,7 +82,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:62 2bbac949f99c41a2bc83777df386d0a9
 msgid "主要翻译文件"
-msgstr ""
+msgstr "Main translation file"
 
 #: ../../old_files/I18N_GUIDE.md:64 937f96f4f876478997fa65b7717ed8ba
 msgid "优先翻译以下文件以获得最佳效果："
@@ -121,7 +121,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:92 2af7e427dfc5495cbadd97e1c65e042a
 msgid "快速测试单个文件翻译"
-msgstr ""
+msgstr "快速测试单个文件的翻译"
 
 #: ../../old_files/I18N_GUIDE.md:102 41fdc53966e445d68461350ad8a74181
 msgid "📂 目录结构"

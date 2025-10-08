@@ -7,163 +7,168 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 16:17-0400\n"
+"POT-Creation-Date: 2025-10-07 21:40-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.compose_scripts.tool_graph_generation.rst:2
-#: 247fea704edd499a836d9c9b4e3509bd
+#: 7a095fa8936e4c08a8baf9f3cfea430b
 msgid "tooluniverse.compose\\_scripts.tool\\_graph\\_generation module"
 msgstr "tooluniverse.compose_scripts.tool_graph_generation 模块"
 
-#: b7eaaf972ba04ff49fd7b373c45ac36f of
+#: 62c7f0e59ef34227aa4073c6e00ff90e of
 #: tooluniverse.compose_scripts.tool_graph_generation:1
 msgid "Tool Graph Generation Compose Script"
 msgstr "工具图生成组合脚本"
 
-#: 09b614f9a1da4c6098b27b997aa86b22 of
+#: ccb49a18cf954f31b09f3fcc1d00ac9d of
 #: tooluniverse.compose_scripts.tool_graph_generation:3
 msgid ""
-"Efficiently evaluates directional data-flow relationships between all unique"
-" pairs of provided tool configs using one agentic tool:"
+"Efficiently evaluates directional data-flow relationships between all "
+"unique pairs of provided tool configs using one agentic tool:"
 msgstr "高效评估所有提供工具配置中唯一配对之间的方向性数据流关系，使用单一智能工具："
 
-#: 18347827143e4c9c85015319ec722bf8 of
+#: f5db9ccb72b6414aa520d7d1a2ee41d5 of
 #: tooluniverse.compose_scripts.tool_graph_generation:5
 msgid "ToolRelationshipDetector"
 msgstr "工具关系检测器"
 
-#: f8d25dbfd4194b628cbe6c19434967bb of
+#: 2098433da3744da0b33589706374165f of
 #: tooluniverse.compose_scripts.tool_graph_generation:7
 msgid ""
 "Outputs a graph structure with edges representing valid directional "
 "relationships. Each edge stores: source, target, rationale."
 msgstr "输出一个图结构，其中边表示有效的有向关系。每条边包含：源节点、目标节点、理由。"
 
-#: 87e0ec894cf543fbbbcd3f4c453afec7 of
+#: 5e2d080c872e46dcbfcc0f823835faa0 of
 #: tooluniverse.compose_scripts.tool_graph_generation:10
 msgid "Performance considerations:"
 msgstr "性能考虑："
 
-#: 7060955679314f1781bb6ff5263752ea of
+#: e30ef693427941efbb2cd75ec115dd7e of
 #: tooluniverse.compose_scripts.tool_graph_generation:11
 msgid "Iterates i<j once (O(N^2/2) pairs)"
 msgstr "迭代 i<j 一次（O(N²/2) 对）"
 
-#: b5d7296866754b388c411922cf88c892 of
+#: 3e99846409fb40f0a192c428e763d264 of
 #: tooluniverse.compose_scripts.tool_graph_generation:12
 msgid "Lightweight JSON serialization of minimal fields"
 msgstr "轻量级 JSON 序列化的最小字段"
 
-#: 408d893ef9d347a0b54bb7a117c8b250 of
+#: 190e1c34f86347b6ae72b398b3755d5e of
 #: tooluniverse.compose_scripts.tool_graph_generation:13
 msgid ""
 "Optional batching hook (currently sequential because call_tool likely "
 "remote)"
 msgstr "可选批处理钩子（当前为顺序执行，因为 call_tool 可能是远程调用）"
 
-#: 2fb4c14aa1e447cc80df268aebdf973f of
+#: 36c6557b597647dd9240cff2ac69fe9d of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param tool_configs"
 msgstr "参数 tool_configs"
 
-#: 24131876fc5142669061e042757dc0ec of
+#: 9f05fb29f125433aa49f3531633b287b of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type tool_configs"
 msgstr "键入 tool_configs"
 
-#: d74f6bdcaed44726a0112bcff07f7731 of
+#: 29087c020ef44cce805dcc90cf91538d of
 #: tooluniverse.compose_scripts.tool_graph_generation:16
 msgid ":py:class:`list[dict]`"
 msgstr ""
 
-#: 3fc3bb7c68aa4098a9fb7fbb0f4bd94b of
+#: 0b5a0f9eb17b418790e8675524644df6 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param max_tools"
 msgstr "参数 max_tools"
 
-#: c49291debed04c5ebc8acd554b9427ab of
+#: 489c59a1c3cc475eb8514cfc59f9cb4c of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type max_tools"
 msgstr "类型 max_tools"
 
-#: 5bf696c7f5244f75b849cd12427b7639 of
+#: 15f6e8ebfff14607a92029cfc75bae66 of
 #: tooluniverse.compose_scripts.tool_graph_generation:18
 msgid ":py:class:`int`"
 msgstr ""
 
-#: a7da9184990f47708fb051a6618e83c0 of
+#: 69b97e58277544b48fb2aa929a1fbbc4 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param output_path"
 msgstr "参数 output_path"
 
-#: f338244e991f4cf5bc0772e4dec22ba6 of
+#: ff18e54fbbd14f7fb00dc42a53900e9f of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type output_path"
 msgstr "输入 output_path"
 
-#: 1df1305320484ffd980795e2b21608f9 of
+#: fe58a4babd8046eb8617342de08090e6 of
 #: tooluniverse.compose_scripts.tool_graph_generation:20
+#, fuzzy
 msgid ""
-":py:class:`str) path` to write resulting graph JSON (default "
-"``'./tool_relationship_graph.json'``"
+":py:class:`str) path to write resulting graph JSON (default "
+"'./tool_relationship_graph.json'`"
 msgstr ""
 ":py:class:`str) path` 用于写入生成的图形 JSON（默认值为 "
 "``'./tool_relationship_graph.json'``）"
 
-#: 9567f0f68a45408fa29237b64630b44e of
+#: e58350c1b83042409e977d489c392ad6 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param save_intermediate_every"
 msgstr "参数 save_intermediate_every"
 
-#: 1e9c97d01bb744a8b76222adc97f5d97 of
+#: ca0956011b744479b8c70c1c43c68103 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type save_intermediate_every"
 msgstr "类型 save_intermediate_every"
 
-#: d75a922b7c2d48cb81d32dfc74eb7f92 of
+#: 012f8b38de984656b5c40969f3756426 of
 #: tooluniverse.compose_scripts.tool_graph_generation:22
 msgid ":py:class:`int) checkpoint frequency (default 5000 pairs processed`"
 msgstr ":py:class:`int) 检查点频率（默认值为处理 5000 对数据）"
 
-#: 8c2b891463b948e79b8186775fa0a193 of
+#: 53ab9a0668704c22a844266425851dae of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "returns"
 msgstr "返回"
 
-#: e47eca13552b478e9e9331fbc86176ac of
+#: 5b2e9a7ec31348168ac201055595c94d of
 #: tooluniverse.compose_scripts.tool_graph_generation:24
 msgid "nodes, edges, stats"
 msgstr "节点、边、统计"
 
-#: f43a3cb0bd2b434488097337234a76ac of
+#: 3642ad534ffe44e6bfb46266929a8c19 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "rtype"
 msgstr ""
 
-#: 5f9905fc505b404ea50b2ab5fe41e9f1 of
+#: 7836a9fbe43043ca940e51f8bf945622 of
 #: tooluniverse.compose_scripts.tool_graph_generation:25
 msgid "dict with keys"
 msgstr "具有键的字典"
 
 #~ msgid ""
-#~ ":py:class:`str) path` to write resulting graph JSON (default "
+#~ ":py:class:`str) path` to write resulting "
+#~ "graph JSON (default "
 #~ "``'./tool_relationship_graph.json'``"
 #~ msgstr ""
 #~ ":py:class:`str) path` 用于写入生成的图形 JSON（默认值为 "
 #~ "``'./tool_relationship_graph.json'``）"
 
 #~ msgid ""
-#~ ":py:class:`str) path to write resulting graph JSON (default "
+#~ ":py:class:`str) path to write resulting "
+#~ "graph JSON (default "
 #~ "'./tool_relationship_graph.json'`"
 #~ msgstr ""
-#~ ":py:class:`str) 用于写入生成的图形 JSON 的路径（默认值为 './tool_relationship_graph.json'）`"
+#~ ":py:class:`str) 用于写入生成的图形 JSON 的路径（默认值为 "
+#~ "'./tool_relationship_graph.json'）`"
+

@@ -279,24 +279,27 @@ msgid ""
 "corresponding class (e.g., `FDADrugLabelTool`) - Merges `BaseTool` default "
 "configurations with entry-specific config"
 msgstr ""
+"**实例化与默认配置**  \n"
+"- 根据 `type` 查找对应的类（例如，`FDADrugLabelTool`）  \n"
+"- 将 `BaseTool` 的默认配置与条目特定配置合并"
 
 #: ../../expand_tooluniverse/architecture.rst:249
 #: 72bf66c51ac94ba4819abe3334bbf202
 msgid ""
 "**Execution & Validation** - `ToolUniverse.run_tool(tool_name, params)`:"
-msgstr ""
+msgstr "**执行与验证** - `ToolUniverse.run_tool(tool_name, params)`："
 
 #: ../../expand_tooluniverse/architecture.rst:251
 #: 4cfa1e728e3f43fb9c2e3f66f75e846a
 msgid ""
 "Locate instance by name → Parameter validation (required fields) → Call "
 "concrete implementation"
-msgstr ""
+msgstr "通过名称定位实例 → 参数验证（必填字段） → 调用具体实现"
 
 #: ../../expand_tooluniverse/architecture.rst:252
 #: 78c4dfa8e822406faf534b6849738a65
 msgid "Unified error handling and return structure"
-msgstr ""
+msgstr "统一的错误处理和返回结构"
 
 #: ../../expand_tooluniverse/architecture.rst:254
 #: db91adee36e04e33ad11e209db4b9601
@@ -306,11 +309,15 @@ msgid ""
 "(keyword/embedding/LLM) for tool retrieval - Visualize tool relationships "
 "and call chains via scripts or `tool_graph_web_ui.py`"
 msgstr ""
+"**组合/发现与图表**  \n"
+"- 使用 `compose_tool.py` 或 `compose_scripts/` 进行编排  \n"
+"- 利用 `tool_finder_*`（关键词/嵌入/大语言模型）进行工具检索  \n"
+"- 通过脚本或 `tool_graph_web_ui.py` 可视化工具关系及调用链"
 
 #: ../../expand_tooluniverse/architecture.rst:260
 #: 7a6fd1a472764cb4b18d9ffbf4636773
 msgid "MCP Integration"
-msgstr ""
+msgstr "MCP 集成"
 
 #: ../../expand_tooluniverse/architecture.rst:262
 #: 93d9ed9cf600497b943e231485bccaaa
@@ -320,6 +327,10 @@ msgid ""
 "`smcp_tooluniverse_server.py` provide convenient startup - `pyproject.toml` "
 "exposes commands: `tooluniverse-mcp`, `tooluniverse-smcp*`, etc."
 msgstr ""
+"**服务器端：**  \n"
+"- `smcp.py` 提供 `SMCP` 对象，实现一键暴露所有 ToolUniverse 工具  \n"
+"- `smcp_server.py` 及根目录下的 `smcp_tooluniverse_server.py` 提供便捷的启动方式  \n"
+"- `pyproject.toml` 暴露命令：`tooluniverse-mcp`、`tooluniverse-smcp*` 等。"
 
 #: ../../expand_tooluniverse/architecture.rst:267
 #: a20890696fb94b8e80a691951de24a00
@@ -330,16 +341,20 @@ msgid ""
 " with configurable prefixes and timeouts - `list_mcp_connections()` shows "
 "loaded remote connections and tool counts"
 msgstr ""
+"**客户端/远程工具：**  \n"
+"- `mcp_client_tool.py`、`mcp_integration.py` 支持从远程 MCP 服务器进行发现和动态注册  \n"
+"- `MCPAutoLoaderTool` 可通过配置前缀和超时时间，自动发现并批量注册远程工具的 URL  \n"
+"- `list_mcp_connections()` 显示已加载的远程连接及工具数量"
 
 #: ../../expand_tooluniverse/architecture.rst:273
 #: e79ef6cd9c8a450cb463f626a9e04c0e
 msgid "Configuration & Data Conventions"
-msgstr ""
+msgstr "配置与数据约定"
 
 #: ../../expand_tooluniverse/architecture.rst:275
 #: b00f3673c7cb41748d4461220091cc52
 msgid "**Tool Configuration Structure** (`data/*.json` files):"
-msgstr ""
+msgstr "**工具配置结构**（`data/*.json` 文件）："
 
 #: ../../expand_tooluniverse/architecture.rst:293
 #: 643992e7d9a4475295aea74265e468fb
@@ -348,54 +363,58 @@ msgid ""
 "`*_tool.py` modules - `tool_registry.py` performs smart matching - Can use "
 "`@register_tool` for explicit registration at class definition"
 msgstr ""
+"**命名与映射规范：**  \n"
+"- `*_tools.json` 通常对应 `*_tool.py` 模块  \n"
+"- `tool_registry.py` 执行智能匹配  \n"
+"- 可在类定义时使用 `@register_tool` 进行显式注册"
 
 #: ../../expand_tooluniverse/architecture.rst:299
 #: 64000c3bc46246fa89eb933b97d6d6cb
 msgid "Extension Points"
-msgstr ""
+msgstr "扩展点"
 
 #: ../../expand_tooluniverse/architecture.rst:301
 #: c38929e2a19a4bd28672954d0aed101b
 msgid "**Adding New Data Source Tools:**"
-msgstr ""
+msgstr "**添加新数据源工具：**"
 
 #: ../../expand_tooluniverse/architecture.rst:303
 #: ab64d255b20e4ebfae24036754632640
 msgid "Create `xxx_tool.py` in `src/tooluniverse/` inheriting from `BaseTool`"
-msgstr ""
+msgstr "在 `src/tooluniverse/` 目录下创建继承自 `BaseTool` 的 `xxx_tool.py` 文件"
 
 #: ../../expand_tooluniverse/architecture.rst:304
 #: f80c9e569c754588aa6e0a310120216d
 msgid ""
 "Use `@register_tool('YourToolType')` for registration, or rely on naming "
 "conventions"
-msgstr ""
+msgstr "使用 `@register_tool('YourToolType')` 进行注册，或依赖命名约定。"
 
 #: ../../expand_tooluniverse/architecture.rst:305
 #: c7bff16a596b46e0afa4849ae3c3674f
 msgid "Add one or more tool entries in `data/xxx_tools.json`"
-msgstr ""
+msgstr "在 `data/xxx_tools.json` 中添加一个或多个工具条目"
 
 #: ../../expand_tooluniverse/architecture.rst:307
 #: 238d91d994d54601b3b9e10ed0e103cc
 msgid "**Integrating Remote MCP Tools:**"
-msgstr ""
+msgstr "**集成远程MCP工具：**"
 
 #: ../../expand_tooluniverse/architecture.rst:309
 #: aa474d02801d420e95b83a865e9490c4
 msgid "Use `MCPAutoLoaderTool` with server URL for auto-discovery"
-msgstr ""
+msgstr "使用带有服务器 URL 的 `MCPAutoLoaderTool` 进行自动发现"
 
 #: ../../expand_tooluniverse/architecture.rst:310
 #: 71f03d05f0994242ba10ed704c533a6f
 msgid ""
 "Or use `ToolUniverse.load_mcp_tools([...])` for runtime dynamic loading"
-msgstr ""
+msgstr "或者使用 `ToolUniverse.load_mcp_tools([...])` 进行运行时动态加载"
 
 #: ../../expand_tooluniverse/architecture.rst:312
 #: dcb4e4fd2cdf45e7b3b48c4dd4c6cab1
 msgid "**Composition & Workflows:**"
-msgstr ""
+msgstr "**组成与工作流程：**"
 
 #: ../../expand_tooluniverse/architecture.rst:314
 #: 416f5d47597b477e8bc309e913a32ff3

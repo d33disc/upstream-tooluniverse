@@ -156,19 +156,19 @@ msgstr "统一配置系统"
 
 #: ../../about/changelog.rst:51 0b5cc7797dcf4ebd84aa04dc0334c6b4
 msgid "Improved error handling"
-msgstr ""
+msgstr "改进的错误处理"
 
 #: ../../about/changelog.rst:54 7475d43a68774569b2f7c16114c34c11
 msgid "Security"
-msgstr ""
+msgstr "安全性"
 
 #: ../../about/changelog.rst:55 446f13e5a36344eb9ca773c9f1a311b4
 msgid "Added API key management"
-msgstr ""
+msgstr "新增 API 密钥管理功能"
 
 #: ../../about/changelog.rst:56 163ef3b5b87449a686b44b407823184e
 msgid "Implemented secure token handling"
-msgstr ""
+msgstr "已实现安全令牌处理"
 
 #: ../../about/changelog.rst:59 50caaef0de15488fa2507f5c739e4daf
 msgid "[0.2.0] - 2024-11-XX"
@@ -176,31 +176,31 @@ msgstr ""
 
 #: ../../about/changelog.rst:63 a95de66be65349c09d69dd02ca6fa0ab
 msgid "Basic tool framework"
-msgstr ""
+msgstr "基础工具框架"
 
 #: ../../about/changelog.rst:64 9d907f4d45cc481d83f7299074d34ac8
 msgid "OpenTargets GraphQL integration"
-msgstr ""
+msgstr "OpenTargets GraphQL 集成"
 
 #: ../../about/changelog.rst:65 9f9496c786dc47f48d17836f36f9ea03
 msgid "RESTful API support"
-msgstr ""
+msgstr "RESTful API 支持"
 
 #: ../../about/changelog.rst:66 782f65274b6e4f37b33338a89173da4f
 msgid "Initial documentation"
-msgstr ""
+msgstr "初始文档"
 
 #: ../../about/changelog.rst:70 7af01a919b5a45d6835c8ab9406f9e83
 msgid "Refactored base tool architecture"
-msgstr ""
+msgstr "重构基础工具架构"
 
 #: ../../about/changelog.rst:74 3eb3321213d144ecbfa0cdf70ad001ac
 msgid "Connection timeout issues"
-msgstr ""
+msgstr "连接超时问题"
 
 #: ../../about/changelog.rst:75 02f7358384f04718913c51bf08c2be09
 msgid "JSON parsing errors"
-msgstr ""
+msgstr "JSON 解析错误"
 
 #: ../../about/changelog.rst:78 491772c11ec94cdb9d04c83ccb9de574
 msgid "[0.1.0] - 2024-10-XX"
@@ -208,23 +208,23 @@ msgstr ""
 
 #: ../../about/changelog.rst:82 29ba2d2419ba4cb89b51542a99031db0
 msgid "Initial release"
-msgstr ""
+msgstr "初始版本发布"
 
 #: ../../about/changelog.rst:83 ae9136bd6a8f4a1995477e03f6881ab6
 msgid "Basic scientific data access"
-msgstr ""
+msgstr "基础科学数据访问"
 
 #: ../../about/changelog.rst:84 0979db760c8d43a2aa9902aaf1d67ecf
 msgid "Simple tool interface"
-msgstr ""
+msgstr "简单工具界面"
 
 #: ../../about/changelog.rst:87 8cdda045b9744122bd2601d0b31d544d
 msgid "Features by Version"
-msgstr ""
+msgstr "按版本划分的功能"
 
 #: ../../about/changelog.rst:90 36958914d0754aeba998b4197ba78f2d
 msgid "Version 0.3.0 Features"
-msgstr ""
+msgstr "版本 0.3.0 功能介绍"
 
 #: ../../about/changelog.rst:92 8f17dbca623e4cec9aa6632e2bab7e06
 msgid ""
@@ -233,12 +233,27 @@ msgid ""
 "tools) - ChEMBL (3+ tools) - DrugBank (2+ tools) - Europe PMC (1+ tools) - "
 "Semantic Scholar (1+ tools) - OpenAlex (1+ tools)"
 msgstr ""
+"**数据来源**：  \n"
+"- OpenTargets 平台（50+ 工具）  \n"
+"- FDA 药物标签 / FAERS（20+ 工具）  \n"
+"- PubMed/PubTator（5+ 工具）  \n"
+"- ClinicalTrials.gov（10+ 工具）  \n"
+"- ChEMBL（3+ 工具）  \n"
+"- DrugBank（2+ 工具）  \n"
+"- Europe PMC（1+ 工具）  \n"
+"- Semantic Scholar（1+ 工具）  \n"
+"- OpenAlex（1+ 工具）"
 
 #: ../../about/changelog.rst:103 271a010a58bf42938f7122628ce83570
 msgid ""
 "**Analysis Tools**: - Gene enrichment analysis (Enrichr) - Protein-protein "
 "interactions (HumanBase) - Network analysis - Statistical analysis"
 msgstr ""
+"**分析工具**：  \n"
+"- 基因富集分析（Enrichr）  \n"
+"- 蛋白质相互作用（HumanBase）  \n"
+"- 网络分析  \n"
+"- 统计分析"
 
 #: ../../about/changelog.rst:109 dc53d9637c4f4b3d92724626749181d5
 msgid ""

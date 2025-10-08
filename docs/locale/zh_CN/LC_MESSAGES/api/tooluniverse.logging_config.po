@@ -192,39 +192,39 @@ msgstr "记录关键消息"
 #: ae5d09824a334f6694debd2c6f30444c of
 #: tooluniverse.logging_config.get_hook_logger:1
 msgid "Get a logger specifically configured for hook operations."
-msgstr ""
+msgstr "获取专门为钩子操作配置的记录器。"
 
 #: abb0baba9ce34d53ac5606131685eb30 of
 #: tooluniverse.logging_config.get_hook_logger:3
 msgid "Name of the logger. Defaults to 'HookManager'"
-msgstr ""
+msgstr "记录器名称。默认值为 'HookManager'"
 
 #: e1179a9f4be841cbb6be0e52912d1370 of
 #: tooluniverse.logging_config.get_hook_logger:6
 msgid "Configured logger for hook operations"
-msgstr ""
+msgstr "为钩子操作配置的日志记录器"
 
 #: 945e2d4339e243babcdd9d698958e010 of
 #: tooluniverse.logging_config.log_hook_execution:1
 msgid "Log hook execution details for monitoring and debugging."
-msgstr ""
+msgstr "记录钩子执行详情以便监控和调试。"
 
 #: b3030ded491542c9a8ac31a246f3307b of
 #: tooluniverse.logging_config.log_hook_execution:3
 msgid "Name of the hook that was executed"
-msgstr ""
+msgstr "执行的钩子名称"
 
 #: 5a0f35e3ed3c4a80a55ade326a41d96c of
 #: tooluniverse.logging_config.log_hook_execution:5
 msgid "Name of the tool the hook was applied to"
-msgstr ""
+msgstr "应用挂钩的工具名称"
 
 #: 4205ad1f6803450ebb99b5bfeef9f4d3 of
 #: tooluniverse.logging_config.log_hook_execution:7
 msgid "Time taken to execute the hook in seconds"
-msgstr ""
+msgstr "执行钩子所用时间（秒）"
 
 #: 20849b6462904714a5ee8e09177e21d4 of
 #: tooluniverse.logging_config.log_hook_execution:9
 msgid "Whether the hook execution was successful"
-msgstr ""
+msgstr "钩子执行是否成功"

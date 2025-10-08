@@ -388,12 +388,12 @@ msgstr "**集成测试**：验证工具在 ToolUniverse 中的正确运行"
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:185
 #: a36cc32ea45f446e8c37007d4c747fd6
 msgid "**Error Testing**: Test all error conditions and input validation"
-msgstr ""
+msgstr "**错误测试**：测试所有错误情况和输入验证"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:186
 #: dc67564e92fa4366a450fca8968e4299
 msgid "**Mock External APIs**: Use mocks for external service calls in tests"
-msgstr ""
+msgstr "**模拟外部 API**：在测试中使用模拟来替代外部服务调用"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:188
 #: f095a5efe720494aa49009350b575337
@@ -402,6 +402,12 @@ msgid ""
 "external API calls appropriately - Test both success and error scenarios - "
 "Include test data fixtures - Validate input/output formats"
 msgstr ""
+"**必需的测试组件：**  \n"
+"- 使用 pytest 夹具的测试类  \n"
+"- 适当模拟外部 API 调用  \n"
+"- 测试成功和错误两种场景  \n"
+"- 包含测试数据夹具  \n"
+"- 验证输入/输出格式"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:195
 #: c435e6cc00b342e99d0aad39873d6dbd
@@ -411,11 +417,16 @@ msgid ""
 "structures - Fixture creation patterns - Mocking strategies for external "
 "APIs - Coverage reporting setup"
 msgstr ""
+"有关详细的测试示例和模板，请参见 :doc:`local_tool_registration`，其中包括：  \n"
+"- 完整的测试文件结构  \n"
+"- 夹具创建模式  \n"
+"- 外部 API 的模拟策略  \n"
+"- 覆盖率报告设置"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:202
 #: 2bae8158ad9c47a887bb499666e5bf68
 msgid "Step 5: Code Quality and Standards for Contribution"
-msgstr ""
+msgstr "步骤5：代码质量与贡献标准"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:204
 #: 7b6330d3cedb4ea4b2a83d44ef0163ae
@@ -424,16 +435,17 @@ msgid ""
 "detailed requirements and examples are covered in "
 ":doc:`local_tool_registration`."
 msgstr ""
+"所有贡献的工具必须符合 ToolUniverse 的代码质量标准。详细的要求和示例请参见 :doc:`local_tool_registration`。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:206
 #: adf80b5a712249759e4dfa1e9cc5da67
 msgid "**Quality Checklist:**"
-msgstr ""
+msgstr "**质量检查清单：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:209
 #: bf5b326c012944499900f1b4d7bb1047
 msgid "5.1 Pre-submission Requirements"
-msgstr ""
+msgstr "5.1 提交前要求"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:225
 #: b41b2eeba76147b7ae197595c93b9120
@@ -444,18 +456,24 @@ msgid ""
 "**Documentation**: Google-style docstrings with examples - **Testing**: >90%"
 " test coverage"
 msgstr ""
+"**必需标准：**  \n"
+"- **代码格式**：使用 Black 格式化（行宽限制为 88 字符）  \n"
+"- **代码检查**：通过 flake8 检查且无警告  \n"
+"- **类型注解**：所有函数必须具备完整的类型注解  \n"
+"- **文档编写**：采用 Google 风格的文档字符串，包含示例  \n"
+"- **测试覆盖率**：测试覆盖率超过 90%"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:232
 #: e531e50435d44224929926ecf7e87be6
 msgid ""
 "For detailed code examples and documentation templates, see "
 ":doc:`local_tool_registration`."
-msgstr ""
+msgstr "有关详细的代码示例和文档模板，请参见 :doc:`local_tool_registration`。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:235
 #: 86e0825bdd4f42d2901242b5b47ad55b
 msgid "Step 6: Tool Registration and Discovery"
-msgstr ""
+msgstr "第6步：工具注册与发现"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:237
 #: 0099e691d6354ff9a315303b1b058167
@@ -463,31 +481,31 @@ msgid ""
 "Tool registration is handled automatically by ToolUniverse when tools are "
 "placed in the correct directory structure. The registration details are "
 "covered in the implementation guides:"
-msgstr ""
+msgstr "工具注册由 ToolUniverse 自动处理，当工具放置在正确的目录结构中时即完成注册。注册详情请参阅实施指南："
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:239
 #: 59c4a3293ebc4a738e4e9be3b8819652
 msgid ""
 "**Local Tools**: See :doc:`local_tool_registration` for automatic discovery "
 "patterns"
-msgstr ""
+msgstr "**本地工具**：参见 :doc:`local_tool_registration` 了解自动发现模式"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:240
 #: c762959c67cd4588864d8f9e626fb736
 msgid ""
 "**Remote Tools**: See :doc:`remote_tool_registration` for MCP and REST API "
 "registration"
-msgstr ""
+msgstr "**远程工具**：有关 MCP 和 REST API 注册，请参见 :doc:`remote_tool_registration`。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:242
 #: e3851959ff994f2dbd6723b1d3e3478e
 msgid "**Verification Test:**"
-msgstr ""
+msgstr "**验证测试：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:264
 #: a05c855efa6e42608f6f396ee1757b4b
 msgid "Step 7: Documentation Requirements for Contribution"
-msgstr ""
+msgstr "第七步：贡献文档要求"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:266
 #: 1f302eafd11d42968c7f086b5dc8f100
@@ -495,26 +513,26 @@ msgid ""
 "Contributors must provide comprehensive documentation for their tools. The "
 "detailed documentation patterns and requirements are covered in "
 ":doc:`local_tool_registration`."
-msgstr ""
+msgstr "贡献者必须为其工具提供全面的文档。详细的文档模式和要求请参见 :doc:`local_tool_registration`。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:268
 #: cc051542f49b49c4a6b8e5df09cf0645
 msgid "**Required Documentation Components:**"
-msgstr ""
+msgstr "**必需的文档组成部分：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:270
 #: 9d59e1fd904d48d89ada67d56c0f07c5
 msgid ""
 "**Comprehensive Docstrings**: All public methods must have detailed Google-"
 "style docstrings"
-msgstr ""
+msgstr "**完整的文档字符串**：所有公共方法必须包含详细的 Google 风格文档字符串"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:271
 #: ddac833cc4204f8ab66aa5259e403034
 msgid ""
 "**Usage Examples**: Include practical examples in docstrings showing real-"
 "world usage"
-msgstr ""
+msgstr "**使用示例**：在文档字符串中包含展示实际应用的示例"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:272
 #: 6775c1f0bb95429d90c46b3e3cdec8f3

@@ -243,7 +243,7 @@ msgstr ""
 
 #: ../../old_files/README.md:20 9cdf206e98b44f7bb09be6621734f7bf
 msgid "旧配置文件 / Old Configuration Files"
-msgstr ""
+msgstr "旧配置文件 / 旧配置文件"
 
 #: ../../old_files/README.md:21 ee05c1ed9f3646939c43a5884eefe6ea
 msgid "`conf_backup_pydata.py` - PyData 主题备份配置"
@@ -259,7 +259,7 @@ msgstr ""
 
 #: ../../old_files/README.md:24 2431a242f978484987aa1d58914227a6
 msgid "`conf_pydata.py` - PyData 主题配置"
-msgstr ""
+msgstr "`conf_pydata.py` - PyData 主题配置文件"
 
 #: ../../old_files/README.md:25 32645aa36e114a7a8b9a9fd228a060b7
 msgid "`conf_shibuya.py` - Shibuya 主题独立配置"
@@ -295,7 +295,7 @@ msgstr ""
 
 #: ../../old_files/README.md:35 7732702e848345e9b92da49032729cde
 msgid "主题切换工具 / Theme Switching Tools"
-msgstr ""
+msgstr "主题切换工具 / 主题切换工具"
 
 #: ../../old_files/README.md:36 3dc64f3c002d4e009e065911b2f1aae6
 msgid "`switch_theme.py` - Python 主题切换工具"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../../old_files/README.md:39 b896dafa5e854514a234df293d387b9b
 msgid "测试文件 / Test Files"
-msgstr ""
+msgstr "测试文件 / 测试文件"
 
 #: ../../old_files/README.md:40 e839548ff5d249c48070dd33f80b0c9d
 msgid "`test_switcher.html` - 语言切换器测试页面"
@@ -315,11 +315,11 @@ msgstr ""
 
 #: ../../old_files/README.md:42 0751bc85210a4d7b9408fe0c58ee855b
 msgid "文件统计 / File Statistics"
-msgstr ""
+msgstr "文件统计 / 文件统计"
 
 #: ../../old_files/README.md:44 44e062b241bb4bbabc5674d52145fec4
 msgid "**Markdown 文档**: 8 个"
-msgstr ""
+msgstr "**Markdown 文档**：8 个"
 
 #: ../../old_files/README.md:45 8548562783c64522a2992edef4c42aa3
 msgid "**Python 配置文件**: 6 个"

@@ -40,8 +40,8 @@ Remote tools integrate external services, APIs, and specialized systems running 
 Overview
 -----------------------------
 
-* **Total Configuration Files**: 63
-* **Total Tools**: 651
+* **Total Configuration Files**: 79
+* **Total Tools**: 667
 
 Local Tools
 -----------
@@ -138,6 +138,16 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Arxiv Tools <arxiv_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Biorxiv Tools <biorxiv_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Boltz Tools <boltz_tools>
 
 .. toctree::
@@ -158,6 +168,16 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Core Tools <core_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Crossref Tools <crossref_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Dailymed Tools <dailymed_tools>
 
 .. toctree::
@@ -168,7 +188,17 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Dblp Tools <dblp_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Disease Target Score Tools <disease_target_score_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Doaj Tools <doaj_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -198,6 +228,11 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Fatcat Tools <fatcat_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Fda Drug Adverse Event Tools <fda_drug_adverse_event_tools>
 
 .. toctree::
@@ -219,6 +254,11 @@ Builtin Tools
    :maxdepth: 1
 
    Gwas Tools <gwas_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Hal Tools <hal_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -248,12 +288,22 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Medrxiv Tools <medrxiv_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Monarch Tools <monarch_tools>
 
 .. toctree::
    :maxdepth: 1
 
    Odphp Tools <odphp_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Openaire Tools <openaire_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -268,12 +318,27 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Osf Preprints Tools <osf_preprints_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Output Summarization Tools <output_summarization_tools>
 
 .. toctree::
    :maxdepth: 1
 
+   Pmc Tools <pmc_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Pubchem Tools <pubchem_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Pubmed Tools <pubmed_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -318,6 +383,11 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Unpaywall Tools <unpaywall_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Url Fetch Tools <url_fetch_tools>
 
 .. toctree::
@@ -333,7 +403,17 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Wikidata Sparql Tools <wikidata_sparql_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Xml Tools <xml_tools>
+
+.. toctree::
+   :maxdepth: 1
+
+   Zenodo Tools <zenodo_tools>
 
 
 Remote Tools
@@ -424,6 +504,18 @@ Tools by Type
   * alphafold_get_prediction (from :doc:`alphafold_tools`)
   * alphafold_get_summary (from :doc:`alphafold_tools`)
 
+**ArXivTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * ArXiv_search_papers (from :doc:`arxiv_tools`)
+
+**BioRxivTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * BioRxiv_search_preprints (from :doc:`biorxiv_tools`)
+
 **ChEMBLTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -464,6 +556,30 @@ Tools by Type
   * ToolGraphComposer (from :doc:`tool_composition_tools`)
   * ToolGraphGenerationPipeline (from :doc:`compose_tools`)
   * ToolMetadataGenerationPipeline (from :doc:`compose_tools`)
+
+**CoreTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * CORE_search_papers (from :doc:`core_tools`)
+
+**CrossrefTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * Crossref_search_works (from :doc:`crossref_tools`)
+
+**DBLPTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * DBLP_search_publications (from :doc:`dblp_tools`)
+
+**DOAJTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * DOAJ_search_articles (from :doc:`doaj_tools`)
 
 **DatasetTool** (7 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -717,6 +833,12 @@ Tools by Type
 *Local Tools:*
   * FDA_get_drug_generic_name (from :doc:`fda_drug_labeling_tools`)
 
+**FatcatScholarTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * Fatcat_search_scholar (from :doc:`fatcat_tools`)
+
 **GWASAssociationByID** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -804,6 +926,12 @@ Tools by Type
 
 *Local Tools:*
   * DailyMed_get_spl_by_setid (from :doc:`dailymed_tools`)
+
+**HALTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * HAL_search_archive (from :doc:`hal_tools`)
 
 **HPAGetBiologicalProcessTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -912,6 +1040,12 @@ Tools by Type
   * mcp_mock_calculator (from :doc:`mcp_client_tools_example`)
   * mcp_mock_greeter (from :doc:`mcp_client_tools_example`)
 
+**MedRxivTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * MedRxiv_search_preprints (from :doc:`medrxiv_tools`)
+
 **MedlinePlusRESTTool** (5 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -958,6 +1092,18 @@ Tools by Type
 
 *Local Tools:*
   * odphp_topicsearch (from :doc:`odphp_tools`)
+
+**OSFPreprintsTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * OSF_search_preprints (from :doc:`osf_preprints_tools`)
+
+**OpenAIRETool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * OpenAIRE_search_publications (from :doc:`openaire_tools`)
 
 **OpenAlexTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1030,6 +1176,12 @@ Tools by Type
 *Local Tools:*
   * OpenTargets_get_drug_chembId_by_generic_name (from :doc:`opentarget_tools`)
   * OpenTargets_get_drug_id_description_by_name (from :doc:`opentarget_tools`)
+
+**PMCTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * PMC_search_papers (from :doc:`pmc_tools`)
 
 **PackageTool** (164 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1214,6 +1366,12 @@ Tools by Type
   * PubChem_search_compounds_by_similarity (from :doc:`pubchem_tools`)
   * PubChem_search_compounds_by_substructure (from :doc:`pubchem_tools`)
 
+**PubMedTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * PubMed_search_articles (from :doc:`pubmed_tools`)
+
 **PubTatorTool** (2 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1366,6 +1524,18 @@ Tools by Type
   * UniProt_get_sequence_by_accession (from :doc:`uniprot_tools`)
   * UniProt_get_subcellular_location_by_accession (from :doc:`uniprot_tools`)
 
+**UnpaywallTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * Unpaywall_check_oa_status (from :doc:`unpaywall_tools`)
+
+**WikidataSPARQLTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * Wikidata_SPARQL_query (from :doc:`wikidata_sparql_tools`)
+
 **XMLTool** (19 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1389,6 +1559,12 @@ Tools by Type
   * mesh_get_subjects_by_subject_id (from :doc:`xml_tools`)
   * mesh_get_subjects_by_subject_name (from :doc:`xml_tools`)
   * mesh_get_subjects_by_subject_scope_or_definition (from :doc:`xml_tools`)
+
+**ZenodoTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * Zenodo_search_records (from :doc:`zenodo_tools`)
 
 
 Quick Tool Search

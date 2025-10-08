@@ -91,7 +91,7 @@ msgstr "如果为 None，则尝试从本地 MCP 工具注册表中发现。"
 #: tooluniverse.mcp_integration.discover_mcp_tools:11
 #: tooluniverse.mcp_integration.load_mcp_tools:16
 msgid "**kwargs"
-msgstr ""
+msgstr "**kwargs（关键字参数）"
 
 #: d78b2934956e4067a3fb5d311ced95da of
 #: tooluniverse.mcp_integration.load_mcp_tools:17
@@ -221,16 +221,18 @@ msgid ""
 "tools locally, auto-discover their servers tu.load_mcp_tools()  # Uses "
 "servers from mcp_tool_registry ```"
 msgstr ""
+"本地注册表自动发现：```python # 如果您已在本地注册 MCP 工具，自动发现其服务器 tu.load_mcp_tools()  # 使用 "
+"mcp_tool_registry 中的服务器 ```"
 
 #: 273dac1ad3314ceaa4281771ddb3c8b8 of
 #: tooluniverse.mcp_integration._load_tools_from_mcp_server:1
 msgid "Load tools from a specific MCP server."
-msgstr ""
+msgstr "从特定的 MCP 服务器加载工具。"
 
 #: bb6e8bd50d9549de854b9a8e3bb77503 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:1
 msgid "Discover available tools from MCP servers without loading them."
-msgstr ""
+msgstr "无需加载即可发现 MCP 服务器上的可用工具。"
 
 #: 93f7a5d5a2d8490ab3dcec1e4e2270e3 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:3
@@ -238,12 +240,12 @@ msgid ""
 "This method connects to MCP servers to discover what tools are available "
 "without actually registering them in ToolUniverse. Useful for exploration "
 "and selective tool loading."
-msgstr ""
+msgstr "此方法连接到 MCP 服务器，以发现可用的工具，而无需实际将其注册到 ToolUniverse 中。适用于工具的探索和选择性加载。"
 
 #: 6195ffc4fc3742a6bf27c6c2ef3fd7e9 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:10
 msgid "List of MCP server URLs to discover from"
-msgstr ""
+msgstr "用于发现的 MCP 服务器 URL 列表"
 
 #: d8c0b9ee7fc549e8a3b3688bafbe700c of
 #: tooluniverse.mcp_integration.discover_mcp_tools:12
@@ -251,58 +253,69 @@ msgid ""
 "Additional options: - timeout (int): Connection timeout (default: 30) - "
 "include_schemas (bool): Include tool parameter schemas (default: True)"
 msgstr ""
+"附加选项：  \n"
+"- timeout (int)：连接超时（默认值：30）  \n"
+"- include_schemas (bool)：是否包含工具参数架构（默认值：True）"
 
 #: 896c3b2b84294170951293f6c3a94684 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:19
 msgid "Discovery results with tools organized by server"
-msgstr ""
+msgstr "按服务器组织的工具发现结果"
 
 #: df6e52917ea04cffa288a38552b10154 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:23
 msgid "```python tu = ToolUniverse()"
 msgstr ""
+"```python\n"
+"tu = ToolUniverse()\n"
+"```"
 
 #: e647df144cc34de79a8891bc3fb79349 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:26
 msgid "# Discover what's available discovery = tu.discover_mcp_tools(["
 msgstr ""
+"# 发现可用资源  \n"
+"discovery = tu.discover_mcp_tools(["
 
 #: f68f0073c1574eb69a5a25095bb76ea0 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:28
 msgid "\"http://localhost:8001\", \"http://ml-server:8002\""
-msgstr ""
+msgstr "http://localhost:8001\", \"http://ml-server:8002"
 
 #: 5344ff643661443a8f12abbcc8cf4f2e of
 #: tooluniverse.mcp_integration.discover_mcp_tools:32
 msgid "# Show available tools for server, info in discovery[\"servers\"].items():"
-msgstr ""
+msgstr "# 显示 discovery[\"servers\"].items() 中服务器的可用工具信息："
 
 #: 0baff1ab12014cf1abce20471a7f00f0 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:34
 #, python-brace-format
 msgid "print(f\"\\n{server}:\") for tool in info.get(\"tools\", []):"
-msgstr ""
+msgstr "print(f\"\\n{server}:\") 对 info.get(\"tools\", []) 中的每个工具执行："
 
 #: d79e005e3d9a465b9da8d067e679ac71 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:36
 #, python-brace-format
 msgid "print(f\"  - {tool['name']}: {tool['description']}\")"
-msgstr ""
+msgstr "print(f\"  - {tool['name']}：{tool['description']}\")"
 
 #: 8385e92691b941f5ad4639a30b1ea2a6 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:37
 msgid "```"
 msgstr ""
+"```  \n"
+"上下文：文档  \n"
+"```"
 
 #: 7e22eb23f9984702972f39b868eccffc of
 #: tooluniverse.mcp_integration.list_mcp_connections:1
 msgid "List all active MCP connections and loaded tools."
-msgstr ""
+msgstr "列出所有活动的 MCP 连接及已加载的工具。"
 
 #: cb56f59cfe6946c9bd1b2434dc9e22c2 of
 #: tooluniverse.mcp_integration.list_mcp_connections:6
 msgid "Information about MCP connections, auto-loaders, and loaded tools"
-msgstr ""
+msgstr "关于MCP连接、自动装载器及已装载工具的信息"
 
 #: af61b7af05404fd999faed982b8e0d10 of
 #: tooluniverse.mcp_integration.list_mcp_connections:10

@@ -152,83 +152,83 @@ msgstr "测试覆盖率"
 
 #: ../../about/contributing.rst:168 85d936f35112466081d34d26f39f828f
 msgid "Aim for >90% test coverage:"
-msgstr ""
+msgstr "目标测试覆盖率超过90%："
 
 #: ../../about/contributing.rst:176 9899fe3516a54e659825fbf74b891ec6
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
 #: ../../about/contributing.rst:179 e745316f1b794c93b1ccae06c2c4f03c
 msgid "Building Documentation"
-msgstr ""
+msgstr "构建文档"
 
 #: ../../about/contributing.rst:188 3821396c640f43a4a12b3522c92a5ee6
 msgid "Live Documentation"
-msgstr ""
+msgstr "实时文档"
 
 #: ../../about/contributing.rst:190 342a61dd97ef48bd87cd13f520b864e0
 msgid "For live editing:"
-msgstr ""
+msgstr "实时编辑："
 
 #: ../../about/contributing.rst:198 0f3a623c4e464bd1982324bf14db5cf1
 msgid "Writing Documentation"
-msgstr ""
+msgstr "编写文档"
 
 #: ../../about/contributing.rst:200 9f4f7d66fb4e4a0eae957c935a82b194
 msgid "Document all public APIs"
-msgstr ""
+msgstr "记录所有公共 API"
 
 #: ../../about/contributing.rst:201 66f8fbf416fa43d59fbd00cb08ae3002
 msgid "Include examples in docstrings"
-msgstr ""
+msgstr "在文档字符串中包含示例"
 
 #: ../../about/contributing.rst:202 98b0307f9b7949a5a74e64f2d7f8746d
 msgid "Update user guides for new features"
-msgstr ""
+msgstr "更新用户指南以涵盖新功能"
 
 #: ../../about/contributing.rst:203 138f8d4cb785473ab1894e6523d084a0
 msgid "Add tutorials for complex workflows"
-msgstr ""
+msgstr "为复杂工作流程添加教程"
 
 #: ../../about/contributing.rst:206 8fa3942ab3fd44d1b89792767a1e4d1f
 msgid "Docstring Format"
-msgstr ""
+msgstr "文档字符串格式"
 
 #: ../../about/contributing.rst:208 9174aeeff99643fab0fe023a76194784
 msgid "Use Google-style docstrings:"
-msgstr ""
+msgstr "使用 Google 风格的文档字符串："
 
 #: ../../about/contributing.rst:236 6bf4f217f3834c24a76d659c00c9d24d
 msgid "Contributing Workflow"
-msgstr ""
+msgstr "贡献工作流程"
 
 #: ../../about/contributing.rst:239 0150b9aaef644c2d88e3f6924b097437
 msgid "1. Create a Feature Branch"
-msgstr ""
+msgstr "1. 创建功能分支"
 
 #: ../../about/contributing.rst:246 ecec8514db384f3892e712bc743e2923
 msgid "2. Make Changes"
-msgstr ""
+msgstr "2. 进行更改"
 
 #: ../../about/contributing.rst:248 6dc83768698642028acc16eee46bcf35
 msgid "Write code following our standards"
-msgstr ""
+msgstr "按照我们的标准编写代码"
 
 #: ../../about/contributing.rst:249 c1585cbe9e9a404aacf08134d08fab8f
 msgid "Add comprehensive tests"
-msgstr ""
+msgstr "添加全面测试"
 
 #: ../../about/contributing.rst:250 4f16b456db1c4f1f9e3293de3db040e3
 msgid "Update documentation"
-msgstr ""
+msgstr "更新文档"
 
 #: ../../about/contributing.rst:251 941bde65307444ebb68e041e4e8455ef
 msgid "Run the test suite"
-msgstr ""
+msgstr "运行测试套件"
 
 #: ../../about/contributing.rst:254 4b3a8e3e0bfd4664bb9942344b5ae2e7
 msgid "3. Commit Changes"
-msgstr ""
+msgstr "3. 提交更改"
 
 #: ../../about/contributing.rst:256 b34fec2c4de54edf80c5baaf0120b04a
 msgid "Use conventional commit messages:"
