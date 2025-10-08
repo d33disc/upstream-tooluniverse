@@ -176,7 +176,7 @@ msgstr "基础：:py:class:`~tooluniverse.mcp_client_tool.MCPClientTool`"
 msgid ""
 "A proxy tool that automatically forwards tool calls to an MCP server. This "
 "creates individual tools for each tool available on the MCP server."
-msgstr "一种代理工具，可自动将工具调用转发到MCP服务器。这将为MCP服务器上可用的每个工具创建单独的工具。"
+msgstr "一种智能体工具，可自动将工具调用转发到MCP服务器。这将为MCP服务器上可用的每个工具创建单独的工具。"
 
 #: 7499efc92174452e9aeef0adceab6bcd of
 #: tooluniverse.mcp_client_tool.MCPProxyTool.run:1
@@ -253,7 +253,7 @@ msgstr "直接按名称调用 MCP 工具"
 #: cfd12c29da844532a5dc82159f6194fa of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.generate_proxy_tool_configs:1
 msgid "Generate proxy tool configurations for discovered tools"
-msgstr "为已发现的工具生成代理工具配置"
+msgstr "为已发现的工具生成智能体工具配置"
 
 #: 27dc715d304b4b5db80755fdcccbbc40 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.register_tools_in_engine:1

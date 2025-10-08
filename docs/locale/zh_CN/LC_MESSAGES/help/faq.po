@@ -375,7 +375,7 @@ msgstr "**检查互联网连接**"
 
 #: ../../help/faq.rst:344 e138e47a15014099a7500205ddb12410
 msgid "**Verify proxy settings** if behind corporate firewall"
-msgstr "**如果处于企业防火墙后，请验证代理设置**"
+msgstr "**如果处于企业防火墙后，请验证智能体设置**"
 
 #: ../../help/faq.rst:345 dfe4a7b22c6441ac809c9c152014ffab
 msgid "**Test specific endpoints:**"

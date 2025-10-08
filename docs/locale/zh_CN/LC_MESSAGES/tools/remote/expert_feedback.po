@@ -191,7 +191,7 @@ msgstr "**设置环境变量：**"
 
 #: ../../tools/remote/expert_feedback.md:70 96fbc683139a49528d7cceff80a41a4a
 msgid "In the environment where agent runs tools:"
-msgstr "在代理运行工具的环境中："
+msgstr "在智能体运行工具的环境中："
 
 #: ../../tools/remote/expert_feedback.md:92 63e24f19de2c4e14872883caa2ee0387
 msgid "🔧 Available Tools"

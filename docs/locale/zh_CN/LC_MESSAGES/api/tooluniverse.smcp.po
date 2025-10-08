@@ -38,7 +38,7 @@ msgid ""
 "protocol, enabling AI systems to access scientific databases, perform "
 "complex analyses, and execute scientific workflows."
 msgstr ""
-"SMCP 是一款先进的 MCP（模型上下文协议）服务器，旨在弥合 AI 代理与科学工具之间的鸿沟。它将 ToolUniverse 拥有的 350 "
+"SMCP 是一款先进的 MCP（模型上下文协议）服务器，旨在弥合 AI 智能体与科学工具之间的鸿沟。它将 ToolUniverse 拥有的 350 "
 "多种科学工具与 MCP 协议无缝集成，使 AI 系统能够访问科学数据库、执行复杂分析并开展科学工作流程。"
 
 #: 3ccc329107f04376b60deedcd7615a05 of tooluniverse.smcp:8
@@ -48,7 +48,7 @@ msgid ""
 "easy for AI agents to discover, understand, and execute scientific tools in "
 "a unified manner."
 msgstr ""
-"SMCP 模块通过标准化的 MCP 协议，提供了一套完整的解决方案，用于公开科学计算资源，使 AI 代理能够以统一的方式轻松发现、理解和执行科学工具。"
+"SMCP 模块通过标准化的 MCP 协议，提供了一套完整的解决方案，用于公开科学计算资源，使 AI 智能体能够以统一的方式轻松发现、理解和执行科学工具。"
 
 #: 5fdd9c29a09c4d6fbcd629590b6836e2 8f80a2dda38b40e4b1c5257486948ca5 of
 #: tooluniverse.smcp:13 tooluniverse.smcp.SMCP.close:28
@@ -157,7 +157,7 @@ msgid ""
 msgstr ""
 "┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐  \n"
 "│   MCP 客户端     │◄──►│      SMCP        │◄──►│  ToolUniverse   │  \n"
-"│  （AI 代理）     │    │     服务器       │    │   （350+ 工具） │  \n"
+"│  （AI 智能体）     │    │     服务器       │    │   （350+ 工具） │  \n"
 "└─────────────────┘    └──────────────────┘    └─────────────────┘"
 
 #: d6a5ee5c67354c63b144ac0673703660 of tooluniverse.smcp:56
@@ -182,7 +182,7 @@ msgid ""
 "discovery and recommendation"
 msgstr ""
 "SMCP 服务器充当智能中间件层，其功能包括：  \n"
-"1. 接收来自 AI 代理/客户端的 MCP 请求  \n"
+"1. 接收来自 AI 智能体/客户端的 MCP 请求  \n"
 "2. 将请求转换为 ToolUniverse 工具调用  \n"
 "3. 针对科学数据库/服务执行工具操作  \n"
 "4. 通过 MCP 协议返回格式化结果  \n"
@@ -241,7 +241,7 @@ msgstr "基于类别的工具组织"
 
 #: 9346ee79489849fcb40f6ceb80ec78c4 of tooluniverse.smcp:86
 msgid "AI Agent Interface:"
-msgstr "AI代理接口："
+msgstr "AI智能体接口："
 
 #: 30733691b7fa456c9e8b94dbcd850b91 of tooluniverse.smcp:87
 msgid "Natural language tool discovery"

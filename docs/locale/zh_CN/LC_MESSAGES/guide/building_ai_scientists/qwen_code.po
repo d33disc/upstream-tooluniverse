@@ -48,7 +48,7 @@ msgid ""
 " connect to ToolUniverse to power evidence-based scientific research from "
 "your terminal."
 msgstr ""
-"Qwen Code 是一款编码代理命令行工具，能够查询和编辑大型代码库并自动化工作流程。通过集成模型上下文协议（MCP），它可以连接到 "
+"Qwen Code 是一款编码智能体命令行工具，能够查询和编辑大型代码库并自动化工作流程。通过集成模型上下文协议（MCP），它可以连接到 "
 "ToolUniverse，从终端驱动基于证据的科学研究。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:33

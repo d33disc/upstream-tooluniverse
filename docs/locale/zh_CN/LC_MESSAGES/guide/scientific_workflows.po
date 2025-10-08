@@ -238,7 +238,7 @@ msgstr "**场景**：针对特定病症的临床试验进行全面分析"
 
 #: ../../guide/scientific_workflows.rst:1083 9e0dcc1a961f42f98708dfb3598bacba
 msgid "🤖 Agentic Workflows with AI Integration"
-msgstr "🤖 基于人工智能集成的代理工作流"
+msgstr "🤖 基于人工智能集成的智能体工作流"
 
 #: ../../guide/scientific_workflows.rst:1086 b3dae8fab07341559a3dba26d089b19e
 msgid "Intelligent Research Assistant"

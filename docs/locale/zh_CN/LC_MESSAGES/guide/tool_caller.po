@@ -70,7 +70,7 @@ msgstr "**直接使用 API**：使用 ToolUniverse 的 Python API 以编程方�
 msgid ""
 "**MCP Server Integration**: Setting up and using MCP (Model Context "
 "Protocol) servers for AI agent integration"
-msgstr "**MCP服务器集成**：设置和使用MCP（模型上下文协议）服务器进行AI代理集成"
+msgstr "**MCP服务器集成**：设置和使用MCP（模型上下文协议）服务器进行AI智能体集成"
 
 #: ../../guide/tool_caller.rst:14 c76684ca8b8b4c7d9e874fb3ba44782d
 msgid "Direct API Usage"
@@ -154,7 +154,7 @@ msgid ""
 "capabilities through the SMCP (Scientific Model Context Protocol) "
 "implementation. This allows AI agents to discover and execute tools "
 "through a standardized protocol."
-msgstr "ToolUniverse通过SMCP（科学模型上下文协议）的实现，提供了全面的MCP（模型上下文协议）服务器功能。这使得AI代理能够通过标准化协议发现并执行工具。"
+msgstr "ToolUniverse通过SMCP（科学模型上下文协议）的实现，提供了全面的MCP（模型上下文协议）服务器功能。这使得AI智能体能够通过标准化协议发现并执行工具。"
 
 #: ../../guide/tool_caller.rst:108 48b1ce1a649645a5aafe2d967e5efbdc
 msgid "SMCP Server Overview"
@@ -514,7 +514,7 @@ msgstr "工具会被动态加载并缓存，以实现最佳性能。"
 
 #: ../../guide/tool_caller.rst:447 e623f51969d547e482c4c61aa0c0d101
 msgid "MCP servers provide standardized AI agent integration"
-msgstr "MCP 服务器提供标准化的 AI 代理集成"
+msgstr "MCP 服务器提供标准化的 AI 智能体集成"
 
 #: ../../guide/tool_caller.rst:448 e7b554500e1f49f0b14ea361e183ca16
 msgid "Comprehensive error handling and validation ensure reliable operation"

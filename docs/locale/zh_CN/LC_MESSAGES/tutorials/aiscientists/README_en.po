@@ -217,11 +217,11 @@ msgstr "工具集批量集成"
 
 #: ../../tutorials/aiscientists/README_en.md dc01f907b9414150b3012a0da4174d0b
 msgid "**MCPProxyTool**"
-msgstr "**MCP代理工具**"
+msgstr "**MCP智能体工具**"
 
 #: ../../tutorials/aiscientists/README_en.md c0cafdfd620a41a1b55976cd11fc3ea9
 msgid "Single tool proxy"
-msgstr "单工具代理"
+msgstr "单工具智能体"
 
 #: ../../tutorials/aiscientists/README_en.md c6b7fc98f469403dbe00035f3bf6b97b
 msgid "Transparent tool forwarding"
@@ -240,7 +240,7 @@ msgstr "快速自动加载器"
 #: ../../tutorials/aiscientists/README_en.md:62
 #: ff54d459993347a493a81bf64d3371c7
 msgid "Dedicated Tool Proxy"
-msgstr "专用工具代理"
+msgstr "专用工具智能体"
 
 #: ../../tutorials/aiscientists/README_en.md:72
 #: cca5788ddabf4ca1a62c7bae4de38b70

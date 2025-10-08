@@ -184,10 +184,10 @@ msgstr "Batch Integration Toolkit"
 
 #: ../../tutorials/aiscientists/README.md 393b31bcbb2f49a29ddf6ce2f2a65f6d
 msgid "**MCPProxyTool**"
-msgstr "**MCP代理工具**"
+msgstr "**MCP智能体工具**"
 
 #: ../../tutorials/aiscientists/README.md a55ff7842270434698c082ed34a55096
-msgid "单工具代理"
+msgid "单工具智能体"
 msgstr ""
 
 #: ../../tutorials/aiscientists/README.md 298611781a3044ca9cb796ae9216a385
@@ -203,7 +203,7 @@ msgid "快速自动加载器"
 msgstr ""
 
 #: ../../tutorials/aiscientists/README.md:62 ba0d7daa00f24e569eb06a6de5ef013f
-msgid "专用工具代理"
+msgid "专用工具智能体"
 msgstr ""
 
 #: ../../tutorials/aiscientists/README.md:72 88f85a9a04d84217be71e4ce44bb3719

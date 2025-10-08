@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:10
 #: 08e01e5cc1064f94a82361d1ad9e2514
-msgid "[代理工具配置](#代理工具配置)"
+msgid "[智能体工具配置](#智能体工具配置)"
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:11
@@ -129,8 +129,8 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:29
 #: 0d4359626bbc43e8835d0e9898bf7e18
-msgid "**用途**: 为特定的 MCP 工具创建直接代理"
-msgstr "**用途**：为特定的 MCP 工具创建直接代理"
+msgid "**用途**: 为特定的 MCP 工具创建直接智能体"
+msgstr "**用途**：为特定的 MCP 工具创建直接智能体"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:30
 #: 94b335a5d7dd423486b47b612f110828
@@ -320,22 +320,22 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:167
 #: 24675489b2c84c94bd28fa7cea7ca255
-msgid "代理工具配置"
+msgid "智能体工具配置"
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:169
 #: 985d4df7459e43fd878ab8374853171e
-msgid "手动创建代理工具"
+msgid "手动创建智能体工具"
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:192
 #: e6d26b9c8dfd465d8c84e7aeed27b346
-msgid "批量创建代理工具"
+msgid "批量创建智能体工具"
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:194
 #: fa3813cea6e144ccbbb21027c446abd1
-msgid "使用 `MCPServerDiscovery` 类批量发现和创建代理工具："
+msgid "使用 `MCPServerDiscovery` 类批量发现和创建智能体工具："
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:216
@@ -634,7 +634,7 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:469
 #: e30e8a60e4c24b8c99244be78dab7736
-msgid "✅ 创建 MCPProxyTool 进行直接工具代理"
+msgid "✅ 创建 MCPProxyTool 进行直接工具智能体"
 msgstr ""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:470

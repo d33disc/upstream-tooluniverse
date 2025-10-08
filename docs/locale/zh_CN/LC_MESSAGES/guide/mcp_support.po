@@ -37,7 +37,7 @@ msgid ""
 "and agentic systems. This guide covers everything you need to know about "
 "using ToolUniverse through MCP."
 msgstr ""
-"ToolUniverse 提供全面支持模型上下文协议（MCP），实现与 AI 助手、推理模型和代理系统的无缝集成。本指南涵盖了通过 MCP 使用 "
+"ToolUniverse 提供全面支持模型上下文协议（MCP），实现与 AI 助手、推理模型和智能体系统的无缝集成。本指南涵盖了通过 MCP 使用 "
 "ToolUniverse 所需了解的所有内容。"
 
 #: ../../guide/mcp_support.rst:9 cc9815b48e284c3389e6a03f1ddce79d

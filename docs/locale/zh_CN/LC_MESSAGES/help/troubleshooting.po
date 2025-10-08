@@ -228,7 +228,7 @@ msgstr "**检查网络连接：**"
 
 #: ../../help/troubleshooting.rst:295 4561918a606c4e74bd5c93b991870220
 msgid "**Configure proxy (if needed):**"
-msgstr "**配置代理（如有需要）：**"
+msgstr "**配置智能体（如有需要）：**"
 
 #: ../../help/troubleshooting.rst:304 aae64908c88d404289bc8095242727ca
 msgid "SSL Certificate errors"

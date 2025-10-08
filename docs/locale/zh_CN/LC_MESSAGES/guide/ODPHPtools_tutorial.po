@@ -29,7 +29,7 @@ msgid ""
 "**What it is.** A fast, agent-aligned interface to the U.S. Office of "
 "Disease Prevention and Health Promotion (ODPHP) **MyHealthfinder API**:"
 msgstr ""
-"**它是什么。** 一个快速、与代理对齐的接口，用于连接美国疾病预防与健康促进办公室（ODPHP）的 **MyHealthfinder API**："
+"**它是什么。** 一个快速、与智能体对齐的接口，用于连接美国疾病预防与健康促进办公室（ODPHP）的 **MyHealthfinder API**："
 
 #: ../../guide/ODPHPtools_tutorial.md:5 1e29c896cd5341a084332fe992c61182
 msgid ""
@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../../guide/ODPHPtools_tutorial.md:9 093b8fe5546747ab9c3cc3b5ac392ff3
 msgid "Exposed to ToolUniverse as **4 agent-visible tools** via JSON config."
-msgstr "通过 JSON 配置文件以 **4 个代理可见工具** 的形式向 ToolUniverse 暴露。"
+msgstr "通过 JSON 配置文件以 **4 个智能体可见工具** 的形式向 ToolUniverse 暴露。"
 
 #: ../../guide/ODPHPtools_tutorial.md:13 9d05bdb9aa0d4c168b84ffad631169b6
 msgid "Files & flow"
@@ -175,7 +175,7 @@ msgstr "其他：链接 + 尽力处理。"
 
 #: ../../guide/ODPHPtools_tutorial.md:120 6d5fa37e316143b79d67da8c61e55277
 msgid "**Next steps for an agent**"
-msgstr "**代理的下一步操作**"
+msgstr "**智能体的下一步操作**"
 
 #: ../../guide/ODPHPtools_tutorial.md:122 0f7a3d72c85144b1ab348109f9244a96
 msgid ""
@@ -227,7 +227,7 @@ msgstr "边缘情况：无效参数、模式合规性、HTML剥离。"
 
 #: ../../guide/ODPHPtools_tutorial.md:141 cdff2efa119743eb884282a0a518e3d9
 msgid "Agent rubric"
-msgstr "代理准则"
+msgstr "智能体准则"
 
 #: ../../guide/ODPHPtools_tutorial.md:143 f485fbb8faa24ef2b1d3dce539d24eb1
 msgid "Start with **MyHealthfinder** when demographics are known."

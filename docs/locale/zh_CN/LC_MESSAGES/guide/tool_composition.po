@@ -111,7 +111,7 @@ msgstr ""
 "**执行模式**：  \n"
 "- **链式调用**：将一个工具的输出作为下一个工具的输入进行链式调用  \n"
 "- **广播调用**：通过单个查询调用多个工具  \n"
-"- **代理循环**：构建代理循环，利用代理工具生成函数调用、执行工具操作，并结合工具反馈进行多步骤实验分析"
+"- **智能体循环**：构建智能体循环，利用智能体工具生成函数调用、执行工具操作，并结合工具反馈进行多步骤实验分析"
 
 #: ../../guide/tool_composition.rst:49 e50159d60e334e15a95f13f7d92c7972
 msgid "How Tool Composition Works"
@@ -268,7 +268,7 @@ msgid ""
 "construction in which each step is driven by tool execution. This approach "
 "enables:"
 msgstr ""
-"如《ToolUniverse》论文所示，组合工具可以同时运行多个文献检索工具，随后调用摘要代理对结果进行综合，展示了异构工作流的构建方式，其中每个步骤均由工具执行驱动。该方法实现了："
+"如《ToolUniverse》论文所示，组合工具可以同时运行多个文献检索工具，随后调用摘要智能体对结果进行综合，展示了异构工作流的构建方式，其中每个步骤均由工具执行驱动。该方法实现了："
 
 #: ../../guide/tool_composition.rst:193 3b7af2a476974828a81f3797936fd4b3
 msgid ""
@@ -285,7 +285,7 @@ msgstr "**并发执行**：同时运行多个工具以提高效率"
 msgid ""
 "**Intelligent Synthesis**: Use AI agents to synthesize results from "
 "heterogeneous sources"
-msgstr "**智能合成**：使用人工智能代理从异构来源合成结果"
+msgstr "**智能合成**：使用人工智能智能体从异构来源合成结果"
 
 #: ../../guide/tool_composition.rst:196 1931e5c9dcd04b25b3ba090708a85f0d
 msgid ""
@@ -324,7 +324,7 @@ msgstr "**模式**：使用单个查询调用多个工具（广播）"
 
 #: ../../guide/tool_composition.rst:321 cddbeb3355ee4591870d13358b385987
 msgid "3. Agentic Loops"
-msgstr "3. 代理循环"
+msgstr "3. 智能体循环"
 
 #: ../../guide/tool_composition.rst:323 aecb11c11e034060acf8d1374d03586d
 msgid ""
@@ -336,7 +336,7 @@ msgid ""
 "**Pattern**: Build agentic loops that use agentic tools to generate function"
 " calls, execute tools, and incorporate tool feedback for multi-step "
 "experimental analysis"
-msgstr "**模式**：构建代理循环，利用代理工具生成函数调用、执行工具并结合工具反馈，以进行多步骤实验分析"
+msgstr "**模式**：构建智能体循环，利用智能体工具生成函数调用、执行工具并结合工具反馈，以进行多步骤实验分析"
 
 #: ../../guide/tool_composition.rst:403 a5d6f7fb59494ee6a75281523802f82a
 msgid "4. Error Handling and Fallbacks"
@@ -519,7 +519,7 @@ msgid ""
 "summarization - Demonstrates broadcasting pattern"
 msgstr ""
 "**LiteratureSearchTool** - 文献检索与综述 - 检索 EuropePMC、OpenAlex 及 PubTator 数据库 - "
-"使用 AI 代理进行文献摘要 - 展示广播模式"
+"使用 AI 智能体进行文献摘要 - 展示广播模式"
 
 #: ../../guide/tool_composition.rst:539 5e0b4390009e4394ae4c652f6e53dc1e
 msgid ""
@@ -563,7 +563,7 @@ msgid ""
 "**ToolDiscover** - Tool discovery and generation - AI-powered tool creation "
 "from descriptions - Iterative code improvement - Demonstrates advanced "
 "agentic workflows"
-msgstr "**ToolDiscover** - 工具发现与生成 - 基于描述的AI驱动工具创建 - 迭代代码优化 - 展示先进的自主代理工作流程"
+msgstr "**ToolDiscover** - 工具发现与生成 - 基于描述的AI驱动工具创建 - 迭代代码优化 - 展示先进的自主智能体工作流程"
 
 #: ../../guide/tool_composition.rst:568 93aad734ff314fababf2152bbb8b6590
 msgid ""
@@ -598,7 +598,7 @@ msgstr ""
 msgid ""
 "**Flexible Multi-tool Execution**: Support for chaining, broadcasting, and "
 "agentic loops"
-msgstr "**灵活的多工具执行**：支持链式调用、广播及代理循环"
+msgstr "**灵活的多工具执行**：支持链式调用、广播及智能体循环"
 
 #: ../../guide/tool_composition.rst:581 1e660ebbde214af3b7dfe97861b0d598
 msgid ""

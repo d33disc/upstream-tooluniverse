@@ -98,7 +98,7 @@ msgstr "概述"
 msgid ""
 "**TxAgent** is an AI agent for precision therapeutics and personalized "
 "treatment recommendations. This documentation helps you:"
-msgstr "**TxAgent** 是一款用于精准治疗和个性化治疗推荐的人工智能代理。本文档将帮助您："
+msgstr "**TxAgent** 是一款用于精准治疗和个性化治疗推荐的人工智能智能体。本文档将帮助您："
 
 #: ../../tutorials/overview.md:27 349e651627fc43a49361be858dfa0bac
 msgid ""

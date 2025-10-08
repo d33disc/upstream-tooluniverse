@@ -238,7 +238,7 @@ msgid ""
 "This method either uses RAG inference to find tools based on a message or "
 "processes a list of pre-selected tool names. It filters out special tools "
 "and returns tool prompts suitable for use in agent workflows."
-msgstr "该方法通过RAG推理根据消息查找工具，或处理预先选择的工具名称列表。它会过滤特殊工具，并返回适用于代理工作流的工具提示。"
+msgstr "该方法通过RAG推理根据消息查找工具，或处理预先选择的工具名称列表。它会过滤特殊工具，并返回适用于智能体工作流的工具提示。"
 
 #: a463c2cbbd7b4699acbe767d3384d553 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:7

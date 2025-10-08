@@ -23,7 +23,7 @@ msgstr ""
 #: ../../tutorials/agentic_tools_tutorial.rst:3
 #: 874e62506ed842fdb2cf90f0cfa72e0b
 msgid "Agentic Tools Tutorial"
-msgstr "代理工具教程"
+msgstr "智能体工具教程"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:5
 #: 72d964507a434b2882a7bf1dd2086776
@@ -48,16 +48,16 @@ msgid ""
 " Load and execute agentic tools in your workflows ✅ Handle errors and "
 "troubleshoot common issues"
 msgstr ""
-"✅ 了解代理工具的定义及其适用场景  \n"
-"✅ 从零创建专属代理工具  \n"
+"✅ 了解智能体工具的定义及其适用场景  \n"
+"✅ 从零创建专属智能体工具  \n"
 "✅ 配置大语言模型（LLM）设置以实现最佳性能  \n"
-"✅ 在工作流程中加载并执行代理工具  \n"
+"✅ 在工作流程中加载并执行智能体工具  \n"
 "✅ 处理错误并排查常见问题"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:19
 #: a40099cb68c641838329aff6c01b4422
 msgid "What are Agentic Tools?"
-msgstr "什么是自主代理工具？"
+msgstr "什么是自主智能体工具？"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:21
 #: 4bee56500c4b42bc985df04a80264ba8
@@ -368,7 +368,7 @@ msgstr "**替代方案**：添加到内置集合"
 msgid ""
 "You can also add your tool to ToolUniverse's built-in agentic tools "
 "collection:"
-msgstr "您还可以将您的工具添加到 ToolUniverse 内置的智能代理工具集合中："
+msgstr "您还可以将您的工具添加到 ToolUniverse 内置的智能智能体工具集合中："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:266
 #: b3195d7e9efa4470a81adab58d8e14f4

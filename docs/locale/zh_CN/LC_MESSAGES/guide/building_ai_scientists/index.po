@@ -45,7 +45,7 @@ msgid ""
 " while ToolUniverse serves as the scientific environment for interaction and"
 " experimentation."
 msgstr ""
-"通过将 ToolUniverse 与大型语言模型（LLMs）、推理模型及 AI 代理集成，可以开发定制化的 AI 科学家。在此配置中，LLMs "
+"通过将 ToolUniverse 与大型语言模型（LLMs）、推理模型及 AI 智能体集成，可以开发定制化的 AI 科学家。在此配置中，LLMs "
 "和推理模型提供推理及工具使用的核心能力，而 ToolUniverse 则作为科学环境，支持交互与实验。"
 
 #: ../../guide/building_ai_scientists/index.rst:9
@@ -125,11 +125,11 @@ msgid ""
 "models with agentic feedback loops to autonomously manage multi-step problem"
 " solving and tool use"
 msgstr ""
-"**智能代理系统**：如 Gemini CLI 或 Claude Code，将推理模型与智能代理反馈循环相结合，实现多步骤问题解决和工具使用的自主管理。"
+"**智能智能体系统**：如 Gemini CLI 或 Claude Code，将推理模型与智能智能体反馈循环相结合，实现多步骤问题解决和工具使用的自主管理。"
 
 #: ../../guide/building_ai_scientists/index.rst:28
 #: 154a844a43324e7b9f70b0f3cc143d6d
 msgid ""
 "**Specialized Agents**: Trained for specific scientific domains, enabling "
 "stronger performance on targeted tasks"
-msgstr "**专业代理**：针对特定科学领域进行培训，提升在目标任务上的表现能力"
+msgstr "**专业智能体**：针对特定科学领域进行培训，提升在目标任务上的表现能力"

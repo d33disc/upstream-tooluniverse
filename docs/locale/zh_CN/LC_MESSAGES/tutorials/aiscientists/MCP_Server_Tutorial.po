@@ -85,7 +85,7 @@ msgid ""
 "your tools and functions for use by AI agents and other applications. By "
 "converting your program to an MCP server, you can:"
 msgstr ""
-"MCP（模型上下文协议）服务器提供了一种标准化的方法，将您的工具和功能暴露给AI代理和其他应用程序使用。通过将您的程序转换为MCP服务器，您可以："
+"MCP（模型上下文协议）服务器提供了一种标准化的方法，将您的工具和功能暴露给AI智能体和其他应用程序使用。通过将您的程序转换为MCP服务器，您可以："
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:17
 #: bd00a2e8c6134d6fbeef6f6510dbc60b
@@ -429,7 +429,7 @@ msgid ""
 "agents and other applications."
 msgstr ""
 "通过遵循本教程，您可以成功将您的 Python 程序转换为 MCP 服务器，并将其集成到 ToolUniverse "
-"中。此方法提供了一种可扩展且标准化的方式，使您的工具能够被 AI 代理及其他应用程序使用。"
+"中。此方法提供了一种可扩展且标准化的方式，使您的工具能够被 AI 智能体及其他应用程序使用。"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:363
 #: 71432b48b1014793865e2155176d4f6d

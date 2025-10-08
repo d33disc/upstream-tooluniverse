@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:2 f6162c2a48164f64b080897a30037ba9
 msgid "Agentic Tools"
-msgstr "代理工具"
+msgstr "智能体工具"
 
 #: ../../tools/agentic_tools.rst:4 4e0e9c278e6a473f9d1120bc6a45ae3e
 msgid ""
@@ -524,7 +524,7 @@ msgstr "``implementation_code``（字符串）（可选）用于验证的实现�
 
 #: ../../tools/agentic_tools.rst:320 66eeb5ad64a54b0d9484231a7bdacda1
 msgid "**EthicalComplianceReviewer** (Type: AgenticTool)"
-msgstr "**伦理合规审查员**（类型：代理工具）"
+msgstr "**伦理合规审查员**（类型：智能体工具）"
 
 #: ../../tools/agentic_tools.rst:322 56c6ce1554764a789d78902e4518bf02
 msgid "Checks adherence to ethical standards and disclosure practices."

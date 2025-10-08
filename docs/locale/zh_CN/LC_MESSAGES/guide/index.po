@@ -29,7 +29,7 @@ msgid ""
 "This comprehensive tutorial takes you from basic concepts to advanced AI "
 "scientist workflows, with everything you need to democratize AI agents for "
 "scientific discovery."
-msgstr "这个综合教程将带您从基本概念到高级AI科学家工作流程，包含您需要的一切来民主化AI代理进行科学发现。"
+msgstr "这个综合教程将带您从基本概念到高级AI科学家工作流程，包含您需要的一切来民主化AI智能体进行科学发现。"
 
 #: ../../guide/index.rst:7 15af72da47724133b0531bb7329d4b46
 msgid "Choose the section that matches your current needs:"
@@ -134,7 +134,7 @@ msgid ""
 "**🤖 Building AI Scientists** → :doc:`building_ai_scientists/index` - Create "
 "AI research assistants from LLMs, reasoning models, and agentic systems"
 msgstr ""
-"**🤖 构建AI科学家** → :doc:`building_ai_scientists/index` - 从LLM、推理模型和代理系统创建AI研究助手"
+"**🤖 构建AI科学家** → :doc:`building_ai_scientists/index` - 从LLM、推理模型和智能体系统创建AI研究助手"
 
 #: ../../guide/index.rst:37 8b1c93ffae6346af9cec3eabac42e9a2
 msgid ""

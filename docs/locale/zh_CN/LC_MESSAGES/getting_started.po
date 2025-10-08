@@ -215,7 +215,7 @@ msgid ""
 "(MCP). This enables AI agents to discover and execute scientific tools "
 "automatically, creating powerful AI-scientist workflows."
 msgstr ""
-"通过模型上下文协议 (MCP) 将 ToolUniverse 连接到 AI 助手。这使 AI 代理能够自动发现和执行科学工具，创建强大的 AI-"
+"通过模型上下文协议 (MCP) 将 ToolUniverse 连接到 AI 助手。这使 AI 智能体能够自动发现和执行科学工具，创建强大的 AI-"
 "科学家工作流程。"
 
 #: ../../getting_started.rst:225 679681b0a28443b78ea2535dd8d1c578
@@ -230,7 +230,7 @@ msgid ""
 "Claude, ChatGPT, Gemini, and Qwen, see "
 ":doc:`guide/building_ai_scientists/index`"
 msgstr ""
-"有关与 Claude、ChatGPT、Gemini 和 Qwen 等 LLM/推理模型/AI 代理的完整 MCP 集成，请参阅 "
+"有关与 Claude、ChatGPT、Gemini 和 Qwen 等 LLM/推理模型/AI 智能体的完整 MCP 集成，请参阅 "
 ":doc:`guide/building_ai_scientists/index`"
 
 #: ../../getting_started.rst:231 f76b4ce9136e487cb3f97bf5ec3e9031
@@ -376,7 +376,7 @@ msgid ""
 "**Agentic Tools** → :doc:`tutorials/agentic_tools_tutorial` - Build and use "
 "AI-powered tools with LLMs for tasks requiring reasoning and creativity"
 msgstr ""
-"**代理工具** → :doc:`tutorials/agentic_tools_tutorial` - 使用 LLM 构建和使用 AI "
+"**智能体工具** → :doc:`tutorials/agentic_tools_tutorial` - 使用 LLM 构建和使用 AI "
 "驱动的工具，用于需要推理和创造性的任务"
 
 #: ../../getting_started.rst:265 e0adbb18db624c04a917bfba37eaa2f3

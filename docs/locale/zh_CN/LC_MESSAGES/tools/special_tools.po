@@ -51,7 +51,7 @@ msgstr "**CallAgent**（类型：SpecialTool）"
 msgid ""
 "Give a solution plan to the agent and let it solve the problem. Solution "
 "plan should reflect a di..."
-msgstr "向代理提供解决方案计划，并让其解决问题。解决方案计划应反映一个 di..."
+msgstr "向智能体提供解决方案计划，并让其解决问题。解决方案计划应反映一个 di..."
 
 #: ../../tools/special_tools.rst e7266934a8474b14a5884805036610b9
 msgid "CallAgent tool specification"
@@ -81,7 +81,7 @@ msgid ""
 "achieve the task based on the plan, so only give the plan instead of "
 "unverified information."
 msgstr ""
-"**描述**：提供一个解决方案计划给代理，让其解决问题。解决方案计划应体现出一种独特的方法、途径或观点来解决所提出的问题。多次调用这些函数，每个解决方案计划应从问题的不同方面开始，例如基因、表型、疾病或药物等。CallAgent将根据计划完成任务，因此只需提供计划，而不要提供未经验证的信息。"
+"**描述**：提供一个解决方案计划给智能体，让其解决问题。解决方案计划应体现出一种独特的方法、途径或观点来解决所提出的问题。多次调用这些函数，每个解决方案计划应从问题的不同方面开始，例如基因、表型、疾病或药物等。CallAgent将根据计划完成任务，因此只需提供计划，而不要提供未经验证的信息。"
 
 #: ../../tools/special_tools.rst:26 ../../tools/special_tools.rst:56
 #: 1e94bba772cb46f0a6b7f4273bb8859b 94400adbcedc4609a7e5285fbeb2721e

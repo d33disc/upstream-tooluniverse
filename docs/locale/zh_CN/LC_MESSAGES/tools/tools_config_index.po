@@ -78,7 +78,7 @@ msgstr "不良事件工具"
 
 #: ../../tools/tools_config_index.rst:128
 msgid "Agentic Tools"
-msgstr "代理工具"
+msgstr "智能体工具"
 
 #: ../../tools/tools_config_index.rst:133
 msgid "Alphafold Tools"

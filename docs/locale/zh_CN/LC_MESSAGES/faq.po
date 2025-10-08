@@ -38,7 +38,7 @@ msgid ""
 "providing unified access to drug safety data, genomics, literature, "
 "clinical trials, and more."
 msgstr ""
-"ToolUniverse是为AI代理收集的600多种科学工具，提供对药物安全数据、基因组学、文献、临床试验等的统一访问。"
+"ToolUniverse是为AI智能体收集的600多种科学工具，提供对药物安全数据、基因组学、文献、临床试验等的统一访问。"
 
 #: ../../faq.rst:23 2b11b5b4b1374244ad994f55e481b468
 msgid "How do I install it?"

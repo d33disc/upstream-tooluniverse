@@ -48,7 +48,7 @@ msgid ""
 "applications, and MCP clients."
 msgstr ""
 "ToolUniverse 采用以统一的 `ToolUniverse` "
-"引擎为核心的模块化、基于注册表的架构。通过工具注册、配置和自动发现，连接海量科学数据库和 API，为上层代理、应用程序及 MCP 客户端提供一致的接口。"
+"引擎为核心的模块化、基于注册表的架构。通过工具注册、配置和自动发现，连接海量科学数据库和 API，为上层智能体、应用程序及 MCP 客户端提供一致的接口。"
 
 #: ../../expand_tooluniverse/architecture.rst:31
 #: 3ed562348c8445878ac07769a647e31c

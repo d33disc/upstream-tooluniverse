@@ -30,7 +30,7 @@ msgstr "tooluniverse.web_tools.literature_search_ui.agentic_tools 模块"
 msgid ""
 "Advanced Agentic Tools for Literature Search Web UI Specialized tools for "
 "intelligent literature analysis and summarization"
-msgstr "高级代理工具用于文献检索 Web UI 专用工具，支持智能文献分析与摘要生成"
+msgstr "高级智能体工具用于文献检索 Web UI 专用工具，支持智能文献分析与摘要生成"
 
 #: 76bdfea7a39d4447a511361901e2ac56 d0ebdacaa46848d79b5617511199bcb1
 #: d75003a2c3d74184987b1e7549746eb4 d87393e2e5da432d9eeedfdd856ca9b8

@@ -56,7 +56,7 @@ msgstr "构建 AI 科学家"
 
 #: ../../quickstart.rst:35 4cd6474d3ec246d6b16d2af882b54f0c
 msgid "**ToolUniverse + LLMs/Reasoning Models/Agents = AI Scientists**"
-msgstr "**ToolUniverse + LLM/推理模型/代理 = AI 科学家**"
+msgstr "**ToolUniverse + LLM/推理模型/智能体 = AI 科学家**"
 
 #: ../../quickstart.rst:37 092b9c38f7af45388996a04be328d684
 msgid "How you want to use ToolUniverse:"
@@ -114,11 +114,11 @@ msgstr ":doc:`guide/building_ai_scientists/chatgpt_api`"
 
 #: ../../quickstart.rst:69 f30d4af9dc2845d19d97cc06bed6f194
 msgid "Agent Integration"
-msgstr "代理集成"
+msgstr "智能体集成"
 
 #: ../../quickstart.rst:73 2d068f580b024bb5acdb62e438ac9403
 msgid "Connect ToolUniverse to sophisticated AI agents with tool access"
-msgstr "将 ToolUniverse 连接到具有工具访问权限的复杂 AI 代理"
+msgstr "将 ToolUniverse 连接到具有工具访问权限的复杂 AI 智能体"
 
 #: ../../quickstart.rst:75 a1276a5367ab4cb1920a0a3daba6e148
 msgid "**Best for**: Complex workflows, autonomous systems"

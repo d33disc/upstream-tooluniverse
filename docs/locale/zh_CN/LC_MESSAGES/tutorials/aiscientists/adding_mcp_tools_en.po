@@ -58,7 +58,7 @@ msgstr "[使用自动加载器](#using-auto-loader)"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:10
 #: 6d01d3e53fc74ec8a85603490273137a
 msgid "[Proxy Tool Configuration](#proxy-tool-configuration)"
-msgstr "[代理工具配置](#proxy-tool-configuration)"
+msgstr "[智能体工具配置](#proxy-tool-configuration)"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:11
 #: 1b7dbbbda3f44ee39486dce41c14496b
@@ -134,7 +134,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:29
 #: 28eebf4449d7491f84ded9053373b253
 msgid "**Purpose**: Create direct proxy for specific MCP tools"
-msgstr "**目的**：为特定的MCP工具创建直接代理"
+msgstr "**目的**：为特定的MCP工具创建直接智能体"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:30
 #: aa158bf3d87244f8af0979ca05e48554
@@ -325,23 +325,23 @@ msgstr "使用自动加载器进行工具发现"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:167
 #: f8332ab8828149b097b1f9c756aa5400
 msgid "Proxy Tool Configuration"
-msgstr "代理工具配置"
+msgstr "智能体工具配置"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:169
 #: 7216e8661425447db211827390592dbd
 msgid "Manual Proxy Tool Creation"
-msgstr "手动代理工具创建"
+msgstr "手动智能体工具创建"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:192
 #: 5e625384866c494e912f0adfabb13100
 msgid "Batch Proxy Tool Creation"
-msgstr "批量代理工具创建"
+msgstr "批量智能体工具创建"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:194
 #: af6785b4e33743f9aedcdfe8a5833978
 msgid ""
 "Use the `MCPServerDiscovery` class to batch discover and create proxy tools:"
-msgstr "使用 `MCPServerDiscovery` 类批量发现并创建代理工具："
+msgstr "使用 `MCPServerDiscovery` 类批量发现并创建智能体工具："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:216
 #: 0394a074e6dc43f3827e8666c478e367
@@ -641,7 +641,7 @@ msgstr "✅ 使用 MCPAutoLoaderTool 自动发现并加载工具"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:469
 #: 1ab152facd3b46468d360b1380593ad8
 msgid "✅ Creating MCPProxyTool for direct tool proxying"
-msgstr "✅ 创建 MCPProxyTool 以实现工具的直接代理"
+msgstr "✅ 创建 MCPProxyTool 以实现工具的直接智能体"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:470
 #: 6787c75ee7b7423dabd0166451f66a0f

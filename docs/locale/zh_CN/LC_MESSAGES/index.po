@@ -104,7 +104,7 @@ msgstr "构建您的 AI 科学家"
 msgid ""
 "Transform any LLM/Reasoning Model/Agent into a powerful research scientist "
 "with ToolUniverse's comprehensive integration guides:"
-msgstr "使用 ToolUniverse 的全面集成指南，将任何 LLM/推理模型/代理转化为强大的研究科学家："
+msgstr "使用 ToolUniverse 的全面集成指南，将任何 LLM/推理模型/智能体转化为强大的研究科学家："
 
 #: ../../index.rst:67 075b33fc7a4643cdb35b7eba6935f2e3
 msgid ""
@@ -172,7 +172,7 @@ msgstr "鼓励社区贡献的开源生态系统"
 
 #: ../../index.rst:82 743a43747fd8470299bb064519f198d9
 msgid "Standardized tool specifications for agentic AI"
-msgstr "面向代理 AI 的标准化工具规范"
+msgstr "面向智能体 AI 的标准化工具规范"
 
 #: ../../index.rst:83 e771d3480e034777ae21ba56a95d7198
 msgid "Integration with heterogeneous scientific workflows"

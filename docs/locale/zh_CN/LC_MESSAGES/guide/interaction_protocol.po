@@ -203,7 +203,7 @@ msgstr "科学软件包"
 
 #: ../../guide/interaction_protocol.rst:267 076308bbdddf45fe93e821d285ff182d
 msgid "AI Agents & Tools"
-msgstr "AI 代理与工具"
+msgstr "AI 智能体与工具"
 
 #: ../../guide/interaction_protocol.rst:284 99f4ebb9a5bc4ed88c342a734c128447
 msgid "Error Handling & Validation"

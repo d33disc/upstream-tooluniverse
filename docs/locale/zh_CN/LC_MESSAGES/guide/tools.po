@@ -118,7 +118,7 @@ msgstr "结构化数据存储与检索"
 
 #: ../../guide/tools.rst:80 77a4c7473c7049bfa7294551ed255ae8
 msgid "AI Agents"
-msgstr "AI代理"
+msgstr "AI智能体"
 
 #: ../../guide/tools.rst:81 578c5377cbef44a293b7e8da9250de12
 msgid "33"
