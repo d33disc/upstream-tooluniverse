@@ -2,6 +2,16 @@
 (function() {
     'use strict';
     
+    // 计算部署的基础前缀（例如 GitHub Pages 项目页面的 /<repo>/ 前缀）
+    function getBasePrefix(pathname) {
+        if (pathname.includes('/en/')) return pathname.split('/en/')[0] + '/';
+        if (pathname.includes('/zh-CN/')) return pathname.split('/zh-CN/')[0] + '/';
+        if (pathname.includes('/zh_CN/')) return pathname.split('/zh_CN/')[0] + '/';
+        const parts = pathname.split('/').filter(Boolean);
+        if (parts.length > 0) return '/' + parts[0] + '/';
+        return '/';
+    }
+
     // 检测当前语言
     function detectCurrentLanguage() {
         const path = window.location.pathname;
@@ -15,52 +25,39 @@
     // 切换语言
     function switchLanguage(newLang) {
         const currentPath = window.location.pathname;
-        let newPath;
-        
-        // 提取当前文件路径(相对于语言目录)
-        let relativeFile = 'index.html';
-        
+        const origin = window.location.origin;
+        const basePrefix = getBasePrefix(currentPath);
+
+        // 优先路径替换，保持当前位置文件一致
         if (currentPath.includes('/en/')) {
-            const enIndex = currentPath.indexOf('/en/');
-            relativeFile = currentPath.substring(enIndex + '/en/'.length);
-        } else if (currentPath.includes('/zh-CN/')) {
-            const zhIndex = currentPath.indexOf('/zh-CN/');
-            relativeFile = currentPath.substring(zhIndex + '/zh-CN/'.length);
-        } else if (currentPath.includes('/zh_CN/')) {
-            const zhIndex = currentPath.indexOf('/zh_CN/');
-            relativeFile = currentPath.substring(zhIndex + '/zh_CN/'.length);
-        } else if (currentPath !== '/') {
-            // 处理根路径的其他页面(如果英文文档在根目录)
-            relativeFile = currentPath.substring(1); // 移除开头的 /
-        }
-        
-        // 确保有文件名
-        if (!relativeFile || relativeFile.endsWith('/')) {
-            relativeFile += 'index.html';
-        }
-        
-        // 获取基础URL(协议 + 主机 + 端口)
-        const baseUrl = window.location.origin;
-        
-        if (newLang === 'zh_CN') {
-            // 切换到中文
-            if (currentPath.includes('/zh-CN/') || currentPath.includes('/zh_CN/')) {
-                return; // 已经是中文
+            if (newLang === 'zh_CN') {
+                window.location.href = origin + currentPath.replace('/en/', '/zh-CN/');
             }
-            // 构建中文URL: http://host:port/zh-CN/file.html
-            newPath = baseUrl + '/zh-CN/' + relativeFile;
-        } else {
-            // 切换到英文
-            if (currentPath.includes('/en/')) {
-                return; // 已经是英文
-            }
-            // 如果 DOC_EN_AS_ROOT=true,则使用根路径,否则使用 /en/ 路径
-            // 这里我们统一使用 /en/ 路径以保持一致性
-            newPath = baseUrl + '/en/' + relativeFile;
+            return;
         }
-        
-        // 跳转到新语言
-        window.location.href = newPath;
+        if (currentPath.includes('/zh-CN/')) {
+            if (newLang !== 'zh_CN') {
+                window.location.href = origin + currentPath.replace('/zh-CN/', '/en/');
+            }
+            return;
+        }
+        if (currentPath.includes('/zh_CN/')) {
+            if (newLang !== 'zh_CN') {
+                window.location.href = origin + currentPath.replace('/zh_CN/', '/en/');
+            }
+            return;
+        }
+
+        // 兜底：当前不在语言目录下（例如 /<repo>/index.html）
+        // 解析当前文件名
+        let relativeFile = 'index.html';
+        if (currentPath !== '/') {
+            const lastSlash = currentPath.lastIndexOf('/');
+            const file = currentPath.substring(lastSlash + 1) || 'index.html';
+            relativeFile = file;
+        }
+        const targetLangPrefix = newLang === 'zh_CN' ? 'zh-CN' : 'en';
+        window.location.href = origin + basePrefix + targetLangPrefix + '/' + relativeFile;
     }
     
     // 创建语言切换器

@@ -24,7 +24,7 @@ msgstr ""
 #: ../../guide/building_ai_scientists/index.rst:33
 #: f80c288799b34f88aadb0649afb2cd5d
 msgid "Integration Methods"
-msgstr ""
+msgstr "集成方法"
 
 #: ../../guide/building_ai_scientists/index.rst:2
 #: 4305a413daba4c7abe024d7994f57241

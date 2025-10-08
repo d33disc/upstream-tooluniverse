@@ -1,0 +1,1117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-07 19:38-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:2
+#: b18d4f2454a946648a38433afecd61e6
+msgid "Literature Search Tools Tutorial"
+msgstr "文献检索工具教程"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:4
+#: df1a4956177a4b31a5e23a92759f303b
+msgid ""
+"This comprehensive tutorial demonstrates how to use the literature search "
+"tools available in ToolUniverse for finding academic papers, preprints, and "
+"research articles across multiple databases."
+msgstr "本综合教程演示了如何使用 ToolUniverse 中提供的文献检索工具，跨多个数据库查找学术论文、预印本及研究文章。"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:7
+#: 9953d70822b144ae890725baced80fcf
+msgid "Overview"
+msgstr "概述"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:9
+#: 687419ffd4584b3ab39ea1abd1b8481e
+msgid ""
+"ToolUniverse provides 15 powerful literature search tools that cover "
+"different aspects of academic research:"
+msgstr "ToolUniverse 提供 15 种强大的文献检索工具，涵盖学术研究的不同方面："
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:11
+#: 201214a9de1941dfb6c9c073fb4c4c5d
+msgid ""
+"**Preprint Archives:** - ArXiv - Physics, mathematics, computer science, and"
+" other fields - BioRxiv - Biology preprints - MedRxiv - Medical preprints - "
+"HAL - French research archive"
+msgstr ""
+"**预印本档案库：**  \n"
+"- ArXiv - 物理学、数学、计算机科学及其他领域  \n"
+"- BioRxiv - 生物学预印本  \n"
+"- MedRxiv - 医学预印本  \n"
+"- HAL - 法国科研档案库"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:17
+#: 04a55eff4c7943b8890f08646439881b
+msgid ""
+"**Academic Databases:** - Crossref - Scholarly articles with DOI metadata - "
+"PubMed - Medical and life sciences literature - Europe PMC - Biomedical "
+"literature - Semantic Scholar - AI-powered academic search - OpenAlex - Open"
+" academic graph - DBLP - Computer science bibliography"
+msgstr ""
+"**学术数据库：**  \n"
+"- Crossref - 带有 DOI 元数据的学术文章  \n"
+"- PubMed - 医学与生命科学文献  \n"
+"- Europe PMC - 生物医学文献  \n"
+"- Semantic Scholar - 人工智能驱动的学术搜索  \n"
+"- OpenAlex - 开放学术图谱  \n"
+"- DBLP - 计算机科学文献目录"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:25
+#: 89a5b38b3a1d4c7ab883cf012cd853a6
+msgid ""
+"**Open Access Tools:** - DOAJ - Directory of Open Access Journals - "
+"Unpaywall - Open access status checker - CORE - World's largest open access "
+"research papers collection - PMC - PubMed Central full-text biomedical "
+"literature - Zenodo - Open research data and publications repository"
+msgstr ""
+"**开放获取工具：**  \n"
+"- DOAJ - 开放获取期刊目录  \n"
+"- Unpaywall - 开放获取状态检查工具  \n"
+"- CORE - 全球最大的开放获取研究论文集合  \n"
+"- PMC - PubMed Central 生物医学全文文献库  \n"
+"- Zenodo - 开放研究数据与出版物存储库"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:33
+#: b657b310bd034af3a0076bf735b8cb45
+msgid "Tool Overview Table"
+msgstr "工具概览表"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:36
+#: 129940b5d08b41ba84054530a2f5aa95
+msgid "Tool Name"
+msgstr "工具名称"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:36
+#: 86feeea00a4a4000889dda18be81ac2e
+msgid "Database"
+msgstr "数据库"
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:36
+#: 3a5391f428404e219262812f776528e5
+msgid "Best For"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:36
+#: be0a0775c3d54ea2a34830e4ad912384
+msgid "Key Features"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:38
+#: ef49b3349035495583c1330afb915746
+msgid "ArXiv_search_ papers"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:38
+#: 8559dd63f2524c778d9a89560c3d62dc
+msgid "ArXiv"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:38
+#: 2aba98d710a14024af4bee6d2461bb6a
+msgid "Preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:38
+#: 5d0d4e7bdfea4317b104575dbaeeab97
+msgid "Physics, Math, CS, Biology"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:41
+#: be03985caa724ea5abbf2f9311ebc42d
+msgid "Crossref_search_ works"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:41
+#: 27eea181114c443898d9d26555edbcf5
+msgid "Crossref"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:41
+#: 81d200d31bd54e02aa13d8914e36cd1d
+msgid "Scholarly Articles"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:41
+#: 957bdce27fdf4fbb8232ab9cbee75328
+msgid "DOI metadata, Rich metadata"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:44
+#: 27a704c237a8412e8c9cdbdd4c5c5642
+msgid "PubMed_search_ articles"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:44
+#: cfca0233d09a47ad89fed115c3590049
+msgid "PubMed"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:44
+#: 73375e66fbd54b0ab6c63737554b2e59
+msgid "Medical/Life Sciences"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:44
+#: 5302a8b1c6dd47c8b486962b6083175d
+msgid "Medical literature"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:47
+#: c5f839115994466ea81f08be5ca9caeb
+msgid "SemanticScholar_ search_papers"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:47
+#: b2c0a7c3238842ee947e6acf95eaed1e
+msgid "Semantic Scholar"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:47
+#: 443e389915a04179a9fddc83695dea64
+msgid "AI-powered Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:47
+#: 7f3437281ca14a6d9215dd68e9c82705
+msgid "AI ranking, Citations"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:50
+#: a3be8d3e1585433fa4ed04ae5958bb3b
+msgid "openalex_ literature_ search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:50
+#: 411846d0bd3842d09c8ceceab688ebe2
+msgid "OpenAlex"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:50
+#: eace962d4b204eedbceaa0f35f15d5fe
+msgid "Comprehensive Academic Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:50
+#: 60bbbb963a484e1cbf4351de0c44c7b2
+msgid "Open access, Year filtering"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:54
+#: b8b054164818485eb6e08629be01beda
+msgid "EuropePMC_ search_articles"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:54
+#: d819d7a1e3eb4bf185a93fa5843dc4b8
+msgid "Europe PMC"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:54
+#: 322375b6292847a49f594aa7cf3a8414
+msgid "Biomedical Literature"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:54
+#: ed42e3f762d54c408537cf19a8b13353
+msgid "European research"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:57
+#: f474ed84ace14bcf89ddf5630c5e5419
+msgid "DBLP_search_ publications"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:57
+#: 8e04fb338bda464aa0c458b9b2f35be8
+msgid "DBLP"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:57
+#: 14a6cc3e542f48a9a49e7c5c1619d38b
+msgid "Computer Science"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:57
+#: 8f3f89927c3041039f2ec7d4060f1136
+msgid "CS bibliography"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:60
+#: fd23e8627f234571ac16843e960b64ba
+msgid "DOAJ_search_ articles"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:60
+#: e64c421460db4904a3e3b317887b44ff
+msgid "DOAJ"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:60
+#: b712a1c6e39d4e8dbfc778cafe693970
+msgid "Open Access"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:60
+#: d84ca7950f6549a58b3331b5501d029e
+msgid "Articles & Journals"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:63
+#: abd81c2807884d00babf09a40e4075c9
+msgid "BioRxiv_search_ preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:63
+#: 1443673a86f843e78d248fd32f4dd526
+msgid "BioRxiv"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:63
+#: 430218bbbad046efb547209f7ed6a431
+msgid "Biology Preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:63
+#: 8092f92a957f407aa3c802b8a13777ac
+msgid "Biology preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:66
+#: 0b4bf0f829d2451591e1389ade7d5abc
+msgid "MedRxiv_search_ preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:66
+#: 041c083dde32453db2ff881a039a6370
+msgid "MedRxiv"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:66
+#: c3bd7a2d9cb64da3ab850e91ce008b46
+msgid "Medical Preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:66
+#: 5c196d7f3877448b9474310648f90e21
+msgid "Medical preprints"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:69
+#: b43aa4886e9b4d468de2b61e96968fbe
+msgid "HAL_search_ archive"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:69
+#: 8f18120d6c2e45b48ff241c8194bf0b8
+msgid "HAL"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:69
+#: 47935d60d2a946018588be660aa0ae75
+msgid "French Research Archive"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:69
+#: 207e1c0f8ad34d42b0e641d295c3d6ad
+msgid "French academic papers"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:72
+#: 2b22cb4c952d45469260d2fecb6c35cb
+msgid "Unpaywall_ check_oa_status"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:72
+#: ece60a22a3c744e0986ef3a187b62c75
+msgid "Unpaywall"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:72
+#: 9f929d72cb004709a9c116b4a64d81c1
+msgid "Open Access Status"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:72
+#: 6ea7ede6dda441628d819af5a4e98677
+msgid "OA status checking"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:77
+#: fe646df05c4e4dd0b12b70a6aecde888
+msgid "Getting Started"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:79
+#: 2758dbf811084b2cb3f6490debf617c8
+msgid ""
+"First, let's initialize ToolUniverse and load the literature search tools:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:112
+#: 7573beca3edc4c738253a323d358b9df
+msgid "Basic Usage Pattern"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:114
+#: b25d0193a17e45759b59455e1a9c4b2f
+msgid "All literature search tools follow a similar usage pattern:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:139
+#: 5ad066032b174b298f82a2f2e9041b5c
+msgid "Tool-Specific Examples"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:142
+#: b64dc84a72cd4b3ebb37f22c2145ec70
+msgid "ArXiv Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:144
+#: 849ee090161a4a879d15c09cb8b48ba8
+msgid ""
+"Search for preprints in physics, mathematics, computer science, and other "
+"fields:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:170
+#: e9e5b2b94c2a4690b3f72435719ae2ba
+msgid "Crossref Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:172
+#: e3dbc2ba736e4b0a80aa9ce65e0eefdc
+msgid "Search for scholarly articles with rich metadata:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:196
+#: 58cae8825f2341a89039ee2493470c8d
+msgid "PubMed Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:198
+#: b93201bdcf3f4c53bfea358f847fde18
+msgid "Search medical and life sciences literature:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:221
+#: de0cb3cf80da4a1a8399723fffadb7b6
+msgid "Semantic Scholar Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:223
+#: dab9738b0bc24fc6b4dfb8c370361862
+msgid "AI-powered academic search with enhanced results:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:237
+#: b006b5967f5449f7ae934a81027379e0
+msgid "OpenAlex Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:239
+#: 4518bf4165d64016b125d5e25f274030
+msgid "Comprehensive academic search with advanced filtering:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:264
+#: 06069c2125e647048fe8ff4223fa2843
+msgid "Preprint Archives"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:266
+#: 5497b2e793e6483aa475b5aaac1e37ff
+msgid "Search for preprints in specific fields:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:298
+#: 74dc107216a74c1384bbfe1b5f0c598a
+msgid "Open Access Tools"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:300
+#: 9c4550e156fb46678f0b39df6e73f7f5
+msgid "Find open access articles and check access status:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:334
+#: a2ace3e8a5ea496080d856d02325cd54
+msgid "Advanced Usage Patterns"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:337
+#: 63743efd55b945be9a93ec90689622c9
+msgid "Combining Multiple Searches"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:339
+#: a6dbeacdb44047379568f281adb7d11a
+msgid "Search across multiple databases for comprehensive results:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:374
+#: 92b281a3c23347a6a8fb7e4a8976ec11
+msgid "Filtering and Sorting"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:376
+#: fdae65bd8e4144d1a11ee2736b76b40c
+msgid "Different tools offer various filtering and sorting options:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:414
+#: 4a4a719c807e4f8181e1272770f88cc3
+msgid "Error Handling"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:416
+#: 32bc61c48994485cbdac72060a63174f
+msgid "Always include proper error handling for robust applications:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:452
+#: 2d4306f3144442ef93aff3ba5b4f72e6
+msgid "Best Practices"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:454
+#: 3a5bbc7d77d14b93ba361adbe4c4910d
+msgid ""
+"**Choose the Right Tool:** - Use ArXiv for preprints in physics, math, CS - "
+"Use PubMed for medical/life sciences - Use Semantic Scholar for AI-powered "
+"ranking - Use OpenAlex for comprehensive academic search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:460
+#: fd2becce145a487b886f366222335801
+msgid ""
+"**Optimize Your Queries:** - Use specific, relevant keywords - Combine terms"
+" with appropriate operators - Use filters to narrow results"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:465
+#: 9214e310a98f4b8b83cdd3efa6d939e9
+msgid ""
+"**Handle Rate Limits:** - Some APIs have rate limits - Implement delays "
+"between requests if needed - Use error handling for 429 (Too Many Requests) "
+"errors"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:470
+#: 24bf465631ee4fffbe29084d3c4b178b
+msgid ""
+"**Process Results Efficiently:** - Check result types before processing - "
+"Extract only needed fields - Implement pagination for large result sets"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:475
+#: ad02e0d7982f4ebf87a059c1d5a2c164
+msgid ""
+"**Combine Multiple Sources:** - Use different tools for comprehensive "
+"coverage - Cross-reference results for validation - Merge and deduplicate "
+"results"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:481
+#: 02dd35b7963340c5ab5321584e9b316b
+msgid "Complete Example"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:483
+#: 7e993d8fc1114add9d90e548512ba170
+msgid ""
+"Here's a complete example that demonstrates searching across multiple "
+"literature databases:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:565
+#: 4eef6518001c4d2aa97e91b2dd079e06
+msgid ""
+"This tutorial provides a comprehensive guide to using ToolUniverse's "
+"literature search tools. For more specific examples and advanced usage "
+"patterns, refer to the individual tool documentation in the API reference."
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:568
+#: f49e4b55c2264d02a09733656c89fe8f
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:570
+#: 2f70d8e997184f6aa8e4134da0cef7ba
+msgid "Common Issues and Solutions:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:572
+#: 377e595cc6324bdc877dd4ef7b6231dc
+msgid ""
+"**API Rate Limits:** - Some services have rate limits - Implement delays "
+"between requests - Use error handling for 429 errors"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:577
+#: 9c758ee5c3dd4b8d9d36f73cfefe88bc
+msgid ""
+"**Missing Results:** - Check query spelling and keywords - Try different "
+"search terms - Verify tool parameters"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:582
+#: 55ed2e6828374c039848982001e729f0
+msgid ""
+"**Authentication Errors:** - Some tools require API keys - Check your .env "
+"file configuration - Verify API key validity"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:587
+#: cbac7272497a4c5291e0441557ea9e61
+msgid ""
+"**Network Issues:** - Check internet connection - Implement retry logic - "
+"Handle timeout exceptions"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:592
+#: 5c5447bc46a741d7b740c181ad34c6a2
+msgid ""
+"For more help, see the :doc:`troubleshooting guide "
+"<../help/troubleshooting>`."
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:595
+#: fe37e5945e5d4c8b89f7bdf0febe5ba4
+msgid "Quick Reference"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:598
+#: 528df1f80a434d818d576f279282aea5
+msgid "Common Parameters"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:600
+#: 006a397fa0cf43ca8c12a6b530472996
+msgid "Most search tools accept these common parameters:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:603
+#: 4b4f762e07a84dc0b9f3ca37bb4305af
+msgid "Parameter"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:603
+#: 8fb259b3c95d4888a4ddc1c4438f17a8
+msgid "Type"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:603
+#: e17d743f0350417c857757d285e8333e
+msgid "Description"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:603
+#: 2f3c6f6208d54fad94bd48af322b6606
+msgid "Example"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:605
+#: d13e27e3e98d4fc08018e431d57b9ba0
+msgid "query"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:605
+#: ../../tutorials/literature_search_tools_tutorial.rst:613
+#: ../../tutorials/literature_search_tools_tutorial.rst:615
+#: ../../tutorials/literature_search_tools_tutorial.rst:617
+#: ../../tutorials/literature_search_tools_tutorial.rst:626
+#: ../../tutorials/literature_search_tools_tutorial.rst:628
+#: 1580c2eac27641b096a6b43a64d94363 87c239c077f9449daa1bd64c97e3f4e4
+#: 888325d22bfb4bc3bef341885111c15b 891474c6f25443d99ddf8f3ec79cf9ef
+#: d61e1f60cb5a4ae2970dfa9b3f03c5b0 d850292e0fe44390ac67d2a907a1d07e
+msgid "string"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:605
+#: cf3ec7874fcc48808b6edac8b8b4b9f8
+msgid "Search terms"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:605
+#: 92ae88d2ff0d4d468fd4764c2d1d3b71
+msgid "\"machine learning\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:608
+#: 7afe40d29caa439ea2bf458636652a0c
+msgid "limit"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:608
+#: ../../tutorials/literature_search_tools_tutorial.rst:610
+#: ../../tutorials/literature_search_tools_tutorial.rst:620
+#: ../../tutorials/literature_search_tools_tutorial.rst:622
+#: 09706bf1365f409c9acdb71197366b9d 99202092d5f142fa9c7c4c5548b0024c
+#: ac44412e960c4cb99c7174c0c6cf5d55 d7e215fc2bb2433d8a8933290dc541d0
+msgid "integer"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:608
+#: 0d4052d3155a4fb586a6bbf98406f791
+msgid "Max results"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:608
+#: ../../tutorials/literature_search_tools_tutorial.rst:610
+#: fd649108059c4034ab7fc4afea4b1d04 fecd0b8d7c154c1e932f45ea1f094080
+msgid "5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:610
+#: 9e3f8aa03c394dc997948e34929f3199
+msgid "max_results"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:610
+#: 4ea0e5d2415948c8b582f16286404007
+msgid "Max results (alternative)"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:613
+#: 408c1d4dc52449cb9a2f8d8ddb56c1e9
+msgid "sort_by"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:613
+#: 1bc34f3d761d4177a17a360d1fab14ed
+msgid "Sort order"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:613
+#: 7807523461cb4a9b99d50f729810d6b3
+msgid "\"relevance\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:615
+#: bd659a41b1ac4449be7967c12b157d48
+msgid "sort_order"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:615
+#: 97504d2f2c234a5a8e7d4d942536aa38
+msgid "Sort direction"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:615
+#: 548a347253de45b7b06a03a0f1b02f1d
+msgid "\"descending\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:617
+#: 74ce039990d24a40a1cf3e3af7b2ec9c
+msgid "filter"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:617
+#: c047ac2dad0c46bc931558117ae22aec
+msgid "Result filters"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:617
+#: 5b1f3a832ece4008a650f10791f8713d
+msgid "\"type:journal- article\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:620
+#: 4d82a3d71c854d5483d296d4cd11fa3a
+msgid "year_from"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:620
+#: dffe879984cd4edcba3cb9a161fd53eb
+msgid "Start year"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:620
+#: fb0593bc47df49d286e7a5149933299b
+msgid "2020"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:622
+#: 95268dabd0a9450a93d266e1ef906582
+msgid "year_to"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:622
+#: aabbb597599941b1a5cf17ee77b6c832
+msgid "End year"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:622
+#: 2064a3b3f1ff40fe9c4ed914709181e2
+msgid "2024"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:624
+#: 0caa50dd50054f20b2fe8b14cce14da4
+msgid "open_access"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:624
+#: 1f09f1a3f4e543159062d420f373f34b
+msgid "boolean"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:624
+#: a165b54ecf6f43feb44df8c052bb1a20
+msgid "Open access only"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:624
+#: 713f93e78059485eada87bacfc218de4
+msgid "True"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:626
+#: eb4bef599a4646d5b84650ec8eddb876
+msgid "type"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:626
+#: 0dac4ebf490e428ea8d3c6a9b47d755a
+msgid "Content type"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:626
+#: 14ba40fb936e44fbaf370008d3acf63c
+msgid "\"articles\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:628
+#: 9e46085fe8bd4f2ba40f6ae7baab464e
+msgid "email"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:628
+#: 3cf211c3f05546138e08afdff06ce981
+msgid "Contact email (required)"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:628
+#: e9c40ca1893141c6a22dfed358f2a2fd
+msgid "\"user@example. com\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:633
+#: a4af88a872d8439191d0e50fa84c2375
+msgid "Quick Usage Examples"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:635
+#: 05fbccb808114e599fbd2b0a7121e647
+msgid "ArXiv Search: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:638
+#: ../../tutorials/literature_search_tools_tutorial.rst:650
+#: ../../tutorials/literature_search_tools_tutorial.rst:662
+#: ../../tutorials/literature_search_tools_tutorial.rst:673
+#: ../../tutorials/literature_search_tools_tutorial.rst:684
+#: 11734e928d2844d7b389fe23ec8b2bef 23f14f7a628f41dda9d1948b69f4f825
+#: 532ac6464c6d4500b066c31d872b444a 8468846b788b4feb81544e61a58f7dd7
+#: f4765195de434237b664bc49464226c7
+msgid "result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:639
+#: e2ad478226764809b994928533e30358
+msgid "\"name\": \"ArXiv_search_papers\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:641
+#: 3facecdaa6c0431c9210ceebd0b1b18d
+msgid "\"query\": \"machine learning\", \"limit\": 5, \"sort_by\": \"relevance\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:644
+#: ../../tutorials/literature_search_tools_tutorial.rst:656
+#: ../../tutorials/literature_search_tools_tutorial.rst:667
+#: ../../tutorials/literature_search_tools_tutorial.rst:678
+#: ../../tutorials/literature_search_tools_tutorial.rst:691
+#: ../../tutorials/literature_search_tools_tutorial.rst:703
+#: ../../tutorials/literature_search_tools_tutorial.rst:712
+#: ../../tutorials/literature_search_tools_tutorial.rst:721
+#: ../../tutorials/literature_search_tools_tutorial.rst:734
+#: ../../tutorials/literature_search_tools_tutorial.rst:743
+#: 0947e974f75c472db5a2653f2374f9fe 22b9ec2190264a1d9c7d6643a9352483
+#: 2da1290d96554540adfe70f98039b716 5c61a26df5d74e42bef8853761b2384b
+#: 6623511f84b7465f85de5bc2ecd5b78f 8dc481022cbe48eeb93aa73f0cb695ca
+#: a270c4f67b684a48a1d97178ac5bdf91 b9648feb88f9441d8b36f4b00657b85c
+#: bff90c0d1c9443ff872e053d4985abe9 d9b309be17334a7fa22805854779d994
+msgid "}"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:645
+#: ../../tutorials/literature_search_tools_tutorial.rst:657
+#: ../../tutorials/literature_search_tools_tutorial.rst:668
+#: ../../tutorials/literature_search_tools_tutorial.rst:679
+#: ../../tutorials/literature_search_tools_tutorial.rst:692
+#: ../../tutorials/literature_search_tools_tutorial.rst:704
+#: ../../tutorials/literature_search_tools_tutorial.rst:713
+#: ../../tutorials/literature_search_tools_tutorial.rst:722
+#: ../../tutorials/literature_search_tools_tutorial.rst:735
+#: ../../tutorials/literature_search_tools_tutorial.rst:744
+#: 0a41c5b404814b6d837495fe8106db5c 0fc418a42ebd42b38c931339457ca0e3
+#: 68aef5dfe24f487895fcf919c65da160 740f223ba3f6401eb3f69543fb4bb82e
+#: 75919626078c44408ca77f18b55dd127 c6cdc6dc580f4117b075a6c27678f947
+#: cc53fd0317e0440699f043408fa7eb5c daa2c6c9949942749fe4f5f5fa691902
+#: e0275df6cc034ecb941bd014deab84e8 f68e929de1224f13a63225ed85c6b4ee
+msgid "})"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:647
+#: ce0357cc42c04fa2999018f8b441d687
+msgid "Crossref Search: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:651
+#: 0340e2f02bda42e6bf8d721c6f6a88f3
+msgid "\"name\": \"Crossref_search_works\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:653
+#: 56457dc84afc4f3eb98dc427b66061fc
+msgid "\"query\": \"artificial intelligence\", \"limit\": 5, \"filter\": \"type:journal-article\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:659
+#: b64bd31ea329475782851d2866a5f701
+msgid "PubMed Search: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:663
+#: 779d0a0827c14318be251bf04c82a95a
+msgid "\"name\": \"PubMed_search_articles\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:665
+#: ffe3d4667900499bb0b5ea56ff59bdf6
+msgid "\"query\": \"cancer research\", \"limit\": 5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:670
+#: 3011cc73f5294107b8cf39e8d885f5af
+msgid "Semantic Scholar Search: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:674
+#: 2799f841885a4f9ba19fde4831b36288
+msgid "\"name\": \"SemanticScholar_search_papers\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:676
+#: 74395b1e7d5149dd98058987c0ac6f3f
+msgid "\"query\": \"deep learning\", \"limit\": 5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:681
+#: e41b9ea3263f437ebbed43e5087941fb
+msgid "OpenAlex Search: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:685
+#: 7e411fac02be469c9f7e046c45f07b66
+msgid "\"name\": \"openalex_literature_search\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:687
+#: 876dda9f812241bcbf90881a6dbce8b3
+msgid ""
+"\"search_keywords\": \"artificial intelligence\", \"max_results\": 5, "
+"\"year_from\": 2020, \"open_access\": True"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:694
+#: 0609f6e592e2453f9a2b497dbbc9ed2b
+msgid "Preprint Archives: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:697
+#: 11636e2d69c548d18e5f47bca7d1b920
+msgid "# BioRxiv (Biology) result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:699
+#: 809a50cdfce14e689193d6c20e45a242
+msgid "\"name\": \"BioRxiv_search_preprints\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:701
+#: 6f6e1eebb20d4c7facfc658f94aabd15
+msgid "\"query\": \"CRISPR\", \"max_results\": 5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:706
+#: 3a2ca88d6a68418c91724b5d76d28d0e
+msgid "# MedRxiv (Medical) result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:708
+#: 91abccc59aba4bca9a1386985a9fcceb
+msgid "\"name\": \"MedRxiv_search_preprints\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:710
+#: bbc358ed330647528e2047175dbbb54f
+msgid "\"query\": \"COVID-19\", \"max_results\": 5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:715
+#: 84f3de74e5ce48388c1955ac7d799c54
+msgid "# HAL (French Archive) result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:717
+#: ed453b7f293842fe8fd002e6565ac77c
+msgid "\"name\": \"HAL_search_archive\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:719
+#: da9b63faf0a241e0b41423e2c1743326
+msgid "\"query\": \"mathematics\", \"max_results\": 5"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:724
+#: d1caaa1e38a344f3b9240d56fec4b57b
+msgid "Open Access Tools: .. code-block:: python"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:727
+#: a4f39bc3f1994189a3d66e4d6ca798a8
+msgid "# DOAJ Search result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:729
+#: a010ba3cf3ba49b2acf98509e8905fd5
+msgid "\"name\": \"DOAJ_search_articles\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:731
+#: 25b6687383c649a0a9ca62c570ef3cc9
+msgid "\"query\": \"renewable energy\", \"max_results\": 5, \"type\": \"articles\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:737
+#: dd1eb35af8b24e19885d6458e20c6221
+msgid "# Unpaywall Check result = tu.run({"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:739
+#: dfeb76c9cc3c485eb6cc962e10a950b9
+msgid "\"name\": \"Unpaywall_check_oa_status\", \"arguments\": {"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:741
+#: 6e4455dd562f426180d1b46bb7f7fa93
+msgid "\"doi\": \"10.1038/nature12373\", \"email\": \"your-email@example.com\""
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:747
+#: 0531d5ba4fad456781d4bfb407c41095
+msgid "CORE Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:749
+#: 53b1a33f16b043ad8b27ad07a58892da
+msgid "Search the world's largest collection of open access research papers:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:784
+#: 49ec0266ab20425594f03d0ac42a796c
+msgid "PMC Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:786
+#: 254fc3c0297042d1a5f7d4b9946e5171
+msgid "Search PubMed Central full-text biomedical literature:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:821
+#: c347935b833b4318ba88e12829597b91
+msgid "Zenodo Search"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:823
+#: 8778145bdc6e479685c1241d7c1a2588
+msgid "Search Zenodo for research data, publications, and datasets:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:856
+#: 340234f55fe941a29db1bd58572b2fdc
+msgid "Tool Selection Guide"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:858
+#: 6ca208887a1442848943d173b1836176
+msgid "Choose the right tool for your research field:"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:860
+#: 057e244abd9e45049e3e2755c12d6311
+msgid "**Physics/Math/CS**: ArXiv"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:861
+#: 6f40b05ca0f14f959aa2a764737cae9d
+msgid "**Medical/Life Sciences**: PubMed, Europe PMC, PMC"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:862
+#: 38e04b914c514a86b0e85059bbed5ce1
+msgid "**General Academic**: Crossref, Semantic Scholar, OpenAlex"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:863
+#: e5bb3755aa2b44ab92c929fbe88807bb
+msgid "**Computer Science**: DBLP"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:864
+#: 2fbdc10e130b4af7b0f822934a562c4b
+msgid "**Preprints**: BioRxiv, MedRxiv, HAL"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:865
+#: c496bbbfa7284e98b71739f11e36c527
+msgid "**Open Access**: DOAJ, Unpaywall, CORE"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:866
+#: 8a67c812c0ee4ae39fbf423c19c3ee65
+msgid "**Full-Text Biomedical**: PMC"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:867
+#: d75c96db86ed4ba6bbb6ec172110f49b
+msgid "**Comprehensive Open Access**: CORE"
+msgstr ""
+
+#: ../../tutorials/literature_search_tools_tutorial.rst:868
+#: fed998c4d97d43d0a50918c2b1a1db75
+msgid "**Research Data & Datasets**: Zenodo"
+msgstr ""

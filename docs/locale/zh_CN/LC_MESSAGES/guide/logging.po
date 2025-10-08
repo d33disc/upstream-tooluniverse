@@ -7,93 +7,94 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/logging.rst:2 fd9e13bcda1a4ad58320d404814eca42
 msgid "Logging Tutorial"
-msgstr ""
+msgstr "<h1>日志记录教程</h1>"
 
 #: ../../guide/logging.rst:4 ac4718ffe8b84210809cab5d61aeff9b
 msgid "**Configure and use ToolUniverse's comprehensive logging system**"
-msgstr ""
+msgstr "**配置并使用ToolUniverse的全面日志系统**"
 
 #: ../../guide/logging.rst:6 95a0b41c824e4b8b9fa23fe36b42a71f
 msgid ""
 "ToolUniverse provides a robust logging system to help you monitor tool "
-"execution, debug issues, and track research workflows. This Tutorial "
-"covers all logging levels, configuration methods, and best practices."
+"execution, debug issues, and track research workflows. This Tutorial covers "
+"all logging levels, configuration methods, and best practices."
 msgstr ""
+"ToolUniverse 提供了一个强大的日志系统，帮助您监控工具执行情况、调试问题以及跟踪研究工作流程。本教程涵盖所有日志级别、配置方法以及最佳实践。"
 
 #: ../../guide/logging.rst:9 1dade6706a884056b3f5701dcc538aa8
 msgid "🎯 Logging Overview"
-msgstr ""
+msgstr "🎯 日志概述"
 
 #: ../../guide/logging.rst:11 da9749ac7e3347cebf9daf8317aaead0
 msgid ""
-"ToolUniverse uses Python's standard logging module with enhanced "
-"formatting and emoji indicators. The logging system provides:"
-msgstr ""
+"ToolUniverse uses Python's standard logging module with enhanced formatting "
+"and emoji indicators. The logging system provides:"
+msgstr "ToolUniverse 使用 Python 的标准日志模块，并结合增强的格式化和表情符号指示器。该日志系统提供："
 
 #: ../../guide/logging.rst:13 918779d5c04144a8b6687dde738f00c2
 msgid "**5 Standard Log Levels**: DEBUG, INFO, WARNING, ERROR, CRITICAL"
-msgstr ""
+msgstr "**5个标准日志级别**：DEBUG、INFO、WARNING、ERROR、CRITICAL"
 
 #: ../../guide/logging.rst:14 98d4361430914d23b4d7f674434b62a8
 msgid "**1 Custom Level**: PROGRESS (for workflow tracking)"
-msgstr ""
+msgstr "**1 自定义级别**：进度（用于工作流程跟踪）"
 
 #: ../../guide/logging.rst:15 abf3a1362af4456fa83c9412dc4a29f7
 msgid "**Emoji Indicators**: Visual cues for different message types"
-msgstr ""
+msgstr "**表情符号指示器**：用于不同消息类型的视觉提示"
 
 #: ../../guide/logging.rst:16 4d41c4de55214c0398bf0046cbb2438c
 msgid ""
-"**Flexible Configuration**: Environment variables, programmatic setup, "
-"and per-instance control"
-msgstr ""
+"**Flexible Configuration**: Environment variables, programmatic setup, and "
+"per-instance control"
+msgstr "**灵活配置**：环境变量、编程设置和按实例控制"
 
 #: ../../guide/logging.rst:19 f59216f7ebe44a65ab5aa25d57e882d0
 msgid "📊 Log Levels Explained"
-msgstr ""
+msgstr "📊 日志级别解析"
 
 #: ../../guide/logging.rst:21 a6f3670508154a579ee6646596e8ecd8
 msgid "Understanding when to use each log level:"
-msgstr ""
+msgstr "了解何时使用每个日志级别："
 
 #: ../../guide/logging.rst:24 d22e40aa6da74f609f8ac439490dd73d
 msgid "DEBUG Level"
-msgstr ""
+msgstr "调试级别"
 
 #: ../../guide/logging.rst:26 035f49bc18e348eb839a2425f4cfee95
 msgid "**When to use**: Detailed diagnostic information for troubleshooting"
-msgstr ""
+msgstr "**使用时机**：用于故障排除的详细诊断信息"
 
 #: ../../guide/logging.rst:28 7b9152d1d0e94961b927520fcec34638
 msgid "Tool loading details"
-msgstr ""
+msgstr "工具加载详情"
 
 #: ../../guide/logging.rst:29 488ce0cc1dd2462d8cff4a7c20fa58b3
 msgid "API request/response data"
-msgstr ""
+msgstr "API 请求/响应数据"
 
 #: ../../guide/logging.rst:30 8b96e246cdc14681aba5775ec4f63c5b
 msgid "Internal state changes"
-msgstr ""
+msgstr "内部状态变化"
 
 #: ../../guide/logging.rst:31 8a7d58e4221541c693c94a2b349d7a39
 msgid "Parameter validation steps"
-msgstr ""
+msgstr "参数验证步骤"
 
 #: ../../guide/logging.rst:44 ../../guide/logging.rst:71
 #: ../../guide/logging.rst:102 ../../guide/logging.rst:128
@@ -102,55 +103,55 @@ msgstr ""
 #: 6c2c2acfa18546f8b0d7e7351f4c9165 a28d3569b22f442e8d8bd2b4a7af7fea
 #: a859dc6db6854dfeb108114cd3894ce8 bef7f41555aa40afa4ff7d44a1e44d4d
 msgid "**Example output**:"
-msgstr ""
+msgstr "请提供您需要翻译的具体文本，我将根据您的要求进行翻译。"
 
 #: ../../guide/logging.rst:55 5a26b84ed2e9492dbcb8930ff827ba2d
 msgid "INFO Level (Default)"
-msgstr ""
+msgstr "INFO 等级（默认）"
 
 #: ../../guide/logging.rst:57 15a7640cecb14b4b8d8c6d5941a66877
 msgid "**When to use**: General information about normal operations"
-msgstr ""
+msgstr "**使用时机**：关于正常操作的常规信息"
 
 #: ../../guide/logging.rst:59 9625f461b79448aea28076b60b1b93ee
 msgid "Tool registration confirmations"
-msgstr ""
+msgstr "工具注册确认"
 
 #: ../../guide/logging.rst:60 a2eea47b728a4e34b4fea08eebb61a89
 msgid "Workflow progress updates"
-msgstr ""
+msgstr "工作流进度更新"
 
 #: ../../guide/logging.rst:61 3d6f177a15ec4abcbdada1750895205a
 msgid "Configuration changes"
-msgstr ""
+msgstr "配置更改"
 
 #: ../../guide/logging.rst:62 a6fdf7db1ce242ebbaa96f8f0736857a
 msgid "Successful operations"
-msgstr ""
+msgstr "成功操作"
 
 #: ../../guide/logging.rst:79 794f5066dd1c49b5ab5a5c5b9de969f2
 msgid "PROGRESS Level (Custom)"
-msgstr ""
+msgstr "进度等级（自定义）"
 
 #: ../../guide/logging.rst:81 0952c35bde174ba79519036e75a51411
 msgid "**When to use**: Track progress of long-running workflows"
-msgstr ""
+msgstr "**使用时机**：跟踪长时间运行工作流的进度"
 
 #: ../../guide/logging.rst:83 659fe01c47514defb798add0dba0f663
 msgid "Multi-step research pipelines"
-msgstr ""
+msgstr "多步骤研究流程"
 
 #: ../../guide/logging.rst:84 78602c6bfc894b46bd055ff79a1fe022
 msgid "Batch processing operations"
-msgstr ""
+msgstr "批量处理操作"
 
 #: ../../guide/logging.rst:85 d1ffd054858a4acc9c534cdd26eca217
 msgid "Data collection workflows"
-msgstr ""
+msgstr "数据采集工作流程"
 
 #: ../../guide/logging.rst:111 b1888caeac144a2784d87d669a7a19ab
 msgid "WARNING Level"
-msgstr ""
+msgstr "警告级别"
 
 #: ../../guide/logging.rst:113 46987f0c8d9443d3a9daef60cd97abde
 msgid "**When to use**: Something unexpected happened but execution continues"
@@ -370,8 +371,8 @@ msgstr ""
 
 #: ../../guide/logging.rst:541 7ca45089b667417faa35a55cf6d13f26
 msgid ""
-"**🔬 Workflows** → :doc:`scientific_workflows` - Apply logging to "
-"scientific workflows"
+"**🔬 Workflows** → :doc:`scientific_workflows` - Apply logging to scientific "
+"workflows"
 msgstr ""
 
 #: ../../guide/logging.rst:542 cac0c4c1c510412a8d592a29b36862fe
@@ -382,8 +383,8 @@ msgstr ""
 
 #: ../../guide/logging.rst:543 93f5f3e332b64516899f1e5a93ba859e
 msgid ""
-"**🛠️ Custom Tools** → :doc:`../tutorials/custom_tools` - Add logging to "
-"your custom tools"
+"**🛠️ Custom Tools** → :doc:`../tutorials/custom_tools` - Add logging to your"
+" custom tools"
 msgstr ""
 
 #: ../../guide/logging.rst:544 24ca72951a0445d78aaef554ab356214
@@ -395,7 +396,6 @@ msgstr ""
 #: ../../guide/logging.rst:547 e3a83e21d1c04fcd95a2aa38fdc0ad23
 msgid ""
 "**Pro tip**: Start with INFO level for normal use, switch to DEBUG when "
-"investigating issues, and use PROGRESS for long-running workflows to "
-"track execution progress!"
+"investigating issues, and use PROGRESS for long-running workflows to track "
+"execution progress!"
 msgstr ""
-

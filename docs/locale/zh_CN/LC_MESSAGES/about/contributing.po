@@ -7,148 +7,148 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../about/contributing.rst:2 08dba14acf704710bb6f3f20a59b7308
 msgid "Contributing to ToolUniverse"
-msgstr ""
+msgstr "为ToolUniverse做贡献"
 
 #: ../../about/contributing.rst:4 3c628ebcd1054255865305c46874832c
 msgid ""
 "We welcome contributions to ToolUniverse! This Tutorial explains how to "
 "contribute effectively."
-msgstr ""
+msgstr "我们欢迎为ToolUniverse做贡献！本教程解释如何有效贡献。"
 
 #: ../../about/contributing.rst:7 5f923674089e453faa6f5135af4152fe
 msgid "Getting Started"
-msgstr ""
+msgstr "快速入门"
 
 #: ../../about/contributing.rst:10 db79064a61784dc2821742232216b289
 msgid "Development Setup"
-msgstr ""
+msgstr "开发环境搭建"
 
 #: ../../about/contributing.rst:12 0689a4c4bc1f472f9a0196fb206656c6
 msgid "Fork the repository on GitHub"
-msgstr ""
+msgstr "在 GitHub 上派生该仓库"
 
 #: ../../about/contributing.rst:13 ee700cf72535440a8b34c8c0aac6c695
 msgid "Clone your fork locally:"
-msgstr ""
+msgstr "在本地克隆您的派生仓库："
 
 #: ../../about/contributing.rst:20 2bf36479d55e4bb5b5c456c21672200f
 msgid "Create a virtual environment:"
-msgstr ""
+msgstr "创建虚拟环境："
 
 #: ../../about/contributing.rst:27 1c452842d60e4ebaaccc2cf30dfe3614
 msgid "Install in development mode:"
-msgstr ""
+msgstr "以开发模式安装："
 
 #: ../../about/contributing.rst:33 95f755390e96432d93e138271e7ec37b
 msgid "Install pre-commit hooks:"
-msgstr ""
+msgstr "安装 pre-commit 钩子："
 
 #: ../../about/contributing.rst:35 d5cd1f45a269444c887c7947ee0e5b79
 msgid "**Automatic Setup (Recommended):**"
-msgstr ""
+msgstr "**自动设置（推荐）：**"
 
 #: ../../about/contributing.rst:42 895a41068db54304a7a40d670fd6026b
 msgid "**Manual Setup:**"
-msgstr ""
+msgstr "**手动设置：**"
 
 #: ../../about/contributing.rst:56 22a60fe4bac14fa7b349dc4f3360c9c3
 msgid "Development Dependencies"
-msgstr ""
+msgstr "开发依赖项"
 
 #: ../../about/contributing.rst:58 1d2b7d8f000346f3849891faa8f55594
 msgid "The development setup includes:"
-msgstr ""
+msgstr "开发设置包括："
 
 #: ../../about/contributing.rst:60 e7f9383ac9d74163bda3e4d21c8a152a
 msgid "``pytest`` - Testing framework"
-msgstr ""
+msgstr "``pytest`` - 测试框架"
 
 #: ../../about/contributing.rst:61 5ef5da15d8024ee1a1a6a64a9693b44c
 msgid "``black`` - Code formatting"
-msgstr ""
+msgstr "``black`` - 代码格式化"
 
 #: ../../about/contributing.rst:62 dd2787907de54f87aded9842819426be
 msgid "``flake8`` - Code linting"
-msgstr ""
+msgstr "``flake8`` - 代码静态检查"
 
 #: ../../about/contributing.rst:63 2728e9a30d864bffa4d017dcfa549cc1
 msgid "``mypy`` - Type checking"
-msgstr ""
+msgstr "``mypy`` - 类型检查"
 
 #: ../../about/contributing.rst:64 eef48a93f81749dc8541fe7a9b10e279
 msgid "``sphinx`` - Documentation"
-msgstr ""
+msgstr "``sphinx`` - 文档"
 
 #: ../../about/contributing.rst:65 af2493158a5f4c4d8224601b734a2449
 msgid "``pre-commit`` - Git hooks"
-msgstr ""
+msgstr "``pre-commit`` - Git 钩子"
 
 #: ../../about/contributing.rst:68 d811396bc5a04e3aa35e0d4701baabf7
 msgid "Code Standards"
-msgstr ""
+msgstr "代码标准"
 
 #: ../../about/contributing.rst:71 0edd6c372b7c410c803f9963471b653b
 msgid "Code Style"
-msgstr ""
+msgstr "代码风格"
 
 #: ../../about/contributing.rst:73 64977fc72328478d942724b4147d9cb1
 msgid "We use Black for code formatting and follow PEP 8:"
-msgstr ""
+msgstr "我们使用 Black 进行代码格式化，并遵循 PEP 8："
 
 #: ../../about/contributing.rst:84 0d269bc55cff4a65a1e8c5f6c1487b76
 msgid "Linting"
-msgstr ""
+msgstr "代码检查"
 
 #: ../../about/contributing.rst:86 8975e83ae942466ba498a665b3337a5d
 msgid "Use flake8 for linting:"
-msgstr ""
+msgstr "使用 flake8 进行代码检查："
 
 #: ../../about/contributing.rst:93 a40bb34b1a854c109967f76022595682
 msgid "Type Hints"
-msgstr ""
+msgstr "类型提示"
 
 #: ../../about/contributing.rst:95 39e36a4a69e741af9dd1b8f2e5c70aa9
 msgid "All new code should include type hints:"
-msgstr ""
+msgstr "所有新代码应包含类型提示："
 
 #: ../../about/contributing.rst:109 43af5f0563d74da9a90dc3c22a32aade
 msgid "Testing"
-msgstr ""
+msgstr "测试"
 
 #: ../../about/contributing.rst:112 f6b432877aa04a528921abbc87c8a52c
 msgid "Running Tests"
-msgstr ""
+msgstr "运行测试"
 
 #: ../../about/contributing.rst:114 2bb46f236b3f4b0891ca8ca2d7f06700
 msgid "Run the test suite:"
-msgstr ""
+msgstr "运行测试套件："
 
 #: ../../about/contributing.rst:128 48488a0487784110a8c11151037a4cb4
 msgid "Writing Tests"
-msgstr ""
+msgstr "编写测试"
 
 #: ../../about/contributing.rst:130 d7bbb78082364ac1adb237cd15023f40
 msgid "Write tests for all new functionality:"
-msgstr ""
+msgstr "为所有新功能编写测试："
 
 #: ../../about/contributing.rst:166 4cb7d4fbc6444f99896d31a0f70c679c
 msgid "Test Coverage"
-msgstr ""
+msgstr "测试覆盖率"
 
 #: ../../about/contributing.rst:168 85d936f35112466081d34d26f39f828f
 msgid "Aim for >90% test coverage:"
@@ -238,8 +238,8 @@ msgstr ""
 msgid ""
 "Commit Types: - ``feat``: New features - ``fix``: Bug fixes - ``docs``: "
 "Documentation updates - ``test``: Test additions or modifications - "
-"``refactor``: Code refactoring - ``style``: Code style changes - "
-"``chore``: Build/maintenance tasks"
+"``refactor``: Code refactoring - ``style``: Code style changes - ``chore``: "
+"Build/maintenance tasks"
 msgstr ""
 
 #: ../../about/contributing.rst:278 b1a8fa1049d34d379232d255ab953030
@@ -248,9 +248,9 @@ msgstr ""
 
 #: ../../about/contributing.rst:284 72c328c6a2dc424db72ec9920c540065
 msgid ""
-"Then create a Pull Request on GitHub with: - Clear description of changes"
-" - Link to related issues - Screenshots for UI changes - Performance "
-"impact notes"
+"Then create a Pull Request on GitHub with: - Clear description of changes - "
+"Link to related issues - Screenshots for UI changes - Performance impact "
+"notes"
 msgstr ""
 
 #: ../../about/contributing.rst:291 3679f2eb8fed4a02be6571351857d6a7
@@ -504,4 +504,3 @@ msgstr ""
 #: ../../about/contributing.rst:457 c07c4aca5e624d169faf3efb3fa65ad3
 msgid "Thank you for contributing to ToolUniverse! 🧬🔬"
 msgstr ""
-

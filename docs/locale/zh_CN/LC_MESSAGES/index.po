@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 11:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../index.rst:95
@@ -78,25 +78,23 @@ msgstr "为科学民主化 AI 科学家"
 
 #: ../../index.rst:57 29e4c379f7574f14af92b892af67cd97
 msgid ""
-"ToolUniverse is a unified ecosystem that transforms any large language "
-"model (LLM)—open or closed—into a powerful AI scientist. By standardizing"
-" how LLMs identify and call tools, it integrates over 600 scientific "
-"resources, including machine learning models, datasets, APIs, and "
-"analysis packages."
+"ToolUniverse is a unified ecosystem that transforms any large language model"
+" (LLM)—open or closed—into a powerful AI scientist. By standardizing how "
+"LLMs identify and call tools, it integrates over 600 scientific resources, "
+"including machine learning models, datasets, APIs, and analysis packages."
 msgstr ""
-"ToolUniverse 是一个统一的生态系统，可以将任何大型语言模型（LLM）——无论是开源还是闭源——"
-"转化为强大的 AI 科学家。通过标准化 LLM 识别和调用工具的方式，它集成了超过 600 个科学资源，"
-"包括机器学习模型、数据集、API 和分析包。"
+"ToolUniverse 是一个统一的生态系统，可以将任何大型语言模型（LLM）——无论是开源还是闭源——转化为强大的 AI 科学家。通过标准化 LLM"
+" 识别和调用工具的方式，它集成了超过 600 个科学资源，包括机器学习模型、数据集、API 和分析包。"
 
 #: ../../index.rst:59 24c9031fd20e477b8317be46528fa2e0
 msgid ""
-"With its **AI-Tool Interaction Protocol**, ToolUniverse provides a common"
-" interface for seamless communication between LLMs and tools, ensuring "
-"compatibility across platforms such as GPT, Claude, Gemini, and open-"
-"source models."
+"With its **AI-Tool Interaction Protocol**, ToolUniverse provides a common "
+"interface for seamless communication between LLMs and tools, ensuring "
+"compatibility across platforms such as GPT, Claude, Gemini, and open-source "
+"models."
 msgstr ""
-"通过其 **AI-工具交互协议**，ToolUniverse 为 LLM 和工具之间的无缝通信提供了一个通用接口，"
-"确保在 GPT、Claude、Gemini 和开源模型等平台上的兼容性。"
+"通过其 **AI-工具交互协议**，ToolUniverse 为 LLM 和工具之间的无缝通信提供了一个通用接口，确保在 "
+"GPT、Claude、Gemini 和开源模型等平台上的兼容性。"
 
 #: ../../index.rst:63 4546b2bc0ed54556b5f4d1d1d397ba75
 msgid "Building your AI Scientists"
@@ -104,18 +102,15 @@ msgstr "构建您的 AI 科学家"
 
 #: ../../index.rst:65 6d72ff85672343479a715e9c7922b325
 msgid ""
-"Transform any LLM/Reasoning Model/Agent into a powerful research "
-"scientist with ToolUniverse's comprehensive integration guides:"
-msgstr ""
-"使用 ToolUniverse 的全面集成指南，将任何 LLM/推理模型/代理转化为强大的研究科学家："
+"Transform any LLM/Reasoning Model/Agent into a powerful research scientist "
+"with ToolUniverse's comprehensive integration guides:"
+msgstr "使用 ToolUniverse 的全面集成指南，将任何 LLM/推理模型/代理转化为强大的研究科学家："
 
 #: ../../index.rst:67 075b33fc7a4643cdb35b7eba6935f2e3
 msgid ""
 "📖 **Complete Tutorial**: `Building AI Scientists Overview "
 "<guide/building_ai_scientists/index.html>`_"
-msgstr ""
-"📖 **完整教程**：`构建 AI 科学家概述 "
-"<guide/building_ai_scientists/index.html>`_"
+msgstr "📖 **完整教程**：`构建 AI 科学家概述 <guide/building_ai_scientists/index.html>`_"
 
 #: ../../index.rst:70 93008d36b16f4865ba7e539e2165c9e1
 msgid ""
@@ -146,16 +141,14 @@ msgid ""
 "**Qwen Code**: `Qwen Code Integration "
 "<guide/building_ai_scientists/qwen_code.html>`_"
 msgstr ""
-"**Qwen Code**：`Qwen Code 集成 "
-"<guide/building_ai_scientists/qwen_code.html>`_"
+"**Qwen Code**：`Qwen Code 集成 <guide/building_ai_scientists/qwen_code.html>`_"
 
 #: ../../index.rst:74 cfb5fb10751b4c2e9840fd478efa6261
 msgid ""
 "**Codex CLI**: `Codex CLI Integration "
 "<guide/building_ai_scientists/codex_cli.html>`_"
 msgstr ""
-"**Codex CLI**：`Codex CLI 集成 "
-"<guide/building_ai_scientists/codex_cli.html>`_"
+"**Codex CLI**：`Codex CLI 集成 <guide/building_ai_scientists/codex_cli.html>`_"
 
 #: ../../index.rst:75 21b5a414f9334559869ec43b4961bedf
 msgid ""
@@ -195,11 +188,11 @@ msgstr "**Web 服务**：`aiscientist.tools <https://aiscientist.tools>`_"
 
 #: ../../index.rst:88 dff94e4e463742fbb98aaa04b96a2f3d
 msgid ""
-"**GitHub Repository**: `mims-harvard/ToolUniverse <https://github.com"
-"/mims-harvard/ToolUniverse>`_"
+"**GitHub Repository**: `mims-harvard/ToolUniverse <https://github.com/mims-"
+"harvard/ToolUniverse>`_"
 msgstr ""
-"**GitHub 仓库**：`mims-harvard/ToolUniverse <https://github.com"
-"/mims-harvard/ToolUniverse>`_"
+"**GitHub 仓库**：`mims-harvard/ToolUniverse <https://github.com/mims-"
+"harvard/ToolUniverse>`_"
 
 #: ../../index.rst:89 369527e43cbf473985aef4d92a6bd005
 msgid ""
@@ -212,20 +205,17 @@ msgstr ""
 #: ../../index.rst:90 5fc653c3278e4ce09bc2683b3a541367
 msgid ""
 "**Discussions**: `Join our Slack community "
-"<https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-"
-"5xxoJch7TLNibNQn5_AREQ>`_"
+"<https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ>`_"
 msgstr ""
 "**讨论**：`加入我们的 Slack 社区 "
-"<https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-"
-"5xxoJch7TLNibNQn5_AREQ>`_"
+"<https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ>`_"
 
 #: ../../index.rst:93 8ecca50594c64ea4b77f5f3fa168f2d2
 msgid "📚 Documentation Structure"
 msgstr "📚 文档结构"
 
 #~ msgid "Python Version"
-#~ msgstr ""
+#~ msgstr "Python 版本"
 
 #~ msgid "Number of Tools"
-#~ msgstr ""
-
+#~ msgstr "工具数量"

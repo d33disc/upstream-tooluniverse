@@ -7,83 +7,89 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/tool_caller.rst:2 819a6c97125a4c969bab843ff10ae065
 msgid "Tool Caller Tutorial"
-msgstr ""
+msgstr "工具调用教程"
 
 #: ../../guide/tool_caller.rst:4 2cdcc8a3b02a4b9da87179c01fe4c92b
 msgid ""
 "The Tool Caller is the primary execution engine in ToolUniverse. It is "
-"responsible for instantiating tools, validating requests, and dispatching"
-" calls. Upon initialization, the Tool Caller is configured with a "
-"manifest of available tools, including their specifications and settings."
-" To mitigate the significant system overhead associated with loading all "
-"tools simultaneously, it employs a dynamic loading strategy. A specific "
-"tool is loaded into memory only upon its first request and is then cached"
-" for a duration to efficiently handle subsequent calls."
+"responsible for instantiating tools, validating requests, and dispatching "
+"calls. Upon initialization, the Tool Caller is configured with a manifest of"
+" available tools, including their specifications and settings. To mitigate "
+"the significant system overhead associated with loading all tools "
+"simultaneously, it employs a dynamic loading strategy. A specific tool is "
+"loaded into memory only upon its first request and is then cached for a "
+"duration to efficiently handle subsequent calls."
 msgstr ""
+"Tool Caller 是 ToolUniverse 中的主要执行引擎。它负责实例化工具、验证请求以及分发调用。在初始化时，Tool Caller "
+"会根据工具清单进行配置，该清单包含可用工具的规格和设置。为了减少同时加载所有工具所带来的系统开销，它采用了动态加载策略。特定工具仅在首次请求时加载到内存中，并会缓存一段时间，以便高效处理后续调用。"
 
 #: ../../guide/tool_caller.rst:6 58301ae04812473cb0e72752741adceb
 msgid ""
-"When a tool execution request is received, the Tool Caller first parses "
-"it to extract the tool name and arguments. It then performs a rigorous "
-"validation check, ensuring the provided arguments conform to the data "
-"types and structural requirements defined in the tool's specification. "
-"Once validated, the Tool Caller dispatches the arguments to the tool's "
-"primary execution method, such as ``run()``. The resulting output is then"
-" returned to the client through ToolUniverse's communication protocols. "
-"If any step in this process fails, from loading to validation or "
-"execution, the system generates and returns a descriptive error message."
+"When a tool execution request is received, the Tool Caller first parses it "
+"to extract the tool name and arguments. It then performs a rigorous "
+"validation check, ensuring the provided arguments conform to the data types "
+"and structural requirements defined in the tool's specification. Once "
+"validated, the Tool Caller dispatches the arguments to the tool's primary "
+"execution method, such as ``run()``. The resulting output is then returned "
+"to the client through ToolUniverse's communication protocols. If any step in"
+" this process fails, from loading to validation or execution, the system "
+"generates and returns a descriptive error message."
 msgstr ""
+"当接收到工具执行请求时，Tool Caller "
+"首先对其进行解析，以提取工具名称和参数。随后，它会执行严格的验证检查，确保提供的参数符合工具规范中定义的数据类型和结构要求。验证通过后，Tool "
+"Caller 将参数分派给工具的主要执行方法，例如 ``run()``。生成的输出结果将通过 ToolUniverse "
+"的通信协议返回给客户端。如果此过程中任何步骤失败，无论是加载、验证还是执行，系统都会生成并返回一条描述性的错误信息。"
 
 #: ../../guide/tool_caller.rst:8 38628d1e9ce84528bc4861f23fc97ab9
 msgid "This Tutorial covers the main approaches to using the Tool Caller:"
-msgstr ""
+msgstr "本教程涵盖使用工具调用器的主要方法："
 
 #: ../../guide/tool_caller.rst:10 4039af8016384282989492dbbe2a4901
 msgid ""
 "**Direct API Usage**: Using ToolUniverse's Python API to call tools "
 "programmatically"
-msgstr ""
+msgstr "**直接使用 API**：使用 ToolUniverse 的 Python API 以编程方式调用工具"
 
 #: ../../guide/tool_caller.rst:11 f6b6d69567e64de0b5b44a33f65e92bc
 msgid ""
 "**MCP Server Integration**: Setting up and using MCP (Model Context "
 "Protocol) servers for AI agent integration"
-msgstr ""
+msgstr "**MCP服务器集成**：设置和使用MCP（模型上下文协议）服务器进行AI代理集成"
 
 #: ../../guide/tool_caller.rst:14 d5cb3b07ad6d4c38b4ac0372a55e2c11
 msgid "Direct API Usage"
-msgstr ""
+msgstr "直接使用 API"
 
 #: ../../guide/tool_caller.rst:16 d6b289dc9636407098774ca63a01be27
 msgid ""
-"The ToolUniverse class provides the core Tool Caller functionality "
-"through its execution methods."
-msgstr ""
+"The ToolUniverse class provides the core Tool Caller functionality through "
+"its execution methods."
+msgstr "ToolUniverse 类通过其执行方法提供核心工具调用功能。"
 
 #: ../../guide/tool_caller.rst:19 15ed2d3ad59e4414ac26a932a5c5b909
 msgid "Basic Tool Execution"
-msgstr ""
+msgstr "基本工具执行"
 
 #: ../../guide/tool_caller.rst:37 ec171a903e884df1a75373885e897c60
 msgid ""
-"The ``run`` method is the primary execution engine that handles both "
-"single and multiple function calls."
-msgstr ""
+"The ``run`` method is the primary execution engine that handles both single "
+"and multiple function calls."
+msgstr "``run`` 方法是主要的执行引擎，用于处理单个和多个函数调用。"
 
 #: ../../guide/tool_caller.rst:40 ../../guide/tool_caller.rst:48
 #: ../../guide/tool_caller.rst:56 ../../guide/tool_caller.rst:98
@@ -92,182 +98,207 @@ msgstr ""
 msgid ""
 "For complete API documentation, see :doc:`../api_comprehensive` - "
 "ToolUniverse class and methods"
-msgstr ""
+msgstr "要查看完整的API文档，请参阅 :doc:`../api_comprehensive` - ToolUniverse 类及方法"
 
 #: ../../guide/tool_caller.rst:43 d4413cfa86754a56a46ef7066e93a7a0
 msgid "Tool Initialization and Caching"
-msgstr ""
+msgstr "工具初始化与缓存"
 
 #: ../../guide/tool_caller.rst:45 55a8a47e346c420baeb239ce3ad7497e
 msgid "Tools are dynamically loaded and cached for performance:"
-msgstr ""
+msgstr "工具会被动态加载并缓存以提升性能："
 
 #: ../../guide/tool_caller.rst:51 4c138c2bc58d4d0fb5cc594536a2ae45
 msgid "Internal Execution Method"
-msgstr ""
+msgstr "内部执行方法"
 
 #: ../../guide/tool_caller.rst:53 2a27ac329e6b479b9a7b29f2d563c052
 msgid ""
-"The ``run`` method internally uses ``run_one_function`` for individual "
-"tool execution:"
-msgstr ""
+"The ``run`` method internally uses ``run_one_function`` for individual tool "
+"execution:"
+msgstr "``run`` 方法在内部使用 ``run_one_function`` 来执行单个工具："
 
 #: ../../guide/tool_caller.rst:59 d55071c3458044a5b8e5df4393de98c0
 msgid ""
-"While ``run_one_function`` is available for direct use, the ``run`` "
-"method is the recommended interface as it provides better error handling,"
-" supports multiple function calls, and offers more flexible input parsing"
-" options."
+"While ``run_one_function`` is available for direct use, the ``run`` method "
+"is the recommended interface as it provides better error handling, supports "
+"multiple function calls, and offers more flexible input parsing options."
 msgstr ""
+"尽管可以直接使用``run_one_function``，但推荐使用``run``方法作为接口，因为它提供更好的错误处理功能，支持多次函数调用，并且提供更灵活的输入解析选项。"
 
 #: ../../guide/tool_caller.rst:62 8029e5f1adc844208d8e78574b08fe39
 msgid "Advanced Tool Execution"
-msgstr ""
+msgstr "高级工具执行"
 
 #: ../../guide/tool_caller.rst:64 7e76450b43684500b355503ce347613a
 msgid "The ``run`` method supports various input formats and execution modes:"
-msgstr ""
+msgstr "``run`` 方法支持多种输入格式和执行模式："
 
 #: ../../guide/tool_caller.rst:93 ad5cc0d00491476ba02b76e915431c46
 msgid "Tool Validation"
-msgstr ""
+msgstr "工具验证"
 
 #: ../../guide/tool_caller.rst:95 741b841b62194b7ea11ab4b8c79fb725
 msgid "The Tool Caller performs comprehensive validation before execution:"
-msgstr ""
+msgstr "工具调用器在执行之前会进行全面验证："
 
 #: ../../guide/tool_caller.rst:103 54dbcc0fe2324dc1808bac2e32aa8d6d
 msgid "MCP Server Integration"
-msgstr ""
+msgstr "MCP服务器集成"
 
 #: ../../guide/tool_caller.rst:105 15fa983f85f540a98d2a52338ced3802
 msgid ""
 "ToolUniverse provides comprehensive MCP (Model Context Protocol) server "
 "capabilities through the SMCP (Scientific Model Context Protocol) "
-"implementation. This allows AI agents to discover and execute tools "
-"through a standardized protocol."
+"implementation. This allows AI agents to discover and execute tools through "
+"a standardized protocol."
 msgstr ""
+"ToolUniverse通过SMCP（科学模型上下文协议）的实现，提供了全面的MCP（模型上下文协议）服务器功能。这使得AI代理能够通过标准化协议发现并执行工具。"
 
 #: ../../guide/tool_caller.rst:108 adf347f596cd49b2b353bc8e8783561d
 msgid "SMCP Server Overview"
-msgstr ""
+msgstr "SMCP服务器概述"
 
 #: ../../guide/tool_caller.rst:110 8a129ca590504a4c802fe60fd54d4639
 msgid ""
 "The SMCP server extends standard MCP capabilities with scientific domain "
 "expertise, intelligent tool discovery, and optimized configurations for "
-"research applications. It automatically handles the complex task of "
-"exposing hundreds of specialized tools through a consistent, well-"
-"documented interface."
+"research applications. It automatically handles the complex task of exposing"
+" hundreds of specialized tools through a consistent, well-documented "
+"interface."
 msgstr ""
+"SMCP 服务器通过科学领域的专业知识、智能工具发现以及针对研究应用的优化配置，扩展了标准 MCP "
+"的功能。它能够自动处理复杂任务，通过一致且文档完善的接口公开数百种专业工具。"
 
 #: ../../guide/tool_caller.rst:113 5b8717e156854229881116bf20319f12
 msgid ""
-"For complete SMCP API documentation, see :doc:`../api_comprehensive` - "
-"SMCP class"
-msgstr ""
+"For complete SMCP API documentation, see :doc:`../api_comprehensive` - SMCP "
+"class"
+msgstr "要查看完整的 SMCP API 文档，请参阅 :doc:`../api_comprehensive` - SMCP 类"
 
 #: ../../guide/tool_caller.rst:115 476923fdb389413ba93b997d60207d65
 msgid ""
 "Key Features: - **Scientific Tool Integration**: Native access to 350+ "
-"specialized tools - **AI-Powered Tool Discovery**: Multi-tiered "
-"intelligent search system - **Full MCP Protocol Support**: Complete "
-"implementation of MCP specification - **High-Performance Architecture**: "
-"Production-ready features"
+"specialized tools - **AI-Powered Tool Discovery**: Multi-tiered intelligent "
+"search system - **Full MCP Protocol Support**: Complete implementation of "
+"MCP specification - **High-Performance Architecture**: Production-ready "
+"features"
 msgstr ""
+"关键功能：  \n"
+"- **科学工具集成**：原生支持超过350种专业工具  \n"
+"- **AI驱动的工具发现**：多层次智能搜索系统  \n"
+"- **全面支持MCP协议**：完整实现MCP规范  \n"
+"- **高性能架构**：生产级功能"
 
 #: ../../guide/tool_caller.rst:122 b3725f3a86c643688630e50e90acaf49
 msgid "Server Setup"
-msgstr ""
+msgstr "服务器设置"
 
 #: ../../guide/tool_caller.rst:125 ea1fa340b15d483a93ee6cb41ff60cee
 msgid "Python Configuration"
-msgstr ""
+msgstr "Python 配置"
 
 #: ../../guide/tool_caller.rst:147 c2700ce4d8744417b155be66c8b7201c
 msgid "Command Line Setup"
-msgstr ""
+msgstr "命令行设置"
 
 #: ../../guide/tool_caller.rst:166 677756fbd2b24358858b52fd904b7b59
 msgid "Complete Parameter Reference"
-msgstr ""
+msgstr "完整参数参考"
 
 #: ../../guide/tool_caller.rst df7c98ca91454a60b278b531541f4b4f
 msgid "Complete SMCP Command Line Parameters"
-msgstr ""
+msgstr "完整的 SMCP 命令行参数"
 
 #: ../../guide/tool_caller.rst:170 637e58939bf74aaa98df76d9b1ccd20b
 msgid "The ``tooluniverse-smcp`` command supports the following parameters:"
-msgstr ""
+msgstr "``tooluniverse-smcp`` 命令支持以下参数："
 
 #: ../../guide/tool_caller.rst:172 afe158c1b16e4f44b64db66ec1f665b5
 msgid ""
-"**Tool Selection:** - ``--categories``: Load specific tool categories "
-"(e.g., uniprot ChEMBL opentarget) - ``--include-tools``: Load only "
-"specific tools by name - ``--exclude-tools``: Exclude specific tools by "
-"name - ``--exclude-categories``: Exclude entire tool categories - "
-"``--tools-file``: Load tools from a text file (one tool name per line)"
+"**Tool Selection:** - ``--categories``: Load specific tool categories (e.g.,"
+" uniprot ChEMBL opentarget) - ``--include-tools``: Load only specific tools "
+"by name - ``--exclude-tools``: Exclude specific tools by name - ``--exclude-"
+"categories``: Exclude entire tool categories - ``--tools-file``: Load tools "
+"from a text file (one tool name per line)"
 msgstr ""
+"**工具选择：**  \n"
+"- ``--categories``：加载特定工具类别（例如：uniprot、ChEMBL、opentarget）  \n"
+"- ``--include-tools``：仅按名称加载特定工具  \n"
+"- ``--exclude-tools``：按名称排除特定工具  \n"
+"- ``--exclude-categories``：排除整个工具类别  \n"
+"- ``--tools-file``：从文本文件加载工具（每行一个工具名称）"
 
 #: ../../guide/tool_caller.rst:179 17e44ce7ef6446bf9c381a955abd7c7d
 msgid ""
 "**Server Configuration:** - ``--transport``: Transport protocol (stdio, "
-"http, sse) - default: http - ``--host``: Host to bind to - default: "
-"0.0.0.0 - ``--port``: Port to bind to - default: 7000 - ``--name``: "
-"Server name - default: \"ToolUniverse SMCP Server\" - ``--max-workers``: "
-"Maximum worker threads - default: 5 - ``--no-search``: Disable "
-"intelligent search functionality - ``--verbose``, ``-v``: Enable verbose "
-"logging"
+"http, sse) - default: http - ``--host``: Host to bind to - default: 0.0.0.0 "
+"- ``--port``: Port to bind to - default: 7000 - ``--name``: Server name - "
+"default: \"ToolUniverse SMCP Server\" - ``--max-workers``: Maximum worker "
+"threads - default: 5 - ``--no-search``: Disable intelligent search "
+"functionality - ``--verbose``, ``-v``: Enable verbose logging"
 msgstr ""
+"**服务器配置：**  \n"
+"- ``--transport``：传输协议（stdio、http、sse）- 默认值：http  \n"
+"- ``--host``：绑定的主机地址 - 默认值：0.0.0.0  \n"
+"- ``--port``：绑定的端口号 - 默认值：7000  \n"
+"- ``--name``：服务器名称 - 默认值：\"ToolUniverse SMCP Server\"  \n"
+"- ``--max-workers``：最大工作线程数 - 默认值：5  \n"
+"- ``--no-search``：禁用智能搜索功能  \n"
+"- ``--verbose``，``-v``：启用详细日志记录"
 
 #: ../../guide/tool_caller.rst:188 bff5194631ba4200af64320e6844b53f
 msgid ""
-"**Information Commands:** - ``--list-tools``: List all available tools "
-"and exit - ``--list-categories``: List all available tool categories and "
-"exit"
+"**Information Commands:** - ``--list-tools``: List all available tools and "
+"exit - ``--list-categories``: List all available tool categories and exit"
 msgstr ""
+"**信息命令：**  \n"
+"- ``--list-tools``：列出所有可用工具并退出  \n"
+"- ``--list-categories``：列出所有可用工具类别并退出"
 
 #: ../../guide/tool_caller.rst:193 a935d77a51744758880f62399117854e
 msgid ""
 "For complete SMCP server documentation, see "
 ":doc:`../tutorials/aiscientists/adding_mcp_tools_en`"
 msgstr ""
+"要查看完整的SMCP服务器文档，请参阅 :doc:`../tutorials/aiscientists/adding_mcp_tools_en`"
 
 #: ../../guide/tool_caller.rst:198 2302858420794677a5bbd617acb2b8cb
 msgid "MCP Client Integration"
-msgstr ""
+msgstr "MCP客户端集成"
 
 #: ../../guide/tool_caller.rst 55831bc63aa849de9bdc191e425cf0da
 msgid "Python MCP Client Examples"
-msgstr ""
+msgstr "Python MCP 客户端示例"
 
 #: ../../guide/tool_caller.rst:202 b10fc9d34adf4dd1963e5285e199c050
 msgid "**STDIO Client:**"
-msgstr ""
+msgstr "**STDIO 客户端：**"
 
 #: ../../guide/tool_caller.rst:240 8859c12749c04a66abf133692543c0e6
 msgid "**HTTP Client:**"
-msgstr ""
+msgstr "**HTTP 客户端：**"
 
 #: ../../guide/tool_caller.rst b548ae6cc71b4c1cb0acfb9853339851
 msgid "cURL Client Examples"
-msgstr ""
+msgstr "cURL 客户端示例"
 
 #: ../../guide/tool_caller.rst:271 b3aad5528d0c46969b874e6662cc293a
 msgid ""
 "You can also interact with ToolUniverse MCP servers directly using cURL "
 "commands:"
-msgstr ""
+msgstr "您还可以使用 cURL 命令直接与 ToolUniverse MCP 服务器进行交互："
 
 #: ../../guide/tool_caller.rst:303 4d7b5361a8c64b3b918e6eb7e215b8c0
 msgid ""
 "For detailed MCP integration tutorials, see "
 ":doc:`../tutorials/aiscientists/adding_mcp_tools_en`"
 msgstr ""
+"有关详细的 MCP 集成教程，请参见 :doc:`../tutorials/aiscientists/adding_mcp_tools_en`。"
 
 #: ../../guide/tool_caller.rst:306 658984ff83c3443b9108cf7154f5626e
 msgid "Important Notes for MCP Clients"
-msgstr ""
+msgstr "MCP客户重要注意事项"
 
 #: ../../guide/tool_caller.rst:308 2921d5674a6e483785620215f23f3fe6
 msgid ""
@@ -275,34 +306,40 @@ msgid ""
 "protocol, which requires: - `Content-Type: application/json` - `Accept: "
 "application/json, text/event-stream`"
 msgstr ""
+"**必需的请求头**：ToolUniverse MCP 服务器使用 streamable-http 协议，要求：- `Content-Type: "
+"application/json` - `Accept: application/json, text/event-stream`"
 
 #: ../../guide/tool_caller.rst:312 f7b22ff55e154d44a6ab5987e6ce0567
 msgid ""
 "**JSON-RPC 2.0 Format**: All requests must follow the JSON-RPC 2.0 "
-"specification with: - `jsonrpc: \"2.0\"` - `id`: Unique request "
-"identifier - `method`: The MCP method to call - `params`: Method "
-"parameters"
+"specification with: - `jsonrpc: \"2.0\"` - `id`: Unique request identifier -"
+" `method`: The MCP method to call - `params`: Method parameters"
 msgstr ""
+"**JSON-RPC 2.0 格式**：所有请求必须遵循 JSON-RPC 2.0 规范，包含以下内容：  \n"
+"- `jsonrpc: \"2.0\"`  \n"
+"- `id`：唯一请求标识符  \n"
+"- `method`：调用的 MCP 方法  \n"
+"- `params`：方法参数"
 
 #: ../../guide/tool_caller.rst:318 4a2a4e7edbdb4d5597364f26277bc556
 msgid ""
 "**Tool Arguments**: When calling tools, arguments must match the tool's "
 "parameter schema exactly."
-msgstr ""
+msgstr "**工具参数**：调用工具时，参数必须与工具的参数结构完全匹配。"
 
 #: ../../guide/tool_caller.rst:321 1c3f8781ae634acfa58556af9b889435
 msgid "Tool Execution Flow"
-msgstr ""
+msgstr "工具执行流程"
 
 #: ../../guide/tool_caller.rst:323 d7841410ff634074a9e56504797af9db
 msgid "The Tool Caller follows a systematic execution flow:"
-msgstr ""
+msgstr "工具调用器遵循系统化的执行流程："
 
 #: ../../guide/tool_caller.rst:325 0f984418645d43c58a65be88404f5580
 msgid ""
-"**Request Parsing**: The ``run()`` method parses input and extracts "
-"function call data"
-msgstr ""
+"**Request Parsing**: The ``run()`` method parses input and extracts function"
+" call data"
+msgstr "**请求解析**：``run()`` 方法解析输入并提取函数调用数据"
 
 #: ../../guide/tool_caller.rst:326 86724c46acec4e058d2394de209b5904
 msgid ""
@@ -312,8 +349,8 @@ msgstr ""
 
 #: ../../guide/tool_caller.rst:327 9c858a69e6184dfa82a87d37e2beb787
 msgid ""
-"**Tool Validation**: ``run_one_function()`` validates the tool exists and"
-" arguments are valid"
+"**Tool Validation**: ``run_one_function()`` validates the tool exists and "
+"arguments are valid"
 msgstr ""
 
 #: ../../guide/tool_caller.rst:328 f3627d18b7b645ef9a735447dbf7d9d8
@@ -337,13 +374,14 @@ msgid "**Result Processing**: Format and return the result"
 msgstr ""
 
 #: ../../guide/tool_caller.rst:332 53bb102351a94a93b174d48044cbaa68
-msgid "**Error Handling**: Generate descriptive error messages if any step fails"
+msgid ""
+"**Error Handling**: Generate descriptive error messages if any step fails"
 msgstr ""
 
 #: ../../guide/tool_caller.rst:334 72b7e3859efb4164af45e1cba7b90969
 msgid ""
-"For multiple function calls, the ``run()`` method iterates through each "
-"call and uses ``run_one_function()`` internally."
+"For multiple function calls, the ``run()`` method iterates through each call"
+" and uses ``run_one_function()`` internally."
 msgstr ""
 
 #: ../../guide/tool_caller.rst:339 0b06bbfd29d54569bd8537f70a7749ac
@@ -400,7 +438,8 @@ msgstr ""
 
 #: ../../guide/tool_caller.rst:399 ../../guide/tool_caller.rst:429
 #: 4759e9cabefc4f91af356fcfc8a31d65 ab77db7a95d14181aeb25633ed2e360b
-msgid "**Tool Not Found**: Ensure the tool name is correct and the tool is loaded"
+msgid ""
+"**Tool Not Found**: Ensure the tool name is correct and the tool is loaded"
 msgstr ""
 
 #: ../../guide/tool_caller.rst:400 ../../guide/tool_caller.rst:430
@@ -421,8 +460,8 @@ msgstr ""
 #: ../../guide/tool_caller.rst:403 ../../guide/tool_caller.rst:433
 #: 1a21e563ccb846d49c1b9390c77269c4 fc68c1ff90b1425fadd498199dce58a2
 msgid ""
-"**Memory Issues**: Reduce the number of loaded tools or increase "
-"available memory"
+"**Memory Issues**: Reduce the number of loaded tools or increase available "
+"memory"
 msgstr ""
 
 #: ../../guide/tool_caller.rst:406 22807725e65c4d9ea9dadb33caa791ee
@@ -454,10 +493,9 @@ msgstr ""
 #: ../../guide/tool_caller.rst:441 8f7118e77ba04ba085571e1882d19ce6
 msgid ""
 "This comprehensive Tutorial covers both direct API usage and MCP server "
-"integration for the Tool Caller. The Tool Caller's dynamic loading "
-"strategy, validation system, and error handling make it a robust "
-"execution engine for ToolUniverse's extensive collection of scientific "
-"tools."
+"integration for the Tool Caller. The Tool Caller's dynamic loading strategy,"
+" validation system, and error handling make it a robust execution engine for"
+" ToolUniverse's extensive collection of scientific tools."
 msgstr ""
 
 #: ../../guide/tool_caller.rst:443 7b8209c5be6d45fe893b02b780837502
@@ -490,4 +528,3 @@ msgid ""
 "documentation and :doc:`../tutorials/aiscientists/adding_mcp_tools_en` "
 "tutorials."
 msgstr ""
-

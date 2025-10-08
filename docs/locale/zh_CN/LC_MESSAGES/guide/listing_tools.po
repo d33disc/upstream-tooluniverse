@@ -7,207 +7,234 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/listing_tools.rst:2 1d58448f8f44472bbfacd5d666212e78
 msgid "Tool Listing Tutorial"
-msgstr ""
+msgstr "工具清单教程"
 
 #: ../../guide/listing_tools.rst:4 e2498fdbd8144733ab9b5c95677ca92d
 msgid ""
 "ToolUniverse provides powerful methods for discovering and exploring the "
-"available tools in the system. This Tutorial covers the various ways you "
-"can list, filter, and understand the tools available in your ToolUniverse"
-" instance."
+"available tools in the system. This Tutorial covers the various ways you can"
+" list, filter, and understand the tools available in your ToolUniverse "
+"instance."
 msgstr ""
+"ToolUniverse 提供强大的方法，用于发现和探索系统中的可用工具。本教程涵盖了在您的 ToolUniverse "
+"实例中列出、筛选以及理解可用工具的各种方式。"
 
 #: ../../guide/listing_tools.rst:7 0d997da131d04664b27a56602e8cd6fe
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../guide/listing_tools.rst:9 db9234a34fdc4c6797932975d24f4897
 msgid ""
-"The primary method for tool discovery is ``list_built_in_tools()``, which"
-" provides comprehensive information about all available tools. This "
-"method supports multiple modes to help you understand tools from "
-"different perspectives and access tool data in various formats."
+"The primary method for tool discovery is ``list_built_in_tools()``, which "
+"provides comprehensive information about all available tools. This method "
+"supports multiple modes to help you understand tools from different "
+"perspectives and access tool data in various formats."
 msgstr ""
+"工具发现的主要方法是``list_built_in_tools()``，它提供了关于所有可用工具的全面信息。此方法支持多种模式，帮助您从不同角度了解工具，并以多种格式访问工具数据。"
 
 #: ../../guide/listing_tools.rst:12 f6d45e15f45f48e781d5fa8d37b1643d
 msgid "API Reference"
-msgstr ""
+msgstr "API 参考"
 
 #: ../../guide/listing_tools.rst:15 6b3a4ef3d63549daaa586fbd8e3ded29
 msgid ""
-"**For complete Python API documentation**, see "
-":doc:`../api_quick_reference` for commonly used classes and methods, or "
-":doc:`../api_comprehensive` for full API reference."
+"**For complete Python API documentation**, see :doc:`../api_quick_reference`"
+" for commonly used classes and methods, or :doc:`../api_comprehensive` for "
+"full API reference."
 msgstr ""
+"**完整的 Python API 文档**请参阅 :doc:`../api_quick_reference` 了解常用的类和方法，或查看 "
+":doc:`../api_comprehensive` 获取完整的 API 参考。"
 
 #: 82a6f0edb46a4c6891a4048895933033 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:1
 msgid ""
-"List all built-in tool categories and their statistics with different "
-"modes."
-msgstr ""
+"List all built-in tool categories and their statistics with different modes."
+msgstr "列出所有内置工具类别及其统计数据，并区分不同模式。"
 
 #: 2248f8bf41c24a9c9905db8d6c3a43e0 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:3
 msgid ""
-"This method provides a comprehensive overview of all available tools in "
-"the ToolUniverse, organized by categories. It reads directly from the "
-"default tool files to gather statistics, so it works even before calling "
+"This method provides a comprehensive overview of all available tools in the "
+"ToolUniverse, organized by categories. It reads directly from the default "
+"tool files to gather statistics, so it works even before calling "
 "load_tools()."
 msgstr ""
+"此方法提供了对ToolUniverse中所有可用工具的全面概览，并按类别进行组织。它直接从默认工具文件中读取数据以收集统计信息，因此即使在调用load_tools()之前也能正常工作。"
 
 #: ../../guide/listing_tools.rst 0f8bdf7e31994e76b061312c7ccbe608
 #: 4557079ad6af4aa4af751af66e3a3bf7 8d9bffa7e8544a2999f37f92187ebdf2
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 26a28b67c646408dbc9ac9066ef4a2b3 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:7
 msgid ""
-"Organization mode for tools. Defaults to 'config'. - 'config': Organize "
-"by config file categories (original behavior) - 'type': Organize by tool "
-"types (implementation classes) - 'list_name': Return a list of all tool "
-"names - 'list_spec': Return a list of all tool specifications"
+"Organization mode for tools. Defaults to 'config'. - 'config': Organize by "
+"config file categories (original behavior) - 'type': Organize by tool types "
+"(implementation classes) - 'list_name': Return a list of all tool names - "
+"'list_spec': Return a list of all tool specifications"
 msgstr ""
+"工具的组织模式。默认值为“config”。  \n"
+"- “config”：按配置文件类别组织（原始行为）  \n"
+"- “type”：按工具类型（实现类）组织  \n"
+"- “list_name”：返回所有工具名称的列表  \n"
+"- “list_spec”：返回所有工具规格的列表"
 
 #: 08b90dc8f1964f20be84437f9e8244e4 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:13
 msgid ""
-"Whether to scan all JSON files in data directory recursively. If True, "
-"scans all JSON files in data/ and its subdirectories. If False (default),"
-" uses predefined tool file mappings."
+"Whether to scan all JSON files in data directory recursively. If True, scans"
+" all JSON files in data/ and its subdirectories. If False (default), uses "
+"predefined tool file mappings."
 msgstr ""
+"是否递归扫描数据目录中的所有 JSON 文件。如果为 True，则扫描数据/及其子目录中的所有 JSON 文件。如果为 "
+"False（默认值），则使用预定义的工具文件映射。"
 
 #: ../../guide/listing_tools.rst 2bc3b14df642452e8be4078abd160ee0
 #: 6d4cb971f4dd4147bac050a33df232b8 cc6f284c91534646a906edc52406056b
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 02afbc739e234d52a5e9756dc1b961a1 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:18
 msgid ""
-"- For 'config' and 'type' modes: A dictionary containing tool statistics "
-"- For 'list_name' mode: A list of all tool names - For 'list_spec' mode: "
-"A list of all tool specifications"
+"- For 'config' and 'type' modes: A dictionary containing tool statistics - "
+"For 'list_name' mode: A list of all tool names - For 'list_spec' mode: A "
+"list of all tool specifications"
 msgstr ""
+"- 对于“config”和“type”模式：包含工具统计信息的字典  \n"
+"- 对于“list_name”模式：所有工具名称的列表  \n"
+"- 对于“list_spec”模式：所有工具规格的列表"
 
 #: c4f06c3d59a9463a968999daf93c899b of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:18
 msgid "For 'config' and 'type' modes: A dictionary containing tool statistics"
-msgstr ""
+msgstr "对于“config”和“type”模式：包含工具统计信息的字典"
 
 #: a58e9f2233d8453f8e40eaa0dc157dc1 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:19
 msgid "For 'list_name' mode: A list of all tool names"
-msgstr ""
+msgstr "对于“list_name”模式：所有工具名称的列表"
 
 #: bae2d09cf6bd4838af9963134fab1023 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:20
 msgid "For 'list_spec' mode: A list of all tool specifications"
-msgstr ""
+msgstr "对于“list_spec”模式：所有工具规格的列表"
 
 #: ../../guide/listing_tools.rst 01fa287800e743ac85b1f0d7c18e4b4d
 #: 06be35e10191464b8bc787ee159cb163 469ac985c9714dcf84937389c11ea386
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: e69b8768fb204ae795791eab57e87673 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:23
 msgid "Example"
-msgstr ""
+msgstr "示例"
 
 #: aa810a46390343af845a6655bf98eb45 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:35
 msgid ""
 "This method reads directly from tool files and works without calling "
 "load_tools()"
-msgstr ""
+msgstr "此方法直接从工具文件中读取数据，无需调用 load_tools()。"
 
 #: e0476371b6a840d4a55f2e2d835edf94 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:36
 msgid ""
-"Tools are deduplicated across categories, so the same tool won't be "
-"counted multiple times"
-msgstr ""
+"Tools are deduplicated across categories, so the same tool won't be counted "
+"multiple times"
+msgstr "工具在各类别之间已去重，因此同一工具不会被重复计数。"
 
 #: 3b752ebcd4c84f3bac56bae532ecaed9 of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:37
 msgid ""
-"The summary is automatically printed to console when this method is "
-"called (except for list_name and list_spec modes)"
-msgstr ""
+"The summary is automatically printed to console when this method is called "
+"(except for list_name and list_spec modes)"
+msgstr "当调用此方法时，摘要会自动打印到控制台（list_name 和 list_spec 模式除外）。"
 
 #: 1a6b00ded634417087453f210313fe5f of
 #: tooluniverse.execute_function.ToolUniverse.list_built_in_tools:38
-msgid "When scan_all=True, all JSON files in data/ and subdirectories are scanned"
-msgstr ""
+msgid ""
+"When scan_all=True, all JSON files in data/ and subdirectories are scanned"
+msgstr "当 scan_all=True 时，系统会扫描 data/ 目录及其子目录中的所有 JSON 文件"
 
 #: ../../guide/listing_tools.rst:21 d98439a3be6046e297f7278ad65f23d4
 msgid "Quick Start"
-msgstr ""
+msgstr "快速入门"
 
 #: ../../guide/listing_tools.rst:46 40c500a73af44455b9c7821ae4d517d1
 msgid "Available Modes"
-msgstr ""
+msgstr "可用模式"
 
 #: ../../guide/listing_tools.rst:48 5ceb09bf5760430ca26bfe7422607465
 msgid ""
-"The ``list_built_in_tools()`` method supports several modes for different"
-" use cases:"
-msgstr ""
+"The ``list_built_in_tools()`` method supports several modes for different "
+"use cases:"
+msgstr "``list_built_in_tools()`` 方法支持多种模式以适应不同的使用场景："
 
 #: ../../guide/listing_tools.rst:51 0addda99089a489186209dd37e8326ff
 msgid "List Name Mode"
-msgstr ""
+msgstr "列表名称模式"
 
 #: ../../guide/listing_tools.rst:53 f1a74153c83f4127b9cc5dc1327ba036
 msgid "Returns a simple list of all tool names, sorted alphabetically."
-msgstr ""
+msgstr "返回按字母顺序排序的所有工具名称的简单列表。"
 
 #: ../../guide/listing_tools.rst:62 5e0e6987af5a429fbd2ec605babbb61b
 msgid ""
-"**Use cases:** - Quick tool name lookup - Building tool selection "
-"interfaces - Tool name validation - Simple tool counting"
+"**Use cases:** - Quick tool name lookup - Building tool selection interfaces"
+" - Tool name validation - Simple tool counting"
 msgstr ""
+"**使用场景：**  \n"
+"- 快速查找工具名称  \n"
+"- 构建工具选择界面  \n"
+"- 工具名称验证  \n"
+"- 简单的工具计数"
 
 #: ../../guide/listing_tools.rst:69 9fa1c48c3b994c288862448d61c522da
 msgid "List Spec Mode"
-msgstr ""
+msgstr "列表规格模式"
 
 #: ../../guide/listing_tools.rst:71 45f249647f4f4fe8a62a800824764a61
-msgid "Returns a list of all tool specifications (complete tool configurations)."
-msgstr ""
+msgid ""
+"Returns a list of all tool specifications (complete tool configurations)."
+msgstr "返回所有工具规格（完整工具配置）的列表。"
 
 #: ../../guide/listing_tools.rst:83 e3e5d4b51d1b47fa9e75fbbb3867d7d5
 msgid ""
 "**Use cases:** - Accessing complete tool configurations - Tool metadata "
 "analysis - Building tool databases - Tool specification validation"
 msgstr ""
+"**使用场景：**  \n"
+"- 访问完整的工具配置  \n"
+"- 工具元数据分析  \n"
+"- 构建工具数据库  \n"
+"- 工具规格验证"
 
 #: ../../guide/listing_tools.rst:90 d848b4ae5320457d9d40671564408108
 msgid "Config Mode (Default)"
-msgstr ""
+msgstr "配置模式（默认）"
 
 #: ../../guide/listing_tools.rst:92 a37a12fb60df41e2b38e552a54a5d30f
 msgid ""
 "The config mode organizes tools by their configuration file categories, "
 "representing logical groupings by functionality or data source."
-msgstr ""
+msgstr "配置模式根据工具的配置文件类别进行组织，按功能或数据来源对其进行逻辑分组。"
 
 #: ../../guide/listing_tools.rst:101 910aaafdf86c4a7a85301758aade7562
 msgid ""
@@ -215,96 +242,124 @@ msgid ""
 "tools by functional area (e.g., clinical trials, drug information, "
 "literature search) - Getting an overview of scientific domains covered"
 msgstr ""
+"**使用场景：**  \n"
+"- 了解可用的数据源  \n"
+"- 按功能领域查找工具（例如，临床试验、药物信息、文献检索）  \n"
+"- 获取涵盖的科学领域概览"
 
 #: ../../guide/listing_tools.rst:106 46ff78841f0440f8b595f30c8427b5c7
 msgid ""
 "**Example categories:** - ``fda_drug_label`` - FDA drug labeling tools - "
-"``clinical_trials`` - Clinical trials data tools - ``semantic_scholar`` -"
-" Academic literature tools - ``opentarget`` - OpenTargets platform tools "
-"- ``chembl`` - ChEMBL database tools"
+"``clinical_trials`` - Clinical trials data tools - ``semantic_scholar`` - "
+"Academic literature tools - ``opentarget`` - OpenTargets platform tools - "
+"``chembl`` - ChEMBL database tools"
 msgstr ""
+"**示例类别：**  \n"
+"- ``fda_drug_label`` - FDA药物标签工具  \n"
+"- ``clinical_trials`` - 临床试验数据工具  \n"
+"- ``semantic_scholar`` - 学术文献工具  \n"
+"- ``opentarget`` - OpenTargets平台工具  \n"
+"- ``chembl`` - ChEMBL数据库工具"
 
 #: ../../guide/listing_tools.rst:114 b96c2bd333c0411f95ad413789d60543
 msgid "Type Mode"
-msgstr ""
+msgstr "类型模式"
 
 #: ../../guide/listing_tools.rst:116 4955ef02f4d747c5834c37a56bec4985
 msgid ""
-"The type mode organizes tools by their implementation classes, showing "
-"the technical categorization of tools."
-msgstr ""
+"The type mode organizes tools by their implementation classes, showing the "
+"technical categorization of tools."
+msgstr "类型模式根据工具的实现类进行组织，展示工具的技术分类。"
 
 #: ../../guide/listing_tools.rst:123 c3536004a7c44107953bd7379f4a8a06
 msgid ""
-"**Use cases:** - Understanding the technical architecture - Finding tools"
-" by implementation pattern - Debugging and development work - Tool "
-"composition and workflow building"
+"**Use cases:** - Understanding the technical architecture - Finding tools by"
+" implementation pattern - Debugging and development work - Tool composition "
+"and workflow building"
 msgstr ""
+"**使用场景：**  \n"
+"- 了解技术架构  \n"
+"- 按实现模式查找工具  \n"
+"- 调试与开发工作  \n"
+"- 工具组合与工作流构建"
 
 #: ../../guide/listing_tools.rst:129 a3772e900efd4552b1ab35bafa08b5d2
 msgid ""
 "**Example types:** - ``FDADrugLabel`` - FDA drug labeling tool "
-"implementations - ``OpenTarget`` - OpenTargets API tool implementations -"
-" ``ChEMBLTool`` - ChEMBL database tool implementations - "
+"implementations - ``OpenTarget`` - OpenTargets API tool implementations - "
+"``ChEMBLTool`` - ChEMBL database tool implementations - "
 "``MCPAutoLoaderTool`` - MCP client auto-loading tools"
 msgstr ""
+"**示例类型：**  \n"
+"- ``FDADrugLabel`` - FDA药物标签工具实现  \n"
+"- ``OpenTarget`` - OpenTargets API工具实现  \n"
+"- ``ChEMBLTool`` - ChEMBL数据库工具实现  \n"
+"- ``MCPAutoLoaderTool`` - MCP客户端自动加载工具"
 
 #: ../../guide/listing_tools.rst:136 1f92dcfeddfe460ea9185b3d6ab393e0
 msgid "Scan All Option"
-msgstr ""
+msgstr "扫描全部选项"
 
 #: ../../guide/listing_tools.rst:138 49b34f1dbf9247d79d5cd5eb38aac47f
 msgid ""
 "All modes support the ``scan_all`` parameter to control how tools are "
 "discovered:"
-msgstr ""
+msgstr "所有模式均支持 ``scan_all`` 参数，用于控制工具的发现方式："
 
 #: ../../guide/listing_tools.rst:148 bf66d021b9db4e47b73ef518339defbf
 msgid ""
 "**When to use scan_all=True:** - Discovering tools not in predefined "
-"mappings - Finding tools in custom or additional JSON files - "
-"Comprehensive tool discovery - Development and testing"
+"mappings - Finding tools in custom or additional JSON files - Comprehensive "
+"tool discovery - Development and testing"
 msgstr ""
+"**何时使用 scan_all=True：**  \n"
+"- 发现未包含在预定义映射中的工具  \n"
+"- 查找自定义或附加的 JSON 文件中的工具  \n"
+"- 全面工具发现  \n"
+"- 开发与测试"
 
 #: ../../guide/listing_tools.rst:154 990e295207b743f698af86dee530730a
 msgid ""
-"**When to use scan_all=False (default):** - Production environments "
-"(faster) - Standard tool discovery - When you only need predefined tools"
+"**When to use scan_all=False (default):** - Production environments (faster)"
+" - Standard tool discovery - When you only need predefined tools"
 msgstr ""
+"**何时使用 scan_all=False（默认值）：**  \n"
+"- 生产环境（更快）  \n"
+"- 标准工具发现  \n"
+"- 仅需预定义工具时"
 
 #: ../../guide/listing_tools.rst:160 8536f04de354420ea559eb4090c1680b
 msgid "Return Structure"
-msgstr ""
+msgstr "返回结构"
 
 #: ../../guide/listing_tools.rst:162 42b0a138334b484985d3f8a5328ef71a
 msgid "The return structure depends on the mode:"
-msgstr ""
+msgstr "返回结构取决于模式："
 
 #: ../../guide/listing_tools.rst:164 8d717dee50224bd0aebe989506886b75
 msgid ""
-"**For 'config' and 'type' modes:** Returns a dictionary with "
-"comprehensive statistics and information:"
-msgstr ""
+"**For 'config' and 'type' modes:** Returns a dictionary with comprehensive "
+"statistics and information:"
+msgstr "**对于“config”和“type”模式：** 返回包含全面统计数据和信息的字典："
 
 #: ../../guide/listing_tools.rst:182 3201ad740b2a4e598d58333ddf6ac407
 msgid "**For 'list_name' mode:** Returns a sorted list of tool names:"
-msgstr ""
+msgstr "**对于“list_name”模式：** 返回按排序顺序排列的工具名称列表："
 
 #: ../../guide/listing_tools.rst:188 ec0bff97e3db4b9da861a868582b34f7
 msgid ""
-"**For 'list_spec' mode:** Returns a list of tool specification "
-"dictionaries:"
-msgstr ""
+"**For 'list_spec' mode:** Returns a list of tool specification dictionaries:"
+msgstr "**对于“list_spec”模式：** 返回工具规格字典列表："
 
 #: ../../guide/listing_tools.rst:203 c12b3ddcb31748fb96ad2879e7f7cb3d
 msgid "Accessing Tool Information"
-msgstr ""
+msgstr "访问工具信息"
 
 #: ../../guide/listing_tools.rst:205 4fe7fc1639ba4193a3f5068762971ef8
 msgid ""
 "After getting the statistics, you can access detailed information about "
 "tools:"
-msgstr ""
+msgstr "获取统计数据后，您可以访问有关工具的详细信息："
 
 #: ../../guide/listing_tools.rst:224 4adfa212f2c64f698ef1acaa637646ac
 msgid "Practical Examples"
@@ -328,8 +383,8 @@ msgstr ""
 
 #: ../../guide/listing_tools.rst:301 3e18063a99904f85901c82c0203fdbb9
 msgid ""
-"While ``list_built_in_tools()`` shows all available tools, you can filter"
-" tools using other methods:"
+"While ``list_built_in_tools()`` shows all available tools, you can filter "
+"tools using other methods:"
 msgstr ""
 
 #: f66054d65d9542b4b18197f197154d77 of
@@ -365,15 +420,15 @@ msgstr ""
 
 #: 15c7e8d94c1441c8968e70a4d0624553 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:1
-msgid "Refresh the tool name and description mappings with optional filtering."
+msgid ""
+"Refresh the tool name and description mappings with optional filtering."
 msgstr ""
 
 #: 75a079664e6348b9a811cc0c45dcecc4 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:3
 msgid ""
 "This method rebuilds the internal tool dictionary and generates filtered "
-"lists of tool names and descriptions based on the provided filter "
-"criteria."
+"lists of tool names and descriptions based on the provided filter criteria."
 msgstr ""
 
 #: 56eb26f94482409087577bc91f522449 of
@@ -409,8 +464,8 @@ msgstr ""
 
 #: ../../guide/listing_tools.rst:329 812cd4dc2d2040a5a0b1390d242f9792
 msgid ""
-"One key advantage of ``list_built_in_tools()`` is that it works "
-"**before** calling ``load_tools()``:"
+"One key advantage of ``list_built_in_tools()`` is that it works **before** "
+"calling ``load_tools()``:"
 msgstr ""
 
 #: ../../guide/listing_tools.rst:345 62d9ace5bb824040b6ae529b8f0d3add
@@ -419,8 +474,8 @@ msgstr ""
 
 #: ../../guide/listing_tools.rst:347 1f3cbf8930d443f4b8adb9fc1ea73bbc
 msgid ""
-"The ``list_built_in_tools()`` method provides flexible tool discovery "
-"with four modes:"
+"The ``list_built_in_tools()`` method provides flexible tool discovery with "
+"four modes:"
 msgstr ""
 
 #: ../../guide/listing_tools.rst:349 7af3d21e5b344d80a893bb164eae47ed
@@ -442,7 +497,6 @@ msgstr ""
 #: ../../guide/listing_tools.rst:354 5599a6d3fd10494bb6ffba63c5cac65a
 msgid ""
 "All modes support the ``scan_all`` parameter for comprehensive tool "
-"discovery. This makes it easy to explore, validate, and work with tools "
-"in ToolUniverse without needing to load them first."
+"discovery. This makes it easy to explore, validate, and work with tools in "
+"ToolUniverse without needing to load them first."
 msgstr ""
-

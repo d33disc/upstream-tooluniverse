@@ -7,50 +7,53 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/gwas_tools.rst:2 153abcab873140f8923981cf77bc61e6
 msgid "Gwas Tools"
-msgstr ""
+msgstr "Gwas 工具"
 
 #: ../../tools/gwas_tools.rst:4 a8b5c985243f4ab5a3fc10a44da974a9
 msgid ""
 "**Configuration File**: ``gwas_tools.json`` **Tool Type**: Local **Tools "
 "Count**: 12"
 msgstr ""
+"**配置文件**：``gwas_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：12"
 
 #: ../../tools/gwas_tools.rst:8 2956f95b4c884b8c9e7c4443206398b4
 msgid ""
 "This page contains all tools defined in the ``gwas_tools.json`` "
 "configuration file."
-msgstr ""
+msgstr "此页面包含 ``gwas_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/gwas_tools.rst:11 1dfef46ef7d34dd7a9ad22fed801af06
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/gwas_tools.rst:14 08f38d08752b48c4ae7b7c94a3f2a125
 msgid "**gwas_get_association_by_id** (Type: GWASAssociationByID)"
-msgstr ""
+msgstr "**gwas_get_association_by_id**（类型：GWASAssociationByID）"
 
 #: ../../tools/gwas_tools.rst:16 61e27acd990e448f8149d07088797c84
 msgid "Get a specific GWAS association by its unique identifier."
-msgstr ""
+msgstr "通过其唯一标识符获取特定的GWAS关联。"
 
 #: ../../tools/gwas_tools.rst 220ca3f94a584dcf9241cf5e09156691
 msgid "gwas_get_association_by_id tool specification"
-msgstr ""
+msgstr "gwas_get_association_by_id 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:20 ../../tools/gwas_tools.rst:50
 #: ../../tools/gwas_tools.rst:92 ../../tools/gwas_tools.rst:128
@@ -65,19 +68,20 @@ msgstr ""
 #: b4d1c54f53d544299b2bdd3209cf1ada da7f8e63d9c34fe7a8d9b31801e6831b
 #: e9ffd3203e5f428a94ad01c8afc824b8 eb23d8fc5e19412eab56e5eb4e463137
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/gwas_tools.rst:22 368b9929c13d4b95bec7cca8466b0a92
 msgid "**Name**: ``gwas_get_association_by_id``"
-msgstr ""
+msgstr "**名称**：``gwas_get_association_by_id``"
 
 #: ../../tools/gwas_tools.rst:23 f577ec0863654cae93348ff65d86bcaa
 msgid "**Type**: ``GWASAssociationByID``"
-msgstr ""
+msgstr "**类型**：``GWASAssociationByID``"
 
 #: ../../tools/gwas_tools.rst:24 18e80d67042c4a78b6916506ec5807ef
-msgid "**Description**: Get a specific GWAS association by its unique identifier."
-msgstr ""
+msgid ""
+"**Description**: Get a specific GWAS association by its unique identifier."
+msgstr "**描述**：通过其唯一标识符获取特定的GWAS关联。"
 
 #: ../../tools/gwas_tools.rst:26 ../../tools/gwas_tools.rst:56
 #: ../../tools/gwas_tools.rst:98 ../../tools/gwas_tools.rst:134
@@ -92,11 +96,11 @@ msgstr ""
 #: cadece7e128b4b398edb6e35a2ec901f d6b178a037c54277b0028357e4c0bfcb
 #: dec49e9814d14f38b640ab98784db37f f2735bd5a6cc4590bd16cd861ae31f4a
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/gwas_tools.rst:28 aaf38d571d1c42b5b29f44bb301382b0
 msgid "``association_id`` (string) (optional) GWAS association identifier"
-msgstr ""
+msgstr "``association_id``（字符串）（可选）GWAS 关联标识符"
 
 #: ../../tools/gwas_tools.rst:31 ../../tools/gwas_tools.rst:73
 #: ../../tools/gwas_tools.rst:109 ../../tools/gwas_tools.rst:145
@@ -111,50 +115,50 @@ msgstr ""
 #: c63a03cbbf0849a18bb47b1e55173cfd e22699b94e214b6b8371b7ae868272c3
 #: e4c9de84f5e84f02bdaf3627bd994f8c e6be21a168e049a7a522d955289db5f7
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/gwas_tools.rst:44 f529a85ac1824cf0ac1cc676212463b9
 msgid "**gwas_get_associations_for_snp** (Type: GWASAssociationsForSNP)"
-msgstr ""
+msgstr "**gwas_get_associations_for_snp**（类型：GWASAssociationsForSNP）"
 
 #: ../../tools/gwas_tools.rst:46 957bb1784f104468970de42169ecbdef
 msgid "Get all associations for a specific SNP with optional sorting."
-msgstr ""
+msgstr "获取特定SNP的所有关联，并可选择排序。"
 
 #: ../../tools/gwas_tools.rst 674471cbc5a346a693112d7c749d2619
 msgid "gwas_get_associations_for_snp tool specification"
-msgstr ""
+msgstr "gwas_get_associations_for_snp 工具规范"
 
 #: ../../tools/gwas_tools.rst:52 8406c2cb4cf445f4a4a56008f8b3734b
 msgid "**Name**: ``gwas_get_associations_for_snp``"
-msgstr ""
+msgstr "**名称**: ``gwas_get_associations_for_snp``"
 
 #: ../../tools/gwas_tools.rst:53 8b4c86d37fee4abf9d8d93e2ac9bef97
 msgid "**Type**: ``GWASAssociationsForSNP``"
-msgstr ""
+msgstr "**类型**: ``GWASAssociationsForSNP``"
 
 #: ../../tools/gwas_tools.rst:54 37820a0760d74434a7d20a6445612aa2
 msgid ""
 "**Description**: Get all associations for a specific SNP with optional "
 "sorting."
-msgstr ""
+msgstr "**描述**：获取特定SNP的所有关联，并支持可选排序。"
 
 #: ../../tools/gwas_tools.rst:58 ../../tools/gwas_tools.rst:172
 #: ../../tools/gwas_tools.rst:355 ../../tools/gwas_tools.rst:400
 #: 7c4a4789b00343588a21535db6e83e35 a6ce88ea69004b0a87ec356c440ac6c8
 #: ae0b471b475440159cc2f0d906577e4b e9d59bf7bd4d405dbcf0fdd2f511052e
 msgid "``rs_id`` (string) (optional) dbSNP rs identifier"
-msgstr ""
+msgstr "``rs_id``（字符串）（可选）dbSNP rs 标识符"
 
 #: ../../tools/gwas_tools.rst:61 ../../tools/gwas_tools.rst:361
 #: da29e961856e4e71b6e0a6469ab3bd29 fdbd4b7eb95a41da856757372291a34a
 msgid "``sort`` (string) (optional) Sort field (e.g., 'p_value', 'or_value')"
-msgstr ""
+msgstr "``sort``（字符串）（可选）排序字段（例如：'p_value'，'or_value'）"
 
 #: ../../tools/gwas_tools.rst:64 ../../tools/gwas_tools.rst:364
 #: a869499b39d745d08cf61d2f0d1e4ac5 b48fde4f62404df39c8d42db5fdfea2f
 msgid "``direction`` (string) (optional) Sort direction ('asc' or 'desc')"
-msgstr ""
+msgstr "``direction``（字符串）（可选）排序方向（'asc' 或 'desc'）"
 
 #: ../../tools/gwas_tools.rst:67 ../../tools/gwas_tools.rst:103
 #: ../../tools/gwas_tools.rst:139 ../../tools/gwas_tools.rst:205
@@ -163,7 +167,7 @@ msgstr ""
 #: b35876d315d34a0d8abd75093b2f0ff6 be40805bef1746169c4cc68df0f40dbd
 #: e9e4525094664d88b751fac91c8c420d ffc7107786c444258f84610980c2c7e6
 msgid "``size`` (integer) (optional) Number of results to return per page"
-msgstr ""
+msgstr "``size``（整数）（可选）每页返回的结果数量"
 
 #: ../../tools/gwas_tools.rst:70 ../../tools/gwas_tools.rst:106
 #: ../../tools/gwas_tools.rst:142 ../../tools/gwas_tools.rst:208
@@ -175,27 +179,27 @@ msgstr ""
 #: afd3871b6a0944b6bbb114acff8030fa b30d6ba7a9db4655827ac20e0c0985e0
 #: dace326dcd934e529dd9b13752f1465a de928fef07b34f48ac2dd895ba8e5c2d
 msgid "``page`` (integer) (optional) Page number for pagination"
-msgstr ""
+msgstr "``page``（整数）（可选）用于分页的页码"
 
 #: ../../tools/gwas_tools.rst:86 7560ea9d8c974fc5ac01bf04e76cdc9a
 msgid "**gwas_get_associations_for_study** (Type: GWASAssociationsForStudy)"
-msgstr ""
+msgstr "**gwas_get_associations_for_study**（类型：GWASAssociationsForStudy）"
 
 #: ../../tools/gwas_tools.rst:88 0c6fdeb042c94c7792ebc961d6f607ef
 msgid "Get all associations for a specific study, sorted by p-value."
-msgstr ""
+msgstr "获取特定研究的所有关联，并按 p 值排序。"
 
 #: ../../tools/gwas_tools.rst 6d282967a13e46fc9489e65324d7aaa1
 msgid "gwas_get_associations_for_study tool specification"
-msgstr ""
+msgstr "gwas_get_associations_for_study 工具规范"
 
 #: ../../tools/gwas_tools.rst:94 763c476c58494093a24f7e40413bae7d
 msgid "**Name**: ``gwas_get_associations_for_study``"
-msgstr ""
+msgstr "**名称**: ``gwas_get_associations_for_study``"
 
 #: ../../tools/gwas_tools.rst:95 9bdab83650ca455a93a005ab973a44f4
 msgid "**Type**: ``GWASAssociationsForStudy``"
-msgstr ""
+msgstr "**类型**：``GWASAssociationsForStudy``"
 
 #: ../../tools/gwas_tools.rst:96 d69d37cc856a406488065a3dbe936add
 msgid ""
@@ -321,8 +325,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:234 b0ebd4792438497ca639a29200f7133f
 msgid ""
-"**Description**: Get studies for a specific trait with optional filters "
-"for cohort, GxE interactions, and summary statistics."
+"**Description**: Get studies for a specific trait with optional filters for "
+"cohort, GxE interactions, and summary statistics."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:241 ../../tools/gwas_tools.rst:442
@@ -332,7 +336,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:244 ../../tools/gwas_tools.rst:445
 #: 85f71bba5bce495a948e54591115262f c261346cf7d54284877fc498f10c61c7
-msgid "``cohort`` (string) (optional) Cohort name (e.g., 'UKB' for UK Biobank)"
+msgid ""
+"``cohort`` (string) (optional) Cohort name (e.g., 'UKB' for UK Biobank)"
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:247 ../../tools/gwas_tools.rst:448
@@ -382,7 +387,8 @@ msgid "**gwas_get_variants_for_trait** (Type: GWASVariantsForTrait)"
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:304 9b5540fa54ad44328b6dbb454ee578b5
-msgid "Get all variants associated with a specific trait with pagination support."
+msgid ""
+"Get all variants associated with a specific trait with pagination support."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst 1a72f0231af64838ab74f88c16548938
@@ -409,8 +415,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:340 ff47b4d1303149edbd6e180ac1968c85
 msgid ""
-"Search for GWAS associations by various criteria including EFO trait, rs "
-"ID, accession ID, with s..."
+"Search for GWAS associations by various criteria including EFO trait, rs ID,"
+" accession ID, with s..."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst 6ad68181258f47e28b873fa09ecab89b
@@ -427,9 +433,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:348 b208c22278f14980adb3a6a449321494
 msgid ""
-"**Description**: Search for GWAS associations by various criteria "
-"including EFO trait, rs ID, accession ID, with sorting and pagination "
-"support."
+"**Description**: Search for GWAS associations by various criteria including "
+"EFO trait, rs ID, accession ID, with sorting and pagination support."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:367 ../../tools/gwas_tools.rst:406
@@ -444,8 +449,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:388 e620aef4f5a84050a7ebccc839290987
 msgid ""
-"Search for GWAS single nucleotide polymorphisms (SNPs) by rs ID or mapped"
-" gene."
+"Search for GWAS single nucleotide polymorphisms (SNPs) by rs ID or mapped "
+"gene."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst 17049fc28c384603a6e266a0fb30311e
@@ -462,8 +467,8 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:396 417c20795e6d4c8f81ae2580f184293b
 msgid ""
-"**Description**: Search for GWAS single nucleotide polymorphisms (SNPs) "
-"by rs ID or mapped gene."
+"**Description**: Search for GWAS single nucleotide polymorphisms (SNPs) by "
+"rs ID or mapped gene."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:425 c140481f8eca46e8a092ecbb5d05bdf7
@@ -490,9 +495,9 @@ msgstr ""
 
 #: ../../tools/gwas_tools.rst:435 1a2c4b710e3340e1a07488808da27c7c
 msgid ""
-"**Description**: Search for GWAS studies by various criteria including "
-"EFO trait, disease trait, cohort, GxE interactions, and summary "
-"statistics availability."
+"**Description**: Search for GWAS studies by various criteria including EFO "
+"trait, disease trait, cohort, GxE interactions, and summary statistics "
+"availability."
 msgstr ""
 
 #: ../../tools/gwas_tools.rst:473 8e6b687a21c943d0906ddd1a7cbddc79
@@ -506,4 +511,3 @@ msgstr ""
 #: ../../tools/gwas_tools.rst:476 efea235a10f34736aeff57aa2bb5d906
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

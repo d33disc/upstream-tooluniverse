@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 14:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../old_files/I18N_GUIDE.md:1 82ce8a3b717c41ed85070efc0265a9fa
@@ -30,11 +30,11 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:5 22190c058e684370a3e54a48cc0db1ae
 msgid "ToolUniverse 文档现已支持中英文切换！本指南将帮助你完成翻译和构建。"
-msgstr ""
+msgstr "ToolUniverse 文档现已支持中英文切换！本指南将帮助您完成翻译与构建。"
 
 #: ../../old_files/I18N_GUIDE.md:7 3baa49e128aa42bd8f414c21908c5100
 msgid "🚀 快速开始"
-msgstr ""
+msgstr "🚀 快速入门"
 
 #: ../../old_files/I18N_GUIDE.md:9 1b176d5a7da0495d9d6dbfb80af6b70d
 msgid "1. 构建多语言文档"
@@ -42,11 +42,11 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:16 76b474216bb149f98474b84f9753eb22
 msgid "这将自动："
-msgstr ""
+msgstr "这将自动完成："
 
 #: ../../old_files/I18N_GUIDE.md:17 43e0fdaadafe456db3945c1b311d4b90
 msgid "生成英文文档"
-msgstr ""
+msgstr "Generate English Documentation"
 
 #: ../../old_files/I18N_GUIDE.md:18 bd5af25256954193af663ca5acc2cd6d
 msgid "生成中文文档（基于翻译）"
@@ -70,7 +70,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:31 01fe380b67f44600b389dda9c6bc3c5b
 msgid "所有翻译文件在：`locale/zh_CN/LC_MESSAGES/`"
-msgstr ""
+msgstr "所有翻译文件位于：`locale/zh_CN/LC_MESSAGES/`"
 
 #: ../../old_files/I18N_GUIDE.md:33 28cb1350f8b84355a49d05384e1ce7de
 msgid "翻译格式示例"
@@ -87,6 +87,9 @@ msgstr ""
 #: ../../old_files/I18N_GUIDE.md:64 937f96f4f876478997fa65b7717ed8ba
 msgid "优先翻译以下文件以获得最佳效果："
 msgstr ""
+"以下是翻译后的中文内容：\n"
+"\n"
+"优先翻译以下文件以获得最佳效果："
 
 #: ../../old_files/I18N_GUIDE.md:66 993a48e14c104d99b2142db18a3849ac
 msgid "**首页导航** - `locale/zh_CN/LC_MESSAGES/index.po`"
@@ -106,7 +109,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:70 c4a7a4c1765d4f01b082041ccb8b4afa
 msgid "**FAQ** - `locale/zh_CN/LC_MESSAGES/faq.po`"
-msgstr ""
+msgstr "**常见问题解答** - `locale/zh_CN/LC_MESSAGES/faq.po`"
 
 #: ../../old_files/I18N_GUIDE.md:72 4b61a9a8a74d4adeb586adcc29f422a5
 msgid "🔄 工作流程"
@@ -330,4 +333,3 @@ msgstr ""
 #: ../../old_files/I18N_GUIDE.md:267 bca2f3d4c95e42b2aabe13defd3314ef
 msgid "Happy translating! 🌍"
 msgstr ""
-

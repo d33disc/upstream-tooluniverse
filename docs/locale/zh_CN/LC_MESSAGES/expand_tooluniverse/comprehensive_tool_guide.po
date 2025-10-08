@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:2
@@ -31,8 +31,7 @@ msgid ""
 "This comprehensive Tutorial covers everything you need to know about "
 "contributing tools to ToolUniverse, from understanding existing tools to "
 "creating, testing, and submitting your own tools."
-msgstr ""
-"本综合教程涵盖了您需要了解的关于为 ToolUniverse 贡献工具的所有内容，从了解现有工具到创建、测试和提交您自己的工具。"
+msgstr "本综合教程涵盖了您需要了解的关于为 ToolUniverse 贡献工具的所有内容，从了解现有工具到创建、测试和提交您自己的工具。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:7
 #: 75538e127ab045d58b3aa68ab9c54f0a
@@ -53,18 +52,16 @@ msgstr "什么是 ToolUniverse 工具？"
 #: 764d9a22cbf3472a8430c7c58cf421b2
 msgid ""
 "ToolUniverse tools are standardized interfaces to scientific databases, "
-"APIs, machine learning models, and data analysis packages. Each tool "
-"follows a consistent pattern:"
-msgstr ""
-"ToolUniverse 工具是科学数据库、API、机器学习模型和数据分析包的标准化接口。每个工具都遵循一致的模式："
+"APIs, machine learning models, and data analysis packages. Each tool follows"
+" a consistent pattern:"
+msgstr "ToolUniverse 工具是科学数据库、API、机器学习模型和数据分析包的标准化接口。每个工具都遵循一致的模式："
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:21
 #: f09c769f34204d5e882d520853b6cd4d
 msgid ""
-"**Standardized Input/Output**: All tools accept structured parameters and"
-" return consistent JSON responses"
-msgstr ""
-"**标准化输入/输出**：所有工具都接受结构化参数并返回一致的 JSON 响应"
+"**Standardized Input/Output**: All tools accept structured parameters and "
+"return consistent JSON responses"
+msgstr "**标准化输入/输出**：所有工具都接受结构化参数并返回一致的 JSON 响应"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:22
 #: 2c58df75b1f14966b16cc5f40bc05bb1
@@ -124,21 +121,23 @@ msgstr "**手动设置：**"
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:80
 #: 4f92a5c28d894825bb97055c5b34c45b
 msgid ""
-"**Required Development Tools:** - ``pytest`` - Testing framework - "
-"``black`` - Code formatting - ``flake8`` - Code linting - ``mypy`` - Type"
-" checking - ``sphinx`` - Documentation - ``pre-commit`` - Git hooks"
+"**Required Development Tools:** - ``pytest`` - Testing framework - ``black``"
+" - Code formatting - ``flake8`` - Code linting - ``mypy`` - Type checking - "
+"``sphinx`` - Documentation - ``pre-commit`` - Git hooks"
 msgstr ""
-"**必需的开发工具：** - ``pytest`` - 测试框架 - ``black`` - 代码格式化 - ``flake8`` - 代码检查 - ``mypy`` - 类型检查 - ``sphinx`` - 文档 - ``pre-commit`` - Git 钩子"
+"**必需的开发工具：** - ``pytest`` - 测试框架 - ``black`` - 代码格式化 - ``flake8`` - 代码检查 - "
+"``mypy`` - 类型检查 - ``sphinx`` - 文档 - ``pre-commit`` - Git 钩子"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:88
 #: ade856b7fcdc48068cf28a447622fb81
 msgid ""
-"**Pre-commit Benefits:** - ✅ **Automatic code formatting** with Black - ✅"
-" **Code linting** with flake8 and ruff - ✅ **Import cleanup** with "
-"autoflake - ✅ **File validation** (YAML, TOML, AST checks) - ✅ **Runs on "
-"every commit** to ensure code quality"
+"**Pre-commit Benefits:** - ✅ **Automatic code formatting** with Black - ✅ "
+"**Code linting** with flake8 and ruff - ✅ **Import cleanup** with autoflake "
+"- ✅ **File validation** (YAML, TOML, AST checks) - ✅ **Runs on every "
+"commit** to ensure code quality"
 msgstr ""
-"**预提交优势：** - ✅ **使用 Black 自动代码格式化** - ✅ **使用 flake8 和 ruff 进行代码检查** - ✅ **使用 autoflake 进行导入清理** - ✅ **文件验证**（YAML、TOML、AST 检查） - ✅ **在每次提交时运行**以确保代码质量"
+"**预提交优势：** - ✅ **使用 Black 自动代码格式化** - ✅ **使用 flake8 和 ruff 进行代码检查** - ✅ **使用"
+" autoflake 进行导入清理** - ✅ **文件验证**（YAML、TOML、AST 检查） - ✅ **在每次提交时运行**以确保代码质量"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:96
 #: 1f19ad953d7343f88def22798d7dcb80
@@ -152,203 +151,239 @@ msgstr "2.1 工具类型选择"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:101
 #: 01fa25ae6b2b48c6823c00e084a75ede
-msgid "Before implementing, decide whether your tool should be local or remote:"
+msgid ""
+"Before implementing, decide whether your tool should be local or remote:"
 msgstr "在实现之前，决定您的工具应该是本地的还是远程的："
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:103
 #: 9fce840564324fd6a20307514dca7804
 msgid ""
-"**Local Tools** (recommended for most cases): - Python classes running in"
-" the same process - Best for: API wrappers, data processing, simple "
+"**Local Tools** (recommended for most cases): - Python classes running in "
+"the same process - Best for: API wrappers, data processing, simple "
 "computations - See :doc:`local_tool_registration` for detailed "
 "implementation Tutorial"
 msgstr ""
+"**本地工具**（推荐大多数场景使用）：  \n"
+"- 在同一进程中运行的 Python 类  \n"
+"- 适用于：API 封装、数据处理、简单计算  \n"
+"- 详见 :doc:`local_tool_registration` 获取详细实现教程"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:108
 #: 030cbf398fd14727bfd1ac96ab85c714
 msgid ""
-"**Remote Tools** (for specialized cases): - External services accessed "
-"via MCP or REST APIs - Best for: microservices, cloud AI services, "
-"existing systems - See :doc:`remote_tool_registration` for detailed "
-"implementation Tutorial"
+"**Remote Tools** (for specialized cases): - External services accessed via "
+"MCP or REST APIs - Best for: microservices, cloud AI services, existing "
+"systems - See :doc:`remote_tool_registration` for detailed implementation "
+"Tutorial"
 msgstr ""
+"**远程工具**（针对特殊情况）：  \n"
+"- 通过 MCP 或 REST API 访问的外部服务  \n"
+"- 适用于：微服务、云端 AI 服务、现有系统  \n"
+"- 详见 :doc:`remote_tool_registration` 获取详细实现教程"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:114
 #: c3db8c37234e45479cba45f2b4ab0e11
 msgid "2.2 Research Your Data Source"
-msgstr ""
+msgstr "2.2 研究您的数据源"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:116
 #: e7080d32a6454f498368ab8e87d131ab
-msgid "**API Documentation**: Understand endpoints, rate limits, authentication"
-msgstr ""
+msgid ""
+"**API Documentation**: Understand endpoints, rate limits, authentication"
+msgstr "**API 文档**：了解端点、速率限制、身份验证"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:117
 #: 38063f5bf29242eba48cb161e9d61d2a
 msgid "**Data Format**: Study response structures and data types"
-msgstr ""
+msgstr "**数据格式**：研究响应结构和数据类型"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:118
 #: 18716074e6cf48e487248101e1d9fd2a
 msgid "**Error Conditions**: Identify common error scenarios"
-msgstr ""
+msgstr "**错误情况**：识别常见错误场景"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:119
 #: 33674bf24d974522b49d61ce74df19ab
 msgid "**Usage Patterns**: How researchers typically use this data"
-msgstr ""
+msgstr "**使用模式**：研究人员通常如何使用这些数据"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:121
 #: 65037e082a324265acafcc0217956984
 msgid ""
 "**Design Principles:** - Keep parameters intuitive for scientists - Use "
-"consistent naming conventions - Provide sensible defaults - Support "
-"common use cases first"
+"consistent naming conventions - Provide sensible defaults - Support common "
+"use cases first"
 msgstr ""
+"**设计原则：**  \n"
+"- 保持参数对科学家直观易懂  \n"
+"- 使用一致的命名规范  \n"
+"- 提供合理的默认值  \n"
+"- 优先支持常见使用场景"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:128
 #: 43e7a983097249baa05220bc3f73c376
 msgid "Step 3: Tool Implementation"
-msgstr ""
+msgstr "步骤3：工具实施"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:130
 #: ad14c9f910d145f5a228894afd05a757
 msgid ""
 "The implementation details depend on whether you're creating a local or "
 "remote tool:"
-msgstr ""
+msgstr "具体实现细节取决于您是创建本地工具还是远程工具："
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:132
 #: 2f94b3d1f2cf4a57b4ab022faef775c7
 msgid ""
 "**For Local Tools:** Follow the comprehensive Tutorial at "
-":doc:`local_tool_registration` which covers: - Directory structure and "
-"file organization - Tool class implementation with BaseTool inheritance -"
-" Configuration and parameter handling - Testing and validation"
+":doc:`local_tool_registration` which covers: - Directory structure and file "
+"organization - Tool class implementation with BaseTool inheritance - "
+"Configuration and parameter handling - Testing and validation"
 msgstr ""
+"**对于本地工具：** 请参考完整的教程 :doc:`local_tool_registration`，内容包括：  \n"
+"- 目录结构和文件组织  \n"
+"- 使用 BaseTool 继承实现工具类  \n"
+"- 配置和参数处理  \n"
+"- 测试与验证"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:139
 #: e2ddd0f600274d49ab373aa8423e2ef1
 msgid ""
 "**For Remote Tools:** Follow the detailed Tutorial at "
 ":doc:`remote_tool_registration` which covers: - MCP server setup and "
-"configuration - REST API wrapper patterns - Authentication and security -"
-" Performance optimization"
+"configuration - REST API wrapper patterns - Authentication and security - "
+"Performance optimization"
 msgstr ""
+"**对于远程工具：** 请参阅详细教程 :doc:`remote_tool_registration`，内容包括：  \n"
+"- MCP 服务器的设置与配置  \n"
+"- REST API 包装模式  \n"
+"- 身份验证与安全性  \n"
+"- 性能优化"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:146
 #: a59f6bd00e604a20808bc4ac25929ee4
 msgid "**Key Requirements for Community Contribution:**"
-msgstr ""
+msgstr "**社区贡献的关键要求：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:148
 #: 1c5e2cd855ca41a4aeca5348df5f6a11
 msgid ""
-"**Inherit from BaseTool**: All contributed tools must inherit from "
-"BaseTool"
-msgstr ""
+"**Inherit from BaseTool**: All contributed tools must inherit from BaseTool"
+msgstr "**继承自 BaseTool**：所有贡献的工具都必须继承自 BaseTool"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:149
 #: e66456fabd2642b296136d55399fab96
-msgid "**Comprehensive Documentation**: Include detailed docstrings with examples"
-msgstr ""
+msgid ""
+"**Comprehensive Documentation**: Include detailed docstrings with examples"
+msgstr "**全面文档**：包含带有示例的详细文档字符串"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:150
 #: dc754e5e2fb245d1b817b359fd543c09
 msgid "**Error Handling**: Implement robust error handling and validation"
-msgstr ""
+msgstr "**错误处理**：实施健壮的错误处理和验证"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:151
 #: 5bda757a711343ccb499e63ba987cdb7
 msgid ""
 "**Consistent API**: Follow ToolUniverse conventions for parameters and "
 "responses"
-msgstr ""
+msgstr "**一致的 API**：遵循 ToolUniverse 对参数和响应的约定"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:152
 #: bbfd901a2b4b4c99b85aa0e4dcb14d1e
-msgid "**Scientific Focus**: Design interfaces that are intuitive for researchers"
-msgstr ""
+msgid ""
+"**Scientific Focus**: Design interfaces that are intuitive for researchers"
+msgstr "**科学重点**：设计直观且适合研究人员使用的界面"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:154
 #: c28668efc81e41b083ce485ce561beba
 msgid ""
 "For detailed implementation examples and templates, see the appropriate "
 "Tutorial above."
-msgstr ""
+msgstr "如需详细的实现示例和模板，请参阅上方相应的教程。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:157
 #: 068283d978364a8d95ee93970b18c50c
 msgid "3.3 Contribution-Specific Requirements"
-msgstr ""
+msgstr "3.3 特定贡献要求"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:159
 #: 9617c16033a6497c9d1f7f7f3df8ab96
 msgid ""
 "When contributing tools to ToolUniverse, ensure your implementation "
 "includes:"
-msgstr ""
+msgstr "在向 ToolUniverse 提交工具时，请确保您的实现包含："
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:161
 #: d1bd14c37be0442a8e70058619a9882e
 #, python-format
 msgid ""
 "**Code Organization:** - Place tools in appropriate domain directories - "
-"Include comprehensive test suites with >90% coverage - Provide "
-"configuration files following ToolUniverse standards - Add proper "
-"documentation and examples"
+"Include comprehensive test suites with >90% coverage - Provide configuration"
+" files following ToolUniverse standards - Add proper documentation and "
+"examples"
 msgstr ""
+"**代码组织：**  \n"
+"- 将工具放置在适当的领域目录中  \n"
+"- 包含覆盖率超过90%的全面测试套件  \n"
+"- 提供符合ToolUniverse标准的配置文件  \n"
+"- 添加适当的文档和示例"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:167
 #: ad83076d696c49ecba3d250af74daa23
 msgid ""
-"**Quality Standards:** - Pass all code quality checks (Black, flake8, "
-"mypy) - Include detailed docstrings with usage examples - Implement "
-"robust error handling and input validation - Follow scientific naming "
-"conventions"
+"**Quality Standards:** - Pass all code quality checks (Black, flake8, mypy) "
+"- Include detailed docstrings with usage examples - Implement robust error "
+"handling and input validation - Follow scientific naming conventions"
 msgstr ""
+"**质量标准：**  \n"
+"- 通过所有代码质量检查（Black、flake8、mypy）  \n"
+"- 包含带有使用示例的详细文档字符串  \n"
+"- 实现健壮的错误处理和输入验证  \n"
+"- 遵循科学命名规范"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:173
 #: db0c0ee6c891459d83d9ba33c74c88d8
 msgid ""
-"For detailed file structures and templates, refer to the tool "
-"registration guides linked above."
-msgstr ""
+"For detailed file structures and templates, refer to the tool registration "
+"guides linked above."
+msgstr "有关详细的文件结构和模板，请参阅上方链接的工具注册指南。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:176
 #: d884094a6345458faa39e4f45529eb9d
 msgid "Step 4: Testing Requirements for Contribution"
-msgstr ""
+msgstr "步骤 4：贡献测试要求"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:178
 #: e8c0eb1c018b4c36ad8f2acf4f2c9c25
 msgid ""
-"Contributors must provide comprehensive test suites. The testing patterns"
-" and examples are detailed in :doc:`local_tool_registration` under the "
+"Contributors must provide comprehensive test suites. The testing patterns "
+"and examples are detailed in :doc:`local_tool_registration` under the "
 "testing section."
-msgstr ""
+msgstr "贡献者必须提供全面的测试套件。测试模式和示例详见 :doc:`local_tool_registration` 的测试部分。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:180
 #: 3b30bea1b84e4a44a4c7f8a2bda2f51b
 msgid "**Key Testing Requirements:**"
-msgstr ""
+msgstr "**关键测试要求：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:182
 #: a259a87317d042be8ff4e81cde2aa4f2
 msgid ""
-"**>90% Test Coverage**: All contributed tools must have comprehensive "
-"test coverage"
-msgstr ""
+"**>90% Test Coverage**: All contributed tools must have comprehensive test "
+"coverage"
+msgstr "**>90% 测试覆盖率**：所有提交的工具必须具备全面的测试覆盖率"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:183
 #: bda89ca703054b9cb7502ede993aa0cd
-msgid "**Unit Tests**: Test all public methods with various inputs and edge cases"
-msgstr ""
+msgid ""
+"**Unit Tests**: Test all public methods with various inputs and edge cases"
+msgstr "**单元测试**：使用各种输入和边界情况测试所有公共方法"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:184
 #: 4520ffb597794b47a09c4e5054c9d031
 msgid "**Integration Tests**: Verify tool works correctly within ToolUniverse"
-msgstr ""
+msgstr "**集成测试**：验证工具在 ToolUniverse 中的正确运行"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:185
 #: a36cc32ea45f446e8c37007d4c747fd6
@@ -364,8 +399,8 @@ msgstr ""
 #: f095a5efe720494aa49009350b575337
 msgid ""
 "**Required Test Components:** - Test class with pytest fixtures - Mock "
-"external API calls appropriately - Test both success and error scenarios "
-"- Include test data fixtures - Validate input/output formats"
+"external API calls appropriately - Test both success and error scenarios - "
+"Include test data fixtures - Validate input/output formats"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:195
@@ -385,8 +420,8 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:204
 #: 7b6330d3cedb4ea4b2a83d44ef0163ae
 msgid ""
-"All contributed tools must meet ToolUniverse's code quality standards. "
-"The detailed requirements and examples are covered in "
+"All contributed tools must meet ToolUniverse's code quality standards. The "
+"detailed requirements and examples are covered in "
 ":doc:`local_tool_registration`."
 msgstr ""
 
@@ -404,10 +439,10 @@ msgstr ""
 #: b41b2eeba76147b7ae197595c93b9120
 msgid ""
 "**Required Standards:** - **Code Formatting**: Black formatting (88 "
-"character line limit) - **Linting**: Pass flake8 checks with no warnings "
-"- **Type Hints**: All functions must have complete type annotations - "
-"**Documentation**: Google-style docstrings with examples - **Testing**: "
-">90% test coverage"
+"character line limit) - **Linting**: Pass flake8 checks with no warnings - "
+"**Type Hints**: All functions must have complete type annotations - "
+"**Documentation**: Google-style docstrings with examples - **Testing**: >90%"
+" test coverage"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:232
@@ -425,23 +460,23 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:237
 #: 0099e691d6354ff9a315303b1b058167
 msgid ""
-"Tool registration is handled automatically by ToolUniverse when tools are"
-" placed in the correct directory structure. The registration details are "
+"Tool registration is handled automatically by ToolUniverse when tools are "
+"placed in the correct directory structure. The registration details are "
 "covered in the implementation guides:"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:239
 #: 59c4a3293ebc4a738e4e9be3b8819652
 msgid ""
-"**Local Tools**: See :doc:`local_tool_registration` for automatic "
-"discovery patterns"
+"**Local Tools**: See :doc:`local_tool_registration` for automatic discovery "
+"patterns"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:240
 #: c762959c67cd4588864d8f9e626fb736
 msgid ""
-"**Remote Tools**: See :doc:`remote_tool_registration` for MCP and REST "
-"API registration"
+"**Remote Tools**: See :doc:`remote_tool_registration` for MCP and REST API "
+"registration"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:242
@@ -457,8 +492,8 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:266
 #: 1f302eafd11d42968c7f086b5dc8f100
 msgid ""
-"Contributors must provide comprehensive documentation for their tools. "
-"The detailed documentation patterns and requirements are covered in "
+"Contributors must provide comprehensive documentation for their tools. The "
+"detailed documentation patterns and requirements are covered in "
 ":doc:`local_tool_registration`."
 msgstr ""
 
@@ -470,15 +505,15 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:270
 #: 9d59e1fd904d48d89ada67d56c0f07c5
 msgid ""
-"**Comprehensive Docstrings**: All public methods must have detailed "
-"Google-style docstrings"
+"**Comprehensive Docstrings**: All public methods must have detailed Google-"
+"style docstrings"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:271
 #: ddac833cc4204f8ab66aa5259e403034
 msgid ""
-"**Usage Examples**: Include practical examples in docstrings showing "
-"real-world usage"
+"**Usage Examples**: Include practical examples in docstrings showing real-"
+"world usage"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:272
@@ -532,10 +567,10 @@ msgstr ""
 #: 626ed449e30742e79eff6f38617061dc
 msgid ""
 "**Integration Test Requirements:** - **Tool Discovery**: Verify tool is "
-"automatically discovered by ToolUniverse - **API Compliance**: Ensure "
-"tool methods work through ToolUniverse interface - **Response Format**: "
-"Validate standardized response structure - **Error Handling**: Test error"
-" conditions are properly handled"
+"automatically discovered by ToolUniverse - **API Compliance**: Ensure tool "
+"methods work through ToolUniverse interface - **Response Format**: Validate "
+"standardized response structure - **Error Handling**: Test error conditions "
+"are properly handled"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:320
@@ -563,9 +598,9 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:330
 #: 40c160454c1a4b3a86970e378c3f24f1
 msgid ""
-"**Code Quality:** - [ ] All tests pass: ``pytest`` - [ ] Code is "
-"formatted: ``black src/`` - [ ] No linting errors: ``flake8 src/`` - [ ] "
-"Type checking passes: ``mypy src/`` - [ ] Test coverage >90%: ``pytest "
+"**Code Quality:** - [ ] All tests pass: ``pytest`` - [ ] Code is formatted: "
+"``black src/`` - [ ] No linting errors: ``flake8 src/`` - [ ] Type checking "
+"passes: ``mypy src/`` - [ ] Test coverage >90%: ``pytest "
 "--cov=tooluniverse``"
 msgstr ""
 
@@ -580,16 +615,16 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:343
 #: 628438ecd6244cab94e8023e9a2eee16
 msgid ""
-"**Testing:** - [ ] Unit tests cover all methods - [ ] Integration tests "
-"pass - [ ] Error conditions are tested - [ ] Edge cases are handled"
+"**Testing:** - [ ] Unit tests cover all methods - [ ] Integration tests pass"
+" - [ ] Error conditions are tested - [ ] Edge cases are handled"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:349
 #: 044bf389d91743ef841f5bd12d080d8d
 msgid ""
-"**Tool Integration:** - [ ] Tool loads correctly in ToolUniverse - [ ] "
-"Tool methods work through ToolUniverse interface - [ ] Configuration is "
-"properly handled"
+"**Tool Integration:** - [ ] Tool loads correctly in ToolUniverse - [ ] Tool "
+"methods work through ToolUniverse interface - [ ] Configuration is properly "
+"handled"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:355
@@ -610,8 +645,8 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:387
 #: 43874261c40741588c1caaab3a62b082
 msgid ""
-"**Commit Message Format:** - ``feat``: New tool or feature - ``fix``: Bug"
-" fixes - ``docs``: Documentation updates - ``test``: Test additions - "
+"**Commit Message Format:** - ``feat``: New tool or feature - ``fix``: Bug "
+"fixes - ``docs``: Documentation updates - ``test``: Test additions - "
 "``refactor``: Code refactoring"
 msgstr ""
 
@@ -650,22 +685,22 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:473
 #: d7af16fcd2e24af5956ee767b4ffd723
 msgid ""
-"**Testing Improvements** - Add missing test cases - Improve test coverage"
-" - Mock external dependencies properly"
+"**Testing Improvements** - Add missing test cases - Improve test coverage - "
+"Mock external dependencies properly"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:478
 #: db2f12f5c10a4093b7788012b12ec5e3
 msgid ""
-"**Documentation Clarifications** - Clarify unclear docstrings - Add "
-"missing examples - Fix documentation formatting"
+"**Documentation Clarifications** - Clarify unclear docstrings - Add missing "
+"examples - Fix documentation formatting"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:483
 #: 7b214e0ed5f24a5cad0211608fce5404
 msgid ""
-"**API Design Suggestions** - Simplify complex interfaces - Make "
-"parameters more intuitive - Improve error messages"
+"**API Design Suggestions** - Simplify complex interfaces - Make parameters "
+"more intuitive - Improve error messages"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:488
@@ -687,8 +722,8 @@ msgstr ""
 #: 09404a5fa53d47c2bb9f26895a2879a1
 msgid ""
 "**Ongoing Responsibilities:** - Monitor for issues reported by users - "
-"Update tool when external API changes - Improve performance based on "
-"usage patterns - Add new features as requested by community"
+"Update tool when external API changes - Improve performance based on usage "
+"patterns - Add new features as requested by community"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:523
@@ -771,19 +806,19 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:711
 #: 276c34fb780743b280a26f2526159fbe
 msgid ""
-"**Community Resources:** - GitHub Discussions: General questions and "
-"feature discussions - GitHub Issues: Bug reports and specific problems - "
-"Email: Direct contact with maintainers - Documentation: Comprehensive "
-"guides and examples"
+"**Community Resources:** - GitHub Discussions: General questions and feature"
+" discussions - GitHub Issues: Bug reports and specific problems - Email: "
+"Direct contact with maintainers - Documentation: Comprehensive guides and "
+"examples"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:717
 #: 4dc40884bb1b4d9ea4770270b45ed8a4
 msgid ""
 "**Best Practices for Getting Help:** 1. Search existing issues first 2. "
-"Provide minimal reproducible examples 3. Include system information "
-"(Python version, OS, ToolUniverse version) 4. Share relevant error "
-"messages and tracebacks"
+"Provide minimal reproducible examples 3. Include system information (Python "
+"version, OS, ToolUniverse version) 4. Share relevant error messages and "
+"tracebacks"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:724
@@ -794,17 +829,17 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:726
 #: a515091efc434d4e954b52a621fd1101
 msgid ""
-"**Other Ways to Contribute:** - Improve documentation - Add usage "
-"examples - Fix bugs in existing tools - Optimize performance - Add new "
-"features to the core framework - Help with testing and quality assurance"
+"**Other Ways to Contribute:** - Improve documentation - Add usage examples -"
+" Fix bugs in existing tools - Optimize performance - Add new features to the"
+" core framework - Help with testing and quality assurance"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:734
 #: 2aefd5f5e3c84840aae4bec03aff378c
 msgid ""
-"**Mentoring New Contributors:** - Help newcomers understand the codebase "
-"- Review pull requests from community members - Create tutorials and "
-"learning materials - Participate in community discussions"
+"**Mentoring New Contributors:** - Help newcomers understand the codebase - "
+"Review pull requests from community members - Create tutorials and learning "
+"materials - Participate in community discussions"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:741
@@ -815,17 +850,17 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:743
 #: e5e6ccffd7cc4beb8f5305ae467eabf0
 msgid ""
-"**Contributor Recognition:** - Contributors are listed in release notes -"
-" Major contributors get acknowledgment in documentation - Annual "
-"contributor highlights - Conference presentation opportunities for "
-"significant contributions"
+"**Contributor Recognition:** - Contributors are listed in release notes - "
+"Major contributors get acknowledgment in documentation - Annual contributor "
+"highlights - Conference presentation opportunities for significant "
+"contributions"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:749
 #: e68e36dcd02a4bdd8c332b989c205f26
 msgid ""
-"**Long-term Benefits:** - Build your scientific software portfolio - Gain"
-" experience with production-quality APIs - Learn best practices for "
+"**Long-term Benefits:** - Build your scientific software portfolio - Gain "
+"experience with production-quality APIs - Learn best practices for "
 "scientific data integration - Network with other scientific developers"
 msgstr ""
 
@@ -838,28 +873,27 @@ msgstr ""
 #: d3fa13e5d1754ff39088ef24ec248852
 msgid ""
 "Contributing to ToolUniverse is an opportunity to democratize access to "
-"scientific data and help build the next generation of AI scientist "
-"systems. By following this comprehensive Tutorial, you'll create high-"
-"quality tools that benefit the entire scientific community."
+"scientific data and help build the next generation of AI scientist systems. "
+"By following this comprehensive Tutorial, you'll create high-quality tools "
+"that benefit the entire scientific community."
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:760
 #: 70a09c127e7f4389813e2f2834d30674
 msgid ""
-"**Key Takeaways:** 1. **Quality First**: Focus on robust, well-tested, "
-"and well-documented tools 2. **User Experience**: Design intuitive APIs "
-"that scientists can easily use 3. **Community**: Engage with the "
-"community for feedback and support 4. **Continuous Improvement**: "
-"Maintain and improve your tools based on user feedback"
+"**Key Takeaways:** 1. **Quality First**: Focus on robust, well-tested, and "
+"well-documented tools 2. **User Experience**: Design intuitive APIs that "
+"scientists can easily use 3. **Community**: Engage with the community for "
+"feedback and support 4. **Continuous Improvement**: Maintain and improve "
+"your tools based on user feedback"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:766
 #: 4ce70427966a4ae8bd4941aed3c5036c
 msgid ""
-"**Next Steps:** 1. Choose a scientific data source you're passionate "
-"about 2. Follow this Tutorial step-by-step 3. Start with a simple tool "
-"and gradually add features 4. Engage with the community for feedback and "
-"support"
+"**Next Steps:** 1. Choose a scientific data source you're passionate about "
+"2. Follow this Tutorial step-by-step 3. Start with a simple tool and "
+"gradually add features 4. Engage with the community for feedback and support"
 msgstr ""
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:772
@@ -898,4 +932,3 @@ msgstr ""
 #: 8522dc0202b9463f848298e97041b399
 msgid "Issue Tracker: https://github.com/mims-harvard/ToolUniverse/issues"
 msgstr ""
-

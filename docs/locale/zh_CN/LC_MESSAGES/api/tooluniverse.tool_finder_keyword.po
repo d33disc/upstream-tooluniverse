@@ -7,29 +7,29 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.tool_finder_keyword.rst:2
 #: db114ba73c7b4da293bd50e50db2e960
 msgid "tooluniverse.tool\\_finder\\_keyword module"
-msgstr ""
+msgstr "tooluniverse.tool_finder_keyword 模块"
 
 #: 19c25ee889944c9e819055b60f1a9505 of tooluniverse.tool_finder_keyword:1
 msgid ""
 "Keyword-based Tool Finder - An advanced keyword search tool for finding "
 "relevant tools."
-msgstr ""
+msgstr "基于关键词的工具查找器 - 一款用于查找相关工具的高级关键词搜索工具。"
 
 #: 07714c4fc8c44e838e2c0cc8d839fbb1 of tooluniverse.tool_finder_keyword:3
 msgid ""
@@ -39,39 +39,48 @@ msgid ""
 "serves as a robust search method when AI-powered search methods are "
 "unavailable."
 msgstr ""
+"该工具利用自然语言处理技术提供高级关键词匹配功能，包括分词、停用词去除、词干提取及TF-"
+"IDF评分，以提升相关性排序效果。当无法使用人工智能驱动的搜索方法时，该工具作为一种强大的搜索手段。"
 
 #: 8533cbf4b1594092b593206b9516065e of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
 #: 5dbdcb5520374c5a887e56d41abf9122 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword:1
 msgid ""
-"Advanced keyword-based tool finder that uses sophisticated text "
-"processing and TF-IDF scoring."
-msgstr ""
+"Advanced keyword-based tool finder that uses sophisticated text processing "
+"and TF-IDF scoring."
+msgstr "基于高级关键词的工具查找器，采用复杂的文本处理和TF-IDF评分技术。"
 
 #: 87dac5ce144f4c53ad000514686e21a8 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword:3
 msgid ""
 "This class implements natural language processing techniques for tool "
-"discovery including: - Tokenization and normalization - Stop word removal"
-" - Basic stemming - TF-IDF relevance scoring - Semantic phrase matching"
+"discovery including: - Tokenization and normalization - Stop word removal - "
+"Basic stemming - TF-IDF relevance scoring - Semantic phrase matching"
 msgstr ""
+"本类实现了用于工具发现的自然语言处理技术，包括：  \n"
+"- 分词与规范化  \n"
+"- 停用词去除  \n"
+"- 基础词干提取  \n"
+"- TF-IDF 相关性评分  \n"
+"- 语义短语匹配"
 
 #: 3481fff9948c4a088ab7cb9f6f9fb40b of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword:10
 msgid ""
-"The search operates by parsing user queries to extract key terms, "
-"processing them through NLP pipelines, and matching against pre-built "
-"indices of tool metadata for efficient and relevant tool discovery."
+"The search operates by parsing user queries to extract key terms, processing"
+" them through NLP pipelines, and matching against pre-built indices of tool "
+"metadata for efficient and relevant tool discovery."
 msgstr ""
+"搜索通过解析用户查询以提取关键术语，利用自然语言处理（NLP）管道进行处理，并与预先构建的工具元数据索引进行匹配，从而实现高效且相关的工具发现。"
 
 #: 48176bdab1e8471c8b8480b96bedc22f of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.__init__:1
 msgid "Initialize the Advanced Keyword-based Tool Finder."
-msgstr ""
+msgstr "初始化高级基于关键词的工具查找器。"
 
 #: ../../api/tooluniverse.tool_finder_keyword.rst
 #: 0bd009f5c71140beaf700c0fae1ba470 1488584df6d34694a9ae9b844d2d1f63
@@ -81,12 +90,12 @@ msgstr ""
 #: cfae5da26ebe4e30a295965e7e12d8f8 f52570cf2e7147ad8f59e465bae4e20a
 #: f56a35e5e8f141ec8401e1d6b1e73ec7
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 65d71927929d4b3494780d03852b900f of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.__init__:3
 msgid "Configuration dictionary for the tool"
-msgstr ""
+msgstr "工具的配置字典"
 
 #: 1be0dd69af53408ea88290ae80655187 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.__init__:5
@@ -165,7 +174,8 @@ msgstr ""
 
 #: 086adabbef0042c2bf4115542c1f9ec9 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._build_tool_index:1
-msgid "Build TF-IDF index for all tools to enable efficient relevance scoring."
+msgid ""
+"Build TF-IDF index for all tools to enable efficient relevance scoring."
 msgstr ""
 
 #: 8ea762380ed446e6a722aa5b73272248 of
@@ -236,14 +246,14 @@ msgstr ""
 #: ffe6922592cd493f8f293270e7decb24 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.find_tools:3
 msgid ""
-"This method matches the interface of other tool finders to ensure "
-"seamless replacement. It uses keyword-based search instead of embedding "
-"similarity."
+"This method matches the interface of other tool finders to ensure seamless "
+"replacement. It uses keyword-based search instead of embedding similarity."
 msgstr ""
 
 #: d95ef54e84af490caada395f6f650472 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.find_tools:6
-msgid "Query message to find tools for. Required if picked_tool_names is None."
+msgid ""
+"Query message to find tools for. Required if picked_tool_names is None."
 msgstr ""
 
 #: 48d8d17ccd60463a87621ecfbabd17de of
@@ -270,8 +280,8 @@ msgstr ""
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.find_tools:17
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.run:13
 msgid ""
-"- If return_call_result is False: Tool prompts as a formatted string - If"
-" return_call_result is True: Tuple of (tool_prompts, tool_names)"
+"- If return_call_result is False: Tool prompts as a formatted string - If "
+"return_call_result is True: Tuple of (tool_prompts, tool_names)"
 msgstr ""
 
 #: 252e2017fd624b1a8b843dda7c4db29f bf2f25cc14f34aee8e4bcceb2f758d61 of
@@ -299,26 +309,25 @@ msgstr ""
 #: 41b5ef84da454afaac4b8015e844e148 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.run:1
 msgid ""
-"Find tools using advanced keyword-based search with NLP processing and "
-"TF-IDF scoring."
+"Find tools using advanced keyword-based search with NLP processing and TF-"
+"IDF scoring."
 msgstr ""
 
 #: 0d03d26ec01545a191c3c72c2a66c5d5 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.run:3
 msgid ""
-"This method provides a unified interface compatible with other tool "
-"finders."
+"This method provides a unified interface compatible with other tool finders."
 msgstr ""
 
 #: 0b80b6a9bbf84ea3b6d2b29b41ae389d of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.run:5
 msgid ""
 "Dictionary containing: - description (str): Search query string (unified "
-"parameter name) - categories (list, optional): List of categories to "
-"filter by - limit (int, optional): Maximum number of results to return "
-"(default: 10) - picked_tool_names (list, optional): Pre-selected tool "
-"names to process - return_call_result (bool, optional): Whether to return"
-" both prompts and names. Defaults to False."
+"parameter name) - categories (list, optional): List of categories to filter "
+"by - limit (int, optional): Maximum number of results to return (default: "
+"10) - picked_tool_names (list, optional): Pre-selected tool names to process"
+" - return_call_result (bool, optional): Whether to return both prompts and "
+"names. Defaults to False."
 msgstr ""
 
 #: e767a2ccd10e45efbcb8a31dd7c9fee8 of
@@ -335,4 +344,3 @@ msgstr ""
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._run_json_search:6
 msgid "JSON string containing search results with relevance scores"
 msgstr ""
-

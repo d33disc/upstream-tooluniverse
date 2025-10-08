@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 11:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../QUICK_BUILD_GUIDE.md:1 1d19a7f91f24444bb39d659919e71588
@@ -26,11 +26,11 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:3 7df9f6208dbf45479e0d3d9b11af6f83
 msgid "✨ 一键构建中英文文档"
-msgstr ""
+msgstr "✨ 一键生成中英文文档"
 
 #: ../../QUICK_BUILD_GUIDE.md:5 94398bb5503b4f8398d22ba171e0d196
 msgid "现在 `quick_doc_build.sh` 和 `quick_doc_build_cn.sh` 脚本会**自动构建中英文两个版本**！"
-msgstr ""
+msgstr "现在 `quick_doc_build.sh` 和 `quick_doc_build_cn.sh` 脚本会**自动生成中英文两个版本**！"
 
 #: ../../QUICK_BUILD_GUIDE.md:7 1a45989432f144c7aeabecd9df3bca97
 msgid "📝 使用方法"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:9 cad8c8c7227c4a1888515a467f83f7be
 msgid "方法 1: 默认构建（中英文）"
-msgstr ""
+msgstr "方法 1：默认构建（中英文）"
 
 #: ../../QUICK_BUILD_GUIDE.md:18 ba0bf75fed6046b18ef9a2731dc46074
 msgid "**自动执行：**"
@@ -74,15 +74,15 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:27 1110237bd5c648cca5bb1004a8ab2e77
 msgid "方法 2: 仅构建英文"
-msgstr ""
+msgstr "方法 2：仅构建英文"
 
 #: ../../QUICK_BUILD_GUIDE.md:33 5c889dca4f0a4b0cb2f2ba5f2513afe0
 msgid "方法 3: 仅构建中文"
-msgstr ""
+msgstr "方法 3：仅构建中文"
 
 #: ../../QUICK_BUILD_GUIDE.md:39 9bf6a97ab7cc4ef89e50543c31919c90
 msgid "方法 4: 自定义语言组合"
-msgstr ""
+msgstr "方法 4：自定义语言组合"
 
 #: ../../QUICK_BUILD_GUIDE.md:45 c3122867d3234b2e8b3f113a648b960c
 msgid "📂 构建结果"
@@ -344,4 +344,3 @@ msgstr ""
 #: ../../QUICK_BUILD_GUIDE.md:272 f8674c1575a341069ed015de0fd399e7
 msgid "一键生成精美的中英文文档！🚀"
 msgstr ""
-

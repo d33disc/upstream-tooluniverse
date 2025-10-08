@@ -7,54 +7,57 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/hpa_tools.rst:2 27f0063fb6534fe881e7eca53283562c
 msgid "Hpa Tools"
-msgstr ""
+msgstr "Hpa 工具"
 
 #: ../../tools/hpa_tools.rst:4 40245133e4c4425885caa7d482f98c31
 msgid ""
 "**Configuration File**: ``hpa_tools.json`` **Tool Type**: Local **Tools "
 "Count**: 13"
 msgstr ""
+"**配置文件**：``hpa_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：13"
 
 #: ../../tools/hpa_tools.rst:8 78944c39a3934c4fae115bf980424fc2
 msgid ""
-"This page contains all tools defined in the ``hpa_tools.json`` "
-"configuration file."
-msgstr ""
+"This page contains all tools defined in the ``hpa_tools.json`` configuration"
+" file."
+msgstr "本页面包含 ``hpa_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/hpa_tools.rst:11 80649db1a5844fd3b2b01fcd40496198
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/hpa_tools.rst:14 71f788c514cd41bfac3399336979c81d
 msgid ""
-"**HPA_get_biological_processes_by_gene** (Type: "
-"HPAGetBiologicalProcessTool)"
+"**HPA_get_biological_processes_by_gene** (Type: HPAGetBiologicalProcessTool)"
 msgstr ""
+"**HPA_get_biological_processes_by_gene**（类型：HPAGetBiologicalProcessTool）"
 
 #: ../../tools/hpa_tools.rst:16 597b33b839f54558b8799ee25001411c
 msgid ""
 "Get biological process information for a gene, with special focus on key "
 "processes like apoptosis..."
-msgstr ""
+msgstr "获取基因的生物过程信息，特别关注诸如细胞凋亡等关键过程..."
 
 #: ../../tools/hpa_tools.rst d9bf84000e3545efb021ce9f2f789f31
 msgid "HPA_get_biological_processes_by_gene tool specification"
-msgstr ""
+msgstr "HPA_get_biological_processes_by_gene 工具规格说明"
 
 #: ../../tools/hpa_tools.rst:20 ../../tools/hpa_tools.rst:54
 #: ../../tools/hpa_tools.rst:85 ../../tools/hpa_tools.rst:120
@@ -70,21 +73,21 @@ msgstr ""
 #: cda695995a8d4b899c7fd419cc57a530 d696e000a3084049b7eb0f98b3a34075
 #: dc13157adbe141f28c43d30e6509065d fb31d8ff567542beaefdb20d2f97b364
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/hpa_tools.rst:22 912c673fec494411bbe5e32c46e04a29
 msgid "**Name**: ``HPA_get_biological_processes_by_gene``"
-msgstr ""
+msgstr "**名称**：``HPA_get_biological_processes_by_gene``"
 
 #: ../../tools/hpa_tools.rst:23 2ee21619c86c4be5ab66857c0386576f
 msgid "**Type**: ``HPAGetBiologicalProcessTool``"
-msgstr ""
+msgstr "**类型**：``HPAGetBiologicalProcessTool``"
 
 #: ../../tools/hpa_tools.rst:24 7c182e2eb050447fa0c36c46dbf78c47
 msgid ""
-"**Description**: Get biological process information for a gene, with "
-"special focus on key processes like apoptosis, cell cycle, etc."
-msgstr ""
+"**Description**: Get biological process information for a gene, with special"
+" focus on key processes like apoptosis, cell cycle, etc."
+msgstr "**描述**：获取基因的生物学过程信息，重点关注诸如细胞凋亡、细胞周期等关键过程。"
 
 #: ../../tools/hpa_tools.rst:26 ../../tools/hpa_tools.rst:60
 #: ../../tools/hpa_tools.rst:91 ../../tools/hpa_tools.rst:126
@@ -100,13 +103,13 @@ msgstr ""
 #: b29b8ee71d4e4d2c9299136c77ae8eab b4246993f7734622a681d167ab14c9c1
 #: b4def3da9d9149429bb16cf452a3d16a cc006f6c06d341e08a92428aa28e6700
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/hpa_tools.rst:28 8082bea0cc924619aa2dedba70117705
 msgid ""
-"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53',"
-" 'CDK1', 'CASP3', etc."
-msgstr ""
+"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53', "
+"'CDK1', 'CASP3', etc."
+msgstr "``gene_name``（字符串）（必填项）基因名称或基因符号，例如：'TP53'、'CDK1'、'CASP3' 等。"
 
 #: ../../tools/hpa_tools.rst:31 d4fdf5ccc6d246bb8d1635b899993432
 msgid ""
@@ -114,6 +117,7 @@ msgid ""
 "specific biological processes (apoptosis, cell cycle, transcription "
 "regulation, etc.), defaults to true."
 msgstr ""
+"``filter_processes``（布尔值）（可选）是否筛选并专注于特定的生物学过程（如细胞凋亡、细胞周期、转录调控等），默认为 true。"
 
 #: ../../tools/hpa_tools.rst:34 ../../tools/hpa_tools.rst:65
 #: ../../tools/hpa_tools.rst:99 ../../tools/hpa_tools.rst:140
@@ -129,86 +133,90 @@ msgstr ""
 #: 6a70e0ba1de542f0bddcdd396080839c a93494ba17024dd182a27d7882cf4c5a
 #: aa5d696bcd81427a90978a6f4f092f90 ece2db1447dd431ca482d38789b3c08f
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/hpa_tools.rst:48 fe30784788a7402f93af11f615771e02
-msgid "**HPA_get_cancer_prognostics_by_gene** (Type: HPAGetCancerPrognosticsTool)"
+msgid ""
+"**HPA_get_cancer_prognostics_by_gene** (Type: HPAGetCancerPrognosticsTool)"
 msgstr ""
+"**HPA_get_cancer_prognostics_by_gene**（类型：HPAGetCancerPrognosticsTool）"
 
 #: ../../tools/hpa_tools.rst:50 93f54f8f710341e98674b17a8ce10ca9
 msgid ""
-"Retrieve prognostic value of a gene across various cancer types, "
-"indicating if its expression lev..."
-msgstr ""
+"Retrieve prognostic value of a gene across various cancer types, indicating "
+"if its expression lev..."
+msgstr "检索特定基因在多种癌症类型中的预后价值，指明其表达水平是否与患者的生存率相关。"
 
 #: ../../tools/hpa_tools.rst 5d0684f0fcc741898ef2c8f780492d64
 msgid "HPA_get_cancer_prognostics_by_gene tool specification"
-msgstr ""
+msgstr "HPA_get_cancer_prognostics_by_gene 工具规范"
 
 #: ../../tools/hpa_tools.rst:56 268991d8292547bbaa3832fed01a0766
 msgid "**Name**: ``HPA_get_cancer_prognostics_by_gene``"
-msgstr ""
+msgstr "**名称**: ``HPA_get_cancer_prognostics_by_gene``"
 
 #: ../../tools/hpa_tools.rst:57 b1008ce5f46e4a4f8fd7a10d2c021dbc
 msgid "**Type**: ``HPAGetCancerPrognosticsTool``"
-msgstr ""
+msgstr "**类型**: ``HPAGetCancerPrognosticsTool``"
 
 #: ../../tools/hpa_tools.rst:58 e6e6120b445a4940b0e98386c06674e8
 msgid ""
-"**Description**: Retrieve prognostic value of a gene across various "
-"cancer types, indicating if its expression level correlates with patient "
-"survival outcomes."
-msgstr ""
+"**Description**: Retrieve prognostic value of a gene across various cancer "
+"types, indicating if its expression level correlates with patient survival "
+"outcomes."
+msgstr "**描述**：检索某基因在多种癌症类型中的预后价值，指示其表达水平是否与患者生存结果相关联。"
 
 #: ../../tools/hpa_tools.rst:62 acae16a660984f41a30dc79e221b64ee
 msgid ""
 "``ensembl_id`` (string) (required) Ensembl Gene ID of the gene to check, "
 "e.g., 'ENSG00000141510' for TP53, 'ENSG00000012048' for BRCA1."
 msgstr ""
+"``ensembl_id``（字符串）（必填）要检查的基因的 Ensembl 基因 ID，例如：TP53 的 "
+"'ENSG00000141510'，BRCA1 的 'ENSG00000012048'。"
 
 #: ../../tools/hpa_tools.rst:79 45cc007475f94bbda6c746dc553621c6
 msgid ""
 "**HPA_get_comparative_expression_by_gene_and_cellline** (Type: "
 "HPAGetComparativeExpressionTool)"
 msgstr ""
+"**HPA_get_comparative_expression_by_gene_and_cellline**（类型：HPAGetComparativeExpressionTool）"
 
 #: ../../tools/hpa_tools.rst:81 3fe5695532f043cfb2b3125ec88bc02c
 msgid ""
-"Compare the expression level differences of a gene between a specific "
-"cell line and healthy tissu..."
-msgstr ""
+"Compare the expression level differences of a gene between a specific cell "
+"line and healthy tissu..."
+msgstr "比较特定细胞系与健康组织中某基因的表达水平差异。"
 
 #: ../../tools/hpa_tools.rst 1456c552221e4d4eba69daa8bd01da8f
 msgid "HPA_get_comparative_expression_by_gene_and_cellline tool specification"
-msgstr ""
+msgstr "HPA_get_comparative_expression_by_gene_and_cellline 工具规范"
 
 #: ../../tools/hpa_tools.rst:87 4a7e30cec922466997bf0cfc2ef3a489
 msgid "**Name**: ``HPA_get_comparative_expression_by_gene_and_cellline``"
-msgstr ""
+msgstr "**名称**: ``HPA_get_comparative_expression_by_gene_and_cellline``"
 
 #: ../../tools/hpa_tools.rst:88 1bb92adac6d94ddda2f289c9a37dc7d4
 msgid "**Type**: ``HPAGetComparativeExpressionTool``"
-msgstr ""
+msgstr "**类型**: ``HPAGetComparativeExpressionTool``"
 
 #: ../../tools/hpa_tools.rst:89 bb84b41c70e947dea62c7b6537bc0361
 msgid ""
-"**Description**: Compare the expression level differences of a gene "
-"between a specific cell line and healthy tissues using gene name and cell"
-" line name."
-msgstr ""
+"**Description**: Compare the expression level differences of a gene between "
+"a specific cell line and healthy tissues using gene name and cell line name."
+msgstr "**描述**：使用基因名称和细胞系名称比较特定细胞系与健康组织之间的基因表达水平差异。"
 
 #: ../../tools/hpa_tools.rst:93 17b0546f82204bfaaac25561fde997cb
 msgid ""
-"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53',"
-" 'BRCA1', 'EGFR', etc."
-msgstr ""
+"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53', "
+"'BRCA1', 'EGFR', etc."
+msgstr "``gene_name``（字符串）（必填）基因名称或基因符号，例如：'TP53'、'BRCA1'、'EGFR' 等。"
 
 #: ../../tools/hpa_tools.rst:96 aaf7aa2cd3d64cf2ab64c8e4bfc0d83e
 msgid ""
 "``cell_line`` (string) (required) Cell line name, supported cell lines "
-"include: ishikawa, hela, mcf7, a549, hepg2, jurkat, pc3, rh30, siha, "
-"u251."
+"include: ishikawa, hela, mcf7, a549, hepg2, jurkat, pc3, rh30, siha, u251."
 msgstr ""
+"``cell_line``（字符串）（必填）细胞系名称，支持的细胞系包括：ishikawa、hela、mcf7、a549、hepg2、jurkat、pc3、rh30、siha、u251。"
 
 #: ../../tools/hpa_tools.rst:114 869be3ca4d8d49d7a70e587252775ec4
 msgid ""
@@ -237,30 +245,29 @@ msgstr ""
 #: ../../tools/hpa_tools.rst:124 bec241d3b6eb429889653b4dd2261aa8
 msgid ""
 "**Description**: Get detailed in-depth information from gene page using "
-"Ensembl Gene ID, including image URLs, antibody data, protein expression,"
-" and comprehensive information. This is the core tool for retrieving all "
+"Ensembl Gene ID, including image URLs, antibody data, protein expression, "
+"and comprehensive information. This is the core tool for retrieving all "
 "images (tissue immunohistochemistry, subcellular immunofluorescence)."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:128 d93324e9d33f42399f43be788d640cfe
 msgid ""
-"``ensembl_id`` (string) (required) Ensembl Gene ID, e.g., "
-"'ENSG00000064787' (BCAS1), 'ENSG00000141510' (TP53), etc. Usually "
-"obtained through HPA_search_genes_by_query tool."
+"``ensembl_id`` (string) (required) Ensembl Gene ID, e.g., 'ENSG00000064787' "
+"(BCAS1), 'ENSG00000141510' (TP53), etc. Usually obtained through "
+"HPA_search_genes_by_query tool."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:131 92b4b6ea24304848b12483ab90d0b8a2
 msgid ""
 "``include_images`` (boolean) (optional) Whether to include image URL "
-"information (immunofluorescence, cell line images, etc.), defaults to "
-"true."
+"information (immunofluorescence, cell line images, etc.), defaults to true."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:134 fc7cd5f6d5254d5491d991eff2bbcce2
 msgid ""
 "``include_antibodies`` (boolean) (optional) Whether to include detailed "
-"antibody information (validation status, Western blot data, etc.), "
-"defaults to true."
+"antibody information (validation status, Western blot data, etc.), defaults "
+"to true."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:137 2a152ab4b6a14a65abdccd711c5fa20f
@@ -278,8 +285,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:156 848839a3a05f485da558c80a88d3babd
 msgid ""
-"Analyze a gene's biological processes in the context of a specific tissue"
-" or cell line by integra..."
+"Analyze a gene's biological processes in the context of a specific tissue or"
+" cell line by integra..."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst 61c5eb9397ae44b3aef511658dc40546
@@ -296,15 +303,15 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:164 fecf08b9e3064fc4b9c2afc7d4dc042c
 msgid ""
-"**Description**: Analyze a gene's biological processes in the context of "
-"a specific tissue or cell line by integrating functional annotation with "
+"**Description**: Analyze a gene's biological processes in the context of a "
+"specific tissue or cell line by integrating functional annotation with "
 "expression data to determine functional relevance."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:168 b60b45cd1d154954b93f8a295d6c47cd
 msgid ""
-"``gene_name`` (string) (required) Gene name or symbol, e.g., 'TP53', "
-"'EGFR', 'BRCA1'."
+"``gene_name`` (string) (required) Gene name or symbol, e.g., 'TP53', 'EGFR',"
+" 'BRCA1'."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:171 b81b7b04fdf84cf2b076856dfc2c3c8d
@@ -339,21 +346,20 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:199 99dcbab4818a4cef9289b06e7d150862
 msgid ""
-"**Description**: Compare the expression level of a gene in specific "
-"disease state versus healthy state using gene name, tissue type, and "
-"disease name."
+"**Description**: Compare the expression level of a gene in specific disease "
+"state versus healthy state using gene name, tissue type, and disease name."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:203 090dc6233b264dc3a04c1868d042f42f
 msgid ""
-"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53',"
-" 'BRCA1', 'KRAS', etc."
+"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'TP53', "
+"'BRCA1', 'KRAS', etc."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:206 ef8ea5a0ad66439d99a06dd22e1e512d
 msgid ""
-"``tissue_type`` (string) (optional) Tissue type, e.g., 'brain', 'breast',"
-" 'colon', 'lung', etc., optional parameter."
+"``tissue_type`` (string) (optional) Tissue type, e.g., 'brain', 'breast', "
+"'colon', 'lung', etc., optional parameter."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:209 95dd68240ede42d1a3380ff68004662b
@@ -388,16 +394,16 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:237 9768121ed4c3414797df0fef51df480c
 msgid ""
-"**Description**: Get gene basic information and expression data from "
-"Human Protein Atlas using Ensembl Gene ID. Enhanced version now uses "
-"efficient JSON API."
+"**Description**: Get gene basic information and expression data from Human "
+"Protein Atlas using Ensembl Gene ID. Enhanced version now uses efficient "
+"JSON API."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:241 ../../tools/hpa_tools.rst:272
 #: 699b3a6164804c1fbfdc1326cfb7f370 dd8beda0cf274ae39437643bca002b85
 msgid ""
-"``ensembl_id`` (string) (required) Ensembl Gene ID, e.g., "
-"'ENSG00000134057', 'ENSG00000141510', etc."
+"``ensembl_id`` (string) (required) Ensembl Gene ID, e.g., 'ENSG00000134057',"
+" 'ENSG00000141510', etc."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:258 b0de41806aa04e458b97bae46915a09e
@@ -406,8 +412,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:260 77a6fdcf69314fc28e79cf73d73c80fb
 msgid ""
-"Get detailed gene data in TSV format from Human Protein Atlas using "
-"Ensembl Gene ID (backward com..."
+"Get detailed gene data in TSV format from Human Protein Atlas using Ensembl "
+"Gene ID (backward com..."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst 70feb05ab82c4f92b3a6b9254c3bbf1e
@@ -436,8 +442,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:291 78638f21d8c54e4499d569e214c3a5f3
 msgid ""
-"Fetch known protein-protein interaction partners for a given gene from "
-"Human Protein Atlas database."
+"Fetch known protein-protein interaction partners for a given gene from Human"
+" Protein Atlas database."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst e1ca79a83999450cbda37711988d964a
@@ -466,14 +472,13 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:320 76589d19cf524a02a7e533058f5e41db
 msgid ""
-"**HPA_get_rna_expression_by_source** (Type: "
-"HPAGetRnaExpressionBySourceTool)"
+"**HPA_get_rna_expression_by_source** (Type: HPAGetRnaExpressionBySourceTool)"
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:322 6692a7ba129b4d7dbad05cd4fea18b9d
 msgid ""
-"Get RNA expression level (nTPM) for a gene in a specific biological "
-"source using optimized column..."
+"Get RNA expression level (nTPM) for a gene in a specific biological source "
+"using optimized column..."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst 7297273ee51c4ea9922b80321fa53b84
@@ -490,22 +495,21 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:330 680ddce0106d4ee29ed18f210d7dfc3e
 msgid ""
-"**Description**: Get RNA expression level (nTPM) for a gene in a specific"
-" biological source using optimized columns parameter. Supports tissue, "
-"blood, brain, and single_cell source types with comprehensive source "
-"mappings."
+"**Description**: Get RNA expression level (nTPM) for a gene in a specific "
+"biological source using optimized columns parameter. Supports tissue, blood,"
+" brain, and single_cell source types with comprehensive source mappings."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:334 163470f94fe9459f928df80c1914fe70
 msgid ""
-"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'GFAP',"
-" 'TP53', 'BRCA1', etc."
+"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'GFAP', "
+"'TP53', 'BRCA1', etc."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:337 718afe72adb34a488ddf61fe0a1ebf8d
 msgid ""
-"``source_type`` (string) (required) The type of biological source. Choose"
-" from: 'tissue', 'blood', 'brain', 'single_cell'."
+"``source_type`` (string) (required) The type of biological source. Choose "
+"from: 'tissue', 'blood', 'brain', 'single_cell'."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:340 e7f04f74cd774e60b4cd0fb71022e66a
@@ -524,8 +528,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:361 8cbc996e3960484b9fafe14438c84647
 msgid ""
-"Query RNA expression levels (nTPM) for a specific gene in one or more "
-"user-specified tissues with..."
+"Query RNA expression levels (nTPM) for a specific gene in one or more user-"
+"specified tissues with..."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst bd7ea71138c14b10bf48d3d9e259f642
@@ -542,8 +546,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:369 8dd8c3fe5f3b42c6ab985f9aa735990f
 msgid ""
-"**Description**: Query RNA expression levels (nTPM) for a specific gene "
-"in one or more user-specified tissues with precise tissue matching."
+"**Description**: Query RNA expression levels (nTPM) for a specific gene in "
+"one or more user-specified tissues with precise tissue matching."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:373 63c267c55db4421592ab14b3827dac78
@@ -555,8 +559,8 @@ msgstr ""
 #: ../../tools/hpa_tools.rst:376 5df511e31d12404a85626083d46e058f
 msgid ""
 "``tissue_names`` (array) (required) List of tissue names to query, e.g., "
-"['brain', 'liver', 'heart muscle', 'kidney']. Case-insensitive matching "
-"is supported."
+"['brain', 'liver', 'heart muscle', 'kidney']. Case-insensitive matching is "
+"supported."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:394 80fc7ee90598452f81ba63976f66efaf
@@ -565,8 +569,8 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:396 177c0bdef82c455fa6755ed1fac973da
 msgid ""
-"Get annotated subcellular locations for a protein using optimized columns"
-" parameter. Retrieves bo..."
+"Get annotated subcellular locations for a protein using optimized columns "
+"parameter. Retrieves bo..."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst e20f3cb3bf3b4ae79f1a744651eb4b87
@@ -584,14 +588,14 @@ msgstr ""
 #: ../../tools/hpa_tools.rst:404 c73391fcca3b4833bd9f83a1cdac795b
 msgid ""
 "**Description**: Get annotated subcellular locations for a protein using "
-"optimized columns parameter. Retrieves both main and additional "
-"subcellular locations efficiently."
+"optimized columns parameter. Retrieves both main and additional subcellular "
+"locations efficiently."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:408 7aab063221c0439b80deba9cf1fbd6b7
 msgid ""
-"``gene_name`` (string) (required) Gene name or gene symbol, e.g., "
-"'CCNB1', 'TP53', 'EGFR', etc."
+"``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'CCNB1', "
+"'TP53', 'EGFR', etc."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:425 724fb6cc02264f43972b965e3c479120
@@ -618,15 +622,15 @@ msgstr ""
 
 #: ../../tools/hpa_tools.rst:435 fd3045f851064f2f89e9dae3e067b07d
 msgid ""
-"**Description**: Search for matching genes by gene name, keywords, or "
-"cell line names and return Ensembl ID list. This is the entry tool for "
-"many HPA query workflows."
+"**Description**: Search for matching genes by gene name, keywords, or cell "
+"line names and return Ensembl ID list. This is the entry tool for many HPA "
+"query workflows."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:439 0dabfe7179bb4d48b0eab263897bc25b
 msgid ""
-"``search_query`` (string) (required) Gene name, alias, keyword, or cell "
-"line name to search for, e.g., 'EGFR', 'TP53', or 'MCF7'."
+"``search_query`` (string) (required) Gene name, alias, keyword, or cell line"
+" name to search for, e.g., 'EGFR', 'TP53', or 'MCF7'."
 msgstr ""
 
 #: ../../tools/hpa_tools.rst:456 541d7bff6bbb49cf82b36885ac6314e2
@@ -640,4 +644,3 @@ msgstr ""
 #: ../../tools/hpa_tools.rst:459 e04a45bd38e944c8b9db9712312a654c
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

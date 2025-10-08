@@ -7,52 +7,55 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/rcsb_pdb_tools.rst:2 1545ce888e304a7f917c6639c5968351
 msgid "Rcsb Pdb Tools"
-msgstr ""
+msgstr "Rcsb Pdb 工具集"
 
 #: ../../tools/rcsb_pdb_tools.rst:4 7669d68c070e4877a9e7a131aa472237
 msgid ""
-"**Configuration File**: ``rcsb_pdb_tools.json`` **Tool Type**: Local "
-"**Tools Count**: 39"
+"**Configuration File**: ``rcsb_pdb_tools.json`` **Tool Type**: Local **Tools"
+" Count**: 39"
 msgstr ""
+"**配置文件**：``rcsb_pdb_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：39"
 
 #: ../../tools/rcsb_pdb_tools.rst:8 7a59650e9f134286ba489c7ff54986fb
 msgid ""
 "This page contains all tools defined in the ``rcsb_pdb_tools.json`` "
 "configuration file."
-msgstr ""
+msgstr "此页面包含在 ``rcsb_pdb_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/rcsb_pdb_tools.rst:11 5b9d966729dd4e75aabc4286fc31193b
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/rcsb_pdb_tools.rst:14 1fe4395cbe444459b35c7760ed595af2
 msgid "**get_assembly_info_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_assembly_info_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:16 efbe37d779744fc4b6e0555170e50f3c
 msgid ""
 "Retrieve all associated biological assembly details for a given PDB "
 "structure."
-msgstr ""
+msgstr "检索给定PDB结构的所有相关生物组装体详细信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst 15ef787d96554e92bf855f4001dc581d
 msgid "get_assembly_info_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_assembly_info_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:20 ../../tools/rcsb_pdb_tools.rst:50
 #: ../../tools/rcsb_pdb_tools.rst:80 ../../tools/rcsb_pdb_tools.rst:110
@@ -94,11 +97,11 @@ msgstr ""
 #: e73ef4cd373c4ac3bc762fde17bf9132 e7b560f1302147a1a99c08443294e0da
 #: fcb4e50a7dc74f4084e8ed51bc9c5c3e ffce01ce58e843499b709511d47fdb8a
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/rcsb_pdb_tools.rst:22 97a154e4da7e4ee58a4c657e3dbf1832
 msgid "**Name**: ``get_assembly_info_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_assembly_info_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:23 ../../tools/rcsb_pdb_tools.rst:53
 #: ../../tools/rcsb_pdb_tools.rst:83 ../../tools/rcsb_pdb_tools.rst:113
@@ -140,13 +143,13 @@ msgstr ""
 #: f2bb251100aa44609d9661a7ddfaa20e f383e0302a68424aaf3c98ff64f1d884
 #: fcb733740ff74157b86aaaedad9a6135 fd7c9637e1014f29b65190e421ec35c9
 msgid "**Type**: ``RCSBTool``"
-msgstr ""
+msgstr "**类型**：``RCSBTool``"
 
 #: ../../tools/rcsb_pdb_tools.rst:24 1efc46740ca64ffe8a2215d0822dbb28
 msgid ""
-"**Description**: Retrieve all associated biological assembly details for "
-"a given PDB structure."
-msgstr ""
+"**Description**: Retrieve all associated biological assembly details for a "
+"given PDB structure."
+msgstr "**描述**：检索给定PDB结构的所有相关生物组装详细信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst:26 ../../tools/rcsb_pdb_tools.rst:56
 #: ../../tools/rcsb_pdb_tools.rst:86 ../../tools/rcsb_pdb_tools.rst:116
@@ -188,7 +191,7 @@ msgstr ""
 #: f7f692be45894cd397ee23ea3f651590 fb37831a5e884ef798a515c37bcb9ad5
 #: fcdfe77af1b94145a0ecc3b8722e092c fd407bcf9b024d06a957dcc94ba089b5
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/rcsb_pdb_tools.rst:28 ../../tools/rcsb_pdb_tools.rst:178
 #: ../../tools/rcsb_pdb_tools.rst:358 ../../tools/rcsb_pdb_tools.rst:538
@@ -200,7 +203,7 @@ msgstr ""
 #: 5231c80d50be48a1bcd4a9fa3d6243e0 bc5e7f163a8843898f1bce61a7dc03fc
 #: cd50867c065c409496f3fdd35fe46eaf fe5aa87c66ce45c2a6713c29a13841cd
 msgid "``pdb_id`` (string) (optional) 4-character RCSB PDB ID"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）4 个字符的 RCSB PDB ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:31 ../../tools/rcsb_pdb_tools.rst:61
 #: ../../tools/rcsb_pdb_tools.rst:91 ../../tools/rcsb_pdb_tools.rst:121
@@ -242,94 +245,94 @@ msgstr ""
 #: ea09f547bf4444deb76edd55ad71ae27 eeaa1ed364844120ba7b6d822cd3c7cf
 #: ef1b87a8b4e94663875e46f24101ac56 fa43c91e3cbb4e87b05b770277a304e9
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/rcsb_pdb_tools.rst:44 3e347e75c0e640e1956ac601f2eb98a1
 msgid "**get_assembly_summary** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_assembly_summary**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:46 7c4c5b5c4e674cedbaebcb4911e7d606
 msgid ""
-"Get key assembly composition and symmetry summary for an assembly "
-"associated with a PDB entry."
-msgstr ""
+"Get key assembly composition and symmetry summary for an assembly associated"
+" with a PDB entry."
+msgstr "获取与PDB条目相关的装配的关键组装组成和对称性摘要。"
 
 #: ../../tools/rcsb_pdb_tools.rst 25ef9f6481c24d5b8c7545d6d739509a
 msgid "get_assembly_summary tool specification"
-msgstr ""
+msgstr "get_assembly_summary 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:52 7cda2591b4f342229873d13833d5b384
 msgid "**Name**: ``get_assembly_summary``"
-msgstr ""
+msgstr "**名称**: ``get_assembly_summary``"
 
 #: ../../tools/rcsb_pdb_tools.rst:54 a7a307f7f42c453d91bd900a343caad1
 msgid ""
-"**Description**: Get key assembly composition and symmetry summary for an"
-" assembly associated with a PDB entry."
-msgstr ""
+"**Description**: Get key assembly composition and symmetry summary for an "
+"assembly associated with a PDB entry."
+msgstr "**描述**：获取与PDB条目相关的装配的关键组成和对称性摘要。"
 
 #: ../../tools/rcsb_pdb_tools.rst:58 99adece028f54e489314fe250489029a
 msgid ""
 "``assembly_id`` (string) (optional) Assembly ID in format 'PDBID-"
 "assemblyNumber' (e.g., '1A8M-1')"
-msgstr ""
+msgstr "``assembly_id``（字符串）（可选）装配 ID，格式为“PDBID-assemblyNumber”（例如：“1A8M-1”）"
 
 #: ../../tools/rcsb_pdb_tools.rst:74 d95aaf6d35034b74be3acc29710e3562
 msgid "**get_binding_affinity_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_binding_affinity_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:76 0ae778d8d6bd4238a930773d9445abae
 msgid ""
-"Retrieve binding affinity constants (Kd, Ki, IC50) associated with "
-"ligands in a PDB entry."
-msgstr ""
+"Retrieve binding affinity constants (Kd, Ki, IC50) associated with ligands "
+"in a PDB entry."
+msgstr "检索与配体相关的结合亲和力常数（Kd、Ki、IC50）在PDB条目中。"
 
 #: ../../tools/rcsb_pdb_tools.rst e8de33c7b66a455e8d1bab52019322dc
 msgid "get_binding_affinity_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取结合亲和力工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:82 5fd262c1cb294699b61914f6b98520fe
 msgid "**Name**: ``get_binding_affinity_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_binding_affinity_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:84 e12c1f9c47d0402ba1a6ec9c7ad98052
 msgid ""
 "**Description**: Retrieve binding affinity constants (Kd, Ki, IC50) "
 "associated with ligands in a PDB entry."
-msgstr ""
+msgstr "**描述**：检索与PDB条目中的配体相关的结合亲和常数（Kd、Ki、IC50）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:88 7b809308e0324d33914070db93cda0d8
 msgid "``pdb_id`` (string) (optional) RCSB PDB ID (e.g., 1A8M)"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）RCSB PDB ID（例如：1A8M）"
 
 #: ../../tools/rcsb_pdb_tools.rst:104 d32d973d5b844430bf345ce0c4674b7e
 msgid "**get_chem_comp_audit_info** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_chem_comp_audit_info**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:106 f45ebe3a8f0049bf9f83339730d4432e
 msgid ""
-"Fetch audit history for a chemical component: action type, date, details,"
-" ordinal, and processing..."
-msgstr ""
+"Fetch audit history for a chemical component: action type, date, details, "
+"ordinal, and processing..."
+msgstr "获取化学组件的审计历史：操作类型、日期、详细信息、序号和处理..."
 
 #: ../../tools/rcsb_pdb_tools.rst d13294d65cd14efea965d1bd354093fa
 msgid "get_chem_comp_audit_info tool specification"
-msgstr ""
+msgstr "get_chem_comp_audit_info 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:112 ed2da80d79b346079d7ea2121d62a889
 msgid "**Name**: ``get_chem_comp_audit_info``"
-msgstr ""
+msgstr "**名称**: ``get_chem_comp_audit_info``"
 
 #: ../../tools/rcsb_pdb_tools.rst:114 571d23ed50bc4b9681fa5deff2e39787
 msgid ""
-"**Description**: Fetch audit history for a chemical component: action "
-"type, date, details, ordinal, and processing site."
+"**Description**: Fetch audit history for a chemical component: action type, "
+"date, details, ordinal, and processing site."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:118 cbe433bfcb03415a98663489c57258a5
 msgid ""
-"``pdb_id`` (string) (optional) Chemical component ID to retrieve audit "
-"info for"
+"``pdb_id`` (string) (optional) Chemical component ID to retrieve audit info "
+"for"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:134 fd737c764cb84a24ad5ee6e061ff040a
@@ -350,8 +353,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:144 de8a8c11382c486daa8f9151236cb7a1
 msgid ""
-"**Description**: Retrieve the formal charge and ambiguity flag of a "
-"chemical component."
+"**Description**: Retrieve the formal charge and ambiguity flag of a chemical"
+" component."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:148 c6692ec2f07640da81b289bc25c0565e
@@ -380,8 +383,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:174 5204b016b7d8441cbd28297f84b95be9
 msgid ""
-"**Description**: Retrieve citation information (authors, journal, year) "
-"for a given PDB structure."
+"**Description**: Retrieve citation information (authors, journal, year) for "
+"a given PDB structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:194 d6c0f6191e134e6bb214de5e26f23926
@@ -390,8 +393,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:196 1003c60425224ea5bac18c61132e29c4
 msgid ""
-"Retrieve essential refinement statistics for a given PDB structure "
-"including R-factors, occupancy..."
+"Retrieve essential refinement statistics for a given PDB structure including"
+" R-factors, occupancy..."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 894d33cd0f5241c39d83d09f53f24c0d
@@ -404,9 +407,9 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:204 125a68924b4243ffb642dd5d7fd725f1
 msgid ""
-"**Description**: Retrieve essential refinement statistics for a given PDB"
-" structure including R-factors, occupancy, phase errors, and solvent "
-"model parameters."
+"**Description**: Retrieve essential refinement statistics for a given PDB "
+"structure including R-factors, occupancy, phase errors, and solvent model "
+"parameters."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:208 6de33354a269449795e6b21919e36499
@@ -460,7 +463,8 @@ msgid "**Name**: ``get_crystallization_ph_by_pdb_id``"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:264 1f2b3b07f43247e9ae21b76b8273e2a0
-msgid "**Description**: Fetch the pH used during crystallization of the sample."
+msgid ""
+"**Description**: Fetch the pH used during crystallization of the sample."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:268 6d7e6afc432e4f8ca212f01b8ecb34a0
@@ -473,8 +477,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:286 184bf96a7a1940ee87d5896ac9f6fe1e
 msgid ""
-"Retrieve crystallographic properties such as unit cell dimensions and "
-"space group for a PDB entry."
+"Retrieve crystallographic properties such as unit cell dimensions and space "
+"group for a PDB entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 08c4bbc9bc2f40e9a6bc7ecb5e213c31
@@ -524,8 +528,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:346 15f76a1a7d8a4799aa929b2a969d7fc6
 msgid ""
-"Retrieve EM 3D fitting model details and associated 3D reconstruction "
-"info for a given PDB entry."
+"Retrieve EM 3D fitting model details and associated 3D reconstruction info "
+"for a given PDB entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst a0f783c36c384d9ca595980564845e31
@@ -548,8 +552,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:376 f05aacfb78b04138acf68b1f4e1f9737
 msgid ""
-"Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB"
-" entry."
+"Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB "
+"entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 6601569528ff4f3e9945ff72f2dd190d
@@ -562,8 +566,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:384 3c0efa9fa6c041b99a6292f1fc594896
 msgid ""
-"**Description**: Retrieve Electron Microscopy Data Bank (EMDB) "
-"identifiers linked to a PDB entry."
+"**Description**: Retrieve Electron Microscopy Data Bank (EMDB) identifiers "
+"linked to a PDB entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:388 ../../tools/rcsb_pdb_tools.rst:448
@@ -590,7 +594,8 @@ msgid "**Name**: ``get_gene_name_by_entity_id``"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:414 eef1db9d61b341748aa4352ffdfbd8a8
-msgid "**Description**: Retrieve gene name(s) associated with a polymer entity."
+msgid ""
+"**Description**: Retrieve gene name(s) associated with a polymer entity."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:418 e0ab5de24a3a42ee83930b6768b81b3e
@@ -615,8 +620,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:444 84d431fea1454e1d887bdd3478db3967
 msgid ""
-"**Description**: Get the host organism used for protein expression in a "
-"PDB entry."
+"**Description**: Get the host organism used for protein expression in a PDB "
+"entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:464 5cb72528a22b4c1495411e9ba0714917
@@ -652,8 +657,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:496 357902f87e4d4523b9492bfa6fe6110c
 msgid ""
-"Retrieve the SMILES chemical structure string for a given chemical "
-"component (ligand) ID."
+"Retrieve the SMILES chemical structure string for a given chemical component"
+" (ligand) ID."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 4c39a763b55a4298b42296c04d0abc18
@@ -666,12 +671,13 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:504 46c2409f957a4e4d8736c79955affd0f
 msgid ""
-"**Description**: Retrieve the SMILES chemical structure string for a "
-"given chemical component (ligand) ID."
+"**Description**: Retrieve the SMILES chemical structure string for a given "
+"chemical component (ligand) ID."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:508 97c4a930bb3d439ca7746fafec92e1dc
-msgid "``chem_comp_id`` (string) (optional) Chemical component ID (e.g., 'ATP')"
+msgid ""
+"``chem_comp_id`` (string) (optional) Chemical component ID (e.g., 'ATP')"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:524 fb8c35c1cc9e4bc4a4401167335fd6d5
@@ -691,7 +697,8 @@ msgid "**Name**: ``get_mutation_annotations_by_pdb_id``"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:534 ec75b016452b490f953b8af7298fedc2
-msgid "**Description**: Retrieve mutation annotations for a given PDB structure."
+msgid ""
+"**Description**: Retrieve mutation annotations for a given PDB structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:554 026c8b6003824269b730600286ef4cf9
@@ -742,8 +749,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:594 bc7e3591242842b1abc88fee3c0bdd56
 msgid ""
-"**Description**: Retrieve functional annotations (Pfam domains, GO terms)"
-" and associated UniProt accession IDs for a polymer entity."
+"**Description**: Retrieve functional annotations (Pfam domains, GO terms) "
+"and associated UniProt accession IDs for a polymer entity."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:598 ../../tools/rcsb_pdb_tools.rst:688
@@ -770,8 +777,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:624 1f37494add754031a6f8ab00dafe6fee
 msgid ""
-"**Description**: Get the number of distinct polymer entities (chains) in "
-"a structure."
+"**Description**: Get the number of distinct polymer entities (chains) in a "
+"structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:644 72716392c2dd48fb8f3e7ed55a772452
@@ -809,8 +816,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:676 e553f4db3dd64a25bfe9436c3d0deb7d
 msgid ""
-"Get the polymer entity type (e.g., Protein, DNA) using the polymer entity"
-" ID."
+"Get the polymer entity type (e.g., Protein, DNA) using the polymer entity "
+"ID."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst e876283c9f4b45ec8dcd8cb28438dba5
@@ -823,8 +830,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:684 267fd0ff3dcc404bbbf2b72bef555c57
 msgid ""
-"**Description**: Get the polymer entity type (e.g., Protein, DNA) using "
-"the polymer entity ID."
+"**Description**: Get the polymer entity type (e.g., Protein, DNA) using the "
+"polymer entity ID."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:704 09cf7fe03c0b41eeb04d3ab7fd42c79a
@@ -892,8 +899,7 @@ msgstr ""
 #: ../../tools/rcsb_pdb_tools.rst:774 8ae02f29739f46f0993cb9dabb964152
 msgid ""
 "**Description**: Retrieve basic protein structure metadata, including "
-"structure title, experimental method, resolution, and initial release "
-"date."
+"structure title, experimental method, resolution, and initial release date."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:794 96f9475d794646bda5ebd97038209e46
@@ -902,8 +908,7 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:796 7890004a01d34456b844f3ca1813e002
 msgid ""
-"Retrieve the reported resolution from refinement data for X-ray "
-"structures."
+"Retrieve the reported resolution from refinement data for X-ray structures."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst c4a372fd6f38457a9a7c52dab8f9ee8a
@@ -916,8 +921,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:804 2b9655229a574e5c82bd87d81c19c6e2
 msgid ""
-"**Description**: Retrieve the reported resolution from refinement data "
-"for X-ray structures."
+"**Description**: Retrieve the reported resolution from refinement data for "
+"X-ray structures."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:808 14af01a9d14e412fa3b79da2e2228b9a
@@ -950,8 +955,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:856 4fd9bdea1a604de3ab2aaa17207651f6
 msgid ""
-"Retrieve amino acid or nucleotide sequence of polymer entities for a "
-"given PDB structure."
+"Retrieve amino acid or nucleotide sequence of polymer entities for a given "
+"PDB structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 71a529a0c62a4dcb8b80dd14bf4828e6
@@ -974,8 +979,7 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:886 c7529731eac540cbb3c09d3a7fb4e312
 msgid ""
-"Retrieve the sequence lengths of polymer entities for a given PDB "
-"structure."
+"Retrieve the sequence lengths of polymer entities for a given PDB structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst f7299ad9bad24bfab3d6bc53da19be92
@@ -998,8 +1002,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:916 667df005a03e4ecda796163228111265
 msgid ""
-"Retrieve sequence positional features (e.g., binding sites, motifs) for a"
-" polymer entity instance."
+"Retrieve sequence positional features (e.g., binding sites, motifs) for a "
+"polymer entity instance."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 098ce4ccd5ee4ddda4aec8fbbff776ab
@@ -1012,14 +1016,13 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:924 77c74b3ee4c74593813edb4f73db3454
 msgid ""
-"**Description**: Retrieve sequence positional features (e.g., binding "
-"sites, motifs) for a polymer entity instance."
+"**Description**: Retrieve sequence positional features (e.g., binding sites,"
+" motifs) for a polymer entity instance."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:928 dd3432abc6334617a2e7ab66be5ae7ec
 msgid ""
-"``instance_id`` (string) (optional) Polymer entity instance ID like "
-"'1NDO.A'"
+"``instance_id`` (string) (optional) Polymer entity instance ID like '1NDO.A'"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:944 68d5858efe82429c9af1bf416bba6c47
@@ -1042,12 +1045,13 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:954 7a63b032154d4ed6b5b50fb0466832d0
 msgid ""
-"**Description**: Retrieve the scientific name of the source organism for "
-"a given PDB structure."
+"**Description**: Retrieve the scientific name of the source organism for a "
+"given PDB structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:958 65c93497d316445abc02f4d88d8bf6ba
-msgid "``pdb_id`` (string) (optional) 4-character RCSB PDB ID of the structure"
+msgid ""
+"``pdb_id`` (string) (optional) 4-character RCSB PDB ID of the structure"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:974 5665baa0264e4d179751f96f769b7932
@@ -1067,7 +1071,8 @@ msgid "**Name**: ``get_space_group_by_pdb_id``"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:984 85daa87ceb454565baa099ddb5e24df1
-msgid "**Description**: Get the crystallographic space group of the structure."
+msgid ""
+"**Description**: Get the crystallographic space group of the structure."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1004 38b285762ff64229b662dfd75e2438f3
@@ -1122,8 +1127,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1066 6ed75f32feae4803b89d84967c6489f7
 msgid ""
-"Retrieve structure validation metrics such as R-free, R-work, and "
-"clashscore for a PDB entry."
+"Retrieve structure validation metrics such as R-free, R-work, and clashscore"
+" for a PDB entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 115a03b61a3e459d9c01960f8eef3e49
@@ -1160,15 +1165,15 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1104 4c904541ee3a4ce69e6bac3ce7ea0b70
 msgid ""
-"**Description**: Retrieve essential cofactor information for a given "
-"target including cofactor IDs, mechanism of action, literature "
-"references, and resource metadata."
+"**Description**: Retrieve essential cofactor information for a given target "
+"including cofactor IDs, mechanism of action, literature references, and "
+"resource metadata."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1108 157aff7cc77c46a186ae221974ea7397
 msgid ""
-"``pdb_id`` (string) (optional) Target ID or entity identifier (e.g., "
-"UniProt ID or internal target id)"
+"``pdb_id`` (string) (optional) Target ID or entity identifier (e.g., UniProt"
+" ID or internal target id)"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1124 46413995e2534738b4c9ada98bc9dcc1
@@ -1177,8 +1182,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1126 ae86a058cad44617ab3da92de4cacf72
 msgid ""
-"Get the scientific name and taxonomy of the organism(s) associated with a"
-" PDB entry."
+"Get the scientific name and taxonomy of the organism(s) associated with a "
+"PDB entry."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst a51538ba1e2a4487b498c8b605e99dd3
@@ -1200,7 +1205,8 @@ msgid "**get_uniprot_accession_by_entity_id** (Type: RCSBTool)"
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1156 b4360b4cf22140efbdb4f60fecdca6a5
-msgid "Fetch UniProt accession numbers associated with a specific polymer entity."
+msgid ""
+"Fetch UniProt accession numbers associated with a specific polymer entity."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst 86fc3cc4979948b0aa685fd85a5bd63b
@@ -1213,8 +1219,8 @@ msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1164 85166a8585a24008834f464e7701dc96
 msgid ""
-"**Description**: Fetch UniProt accession numbers associated with a "
-"specific polymer entity."
+"**Description**: Fetch UniProt accession numbers associated with a specific "
+"polymer entity."
 msgstr ""
 
 #: ../../tools/rcsb_pdb_tools.rst:1184 7d956a916bbc4504bc63dfa8f9c64db6
@@ -1228,4 +1234,3 @@ msgstr ""
 #: ../../tools/rcsb_pdb_tools.rst:1187 ff7f23cc5c57468ba90694552e82e8b8
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

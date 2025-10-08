@@ -8,6 +8,8 @@ Choose the section that matches your current needs:
 
 💡 **For Python API documentation**, see the dedicated :doc:`../api/index` section.
 
+💡 **For MCP integration and server setup**, see the comprehensive :doc:`mcp_support` guide.
+
 Core Concepts
 -------------
 

@@ -194,14 +194,20 @@ jobs:
         ls -la docs/_build/html/_static/ | grep -i logo || echo "⚠️ Logo not found in _static"
         # Check if logo is referenced in HTML
         grep -r "tooluniverse_logo" docs/_build/html/ || echo "⚠️ Logo not referenced in HTML"
+        # Verify multilingual build structure
+        test -d docs/_build/html/en || (echo "❌ Missing 'en' directory" && exit 1)
+        test -d docs/_build/html/zh-CN || (echo "❌ Missing 'zh-CN' directory" && exit 1)
+        # Verify key pages exist
+        test -f docs/_build/html/en/expand_tooluniverse/index.html || (echo "❌ Missing English expand_tooluniverse index" && exit 1)
+        test -f docs/_build/html/zh-CN/expand_tooluniverse/index.html || (echo "❌ Missing Chinese expand_tooluniverse index" && exit 1)
         
     - name: Add .nojekyll file
       run: |
         touch docs/_build/html/.nojekyll
         
-    - name: Create CNAME file for custom domain
-      run: |
-        echo "zitniklab.hms.harvard.edu" > docs/_build/html/CNAME
+    # Note: Do NOT create a CNAME here. This project is served under
+    # https://zitniklab.hms.harvard.edu/ToolUniverse/.
+    # Adding a CNAME would incorrectly claim the root domain.
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -227,6 +233,8 @@ jobs:
           echo "✅ Documentation deployment successful!"
           echo "🎨 Modern theme with enhanced styling applied"
           echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/ToolUniverse/"
+          echo "   • English: https://zitniklab.hms.harvard.edu/ToolUniverse/en/expand_tooluniverse/index.html"
+          echo "   • Chinese: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/expand_tooluniverse/index.html"
           echo "🌟 Features:"
           echo "   • Modern responsive design"
           echo "   • Dark/light mode support (if Furo theme)"

@@ -7,156 +7,155 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/interaction_protocol.rst:2 4baeca73fd924c1f95a6b34dbc8c6f5d
 msgid "AI-Tool Interaction Protocol"
-msgstr ""
+msgstr "AI工具交互协议"
 
 #: ../../guide/interaction_protocol.rst:4 09d42ace94b34dd781cc56a456243b37
 msgid ""
-"**The foundation that makes ToolUniverse's 600+ tools universally "
-"accessible to any AI system**"
-msgstr ""
+"**The foundation that makes ToolUniverse's 600+ tools universally accessible"
+" to any AI system**"
+msgstr "**使ToolUniverse的600多种工具可被任何AI系统普遍访问的基础**"
 
 #: ../../guide/interaction_protocol.rst:7 d912be93cc274ef5afdf7601a52417c4
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../guide/interaction_protocol.rst:9 ce854ac0dd714706871855e2b6a25b10
 msgid ""
 "Just as HTTP standardizes client-server communication across the web, "
 "ToolUniverse implements an **AI-Tool Interaction Protocol** that "
 "standardizes how AI models interact with scientific tools. This protocol "
-"abstracts away the complexity of 600+ heterogeneous tools (machine "
-"learning models, databases, APIs, robotics systems) behind a unified "
-"interface."
+"abstracts away the complexity of 600+ heterogeneous tools (machine learning "
+"models, databases, APIs, robotics systems) behind a unified interface."
 msgstr ""
+"正如 HTTP 标准化了整个网络中的客户端与服务器通信，ToolUniverse 实现了一种**AI工具交互协议**，标准化了 AI "
+"模型与科学工具之间的交互方式。该协议将 600 多种异构工具（包括机器学习模型、数据库、API、机器人系统）的复杂性抽象为一个统一接口。"
 
 #: ../../guide/interaction_protocol.rst:32 5dc59c4dec004aa38bf6c11962f318dd
 msgid "Protocol Components"
-msgstr ""
+msgstr "协议组件"
 
 #: ../../guide/interaction_protocol.rst:34 d6fa67e91be740b49767e22ad947253a
 msgid "The AI-Tool Interaction Protocol comprises three essential elements:"
-msgstr ""
+msgstr "AI工具交互协议包含三个基本要素："
 
 #: ../../guide/interaction_protocol.rst:36 e30a022e46ee4d22b941fce2fa8dd144
 msgid "**Specification Schema** - How tools describe themselves"
-msgstr ""
+msgstr "**规范架构** - 工具自我描述方式"
 
 #: ../../guide/interaction_protocol.rst:37 deb5a553dd9349f5aba5fdf5fdd98d0f
 msgid "**Interaction Schema** - How to request tool execution"
-msgstr ""
+msgstr "**交互模式** - 如何请求工具执行"
 
 #: ../../guide/interaction_protocol.rst:38 6733afb5887f4e2e93f486c83940768e
 msgid "**Communication Methods** - Local Python and remote MCP"
-msgstr ""
+msgstr "**通信方法** - 本地 Python 与远程 MCP"
 
 #: ../../guide/interaction_protocol.rst:41 34a997b279a849e4871986ab228f2993
 msgid "1. Tool Specification Schema"
-msgstr ""
+msgstr "1. 工具规格架构"
 
 #: ../../guide/interaction_protocol.rst:43 cd35e5a47b2d4a8e93c93ba6afcd5db8
 msgid ""
 "Every tool in ToolUniverse exposes itself through a standardized "
 "specification:"
-msgstr ""
+msgstr "ToolUniverse中的每个工具都通过标准化规范进行呈现："
 
 #: ../../guide/interaction_protocol.rst:66 a1ab7fc11b714e9d872897bf1ec4d70e
 msgid "**Schema Components:**"
-msgstr ""
+msgstr "**架构组件：**"
 
 #: ../../guide/interaction_protocol.rst:68 8f5ffcec238247ab8544f0443728b82f
 msgid ""
 "**Name**: Unique tool identifier following `Database_action_description` "
 "format"
-msgstr ""
+msgstr "**名称**：遵循 `Database_action_description` 格式的唯一工具标识符"
 
 #: ../../guide/interaction_protocol.rst:69 50ff34968cae49cfaca27989d6941019
 msgid "**Description**: Clear explanation of tool's purpose and functionality"
-msgstr ""
+msgstr "**描述**：清晰说明工具的用途和功能"
 
 #: ../../guide/interaction_protocol.rst:70 4ffe9e983e054709b83eb5950fcfdda6
 msgid ""
-"**Parameters**: Detailed argument specifications with types and "
-"requirements"
-msgstr ""
+"**Parameters**: Detailed argument specifications with types and requirements"
+msgstr "**参数**：详细的参数规范，包括类型和要求"
 
 #: ../../guide/interaction_protocol.rst:71 681fca5e595c4a43ac6229db7bd85662
 msgid "**Return Schema**: Structure of expected output data"
-msgstr ""
+msgstr "**返回模式**：预期输出数据的结构"
 
 #: ../../guide/interaction_protocol.rst:74 fdf5511f2afe47558f2d3f5d8d99560e
 msgid "2. Interaction Schema"
-msgstr ""
+msgstr "2. 交互架构"
 
 #: ../../guide/interaction_protocol.rst:76 a97c2054f9134b87b13074a2d0605246
 msgid "All tool interactions follow a uniform request format:"
-msgstr ""
+msgstr "所有工具交互均遵循统一的请求格式："
 
 #: ../../guide/interaction_protocol.rst:88 d1c9f39f1dfc49d980868aa794c2f3f0
 msgid "**Example Requests:**"
-msgstr ""
+msgstr "**示例请求：**"
 
 #: ../../guide/interaction_protocol.rst:118 c1dd822286234e7e9f4d31e47ea585fe
 msgid "3. Communication Methods"
-msgstr ""
+msgstr "3. 通信方式"
 
 #: ../../guide/interaction_protocol.rst:120 6f42da0f965a4615bdf3fa7e14c2c995
 msgid "**Local Communication** (Python):"
-msgstr ""
+msgstr "**本地通信**（Python）："
 
 #: ../../guide/interaction_protocol.rst:135 070cca74288c43bba90bd5fd96047106
 msgid "**Remote Communication** (MCP):"
-msgstr ""
+msgstr "**远程通信**（MCP）："
 
 #: ../../guide/interaction_protocol.rst:146 5d425075f19e43929b012a662398cf2d
 msgid "Core Operations"
-msgstr ""
+msgstr "核心操作"
 
 #: ../../guide/interaction_protocol.rst:148 1505be838b324406a2041f4d638a1b5f
 msgid ""
 "The protocol defines two fundamental operations that AI systems use to "
 "interact with ToolUniverse:"
-msgstr ""
+msgstr "该协议定义了人工智能系统用于与 ToolUniverse 交互的两项基本操作："
 
 #: ../../guide/interaction_protocol.rst:151 b495c90f652942b8b272c7c31c9e4bb3
 msgid "Find Tool Operation"
-msgstr ""
+msgstr "查找工具操作"
 
 #: ../../guide/interaction_protocol.rst:153 1157d8e0216b4949b9dd3f536a14cb3e
 msgid ""
-"**Purpose**: Discover relevant tools based on natural language "
-"descriptions"
-msgstr ""
+"**Purpose**: Discover relevant tools based on natural language descriptions"
+msgstr "**目的**：根据自然语言描述发现相关工具"
 
 #: ../../guide/interaction_protocol.rst:155 25d9b653a6714f05897de57c474710fb
 msgid "**Input**: Natural language query describing desired functionality"
-msgstr ""
+msgstr "**输入**：描述所需功能的自然语言查询"
 
 #: ../../guide/interaction_protocol.rst:157 d1fdc26b1bd34a01aabacf9384facb7b
 msgid "**Output**: List of relevant tool specifications"
-msgstr ""
+msgstr "**输出**：相关工具规格列表"
 
 #: ../../guide/interaction_protocol.rst:171 cad944317bc4415ab75335cb13531d1d
 msgid "**Implementation Methods:**"
-msgstr ""
+msgstr "**实现方法：**"
 
 #: ../../guide/interaction_protocol.rst:173 4532ae801eb344cda7dd661bb89f46cb
 msgid "**Keyword Search**: Fast TF-IDF matching with morphological processing"
-msgstr ""
+msgstr "**关键词搜索**：结合形态学处理的快速TF-IDF匹配"
 
 #: ../../guide/interaction_protocol.rst:174 cce2b37206654d3e9c4fefdb334cf5c7
 msgid "**LLM-based Search**: Contextual reasoning for complex queries"
@@ -252,17 +251,16 @@ msgstr ""
 
 #: ../../guide/interaction_protocol.rst:373 f10a2294d93448eebb534769f4da7d37
 msgid ""
-"**For AI Developers:** - Single interface for 600+ diverse tools - No "
-"tool-specific integration work required - Automatic error handling and "
-"validation - Consistent response formats"
+"**For AI Developers:** - Single interface for 600+ diverse tools - No tool-"
+"specific integration work required - Automatic error handling and validation"
+" - Consistent response formats"
 msgstr ""
 
 #: ../../guide/interaction_protocol.rst:379 e91943e59dd34147920949eddbc760e9
 msgid ""
-"**For Scientists:** - Focus on research logic, not technical "
-"implementation - Reproducible workflows across different tools - Easy "
-"tool discovery and experimentation - Human expertise integration when "
-"needed"
+"**For Scientists:** - Focus on research logic, not technical implementation "
+"- Reproducible workflows across different tools - Easy tool discovery and "
+"experimentation - Human expertise integration when needed"
 msgstr ""
 
 #: ../../guide/interaction_protocol.rst:385 7bb1254eb44b4ddda3d59ea6c2ae244f
@@ -302,8 +300,7 @@ msgstr ""
 
 #: ../../guide/interaction_protocol.rst:403 586c74b16a1c44a5bf06aaf2805410b8
 msgid ""
-"**The protocol makes ToolUniverse unique**: While other frameworks "
-"provide tool orchestration, ToolUniverse creates a universal language for"
-" AI-tool interaction, similar to how HTTP enabled the modern web."
+"**The protocol makes ToolUniverse unique**: While other frameworks provide "
+"tool orchestration, ToolUniverse creates a universal language for AI-tool "
+"interaction, similar to how HTTP enabled the modern web."
 msgstr ""
-

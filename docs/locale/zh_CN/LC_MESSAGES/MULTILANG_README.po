@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 11:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../MULTILANG_README.md:1 04151bd1c11b4a64a9131f0a9ba65d2a
@@ -34,11 +34,11 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:6 d1064332b0eb4287a55466536c129068
 msgid "✅ **Shibuya 现代主题** - 美观的界面，完美的侧边栏导航"
-msgstr ""
+msgstr "✅ **涩谷现代主题** - 美观的界面，完美的侧边栏导航"
 
 #: ../../MULTILANG_README.md:7 9811155444fd49338174ffc2a99ebe9e
 msgid "✅ **浮动语言切换器** - 页面右下角，随时切换语言"
-msgstr ""
+msgstr "✅ **浮动语言切换器** - 页面右下角，可随时切换语言"
 
 #: ../../MULTILANG_README.md:8 d25d571e3b284002915655978eec91da
 msgid "✅ **独立语言选择页** - 优雅的语言选择界面"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:9 aaa25eebe21b4f1a85b4a7960ee8ec10
 msgid "✅ **深色/浅色模式** - 自动适配系统主题"
-msgstr ""
+msgstr "✅ **深色/浅色模式** - 自动适应系统主题"
 
 #: ../../MULTILANG_README.md:10 450a179b852c4b279302ce99a4fdfbbe
 msgid "✅ **移动端优化** - 响应式设计"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:14 da50e826b7e7435ab196cf17943b2903
 msgid "方法 1: 使用交互式脚本（推荐）"
-msgstr ""
+msgstr "方法 1：使用交互式脚本（推荐）"
 
 #: ../../MULTILANG_README.md:21 c4793a26e5a843ab8baf00b57f4b97c7
 msgid "然后选择："
@@ -83,7 +83,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:26 5a51c5b44e0740beb8fcca857eb3b518
 msgid "打开语言选择页"
-msgstr ""
+msgstr "打开语言选择页面"
 
 #: ../../MULTILANG_README.md:28 83edd54d00fe47a995e131cd79bbb7ac
 msgid "方法 2: 直接命令"
@@ -470,4 +470,3 @@ msgstr ""
 #: ../../MULTILANG_README.md:307 3fcfe3936c714cf6ab506952d958cb57
 msgid "🌟 **现在就开始使用双语文档吧！**"
 msgstr ""
-

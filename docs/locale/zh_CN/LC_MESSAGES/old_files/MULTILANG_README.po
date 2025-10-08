@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 14:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../old_files/MULTILANG_README.md:1 8c58ce2d84444173844c3412a87ce670
@@ -34,11 +34,11 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:6 c6575370117a4b51bdcd55384193ca15
 msgid "✅ **Shibuya 现代主题** - 美观的界面，完美的侧边栏导航"
-msgstr ""
+msgstr "✅ **涩谷现代主题** - 美观的界面，完美的侧边栏导航"
 
 #: ../../old_files/MULTILANG_README.md:7 2cd94a6dc5a7430b98e1612b329b15c7
 msgid "✅ **浮动语言切换器** - 页面右下角，随时切换语言"
-msgstr ""
+msgstr "✅ **浮动语言切换器** - 位于页面右下角，随时切换语言"
 
 #: ../../old_files/MULTILANG_README.md:8 802443474d6b41e28b6d0249a941f336
 msgid "✅ **独立语言选择页** - 优雅的语言选择界面"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:9 d84545e9fb2147edbe7feba2ac8fc50f
 msgid "✅ **深色/浅色模式** - 自动适配系统主题"
-msgstr ""
+msgstr "✅ **深色/浅色模式** - 自动适应系统主题"
 
 #: ../../old_files/MULTILANG_README.md:10 8f63ea8f5b8f440885ede1afab213f3b
 msgid "✅ **移动端优化** - 响应式设计"
@@ -56,11 +56,11 @@ msgstr ""
 #: ../../old_files/MULTILANG_README.md:163 1a8a74a5f9464cccae5b2d50faa54210
 #: d3a0dad763154ac39ad54a988861c3c2
 msgid "🚀 快速开始"
-msgstr ""
+msgstr "🚀 快速入门"
 
 #: ../../old_files/MULTILANG_README.md:14 d48a5ff96e6f47b9afe785ecb35d6591
 msgid "方法 1: 使用交互式脚本（推荐）"
-msgstr ""
+msgstr "方法 1：使用交互式脚本（推荐）"
 
 #: ../../old_files/MULTILANG_README.md:21 7695f20bb9444287844f0cada850c9f2
 msgid "然后选择："
@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:26 7565eab0828e4feabf6f5631f46e1fff
 msgid "打开语言选择页"
-msgstr ""
+msgstr "打开语言选择页面"
 
 #: ../../old_files/MULTILANG_README.md:28 f361a1cca9f440e7bdc073371d5fd337
 msgid "方法 2: 直接命令"
@@ -109,6 +109,9 @@ msgstr ""
 #: ../../old_files/MULTILANG_README.md:55 29c79b5b97464853b9836f2800d76249
 msgid "示例（`locale/zh_CN/LC_MESSAGES/index.po`）："
 msgstr ""
+"示例（`locale/zh_CN/LC_MESSAGES/index.po`）：  \n"
+"\n"
+"上下文：文档"
 
 #: ../../old_files/MULTILANG_README.md:68 91375e57031b4216818e0f04d9e6cf63
 msgid "3. 重新构建"
@@ -471,4 +474,3 @@ msgstr ""
 #: ../../old_files/MULTILANG_README.md:307 eb69b7a169a84d5690c9b7c8451b518e
 msgid "🌟 **现在就开始使用双语文档吧！**"
 msgstr ""
-

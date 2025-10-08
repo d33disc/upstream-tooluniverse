@@ -7,138 +7,143 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 11:08-0400\n"
+"POT-Creation-Date: 2025-10-07 16:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/tooluniverse.output_hook.rst:2 5ef282b41d7641e1af54f9995350e629
+#: ../../api/tooluniverse.output_hook.rst:2 b242453ea3694feba734dd4cc319a2f2
 msgid "tooluniverse.output\\_hook module"
-msgstr ""
+msgstr "tooluniverse.output_hook 模块"
 
-#: 26094b983cda466e91056141e341c2b3 of tooluniverse.output_hook:1
+#: c990a0a93648428fae8fc787a06b529c of tooluniverse.output_hook:1
 msgid "Output Hook System for ToolUniverse"
-msgstr ""
+msgstr "ToolUniverse 输出钩子系统"
 
-#: a68746c95db14208bab5275368bc072a of tooluniverse.output_hook:3
+#: 133838be1ab64c71bc27aa4d93467feb of tooluniverse.output_hook:3
 msgid ""
 "This module provides a comprehensive hook-based output processing system "
 "that allows for intelligent post-processing of tool outputs. The system "
 "supports various types of hooks including summarization, filtering, and "
 "transformation hooks."
-msgstr ""
+msgstr "该模块提供了一个基于钩子的全面输出处理系统，支持对工具输出进行智能后处理。该系统支持多种类型的钩子，包括摘要钩子、过滤钩子和转换钩子。"
 
-#: 709b1680cb4d43d1b141844a9454812e of tooluniverse.output_hook:7
+#: 49415a2c09cd4fcfa08035a6daffd88f of tooluniverse.output_hook:7
 msgid ""
-"Key Components: - HookRule: Defines conditions for when hooks should "
-"trigger - OutputHook: Base class for all output hooks - "
-"SummarizationHook: Specialized hook for output summarization - "
-"HookManager: Manages and coordinates all hooks"
+"Key Components: - HookRule: Defines conditions for when hooks should trigger"
+" - OutputHook: Base class for all output hooks - SummarizationHook: "
+"Specialized hook for output summarization - HookManager: Manages and "
+"coordinates all hooks"
 msgstr ""
+"关键组件：  \n"
+"- HookRule：定义钩子触发的条件  \n"
+"- OutputHook：所有输出钩子的基类  \n"
+"- SummarizationHook：用于输出摘要的专用钩子  \n"
+"- HookManager：管理和协调所有钩子"
 
-#: f159a9a5e1d0474da0c061e32822de95 of tooluniverse.output_hook:13
+#: c05e3778987e44c2aedfb89ca12e453e of tooluniverse.output_hook:13
 msgid ""
 "The hook system integrates seamlessly with ToolUniverse's existing "
-"architecture, leveraging AgenticTool and ComposeTool for intelligent "
-"output processing."
-msgstr ""
+"architecture, leveraging AgenticTool and ComposeTool for intelligent output "
+"processing."
+msgstr "钩子系统与 ToolUniverse 现有架构无缝集成，利用 AgenticTool 和 ComposeTool 实现智能输出处理。"
 
-#: cc32bdfff5cb49f9b153d5f3ec51df62 cec9f938ed014d8db5dcf5fe97e658bf
-#: d79f140ca99a462ba95043681e52abbe of tooluniverse.output_hook.HookManager:1
+#: 45849d164e9a49c8801181944f371b20 75da88c26f634da9b5a3d983288a62f1
+#: 91215ffc3daa41da85459f0bffaeb56b of tooluniverse.output_hook.HookManager:1
 #: tooluniverse.output_hook.HookRule:1 tooluniverse.output_hook.OutputHook:1
 msgid "Bases: :py:class:`object`"
-msgstr ""
+msgstr "基类：:py:class:`object`"
 
-#: 0d06cabb8f904a28ae03d656b00ec526 of tooluniverse.output_hook.HookRule:1
+#: d6bcf66f7aec4c4b916c825b760791c5 of tooluniverse.output_hook.HookRule:1
 msgid "Defines rules for when hooks should be triggered."
-msgstr ""
+msgstr "定义钩子触发时机的规则。"
 
-#: f32daac8a1b44820abb53c5bcf0becdb of tooluniverse.output_hook.HookRule:3
+#: 941285407ed14f028b4eeb31e0fc2a1e of tooluniverse.output_hook.HookRule:3
 msgid ""
 "This class evaluates various conditions to determine if a hook should be "
 "applied to a tool's output. Supports multiple condition types including "
 "output length, content type, and tool-specific criteria."
-msgstr ""
+msgstr "该类评估多种条件，以确定是否应将钩子应用于工具的输出。支持多种条件类型，包括输出长度、内容类型及工具特定的标准。"
 
-#: ../../api/tooluniverse.output_hook.rst 135609d9208b4121a4f8e80dd96509b5
-#: 2052d9c5fed94303aeca6bbd206e93e2 20b2fa6e23d94ccfb11f788983d05f14
-#: 276c9f5511ce4271a121e1d487222fed 2c75cb4b53654310a3f826df0e97cf9e
-#: 318b5f8e4bc54fae98ca5a62aeed9c34 37e5324bf52d473dbe0b376641d405b6
-#: 393aed6440db4a0f90b9c669c0d46484 3c88064afe0b470aad1729c144477b61
-#: 3f1156b4c9494ecabffbb1cebae9086f 442c926a327548538f3f93038bd749db
-#: 4ef6b5e9d1b64b8a8f6577a5e0011c87 5363af8647324c8a80d210a6b80693d7
-#: 664837c70beb4eae89791c2df4ee6f84 6d0b5bdf729b4d1ba5f926bf7f7742ff
-#: 6f5be1dd0bed41ac9ac37b6ec8579afd 751770f5a860402f921d5e80240caee8
-#: 7da302b6fa3d440db58a0ee57c45894c 8e7f914f598c4a3a81b30647f4b3a0cd
-#: 9a5f55e215ed48bfa39f28ae43a0691c a46117bbe66f44b98867957f8f22f4dc
-#: aaa93ae89a674068846c9047e7a85275 d08b450b427d41f8a9304390d3c4b8b0
-#: d5417742eb3a437ea1ea9a5821b4dcaf d9a06d2122464aea9165e1f524e5073c
-#: f36c5731c81b4b469b28c459f2a5e9e6 f7764009902748e483698a346e84bdcc
-#: ff89acb2855e419aba1cb51db66dd907
+#: ../../api/tooluniverse.output_hook.rst 02d829696cd14277b8a9a46e47771d51
+#: 08ebb163c47f428c841db8f56a5f1b68 103f35ba9e9f4480812433fdac96f6ef
+#: 1d745da8ea3c4d569bd65cfeb4eef321 1edc2174ed734ac1bb0080e71b5fa359
+#: 251b1c0f92be446e9181a2cd070d4401 28b83afdeed04cfebf9658ed36801550
+#: 2c676d3fb4c846eea92e91cf0961014b 35531d78066d410da7a35d120c8dcaf3
+#: 372cc555e30c4e488197fbf46551a14c 42340717e25a436fb42f957f73d9534f
+#: 4ca8f67df90b4caa99add160310b6ff1 4eaccf4bbc5d4b508871d8591a69964f
+#: 4f6eae0cf6db417881af2815c9ce9378 5383c217ca4a4d46a9e5a90684c371cc
+#: 5874a41b0dc9455ab912b30d04278ba3 6c7999839edd4f3c960c8f5fc9ee0c44
+#: 7565fa373a92447a8706c5b425f29c36 75eff49c431c40218e141e731119f613
+#: 7720139f49e8460ea8254003c57f2e68 772895546d1c446789d207ef91abf5b1
+#: 7ca1407d03834ff49f0e862afc648bdd 808b516d4b7842fd9cc09e57e0bf53b2
+#: 83bc5d49431e441a8b1c674ffa92a345 985a97df4cfe45faad2d850700a43e62
+#: a225c6398fdb4bab80912a5e619e5fe9 acb940971dc04bba9cfede9cfdd08d79
+#: b850e54085e94a01af57637160d4e4be
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
-#: ae2fcccdf6974083a0d6856f42ff0f06 of tooluniverse.output_hook.HookRule:7
+#: fac9cafdced64f92af92898a0a233b7e of tooluniverse.output_hook.HookRule:7
 msgid "Dictionary containing condition specifications"
-msgstr ""
+msgstr "包含条件规格的字典"
 
-#: b76f69e2999d487a92b7cad49d5e1a10 of tooluniverse.output_hook.HookRule:12
+#: 15fed0c6130c4fa0aabbc973527ea863 of tooluniverse.output_hook.HookRule:12
 msgid "The condition specifications"
 msgstr ""
 
-#: 0c7aba11add043bea5ea985462c3e7e0 334f36e7cbc049c2a0de9a2e36dacd58
-#: 44b483a5d6914728805d4c9fcd44d861 506c74a92a314d4391818a6c42c40fd6
-#: 61662a5dd6984568a32a584336784726 6b6660407db3416b871516fd68be2b66
-#: 76146c0415bd4ce4bc06a16d855ce3aa 7817c03c54f6450397bf25d3cb86d6e5
-#: 7bd9eb2ca79740ffb3b1762fd9d56967 ab5383984ab94bd0b965e06a475ee68b
-#: ad04c57335fb4a13a0583e1d263eb6ab b4f93021f8be478fb05ea841271ab9eb
-#: e0ac12de050f4ae6a5a348d21981defe e2e7cc82dc2a40d5afb6e70f2d62980a of
+#: 0691828b606b4997b0d87108ad5ff754 0e99a30825c448d28c743936c4c5fe2c
+#: 15fa45906d1046a08fefee902a59b41b 301408e9b850482db733ea24db13b13b
+#: 33005e1f0b1e452d96815af109196e83 34bfc7a8626a49b89fe5e9ed07c590b2
+#: 4e189435256b4faeb39734a9dcf51c52 54aa896d01bb4799b800386d57e7f720
+#: 5cd1768ecd0d46aea5cbcd78e80da480 6e90d6b1043446119bbc8d74d3699435
+#: 8a4bb8e9e955475b964168498f66209a c6c4ef13c9164d6a846da5c0fca1cf87
+#: d2781d8660804e5392fd7cbb30312ce4 fe651f81f99e4985aa1c1520b0e15e3e of
 #: tooluniverse.output_hook.HookManager tooluniverse.output_hook.HookRule
 #: tooluniverse.output_hook.OutputHook
 #: tooluniverse.output_hook.SummarizationHook
 msgid "type"
 msgstr ""
 
-#: 095f613a4e0b4794a20faf24a70dd88e 626c3a2c2c394dd4a790629e32e0a179
-#: a1a3bec632184879b46823a398b161bb of tooluniverse.output_hook.HookManager:15
+#: 244473e51d354db2944cb615c0e91282 5005a2ee30b0489d87337ae5ba8d6701
+#: a0217487d54b45c7abc21580dac8375b of tooluniverse.output_hook.HookManager:15
 #: tooluniverse.output_hook.HookRule:14 tooluniverse.output_hook.OutputHook:15
-msgid ":py:class:`Dict[str, Any]`"
+msgid ":py:class:`Dict[str`, :py:class:`Any]`"
 msgstr ""
 
-#: 7c96eabc5ab34042a6de354f5508e14d of
+#: dd48d8b3487c4a1182bf22af1ac9c284 of
 #: tooluniverse.output_hook.HookRule.__init__:1
 msgid "Initialize the hook rule with conditions."
 msgstr ""
 
-#: 63c9a46cbd1641b5953fc63edfa70141 of
+#: 4b32cfce6c324af1a31ed286968cf1ab of
 #: tooluniverse.output_hook.HookRule.__init__:3
 msgid ""
-"Condition specifications including output_length, content_type, "
-"tool_type, etc."
+"Condition specifications including output_length, content_type, tool_type, "
+"etc."
 msgstr ""
 
-#: 3228b662be1845bfb50143fe1bc984d5 of
+#: 3c69b5f8342a44a5a547f237e3667f69 of
 #: tooluniverse.output_hook.HookRule.evaluate:1
 msgid "Evaluate whether the rule conditions are met."
 msgstr ""
 
-#: 4bb5f0384f36453095f162711ae23bbc f8f36740dcc245839a4d0105ef930f24 of
+#: 108000abe085463db55d3c71ceb2df9d a8590404c6b54131a0dfd11636456b06 of
 #: tooluniverse.output_hook.HookRule.evaluate:3
 #: tooluniverse.output_hook.OutputHook.should_trigger:3
 msgid "The tool output to evaluate"
 msgstr ""
 
-#: 10381bea306a435694981db459ec48a5 2f2fc6c9775b40048676b80d9c57e94a
-#: 53df677d329f4b77904dfff10f304a26 61eba2f6196446ebbbb0ca5c26da6fda
-#: d48d8f7166a14bf182f37909820af06d fc15759f35d24a1ba37f35d88c61c2f7 of
+#: 22a64cbb9a554e8ea1fed2a9fb029390 6f33d2a105d44334b5a6c259e50a4c5c
+#: 70dbf2cd0d1f4639a944b89b9c3be055 c63ac5f274f74194bd0d7a36a10b4f68
+#: d8f2c60eed794991844e7aeae0dbd315 ee6d10ccda364ac48e02cf1ae3c6617d of
 #: tooluniverse.output_hook.FileSaveHook.process:5
 #: tooluniverse.output_hook.HookManager.apply_hooks:9
 #: tooluniverse.output_hook.HookRule.evaluate:5
@@ -148,9 +153,9 @@ msgstr ""
 msgid "Name of the tool that produced the output"
 msgstr ""
 
-#: 03c958da9123465590efd78764363242 438c7df8c9404265989e547468ee4ec3
-#: 4e347f89089b4d88bbe385c089ced313 5129fe6e3b844d4287781391022821fa
-#: 648b953e8ffe4214925b51c320ffecf3 c240a9bf6a3f4b44aaf78b51d8986545 of
+#: 44e0b779190f43a982d952ebe3672f82 52e30025b1e04a9aa715f3d4196aaccc
+#: 8e74f9df58d740679d3947797b9d9164 a23541b195b0407d97fadd67af2811df
+#: caec66399271460f9e0561c4b3e39e06 d1193e4fc1c94625927d56307a8a805f of
 #: tooluniverse.output_hook.FileSaveHook.process:7
 #: tooluniverse.output_hook.HookManager.apply_hooks:11
 #: tooluniverse.output_hook.HookRule.evaluate:7
@@ -160,9 +165,9 @@ msgstr ""
 msgid "Arguments passed to the tool"
 msgstr ""
 
-#: 00de131b254f40f5a39edfb9b863f108 597647d5567b4d2f9eab3b16769bdffe
-#: 5ad7920726a945189ddb598c12ed060e 73e071b639894eb28a6d718e385f27f8
-#: cf601e1e9c3f4f8d8decb25622958381 of
+#: 195bc647bf2249588980b469091bd2fa 196de10de20c469f8abd1811b33f08ed
+#: 1c7a6b2d7fcb4705a23ab4ab92ac64b2 dd2c8a34916a43d581f61660d286f60e
+#: f91101b3a3b74aa6832f01c829a0a3ef of
 #: tooluniverse.output_hook.HookManager.apply_hooks:13
 #: tooluniverse.output_hook.HookRule.evaluate:9
 #: tooluniverse.output_hook.OutputHook.process:12
@@ -171,65 +176,63 @@ msgstr ""
 msgid "Additional context information"
 msgstr ""
 
-#: ../../api/tooluniverse.output_hook.rst 227a5e3b18a443e9a85ab6d6f7df8ffb
-#: 26a691d658c0444a8c9daf635fc4581c 389ed491cdaa48a08bb7faf91f4794ab
-#: 40f89ce3d9c046f8bec2ac171456e9c6 4c1b2d0f04ac4495ab16af04aec6dab3
-#: 520bf1d2afd04a679f6d5c1c25bb09a2 5c7069cc394940efbcfe9efc53f0ba9f
-#: 748314525bb94890b4335851097f53a7 851ccfb88a6c4103b3fd3b6f82060a16
-#: 9ba47f2cc6ef477d963d58771c6aab49 a1649293bb854a56869119c71f504950
-#: d854285a028949c6846078ac8f983295 df3162b98b8241808fd7da6dc71f169a
-#: ee5b77a9c72c45ecb048d86d133f4a19 f22d323c21474b98b8a7965328745ce4
+#: ../../api/tooluniverse.output_hook.rst 1032739d6d794ce194f5965b1c875daa
+#: 299384876a3d408bbf300ac54f398d47 2dcfa400c3db46b79d5e906de93ba15b
+#: 33e2cf5c2f654003b5d2085e9ecfc799 37b66da937d24b5d8565dce004787d42
+#: 469ea545a95346e8acb9f30f7743b485 4a240184d8d24c6f8e08dd6180ba4ba8
+#: 4b5d2c8385264c9c8fcd135ef63e7a8b 740faf375f8045d796c604115fb0885f
+#: 7b5d2ed03e9549ebb0da79f3f55dd638 80e020fe8427412eb3d80c28347450bf
+#: e8125a46be8c4a3cb44aed5c87599822 ecbe1257e8a44e22a01e27fc14610a60
+#: f74bd18c1f784c7c8e8f6ff8da404096 fed2a460419f4365a4c17ad7579ee47a
 msgid "Returns"
 msgstr ""
 
-#: bbd108f4a5ea488392f8c747b277320a of
+#: 385f0889aeb241c48d649af06d3b0d9f of
 #: tooluniverse.output_hook.HookRule.evaluate:12
 msgid "True if conditions are met, False otherwise"
 msgstr ""
 
-#: ../../api/tooluniverse.output_hook.rst 267ba1a3c9cf4fb6ad125021de63adc8
-#: 319a434480ff403b909a8385fbc74584 43d71da0c3a34792993a2e9c04a347b5
-#: 5310344bc3374f5aacbe54f4629df241 6bc9bfc679764ce59120d8746946c3e0
-#: 6c9f536f41c648d2bd1edff2eff44229 741697c5a31346f89cfc9713f38466ff
-#: 7c975f0cd866483b9ad01973658f2678 882ae1baa64646768e8ccc5574af025b
-#: b79841770c804a9a84fd9d0abf277e18 c694fcc2584e4758b54ab274c8e2d489
-#: db8cc294bede45d0913c86fd2ea2d208 e34ebf1a0536448f94ccd770cb02f9cd
-#: e4b33b012c1b46d7bf3ad6c05f4c980d ec4b266cb00a4b66a296ec06c46d7de4
+#: ../../api/tooluniverse.output_hook.rst 0fb483193e4343ed8af01353af4809ff
+#: 3262eda06c3b49279a80a4cbd5f06733 3afc28f7146c44c3b310e2a14aa5048d
+#: 4bb5455a7054483ba6216ac53a633193 4ea8b123d29e487680e458d49c5d8dc3
+#: 64181c8244ce417389014a76daff2624 80ad84c445954c2ca89f883c9d07261b
+#: 80ee946f937c4a4d89f11fd9ea069465 85175a7509f647469212f111fbfddc95
+#: 948496080dbe4f5d93110884f9df690c 9586f97ea3d54ccc930ba2dbc41c327c
+#: b66ad160fb5c4282b29c717d41f682dc dc5783bd4916483cb6c7d0dcbf580d7d
+#: e69d4cc89c8e4c5d861aaa73adcecf43 f9c352a14de445e58f452251674708a2
 msgid "Return type"
 msgstr ""
 
-#: 29b991c7aec54eab8230e47c795a07bd of tooluniverse.output_hook.OutputHook:1
+#: 3f86bb5aef5e497c9da79ae5da24ae6f of tooluniverse.output_hook.OutputHook:1
 msgid "Base class for all output hooks."
 msgstr ""
 
-#: 7e60faa178554ce185ea2a123599cac5 of tooluniverse.output_hook.OutputHook:3
+#: 7832ddb5ae124ec5ac071d3370b58ed4 of tooluniverse.output_hook.OutputHook:3
 msgid ""
-"This abstract base class defines the interface that all output hooks must"
-" implement. Hooks are used to process tool outputs after execution, "
-"enabling features like summarization, filtering, transformation, and "
-"validation."
+"This abstract base class defines the interface that all output hooks must "
+"implement. Hooks are used to process tool outputs after execution, enabling "
+"features like summarization, filtering, transformation, and validation."
 msgstr ""
 
-#: 088edbc2f03947ca933afcafd8ca3e04 of tooluniverse.output_hook.OutputHook:7
+#: f84e245b73ae4f448b6a0b20fe985fd6 of tooluniverse.output_hook.OutputHook:7
 msgid ""
-"Hook configuration including name, enabled status, priority, and "
-"conditions"
+"Hook configuration including name, enabled status, priority, and conditions"
 msgstr ""
 
-#: 06ab25897c7246e895b46d08811807b2 5b1e8e18a47e4e508f621ba316153e3b
-#: 6d8e734c5ac24af7b26f5e43ec990a1a of
+#: 65bb65b890504c12a70df25f04f14007 948bbda894f14b1588f0ee2d5a7b20ed
+#: a6d4a19216d24569861923d676b53038 of
 #: tooluniverse.output_hook.HookManager._create_hook_instance:6
 #: tooluniverse.output_hook.OutputHook:13
 #: tooluniverse.output_hook.SummarizationHook.__init__:3
 msgid "Hook configuration"
 msgstr ""
 
-#: b8e9743274234fae84715d1bb43f2a73 of tooluniverse.output_hook.OutputHook:19
+#: cdb208a9c13d45dabd3e568c118bdb12 of tooluniverse.output_hook.OutputHook:19
 msgid "Name of the hook"
 msgstr ""
 
-#: 19ef1e74709647238f0fcf13d9a95647 4472c527574d47e69247155647ca0a9a
-#: 4cefc879a4654275b7ebbfea81d2d940 ef3721eb0cb64d9ab74be33fb90c5f45 of
+#: 0dba28862fed44f1ba6f807864c678c7 870cfbe545b649cdb62d5d1d9dbdfd74
+#: 8dc6a408ac7d4d748adb896af0bcdf67 9c1fc99fdce64abb88b285bd0ad8ac15 of
 #: tooluniverse.output_hook.HookManager:37
 #: tooluniverse.output_hook.OutputHook:21
 #: tooluniverse.output_hook.SummarizationHook:19
@@ -237,165 +240,164 @@ msgstr ""
 msgid ":py:class:`str`"
 msgstr ""
 
-#: e0c8dce4e596484c9e7454e36d4ca4af of tooluniverse.output_hook.OutputHook:25
+#: aad397f9014548d5bf1a100e82fd0317 of tooluniverse.output_hook.OutputHook:25
 msgid "Whether the hook is enabled"
 msgstr ""
 
-#: 7ea9f1e77e664922bb8de54271410ca8 cc3ba1c40d244eb9927a00943ba7660f of
+#: 654b397ae0aa469288a2a1fd4dab4dd6 f104dff7c33843999b728584d91016ae of
 #: tooluniverse.output_hook.HookManager:31
 #: tooluniverse.output_hook.OutputHook:27
 msgid ":py:class:`bool`"
 msgstr ""
 
-#: b735e29b8241485e911176364ed43252 of tooluniverse.output_hook.OutputHook:31
+#: fa2eb9ff088540749a75562d53db19b2 of tooluniverse.output_hook.OutputHook:31
 msgid "Hook priority (lower numbers execute first)"
 msgstr ""
 
-#: 309428e86ddd40888f2e6e418d407024 56faa65014fa479d870920c82bcf4015
-#: b1661d80cf7f4e62a5640de2e36c4d66 of tooluniverse.output_hook.OutputHook:33
+#: 3a839d73f8064050bfcf7b45a6c3f0e1 8a786abadab9496eb24ba29bd1f0b979
+#: f8f8bc409df3417fb17f994b77c7acb5 of tooluniverse.output_hook.OutputHook:33
 #: tooluniverse.output_hook.SummarizationHook:25
 #: tooluniverse.output_hook.SummarizationHook:37
 msgid ":py:class:`int`"
 msgstr ""
 
-#: 9b688a0b916944b7bb64757601594b2a of tooluniverse.output_hook.OutputHook:37
+#: 7ec026a9200842d4894da398697599bb of tooluniverse.output_hook.OutputHook:37
 msgid "Rule for when this hook should trigger"
 msgstr ""
 
-#: 2ef6e543c60a4cd7afc1ab29c5a42f71 of tooluniverse.output_hook.OutputHook:39
+#: e626555f38e047679022db78e43a84e0 of tooluniverse.output_hook.OutputHook:39
 msgid ":py:class:`HookRule`"
 msgstr ""
 
-#: 4c096717ba45453e84f9357dee02f952 of
+#: 6000602b0abd40f78757f9d7bb029aaf of
 #: tooluniverse.output_hook.OutputHook.__init__:1
 msgid "Initialize the output hook with configuration."
 msgstr ""
 
-#: ec682e8b41d14ca8aa8124a4c1d3060a of
+#: e012685a67a74e0da89e4749132b5a26 of
 #: tooluniverse.output_hook.OutputHook.__init__:3
 msgid ""
-"Hook configuration containing: - name: Hook identifier - enabled: Whether"
-" hook is active - priority: Execution priority - conditions: Trigger "
+"Hook configuration containing: - name: Hook identifier - enabled: Whether "
+"hook is active - priority: Execution priority - conditions: Trigger "
 "conditions"
 msgstr ""
 
-#: f7535051cc2d4e0aba814ce95468e160 of
+#: 1be910937978456b9cb450ba64e90eb2 of
 #: tooluniverse.output_hook.OutputHook.should_trigger:1
 msgid "Determine if this hook should be triggered for the given output."
 msgstr ""
 
-#: ccea4fb8fb024c94ab686cbb3c30182a of
+#: d77b604e6700447386458dce37b93867 of
 #: tooluniverse.output_hook.OutputHook.should_trigger:12
 msgid "True if hook should trigger, False otherwise"
 msgstr ""
 
-#: 9594d0a3a21d422a8396190ef48b5078 of
+#: 5db8d3c578804836b68cd9c721b7609b of
 #: tooluniverse.output_hook.OutputHook.process:1
 msgid "Process the tool output."
 msgstr ""
 
-#: 463c0276493748e98f24e62e254a42ba of
+#: f16dc50b42cb4b3f8f8e90264587d194 of
 #: tooluniverse.output_hook.OutputHook.process:3
 msgid ""
 "This method must be implemented by subclasses to define the specific "
 "processing logic for the hook."
 msgstr ""
 
-#: 61b898cd358c44baa0c1541a015117da a0a8935a4ec746c681970aab204c204e
-#: af4f5179409646c68f0da1befbb31f31 of
+#: 0cbb6746a63545d2a6151c4e71d0e39e 2f5eed4b83474ef5b711d9e3f974c414
+#: 45b03c23c6ab4522a54617ffc705aed0 of
 #: tooluniverse.output_hook.FileSaveHook.process:3
 #: tooluniverse.output_hook.HookManager.apply_hooks:7
 #: tooluniverse.output_hook.OutputHook.process:6
 msgid "The tool output to process"
 msgstr ""
 
-#: 345bfe45173249f18901b426267a8ee0 of
+#: 8ab0867fa26249cab417afb38011f33f of
 #: tooluniverse.output_hook.OutputHook.process:15
 msgid "The processed output"
 msgstr ""
 
-#: ../../api/tooluniverse.output_hook.rst 4c664c04150e4f488b7592aefa570d95
+#: ../../api/tooluniverse.output_hook.rst abd07eb66de4475e8f4fa66f1bee7905
 msgid "Raises"
 msgstr ""
 
-#: 02cbca5a633a43349fedc5bf0390ea95 of
+#: aa7951ceaaf54387b233ad0520c04e1d of
 #: tooluniverse.output_hook.OutputHook.process:18
 msgid "If not implemented by subclass"
 msgstr ""
 
-#: ece7371c890244d78f1baa9d7187585f efb31b27d32e4379a64ddd2bbf1582cd of
+#: 3cf7705be2eb4f469e98a95e135b6048 721198c44861473585d3f1734a60faf6 of
 #: tooluniverse.output_hook.FileSaveHook:1
 #: tooluniverse.output_hook.SummarizationHook:1
 msgid "Bases: :py:class:`~tooluniverse.output_hook.OutputHook`"
 msgstr ""
 
-#: 74287267985b4341a848f9664ac40a5e of
+#: 6be1686fea124b8799711a9a833f7dda of
 #: tooluniverse.output_hook.SummarizationHook:1
 msgid "Hook for intelligent output summarization using AI."
 msgstr ""
 
-#: b3c5e711c9d64335ba8372b78aa37f7f of
+#: a0390e08d3a341c9b3e90ecec39dbfc4 of
 #: tooluniverse.output_hook.SummarizationHook:3
 msgid ""
-"This hook uses the ToolUniverse's AgenticTool and ComposeTool "
-"infrastructure to provide intelligent summarization of long tool outputs."
-" It supports chunking large outputs, processing each chunk with AI, and "
-"merging results."
+"This hook uses the ToolUniverse's AgenticTool and ComposeTool infrastructure"
+" to provide intelligent summarization of long tool outputs. It supports "
+"chunking large outputs, processing each chunk with AI, and merging results."
 msgstr ""
 
-#: c05133b7dbfa4d1092ce469d4a092ab2 of
+#: 188e87b11cd241ff9ecff1730efbcd78 of
 #: tooluniverse.output_hook.SummarizationHook:7
 msgid "Hook configuration including summarization parameters"
 msgstr ""
 
-#: 41fad78dd58d4b68b30ae5c8d0f8bc82 7217de80046245f3af354b78ef6e8b82 of
+#: 0ddb6a51b036490286dca39e6072e7af 70d6125b564741fb86664571e76595e1 of
 #: tooluniverse.output_hook.HookManager:9
 #: tooluniverse.output_hook.SummarizationHook:9
 msgid "Reference to the ToolUniverse instance"
 msgstr ""
 
-#: 3322f4df066545b9969b4e61f903615b 5dbab3d4e45846dab4e5a7a6df44a0c2 of
+#: 055491f26d234b47ace92c3497da6c6f 4af4c115e33d4592817e428f976712bd of
 #: tooluniverse.output_hook.HookManager:19
 #: tooluniverse.output_hook.SummarizationHook:13
 msgid "ToolUniverse instance for tool execution"
 msgstr ""
 
-#: 9f7ae730353d4f0fac1ed7e99f589a0a of
+#: f18f80483ddb4554b14ce5854b8925dc of
 #: tooluniverse.output_hook.SummarizationHook:17
 msgid "Name of the ComposeTool for summarization"
 msgstr ""
 
-#: d3ec3f39be294387b7ae5d5836e019c9 of
+#: 60b4c60bb6ca4ea993393430f69e47d9 of
 #: tooluniverse.output_hook.SummarizationHook:23
 msgid "Size of chunks for processing large outputs"
 msgstr ""
 
-#: 129261eff19540f3ac3cda455744f8f2 of
+#: 1662620f455d4defa6759a2fd01bb007 of
 #: tooluniverse.output_hook.SummarizationHook:29
 msgid "Areas to focus on during summarization"
 msgstr ""
 
-#: c51e00a0b4c34d7991f092de66f07fb6 of
+#: b75ac75f926f40b7977106f5c9fd7b73 of
 #: tooluniverse.output_hook.SummarizationHook:35
 msgid "Maximum length of final summary"
 msgstr ""
 
-#: 144d142ea9d3414f8511ae7ca5831d88 of
+#: 0d20ced911554131b0968d8ed4063cea of
 #: tooluniverse.output_hook.SummarizationHook.__init__:1
 msgid "Initialize the summarization hook."
 msgstr ""
 
-#: cd5e25a5d6aa4813b9fd5544cc1c5d23 of
+#: f17f6ba0568c4ff68ceadbad6917420b of
 #: tooluniverse.output_hook.SummarizationHook.__init__:5
 msgid "ToolUniverse instance for executing summarization tools"
 msgstr ""
 
-#: 03ec8b66ca3f44b789f3dfc6ef25b915 of
+#: 60edd2183fbc4b8493e01ff07b8dc1f9 of
 #: tooluniverse.output_hook.SummarizationHook.process:1
 msgid "Execute summarization processing using Compose Summarizer Tool."
 msgstr ""
 
-#: b401aeac665e4cc8896b4b50d8a6b75b of
+#: 34d55ba65cd84371801949500ed84213 of
 #: tooluniverse.output_hook.SummarizationHook.process:3
 msgid ""
 "This method orchestrates the summarization workflow by: 1. Preparing "
@@ -403,93 +405,92 @@ msgid ""
 "ToolUniverse 3. Processing and returning the summarized result"
 msgstr ""
 
-#: 2d779057d0bd4da4803da0415de003e4 of
+#: 4df9cdace8e34c2ca1935accd1f56148 of
 #: tooluniverse.output_hook.SummarizationHook.process:8
 msgid "The tool output to summarize"
 msgstr ""
 
-#: d7d909617d7d4bb5877a67e5b0907dd0 of
+#: 5ef7643a3bb04352a43aff4fbb200675 of
 #: tooluniverse.output_hook.SummarizationHook.process:17
 msgid "The summarized output, or original output if summarization fails"
 msgstr ""
 
-#: 38d9751ae3414deaa3134fdea8ea71d8 of
+#: 6b35795ab49f4133aa64bc0f2d2dec38 of
 #: tooluniverse.output_hook.SummarizationHook._extract_query_context:1
 msgid "Extract query context from execution context."
 msgstr ""
 
-#: 483cab83b6f24f20a7d2e006de5b7754 of
+#: 34673920c1cb42bca68572c66689a030 of
 #: tooluniverse.output_hook.SummarizationHook._extract_query_context:3
 msgid ""
-"This method attempts to identify the original user query or intent from "
-"the context information to provide better summarization."
+"This method attempts to identify the original user query or intent from the "
+"context information to provide better summarization."
 msgstr ""
 
-#: 7b4a126325cf4554bc8dd36ada190437 of
+#: ece726557e1943b7926079620e473072 of
 #: tooluniverse.output_hook.SummarizationHook._extract_query_context:6
 msgid "Execution context containing arguments and metadata"
 msgstr ""
 
-#: e4a968564e0a4ee889ed060208142d3a of
+#: 1996af40a7eb4ec7917305f2fecdd1ea of
 #: tooluniverse.output_hook.SummarizationHook._extract_query_context:9
 msgid "Extracted query context or fallback description"
 msgstr ""
 
-#: add157ceb86846b0ad7e6097028bc2a0 of tooluniverse.output_hook.HookManager:1
+#: e15db388084c4df28c9d03f7b4bb9e2d of tooluniverse.output_hook.HookManager:1
 msgid "Manages and coordinates all output hooks."
 msgstr ""
 
-#: 6f3d4753edb043fdb7ab65e94e719387 of tooluniverse.output_hook.HookManager:3
+#: 135a11baef564a728144419aaa72e40e of tooluniverse.output_hook.HookManager:3
 msgid ""
 "The HookManager is responsible for loading hook configurations, creating "
-"hook instances, and applying hooks to tool outputs. It provides a unified"
-" interface for hook management and supports dynamic configuration "
-"updates."
+"hook instances, and applying hooks to tool outputs. It provides a unified "
+"interface for hook management and supports dynamic configuration updates."
 msgstr ""
 
-#: 587cb34994d94b87ace9f9411dd6d39b 83f52ef3a1cb4fb3be591d2f284c934b of
+#: 17d5ba45093141bbac16b62111633952 2b8b1a4197c749168b330280d3da8504 of
 #: tooluniverse.output_hook.HookManager:7
 #: tooluniverse.output_hook.HookManager:13
 msgid "Hook manager configuration"
 msgstr ""
 
-#: 79cc8239d7cf4b92b0a467407682ecf6 of tooluniverse.output_hook.HookManager:23
+#: 0a25121517f842d8a5a745f514d89c05 of tooluniverse.output_hook.HookManager:23
 msgid "List of loaded hook instances"
 msgstr ""
 
-#: b17d887de3a043a0ad769e9ef39c7bcb of tooluniverse.output_hook.HookManager:25
+#: 15a05554157148ebbaa5b452929adbd8 of tooluniverse.output_hook.HookManager:25
 msgid ":py:class:`List[OutputHook]`"
 msgstr ""
 
-#: 785c285eb1754ec9aab2d676235bfba2 of tooluniverse.output_hook.HookManager:29
+#: c5f6fcc7a169493ab72e95692605a0ae of tooluniverse.output_hook.HookManager:29
 msgid "Whether hook processing is enabled"
 msgstr ""
 
-#: b1460e09cd5546c8ae6dec7deb73aaae of tooluniverse.output_hook.HookManager:35
+#: 7b95c631688048b8a8fc905fe3c87558 of tooluniverse.output_hook.HookManager:35
 msgid "Path to hook configuration file"
 msgstr ""
 
-#: 9d59a18985824c66aa09804e625e358a of
+#: 66cf70dfd4484e37a228b289f16deba7 of
 #: tooluniverse.output_hook.HookManager.__init__:1
 msgid "Initialize the hook manager."
 msgstr ""
 
-#: 0fe91c7e66f34eaabf2424a60e859997 of
+#: 8f032bbae13a499a88d17ca3f9b0562c of
 #: tooluniverse.output_hook.HookManager.__init__:3
 msgid "Configuration for hook manager"
 msgstr ""
 
-#: 7732e4f39e344f68b6d0b9d66d6361f7 of
+#: 23db2698510943b1b88f37877d7f2212 of
 #: tooluniverse.output_hook.HookManager.__init__:5
 msgid "ToolUniverse instance for executing tools"
 msgstr ""
 
-#: 13a44834d1874c3280c81342765e7ad6 of
+#: 9f7bb44fe1d94ffdb1a53455b7882703 of
 #: tooluniverse.output_hook.HookManager.apply_hooks:1
 msgid "Apply all applicable hooks to the tool output."
 msgstr ""
 
-#: 17ad45e7fb7f4e22a870d89365df700b of
+#: f54e8ebfdf8843e2b07d2c07a88af622 of
 #: tooluniverse.output_hook.HookManager.apply_hooks:3
 msgid ""
 "This method iterates through all loaded hooks, checks if they should be "
@@ -497,162 +498,162 @@ msgid ""
 "applicable hook in priority order."
 msgstr ""
 
-#: 29203773886c48b2b9c0025d5ee03ec2 of
+#: fd4fcec9359b4c7bbcb54d84dd88481d of
 #: tooluniverse.output_hook.HookManager.apply_hooks:16
 msgid "The processed output after applying all applicable hooks"
 msgstr ""
 
-#: b273c58bdf004dda9e07048b98bf1c95 of
+#: 4ab62a64477240f1b55f889468b820c0 of
 #: tooluniverse.output_hook.HookManager._validate_llm_api_keys:1
 msgid "Validate that LLM API keys are available for hook tools."
 msgstr ""
 
-#: 9f483137a0c94b70b0c44be8b0520f7a of
+#: 14979fb7550e4f47883dd215b6d06555 of
 #: tooluniverse.output_hook.HookManager._validate_llm_api_keys:3
 msgid "True if API keys are available, False otherwise"
 msgstr ""
 
-#: 63fe2920c4b54b60a0361174fce6757b of
+#: 3321927bf8db45e79a6704d8a800274b of
 #: tooluniverse.output_hook.HookManager.enable_hook:1
 msgid "Enable a specific hook by name."
 msgstr ""
 
-#: 55a355fffe604933905af948e3615b8c of
+#: 5b99a911a39c4bf9b7e995b8d08774f4 of
 #: tooluniverse.output_hook.HookManager.enable_hook:3
 msgid "Name of the hook to enable"
 msgstr ""
 
-#: a510e6b8bb334140ac64c2ee28ad6576 of
+#: 6ddd7b4a65dc40ac8e5a6fde5901e3db of
 #: tooluniverse.output_hook.HookManager.disable_hook:1
 msgid "Disable a specific hook by name."
 msgstr ""
 
-#: 79c597356d06404bbd604fa9086236d3 of
+#: 8ea06e56858e4d66991ce17701d703fd of
 #: tooluniverse.output_hook.HookManager.disable_hook:3
 msgid "Name of the hook to disable"
 msgstr ""
 
-#: ee83d668ad824483b6e7d022784499a2 of
+#: b17de7aac00a422194158262fbf09a88 of
 #: tooluniverse.output_hook.HookManager.toggle_hooks:1
 msgid "Enable or disable all hooks globally."
 msgstr ""
 
-#: 4596035fa20e4339b60d69bb7c22ec25 of
+#: 23c2cde0e8f84c40ba8e1e2dac38a2fd of
 #: tooluniverse.output_hook.HookManager.toggle_hooks:3
 msgid "True to enable all hooks, False to disable"
 msgstr ""
 
-#: b23267b012d34f9194174ea9d4964194 of
+#: 785c563183e6473dbce49ce560c89ce3 of
 #: tooluniverse.output_hook.HookManager.reload_config:1
 msgid "Reload hook configuration from file."
 msgstr ""
 
-#: 3a0b9e5c2a184732ab0abe9e05636639 of
+#: b55fd8d13af443ed90372283318e2d3a of
 #: tooluniverse.output_hook.HookManager.reload_config:3
 msgid "Path to configuration file. If None, uses the current config_path"
 msgstr ""
 
-#: 8cabcd20ba234478977ae3311a8a4b9c of
+#: e89a9492a8e34b7fab8f087c621256e6 of
 #: tooluniverse.output_hook.HookManager.get_hook:1
 msgid "Get a hook instance by name."
 msgstr ""
 
-#: d75ed2b0a90b424dba1896cc3ddd898a of
+#: ac64910965a74c27a624061e007f82e3 of
 #: tooluniverse.output_hook.HookManager.get_hook:3
 msgid "Name of the hook to retrieve"
 msgstr ""
 
-#: 12ebbf5195ee49c883ea4c346808aeb1 of
+#: e1327cf61f03479394dc8ebb7c0f3b46 of
 #: tooluniverse.output_hook.HookManager.get_hook:6
 msgid "Hook instance if found, None otherwise"
 msgstr ""
 
-#: 402cb655404e4b518bef5e29ba1a0272 of
+#: 8ec25d4bb43e4d7296a0c54693b68274 of
 #: tooluniverse.output_hook.HookManager._load_hook_config:1
 msgid "Load hook configuration from file."
 msgstr ""
 
-#: e54a9bc6c42f49039bdd5ed6479f49b0 of
+#: aa46c3110f5a4475bc439d6073563277 of
 #: tooluniverse.output_hook.HookManager._load_hook_config:3
 msgid ""
-"This method attempts to load the hook configuration from the specified "
-"file path, handling both package resources and file system paths. If the "
-"config is already provided and not empty, it uses that instead."
+"This method attempts to load the hook configuration from the specified file "
+"path, handling both package resources and file system paths. If the config "
+"is already provided and not empty, it uses that instead."
 msgstr ""
 
-#: 5a2bb154cccc470eaa4994c26eb52212 of
+#: af1fe0835488460792d90e972d371da6 of
 #: tooluniverse.output_hook.HookManager._get_config_file_path:1
 msgid "Get the path to the hook configuration file."
 msgstr ""
 
-#: 7cefe2b4b01c481d94ba6d0fe3d7ccad of
+#: 6d76a6a7bcb34a609593d748986aece2 of
 #: tooluniverse.output_hook.HookManager._get_config_file_path:3
 msgid "Path to the configuration file"
 msgstr ""
 
-#: 7afe5a8e588648b4ba9cdc7728d9ae2a of
+#: 35d388f47bce4713a5c5ed48159e0181 of
 #: tooluniverse.output_hook.HookManager._load_hooks:1
 msgid "Load hook configurations and create hook instances."
 msgstr ""
 
-#: 3fee1ff40a7a46d5ababf1c92ae9ae69 of
+#: b59e4b914e634108a39c8b215d42174d of
 #: tooluniverse.output_hook.HookManager._load_hooks:3
 msgid ""
 "This method processes the configuration and creates appropriate hook "
-"instances for global, tool-specific, and category-specific hooks. It also"
-" automatically loads any tools required by the hooks."
+"instances for global, tool-specific, and category-specific hooks. It also "
+"automatically loads any tools required by the hooks."
 msgstr ""
 
-#: 3db58240e7c54d2cb3f848653fad43b5 of
+#: 616be02de18e4e959d5de26cd212d028 of
 #: tooluniverse.output_hook.HookManager._auto_load_hook_tools:1
 msgid "Automatically load tools required by hooks."
 msgstr ""
 
-#: 2383b7fc624b48b491b69aea39607964 of
+#: c256bd7245074e7697ee6d63760eaa7c of
 #: tooluniverse.output_hook.HookManager._auto_load_hook_tools:3
 msgid ""
-"This method analyzes hook configurations to determine which tools are "
-"needed and automatically loads them into the ToolUniverse."
+"This method analyzes hook configurations to determine which tools are needed"
+" and automatically loads them into the ToolUniverse."
 msgstr ""
 
-#: f3b633fdf9784f1fae12b93b1940e85f of
+#: dcc9a126f6454a469e8576183a0f0d92 of
 #: tooluniverse.output_hook.HookManager._auto_load_hook_tools:6
 msgid "List of hook configurations"
 msgstr ""
 
-#: be8d31383cf94677b3e6c7ff76a11379 of
+#: 6dc37848e9e2465b85705066cbf5fa52 of
 #: tooluniverse.output_hook.HookManager._ensure_hook_tools_loaded:1
 msgid "Ensure that tools required by hooks are loaded."
 msgstr ""
 
-#: c84ce7d546b34671b4229da21260d5f9 of
+#: 509866ce7c19410c935fcf5ed9582c1f of
 #: tooluniverse.output_hook.HookManager._ensure_hook_tools_loaded:3
 msgid ""
-"This method is called during HookManager initialization to make sure that"
-" the necessary tools (like output_summarization tools) are available."
+"This method is called during HookManager initialization to make sure that "
+"the necessary tools (like output_summarization tools) are available."
 msgstr ""
 
-#: ed5533ca2f1545bba426be9fe1bd4a2a of
+#: 6dcaba0674b34113aaed68101ff5db0f of
 #: tooluniverse.output_hook.HookManager._load_pending_tools:1
 msgid "Load any pending tools that were queued during initialization."
 msgstr ""
 
-#: 0a0f2d7a68494a0d9c38d896cc4a1137 of
+#: 1945f8c626cf44d88b0a280011e57641 of
 #: tooluniverse.output_hook.HookManager._load_pending_tools:3
 msgid ""
-"This method is called when hooks are applied to ensure that any tools "
-"that couldn't be loaded during HookManager initialization are loaded once"
-" the ToolUniverse is fully ready."
+"This method is called when hooks are applied to ensure that any tools that "
+"couldn't be loaded during HookManager initialization are loaded once the "
+"ToolUniverse is fully ready."
 msgstr ""
 
-#: 34d8f7bc144c4914868a805926de6b52 of
+#: dac46d08f13f4c6f89c59e89fa7ab296 of
 #: tooluniverse.output_hook.HookManager._is_hook_tool:1
 msgid ""
 "Check if a tool is a hook-related tool that should not be processed by "
 "hooks."
 msgstr ""
 
-#: 3a3ee28c532d4f699bbe786233119c98 of
+#: 09cf51db7a2e4740a05c138035f61270 of
 #: tooluniverse.output_hook.HookManager._is_hook_tool:3
 msgid ""
 "This prevents recursive hook processing where hook tools (like "
@@ -660,208 +661,206 @@ msgid ""
 "processing."
 msgstr ""
 
-#: 75e1e8fbfb5a466687cece0c9cca3f0c of
+#: 0bf35de5e9f24eaf9e48a73229228db6 of
 #: tooluniverse.output_hook.HookManager._is_hook_tool:6
 msgid "Name of the tool to check"
 msgstr ""
 
-#: efefbad4d22746a38971d1dd09dac2ad of
+#: 8329a368849247cab9d261261435c588 of
 #: tooluniverse.output_hook.HookManager._is_hook_tool:9
 msgid ""
-"True if the tool is a hook tool and should be excluded from hook "
-"processing"
+"True if the tool is a hook tool and should be excluded from hook processing"
 msgstr ""
 
-#: f645460341de4c7fbad5a9c68341b654 of
+#: 99dd07ee99c64e30ade0c257c103faab of
 #: tooluniverse.output_hook.HookManager._create_hook_instance:1
 msgid "Create a hook instance based on configuration."
 msgstr ""
 
-#: ecde9e7ef6724c478c866c6ff3663a12 of
+#: 53b1968ef23f471a8f0ed1fb33e77d85 of
 #: tooluniverse.output_hook.HookManager._create_hook_instance:3
 msgid ""
-"This method creates hook instances and applies hook type-specific "
-"defaults from the configuration before initializing the hook."
+"This method creates hook instances and applies hook type-specific defaults "
+"from the configuration before initializing the hook."
 msgstr ""
 
-#: f683a0f04d9d443fb53e95caf7146307 of
+#: 55e3a80e535540749c74ef72986f603b of
 #: tooluniverse.output_hook.HookManager._create_hook_instance:9
 msgid "Created hook instance or None if type not supported"
 msgstr ""
 
-#: 140f538b633f4482911815b089d80551 of
+#: 3254658242ed4a9d941e83a2e88d2b4b of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:1
 msgid "Apply hook type-specific default values to hook configuration."
 msgstr ""
 
-#: 0cfe9ed104474596b789a287c771b754 of
+#: bc165d05f6064bf3a5905eaff79fa79c of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:3
 msgid ""
-"This method merges hook type defaults with individual hook configuration,"
-" ensuring that each hook type gets its appropriate default values."
+"This method merges hook type defaults with individual hook configuration, "
+"ensuring that each hook type gets its appropriate default values."
 msgstr ""
 
-#: e947f30e509a4de89ace8cf5c5e3f7bc of
+#: 951aa63fa28a40e297a578e73b77ab95 of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:6
 msgid "Original hook configuration"
 msgstr ""
 
-#: 9a2ebfdf7bc049aab891f655bfed7de9 of
+#: 6e9d8f65c2f8408091571ec2a105fc1b of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:9
 msgid "Enhanced configuration with defaults applied"
 msgstr ""
 
-#: 0c818b38a57e4ad4a7c1b238da27d51b of
+#: 4cd77837e6074b9fa2ca0635fbd8d1a1 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:1
 msgid "Check if a hook is applicable to the current tool."
 msgstr ""
 
-#: e4c4b88a771f428580dd610bd1d38f2c of
+#: 5cb10098d7a6412db79d64d43543e842 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:3
 msgid "Hook instance to check"
 msgstr ""
 
-#: 920b38707485414badd0964480011988 of
+#: 5e2ac3da294248f9a844eedac69abac0 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:5
 msgid "Name of the current tool"
 msgstr ""
 
-#: 00a0e3afd3224b9fbd639abcdb261326 dbe7a97f6cc24db19eda1fe16aab7719 of
+#: 02f0c2c3e6a8477aa527a02fc531f75c 121fc00684574887a3d39e84234f6363 of
 #: tooluniverse.output_hook.FileSaveHook.process:9
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:7
 msgid "Execution context"
 msgstr ""
 
-#: 4fc41709343849569b2c543743ce59bd of
+#: 5c23af7f991c46fbbf2c5d37dc834291 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:10
 msgid "True if hook is applicable, False otherwise"
 msgstr ""
 
-#: 1078a4f02e264902aeca2fd5e256ed41 of tooluniverse.output_hook.FileSaveHook:1
+#: 3f366873c7454d5698f3c6b822fe19f4 of tooluniverse.output_hook.FileSaveHook:1
 msgid ""
 "Hook that saves tool outputs to temporary files and returns file "
 "information."
 msgstr ""
 
-#: 5a5ab492ae654302a8ce93a8e1c79013 of tooluniverse.output_hook.FileSaveHook:3
+#: ac8eb46d1e224119be1c2a7ff18680cd of tooluniverse.output_hook.FileSaveHook:3
 msgid ""
-"This hook saves the tool output to a temporary file and returns "
-"information about the file path, data format, and data structure instead "
-"of the original output. This is useful for handling large outputs or when"
-" you need to process outputs as files rather than in-memory data."
+"This hook saves the tool output to a temporary file and returns information "
+"about the file path, data format, and data structure instead of the original"
+" output. This is useful for handling large outputs or when you need to "
+"process outputs as files rather than in-memory data."
 msgstr ""
 
-#: 41f43cda7481419eb7678dbefa391181 of tooluniverse.output_hook.FileSaveHook:8
+#: 78c6066a9ad4443a8c8fd32c254fabbe of tooluniverse.output_hook.FileSaveHook:8
 msgid ""
 "Configuration options: - temp_dir: Directory to save temporary files "
 "(default: system temp) - file_prefix: Prefix for generated filenames "
-"(default: 'tool_output') - include_metadata: Whether to include metadata "
-"in the response (default: True) - auto_cleanup: Whether to automatically "
-"clean up old files (default: False) - cleanup_age_hours: Age in hours for"
-" auto cleanup (default: 24)"
+"(default: 'tool_output') - include_metadata: Whether to include metadata in "
+"the response (default: True) - auto_cleanup: Whether to automatically clean "
+"up old files (default: False) - cleanup_age_hours: Age in hours for auto "
+"cleanup (default: 24)"
 msgstr ""
 
-#: d89deec4d80d411b9a6f3b03629637d5 of
+#: f87aee6ee5234873a7e589c304d10d75 of
 #: tooluniverse.output_hook.FileSaveHook.__init__:1
 msgid "Initialize the FileSaveHook."
 msgstr ""
 
-#: 89a6085afd62448d82434620b81022bf of
+#: c1d049c79e884115af6155068e56a01b of
 #: tooluniverse.output_hook.FileSaveHook.__init__:3
 msgid ""
-"Hook configuration including: - name: Hook name - temp_dir: Directory for"
-" temporary files - file_prefix: Prefix for filenames - include_metadata: "
-"Include metadata flag - auto_cleanup: Auto cleanup flag - "
-"cleanup_age_hours: Cleanup age in hours"
+"Hook configuration including: - name: Hook name - temp_dir: Directory for "
+"temporary files - file_prefix: Prefix for filenames - include_metadata: "
+"Include metadata flag - auto_cleanup: Auto cleanup flag - cleanup_age_hours:"
+" Cleanup age in hours"
 msgstr ""
 
-#: 84d0071b72da4ddfb0555c9263e0946b of
+#: 6136fdf3deab4b66ae915b332fa04871 of
 #: tooluniverse.output_hook.FileSaveHook.process:1
 msgid "Process the tool output by saving it to a temporary file."
 msgstr ""
 
-#: f27dc12b4a2f4b15a0c5faa235ea2635 of
+#: 1655a83d676e430f945c683ce7f8c2d4 of
 #: tooluniverse.output_hook.FileSaveHook.process:12
 msgid ""
-"Dictionary containing file information:     - file_path: Path to the "
-"saved file     - data_format: Format of the data (json, text, binary, "
-"etc.)     - data_structure: Structure information about the data     - "
-"file_size: Size of the file in bytes     - created_at: Timestamp when "
-"file was created     - metadata: Additional metadata (if include_metadata"
-" is True)"
+"Dictionary containing file information:     - file_path: Path to the saved "
+"file     - data_format: Format of the data (json, text, binary, etc.)     - "
+"data_structure: Structure information about the data     - file_size: Size "
+"of the file in bytes     - created_at: Timestamp when file was created     -"
+" metadata: Additional metadata (if include_metadata is True)"
 msgstr ""
 
-#: aab7bf48aa18487abe36aac10106ad07 of
+#: 4c5e5f25a4ca4c9c8bb5bfdeca432a98 of
 #: tooluniverse.output_hook.FileSaveHook.process:14
 msgid "Dictionary containing file information:"
 msgstr ""
 
-#: 68cc9c934ad347718abfe67dd895ab79 of
+#: 14e50dc2d2334b1eadcc48b6fda15c15 of
 #: tooluniverse.output_hook.FileSaveHook.process:15
 msgid "file_path: Path to the saved file"
 msgstr ""
 
-#: eea5606c21ff4b63840c83a2df998dad of
+#: 31a27b547f284da984f2af8dc518b3a3 of
 #: tooluniverse.output_hook.FileSaveHook.process:16
 msgid "data_format: Format of the data (json, text, binary, etc.)"
 msgstr ""
 
-#: 8c86028a76fd4cc59c897c74243c66fa of
+#: fc0dcbf49a9f4cc49589439d5c9ef892 of
 #: tooluniverse.output_hook.FileSaveHook.process:17
 msgid "data_structure: Structure information about the data"
 msgstr ""
 
-#: 793c1b775b0943fab104cd9dc82c8f27 of
+#: 42552203f16a4fd8b44439a79e6790dc of
 #: tooluniverse.output_hook.FileSaveHook.process:18
 msgid "file_size: Size of the file in bytes"
 msgstr ""
 
-#: 3e530bb050554552847101a318989d10 of
+#: 3ae556b515fb4a0dbda772bb4dd6bac0 of
 #: tooluniverse.output_hook.FileSaveHook.process:19
 msgid "created_at: Timestamp when file was created"
 msgstr ""
 
-#: 665139692a394b0d99f74077d001edad of
+#: e7b2d377291b43c99aaef6d231fb59fb of
 #: tooluniverse.output_hook.FileSaveHook.process:20
 msgid "metadata: Additional metadata (if include_metadata is True)"
 msgstr ""
 
-#: 52d4a1cfc5534478833dd9277f3d5359 of
+#: b825a4df47ef4336ac3e339f4adbf02d of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:1
 msgid "Analyze the data to determine its format and structure."
 msgstr ""
 
-#: 264ee9eb43a648a08759d4313f981b1b of
+#: a0c8f94dd31b41d384b58342bc41be6e of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:3
 msgid "The data to analyze"
 msgstr ""
 
-#: a2eeb978b07d4b0a8eaf10cc84bc691b of
+#: c4796b41d172447b8ab60431812e137e of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:6
 msgid "(data_format, data_structure)"
 msgstr ""
 
-#: 7b1028a790e1439aa0ae7203c0796364 of
+#: 58fbbefab6234b9bb3f3ae10233bddf5 of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:1
 msgid "Write data to file in the appropriate format."
 msgstr ""
 
-#: d3d799966e784c3f8f094b6e86e9a56f of
+#: 0803c0a8fb364e9aa0e3ac1e782e4eed of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:3
 msgid "The data to write"
 msgstr ""
 
-#: d44bd42ac0f840809c460ac8bb2c75df of
+#: dca6ff0d4bbb4e6f8ddec198b57888a2 of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:5
 msgid "Path to the file"
 msgstr ""
 
-#: f9c1900a7eb940d6b4f5804a57cff976 of
+#: 6f56addbd35e43a5998936c2d791d5cf of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:7
 msgid "Format of the data"
 msgstr ""
 
-#: 336ee4acd4a145e5a36ed4864e4114ee of
+#: 5d8830b5836746929b7f260ed1bd985a of
 #: tooluniverse.output_hook.FileSaveHook._cleanup_old_files:1
 msgid "Clean up old files based on the cleanup_age_hours setting."
 msgstr ""
@@ -869,3 +868,5 @@ msgstr ""
 #~ msgid ":py:class:`Dict[str`, :py:class:`Any]`"
 #~ msgstr ""
 
+#~ msgid ":py:class:`Dict[str, Any]`"
+#~ msgstr ""

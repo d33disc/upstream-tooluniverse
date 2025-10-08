@@ -7,140 +7,140 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/tools_config_index.rst:55
 msgid "Bioinformatics Core Tools"
-msgstr ""
+msgstr "生物信息学核心工具"
 
 #: ../../tools/tools_config_index.rst:60
 msgid "Cheminformatics Tools"
-msgstr ""
+msgstr "化学信息学工具"
 
 #: ../../tools/tools_config_index.rst:65
 msgid "Earth Sciences Tools"
-msgstr ""
+msgstr "地球科学工具"
 
 #: ../../tools/tools_config_index.rst:70
 msgid "Genomics Tools"
-msgstr ""
+msgstr "基因组学工具"
 
 #: ../../tools/tools_config_index.rst:75
 msgid "Image Processing Tools"
-msgstr ""
+msgstr "图像处理工具"
 
 #: ../../tools/tools_config_index.rst:80
 msgid "Machine Learning Tools"
-msgstr ""
+msgstr "机器学习工具"
 
 #: ../../tools/tools_config_index.rst:85
 msgid "Neuroscience Tools"
-msgstr ""
+msgstr "神经科学工具"
 
 #: ../../tools/tools_config_index.rst:90
 msgid "Physics Astronomy Tools"
-msgstr ""
+msgstr "物理天文工具"
 
 #: ../../tools/tools_config_index.rst:95
 msgid "Scientific Computing Tools"
-msgstr ""
+msgstr "科学计算工具"
 
 #: ../../tools/tools_config_index.rst:100
 msgid "Single Cell Tools"
-msgstr ""
+msgstr "单细胞工具"
 
 #: ../../tools/tools_config_index.rst:105
 msgid "Structural Biology Tools"
-msgstr ""
+msgstr "结构生物学工具"
 
 #: ../../tools/tools_config_index.rst:110
 msgid "Visualization Tools"
-msgstr ""
+msgstr "可视化工具"
 
 #: ../../tools/tools_config_index.rst:118
 msgid "Admetai Tools"
-msgstr ""
+msgstr "阿德迈泰工具"
 
 #: ../../tools/tools_config_index.rst:123
 msgid "Adverse Event Tools"
-msgstr ""
+msgstr "不良事件工具"
 
 #: ../../tools/tools_config_index.rst:128
 msgid "Agentic Tools"
-msgstr ""
+msgstr "代理工具"
 
 #: ../../tools/tools_config_index.rst:133
 msgid "Alphafold Tools"
-msgstr ""
+msgstr "Alphafold 工具"
 
 #: ../../tools/tools_config_index.rst:138
 #: ../../tools/tools_config_index.rst:347
 msgid "Boltz Tools"
-msgstr ""
+msgstr "博尔兹工具"
 
 #: ../../tools/tools_config_index.rst:143
 msgid "Chembl Tools"
-msgstr ""
+msgstr "Chembl 工具"
 
 #: ../../tools/tools_config_index.rst:148
 msgid "Clinicaltrials Gov Tools"
-msgstr ""
+msgstr "Clinicaltrials Gov 工具"
 
 #: ../../tools/tools_config_index.rst:153
 msgid "Compose Tools"
-msgstr ""
+msgstr "撰写工具"
 
 #: ../../tools/tools_config_index.rst:158
 msgid "Dailymed Tools"
-msgstr ""
+msgstr "Dailymed 工具"
 
 #: ../../tools/tools_config_index.rst:163
 msgid "Dataset Tools"
-msgstr ""
+msgstr "数据集工具"
 
 #: ../../tools/tools_config_index.rst:168
 msgid "Disease Target Score Tools"
-msgstr ""
+msgstr "疾病靶点评分工具"
 
 #: ../../tools/tools_config_index.rst:173
 msgid "Efo Tools"
-msgstr ""
+msgstr "Efo 工具"
 
 #: ../../tools/tools_config_index.rst:178
 msgid "Embedding Tools"
-msgstr ""
+msgstr "嵌入工具"
 
 #: ../../tools/tools_config_index.rst:183
 msgid "Enrichr Tools"
-msgstr ""
+msgstr "Enrichr 工具"
 
 #: ../../tools/tools_config_index.rst:188
 msgid "Europe Pmc Tools"
-msgstr ""
+msgstr "欧洲PMC工具"
 
 #: ../../tools/tools_config_index.rst:193
 #: ../../tools/tools_config_index.rst:347
 msgid "Expert Feedback Tools"
-msgstr ""
+msgstr "专家反馈工具"
 
 #: ../../tools/tools_config_index.rst:198
 msgid "Fda Drug Adverse Event Tools"
-msgstr ""
+msgstr "FDA药物不良事件工具"
 
 #: ../../tools/tools_config_index.rst:203
 msgid "Fda Drug Labeling Tools"
-msgstr ""
+msgstr "FDA药品标签工具"
 
 #: ../../tools/tools_config_index.rst:208
 msgid "Finder Tools"
@@ -291,13 +291,14 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:14 c279e98c0b2140f88562a14ef3f81b3b
 msgid ""
-"**Key Features:** - High performance with no network overhead - Automatic"
-" discovery and registration - Full access to ToolUniverse features - Easy"
-" development and testing"
+"**Key Features:** - High performance with no network overhead - Automatic "
+"discovery and registration - Full access to ToolUniverse features - Easy "
+"development and testing"
 msgstr ""
 
-#: ../../tools/tools_config_index.rst:22 ../../tools/tools_config_index.rst:340
-#: 023ea3f26b274b5a932fba7c9e8d9fcb ecf7763b01024aa98f5902e1d1d059e7
+#: ../../tools/tools_config_index.rst:22
+#: ../../tools/tools_config_index.rst:340 023ea3f26b274b5a932fba7c9e8d9fcb
+#: ecf7763b01024aa98f5902e1d1d059e7
 msgid "Remote Tools"
 msgstr ""
 
@@ -309,9 +310,9 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:26 407ac27746d04e7791f97952e978635a
 msgid ""
-"**Key Features:** - Integration with external APIs and services - "
-"Scalable computation offloading - Support for different programming "
-"languages - Secure isolation of sensitive operations"
+"**Key Features:** - Integration with external APIs and services - Scalable "
+"computation offloading - Support for different programming languages - "
+"Secure isolation of sensitive operations"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:33 efbd6611cd33467594959dbeaf864784
@@ -540,7 +541,8 @@ msgid "AdverseEventICDMapper (from :doc:`adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:382 71e664a9dc8b486298880d7fd47348cf
-msgid "AdverseEventPredictionQuestionGenerator (from :doc:`adverse_event_tools`)"
+msgid ""
+"AdverseEventPredictionQuestionGenerator (from :doc:`adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:383 55c01c8f53114b46a20bf3ef23b4bf0f
@@ -715,8 +717,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:437 3fed78aee497404595e3d986a36c103c
 msgid ""
-"extract_clinical_trial_adverse_events (from "
-":doc:`clinicaltrials_gov_tools`)"
+"extract_clinical_trial_adverse_events (from :doc:`clinicaltrials_gov_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:438 76e7e36d4a4a4bcba0fd8c5d45c68806
@@ -744,7 +745,8 @@ msgid "get_clinical_trial_locations (from :doc:`clinicaltrials_gov_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:443 1f403713fa884f31a9ea7bee4559a734
-msgid "get_clinical_trial_outcome_measures (from :doc:`clinicaltrials_gov_tools`)"
+msgid ""
+"get_clinical_trial_outcome_measures (from :doc:`clinicaltrials_gov_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:444 f92c1e2818ad43e191a61bb74ba041bd
@@ -752,7 +754,8 @@ msgid "get_clinical_trial_references (from :doc:`clinicaltrials_gov_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:445 8821a77a06d34d8e8f03640f9125d814
-msgid "get_clinical_trial_status_and_dates (from :doc:`clinicaltrials_gov_tools`)"
+msgid ""
+"get_clinical_trial_status_and_dates (from :doc:`clinicaltrials_gov_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:448 ac0ebae5e4a74419b9d212789172a933
@@ -864,7 +867,8 @@ msgid "disease_target_score (from :doc:`disease_target_score_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:488 35d2a5e6b9124c02ad0f0cc5eabef28e
-msgid "europepmc_disease_target_score (from :doc:`disease_target_score_tools`)"
+msgid ""
+"europepmc_disease_target_score (from :doc:`disease_target_score_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:489 bc724a024a1f45a297a2970167e8b079
@@ -872,7 +876,8 @@ msgid "eva_disease_target_score (from :doc:`disease_target_score_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:490 4e7b78faf64148f5b6ae9e2a38fbaaf0
-msgid "eva_somatic_disease_target_score (from :doc:`disease_target_score_tools`)"
+msgid ""
+"eva_somatic_disease_target_score (from :doc:`disease_target_score_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:491 60cded24ad1c4f06a0a462190e94566b
@@ -993,24 +998,22 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:544 fa0817ba928a4988ad538ddbcec5e35a
 msgid ""
-"FAERS_count_country_by_drug_event (from "
-":doc:`fda_drug_adverse_event_tools`)"
+"FAERS_count_country_by_drug_event (from :doc:`fda_drug_adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:545 9c7616c7d7d4442c8d51da5150488aa1
 msgid ""
-"FAERS_count_death_related_by_drug (from "
-":doc:`fda_drug_adverse_event_tools`)"
+"FAERS_count_death_related_by_drug (from :doc:`fda_drug_adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:546 eb4bf76b3d3f4c5fb92bd2ce28a1d0fd
 msgid ""
-"FAERS_count_drug_routes_by_event (from "
-":doc:`fda_drug_adverse_event_tools`)"
+"FAERS_count_drug_routes_by_event (from :doc:`fda_drug_adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:547 57f0316b249e483087339839f287a4bf
-msgid "FAERS_count_drugs_by_drug_event (from :doc:`fda_drug_adverse_event_tools`)"
+msgid ""
+"FAERS_count_drugs_by_drug_event (from :doc:`fda_drug_adverse_event_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:548 11631544807444dc9f3cfd7a6c84ae09
@@ -1059,8 +1062,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:560 28f862dcd8b84971bb68805624c4efd1
 msgid ""
-"FDA_get_accessories_info_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_accessories_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:561 ed5915c838484a90bca49c20b7f30fb8
@@ -1071,8 +1073,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:562 12813e6abbf043069341b665e8ffab11
 msgid ""
-"FDA_get_adverse_reactions_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_adverse_reactions_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:563 f218f767220c4f9b9e2b68c9eb5135db
@@ -1115,8 +1116,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:570 3ce42a93955147e4b32ec0ff30711bdd
 msgid ""
-"FDA_get_child_safety_info_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_child_safety_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:571 d925d32c8146415080593c34f84e75da
@@ -1139,8 +1139,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:574 138fa6a325ac4af19170f96e9041fef3
 msgid ""
-"FDA_get_contraindications_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_contraindications_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:575 1676715946a344699cc034369a3624f4
@@ -1156,15 +1155,18 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:577 70072ca4dfec41d3a1826b9b86140867
-msgid "FDA_get_dependence_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_dependence_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:578 ee4262d6899f43e299a47c7282e346cc
-msgid "FDA_get_disposal_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_disposal_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:579 8cb5bd252ce14f4480c594c17f789510
-msgid "FDA_get_do_not_use_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_do_not_use_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:580 ede2b6769a3442ee9eb85c5afe5a3ea3
@@ -1185,8 +1187,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:583 5b778eced4be4379b747c302923789ad
 msgid ""
-"FDA_get_drug_interactions_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_interactions_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:584 f657ba5878b84f95b0e24f2e69f53532
@@ -1195,8 +1196,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:585 71e738b5f0a247c6a977fa6d2b8ab37a
 msgid ""
-"FDA_get_drug_name_by_adverse_reaction (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_name_by_adverse_reaction (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:586 a987f39dd6994487b8c908b9b0a5acb2
@@ -1206,7 +1206,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:587 996d859512204899a84fda11651fe759
-msgid "FDA_get_drug_name_by_dependence_info (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_name_by_dependence_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:588 1c07271c542d42f7843483fc2f70a529
@@ -1242,25 +1243,23 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:594 f049fffbc94e486196b54687d72fbe5b
-msgid "FDA_get_drug_name_by_microbiology (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_name_by_microbiology (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:595 9a0595acb98f400eb698a5b4937b9096
 msgid ""
-"FDA_get_drug_name_by_other_safety_info (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_name_by_other_safety_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:596 086b58024353461db8f0f4e18e9802e4
 msgid ""
-"FDA_get_drug_name_by_pharmacodynamics (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_name_by_pharmacodynamics (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:597 32b8cb0bc6c04369adeaaf07d738686f
 msgid ""
-"FDA_get_drug_name_by_pharmacogenomics (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_name_by_pharmacogenomics (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:598 b701c29563cd446d9d64cb7cde31bdbb
@@ -1288,7 +1287,8 @@ msgid "FDA_get_drug_name_by_set_id (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:603 b9cc5280c2e2486c879720ce9e056028
-msgid "FDA_get_drug_name_by_stop_use_info (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_name_by_stop_use_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:604 2fb629831c8a4381b350e570873fecbd
@@ -1318,7 +1318,8 @@ msgid "FDA_get_drug_names_by_abuse_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:609 8a8983cf78304b6cada3dfaffe1ba453
-msgid "FDA_get_drug_names_by_accessories (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_accessories (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:610 7b66d4bbb72d4eb2b57cc8427868c350
@@ -1350,7 +1351,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:615 8de3430dee934ff49b2dce5c537ae98d
-msgid "FDA_get_drug_names_by_boxed_warning (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_boxed_warning (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:616 40f5d3f054f541ff9ce7eabdfed51878
@@ -1367,8 +1369,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:618 3b4a76c4b1fa4788a2b77ae494f8edb8
 msgid ""
-"FDA_get_drug_names_by_clinical_studies (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_names_by_clinical_studies (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:619 3147349014c14cc081a3bb9a17bfa30b
@@ -1396,7 +1397,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:623 60433b7ebf4d4ea4ac9b445c04884ae8
-msgid "FDA_get_drug_names_by_disposal_info (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_disposal_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:624 f6a8bbd5aff04e7181ecedd6d5011748
@@ -1412,7 +1414,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:626 8a0669f96ad9476694e0f3270d15176f
-msgid "FDA_get_drug_names_by_effective_time (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_effective_time (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:627 2cdb855a4e594c75a0d039a06d249f20
@@ -1428,11 +1431,13 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:629 805d1b3db57a4433b3b51c9614fa9938
-msgid "FDA_get_drug_names_by_geriatric_use (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_geriatric_use (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:630 6a2c04f831f44ed7b81dade51990f0b9
-msgid "FDA_get_drug_names_by_health_claim (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_health_claim (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:631 b00dad0a1d5e4d4ba071ea3c21c4fdfe
@@ -1479,8 +1484,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:639 6c522a39184b4b74a2ceba0d1e8033de
 msgid ""
-"FDA_get_drug_names_by_medication_guide (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_names_by_medication_guide (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:640 36a2cbabfaf74cdf9a58030f30a02c87
@@ -1497,22 +1501,22 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:642 e068314a6fa04d71a0101826cfcf70b7
 msgid ""
-"FDA_get_drug_names_by_overdosage_info (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_names_by_overdosage_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:643 d0727f431ff14949bd2f45153cb7fa86
-msgid "FDA_get_drug_names_by_pediatric_use (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_pediatric_use (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:644 7b15267f94a84c248cf690d416bde277
 msgid ""
-"FDA_get_drug_names_by_pharmacokinetics (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_names_by_pharmacokinetics (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:645 493295fb5ec54906b25d6d4dc6378695
-msgid "FDA_get_drug_names_by_population_use (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_population_use (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:646 91d8c21d158140c4b6b2b029d02d7860
@@ -1523,8 +1527,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:647 d78dd89326bf458298e0bbf95cc55729
 msgid ""
-"FDA_get_drug_names_by_residue_warning (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_drug_names_by_residue_warning (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:648 339e215cd71b49ed8724b99f3aafd19c
@@ -1542,7 +1545,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:651 ff2d160294af4cefbd4865c0342463f0
-msgid "FDA_get_drug_names_by_safety_summary (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_drug_names_by_safety_summary (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:652 f0a9858a8a7e40c8aaaebf46d1ed64f0
@@ -1576,7 +1580,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:657 b264504456614fd6ab16e98c26d0f4f3
-msgid "FDA_get_effective_time_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_effective_time_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:658 399f01122ce94aa7baae2f10a9f4cb60
@@ -1598,7 +1603,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:661 b927c3d349b9441d85cdd9edb6810b5f
-msgid "FDA_get_health_claims_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_health_claims_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:662 bf82e37dc3a1431b8f4e2e945589dd20
@@ -1619,8 +1625,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:665 c266ada7ddfc4ecdb184d8816de07309
 msgid ""
-"FDA_get_info_for_patients_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_info_for_patients_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:666 0477d4922d3945798e11813d1b16646b
@@ -1687,8 +1692,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:677 6fe30b9298f34bf6ae840ef3488261a6
 msgid ""
-"FDA_get_microbiology_info_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_microbiology_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:678 e07a1db1e20442a5af425cf92a76ce7a
@@ -1705,12 +1709,12 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:680 f448c5970876409ea8fcd70e8231e8ad
 msgid ""
-"FDA_get_other_safety_info_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_other_safety_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:681 a782d8b373964092919b2fedeb15b916
-msgid "FDA_get_overdosage_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_overdosage_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:682 ea7caa332ee54933a765093ab6f979a8
@@ -1727,8 +1731,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:684 7bc017f9409a4d16a005838643e2283a
 msgid ""
-"FDA_get_pharmacodynamics_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_pharmacodynamics_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:685 52ef06e2045a4b64abd62f5240e10eb2
@@ -1739,8 +1742,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:686 88fcc4037b2e4e2096061862f27e6c97
 msgid ""
-"FDA_get_pharmacokinetics_by_drug_name (from "
-":doc:`fda_drug_labeling_tools`)"
+"FDA_get_pharmacokinetics_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:687 8901db64c5a349a0898eabd72fb3cc59
@@ -1772,19 +1774,23 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:692 adabcfc11ced4d9683af6337348b4077
-msgid "FDA_get_purpose_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_purpose_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:693 a6df64d7afa540f4b8dc0cc97e9163d1
-msgid "FDA_get_recent_changes_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_recent_changes_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:694 ee56a909992149e192f3142cb3f5e347
-msgid "FDA_get_reference_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_reference_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:695 f08b792e222245cea736fc24a0af7a66
-msgid "FDA_get_residue_warning_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_residue_warning_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:696 f6b92800a98547c08a784372880e8ab3
@@ -1802,7 +1808,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:699 97b627541d8c4e91824830f989f44977
-msgid "FDA_get_safety_summary_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_safety_summary_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:700 4ea7f4d45474427caf05359eb11580d6
@@ -1818,7 +1825,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:702 5522e179353a4d82a016e96c398333e1
-msgid "FDA_get_stop_use_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_get_stop_use_info_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:703 5468e7b1112949bcb8d02d446ffb8e58
@@ -1854,11 +1862,13 @@ msgid "FDA_get_when_using_info (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:709 de2ded195b0345ab8323d5a3f298436f
-msgid "FDA_retrieve_device_use_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_retrieve_device_use_by_drug_name (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:710 ee189af76916412fbed465ae6a2700e2
-msgid "FDA_retrieve_drug_name_by_device_use (from :doc:`fda_drug_labeling_tools`)"
+msgid ""
+"FDA_retrieve_drug_name_by_device_use (from :doc:`fda_drug_labeling_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:711 18e8b4c7d000412baa38cf11096b5f48
@@ -2031,8 +2041,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:824 96b0ba89fa9243c894d973bf5a59b5a4
 msgid ""
-"HPA_get_comparative_expression_by_gene_and_cellline (from "
-":doc:`hpa_tools`)"
+"HPA_get_comparative_expression_by_gene_and_cellline (from :doc:`hpa_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:827 73db3488fafe41d6a2fa17823151c771
@@ -2048,7 +2057,8 @@ msgid "**HPAGetDiseaseExpressionTool** (1 tools)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:836 e55093e931a34125bc2a1d216ab2b41e
-msgid "HPA_get_disease_expression_by_gene_tissue_disease (from :doc:`hpa_tools`)"
+msgid ""
+"HPA_get_disease_expression_by_gene_tissue_disease (from :doc:`hpa_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:839 77c971caba4e411a8c471a80c04aea2d
@@ -2064,7 +2074,8 @@ msgid "**HPAGetGenePageDetailsTool** (1 tools)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:848 99ee4e4df03b442b808fd241f0885476
-msgid "HPA_get_comprehensive_gene_details_by_ensembl_id (from :doc:`hpa_tools`)"
+msgid ""
+"HPA_get_comprehensive_gene_details_by_ensembl_id (from :doc:`hpa_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:851 197f2aa91af6432c9998679b269a82f9
@@ -2176,7 +2187,8 @@ msgid "MedlinePlus_connect_lookup_by_code (from :doc:`medlineplus_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:920 4006cb254c1e410e9f84f4b7f437601b
-msgid "MedlinePlus_get_genetics_condition_by_name (from :doc:`medlineplus_tools`)"
+msgid ""
+"MedlinePlus_get_genetics_condition_by_name (from :doc:`medlineplus_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:921 49b1ae0368ae4917a5a9d361712d2e9a
@@ -2208,7 +2220,8 @@ msgid "**MonarchDiseasesForMultiplePheno** (1 tools)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:936 44be93238e4f4ed4ac102ad34e2e3355
-msgid "get_joint_associated_diseases_by_HPO_ID_list (from :doc:`monarch_tools`)"
+msgid ""
+"get_joint_associated_diseases_by_HPO_ID_list (from :doc:`monarch_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:939 e30180b40b264295a41b5709581b63be
@@ -2327,8 +2340,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:984 5ebf98214d884d19bba9c168b5758b57
 msgid ""
-"OpenTargets_get_disease_description_by_efoId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_disease_description_by_efoId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:985 86f6378bdc414b6589fed932eea4c68e
@@ -2346,11 +2358,13 @@ msgid "OpenTargets_get_disease_ids_by_name (from :doc:`idmap_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:988 f2b50760b0eb4bf8b2c7c86d58c654a1
-msgid "OpenTargets_get_disease_locations_by_efoId (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_disease_locations_by_efoId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:989 1fdd1b19b32a4b3aa751c5ae793618d8
-msgid "OpenTargets_get_disease_synonyms_by_efoId (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_disease_synonyms_by_efoId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:990 4cb50a5a67fc482d842a67edc92e0091
@@ -2379,14 +2393,12 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:994 2b2a071efc80412884268bdea196fd62
 msgid ""
-"OpenTargets_get_drug_description_by_chemblId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_drug_description_by_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:995 eb0f8286941d479fbeaaa391efb35b45
 msgid ""
-"OpenTargets_get_drug_indications_by_chemblId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_drug_indications_by_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:996 681e8780794c42819f02d0ade7b18810
@@ -2396,17 +2408,18 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:997 4083b20d82734a5ba5d9e8ff7c5b4d33
-msgid "OpenTargets_get_drug_synonyms_by_chemblId (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_drug_synonyms_by_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:998 eb149224e6a34442a7bc980ecba1c1a7
 msgid ""
-"OpenTargets_get_drug_trade_names_by_chemblId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_drug_trade_names_by_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:999 275dede6878541d8b2c3a57165819559
-msgid "OpenTargets_get_drug_warnings_by_chemblId (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_drug_warnings_by_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1000 77508a61bfa04270b4f7a52751048f99
@@ -2416,13 +2429,13 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1001 9fbed4a62e1e4be4a25835b6ec06f96d
-msgid "OpenTargets_get_gene_ontology_terms_by_goID (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_gene_ontology_terms_by_goID (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1002 cf82ba35a8c64e5c91400172ce7a3046
 msgid ""
-"OpenTargets_get_known_drugs_by_drug_chemblId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_known_drugs_by_drug_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1003 ef1bc0da0c2b496bbd73b1add6720d19
@@ -2433,14 +2446,12 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1004 2bfa57edbc9b444daf6285a9c5f0cd90
 msgid ""
-"OpenTargets_get_publications_by_disease_efoId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_publications_by_disease_efoId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1005 be19d9e395124c55aa0cfcd69760ec24
 msgid ""
-"OpenTargets_get_publications_by_drug_chemblId (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_publications_by_drug_chemblId (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1006 0b98ca57955b44e0afd47dc2ad8e6141
@@ -2468,7 +2479,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1010 91a2061550a5402891bb7294ff0c296a
-msgid "OpenTargets_get_target_classes_by_ensemblID (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_target_classes_by_ensemblID (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1011 b5355214e42f4002bc0f1e87f27b67c0
@@ -2503,8 +2515,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1016 aa78cddcd66146d7a88a380a73592f20
 msgid ""
-"OpenTargets_get_target_id_description_by_name (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_target_id_description_by_name (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1017 5db9dad4dbab4366b7a2c62f010b298f
@@ -2527,8 +2538,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1020 ddd43d1a79134b6cbdb1033448a35033
 msgid ""
-"OpenTargets_get_target_synonyms_by_ensemblID (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_target_synonyms_by_ensemblID (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1021 d914ccc63a6a48578fadca294c2d8fab
@@ -2538,7 +2548,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1022 b319d1de51a449719ab81cacd4b5c710
-msgid "OpenTargets_map_any_disease_id_to_all_other_ids (from :doc:`idmap_tools`)"
+msgid ""
+"OpenTargets_map_any_disease_id_to_all_other_ids (from :doc:`idmap_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1023 0410759e83f74d3cbcfddf8e48073af9
@@ -2563,12 +2574,12 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1031 9aa5840135214ba69067a1c1b068416b
 msgid ""
-"OpenTargets_get_drug_chembId_by_generic_name (from "
-":doc:`opentarget_tools`)"
+"OpenTargets_get_drug_chembId_by_generic_name (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1032 b0a1ae1cf7a6499a966998b7e9362986
-msgid "OpenTargets_get_drug_id_description_by_name (from :doc:`opentarget_tools`)"
+msgid ""
+"OpenTargets_get_drug_id_description_by_name (from :doc:`opentarget_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1035 60bfa61d34104cc9b207f769919f3b75
@@ -3332,7 +3343,8 @@ msgid "get_ec_number_by_entity_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1239 071641387fbd422e946e3c8d654055ae
-msgid "get_em_3d_fitting_and_reconstruction_details (from :doc:`rcsb_pdb_tools`)"
+msgid ""
+"get_em_3d_fitting_and_reconstruction_details (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1240 b15736bae49a4f468c364d3b7d21e627
@@ -3360,7 +3372,8 @@ msgid "get_mutation_annotations_by_pdb_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1246 4372e6ac98e745408620297794d71300
-msgid "get_oligosaccharide_descriptors_by_entity_id (from :doc:`rcsb_pdb_tools`)"
+msgid ""
+"get_oligosaccharide_descriptors_by_entity_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1247 731e470766334303ad92339088cc865e
@@ -3409,8 +3422,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1258 fd28da8e0d1348c2bca22d30da7094dc
 msgid ""
-"get_sequence_positional_features_by_instance_id (from "
-":doc:`rcsb_pdb_tools`)"
+"get_sequence_positional_features_by_instance_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1259 3846be575ada41a39c3521e96c7189d6
@@ -3423,8 +3435,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1261 101911f4a757443498068eb591f0c37c
 msgid ""
-"get_structure_determination_software_by_pdb_id (from "
-":doc:`rcsb_pdb_tools`)"
+"get_structure_determination_software_by_pdb_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1262 d400eae79a184633a599605ceb38a223
@@ -3432,7 +3443,8 @@ msgid "get_structure_title_by_pdb_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1263 5922fb005f914848adf5180f4ec4a18f
-msgid "get_structure_validation_metrics_by_pdb_id (from :doc:`rcsb_pdb_tools`)"
+msgid ""
+"get_structure_validation_metrics_by_pdb_id (from :doc:`rcsb_pdb_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1264 6bc8b4bff7444b8fb626a9facff1d712
@@ -3476,7 +3488,8 @@ msgid "consult_human_expert (from :doc:`expert_feedback_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1281 61c022d24e614d9a8fe8d7b91efa29a2
-msgid "get_abstract_from_patent_app_number (from :doc:`uspto_downloader_tools`)"
+msgid ""
+"get_abstract_from_patent_app_number (from :doc:`uspto_downloader_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1282 94021de669b54b35b3560a0ae14dfcee
@@ -3492,7 +3505,8 @@ msgid "get_expert_status (from :doc:`expert_feedback_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1285 5853c6d36f8c472db652a3f2a293f737
-msgid "get_full_text_from_patent_app_number (from :doc:`uspto_downloader_tools`)"
+msgid ""
+"get_full_text_from_patent_app_number (from :doc:`uspto_downloader_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1286 b43c7afaac0f47d8b0764afffd4f6b11
@@ -3662,7 +3676,8 @@ msgid "UniProt_get_sequence_by_accession (from :doc:`uniprot_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1367 25e71953f7fa44979f95019b32e50a85
-msgid "UniProt_get_subcellular_location_by_accession (from :doc:`uniprot_tools`)"
+msgid ""
+"UniProt_get_subcellular_location_by_accession (from :doc:`uniprot_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1370 4af789fa02d2448fa398668008f85923
@@ -3693,8 +3708,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1377 5224e4bde7cc46879add0111e8dc537d
 msgid ""
-"drugbank_get_drug_name_and_description_by_indication (from "
-":doc:`xml_tools`)"
+"drugbank_get_drug_name_and_description_by_indication (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1378 0eed92c6f0e043f5957fe8fd8e44c123
@@ -3711,18 +3725,19 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1380 3e3ea896a0214efd9dddbe3adf4b4227
 msgid ""
-"drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action "
-"(from :doc:`xml_tools`)"
+"drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action (from"
+" :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1381 ef8db0169bd24216a7dda195da7fbf4f
 msgid ""
-"drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id "
-"(from :doc:`xml_tools`)"
+"drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id (from "
+":doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1382 66d28d1257d546ee9424f45b2efe61db
-msgid "drugbank_get_drug_products_by_name_or_drugbank_id (from :doc:`xml_tools`)"
+msgid ""
+"drugbank_get_drug_products_by_name_or_drugbank_id (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1383 44797a1f55324cffa840aed9132730bc
@@ -3733,8 +3748,7 @@ msgstr ""
 
 #: ../../tools/tools_config_index.rst:1384 7d0fb086d6fd48a7ac04908e01cd067d
 msgid ""
-"drugbank_get_indications_by_drug_name_or_drugbank_id (from "
-":doc:`xml_tools`)"
+"drugbank_get_indications_by_drug_name_or_drugbank_id (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1385 74dc71d8891841a19cc9014311d27439
@@ -3744,11 +3758,13 @@ msgid ""
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1386 c325e2e92f074a848b38f85e4a33d1e2
-msgid "drugbank_get_safety_by_drug_name_or_drugbank_id (from :doc:`xml_tools`)"
+msgid ""
+"drugbank_get_safety_by_drug_name_or_drugbank_id (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1387 20ce0cf6c93e4a3983adc9f670f2643b
-msgid "drugbank_get_targets_by_drug_name_or_drugbank_id (from :doc:`xml_tools`)"
+msgid ""
+"drugbank_get_targets_by_drug_name_or_drugbank_id (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1388 0e942239e5854aacbd19fc283a18edd0
@@ -3764,7 +3780,8 @@ msgid "mesh_get_subjects_by_subject_name (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1391 9d5cdabbf18d4fd08fdb0c077de5efad
-msgid "mesh_get_subjects_by_subject_scope_or_definition (from :doc:`xml_tools`)"
+msgid ""
+"mesh_get_subjects_by_subject_scope_or_definition (from :doc:`xml_tools`)"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1395 5b7e3ad5e2374b78a33ab4e9671dd954
@@ -3780,7 +3797,8 @@ msgid "**Tool Name**: Search for the exact tool name"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1400 b9e04288c7f44a598f46c439b0cb4205
-msgid "**File Path**: Search for ``filename.json`` to find all tools in that file"
+msgid ""
+"**File Path**: Search for ``filename.json`` to find all tools in that file"
 msgstr ""
 
 #: ../../tools/tools_config_index.rst:1401 6062a71a2f52491d95410285deb0476c
@@ -3794,4 +3812,3 @@ msgid ""
 "Each configuration file has its own dedicated page with detailed tool "
 "information and collapsible sections."
 msgstr ""
-

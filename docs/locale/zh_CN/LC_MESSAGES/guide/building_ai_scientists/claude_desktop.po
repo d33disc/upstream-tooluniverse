@@ -23,12 +23,12 @@ msgstr ""
 #: ../../guide/building_ai_scientists/claude_desktop.rst:2
 #: 6bba29b05c634404ac566ed754b5275b
 msgid "Claude Desktop"
-msgstr ""
+msgstr "Claude Desktop"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:4
 #: adeaa9ce66f54a9cb0647790aa73fc71
 msgid "**Building AI Scientists with Claude Desktop App and ToolUniverse**"
-msgstr ""
+msgstr "**使用Claude Desktop App和ToolUniverse构建AI科学家**"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:7
 #: 4038f1f0f0b542259f63ec968fdd74df

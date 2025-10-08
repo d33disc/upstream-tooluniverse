@@ -7,26 +7,26 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/loading_tools.rst:2 8b290cf0ce60422cade29b6b783a4a11
 msgid "Tool Loading Tutorial"
-msgstr ""
+msgstr "工具加载教程"
 
 #: ../../guide/loading_tools.rst:4 5e30752f43014b60baea168cea890e70
 msgid "**Complete Tutorial to loading and managing tools in ToolUniverse**"
-msgstr ""
+msgstr "**完整教程：加载和管理 ToolUniverse 中的工具**"
 
 #: ../../guide/loading_tools.rst:6 5cc1ff8ce7574ff5975f0683829d83f8
 msgid ""
@@ -34,69 +34,74 @@ msgid ""
 "tools: Python API using ``load_tools()`` method and MCP (Model Context "
 "Protocol) server using terminal commands."
 msgstr ""
+"本教程介绍了加载和访问ToolUniverse工具的两种主要方法：通过Python "
+"API使用``load_tools()``方法，以及通过终端命令使用MCP（模型上下文协议）服务器。"
 
 #: ../../guide/loading_tools.rst:9 ef1faceea7494bd68fa67820a7f5d576
 msgid "Python API: Using load_tools()"
-msgstr ""
+msgstr "Python API：使用 load_tools()"
 
 #: ../../guide/loading_tools.rst:11 b5119351569a4ec0af131aab4f711814
 msgid ""
 "The ``load_tools()`` method is the primary way to load tools when using "
 "ToolUniverse programmatically in Python."
-msgstr ""
+msgstr "``load_tools()`` 方法是使用 Python 以编程方式操作 ToolUniverse 时加载工具的主要方式。"
 
 #: ../../guide/loading_tools.rst:14 7d3e271973e442178b71d69757a5a640
 msgid ""
-"**For complete Python API documentation**, see "
-":doc:`../api_quick_reference` for commonly used classes and methods, or "
-":doc:`../api_comprehensive` for full API reference."
+"**For complete Python API documentation**, see :doc:`../api_quick_reference`"
+" for commonly used classes and methods, or :doc:`../api_comprehensive` for "
+"full API reference."
 msgstr ""
+"**完整的 Python API 文档**请参阅 :doc:`../api_quick_reference` 以了解常用的类和方法，或查看 "
+":doc:`../api_comprehensive` 获取完整的 API 参考。"
 
 #: c3caa46209bd46029aa3702e3fb95f83 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:1
-msgid "Loads tool definitions from JSON files into the instance's tool registry."
-msgstr ""
+msgid ""
+"Loads tool definitions from JSON files into the instance's tool registry."
+msgstr "从JSON文件加载工具定义到实例的工具注册表中。"
 
 #: 2bcc8ef035264bc98a3017c46489d3d1 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:3
 msgid ""
 "If `tool_type` is None, loads all available tool categories from "
 "`self.tool_files`. Otherwise, loads only the specified tool categories."
-msgstr ""
+msgstr "如果 `tool_type` 为 None，则从 `self.tool_files` 加载所有可用的工具类别。否则，仅加载指定的工具类别。"
 
 #: a63ada00ab6a4dda87d5f324cdedb9ed of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:6
 msgid ""
 "After loading, deduplicates tools by their 'name' field and updates the "
 "internal tool list. Also refreshes the tool name and description mapping."
-msgstr ""
+msgstr "加载后，根据工具的“名称”字段进行去重，并更新内部工具列表。同时刷新工具名称和描述的映射关系。"
 
 #: ../../guide/loading_tools.rst 2977bf58dc5e49f6ace8e6366ffe529b
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 007b1d0aea364bccb2ed8b52d189506e of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:9
 msgid "List of tool category names to load. If None, loads all categories."
-msgstr ""
+msgstr "工具类别名称列表以供加载。如果为 None，则加载所有类别。"
 
 #: 094257d0cd914605a39396ffa5c239a7 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:11
 msgid "List of specific tool names to exclude from loading."
-msgstr ""
+msgstr "要排除加载的特定工具名称列表。"
 
 #: 2b4b896d5385486ab649f29058a7d891 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:13
 msgid "List of tool categories to exclude from loading."
-msgstr ""
+msgstr "工具类别排除加载列表"
 
 #: 80922cc9a29c4ddea918b21a56071d32 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:15
 msgid ""
-"List of specific tool names to include, or path to a text file containing"
-" tool names (one per line). If provided, only these tools will be loaded "
+"List of specific tool names to include, or path to a text file containing "
+"tool names (one per line). If provided, only these tools will be loaded "
 "regardless of categories."
-msgstr ""
+msgstr "工具名称列表，或包含工具名称的文本文件路径（每行一个名称）。如果提供了此列表，则无论类别如何，仅加载这些工具。"
 
 #: 83f9058f505b44c09897c950e6a94f7a of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:19
@@ -104,60 +109,60 @@ msgstr ""
 msgid ""
 "Additional tool configuration files to load. Format: {\"category_name\": "
 "\"/path/to/config.json\"}"
-msgstr ""
+msgstr "要加载的其他工具配置文件。格式：{\"category_name\": \"/path/to/config.json\"}"
 
 #: 787a53fd16a1434190e07bfbc88e219a of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:22
 msgid ""
 "Path to a text file containing tool names to include (one per line). "
 "Alternative to include_tools when providing a file path."
-msgstr ""
+msgstr "包含工具名称的文本文件路径（每行一个）。提供文件路径时，可作为 include_tools 的替代选项。"
 
 #: be96cdf4cf654f94b01150d760eeffd1 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:25
 msgid ""
-"List of tool types to include (e.g., [\"OpenTarget\", \"ChEMBLTool\"]). "
-"If provided, only tools with these types will be loaded."
-msgstr ""
+"List of tool types to include (e.g., [\"OpenTarget\", \"ChEMBLTool\"]). If "
+"provided, only tools with these types will be loaded."
+msgstr "工具类型列表（例如，[\"OpenTarget\", \"ChEMBLTool\"]）。如果提供了此列表，则仅加载具有这些类型的工具。"
 
 #: 4c945fe5b1eb42db9fc7822750a679b1 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:28
 msgid ""
-"List of tool types to exclude (e.g., [\"ToolFinderEmbedding\"]). Tools "
-"with these types will be excluded."
-msgstr ""
+"List of tool types to exclude (e.g., [\"ToolFinderEmbedding\"]). Tools with "
+"these types will be excluded."
+msgstr "排除的工具类型列表（例如，[\"ToolFinderEmbedding\"]）。具有这些类型的工具将被排除。"
 
 #: 004d317d86f4437b941918e91c490602 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:32
 msgid "Side Effects:"
-msgstr ""
+msgstr "副作用："
 
 #: 6bbc1cae9e564f9c9fc35263e7d99556 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:33
 msgid "Updates `self.all_tools` with loaded and deduplicated tools."
-msgstr ""
+msgstr "更新 `self.all_tools`，将加载并去重的工具保存到其中。"
 
 #: cc94ad6c0ae24373b9f8ba660b53cdf0 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:34
 msgid "Updates `self.tool_category_dicts` with loaded tools per category."
-msgstr ""
+msgstr "使用加载的工具按类别更新 `self.tool_category_dicts`。"
 
 #: dd1798a3d1314b0cbdf0d64edd41a3d4 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:35
 msgid ""
 "Calls `self.refresh_tool_name_desc()` to update tool name/description "
 "mapping."
-msgstr ""
+msgstr "调用 `self.refresh_tool_name_desc()` 以更新工具名称/描述映射。"
 
 #: ff42b54039e34931b630f231902e2db5 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:36
 msgid "Prints the number of tools before and after loading."
-msgstr ""
+msgstr "打印加载前后的工具数量。"
 
 #: 5c23ef07247d4e29953bb9b72dfe164b of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:38
 msgid "Examples"
-msgstr ""
+msgstr "示例"
 
 #: 36b2ced1557a45abb7f63b22b4c440ea of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:40
@@ -166,13 +171,16 @@ msgid ""
 "tu.load_tools(include_tools=[\"UniProt_get_entry_by_accession\", "
 "\"ChEMBL_get_molecule_by_chembl_id\"])"
 msgstr ""
+"# 通过名称加载特定工具 "
+"tu.load_tools(include_tools=[\"UniProt_get_entry_by_accession\", "
+"\"ChEMBL_get_molecule_by_chembl_id\"])"
 
 #: 179a7d4441404c368636b9ecdb66a78c of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:43
 msgid ""
 "# Load tools from a file "
 "tu.load_tools(tools_file=\"/path/to/tool_names.txt\")"
-msgstr ""
+msgstr "# 从文件加载工具 tu.load_tools(tools_file=\"/path/to/tool_names.txt\")"
 
 #: ed24b4d605ab48759db3f96961fbaa2b of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:46
@@ -180,6 +188,8 @@ msgid ""
 "# Include only specific tool types "
 "tu.load_tools(include_tool_types=[\"OpenTarget\", \"ChEMBLTool\"])"
 msgstr ""
+"# 仅包含特定工具类型 tu.load_tools(include_tool_types=[\"OpenTarget\", "
+"\"ChEMBLTool\"])"
 
 #: fea49376fadb4e43aec61d9e4e397457 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:49
@@ -187,6 +197,8 @@ msgid ""
 "# Exclude specific tool types "
 "tu.load_tools(exclude_tool_types=[\"ToolFinderEmbedding\", \"Unknown\"])"
 msgstr ""
+"# 排除特定工具类型 tu.load_tools(exclude_tool_types=[\"ToolFinderEmbedding\", "
+"\"Unknown\"])"
 
 #: a04504c3a42f450e8964889938377d73 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:52
@@ -196,111 +208,114 @@ msgid ""
 "tu.load_tools(tool_config_files={\"custom_tools\": "
 "\"/path/to/custom_tools.json\"})"
 msgstr ""
+"# 加载额外的配置文件 tu.load_tools(tool_config_files={\"custom_tools\": "
+"\"/path/to/custom_tools.json\"})"
 
 #: 37ad10f884ba4e4b9cbbcdd64dd023da of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:55
 msgid "# Combine multiple options tu.load_tools("
-msgstr ""
+msgstr "# 组合多个选项 tu.load_tools("
 
 #: 9715cdb1a98b4e3ca17cd4c73db65c9d of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:57
 #, python-brace-format
 msgid ""
-"tool_type=[\"uniprot\", \"ChEMBL\"], "
-"exclude_tools=[\"problematic_tool\"], exclude_tool_types=[\"Unknown\"], "
-"tool_config_files={\"custom\": \"/path/to/custom.json\"}"
+"tool_type=[\"uniprot\", \"ChEMBL\"], exclude_tools=[\"problematic_tool\"], "
+"exclude_tool_types=[\"Unknown\"], tool_config_files={\"custom\": "
+"\"/path/to/custom.json\"}"
 msgstr ""
 
 #: 53e5dc93cf8f4546ac13d0a543faa7bb of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:61
 msgid ")"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本内容，我将为您翻译成自然流畅且专业的中文。"
 
 #: ../../guide/loading_tools.rst:20 da1096ab60eb46a882e266fed76cb51b
 msgid "Basic Usage"
-msgstr ""
+msgstr "基本使用"
 
 #: ../../guide/loading_tools.rst:22 b295a03bc8bd4bf3aabd043d5598ae31
 msgid "Load all available tools:"
-msgstr ""
+msgstr "加载所有可用工具："
 
 #: ../../guide/loading_tools.rst:43 59535e641cec4ea89491c23df7c51c49
 msgid "Selective Tool Loading"
-msgstr ""
+msgstr "选择性工具加载"
 
 #: ../../guide/loading_tools.rst:45 66c98bd651134afea085920c35289c0a
 msgid "Load specific tool categories:"
-msgstr ""
+msgstr "加载特定工具类别："
 
 #: ../../guide/loading_tools.rst:55 ../../guide/loading_tools.rst:221
 #: eb0be12d0a0a40d29f755bee6ff547de f5fb1ca6974e44e6ae7aebb3a8001260
 msgid "Load specific tools by name:"
-msgstr ""
+msgstr "按名称加载特定工具："
 
 #: ../../guide/loading_tools.rst:70 6d335d6528f34ba2bea3bad78a272568
 msgid "Advanced Filtering"
-msgstr ""
+msgstr "高级过滤"
 
 #: ../../guide/loading_tools.rst:72 ../../guide/loading_tools.rst:236
 #: 176c34826e2441528f7ac0859ed47d70 60f62a8ee7034dfd96dffc6401964900
 msgid "Filter by tool types:"
-msgstr ""
+msgstr "按工具类型筛选："
 
 #: ../../guide/loading_tools.rst:82 e4a2307d0a5b4c858aad87adbb10ee1b
 msgid "Exclude specific tools:"
-msgstr ""
+msgstr "排除特定工具："
 
 #: ../../guide/loading_tools.rst:90 a2b8b3220e6f468698252151f371fae6
 msgid "Load Additional Configurations"
-msgstr ""
+msgstr "加载其他配置"
 
 #: ../../guide/loading_tools.rst:92 3a83b4ca9d3540e2b16de123b429a932
 msgid "Add custom tool configuration files:"
-msgstr ""
+msgstr "添加自定义工具配置文件："
 
 #: ../../guide/loading_tools.rst:102 c259c71a4b984ec4811693430c8201fa
 msgid ""
-"Note: tool_config_files is a dictionary of tool category names and the "
-"path to the tool configuration file, but it does not mean that the tool "
-"is loaded. You need to load the tool with tool_type or include_tools or "
+"Note: tool_config_files is a dictionary of tool category names and the path "
+"to the tool configuration file, but it does not mean that the tool is "
+"loaded. You need to load the tool with tool_type or include_tools or "
 "include_tool_types."
 msgstr ""
+"注意：`tool_config_files` 是一个包含工具类别名称和工具配置文件路径的字典，但这并不意味着工具已被加载。您需要使用 "
+"`tool_type`、`include_tools` 或 `include_tool_types` 来加载工具。"
 
 #: ../../guide/loading_tools.rst:107 3ea202cfb8e547e29d14f7ccc3755a13
 msgid "Combined Parameters"
-msgstr ""
+msgstr "组合参数"
 
 #: ../../guide/loading_tools.rst:109 2100f83aca2e44b98cd061eb26793fc9
 msgid "Combine multiple loading options:"
-msgstr ""
+msgstr "结合多种加载选项："
 
 #: ../../guide/loading_tools.rst:125 f363670525874dfe995f49c68c8e2146
 msgid "MCP Server Functions"
-msgstr ""
+msgstr "MCP服务器功能"
 
 #: ../../guide/loading_tools.rst:127 0c502cc59efa4bf2a7051d11d93dd595
 msgid ""
-"ToolUniverse provides two main MCP server functions for different use "
-"cases:"
-msgstr ""
+"ToolUniverse provides two main MCP server functions for different use cases:"
+msgstr "ToolUniverse 提供两种主要的 MCP 服务器功能，以满足不同的使用场景："
 
 #: ../../guide/loading_tools.rst:130 de6ffce8658a4b52b674c67521aaec9d
 msgid ""
-"For a comprehensive MCP overview, detailed configuration, best practices,"
-" and troubleshooting, see :doc:`mcp_support`."
-msgstr ""
+"For a comprehensive MCP overview, detailed configuration, best practices, "
+"and troubleshooting, see :doc:`mcp_support`."
+msgstr "要全面了解MCP概述、详细配置、最佳实践和故障排除，请参阅:doc:`mcp_support`。"
 
 #: ../../guide/loading_tools.rst:132 e2b8e96e9b6844998003605bcd4342a9
 msgid ""
-"**`tooluniverse-mcp`** - Full-featured server with configurable transport"
-" (HTTP, SSE, stdio)"
-msgstr ""
+"**`tooluniverse-mcp`** - Full-featured server with configurable transport "
+"(HTTP, SSE, stdio)"
+msgstr "**`tooluniverse-mcp`** - 功能全面的服务器，支持可配置的传输方式（HTTP、SSE、stdio）"
 
 #: ../../guide/loading_tools.rst:133 a8d205fb725f4cc28812e425310affc0
 msgid ""
-"**`tooluniverse-smcp-stdio`** - Specialized server for stdio transport "
-"(for desktop AI applications)"
-msgstr ""
+"**`tooluniverse-smcp-stdio`** - Specialized server for stdio transport (for "
+"desktop AI applications)"
+msgstr "**`tooluniverse-smcp-stdio`** - 专用于标准输入输出传输的服务器（适用于桌面级AI应用）"
 
 #: ../../guide/loading_tools.rst:135 61e0b76bef5a4c2abd81f2ad5939f35c
 msgid ""
@@ -315,9 +330,9 @@ msgstr ""
 
 #: ../../guide/loading_tools.rst:140 a27af774b39b4333aa6dbd37cf330f5c
 msgid ""
-"The `tooluniverse-mcp` function is the main entry point for "
-"ToolUniverse's SMCP server, providing full configurability for different "
-"deployment scenarios."
+"The `tooluniverse-mcp` function is the main entry point for ToolUniverse's "
+"SMCP server, providing full configurability for different deployment "
+"scenarios."
 msgstr ""
 
 #: ../../guide/loading_tools.rst:143 734514ee0597491a96aa3c0736c419cf
@@ -410,10 +425,10 @@ msgstr ""
 
 #: ../../guide/loading_tools.rst:291 eb8c216b375d49dd90dd15cf619c70d6
 msgid ""
-"The `tooluniverse-smcp-stdio` function is specifically designed for stdio"
-" transport, making it ideal for Claude Desktop integration and other "
-"desktop AI applications. **By default, this function enables output "
-"processing hooks for intelligent post-processing of tool outputs.**"
+"The `tooluniverse-smcp-stdio` function is specifically designed for stdio "
+"transport, making it ideal for Claude Desktop integration and other desktop "
+"AI applications. **By default, this function enables output processing hooks"
+" for intelligent post-processing of tool outputs.**"
 msgstr ""
 
 #: ../../guide/loading_tools.rst:294 6c5445053367404dafbabc331d57f91b
@@ -429,7 +444,8 @@ msgid "The stdio server supports intelligent output processing hooks:"
 msgstr ""
 
 #: ../../guide/loading_tools.rst:325 2da7461159a8438f8002361aad0306f7
-msgid "**SummarizationHook** (default): AI-powered summarization of long outputs"
+msgid ""
+"**SummarizationHook** (default): AI-powered summarization of long outputs"
 msgstr ""
 
 #: ../../guide/loading_tools.rst:332 cc50f44112544b0cbcbef7b3db9fc13a
@@ -455,4 +471,3 @@ msgstr ""
 #: ../../guide/loading_tools.rst:387 68fd4f5fe1ff4a5b924f9f565928c0e8
 msgid "Create a text file with one tool name per line:"
 msgstr ""
-

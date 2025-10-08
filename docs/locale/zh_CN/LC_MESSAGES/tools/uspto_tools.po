@@ -7,52 +7,55 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/uspto_tools.rst:2 4da71326a2a84001b1887c1dfdaecfb8
 msgid "Uspto Tools"
-msgstr ""
+msgstr "USPTO 工具"
 
 #: ../../tools/uspto_tools.rst:4 9bd871eead864b84b57c7bc811bc2275
 msgid ""
-"**Configuration File**: ``uspto_tools.json`` **Tool Type**: Local **Tools"
-" Count**: 6"
+"**Configuration File**: ``uspto_tools.json`` **Tool Type**: Local **Tools "
+"Count**: 6"
 msgstr ""
+"**配置文件**：``uspto_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：6"
 
 #: ../../tools/uspto_tools.rst:8 3003586b0ed143579cd288b78a70c7b1
 msgid ""
 "This page contains all tools defined in the ``uspto_tools.json`` "
 "configuration file."
-msgstr ""
+msgstr "此页面包含 ``uspto_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/uspto_tools.rst:11 1f31db72daff4ab9b8cb04b62753c350
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/uspto_tools.rst:14 601a3825bb734cb9abcb8d39a4011acb
 msgid "**get_associated_documents_metadata** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_associated_documents_metadata**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:16 c0c1325d18414f94b7cde44ee2e89e41
 msgid ""
 "Obtains metadata for documents associated with an application, such as "
 "publications and grants."
-msgstr ""
+msgstr "获取与应用程序相关的文档元数据，例如出版物和资助项目。"
 
 #: ../../tools/uspto_tools.rst f40fd97aaf1543e08711634a7f107046
 msgid "get_associated_documents_metadata tool specification"
-msgstr ""
+msgstr "get_associated_documents_metadata 工具规范"
 
 #: ../../tools/uspto_tools.rst:20 ../../tools/uspto_tools.rst:50
 #: ../../tools/uspto_tools.rst:80 ../../tools/uspto_tools.rst:110
@@ -61,11 +64,11 @@ msgstr ""
 #: 51426081337148c5a088b549ee05d60b 783d6d8324b44080a267973d7fee397c
 #: 7dc46f1df48044689c95c20d2d856b3e c4b671e9875447198ae32b7969e99eed
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/uspto_tools.rst:22 0a49c68738184715a1485bda5389905f
 msgid "**Name**: ``get_associated_documents_metadata``"
-msgstr ""
+msgstr "**名称**：``get_associated_documents_metadata``"
 
 #: ../../tools/uspto_tools.rst:23 ../../tools/uspto_tools.rst:53
 #: ../../tools/uspto_tools.rst:83 ../../tools/uspto_tools.rst:113
@@ -74,13 +77,13 @@ msgstr ""
 #: 73d6bffeb3ef437b952a3eda068bf706 74a62719d9be4790806557022f73a106
 #: a3133e548ed64de8b95e727506c426b7 da7b7522377749d89f4d7814a91033b1
 msgid "**Type**: ``USPTOOpenDataPortalTool``"
-msgstr ""
+msgstr "**类型**：``USPTOOpenDataPortalTool``"
 
 #: ../../tools/uspto_tools.rst:24 f136552841ca471b896b61d1c4a0e552
 msgid ""
 "**Description**: Obtains metadata for documents associated with an "
 "application, such as publications and grants."
-msgstr ""
+msgstr "**描述**：获取与应用程序相关的文档元数据，例如出版物和资助信息。"
 
 #: ../../tools/uspto_tools.rst:26 ../../tools/uspto_tools.rst:56
 #: ../../tools/uspto_tools.rst:86 ../../tools/uspto_tools.rst:116
@@ -89,7 +92,7 @@ msgstr ""
 #: 55f7a913916140e3bc69f6a4b1127460 7418906ff96348a29863bb8bbe283228
 #: c7a28aa065054507a228379e94a03e80 e6282a87863442058f1a1a1e0b43b292
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/uspto_tools.rst:28 ../../tools/uspto_tools.rst:58
 #: ../../tools/uspto_tools.rst:88 ../../tools/uspto_tools.rst:118
@@ -97,9 +100,9 @@ msgstr ""
 #: 07e9c793490c491cbe14183f245eafe7 33d5a6cdac8248eb904378cc2db82c93
 #: b4decbbbab8c43db9ba9e9e7c7d333aa d1bc47bd1f6c45eab86e7baf5deda0e8
 msgid ""
-"``applicationNumberText`` (string) (optional) The application number of "
-"the patent."
-msgstr ""
+"``applicationNumberText`` (string) (optional) The application number of the "
+"patent."
+msgstr "``applicationNumberText``（字符串）（可选）专利的申请号。"
 
 #: ../../tools/uspto_tools.rst:31 ../../tools/uspto_tools.rst:61
 #: ../../tools/uspto_tools.rst:91 ../../tools/uspto_tools.rst:121
@@ -108,88 +111,88 @@ msgstr ""
 #: 215c3cc091214e779350fbdcd12d7d87 e120fb9face944c9b5b80ff298a30fe6
 #: e75675a6df684047bce27d598768354d ee03e93975de423d8d4ebb5fcc9626c8
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/uspto_tools.rst:44 36d34d1d05914056a9559d4d07a083ac
 msgid "**get_patent_application_metadata** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_patent_application_metadata**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:46 297cb1cea7df4229a3a186d2310cef67
 msgid ""
 "Retrieves only the metadata for a specific patent application by its "
 "application number."
-msgstr ""
+msgstr "根据申请号仅检索特定专利申请的元数据。"
 
 #: ../../tools/uspto_tools.rst b09d8053822d4774aad750d47a79a2f4
 msgid "get_patent_application_metadata tool specification"
-msgstr ""
+msgstr "get_patent_application_metadata 工具规范"
 
 #: ../../tools/uspto_tools.rst:52 4bb6fdd6907946fc82bbe272abf926c9
 msgid "**Name**: ``get_patent_application_metadata``"
-msgstr ""
+msgstr "**名称**: ``get_patent_application_metadata``"
 
 #: ../../tools/uspto_tools.rst:54 413ff324ea1940079e100cb4def44d0f
 msgid ""
 "**Description**: Retrieves only the metadata for a specific patent "
 "application by its application number."
-msgstr ""
+msgstr "**描述**：根据申请号仅检索特定专利申请的元数据。"
 
 #: ../../tools/uspto_tools.rst:74 e76a41d855b94e079592716a65c25934
 msgid "**get_patent_continuity_data** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_patent_continuity_data**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:76 4db20b10cbb64c9fbf97533ae99bdadf
 msgid ""
 "Fetches the parent and child continuity data for a patent application, "
 "showing its relationship t..."
-msgstr ""
+msgstr "获取专利申请的父项和子项连续性数据，以显示其与其他专利申请的关系。"
 
 #: ../../tools/uspto_tools.rst 7f87bb92e7e84b37a430bedd903cdac4
 msgid "get_patent_continuity_data tool specification"
-msgstr ""
+msgstr "get_patent_continuity_data 工具规范"
 
 #: ../../tools/uspto_tools.rst:82 089f477cac55495a9893f8013036301b
 msgid "**Name**: ``get_patent_continuity_data``"
-msgstr ""
+msgstr "**名称**: ``get_patent_continuity_data``"
 
 #: ../../tools/uspto_tools.rst:84 a83321647af64fb092f602d48ce65be3
 msgid ""
-"**Description**: Fetches the parent and child continuity data for a "
-"patent application, showing its relationship to other applications."
-msgstr ""
+"**Description**: Fetches the parent and child continuity data for a patent "
+"application, showing its relationship to other applications."
+msgstr "**描述**：获取专利申请的父项和子项连续性数据，显示其与其他申请的关系。"
 
 #: ../../tools/uspto_tools.rst:104 c274ac5a1cbe452da1b46e1a535bdaea
 msgid "**get_patent_foreign_priority_data** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_patent_foreign_priority_data**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:106 846ecc47fa29412f8c75ec5541657e12
 msgid ""
-"Accesses information about any foreign priority claims associated with an"
-" application."
-msgstr ""
+"Accesses information about any foreign priority claims associated with an "
+"application."
+msgstr "获取与申请相关的任何外国优先权声明信息。"
 
 #: ../../tools/uspto_tools.rst db32e9e5a45c48549ba01f37e250e3a4
 msgid "get_patent_foreign_priority_data tool specification"
-msgstr ""
+msgstr "get_patent_foreign_priority_data 工具规范"
 
 #: ../../tools/uspto_tools.rst:112 e6fce96b226346689088b555500c4313
 msgid "**Name**: ``get_patent_foreign_priority_data``"
-msgstr ""
+msgstr "**名称**: ``get_patent_foreign_priority_data``"
 
 #: ../../tools/uspto_tools.rst:114 681c3b484a1e447a8c579c0a8a43d2c1
 msgid ""
 "**Description**: Accesses information about any foreign priority claims "
 "associated with an application."
-msgstr ""
+msgstr "**描述**：访问与申请相关的任何外国优先权声明信息。"
 
 #: ../../tools/uspto_tools.rst:134 ae9fd90ebbb64b7a8779db01c1242874
 msgid "**get_patent_overview_by_text_query** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_patent_overview_by_text_query**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:136 24b3a9d662d44fdf906ac900776b9058
 msgid ""
-"Search for patent application overviews using a query string of the "
-"format 'applicationMetaData.i..."
+"Search for patent application overviews using a query string of the format "
+"'applicationMetaData.i..."
 msgstr ""
 
 #: ../../tools/uspto_tools.rst 4af079c8e6384b9998124838335f5034
@@ -203,15 +206,13 @@ msgstr ""
 #: ../../tools/uspto_tools.rst:144 bacbf3f475aa45ec9b548fa601c6ce59
 msgid ""
 "**Description**: Search for patent application overviews using a query "
-"string of the format "
-"'applicationMetaData.inventionTitle:your_search_term', where "
-"your_search_term is the case-insensitive keyword or keyphrase you are "
+"string of the format 'applicationMetaData.inventionTitle:your_search_term', "
+"where your_search_term is the case-insensitive keyword or keyphrase you are "
 "searching for. If your_search_term is a multi-word phrase, it must be "
 "encased in escaped double quotation marks for exact matching. This tool "
-"allows for sorting, offsetting, and filterin of results. Returns a list "
-"of important metadata fields for each application, including application "
-"number, filing date, grant date, invention title, and CPC "
-"classifications."
+"allows for sorting, offsetting, and filterin of results. Returns a list of "
+"important metadata fields for each application, including application "
+"number, filing date, grant date, invention title, and CPC classifications."
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:148 0a1201b261de41c789665464ae1ab2d1
@@ -222,22 +223,22 @@ msgstr ""
 
 #: ../../tools/uspto_tools.rst:151 03ac9170565442cf88fa76c4de5d6719
 msgid ""
-"``exact_match`` (boolean) (optional) If true, the search will only return"
-" results that exactly match the provided query. Default is false."
+"``exact_match`` (boolean) (optional) If true, the search will only return "
+"results that exactly match the provided query. Default is false."
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:154 6095ee59a0374e9a808d97db9061368f
 msgid ""
-"``sort`` (string) (optional) Sorts results by one of the following "
-"fields: filingDate or grantDate. Follow the field name with a space and "
-"'asc' or 'desc' for ascending or descending by date, respectively. For "
-"example: 'filingDate desc'"
+"``sort`` (string) (optional) Sorts results by one of the following fields: "
+"filingDate or grantDate. Follow the field name with a space and 'asc' or "
+"'desc' for ascending or descending by date, respectively. For example: "
+"'filingDate desc'"
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:157 3c1722acccb548158f093e9130f4a608
 msgid ""
-"``offset`` (integer) (optional) The starting position (zero-indexed) of "
-"the result set. Default is 0."
+"``offset`` (integer) (optional) The starting position (zero-indexed) of the "
+"result set. Default is 0."
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:160 a8871212fb054639ba83061c34d5dc9b
@@ -249,10 +250,9 @@ msgstr ""
 #: ../../tools/uspto_tools.rst:163 f41f7b0398ce4b259b7ca5e2a6986af4
 msgid ""
 "``rangeFilters`` (string) (optional) Limits results to the date range "
-"specified for one of the following fields: filingDate or grantDate. "
-"Provide the field name, a space, and a colon-separated start and end "
-"value in YYYY-MM-DD format. For example: 'grantDate "
-"2010-01-01:2011-01-01'"
+"specified for one of the following fields: filingDate or grantDate. Provide "
+"the field name, a space, and a colon-separated start and end value in YYYY-"
+"MM-DD format. For example: 'grantDate 2010-01-01:2011-01-01'"
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:179 757109a38bdb4a2083460b8e505c0c69
@@ -260,7 +260,8 @@ msgid "**get_patent_term_adjustment_data** (Type: USPTOOpenDataPortalTool)"
 msgstr ""
 
 #: ../../tools/uspto_tools.rst:181 9cb81fee715046249e527b848c37110c
-msgid "Obtains the patent term adjustment details for a given application number."
+msgid ""
+"Obtains the patent term adjustment details for a given application number."
 msgstr ""
 
 #: ../../tools/uspto_tools.rst 0291d47d890d441cae39fbf0349d3cda
@@ -288,4 +289,3 @@ msgstr ""
 #: ../../tools/uspto_tools.rst:212 918b3ef376484a64bc720be0b5586f6d
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

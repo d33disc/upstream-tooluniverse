@@ -7,22 +7,22 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.hpa_tool.rst:2 7a0cf11a00f740d59d815153a4a5a889
 msgid "tooluniverse.hpa\\_tool module"
-msgstr ""
+msgstr "tooluniverse.hpa_tool 模块"
 
 #: 054e3f44b2f24c738e8c46a9488a0988 1b09dd1a612d41428afcb7fd0a1d47ac
 #: 76973631192f4d23926c1a413c5cd4d1 dccd0dd51f17477787fbf81a49463697 of
@@ -31,42 +31,43 @@ msgstr ""
 #: tooluniverse.hpa_tool.HPASearchApiTool:1
 #: tooluniverse.hpa_tool.HPAXmlApiTool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
-#: 2b52ef2c9d25454f972d3571f597900b of tooluniverse.hpa_tool.HPASearchApiTool:1
+#: 2b52ef2c9d25454f972d3571f597900b of
+#: tooluniverse.hpa_tool.HPASearchApiTool:1
 msgid ""
-"Base class for interacting with HPA's search_download.php API. Uses HPA's"
-" search and download API to get protein expression data."
-msgstr ""
+"Base class for interacting with HPA's search_download.php API. Uses HPA's "
+"search and download API to get protein expression data."
+msgstr "与HPA的search_download.php API交互的基类。使用HPA的搜索和下载API获取蛋白质表达数据。"
 
 #: 3a62a0e9952047ab9eb6af1069843c92 of
 #: tooluniverse.hpa_tool.HPASearchApiTool._make_api_request:1
 msgid "Make HPA API request with improved error handling"
-msgstr ""
+msgstr "使用改进的错误处理进行 HPA API 请求"
 
 #: 4882625c9eac4956b90dbf9585730f97 of tooluniverse.hpa_tool.HPAJsonApiTool:1
 #, python-brace-format
 msgid ""
-"Base class for interacting with HPA's /{ensembl_id}.json API. More "
-"efficient for getting comprehensive gene data."
-msgstr ""
+"Base class for interacting with HPA's /{ensembl_id}.json API. More efficient"
+" for getting comprehensive gene data."
+msgstr "与 HPA 的 /{ensembl_id}.json API 交互的基类。用于更高效地获取全面的基因数据。"
 
 #: 6b4a8fb1703b475a81c0ee832025dc11 of
 #: tooluniverse.hpa_tool.HPAJsonApiTool._make_api_request:1
 msgid "Make HPA JSON API request for a specific gene"
-msgstr ""
+msgstr "针对特定基因发起 HPA JSON API 请求"
 
 #: f56aa81c7d994e5aa4f81d2006274a1c of tooluniverse.hpa_tool.HPAXmlApiTool:1
 #, python-brace-format
 msgid ""
-"Base class for interacting with HPA's /{ensembl_id}.xml API. Optimized "
-"for comprehensive XML data extraction."
-msgstr ""
+"Base class for interacting with HPA's /{ensembl_id}.xml API. Optimized for "
+"comprehensive XML data extraction."
+msgstr "用于与 HPA 的 /{ensembl_id}.xml API 交互的基类。针对全面的 XML 数据提取进行了优化。"
 
 #: 0aa179ccc0f8465aac152d7b795bf602 of
 #: tooluniverse.hpa_tool.HPAXmlApiTool._make_api_request:1
 msgid "Make HPA XML API request for a specific gene"
-msgstr ""
+msgstr "为特定基因发起 HPA XML API 请求"
 
 #: 12e958ef5fcd4e3696fabd5b00b2cb8f 361f75fd3aaf4945800c96e598bfe9d4
 #: 535f340219074557b45eb791cc340d06 80e00771f2ef47a9b3b3768a7b5cd0e0
@@ -81,15 +82,15 @@ msgstr ""
 #: tooluniverse.hpa_tool.HPAGetSubcellularLocationTool:1
 #: tooluniverse.hpa_tool.HPASearchGenesTool:1
 msgid "Bases: :py:class:`~tooluniverse.hpa_tool.HPASearchApiTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.hpa_tool.HPASearchApiTool`"
 
 #: 01412e8717a74883a12c55b2f9abaea2 of
 #: tooluniverse.hpa_tool.HPAGetRnaExpressionBySourceTool:1
 msgid ""
 "Get RNA expression for a gene from specific biological sources using "
-"optimized columns parameter. This tool directly leverages the "
-"comprehensive columns table for efficient queries."
-msgstr ""
+"optimized columns parameter. This tool directly leverages the comprehensive "
+"columns table for efficient queries."
+msgstr "使用优化的 columns 参数，从特定生物来源获取基因的 RNA 表达。本工具直接利用全面的 columns 表，实现高效查询。"
 
 #: 1709147c33b04063abeb383e738ca0e2 48d1b24fde1340f1b1bd49cfd7bc6797
 #: 5224c5dc02c547d88d1bee1325cb9ceb 6d8ade9d01164005aa07f43ff2bfd190
@@ -135,17 +136,17 @@ msgstr ""
 #: tooluniverse.hpa_tool.HPAGetSubcellularLocationTool.run:3
 #: tooluniverse.hpa_tool.HPASearchGenesTool.run:3
 msgid ""
-"The default BaseTool implementation accepts an optional arguments mapping"
-" to align with most concrete tool implementations which expect a "
-"dictionary of inputs."
+"The default BaseTool implementation accepts an optional arguments mapping to"
+" align with most concrete tool implementations which expect a dictionary of "
+"inputs."
 msgstr ""
 
 #: 5b545f0e20e94738a82eadf04284b438 of
 #: tooluniverse.hpa_tool.HPAGetSubcellularLocationTool:1
 msgid ""
-"Get annotated subcellular locations for a protein using optimized columns"
-" parameter. Uses scml (main location) and scal (additional location) "
-"columns for efficient queries."
+"Get annotated subcellular locations for a protein using optimized columns "
+"parameter. Uses scml (main location) and scal (additional location) columns "
+"for efficient queries."
 msgstr ""
 
 #: bfdbecd8d85a43fcbd61cbbb8aa55da3 of
@@ -163,9 +164,8 @@ msgstr ""
 #: 48472948d34b480faccc2823b03e0dc1 of
 #: tooluniverse.hpa_tool.HPAGetComparativeExpressionTool:1
 msgid ""
-"Compare gene expression levels in specific cell lines and healthy "
-"tissues. Get expression data for comparison by gene name and cell line "
-"name."
+"Compare gene expression levels in specific cell lines and healthy tissues. "
+"Get expression data for comparison by gene name and cell line name."
 msgstr ""
 
 #: f4b6d18aca4d469daf353fe4c2ff737d of
@@ -176,9 +176,8 @@ msgstr ""
 #: d7778ce7bd56408eac10d871576fb9b4 of
 #: tooluniverse.hpa_tool.HPAGetDiseaseExpressionTool:1
 msgid ""
-"Get expression data for a gene in specific diseases and tissues. Get "
-"related expression information by gene name, tissue type, and disease "
-"name."
+"Get expression data for a gene in specific diseases and tissues. Get related"
+" expression information by gene name, tissue type, and disease name."
 msgstr ""
 
 #: b194901ed16f4dd49e00f1a1cdc1a67b of
@@ -204,8 +203,8 @@ msgstr ""
 #: 7b8e53d1f4334999a5baff5d50cd2eee of
 #: tooluniverse.hpa_tool.HPAGetCancerPrognosticsTool:1
 msgid ""
-"Get prognostic value of a gene across various cancers. Uses the efficient"
-" JSON API to retrieve cancer prognostic data."
+"Get prognostic value of a gene across various cancers. Uses the efficient "
+"JSON API to retrieve cancer prognostic data."
 msgstr ""
 
 #: 2bcc5f0934284da697efbfc042f466db of
@@ -230,9 +229,8 @@ msgstr ""
 #: 4f443c25ab48416d990efdb75996ccfe of
 #: tooluniverse.hpa_tool.HPAGetContextualBiologicalProcessTool:1
 msgid ""
-"Analyze a gene's biological processes in the context of specific tissue "
-"or cell line. Enhanced with intelligent context validation and "
-"recommendation."
+"Analyze a gene's biological processes in the context of specific tissue or "
+"cell line. Enhanced with intelligent context validation and recommendation."
 msgstr ""
 
 #: 98c56568ab934db38a703703b2b0f75f of
@@ -249,10 +247,9 @@ msgstr ""
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool:1
 msgid ""
 "Get detailed information about a gene page, including images, protein "
-"expression, antibody data, etc. Get the most comprehensive data by "
-"parsing HPA's single gene XML endpoint. Enhanced version with improved "
-"image extraction and comprehensive data parsing based on optimization "
-"plan."
+"expression, antibody data, etc. Get the most comprehensive data by parsing "
+"HPA's single gene XML endpoint. Enhanced version with improved image "
+"extraction and comprehensive data parsing based on optimization plan."
 msgstr ""
 
 #: 781d599047044e53afb378afc4f70210 of
@@ -270,8 +267,8 @@ msgstr ""
 #: 2a51943ce9b5465f8af525a57943a68d of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_if_images:1
 msgid ""
-"Extract subcellular immunofluorescence (IF) images based on actual HPA "
-"XML structure"
+"Extract subcellular immunofluorescence (IF) images based on actual HPA XML "
+"structure"
 msgstr ""
 
 #: 0bcdf9a8456143c3a9f220d9cfd04fde of
@@ -297,12 +294,11 @@ msgstr ""
 #: 08a6f99843a74afbb92f0c692209ab68 of
 #: tooluniverse.hpa_tool.HPAGetGeneJSONTool:1
 msgid ""
-"Enhanced legacy tool - Get basic gene information using Ensembl Gene ID. "
-"Now uses the efficient JSON API instead of search API."
+"Enhanced legacy tool - Get basic gene information using Ensembl Gene ID. Now"
+" uses the efficient JSON API instead of search API."
 msgstr ""
 
 #: 35039db62aa549f688a9ff96b6060668 of
 #: tooluniverse.hpa_tool.HPAGetGeneXMLTool:1
 msgid "Legacy tool - Get gene TSV format data (alternative to XML)."
 msgstr ""
-

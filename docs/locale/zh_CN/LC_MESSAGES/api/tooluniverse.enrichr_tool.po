@@ -7,73 +7,73 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.enrichr_tool.rst:2 d07a26fd28814098beed674c2867d479
 msgid "tooluniverse.enrichr\\_tool module"
-msgstr ""
+msgstr "tooluniverse.enrichr_tool 模块"
 
 #: 91a4215653ff4bf48db94a5025cd8f20 of tooluniverse.enrichr_tool.EnrichrTool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
 #: e0454f4359394138a3ab48c3264023a6 of tooluniverse.enrichr_tool.EnrichrTool:1
 msgid "Tool to perform gene enrichment analysis using Enrichr."
-msgstr ""
+msgstr "用于使用 Enrichr 进行基因富集分析的工具。"
 
 #: 76bd77b68168475ba6939947508d3f1d of
 #: tooluniverse.enrichr_tool.EnrichrTool.run:1
 msgid "Main entry point for the tool."
-msgstr ""
+msgstr "工具的主要入口点。"
 
 #: c3366eb8d3d2456ca0670d4c4925eb57 of
 #: tooluniverse.enrichr_tool.EnrichrTool.get_official_gene_name:1
 msgid ""
-"Retrieve the official gene symbol for a given gene name or synonym using "
-"the MyGene.info API."
-msgstr ""
+"Retrieve the official gene symbol for a given gene name or synonym using the"
+" MyGene.info API."
+msgstr "使用 MyGene.info API 根据给定的基因名称或同义词检索官方基因符号。"
 
 #: ../../api/tooluniverse.enrichr_tool.rst 19f479629cce44bba6952613c097c3c7
 #: 40c503b21ad34496adc22db6590a30d5 417654bb4f5c493cb21c11ca173ca034
 #: 7a0aebf50e7a4966acc3a3131dabb84f aeb16f91084841639801e1b1545d4683
 #: d85417b134c44128b6ad973352f66854 fb24db884b974a5c85e65dc09f23477c
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 6090c1c6659d45ee9a5e74f41bb2245d of
 #: tooluniverse.enrichr_tool.EnrichrTool.get_official_gene_name:3
 msgid "The gene name or synonym to query."
-msgstr ""
+msgstr "要查询的基因名称或同义词。"
 
 #: ../../api/tooluniverse.enrichr_tool.rst 1511b72c2d7e4a0c8370d657c545f977
 #: 34fbe2690626409faa6590a2f70764e9 5407b7388e3c468e8f27e881fc4844a5
 #: 72c2981444a3493da249b42bc37953db 9750068482624038b0b13128d6b1aae2
 #: bd7abd53a03d4f30954b961462ec63c8 eb68011958e24fbe8aee104513ab8dcb
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: b53b674cca1c4295ae80826d31611f65 of
 #: tooluniverse.enrichr_tool.EnrichrTool.get_official_gene_name:6
 msgid "The official gene symbol if found; otherwise, raises an Exception."
-msgstr ""
+msgstr "如果找到官方基因符号；否则，抛出异常。"
 
 #: ../../api/tooluniverse.enrichr_tool.rst 2db3aac62f4e46f5b1d90646943977d0
 #: 2fd9941bc3874624a3ac82129d80a9d5 bb73cffefac04d6db423e47e132b2c66
 #: ca8cb926f1dd4a9a8b9492979cffc8c5 ccfcf02a4c3440aca1a233f8e3955721
 #: d7c781cb371547eca7e598c71fad9b5e fcd86807a12145adaa100431d17b296d
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 8744f7d3f79d440587e96043672509e8 of
 #: tooluniverse.enrichr_tool.EnrichrTool.submit_gene_list:1
@@ -129,7 +129,8 @@ msgstr ""
 
 #: eb449e23853a41859891fda8d392b0f3 of
 #: tooluniverse.enrichr_tool.EnrichrTool.rank_paths_by_weight:1
-msgid "Find and rank paths between source and target based on total edge weight."
+msgid ""
+"Find and rank paths between source and target based on total edge weight."
 msgstr ""
 
 #: 9f2e8ddaae35470c9bd756bde4f69c73 cb7fd1a5058840d3b6b0bdd102398e0f of
@@ -156,8 +157,8 @@ msgstr ""
 #: df286e2ab26d4fb082ba5074f7970cc2 of
 #: tooluniverse.enrichr_tool.EnrichrTool.rank_paths_to_term:1
 msgid ""
-"Find and rank paths from each gene to a specified term based on total "
-"edge weight."
+"Find and rank paths from each gene to a specified term based on total edge "
+"weight."
 msgstr ""
 
 #: 6f487dfe6c2049b081e5955f4a42c848 of
@@ -191,4 +192,3 @@ msgstr ""
 #: tooluniverse.enrichr_tool.EnrichrTool.enrichr_api:8
 msgid "(connected_path, connections) dictionaries."
 msgstr ""
-

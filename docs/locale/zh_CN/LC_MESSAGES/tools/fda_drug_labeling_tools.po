@@ -7,52 +7,55 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2 0e5773d0b8c0424ca6a50c93e021bb93
 msgid "Fda Drug Labeling Tools"
-msgstr ""
+msgstr "FDA 药品标签工具"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4 2cac2265ac854286a722a5a7d7937f1b
 msgid ""
 "**Configuration File**: ``fda_drug_labeling_tools.json`` **Tool Type**: "
 "Local **Tools Count**: 156"
 msgstr ""
+"**配置文件**：``fda_drug_labeling_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：156"
 
 #: ../../tools/fda_drug_labeling_tools.rst:8 5a3a8bb7175c4d449f3936948bb930ad
 msgid ""
-"This page contains all tools defined in the "
-"``fda_drug_labeling_tools.json`` configuration file."
-msgstr ""
+"This page contains all tools defined in the ``fda_drug_labeling_tools.json``"
+" configuration file."
+msgstr "此页面包含 ``fda_drug_labeling_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:11 e2ed82eb067c4931a4c54a9ac66243e2
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/fda_drug_labeling_tools.rst:14 df456edd3ed54b588131e5e1e85c71e3
 msgid "**FDA_get_abuse_dependence_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_abuse_dependence_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:16 664d5060a02d425a93f7f441cabe507d
 msgid ""
 "Get information about drug abuse and dependence based on the drug name, "
 "specifically information ..."
-msgstr ""
+msgstr "根据药物名称获取有关药物滥用和依赖的信息，具体信息包括..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 2d51547c77534b44bf0c20711ce27a5f
 msgid "FDA_get_abuse_dependence_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_abuse_dependence_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:20
 #: ../../tools/fda_drug_labeling_tools.rst:56
@@ -289,11 +292,11 @@ msgstr ""
 #: fa2dbab7bd154720b54debaf02e326e1 fc0a19bc04a44bf888a2a9f6fa2b99ab
 #: fc760c051b2c46a790eec14044f756c4 feaa5c739f6c4abea7e38df24af8d1b2
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/fda_drug_labeling_tools.rst:22 b82e31e1dc234983b9d29b9592e41d14
 msgid "**Name**: ``FDA_get_abuse_dependence_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_abuse_dependence_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:23
 #: ../../tools/fda_drug_labeling_tools.rst:59
@@ -529,15 +532,15 @@ msgstr ""
 #: fe3216407d5540179969111eb5a49ab2 fed15c89a80846ed9a6d04b4529f1a5a
 #: ffda730b69b64a6bbb1880785f463cc8
 msgid "**Type**: ``FDADrugLabel``"
-msgstr ""
+msgstr "**类型**：``FDADrugLabel``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:24 1327714c2bd24e969fdfedb858d8324c
 msgid ""
-"**Description**: Get information about drug abuse and dependence based on"
-" the drug name, specifically information on whether the drug is a "
-"controlled substances, the types of possible abuse, and adverse reactions"
-" relevant to those abuse types."
-msgstr ""
+"**Description**: Get information about drug abuse and dependence based on "
+"the drug name, specifically information on whether the drug is a controlled "
+"substances, the types of possible abuse, and adverse reactions relevant to "
+"those abuse types."
+msgstr "**描述**：根据药物名称获取有关药物滥用和依赖的信息，具体包括该药物是否属于管制药物、可能的滥用类型以及与这些滥用类型相关的不良反应。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:26
 #: ../../tools/fda_drug_labeling_tools.rst:62
@@ -774,7 +777,7 @@ msgstr ""
 #: fd4bf1b70ea348f993ace8237adf8f18 fd75420595d3437ab56521481241229e
 #: fecf82a495d14913a383e88a43eb0f92 ffdca0cd834e474da69d80b9b578c8c8
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/fda_drug_labeling_tools.rst:28
 #: ../../tools/fda_drug_labeling_tools.rst:64
@@ -891,7 +894,7 @@ msgstr ""
 #: f558c578265146eaace4057740aea7b4 f7484bf82ce0492f86d72613684bcd09
 #: f75169abd59f42328fb275e38e8bf0be fce5df2ab7394044ac2deec17d54dba9
 msgid "``drug_name`` (string) (optional) The name of the drug."
-msgstr ""
+msgstr "``drug_name``（字符串）（可选）药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:31
 #: ../../tools/fda_drug_labeling_tools.rst:67
@@ -1127,7 +1130,7 @@ msgstr ""
 #: fb18cb8a029642d2a1f89561700a404c fbc668bb2fdf49d097eda5090fff771a
 #: fe0ba356695d411794fd98cea91f8aa7
 msgid "``limit`` (integer) (optional) The number of records to return."
-msgstr ""
+msgstr "``limit``（整数）（可选）返回的记录数量。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:34
 #: ../../tools/fda_drug_labeling_tools.rst:70
@@ -1361,7 +1364,7 @@ msgstr ""
 #: faed4662b6794d6eb6df389895f286b8 fb968ec289c14010b0b8a434cdd222ba
 #: fb9a2fc51d8644fba76d5befc30870e3 fdb0689d328f4f299706e48f6c1f2418
 msgid "``skip`` (integer) (optional) The number of records to skip."
-msgstr ""
+msgstr "``skip``（整数）（可选）要跳过的记录数。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:37
 #: ../../tools/fda_drug_labeling_tools.rst:73
@@ -1598,79 +1601,85 @@ msgstr ""
 #: fde8b53db04e42788b1c259e22089265 fe3e0a8c132e4c809899639196dcfb24
 #: fe617bc93a37428fbb859d4a02320d90 fef0e582b2834fdebcbd375bd000caa9
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/fda_drug_labeling_tools.rst:50 30f4ed28f23c4938833b7f84d9b9b270
 msgid "**FDA_get_abuse_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_abuse_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:52 a9aae3fe22bb4a37bee94eca195a5e0c
 msgid "Retrieve information about types of abuse based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索有关滥用类型的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 94825ab3d9af4eeea79d91f276c77414
 msgid "FDA_get_abuse_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_abuse_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:58 dfaa0c71cc004403a4e59699b34bc3af
 msgid "**Name**: ``FDA_get_abuse_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_abuse_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:60 31c2a1e303824458934e2c4dbaa7e6e1
 msgid ""
-"**Description**: Retrieve information about types of abuse based on the "
-"drug name."
-msgstr ""
+"**Description**: Retrieve information about types of abuse based on the drug"
+" name."
+msgstr "**描述**：根据药物名称检索有关滥用类型的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:86 78346154c22a40d1a01cd3dc0e703f0a
 msgid "**FDA_get_accessories_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_accessories_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:88 8d3c8e20f28c47bd8d506304c0d25eb1
 msgid "Retrieve information about accessories based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索配件信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst da3b3dff831e4d9b97b396ed58c8aaea
 msgid "FDA_get_accessories_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_accessories_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:94 0ed95866b4264a81b889ea13a46a2684
 msgid "**Name**: ``FDA_get_accessories_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_accessories_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:96 ba664242a7df4101ae5a61f07ba47bda
 msgid ""
-"**Description**: Retrieve information about accessories based on the drug"
-" name."
-msgstr ""
+"**Description**: Retrieve information about accessories based on the drug "
+"name."
+msgstr "**描述**：根据药物名称检索配件信息。"
 
-#: ../../tools/fda_drug_labeling_tools.rst:122 f8252b14d04b42b9872f5cfde46e08df
+#: ../../tools/fda_drug_labeling_tools.rst:122
+#: f8252b14d04b42b9872f5cfde46e08df
 msgid "**FDA_get_active_ingredient_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_active_ingredient_info_by_drug_name**（类型：FDADrugLabel）"
 
-#: ../../tools/fda_drug_labeling_tools.rst:124 f0ad2bdbf41c43f8b5f35096da321d0a
+#: ../../tools/fda_drug_labeling_tools.rst:124
+#: f0ad2bdbf41c43f8b5f35096da321d0a
 msgid "Fetch a list of active ingredients in a specific drug product."
-msgstr ""
+msgstr "获取特定药品中活性成分的列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7cda21007e7c4257af0d35626e9342e9
 msgid "FDA_get_active_ingredient_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_active_ingredient_info_by_drug_name 工具规范"
 
-#: ../../tools/fda_drug_labeling_tools.rst:130 f98a39a9193a485db06c34651f188e9c
+#: ../../tools/fda_drug_labeling_tools.rst:130
+#: f98a39a9193a485db06c34651f188e9c
 msgid "**Name**: ``FDA_get_active_ingredient_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_active_ingredient_info_by_drug_name``"
 
-#: ../../tools/fda_drug_labeling_tools.rst:132 44d963a2e1884d76ade62fcb95f08407
+#: ../../tools/fda_drug_labeling_tools.rst:132
+#: 44d963a2e1884d76ade62fcb95f08407
 msgid ""
 "**Description**: Fetch a list of active ingredients in a specific drug "
 "product."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:158 e365034621ce4c2ea6482e8ea5476227
+#: ../../tools/fda_drug_labeling_tools.rst:158
+#: e365034621ce4c2ea6482e8ea5476227
 msgid "**FDA_get_adverse_reactions_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:160 24ec6ef4feda43e7854bc7da35b4946b
+#: ../../tools/fda_drug_labeling_tools.rst:160
+#: 24ec6ef4feda43e7854bc7da35b4946b
 msgid "Retrieve adverse reactions information based on the drug name."
 msgstr ""
 
@@ -1678,21 +1687,25 @@ msgstr ""
 msgid "FDA_get_adverse_reactions_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:166 05a2a41f8a0543adb7609c13b1e9b597
+#: ../../tools/fda_drug_labeling_tools.rst:166
+#: 05a2a41f8a0543adb7609c13b1e9b597
 msgid "**Name**: ``FDA_get_adverse_reactions_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:168 2c17e986e42c43bbb88ee8b2dd529b3c
+#: ../../tools/fda_drug_labeling_tools.rst:168
+#: 2c17e986e42c43bbb88ee8b2dd529b3c
 msgid ""
-"**Description**: Retrieve adverse reactions information based on the drug"
-" name."
+"**Description**: Retrieve adverse reactions information based on the drug "
+"name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:194 79183d18284f43e0a91c29fdb0907318
+#: ../../tools/fda_drug_labeling_tools.rst:194
+#: 79183d18284f43e0a91c29fdb0907318
 msgid "**FDA_get_alarms_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:196 4239666f5e514deb82b432b3b75ff990
+#: ../../tools/fda_drug_labeling_tools.rst:196
+#: 4239666f5e514deb82b432b3b75ff990
 msgid "Retrieve alarms based on the specified drug name."
 msgstr ""
 
@@ -1700,43 +1713,51 @@ msgstr ""
 msgid "FDA_get_alarms_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:202 2e5708b6efe34f91831ffe79bc9042d8
+#: ../../tools/fda_drug_labeling_tools.rst:202
+#: 2e5708b6efe34f91831ffe79bc9042d8
 msgid "**Name**: ``FDA_get_alarms_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:204 49d85a85efe94e658cf7ebca2d409081
+#: ../../tools/fda_drug_labeling_tools.rst:204
+#: 49d85a85efe94e658cf7ebca2d409081
 msgid "**Description**: Retrieve alarms based on the specified drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:230 d841eb06a254434f87556b4f5df3fa1a
+#: ../../tools/fda_drug_labeling_tools.rst:230
+#: d841eb06a254434f87556b4f5df3fa1a
 msgid "**FDA_get_animal_pharmacology_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:232 4cfdb176b35b4d589cae1835279040d1
+#: ../../tools/fda_drug_labeling_tools.rst:232
+#: 4cfdb176b35b4d589cae1835279040d1
 msgid ""
-"Retrieve animal pharmacology and toxicology information based on drug "
-"names."
+"Retrieve animal pharmacology and toxicology information based on drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 5392f90382774e7ba8d75eaf3e249366
 msgid "FDA_get_animal_pharmacology_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:238 c4a8e92395a64b0ea16943528a5a543a
+#: ../../tools/fda_drug_labeling_tools.rst:238
+#: c4a8e92395a64b0ea16943528a5a543a
 msgid "**Name**: ``FDA_get_animal_pharmacology_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:240 368d3b344fbf4e83bc5792aa042c36df
+#: ../../tools/fda_drug_labeling_tools.rst:240
+#: 368d3b344fbf4e83bc5792aa042c36df
 msgid ""
 "**Description**: Retrieve animal pharmacology and toxicology information "
 "based on drug names."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:266 59870b2f261d412582581c92a796dcc7
-msgid "**FDA_get_assembly_installation_info_by_drug_name** (Type: FDADrugLabel)"
+#: ../../tools/fda_drug_labeling_tools.rst:266
+#: 59870b2f261d412582581c92a796dcc7
+msgid ""
+"**FDA_get_assembly_installation_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:268 e624b9b3b4af46e58fd8c1dc2bfd9c58
+#: ../../tools/fda_drug_labeling_tools.rst:268
+#: e624b9b3b4af46e58fd8c1dc2bfd9c58
 msgid "Retrieve assembly or installation instructions based on drug names."
 msgstr ""
 
@@ -1744,75 +1765,87 @@ msgstr ""
 msgid "FDA_get_assembly_installation_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:274 c9b5171b84b64781b9d4eb9a4495a9bb
+#: ../../tools/fda_drug_labeling_tools.rst:274
+#: c9b5171b84b64781b9d4eb9a4495a9bb
 msgid "**Name**: ``FDA_get_assembly_installation_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:276 52f0e86e3244429f80b70961d2ad3138
+#: ../../tools/fda_drug_labeling_tools.rst:276
+#: 52f0e86e3244429f80b70961d2ad3138
 msgid ""
 "**Description**: Retrieve assembly or installation instructions based on "
 "drug names."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:302 ef1643edd72048afa3f74792e6f45736
+#: ../../tools/fda_drug_labeling_tools.rst:302
+#: ef1643edd72048afa3f74792e6f45736
 msgid "**FDA_get_boxed_warning_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:304 148fbdd585844eca96bfaa5d42e1b870
+#: ../../tools/fda_drug_labeling_tools.rst:304
+#: 148fbdd585844eca96bfaa5d42e1b870
 msgid ""
-"Retrieve boxed warning and adverse effects information for a specific "
-"drug."
+"Retrieve boxed warning and adverse effects information for a specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst adc555821baa4a438ea70b029f13d656
 msgid "FDA_get_boxed_warning_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:310 2c683b8e57774cd78f12f992f25dccad
+#: ../../tools/fda_drug_labeling_tools.rst:310
+#: 2c683b8e57774cd78f12f992f25dccad
 msgid "**Name**: ``FDA_get_boxed_warning_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:312 255671c8884b44e98c9340b44433cb27
+#: ../../tools/fda_drug_labeling_tools.rst:312
+#: 255671c8884b44e98c9340b44433cb27
 msgid ""
-"**Description**: Retrieve boxed warning and adverse effects information "
-"for a specific drug."
+"**Description**: Retrieve boxed warning and adverse effects information for "
+"a specific drug."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:338 752ffa3fc09c48069a58fdf92c5d5611
+#: ../../tools/fda_drug_labeling_tools.rst:338
+#: 752ffa3fc09c48069a58fdf92c5d5611
 msgid "**FDA_get_brand_name_generic_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:340 e13ff5a8b7a149a89c6b4081137cb9f1
+#: ../../tools/fda_drug_labeling_tools.rst:340
+#: e13ff5a8b7a149a89c6b4081137cb9f1
 msgid ""
-"Retrieve the brand name and generic name from generic name or brand name "
-"of a drug."
+"Retrieve the brand name and generic name from generic name or brand name of "
+"a drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst e6f962ddcb354e4692c62eee9a772a27
 msgid "FDA_get_brand_name_generic_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:346 acadc58898ba47ceafae3d7c4602bd76
+#: ../../tools/fda_drug_labeling_tools.rst:346
+#: acadc58898ba47ceafae3d7c4602bd76
 msgid "**Name**: ``FDA_get_brand_name_generic_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:348 da418d275d7d4b0da4c26fbc2b8a5e54
+#: ../../tools/fda_drug_labeling_tools.rst:348
+#: da418d275d7d4b0da4c26fbc2b8a5e54
 msgid ""
-"**Description**: Retrieve the brand name and generic name from generic "
-"name or brand name of a drug."
+"**Description**: Retrieve the brand name and generic name from generic name "
+"or brand name of a drug."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:352 2f7289df7b53462985bee2c012a4868f
+#: ../../tools/fda_drug_labeling_tools.rst:352
+#: 2f7289df7b53462985bee2c012a4868f
 msgid ""
-"``drug_name`` (string) (optional) The generic name or the brand name of "
-"the drug."
+"``drug_name`` (string) (optional) The generic name or the brand name of the "
+"drug."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:371 e8cfecd9422541d7945843abc770a214
+#: ../../tools/fda_drug_labeling_tools.rst:371
+#: e8cfecd9422541d7945843abc770a214
 msgid "**FDA_get_calibration_instructions_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:373 8a6d2b263c694549a75b798eac76fe53
+#: ../../tools/fda_drug_labeling_tools.rst:373
+#: 8a6d2b263c694549a75b798eac76fe53
 msgid "Retrieve calibration instructions based on the specified drug name."
 msgstr ""
 
@@ -1820,69 +1853,83 @@ msgstr ""
 msgid "FDA_get_calibration_instructions_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:379 e9cdfe4d936a41a3ae60e9824ffc5a2d
+#: ../../tools/fda_drug_labeling_tools.rst:379
+#: e9cdfe4d936a41a3ae60e9824ffc5a2d
 msgid "**Name**: ``FDA_get_calibration_instructions_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:381 5f4bda22d4a64b99be216c8e89d51280
+#: ../../tools/fda_drug_labeling_tools.rst:381
+#: 5f4bda22d4a64b99be216c8e89d51280
 msgid ""
-"**Description**: Retrieve calibration instructions based on the specified"
-" drug name."
+"**Description**: Retrieve calibration instructions based on the specified "
+"drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:407 e292a9c05d644c79b44e11f9e25ebf50
+#: ../../tools/fda_drug_labeling_tools.rst:407
+#: e292a9c05d644c79b44e11f9e25ebf50
 msgid ""
 "**FDA_get_carcinogenic_mutagenic_fertility_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:409 7d41d40f3f8846089412154ce3d188f7
+#: ../../tools/fda_drug_labeling_tools.rst:409
+#: 7d41d40f3f8846089412154ce3d188f7
 msgid ""
-"Retrieve carcinogenic, mutagenic, or fertility impairment information "
-"based on the drug name."
+"Retrieve carcinogenic, mutagenic, or fertility impairment information based "
+"on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 290293cf58ce43bf9cd0369c5b5ea4cd
-msgid "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name tool specification"
+msgid ""
+"FDA_get_carcinogenic_mutagenic_fertility_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:415 54fb5d33582549e48871a5d64101b5d4
+#: ../../tools/fda_drug_labeling_tools.rst:415
+#: 54fb5d33582549e48871a5d64101b5d4
 msgid "**Name**: ``FDA_get_carcinogenic_mutagenic_fertility_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:417 c64dff0e0d2d4f828a63cece0e029435
+#: ../../tools/fda_drug_labeling_tools.rst:417
+#: c64dff0e0d2d4f828a63cece0e029435
 msgid ""
-"**Description**: Retrieve carcinogenic, mutagenic, or fertility "
-"impairment information based on the drug name."
+"**Description**: Retrieve carcinogenic, mutagenic, or fertility impairment "
+"information based on the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:443 f6a78265542643af9babcc5881605ce3
+#: ../../tools/fda_drug_labeling_tools.rst:443
+#: f6a78265542643af9babcc5881605ce3
 msgid "**FDA_get_child_safety_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:445 ee2eda98c96f44e7bd57a7e055862cc8
-msgid "Retrieve child safety information for a specific drug based on its name."
+#: ../../tools/fda_drug_labeling_tools.rst:445
+#: ee2eda98c96f44e7bd57a7e055862cc8
+msgid ""
+"Retrieve child safety information for a specific drug based on its name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst d44c33a6107c4e358c783aba282509cd
 msgid "FDA_get_child_safety_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:451 27c53cfebad5413a80db176a17e252f8
+#: ../../tools/fda_drug_labeling_tools.rst:451
+#: 27c53cfebad5413a80db176a17e252f8
 msgid "**Name**: ``FDA_get_child_safety_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:453 6d717f4fb3534e05970f751b3dbe1341
+#: ../../tools/fda_drug_labeling_tools.rst:453
+#: 6d717f4fb3534e05970f751b3dbe1341
 msgid ""
-"**Description**: Retrieve child safety information for a specific drug "
-"based on its name."
+"**Description**: Retrieve child safety information for a specific drug based"
+" on its name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:479 edb9469d28cb47c8a00a27e1653c18a8
+#: ../../tools/fda_drug_labeling_tools.rst:479
+#: edb9469d28cb47c8a00a27e1653c18a8
 msgid "**FDA_get_clinical_pharmacology_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:481 c3ba1b34b84f484ba0a5ae0781935eb0
+#: ../../tools/fda_drug_labeling_tools.rst:481
+#: c3ba1b34b84f484ba0a5ae0781935eb0
 msgid "Retrieve clinical pharmacology information based on drug names."
 msgstr ""
 
@@ -1890,21 +1937,25 @@ msgstr ""
 msgid "FDA_get_clinical_pharmacology_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:487 e2b37c916dc943ceb52036d1584e609c
+#: ../../tools/fda_drug_labeling_tools.rst:487
+#: e2b37c916dc943ceb52036d1584e609c
 msgid "**Name**: ``FDA_get_clinical_pharmacology_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:489 d23b5553f40c40aaa64a0ed64a2489f6
+#: ../../tools/fda_drug_labeling_tools.rst:489
+#: d23b5553f40c40aaa64a0ed64a2489f6
 msgid ""
-"**Description**: Retrieve clinical pharmacology information based on drug"
-" names."
+"**Description**: Retrieve clinical pharmacology information based on drug "
+"names."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:515 5687a66a2b1a4e1facaccece30eed796
+#: ../../tools/fda_drug_labeling_tools.rst:515
+#: 5687a66a2b1a4e1facaccece30eed796
 msgid "**FDA_get_clinical_studies_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:517 7aad69fb59e34f2889a3bee510f28ab9
+#: ../../tools/fda_drug_labeling_tools.rst:517
+#: 7aad69fb59e34f2889a3bee510f28ab9
 msgid "Retrieve clinical studies information based on the drug name."
 msgstr ""
 
@@ -1912,45 +1963,54 @@ msgstr ""
 msgid "FDA_get_clinical_studies_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:523 d0582f4387324b52a98a9c2e3357f7aa
+#: ../../tools/fda_drug_labeling_tools.rst:523
+#: d0582f4387324b52a98a9c2e3357f7aa
 msgid "**Name**: ``FDA_get_clinical_studies_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:525 e47f6a659cb14187af76ce678835653c
+#: ../../tools/fda_drug_labeling_tools.rst:525
+#: e47f6a659cb14187af76ce678835653c
 msgid ""
 "**Description**: Retrieve clinical studies information based on the drug "
 "name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:551 de4492a744dc451faa82d068fc79e739
-msgid "**FDA_get_contact_for_questions_info_by_drug_name** (Type: FDADrugLabel)"
+#: ../../tools/fda_drug_labeling_tools.rst:551
+#: de4492a744dc451faa82d068fc79e739
+msgid ""
+"**FDA_get_contact_for_questions_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:553 acf2ffb9a270436eae0cec33b7f9fbfa
+#: ../../tools/fda_drug_labeling_tools.rst:553
+#: acf2ffb9a270436eae0cec33b7f9fbfa
 msgid ""
-"Retrieve information on who to contact with questions about the drug "
-"based on the provided drug n..."
+"Retrieve information on who to contact with questions about the drug based "
+"on the provided drug n..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ff8a2aa030384d86ad371a36449ee0b9
 msgid "FDA_get_contact_for_questions_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:559 c6920435cad7479c84cced231cf1bb19
+#: ../../tools/fda_drug_labeling_tools.rst:559
+#: c6920435cad7479c84cced231cf1bb19
 msgid "**Name**: ``FDA_get_contact_for_questions_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:561 e0e4b19c3ca345f9bf69b380b994f6be
+#: ../../tools/fda_drug_labeling_tools.rst:561
+#: e0e4b19c3ca345f9bf69b380b994f6be
 msgid ""
-"**Description**: Retrieve information on who to contact with questions "
-"about the drug based on the provided drug name."
+"**Description**: Retrieve information on who to contact with questions about"
+" the drug based on the provided drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:587 bb4c38928e854699ad8d55fc34292a4c
+#: ../../tools/fda_drug_labeling_tools.rst:587
+#: bb4c38928e854699ad8d55fc34292a4c
 msgid "**FDA_get_contraindications_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:589 308e2b203d064b2cb3afbf09f7d2b8f3
+#: ../../tools/fda_drug_labeling_tools.rst:589
+#: 308e2b203d064b2cb3afbf09f7d2b8f3
 msgid "Retrieve contraindications information based on the drug name."
 msgstr ""
 
@@ -1958,23 +2018,27 @@ msgstr ""
 msgid "FDA_get_contraindications_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:595 9a79870a72514bd6b3d433d9cb5fc0f0
+#: ../../tools/fda_drug_labeling_tools.rst:595
+#: 9a79870a72514bd6b3d433d9cb5fc0f0
 msgid "**Name**: ``FDA_get_contraindications_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:597 61faf66b51854ac1861975f411f371ac
+#: ../../tools/fda_drug_labeling_tools.rst:597
+#: 61faf66b51854ac1861975f411f371ac
 msgid ""
-"**Description**: Retrieve contraindications information based on the drug"
-" name."
+"**Description**: Retrieve contraindications information based on the drug "
+"name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:623 e271d2e2c7f7446aa9cf498b7567af0a
+#: ../../tools/fda_drug_labeling_tools.rst:623
+#: e271d2e2c7f7446aa9cf498b7567af0a
 msgid ""
 "**FDA_get_controlled_substance_DEA_schedule_info_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:625 112129598acd4515b26d854133f5e050
+#: ../../tools/fda_drug_labeling_tools.rst:625
+#: 112129598acd4515b26d854133f5e050
 msgid ""
 "Retrieve information about the controlled substance Drug Enforcement "
 "Administratino (DEA) schedul..."
@@ -1986,23 +2050,28 @@ msgid ""
 "specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:631 ba69d37de2de47b9802fd62eeb35703b
-msgid "**Name**: ``FDA_get_controlled_substance_DEA_schedule_info_by_drug_name``"
-msgstr ""
-
-#: ../../tools/fda_drug_labeling_tools.rst:633 520c81c3d5774455a4ab65f959575eed
+#: ../../tools/fda_drug_labeling_tools.rst:631
+#: ba69d37de2de47b9802fd62eeb35703b
 msgid ""
-"**Description**: Retrieve information about the controlled substance Drug"
-" Enforcement Administratino (DEA) schedule for a specific drug."
+"**Name**: ``FDA_get_controlled_substance_DEA_schedule_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:659 4f9330e75cb8435496d2dc0f4efecdb2
+#: ../../tools/fda_drug_labeling_tools.rst:633
+#: 520c81c3d5774455a4ab65f959575eed
+msgid ""
+"**Description**: Retrieve information about the controlled substance Drug "
+"Enforcement Administratino (DEA) schedule for a specific drug."
+msgstr ""
+
+#: ../../tools/fda_drug_labeling_tools.rst:659
+#: 4f9330e75cb8435496d2dc0f4efecdb2
 msgid ""
 "**FDA_get_dear_health_care_provider_letter_info_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:661 f2448ea0a3a043e98c60643c4b134739
+#: ../../tools/fda_drug_labeling_tools.rst:661
+#: f2448ea0a3a043e98c60643c4b134739
 msgid ""
 "Fetch information about dear health care provider letters for a specific "
 "drug. The letters are se..."
@@ -2014,22 +2083,27 @@ msgid ""
 "specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:667 8abc2094babf413fb9be881786a52fb3
-msgid "**Name**: ``FDA_get_dear_health_care_provider_letter_info_by_drug_name``"
-msgstr ""
-
-#: ../../tools/fda_drug_labeling_tools.rst:669 c027daca87774aa1a6359c988b22b6ef
+#: ../../tools/fda_drug_labeling_tools.rst:667
+#: 8abc2094babf413fb9be881786a52fb3
 msgid ""
-"**Description**: Fetch information about dear health care provider "
-"letters for a specific drug. The letters are sent by drug manufacturers "
-"to provide new or updated information about the drug."
+"**Name**: ``FDA_get_dear_health_care_provider_letter_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:695 9aab408e552c4301b0482f74380e33d4
+#: ../../tools/fda_drug_labeling_tools.rst:669
+#: c027daca87774aa1a6359c988b22b6ef
+msgid ""
+"**Description**: Fetch information about dear health care provider letters "
+"for a specific drug. The letters are sent by drug manufacturers to provide "
+"new or updated information about the drug."
+msgstr ""
+
+#: ../../tools/fda_drug_labeling_tools.rst:695
+#: 9aab408e552c4301b0482f74380e33d4
 msgid "**FDA_get_dependence_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:697 06bc3ac03dda4480a9da77a98366de6c
+#: ../../tools/fda_drug_labeling_tools.rst:697
+#: 06bc3ac03dda4480a9da77a98366de6c
 msgid ""
 "Retrieve information about dependence characteristics based on the drug "
 "name."
@@ -2039,67 +2113,80 @@ msgstr ""
 msgid "FDA_get_dependence_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:703 dd2bf566529d4f40bc82c297af05a205
+#: ../../tools/fda_drug_labeling_tools.rst:703
+#: dd2bf566529d4f40bc82c297af05a205
 msgid "**Name**: ``FDA_get_dependence_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:705 c4c08dcd714a4bd0ab4ccf6879f7fca8
+#: ../../tools/fda_drug_labeling_tools.rst:705
+#: c4c08dcd714a4bd0ab4ccf6879f7fca8
 msgid ""
-"**Description**: Retrieve information about dependence characteristics "
-"based on the drug name."
+"**Description**: Retrieve information about dependence characteristics based"
+" on the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:731 51aaccb63bff4b4d90866b77f5e0b71c
+#: ../../tools/fda_drug_labeling_tools.rst:731
+#: 51aaccb63bff4b4d90866b77f5e0b71c
 msgid "**FDA_get_disposal_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:733 7b4c5fd73a4746c69367967765112058
-msgid "Retrieve disposal and waste handling information based on the drug name."
+#: ../../tools/fda_drug_labeling_tools.rst:733
+#: 7b4c5fd73a4746c69367967765112058
+msgid ""
+"Retrieve disposal and waste handling information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 8fccfd403c954f829776d56ea22dd908
 msgid "FDA_get_disposal_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:739 a8f281c1aef046819ada273501724acd
+#: ../../tools/fda_drug_labeling_tools.rst:739
+#: a8f281c1aef046819ada273501724acd
 msgid "**Name**: ``FDA_get_disposal_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:741 127be7bd53cb447fb0dd4e3330fa82df
+#: ../../tools/fda_drug_labeling_tools.rst:741
+#: 127be7bd53cb447fb0dd4e3330fa82df
 msgid ""
-"**Description**: Retrieve disposal and waste handling information based "
-"on the drug name."
+"**Description**: Retrieve disposal and waste handling information based on "
+"the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:767 df41417a45054ea8836be1da4c18d0e4
+#: ../../tools/fda_drug_labeling_tools.rst:767
+#: df41417a45054ea8836be1da4c18d0e4
 msgid "**FDA_get_do_not_use_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:769 4168d2eda53040cd87e4b826530eb5b4
+#: ../../tools/fda_drug_labeling_tools.rst:769
+#: 4168d2eda53040cd87e4b826530eb5b4
 msgid ""
-"Retrieve information about all contraindications for use based on the "
-"drug name."
+"Retrieve information about all contraindications for use based on the drug "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 5b32aba64a40469abea8e61b3d7073cd
 msgid "FDA_get_do_not_use_info_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:775 e2548170615a4feba20ed0d610173db4
+#: ../../tools/fda_drug_labeling_tools.rst:775
+#: e2548170615a4feba20ed0d610173db4
 msgid "**Name**: ``FDA_get_do_not_use_info_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:777 8ce1e60ed8f54c6fb07a05f3a738a6b2
+#: ../../tools/fda_drug_labeling_tools.rst:777
+#: 8ce1e60ed8f54c6fb07a05f3a738a6b2
 msgid ""
-"**Description**: Retrieve information about all contraindications for use"
-" based on the drug name."
+"**Description**: Retrieve information about all contraindications for use "
+"based on the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:803 444d750d692e4299921fa2a5de36835e
+#: ../../tools/fda_drug_labeling_tools.rst:803
+#: 444d750d692e4299921fa2a5de36835e
 msgid "**FDA_get_document_id_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:805 72675609ec634c76a7a25dbcf5cecae7
+#: ../../tools/fda_drug_labeling_tools.rst:805
+#: 72675609ec634c76a7a25dbcf5cecae7
 msgid "Retrieve the document ID based on the drug name."
 msgstr ""
 
@@ -2107,21 +2194,24 @@ msgstr ""
 msgid "FDA_get_document_id_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:811 56ccda60a141417f912c596a90c85d36
+#: ../../tools/fda_drug_labeling_tools.rst:811
+#: 56ccda60a141417f912c596a90c85d36
 msgid "**Name**: ``FDA_get_document_id_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:813 0ba2e868dea343d08ea97a691aad1363
+#: ../../tools/fda_drug_labeling_tools.rst:813
+#: 0ba2e868dea343d08ea97a691aad1363
 msgid "**Description**: Retrieve the document ID based on the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:839 e8536665035c4eb78f02bed870e426c9
+#: ../../tools/fda_drug_labeling_tools.rst:839
+#: e8536665035c4eb78f02bed870e426c9
 msgid ""
-"**FDA_get_dosage_and_storage_information_by_drug_name** (Type: "
-"FDADrugLabel)"
+"**FDA_get_dosage_and_storage_information_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:841 3b438207fcbb49bfba502ff416cf4f9d
+#: ../../tools/fda_drug_labeling_tools.rst:841
+#: 3b438207fcbb49bfba502ff416cf4f9d
 msgid "Retrieve dosage and storage information for a specific drug."
 msgstr ""
 
@@ -2129,43 +2219,54 @@ msgstr ""
 msgid "FDA_get_dosage_and_storage_information_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:847 c8b6fb110ab3415c98fa94baaf2690a9
+#: ../../tools/fda_drug_labeling_tools.rst:847
+#: c8b6fb110ab3415c98fa94baaf2690a9
 msgid "**Name**: ``FDA_get_dosage_and_storage_information_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:849 dd42dab91e5f4fe18525148255a2feff
+#: ../../tools/fda_drug_labeling_tools.rst:849
+#: dd42dab91e5f4fe18525148255a2feff
 msgid ""
 "**Description**: Retrieve dosage and storage information for a specific "
 "drug."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:875 969e7c81fbbf40d8a7f7d01740bca67f
-msgid "**FDA_get_dosage_forms_and_strengths_by_drug_name** (Type: FDADrugLabel)"
+#: ../../tools/fda_drug_labeling_tools.rst:875
+#: 969e7c81fbbf40d8a7f7d01740bca67f
+msgid ""
+"**FDA_get_dosage_forms_and_strengths_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:877 56c8ab347615498595eedf81f3dbb8a7
-msgid "Retrieve dosage forms and strengths information based on the drug name."
+#: ../../tools/fda_drug_labeling_tools.rst:877
+#: 56c8ab347615498595eedf81f3dbb8a7
+msgid ""
+"Retrieve dosage forms and strengths information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst b717017c81f44cb7899acb4eb602dc53
 msgid "FDA_get_dosage_forms_and_strengths_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:883 a811dca7cd174d2e864c4271288b62c0
+#: ../../tools/fda_drug_labeling_tools.rst:883
+#: a811dca7cd174d2e864c4271288b62c0
 msgid "**Name**: ``FDA_get_dosage_forms_and_strengths_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:885 aefed70428ab4891b84ed03ae973fa62
+#: ../../tools/fda_drug_labeling_tools.rst:885
+#: aefed70428ab4891b84ed03ae973fa62
 msgid ""
-"**Description**: Retrieve dosage forms and strengths information based on"
-" the drug name."
+"**Description**: Retrieve dosage forms and strengths information based on "
+"the drug name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:911 cdd7bcb2d4f040939082ff787900df71
-msgid "**FDA_get_drug_generic_name** (Type: FDADrugLabelGetDrugGenericNameTool)"
+#: ../../tools/fda_drug_labeling_tools.rst:911
+#: cdd7bcb2d4f040939082ff787900df71
+msgid ""
+"**FDA_get_drug_generic_name** (Type: FDADrugLabelGetDrugGenericNameTool)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:913 b62e1d3d28e04adaaff0f5f705aa764c
+#: ../../tools/fda_drug_labeling_tools.rst:913
+#: b62e1d3d28e04adaaff0f5f705aa764c
 msgid "Get the drug’s generic name based on the drug's generic or brand name."
 msgstr ""
 
@@ -2173,29 +2274,36 @@ msgstr ""
 msgid "FDA_get_drug_generic_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:919 937a13d82de540fb8e679a9ca091500f
+#: ../../tools/fda_drug_labeling_tools.rst:919
+#: 937a13d82de540fb8e679a9ca091500f
 msgid "**Name**: ``FDA_get_drug_generic_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:920 eef08e8a03cd40ef9c1af0d784595272
+#: ../../tools/fda_drug_labeling_tools.rst:920
+#: eef08e8a03cd40ef9c1af0d784595272
 msgid "**Type**: ``FDADrugLabelGetDrugGenericNameTool``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:921 88e81b1bf20246ffa48c7152dacb3085
+#: ../../tools/fda_drug_labeling_tools.rst:921
+#: 88e81b1bf20246ffa48c7152dacb3085
 msgid ""
-"**Description**: Get the drug’s generic name based on the drug's generic "
-"or brand name."
+"**Description**: Get the drug’s generic name based on the drug's generic or "
+"brand name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:925 56f65c919fc24d61b92bbb076bd78ef6
-msgid "``drug_name`` (string) (optional) The generic or brand name of the drug."
+#: ../../tools/fda_drug_labeling_tools.rst:925
+#: 56f65c919fc24d61b92bbb076bd78ef6
+msgid ""
+"``drug_name`` (string) (optional) The generic or brand name of the drug."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:941 72e3b6a0ec9241c88354edbaafe92641
+#: ../../tools/fda_drug_labeling_tools.rst:941
+#: 72e3b6a0ec9241c88354edbaafe92641
 msgid "**FDA_get_drug_interactions_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:943 4a3137ebe59e43f78a9074e3d43b3b41
+#: ../../tools/fda_drug_labeling_tools.rst:943
+#: 4a3137ebe59e43f78a9074e3d43b3b41
 msgid "Retrieve drug interactions based on the specified drug name."
 msgstr ""
 
@@ -2203,21 +2311,25 @@ msgstr ""
 msgid "FDA_get_drug_interactions_by_drug_name tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:949 07d3eb1981064c7facf0d7da49878d8e
+#: ../../tools/fda_drug_labeling_tools.rst:949
+#: 07d3eb1981064c7facf0d7da49878d8e
 msgid "**Name**: ``FDA_get_drug_interactions_by_drug_name``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:951 43c21ef840124115867245995daa8d11
+#: ../../tools/fda_drug_labeling_tools.rst:951
+#: 43c21ef840124115867245995daa8d11
 msgid ""
 "**Description**: Retrieve drug interactions based on the specified drug "
 "name."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:977 6e6e09b024204f2d8006257f5395587f
+#: ../../tools/fda_drug_labeling_tools.rst:977
+#: 6e6e09b024204f2d8006257f5395587f
 msgid "**FDA_get_drug_name_by_SPL_ID** (Type: FDADrugLabel)"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:979 c86d109e15d44ffba362057f567adf29
+#: ../../tools/fda_drug_labeling_tools.rst:979
+#: c86d109e15d44ffba362057f567adf29
 msgid ""
 "Retrieve the drug name based on the FDA application number, NUI unique "
 "identifier, document ID of..."
@@ -2227,22 +2339,25 @@ msgstr ""
 msgid "FDA_get_drug_name_by_SPL_ID tool specification"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:985 1dc1898cd9a94728859585e0d9bbf093
+#: ../../tools/fda_drug_labeling_tools.rst:985
+#: 1dc1898cd9a94728859585e0d9bbf093
 msgid "**Name**: ``FDA_get_drug_name_by_SPL_ID``"
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:987 672d900c9c3f4cf69afe1fad07423a5a
+#: ../../tools/fda_drug_labeling_tools.rst:987
+#: 672d900c9c3f4cf69afe1fad07423a5a
 msgid ""
-"**Description**: Retrieve the drug name based on the FDA application "
-"number, NUI unique identifier, document ID of a specific version of the "
-"drug's Structured Product Label (SPL), or set ID of the drug's Structured"
-" Product Label that works across label versions."
+"**Description**: Retrieve the drug name based on the FDA application number,"
+" NUI unique identifier, document ID of a specific version of the drug's "
+"Structured Product Label (SPL), or set ID of the drug's Structured Product "
+"Label that works across label versions."
 msgstr ""
 
-#: ../../tools/fda_drug_labeling_tools.rst:991 7a4a9396dc5a481e85d4b3cb3c31fab1
+#: ../../tools/fda_drug_labeling_tools.rst:991
+#: 7a4a9396dc5a481e85d4b3cb3c31fab1
 msgid ""
-"``field_info`` (string) (optional) The specific field information to "
-"search for."
+"``field_info`` (string) (optional) The specific field information to search "
+"for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1013
@@ -2269,17 +2384,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1023
 #: bc5a30aee95d48ebbe4d5308087131cd
 msgid ""
-"**Description**: Retrieve the drug name based on specific adverse "
-"reactions reported. Warning: This tool only outputs a predefined limited "
-"number of drug names and does not cover all possible drugs. Use with "
-"caution."
+"**Description**: Retrieve the drug name based on specific adverse reactions "
+"reported. Warning: This tool only outputs a predefined limited number of "
+"drug names and does not cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1027
 #: 5cbd306fb14041078ffabb65d81c7bee
 msgid ""
-"``adverse_reaction`` (string) (optional) The adverse reaction to search "
-"for."
+"``adverse_reaction`` (string) (optional) The adverse reaction to search for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1049
@@ -2346,8 +2459,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1099
 #: 8fe8bf91df524c0590c87f55b0750901
 msgid ""
-"``dependence_info`` (string) (optional) Information related to "
-"psychological and physical dependence of the drug."
+"``dependence_info`` (string) (optional) Information related to psychological"
+" and physical dependence of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1121
@@ -2403,8 +2516,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1167
 #: 84313e9c7a1744608b21fe66526d5540
 msgid ""
-"**Description**: Retrieve the drug name based on dosage and "
-"administration information."
+"**Description**: Retrieve the drug name based on dosage and administration "
+"information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1171
@@ -2436,15 +2549,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1203
 #: 41bc62a931524684b8f9bd4c2cf45c75
 msgid ""
-"**Description**: Retrieve the drug name based on the specified "
-"environmental warnings."
+"**Description**: Retrieve the drug name based on the specified environmental"
+" warnings."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1207
 #: 5b2360b65c5343f0b38dddba95122b1c
 msgid ""
-"``environmental_warning`` (string) (optional) The environmental warning "
-"text to search for."
+"``environmental_warning`` (string) (optional) The environmental warning text"
+" to search for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1229
@@ -2483,8 +2596,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1265
 #: c91d4565678545b1b4773726df2bc09d
 msgid ""
-"**FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation** "
-"(Type: FDADrugLabel)"
+"**FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation** (Type: "
+"FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1267
@@ -2510,10 +2623,10 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1275
 #: 14fce85d854c48e1a881df30ab3a0e8e
 msgid ""
-"**Description**: Retrieve the drug names that require asking a doctor "
-"before use due to a patient's specific conditions and symptoms.  Warning:"
-" This tool only outputs a predefined limited number of drug names and "
-"does not cover all possible drugs. Use with caution."
+"**Description**: Retrieve the drug names that require asking a doctor before"
+" use due to a patient's specific conditions and symptoms.  Warning: This "
+"tool only outputs a predefined limited number of drug names and does not "
+"cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1279
@@ -2554,8 +2667,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1315
 #: 03f2f78b8bf4496a979bea015b9d3357
 msgid ""
-"``labor_and_delivery_info`` (string) (optional) Information about the "
-"drug’s use during labor or delivery."
+"``labor_and_delivery_info`` (string) (optional) Information about the drug’s"
+" use during labor or delivery."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1337
@@ -2599,8 +2712,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1375
 #: 05fa669d702d4821a93297082ae7696d
 msgid ""
-"Retrieve the drug name based on the provided safety information. This "
-"tool looks through safety i..."
+"Retrieve the drug name based on the provided safety information. This tool "
+"looks through safety i..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst fc251433c15640da8cd79647cbbde47d
@@ -2623,8 +2736,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1387
 #: 31ccc179b0a74f489b291fb1ec1ac6c0
 msgid ""
-"``safety_info`` (string) (optional) Information about safe use and "
-"handling of the product."
+"``safety_info`` (string) (optional) Information about safe use and handling "
+"of the product."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1409
@@ -2656,8 +2769,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1423
 #: f29d6f30b4ad4841bce573cdd07f938b
 msgid ""
-"``pharmacodynamics`` (string) (optional) Information about the "
-"biochemical or physiologic pharmacologic effects of the drug."
+"``pharmacodynamics`` (string) (optional) Information about the biochemical "
+"or physiologic pharmacologic effects of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1445
@@ -2722,8 +2835,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1495
 #: fef16d3a9c1a4b72b0265515687a8ed9
 msgid ""
-"``precautions`` (string) (optional) Information about any special care to"
-" be exercised for safe and effective use of the drug."
+"``precautions`` (string) (optional) Information about any special care to be"
+" exercised for safe and effective use of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1517
@@ -2735,11 +2848,13 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1519
 #: 507938d5d5284f249b386e8fb3a2277c
-msgid "Retrieve the drug names based on pregnancy or breastfeeding information."
+msgid ""
+"Retrieve the drug names based on pregnancy or breastfeeding information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst c7496198fa4e4399b9d01058d2ecfe4d
-msgid "FDA_get_drug_name_by_pregnancy_or_breastfeeding_info tool specification"
+msgid ""
+"FDA_get_drug_name_by_pregnancy_or_breastfeeding_info tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1525
@@ -2750,15 +2865,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1527
 #: fbcf71fd7c034a168ee63816ac396095
 msgid ""
-"**Description**: Retrieve the drug names based on pregnancy or "
-"breastfeeding information."
+"**Description**: Retrieve the drug names based on pregnancy or breastfeeding"
+" information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1531
 #: 6ac27cd1b21240ec9fd40707407b7160
 msgid ""
-"``pregnancy_info`` (string) (optional) Information related to pregnancy "
-"or breastfeeding."
+"``pregnancy_info`` (string) (optional) Information related to pregnancy or "
+"breastfeeding."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1553
@@ -2769,8 +2884,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1555
 #: be70b8938cca40e3aeebabcd6533fa36
 msgid ""
-"Retrieve the drug name based on the content of the principal display "
-"panel of the product package."
+"Retrieve the drug name based on the content of the principal display panel "
+"of the product package."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 29c215cf99354a1887a83862c51e708d
@@ -2792,8 +2907,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1567
 #: 1ea00dded0d74bb4b32f34985c9be8a2
 msgid ""
-"``display_panel_content`` (string) (optional) The content of the "
-"principal display panel of the product package."
+"``display_panel_content`` (string) (optional) The content of the principal "
+"display panel of the product package."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1589
@@ -2804,8 +2919,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1591
 #: 0332438902a44af49f3f2d37a7ef6a83
 msgid ""
-"Retrieve the drug name based on the reference information provided in the"
-" drug labeling."
+"Retrieve the drug name based on the reference information provided in the "
+"drug labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ea3256adbd2940dc88c4c9ec526630e4
@@ -2820,15 +2935,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1599
 #: 877792e3d2104979a91024a76084658f
 msgid ""
-"**Description**: Retrieve the drug name based on the reference "
-"information provided in the drug labeling."
+"**Description**: Retrieve the drug name based on the reference information "
+"provided in the drug labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1603
 #: 76aa1a34c68b4f7cbcf5afa962139113
 msgid ""
-"``reference`` (string) (optional) The reference information to search for"
-" in the drug labeling."
+"``reference`` (string) (optional) The reference information to search for in"
+" the drug labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1625
@@ -2853,15 +2968,14 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1635
 #: 8c16a1b0989749ca8998de13a1c768dc
 msgid ""
-"**Description**: Retrieve the drug name based on the Set ID of the "
-"labeling."
+"**Description**: Retrieve the drug name based on the Set ID of the labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1639
 #: 38c5a0de92c246fdaa61ce26b3d9aa37
 msgid ""
-"``set_id`` (string) (optional) The Set ID, a globally unique identifier "
-"for the labeling."
+"``set_id`` (string) (optional) The Set ID, a globally unique identifier for "
+"the labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1661
@@ -2886,20 +3000,21 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1671
 #: c916e2dca9ab4f9cabd27f38354cfd62
 msgid ""
-"**Description**: Retrieve the drug name based on the stop use information"
-" provided."
+"**Description**: Retrieve the drug name based on the stop use information "
+"provided."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1675
 #: bc338b1dd41545d38de1db80ed141419
 msgid ""
-"``stop_use_info`` (string) (optional) Information about when use of the "
-"drug product should be discontinued immediately and a doctor consulted."
+"``stop_use_info`` (string) (optional) Information about when use of the drug"
+" product should be discontinued immediately and a doctor consulted."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1697
 #: 364e66e1b3504cef86ec2ad56032bfb1
-msgid "**FDA_get_drug_name_by_storage_and_handling_info** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_name_by_storage_and_handling_info** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1699
@@ -2959,8 +3074,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1747
 #: 0783f4ce3cd840afbeda74b6bf6639c0
 msgid ""
-"``warning_text`` (string) (optional) The warning text to search for in "
-"the drug labeling."
+"``warning_text`` (string) (optional) The warning text to search for in the "
+"drug labeling."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1769
@@ -2987,8 +3102,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1779
 #: 2fda8262a6144e008b67bdf197836e73
 msgid ""
-"**Description**: Retrieve the drug name based on the information provided"
-" in the patient package insert."
+"**Description**: Retrieve the drug name based on the information provided in"
+" the patient package insert."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1783
@@ -3006,8 +3121,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1807
 #: bc632b347ecc4efe9999f9cb1ce85ca0
 msgid ""
-"Retrieve the drug name based on information about drug abuse and "
-"dependence, including whether th..."
+"Retrieve the drug name based on information about drug abuse and dependence,"
+" including whether th..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 8bc6dfa28e13462787b960399deb03fd
@@ -3023,9 +3138,9 @@ msgstr ""
 #: fdc3cecc59ea4b32ac89e9531a70f3f1
 msgid ""
 "**Description**: Retrieve the drug name based on information about drug "
-"abuse and dependence, including whether the drug is a controlled "
-"substances, the types of possible abuse, and adverse reactions relevant "
-"to those abuse types."
+"abuse and dependence, including whether the drug is a controlled substances,"
+" the types of possible abuse, and adverse reactions relevant to those abuse "
+"types."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1819
@@ -3043,8 +3158,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1843
 #: 50d4fb2c3f9b41fc8a6f32e8aee76fe2
 msgid ""
-"Retrieve drug names based on information about types of abuse and adverse"
-" reactions pertinent to ..."
+"Retrieve drug names based on information about types of abuse and adverse "
+"reactions pertinent to ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst a646a1e00e644928be33e2b0c286c4c6
@@ -3060,16 +3175,16 @@ msgstr ""
 #: 5566923ea15e4471bd1856ec513ac366
 msgid ""
 "**Description**: Retrieve drug names based on information about types of "
-"abuse and adverse reactions pertinent to those types of abuse. Warning: "
-"This tool only outputs a predefined limited number of drug names and does"
-" not cover all possible drugs. Use with caution."
+"abuse and adverse reactions pertinent to those types of abuse. Warning: This"
+" tool only outputs a predefined limited number of drug names and does not "
+"cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1855
 #: 6c28e442c1a54c4b84073570f5cf3428
 msgid ""
-"``abuse_info`` (string) (optional) Information about the types of abuse "
-"that can occur with the drug."
+"``abuse_info`` (string) (optional) Information about the types of abuse that"
+" can occur with the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1858
@@ -3144,7 +3259,8 @@ msgstr ""
 #: f02041c118944ca597b5a1edba62ad3d f790b64e8f414ce1a148d025bc8c0f0c
 #: f82b6737dfc04a64b95916f03b33622e fb797c6722244a76b1a07139874aff7f
 #: fdcf2a351644401787cddbd1123a9ef2 ff47d3fe2fd24d9f916acc2eda6c50fb
-msgid "``indication`` (string) (optional) The indication or usage of the drug."
+msgid ""
+"``indication`` (string) (optional) The indication or usage of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1880
@@ -3176,8 +3292,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1894
 #: bbb74e3774914750ac442b214eb5f892
 msgid ""
-"``accessory_name`` (string) (optional) The name or part of the name of "
-"the accessory."
+"``accessory_name`` (string) (optional) The name or part of the name of the "
+"accessory."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1919
@@ -3209,8 +3325,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:1933
 #: 0cf072e7d8674fb2abc3d55535b9d1a0
 msgid ""
-"``active_ingredient`` (string) (optional) The active ingredient in the "
-"drug product."
+"``active_ingredient`` (string) (optional) The active ingredient in the drug "
+"product."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1958
@@ -3239,8 +3355,8 @@ msgstr ""
 msgid ""
 "**Description**: Retrieve drug names based on the presence of specific "
 "alarms, which are related to adverse reaction events. Warning: This tool "
-"only outputs a predefined limited number of drug names and does not cover"
-" all possible drugs. Use with caution."
+"only outputs a predefined limited number of drug names and does not cover "
+"all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1972
@@ -3250,14 +3366,15 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1997
 #: 654af7d3a71b46e385efd1c1380b5292
-msgid "**FDA_get_drug_names_by_animal_pharmacology_info** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_names_by_animal_pharmacology_info** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:1999
 #: 841dd8ba4d58426cbeadc7ca88af6b51
 msgid ""
-"Retrieve drug names based on animal pharmacology and toxicology "
-"information.  Warning: This tool ..."
+"Retrieve drug names based on animal pharmacology and toxicology information."
+"  Warning: This tool ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst bdf6d695b09b4667ba8ab94bafe01e13
@@ -3274,22 +3391,21 @@ msgstr ""
 msgid ""
 "**Description**: Retrieve drug names based on animal pharmacology and "
 "toxicology information.  Warning: This tool only outputs a predefined "
-"limited number of drug names and does not cover all possible drugs. Use "
-"with caution."
+"limited number of drug names and does not cover all possible drugs. Use with"
+" caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2011
 #: 5279d7e993164fdb935a56d024a65fe2
 msgid ""
-"``pharmacology_info`` (string) (optional) Information from studies of the"
-" drug in animals."
+"``pharmacology_info`` (string) (optional) Information from studies of the "
+"drug in animals."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2036
 #: 2e43fe7d7fed4ffc90b25ecca2b97cb8
 msgid ""
-"**FDA_get_drug_names_by_application_number_NDC_number** (Type: "
-"FDADrugLabel)"
+"**FDA_get_drug_names_by_application_number_NDC_number** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2038
@@ -3311,8 +3427,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2046
 #: 5d0ee2baf1034a7e95877f9ab30f773d
 msgid ""
-"**Description**: Retrieve drug names based on the specified FDA "
-"application number or National Drug Code (NDC) number."
+"**Description**: Retrieve drug names based on the specified FDA application "
+"number or National Drug Code (NDC) number."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2050
@@ -3324,14 +3440,15 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2072
 #: f6815d6fd5454472a14ef25373267e94
-msgid "**FDA_get_drug_names_by_assembly_installation_info** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_names_by_assembly_installation_info** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2074
 #: 1823f82dda014fbab70618c1f8a58475
 msgid ""
-"Retrieve drug names based on assembly or installation instructions. "
-"Warning: This tool only outpu..."
+"Retrieve drug names based on assembly or installation instructions. Warning:"
+" This tool only outpu..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ce9fbf283551478884ec4464de61e438
@@ -3347,8 +3464,8 @@ msgstr ""
 #: f904e618156f4383a496ceced90383fd
 msgid ""
 "**Description**: Retrieve drug names based on assembly or installation "
-"instructions. Warning: This tool only outputs a predefined limited number"
-" of drug names and does not cover all possible drugs. Use with caution."
+"instructions. Warning: This tool only outputs a predefined limited number of"
+" drug names and does not cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2086
@@ -3365,7 +3482,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2113
 #: 79c05736779c40a1b18e107b54c70402
-msgid "Retrieve drug names that have specific boxed warnings and adverse effects."
+msgid ""
+"Retrieve drug names that have specific boxed warnings and adverse effects."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 10634096cc794e55991f66842e85df8c
@@ -3380,15 +3498,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2121
 #: f6b5f48b747744c18448d92e27c59b49
 msgid ""
-"**Description**: Retrieve drug names that have specific boxed warnings "
-"and adverse effects."
+"**Description**: Retrieve drug names that have specific boxed warnings and "
+"adverse effects."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2125
 #: fea89186c18b465d92233287ea5d7480
 msgid ""
-"``warning_text`` (string) (optional) The text of the boxed warning to "
-"search for."
+"``warning_text`` (string) (optional) The text of the boxed warning to search"
+" for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2150
@@ -3399,8 +3517,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2152
 #: c99c02cfbf1a43eaa0016e7988487cc1
 msgid ""
-"Retrieve drug names based on whether the product should be kept out of "
-"the reach of children and ..."
+"Retrieve drug names based on whether the product should be kept out of the "
+"reach of children and ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 7c602f68ec82427bbdc636754085a83c
@@ -3415,16 +3533,16 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2160
 #: 8d72d7ff478246409b3f2fbb7d8b1b56
 msgid ""
-"**Description**: Retrieve drug names based on whether the product should "
-"be kept out of the reach of children and instructions about what to do in"
-" the case of accidental contact or ingestion."
+"**Description**: Retrieve drug names based on whether the product should be "
+"kept out of the reach of children and instructions about what to do in the "
+"case of accidental contact or ingestion."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2164
 #: bdbffd43008f40a8925c424558c348c7
 msgid ""
-"``child_safety_info`` (string) (optional) Information pertaining to "
-"whether the product should be kept out of the reach of children."
+"``child_safety_info`` (string) (optional) Information pertaining to whether "
+"the product should be kept out of the reach of children."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2189
@@ -3452,15 +3570,15 @@ msgstr ""
 #: efe648831f314545aa876a5630969294
 msgid ""
 "**Description**: Retrieve drug names based on clinical pharmacology "
-"information. Warning: This tool only outputs a predefined limited number "
-"of drug names and does not cover all possible drugs. Use with caution."
+"information. Warning: This tool only outputs a predefined limited number of "
+"drug names and does not cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2203
 #: be82d0f3a25d441a80caffdd1931c701
 msgid ""
-"``clinical_pharmacology`` (string) (optional) Information about the "
-"clinical pharmacology and actions of the drug in humans. Use key words"
+"``clinical_pharmacology`` (string) (optional) Information about the clinical"
+" pharmacology and actions of the drug in humans. Use key words"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2228
@@ -3470,7 +3588,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2230
 #: 2583eaafc1354e7291ff9ae8241ec690
-msgid "Retrieve drug names based on the presence of clinical studies information."
+msgid ""
+"Retrieve drug names based on the presence of clinical studies information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst af3dbfe04541497b9ef6da696830b020
@@ -3506,12 +3625,13 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2269
 #: 47ec27f68ec94177afb4ae03878db64a
 msgid ""
-"Retrieve drug names based on information about when a doctor or "
-"pharmacist should be consulted re..."
+"Retrieve drug names based on information about when a doctor or pharmacist "
+"should be consulted re..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ce9a4868088449cebe0915a55659eda6
-msgid "FDA_get_drug_names_by_consulting_doctor_pharmacist_info tool specification"
+msgid ""
+"FDA_get_drug_names_by_consulting_doctor_pharmacist_info tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2275
@@ -3524,15 +3644,15 @@ msgstr ""
 msgid ""
 "**Description**: Retrieve drug names based on information about when a "
 "doctor or pharmacist should be consulted regarding drug interactions. "
-"Warning: This tool only outputs a predefined limited number of drug names"
-" and does not cover all possible drugs. Use with caution."
+"Warning: This tool only outputs a predefined limited number of drug names "
+"and does not cover all possible drugs. Use with caution."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2281
 #: b12516458a6f400f86b5855e7c2b78fe
 msgid ""
-"``interaction_info`` (string) (optional) Information about when a doctor "
-"or pharmacist should be consulted regarding drug interactions."
+"``interaction_info`` (string) (optional) Information about when a doctor or "
+"pharmacist should be consulted regarding drug interactions."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2306
@@ -3564,8 +3684,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2320
 #: 92f5a61ac4cf49c9ab31068821e267c2
 msgid ""
-"``contraindication_info`` (string) (optional) Information about "
-"situations in which the drug product is contraindicated."
+"``contraindication_info`` (string) (optional) Information about situations "
+"in which the drug product is contraindicated."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2345
@@ -3583,7 +3703,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ef36c35d8c8343b9a0fe73da47738f45
-msgid "FDA_get_drug_names_by_controlled_substance_DEA_schedule tool specification"
+msgid ""
+"FDA_get_drug_names_by_controlled_substance_DEA_schedule tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2353
@@ -3601,8 +3722,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2359
 #: 491ae67a052949bfad2814004fb45d36
 msgid ""
-"``controlled_substance_schedule`` (string) (optional) The schedule in "
-"which the drug is controlled by the Drug Enforcement Administration."
+"``controlled_substance_schedule`` (string) (optional) The schedule in which "
+"the drug is controlled by the Drug Enforcement Administration."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2384
@@ -3627,15 +3748,16 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2392
 #: 5d66ca9ee1e54374b2e2b745ecb0515e
-msgid "**Name**: ``FDA_get_drug_names_by_dear_health_care_provider_letter_info``"
+msgid ""
+"**Name**: ``FDA_get_drug_names_by_dear_health_care_provider_letter_info``"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2394
 #: f9783d0c8d1e43d69387b0cb3eccf215
 msgid ""
 "**Description**: Fetch drug names based on information about dear health "
-"care provider letters. The letters are sent by drug manufacturers to "
-"provide new or updated information about the drug."
+"care provider letters. The letters are sent by drug manufacturers to provide"
+" new or updated information about the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2398
@@ -3667,15 +3789,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2433
 #: ae77747540bf4d709fa8539a1eb9aea6
 msgid ""
-"**Description**: Retrieve drug names based on disposal and waste handling"
-" information."
+"**Description**: Retrieve drug names based on disposal and waste handling "
+"information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2437
 #: b4e2a6ec22434a2492ed0ae4483cf8fd
 msgid ""
-"``disposal_info`` (string) (optional) Information related to the disposal"
-" and waste handling of the drug."
+"``disposal_info`` (string) (optional) Information related to the disposal "
+"and waste handling of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2462
@@ -3693,7 +3815,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst b7b8947370ef493b8316c3f571c6ffad
-msgid "FDA_get_drug_names_by_dosage_forms_and_strengths_info tool specification"
+msgid ""
+"FDA_get_drug_names_by_dosage_forms_and_strengths_info tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2470
@@ -3722,7 +3845,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2503
 #: d53b6d1bafe9404c9cae1645573f76d9
-msgid "Retrieve a list of drug names that have the specified drug interactions."
+msgid ""
+"Retrieve a list of drug names that have the specified drug interactions."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 63d1d984dbce4992b1c49ea1a95089eb
@@ -3737,8 +3861,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2511
 #: c03cc92e49074ecb8016252d4fec256e
 msgid ""
-"**Description**: Retrieve a list of drug names that have the specified "
-"drug interactions."
+"**Description**: Retrieve a list of drug names that have the specified drug "
+"interactions."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2515
@@ -3755,7 +3879,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2542
 #: f764c18a7bb94a3bbeac9454ccabd5bd
-msgid "Retrieve drug names based on the effective time of the labeling document."
+msgid ""
+"Retrieve drug names based on the effective time of the labeling document."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 01c8ecd94cc94e05ac8c39f5476584a9
@@ -3803,8 +3928,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2589
 #: 103c7d3c4291417884f1ca9bb1940d28
 msgid ""
-"**Description**: Retrieve drug names based on specific food safety "
-"warnings."
+"**Description**: Retrieve drug names based on specific food safety warnings."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2593
@@ -3836,15 +3960,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2628
 #: 49dc17806b014625a67318d04adb45e7
 msgid ""
-"**Description**: Retrieve drug names based on specific general "
-"precautions information."
+"**Description**: Retrieve drug names based on specific general precautions "
+"information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2632
 #: 3bcbcd8246414f5782db860459894be8
 msgid ""
-"``precaution_info`` (string) (optional) Information about any special "
-"care to be exercised for safe and effective use of the drug."
+"``precaution_info`` (string) (optional) Information about any special care "
+"to be exercised for safe and effective use of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2657
@@ -3854,7 +3978,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2659
 #: 09e3a26aa34447bfab384b4db060be26
-msgid "Retrieve drug names that have specific information about geriatric use."
+msgid ""
+"Retrieve drug names that have specific information about geriatric use."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst bb6a6fe1d4314ea5ab2e11d46eb1da66
@@ -3869,16 +3994,16 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2667
 #: ad6931ebd2a94c86a6fadccb8098ef1e
 msgid ""
-"**Description**: Retrieve drug names that have specific information about"
-" geriatric use."
+"**Description**: Retrieve drug names that have specific information about "
+"geriatric use."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2671
 #: 818eda959319469a9cd99268a1725b62
 msgid ""
-"``geriatric_use`` (string) (optional) Information about any limitations "
-"on any geriatric indications, needs for specific monitoring, hazards "
-"associated with use of the drug in the geriatric population."
+"``geriatric_use`` (string) (optional) Information about any limitations on "
+"any geriatric indications, needs for specific monitoring, hazards associated"
+" with use of the drug in the geriatric population."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2696
@@ -3908,8 +4033,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2710
 #: 75fc7cde328d4b4b8766d7934f588d6a
 msgid ""
-"``health_claim`` (string) (optional) The health claim associated with the"
-" drug."
+"``health_claim`` (string) (optional) The health claim associated with the "
+"drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2735
@@ -3940,7 +4065,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2771
 #: 735e67a3504f4f5d8816a5b8e7d5241c
-msgid "**FDA_get_drug_names_by_info_for_nursing_mothers** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_names_by_info_for_nursing_mothers** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2773
@@ -3960,15 +4086,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2781
 #: 78578262f04f4b74bc77f7010cd75ebb
 msgid ""
-"**Description**: Retrieve drug names based on information related to "
-"nursing mothers."
+"**Description**: Retrieve drug names based on information related to nursing"
+" mothers."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2785
 #: 364a40b3b46a4ce9a674a97be53fc1e4
 msgid ""
-"``nursing_mothers_info`` (string) (optional) Information about excretion "
-"of the drug in human milk and effects on the nursing infant."
+"``nursing_mothers_info`` (string) (optional) Information about excretion of "
+"the drug in human milk and effects on the nursing infant."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2810
@@ -3991,7 +4117,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2818
 #: 88734c56635a4908918cafc435885e76
-msgid "**Name**: ``FDA_get_drug_names_by_information_for_owners_or_caregivers``"
+msgid ""
+"**Name**: ``FDA_get_drug_names_by_information_for_owners_or_caregivers``"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2820
@@ -4032,15 +4159,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2859
 #: 0584dcca58444819a8273f171b165bae
 msgid ""
-"**Description**: Retrieve drug names based on a specific ingredient "
-"present in the drug product."
+"**Description**: Retrieve drug names based on a specific ingredient present "
+"in the drug product."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2863
 #: df27e710c98a46bbb0448a8f51c089c3
 msgid ""
-"``ingredient_name`` (string) (optional) The name of the ingredient to "
-"search for in drug products."
+"``ingredient_name`` (string) (optional) The name of the ingredient to search"
+" for in drug products."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2888
@@ -4065,15 +4192,14 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2898
 #: 2f374397214a4ff5af04e1cd801aa7dd
 msgid ""
-"**Description**: Retrieve drug names based on specific instructions for "
-"use."
+"**Description**: Retrieve drug names based on specific instructions for use."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2902
 #: 36cb5ca731e94210a84adc38e1ca2578
 msgid ""
-"``instructions_for_use`` (string) (optional) Information about safe "
-"handling and use of the drug product."
+"``instructions_for_use`` (string) (optional) Information about safe handling"
+" and use of the drug product."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2927
@@ -4083,7 +4209,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2929
 #: 6e1824c0440e4caab9049c2f77e23ca9
-msgid "Retrieve drug names that have known interference with laboratory tests."
+msgid ""
+"Retrieve drug names that have known interference with laboratory tests."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst a93e854ba9ee43f3b665908ad42caf82
@@ -4105,8 +4232,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2941
 #: 48bca74996234d48a9d60c244555a748
 msgid ""
-"``lab_test_interference`` (string) (optional) Information about any known"
-" interference by the drug with laboratory tests."
+"``lab_test_interference`` (string) (optional) Information about any known "
+"interference by the drug with laboratory tests."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2966
@@ -4131,8 +4258,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:2976
 #: f88cfb05113f45ff9e0182f43fb2b6d8
 msgid ""
-"**Description**: Retrieve drug names based on laboratory tests "
-"information."
+"**Description**: Retrieve drug names based on laboratory tests information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:2980
@@ -4150,8 +4276,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3007
 #: 54b1823d93ca4c15a4e1cbef78688734
 msgid ""
-"Retrieve drug names based on the specified mechanism of action "
-"information."
+"Retrieve drug names based on the specified mechanism of action information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 4da191f198fe4636987728a1d0fae218
@@ -4173,8 +4298,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3019
 #: e076818db7d1482e9b796e45d7da9a3a
 msgid ""
-"``mechanism_info`` (string) (optional) Information related to the desired"
-" mechanism of action."
+"``mechanism_info`` (string) (optional) Information related to the desired "
+"mechanism of action."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3044
@@ -4214,7 +4339,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3083
 #: db1a1ed8e2504277b043dd6d53ca5bd4
-msgid "**FDA_get_drug_names_by_nonclinical_toxicology_info** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_names_by_nonclinical_toxicology_info** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3085
@@ -4241,8 +4367,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3097
 #: a3cdc7a239d744d3af12903041895299
 msgid ""
-"``toxicology_info`` (string) (optional) Information about toxicology in "
-"non-human subjects."
+"``toxicology_info`` (string) (optional) Information about toxicology in non-"
+"human subjects."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3122
@@ -4269,15 +4395,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3132
 #: 1dc7db9c261d4c14910b77d34e25942b
 msgid ""
-"**Description**: Retrieve drug names based on the presence of "
-"nonteratogenic effects information."
+"**Description**: Retrieve drug names based on the presence of nonteratogenic"
+" effects information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3136
 #: f6ee2146edfc46568e7ef8644d2385d1
 msgid ""
-"``nonteratogenic_effects`` (string) (optional) Information about the "
-"drug’s nonteratogenic effects."
+"``nonteratogenic_effects`` (string) (optional) Information about the drug’s "
+"nonteratogenic effects."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3161
@@ -4311,8 +4437,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3175
 #: 0b496d562619437f9764359f73dd4dae
 msgid ""
-"``overdosage_info`` (string) (optional) Information about signs, "
-"symptoms, and laboratory findings of acute overdosage."
+"``overdosage_info`` (string) (optional) Information about signs, symptoms, "
+"and laboratory findings of acute overdosage."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3200
@@ -4336,14 +4462,15 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3210
 #: 8c4ce0839c354da3bc5f44a80d426d21
-msgid "**Description**: Retrieve drug names based on pediatric use information."
+msgid ""
+"**Description**: Retrieve drug names based on pediatric use information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3214
 #: 9c092ba02b96449db74ff26c64cd42cd
 msgid ""
-"``pediatric_use_info`` (string) (optional) Information related to the "
-"safe and effective pediatric use of the drug."
+"``pediatric_use_info`` (string) (optional) Information related to the safe "
+"and effective pediatric use of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3239
@@ -4354,8 +4481,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3241
 #: d0066c4f97b54e1c8300eee62a03a5a4
 msgid ""
-"Retrieve drug names based on specific pharmacokinetics information, such "
-"as absorption, distribut..."
+"Retrieve drug names based on specific pharmacokinetics information, such as "
+"absorption, distribut..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 7732d6d12520484f8c0804a3955ac562
@@ -4371,8 +4498,8 @@ msgstr ""
 #: 9c4a9ba5e9fa4e2da11e5caac00a8c12
 msgid ""
 "**Description**: Retrieve drug names based on specific pharmacokinetics "
-"information, such as absorption, distribution, elimination, metabolism, "
-"drug interactions, and specific patient populations."
+"information, such as absorption, distribution, elimination, metabolism, drug"
+" interactions, and specific patient populations."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3253
@@ -4407,15 +4534,15 @@ msgstr ""
 #: 467fe3242a5a4e3d8f3ac9980e15a355
 msgid ""
 "**Description**: Retrieve drug names based on their use in specific "
-"populations, such as pregnant women, nursing mothers, pediatric patients,"
-" and geriatric patients."
+"populations, such as pregnant women, nursing mothers, pediatric patients, "
+"and geriatric patients."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3292
 #: 555f139065944ed1b21ab21414a65537
 msgid ""
-"``population_use`` (string) (optional) The specific population use to "
-"search for (e.g., pregnant women, nursing mothers)."
+"``population_use`` (string) (optional) The specific population use to search"
+" for (e.g., pregnant women, nursing mothers)."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3317
@@ -4426,8 +4553,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3319
 #: 11f847594cb149cca8343a5d8b03fea1
 msgid ""
-"Retrieve drug names based on information about effects the drug may have "
-"on pregnant women or on ..."
+"Retrieve drug names based on information about effects the drug may have on "
+"pregnant women or on ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 2e9b4f39f5c54968ae5e4f88efca7188
@@ -4442,8 +4569,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3327
 #: a5a4ceada53b4df5a6699016279a84d5
 msgid ""
-"**Description**: Retrieve drug names based on information about effects "
-"the drug may have on pregnant women or on a fetus."
+"**Description**: Retrieve drug names based on information about effects the "
+"drug may have on pregnant women or on a fetus."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3331
@@ -4482,8 +4609,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3370
 #: c9b2cdc0c08e4ef0834c31f4c155bb1e
 msgid ""
-"``residue_warning`` (string) (optional) The residue warning information "
-"to search for."
+"``residue_warning`` (string) (optional) The residue warning information to "
+"search for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3395
@@ -4494,8 +4621,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3397
 #: 17782cfa8519422fa21376a5da7ccf73
 msgid ""
-"Retrieve drug names based on specific risk information, especially "
-"regarding pregnancy or breastf..."
+"Retrieve drug names based on specific risk information, especially regarding"
+" pregnancy or breastf..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 77a5dc40657c466dad5af03d993e5bf6
@@ -4516,7 +4643,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3409
 #: d3424bcbab93407f95a0490594d14a69
-msgid "``risk_info`` (string) (optional) Specific risk information to search for."
+msgid ""
+"``risk_info`` (string) (optional) Specific risk information to search for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3434
@@ -4614,20 +4742,21 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3526
 #: c12b8911b4764866b70f02f32ad2af3c
 msgid ""
-"``summary_text`` (string) (optional) Text to search within the summary of"
-" safety and effectiveness field."
+"``summary_text`` (string) (optional) Text to search within the summary of "
+"safety and effectiveness field."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3551
 #: 2cdd2f176b0e430a90b4ec6dcb820889
-msgid "**FDA_get_drug_names_by_spl_indexing_data_elements** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drug_names_by_spl_indexing_data_elements** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3553
 #: f2d0534cb9b145f4810c4876f54fcfcc
 msgid ""
-"Retrieve drug names based on Structured Product Labeling (SPL) indexing "
-"data elements."
+"Retrieve drug names based on Structured Product Labeling (SPL) indexing data"
+" elements."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 5ae17725aa404880b860b12a0d33c99e
@@ -4642,8 +4771,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3561
 #: 91d71b394129460494ac21b42ff515c2
 msgid ""
-"**Description**: Retrieve drug names based on Structured Product Labeling"
-" (SPL) indexing data elements."
+"**Description**: Retrieve drug names based on Structured Product Labeling "
+"(SPL) indexing data elements."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3565
@@ -4675,15 +4804,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3600
 #: 3bc575252f224dacb63595b5704fdd02
 msgid ""
-"**Description**: Retrieve drug names based on specific teratogenic "
-"effects categories."
+"**Description**: Retrieve drug names based on specific teratogenic effects "
+"categories."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3604
 #: 898ccbca3daf435396851040673bed09
 msgid ""
-"``teratogenic_effects`` (string) (optional) The teratogenic effects "
-"category to search for (e.g., Pregnancy category A, B, C, D, or X)."
+"``teratogenic_effects`` (string) (optional) The teratogenic effects category"
+" to search for (e.g., Pregnancy category A, B, C, D, or X)."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3629
@@ -4715,8 +4844,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3643
 #: 4f0f34a19d34422fa8ea752ad6d94b19
 msgid ""
-"``safety_warning`` (string) (optional) The specific safety warning to "
-"search for."
+"``safety_warning`` (string) (optional) The specific safety warning to search"
+" for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3668
@@ -4726,7 +4855,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3670
 #: 5500d795b4bc44d791966cb0e18f4b7d
-msgid "Retrieve drug names based on specific warnings and cautions information."
+msgid ""
+"Retrieve drug names based on specific warnings and cautions information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst a574b1a234064465b009f9716660d084
@@ -4741,20 +4871,21 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3678
 #: a1be1265e23b463289cb41995dc26ac5
 msgid ""
-"**Description**: Retrieve drug names based on specific warnings and "
-"cautions information."
+"**Description**: Retrieve drug names based on specific warnings and cautions"
+" information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3682
 #: 5e2f4a90952b45fdacdab92f3654b3d3
 msgid ""
-"``warnings_and_cautions_info`` (string) (optional) The warnings and "
-"cautions text to search for."
+"``warnings_and_cautions_info`` (string) (optional) The warnings and cautions"
+" text to search for."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3707
 #: 3d584fcc37494b0c85db8813c585076e
-msgid "**FDA_get_drugs_by_carcinogenic_mutagenic_fertility** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_drugs_by_carcinogenic_mutagenic_fertility** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3709
@@ -4776,15 +4907,15 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3717
 #: fe337123307c42918c0bb3cb67535970
 msgid ""
-"**Description**: Retrieve drug names based on the presence of "
-"carcinogenic, mutagenic, or fertility impairment information."
+"**Description**: Retrieve drug names based on the presence of carcinogenic, "
+"mutagenic, or fertility impairment information."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3721
 #: 8b462f56d29540cab7a122627eea717a
 msgid ""
-"``carcinogenic_info`` (string) (optional) Information about carcinogenic,"
-" mutagenic, or fertility impairment potential."
+"``carcinogenic_info`` (string) (optional) Information about carcinogenic, "
+"mutagenic, or fertility impairment potential."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3746
@@ -4794,7 +4925,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3748
 #: 4763d6af38e945cbbebc753ab790e5b3
-msgid "Retrieve effective time of the labeling document based on the drug name."
+msgid ""
+"Retrieve effective time of the labeling document based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 57336f2630f348f494becc244470090c
@@ -4809,8 +4941,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3756
 #: 5219cc827dd443c1a239f2265c911d9e
 msgid ""
-"**Description**: Retrieve effective time of the labeling document based "
-"on the drug name."
+"**Description**: Retrieve effective time of the labeling document based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3782
@@ -4835,8 +4967,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3792
 #: 3452dc3b538e4f03a372174ac5ec569e
 msgid ""
-"**Description**: Fetch environmental warnings for a specific drug based "
-"on its name."
+"**Description**: Fetch environmental warnings for a specific drug based on "
+"its name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3818
@@ -4861,8 +4993,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3828
 #: ad010e361ef347ee83874f67855c90f6
 msgid ""
-"**Description**: Retrieve general precautions information based on the "
-"drug name."
+"**Description**: Retrieve general precautions information based on the drug "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3854
@@ -4887,8 +5019,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3864
 #: 7287f131d006446e93fcb7e5bf1f81f8
 msgid ""
-"**Description**: Retrieve information about geriatric use based on the "
-"drug name."
+"**Description**: Retrieve information about geriatric use based on the drug "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3890
@@ -4925,8 +5057,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:3928
 #: 531d167f98d34e09888438f1297e65bf
 msgid ""
-"Fetch a list of inactive ingredients in a specific drug product based on "
-"the drug name."
+"Fetch a list of inactive ingredients in a specific drug product based on the"
+" drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst a1cd190850c14f548ded0ba04fd9266b
@@ -4952,7 +5084,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:3964
 #: 657db32275e64edba0a33d8a0344d017
-msgid "Retrieve indications and usage information based on a specific drug name."
+msgid ""
+"Retrieve indications and usage information based on a specific drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 4b1592cc0162404c9cbda2542cb76916
@@ -4993,8 +5126,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4008
 #: 7c34ba9a18a64a1b98e1e1758d69d8ab
 msgid ""
-"**Description**: Retrieve information about nursing mothers for a "
-"specific drug."
+"**Description**: Retrieve information about nursing mothers for a specific "
+"drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4034
@@ -5018,14 +5151,15 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4044
 #: e37e3ded3aab45e68919c67b22f5e470
-msgid "**Description**: Fetch information for patients based on the drug name."
+msgid ""
+"**Description**: Fetch information for patients based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4070
 #: 1724e25362a44101a24fc7d0327a2a8e
 msgid ""
-"**FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name** "
-"(Type: FDADrugLabel)"
+"**FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name** (Type: "
+"FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4072
@@ -5071,20 +5205,20 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 5eb9e0a3fcb64c23b9a6ec52b3f72a13
 msgid ""
-"FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name tool "
-"specification"
+"FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4114
 #: 89d87194229e448286a4db4b2f13a558
-msgid "**Name**: ``FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name``"
+msgid ""
+"**Name**: ``FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name``"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4116
 #: 3933fb701a90407ab5365af0a93df182
 msgid ""
-"**Description**: Get information about when a doctor or pharmacist should"
-" be consulted regarding drug interactions for a specific drug."
+"**Description**: Get information about when a doctor or pharmacist should be"
+" consulted regarding drug interactions for a specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4142
@@ -5103,13 +5237,13 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ea8506c9a4994e18ab6cb088862ebac5
 msgid ""
-"FDA_get_information_for_owners_or_caregivers_by_drug_name tool "
-"specification"
+"FDA_get_information_for_owners_or_caregivers_by_drug_name tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4150
 #: c99ac98a6c274b17a7098b9f9d78485e
-msgid "**Name**: ``FDA_get_information_for_owners_or_caregivers_by_drug_name``"
+msgid ""
+"**Name**: ``FDA_get_information_for_owners_or_caregivers_by_drug_name``"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4152
@@ -5141,8 +5275,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4188
 #: d15c327c074d4c58ab56be2f80b45b8d
 msgid ""
-"**Description**: Retrieve a list of drug ingredients based on the drug "
-"name."
+"**Description**: Retrieve a list of drug ingredients based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4214
@@ -5167,13 +5300,14 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4224
 #: 11bc7c275d914257998e8ef382efdfea
 msgid ""
-"**Description**: Retrieve instructions for use information based on the "
-"drug name."
+"**Description**: Retrieve instructions for use information based on the drug"
+" name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4250
 #: 0d0efb418eed48398c1e7e0986d37191
-msgid "**FDA_get_lab_test_interference_info_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_lab_test_interference_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4252
@@ -5195,8 +5329,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4260
 #: c209794a963b407db167c15c7dd95618
 msgid ""
-"**Description**: Retrieve information about laboratory test interferences"
-" for a specific drug."
+"**Description**: Retrieve information about laboratory test interferences "
+"for a specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4286
@@ -5221,8 +5355,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4296
 #: abc3cd3beec9407eba72b67d4be886de
 msgid ""
-"**Description**: Retrieve laboratory tests information based on drug "
-"names."
+"**Description**: Retrieve laboratory tests information based on drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4322
@@ -5233,8 +5366,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4324
 #: 328a2c965a124cbab3036dc16a2f2bd0
 msgid ""
-"Retrieve information about the drug’s use during labor or delivery based "
-"on the drug name."
+"Retrieve information about the drug’s use during labor or delivery based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst d25e7395d00147b6bf7c970343b38536
@@ -5249,13 +5382,14 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4332
 #: 28d0882282d94a099ad68c5444ba010c
 msgid ""
-"**Description**: Retrieve information about the drug’s use during labor "
-"or delivery based on the drug name."
+"**Description**: Retrieve information about the drug’s use during labor or "
+"delivery based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4358
 #: 4b1bdd2870c74f91a69a5b49b4c4bfbd
-msgid "**FDA_get_manufacturer_name_NDC_number_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_manufacturer_name_NDC_number_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4360
@@ -5278,8 +5412,8 @@ msgstr ""
 #: 0cd06588f56f4a7cb71ee8df83bb8f0a
 msgid ""
 "**Description**: Retrieve detailed information about a drug's active "
-"ingredient, FDA application number, manufacturer name, National Drug Code"
-" (NDC) number, and route of administration; all based on the drug name."
+"ingredient, FDA application number, manufacturer name, National Drug Code "
+"(NDC) number, and route of administration; all based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4394
@@ -5304,8 +5438,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4404
 #: b6be433691dd4c7182c9aeae57764016
 msgid ""
-"**Description**: Retrieve the mechanism of action information for a "
-"specific drug."
+"**Description**: Retrieve the mechanism of action information for a specific"
+" drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4430
@@ -5355,12 +5489,14 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4476
 #: aa98b2400cf046649a134224971b6c3a
-msgid "**Description**: Retrieve microbiology information based on the drug name."
+msgid ""
+"**Description**: Retrieve microbiology information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4502
 #: 2f9f6492da6a4049af38c522b1aa0565
-msgid "**FDA_get_nonclinical_toxicology_info_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_nonclinical_toxicology_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4504
@@ -5380,8 +5516,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4512
 #: 6e8411fd05f648b892ed719ee96bc9ab
 msgid ""
-"**Description**: Retrieve nonclinical toxicology information based on "
-"drug names."
+"**Description**: Retrieve nonclinical toxicology information based on drug "
+"names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4538
@@ -5391,7 +5527,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4540
 #: ba1a874313a4414d8e47df80fcc71320
-msgid "Retrieve information about nonteratogenic effects based on the drug name."
+msgid ""
+"Retrieve information about nonteratogenic effects based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 358226e8b47347b3a0161fd8330e78c1
@@ -5406,8 +5543,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4548
 #: ce1400dd9470491d8f76d88959b0f6b5
 msgid ""
-"**Description**: Retrieve information about nonteratogenic effects based "
-"on the drug name."
+"**Description**: Retrieve information about nonteratogenic effects based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4574
@@ -5418,8 +5555,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4576
 #: edb4e0ce1f424658bb2df215bf9d65c1
 msgid ""
-"Retrieve safety information that may not be specified in other fields "
-"based on the provided drug ..."
+"Retrieve safety information that may not be specified in other fields based "
+"on the provided drug ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst e04c9a560aac4c189bcf1098042006e7
@@ -5434,8 +5571,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4584
 #: 525088ab19df4994ba418a487eda1baa
 msgid ""
-"**Description**: Retrieve safety information that may not be specified in"
-" other fields based on the provided drug name."
+"**Description**: Retrieve safety information that may not be specified in "
+"other fields based on the provided drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4610
@@ -5446,8 +5583,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4612
 #: 6f866f68d1db4de69da76143e9c7471b
 msgid ""
-"Retrieve information about signs, symptoms, and laboratory findings of "
-"acute overdosage based on ..."
+"Retrieve information about signs, symptoms, and laboratory findings of acute"
+" overdosage based on ..."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst a7232618116e4b70b26bd9258d74e22b
@@ -5462,8 +5599,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4620
 #: 9bd4f67ee33a43ada22876568d91d9eb
 msgid ""
-"**Description**: Retrieve information about signs, symptoms, and "
-"laboratory findings of acute overdosage based on the drug name."
+"**Description**: Retrieve information about signs, symptoms, and laboratory "
+"findings of acute overdosage based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4646
@@ -5473,7 +5610,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4648
 #: 34ee9b06802044c98d553d3105cb4603
-msgid "Retrieve the patient package insert information based on the drug name."
+msgid ""
+"Retrieve the patient package insert information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 77b03cb71cdf448ebfb25e7e8c856c70
@@ -5488,8 +5626,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4656
 #: 6b96a1d0b7fc40218adbdeda0110ea1c
 msgid ""
-"**Description**: Retrieve the patient package insert information based on"
-" the drug name."
+"**Description**: Retrieve the patient package insert information based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4682
@@ -5513,7 +5651,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4692
 #: b446525f7e0448ad968894da7f7f4aa7
-msgid "**Description**: Retrieve pediatric use information based on drug names."
+msgid ""
+"**Description**: Retrieve pediatric use information based on drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4718
@@ -5605,8 +5744,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4828
 #: bdb389b6dc424305bdc189c368550446
 msgid ""
-"Retrieve information about the use of a drug in specific populations "
-"based on the drug name."
+"Retrieve information about the use of a drug in specific populations based "
+"on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 938acbfe016143c88c4c50ae660a2b0c
@@ -5621,8 +5760,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4836
 #: 59aaf1259f0f428a852d0d2c25e606c3
 msgid ""
-"**Description**: Retrieve information about the use of a drug in specific"
-" populations based on the drug name."
+"**Description**: Retrieve information about the use of a drug in specific "
+"populations based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4862
@@ -5646,7 +5785,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4872
 #: a5e5dec2274f4ff283eddfb58fa5f23d
-msgid "**Description**: Retrieve precautions information based on the drug name."
+msgid ""
+"**Description**: Retrieve precautions information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4898
@@ -5656,7 +5796,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4900
 #: 4f97b45dda4e4bfc9de95dd3fc51d595
-msgid "Retrieve information about the effects on pregnancy for a specific drug."
+msgid ""
+"Retrieve information about the effects on pregnancy for a specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 2e0add0856f54da2a32c861e05d38631
@@ -5671,8 +5812,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4908
 #: 4b48ce7d3a4b498d953072824fe653ab
 msgid ""
-"**Description**: Retrieve information about the effects on pregnancy for "
-"a specific drug."
+"**Description**: Retrieve information about the effects on pregnancy for a "
+"specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4934
@@ -5685,12 +5826,13 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4936
 #: d5e5f452f9dd4619a529a86555f56ee6
 msgid ""
-"Retrieve the pregnancy or breastfeeding information based on the "
-"specified drug name."
+"Retrieve the pregnancy or breastfeeding information based on the specified "
+"drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 62737fe4d00342dc9ebe8c9d09024ede
-msgid "FDA_get_pregnancy_or_breastfeeding_info_by_drug_name tool specification"
+msgid ""
+"FDA_get_pregnancy_or_breastfeeding_info_by_drug_name tool specification"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4942
@@ -5701,8 +5843,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4944
 #: 78da5bdcbb804c74ae47b4305603a7d1
 msgid ""
-"**Description**: Retrieve the pregnancy or breastfeeding information "
-"based on the specified drug name."
+"**Description**: Retrieve the pregnancy or breastfeeding information based "
+"on the specified drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:4970
@@ -5713,8 +5855,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4972
 #: d3877d52a0b94857a2b1ac48013adc1d
 msgid ""
-"Retrieve the content of the principal display panel of the product "
-"package based on the drug name."
+"Retrieve the content of the principal display panel of the product package "
+"based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 66e24d6084b94a2fad7c8a8cdb9997f2
@@ -5729,8 +5871,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:4980
 #: 10cf90d0b6414dd7aef80b5b6af23544
 msgid ""
-"**Description**: Retrieve the content of the principal display panel of "
-"the product package based on the drug name."
+"**Description**: Retrieve the content of the principal display panel of the "
+"product package based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5006
@@ -5757,8 +5899,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5016
 #: 818cdbecd9ee4004904d36c968326cbb
 msgid ""
-"**Description**: Retrieve about the drug product’s indications for use "
-"based on the drug name."
+"**Description**: Retrieve about the drug product’s indications for use based"
+" on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5042
@@ -5783,8 +5925,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5052
 #: bafe0ac5d17346b4a0654ec1d1478011
 msgid ""
-"**Description**: Retrieve recent major changes in labeling for a specific"
-" drug."
+"**Description**: Retrieve recent major changes in labeling for a specific "
+"drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5078
@@ -5845,8 +5987,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5152
 #: e6b380e98d23459f864fb3f757fc97bd
 msgid ""
-"Retrieve risk information (especially regarding pregnancy or "
-"breastfeeding) based on the drug name."
+"Retrieve risk information (especially regarding pregnancy or breastfeeding) "
+"based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 8f156952a7b34466a8252f3afbfd2694
@@ -5861,8 +6003,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5160
 #: 7f2ee3f343794c8295f258715d3d8cd5
 msgid ""
-"**Description**: Retrieve risk information (especially regarding "
-"pregnancy or breastfeeding) based on the drug name."
+"**Description**: Retrieve risk information (especially regarding pregnancy "
+"or breastfeeding) based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5186
@@ -5872,7 +6014,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5188
 #: 9a6fcd4ba5db47b7bbe25b9204125778
-msgid "Retrieve the route of administration information based on the drug name."
+msgid ""
+"Retrieve the route of administration information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 8095111cb65044b3a172ce5465ad195c
@@ -5887,8 +6030,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5196
 #: f70f15eb8b5149f2a3e756bd6b7c0579
 msgid ""
-"**Description**: Retrieve the route of administration information based "
-"on the drug name."
+"**Description**: Retrieve the route of administration information based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5222
@@ -5913,8 +6056,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5232
 #: cafd1d69e85e42e8906228c8ae7390d8
 msgid ""
-"**Description**: Retrieve safe handling warnings for a specific drug "
-"based on its name."
+"**Description**: Retrieve safe handling warnings for a specific drug based "
+"on its name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5258
@@ -5925,8 +6068,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5260
 #: d6d969531ec04d7586a7084478687587
 msgid ""
-"Retrieve a summary of safety and effectiveness information based on the "
-"drug name."
+"Retrieve a summary of safety and effectiveness information based on the drug"
+" name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 8c56e8d662fc45b5beb0faa6ef36624b
@@ -5941,28 +6084,29 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5268
 #: 596fde8c50be49af9f41796c80ddde4e
 msgid ""
-"**Description**: Retrieve a summary of safety and effectiveness "
-"information based on the drug name."
+"**Description**: Retrieve a summary of safety and effectiveness information "
+"based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5272
 #: ../../tools/fda_drug_labeling_tools.rst:5452
 #: c576a17eff2d4c7689a3d04132d406cd f774f3e0a8e24e608e083d1880c47ba3
 msgid ""
-"``drug_name`` (string) (optional) The name of the drug (either brand name"
-" or generic name)."
+"``drug_name`` (string) (optional) The name of the drug (either brand name or"
+" generic name)."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5294
 #: 5bf06064c3a9475aac3a30c1f1dbe546
-msgid "**FDA_get_spl_indexing_data_elements_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_spl_indexing_data_elements_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5296
 #: d8c3b15e312049df9aa590f97b0fcbb4
 msgid ""
-"Retrieve Structured Product Labeling (SPL) indexing data elements based "
-"on drug names."
+"Retrieve Structured Product Labeling (SPL) indexing data elements based on "
+"drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 369fa236ea84449bb366af9220d80d7d
@@ -5977,8 +6121,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5304
 #: 7b78717e750246bba0269ed113d2175b
 msgid ""
-"**Description**: Retrieve Structured Product Labeling (SPL) indexing data"
-" elements based on drug names."
+"**Description**: Retrieve Structured Product Labeling (SPL) indexing data "
+"elements based on drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5330
@@ -5988,7 +6132,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5332
 #: 9be28ea2a5c246c49e87bf032ead0da6
-msgid "Retrieve the SPL unclassified section information based on the drug name."
+msgid ""
+"Retrieve the SPL unclassified section information based on the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ddf380b1200641ffbd9ba2a7dd72d225
@@ -6003,8 +6148,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5340
 #: e4cf97590a1a4d148de0d83dd29b0eb2
 msgid ""
-"**Description**: Retrieve the SPL unclassified section information based "
-"on the drug name."
+"**Description**: Retrieve the SPL unclassified section information based on "
+"the drug name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5366
@@ -6035,7 +6180,8 @@ msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5402
 #: 7f5ebbf329614970a923a2b8936ab62a
-msgid "**FDA_get_storage_and_handling_info_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_get_storage_and_handling_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5404
@@ -6055,8 +6201,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5412
 #: 379e0e2cc7a044838e268f2e6f7d3bb7
 msgid ""
-"**Description**: Retrieve storage and handling information based on the "
-"drug name."
+"**Description**: Retrieve storage and handling information based on the drug"
+" name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5438
@@ -6081,8 +6227,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5448
 #: fd01493ea27441c5a94d9cf50b63858b
 msgid ""
-"**Description**: Retrieve teratogenic effects information based on the "
-"drug name."
+"**Description**: Retrieve teratogenic effects information based on the drug "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5474
@@ -6107,8 +6253,7 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5484
 #: 9b0273a992394d8c853967458b349be1
 msgid ""
-"**Description**: Retrieve specific user safety warnings based on drug "
-"names."
+"**Description**: Retrieve specific user safety warnings based on drug names."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5488
@@ -6124,8 +6269,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5512
 #: 1dcd20081d874a16956359536bc0f197
 msgid ""
-"Retrieve warnings and cautions information for a specific drug based on "
-"its name."
+"Retrieve warnings and cautions information for a specific drug based on its "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst 6e5b25fd41544c0fac7e333b6bfdd248
@@ -6140,8 +6285,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5520
 #: 68276ccce9574579a1fc1860b7dfbeae
 msgid ""
-"**Description**: Retrieve warnings and cautions information for a "
-"specific drug based on its name."
+"**Description**: Retrieve warnings and cautions information for a specific "
+"drug based on its name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5546
@@ -6192,8 +6337,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5592
 #: 7cd673b9bbf946968f360e9eef195ed0
 msgid ""
-"**Description**: Retrieve information about side effects and substances "
-"or activities to avoid while using a specific drug."
+"**Description**: Retrieve information about side effects and substances or "
+"activities to avoid while using a specific drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5618
@@ -6218,8 +6363,8 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5628
 #: 4a1b64f2c29c47b1abd36684db2f40fc
 msgid ""
-"**Description**: Retrieve the intended use of the device based on the "
-"drug name."
+"**Description**: Retrieve the intended use of the device based on the drug "
+"name."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5654
@@ -6251,22 +6396,21 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5668
 #: 0f39149427fb408a9a05c731a6929408
 msgid ""
-"``intended_use_of_the_device`` (string) (optional) The intended use of "
-"the device."
+"``intended_use_of_the_device`` (string) (optional) The intended use of the "
+"device."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5690
 #: 00be4f94b6ef448887f73b17907be174
 msgid ""
-"**FDA_retrieve_drug_names_by_patient_medication_info** (Type: "
-"FDADrugLabel)"
+"**FDA_retrieve_drug_names_by_patient_medication_info** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5692
 #: ef5817958b1849408fe5d6c7323060f0
 msgid ""
-"Retrieve drug names based on patient medication information, which is "
-"about safe use of the drug."
+"Retrieve drug names based on patient medication information, which is about "
+"safe use of the drug."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst ec886a5d366c4050a9e1a053e58c4e06
@@ -6288,13 +6432,14 @@ msgstr ""
 #: ../../tools/fda_drug_labeling_tools.rst:5704
 #: 5c3536942c7442a79e24edc0181a4211
 msgid ""
-"``patient_info`` (string) (optional) Information or instructions to "
-"patients about safe use of the drug product."
+"``patient_info`` (string) (optional) Information or instructions to patients"
+" about safe use of the drug product."
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5726
 #: a2ea1690ed5541498c63926edb59df58
-msgid "**FDA_retrieve_patient_medication_info_by_drug_name** (Type: FDADrugLabel)"
+msgid ""
+"**FDA_retrieve_patient_medication_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
 
 #: ../../tools/fda_drug_labeling_tools.rst:5728
@@ -6334,4 +6479,3 @@ msgstr ""
 #: daa8dceb8e49419abc7cfa99bd9393e6
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

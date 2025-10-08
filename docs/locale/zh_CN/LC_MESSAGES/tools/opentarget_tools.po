@@ -7,52 +7,55 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/opentarget_tools.rst:2 0fc80828df0a4fefbd4e0c767409b4f1
 msgid "Opentarget Tools"
-msgstr ""
+msgstr "Opentarget 工具"
 
 #: ../../tools/opentarget_tools.rst:4 75246059fb3d425f8f968d95153a5642
 msgid ""
 "**Configuration File**: ``opentarget_tools.json`` **Tool Type**: Local "
 "**Tools Count**: 53"
 msgstr ""
+"**配置文件**：``opentarget_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：53"
 
 #: ../../tools/opentarget_tools.rst:8 e82c50b403454cc58ff53979c3fde4fc
 msgid ""
 "This page contains all tools defined in the ``opentarget_tools.json`` "
 "configuration file."
-msgstr ""
+msgstr "此页面包含 ``opentarget_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/opentarget_tools.rst:11 5cda71202b20421787eb6a0015af1501
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/opentarget_tools.rst:14 60f3909954074ddea0a12f563da1c5e1
 msgid "**OpenTargets_drug_pharmacogenomics_data** (Type: OpenTarget)"
-msgstr ""
+msgstr "**OpenTargets_药物药物基因组学数据**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:16 13d2321f798a404b8bd1ed3972462297
 msgid ""
 "Retrieve pharmacogenomics data for a specific drug, including evidence "
 "levels and genotype annota..."
-msgstr ""
+msgstr "检索特定药物的药物基因组学数据，包括证据等级和基因型注释..."
 
 #: ../../tools/opentarget_tools.rst a70dd45bc05e43bb96124a2257a5c1e9
 msgid "OpenTargets_drug_pharmacogenomics_data tool specification"
-msgstr ""
+msgstr "OpenTargets_drug_pharmacogenomics_data 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:20 ../../tools/opentarget_tools.rst:53
 #: ../../tools/opentarget_tools.rst:83 ../../tools/opentarget_tools.rst:113
@@ -108,11 +111,11 @@ msgstr ""
 #: ec5f8ce2700b4fdba2421b0d8d6c5138 f04ee539f1da4e7b9001a3bdb77bcddd
 #: f682bca8aaed4ab2967d6e7cbd393e76 f8a471d5bb9241dfba1c0353439cfa33
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/opentarget_tools.rst:22 9441587608bd4769830e021e59c4c756
 msgid "**Name**: ``OpenTargets_drug_pharmacogenomics_data``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_drug_pharmacogenomics_data``"
 
 #: ../../tools/opentarget_tools.rst:23 ../../tools/opentarget_tools.rst:56
 #: ../../tools/opentarget_tools.rst:86 ../../tools/opentarget_tools.rst:116
@@ -166,13 +169,13 @@ msgstr ""
 #: f64f6bddc70e4826bf7c801b72ca8596 f98b2e0847774d6daf43bbfb25876eef
 #: feb6f80f3e684fffb48cdf63200d589e febee51e8a1b436286cc137a831fd1ea
 msgid "**Type**: ``OpenTarget``"
-msgstr ""
+msgstr "**类型**：``OpenTarget``"
 
 #: ../../tools/opentarget_tools.rst:24 76a6d8bdf3294ac7a5770e1ffc806efa
 msgid ""
 "**Description**: Retrieve pharmacogenomics data for a specific drug, "
 "including evidence levels and genotype annotations."
-msgstr ""
+msgstr "**描述**：检索特定药物的药物基因组学数据，包括证据级别和基因型注释。"
 
 #: ../../tools/opentarget_tools.rst:26 ../../tools/opentarget_tools.rst:59
 #: ../../tools/opentarget_tools.rst:89 ../../tools/opentarget_tools.rst:119
@@ -228,7 +231,7 @@ msgstr ""
 #: f474ca88ef1b4448a423c014bd7664a8 f656a16562f74457b9b14f01f07da6b3
 #: fcdeddd91c9a46da9a92457ba4d45a02 ffd516c5ca8c4e9b98d583c6c872145b
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/opentarget_tools.rst:28 ../../tools/opentarget_tools.rst:61
 #: ../../tools/opentarget_tools.rst:91 ../../tools/opentarget_tools.rst:250
@@ -244,11 +247,11 @@ msgstr ""
 #: ab739c26eccf4ab6be7c05e426dc7afd ae20e0f83fe64c5dae65577457ad59c1
 #: c2417c531a2640e0a663136c3e7553b1 d0835c53145e418ba47fb3ce390f6137
 msgid "``chemblId`` (string) (optional) The ChEMBL ID of the drug."
-msgstr ""
+msgstr "``chemblId``（字符串）（可选）药物的 ChEMBL ID。"
 
 #: ../../tools/opentarget_tools.rst:31 154dd3956a5f44049652d536a66fbfb4
 msgid "``page`` (object) (optional) Pagination options."
-msgstr ""
+msgstr "``page``（对象）（可选）分页选项。"
 
 #: ../../tools/opentarget_tools.rst:34 ../../tools/opentarget_tools.rst:64
 #: ../../tools/opentarget_tools.rst:94 ../../tools/opentarget_tools.rst:127
@@ -304,81 +307,85 @@ msgstr ""
 #: ef880547652546b4b28d0fe6db34aba0 f10ab74e18e14989bed0f92d6a5b3209
 #: fc10df121071447194f1d8a92b226da5 fd6fb599309b403dabe1077722ccc891
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/opentarget_tools.rst:47 eb10e0cd32614116a93573269f6af884
 msgid ""
-"**OpenTargets_get_approved_indications_by_drug_chemblId** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_approved_indications_by_drug_chemblId** (Type: OpenTarget)"
 msgstr ""
+"**OpenTargets_get_approved_indications_by_drug_chemblId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:49 f32a58aa86a2462c9fbb2a03d758e8c4
 msgid ""
-"Retrieve detailed information about multiple drugs using a list of ChEMBL"
-" IDs."
-msgstr ""
+"Retrieve detailed information about multiple drugs using a list of ChEMBL "
+"IDs."
+msgstr "使用一组 ChEMBL ID 检索多个药物的详细信息。"
 
 #: ../../tools/opentarget_tools.rst 1667c553f3954d2fb51100c1512954ce
-msgid "OpenTargets_get_approved_indications_by_drug_chemblId tool specification"
-msgstr ""
+msgid ""
+"OpenTargets_get_approved_indications_by_drug_chemblId tool specification"
+msgstr "OpenTargets_get_approved_indications_by_drug_chemblId 工具规范"
 
 #: ../../tools/opentarget_tools.rst:55 518a1fcb912847619c143f497bb4a353
 msgid "**Name**: ``OpenTargets_get_approved_indications_by_drug_chemblId``"
-msgstr ""
+msgstr "**名称**: ``OpenTargets_get_approved_indications_by_drug_chemblId``"
 
 #: ../../tools/opentarget_tools.rst:57 397d2019e2b44059a5ebaef5e1d84446
 msgid ""
-"**Description**: Retrieve detailed information about multiple drugs using"
-" a list of ChEMBL IDs."
-msgstr ""
+"**Description**: Retrieve detailed information about multiple drugs using a "
+"list of ChEMBL IDs."
+msgstr "**描述**：使用一组 ChEMBL ID 检索多个药物的详细信息。"
 
 #: ../../tools/opentarget_tools.rst:77 9bc15a33adad4995b8879f322dc77a91
 msgid ""
-"**OpenTargets_get_associated_diseases_by_drug_chemblId** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_associated_diseases_by_drug_chemblId** (Type: OpenTarget)"
 msgstr ""
+"**OpenTargets_get_associated_diseases_by_drug_chemblId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:79 12e12516287a4a739c6ed8f7feb66c9f
 msgid ""
-"Retrieve the list of diseases associated with a specific drug chemblId "
-"based on clinical trial da..."
-msgstr ""
+"Retrieve the list of diseases associated with a specific drug chemblId based"
+" on clinical trial da..."
+msgstr "根据临床试验数据，检索与特定药物 chemblId 相关的疾病列表。"
 
 #: ../../tools/opentarget_tools.rst e91b8d27e5ec4b9485c85d30d256b760
-msgid "OpenTargets_get_associated_diseases_by_drug_chemblId tool specification"
-msgstr ""
+msgid ""
+"OpenTargets_get_associated_diseases_by_drug_chemblId tool specification"
+msgstr "OpenTargets_get_associated_diseases_by_drug_chemblId 工具规范"
 
 #: ../../tools/opentarget_tools.rst:85 a8c8003c3dd34c5b9526baa0e2d0186e
 msgid "**Name**: ``OpenTargets_get_associated_diseases_by_drug_chemblId``"
-msgstr ""
+msgstr "**名称**: ``OpenTargets_get_associated_diseases_by_drug_chemblId``"
 
 #: ../../tools/opentarget_tools.rst:87 1691d50c21ca476988de8677dfb85802
 msgid ""
-"**Description**: Retrieve the list of diseases associated with a specific"
-" drug chemblId based on clinical trial data or post-marketed drugs."
-msgstr ""
+"**Description**: Retrieve the list of diseases associated with a specific "
+"drug chemblId based on clinical trial data or post-marketed drugs."
+msgstr "**描述**：根据临床试验数据或上市后药物信息，检索与特定药物的 chemblId 相关的疾病列表。"
 
 #: ../../tools/opentarget_tools.rst:107 5875fcb490b841cf99ce8d0e80cbf14f
-msgid "**OpenTargets_get_associated_drugs_by_disease_efoId** (Type: OpenTarget)"
-msgstr ""
+msgid ""
+"**OpenTargets_get_associated_drugs_by_disease_efoId** (Type: OpenTarget)"
+msgstr "**OpenTargets_get_associated_drugs_by_disease_efoId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:109 b2306cf49a3e4777a0754eac8651093f
-msgid "Retrieve known drugs associated with a specific disease by disease efoId."
-msgstr ""
+msgid ""
+"Retrieve known drugs associated with a specific disease by disease efoId."
+msgstr "根据疾病的 efoId 检索与特定疾病相关的已知药物。"
 
 #: ../../tools/opentarget_tools.rst 1d369dcbab8441a7958830cf7d51e566
 msgid "OpenTargets_get_associated_drugs_by_disease_efoId tool specification"
-msgstr ""
+msgstr "OpenTargets_get_associated_drugs_by_disease_efoId 工具规范"
 
 #: ../../tools/opentarget_tools.rst:115 10822b2fee6144e7839b9acdad225cb9
 msgid "**Name**: ``OpenTargets_get_associated_drugs_by_disease_efoId``"
-msgstr ""
+msgstr "**名称**: ``OpenTargets_get_associated_drugs_by_disease_efoId``"
 
 #: ../../tools/opentarget_tools.rst:117 0fff0d5bd6014404bd195c4afcad81a2
 msgid ""
-"**Description**: Retrieve known drugs associated with a specific disease "
-"by disease efoId."
-msgstr ""
+"**Description**: Retrieve known drugs associated with a specific disease by "
+"disease efoId."
+msgstr "**描述**：通过疾病的 efoId 检索与特定疾病相关的已知药物。"
 
 #: ../../tools/opentarget_tools.rst:121 ../../tools/opentarget_tools.rst:340
 #: ../../tools/opentarget_tools.rst:370 ../../tools/opentarget_tools.rst:400
@@ -399,8 +406,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:140 69de4289c7594fd58e5bd791ecd28498
 msgid ""
-"**OpenTargets_get_associated_drugs_by_target_ensemblID** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_associated_drugs_by_target_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:142 a02950e6c0064a87ab496349b4d40951
@@ -410,7 +416,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 9bfaecdbf3da4aa59154bffb6091791b
-msgid "OpenTargets_get_associated_drugs_by_target_ensemblID tool specification"
+msgid ""
+"OpenTargets_get_associated_drugs_by_target_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:148 06c2c595446a445d9eb59f3f4491e63e
@@ -420,8 +427,8 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:150 be01c8b13650471b849bd4117272452a
 msgid ""
 "**Description**: Get known drugs and information (e.g. id, name, MoA) "
-"associated with a specific target ensemblID, including clinical trial "
-"phase and mechanism of action of the drugs."
+"associated with a specific target ensemblID, including clinical trial phase "
+"and mechanism of action of the drugs."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:154 ../../tools/opentarget_tools.rst:280
@@ -454,7 +461,8 @@ msgid "Find HPO phenotypes asosciated with the specified disease efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 183b3dfe57c74ef09beb47345b3132a0
-msgid "OpenTargets_get_associated_phenotypes_by_disease_efoId tool specification"
+msgid ""
+"OpenTargets_get_associated_phenotypes_by_disease_efoId tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:184 679bcc5176f9494482c1c2ec59e05b1c
@@ -463,8 +471,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:186 f56fe49b2fbe4cfbb367cf7ee31bad1b
 msgid ""
-"**Description**: Find HPO phenotypes asosciated with the specified "
-"disease efoId."
+"**Description**: Find HPO phenotypes asosciated with the specified disease "
+"efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:190 ../../tools/opentarget_tools.rst:220
@@ -474,13 +482,13 @@ msgid "``efoId`` (string) (optional) The efoId of a disease or phenotype."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:206 5f23e1f8498f4ab1a9b6c7f0af036496
-msgid "**OpenTargets_get_associated_targets_by_disease_efoId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_associated_targets_by_disease_efoId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:208 29765dee7f784432941b5319b6c2713d
 msgid ""
-"Find targets associated with a specific disease or phenotype based on "
-"efoId."
+"Find targets associated with a specific disease or phenotype based on efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 1a03ecd0d7e24edeb0b4d3a2ce778a73
@@ -498,13 +506,14 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:236 75d981829ff249f684dc875027a111c4
-msgid "**OpenTargets_get_associated_targets_by_drug_chemblId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_associated_targets_by_drug_chemblId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:238 93d8f4e9053d437b98dadb51ecd41aa6
 msgid ""
-"Retrieve the list of targets linked to a specific drug chemblId based on "
-"its mechanism of action."
+"Retrieve the list of targets linked to a specific drug chemblId based on its"
+" mechanism of action."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 38155fcd2086425db8997d29b6228d28
@@ -523,18 +532,18 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:266 6a9784d1edb94bcebc559922f6cd4d84
 msgid ""
-"**OpenTargets_get_biological_mouse_models_by_ensemblID** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_biological_mouse_models_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:268 2508687afe85474c9f4494e2c72ca6a4
 msgid ""
-"Retrieve biological mouse models, including allelic compositions and "
-"genetic backgrounds, for a s..."
+"Retrieve biological mouse models, including allelic compositions and genetic"
+" backgrounds, for a s..."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst b7756335fc9946dc8e035aaba8b916b6
-msgid "OpenTargets_get_biological_mouse_models_by_ensemblID tool specification"
+msgid ""
+"OpenTargets_get_biological_mouse_models_by_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:274 fac9d17ba68d47369f9054886ef5e770
@@ -548,7 +557,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:296 b671c63cf79645f0a8a7d3c0b592ddce
-msgid "**OpenTargets_get_chemical_probes_by_target_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_chemical_probes_by_target_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:298 554bade02a3f4f8bb5186ff6e767616f
@@ -567,24 +577,25 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:306 4d9025b27045498ca044cddb85171ac5
 msgid ""
-"**Description**: Retrieve chemical probes associated with a specific "
-"target using its ensemblID."
+"**Description**: Retrieve chemical probes associated with a specific target "
+"using its ensemblID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:310 d670bac0f0f642af8259e36a6f41da7e
 msgid ""
-"``ensemblId`` (string) (optional) The Ensembl ID of the target for which "
-"to retrieve chemical probes."
+"``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
+"retrieve chemical probes."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:326 bb5a6327d1ee4612a14dd37f0e17233c
-msgid "**OpenTargets_get_disease_ancestors_parents_by_efoId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_disease_ancestors_parents_by_efoId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:328 e824b0fcd67d40b686f3f3945a38daa1
 msgid ""
-"Retrieve the disease ancestors and parents in the ontology using the "
-"disease EFO ID."
+"Retrieve the disease ancestors and parents in the ontology using the disease"
+" EFO ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 7dd594f0475b49828ddecd4e64cc9fd2
@@ -597,14 +608,13 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:336 d76b1b3c6fc647018e71a2372be5463a
 msgid ""
-"**Description**: Retrieve the disease ancestors and parents in the "
-"ontology using the disease EFO ID."
+"**Description**: Retrieve the disease ancestors and parents in the ontology "
+"using the disease EFO ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:356 bb997f7e145e4bdab75a5051b0ff5c94
 msgid ""
-"**OpenTargets_get_disease_descendants_children_by_efoId** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_disease_descendants_children_by_efoId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:358 51f95dd760ac40da9e2b407fe8bc808b
@@ -614,7 +624,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst e75fe1cbc83e41c8a7f5e1905de555e2
-msgid "OpenTargets_get_disease_descendants_children_by_efoId tool specification"
+msgid ""
+"OpenTargets_get_disease_descendants_children_by_efoId tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:364 50e8018ecdf14db08f4752efb809b588
@@ -648,8 +659,8 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:396 82c35e065e7b4f708583cd924ba2760c
 msgid ""
 "**Description**: Retrieve disease description, name, database cros "
-"references, obsolete terms, and whether it's a therapeutic area, all "
-"using the specified efoId."
+"references, obsolete terms, and whether it's a therapeutic area, all using "
+"the specified efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:416 b994de8ae418431595087830d6e718f6
@@ -657,7 +668,8 @@ msgid "**OpenTargets_get_disease_id_description_by_name** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:418 64381eac00434957a3d709ec27daabde
-msgid "Retrieve the efoId and additional details of a disease based on its name."
+msgid ""
+"Retrieve the efoId and additional details of a disease based on its name."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 88364fe28cf34b58ae6c4aa408224caa
@@ -675,7 +687,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:430 5cee89bd02e4484185ef26d3559d4b0e
-msgid "``diseaseName`` (string) (optional) The name of the disease to search for."
+msgid ""
+"``diseaseName`` (string) (optional) The name of the disease to search for."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:446 04440aa1b11745b8bf59cb612e9d9bf4
@@ -684,8 +697,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:448 96cbb23581dc46feb70a4c9f4fc63d0a
 msgid ""
-"Retrieve the disease's direct location and indirect location disease "
-"terms and IDs using the dise..."
+"Retrieve the disease's direct location and indirect location disease terms "
+"and IDs using the dise..."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 99bcdc8b0f174c6daf370c68ae11f9e1
@@ -723,11 +736,13 @@ msgid "**Description**: Retrieve disease synonyms by its EFO ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:506 93c453ba99794aa091a213fdc5857134
-msgid "**OpenTargets_get_disease_therapeutic_areas_by_efoId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_disease_therapeutic_areas_by_efoId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:508 d6c2d947f48c41a0a58d3e034c871eb5
-msgid "Retrieve the therapeutic areas associated with a specific disease efoId."
+msgid ""
+"Retrieve the therapeutic areas associated with a specific disease efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 399582d4e7e54c47bd55bcca44db0ee5
@@ -740,14 +755,13 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:516 14ff22f965d4496d9b4d4df0e4ecaafc
 msgid ""
-"**Description**: Retrieve the therapeutic areas associated with a "
-"specific disease efoId."
+"**Description**: Retrieve the therapeutic areas associated with a specific "
+"disease efoId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:536 2ae9fd6469c046fea3e409ca69c59874
 msgid ""
-"**OpenTargets_get_diseases_phenotypes_by_target_ensembl** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_diseases_phenotypes_by_target_ensembl** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:538 a914c6997e89461fad279c8f5b90b927
@@ -757,7 +771,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 5639728430ad4c67b7f1b2af3c68a1e9
-msgid "OpenTargets_get_diseases_phenotypes_by_target_ensembl tool specification"
+msgid ""
+"OpenTargets_get_diseases_phenotypes_by_target_ensembl tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:544 781514ab8c7b4f5cb181d6fb3c9bd8b6
@@ -781,7 +796,8 @@ msgid "**OpenTargets_get_drug_adverse_events_by_chemblId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:568 f35ab867ddc74030a9c996ee0151220d
-msgid "Retrieve significant adverse events reported for a specific drug chemblId."
+msgid ""
+"Retrieve significant adverse events reported for a specific drug chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 1ed300a7e59f44e187dcb64ce452893c
@@ -794,8 +810,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:576 f69e175b43374b17abd08ee6fabbe071
 msgid ""
-"**Description**: Retrieve significant adverse events reported for a "
-"specific drug chemblId."
+"**Description**: Retrieve significant adverse events reported for a specific"
+" drug chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:583 9a981921b9fc42eca73ee8fba727b0bf
@@ -803,7 +819,8 @@ msgid "``page`` (object) (optional) Pagination settings."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:599 53bd0edb1e784b7090b1ed36f82772f4
-msgid "**OpenTargets_get_drug_approval_status_by_chemblId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_drug_approval_status_by_chemblId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:601 c4839b6b10c84a5e9572ee84b29bcbe3
@@ -819,7 +836,8 @@ msgid "**Name**: ``OpenTargets_get_drug_approval_status_by_chemblId``"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:609 411778bdc04947138d21ec4cd446a0d2
-msgid "**Description**: Retrieve the approval status of a specific drug chemblId."
+msgid ""
+"**Description**: Retrieve the approval status of a specific drug chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:629 e1fbf526bc5f4426800d7ef9417f7853
@@ -830,7 +848,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:631 ../../tools/opentarget_tools.rst:691
 #: 22f39e421a674af9a750cce705cfe409 c2024a317bd14ef7a3ed59c9c62b9a2c
-msgid "Fetch the drug chemblId and description based on the drug generic name."
+msgid ""
+"Fetch the drug chemblId and description based on the drug generic name."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 427ce67b8992402bb3594932d5de0335
@@ -849,14 +868,14 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:639 ../../tools/opentarget_tools.rst:699
 #: 15788077a4684de397383201f0fb93ad be2ca5ee7ec543d693c8387d879da984
 msgid ""
-"**Description**: Fetch the drug chemblId and description based on the "
-"drug generic name."
+"**Description**: Fetch the drug chemblId and description based on the drug "
+"generic name."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:643 294404896c184b0c94e92f4fafeb056c
 msgid ""
-"``drugName`` (string) (optional) The generic name of the drug for which "
-"the ID is required."
+"``drugName`` (string) (optional) The generic name of the drug for which the "
+"ID is required."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:659 e5760edbfc6d4bbcb869bffebcd6e8da
@@ -899,8 +918,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:703 ea3535d61d784b6db534751c12375697
 msgid ""
-"``drugName`` (string) (optional) The name of the drug for which the ID is"
-" required."
+"``drugName`` (string) (optional) The name of the drug for which the ID is "
+"required."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:719 626a1669c2d44c6bb571d4fb78952397
@@ -909,8 +928,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:721 6c47e2afc29b4ad0bbef9e347c3c9202
 msgid ""
-"Fetch indications (treatable phenotypes/diseases) for a given drug "
-"chemblId."
+"Fetch indications (treatable phenotypes/diseases) for a given drug chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 77590234aa054d87b4329664c4503c96
@@ -935,8 +953,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:749 937a9ca5da32491d9747dec3fe139593
 msgid ""
-"**OpenTargets_get_drug_mechanisms_of_action_by_chemblId** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_drug_mechanisms_of_action_by_chemblId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:751 50e1ea881339452899ce32282cb73a51
@@ -946,7 +963,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst f43071a4c65e4a33a5ba25dc2fc64035
-msgid "OpenTargets_get_drug_mechanisms_of_action_by_chemblId tool specification"
+msgid ""
+"OpenTargets_get_drug_mechanisms_of_action_by_chemblId tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:757 f1c0d9f6dbe24742a3223600a32a7aa0
@@ -999,8 +1017,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:819 90e8ee5d553d4cac85133e75feeadb68
 msgid ""
-"**Description**: Retrieve the trade names associated with a specific drug"
-" chemblId."
+"**Description**: Retrieve the trade names associated with a specific drug "
+"chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:839 d074875a912b4236a3405825276d7266
@@ -1020,7 +1038,8 @@ msgid "**Name**: ``OpenTargets_get_drug_warnings_by_chemblId``"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:849 0d47165f67984677a464c372b28b95bc
-msgid "**Description**: Retrieve warnings for a specific drug using ChEMBL ID."
+msgid ""
+"**Description**: Retrieve warnings for a specific drug using ChEMBL ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:869 a415f639d1864a17b3f15bdd6c7bf09a
@@ -1042,7 +1061,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:877 f70bf88c4f8f406e9ee0e873dfd9c861
-msgid "**Name**: ``OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId``"
+msgid ""
+"**Name**: ``OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId``"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:879 58673bbff3ae401d98589696432e8d28
@@ -1072,13 +1092,14 @@ msgid "**Name**: ``OpenTargets_get_gene_ontology_terms_by_goID``"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:909 f0d962d98cca4ff39637ac29cc38dd7f
-msgid "**Description**: Retrieve Gene Ontology terms based on a list of GO IDs."
+msgid ""
+"**Description**: Retrieve Gene Ontology terms based on a list of GO IDs."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:913 9d60bdad541b4456abd7ad4a89539984
 msgid ""
-"``goIds`` (array) (optional) A list of Gene Ontology (GO) IDs to fetch "
-"the corresponding terms."
+"``goIds`` (array) (optional) A list of Gene Ontology (GO) IDs to fetch the "
+"corresponding terms."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:929 65f3f7f5fd364e4fb933eee95caa6d6b
@@ -1101,8 +1122,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:939 8a3be3e799c44ecb9bd8a7f49e60c780
 msgid ""
-"**Description**: Get a list of known drugs and associated information "
-"using the specified chemblId."
+"**Description**: Get a list of known drugs and associated information using "
+"the specified chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:959 c6927ac589284c37bff5d65a1f97f2bd
@@ -1117,8 +1138,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst 30b79556c9744363a1b3205100b4e0a1
 msgid ""
-"OpenTargets_get_parent_child_molecules_by_drug_chembl_ID tool "
-"specification"
+"OpenTargets_get_parent_child_molecules_by_drug_chembl_ID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:967 d7bfc31529b84f7eb7a87d5d2dcd4fae
@@ -1127,8 +1147,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:969 d5f06a29f0db4754b9e7fcc0a1208d55
 msgid ""
-"**Description**: Get parent and child molecules of specified drug "
-"chemblId."
+"**Description**: Get parent and child molecules of specified drug chemblId."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:989 2fb7c4de4af84523b603a8dd8d74c8f8
@@ -1137,8 +1156,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:991 4d0fe943c33c47f986b6064e06329733
 msgid ""
-"Retrieve publications related to a disease efoId, including PubMed IDs "
-"and publication dates."
+"Retrieve publications related to a disease efoId, including PubMed IDs and "
+"publication dates."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 3105972a25224615b0cb39ac2a7cb87b
@@ -1151,8 +1170,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:999 c4c4afcb9c0b418cb61c967c07d40c1f
 msgid ""
-"**Description**: Retrieve publications related to a disease efoId, "
-"including PubMed IDs and publication dates."
+"**Description**: Retrieve publications related to a disease efoId, including"
+" PubMed IDs and publication dates."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1003 2894e55a40b547eb99b32326e2fdaef9
@@ -1163,20 +1182,22 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:1096 46182af492734b908506c4f121b95750
 #: b0b07e545e8b4796a55958432c381436 d4cab17527bf4be1ba7e79938a3af375
 msgid ""
-"``additionalIds`` (array) (optional) List of additional IDs to include in"
-" the search."
+"``additionalIds`` (array) (optional) List of additional IDs to include in "
+"the search."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1009 ../../tools/opentarget_tools.rst:1054
 #: ../../tools/opentarget_tools.rst:1099 7cbbffa3629946b29317b281631c580d
 #: 827548544b5b4f72b301d9aa795b144b 903c9d81dab5492f990314040f944563
-msgid "``startYear`` (integer) (optional) Year at the lower end of the filter."
+msgid ""
+"``startYear`` (integer) (optional) Year at the lower end of the filter."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1012 ../../tools/opentarget_tools.rst:1057
 #: ../../tools/opentarget_tools.rst:1102 084f1b4f821e44faa4202e1aa3cd02ae
 #: 862824b31e4242aca907dadee2bc753c fc2f055d94c0414e9928c155570c8056
-msgid "``startMonth`` (integer) (optional) Month at the lower end of the filter."
+msgid ""
+"``startMonth`` (integer) (optional) Month at the lower end of the filter."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1015 ../../tools/opentarget_tools.rst:1060
@@ -1188,7 +1209,8 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:1018 ../../tools/opentarget_tools.rst:1063
 #: ../../tools/opentarget_tools.rst:1108 27f8565582be40d0a68ebe49a0e52486
 #: d43aa69788eb416aa8f309fe9bca59f6 e37e9329ad4e4e1a849d642f778b8bba
-msgid "``endMonth`` (integer) (optional) Month at the higher end of the filter."
+msgid ""
+"``endMonth`` (integer) (optional) Month at the higher end of the filter."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1034 f5be55b7cd674065a7fe193d41fa234b
@@ -1197,8 +1219,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1036 66c4bb70d8c7466fba8acbac18d3779e
 msgid ""
-"Retrieve publications related to a drug chemblId, including PubMed IDs "
-"and publication dates."
+"Retrieve publications related to a drug chemblId, including PubMed IDs and "
+"publication dates."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 4f18b5d0ba4448c48021775f71a77229
@@ -1211,8 +1233,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1044 89758b1250c14d3da4a24cb1ac4d39ba
 msgid ""
-"**Description**: Retrieve publications related to a drug chemblId, "
-"including PubMed IDs and publication dates."
+"**Description**: Retrieve publications related to a drug chemblId, including"
+" PubMed IDs and publication dates."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1048 3f5120df7eb2470d968504966e3ea52a
@@ -1220,13 +1242,14 @@ msgid "``entityId`` (string) (optional) The ID of the entity (chemblId)."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1079 1c4715fb24d04b37b2aeb63bc43dd5d4
-msgid "**OpenTargets_get_publications_by_target_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_publications_by_target_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1081 e0f3041a66e24274a860f9439f2c1462
 msgid ""
-"Retrieve publications related to a target ensemblID, including PubMed IDs"
-" and publication dates."
+"Retrieve publications related to a target ensemblID, including PubMed IDs "
+"and publication dates."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 9a61a87c7d7948a585c11ea24cbbec6b
@@ -1248,13 +1271,14 @@ msgid "``entityId`` (string) (optional) The ID of the entity (ensemblID)."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1124 d0b0508d9d884164815867b4eb7b43f8
-msgid "**OpenTargets_get_similar_entities_by_disease_efoId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_similar_entities_by_disease_efoId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1126 3a2bb1b9e86040cd9e1759bba61c2ca6
 msgid ""
-"Retrieve similar entities for a given disease efoId using a model trained"
-" with PubMed."
+"Retrieve similar entities for a given disease efoId using a model trained "
+"with PubMed."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 206d2b773cef4bc3924e78fbd2cdfac1
@@ -1267,16 +1291,16 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1134 c7c90b1cd3a3433aa90585a7fa46cb7e
 msgid ""
-"**Description**: Retrieve similar entities for a given disease efoId "
-"using a model trained with PubMed."
+"**Description**: Retrieve similar entities for a given disease efoId using a"
+" model trained with PubMed."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1141 ../../tools/opentarget_tools.rst:1177
 #: ../../tools/opentarget_tools.rst:1213 56ab15bf1d4841bb8babababdef89af6
 #: 5a4eb8545cba419a89b72f5040062e41 f37114d3c12f4e22b4f30398b4db10fb
 msgid ""
-"``threshold`` (number) (optional) Threshold similarity between 0 and 1. "
-"Only results above threshold are returned."
+"``threshold`` (number) (optional) Threshold similarity between 0 and 1. Only"
+" results above threshold are returned."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1144 ../../tools/opentarget_tools.rst:1180
@@ -1286,13 +1310,14 @@ msgid "``size`` (integer) (optional) Number of similar entities to fetch."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1160 dc1b15a3138c4e819a4788ef54e95226
-msgid "**OpenTargets_get_similar_entities_by_drug_chemblId** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_similar_entities_by_drug_chemblId** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1162 46ce0a4cd56c470f9f76f9f667f52c73
 msgid ""
-"Retrieve similar entities for a given drug chemblId using a model trained"
-" with PubMed."
+"Retrieve similar entities for a given drug chemblId using a model trained "
+"with PubMed."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 431a2c0004364150a1627d10e7329469
@@ -1305,8 +1330,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1170 7ceece2112914a2e8e68bca8eca1d899
 msgid ""
-"**Description**: Retrieve similar entities for a given drug chemblId "
-"using a model trained with PubMed."
+"**Description**: Retrieve similar entities for a given drug chemblId using a"
+" model trained with PubMed."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1174 d6b6e4f79b464195aae72b212a394f55
@@ -1315,18 +1340,18 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1196 9744132d34db41e1a096dcd2a6c93224
 msgid ""
-"**OpenTargets_get_similar_entities_by_target_ensemblID** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_similar_entities_by_target_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1198 4f212a6cded94276a29bf5f981440965
 msgid ""
-"Retrieve similar entities for a given target ensemblID using a model "
-"trained with PubMed."
+"Retrieve similar entities for a given target ensemblID using a model trained"
+" with PubMed."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst deb270697bdc4ee4989972d6cda86a5f
-msgid "OpenTargets_get_similar_entities_by_target_ensemblID tool specification"
+msgid ""
+"OpenTargets_get_similar_entities_by_target_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1204 a0bf84eb2b1e48f7891e3bc274d6eb43
@@ -1348,7 +1373,8 @@ msgid "**OpenTargets_get_target_classes_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1234 18eaf624af3c4e9aaae2ace03b046ce7
-msgid "Retrieve the target classes associated with a specific target ensemblID."
+msgid ""
+"Retrieve the target classes associated with a specific target ensemblID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst ca504f3ebc334a6daf1ddffb81dc4d24
@@ -1366,7 +1392,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1262 ea282991f6ac4a1396693e218aa7fbaf
-msgid "**OpenTargets_get_target_constraint_info_by_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_target_constraint_info_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1264 d308ee805739474ca14a77aa5c17676a
@@ -1391,8 +1418,7 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1292 c28e53f7b8f544d5b65b17d502dc9f73
 msgid ""
-"**OpenTargets_get_target_enabling_packages_by_ensemblID** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_target_enabling_packages_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1294 c07797662ffb4f00aafd999adb9753a0
@@ -1402,7 +1428,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 50669f475a9343559766dbd988b56e55
-msgid "OpenTargets_get_target_enabling_packages_by_ensemblID tool specification"
+msgid ""
+"OpenTargets_get_target_enabling_packages_by_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1300 3d2929ab7a724ca7ae6d6d6d1ef93aea
@@ -1411,16 +1438,18 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1302 4251b730d6cf4527a3c1c684b0c6f139
 msgid ""
-"**Description**: Retrieve the Target Enabling Packages (TEP) associated "
-"with a specific target ensemblID."
+"**Description**: Retrieve the Target Enabling Packages (TEP) associated with"
+" a specific target ensemblID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1322 da9da43faeba4bdf80298a9931be18f5
-msgid "**OpenTargets_get_target_gene_ontology_by_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_target_gene_ontology_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1324 1a1de2206e344b849552c707d3ae5f45
-msgid "Retrieve Gene Ontology annotations for a specific target by Ensembl ID."
+msgid ""
+"Retrieve Gene Ontology annotations for a specific target by Ensembl ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 64dde4a9c90e416cafdf164b63121e27
@@ -1433,30 +1462,30 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1332 26a681a7a436481b8d199f56722e9205
 msgid ""
-"**Description**: Retrieve Gene Ontology annotations for a specific target"
-" by Ensembl ID."
+"**Description**: Retrieve Gene Ontology annotations for a specific target by"
+" Ensembl ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1336 4f0e137c7c3d43aaaf264f010ea628c1
 msgid ""
-"``ensemblId`` (string) (optional) The Ensembl ID of the target for which "
-"to retrieve Gene Ontology annotations."
+"``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
+"retrieve Gene Ontology annotations."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1352 f11fa644ea2d47d9aea6798817379e17
 msgid ""
-"**OpenTargets_get_target_genomic_location_by_ensemblID** (Type: "
-"OpenTarget)"
+"**OpenTargets_get_target_genomic_location_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1354 856b4554ea794828ae87b021e6c08e3a
 msgid ""
-"Retrieve genomic location data for a specific target, including "
-"chromosome, start, end, and strand."
+"Retrieve genomic location data for a specific target, including chromosome, "
+"start, end, and strand."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 7f034c9fb3954b619a21dad86c581219
-msgid "OpenTargets_get_target_genomic_location_by_ensemblID tool specification"
+msgid ""
+"OpenTargets_get_target_genomic_location_by_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1360 33068a22c186494081210ca79d85b783
@@ -1471,8 +1500,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1366 b74674ad83a24c5d836983bc1bf4b698
 msgid ""
-"``ensemblId`` (string) (optional) The Ensembl ID of the target for which "
-"to retrieve genomic location information."
+"``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
+"retrieve genomic location information."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1382 30ae04daa7dd48a99c7ec9dba0121157
@@ -1497,8 +1526,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1396 8456982a357a443da0572b4657e3babf
 msgid ""
-"``ensemblId`` (string) (optional) The Ensembl ID of the target for which "
-"to retrieve homologues."
+"``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
+"retrieve homologues."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1412 3288c20e534847648a6b78587c48e6e3
@@ -1519,18 +1548,18 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1422 7c615c4ef14340e8916124114fe32c67
 msgid ""
-"**Description**: Get the ensemblId and description based on the target "
-"name."
+"**Description**: Get the ensemblId and description based on the target name."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1426 6e4e8328b1884ab5b6249179a981e86c
 msgid ""
-"``targetName`` (string) (optional) The name of the target for which the "
-"ID is required."
+"``targetName`` (string) (optional) The name of the target for which the ID "
+"is required."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1442 a92ca8916fec4547a8f4e0bedd70404a
-msgid "**OpenTargets_get_target_interactions_by_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_target_interactions_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1444 cbcb4635bc00425d8f1112e8ba0ecec6
@@ -1549,8 +1578,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1452 51cd8856dcfe4c7d98c3ee62e9d3ee90
 msgid ""
-"**Description**: Retrieve interaction data for a specific target "
-"ensemblID, including interaction partners and evidence."
+"**Description**: Retrieve interaction data for a specific target ensemblID, "
+"including interaction partners and evidence."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1459 f0bb484a1ac64f45bf06038699f253a2
@@ -1558,11 +1587,13 @@ msgid "``page`` (object) (optional) Pagination parameters."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1475 6002aceefd994fdda02d80405342e667
-msgid "**OpenTargets_get_target_safety_profile_by_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_target_safety_profile_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1477 30aa7b84da7d4818b34251aee22e358f
-msgid "Retrieve known target safety liabilities for a specific target Ensembl ID."
+msgid ""
+"Retrieve known target safety liabilities for a specific target Ensembl ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 38ecf2e273064cc388949a028f9e5273
@@ -1581,8 +1612,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1489 9d06b8d300c24182bcc395a45e2aaf73
 msgid ""
-"``ensemblId`` (string) (optional) The Ensembl ID of the target for which "
-"to retrieve safety liabilities."
+"``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
+"retrieve safety liabilities."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1505 0b06cfe625d5474cbee401fcf06dd287
@@ -1599,12 +1630,12 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst 038c24bd3c6a46b6b06de0511b7ede18
 msgid ""
-"OpenTargets_get_target_subcellular_locations_by_ensemblID tool "
-"specification"
+"OpenTargets_get_target_subcellular_locations_by_ensemblID tool specification"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1513 2ac45602f7bd417d96caf77d49921967
-msgid "**Name**: ``OpenTargets_get_target_subcellular_locations_by_ensemblID``"
+msgid ""
+"**Name**: ``OpenTargets_get_target_subcellular_locations_by_ensemblID``"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1515 657316835da44658816221501f3a6f33
@@ -1638,7 +1669,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1565 0e03c4fa3e1940c88196150c26f9a180
-msgid "**OpenTargets_get_target_tractability_by_ensemblID** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_get_target_tractability_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1567 7a0cebed419e4ec5a4403e047ea978f0
@@ -1657,8 +1689,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1575 17da18da71884460b1cd51a7f56a5750
 msgid ""
-"**Description**: Retrieve tractability assessments, including modality "
-"and values, for a specific target ensembl ID."
+"**Description**: Retrieve tractability assessments, including modality and "
+"values, for a specific target ensembl ID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1595 0af478a551094a62b2a2ccfb7eeb16db
@@ -1667,8 +1699,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1597 c921bfdbf6734f7b9c8c782daa8d7465
 msgid ""
-"Perform a multi-entity search based on a query string, filtering by "
-"entity names and pagination s..."
+"Perform a multi-entity search based on a query string, filtering by entity "
+"names and pagination s..."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst 61304509116e4c559adbfee96d8e52da
@@ -1694,8 +1726,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1612 65c4761c7ca3445d8220d283526bd320
 msgid ""
-"``entityNames`` (array) (optional) List of entity names to search for "
-"(e.g., target, disease, drug)."
+"``entityNames`` (array) (optional) List of entity names to search for (e.g.,"
+" target, disease, drug)."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1615 36fbbdbe100648849469af8d3803484c
@@ -1703,7 +1735,8 @@ msgid "``page`` (object) (optional) Pagination settings with index and size."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1631 d09d4c8f92f542d78bc80618e849aa99
-msgid "**OpenTargets_search_category_counts_by_query_string** (Type: OpenTarget)"
+msgid ""
+"**OpenTargets_search_category_counts_by_query_string** (Type: OpenTarget)"
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1633 8431d13d7fcc49628421b4328a120161
@@ -1722,8 +1755,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1641 5d97c96751874122b4d8e5830a1441b7
 msgid ""
-"**Description**: Get the count of entries in each entity category "
-"(disease, target, drug) based on a query string."
+"**Description**: Get the count of entries in each entity category (disease, "
+"target, drug) based on a query string."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1661 692c90c948404343b18022320ea37c4f
@@ -1732,8 +1765,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1663 43dcc76411c5469eaa60215774e8901e
 msgid ""
-"Explore evidence that supports a specific target-disease association. "
-"Input is disease efoId and ..."
+"Explore evidence that supports a specific target-disease association. Input "
+"is disease efoId and ..."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst a38b21f979574cc78b6ae3a91b278973
@@ -1746,8 +1779,8 @@ msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1671 e79a4907c6b74b9a888caafb72958821
 msgid ""
-"**Description**: Explore evidence that supports a specific target-disease"
-" association. Input is disease efoId and target ensemblID."
+"**Description**: Explore evidence that supports a specific target-disease "
+"association. Input is disease efoId and target ensemblID."
 msgstr ""
 
 #: ../../tools/opentarget_tools.rst:1694 2ef654ec0b544b7a80019b2037982933
@@ -1761,4 +1794,3 @@ msgstr ""
 #: ../../tools/opentarget_tools.rst:1697 8068c5414b5f42ffb86d33cb8d0a0485
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

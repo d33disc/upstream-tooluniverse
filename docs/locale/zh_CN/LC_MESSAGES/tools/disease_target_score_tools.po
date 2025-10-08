@@ -7,58 +7,62 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/disease_target_score_tools.rst:2
 #: 1b4c2cfdb92943369cc9c75f9af3d066
 msgid "Disease Target Score Tools"
-msgstr ""
+msgstr "疾病靶点评分工具"
 
 #: ../../tools/disease_target_score_tools.rst:4
 #: 5eba1dc43e9c47a49822e73c7a75ab99
 msgid ""
-"**Configuration File**: ``disease_target_score_tools.json`` **Tool "
-"Type**: Local **Tools Count**: 10"
+"**Configuration File**: ``disease_target_score_tools.json`` **Tool Type**: "
+"Local **Tools Count**: 10"
 msgstr ""
+"**配置文件**：``disease_target_score_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：10"
 
 #: ../../tools/disease_target_score_tools.rst:8
 #: 79c4c7adc2334f13962e876b81799645
 msgid ""
 "This page contains all tools defined in the "
 "``disease_target_score_tools.json`` configuration file."
-msgstr ""
+msgstr "此页面包含 ``disease_target_score_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/disease_target_score_tools.rst:11
 #: 29f199884ec942a1a0f491e6c9bffe7a
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/disease_target_score_tools.rst:14
 #: 85f5c02d132a4f30ae092e3e7f46bc8f
-msgid "**cancer_biomarkers_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgid ""
+"**cancer_biomarkers_disease_target_score** (Type: DiseaseTargetScoreTool)"
+msgstr "**癌症生物标志物疾病靶点评分**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:16
 #: a55511e909e14443b0279f5a6170165f
 msgid ""
-"Extract disease-target association scores from cancer biomarkers data. "
-"This includes known cancer..."
-msgstr ""
+"Extract disease-target association scores from cancer biomarkers data. This "
+"includes known cancer..."
+msgstr "从癌症生物标志物数据中提取疾病-靶点关联评分。包括已知的癌症..."
 
 #: ../../tools/disease_target_score_tools.rst dd47e835e4784e6196d71a75b6f4b74d
 msgid "cancer_biomarkers_disease_target_score tool specification"
-msgstr ""
+msgstr "cancer_biomarkers_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:20
 #: ../../tools/disease_target_score_tools.rst:54
@@ -76,12 +80,12 @@ msgstr ""
 #: a1aa83b18fbd440490c3ce5b12cd3d62 a95d3d22109249949393ada90bd71f59
 #: bd2fa838a4ad448e981a16c88ade33a9 cded5431add34a02b413c6d786180b1b
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/disease_target_score_tools.rst:22
 #: 065258fba4fa4cd780294b8267f189ee
 msgid "**Name**: ``cancer_biomarkers_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``cancer_biomarkers_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:23
 #: ../../tools/disease_target_score_tools.rst:57
@@ -99,14 +103,14 @@ msgstr ""
 #: c54fd58a34f44c32b178c826473aed0f dc58831ee8b34ca79bccf51e937e9c06
 #: e7f1ea9b3e2f4694a03b91d58fe25f45 f5ca409e1bf4474ebd5999b38e8271ae
 msgid "**Type**: ``DiseaseTargetScoreTool``"
-msgstr ""
+msgstr "**类型**：``DiseaseTargetScoreTool``"
 
 #: ../../tools/disease_target_score_tools.rst:24
 #: e15d7f0ffa65428382376758f799a438
 msgid ""
 "**Description**: Extract disease-target association scores from cancer "
 "biomarkers data. This includes known cancer biomarkers."
-msgstr ""
+msgstr "**描述**：从癌症生物标志物数据中提取疾病-靶点关联评分。这包括已知的癌症生物标志物。"
 
 #: ../../tools/disease_target_score_tools.rst:26
 #: ../../tools/disease_target_score_tools.rst:60
@@ -124,7 +128,7 @@ msgstr ""
 #: d4192e601a454e85818de28a81344afd e63353f3d8fa4fe8a33b5b460e9eebed
 #: efd24a3dae5b4e749c2c1a07c837544b f70f73e02fa642cda7ae1462e51e9c1e
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/disease_target_score_tools.rst:28
 #: ../../tools/disease_target_score_tools.rst:62
@@ -142,9 +146,9 @@ msgstr ""
 #: b16c19b8015d4b1db434397d751befae c57407c0651247f7a84f7a532fd08369
 #: c88a4473d8d845849409a749776d1479 de023c6be3204ddf908cccfdb64440c4
 msgid ""
-"``efoId`` (string) (required) The EFO (Experimental Factor Ontology) ID "
-"of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
-msgstr ""
+"``efoId`` (string) (required) The EFO (Experimental Factor Ontology) ID of "
+"the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia"
+msgstr "``efoId``（字符串）（必填）疾病的EFO（实验因子本体）ID，例如，慢性粒细胞白血病的ID为'EFO_0000339'"
 
 #: ../../tools/disease_target_score_tools.rst:31
 #: ../../tools/disease_target_score_tools.rst:65
@@ -162,9 +166,9 @@ msgstr ""
 #: b1c09675af2140fa9f735e4db54fb40e cc7f8cdbec5940788f599571c462d3a5
 #: dd1c03051fdb45b090fc697955afa167 fc1af81b7c96497faf4e65fc353ea7ca
 msgid ""
-"``pageSize`` (integer) (optional) Number of results per page (default: "
-"100, max: 100)"
-msgstr ""
+"``pageSize`` (integer) (optional) Number of results per page (default: 100, "
+"max: 100)"
+msgstr "``pageSize``（整数）（可选）每页返回结果数量（默认值：100，最大值：100）"
 
 #: ../../tools/disease_target_score_tools.rst:34
 #: ../../tools/disease_target_score_tools.rst:68
@@ -182,103 +186,107 @@ msgstr ""
 #: 9738daa759a948a4a97a1c704bac63f2 ee5c0b433f2845eaabe396b2570f5ff4
 #: f7c12fd8cfed43b28bc23cfb8096400e fcbd30174cc948c782fe86fa552930ed
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/disease_target_score_tools.rst:48
 #: c367f720a6ce40bdaae485eb5f97a6b3
-msgid "**cancer_gene_census_disease_target_score** (Type: DiseaseTargetScoreTool)"
+msgid ""
+"**cancer_gene_census_disease_target_score** (Type: DiseaseTargetScoreTool)"
 msgstr ""
+"**cancer_gene_census_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:50
 #: 9d9c51b9f3ea4cb389878a5c82f18107
 msgid ""
 "Extract disease-target association scores from Cancer Gene Census. This "
 "provides curated cancer g..."
-msgstr ""
+msgstr "从癌症基因目录中提取疾病与靶点的关联评分。该功能提供经过整理的癌症基因..."
 
 #: ../../tools/disease_target_score_tools.rst e4b77d207a8c46e1904acdbf7a54f1d0
 msgid "cancer_gene_census_disease_target_score tool specification"
-msgstr ""
+msgstr "癌症基因目录疾病目标评分工具规范"
 
 #: ../../tools/disease_target_score_tools.rst:56
 #: 340740facf4243388a6494f39e598c9c
 msgid "**Name**: ``cancer_gene_census_disease_target_score``"
-msgstr ""
+msgstr "**名称**: ``cancer_gene_census_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:58
 #: bbfcfbc29522434fb54c4ea4628b2229
 msgid ""
-"**Description**: Extract disease-target association scores from Cancer "
-"Gene Census. This provides curated cancer gene data."
-msgstr ""
+"**Description**: Extract disease-target association scores from Cancer Gene "
+"Census. This provides curated cancer gene data."
+msgstr "**描述**：从癌症基因目录中提取疾病-靶点关联评分。本功能提供经过整理的癌症基因数据。"
 
 #: ../../tools/disease_target_score_tools.rst:82
 #: 04adf87e504242e0a3d3ff94a0190ff3
 msgid "**chembl_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**chembl_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:84
 #: 5c7ff676255b4d738ba25f3fb6de8dc3
 msgid ""
-"Extract disease-target association scores specifically from ChEMBL "
-"database. ChEMBL provides bioa..."
-msgstr ""
+"Extract disease-target association scores specifically from ChEMBL database."
+" ChEMBL provides bioa..."
+msgstr "从ChEMBL数据库中提取疾病与靶点关联评分。ChEMBL提供生物活性数据..."
 
 #: ../../tools/disease_target_score_tools.rst 70b7117cc6e14a318478dbb720ff8bda
 msgid "chembl_disease_target_score tool specification"
-msgstr ""
+msgstr "chembl_disease_target_score 工具规范"
 
 #: ../../tools/disease_target_score_tools.rst:90
 #: b08d5ef4aea74c2f9530f3bf1daa4959
 msgid "**Name**: ``chembl_disease_target_score``"
-msgstr ""
+msgstr "**名称**: ``chembl_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:92
 #: d623f5ec285641b0846131825c46ab31
 msgid ""
-"**Description**: Extract disease-target association scores specifically "
-"from ChEMBL database. ChEMBL provides bioactivity data for drug-target "
+"**Description**: Extract disease-target association scores specifically from"
+" ChEMBL database. ChEMBL provides bioactivity data for drug-target "
 "interactions."
-msgstr ""
+msgstr "**描述**：从ChEMBL数据库中提取疾病-靶点关联评分。ChEMBL提供药物-靶点相互作用的生物活性数据。"
 
 #: ../../tools/disease_target_score_tools.rst:116
 #: d8e20fa949ef42e2a99868967f84a4b6
 msgid "**disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:118
 #: f47799347771470fbefac00a1607edb8
 msgid ""
-"Extract disease-target association scores from a specific data source "
-"using GraphQL API. This too..."
-msgstr ""
+"Extract disease-target association scores from a specific data source using "
+"GraphQL API. This too..."
+msgstr "使用GraphQL API从特定数据源中提取疾病与靶点的关联评分。"
 
 #: ../../tools/disease_target_score_tools.rst e76fa03c310a4e93baf09f33a4866d91
 msgid "disease_target_score tool specification"
-msgstr ""
+msgstr "疾病目标评分工具规范"
 
 #: ../../tools/disease_target_score_tools.rst:124
 #: 8a643242273e46f8944c8b3331ca5c26
 msgid "**Name**: ``disease_target_score``"
-msgstr ""
+msgstr "**名称**: ``disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:126
 #: d4a5aaf0e06c4ac0acc01404a3ba30cc
 msgid ""
-"**Description**: Extract disease-target association scores from a "
-"specific data source using GraphQL API. This tool retrieves all targets "
-"associated with a disease and their scores from a specified datasource "
-"(e.g., chembl, eva, cancer_gene_census, etc.)."
+"**Description**: Extract disease-target association scores from a specific "
+"data source using GraphQL API. This tool retrieves all targets associated "
+"with a disease and their scores from a specified datasource (e.g., chembl, "
+"eva, cancer_gene_census, etc.)."
 msgstr ""
+"**描述**：使用GraphQL API从特定数据源中提取疾病-"
+"靶点关联评分。此工具从指定的数据源（例如：chembl、eva、cancer_gene_census等）中检索与某种疾病相关的所有靶点及其评分。"
 
 #: ../../tools/disease_target_score_tools.rst:133
 #: b2ff5af520ee42b893b2dd343a1a2b02
 msgid ""
 "``datasourceId`` (string) (required) The datasource ID to extract scores "
 "from. Available options: 'chembl', 'eva', 'eva_somatic', "
-"'cancer_gene_census', 'cancer_biomarkers', 'europepmc', "
-"'expression_atlas', 'genomics_england', 'impc', 'reactome', "
-"'uniprot_literature', 'uniprot_variants'"
+"'cancer_gene_census', 'cancer_biomarkers', 'europepmc', 'expression_atlas', "
+"'genomics_england', 'impc', 'reactome', 'uniprot_literature', "
+"'uniprot_variants'"
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:154
@@ -289,8 +297,8 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:156
 #: 80a1847f971649b5b141855344a9d257
 msgid ""
-"Extract disease-target association scores from Europe PMC literature. "
-"This includes literature-ba..."
+"Extract disease-target association scores from Europe PMC literature. This "
+"includes literature-ba..."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst 803c4747b1764a44a19f473bc16f397c
@@ -305,8 +313,8 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:164
 #: d5bfd1364cbb4f1b9e5a638e8071762d
 msgid ""
-"**Description**: Extract disease-target association scores from Europe "
-"PMC literature. This includes literature-based evidence."
+"**Description**: Extract disease-target association scores from Europe PMC "
+"literature. This includes literature-based evidence."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:188
@@ -345,8 +353,8 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:224
 #: d1c3a0fc326b4685b607b64563e74265
 msgid ""
-"Extract disease-target association scores from EVA somatic mutations. "
-"This includes somatic varia..."
+"Extract disease-target association scores from EVA somatic mutations. This "
+"includes somatic varia..."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst d95a34141a144f6f806607ef2fbfd624
@@ -361,13 +369,14 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:232
 #: 31073a8f07514ba7b2c51ed9c174cd4c
 msgid ""
-"**Description**: Extract disease-target association scores from EVA "
-"somatic mutations. This includes somatic variant data."
+"**Description**: Extract disease-target association scores from EVA somatic "
+"mutations. This includes somatic variant data."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:256
 #: 39fcd01cf3af4ac984add8fb8506f3c4
-msgid "**expression_atlas_disease_target_score** (Type: DiseaseTargetScoreTool)"
+msgid ""
+"**expression_atlas_disease_target_score** (Type: DiseaseTargetScoreTool)"
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:258
@@ -389,20 +398,21 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:266
 #: f1a8194f3c26407b92bdf2cbd7116af6
 msgid ""
-"**Description**: Extract disease-target association scores from "
-"Expression Atlas. This provides gene expression data."
+"**Description**: Extract disease-target association scores from Expression "
+"Atlas. This provides gene expression data."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:290
 #: 810aa0c6ad034de0ad9379f019c5f939
-msgid "**genomics_england_disease_target_score** (Type: DiseaseTargetScoreTool)"
+msgid ""
+"**genomics_england_disease_target_score** (Type: DiseaseTargetScoreTool)"
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst:292
 #: 7ab9b99309614d618d2dce25b677bbbb
 msgid ""
-"Extract disease-target association scores from Genomics England data. "
-"This includes clinical geno..."
+"Extract disease-target association scores from Genomics England data. This "
+"includes clinical geno..."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst 90762942fe524635acbf29c1c9d70281
@@ -429,8 +439,8 @@ msgstr ""
 #: ../../tools/disease_target_score_tools.rst:326
 #: 712cd23548a54eab85ffd290c48887b0
 msgid ""
-"Extract disease-target association scores from Reactome pathway data. "
-"This includes pathway-based..."
+"Extract disease-target association scores from Reactome pathway data. This "
+"includes pathway-based..."
 msgstr ""
 
 #: ../../tools/disease_target_score_tools.rst b6d30b1a71f447cdbced3466282284d6
@@ -463,4 +473,3 @@ msgstr ""
 #: ad94cb115d584b43b1e0a7ca23690876
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

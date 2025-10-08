@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 11:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../SUMMARY.md:1 6b19fdf1603f41d4b43620e6d483c2e1
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:3 fc1d3f048b41454b9a9807c83930408c
 msgid "🎉 已完成的功能"
-msgstr ""
+msgstr "🎉 Completed Features"
 
 #: ../../SUMMARY.md:5 f76b70f2ac6b4fae9e2f8a41165a0ffe
 msgid "1. **📜 一键构建脚本升级**"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:7 531f775c7f374bad884e33dbd5ea9d7e
 msgid "`quick_doc_build.sh` (English version)"
-msgstr ""
+msgstr "`quick_doc_build.sh`（中文版）"
 
 #: ../../SUMMARY.md:8 7de56f96c4ae493791e46ffebaee1358
 msgid "✅ **默认构建中英文**：`DOC_LANGUAGES=\"en,zh_CN\"`"
@@ -47,15 +47,15 @@ msgstr ""
 #: ../../SUMMARY.md:10 ../../SUMMARY.md:157 aabc48ba138c4a168c2491b77b002006
 #: e5200d24e9be4ef18bbcfb4d4d32df26
 msgid "✅ 创建语言选择页"
-msgstr ""
+msgstr "✅ 创建语言选择页面"
 
 #: ../../SUMMARY.md:11 9d5696ee69fb426c91f53b56e4c20d10
 msgid "✅ 支持环境变量配置"
-msgstr ""
+msgstr "✅ 支持通过环境变量进行配置"
 
 #: ../../SUMMARY.md:13 86027b9d505244379f1c0c2459f2c4c3
 msgid "`quick_doc_build_cn.sh` (中文版本)"
-msgstr ""
+msgstr "`quick_doc_build_cn.sh`（中文版本）"
 
 #: ../../SUMMARY.md:14 4bd59af99a2f41e5ada73a45278bc917
 msgid "✅ **默认构建中英文**：`DOC_LANGUAGES=\"zh_CN,en\"`"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:16 293f8d1dbb8141c39377db656dc7873c
 msgid "✅ 完全相同功能"
-msgstr ""
+msgstr "✅ 完全相同的功能"
 
 #: ../../SUMMARY.md:18 1d5d0a26bbda4426ba30236250f492d3
 msgid "2. **🌍 语言选择页面**"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:24 fa2e548d2c0f4f9da159bfdfd6230246
 msgid "📱 移动端友好"
-msgstr ""
+msgstr "📱 移动端兼容"
 
 #: ../../SUMMARY.md:26 ../../SUMMARY.md:133 5b8097c2e84d441f8b753aa845d52041
 #: 5bd63f6dfda34ed6a05f8c824e12a3f8
@@ -124,7 +124,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:59 be6ad56694e5403f8e718dc174675bf2
 msgid "✅ 应用翻译到中文版本"
-msgstr ""
+msgstr "✅ 应用翻译至中文版本"
 
 #: ../../SUMMARY.md:61 c2656c3067fc47dda7c4c83b78ae4eb7
 msgid "已翻译内容"
@@ -531,7 +531,6 @@ msgstr ""
 
 #: ../../SUMMARY.md:379 abeb3f3c02d24f4b8ce78422617484da
 msgid ""
-"Created: 2025-10-07 Author: GitHub Copilot Status: ✅ Complete and Ready "
-"to Use"
+"Created: 2025-10-07 Author: GitHub Copilot Status: ✅ Complete and Ready to "
+"Use"
 msgstr ""
-

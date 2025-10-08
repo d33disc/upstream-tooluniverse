@@ -23,12 +23,12 @@ msgstr ""
 #: ../../tutorials/agentic_tools_tutorial.rst:3
 #: 874e62506ed842fdb2cf90f0cfa72e0b
 msgid "Agentic Tools Tutorial"
-msgstr ""
+msgstr "代理工具教程"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:5
 #: 72d964507a434b2882a7bf1dd2086776
 msgid "**Learn to build and use AI-powered tools in ToolUniverse**"
-msgstr ""
+msgstr "**学习在ToolUniverse中构建和使用AI驱动的工具**"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:8
 #: adef97c549fe44cfacfb80da81695bf9

@@ -7,52 +7,55 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/agentic_tools.rst:2 f6162c2a48164f64b080897a30037ba9
 msgid "Agentic Tools"
-msgstr ""
+msgstr "代理工具"
 
 #: ../../tools/agentic_tools.rst:4 4e0e9c278e6a473f9d1120bc6a45ae3e
 msgid ""
-"**Configuration File**: ``agentic_tools.json`` **Tool Type**: Local "
-"**Tools Count**: 33"
+"**Configuration File**: ``agentic_tools.json`` **Tool Type**: Local **Tools "
+"Count**: 33"
 msgstr ""
+"**配置文件**：``agentic_tools.json``  \n"
+"**工具类型**：本地  \n"
+"**工具数量**：33"
 
 #: ../../tools/agentic_tools.rst:8 be14e930e3774c7d8ce0b72bce119158
 msgid ""
 "This page contains all tools defined in the ``agentic_tools.json`` "
 "configuration file."
-msgstr ""
+msgstr "此页面包含在 ``agentic_tools.json`` 配置文件中定义的所有工具。"
 
 #: ../../tools/agentic_tools.rst:11 c2aab0cfe79a4a61a775a6c50d0d63d6
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/agentic_tools.rst:14 b4c8657c69244c18bc77405f946ea461
 msgid "**AdvancedCodeQualityAnalyzer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**高级代码质量分析器**（类型：自主工具）"
 
 #: ../../tools/agentic_tools.rst:16 774842dc4a2d470ca9643da9599524fd
 msgid ""
 "Performs deep analysis of code quality including complexity, security, "
 "performance, and maintaina..."
-msgstr ""
+msgstr "执行代码质量的深度分析，包括复杂度、安全性、性能和可维护性..."
 
 #: ../../tools/agentic_tools.rst 9fd45ff668d642ea932cfc18b49d902d
 msgid "AdvancedCodeQualityAnalyzer tool specification"
-msgstr ""
+msgstr "AdvancedCodeQualityAnalyzer 工具规范"
 
 #: ../../tools/agentic_tools.rst:20 ../../tools/agentic_tools.rst:60
 #: ../../tools/agentic_tools.rst:95 ../../tools/agentic_tools.rst:130
@@ -88,11 +91,11 @@ msgstr ""
 #: e893bd4b336c45bb8b0fc1732d65d753 efe4fd7ea236454dadd3bd08fba38eb0
 #: f23502257e3545cbac173e89bd404baf fe6e8258725843d88730b82a947f946c
 msgid "**Tool Information:**"
-msgstr ""
+msgstr "**工具信息：**"
 
 #: ../../tools/agentic_tools.rst:22 f4dbf6fddbb24485ba9615ee457ce4c0
 msgid "**Name**: ``AdvancedCodeQualityAnalyzer``"
-msgstr ""
+msgstr "**名称**：``AdvancedCodeQualityAnalyzer``"
 
 #: ../../tools/agentic_tools.rst:23 ../../tools/agentic_tools.rst:63
 #: ../../tools/agentic_tools.rst:98 ../../tools/agentic_tools.rst:133
@@ -128,14 +131,14 @@ msgstr ""
 #: f73ffe074e884be486758bc4a4a1b380 fcd39a5aceb54642962e50555b8acb47
 #: fe1ef31af12c4dc882e30fdd453b4179 fffa1fdade5c409a936eaadbccfef698
 msgid "**Type**: ``AgenticTool``"
-msgstr ""
+msgstr "**类型**：``AgenticTool``"
 
 #: ../../tools/agentic_tools.rst:24 87de879bb6e34e978f3b0be278bc164d
 msgid ""
 "**Description**: Performs deep analysis of code quality including "
-"complexity, security, performance, and maintainability metrics with "
-"domain-specific expertise"
-msgstr ""
+"complexity, security, performance, and maintainability metrics with domain-"
+"specific expertise"
+msgstr "**描述**：利用领域专长对代码质量进行深入分析，包括复杂性、安全性、性能和可维护性等指标"
 
 #: ../../tools/agentic_tools.rst:26 ../../tools/agentic_tools.rst:66
 #: ../../tools/agentic_tools.rst:101 ../../tools/agentic_tools.rst:136
@@ -171,29 +174,30 @@ msgstr ""
 #: d4954d6293ee4fd88015360995724dcf f325363f50d74272b6b6fcb20ef31d43
 #: fbe828088ca84f469fe69d2d0e014168 fe30caf175884b2fa308bfbb47675148
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/agentic_tools.rst:28 7514aaf60b964f2b91b51e8222852981
 msgid ""
-"``source_code`` (string) (required) The source code to analyze for "
-"quality assessment"
-msgstr ""
+"``source_code`` (string) (required) The source code to analyze for quality "
+"assessment"
+msgstr "``source_code``（字符串）（必填）用于质量评估分析的源代码"
 
 #: ../../tools/agentic_tools.rst:31 9c53f495c4674490a7fe5ac6ee4ba07d
 msgid ""
-"``language`` (string) (optional) Programming language (python, "
-"javascript, etc.)"
-msgstr ""
+"``language`` (string) (optional) Programming language (python, javascript, "
+"etc.)"
+msgstr "``language``（字符串）（可选）编程语言（如：python、javascript 等）"
 
 #: ../../tools/agentic_tools.rst:34 69a508a101d047ed8bac504606535da5
-msgid "``analysis_depth`` (string) (optional) Level of analysis depth to perform"
-msgstr ""
+msgid ""
+"``analysis_depth`` (string) (optional) Level of analysis depth to perform"
+msgstr "``analysis_depth``（字符串）（可选）执行分析深度的级别"
 
 #: ../../tools/agentic_tools.rst:37 11e24777f0f443ad9ba0bf79e940840f
 msgid ""
 "``domain_context`` (string) (optional) Domain context for specialized "
 "analysis (e.g., bioinformatics, web development)"
-msgstr ""
+msgstr "``domain_context``（字符串）（可选）用于特定领域分析的域上下文（例如：生物信息学、Web开发）"
 
 #: ../../tools/agentic_tools.rst:40 ../../tools/agentic_tools.rst:74
 #: ../../tools/agentic_tools.rst:109 ../../tools/agentic_tools.rst:156
@@ -229,80 +233,80 @@ msgstr ""
 #: d7981f6b49894dbdbe50dd8da65dc76e dacea528f3b64d7f9d6c5eb7c1067f81
 #: e138d8fb07934517b7283c90fdbdcd8a ecb10e428e7345d7945bacab3b1f4ac4
 msgid "**Example Usage:**"
-msgstr ""
+msgstr "**示例用法：**"
 
 #: ../../tools/agentic_tools.rst:54 31a3b425dcd5454b9220cc61b66312df
 msgid "**ArgumentDescriptionOptimizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ArgumentDescriptionOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:56 402b7a67dd4f4cdba8ec1842c615efac
 msgid ""
-"Optimizes the descriptions of tool arguments/parameters based on test "
-"case results and actual usa..."
-msgstr ""
+"Optimizes the descriptions of tool arguments/parameters based on test case "
+"results and actual usa..."
+msgstr "根据测试用例结果和实际使用情况优化工具参数/参数的描述。"
 
 #: ../../tools/agentic_tools.rst 292b1e323cb34e42a937d468bad51457
 msgid "ArgumentDescriptionOptimizer tool specification"
-msgstr ""
+msgstr "参数说明优化器工具规范"
 
 #: ../../tools/agentic_tools.rst:62 885185c05a244effb576bd0de17b8534
 msgid "**Name**: ``ArgumentDescriptionOptimizer``"
-msgstr ""
+msgstr "**名称**: ``ArgumentDescriptionOptimizer``"
 
 #: ../../tools/agentic_tools.rst:64 3acb60e745e54eb99a871c28c4c8555d
 msgid ""
 "**Description**: Optimizes the descriptions of tool arguments/parameters "
 "based on test case results and actual usage patterns. Provides improved "
 "descriptions that are more accurate and user-friendly."
-msgstr ""
+msgstr "**描述**：根据测试用例结果和实际使用模式优化工具参数的描述。提供更准确且更易于用户理解的描述。"
 
 #: ../../tools/agentic_tools.rst:68 8c8a079a80834d3595177c1b023dacf4
 msgid ""
 "``parameter_schema`` (string) (required) JSON string of the original "
 "parameter schema with properties and descriptions."
-msgstr ""
+msgstr "``parameter_schema``（字符串）（必填）原始参数架构的 JSON 字符串，其中包含属性和描述。"
 
 #: ../../tools/agentic_tools.rst:71 42e71cf2654c49f98a9503f8497da5de
 msgid ""
 "``test_results`` (string) (required) A JSON string containing test case "
 "input/output pairs showing parameter usage."
-msgstr ""
+msgstr "``test_results``（字符串）（必填）一个包含测试用例输入/输出对的 JSON 字符串，用于展示参数的使用情况。"
 
 #: ../../tools/agentic_tools.rst:89 c86b0d86b3a14653a7e9444a7d389598
 msgid "**CodeOptimizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**CodeOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:91 f4adf89f4c8947439dbdc156dab86432
 msgid ""
-"Optimizes code implementation for tools based on quality evaluation. "
-"Takes tool configuration and..."
-msgstr ""
+"Optimizes code implementation for tools based on quality evaluation. Takes "
+"tool configuration and..."
+msgstr "根据质量评估优化工具的代码实现。支持工具配置并..."
 
 #: ../../tools/agentic_tools.rst 7e0bcf57f9464347ba61193dcfe49567
 msgid "CodeOptimizer tool specification"
-msgstr ""
+msgstr "CodeOptimizer工具规格"
 
 #: ../../tools/agentic_tools.rst:97 091cbcbe1aeb44039fb0ed4004051592
 msgid "**Name**: ``CodeOptimizer``"
-msgstr ""
+msgstr "**名称**: ``CodeOptimizer``"
 
 #: ../../tools/agentic_tools.rst:99 210941cde86045489f1b17c84e829650
 msgid ""
-"**Description**: Optimizes code implementation for tools based on quality"
-" evaluation. Takes tool configuration and quality evaluation results to "
+"**Description**: Optimizes code implementation for tools based on quality "
+"evaluation. Takes tool configuration and quality evaluation results to "
 "produce improved source code."
-msgstr ""
+msgstr "**描述**：根据质量评估优化工具的代码实现。利用工具配置和质量评估结果生成改进后的源代码。"
 
 #: ../../tools/agentic_tools.rst:103 13f4f5cf49714754bf80401df84cb4fc
 msgid ""
-"``tool_config`` (string) (required) JSON string containing the complete "
-"tool configuration including current implementation"
-msgstr ""
+"``tool_config`` (string) (required) JSON string containing the complete tool"
+" configuration including current implementation"
+msgstr "``tool_config``（字符串）（必填）包含完整工具配置的 JSON 字符串，包括当前实现"
 
 #: ../../tools/agentic_tools.rst:106 00f215314b60460cb9872497401219fa
 msgid ""
-"``quality_evaluation`` (string) (required) JSON string containing quality"
-" evaluation results and feedback"
+"``quality_evaluation`` (string) (required) JSON string containing quality "
+"evaluation results and feedback"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:124 238b3d866cba4ab790ec996f629148e3
@@ -325,10 +329,10 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:134 8a9eb31d726c41639165916a50352574
 msgid ""
-"**Description**: Analyzes code quality from multiple dimensions including"
-" algorithmic correctness, functional implementation capability, "
-"performance characteristics, and best practices. Provides detailed "
-"feedback and improvement suggestions."
+"**Description**: Analyzes code quality from multiple dimensions including "
+"algorithmic correctness, functional implementation capability, performance "
+"characteristics, and best practices. Provides detailed feedback and "
+"improvement suggestions."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:138 04031a7f67ba42c8a7da3f5cf3184450
@@ -343,24 +347,25 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:144 51dd6873cb15493f914f2a7652e7a87a
 msgid ""
-"``tool_parameters`` (string) (required) JSON string of tool parameters "
-"and their types"
+"``tool_parameters`` (string) (required) JSON string of tool parameters and "
+"their types"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:147 dd06dbf18b844410849318ed0e673c5c
 msgid ""
-"``implementation_code`` (string) (required) The actual implementation "
-"code to analyze"
+"``implementation_code`` (string) (required) The actual implementation code "
+"to analyze"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:150 4395ed4d631742a2a9c4d8035bf5cf49
-msgid "``test_cases`` (string) (required) JSON string of test cases for the tool"
+msgid ""
+"``test_cases`` (string) (required) JSON string of test cases for the tool"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:153 b5d6a16fae4e4c0985088445e20ca536
 msgid ""
-"``test_execution_results`` (string) (optional) JSON string of test "
-"execution results including pass/fail status and actual outputs"
+"``test_execution_results`` (string) (optional) JSON string of test execution"
+" results including pass/fail status and actual outputs"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:174 5d2e6a961428447790e56e94a812a659
@@ -369,8 +374,7 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:176 82972cb02957463983a84e929dc38fcf
 msgid ""
-"Checks statistical choices, assumption testing, and reporting "
-"transparency."
+"Checks statistical choices, assumption testing, and reporting transparency."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst d2bf015bef0248ffbaa9a9b57490b7ba
@@ -411,22 +415,22 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:215 98335e5302eb4371895c1c64875a10f2
 msgid ""
-"**Description**: Analyzes a tool's original description and the results "
-"of multiple test cases, then suggests an improved description that is "
-"more accurate, comprehensive, and user-friendly. Optionally provides a "
-"rationale for the changes."
+"**Description**: Analyzes a tool's original description and the results of "
+"multiple test cases, then suggests an improved description that is more "
+"accurate, comprehensive, and user-friendly. Optionally provides a rationale "
+"for the changes."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:219 6770652c1c8843d8a05816ec78922480
 msgid ""
-"``original_description`` (string) (required) The original description of "
-"the tool."
+"``original_description`` (string) (required) The original description of the"
+" tool."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:222 7021250ff522465086abf42d6f797eba
 msgid ""
-"``test_results`` (string) (required) A JSON string containing a list of "
-"test case input/output pairs."
+"``test_results`` (string) (required) A JSON string containing a list of test"
+" case input/output pairs."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:240 b7ed252eb078453eac0c28b9fd1eec8a
@@ -449,12 +453,13 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:250 fbc21aa2bad747d0b287e2cc4d399af0
 msgid ""
-"**Description**: Evaluates the quality of tool descriptions and parameter"
-" descriptions, providing a score and specific feedback for improvements."
+"**Description**: Evaluates the quality of tool descriptions and parameter "
+"descriptions, providing a score and specific feedback for improvements."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:254 1c4a12437a564f3ebb03a8d254371300
-msgid "``tool_description`` (string) (required) The tool description to evaluate."
+msgid ""
+"``tool_description`` (string) (required) The tool description to evaluate."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:257 237a7bd3d29144fd9bdb243a4b492546
@@ -512,8 +517,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:302 d2765202e82647b1a7de1e0fc89a8256
 msgid ""
-"``implementation_code`` (string) (optional) Implementation code to "
-"validate (optional)"
+"``implementation_code`` (string) (optional) Implementation code to validate "
+"(optional)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:320 66eeb5ad64a54b0d9484231a7bdacda1
@@ -548,8 +553,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:353 a7567d9532794fc991467620a3414e71
 msgid ""
-"Assesses a proposed experimental design by assigning scores and "
-"structured feedback on hypothesis..."
+"Assesses a proposed experimental design by assigning scores and structured "
+"feedback on hypothesis..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 7d7c344f4cf8480fab7c986e569baabf
@@ -562,11 +567,10 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:361 fa00e8627e72406da6ab70aea5920577
 msgid ""
-"**Description**: Assesses a proposed experimental design by assigning "
-"scores and structured feedback on hypothesis clarity, variable "
-"definitions, sample size, controls, randomization, measurement methods, "
-"statistical analysis, bias mitigation, ethical considerations, and "
-"overall feasibility."
+"**Description**: Assesses a proposed experimental design by assigning scores"
+" and structured feedback on hypothesis clarity, variable definitions, sample"
+" size, controls, randomization, measurement methods, statistical analysis, "
+"bias mitigation, ethical considerations, and overall feasibility."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:365 45a13f658c6f4b298f77949d75802aa6
@@ -578,8 +582,8 @@ msgstr ""
 #: ../../tools/agentic_tools.rst:368 ced4b40f15724761b4d394b67d1c57e9
 msgid ""
 "``design_description`` (string) (required) A detailed description of the "
-"proposed experimental design, including variables, methods, sample "
-"details, and planned analyses."
+"proposed experimental design, including variables, methods, sample details, "
+"and planned analyses."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:386 19b4b25dd1f645249fefb9b90d16464f
@@ -588,8 +592,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:388 0b67c5029883461dbe6f87c2fe585efa
 msgid ""
-"Generates research hypotheses based on provided background context, "
-"domain, and desired format. U..."
+"Generates research hypotheses based on provided background context, domain, "
+"and desired format. U..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 7e15cd5efd95419b9971ea15a1477f24
@@ -602,9 +606,9 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:396 441d4f08e5634dbfa13fcf306147ed02
 msgid ""
-"**Description**: Generates research hypotheses based on provided "
-"background context, domain, and desired format. Uses AI to propose novel,"
-" testable hypotheses for scientific exploration."
+"**Description**: Generates research hypotheses based on provided background "
+"context, domain, and desired format. Uses AI to propose novel, testable "
+"hypotheses for scientific exploration."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:400 427f354bfa0a404eaf3e39a7e1990d1b
@@ -633,15 +637,15 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:412 64ded5769b10446c933a43f2e3100b12
 msgid ""
-"If–Then Statements: \"If [independent variable condition], then [expected"
-" outcome].\""
+"If–Then Statements: \"If [independent variable condition], then [expected "
+"outcome].\""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:413 2d5fee255e8c45e4a83664d7afe1ea19
 msgid ""
 "Null and Alternative (Statistical): • H₀ (Null): \"There is no "
-"difference/effect/association between X and Y.\" • H₁ (Alt): \"There is a"
-" difference/effect/association between X and Y.\""
+"difference/effect/association between X and Y.\" • H₁ (Alt): \"There is a "
+"difference/effect/association between X and Y.\""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:416 f5191b4e41ae4170b6b6d593bbf62a0e
@@ -652,14 +656,14 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:417 ee68a39e218748bb99f6f34800f96306
 msgid ""
-"Directional (Non-If–Then): \"Increasing/decreasing [Variable A] will lead"
-" to [directional change] in [Variable B].\""
+"Directional (Non-If–Then): \"Increasing/decreasing [Variable A] will lead to"
+" [directional change] in [Variable B].\""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:418 433fd0543bd94c93bd6e121870b6f95c
 msgid ""
-"Comparative (Group Comparison): \"Group A will show higher/lower "
-"[dependent measure] compared to Group B under [condition].\""
+"Comparative (Group Comparison): \"Group A will show higher/lower [dependent "
+"measure] compared to Group B under [condition].\""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:419 2add453c26cd4af8913bab21029698f1
@@ -670,8 +674,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:420 4d7c393d4e7b498b9eecc9056853cfd7
 msgid ""
-"Descriptive (Exploratory/Pattern-Oriented): \"Population X exhibits "
-"pattern Y in context Z.\""
+"Descriptive (Exploratory/Pattern-Oriented): \"Population X exhibits pattern "
+"Y in context Z.\""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:422 972d35aca03b498887f5f4718795cb04
@@ -698,9 +702,9 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:450 b91a3a65eab2497ba5f11df602c6173f
 msgid ""
-"**Description**: Generates relevant keyword labels for tools based on "
-"their name, description, parameters, and category. Creates a "
-"comprehensive list of tags for tool discovery and categorization."
+"**Description**: Generates relevant keyword labels for tools based on their "
+"name, description, parameters, and category. Creates a comprehensive list of"
+" tags for tool discovery and categorization."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:454 7acc803ce92249c491231a1cce945874
@@ -709,14 +713,14 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:457 9b7ab8f909ea4af0956df083597ba7d0
 msgid ""
-"``tool_description`` (string) (required) Detailed description of what the"
-" tool does"
+"``tool_description`` (string) (required) Detailed description of what the "
+"tool does"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:460 14f109930f014621a1fb9bab48a37036
 msgid ""
-"``tool_parameters`` (string) (required) JSON string describing the tool's"
-" input parameters and their types"
+"``tool_parameters`` (string) (required) JSON string describing the tool's "
+"input parameters and their types"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:463 2dc62e1875e74043b2bcfd23ed9a13f9
@@ -727,8 +731,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:466 6c19cda0b6f2449795c787fe6eab5cf7
 msgid ""
-"``existing_labels`` (string) (optional) JSON array string of existing "
-"labels to consider reusing (optional)"
+"``existing_labels`` (string) (optional) JSON array string of existing labels"
+" to consider reusing (optional)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:486 d5705e32005548c4bdf83f0cbf611997
@@ -736,7 +740,8 @@ msgid "**LiteratureContextReviewer** (Type: AgenticTool)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:488 e951c310b14d4f869aa4b987bfdcecc1
-msgid "Reviews coverage, relevance, and critical synthesis of prior scholarship."
+msgid ""
+"Reviews coverage, relevance, and critical synthesis of prior scholarship."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst ce6f546d22a944f9a397053b2fa8bd41
@@ -783,15 +788,13 @@ msgstr ""
 msgid ""
 "**Description**: Conducts systematic reviews of medical literature on "
 "specific topics. Synthesizes findings from multiple studies and provides "
-"evidence-based conclusions with structured analysis and quality "
-"assessment."
+"evidence-based conclusions with structured analysis and quality assessment."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:535 0d7d19c7310e4a6ea363c7cf1b4225b4
 msgid ""
-"``research_topic`` (string) (required) The specific medical/research "
-"topic for literature review (e.g., 'efficacy of drug X in treating "
-"condition Y')."
+"``research_topic`` (string) (required) The specific medical/research topic "
+"for literature review (e.g., 'efficacy of drug X in treating condition Y')."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:538 4b7097a803e54b9f9fd6dc6937d80eb7
@@ -802,16 +805,16 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:541 17da233efc4d479c86f9fedacdadc872
 msgid ""
-"``focus_area`` (string) (required) Primary focus area for the review "
-"(e.g., 'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', "
-"'biomarker validation')."
+"``focus_area`` (string) (required) Primary focus area for the review (e.g., "
+"'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', 'biomarker "
+"validation')."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:544 6b5dc4368d9e458d832ddae36d845288
 msgid ""
-"``study_types`` (string) (required) Types of studies to prioritize in the"
-" analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort"
-" studies', 'case-control studies')."
+"``study_types`` (string) (required) Types of studies to prioritize in the "
+"analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort "
+"studies', 'case-control studies')."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:547 4426e739f42e4fa8996bec0ba967e0fc
@@ -834,8 +837,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:574 9607a2bd00a74bb3acce5d43b479e71a
 msgid ""
-"Identifies and corrects misspelled drug or disease names, returning a "
-"list of plausible standardi..."
+"Identifies and corrects misspelled drug or disease names, returning a list "
+"of plausible standardi..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 55e70cc0c341451ba679b6ca791a2220
@@ -848,14 +851,14 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:582 8dec41d5c1f24fa7b525247db18658be
 msgid ""
-"**Description**: Identifies and corrects misspelled drug or disease "
-"names, returning a list of plausible standardized terms."
+"**Description**: Identifies and corrects misspelled drug or disease names, "
+"returning a list of plausible standardized terms."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:586 a31ab2eb58cd43ca8317538f437e54ca
 msgid ""
-"``raw_terms`` (string) (required) A comma- or whitespace-separated string"
-" containing one misspelled drug or disease name."
+"``raw_terms`` (string) (required) A comma- or whitespace-separated string "
+"containing one misspelled drug or disease name."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:603 5f802a3b75cc4cba9b262a61e79127ee
@@ -863,7 +866,8 @@ msgid "**MethodologyRigorReviewer** (Type: AgenticTool)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:605 3eaff5636d2348b1868d6cfb1b212d35
-msgid "Evaluates design appropriateness, sampling, and procedural transparency."
+msgid ""
+"Evaluates design appropriateness, sampling, and procedural transparency."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 5b1a78573ba94398927aba4be45dc2c4
@@ -876,8 +880,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:613 04d30cb2806f4168a425c6d9ac9cb0ba
 msgid ""
-"**Description**: Evaluates design appropriateness, sampling, and "
-"procedural transparency."
+"**Description**: Evaluates design appropriateness, sampling, and procedural "
+"transparency."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:617 edc9549dcc8946f183fa4beb1a620955
@@ -890,8 +894,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:636 d57c80a5a1ce443b918a887421cd64e5
 msgid ""
-"Provides a structured peer-review of the work's originality and potential"
-" impact."
+"Provides a structured peer-review of the work's originality and potential "
+"impact."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst e70efcdb54c34f30acc4576f156c576b
@@ -904,8 +908,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:644 5b2369a0fa794b919d6f72a0c026011b
 msgid ""
-"**Description**: Provides a structured peer-review of the work's "
-"originality and potential impact."
+"**Description**: Provides a structured peer-review of the work's originality"
+" and potential impact."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:648 efad1205dccc4deb9ae03e5579404a0a
@@ -940,9 +944,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:683 cd1dd621f2d74c44a9361ccbfd6b5b1b
 msgid ""
-"**Description**: Reviews an initial protocol and delivers targeted "
-"revisions that improve clarity, feasibility, risk-management, and "
-"evaluation rigor."
+"**Description**: Reviews an initial protocol and delivers targeted revisions"
+" that improve clarity, feasibility, risk-management, and evaluation rigor."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:687 eb2e20973153454a832caf477722b17d
@@ -969,21 +972,20 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:714 43378fb4d33f4d33824ebe9188209f58
 msgid ""
-"**Description**: Generates three distinct paraphrases of a given question"
-" while ensuring answer options remain valid and applicable."
+"**Description**: Generates three distinct paraphrases of a given question "
+"while ensuring answer options remain valid and applicable."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:718 1f3df472397a4690aaa08f04c6de6420
 msgid ""
-"``question`` (string) (required) The original question text to be "
-"rephrased"
+"``question`` (string) (required) The original question text to be rephrased"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:721 ac537fd5c82146c492c08850f0203eb0
 msgid ""
 "``options`` (string) (optional) Answer options (e.g., multiple choice "
-"options) that should remain valid for the rephrased questions. Leave "
-"empty if no options are provided."
+"options) that should remain valid for the rephrased questions. Leave empty "
+"if no options are provided."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:738 8c55a65ff50a4182b8dbbbdc8cf28556
@@ -1017,7 +1019,8 @@ msgid "**ResultsInterpretationReviewer** (Type: AgenticTool)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:771 5438f59f082544ee9f73696107d58202
-msgid "Judges whether conclusions are data-justified and limitations addressed."
+msgid ""
+"Judges whether conclusions are data-justified and limitations addressed."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 63137b1a31ab4e5da26e96686925794e
@@ -1048,8 +1051,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:806 3cf5f5faee7c4436aab642d6677b4742
 msgid ""
-"Summarizes biomedical research texts, abstracts, or papers with specified"
-" length and focus areas...."
+"Summarizes biomedical research texts, abstracts, or papers with specified "
+"length and focus areas...."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst bb3ae97a24134c0d90261a2f3370b823
@@ -1062,16 +1065,15 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:814 b18790cb48104237935dcfb3e287caef
 msgid ""
-"**Description**: Summarizes biomedical research texts, abstracts, or "
-"papers with specified length and focus areas. Uses AI to extract key "
-"findings, methodology, and conclusions from complex biomedical "
-"literature."
+"**Description**: Summarizes biomedical research texts, abstracts, or papers "
+"with specified length and focus areas. Uses AI to extract key findings, "
+"methodology, and conclusions from complex biomedical literature."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:818 eac5601ebe09479d94f5998c6ad00e32
 msgid ""
-"``text`` (string) (required) The biomedical text, abstract, or paper "
-"content to be summarized."
+"``text`` (string) (required) The biomedical text, abstract, or paper content"
+" to be summarized."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:821 84d48efb8db442fdbab4e0fdcda55b1c
@@ -1082,8 +1084,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:824 d955ffcc5e724104baa044c3e0e05d5d
 msgid ""
-"``focus_area`` (string) (required) What to focus on in the summary (e.g.,"
-" 'methodology', 'results', 'clinical implications', 'drug interactions')."
+"``focus_area`` (string) (required) What to focus on in the summary (e.g., "
+"'methodology', 'results', 'clinical implications', 'drug interactions')."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:843 92b2fa34607c43e0911fcb5bfa2d0e9a
@@ -1092,8 +1094,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:845 30e751efd7ee4bf3a83f3a46dd9b58b2
 msgid ""
-"Generates diverse and representative ToolUniverse tool call dictionaries "
-"for a given tool based o..."
+"Generates diverse and representative ToolUniverse tool call dictionaries for"
+" a given tool based o..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 230493e8431d4bd78ae2a69bafe1c3b6
@@ -1106,18 +1108,18 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:853 a886c8fda2d443eeb4892442dfe82a2c
 msgid ""
-"**Description**: Generates diverse and representative ToolUniverse tool "
-"call dictionaries for a given tool based on its parameter schema. Each "
-"tool call should be a JSON object with 'name' (the tool's name) and "
-"'arguments' (a dict of input arguments), covering different parameter "
-"combinations, edge cases, and typical usage. Can generate targeted test "
-"cases based on previous optimization feedback."
+"**Description**: Generates diverse and representative ToolUniverse tool call"
+" dictionaries for a given tool based on its parameter schema. Each tool call"
+" should be a JSON object with 'name' (the tool's name) and 'arguments' (a "
+"dict of input arguments), covering different parameter combinations, edge "
+"cases, and typical usage. Can generate targeted test cases based on previous"
+" optimization feedback."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:857 dc9a1f4e338e4626871c00b2c029ed23
 msgid ""
-"``tool_config`` (object) (required) The full configuration of the tool to"
-" generate test cases for. May include '_optimization_feedback' and "
+"``tool_config`` (object) (required) The full configuration of the tool to "
+"generate test cases for. May include '_optimization_feedback' and "
 "'_iteration' fields for feedback-driven test generation."
 msgstr ""
 
@@ -1141,25 +1143,26 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:884 7b23537c57a648cc9c2f072e2ea9329a
 msgid ""
-"**Description**: Generates domain-specific, functional code "
-"implementations based on tool descriptions and requirements with "
-"intelligent algorithm selection"
+"**Description**: Generates domain-specific, functional code implementations "
+"based on tool descriptions and requirements with intelligent algorithm "
+"selection"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:888 61d22f38feca437390dd5d7615b26142
 msgid ""
-"``tool_description`` (string) (required) Detailed description of what the"
-" tool should accomplish"
+"``tool_description`` (string) (required) Detailed description of what the "
+"tool should accomplish"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:891 250e743e9aa84d2184782d13c93597ec
 msgid ""
-"``tool_parameters`` (string) (required) JSON string of parameter schema "
-"for the tool"
+"``tool_parameters`` (string) (required) JSON string of parameter schema for "
+"the tool"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:894 8adfa98423c54e078ada94ad58ae2604
-msgid "``domain`` (string) (optional) Domain area for specialized implementation"
+msgid ""
+"``domain`` (string) (optional) Domain area for specialized implementation"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:897 4ddf7ed3728d46159c07660aff4c6adc
@@ -1170,8 +1173,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:900 f9dee82b522a4875a744de2fe552adf3
 msgid ""
-"``performance_requirements`` (string) (optional) Performance requirements"
-" or constraints"
+"``performance_requirements`` (string) (optional) Performance requirements or"
+" constraints"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:918 bff158662ea14d0496efc6515f60a637
@@ -1194,22 +1197,22 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:928 a027fc0af2344247b7c049d1dede3fc7
 msgid ""
-"**Description**: Generates a JSON structure with the metadata of a tool "
-"in ToolUniverse, given the JSON configuration of the tool."
+"**Description**: Generates a JSON structure with the metadata of a tool in "
+"ToolUniverse, given the JSON configuration of the tool."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:932 13cafa0c6dd848e7bdfb615154ee6bc4
 msgid ""
-"``tool_config`` (string) (required) JSON string of the tool configuration"
-" to extract metadata from"
+"``tool_config`` (string) (required) JSON string of the tool configuration to"
+" extract metadata from"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:935 746aab0dbed44becb6c2a727aa8af7b0
 #, python-brace-format
 msgid ""
 "``tool_type_mappings`` (object) (optional) A mapping from a simplified "
-"toolType to a list of tool_config.type that fall under the toolType "
-"(e.g., {'Databases': ['XMLTool']})"
+"toolType to a list of tool_config.type that fall under the toolType (e.g., "
+"{'Databases': ['XMLTool']})"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:952 8dd12caf4b3b43beb7cec1196a442a58
@@ -1232,9 +1235,9 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:962 d5e2da624ffa4682baffc147b6830dec
 msgid ""
-"**Description**: Standardizes and groups semantically equivalent metadata"
-" strings (e.g., sources, tags) into canonical forms for consistent "
-"downstream usage."
+"**Description**: Standardizes and groups semantically equivalent metadata "
+"strings (e.g., sources, tags) into canonical forms for consistent downstream"
+" usage."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:966 1878534ae02641158f9f630b7c31585b
@@ -1245,9 +1248,9 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:969 552840fd29b9405a8b9d6d58259d40c2
 msgid ""
-"``limit`` (integer) (optional) If provided, the maximum number of "
-"canonical strings to return. The LLM will group terms more aggressively "
-"to meet this limit, ensuring all raw strings are mapped."
+"``limit`` (integer) (optional) If provided, the maximum number of canonical "
+"strings to return. The LLM will group terms more aggressively to meet this "
+"limit, ensuring all raw strings are mapped."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:986 95339580ba6a4ff79fb9b6df532065a8
@@ -1270,8 +1273,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:996 b496263e602647a9885a5f359f16a44a
 msgid ""
-"**Description**: Optimizes tool configurations based on quality feedback."
-" Improves tool specifications and implementations to address identified "
+"**Description**: Optimizes tool configurations based on quality feedback. "
+"Improves tool specifications and implementations to address identified "
 "issues."
 msgstr ""
 
@@ -1283,8 +1286,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1003 a2af55998b0b4093bb3e5314c4ff2210
 msgid ""
-"``quality_feedback`` (string) (required) JSON string of quality "
-"evaluation feedback"
+"``quality_feedback`` (string) (required) JSON string of quality evaluation "
+"feedback"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1006 5d001dc5513b4813b5f51352a7a81ded
@@ -1299,8 +1302,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1026 17ccb3e21bac41f38556b96fb94930ef
 msgid ""
-"Evaluates the quality of tool configurations and implementations. "
-"Provides detailed scoring and f..."
+"Evaluates the quality of tool configurations and implementations. Provides "
+"detailed scoring and f..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 317db7fe57584a59b6d36825f7188cb2
@@ -1318,7 +1321,8 @@ msgid ""
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1038 fd49b9c354e84e4497072050c3c6f36c
-msgid "``tool_config`` (string) (required) JSON string of the tool configuration"
+msgid ""
+"``tool_config`` (string) (required) JSON string of the tool configuration"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1041 775f44fddf75489ab38b9514c80eec3b
@@ -1351,10 +1355,9 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1071 f25e0fd817fb49e28f3eb3fef8aad17d
 msgid ""
-"**Description**: Analyzes a primary tool against a list of other tools to"
-" identify meaningful, directional data flow compatibilities for "
-"scientific workflows. Returns a list of compatible pairs with direction "
-"and rationale."
+"**Description**: Analyzes a primary tool against a list of other tools to "
+"identify meaningful, directional data flow compatibilities for scientific "
+"workflows. Returns a list of compatible pairs with direction and rationale."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1075 fd5d744aa6e14edd87c17ea77ae2a5a3
@@ -1397,14 +1400,14 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1110 0c3196566cfd46408133a69a17b6718e
 msgid ""
-"``tool_description`` (string) (required) Brief description of the desired"
-" tool functionality and purpose."
+"``tool_description`` (string) (required) Brief description of the desired "
+"tool functionality and purpose."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1113 9fefcf8b9b354667afc9eed08f6a4f73
 msgid ""
-"``tool_category`` (string) (required) Target category for the tool (e.g.,"
-" 'biomedical', 'data_analysis', 'text_processing')."
+"``tool_category`` (string) (required) Target category for the tool (e.g., "
+"'biomedical', 'data_analysis', 'text_processing')."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1116 3114dd4ad16b4d5180d892473471c7f8
@@ -1415,15 +1418,14 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1119 d6409e5a638c4d1b947f8d42c6a14053
 msgid ""
-"``similar_tools`` (string) (required) JSON string containing "
-"configurations of similar existing tools for analysis and "
-"differentiation."
+"``similar_tools`` (string) (required) JSON string containing configurations "
+"of similar existing tools for analysis and differentiation."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1122 3f95a49a485d476e8442fb054bdc926d
 msgid ""
-"``existing_tools_summary`` (string) (required) Summary of existing tools "
-"in the ecosystem to avoid duplication and identify gaps."
+"``existing_tools_summary`` (string) (required) Summary of existing tools in "
+"the ecosystem to avoid duplication and identify gaps."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1143 c495e190f3de48808d09d52879666aac
@@ -1432,8 +1434,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1145 4b231cd49da2463ba4f316f1f54e1ead
 msgid ""
-"Optimizes tool specifications for clarity, completeness, and usability "
-"with comprehensive benchma..."
+"Optimizes tool specifications for clarity, completeness, and usability with "
+"comprehensive benchma..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst bdf1eee0f2b840eeac696e0214f1bcf3
@@ -1446,8 +1448,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1153 70b67daeae6048bdb003739821fc5b36
 msgid ""
-"**Description**: Optimizes tool specifications for clarity, completeness,"
-" and usability with comprehensive benchmarking against similar tools"
+"**Description**: Optimizes tool specifications for clarity, completeness, "
+"and usability with comprehensive benchmarking against similar tools"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1157 378ee183cf7348bd88f627aa67430f23
@@ -1466,8 +1468,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1166 453e7b60e5a2408388008cd6290caf1c
 msgid ""
-"``similar_tools`` (string) (optional) JSON string array of similar tools "
-"for comparison and benchmarking"
+"``similar_tools`` (string) (optional) JSON string array of similar tools for"
+" comparison and benchmarking"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1183 8675ca442820441e82845c3af295cf6e
@@ -1475,7 +1477,8 @@ msgid "**WritingPresentationReviewer** (Type: AgenticTool)"
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1185 1c049a4f1ac14aa5a4ba58c88d39ef46
-msgid "Assesses clarity, organization, grammar, and visual presentation quality."
+msgid ""
+"Assesses clarity, organization, grammar, and visual presentation quality."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 75859bb864e346389584ae4a4784dc05
@@ -1502,8 +1505,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1216 4dbca5f1c31b41248e2be3ed5917381f
 msgid ""
-"Produces a concise, practical answer that emulates how a well-informed "
-"human would respond to the..."
+"Produces a concise, practical answer that emulates how a well-informed human"
+" would respond to the..."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst 90a4cf33d775402abb55ee08dfd28e83
@@ -1516,8 +1519,8 @@ msgstr ""
 
 #: ../../tools/agentic_tools.rst:1224 734b478bde414a2cbd8c656a63422936
 msgid ""
-"**Description**: Produces a concise, practical answer that emulates how a"
-" well-informed human would respond to the question."
+"**Description**: Produces a concise, practical answer that emulates how a "
+"well-informed human would respond to the question."
 msgstr ""
 
 #: ../../tools/agentic_tools.rst:1228 e51f5be597d44632a4efb93bb845b985
@@ -1537,4 +1540,3 @@ msgstr ""
 #: ../../tools/agentic_tools.rst:1248 2ee4eb8805b44af0afe9e419c7a31def
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ""
-

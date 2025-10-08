@@ -22,13 +22,14 @@ msgstr ""
 
 #: ../../tutorials/finding_tools.rst:3 cdd52e63d90e49dbbf56bd58e93a84e6
 msgid "Tool Finder Tutorial"
-msgstr ""
+msgstr "工具查找器教程"
 
 #: ../../tutorials/finding_tools.rst:5 a743a74ac55442859dc3d3836b8f8250
 msgid ""
 "**Complete Tutorial to using ToolUniverse's three built-in tool discovery"
 " methods**"
 msgstr ""
+"**使用ToolUniverse三种内置工具发现方法的完整教程**"
 
 #: ../../tutorials/finding_tools.rst:8 3e2a40b45b0640f8a2e4264c821ef016
 msgid "Introduction"

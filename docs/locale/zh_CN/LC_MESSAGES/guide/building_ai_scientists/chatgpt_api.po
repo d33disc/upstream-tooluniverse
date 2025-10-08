@@ -23,12 +23,12 @@ msgstr ""
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:2
 #: 497fab9bb9124e5e8b58631c7f2e945f
 msgid "ChatGPT API"
-msgstr ""
+msgstr "ChatGPT API"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:4
 #: a57e4dd55e714dbf8e92096cbb22154e
 msgid "**Building AI Scientists with ChatGPT API and ToolUniverse**"
-msgstr ""
+msgstr "**使用ChatGPT API和ToolUniverse构建AI科学家**"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:7
 #: c70575b2823b44acae4fdb1336380e63

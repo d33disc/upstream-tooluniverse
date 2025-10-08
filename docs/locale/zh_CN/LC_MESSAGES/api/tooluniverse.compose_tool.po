@@ -7,44 +7,46 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.compose_tool.rst:2 ee9d9e7dd9884aabaf4b195f3fbadcbb
 msgid "tooluniverse.compose\\_tool module"
-msgstr ""
+msgstr "tooluniverse.compose_tool 模块"
 
 #: af95925305fc4247a37fc5dc7c7a0b07 of tooluniverse.compose_tool:1
 msgid ""
 "ComposeTool - A tool that composes other tools using custom code logic. "
 "Supports intelligent dependency management with automatic tool loading."
-msgstr ""
+msgstr "ComposeTool —— 一款通过自定义代码逻辑组合其他工具的工具。支持智能依赖管理及自动加载工具。"
 
 #: 5813572ee0694c66971d3e46f1e85794 of tooluniverse.compose_tool.ComposeTool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
 #: 976c379678684b129354e9a1d8ad048b of tooluniverse.compose_tool.ComposeTool:1
 msgid ""
 "A flexible tool that can compose other tools using custom code logic. "
-"Supports both inline composition_code and external Python files. Features"
-" intelligent dependency management with automatic tool loading."
+"Supports both inline composition_code and external Python files. Features "
+"intelligent dependency management with automatic tool loading."
 msgstr ""
+"一个灵活的工具，能够通过自定义代码逻辑组合其他工具。支持内联 composition_code 及外部 Python "
+"文件。具备智能依赖管理功能，实现自动加载工具。"
 
 #: ac1743b3ff6d4992b5684cb4a6b6b71d of
 #: tooluniverse.compose_tool.ComposeTool._discover_tool_dependencies:1
 msgid "Automatically discover tool dependencies from composition code."
-msgstr ""
+msgstr "自动从组合代码中发现工具依赖关系。"
 
 #: ../../api/tooluniverse.compose_tool.rst 0376bc21b7914ccf966c0a2826786b3d
 #: 1a3ddc7bb3bf457f9f220f0eb186ae9a 55f7fc0b22de4a278c12f704d9ab7bc1
@@ -52,12 +54,12 @@ msgstr ""
 #: 88353f1911544a78b6b4e98f4476ef83 8b5db147c6374141aec60bca79001804
 #: d6f58dfb41ba4c2b986105fe95827cc4
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: ab9188b6c1a5401e85dc4642138e2807 of
 #: tooluniverse.compose_tool.ComposeTool._discover_tool_dependencies:3
 msgid "Set of tool names that this composition calls"
-msgstr ""
+msgstr "此组合调用的工具名称集合"
 
 #: ../../api/tooluniverse.compose_tool.rst 10cd00d434c94db8a78f346627f14b32
 #: 1a4ebb52c655454aad146b6ac74f9c2f 23f047451b8d4855845969c8f82c1240
@@ -65,17 +67,17 @@ msgstr ""
 #: 3cc0b1e3c1f346a885ae066a82b6c217 a70ebe8e01e548e7b5f327832b9250d6
 #: e7aca5a506e94f298afb410b33e0ced3
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 88eb707e1e1f47b39a2e8ffd151375b1 of
 #: tooluniverse.compose_tool.ComposeTool._get_tool_category_mapping:1
 msgid "Create a mapping from tool names to their categories."
-msgstr ""
+msgstr "创建工具名称到其类别的映射。"
 
 #: bd9b9829bcec42f7981a1a4374ac7619 of
 #: tooluniverse.compose_tool.ComposeTool._get_tool_category_mapping:3
 msgid "Mapping of tool names to category names"
-msgstr ""
+msgstr "工具名称与类别名称的映射"
 
 #: 493d1b5d8bf54b23a1d7fd919cb7967c of
 #: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:1
@@ -161,4 +163,3 @@ msgstr ""
 #: tooluniverse.compose_tool.ComposeTool._call_tool:8
 msgid "Result from the tool execution"
 msgstr ""
-

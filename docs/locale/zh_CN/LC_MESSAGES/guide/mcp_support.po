@@ -7,223 +7,235 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/mcp_support.rst:2 2820fb0ef15b4841b5e2e647dea01b2c
 msgid "MCP Support"
-msgstr ""
+msgstr "MCP 支持"
 
 #: ../../guide/mcp_support.rst:4 d4d742bf3de541d7b866b7733ef03f9b
 msgid ""
 "**Complete guide to Model Context Protocol (MCP) integration with "
 "ToolUniverse**"
-msgstr ""
+msgstr "**完整指南：将模型上下文协议（MCP）集成到ToolUniverse中**"
 
 #: ../../guide/mcp_support.rst:6 65ac8463481c4adc96d8df0adfe04ed3
 msgid ""
-"ToolUniverse provides comprehensive support for the Model Context "
-"Protocol (MCP), enabling seamless integration with AI assistants, "
-"reasoning models, and agentic systems. This guide covers everything you "
-"need to know about using ToolUniverse through MCP."
+"ToolUniverse provides comprehensive support for the Model Context Protocol "
+"(MCP), enabling seamless integration with AI assistants, reasoning models, "
+"and agentic systems. This guide covers everything you need to know about "
+"using ToolUniverse through MCP."
 msgstr ""
+"ToolUniverse 提供全面支持模型上下文协议（MCP），实现与 AI 助手、推理模型和代理系统的无缝集成。本指南涵盖了通过 MCP 使用 "
+"ToolUniverse 所需了解的所有内容。"
 
 #: ../../guide/mcp_support.rst:9 ede69f44143141f1922398e33134772d
 msgid "What is MCP?"
-msgstr ""
+msgstr "什么是MCP？"
 
 #: ../../guide/mcp_support.rst:11 a5f458908c2d4283a4f40b7608b17b63
 msgid ""
-"The Model Context Protocol (MCP) is a standardized protocol that enables "
-"AI assistants to securely connect to external tools and data sources. "
-"ToolUniverse implements MCP through the Scientific Model Context Protocol"
-" (SMCP), extending standard MCP capabilities with scientific domain "
+"The Model Context Protocol (MCP) is a standardized protocol that enables AI "
+"assistants to securely connect to external tools and data sources. "
+"ToolUniverse implements MCP through the Scientific Model Context Protocol "
+"(SMCP), extending standard MCP capabilities with scientific domain "
 "expertise."
 msgstr ""
+"Model Context "
+"Protocol（MCP）是一种标准化协议，可使AI助手安全地连接到外部工具和数据源。ToolUniverse通过Scientific Model "
+"Context Protocol（SMCP）实现MCP，并在标准MCP功能的基础上扩展了科学领域的专业能力。"
 
 #: ../../guide/mcp_support.rst:13 c495d284a0854341bfe5fd21d849fdf1
 msgid ""
-"Key Benefits: - **Standardized Integration**: Connect to any MCP-"
-"compatible AI assistant - **Scientific Tool Access**: Direct access to "
-"600+ scientific tools - **Intelligent Discovery**: AI-powered tool search"
-" and recommendation - **Secure Communication**: Standardized protocol "
-"ensures secure tool execution - **Production Ready**: High-performance "
-"architecture for real-world applications"
+"Key Benefits: - **Standardized Integration**: Connect to any MCP-compatible "
+"AI assistant - **Scientific Tool Access**: Direct access to 600+ scientific "
+"tools - **Intelligent Discovery**: AI-powered tool search and recommendation"
+" - **Secure Communication**: Standardized protocol ensures secure tool "
+"execution - **Production Ready**: High-performance architecture for real-"
+"world applications"
 msgstr ""
+"主要优势：\n"
+"- **标准化集成**：连接至任何兼容MCP的AI助手  \n"
+"- **科学工具访问**：直接访问600+科学工具  \n"
+"- **智能发现**：AI驱动的工具搜索与推荐  \n"
+"- **安全通信**：标准化协议确保工具执行安全  \n"
+"- **生产级准备**：高性能架构适用于实际应用"
 
 #: ../../guide/mcp_support.rst:21 0e781d00cf7f41778b5a56fc5a4697ad
 msgid "MCP Architecture Overview"
-msgstr ""
+msgstr "MCP 架构概述"
 
 #: ../../guide/mcp_support.rst:42 8dbc5dfa09724023b82085301a1c4923
 msgid "ToolUniverse MCP Implementation"
-msgstr ""
+msgstr "ToolUniverse MCP 实施"
 
 #: ../../guide/mcp_support.rst:44 df276e5d00504a76a251f2dfd827dff4
 msgid "ToolUniverse provides two main MCP server implementations:"
-msgstr ""
+msgstr "ToolUniverse 提供两种主要的MCP服务器实现："
 
 #: ../../guide/mcp_support.rst:46 e8ac9bbb6d3841eb9fe2b741e7c3bb81
 msgid ""
-"**`tooluniverse-smcp`** - Full-featured server with configurable "
-"transport (HTTP, SSE, stdio)"
-msgstr ""
+"**`tooluniverse-smcp`** - Full-featured server with configurable transport "
+"(HTTP, SSE, stdio)"
+msgstr "**`tooluniverse-smcp`** - 功能全面的服务器，支持可配置的传输方式（HTTP、SSE、stdio）"
 
 #: ../../guide/mcp_support.rst:47 69424a0242ab41d2a7162e37fa963fe3
 msgid ""
 "**`tooluniverse-smcp-stdio`** - Specialized server for stdio transport "
 "(optimized for desktop AI applications)"
-msgstr ""
+msgstr "**`tooluniverse-smcp-stdio`** - 专用于标准输入输出传输的服务器（针对桌面级人工智能应用进行了优化）"
 
 #: ../../guide/mcp_support.rst:49 3d34817885bb497ab2369b68e0355ea8
 msgid ""
-"Both servers expose the same comprehensive set of scientific tools "
-"through the MCP protocol."
-msgstr ""
+"Both servers expose the same comprehensive set of scientific tools through "
+"the MCP protocol."
+msgstr "两台服务器均通过MCP协议提供相同的全面科学工具集。"
 
 #: ../../guide/mcp_support.rst:52 dee55fe984cb40e99ce5abb35754b4b6
 msgid "Quick Start"
-msgstr ""
+msgstr "快速入门"
 
 #: ../../guide/mcp_support.rst:54 caf2cf1ea9a14329872601b25c7ec59a
 msgid ""
-"For basic MCP server setup and configuration, see the comprehensive guide"
-" in :ref:`mcp-server-functions`."
-msgstr ""
+"For basic MCP server setup and configuration, see the comprehensive guide in"
+" :ref:`mcp-server-functions`."
+msgstr "如需了解基本的MCP服务器设置和配置，请参阅 :ref:`mcp-server-functions` 中的综合指南。"
 
 #: ../../guide/mcp_support.rst:57 d9f4b0d3a2594979a07a9df1687e82d5
 msgid "CLI Options Reference"
-msgstr ""
+msgstr "CLI选项参考"
 
 #: ../../guide/mcp_support.rst:59 ef688a9b5c3341b195f3ce2af68c57fe
 msgid ""
 "The following are commonly used command-line flags for ToolUniverse MCP "
 "servers."
-msgstr ""
+msgstr "以下是 ToolUniverse MCP 服务器常用的命令行标志。"
 
 #: ../../guide/mcp_support.rst:101 70af602a241c4ab9bdcb3472b297ee06
 msgid "Environment Variables"
-msgstr ""
+msgstr "环境变量"
 
 #: ../../guide/mcp_support.rst:103 f75f184f81d241a48c7c968a7f1c0e5a
 msgid ""
 "You can configure defaults via environment variables. CLI flags take "
 "precedence."
-msgstr ""
+msgstr "您可以通过环境变量配置默认值。命令行标志具有更高优先级。"
 
 #: ../../guide/mcp_support.rst:130 1f951bf579de4b45ab7363d53456677d
 msgid "Configuration Files"
-msgstr ""
+msgstr "配置文件"
 
 #: ../../guide/mcp_support.rst:132 6b50f0f8b71344abaf85336f5772c8b4
 msgid ""
-"Example tools file (one tool per line, lines starting with # are "
-"comments):"
-msgstr ""
+"Example tools file (one tool per line, lines starting with # are comments):"
+msgstr "示例工具文件（每行一个工具，以#开头的行为注释）："
 
 #: ../../guide/mcp_support.rst:142 753c7299ce2e48ab8db3589af5f416d0
 msgid "Example hook config file:"
-msgstr ""
+msgstr "示例钩子配置文件："
 
 #: ../../guide/mcp_support.rst:158 2c8a246d4afc449ea3a713d208822504
 msgid "Client Integration Examples"
-msgstr ""
+msgstr "客户集成示例"
 
 #: ../../guide/mcp_support.rst:160 9f4315dbbec34c7384449d3a3c0ced9a
 msgid "Python MCP client (conceptual) connecting to HTTP server:"
-msgstr ""
+msgstr "Python MCP 客户端（概念）连接到 HTTP 服务器："
 
 #: ../../guide/mcp_support.rst:177 2b265c1a9f4f404d9af658d5f11bbd27
 msgid "JavaScript MCP client (conceptual) against HTTP server:"
-msgstr ""
+msgstr "JavaScript MCP 客户端（概念性）与 HTTP 服务器："
 
 #: ../../guide/mcp_support.rst:202 bfdab5d4a276466cb3167e6a7b39301b
 msgid "Streaming Output"
-msgstr ""
+msgstr "流式输出"
 
 #: ../../guide/mcp_support.rst:204 43a4505e25ba452eb48c6c7b022eb3e3
 msgid ""
-"All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` "
-"flag. When set to ``true``, compatible tools send incremental text chunks"
-" as MCP log notifications while still returning the final result payload "
-"at completion. Example request payload:"
+"All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` flag. "
+"When set to ``true``, compatible tools send incremental text chunks as MCP "
+"log notifications while still returning the final result payload at "
+"completion. Example request payload:"
 msgstr ""
+"所有暴露给 MCP 的工具现在支持一个可选的 ``_tooluniverse_stream`` 标志。当该标志设置为 ``true`` "
+"时，兼容的工具会以 MCP 日志通知的形式发送增量文本块，同时在完成时仍返回最终结果数据包。示例请求数据包："
 
 #: ../../guide/mcp_support.rst:221 bd3ab5758bfd4fa3bda5eb9c3a3ebaec
 msgid ""
-"Make sure your client surfaces ``notifications/log`` (FastMCP "
-"``ctx.info``) messages to display the streamed output."
-msgstr ""
+"Make sure your client surfaces ``notifications/log`` (FastMCP ``ctx.info``) "
+"messages to display the streamed output."
+msgstr "确保您的客户端将``notifications/log``（FastMCP ``ctx.info``）消息展示出来，以显示流式输出。"
 
 #: ../../guide/mcp_support.rst:224 787e3fc4f0974ca18cb3aeb365d41345
 msgid "Claude Desktop stdio registration (example):"
-msgstr ""
+msgstr "Claude Desktop Studio 注册（示例）："
 
 #: ../../guide/mcp_support.rst:242 afcbaf50483f4eebaea5b1a7226e1129
 msgid "MCP Server Configuration"
-msgstr ""
+msgstr "MCP服务器配置"
 
 #: ../../guide/mcp_support.rst:245 434ae0fa424f4969bb4b170c2523bedb
 msgid "Transport Options"
-msgstr ""
+msgstr "运输选项"
 
 #: ../../guide/mcp_support.rst:247 1ac3fd92c204445db294650a7a23caa3
 msgid "ToolUniverse MCP servers support multiple transport protocols:"
-msgstr ""
+msgstr "ToolUniverse MCP 服务器支持多种传输协议："
 
 #: ../../guide/mcp_support.rst:249 10126dbe2dc74bf7ae9cf4027e2979b8
 msgid "**HTTP Transport** (Default)"
-msgstr ""
+msgstr "**HTTP 传输**（默认）"
 
 #: ../../guide/mcp_support.rst:250 8463ced70a034a9c91d3a03dabb95a8b
 msgid "Best for web-based applications and remote access"
-msgstr ""
+msgstr "最适用于基于网络的应用程序和远程访问"
 
 #: ../../guide/mcp_support.rst:251 2b1879c6f129437f8c6d4255d84bc953
 msgid "Supports RESTful API endpoints"
-msgstr ""
+msgstr "支持 RESTful API 端点"
 
 #: ../../guide/mcp_support.rst:252 47553c70fe624847a1799ef287a45200
 msgid "Configurable host and port"
-msgstr ""
+msgstr "可配置的主机和端口"
 
 #: ../../guide/mcp_support.rst:254 a4a30288ce52455196a704683141ea45
 msgid "**STDIO Transport**"
-msgstr ""
+msgstr "**STDIO 传输**"
 
 #: ../../guide/mcp_support.rst:255 68d8a4aae9c544ef9cca6a2031f7e11d
 msgid "Optimized for desktop AI applications"
-msgstr ""
+msgstr "针对桌面端人工智能应用进行优化"
 
 #: ../../guide/mcp_support.rst:256 7e41659553cc44f69e8517d73f4f8d3a
 msgid "Direct process communication"
-msgstr ""
+msgstr "直接过程通信"
 
 #: ../../guide/mcp_support.rst:257 63996bdee0e24ae7bfd1de89f5d12bee
 msgid "Lower latency for local applications"
-msgstr ""
+msgstr "降低本地应用程序的延迟"
 
 #: ../../guide/mcp_support.rst:259 87ae1920af834241b8f9fafbec54989a
 msgid "**Server-Sent Events (SSE)**"
-msgstr ""
+msgstr "**服务器发送事件 (SSE)**"
 
 #: ../../guide/mcp_support.rst:260 67f3951c2a784bac83c8d0faee736a59
 msgid "Real-time streaming capabilities"
-msgstr ""
+msgstr "实时流媒体功能"
 
 #: ../../guide/mcp_support.rst:261 327c5c4486a640aa968117ee989a17e8
 msgid "Suitable for interactive applications"
-msgstr ""
+msgstr "适用于交互式应用"
 
 #: ../../guide/mcp_support.rst:262 a2d92306f667428a90106d363f4f6554
 msgid "Supports long-running operations"
@@ -299,12 +311,12 @@ msgstr ""
 
 #: ../../guide/mcp_support.rst:298 319e98ec243b424291e9a702464c9b8a
 msgid ""
-"Connect ToolUniverse to ChatGPT API for programmatic AI-scientist "
-"workflows."
+"Connect ToolUniverse to ChatGPT API for programmatic AI-scientist workflows."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:301 6ed1785a05304fe1ad9e0bdd89b7aad0
-msgid "For ChatGPT API integration, see :doc:`building_ai_scientists/chatgpt_api`"
+msgid ""
+"For ChatGPT API integration, see :doc:`building_ai_scientists/chatgpt_api`"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:304 d60fcd5a5b9d43a78a7b9eddb274a680
@@ -316,7 +328,8 @@ msgid "Use ToolUniverse with Gemini CLI for command-line scientific research."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:309 75f87dcc903949e8ade71a67f5dbc299
-msgid "For Gemini CLI integration, see :doc:`building_ai_scientists/gemini_cli`"
+msgid ""
+"For Gemini CLI integration, see :doc:`building_ai_scientists/gemini_cli`"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:312 da103e8d5f8546ce83a8d831f93caf8b
@@ -330,7 +343,8 @@ msgid ""
 msgstr ""
 
 #: ../../guide/mcp_support.rst:317 d37b29af7fc24645b3a63559fa75343f
-msgid "For Claude Code integration, see :doc:`building_ai_scientists/claude_code`"
+msgid ""
+"For Claude Code integration, see :doc:`building_ai_scientists/claude_code`"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:320 6297d9f46fd948e49d014c76ec42b013
@@ -338,7 +352,8 @@ msgid "Qwen Code"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:322 bf62f23b54ba4186ad87ef0180608a5c
-msgid "Connect ToolUniverse to Qwen Code for terminal-based scientific workflows."
+msgid ""
+"Connect ToolUniverse to Qwen Code for terminal-based scientific workflows."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:325 0d4846f6a6654e7e8f1275359f300f22
@@ -356,7 +371,8 @@ msgid ""
 msgstr ""
 
 #: ../../guide/mcp_support.rst:333 4c716e8e58d7416c826cd46f4041c672
-msgid "For GPT Codex CLI integration, see :doc:`building_ai_scientists/codex_cli`"
+msgid ""
+"For GPT Codex CLI integration, see :doc:`building_ai_scientists/codex_cli`"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:336 cd856454ccba4732b2bc8c5035bdca06
@@ -369,9 +385,9 @@ msgstr ""
 
 #: ../../guide/mcp_support.rst:341 8362b4d53105418693aaf4c7abf4c8c1
 msgid ""
-"MCP clients can discover available tools through the standard MCP "
-"protocol. For detailed tool discovery methods and examples, see :ref"
-":`mcp-server-integration`."
+"MCP clients can discover available tools through the standard MCP protocol. "
+"For detailed tool discovery methods and examples, see :ref:`mcp-server-"
+"integration`."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:344 9add3082e29a4bcf9585f763546f9b0c
@@ -425,8 +441,8 @@ msgstr ""
 
 #: ../../guide/mcp_support.rst:369 3437dbc497dc4a569664047e92494894
 msgid ""
-"Monitor MCP server performance. For performance monitoring and "
-"optimization, see :ref:`performance-optimization`."
+"Monitor MCP server performance. For performance monitoring and optimization,"
+" see :ref:`performance-optimization`."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:372 5bc0fec907fc4730b4b26309ec9f8d3f
@@ -581,8 +597,8 @@ msgstr ""
 
 #: ../../guide/mcp_support.rst:431 e448f7f7a6be4b758100d0fc5894001e
 msgid ""
-"For detailed best practices and production deployment guidance, see :ref"
-":`performance-optimization`."
+"For detailed best practices and production deployment guidance, see "
+":ref:`performance-optimization`."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:434 b8d5d000209b401b880a2e0f06913c76
@@ -594,7 +610,8 @@ msgid "Core MCP Components"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:439 c757c00e3db740e9a594992d7af3d60b
-msgid ":doc:`tool_caller` - Tool execution engine and MCP server implementation"
+msgid ""
+":doc:`tool_caller` - Tool execution engine and MCP server implementation"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:440 db361a213ffc4717aafdda332c562af2
@@ -614,7 +631,8 @@ msgid ""
 msgstr ""
 
 #: ../../guide/mcp_support.rst:447 1edbc6291ff3493f806954f01472bc7c
-msgid ":doc:`building_ai_scientists/claude_desktop` - Claude Desktop integration"
+msgid ""
+":doc:`building_ai_scientists/claude_desktop` - Claude Desktop integration"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:448 ad0970acf376483cb2cd1cebb99cae95
@@ -662,7 +680,8 @@ msgid ":doc:`examples` - Practical MCP usage examples"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:465 91a3dcf95d614bdfa5cb7cbbb072f670
-msgid ":doc:`../tutorials/index` - Comprehensive tutorials for MCP integration"
+msgid ""
+":doc:`../tutorials/index` - Comprehensive tutorials for MCP integration"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:468 740d08ec847d4471bdbec24db9c6963a
@@ -674,7 +693,8 @@ msgid ":doc:`../api_comprehensive` - Complete SMCP API documentation"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:471 f27b59f775b54b929da585c77cf16c98
-msgid ":doc:`../api_quick_reference` - Quick reference for common MCP operations"
+msgid ""
+":doc:`../api_quick_reference` - Quick reference for common MCP operations"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:474 62955442e4e343079aee813cfdf1c81a
@@ -682,7 +702,8 @@ msgid "External Resources"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:476 cb8381bff1624cb0a232fc45eca98389
-msgid "`Model Context Protocol Specification <https://modelcontextprotocol.io/>`_"
+msgid ""
+"`Model Context Protocol Specification <https://modelcontextprotocol.io/>`_"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:477 ffd790aff5964609a5d8331bccce0757
@@ -703,8 +724,8 @@ msgstr ""
 msgid ""
 "ToolUniverse's MCP support provides a powerful, standardized way to "
 "integrate scientific tools with AI assistants. The SMCP implementation "
-"extends standard MCP capabilities with scientific domain expertise, "
-"making it easy to build sophisticated AI-scientist workflows."
+"extends standard MCP capabilities with scientific domain expertise, making "
+"it easy to build sophisticated AI-scientist workflows."
 msgstr ""
 
 #: ../../guide/mcp_support.rst:485 9d57c8e02b8f415f8e33877cbee30eba
@@ -720,7 +741,8 @@ msgid "**Comprehensive Tools**: Access to 600+ scientific tools through MCP"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:489 d35e5e450a0242a4a631920b94abb4f6
-msgid "**Flexible Configuration**: Multiple transport options and tool selection"
+msgid ""
+"**Flexible Configuration**: Multiple transport options and tool selection"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:490 bbbba600305640d784004d11f313adb6
@@ -728,13 +750,13 @@ msgid "**Production Ready**: High-performance, secure, and reliable"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:491 fe27ea878fa04564be58c5df4010f3ed
-msgid "**Extensive Documentation**: Complete guides for all major AI platforms"
+msgid ""
+"**Extensive Documentation**: Complete guides for all major AI platforms"
 msgstr ""
 
 #: ../../guide/mcp_support.rst:493 0fa935db2aac462da79d62b0c3d1e54d
 msgid ""
-"Start with the :doc:`building_ai_scientists/index` guide to begin "
-"building your AI scientist, or explore specific integrations for your "
-"preferred AI assistant."
+"Start with the :doc:`building_ai_scientists/index` guide to begin building "
+"your AI scientist, or explore specific integrations for your preferred AI "
+"assistant."
 msgstr ""
-

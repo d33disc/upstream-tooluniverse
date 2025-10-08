@@ -7,71 +7,70 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/tools.rst:2 1b2197567f1141c6a0e38348949cfa4f
 msgid "Available Tools Reference"
-msgstr ""
+msgstr "可用工具参考"
 
 #: ../../guide/tools.rst:4 8bdcafcc0ccf4c899d46bd3addc6e3fd
 msgid ""
 "**Complete reference of all ToolUniverse scientific tools and their "
 "capabilities.**"
-msgstr ""
+msgstr "**ToolUniverse所有科学工具及其功能的完整参考。**"
 
 #: ../../guide/tools.rst:6 2b7b825826844602b669c41d7a9ac355
 msgid ""
-"ToolUniverse provides 600+ tools across eight major categories, each "
-"serving specific computational and analytical requirements in scientific "
-"research."
-msgstr ""
+"ToolUniverse provides 600+ tools across eight major categories, each serving"
+" specific computational and analytical requirements in scientific research."
+msgstr "ToolUniverse提供600+工具，涵盖八个主要类别，每个类别都服务于科学研究中的特定计算和分析需求。"
 
 #: ../../guide/tools.rst:9 27a9fd99d43b4754bb0a361932240daf
 msgid "Tool Ecosystem Overview"
-msgstr ""
+msgstr "工具生态系统概览"
 
 #: ../../guide/tools.rst:11 6767ab83e3d7415f950d6ba90a2626d1
 msgid "ToolUniverse integrates tools across eight major categories:"
-msgstr ""
+msgstr "ToolUniverse 集成了八大类别的工具："
 
 #: ../../guide/tools.rst:58 616d110234494b888f6d58a263d510e8
 msgid "Tool Categories Summary"
-msgstr ""
+msgstr "工具类别摘要"
 
 #: ../../guide/tools.rst:60 387d69db62a54387b874abbfeeeb4378
 msgid "Tool Distribution by Category"
-msgstr ""
+msgstr "工具按类别分布"
 
 #: ../../guide/tools.rst:64 8e44c2cd13264705b68645902096c4a4
 msgid "Category"
-msgstr ""
+msgstr "类别"
 
 #: ../../guide/tools.rst:65 ffd31c7087ad486e9b907a379fc1164d
 msgid "Count"
-msgstr ""
+msgstr "计数"
 
 #: ../../guide/tools.rst:66 a5a406ed5e804e2aa686c32d02da7f23
 msgid "Percentage"
-msgstr ""
+msgstr "百分比"
 
 #: ../../guide/tools.rst:67 12de11cc9e6c4efdbaf8f1967200b073
 msgid "Primary Use Cases"
-msgstr ""
+msgstr "主要使用案例"
 
 #: ../../guide/tools.rst:68 dde4c01d396e4c21a1550edb959c25de
 msgid "APIs"
-msgstr ""
+msgstr "API（应用程序编程接口）"
 
 #: ../../guide/tools.rst:69 9ceda0b06530450f970efcee15eab022
 msgid "281"
@@ -83,15 +82,15 @@ msgstr ""
 
 #: ../../guide/tools.rst:71 c9cbb433e405457594f259aa728154d8
 msgid "External data access, real-time information"
-msgstr ""
+msgstr "外部数据访问，实时信息"
 
 #: ../../guide/tools.rst:72 064ae47816324c99b14d2b4ddd4ca59b
 msgid "Software Packages"
-msgstr ""
+msgstr "软件包"
 
 #: ../../guide/tools.rst:73 4e805fbc9fc44268a351172c8a89651c
 msgid "164"
-msgstr ""
+msgstr "请提供完整的英文文本以便进行翻译。"
 
 #: ../../guide/tools.rst:74 eee85c0c68ea460eb58f170910499c9d
 msgid "28.3%"
@@ -99,11 +98,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:75 5abc6c9fb62445059e603d3a93d27a79
 msgid "Computational analysis, local processing"
-msgstr ""
+msgstr "计算分析，本地处理"
 
 #: ../../guide/tools.rst:76 ba11a06eb12042d09dc35fd544fd7f90
 msgid "Databases"
-msgstr ""
+msgstr "数据库"
 
 #: ../../guide/tools.rst:77 d44d84a3022d42d3ae9cbbaeeeb292cf
 msgid "84"
@@ -115,11 +114,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:79 594badf1788d4cd88912b686b16f0695
 msgid "Structured data storage and retrieval"
-msgstr ""
+msgstr "结构化数据存储与检索"
 
 #: ../../guide/tools.rst:80 77a4c7473c7049bfa7294551ed255ae8
 msgid "AI Agents"
-msgstr ""
+msgstr "AI代理"
 
 #: ../../guide/tools.rst:81 578c5377cbef44a293b7e8da9250de12
 msgid "33"
@@ -131,11 +130,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:83 6551c8aa7e1c46169d18a8f8c573db06
 msgid "Autonomous reasoning and planning"
-msgstr ""
+msgstr "自主推理与规划"
 
 #: ../../guide/tools.rst:84 4e2f5c6a61fd4d3faab17ca0be34bbf6
 msgid "ML Models"
-msgstr ""
+msgstr "ML模型"
 
 #: ../../guide/tools.rst:85 8ec3ccda60374a10b55db779cc3b7457
 msgid "15"
@@ -147,11 +146,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:87 4f9f961b0bc84825aae1c881fae842a5
 msgid "Prediction and classification tasks"
-msgstr ""
+msgstr "预测与分类任务"
 
 #: ../../guide/tools.rst:88 b636bd082b53418ea6be3d415c841883
 msgid "Expert Feedback"
-msgstr ""
+msgstr "专家反馈"
 
 #: ../../guide/tools.rst:89 1760fd63a21f4a53af0d64cbb4944f0d
 msgid "6"
@@ -163,11 +162,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:91 f03b2823835247ee89a573584e805290
 msgid "Human validation and guidance"
-msgstr ""
+msgstr "人工验证与指导"
 
 #: ../../guide/tools.rst:92 14d07c5097234d8096de6f79945883db
 msgid "Embedding Stores"
-msgstr ""
+msgstr "嵌入存储"
 
 #: ../../guide/tools.rst:93 c97439c0b7c34ce0ad5dad255d9e3931
 msgid "4"
@@ -179,7 +178,7 @@ msgstr ""
 
 #: ../../guide/tools.rst:95 f24812a2b5a24271a4061b207e4c4a0d
 msgid "Semantic search and similarity"
-msgstr ""
+msgstr "语义搜索与相似性"
 
 #: ../../guide/tools.rst:96 ba40feeb299347d890d065328bc1af0c
 msgid "Robotics"
@@ -227,10 +226,10 @@ msgstr ""
 
 #: ../../guide/tools.rst:113 53f5c6671e9445a3bbc36ccbea3618e2
 msgid ""
-"**Key Functions:** * ``UniProt_get_function_by_accession`` - Get "
-"functional annotations by UniProt accession * ``UniProt_search_proteins``"
-" - Search proteins by keywords * ``UniProt_get_protein_sequence`` - "
-"Retrieve protein sequences"
+"**Key Functions:** * ``UniProt_get_function_by_accession`` - Get functional "
+"annotations by UniProt accession * ``UniProt_search_proteins`` - Search "
+"proteins by keywords * ``UniProt_get_protein_sequence`` - Retrieve protein "
+"sequences"
 msgstr ""
 
 #: ../../guide/tools.rst:118 ../../guide/tools.rst:138
@@ -263,9 +262,9 @@ msgstr ""
 
 #: ../../guide/tools.rst:133 4c5fac0c561049b2a426175d2c4c7072
 msgid ""
-"**Key Functions:** * ``GeneOntology_get_annotations`` - Get GO "
-"annotations for genes * ``GeneOntology_search_terms`` - Search GO terms *"
-" ``GeneOntology_get_enrichment`` - Functional enrichment analysis"
+"**Key Functions:** * ``GeneOntology_get_annotations`` - Get GO annotations "
+"for genes * ``GeneOntology_search_terms`` - Search GO terms * "
+"``GeneOntology_get_enrichment`` - Functional enrichment analysis"
 msgstr ""
 
 #: ../../guide/tools.rst:148 3c0ba97ff9dd4eef9b7cf74b086a591f
@@ -278,9 +277,9 @@ msgstr ""
 
 #: ../../guide/tools.rst:152 7f144feec3074fd68f9311e62063e962
 msgid ""
-"**Key Functions:** * ``Enrichr_analyze_gene_list`` - Enrichment analysis "
-"for gene lists * ``Enrichr_get_libraries`` - List available gene set "
-"libraries * ``Enrichr_download_results`` - Download enrichment results"
+"**Key Functions:** * ``Enrichr_analyze_gene_list`` - Enrichment analysis for"
+" gene lists * ``Enrichr_get_libraries`` - List available gene set libraries "
+"* ``Enrichr_download_results`` - Download enrichment results"
 msgstr ""
 
 #: ../../guide/tools.rst:170 e20d10a415f144e7a6efb629c49bd18a
@@ -297,12 +296,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:177 bf50aad088a9455ebaaa4925e9565e41
 msgid ""
-"**Key Functions:** * "
-"``OpenTargets_get_associated_targets_by_disease_efoId`` - Disease-"
-"associated targets * ``OpenTargets_get_associated_diseases_by_target`` - "
-"Target-associated diseases * "
-"``OpenTargets_get_disease_id_description_by_name`` - Disease lookup * "
-"``OpenTargets_get_evidence`` - Evidence for associations * "
+"**Key Functions:** * ``OpenTargets_get_associated_targets_by_disease_efoId``"
+" - Disease-associated targets * "
+"``OpenTargets_get_associated_diseases_by_target`` - Target-associated "
+"diseases * ``OpenTargets_get_disease_id_description_by_name`` - Disease "
+"lookup * ``OpenTargets_get_evidence`` - Evidence for associations * "
 "``OpenTargets_get_drug_info`` - Drug information and mechanisms"
 msgstr ""
 
@@ -336,9 +334,9 @@ msgstr ""
 #: ../../guide/tools.rst:221 231a547f7c284d1d89bf36ecd140df25
 msgid ""
 "**Key Functions:** * ``PubChem_get_compound_info`` - Get compound "
-"information by name/ID * ``PubChem_search_compounds`` - Search compounds "
-"by structure/properties * ``PubChem_get_compound_properties`` - Molecular"
-" properties * ``PubChem_similarity_search`` - Chemical similarity search"
+"information by name/ID * ``PubChem_search_compounds`` - Search compounds by "
+"structure/properties * ``PubChem_get_compound_properties`` - Molecular "
+"properties * ``PubChem_similarity_search`` - Chemical similarity search"
 msgstr ""
 
 #: ../../guide/tools.rst:237 015168f6c5284f5f9fa1d8e2b5bcfb1d
@@ -371,9 +369,9 @@ msgstr ""
 
 #: ../../guide/tools.rst:264 2dbd38bbe78f435da0ea3a4dd18f99c1
 msgid ""
-"**Key Functions:** * ``FAERS_count_reactions_by_drug_event`` - Count "
-"adverse reactions by drug * ``openfda_get_warnings_by_drug_name`` - Get "
-"FDA warnings * ``OpenFDA_get_drug_labels`` - Drug labeling information * "
+"**Key Functions:** * ``FAERS_count_reactions_by_drug_event`` - Count adverse"
+" reactions by drug * ``openfda_get_warnings_by_drug_name`` - Get FDA "
+"warnings * ``OpenFDA_get_drug_labels`` - Drug labeling information * "
 "``OpenFDA_search_recalls`` - Drug recall information"
 msgstr ""
 
@@ -387,8 +385,8 @@ msgstr ""
 
 #: ../../guide/tools.rst:291 4f237eb51e3d45eba995abfcb44bd718
 msgid ""
-"**Key Functions:** * ``DailyMed_get_drug_label`` - Get official drug "
-"labels * ``DailyMed_search_drugs`` - Search drugs by name * "
+"**Key Functions:** * ``DailyMed_get_drug_label`` - Get official drug labels "
+"* ``DailyMed_search_drugs`` - Search drugs by name * "
 "``DailyMed_get_NDC_info`` - NDC (drug code) information"
 msgstr ""
 
@@ -426,8 +424,8 @@ msgstr ""
 
 #: ../../guide/tools.rst:339 457e6451aa8c4957baf7766c2199e949
 msgid ""
-"**Key Functions:** * ``PubTator_search_publications`` - Search literature"
-" with entities * ``PubTator_get_annotations`` - Get entity annotations * "
+"**Key Functions:** * ``PubTator_search_publications`` - Search literature "
+"with entities * ``PubTator_get_annotations`` - Get entity annotations * "
 "``PubTator_search_by_entity`` - Search by specific entities"
 msgstr ""
 
@@ -458,8 +456,7 @@ msgstr ""
 msgid ""
 "**Key Functions:** * ``SemanticScholar_search_papers`` - Search academic "
 "papers * ``SemanticScholar_get_paper_details`` - Get detailed paper "
-"information * ``SemanticScholar_get_citations`` - Citation network "
-"analysis"
+"information * ``SemanticScholar_get_citations`` - Citation network analysis"
 msgstr ""
 
 #: ../../guide/tools.rst:394 22bb791f56e04d5fb1484fc203f36ea2
@@ -506,8 +503,8 @@ msgstr ""
 
 #: ../../guide/tools.rst:430 0a64e99a8ede47f38f45708902f99917
 msgid ""
-"**Key Functions:** * ``Reactome_get_pathways_by_gene`` - Pathways for "
-"genes * ``Reactome_search_pathways`` - Search pathway database * "
+"**Key Functions:** * ``Reactome_get_pathways_by_gene`` - Pathways for genes "
+"* ``Reactome_search_pathways`` - Search pathway database * "
 "``Reactome_get_pathway_details`` - Detailed pathway information"
 msgstr ""
 
@@ -522,8 +519,8 @@ msgstr ""
 #: ../../guide/tools.rst:449 c18770d28d8c4083b5aaa37778edfccb
 msgid ""
 "**Key Functions:** * ``HumanBase_get_gene_networks`` - Tissue-specific "
-"networks * ``HumanBase_predict_gene_function`` - Gene function prediction"
-" * ``HumanBase_get_tissue_expression`` - Tissue expression patterns"
+"networks * ``HumanBase_predict_gene_function`` - Gene function prediction * "
+"``HumanBase_get_tissue_expression`` - Tissue expression patterns"
 msgstr ""
 
 #: ../../guide/tools.rst:455 84cb20193be94ac99ec349606fdb8f3b
@@ -537,8 +534,8 @@ msgstr ""
 #: ../../guide/tools.rst:459 5663bbe20446446aae011cfec654b6ac
 msgid ""
 "**Key Functions:** * ``MedlinePlus_get_health_topics`` - Health topic "
-"information * ``MedlinePlus_search_conditions`` - Search medical "
-"conditions * ``MedlinePlus_get_drug_info`` - Consumer drug information"
+"information * ``MedlinePlus_search_conditions`` - Search medical conditions "
+"* ``MedlinePlus_get_drug_info`` - Consumer drug information"
 msgstr ""
 
 #: ../../guide/tools.rst:465 1a851549375f4fd6846de626f15ddc0c
@@ -608,8 +605,8 @@ msgstr ""
 #: ../../guide/tools.rst:566 5a8d90a9e2c64195bc3f22046ad4bffa
 msgid ""
 "**Key Functions:** * ``discover_tools_by_description`` - Find tools by "
-"natural language * ``compose_tools_for_workflow`` - Create tool workflows"
-" * ``optimize_tool_descriptions`` - Improve tool descriptions"
+"natural language * ``compose_tools_for_workflow`` - Create tool workflows * "
+"``optimize_tool_descriptions`` - Improve tool descriptions"
 msgstr ""
 
 #: ../../guide/tools.rst:583 447cd5a501234d2790b12dcd7737e842
@@ -626,8 +623,8 @@ msgstr ""
 
 #: ../../guide/tools.rst:590 593fd6b4fefd4e34ba114245a4c70bfc
 msgid ""
-"**Key Functions:** * ``find_tools_by_keyword`` - Keyword-based tool "
-"search * ``find_tools_by_category`` - Browse tools by category * "
+"**Key Functions:** * ``find_tools_by_keyword`` - Keyword-based tool search *"
+" ``find_tools_by_category`` - Browse tools by category * "
 "``get_tool_recommendations`` - Get tool recommendations"
 msgstr ""
 
@@ -664,9 +661,8 @@ msgstr ""
 #: ../../guide/tools.rst:644 e6d5a377668f4c35b9cddbd99f835231
 msgid ""
 "**Key Functions:** * ``integrate_gene_data`` - Combine gene data from "
-"multiple sources * ``cross_reference_identifiers`` - Map between "
-"different ID systems * ``validate_data_consistency`` - Check data "
-"consistency"
+"multiple sources * ``cross_reference_identifiers`` - Map between different "
+"ID systems * ``validate_data_consistency`` - Check data consistency"
 msgstr ""
 
 #: ../../guide/tools.rst:650 69236f53c938431bbee6f26baf261f6b
@@ -748,7 +744,8 @@ msgid "Rate Limiting"
 msgstr ""
 
 #: ../../guide/tools.rst:826 01f772dfa7d647ef85e7a28f7d8a5295
-msgid "ToolUniverse automatically handles API rate limits, but you can optimize:"
+msgid ""
+"ToolUniverse automatically handles API rate limits, but you can optimize:"
 msgstr ""
 
 #: ../../guide/tools.rst:838 96964ade62454636add0774a52301ead
@@ -770,14 +767,13 @@ msgstr ""
 #: ../../guide/tools.rst:860 0995c9fcf38f4f0593c1d4209bf91309
 msgid ""
 "**ML Models**: - Remote execution reduces local resource requirements - "
-"Batch predictions when possible - Cache results for expensive "
-"computations"
+"Batch predictions when possible - Cache results for expensive computations"
 msgstr ""
 
 #: ../../guide/tools.rst:865 88bdb0d660834353ac615ac72b30a00c
 msgid ""
-"**APIs**: - Respect rate limits and implement backoff - Use pagination "
-"for large datasets - Cache frequent queries"
+"**APIs**: - Respect rate limits and implement backoff - Use pagination for "
+"large datasets - Cache frequent queries"
 msgstr ""
 
 #: ../../guide/tools.rst:870 3ae8e342e6d748c8962af7ae24eab8e7
@@ -788,8 +784,8 @@ msgstr ""
 
 #: ../../guide/tools.rst:875 4a8b67daae094d9e8f10fcc5336dc3ca
 msgid ""
-"**Agents**: - Configure appropriate timeout values - Use streaming for "
-"long-running tasks - Implement progress monitoring"
+"**Agents**: - Configure appropriate timeout values - Use streaming for long-"
+"running tasks - Implement progress monitoring"
 msgstr ""
 
 #: ../../guide/tools.rst:881 3f40d1acb2de4152b7e5b16d36557a45
@@ -813,7 +809,8 @@ msgid "**Caching**: Use caching for frequently accessed data"
 msgstr ""
 
 #: ../../guide/tools.rst:887 03894c69a31a460cac91704c92bbd03e
-msgid "**Batch Processing**: Use batch operations when available for efficiency"
+msgid ""
+"**Batch Processing**: Use batch operations when available for efficiency"
 msgstr ""
 
 #: ../../guide/tools.rst:888 f0f2d2f4cb8148d3b6a64136919b4e9c
@@ -850,9 +847,9 @@ msgstr ""
 
 #: ../../guide/tools.rst:957 37eb158ef7f940358a4a548e044ecb65
 msgid ""
-"**Planned Categories**: - **Visualization Tools**: Interactive plotting "
-"and dashboard generation - **Workflow Engines**: Advanced orchestration "
-"and scheduling - **Cloud Services**: Distributed computing and storage - "
+"**Planned Categories**: - **Visualization Tools**: Interactive plotting and "
+"dashboard generation - **Workflow Engines**: Advanced orchestration and "
+"scheduling - **Cloud Services**: Distributed computing and storage - "
 "**Compliance Tools**: Regulatory and ethics validation"
 msgstr ""
 
@@ -882,7 +879,8 @@ msgid ""
 msgstr ""
 
 #: ../../guide/tools.rst:976 3aa3b199b5744d2daaa44fd6fdf1dfd2
-msgid "⚡ **Optimize**: :doc:`best_practices` - Performance and production tips"
+msgid ""
+"⚡ **Optimize**: :doc:`best_practices` - Performance and production tips"
 msgstr ""
 
 #: ../../guide/tools.rst:977 7c9d5b7650454597b93f9945d2b42c61
@@ -893,15 +891,14 @@ msgstr ""
 
 #: ../../guide/tools.rst:980 6f2d35d55ba34806aa26e95d86dc4a20
 msgid ""
-"**Discovery tip**: Use the AI-powered tool discovery features to find the"
-" right tools for your specific research questions!"
+"**Discovery tip**: Use the AI-powered tool discovery features to find the "
+"right tools for your specific research questions!"
 msgstr ""
 
 #: ../../guide/tools.rst:983 06664afd699c4c9db110298264f7403e
 msgid ""
 "**Tool ecosystem synergy**: The eight categories are designed to work "
 "together. APIs provide data access, ML models add intelligence, agents "
-"orchestrate complex workflows, while databases and embedding stores "
-"enable efficient information management."
+"orchestrate complex workflows, while databases and embedding stores enable "
+"efficient information management."
 msgstr ""
-
