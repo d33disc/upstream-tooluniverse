@@ -74,7 +74,7 @@ msgstr "Slack"
 
 #: ../../index.rst:27 25d8dac1452b4e7c88b5ca2851d0d35f
 msgid "Democratizing AI Scientists for Science"
-msgstr "为科学民主化 AI 科学家"
+msgstr "普及化 AI 科学家"
 
 #: ../../index.rst:57 29e4c379f7574f14af92b892af67cd97
 msgid ""
