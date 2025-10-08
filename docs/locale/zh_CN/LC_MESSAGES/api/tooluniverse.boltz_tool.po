@@ -92,8 +92,8 @@ msgstr "返回值"
 msgid ""
 "A dictionary containing the path to the predicted structure and affinity "
 "data, or an error."
-msgstr ""
+msgstr "一个字典，其中包含预测结构和亲和力数据的路径，或错误信息。"
 
 #: ../../api/tooluniverse.boltz_tool.rst 613a37ee663649aebcdf8529634487c1
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"

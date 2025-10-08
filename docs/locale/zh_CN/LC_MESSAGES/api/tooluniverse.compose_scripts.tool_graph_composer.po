@@ -75,24 +75,24 @@ msgstr "从 ToolUniverse 加载所有可用工具。"
 #: f0cb82aacdd9448a908a4ab2c38d0fcf of
 #: tooluniverse.compose_scripts.tool_graph_composer._build_compatibility_graph:1
 msgid "Build the compatibility graph by analyzing tool pairs."
-msgstr ""
+msgstr "通过分析工具对来构建兼容性图。"
 
 #: 23ab3825e4924f3c994aefcf960ee941 of
 #: tooluniverse.compose_scripts.tool_graph_composer._extract_compatibility_info:1
 msgid "Extract structured compatibility information from analysis result."
-msgstr ""
+msgstr "从分析结果中提取结构化的兼容性信息。"
 
 #: 2db53d5b44f54c02988eca1739ffe0be of
 #: tooluniverse.compose_scripts.tool_graph_composer._save_graph:1
 msgid "Save the graph in multiple formats."
-msgstr ""
+msgstr "将图表保存为多种格式。"
 
 #: 88a2a8769e3441f783bfa1ae5cacfbcb of
 #: tooluniverse.compose_scripts.tool_graph_composer._generate_graph_stats:1
 msgid "Generate statistics about the graph."
-msgstr ""
+msgstr "生成有关图表的统计数据。"
 
 #: 4a05ebeeaa454a6d97e0def8fcde5d92 of
 #: tooluniverse.compose_scripts.tool_graph_composer._load_cached_graph:1
 msgid "Load a previously cached graph."
-msgstr ""
+msgstr "加载先前缓存的图表。"

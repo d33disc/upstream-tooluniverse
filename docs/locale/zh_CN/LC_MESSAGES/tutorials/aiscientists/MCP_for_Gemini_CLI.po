@@ -7,35 +7,35 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:1
 #: 22e54bf1370d41ebb367b915b0932e48
 msgid "ToolUniverse MCP Integration with Gemini CLI"
-msgstr ""
+msgstr "ToolUniverse MCP 与 Gemini CLI 集成"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:3
 #: 434e7e23617545c1a64cfa05d1f9962e
 msgid ""
-"This tutorial will Tutorial you through setting up ToolUniverse as an MCP"
-" (Model Context Protocol) server for the Gemini CLI."
-msgstr ""
+"This tutorial will Tutorial you through setting up ToolUniverse as an MCP "
+"(Model Context Protocol) server for the Gemini CLI."
+msgstr "本教程将指导您将 ToolUniverse 设置为 Gemini CLI 的 MCP（模型上下文协议）服务器。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:5
 #: cd39ae086cb846d6abf7e5d912892ca9
 msgid "Prerequisites"
-msgstr ""
+msgstr "先决条件"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:7
 #: 9d7983b2d9ae491faa651193eb4f9e89
@@ -43,158 +43,161 @@ msgid ""
 "Gemini CLI installed on your system ([Install "
 "guideline](https://github.com/google-gemini/gemini-cli))"
 msgstr ""
+"系统中已安装 Gemini CLI（[安装指南](https://github.com/google-gemini/gemini-cli)）"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:8
 #: e190f08437254c51b6a0abb9078ace9b
 msgid "`tooluniverse>=0.2.0` installed"
-msgstr ""
+msgstr "已安装 `tooluniverse>=0.2.0`"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:9
 #: 1c20ef6c64214a2d9e218d8b1116f616
 msgid "`uv` package manager installed"
-msgstr ""
+msgstr "已安装 `uv` 包管理器"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:10
 #: 673362639d3346339eaae0f9131ee928
 msgid "Valid API keys for external services (if required by specific tools)"
-msgstr ""
+msgstr "外部服务的有效 API 密钥（如特定工具要求）"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:12
 #: a9091f12b9104d9691764b431449a3b5
 msgid "Configuration Steps"
-msgstr ""
+msgstr "配置步骤"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:14
 #: b7d658f204ae474891706acb5d74afdb
 msgid "1. Locate Gemini CLI Configuration"
-msgstr ""
+msgstr "1. 定位 Gemini CLI 配置"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:16
 #: 90100f7bc62e48bcac8619e437ca742e
 msgid ""
 "The Gemini CLI uses configuration files to manage MCP servers. You can "
 "configure them:"
-msgstr ""
+msgstr "Gemini CLI 使用配置文件来管理 MCP 服务器。您可以配置它们："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:18
 #: 4f559d2a491947e49146039f048e2774
 msgid "**Globally**: In the `~/.gemini/settings.json` file."
-msgstr ""
+msgstr "**全局**：在 `~/.gemini/settings.json` 文件中。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:19
 #: 5dacac5afa3a4f86bcadc620b8dff8b7
 msgid "**Per project**: In your project's `.gemini/settings.json` file."
-msgstr ""
+msgstr "**每个项目**：在项目的 `.gemini/settings.json` 文件中。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:21
 #: 3ebd6dc345a9475fbb53cab0d82b4511
 msgid "2. Add ToolUniverse MCP Server"
-msgstr ""
+msgstr "2. 添加 ToolUniverse MCP 服务器"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:23
 #: 4d32eac3417d41c1b54cd99c6b7d8958
 msgid ""
-"Create or open your `settings.json` file and add the ToolUniverse MCP "
-"server configuration:"
-msgstr ""
+"Create or open your `settings.json` file and add the ToolUniverse MCP server"
+" configuration:"
+msgstr "创建或打开您的 `settings.json` 文件，并添加 ToolUniverse MCP 服务器配置："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:41
 #: a0b61c7853494682bfd0ad863513f367
 msgid ""
-"**Important**: Replace `/path/to/your/gemini_running_env` with the actual"
-" absolute path to your gemini running folder."
+"**Important**: Replace `/path/to/your/gemini_running_env` with the actual "
+"absolute path to your gemini running folder."
 msgstr ""
+"**重要说明**：将 `/path/to/your/gemini_running_env` 替换为您的 Gemini 运行文件夹的实际绝对路径。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:43
 #: bc0e2ae21d9d470e88fc80219c0f2ee7
 msgid "3. Configuration Explanation"
-msgstr ""
+msgstr "3. 配置说明"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:45
 #: fea55039a4bd4d7e951ad8ad99aa43e0
 msgid "**mcpServers**: The main container for all MCP server configurations"
-msgstr ""
+msgstr "**mcpServers**：所有MCP服务器配置的主要容器"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:46
 #: 2b178b35c33c48a1b0fa1d678fe581b1
 msgid "**tooluniverse**: The name identifier for your ToolUniverse MCP server"
-msgstr ""
+msgstr "**tooluniverse**：您的 ToolUniverse MCP 服务器的名称标识符"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:47
 #: dfc9ac33c9354691b21f6daf629d005c
 msgid "**command**: Uses `uv` package manager to run the MCP server"
-msgstr ""
+msgstr "**命令**：使用 `uv` 包管理器运行 MCP 服务器"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:48
 #: 1b156c9fb4134ef880e98d0a5a199b67
 msgid "**args**: Command line arguments passed to uv:"
-msgstr ""
+msgstr "**args**：传递给 uv 的命令行参数："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:49
 #: c69eb93a6cb24c19be981154cc6969f6
 msgid ""
-"`--directory`: Specifies the working directory for the ToolUniverse "
-"project"
-msgstr ""
+"`--directory`: Specifies the working directory for the ToolUniverse project"
+msgstr "`--directory`：指定 ToolUniverse 项目的工作目录"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:50
 #: 5821a78723204d12aca11eff02428b9d
 msgid "`run`: Tells uv to run a command"
-msgstr ""
+msgstr "`run`：指示 uv 运行一个命令"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:51
 #: db0f848aa7e64b17b86856e6ba49236a
 msgid "`tooluniverse-smcp-stdio`: The specific MCP command to execute"
-msgstr ""
+msgstr "`tooluniverse-smcp-stdio`：执行的特定MCP命令"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:54
 #: f039d4fb75de4fdabd8c6412ca2e6d3a
 msgid "4. Optional Configuration Properties"
-msgstr ""
+msgstr "4. 可选配置属性"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:56
 #: b561c4089fa44cfea0a5b394b2e38691
-msgid "You can customize your ToolUniverse MCP server with additional properties:"
-msgstr ""
+msgid ""
+"You can customize your ToolUniverse MCP server with additional properties:"
+msgstr "您可以通过添加其他属性来自定义您的 ToolUniverse MCP 服务器："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:58
 #: 1c872c0c7b014189bcd813ffd388ccca
 msgid "Environment Variables"
-msgstr ""
+msgstr "环境变量"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:59
 #: b227692570f743c1b4f33db5f9056297
-msgid "To provide API keys or other secrets to the server, use the `env` block."
-msgstr ""
+msgid ""
+"To provide API keys or other secrets to the server, use the `env` block."
+msgstr "若要向服务器提供 API 密钥或其他机密信息，请使用 `env` 块。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:61
 #: 3128b642677d4ea4b92e254a66e5b31b
 msgid "**Basic Configuration:**"
-msgstr ""
+msgstr "**基本配置：**"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:85
 #: a3bd747e6a2049d99cd16ba0d7465063
 msgid "**With SummarizationHook and Optimized for Non-Coding Users:**"
-msgstr ""
+msgstr "**配备SummarizationHook并针对非编码用户优化：**"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:114
 #: 0a54fbca034a44729cafc70c264bfdb0
 msgid "**Configuration Notes:**"
-msgstr ""
+msgstr "**配置说明：**"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:115
 #: 9f34b084f9704ce2958f82a7d7f29a1f
 msgid ""
 "`--exclude-tool-types PackageTool`: Excludes package management tools to "
 "save context window space (recommended for non-coding users)"
-msgstr ""
+msgstr "`--exclude-tool-types PackageTool`：排除包管理工具以节省上下文窗口空间（建议非编码用户使用）"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:116
 #: 5fdaa8a722ce4478b976d87cb62c9cd5
 msgid ""
 "`--hook-type SummarizationHook`: Enables output summarization for better "
 "readability"
-msgstr ""
+msgstr "`--hook-type SummarizationHook`：启用输出摘要功能，以提升可读性"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:117
 #: 535aa24851864550847f3098bfe1ab58
@@ -202,97 +205,98 @@ msgid ""
 "`AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`: Required for "
 "SummarizationHook functionality"
 msgstr ""
+"`AZURE_OPENAI_API_KEY` 和 `AZURE_OPENAI_ENDPOINT`：SummarizationHook 功能所必需的参数"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:119
 #: 291e4a03beec491aafc9010dd43d4ce6
 msgid "Tool Filtering"
-msgstr ""
+msgstr "工具筛选"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:120
 #: 373b958b9e534a30a155ccc4a97910ec
-msgid "If you want to use only specific ToolUniverse tools to reduce overhead:"
-msgstr ""
+msgid ""
+"If you want to use only specific ToolUniverse tools to reduce overhead:"
+msgstr "如果您只想使用特定的 ToolUniverse 工具以减少开销："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:144
 #: e778a57723a9422fb4988961950cd924
 msgid "Excluding Specific Tools"
-msgstr ""
+msgstr "排除特定工具"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:145
 #: 7080e9cf07234393a3c049779add460c
 msgid "To exclude certain tools while keeping the rest:"
-msgstr ""
+msgstr "要排除某些工具，同时保留其余工具："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:167
 #: 741e42047ada4377a08a860763932b3e
 msgid "5. Start the Gemini CLI"
-msgstr ""
+msgstr "5. 启动 Gemini 命令行界面（CLI）"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:169
 #: 2ccd2165d45844f99d6392cdebaf6005
 msgid ""
-"After saving the configuration file, start or restart the Gemini CLI. The"
-" MCP server will be automatically discovered and connected."
-msgstr ""
+"After saving the configuration file, start or restart the Gemini CLI. The "
+"MCP server will be automatically discovered and connected."
+msgstr "保存配置文件后，启动或重启 Gemini CLI。MCP 服务器将被自动发现并连接。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:171
 #: 4e71c2ac58ed4205ba7b096296ba877c
 msgid "6. Verify Integration"
-msgstr ""
+msgstr "6. 验证集成"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:173
 #: 209490e936084e9183f220d275e762bf
 msgid ""
-"Use the `/mcp` command to check the status of your ToolUniverse MCP "
-"server:"
-msgstr ""
+"Use the `/mcp` command to check the status of your ToolUniverse MCP server:"
+msgstr "使用 `/mcp` 命令检查您的 ToolUniverse MCP 服务器状态："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:179
 #: 6be320886c824d7cb27375157a0e4e2c
 msgid "This will display:"
-msgstr ""
+msgstr "这将显示："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:180
 #: a38b9d4fddcf414994f7636ad65587da
 msgid "Server connection status (`CONNECTED` or `DISCONNECTED`)"
-msgstr ""
+msgstr "服务器连接状态（`已连接` 或 `未连接`）"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:181
 #: d9ad7bad48244ee4bdb71cb8d0db3801
 msgid "Available ToolUniverse tools"
-msgstr ""
+msgstr "可用的 ToolUniverse 工具"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:182
 #: 7799f01372d64a8286bb64626a7cc25a
 msgid "Configuration details"
-msgstr ""
+msgstr "配置详情"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:183
 #: 39169e9ea3f74997939ee8ce9ff7be16
 msgid "Any connection errors"
-msgstr ""
+msgstr "任何连接错误"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:185
 #: c271a4a4c6464ed99b49a98582cfdf61
 msgid "Example Usage"
-msgstr ""
+msgstr "示例用法"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:187
 #: 1bdd476935574dc8a68953ce2caef6a7
 msgid ""
 "Once configured, you can use ToolUniverse tools naturally in your "
 "conversations:"
-msgstr ""
+msgstr "配置完成后，您即可在对话中自然使用 ToolUniverse 工具："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:189
 #: a0b2c16aa63a4fc8bc16c4f42128752e
 msgid "Scientific Literature Search"
-msgstr ""
+msgstr "科学文献检索"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:194
 #: fe901b1dde6d4233ae53653f34fd35b4
 msgid "Chemical Compound Research"
-msgstr ""
+msgstr "化学化合物研究"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:199
 #: 921087722bfe4e759f55b6e98f50bf78
@@ -322,8 +326,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:218
 #: 5ac8758143d04f46bf3d269b1b26e5fc
 msgid ""
-"**Connects to ToolUniverse**: Establishes a connection using stdio "
-"transport based on your `settings.json`."
+"**Connects to ToolUniverse**: Establishes a connection using stdio transport"
+" based on your `settings.json`."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:219
@@ -335,12 +339,14 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:220
 #: b08c0d9dc16e400d9cd8f38a914a39a6
-msgid "**Validates schemas**: Ensures compatibility with Gemini API requirements."
+msgid ""
+"**Validates schemas**: Ensures compatibility with Gemini API requirements."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:221
 #: f1ff2ba41297432cb1815d53c95b41ce
-msgid "**Registers tools**: Makes the tools available for use in conversations."
+msgid ""
+"**Registers tools**: Makes the tools available for use in conversations."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:223
@@ -363,8 +369,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:228
 #: f50800b298ef401eb3f12b774636b5c7
 msgid ""
-"**Confirmation**: If `trust: false`, you'll be prompted to confirm the "
-"tool execution."
+"**Confirmation**: If `trust: false`, you'll be prompted to confirm the tool "
+"execution."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:229
@@ -375,8 +381,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:230
 #: 346627ed16ad46aaa61d89e9500599a9
 msgid ""
-"**Response**: Results are formatted and displayed in a user-friendly "
-"manner."
+"**Response**: Results are formatted and displayed in a user-friendly manner."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:232
@@ -428,7 +433,8 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:246
 #: e64aeb7199764497b3d23c4f180dac22
-msgid "**Symptoms**: ToolUniverse server shows `DISCONNECTED` status in `/mcp`."
+msgid ""
+"**Symptoms**: ToolUniverse server shows `DISCONNECTED` status in `/mcp`."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:248
@@ -443,14 +449,15 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:249
 #: ace6b82fd8c14df6aff62250b8305673
 msgid ""
-"Verify ToolUniverse is properly installed and the `tooluniverse-mcp-"
-"claude` command is runnable. Test it directly in your terminal: `cd "
+"Verify ToolUniverse is properly installed and the `tooluniverse-mcp-claude` "
+"command is runnable. Test it directly in your terminal: `cd "
 "/path/to/your/ToolUniverse && uv run tooluniverse-mcp-claude --help`"
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:251
 #: 29d643ac022c48fd999e8b3daa4d3c6b
-msgid "Check that the `cwd` path in your configuration is correct and absolute."
+msgid ""
+"Check that the `cwd` path in your configuration is correct and absolute."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:252
@@ -481,8 +488,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:260
 #: b95f69ec55da4ea581f51b82ce5dad2d
 msgid ""
-"Check if your `includeTools` or `excludeTools` filter is too restrictive "
-"or has typos."
+"Check if your `includeTools` or `excludeTools` filter is too restrictive or "
+"has typos."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:261
@@ -519,7 +526,8 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:270
 #: e8ad8972668f4c06b0fc7215d55aa97e
-msgid "Increase the `timeout` value in your configuration for slow API responses."
+msgid ""
+"Increase the `timeout` value in your configuration for slow API responses."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:271
@@ -604,8 +612,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:299
 #: 244c2654084845bcb98c6b71d58d186c
 msgid ""
-"You can configure multiple ToolUniverse instances, for example, to "
-"separate concerns or use different toolsets."
+"You can configure multiple ToolUniverse instances, for example, to separate "
+"concerns or use different toolsets."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:332
@@ -616,8 +624,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:334
 #: bcb170c93ebe4ea797ee7c22201d053f
 msgid ""
-"For containerized environments, you can configure the server to run "
-"inside Docker."
+"For containerized environments, you can configure the server to run inside "
+"Docker."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:359
@@ -643,8 +651,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:363
 #: 08d5e31bc5d64c06895de9176e55b056
 msgid ""
-"**Network Access**: Ensure your firewall allows outbound connections to "
-"the necessary scientific APIs."
+"**Network Access**: Ensure your firewall allows outbound connections to the "
+"necessary scientific APIs."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:364
@@ -662,15 +670,15 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:368
 #: 9819c7d6d15f4832ab0dd280d9675bf0
 msgid ""
-"**Tool Selection**: Use `includeTools` to load only the tools you need "
-"for a specific task."
+"**Tool Selection**: Use `includeTools` to load only the tools you need for a"
+" specific task."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:369
 #: d88ef0fc660c482f9beb655903bed0f8
 msgid ""
-"**Timeout Configuration**: Set appropriate timeouts based on expected API"
-" response times."
+"**Timeout Configuration**: Set appropriate timeouts based on expected API "
+"response times."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:370
@@ -721,7 +729,8 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:407
 #: 760bb445f8ff43b6927e9e3e92dff69e
-msgid "Saves significant context window space for more relevant scientific tools"
+msgid ""
+"Saves significant context window space for more relevant scientific tools"
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:408
@@ -762,8 +771,8 @@ msgstr ""
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:417
 #: 3aa867f718ec4fe9b351d686b93d6c03
 msgid ""
-"Better performance for literature search, chemical analysis, and clinical"
-" data"
+"Better performance for literature search, chemical analysis, and clinical "
+"data"
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:418
@@ -833,7 +842,8 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:436
 #: 62bf6182b1b34b04861a10ae5f20131b
-msgid "**Status Check**: Use `/mcp` to monitor server status and available tools."
+msgid ""
+"**Status Check**: Use `/mcp` to monitor server status and available tools."
 msgstr ""
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:437
@@ -866,9 +876,7 @@ msgstr ""
 #: 0d99d409358140b0bd3bffa8deba127f
 msgid ""
 "With ToolUniverse integrated as an MCP server, the Gemini CLI becomes a "
-"powerful, interactive platform for scientific research. It enables "
-"seamless access to literature databases, chemical compound information, "
-"clinical trial data, and advanced research tools through natural "
-"language."
+"powerful, interactive platform for scientific research. It enables seamless "
+"access to literature databases, chemical compound information, clinical "
+"trial data, and advanced research tools through natural language."
 msgstr ""
-

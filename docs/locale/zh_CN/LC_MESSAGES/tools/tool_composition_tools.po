@@ -186,4 +186,4 @@ msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/tool_composition_tools.rst:100 e85b269f8f6e437e937514f67d359e57
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:20 777ad2ab58be40a9b5cd4e3144d5127c
 msgid "自动生成的多语言索引页："
-msgstr ""
+msgstr "自动生成的多语言索引页面："
 
 #: ../../old_files/SUMMARY.md:21 a58c91b416ce4c1e94b22773b7a14472
 msgid "📍 位置：`_build/html/index.html`"
@@ -91,7 +91,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:24 fbbf0edd12a943eaa133d57713fd5f37
 msgid "📱 移动端友好"
-msgstr ""
+msgstr "📱 移动端优化"
 
 #: ../../old_files/SUMMARY.md:26 ../../old_files/SUMMARY.md:133
 #: 4ce8e4382cbb41338d9bfed0a5484ad5 7c3d6412d3a84006b8e5889e82f6e1e7
@@ -124,7 +124,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:59 35fb9d2fc8ce476b8f5d48889b9c38a1
 msgid "✅ 应用翻译到中文版本"
-msgstr ""
+msgstr "✅ 应用已翻译为中文版"
 
 #: ../../old_files/SUMMARY.md:61 6e75f61b3c4f481c90826cb230e46e19
 msgid "已翻译内容"

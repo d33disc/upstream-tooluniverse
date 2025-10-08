@@ -77,22 +77,22 @@ msgstr "为点路径创建嵌套字典，并将最终键设置为对应的值。
 msgid ""
 "Runs the specified tool by constructing and executing an API call based on "
 "the tool's configuration."
-msgstr ""
+msgstr "根据工具的配置，构建并执行API调用以运行指定的工具。"
 
 #: 4f276d2a1f2a43b988dc020257483126 of
 #: tooluniverse.uspto_tool.USPTOOpenDataPortalTool.run:3
 msgid ""
 "A dictionary of arguments for the tool, matching the parameters in the tool "
 "definition."
-msgstr ""
+msgstr "与工具定义中的参数相匹配的工具参数字典。"
 
 #: ../../api/tooluniverse.uspto_tool.rst c707f9efefcf4f70bc81ae5ef49cd6f1
 msgid "Returns"
-msgstr ""
+msgstr "返回"
 
 #: 4d4e58c9f40c4bfe9ff55ed4a4fdab66 of
 #: tooluniverse.uspto_tool.USPTOOpenDataPortalTool.run:5
 msgid ""
 "The result of the API call, either as a dictionary (for JSON) or a string "
 "(for CSV)."
-msgstr ""
+msgstr "API调用的结果，可以是字典格式（用于JSON）或字符串格式（用于CSV）。"

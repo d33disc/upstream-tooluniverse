@@ -327,189 +327,189 @@ msgstr "**名称**: ``get_chem_comp_audit_info``"
 msgid ""
 "**Description**: Fetch audit history for a chemical component: action type, "
 "date, details, ordinal, and processing site."
-msgstr ""
+msgstr "**描述**：获取化学成分的审计历史记录，包括操作类型、日期、详细信息、序号及处理地点。"
 
 #: ../../tools/rcsb_pdb_tools.rst:118 cbe433bfcb03415a98663489c57258a5
 msgid ""
 "``pdb_id`` (string) (optional) Chemical component ID to retrieve audit info "
 "for"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）用于检索审核信息的化学组分ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:134 fd737c764cb84a24ad5ee6e061ff040a
 msgid "**get_chem_comp_charge_and_ambiguity** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_chem_comp_charge_and_ambiguity**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:136 2ab3322526d643fcbb2ae78ae7ff92bf
 msgid "Retrieve the formal charge and ambiguity flag of a chemical component."
-msgstr ""
+msgstr "获取化学组分的形式电荷和歧义标志。"
 
 #: ../../tools/rcsb_pdb_tools.rst 7f2c633dbf7142ecb28810bd17418817
 msgid "get_chem_comp_charge_and_ambiguity tool specification"
-msgstr ""
+msgstr "get_chem_comp_charge_and_ambiguity 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:142 3e4f188dc0444a1296eebd910e7533a6
 msgid "**Name**: ``get_chem_comp_charge_and_ambiguity``"
-msgstr ""
+msgstr "**名称**：``get_chem_comp_charge_and_ambiguity``"
 
 #: ../../tools/rcsb_pdb_tools.rst:144 de8a8c11382c486daa8f9151236cb7a1
 msgid ""
 "**Description**: Retrieve the formal charge and ambiguity flag of a chemical"
 " component."
-msgstr ""
+msgstr "**描述**：获取化学组分的形式电荷和不确定性标志。"
 
 #: ../../tools/rcsb_pdb_tools.rst:148 c6692ec2f07640da81b289bc25c0565e
 msgid ""
 "``pdb_id`` (string) (optional) Chemical component ID to query charge and "
 "ambiguity"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）用于查询电荷和歧义的化学组分ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:164 e30917d0e835464fab837f8cd7b9ad0d
 msgid "**get_citation_info_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_citation_info_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:166 c3bf0ecc49fc4fccb82045fb0b158e37
 msgid ""
 "Retrieve citation information (authors, journal, year) for a given PDB "
 "structure."
-msgstr ""
+msgstr "检索指定PDB结构的引文信息（作者、期刊、年份）。"
 
 #: ../../tools/rcsb_pdb_tools.rst 603d2a4248594176bfd0dd9342a80cc4
 msgid "get_citation_info_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_citation_info_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:172 6eb542c6150e4985bda191cf2ea08771
 msgid "**Name**: ``get_citation_info_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_citation_info_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:174 5204b016b7d8441cbd28297f84b95be9
 msgid ""
 "**Description**: Retrieve citation information (authors, journal, year) for "
 "a given PDB structure."
-msgstr ""
+msgstr "**描述**：检索给定PDB结构的引文信息（作者、期刊、年份）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:194 d6c0f6191e134e6bb214de5e26f23926
 msgid "**get_core_refinement_statistics** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_core_refinement_statistics**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:196 1003c60425224ea5bac18c61132e29c4
 msgid ""
 "Retrieve essential refinement statistics for a given PDB structure including"
 " R-factors, occupancy..."
-msgstr ""
+msgstr "检索指定PDB结构的关键精修统计数据，包括R因子、占据率..."
 
 #: ../../tools/rcsb_pdb_tools.rst 894d33cd0f5241c39d83d09f53f24c0d
 msgid "get_core_refinement_statistics tool specification"
-msgstr ""
+msgstr "get_core_refinement_statistics 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:202 a9985eb8c13944db951bfe2b094ff6d9
 msgid "**Name**: ``get_core_refinement_statistics``"
-msgstr ""
+msgstr "**名称**：``get_core_refinement_statistics``"
 
 #: ../../tools/rcsb_pdb_tools.rst:204 125a68924b4243ffb642dd5d7fd725f1
 msgid ""
 "**Description**: Retrieve essential refinement statistics for a given PDB "
 "structure including R-factors, occupancy, phase errors, and solvent model "
 "parameters."
-msgstr ""
+msgstr "**描述**：检索指定PDB结构的关键精修统计数据，包括R因子、占有率、相位误差及溶剂模型参数。"
 
 #: ../../tools/rcsb_pdb_tools.rst:208 6de33354a269449795e6b21919e36499
 msgid "``pdb_id`` (string) (optional) PDB entry ID (e.g., '1ABC')"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）PDB 条目 ID（例如，'1ABC'）"
 
 #: ../../tools/rcsb_pdb_tools.rst:224 9a7bc98f0d734c07bd3207925ecb2c6e
 msgid "**get_crystal_growth_conditions_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_crystal_growth_conditions_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:226 1107f18887e244b6853ca01a9d9a162d
 msgid ""
 "Get information about the crystallization method and conditions for a "
 "structure."
-msgstr ""
+msgstr "获取有关结构的结晶方法及条件的信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst 3c153c26290a4ffb809af3f4a492b845
 msgid "get_crystal_growth_conditions_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_crystal_growth_conditions_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:232 bed719a3f9d34dd189f826f88ef5941f
 msgid "**Name**: ``get_crystal_growth_conditions_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_crystal_growth_conditions_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:234 1f60f55745654e3eb53396d00a44f1ab
 msgid ""
 "**Description**: Get information about the crystallization method and "
 "conditions for a structure."
-msgstr ""
+msgstr "**描述**：获取有关结构的结晶方法及条件的信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst:238 ../../tools/rcsb_pdb_tools.rst:298
 #: ../../tools/rcsb_pdb_tools.rst:1078 85c5d5c08867479682a9934a78179753
 #: 8dad313b27574aaf95f48de8a504b054 f8d19ecfb0e54ef0be433220efdae005
 msgid "``pdb_id`` (string) (optional) PDB ID of the structure"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）结构的PDB编号"
 
 #: ../../tools/rcsb_pdb_tools.rst:254 f0582f91deab46818ec85c2d5d83b17e
 msgid "**get_crystallization_ph_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_crystallization_ph_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:256 ffedac9449eb439da5f357312f6e8c83
 msgid "Fetch the pH used during crystallization of the sample."
-msgstr ""
+msgstr "获取样品结晶过程中使用的pH值。"
 
 #: ../../tools/rcsb_pdb_tools.rst cbcc0bc31e2344f09296642479d95504
 msgid "get_crystallization_ph_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_crystallization_ph_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:262 e8e9082b99dd4023a32c48f16454c33f
 msgid "**Name**: ``get_crystallization_ph_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_crystallization_ph_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:264 1f2b3b07f43247e9ae21b76b8273e2a0
 msgid ""
 "**Description**: Fetch the pH used during crystallization of the sample."
-msgstr ""
+msgstr "**描述**：获取样品结晶过程中使用的pH值。"
 
 #: ../../tools/rcsb_pdb_tools.rst:268 6d7e6afc432e4f8ca212f01b8ecb34a0
 msgid "``pdb_id`` (string) (optional) RCSB PDB ID of the structure"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）结构的 RCSB PDB 编号"
 
 #: ../../tools/rcsb_pdb_tools.rst:284 85a336ebb52e4f64ac073e61253edd9e
 msgid "**get_crystallographic_properties_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_crystallographic_properties_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:286 184bf96a7a1940ee87d5896ac9f6fe1e
 msgid ""
 "Retrieve crystallographic properties such as unit cell dimensions and space "
 "group for a PDB entry."
-msgstr ""
+msgstr "检索PDB条目的晶体学属性，如晶胞参数和空间群。"
 
 #: ../../tools/rcsb_pdb_tools.rst 08c4bbc9bc2f40e9a6bc7ecb5e213c31
 msgid "get_crystallographic_properties_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_crystallographic_properties_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:292 48e1b2754ec64bbeacd550f3d464e6a0
 msgid "**Name**: ``get_crystallographic_properties_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_crystallographic_properties_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:294 8464dd894bf84e6fa83d595450c13032
 msgid ""
 "**Description**: Retrieve crystallographic properties such as unit cell "
 "dimensions and space group for a PDB entry."
-msgstr ""
+msgstr "**描述**：检索PDB条目的晶体学属性，如晶胞参数和空间群。"
 
 #: ../../tools/rcsb_pdb_tools.rst:314 51f53d4ea17f4a60b40ef4f858123a0f
 msgid "**get_ec_number_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_ec_number_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:316 27607fee53f34a49a656ac0c2c610522
 msgid "Retrieve the Enzyme Commission (EC) number(s) for an entity."
-msgstr ""
+msgstr "检索实体的酶委托编号（EC号）。"
 
 #: ../../tools/rcsb_pdb_tools.rst fe1fbd0caffd46ec80c5a4611aeca2e1
 msgid "get_ec_number_by_entity_id tool specification"
-msgstr ""
+msgstr "get_ec_number_by_entity_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:322 1b4abe99c1054c879ef300fff585efb5
 msgid "**Name**: ``get_ec_number_by_entity_id``"
-msgstr ""
+msgstr "**名称**：``get_ec_number_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:324 3797e51833054874bf8bcc1d255f7b3d
 msgid ""

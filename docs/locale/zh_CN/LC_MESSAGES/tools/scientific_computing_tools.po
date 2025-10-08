@@ -297,225 +297,225 @@ msgstr "**描述**：获取有关 FlowUtils 的全面信息——流式细胞术
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "FlowUtils"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 FlowUtils 的信息类型"
 
 #: ../../tools/scientific_computing_tools.rst:133
 #: fd852dc7a0ec4ecd94a12bf55832af8d
 msgid "**get_h5py_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_h5py_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:135
 #: e84ed9d2100e4f13bb2ab77ba83efbea
 msgid "Get comprehensive information about h5py – HDF5 for Python"
-msgstr ""
+msgstr "获取关于 h5py —— Python 的 HDF5 的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst 62d4389e50ec435c9b0214918d6b2b72
 msgid "get_h5py_info tool specification"
-msgstr ""
+msgstr "get_h5py_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:141
 #: 812a84ab11524cbba1cfe7c5028f7303
 msgid "**Name**: ``get_h5py_info``"
-msgstr ""
+msgstr "**名称**：``get_h5py_info``"
 
 #: ../../tools/scientific_computing_tools.rst:143
 #: 33ea808e9ba541aebe8b509fbad40ac4
 msgid ""
 "**Description**: Get comprehensive information about h5py – HDF5 for Python"
-msgstr ""
+msgstr "**描述**：获取关于 h5py —— Python 的 HDF5 的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst:163
 #: b5723eebd530498b9b9f71b33313d59c
 msgid "**get_joblib_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_joblib_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:165
 #: f7dec1eabab6457bbdd9eb893a30d613
 msgid ""
 "Get information about the joblib package. Lightweight pipelining with Python"
 " functions"
-msgstr ""
+msgstr "获取有关 joblib 包的信息。使用 Python 函数实现轻量级流水线处理"
 
 #: ../../tools/scientific_computing_tools.rst eea250a2198a42d9b634a7971658ef9d
 msgid "get_joblib_info tool specification"
-msgstr ""
+msgstr "get_joblib_info 工具规范"
 
 #: ../../tools/scientific_computing_tools.rst:171
 #: 8a92a6f14a404f00a0ef50d83c00da40
 msgid "**Name**: ``get_joblib_info``"
-msgstr ""
+msgstr "**名称**：``get_joblib_info``"
 
 #: ../../tools/scientific_computing_tools.rst:173
 #: 9494ecececcc407db8a8a40a50b19513
 msgid ""
 "**Description**: Get information about the joblib package. Lightweight "
 "pipelining with Python functions"
-msgstr ""
+msgstr "**描述**：获取有关 joblib 包的信息。使用 Python 函数实现轻量级流水线处理"
 
 #: ../../tools/scientific_computing_tools.rst:192
 #: efc5736de30f4f4dbad742df7c989510
 msgid "**get_numpy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_numpy_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:194
 #: e72547c18671412e9c52d37a9aa24996
 msgid ""
 "Get comprehensive information about NumPy - the fundamental package for "
 "scientific computing with..."
-msgstr ""
+msgstr "获取有关 NumPy 的全面信息——科学计算的基础包，包含..."
 
 #: ../../tools/scientific_computing_tools.rst 9a1c8c28760146dba7a02e6debb26697
 msgid "get_numpy_info tool specification"
-msgstr ""
+msgstr "get_numpy_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:200
 #: 11351898ed3245f59b16e69880e0bb92
 msgid "**Name**: ``get_numpy_info``"
-msgstr ""
+msgstr "**名称**：``get_numpy_info``"
 
 #: ../../tools/scientific_computing_tools.rst:202
 #: abfd2a16f5f344e690cbfe1b91f67e8c
 msgid ""
 "**Description**: Get comprehensive information about NumPy - the fundamental"
 " package for scientific computing with Python"
-msgstr ""
+msgstr "**描述**：获取关于 NumPy 的全面信息——Python 科学计算的基础包"
 
 #: ../../tools/scientific_computing_tools.rst:222
 #: 7a1eb1ca626b4600a0186dace4fbaba1
 msgid "**get_optlang_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_optlang_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:224
 #: 452142e021204537b9e9fa3d353fbae0
 msgid ""
 "Get comprehensive information about optlang – optimization language for "
 "mathematical programming"
-msgstr ""
+msgstr "获取关于 optlang —— 数学规划优化语言的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst ace4edd78e654df08f9b454550e9dd00
 msgid "get_optlang_info tool specification"
-msgstr ""
+msgstr "get_optlang_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:230
 #: 9a3b74dfba514747ab7465998065d201
 msgid "**Name**: ``get_optlang_info``"
-msgstr ""
+msgstr "**名称**：``get_optlang_info``"
 
 #: ../../tools/scientific_computing_tools.rst:232
 #: b908dfed8b5a4986b4be8c1895b31f53
 msgid ""
 "**Description**: Get comprehensive information about optlang – optimization "
 "language for mathematical programming"
-msgstr ""
+msgstr "**描述**：获取关于 optlang —— 数学规划优化语言的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst:236
 #: 38b142f9523c433898efbae9c62020fb
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "optlang"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 optlang 的信息类型"
 
 #: ../../tools/scientific_computing_tools.rst:253
 #: 89ab0b4bafa04478b95abc372b228bac
 msgid "**get_pandas_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pandas_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:255
 #: eb79b58d8a3e4d969bf3949d07b54467
 msgid ""
 "Get comprehensive information about pandas - powerful data structures and "
 "data analysis tools for..."
-msgstr ""
+msgstr "获取关于 pandas 的全面信息——强大的数据结构和数据分析工具，用于..."
 
 #: ../../tools/scientific_computing_tools.rst 60411f97f2594cf1a859cf7a24b8de3d
 msgid "get_pandas_info tool specification"
-msgstr ""
+msgstr "get_pandas_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:261
 #: aff314a8a29b4efd9c5d207835c5a5a6
 msgid "**Name**: ``get_pandas_info``"
-msgstr ""
+msgstr "**名称**：``get_pandas_info``"
 
 #: ../../tools/scientific_computing_tools.rst:263
 #: 96edd68384c34cb0b775043e4d5cd412
 msgid ""
 "**Description**: Get comprehensive information about pandas - powerful data "
 "structures and data analysis tools for Python"
-msgstr ""
+msgstr "**描述**：获取有关 pandas 的全面信息——Python 强大的数据结构和数据分析工具"
 
 #: ../../tools/scientific_computing_tools.rst:283
 #: f3b45a157055466bb985fc79fb33a8a0
 msgid "**get_patsy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_patsy_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:285
 #: b3939934dbfc476aa70be58e0c7a1cbd
 msgid ""
 "Get information about the patsy package. Python library for describing "
 "statistical models"
-msgstr ""
+msgstr "获取有关 patsy 包的信息。用于描述统计模型的 Python 库"
 
 #: ../../tools/scientific_computing_tools.rst cf626ef83b61420284deb62578b73023
 msgid "get_patsy_info tool specification"
-msgstr ""
+msgstr "get_patsy_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:291
 #: 9f63747d4d9042f0b72b057bcf4788a6
 msgid "**Name**: ``get_patsy_info``"
-msgstr ""
+msgstr "**名称**：``get_patsy_info``"
 
 #: ../../tools/scientific_computing_tools.rst:293
 #: db0f2a6612bc4798b5e0cebcbe589c4a
 msgid ""
 "**Description**: Get information about the patsy package. Python library for"
 " describing statistical models"
-msgstr ""
+msgstr "**描述**：获取有关 patsy 包的信息。用于描述统计模型的 Python 库"
 
 #: ../../tools/scientific_computing_tools.rst:312
 #: fcd43d573dd84d2cb05028eb44bdedf9
 msgid "**get_scipy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scipy_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:314
 #: 08a9c6ef094d4a469faf1561f9eecc38
 msgid ""
 "Get comprehensive information about SciPy – fundamental algorithms for "
 "scientific computing"
-msgstr ""
+msgstr "获取关于 SciPy 的全面信息——科学计算的基础算法"
 
 #: ../../tools/scientific_computing_tools.rst 2a4e5921a0ad445c803495df3f0cd35d
 msgid "get_scipy_info tool specification"
-msgstr ""
+msgstr "get_scipy_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:320
 #: 784f144c914f40cead4c75ddd33d8950
 msgid "**Name**: ``get_scipy_info``"
-msgstr ""
+msgstr "**名称**：``get_scipy_info``"
 
 #: ../../tools/scientific_computing_tools.rst:322
 #: 3bae94eda4a0488e9df95f74e40b98ef
 msgid ""
 "**Description**: Get comprehensive information about SciPy – fundamental "
 "algorithms for scientific computing"
-msgstr ""
+msgstr "**描述**：获取关于 SciPy 的全面信息——科学计算的基础算法"
 
 #: ../../tools/scientific_computing_tools.rst:326
 #: 7a982c9e74ae44f6857c74be61f11d23
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "SciPy"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 SciPy 的信息类型"
 
 #: ../../tools/scientific_computing_tools.rst:343
 #: a4aa34c50d2e4e618b11c1ee803354d2
 msgid "**get_sympy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_sympy_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:345
 #: 267988890a634da8994fe40180b3f27a
 msgid ""
 "Get comprehensive information about SymPy – symbolic mathematics library"
-msgstr ""
+msgstr "获取关于 SymPy —— 符号数学库的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst d94b68f1510b485d980142617fb3a3db
 msgid "get_sympy_info tool specification"

@@ -75,14 +75,14 @@ msgstr "API 调用参数。"
 #: ../../api/tooluniverse.gene_ontology_tool.rst
 #: 984b70b6a99f413f9112b38f66a72edb
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 43991804c49e429b8c12c753178f90a4 of
 #: tooluniverse.gene_ontology_tool.GeneOntologyTool.run:6
 msgid "The JSON data from the API or an error dictionary."
-msgstr ""
+msgstr "从API获取的JSON数据或错误字典。"
 
 #: ../../api/tooluniverse.gene_ontology_tool.rst
 #: 3eb3059cd9454115b1ea9b42ee6e432a
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"

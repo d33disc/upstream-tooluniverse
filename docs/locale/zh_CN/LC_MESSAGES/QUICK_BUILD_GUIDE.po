@@ -66,7 +66,7 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:24 a952e6c433494bb8a8fc61d4040e6a33
 msgid "✅ 创建语言选择页 → `_build/html/index.html`"
-msgstr ""
+msgstr "✅ 创建语言选择页面 → `_build/html/index.html`"
 
 #: ../../QUICK_BUILD_GUIDE.md:25 0e38c445b05d45e1bfdc3d7fcc8cfcbe
 msgid "✅ 启动本地服务器（可选）"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:66 14670c61976e4b16bb029155f3a9a7a1
 msgid "构建完成后，脚本会显示访问链接："
-msgstr ""
+msgstr "构建完成后，脚本将显示访问链接："
 
 #: ../../QUICK_BUILD_GUIDE.md:81 a94c762df6ee4428937e1bc7ade4da82
 msgid "本地服务器"
@@ -110,7 +110,7 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:83 6ebcdf9dac6740efad8d8e855d83c929
 msgid "脚本会询问是否启动本地服务器："
-msgstr ""
+msgstr "脚本将询问是否启动本地服务器："
 
 #: ../../QUICK_BUILD_GUIDE.md:89 271b819ee725473392bf5911a23ef68f
 msgid "选择 `y` 后，访问："
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../QUICK_BUILD_GUIDE.md:91 dde1eed5a3ac4735a69da400c9e2178b
 msgid "🇬🇧 英文：`http://localhost:8080/en/index.html`"
-msgstr ""
+msgstr "🇨🇳 中文：`http://localhost:8080/zh/index.html`"
 
 #: ../../QUICK_BUILD_GUIDE.md:92 2823e70f7a3846a7af7bef486b67cd2c
 msgid "🇨🇳 中文：`http://localhost:8080/zh-CN/index.html`"

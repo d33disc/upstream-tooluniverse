@@ -7,131 +7,133 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:2
 #: 59de232ab37143a4ba2525986541db48
 msgid "Qwen Code"
-msgstr ""
+msgstr "Qwen 代码"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:4
 #: c23195b7572446919ffee6bd1783f224
 msgid "**Building AI Scientists with Qwen Code and ToolUniverse**"
-msgstr ""
+msgstr "**使用 Qwen Code 和 ToolUniverse 构建 AI 科学家**"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:6
 #: cd28d87d5baf40179c76782e124567bb
 msgid "Qwen Code integrates with ToolUniverse via MCP"
-msgstr ""
+msgstr "Qwen Code 通过 MCP 与 ToolUniverse 集成"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:12
 #: b60feb935cef46329d94a71825d3fd26
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:14
 #: 0df215cdd08945cbbcc22169c079f814
 msgid ""
-"Qwen Code is a coding agent CLI that can query and edit large codebases "
-"and automate workflows. Integrated with the Model Context Protocol (MCP),"
-" it can connect to ToolUniverse to power evidence-based scientific "
-"research from your terminal."
+"Qwen Code is a coding agent CLI that can query and edit large codebases and "
+"automate workflows. Integrated with the Model Context Protocol (MCP), it can"
+" connect to ToolUniverse to power evidence-based scientific research from "
+"your terminal."
 msgstr ""
+"Qwen Code 是一款编码代理命令行工具，能够查询和编辑大型代码库并自动化工作流程。通过集成模型上下文协议（MCP），它可以连接到 "
+"ToolUniverse，从终端驱动基于证据的科学研究。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:33
 #: 49c079d3d5e64f01a8f9a9cda31027d8
 msgid "**Benefits of Qwen Code Integration**:"
-msgstr ""
+msgstr "**Qwen 代码集成的优势**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:35
 #: 005f487728814fb38c10d9c3e6c8520c
 msgid ""
-"**Command-Line Efficiency**: Scriptable, terminal-first scientific "
-"workflows"
-msgstr ""
+"**Command-Line Efficiency**: Scriptable, terminal-first scientific workflows"
+msgstr "**命令行效率**：可脚本化、以终端为核心的科学工作流程"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:36
 #: a3a4f8febd4b4c47afbe6ec39588243e
-msgid "**Advanced Reasoning**: Qwen Coder models optimized for code and tooling"
-msgstr ""
+msgid ""
+"**Advanced Reasoning**: Qwen Coder models optimized for code and tooling"
+msgstr "**高级推理**：针对代码和工具优化的 Qwen Coder 模型"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:37
 #: 865a5ebc9c444ea09c86cd53e510d0e5
 msgid "**Comprehensive Tools**: Access 600+ scientific tools via ToolUniverse"
-msgstr ""
+msgstr "**综合工具**：通过 ToolUniverse 访问 600 多种科学工具"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:38
 #: ee22ae7cf4e14162a5d9d9c721c9af1c
 msgid "**Automated Execution**: Natural language to tool execution"
-msgstr ""
+msgstr "**自动执行**：自然语言到工具执行"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:39
 #: 7bbb81e84b3648619ce060778c6370a1
 msgid "**Batch Processing**: Efficient multi-task research"
-msgstr ""
+msgstr "**批量处理**：高效的多任务研究"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:42
 #: d50c59bbe83b487cbf0b0fed1f5fbddb
 msgid "Prerequisites"
-msgstr ""
+msgstr "先决条件"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:44
 #: bad91d1a93c1443f9a7a525aa4d0af25
 msgid "Before setting up Qwen Code integration, ensure you have:"
-msgstr ""
+msgstr "在设置 Qwen Code 集成之前，请确保您已具备："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:46
 #: 753fb5348c0e40158f9b445c6f23e19d
 msgid "**Qwen Code**: Installed and runnable (`qwen --version`)"
-msgstr ""
+msgstr "**Qwen Code**：已安装并可运行（`qwen --version`）"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:47
 #: ae5ac42979444504954525dbcef44f1e
 msgid "**ToolUniverse**: Installed"
-msgstr ""
+msgstr "**ToolUniverse**：已安装"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:48
 #: f9e82b0273ce481ba20cd94fa97d3457
 msgid "**UV Package Manager**: For running the MCP server"
-msgstr ""
+msgstr "**UV 包管理器**：用于运行 MCP 服务器"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:49
 #: bf5e752c23314f3b8e697c08db7e9191
 msgid "**System Requirements**: macOS, Windows, or Linux with Python 3.10+"
-msgstr ""
+msgstr "**系统要求**：支持 macOS、Windows 或 Linux，需安装 Python 3.10 及以上版本"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:50
 #: f18925aad28a4bce9d6956390240f270
 msgid "**API Keys**: For tools and optional summarization hooks"
-msgstr ""
+msgstr "**API 密钥**：用于工具和可选的摘要钩子"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:53
 #: 97e4ec41399442cbb9502c5c9166b1ba
 msgid "Installation and Setup"
-msgstr ""
+msgstr "安装与设置"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:56
 #: 72d1c8ccea2343d19807338b80a03bc9
 msgid "Command Legend"
-msgstr ""
+msgstr "命令说明"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:58
 #: 45f7e4f8394b4e2b90f6f5db5483c71e
 msgid ""
-"System terminal (your shell: zsh/bash): run installation and file editing"
-" commands"
-msgstr ""
+"System terminal (your shell: zsh/bash): run installation and file editing "
+"commands"
+msgstr "系统终端（您的 shell：zsh/bash）：运行安装及文件编辑命令"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:59
 #: 03f444fb71604d8e9f2e69570f8033f0
@@ -139,16 +141,17 @@ msgid ""
 "Qwen Code prompt (inside `qwen`): run slash commands like ``/mcp``, "
 "``/stats``, ``/memory show``"
 msgstr ""
+"Qwen Code 提示（位于 `qwen` 内）：运行斜杠命令，如 ``/mcp``、``/stats``、``/memory show``"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:62
 #: 0c7b432ff0454408b01adbda4dc79f90
 msgid "Step 1: Install Qwen Code"
-msgstr ""
+msgstr "步骤 1：安装 Qwen Code"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:64
 #: e147c8976ca7488fab4f7e77626bf322
 msgid "You can install Qwen Code via npm or Homebrew."
-msgstr ""
+msgstr "您可以通过 npm 或 Homebrew 安装 Qwen Code。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:81
 #: 876bf68c542e41e7ad1f4ca0d4e0984f
@@ -156,142 +159,151 @@ msgid ""
 "For details, see the official repository `Qwen Code on GitHub "
 "<https://github.com/QwenLM/qwen-code>`_."
 msgstr ""
+"详情请参见官方仓库 `Qwen Code on GitHub <https://github.com/QwenLM/qwen-code>`_。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:84
 #: 559d0cb0373c42179b931363c9e982e7
 msgid "Step 2: Install ToolUniverse"
-msgstr ""
+msgstr "步骤 2：安装 ToolUniverse"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:90
 #: 49159dda5df0488aaf5391f012b5bcfd
 msgid "Verify installation:"
-msgstr ""
+msgstr "验证安装："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:97
 #: c01a97788936408c8881941aa7977d6e
 msgid "Step 3: Locate Qwen Code Configuration"
-msgstr ""
+msgstr "步骤 3：定位 Qwen 代码配置"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:99
 #: ff51c78012044cb5be91005ced358894
 msgid ""
 "Qwen Code reads settings from a home directory config at "
-"``~/.qwen/settings.json`` or from a project-local "
-"``.qwen/settings.json``."
+"``~/.qwen/settings.json`` or from a project-local ``.qwen/settings.json``."
 msgstr ""
+"Qwen Code 会从主目录下的配置文件 ``~/.qwen/settings.json`` 或项目本地的 "
+"``.qwen/settings.json`` 读取设置。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:101
 #: 62844b23509441b2876ee0e5bbd4fa08
 msgid "Create or open your settings file:"
-msgstr ""
+msgstr "创建或打开您的设置文件："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:113
 #: cca924531bc94e87a3190ae5246d84c9
 msgid "Note: These commands are run in your system terminal."
-msgstr ""
+msgstr "注意：这些命令需在您的系统终端中运行。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:116
 #: 0c271864e1214e8d8bf88ca357bcd161
 msgid "Step 4: Configure ToolUniverse MCP Server"
-msgstr ""
+msgstr "步骤4：配置ToolUniverse MCP服务器"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:118
 #: b8d883c2f8c146aab7fe522f9769d615
 msgid ""
 "Add the ToolUniverse MCP server configuration to your Qwen settings "
 "``settings.json``."
-msgstr ""
+msgstr "将 ToolUniverse MCP 服务器配置添加到 Qwen 设置的 ``settings.json`` 文件中。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:120
 #: 802128f754f54e04a2036f719932b1d6
 msgid "Note: Edit the JSON in your system terminal/editor."
-msgstr ""
+msgstr "注意：在您的系统终端/编辑器中编辑 JSON。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:122
 #: 8286be1386d847b2b1ac9aef48da84b4
 msgid "**Basic Configuration:**"
-msgstr ""
+msgstr "**基本配置：**"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:140
 #: 1958a15ec6644aaea8c2ff3af7560b5d
 msgid "**Optimized Configuration for Research Users (Recommended):**"
-msgstr ""
+msgstr "**为研究用户优化的配置（推荐）：**"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:166
 #: 0983009ee65a4100ac094bbf2d0f2685
 msgid "**Configuration Benefits:**"
-msgstr ""
+msgstr "**配置优势：**"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:168
 #: b70c260807a14234be27d2acf5ec0367
 msgid ""
-"``--exclude-tool-types PackageTool``: Saves context if you don't need "
-"coding package tools"
-msgstr ""
+"``--exclude-tool-types PackageTool``: Saves context if you don't need coding"
+" package tools"
+msgstr "``--exclude-tool-types PackageTool``：如果您不需要编码包工具，则保存上下文"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:169
 #: 69337112da724999a955905543d56444
-msgid "``--hook-type SummarizationHook``: Summarizes long outputs to fit context"
-msgstr ""
+msgid ""
+"``--hook-type SummarizationHook``: Summarizes long outputs to fit context"
+msgstr "``--hook-type SummarizationHook``：将较长的输出摘要以适应上下文"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:170
 #: 9638757d87cd45209c722315abb86930
 msgid "``AZURE_OPENAI_*``: Required for SummarizationHook"
-msgstr ""
+msgstr "``AZURE_OPENAI_*``：摘要钩子（SummarizationHook）所需"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:172
 #: 3a16f6dc302e499e84043db4f6ef1dc4
 msgid "**Important Notes**:"
-msgstr ""
+msgstr "**重要说明**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:174
 #: f90f69cfaa834b60a7e10eb1ddc382ef
 msgid ""
-"Replace ``/path/to/your/qwen_running_env`` with the absolute path to your"
-" Qwen working folder"
-msgstr ""
+"Replace ``/path/to/your/qwen_running_env`` with the absolute path to your "
+"Qwen working folder"
+msgstr "将 ``/path/to/your/qwen_running_env`` 替换为指向您 Qwen 工作文件夹的绝对路径"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:175
 #: cfc5994c6d374c5f874e499b3faa1072
 msgid "Prefer absolute paths for reliability"
-msgstr ""
+msgstr "为确保可靠性，请优先使用绝对路径"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:178
 #: 5ef51154e7f3477aa98e977ad5f39144
 msgid "Step 5: Configure Context File (QWEN.md)"
-msgstr ""
+msgstr "第5步：配置上下文文件 (QWEN.md)"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:180
 #: e1d9e8b6fb6c436093280140e3ad8300
 msgid ""
-"You can provide project-specific research instructions to Qwen Code using"
-" a context file."
-msgstr ""
+"You can provide project-specific research instructions to Qwen Code using a "
+"context file."
+msgstr "您可以使用上下文文件向 Qwen Code 提供项目特定的研究指令。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:182
 #: 151fcc483ace4fe4ba6775054558301f
 msgid "**Create QWEN.md** in your project root:"
-msgstr ""
+msgstr "在项目根目录中创建 **QWEN.md**:"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:188
 #: c6f75735aa7c4616b44953f3ac88bde2
 msgid "**Add ToolUniverse-specific context**:"
 msgstr ""
+"**添加 ToolUniverse 特定上下文**：\n"
+"\n"
+"上下文：技术文档"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:202
 #: 8e345142385b4ec8bcfd25e2122bf425
 msgid "Step 6: Start Qwen Code and Verify MCP"
-msgstr ""
+msgstr "步骤6：启动Qwen Code并验证MCP"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:204
 #: f6452a46abac40e7b3ff8d105b7774ca
 msgid "**Start Qwen Code**:"
 msgstr ""
+"**启动 Qwen 代码**：\n"
+"\n"
+"上下文：技术文档"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:210
 #: 8da5f949c7364091af218c2c01e53f39
 msgid "Note: Run this in your system terminal."
-msgstr ""
+msgstr "注意：在您的系统终端中运行此命令。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:212
 #: 76fc973981f24bd69737f83b7dd0e038
@@ -316,8 +328,8 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:230
 #: 5efb15dacb4245f3b50fcb4b7f9d8770
 msgid ""
-"For authentication methods (OAuth and API keys), see: `Authorization "
-"(Qwen Code README) <https://github.com/QwenLM/qwen-code?tab=readme-ov-"
+"For authentication methods (OAuth and API keys), see: `Authorization (Qwen "
+"Code README) <https://github.com/QwenLM/qwen-code?tab=readme-ov-"
 "file#authorization>`_."
 msgstr ""
 
@@ -380,8 +392,8 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:271
 #: 343ec11ad906485f831483f32ba60b85
 msgid ""
-"**Drug Analysis**: - Drug information retrieval - Safety profile analysis"
-" - Drug interaction checking - Clinical trial data access"
+"**Drug Analysis**: - Drug information retrieval - Safety profile analysis - "
+"Drug interaction checking - Clinical trial data access"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:278
@@ -404,8 +416,8 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:287
 #: 348e07e6de81429f9dca6ec9ffeaf850
 msgid ""
-"**Molecular Interactions**: - Protein-protein and drug-target "
-"interactions - Pathway analysis and functional annotation"
+"**Molecular Interactions**: - Protein-protein and drug-target interactions -"
+" Pathway analysis and functional annotation"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:292
@@ -428,8 +440,8 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:300
 #: 2f524f8addfb4ed2ad0c412d264720c0
 msgid ""
-"**Content Analysis**: - Abstract summarization and key finding extraction"
-" - Trend analysis and gap identification"
+"**Content Analysis**: - Abstract summarization and key finding extraction - "
+"Trend analysis and gap identification"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:305
@@ -475,24 +487,24 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:374
 #: d683eea2df024b3f8b9b0f4247aeda72
 msgid ""
-"**MCP Server Not Loading**: - Verify ToolUniverse installation path - "
-"Check UV package manager installation - Ensure proper JSON syntax in "
-"configuration - Use ``/stats`` to confirm session info and limits"
+"**MCP Server Not Loading**: - Verify ToolUniverse installation path - Check "
+"UV package manager installation - Ensure proper JSON syntax in configuration"
+" - Use ``/stats`` to confirm session info and limits"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:380
 #: 3467f3cc47c746d8b2cdd64f019a59f0
 msgid ""
-"**No Tools Discovered**: - Verify the ToolUniverse MCP server is working "
-"- Check if your ``includeTools`` or ``excludeTools`` filter is too "
-"restrictive - Ensure all ToolUniverse dependencies are installed"
+"**No Tools Discovered**: - Verify the ToolUniverse MCP server is working - "
+"Check if your ``includeTools`` or ``excludeTools`` filter is too restrictive"
+" - Ensure all ToolUniverse dependencies are installed"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:385
 #: 554abda265484b309869ef8d26e5f9fe
 msgid ""
-"**Tools Not Executing**: - Check your ``env`` configuration for needed "
-"API keys - Verify network connectivity - Increase the ``timeout`` value"
+"**Tools Not Executing**: - Check your ``env`` configuration for needed API "
+"keys - Verify network connectivity - Increase the ``timeout`` value"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:391
@@ -507,7 +519,8 @@ msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:395
 #: c2fbe436165f4030ae8b8f9fc9190f8a
-msgid "``/compress``: Compress conversation history to stay within token limits"
+msgid ""
+"``/compress``: Compress conversation history to stay within token limits"
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:396
@@ -562,8 +575,8 @@ msgstr ""
 #: 5588c2557fb742bcb1c3a6e468074136
 msgid ""
 "For regional guidance and provider options (Bailian, ModelScope, "
-"ModelStudio, OpenRouter), refer to the repository docs: `Qwen Code on "
-"GitHub <https://github.com/QwenLM/qwen-code>`_."
+"ModelStudio, OpenRouter), refer to the repository docs: `Qwen Code on GitHub"
+" <https://github.com/QwenLM/qwen-code>`_."
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:427
@@ -579,15 +592,13 @@ msgstr ""
 #: ../../guide/building_ai_scientists/qwen_code.rst:431
 #: 9aba6e5f63434f74b7c409ebbe99572f
 msgid ""
-"**Status Check**: Use ``/mcp`` to confirm server status and available "
-"tools."
+"**Status Check**: Use ``/mcp`` to confirm server status and available tools."
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:433
 #: a22be6ad13234d04b7497c18ee2d8b43
 msgid ""
-"**Session Control**: Use ``/compress`` and ``/stats`` to manage token "
-"usage."
+"**Session Control**: Use ``/compress`` and ``/stats`` to manage token usage."
 msgstr ""
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:436
@@ -601,4 +612,3 @@ msgid ""
 "Qwen Code repository: `https://github.com/QwenLM/qwen-code "
 "<https://github.com/QwenLM/qwen-code>`_"
 msgstr ""
-

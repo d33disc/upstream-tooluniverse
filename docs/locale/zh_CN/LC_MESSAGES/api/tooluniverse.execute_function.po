@@ -100,18 +100,20 @@ msgid ""
 " and specialized scientific tools. It handles tool loading, filtering, "
 "caching, and execution."
 msgstr ""
+"ToolUniverse 类提供了一个集中的接口，用于管理不同类型的工具，包括 GraphQL 工具、RESTful API、MCP "
+"客户端以及专用的科学工具。它负责工具的加载、筛选、缓存和执行。"
 
 #: 68f3fa45dc5846d18c0b4475d4e1b77b of
 #: tooluniverse.execute_function.ToolUniverse:9
 msgid "List of all loaded tool configurations"
-msgstr ""
+msgstr "已加载工具配置列表"
 
 #: 2d7c188ce9224e3f8337a58b0e91be5a 85c4f192b6e14276832efbdcf3c35d66
 #: acf73a37d55649d6a320bd4ec5d8bec5 b0fd861f236e48d8932176156e938a4b
 #: d7b97cc0a49c48909eb01b64b90be511 of
 #: tooluniverse.execute_function.ToolUniverse
 msgid "type"
-msgstr ""
+msgstr "类型"
 
 #: 4d3f68043e4c44d0a28c0d3c7f203dd4 of
 #: tooluniverse.execute_function.ToolUniverse:11
@@ -121,7 +123,7 @@ msgstr ""
 #: edb4452a5d9340bf96bb339e928eb9d2 of
 #: tooluniverse.execute_function.ToolUniverse:15
 msgid "Dictionary mapping tool names to their configurations"
-msgstr ""
+msgstr "将工具名称映射到其配置的字典"
 
 #: 004cf29146d842bd89df1df00b8436b5 35fed852550e495995f035b842bd6952
 #: 57b5f803d9354089a019b2164824d1da eb0856f16c974f14aa4c1b6c033e0078 of
@@ -135,22 +137,22 @@ msgstr ""
 #: ad20807b4e77440c8312d11f49164802 of
 #: tooluniverse.execute_function.ToolUniverse:21
 msgid "Dictionary organizing tools by category"
-msgstr ""
+msgstr "按类别组织工具的字典"
 
 #: f5ac934fa8254b4d81fec1a17c455d51 of
 #: tooluniverse.execute_function.ToolUniverse:27
 msgid "Dictionary mapping category names to their JSON file paths"
-msgstr ""
+msgstr "将类别名称映射到其 JSON 文件路径的字典"
 
 #: aa6a86dec6184f9a8baa47440c5f5fc9 of
 #: tooluniverse.execute_function.ToolUniverse:33
 msgid "Cache of instantiated tool objects"
-msgstr ""
+msgstr "已实例化工具对象的缓存"
 
 #: 8e7d1b2903354fc19ac34fa4c3f49601 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:1
 msgid "Initialize the ToolUniverse with tool file configurations."
-msgstr ""
+msgstr "使用工具文件配置初始化ToolUniverse。"
 
 #: ../../api/tooluniverse.execute_function.rst
 #: 12483bbae1b54d9ca930d1c9e739bbb9 13d6c9aa90284270bf7e322b1d15a0f3
@@ -170,21 +172,21 @@ msgstr ""
 #: f9efa42db3de467abb9941a88c8f4db7 fab071cf3a6d488c8f6a9905b5afa8a5
 #: fcce938780404bdf866c93e34d297628 fcf40d24ff1140179e0c8fe5635bfd96
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: e6567b552e27451282980cbe9b803327 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:3
 msgid ""
 "Dictionary mapping category names to JSON file paths. Defaults to "
 "default_tool_files."
-msgstr ""
+msgstr "将类别名称映射到JSON文件路径的字典。默认为default_tool_files。"
 
 #: 0b1032e0ed5c4fa88a6e63c9e25593b3 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:6
 msgid ""
 "Whether to keep default tools when custom tool_files are provided. Defaults "
 "to True."
-msgstr ""
+msgstr "当提供自定义工具文件时，是否保留默认工具。默认为 True。"
 
 #: dfcb84e9ff9a43199cdb7a99d62ca337 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:9
@@ -192,16 +194,17 @@ msgid ""
 "Log level for this instance. Can be 'DEBUG', 'INFO', 'WARNING', 'ERROR', "
 "'CRITICAL'. If None, uses global setting."
 msgstr ""
+"此实例的日志级别。可以为 'DEBUG'、'INFO'、'WARNING'、'ERROR'、'CRITICAL'。如果为 None，则使用全局设置。"
 
 #: 4e343ce0dbed46d29f406bef42795bfe of
 #: tooluniverse.execute_function.ToolUniverse.__init__:12
 msgid "Whether to enable output hooks. Defaults to False."
-msgstr ""
+msgstr "是否启用输出钩子。默认为 False。"
 
 #: f01e40254dc442ec919757a179a80d64 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:14
 msgid "Configuration for hooks. If None, uses default config."
-msgstr ""
+msgstr "钩子的配置。如果为 None，则使用默认配置。"
 
 #: 628535dccb4941fb8a067475b41afcb8 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:16
@@ -210,21 +213,23 @@ msgid ""
 " list of both. Defaults to 'SummarizationHook'. If both hook_config and "
 "hook_type are provided, hook_config takes precedence."
 msgstr ""
+"简单的钩子类型选择。可以是 'SummarizationHook'、'FileSaveHook'，或者两者的列表。默认值为 "
+"'SummarizationHook'。如果同时提供了 hook_config 和 hook_type，则以 hook_config 为准。"
 
 #: dfa18860b6a243fda36da7065b20c13e of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:1
 msgid "Register a custom tool class at runtime."
-msgstr ""
+msgstr "在运行时注册自定义工具类。"
 
 #: ea37b63a00444c4ba75af17521d92438 of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:3
 msgid "The tool class to register"
-msgstr ""
+msgstr "要注册的工具类"
 
 #: 92f4e313d50443d89f60f594ff1b8c49 of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:4
 msgid "Name to register under. Uses class name if None."
-msgstr ""
+msgstr "注册名称。如果未指定，则使用类名。"
 
 #: 221272ec8daf41de8e03a50492f441bc of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:6

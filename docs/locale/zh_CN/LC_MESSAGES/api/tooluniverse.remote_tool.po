@@ -75,79 +75,79 @@ msgstr "有关远程服务器和工具的信息"
 #: 491914a65d5b4e2680d41581f76aaca5 of
 #: tooluniverse.remote_tool.RemoteTool.__init__:1
 msgid "Initialize the RemoteTool."
-msgstr ""
+msgstr "初始化 RemoteTool。"
 
 #: ../../api/tooluniverse.remote_tool.rst 6c8a482f6f98485d8ebc489b036b9a62
 #: 79da59c878f6477180e86a66f3516c13
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: b2b7022bb00046388fdff8b4deae3fbb of
 #: tooluniverse.remote_tool.RemoteTool.__init__:3
 msgid "Tool configuration dictionary"
-msgstr ""
+msgstr "工具配置字典"
 
 #: 7d4906a0e9854a318b224201033a77d3 of
 #: tooluniverse.remote_tool.RemoteTool.run:1
 msgid "Placeholder run method for remote tools."
-msgstr ""
+msgstr "用于远程工具的占位运行方法。"
 
 #: f11fc50967e2434ea2a499134d535b29 of
 #: tooluniverse.remote_tool.RemoteTool.run:3
 msgid ""
 "Remote tools cannot be executed locally. This method always returns an error"
 " message indicating that the tool is not available for local execution."
-msgstr ""
+msgstr "远程工具无法在本地执行。此方法始终返回一条错误消息，指示该工具不可用于本地执行。"
 
 #: deed9c4a71f645c2931e40f478cb2b99 of
 #: tooluniverse.remote_tool.RemoteTool.run:6
 msgid "Tool arguments (ignored)"
-msgstr ""
+msgstr "工具参数（已忽略）"
 
 #: ../../api/tooluniverse.remote_tool.rst 05746356ff77475cb686ec8a66e2cf00
 #: 2b258081f64d4ac0af7e26a24cda55b5 87ced36618c24b789725d2653ec5ce71
 #: e5ef92b90bae4efd8475eea08bb65c98
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 50d7ed46a40d4e05967ae6ae637b8ec0 of
 #: tooluniverse.remote_tool.RemoteTool.run:9
 msgid "Error message indicating the tool is not available locally"
-msgstr ""
+msgstr "错误消息指示工具在本地不可用"
 
 #: ../../api/tooluniverse.remote_tool.rst 3e9db373e2c849e1a41ea9659b9cb38e
 #: 8053f368468f4f2d832b542a90112099 b05fe5f7a4c44e33a7179bca7f7e485b
 #: ef174819361c4444b1a2ce4bc44cde11
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 4d89e4e222474de4b4ff0487b832d53b of
 #: tooluniverse.remote_tool.RemoteTool.get_remote_info:1
 msgid "Get information about the remote server hosting this tool."
-msgstr ""
+msgstr "获取有关托管此工具的远程服务器的信息。"
 
 #: 0488fb62883b41abb35b5c2f2286f319 of
 #: tooluniverse.remote_tool.RemoteTool.get_remote_info:3
 msgid ""
 "Remote server information including server type, URL, and original tool type"
-msgstr ""
+msgstr "远程服务器信息，包括服务器类型、URL和原始工具类型"
 
 #: 065d1cee28ce4db98afc4e33aee794c3 of
 #: tooluniverse.remote_tool.RemoteTool.is_available_locally:1
 msgid "Check if this tool is available for local execution."
-msgstr ""
+msgstr "检查此工具是否可用于本地执行。"
 
 #: 95bdf912539c4399a2cf8801e09cdeda of
 #: tooluniverse.remote_tool.RemoteTool.is_available_locally:3
 msgid "Always False for RemoteTool instances"
-msgstr ""
+msgstr "始终为 RemoteTool 实例返回 False"
 
 #: 380259b3c9f24b18bc8040c5f102dc11 of
 #: tooluniverse.remote_tool.RemoteTool.get_server_info:1
 msgid "Get server connection information for this remote tool."
-msgstr ""
+msgstr "获取此远程工具的服务器连接信息。"
 
 #: 963ebd2156a84daca0bced25924f3df4 of
 #: tooluniverse.remote_tool.RemoteTool.get_server_info:3
 msgid "Server connection details"
-msgstr ""
+msgstr "服务器连接详情"

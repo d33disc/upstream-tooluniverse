@@ -79,7 +79,7 @@ msgstr "参数 tool_configs"
 #: 24131876fc5142669061e042757dc0ec of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type tool_configs"
-msgstr ""
+msgstr "键入 tool_configs"
 
 #: d74f6bdcaed44726a0112bcff07f7731 of
 #: tooluniverse.compose_scripts.tool_graph_generation:16
@@ -89,12 +89,12 @@ msgstr ""
 #: 3fc3bb7c68aa4098a9fb7fbb0f4bd94b of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param max_tools"
-msgstr ""
+msgstr "参数 max_tools"
 
 #: c49291debed04c5ebc8acd554b9427ab of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type max_tools"
-msgstr ""
+msgstr "类型 max_tools"
 
 #: 5bf696c7f5244f75b849cd12427b7639 of
 #: tooluniverse.compose_scripts.tool_graph_generation:18
@@ -104,12 +104,12 @@ msgstr ""
 #: a7da9184990f47708fb051a6618e83c0 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param output_path"
-msgstr ""
+msgstr "参数 output_path"
 
 #: f338244e991f4cf5bc0772e4dec22ba6 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type output_path"
-msgstr ""
+msgstr "输入 output_path"
 
 #: 1df1305320484ffd980795e2b21608f9 of
 #: tooluniverse.compose_scripts.tool_graph_generation:20
@@ -117,31 +117,33 @@ msgid ""
 ":py:class:`str) path` to write resulting graph JSON (default "
 "``'./tool_relationship_graph.json'``"
 msgstr ""
+":py:class:`str) path` 用于写入生成的图形 JSON（默认值为 "
+"``'./tool_relationship_graph.json'``）"
 
 #: 9567f0f68a45408fa29237b64630b44e of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "param save_intermediate_every"
-msgstr ""
+msgstr "参数 save_intermediate_every"
 
 #: 1e9c97d01bb744a8b76222adc97f5d97 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type save_intermediate_every"
-msgstr ""
+msgstr "类型 save_intermediate_every"
 
 #: d75a922b7c2d48cb81d32dfc74eb7f92 of
 #: tooluniverse.compose_scripts.tool_graph_generation:22
 msgid ":py:class:`int) checkpoint frequency (default 5000 pairs processed`"
-msgstr ""
+msgstr ":py:class:`int) 检查点频率（默认值为处理 5000 对数据）"
 
 #: 8c2b891463b948e79b8186775fa0a193 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "returns"
-msgstr ""
+msgstr "返回"
 
 #: e47eca13552b478e9e9331fbc86176ac of
 #: tooluniverse.compose_scripts.tool_graph_generation:24
 msgid "nodes, edges, stats"
-msgstr ""
+msgstr "节点、边、统计"
 
 #: f43a3cb0bd2b434488097337234a76ac of
 #: tooluniverse.compose_scripts.tool_graph_generation
@@ -151,14 +153,17 @@ msgstr ""
 #: 5f9905fc505b404ea50b2ab5fe41e9f1 of
 #: tooluniverse.compose_scripts.tool_graph_generation:25
 msgid "dict with keys"
-msgstr ""
+msgstr "具有键的字典"
 
 #~ msgid ""
 #~ ":py:class:`str) path` to write resulting graph JSON (default "
 #~ "``'./tool_relationship_graph.json'``"
 #~ msgstr ""
+#~ ":py:class:`str) path` 用于写入生成的图形 JSON（默认值为 "
+#~ "``'./tool_relationship_graph.json'``）"
 
 #~ msgid ""
 #~ ":py:class:`str) path to write resulting graph JSON (default "
 #~ "'./tool_relationship_graph.json'`"
 #~ msgstr ""
+#~ ":py:class:`str) 用于写入生成的图形 JSON 的路径（默认值为 './tool_relationship_graph.json'）`"

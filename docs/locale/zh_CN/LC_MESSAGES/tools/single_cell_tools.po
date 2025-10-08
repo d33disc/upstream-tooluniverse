@@ -327,171 +327,171 @@ msgstr "**名称**: ``get_scanpy_info``"
 msgid ""
 "**Description**: Get comprehensive information about Scanpy – scalable "
 "single-cell analysis in Python"
-msgstr ""
+msgstr "**描述**：获取关于 Scanpy —— Python 中可扩展的单细胞分析的全面信息"
 
 #: ../../tools/single_cell_tools.rst:251 a4076e7774f94af6b3981f9acd2af34c
 msgid "**get_scrublet_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scrublet_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:253 ccb9bafed4484f5ba6217d5aa36b5469
 msgid ""
 "Get comprehensive information about Scrublet – single-cell doublet detection"
-msgstr ""
+msgstr "获取关于 Scrublet —— 单细胞双重体检测的全面信息"
 
 #: ../../tools/single_cell_tools.rst 0c8d34759e054850bf2f00f89cdd325b
 msgid "get_scrublet_info tool specification"
-msgstr ""
+msgstr "get_scrublet_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:259 6dcc261160cd4a24a26e61653a4b9848
 msgid "**Name**: ``get_scrublet_info``"
-msgstr ""
+msgstr "**名称**：``get_scrublet_info``"
 
 #: ../../tools/single_cell_tools.rst:261 b9ab852c5c6e40d493df20d813c98576
 msgid ""
 "**Description**: Get comprehensive information about Scrublet – single-cell "
 "doublet detection"
-msgstr ""
+msgstr "**描述**：获取关于 Scrublet —— 单细胞双重体检测的全面信息"
 
 #: ../../tools/single_cell_tools.rst:281 5651a91328ef4e42b5589e32269750a1
 msgid "**get_scvelo_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scvelo_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:283 3eb3a6a9976b485290558ac018fc61b6
 msgid ""
 "Get comprehensive information about scVelo – RNA velocity analysis in single"
 " cells"
-msgstr ""
+msgstr "获取关于 scVelo —— 单细胞 RNA 速度分析的全面信息"
 
 #: ../../tools/single_cell_tools.rst d1f4ee51ffc9459a986b497c03bbed93
 msgid "get_scvelo_info tool specification"
-msgstr ""
+msgstr "get_scvelo_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:289 9d319701d4134bc78dd9356787a3b4ca
 msgid "**Name**: ``get_scvelo_info``"
-msgstr ""
+msgstr "**名称**：``get_scvelo_info``"
 
 #: ../../tools/single_cell_tools.rst:291 679b4b5ec7b04c41ae9682a33829e81e
 msgid ""
 "**Description**: Get comprehensive information about scVelo – RNA velocity "
 "analysis in single cells"
-msgstr ""
+msgstr "**描述**：获取关于 scVelo —— 单细胞 RNA 速度分析的全面信息"
 
 #: ../../tools/single_cell_tools.rst:311 98081f87f497477eb90df2146d7744fa
 msgid "**get_scvi_tools_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scvi_tools_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:313 c28ac9bea8ef4ac7afc9dea83b7eb93a
 msgid ""
 "Get information about the scvi-tools package. Deep probabilistic analysis of"
 " single-cell omics data"
-msgstr ""
+msgstr "获取有关 scvi-tools 软件包的信息。单细胞组学数据的深度概率分析"
 
 #: ../../tools/single_cell_tools.rst 1f986c7267ee4828b962baf6a40e4f16
 msgid "get_scvi_tools_info tool specification"
-msgstr ""
+msgstr "get_scvi_tools_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:319 951fa55ec02a45f3b0f99af519e175c3
 msgid "**Name**: ``get_scvi_tools_info``"
-msgstr ""
+msgstr "**名称**：``get_scvi_tools_info``"
 
 #: ../../tools/single_cell_tools.rst:321 cdb07ae4b02a4d6ea4d28b6bbb49c2d4
 msgid ""
 "**Description**: Get information about the scvi-tools package. Deep "
 "probabilistic analysis of single-cell omics data"
-msgstr ""
+msgstr "**描述**：获取有关 scvi-tools 软件包的信息。单细胞组学数据的深度概率分析"
 
 #: ../../tools/single_cell_tools.rst:340 ecb3d72cf7604e87add08f762a4d95cc
 msgid "**get_souporcell_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_souporcell_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:342 0ee83726f151489ea16d29b15a293cfc
 msgid ""
 "Get comprehensive information about souporcell – scRNA-seq genotype "
 "clustering"
-msgstr ""
+msgstr "获取关于 souporcell – scRNA-seq 基因型聚类的全面信息"
 
 #: ../../tools/single_cell_tools.rst a170edeba4a648509a45b55d23cbc60a
 msgid "get_souporcell_info tool specification"
-msgstr ""
+msgstr "get_souporcell_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:348 216e16dc30124093b3be2fd298c273b9
 msgid "**Name**: ``get_souporcell_info``"
-msgstr ""
+msgstr "**名称**：``get_souporcell_info``"
 
 #: ../../tools/single_cell_tools.rst:350 36eabfae2dda491f997010c45f52b33c
 msgid ""
 "**Description**: Get comprehensive information about souporcell – scRNA-seq "
 "genotype clustering"
-msgstr ""
+msgstr "**描述**：获取关于 souporcell – scRNA-seq 基因型聚类的全面信息"
 
 #: ../../tools/single_cell_tools.rst:354 99071a9a07a74e919bdf84b0304d2a44
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "souporcell"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 souporcell 的信息类型"
 
 #: ../../tools/single_cell_tools.rst:371 74cc24c4a11e463ebe9ce170d2eac336
 msgid "**get_tiledbsoma_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_tiledbsoma_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:373 689e58f2bf124a95bfa8bd96ad6fded1
 msgid ""
 "Get comprehensive information about TileDB-SOMA – single-cell data storage "
 "with TileDB"
-msgstr ""
+msgstr "获取关于 TileDB-SOMA —— 基于 TileDB 的单细胞数据存储的全面信息"
 
 #: ../../tools/single_cell_tools.rst 6fb8100e2fcb489c9ca05c2af7a4b91b
 msgid "get_tiledbsoma_info tool specification"
-msgstr ""
+msgstr "get_tiledbsoma_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:379 2693f20e321a480dbd47f6cfd4771567
 msgid "**Name**: ``get_tiledbsoma_info``"
-msgstr ""
+msgstr "**名称**：``get_tiledbsoma_info``"
 
 #: ../../tools/single_cell_tools.rst:381 831d7c6947cb4e57b26b386c402d1e79
 msgid ""
 "**Description**: Get comprehensive information about TileDB-SOMA – single-"
 "cell data storage with TileDB"
-msgstr ""
+msgstr "**描述**：获取有关 TileDB-SOMA 的全面信息——基于 TileDB 的单细胞数据存储方案"
 
 #: ../../tools/single_cell_tools.rst:385 fb4aaf585e914bd7b9952d7349984b6a
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "TileDB-SOMA"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 TileDB-SOMA 的信息类型"
 
 #: ../../tools/single_cell_tools.rst:402 fed46884bde5473493529ee5ad6f1a84
 msgid "**get_velocyto_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_velocyto_info**（类型：PackageTool）"
 
 #: ../../tools/single_cell_tools.rst:404 639cd5d6219b41639bc2d14a6680e5dc
 msgid ""
 "Get information about the velocyto package. RNA velocity analysis for single"
 " cell RNA-seq data"
-msgstr ""
+msgstr "获取有关 velocyto 软件包的信息。用于单细胞 RNA 测序数据的 RNA 速度分析"
 
 #: ../../tools/single_cell_tools.rst af1190e46d924274aeb6e01d67e90920
 msgid "get_velocyto_info tool specification"
-msgstr ""
+msgstr "get_velocyto_info 工具规格说明"
 
 #: ../../tools/single_cell_tools.rst:410 38c2c1eb486d44eb8b79498fcb694759
 msgid "**Name**: ``get_velocyto_info``"
-msgstr ""
+msgstr "**名称**：``get_velocyto_info``"
 
 #: ../../tools/single_cell_tools.rst:412 32253c1360df490c89fe127649e61192
 msgid ""
 "**Description**: Get information about the velocyto package. RNA velocity "
 "analysis for single cell RNA-seq data"
-msgstr ""
+msgstr "**描述**：获取关于velocyto软件包的信息。用于单细胞RNA测序数据的RNA速度分析。"
 
 #: ../../tools/single_cell_tools.rst:431 2717a1c294da491da7f2b057fd2f74f9
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/single_cell_tools.rst:433 65d6eec831dd402f9c37770fa7d23850
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/single_cell_tools.rst:434 6fa42d2ad3c84b768314eac9cee3c83d
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

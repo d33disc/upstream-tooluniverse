@@ -7,290 +7,297 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../tools/remote/expert_feedback_mcp.md:1 875d8d9d1467424083402f84a7336ad0
+#: ../../tools/remote/expert_feedback_mcp.md:1
+#: 875d8d9d1467424083402f84a7336ad0
 msgid "Human Expert Feedback System MCP"
-msgstr ""
+msgstr "人工专家反馈系统 MCP"
 
-#: ../../tools/remote/expert_feedback_mcp.md:3 dcfb35a0f9f941a3ab1d6f7a7a1d21fc
+#: ../../tools/remote/expert_feedback_mcp.md:3
+#: dcfb35a0f9f941a3ab1d6f7a7a1d21fc
 msgid ""
 "This system allows ToolUniverse to consult human experts for complex "
 "decisions through an MCP (Model Context Protocol) server."
-msgstr ""
+msgstr "该系统允许 ToolUniverse 通过 MCP（模型上下文协议）服务器咨询人工专家以处理复杂决策。"
 
-#: ../../tools/remote/expert_feedback_mcp.md:5 5950d5208c5d4ca7bf3964d652991a91
+#: ../../tools/remote/expert_feedback_mcp.md:5
+#: 5950d5208c5d4ca7bf3964d652991a91
 msgid "image"
-msgstr ""
+msgstr "图像"
 
-#: ../../tools/remote/expert_feedback_mcp.md:7 02e0a3c5f7104768ae17fa46fe2738a6
+#: ../../tools/remote/expert_feedback_mcp.md:7
+#: 02e0a3c5f7104768ae17fa46fe2738a6
 msgid "Quick Start"
-msgstr ""
+msgstr "快速开始"
 
-#: ../../tools/remote/expert_feedback_mcp.md:9 9964880b1e6e4a608808d3d08f1f29fe
+#: ../../tools/remote/expert_feedback_mcp.md:9
+#: 9964880b1e6e4a608808d3d08f1f29fe
 msgid "Environment Setup"
-msgstr ""
+msgstr "环境配置"
 
 #: ../../tools/remote/expert_feedback_mcp.md:11
 #: d03fca9ea2d0445f9bbb4de348731a51
 msgid ""
-"Before starting the system, you need to note the MCP server URL that will"
-" be displayed when you run the server."
-msgstr ""
+"Before starting the system, you need to note the MCP server URL that will be"
+" displayed when you run the server."
+msgstr "在启动系统之前，您需要记录运行服务器时显示的 MCP 服务器 URL。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:13
 #: fc96c3512fcd4c458a0fd954ad9a31e8
 msgid "**Step 1: Start the MCP Server first to see the URL**"
-msgstr ""
+msgstr "**步骤 1：首先启动 MCP 服务器以查看 URL**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:18
 #: 55360a213a4f49caa050297d5b7fc20b
 msgid "When the server starts, it will display:"
-msgstr ""
+msgstr "当服务器启动时，将显示："
 
 #: ../../tools/remote/expert_feedback_mcp.md:23
 #: ecb315b229f448c9b54195d1ba5d328f
 msgid ""
-"**Step 2: Set the environment variable** Based on the displayed URL, set "
-"the environment variable (use `localhost:7001` for the environment "
-"variable):"
-msgstr ""
+"**Step 2: Set the environment variable** Based on the displayed URL, set the"
+" environment variable (use `localhost:7001` for the environment variable):"
+msgstr "**步骤 2：设置环境变量** 根据显示的 URL，设置环境变量（环境变量使用 `localhost:7001`）："
 
 #: ../../tools/remote/expert_feedback_mcp.md:29
 #: dbdde5c509444ef4997c0f5a02aac75d
 msgid "Or create a `.env` file (copy from `.env.template`) and set:"
-msgstr ""
+msgstr "或者创建一个 `.env` 文件（从 `.env.template` 复制）并设置："
 
 #: ../../tools/remote/expert_feedback_mcp.md:34
 #: 49110d5c6592441a89e4f0fb360e1ae5
 msgid "**Important**:"
-msgstr ""
+msgstr "**重要**："
 
 #: ../../tools/remote/expert_feedback_mcp.md:35
 #: 93e0e694133145cf9d3c47b4d69d083f
 msgid ""
-"The server runs on `http://0.0.0.0:7001` but the environment variable "
-"should be set to `localhost:7001` (without `http://` prefix)"
+"The server runs on `http://0.0.0.0:7001` but the environment variable should"
+" be set to `localhost:7001` (without `http://` prefix)"
 msgstr ""
+"服务器运行在 `http://0.0.0.0:7001`，但环境变量应设置为 `localhost:7001`（不包含 `http://` 前缀）。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:36
 #: 4b929fb86c4549e3afb968ae99996ab8
 msgid "The server URL will be shown when you run `human_expert_mcp_server.py`"
-msgstr ""
+msgstr "运行 `human_expert_mcp_server.py` 时，服务器 URL 将会显示。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:38
 #: a0026793f8db49bdb0f47d458c2d6d95
 msgid "System Components"
-msgstr ""
+msgstr "系统组件"
 
 #: ../../tools/remote/expert_feedback_mcp.md:40
 #: 8885e95194cd4dbaa7527469314d2f44
 msgid ""
 "The system consists of three separate components that should be started "
 "independently:"
-msgstr ""
+msgstr "系统由三个独立的组件组成，这些组件需要分别启动："
 
 #: ../../tools/remote/expert_feedback_mcp.md:42
 #: 577fbd83a1674fb898bd001ef014b216
 msgid "1. Start the MCP Server"
-msgstr ""
+msgstr "1. 启动MCP服务器"
 
 #: ../../tools/remote/expert_feedback_mcp.md:46
 #: a5847c19841240f59aa0de0fb771c4b0
-msgid "This starts the MCP server on port 7001 that ToolUniverse can connect to."
-msgstr ""
+msgid ""
+"This starts the MCP server on port 7001 that ToolUniverse can connect to."
+msgstr "此操作将在端口 7001 上启动 MCP 服务器，供 ToolUniverse 连接使用。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:48
 #: 4de550c774de4183b2956905a54089ce
 msgid "2. Start the Web Interface (Recommended)"
-msgstr ""
+msgstr "2. 启动Web界面（推荐）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:52
 #: b7fb6eb12c37416bab8f705ab672998d
 msgid ""
 "This provides a web-based interface for experts to view and respond to "
 "requests."
-msgstr ""
+msgstr "此功能提供一个基于网页的界面，供专家查看和响应请求。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:54
 #: 492fb2ff80f94c38882cddca4bca8c89
 msgid "3. Start the Terminal Interface (Alternative)"
-msgstr ""
+msgstr "3. 启动终端界面（备用方法）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:58
 #: 1c0a467da2b34b409c0b106ac32eb1ac
 msgid ""
-"This provides a command-line interface for experts to view and respond to"
-" requests."
-msgstr ""
+"This provides a command-line interface for experts to view and respond to "
+"requests."
+msgstr "此功能提供一个命令行界面，供专家查看和响应请求。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:60
 #: dd16f24760724d6da3750a1c9a57f855
 msgid "Usage Workflow"
-msgstr ""
+msgstr "使用工作流程"
 
 #: ../../tools/remote/expert_feedback_mcp.md:62
 #: d576d6a7a7f449588b627f0e8aae88d3
 msgid "**Start the MCP server first**: `python human_expert_mcp_server.py`"
-msgstr ""
+msgstr "**首先启动MCP服务器**：`python human_expert_mcp_server.py`"
 
 #: ../../tools/remote/expert_feedback_mcp.md:63
 #: 216a90cf571e4dd1a44e96f9bd16befc
 msgid ""
 "**Note the server URL displayed**: The server will show `🚀 MCP Server "
 "running on http://0.0.0.0:7001`"
-msgstr ""
+msgstr "**注意显示的服务器 URL**：服务器将显示 `🚀 MCP Server running on http://0.0.0.0:7001`"
 
 #: ../../tools/remote/expert_feedback_mcp.md:64
 #: daea2ebdabbf47d9ac5060e841db8d8d
 msgid ""
 "**Set Environment Variable**: `export "
 "EXPERT_FEEDBACK_MCP_SERVER_URL=localhost:7001`"
-msgstr ""
+msgstr "**设置环境变量**：`export EXPERT_FEEDBACK_MCP_SERVER_URL=localhost:7001`"
 
 #: ../../tools/remote/expert_feedback_mcp.md:65
 #: d9ade595b3bb42f4b8948da11c800199
 msgid ""
 "**Start either the web interface OR terminal interface** (for experts to "
 "monitor requests)"
-msgstr ""
+msgstr "**启动网页界面或终端界面**（供专家监控请求）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:66
 #: b2347cf4f55040dd8db164b99633baed
 msgid ""
-"**Use ToolUniverse** with the expert consultation tools to submit "
-"questions"
-msgstr ""
+"**Use ToolUniverse** with the expert consultation tools to submit questions"
+msgstr "**使用 ToolUniverse** 和专家咨询工具提交问题"
 
 #: ../../tools/remote/expert_feedback_mcp.md:67
 #: c8f9686d88f84a399fb55a2029f267b3
 msgid "**Experts respond** through their chosen interface"
-msgstr ""
+msgstr "**专家通过其选定的界面进行响应**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:68
 #: 90f4c5668a2d42198573b4dbfcf50de1
 msgid "**ToolUniverse retrieves responses** using the response tools"
-msgstr ""
+msgstr "**ToolUniverse 使用响应工具检索响应**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:70
 #: e841489547684e85bc6d6f2186a2498b
 msgid "Recommended Startup Workflow"
-msgstr ""
+msgstr "推荐的启动工作流程"
 
 #: ../../tools/remote/expert_feedback_mcp.md:72
 #: 657938747ac8422a9bd451b67824e651
 msgid "**Terminal 1 - MCP Server (Start this first):**"
-msgstr ""
+msgstr "**终端 1 - MCP 服务器（请先启动此项）：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:78
 #: 6b38f4f1c13f470bbf9f10184e9d9aec
 msgid "**Terminal 2 - Set environment variable and start Expert Interface:**"
-msgstr ""
+msgstr "**终端2 - 设置环境变量并启动专家界面：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:80
 #: 2a521bdb212c4a3fb241e39adc5e85d8
 msgid "**Set the environment variable:**"
-msgstr ""
+msgstr "**设置环境变量：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:85
 #: 1dc1fd419fc94e7294aa19c766698439
 msgid "**Then choose one interface:**"
-msgstr ""
+msgstr "**然后选择一个接口：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:87
 #: 6f8fe512708146d8b54e9efeb0544756
 msgid "**Web Interface (Recommended):**"
-msgstr ""
+msgstr "**网页界面（推荐）：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:92
 #: 2d160f49543a4a818a0b5aea8c50e107
 msgid "**OR Terminal Interface:**"
-msgstr ""
+msgstr "**OR 端子接口：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:97
 #: 12fdef91492746f595be01d18f533b7d
 msgid "**Terminal 3 - ToolUniverse:**"
-msgstr ""
+msgstr "**3号航站楼 - ToolUniverse：**"
 
 #: ../../tools/remote/expert_feedback_mcp.md:104
 #: 10acae94b9374c4285ff8dd24dc980a5
 msgid "Alternative Direct Commands"
-msgstr ""
+msgstr "替代直接命令"
 
 #: ../../tools/remote/expert_feedback_mcp.md:106
 #: 6ca55020faed49e89ea83ea35325bd58
 msgid "Instead of using the convenience scripts, you can run directly:"
-msgstr ""
+msgstr "您也可以直接运行，而无需使用便捷脚本："
 
 #: ../../tools/remote/expert_feedback_mcp.md:119
 #: aada6c02dda4477bac445acf733d1198
 msgid "Available MCP Tools"
-msgstr ""
+msgstr "可用的 MCP 工具"
 
 #: ../../tools/remote/expert_feedback_mcp.md:121
 #: 2bb1d8d535eb44d3b8d86cd5f67a0bf5
 msgid "`consult_human_expert`: Submit questions to human experts"
-msgstr ""
+msgstr "`consult_human_expert`：提交问题给人工专家"
 
 #: ../../tools/remote/expert_feedback_mcp.md:122
 #: b72b6550360346f9a95f9975d2616937
 msgid "`get_expert_response`: Check for expert responses"
-msgstr ""
+msgstr "`get_expert_response`：检查专家回复"
 
 #: ../../tools/remote/expert_feedback_mcp.md:123
 #: 09be611db24d4cb8aee584bce1bdc4bd
 msgid "`list_pending_expert_requests`: View pending requests (for experts)"
-msgstr ""
+msgstr "`list_pending_expert_requests`：查看待处理请求（专家用）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:124
 #: f6606e6312ff4a9ba70f657fcedebcf2
 msgid "`submit_expert_response`: Submit expert responses (for experts)"
-msgstr ""
+msgstr "`submit_expert_response`：提交专家回复（仅限专家）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:125
 #: 0d76085999dc43dcadee31b232565cd7
 msgid "`get_expert_status`: Get system status"
-msgstr ""
+msgstr "`get_expert_status`：获取系统状态"
 
 #: ../../tools/remote/expert_feedback_mcp.md:127
 #: a52792ccb9d84f4fb74d263bcf5e95cb
 msgid "ToolUniverse Integration"
-msgstr ""
+msgstr "ToolUniverse 集成"
 
 #: ../../tools/remote/expert_feedback_mcp.md:129
 #: cd5e47ff11f84b28985799496af4618c
 msgid ""
 "The tools are configured in "
-"`src/tooluniverse/data/expert_feedback_tools.json`. The configuration "
-"uses the `EXPERT_FEEDBACK_MCP_SERVER_URL` environment variable to "
-"determine the server URL."
+"`src/tooluniverse/data/expert_feedback_tools.json`. The configuration uses "
+"the `EXPERT_FEEDBACK_MCP_SERVER_URL` environment variable to determine the "
+"server URL."
 msgstr ""
+"工具的配置位于 `src/tooluniverse/data/expert_feedback_tools.json` 文件中。配置使用 "
+"`EXPERT_FEEDBACK_MCP_SERVER_URL` 环境变量来确定服务器 URL。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:131
 #: 364e53930d2840e5acf03718c9c06d6e
 msgid "**Important Configuration Steps**:"
-msgstr ""
+msgstr "**重要配置步骤**："
 
 #: ../../tools/remote/expert_feedback_mcp.md:132
 #: 6f7d2ff0de7949658e713ee90729feb4
 msgid "**Start the MCP server first** to see the URL it displays"
-msgstr ""
+msgstr "**首先启动 MCP 服务器**，以查看其显示的 URL。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:133
 #: d771b0c26bc74127a6a2e33cc270d8d7
 msgid "**Set the environment variable** based on the server output:"
-msgstr ""
+msgstr "**根据服务器输出设置环境变量**："
 
 #: ../../tools/remote/expert_feedback_mcp.md:138
 #: a94a0b0ca76648559225ee145ba8d7b6
@@ -322,8 +329,8 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:145
 #: d988a126fd0f47e8871d18d030dfb205
 msgid ""
-"**Load tools in ToolUniverse** and they will be available with the "
-"`expert_` prefix:"
+"**Load tools in ToolUniverse** and they will be available with the `expert_`"
+" prefix:"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:146
@@ -419,8 +426,8 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:195
 #: 26aa86b68f744ffb8c01e8ed4d0273b7
 msgid ""
-"`EXPERT_FEEDBACK_MCP_SERVER_URL`: Must be set to `localhost:7001` for the"
-" system to work properly"
+"`EXPERT_FEEDBACK_MCP_SERVER_URL`: Must be set to `localhost:7001` for the "
+"system to work properly"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:197
@@ -472,7 +479,8 @@ msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:209
 #: 316655f786e94e878cd194760ec3f73a
-msgid "The system has a clean, modular design with three independent components:"
+msgid ""
+"The system has a clean, modular design with three independent components:"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:211
@@ -485,15 +493,15 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:212
 #: 34c9f2afecc141b88c835242618ca41a
 msgid ""
-"**Web Interface** (`start_web_interface.py`) - User-friendly web "
-"interface for experts"
+"**Web Interface** (`start_web_interface.py`) - User-friendly web interface "
+"for experts"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:213
 #: c3a090aed19a46a39e59f90019753b7e
 msgid ""
-"**Terminal Interface** (built into MCP server with `--interface-only` "
-"flag) - Command-line interface for experts"
+"**Terminal Interface** (built into MCP server with `--interface-only` flag) "
+"- Command-line interface for experts"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:215
@@ -506,9 +514,9 @@ msgstr ""
 msgid ""
 "✅ Removed redundant startup scripts ✅ Simplified startup process - each "
 "component runs independently ✅ Clear separation of concerns - no complex "
-"\"full system\" mode ✅ Updated documentation to reflect new workflow ✅ "
-"Added ToolUniverse integration configuration ✅ Maintained all "
-"functionality while reducing complexity"
+"\"full system\" mode ✅ Updated documentation to reflect new workflow ✅ Added"
+" ToolUniverse integration configuration ✅ Maintained all functionality while"
+" reducing complexity"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:224
@@ -546,8 +554,7 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:248
 #: 7f0a7b084edb47f3bd82a664de1dda75
 msgid ""
-"**Start the MCP server** and note the displayed URL "
-"(`http://0.0.0.0:7001`)"
+"**Start the MCP server** and note the displayed URL (`http://0.0.0.0:7001`)"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:249
@@ -568,8 +575,8 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:252
 #: ec992e68fbe3471e8cd7071afba956aa
 msgid ""
-"**Check the web interface** at `http://localhost:8080` to see the pending"
-" request"
+"**Check the web interface** at `http://localhost:8080` to see the pending "
+"request"
 msgstr ""
 
 #: ../../tools/remote/expert_feedback_mcp.md:253
@@ -585,7 +592,5 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:256
 #: 670ea61323384727bc36f8f8488cd55f
 msgid ""
-"Make sure both the MCP server and web interface are running before "
-"testing."
+"Make sure both the MCP server and web interface are running before testing."
 msgstr ""
-

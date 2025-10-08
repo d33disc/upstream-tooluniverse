@@ -104,7 +104,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:53 219c142a333e488781d7b8dd9a993caa
 msgid "4. **🔧 翻译系统集成**"
-msgstr ""
+msgstr "4. **🔧 Translation System Integration**"
 
 #: ../../SUMMARY.md:55 0d66bbe55384413da537bbbc18bb9bc8
 msgid "自动化流程"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:57 d8768743af474101947b12b6739d7018
 msgid "✅ 提取可翻译文本 → `_build/gettext/`"
-msgstr ""
+msgstr "✅ Extract translatable text → `_build/gettext/`"
 
 #: ../../SUMMARY.md:58 9b7f7b3d30f048e092d4e92a7e43df95
 msgid "✅ 更新翻译文件 → `locale/zh_CN/LC_MESSAGES/*.po`"

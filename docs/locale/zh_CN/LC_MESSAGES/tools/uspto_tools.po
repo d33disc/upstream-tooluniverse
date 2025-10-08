@@ -193,15 +193,15 @@ msgstr "**get_patent_overview_by_text_query**（类型：USPTOOpenDataPortalTool
 msgid ""
 "Search for patent application overviews using a query string of the format "
 "'applicationMetaData.i..."
-msgstr ""
+msgstr "使用格式为 'applicationMetaData.i...' 的查询字符串搜索专利申请概览。"
 
 #: ../../tools/uspto_tools.rst 4af079c8e6384b9998124838335f5034
 msgid "get_patent_overview_by_text_query tool specification"
-msgstr ""
+msgstr "get_patent_overview_by_text_query 工具规格说明"
 
 #: ../../tools/uspto_tools.rst:142 fb3c7d99f22048c386f21b52ccd314d2
 msgid "**Name**: ``get_patent_overview_by_text_query``"
-msgstr ""
+msgstr "**名称**：``get_patent_overview_by_text_query``"
 
 #: ../../tools/uspto_tools.rst:144 bacbf3f475aa45ec9b548fa601c6ce59
 msgid ""
@@ -214,18 +214,22 @@ msgid ""
 "important metadata fields for each application, including application "
 "number, filing date, grant date, invention title, and CPC classifications."
 msgstr ""
+"**描述**：使用格式为 `applicationMetaData.inventionTitle:your_search_term` "
+"的查询字符串搜索专利申请概览，其中 your_search_term 是您要搜索的大小写不敏感的关键词或短语。如果 your_search_term "
+"是多词短语，必须使用转义的双引号括起来以实现精确匹配。该工具支持结果的排序、偏移和筛选。返回每个申请的重要元数据字段列表，包括申请号、申请日期、授权日期、发明名称及"
+" CPC 分类。"
 
 #: ../../tools/uspto_tools.rst:148 0a1201b261de41c789665464ae1ab2d1
 msgid ""
 "``query`` (string) (optional) Keyword or keyphrase to search for in the "
 "patent application title. This field is required."
-msgstr ""
+msgstr "``query``（字符串）（可选）用于在专利申请标题中搜索的关键词或关键短语。此字段为必填项。"
 
 #: ../../tools/uspto_tools.rst:151 03ac9170565442cf88fa76c4de5d6719
 msgid ""
 "``exact_match`` (boolean) (optional) If true, the search will only return "
 "results that exactly match the provided query. Default is false."
-msgstr ""
+msgstr "``exact_match``（布尔值）（可选）如果为 true，搜索将仅返回与提供的查询完全匹配的结果。默认值为 false。"
 
 #: ../../tools/uspto_tools.rst:154 6095ee59a0374e9a808d97db9061368f
 msgid ""
@@ -234,18 +238,20 @@ msgid ""
 "'desc' for ascending or descending by date, respectively. For example: "
 "'filingDate desc'"
 msgstr ""
+"``sort``（字符串）（可选） 按以下字段之一对结果进行排序：filingDate 或 "
+"grantDate。字段名称后跟一个空格及“asc”或“desc”，分别表示按日期升序或降序。例如：'filingDate desc'"
 
 #: ../../tools/uspto_tools.rst:157 3c1722acccb548158f093e9130f4a608
 msgid ""
 "``offset`` (integer) (optional) The starting position (zero-indexed) of the "
 "result set. Default is 0."
-msgstr ""
+msgstr "``offset``（整数）（可选）结果集的起始位置（从零开始计数）。默认值为0。"
 
 #: ../../tools/uspto_tools.rst:160 a8871212fb054639ba83061c34d5dc9b
 msgid ""
 "``limit`` (integer) (optional) The maximum number of results to return. "
 "Default is 25."
-msgstr ""
+msgstr "``limit``（整数）（可选） 返回的最大结果数量。默认值为25。"
 
 #: ../../tools/uspto_tools.rst:163 f41f7b0398ce4b259b7ca5e2a6986af4
 msgid ""
@@ -254,38 +260,41 @@ msgid ""
 "the field name, a space, and a colon-separated start and end value in YYYY-"
 "MM-DD format. For example: 'grantDate 2010-01-01:2011-01-01'"
 msgstr ""
+"``rangeFilters``（字符串）（可选）限制结果在以下字段之一指定的日期范围内：filingDate 或 "
+"grantDate。请提供字段名称、一个空格，以及用冒号分隔的起始和结束日期，格式为 YYYY-MM-DD。例如：'grantDate "
+"2010-01-01:2011-01-01'"
 
 #: ../../tools/uspto_tools.rst:179 757109a38bdb4a2083460b8e505c0c69
 msgid "**get_patent_term_adjustment_data** (Type: USPTOOpenDataPortalTool)"
-msgstr ""
+msgstr "**get_patent_term_adjustment_data**（类型：USPTOOpenDataPortalTool）"
 
 #: ../../tools/uspto_tools.rst:181 9cb81fee715046249e527b848c37110c
 msgid ""
 "Obtains the patent term adjustment details for a given application number."
-msgstr ""
+msgstr "获取指定申请号的专利期限调整详情。"
 
 #: ../../tools/uspto_tools.rst 0291d47d890d441cae39fbf0349d3cda
 msgid "get_patent_term_adjustment_data tool specification"
-msgstr ""
+msgstr "get_patent_term_adjustment_data 工具规范"
 
 #: ../../tools/uspto_tools.rst:187 490615ba98924bc3acc5ed56a30c74ea
 msgid "**Name**: ``get_patent_term_adjustment_data``"
-msgstr ""
+msgstr "**名称**：``get_patent_term_adjustment_data``"
 
 #: ../../tools/uspto_tools.rst:189 01103d5191fc4e95b6ac02bb2bc42790
 msgid ""
 "**Description**: Obtains the patent term adjustment details for a given "
 "application number."
-msgstr ""
+msgstr "**描述**：获取指定申请号的专利期限调整详情。"
 
 #: ../../tools/uspto_tools.rst:209 7a2d85abc47243e18135719aa2e5565c
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/uspto_tools.rst:211 e1e8cc5408e847369d36dc3b7dfb723e
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/uspto_tools.rst:212 918b3ef376484a64bc720be0b5586f6d
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

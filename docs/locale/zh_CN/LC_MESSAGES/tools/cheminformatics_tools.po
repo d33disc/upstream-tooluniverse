@@ -249,194 +249,194 @@ msgstr "**描述**：获取关于DeepChem的全面信息——一个开源工具
 
 #: ../../tools/cheminformatics_tools.rst:132 7ccc238dfafe4379a43ad3da9a0ab7fc
 msgid "**get_dscribe_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_dscribe_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:134 de8b9986534044a1b5e5ff4aba903cfe
 msgid ""
 "Get comprehensive information about DScribe – a library for generating "
 "machine-learning descripto..."
-msgstr ""
+msgstr "获取有关 DScribe 的全面信息——一个用于生成机器学习描述符的库..."
 
 #: ../../tools/cheminformatics_tools.rst 38016de22aea442e9d9992234e43cd49
 msgid "get_dscribe_info tool specification"
-msgstr ""
+msgstr "get_dscribe_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:140 c98e376298e940f2be12e5490d2b5e30
 msgid "**Name**: ``get_dscribe_info``"
-msgstr ""
+msgstr "**名称**：``get_dscribe_info``"
 
 #: ../../tools/cheminformatics_tools.rst:142 72f19628a21d453c87a10917be906c0c
 msgid ""
 "**Description**: Get comprehensive information about DScribe – a library for"
 " generating machine-learning descriptors for materials and molecules."
-msgstr ""
+msgstr "**描述**：获取关于 DScribe 的全面信息——一个用于生成材料和分子机器学习描述符的库。"
 
 #: ../../tools/cheminformatics_tools.rst:162 6ac427b76fb94c098d4f731ac944e60a
 msgid "**get_molfeat_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_molfeat_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:164 f61602ab6d10436f86c6d0a376f9b38d
 msgid ""
 "Get information about the molfeat package. Simple and robust molecular "
 "featurization"
-msgstr ""
+msgstr "获取有关 molfeat 软件包的信息。简单且稳健的分子特征提取工具"
 
 #: ../../tools/cheminformatics_tools.rst 06391e317dde4d49b57695d943c69577
 msgid "get_molfeat_info tool specification"
-msgstr ""
+msgstr "get_molfeat_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:170 593bdee155eb443c9608aa1e2ca19f85
 msgid "**Name**: ``get_molfeat_info``"
-msgstr ""
+msgstr "**名称**：``get_molfeat_info``"
 
 #: ../../tools/cheminformatics_tools.rst:172 0ab5d6f59fdd462cb30e118c50be40b3
 msgid ""
 "**Description**: Get information about the molfeat package. Simple and "
 "robust molecular featurization"
-msgstr ""
+msgstr "**描述**：获取有关 molfeat 软件包的信息。简单且稳健的分子特征提取工具。"
 
 #: ../../tools/cheminformatics_tools.rst:191 70ae60bdd94845b78b38856587237844
 msgid "**get_molvs_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_molvs_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:193 6f49ef9d69d740b396ecb3f2e8406769
 msgid ""
 "Get information about the molvs package. Molecule validation and "
 "standardization"
-msgstr ""
+msgstr "获取有关 molvs 软件包的信息。分子验证与标准化"
 
 #: ../../tools/cheminformatics_tools.rst 24068a7d42d94ae38b9169a71595e1c0
 msgid "get_molvs_info tool specification"
-msgstr ""
+msgstr "get_molvs_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:199 31af52a9f2024bfd9087ce6ca5ae1d26
 msgid "**Name**: ``get_molvs_info``"
-msgstr ""
+msgstr "**名称**：``get_molvs_info``"
 
 #: ../../tools/cheminformatics_tools.rst:201 f5c8fcbe3d1e4faeb3c6e79909fa9419
 msgid ""
 "**Description**: Get information about the molvs package. Molecule "
 "validation and standardization"
-msgstr ""
+msgstr "**描述**：获取有关 molvs 包的信息。分子验证与标准化"
 
 #: ../../tools/cheminformatics_tools.rst:220 e0f3bb0f222e42efaff3d448c6967fa3
 msgid "**get_mordred_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_mordred_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:222 2148e1d860e94ae7b31173919ec7d2d5
 msgid ""
 "Get information about the mordred package. Molecular descriptor calculator"
-msgstr ""
+msgstr "获取有关 mordred 软件包的信息。分子描述符计算器"
 
 #: ../../tools/cheminformatics_tools.rst 36b60d09328b40ca8f0f6b8beafa854a
 msgid "get_mordred_info tool specification"
-msgstr ""
+msgstr "get_mordred_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:228 2e745ebe81b0477bbc59697ef7ce915f
 msgid "**Name**: ``get_mordred_info``"
-msgstr ""
+msgstr "**名称**：``get_mordred_info``"
 
 #: ../../tools/cheminformatics_tools.rst:230 714fac1bbe494d8b912be9dd7e9550a2
 msgid ""
 "**Description**: Get information about the mordred package. Molecular "
 "descriptor calculator"
-msgstr ""
+msgstr "**描述**：获取有关mordred包的信息。分子描述符计算器"
 
 #: ../../tools/cheminformatics_tools.rst:249 6709ab5984674bb8a5fe322ff3e71e82
 msgid "**get_openbabel_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_openbabel_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:251 d530907722814d90b6a679463363670c
 msgid ""
 "Get comprehensive information about OpenBabel – chemical format conversion "
 "and analysis"
-msgstr ""
+msgstr "获取关于 OpenBabel——化学格式转换与分析的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst 8ac4814169a44538b0c68bb09147aefc
 msgid "get_openbabel_info tool specification"
-msgstr ""
+msgstr "get_openbabel_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:257 ea4d54b214c44ff3928fe88081622dac
 msgid "**Name**: ``get_openbabel_info``"
-msgstr ""
+msgstr "**名称**：``get_openbabel_info``"
 
 #: ../../tools/cheminformatics_tools.rst:259 45f511ad4d2242899ca20c4abddbb64b
 msgid ""
 "**Description**: Get comprehensive information about OpenBabel – chemical "
 "format conversion and analysis"
-msgstr ""
+msgstr "**描述**：获取关于 OpenBabel——化学格式转换与分析的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst:279 b2e90312ad5d4de8b3e6dc05629bd0a3
 msgid "**get_openchem_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_openchem_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:281 559af35ac9a04f1eb549a7712964039e
 msgid ""
 "Get comprehensive information about OpenChem – deep learning toolkit for "
 "drug discovery"
-msgstr ""
+msgstr "获取关于 OpenChem —— 用于药物发现的深度学习工具包的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst 790aef92cb934a56964720b72f12311d
 msgid "get_openchem_info tool specification"
-msgstr ""
+msgstr "get_openchem_info 工具规范"
 
 #: ../../tools/cheminformatics_tools.rst:287 5df0d756da9c4c59b325dea57049b289
 msgid "**Name**: ``get_openchem_info``"
-msgstr ""
+msgstr "**名称**：``get_openchem_info``"
 
 #: ../../tools/cheminformatics_tools.rst:289 6deee2efd588446cbdd63317da2b7e51
 msgid ""
 "**Description**: Get comprehensive information about OpenChem – deep "
 "learning toolkit for drug discovery"
-msgstr ""
+msgstr "**描述**：获取关于 OpenChem —— 用于药物发现的深度学习工具包的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst:293 406483339fab4d1c9f02d45f0a5c71a1
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "OpenChem"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 OpenChem 的信息类型"
 
 #: ../../tools/cheminformatics_tools.rst:310 21eb6df70aba49ab83b4e51c1dadb7dd
 msgid "**get_pubchempy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pubchempy_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:312 703973108e7f418895b69a4a73cdae7b
 msgid ""
 "Get information about the pubchempy package. Python interface for PubChem "
 "REST API"
-msgstr ""
+msgstr "获取有关 pubchempy 包的信息。PubChem REST API 的 Python 接口"
 
 #: ../../tools/cheminformatics_tools.rst 99f9884a8edb494a9901f4dc71bfa0e2
 msgid "get_pubchempy_info tool specification"
-msgstr ""
+msgstr "get_pubchempy_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:318 0623f09f16fb4ab09e77f9c9047f6b79
 msgid "**Name**: ``get_pubchempy_info``"
-msgstr ""
+msgstr "**名称**：``get_pubchempy_info``"
 
 #: ../../tools/cheminformatics_tools.rst:320 f9f18ead53454ad59eee43185d332ea1
 msgid ""
 "**Description**: Get information about the pubchempy package. Python "
 "interface for PubChem REST API"
-msgstr ""
+msgstr "**描述**：获取有关 pubchempy 包的信息。PubChem REST API 的 Python 接口"
 
 #: ../../tools/cheminformatics_tools.rst:339 c9f416d5dbfe4169846ca547699c454e
 msgid "**get_rdkit_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_rdkit_info**（类型：PackageTool）"
 
 #: ../../tools/cheminformatics_tools.rst:341 6c45d44afadc44228070e0e0e2fd3365
 msgid ""
 "Get comprehensive information about RDKit – cheminformatics and machine "
 "learning toolkit"
-msgstr ""
+msgstr "获取关于 RDKit —— 化学信息学与机器学习工具包的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst 1eca752b5f9c456890da6d0ab5f5d0db
 msgid "get_rdkit_info tool specification"
-msgstr ""
+msgstr "get_rdkit_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:347 5d22caae3f274b3f93aae5affb680c04
 msgid "**Name**: ``get_rdkit_info``"
-msgstr ""
+msgstr "**名称**：``get_rdkit_info``"
 
 #: ../../tools/cheminformatics_tools.rst:349 503161df1cb44f00a0ec508386339998
 msgid ""

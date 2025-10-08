@@ -345,150 +345,150 @@ msgstr "**请求解析**：``run()`` 方法解析输入并提取函数调用数�
 msgid ""
 "**Format Detection**: Determines if input is single function call or "
 "multiple calls"
-msgstr ""
+msgstr "**格式检测**：确定输入是单次函数调用还是多次调用"
 
 #: ../../guide/tool_caller.rst:327 9c858a69e6184dfa82a87d37e2beb787
 msgid ""
 "**Tool Validation**: ``run_one_function()`` validates the tool exists and "
 "arguments are valid"
-msgstr ""
+msgstr "**工具验证**：``run_one_function()`` 用于验证工具是否存在及参数的有效性"
 
 #: ../../guide/tool_caller.rst:328 f3627d18b7b645ef9a735447dbf7d9d8
 msgid ""
 "**Dynamic Loading**: Load the tool if not already cached using "
 "``init_tool()``"
-msgstr ""
+msgstr "**动态加载**：如果工具尚未缓存，则使用``init_tool()``进行加载。"
 
 #: ../../guide/tool_caller.rst:329 b73301c99cbe4b52a621cdc64e56aeda
 msgid ""
 "**Configuration Injection**: Inject necessary configurations (API keys, "
 "endpoints)"
-msgstr ""
+msgstr "**配置注入**：注入必要的配置（API 密钥、端点）"
 
 #: ../../guide/tool_caller.rst:330 7aa2bb22ff6744f0ab6beb8625065d0e
 msgid "**Execution**: Call the tool's ``run()`` method"
-msgstr ""
+msgstr "**执行**：调用工具的``run()``方法"
 
 #: ../../guide/tool_caller.rst:331 d5d42d32e93f47218a0ad9edcf75f7ac
 msgid "**Result Processing**: Format and return the result"
-msgstr ""
+msgstr "**结果处理**：格式化并返回结果"
 
 #: ../../guide/tool_caller.rst:332 53bb102351a94a93b174d48044cbaa68
 msgid ""
 "**Error Handling**: Generate descriptive error messages if any step fails"
-msgstr ""
+msgstr "**错误处理**：如果任何步骤失败，生成描述性错误信息"
 
 #: ../../guide/tool_caller.rst:334 72b7e3859efb4164af45e1cba7b90969
 msgid ""
 "For multiple function calls, the ``run()`` method iterates through each call"
 " and uses ``run_one_function()`` internally."
-msgstr ""
+msgstr "对于多个函数调用，``run()`` 方法会遍历每个调用，并在内部使用 ``run_one_function()``。"
 
 #: ../../guide/tool_caller.rst:339 0b06bbfd29d54569bd8537f70a7749ac
 msgid "Error Handling and Validation"
-msgstr ""
+msgstr "错误处理与验证"
 
 #: ../../guide/tool_caller.rst:341 3647581b44d94b15b7a3127fbf3e08ce
 msgid "The Tool Caller provides comprehensive error handling:"
-msgstr ""
+msgstr "Tool Caller 提供全面的错误处理功能："
 
 #: ../../guide/tool_caller.rst:366 85bc10315e9c441a9e9e788d6f43050c
 msgid "Performance Optimization"
-msgstr ""
+msgstr "性能优化"
 
 #: ../../guide/tool_caller.rst:369 db4abf06a9b24059b504c74e55b61d6c
 msgid "Dynamic Loading Strategy"
-msgstr ""
+msgstr "动态加载策略"
 
 #: ../../guide/tool_caller.rst:371 ec6dd63a29a84759865a2eca665f6999
 msgid "The Tool Caller uses lazy loading to optimize performance:"
-msgstr ""
+msgstr "Tool Caller 使用延迟加载来优化性能："
 
 #: ../../guide/tool_caller.rst:373 303a5d4aa41247809bf6a8bc897245a5
 msgid "Tools are loaded only when first requested"
-msgstr ""
+msgstr "工具仅在首次请求时加载"
 
 #: ../../guide/tool_caller.rst:374 6381af551e344254914ea8d9f0e18d9a
 msgid "Loaded tools are cached for subsequent calls"
-msgstr ""
+msgstr "已加载的工具将被缓存以供后续调用使用"
 
 #: ../../guide/tool_caller.rst:375 cd99668b8e8b4ecf8cea28228d4283f5
 msgid "Memory usage is minimized by not loading all tools at startup"
-msgstr ""
+msgstr "通过不在启动时加载所有工具，最大限度地减少内存使用。"
 
 #: ../../guide/tool_caller.rst:376 c2bce5f96ef04f3ca9efae1dfffde5ce
 msgid "Cache duration can be configured based on usage patterns"
-msgstr ""
+msgstr "缓存持续时间可根据使用模式进行配置"
 
 #: ../../guide/tool_caller.rst:379 5c7e0b5711a14f7cb49c96365af6efcf
 msgid "Thread Pool Execution"
-msgstr ""
+msgstr "线程池执行"
 
 #: ../../guide/tool_caller.rst:381 421087921ecb4601a61fc4b0a93d1ca6
 msgid "For MCP servers, tools execute in thread pools to prevent blocking:"
-msgstr ""
+msgstr "对于 MCP 服务器，工具在线程池中执行以防止阻塞："
 
 #: ../../guide/tool_caller.rst:394 d87f839652234c81a8711d7d91576fd3
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../guide/tool_caller.rst:397 42f18dadcec84e03a1d81c5f66d84cfe
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../guide/tool_caller.rst:399 ../../guide/tool_caller.rst:429
 #: 4759e9cabefc4f91af356fcfc8a31d65 ab77db7a95d14181aeb25633ed2e360b
 msgid ""
 "**Tool Not Found**: Ensure the tool name is correct and the tool is loaded"
-msgstr ""
+msgstr "**未找到工具**：请确保工具名称正确且工具已加载"
 
 #: ../../guide/tool_caller.rst:400 ../../guide/tool_caller.rst:430
 #: 34b70007dc834ea49202bcdb59b73759 c9d732eaa42d486f8071e08dfb868171
 msgid "**Invalid Arguments**: Check that all required parameters are provided"
-msgstr ""
+msgstr "**无效参数**：请检查是否提供了所有必需的参数"
 
 #: ../../guide/tool_caller.rst:401 ../../guide/tool_caller.rst:431
 #: 82989a2a6638469cb6614ed364e29f5f a3554b21ece9435bb49519abaa380ee2
 msgid "**API Key Issues**: Verify that necessary API keys are configured"
-msgstr ""
+msgstr "**API 密钥问题**：请确认已配置必要的 API 密钥"
 
 #: ../../guide/tool_caller.rst:402 ../../guide/tool_caller.rst:432
 #: 7c2dd01c22eb4a0784a11034f5fd024c f5947e7003994647853b31f4360990c4
 msgid "**Network Errors**: Check connectivity to external services"
-msgstr ""
+msgstr "**网络错误**：检查与外部服务的连接情况"
 
 #: ../../guide/tool_caller.rst:403 ../../guide/tool_caller.rst:433
 #: 1a21e563ccb846d49c1b9390c77269c4 fc68c1ff90b1425fadd498199dce58a2
 msgid ""
 "**Memory Issues**: Reduce the number of loaded tools or increase available "
 "memory"
-msgstr ""
+msgstr "**内存问题**：减少加载的工具数量或增加可用内存"
 
 #: ../../guide/tool_caller.rst:406 22807725e65c4d9ea9dadb33caa791ee
 msgid "Debugging Tips"
-msgstr ""
+msgstr "调试技巧"
 
 #: ../../guide/tool_caller.rst e3a1d5555f1b499c82b4fde36a40589d
 msgid "Debugging and Troubleshooting"
-msgstr ""
+msgstr "调试与故障排除"
 
 #: ../../guide/tool_caller.rst:410 054d30ec13294a4e92f3f56d160f0d93
 msgid "**Enable Debug Logging:**"
-msgstr ""
+msgstr "**启用调试日志记录：**"
 
 #: ../../guide/tool_caller.rst:427 fa45bead89c542d39f204f31f4ab03ac
 msgid "**Common Issues and Solutions:**"
-msgstr ""
+msgstr "**常见问题及解决方案：**"
 
 #: ../../guide/tool_caller.rst:436 b27c9cefe18647978d09998f35814996
 msgid ""
 "For comprehensive troubleshooting Tutorial, see "
 ":doc:`../help/troubleshooting`"
-msgstr ""
+msgstr "有关全面故障排除教程，请参见：:doc:`../help/troubleshooting`"
 
 #: ../../guide/tool_caller.rst:439 9426330dab324b97990e571221a1eaeb
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../guide/tool_caller.rst:441 8f7118e77ba04ba085571e1882d19ce6
 msgid ""
@@ -497,30 +497,31 @@ msgid ""
 " validation system, and error handling make it a robust execution engine for"
 " ToolUniverse's extensive collection of scientific tools."
 msgstr ""
+"本综合教程涵盖了工具调用器的直接API使用及MCP服务器集成。工具调用器的动态加载策略、验证系统及错误处理机制，使其成为ToolUniverse庞大科学工具库中功能强大的执行引擎。"
 
 #: ../../guide/tool_caller.rst:443 7b8209c5be6d45fe893b02b780837502
 msgid "**Key Takeaways:**"
-msgstr ""
+msgstr "**主要内容：**"
 
 #: ../../guide/tool_caller.rst:445 bff33ead22354086beb7954e1633bcdf
 msgid "Use the ``run()`` method for all tool execution needs"
-msgstr ""
+msgstr "使用 ``run()`` 方法执行所有工具操作需求"
 
 #: ../../guide/tool_caller.rst:446 fd587a4af6594aaba04885a87ff5b651
 msgid "Tools are dynamically loaded and cached for optimal performance"
-msgstr ""
+msgstr "工具会被动态加载并缓存，以实现最佳性能。"
 
 #: ../../guide/tool_caller.rst:447 575e206bc18c42a4ad68ef707af390e6
 msgid "MCP servers provide standardized AI agent integration"
-msgstr ""
+msgstr "MCP 服务器提供标准化的 AI 代理集成"
 
 #: ../../guide/tool_caller.rst:448 c124fb411a434844a8f18dc96ecdd69b
 msgid "Comprehensive error handling and validation ensure reliable operation"
-msgstr ""
+msgstr "全面的错误处理和验证确保系统运行可靠"
 
 #: ../../guide/tool_caller.rst:449 fdfd7475b4e9473e8098549b652d787d
 msgid "Debug logging and troubleshooting tools help resolve issues quickly"
-msgstr ""
+msgstr "调试日志记录和故障排除工具有助于快速解决问题"
 
 #: ../../guide/tool_caller.rst:451 244597e613074bbc816955ed014275f0
 msgid ""
@@ -528,3 +529,5 @@ msgid ""
 "documentation and :doc:`../tutorials/aiscientists/adding_mcp_tools_en` "
 "tutorials."
 msgstr ""
+"有关更详细的信息，请参阅 :doc:`../api_comprehensive` 文档及 "
+":doc:`../tutorials/aiscientists/adding_mcp_tools_en` 教程。"

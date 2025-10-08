@@ -323,201 +323,201 @@ msgstr "get_htmd_info 工具规范"
 #: ../../tools/structural_biology_tools.rst:173
 #: b0ec2a7da2c14bdeafe575afcee0a826
 msgid "**Name**: ``get_htmd_info``"
-msgstr ""
+msgstr "**名称**：``get_htmd_info``"
 
 #: ../../tools/structural_biology_tools.rst:175
 #: 1a1b4b5a281d4912bdebb33b5f708eb3
 msgid ""
 "**Description**: Get information about the htmd package. High throughput "
 "molecular dynamics platform"
-msgstr ""
+msgstr "**描述**：获取有关 htmd 软件包的信息。高通量分子动力学平台"
 
 #: ../../tools/structural_biology_tools.rst:194
 #: d0c377781a9044e78ca0b06991cce40f
 msgid "**get_mdanalysis_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_mdanalysis_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:196
 #: 154051c186604777a971f5e627a61f86
 msgid ""
 "Get comprehensive information about MDAnalysis – molecular dynamics "
 "trajectory analysis"
-msgstr ""
+msgstr "获取关于 MDAnalysis —— 分子动力学轨迹分析的全面信息"
 
 #: ../../tools/structural_biology_tools.rst 3d65f26ba955496a91f3b69b7d1e39d3
 msgid "get_mdanalysis_info tool specification"
-msgstr ""
+msgstr "get_mdanalysis_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:202
 #: 16bc569b468c4f64af867486e1993bd5
 msgid "**Name**: ``get_mdanalysis_info``"
-msgstr ""
+msgstr "**名称**：``get_mdanalysis_info``"
 
 #: ../../tools/structural_biology_tools.rst:204
 #: 06c7adc22cf1404e9d8146b43bb7270c
 msgid ""
 "**Description**: Get comprehensive information about MDAnalysis – molecular "
 "dynamics trajectory analysis"
-msgstr ""
+msgstr "**描述**：获取关于MDAnalysis——分子动力学轨迹分析的全面信息"
 
 #: ../../tools/structural_biology_tools.rst:208
 #: 67949e13cd13470b8c362963fad9b716
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "MDAnalysis"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 MDAnalysis 的信息类型"
 
 #: ../../tools/structural_biology_tools.rst:225
 #: d25d31f60ba14fa39668771ea0f1289e
 msgid "**get_mdtraj_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_mdtraj_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:227
 #: 127fe87eb2dc41f081dcdef106382bc8
 msgid ""
 "Get information about the mdtraj package. Modern library for molecular "
 "dynamics trajectory analysis"
-msgstr ""
+msgstr "获取有关 mdtraj 软件包的信息。用于分子动力学轨迹分析的现代库。"
 
 #: ../../tools/structural_biology_tools.rst efe17a30e7f245638f8151b04e8b107f
 msgid "get_mdtraj_info tool specification"
-msgstr ""
+msgstr "get_mdtraj_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:233
 #: 8ad0a1916ffb4b7f9689e558620438bb
 msgid "**Name**: ``get_mdtraj_info``"
-msgstr ""
+msgstr "**名称**：``get_mdtraj_info``"
 
 #: ../../tools/structural_biology_tools.rst:235
 #: aa91b2e0d2f94a53a27bd79a42dc5f81
 msgid ""
 "**Description**: Get information about the mdtraj package. Modern library "
 "for molecular dynamics trajectory analysis"
-msgstr ""
+msgstr "**描述**：获取有关 mdtraj 软件包的信息。用于分子动力学轨迹分析的现代库。"
 
 #: ../../tools/structural_biology_tools.rst:254
 #: 597cae000ea74dc3a0101f4eaf5132aa
 msgid "**get_nglview_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_nglview_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:256
 #: 7da885632deb4c7ca2eaf6a6573ebf20
 msgid ""
 "Get information about the nglview package. Jupyter widget for molecular "
 "visualization"
-msgstr ""
+msgstr "获取有关 nglview 软件包的信息。用于分子可视化的 Jupyter 小部件"
 
 #: ../../tools/structural_biology_tools.rst 96f249ea41b5420a8ce65e6484e36374
 msgid "get_nglview_info tool specification"
-msgstr ""
+msgstr "get_nglview_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:262
 #: a56cbc1eae3f47b2b8e8d53571c16279
 msgid "**Name**: ``get_nglview_info``"
-msgstr ""
+msgstr "**名称**：``get_nglview_info``"
 
 #: ../../tools/structural_biology_tools.rst:264
 #: 7410f7d3e3384f15857155caf56689f2
 msgid ""
 "**Description**: Get information about the nglview package. Jupyter widget "
 "for molecular visualization"
-msgstr ""
+msgstr "**描述**：获取有关 nglview 包的信息。用于分子可视化的 Jupyter 小部件。"
 
 #: ../../tools/structural_biology_tools.rst:283
 #: 7457e366433b4b0d93854437552c0e1b
 msgid "**get_openmm_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_openmm_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:285
 #: 394651411e0f4f0a80407a2a8544091e
 msgid ""
 "Get comprehensive information about OpenMM – molecular dynamics simulation "
 "toolkit"
-msgstr ""
+msgstr "获取关于 OpenMM —— 分子动力学模拟工具包的全面信息"
 
 #: ../../tools/structural_biology_tools.rst 4bc2056adc5c4cfb8b06bb98414395ca
 msgid "get_openmm_info tool specification"
-msgstr ""
+msgstr "get_openmm_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:291
 #: 2d934f7e324b43d9b8a0ee88701b256a
 msgid "**Name**: ``get_openmm_info``"
-msgstr ""
+msgstr "**名称**：``get_openmm_info``"
 
 #: ../../tools/structural_biology_tools.rst:293
 #: 7456c26522a6471ba303d53f882ab56a
 msgid ""
 "**Description**: Get comprehensive information about OpenMM – molecular "
 "dynamics simulation toolkit"
-msgstr ""
+msgstr "**描述**：获取关于 OpenMM —— 分子动力学模拟工具包的全面信息"
 
 #: ../../tools/structural_biology_tools.rst:313
 #: 1f7bc7df247c42bdb5c30996f31a7b0f
 msgid "**get_pyrosetta_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyrosetta_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:315
 #: 6490289c0542459d8807cc8d5523a110
 msgid ""
 "Get information about the pyrosetta package. Python interface to Rosetta "
 "macromolecular modeling ..."
-msgstr ""
+msgstr "获取有关 pyrosetta 软件包的信息。Rosetta 大分子建模的 Python 接口..."
 
 #: ../../tools/structural_biology_tools.rst f5ea918015494017bee9b3525bdf8b3b
 msgid "get_pyrosetta_info tool specification"
-msgstr ""
+msgstr "get_pyrosetta_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:321
 #: 8ba516da8e1e4b20802424c783e88e1e
 msgid "**Name**: ``get_pyrosetta_info``"
-msgstr ""
+msgstr "**名称**：``get_pyrosetta_info``"
 
 #: ../../tools/structural_biology_tools.rst:323
 #: 3c5dad1cb13b49caa29e0999a94a53bc
 msgid ""
 "**Description**: Get information about the pyrosetta package. Python "
 "interface to Rosetta macromolecular modeling suite"
-msgstr ""
+msgstr "**描述**：获取有关 pyrosetta 软件包的信息。Rosetta 大分子建模套件的 Python 接口。"
 
 #: ../../tools/structural_biology_tools.rst:342
 #: e79832fa520c41f78a268fa0aaa1d28a
 msgid "**get_pyscf_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyscf_info**（类型：PackageTool）"
 
 #: ../../tools/structural_biology_tools.rst:344
 #: bf829277b16d44e8bc021a3e36f37242
 msgid ""
 "Get comprehensive information about PySCF – a versatile quantum-chemistry "
 "framework in Python."
-msgstr ""
+msgstr "获取关于 PySCF —— 一个多功能 Python 量子化学框架的全面信息。"
 
 #: ../../tools/structural_biology_tools.rst 11567fc88fd249d1a7207067e124d645
 msgid "get_pyscf_info tool specification"
-msgstr ""
+msgstr "get_pyscf_info 工具规格说明"
 
 #: ../../tools/structural_biology_tools.rst:350
 #: fe04e2db4ed8403fac9c4feb5f9d71c6
 msgid "**Name**: ``get_pyscf_info``"
-msgstr ""
+msgstr "**名称**：``get_pyscf_info``"
 
 #: ../../tools/structural_biology_tools.rst:352
 #: bb491ee44a784fe3bce07736d87d0b4d
 msgid ""
 "**Description**: Get comprehensive information about PySCF – a versatile "
 "quantum-chemistry framework in Python."
-msgstr ""
+msgstr "**描述**：获取关于 PySCF 的全面信息——一个功能强大的 Python 量子化学框架。"
 
 #: ../../tools/structural_biology_tools.rst:372
 #: b1f399e8eaa64bc9b8f8145803761ced
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/structural_biology_tools.rst:374
 #: d7e84b11cdfa437ebf46463e3700c68c
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/structural_biology_tools.rst:375
 #: cb551f327e484c638aff05c94033a121
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

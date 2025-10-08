@@ -99,23 +99,28 @@ msgstr "transport=\"http\"，host=\"0.0.0.0\"，port=7000"
 #: tooluniverse.smcp.create_smcp_server:89
 #: tooluniverse.smcp.create_smcp_server:112
 msgid ")"
-msgstr ""
+msgstr "请提供需要翻译的具体文本。"
 
 #: 23542bd1c9834759884b539b238c651f of tooluniverse.smcp:32
 msgid ""
 "Client Integration: ```python # Using MCP client to discover and use tools "
 "import json"
 msgstr ""
+"客户端集成：  \n"
+"```python  \n"
+"# 使用MCP客户端来发现和使用工具  \n"
+"import json  \n"
+"```"
 
 #: 6377424d576a404bb9085ad096bb487a of tooluniverse.smcp:37
 msgid ""
 "# Discover protein analysis tools response = await "
 "client.call_tool(\"find_tools\", {"
-msgstr ""
+msgstr "# 发现蛋白质分析工具 response = await client.call_tool(\"find_tools\", {"
 
 #: 65e5c70f844f4733913632bba7d05b7b of tooluniverse.smcp:39
 msgid "\"query\": \"protein structure analysis\", \"limit\": 5"
-msgstr ""
+msgstr "\"query\": \"蛋白质结构分析\", \"limit\": 5"
 
 #: 483eedbc4953490da118c39612243df6 5e58593f6b684d21924d808ab13c00d3
 #: 6bef415909a94d52b1635aa73b907ebb of tooluniverse.smcp:41
@@ -128,6 +133,8 @@ msgid ""
 "# Use discovered tool result = await "
 "client.call_tool(\"UniProt_get_entry_by_accession\", {"
 msgstr ""
+"# 使用发现的工具 result = await "
+"client.call_tool(\"UniProt_get_entry_by_accession\", {"
 
 #: dab731c3d79d4437b16d993792d8801c of tooluniverse.smcp:45
 #, python-brace-format
@@ -137,6 +144,9 @@ msgstr ""
 #: 4af2ddbd41f5491185c2be6cb1df21e4 of tooluniverse.smcp:50
 msgid "Architecture:"
 msgstr ""
+"架构：\n"
+"\n"
+"上下文：文档"
 
 #: 123ec255a5e2433a8baa7dd6c62e00ca of tooluniverse.smcp:52
 msgid ""
@@ -145,6 +155,10 @@ msgid ""
 "     │    │     Server       │    │   (350+ Tools)  │ └─────────────────┘"
 "    └──────────────────┘    └─────────────────┘"
 msgstr ""
+"┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐  \n"
+"│   MCP 客户端     │◄──►│      SMCP        │◄──►│  ToolUniverse   │  \n"
+"│  （AI 代理）     │    │     服务器       │    │   （350+ 工具） │  \n"
+"└─────────────────┘    └──────────────────┘    └─────────────────┘"
 
 #: d6a5ee5c67354c63b144ac0673703660 of tooluniverse.smcp:56
 msgid "│ ▼"
@@ -155,6 +169,9 @@ msgid ""
 "┌──────────────────┐ │  Scientific      │ │  Databases &     │ │  Services"
 "        │ └──────────────────┘"
 msgstr ""
+"┌──────────────────┐  \n"
+"│  科学数据库与服务 │  \n"
+"└──────────────────┘"
 
 #: 6bedf4fa347a419ca55010f47682ebe2 of tooluniverse.smcp:64
 msgid ""
@@ -164,35 +181,47 @@ msgid ""
 "Returns formatted results via MCP protocol 5. Provides intelligent tool "
 "discovery and recommendation"
 msgstr ""
+"SMCP 服务器充当智能中间件层，其功能包括：  \n"
+"1. 接收来自 AI 代理/客户端的 MCP 请求  \n"
+"2. 将请求转换为 ToolUniverse 工具调用  \n"
+"3. 针对科学数据库/服务执行工具操作  \n"
+"4. 通过 MCP 协议返回格式化结果  \n"
+"5. 提供智能工具发现和推荐"
 
 #: e62612edff9b47b2a1ceee4ce449887d of tooluniverse.smcp:72
 msgid "Integration Points:"
 msgstr ""
+"集成点：\n"
+"\n"
+"上下文：文档"
 
 #: b9482d634d534064a4f2b0baf9ce0719 of tooluniverse.smcp:74
 msgid "MCP Protocol Layer:"
-msgstr ""
+msgstr "MCP 协议层:"
 
 #: c967afa506af4c73abe632eb21ddeb05 of tooluniverse.smcp:75
 msgid "Standard MCP methods (tools/list, tools/call, etc.)"
-msgstr ""
+msgstr "标准MCP方法（tools/list、tools/call等）"
 
 #: 5ef26c24b36e41c3ac5fc63e341a9584 87ea832c2ecb4354802f73a9be9a9e1f of
 #: tooluniverse.smcp:76 tooluniverse.smcp.SMCP:26
 msgid "Custom scientific methods (tools/find, tools/search)"
-msgstr ""
+msgstr "自定义科学方法（tools/find, tools/search）"
 
 #: 5cd6a7432c914d43962c3c8a7d6f2bbd of tooluniverse.smcp:77
 msgid "Transport-agnostic communication (stdio, HTTP, SSE)"
-msgstr ""
+msgstr "与传输无关的通信（stdio、HTTP、SSE）"
 
 #: 09e67304d214422d85e7cb07aa3f3c57 of tooluniverse.smcp:78
 msgid "Proper error codes and JSON-RPC 2.0 compliance"
-msgstr ""
+msgstr "正确的错误代码与JSON-RPC 2.0规范的遵从"
 
 #: 02450c2d526c411aa18024d282ad97fe of tooluniverse.smcp:80
 msgid "ToolUniverse Integration:"
 msgstr ""
+"ToolUniverse 集成：\n"
+"\n"
+"Context: 文档"
 
 #: 1a92504568644627a5174bc048772ab0 of tooluniverse.smcp:81
 msgid "Dynamic tool loading and configuration"

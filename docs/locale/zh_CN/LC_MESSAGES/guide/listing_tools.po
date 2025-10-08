@@ -363,136 +363,136 @@ msgstr "获取统计数据后，您可以访问有关工具的详细信息："
 
 #: ../../guide/listing_tools.rst:224 4adfa212f2c64f698ef1acaa637646ac
 msgid "Practical Examples"
-msgstr ""
+msgstr "实际示例"
 
 #: ../../guide/listing_tools.rst:227 df0c775d816a441a931a2934def7ccc8
 msgid "Example 1: Finding Tools by Data Source"
-msgstr ""
+msgstr "示例 1：按数据源查找工具"
 
 #: ../../guide/listing_tools.rst:247 acdd9fc4ee7f47fe9f4c0075ddd69af5
 msgid "Example 2: Understanding Tool Implementation Types"
-msgstr ""
+msgstr "示例 2：理解工具实现类型"
 
 #: ../../guide/listing_tools.rst:270 fe236ddb700f4b14b662c4a5c71ee7aa
 msgid "Example 3: Comparing Both Modes"
-msgstr ""
+msgstr "示例 3：两种模式的比较"
 
 #: ../../guide/listing_tools.rst:299 82be754367ff4614ac37ec788e56634b
 msgid "Filtering and Selection"
-msgstr ""
+msgstr "筛选与选择"
 
 #: ../../guide/listing_tools.rst:301 3e18063a99904f85901c82c0203fdbb9
 msgid ""
 "While ``list_built_in_tools()`` shows all available tools, you can filter "
 "tools using other methods:"
-msgstr ""
+msgstr "虽然 ``list_built_in_tools()`` 显示所有可用工具，但您可以使用其他方法筛选工具："
 
 #: f66054d65d9542b4b18197f197154d77 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:1
 msgid "Select tools based on tool names and/or categories (tool_files keys)."
-msgstr ""
+msgstr "根据工具名称和/或类别（tool_files 键）选择工具。"
 
 #: 2b42b97bf3804cbd8be404a143673136 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:3
 msgid "List of tool names to include. If None, include all."
-msgstr ""
+msgstr "要包含的工具名称列表。如果为 None，则包含所有工具。"
 
 #: 4b1d41f8688f47259af5e9e5fe55025e e64b807b2429417e90be6089b1acd8e5 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:11
 #: tooluniverse.execute_function.ToolUniverse.select_tools:5
 msgid "List of tool names to exclude."
-msgstr ""
+msgstr "要排除的工具名称列表。"
 
 #: 4f731a2854f3481180d012e208fda3c6 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:7
 msgid "List of categories (tool_files keys) to include. If None, include all."
-msgstr ""
+msgstr "包含的类别列表（tool_files 键）。如果为 None，则包含所有类别。"
 
 #: 35a88720783b4ef3b4fbbf117835dd36 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:10
 msgid "List of categories (tool_files keys) to exclude."
-msgstr ""
+msgstr "要排除的类别列表（tool_files 键）。"
 
 #: 542f53ae1cad422190c699ffa0fdcd4d of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:13
 msgid "List of selected tool configurations."
-msgstr ""
+msgstr "所选工具配置列表。"
 
 #: 15c7e8d94c1441c8968e70a4d0624553 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:1
 msgid ""
 "Refresh the tool name and description mappings with optional filtering."
-msgstr ""
+msgstr "使用可选过滤刷新工具名称和描述映射。"
 
 #: 75a079664e6348b9a811cc0c45dcecc4 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:3
 msgid ""
 "This method rebuilds the internal tool dictionary and generates filtered "
 "lists of tool names and descriptions based on the provided filter criteria."
-msgstr ""
+msgstr "此方法重建内部工具字典，并根据提供的筛选条件生成经过筛选的工具名称和描述列表。"
 
 #: 56eb26f94482409087577bc91f522449 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:6
 msgid ""
 "If True, includes full tool JSON as description. If False, uses \"name: "
 "description\" format. Defaults to False."
-msgstr ""
+msgstr "如果为 True，则将完整的工具 JSON 作为描述包含在内。若为 False，则使用“名称: 描述”格式。默认值为 False。"
 
 #: 956e66a7a0034ac49c0aaa741a55fb43 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:9
 msgid "List of tool names to include."
-msgstr ""
+msgstr "要包含的工具名称列表。"
 
 #: 3878a40975784c62bef2acac63dfc106 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:13
 msgid "List of categories to include."
-msgstr ""
+msgstr "包含的类别列表。"
 
 #: 153cae27eaba4484b3c885b9baccce8d of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:15
 msgid "List of categories to exclude."
-msgstr ""
+msgstr "要排除的类别列表。"
 
 #: 1702e22079024a0fb7d71e168e0512d3 of
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:18
 msgid "A tuple containing (tool_name_list, tool_desc_list) after filtering."
-msgstr ""
+msgstr "经过筛选后包含（tool_name_list，tool_desc_list）的元组。"
 
 #: ../../guide/listing_tools.rst:327 3523fe1e170f4277b06fe7ec9dcc8bc5
 msgid "Working Without Loading Tools"
-msgstr ""
+msgstr "无加载工具操作"
 
 #: ../../guide/listing_tools.rst:329 812cd4dc2d2040a5a0b1390d242f9792
 msgid ""
 "One key advantage of ``list_built_in_tools()`` is that it works **before** "
 "calling ``load_tools()``:"
-msgstr ""
+msgstr "``list_built_in_tools()`` 的一个主要优点是它在调用 ``load_tools()`` **之前** 即可运行："
 
 #: ../../guide/listing_tools.rst:345 62d9ace5bb824040b6ae529b8f0d3add
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../guide/listing_tools.rst:347 1f3cbf8930d443f4b8adb9fc1ea73bbc
 msgid ""
 "The ``list_built_in_tools()`` method provides flexible tool discovery with "
 "four modes:"
-msgstr ""
+msgstr "``list_built_in_tools()`` 方法提供四种模式的灵活工具发现功能："
 
 #: ../../guide/listing_tools.rst:349 7af3d21e5b344d80a893bb164eae47ed
 msgid "**list_name**: Simple list of tool names"
-msgstr ""
+msgstr "**list_name**：工具名称的简单列表"
 
 #: ../../guide/listing_tools.rst:350 451c304b4bc441c49396e9c54f1d50a8
 msgid "**list_spec**: Complete tool specifications"
-msgstr ""
+msgstr "**list_spec**：完整的工具规格说明"
 
 #: ../../guide/listing_tools.rst:351 575ad3e5f0494cbd8470a9d8e42c042a
 msgid "**config**: Organized by configuration categories"
-msgstr ""
+msgstr "**config**：按配置类别组织"
 
 #: ../../guide/listing_tools.rst:352 ecd894af5b9a47ad8a5d5e4ea4f112a3
 msgid "**type**: Organized by implementation types"
-msgstr ""
+msgstr "**type**：按实现类型组织"
 
 #: ../../guide/listing_tools.rst:354 5599a6d3fd10494bb6ffba63c5cac65a
 msgid ""
@@ -500,3 +500,4 @@ msgid ""
 "discovery. This makes it easy to explore, validate, and work with tools in "
 "ToolUniverse without needing to load them first."
 msgstr ""
+"所有模式均支持``scan_all``参数，以实现全面的工具发现。这样，用户无需预先加载工具即可轻松浏览、验证并使用ToolUniverse中的工具。"

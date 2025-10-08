@@ -4,12 +4,13 @@
     
     // 计算部署的基础前缀（例如 GitHub Pages 项目页面的 /<repo>/ 前缀）
     function getBasePrefix(pathname) {
+        // Always prefer explicit project base if present
+        if (pathname.includes('/ToolUniverse/')) return '/ToolUniverse/';
         if (pathname.includes('/en/')) return pathname.split('/en/')[0] + '/';
         if (pathname.includes('/zh-CN/')) return pathname.split('/zh-CN/')[0] + '/';
         if (pathname.includes('/zh_CN/')) return pathname.split('/zh_CN/')[0] + '/';
-        const parts = pathname.split('/').filter(Boolean);
-        if (parts.length > 0) return '/' + parts[0] + '/';
-        return '/';
+        // Fallback: assume project page lives under /ToolUniverse/
+        return '/ToolUniverse/';
     }
 
     // 检测当前语言

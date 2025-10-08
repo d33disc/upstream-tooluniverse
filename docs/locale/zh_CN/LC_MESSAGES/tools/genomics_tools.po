@@ -246,7 +246,7 @@ msgstr "**名称**: ``get_cyvcf2_info``"
 msgid ""
 "**Description**: Get comprehensive information about cyvcf2 – fast VCF/BCF "
 "file processing"
-msgstr ""
+msgstr "**描述**：获取关于 cyvcf2 的全面信息——快速处理 VCF/BCF 文件"
 
 #: ../../tools/genomics_tools.rst:121 ../../tools/genomics_tools.rst:182
 #: ../../tools/genomics_tools.rst:301 ../../tools/genomics_tools.rst:391
@@ -260,114 +260,114 @@ msgstr ""
 msgid ""
 "``include_examples`` (boolean) (optional) Whether to include usage examples "
 "and quick start guide"
-msgstr ""
+msgstr "``include_examples``（布尔值）（可选）是否包含使用示例和快速入门指南"
 
 #: ../../tools/genomics_tools.rst:137 180b107751a640398bf460f93d24b0b2
 msgid "**get_deeptools_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_deeptools_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:139 bae1e6e6e0934c6a8da284c555304723
 msgid ""
 "Get comprehensive information about deepTools – deep sequencing data "
 "processing"
-msgstr ""
+msgstr "获取有关 deepTools 的全面信息——深度测序数据处理"
 
 #: ../../tools/genomics_tools.rst 2d93e39de8d845048332cc50455f4203
 msgid "get_deeptools_info tool specification"
-msgstr ""
+msgstr "get_deeptools_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:145 27a3da9ce2c34c2bb0d0d863710e5efe
 msgid "**Name**: ``get_deeptools_info``"
-msgstr ""
+msgstr "**名称**：``get_deeptools_info``"
 
 #: ../../tools/genomics_tools.rst:147 be3f72cda26b4c1ca2c3c0146b38a66d
 msgid ""
 "**Description**: Get comprehensive information about deepTools – deep "
 "sequencing data processing"
-msgstr ""
+msgstr "**描述**：获取关于 deepTools —— 深度测序数据处理的全面信息"
 
 #: ../../tools/genomics_tools.rst:151 d6cb2b7af156499db38e584a4cc48c71
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "deepTools"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 deepTools 的信息类型"
 
 #: ../../tools/genomics_tools.rst:168 ebf653078cca487199c2db13db3564be
 msgid "**get_gseapy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_gseapy_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:170 f3cf616704894597a404c9c1c0b61ad8
 msgid ""
 "Get comprehensive information about GSEApy – Gene Set Enrichment Analysis in"
 " Python"
-msgstr ""
+msgstr "获取关于 GSEApy —— Python 中基因集富集分析的全面信息"
 
 #: ../../tools/genomics_tools.rst 9791ffab5a324df38e0e3165036de4b7
 msgid "get_gseapy_info tool specification"
-msgstr ""
+msgstr "get_gseapy_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:176 1c51743074d24573a14043161abb35bc
 msgid "**Name**: ``get_gseapy_info``"
-msgstr ""
+msgstr "**名称**：``get_gseapy_info``"
 
 #: ../../tools/genomics_tools.rst:178 f8cd11d4b1884279a90a67ba98859928
 msgid ""
 "**Description**: Get comprehensive information about GSEApy – Gene Set "
 "Enrichment Analysis in Python"
-msgstr ""
+msgstr "**描述**：获取关于 GSEApy —— Python 中的基因集富集分析的全面信息"
 
 #: ../../tools/genomics_tools.rst:198 b45eaf506ab442129c3a4ce0c9fb67c8
 msgid "**get_jcvi_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_jcvi_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:200 b819b9d4b0b04cae8165c4c3f4144bd2
 msgid ""
 "Get comprehensive information about JCVI – genome assembly and comparative "
 "genomics"
-msgstr ""
+msgstr "获取关于JCVI——基因组组装与比较基因组学的全面信息"
 
 #: ../../tools/genomics_tools.rst 0b894aed7aa24086af0950104420733d
 msgid "get_jcvi_info tool specification"
-msgstr ""
+msgstr "get_jcvi_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:206 b0ef9c20bdea4b748d396e71b3ca5ef9
 msgid "**Name**: ``get_jcvi_info``"
-msgstr ""
+msgstr "**名称**：``get_jcvi_info``"
 
 #: ../../tools/genomics_tools.rst:208 998a615a5203478793dbe7322d6f7583
 msgid ""
 "**Description**: Get comprehensive information about JCVI – genome assembly "
 "and comparative genomics"
-msgstr ""
+msgstr "**描述**：获取关于JCVI——基因组组装与比较基因组学的全面信息"
 
 #: ../../tools/genomics_tools.rst:212 b3a5537e1ee94c13921a1667a30d110e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about JCVI"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 JCVI 的信息类型"
 
 #: ../../tools/genomics_tools.rst:229 aa2c17383d7447718e6fb5b645961366
 msgid "**get_kipoiseq_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_kipoiseq_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:231 1205f66ccd574c75ad9eac9b304f0d9f
 msgid ""
 "Get information about the kipoiseq package. Kipoi sequence utilities for "
 "genomics deep learning"
-msgstr ""
+msgstr "获取有关 kipoiseq 软件包的信息。Kipoi 序列工具集，适用于基因组学深度学习。"
 
 #: ../../tools/genomics_tools.rst b4b4c309278b413ab09e2259db2f17ff
 msgid "get_kipoiseq_info tool specification"
-msgstr ""
+msgstr "get_kipoiseq_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:237 3e1eff84a4344480b3454526caeb08eb
 msgid "**Name**: ``get_kipoiseq_info``"
-msgstr ""
+msgstr "**名称**：``get_kipoiseq_info``"
 
 #: ../../tools/genomics_tools.rst:239 e1f1dc9da38c4f52ab6e20e71b146936
 msgid ""
 "**Description**: Get information about the kipoiseq package. Kipoi sequence "
 "utilities for genomics deep learning"
-msgstr ""
+msgstr "**描述**：获取有关 kipoiseq 软件包的信息。Kipoi 序列工具集，适用于基因组学深度学习。"
 
 #: ../../tools/genomics_tools.rst:243 ../../tools/genomics_tools.rst:272
 #: ../../tools/genomics_tools.rst:362 ../../tools/genomics_tools.rst:421
@@ -375,76 +375,76 @@ msgstr ""
 #: 7f5d2b048de54742aabc2f4f329ee749 acdc16741064454f994b57b314cf5037
 #: b3771c67618547cc88418131456c998d ce3c4bb177774f41ab0a434c804ad0ad
 msgid "No parameters required."
-msgstr ""
+msgstr "无需参数。"
 
 #: ../../tools/genomics_tools.rst:258 0eb7112f284c47a9ae438c69d06b1b56
 msgid "**get_poretools_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_poretools_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:260 26eaedbff2f0444188499c1f32cc1865
 msgid "Get information about the poretools package. Python package: poretools"
-msgstr ""
+msgstr "获取有关 poretools 软件包的信息。Python 软件包：poretools"
 
 #: ../../tools/genomics_tools.rst 98139c1e1e274508ba457b203cbd8035
 msgid "get_poretools_info tool specification"
-msgstr ""
+msgstr "get_poretools_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:266 3982a2b175134186ac133d0104a99b2e
 msgid "**Name**: ``get_poretools_info``"
-msgstr ""
+msgstr "**名称**：``get_poretools_info``"
 
 #: ../../tools/genomics_tools.rst:268 55af3ae09a6043dab8eb3f82eeac6b52
 msgid ""
 "**Description**: Get information about the poretools package. Python "
 "package: poretools"
-msgstr ""
+msgstr "**描述**：获取有关 poretools 包的信息。Python 包：poretools"
 
 #: ../../tools/genomics_tools.rst:287 4ee12909392148d4b446a712e8efc0ee
 msgid "**get_pybedtools_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pybedtools_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:289 a0343d5b747f418fa548fa58f7718289
 msgid ""
 "Get comprehensive information about pybedtools – Python wrapper for BEDTools"
-msgstr ""
+msgstr "获取关于 pybedtools —— BEDTools 的 Python 封装器的全面信息"
 
 #: ../../tools/genomics_tools.rst 99635d5dec9c44e19aa227c909bd147a
 msgid "get_pybedtools_info tool specification"
-msgstr ""
+msgstr "get_pybedtools_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:295 3805ca06f56f4d2191c5f64d1665f4c3
 msgid "**Name**: ``get_pybedtools_info``"
-msgstr ""
+msgstr "**名称**：``get_pybedtools_info``"
 
 #: ../../tools/genomics_tools.rst:297 59b60e35c528445aa86c9a2fe2d3d2ac
 msgid ""
 "**Description**: Get comprehensive information about pybedtools – Python "
 "wrapper for BEDTools"
-msgstr ""
+msgstr "**描述**：获取有关 pybedtools 的全面信息 —— BEDTools 的 Python 封装器"
 
 #: ../../tools/genomics_tools.rst:317 7a9f1566895847d5bb3f3344a0c58885
 msgid "**get_pydeseq2_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pydeseq2_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:319 e8379b53727940d2a7e85c7a82c32858
 msgid ""
 "Get comprehensive information about PyDESeq2 – RNA-seq differential "
 "expression analysis"
-msgstr ""
+msgstr "获取关于 PyDESeq2 —— RNA 测序差异表达分析的全面信息"
 
 #: ../../tools/genomics_tools.rst 2c28d644c6794e949c362890e97e32a0
 msgid "get_pydeseq2_info tool specification"
-msgstr ""
+msgstr "get_pydeseq2_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:325 01cb835754574ab183280c6dfd761cd9
 msgid "**Name**: ``get_pydeseq2_info``"
-msgstr ""
+msgstr "**名称**：``get_pydeseq2_info``"
 
 #: ../../tools/genomics_tools.rst:327 6b64542639eb4234b6600baa32272c7c
 msgid ""
 "**Description**: Get comprehensive information about PyDESeq2 – RNA-seq "
 "differential expression analysis"
-msgstr ""
+msgstr "**描述**：获取关于 PyDESeq2 —— RNA 测序差异表达分析的全面信息"
 
 #: ../../tools/genomics_tools.rst:331 eec8cc0037884962ba62367e032c4524
 msgid ""

@@ -94,17 +94,17 @@ msgstr "按类别组织的工具字典"
 #: c1daa9b3de564065a39017adc939ac40 of
 #: tooluniverse.execute_function.ToolUniverse:27
 msgid "Dictionary mapping category names to their JSON file paths"
-msgstr ""
+msgstr "将类别名称映射到其对应的 JSON 文件路径的字典"
 
 #: bd26897df2124b42995baa661ffdeed8 of
 #: tooluniverse.execute_function.ToolUniverse:33
 msgid "Cache of instantiated tool objects"
-msgstr ""
+msgstr "已实例化工具对象的缓存"
 
 #: 563d9fd6dce6475d84ceeee28d38d0a8 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:1
 msgid "Initialize the ToolUniverse with tool file configurations."
-msgstr ""
+msgstr "初始化 ToolUniverse 并加载工具文件配置。"
 
 #: ../../api/tooluniverse.rst 10c2c260da9a44228149b7c983f1eaf4
 #: 1b2d9544912d474cb5047059b7f57da2 249cf3c01a0a41edbb7ba7a890c2a069
@@ -120,21 +120,21 @@ msgstr ""
 #: dd8f92e56a234d679b204c94099486e5 e96b4c594cae4290a3daa26fc6a59f69
 #: f7c605b4cca04381920d5755271ace54 ff5ea5de14c7495ca1fd5a54a1286867
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: b8eec650de134abdba6aaf6918d3495e of
 #: tooluniverse.execute_function.ToolUniverse.__init__:3
 msgid ""
 "Dictionary mapping category names to JSON file paths. Defaults to "
 "default_tool_files."
-msgstr ""
+msgstr "将类别名称映射到 JSON 文件路径的字典。默认为 default_tool_files。"
 
 #: 97760ab3535849398e5267a2145ffcb9 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:6
 msgid ""
 "Whether to keep default tools when custom tool_files are provided. Defaults "
 "to True."
-msgstr ""
+msgstr "当提供自定义 tool_files 时，是否保留默认工具。默认值为 True。"
 
 #: 6c70baaf07094e1cbe48aee71ff9fcd8 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:9
@@ -142,16 +142,17 @@ msgid ""
 "Log level for this instance. Can be 'DEBUG', 'INFO', 'WARNING', 'ERROR', "
 "'CRITICAL'. If None, uses global setting."
 msgstr ""
+"此实例的日志级别。可设置为 'DEBUG'、'INFO'、'WARNING'、'ERROR'、'CRITICAL'。如果为 None，则使用全局设置。"
 
 #: 6d797751c7f04f18a3d1538327c3dce2 of
 #: tooluniverse.execute_function.ToolUniverse.__init__:12
 msgid "Whether to enable output hooks. Defaults to False."
-msgstr ""
+msgstr "是否启用输出钩子。默认为 False。"
 
 #: 8703cc8b682649d18e8a182c8ca3ac3a of
 #: tooluniverse.execute_function.ToolUniverse.__init__:14
 msgid "Configuration for hooks. If None, uses default config."
-msgstr ""
+msgstr "钩子的配置。如果为 None，则使用默认配置。"
 
 #: 96033cfb62194535935983ed6066d5fc of
 #: tooluniverse.execute_function.ToolUniverse.__init__:16
@@ -160,20 +161,22 @@ msgid ""
 " list of both. Defaults to 'SummarizationHook'. If both hook_config and "
 "hook_type are provided, hook_config takes precedence."
 msgstr ""
+"简单的钩子类型选择。可以是 'SummarizationHook'、'FileSaveHook'，或两者的列表。默认为 "
+"'SummarizationHook'。如果同时提供了 hook_config 和 hook_type，则以 hook_config 为优先。"
 
 #: 407d19a5f3bc464680256a51fcc36ac7 of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:1
 msgid ""
 "Check if a tool's required API keys are available. Also supports "
 "optional_api_keys where at least one key from the list must be available."
-msgstr ""
+msgstr "检查工具所需的 API 密钥是否可用。同时支持 optional_api_keys，其中列表中的至少一个密钥必须可用。"
 
 #: 44d97c0be45b4f059e9de80e73e607f3 of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:4
 msgid ""
 "Tool configuration containing optional 'required_api_keys' and "
 "'optional_api_keys' fields"
-msgstr ""
+msgstr "工具配置包含可选的“required_api_keys”和“optional_api_keys”字段"
 
 #: ../../api/tooluniverse.rst 076835b6c6c8418da05f48242e0fe1c7
 #: 1bae120e5eb34b8399dc5ab3f388fd80 23d52f665be84947a8f75de17c2e8a65
@@ -185,12 +188,12 @@ msgstr ""
 #: fc3ef46ad20a4abebec026c0b0317727 fcde8936f0e04488bce42632df88f9e2 of
 #: tooluniverse.smcp.SMCP
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 13c6cb6fb26b4f718eced0cf1c4f89fe of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:7
 msgid "(bool, list) - (all_keys_available, missing_keys)"
-msgstr ""
+msgstr "（bool，list）-（所有键可用，缺失键）"
 
 #: ../../api/tooluniverse.rst 0960625c06b04b6c9694ad99599fb7cb
 #: 3b1ea3f52de542bf9d0259f2b254a721 52ab9d2a570145f7a285e772f68a4cd8
@@ -204,24 +207,24 @@ msgstr ""
 #: ddbdb5cdaf55497eb827e5cead926887 f1c4b74d675e413ea144080c5ea547c3 of
 #: tooluniverse.smcp.SMCP
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 1a34c06ae2f5454d96b1b6aaf1c2fa27 of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:1
 msgid "Create hook configuration from simple hook_type parameter."
-msgstr ""
+msgstr "根据简单的 hook_type 参数创建钩子配置。"
 
 #: 22472695d80c4ef6a42c7ecb73a5ef82 of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:3
 msgid ""
 "Hook type(s) to enable. Can be 'SummarizationHook', 'FileSaveHook', or a "
 "list of both."
-msgstr ""
+msgstr "启用的钩子类型。可以是 'SummarizationHook'、'FileSaveHook'，或两者的列表。"
 
 #: dd33389bd0194007859e845d028fff1c of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:7
 msgid "Generated hook configuration"
-msgstr ""
+msgstr "生成的钩子配置"
 
 #: 1dec73ee8f2745a4a6e383e45ed4e8b3 of
 #: tooluniverse.execute_function.ToolUniverse._execute_tool_with_stream:1

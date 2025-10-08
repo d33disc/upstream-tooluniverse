@@ -288,188 +288,189 @@ msgid ""
 "'genomics_england', 'impc', 'reactome', 'uniprot_literature', "
 "'uniprot_variants'"
 msgstr ""
+"``datasourceId``（字符串）（必填）用于提取评分的数据源ID。可选项包括：'chembl'、'eva'、'eva_somatic'、'cancer_gene_census'、'cancer_biomarkers'、'europepmc'、'expression_atlas'、'genomics_england'、'impc'、'reactome'、'uniprot_literature'、'uniprot_variants'。"
 
 #: ../../tools/disease_target_score_tools.rst:154
 #: 68b4d86402c4410e94b05d72783bb1ca
 msgid "**europepmc_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**europepmc_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:156
 #: 80a1847f971649b5b141855344a9d257
 msgid ""
 "Extract disease-target association scores from Europe PMC literature. This "
 "includes literature-ba..."
-msgstr ""
+msgstr "从 Europe PMC 文献中提取疾病-靶点关联评分。此过程包括基于文献的..."
 
 #: ../../tools/disease_target_score_tools.rst 803c4747b1764a44a19f473bc16f397c
 msgid "europepmc_disease_target_score tool specification"
-msgstr ""
+msgstr "europepmc_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:162
 #: a66d89a41f8447adbee5da5cbfde4390
 msgid "**Name**: ``europepmc_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``europepmc_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:164
 #: d5bfd1364cbb4f1b9e5a638e8071762d
 msgid ""
 "**Description**: Extract disease-target association scores from Europe PMC "
 "literature. This includes literature-based evidence."
-msgstr ""
+msgstr "**描述**：从 Europe PMC 文献中提取疾病-靶点关联评分。包括基于文献的证据。"
 
 #: ../../tools/disease_target_score_tools.rst:188
 #: 60632b8e4add40a3a789a7542ff0506a
 msgid "**eva_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**eva_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:190
 #: b525c4d6b1d24e3890ebd1903d50dc1d
 msgid ""
 "Extract disease-target association scores from EVA (European Variation "
 "Archive). EVA provides gen..."
-msgstr ""
+msgstr "从EVA（欧洲变异档案）提取疾病-靶点关联评分。EVA提供基因变异数据..."
 
 #: ../../tools/disease_target_score_tools.rst 5ad5497fe21e457da156710a6213beea
 msgid "eva_disease_target_score tool specification"
-msgstr ""
+msgstr "eva_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:196
 #: ab1cca502259429fb1feb5344d5dcbed
 msgid "**Name**: ``eva_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``eva_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:198
 #: 01e4d46781974e2b86c7958f7c0c324a
 msgid ""
 "**Description**: Extract disease-target association scores from EVA "
 "(European Variation Archive). EVA provides genetic variant data."
-msgstr ""
+msgstr "**描述**：从EVA（欧洲变异档案）提取疾病-靶点关联评分。EVA提供遗传变异数据。"
 
 #: ../../tools/disease_target_score_tools.rst:222
 #: 72dfde63b5db4c4eb86d528b055ec93e
 msgid "**eva_somatic_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**eva_somatic_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:224
 #: d1c3a0fc326b4685b607b64563e74265
 msgid ""
 "Extract disease-target association scores from EVA somatic mutations. This "
 "includes somatic varia..."
-msgstr ""
+msgstr "从EVA体细胞突变中提取疾病-靶点关联评分。此过程包括体细胞变异的..."
 
 #: ../../tools/disease_target_score_tools.rst d95a34141a144f6f806607ef2fbfd624
 msgid "eva_somatic_disease_target_score tool specification"
-msgstr ""
+msgstr "eva_somatic_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:230
 #: ab4ccc146b03418faea33838d874be11
 msgid "**Name**: ``eva_somatic_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``eva_somatic_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:232
 #: 31073a8f07514ba7b2c51ed9c174cd4c
 msgid ""
 "**Description**: Extract disease-target association scores from EVA somatic "
 "mutations. This includes somatic variant data."
-msgstr ""
+msgstr "**描述**：从EVA体细胞突变中提取疾病-靶点关联评分。包括体细胞变异数据。"
 
 #: ../../tools/disease_target_score_tools.rst:256
 #: 39fcd01cf3af4ac984add8fb8506f3c4
 msgid ""
 "**expression_atlas_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**expression_atlas_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:258
 #: ecb04fc04d14470f8763249e62b218f8
 msgid ""
 "Extract disease-target association scores from Expression Atlas. This "
 "provides gene expression data."
-msgstr ""
+msgstr "从 Expression Atlas 提取疾病-靶点关联评分。该数据提供基因表达信息。"
 
 #: ../../tools/disease_target_score_tools.rst 99995619499549608ae782167d197138
 msgid "expression_atlas_disease_target_score tool specification"
-msgstr ""
+msgstr "expression_atlas_disease_target_score 工具规范"
 
 #: ../../tools/disease_target_score_tools.rst:264
 #: f011d30ec15b4cf5abd39be85c438477
 msgid "**Name**: ``expression_atlas_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``expression_atlas_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:266
 #: f1a8194f3c26407b92bdf2cbd7116af6
 msgid ""
 "**Description**: Extract disease-target association scores from Expression "
 "Atlas. This provides gene expression data."
-msgstr ""
+msgstr "**描述**：从 Expression Atlas 提取疾病-靶点关联评分。该数据提供基因表达信息。"
 
 #: ../../tools/disease_target_score_tools.rst:290
 #: 810aa0c6ad034de0ad9379f019c5f939
 msgid ""
 "**genomics_england_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**genomics_england_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:292
 #: 7ab9b99309614d618d2dce25b677bbbb
 msgid ""
 "Extract disease-target association scores from Genomics England data. This "
 "includes clinical geno..."
-msgstr ""
+msgstr "从Genomics England数据中提取疾病-靶点关联评分。此过程包括临床基因型..."
 
 #: ../../tools/disease_target_score_tools.rst 90762942fe524635acbf29c1c9d70281
 msgid "genomics_england_disease_target_score tool specification"
-msgstr ""
+msgstr "genomics_england_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:298
 #: abb2fd9db75941eebea3b4a745119943
 msgid "**Name**: ``genomics_england_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``genomics_england_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:300
 #: 77c8691a0a4e432ab24dafc5fb6586fc
 msgid ""
 "**Description**: Extract disease-target association scores from Genomics "
 "England data. This includes clinical genomics evidence."
-msgstr ""
+msgstr "**描述**：从Genomics England数据中提取疾病-靶点关联评分。包括临床基因组学证据。"
 
 #: ../../tools/disease_target_score_tools.rst:324
 #: edd2da3613244e8389aafb6f5cf07965
 msgid "**reactome_disease_target_score** (Type: DiseaseTargetScoreTool)"
-msgstr ""
+msgstr "**reactome_disease_target_score**（类型：DiseaseTargetScoreTool）"
 
 #: ../../tools/disease_target_score_tools.rst:326
 #: 712cd23548a54eab85ffd290c48887b0
 msgid ""
 "Extract disease-target association scores from Reactome pathway data. This "
 "includes pathway-based..."
-msgstr ""
+msgstr "从Reactome通路数据中提取疾病-靶点关联评分。此过程包括基于通路的..."
 
 #: ../../tools/disease_target_score_tools.rst b6d30b1a71f447cdbced3466282284d6
 msgid "reactome_disease_target_score tool specification"
-msgstr ""
+msgstr "reactome_disease_target_score 工具规格说明"
 
 #: ../../tools/disease_target_score_tools.rst:332
 #: b55250aa2eb14c779f61dbf192ab0e5c
 msgid "**Name**: ``reactome_disease_target_score``"
-msgstr ""
+msgstr "**名称**：``reactome_disease_target_score``"
 
 #: ../../tools/disease_target_score_tools.rst:334
 #: 6bc46a66ea1f4dc382903e17e9fcac1a
 msgid ""
 "**Description**: Extract disease-target association scores from Reactome "
 "pathway data. This includes pathway-based evidence."
-msgstr ""
+msgstr "**描述**：从Reactome通路数据中提取疾病-靶点关联评分。包括基于通路的证据。"
 
 #: ../../tools/disease_target_score_tools.rst:358
 #: e6455718f61b4290bcfacd17b3f33892
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/disease_target_score_tools.rst:360
 #: 63852d4b19114920b888ba678264a6d3
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/disease_target_score_tools.rst:361
 #: ad94cb115d584b43b1e0a7ca23690876
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

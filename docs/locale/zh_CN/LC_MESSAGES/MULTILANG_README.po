@@ -55,7 +55,7 @@ msgstr ""
 #: ../../MULTILANG_README.md:12 ../../MULTILANG_README.md:163
 #: 5d82d5e9afdc46999e99230fa7c18ebd c4cb46c43332477bac68ae949d6aa096
 msgid "🚀 快速开始"
-msgstr ""
+msgstr "🚀 快速入门"
 
 #: ../../MULTILANG_README.md:14 da50e826b7e7435ab196cf17943b2903
 msgid "方法 1: 使用交互式脚本（推荐）"

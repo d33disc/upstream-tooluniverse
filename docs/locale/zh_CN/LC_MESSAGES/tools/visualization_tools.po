@@ -349,143 +349,143 @@ msgstr "**描述**：获取有关 OpenCV-Python（计算机视觉库）的全面
 
 #: ../../tools/visualization_tools.rst:250 30830269d9544063b4b59cee17dcb215
 msgid "**get_plantcv_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_plantcv_info**（类型：PackageTool）"
 
 #: ../../tools/visualization_tools.rst:252 c704d0b7a2bd4663815e6ea20ebbd426
 msgid ""
 "Get comprehensive information about PlantCV – plant phenotyping with image "
 "analysis"
-msgstr ""
+msgstr "获取关于 PlantCV —— 基于图像分析的植物表型测定的全面信息"
 
 #: ../../tools/visualization_tools.rst 1f497135d1a94816a8f90b086f9038d3
 msgid "get_plantcv_info tool specification"
-msgstr ""
+msgstr "get_plantcv_info 工具规格说明"
 
 #: ../../tools/visualization_tools.rst:258 f1c773098f3f49dabee99f0a6f2efdb3
 msgid "**Name**: ``get_plantcv_info``"
-msgstr ""
+msgstr "**名称**：``get_plantcv_info``"
 
 #: ../../tools/visualization_tools.rst:260 f8c7d11015804847aab8d98094962a1b
 msgid ""
 "**Description**: Get comprehensive information about PlantCV – plant "
 "phenotyping with image analysis"
-msgstr ""
+msgstr "**描述**：获取关于PlantCV——基于图像分析的植物表型测定的全面信息"
 
 #: ../../tools/visualization_tools.rst:264 4504ed515f634302aaa42cea725ffbec
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PlantCV"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的 PlantCV 信息类型"
 
 #: ../../tools/visualization_tools.rst:281 62df83efe6ea437a93ee4cf4037d7e9a
 msgid "**get_plotly_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_plotly_info**（类型：PackageTool）"
 
 #: ../../tools/visualization_tools.rst:283 fe90872782394f2d9d917a9fa2a7454a
 msgid ""
 "Get information about the plotly package. Interactive plotting library for "
 "Python"
-msgstr ""
+msgstr "获取有关 plotly 包的信息。Python 的交互式绘图库。"
 
 #: ../../tools/visualization_tools.rst 2d588c1adc2641c09e00392b57ad6d7a
 msgid "get_plotly_info tool specification"
-msgstr ""
+msgstr "get_plotly_info 工具规格说明"
 
 #: ../../tools/visualization_tools.rst:289 a31fcb1299ca435a9ad5b7a7dcd88a5a
 msgid "**Name**: ``get_plotly_info``"
-msgstr ""
+msgstr "**名称**：``get_plotly_info``"
 
 #: ../../tools/visualization_tools.rst:291 98741b1f694d49c4b5cca2f16adafe6b
 msgid ""
 "**Description**: Get information about the plotly package. Interactive "
 "plotting library for Python"
-msgstr ""
+msgstr "**描述**：获取有关 plotly 包的信息。Python 的交互式绘图库。"
 
 #: ../../tools/visualization_tools.rst:310 d32817eb244d43f0a1f22119ee0bf42c
 msgid "**get_pyvis_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyvis_info**（类型：PackageTool）"
 
 #: ../../tools/visualization_tools.rst:312 ed03f5175a2f4ea4b5733b1e7205aed6
 msgid ""
 "Get information about the pyvis package. Python library for visualizing "
 "networks"
-msgstr ""
+msgstr "获取有关 pyvis 包的信息。用于可视化网络的 Python 库"
 
 #: ../../tools/visualization_tools.rst 21feec7b2fc84a49aabea8754f10334b
 msgid "get_pyvis_info tool specification"
-msgstr ""
+msgstr "get_pyvis_info 工具规格说明"
 
 #: ../../tools/visualization_tools.rst:318 b61f4b57d3e7463bade51ae5d45eae0f
 msgid "**Name**: ``get_pyvis_info``"
-msgstr ""
+msgstr "**名称**：``get_pyvis_info``"
 
 #: ../../tools/visualization_tools.rst:320 8bb141ff7cc7480d9f3722a48f7246ed
 msgid ""
 "**Description**: Get information about the pyvis package. Python library for"
 " visualizing networks"
-msgstr ""
+msgstr "**描述**：获取有关 pyvis 包的信息。用于可视化网络的 Python 库"
 
 #: ../../tools/visualization_tools.rst:339 af1ae8880f914d8abcba619ddc824aca
 msgid "**get_scikit_image_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scikit_image_info**（类型：PackageTool）"
 
 #: ../../tools/visualization_tools.rst:341 7427a8ca452b426baf60f7f052c6c3d5
 msgid ""
 "Get comprehensive information about scikit-image – image processing in "
 "Python"
-msgstr ""
+msgstr "获取关于 scikit-image —— Python 图像处理的全面信息"
 
 #: ../../tools/visualization_tools.rst 5cd27d0f0b8643b9af8ba3647b592f93
 msgid "get_scikit_image_info tool specification"
-msgstr ""
+msgstr "get_scikit_image_info 工具规格说明"
 
 #: ../../tools/visualization_tools.rst:347 db57fe144dbe4461be2b22df2f36e081
 msgid "**Name**: ``get_scikit_image_info``"
-msgstr ""
+msgstr "**名称**：``get_scikit_image_info``"
 
 #: ../../tools/visualization_tools.rst:349 428378454a724504bc6f6d9950c8f1ea
 msgid ""
 "**Description**: Get comprehensive information about scikit-image – image "
 "processing in Python"
-msgstr ""
+msgstr "**描述**：获取有关 scikit-image —— Python 图像处理的全面信息"
 
 #: ../../tools/visualization_tools.rst:353 17ba9bf82dd64e91a074cc7abcaef68e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "scikit-image"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 scikit-image 的信息类型"
 
 #: ../../tools/visualization_tools.rst:370 fd7f427b96004f8da97a65cbf4f77081
 msgid "**get_seaborn_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_seaborn_info**（类型：PackageTool）"
 
 #: ../../tools/visualization_tools.rst:372 2dc439e3e30842d492363a76edb4b5c3
 msgid ""
 "Get comprehensive information about Seaborn – statistical data visualization"
-msgstr ""
+msgstr "获取关于 Seaborn —— 统计数据可视化的全面信息"
 
 #: ../../tools/visualization_tools.rst a3d5a24501c6453b91893fa1bd62442f
 msgid "get_seaborn_info tool specification"
-msgstr ""
+msgstr "get_seaborn_info 工具规格说明"
 
 #: ../../tools/visualization_tools.rst:378 2912450855494d25bd2dd1db979052be
 msgid "**Name**: ``get_seaborn_info``"
-msgstr ""
+msgstr "**名称**：``get_seaborn_info``"
 
 #: ../../tools/visualization_tools.rst:380 ee1612cacf6d446fb1ac30ae8d6820fe
 msgid ""
 "**Description**: Get comprehensive information about Seaborn – statistical "
 "data visualization"
-msgstr ""
+msgstr "**描述**：获取关于 Seaborn —— 统计数据可视化的全面信息"
 
 #: ../../tools/visualization_tools.rst:400 7d1e0a8ce6374b548e76b1ab3124daad
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/visualization_tools.rst:402 de27fce894154573a01475caa4f646d1
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/visualization_tools.rst:403 3bb6a26add344e428f6471928792ac8a
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

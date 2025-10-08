@@ -155,163 +155,163 @@ msgstr "警告级别"
 
 #: ../../guide/logging.rst:113 46987f0c8d9443d3a9daef60cd97abde
 msgid "**When to use**: Something unexpected happened but execution continues"
-msgstr ""
+msgstr "**使用时机**：发生了意外情况，但执行仍然继续进行"
 
 #: ../../guide/logging.rst:115 2f91c36df6b848baa9be1063686b94be
 msgid "API rate limiting"
-msgstr ""
+msgstr "API 速率限制"
 
 #: ../../guide/logging.rst:116 4625343b15dd47a9b8348ae2ef49c69a
 msgid "Deprecated tool usage"
-msgstr ""
+msgstr "已弃用的工具使用"
 
 #: ../../guide/logging.rst:117 c10ff9135c8d4066b0566121b4f9a95e
 msgid "Missing optional parameters"
-msgstr ""
+msgstr "缺少可选参数"
 
 #: ../../guide/logging.rst:118 773df9df5f53413e9d68502e1c66949f
 msgid "Fallback operations"
-msgstr ""
+msgstr "回退操作"
 
 #: ../../guide/logging.rst:135 fcb930edd36f4f1aa33c069fa7eb7ac2
 msgid "ERROR Level"
-msgstr ""
+msgstr "错误级别"
 
 #: ../../guide/logging.rst:137 42c1e66fd5b449c1a5fbb5d70e542fcc
 msgid "**When to use**: Serious problems that prevent specific operations"
-msgstr ""
+msgstr "**使用时机**：导致特定操作无法进行的严重问题"
 
 #: ../../guide/logging.rst:139 511499bb15454cd19142695a7a88840e
 msgid "Tool execution failures"
-msgstr ""
+msgstr "工具执行失败"
 
 #: ../../guide/logging.rst:140 148f6dfbc4eb488689bd25cf200811d3
 msgid "API authentication errors"
-msgstr ""
+msgstr "API 认证错误"
 
 #: ../../guide/logging.rst:141 87dac8c2cf334edaacb774b299f18023
 msgid "Invalid parameters"
-msgstr ""
+msgstr "无效参数"
 
 #: ../../guide/logging.rst:142 22bf454e985245828aad0286109e51ab
 msgid "Network timeouts"
-msgstr ""
+msgstr "网络超时"
 
 #: ../../guide/logging.rst:152 4b17c6e04f3a4f53bad51ff1561e47ad
 msgid "CRITICAL Level"
-msgstr ""
+msgstr "关键级别"
 
 #: ../../guide/logging.rst:154 88e9362b05b4462db7d8082b77f0fd05
 msgid "**When to use**: Very serious errors that might stop the program"
-msgstr ""
+msgstr "**使用时机**：可能导致程序停止的严重错误"
 
 #: ../../guide/logging.rst:156 a712fb1424fd45b4bf60d3fddd3601ad
 msgid "System-level failures"
-msgstr ""
+msgstr "系统级故障"
 
 #: ../../guide/logging.rst:157 3f0e651c87824e61a165afa7ba4ac53e
 msgid "Configuration corruption"
-msgstr ""
+msgstr "配置损坏"
 
 #: ../../guide/logging.rst:158 94e57e1a1add4891ab0411b404a187be
 msgid "Resource exhaustion"
-msgstr ""
+msgstr "资源耗尽"
 
 #: ../../guide/logging.rst:167 caa1259b72be47578f079f159bd362a6
 msgid "⚙️ Configuration Methods"
-msgstr ""
+msgstr "⚙️ 配置方法"
 
 #: ../../guide/logging.rst:170 10b574e148e4489ebdab287f8ea524fb
 msgid "Method 1: Environment Variable (Recommended)"
-msgstr ""
+msgstr "方法一：环境变量（推荐）"
 
 #: ../../guide/logging.rst:172 da384668338740dca3f1484ee93de172
 msgid "Set the log level before starting your application:"
-msgstr ""
+msgstr "在启动应用程序之前设置日志级别："
 
 #: ../../guide/logging.rst:198 476d63b3b6a649ad9dfdc211c30e6623
 msgid "Method 2: Global Configuration"
-msgstr ""
+msgstr "方法二：全局配置"
 
 #: ../../guide/logging.rst:200 fa675e237bd443749fcfb8b2b271e7e9
 msgid "Set logging level programmatically for all ToolUniverse operations:"
-msgstr ""
+msgstr "以编程方式设置所有 ToolUniverse 操作的日志级别："
 
 #: ../../guide/logging.rst:214 a8745c4db3e54d66a16333c6e543cd70
 msgid "Method 3: Per-Instance Configuration"
-msgstr ""
+msgstr "方法三：逐实例配置"
 
 #: ../../guide/logging.rst:216 4a126cebfccd46988217c9d9f2a837f5
 msgid "Set different log levels for different ToolUniverse instances:"
-msgstr ""
+msgstr "为不同的 ToolUniverse 实例设置不同的日志级别："
 
 #: ../../guide/logging.rst:230 eb8a22ba295f4e9490e6ddc9e2d6896a
 msgid "Method 4: Dynamic Level Changes"
-msgstr ""
+msgstr "方法四：动态电平变化"
 
 #: ../../guide/logging.rst:232 ccb8d8c40aac4a8aaa97f1ef37aa74f6
 msgid "Change log level during execution:"
-msgstr ""
+msgstr "执行过程中更改日志级别："
 
 #: ../../guide/logging.rst:253 eb95a7ad1e7b4a9882d0d9cfce4700fe
 msgid "🛠️ Custom Logging in Your Code"
-msgstr ""
+msgstr "🛠️ 在代码中实现自定义日志记录"
 
 #: ../../guide/logging.rst:256 d6f9d194a3df46c1b988d660088ca9c6
 msgid "Using ToolUniverse Logger in Your Scripts"
-msgstr ""
+msgstr "在您的脚本中使用 ToolUniverse Logger"
 
 #: ../../guide/logging.rst:286 01ba3718c35648ffb9f5496be612f1ca
 msgid "Convenience Functions"
-msgstr ""
+msgstr "便捷功能"
 
 #: ../../guide/logging.rst:288 923addb5363f4f479a21196eb832bd03
 msgid "ToolUniverse provides convenience functions for quick logging:"
-msgstr ""
+msgstr "ToolUniverse 提供便捷的快速日志记录功能："
 
 #: ../../guide/logging.rst:303 9c22dbe133ef46b2b014710833be5086
 msgid "📋 Common Logging Patterns"
-msgstr ""
+msgstr "📋 常见日志记录模式"
 
 #: ../../guide/logging.rst:306 1abb47c848e24863a06c22ef5030b485
 msgid "Research Workflow Logging"
-msgstr ""
+msgstr "研究工作流程日志记录"
 
 #: ../../guide/logging.rst:345 5e6efd7077d44b29b558b0f1f8447025
 msgid "Debugging Failed Tools"
-msgstr ""
+msgstr "调试失败的工具"
 
 #: ../../guide/logging.rst:371 4f4813bd57f64f17bd4027fc3a584c78
 msgid "Batch Processing with Progress Tracking"
-msgstr ""
+msgstr "批量处理与进度跟踪"
 
 #: ../../guide/logging.rst:408 52cd4648190f4ac897cffb4ac1a07a1f
 msgid "🎯 Best Practices"
-msgstr ""
+msgstr "🎯 最佳实践"
 
 #: ../../guide/logging.rst:411 0d86dea711f74d6f80d4685d75cd50e9
 msgid "Choose Appropriate Log Levels"
-msgstr ""
+msgstr "选择合适的日志级别"
 
 #: ../../guide/logging.rst:413 c24b202297214dc8a2edae512f25b3d4
 msgid "**Production**: Use INFO or WARNING to reduce noise"
-msgstr ""
+msgstr "**生产环境**：使用 INFO 或 WARNING 级别以减少噪音"
 
 #: ../../guide/logging.rst:414 accc48d30131427b92d549a27d66d245
 msgid "**Development**: Use DEBUG for detailed diagnostics"
-msgstr ""
+msgstr "**开发**：使用 DEBUG 进行详细诊断"
 
 #: ../../guide/logging.rst:415 c7e98a1edaec4e46ab169615f33af584
 msgid "**CI/CD**: Use ERROR to only show failures"
-msgstr ""
+msgstr "**CI/CD**：使用 ERROR 仅显示失败信息"
 
 #: ../../guide/logging.rst:416 b418b27e0f9443ffa9a3a0fbf954c56c
 msgid "**Demonstrations**: Use PROGRESS to show workflow steps"
-msgstr ""
+msgstr "**演示**：使用 PROGRESS 显示工作流程步骤"
 
 #: ../../guide/logging.rst:432 d776920511d84746b10f85ea7cad8095
 msgid "Structure Your Log Messages"
-msgstr ""
+msgstr "构建您的日志消息结构"
 
 #: ../../guide/logging.rst:434 0cdd6d4c67774af1bc700a82d2df56ca
 msgid "Use consistent formatting for better readability:"

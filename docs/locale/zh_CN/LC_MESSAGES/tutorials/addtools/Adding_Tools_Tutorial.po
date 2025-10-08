@@ -7,284 +7,285 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:1
 #: 939f305155d44ec58011ed5eec6ebd31
 msgid "Adding Tools to ToolUniverse - Complete Tutorial"
-msgstr ""
+msgstr "将工具添加到 ToolUniverse —— 完整教程"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:3
 #: 3102f4f3a0f14151821778a8db7832fc
 msgid ""
-"This tutorial covers everything you need to know about adding custom "
-"tools to ToolUniverse using the new decorator-based auto-registration "
-"system."
-msgstr ""
+"This tutorial covers everything you need to know about adding custom tools "
+"to ToolUniverse using the new decorator-based auto-registration system."
+msgstr "本教程涵盖了使用基于装饰器的新自动注册系统向 ToolUniverse 添加自定义工具所需了解的所有内容。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:5
 #: 24097036973848818e7e6de80eff8f35
 msgid "Table of Contents"
-msgstr ""
+msgstr "目录"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:6
 #: e772b136de5a4cf9ae17d5da4f9940d5
 msgid "[Overview](#overview)"
-msgstr ""
+msgstr "[概述](#overview)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:7
 #: 585a439ca1194c7c94b879ec81ccc904
 msgid "[Development Environment Setup](#development-environment-setup)"
-msgstr ""
+msgstr "[开发环境设置](#development-environment-setup)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:8
 #: 9e51f61237e34ceeb9967dfeb69f37fd
 msgid "[Quick Start](#quick-start)"
-msgstr ""
+msgstr "[快速开始](#quick-start)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:9
 #: 7e302edaef9143a4813a1a2b9cab24f8
 msgid ""
 "[Method 1: Decorator Registration (Recommended)](#method-1-decorator-"
 "registration-recommended)"
-msgstr ""
+msgstr "[方法一：装饰器注册（推荐）](#method-1-decorator-registration-recommended)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:10
 #: e2487c9058f044a0b3176b4b6a78702e
 msgid "[Method 2: Manual Registration](#method-2-manual-registration)"
-msgstr ""
+msgstr "[方法二：手动注册](#method-2-manual-registration)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:11
 #: f72e8ebad59b4e97be838edfdc014681
 msgid "[Tool Configuration](#tool-configuration)"
-msgstr ""
+msgstr "[工具配置](#tool-configuration)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:12
 #: 2abd5d201832429a8c2724c218091771
 msgid "[Real-World Examples](#real-world-examples)"
-msgstr ""
+msgstr "[实际案例](#real-world-examples)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:13
 #: 0a453ba313264dfba6113ce907b92efa
 msgid "[Best Practices](#best-practices)"
-msgstr ""
+msgstr "[最佳实践](#best-practices)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:14
 #: f74ebb5dfc3243a7845b7e5e9e81c220
 msgid "[Troubleshooting](#troubleshooting)"
-msgstr ""
+msgstr "[故障排除](#troubleshooting)"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:16
 #: cf2fe9dde12f461c861bb11177f6e84a
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:18
 #: 7ddbc9351a9549dd806270c080d4a6af
 msgid ""
-"ToolUniverse now supports **automatic tool discovery** through "
-"decorators. When you add a new tool, it's automatically registered and "
-"available without needing to manually edit core files."
-msgstr ""
+"ToolUniverse now supports **automatic tool discovery** through decorators. "
+"When you add a new tool, it's automatically registered and available without"
+" needing to manually edit core files."
+msgstr "ToolUniverse 现在通过装饰器支持**自动工具发现**功能。添加新工具时，系统会自动注册并使其可用，无需手动编辑核心文件。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:20
 #: 4477bf5c422e4c2fa35423b4995532b3
 msgid "What You Can Add"
-msgstr ""
+msgstr "您可以添加"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:21
 #: b67b81c7f9984be581826d591a857d54
 msgid "Custom API wrappers"
-msgstr ""
+msgstr "自定义 API 封装"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:22
 #: 302a544d95cd4a9f931bee0490fe36e8
 msgid "Data processing tools"
-msgstr ""
+msgstr "数据处理工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:23
 #: 4800a89a9a4c404c92bd8d02a7c2dc60
 msgid "File manipulation utilities"
-msgstr ""
+msgstr "文件操作工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:24
 #: 9689239d7d0a41009771f19d9bd174f5
 msgid "External service integrations"
-msgstr ""
+msgstr "外部服务集成"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:25
 #: 303996ea0c3e4d10ab919445226b95d8
 msgid "Analysis and computation tools"
-msgstr ""
+msgstr "分析与计算工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:27
 #: 894b20e59e0f418a8721b1362df3bbfd
 msgid "What Changed"
-msgstr ""
+msgstr "变更内容"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:28
 #: 8ba24775972e48a8861865c8182226d2
 msgid "❌ **Before**: Manual imports and mappings in `execute_function.py`"
-msgstr ""
+msgstr "❌ **之前**：在 `execute_function.py` 中的手动导入和映射"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:29
 #: f93311b614424c97bbe18d9938f21010
 msgid "✅ **Now**: Simple decorator registration with auto-discovery"
-msgstr ""
+msgstr "✅ **现在**：使用自动发现功能进行简单的装饰器注册"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:31
 #: 7596222454ef46b2ac69e088e11f4df0
 msgid "Development Environment Setup"
-msgstr ""
+msgstr "开发环境设置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:33
 #: 050edebd08e44e76bdc5e58edd805e41
 msgid ""
-"Before adding tools, ensure you have the proper development environment "
-"set up:"
-msgstr ""
+"Before adding tools, ensure you have the proper development environment set "
+"up:"
+msgstr "在添加工具之前，请确保已正确设置开发环境："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:35
 #: 459d3c6955314c8394385248ea61c03d
 msgid "1. Clone and Install ToolUniverse"
-msgstr ""
+msgstr "1. 克隆并安装 ToolUniverse"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:46
 #: 02dcdb4d57f54d60b3b175c807fbe051
 msgid "2. Set Up Pre-commit Hooks (Recommended)"
-msgstr ""
+msgstr "2. 设置预提交钩子（推荐）"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:48
 #: 4c50af3ba4ac4c3d8e0cd999be14fe8e
 msgid "**Automatic Setup:**"
-msgstr ""
+msgstr "**自动设置：**"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:54
 #: 697f43b124994d348d4704d13f364887
 msgid "**Manual Setup:**"
-msgstr ""
+msgstr "**手动设置：**"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:66
 #: ab2a983024c94d63845491a5a7b4c8d3
 msgid "**Pre-commit Benefits:**"
-msgstr ""
+msgstr "**预提交的优势：**"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:67
 #: 08629c7c56c14642b8cab9ead105fdf3
 msgid "✅ **Automatic code formatting** with Black"
-msgstr ""
+msgstr "✅ **使用 Black 进行自动代码格式化**"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:68
 #: 49fb3511944c49198fa207264044ff71
 msgid "✅ **Code linting** with flake8 and ruff"
-msgstr ""
+msgstr "✅ 使用 flake8 和 ruff 进行代码静态检查"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:69
 #: ca0fc293b6004e47b1aafd87db6f29ae
 msgid "✅ **Import cleanup** with autoflake"
-msgstr ""
+msgstr "✅ 使用 autoflake 进行 **导入清理**"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:70
 #: fd21bd44f0e24aeda236a4caf131b29e
 msgid "✅ **File validation** (YAML, TOML, AST checks)"
-msgstr ""
+msgstr "✅ **文件验证**（YAML、TOML、AST 检查）"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:71
 #: 1edc8b699569411bb62aa96527d8f46e
 msgid "✅ **Runs on every commit** to ensure code quality"
-msgstr ""
+msgstr "✅ **在每次提交时运行**，以确保代码质量"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:73
 #: d0185fb47aef4df7b784c45c5c24e2c8
 msgid "3. Verify Installation"
-msgstr ""
+msgstr "3. 验证安装"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:83
 #: 0bc8547cc405465fb06d1e0b8a9fa0d7
 msgid "Quick Start"
-msgstr ""
+msgstr "快速入门"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:85
 #: 9938e795a93347649584a298bc3e7d04
 msgid "Here's the fastest way to add a new tool:"
-msgstr ""
+msgstr "以下是添加新工具的最快方法："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:128
 #: bb7797c196a74da9a656983538fe12cc
 msgid "That's it! Your tool is automatically discovered and ready to use."
-msgstr ""
+msgstr "就是这样！您的工具已被自动发现，随时可用。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:130
 #: 96502d5dbf52415784f13b646514773d
 msgid "Method 1: Decorator Registration (Recommended)"
-msgstr ""
+msgstr "方法一：装饰器注册（推荐）"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:132
 #: d4f0de5b0dda4f7cb0891bb0f84aaf2d
-msgid "The decorator approach is the simplest and most powerful way to add tools."
-msgstr ""
+msgid ""
+"The decorator approach is the simplest and most powerful way to add tools."
+msgstr "装饰器方法是添加工具最简单且最强大的方式。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:134
 #: 85ab993d1ef84807bc8baafcc638a22f
 msgid "Basic Structure"
-msgstr ""
+msgstr "基本结构"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:150
 #: b370246f2ce64483bec5b7e8b0a3b40a
 msgid "Step-by-Step Tutorial"
-msgstr ""
+msgstr "逐步教程"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:152
 #: 300a11308bb442038d57e07c55faa66e
 msgid "1. Create Your Tool File"
-msgstr ""
+msgstr "1. 创建您的工具文件"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:153
 #: edf8c9552c0a4bcbade6621997d9ecc4
-msgid "Create a new Python file ending with `_tool.py` (e.g., `weather_tool.py`):"
-msgstr ""
+msgid ""
+"Create a new Python file ending with `_tool.py` (e.g., `weather_tool.py`):"
+msgstr "创建一个以 `_tool.py` 结尾的新 Python 文件（例如，`weather_tool.py`）："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:215
 #: 9a327738c8b54c5187459bdd9679f422
 msgid "2. Place in ToolUniverse Package"
-msgstr ""
+msgstr "2. 放置于 ToolUniverse 软件包中"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:216
 #: 9b5f1ceabea14f68b6b660aa37f13259
 msgid "Move your file to the ToolUniverse source directory:"
-msgstr ""
+msgstr "将您的文件移动到 ToolUniverse 源目录："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:221
 #: bc3a451ba41440d49406a6168b8401fa
 msgid "3. Use Your Tool"
-msgstr ""
+msgstr "3. 使用您的工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:222
 #: 0c9461d33a7c49caa05af04f1373beca
 msgid "Your tool is automatically discovered:"
-msgstr ""
+msgstr "您的工具已被自动发现："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:239
 #: f5c9328a4ce0475eb0e8bec97241bb46
 msgid "Configuration Options"
-msgstr ""
+msgstr "配置选项"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:241
 #: 885eb2371478455dba2c52136549799a
 msgid ""
-"The `config` parameter in the decorator supports all standard "
-"ToolUniverse configuration:"
+"The `config` parameter in the decorator supports all standard ToolUniverse "
+"configuration:"
 msgstr ""
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:278
@@ -554,7 +555,8 @@ msgstr ""
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:795
 #: d04b9fcd05644983b9edc41a98b36aba
-msgid "**Start Simple**: Begin with a basic tool using the quick start example"
+msgid ""
+"**Start Simple**: Begin with a basic tool using the quick start example"
 msgstr ""
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:796
@@ -609,4 +611,3 @@ msgid ""
 "maintaining all the power and flexibility of ToolUniverse. Happy tool "
 "building! 🛠️"
 msgstr ""
-

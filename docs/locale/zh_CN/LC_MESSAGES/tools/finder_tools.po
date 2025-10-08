@@ -194,43 +194,43 @@ msgstr ""
 msgid ""
 "``description`` (string) (required) The description of the tool capability "
 "required."
-msgstr ""
+msgstr "``description``（字符串）（必填）所需工具能力的描述。"
 
 #: ../../tools/finder_tools.rst:115 6bbf1dab4ee943cca9ab98eb75f227cf
 msgid "``limit`` (integer) (required) The number of tools to retrieve"
-msgstr ""
+msgstr "``limit``（整数）（必填）要检索的工具数量"
 
 #: ../../tools/finder_tools.rst:142 14c9f9c22143457ea53796d9a22f0b9e
 msgid "**Tool_RAG** (Type: ToolFinderEmbedding)"
-msgstr ""
+msgstr "**Tool_RAG**（类型：ToolFinderEmbedding）"
 
 #: ../../tools/finder_tools.rst:144 db5dbed2ab71495b93b3e70057845386
 msgid ""
 "Retrieve related tools from the toolbox based on the provided description"
-msgstr ""
+msgstr "根据提供的描述从工具箱中检索相关工具"
 
 #: ../../tools/finder_tools.rst ae22837c7e0b44a286d823c3ffd601a7
 msgid "Tool_RAG tool specification"
-msgstr ""
+msgstr "Tool_RAG 工具规格说明"
 
 #: ../../tools/finder_tools.rst:150 e6c7b11c6954461da8183ae5963fec1c
 msgid "**Name**: ``Tool_RAG``"
-msgstr ""
+msgstr "**名称**：``Tool_RAG``"
 
 #: ../../tools/finder_tools.rst:152 29c9287acfd74f4ba932bf445891bd1f
 msgid ""
 "**Description**: Retrieve related tools from the toolbox based on the "
 "provided description"
-msgstr ""
+msgstr "**描述**：根据提供的描述从工具箱中检索相关工具"
 
 #: ../../tools/finder_tools.rst:175 9beb0e91116a4573a1bfa9c57973a5a9
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/finder_tools.rst:177 dd54225d47a4497e85db11b3b27cb7f1
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/finder_tools.rst:178 294320efab1e44f282fdfa44ad33922f
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

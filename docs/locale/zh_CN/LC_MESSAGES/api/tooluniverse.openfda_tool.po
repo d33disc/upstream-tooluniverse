@@ -76,13 +76,13 @@ msgstr "属性名称与 openFDA 字段的映射。"
 #: 50049c75520141bc883f62e92773a5ab of
 #: tooluniverse.openfda_tool.map_properties_to_openfda_fields:6
 msgid "A dictionary with openFDA fields and corresponding values."
-msgstr ""
+msgstr "一个包含openFDA字段及其对应值的字典。"
 
 #: ced4ff92a99b4734b08f4e4e04575401 of
 #: tooluniverse.openfda_tool.extract_sentences_with_keywords:1
 msgid ""
 "Extracts sentences containing any of the specified keywords from the text."
-msgstr ""
+msgstr "从文本中提取包含任何指定关键词的句子。"
 
 #: 682cfaec02664779b6b1cf370ff39bd5 of
 #: tooluniverse.openfda_tool.extract_sentences_with_keywords:3
@@ -90,15 +90,20 @@ msgid ""
 "Parameters: - text (str): The input text from which to extract sentences. - "
 "keywords (list): A list of keywords to search for in the text."
 msgstr ""
+"参数：  \n"
+"- text (str)：输入的文本，用于提取句子。  \n"
+"- keywords (list)：在文本中搜索的关键词列表。"
 
 #: 768976d3fff44bdc9a1c4e04cf1d3c6b of
 #: tooluniverse.openfda_tool.extract_sentences_with_keywords:7
 msgid "Returns: - list: A list of sentences containing any of the keywords."
 msgstr ""
+"返回值：  \n"
+"- list：包含任意关键词的句子列表。"
 
 #: 45dfb4d896bc4e1bb98bb8f596a052db of tooluniverse.openfda_tool.FDATool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
 #: 55051c0265e543898677ae497bf7fa76 56f7a982a1e24b3582682a01238a51ba
 #: a34b26eb670c4aef848e94dd3a59d938 cfa43737285d49f6891c4aaad062ad6b of
@@ -107,7 +112,7 @@ msgstr ""
 #: tooluniverse.openfda_tool.FDADrugLabelSearchTool.run:1
 #: tooluniverse.openfda_tool.FDATool.run:1
 msgid "Execute the tool."
-msgstr ""
+msgstr "执行该工具。"
 
 #: 30841a7ce74940229fae3b48c0c61338 309bbdeb72214f71b9e55bbc24f2fed2
 #: 9c0e1a211fa644d1aa0567803b4311a5 e5b6b3ac43bb429e9e50a4c4e1284649 of
@@ -119,7 +124,7 @@ msgid ""
 "The default BaseTool implementation accepts an optional arguments mapping to"
 " align with most concrete tool implementations which expect a dictionary of "
 "inputs."
-msgstr ""
+msgstr "默认的 BaseTool 实现接受一个可选的参数映射，以便与大多数具体工具实现保持一致，这些工具通常期望输入为一个字典。"
 
 #: a4a06f030dec46cca01a2cbea0da8eaa f2aad7dd85904cc1980fce9afbf1d2ef
 #: f5b474ae16bf41a6a7b2b7bc801ae569 of

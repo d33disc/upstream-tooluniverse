@@ -288,25 +288,25 @@ msgstr "``cid``（整数）（必填）用于查询外部引用的化合物ID，
 msgid ""
 "``xref_types`` (array) (required) List of external database types to query, "
 "e.g., [\"RegistryID\", \"RN\", \"PubMedID\"]."
-msgstr ""
+msgstr "``xref_types``（数组）（必填）要查询的外部数据库类型列表，例如：[\"RegistryID\", \"RN\", \"PubMedID\"]。"
 
 #: ../../tools/pubchem_tools.rst:238 ce35bfa4b6dc466ba36aa196db33103b
 msgid "**PubChem_search_compounds_by_similarity** (Type: PubChemRESTTool)"
-msgstr ""
+msgstr "**PubChem_search_compounds_by_similarity**（类型：PubChemRESTTool）"
 
 #: ../../tools/pubchem_tools.rst:240 d8d77f53c22441dd9463c00604034cda
 msgid ""
 "Search by similarity (Tanimoto coefficient), returns CID list of compounds "
 "with similarity above ..."
-msgstr ""
+msgstr "按相似度搜索（Tanimoto系数），返回相似度高于…的化合物CID列表"
 
 #: ../../tools/pubchem_tools.rst cd22fe07d566468888edc4aae699fc41
 msgid "PubChem_search_compounds_by_similarity tool specification"
-msgstr ""
+msgstr "PubChem_search_compounds_by_similarity 工具规格说明"
 
 #: ../../tools/pubchem_tools.rst:246 bd188c6b43f94b458e2cca31033d249a
 msgid "**Name**: ``PubChem_search_compounds_by_similarity``"
-msgstr ""
+msgstr "**名称**：``PubChem_search_compounds_by_similarity``"
 
 #: ../../tools/pubchem_tools.rst:248 7307faab926d48b88f34054e0b5185a0
 msgid ""
@@ -314,55 +314,56 @@ msgid ""
 "list of compounds with similarity above threshold to given SMILES molecule, "
 "returns no more than 10 CIDs (MaxRecords=10)"
 msgstr ""
+"**描述**：通过相似度（Tanimoto系数）进行搜索，返回与给定SMILES分子相似度高于阈值的化合物CID列表，最多返回10个CID（MaxRecords=10）"
 
 #: ../../tools/pubchem_tools.rst:252 4e59bc3ad0c74066b51c6325c9b4dcf7
 msgid "``smiles`` (string) (required) SMILES expression of target molecule."
-msgstr ""
+msgstr "``smiles``（字符串）（必填）目标分子的SMILES表达式。"
 
 #: ../../tools/pubchem_tools.rst:255 4e544711f0d4431997006c6bc7522461
 #, python-format
 msgid ""
 "``threshold`` (number) (optional) Similarity threshold (between 0 and 1), "
 "e.g., 0.9 means 90% similarity."
-msgstr ""
+msgstr "``threshold``（数字）（可选）相似度阈值（介于0和1之间），例如，0.9表示90%的相似度。"
 
 #: ../../tools/pubchem_tools.rst:272 48024118ee6245b395436537e583b86a
 msgid "**PubChem_search_compounds_by_substructure** (Type: PubChemRESTTool)"
-msgstr ""
+msgstr "**PubChem_按子结构搜索化合物**（类型：PubChemRESTTool）"
 
 #: ../../tools/pubchem_tools.rst:274 ef835edd0cbb40159fccc452e1ad0599
 msgid ""
 "Search for all CIDs in PubChem that contain the given substructure (SMILES)."
-msgstr ""
+msgstr "在PubChem中搜索包含指定子结构（SMILES）的所有CID。"
 
 #: ../../tools/pubchem_tools.rst 353d903fce1e4020b434839a974122e8
 msgid "PubChem_search_compounds_by_substructure tool specification"
-msgstr ""
+msgstr "PubChem_按子结构搜索化合物 工具规范"
 
 #: ../../tools/pubchem_tools.rst:280 ab6607301e86447898e536374286ccbd
 msgid "**Name**: ``PubChem_search_compounds_by_substructure``"
-msgstr ""
+msgstr "**名称**：``PubChem_search_compounds_by_substructure``"
 
 #: ../../tools/pubchem_tools.rst:282 2af417c714a44cb993221d1ba5082602
 msgid ""
 "**Description**: Search for all CIDs in PubChem that contain the given "
 "substructure (SMILES)."
-msgstr ""
+msgstr "**描述**：在PubChem中搜索包含指定子结构（SMILES）的所有CID。"
 
 #: ../../tools/pubchem_tools.rst:286 094a08260ad8451294a9c87eabcb9f46
 msgid ""
 "``smiles`` (string) (required) SMILES of substructure (e.g., \"c1ccccc1\" "
 "corresponds to benzene ring)."
-msgstr ""
+msgstr "``smiles``（字符串）（必填）子结构的SMILES表示（例如，“c1ccccc1”对应苯环）。"
 
 #: ../../tools/pubchem_tools.rst:303 3cf060266d1d413887e96803cf269a75
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/pubchem_tools.rst:305 550e0bbc53ea4a79875323d4f6697f7b
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/pubchem_tools.rst:306 9428ac72031d4ccb9a5d298816f6be3d
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -206,147 +206,148 @@ msgstr "**描述**：从UniProtKB条目中提取功能注释（注释类型 = �
 
 #: ../../tools/uniprot_tools.rst:138 4f471fe2251540e08a721b98eebdfe09
 msgid "**UniProt_get_isoform_ids_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_isoform_ids_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:140 df4b20852b114230afe398638a678c89
 msgid "Extract all splice isoform IDs from UniProtKB entry (isoformNames)."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取所有剪接异构体 ID（isoformNames）。"
 
 #: ../../tools/uniprot_tools.rst b6b081681280495284c940b0d2679b6f
 msgid "UniProt_get_isoform_ids_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_isoform_ids_by_accession 工具规范"
 
 #: ../../tools/uniprot_tools.rst:146 d6afd4252c57494c83a4ac9e413b7502
 msgid "**Name**: ``UniProt_get_isoform_ids_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_isoform_ids_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:148 8f2ddf48b05a4742bcc24c25d62d9e53
 msgid ""
 "**Description**: Extract all splice isoform IDs from UniProtKB entry "
 "(isoformNames)."
-msgstr ""
+msgstr "**描述**：从 UniProtKB 条目中提取所有剪接异构体 ID（isoformNames）。"
 
 #: ../../tools/uniprot_tools.rst:169 b2f8af15f9b24dc99c3742390828ca37
 msgid "**UniProt_get_organism_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_organism_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:171 31f4cf4f32054ff7814624158cd57ccc
 msgid "Extract the organism scientific name from UniProtKB entry."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取生物体的学名。"
 
 #: ../../tools/uniprot_tools.rst 4ec59b39cf8c4efaa4d48ee5e4626e11
 msgid "UniProt_get_organism_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_organism_by_accession 工具规格说明"
 
 #: ../../tools/uniprot_tools.rst:177 0348f6a461ff4cc48d0df2e6b104fc15
 msgid "**Name**: ``UniProt_get_organism_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_organism_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:179 d0666ffc8c8c4a6e88a0419fe660b6f9
 msgid ""
 "**Description**: Extract the organism scientific name from UniProtKB entry."
-msgstr ""
+msgstr "**描述**：从 UniProtKB 条目中提取生物体学名。"
 
 #: ../../tools/uniprot_tools.rst:200 5ec45aa220ac41059ee6afedda9095a3
 msgid "**UniProt_get_ptm_processing_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_ptm_processing_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:202 c6970ece4d6b48a0aa1bd7bbe374e533
 msgid ""
 "Extract all PTM and processing sites from UniProtKB entry (feature type = "
 "MODIFIED RESIDUE or SIG..."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取所有 PTM 和加工位点（特征类型 = MODIFIED RESIDUE 或 SIG...）"
 
 #: ../../tools/uniprot_tools.rst a1c24c7ab8994355972819d05c97b63e
 msgid "UniProt_get_ptm_processing_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_ptm_processing_by_accession 工具规格说明"
 
 #: ../../tools/uniprot_tools.rst:208 e91cbce8988749ce8b4b7ff73210b7a4
 msgid "**Name**: ``UniProt_get_ptm_processing_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_ptm_processing_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:210 af8f81cce9f143fe8f0727ca95292e19
 msgid ""
 "**Description**: Extract all PTM and processing sites from UniProtKB entry "
 "(feature type = MODIFIED RESIDUE or SIGNAL, etc.)."
 msgstr ""
+"**描述**：从 UniProtKB 条目中提取所有 PTM 及加工位点（特征类型 = MODIFIED RESIDUE 或 SIGNAL 等）。"
 
 #: ../../tools/uniprot_tools.rst:231 44ffad1aa60d4729a12fc0b428b41b87
 msgid "**UniProt_get_recommended_name_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_recommended_name_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:233 5000781165b44b93a4eb4c8237f3d510
 msgid ""
 "Extract the recommended protein name (recommendedName) from UniProtKB entry."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取推荐蛋白名称（recommendedName）。"
 
 #: ../../tools/uniprot_tools.rst a3a38c32dfaf441fadbd07e0f7eec42d
 msgid "UniProt_get_recommended_name_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_recommended_name_by_accession 工具规格说明"
 
 #: ../../tools/uniprot_tools.rst:239 a797ee237a774b1e82c2ff61e4230022
 msgid "**Name**: ``UniProt_get_recommended_name_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_recommended_name_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:241 497462cc960746b0b2f5d8109f4df1ca
 msgid ""
 "**Description**: Extract the recommended protein name (recommendedName) from"
 " UniProtKB entry."
-msgstr ""
+msgstr "**描述**：从UniProtKB条目中提取推荐蛋白名称（recommendedName）。"
 
 #: ../../tools/uniprot_tools.rst:262 1c31f2669ab349529ea2e2ae25f41b73
 msgid "**UniProt_get_sequence_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_sequence_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:264 562cd8e030f04d609d6a674313a4c27a
 msgid "Extract the canonical sequence from UniProtKB entry."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取规范序列。"
 
 #: ../../tools/uniprot_tools.rst 4f9e37caf8f04353a7b8730e19f4c724
 msgid "UniProt_get_sequence_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_sequence_by_accession 工具规范"
 
 #: ../../tools/uniprot_tools.rst:270 210fbfbc463540149df49f1aaf6d2657
 msgid "**Name**: ``UniProt_get_sequence_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_sequence_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:272 eaba560e77e44ba2811866dce41e72b4
 msgid "**Description**: Extract the canonical sequence from UniProtKB entry."
-msgstr ""
+msgstr "**描述**：从 UniProtKB 条目中提取规范序列。"
 
 #: ../../tools/uniprot_tools.rst:293 78c6f666ed424456ade709eb6653ee09
 msgid ""
 "**UniProt_get_subcellular_location_by_accession** (Type: UniProtRESTTool)"
-msgstr ""
+msgstr "**UniProt_get_subcellular_location_by_accession**（类型：UniProtRESTTool）"
 
 #: ../../tools/uniprot_tools.rst:295 015340dfc36a4cf8b3689f3a943f48c3
 msgid ""
 "Extract subcellular localization annotations from UniProtKB entry (Comment "
 "type = SUBCELLULAR LOC..."
-msgstr ""
+msgstr "从 UniProtKB 条目中提取亚细胞定位注释（注释类型 = SUBCELLULAR LOC...）"
 
 #: ../../tools/uniprot_tools.rst fed1e97e938e4620872627a3a050c2d2
 msgid "UniProt_get_subcellular_location_by_accession tool specification"
-msgstr ""
+msgstr "UniProt_get_subcellular_location_by_accession 工具规格说明"
 
 #: ../../tools/uniprot_tools.rst:301 ca4f7607e0094ced9ec12b47c0405517
 msgid "**Name**: ``UniProt_get_subcellular_location_by_accession``"
-msgstr ""
+msgstr "**名称**：``UniProt_get_subcellular_location_by_accession``"
 
 #: ../../tools/uniprot_tools.rst:303 eb6fe31d46784f428a93fe7b62a84b8d
 msgid ""
 "**Description**: Extract subcellular localization annotations from UniProtKB"
 " entry (Comment type = SUBCELLULAR LOCATION)."
-msgstr ""
+msgstr "**描述**：从 UniProtKB 条目中提取亚细胞定位注释（注释类型 = 亚细胞定位）。"
 
 #: ../../tools/uniprot_tools.rst:324 4b383cfbc63a41f3b09a26183ecc50f6
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/uniprot_tools.rst:326 08a627da0bd4489fa0a7a0ba2783c7f5
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/uniprot_tools.rst:327 9c4a4d367df544148bcdf251f81e8cb6
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

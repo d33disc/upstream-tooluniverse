@@ -86,63 +86,63 @@ msgstr ""
 #: 2bf2552e7e2c4c93a64965489306797f of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:27
 msgid "List of available tool names"
-msgstr ""
+msgstr "可用工具名称列表"
 
 #: 7e9a2a7ee4524c9cb724d2165d823f08 9721fffa4d2a4edc9111f40102a4079e of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:29
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:41
 msgid ":py:class:`list`"
-msgstr ""
+msgstr ":py:class:`列表`"
 
 #: d3ab253bdbb64959939fec0b234a8238 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:33
 msgid "Path to cached tool embeddings file"
-msgstr ""
+msgstr "缓存工具嵌入文件的路径"
 
 #: db6ce52f7e5c4e75a8c779b6ecdf2cab of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:39
 msgid "List of special tools to exclude from results"
-msgstr ""
+msgstr "排除结果的特殊工具列表"
 
 #: c75337712ff24b0b8d8620315e185ff9 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding:45
 msgid "Reference to the tool universe containing all tools"
-msgstr ""
+msgstr "参考包含所有工具的工具库"
 
 #: e407c55708044cf7a703cb9ebee1a63f of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.__init__:1
 msgid "Initialize the ToolFinderEmbedding with configuration and RAG model."
-msgstr ""
+msgstr "使用配置和RAG模型初始化ToolFinderEmbedding。"
 
 #: ../../api/tooluniverse.tool_finder_embedding.rst
 #: 274f9010a15b4c5e9c149f5ac26ea2dd 31ff7b1ef74a404aaa72cc587681f469
 #: 8f7371f8a0c84408a90418d35e9424b0 a3f58c2d4419455d984f6d4b038e02c1
 #: e8fc8f62a6cc442ba873e125c76fff7e
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: afcbf82ac83a4927a794b831a23b9499 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.__init__:3
 msgid "Configuration dictionary for the tool"
-msgstr ""
+msgstr "工具的配置字典"
 
 #: 7074d2f8a4d34a939d537915e898a243 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_rag_model:1
 msgid "Load the sentence transformer model for RAG-based tool retrieval."
-msgstr ""
+msgstr "加载用于基于RAG工具检索的句子转换器模型。"
 
 #: 9ca6ebcbea41495dbeabb339d6700d69 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_rag_model:3
 msgid ""
 "Configures the model with appropriate sequence length and tokenizer settings"
 " for optimal performance in tool description encoding."
-msgstr ""
+msgstr "配置模型的适当序列长度和分词器设置，以实现工具描述编码的最佳性能。"
 
 #: f0fd10ad2bc2460789de922c2b842567 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:1
 msgid ""
 "Load or generate embeddings for tool descriptions from the tool universe."
-msgstr ""
+msgstr "从工具库中加载或生成工具描述的嵌入数据。"
 
 #: 68314d7d3ce74340b6469bf5f4158a64 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:3
@@ -152,31 +152,32 @@ msgid ""
 "subsequent loads. Memory is properly cleaned up after embedding generation "
 "to avoid OOM issues."
 msgstr ""
+"此方法会从磁盘加载缓存的嵌入，或者通过编码所有工具描述生成新的嵌入。嵌入会被缓存到磁盘，以加快后续加载速度。在生成嵌入后，会适当清理内存以避免出现内存溢出（OOM）问题。"
 
 #: 120968b4b83e47d9821ae5b54d9b1050 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:7
 msgid "ToolUniverse instance containing all available tools"
-msgstr ""
+msgstr "ToolUniverse 实例，包含所有可用工具"
 
 #: 5bf66e38655e4567993160d375d487e3 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:8
 msgid "Specific tool names to include"
-msgstr ""
+msgstr "特定工具名称包括"
 
 #: 81fd468368bc4284b069aef3f39035bb of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:10
 msgid "Tool names to exclude"
-msgstr ""
+msgstr "要排除的工具名称"
 
 #: 7407f73d6d1e48cea216697d30d7faeb of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:12
 msgid "Tool categories to include"
-msgstr ""
+msgstr "工具类别包括"
 
 #: 3c5c05c3fb5e4b0b8cd22156f4c19d92 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.load_tool_desc_embedding:14
 msgid "Tool categories to exclude"
-msgstr ""
+msgstr "要排除的工具类别"
 
 #: de2aa228b2814e94a09f67c6ecd3363c of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:1

@@ -78,82 +78,82 @@ msgstr "返回类型"
 #: c208379635064fa2b79605190b9a07d1 of
 #: tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids:1
 msgid "Convert gene names to Entrez IDs using NCBI Entrez API."
-msgstr ""
+msgstr "使用NCBI Entrez API将基因名称转换为Entrez ID。"
 
 #: 1d5634374181434fb870f9fe92517ddc of
 #: tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids:3
 msgid "List of gene names to convert."
-msgstr ""
+msgstr "基因名称转换列表。"
 
 #: bd3abf16c2f24f0d9ae8d40f55b47428 of
 #: tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids:6
 msgid "List of Entrez IDs corresponding to the gene names."
-msgstr ""
+msgstr "与基因名称对应的Entrez ID列表。"
 
 #: 4e03ba3a7cdd4ab89a0db108ba3d850b of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:1
 msgid ""
 "Retrieve protein-protein interactions and biological processes from "
 "HumanBase."
-msgstr ""
+msgstr "从HumanBase中检索蛋白质-蛋白质相互作用和生物过程。"
 
 #: dceada57972b4416b4f5aa4dc1f263ed of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:3
 msgid "List of gene names to analyze."
-msgstr ""
+msgstr "要分析的基因名称列表。"
 
 #: 963358b7c0714e3d91999068d500a52e of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:5
 msgid "Tissue type for tissue-specific interactions."
-msgstr ""
+msgstr "用于组织特异性交互的组织类型。"
 
 #: 36f91182f46b4385a3eb2c0c9b688224 of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:7
 msgid "Maximum number of nodes to retrieve."
-msgstr ""
+msgstr "要检索的节点最大数量。"
 
 #: ed80f538ef0240a88d280ac43ad8b8e8 of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:9
 msgid "Specific interaction type to filter by."
-msgstr ""
+msgstr "要筛选的特定交互类型。"
 
 #: 5c95bd3e955d4d598ffb97c2382da511 of
 #: tooluniverse.humanbase_tool.HumanBaseTool.humanbase_ppi_retrieve:12
 msgid "(NetworkX Graph of interactions, list of biological processes)"
-msgstr ""
+msgstr "（交互的NetworkX图，生物过程列表）"
 
 #: e832771558674a68bac6572305f9ef81 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:1
 msgid ""
 "Convert NetworkX graph and biological processes to string representation."
-msgstr ""
+msgstr "将 NetworkX 图和生物过程转换为字符串表示形式。"
 
 #: e3803b599d0441b0a32f60368b195164 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:3
 msgid "The network graph."
-msgstr ""
+msgstr "网络图。"
 
 #: fdd150e5ea7a4167a4eed597513f83f6 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:5
 msgid "List of biological processes."
-msgstr ""
+msgstr "生物过程列表"
 
 #: 88c023f405be41e4b6e7540eadf16831 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:7
 msgid "Original gene list provided by user."
-msgstr ""
+msgstr "用户提供的原始基因列表。"
 
 #: 366de4002eda46e8907dc00e741617f0 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:9
 msgid "Tissue type used for analysis."
-msgstr ""
+msgstr "用于分析的组织类型。"
 
 #: 99b084599d8142da864d6487726a5713 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._convert_to_string:12
 msgid "Comprehensive string representation of the network data."
-msgstr ""
+msgstr "网络数据的全面字符串表示。"
 
 #: 7239d57994d14e86bdb3077fa4fabbd7 of
 #: tooluniverse.humanbase_tool.HumanBaseTool._get_current_timestamp:1
 msgid "Get current timestamp for the report."
-msgstr ""
+msgstr "获取报告的当前时间戳。"

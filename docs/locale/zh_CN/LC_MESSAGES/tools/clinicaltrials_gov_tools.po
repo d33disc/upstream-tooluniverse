@@ -410,7 +410,7 @@ msgstr "**名称**: ``get_clinical_trial_outcome_measures``"
 msgid ""
 "**Description**: Retrieves the outcome measures for the clinical trials, "
 "using their NCT IDs."
-msgstr ""
+msgstr "**描述**：使用临床试验的NCT编号检索其结果指标。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:232
 #: a31d77932c824f13aeff9f1d9490c3f7
@@ -419,98 +419,100 @@ msgid ""
 "primary, secondary, or all outcome measures. Options are 'primary', "
 "'secondary', or 'all'. Default is 'primary'."
 msgstr ""
+"``outcome_measures``（字符串）（可选）决定是否检索主要、次要或所有结局指标。选项包括 'primary'、'secondary' 或"
+" 'all'。默认值为 'primary'。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:248
 #: fc1a94fd57e74a81a71d2a482de14552
 msgid "**get_clinical_trial_references** (Type: ClinicalTrialsDetailsTool)"
-msgstr ""
+msgstr "**get_clinical_trial_references**（类型：ClinicalTrialsDetailsTool）"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:250
 #: bcdb971f8c2d486a96aab4e8fd9b3524
 msgid ""
 "Retrieves the references (if any) for the clinical trials, using their NCT "
 "IDs."
-msgstr ""
+msgstr "使用临床试验的NCT编号检索其参考文献（如有）。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst 8f3ff9b206dc4c6587a8c7497339e4b6
 msgid "get_clinical_trial_references tool specification"
-msgstr ""
+msgstr "get_clinical_trial_references 工具规格说明"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:256
 #: 39e05e81d3e74d4e86f0b99b8d8fa7db
 msgid "**Name**: ``get_clinical_trial_references``"
-msgstr ""
+msgstr "**名称**：``get_clinical_trial_references``"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:258
 #: a5301e221bbf44b7815748e8e7d19a84
 msgid ""
 "**Description**: Retrieves the references (if any) for the clinical trials, "
 "using their NCT IDs."
-msgstr ""
+msgstr "**描述**：使用临床试验的 NCT ID 检索其参考文献（如有）。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:265
 #: eb8b2a17cf164ed2a479a5c5f5f7083a
 msgid "``references`` (string) (optional) Placeholder."
-msgstr ""
+msgstr "``references``（字符串）（可选）占位符。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:281
 #: ac7819632ff54146b0ea345b930b163c
 msgid ""
 "**get_clinical_trial_status_and_dates** (Type: ClinicalTrialsDetailsTool)"
-msgstr ""
+msgstr "**get_clinical_trial_status_and_dates**（类型：ClinicalTrialsDetailsTool）"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:283
 #: a97d7701a00e467ea9224375fd5cedd0
 msgid ""
 "Retrieves trial status and start and completion dates, using their NCT IDs."
-msgstr ""
+msgstr "使用NCT编号检索试验状态及开始和完成日期。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst 6f3dc945ed80426a834e71670a0c03c0
 msgid "get_clinical_trial_status_and_dates tool specification"
-msgstr ""
+msgstr "get_clinical_trial_status_and_dates 工具规格说明"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:289
 #: df091e8f2ba046949b21d42741f4120e
 msgid "**Name**: ``get_clinical_trial_status_and_dates``"
-msgstr ""
+msgstr "**名称**：``get_clinical_trial_status_and_dates``"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:291
 #: 8ff2082d32be419a92ebed3c0fd0128d
 msgid ""
 "**Description**: Retrieves trial status and start and completion dates, "
 "using their NCT IDs."
-msgstr ""
+msgstr "**描述**：使用其 NCT ID 检索试验状态及开始和完成日期。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:298
 #: c378afb628684280a8bb27b655c49ad8
 msgid "``status_and_date`` (string) (optional) Placeholder."
-msgstr ""
+msgstr "``status_and_date``（字符串）（可选）占位符。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:314
 #: 65f3018fc8e44569a206169c9226d6cf
 msgid "**search_clinical_trials** (Type: ClinicalTrialsSearchTool)"
-msgstr ""
+msgstr "**search_clinical_trials**（类型：ClinicalTrialsSearchTool）"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:316
 #: 21429f07436e43ec8ee8f436c03aa0e3
 msgid ""
 "Search for clinical trials registered on clinicaltrials.gov based on title, "
 "conditions, intervent..."
-msgstr ""
+msgstr "根据标题、疾病、干预措施等在 clinicaltrials.gov 上搜索注册的临床试验..."
 
 #: ../../tools/clinicaltrials_gov_tools.rst e3c3d966655c436aba4f2315f8366ed9
 msgid "search_clinical_trials tool specification"
-msgstr ""
+msgstr "search_clinical_trials 工具规格说明"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:322
 #: 96af24f924574584b20efb5e45b1dc6c
 msgid "**Name**: ``search_clinical_trials``"
-msgstr ""
+msgstr "**名称**：``search_clinical_trials``"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:323
 #: a6235dcab24c4b07bee93b94eca8256f
 msgid "**Type**: ``ClinicalTrialsSearchTool``"
-msgstr ""
+msgstr "**类型**：``ClinicalTrialsSearchTool``"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:324
 #: 02689d317b194475b3024ed7dbd4b29c
@@ -527,6 +529,11 @@ msgid ""
 "the next query. Note that currently the search is limited to trials beyond "
 "phase 1."
 msgstr ""
+"**描述**：根据标题、疾病状况、干预措施、结局指标和状态，在 clinicaltrials.gov 上搜索注册的临床试验。返回包含每个试验的 NCT "
+"ID 及描述的分页研究列表。您可以使用这些 NCT ID，调用 'get_clinical_trials_*' "
+"工具获取特定研究中具体方案字段的详细信息，或使用 'extract_clinical_trials_efficacy/safety' "
+"工具获取特定研究的疗效或不良事件结果。若需查看下一页结果，可将本工具上一次输出中的 'nextPageToken' 值作为下一次查询的 "
+"'pageToken' 参数输入。请注意，目前搜索仅限于超过一期的试验。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:328
 #: 947b5ee267f14cdc83cf98cff179e411
@@ -535,6 +542,8 @@ msgid ""
 " expression syntax (e.g., 'lung cancer', '(head OR neck) AND pain AND NOT "
 "\"back pain\"')."
 msgstr ""
+"``condition``（字符串）（可选） 使用 Essie 表达式语法查询病症或疾病（例如，'lung cancer'，'(head OR "
+"neck) AND pain AND NOT \"back pain\"'）。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:331
 #: 5a40e5c5ef0642e080f3d35d22b8f5c5
@@ -543,6 +552,8 @@ msgid ""
 "Essie expression syntax (e.g., 'chemotherapy', 'immunotherapy', 'olaparib', "
 "'combination therapy')."
 msgstr ""
+"``intervention``（字符串）（可选） 使用 Essie "
+"表达式语法查询干预/治疗（例如，‘化疗’、‘免疫治疗’、‘奥拉帕利’、‘联合治疗’）。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:334
 #: 132574a959f44787a0c4f03c90b20bc8
@@ -553,13 +564,16 @@ msgid ""
 " search for all other protocol fields, including but not limited to title, "
 "outcome measures, status, phase, location, etc."
 msgstr ""
+"``query_term``（字符串）（可选） "
+"使用Essie表达式语法查询“其他术语”（例如，'combination'、'AREA[LastUpdatePostDate]RANGE[2023-01-15,MAX]'、'Phase"
+" II'）。可用于搜索所有其他协议字段，包括但不限于标题、结果指标、状态、阶段、地点等。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:337
 #: 186a0209f82a4c58a26b1d8f8b4cd801
 msgid ""
 "``pageSize`` (integer) (optional) Maximum number of studies to return per "
 "page (default 10, max 1000)."
-msgstr ""
+msgstr "``pageSize``（整数）（可选）每页返回的最大研究数量（默认值为10，最大值为1000）。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:340
 #: 303dfa6244884f9fbb8bb044edccde96
@@ -571,18 +585,21 @@ msgid ""
 "This token can then be used as a parameter in the subsequent API request to "
 "retrieve the next set of data."
 msgstr ""
+"``pageToken``（字符串）（可选）用于获取下一页结果的令牌，取自前一次响应中的 `nextPageToken` "
+"字段。首次请求时无需指定该参数。当您首次调用支持分页的 API 时，响应中会包含一个 `nextPageToken`。该令牌可作为后续 API "
+"请求的参数，用于获取下一批数据。"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:356
 #: abf3cba5417f45ef96485d0de766bbd8
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:358
 #: f55c3e306ea84ff99a43460957ab7b5c
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/clinicaltrials_gov_tools.rst:359
 #: 1b9e7f2d0d17403297104870d638d514
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -297,7 +297,7 @@ msgstr "**名称**: ``get_deepxde_info``"
 msgid ""
 "**Description**: Get comprehensive information about DeepXDE – a library for"
 " physics-informed neural networks (PINNs) solving PDEs and inverse problems."
-msgstr ""
+msgstr "**描述**：获取关于 DeepXDE 的全面信息——一个用于求解偏微分方程（PDEs）和逆问题的物理信息神经网络（PINNs）库。"
 
 #: ../../tools/machine_learning_tools.rst:119
 #: ../../tools/machine_learning_tools.rst:450 3f28599d53774068b4cca32c1b39067c
@@ -305,31 +305,31 @@ msgstr ""
 msgid ""
 "``include_examples`` (boolean) (optional) Whether to include usage examples "
 "and a quick-start guide"
-msgstr ""
+msgstr "``include_examples``（布尔值）（可选）是否包含使用示例和快速入门指南"
 
 #: ../../tools/machine_learning_tools.rst:135 d77c53c8714f47d483f35018893bea23
 msgid "**get_faiss_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_faiss_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:137 4796d6e8080b44cc9f26c17f02e72550
 msgid ""
 "Get comprehensive information about Faiss – efficient similarity search and "
 "clustering"
-msgstr ""
+msgstr "获取关于 Faiss —— 高效相似性搜索与聚类的全面信息"
 
 #: ../../tools/machine_learning_tools.rst f27582c61e7240f19026c48644d4c069
 msgid "get_faiss_info tool specification"
-msgstr ""
+msgstr "get_faiss_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:143 89dfef3663bc4bd5a445cd65469aa989
 msgid "**Name**: ``get_faiss_info``"
-msgstr ""
+msgstr "**名称**：``get_faiss_info``"
 
 #: ../../tools/machine_learning_tools.rst:145 799c0de5e234482d86639da847791535
 msgid ""
 "**Description**: Get comprehensive information about Faiss – efficient "
 "similarity search and clustering"
-msgstr ""
+msgstr "**描述**：获取关于 Faiss —— 高效相似度搜索与聚类的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:149
 #: ../../tools/machine_learning_tools.rst:241
@@ -344,162 +344,162 @@ msgstr ""
 msgid ""
 "``include_examples`` (boolean) (optional) Whether to include usage examples "
 "and quick start guide"
-msgstr ""
+msgstr "``include_examples``（布尔值）（可选）是否包含使用示例和快速入门指南"
 
 #: ../../tools/machine_learning_tools.rst:165 1fdc92b9dda94b2988e8471f0b31c39a
 msgid "**get_harmony_pytorch_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_harmony_pytorch_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:167 6cc19941698c4a19bef0792187652533
 msgid ""
 "Get comprehensive information about harmony-pytorch – single-cell data "
 "integration"
-msgstr ""
+msgstr "获取关于 harmony-pytorch —— 单细胞数据整合的全面信息"
 
 #: ../../tools/machine_learning_tools.rst f181f1b9e60846c4aa0299663bdf2e21
 msgid "get_harmony_pytorch_info tool specification"
-msgstr ""
+msgstr "get_harmony_pytorch_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:173 9988d8efaf6c4ba88a7ff8cbb1e0c0cf
 msgid "**Name**: ``get_harmony_pytorch_info``"
-msgstr ""
+msgstr "**名称**：``get_harmony_pytorch_info``"
 
 #: ../../tools/machine_learning_tools.rst:175 360a270cc3604b3887956878d68ff77a
 msgid ""
 "**Description**: Get comprehensive information about harmony-pytorch – "
 "single-cell data integration"
-msgstr ""
+msgstr "**描述**：获取关于 harmony-pytorch —— 单细胞数据整合的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:179 b26ce0a6a0bc40d18a88cce79166881b
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "harmony-pytorch"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 harmony-pytorch 的信息类型"
 
 #: ../../tools/machine_learning_tools.rst:196 05090b6f6a34491389ca485f62eb47b6
 msgid "**get_hmmlearn_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_hmmlearn_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:198 da8aba301f784787a7a6cdb1f7021e92
 msgid ""
 "Get comprehensive information about hmmlearn – Hidden Markov Models in "
 "Python"
-msgstr ""
+msgstr "获取有关 hmmlearn —— Python 中隐马尔可夫模型的全面信息"
 
 #: ../../tools/machine_learning_tools.rst 157865a9cdf3484ba1bad9525e65db5f
 msgid "get_hmmlearn_info tool specification"
-msgstr ""
+msgstr "get_hmmlearn_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:204 86dc90ab2e9e43ffaa982384ff0afc85
 msgid "**Name**: ``get_hmmlearn_info``"
-msgstr ""
+msgstr "**名称**：``get_hmmlearn_info``"
 
 #: ../../tools/machine_learning_tools.rst:206 dc4fea1db5bf408586ddbe63d813c97b
 msgid ""
 "**Description**: Get comprehensive information about hmmlearn – Hidden "
 "Markov Models in Python"
-msgstr ""
+msgstr "**描述**：获取有关 hmmlearn —— Python 中的隐马尔可夫模型的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:210 d67558fd77c9473ab71ae0fecd6e8332
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "hmmlearn"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 hmmlearn 的信息类型"
 
 #: ../../tools/machine_learning_tools.rst:227 36e88e039ddc4ff799559d79de3ad87d
 msgid "**get_hyperopt_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_hyperopt_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:229 a053ff3f22ce4973bcbbf5a38516cca3
 msgid ""
 "Get comprehensive information about Hyperopt – distributed hyperparameter "
 "optimization"
-msgstr ""
+msgstr "获取关于 Hyperopt —— 分布式超参数优化的全面信息"
 
 #: ../../tools/machine_learning_tools.rst 1b3dc1ce22f349558240f4a74f0cda7c
 msgid "get_hyperopt_info tool specification"
-msgstr ""
+msgstr "get_hyperopt_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:235 54fcde6ec02049f4864ed0142b393377
 msgid "**Name**: ``get_hyperopt_info``"
-msgstr ""
+msgstr "**名称**：``get_hyperopt_info``"
 
 #: ../../tools/machine_learning_tools.rst:237 5279f8eacc6c4323bddc12df911dc53b
 msgid ""
 "**Description**: Get comprehensive information about Hyperopt – distributed "
 "hyperparameter optimization"
-msgstr ""
+msgstr "**描述**：获取关于 Hyperopt —— 分布式超参数优化的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:257 24becce8feb14596973ea2a7882bd125
 msgid "**get_imbalanced_learn_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_imbalanced_learn_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:259 2901aae2376240e4b5ab7516857a8c04
 msgid ""
 "Get information about the imbalanced-learn package. Python toolbox for "
 "imbalanced dataset learning"
-msgstr ""
+msgstr "获取有关 imbalanced-learn 包的信息。用于不平衡数据集学习的 Python 工具箱"
 
 #: ../../tools/machine_learning_tools.rst 7578584cba0646768f9b2a92b6338751
 msgid "get_imbalanced_learn_info tool specification"
-msgstr ""
+msgstr "get_imbalanced_learn_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:265 8fe90bfedc6a4993ae6ac1c70c3d26b8
 msgid "**Name**: ``get_imbalanced_learn_info``"
-msgstr ""
+msgstr "**名称**：``get_imbalanced_learn_info``"
 
 #: ../../tools/machine_learning_tools.rst:267 44fc9ec2133c4b849a8fa9ef2cc6edfb
 msgid ""
 "**Description**: Get information about the imbalanced-learn package. Python "
 "toolbox for imbalanced dataset learning"
-msgstr ""
+msgstr "**描述**：获取有关 imbalanced-learn 包的信息。用于不平衡数据集学习的 Python 工具箱"
 
 #: ../../tools/machine_learning_tools.rst:286 421aecaaed544433921c51e1ad7f250d
 msgid "**get_lightgbm_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_lightgbm_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:288 4a226469f4ce4909b788244fb42a9a81
 msgid ""
 "Get information about the lightgbm package. Fast gradient boosting framework"
-msgstr ""
+msgstr "获取有关 lightgbm 包的信息。快速梯度提升框架"
 
 #: ../../tools/machine_learning_tools.rst f71326db6a52472eb1003f7af8188919
 msgid "get_lightgbm_info tool specification"
-msgstr ""
+msgstr "get_lightgbm_info 工具规范"
 
 #: ../../tools/machine_learning_tools.rst:294 ac8e6800fbd240bcb6c9a2480727a0c3
 msgid "**Name**: ``get_lightgbm_info``"
-msgstr ""
+msgstr "**名称**：``get_lightgbm_info``"
 
 #: ../../tools/machine_learning_tools.rst:296 86db2bd52cea4126bf40c7bd4670563f
 msgid ""
 "**Description**: Get information about the lightgbm package. Fast gradient "
 "boosting framework"
-msgstr ""
+msgstr "**描述**：获取有关 lightgbm 包的信息。快速梯度提升框架"
 
 #: ../../tools/machine_learning_tools.rst:315 8aeb0165f8904ba08f9d288045a02a6c
 msgid "**get_optuna_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_optuna_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:317 487558d6652c4015a5cf7546e0ca62fe
 msgid ""
 "Get information about the optuna package. Hyperparameter optimization "
 "framework"
-msgstr ""
+msgstr "获取有关 optuna 包的信息。超参数优化框架"
 
 #: ../../tools/machine_learning_tools.rst 7366e276c7f24ccbb091a6eb32d27c10
 msgid "get_optuna_info tool specification"
-msgstr ""
+msgstr "get_optuna_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:323 950f4593e75848d4aaf26a27b1dc5b75
 msgid "**Name**: ``get_optuna_info``"
-msgstr ""
+msgstr "**名称**：``get_optuna_info``"
 
 #: ../../tools/machine_learning_tools.rst:325 6d13b940dff24f49b6feb289c0ec9e4a
 msgid ""
 "**Description**: Get information about the optuna package. Hyperparameter "
 "optimization framework"
-msgstr ""
+msgstr "**描述**：获取有关 optuna 包的信息。超参数优化框架"
 
 #: ../../tools/machine_learning_tools.rst:344 263e7b251c5e4941b4c2c8171af1e3b6
 msgid "**get_pymzml_info** (Type: PackageTool)"

@@ -82,43 +82,43 @@ msgstr "工具名称与类别名称的映射"
 #: 493d1b5d8bf54b23a1d7fd919cb7967c of
 #: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:1
 msgid "Automatically load missing tool dependencies."
-msgstr ""
+msgstr "自动加载缺失的工具依赖项。"
 
 #: ../../api/tooluniverse.compose_tool.rst 91f268e9c8774882a5d26724cbcce698
 #: 9e439d6a4ed346c6a4fe92c556a6cf3b b214fb3bbccb426684c3d066bb519a04
 #: b9db2a16578b4c2ba4f0ff412407f3b4 c2e0caa8875f49b1810671ab18cf5f4e
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 4c914030b5e447aea8583dbd8721256b of
 #: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:3
 msgid "Set of missing tool names"
-msgstr ""
+msgstr "缺失工具名称集"
 
 #: 1fc6cc8166844d6fa43f75c780b0a909 of
 #: tooluniverse.compose_tool.ComposeTool._load_missing_dependencies:6
 msgid "(successfully_loaded, failed_to_load)"
-msgstr ""
+msgstr "(successfully_loaded, 加载成功, failed_to_load, 加载失败)"
 
 #: 33641a7186fc468aae7b181cb20c1490 of
 #: tooluniverse.compose_tool.ComposeTool._load_code_from_file:1
 msgid "Load composition code from external Python file."
-msgstr ""
+msgstr "从外部 Python 文件加载组合代码。"
 
 #: a3e8d956328b46e78465748933a65a36 of
 #: tooluniverse.compose_tool.ComposeTool._load_code_from_file:3
 msgid "The composition code as a string"
-msgstr ""
+msgstr "组成代码作为字符串"
 
 #: 4690f9a563574cb096482e7275a0e783 of
 #: tooluniverse.compose_tool.ComposeTool.run:1
 msgid "Execute the composed tool with custom code logic."
-msgstr ""
+msgstr "执行包含自定义代码逻辑的组合工具。"
 
 #: 8ab29ad5c7e04156b80e466c202e4c95 of
 #: tooluniverse.compose_tool.ComposeTool.run:3
 msgid "Input arguments for the composition"
-msgstr ""
+msgstr "组成的输入参数"
 
 #: 009efdf9e3fd4c888d6cfea1e3d61bb4 5dac95170ec24d57b92a93ac1b740e56
 #: 9287cf76726e4ff69f12613ed85449e7 of
@@ -126,40 +126,40 @@ msgstr ""
 #: tooluniverse.compose_tool.ComposeTool._execute_inline_code:6
 #: tooluniverse.compose_tool.ComposeTool.run:6
 msgid "Result from the composition execution"
-msgstr ""
+msgstr "组合执行结果"
 
 #: 7590dcf0e5564cbf918b8e7df13ed683 of
 #: tooluniverse.compose_tool.ComposeTool._execute_from_file:1
 msgid "Execute composition code from external file."
-msgstr ""
+msgstr "从外部文件执行组合代码。"
 
 #: 12bfc81ec8364f2795bf85aa08ce54f6 7d3068f325244bf28569ab123d81fbfc of
 #: tooluniverse.compose_tool.ComposeTool._execute_from_file:3
 #: tooluniverse.compose_tool.ComposeTool._execute_inline_code:3
 msgid "Input arguments"
-msgstr ""
+msgstr "输入参数"
 
 #: 4805a2b4529c4f0584fe2f8c08569943 of
 #: tooluniverse.compose_tool.ComposeTool._execute_inline_code:1
 msgid "Execute inline composition code (existing behavior)."
-msgstr ""
+msgstr "执行内联组合代码（现有行为）。"
 
 #: d5d58020f14e4b369843b6fe92c43b1f of
 #: tooluniverse.compose_tool.ComposeTool._call_tool:1
 msgid "Helper function to call other tools from within composition code."
-msgstr ""
+msgstr "辅助函数，用于在组合代码中调用其他工具。"
 
 #: da736cf489074988b4677f7bbc8bd028 of
 #: tooluniverse.compose_tool.ComposeTool._call_tool:3
 msgid "Name of the tool to call"
-msgstr ""
+msgstr "调用工具的名称"
 
 #: fc341fdb873041cda0c3fab81ce5a55b of
 #: tooluniverse.compose_tool.ComposeTool._call_tool:5
 msgid "Arguments to pass to the tool"
-msgstr ""
+msgstr "传递给工具的参数"
 
 #: 731e1dde24a74982978baa5ffaee4901 of
 #: tooluniverse.compose_tool.ComposeTool._call_tool:8
 msgid "Result from the tool execution"
-msgstr ""
+msgstr "工具执行结果"

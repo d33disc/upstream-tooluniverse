@@ -7,79 +7,79 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../help/troubleshooting.rst:2 6b45fe1968fe46728a7d8d10b884615f
 msgid "Troubleshooting Tutorial"
-msgstr ""
+msgstr "故障排除教程"
 
 #: ../../help/troubleshooting.rst:4 6f59714d02f846228661f218d9352b52
 msgid ""
 "This Tutorial helps you diagnose and resolve common issues with "
 "ToolUniverse."
-msgstr ""
+msgstr "本教程将帮助您诊断并解决 ToolUniverse 的常见问题。"
 
 #: ../../help/troubleshooting.rst:7 1d5ca95aefd84788bc993a5eea4ed6f3
 msgid "Quick Diagnostic"
-msgstr ""
+msgstr "快速诊断"
 
 #: ../../help/troubleshooting.rst:9 4ec33b8402524b7da5f0c578500288b6
 msgid "Run this diagnostic script to check your ToolUniverse installation:"
-msgstr ""
+msgstr "运行此诊断脚本以检查您的 ToolUniverse 安装情况："
 
 #: ../../help/troubleshooting.rst:25 ../../help/troubleshooting.rst:42
 #: 83cdeff1e6c2462e84822e9d6af62359 93cdec08667c45b1af813d971412867d
 msgid "Installation Issues"
-msgstr ""
+msgstr "安装问题"
 
 #: ../../help/troubleshooting.rst:27 717cd1b494574a648af3f275db2e4ed6
 msgid "Most common installation problems and solutions."
-msgstr ""
+msgstr "最常见的安装问题及解决方案。"
 
 #: ../../help/troubleshooting.rst:29 ../../help/troubleshooting.rst:116
 #: 3e4fea5ad485460ba8c019ca7e6d52ac f6ca76361f2347bab17e282fffe5e739
 msgid "Runtime Errors"
-msgstr ""
+msgstr "运行时错误"
 
 #: ../../help/troubleshooting.rst:31 4ef98484dc524c1f996f49f76068ccea
 msgid "Errors that occur during tool execution."
-msgstr ""
+msgstr "工具执行过程中发生的错误。"
 
 #: ../../help/troubleshooting.rst:33 ../../help/troubleshooting.rst:328
 #: 50a3f30bc5074a3b8a45d7707190383e bdd71bcd01314c7eb549a6f9acd29554
 msgid "Performance Issues"
-msgstr ""
+msgstr "性能问题"
 
 #: ../../help/troubleshooting.rst:35 f5e31d7bf0be42018be6abe6faa3855e
 msgid "Slow queries and optimization tips."
-msgstr ""
+msgstr "慢查询及优化建议。"
 
 #: ../../help/troubleshooting.rst:37 61400f771176426593bfa3735589b51d
 msgid "API Connectivity"
-msgstr ""
+msgstr "API 连接"
 
 #: ../../help/troubleshooting.rst:39 9c2265acb200456d8ccf052cb3bdc427
 msgid "Network and API-related problems."
-msgstr ""
+msgstr "网络和API相关问题"
 
 #: ../../help/troubleshooting.rst:45 92424cd5a0c04ea894d5749502b058b7
 msgid "ImportError: No module named 'tooluniverse'"
-msgstr ""
+msgstr "ImportError: 未找到名为 'tooluniverse' 的模块"
 
 #: ../../help/troubleshooting.rst:47 fe351fabb918404bac33e0407f6dcacb
 msgid "**Symptom:** Python can't find the ToolUniverse module."
-msgstr ""
+msgstr "**症状：** Python 无法找到 ToolUniverse 模块。"
 
 #: ../../help/troubleshooting.rst:49 ../../help/troubleshooting.rst:123
 #: ../../help/troubleshooting.rst:171 ../../help/troubleshooting.rst:222
@@ -91,7 +91,7 @@ msgstr ""
 #: 62e544e30f0145d6a2cca943870f43d3 7a7de5a8cc1849ada02134e3b0dab4ab
 #: d0119793edb9486a90b8018f106fcd68 d2ba70cf4d814cc1a8ed2282dae32b0e
 msgid "**Diagnosis:**"
-msgstr ""
+msgstr "**诊断：**"
 
 #: ../../help/troubleshooting.rst:55 ../../help/troubleshooting.rst:93
 #: ../../help/troubleshooting.rst:137 ../../help/troubleshooting.rst:188
@@ -104,63 +104,63 @@ msgstr ""
 #: 93202a808e2a49f384b19ea4ed161969 bac710633ad441909fc518e133a53a9f
 #: c41c643a568343df9f259329f894c91f ded5cbfff42047eb92ca7a8c1599934f
 msgid "**Solutions:**"
-msgstr ""
+msgstr "**解决方案：**"
 
 #: ../../help/troubleshooting.rst:59 948d3ee916ca4e9090745efb1cb4cce4
 msgid "Standard Installation"
-msgstr ""
+msgstr "标准安装"
 
 #: ../../help/troubleshooting.rst:65 1fe014c8bd0449eb933ce254c50a6cc3
 msgid "Development Installation"
-msgstr ""
+msgstr "开发安装"
 
 #: ../../help/troubleshooting.rst:73 e67ec33845fc4322b7956ed4c13474dc
 msgid "Virtual Environment"
-msgstr ""
+msgstr "虚拟环境"
 
 #: ../../help/troubleshooting.rst:83 d6855ad70b654974870f61bb9e0e264b
 msgid "Dependency conflicts"
-msgstr ""
+msgstr "依赖冲突"
 
 #: ../../help/troubleshooting.rst:85 88604c9b55684547800dcf2d474a7bcd
 msgid "**Symptom:** Conflicting package versions during installation."
-msgstr ""
+msgstr "**症状：** 安装过程中出现软件包版本冲突。"
 
 #: ../../help/troubleshooting.rst:87 5df7aee8cf554ff8a2f25150af1c7a05
 msgid "**Check dependencies:**"
-msgstr ""
+msgstr "**检查依赖项：**"
 
 #: ../../help/troubleshooting.rst:95 aa8a7cdf9bf04ab9827772465dcaf020
 msgid "**Create clean environment:**"
-msgstr ""
+msgstr "**创建清洁环境：**"
 
 #: ../../help/troubleshooting.rst:103 2755c41c42d04ae48a133beadb192bf6
 msgid "**Update conflicting packages:**"
-msgstr ""
+msgstr "**更新冲突的程序包：**"
 
 #: ../../help/troubleshooting.rst:109 8f0678231002438ba2ab8895e2e053ea
 msgid "**Install specific versions:**"
-msgstr ""
+msgstr "**安装特定版本：**"
 
 #: ../../help/troubleshooting.rst:119 522c1247c1dd4ee08efe8fa125e05749
 msgid "Tool not found errors"
-msgstr ""
+msgstr "工具未找到错误"
 
 #: ../../help/troubleshooting.rst:121 607b347c9e1742b8a6a646e6dc9dd3e0
 msgid "**Symptom:** ``ToolNotFoundError: Tool 'XYZ' not found``"
-msgstr ""
+msgstr "**症状：** ``ToolNotFoundError: 未找到工具 'XYZ'``"
 
 #: ../../help/troubleshooting.rst:139 8087204159ed4c888a1fabd58fe2a4d0
 msgid "**Check tool name spelling:**"
-msgstr ""
+msgstr "**检查工具名称拼写：**"
 
 #: ../../help/troubleshooting.rst:150 eaa272b4ab9a4226aaaf6148834a79dc
 msgid "**Verify tool is loaded:**"
-msgstr ""
+msgstr "**验证工具已加载：**"
 
 #: ../../help/troubleshooting.rst:158 91d0b4352547486b93537680de73d114
 msgid "**Manual tool loading:**"
-msgstr ""
+msgstr "**手动工具装载：**"
 
 #: ../../help/troubleshooting.rst:167 9c42ab059ba84cee9093978220bdf4de
 msgid "API Authentication errors"
@@ -411,4 +411,3 @@ msgstr ""
 #: ../../help/troubleshooting.rst:576 4578e9cf8ea94682934d0b970df9932f
 msgid "Include this output in your bug report."
 msgstr ""
-

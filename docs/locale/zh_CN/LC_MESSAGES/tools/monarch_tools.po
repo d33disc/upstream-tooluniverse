@@ -165,8 +165,8 @@ msgstr "导航"
 
 #: ../../tools/monarch_tools.rst:118 839df7564b124825988c9f7eeb68d6d8
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/monarch_tools.rst:119 741315b3288748ce91772a703b053cdb
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

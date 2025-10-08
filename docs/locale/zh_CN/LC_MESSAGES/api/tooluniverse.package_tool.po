@@ -70,19 +70,19 @@ msgstr "从 PyPI API 获取软件包信息"
 #: 00705ffeb1ee457084bed135d5e8c45b of
 #: tooluniverse.package_tool.PackageTool._get_local_info:1
 msgid "Get package information from local configuration"
-msgstr ""
+msgstr "从本地配置获取包信息"
 
 #: 918180679ef84ba397f19e18f19816c1 of
 #: tooluniverse.package_tool.PackageTool._get_installation_instructions:1
 msgid "Generate installation instructions"
-msgstr ""
+msgstr "生成安装说明"
 
 #: e6c5fd0a46e043c4bb4731e57b7160a3 of
 #: tooluniverse.package_tool.PackageTool._get_usage_example:1
 msgid "Get usage example for the package"
-msgstr ""
+msgstr "获取该软件包的使用示例"
 
 #: 865f6981ff2744b8878e6798f1224e76 of
 #: tooluniverse.package_tool.PackageTool._get_quick_start_guide:1
 msgid "Get quick start guide steps"
-msgstr ""
+msgstr "获取快速入门指南步骤"

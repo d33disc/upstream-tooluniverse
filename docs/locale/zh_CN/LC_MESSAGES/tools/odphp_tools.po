@@ -189,46 +189,48 @@ msgid ""
 "`odphp_myhealthfinder` or `odphp_topicsearch` tools or when the user wants "
 "to simply dive deeper into ODPHP data."
 msgstr ""
+"**描述**：该工具从ODPHP文章链接和信息来源中提取可读文本。此功能在使用`odphp_myhealthfinder`或`odphp_topicsearch`工具后，或用户希望深入了解ODPHP数据时非常有用。"
 
 #: ../../tools/odphp_tools.rst:103 58194e97dcc8444aa463795f0b7a4c93
 msgid ""
 "``urls`` (array) (required) 1–3 absolute URLs from AccessibleVersion or "
 "RelatedItems.Url"
 msgstr ""
+"``urls``（数组）（必填）1–3 个来自 AccessibleVersion 或 RelatedItems.Url 的绝对 URL 地址"
 
 #: ../../tools/odphp_tools.rst:106 15a0811d095148d99b9ed3071e6654a3
 msgid ""
 "``max_chars`` (integer) (optional) Optional hard cap on extracted text "
 "length (e.g., 5000)"
-msgstr ""
+msgstr "``max_chars``（整数）（可选） 可选的提取文本长度硬性上限（例如，5000）"
 
 #: ../../tools/odphp_tools.rst:109 58056dd09ab54534904b9a9e42118745
 msgid ""
 "``return_html`` (boolean) (optional) If true, also return minimally cleaned "
 "HTML"
-msgstr ""
+msgstr "``return_html``（布尔值）（可选）如果为 true，则同时返回经过最小清理的 HTML。"
 
 #: ../../tools/odphp_tools.rst:126 235d669b046545beb9fdfb1eecfb5eb0
 msgid "**odphp_topicsearch** (Type: ODPHPTopicSearch)"
-msgstr ""
+msgstr "**odphp_topicsearch**（类型：ODPHPTopicSearch）"
 
 #: ../../tools/odphp_tools.rst:128 a2aaa6ec46064335bcb8e18a73c66448
 msgid ""
 "Find specific health topics and get their full content. Use when the user "
 "mentions a keyword (e.g..."
-msgstr ""
+msgstr "查找特定健康主题并获取其完整内容。用户提及关键词时使用（例如...）。"
 
 #: ../../tools/odphp_tools.rst 0440ffe863894115af66699b9196711a
 msgid "odphp_topicsearch tool specification"
-msgstr ""
+msgstr "odphp_topicsearch 工具规范"
 
 #: ../../tools/odphp_tools.rst:134 5a010c81f2da4edc91b2ddcf636d49ef
 msgid "**Name**: ``odphp_topicsearch``"
-msgstr ""
+msgstr "**名称**：``odphp_topicsearch``"
 
 #: ../../tools/odphp_tools.rst:135 886ed9db68b84151b1dd1beb0e694a06
 msgid "**Type**: ``ODPHPTopicSearch``"
-msgstr ""
+msgstr "**类型**：``ODPHPTopicSearch``"
 
 #: ../../tools/odphp_tools.rst:136 6fabfd6b10b4425a8d6c5783a3407658
 msgid ""
@@ -239,27 +241,30 @@ msgid ""
 "AccessibleVersion link. Next: to quote or summarize the actual page text, "
 "pass the AccessibleVersion (or RelatedItems URLs) to `odphp_outlink_fetch`."
 msgstr ""
+"**描述**：查找特定健康主题并获取其完整内容。当用户提及关键词（例如“叶酸”、“血压”）或已从 `odphp_itemlist` 获得主题/类别 ID"
+" 时使用。返回详细的主题页面（标题、章节、相关项目）及无障碍版本链接。下一步：如需引用或摘要实际页面文本，请将无障碍版本链接（或相关项目 URL）传递给"
+" `odphp_outlink_fetch`。"
 
 #: ../../tools/odphp_tools.rst:143 ed8c2a3e8c1b4c7486c4a2082cd17190
 msgid "``topicId`` (string) (optional) Comma-separated topic IDs"
-msgstr ""
+msgstr "``topicId``（字符串）（可选）以逗号分隔的主题ID列表"
 
 #: ../../tools/odphp_tools.rst:146 271696237e3a4e1196dd55b51b24d42b
 msgid "``categoryId`` (string) (optional) Comma-separated category IDs"
-msgstr ""
+msgstr "``categoryId``（字符串）（可选）以逗号分隔的类别ID列表"
 
 #: ../../tools/odphp_tools.rst:149 a33909a77292405db9d021b3f1229c26
 msgid "``keyword`` (string) (optional) Keyword search for topics"
-msgstr ""
+msgstr "``keyword``（字符串）（可选）用于主题的关键词搜索"
 
 #: ../../tools/odphp_tools.rst:168 9ab8ba052bef4e6e857d65c2d9412b6b
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/odphp_tools.rst:170 92a0bba0a4f14eb0a05317e6f7666dbf
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/odphp_tools.rst:171 367e80a7a7204a7bb749037e1d87b175
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -7,29 +7,29 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../reference/data_sources.rst:2 f8fa60f936ed4623b25635ef47400c5a
 msgid "Data Sources"
-msgstr ""
+msgstr "数据源"
 
 #: ../../reference/data_sources.rst:4 117fdeb2ba514396a88bc6edf602ba36
 msgid ""
-"ToolUniverse integrates with the following scientific sources, AI models,"
-" and services. We thank all the organizations and teams behind these "
-"valuable resources for making their data and tools publicly available."
-msgstr ""
+"ToolUniverse integrates with the following scientific sources, AI models, "
+"and services. We thank all the organizations and teams behind these valuable"
+" resources for making their data and tools publicly available."
+msgstr "ToolUniverse 集成了以下科学资源、人工智能模型和服务。我们感谢所有为公众开放其数据和工具的组织及团队，感谢他们提供的宝贵资源。"
 
 #: ../../reference/data_sources.rst:6 6b8a5571209943529853460da719e5e0
 msgid ""
@@ -46,6 +46,8 @@ msgid ""
 "**Azure OpenAI** - `Azure OpenAI <https://azure.microsoft.com/en-"
 "us/products/ai-services/openai-service>`_"
 msgstr ""
+"**Azure OpenAI** - `Azure OpenAI <https://azure.microsoft.com/zh-"
+"cn/products/ai-services/openai-service>`_"
 
 #: ../../reference/data_sources.rst:9 cf734168882f4566a5377aac24df501c
 msgid ""
@@ -71,8 +73,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:14 ff3c3aa270c14be08d75559ccc4af126
 msgid ""
-"**ClinicalTrials.gov** - `ClinicalTrials.gov "
-"<https://clinicaltrials.gov/>`_"
+"**ClinicalTrials.gov** - `ClinicalTrials.gov <https://clinicaltrials.gov/>`_"
 msgstr ""
 
 #: ../../reference/data_sources.rst:15 ee306039acd8463bb9446923eab03f78
@@ -99,15 +100,15 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:20 c0ccbb0acfc64840adee3edac0240ef1
 msgid ""
-"**EFO (Experimental Factor Ontology)** - `EFO "
-"<https://www.ebi.ac.uk/efo/>`_"
-msgstr ""
+"**EFO (Experimental Factor Ontology)** - `EFO <https://www.ebi.ac.uk/efo/>`_"
+msgstr "**EFO（实验因素本体）** - `EFO <https://www.ebi.ac.uk/efo/>`_"
 
 #: ../../reference/data_sources.rst:21 bd0a55096b77425f93804149c0ebd490
 msgid ""
 "**EMBL-EBI OLS (Ontology Lookup Service)** - `EMBL-EBI OLS "
 "<https://www.ebi.ac.uk/ols/>`_"
 msgstr ""
+"**EMBL-EBI OLS（本体查询服务）** - `EMBL-EBI OLS <https://www.ebi.ac.uk/ols/>`_"
 
 #: ../../reference/data_sources.rst:22 3cf90b794aa840cc9394fac021e3c89c
 msgid "**Enrichr** - `Enrichr <https://maayanlab.cloud/Enrichr/>`_"
@@ -123,7 +124,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:25 eaea59ecd23a4176b018543c1042ccac
 msgid "**FDA (FAERS)** - `FDA FAERS <https://open.fda.gov/>`_"
-msgstr ""
+msgstr "**FDA（FAERS）** - `FDA FAERS <https://open.fda.gov/>`_"
 
 #: ../../reference/data_sources.rst:26 7b93679e6be043d789c48898ec5cbd23
 msgid "**FDA OpenFDA API** - `FDA OpenFDA API <https://api.fda.gov/>`_"
@@ -165,8 +166,8 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:35 c3f58ca722674225adca4d43030948a6
 msgid ""
-"**Immune Compass** - `Immune Compass <https://github.com/compass-ai"
-"/immune-compass>`_"
+"**Immune Compass** - `Immune Compass <https://github.com/compass-ai/immune-"
+"compass>`_"
 msgstr ""
 
 #: ../../reference/data_sources.rst:36 6d56cd278fed4188a4914d1e7680bbc0
@@ -235,8 +236,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:49 52137ccbccf746c288103f88fc9defb4
 msgid ""
-"**PubTator** - `PubTator "
-"<https://www.ncbi.nlm.nih.gov/research/pubtator/>`_"
+"**PubTator** - `PubTator <https://www.ncbi.nlm.nih.gov/research/pubtator/>`_"
 msgstr ""
 
 #: ../../reference/data_sources.rst:50 55853925b9f345af9a2e2727c98d2767
@@ -269,8 +269,8 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:56 a527bf3df5084022bb270c2ff2dcece9
 msgid ""
-"**Transcriptformer** - `Transcriptformer <https://chanzuckerberg.com/blog"
-"/transcriptformer-model-overview/>`_"
+"**Transcriptformer** - `Transcriptformer "
+"<https://chanzuckerberg.com/blog/transcriptformer-model-overview/>`_"
 msgstr ""
 
 #: ../../reference/data_sources.rst:57 9dd1d1cfaab4475884d18601f1fd7d6d
@@ -280,4 +280,3 @@ msgstr ""
 #: ../../reference/data_sources.rst:58 209a3451300a4599b0cf8dc0c9e8ea06
 msgid "**USPTO** - `USPTO <https://www.uspto.gov/>`_"
 msgstr ""
-

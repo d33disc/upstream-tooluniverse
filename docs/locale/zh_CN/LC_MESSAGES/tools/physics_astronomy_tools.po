@@ -202,35 +202,35 @@ msgstr "**get_sunpy_info**（类型：PackageTool）"
 #: ../../tools/physics_astronomy_tools.rst:132
 #: f613c9baba434cf89131a88e861fd056
 msgid "Get information about the sunpy package. Solar data analysis library"
-msgstr ""
+msgstr "获取关于 sunpy 包的信息。太阳数据分析库"
 
 #: ../../tools/physics_astronomy_tools.rst 14a827fa353244eda62452d262c50482
 msgid "get_sunpy_info tool specification"
-msgstr ""
+msgstr "get_sunpy_info 工具规格说明"
 
 #: ../../tools/physics_astronomy_tools.rst:138
 #: b014fdd9589b4421bb4168dc51eeb963
 msgid "**Name**: ``get_sunpy_info``"
-msgstr ""
+msgstr "**名称**：``get_sunpy_info``"
 
 #: ../../tools/physics_astronomy_tools.rst:140
 #: 52ff35a6ed054aeba3129ce76fea8891
 msgid ""
 "**Description**: Get information about the sunpy package. Solar data "
 "analysis library"
-msgstr ""
+msgstr "**描述**：获取有关 sunpy 包的信息。太阳数据分析库"
 
 #: ../../tools/physics_astronomy_tools.rst:159
 #: d167379f928943ed8e14d47c3e935f63
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/physics_astronomy_tools.rst:161
 #: cc2a2f3d3fa74817b9507a1c6395d8cb
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/physics_astronomy_tools.rst:162
 #: c6d189086a0d401c91ac0fa23d1c086b
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

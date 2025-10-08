@@ -264,15 +264,15 @@ msgstr ""
 msgid ""
 "Predicts solubility, lipophilicity, and hydration endpoints "
 "(Solubility_AqSolDB, Lipophilicity_As..."
-msgstr ""
+msgstr "预测溶解度、脂溶性及水合终点（Solubility_AqSolDB、Lipophilicity_As...）"
 
 #: ../../tools/admetai_tools.rst 19cc0c5ed1e04f39a5b02fa7acdf4341
 msgid "ADMETAI_predict_solubility_lipophilicity_hydration tool specification"
-msgstr ""
+msgstr "ADMETAI_预测溶解度、脂溶性与水合工具规格说明"
 
 #: ../../tools/admetai_tools.rst:208 d5c3f3f6fb2d40bfb7845a62eaf79f51
 msgid "**Name**: ``ADMETAI_predict_solubility_lipophilicity_hydration``"
-msgstr ""
+msgstr "**名称**：``ADMETAI_predict_solubility_lipophilicity_hydration``"
 
 #: ../../tools/admetai_tools.rst:210 774582b52b254a5785fd6436d5557e6d
 msgid ""
@@ -281,48 +281,51 @@ msgid ""
 "HydrationFreeEnergy_FreeSolv) for a given list of molecules in SMILES "
 "format."
 msgstr ""
+"**描述**：预测给定分子列表（SMILES格式）的溶解度、脂溶性及水合终点（Solubility_AqSolDB、Lipophilicity_AstraZeneca、HydrationFreeEnergy_FreeSolv）。"
 
 #: ../../tools/admetai_tools.rst:231 50b5f1f626cd4d24a4e440957ff331b1
 msgid "**ADMETAI_predict_stress_response** (Type: ADMETAITool)"
-msgstr ""
+msgstr "**ADMETAI_predict_stress_response**（类型：ADMETAITool）"
 
 #: ../../tools/admetai_tools.rst:233 c247fc303f0b4bcfb06772a2b22fa6d5
 msgid ""
 "Predicts stress response endpoints (SR-ARE, SR-ATAD5, SR-HSE, SR-MMP, "
 "SR-p53) for a given list of..."
-msgstr ""
+msgstr "预测给定列表的应激反应终点（SR-ARE、SR-ATAD5、SR-HSE、SR-MMP、SR-p53）"
 
 #: ../../tools/admetai_tools.rst 15ecbc61b98943bfb77d67086b06b116
 msgid "ADMETAI_predict_stress_response tool specification"
-msgstr ""
+msgstr "ADMETAI_predict_stress_response 工具规格说明"
 
 #: ../../tools/admetai_tools.rst:239 ac1910beb99b4b34bd4bcba465f77af1
 msgid "**Name**: ``ADMETAI_predict_stress_response``"
-msgstr ""
+msgstr "**名称**：``ADMETAI_predict_stress_response``"
 
 #: ../../tools/admetai_tools.rst:241 a8a3fe4251904c9f8bd719b5c9f684c7
 msgid ""
 "**Description**: Predicts stress response endpoints (SR-ARE, SR-ATAD5, SR-"
 "HSE, SR-MMP, SR-p53) for a given list of molecules in SMILES format."
 msgstr ""
+"**描述**：预测给定分子列表（SMILES格式）的应激反应终点（SR-ARE、SR-ATAD5、SR-HSE、SR-MMP、SR-p53）。"
 
 #: ../../tools/admetai_tools.rst:262 b7c7c1289980495a84556cac1cc93b98
 msgid "**ADMETAI_predict_toxicity** (Type: ADMETAITool)"
-msgstr ""
+msgstr "**ADMETAI_predict_toxicity**（类型：ADMETAITool）"
 
 #: ../../tools/admetai_tools.rst:264 576c9626502f40d69eca216d7b368355
 msgid ""
 "Predicts toxicity endpoints (AMES, Carcinogens_Lagunin, ClinTox, DILI, "
 "LD50_Zhu, Skin_Reaction, h..."
 msgstr ""
+"预测毒性终点（AMES、Carcinogens_Lagunin、ClinTox、DILI、LD50_Zhu、Skin_Reaction、h..."
 
 #: ../../tools/admetai_tools.rst 190d5dde69af4873a9be542b2b1c2ec9
 msgid "ADMETAI_predict_toxicity tool specification"
-msgstr ""
+msgstr "ADMETAI_predict_toxicity 工具规格说明"
 
 #: ../../tools/admetai_tools.rst:270 fd4ad18f340a4497a1cde4350a24dd1c
 msgid "**Name**: ``ADMETAI_predict_toxicity``"
-msgstr ""
+msgstr "**名称**：``ADMETAI_predict_toxicity``"
 
 #: ../../tools/admetai_tools.rst:272 f51a80c58fc84f70afaacb3fccd3f4ff
 msgid ""
@@ -330,15 +333,16 @@ msgid ""
 "ClinTox, DILI, LD50_Zhu, Skin_Reaction, hERG) for a given list of molecules "
 "in SMILES format."
 msgstr ""
+"**描述**：预测给定分子列表（SMILES格式）的毒性终点（AMES、Carcinogens_Lagunin、ClinTox、DILI、LD50_Zhu、Skin_Reaction、hERG）。"
 
 #: ../../tools/admetai_tools.rst:293 5bcd3813c8bf4312bdfae91f1059dc54
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/admetai_tools.rst:295 2616db6151334d218675f28d16c7c2a6
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/admetai_tools.rst:296 c8cd95866a3249e2a02c71ee185f8cae
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

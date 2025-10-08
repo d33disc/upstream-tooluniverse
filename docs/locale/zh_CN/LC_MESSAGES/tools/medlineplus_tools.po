@@ -205,62 +205,62 @@ msgstr "``gene``（字符串）（必填）基因名称的URL标识，例如 \"B
 
 #: ../../tools/medlineplus_tools.rst:126 4468e57aec45469a9ad8d4622d71eb0f
 msgid "**MedlinePlus_get_genetics_index** (Type: MedlinePlusRESTTool)"
-msgstr ""
+msgstr "**MedlinePlus_get_genetics_index**（类型：MedlinePlusRESTTool）"
 
 #: ../../tools/medlineplus_tools.rst:128 2aa32b27a45f4a54b6f5c7e04c3732af
 msgid ""
 "Download index file (XML) of all genetics entries in MedlinePlus, get "
 "complete list in one call."
-msgstr ""
+msgstr "下载MedlinePlus中所有遗传学条目的索引文件（XML），一次调用获取完整列表。"
 
 #: ../../tools/medlineplus_tools.rst 7c6c6429b94c4f26bdcd14a98cc1a6f9
 msgid "MedlinePlus_get_genetics_index tool specification"
-msgstr ""
+msgstr "MedlinePlus_get_genetics_index 工具规格说明"
 
 #: ../../tools/medlineplus_tools.rst:134 7918b246e2a647fcbe4504007f4514e3
 msgid "**Name**: ``MedlinePlus_get_genetics_index``"
-msgstr ""
+msgstr "**名称**：``MedlinePlus_get_genetics_index``"
 
 #: ../../tools/medlineplus_tools.rst:136 5ac15e49a54d4539bee1579b8c3c6d5e
 msgid ""
 "**Description**: Download index file (XML) of all genetics entries in "
 "MedlinePlus, get complete list in one call."
-msgstr ""
+msgstr "**描述**：下载MedlinePlus中所有遗传学条目的索引文件（XML），一次调用即可获取完整列表。"
 
 #: ../../tools/medlineplus_tools.rst:140 7d56a0f872ff4f2bb84723ba597a83c0
 msgid "No parameters required."
-msgstr ""
+msgstr "无需参数。"
 
 #: ../../tools/medlineplus_tools.rst:155 3626ae91704141d89921ca0155aff5e2
 msgid "**MedlinePlus_search_topics_by_keyword** (Type: MedlinePlusRESTTool)"
-msgstr ""
+msgstr "**MedlinePlus_按关键词搜索主题**（类型：MedlinePlusRESTTool）"
 
 #: ../../tools/medlineplus_tools.rst:157 578e69a6f437499c8859981953326051
 msgid ""
 "Search for relevant information in MedlinePlus Web Service by keyword across"
 " health topics or oth..."
-msgstr ""
+msgstr "通过关键词在 MedlinePlus Web 服务中搜索健康主题或其他相关信息"
 
 #: ../../tools/medlineplus_tools.rst 83a26ac404f549e6aaa40e080ba5278c
 msgid "MedlinePlus_search_topics_by_keyword tool specification"
-msgstr ""
+msgstr "MedlinePlus_按关键词搜索主题 工具规格说明"
 
 #: ../../tools/medlineplus_tools.rst:163 5087da583337459babf6ccb3944167e9
 msgid "**Name**: ``MedlinePlus_search_topics_by_keyword``"
-msgstr ""
+msgstr "**名称**：``MedlinePlus_search_topics_by_keyword``"
 
 #: ../../tools/medlineplus_tools.rst:165 001904cf1fc44d3881ff32f18cc3e6a4
 msgid ""
 "**Description**: Search for relevant information in MedlinePlus Web Service "
 "by keyword across health topics or other sub-libraries (such as drugs, "
 "genetics, etc.)."
-msgstr ""
+msgstr "**描述**：通过关键词在MedlinePlus网络服务中搜索相关信息，涵盖健康主题或其他子库（如药物、遗传学等）。"
 
 #: ../../tools/medlineplus_tools.rst:169 36f38c748989410bb469ca3521c6ae7d
 msgid ""
 "``term`` (string) (required) Search keyword, e.g., \"diabetes\", needs to be"
 " URL encoded before passing."
-msgstr ""
+msgstr "``term``（字符串）（必填）搜索关键词，例如“diabetes”，传递前需进行URL编码。"
 
 #: ../../tools/medlineplus_tools.rst:172 290d3eb241204bed951b3510c8593d66
 msgid ""
@@ -268,6 +268,8 @@ msgid ""
 "healthTopics (English health topics), healthTopicsSpanish (Spanish health "
 "topics), drugs (English drugs), etc."
 msgstr ""
+"``db``（字符串）（必填）指定要搜索的数据库，例如 "
+"healthTopics（英文健康主题）、healthTopicsSpanish（西班牙文健康主题）、drugs（英文药物）等。"
 
 #: ../../tools/medlineplus_tools.rst:175 0defe02e39a545e3ab229ebf6f474323
 msgid ""
@@ -275,15 +277,17 @@ msgid ""
 "(concise information, default), topic (detailed XML record), all (includes "
 "all available information)."
 msgstr ""
+"``rettype``（字符串）（可选）结果返回格式，选项包括：brief（简洁信息，默认）、topic（详细的 XML "
+"记录）、all（包含所有可用信息）。"
 
 #: ../../tools/medlineplus_tools.rst:193 1198dd3f8768472797579c35932cf48f
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/medlineplus_tools.rst:195 649a9baaa0064592bbd37e58920bfa03
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/medlineplus_tools.rst:196 4ca41d0dc9d541578e67676be82c8adf
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

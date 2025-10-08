@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:1
@@ -31,6 +31,8 @@ msgid ""
 "本教程将指导你如何在 ToolUniverse 中集成 Model Context Protocol (MCP) 工具。ToolUniverse "
 "提供了多种方式来连接和使用 MCP 服务器的工具。"
 msgstr ""
+"本教程将指导您如何在 ToolUniverse 中集成 Model Context Protocol (MCP) 工具。ToolUniverse "
+"提供多种方式来连接和使用 MCP 服务器的工具。"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:5
 #: 0a6db970f00549fcb71c8a182586d6cf
@@ -80,62 +82,65 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:18
 #: 59eef54a7e534eeba87e98e00b62dfd1
 msgid "1. MCPClientTool"
-msgstr ""
+msgstr "1. MCP客户端工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:19
 #: 762951daa1a449f8962d15280b4359e2
 msgid "**用途**: 通用的 MCP 客户端，支持所有 MCP 操作"
-msgstr ""
+msgstr "**用途**：通用的 MCP 客户端，支持所有 MCP 操作"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:20
 #: e7c2eb431c494a979fd9dc81f8e1b1ce
 msgid "**特点**: 手动配置，精确控制"
-msgstr ""
+msgstr "**特点**：手动配置，精确控制"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:21
 #: c0019290e2b5416fb99cccc0018f77e4
 msgid "**适用场景**: 需要访问多种 MCP 功能（工具、资源、提示）"
-msgstr ""
+msgstr "**适用场景**：需要访问多种 MCP 功能（工具、资源、提示）"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:23
 #: aa238925b44147cbaeb3a8cf456936a0
 msgid "2. MCPAutoLoaderTool"
-msgstr ""
+msgstr "2. MCP自动加载工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:24
 #: 26ff4ef73fab44268811fe329a30f4f1
 msgid "**用途**: 自动发现并加载 MCP 服务器上的所有工具"
-msgstr ""
+msgstr "**用途**：自动发现并加载 MCP 服务器上的所有工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:25
 #: bafa265802444eefb33e9d34a6c878e8
 msgid "**特点**: 自动化配置，批量加载"
-msgstr ""
+msgstr "**特点**：自动化配置，批量加载"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:26
 #: d8494b05736c4e84b62745e9253a8819
 msgid "**适用场景**: 快速集成整个 MCP 服务器的工具集"
-msgstr ""
+msgstr "**适用场景**：快速集成整个 MCP 服务器的工具集"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:28
 #: f72e992ecb884d65a4dda9a38ad5e566
 msgid "3. MCPProxyTool"
 msgstr ""
+"3. MCPProxyTool\n"
+"\n"
+"3. MCPProxyTool"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:29
 #: 0d4359626bbc43e8835d0e9898bf7e18
 msgid "**用途**: 为特定的 MCP 工具创建直接代理"
-msgstr ""
+msgstr "**用途**：为特定的 MCP 工具创建直接代理"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:30
 #: 94b335a5d7dd423486b47b612f110828
 msgid "**特点**: 一对一映射，透明转发"
-msgstr ""
+msgstr "**特点**：一对一映射，透明转发"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:31
 #: ac1a48585df24e328cddfbca39a192e3
 msgid "**适用场景**: 将单个 MCP 工具集成为 ToolUniverse 工具"
-msgstr ""
+msgstr "**适用场景**：将单个 MCP 工具集成至 ToolUniverse 工具中"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:33
 #: c04696235ea14dec9c0312b3418f83ac
@@ -671,4 +676,3 @@ msgstr ""
 #: 986583527ff04eb19f01db4724436af0
 msgid "[API 参考文档](../../api/mcp_tools.rst)"
 msgstr ""
-

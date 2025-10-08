@@ -1671,199 +1671,199 @@ msgstr "**名称**: ``FDA_get_active_ingredient_info_by_drug_name``"
 msgid ""
 "**Description**: Fetch a list of active ingredients in a specific drug "
 "product."
-msgstr ""
+msgstr "**描述**：获取特定药品中活性成分的列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:158
 #: e365034621ce4c2ea6482e8ea5476227
 msgid "**FDA_get_adverse_reactions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_adverse_reactions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:160
 #: 24ec6ef4feda43e7854bc7da35b4946b
 msgid "Retrieve adverse reactions information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索不良反应信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b43845ad41b74d7e8735b43ec8129123
 msgid "FDA_get_adverse_reactions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_adverse_reactions_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:166
 #: 05a2a41f8a0543adb7609c13b1e9b597
 msgid "**Name**: ``FDA_get_adverse_reactions_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_adverse_reactions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:168
 #: 2c17e986e42c43bbb88ee8b2dd529b3c
 msgid ""
 "**Description**: Retrieve adverse reactions information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药品名称检索不良反应信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:194
 #: 79183d18284f43e0a91c29fdb0907318
 msgid "**FDA_get_alarms_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_alarms_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:196
 #: 4239666f5e514deb82b432b3b75ff990
 msgid "Retrieve alarms based on the specified drug name."
-msgstr ""
+msgstr "根据指定的药品名称检索报警信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 58a2dbb40b8f496ba14abafea2021397
 msgid "FDA_get_alarms_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_alarms_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:202
 #: 2e5708b6efe34f91831ffe79bc9042d8
 msgid "**Name**: ``FDA_get_alarms_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_alarms_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:204
 #: 49d85a85efe94e658cf7ebca2d409081
 msgid "**Description**: Retrieve alarms based on the specified drug name."
-msgstr ""
+msgstr "**描述**：根据指定的药品名称检索报警信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:230
 #: d841eb06a254434f87556b4f5df3fa1a
 msgid "**FDA_get_animal_pharmacology_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_animal_pharmacology_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:232
 #: 4cfdb176b35b4d589cae1835279040d1
 msgid ""
 "Retrieve animal pharmacology and toxicology information based on drug names."
-msgstr ""
+msgstr "根据药物名称检索动物药理学和毒理学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 5392f90382774e7ba8d75eaf3e249366
 msgid "FDA_get_animal_pharmacology_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_animal_pharmacology_info_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:238
 #: c4a8e92395a64b0ea16943528a5a543a
 msgid "**Name**: ``FDA_get_animal_pharmacology_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_animal_pharmacology_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:240
 #: 368d3b344fbf4e83bc5792aa042c36df
 msgid ""
 "**Description**: Retrieve animal pharmacology and toxicology information "
 "based on drug names."
-msgstr ""
+msgstr "**描述**：根据药物名称检索动物药理学和毒理学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:266
 #: 59870b2f261d412582581c92a796dcc7
 msgid ""
 "**FDA_get_assembly_installation_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_assembly_installation_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:268
 #: e624b9b3b4af46e58fd8c1dc2bfd9c58
 msgid "Retrieve assembly or installation instructions based on drug names."
-msgstr ""
+msgstr "根据药品名称检索组装或安装说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ca27b8527edf4408bf082c8b09e448ca
 msgid "FDA_get_assembly_installation_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_assembly_installation_info_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:274
 #: c9b5171b84b64781b9d4eb9a4495a9bb
 msgid "**Name**: ``FDA_get_assembly_installation_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_assembly_installation_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:276
 #: 52f0e86e3244429f80b70961d2ad3138
 msgid ""
 "**Description**: Retrieve assembly or installation instructions based on "
 "drug names."
-msgstr ""
+msgstr "**描述**：根据药品名称检索装配或安装说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:302
 #: ef1643edd72048afa3f74792e6f45736
 msgid "**FDA_get_boxed_warning_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_boxed_warning_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:304
 #: 148fbdd585844eca96bfaa5d42e1b870
 msgid ""
 "Retrieve boxed warning and adverse effects information for a specific drug."
-msgstr ""
+msgstr "检索特定药物的黑框警告及不良反应信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst adc555821baa4a438ea70b029f13d656
 msgid "FDA_get_boxed_warning_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_boxed_warning_info_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:310
 #: 2c683b8e57774cd78f12f992f25dccad
 msgid "**Name**: ``FDA_get_boxed_warning_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_boxed_warning_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:312
 #: 255671c8884b44e98c9340b44433cb27
 msgid ""
 "**Description**: Retrieve boxed warning and adverse effects information for "
 "a specific drug."
-msgstr ""
+msgstr "**描述**：检索特定药物的黑框警告及不良反应信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:338
 #: 752ffa3fc09c48069a58fdf92c5d5611
 msgid "**FDA_get_brand_name_generic_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_brand_name_generic_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:340
 #: e13ff5a8b7a149a89c6b4081137cb9f1
 msgid ""
 "Retrieve the brand name and generic name from generic name or brand name of "
 "a drug."
-msgstr ""
+msgstr "从药物的通用名或品牌名中提取品牌名和通用名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst e6f962ddcb354e4692c62eee9a772a27
 msgid "FDA_get_brand_name_generic_name tool specification"
-msgstr ""
+msgstr "FDA_get_brand_name_generic_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:346
 #: acadc58898ba47ceafae3d7c4602bd76
 msgid "**Name**: ``FDA_get_brand_name_generic_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_brand_name_generic_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:348
 #: da418d275d7d4b0da4c26fbc2b8a5e54
 msgid ""
 "**Description**: Retrieve the brand name and generic name from generic name "
 "or brand name of a drug."
-msgstr ""
+msgstr "**描述**：从药物的通用名或品牌名中提取品牌名和通用名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:352
 #: 2f7289df7b53462985bee2c012a4868f
 msgid ""
 "``drug_name`` (string) (optional) The generic name or the brand name of the "
 "drug."
-msgstr ""
+msgstr "``drug_name``（字符串）（可选）药物的通用名或品牌名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:371
 #: e8cfecd9422541d7945843abc770a214
 msgid "**FDA_get_calibration_instructions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_calibration_instructions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:373
 #: 8a6d2b263c694549a75b798eac76fe53
 msgid "Retrieve calibration instructions based on the specified drug name."
-msgstr ""
+msgstr "根据指定的药品名称检索校准说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 53949407ab4b491f9e0102c11ff5712d
 msgid "FDA_get_calibration_instructions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_calibration_instructions_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:379
 #: e9cdfe4d936a41a3ae60e9824ffc5a2d
 msgid "**Name**: ``FDA_get_calibration_instructions_by_drug_name``"
-msgstr ""
+msgstr "**名称**：``FDA_get_calibration_instructions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:381
 #: 5f4bda22d4a64b99be216c8e89d51280
 msgid ""
 "**Description**: Retrieve calibration instructions based on the specified "
 "drug name."
-msgstr ""
+msgstr "**描述**：根据指定的药品名称检索校准说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:407
 #: e292a9c05d644c79b44e11f9e25ebf50
@@ -1871,18 +1871,19 @@ msgid ""
 "**FDA_get_carcinogenic_mutagenic_fertility_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_carcinogenic_mutagenic_fertility_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:409
 #: 7d41d40f3f8846089412154ce3d188f7
 msgid ""
 "Retrieve carcinogenic, mutagenic, or fertility impairment information based "
 "on the drug name."
-msgstr ""
+msgstr "根据药品名称检索致癌性、致突变性或生育能力损害信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 290293cf58ce43bf9cd0369c5b5ea4cd
 msgid ""
 "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:415
 #: 54fb5d33582549e48871a5d64101b5d4

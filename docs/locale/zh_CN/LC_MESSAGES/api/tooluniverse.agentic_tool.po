@@ -71,7 +71,7 @@ msgstr "尝试初始化特定的 API 和模型。"
 #: e0d92e17d39243f2a793063fa9a2e5ee of
 #: tooluniverse.agentic_tool.AgenticTool.run:1
 msgid "Execute the tool."
-msgstr ""
+msgstr "执行该工具。"
 
 #: f68f48d5b147429cad40ef8e67f1e2b8 of
 #: tooluniverse.agentic_tool.AgenticTool.run:3
@@ -79,19 +79,19 @@ msgid ""
 "The default BaseTool implementation accepts an optional arguments mapping to"
 " align with most concrete tool implementations which expect a dictionary of "
 "inputs."
-msgstr ""
+msgstr "默认的 BaseTool 实现接受一个可选的参数映射，以与大多数具体工具实现保持一致，这些工具通常期望输入为一个字典。"
 
 #: 82a76e88951845668cf1cd627acd6967 of
 #: tooluniverse.agentic_tool.AgenticTool.is_available:1
 msgid "Check if the tool is available for use."
-msgstr ""
+msgstr "请检查该工具是否可用。"
 
 #: c7d5dd3046774750ad79d07dab0ed5cd of
 #: tooluniverse.agentic_tool.AgenticTool.get_availability_status:1
 msgid "Get detailed availability status of the tool."
-msgstr ""
+msgstr "获取工具的详细可用性状态。"
 
 #: 042d5b3baec94a6e8717218be0e69ed1 of
 #: tooluniverse.agentic_tool.AgenticTool.retry_initialization:1
 msgid "Attempt to reinitialize the tool (useful if API keys were updated)."
-msgstr ""
+msgstr "尝试重新初始化工具（如果已更新 API 密钥，此操作可能有用）。"

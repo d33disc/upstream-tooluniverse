@@ -396,40 +396,40 @@ msgstr "**描述**：通过疾病的 efoId 检索与特定疾病相关的已知�
 #: d993a4d7922f49c98a61839d675d54e1 e213e523deab4b49b5510e01c5a2500f
 #: ebe78eb811474fa190f382d136abdf56 ee2ad637cb974f49880946eaec6c6773
 msgid "``efoId`` (string) (optional) The EFO ID of the disease."
-msgstr ""
+msgstr "``efoId``（字符串）（可选）疾病的 EFO 编号。"
 
 #: ../../tools/opentarget_tools.rst:124 3cd3d519a28e4d809a93a9096a0f4813
 msgid ""
 "``size`` (integer) (optional) Number of entries to fetch, recomanding a "
 "large number to avoid missing drugs."
-msgstr ""
+msgstr "``size``（整数）（可选）要获取的条目数量，建议设置较大数值以避免遗漏药物。"
 
 #: ../../tools/opentarget_tools.rst:140 69de4289c7594fd58e5bd791ecd28498
 msgid ""
 "**OpenTargets_get_associated_drugs_by_target_ensemblID** (Type: OpenTarget)"
-msgstr ""
+msgstr "**OpenTargets_通过目标EnsemblID获取相关药物**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:142 a02950e6c0064a87ab496349b4d40951
 msgid ""
 "Get known drugs and information (e.g. id, name, MoA) associated with a "
 "specific target ensemblID,..."
-msgstr ""
+msgstr "获取与特定目标ensemblID相关的已知药物及信息（例如ID、名称、作用机制）..."
 
 #: ../../tools/opentarget_tools.rst 9bfaecdbf3da4aa59154bffb6091791b
 msgid ""
 "OpenTargets_get_associated_drugs_by_target_ensemblID tool specification"
-msgstr ""
+msgstr "OpenTargets_get_associated_drugs_by_target_ensemblID 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:148 06c2c595446a445d9eb59f3f4491e63e
 msgid "**Name**: ``OpenTargets_get_associated_drugs_by_target_ensemblID``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_associated_drugs_by_target_ensemblID``"
 
 #: ../../tools/opentarget_tools.rst:150 be01c8b13650471b849bd4117272452a
 msgid ""
 "**Description**: Get known drugs and information (e.g. id, name, MoA) "
 "associated with a specific target ensemblID, including clinical trial phase "
 "and mechanism of action of the drugs."
-msgstr ""
+msgstr "**描述**：获取与特定靶点ensemblID相关的已知药物及其信息（例如ID、名称、作用机制），包括药物的临床试验阶段和作用机制。"
 
 #: ../../tools/opentarget_tools.rst:154 ../../tools/opentarget_tools.rst:280
 #: ../../tools/opentarget_tools.rst:1246 ../../tools/opentarget_tools.rst:1276
@@ -440,167 +440,170 @@ msgstr ""
 #: d896d94db33440878e34e6d9e3750409 e9f5404ba8814644999b9a82ec774ec0
 #: f85cd5dbca3d416c9190d645e617e8f7 fadcdab1cc534cbaa04e83378d0789dc
 msgid "``ensemblId`` (string) (optional) The Ensembl ID of the target."
-msgstr ""
+msgstr "``ensemblId``（字符串）（可选）目标的Ensembl ID。"
 
 #: ../../tools/opentarget_tools.rst:157 120697877ecd4502b51baae98e4820ca
 msgid "``size`` (integer) (optional) Number of entries to fetch."
-msgstr ""
+msgstr "``size``（整数）（可选）要获取的条目数量。"
 
 #: ../../tools/opentarget_tools.rst:160 9139f3c6d62d4e7b9dc98d2b2e53d344
 msgid "``cursor`` (string) (optional) Cursor for pagination."
-msgstr ""
+msgstr "``cursor``（字符串）（可选）用于分页的游标。"
 
 #: ../../tools/opentarget_tools.rst:176 b1d06b713adf48ec9488a7f862fba571
 msgid ""
 "**OpenTargets_get_associated_phenotypes_by_disease_efoId** (Type: "
 "OpenTarget)"
-msgstr ""
+msgstr "**OpenTargets_根据疾病EFO ID获取相关表型**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:178 f054d35db41747919fc3739ec84cf790
 msgid "Find HPO phenotypes asosciated with the specified disease efoId."
-msgstr ""
+msgstr "查找与指定疾病 efoId 相关的 HPO 表型。"
 
 #: ../../tools/opentarget_tools.rst 183b3dfe57c74ef09beb47345b3132a0
 msgid ""
 "OpenTargets_get_associated_phenotypes_by_disease_efoId tool specification"
-msgstr ""
+msgstr "OpenTargets_根据疾病EFO ID获取相关表型工具规范"
 
 #: ../../tools/opentarget_tools.rst:184 679bcc5176f9494482c1c2ec59e05b1c
 msgid "**Name**: ``OpenTargets_get_associated_phenotypes_by_disease_efoId``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_associated_phenotypes_by_disease_efoId``"
 
 #: ../../tools/opentarget_tools.rst:186 f56fe49b2fbe4cfbb367cf7ee31bad1b
 msgid ""
 "**Description**: Find HPO phenotypes asosciated with the specified disease "
 "efoId."
-msgstr ""
+msgstr "**描述**：查找与指定疾病 efoId 相关的 HPO 表型。"
 
 #: ../../tools/opentarget_tools.rst:190 ../../tools/opentarget_tools.rst:220
 #: ../../tools/opentarget_tools.rst:1675 3a439127ddd7488aaf7d9f4724c605a8
 #: 73514b3818944edc97f9f968b6eb45c4 b312bd8141644b18bd30f695977c472b
 msgid "``efoId`` (string) (optional) The efoId of a disease or phenotype."
-msgstr ""
+msgstr "``efoId``（字符串）（可选）疾病或表型的 efoId。"
 
 #: ../../tools/opentarget_tools.rst:206 5f23e1f8498f4ab1a9b6c7f0af036496
 msgid ""
 "**OpenTargets_get_associated_targets_by_disease_efoId** (Type: OpenTarget)"
 msgstr ""
+"**OpenTargets_get_associated_targets_by_disease_efoId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:208 29765dee7f784432941b5319b6c2713d
 msgid ""
 "Find targets associated with a specific disease or phenotype based on efoId."
-msgstr ""
+msgstr "根据 efoId 查找与特定疾病或表型相关的靶点。"
 
 #: ../../tools/opentarget_tools.rst 1a03ecd0d7e24edeb0b4d3a2ce778a73
 msgid "OpenTargets_get_associated_targets_by_disease_efoId tool specification"
-msgstr ""
+msgstr "OpenTargets_通过疾病EFO ID获取相关靶点工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:214 0fd464be14cc4dd1ac2f0a254cd802bc
 msgid "**Name**: ``OpenTargets_get_associated_targets_by_disease_efoId``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_associated_targets_by_disease_efoId``"
 
 #: ../../tools/opentarget_tools.rst:216 72db95f45c9d480b9e2577f9cbfae9a5
 msgid ""
 "**Description**: Find targets associated with a specific disease or "
 "phenotype based on efoId."
-msgstr ""
+msgstr "**描述**：根据 efoId 查找与特定疾病或表型相关的靶点。"
 
 #: ../../tools/opentarget_tools.rst:236 75d981829ff249f684dc875027a111c4
 msgid ""
 "**OpenTargets_get_associated_targets_by_drug_chemblId** (Type: OpenTarget)"
 msgstr ""
+"**OpenTargets_get_associated_targets_by_drug_chemblId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:238 93d8f4e9053d437b98dadb51ecd41aa6
 msgid ""
 "Retrieve the list of targets linked to a specific drug chemblId based on its"
 " mechanism of action."
-msgstr ""
+msgstr "根据药物的作用机制，检索与特定药物 chemblId 相关联的靶点列表。"
 
 #: ../../tools/opentarget_tools.rst 38155fcd2086425db8997d29b6228d28
 msgid "OpenTargets_get_associated_targets_by_drug_chemblId tool specification"
-msgstr ""
+msgstr "OpenTargets_get_associated_targets_by_drug_chemblId 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:244 1082bea939d341b8a9e4f7b5e61e606d
 msgid "**Name**: ``OpenTargets_get_associated_targets_by_drug_chemblId``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_associated_targets_by_drug_chemblId``"
 
 #: ../../tools/opentarget_tools.rst:246 d0647c18be8e437688d8bd6e1a023971
 msgid ""
 "**Description**: Retrieve the list of targets linked to a specific drug "
 "chemblId based on its mechanism of action."
-msgstr ""
+msgstr "**描述**：根据药物的作用机制，检索与特定药物 chemblId 相关联的靶点列表。"
 
 #: ../../tools/opentarget_tools.rst:266 6a9784d1edb94bcebc559922f6cd4d84
 msgid ""
 "**OpenTargets_get_biological_mouse_models_by_ensemblID** (Type: OpenTarget)"
 msgstr ""
+"**OpenTargets_get_biological_mouse_models_by_ensemblID**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:268 2508687afe85474c9f4494e2c72ca6a4
 msgid ""
 "Retrieve biological mouse models, including allelic compositions and genetic"
 " backgrounds, for a s..."
-msgstr ""
+msgstr "检索生物小鼠模型，包括等位基因组成和遗传背景，用于s..."
 
 #: ../../tools/opentarget_tools.rst b7756335fc9946dc8e035aaba8b916b6
 msgid ""
 "OpenTargets_get_biological_mouse_models_by_ensemblID tool specification"
-msgstr ""
+msgstr "OpenTargets_get_biological_mouse_models_by_ensemblID 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:274 fac9d17ba68d47369f9054886ef5e770
 msgid "**Name**: ``OpenTargets_get_biological_mouse_models_by_ensemblID``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_biological_mouse_models_by_ensemblID``"
 
 #: ../../tools/opentarget_tools.rst:276 e96461b79715453aaf2bcf477a1b6652
 msgid ""
 "**Description**: Retrieve biological mouse models, including allelic "
 "compositions and genetic backgrounds, for a specific target."
-msgstr ""
+msgstr "**描述**：检索生物小鼠模型，包括等位基因组成和遗传背景，针对特定靶标。"
 
 #: ../../tools/opentarget_tools.rst:296 b671c63cf79645f0a8a7d3c0b592ddce
 msgid ""
 "**OpenTargets_get_chemical_probes_by_target_ensemblID** (Type: OpenTarget)"
-msgstr ""
+msgstr "**OpenTargets_通过目标Ensembl ID获取化学探针**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:298 554bade02a3f4f8bb5186ff6e767616f
 msgid ""
 "Retrieve chemical probes associated with a specific target using its "
 "ensemblID."
-msgstr ""
+msgstr "使用其 ensemblID 检索与特定靶点相关的化学探针。"
 
 #: ../../tools/opentarget_tools.rst 8705f16fabc14478a00ba50cb5381fee
 msgid "OpenTargets_get_chemical_probes_by_target_ensemblID tool specification"
-msgstr ""
+msgstr "OpenTargets_get_chemical_probes_by_target_ensemblID 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:304 3b540feb86c54abeac38c7db819b4f18
 msgid "**Name**: ``OpenTargets_get_chemical_probes_by_target_ensemblID``"
-msgstr ""
+msgstr "**名称**：``OpenTargets_get_chemical_probes_by_target_ensemblID``"
 
 #: ../../tools/opentarget_tools.rst:306 4d9025b27045498ca044cddb85171ac5
 msgid ""
 "**Description**: Retrieve chemical probes associated with a specific target "
 "using its ensemblID."
-msgstr ""
+msgstr "**描述**：使用目标的 ensemblID 检索与之相关的化学探针。"
 
 #: ../../tools/opentarget_tools.rst:310 d670bac0f0f642af8259e36a6f41da7e
 msgid ""
 "``ensemblId`` (string) (optional) The Ensembl ID of the target for which to "
 "retrieve chemical probes."
-msgstr ""
+msgstr "``ensemblId``（字符串）（可选）用于检索化学探针的目标的Ensembl ID。"
 
 #: ../../tools/opentarget_tools.rst:326 bb5a6327d1ee4612a14dd37f0e17233c
 msgid ""
 "**OpenTargets_get_disease_ancestors_parents_by_efoId** (Type: OpenTarget)"
-msgstr ""
+msgstr "**OpenTargets_get_disease_ancestors_parents_by_efoId**（类型：OpenTarget）"
 
 #: ../../tools/opentarget_tools.rst:328 e824b0fcd67d40b686f3f3945a38daa1
 msgid ""
 "Retrieve the disease ancestors and parents in the ontology using the disease"
 " EFO ID."
-msgstr ""
+msgstr "使用疾病 EFO ID 在本体中检索疾病的祖先和父节点。"
 
 #: ../../tools/opentarget_tools.rst 7dd594f0475b49828ddecd4e64cc9fd2
 msgid "OpenTargets_get_disease_ancestors_parents_by_efoId tool specification"
-msgstr ""
+msgstr "OpenTargets_get_disease_ancestors_parents_by_efoId 工具规格说明"
 
 #: ../../tools/opentarget_tools.rst:334 1740880b2c3247fa8ee954e71ddf9174
 msgid "**Name**: ``OpenTargets_get_disease_ancestors_parents_by_efoId``"

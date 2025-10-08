@@ -87,39 +87,39 @@ msgstr "工具的主入口点"
 #: 966c9c9050c3422facd662ade6eec52d of
 #: tooluniverse.embedding_database.EmbeddingDatabase._create_from_documents:1
 msgid "Create new embedding database from documents"
-msgstr ""
+msgstr "从文档创建新的嵌入式数据库"
 
 #: 34527998998546fb83fe9a591496c08a of
 #: tooluniverse.embedding_database.EmbeddingDatabase._add_documents:1
 msgid "Add documents to existing database"
-msgstr ""
+msgstr "将文档添加到现有数据库"
 
 #: 3e78c955103c45ed8ad0f63a2d7a0d37 of
 #: tooluniverse.embedding_database.EmbeddingDatabase._search:1
 msgid "Search for similar documents in database"
-msgstr ""
+msgstr "在数据库中搜索相似文档"
 
 #: ef76de34a6604e759049a1544055e7bf of
 #: tooluniverse.embedding_database.EmbeddingDatabase._load_database:1
 msgid "Load existing database from path"
-msgstr ""
+msgstr "从路径加载现有数据库"
 
 #: 0c2c28f8b9a14b9d84e4ebc2c962649b of
 #: tooluniverse.embedding_database.EmbeddingDatabase._generate_embeddings:1
 msgid "Generate embeddings using OpenAI or Azure OpenAI API"
-msgstr ""
+msgstr "使用 OpenAI 或 Azure OpenAI API 生成嵌入"
 
 #: d02f91c7b46c467bade5ac579d870b52 of
 #: tooluniverse.embedding_database.EmbeddingDatabase._database_exists:1
 msgid "Check if database exists"
-msgstr ""
+msgstr "检查数据库是否存在"
 
 #: 946d4713bd73432b9a0db00c2b290b6f of
 #: tooluniverse.embedding_database.EmbeddingDatabase._get_database_info:1
 msgid "Get database information"
-msgstr ""
+msgstr "获取数据库信息"
 
 #: f2dbcda9c0804e2c8b5cd89f57886ad6 of
 #: tooluniverse.embedding_database.EmbeddingDatabase._matches_filters:1
 msgid "Check if metadata matches the given filters"
-msgstr ""
+msgstr "检查元数据是否符合指定的筛选条件"

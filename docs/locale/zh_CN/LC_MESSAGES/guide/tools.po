@@ -182,7 +182,7 @@ msgstr "语义搜索与相似性"
 
 #: ../../guide/tools.rst:96 ba40feeb299347d890d065328bc1af0c
 msgid "Robotics"
-msgstr ""
+msgstr "机器人技术"
 
 #: ../../guide/tools.rst:97 2d2d28beb0fe4d4693b10496066c6680
 msgid "1"
@@ -194,11 +194,11 @@ msgstr ""
 
 #: ../../guide/tools.rst:99 fd1cd8b18cca4a93bd230c114f88f3ab
 msgid "Laboratory automation"
-msgstr ""
+msgstr "实验室自动化"
 
 #: ../../guide/tools.rst:100 9e93f9d248c44d97837dc797961d87d1
 msgid "**Total**"
-msgstr ""
+msgstr "**总计**"
 
 #: ../../guide/tools.rst:101 a24ec333df8e4b5bbb3a2a086a7d7ee3
 msgid "**588**"
@@ -210,15 +210,15 @@ msgstr ""
 
 #: ../../guide/tools.rst:103 b527783656fb473f85bb056cc5083bb1
 msgid "**Comprehensive scientific ecosystem**"
-msgstr ""
+msgstr "**全面的科学生态系统**"
 
 #: ../../guide/tools.rst:106 553854a9c18b484da92dfdb965bf7651
 msgid "🧬 Molecular & Genetic Data"
-msgstr ""
+msgstr "🧬 分子与遗传数据"
 
 #: ../../guide/tools.rst:109 2f59a13f517a499eaf4d2ea8591ee670
 msgid "UniProt - Protein Information"
-msgstr ""
+msgstr "UniProt - 蛋白质信息"
 
 #: ../../guide/tools.rst:111 20e0482aa2f74f74bb4326fc6250ed53
 msgid "Access comprehensive protein and gene information."

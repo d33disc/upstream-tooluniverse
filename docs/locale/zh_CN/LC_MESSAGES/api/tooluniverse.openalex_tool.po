@@ -73,72 +73,72 @@ msgstr "出版日期筛选的结束年份（可选）。"
 #: 7d1f0ee181c746948321b3760fe47ab4 of
 #: tooluniverse.openalex_tool.OpenAlexTool.search_literature:11
 msgid "Filter for open access papers only (optional)."
-msgstr ""
+msgstr "仅筛选开放获取论文（可选）。"
 
 #: ../../api/tooluniverse.openalex_tool.rst 593be816c0774c68a1442940803ebf6d
 #: 83f729fb59fe4d88b81da4c1df1455f9 df0f8c8d2ec24b6a9c4ead8792c4c050
 #: f6c77b2965904264a497401bd0517f8b
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 9938003dfd174aa3a69be645a4c0daa4 of
 #: tooluniverse.openalex_tool.OpenAlexTool.search_literature:14
 msgid "List of dictionaries containing paper information."
-msgstr ""
+msgstr "包含论文信息的字典列表。"
 
 #: ../../api/tooluniverse.openalex_tool.rst 2bb4024b9642469e9bfe5af3b55469a7
 #: 67a9a2ccc9bd4a918c55605def29cc0b 94daf75b8399460caa4e383d70ee3ebc
 #: f5227cc6ce854aa6976d53c62402aaf6
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 770538adfad649bfa174b3e2b22f40cc of
 #: tooluniverse.openalex_tool.OpenAlexTool._extract_paper_info:1
 msgid ""
 "Extract relevant information from a work object returned by OpenAlex API."
-msgstr ""
+msgstr "从OpenAlex API返回的工作对象中提取相关信息。"
 
 #: f16a4434bf454f178f212cf1e4ad13c2 of
 #: tooluniverse.openalex_tool.OpenAlexTool._extract_paper_info:3
 msgid "Work object from OpenAlex API response."
-msgstr ""
+msgstr "从 OpenAlex API 响应中获取工作对象。"
 
 #: 9991ca8305f6494dbd3ed89aa8d6dc4e of
 #: tooluniverse.openalex_tool.OpenAlexTool._extract_paper_info:6
 msgid "Formatted paper information."
-msgstr ""
+msgstr "格式化纸张信息。"
 
 #: 010b58198aee42abbb6539ca479a4926 of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_paper_by_doi:1
 msgid "Retrieve a specific paper by its DOI."
-msgstr ""
+msgstr "通过其 DOI 检索特定论文。"
 
 #: 4bdd9fe4d9324d2997c8d57efee0f4e6 of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_paper_by_doi:3
 msgid "DOI of the paper to retrieve."
-msgstr ""
+msgstr "要检索的论文 DOI。"
 
 #: 311e04d5b98648f8870d9eb33e37a3fe of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_paper_by_doi:6
 msgid "Paper information or None if not found."
-msgstr ""
+msgstr "纸张信息或未找到时为无。"
 
 #: 26d5b60253b14f628ab008d304daf4b0 of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_papers_by_author:1
 msgid "Retrieve papers by a specific author."
-msgstr ""
+msgstr "检索特定作者的论文。"
 
 #: 97ab9169698f45299125d82884d2f87f of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_papers_by_author:3
 msgid "Name of the author to search for."
-msgstr ""
+msgstr "要搜索的作者名称。"
 
 #: 3fba02ef0a6a44779eeea8fcd589f9be of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_papers_by_author:5
 msgid "Maximum number of results to return."
-msgstr ""
+msgstr "返回结果的最大数量。"
 
 #: 5a35fa32af0c46aaa1be8d3dd2ebec44 of
 #: tooluniverse.openalex_tool.OpenAlexTool.get_papers_by_author:8
 msgid "List of papers by the author."
-msgstr ""
+msgstr "作者论文列表"

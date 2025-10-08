@@ -205,40 +205,40 @@ msgstr "**类型**：``GWASAssociationsForStudy``"
 msgid ""
 "**Description**: Get all associations for a specific study, sorted by "
 "p-value."
-msgstr ""
+msgstr "**描述**：获取特定研究的所有关联，按p值排序。"
 
 #: ../../tools/gwas_tools.rst:100 ../../tools/gwas_tools.rst:358
 #: 2d04f2cfdba84847ba51de6dd1f42147 c056ddb1c28d49429057cef26cddb609
 msgid "``accession_id`` (string) (optional) Study accession identifier"
-msgstr ""
+msgstr "``accession_id``（字符串）（可选）研究登录标识符"
 
 #: ../../tools/gwas_tools.rst:122 15823d5caa54410caeca0e5db957bfdf
 msgid "**gwas_get_associations_for_trait** (Type: GWASAssociationsForTrait)"
-msgstr ""
+msgstr "**gwas_get_associations_for_trait**（类型：GWASAssociationsForTrait）"
 
 #: ../../tools/gwas_tools.rst:124 1416b1738e4e462fa4ca8ea0c9929250
 msgid ""
 "Get all associations for a specific trait, sorted by p-value (most "
 "significant first)."
-msgstr ""
+msgstr "获取特定性状的所有关联，按p值排序（最显著优先）。"
 
 #: ../../tools/gwas_tools.rst 5e703939f41544c6bf7bb4cef648dfa3
 msgid "gwas_get_associations_for_trait tool specification"
-msgstr ""
+msgstr "gwas_get_associations_for_trait 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:130 4c4cbfbf11d445518a28fa1aa2b2f73a
 msgid "**Name**: ``gwas_get_associations_for_trait``"
-msgstr ""
+msgstr "**名称**：``gwas_get_associations_for_trait``"
 
 #: ../../tools/gwas_tools.rst:131 c4b8bd0b02ba4bbd8cb9211c2d429c4e
 msgid "**Type**: ``GWASAssociationsForTrait``"
-msgstr ""
+msgstr "**类型**：``GWASAssociationsForTrait``"
 
 #: ../../tools/gwas_tools.rst:132 d848a55b84a0453d8372446cfcd12cab
 msgid ""
 "**Description**: Get all associations for a specific trait, sorted by "
 "p-value (most significant first)."
-msgstr ""
+msgstr "**描述**：获取特定性状的所有关联，按p值排序（最显著的优先）。"
 
 #: ../../tools/gwas_tools.rst:136 ../../tools/gwas_tools.rst:238
 #: ../../tools/gwas_tools.rst:316 ../../tools/gwas_tools.rst:352
@@ -246,145 +246,145 @@ msgstr ""
 #: 55dbc8de0cef4726bac7ff35ebb1e996 a8e9762a41894eb0b12189e3ed1d17d6
 #: e062a6abcfaf49b99ec3cd7c740dfd40 f5cc4c50eac747e6af08d638aef70397
 msgid "``efo_trait`` (string) (optional) EFO trait identifier or name"
-msgstr ""
+msgstr "``efo_trait``（字符串）（可选）EFO 性状标识符或名称"
 
 #: ../../tools/gwas_tools.rst:158 a0c75f5a53d543b6b93e40f904663594
 msgid "**gwas_get_snp_by_id** (Type: GWASSNPByID)"
-msgstr ""
+msgstr "**gwas_get_snp_by_id**（类型：GWASSNPByID）"
 
 #: ../../tools/gwas_tools.rst:160 92c4f9af49df4c7b8d09bb99b58e0042
 msgid "Get a specific GWAS SNP by its rs ID."
-msgstr ""
+msgstr "通过其 rs ID 获取特定的 GWAS SNP。"
 
 #: ../../tools/gwas_tools.rst d552095b56f84aecaefa49c83501d38c
 msgid "gwas_get_snp_by_id tool specification"
-msgstr ""
+msgstr "gwas_get_snp_by_id 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:166 aa3d74e97850442b933e971c9c2e40c3
 msgid "**Name**: ``gwas_get_snp_by_id``"
-msgstr ""
+msgstr "**名称**：``gwas_get_snp_by_id``"
 
 #: ../../tools/gwas_tools.rst:167 c2adcf26d2304c7494a4699b7c0221e2
 msgid "**Type**: ``GWASSNPByID``"
-msgstr ""
+msgstr "**类型**：``GWASSNPByID``"
 
 #: ../../tools/gwas_tools.rst:168 3a9b42b45f8f444bb60d318ec80f7612
 msgid "**Description**: Get a specific GWAS SNP by its rs ID."
-msgstr ""
+msgstr "**描述**：通过其 rs ID 获取特定的 GWAS SNP。"
 
 #: ../../tools/gwas_tools.rst:188 5a5e7b2cb7be4121adf9865398fc2d44
 msgid "**gwas_get_snps_for_gene** (Type: GWASSNPsForGene)"
-msgstr ""
+msgstr "**gwas_get_snps_for_gene**（类型：GWASSNPsForGene）"
 
 #: ../../tools/gwas_tools.rst:190 08279f8c9624472a8c28cf72308365e5
 msgid "Get all SNPs mapped to a specific gene."
-msgstr ""
+msgstr "获取映射到特定基因的所有SNP。"
 
 #: ../../tools/gwas_tools.rst 253e9480b31d470291cade98fbeebb70
 msgid "gwas_get_snps_for_gene tool specification"
-msgstr ""
+msgstr "gwas_get_snps_for_gene 工具规范"
 
 #: ../../tools/gwas_tools.rst:196 81a876c02f2b4de892ee89e651fffceb
 msgid "**Name**: ``gwas_get_snps_for_gene``"
-msgstr ""
+msgstr "**名称**：``gwas_get_snps_for_gene``"
 
 #: ../../tools/gwas_tools.rst:197 0ee714ce27984a568084fdea9b10eced
 msgid "**Type**: ``GWASSNPsForGene``"
-msgstr ""
+msgstr "**类型**：``GWASSNPsForGene``"
 
 #: ../../tools/gwas_tools.rst:198 da4d65ffa01248a0bf2bd2d00ff6abd9
 msgid "**Description**: Get all SNPs mapped to a specific gene."
-msgstr ""
+msgstr "**描述**：获取映射到特定基因的所有SNP。"
 
 #: ../../tools/gwas_tools.rst:202 ../../tools/gwas_tools.rst:403
 #: ab608d6397e1426e8a15f95516eb0fd0 de9959c1293640758e185136c3409a91
 msgid "``mapped_gene`` (string) (optional) Gene name or symbol"
-msgstr ""
+msgstr "``mapped_gene``（字符串）（可选）基因名称或符号"
 
 #: ../../tools/gwas_tools.rst:224 c3416271955e4316be500508724a4c02
 msgid "**gwas_get_studies_for_trait** (Type: GWASStudiesForTrait)"
-msgstr ""
+msgstr "**gwas_get_studies_for_trait**（类型：GWASStudiesForTrait）"
 
 #: ../../tools/gwas_tools.rst:226 eb1ab02d0cb444498eb270d3e83797e9
 msgid ""
 "Get studies for a specific trait with optional filters for cohort, GxE "
 "interactions, and summary ..."
-msgstr ""
+msgstr "获取特定性状的研究，可选择性应用队列、基因-环境交互（GxE）及摘要等筛选条件..."
 
 #: ../../tools/gwas_tools.rst f2a4a085fe8b4a4d9ff78ad391f40222
 msgid "gwas_get_studies_for_trait tool specification"
-msgstr ""
+msgstr "gwas_get_studies_for_trait 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:232 ab28d0f5d25648beaaf0bb0927f57754
 msgid "**Name**: ``gwas_get_studies_for_trait``"
-msgstr ""
+msgstr "**名称**：``gwas_get_studies_for_trait``"
 
 #: ../../tools/gwas_tools.rst:233 1dbf7b4aa1d441f9bcdb867adf914b2d
 msgid "**Type**: ``GWASStudiesForTrait``"
-msgstr ""
+msgstr "**类型**：``GWASStudiesForTrait``"
 
 #: ../../tools/gwas_tools.rst:234 b0ebd4792438497ca639a29200f7133f
 msgid ""
 "**Description**: Get studies for a specific trait with optional filters for "
 "cohort, GxE interactions, and summary statistics."
-msgstr ""
+msgstr "**描述**：获取特定性状的研究数据，支持按队列、基因与环境交互（GxE）及汇总统计信息进行可选筛选。"
 
 #: ../../tools/gwas_tools.rst:241 ../../tools/gwas_tools.rst:442
 #: 8b8b7018e7c34452bda3f37d582c85de e389b112a25d41ab8bf92da80fbc7c55
 msgid "``disease_trait`` (string) (optional) Disease trait name"
-msgstr ""
+msgstr "``disease_trait``（字符串）（可选）疾病特征名称"
 
 #: ../../tools/gwas_tools.rst:244 ../../tools/gwas_tools.rst:445
 #: 85f71bba5bce495a948e54591115262f c261346cf7d54284877fc498f10c61c7
 msgid ""
 "``cohort`` (string) (optional) Cohort name (e.g., 'UKB' for UK Biobank)"
-msgstr ""
+msgstr "``cohort``（字符串）（可选）队列名称（例如，英国生物样本库的“UKB”）"
 
 #: ../../tools/gwas_tools.rst:247 ../../tools/gwas_tools.rst:448
 #: 75cff2f9d9cb456e8cf42c6edba15413 f9f378439ef24c0ca33992157439329b
 msgid ""
 "``gxe`` (boolean) (optional) Filter for Gene-by-Environment interaction "
 "studies"
-msgstr ""
+msgstr "``gxe``（布尔型）（可选）用于基因与环境交互作用研究的筛选条件"
 
 #: ../../tools/gwas_tools.rst:250 ../../tools/gwas_tools.rst:451
 #: 931064084d6241a6bb2b8ab3b319b3a3 beafca6b30e44b029b6a38d059eb7a22
 msgid ""
 "``full_pvalue_set`` (boolean) (optional) Filter for studies with full "
 "summary statistics"
-msgstr ""
+msgstr "``full_pvalue_set``（布尔值）（可选）用于筛选具有完整汇总统计数据的研究"
 
 #: ../../tools/gwas_tools.rst:272 6b16466e88db440386081d2b5acb8ebf
 msgid "**gwas_get_study_by_id** (Type: GWASStudyByID)"
-msgstr ""
+msgstr "**gwas_get_study_by_id**（类型：GWASStudyByID）"
 
 #: ../../tools/gwas_tools.rst:274 876bbc78a78e4570a751c8595171a7b7
 msgid "Get a specific GWAS study by its unique identifier."
-msgstr ""
+msgstr "通过其唯一标识符获取特定的GWAS研究。"
 
 #: ../../tools/gwas_tools.rst 46032571f0324ebdb67c9a55d7007ad0
 msgid "gwas_get_study_by_id tool specification"
-msgstr ""
+msgstr "gwas_get_study_by_id 工具规范"
 
 #: ../../tools/gwas_tools.rst:280 3a508c07aa824763adedcbafa9fdf159
 msgid "**Name**: ``gwas_get_study_by_id``"
-msgstr ""
+msgstr "**名称**：``gwas_get_study_by_id``"
 
 #: ../../tools/gwas_tools.rst:281 20bffb776b6e4dc7a799ea2cd27e3b64
 msgid "**Type**: ``GWASStudyByID``"
-msgstr ""
+msgstr "**类型**：``GWASStudyByID``"
 
 #: ../../tools/gwas_tools.rst:282 bab29397ca9642f8af43df2f19e48a58
 msgid "**Description**: Get a specific GWAS study by its unique identifier."
-msgstr ""
+msgstr "**描述**：通过唯一标识符获取特定的GWAS研究。"
 
 #: ../../tools/gwas_tools.rst:286 5bff6f9b735a4192bbbef515c922da86
 msgid "``study_id`` (string) (optional) GWAS study identifier"
-msgstr ""
+msgstr "``study_id``（字符串）（可选）GWAS 研究标识符"
 
 #: ../../tools/gwas_tools.rst:302 afc31c372e0645f6bc532708f6ff1aa2
 msgid "**gwas_get_variants_for_trait** (Type: GWASVariantsForTrait)"
-msgstr ""
+msgstr "**gwas_get_variants_for_trait**（类型：GWASVariantsForTrait）"
 
 #: ../../tools/gwas_tools.rst:304 9b5540fa54ad44328b6dbb454ee578b5
 msgid ""

@@ -100,19 +100,19 @@ msgstr "工具的配置字典"
 #: 1be0dd69af53408ea88290ae80655187 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword.__init__:5
 msgid "Reference to the ToolUniverse instance containing all tools"
-msgstr ""
+msgstr "引用包含所有工具的 ToolUniverse 实例"
 
 #: 9dbd215af8ba49c890f80a0c93b5a547 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._tokenize_and_normalize:1
 msgid ""
 "Tokenize text and apply normalization including stop word removal and "
 "stemming."
-msgstr ""
+msgstr "对文本进行分词，并应用规范化处理，包括停用词移除和词干提取。"
 
 #: cfb47b98d6cc406d9bc7b4e10a17d83d of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._tokenize_and_normalize:3
 msgid "Input text to tokenize"
-msgstr ""
+msgstr "输入文本进行分词"
 
 #: ../../api/tooluniverse.tool_finder_keyword.rst
 #: 077e93e829c84cf9ac3024e257eb751e 43674cc800044d22a16e59580386007b
@@ -121,12 +121,12 @@ msgstr ""
 #: 9eccebc134dc4090b73dd079e19ee31f b79a6d32e7394e6d97173bd5125cf0c2
 #: e85d3806387f4551a4c1f308413c76c6
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 794c79b527fc44db9aae089a26263ccb of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._tokenize_and_normalize:6
 msgid "List of processed tokens"
-msgstr ""
+msgstr "处理后的标记列表"
 
 #: ../../api/tooluniverse.tool_finder_keyword.rst
 #: 100ced789f1042798aa92f2488274f5e 19127b103538409da4d22419fce42bd9
@@ -135,78 +135,78 @@ msgstr ""
 #: b4a8562a11f54bb9ac81ef057673ce83 da6ec770c7c8413892ee98185402599a
 #: e840a698625b4332a31f7320f69b31f4
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: abde4d322178437dbca3d05bf04adda6 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._apply_stemming:1
 msgid "Apply basic stemming rules to reduce words to their root form."
-msgstr ""
+msgstr "应用基本的词干提取规则，将单词还原为其词根形式。"
 
 #: 26ee455814ae4a5f893a73e59debbb39 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._apply_stemming:3
 msgid "Word to stem"
-msgstr ""
+msgstr "词干提取"
 
 #: 31da282e76984fbe8f8df69a3cc80349 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._apply_stemming:6
 msgid "Stemmed word"
-msgstr ""
+msgstr "词干词"
 
 #: 18134bdb597d4ebc8b9d8b0dbc58d1ca of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_phrases:1
 msgid "Extract meaningful phrases from tokens for better semantic matching."
-msgstr ""
+msgstr "从标记中提取有意义的短语以实现更好的语义匹配。"
 
 #: 63ea073a90c041ac8098609ec8122952 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_phrases:3
 msgid "Tokenized words"
-msgstr ""
+msgstr "分词"
 
 #: 4a21facd20af491d8f9dc3adec834d60 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_phrases:5
 msgid "Maximum length of phrases to extract"
-msgstr ""
+msgstr "可提取短语的最大长度"
 
 #: a4558ca748334476be5eee874d85bee1 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_phrases:8
 msgid "List of phrases and individual tokens"
-msgstr ""
+msgstr "短语和单个标记列表"
 
 #: 086adabbef0042c2bf4115542c1f9ec9 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._build_tool_index:1
 msgid ""
 "Build TF-IDF index for all tools to enable efficient relevance scoring."
-msgstr ""
+msgstr "为所有工具构建TF-IDF索引，以实现高效的相关性评分。"
 
 #: 8ea762380ed446e6a722aa5b73272248 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._build_tool_index:3
 msgid "List of tool configurations"
-msgstr ""
+msgstr "工具配置列表"
 
 #: 686daf41924441279b9621e2c9f67c6f of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_parameter_text:1
 msgid "Extract searchable text from parameter schema."
-msgstr ""
+msgstr "从参数模式中提取可搜索文本。"
 
 #: 020af6fbc73746d8aca98672352c0ad3 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_parameter_text:3
 msgid "Tool parameter schema"
-msgstr ""
+msgstr "工具参数模式"
 
 #: 72e8e4e7cf12425488e0d7b379058467 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._extract_parameter_text:6
 msgid "List of text elements from parameters"
-msgstr ""
+msgstr "从参数中提取文本元素列表"
 
 #: 82fdf00c21c04b7199b75da1e68a0676 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._calculate_tfidf_score:1
 msgid "Calculate TF-IDF relevance score for a tool given query terms."
-msgstr ""
+msgstr "计算工具针对查询词的TF-IDF相关性得分。"
 
 #: 5a0c5b1720b24396adf095e7085b65cb of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._calculate_tfidf_score:3
 msgid "Processed query terms and phrases"
-msgstr ""
+msgstr "已处理的查询术语和短语"
 
 #: 0fc49ff150864cbdac8f3892a751b95c of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._calculate_tfidf_score:5

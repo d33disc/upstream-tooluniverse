@@ -73,9 +73,9 @@ msgstr "获取工具的入站和出站连接。"
 #: 9a48bd17352745dca2758aed77cdc1be of
 #: tooluniverse.tool_graph_web_ui.ToolGraphWebUI.run:1
 msgid "Run the web application."
-msgstr ""
+msgstr "运行该Web应用程序。"
 
 #: 9bb669f2a05d4370aca1633819e375e3 of
 #: tooluniverse.tool_graph_web_ui.create_web_ui_files:1
 msgid "Create the necessary HTML, CSS, and JS files for the web UI."
-msgstr ""
+msgstr "创建用于网页用户界面的必要HTML、CSS和JS文件。"

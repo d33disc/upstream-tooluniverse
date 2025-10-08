@@ -7,142 +7,147 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../help/faq.rst:2 c0584c386b9a40f88ab3667fc0cef377
 msgid "FAQ - Frequently Asked Questions"
-msgstr ""
+msgstr "常见问题解答"
 
 #: ../../help/faq.rst:4 84413163fd784e5b8327de9cd0b1a6dd
 msgid ""
 "This page contains answers to the most frequently asked questions about "
 "ToolUniverse."
-msgstr ""
+msgstr "本页面包含有关 ToolUniverse 的常见问题解答。"
 
 #: ../../help/faq.rst:7 ff95bc41a55c49b68c48127080c309ce
 msgid "General Questions"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../help/faq.rst:10 2024dbd8cfca4eb6bb84625db612f7a2
 msgid "What is ToolUniverse?"
-msgstr ""
+msgstr "什么是 ToolUniverse？"
 
 #: ../../help/faq.rst:12 1a19152f13724e949fbec5113d7a239b
 msgid ""
-"ToolUniverse is a comprehensive collection of scientific tools for "
-"Agentic AI, offering integration with various scientific databases and "
-"services. It provides a unified interface to access data from FDA, "
-"OpenTargets, ChEMBL, PubTator, and many other sources."
+"ToolUniverse is a comprehensive collection of scientific tools for Agentic "
+"AI, offering integration with various scientific databases and services. It "
+"provides a unified interface to access data from FDA, OpenTargets, ChEMBL, "
+"PubTator, and many other sources."
 msgstr ""
+"ToolUniverse 是一个面向自主智能体的综合科学工具集合，支持与多种科学数据库和服务的集成。它提供统一的界面，便于访问 "
+"FDA、OpenTargets、ChEMBL、PubTator 及众多其他来源的数据。"
 
 #: ../../help/faq.rst:16 84f97518f4a7454eb49afe7173d26678
 msgid "Python SDK"
-msgstr ""
+msgstr "Python 软件开发工具包 (SDK)"
 
 #: ../../help/faq.rst:18 787e1aa5af4c4201a7538492502416cf
 msgid "Use ToolUniverse as a Python library:"
-msgstr ""
+msgstr "将 ToolUniverse 作为 Python 库使用："
 
 #: ../../help/faq.rst:26 a783b659a6424a73b2816717ed60b60b
 msgid "MCP Server"
-msgstr ""
+msgstr "MCP 服务器"
 
 #: ../../help/faq.rst:28 bce8c6c8114d45d79146ca71e5f74e84
 msgid "Use ToolUniverse with AI assistants via MCP:"
-msgstr ""
+msgstr "通过MCP使用配备AI助手的ToolUniverse："
 
 #: ../../help/faq.rst:34 3e5d53134f374080adafb9fabd89777f
 msgid "Command Line"
-msgstr ""
+msgstr "命令行"
 
 #: ../../help/faq.rst:36 bf07577234944ec89b815803eb6013dd
 msgid "Direct tool execution:"
-msgstr ""
+msgstr "直接工具执行："
 
 #: ../../help/faq.rst:43 bd3272eeb376465b9cea00232cae81fe
 msgid "What databases are supported?"
-msgstr ""
+msgstr "支持哪些数据库？"
 
 #: ../../help/faq.rst:45 22c96dccd4e8489c9a8e3777bdb9d3be
 msgid "ToolUniverse integrates with 20+ scientific databases:"
-msgstr ""
+msgstr "ToolUniverse 集成了20多个科学数据库："
 
 #: ../../help/faq.rst:47 6531b9d1a8444c8498e2ac2334b074b9
 msgid "**Drug Information**: FDA FAERS, ChEMBL, PubChem, DrugBank"
-msgstr ""
+msgstr "**药物信息**：FDA FAERS、ChEMBL、PubChem、DrugBank"
 
 #: ../../help/faq.rst:48 0854515ab1264499bf03f840b14adb0b
 msgid "**Gene/Protein Data**: UniProt, Ensembl, Human Protein Atlas"
-msgstr ""
+msgstr "**基因/蛋白质数据**：UniProt、Ensembl、Human Protein Atlas"
 
 #: ../../help/faq.rst:49 546a6086475a4331b18ddf96580a01c4
 msgid "**Disease Information**: OpenTargets, DisGeNET, OMIM"
-msgstr ""
+msgstr "**疾病信息**：OpenTargets、DisGeNET、OMIM"
 
 #: ../../help/faq.rst:50 96c59b49266e4678b78f74bea2a211af
 msgid "**Literature**: PubMed, PubTator"
-msgstr ""
+msgstr "**文献**：PubMed，PubTator"
 
 #: ../../help/faq.rst:51 c7cdcb04cc58492ebaddff1e87c55738
 msgid "**Clinical Data**: ClinicalTrials.gov, UK Biobank"
-msgstr ""
+msgstr "**临床数据**：ClinicalTrials.gov，英国生物银行"
 
 #: ../../help/faq.rst:52 8e56d045cf87499dabceebbd4b1ad411
 msgid "**Pathway Analysis**: Enrichr, KEGG, Reactome"
-msgstr ""
+msgstr "**路径分析**：Enrichr、KEGG、Reactome"
 
 #: ../../help/faq.rst:55 db5e5db866e84be5958b650401b3ab0a
 msgid "Installation & Setup"
-msgstr ""
+msgstr "安装与设置"
 
 #: ../../help/faq.rst:58 bf52beaa38a649599462016d0c335ce0
 msgid "How do I install ToolUniverse?"
-msgstr ""
+msgstr "如何安装ToolUniverse？"
 
 #: ../../help/faq.rst:62 42660a6484f2427fb2019a1c58320d75
 msgid "Basic Installation"
-msgstr ""
+msgstr "基础安装"
 
 #: ../../help/faq.rst:68 3c4cf0ee8e544c9ba86a33f0c2b5b30e
 msgid "Development Installation"
-msgstr ""
+msgstr "开发安装"
 
 #: ../../help/faq.rst:76 764bb6e7550046768f73ea4ec75c06f9
 msgid "With Optional Dependencies"
-msgstr ""
+msgstr "包含可选依赖项"
 
 #: ../../help/faq.rst:83 d9431dfb46bc40aeb61dea7177bcd3d7
 msgid "Do I need API keys?"
-msgstr ""
+msgstr "我是否需要 API 密钥？"
 
 #: ../../help/faq.rst:85 358f25e9a2d34bd4b77d2d4efd2212ee
 msgid "Some tools require API keys for accessing external services:"
-msgstr ""
+msgstr "某些工具需要使用API密钥来访问外部服务："
 
 #: ../../help/faq.rst:87 875d71eef35a4eee826c563ab5228602
 msgid ""
-"**Required API Keys:** - OpenTargets Platform API key (free registration)"
-" - NCBI E-utilities API key (optional but recommended)"
+"**Required API Keys:** - OpenTargets Platform API key (free registration) - "
+"NCBI E-utilities API key (optional but recommended)"
 msgstr ""
+"**所需 API 密钥：**  \n"
+"- OpenTargets 平台 API 密钥（免费注册）  \n"
+"- NCBI E-utilities API 密钥（可选但推荐）"
 
 #: ../../help/faq.rst:91 577d98eddcf0496abcb8e26cbeb15e70
 msgid "**How to set API keys:**"
-msgstr ""
+msgstr "**如何设置API密钥：**"
 
 #: ../../help/faq.rst:100 ae63f1ecdf79416f801f447c696b692b
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../help/faq.rst:103 e203098d19ef42e287da1d9819cbde82
 msgid "Why am I getting rate limit errors?"
@@ -236,8 +241,8 @@ msgstr ""
 
 #: ../../help/faq.rst:189 77012dfb6d584aa9865ce32ce0925830
 msgid ""
-"Yes! You can run multiple ToolUniverse instances or combine with other "
-"MCP servers:"
+"Yes! You can run multiple ToolUniverse instances or combine with other MCP "
+"servers:"
 msgstr ""
 
 #: ../../help/faq.rst:207 a70d8bddb4bb4dc18a888194618b27f2
@@ -429,4 +434,3 @@ msgstr ""
 #: ../../help/faq.rst:376 1ca68a6a08c043a68b418516f44f40e0
 msgid "Minimal code example"
 msgstr ""
-

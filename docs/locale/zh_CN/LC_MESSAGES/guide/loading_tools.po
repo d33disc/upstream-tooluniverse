@@ -224,6 +224,9 @@ msgid ""
 "exclude_tool_types=[\"Unknown\"], tool_config_files={\"custom\": "
 "\"/path/to/custom.json\"}"
 msgstr ""
+"tool_type=[\"uniprot\", "
+"\"ChEMBL\"]，exclude_tools=[\"problematic_tool\"]，exclude_tool_types=[\"Unknown\"]，tool_config_files={\"custom\":"
+" \"/path/to/custom.json\"}"
 
 #: 53e5dc93cf8f4546ac13d0a543faa7bb of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:61
@@ -322,106 +325,106 @@ msgid ""
 "Both functions expose the same 600+ scientific tools through the Model "
 "Context Protocol (MCP), but with different transport configurations and "
 "argument handling."
-msgstr ""
+msgstr "这两个功能通过模型上下文协议（MCP）提供相同的600多个科学工具，但采用不同的传输配置和参数处理方式。"
 
 #: ../../guide/loading_tools.rst:138 581c1a9af2ab4ef498bebf40c897b658
 msgid "tooluniverse-mcp Function"
-msgstr ""
+msgstr "tooluniverse-mcp 功能"
 
 #: ../../guide/loading_tools.rst:140 a27af774b39b4333aa6dbd37cf330f5c
 msgid ""
 "The `tooluniverse-mcp` function is the main entry point for ToolUniverse's "
 "SMCP server, providing full configurability for different deployment "
 "scenarios."
-msgstr ""
+msgstr "`tooluniverse-mcp` 功能是 ToolUniverse SMCP 服务器的主要入口点，提供针对不同部署场景的全面可配置性。"
 
 #: ../../guide/loading_tools.rst:143 734514ee0597491a96aa3c0736c419cf
 msgid "Basic Server Startup"
-msgstr ""
+msgstr "基本服务器启动"
 
 #: ../../guide/loading_tools.rst:145 a8f1618de74740bca6040d9fc0a1c72a
 msgid "Start a basic MCP server with all tools:"
-msgstr ""
+msgstr "使用所有工具启动一个基础的 MCP 服务器："
 
 #: ../../guide/loading_tools.rst:161 ../../guide/loading_tools.rst:307
 #: 14c05894ebc246d7adfd18d5dd17fc18 e2d101c4a58a40d68f83c984a0108948
 msgid "Hook Configuration"
-msgstr ""
+msgstr "钩子配置"
 
 #: ../../guide/loading_tools.rst:163 05f38821aabf4abfb0c8afdff71a6d7b
 msgid "Enable intelligent output processing hooks:"
-msgstr ""
+msgstr "启用智能输出处理钩子："
 
 #: ../../guide/loading_tools.rst:178 ../../guide/loading_tools.rst:323
 #: 5a23a64fe2cc48b79a2c3334ed39439b 72ae05fd37564edd815e982b29bfbbce
 msgid "Available Hook Types"
-msgstr ""
+msgstr "可用的钩子类型"
 
 #: ../../guide/loading_tools.rst:180 ce2a9cfe4f3f4519b973379b7d7d4042
 msgid "**SummarizationHook**: AI-powered summarization of long outputs"
-msgstr ""
+msgstr "**SummarizationHook**：基于人工智能的长文本摘要生成"
 
 #: ../../guide/loading_tools.rst:181 ../../guide/loading_tools.rst:326
 #: 954cec2d7cf34d51a7a4f0186d10fbbf a96bdfaba9e44bc190fe71c09ae7ff02
 msgid "**FileSaveHook**: Save outputs to files with metadata"
-msgstr ""
+msgstr "**FileSaveHook**：将输出及元数据保存到文件中"
 
 #: ../../guide/loading_tools.rst:183 ../../guide/loading_tools.rst:328
 #: 1357f3e714f74db2816c81025ad52955 eeb4368552a046028e2ad95122e89c1e
 msgid "For detailed hook configuration, see :doc:`hooks/index`."
-msgstr ""
+msgstr "有关详细的钩子配置，请参见 :doc:`hooks/index`。"
 
 #: ../../guide/loading_tools.rst:186 96e854c33c674f88832f7c4f6900045d
 msgid "Transport Configuration"
-msgstr ""
+msgstr "传输配置"
 
 #: ../../guide/loading_tools.rst:188 97601fbdf6044e8bbc0428bab181a92a
 msgid "Different transport protocols:"
-msgstr ""
+msgstr "不同的传输协议："
 
 #: ../../guide/loading_tools.rst:204 60fe302b8c8f42b09b96f6e710739481
 msgid "Category-Based Loading"
-msgstr ""
+msgstr "基于类别的加载"
 
 #: ../../guide/loading_tools.rst:206 f1471ca62ca44571b829ff0ef8eafeda
 msgid "Load only specific tool categories:"
-msgstr ""
+msgstr "仅加载特定工具类别："
 
 #: ../../guide/loading_tools.rst:219 d9ed238140fe4c14a2ae8de51d00fb44
 msgid "Tool-Specific Loading"
-msgstr ""
+msgstr "工具特定加载"
 
 #: ../../guide/loading_tools.rst:234 28f5a0b5b36e48c79158b105ccad74c5
 msgid "Type-Based Filtering"
-msgstr ""
+msgstr "基于类型的过滤"
 
 #: ../../guide/loading_tools.rst:249 0c3bef62b1924c27839da09cf7f113c0
 msgid "Server Configuration"
-msgstr ""
+msgstr "服务器配置"
 
 #: ../../guide/loading_tools.rst:251 b0c2078c10d741a691c56f51ec1f5949
 msgid "Advanced server configuration:"
-msgstr ""
+msgstr "高级服务器配置："
 
 #: ../../guide/loading_tools.rst:266 665da0ac30d047a19552bd905ccc3c5b
 msgid "Discovery Commands"
-msgstr ""
+msgstr "发现命令"
 
 #: ../../guide/loading_tools.rst:268 a077960ef1d9439b8ea4b82e0fccd40b
 msgid "List available categories and tools:"
-msgstr ""
+msgstr "列出可用的类别和工具："
 
 #: ../../guide/loading_tools.rst:279 5b437ede678e4f109225b65bf20b6dba
 msgid "Custom Configuration Files"
-msgstr ""
+msgstr "自定义配置文件"
 
 #: ../../guide/loading_tools.rst:281 5d9c6c06f2dc4bd4a6b7324ff592ec70
 msgid "Load additional tool configurations:"
-msgstr ""
+msgstr "加载更多工具配置："
 
 #: ../../guide/loading_tools.rst:289 f0e9c1eb70f149e480c25c45a4f8b317
 msgid "tooluniverse-smcp-stdio Function"
-msgstr ""
+msgstr "tooluniverse-smcp-stdio 函数"
 
 #: ../../guide/loading_tools.rst:291 eb8c216b375d49dd90dd15cf619c70d6
 msgid ""
@@ -430,44 +433,46 @@ msgid ""
 "AI applications. **By default, this function enables output processing hooks"
 " for intelligent post-processing of tool outputs.**"
 msgstr ""
+"`tooluniverse-smcp-stdio` 函数专为 stdio 传输设计，非常适合 Claude Desktop 集成及其他桌面 AI "
+"应用。**默认情况下，该函数启用输出处理钩子，以实现工具输出的智能后处理。**"
 
 #: ../../guide/loading_tools.rst:294 6c5445053367404dafbabc331d57f91b
 msgid "Basic Stdio Server Startup"
-msgstr ""
+msgstr "基础标准输入输出服务器启动"
 
 #: ../../guide/loading_tools.rst:296 9f283c36343e42799236ae6fb0d5e707
 msgid "Start a stdio server with default settings (hooks enabled):"
-msgstr ""
+msgstr "使用默认设置（启用钩子）启动 stdio 服务器："
 
 #: ../../guide/loading_tools.rst:309 6141d64a37564374b1418912aca682f7
 msgid "The stdio server supports intelligent output processing hooks:"
-msgstr ""
+msgstr "stdio 服务器支持智能输出处理钩子："
 
 #: ../../guide/loading_tools.rst:325 2da7461159a8438f8002361aad0306f7
 msgid ""
 "**SummarizationHook** (default): AI-powered summarization of long outputs"
-msgstr ""
+msgstr "**SummarizationHook**（默认）：基于人工智能的长文本摘要生成"
 
 #: ../../guide/loading_tools.rst:332 cc50f44112544b0cbcbef7b3db9fc13a
 msgid "🛠️ Practical Examples"
-msgstr ""
+msgstr "🛠️ 实用示例"
 
 #: ../../guide/loading_tools.rst:335 0947c84bc6774c3d84c1be75b95ca74d
 msgid "Research Workflow Setup"
-msgstr ""
+msgstr "研究工作流程设置"
 
 #: ../../guide/loading_tools.rst:337 927466ee881548c3b2cb5f77587b9372
 msgid "Setting up for scientific research:"
-msgstr ""
+msgstr "科学研究的准备工作："
 
 #: ../../guide/loading_tools.rst:382 b6a96264ccbe42008e12cbc9ef739cca
 msgid "🗂️ File Formats"
-msgstr ""
+msgstr "🗂️ 文件格式"
 
 #: ../../guide/loading_tools.rst:385 709c175f685f462eb502fe438e4a4372
 msgid "Tool Names File Format"
-msgstr ""
+msgstr "工具名称文件格式"
 
 #: ../../guide/loading_tools.rst:387 68fd4f5fe1ff4a5b924f9f565928c0e8
 msgid "Create a text file with one tool name per line:"
-msgstr ""
+msgstr "创建一个文本文件，每行填写一个工具名称："

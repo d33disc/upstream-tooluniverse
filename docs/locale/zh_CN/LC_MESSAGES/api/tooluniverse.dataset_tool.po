@@ -87,17 +87,17 @@ msgstr "返回值"
 #: 2f1c6f23e35d4e358f444cc3f89a5044 of
 #: tooluniverse.dataset_tool.DatasetTool._drugbank_search:14
 msgid "Search results with matched records and metadata"
-msgstr ""
+msgstr "搜索结果包含匹配的记录和元数据"
 
 #: ../../api/tooluniverse.dataset_tool.rst 39fc8b9a5b7643e7aaf95bf2766fc4fa
 #: 7fad5a3244a24d5f9fba580efaba809d
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 7c13304e612a426891deb2433bf509ec of
 #: tooluniverse.dataset_tool.DatasetTool._drugbank_filter:1
 msgid "Filter drugs based on specific criteria and field-based conditions."
-msgstr ""
+msgstr "根据特定条件和字段条件筛选药物。"
 
 #: 50af0f2350e3431fb304f2765a1d7993 of
 #: tooluniverse.dataset_tool.DatasetTool._drugbank_filter:3
@@ -106,6 +106,8 @@ msgid ""
 "condition-value parameters. It supports filter types like contains, "
 "starts_with, ends_with, exact, not_empty."
 msgstr ""
+"此功能专用于基于条件的筛选，使用简单的字段-条件-"
+"值参数。支持的筛选类型包括：包含（contains）、以...开头（starts_with）、以...结尾（ends_with）、精确匹配（exact）、非空（not_empty）。"
 
 #: 5d9d7a62acc2435b827a3aa9ec4f6c89 of
 #: tooluniverse.dataset_tool.DatasetTool._drugbank_filter:6
@@ -115,13 +117,18 @@ msgid ""
 " not_empty) - value (str): Value to filter by (optional for not_empty "
 "condition) - limit (int): Maximum number of results"
 msgstr ""
+"过滤参数包括：  \n"
+"- field (str)：用于过滤的字段名称  \n"
+"- condition (str)：条件类型（包含 contains、以...开头 starts_with、以...结尾 ends_with、精确匹配 exact、非空 not_empty）  \n"
+"- value (str)：用于过滤的值（对于非空 not_empty 条件可选）  \n"
+"- limit (int)：结果的最大数量"
 
 #: 9755d82f4e5a4f04ba0b6c83a87fa100 of
 #: tooluniverse.dataset_tool.DatasetTool._drugbank_filter:13
 msgid "Filtered results with matched records and applied filters"
-msgstr ""
+msgstr "筛选结果包含匹配的记录和已应用的筛选条件"
 
 #: c456f1b9a0d84573b93d98e49792e017 of
 #: tooluniverse.dataset_tool.DatasetTool.get_dataset_info:1
 msgid "Get information about the loaded dataset."
-msgstr ""
+msgstr "获取有关已加载数据集的信息。"

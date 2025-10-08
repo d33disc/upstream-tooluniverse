@@ -97,7 +97,7 @@ msgstr "包含条件规格的字典"
 
 #: 15fed0c6130c4fa0aabbc973527ea863 of tooluniverse.output_hook.HookRule:12
 msgid "The condition specifications"
-msgstr ""
+msgstr "条件规范"
 
 #: 0691828b606b4997b0d87108ad5ff754 0e99a30825c448d28c743936c4c5fe2c
 #: 15fa45906d1046a08fefee902a59b41b 301408e9b850482db733ea24db13b13b
@@ -110,7 +110,7 @@ msgstr ""
 #: tooluniverse.output_hook.OutputHook
 #: tooluniverse.output_hook.SummarizationHook
 msgid "type"
-msgstr ""
+msgstr "类型"
 
 #: 244473e51d354db2944cb615c0e91282 5005a2ee30b0489d87337ae5ba8d6701
 #: a0217487d54b45c7abc21580dac8375b of tooluniverse.output_hook.HookManager:15
@@ -121,25 +121,25 @@ msgstr ""
 #: dd48d8b3487c4a1182bf22af1ac9c284 of
 #: tooluniverse.output_hook.HookRule.__init__:1
 msgid "Initialize the hook rule with conditions."
-msgstr ""
+msgstr "使用条件初始化钩子规则。"
 
 #: 4b32cfce6c324af1a31ed286968cf1ab of
 #: tooluniverse.output_hook.HookRule.__init__:3
 msgid ""
 "Condition specifications including output_length, content_type, tool_type, "
 "etc."
-msgstr ""
+msgstr "条件规范包括 output_length、content_type、tool_type 等。"
 
 #: 3c69b5f8342a44a5a547f237e3667f69 of
 #: tooluniverse.output_hook.HookRule.evaluate:1
 msgid "Evaluate whether the rule conditions are met."
-msgstr ""
+msgstr "评估规则条件是否满足。"
 
 #: 108000abe085463db55d3c71ceb2df9d a8590404c6b54131a0dfd11636456b06 of
 #: tooluniverse.output_hook.HookRule.evaluate:3
 #: tooluniverse.output_hook.OutputHook.should_trigger:3
 msgid "The tool output to evaluate"
-msgstr ""
+msgstr "工具输出以评估"
 
 #: 22a64cbb9a554e8ea1fed2a9fb029390 6f33d2a105d44334b5a6c259e50a4c5c
 #: 70dbf2cd0d1f4639a944b89b9c3be055 c63ac5f274f74194bd0d7a36a10b4f68
@@ -151,7 +151,7 @@ msgstr ""
 #: tooluniverse.output_hook.OutputHook.should_trigger:5
 #: tooluniverse.output_hook.SummarizationHook.process:10
 msgid "Name of the tool that produced the output"
-msgstr ""
+msgstr "生成输出的工具名称"
 
 #: 44e0b779190f43a982d952ebe3672f82 52e30025b1e04a9aa715f3d4196aaccc
 #: 8e74f9df58d740679d3947797b9d9164 a23541b195b0407d97fadd67af2811df
@@ -163,7 +163,7 @@ msgstr ""
 #: tooluniverse.output_hook.OutputHook.should_trigger:7
 #: tooluniverse.output_hook.SummarizationHook.process:12
 msgid "Arguments passed to the tool"
-msgstr ""
+msgstr "传递给工具的参数"
 
 #: 195bc647bf2249588980b469091bd2fa 196de10de20c469f8abd1811b33f08ed
 #: 1c7a6b2d7fcb4705a23ab4ab92ac64b2 dd2c8a34916a43d581f61660d286f60e
@@ -174,7 +174,7 @@ msgstr ""
 #: tooluniverse.output_hook.OutputHook.should_trigger:9
 #: tooluniverse.output_hook.SummarizationHook.process:14
 msgid "Additional context information"
-msgstr ""
+msgstr "附加上下文信息"
 
 #: ../../api/tooluniverse.output_hook.rst 1032739d6d794ce194f5965b1c875daa
 #: 299384876a3d408bbf300ac54f398d47 2dcfa400c3db46b79d5e906de93ba15b
@@ -185,12 +185,12 @@ msgstr ""
 #: e8125a46be8c4a3cb44aed5c87599822 ecbe1257e8a44e22a01e27fc14610a60
 #: f74bd18c1f784c7c8e8f6ff8da404096 fed2a460419f4365a4c17ad7579ee47a
 msgid "Returns"
-msgstr ""
+msgstr "退货"
 
 #: 385f0889aeb241c48d649af06d3b0d9f of
 #: tooluniverse.output_hook.HookRule.evaluate:12
 msgid "True if conditions are met, False otherwise"
-msgstr ""
+msgstr "如果满足条件，则为 True，否则为 False"
 
 #: ../../api/tooluniverse.output_hook.rst 0fb483193e4343ed8af01353af4809ff
 #: 3262eda06c3b49279a80a4cbd5f06733 3afc28f7146c44c3b310e2a14aa5048d
@@ -201,23 +201,23 @@ msgstr ""
 #: b66ad160fb5c4282b29c717d41f682dc dc5783bd4916483cb6c7d0dcbf580d7d
 #: e69d4cc89c8e4c5d861aaa73adcecf43 f9c352a14de445e58f452251674708a2
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 3f86bb5aef5e497c9da79ae5da24ae6f of tooluniverse.output_hook.OutputHook:1
 msgid "Base class for all output hooks."
-msgstr ""
+msgstr "所有输出钩子的基类。"
 
 #: 7832ddb5ae124ec5ac071d3370b58ed4 of tooluniverse.output_hook.OutputHook:3
 msgid ""
 "This abstract base class defines the interface that all output hooks must "
 "implement. Hooks are used to process tool outputs after execution, enabling "
 "features like summarization, filtering, transformation, and validation."
-msgstr ""
+msgstr "此抽象基类定义了所有输出钩子必须实现的接口。钩子用于在工具执行后处理输出，从而实现摘要、过滤、转换和验证等功能。"
 
 #: f84e245b73ae4f448b6a0b20fe985fd6 of tooluniverse.output_hook.OutputHook:7
 msgid ""
 "Hook configuration including name, enabled status, priority, and conditions"
-msgstr ""
+msgstr "钩子配置，包括名称、启用状态、优先级和条件"
 
 #: 65bb65b890504c12a70df25f04f14007 948bbda894f14b1588f0ee2d5a7b20ed
 #: a6d4a19216d24569861923d676b53038 of
@@ -225,11 +225,11 @@ msgstr ""
 #: tooluniverse.output_hook.OutputHook:13
 #: tooluniverse.output_hook.SummarizationHook.__init__:3
 msgid "Hook configuration"
-msgstr ""
+msgstr "钩子配置"
 
 #: cdb208a9c13d45dabd3e568c118bdb12 of tooluniverse.output_hook.OutputHook:19
 msgid "Name of the hook"
-msgstr ""
+msgstr "挂钩名称"
 
 #: 0dba28862fed44f1ba6f807864c678c7 870cfbe545b649cdb62d5d1d9dbdfd74
 #: 8dc6a408ac7d4d748adb896af0bcdf67 9c1fc99fdce64abb88b285bd0ad8ac15 of
@@ -242,7 +242,7 @@ msgstr ""
 
 #: aad397f9014548d5bf1a100e82fd0317 of tooluniverse.output_hook.OutputHook:25
 msgid "Whether the hook is enabled"
-msgstr ""
+msgstr "是否启用钩子"
 
 #: 654b397ae0aa469288a2a1fd4dab4dd6 f104dff7c33843999b728584d91016ae of
 #: tooluniverse.output_hook.HookManager:31
@@ -252,7 +252,7 @@ msgstr ""
 
 #: fa2eb9ff088540749a75562d53db19b2 of tooluniverse.output_hook.OutputHook:31
 msgid "Hook priority (lower numbers execute first)"
-msgstr ""
+msgstr "钩子优先级（数字越小优先执行）"
 
 #: 3a839d73f8064050bfcf7b45a6c3f0e1 8a786abadab9496eb24ba29bd1f0b979
 #: f8f8bc409df3417fb17f994b77c7acb5 of tooluniverse.output_hook.OutputHook:33
@@ -263,7 +263,7 @@ msgstr ""
 
 #: 7ec026a9200842d4894da398697599bb of tooluniverse.output_hook.OutputHook:37
 msgid "Rule for when this hook should trigger"
-msgstr ""
+msgstr "触发此钩子的规则"
 
 #: e626555f38e047679022db78e43a84e0 of tooluniverse.output_hook.OutputHook:39
 msgid ":py:class:`HookRule`"
@@ -272,7 +272,7 @@ msgstr ""
 #: 6000602b0abd40f78757f9d7bb029aaf of
 #: tooluniverse.output_hook.OutputHook.__init__:1
 msgid "Initialize the output hook with configuration."
-msgstr ""
+msgstr "使用配置初始化输出钩子。"
 
 #: e012685a67a74e0da89e4749132b5a26 of
 #: tooluniverse.output_hook.OutputHook.__init__:3
@@ -281,28 +281,33 @@ msgid ""
 "hook is active - priority: Execution priority - conditions: Trigger "
 "conditions"
 msgstr ""
+"钩子配置包含：  \n"
+"- name：钩子标识符  \n"
+"- enabled：钩子是否启用  \n"
+"- priority：执行优先级  \n"
+"- conditions：触发条件"
 
 #: 1be910937978456b9cb450ba64e90eb2 of
 #: tooluniverse.output_hook.OutputHook.should_trigger:1
 msgid "Determine if this hook should be triggered for the given output."
-msgstr ""
+msgstr "确定是否应为给定的输出触发此钩子。"
 
 #: d77b604e6700447386458dce37b93867 of
 #: tooluniverse.output_hook.OutputHook.should_trigger:12
 msgid "True if hook should trigger, False otherwise"
-msgstr ""
+msgstr "如果钩子应触发，则为 True，否则为 False"
 
 #: 5db8d3c578804836b68cd9c721b7609b of
 #: tooluniverse.output_hook.OutputHook.process:1
 msgid "Process the tool output."
-msgstr ""
+msgstr "处理工具输出。"
 
 #: f16dc50b42cb4b3f8f8e90264587d194 of
 #: tooluniverse.output_hook.OutputHook.process:3
 msgid ""
 "This method must be implemented by subclasses to define the specific "
 "processing logic for the hook."
-msgstr ""
+msgstr "此方法必须由子类实现，以定义钩子的具体处理逻辑。"
 
 #: 0cbb6746a63545d2a6151c4e71d0e39e 2f5eed4b83474ef5b711d9e3f974c414
 #: 45b03c23c6ab4522a54617ffc705aed0 of
@@ -310,32 +315,32 @@ msgstr ""
 #: tooluniverse.output_hook.HookManager.apply_hooks:7
 #: tooluniverse.output_hook.OutputHook.process:6
 msgid "The tool output to process"
-msgstr ""
+msgstr "工具输出以处理"
 
 #: 8ab0867fa26249cab417afb38011f33f of
 #: tooluniverse.output_hook.OutputHook.process:15
 msgid "The processed output"
-msgstr ""
+msgstr "处理后的输出"
 
 #: ../../api/tooluniverse.output_hook.rst abd07eb66de4475e8f4fa66f1bee7905
 msgid "Raises"
-msgstr ""
+msgstr "提升"
 
 #: aa7951ceaaf54387b233ad0520c04e1d of
 #: tooluniverse.output_hook.OutputHook.process:18
 msgid "If not implemented by subclass"
-msgstr ""
+msgstr "如果未被子类实现"
 
 #: 3cf7705be2eb4f469e98a95e135b6048 721198c44861473585d3f1734a60faf6 of
 #: tooluniverse.output_hook.FileSaveHook:1
 #: tooluniverse.output_hook.SummarizationHook:1
 msgid "Bases: :py:class:`~tooluniverse.output_hook.OutputHook`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.output_hook.OutputHook`"
 
 #: 6be1686fea124b8799711a9a833f7dda of
 #: tooluniverse.output_hook.SummarizationHook:1
 msgid "Hook for intelligent output summarization using AI."
-msgstr ""
+msgstr "用于智能输出摘要的 AI 钩子"
 
 #: a0390e08d3a341c9b3e90ecec39dbfc4 of
 #: tooluniverse.output_hook.SummarizationHook:3
@@ -344,6 +349,7 @@ msgid ""
 " to provide intelligent summarization of long tool outputs. It supports "
 "chunking large outputs, processing each chunk with AI, and merging results."
 msgstr ""
+"此钩子利用ToolUniverse的AgenticTool和ComposeTool基础架构，提供对长工具输出的智能摘要功能。它支持对大型输出进行分块处理，使用AI处理每个分块，并合并结果。"
 
 #: 188e87b11cd241ff9ecff1730efbcd78 of
 #: tooluniverse.output_hook.SummarizationHook:7

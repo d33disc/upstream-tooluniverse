@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse \n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-07 10:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tutorials/finding_tools.rst:3 cdd52e63d90e49dbbf56bd58e93a84e6
@@ -26,40 +26,41 @@ msgstr "工具查找器教程"
 
 #: ../../tutorials/finding_tools.rst:5 a743a74ac55442859dc3d3836b8f8250
 msgid ""
-"**Complete Tutorial to using ToolUniverse's three built-in tool discovery"
-" methods**"
-msgstr ""
-"**使用ToolUniverse三种内置工具发现方法的完整教程**"
+"**Complete Tutorial to using ToolUniverse's three built-in tool discovery "
+"methods**"
+msgstr "**使用ToolUniverse三种内置工具发现方法的完整教程**"
 
 #: ../../tutorials/finding_tools.rst:8 3e2a40b45b0640f8a2e4264c821ef016
 msgid "Introduction"
-msgstr ""
+msgstr "简介"
 
 #: ../../tutorials/finding_tools.rst:10 8856c12d50e24708823834bdd718f0fb
 msgid ""
-"ToolUniverse contains a vast repository of over 600+ scientific tools. To"
-" help you quickly find the right tools for your research tasks, "
-"ToolUniverse provides three sophisticated tool finder methods, each "
-"optimized for different use cases and computational requirements."
+"ToolUniverse contains a vast repository of over 600+ scientific tools. To "
+"help you quickly find the right tools for your research tasks, ToolUniverse "
+"provides three sophisticated tool finder methods, each optimized for "
+"different use cases and computational requirements."
 msgstr ""
+"ToolUniverse 包含超过 600 种科学工具的庞大资源库。为了帮助您快速找到适合研究任务的工具，ToolUniverse "
+"提供了三种先进的工具查找方法，每种方法均针对不同的使用场景和计算需求进行了优化。"
 
 #: ../../tutorials/finding_tools.rst:13 6d4535b723f945019b90ff5db571b025
 msgid "Why Use Tool Finders?"
-msgstr ""
+msgstr "为什么使用刀具查找器？"
 
 #: ../../tutorials/finding_tools.rst:15 f9619cf8d7a742df9e770e6a566e94dc
 msgid ""
 "**The Challenge**: With hundreds of available tools across domains like "
-"bioinformatics, chemistry, literature search, and data analysis, manually"
-" browsing through tool lists is time-consuming and inefficient."
-msgstr ""
+"bioinformatics, chemistry, literature search, and data analysis, manually "
+"browsing through tool lists is time-consuming and inefficient."
+msgstr "**挑战**：在生物信息学、化学、文献检索和数据分析等多个领域中，数百种可用工具的手动浏览既耗时又低效。"
 
 #: ../../tutorials/finding_tools.rst:17 7e35f28472924d5c83c8802d1cf42ecf
 msgid ""
 "**The Solution**: ToolUniverse's tool finders allow you to describe your "
 "research task in natural language and automatically discover the most "
 "relevant tools."
-msgstr ""
+msgstr "**解决方案**：ToolUniverse 的工具查找器允许您使用自然语言描述您的研究任务，并自动发现最相关的工具。"
 
 #: ../../tutorials/finding_tools.rst:19 ab102e76feef425f84039a2d447138ff
 msgid ""
@@ -68,208 +69,235 @@ msgid ""
 "queries - **Embedding Search**: Semantic understanding, scalable, "
 "similarity-based"
 msgstr ""
+"**三种方法**：  \n"
+"- **关键词搜索**：快速、精准、资源高效  \n"
+"- **大模型搜索**：智能、具备上下文感知能力、处理复杂查询  \n"
+"- **向量搜索**：语义理解、可扩展、基于相似度"
 
 #: ../../tutorials/finding_tools.rst:25 cf83ad32772844c18fb6781fcb7770a0
 msgid "Overview of Tool Finder Methods"
-msgstr ""
+msgstr "工具查找方法概述"
 
 #: ../../tutorials/finding_tools.rst:28 1bc07d3ec967426a9e430ff06aa587da
 msgid "Strategic Trade-offs"
-msgstr ""
+msgstr "战略权衡"
 
 #: ../../tutorials/finding_tools.rst:30 768f52e16ba94d8cb25952c3f639d3ad
 msgid "Each method offers different advantages:"
-msgstr ""
+msgstr "每种方法各有不同的优势："
 
 #: ../../tutorials/finding_tools.rst:32 d28a8093081e479d9b5d87549747e058
 msgid "Tool Finder Comparison"
-msgstr ""
+msgstr "工具查找器比较"
 
 #: ../../tutorials/finding_tools.rst:36 eb018cf984d645daacc2b5584d9679ac
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: ../../tutorials/finding_tools.rst:37 c53a70c973a648bc8115d02c41426fd2
 msgid "Speed"
-msgstr ""
+msgstr "速度"
 
 #: ../../tutorials/finding_tools.rst:38 d2a117a89f8a490fbea8a8f537806ef9
 msgid "Semantic Understanding"
-msgstr ""
+msgstr "语义理解"
 
 #: ../../tutorials/finding_tools.rst:39 0d0e62e28c684ef1953f3da5f578b230
 msgid "Resource Usage"
-msgstr ""
+msgstr "资源使用"
 
 #: ../../tutorials/finding_tools.rst:40 c3007efe33ff4431a88413be69681fc4
 msgid "**Keyword Search**"
-msgstr ""
+msgstr "**关键词搜索**"
 
 #: ../../tutorials/finding_tools.rst:41 561ec49bae7f491cade24f925c87ec2e
 msgid "Very Fast"
-msgstr ""
+msgstr "非常快速"
 
 #: ../../tutorials/finding_tools.rst:42 8fc07399e7904e0bb3366d2495d7f1dd
 msgid "Basic"
-msgstr ""
+msgstr "基础"
 
 #: ../../tutorials/finding_tools.rst:43 9d91f07a14c946468649829b86638289
 msgid "Very Low"
-msgstr ""
+msgstr "非常低"
 
 #: ../../tutorials/finding_tools.rst:44 067e4739353b406b8cc42e86c027c962
 msgid "**LLM Search**"
-msgstr ""
+msgstr "**LLM 搜索**"
 
 #: ../../tutorials/finding_tools.rst:45 ../../tutorials/finding_tools.rst:51
 #: 8803f143db264c038dc1aa630fa3bbe6 a99ccc53b81f4ccd843847bd264a5a0f
 msgid "Moderate"
-msgstr ""
+msgstr "适中"
 
 #: ../../tutorials/finding_tools.rst:46 8fb8e3c1c5604a4382c45c992405d362
 msgid "Excellent"
-msgstr ""
+msgstr "优秀"
 
 #: ../../tutorials/finding_tools.rst:47 866054c3c30247aca14fcc5609100219
 msgid "High"
-msgstr ""
+msgstr "高"
 
 #: ../../tutorials/finding_tools.rst:48 535a43b058c04ace9e97ce9dc6468b51
 msgid "**Embedding Search**"
-msgstr ""
+msgstr "**嵌入式搜索**"
 
 #: ../../tutorials/finding_tools.rst:49 fb4fe2d88f824cfdb350cfa7ffbb22f4
 msgid "Fast"
-msgstr ""
+msgstr "快速"
 
 #: ../../tutorials/finding_tools.rst:50 93e315af882e498c882c35cf7e60966e
 msgid "Good"
-msgstr ""
+msgstr "好"
 
 #: ../../tutorials/finding_tools.rst:54 5ac148c942b64673a02c20ff513c859f
 msgid "When to Use Each Method"
-msgstr ""
+msgstr "何时使用每种方法"
 
 #: ../../tutorials/finding_tools.rst:56 45e3b07b1c2546109591d430b8b7e82d
 msgid ""
-"**🔍 Keyword Search** - Use when: - You know specific technical terms - "
-"You need fast results - Working with limited computational resources - "
-"Looking for tools with specific names or exact terminology"
+"**🔍 Keyword Search** - Use when: - You know specific technical terms - You "
+"need fast results - Working with limited computational resources - Looking "
+"for tools with specific names or exact terminology"
 msgstr ""
+"**🔍 关键词搜索** - 使用场景：  \n"
+"- 您已知具体的技术术语  \n"
+"- 您需要快速获取结果  \n"
+"- 您在计算资源有限的情况下工作  \n"
+"- 您正在查找具有特定名称或精确术语的工具"
 
 #: ../../tutorials/finding_tools.rst:62 61739c0d088a4b04a9c672b5b7bf80a1
 msgid ""
 "**🧠 LLM Search** - Use when: - You have complex, multi-step research "
-"questions - Need intelligent interpretation of abstract goals - Want tool"
-" sequence recommendations - Have access to LLM APIs"
+"questions - Need intelligent interpretation of abstract goals - Want tool "
+"sequence recommendations - Have access to LLM APIs"
 msgstr ""
+"**🧠 LLM搜索** - 使用场景： - 您有复杂的多步骤研究问题 - 需要智能解读抽象目标 - 希望获得工具使用顺序的推荐 - 拥有LLM "
+"API的访问权限"
 
 #: ../../tutorials/finding_tools.rst:68 12d47b2963464d13a0e7380451430c52
 msgid ""
-"**🎯 Embedding Search** - Use when: - You want semantic similarity "
-"matching - Need scalable search across large tool sets - Looking for "
-"conceptually similar tools - Want to find tools based on research intent "
-"rather than exact keywords"
+"**🎯 Embedding Search** - Use when: - You want semantic similarity matching -"
+" Need scalable search across large tool sets - Looking for conceptually "
+"similar tools - Want to find tools based on research intent rather than "
+"exact keywords"
 msgstr ""
+"**🎯 嵌入式搜索**  \n"
+"使用场景：  \n"
+"- 需要语义相似性匹配  \n"
+"- 需要在大型工具集上实现可扩展搜索  \n"
+"- 寻找概念上相似的工具  \n"
+"- 希望根据研究意图而非精确关键词查找工具"
 
 #: ../../tutorials/finding_tools.rst:75 cce8bb6c18b44b008028857302cd45fc
 msgid "Method 1: Keyword Search"
-msgstr ""
+msgstr "方法一：关键词搜索"
 
 #: ../../tutorials/finding_tools.rst:78 b27d6fa58fa54455ba1bc12145b99b0d
 msgid "How Keyword Search Works"
-msgstr ""
+msgstr "关键词搜索的工作原理"
 
 #: ../../tutorials/finding_tools.rst:80 949f3f9c9e9b4ece8742d3f2029d62e6
 msgid "Keyword search uses a sophisticated text processing pipeline:"
-msgstr ""
+msgstr "关键词搜索采用了复杂的文本处理流程："
 
 #: ../../tutorials/finding_tools.rst:82 e28d74ea7faf408fb96a01b0e9bacbe0
 msgid ""
-"**Query Processing**: - Tokenization via regular expressions - Removal of"
-" 45+ common English stop words - Suffix-based stemming using 20 "
-"morphological rules - Generation of n-grams (bigrams and trigrams)"
+"**Query Processing**: - Tokenization via regular expressions - Removal of "
+"45+ common English stop words - Suffix-based stemming using 20 morphological"
+" rules - Generation of n-grams (bigrams and trigrams)"
 msgstr ""
+"**查询处理**：  \n"
+"- 通过正则表达式进行分词  \n"
+"- 去除45个以上常见英文停用词  \n"
+"- 基于20条形态规则的后缀词干提取  \n"
+"- 生成n-gram（双词组和三词组）"
 
 #: ../../tutorials/finding_tools.rst:88 8158e52a4d3e4b62a0b50ec1d07eae3a
 msgid "**Relevance Scoring**:"
-msgstr ""
+msgstr "**相关性评分**："
 
 #: ../../tutorials/finding_tools.rst:90 3b6c0da5afc346c1b7df99c4a45756f1
 msgid "Uses TF-IDF (Term Frequency-Inverse Document Frequency)"
-msgstr ""
+msgstr "使用 TF-IDF（词频-逆文档频率）"
 
 #: ../../tutorials/finding_tools.rst:91 e70c26dd00ea4fa7a0d74ab4a1578569
 msgid "Formula: ``Relevance = TF × IDF × log(1 + QueryFrequency)``"
-msgstr ""
+msgstr "公式：``相关度 = 词频（TF）× 逆文档频率（IDF）× log(1 + 查询频率)``"
 
 #: ../../tutorials/finding_tools.rst:92 bd8c74d40f60431da1e7df106ac3bb67
 msgid "Hierarchical bonus structure:"
-msgstr ""
+msgstr "分层奖金结构："
 
 #: ../../tutorials/finding_tools.rst:94 973a9759905245fa91e9f961d360a77c
 msgid "Tool name matches: 2.0× multiplier"
-msgstr ""
+msgstr "工具名称匹配：2.0× 倍数"
 
 #: ../../tutorials/finding_tools.rst:95 195c4d72c956407bb75a82d652d8ba56
 msgid "Exact phrase matches: 1.5× multiplier"
-msgstr ""
+msgstr "完全匹配短语：1.5× 倍数"
 
 #: ../../tutorials/finding_tools.rst:97 0a8f7b05122b40fa9b176472753ffa25
 msgid ""
 "**Fast Matching**: Pre-built index ensures rapid search without ML "
 "dependencies"
-msgstr ""
+msgstr "**快速匹配**：预构建索引确保无需依赖机器学习即可实现快速搜索"
 
 #: ../../tutorials/finding_tools.rst:100 63af309c25994c4bbd5356a73a7dfd15
 msgid "Using Keyword Search"
-msgstr ""
+msgstr "使用关键词搜索"
 
 #: ../../tutorials/finding_tools.rst:103 ../../tutorials/finding_tools.rst:173
 #: ../../tutorials/finding_tools.rst:289 482aab7576ad4dacbb95ef0a9ec14590
 #: 926eaad8370c4002a67544ed675c0b7c efb4e07a25904c79bed31be68dd41818
 msgid "Basic Usage"
-msgstr ""
+msgstr "基本用法"
 
 #: ../../tutorials/finding_tools.rst:127 97c36d2876f544c28c86b86f688b074b
 msgid "Advanced Usage with Filters"
-msgstr ""
+msgstr "高级用法与过滤器"
 
 #: ../../tutorials/finding_tools.rst:149 c791382434e14370aa48a2a0ed54dc6c
 msgid "Keyword Search Best Practices"
-msgstr ""
+msgstr "关键词搜索最佳实践"
 
 #: ../../tutorials/finding_tools.rst:151 38a64178491a4919addce11c96900aac
 msgid ""
-"**Effective Queries**: - Use specific scientific terminology: \"CRISPR "
-"gene editing\", \"molecular docking\", \"phylogenetic analysis\" - "
-"Include domain-specific keywords: \"protein\", \"drug\", \"genomic\", "
-"\"clinical\" - Use technical abbreviations: \"PCR\", \"BLAST\", \"PDB\""
+"**Effective Queries**: - Use specific scientific terminology: \"CRISPR gene "
+"editing\", \"molecular docking\", \"phylogenetic analysis\" - Include "
+"domain-specific keywords: \"protein\", \"drug\", \"genomic\", \"clinical\" -"
+" Use technical abbreviations: \"PCR\", \"BLAST\", \"PDB\""
 msgstr ""
+"**有效查询**：  \n"
+"- 使用具体的科学术语：“CRISPR基因编辑”、“分子对接”、“系统发育分析”  \n"
+"- 包含领域特定关键词：“蛋白质”、“药物”、“基因组”、“临床”  \n"
+"- 使用技术缩写：“PCR”、“BLAST”、“PDB”"
 
 #: ../../tutorials/finding_tools.rst:157 d6a676715fbc4bbf99daf5ab9b8e4977
 msgid "Method 2: LLM Search"
-msgstr ""
+msgstr "方法二：LLM 搜索"
 
 #: ../../tutorials/finding_tools.rst:160 83dc9372b62f4b49877617534a8d3511
 msgid "How LLM Search Works"
-msgstr ""
+msgstr "LLM 搜索的工作原理"
 
 #: ../../tutorials/finding_tools.rst:162 ddc554d380b84b5ca0ec9ef37db8815e
-msgid "LLM search leverages Large Language Models for intelligent tool discovery:"
-msgstr ""
+msgid ""
+"LLM search leverages Large Language Models for intelligent tool discovery:"
+msgstr "LLM 搜索利用大型语言模型实现智能工具发现："
 
 #: ../../tutorials/finding_tools.rst:164 30a22e9af69a415dbe3668169622e254
 msgid ""
-"**Context Construction**: Creates detailed prompts combining user queries"
-" with tool specifications"
-msgstr ""
+"**Context Construction**: Creates detailed prompts combining user queries "
+"with tool specifications"
+msgstr "**上下文构建**：结合用户查询与工具规格，创建详细的提示信息"
 
 #: ../../tutorials/finding_tools.rst:165 849151f96e184a49ac440dfb0c1b268c
 msgid ""
-"**Intelligent Reasoning**: LLM analyzes context to infer optimal tools or"
-" tool sequences"
-msgstr ""
+"**Intelligent Reasoning**: LLM analyzes context to infer optimal tools or "
+"tool sequences"
+msgstr "**智能推理**：大型语言模型分析上下文以推断最佳工具或工具序列"
 
 #: ../../tutorials/finding_tools.rst:166 636b23bd815d44a68f0f1f6f297ed8e8
 msgid ""
@@ -299,10 +327,10 @@ msgstr ""
 
 #: ../../tutorials/finding_tools.rst:266 b7978c47248b4402abb0cbd3bae26ad7
 msgid ""
-"**Effective Strategies**: - Describe your research context and goals "
-"clearly - Mention specific diseases, molecules, or research areas - "
-"Include workflow steps if you have a multi-step process - Ask for "
-"reasoning to understand why tools were recommended"
+"**Effective Strategies**: - Describe your research context and goals clearly"
+" - Mention specific diseases, molecules, or research areas - Include "
+"workflow steps if you have a multi-step process - Ask for reasoning to "
+"understand why tools were recommended"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:273 bc2baaa2d519419480ba2d97c2ed936d
@@ -319,14 +347,13 @@ msgstr ""
 
 #: ../../tutorials/finding_tools.rst:280 b911605c56b6448a9186770a4db7b2ae
 msgid ""
-"**Model Training**: Fine-tuned embedding model on synthetic query-tool "
-"pairs"
+"**Model Training**: Fine-tuned embedding model on synthetic query-tool pairs"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:281 98678d349067421facc32b89389a9956
 msgid ""
-"**Offline Indexing**: Tool specifications converted to semantic vectors "
-"and stored in vector database"
+"**Offline Indexing**: Tool specifications converted to semantic vectors and "
+"stored in vector database"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:282 244d64b764544e5a99722122e0f28a6f
@@ -337,8 +364,8 @@ msgstr ""
 
 #: ../../tutorials/finding_tools.rst:283 48ab3639635c43a0b146043bd7167ad0
 msgid ""
-"**Semantic Understanding**: Captures conceptual relationships beyond "
-"keyword matching"
+"**Semantic Understanding**: Captures conceptual relationships beyond keyword"
+" matching"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:286 0e4ec6c1760c44439719004ce845c08d
@@ -403,8 +430,8 @@ msgstr ""
 
 #: ../../tutorials/finding_tools.rst:501 cf3c04ab4856492ea83d7f82e2e8e5dc
 msgid ""
-"**🧠 LLM Search**: Ideal for complex, multi-step research workflows "
-"requiring intelligence"
+"**🧠 LLM Search**: Ideal for complex, multi-step research workflows requiring"
+" intelligence"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:503 55bc2d6914db49edb958e1a7a416975f
@@ -446,15 +473,15 @@ msgstr ""
 #: ../../tutorials/finding_tools.rst:517 8ef5121c2912477f91ff2f50cb9ff7cc
 msgid ""
 "**Related Documentation**: - :doc:`../guide/tools` - Overview of all "
-"ToolUniverse tools - :doc:`../guide/examples` - Practical usage examples "
-"- :doc:`custom_tools` - Creating your own tools"
+"ToolUniverse tools - :doc:`../guide/examples` - Practical usage examples - "
+":doc:`custom_tools` - Creating your own tools"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:522 c591a06c280544a48cabac27748500a3
 msgid ""
 "**API References**: - :doc:`../api_comprehensive` - Complete API "
-"documentation - :doc:`../reference/tool_categories` - Tool categories and"
-" descriptions"
+"documentation - :doc:`../reference/tool_categories` - Tool categories and "
+"descriptions"
 msgstr ""
 
 #: ../../tutorials/finding_tools.rst:526 a96fd829cedb44a28d271840390774d0
@@ -462,4 +489,3 @@ msgid ""
 "**Need Help?**: - :doc:`../help/troubleshooting` - Common issues and "
 "solutions - :doc:`../help/faq` - Frequently asked questions"
 msgstr ""
-

@@ -72,176 +72,178 @@ msgstr "一份涵盖全面内容的教程："
 
 #: ../../tutorials/overview.md:17 94df614a8ae54a569286ba70c9766d93
 msgid "Converting your Python program into an MCP server"
-msgstr ""
+msgstr "将您的 Python 程序转换为 MCP 服务器"
 
 #: ../../tutorials/overview.md:18 1d6f5eebeec247cfa854d4b801f7daf8
 msgid "Creating ToolUniverse configuration files"
-msgstr ""
+msgstr "创建 ToolUniverse 配置文件"
 
 #: ../../tutorials/overview.md:19 e4020347823b4f179efb47c850c38705
 msgid "Integration best practices"
-msgstr ""
+msgstr "集成最佳实践"
 
 #: ../../tutorials/overview.md:20 87d6e4a2a0104d2fa8565216f95c4c09
 msgid "Troubleshooting common issues"
-msgstr ""
+msgstr "排除常见问题"
 
 #: ../../tutorials/overview.md:21 4a96b992f0754789a776f0a1c3818930
 msgid "Complete working examples"
-msgstr ""
+msgstr "完整的工作示例"
 
 #: ../../tutorials/overview.md:23 3eb960dd2a1044b69d4a297150b88be6
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../tutorials/overview.md:25 c8ee95830aa842feb9b12b5f4f03431e
 msgid ""
 "**TxAgent** is an AI agent for precision therapeutics and personalized "
 "treatment recommendations. This documentation helps you:"
-msgstr ""
+msgstr "**TxAgent** 是一款用于精准治疗和个性化治疗推荐的人工智能代理。本文档将帮助您："
 
 #: ../../tutorials/overview.md:27 349e651627fc43a49361be858dfa0bac
 msgid ""
 "**Add Custom Tools**: Create your own tools using the decorator-based system"
-msgstr ""
+msgstr "**添加自定义工具**：使用基于装饰器的系统创建您自己的工具"
 
 #: ../../tutorials/overview.md:28 7272ef745e8b49cfa087aa9f6dd7514d
 msgid ""
 "**Expose TxAgent as an MCP Server**: Make TxAgent accessible via the Model "
 "Context Protocol"
 msgstr ""
+"**将 TxAgent 暴露为 MCP 服务器**：通过模型上下文协议（Model Context Protocol）使 TxAgent 可访问"
 
 #: ../../tutorials/overview.md:29 e6aa15b905b94e639fa68bb245173c24
 msgid ""
 "**Integrate with ToolUniverse**: Use TxAgent tools within the ToolUniverse "
 "framework"
-msgstr ""
+msgstr "**集成到ToolUniverse**：在ToolUniverse框架中使用TxAgent工具"
 
 #: ../../tutorials/overview.md:30 a94e113ca14549b88f491fc227dfee9c
 msgid ""
 "**Create Your Own MCP Tools**: Convert any Python program into an MCP server"
-msgstr ""
+msgstr "**创建您自己的MCP工具**：将任意Python程序转换为MCP服务器"
 
 #: ../../tutorials/overview.md:32 f5f64df614fe4500bbe6b3621223eb0a
 msgid "Key Components"
-msgstr ""
+msgstr "关键组件"
 
 #: ../../tutorials/overview.md:34 703dfde2a05a4355aaee0a91115fa29a
 msgid "MCP Server"
-msgstr ""
+msgstr "MCP 服务器"
 
 #: ../../tutorials/overview.md:35 4c0472fc07e64962b3318649ac203079
 msgid "**Purpose**: Standardized way to expose AI tools and functions"
-msgstr ""
+msgstr "**目的**：以标准化方式公开AI工具和功能"
 
 #: ../../tutorials/overview.md:36 693b5de4c72d4fdab92db065d4aaf27b
 msgid "**Protocol**: HTTP-based communication"
-msgstr ""
+msgstr "**协议**：基于HTTP的通信"
 
 #: ../../tutorials/overview.md:37 eae0e694183c438bb577008f23944509
 msgid "**Benefits**: Remote access, scalability, standardization"
-msgstr ""
+msgstr "**优势**：远程访问、可扩展性、标准化"
 
 #: ../../tutorials/overview.md:39 0c4a19cf7e23405db5f5b197603a085b
 msgid "ToolUniverse Integration"
-msgstr ""
+msgstr "ToolUniverse 集成"
 
 #: ../../tutorials/overview.md:40 f201006f2ae54ae6aaad0bc09090b4a6
 msgid "**Auto-discovery**: Automatically finds and registers MCP tools"
-msgstr ""
+msgstr "**自动发现**：自动查找并注册MCP工具"
 
 #: ../../tutorials/overview.md:41 74219790161a45e295df4449efc6ab28
 msgid "**Unified Interface**: Single API for multiple tool types"
-msgstr ""
+msgstr "**统一界面**：为多种工具类型提供单一 API"
 
 #: ../../tutorials/overview.md:42 65fa27d3d50b4133a10d9e805f00b456
 msgid "**Configuration**: JSON-based tool definitions"
-msgstr ""
+msgstr "**配置**：基于JSON的工具定义"
 
 #: ../../tutorials/overview.md:44 9b692422cf0d44268f7df1153b6ed6bf
 msgid "FastMCP Framework"
-msgstr ""
+msgstr "FastMCP 框架"
 
 #: ../../tutorials/overview.md:45 57b1e428435a487d9a930c1ed536f897
 msgid "**Library**: Python framework for creating MCP servers"
-msgstr ""
+msgstr "**库**：用于创建 MCP 服务器的 Python 框架"
 
 #: ../../tutorials/overview.md:46 17082aca899744e0997e2724cd96600f
 msgid "**Features**: Easy decorator-based tool definition"
-msgstr ""
+msgstr "**功能**：基于装饰器的简便工具定义"
 
 #: ../../tutorials/overview.md:47 bbda9e82fbe94e0abed9652655551c65
 msgid "**Transport**: HTTP and other protocols supported"
-msgstr ""
+msgstr "**传输**：支持 HTTP 及其他协议"
 
 #: ../../tutorials/overview.md:49 a87cce8f23774d20a99694d8922d78d2
 msgid "Getting Started"
-msgstr ""
+msgstr "入门指南"
 
 #: ../../tutorials/overview.md:51 839d6e9052fe499f90f4e2d8f8752f45
 msgid ""
 "**Want to add your own tools?** Start with the [Adding Tools "
 "Tutorial](Adding_Tools_Tutorial.md)"
-msgstr ""
+msgstr "**想添加您自己的工具？** 请从[添加工具教程](Adding_Tools_Tutorial.md)开始"
 
 #: ../../tutorials/overview.md:52 f253474c8b434e3aa4f547bfa4a0a73f
 msgid ""
 "**New to MCP?** Check out the [MCP Server Tutorial](MCP_Server_Tutorial.md)"
-msgstr ""
+msgstr "**首次使用 MCP？** 请查看 [MCP 服务器教程](MCP_Server_Tutorial.md)"
 
 #: ../../tutorials/overview.md:53 1f4e8615fd61484b8bc0ab6fdbbac01b
 msgid ""
 "**Need quick optimization?** Use the [Tool Description Optimizer Quick "
 "Start](Tool_Description_Optimizer_Quick_Start.md)"
 msgstr ""
+"**需要快速优化？** 请使用[工具描述优化器快速入门](Tool_Description_Optimizer_Quick_Start.md)"
 
 #: ../../tutorials/overview.md:55 700c1a3d4d94475b90bc993f462918d7
 msgid "Example Files"
-msgstr ""
+msgstr "示例文件"
 
 #: ../../tutorials/overview.md:57 588ad44bfeb443918ad24d89f40ef963
 msgid "In the parent directory, you'll find:"
-msgstr ""
+msgstr "在父目录中，您将找到："
 
 #: ../../tutorials/overview.md:58 f2fdb7ebce634bf184394a63ddfc9493
 msgid "`run_mcp.py` - TxAgent MCP server implementation"
-msgstr ""
+msgstr "`run_mcp.py` - TxAgent MCP 服务器实现"
 
 #: ../../tutorials/overview.md:59 aa7f6f9a8fd94b9dbc7f3c6ee4bfae5c
 msgid "`tooluni_client.py` - Example of using TxAgent through ToolUniverse"
-msgstr ""
+msgstr "`tooluni_client.py` - 通过 ToolUniverse 使用 TxAgent 的示例"
 
 #: ../../tutorials/overview.md:60 55aea73b53f84101b48dc523c82a2f35
 msgid "`txagent_client_tools.json` - ToolUniverse configuration for TxAgent"
-msgstr ""
+msgstr "`txagent_client_tools.json` - TxAgent 的 ToolUniverse 配置文件"
 
 #: ../../tutorials/overview.md:62 1bb90e42119f4e55961c02d45fa7d4bb
 msgid "Architecture Overview"
-msgstr ""
+msgstr "架构概述"
 
 #: ../../tutorials/overview.md:78 fd154c4229e641cc8588cb22226ac48b
 msgid "Support"
-msgstr ""
+msgstr "支持"
 
 #: ../../tutorials/overview.md:80 4fb285dbdd1a487d9f6240a0708fee52
 msgid "If you encounter issues:"
-msgstr ""
+msgstr "如果您遇到问题："
 
 #: ../../tutorials/overview.md:81 2a9f56074ddd478e98136b260fb48891
 msgid "Check the troubleshooting sections in the tutorials"
-msgstr ""
+msgstr "请查阅教程中的故障排除部分"
 
 #: ../../tutorials/overview.md:82 5cd454a9d6ac4c23b94dd9d3ff817207
 msgid "Verify your configuration matches the examples"
-msgstr ""
+msgstr "请核对您的配置是否与示例一致"
 
 #: ../../tutorials/overview.md:83 144a8bf6b8ae46bb8436a15594c6e3cf
 msgid "Ensure all dependencies are properly installed"
-msgstr ""
+msgstr "确保所有依赖项均已正确安装"
 
 #: ../../tutorials/overview.md:84 ecb51ee899204b88b59029a81fd70f65
 msgid "Test MCP server functionality independently"
-msgstr ""
+msgstr "独立测试 MCP 服务器功能"
 
 #: ../../tutorials/overview.md:86 a1ae0e4f91844dd8ab424b627282247c
 msgid "Contributing"

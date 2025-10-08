@@ -266,132 +266,132 @@ msgstr "**✅ 已验证可用的Compose工具**"
 
 #: ../../guide/scientific_workflows.rst:1166 f6e3bfb06a50451fb53cf3b1a357ecce
 msgid "**LiteratureSearchTool**"
-msgstr ""
+msgstr "**文献检索工具**"
 
 #: ../../guide/scientific_workflows.rst:1168 2f74382cad75439e9ce2bb75f0e287b2
 msgid "**Purpose**: Comprehensive literature research and synthesis"
-msgstr ""
+msgstr "**目的**：全面的文献调研与综合分析"
 
 #: ../../guide/scientific_workflows.rst:1169 5c0cccd3851b49bc9e7cb115695b1eed
 msgid ""
 "**Workflow**: Broadcasting pattern across EuropePMC, OpenAlex, PubTator"
-msgstr ""
+msgstr "**工作流程**：在 EuropePMC、OpenAlex、PubTator 中的广播模式"
 
 #: ../../guide/scientific_workflows.rst:1170 9940b5de7e864b158e2a1436b495af8e
 msgid ""
 "**AI Integration**: MedicalLiteratureReviewer for intelligent summarization"
-msgstr ""
+msgstr "**AI集成**：MedicalLiteratureReviewer 用于智能摘要生成"
 
 #: ../../guide/scientific_workflows.rst:1172 02ab932101de4dd59cfbf9e9846e2a88
 msgid "**ComprehensiveDrugDiscoveryPipeline**"
-msgstr ""
+msgstr "**综合药物发现流程**"
 
 #: ../../guide/scientific_workflows.rst:1174 2d5b6621f88c45a5822bd53810510662
 msgid "**Purpose**: End-to-end drug discovery from disease to candidates"
-msgstr ""
+msgstr "**目的**：从疾病到候选药物的端到端药物发现过程"
 
 #: ../../guide/scientific_workflows.rst:1175 e1d149d9329248ddac85ecbab4376f16
 msgid "**Workflow**: Sequential chaining with tool integration"
-msgstr ""
+msgstr "**工作流程**：带有工具集成的顺序链式操作"
 
 #: ../../guide/scientific_workflows.rst:1176 d0cebd314cc643059508172dbbd24077
 msgid ""
 "**Phases**: Target identification → Lead discovery → Safety assessment → "
 "Literature validation"
-msgstr ""
+msgstr "**阶段**：靶点识别 → 先导化合物发现 → 安全性评估 → 文献验证"
 
 #: ../../guide/scientific_workflows.rst:1177 d58ece6964c54246a4c808372795ee73
 msgid ""
 "**Tool Chaining**: OpenTargets → PubChem → ADMETAI → LiteratureSearchTool"
-msgstr ""
+msgstr "**工具链**：OpenTargets → PubChem → ADMETAI → LiteratureSearchTool"
 
 #: ../../guide/scientific_workflows.rst:1179 ce4aea39542a48faa413ca97e11f04eb
 msgid "**BiomarkerDiscoveryWorkflow**"
-msgstr ""
+msgstr "**生物标志物发现工作流程**"
 
 #: ../../guide/scientific_workflows.rst:1181 d544c759bc8042308c7eb66b352d6ca7
 msgid "**Purpose**: Biomarker discovery and validation for diseases"
-msgstr ""
+msgstr "**目的**：疾病生物标志物的发现与验证"
 
 #: ../../guide/scientific_workflows.rst:1182 fae62ad6650b45aa87be8b08a52e0f26
 msgid "**Workflow**: Multi-strategy approach with comprehensive fallbacks"
-msgstr ""
+msgstr "**工作流程**：多策略方法，配备全面的备用方案"
 
 #: ../../guide/scientific_workflows.rst:1183 a4ea213f15ed4f3e9717adbafa56f2b1
 msgid ""
 "**Steps**: Literature search → Gene discovery → Pathway analysis → Clinical "
 "validation"
-msgstr ""
+msgstr "**步骤**：文献检索 → 基因发现 → 通路分析 → 临床验证"
 
 #: ../../guide/scientific_workflows.rst:1184 40656504ca774b14b765e389bd62eee7
 msgid ""
 "**Multi-tool Analysis**: HPA biological processes, protein interactions, "
 "cancer prognostics"
-msgstr ""
+msgstr "**多工具分析**：HPA 生物过程、蛋白质相互作用、癌症预后分析"
 
 #: ../../guide/scientific_workflows.rst:1187 edd4e254ab2643cba0f395e80ec1baa1
 msgid "**DrugSafetyAnalyzer**"
-msgstr ""
+msgstr "**药物安全分析器**"
 
 #: ../../guide/scientific_workflows.rst:1189 cc11b5dadf0d4e0797bcdcb1272a249c
 msgid "**Purpose**: Comprehensive drug safety assessment"
-msgstr ""
+msgstr "**目的**：全面的药物安全性评估"
 
 #: ../../guide/scientific_workflows.rst:1190 90e6568958a2413a818b5873fe0526f3
 msgid "**Workflow**: Safety-focused data integration"
-msgstr ""
+msgstr "**工作流程**：以安全为核心的数据集成"
 
 #: ../../guide/scientific_workflows.rst:1191 f4e635834bcd4720b3e650e0ee4d0967
 msgid "**Components**: PubChem compound data, EuropePMC literature search"
-msgstr ""
+msgstr "**组件**：PubChem 化合物数据，EuropePMC 文献检索"
 
 #: ../../guide/scientific_workflows.rst:1192 91f119d347314df5b6dc4429f92749ef
 msgid "**Status**: ✅ Fully functional with real safety data processing"
-msgstr ""
+msgstr "**状态**：✅ 完全功能正常，具备真实安全数据处理能力"
 
 #: ../../guide/scientific_workflows.rst:1194 c9e6f64691ae403b8e2ec41441dfead5
 msgid "**ToolDescriptionOptimizer**"
-msgstr ""
+msgstr "**工具描述优化器**"
 
 #: ../../guide/scientific_workflows.rst:1196 518f6a71d8024d7d8adbbcf5ed1de39d
 msgid "**Purpose**: AI-powered tool description optimization"
-msgstr ""
+msgstr "**目的**：基于人工智能的工具描述优化"
 
 #: ../../guide/scientific_workflows.rst:1197 2fd970daac654a57aac6765a5c6968f1
 msgid "**Workflow**: Agentic optimization loops with quality evaluation"
-msgstr ""
+msgstr "**工作流程**：带有质量评估的自主优化循环"
 
 #: ../../guide/scientific_workflows.rst:1198 590c5dc211c3467aba549fd52a82589b
 msgid ""
 "**Features**: Test case generation, iterative improvement, quality scoring"
-msgstr ""
+msgstr "**功能**：测试用例生成、迭代改进、质量评分"
 
 #: ../../guide/scientific_workflows.rst:1200 acff90d603b4411f85a7c115c6301b37
 msgid "**ToolDiscover**"
-msgstr ""
+msgstr "**工具发现**"
 
 #: ../../guide/scientific_workflows.rst:1202 280880f98f5045e387bcfab159831ee1
 msgid ""
 "**Purpose**: AI-powered tool creation from natural language descriptions"
-msgstr ""
+msgstr "**目的**：基于自然语言描述的人工智能驱动工具创建"
 
 #: ../../guide/scientific_workflows.rst:1203 43a2013479e248e58459c9fea88f03b4
 msgid ""
 "**Workflow**: Advanced agentic workflows with iterative code improvement"
-msgstr ""
+msgstr "**工作流程**：具有迭代代码改进功能的高级自主工作流程"
 
 #: ../../guide/scientific_workflows.rst:1204 8ce946b9bd294563b254481b932f4eaf
 msgid ""
 "**Features**: Tool specification generation, code implementation, quality "
 "analysis"
-msgstr ""
+msgstr "**功能**：工具规格生成、代码实现、质量分析"
 
 #: ../../guide/scientific_workflows.rst:1209 d419fdaff5fa4ec69cf8ded0de0f11e8
 msgid ""
 "**Workflow Strategy**: Start with compose tools for common patterns, then "
 "build custom workflows for specific research needs. Always implement error "
 "handling and consider performance optimization for large-scale analyses."
-msgstr ""
+msgstr "**工作流策略**：首先使用组合工具处理常见模式，然后针对特定研究需求构建自定义工作流。始终实施错误处理，并考虑大规模分析的性能优化。"
 
 #: ../../guide/scientific_workflows.rst:1212 b284cf45f079424f897ad6626b7122c1
 msgid ""
@@ -400,6 +400,8 @@ msgid ""
 "reliability and maintainability, while custom workflows offer maximum "
 "flexibility."
 msgstr ""
+"**Compose 与 Custom**：使用 Compose 工具构建可复用的模式，使用 Custom 工作流针对特定的研究问题。Compose "
+"工具提供更高的可靠性和可维护性，而 Custom 工作流则提供最大的灵活性。"
 
 #: ../../guide/scientific_workflows.rst:1215 41a108d924954790937995377f9bdf34
 msgid ""
@@ -408,3 +410,4 @@ msgid ""
 "comprehensive research pipelines that would be impossible with individual "
 "tools alone."
 msgstr ""
+"**异构集成**：ToolUniverse 擅长整合来自不同科学数据库和 API 的工具。利用此能力构建全面的研究流程，这在单一工具下是无法实现的。"

@@ -107,17 +107,17 @@ msgstr "数据库"
 #: ../../tutorials/literature_search_tools_tutorial.rst:36
 #: 3a5391f428404e219262812f776528e5
 msgid "Best For"
-msgstr ""
+msgstr "最佳适用"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:36
 #: be0a0775c3d54ea2a34830e4ad912384
 msgid "Key Features"
-msgstr ""
+msgstr "主要功能"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:38
 #: ef49b3349035495583c1330afb915746
 msgid "ArXiv_search_ papers"
-msgstr ""
+msgstr "ArXiv_search_论文"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:38
 #: 8559dd63f2524c778d9a89560c3d62dc
@@ -127,17 +127,17 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:38
 #: 2aba98d710a14024af4bee6d2461bb6a
 msgid "Preprints"
-msgstr ""
+msgstr "预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:38
 #: 5d0d4e7bdfea4317b104575dbaeeab97
 msgid "Physics, Math, CS, Biology"
-msgstr ""
+msgstr "物理学、数学、计算机科学、生物学"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:41
 #: be03985caa724ea5abbf2f9311ebc42d
 msgid "Crossref_search_ works"
-msgstr ""
+msgstr "Crossref_search_ 功能正常"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:41
 #: 27eea181114c443898d9d26555edbcf5
@@ -147,17 +147,17 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:41
 #: 81d200d31bd54e02aa13d8914e36cd1d
 msgid "Scholarly Articles"
-msgstr ""
+msgstr "学术文章"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:41
 #: 957bdce27fdf4fbb8232ab9cbee75328
 msgid "DOI metadata, Rich metadata"
-msgstr ""
+msgstr "DOI元数据，丰富的元数据"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: 27a704c237a8412e8c9cdbdd4c5c5642
 msgid "PubMed_search_ articles"
-msgstr ""
+msgstr "PubMed_搜索_文章"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: cfca0233d09a47ad89fed115c3590049
@@ -167,77 +167,82 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: 73375e66fbd54b0ab6c63737554b2e59
 msgid "Medical/Life Sciences"
-msgstr ""
+msgstr "医学/生命科学"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: 5302a8b1c6dd47c8b486962b6083175d
 msgid "Medical literature"
-msgstr ""
+msgstr "医学文献"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:47
 #: c5f839115994466ea81f08be5ca9caeb
 msgid "SemanticScholar_ search_papers"
-msgstr ""
+msgstr "SemanticScholar_ 搜索_论文"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:47
 #: b2c0a7c3238842ee947e6acf95eaed1e
 msgid "Semantic Scholar"
-msgstr ""
+msgstr "语义学者"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:47
 #: 443e389915a04179a9fddc83695dea64
 msgid "AI-powered Search"
-msgstr ""
+msgstr "AI 驱动的搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:47
 #: 7f3437281ca14a6d9215dd68e9c82705
 msgid "AI ranking, Citations"
-msgstr ""
+msgstr "人工智能排名，引用"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:50
 #: a3be8d3e1585433fa4ed04ae5958bb3b
 msgid "openalex_ literature_ search"
-msgstr ""
+msgstr "openalex_ 文献_ 搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:50
 #: 411846d0bd3842d09c8ceceab688ebe2
 msgid "OpenAlex"
 msgstr ""
+"OpenAlex\n"
+"\n"
+"Context: 技术文档\n"
+"\n"
+"OpenAlex"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:50
 #: eace962d4b204eedbceaa0f35f15d5fe
 msgid "Comprehensive Academic Search"
-msgstr ""
+msgstr "综合学术检索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:50
 #: 60bbbb963a484e1cbf4351de0c44c7b2
 msgid "Open access, Year filtering"
-msgstr ""
+msgstr "开放获取，年份筛选"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:54
 #: b8b054164818485eb6e08629be01beda
 msgid "EuropePMC_ search_articles"
-msgstr ""
+msgstr "EuropePMC_ 搜索文章"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:54
 #: d819d7a1e3eb4bf185a93fa5843dc4b8
 msgid "Europe PMC"
-msgstr ""
+msgstr "欧洲 PMC"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:54
 #: 322375b6292847a49f594aa7cf3a8414
 msgid "Biomedical Literature"
-msgstr ""
+msgstr "生物医学文献"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:54
 #: ed42e3f762d54c408537cf19a8b13353
 msgid "European research"
-msgstr ""
+msgstr "欧洲研究"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:57
 #: f474ed84ace14bcf89ddf5630c5e5419
 msgid "DBLP_search_ publications"
-msgstr ""
+msgstr "DBLP_搜索_出版物"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:57
 #: 8e04fb338bda464aa0c458b9b2f35be8
@@ -247,37 +252,37 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:57
 #: 14a6cc3e542f48a9a49e7c5c1619d38b
 msgid "Computer Science"
-msgstr ""
+msgstr "计算机科学"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:57
 #: 8f3f89927c3041039f2ec7d4060f1136
 msgid "CS bibliography"
-msgstr ""
+msgstr "计算机科学参考文献"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:60
 #: fd23e8627f234571ac16843e960b64ba
 msgid "DOAJ_search_ articles"
-msgstr ""
+msgstr "DOAJ_搜索_文章"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:60
 #: e64c421460db4904a3e3b317887b44ff
 msgid "DOAJ"
-msgstr ""
+msgstr "DOAJ（开放获取期刊目录）"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:60
 #: b712a1c6e39d4e8dbfc778cafe693970
 msgid "Open Access"
-msgstr ""
+msgstr "开放获取"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:60
 #: d84ca7950f6549a58b3331b5501d029e
 msgid "Articles & Journals"
-msgstr ""
+msgstr "文章与期刊"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: abd81c2807884d00babf09a40e4075c9
 msgid "BioRxiv_search_ preprints"
-msgstr ""
+msgstr "BioRxiv_搜索_预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 1443673a86f843e78d248fd32f4dd526
@@ -287,7 +292,7 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 430218bbbad046efb547209f7ed6a431
 msgid "Biology Preprints"
-msgstr ""
+msgstr "生物学预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 8092f92a957f407aa3c802b8a13777ac

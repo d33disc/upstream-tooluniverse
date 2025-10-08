@@ -144,150 +144,150 @@ msgstr "FDA药品标签工具"
 
 #: ../../tools/tools_config_index.rst:208
 msgid "Finder Tools"
-msgstr ""
+msgstr "查找器工具"
 
 #: ../../tools/tools_config_index.rst:213
 msgid "Gene Ontology Tools"
-msgstr ""
+msgstr "基因本体工具"
 
 #: ../../tools/tools_config_index.rst:218
 msgid "Gwas Tools"
-msgstr ""
+msgstr "Gwas 工具"
 
 #: ../../tools/tools_config_index.rst:223
 msgid "Hpa Tools"
-msgstr ""
+msgstr "Hpa 工具"
 
 #: ../../tools/tools_config_index.rst:228
 msgid "Humanbase Tools"
-msgstr ""
+msgstr "Humanbase 工具"
 
 #: ../../tools/tools_config_index.rst:233
 msgid "Idmap Tools"
-msgstr ""
+msgstr "Idmap 工具"
 
 #: ../../tools/tools_config_index.rst:238
 msgid "Mcp Client Tools Example"
-msgstr ""
+msgstr "MCP 客户端工具示例"
 
 #: ../../tools/tools_config_index.rst:243
 msgid "Medlineplus Tools"
-msgstr ""
+msgstr "Medlineplus 工具"
 
 #: ../../tools/tools_config_index.rst:248
 msgid "Monarch Tools"
-msgstr ""
+msgstr "Monarch 工具"
 
 #: ../../tools/tools_config_index.rst:253
 msgid "Odphp Tools"
-msgstr ""
+msgstr "Odphp 工具"
 
 #: ../../tools/tools_config_index.rst:258
 msgid "Openalex Tools"
-msgstr ""
+msgstr "Openalex 工具"
 
 #: ../../tools/tools_config_index.rst:263
 msgid "Opentarget Tools"
-msgstr ""
+msgstr "Opentarget 工具"
 
 #: ../../tools/tools_config_index.rst:268
 msgid "Output Summarization Tools"
-msgstr ""
+msgstr "输出汇总工具"
 
 #: ../../tools/tools_config_index.rst:273
 msgid "Pubchem Tools"
-msgstr ""
+msgstr "PubChem 工具"
 
 #: ../../tools/tools_config_index.rst:278
 msgid "Pubtator Tools"
-msgstr ""
+msgstr "Pubtator 工具"
 
 #: ../../tools/tools_config_index.rst:283
 msgid "Rcsb Pdb Tools"
-msgstr ""
+msgstr "Rcsb Pdb 工具集"
 
 #: ../../tools/tools_config_index.rst:288
 msgid "Reactome Tools"
-msgstr ""
+msgstr "Reactome 工具"
 
 #: ../../tools/tools_config_index.rst:293
 msgid "Semantic Scholar Tools"
-msgstr ""
+msgstr "语义学者工具"
 
 #: ../../tools/tools_config_index.rst:298
 msgid "Special Tools"
-msgstr ""
+msgstr "专用工具"
 
 #: ../../tools/tools_config_index.rst:303
 msgid "Tool Composition Tools"
-msgstr ""
+msgstr "工具组成工具"
 
 #: ../../tools/tools_config_index.rst:308
 msgid "Txagent Client Tools"
-msgstr ""
+msgstr "Txagent 客户端工具"
 
 #: ../../tools/tools_config_index.rst:313
 msgid "Uniprot Tools"
-msgstr ""
+msgstr "Uniprot 工具"
 
 #: ../../tools/tools_config_index.rst:318
 msgid "Url Fetch Tools"
-msgstr ""
+msgstr "URL 获取工具"
 
 #: ../../tools/tools_config_index.rst:323
 #: ../../tools/tools_config_index.rst:347
 msgid "Uspto Downloader Tools"
-msgstr ""
+msgstr "USPTO 下载工具"
 
 #: ../../tools/tools_config_index.rst:328
 msgid "Uspto Tools"
-msgstr ""
+msgstr "USPTO 工具"
 
 #: ../../tools/tools_config_index.rst:333
 msgid "Xml Tools"
-msgstr ""
+msgstr "Xml 工具"
 
 #: ../../tools/tools_config_index.rst:347
 msgid "Depmap Tools"
-msgstr ""
+msgstr "Depmap 工具"
 
 #: ../../tools/tools_config_index.rst:347
 msgid "Immune Compass Tools"
-msgstr ""
+msgstr "免疫指南工具"
 
 #: ../../tools/tools_config_index.rst:347
 msgid "Pinnacle Tools"
-msgstr ""
+msgstr "巅峰工具"
 
 #: ../../tools/tools_config_index.rst:347
 msgid "Transcriptformer Tools"
-msgstr ""
+msgstr "Transcriptformer 工具"
 
 #: ../../tools/tools_config_index.rst:2 a9be5dd3d4984900aae08b1bd246c121
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: ../../tools/tools_config_index.rst:4 eb95c14fafaa4a018aef47d43a3b401e
 msgid ""
 "ToolUniverse provides over 600 scientific tools organized into local and "
 "remote categories. This overview helps you discover and navigate the "
 "available tools for your research needs."
-msgstr ""
+msgstr "ToolUniverse 提供了超过600种科学工具，分为本地和远程两大类。本概览帮助您发现并导航适合您研究需求的可用工具。"
 
 #: ../../tools/tools_config_index.rst:7 ccd6b0ec997c4f2f8ce0b90fa6116ae2
 msgid "Tool Registry"
-msgstr ""
+msgstr "工具注册表"
 
 #: ../../tools/tools_config_index.rst:10 ../../tools/tools_config_index.rst:47
 #: 39a622c0f59549bf806bf19faf717816 e8f3358517854cbf88f08ae0146e0187
 msgid "Local Tools"
-msgstr ""
+msgstr "本地工具"
 
 #: ../../tools/tools_config_index.rst:12 7d92e9b78ada4de692722969c2995e00
 msgid ""
 "Local tools are Python classes that run within the ToolUniverse process, "
 "providing high performance and seamless integration."
-msgstr ""
+msgstr "本地工具是运行在 ToolUniverse 进程内的 Python 类，提供高性能和无缝集成。"
 
 #: ../../tools/tools_config_index.rst:14 c279e98c0b2140f88562a14ef3f81b3b
 msgid ""
@@ -295,18 +295,23 @@ msgid ""
 "discovery and registration - Full access to ToolUniverse features - Easy "
 "development and testing"
 msgstr ""
+"**主要特性：**  \n"
+"- 高性能且无网络开销  \n"
+"- 自动发现与注册  \n"
+"- 完全支持 ToolUniverse 功能  \n"
+"- 便捷的开发与测试"
 
 #: ../../tools/tools_config_index.rst:22
 #: ../../tools/tools_config_index.rst:340 023ea3f26b274b5a932fba7c9e8d9fcb
 #: ecf7763b01024aa98f5902e1d1d059e7
 msgid "Remote Tools"
-msgstr ""
+msgstr "远程工具"
 
 #: ../../tools/tools_config_index.rst:24 71e6372f893a4b4f90dacd07147f3aa3
 msgid ""
 "Remote tools integrate external services, APIs, and specialized systems "
 "running on different servers."
-msgstr ""
+msgstr "远程工具集成运行于不同服务器上的外部服务、API 及专用系统。"
 
 #: ../../tools/tools_config_index.rst:26 407ac27746d04e7791f97952e978635a
 msgid ""
@@ -314,10 +319,15 @@ msgid ""
 "computation offloading - Support for different programming languages - "
 "Secure isolation of sensitive operations"
 msgstr ""
+"**主要功能：**  \n"
+"- 与外部API和服务的集成  \n"
+"- 可扩展的计算卸载  \n"
+"- 支持多种编程语言  \n"
+"- 敏感操作的安全隔离"
 
 #: ../../tools/tools_config_index.rst:33 efbd6611cd33467594959dbeaf864784
 msgid "**Discover Available Tools:**"
-msgstr ""
+msgstr "**发现可用工具：**"
 
 #: ../../tools/tools_config_index.rst:35 ce2e44dedbc4442bbd02de3a100831a8
 msgid ""

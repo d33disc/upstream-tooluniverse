@@ -68,4 +68,4 @@ msgstr "包含工具执行结果的字典"
 
 #: ../../api/tooluniverse.custom_tool.rst f55de41d4380420181f7c41bb800ca03
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"

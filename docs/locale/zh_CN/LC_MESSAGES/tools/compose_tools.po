@@ -203,15 +203,15 @@ msgstr "**文献搜索工具**（类型：撰写工具）"
 msgid ""
 "Comprehensive literature search and summary tool that searches multiple "
 "databases (EuropePMC, Ope..."
-msgstr ""
+msgstr "综合文献检索与汇总工具，支持多数据库检索（EuropePMC、Ope..."
 
 #: ../../tools/compose_tools.rst abae985e6d2d46e1ba4b8fff6188f693
 msgid "LiteratureSearchTool tool specification"
-msgstr ""
+msgstr "LiteratureSearchTool 工具规格说明"
 
 #: ../../tools/compose_tools.rst:124 2fb724d8b8724666a43eb23c223a4d23
 msgid "**Name**: ``LiteratureSearchTool``"
-msgstr ""
+msgstr "**名称**：``LiteratureSearchTool``"
 
 #: ../../tools/compose_tools.rst:126 fa5ae10290564d058717ba5130400cc1
 msgid ""
@@ -219,30 +219,31 @@ msgid ""
 "searches multiple databases (EuropePMC, OpenAlex, PubTator) and generates "
 "AI-powered summaries of research findings"
 msgstr ""
+"**描述**：一款综合文献检索与摘要工具，能够检索多个数据库（EuropePMC、OpenAlex、PubTator），并生成基于人工智能的研究成果摘要。"
 
 #: ../../tools/compose_tools.rst:130 a601f3ef5cc1460fb550abaf64f728e8
 msgid ""
 "``research_topic`` (string) (required) The research topic or query to search"
 " for in the literature"
-msgstr ""
+msgstr "``research_topic``（字符串）（必填）用于在文献中搜索的研究主题或查询内容"
 
 #: ../../tools/compose_tools.rst:147 98fa961ab8714241b416b80eebd1ea8e
 msgid "**ToolDescriptionOptimizer** (Type: ComposeTool)"
-msgstr ""
+msgstr "**ToolDescriptionOptimizer**（类型：ComposeTool）"
 
 #: ../../tools/compose_tools.rst:149 2cfd556bf5fa4d189a285d58af5b7693
 msgid ""
 "Optimizes a tool's description and parameter descriptions by generating test"
 " cases, executing the..."
-msgstr ""
+msgstr "通过生成测试用例并执行，优化工具的描述及参数说明..."
 
 #: ../../tools/compose_tools.rst 021bad84995649d388a435daae925281
 msgid "ToolDescriptionOptimizer tool specification"
-msgstr ""
+msgstr "工具描述优化器工具规格"
 
 #: ../../tools/compose_tools.rst:155 b989cdf214654a8884b15bfe3ea1a77d
 msgid "**Name**: ``ToolDescriptionOptimizer``"
-msgstr ""
+msgstr "**名称**：``ToolDescriptionOptimizer``"
 
 #: ../../tools/compose_tools.rst:157 afeaafb9eac34834ab38437f8bd1746e
 msgid ""
@@ -252,54 +253,57 @@ msgid ""
 "Optionally saves a comprehensive optimization report to a file without "
 "overwriting the original."
 msgstr ""
+"**描述**：通过生成测试用例、执行测试、分析结果，优化工具的描述及参数说明，并为工具及其参数提供改进建议。可选地将完整的优化报告保存至文件，且不覆盖原始文件。"
 
 #: ../../tools/compose_tools.rst:161 c5099bd361694369839bfba76db0e63f
 msgid ""
 "``tool_config`` (object) (required) The full configuration of the tool to "
 "optimize."
-msgstr ""
+msgstr "``tool_config``（对象）（必填） 要优化的工具的完整配置。"
 
 #: ../../tools/compose_tools.rst:164 873626cb44ee4f2eb8de1f55f9b37916
 msgid ""
 "``save_to_file`` (boolean) (optional) If true, save the optimized "
 "description to a file (do not overwrite the original)."
-msgstr ""
+msgstr "``save_to_file``（布尔值）（可选）如果为 true，则将优化后的描述保存到文件中（不覆盖原文件）。"
 
 #: ../../tools/compose_tools.rst:167 9f94b17ddc6d45bc835c5a8b341a5574
 msgid ""
 "``output_file`` (string) (optional) Optional file path to save the optimized"
 " description. If not provided, use '<tool_name>_optimized_description.txt'."
 msgstr ""
+"``output_file``（字符串）（可选）可选的文件路径，用于保存优化后的描述。如果未提供，则使用 "
+"'<tool_name>_optimized_description.txt'。"
 
 #: ../../tools/compose_tools.rst:170 6626c12696244fec827fbf3f3ff2a1d2
 msgid ""
 "``max_iterations`` (integer) (optional) Maximum number of optimization "
 "rounds to perform."
-msgstr ""
+msgstr "``max_iterations``（整数）（可选）最大优化轮次数。"
 
 #: ../../tools/compose_tools.rst:173 5b7d1f64f9194377921af58ade1ad864
 msgid ""
 "``satisfaction_threshold`` (number) (optional) Quality score threshold "
 "(1-10) to consider optimization satisfactory."
-msgstr ""
+msgstr "``satisfaction_threshold``（数字）（可选）用于判断优化是否满意的质量分数阈值（1-10）。"
 
 #: ../../tools/compose_tools.rst:190 3066900cd13b4c77844309ba14ec5c4e
 msgid "**ToolDiscover** (Type: ComposeTool)"
-msgstr ""
+msgstr "**ToolDiscover**（类型：ComposeTool）"
 
 #: ../../tools/compose_tools.rst:192 702545fec89a4c2dbe6436a41ac4e588
 msgid ""
 "Generates new ToolUniverse-compliant tools based on short descriptions "
 "through an intelligent dis..."
-msgstr ""
+msgstr "基于简短描述，通过智能分解生成符合 ToolUniverse 标准的新工具..."
 
 #: ../../tools/compose_tools.rst 4e17774745b24b3da57615ca6b0d1659
 msgid "ToolDiscover tool specification"
-msgstr ""
+msgstr "ToolDiscover 工具规格"
 
 #: ../../tools/compose_tools.rst:198 98f32abdcc894a73b6e4484871e21fca
 msgid "**Name**: ``ToolDiscover``"
-msgstr ""
+msgstr "**名称**：``ToolDiscover``"
 
 #: ../../tools/compose_tools.rst:200 7703c52c5c5c4186bcd1117c2dcd9fc5
 msgid ""
@@ -310,6 +314,8 @@ msgid ""
 "refines the tool configuration using agentic optimization tools until it "
 "meets quality standards."
 msgstr ""
+"**描述**：通过智能发现与优化流程，根据简短描述生成符合 ToolUniverse "
+"标准的新工具。自动确定最佳工具类型和类别，发现相似的现有工具，生成初始规格，并利用代理优化工具迭代完善工具配置，直至达到质量标准。"
 
 #: ../../tools/compose_tools.rst:204 79e444b6e5914da2b8ece3bf351899ac
 msgid ""
@@ -318,87 +324,89 @@ msgid ""
 "this to determine the optimal tool type (PackageTool, RESTTool, XMLTool, or "
 "AgenticTool) and appropriate category."
 msgstr ""
+"``tool_description``（字符串）（必填）所需工具功能和用途的简要描述。Tool Discover "
+"将自动分析该描述，以确定最佳工具类型（PackageTool、RESTTool、XMLTool 或 AgenticTool）及其适用类别。"
 
 #: ../../tools/compose_tools.rst:207 0c5abc28c8da478fb79bd34682cfbbca
 msgid ""
 "``max_iterations`` (integer) (optional) Maximum number of refinement "
 "iterations to perform."
-msgstr ""
+msgstr "``max_iterations``（整数）（可选）执行的最大细化迭代次数。"
 
 #: ../../tools/compose_tools.rst:210 c92491ebfa3142d4a422cf332f39713c
 msgid ""
 "``save_to_file`` (boolean) (optional) Whether to save the generated tool "
 "configuration and report to a file."
-msgstr ""
+msgstr "``save_to_file``（布尔值）（可选）是否将生成的工具配置和报告保存到文件。"
 
 #: ../../tools/compose_tools.rst:213 48d59f78ee5948298082d821671bc123
 msgid ""
 "``output_file`` (string) (optional) Optional file path to save the generated"
 " tool. If not provided, uses auto-generated filename."
-msgstr ""
+msgstr "``output_file``（字符串）（可选）用于保存生成工具的可选文件路径。如果未提供，则使用自动生成的文件名。"
 
 #: ../../tools/compose_tools.rst:230 d412dae438fa4563855dce4b225f755a
 msgid "**ToolGraphGenerationPipeline** (Type: ComposeTool)"
-msgstr ""
+msgstr "**ToolGraphGenerationPipeline**（类型：ComposeTool）"
 
 #: ../../tools/compose_tools.rst:232 556049a890714190b8bc90c886e3cd2a
 msgid ""
 "Generates a directed tool relationship graph among provided tool configs "
 "using ToolRelationshipDe..."
-msgstr ""
+msgstr "使用 ToolRelationshipDe 生成所提供工具配置之间的有向工具关系图。"
 
 #: ../../tools/compose_tools.rst dc205889f0a440ee8d524283866bc66f
 msgid "ToolGraphGenerationPipeline tool specification"
-msgstr ""
+msgstr "ToolGraphGenerationPipeline 工具规范"
 
 #: ../../tools/compose_tools.rst:238 3edf399219294400ad9a831d80e77df5
 msgid "**Name**: ``ToolGraphGenerationPipeline``"
-msgstr ""
+msgstr "**名称**：``ToolGraphGenerationPipeline``"
 
 #: ../../tools/compose_tools.rst:240 4b3e3ed9338142e5acc9ea248975cf61
 msgid ""
 "**Description**: Generates a directed tool relationship graph among provided"
 " tool configs using ToolRelationshipDetector to infer data-flow "
 "compatibility."
-msgstr ""
+msgstr "**描述**：使用 ToolRelationshipDetector 在提供的工具配置之间生成有向工具关系图，以推断数据流兼容性。"
 
 #: ../../tools/compose_tools.rst:244 116b10696d844df396d37cca97b0d2fc
 msgid "``tool_configs`` (array) (required) List of tool configuration objects"
-msgstr ""
+msgstr "``tool_configs``（数组）（必填）工具配置对象列表"
 
 #: ../../tools/compose_tools.rst:247 a57567b82a294c2e8c6ddeffc93ce789
 msgid ""
 "``max_tools`` (integer) (optional) Optional max number of tools to process "
 "(debug)"
-msgstr ""
+msgstr "``max_tools``（整数）（可选） 可选的最大处理工具数量（调试用）"
 
 #: ../../tools/compose_tools.rst:250 e9936b62157f47ebb1768d60990af791
 msgid "``output_path`` (string) (optional) Path for output graph JSON"
-msgstr ""
+msgstr "``output_path``（字符串）（可选）输出图 JSON 的路径"
 
 #: ../../tools/compose_tools.rst:253 17f37a9f1bd04947b7a9025581db56ea
 msgid ""
 "``save_intermediate_every`` (integer) (optional) Checkpoint every N "
 "processed pairs"
-msgstr ""
+msgstr "``save_intermediate_every``（整数）（可选）每处理 N 对时保存一次检查点"
 
 #: ../../tools/compose_tools.rst:270 e540cb22b53040b0a84e0a11ca8be691
 msgid "**ToolMetadataGenerationPipeline** (Type: ComposeTool)"
-msgstr ""
+msgstr "**ToolMetadataGenerationPipeline**（类型：ComposeTool）"
 
 #: ../../tools/compose_tools.rst:272 72ec48be43b24d9b880f71896418a14f
 msgid ""
 "Generates standardized metadata for a batch of ToolUniverse tool "
 "configurations by calling ToolMe..."
-msgstr ""
+msgstr "通过调用 ToolMe，为一批 ToolUniverse 工具配置生成标准化元数据..."
 
 #: ../../tools/compose_tools.rst ab91cce5b57c4fb3b265d64f107f06a7
 msgid "ToolMetadataGenerationPipeline tool specification"
-msgstr ""
+msgstr "ToolMetadataGenerationPipeline 工具规范"
 
 #: ../../tools/compose_tools.rst:278 c305c9f4b6b94b738b7e232303f8a8af
 msgid "**Name**: ``ToolMetadataGenerationPipeline``"
-msgstr ""
+msgstr "**名称**：``ToolMetadataGenerationPipeline``"
 
 #: ../../tools/compose_tools.rst:280 d5266ac560c64734b931fcc57abf6de7
 msgid ""
@@ -406,12 +414,14 @@ msgid ""
 " tool configurations by calling ToolMetadataGenerator, LabelGenerator, and "
 "ToolMetadataStandardizer for sources and tags."
 msgstr ""
+"**描述**：通过调用 ToolMetadataGenerator、LabelGenerator 和 "
+"ToolMetadataStandardizer，为一批 ToolUniverse 工具配置生成标准化元数据，包括来源和标签。"
 
 #: ../../tools/compose_tools.rst:284 6a080c9fe9754016850c0e58b08072e0
 msgid ""
 "``tool_configs`` (array) (required) List of raw tool configuration JSON "
 "objects to extract and standardize metadata for"
-msgstr ""
+msgstr "``tool_configs``（数组）（必填）用于提取和标准化元数据的原始工具配置 JSON 对象列表"
 
 #: ../../tools/compose_tools.rst:287 7d5f484f00b94323998824d786379c20
 #, python-brace-format
@@ -420,6 +430,8 @@ msgid ""
 "(keys) to lists of tool 'type' values belonging to each simplified category "
 "(e.g., {'Databases': ['XMLTool']})"
 msgstr ""
+"``tool_type_mappings``（对象）（可选） 简化的 "
+"toolType（键）与属于每个简化类别的工具“type”值列表之间的映射（例如，{'Databases': ['XMLTool']}）"
 
 #: ../../tools/compose_tools.rst:290 673b3312bc304531ab69da7540659f80
 msgid ""

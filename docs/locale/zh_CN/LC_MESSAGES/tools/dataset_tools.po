@@ -325,24 +325,24 @@ msgstr "drugbank_vocab_filter 工具规范"
 
 #: ../../tools/dataset_tools.rst:232 3bc5c94c0f584816b498471dfb0f718f
 msgid "**Name**: ``drugbank_vocab_filter``"
-msgstr ""
+msgstr "**名称**：``drugbank_vocab_filter``"
 
 #: ../../tools/dataset_tools.rst:234 4129e579cc7149b8a76483b6b3c0fb8d
 msgid ""
 "**Description**: Filter the DrugBank vocabulary dataset based on specific "
 "field criteria. Use simple field-value pairs to filter drugs by properties "
 "like names, IDs, and chemical identifiers."
-msgstr ""
+msgstr "**描述**：根据特定字段条件筛选 DrugBank 词汇数据集。使用简单的字段-值对，根据名称、ID 及化学标识符等属性筛选药物。"
 
 #: ../../tools/dataset_tools.rst:238 7d310049b9004941befbafa6fe168685
 msgid "``field`` (string) (optional) The field to filter on"
-msgstr ""
+msgstr "``field``（字符串）（可选）用于筛选的字段"
 
 #: ../../tools/dataset_tools.rst:241 86e3d403c38c4ad78720a7b5606f2783
 msgid ""
 "``condition`` (string) (optional) The type of filtering condition to apply. "
 "Filter is case-insensitive."
-msgstr ""
+msgstr "``condition``（字符串）（可选）应用的过滤条件类型。过滤不区分大小写。"
 
 #: ../../tools/dataset_tools.rst:244 56cddcc209884aa3ad6eb16ccdedcd8c
 msgid ""
@@ -350,29 +350,30 @@ msgid ""
 "condition is 'not_empty'. Examples: 'insulin' (for contains), 'DB00' (for "
 "starts_with), 'acid' (for ends_with), 'Aspirin' (for exact)"
 msgstr ""
+"``value``（字符串）（可选）用于过滤的值。当条件为“not_empty”时，此项非必填。示例：'insulin'（用于包含匹配）、'DB00'（用于开头匹配）、'acid'（用于结尾匹配）、'Aspirin'（用于精确匹配）"
 
 #: ../../tools/dataset_tools.rst:247 ../../tools/dataset_tools.rst:289
 #: e3a6a2ffbd544b94861d99cdb02f89f2 fcd0f01abbf94a7799573c7efa3b0911
 msgid "``limit`` (integer) (optional) Maximum number of results to return."
-msgstr ""
+msgstr "``limit``（整数）（可选）返回结果的最大数量。"
 
 #: ../../tools/dataset_tools.rst:263 1e183543efeb4b45b38e1bc1b2c8d670
 msgid "**drugbank_vocab_search** (Type: DatasetTool)"
-msgstr ""
+msgstr "**drugbank_vocab_search**（类型：数据集工具）"
 
 #: ../../tools/dataset_tools.rst:265 c887aa49f17444e39c77fdb18f076cae
 msgid ""
 "Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or "
 "other fields using tex..."
-msgstr ""
+msgstr "使用 tex 在 DrugBank 词汇数据集中通过名称、ID、同义词或其他字段搜索药物。"
 
 #: ../../tools/dataset_tools.rst 9d4015cb18f548688f8c06b8ebbc6d54
 msgid "drugbank_vocab_search tool specification"
-msgstr ""
+msgstr "drugbank_vocab_search 工具规范"
 
 #: ../../tools/dataset_tools.rst:271 3fe05defdd214d59a2ad0bbf9aa5adec
 msgid "**Name**: ``drugbank_vocab_search``"
-msgstr ""
+msgstr "**名称**：``drugbank_vocab_search``"
 
 #: ../../tools/dataset_tools.rst:273 438d51b80f5f432fb702560cba38f469
 msgid ""
@@ -381,12 +382,14 @@ msgid ""
 "drug information including DrugBank ID, common name, CAS number, UNII, and "
 "synonyms."
 msgstr ""
+"**描述**：通过基于文本的查询，在DrugBank词汇数据集中按名称、ID、同义词或其他字段搜索药物。返回包括DrugBank "
+"ID、通用名称、CAS号、UNII及同义词在内的详细药物信息。"
 
 #: ../../tools/dataset_tools.rst:277 383c326787064befa6051b44c3022d10
 msgid ""
 "``query`` (string) (optional) Search query string. Can be drug name, "
 "synonym, DrugBank ID, or any text to search for."
-msgstr ""
+msgstr "``query``（字符串）（可选）搜索查询字符串。可以是药物名称、同义词、DrugBank ID，或任何用于搜索的文本。"
 
 #: ../../tools/dataset_tools.rst:280 7c97ea3b3b7b4a7fb6be5a8853c564e0
 msgid ""
@@ -394,27 +397,29 @@ msgid ""
 "'DrugBank ID', 'Accession Numbers', 'Common name', 'CAS', 'UNII', "
 "'Synonyms', 'Standard InChI Key'."
 msgstr ""
+"``search_fields``（数组）（可选）搜索的字段。可用字段包括：‘DrugBank ID’、‘Accession "
+"Numbers’、‘Common name’、‘CAS’、‘UNII’、‘Synonyms’、‘Standard InChI Key’。"
 
 #: ../../tools/dataset_tools.rst:283 b293e5e668e745ba8d2c46689107746d
 msgid ""
 "``case_sensitive`` (boolean) (optional) Whether the search should be case "
 "sensitive."
-msgstr ""
+msgstr "``case_sensitive``（布尔值）（可选） 指定搜索是否区分大小写。"
 
 #: ../../tools/dataset_tools.rst:286 b09bab42b45245b4ab3da0d37c6c5fc1
 msgid ""
 "``exact_match`` (boolean) (optional) Whether to perform exact matching "
 "instead of substring matching."
-msgstr ""
+msgstr "``exact_match``（布尔值）（可选）是否执行精确匹配，而非子字符串匹配。"
 
 #: ../../tools/dataset_tools.rst:305 bcdb1d0d56294631880fd94c684a4df8
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/dataset_tools.rst:307 e8076ed7692b4751985753d8b74bc439
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/dataset_tools.rst:308 5e0ff52eb93b48b78b4159f0377123e2
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

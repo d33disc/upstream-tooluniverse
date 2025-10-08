@@ -425,226 +425,226 @@ msgstr "**描述**：获取有关Biotite的全面信息——一款功能全面�
 #: ../../tools/bioinformatics_core_tools.rst:133
 #: be01e7365bf74ca0a57aab7424b09ff3
 msgid "**get_cryosparc_tools_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_cryosparc_tools_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:135
 #: 7b1672955ee742a7ad5ae97dd2ce068f
 msgid ""
 "Get comprehensive information about cryosparc-tools – interface to CryoSPARC"
 " cryo-EM processing"
-msgstr ""
+msgstr "获取有关 cryosparc-tools 的全面信息 —— CryoSPARC 冷冻电镜处理的接口"
 
 #: ../../tools/bioinformatics_core_tools.rst 1a5016f52f084c718548d25b801b74a8
 msgid "get_cryosparc_tools_info tool specification"
-msgstr ""
+msgstr "get_cryosparc_tools_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:141
 #: 7b929a86d4ad424ebd88f13410e7b8ef
 msgid "**Name**: ``get_cryosparc_tools_info``"
-msgstr ""
+msgstr "**名称**：``get_cryosparc_tools_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:143
 #: bba05e52c2b14bbb8041e7a2a72053cf
 msgid ""
 "**Description**: Get comprehensive information about cryosparc-tools – "
 "interface to CryoSPARC cryo-EM processing"
-msgstr ""
+msgstr "**描述**：获取关于 cryosparc-tools 的全面信息——CryoSPARC 冷冻电子显微镜处理的接口。"
 
 #: ../../tools/bioinformatics_core_tools.rst:147
 #: cc381812ddd941fa8972de12ab4a6620
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "cryosparc-tools"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 cryosparc-tools 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:164
 #: af881c5d579b435cb84c7edb02de6109
 msgid "**get_dendropy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_dendropy_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:166
 #: 2b7c45ad8dd841ce9fa58376b6a4eb49
 msgid "Get information about the dendropy package. Python package: dendropy"
-msgstr ""
+msgstr "获取有关 dendropy 包的信息。Python 包：dendropy"
 
 #: ../../tools/bioinformatics_core_tools.rst 014bc671861f4d6188e3f93689f76b3f
 msgid "get_dendropy_info tool specification"
-msgstr ""
+msgstr "get_dendropy_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:172
 #: 49f0f091626c4df794e6a5e70dc38ad3
 msgid "**Name**: ``get_dendropy_info``"
-msgstr ""
+msgstr "**名称**：``get_dendropy_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:174
 #: 1a999b5b07994ed8ac51485d5b6aad8e
 msgid ""
 "**Description**: Get information about the dendropy package. Python package:"
 " dendropy"
-msgstr ""
+msgstr "**描述**：获取有关 dendropy 包的信息。Python 包：dendropy"
 
 #: ../../tools/bioinformatics_core_tools.rst:193
 #: 27338f4f601d4a99ac02f474766bf406
 msgid "**get_ete3_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_ete3_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:195
 #: 69ab869c06224118a32916ed0cfc8a04
 msgid "Get information about the ete3 package. Python package: ete3"
-msgstr ""
+msgstr "获取有关 ete3 包的信息。Python 包：ete3"
 
 #: ../../tools/bioinformatics_core_tools.rst 404897bfbb81483fa130f8d0764855e5
 msgid "get_ete3_info tool specification"
-msgstr ""
+msgstr "get_ete3_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:201
 #: e20f026dd9de4a3ba3d03afe473a9c5f
 msgid "**Name**: ``get_ete3_info``"
-msgstr ""
+msgstr "**名称**：``get_ete3_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:203
 #: d33e011b1edb4371be7de7dc882a0ead
 msgid ""
 "**Description**: Get information about the ete3 package. Python package: "
 "ete3"
-msgstr ""
+msgstr "**描述**：获取有关 ete3 包的信息。Python 包：ete3"
 
 #: ../../tools/bioinformatics_core_tools.rst:222
 #: 1831ed30ed124a29b0a95cd92bacd1b6
 msgid "**get_fanc_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_fanc_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:224
 #: 1da426f7cf38461db523190d5b3fbded
 msgid ""
 "Get comprehensive information about FAN-C – framework for analyzing nuclear "
 "contacts"
-msgstr ""
+msgstr "获取关于FAN-C——核接触分析框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst f3fb7f3981b7424c81d46325c748e6d6
 msgid "get_fanc_info tool specification"
-msgstr ""
+msgstr "get_fanc_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:230
 #: 9a6dd4ec059745bb86402bf29c3fcaf2
 msgid "**Name**: ``get_fanc_info``"
-msgstr ""
+msgstr "**名称**：``get_fanc_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:232
 #: 2968cd1df8964ad99603c5d67db4bc57
 msgid ""
 "**Description**: Get comprehensive information about FAN-C – framework for "
 "analyzing nuclear contacts"
-msgstr ""
+msgstr "**描述**：获取关于FAN-C——用于分析核接触的框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:236
 #: 9fe3da894db94cf5877e2707a4b8e886
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "FAN-C"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于FAN-C的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:253
 #: 08164d40d8aa41e6a83a98d0f6f0d80b
 msgid "**get_flask_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_flask_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:255
 #: 159d808b69d04a83a1861fe8c3ebc0d7
 msgid ""
 "Get comprehensive information about Flask - a lightweight WSGI web "
 "application framework"
-msgstr ""
+msgstr "获取关于 Flask —— 一款轻量级 WSGI Web 应用框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 59dffb445c52438e8c150afb04701238
 msgid "get_flask_info tool specification"
-msgstr ""
+msgstr "get_flask_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:261
 #: 174fad11044a4085b33ef75daaf73be1
 msgid "**Name**: ``get_flask_info``"
-msgstr ""
+msgstr "**名称**：``get_flask_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:263
 #: 9d46e9e7ff744070908d170d8a904cf5
 msgid ""
 "**Description**: Get comprehensive information about Flask - a lightweight "
 "WSGI web application framework"
-msgstr ""
+msgstr "**描述**：获取关于 Flask —— 一款轻量级 WSGI Web 应用框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:283
 #: b6df75b16e2541a2894b13a213cf839a
 msgid "**get_flowio_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_flowio_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:285
 #: 5b917371df154b0bb1fea06e27c48d11
 msgid ""
 "Get comprehensive information about FlowIO – FCS file I/O for flow cytometry"
-msgstr ""
+msgstr "获取关于 FlowIO —— 流式细胞术 FCS 文件输入输出的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 655b34ebad324d7a9aaa69da06d03838
 msgid "get_flowio_info tool specification"
-msgstr ""
+msgstr "get_flowio_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:291
 #: 70d232fb8244414fbf8e48af7c091c4e
 msgid "**Name**: ``get_flowio_info``"
-msgstr ""
+msgstr "**名称**：``get_flowio_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:293
 #: d47f45a7eed24d9798822135749146da
 msgid ""
 "**Description**: Get comprehensive information about FlowIO – FCS file I/O "
 "for flow cytometry"
-msgstr ""
+msgstr "**描述**：获取有关 FlowIO —— 流式细胞术的 FCS 文件输入/输出的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:297
 #: dac3b156652b4543bb573cda39a1703b
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "FlowIO"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的 FlowIO 信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:314
 #: 7189bcad9cf74e0089240916041c75e4
 msgid "**get_flowkit_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_flowkit_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:316
 #: 421bc1cd9b454ad4ab29966ef8bd7ff5
 msgid ""
 "Get comprehensive information about FlowKit – flow cytometry analysis "
 "toolkit"
-msgstr ""
+msgstr "获取关于 FlowKit —— 流式细胞术分析工具包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 374f34d72b824af2baac8bd9dcabaf72
 msgid "get_flowkit_info tool specification"
-msgstr ""
+msgstr "get_flowkit_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:322
 #: e857e7dcf41a4ad7a5e009c6d201f2d4
 msgid "**Name**: ``get_flowkit_info``"
-msgstr ""
+msgstr "**名称**：``get_flowkit_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:324
 #: 53d1dbaae53d4edb9705cd870ca29679
 msgid ""
 "**Description**: Get comprehensive information about FlowKit – flow "
 "cytometry analysis toolkit"
-msgstr ""
+msgstr "**描述**：获取关于 FlowKit —— 流式细胞术分析工具包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:328
 #: a23e5dfa7c004cb6a4500360662a2667
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "FlowKit"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 FlowKit 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:345
 #: e8cc516ac4a34a3b80950b82a1640b14
 msgid "**get_gget_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_gget_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:347
 #: 0ad6f148a74d4dcd9da1a12d80df0898

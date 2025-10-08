@@ -75,34 +75,34 @@ msgstr "通过多个字段按文本内容搜索记录。"
 #: 459164965a174f7f8e30df1896a535c9 of
 #: tooluniverse.xml_tool.XMLDatasetTool._find_matches:1
 msgid "Find matching fields in a record."
-msgstr ""
+msgstr "在记录中查找匹配的字段。"
 
 #: 818d8f3689554cc4897088d572d87477 of
 #: tooluniverse.xml_tool.XMLDatasetTool._get_searchable_value:1
 msgid "Get searchable string value for a field."
-msgstr ""
+msgstr "获取字段的可搜索字符串值。"
 
 #: c4fd240252384fe4b4f6e2e3476407ef of
 #: tooluniverse.xml_tool.XMLDatasetTool._is_match:1
 msgid "Check if field value matches search query."
-msgstr ""
+msgstr "检查字段值是否与搜索查询匹配。"
 
 #: a5407145dabd4ec78d11e8c0a9681e38 of
 #: tooluniverse.xml_tool.XMLDatasetTool._filter:1
 msgid "Filter records based on field criteria."
-msgstr ""
+msgstr "根据字段条件筛选记录。"
 
 #: 01b25bf5d2734eb1b450e3a852251b02 of
 #: tooluniverse.xml_tool.XMLDatasetTool._get_filter_function:1
 msgid "Get the appropriate filter function for the condition."
-msgstr ""
+msgstr "获取适用于该条件的过滤函数。"
 
 #: c1dfd9e1f895477fa43869cd02a6c7fe of
 #: tooluniverse.xml_tool.XMLDatasetTool._get_filter_description:1
 msgid "Get human-readable filter description."
-msgstr ""
+msgstr "获取人类可读的过滤器描述。"
 
 #: 34138f00079446928f8726331e1e526b of
 #: tooluniverse.xml_tool.XMLDatasetTool.get_dataset_info:1
 msgid "Get comprehensive information about the loaded XML dataset."
-msgstr ""
+msgstr "获取有关已加载 XML 数据集的全面信息。"

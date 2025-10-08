@@ -85,99 +85,99 @@ msgstr "按多种条件搜索GWAS研究。"
 #: a31ac78333c8479887c5fc699ecf3248 of
 #: tooluniverse.gwas_tool.GWASStudySearch.run:1
 msgid "Search for studies with optional filters."
-msgstr ""
+msgstr "使用可选筛选条件搜索研究。"
 
 #: 55a760275ac74e668d1bc80aff65c7e6 of tooluniverse.gwas_tool.GWASSNPSearch:1
 msgid "Search for GWAS single nucleotide polymorphisms (SNPs)."
-msgstr ""
+msgstr "搜索 GWAS 单核苷酸多态性（SNPs）。"
 
 #: 830dc034bc534ef5aad8593e0aa003ec of
 #: tooluniverse.gwas_tool.GWASSNPSearch.run:1
 msgid "Search for SNPs with optional filters."
-msgstr ""
+msgstr "使用可选筛选条件搜索SNP。"
 
 #: ef48b4befccc4662a9a65f92a285e0a9 of
 #: tooluniverse.gwas_tool.GWASAssociationByID:1
 msgid "Get a specific GWAS association by its ID."
-msgstr ""
+msgstr "根据其ID获取特定的GWAS关联。"
 
 #: 0ce6a96e3a554438adb02717b60290bf of
 #: tooluniverse.gwas_tool.GWASAssociationByID.run:1
 msgid "Get association by ID."
-msgstr ""
+msgstr "通过 ID 获取关联。"
 
 #: 824e781673744fa987b182dc0cbb80c6 of tooluniverse.gwas_tool.GWASStudyByID:1
 msgid "Get a specific GWAS study by its ID."
-msgstr ""
+msgstr "通过其 ID 获取特定的 GWAS 研究。"
 
 #: f79be5d6de8e44059602c623633f6d36 of
 #: tooluniverse.gwas_tool.GWASStudyByID.run:1
 msgid "Get study by ID."
-msgstr ""
+msgstr "通过ID获取研究。"
 
 #: 966079fc7b7040139ad55e546eb897ee of tooluniverse.gwas_tool.GWASSNPByID:1
 msgid "Get a specific GWAS SNP by its rs ID."
-msgstr ""
+msgstr "通过其 rs ID 获取特定的 GWAS SNP。"
 
 #: 80fa3ac839fe4968897b71725ccee391 of
 #: tooluniverse.gwas_tool.GWASSNPByID.run:1
 msgid "Get SNP by rs ID."
-msgstr ""
+msgstr "通过 rs ID 获取 SNP。"
 
 #: 32a0fa09b622463684e871071340bd34 of
 #: tooluniverse.gwas_tool.GWASVariantsForTrait:1
 msgid "Get all variants associated with a specific trait."
-msgstr ""
+msgstr "获取与特定特征相关的所有变体。"
 
 #: 8ec5ce32c49647eca71a89379383cf9e of
 #: tooluniverse.gwas_tool.GWASVariantsForTrait.run:1
 msgid "Get variants for a trait with pagination support."
-msgstr ""
+msgstr "获取具有分页支持的特征变体。"
 
 #: cc39609ecefa4291b9c9dae32b41738e of
 #: tooluniverse.gwas_tool.GWASAssociationsForTrait:1
 msgid "Get all associations for a specific trait, sorted by p-value."
-msgstr ""
+msgstr "获取特定性状的所有关联，并按p值排序。"
 
 #: 48ae5285de0641c1bef6955204936045 of
 #: tooluniverse.gwas_tool.GWASAssociationsForTrait.run:1
 msgid "Get associations for a trait, sorted by significance."
-msgstr ""
+msgstr "获取某个特征的关联，并按重要性排序。"
 
 #: a1da554d9c09409682bb89849f6a465b of
 #: tooluniverse.gwas_tool.GWASAssociationsForSNP:1
 msgid "Get all associations for a specific SNP."
-msgstr ""
+msgstr "获取特定SNP的所有关联。"
 
 #: d29c92fe08a049f1a00935d97501365b of
 #: tooluniverse.gwas_tool.GWASAssociationsForSNP.run:1
 msgid "Get associations for a SNP."
-msgstr ""
+msgstr "获取单核苷酸多态性（SNP）的关联数据。"
 
 #: d0ff239691f444eda6b51745016c5b1d of
 #: tooluniverse.gwas_tool.GWASStudiesForTrait:1
 msgid "Get studies for a specific trait with optional filters."
-msgstr ""
+msgstr "获取特定性状的研究数据，并可选择使用筛选条件。"
 
 #: 7e2579afc6c04c4bad527dada4a68d77 of
 #: tooluniverse.gwas_tool.GWASStudiesForTrait.run:1
 msgid "Get studies for a trait with optional filters."
-msgstr ""
+msgstr "获取具有可选筛选条件的性状研究。"
 
 #: a880cf68fd7e4e3b90036287e09f2e4b of
 #: tooluniverse.gwas_tool.GWASSNPsForGene:1
 msgid "Get SNPs mapped to a specific gene."
-msgstr ""
+msgstr "获取映射到特定基因的SNPs。"
 
 #: 907a4ce5752c43eebd01631afcfc7187 of
 #: tooluniverse.gwas_tool.GWASSNPsForGene.run:1
 msgid "Get SNPs for a gene."
-msgstr ""
+msgstr "获取基因的SNP信息。"
 
 #: 4959db0167744cef90a084f1bf65d2eb of
 #: tooluniverse.gwas_tool.GWASAssociationsForStudy:1
 msgid "Get all associations for a specific study."
-msgstr ""
+msgstr "获取特定研究的所有关联。"
 
 #: 6bd17270ce854fc0adfb954c30b7a9d2 of
 #: tooluniverse.gwas_tool.GWASAssociationsForStudy.run:1

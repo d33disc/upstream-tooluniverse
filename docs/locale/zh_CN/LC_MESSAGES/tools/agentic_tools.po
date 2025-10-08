@@ -307,25 +307,25 @@ msgstr "``tool_config``（字符串）（必填）包含完整工具配置的 JS
 msgid ""
 "``quality_evaluation`` (string) (required) JSON string containing quality "
 "evaluation results and feedback"
-msgstr ""
+msgstr "``quality_evaluation``（字符串）（必填）包含质量评估结果和反馈的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:124 238b3d866cba4ab790ec996f629148e3
 msgid "**CodeQualityAnalyzer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**代码质量分析器**（类型：智能工具）"
 
 #: ../../tools/agentic_tools.rst:126 89e8cb3584b44826b920d53a630d4709
 msgid ""
 "Analyzes code quality from multiple dimensions including algorithmic "
 "correctness, functional impl..."
-msgstr ""
+msgstr "从多个维度分析代码质量，包括算法正确性、功能实现..."
 
 #: ../../tools/agentic_tools.rst 42caab5d44fd48148c66e6948d8da03c
 msgid "CodeQualityAnalyzer tool specification"
-msgstr ""
+msgstr "CodeQualityAnalyzer 工具规范"
 
 #: ../../tools/agentic_tools.rst:132 a8ef42e7b96e4762821111724e4fda9a
 msgid "**Name**: ``CodeQualityAnalyzer``"
-msgstr ""
+msgstr "**名称**：``CodeQualityAnalyzer``"
 
 #: ../../tools/agentic_tools.rst:134 8a9eb31d726c41639165916a50352574
 msgid ""
@@ -333,85 +333,86 @@ msgid ""
 "algorithmic correctness, functional implementation capability, performance "
 "characteristics, and best practices. Provides detailed feedback and "
 "improvement suggestions."
-msgstr ""
+msgstr "**描述**：从算法正确性、功能实现能力、性能特性及最佳实践等多个维度分析代码质量。提供详细的反馈和改进建议。"
 
 #: ../../tools/agentic_tools.rst:138 04031a7f67ba42c8a7da3f5cf3184450
 msgid "``tool_name`` (string) (required) Name of the tool being analyzed"
-msgstr ""
+msgstr "``tool_name``（字符串）（必填）被分析工具的名称"
 
 #: ../../tools/agentic_tools.rst:141 2271b4dba28942eb960e0a6b7e3a1493
 msgid ""
 "``tool_description`` (string) (required) Description of what the tool is "
 "supposed to do"
-msgstr ""
+msgstr "``tool_description``（字符串）（必填）工具预期功能的描述"
 
 #: ../../tools/agentic_tools.rst:144 51dd6873cb15493f914f2a7652e7a87a
 msgid ""
 "``tool_parameters`` (string) (required) JSON string of tool parameters and "
 "their types"
-msgstr ""
+msgstr "``tool_parameters``（字符串）（必填）工具参数及其类型的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:147 dd06dbf18b844410849318ed0e673c5c
 msgid ""
 "``implementation_code`` (string) (required) The actual implementation code "
 "to analyze"
-msgstr ""
+msgstr "``implementation_code``（字符串）（必填）用于分析的实际实现代码"
 
 #: ../../tools/agentic_tools.rst:150 4395ed4d631742a2a9c4d8035bf5cf49
 msgid ""
 "``test_cases`` (string) (required) JSON string of test cases for the tool"
-msgstr ""
+msgstr "``test_cases``（字符串）（必填）工具测试用例的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:153 b5d6a16fae4e4c0985088445e20ca536
 msgid ""
 "``test_execution_results`` (string) (optional) JSON string of test execution"
 " results including pass/fail status and actual outputs"
 msgstr ""
+"``test_execution_results``（字符串）（可选）包含测试执行结果的 JSON 字符串，包括通过/失败状态及实际输出内容"
 
 #: ../../tools/agentic_tools.rst:174 5d2e6a961428447790e56e94a812a659
 msgid "**DataAnalysisValidityReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**数据分析有效性审核员**（类型：自主工具）"
 
 #: ../../tools/agentic_tools.rst:176 82972cb02957463983a84e929dc38fcf
 msgid ""
 "Checks statistical choices, assumption testing, and reporting transparency."
-msgstr ""
+msgstr "检查统计选择、假设检验及报告透明度。"
 
 #: ../../tools/agentic_tools.rst d2bf015bef0248ffbaa9a9b57490b7ba
 msgid "DataAnalysisValidityReviewer tool specification"
-msgstr ""
+msgstr "DataAnalysisValidityReviewer 工具规范"
 
 #: ../../tools/agentic_tools.rst:182 e3cf4fd5a63e42f99497aeb9040da035
 msgid "**Name**: ``DataAnalysisValidityReviewer``"
-msgstr ""
+msgstr "**名称**：``DataAnalysisValidityReviewer``"
 
 #: ../../tools/agentic_tools.rst:184 d195268f0e2c4e4988e49800ca3470c5
 msgid ""
 "**Description**: Checks statistical choices, assumption testing, and "
 "reporting transparency."
-msgstr ""
+msgstr "**描述**：检查统计选择、假设检验及报告透明度。"
 
 #: ../../tools/agentic_tools.rst:188 8a2ed9c2b6eb4f6597d92786339cd1ec
 msgid "``analysis_section`` (string) (required) No description"
-msgstr ""
+msgstr "``analysis_section``（字符串）（必填） 无描述"
 
 #: ../../tools/agentic_tools.rst:205 2869b8a9ba9b4ac5aa49e98d93f9d13c
 msgid "**DescriptionAnalyzer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**DescriptionAnalyzer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:207 3172aa4d56c64398a0e3ea987dc7c77f
 msgid ""
 "Analyzes a tool's original description and the results of multiple test "
 "cases, then suggests an i..."
-msgstr ""
+msgstr "分析工具的原始描述及多个测试用例的结果，然后建议一个i..."
 
 #: ../../tools/agentic_tools.rst f1169dce76e94dfe9dd8e7e8129fc791
 msgid "DescriptionAnalyzer tool specification"
-msgstr ""
+msgstr "DescriptionAnalyzer 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:213 64b6ae49993345d0a0ef2ea0acd5eff5
 msgid "**Name**: ``DescriptionAnalyzer``"
-msgstr ""
+msgstr "**名称**：``DescriptionAnalyzer``"
 
 #: ../../tools/agentic_tools.rst:215 98335e5302eb4371895c1c64875a10f2
 msgid ""
@@ -419,95 +420,95 @@ msgid ""
 "multiple test cases, then suggests an improved description that is more "
 "accurate, comprehensive, and user-friendly. Optionally provides a rationale "
 "for the changes."
-msgstr ""
+msgstr "**描述**：分析工具的原始描述及多个测试用例的结果，随后建议一个更准确、全面且用户友好的改进描述。可选地提供修改理由。"
 
 #: ../../tools/agentic_tools.rst:219 6770652c1c8843d8a05816ec78922480
 msgid ""
 "``original_description`` (string) (required) The original description of the"
 " tool."
-msgstr ""
+msgstr "``original_description``（字符串）（必填）工具的原始描述。"
 
 #: ../../tools/agentic_tools.rst:222 7021250ff522465086abf42d6f797eba
 msgid ""
 "``test_results`` (string) (required) A JSON string containing a list of test"
 " case input/output pairs."
-msgstr ""
+msgstr "``test_results``（字符串）（必填）包含测试用例输入/输出对列表的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:240 b7ed252eb078453eac0c28b9fd1eec8a
 msgid "**DescriptionQualityEvaluator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**DescriptionQualityEvaluator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:242 de3c14df916b42688c3d608b3fc08e6c
 msgid ""
 "Evaluates the quality of tool descriptions and parameter descriptions, "
 "providing a score and spec..."
-msgstr ""
+msgstr "评估工具描述和参数描述的质量，提供评分和规范..."
 
 #: ../../tools/agentic_tools.rst ac6fd9ef1c0348d096688b3a741220fb
 msgid "DescriptionQualityEvaluator tool specification"
-msgstr ""
+msgstr "DescriptionQualityEvaluator 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:248 09237a8d4e79431c8de4b9c115088785
 msgid "**Name**: ``DescriptionQualityEvaluator``"
-msgstr ""
+msgstr "**名称**：``DescriptionQualityEvaluator``"
 
 #: ../../tools/agentic_tools.rst:250 fbc21aa2bad747d0b287e2cc4d399af0
 msgid ""
 "**Description**: Evaluates the quality of tool descriptions and parameter "
 "descriptions, providing a score and specific feedback for improvements."
-msgstr ""
+msgstr "**描述**：评估工具描述和参数描述的质量，提供评分及具体改进建议。"
 
 #: ../../tools/agentic_tools.rst:254 1c4a12437a564f3ebb03a8d254371300
 msgid ""
 "``tool_description`` (string) (required) The tool description to evaluate."
-msgstr ""
+msgstr "``tool_description``（字符串）（必填）用于评估的工具描述。"
 
 #: ../../tools/agentic_tools.rst:257 237a7bd3d29144fd9bdb243a4b492546
 msgid ""
 "``parameter_descriptions`` (string) (required) JSON string of parameter "
 "names and their descriptions."
-msgstr ""
+msgstr "``parameter_descriptions``（字符串）（必填）参数名称及其描述的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:260 c259f6e90458461dbce7d6fad74b01fa
 msgid ""
 "``test_results`` (string) (required) JSON string containing test case "
 "results."
-msgstr ""
+msgstr "``test_results``（字符串）（必填）包含测试用例结果的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:279 c3489d1111084077949bb09e1f7e0d86
 msgid "**DomainExpertValidator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**DomainExpertValidator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:281 f17cb6bed2104ebbb3eb14f09a9ecec4
 msgid ""
 "Provides domain-specific validation and expert recommendations for tools "
 "with deep expertise acro..."
-msgstr ""
+msgstr "提供针对特定领域的验证以及具备深厚专业知识的工具的专家建议..."
 
 #: ../../tools/agentic_tools.rst 96270ce1fdb74aeda2070faf9f07bb39
 msgid "DomainExpertValidator tool specification"
-msgstr ""
+msgstr "DomainExpertValidator 工具规范"
 
 #: ../../tools/agentic_tools.rst:287 fce175fbd6cd4c8abba4836c08e05047
 msgid "**Name**: ``DomainExpertValidator``"
-msgstr ""
+msgstr "**名称**：``DomainExpertValidator``"
 
 #: ../../tools/agentic_tools.rst:289 587cbad80dae4a82ba8e55fd5531864e
 msgid ""
 "**Description**: Provides domain-specific validation and expert "
 "recommendations for tools with deep expertise across scientific and "
 "technical domains"
-msgstr ""
+msgstr "**描述**：提供针对特定领域的验证和专家建议，具备跨科学与技术领域的深厚专业知识。"
 
 #: ../../tools/agentic_tools.rst:293 768e6470fced469fbdea397fb3d94fbf
 msgid ""
 "``tool_config`` (string) (required) JSON string of tool configuration to "
 "validate"
-msgstr ""
+msgstr "``tool_config``（字符串）（必填）用于验证的工具配置的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:296 96783fdf4e8c4b39a56fdd9ee7578489
 msgid "``domain`` (string) (required) Domain expertise area for validation"
-msgstr ""
+msgstr "``domain``（字符串）（必填）用于验证的领域专业知识范围"
 
 #: ../../tools/agentic_tools.rst:299 0414cfd8cc5e4ff29b6e85dfc0e1c590
 msgid ""

@@ -128,11 +128,11 @@ msgstr "对于生产环境部署，建议使用 **Web服务器的URL重写**："
 
 #: ../../ENGLISH_AS_DEFAULT.md:88 9d9d2cde00214da38f369c1f25b8ff4e
 msgid "Nginx 配置:"
-msgstr ""
+msgstr "Nginx 配置："
 
 #: ../../ENGLISH_AS_DEFAULT.md:97 3ef77b1c85dd431fafb196d982510d0f
 msgid "Apache 配置:"
-msgstr ""
+msgstr "Apache 配置："
 
 #: ../../ENGLISH_AS_DEFAULT.md:104 b6842943302d4878b8c39243e40c6cd8
 msgid "这样可以避免文件重复,同时提供友好的URL。"
@@ -158,12 +158,15 @@ msgstr "开发环境：模式2 (DOC_EN_AS_ROOT=true) - 便于测试"
 
 #: ../../ENGLISH_AS_DEFAULT.md:134 ba0aa3fe2c6349f2892cfefb4c60c06c
 msgid "生产环境: 模式1 + Nginx重写 - 节省空间"
-msgstr ""
+msgstr "生产环境：模式1 + Nginx重写 - 节省空间"
 
 #: ../../ENGLISH_AS_DEFAULT.md:136 22f69d5bdd3d41babe2699caea24b3c2
 msgid "**Q: 语言切换不工作?** A: 确保服务器在 `_build/html` 目录启动,不是在 `_build/html/en` 目录"
 msgstr ""
+"**问：语言切换不工作？** 答：请确保服务器是在 `_build/html` 目录下启动，而不是在 `_build/html/en` 目录下启动。"
 
 #: ../../ENGLISH_AS_DEFAULT.md:139 ad748064910644d4a3fa13b8bd09384c
 msgid "**Q: 能否让中文也在根目录?** A: 不推荐。保持英文为默认是国际惯例。"
 msgstr ""
+"**问：能否将中文也放在根目录？**  \n"
+"答：不推荐。保持英文为默认语言是国际惯例。"
