@@ -322,6 +322,10 @@ msgstr "关于MCP连接、自动装载器及已装载工具的信息"
 msgid ""
 "```python tu = ToolUniverse() tu.load_mcp_tools([\"http://localhost:8001\"])"
 msgstr ""
+"```python\n"
+"tu = ToolUniverse()\n"
+"tu.load_mcp_tools([\"http://localhost:8001\"])\n"
+"```"
 
 #: bfc22de546fd4023b42fe0ec93224428 of
 #: tooluniverse.mcp_integration.list_mcp_connections:14
@@ -330,8 +334,10 @@ msgid ""
 "connections = tu.list_mcp_connections() print(f\"Active MCP connections: "
 "{len(connections['connections'])}\") ```"
 msgstr ""
+"connections = tu.list_mcp_connections()  \n"
+"print(f\"活动的 MCP 连接数：{len(connections['connections'])}\")"
 
 #: 586f3452dd2b48639b75e5beceed1a69 of
 #: tooluniverse.mcp_integration._patch_tooluniverse:1
 msgid "Add MCP integration methods to ToolUniverse class."
-msgstr ""
+msgstr "将 MCP 集成方法添加到 ToolUniverse 类中。"

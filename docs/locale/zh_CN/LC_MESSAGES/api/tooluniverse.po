@@ -331,14 +331,14 @@ msgstr "打印有关发现过程的调试信息"
 #: 597cc28c7a7e45f8afea19cd347f2a68 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:10
 msgid "Updates tool counts after MCP registration"
-msgstr ""
+msgstr "在MCP注册后更新工具计数"
 
 #: f5e6e961f902443e822c8621e62ba209 of
 #: tooluniverse.execute_function.ToolUniverse._scan_all_json_files:1
 msgid ""
 "Recursively scan all JSON files in the data directory and its "
 "subdirectories."
-msgstr ""
+msgstr "递归扫描 data 目录及其子目录中的所有 JSON 文件。"
 
 #: f854ec01ef79445ca689ba6437dc7f94 of
 #: tooluniverse.execute_function.ToolUniverse._scan_all_json_files:3
@@ -347,63 +347,64 @@ msgid ""
 "(all_tools, all_tool_names) where all_tools is a list of tool configs"
 "        and all_tool_names is a set of tool names for deduplication"
 msgstr ""
+"(all_tools, all_tool_names)，其中 all_tools 是工具配置列表，all_tool_names 是用于去重的工具名称集合"
 
 #: e56a46e4126c434ca1e254a49c438c7a of
 #: tooluniverse.execute_function.ToolUniverse._scan_all_json_files:5
 #: tooluniverse.execute_function.ToolUniverse._scan_predefined_files:5
 msgid "(all_tools, all_tool_names) where all_tools is a list of tool configs"
-msgstr ""
+msgstr "(all_tools, all_tool_names)，其中 all_tools 是工具配置列表"
 
 #: 130c9fa3752947b0952f6e4c4803f529 of
 #: tooluniverse.execute_function.ToolUniverse._scan_all_json_files:6
 #: tooluniverse.execute_function.ToolUniverse._scan_predefined_files:6
 msgid "and all_tool_names is a set of tool names for deduplication"
-msgstr ""
+msgstr "and all_tool_names 是用于去重的一组工具名称集合"
 
 #: c2e1233555104137a31e3eb039defdac of
 #: tooluniverse.execute_function.ToolUniverse._scan_predefined_files:1
 msgid "Scan predefined tool files (original behavior)."
-msgstr ""
+msgstr "扫描预定义工具文件（原始行为）。"
 
 #: 2e13a10a24424732abc4e489bd88f274 of
 #: tooluniverse.execute_function.ToolUniverse.call_id_gen:1
 msgid "Generate a random call ID for function calls."
-msgstr ""
+msgstr "为函数调用生成随机呼叫ID。"
 
 #: a18310370cfb461eb755393ca4c72b89 of
 #: tooluniverse.execute_function.ToolUniverse.call_id_gen:3
 msgid "A random 9-character string composed of letters and digits."
-msgstr ""
+msgstr "由字母和数字组成的随机9字符字符串。"
 
 #: 2d15b7abf4da4c6e8f8846daf425a4a8 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:1
 msgid "Validate a function call against tool configuration."
-msgstr ""
+msgstr "验证函数调用是否符合工具配置。"
 
 #: 646c010e099241c190e62170ffbfb86b of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:3
 msgid ""
 "This method checks if a function call is valid by verifying the function "
 "name exists and the arguments match the expected parameters."
-msgstr ""
+msgstr "此方法通过验证函数名称是否存在以及参数是否与预期参数匹配来检查函数调用的有效性。"
 
 #: 47ffa881a7e14e9fa74608a5cdb3fb40 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:6
 msgid "Function call string or data to validate."
-msgstr ""
+msgstr "函数调用字符串或需验证的数据。"
 
 #: 8b92897f7fad4052b762fbfe390287f2 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:7
 msgid ""
 "Specific function configuration to validate against. If None, uses the "
 "loaded tool configuration."
-msgstr ""
+msgstr "特定功能配置以进行验证。如为 None，则使用已加载的工具配置。"
 
 #: a1a7cda646b24e8bb796cead0db10ad0 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:10
 #: tooluniverse.execute_function.ToolUniverse.run:11
 msgid "Format type for parsing. Defaults to 'llama'."
-msgstr ""
+msgstr "解析的格式类型。默认值为“llama”。"
 
 #: df926dda188a47488f729c8c5cd1591a of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:13
@@ -412,26 +413,29 @@ msgid ""
 "function call is valid, False otherwise     - message (str): Error message "
 "if invalid, empty if valid"
 msgstr ""
+"一个包含 (is_valid, message) 的元组，其中：  \n"
+"- is_valid (bool)：如果函数调用有效，则为 True；否则为 False  \n"
+"- message (str)：无效时的错误信息，有效时为空字符串"
 
 #: c987a5ac74f340ffa92930033d5e891f of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:15
 msgid "A tuple of (is_valid, message) where:"
-msgstr ""
+msgstr "一个由 (is_valid, message) 组成的元组，其中："
 
 #: da39aa7aa8614fb6b1162d5feb8d9844 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:16
 msgid "is_valid (bool): True if the function call is valid, False otherwise"
-msgstr ""
+msgstr "is_valid（bool）：如果函数调用有效，则为 True；否则为 False。"
 
 #: c7e2b735a21f4250afc3788d54ae2cf4 of
 #: tooluniverse.execute_function.ToolUniverse.check_function_call:17
 msgid "message (str): Error message if invalid, empty if valid"
-msgstr ""
+msgstr "message (str)：错误信息（如果无效），有效时为空"
 
 #: 9fb8f3b8b140475989412e41b7ea3150 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:1
 msgid "Discover available tools from MCP servers without loading them."
-msgstr ""
+msgstr "无需加载即可发现 MCP 服务器上的可用工具。"
 
 #: b179bf1f4ce64da48321e5d2cfd54b2f of
 #: tooluniverse.mcp_integration.discover_mcp_tools:3
@@ -439,7 +443,7 @@ msgid ""
 "This method connects to MCP servers to discover what tools are available "
 "without actually registering them in ToolUniverse. Useful for exploration "
 "and selective tool loading."
-msgstr ""
+msgstr "此方法连接到 MCP 服务器，以发现可用的工具，而无需实际将其注册到 ToolUniverse 中。适用于工具的探索和选择性加载。"
 
 #: 5ced599014764c39af3fc55edefb8ea4 646bf03dba5345a79aa7d8a7aca0f0f3
 #: 659054c7d11e4c88aa88040947a87e26 of
@@ -451,13 +455,13 @@ msgstr ""
 #: tooluniverse.smcp.SMCP.add_custom_tool:9
 #: tooluniverse.smcp.SMCP.run_simple:8 tooluniverse.smcp.create_smcp_server:8
 msgid "Parameters:"
-msgstr ""
+msgstr "参数："
 
 #: 09846b36896d4b6984b79ca579289ca6 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:9
 #: tooluniverse.mcp_integration.load_mcp_tools:8
 msgid "server_urls"
-msgstr ""
+msgstr "服务器网址"
 
 #: 1024fe1cb9ea4e8b8f115792229eab3e 793f574160614d09b02ef3695df0a9d8
 #: 9044e7d92f4648cd9354ad369626c237 a22510e9d25b456d9464f97819f780ea
@@ -468,12 +472,12 @@ msgstr ""
 #: tooluniverse.smcp.SMCP._perform_tool_search:-1
 #: tooluniverse.smcp.create_smcp_server:-1
 msgid "list of str, optional"
-msgstr ""
+msgstr "字符串列表，可选项"
 
 #: 8816ae901eaa4234be823f776ea6dca8 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:10
 msgid "List of MCP server URLs to discover from"
-msgstr ""
+msgstr "用于发现的 MCP 服务器 URL 列表"
 
 #: 1838e576fe404793b3aa0fe4f3117ffb 6a96aa3c7f134e8e8d65440e18271c69
 #: 7bdc2af7e0924842968af19f277c2cc9 of
@@ -483,7 +487,7 @@ msgstr ""
 #: tooluniverse.smcp.SMCP.run_simple:39
 #: tooluniverse.smcp.create_smcp_server:37
 msgid "**kwargs"
-msgstr ""
+msgstr "**kwargs（关键字参数）"
 
 #: 17092a34f3c84a33a29f2361336b8590 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:12
@@ -491,6 +495,9 @@ msgid ""
 "Additional options: - timeout (int): Connection timeout (default: 30) - "
 "include_schemas (bool): Include tool parameter schemas (default: True)"
 msgstr ""
+"附加选项：  \n"
+"- timeout (int)：连接超时时间（默认值：30）  \n"
+"- include_schemas (bool)：是否包含工具参数模式（默认值：True）"
 
 #: 5e5ee794f6bc4679aa049342e8ded4bf 94eb3cb61a7c42b2b6b66c950c291fc2 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:17
@@ -502,7 +509,7 @@ msgstr ""
 #: tooluniverse.smcp.SMCP.add_custom_tool:35
 #: tooluniverse.smcp.create_smcp_server:46
 msgid "Returns:"
-msgstr ""
+msgstr "返回值："
 
 #: bb0094b74f5a40f9b581146f950e6a64 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:18
@@ -513,12 +520,12 @@ msgstr ""
 #: tooluniverse.smcp.SMCP._handle_tools_find:-1
 #: tooluniverse.smcp.SMCP._handle_tools_find:22
 msgid "dict"
-msgstr ""
+msgstr "字典"
 
 #: d31ca673c5ad41739903b56fb63410e1 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:19
 msgid "Discovery results with tools organized by server"
-msgstr ""
+msgstr "按服务器组织的工具发现结果"
 
 #: 364cec6171034459957f5ed8da15bf28 deeb9baf5f7745878a5e725ac336c458 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:22
@@ -529,22 +536,27 @@ msgstr ""
 #: tooluniverse.smcp.SMCP._expose_tooluniverse_tools:73
 #: tooluniverse.smcp.SMCP._handle_tools_find:61
 msgid "Examples:"
-msgstr ""
+msgstr "示例："
 
 #: ade687d1f64b4ecda9102628a9c2a4d1 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:23
 msgid "```python tu = ToolUniverse()"
 msgstr ""
+"```python\n"
+"tu = ToolUniverse()\n"
+"```"
 
 #: 5bec648f1d16417c95dbb6d393cf73c7 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:26
 msgid "# Discover what's available discovery = tu.discover_mcp_tools(["
 msgstr ""
+"# 发现可用资源  \n"
+"discovery = tu.discover_mcp_tools(["
 
 #: 52e2cae4ee5446d89fb8b74941820fb5 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:28
 msgid "\"http://localhost:8001\", \"http://ml-server:8002\""
-msgstr ""
+msgstr "http://localhost:8001\", \"http://ml-server:8002"
 
 #: 6a168935fd104ce88dad95b76c3346e4 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:30
@@ -555,19 +567,19 @@ msgstr ""
 #: 39de5cf0118d459a81f85c3bcea29538 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:32
 msgid "# Show available tools for server, info in discovery[\"servers\"].items():"
-msgstr ""
+msgstr "# 显示 discovery[\"servers\"].items() 中服务器的可用工具信息："
 
 #: ffde67ee5c364c1db08884d9cc43c1d0 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:34
 #, python-brace-format
 msgid "print(f\"\\n{server}:\") for tool in info.get(\"tools\", []):"
-msgstr ""
+msgstr "print(f\"\\n{server}:\") 对 info.get(\"tools\", []) 中的每个工具执行："
 
 #: a2fa7456546f4befab4512422efbe682 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:36
 #, python-brace-format
 msgid "print(f\"  - {tool['name']}: {tool['description']}\")"
-msgstr ""
+msgstr "print(f\"  - {tool['name']}：{tool['description']}\")"
 
 #: 4eae3e5bfdc340489719287a4b46f3a1 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:37
@@ -576,66 +588,69 @@ msgstr ""
 #: tooluniverse.smcp.SMCP.close:37 tooluniverse.smcp.SMCP.close:47
 msgid "```"
 msgstr ""
+"```\n"
+"上下文：文档\n"
+"```"
 
 #: 2e5cbb419106436fb78343ed7af679c3 of
 #: tooluniverse.execute_function.ToolUniverse.export_tool_names:1
 msgid "Export tool names to a text file (one per line)."
-msgstr ""
+msgstr "将工具名称导出到文本文件（每行一个）。"
 
 #: 30328f0afabc448c9cd55882a2121e61 of
 #: tooluniverse.execute_function.ToolUniverse.export_tool_names:3
 msgid "Path to the output file"
-msgstr ""
+msgstr "输出文件路径"
 
 #: 8d013f4160b8404cbdb325cf70a8c287 of
 #: tooluniverse.execute_function.ToolUniverse.export_tool_names:5
 #: tooluniverse.execute_function.ToolUniverse.get_available_tools:3
 msgid "List of categories to filter by"
-msgstr ""
+msgstr "可筛选的类别列表"
 
 #: 7741a78d1e284ad29dc3bf50f0e00d12 of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:1
 msgid "Extract function call JSON from input data."
-msgstr ""
+msgstr "从输入数据中提取函数调用的 JSON。"
 
 #: d9873582d0c64a1b9177ab018983c1b0 of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:3
 msgid ""
 "This method delegates to the utility function extract_function_call_json."
-msgstr ""
+msgstr "该方法委托给工具函数 extract_function_call_json。"
 
 #: dfc8a0a6f2e74e87812a2ef886ac9a0f of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:5
 msgid "Input data containing function call information."
-msgstr ""
+msgstr "包含函数调用信息的输入数据。"
 
 #: 1f8f9c5e31a54e54b5f35c321b65093d of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:6
 msgid "Whether to return message along with JSON. Defaults to False."
-msgstr ""
+msgstr "是否随 JSON 一并返回消息。默认值为 False。"
 
 #: 78b59185a13e463d9d3a44a672505c63 of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:8
 #: tooluniverse.execute_function.ToolUniverse.run:9
 msgid "Whether to enable verbose output. Defaults to True."
-msgstr ""
+msgstr "是否启用详细输出。默认值为 True。"
 
 #: a08f59b208e6498fb2b0bf3f3aaabbc8 of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:10
 msgid "Format type for extraction. Defaults to 'llama'."
-msgstr ""
+msgstr "提取的格式类型。默认值为“llama”。"
 
 #: fd5c2efcf77b418fbb2aeccd795b1051 of
 #: tooluniverse.execute_function.ToolUniverse.extract_function_call_json:13
 msgid "Function call JSON, optionally with message if return_message is True."
-msgstr ""
+msgstr "函数调用 JSON，可选包含消息内容（当 return_message 为 True 时）。"
 
 #: 10518cc4587b4051acfd91cffa51fa37 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:1
 msgid ""
 "Directly filter tool name and description lists based on names and/or "
 "categories."
-msgstr ""
+msgstr "根据名称和/或类别直接筛选工具名称和描述列表。"
 
 #: b0976c7185fd413da0ab117ca28a5950 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:3
@@ -643,48 +658,48 @@ msgid ""
 "This method takes existing tool name and description lists and filters them "
 "according to the specified criteria using the select_tools method for "
 "category-based filtering."
-msgstr ""
+msgstr "该方法采用现有的工具名称和描述列表，并使用 select_tools 方法根据指定的条件进行类别筛选。"
 
 #: 78ade932792b4e8f8c9bd9498d5ed001 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:6
 msgid "List of tool names to filter."
-msgstr ""
+msgstr "工具名称筛选列表。"
 
 #: 8b1b6b983dc64d12b8392f3f8724b89e of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:8
 msgid ""
 "List of tool descriptions to filter (must correspond to tool_name_list)."
-msgstr ""
+msgstr "用于筛选的工具描述列表（必须与 tool_name_list 相对应）。"
 
 #: c86c751a8fe54e65acf2cc4847041467 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:10
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:9
 msgid "List of tool names to include."
-msgstr ""
+msgstr "包含的工具名称列表。"
 
 #: aaf31106a5724a5f94831837b679ce07 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:12
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:11
 #: tooluniverse.execute_function.ToolUniverse.select_tools:5
 msgid "List of tool names to exclude."
-msgstr ""
+msgstr "要排除的工具名称列表。"
 
 #: 5bb121635e894a77bfdaac40e871081f of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:14
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:13
 msgid "List of categories to include."
-msgstr ""
+msgstr "包含的类别列表。"
 
 #: ec4ae2e2d3404462b0c390d866383965 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:16
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:15
 msgid "List of categories to exclude."
-msgstr ""
+msgstr "要排除的类别列表。"
 
 #: a894fb18d65a46f599b55f7c10ae312e of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:19
 msgid "A tuple containing (filtered_tool_name_list, filtered_tool_desc_list)."
-msgstr ""
+msgstr "包含 (filtered_tool_name_list, filtered_tool_desc_list) 的元组。"
 
 #: c57d436bd9bf47a881869f787a5f29ff of
 #: tooluniverse.execute_function.ToolUniverse.find_tools_by_pattern:1

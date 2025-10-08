@@ -438,67 +438,67 @@ msgstr "**常见问题：**"
 msgid ""
 "**MCP Server Not Loading**: Check ToolUniverse installation path and UV "
 "installation"
-msgstr ""
+msgstr "**MCP 服务器未加载**：请检查 ToolUniverse 安装路径及 UV 安装情况"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:297
 #: 23a49242f88c4f45a2fdcae0ab3c062b
 msgid ""
 "**No Tools Discovered**: Verify MCP server is working and tool filters "
 "aren't too restrictive"
-msgstr ""
+msgstr "**未发现工具**：请确认 MCP 服务器正常运行且工具筛选条件不过于严格。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:298
 #: b50fb6c3c06743b184765802d8967eec
 msgid "**Tools Not Executing**: Check API keys and network connectivity"
-msgstr ""
+msgstr "**工具未执行**：请检查 API 密钥和网络连接情况。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:299
 #: 39799c9ed4564adda448b06b5be23102
 msgid "**Authentication Issues**: Ensure ChatGPT sign-in or valid API key"
-msgstr ""
+msgstr "**身份验证问题**：确保 ChatGPT 登录或有效的 API 密钥"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:301
 #: 25693f99cc474ab9a245d2876ca699f4
 msgid "**Debug Commands:**"
-msgstr ""
+msgstr "**调试命令：**"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:303
 #: 639bd5e80c354c599c99a2c0367703d4
 msgid "``DEBUG=true codex``: Run with detailed logging"
-msgstr ""
+msgstr "``DEBUG=true codex``：以详细日志模式运行"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:304
 #: 81d307d1135a40bab28594a96e8eaeec
 msgid "``codex --help``: Show all available options"
-msgstr ""
+msgstr "``codex --help``：显示所有可用选项"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:305
 #: b58d5f2e23024bf1a28aaf21a3fa6a05
 msgid "``/mcp``: Show MCP server status (if available)"
-msgstr ""
+msgstr "``/mcp``：显示 MCP 服务器状态（如可用）"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:308
 #: 0e89ae8bb3b74bdca684ee9717c63a61
 msgid "References"
-msgstr ""
+msgstr "参考文献"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:310
 #: 36f04b1be3404ab5b3a9079ef5c03929
 msgid "`Codex CLI GitHub Repository <https://github.com/openai/codex>`_"
-msgstr ""
+msgstr "Codex CLI GitHub 仓库 <https://github.com/openai/codex>`_"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:311
 #: 2717f1c29ada480fa170699a78a65d9a
 msgid ""
 "`Codex CLI Documentation <https://github.com/openai/codex/tree/main/docs>`_"
-msgstr ""
+msgstr "Codex CLI 文档 <https://github.com/openai/codex/tree/main/docs>`_"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:312
 #: cfff84064c03470bba5de23397c66062
 msgid "`Model Context Protocol (MCP) <https://modelcontextprotocol.io/>`_"
-msgstr ""
+msgstr "模型上下文协议（MCP）<https://modelcontextprotocol.io/>`_"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:313
 #: c794d723bc29407388aff8cf9c66e62b
 msgid "`ToolUniverse Documentation <https://tooluniverse.readthedocs.io/>`_"
-msgstr ""
+msgstr "ToolUniverse 文档 <https://tooluniverse.readthedocs.io/>_"

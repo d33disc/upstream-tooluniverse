@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/README.md 17dc05051e5247c0afb187923575f694
 msgid "适用场景"
-msgstr ""
+msgstr "Applicable Scenarios"
 
 #: ../../tutorials/aiscientists/README.md 0921465e630e4b8d9ce3361e8f15452b
 msgid "**MCPClientTool**"
@@ -168,23 +168,23 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/README.md d18a5386326843fd9a33ef5742b6ba34
 msgid "需要完整 MCP 功能"
-msgstr ""
+msgstr "需要完整的 MCP 功能"
 
 #: ../../tutorials/aiscientists/README.md f4e63fe07ada4e92bd1e0c143226fa7e
 msgid "**MCPAutoLoaderTool**"
-msgstr ""
+msgstr "**MCP自动加载工具**"
 
 #: ../../tutorials/aiscientists/README.md 59e931afe9c04a9e955457e5c691a158
 msgid "自动工具发现器"
-msgstr ""
+msgstr "自动工具检测器"
 
 #: ../../tutorials/aiscientists/README.md 4e8e837158824ace8212d96f7736ceb6
 msgid "批量集成工具集"
-msgstr ""
+msgstr "Batch Integration Toolkit"
 
 #: ../../tutorials/aiscientists/README.md 393b31bcbb2f49a29ddf6ce2f2a65f6d
 msgid "**MCPProxyTool**"
-msgstr ""
+msgstr "**MCP代理工具**"
 
 #: ../../tutorials/aiscientists/README.md a55ff7842270434698c082ed34a55096
 msgid "单工具代理"
@@ -228,4 +228,4 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/README.md:81 a92d8389bc7a40a3aff7b3001ff912ab
 msgid "**准备好开始了吗？** 点击 [添加 MCP 工具](adding_mcp_tools.md) 开始你的 MCP 之旅！"
-msgstr ""
+msgstr "**准备好开始了吗？** 点击 [添加 MCP 工具](adding_mcp_tools.md) 开始您的 MCP 之旅！"

@@ -311,7 +311,7 @@ msgstr "要注册的工具类"
 #: e15490dd3313467e8e25e8084ca5eb54 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:-1
 msgid "dict"
-msgstr ""
+msgstr "字典"
 
 #: 0f91c6da50464e3b9169d3e35885c1d7 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:13
@@ -320,11 +320,19 @@ msgid ""
 "description - parameter_schema: JSON schema for parameters - mcp_config: MCP"
 " server configuration"
 msgstr ""
+"配置包含：  \n"
+"- name：工具名称（必填）  \n"
+"- description：工具描述  \n"
+"- parameter_schema：参数的 JSON 模式  \n"
+"- mcp_config：MCP 服务器配置"
 
 #: 0fb044c9814e463c9046ec80e4e021ad of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:21
 msgid "```python class ExistingTool:"
 msgstr ""
+"```python\n"
+"class ExistingTool:\n"
+"```"
 
 #: 87d8923f25fb4166a902abeb5b2e1cf7 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:24
@@ -344,6 +352,8 @@ msgid ""
 "\"name\": \"existing_tool\", \"description\": \"An existing tool exposed via"
 " MCP\", \"mcp_config\": {\"port\": 8002}"
 msgstr ""
+"\"name\": \"existing_tool\", \"description\": \"通过 MCP 暴露的现有工具\", "
+"\"mcp_config\": {\"port\": 8002}"
 
 #: 3b575a757f204d75a5ad7cecb2d9a2c2 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:31
@@ -353,104 +363,108 @@ msgstr ""
 #: 700f534bde4c441faac9491e783ba9d7 of
 #: tooluniverse.mcp_tool_registry.get_mcp_tool_registry:1
 msgid "Get the current MCP tool registry."
-msgstr ""
+msgstr "获取当前的 MCP 工具注册表。"
 
 #: 7f6bbe4266d44ba6b0185a6b7f94d80f of
 #: tooluniverse.mcp_tool_registry.get_registered_tools:1
 msgid "Get a list of all registered MCP tools with their information."
-msgstr ""
+msgstr "获取所有已注册MCP工具及其信息的列表。"
 
 #: ../../api/tooluniverse.mcp_tool_registry.rst
 #: 0690965538614c20b905e125759dc320
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: c23a822b5b1d4411a94292166e478c67 of
 #: tooluniverse.mcp_tool_registry.get_registered_tools:3
 msgid ""
 "List of dictionaries containing tool information including name, "
 "description, and port."
-msgstr ""
+msgstr "包含工具信息（包括名称、描述和端口）的字典列表。"
 
 #: ../../api/tooluniverse.mcp_tool_registry.rst
 #: 8128609ec9af4e119747aa76b1058053
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 29519fd570da44c68ede3d5b41ae878b of
 #: tooluniverse.mcp_tool_registry.get_mcp_server_configs:1
 msgid "Get the current MCP server configurations grouped by port."
-msgstr ""
+msgstr "获取按端口分组的当前 MCP 服务器配置。"
 
 #: f58a278e72814891b2db697bbafccef9 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:1
 msgid "Start MCP server(s) for registered tools."
-msgstr ""
+msgstr "启动已注册工具的 MCP 服务器。"
 
 #: a417874efa2743ebb89c50a4fef3d18b aedec39e780142079aae496088783717 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:5
 #: tooluniverse.mcp_tool_registry.stop_mcp_server:5
 msgid "port"
-msgstr ""
+msgstr "端口"
 
 #: 8eeebf4bbe35477782d5f5a080a4be33 c3f3e486699246aeb9872a9b7abdc545 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:-1
 #: tooluniverse.mcp_tool_registry.stop_mcp_server:-1
 msgid "int, optional"
-msgstr ""
+msgstr "int，可选项"
 
 #: 4725ea8921ea428283d94304f2f20645 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:6
 msgid ""
 "Specific port to start server for. If None, starts servers for all "
 "registered tools."
-msgstr ""
+msgstr "用于启动服务器的特定端口。如果为 None，则启动所有已注册工具的服务器。"
 
 #: 08bd82ff1e824493ab820ce42f653244 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:7
 msgid "**kwargs"
-msgstr ""
+msgstr "**kwargs（关键字参数）"
 
 #: 815d2bb4d240412b973280b3af9c6a7e of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:8
 msgid "Additional arguments passed to SMCP server"
-msgstr ""
+msgstr "传递给 SMCP 服务器的附加参数"
 
 #: 1ed62c8aba89414bbecc0251d5c79b62 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:12
 msgid "```python # Start server for specific port start_mcp_server(port=8001)"
 msgstr ""
+"```python\n"
+"# 启动指定端口的服务器\n"
+"start_mcp_server(port=8001)\n"
+"```"
 
 #: d9a67bf4e82b4fa392e1d5c1fe0c24e3 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:16
 msgid "# Start all servers start_mcp_server()"
-msgstr ""
+msgstr "# 启动所有服务器 start_mcp_server()"
 
 #: 77b1200eba4045db8a035c08a6ea8837 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server:19
 msgid ""
 "# Start with custom configuration start_mcp_server(max_workers=20, "
 "debug=True) ```"
-msgstr ""
+msgstr "# 从自定义配置开始 start_mcp_server(max_workers=20, debug=True) ```"
 
 #: 8a84a0e1a8744f33998b637088619ee9 of
 #: tooluniverse.mcp_tool_registry._start_server_for_port:1
 msgid "Start SMCP server for tools on a specific port."
-msgstr ""
+msgstr "在特定端口启动用于工具的SMCP服务器。"
 
 #: e7ae1dd4dffc4edda168a76b1805e750 of
 #: tooluniverse.mcp_tool_registry._add_tool_to_smcp_server:1
 msgid ""
 "Add a registered tool to an SMCP server instance by reusing SMCP's proven "
 "method."
-msgstr ""
+msgstr "通过复用 SMCP 的成熟方法，将已注册的工具添加到 SMCP 服务器实例中。"
 
 #: eaa35ff3cf8248b594fc61629c58c2e3 of
 #: tooluniverse.mcp_tool_registry._create_mcp_tool_from_tooluniverse_with_instance:1
 msgid ""
 "Create an MCP tool from a ToolUniverse tool configuration using a tool "
 "instance."
-msgstr ""
+msgstr "使用工具实例从 ToolUniverse 工具配置创建 MCP 工具。"
 
 #: d856ff90371c49dbb3a31c0e2387b67a of
 #: tooluniverse.mcp_tool_registry._create_mcp_tool_from_tooluniverse_with_instance:3
@@ -461,13 +475,15 @@ msgid ""
 "parameter signatures that match the ToolUniverse tool schema, enabling "
 "FastMCP's automatic parameter validation."
 msgstr ""
+"该方法复用了 SMCP 中 _create_mcp_tool_from_tooluniverse 方法的成熟方案，但进行了调整以适配工具实例而非 "
+"ToolUniverse。它创建了具有与 ToolUniverse 工具架构相匹配的正确参数签名的函数，从而实现了 FastMCP 的自动参数校验功能。"
 
 #: 6a6488924a5c46949296394a5252020f of
 #: tooluniverse.mcp_tool_registry._build_fastmcp_tool_function:1
 msgid ""
 "Build a FastMCP-compatible function with proper docstring and type "
 "annotations."
-msgstr ""
+msgstr "构建一个兼容 FastMCP 的函数，包含规范的文档字符串和类型注解。"
 
 #: 4b76672cd2e34b8b8ae53bcc340c2a27 of
 #: tooluniverse.mcp_tool_registry._build_fastmcp_tool_function:3
@@ -475,37 +491,37 @@ msgid ""
 "FastMCP generates parameter schema from the function signature and "
 "docstring, so we need to create a function that matches the expected format "
 "exactly."
-msgstr ""
+msgstr "FastMCP 根据函数签名和文档字符串生成参数模式，因此我们需要创建一个与预期格式完全匹配的函数。"
 
 #: ae4c67971ccd4be892504bf310a8f1b8 of
 #: tooluniverse.mcp_tool_registry.start_mcp_server_for_tool:1
 msgid "Start MCP server for a specific tool."
-msgstr ""
+msgstr "启动特定工具的 MCP 服务器。"
 
 #: 364316c0fcae4091b70f2a581fb7c362 of
 #: tooluniverse.mcp_tool_registry.stop_mcp_server:1
 msgid "Stop MCP server(s)."
-msgstr ""
+msgstr "停止 MCP 服务器。"
 
 #: dc88ec21293c49a6a809ee45e0d5390f of
 #: tooluniverse.mcp_tool_registry.stop_mcp_server:6
 msgid "Specific port to stop server for. If None, stops all servers."
-msgstr ""
+msgstr "要停止服务器的特定端口。如果为 None，则停止所有服务器。"
 
 #: faab016b079e48b7a2e5f9011e6fa6c6 of
 #: tooluniverse.mcp_tool_registry.list_mcp_tools:1
 msgid "List all registered MCP tools with their configurations."
-msgstr ""
+msgstr "列出所有已注册的 MCP 工具及其配置。"
 
 #: aaf379f6459d44f88c8781300456a70a of
 #: tooluniverse.mcp_tool_registry.get_mcp_tool_urls:1
 msgid "Get list of MCP server URLs for all registered tools."
-msgstr ""
+msgstr "获取所有已注册工具的 MCP 服务器 URL 列表。"
 
 #: f680dc6ef5dc4095bb8e1aae4e3278ea of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:1
 msgid "Load MCP tools from servers into a ToolUniverse instance."
-msgstr ""
+msgstr "将 MCP 工具从服务器加载到 ToolUniverse 实例中。"
 
 #: bb09c5484e01460b916dbdd2cd438c16 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:5
@@ -515,27 +531,27 @@ msgstr ""
 #: c8acab97f3f14ccfa2dd633dac2980f8 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:-1
 msgid "ToolUniverse"
-msgstr ""
+msgstr "工具宇宙"
 
 #: b2b158f61fe542a8af1da145b8923c24 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:6
 msgid "ToolUniverse instance to load tools into"
-msgstr ""
+msgstr "用于加载工具的 ToolUniverse 实例"
 
 #: 95952b4dc813492d951a36bef05bcf0f of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:7
 msgid "server_urls"
-msgstr ""
+msgstr "服务器网址"
 
 #: bb247694b3884aa78bc1652929445b3a of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:-1
 msgid "list of str, optional"
-msgstr ""
+msgstr "可选的字符串列表"
 
 #: ab93de3a6e26447aa0e1d57b0091224c of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:8
 msgid "List of MCP server URLs. If None, uses all registered local servers."
-msgstr ""
+msgstr "MCP 服务器 URL 列表。若为 None，则使用所有已注册的本地服务器。"
 
 #: 8069dd4d8be44da3829bbd5027f4f855 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:12
@@ -543,6 +559,10 @@ msgid ""
 "```python from tooluniverse import ToolUniverse from "
 "tooluniverse.mcp_tool_registry import load_mcp_tools_to_tooluniverse"
 msgstr ""
+"```python\n"
+"from tooluniverse import ToolUniverse\n"
+"from tooluniverse.mcp_tool_registry import load_mcp_tools_to_tooluniverse\n"
+"```"
 
 #: 52dbfa4e274f43259a9b24879dcaf01f of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:16
@@ -552,12 +572,12 @@ msgstr ""
 #: 2fc84372caa04e7f82e6638820716b9e of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:18
 msgid "# Load from specific servers load_mcp_tools_to_tooluniverse(tu, ["
-msgstr ""
+msgstr "# 从特定服务器加载 load_mcp_tools_to_tooluniverse(tu, ["
 
 #: b5b62fe67b934dcb8d50755e9f35ec4d of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:20
 msgid "\"http://localhost:8001\", \"http://analysis-server:8002\""
-msgstr ""
+msgstr "http://localhost:8001\", \"http://analysis-server:8002"
 
 #: 0187c5cf031840c0bf050a425a7b4153 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:22
@@ -569,4 +589,4 @@ msgstr ""
 msgid ""
 "# Load from all local registered servers load_mcp_tools_to_tooluniverse(tu) "
 "```"
-msgstr ""
+msgstr "# 从所有本地注册服务器加载 load_mcp_tools_to_tooluniverse(tu) ```"

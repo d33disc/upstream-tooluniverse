@@ -178,11 +178,11 @@ msgstr "翻译将自动应用于中文版本！"
 
 #: ../../QUICK_BUILD_GUIDE.md:162 1ddd5e9f21a14f26805520b8e0bee239
 msgid "🎨 主题特性"
-msgstr ""
+msgstr "🎨 主题功能"
 
 #: ../../QUICK_BUILD_GUIDE.md:164 94539c879ec947a08dcaddb5c9439d90
 msgid "Shibuya 现代主题"
-msgstr ""
+msgstr "涩谷现代主题"
 
 #: ../../QUICK_BUILD_GUIDE.md:166 9bdb3f0ce9d8476694b3a18b1a503fc7
 msgid "✅ 美观的界面设计"

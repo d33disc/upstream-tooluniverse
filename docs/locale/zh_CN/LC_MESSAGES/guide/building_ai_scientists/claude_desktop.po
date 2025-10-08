@@ -498,22 +498,22 @@ msgstr "为特定研究领域创建自定义工具集："
 #: ../../guide/building_ai_scientists/claude_desktop.rst:429
 #: 2495aa6fd9ec45fbbe7c419f01eecb44
 msgid "Multiple MCP Servers"
-msgstr ""
+msgstr "多个 MCP 服务器"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:431
 #: 8b07c8c9bf7d477295eba4a6a740385e
 msgid "Run multiple ToolUniverse instances for different purposes:"
-msgstr ""
+msgstr "运行多个 ToolUniverse 实例以满足不同需求："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:464
 #: 7f65abba42f647a3afa691b44856e632
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:467
 #: eb860ff4960b4644b63562582d70f8bc
 msgid "Common Issues and Solutions"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:469
 #: e8cb84b83ed2463398d1bc461e02163f
@@ -522,6 +522,11 @@ msgid ""
 "manager installation - Ensure proper JSON syntax in configuration - Check "
 "Claude Desktop logs for errors"
 msgstr ""
+"**MCP 服务器未加载**：  \n"
+"- 验证 uv 环境  \n"
+"- 检查 UV 包管理器安装情况  \n"
+"- 确保配置中的 JSON 语法正确  \n"
+"- 检查 Claude Desktop 日志中的错误信息"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:475
 #: bd225d54f1194d81a5be2b5432f4a7f8
@@ -529,6 +534,10 @@ msgid ""
 "**Too Many Tools Loaded**: - Use selective tool loading - Reduce the number "
 "of enabled tools - Implement tool filtering"
 msgstr ""
+"**加载的工具过多**：  \n"
+"- 使用选择性加载工具  \n"
+"- 减少启用的工具数量  \n"
+"- 实施工具过滤"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:480
 #: 9987a0467d36401f8e95baa1fc703109
@@ -536,6 +545,10 @@ msgid ""
 "**Performance Issues**: - Implement caching strategies - Use selective tool "
 "loading - Optimize query patterns"
 msgstr ""
+"**性能问题**：  \n"
+"- 实施缓存策略  \n"
+"- 使用选择性工具加载  \n"
+"- 优化查询模式"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:485
 #: 902ebcd4b65b49b6a396d0f8622334cb
@@ -543,3 +556,7 @@ msgid ""
 "**Connection Issues**: - Verify network connectivity - Check firewall "
 "settings - Ensure proper MCP server configuration"
 msgstr ""
+"**连接问题**：  \n"
+"- 验证网络连接  \n"
+"- 检查防火墙设置  \n"
+"- 确保 MCP 服务器配置正确"

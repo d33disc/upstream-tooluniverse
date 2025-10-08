@@ -515,281 +515,281 @@ msgstr "**名称**：``get_ec_number_by_entity_id``"
 msgid ""
 "**Description**: Retrieve the Enzyme Commission (EC) number(s) for an "
 "entity."
-msgstr ""
+msgstr "**描述**：获取实体的酶委托号（EC号）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:328 ../../tools/rcsb_pdb_tools.rst:1168
 #: a786df52066a4287920a0c5da25913df b0ef4873c92c4c1c91c26834f54f10b3
 msgid "``entity_id`` (string) (optional) Polymer entity ID (e.g., '1A8M_1')"
-msgstr ""
+msgstr "``entity_id``（字符串）（可选）Polymer 实体 ID（例如，'1A8M_1'）"
 
 #: ../../tools/rcsb_pdb_tools.rst:344 42237d9a22c348a4802c93f6b7db2174
 msgid "**get_em_3d_fitting_and_reconstruction_details** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_em_3d_fitting_and_reconstruction_details**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:346 15f76a1a7d8a4799aa929b2a969d7fc6
 msgid ""
 "Retrieve EM 3D fitting model details and associated 3D reconstruction info "
 "for a given PDB entry."
-msgstr ""
+msgstr "检索指定PDB条目的EM三维拟合模型详情及相关三维重建信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst a0f783c36c384d9ca595980564845e31
 msgid "get_em_3d_fitting_and_reconstruction_details tool specification"
-msgstr ""
+msgstr "get_em_3d_fitting_and_reconstruction_details 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:352 e08963debe1a449aa4ce1b1ef071326c
 msgid "**Name**: ``get_em_3d_fitting_and_reconstruction_details``"
-msgstr ""
+msgstr "**名称**：``get_em_3d_fitting_and_reconstruction_details``"
 
 #: ../../tools/rcsb_pdb_tools.rst:354 1edfa792393a4f29996b7187d23ed49c
 msgid ""
 "**Description**: Retrieve EM 3D fitting model details and associated 3D "
 "reconstruction info for a given PDB entry."
-msgstr ""
+msgstr "**描述**：检索指定PDB条目的电镜三维拟合模型详情及相关三维重建信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst:374 2b6086356f4e4b0183c0a2065d7e1f10
 msgid "**get_emdb_ids_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_emdb_ids_by_pdb_id**（类型：RCSB工具）"
 
 #: ../../tools/rcsb_pdb_tools.rst:376 f05aacfb78b04138acf68b1f4e1f9737
 msgid ""
 "Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB "
 "entry."
-msgstr ""
+msgstr "检索与PDB条目关联的电子显微镜数据银行（EMDB）标识符。"
 
 #: ../../tools/rcsb_pdb_tools.rst 6601569528ff4f3e9945ff72f2dd190d
 msgid "get_emdb_ids_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_emdb_ids_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:382 8003aa24b0ee4d98a6e21cb2a9c0d363
 msgid "**Name**: ``get_emdb_ids_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_emdb_ids_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:384 3c0efa9fa6c041b99a6292f1fc594896
 msgid ""
 "**Description**: Retrieve Electron Microscopy Data Bank (EMDB) identifiers "
 "linked to a PDB entry."
-msgstr ""
+msgstr "**描述**：检索与PDB条目关联的电子显微镜数据银行（EMDB）标识符。"
 
 #: ../../tools/rcsb_pdb_tools.rst:388 ../../tools/rcsb_pdb_tools.rst:448
 #: ../../tools/rcsb_pdb_tools.rst:628 ../../tools/rcsb_pdb_tools.rst:1048
 #: 0b3908542bca4364bfbdbfcc689edd4a 0c6201087e264974858faf67f399cc78
 #: 121e3da06f5143c2aef48ab240a45bb6 c559620e8f7945279d6cc2619f1b8e80
 msgid "``pdb_id`` (string) (optional) 4-character PDB ID"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）4字符的PDB编号"
 
 #: ../../tools/rcsb_pdb_tools.rst:404 eda1a3c5e1ad46569e0b7cfc4cc2551c
 msgid "**get_gene_name_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_gene_name_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:406 a14396a1e33f4ab8a9650dbfc75513f3
 msgid "Retrieve gene name(s) associated with a polymer entity."
-msgstr ""
+msgstr "检索与聚合物实体相关的基因名称。"
 
 #: ../../tools/rcsb_pdb_tools.rst fd7237a39430474ebfc1ccc3e2f190d0
 msgid "get_gene_name_by_entity_id tool specification"
-msgstr ""
+msgstr "get_gene_name_by_entity_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:412 598fd1da8c9a41d99064b846f494542c
 msgid "**Name**: ``get_gene_name_by_entity_id``"
-msgstr ""
+msgstr "**名称**：``get_gene_name_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:414 eef1db9d61b341748aa4352ffdfbd8a8
 msgid ""
 "**Description**: Retrieve gene name(s) associated with a polymer entity."
-msgstr ""
+msgstr "**描述**：检索与聚合物实体相关的基因名称。"
 
 #: ../../tools/rcsb_pdb_tools.rst:418 e0ab5de24a3a42ee83930b6768b81b3e
 msgid "``entity_id`` (string) (optional) Entity ID like '1A8M_1'"
-msgstr ""
+msgstr "``entity_id``（字符串）（可选）实体ID，例如 '1A8M_1'"
 
 #: ../../tools/rcsb_pdb_tools.rst:434 b19ac3a1456b40e8ae75ceaa25d4c4ad
 msgid "**get_host_organism_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_host_organism_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:436 bdd76a9389204b5592acdd1821e72bde
 msgid "Get the host organism used for protein expression in a PDB entry."
-msgstr ""
+msgstr "获取PDB条目中用于蛋白质表达的宿主生物。"
 
 #: ../../tools/rcsb_pdb_tools.rst 18ee71f2f8ba40f59dba9eb5a9d45cda
 msgid "get_host_organism_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_host_organism_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:442 1dbf743468684a598ad8c17162c12b75
 msgid "**Name**: ``get_host_organism_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_host_organism_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:444 84d431fea1454e1d887bdd3478db3967
 msgid ""
 "**Description**: Get the host organism used for protein expression in a PDB "
 "entry."
-msgstr ""
+msgstr "**描述**：获取PDB条目中用于蛋白质表达的宿主生物。"
 
 #: ../../tools/rcsb_pdb_tools.rst:464 5cb72528a22b4c1495411e9ba0714917
 msgid "**get_ligand_bond_count_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_ligand_bond_count_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:466 1404d20d91b34d919a56a9a71b90a251
 msgid "Get the number of bonds for each ligand in a given PDB structure."
-msgstr ""
+msgstr "获取给定PDB结构中每个配体的键数。"
 
 #: ../../tools/rcsb_pdb_tools.rst 536a66fa283f43b0890e5a36a8fa8e81
 msgid "get_ligand_bond_count_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_ligand_bond_count_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:472 8948d3e9831a45afa5f66529da281f3c
 msgid "**Name**: ``get_ligand_bond_count_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_ligand_bond_count_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:474 8a35bef4df5446bca137b2f248ed17a5
 msgid ""
 "**Description**: Get the number of bonds for each ligand in a given PDB "
 "structure."
-msgstr ""
+msgstr "**描述**：获取给定PDB结构中每个配体的键数。"
 
 #: ../../tools/rcsb_pdb_tools.rst:478 ../../tools/rcsb_pdb_tools.rst:748
 #: 31413320b7bf4d7f967513eb0ee02275 658c0199233044cba3477d22bfe10d31
 msgid "``pdb_id`` (string) (optional) PDB ID of the entry"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）条目的PDB编号"
 
 #: ../../tools/rcsb_pdb_tools.rst:494 21d2303acfea4de7a20019ecf053ddc2
 msgid "**get_ligand_smiles_by_chem_comp_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_ligand_smiles_by_chem_comp_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:496 357902f87e4d4523b9492bfa6fe6110c
 msgid ""
 "Retrieve the SMILES chemical structure string for a given chemical component"
 " (ligand) ID."
-msgstr ""
+msgstr "检索指定化学成分（配体）ID的SMILES化学结构字符串。"
 
 #: ../../tools/rcsb_pdb_tools.rst 4c39a763b55a4298b42296c04d0abc18
 msgid "get_ligand_smiles_by_chem_comp_id tool specification"
-msgstr ""
+msgstr "get_ligand_smiles_by_chem_comp_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:502 db44f13dd017421683b5259912d9b8a8
 msgid "**Name**: ``get_ligand_smiles_by_chem_comp_id``"
-msgstr ""
+msgstr "**名称**：``get_ligand_smiles_by_chem_comp_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:504 46c2409f957a4e4d8736c79955affd0f
 msgid ""
 "**Description**: Retrieve the SMILES chemical structure string for a given "
 "chemical component (ligand) ID."
-msgstr ""
+msgstr "**描述**：检索指定化学成分（配体）ID对应的SMILES化学结构字符串。"
 
 #: ../../tools/rcsb_pdb_tools.rst:508 97c4a930bb3d439ca7746fafec92e1dc
 msgid ""
 "``chem_comp_id`` (string) (optional) Chemical component ID (e.g., 'ATP')"
-msgstr ""
+msgstr "``chem_comp_id``（字符串）（可选）化学成分编号（例如，'ATP'）"
 
 #: ../../tools/rcsb_pdb_tools.rst:524 fb8c35c1cc9e4bc4a4401167335fd6d5
 msgid "**get_mutation_annotations_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_mutation_annotations_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:526 96b91115c9f74ffba20c99f5c5d027cd
 msgid "Retrieve mutation annotations for a given PDB structure."
-msgstr ""
+msgstr "检索指定PDB结构的突变注释。"
 
 #: ../../tools/rcsb_pdb_tools.rst 8443f1df362543888c8f4118f1be72fe
 msgid "get_mutation_annotations_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_mutation_annotations_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:532 01f71ce1b77e44f787f2b2214f96a537
 msgid "**Name**: ``get_mutation_annotations_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_mutation_annotations_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:534 ec75b016452b490f953b8af7298fedc2
 msgid ""
 "**Description**: Retrieve mutation annotations for a given PDB structure."
-msgstr ""
+msgstr "**描述**：检索指定PDB结构的突变注释。"
 
 #: ../../tools/rcsb_pdb_tools.rst:554 026c8b6003824269b730600286ef4cf9
 msgid "**get_oligosaccharide_descriptors_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_oligosaccharide_descriptors_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:556 ec6087b02dde411facaee2b189ec89ca
 msgid ""
 "Retrieve structural descriptors for branched entities (e.g., "
 "oligosaccharides) in a PDB entry."
-msgstr ""
+msgstr "检索PDB条目中分支实体（例如低聚糖）的结构描述符。"
 
 #: ../../tools/rcsb_pdb_tools.rst fb007f197594456986c88fdce9549b86
 msgid "get_oligosaccharide_descriptors_by_entity_id tool specification"
-msgstr ""
+msgstr "get_oligosaccharide_descriptors_by_entity_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:562 acf8682436f64a6bafade15fd401a576
 msgid "**Name**: ``get_oligosaccharide_descriptors_by_entity_id``"
-msgstr ""
+msgstr "**名称**：``get_oligosaccharide_descriptors_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:564 1b1f63360e1f4e7e8a5ba60f22b0eda3
 msgid ""
 "**Description**: Retrieve structural descriptors for branched entities "
 "(e.g., oligosaccharides) in a PDB entry."
-msgstr ""
+msgstr "**描述**：检索PDB条目中分支实体（例如寡糖）的结构描述符。"
 
 #: ../../tools/rcsb_pdb_tools.rst:568 43c50164c36d44ee8682280e121e3ed8
 msgid "``entity_id`` (string) (optional) Branched entity ID like '5FMB_2'"
-msgstr ""
+msgstr "``entity_id``（字符串）（可选）分支实体ID，例如 '5FMB_2'"
 
 #: ../../tools/rcsb_pdb_tools.rst:584 59a78020c5884835b0ebd32d20b8f632
 msgid "**get_polymer_entity_annotations** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_polymer_entity_annotations**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:586 85ae6d47161a4dc485bdbbfa6dd095ab
 msgid ""
 "Retrieve functional annotations (Pfam domains, GO terms) and associated "
 "UniProt accession IDs for..."
-msgstr ""
+msgstr "检索功能注释（Pfam 域、GO 术语）及相关的 UniProt 登录号以获取..."
 
 #: ../../tools/rcsb_pdb_tools.rst 2d085ef265dd4e9f820c300f952d6330
 msgid "get_polymer_entity_annotations tool specification"
-msgstr ""
+msgstr "get_polymer_entity_annotations 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:592 7fde317241b548c68602b8cf4b6cbd77
 msgid "**Name**: ``get_polymer_entity_annotations``"
-msgstr ""
+msgstr "**名称**：``get_polymer_entity_annotations``"
 
 #: ../../tools/rcsb_pdb_tools.rst:594 bc7e3591242842b1abc88fee3c0bdd56
 msgid ""
 "**Description**: Retrieve functional annotations (Pfam domains, GO terms) "
 "and associated UniProt accession IDs for a polymer entity."
-msgstr ""
+msgstr "**描述**：检索聚合物实体的功能注释（Pfam结构域、GO术语）及相关的UniProt登录号。"
 
 #: ../../tools/rcsb_pdb_tools.rst:598 ../../tools/rcsb_pdb_tools.rst:688
 #: ../../tools/rcsb_pdb_tools.rst:718 34ec28ae69014c118f01694d772e7a65
 #: 5b29af17f65a4abbb4f09e404916cd8d 89cfba8b369246acaf97c2813ffe1937
 msgid "``entity_id`` (string) (optional) Polymer entity ID like '1A8M_1'"
-msgstr ""
+msgstr "``entity_id``（字符串）（可选）聚合物实体ID，例如 '1A8M_1'"
 
 #: ../../tools/rcsb_pdb_tools.rst:614 1eb3b277e89848fc8d2506349f270cc8
 msgid "**get_polymer_entity_count_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_polymer_entity_count_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:616 1122c0d1d2e84dfd81b3b216390cb8c2
 msgid "Get the number of distinct polymer entities (chains) in a structure."
-msgstr ""
+msgstr "获取结构中不同聚合物实体（链）的数量。"
 
 #: ../../tools/rcsb_pdb_tools.rst 673ca9112cc749b1bf800c81189056b4
 msgid "get_polymer_entity_count_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_polymer_entity_count_by_pdb_id 工具规格说明"
 
 #: ../../tools/rcsb_pdb_tools.rst:622 d33e2916189440f8a81f12ed3d1c476d
 msgid "**Name**: ``get_polymer_entity_count_by_pdb_id``"
-msgstr ""
+msgstr "**名称**：``get_polymer_entity_count_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:624 1f37494add754031a6f8ab00dafe6fee
 msgid ""
 "**Description**: Get the number of distinct polymer entities (chains) in a "
 "structure."
-msgstr ""
+msgstr "**描述**：获取结构中不同聚合物实体（链）的数量。"
 
 #: ../../tools/rcsb_pdb_tools.rst:644 72716392c2dd48fb8f3e7ed55a772452
 msgid "**get_polymer_entity_ids_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_polymer_entity_ids_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:646 9e31fa783bd2463e8cfc54a944c6ea6c
 msgid ""
 "List polymer entity IDs for a given PDB ID. Useful for building further "
 "queries on individual pol..."
-msgstr ""
+msgstr "列出给定 PDB ID 的聚合物实体 ID。适用于基于单个聚合物实体构建进一步查询。"
 
 #: ../../tools/rcsb_pdb_tools.rst ee3935e9da3c4321aeadeb106aa01959
 msgid "get_polymer_entity_ids_by_pdb_id tool specification"

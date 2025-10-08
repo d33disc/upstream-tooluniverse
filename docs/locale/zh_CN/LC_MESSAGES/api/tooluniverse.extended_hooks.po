@@ -329,4 +329,4 @@ msgstr "为工具执行创建日志条目。"
 #: 0c2397a82bf3408d8c45f2e381484f73 of
 #: tooluniverse.extended_hooks.LoggingHook._write_log:1
 msgid "Write the log entry to the configured destination."
-msgstr ""
+msgstr "将日志条目写入配置的目标位置。"

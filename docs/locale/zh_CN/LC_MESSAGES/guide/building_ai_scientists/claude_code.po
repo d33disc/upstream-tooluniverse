@@ -483,7 +483,7 @@ msgstr "多步骤研究工作流程"
 #: ../../guide/building_ai_scientists/claude_code.rst:270
 #: f96ff750be7640b384d391cc76da1542
 msgid "Claude Code excels at complex, multi-step research workflows:"
-msgstr ""
+msgstr "Claude Code 擅长处理复杂的多步骤研究工作流程："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:272
 #: 59f253aaf7954f21910ed9576f9b144b
@@ -491,22 +491,22 @@ msgid ""
 "**Hypothesis-Driven Research**: 1. Formulate a hypothesis 2. Design an "
 "approach and select tools 3. Gather supporting evidence 4. Validate findings"
 " 5. Generate conclusions"
-msgstr ""
+msgstr "**假设驱动的研究**：1. 制定假设 2. 设计方法并选择工具 3. 收集支持证据 4. 验证研究结果 5. 得出结论"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:280
 #: c3a9f5cd5593454db89508158bba7869
 msgid "Settings and Configuration"
-msgstr ""
+msgstr "设置与配置"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:283
 #: 26aaec8c16344e08a7956a279d9e1786
 msgid "Tool Selection Strategies"
-msgstr ""
+msgstr "工具选择策略"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:285
 #: a1699f98fa654f1f8781e2642aa226a4
 msgid "Optimize tool usage for better performance:"
-msgstr ""
+msgstr "优化工具使用以提升性能："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:287
 #: 4ff391c9567e4910a439d182c82ac261
@@ -514,31 +514,34 @@ msgid ""
 "**Selective Tool Loading**: - Load only relevant tools for specific research"
 " domains - Reduce context usage and improve response times"
 msgstr ""
+"**选择性工具加载**：  \n"
+"- 仅加载特定研究领域相关的工具  \n"
+"- 减少上下文使用，提升响应速度"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:291
 #: 03ea38c874ba4f06911507d9d4cc9f74
 msgid "**Example Tool Selection**:"
-msgstr ""
+msgstr "**示例工具选择**："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:302
 #: bd076838dcda42a69c7485b1a8d186a5
 msgid "Multiple MCP Servers"
-msgstr ""
+msgstr "多台 MCP 服务器"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:304
 #: a098a06f6356414abb0e2665a3276694
 msgid "Run multiple ToolUniverse instances for different purposes:"
-msgstr ""
+msgstr "运行多个 ToolUniverse 实例以满足不同需求："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:321
 #: a81edae95d1f422fb87548bfb149758b
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:324
 #: c9f52c51bdc64b3d927faf80c66ce6a5
 msgid "Common Issues and Solutions"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:326
 #: 998cba9a356c4919a16fda563ef51faa
@@ -549,6 +552,12 @@ msgid ""
 "tooluniverse` - For troubleshooting, see: `Claude Code troubleshooting "
 "<https://docs.anthropic.com/en/docs/claude-code/troubleshooting>`_"
 msgstr ""
+"**MCP 服务器未加载**：  \n"
+"- 验证 ToolUniverse 安装路径及绝对路径  \n"
+"- 检查 UV 包管理器安装情况  \n"
+"- 运行 `claude mcp list` 查看当前服务器列表  \n"
+"- 使用 `claude mcp get tooluniverse` 检查服务器日志  \n"
+"- 如需排查问题，请参阅：`Claude Code 排查指南 <https://docs.anthropic.com/en/docs/claude-code/troubleshooting>`_"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:333
 #: 75e3744d26084d7498c3f4f9cff87670
@@ -558,6 +567,11 @@ msgid ""
 "ToolUniverse dependencies are installed - Use `claude doctor` for system "
 "diagnostics"
 msgstr ""
+"**未发现工具**：  \n"
+"- 验证 ToolUniverse MCP 服务器命令是否在本地运行  \n"
+"- 检查您的工具筛选条件是否过于严格  \n"
+"- 确保已安装所有 ToolUniverse 依赖项  \n"
+"- 使用 `claude doctor` 进行系统诊断"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:339
 #: 3022019490f84cacb360c80bc4c568ee
@@ -568,18 +582,22 @@ msgid ""
 "<https://docs.anthropic.com/en/docs/claude-code/mcp#mcp-output-limits-and-"
 "warnings>`_"
 msgstr ""
+"**工具未执行**：  \n"
+"- 添加服务器时通过 `--env` 标志提供所需的 API 密钥  \n"
+"- 验证与外部 API 的网络连接  \n"
+"- 检查 MCP 输出限制，详见：`MCP 输出限制 <https://docs.anthropic.com/en/docs/claude-code/mcp#mcp-output-limits-and-warnings>`_"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:345
 #: ebd1c0c52a924b55a43bf851c9a6e86e
 msgid "Tips"
-msgstr ""
+msgstr "提示"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:347
 #: 90be581c61d143cfb74aad55603c372a
 msgid ""
 "**Tool Selection**: Use `--include-tools` to load only the tools you need "
 "for better performance."
-msgstr ""
+msgstr "**工具选择**：使用 `--include-tools` 仅加载所需工具，以提升性能。"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:349
 #: 4d483359e16b410f89fa2326f7397ebe
@@ -587,27 +605,28 @@ msgid ""
 "**Status Check**: Use `claude mcp list` and `claude mcp get <server>` to "
 "inspect MCP servers."
 msgstr ""
+"**状态检查**：使用 `claude mcp list` 和 `claude mcp get <server>` 来检查 MCP 服务器。"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:351
 #: 71a0655743f94e2098aaf5a6b994ba77
 msgid ""
 "**Keep Paths Absolute**: Avoid relative paths in MCP config to prevent "
 "resolution issues."
-msgstr ""
+msgstr "**保持路径为绝对路径**：避免在 MCP 配置中使用相对路径，以防止解析问题。"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:353
 #: 25175ac6a6784ce2b0879bce95533f4f
 msgid ""
 "**Authentication**: For OAuth-based MCP servers, use `/mcp` command in "
 "Claude Code chat for secure authentication."
-msgstr ""
+msgstr "**认证**：对于基于 OAuth 的 MCP 服务器，请在 Claude Code 聊天中使用 `/mcp` 命令进行安全认证。"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:355
 #: 3f67f660193749fca34a1bde0657917a
 msgid ""
 "**Resources**: Reference external resources with `@server:protocol://path` "
 "syntax in your prompts."
-msgstr ""
+msgstr "**资源**：在提示中使用 `@server:protocol://path` 语法引用外部资源。"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:357
 #: 66f43be1e26742f1857411e94e42e31c
@@ -615,3 +634,5 @@ msgid ""
 "For comprehensive documentation, see: `Claude Code documentation "
 "<https://docs.anthropic.com/en/docs/claude-code/>`_."
 msgstr ""
+"有关完整文档，请参见：`Claude Code 文档 <https://docs.anthropic.com/en/docs/claude-"
+"code/>`_。"

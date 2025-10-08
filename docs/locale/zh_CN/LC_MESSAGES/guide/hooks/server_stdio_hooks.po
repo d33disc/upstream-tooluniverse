@@ -385,29 +385,29 @@ msgstr "启用详细日志记录以进行故障排除："
 #: ../../guide/hooks/server_stdio_hooks.rst:309
 #: 8e9b736d9f944a6296538bd4fedf6d5d
 msgid "Next Steps"
-msgstr ""
+msgstr "下一步"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:311
 #: ef26d2b58ca44fc6a51a45ff134f97b0
 msgid ":doc:`index` - Complete hooks system Tutorial"
-msgstr ""
+msgstr ":doc:`index` - 完整的钩子系统教程"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:312
 #: 647db6d21a074bc880e578d53fd01b82
 msgid ":doc:`summarization_hook` - SummarizationHook details"
-msgstr ""
+msgstr ":doc:`summarization_hook` - SummarizationHook 详细信息"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:313
 #: e76e6996438b42b49f718a383af90c4d
 msgid ":doc:`file_save_hook` - FileSaveHook details"
-msgstr ""
+msgstr ":doc:`file_save_hook` - FileSaveHook 详情"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:314
 #: f0c4ec0b7d23481599c1c41ffbe1fea2
 msgid ":doc:`hook_configuration` - Advanced configuration"
-msgstr ""
+msgstr ":doc:`hook_configuration` - 高级配置"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:315
 #: 4b7d09dde1e74654a6f223e4f0a6ac95
 msgid ":doc:`../loading_tools` - Tool loading and management"
-msgstr ""
+msgstr ":doc:`../loading_tools` - 工具加载与管理"

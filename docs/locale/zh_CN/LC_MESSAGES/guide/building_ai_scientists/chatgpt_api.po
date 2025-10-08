@@ -490,21 +490,21 @@ msgstr "**错误处理**：在生产环境中，始终将工具执行代码包�
 msgid ""
 "**Prompt Engineering**: Customize the system prompt for domain-specific "
 "research tasks."
-msgstr ""
+msgstr "**提示工程**：为特定领域的研究任务定制系统提示。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:492
 #: 954cf41627254488b287da877b9e7ea2
 msgid ""
 "**Batch Processing**: Use the pattern for processing multiple queries "
 "efficiently."
-msgstr ""
+msgstr "**批量处理**：使用该模式高效处理多个查询。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:494
 #: c44adf8eb6624d2a8f332045c94c0a06
 msgid ""
 "**Rate Limiting**: Implement delays between API calls if you hit OpenAI rate"
 " limits."
-msgstr ""
+msgstr "**速率限制**：如果达到 OpenAI 速率限制，请在 API 调用之间实施延迟。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:497
 #: 33e54f6e9e5943e4895ecd8fe1e2fffe
@@ -512,7 +512,7 @@ msgid ""
 "**Start Simple**: Begin with basic research queries to understand the "
 "integration, then progress to complex multi-step workflows as you become "
 "familiar with the capabilities."
-msgstr ""
+msgstr "**从简开始**：先从基础的研究查询入手，了解集成的基本情况，随着对功能的熟悉，再逐步推进到复杂的多步骤工作流程。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:500
 #: 64acf2b22ba5403eb5ba4eadba869027
@@ -520,4 +520,4 @@ msgid ""
 "**Function Calling**: ChatGPT API provides a powerful programmatic interface"
 " for scientific research, enabling both interactive exploration and "
 "automated batch processing of research tasks."
-msgstr ""
+msgstr "**函数调用**：ChatGPT API 提供了强大的编程接口，支持科学研究中的交互式探索和自动化批量处理研究任务。"

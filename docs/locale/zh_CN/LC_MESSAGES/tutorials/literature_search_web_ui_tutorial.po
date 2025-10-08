@@ -469,20 +469,21 @@ msgid ""
 "**ToolUniverse Not Found** - ToolUniverse is not properly installed or "
 "configured - Solution: Install ToolUniverse or run in demo mode"
 msgstr ""
+"**未找到 ToolUniverse** - ToolUniverse 未正确安装或配置 - 解决方案：安装 ToolUniverse 或以演示模式运行"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:267
 #: e06bc276114f432fb97e0d8442c45f59
 msgid ""
 "**No Results Found** - Search query might be too specific - Try broader "
 "terms or enable AI query expansion - Check if databases are accessible"
-msgstr ""
+msgstr "**未找到结果** - 搜索查询可能过于具体 - 尝试使用更广泛的关键词或启用 AI 查询扩展 - 检查数据库是否可访问"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:272
 #: 133fe1b9338e4df4b1cfa3e83b3b0b4f
 msgid ""
 "**Slow Performance** - Large result sets or many databases can slow down "
 "searches - Reduce the result limit - Disable some databases if not needed"
-msgstr ""
+msgstr "**性能缓慢** - 大量结果集或多个数据库可能导致搜索速度变慢 - 降低结果限制 - 如无必要，可禁用部分数据库"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:277
 #: a0cb1442bf2c458291291e745da1ffb3
@@ -490,208 +491,212 @@ msgid ""
 "**API Errors** - Check network connectivity - Verify API endpoints are "
 "accessible - Check for rate limiting"
 msgstr ""
+"**API错误**  \n"
+"- 检查网络连接  \n"
+"- 验证API端点是否可访问  \n"
+"- 检查是否存在速率限制"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:283
 #: ec1d3397d03842b48dab8d4e11d3f618
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:286
 #: d11475ca7f1c450a9dbf581b05585108
 msgid "Search Optimization"
-msgstr ""
+msgstr "搜索优化"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:288
 #: e15b173802ef4cda93534d4f7230f0af
 msgid "**Use specific, relevant keywords**"
-msgstr ""
+msgstr "**使用具体且相关的关键词**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:289
 #: c17668b99dd74c0fa9fb132be680a752
 msgid "**Enable AI query expansion** for comprehensive coverage"
-msgstr ""
+msgstr "**启用 AI 查询扩展** 以实现全面覆盖"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:290
 #: 4f4345d932d24970bf7683650901368c
 msgid "**Start with moderate result limits** (5-10) for faster searches"
-msgstr ""
+msgstr "**从适中的结果限制开始**（5-10），以加快搜索速度"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:291
 #: b127a85e684645e5a072964f045ee17e
 msgid "**Use the intelligent summary** to understand research landscape"
-msgstr ""
+msgstr "**使用智能摘要**了解研究全景"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:294
 #: d284ea7e115b44f2aaf2e51014937c57
 msgid "Result Analysis"
-msgstr ""
+msgstr "结果分析"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:296
 #: 32b3bc21e116462682f41512f33833f7
 msgid "**Review the paper cards** for relevant publications"
-msgstr ""
+msgstr "**审查纸质卡片**以获取相关出版物信息"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:297
 #: d6e8bfd21b7b487bb3529480848223a2
 msgid "**Read the intelligent summary** for research insights"
-msgstr ""
+msgstr "**阅读智能摘要**以获取研究见解"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:298
 #: 54a0145d1d82445d8cf4917f74109dfe
 msgid "**Check source diversity** to ensure comprehensive coverage"
-msgstr ""
+msgstr "**检查来源多样性**以确保覆盖全面"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:299
 #: f82ae176d09d416998e6938ef47a95c9
 msgid "**Use the timeline analysis** to understand research evolution"
-msgstr ""
+msgstr "**使用时间线分析**以了解研究演变过程"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:302
 #: c6a4dd87b44741999a1b693a90f13f07
 msgid "Workflow Integration"
-msgstr ""
+msgstr "工作流集成"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:304
 #: b0502ce1da864034ba539b3b67c113a7
 msgid "**Start with broad searches** to understand the field"
-msgstr ""
+msgstr "**从广泛的搜索开始**，以了解该领域"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:305
 #: 5f010bb10c314cd7bff362884a055d1c
 msgid "**Refine queries** based on initial results"
-msgstr ""
+msgstr "根据初始结果**优化查询**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:306
 #: 0eb9036abe014d46b8203cf8223478af
 msgid "**Use multiple search sessions** for different aspects"
-msgstr ""
+msgstr "**为不同方面使用多个搜索会话**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:307
 #: 58dc6c76ab3d4591a2b5348f1983e774
 msgid "**Export results** for further analysis"
-msgstr ""
+msgstr "**导出结果**以便进一步分析"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:310
 #: 660a7e3c430449ddb74d36afcb334b7c
 msgid "Example Workflows"
-msgstr ""
+msgstr "示例工作流程"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:313
 #: 496959b00ecc442ab274e230975821c8
 msgid "Literature Review Preparation"
-msgstr ""
+msgstr "文献综述准备"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:315
 #: 8e2878064d884d7b8ea7817a137d9441
 msgid "**Initial broad search**: \"artificial intelligence\""
-msgstr ""
+msgstr "**初步广泛搜索**：“人工智能”"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:316
 #: 73e8cadad13e48f2a2f4de59010e8a01
 msgid "**Enable AI expansion** and summary"
-msgstr ""
+msgstr "**启用 AI 扩展** 及摘要"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:317
 #: 6dcd06cc032b40ec987320727ec6e6c1
 msgid "**Review thematic analysis** to identify key areas"
-msgstr ""
+msgstr "**审查主题分析**以识别关键领域"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:318
 #: 437d65fc13c84e99951edc6fc6c5deb5
 msgid ""
 "**Focus on specific themes**: \"computer vision\", \"natural language "
 "processing\""
-msgstr ""
+msgstr "**聚焦特定主题**：“计算机视觉”、“自然语言处理”"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:319
 #: c7a27356e27747cd91d6499cdcee37c4
 msgid "**Use temporal analysis** to understand recent developments"
-msgstr ""
+msgstr "**使用时序分析**以了解最新发展情况"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:320
 #: 9870ff4435b54cf4ac271c929c665e32
 msgid "**Identify research gaps** for your contribution"
-msgstr ""
+msgstr "**确定研究空白**以突出您的贡献"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:323
 #: d46c9b507683434dbc369fd1a21c0c1a
 msgid "Research Gap Analysis"
-msgstr ""
+msgstr "研究空白分析"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:325
 #: db16fc8c2fcf404a8fb2a99ca4f0a27a
 msgid "**Search your research area**: \"quantum machine learning\""
-msgstr ""
+msgstr "**搜索您的研究领域**：“量子机器学习”"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:326
 #: e488364d220a4c95815ebb8274a31417
 msgid "**Enable intelligent summary** to see research gaps"
-msgstr ""
+msgstr "**启用智能摘要**以识别研究空白"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:327
 #: 911562598c644223aed609374df73288
 msgid "**Review recent papers** (last 2-3 years)"
-msgstr ""
+msgstr "**审阅近期论文**（最近2-3年）"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:328
 #: 5f2267321af842629c389116883be114
 msgid "**Analyze collaboration patterns** for potential partnerships"
-msgstr ""
+msgstr "**分析协作模式**以寻找潜在合作伙伴"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:329
 #: ba516d192e134be09ce010bfaa82ac97
 msgid "**Identify future directions** mentioned in the summary"
-msgstr ""
+msgstr "**识别总结中提及的未来方向**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:332
 #: 4da2fb4b83d447b0881602d6008ec012
 msgid "Competitive Analysis"
-msgstr ""
+msgstr "竞争分析"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:334
 #: 5653d96b07d849e4816e802398fed260
 msgid "**Search for key researchers** in your field"
-msgstr ""
+msgstr "**搜索您领域内的关键研究人员**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:335
 #: e4c56e8ea70c4db79be1e9b74626b475
 msgid "**Use author names** in search queries"
-msgstr ""
+msgstr "**在搜索查询中使用作者姓名**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:336
 #: 1b40c45721f04ead967fd8eaa8d20f5e
 msgid "**Review recent publications** from competitors"
-msgstr ""
+msgstr "**审查竞争对手的最新出版物**"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:337
 #: 92111dad0bb440b3846e75191f92230c
 msgid "**Analyze research trends** to understand market direction"
-msgstr ""
+msgstr "**分析研究趋势**以了解市场方向"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:338
 #: 80b36f900ea2421591783231f1cff86a
 msgid "**Identify emerging areas** for early entry"
-msgstr ""
+msgstr "**识别新兴领域**以实现早期进入"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:341
 #: fe0f4154df6440e287909b83363081e6
 msgid "Complete Example"
-msgstr ""
+msgstr "完整示例"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:343
 #: 0a94ff0a0bbf40bda2907f92c6b20bcf
 msgid "Here's a complete example of using the Wide Research Web UI:"
-msgstr ""
+msgstr "以下是使用 Wide Research Web UI 的完整示例："
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:345
 #: bb07fdbfecf54333be5df3a7a42a4ece
 msgid "**Start the web UI**:"
-msgstr ""
+msgstr "**启动网页用户界面**："
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:351
 #: 1444b646c1034d3c97240f56b33f9afd
 msgid "**Open your browser** and go to http://localhost:5001"
-msgstr ""
+msgstr "**打开您的浏览器**，访问 http://localhost:5001"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:353
 #: b23baa7cff964ba5a72d0be99a043712
@@ -699,6 +704,11 @@ msgid ""
 "**Perform a search**: - Query: \"deep learning computer vision\" - Enable AI"
 " Query Split: ✓ - Enable AI Summary: ✓ - Limit: 5"
 msgstr ""
+"**执行搜索**：  \n"
+"- 查询：\"深度学习计算机视觉\"  \n"
+"- 启用 AI 查询拆分：✓  \n"
+"- 启用 AI 摘要：✓  \n"
+"- 限制：5"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:359
 #: b0428a6f05094496a5c70fd10b4d6956
@@ -707,6 +717,10 @@ msgid ""
 "Read the intelligent summary for insights - Note the research timeline and "
 "themes"
 msgstr ""
+"**查看结果**：  \n"
+"- 检查纸质卡片中的相关出版物  \n"
+"- 阅读智能摘要以获取洞见  \n"
+"- 关注研究时间线和主题"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:364
 #: 2caa1cf1e68d4aa0b45d6403ff0213d4
@@ -715,6 +729,10 @@ msgid ""
 "learning\" - Focus on recent papers: adjust date filters - Explore related "
 "themes from the summary"
 msgstr ""
+"**优化您的搜索**：  \n"
+"- 尝试更具体的关键词：“目标检测 深度学习”  \n"
+"- 关注最新论文：调整日期筛选条件  \n"
+"- 从摘要中探索相关主题"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:369
 #: e4b85f863b7a42ada7696ccd0e43770d
@@ -723,6 +741,10 @@ msgid ""
 "interesting papers for further reading - Use the summary for your literature"
 " review"
 msgstr ""
+"**导出结果**：  \n"
+"- 使用 API 编程访问结果  \n"
+"- 保存感兴趣的论文以便进一步阅读  \n"
+"- 使用摘要进行文献综述"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:374
 #: a3a0f23fa4514f20999761b0def7b7c0
@@ -732,15 +754,17 @@ msgid ""
 "databases with intelligent analysis to provide a complete literature "
 "research solution."
 msgstr ""
+"本教程提供了使用 ToolUniverse Wide Research Web UI "
+"的全面指南。该界面结合了多个学术数据库的强大功能与智能分析，提供完整的文献研究解决方案。"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:376
 #: c826b507acc74a868f692a3e145a6168
 msgid ""
 "For more information about individual tools, see the `literature search "
 "tools tutorial <literature_search_tools_tutorial.html>`_."
-msgstr ""
+msgstr "有关各个工具的详细信息，请参阅`文献检索工具教程 <literature_search_tools_tutorial.html>`_。"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:378
 #: d155a8f20f1542d9ae2603a91872b37f
 msgid "For API reference, see the `API documentation <../api/index.html>`_."
-msgstr ""
+msgstr "有关 API 参考，请参见 `API 文档 <../api/index.html>`_。"

@@ -261,44 +261,56 @@ msgid ""
 "integration - Scientific text summarization - Literature review automation -"
 " Hypothesis generation - Experimental design scoring"
 msgstr ""
+"**AI 集成**：  \n"
+"- 用于 AI 助手的 MCP 服务器  \n"
+"- Claude 桌面集成  \n"
+"- 科学文本摘要  \n"
+"- 文献综述自动化  \n"
+"- 假设生成  \n"
+"- 实验设计评分"
 
 #: ../../about/changelog.rst:117 81c199316a7d49dd9354790cf7f9c06d
 msgid ""
 "**Utilities**: - Medical term normalization - Data validation - Batch "
 "processing - Caching system"
 msgstr ""
+"**工具**：  \n"
+"- 医学术语规范化  \n"
+"- 数据验证  \n"
+"- 批量处理  \n"
+"- 缓存系统"
 
 #: ../../about/changelog.rst:124 adc0599951724dcba7a3415374dc2bc0
 msgid "Migration Tutorial"
-msgstr ""
+msgstr "迁移教程"
 
 #: ../../about/changelog.rst:127 ff6784b0ca1e479ba64dc90d66f08d42
 msgid "From 0.2.x to 0.3.x"
-msgstr ""
+msgstr "从 0.2.x 版本升级到 0.3.x 版本"
 
 #: ../../about/changelog.rst:129 f379921c477045e18d6d9171703d4c17
 msgid "**Breaking Changes**:"
-msgstr ""
+msgstr "**重大变更**："
 
 #: ../../about/changelog.rst:132 72179956c3564759969672445e8f9937
 msgid "1. **Configuration System**:"
-msgstr ""
+msgstr "1. **配置系统**："
 
 #: ../../about/changelog.rst:133 72e953427a244d20903a21c02aba388a
 msgid "Old:"
-msgstr ""
+msgstr "旧版："
 
 #: ../../about/changelog.rst:139 1ecff98ebfae479981614ee5625070dc
 msgid "New:"
-msgstr ""
+msgstr "新增："
 
 #: ../../about/changelog.rst:146 a16c363c54d84e8d958acbbe83d4ec0e
 msgid "2. **Method Names**:"
-msgstr ""
+msgstr "2. **方法名称**："
 
 #: ../../about/changelog.rst:147 af3ec8589e7040f891f0e3e462ec4856
 msgid "Some methods were renamed for consistency:"
-msgstr ""
+msgstr "为保持一致性，部分方法名称已被重命名："
 
 #: ../../about/changelog.rst:149 cb1b3d9e489547ab8b2ebdf4efb55d96
 msgid ""
@@ -311,177 +323,189 @@ msgstr ""
 
 #: ../../about/changelog.rst:153 becbfb32a68646fb82b6a01f4663c7b8
 msgid "3. **Return Format**:"
-msgstr ""
+msgstr "3. **返回格式**："
 
 #: ../../about/changelog.rst:154 fd1ab4557d8f433c8319a1b1b4e71ceb
 msgid "All tools now return consistent dictionary format:"
-msgstr ""
+msgstr "所有工具现均返回一致的字典格式："
 
 #: ../../about/changelog.rst:165 f29b866e7eb348ca939cbc8a36a9d34a
 msgid "**Migration Steps**:"
-msgstr ""
+msgstr "**迁移步骤**："
 
 #: ../../about/changelog.rst:167 7f9356fe79a241c59eb466e738f70054
 msgid "Update configuration calls"
-msgstr ""
+msgstr "更新配置调用"
 
 #: ../../about/changelog.rst:168 25146a242c484d839c6839ce5a607e46
 msgid "Review method names in your code"
-msgstr ""
+msgstr "审查代码中的方法名称"
 
 #: ../../about/changelog.rst:169 49b174d8a6794e4d8e920405b465f67c
 msgid "Update result processing logic"
-msgstr ""
+msgstr "更新结果处理逻辑"
 
 #: ../../about/changelog.rst:170 b215a5cf8c6b43c286abbdaccb9f3caa
 msgid "Test thoroughly with new version"
-msgstr ""
+msgstr "使用新版本进行全面测试"
 
 #: ../../about/changelog.rst:173 6f6e9c5ec77e427c807fdedf48650e62
 msgid "Deprecation Notices"
-msgstr ""
+msgstr "弃用通知"
 
 #: ../../about/changelog.rst:175 877228970d6340b7a1fd2ae8ebc45b60
 msgid ""
 "**Version 0.4.0** (planned): - Legacy configuration format will be removed -"
 " Old method names will be removed - Python 3.9 support will be dropped"
 msgstr ""
+"**版本 0.4.0**（计划中）：  \n"
+"- 旧版配置格式将被移除  \n"
+"- 旧的方法名称将被移除  \n"
+"- 将停止支持 Python 3.9"
 
 #: ../../about/changelog.rst:181 3a5475ec234d4692840a2a032ccdcc3f
 msgid "Known Issues"
-msgstr ""
+msgstr "已知问题"
 
 #: ../../about/changelog.rst:184 482848c520494a4a8219ac35bcae0136
 msgid "Current Known Issues"
-msgstr ""
+msgstr "当前已知问题"
 
 #: ../../about/changelog.rst:186 10dcc2fae7df49938ba1921bf73a0718
 msgid "**Rate Limiting**: Some APIs may throttle requests during peak hours"
-msgstr ""
+msgstr "**速率限制**：某些 API 可能会在高峰时段限制请求速率。"
 
 #: ../../about/changelog.rst:187 cef43e2e10264286a081352ddfc6ee3c
 msgid "**Memory Usage**: Large batch queries may consume significant memory"
-msgstr ""
+msgstr "**内存使用**：大批量查询可能会消耗大量内存"
 
 #: ../../about/changelog.rst:188 d7588544e96d4b3bb32467317ccc19b4
 msgid "**Async Support**: Not all tools support async operations yet"
-msgstr ""
+msgstr "**异步支持**：并非所有工具目前都支持异步操作"
 
 #: ../../about/changelog.rst:191 785d0f78292b483ba70c310e23ef8b8b
 msgid "Workarounds"
-msgstr ""
+msgstr "变通方法"
 
 #: ../../about/changelog.rst:193 d9ea2b02b2f54cbfb77d9c55ce75abf2
 msgid ""
 "**Rate Limiting**: - Enable caching to reduce API calls - Use batch "
 "processing when available - Implement delays between requests"
 msgstr ""
+"**速率限制**：  \n"
+"- 启用缓存以减少 API 调用  \n"
+"- 在可用时使用批处理  \n"
+"- 在请求之间实现延迟"
 
 #: ../../about/changelog.rst:198 ed617c9625fa4899808114aa83115a27
 msgid ""
 "**Memory Usage**: - Process large datasets in chunks - Clear results cache "
 "periodically - Use generators for large result sets"
 msgstr ""
+"**内存使用**：  \n"
+"- 分块处理大型数据集  \n"
+"- 定期清理结果缓存  \n"
+"- 对于大型结果集使用生成器"
 
 #: ../../about/changelog.rst:204 efe73b0d34584fbea239f3ebe08dbec4
 msgid "Performance Notes"
-msgstr ""
+msgstr "性能说明"
 
 #: ../../about/changelog.rst:207 d3f3bcde54264296b46100d93677751e
 msgid "Version 0.3.0 Performance"
-msgstr ""
+msgstr "版本 0.3.0 性能"
 
 #: ../../about/changelog.rst:209 841e3cd5b062443fb341cd5419cd8850
 msgid "**API Response Time**: Average 200-500ms per request"
-msgstr ""
+msgstr "**API 响应时间**：每次请求平均 200-500 毫秒"
 
 #: ../../about/changelog.rst:210 a73396f7309c43a9bc6855b9fa77ac29
 msgid "**Batch Processing**: Up to 10x faster for multiple queries"
-msgstr ""
+msgstr "**批量处理**：多查询时速度提升最多达10倍"
 
 #: ../../about/changelog.rst:211 ce7534d021b040258096fa9ab0e6ee54
 msgid "**Memory Usage**: ~50MB base, +10MB per 1000 cached results"
-msgstr ""
+msgstr "**内存使用**：基础约50MB，每缓存1000个结果增加约10MB"
 
 #: ../../about/changelog.rst:212 e14e039773fe450a81e654b9c6d8ccb6
 msgid "**Concurrent Requests**: Supports up to 10 concurrent API calls"
-msgstr ""
+msgstr "**并发请求**：支持最多10个并发API调用"
 
 #: ../../about/changelog.rst:215 df960b9767eb49acaf71a76cef99f591
 msgid "Benchmarks"
-msgstr ""
+msgstr "基准测试"
 
 #: ../../about/changelog.rst:217 0d4ece01c8ff44408d50cae784c93778
 msgid "Tested on Python 3.10, Ubuntu 20.04, 16GB RAM:"
-msgstr ""
+msgstr "在 Python 3.10、Ubuntu 20.04、16GB 内存环境下测试："
 
 #: ../../about/changelog.rst:219 83b8cd5d66f548b789e56b7f5f0161bb
 msgid "**Simple Query**: 0.2-0.5 seconds"
-msgstr ""
+msgstr "**简单查询**：0.2-0.5秒"
 
 #: ../../about/changelog.rst:220 9384cb45e5a24b448bf8fcc9dca63fd8
 msgid "**Complex GraphQL**: 1-3 seconds"
-msgstr ""
+msgstr "**复杂 GraphQL**：1-3 秒"
 
 #: ../../about/changelog.rst:221 a6ea82ae659b4f78b2862c0e549ed32f
 msgid "**Batch of 100 queries**: 30-60 seconds"
-msgstr ""
+msgstr "**100条查询批处理**：30-60秒"
 
 #: ../../about/changelog.rst:222 49b26f0d9aff4ed7ae1144e349b969ae
 msgid "**Literature search**: 2-5 seconds"
-msgstr ""
+msgstr "**文献检索**：2-5秒"
 
 #: ../../about/changelog.rst:223 e0fa16800b0146319a8807c98ea99c85
 msgid "**MCP server startup**: <2 seconds"
-msgstr ""
+msgstr "**MCP 服务器启动时间**：<2 秒"
 
 #: ../../about/changelog.rst:226 4c3815e5f2104366b4dd78d0ba1edadd
 msgid "Security Updates"
-msgstr ""
+msgstr "安全更新"
 
 #: ../../about/changelog.rst:229 88c50111de8a4a2d87c36cb330b70a64
 msgid "Version 0.3.0 Security"
-msgstr ""
+msgstr "版本 0.3.0 安全性"
 
 #: ../../about/changelog.rst:231 94b5ba049812408a998d54cbcd6f37f1
 msgid "**CVE-2024-XXXX**: Fixed potential XSS in tool descriptions"
-msgstr ""
+msgstr "**CVE-2024-XXXX**：修复工具描述中的潜在跨站脚本（XSS）漏洞"
 
 #: ../../about/changelog.rst:232 784c26387c784e308cd8e6c9f15a75f2
 msgid "**API Keys**: Enhanced secure storage and transmission"
-msgstr ""
+msgstr "**API 密钥**：增强的安全存储与传输"
 
 #: ../../about/changelog.rst:233 970d4d64d1444782a42bbe2bbef5f676
 msgid "**Input Validation**: Strengthened against injection attacks"
-msgstr ""
+msgstr "**输入验证**：增强防注入攻击能力"
 
 #: ../../about/changelog.rst:234 c93c2ddde6fd4144a483e3072fa533d6
 msgid "**Dependencies**: Updated all dependencies to latest secure versions"
-msgstr ""
+msgstr "**依赖项**：已将所有依赖项更新至最新安全版本"
 
 #: ../../about/changelog.rst:237 5ff36d6045e24bccaec1fa7bf808ba4d
 msgid "Security Best Practices"
-msgstr ""
+msgstr "安全最佳实践"
 
 #: ../../about/changelog.rst:239 8aba6cffdfc5470eb1858e9a0e955ac9
 msgid "**API Keys**: Never commit API keys to version control"
-msgstr ""
+msgstr "**API 密钥**：切勿将 API 密钥提交到版本控制系统中"
 
 #: ../../about/changelog.rst:240 e82e84a0104d49bfbebda70dd65d6734
 msgid "**Input Validation**: Always validate user inputs"
-msgstr ""
+msgstr "**输入验证**：始终对用户输入进行验证"
 
 #: ../../about/changelog.rst:241 8d47673365b44c869a692544bfa60e04
 msgid "**HTTPS**: Use HTTPS for all API communications"
-msgstr ""
+msgstr "**HTTPS**：所有 API 通信均应使用 HTTPS"
 
 #: ../../about/changelog.rst:242 a6dab3d4bd044d3e91371c9e373d0052
 msgid "**Updates**: Keep ToolUniverse updated to latest version"
-msgstr ""
+msgstr "**更新**：保持 ToolUniverse 为最新版本"
 
 #: ../../about/changelog.rst:245 e4c1e35035034e61a0615af3d9de5d16
 msgid "Acknowledgments"
-msgstr ""
+msgstr "致谢"
 
 #: ../../about/changelog.rst:248 9fb912bfced44cb492d1e6844b3b9776
 msgid "Contributors to 0.3.0"

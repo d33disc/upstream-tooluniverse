@@ -287,7 +287,7 @@ msgstr "BioRxiv_搜索_预印本"
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 1443673a86f843e78d248fd32f4dd526
 msgid "BioRxiv"
-msgstr ""
+msgstr "BioRxiv（生物预印本）"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 430218bbbad046efb547209f7ed6a431
@@ -373,129 +373,129 @@ msgstr "首先，初始化 ToolUniverse 并加载文献检索工具："
 #: ../../tutorials/literature_search_tools_tutorial.rst:112
 #: 7573beca3edc4c738253a323d358b9df
 msgid "Basic Usage Pattern"
-msgstr ""
+msgstr "基本使用模式"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:114
 #: b25d0193a17e45759b59455e1a9c4b2f
 msgid "All literature search tools follow a similar usage pattern:"
-msgstr ""
+msgstr "所有文献检索工具的使用模式均大同小异："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:139
 #: 5ad066032b174b298f82a2f2e9041b5c
 msgid "Tool-Specific Examples"
-msgstr ""
+msgstr "工具特定示例"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:142
 #: b64dc84a72cd4b3ebb37f22c2145ec70
 msgid "ArXiv Search"
-msgstr ""
+msgstr "ArXiv 搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:144
 #: 849ee090161a4a879d15c09cb8b48ba8
 msgid ""
 "Search for preprints in physics, mathematics, computer science, and other "
 "fields:"
-msgstr ""
+msgstr "在物理学、数学、计算机科学及其他领域搜索预印本："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:170
 #: e9e5b2b94c2a4690b3f72435719ae2ba
 msgid "Crossref Search"
-msgstr ""
+msgstr "Crossref 搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:172
 #: e3dbc2ba736e4b0a80aa9ce65e0eefdc
 msgid "Search for scholarly articles with rich metadata:"
-msgstr ""
+msgstr "搜索具有丰富元数据的学术文章："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:196
 #: 58cae8825f2341a89039ee2493470c8d
 msgid "PubMed Search"
-msgstr ""
+msgstr "PubMed 检索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:198
 #: b93201bdcf3f4c53bfea358f847fde18
 msgid "Search medical and life sciences literature:"
-msgstr ""
+msgstr "搜索医学与生命科学文献："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:221
 #: de0cb3cf80da4a1a8399723fffadb7b6
 msgid "Semantic Scholar Search"
-msgstr ""
+msgstr "语义学者搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:223
 #: dab9738b0bc24fc6b4dfb8c370361862
 msgid "AI-powered academic search with enhanced results:"
-msgstr ""
+msgstr "基于人工智能的学术搜索，提供增强的结果："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:237
 #: b006b5967f5449f7ae934a81027379e0
 msgid "OpenAlex Search"
-msgstr ""
+msgstr "OpenAlex 搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:239
 #: 4518bf4165d64016b125d5e25f274030
 msgid "Comprehensive academic search with advanced filtering:"
-msgstr ""
+msgstr "全面学术检索与高级筛选："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:264
 #: 06069c2125e647048fe8ff4223fa2843
 msgid "Preprint Archives"
-msgstr ""
+msgstr "预印本档案"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:266
 #: 5497b2e793e6483aa475b5aaac1e37ff
 msgid "Search for preprints in specific fields:"
-msgstr ""
+msgstr "在特定领域中搜索预印本："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:298
 #: 74dc107216a74c1384bbfe1b5f0c598a
 msgid "Open Access Tools"
-msgstr ""
+msgstr "开放获取工具"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:300
 #: 9c4550e156fb46678f0b39df6e73f7f5
 msgid "Find open access articles and check access status:"
-msgstr ""
+msgstr "查找开放获取文章并检查访问状态："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:334
 #: a2ace3e8a5ea496080d856d02325cd54
 msgid "Advanced Usage Patterns"
-msgstr ""
+msgstr "高级使用模式"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:337
 #: 63743efd55b945be9a93ec90689622c9
 msgid "Combining Multiple Searches"
-msgstr ""
+msgstr "组合多重搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:339
 #: a6dbeacdb44047379568f281adb7d11a
 msgid "Search across multiple databases for comprehensive results:"
-msgstr ""
+msgstr "跨多个数据库进行搜索以获得全面结果："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:374
 #: 92b281a3c23347a6a8fb7e4a8976ec11
 msgid "Filtering and Sorting"
-msgstr ""
+msgstr "筛选与排序"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:376
 #: fdae65bd8e4144d1a11ee2736b76b40c
 msgid "Different tools offer various filtering and sorting options:"
-msgstr ""
+msgstr "不同工具提供多种筛选和排序选项："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:414
 #: 4a4a719c807e4f8181e1272770f88cc3
 msgid "Error Handling"
-msgstr ""
+msgstr "错误处理"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:416
 #: 32bc61c48994485cbdac72060a63174f
 msgid "Always include proper error handling for robust applications:"
-msgstr ""
+msgstr "始终包含适当的错误处理以确保应用程序的健壮性："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:452
 #: 2d4306f3144442ef93aff3ba5b4f72e6
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:454
 #: 3a5bbc7d77d14b93ba361adbe4c4910d
@@ -504,6 +504,11 @@ msgid ""
 "Use PubMed for medical/life sciences - Use Semantic Scholar for AI-powered "
 "ranking - Use OpenAlex for comprehensive academic search"
 msgstr ""
+"**选择合适的工具：**  \n"
+"- 使用 ArXiv 获取物理、数学和计算机科学领域的预印本  \n"
+"- 使用 PubMed 获取医学和生命科学领域的文献  \n"
+"- 使用 Semantic Scholar 进行人工智能驱动的文献排序  \n"
+"- 使用 OpenAlex 进行全面的学术搜索"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:460
 #: fd2becce145a487b886f366222335801
@@ -511,6 +516,10 @@ msgid ""
 "**Optimize Your Queries:** - Use specific, relevant keywords - Combine terms"
 " with appropriate operators - Use filters to narrow results"
 msgstr ""
+"**优化查询：**  \n"
+"- 使用具体且相关的关键词  \n"
+"- 结合适当的运算符进行组合  \n"
+"- 使用筛选器缩小结果范围"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:465
 #: 9214e310a98f4b8b83cdd3efa6d939e9
@@ -519,6 +528,10 @@ msgid ""
 "between requests if needed - Use error handling for 429 (Too Many Requests) "
 "errors"
 msgstr ""
+"**处理速率限制：**  \n"
+"- 某些 API 存在速率限制  \n"
+"- 如有必要，在请求之间实现延迟  \n"
+"- 对 429（请求过多）错误进行错误处理"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:470
 #: 24bf465631ee4fffbe29084d3c4b178b
@@ -526,6 +539,10 @@ msgid ""
 "**Process Results Efficiently:** - Check result types before processing - "
 "Extract only needed fields - Implement pagination for large result sets"
 msgstr ""
+"**高效处理结果：**  \n"
+"- 在处理前检查结果类型  \n"
+"- 仅提取所需字段  \n"
+"- 对大规模结果集实现分页处理"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:475
 #: ad02e0d7982f4ebf87a059c1d5a2c164
@@ -534,18 +551,22 @@ msgid ""
 "coverage - Cross-reference results for validation - Merge and deduplicate "
 "results"
 msgstr ""
+"**结合多个来源：**  \n"
+"- 使用不同工具以实现全面覆盖  \n"
+"- 交叉验证结果以确保准确性  \n"
+"- 合并并去重结果"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:481
 #: 02dd35b7963340c5ab5321584e9b316b
 msgid "Complete Example"
-msgstr ""
+msgstr "完整示例"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:483
 #: 7e993d8fc1114add9d90e548512ba170
 msgid ""
 "Here's a complete example that demonstrates searching across multiple "
 "literature databases:"
-msgstr ""
+msgstr "以下是一个完整示例，演示如何跨多个文献数据库进行检索："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:565
 #: 4eef6518001c4d2aa97e91b2dd079e06
@@ -553,17 +574,17 @@ msgid ""
 "This tutorial provides a comprehensive guide to using ToolUniverse's "
 "literature search tools. For more specific examples and advanced usage "
 "patterns, refer to the individual tool documentation in the API reference."
-msgstr ""
+msgstr "本教程提供了使用 ToolUniverse 文献检索工具的全面指南。有关更具体的示例和高级用法，请参阅 API 参考中的各个工具文档。"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:568
 #: f49e4b55c2264d02a09733656c89fe8f
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:570
 #: 2f70d8e997184f6aa8e4134da0cef7ba
 msgid "Common Issues and Solutions:"
-msgstr ""
+msgstr "常见问题及解决方案："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:572
 #: 377e595cc6324bdc877dd4ef7b6231dc
@@ -571,6 +592,10 @@ msgid ""
 "**API Rate Limits:** - Some services have rate limits - Implement delays "
 "between requests - Use error handling for 429 errors"
 msgstr ""
+"**API 速率限制：**  \n"
+"- 某些服务存在速率限制  \n"
+"- 在请求之间实现延迟  \n"
+"- 对 429 错误进行错误处理"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:577
 #: 9c758ee5c3dd4b8d9d36f73cfefe88bc
@@ -578,6 +603,10 @@ msgid ""
 "**Missing Results:** - Check query spelling and keywords - Try different "
 "search terms - Verify tool parameters"
 msgstr ""
+"**无结果：**  \n"
+"- 检查查询拼写和关键词  \n"
+"- 尝试不同的搜索词  \n"
+"- 核实工具参数"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:582
 #: 55ed2e6828374c039848982001e729f0
@@ -585,6 +614,10 @@ msgid ""
 "**Authentication Errors:** - Some tools require API keys - Check your .env "
 "file configuration - Verify API key validity"
 msgstr ""
+"**认证错误：**  \n"
+"- 某些工具需要 API 密钥  \n"
+"- 检查您的 .env 文件配置  \n"
+"- 验证 API 密钥的有效性"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:587
 #: cbac7272497a4c5291e0441557ea9e61
@@ -592,53 +625,57 @@ msgid ""
 "**Network Issues:** - Check internet connection - Implement retry logic - "
 "Handle timeout exceptions"
 msgstr ""
+"**网络问题：**  \n"
+"- 检查网络连接  \n"
+"- 实施重试机制  \n"
+"- 处理超时异常"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:592
 #: 5c5447bc46a741d7b740c181ad34c6a2
 msgid ""
 "For more help, see the :doc:`troubleshooting guide "
 "<../help/troubleshooting>`."
-msgstr ""
+msgstr "如需更多帮助，请参阅 :doc:`故障排除指南 <../help/troubleshooting>`。"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:595
 #: fe37e5945e5d4c8b89f7bdf0febe5ba4
 msgid "Quick Reference"
-msgstr ""
+msgstr "快速参考"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:598
 #: 528df1f80a434d818d576f279282aea5
 msgid "Common Parameters"
-msgstr ""
+msgstr "常用参数"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:600
 #: 006a397fa0cf43ca8c12a6b530472996
 msgid "Most search tools accept these common parameters:"
-msgstr ""
+msgstr "大多数搜索工具支持以下常用参数："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:603
 #: 4b4f762e07a84dc0b9f3ca37bb4305af
 msgid "Parameter"
-msgstr ""
+msgstr "参数"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:603
 #: 8fb259b3c95d4888a4ddc1c4438f17a8
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:603
 #: e17d743f0350417c857757d285e8333e
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:603
 #: 2f3c6f6208d54fad94bd48af322b6606
 msgid "Example"
-msgstr ""
+msgstr "示例"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:605
 #: d13e27e3e98d4fc08018e431d57b9ba0
 msgid "query"
-msgstr ""
+msgstr "查询"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:605
 #: ../../tutorials/literature_search_tools_tutorial.rst:613
@@ -650,17 +687,17 @@ msgstr ""
 #: 888325d22bfb4bc3bef341885111c15b 891474c6f25443d99ddf8f3ec79cf9ef
 #: d61e1f60cb5a4ae2970dfa9b3f03c5b0 d850292e0fe44390ac67d2a907a1d07e
 msgid "string"
-msgstr ""
+msgstr "字符串"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:605
 #: cf3ec7874fcc48808b6edac8b8b4b9f8
 msgid "Search terms"
-msgstr ""
+msgstr "搜索词"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:605
 #: 92ae88d2ff0d4d468fd4764c2d1d3b71
 msgid "\"machine learning\""
-msgstr ""
+msgstr "机器学习"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:608
 #: 7afe40d29caa439ea2bf458636652a0c

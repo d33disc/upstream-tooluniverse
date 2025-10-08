@@ -651,340 +651,340 @@ msgstr "**get_gget_info**（类型：PackageTool）"
 msgid ""
 "Get comprehensive information about gget – genomics command-line tool and "
 "Python package"
-msgstr ""
+msgstr "获取关于 gget —— 基因组学命令行工具及 Python 包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 657f82d1def24769bbfd97079394bab4
 msgid "get_gget_info tool specification"
-msgstr ""
+msgstr "get_gget_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:353
 #: 5b54684198974b7a8b265be9226b1612
 msgid "**Name**: ``get_gget_info``"
-msgstr ""
+msgstr "**名称**：``get_gget_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:355
 #: 9b1be0aed22a48d8aa65f8f081706ca2
 msgid ""
 "**Description**: Get comprehensive information about gget – genomics "
 "command-line tool and Python package"
-msgstr ""
+msgstr "**描述**：获取关于 gget —— 基因组学命令行工具及 Python 包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:375
 #: cba9009ce82746368053242e6e6831e3
 msgid "**get_googlesearch_python_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_googlesearch_python_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:377
 #: 74ac1a3cf54e4593be87bac80454defc
 msgid ""
 "Get comprehensive information about googlesearch-python – Google search "
 "automation"
-msgstr ""
+msgstr "获取有关 googlesearch-python —— 谷歌搜索自动化的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 629510f278a7422da9315d4ae59ae6fb
 msgid "get_googlesearch_python_info tool specification"
-msgstr ""
+msgstr "get_googlesearch_python_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:383
 #: 9f32ad7bd69743139a56f1107a0019d8
 msgid "**Name**: ``get_googlesearch_python_info``"
-msgstr ""
+msgstr "**名称**：``get_googlesearch_python_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:385
 #: 88564b1483b44d0284252d27ee9f12a5
 msgid ""
 "**Description**: Get comprehensive information about googlesearch-python – "
 "Google search automation"
-msgstr ""
+msgstr "**描述**：获取关于 googlesearch-python —— 谷歌搜索自动化的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:389
 #: 2e20bac472ab471da826b44f9c6b91df
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "googlesearch-python"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 googlesearch-python 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:406
 #: 8e767edc39fa47bcbf0ca6d2c42cfde0
 msgid "**get_khmer_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_khmer_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:408
 #: 0d0449d4301548c397af6878b1d0d827
 msgid ""
 "Get comprehensive information about khmer – nucleotide sequence k-mer "
 "analysis"
-msgstr ""
+msgstr "获取有关khmer——核苷酸序列k-mer分析的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst d6ae65c3b6574b5dbd164200cf4d5053
 msgid "get_khmer_info tool specification"
-msgstr ""
+msgstr "get_khmer_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:414
 #: 649db3398039436bb14be59c05f36e17
 msgid "**Name**: ``get_khmer_info``"
-msgstr ""
+msgstr "**名称**：``get_khmer_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:416
 #: 6b6b6b12f49943f5a7a4ce1e66c38d21
 msgid ""
 "**Description**: Get comprehensive information about khmer – nucleotide "
 "sequence k-mer analysis"
-msgstr ""
+msgstr "**描述**：获取关于khmer——核苷酸序列k-mer分析的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:420
 #: 7449f7cc9cf44b12a1ff8f0ae9736d54
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "khmer"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于高棉语的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:437
 #: bed140ff348f425c99719ca97e1d2cc2
 msgid "**get_lifelines_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_lifelines_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:439
 #: 072c268c4ef54d998c1056680ad4cf49
 msgid ""
 "Get comprehensive information about lifelines – survival analysis in Python"
-msgstr ""
+msgstr "获取有关 lifelines —— Python 生存分析的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst eeca6b0b0a914b1fa0505f5bb6905f3d
 msgid "get_lifelines_info tool specification"
-msgstr ""
+msgstr "get_lifelines_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:445
 #: 6540d5c0f97843079871255b92f4be96
 msgid "**Name**: ``get_lifelines_info``"
-msgstr ""
+msgstr "**名称**：``get_lifelines_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:447
 #: a5e50345fc554893a861f33d44178325
 msgid ""
 "**Description**: Get comprehensive information about lifelines – survival "
 "analysis in Python"
-msgstr ""
+msgstr "**描述**：获取关于 lifelines —— Python 中生存分析的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:467
 #: 9effd3fc05c24867af9369ed5f2ec4b0
 msgid "**get_loompy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_loompy_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:469
 #: 5482c0919b574848854ab3919ca611a9
 msgid ""
 "Get comprehensive information about loompy – efficient storage for large "
 "omics datasets"
-msgstr ""
+msgstr "获取关于 loompy 的全面信息——高效存储大型组学数据集"
 
 #: ../../tools/bioinformatics_core_tools.rst 97245df0a73f42a2b78928a9eaf557cc
 msgid "get_loompy_info tool specification"
-msgstr ""
+msgstr "get_loompy_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:475
 #: 1d7fda8abdcb4a55ba66bd3a007523b3
 msgid "**Name**: ``get_loompy_info``"
-msgstr ""
+msgstr "**名称**：``get_loompy_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:477
 #: 433463926f054ad98f404babc64e8ea9
 msgid ""
 "**Description**: Get comprehensive information about loompy – efficient "
 "storage for large omics datasets"
-msgstr ""
+msgstr "**描述**：获取关于 loompy 的全面信息——用于大型组学数据集的高效存储方案"
 
 #: ../../tools/bioinformatics_core_tools.rst:481
 #: 667654b986e146c9bf9925f63013f710
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "loompy"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 loompy 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:498
 #: 3edb512a84104310954b316e7dc50af1
 msgid "**get_mageck_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_mageck_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:500
 #: 74f81a00c86b43ed846fcd093cd7f4c5
 msgid ""
 "Get comprehensive information about MAGeCK – CRISPR screen analysis toolkit"
-msgstr ""
+msgstr "获取关于MAGeCK——CRISPR筛选分析工具包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 11b4f7bc8bc247c49bf97c62a2e1fcca
 msgid "get_mageck_info tool specification"
-msgstr ""
+msgstr "get_mageck_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:506
 #: b7a180d1e8f2434e993620d8cf3ad687
 msgid "**Name**: ``get_mageck_info``"
-msgstr ""
+msgstr "**名称**：``get_mageck_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:508
 #: cc85dbf5c85e45199217c826b2405779
 msgid ""
 "**Description**: Get comprehensive information about MAGeCK – CRISPR screen "
 "analysis toolkit"
-msgstr ""
+msgstr "**描述**：获取关于MAGeCK——CRISPR筛选分析工具包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:512
 #: dbae8441fc564a8fbe3224dc49e919e5
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "MAGeCK"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的有关 MAGeCK 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:529
 #: 9a03a55a160945949f4d18b75cdc2c6a
 msgid "**get_msprime_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_msprime_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:531
 #: a1f8dde9165c41ac93ba90503c71a7c8
 msgid ""
 "Get comprehensive information about msprime – coalescent simulation "
 "framework"
-msgstr ""
+msgstr "获取关于 msprime —— 合并模拟框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst f77ca70fc32c42fdbd8107fea6538fe7
 msgid "get_msprime_info tool specification"
-msgstr ""
+msgstr "get_msprime_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:537
 #: 04777245ded34513a49a30789c80db94
 msgid "**Name**: ``get_msprime_info``"
-msgstr ""
+msgstr "**名称**：``get_msprime_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:539
 #: eac196dc28124002bdce8fefc9312350
 msgid ""
 "**Description**: Get comprehensive information about msprime – coalescent "
 "simulation framework"
-msgstr ""
+msgstr "**描述**：获取关于 msprime —— 共祖模拟框架的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:559
 #: 305b6f73691b4e928ade688b430ff700
 msgid "**get_networkx_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_networkx_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:561
 #: 8e049798048f4d67a7f65ba8ee34fec5
 msgid ""
 "Get comprehensive information about NetworkX – network analysis library"
-msgstr ""
+msgstr "获取关于 NetworkX —— 网络分析库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 314deccbb98745c9abc87de6f5416a3d
 msgid "get_networkx_info tool specification"
-msgstr ""
+msgstr "get_networkx_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:567
 #: b1b5b5eb82b749f8adf541713e316463
 msgid "**Name**: ``get_networkx_info``"
-msgstr ""
+msgstr "**名称**：``get_networkx_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:569
 #: 81dab3b0af4c4b76920ae39cdcc9fee1
 msgid ""
 "**Description**: Get comprehensive information about NetworkX – network "
 "analysis library"
-msgstr ""
+msgstr "**描述**：获取关于 NetworkX —— 网络分析库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:573
 #: cedc1fcc435a473f86bd2cbada10299b
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "NetworkX"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 NetworkX 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:590
 #: 6e3256466a3d40f784e34d0fac237414
 msgid "**get_numba_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_numba_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:592
 #: 7d43012b39234dfdb5a9240a4336db31
 msgid "Get comprehensive information about Numba – JIT compiler for Python"
-msgstr ""
+msgstr "获取关于 Numba —— Python 的即时编译器（JIT 编译器）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 501617e143824b6ca13696f5143b6d2b
 msgid "get_numba_info tool specification"
-msgstr ""
+msgstr "get_numba_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:598
 #: a2fdeedb0fa748dcb5b1cddfcec815d1
 msgid "**Name**: ``get_numba_info``"
-msgstr ""
+msgstr "**名称**：``get_numba_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:600
 #: 98dd96ee6a9347059c7b6de5cf1640e2
 msgid ""
 "**Description**: Get comprehensive information about Numba – JIT compiler "
 "for Python"
-msgstr ""
+msgstr "**描述**：获取关于 Numba —— Python 的即时编译器（JIT 编译器）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:604
 #: 221a19cc0db5413395639da308723e21
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "Numba"
-msgstr ""
+msgstr "``info_type``（字符串）（必填） 要检索的关于 Numba 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:621
 #: d67c165110c542c38778051569884c04
 msgid "**get_pdbfixer_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pdbfixer_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:623
 #: 808cb9baddf84cc680f13da65c010da3
 msgid ""
 "Get comprehensive information about PDBFixer – protein structure preparation"
 " tool"
-msgstr ""
+msgstr "获取关于 PDBFixer —— 蛋白质结构预处理工具的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 31e04e376c9845ce857f360333187157
 msgid "get_pdbfixer_info tool specification"
-msgstr ""
+msgstr "get_pdbfixer_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:629
 #: 62d0ea6e57bb4ad49eae837ac9d24f52
 msgid "**Name**: ``get_pdbfixer_info``"
-msgstr ""
+msgstr "**名称**：``get_pdbfixer_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:631
 #: 7b89101c6caa4bc0b684a3ca383e6286
 msgid ""
 "**Description**: Get comprehensive information about PDBFixer – protein "
 "structure preparation tool"
-msgstr ""
+msgstr "**描述**：获取关于PDBFixer——蛋白质结构准备工具的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:635
 #: 168b866c45b04b04b27a78aa213a0f6e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PDBFixer"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PDBFixer 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:652
 #: 8b3575e1c5f9448da7d0ce719ac2bc62
 msgid "**get_plip_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_plip_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:654
 #: adfef7edb082436eafd700837787f139
 msgid ""
 "Get comprehensive information about PLIP – protein-ligand interaction "
 "profiler"
-msgstr ""
+msgstr "获取关于 PLIP —— 蛋白质-配体相互作用分析器的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 41eedc039c344833879faa8caf0ac3da
 msgid "get_plip_info tool specification"
-msgstr ""
+msgstr "get_plip_info 工具规格说明"
 
 #: ../../tools/bioinformatics_core_tools.rst:660
 #: 1517e91226b34ec59e6569495920a46e
 msgid "**Name**: ``get_plip_info``"
-msgstr ""
+msgstr "**名称**：``get_plip_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:662
 #: 3413fc72a7604d86b3a33c3d3b2f4b05

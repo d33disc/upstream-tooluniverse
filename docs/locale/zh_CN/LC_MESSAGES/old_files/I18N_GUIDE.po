@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:136 de81e5d064fd4c48b3c810b57b7a0cc3
 msgid "当有多个语言版本时，主题会自动在导航栏显示语言切换下拉菜单。"
-msgstr ""
+msgstr "当存在多个语言版本时，主题会在导航栏自动显示语言切换下拉菜单。"
 
 #: ../../old_files/I18N_GUIDE.md:138 466ba0422ed843e8a8352ba5ceeb2afe
 msgid "💡 翻译技巧"
@@ -149,11 +149,11 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:142 7545f2bca7414f3ebf38d63d3d50113d
 msgid "使用文本编辑器的查找替换功能："
-msgstr ""
+msgstr "使用文本编辑器的查找和替换功能："
 
 #: ../../old_files/I18N_GUIDE.md:143 5b8f043747fc4edaa0d0e1ed15447e5a
 msgid "VSCode: Cmd+Shift+H"
-msgstr ""
+msgstr "VSCode：Cmd+Shift+H"
 
 #: ../../old_files/I18N_GUIDE.md:144 ed0361b14ea84e238d19dc3870be2d12
 #, python-format
@@ -170,15 +170,15 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:149 c1d479b319c44b9a95be8c075cc9af53
 msgid "Emoji 图标不变"
-msgstr ""
+msgstr "Emoji 图标保持不变"
 
 #: ../../old_files/I18N_GUIDE.md:150 1058291852224ee4966c4ce8925f3600
 msgid "Markdown 语法不变"
-msgstr ""
+msgstr "Markdown 语法保持不变"
 
 #: ../../old_files/I18N_GUIDE.md:151 e1f7e1f1e68e4ce89356c85b84bbe631
 msgid "reStructuredText 指令不变"
-msgstr ""
+msgstr "reStructuredText 指令保持不变"
 
 #: ../../old_files/I18N_GUIDE.md:152 c34360fc42864a209760c158e1612e97
 msgid "代码块不变"
@@ -194,11 +194,11 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:157 0ef565fb8ee14a049cd3c8e5d7753423
 msgid "DeepL Translator"
-msgstr ""
+msgstr "DeepL 翻译器"
 
 #: ../../old_files/I18N_GUIDE.md:158 f3fce67e546a4d5c83283cddf699821f
 msgid "Google Translate"
-msgstr ""
+msgstr "Google 翻译"
 
 #: ../../old_files/I18N_GUIDE.md:159 ad4d8c2b43044b99b7988b37fd0b9813
 msgid "ChatGPT/Claude"

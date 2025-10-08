@@ -168,7 +168,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:108 82c5e832831f4da0af3d61fadd77805e
 msgid "6. **📚 完整的文档系统**"
-msgstr ""
+msgstr "6. **📚 Comprehensive Documentation System**"
 
 #: ../../SUMMARY.md:110 e46167ba89e1443880e7014d46434379
 msgid "创建的文档："
@@ -180,7 +180,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:112 b18e67e827f94eb9ac0699923836a1ce
 msgid "**I18N_GUIDE.md** - 详细翻译指南"
-msgstr ""
+msgstr "**I18N_GUIDE.md** - 详细国际化指南"
 
 #: ../../SUMMARY.md:113 df66e206486745cd8f1bf1d218e06033
 msgid "**MULTILANG_README.md** - 多语言系统说明"

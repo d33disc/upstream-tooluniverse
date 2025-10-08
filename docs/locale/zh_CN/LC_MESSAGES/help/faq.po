@@ -233,204 +233,206 @@ msgstr "**测试连接：**"
 
 #: ../../help/faq.rst:184 9e033da8146846aeaf167319f01f350f
 msgid "Ask Claude: \"What tools are available from ToolUniverse?\""
-msgstr ""
+msgstr "询问 Claude：“ToolUniverse 提供了哪些工具？”"
 
 #: ../../help/faq.rst:187 39510725844446e2af100ef98a2d725e
 msgid "Can I use multiple MCP servers?"
-msgstr ""
+msgstr "我可以使用多个 MCP 服务器吗？"
 
 #: ../../help/faq.rst:189 77012dfb6d584aa9865ce32ce0925830
 msgid ""
 "Yes! You can run multiple ToolUniverse instances or combine with other MCP "
 "servers:"
-msgstr ""
+msgstr "是的！您可以运行多个 ToolUniverse 实例，或与其他 MCP 服务器结合使用："
 
 #: ../../help/faq.rst:207 a70d8bddb4bb4dc18a888194618b27f2
 msgid "Development"
-msgstr ""
+msgstr "开发"
 
 #: ../../help/faq.rst:210 4f94bf1f8c474f92a8bd1cbdf3427a90
 msgid "How do I add a new tool?"
-msgstr ""
+msgstr "如何添加新工具？"
 
 #: ../../help/faq.rst:212 ba6d293112984b2eaed844a2cdc39841
 msgid "**Create tool class:**"
-msgstr ""
+msgstr "**创建工具类：**"
 
 #: ../../help/faq.rst:229 127eaee6ecbb4f0d84f98d73c7b1ecfc
 msgid "**Register the tool:**"
-msgstr ""
+msgstr "**注册工具：**"
 
 #: ../../help/faq.rst:238 6c249539d99442a6b691398704560d58
 msgid "**Add tests:**"
-msgstr ""
+msgstr "**添加测试：**"
 
 #: ../../help/faq.rst:248 f56266f1600e4ada8bdb3f31f6d1f9fe
 msgid "How do I contribute?"
-msgstr ""
+msgstr "我如何贡献？"
 
 #: ../../help/faq.rst:250 fd90c82802284c54952e9755aca05d94
 msgid "Fork the repository"
-msgstr ""
+msgstr "派生该代码库"
 
 #: ../../help/faq.rst:251 a4b1fcc82dec4d398aa94c3e68963f94
 msgid "Create a feature branch"
-msgstr ""
+msgstr "创建功能分支"
 
 #: ../../help/faq.rst:252 55a076f8f0614bfaafff2836996ca5c7
 msgid "Add your changes with tests"
-msgstr ""
+msgstr "添加带有测试的更改"
 
 #: ../../help/faq.rst:253 ff95755835fc4567b22b9d87f72a3f75
 msgid "Submit a pull request"
-msgstr ""
+msgstr "提交拉取请求"
 
 #: ../../help/faq.rst:255 39fd2f9a99074e5a880fb9d936b53dd0
 msgid "See our :doc:`about/contributing` Tutorial for detailed instructions."
-msgstr ""
+msgstr "请参阅我们的 :doc:`about/contributing` 教程，了解详细说明。"
 
 #: ../../help/faq.rst:258 6ba0a03eb3234505b159070f638e59e8
 msgid "Performance"
-msgstr ""
+msgstr "性能"
 
 #: ../../help/faq.rst:261 01d523a2a073413b91e5adb84d85db67
 msgid "How can I speed up queries?"
-msgstr ""
+msgstr "如何加快查询速度？"
 
 #: ../../help/faq.rst:265 9e568d42e6884d3f9af2ee0a4caede8e
 msgid "Enable Caching"
-msgstr ""
+msgstr "启用缓存"
 
 #: ../../help/faq.rst:271 897e3fbfa4484e8c957f881e28439621
 msgid "Batch Processing"
-msgstr ""
+msgstr "批处理"
 
 #: ../../help/faq.rst:282 45995b8461544e4d8e99e5c2e1925ec5
 msgid "Async Operations"
-msgstr ""
+msgstr "异步操作"
 
 #: ../../help/faq.rst:294 4f37767b03c449c0b1fe3c5fba5d2194
 msgid "Why is the first query slow?"
-msgstr ""
+msgstr "为什么第一次查询速度较慢？"
 
 #: ../../help/faq.rst:296 383e8a6c0be34db28e12ea666714bffb
 msgid "The first query often takes longer because:"
-msgstr ""
+msgstr "第一次查询通常耗时较长，原因如下："
 
 #: ../../help/faq.rst:298 10ee5180793c488ca5939c994a540b52
 msgid "**Tool loading**: Tools are loaded on first use"
-msgstr ""
+msgstr "**工具加载**：工具在首次使用时加载"
 
 #: ../../help/faq.rst:299 3e1f5318423045b7b2b1197ac6c18f29
 msgid "**API connection**: Initial connection setup"
-msgstr ""
+msgstr "**API 连接**：初始连接设置"
 
 #: ../../help/faq.rst:300 fd8e71d1772a4099af47fd38b33d9794
 msgid "**Authentication**: API key validation"
-msgstr ""
+msgstr "**认证**：API 密钥验证"
 
 #: ../../help/faq.rst:302 a496c71d56a54042bf12b9121c3e3f3b
 msgid "Subsequent queries will be much faster."
-msgstr ""
+msgstr "后续查询将大幅加快。"
 
 #: ../../help/faq.rst:305 1aedeb6b786c4bb7ac1138a732afecba
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../help/faq.rst:308 fa30df5514b74ec4b026858d0874d4f8
 msgid "Getting import errors?"
-msgstr ""
+msgstr "遇到导入错误？"
 
 #: ../../help/faq.rst:310 41bb685aad0040318dcf8881f4f3aa1d
 msgid "**Common solutions:**"
-msgstr ""
+msgstr "**常见解决方案：**"
 
 #: ../../help/faq.rst:314 f70afd64596d40f087d110f44dff67db
 msgid "Missing Dependencies"
-msgstr ""
+msgstr "缺失的依赖项"
 
 #: ../../help/faq.rst:320 5f2ed671e6894eb69fc6e423425a10b5
 msgid "Python Version"
-msgstr ""
+msgstr "Python 版本"
 
 #: ../../help/faq.rst:322 19b3c9cc2abd4b91a2cd7949c84ae601
 msgid "Ensure Python 3.8+ is installed:"
-msgstr ""
+msgstr "确保已安装 Python 3.8 及以上版本："
 
 #: ../../help/faq.rst:328 6e09c4392332423ab01fe5d439b8a122
 msgid "Virtual Environment"
-msgstr ""
+msgstr "虚拟环境"
 
 #: ../../help/faq.rst:330 e2e291b5a95e48cc9f030022d4689d92
 msgid "Use a clean virtual environment:"
-msgstr ""
+msgstr "使用干净的虚拟环境："
 
 #: ../../help/faq.rst:341 45020f1ef8044cfd9bb435113a88eb59
 msgid "Network connectivity issues?"
-msgstr ""
+msgstr "网络连接问题？"
 
 #: ../../help/faq.rst:343 da256d128d994653809f8435d44bdc6e
 msgid "**Check internet connection**"
-msgstr ""
+msgstr "**检查互联网连接**"
 
 #: ../../help/faq.rst:344 e138e47a15014099a7500205ddb12410
 msgid "**Verify proxy settings** if behind corporate firewall"
-msgstr ""
+msgstr "**如果处于企业防火墙后，请验证代理设置**"
 
 #: ../../help/faq.rst:345 dfe4a7b22c6441ac809c9c152014ffab
 msgid "**Test specific endpoints:**"
-msgstr ""
+msgstr "**测试特定端点：**"
 
 #: ../../help/faq.rst:353 f585bd2d7a9541d3a1ad4800e4feee09
 msgid "**Configure timeouts:**"
-msgstr ""
+msgstr "**配置超时：**"
 
 #: ../../help/faq.rst:360 671e04637632479a9d0ff0651fecc8b6
 msgid "Still Having Issues?"
-msgstr ""
+msgstr "仍然遇到问题？"
 
 #: ../../help/faq.rst:362 fac4f247ba0e4c1b9904a96637ea9f88
 msgid "If you can't find the answer here:"
-msgstr ""
+msgstr "如果您在此处找不到答案："
 
 #: ../../help/faq.rst:364 2ff548ea7a68454598fe6b8fe20e12be
 msgid "**Check the documentation**: :doc:`user_guide/index`"
-msgstr ""
+msgstr "**查看文档**：:doc:`user_guide/index`"
 
 #: ../../help/faq.rst:365 969822d872d9465e8ece452dade68957
 msgid ""
 "**Search existing issues**: `GitHub Issues "
 "<https://github.com/zitniklab/tooluniverse/issues>`_"
 msgstr ""
+"**搜索现有问题**：`GitHub Issues "
+"<https://github.com/zitniklab/tooluniverse/issues>`_"
 
 #: ../../help/faq.rst:366 d0c90635e5164cdbafd623830467685c
 msgid "**Ask the community**: Join our Discord server"
-msgstr ""
+msgstr "**向社区提问**：加入我们的 Discord 服务器"
 
 #: ../../help/faq.rst:367 7e151756d2c84b3b9330a5889190472f
 msgid "**Report a bug**: Create a new GitHub issue with details"
-msgstr ""
+msgstr "**报告错误**：创建一个包含详细信息的新 GitHub 问题单"
 
 #: ../../help/faq.rst:370 f6876a27fab04a03a8b9eb13623da33e
 msgid "When reporting issues, please include:"
-msgstr ""
+msgstr "报告问题时，请包括："
 
 #: ../../help/faq.rst:372 4ea3988fbd6a4bc895eb5983c0ccac12
 msgid "ToolUniverse version"
-msgstr ""
+msgstr "ToolUniverse 版本"
 
 #: ../../help/faq.rst:373 dc7a2d49b4be4b99bd3c30a39bc397d1
 msgid "Python version"
-msgstr ""
+msgstr "Python 版本"
 
 #: ../../help/faq.rst:374 baeaae7d853a454ea803c9b66392f8c7
 msgid "Operating system"
-msgstr ""
+msgstr "操作系统"
 
 #: ../../help/faq.rst:375 a9077db8c50749ac9746867958a92ff1
 msgid "Full error message"
-msgstr ""
+msgstr "完整错误信息"
 
 #: ../../help/faq.rst:376 1ca68a6a08c043a68b418516f44f40e0
 msgid "Minimal code example"
-msgstr ""
+msgstr "最简代码示例"

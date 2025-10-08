@@ -441,6 +441,8 @@ msgid ""
 "minimize the number of new labels created and the possibility of redundant "
 "labels."
 msgstr ""
+"``add_existing_tooluniverse_labels``（布尔值）（可选）是否在为新工具的元数据配置添加标签时包含来自现有 "
+"ToolUniverse 工具的标签。强烈建议将此项设置为 true，以尽量减少新标签的创建数量及冗余标签的可能性。"
 
 #: ../../tools/compose_tools.rst:293 c2971324f6cc456babf5757c3a62e8a7
 msgid ""
@@ -451,15 +453,18 @@ msgid ""
 "relevant new labels will be discarded. Please try to use as few new labels "
 "as possible to avoid excessive labels."
 msgstr ""
+"``max_new_tooluniverse_labels``（整数）（可选） 新工具元数据配置中可使用的新 ToolUniverse "
+"标签的最大数量。系统将优先使用现有的 ToolUniverse "
+"标签，随后根据需要创建新的标签，直至达到该限制。若达到上限，相关性最低的新标签将被丢弃。请尽量减少新标签的使用，以避免标签过多。"
 
 #: ../../tools/compose_tools.rst:310 4dc580ca3a274f66a7c741f9d6cdac5d
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/compose_tools.rst:312 d364efa81acb42d2ac1afce97856436f
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/compose_tools.rst:313 299c61efc30046618ca04faefa27c724
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

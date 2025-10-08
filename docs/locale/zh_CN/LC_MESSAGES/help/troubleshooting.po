@@ -244,170 +244,172 @@ msgstr "**更新证书：**"
 
 #: ../../help/troubleshooting.rst:316 646889e4a1e74da2bafed327feae4c3e
 msgid "**Temporary bypass (not recommended for production):**"
-msgstr ""
+msgstr "**临时绕过（不建议用于生产环境）：**"
 
 #: ../../help/troubleshooting.rst:323 6086a6ef46a84817b347adced4826e04
 msgid "**Corporate firewall:**"
-msgstr ""
+msgstr "**企业防火墙：**"
 
 #: ../../help/troubleshooting.rst:325 3178ab157a8e47d78155f0581fe8514d
 msgid "Contact your IT department for proper certificate configuration."
-msgstr ""
+msgstr "请联系您的IT部门以正确配置证书。"
 
 #: ../../help/troubleshooting.rst:331 b184d040e991417d9088fab54c2f1007
 msgid "Slow query performance"
-msgstr ""
+msgstr "查询性能缓慢"
 
 #: ../../help/troubleshooting.rst:349 e70af987758746f5be89b0c9ca10b9be
 msgid "**Optimization strategies:**"
-msgstr ""
+msgstr "**优化策略：**"
 
 #: ../../help/troubleshooting.rst:351 b0e8a03398b94462b84d6bef2c038e5a
 msgid "**Enable caching:**"
-msgstr ""
+msgstr "**启用缓存：**"
 
 #: ../../help/troubleshooting.rst:357 7845751335574708b3775fa2effacdf5
 msgid "**Use async operations:**"
-msgstr ""
+msgstr "**使用异步操作：**"
 
 #: ../../help/troubleshooting.rst:368 06503f97e03e4a539644d0d72144e27c
 msgid "**Batch similar queries:**"
-msgstr ""
+msgstr "**批量处理相似查询：**"
 
 #: ../../help/troubleshooting.rst:389 dc5c4a2ed8054157b39b7275a2dc3b16
 msgid "Memory usage issues"
-msgstr ""
+msgstr "内存使用问题"
 
 #: ../../help/troubleshooting.rst:391 2026818a67f34d98b502f982f1a23811
 msgid "**Symptom:** High memory consumption or ``MemoryError``."
-msgstr ""
+msgstr "**症状：** 高内存消耗或``MemoryError``。"
 
 #: ../../help/troubleshooting.rst:406 c65f3a9a58a74d719695f0dee211e347
 msgid "**Process data in chunks:**"
-msgstr ""
+msgstr "**分块处理数据：**"
 
 #: ../../help/troubleshooting.rst:415 830f0bba580c43aaa2e664c4415f180b
 msgid "**Clear cache periodically:**"
-msgstr ""
+msgstr "**定期清理缓存：**"
 
 #: ../../help/troubleshooting.rst:421 8eb6bb25dbf345368dbb1a1d848afdcb
 msgid "**Use generators for large results:**"
-msgstr ""
+msgstr "**对于大量结果，使用生成器：**"
 
 #: ../../help/troubleshooting.rst:430 76d1835d7b51492cb0cc20f311c19175
 msgid "MCP Server Issues"
-msgstr ""
+msgstr "MCP 服务器问题"
 
 #: ../../help/troubleshooting.rst:433 5dd6652502474763ba1a859d7774ad55
 msgid "MCP server won't start"
-msgstr ""
+msgstr "MCP 服务器无法启动"
 
 #: ../../help/troubleshooting.rst:435 b4714acc211d426ca8755367f437e48b
 msgid "**Symptom:** Server fails to start or crashes immediately."
-msgstr ""
+msgstr "**症状：** 服务器无法启动或立即崩溃。"
 
 #: ../../help/troubleshooting.rst:446 48d7fbe0f4924de384a8789f86dc6428
 msgid "**Check port availability:**"
-msgstr ""
+msgstr "**检查端口可用性：**"
 
 #: ../../help/troubleshooting.rst:454 e1882624346b4ecc8b1649e85df1c26f
 msgid "**Use different port:**"
-msgstr ""
+msgstr "**使用不同端口：**"
 
 #: ../../help/troubleshooting.rst:460 9048aab3ad6e45cdbdeec12044f47570
 msgid "**Check permissions:**"
-msgstr ""
+msgstr "**检查权限：**"
 
 #: ../../help/troubleshooting.rst:468 4629c9705ca84b7db165d61614bfc43d
 msgid "Claude/AI assistant not finding tools"
-msgstr ""
+msgstr "Claude/AI 助手未找到工具"
 
 #: ../../help/troubleshooting.rst:472 fc4748efeb634a96a3ebfa9a53fc8da8
 msgid "**Verify MCP server is running:**"
-msgstr ""
+msgstr "**验证 MCP 服务器是否正在运行：**"
 
 #: ../../help/troubleshooting.rst:478 77a16f360adf47c196dfb7093b9c5329
 msgid "**Check Claude configuration:**"
-msgstr ""
+msgstr "**检查 Claude 配置：**"
 
 #: ../../help/troubleshooting.rst:480 6d5e8fe160a446ad92b3535893733826
 msgid "Ensure MCP server is properly configured in Claude Desktop settings."
-msgstr ""
+msgstr "确保在 Claude Desktop 设置中正确配置 MCP 服务器。"
 
 #: ../../help/troubleshooting.rst:484 aeba443c0814400ebfae924b6fc6006a
 msgid "**Restart both server and Claude**"
-msgstr ""
+msgstr "**重启服务器和 Claude**"
 
 #: ../../help/troubleshooting.rst:485 9703245097054be48732e2279a36043f
 msgid "**Check Claude logs** for connection errors"
-msgstr ""
+msgstr "**检查 Claude 日志** 以排查连接错误"
 
 #: ../../help/troubleshooting.rst:486 d7a943329ea1407198ccf1c5fffb276b
 msgid "**Verify tool registration:**"
-msgstr ""
+msgstr "**验证工具注册：**"
 
 #: ../../help/troubleshooting.rst:495 41e0f46db1434a7b8bac2a3f05f68434
 msgid "Advanced Debugging"
-msgstr ""
+msgstr "高级调试"
 
 #: ../../help/troubleshooting.rst:498 07f1c1915fa14a939e641ab4e4575188
 msgid "Enable debug logging"
-msgstr ""
+msgstr "启用调试日志记录"
 
 #: ../../help/troubleshooting.rst:513 0fbf922ccaa146d3bf566a60e9f756ba
 msgid "Capture detailed error information"
-msgstr ""
+msgstr "捕获详细的错误信息"
 
 #: ../../help/troubleshooting.rst:528 9810a116882d47cbabcac66eac713a2b
 msgid "Profile performance bottlenecks"
-msgstr ""
+msgstr "分析性能瓶颈"
 
 #: ../../help/troubleshooting.rst:551 d4619d9d2a104189bb29c82df4a4e52b
 msgid "Getting Help"
-msgstr ""
+msgstr "获取帮助"
 
 #: ../../help/troubleshooting.rst:553 860d50cca6ad47c99e75388fc7fc60bf
 msgid "If none of these solutions work:"
-msgstr ""
+msgstr "如果以上解决方案均无效："
 
 #: ../../help/troubleshooting.rst:555 422f0bf3c5804a39be26803d55e5a812
 msgid "**Check the FAQ**: :doc:`faq`"
-msgstr ""
+msgstr "**查看常见问题解答**：:doc:`faq`"
 
 #: ../../help/troubleshooting.rst:556 36d95d0cd7ff4bfebf59b08f7e9c2f8a
 msgid ""
 "**Search GitHub issues**: `Issues "
 "<https://github.com/zitniklab/tooluniverse/issues>`_"
 msgstr ""
+"**搜索 GitHub 问题**：`Issues "
+"<https://github.com/zitniklab/tooluniverse/issues>`_"
 
 #: ../../help/troubleshooting.rst:557 5251fd407586454d9bdc10ed296b3a45
 msgid "**Create a bug report** with:"
-msgstr ""
+msgstr "**创建缺陷报告**，内容包括："
 
 #: ../../help/troubleshooting.rst:559 2ab828da6a594af8a1c137b938e8ee9f
 msgid "ToolUniverse version: ``tooluniverse.__version__``"
-msgstr ""
+msgstr "ToolUniverse 版本：``tooluniverse.__version__``"
 
 #: ../../help/troubleshooting.rst:560 b8b5e01580ae444d997987b3ef48086b
 msgid "Python version: ``python --version``"
-msgstr ""
+msgstr "Python 版本：``python --version``"
 
 #: ../../help/troubleshooting.rst:561 6f03414ae54d46d5ac2ccb1b9a207033
 msgid "Operating system"
-msgstr ""
+msgstr "操作系统"
 
 #: ../../help/troubleshooting.rst:562 36cadec62a6b467aa7b74349d4ad8456
 msgid "Full error message and traceback"
-msgstr ""
+msgstr "完整错误信息及追踪记录"
 
 #: ../../help/troubleshooting.rst:563 935eba5bdefd4ab38db50aa1f6005b4f
 msgid "Minimal code example that reproduces the issue"
-msgstr ""
+msgstr "重现该问题的最简代码示例"
 
 #: ../../help/troubleshooting.rst:565 925d88c83a93473fba969e663703c243
 msgid "**Join our community**: Discord server link"
-msgstr ""
+msgstr "**加入我们的社区**：Discord 服务器链接"
 
 #: ../../help/troubleshooting.rst:576 4578e9cf8ea94682934d0b970df9932f
 msgid "Include this output in your bug report."
-msgstr ""
+msgstr "请在您的错误报告中包含此输出。"

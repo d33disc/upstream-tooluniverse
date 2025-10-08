@@ -421,42 +421,42 @@ msgstr "**组成与工作流程：**"
 msgid ""
 "Use `compose_tool.py` or add scripts in `compose_scripts/` for complex call "
 "chains"
-msgstr ""
+msgstr "对于复杂的调用链，请使用 `compose_tool.py` 或在 `compose_scripts/` 中添加脚本。"
 
 #: ../../expand_tooluniverse/architecture.rst:315
 #: cd25eadd3c5e4bfa943b317cfc2ced3a
 msgid "Leverage `tool_finder_*` for retrieval and routing assistance"
-msgstr ""
+msgstr "利用 `tool_finder_*` 进行检索和路由辅助"
 
 #: ../../expand_tooluniverse/architecture.rst:318
 #: 5ec2df84bc1840ad99aa2bc2d2d39769
 msgid "Directory Quick Reference"
-msgstr ""
+msgstr "目录快速参考"
 
 #: ../../expand_tooluniverse/architecture.rst:320
 #: 850c39edfe3f46b7b925ecac42851c89
 msgid "**Core Package**: `src/tooluniverse/`"
-msgstr ""
+msgstr "**核心包**：`src/tooluniverse/`"
 
 #: ../../expand_tooluniverse/architecture.rst:321
 #: ebde0442bd624d7fb190ac32330e16f2
 msgid "**Tool Implementations**: Various `*_tool.py` files in same directory"
-msgstr ""
+msgstr "**工具实现**：同一目录下的各个 `*_tool.py` 文件"
 
 #: ../../expand_tooluniverse/architecture.rst:322
 #: 9f12718e64cf49c2b70de4e35c45922c
 msgid "**Tool Configurations**: `src/tooluniverse/data/*.json`"
-msgstr ""
+msgstr "**工具配置**：`src/tooluniverse/data/*.json`"
 
 #: ../../expand_tooluniverse/architecture.rst:323
 #: cec9b38624ae4292a019c98cd8f9701d
 msgid "**Tool Collections**: `src/tooluniverse/toolsets/`"
-msgstr ""
+msgstr "**工具集合**：`src/tooluniverse/toolsets/`"
 
 #: ../../expand_tooluniverse/architecture.rst:324
 #: 491eb34851954b2fae50c64e12a2cee3
 msgid "**Composition Scripts**: `src/tooluniverse/compose_scripts/`"
-msgstr ""
+msgstr "**组合脚本**：`src/tooluniverse/compose_scripts/`"
 
 #: ../../expand_tooluniverse/architecture.rst:325
 #: 50aaf1cad9144cbba7c2734a25df7b03
@@ -464,11 +464,14 @@ msgid ""
 "**MCP & Servers**: `src/tooluniverse/smcp.py`, "
 "`src/tooluniverse/smcp_server.py`, root `smcp_tooluniverse_server.py`"
 msgstr ""
+"**MCP "
+"与服务器**：`src/tooluniverse/smcp.py`，`src/tooluniverse/smcp_server.py`，根目录下的 "
+"`smcp_tooluniverse_server.py`"
 
 #: ../../expand_tooluniverse/architecture.rst:326
 #: 10776273322f4abba78c0c43d936f148
 msgid "**External Integrations**: `src/tooluniverse/remote/`"
-msgstr ""
+msgstr "**外部集成**：`src/tooluniverse/remote/`"
 
 #: ../../expand_tooluniverse/architecture.rst:327
 #: b6c88ec85cb64a12b25f8541aae7304a
@@ -476,16 +479,17 @@ msgid ""
 "**Visualization & Graphs**: `src/tooluniverse/scripts/`, "
 "`src/tooluniverse/tool_graph_web_ui.py`"
 msgstr ""
+"**可视化与图表**：`src/tooluniverse/scripts/`，`src/tooluniverse/tool_graph_web_ui.py`"
 
 #: ../../expand_tooluniverse/architecture.rst:328
 #: 9c60c7bcec4c4f00a5f9888b0cf5297f
 msgid "**Tests**: `src/tooluniverse/test/`"
-msgstr ""
+msgstr "**测试**：`src/tooluniverse/test/`"
 
 #: ../../expand_tooluniverse/architecture.rst:331
 #: 7c14c3633ebe4c6d9a9627745a3ac917
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../expand_tooluniverse/architecture.rst:333
 #: c8a6f0bdc7e246babd8fa416ee7b1771
@@ -497,3 +501,5 @@ msgid ""
 "modifying the engine. The composition and visualization tools enable "
 "building explainable, reusable scientific workflows."
 msgstr ""
+"ToolUniverse 通过清晰的注册机制、标准化的 JSON "
+"配置和丰富的工具模块，提供了从工具发现与执行到远程集成（MCP）的完整生态系统。您可以通过添加模块和配置，快速扩展新的数据源或功能，而无需修改引擎。组合与可视化工具支持构建可解释且可复用的科学工作流。"

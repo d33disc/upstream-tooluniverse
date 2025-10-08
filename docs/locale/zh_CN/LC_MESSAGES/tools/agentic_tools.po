@@ -514,57 +514,57 @@ msgstr "``domain``（字符串）（必填）用于验证的领域专业知识�
 msgid ""
 "``validation_aspects`` (string) (optional) JSON array string of specific "
 "aspects to validate"
-msgstr ""
+msgstr "``validation_aspects``（字符串）（可选）用于验证的具体方面的 JSON 数组字符串"
 
 #: ../../tools/agentic_tools.rst:302 d2765202e82647b1a7de1e0fc89a8256
 msgid ""
 "``implementation_code`` (string) (optional) Implementation code to validate "
 "(optional)"
-msgstr ""
+msgstr "``implementation_code``（字符串）（可选）用于验证的实现代码（可选）"
 
 #: ../../tools/agentic_tools.rst:320 66eeb5ad64a54b0d9484231a7bdacda1
 msgid "**EthicalComplianceReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**伦理合规审查员**（类型：代理工具）"
 
 #: ../../tools/agentic_tools.rst:322 56c6ce1554764a789d78902e4518bf02
 msgid "Checks adherence to ethical standards and disclosure practices."
-msgstr ""
+msgstr "检查是否遵守伦理标准和披露规范。"
 
 #: ../../tools/agentic_tools.rst 624009365afb4d4fbc2140d1c30caeba
 msgid "EthicalComplianceReviewer tool specification"
-msgstr ""
+msgstr "EthicalComplianceReviewer 工具规范"
 
 #: ../../tools/agentic_tools.rst:328 bc8974bd15494739983587a50070e213
 msgid "**Name**: ``EthicalComplianceReviewer``"
-msgstr ""
+msgstr "**名称**：``EthicalComplianceReviewer``"
 
 #: ../../tools/agentic_tools.rst:330 5dff4e580a2f4b8684a0e45c696b8f02
 msgid ""
 "**Description**: Checks adherence to ethical standards and disclosure "
 "practices."
-msgstr ""
+msgstr "**描述**：检查是否遵守伦理标准和披露规范。"
 
 #: ../../tools/agentic_tools.rst:334 16ef423ce43f4383b8852dd8174153af
 msgid "``ethics_section`` (string) (required) No description"
-msgstr ""
+msgstr "``ethics_section``（字符串）（必填） 无描述"
 
 #: ../../tools/agentic_tools.rst:351 537ee7cc5910408e8c1f10d534a57d95
 msgid "**ExperimentalDesignScorer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ExperimentalDesignScorer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:353 a7567d9532794fc991467620a3414e71
 msgid ""
 "Assesses a proposed experimental design by assigning scores and structured "
 "feedback on hypothesis..."
-msgstr ""
+msgstr "通过对假设进行评分和结构化反馈，评估所提议的实验设计..."
 
 #: ../../tools/agentic_tools.rst 7d7c344f4cf8480fab7c986e569baabf
 msgid "ExperimentalDesignScorer tool specification"
-msgstr ""
+msgstr "ExperimentalDesignScorer 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:359 41c608bd237d4347a3dcbdecf8dcd432
 msgid "**Name**: ``ExperimentalDesignScorer``"
-msgstr ""
+msgstr "**名称**：``ExperimentalDesignScorer``"
 
 #: ../../tools/agentic_tools.rst:361 fa00e8627e72406da6ab70aea5920577
 msgid ""
@@ -573,74 +573,75 @@ msgid ""
 " size, controls, randomization, measurement methods, statistical analysis, "
 "bias mitigation, ethical considerations, and overall feasibility."
 msgstr ""
+"**描述**：通过对假设清晰度、变量定义、样本量、对照组、随机化、测量方法、统计分析、偏差控制、伦理考量及整体可行性进行评分和结构化反馈，评估所提实验设计。"
 
 #: ../../tools/agentic_tools.rst:365 45a13f658c6f4b298f77949d75802aa6
 msgid ""
 "``hypothesis`` (string) (required) A clear statement of the research "
 "hypothesis to be tested."
-msgstr ""
+msgstr "``hypothesis``（字符串）（必填）需明确陈述待检验的研究假设。"
 
 #: ../../tools/agentic_tools.rst:368 ced4b40f15724761b4d394b67d1c57e9
 msgid ""
 "``design_description`` (string) (required) A detailed description of the "
 "proposed experimental design, including variables, methods, sample details, "
 "and planned analyses."
-msgstr ""
+msgstr "``design_description``（字符串）（必填） 对拟议实验设计的详细描述，包括变量、方法、样本详情及计划的分析内容。"
 
 #: ../../tools/agentic_tools.rst:386 19b4b25dd1f645249fefb9b90d16464f
 msgid "**HypothesisGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**HypothesisGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:388 0b67c5029883461dbe6f87c2fe585efa
 msgid ""
 "Generates research hypotheses based on provided background context, domain, "
 "and desired format. U..."
-msgstr ""
+msgstr "根据提供的背景信息、领域和所需格式生成研究假设。U..."
 
 #: ../../tools/agentic_tools.rst 7e15cd5efd95419b9971ea15a1477f24
 msgid "HypothesisGenerator tool specification"
-msgstr ""
+msgstr "HypothesisGenerator 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:394 e888d9910e5046dc8cfc9de291e167bb
 msgid "**Name**: ``HypothesisGenerator``"
-msgstr ""
+msgstr "**名称**：``HypothesisGenerator``"
 
 #: ../../tools/agentic_tools.rst:396 441d4f08e5634dbfa13fcf306147ed02
 msgid ""
 "**Description**: Generates research hypotheses based on provided background "
 "context, domain, and desired format. Uses AI to propose novel, testable "
 "hypotheses for scientific exploration."
-msgstr ""
+msgstr "**描述**：基于提供的背景信息、领域和所需格式生成研究假设。利用人工智能提出新颖且可验证的假设，支持科学探索。"
 
 #: ../../tools/agentic_tools.rst:400 427f354bfa0a404eaf3e39a7e1990d1b
 msgid ""
 "``context`` (string) (required) Background information, observations, or "
 "data description from which to derive hypotheses."
-msgstr ""
+msgstr "``context``（字符串）（必填）用于推导假设的背景信息、观察结果或数据描述。"
 
 #: ../../tools/agentic_tools.rst:403 d66aa0e7a6504f5a8510af24eb920cb3
 msgid ""
 "``domain`` (string) (required) Field of study or research area (e.g., "
 "'neuroscience', 'ecology', 'materials science')."
-msgstr ""
+msgstr "``domain``（字符串）（必填）研究领域或学科方向（例如，“神经科学”、“生态学”、“材料科学”）。"
 
 #: ../../tools/agentic_tools.rst:406 6715d530437646f5bee257c42920af75
 msgid ""
 "``number_of_hypotheses`` (string) (required) Number of hypotheses to "
 "generate (e.g., '3', '5')."
-msgstr ""
+msgstr "``number_of_hypotheses``（字符串）（必填）生成假设的数量（例如，“3”，“5”）。"
 
 #: ../../tools/agentic_tools.rst:409 35afdb97f0754afdad36181cfc93d645
 msgid ""
 "``hypothesis_format`` (string) (optional) Optional directive on how to "
 "structure each hypothesis. Choose from one of the following formats:"
-msgstr ""
+msgstr "``hypothesis_format``（字符串）（可选） 可选指令，用于指定每个假设的结构。可从以下格式中选择一种："
 
 #: ../../tools/agentic_tools.rst:412 64ded5769b10446c933a43f2e3100b12
 msgid ""
 "If–Then Statements: \"If [independent variable condition], then [expected "
 "outcome].\""
-msgstr ""
+msgstr "条件语句：“如果[自变量条件]，那么[预期结果]。”"
 
 #: ../../tools/agentic_tools.rst:413 2d5fee255e8c45e4a83664d7afe1ea19
 msgid ""
@@ -648,161 +649,164 @@ msgid ""
 "difference/effect/association between X and Y.\" • H₁ (Alt): \"There is a "
 "difference/effect/association between X and Y.\""
 msgstr ""
+"零假设与备择假设（统计学）：  \n"
+"• H₀（零假设）：“X 与 Y 之间不存在差异/效应/关联。”  \n"
+"• H₁（备择假设）：“X 与 Y 之间存在差异/效应/关联。”"
 
 #: ../../tools/agentic_tools.rst:416 f5191b4e41ae4170b6b6d593bbf62a0e
 msgid ""
 "Associative (Correlation-Focused): \"There is a relationship/association "
 "between [Variable A] and [Variable B].\""
-msgstr ""
+msgstr "关联型（以相关性为重点）：“[变量A] 与 [变量B] 之间存在关系/关联。”"
 
 #: ../../tools/agentic_tools.rst:417 ee68a39e218748bb99f6f34800f96306
 msgid ""
 "Directional (Non-If–Then): \"Increasing/decreasing [Variable A] will lead to"
 " [directional change] in [Variable B].\""
-msgstr ""
+msgstr "方向性（非条件式）：“增加/减少[变量A]将导致[变量B]的[方向性变化]。”"
 
 #: ../../tools/agentic_tools.rst:418 433fd0543bd94c93bd6e121870b6f95c
 msgid ""
 "Comparative (Group Comparison): \"Group A will show higher/lower [dependent "
 "measure] compared to Group B under [condition].\""
-msgstr ""
+msgstr "比较（组间比较）：“在[条件]下，A组的[因变量]将高于/低于B组。”"
 
 #: ../../tools/agentic_tools.rst:419 2add453c26cd4af8913bab21029698f1
 msgid ""
 "Mechanistic: \"Because [mechanism or process], [Variable A] will cause "
 "[Variable B].\""
-msgstr ""
+msgstr "机械性：“由于[机制或过程]，[变量A]将导致[变量B]。”"
 
 #: ../../tools/agentic_tools.rst:420 4d7c393d4e7b498b9eecc9056853cfd7
 msgid ""
 "Descriptive (Exploratory/Pattern-Oriented): \"Population X exhibits pattern "
 "Y in context Z.\""
-msgstr ""
+msgstr "描述性（探索性/模式导向）：“群体X在情境Z中表现出模式Y。”"
 
 #: ../../tools/agentic_tools.rst:422 972d35aca03b498887f5f4718795cb04
 msgid "If omitted, defaults to concise declarative sentences."
-msgstr ""
+msgstr "如果省略，默认为简洁的陈述句。"
 
 #: ../../tools/agentic_tools.rst:440 d9c6bcec0ec94847b92488e12018c204
 msgid "**LabelGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**LabelGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:442 e0ee898c9f5546cc940ea2e2bf9defd2
 msgid ""
 "Generates relevant keyword labels for tools based on their name, "
 "description, parameters, and cat..."
-msgstr ""
+msgstr "根据工具的名称、描述、参数及类别生成相关的关键词标签..."
 
 #: ../../tools/agentic_tools.rst 895bdeae63ce48228f18d8dbd6823944
 msgid "LabelGenerator tool specification"
-msgstr ""
+msgstr "LabelGenerator 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:448 535daa53cff3405ab8f15e3465c95d71
 msgid "**Name**: ``LabelGenerator``"
-msgstr ""
+msgstr "**名称**：``LabelGenerator``"
 
 #: ../../tools/agentic_tools.rst:450 b91a3a65eab2497ba5f11df602c6173f
 msgid ""
 "**Description**: Generates relevant keyword labels for tools based on their "
 "name, description, parameters, and category. Creates a comprehensive list of"
 " tags for tool discovery and categorization."
-msgstr ""
+msgstr "**描述**：根据工具的名称、描述、参数和类别生成相关的关键词标签。创建用于工具发现和分类的完整标签列表。"
 
 #: ../../tools/agentic_tools.rst:454 7acc803ce92249c491231a1cce945874
 msgid "``tool_name`` (string) (required) The name of the tool"
-msgstr ""
+msgstr "``tool_name``（字符串）（必填）工具名称"
 
 #: ../../tools/agentic_tools.rst:457 9b7ab8f909ea4af0956df083597ba7d0
 msgid ""
 "``tool_description`` (string) (required) Detailed description of what the "
 "tool does"
-msgstr ""
+msgstr "``tool_description``（字符串）（必填）工具功能的详细描述"
 
 #: ../../tools/agentic_tools.rst:460 14f109930f014621a1fb9bab48a37036
 msgid ""
 "``tool_parameters`` (string) (required) JSON string describing the tool's "
 "input parameters and their types"
-msgstr ""
+msgstr "``tool_parameters``（字符串）（必填）描述工具输入参数及其类型的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:463 2dc62e1875e74043b2bcfd23ed9a13f9
 msgid ""
 "``category`` (string) (required) The general category or domain the tool "
 "belongs to"
-msgstr ""
+msgstr "``category``（字符串）（必填）工具所属的一般类别或领域"
 
 #: ../../tools/agentic_tools.rst:466 6c19cda0b6f2449795c787fe6eab5cf7
 msgid ""
 "``existing_labels`` (string) (optional) JSON array string of existing labels"
 " to consider reusing (optional)"
-msgstr ""
+msgstr "``existing_labels``（字符串）（可选）用于考虑重用的现有标签的 JSON 数组字符串（可选）"
 
 #: ../../tools/agentic_tools.rst:486 d5705e32005548c4bdf83f0cbf611997
 msgid "**LiteratureContextReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**LiteratureContextReviewer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:488 e951c310b14d4f869aa4b987bfdcecc1
 msgid ""
 "Reviews coverage, relevance, and critical synthesis of prior scholarship."
-msgstr ""
+msgstr "审查先前学术研究的覆盖范围、相关性及批判性综合。"
 
 #: ../../tools/agentic_tools.rst ce6f546d22a944f9a397053b2fa8bd41
 msgid "LiteratureContextReviewer tool specification"
-msgstr ""
+msgstr "LiteratureContextReviewer 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:494 d2fb3ccc81c24800a85a22645eab8b5a
 msgid "**Name**: ``LiteratureContextReviewer``"
-msgstr ""
+msgstr "**名称**：``LiteratureContextReviewer``"
 
 #: ../../tools/agentic_tools.rst:496 223bdce759d2470d9b709e59787f78f9
 msgid ""
 "**Description**: Reviews coverage, relevance, and critical synthesis of "
 "prior scholarship."
-msgstr ""
+msgstr "**描述**：评述先前学术研究的覆盖范围、相关性及关键综合分析。"
 
 #: ../../tools/agentic_tools.rst:500 65d1fc8a0a044564b7fd6782c0cd735a
 msgid "``paper_title`` (string) (required) No description"
-msgstr ""
+msgstr "``paper_title``（字符串）（必填） 无描述"
 
 #: ../../tools/agentic_tools.rst:503 dd39fec35dff43a5b3b2bd57307823d8
 msgid "``literature_review`` (string) (required) Full literature-review text"
-msgstr ""
+msgstr "``literature_review``（字符串）（必填）完整的文献综述文本"
 
 #: ../../tools/agentic_tools.rst:521 1ad34cf54af7426784f8b2a4269e4e6c
 msgid "**MedicalLiteratureReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**MedicalLiteratureReviewer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:523 3389250687b14a8494c3f458adb1184a
 msgid ""
 "Conducts systematic reviews of medical literature on specific topics. "
 "Synthesizes findings from m..."
-msgstr ""
+msgstr "对特定主题的医学文献进行系统性综述。综合来自多项研究的发现，..."
 
 #: ../../tools/agentic_tools.rst e405c52cb4af477eb6bb741ba3b55fc7
 msgid "MedicalLiteratureReviewer tool specification"
-msgstr ""
+msgstr "MedicalLiteratureReviewer 工具规格说明"
 
 #: ../../tools/agentic_tools.rst:529 aaaafb26fd634c398c67ebdf18d0ebea
 msgid "**Name**: ``MedicalLiteratureReviewer``"
-msgstr ""
+msgstr "**名称**：``MedicalLiteratureReviewer``"
 
 #: ../../tools/agentic_tools.rst:531 e7174f5e2459440b8dfb1e72607b522d
 msgid ""
 "**Description**: Conducts systematic reviews of medical literature on "
 "specific topics. Synthesizes findings from multiple studies and provides "
 "evidence-based conclusions with structured analysis and quality assessment."
-msgstr ""
+msgstr "**描述**：对特定主题的医学文献进行系统性综述。综合多项研究结果，提供基于证据的结论，并进行结构化分析和质量评估。"
 
 #: ../../tools/agentic_tools.rst:535 0d7d19c7310e4a6ea363c7cf1b4225b4
 msgid ""
 "``research_topic`` (string) (required) The specific medical/research topic "
 "for literature review (e.g., 'efficacy of drug X in treating condition Y')."
-msgstr ""
+msgstr "``research_topic``（字符串）（必填） 文献综述的具体医学/研究主题（例如，“药物X治疗疾病Y的疗效”）。"
 
 #: ../../tools/agentic_tools.rst:538 4b7097a803e54b9f9fd6dc6937d80eb7
 msgid ""
 "``literature_content`` (string) (required) The literature content, "
 "abstracts, full studies, or research papers to review and synthesize."
-msgstr ""
+msgstr "``literature_content``（字符串）（必填）文献内容，包括摘要、完整研究或需审阅和综合的研究论文。"
 
 #: ../../tools/agentic_tools.rst:541 17da233efc4d479c86f9fedacdadc872
 msgid ""
@@ -810,6 +814,7 @@ msgid ""
 "'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', 'biomarker "
 "validation')."
 msgstr ""
+"``focus_area``（字符串）（必填）评审的主要关注领域（例如，“治疗效果”、“安全性概况”、“诊断准确性”、“生物标志物验证”）。"
 
 #: ../../tools/agentic_tools.rst:544 6b5dc4368d9e458d832ddae36d845288
 msgid ""
@@ -817,20 +822,21 @@ msgid ""
 "analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort "
 "studies', 'case-control studies')."
 msgstr ""
+"``study_types``（字符串）（必填）分析中优先考虑的研究类型（例如，“随机对照试验”、“荟萃分析”、“队列研究”、“病例对照研究”）。"
 
 #: ../../tools/agentic_tools.rst:547 4426e739f42e4fa8996bec0ba967e0fc
 msgid ""
 "``quality_level`` (string) (required) Minimum evidence quality level to "
 "include (e.g., 'high quality only', 'moderate and above', 'all available "
 "evidence')."
-msgstr ""
+msgstr "``quality_level``（字符串）（必填）包含的最低证据质量等级（例如，“仅高质量”，“中等及以上”，“所有可用证据”）。"
 
 #: ../../tools/agentic_tools.rst:550 9c8b9f93566c41b9846e634103f99862
 msgid ""
 "``review_scope`` (string) (required) Scope of the review (e.g., "
 "'comprehensive systematic review', 'rapid review', 'scoping review', "
 "'narrative review')."
-msgstr ""
+msgstr "``review_scope``（字符串）（必填）审查范围（例如，“综合系统评价”、“快速评价”、“范围评价”、“叙述性评价”）。"
 
 #: ../../tools/agentic_tools.rst:572 5ca3eb116a1b458c89f8694195c1d9c4
 msgid "**MedicalTermNormalizer** (Type: AgenticTool)"

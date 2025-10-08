@@ -413,60 +413,60 @@ msgstr "5.4 执行工具"
 #: ../../tutorials/agentic_tools_tutorial.rst:335
 #: fb13da10449b46b68b5e84aa4fb6bd88
 msgid "Run your tool and handle the response:"
-msgstr ""
+msgstr "运行您的工具并处理响应："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:353
 #: 51a57a35fb7242c3a0967d38c98babdd
 msgid "Step 6: Handle Common Issues"
-msgstr ""
+msgstr "第六步：处理常见问题"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:356
 #: 73f0b70a251745beab133b713634a879
 msgid "6.1 Check for Missing API Keys"
-msgstr ""
+msgstr "6.1 检查缺失的 API 密钥"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:358
 #: 521004e1659a4a47b737d7c78b25ccbf
 msgid "If you get authentication errors:"
-msgstr ""
+msgstr "如果出现身份验证错误："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:371
 #: baef484a92a74d0dac4350738b7a3ea5
 msgid "6.2 Debug Response Issues"
-msgstr ""
+msgstr "6.2 调试响应问题"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:373
 #: 06e3d7c86b15490094dd3d18b3c7fa17
 msgid "If the tool returns unexpected results:"
-msgstr ""
+msgstr "如果工具返回了意外结果："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:388
 #: e9518a8c7cfb4931ba08e1efdaaa9f9d
 msgid "Step 7: Create More Complex Tools"
-msgstr ""
+msgstr "第7步：创建更复杂的工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:391
 #: 2024fd5600264a458d5cc0db8faa5bb4
 msgid "7.1 JSON Response Tool"
-msgstr ""
+msgstr "7.1 JSON 响应工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:393
 #: 74c18ccb0de4431389dd77bc9d2191f2
 msgid "Create a tool that returns structured data:"
-msgstr ""
+msgstr "创建一个返回结构化数据的工具："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:423
 #: 46a251e5544e40c6a499ba431a298368
 msgid ""
 "**Key difference**: Set ``\"return_json\": true`` for structured responses."
-msgstr ""
+msgstr "**关键区别**：设置 ``\"return_json\": true`` 以获取结构化响应。"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:426
 #: d463a59caf91426e9488fcebd2a0f26c
 msgid "7.2 Tool with Optional Parameters"
-msgstr ""
+msgstr "7.2 带可选参数的工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:428
 #: 1322d5f814024278938cc98a9aa00886
 msgid "Create a tool with both required and optional inputs:"
-msgstr ""
+msgstr "创建一个包含必填和可选输入的工具："

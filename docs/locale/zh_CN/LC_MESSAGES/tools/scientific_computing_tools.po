@@ -519,155 +519,155 @@ msgstr "获取关于 SymPy —— 符号数学库的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst d94b68f1510b485d980142617fb3a3db
 msgid "get_sympy_info tool specification"
-msgstr ""
+msgstr "get_sympy_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:351
 #: 5c3d6e636686402581cba9ae9700953c
 msgid "**Name**: ``get_sympy_info``"
-msgstr ""
+msgstr "**名称**：``get_sympy_info``"
 
 #: ../../tools/scientific_computing_tools.rst:353
 #: a8fa6a563e354546b0d91273c6b4b283
 msgid ""
 "**Description**: Get comprehensive information about SymPy – symbolic "
 "mathematics library"
-msgstr ""
+msgstr "**描述**：获取关于 SymPy —— 符号数学库的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst:357
 #: c2d551c02a684f4a8ba2f6354e383b7e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "SymPy"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 SymPy 的信息类型"
 
 #: ../../tools/scientific_computing_tools.rst:374
 #: ad3a48c1e42448f9b41459a2f798f344
 msgid "**get_tiledb_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_tiledb_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:376
 #: 3dd05ab52e6a4376aeebdcd3fbaf9bdc
 msgid ""
 "Get comprehensive information about TileDB – modern database for array data"
-msgstr ""
+msgstr "获取关于 TileDB —— 现代数组数据数据库的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst 479e9ab6b16b4f29a10bec5d9ea0ab19
 msgid "get_tiledb_info tool specification"
-msgstr ""
+msgstr "get_tiledb_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:382
 #: f322d65673464323935ef271e6d4dc3b
 msgid "**Name**: ``get_tiledb_info``"
-msgstr ""
+msgstr "**名称**：``get_tiledb_info``"
 
 #: ../../tools/scientific_computing_tools.rst:384
 #: ac9f6477923243bdba192a74811e23c1
 msgid ""
 "**Description**: Get comprehensive information about TileDB – modern "
 "database for array data"
-msgstr ""
+msgstr "**描述**：获取关于 TileDB —— 现代数组数据数据库的全面信息"
 
 #: ../../tools/scientific_computing_tools.rst:388
 #: 340ae629880f4ddea8283b0d36cc33e8
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "TileDB"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 TileDB 的信息类型"
 
 #: ../../tools/scientific_computing_tools.rst:405
 #: 8291c61de6bd4de7bbf4dbf237daabbf
 msgid "**get_tqdm_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_tqdm_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:407
 #: 2ee05505a5ad41c6a615c1d6296a3e22
 msgid ""
 "Get comprehensive information about tqdm – fast progress bars for Python"
-msgstr ""
+msgstr "获取有关 tqdm 的全面信息——适用于 Python 的快速进度条工具"
 
 #: ../../tools/scientific_computing_tools.rst 630424ebe16f4189969e18076b952f47
 msgid "get_tqdm_info tool specification"
-msgstr ""
+msgstr "get_tqdm_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:413
 #: 08c30ff051b643d3ae4cf972b2b3c9dd
 msgid "**Name**: ``get_tqdm_info``"
-msgstr ""
+msgstr "**名称**：``get_tqdm_info``"
 
 #: ../../tools/scientific_computing_tools.rst:415
 #: fb0ee16f0f0c4b9db170db8a75c6b64f
 msgid ""
 "**Description**: Get comprehensive information about tqdm – fast progress "
 "bars for Python"
-msgstr ""
+msgstr "**描述**：获取关于 tqdm 的全面信息——适用于 Python 的快速进度条工具"
 
 #: ../../tools/scientific_computing_tools.rst:435
 #: 2042aa5f72c3421e882fc7c26609102c
 msgid "**get_xarray_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_xarray_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:437
 #: 962e8b06322d4753927b2c16aa52989c
 msgid ""
 "Get information about the xarray package. N-D labeled arrays and datasets in"
 " Python"
-msgstr ""
+msgstr "获取有关 xarray 包的信息。Python 中的 N 维带标签数组和数据集"
 
 #: ../../tools/scientific_computing_tools.rst 7306dce374084a179503e144fe8c585c
 msgid "get_xarray_info tool specification"
-msgstr ""
+msgstr "get_xarray_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:443
 #: c0de7fafc051496e941f5ae5735b8049
 msgid "**Name**: ``get_xarray_info``"
-msgstr ""
+msgstr "**名称**：``get_xarray_info``"
 
 #: ../../tools/scientific_computing_tools.rst:445
 #: c629d0cfb317401b80654a1ebafa0ff8
 msgid ""
 "**Description**: Get information about the xarray package. N-D labeled "
 "arrays and datasets in Python"
-msgstr ""
+msgstr "**描述**：获取有关 xarray 包的信息。Python 中的多维带标签数组和数据集"
 
 #: ../../tools/scientific_computing_tools.rst:464
 #: a8f29ff0ce7d41b98b72f67af29219b7
 msgid "**get_zarr_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_zarr_info**（类型：PackageTool）"
 
 #: ../../tools/scientific_computing_tools.rst:466
 #: c5423c9d35e34edb9f346661a7a26ec1
 msgid ""
 "Get information about the zarr package. Chunked, compressed, N-dimensional "
 "arrays"
-msgstr ""
+msgstr "获取有关 zarr 包的信息。分块、压缩的 N 维数组"
 
 #: ../../tools/scientific_computing_tools.rst a7cb8490ac144617930e22f530f5f30b
 msgid "get_zarr_info tool specification"
-msgstr ""
+msgstr "get_zarr_info 工具规格说明"
 
 #: ../../tools/scientific_computing_tools.rst:472
 #: e8ead593e7c04e5787b4ce70e9248860
 msgid "**Name**: ``get_zarr_info``"
-msgstr ""
+msgstr "**名称**：``get_zarr_info``"
 
 #: ../../tools/scientific_computing_tools.rst:474
 #: 52c07d6655a04a78810cf83b9e7a81ae
 msgid ""
 "**Description**: Get information about the zarr package. Chunked, "
 "compressed, N-dimensional arrays"
-msgstr ""
+msgstr "**描述**：获取有关 zarr 包的信息。分块、压缩的 N 维数组"
 
 #: ../../tools/scientific_computing_tools.rst:493
 #: 9544d29e97e4456f9116424eb00824d0
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/scientific_computing_tools.rst:495
 #: fe156b5137664cfaa48ec927f724662b
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/scientific_computing_tools.rst:496
 #: 938dc6aa13a04c6499b3d325ec9436f2
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -220,7 +220,7 @@ msgstr "字符串"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: d26bc5afbf264217b87d9d483b2ad9ed
 msgid "-"
-msgstr ""
+msgstr "请提供需要翻译的英文文本。"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 7f3ded8dcb574450a5f2dee70ab0d50e
@@ -371,62 +371,62 @@ msgstr "环境变量支持"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:238
 #: 12b3740e1168443482bd3af33db95905
 msgid "You can use environment variables in configurations:"
-msgstr ""
+msgstr "您可以在配置中使用环境变量："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:247
 #: 134d136f1cde4c2196c3a95c77a24524
 msgid "Error Handling and Retry"
-msgstr ""
+msgstr "错误处理与重试"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:260
 #: 998cb58e8c3e4ddfa8220da801c06b8b
 msgid "Configuration File Organization"
-msgstr ""
+msgstr "配置文件组织"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:262
 #: 948ca58143f04c939cbc9089a1735a44
 msgid "Recommended Directory Structure"
-msgstr ""
+msgstr "推荐的目录结构"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:272
 #: 0b8e147cd50b4a11a85f3a351617cbaa
 msgid "Modular Configuration Example"
-msgstr ""
+msgstr "模块化配置示例"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:274
 #: 74eff17e2feb46a78ab314a55ef43087
 msgid "`expert_feedback_tools.json`:"
-msgstr ""
+msgstr "`expert_feedback_tools.json`："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:315
 #: 30df51c2cb194613864c4ae54cefa8c9
 msgid "Practical Application Examples"
-msgstr ""
+msgstr "实际应用示例"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:317
 #: ca0b1d8d47d44cdfb77b602c756ac88d
 msgid "Example 1: Medical Expert Consultation System"
-msgstr ""
+msgstr "示例 1：医疗专家咨询系统"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:340
 #: 0f886a80dd71401abd15dc9440b263f8
 msgid "Example 2: Data Analysis Tool Set"
-msgstr ""
+msgstr "示例 2：数据分析工具集"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:363
 #: 180928ccde944e40914dbbebecf9aac6
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:365
 #: 5b2097b50e5d490c8ff44f061b4e48c3
 msgid "Common Issues and Solutions"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:367
 #: 58dfcd6a5d8349de8554f6e6cb5eb86d
 msgid "1. Connection Timeout"
-msgstr ""
+msgstr "1. 连接超时"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:372
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:382
@@ -435,230 +435,230 @@ msgstr ""
 #: 8c8f56c061504388a0d1d96be7e9b9fd 9fdc71bae92e4339b5c5ae343dadbd46
 #: b2d9fcf7044c437bbb23f42303511e69 c8f725a5b88b4affabd7861f209b623f
 msgid "**Solutions**:"
-msgstr ""
+msgstr "**解决方案**："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:373
 #: c47a0cac47cc4e2ba6114133fc25df0e
 msgid "Increase `timeout` value"
-msgstr ""
+msgstr "增加 `timeout` 值"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:374
 #: 48c992b48a164cad95079cbd39c43ede
 msgid "Check network connection"
-msgstr ""
+msgstr "检查网络连接"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:375
 #: 937c2b719ffe4045af3286e058859d66
 msgid "Verify server URL"
-msgstr ""
+msgstr "验证服务器 URL"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:377
 #: 11497adde400427ba10eed28911bd8de
 msgid "2. Transport Protocol Mismatch"
-msgstr ""
+msgstr "2. 传输协议不匹配"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:383
 #: 9153bd822f134e9286b26e783f3e9d26
 msgid "Ensure `transport` is set to \"http\" or \"websocket\""
-msgstr ""
+msgstr "确保 `transport` 设置为 \"http\" 或 \"websocket\""
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:384
 #: 5ce3eb48dee24c708db76c3b93228814
 msgid "Check server supported protocols"
-msgstr ""
+msgstr "检查服务器支持的协议"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:386
 #: 3666c57252da4412a57bb4da4e711c94
 msgid "3. Tool Not Found"
-msgstr ""
+msgstr "3. 未找到工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:392
 #: ce580e48cc2241e596a0f9699b6b21be
 msgid "Use `list_tools` operation to view available tools"
-msgstr ""
+msgstr "使用 `list_tools` 操作查看可用工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:393
 #: 698ea2a7476f4bb391874b7fbf939b39
 msgid "Check tool name spelling"
-msgstr ""
+msgstr "检查工具名称拼写"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:394
 #: 0e7d722aa7a04765973d8fa235884ddc
 msgid "Confirm server is running"
-msgstr ""
+msgstr "确认服务器正在运行"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:396
 #: 679ebd76e84f4367842c30220a72f2c9
 msgid "4. Parameter Validation Failed"
-msgstr ""
+msgstr "4. 参数验证失败"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:402
 #: cae8e792283e446183a8610cc0519af5
 msgid "Check tool parameter schema"
-msgstr ""
+msgstr "检查工具参数架构"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:403
 #: 73041a10e56c45eba335478dbae8c45a
 msgid "Ensure all required parameters are provided"
-msgstr ""
+msgstr "确保提供所有必需的参数"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:404
 #: 97b94575bac44a0a957f502f884a0591
 msgid "Verify parameter data types"
-msgstr ""
+msgstr "验证参数数据类型"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:406
 #: bff2286969744ef59d46d31221b9841f
 msgid "Debugging Tips"
-msgstr ""
+msgstr "调试技巧"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:408
 #: 0c631684110040608c45e407776f9989
 msgid "Enable Verbose Logging"
-msgstr ""
+msgstr "启用详细日志记录"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:416
 #: 4ea302bc72e5483f81feb7a1153080d2
 msgid "Test Connection"
-msgstr ""
+msgstr "测试连接"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:429
 #: 38836c3829844bcc861a604e50385ab7
 msgid "Validate Tool Configuration"
-msgstr ""
+msgstr "验证工具配置"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:440
 #: 72d502b9ca60486fb4bc6c4647aa7114
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:442
 #: 76493dace7884a91b47d0020301355be
 msgid "1. Security Considerations"
-msgstr ""
+msgstr "1. 安全注意事项"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:443
 #: 4a4aed0526c94bb5bb8c1ab2083b4c26
 msgid "Use HTTPS connections for production MCP servers"
-msgstr ""
+msgstr "在生产环境的 MCP 服务器上使用 HTTPS 连接"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:444
 #: 163084812db148d69d441de1bdcf7e9f
 msgid "Configure appropriate timeout values to avoid long waits"
-msgstr ""
+msgstr "配置适当的超时值以避免长时间等待"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:445
 #: 164f5283e8374d41a75c41fbdb572fef
 msgid "Validate all input parameters"
-msgstr ""
+msgstr "验证所有输入参数"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:447
 #: e1f99ff7e83747898002b90a3b70cffd
 msgid "2. Performance Optimization"
-msgstr ""
+msgstr "2. 性能优化"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:448
 #: a0147ba218ff4e8d845f0084dc42d064
 msgid "Enable caching for frequently used tools"
-msgstr ""
+msgstr "启用常用工具的缓存功能"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:449
 #: 4e23c110383f44f9a4c09bbd7279ea97
 msgid "Set reasonable `timeout` values"
-msgstr ""
+msgstr "设置合理的 `timeout` 值"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:450
 #: 158a37b6c7064e0c9bcbb13b637b20bb
 msgid "Use `selected_tools` to load only needed tools"
-msgstr ""
+msgstr "使用 `selected_tools` 仅加载所需工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:452
 #: d0ae8028dbe84b4aad9c4c480eac5cc5
 msgid "3. Error Handling"
-msgstr ""
+msgstr "3. 错误处理"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:453
 #: 78971de98b2f43959135739048403b87
 msgid "Always check for `error` field in return results"
-msgstr ""
+msgstr "始终检查返回结果中的 `error` 字段"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:454
 #: f84bd64c006049329f5ff520c215137c
 msgid "Implement retry mechanisms for temporary network issues"
-msgstr ""
+msgstr "针对临时网络问题实现重试机制"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:455
 #: c5f9aff0dae045fbaef358c9ac260981
 msgid "Log detailed error information for debugging"
-msgstr ""
+msgstr "记录详细的错误信息以便调试"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:457
 #: 1b727b7b7d6f40e79a676e2464032b6e
 msgid "4. Configuration Management"
-msgstr ""
+msgstr "4. 配置管理"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:458
 #: 402e4f0404754b6c8334ff97b3fffb56
 msgid "Use environment variables for sensitive configurations"
-msgstr ""
+msgstr "使用环境变量管理敏感配置"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:459
 #: 79609e63b704441880a5b75a5aff6e2f
 msgid "Organize configuration files by functional modules"
-msgstr ""
+msgstr "按功能模块组织配置文件"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:460
 #: 972ae3241bac4c87b617dca964651224
 msgid "Regularly update and validate configurations"
-msgstr ""
+msgstr "定期更新并验证配置"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:462
 #: e21744127f6d45d7902c8d89d70de6fb
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:464
 #: a9c14207d1f24210a5c01d32ddb382e0
 msgid "Through this tutorial, you have learned:"
-msgstr ""
+msgstr "通过本教程，您已学习到："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:466
 #: 29c588c978e946fa8d9fb2eada05b6cd
 msgid ""
 "✅ Understanding the purposes and characteristics of three MCP tool types"
-msgstr ""
+msgstr "✅ 了解三种MCP工具类型的用途与特性"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:467
 #: 8bd27df53b7b45dcb26b553ef6861932
 msgid "✅ Configuring and using MCPClientTool for general MCP operations"
-msgstr ""
+msgstr "✅ 配置及使用 MCPClientTool 进行常规 MCP 操作"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:468
 #: 18f1879405be4b6dbcf38b40fb6a9aeb
 msgid "✅ Using MCPAutoLoaderTool to automatically discover and load tools"
-msgstr ""
+msgstr "✅ 使用 MCPAutoLoaderTool 自动发现并加载工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:469
 #: 1ab152facd3b46468d360b1380593ad8
 msgid "✅ Creating MCPProxyTool for direct tool proxying"
-msgstr ""
+msgstr "✅ 创建 MCPProxyTool 以实现工具的直接代理"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:470
 #: 6787c75ee7b7423dabd0166451f66a0f
 msgid "✅ Handling common issues and troubleshooting"
-msgstr ""
+msgstr "✅ 常见问题处理与故障排除"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:471
 #: 755c20526a4744a082c21e048ec72cc3
 msgid "✅ Applying best practices for security and performance"
-msgstr ""
+msgstr "✅ 采用最佳安全性和性能实践"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:473
 #: 19ebffcfcc7c4863b2ccfd32bb9728de
 msgid ""
 "Now you can integrate tools from any MCP server into ToolUniverse, expanding"
 " your tool ecosystem!"
-msgstr ""
+msgstr "现在，您可以将任何 MCP 服务器的工具集成到 ToolUniverse 中，扩展您的工具生态系统！"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:475
 #: 66047d1558e54337a61920a5c2445202

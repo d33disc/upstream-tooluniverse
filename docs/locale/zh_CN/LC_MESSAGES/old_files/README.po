@@ -267,7 +267,7 @@ msgstr "`conf_shibuya.py` - Shibuya 主题的独立配置"
 
 #: ../../old_files/README.md:27 40b644764c814393a4e6e66ca49d7575
 msgid "旧构建脚本 / Old Build Scripts"
-msgstr ""
+msgstr "旧构建脚本"
 
 #: ../../old_files/README.md:28 0dfc2fcaf1054756bbfb49229f657633
 msgid "`build_lang.sh` - 语言构建脚本"
@@ -287,7 +287,7 @@ msgstr "`quick_doc_build_cn.sh` - 中文文档快速生成脚本"
 
 #: ../../old_files/README.md:32 fa962a75db904c0da514441479ba81c9
 msgid "`show_multilang_features.sh` - 多语言功能展示脚本"
-msgstr ""
+msgstr "`show_multilang_features.sh` - 多语言功能演示脚本"
 
 #: ../../old_files/README.md:33 98a768a05e5d4589ae3969d4c0786bf6
 msgid "`test_theme.sh` - 主题测试脚本"
@@ -323,41 +323,42 @@ msgstr "**Markdown 文档**：8 个"
 
 #: ../../old_files/README.md:45 8548562783c64522a2992edef4c42aa3
 msgid "**Python 配置文件**: 6 个"
-msgstr ""
+msgstr "**Python 配置文件**：6 个"
 
 #: ../../old_files/README.md:46 5027b70f1edd48efaf1c99839915fcf5
 msgid "**Shell 脚本**: 6 个"
-msgstr ""
+msgstr "**Shell 脚本**：6 个"
 
 #: ../../old_files/README.md:47 2da369a4844346e3b4492b088eaef243
 msgid "**总计**: 21 个文件"
-msgstr ""
+msgstr "**总计**：21 个文件"
 
 #: ../../old_files/README.md:49 764a0d9d9f844d8c97fe155d4c331637
 msgid "当前使用 / Currently Using"
-msgstr ""
+msgstr "当前使用 / 当前使用"
 
 #: ../../old_files/README.md:51 f2eef41a6bfe4a9184ff0fb18f2f6c48
 msgid ""
 "项目现在使用 **Shibuya 主题** 配置在 `conf.py` 中,通过 `quick_doc_build.sh` 进行双语文档构建。"
 msgstr ""
+"项目当前使用 **Shibuya 主题**，在 `conf.py` 中进行配置，并通过 `quick_doc_build.sh` 脚本构建双语文档。"
 
 #: ../../old_files/README.md:53 fd354a9502e04caf80cab4056a693f32
 msgid ""
 "The project now uses **Shibuya theme** configured in `conf.py`, with "
 "bilingual documentation built via `quick_doc_build.sh`."
-msgstr ""
+msgstr "该项目现使用在 `conf.py` 中配置的**Shibuya 主题**，通过 `quick_doc_build.sh` 构建双语文档。"
 
 #: ../../old_files/README.md:55 54014e893f8c4da49c39866ee6104766
 msgid "注意 / Note"
-msgstr ""
+msgstr "注意 / 注意事项"
 
 #: ../../old_files/README.md:57 79bf916bbe9c4628bf59176190c621ee
 msgid "这些文件保留用于参考,但不再被主文档构建系统使用。"
-msgstr ""
+msgstr "这些文件保留供参考，但不再被主文档构建系统使用。"
 
 #: ../../old_files/README.md:59 bae5886b46334001bd22ef199e35757d
 msgid ""
 "These files are kept for reference but are no longer used by the main "
 "documentation build system."
-msgstr ""
+msgstr "这些文件被保留以供参考，但不再被主文档构建系统使用。"

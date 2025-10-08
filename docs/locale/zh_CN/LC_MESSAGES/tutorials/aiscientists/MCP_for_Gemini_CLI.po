@@ -414,28 +414,28 @@ msgstr "防止对外部服务的非预期 API 调用。"
 msgid ""
 "You can selectively trust tools by choosing \"Always allow this tool\" "
 "during confirmation prompts."
-msgstr ""
+msgstr "您可以在确认提示时选择“始终允许此工具”，以有选择地信任工具。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:241
 #: 0f3f8c006ddb4a8ba2f377f3134933cd
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:243
 #: 81424d0d51834d8a9d98785c570def7e
 msgid "Common Issues and Solutions"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:245
 #: c5760595b43a4b5c9a71a794be4924b8
 msgid "Server Won't Connect"
-msgstr ""
+msgstr "服务器无法连接"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:246
 #: e64aeb7199764497b3d23c4f180dac22
 msgid ""
 "**Symptoms**: ToolUniverse server shows `DISCONNECTED` status in `/mcp`."
-msgstr ""
+msgstr "**症状**：ToolUniverse 服务器在 `/mcp` 中显示为 `DISCONNECTED` 状态。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:248
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:258
@@ -444,7 +444,7 @@ msgstr ""
 #: 02ef52aa120544ff8d0f310df674e17e 3439fc2a0c9449e0a2b4d7ffb419bdd7
 #: 35e600d2261b4669b693f70938012c12 60d41d6dc0e747eea8b558d992c3bb4f
 msgid "**Solutions**:"
-msgstr ""
+msgstr "**解决方案**："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:249
 #: ace6b82fd8c14df6aff62250b8305673
@@ -453,185 +453,187 @@ msgid ""
 "command is runnable. Test it directly in your terminal: `cd "
 "/path/to/your/ToolUniverse && uv run tooluniverse-mcp-claude --help`"
 msgstr ""
+"确认 ToolUniverse 已正确安装，且 `tooluniverse-mcp-claude` 命令可正常运行。可在终端中直接测试：`cd "
+"/path/to/your/ToolUniverse && uv run tooluniverse-mcp-claude --help`"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:251
 #: 29d643ac022c48fd999e8b3daa4d3c6b
 msgid ""
 "Check that the `cwd` path in your configuration is correct and absolute."
-msgstr ""
+msgstr "请检查配置中的 `cwd` 路径是否正确且为绝对路径。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:252
 #: 8da7c224c3d34846a624212cbbdb237b
 msgid "Ensure `uv` is installed and accessible in your system's PATH."
-msgstr ""
+msgstr "确保已安装 `uv` 并且其路径已添加到系统的 PATH 环境变量中。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:253
 #: a8ae43c852434f4eabfff757c9118531
 msgid "Review any error messages in the CLI output, possibly with debug mode."
-msgstr ""
+msgstr "检查命令行输出中的任何错误信息，必要时启用调试模式。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:255
 #: 89e7e91443424d54b2de032f99587939
 msgid "No Tools Discovered"
-msgstr ""
+msgstr "未检测到工具"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:256
 #: fbcc43d7b8754dd1bae03ad35409ff82
 msgid "**Symptoms**: Server connects but no tools are available."
-msgstr ""
+msgstr "**症状**：服务器已连接，但无可用工具。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:259
 #: 6c90377c2f7a4a0c841b293bd36c36b0
 msgid "Verify the ToolUniverse MCP server is working by running it manually."
-msgstr ""
+msgstr "通过手动运行验证 ToolUniverse MCP 服务器是否正常工作。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:260
 #: b95f69ec55da4ea581f51b82ce5dad2d
 msgid ""
 "Check if your `includeTools` or `excludeTools` filter is too restrictive or "
 "has typos."
-msgstr ""
+msgstr "请检查您的 `includeTools` 或 `excludeTools` 过滤器是否过于严格或存在拼写错误。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:261
 #: f949207f4c1c4885aee1a8f0793f7a92
 msgid "Ensure all ToolUniverse dependencies are installed (`uv sync`)."
-msgstr ""
+msgstr "确保已安装所有 ToolUniverse 依赖项（`uv sync`）。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:262
 #: 7c4feb39cee54512b4bd1c5061d8c871
 msgid "Review your ToolUniverse installation and configuration."
-msgstr ""
+msgstr "检查您的 ToolUniverse 安装与配置。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:264
 #: 5a6a80650b2f4e9bb74a9dcb6890661a
 msgid "Tools Not Executing"
-msgstr ""
+msgstr "工具未执行"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:265
 #: f4b148c8e7dc484bb3cf945379735f8b
 msgid "**Symptoms**: Tools are discovered but fail during execution."
-msgstr ""
+msgstr "**症状**：工具被发现但执行失败。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:268
 #: e929eaa426cf4b51be8ad272c6b4fede
 msgid ""
 "Check your `env` configuration for API keys. Ensure they are correct and "
 "have the necessary permissions."
-msgstr ""
+msgstr "检查您的 `env` 配置中的 API 密钥。确保其正确且具有必要的权限。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:269
 #: d1009720c724483a87dfb0087b51004e
 msgid "Verify network connectivity to the required scientific APIs."
-msgstr ""
+msgstr "验证与所需科学API的网络连接。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:270
 #: e8ad8972668f4c06b0fc7215d55aa97e
 msgid ""
 "Increase the `timeout` value in your configuration for slow API responses."
-msgstr ""
+msgstr "在配置中增加 `timeout` 值以应对较慢的 API 响应。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:271
 #: 605ed537431e4e5badbf3ef66d591fef
 msgid "Review parameter validation errors in the CLI output."
-msgstr ""
+msgstr "在命令行输出中查看参数验证错误。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:273
 #: 54ba6f1a86d04275a02704778f144530
 msgid "Performance Issues"
-msgstr ""
+msgstr "性能问题"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:274
 #: 20ddd137835f49ce8e41ad666e39e7cc
 msgid "**Symptoms**: Tools are slow or time out."
-msgstr ""
+msgstr "**症状**：工具运行缓慢或超时。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:277
 #: 6c376067d56147ddb69b2f3f396ddd54
 msgid "Increase the `timeout` value in the configuration."
-msgstr ""
+msgstr "在配置中增加 `timeout` 值。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:278
 #: c12ed8eba6d84af7a2ab3190410c3a44
 msgid ""
 "Use `includeTools` to load only the necessary tools, reducing startup "
 "overhead."
-msgstr ""
+msgstr "使用 `includeTools` 仅加载必要的工具，以减少启动开销。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:279
 #: 1cc719cc454f48c29978ea0e8273f322
 msgid "Check network connectivity and latency to external APIs."
-msgstr ""
+msgstr "检查与外部 API 的网络连接性及延迟。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:280
 #: 6855f30957cf44d29a28904dc7e9980d
 msgid ""
 "Be mindful of potential rate limits for the external services you are "
 "calling."
-msgstr ""
+msgstr "请注意您调用的外部服务可能存在的速率限制。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:282
 #: e1d0debcd8ee4387932276fd4a32e061
 msgid "Debug Mode"
-msgstr ""
+msgstr "调试模式"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:284
 #: 3afb5137ba2544cfa04f125d5fe01761
 msgid "Run the Gemini CLI with the `--debug` flag for detailed information:"
-msgstr ""
+msgstr "使用 `--debug` 标志运行 Gemini CLI 以获取详细信息："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:290
 #: c8ed413d90814a3ab033d8f05968210d
 msgid "This provides verbose output about:"
-msgstr ""
+msgstr "这将提供关于以下内容的详细输出："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:291
 #: e1894c2e7f86470aa77666ce09cdae1c
 msgid "MCP server connection attempts"
-msgstr ""
+msgstr "MCP 服务器连接尝试"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:292
 #: ef8521218b47471da41206f1f747681e
 msgid "The tool discovery process"
-msgstr ""
+msgstr "工具发现过程"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:293
 #: ad93ec30aa2f4d68a35ce1fb08169de4
 msgid "Tool execution details and errors"
-msgstr ""
+msgstr "工具执行详情及错误"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:295
 #: c4acbcbfa32b4fd2bbfc341fa805a1e3
 msgid "Advanced Configuration"
-msgstr ""
+msgstr "高级配置"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:297
 #: d4c99fbe4ed6407a871e1788bc1e13e7
 msgid "Multiple ToolUniverse Instances"
-msgstr ""
+msgstr "多个 ToolUniverse 实例"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:299
 #: 244c2654084845bcb98c6b71d58d186c
 msgid ""
 "You can configure multiple ToolUniverse instances, for example, to separate "
 "concerns or use different toolsets."
-msgstr ""
+msgstr "您可以配置多个 ToolUniverse 实例，例如用于分离职责或使用不同的工具集。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:332
 #: 6b63c989e7b84177a4163713175e4fcc
 msgid "Docker-based Setup"
-msgstr ""
+msgstr "基于 Docker 的设置"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:334
 #: bcb170c93ebe4ea797ee7c22201d053f
 msgid ""
 "For containerized environments, you can configure the server to run inside "
 "Docker."
-msgstr ""
+msgstr "对于容器化环境，您可以将服务器配置为在 Docker 内运行。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:359
 #: 20b7a0081c1f42ae88d2fd87ec662d99
 msgid "Security Considerations"
-msgstr ""
+msgstr "安全性注意事项"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:361
 #: 813d8be98d734a03bf94b8fbfbda5dcf
@@ -639,119 +641,119 @@ msgid ""
 "**API Keys**: Store sensitive API keys as environment variables and pass "
 "them to the server using the `env` block. Avoid hardcoding them in "
 "configuration files."
-msgstr ""
+msgstr "**API 密钥**：将敏感的 API 密钥存储为环境变量，并通过 `env` 块传递给服务器。避免将其硬编码在配置文件中。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:362
 #: e3c074617c4446c2806d08a148a9e9ab
 msgid ""
 "**Trust Settings**: Keep `trust: false` for production use to maintain "
 "control over tool executions."
-msgstr ""
+msgstr "**信任设置**：生产环境中请保持 `trust: false`，以确保对工具执行的控制。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:363
 #: 08d5e31bc5d64c06895de9176e55b056
 msgid ""
 "**Network Access**: Ensure your firewall allows outbound connections to the "
 "necessary scientific APIs."
-msgstr ""
+msgstr "**网络访问**：确保您的防火墙允许对必要的科学API的出站连接。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:364
 #: 36db1ae25e6f45b9a5daabe59852beac
 msgid ""
 "**Rate Limits**: Be aware of and respect the API rate limits for all "
 "external services."
-msgstr ""
+msgstr "**速率限制**：请注意并遵守所有外部服务的API速率限制。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:366
 #: e10da58a7a15408a9f866ee2bfec08ac
 msgid "Performance Tips"
-msgstr ""
+msgstr "性能优化建议"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:368
 #: 9819c7d6d15f4832ab0dd280d9675bf0
 msgid ""
 "**Tool Selection**: Use `includeTools` to load only the tools you need for a"
 " specific task."
-msgstr ""
+msgstr "**工具选择**：使用 `includeTools` 仅加载特定任务所需的工具。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:369
 #: d88ef0fc660c482f9beb655903bed0f8
 msgid ""
 "**Timeout Configuration**: Set appropriate timeouts based on expected API "
 "response times."
-msgstr ""
+msgstr "**超时配置**：根据预期的 API 响应时间设置适当的超时时间。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:370
 #: 3b376a7de73f43f48f19ca9cbce3df29
 msgid ""
 "**Connection Persistence**: The CLI maintains persistent connections to "
 "reduce startup overhead."
-msgstr ""
+msgstr "**连接持久性**：CLI 保持持久连接以减少启动开销。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:371
 #: 1508757af8d948a3b886be9ece974791
 msgid ""
 "**Caching**: Some ToolUniverse tools may implement caching to improve "
 "performance on repeated queries."
-msgstr ""
+msgstr "**缓存**：部分 ToolUniverse 工具可能会实现缓存机制，以提升重复查询的性能表现。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:373
 #: b66ad18276e844ad817e53c76a480214
 msgid "Optimization for Non-Coding Users"
-msgstr ""
+msgstr "针对非编码用户的优化"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:375
 #: 36b1855e80504a9d83b83ae993e7f217
 msgid ""
 "If you're primarily using ToolUniverse for scientific research without "
 "coding needs, consider these optimizations:"
-msgstr ""
+msgstr "如果您主要将 ToolUniverse 用于无需编码的科学研究，请考虑以下优化建议："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:377
 #: 9cee7bb30368403f9917ffd48076d6cc
 msgid "Recommended Configuration for Research-Only Users"
-msgstr ""
+msgstr "仅供研究用户的推荐配置"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:403
 #: bcf1eeebe7884d33a8528dd18d85b0fb
 msgid "Benefits of This Configuration"
-msgstr ""
+msgstr "此配置的优势"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:405
 #: 70483ec76d77412ba7ca6d832640cb07
 msgid "**Context Window Optimization**:"
-msgstr ""
+msgstr "**上下文窗口优化**："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:406
 #: 4e3be16f66dd4cc0852ac414e9e646ae
 msgid "`--exclude-tool-types PackageTool` removes package management tools"
-msgstr ""
+msgstr "`--exclude-tool-types PackageTool` 排除包管理工具"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:407
 #: 760bb445f8ff43b6927e9e3e92dff69e
 msgid ""
 "Saves significant context window space for more relevant scientific tools"
-msgstr ""
+msgstr "为更多相关科学工具节省大量上下文窗口空间"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:408
 #: f919817d03d7477ebf9c349ca82389c1
 msgid "Reduces tool discovery overhead"
-msgstr ""
+msgstr "减少工具发现开销"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:410
 #: f6bb720cef914dd08e595ff3438ba82c
 msgid "**Enhanced Readability**:"
-msgstr ""
+msgstr "**增强可读性**："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:411
 #: 9c98e4daaa514f0d957098677ddf8996
 msgid "`--hook-type SummarizationHook` provides cleaner, more readable output"
-msgstr ""
+msgstr "`--hook-type SummarizationHook` 提供更简洁、更易读的输出结果"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:412
 #: c021af33010e423ea21d6e7f25eadfa2
 msgid "Automatically summarizes complex tool results"
-msgstr ""
+msgstr "自动汇总复杂工具结果"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:413
 #: 3248f8e30eb643208d44a38c3f76f023

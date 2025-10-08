@@ -450,229 +450,229 @@ msgstr "**描述**：获取关于 PyDESeq2 —— RNA 测序差异表达分析�
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyDESeq2"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 PyDESeq2 的信息类型"
 
 #: ../../tools/genomics_tools.rst:348 16e2ac39f2b04799babb3fbff4123380
 msgid "**get_pyensembl_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyensembl_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:350 6d43b32735624ebb941fc6cc84d3483f
 msgid ""
 "Get information about the pyensembl package. Python interface to Ensembl "
 "reference genome metadata"
-msgstr ""
+msgstr "获取有关 pyensembl 包的信息。Python 接口，用于访问 Ensembl 参考基因组元数据。"
 
 #: ../../tools/genomics_tools.rst b6eb67077dbf44ddab086716683ba2c3
 msgid "get_pyensembl_info tool specification"
-msgstr ""
+msgstr "get_pyensembl_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:356 f2eed62a840f488aa252bf3a7aaf4d19
 msgid "**Name**: ``get_pyensembl_info``"
-msgstr ""
+msgstr "**名称**：``get_pyensembl_info``"
 
 #: ../../tools/genomics_tools.rst:358 1c9a22afd24440be9da755271e2d4502
 msgid ""
 "**Description**: Get information about the pyensembl package. Python "
 "interface to Ensembl reference genome metadata"
-msgstr ""
+msgstr "**描述**：获取关于 pyensembl 包的信息。Python 接口，用于访问 Ensembl 参考基因组元数据。"
 
 #: ../../tools/genomics_tools.rst:377 e3f3f829b9d94c36af5244b48f2933fb
 msgid "**get_pyfaidx_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyfaidx_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:379 32bd3debea8d4439900b9b02a0f940a6
 msgid ""
 "Get comprehensive information about pyfaidx – efficient FASTA file indexing "
 "and random access"
-msgstr ""
+msgstr "获取关于 pyfaidx 的全面信息——高效的 FASTA 文件索引与随机访问"
 
 #: ../../tools/genomics_tools.rst 8792bb1a325b4034ad63a02a125f8451
 msgid "get_pyfaidx_info tool specification"
-msgstr ""
+msgstr "get_pyfaidx_info 工具规范"
 
 #: ../../tools/genomics_tools.rst:385 f49a4abc2b314f12af7baa6b032bd401
 msgid "**Name**: ``get_pyfaidx_info``"
-msgstr ""
+msgstr "**名称**：``get_pyfaidx_info``"
 
 #: ../../tools/genomics_tools.rst:387 54008a37dda245769b0e6b484e4647df
 msgid ""
 "**Description**: Get comprehensive information about pyfaidx – efficient "
 "FASTA file indexing and random access"
-msgstr ""
+msgstr "**描述**：获取关于 pyfaidx 的全面信息——高效的 FASTA 文件索引和随机访问工具"
 
 #: ../../tools/genomics_tools.rst:407 511f419afb164ae0adc0630543b28f33
 msgid "**get_pyfasta_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyfasta_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:409 4699789ef5624e79aa8bf2c521ce5a22
 msgid ""
 "Get information about the pyfasta package. Python library for efficient "
 "random access to fasta su..."
-msgstr ""
+msgstr "获取有关 pyfasta 包的信息。该 Python 库用于高效随机访问 fasta 序列..."
 
 #: ../../tools/genomics_tools.rst c98a5280da594f0d8745bf48e68ebadd
 msgid "get_pyfasta_info tool specification"
-msgstr ""
+msgstr "get_pyfasta_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:415 f09c6eba75a7407c9e47feaa5e31b79c
 msgid "**Name**: ``get_pyfasta_info``"
-msgstr ""
+msgstr "**名称**：``get_pyfasta_info``"
 
 #: ../../tools/genomics_tools.rst:417 bcec8b5864a94bc98d897196db772183
 msgid ""
 "**Description**: Get information about the pyfasta package. Python library "
 "for efficient random access to fasta subsequences"
-msgstr ""
+msgstr "**描述**：获取有关 pyfasta 包的信息。该 Python 库用于高效随机访问 fasta 子序列。"
 
 #: ../../tools/genomics_tools.rst:436 7fbb8f389ae1455e878dacf7f71d3c01
 msgid "**get_pyliftover_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyliftover_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:438 f266e3c018584c1ea619121646e05d09
 msgid ""
 "Get comprehensive information about PyLiftover – genomic coordinate "
 "conversion between assemblies"
-msgstr ""
+msgstr "获取关于 PyLiftover 的全面信息——基因组坐标在不同组装版本之间的转换"
 
 #: ../../tools/genomics_tools.rst db0e58b16aa34b539084bab25b04a290
 msgid "get_pyliftover_info tool specification"
-msgstr ""
+msgstr "get_pyliftover_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:444 eaa6354d4e8242999b30910ffb9cceca
 msgid "**Name**: ``get_pyliftover_info``"
-msgstr ""
+msgstr "**名称**：``get_pyliftover_info``"
 
 #: ../../tools/genomics_tools.rst:446 712406e686974ed4905b58d0abdd8003
 msgid ""
 "**Description**: Get comprehensive information about PyLiftover – genomic "
 "coordinate conversion between assemblies"
-msgstr ""
+msgstr "**描述**：获取关于 PyLiftover 的全面信息——基因组坐标在不同组装版本之间的转换"
 
 #: ../../tools/genomics_tools.rst:466 b87bcc5dba9e4f2993ee17d58f1e6a29
 msgid "**get_pyranges_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyranges_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:468 d12cc7cf9c2049f28b6aec901edba481
 msgid ""
 "Get comprehensive information about PyRanges – efficient genomic interval "
 "operations"
-msgstr ""
+msgstr "获取关于 PyRanges 的全面信息 —— 高效的基因组区间操作工具"
 
 #: ../../tools/genomics_tools.rst f8efdf43a831430ea254e5362f5ab161
 msgid "get_pyranges_info tool specification"
-msgstr ""
+msgstr "get_pyranges_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:474 135bc120220e40d69f80790b45741d79
 msgid "**Name**: ``get_pyranges_info``"
-msgstr ""
+msgstr "**名称**：``get_pyranges_info``"
 
 #: ../../tools/genomics_tools.rst:476 2da1e2cbefdd454bb8098a70f2e823b5
 msgid ""
 "**Description**: Get comprehensive information about PyRanges – efficient "
 "genomic interval operations"
-msgstr ""
+msgstr "**描述**：获取关于 PyRanges 的全面信息——高效的基因组区间操作工具"
 
 #: ../../tools/genomics_tools.rst:496 c934173905f74babb4c8112964415c10
 msgid "**get_pysam_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pysam_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:498 7a5fb60a1060423a95266e4e82ef2983
 msgid ""
 "Get comprehensive information about pysam – interface to SAM/BAM/CRAM files"
-msgstr ""
+msgstr "获取有关 pysam 的全面信息——SAM/BAM/CRAM 文件接口"
 
 #: ../../tools/genomics_tools.rst 8148dcc027494f0ba92ef7187f9366b4
 msgid "get_pysam_info tool specification"
-msgstr ""
+msgstr "get_pysam_info 工具规范"
 
 #: ../../tools/genomics_tools.rst:504 f67ebe7aaaf648ffba414d263b688128
 msgid "**Name**: ``get_pysam_info``"
-msgstr ""
+msgstr "**名称**：``get_pysam_info``"
 
 #: ../../tools/genomics_tools.rst:506 c51cc6e3e3ee40b2be709aed9edbc413
 msgid ""
 "**Description**: Get comprehensive information about pysam – interface to "
 "SAM/BAM/CRAM files"
-msgstr ""
+msgstr "**描述**：获取关于 pysam 的全面信息——用于操作 SAM/BAM/CRAM 文件的接口"
 
 #: ../../tools/genomics_tools.rst:526 00f6e52d21f3499ca0c833adca71ad15
 msgid "**get_pyvcf_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyvcf_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:528 7373484950bb49e3a7e16c1c6f6cfb57
 msgid ""
 "Get information about the pyvcf package. Python library for parsing and "
 "manipulating VCF files"
-msgstr ""
+msgstr "获取有关 pyvcf 包的信息。用于解析和操作 VCF 文件的 Python 库。"
 
 #: ../../tools/genomics_tools.rst 52404c05b263429faeb095b87be4c31c
 msgid "get_pyvcf_info tool specification"
-msgstr ""
+msgstr "get_pyvcf_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:534 d0b441cdd03242a59ee0f0033a43bd58
 msgid "**Name**: ``get_pyvcf_info``"
-msgstr ""
+msgstr "**名称**：``get_pyvcf_info``"
 
 #: ../../tools/genomics_tools.rst:536 55e1dcef39dd4b1dbfbadca14bbaf32d
 msgid ""
 "**Description**: Get information about the pyvcf package. Python library for"
 " parsing and manipulating VCF files"
-msgstr ""
+msgstr "**描述**：获取有关 pyvcf 包的信息。用于解析和操作 VCF 文件的 Python 库。"
 
 #: ../../tools/genomics_tools.rst:555 266769599b8d4ecc9164b4085ddfa135
 msgid "**get_reportlab_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_reportlab_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:557 72f7dc5960394038a14db23b8eef3c2c
 msgid "Get comprehensive information about ReportLab – PDF generation library"
-msgstr ""
+msgstr "获取关于 ReportLab —— PDF 生成库的全面信息"
 
 #: ../../tools/genomics_tools.rst fa8dcde68a3f4455a9e47493d5a12ab6
 msgid "get_reportlab_info tool specification"
-msgstr ""
+msgstr "get_reportlab_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:563 b3d149ca037144e78dbb6daf968c72f3
 msgid "**Name**: ``get_reportlab_info``"
-msgstr ""
+msgstr "**名称**：``get_reportlab_info``"
 
 #: ../../tools/genomics_tools.rst:565 a4e59f46617641f086d12e3d75defb71
 msgid ""
 "**Description**: Get comprehensive information about ReportLab – PDF "
 "generation library"
-msgstr ""
+msgstr "**描述**：获取关于 ReportLab —— PDF 生成库的全面信息"
 
 #: ../../tools/genomics_tools.rst:585 300b1d7e255140089817d26c8cdba793
 msgid "**get_viennarna_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_viennarna_info**（类型：PackageTool）"
 
 #: ../../tools/genomics_tools.rst:587 c121caf82cd3433a8044612edd7aa78f
 msgid ""
 "Get comprehensive information about ViennaRNA – RNA structure prediction and"
 " analysis"
-msgstr ""
+msgstr "获取关于 ViennaRNA —— RNA 结构预测与分析的全面信息"
 
 #: ../../tools/genomics_tools.rst 591b1683de1147d98753c5e8829b01a1
 msgid "get_viennarna_info tool specification"
-msgstr ""
+msgstr "get_viennarna_info 工具规格说明"
 
 #: ../../tools/genomics_tools.rst:593 ad24d626aa7e4591b6dbb9ddc5eeb88c
 msgid "**Name**: ``get_viennarna_info``"
-msgstr ""
+msgstr "**名称**：``get_viennarna_info``"
 
 #: ../../tools/genomics_tools.rst:595 2fad290f86ec4dfebf28b1b9df72467c
 msgid ""
 "**Description**: Get comprehensive information about ViennaRNA – RNA "
 "structure prediction and analysis"
-msgstr ""
+msgstr "**描述**：获取关于 ViennaRNA——RNA 结构预测与分析的全面信息"
 
 #: ../../tools/genomics_tools.rst:615 1ff135d55db2405f91d8ebcd09440eb3
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/genomics_tools.rst:617 ed47eb98876f4d7e826c554474519199
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/genomics_tools.rst:618 2ce98cdbd5d04d429da8aaa0266e0559
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

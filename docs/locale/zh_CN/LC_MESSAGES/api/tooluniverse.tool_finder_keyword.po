@@ -331,18 +331,24 @@ msgid ""
 " - return_call_result (bool, optional): Whether to return both prompts and "
 "names. Defaults to False."
 msgstr ""
+"包含以下内容的字典：  \n"
+"- description（字符串）：搜索查询字符串（统一参数名称）  \n"
+"- categories（列表，可选）：用于筛选的类别列表  \n"
+"- limit（整数，可选）：返回结果的最大数量（默认值：10）  \n"
+"- picked_tool_names（列表，可选）：预先选择的工具名称列表，用于处理  \n"
+"- return_call_result（布尔值，可选）：是否返回提示和名称，默认为 False。"
 
 #: e767a2ccd10e45efbcb8a31dd7c9fee8 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._run_json_search:1
 msgid "Original JSON-based search implementation for backward compatibility."
-msgstr ""
+msgstr "基于原始 JSON 的搜索实现以保证向后兼容性。"
 
 #: e7b7ce6618dc4ed0b63fb8de2b9237da of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._run_json_search:3
 msgid "Search arguments"
-msgstr ""
+msgstr "搜索参数"
 
 #: fa18d847da904f9b95a1546fd01f73b8 of
 #: tooluniverse.tool_finder_keyword.ToolFinderKeyword._run_json_search:6
 msgid "JSON string containing search results with relevance scores"
-msgstr ""
+msgstr "包含相关性评分的搜索结果的 JSON 字符串"

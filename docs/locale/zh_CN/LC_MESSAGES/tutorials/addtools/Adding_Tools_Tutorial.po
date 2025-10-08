@@ -386,223 +386,231 @@ msgstr "示例 2：文件处理工具"
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:551
 #: 11091c9a883f4751ad5fddebd5e31dcc
 msgid "Example 3: API Integration Tool"
-msgstr ""
+msgstr "示例 3：API 集成工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:638
 #: e270052bdabb4df794d0e6520c0ca075
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:640
 #: 65d0b3fb8e7647f9bcc0ee401e421383
 msgid "1. File Naming"
-msgstr ""
+msgstr "1. 文件命名"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:641
 #: da625fafdeb342a8a25a3242b518ef83
 msgid "Name your tool files with `_tool.py` suffix"
-msgstr ""
+msgstr "将您的工具文件命名为以 `_tool.py` 结尾"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:642
 #: 80f9ea412855422b8c088b5ccdc7c151
 msgid "Use descriptive names: `weather_tool.py`, `database_tool.py`"
-msgstr ""
+msgstr "使用描述性名称：`weather_tool.py`、`database_tool.py`"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:644
 #: 0921f24bf49f4c9eb1fd602da1c1ca5c
 msgid "2. Class Design"
-msgstr ""
+msgstr "2. 类设计"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:664
 #: 90466635e99f495d8406e2f518614441
 msgid "3. Error Handling"
-msgstr ""
+msgstr "3. 错误处理"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:679
 #: efef807efea6444ea3fc340928ad2388
 msgid "4. Configuration Management"
-msgstr ""
+msgstr "4. 配置管理"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:700
 #: 95d5210838d3430b87a984137eac97d6
 msgid "5. Return Format Consistency"
-msgstr ""
+msgstr "5. 返回格式一致性"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:701
 #: 87dbbd7df52c40c8833f2978e111e570
 msgid "Always return dictionaries with consistent structure:"
-msgstr ""
+msgstr "始终返回结构一致的字典："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:718
 #: 1769f88c1e5a41438436414b8b2d12a0
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:720
 #: dfcde8a900c94cd6b115d5228ceae4ca
 msgid "Tool Not Found"
-msgstr ""
+msgstr "未找到工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:721
 #: cb610ed036d44032bb6b9219c4e4ad79
 msgid "**Problem**: Your tool isn't being discovered **Solutions**:"
 msgstr ""
+"**问题**：您的工具未被发现  \n"
+"**解决方案**："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:723
 #: 6b8405ce9cdf4d89b2612854ebac7add
 msgid "Ensure file ends with `_tool.py`"
-msgstr ""
+msgstr "确保文件以 `_tool.py` 结尾"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:724
 #: 05d1da0bfa5342c4a01d745bfd96ce8f
 msgid "Check file is in the correct directory"
-msgstr ""
+msgstr "检查文件是否位于正确的目录中"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:725
 #: 288b75cd06b743bdbdae2780c71aaa0f
 msgid "Verify the import doesn't fail:"
-msgstr ""
+msgstr "验证导入是否成功："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:730
 #: b2c4daf0b87242ea9f1172953737cc26
 msgid "Import Errors"
-msgstr ""
+msgstr "导入错误"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:731
 #: 934612c3c0bd4967ab3ccfce010b61fb
 msgid "**Problem**: Module import fails during auto-discovery **Solutions**:"
 msgstr ""
+"**问题**：模块导入在自动发现过程中失败  \n"
+"**解决方案**："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:733
 #: 466e87cdf5944d53a18874593e83e20e
 msgid "Check all dependencies are installed"
-msgstr ""
+msgstr "确认所有依赖项已安装"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:734
 #: b646c403dee34b4c8c4f9e000f34acec
 msgid "Ensure relative imports use proper syntax"
-msgstr ""
+msgstr "确保相对导入使用正确的语法"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:735
 #: d1d6a2b9dcbe424e9aa558fde8fbb604
 msgid "Test import manually:"
-msgstr ""
+msgstr "手动导入测试："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:742
 #: 9b21dadb7d604a789ca51ebd95b42dc3
 msgid "Configuration Issues"
-msgstr ""
+msgstr "配置问题"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:743
 #: bd714d18f9994a0e8324f2ed542a8021
 msgid "**Problem**: Tool config not loading properly **Solutions**:"
 msgstr ""
+"**问题**：工具配置未能正确加载  \n"
+"**解决方案**："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:745
 #: 0b9ab4abb65c4240ae4d3a419235b768
 msgid "Validate JSON syntax in config"
-msgstr ""
+msgstr "验证配置中的 JSON 语法"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:746
 #: de36fddcbdfb4cdaa580b5ad123e0e77
 msgid "Check required fields are present"
-msgstr ""
+msgstr "检查必填字段是否存在"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:747
 #: 4edf4f1c19a049349d5cbd878945cb91
 msgid "Test config separately:"
-msgstr ""
+msgstr "单独测试配置："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:754
 #: 508d525193b8462f834c9cc421df0ae8
 msgid "Runtime Errors"
-msgstr ""
+msgstr "运行时错误"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:755
 #: 8a994b0511a04422bb3f7603113cb73f
 msgid "**Problem**: Tool fails during execution **Solutions**:"
 msgstr ""
+"**问题**：工具执行过程中失败  \n"
+"**解决方案**："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:757
 #: b0746634156f49e792795c54af23a7e7
 msgid "Add comprehensive error handling"
-msgstr ""
+msgstr "添加全面的错误处理"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:758
 #: e7f7a1785ee94f658b2a912bce427687
 msgid "Validate all inputs in `run()` method"
-msgstr ""
+msgstr "在 `run()` 方法中验证所有输入"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:759
 #: 3c7af744ddd142c1930b43e38fa56f82
 msgid "Return error details:"
-msgstr ""
+msgstr "返回错误详情："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:769
 #: e8e577f9dedf4fda9f530befb2cc94b2
 msgid "Testing Your Tool"
-msgstr ""
+msgstr "测试您的工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:770
 #: c73a1ff9b6944107a65534ece8ecae0d
 msgid "Create a simple test script:"
-msgstr ""
+msgstr "创建一个简单的测试脚本："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:793
 #: c7ad67c0e793477d9f4b71b257019419
 msgid "Next Steps"
-msgstr ""
+msgstr "后续步骤"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:795
 #: d04b9fcd05644983b9edc41a98b36aba
 msgid ""
 "**Start Simple**: Begin with a basic tool using the quick start example"
-msgstr ""
+msgstr "**从简开始**：使用快速入门示例，从基础工具入手"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:796
 #: 36c9a4f315d2458398834fe24b134c4f
 msgid "**Add Complexity**: Gradually add more features and configuration"
-msgstr ""
+msgstr "**增加复杂度**：逐步添加更多功能和配置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:797
 #: 9021974f505e4a87ada98559ee9f2058
 msgid "**Test Thoroughly**: Create test cases for different scenarios"
-msgstr ""
+msgstr "**彻底测试**：为不同场景创建测试用例"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:798
 #: d78beecec9f54439ad5a3df427fa70be
 msgid "**Document**: Add clear descriptions and examples"
-msgstr ""
+msgstr "**文档**：添加清晰的描述和示例"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:799
 #: 8699ad544e2146a6b263dec7460090e6
 msgid "**Share**: Consider contributing useful tools back to the community"
-msgstr ""
+msgstr "**分享**：考虑将有用的工具贡献回社区"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:801
 #: 9ace0b4fb08b492894a38ec8f35df9c5
 msgid "Need Help?"
-msgstr ""
+msgstr "需要帮助？"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:803
 #: cec818aa0ef2498f834aacc4be80157a
 msgid "Check existing tools in the ToolUniverse codebase for examples"
-msgstr ""
+msgstr "请检查 ToolUniverse 代码库中的现有工具示例。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:804
 #: 05a73e2eeb0944ee9955072d718ca047
 msgid "Review the configuration schemas of similar tools"
-msgstr ""
+msgstr "审查类似工具的配置架构"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:805
 #: ffb277c3a7464282847e370a2c78799f
 msgid "Test incrementally - start with basic functionality"
-msgstr ""
+msgstr "逐步测试——从基本功能开始"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:806
 #: 164c28cc29b741efa657b94d29e8154d
 msgid "Use the troubleshooting Tutorial for common issues"
-msgstr ""
+msgstr "使用故障排除教程解决常见问题"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:808
 #: e432c07b0b284c6eb3ea49c0b6fe5671
@@ -610,4 +618,4 @@ msgid ""
 "The decorator-based system makes adding tools straightforward while "
 "maintaining all the power and flexibility of ToolUniverse. Happy tool "
 "building! 🛠️"
-msgstr ""
+msgstr "基于装饰器的系统使添加工具变得简便，同时保持了 ToolUniverse 的全部功能和灵活性。祝您工具开发愉快！🛠️"

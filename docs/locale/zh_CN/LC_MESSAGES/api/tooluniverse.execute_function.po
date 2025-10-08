@@ -364,42 +364,42 @@ msgstr "启用的钩子类型。可以是 'SummarizationHook'、'FileSaveHook'�
 #: d2e5bde7f2f843349e7510fa0a5cef3f of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:7
 msgid "Generated hook configuration"
-msgstr ""
+msgstr "生成的钩子配置"
 
 #: 06860cdf28974cc89d850c6630cf4225 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:1
 msgid ""
 "Loads tool definitions from JSON files into the instance's tool registry."
-msgstr ""
+msgstr "将工具定义从 JSON 文件加载到实例的工具注册表中。"
 
 #: ac4a8dc34c364c419de39d1ac1e64756 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:3
 msgid ""
 "If `tool_type` is None, loads all available tool categories from "
 "`self.tool_files`. Otherwise, loads only the specified tool categories."
-msgstr ""
+msgstr "如果 `tool_type` 为 None，则从 `self.tool_files` 加载所有可用的工具类别。否则，仅加载指定的工具类别。"
 
 #: 1d8760c6ae76490a81c1f8ce32202bdd of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:6
 msgid ""
 "After loading, deduplicates tools by their 'name' field and updates the "
 "internal tool list. Also refreshes the tool name and description mapping."
-msgstr ""
+msgstr "加载完成后，根据工具的“name”字段进行去重，并更新内部工具列表。同时刷新工具名称和描述映射。"
 
 #: 8fdea679ecbd4a38a32e1f3672e23b66 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:9
 msgid "List of tool category names to load. If None, loads all categories."
-msgstr ""
+msgstr "要加载的工具类别名称列表。若为 None，则加载所有类别。"
 
 #: 3d377399850f4f16804fd29ee6ec3c10 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:11
 msgid "List of specific tool names to exclude from loading."
-msgstr ""
+msgstr "要排除加载的特定工具名称列表。"
 
 #: 0c6a2e501b9c46c59ce8efff73ee571b of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:13
 msgid "List of tool categories to exclude from loading."
-msgstr ""
+msgstr "要排除加载的工具类别列表。"
 
 #: 70ce7ef070a34304b6989a571c8103e8 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:15
@@ -407,7 +407,7 @@ msgid ""
 "List of specific tool names to include, or path to a text file containing "
 "tool names (one per line). If provided, only these tools will be loaded "
 "regardless of categories."
-msgstr ""
+msgstr "包含特定工具名称的列表，或包含工具名称（每行一个）的文本文件路径。若提供，则仅加载这些工具，忽略类别设置。"
 
 #: 90fe13909a2c4701b07968f19b809171 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:19
@@ -415,61 +415,61 @@ msgstr ""
 msgid ""
 "Additional tool configuration files to load. Format: {\"category_name\": "
 "\"/path/to/config.json\"}"
-msgstr ""
+msgstr "要加载的额外工具配置文件。格式：{\"category_name\": \"/path/to/config.json\"}"
 
 #: f2b605af37004f03ba3f592ff1aba257 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:22
 msgid ""
 "Path to a text file containing tool names to include (one per line). "
 "Alternative to include_tools when providing a file path."
-msgstr ""
+msgstr "包含工具名称的文本文件路径（每行一个）。提供文件路径时，可替代 include_tools。"
 
 #: 07cf094a036b4912bfb84ea8dc5492cc of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:25
 msgid ""
 "List of tool types to include (e.g., [\"OpenTarget\", \"ChEMBLTool\"]). If "
 "provided, only tools with these types will be loaded."
-msgstr ""
+msgstr "要包含的工具类型列表（例如，[\"OpenTarget\", \"ChEMBLTool\"]）。如果提供，则仅加载这些类型的工具。"
 
 #: ec292c2e07fb46d2ab365e5bad970716 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:28
 msgid ""
 "List of tool types to exclude (e.g., [\"ToolFinderEmbedding\"]). Tools with "
 "these types will be excluded."
-msgstr ""
+msgstr "要排除的工具类型列表（例如，[\"ToolFinderEmbedding\"]）。具有这些类型的工具将被排除。"
 
 #: 686374d2cde14cb994ceb215a3a3d99e f7cb61e8a3144166b0ecd0b612c2e83e of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:7
 #: tooluniverse.execute_function.ToolUniverse.load_tools:32
 msgid "Side Effects:"
-msgstr ""
+msgstr "副作用："
 
 #: fef62591fb5a4e07bf3db7444fc7cd79 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:33
 msgid "Updates `self.all_tools` with loaded and deduplicated tools."
-msgstr ""
+msgstr "更新 `self.all_tools`，包含已加载且去重的工具。"
 
 #: fc13f56e26a34f8c9ecd544677c51826 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:34
 msgid "Updates `self.tool_category_dicts` with loaded tools per category."
-msgstr ""
+msgstr "使用加载的工具按类别更新 `self.tool_category_dicts`。"
 
 #: 02abbaf5cbf34656bb3a88cd1dcd3409 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:35
 msgid ""
 "Calls `self.refresh_tool_name_desc()` to update tool name/description "
 "mapping."
-msgstr ""
+msgstr "调用 `self.refresh_tool_name_desc()` 以更新工具名称/描述映射。"
 
 #: 366068f6040642b4845c7410b5327007 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:36
 msgid "Prints the number of tools before and after loading."
-msgstr ""
+msgstr "打印加载前后的工具数量。"
 
 #: bd6c170b170a492e8852e2d2e6533440 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:38
 msgid "Examples"
-msgstr ""
+msgstr "示例"
 
 #: e340163a61194b5fbf35ed8f3a16e01f of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:40
@@ -478,13 +478,16 @@ msgid ""
 "tu.load_tools(include_tools=[\"UniProt_get_entry_by_accession\", "
 "\"ChEMBL_get_molecule_by_chembl_id\"])"
 msgstr ""
+"# 通过名称加载特定工具 "
+"tu.load_tools(include_tools=[\"UniProt_get_entry_by_accession\", "
+"\"ChEMBL_get_molecule_by_chembl_id\"])"
 
 #: 8d364a0272fa4064808cf4202b8bcfd4 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:43
 msgid ""
 "# Load tools from a file "
 "tu.load_tools(tools_file=\"/path/to/tool_names.txt\")"
-msgstr ""
+msgstr "# 从文件加载工具 tu.load_tools(tools_file=\"/path/to/tool_names.txt\")"
 
 #: 543a425ddcea428d8c9cb2f5d609e37c of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:46
@@ -492,6 +495,8 @@ msgid ""
 "# Include only specific tool types "
 "tu.load_tools(include_tool_types=[\"OpenTarget\", \"ChEMBLTool\"])"
 msgstr ""
+"# 仅包含特定工具类型 tu.load_tools(include_tool_types=[\"OpenTarget\", "
+"\"ChEMBLTool\"])"
 
 #: 7846170092d64747b4fe66c4bd27b1b4 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:49
@@ -499,6 +504,8 @@ msgid ""
 "# Exclude specific tool types "
 "tu.load_tools(exclude_tool_types=[\"ToolFinderEmbedding\", \"Unknown\"])"
 msgstr ""
+"# 排除特定工具类型 tu.load_tools(exclude_tool_types=[\"ToolFinderEmbedding\", "
+"\"Unknown\"])"
 
 #: b6062c4b74234609b08f6df603c4c622 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:52
@@ -508,11 +515,13 @@ msgid ""
 "tu.load_tools(tool_config_files={\"custom_tools\": "
 "\"/path/to/custom_tools.json\"})"
 msgstr ""
+"# 加载额外的配置文件 tu.load_tools(tool_config_files={\"custom_tools\": "
+"\"/path/to/custom_tools.json\"})"
 
 #: 9127cd5d44f941588cd2188940f13daf of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:55
 msgid "# Combine multiple options tu.load_tools("
-msgstr ""
+msgstr "# 组合多个选项 tu.load_tools("
 
 #: c06839f4ed534ca4a69a59bf699baf04 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:57
@@ -522,6 +531,9 @@ msgid ""
 "exclude_tool_types=[\"Unknown\"], tool_config_files={\"custom\": "
 "\"/path/to/custom.json\"}"
 msgstr ""
+"tool_type=[\"uniprot\", "
+"\"ChEMBL\"]，exclude_tools=[\"problematic_tool\"]，exclude_tool_types=[\"Unknown\"]，tool_config_files={\"custom\":"
+" \"/path/to/custom.json\"}"
 
 #: 3a6ddf401a2b47b2a2f1f48e8d97cae4 8a42a690ef2b48bba42da701c21bb909 of
 #: tooluniverse.execute_function.ToolUniverse.load_tools:61
@@ -532,62 +544,62 @@ msgstr ""
 #: eb0ad73197144ee792230b4a9a6f5bf0 of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:1
 msgid "Load tool names from a text file (one tool name per line)."
-msgstr ""
+msgstr "从文本文件中加载工具名称（每行一个工具名称）。"
 
 #: 290d266623c042ed920b3c2020807567 of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:3
 msgid "Path to the text file containing tool names"
-msgstr ""
+msgstr "包含工具名称的文本文件路径"
 
 #: 763cddc566d3491c8df45ebda62670fe of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:6
 msgid "List of tool names loaded from the file"
-msgstr ""
+msgstr "从文件加载的工具名称列表"
 
 #: 53d37825983b4e21a155089939e7dd2b of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:1
 msgid ""
 "Filter tools based on inclusion/exclusion criteria and remove duplicates."
-msgstr ""
+msgstr "根据包含/排除标准筛选工具并去除重复项。"
 
 #: 015b6a4a98cd433bbca87ee375e47e23 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:3
 msgid "Set of tool names to exclude"
-msgstr ""
+msgstr "要排除的工具名称集合"
 
 #: 56cc2ca496384607801240a98203dd95 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:5
 msgid "Set of tool names to include (if None, include all)"
-msgstr ""
+msgstr "要包含的工具名称集合（如果为 None，则包含全部）"
 
 #: a3ecf22da6274b26a0d36b9a358409b7 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:7
 msgid "Set of tool types to include (if None, include all)"
-msgstr ""
+msgstr "要包含的工具类型集合（如果为 None，则包含所有）"
 
 #: 2e6f0fcbd33043c49375fdff0b0e0aff of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:9
 msgid "Set of tool types to exclude (if None, exclude none)"
-msgstr ""
+msgstr "要排除的工具类型集合（如果为 None，则不排除任何类型）"
 
 #: 34359f86f89940609a06e28e2c33bddd of
 #: tooluniverse.execute_function.ToolUniverse._load_auto_discovered_configs:1
 msgid "Load auto-discovered configs from the decorator registry."
-msgstr ""
+msgstr "从装饰器注册表中加载自动发现的配置。"
 
 #: 13e2aff251474e8ba501a70693758eb1 of
 #: tooluniverse.execute_function.ToolUniverse._load_auto_discovered_configs:3
 msgid ""
 "This method loads tool configurations that were registered automatically via"
 " the @register_tool decorator with config parameter."
-msgstr ""
+msgstr "该方法加载通过带有 config 参数的 @register_tool 装饰器自动注册的工具配置。"
 
 #: f66370c455f5496195b84eaf245c3226 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:1
 msgid ""
 "Process any MCPAutoLoaderTool instances to automatically discover and "
 "register MCP tools."
-msgstr ""
+msgstr "处理所有 MCPAutoLoaderTool 实例，以自动发现并注册 MCP 工具。"
 
 #: 7364a4db3a1c41f987aa16a4dea9c6be of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:3
@@ -597,31 +609,33 @@ msgid ""
 "configured servers. It handles async operations properly with cleanup and "
 "error handling."
 msgstr ""
+"该方法扫描所有已加载的工具，查找 MCPAutoLoaderTool 实例，并运行其自动发现流程，以从配置的服务器中查找并注册 MCP "
+"工具。该方法正确处理异步操作，包含清理和错误处理机制。"
 
 #: a9c33f510c674f3e97d4806f9b787f53 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:8
 msgid "May add new tools to the tool registry"
-msgstr ""
+msgstr "可以向工具注册表中添加新工具"
 
 #: 5f4f597d01a4463395502b3fedc50aad of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:9
 msgid "Prints debug information about the discovery process"
-msgstr ""
+msgstr "打印有关发现过程的调试信息"
 
 #: a9602140cd154042997f7b0f599c2e97 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:10
 msgid "Updates tool counts after MCP registration"
-msgstr ""
+msgstr "在MCP注册后更新工具计数"
 
 #: b641d3b1818e4724bd1eb08d5ced9e6c of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:1
 msgid "Select tools based on tool names and/or categories (tool_files keys)."
-msgstr ""
+msgstr "根据工具名称和/或类别（tool_files 键）选择工具。"
 
 #: add8e71ba39e433bbe77653cde29ce5d of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:3
 msgid "List of tool names to include. If None, include all."
-msgstr ""
+msgstr "要包含的工具名称列表。如果为 None，则包含所有工具。"
 
 #: 849648cb25584268886e067fc1e43105 bb3a7ae6965d4b4d9a29dc4bcc32752d
 #: cc083f6ca9be4d99ace524bc822fd6e6 of
@@ -629,29 +643,29 @@ msgstr ""
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:11
 #: tooluniverse.execute_function.ToolUniverse.select_tools:5
 msgid "List of tool names to exclude."
-msgstr ""
+msgstr "要排除的工具名称列表。"
 
 #: 32a74ec109634fdd95e1058761986f6f of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:7
 msgid "List of categories (tool_files keys) to include. If None, include all."
-msgstr ""
+msgstr "包含的类别列表（tool_files 键）。如果为 None，则包含所有类别。"
 
 #: d903b9f4b0054a7d904d83840af75ec7 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:10
 msgid "List of categories (tool_files keys) to exclude."
-msgstr ""
+msgstr "要排除的类别列表（tool_files 键）。"
 
 #: 26901cbe9b8347738014df0bf3dc8cb3 of
 #: tooluniverse.execute_function.ToolUniverse.select_tools:13
 msgid "List of selected tool configurations."
-msgstr ""
+msgstr "所选工具配置列表。"
 
 #: 67be173ae3a343e7a8278e04063fceb6 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:1
 msgid ""
 "Directly filter tool name and description lists based on names and/or "
 "categories."
-msgstr ""
+msgstr "根据名称和/或类别直接筛选工具名称和描述列表。"
 
 #: dc882390985a478d84fda378eaa4cfd7 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:3
@@ -659,41 +673,41 @@ msgid ""
 "This method takes existing tool name and description lists and filters them "
 "according to the specified criteria using the select_tools method for "
 "category-based filtering."
-msgstr ""
+msgstr "该方法采用现有的工具名称和描述列表，并使用 select_tools 方法根据指定的条件进行类别筛选。"
 
 #: a233efdf66fb48248d570992fe07777d of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:6
 msgid "List of tool names to filter."
-msgstr ""
+msgstr "工具名称筛选列表。"
 
 #: 4af2b70d7ef94acfa08861afe6cf60fd of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:8
 msgid ""
 "List of tool descriptions to filter (must correspond to tool_name_list)."
-msgstr ""
+msgstr "用于筛选的工具描述列表（必须与 tool_name_list 对应）。"
 
 #: 310cdc1ab75041c5bedff5e0552a9dd1 75675beafdea4f84852d5a69225f7a5a of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:10
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:9
 msgid "List of tool names to include."
-msgstr ""
+msgstr "要包含的工具名称列表。"
 
 #: 385ceb7fa55b41b6b00c4902399d714c 8912cdee9b9645809c81cf954b558895 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:14
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:13
 msgid "List of categories to include."
-msgstr ""
+msgstr "包含的类别列表。"
 
 #: 8faeaa421c0348a3b6a9ae8231455ebe a5f2b3f3ceab4cdd9c305374e7d00bdb of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:16
 #: tooluniverse.execute_function.ToolUniverse.refresh_tool_name_desc:15
 msgid "List of categories to exclude."
-msgstr ""
+msgstr "要排除的类别列表。"
 
 #: c0c8b639f9fe4e6b9343fe52fb4b6c70 of
 #: tooluniverse.execute_function.ToolUniverse.filter_tool_lists:19
 msgid "A tuple containing (filtered_tool_name_list, filtered_tool_desc_list)."
-msgstr ""
+msgstr "包含 (filtered_tool_name_list, filtered_tool_desc_list) 的元组。"
 
 #: 27a0ce9591694cd595ce9240768099fa of
 #: tooluniverse.execute_function.ToolUniverse.return_all_loaded_tools:1

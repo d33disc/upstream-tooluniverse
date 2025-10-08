@@ -280,24 +280,24 @@ msgstr ""
 #: 4da177ab8f5f4960920a1a53ae611342 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:18
 msgid "If return_call_result is False: Tool prompts as a formatted string"
-msgstr ""
+msgstr "如果 return_call_result 为 False：工具以格式化字符串形式提示"
 
 #: 0d0dfaa40cd4430c9ff6aafe349fedeb of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:19
 msgid "If return_call_result is True: Tuple of (tool_prompts, tool_names)"
-msgstr ""
+msgstr "如果 return_call_result 为 True：返回 (tool_prompts, tool_names) 元组"
 
 #: ada2e617465446948c346288a0217cc5 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:22
 msgid "If both message and picked_tool_names are None"
-msgstr ""
+msgstr "如果 message 和 picked_tool_names 均为 None"
 
 #: d0e6ae4938cc4ec3b1ae5525c69a5ffe of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:1
 msgid ""
 "Run the tool finder with given arguments following the standard tool "
 "interface."
-msgstr ""
+msgstr "按照标准工具接口，使用给定参数运行工具查找器。"
 
 #: 9a0516a69c00421d9c3db98cba87cfe3 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:3
@@ -306,6 +306,7 @@ msgid ""
 "tool. It extracts parameters from the arguments dictionary and delegates to "
 "find_tools()."
 msgstr ""
+"这是使用 ToolFinderEmbedding 作为标准工具的主要入口点。它从参数字典中提取参数，并委托给 find_tools() 函数。"
 
 #: ed753b6bf42e43e9ade2a984296e95d5 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.run:6
@@ -317,3 +318,9 @@ msgid ""
 "optional): Whether to return both prompts and names. Defaults to False. - "
 "categories (list, optional): List of tool categories to filter by"
 msgstr ""
+"字典包含：  \n"
+"- description（字符串，可选）：查询消息，用于查找工具（对应于 'message'）  \n"
+"- limit（整数，可选）：返回的工具数量（对应于 'rag_num'），默认为5  \n"
+"- picked_tool_names（列表，可选）：预先选择的工具名称列表，用于处理  \n"
+"- return_call_result（布尔值，可选）：是否返回提示和名称，默认为False  \n"
+"- categories（列表，可选）：用于筛选的工具类别列表"

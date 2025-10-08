@@ -392,33 +392,33 @@ msgstr "获取帮助"
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:352
 #: f037f1d2a61a41619e2fcc517c170136
 msgid "If you encounter issues:"
-msgstr ""
+msgstr "如果您遇到问题："
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:354
 #: a756a05485194e11838889de000f8777
 msgid "Check the server logs for error messages"
-msgstr ""
+msgstr "检查服务器日志中的错误信息"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:355
 #: 01b21403ac0f453db0e48e8f817cc3ec
 msgid "Verify network connectivity between components"
-msgstr ""
+msgstr "验证组件之间的网络连接性"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:356
 #: 30d72cdd56e64c19ac434da946b41a2d
 msgid "Test your MCP server independently before integrating"
-msgstr ""
+msgstr "在集成之前，请独立测试您的 MCP 服务器。"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:357
 #: 379adb40d5d249078352de331c67a089
 msgid ""
 "Review the ToolUniverse documentation for additional configuration options"
-msgstr ""
+msgstr "请查阅 ToolUniverse 文档以获取更多配置选项。"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:359
 #: a422eaf75a754b30880ea2807efa8d40
 msgid "Conclusion"
-msgstr ""
+msgstr "结论"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:361
 #: 5cee4e56b0504530a74124b7f674c269
@@ -428,10 +428,12 @@ msgid ""
 "provides a scalable and standardized way to expose your tools for use by AI "
 "agents and other applications."
 msgstr ""
+"通过遵循本教程，您可以成功将您的 Python 程序转换为 MCP 服务器，并将其集成到 ToolUniverse "
+"中。此方法提供了一种可扩展且标准化的方式，使您的工具能够被 AI 代理及其他应用程序使用。"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:363
 #: 71432b48b1014793865e2155176d4f6d
 msgid ""
 "For more advanced configurations and features, refer to the FastMCP and "
 "ToolUniverse documentation."
-msgstr ""
+msgstr "有关更高级的配置和功能，请参阅 FastMCP 和 ToolUniverse 文档。"

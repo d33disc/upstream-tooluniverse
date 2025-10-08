@@ -308,107 +308,107 @@ msgstr "科学数据库、文献检索、临床数据、基因组学、蛋白质
 msgid ""
 "🧠 **AI-Powered Tool Discovery**: Multi-tiered intelligent search system "
 "using:"
-msgstr ""
+msgstr "🧠 **AI驱动的工具发现**：采用多层次智能搜索系统，使用："
 
 #: 923a452022a841c5b22d214e67a42a3d of tooluniverse.smcp.SMCP:20
 msgid ""
 "ToolFinderLLM: Cost-optimized LLM-based semantic understanding with pre-"
 "filtering"
-msgstr ""
+msgstr "ToolFinderLLM：基于预过滤的成本优化型大语言模型语义理解"
 
 #: 7b3cbe805aa64ee5876b7bbc14064730 of tooluniverse.smcp.SMCP:21
 msgid "Tool_RAG: Embedding-based similarity search"
-msgstr ""
+msgstr "Tool_RAG：基于嵌入的相似度搜索"
 
 #: 4e32695c5f794662a06a2272fa076be0 of tooluniverse.smcp.SMCP:22
 msgid "Keyword Search: Simple text matching as reliable fallback"
-msgstr ""
+msgstr "关键词搜索：作为可靠备选方案的简单文本匹配"
 
 #: a649c06bdd554e4d85e0a4a85d22b426 of tooluniverse.smcp.SMCP:24
 msgid ""
 "📡 **Full MCP Protocol Support**: Complete implementation of MCP "
 "specification with:"
-msgstr ""
+msgstr "📡 **完整的 MCP 协议支持**：全面实现 MCP 规范，包含："
 
 #: dea9cfb514594a0dab7590107baaf010 of tooluniverse.smcp.SMCP:25
 msgid "Standard methods (tools/list, tools/call, resources/*, prompts/*)"
-msgstr ""
+msgstr "标准方法（tools/list、tools/call、resources/*、prompts/*）"
 
 #: ea25b16b23b54db4a1fa8adb88517646 of tooluniverse.smcp.SMCP:27
 msgid "Multi-transport support (stdio, HTTP, SSE)"
-msgstr ""
+msgstr "多传输支持（stdio、HTTP、SSE）"
 
 #: bb37a8b02c624bbc8693b2b366d47c94 of tooluniverse.smcp.SMCP:28
 msgid "JSON-RPC 2.0 compliance with proper error handling"
-msgstr ""
+msgstr "符合 JSON-RPC 2.0 标准并具备完善的错误处理机制"
 
 #: 3f926ffd833d456191d3b3cc36cbd985 of tooluniverse.smcp.SMCP:30
 msgid ""
 "⚡ **High-Performance Architecture**: Production-ready features including:"
-msgstr ""
+msgstr "⚡ **高性能架构**：具备生产环境准备的功能，包括："
 
 #: 6deb59cbed0b40c2887fbf3c0488972c of tooluniverse.smcp.SMCP:31
 msgid "Configurable thread pools for concurrent tool execution"
-msgstr ""
+msgstr "可配置线程池以实现工具的并发执行"
 
 #: 2375d01d6bc64e22a9e6b4a052504fca of tooluniverse.smcp.SMCP:32
 msgid "Intelligent tool loading and caching"
-msgstr ""
+msgstr "智能工具加载与缓存"
 
 #: b3d9594df9c14b47a0b16238903f469f of tooluniverse.smcp.SMCP:33
 msgid "Resource management and graceful degradation"
-msgstr ""
+msgstr "资源管理与优雅降级"
 
 #: 1fc966ee8a714f8f9b6459473b228250 of tooluniverse.smcp.SMCP:34
 msgid "Comprehensive error handling and recovery"
-msgstr ""
+msgstr "全面的错误处理与恢复"
 
 #: 2842b44ac6e1412e9b340cc206c14fd0 of tooluniverse.smcp.SMCP:36
 msgid ""
 "🔧 **Developer-Friendly**: Simplified configuration and deployment with:"
-msgstr ""
+msgstr "🔧 **开发者友好**：简化的配置与部署，具备以下特点："
 
 #: a95734d0cfc04a17ae69369b2775cc67 of tooluniverse.smcp.SMCP:37
 msgid "Sensible defaults for scientific computing"
-msgstr ""
+msgstr "科学计算的合理默认设置"
 
 #: f1c3d48f1bf34b9c88324f6d89151278 of tooluniverse.smcp.SMCP:38
 msgid "Flexible customization options"
-msgstr ""
+msgstr "灵活的定制选项"
 
 #: d750bbf1797b41f3b9ea14e74cbb8514 of tooluniverse.smcp.SMCP:39
 msgid "Comprehensive documentation and examples"
-msgstr ""
+msgstr "全面的文档和示例"
 
 #: c6ceae3d7bc44793886a2c4f55bdbd95 of tooluniverse.smcp.SMCP:40
 msgid "Built-in diagnostic and monitoring tools"
-msgstr ""
+msgstr "内置诊断和监控工具"
 
 #: f3cb6565714545bfbadbd579fa549471 of tooluniverse.smcp.SMCP:43
 msgid "Custom MCP Methods:"
-msgstr ""
+msgstr "自定义 MCP 方法："
 
 #: 0985261cf1574857bbc383add127b188 e30a499420d64b9db90d667627a4fd07 of
 #: tooluniverse.smcp.SMCP:44 tooluniverse.smcp.SMCP._custom_handle_request:24
 msgid "tools/find:"
-msgstr ""
+msgstr "tools/find："
 
 #: b46e457256d6491ea40309a87f2d219a of tooluniverse.smcp.SMCP:45
 msgid ""
 "AI-powered tool discovery using natural language queries. Supports semantic "
 "search, category filtering, and flexible response formats."
-msgstr ""
+msgstr "基于人工智能的工具发现，支持自然语言查询。支持语义搜索、类别筛选及灵活的响应格式。"
 
 #: fafcfdfe665045c099c18e6873e69699 fd9d20ef7869464490aed1d1565fda4a of
 #: tooluniverse.smcp.SMCP:48 tooluniverse.smcp.SMCP._custom_handle_request:34
 msgid "tools/search:"
-msgstr ""
+msgstr "tools/search: 工具/搜索："
 
 #: 9eb1e5e9fb0346f2b5276fc8da251f83 of tooluniverse.smcp.SMCP:49
 msgid ""
 "Alternative endpoint for tool discovery with identical functionality to "
 "tools/find, provided for compatibility and convenience."
-msgstr ""
+msgstr "用于工具发现的替代端点，功能与 tools/find 完全相同，提供兼容性和便捷性。"
 
 #: 0862728976b04ab095259f0a56c716e0 6c368eba8bcd423e97243096b0772fec
 #: 9fcf14ad350c404591a83f8f1a64c43c a359e83bda39478fb36a4a72414f165b
@@ -420,34 +420,36 @@ msgstr ""
 #: tooluniverse.smcp.SMCP.add_custom_tool:9
 #: tooluniverse.smcp.SMCP.run_simple:8 tooluniverse.smcp.create_smcp_server:8
 msgid "Parameters:"
-msgstr ""
+msgstr "参数："
 
 #: 000c7402633f4753a4d92256c98574e5 b43cee2cd67b4f239bd054208d5f7a36
 #: c834d9e4ec434b5e8c474033ef61694e of tooluniverse.smcp.SMCP:54
 #: tooluniverse.smcp.SMCP.add_custom_tool:10
 #: tooluniverse.smcp.create_smcp_server:9
 msgid "name"
-msgstr ""
+msgstr "名称"
 
 #: 1007432c0f33415ca457f76aab52dd77 4fbfee93403141bcbb465e082729110e
 #: a41a20c1c42f44f2813ddb18a074f5e1 b959d5dfcd144ee79009dc088e2fd66f of
 #: tooluniverse.smcp.SMCP:-1 tooluniverse.smcp.SMCP.add_custom_tool:-1
 msgid "str, optional"
-msgstr ""
+msgstr "str，可选"
 
 #: 77c40fefd42745108405e6b25e927f1b of tooluniverse.smcp.SMCP:55
 msgid ""
 "Human-readable server name used in logs and identification. Default: \"SMCP "
 "Server\" Examples: \"Scientific Research API\", \"Drug Discovery Server\""
 msgstr ""
+"用于日志记录和识别的人类可读服务器名称。默认值：\"SMCP Server\" 示例：\"Scientific Research "
+"API\"、\"Drug Discovery Server\""
 
 #: 9b8a0505f13c484a979187e7160890fe of tooluniverse.smcp.SMCP:59
 msgid "tooluniverse_config"
-msgstr ""
+msgstr "tooluniverse_配置"
 
 #: 805241082a5f416cb9d4e83fe8aaaee8 of tooluniverse.smcp.SMCP:-1
 msgid "ToolUniverse or dict, optional"
-msgstr ""
+msgstr "ToolUniverse 或 dict，可选项"
 
 #: 97017dab4534484785c1a07df1e9b00e of tooluniverse.smcp.SMCP:60
 msgid ""
@@ -455,11 +457,13 @@ msgid ""
 "None, creates a new ToolUniverse with default settings. Allows reuse of "
 "existing tool configurations and customizations."
 msgstr ""
+"预配置的 ToolUniverse 实例或配置字典。如果为 None，则使用默认设置创建新的 "
+"ToolUniverse。允许重用现有的工具配置和自定义内容。"
 
 #: 5adf91f4a039438a9e55f8597051a557 851a2700f70d4574b20cf5c677a74cd6 of
 #: tooluniverse.smcp.SMCP:64 tooluniverse.smcp.create_smcp_server:16
 msgid "tool_categories"
-msgstr ""
+msgstr "工具类别"
 
 #: 27195f74514b4432b812ba79008c2d13 28a5372ddcaf4d489b9971c3da145a64
 #: 4562a8625d494347b77adfecde494cbe 5bfcd1d9ef6f47cfacb9be12f6b412b3
@@ -468,7 +472,7 @@ msgstr ""
 #: tooluniverse.smcp.SMCP:-1 tooluniverse.smcp.SMCP._perform_tool_search:-1
 #: tooluniverse.smcp.create_smcp_server:-1
 msgid "list of str, optional"
-msgstr ""
+msgstr "字符串列表，可选项"
 
 #: 72bacbc64b8847a9a43f921ac3e04525 of tooluniverse.smcp.SMCP:65
 msgid ""
@@ -479,28 +483,32 @@ msgid ""
 "\"agents\"] - Clinical: [\"fda_drug_label\", \"clinical_trials\", "
 "\"adverse_events\"]"
 msgstr ""
+"特定的 ToolUniverse 类别加载。如果为 None 且 auto_expose_tools=True，则加载所有可用工具。常见组合包括：  \n"
+"- 科学类：[\"ChEMBL\", \"uniprot\", \"opentarget\", \"pubchem\", \"hpa\"]  \n"
+"- 文献类：[\"EuropePMC\", \"semantic_scholar\", \"pubtator\", \"agents\"]  \n"
+"- 临床类：[\"fda_drug_label\", \"clinical_trials\", \"adverse_events\"]"
 
 #: f8e9d9d56a7b4bf7968cfb5afe88c7a4 of tooluniverse.smcp.SMCP:71
 msgid "exclude_tools"
-msgstr ""
+msgstr "排除工具"
 
 #: a6ec0d55f99e430f98eaa6f91f9a5f52 of tooluniverse.smcp.SMCP:72
 msgid ""
 "Specific tool names to exclude from loading. These tools will not be exposed"
 " via the MCP interface even if they are in the loaded categories. Useful for"
 " removing specific problematic or unwanted tools."
-msgstr ""
+msgstr "要排除加载的特定工具名称。即使这些工具位于已加载的类别中，也不会通过 MCP 界面暴露。适用于移除特定的有问题或不需要的工具。"
 
 #: 80063f242b67431b99e92e98136ad65b of tooluniverse.smcp.SMCP:76
 msgid "exclude_categories"
-msgstr ""
+msgstr "排除类别"
 
 #: 70906991dbd2482795c07114095f9e7c of tooluniverse.smcp.SMCP:77
 msgid ""
 "Tool categories to exclude from loading. These entire categories will be "
 "skipped during tool loading. Can be combined with tool_categories to first "
 "select categories and then exclude specific ones."
-msgstr ""
+msgstr "工具类别排除加载。加载工具时将跳过整个类别。可与 tool_categories 结合使用，先选择类别，再排除特定类别。"
 
 #: f5fcf6c5caaf4855acc12d19a66b0a97 of tooluniverse.smcp.SMCP:81
 msgid "include_tools"
@@ -510,7 +518,7 @@ msgstr ""
 msgid ""
 "Specific tool names to include. If provided, only these tools will be loaded"
 " regardless of categories. Overrides category-based selection."
-msgstr ""
+msgstr "需包含的特定工具名称。若提供，仅加载这些工具，且不考虑类别。此设置优先于基于类别的选择。"
 
 #: 611d70dddd9e434d847180856645db69 of tooluniverse.smcp.SMCP:85
 msgid "tools_file"
@@ -521,15 +529,15 @@ msgid ""
 "Path to a text file containing tool names to include (one per line). "
 "Alternative to include_tools parameter. Comments (lines starting with #) and"
 " empty lines are ignored."
-msgstr ""
+msgstr "包含工具名称的文本文件路径（每行一个）。作为 include_tools 参数的替代。注释（以 # 开头的行）和空行将被忽略。"
 
 #: 3fa1e78437284613be702c465dd2d80b of tooluniverse.smcp.SMCP:90
 msgid "tool_config_files"
-msgstr ""
+msgstr "工具配置文件"
 
 #: 6c3f440da1ab478da06e4cd48866d5f2 of tooluniverse.smcp.SMCP:-1
 msgid "dict of str, optional"
-msgstr ""
+msgstr "可选的字符串字典"
 
 #: 19a503ee6c2144a4a0c205f612717763 of tooluniverse.smcp.SMCP:91
 #, python-brace-format
@@ -537,11 +545,11 @@ msgid ""
 "Additional tool configuration files to load. Format: {\"category_name\": "
 "\"/path/to/config.json\"}. These files will be loaded in addition to the "
 "default tool files."
-msgstr ""
+msgstr "附加的工具配置文件，格式：{\"category_name\": \"/path/to/config.json\"}。这些文件将在默认工具文件之外加载。"
 
 #: 7d5c8f04539b4688956375593bdbbe32 of tooluniverse.smcp.SMCP:95
 msgid "include_tool_types"
-msgstr ""
+msgstr "包含工具类型"
 
 #: 48f45a2312d84f26b632c12f06f64f4f of tooluniverse.smcp.SMCP:96
 msgid ""
@@ -549,10 +557,12 @@ msgid ""
 "be loaded. Available types include: 'OpenTarget', 'ToolFinderEmbedding', "
 "'ToolFinderKeyword', 'ToolFinderLLM', etc."
 msgstr ""
+"包含的特定工具类型。若提供，则仅加载这些类型的工具。可用类型包括：'OpenTarget'、'ToolFinderEmbedding'、'ToolFinderKeyword'、'ToolFinderLLM'"
+" 等。"
 
 #: 65ecb7f6b23c458baf94f2e289f9e020 of tooluniverse.smcp.SMCP:100
 msgid "exclude_tool_types"
-msgstr ""
+msgstr "排除工具类型"
 
 #: 61229049a3ee482fb0d6b724d203e779 of tooluniverse.smcp.SMCP:101
 msgid ""
@@ -560,16 +570,17 @@ msgid ""
 "tool loading. Useful for excluding entire categories of tools (e.g., all "
 "ToolFinder types or all OpenTarget tools)."
 msgstr ""
+"要排除加载的工具类型。加载工具时将跳过这些工具类型。适用于排除整类工具（例如，所有 ToolFinder 类型或所有 OpenTarget 工具）。"
 
 #: 5b1e62e3003541049d1b42bc245bf097 of tooluniverse.smcp.SMCP:105
 msgid "auto_expose_tools"
-msgstr ""
+msgstr "自动曝光工具"
 
 #: 07b0c61462874a1aa270c87adb5ed100 5c152bcc34574b6c839f77984e2999e1
 #: 6dd9ec17b8a04311862f5603ec66cac3 of tooluniverse.smcp.SMCP:-1
 #: tooluniverse.smcp.create_smcp_server:-1
 msgid "bool, default True"
-msgstr ""
+msgstr "bool，默认值为 True"
 
 #: 74e32eae4310416f89d5aec3b274ddf9 of tooluniverse.smcp.SMCP:106
 msgid ""
@@ -577,11 +588,13 @@ msgid ""
 "all loaded tools become available via the MCP interface with automatic "
 "schema conversion and execution wrapping."
 msgstr ""
+"是否自动将 ToolUniverse 工具作为 MCP 工具公开。设置为 True 时，所有已加载的工具均可通过 MCP "
+"界面访问，且支持自动模式转换和执行封装。"
 
 #: 6ec6dc2c02494cb086b5d02fb7f13f28 9603ccf747274ac8aff99481c02fca1a of
 #: tooluniverse.smcp.SMCP:110 tooluniverse.smcp.create_smcp_server:32
 msgid "search_enabled"
-msgstr ""
+msgstr "search_enabled 搜索已启用"
 
 #: bb6f10f0eae542a4b6138ec5e0a49cca of tooluniverse.smcp.SMCP:111
 msgid ""

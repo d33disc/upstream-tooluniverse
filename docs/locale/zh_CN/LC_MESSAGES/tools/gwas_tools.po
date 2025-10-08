@@ -389,125 +389,125 @@ msgstr "**gwas_get_variants_for_trait**（类型：GWASVariantsForTrait）"
 #: ../../tools/gwas_tools.rst:304 9b5540fa54ad44328b6dbb454ee578b5
 msgid ""
 "Get all variants associated with a specific trait with pagination support."
-msgstr ""
+msgstr "获取与特定特征相关的所有变体，支持分页功能。"
 
 #: ../../tools/gwas_tools.rst 1a72f0231af64838ab74f88c16548938
 msgid "gwas_get_variants_for_trait tool specification"
-msgstr ""
+msgstr "gwas_get_variants_for_trait 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:310 fd9594dcb58d4460a7e7a6aad6b8f59f
 msgid "**Name**: ``gwas_get_variants_for_trait``"
-msgstr ""
+msgstr "**名称**：``gwas_get_variants_for_trait``"
 
 #: ../../tools/gwas_tools.rst:311 d0e7d487bd9245bdb05c24d52a4592c9
 msgid "**Type**: ``GWASVariantsForTrait``"
-msgstr ""
+msgstr "**类型**：``GWASVariantsForTrait``"
 
 #: ../../tools/gwas_tools.rst:312 8f9607be47a3470f9f13737dad43695f
 msgid ""
 "**Description**: Get all variants associated with a specific trait with "
 "pagination support."
-msgstr ""
+msgstr "**描述**：获取与特定特征相关的所有变体，支持分页功能。"
 
 #: ../../tools/gwas_tools.rst:338 1454649922d841289b2ada4fe385cdce
 msgid "**gwas_search_associations** (Type: GWASAssociationSearch)"
-msgstr ""
+msgstr "**gwas_search_associations**（类型：GWASAssociationSearch）"
 
 #: ../../tools/gwas_tools.rst:340 ff47b4d1303149edbd6e180ac1968c85
 msgid ""
 "Search for GWAS associations by various criteria including EFO trait, rs ID,"
 " accession ID, with s..."
-msgstr ""
+msgstr "通过多种标准搜索GWAS关联，包括EFO性状、rs ID、登录号，带有s..."
 
 #: ../../tools/gwas_tools.rst 6ad68181258f47e28b873fa09ecab89b
 msgid "gwas_search_associations tool specification"
-msgstr ""
+msgstr "gwas_search_associations 工具规范"
 
 #: ../../tools/gwas_tools.rst:346 190ba5c811a842f8a7d3a748d4590ebe
 msgid "**Name**: ``gwas_search_associations``"
-msgstr ""
+msgstr "**名称**：``gwas_search_associations``"
 
 #: ../../tools/gwas_tools.rst:347 03b8bd12971641a2ae66ce1be816bdbb
 msgid "**Type**: ``GWASAssociationSearch``"
-msgstr ""
+msgstr "**类型**：``GWASAssociationSearch``"
 
 #: ../../tools/gwas_tools.rst:348 b208c22278f14980adb3a6a449321494
 msgid ""
 "**Description**: Search for GWAS associations by various criteria including "
 "EFO trait, rs ID, accession ID, with sorting and pagination support."
-msgstr ""
+msgstr "**描述**：通过多种条件搜索GWAS关联，包括EFO性状、rs ID、登录号，支持排序和分页功能。"
 
 #: ../../tools/gwas_tools.rst:367 ../../tools/gwas_tools.rst:406
 #: ../../tools/gwas_tools.rst:454 304535038eed4388b331db35cadd1edf
 #: 65cc7aaf050145ca9a04f94380096972 7d6e73c339184709b668481da7c9bc01
 msgid "``size`` (integer) (optional) Number of results to return"
-msgstr ""
+msgstr "``size``（整数）（可选） 返回结果的数量"
 
 #: ../../tools/gwas_tools.rst:386 a9642b1fb59d4a0cbb3dc3d9e9b3aebf
 msgid "**gwas_search_snps** (Type: GWASSNPSearch)"
-msgstr ""
+msgstr "**gwas_search_snps**（类型：GWASSNPSearch）"
 
 #: ../../tools/gwas_tools.rst:388 e620aef4f5a84050a7ebccc839290987
 msgid ""
 "Search for GWAS single nucleotide polymorphisms (SNPs) by rs ID or mapped "
 "gene."
-msgstr ""
+msgstr "通过rs ID或映射基因搜索GWAS单核苷酸多态性（SNP）。"
 
 #: ../../tools/gwas_tools.rst 17049fc28c384603a6e266a0fb30311e
 msgid "gwas_search_snps tool specification"
-msgstr ""
+msgstr "gwas_search_snps 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:394 e1084a7c35d14776bafdd5a844061930
 msgid "**Name**: ``gwas_search_snps``"
-msgstr ""
+msgstr "**名称**：``gwas_search_snps``"
 
 #: ../../tools/gwas_tools.rst:395 6ef3a82da80f45d691fa350b6736ef53
 msgid "**Type**: ``GWASSNPSearch``"
-msgstr ""
+msgstr "**类型**：``GWASSNPSearch``"
 
 #: ../../tools/gwas_tools.rst:396 417c20795e6d4c8f81ae2580f184293b
 msgid ""
 "**Description**: Search for GWAS single nucleotide polymorphisms (SNPs) by "
 "rs ID or mapped gene."
-msgstr ""
+msgstr "**描述**：通过rs ID或映射基因搜索GWAS单核苷酸多态性（SNP）。"
 
 #: ../../tools/gwas_tools.rst:425 c140481f8eca46e8a092ecbb5d05bdf7
 msgid "**gwas_search_studies** (Type: GWASStudySearch)"
-msgstr ""
+msgstr "**gwas_search_studies**（类型：GWASStudySearch）"
 
 #: ../../tools/gwas_tools.rst:427 c792a0dddc7c49bda317459e1944f02e
 msgid ""
 "Search for GWAS studies by various criteria including EFO trait, disease "
 "trait, cohort, GxE inter..."
-msgstr ""
+msgstr "通过多种标准搜索GWAS研究，包括EFO性状、疾病性状、队列、GxE交互作用等..."
 
 #: ../../tools/gwas_tools.rst 0553f24925164b86b25918e26c71eff4
 msgid "gwas_search_studies tool specification"
-msgstr ""
+msgstr "gwas_search_studies 工具规格说明"
 
 #: ../../tools/gwas_tools.rst:433 2d6803be8f174c588aa758497f148130
 msgid "**Name**: ``gwas_search_studies``"
-msgstr ""
+msgstr "**名称**：``gwas_search_studies``"
 
 #: ../../tools/gwas_tools.rst:434 6856b7d898304d3eb300ddcb96d8c25c
 msgid "**Type**: ``GWASStudySearch``"
-msgstr ""
+msgstr "**类型**：``GWASStudySearch``"
 
 #: ../../tools/gwas_tools.rst:435 1a2c4b710e3340e1a07488808da27c7c
 msgid ""
 "**Description**: Search for GWAS studies by various criteria including EFO "
 "trait, disease trait, cohort, GxE interactions, and summary statistics "
 "availability."
-msgstr ""
+msgstr "**描述**：根据多种标准搜索GWAS研究，包括EFO性状、疾病性状、队列、GxE交互作用及汇总统计数据的可用性。"
 
 #: ../../tools/gwas_tools.rst:473 8e6b687a21c943d0906ddd1a7cbddc79
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/gwas_tools.rst:475 862595040195455a81c32c00e5fd2907
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/gwas_tools.rst:476 efea235a10f34736aeff57aa2bb5d906
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

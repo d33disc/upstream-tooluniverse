@@ -142,7 +142,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:128 8bd2099f6d674adcb50ba44307cad58c
 msgid "📝 翻译工作流"
-msgstr ""
+msgstr "📝 翻译工作流程"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:130 33f6820e2c8a45848917478c46c32f63
 msgid "1. 构建时自动更新翻译文件"
@@ -150,7 +150,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:132 a835949c845c4acca4ba7b3da76f9a29
 msgid "每次运行脚本时，如果包含中文（`zh_CN`），会自动："
-msgstr ""
+msgstr "每次运行脚本时，如果包含中文（`zh_CN`），将自动："
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:133 c42a9dd81bba4d798347b89ec6c45f9f
 msgid "提取最新的可翻译文本 → `_build/gettext/`"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:160 1e9e64741d904767aa8c37800a8d3985
 msgid "翻译会自动应用到中文版本！"
-msgstr ""
+msgstr "翻译将自动应用于中文版本！"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:162 e94bda644b5c46239210278edb579f1b
 msgid "🎨 主题特性"

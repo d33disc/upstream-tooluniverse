@@ -147,7 +147,7 @@ msgstr "✅ 高度可配置"
 
 #: ../../MULTILANG_README.md:128 017dbf939b5745c6a8cc17300c1caa98
 msgid "顶部导航"
-msgstr ""
+msgstr "顶部导航栏"
 
 #: ../../MULTILANG_README.md:130 d28344cf4ede42a89816b48c28c71974
 msgid "🏠 Home"
@@ -167,11 +167,11 @@ msgstr "🎯 教程"
 
 #: ../../MULTILANG_README.md:134 7af2ac49f4bf44ce99f209e69308f1de
 msgid "🔍 Search"
-msgstr ""
+msgstr "🔍 搜索"
 
 #: ../../MULTILANG_README.md:136 f5f31699c9344620833335f97b9f7053
 msgid "🌐 语言切换方式"
-msgstr ""
+msgstr "🌐 语言切换方法"
 
 #: ../../MULTILANG_README.md:138 9a51577df8144501a644f11338cf6d64
 msgid "1. 浮动切换器（所有页面）"
@@ -183,7 +183,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:141 61b9f34160ab4eaa89f19a97ed9e66fa
 msgid "🇬🇧 English"
-msgstr ""
+msgstr "🇬🇧 英语"
 
 #: ../../MULTILANG_README.md:142 a90dc1577d2f4de4abc93a6622975128
 msgid "🇨🇳 简体中文"
@@ -191,7 +191,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:144 b7e5bc31eb01459280420125a36a80d0
 msgid "2. 语言选择页"
-msgstr ""
+msgstr "2. 语言选择页面"
 
 #: ../../MULTILANG_README.md:146 a17e2b6532f04a54b3f858145db237b0
 msgid "访问 `_build/html/languages.html` 或运行："

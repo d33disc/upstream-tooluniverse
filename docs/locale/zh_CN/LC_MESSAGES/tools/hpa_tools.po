@@ -449,59 +449,61 @@ msgid ""
 "**HPA_get_protein_interactions_by_gene** (Type: "
 "HPAGetProteinInteractionsTool)"
 msgstr ""
+"**HPA_get_protein_interactions_by_gene**（类型：HPAGetProteinInteractionsTool）"
 
 #: ../../tools/hpa_tools.rst:291 78638f21d8c54e4499d569e214c3a5f3
 msgid ""
 "Fetch known protein-protein interaction partners for a given gene from Human"
 " Protein Atlas database."
-msgstr ""
+msgstr "从人类蛋白质图谱数据库获取指定基因的已知蛋白质相互作用伙伴。"
 
 #: ../../tools/hpa_tools.rst e1ca79a83999450cbda37711988d964a
 msgid "HPA_get_protein_interactions_by_gene tool specification"
-msgstr ""
+msgstr "HPA_get_protein_interactions_by_gene 工具规格说明"
 
 #: ../../tools/hpa_tools.rst:297 5282a24d67934b88a2baaf4bfc09d4f4
 msgid "**Name**: ``HPA_get_protein_interactions_by_gene``"
-msgstr ""
+msgstr "**名称**：``HPA_get_protein_interactions_by_gene``"
 
 #: ../../tools/hpa_tools.rst:298 3e74d1bfb2e44aa6adac96c41738cb56
 msgid "**Type**: ``HPAGetProteinInteractionsTool``"
-msgstr ""
+msgstr "**类型**：``HPAGetProteinInteractionsTool``"
 
 #: ../../tools/hpa_tools.rst:299 972e2661d5434946a2787b249b5c0375
 msgid ""
 "**Description**: Fetch known protein-protein interaction partners for a "
 "given gene from Human Protein Atlas database."
-msgstr ""
+msgstr "**描述**：从人类蛋白质图谱数据库获取指定基因的已知蛋白质-蛋白质相互作用伙伴。"
 
 #: ../../tools/hpa_tools.rst:303 3cdf72b165ce4169a00f1314319b6c57
 msgid ""
 "``gene_name`` (string) (required) Official gene symbol, e.g., 'EGFR', "
 "'TP53', 'BRCA1', etc."
-msgstr ""
+msgstr "``gene_name``（字符串）（必填）官方基因符号，例如 'EGFR'、'TP53'、'BRCA1' 等。"
 
 #: ../../tools/hpa_tools.rst:320 76589d19cf524a02a7e533058f5e41db
 msgid ""
 "**HPA_get_rna_expression_by_source** (Type: HPAGetRnaExpressionBySourceTool)"
 msgstr ""
+"**HPA_get_rna_expression_by_source**（类型：HPAGetRnaExpressionBySourceTool）"
 
 #: ../../tools/hpa_tools.rst:322 6692a7ba129b4d7dbad05cd4fea18b9d
 msgid ""
 "Get RNA expression level (nTPM) for a gene in a specific biological source "
 "using optimized column..."
-msgstr ""
+msgstr "使用优化列获取特定生物来源中基因的RNA表达水平（nTPM）..."
 
 #: ../../tools/hpa_tools.rst 7297273ee51c4ea9922b80321fa53b84
 msgid "HPA_get_rna_expression_by_source tool specification"
-msgstr ""
+msgstr "HPA_get_rna_expression_by_source 工具规格说明"
 
 #: ../../tools/hpa_tools.rst:328 3d51680f12a14a66881628c2a31b8405
 msgid "**Name**: ``HPA_get_rna_expression_by_source``"
-msgstr ""
+msgstr "**名称**：``HPA_get_rna_expression_by_source``"
 
 #: ../../tools/hpa_tools.rst:329 c6aa3b553f444adb83e00372a5c63fc2
 msgid "**Type**: ``HPAGetRnaExpressionBySourceTool``"
-msgstr ""
+msgstr "**类型**：``HPAGetRnaExpressionBySourceTool``"
 
 #: ../../tools/hpa_tools.rst:330 680ddce0106d4ee29ed18f210d7dfc3e
 msgid ""
@@ -509,18 +511,21 @@ msgid ""
 "biological source using optimized columns parameter. Supports tissue, blood,"
 " brain, and single_cell source types with comprehensive source mappings."
 msgstr ""
+"**描述**：使用优化的 columns 参数获取特定生物来源中基因的 RNA "
+"表达水平（nTPM）。支持组织、血液、大脑和单细胞等来源类型，提供全面的来源映射。"
 
 #: ../../tools/hpa_tools.rst:334 163470f94fe9459f928df80c1914fe70
 msgid ""
 "``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'GFAP', "
 "'TP53', 'BRCA1', etc."
-msgstr ""
+msgstr "``gene_name``（字符串）（必填）基因名称或基因符号，例如 'GFAP'、'TP53'、'BRCA1' 等。"
 
 #: ../../tools/hpa_tools.rst:337 718afe72adb34a488ddf61fe0a1ebf8d
 msgid ""
 "``source_type`` (string) (required) The type of biological source. Choose "
 "from: 'tissue', 'blood', 'brain', 'single_cell'."
 msgstr ""
+"``source_type``（字符串）（必填）生物来源的类型。可选值包括：‘tissue’（组织）、‘blood’（血液）、‘brain’（大脑）、‘single_cell’（单细胞）。"
 
 #: ../../tools/hpa_tools.rst:340 e7f04f74cd774e60b4cd0fb71022e66a
 msgid ""
@@ -529,42 +534,44 @@ msgid ""
 "'cerebellum'. Must be a valid name from the comprehensive HPA columns "
 "mapping."
 msgstr ""
+"``source_name``（字符串）（必填）生物来源的具体名称，例如“liver”、“heart_muscle”、“t_cell”、“hepatocytes”、“cerebellum”。必须是综合HPA列映射中的有效名称。"
 
 #: ../../tools/hpa_tools.rst:359 e5cee585703c47ca9e509dda836edde4
 msgid ""
 "**HPA_get_rna_expression_in_specific_tissues** (Type: "
 "HPAGetRnaExpressionByTissueTool)"
 msgstr ""
+"**HPA_get_rna_expression_in_specific_tissues**（类型：HPAGetRnaExpressionByTissueTool）"
 
 #: ../../tools/hpa_tools.rst:361 8cbc996e3960484b9fafe14438c84647
 msgid ""
 "Query RNA expression levels (nTPM) for a specific gene in one or more user-"
 "specified tissues with..."
-msgstr ""
+msgstr "查询一个或多个用户指定组织中特定基因的RNA表达水平（nTPM）..."
 
 #: ../../tools/hpa_tools.rst bd7ea71138c14b10bf48d3d9e259f642
 msgid "HPA_get_rna_expression_in_specific_tissues tool specification"
-msgstr ""
+msgstr "HPA_get_rna_expression_in_specific_tissues 工具规格说明"
 
 #: ../../tools/hpa_tools.rst:367 bb85dcf8488c4804977153840cd4ddb1
 msgid "**Name**: ``HPA_get_rna_expression_in_specific_tissues``"
-msgstr ""
+msgstr "**名称**：``HPA_get_rna_expression_in_specific_tissues``"
 
 #: ../../tools/hpa_tools.rst:368 c495768497b843fb90e1facd3e07ab94
 msgid "**Type**: ``HPAGetRnaExpressionByTissueTool``"
-msgstr ""
+msgstr "**类型**：``HPAGetRnaExpressionByTissueTool``"
 
 #: ../../tools/hpa_tools.rst:369 8dd8c3fe5f3b42c6ab985f9aa735990f
 msgid ""
 "**Description**: Query RNA expression levels (nTPM) for a specific gene in "
 "one or more user-specified tissues with precise tissue matching."
-msgstr ""
+msgstr "**描述**：查询特定基因在一个或多个用户指定组织中的RNA表达水平（nTPM），实现精确的组织匹配。"
 
 #: ../../tools/hpa_tools.rst:373 63c267c55db4421592ab14b3827dac78
 msgid ""
 "``ensembl_id`` (string) (required) Ensembl Gene ID for the gene, e.g., "
 "'ENSG00000141510' for TP53."
-msgstr ""
+msgstr "``ensembl_id``（字符串）（必填）基因的Ensembl基因ID，例如，TP53的ID为“ENSG00000141510”。"
 
 #: ../../tools/hpa_tools.rst:376 5df511e31d12404a85626083d46e058f
 msgid ""
@@ -572,85 +579,88 @@ msgid ""
 "['brain', 'liver', 'heart muscle', 'kidney']. Case-insensitive matching is "
 "supported."
 msgstr ""
+"``tissue_names``（数组）（必填）查询的组织名称列表，例如 ['brain', 'liver', 'heart muscle', "
+"'kidney']。支持不区分大小写的匹配。"
 
 #: ../../tools/hpa_tools.rst:394 80fc7ee90598452f81ba63976f66efaf
 msgid "**HPA_get_subcellular_location** (Type: HPAGetSubcellularLocationTool)"
-msgstr ""
+msgstr "**HPA_get_subcellular_location**（类型：HPAGetSubcellularLocationTool）"
 
 #: ../../tools/hpa_tools.rst:396 177c0bdef82c455fa6755ed1fac973da
 msgid ""
 "Get annotated subcellular locations for a protein using optimized columns "
 "parameter. Retrieves bo..."
-msgstr ""
+msgstr "使用优化的 columns 参数获取蛋白质的注释亚细胞定位。检索 bo..."
 
 #: ../../tools/hpa_tools.rst e20f3cb3bf3b4ae79f1a744651eb4b87
 msgid "HPA_get_subcellular_location tool specification"
-msgstr ""
+msgstr "HPA_get_subcellular_location 工具规范"
 
 #: ../../tools/hpa_tools.rst:402 2319bba3ea0a482b994cd39180a0c642
 msgid "**Name**: ``HPA_get_subcellular_location``"
-msgstr ""
+msgstr "**名称**：``HPA_get_subcellular_location``"
 
 #: ../../tools/hpa_tools.rst:403 7a3a49a8166647f29f1295c4efecba50
 msgid "**Type**: ``HPAGetSubcellularLocationTool``"
-msgstr ""
+msgstr "**类型**：``HPAGetSubcellularLocationTool``"
 
 #: ../../tools/hpa_tools.rst:404 c73391fcca3b4833bd9f83a1cdac795b
 msgid ""
 "**Description**: Get annotated subcellular locations for a protein using "
 "optimized columns parameter. Retrieves both main and additional subcellular "
 "locations efficiently."
-msgstr ""
+msgstr "**描述**：使用优化的 columns 参数获取蛋白质的注释亚细胞定位。高效检索主要及附加的亚细胞定位信息。"
 
 #: ../../tools/hpa_tools.rst:408 7aab063221c0439b80deba9cf1fbd6b7
 msgid ""
 "``gene_name`` (string) (required) Gene name or gene symbol, e.g., 'CCNB1', "
 "'TP53', 'EGFR', etc."
-msgstr ""
+msgstr "``gene_name``（字符串）（必填）基因名称或基因符号，例如 'CCNB1'、'TP53'、'EGFR' 等。"
 
 #: ../../tools/hpa_tools.rst:425 724fb6cc02264f43972b965e3c479120
 msgid "**HPA_search_genes_by_query** (Type: HPASearchGenesTool)"
-msgstr ""
+msgstr "**HPA_search_genes_by_query**（类型：HPASearchGenesTool）"
 
 #: ../../tools/hpa_tools.rst:427 74a800ff343642e1a2ecac47a2577ca0
 msgid ""
 "Search for matching genes by gene name, keywords, or cell line names and "
 "return Ensembl ID list. ..."
-msgstr ""
+msgstr "通过基因名称、关键词或细胞系名称搜索匹配的基因，并返回Ensembl ID列表。..."
 
 #: ../../tools/hpa_tools.rst 7a2a0e0d274241d29a94205e8404f91d
 msgid "HPA_search_genes_by_query tool specification"
-msgstr ""
+msgstr "HPA_search_genes_by_query 工具规格说明"
 
 #: ../../tools/hpa_tools.rst:433 80de433c0d5b4c7faf2d3cfff173deb8
 msgid "**Name**: ``HPA_search_genes_by_query``"
-msgstr ""
+msgstr "**名称**：``HPA_search_genes_by_query``"
 
 #: ../../tools/hpa_tools.rst:434 ff30981898c4434b8e030d2c98032587
 msgid "**Type**: ``HPASearchGenesTool``"
-msgstr ""
+msgstr "**类型**：``HPASearchGenesTool``"
 
 #: ../../tools/hpa_tools.rst:435 fd3045f851064f2f89e9dae3e067b07d
 msgid ""
 "**Description**: Search for matching genes by gene name, keywords, or cell "
 "line names and return Ensembl ID list. This is the entry tool for many HPA "
 "query workflows."
-msgstr ""
+msgstr "**描述**：通过基因名称、关键词或细胞系名称搜索匹配基因，并返回Ensembl ID列表。该工具是多个HPA查询工作流程的入口。"
 
 #: ../../tools/hpa_tools.rst:439 0dabfe7179bb4d48b0eab263897bc25b
 msgid ""
 "``search_query`` (string) (required) Gene name, alias, keyword, or cell line"
 " name to search for, e.g., 'EGFR', 'TP53', or 'MCF7'."
 msgstr ""
+"``search_query``（字符串）（必填）用于搜索的基因名称、别名、关键词或细胞系名称，例如“EGFR”、“TP53”或“MCF7”。"
 
 #: ../../tools/hpa_tools.rst:456 541d7bff6bbb49cf82b36885ac6314e2
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/hpa_tools.rst:458 209863038b5d42518a7e2fcd32d43d92
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具总览"
 
 #: ../../tools/hpa_tools.rst:459 e04a45bd38e944c8b9db9712312a654c
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

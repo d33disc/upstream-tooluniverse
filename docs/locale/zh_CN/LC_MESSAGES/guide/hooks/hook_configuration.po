@@ -397,9 +397,9 @@ msgstr "**工具组成** → :doc:`../tool_composition` - 将工具串联成工�
 msgid ""
 "**Best Practices** → :doc:`../best_practices` - Performance optimization "
 "tips"
-msgstr ""
+msgstr "**最佳实践** → :doc:`../best_practices` - 性能优化建议"
 
 #: ../../guide/hooks/hook_configuration.rst:408
 #: fb5793886e8e45b3a914a62e857cb3ea
 msgid "**Examples** → :doc:`../examples` - More usage examples"
-msgstr ""
+msgstr "**示例** → :doc:`../examples` - 更多使用示例"

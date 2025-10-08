@@ -205,18 +205,18 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 829050bc35304aa8b201363586010c9f
 msgid "`server_url`"
-msgstr ""
+msgstr "服务器地址"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 094793dc05154ad68800664eeac2d33d e40b3188c127438080e70298880d4fcb
 #: ec9f72e793a24fa7b8fd4b461966b36e
 msgid "string"
-msgstr ""
+msgstr "字符串"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 0aa713e722874406a76ed81f4bf6be81
 msgid "-"
-msgstr ""
+msgstr "请提供需要翻译的英文文本。"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: c48e23d614d34e2887925e1918c7926f
@@ -226,32 +226,32 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 765ddfefa3794991a97658ecdcff27d8
 msgid "`transport`"
-msgstr ""
+msgstr "传输"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 903cc0316985404b81c391733d691157
 msgid "\"http\""
-msgstr ""
+msgstr "http"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 36f0f05abd474de5a55afa2546bb4700
 msgid "传输协议（http/websocket）"
-msgstr ""
+msgstr "传输协议（HTTP/WebSocket）"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: bdef63337aaa418caf8cb74ba115eaf4
 msgid "`auto_register`"
-msgstr ""
+msgstr "自动注册"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: c25a3b1a168e4209a52826dfa6402d88
 msgid "boolean"
-msgstr ""
+msgstr "布尔型"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: cdf096b6b8cd409aac618c45f4d2d62e
 msgid "true"
-msgstr ""
+msgstr "真"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 9a9090fe084a4c9fadb0e64dc230cb1d
@@ -261,12 +261,12 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: b68d04050fa24a089c718af7f32c2718
 msgid "`tool_prefix`"
-msgstr ""
+msgstr "工具前缀"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 4acf4734128d48bb82d0af9ed149d3ca
 msgid "\"mcp_\""
-msgstr ""
+msgstr "mcp_"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 9da9beda4b04460489d8e53487599395
@@ -276,7 +276,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 07d5729b525d4925a8294bafbf75e5d0
 msgid "`selected_tools`"
-msgstr ""
+msgstr "已选择的工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 5296cf562fcb4c03b57cb19279dad9ae

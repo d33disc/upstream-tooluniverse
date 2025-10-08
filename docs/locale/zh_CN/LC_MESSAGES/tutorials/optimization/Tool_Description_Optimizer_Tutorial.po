@@ -393,95 +393,95 @@ msgstr "布尔值"
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 4b2ea6f714634218b3472259baa43686
 msgid "true"
-msgstr ""
+msgstr "真"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 97fd108de31f48b0ae74dbb5afb919f2
 msgid "Whether to save optimization results"
-msgstr ""
+msgstr "是否保存优化结果"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:96
 #: a2f375ba3e8f49f18a83ee2867365853
 msgid "Common Configuration Patterns"
-msgstr ""
+msgstr "常见配置模式"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:109
 #: 09e914fa60fe406fa06a44dc4b470479
 msgid "Understanding the Output"
-msgstr ""
+msgstr "理解输出"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:111
 #: 437453e1479d459bb27b451b7b5f7787
 msgid "Optimization Report Structure"
-msgstr ""
+msgstr "优化报告结构"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:112
 #: c315318389bf47ee87cdd89c88042b8e
 msgid ""
 "**Final Optimized Descriptions**: Improved tool and parameter descriptions"
-msgstr ""
+msgstr "**最终优化描述**：改进的工具和参数描述"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:113
 #: 9cc6321533f24dbc9954d71bd7889f9b
 msgid ""
 "**Optimization History**: Round-by-round progression with scores and "
 "feedback"
-msgstr ""
+msgstr "**优化历史**：逐轮进展及评分与反馈"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:114
 #: 4bd6b5f8158a47a1ae67f6a99607316e
 msgid "**Detailed Rationale**: Explanations for each change made"
-msgstr ""
+msgstr "**详细理由**：对每项更改的解释说明"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:115
 #: 6f2d4a7c3db843ec816aaf2bdf7cb04c
 msgid "**Test Results**: Actual tool execution data used for analysis"
-msgstr ""
+msgstr "**测试结果**：用于分析的实际工具执行数据"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:116
 #: 8eadcba901c44377b5310e7864ffb927
 msgid "**Complete Configurations**: Before and after JSON configurations"
-msgstr ""
+msgstr "**完整配置**：JSON 配置的前后对比"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:118
 #: a1a88f27bd91437c801ba340848d839f
 msgid "Reading Quality Scores"
-msgstr ""
+msgstr "读取质量分数"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:119
 #: 28d99cbc41ed4b99802a447531e176fa
 msgid "**7.0-7.9**: Good improvement, suitable for development"
-msgstr ""
+msgstr "**7.0-7.9**：良好改进，适合开发使用"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:120
 #: b5936801fd9e490182760321757748e2
 msgid "**8.0-8.4**: High quality, ready for production use"
-msgstr ""
+msgstr "**8.0-8.4**：高质量，适合生产环境使用"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:121
 #: 2be63087d339471ca5821a96d8a3b4fd
 msgid "**8.5-9.0**: Excellent quality, meets strict standards"
-msgstr ""
+msgstr "**8.5-9.0**：优异品质，符合严格标准"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:122
 #: 859a640783574980a1cc98e154a46283
 msgid "**9.0+**: Outstanding quality, rarely achieved"
-msgstr ""
+msgstr "**9.0+**：卓越品质，罕见达成"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:124
 #: 92a391a2d07a448698112ca1a47dc5a2
 msgid "Real Example: FDA Tool Optimization"
-msgstr ""
+msgstr "真实案例：FDA工具优化"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:126
 #: 3057c903fc6c4f2ba9e98b0fa87f3f55
 msgid "Step-by-Step Process"
-msgstr ""
+msgstr "逐步流程"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:128
 #: accfca08ca2642f3a0ea43dac4d7a060
 msgid "**Original Description**:"
-msgstr ""
+msgstr "**原始描述**："
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:133
 #: a376d19b161e44e78828e5597f3a93aa
@@ -489,107 +489,107 @@ msgid ""
 "**Round 1**: Optimizer identifies description is too simplistic based on "
 "test results showing detailed ingredient information with quantities and "
 "properties."
-msgstr ""
+msgstr "**第一轮**：优化器根据测试结果识别出描述过于简化，测试结果显示了包含数量和属性的详细成分信息。"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:135
 #: 3236f14043404dc7ab8a429e535247b8
 msgid ""
 "**Round 2**: Adds detail about quantities and properties, but feedback "
 "indicates redundancy with parameter descriptions."
-msgstr ""
+msgstr "**第二轮**：增加了关于数量和属性的详细信息，但反馈指出与参数描述存在冗余。"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:137
 #: bd3fb347c2614cd5a2bb2ae360fadd4c
 msgid "**Round 3**: Eliminates redundancy and focuses on core functionality."
-msgstr ""
+msgstr "**第三轮**：消除冗余，聚焦核心功能。"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:139
 #: 40338dbf45b14a6b9412b808e261cfee
 msgid "**Final Result**:"
-msgstr ""
+msgstr "**最终结果**："
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:144
 #: aa6f842aba514dd383f778512f413765
 msgid "Key Improvements Achieved"
-msgstr ""
+msgstr "取得的主要改进成果"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:145
 #: 8a065e0007a44dc9b2a2c044aa1fa40d
 msgid "✅ More accurate representation of actual functionality"
-msgstr ""
+msgstr "✅ 更准确地反映实际功能"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:146
 #: 81f8df00989f4e97a13aa108c7ee84d3
 msgid "✅ Eliminated redundancy with parameter descriptions"
-msgstr ""
+msgstr "✅ 消除了参数描述的冗余"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:147
 #: d9662529da654149bca96d44d7e964f0
 msgid "✅ Clearer scope indication (multiple formulations and brands)"
-msgstr ""
+msgstr "✅ 更清晰的适用范围说明（多种配方和品牌）"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:148
 #: 330b747bf51143d5b8840b31abacbba5
 msgid "✅ More precise action verb (\"provides\" vs \"fetch\")"
-msgstr ""
+msgstr "✅ 更精确的动作动词（“提供” vs “获取”）"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:149
 #: c511a594bc914edbad4f349b71218d65
 msgid "✅ Quality score improved from ~5.0 to 7.5/10"
-msgstr ""
+msgstr "✅ 质量评分从约5.0提升至7.5/10"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:151
 #: b3273c3508714671a6a4af228f813cb1
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:153
 #: e0ed1fcde71e4559b8b96d9256aa35d9
 msgid "1. Tool Selection Strategy"
-msgstr ""
+msgstr "1. 工具选择策略"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:154
 #: e6a0e7ff688b44b1b7fd74f8d2b2898a
 msgid ""
 "**Prioritize**: Complex tools, frequently used tools, unclear descriptions"
-msgstr ""
+msgstr "**优先考虑**：复杂工具、常用工具、不明确的描述"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:155
 #: 08878836cfa441e0b3eff8224e0fa99c
 msgid ""
 "**Avoid**: Simple tools, recently optimized tools, domain-specific jargon-"
 "heavy tools"
-msgstr ""
+msgstr "**避免使用**：简单工具、近期优化的工具、充满领域专业术语的工具"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:157
 #: 0d389d03d7e0496fb62711c521c19a9d
 msgid "2. Configuration Guidelines"
-msgstr ""
+msgstr "2. 配置指南"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 8d858de9667d4ccb8302dda28e5fcc72
 msgid "Scenario"
-msgstr ""
+msgstr "场景"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 05fc84587e4a4a6fbf2ecd4f1f607622
 msgid "max_iterations"
-msgstr ""
+msgstr "最大迭代次数"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: c4854cdc309440e183d39968e5f267f6
 msgid "satisfaction_threshold"
-msgstr ""
+msgstr "满意度阈值"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 6aaf482c009846e8a060b87edf72d54c
 msgid "Use Case"
-msgstr ""
+msgstr "用例"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 418ee1eaca6a4d99b2f66cef30834b52
 msgid "Development"
-msgstr ""
+msgstr "开发"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: ec584fde489f4e3a8b4d8bf292ff4b14
@@ -604,12 +604,12 @@ msgstr ""
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: ef0b0cffae7747ba83b516964161d72f
 msgid "Quick improvements"
-msgstr ""
+msgstr "快速改进"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: f237d62558d34b089babef30fe1c4c08
 msgid "Production"
-msgstr ""
+msgstr "生产"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 9600069b582e4dcc9bbcb5f88e24335d
@@ -624,12 +624,12 @@ msgstr ""
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: a6dea91db39e4750b26c2952d9daf72c
 msgid "Standard quality"
-msgstr ""
+msgstr "标准质量"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 3b9c3a8ea6cb45e8ad8edf49b1c002e5
 msgid "Critical Tools"
-msgstr ""
+msgstr "关键工具"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 77e32052e83b4fc8a83b29950475d3d5
@@ -644,27 +644,27 @@ msgstr ""
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: b216abddf03c447da86d44b141fd7085
 msgid "Highest quality"
-msgstr ""
+msgstr "最高质量"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:164
 #: 715a02bb9433497890ef0940a49687b5
 msgid "3. Review Process"
-msgstr ""
+msgstr "3. 审核流程"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:165
 #: 56577a08ae4a4b0994c8ff8c23a85eb3
 msgid "**Always review** optimized descriptions before applying"
-msgstr ""
+msgstr "**在应用之前，务必审查** 优化后的描述"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:166
 #: 1d6a391e65de4e59853316c970a8109c
 msgid "**Test functionality** with new descriptions"
-msgstr ""
+msgstr "**使用新描述测试功能**"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:167
 #: b7621eb449964f94a9053932f4ca4bf2
 msgid "**Consider domain expertise** that AI might miss"
-msgstr ""
+msgstr "**考虑 AI 可能忽略的领域专业知识**"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md:168
 #: eccb9a442cd743408b828df5aa11fe22

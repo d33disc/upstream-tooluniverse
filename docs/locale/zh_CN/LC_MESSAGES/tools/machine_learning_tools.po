@@ -503,265 +503,265 @@ msgstr "**描述**：获取有关 optuna 包的信息。超参数优化框架"
 
 #: ../../tools/machine_learning_tools.rst:344 263e7b251c5e4941b4c2c8171af1e3b6
 msgid "**get_pymzml_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pymzml_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:346 62da17afbc9646d295b6ad1abc69e6d8
 msgid ""
 "Get comprehensive information about pymzML – mzML file parser for mass "
 "spectrometry"
-msgstr ""
+msgstr "获取有关 pymzML —— 质谱数据 mzML 文件解析器的全面信息"
 
 #: ../../tools/machine_learning_tools.rst 44f29374408f4e8f93a42ff68efb1cf2
 msgid "get_pymzml_info tool specification"
-msgstr ""
+msgstr "get_pymzml_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:352 34079d0cb7fa43b7b7758aefa996953a
 msgid "**Name**: ``get_pymzml_info``"
-msgstr ""
+msgstr "**名称**：``get_pymzml_info``"
 
 #: ../../tools/machine_learning_tools.rst:354 d19318e3fdbd4b6fa1385629afac4131
 msgid ""
 "**Description**: Get comprehensive information about pymzML – mzML file "
 "parser for mass spectrometry"
-msgstr ""
+msgstr "**描述**：获取有关 pymzML —— 质谱数据 mzML 文件解析器的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:358 4a938c85f86a45d2b6b89dc973a09ef9
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "pymzML"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 pymzML 的信息类型"
 
 #: ../../tools/machine_learning_tools.rst:375 5806227d33c843bf9f16fa1adb137464
 msgid "**get_python_libsbml_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_python_libsbml_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:377 8532106e0b3c4668a57e8cf54ed8adba
 msgid ""
 "Get comprehensive information about python-libsbml – SBML (Systems Biology "
 "Markup Language) support"
-msgstr ""
+msgstr "获取有关 python-libsbml —— SBML（系统生物学标记语言）支持的全面信息"
 
 #: ../../tools/machine_learning_tools.rst ecd7b6f500c2424ab6ee1e9b6034cc7a
 msgid "get_python_libsbml_info tool specification"
-msgstr ""
+msgstr "get_python_libsbml_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:383 2dd2e02ad9f447e5ae38f459e700f9d1
 msgid "**Name**: ``get_python_libsbml_info``"
-msgstr ""
+msgstr "**名称**：``get_python_libsbml_info``"
 
 #: ../../tools/machine_learning_tools.rst:385 b480b53ec7c34f1da6f15e6ad21a2052
 msgid ""
 "**Description**: Get comprehensive information about python-libsbml – SBML "
 "(Systems Biology Markup Language) support"
-msgstr ""
+msgstr "**描述**：获取有关 python-libsbml —— SBML（系统生物学标记语言）支持的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:389 40973e5a1cbd40b5aa7ec91d487065f1
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "python-libsbml"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 python-libsbml 的信息类型"
 
 #: ../../tools/machine_learning_tools.rst:406 160ad962ecd3480c913b90bf86f3fa9a
 msgid "**get_pytorch_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pytorch_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:408 c58fdb675d3e469ba364a5ea0d431eee
 msgid ""
 "Get comprehensive information about PyTorch – an open source machine "
 "learning framework"
-msgstr ""
+msgstr "获取有关 PyTorch —— 一个开源机器学习框架的全面信息"
 
 #: ../../tools/machine_learning_tools.rst 68ad35e83e4b441db024f0750a441d2a
 msgid "get_pytorch_info tool specification"
-msgstr ""
+msgstr "get_pytorch_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:414 854dd19f08b74cbf892c0b034539f98f
 msgid "**Name**: ``get_pytorch_info``"
-msgstr ""
+msgstr "**名称**：``get_pytorch_info``"
 
 #: ../../tools/machine_learning_tools.rst:416 2ca55d4c9e134388af98e68e3da53430
 msgid ""
 "**Description**: Get comprehensive information about PyTorch – an open "
 "source machine learning framework"
-msgstr ""
+msgstr "**描述**：获取关于 PyTorch —— 一个开源机器学习框架的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:436 3971c69b4b2244d3907e566095c2f8e9
 msgid "**get_schnetpack_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_schnetpack_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:438 f4332171ccbb497a8eb39b314cdfade5
 msgid ""
 "Get comprehensive information about SchNetPack – a deep-learning toolbox for"
 " molecules and materi..."
-msgstr ""
+msgstr "获取关于 SchNetPack 的全面信息——一个用于分子和材料的深度学习工具箱..."
 
 #: ../../tools/machine_learning_tools.rst 120b3aa51d5e4fee8bf2ffe6083790e6
 msgid "get_schnetpack_info tool specification"
-msgstr ""
+msgstr "get_schnetpack_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:444 28120a97c52e4e3a8c7185310ace902c
 msgid "**Name**: ``get_schnetpack_info``"
-msgstr ""
+msgstr "**名称**：``get_schnetpack_info``"
 
 #: ../../tools/machine_learning_tools.rst:446 e0f29a185a8641b2af7d7b4d12e08666
 msgid ""
 "**Description**: Get comprehensive information about SchNetPack – a deep-"
 "learning toolbox for molecules and materials built on PyTorch."
-msgstr ""
+msgstr "**描述**：获取关于 SchNetPack 的全面信息——一个基于 PyTorch 构建的用于分子和材料的深度学习工具箱。"
 
 #: ../../tools/machine_learning_tools.rst:466 1a898908193348628b6fa46662429441
 msgid "**get_scikit_learn_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scikit_learn_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:468 4604456abdf84865b300f5cb573a20d4
 msgid ""
 "Get comprehensive information about scikit-learn – simple and efficient "
 "tools for predictive data..."
-msgstr ""
+msgstr "获取关于 scikit-learn 的全面信息——用于预测数据的简单高效工具..."
 
 #: ../../tools/machine_learning_tools.rst 17111081dbf84c808a841565ea2f8b40
 msgid "get_scikit_learn_info tool specification"
-msgstr ""
+msgstr "get_scikit_learn_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:474 26ed2f5263ba42f2944e13692fad4760
 msgid "**Name**: ``get_scikit_learn_info``"
-msgstr ""
+msgstr "**名称**：``get_scikit_learn_info``"
 
 #: ../../tools/machine_learning_tools.rst:476 af4bd92ad0ea49f480e7872c4098f8d1
 msgid ""
 "**Description**: Get comprehensive information about scikit-learn – simple "
 "and efficient tools for predictive data analysis"
-msgstr ""
+msgstr "**描述**：获取关于 scikit-learn 的全面信息——用于预测性数据分析的简单高效工具"
 
 #: ../../tools/machine_learning_tools.rst:496 2fda7c350dc34a9bb990a2721c1e4cd0
 msgid "**get_skopt_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_skopt_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:498 cada66d77e40421f95801cf2637e0946
 msgid ""
 "Get information about the skopt package. Scikit-Optimize: sequential model-"
 "based optimization"
-msgstr ""
+msgstr "获取有关 skopt 包的信息。Scikit-Optimize：基于序贯模型的优化"
 
 #: ../../tools/machine_learning_tools.rst 4d0d01bbd34c41a0b69de4d2b053d154
 msgid "get_skopt_info tool specification"
-msgstr ""
+msgstr "get_skopt_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:504 3a4c01d1d79347139d7aa3c48ab5d0cb
 msgid "**Name**: ``get_skopt_info``"
-msgstr ""
+msgstr "**名称**：``get_skopt_info``"
 
 #: ../../tools/machine_learning_tools.rst:506 97a6aeaa6c12492bad67283565661474
 msgid ""
 "**Description**: Get information about the skopt package. Scikit-Optimize: "
 "sequential model-based optimization"
-msgstr ""
+msgstr "**描述**：获取有关 skopt 包的信息。Scikit-Optimize：基于序列模型的优化方法"
 
 #: ../../tools/machine_learning_tools.rst:525 225e95471f8c4a59bf235a9658e71415
 msgid "**get_statsmodels_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_statsmodels_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:527 a9e32305e6cf4650857478345b4a996b
 msgid ""
 "Get comprehensive information about statsmodels – statistical modeling and "
 "econometrics"
-msgstr ""
+msgstr "获取关于 statsmodels —— 统计建模与计量经济学的全面信息"
 
 #: ../../tools/machine_learning_tools.rst c557d302311f4e9398cbcd57a11ad427
 msgid "get_statsmodels_info tool specification"
-msgstr ""
+msgstr "get_statsmodels_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:533 a1f9912f22f94e27affa3373716560b5
 msgid "**Name**: ``get_statsmodels_info``"
-msgstr ""
+msgstr "**名称**：``get_statsmodels_info``"
 
 #: ../../tools/machine_learning_tools.rst:535 c5dc9a9094fd4605ac9be4f676122b8f
 msgid ""
 "**Description**: Get comprehensive information about statsmodels – "
 "statistical modeling and econometrics"
-msgstr ""
+msgstr "**描述**：获取关于statsmodels——统计建模与计量经济学的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:555 75b9e985e5ca43a192fbad835cf203ca
 msgid "**get_torch_geometric_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_torch_geometric_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:557 dbfcfb7abd0e4ae69d687f57866d1a6b
 msgid ""
 "Get comprehensive information about PyTorch Geometric – a high-performance "
 "library for graph neur..."
-msgstr ""
+msgstr "获取有关 PyTorch Geometric 的全面信息——一个高性能的图神经网络库..."
 
 #: ../../tools/machine_learning_tools.rst c28548b718254a69a89c2111e27461a6
 msgid "get_torch_geometric_info tool specification"
-msgstr ""
+msgstr "get_torch_geometric_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:563 7f141639a04544e8aa8a77948453e9a2
 msgid "**Name**: ``get_torch_geometric_info``"
-msgstr ""
+msgstr "**名称**：``get_torch_geometric_info``"
 
 #: ../../tools/machine_learning_tools.rst:565 8378a30934cd4e46b4c2c0aff8783d1e
 msgid ""
 "**Description**: Get comprehensive information about PyTorch Geometric – a "
 "high-performance library for graph neural networks widely used in molecular "
 "and materials science."
-msgstr ""
+msgstr "**描述**：获取关于 PyTorch Geometric 的全面信息——这是一款高性能的图神经网络库，广泛应用于分子科学和材料科学领域。"
 
 #: ../../tools/machine_learning_tools.rst:585 8805c9fa4c8a45758d46d0524f58f86a
 msgid "**get_umap_learn_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_umap_learn_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:587 9f2b027a480c49de96c5f52a0f67ed0e
 msgid ""
 "Get comprehensive information about UMAP-learn – dimensionality reduction "
 "technique"
-msgstr ""
+msgstr "获取关于 UMAP-learn —— 降维技术的全面信息"
 
 #: ../../tools/machine_learning_tools.rst 923395022bbb458db3f079affb340240
 msgid "get_umap_learn_info tool specification"
-msgstr ""
+msgstr "get_umap_learn_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:593 98c50e5cd3294cf0a9d61ead7c8cfcbf
 msgid "**Name**: ``get_umap_learn_info``"
-msgstr ""
+msgstr "**名称**：``get_umap_learn_info``"
 
 #: ../../tools/machine_learning_tools.rst:595 d27e7110ac024f54bbe8167e7b83caa4
 msgid ""
 "**Description**: Get comprehensive information about UMAP-learn – "
 "dimensionality reduction technique"
-msgstr ""
+msgstr "**描述**：获取关于 UMAP-learn —— 一种降维技术的全面信息"
 
 #: ../../tools/machine_learning_tools.rst:615 3c103c888ebd459ba4f1b438cbb7dcd9
 msgid "**get_xgboost_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_xgboost_info**（类型：PackageTool）"
 
 #: ../../tools/machine_learning_tools.rst:617 5b8a57e540de478c84fe7779dc211e12
 msgid ""
 "Get information about the xgboost package. Optimized gradient boosting "
 "framework"
-msgstr ""
+msgstr "获取有关 xgboost 包的信息。优化的梯度提升框架"
 
 #: ../../tools/machine_learning_tools.rst 5712297ad9b74c0aa0cddb174b23bc84
 msgid "get_xgboost_info tool specification"
-msgstr ""
+msgstr "get_xgboost_info 工具规格说明"
 
 #: ../../tools/machine_learning_tools.rst:623 bc5b4a94a58a4562a1f490c4b25a1546
 msgid "**Name**: ``get_xgboost_info``"
-msgstr ""
+msgstr "**名称**：``get_xgboost_info``"
 
 #: ../../tools/machine_learning_tools.rst:625 f1c17576bcb3430fa7a5c30d9663b8ef
 msgid ""
 "**Description**: Get information about the xgboost package. Optimized "
 "gradient boosting framework"
-msgstr ""
+msgstr "**描述**：获取有关 xgboost 包的信息。优化的梯度提升框架"
 
 #: ../../tools/machine_learning_tools.rst:644 017e04cc4d7e4f78973e52b669ad3be0
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/machine_learning_tools.rst:646 5502a053ae16465faa1d4d2ef3511ba2
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/machine_learning_tools.rst:647 d11e2188bf7042f39f4f9bed273807e7
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

@@ -324,60 +324,62 @@ msgstr "**导入错误**"
 
 #: ../../tools/remote/immune_compass.md:208 263cd0fb15d34a64aa8d4e5e7a5ac69a
 msgid "Install COMPASS: `uv pip install immuno-compass`"
-msgstr ""
+msgstr "安装 COMPASS：`uv pip install immuno-compass`"
 
 #: ../../tools/remote/immune_compass.md:209 9ab04f9634a443b3b26f076f49e5f5b2
 msgid "Ensure you're in the correct conda environment"
-msgstr ""
+msgstr "确保您处于正确的 conda 环境中"
 
 #: ../../tools/remote/immune_compass.md:212 b2020d6bab53470f92ddfda3788bb552
 msgid "**Input Data Format Error**"
-msgstr ""
+msgstr "**输入数据格式错误**"
 
 #: ../../tools/remote/immune_compass.md:216 144cd63e743845259bbdc19c46df07a3
 msgid "Ensure input file is in pickle format with correct DataFrame structure"
-msgstr ""
+msgstr "确保输入文件为pickle格式且具有正确的DataFrame结构"
 
 #: ../../tools/remote/immune_compass.md:217 aaf9711a9fec4df18d136e57cd9eddb2
 msgid "Check that gene symbols are standard (e.g., \"CD274\", not \"PD-L1\")"
-msgstr ""
+msgstr "检查基因符号是否为标准格式（例如，“CD274”，而非“PD-L1”）"
 
 #: ../../tools/remote/immune_compass.md:220 02604ee85d13444e9336c5874fe61971
 msgid "References"
-msgstr ""
+msgstr "参考文献"
 
 #: ../../tools/remote/immune_compass.md:222 a872c836b9f94d40a222a77d3d79554c
 msgid ""
 "**COMPASS Paper**: [Generalizable AI predicts immunotherapy outcomes across "
 "cancers and treatments](https://github.com/mims-harvard/COMPASS)"
 msgstr ""
+"**COMPASS 论文**：[通用型人工智能预测不同癌症及治疗中的免疫疗法效果](https://github.com/mims-"
+"harvard/COMPASS)"
 
 #: ../../tools/remote/immune_compass.md:223 9d68600e074741908558961fdd027c52
 msgid "**Project Website**: https://www.immuno-compass.com/"
-msgstr ""
+msgstr "**项目网站**：https://www.immuno-compass.com/"
 
 #: ../../tools/remote/immune_compass.md:224 df9dc5299d0e4c60aa0e3dcc08488cfe
 msgid "**GitHub Repository**: https://github.com/mims-harvard/COMPASS"
-msgstr ""
+msgstr "**GitHub 仓库**：https://github.com/mims-harvard/COMPASS"
 
 #: ../../tools/remote/immune_compass.md:225 3664f3a1ea194efdbebd51f855a17040
 msgid "**Documentation**: https://compass.readthedocs.io/"
-msgstr ""
+msgstr "**文档**: https://compass.readthedocs.io/"
 
 #: ../../tools/remote/immune_compass.md:227 3ac79c1d27274c74b4c845332a80c897
 msgid "Citation"
-msgstr ""
+msgstr "引用"
 
 #: ../../tools/remote/immune_compass.md:229 88b67e87f77949188a8d1bec8c58edfb
 msgid "If you use this tool, please cite the COMPASS paper:"
-msgstr ""
+msgstr "如果您使用此工具，请引用 COMPASS 论文："
 
 #: ../../tools/remote/immune_compass.md:240 afeec94d82c24b6881088e432e77a5eb
 msgid "License"
-msgstr ""
+msgstr "许可证"
 
 #: ../../tools/remote/immune_compass.md:242 fc2060adb2274857b887a3b76f1de2e8
 msgid ""
 "This tool is released under the MIT License, consistent with the original "
 "COMPASS project."
-msgstr ""
+msgstr "该工具依据 MIT 许可证发布，与原始 COMPASS 项目保持一致。"

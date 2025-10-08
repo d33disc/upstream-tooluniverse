@@ -562,127 +562,127 @@ msgstr "定期更新 ToolUniverse 和 MCP 依赖项"
 
 #: ../../guide/mcp_support.rst:413 b0b528eb2cf847c1808120da947b1e2a
 msgid "Monitor server logs for suspicious activity"
-msgstr ""
+msgstr "监控服务器日志中的可疑活动"
 
 #: ../../guide/mcp_support.rst:416 c3f639e4aebc4842b7a5a22fa10a4db3
 msgid "Performance"
-msgstr ""
+msgstr "性能"
 
 #: ../../guide/mcp_support.rst:418 8902d60f985241aa829fa67da1c5ab1a
 msgid "Load only necessary tool categories"
-msgstr ""
+msgstr "仅加载必要的工具类别"
 
 #: ../../guide/mcp_support.rst:419 16c6e339ac1d49b7a7fb15055b184144
 msgid "Use appropriate worker thread counts"
-msgstr ""
+msgstr "使用适当数量的工作线程"
 
 #: ../../guide/mcp_support.rst:420 29dfce5f68dd4fd7a393b4a11f90bcaa
 msgid "Enable caching for frequently used tools"
-msgstr ""
+msgstr "为常用工具启用缓存"
 
 #: ../../guide/mcp_support.rst:421 f7007f518da44cafbd93b0c96a134784
 msgid "Monitor server metrics and adjust configuration"
-msgstr ""
+msgstr "监控服务器指标并调整配置"
 
 #: ../../guide/mcp_support.rst:424 c6ad6a78cdcb449cb68f5e1e7385cb9b
 msgid "Reliability"
-msgstr ""
+msgstr "可靠性"
 
 #: ../../guide/mcp_support.rst:426 671e6702642d4d989c7832d9ddc677c1
 msgid "Implement proper error handling in MCP clients"
-msgstr ""
+msgstr "在 MCP 客户端中实现适当的错误处理"
 
 #: ../../guide/mcp_support.rst:427 4ad3ed17413c4bd89e8e7410df8bee7a
 msgid "Use retry mechanisms for transient failures"
-msgstr ""
+msgstr "对于临时性故障，使用重试机制"
 
 #: ../../guide/mcp_support.rst:428 cafa14176d3f4025b57a183bb18b761f
 msgid "Monitor server health and restart if needed"
-msgstr ""
+msgstr "监控服务器健康状态，必要时重启服务器"
 
 #: ../../guide/mcp_support.rst:429 93a7d7070cf4449ab3d02c187b22cf0a
 msgid "Keep backup configurations for critical deployments"
-msgstr ""
+msgstr "为关键部署保留备份配置"
 
 #: ../../guide/mcp_support.rst:431 e41bb7326c354f06b355ad0b7ca76fc6
 msgid ""
 "For detailed best practices and production deployment guidance, see "
 ":ref:`performance-optimization`."
-msgstr ""
+msgstr "有关详细的最佳实践和生产环境部署指导，请参见 :ref:`performance-optimization`。"
 
 #: ../../guide/mcp_support.rst:434 4e06bf93987b459aa28b6b1ca120e3db
 msgid "Related Documentation"
-msgstr ""
+msgstr "相关文档"
 
 #: ../../guide/mcp_support.rst:437 d2bdab4fe077459b8fca03c65f9dd2a8
 msgid "Core MCP Components"
-msgstr ""
+msgstr "核心MCP组件"
 
 #: ../../guide/mcp_support.rst:439 80bf56035c22450e95916f842bea76be
 msgid ""
 ":doc:`tool_caller` - Tool execution engine and MCP server implementation"
-msgstr ""
+msgstr ":doc:`tool_caller` - 工具执行引擎及 MCP 服务器实现"
 
 #: ../../guide/mcp_support.rst:440 b8c1de8d91554c7786187de784deaad9
 msgid ":doc:`loading_tools` - Tool loading and MCP server configuration"
-msgstr ""
+msgstr ":doc:`loading_tools` - 工具加载与MCP服务器配置"
 
 #: ../../guide/mcp_support.rst:441 2860f33e113f45dcbb836bd9bcc9d161
 msgid ""
 ":doc:`interaction_protocol` - ToolUniverse interaction protocol and MCP "
 "schema"
-msgstr ""
+msgstr ":doc:`interaction_protocol` - ToolUniverse 交互协议及 MCP 架构"
 
 #: ../../guide/mcp_support.rst:446 a4c60c7735da475dbc3aff6741339507
 msgid ""
 ":doc:`building_ai_scientists/index` - Complete guide to building AI "
 "scientists"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/index` - 构建 AI 科学家的完整指南"
 
 #: ../../guide/mcp_support.rst:447 5500dd80190742d0bf58d4d77df53962
 msgid ""
 ":doc:`building_ai_scientists/claude_desktop` - Claude Desktop integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/claude_desktop` - Claude Desktop 集成"
 
 #: ../../guide/mcp_support.rst:448 22aac4046b6147c88ab9c16fa2961d9e
 msgid ":doc:`building_ai_scientists/chatgpt_api` - ChatGPT API integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/chatgpt_api` - ChatGPT API 集成"
 
 #: ../../guide/mcp_support.rst:449 422a755ca7e446beb2391f4b13bbae2d
 msgid ":doc:`building_ai_scientists/gemini_cli` - Gemini CLI integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/gemini_cli` - Gemini CLI 集成"
 
 #: ../../guide/mcp_support.rst:450 cb58c703594b42149e6016953d40dda4
 msgid ":doc:`building_ai_scientists/claude_code` - Claude Code integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/claude_code` - Claude Code 集成"
 
 #: ../../guide/mcp_support.rst:451 b5318845b6c74f3e98aaf0a18d2e8696
 msgid ":doc:`building_ai_scientists/qwen_code` - Qwen Code integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/qwen_code` - Qwen Code 集成"
 
 #: ../../guide/mcp_support.rst:452 9e98533672d24dfc95a22c287c072871
 msgid ":doc:`building_ai_scientists/codex_cli` - GPT Codex CLI integration"
-msgstr ""
+msgstr ":doc:`building_ai_scientists/codex_cli` - GPT Codex CLI 集成"
 
 #: ../../guide/mcp_support.rst:455 e2bd58abf82646cfbadb3a876bb72064
 msgid "Advanced Features"
-msgstr ""
+msgstr "高级功能"
 
 #: ../../guide/mcp_support.rst:457 d3e39c4287e9450fa33fd88ff7530fc7
 msgid ":doc:`hooks/index` - Output processing hooks for MCP servers"
-msgstr ""
+msgstr ":doc:`hooks/index` - MCP 服务器的输出处理钩子"
 
 #: ../../guide/mcp_support.rst:458 66fcfd8c1a86467b956d4d25f52d945e
 msgid ":doc:`scientific_workflows` - Building complex workflows with MCP"
-msgstr ""
+msgstr ":doc:`scientific_workflows` - 使用 MCP 构建复杂工作流"
 
 #: ../../guide/mcp_support.rst:459 32988df015ce47a98f634b78e2a43bae
 msgid ":doc:`tool_composition` - Composing tools for advanced research"
-msgstr ""
+msgstr ":doc:`tool_composition` - 用于高级研究的工具组合"
 
 #: ../../guide/mcp_support.rst:462 e07d3a74180b4bc9a2b6ca9538582ff6
 msgid "Examples and Tutorials"
-msgstr ""
+msgstr "示例与教程"
 
 #: ../../guide/mcp_support.rst:464 2cd61c2159b3439d8887ae33507398f4
 msgid ":doc:`examples` - Practical MCP usage examples"

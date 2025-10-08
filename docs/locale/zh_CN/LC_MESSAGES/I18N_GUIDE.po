@@ -194,11 +194,11 @@ msgstr ""
 
 #: ../../I18N_GUIDE.md:157 591c3bab0bda4b2cb51cd43184153816
 msgid "DeepL Translator"
-msgstr ""
+msgstr "DeepL 翻译器"
 
 #: ../../I18N_GUIDE.md:158 9c98b6a39a5a407b8c3bfef8503ea979
 msgid "Google Translate"
-msgstr ""
+msgstr "Google 翻译"
 
 #: ../../I18N_GUIDE.md:159 9f65f3b142944a778bbd67507e4a4e4a
 msgid "ChatGPT/Claude"

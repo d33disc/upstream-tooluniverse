@@ -148,7 +148,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:31 c9530b9d4cfe499eafe4aeb19f5f0901
 msgid "**GWAS Catalog** - `GWAS Catalog <https://www.ebi.ac.uk/gwas/>`_"
-msgstr ""
+msgstr "**GWAS目录** - `GWAS目录 <https://www.ebi.ac.uk/gwas/>`_"
 
 #: ../../reference/data_sources.rst:32 72404316fad24d9d86026a90a347dc60
 msgid "**Hugging Face** - `Hugging Face <https://huggingface.co/>`_"
@@ -158,7 +158,7 @@ msgstr ""
 msgid ""
 "**Human Protein Atlas** - `Human Protein Atlas "
 "<https://www.proteinatlas.org/>`_"
-msgstr ""
+msgstr "**人类蛋白质图谱** - `人类蛋白质图谱 <https://www.proteinatlas.org/>`_"
 
 #: ../../reference/data_sources.rst:34 ecf834504a944f40bbd300aff994f5e2
 msgid "**HumanBase** - `HumanBase <https://hb.flatironinstitute.org/>`_"
@@ -168,7 +168,7 @@ msgstr ""
 msgid ""
 "**Immune Compass** - `Immune Compass <https://github.com/compass-ai/immune-"
 "compass>`_"
-msgstr ""
+msgstr "**免疫指南针** - `免疫指南针 <https://github.com/compass-ai/immune-compass>`_"
 
 #: ../../reference/data_sources.rst:36 6d56cd278fed4188a4914d1e7680bbc0
 msgid "**KEGG** - `KEGG <https://www.genome.jp/kegg/>`_"
@@ -178,7 +178,7 @@ msgstr ""
 msgid ""
 "**Kempner Institute** - `Kempner Institute "
 "<https://kempnerinstitute.harvard.edu/>`_"
-msgstr ""
+msgstr "**肯普纳研究所** - `肯普纳研究所 <https://kempnerinstitute.harvard.edu/>`_"
 
 #: ../../reference/data_sources.rst:38 d2a6ca16c3a34e3e87e9c93eb3f079f8
 msgid "**MeSH** - `MeSH <https://www.nlm.nih.gov/mesh/>`_"
@@ -192,7 +192,7 @@ msgstr ""
 msgid ""
 "**Monarch Initiative** - `Monarch Initiative "
 "<https://monarchinitiative.org/>`_"
-msgstr ""
+msgstr "**Monarch 计划** - `Monarch 计划 <https://monarchinitiative.org/>`_"
 
 #: ../../reference/data_sources.rst:41 659910c54e8b402387241ef1248bf7bc
 msgid "**MyGene.info** - `MyGene.info <https://mygene.info/>`_"

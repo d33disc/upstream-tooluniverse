@@ -51,7 +51,7 @@ msgstr "✅ 创建语言选择页面"
 
 #: ../../old_files/SUMMARY.md:11 035e3fada919410ca399cb8c520f7a2b
 msgid "✅ 支持环境变量配置"
-msgstr ""
+msgstr "✅ 支持通过环境变量进行配置"
 
 #: ../../old_files/SUMMARY.md:13 329b42535530464e9e05e5bda44b5c19
 msgid "`quick_doc_build_cn.sh` (中文版本)"
@@ -104,7 +104,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:53 d9c54fb739df4873a9d7ddc225a8b7d2
 msgid "4. **🔧 翻译系统集成**"
-msgstr ""
+msgstr "4. **🔧 Translation System Integration**"
 
 #: ../../old_files/SUMMARY.md:55 4409acc79d344d829f2a75df5101fdb2
 msgid "自动化流程"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:57 d54b72aa50144fd094cf58d07958c1ba
 msgid "✅ 提取可翻译文本 → `_build/gettext/`"
-msgstr ""
+msgstr "✅ Extract translatable text → `_build/gettext/`"
 
 #: ../../old_files/SUMMARY.md:58 14a5fc84c82d4b26842b3d83ed217e14
 msgid "✅ 更新翻译文件 → `locale/zh_CN/LC_MESSAGES/*.po`"
@@ -148,7 +148,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:90 275ab91de6ae4be582ac146fa5b53b9d
 msgid "✅ 深色/浅色模式切换"
-msgstr ""
+msgstr "✅ 深色模式/浅色模式切换"
 
 #: ../../old_files/SUMMARY.md:91 a0d205b196e74871abbee30710865fec
 msgid "✅ 移动端响应式设计"

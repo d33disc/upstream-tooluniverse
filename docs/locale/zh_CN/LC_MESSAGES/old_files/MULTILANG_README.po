@@ -123,7 +123,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:104 6e67721eedeb481c9e2ee60702cad01d
 msgid "🎨 主题特性"
-msgstr ""
+msgstr "🎨 主题功能"
 
 #: ../../old_files/MULTILANG_README.md:106 d3a9edd0df0f4c9fae764dc38b48c4da
 msgid "Shibuya 主题配置"
@@ -143,39 +143,39 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:125 d8cd447ad1464bf88eb6e599bd6df131
 msgid "✅ 高亮当前页面"
-msgstr ""
+msgstr "✅ 高亮显示当前页面"
 
 #: ../../old_files/MULTILANG_README.md:126 577342240ef44c049fed7592b3a37dca
 msgid "✅ 深度可配置"
-msgstr ""
+msgstr "✅ 高度可配置"
 
 #: ../../old_files/MULTILANG_README.md:128 2210338c0e8f4644a6704aef9c3c95e4
 msgid "顶部导航"
-msgstr ""
+msgstr "顶部导航栏"
 
 #: ../../old_files/MULTILANG_README.md:130 969a5be40adf49c5b21fe17b1868ffc0
 msgid "🏠 Home"
-msgstr ""
+msgstr "🏠 主页"
 
 #: ../../old_files/MULTILANG_README.md:131 bcf23d0b762040c1ade70d9c48971722
 msgid "📖 User Guide"
-msgstr ""
+msgstr "📖 用户指南"
 
 #: ../../old_files/MULTILANG_README.md:132 11fd55b1c3864ec0a15571c0230c9335
 msgid "🔧 Tools"
-msgstr ""
+msgstr "🔧 工具"
 
 #: ../../old_files/MULTILANG_README.md:133 02c9c6f91d504e05a2606f3d24d45f5c
 msgid "🎯 Tutorials"
-msgstr ""
+msgstr "🎯 教程"
 
 #: ../../old_files/MULTILANG_README.md:134 ab39ea0843cb40298eeb8078302cd6f3
 msgid "🔍 Search"
-msgstr ""
+msgstr "🔍 搜索"
 
 #: ../../old_files/MULTILANG_README.md:136 c4bf84a5fded4261b669122c641032eb
 msgid "🌐 语言切换方式"
-msgstr ""
+msgstr "🌐 语言切换方法"
 
 #: ../../old_files/MULTILANG_README.md:138 d4ea9a3a88de484597fb8ccfce3786f3
 msgid "1. 浮动切换器（所有页面）"
@@ -187,7 +187,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:141 3b42c31e5c654c4dae3c2455a87edb3d
 msgid "🇬🇧 English"
-msgstr ""
+msgstr "🇬🇧 英语"
 
 #: ../../old_files/MULTILANG_README.md:142 d3b9c5cb7bbd45ddb285c52cc0e68a94
 msgid "🇨🇳 简体中文"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:144 9c87c057cc4c4a7db560e89a6a996fdb
 msgid "2. 语言选择页"
-msgstr ""
+msgstr "2. 语言选择页面"
 
 #: ../../old_files/MULTILANG_README.md:146 7fe73b5351f6407da6d784e749947d4b
 msgid "访问 `_build/html/languages.html` 或运行："

@@ -26,7 +26,7 @@ msgstr "人工专家反馈"
 
 #: ../../tutorials/expert_feedback.md:2 803c3e1d89c9444ba3a7a7f1d0ce162a
 msgid "![Web UI](../_static/expert_feedback_ui.jpg)"
-msgstr ""
+msgstr "![Web 用户界面](../_static/expert_feedback_ui.jpg)"
 
 #: ../../tutorials/expert_feedback.md:2 e48a3b1b328d4a9e999d869def6d988e
 msgid "Web UI"

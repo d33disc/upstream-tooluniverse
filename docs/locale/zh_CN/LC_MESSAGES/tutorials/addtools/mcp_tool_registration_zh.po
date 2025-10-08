@@ -178,7 +178,7 @@ msgstr ""
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:525
 #: 3e532be5acd146dd9989ef9a96dc1eb1
 msgid "通过这个 MCP 工具注册系统，你可以："
-msgstr ""
+msgstr "通过此 MCP 工具注册系统，您可以："
 
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:527
 #: 6c58466d995741bdaa90d3b0b1b1ac62
@@ -193,7 +193,7 @@ msgstr ""
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:529
 #: 93bbe7029005440d80898d329d7c6aa5
 msgid "✅ **无缝集成** - 其他 ToolUniverse 实例自动发现和加载"
-msgstr ""
+msgstr "✅ **Seamless Integration** - 自动发现并加载其他 ToolUniverse 实例"
 
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:530
 #: 59c38c5b0fb04683ac56469cc032b66b
@@ -203,9 +203,9 @@ msgstr ""
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:531
 #: 1e6f1b87a6214d348f1e360cd24a6670
 msgid "✅ **生产就绪** - 支持并发、错误处理、配置管理"
-msgstr ""
+msgstr "✅ **生产就绪** - 支持并发、错误处理与配置管理"
 
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:533
 #: 2a15b16c11c34b1eb880681af226f76c
 msgid "这样你就可以轻松地将有用的本地工具分享给团队的其他成员，或者在不同的服务器之间复用工具功能！"
-msgstr ""
+msgstr "这样，您就可以轻松地将有用的本地工具分享给团队的其他成员，或在不同服务器之间复用工具功能！"

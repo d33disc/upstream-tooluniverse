@@ -442,16 +442,16 @@ msgstr "**名称**：``get_rdkit_info``"
 msgid ""
 "**Description**: Get comprehensive information about RDKit – cheminformatics"
 " and machine learning toolkit"
-msgstr ""
+msgstr "**描述**：获取关于 RDKit —— 化学信息学与机器学习工具包的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst:369 0fd89e3df7cc4a9e9f74d2c58208c63e
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/cheminformatics_tools.rst:371 ed0c0b96105a4404bf20217f4086d3d9
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/cheminformatics_tools.rst:372 b0542ad1ad6041838e45fa933e1f84c9
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"
