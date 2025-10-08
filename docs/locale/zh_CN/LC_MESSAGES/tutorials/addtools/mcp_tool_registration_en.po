@@ -276,106 +276,106 @@ msgstr "2. 智能客户端使用"
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:512
 #: db09fea6c3ad4b7bb758e8f45d22d6cc
 msgid "Advanced Configuration"
-msgstr ""
+msgstr "高级配置"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:514
 #: 0588cbfa63d24586ae32f71616084db7
 msgid "1. Custom Parameter Schema"
-msgstr ""
+msgstr "1. 自定义参数架构"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:557
 #: 3824b8178c9f4f4288f34eb443d3cdf4
 msgid "2. Production Environment Configuration"
-msgstr ""
+msgstr "2. 生产环境配置"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:590
 #: babce923f29d44aabefe1d0e34461ab2
 msgid "3. Batch Registration of Existing Tools"
-msgstr ""
+msgstr "3. 现有工具的批量注册"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:633
 #: 77e7ec7471c04cf8b6669671d32de075
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:635
 #: e4330ae1e5a3460dbebd91ace5e1c2a2
 msgid "1. Error Handling"
-msgstr ""
+msgstr "1. 错误处理"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:655
 #: cdd0e6db4afe447ca90f317a7d84fc4c
 msgid "2. Performance Optimization"
-msgstr ""
+msgstr "2. 性能优化"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:682
 #: faae26e6beaa45edb14dad4ece816266
 msgid "3. Security Considerations"
-msgstr ""
+msgstr "3. 安全注意事项"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:704
 #: bf7bdd553728498780894ea1f9c0ad1d
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:706
 #: 7dc7878149294239a098a76db8073e85
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:708
 #: bc59b754b8ea4f29b613fb755cfedab1
 msgid "**Server Start Failure**"
-msgstr ""
+msgstr "**服务器启动失败**"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:718
 #: 190215b836314c41a937460cdf59aa88
 msgid "**Tools Not Discoverable**"
-msgstr ""
+msgstr "**工具无法被发现**"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:726
 #: b96434969a4841c3abd415bffe963323
 msgid "**Connection Timeout**"
-msgstr ""
+msgstr "**连接超时**"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:732
 #: cbb5700dff5c4810a92a569b506778ff
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:734
 #: 92792db72e4f4b128b331dc276f1827c
 msgid "With this MCP tool registration system, you can:"
-msgstr ""
+msgstr "通过此MCP工具注册系统，您可以："
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:736
 #: 5c61fc6f2c2f4f28a7e2af66c8fec658
 msgid "✅ **Simple Registration** - Use `@register_mcp_tool` decorator"
-msgstr ""
+msgstr "✅ **简单注册** - 使用 `@register_mcp_tool` 装饰器"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:737
 #: 73ea24dc074f431994d73a1f37654423
 msgid "✅ **Auto Exposure** - One-click MCP server startup"
-msgstr ""
+msgstr "✅ **自动曝光** - 一键启动 MCP 服务器"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:738
 #: 6c5565ac8717408ea075104082a7ef21
 msgid ""
 "✅ **Seamless Integration** - Other ToolUniverse instances auto-discover and "
 "load"
-msgstr ""
+msgstr "✅ **无缝集成** - 其他 ToolUniverse 实例自动发现并加载"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:739
 #: 0592a1074dd2435bb73d33317085177a
 msgid "✅ **Reuse SMCP** - Fully based on existing SMCP architecture"
-msgstr ""
+msgstr "✅ **重用 SMCP** - 完全基于现有的 SMCP 架构"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:740
 #: 659818c3a88f44b0ade6e44b6a4c70a2
 msgid ""
 "✅ **Production Ready** - Support for concurrency, error handling, "
 "configuration management"
-msgstr ""
+msgstr "✅ **生产就绪** - 支持并发处理、错误处理、配置管理"
 
 #: ../../tutorials/addtools/mcp_tool_registration_en.md:742
 #: 8d6f99a5ad1b4ebda3b297cdfa523eef

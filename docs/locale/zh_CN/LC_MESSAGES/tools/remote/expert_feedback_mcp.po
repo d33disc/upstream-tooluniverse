@@ -305,73 +305,74 @@ msgid ""
 "The configuration file expects this format: `localhost:7001` (without "
 "`http://` prefix), even though the server displays `http://0.0.0.0:7001`."
 msgstr ""
+"配置文件要求的格式为：`localhost:7001`（不含 `http://` 前缀），尽管服务器显示为 `http://0.0.0.0:7001`。"
 
 #: ../../tools/remote/expert_feedback_mcp.md:140
 #: 74777f0888b041d1ab290511b908ac84
 msgid "To use these tools through ToolUniverse:"
-msgstr ""
+msgstr "通过 ToolUniverse 使用这些工具："
 
 #: ../../tools/remote/expert_feedback_mcp.md:142
 #: b0ea3c93920e41ef8c806931fd2d523b
 msgid "**Start the MCP server** and note the displayed URL"
-msgstr ""
+msgstr "**启动 MCP 服务器**，并记录显示的 URL 地址"
 
 #: ../../tools/remote/expert_feedback_mcp.md:143
 #: 127f25ce0d594863904c0adc24ab6d0f
 msgid "**Set the environment variable** (required for the MCP connection)"
-msgstr ""
+msgstr "**设置环境变量**（MCP 连接必需）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:144
 #: ed9154a5b5e64094b8c7ecbc19c5d508
 msgid "**Make sure the MCP server is running** on port 7001"
-msgstr ""
+msgstr "**确保 MCP 服务器正在** 7001 端口运行"
 
 #: ../../tools/remote/expert_feedback_mcp.md:145
 #: d988a126fd0f47e8871d18d030dfb205
 msgid ""
 "**Load tools in ToolUniverse** and they will be available with the `expert_`"
 " prefix:"
-msgstr ""
+msgstr "**在 ToolUniverse 中加载工具**，它们将以 `expert_` 前缀可用："
 
 #: ../../tools/remote/expert_feedback_mcp.md:146
 #: b29320631a7c435ea8b04b2cea32b367
 msgid "`expert_consult_human_expert`"
-msgstr ""
+msgstr "专家咨询人工专家"
 
 #: ../../tools/remote/expert_feedback_mcp.md:147
 #: 6d9f6bb380e14bb4990f9304736a1cc1
 msgid "`expert_get_expert_response`"
-msgstr ""
+msgstr "专家获取专家响应"
 
 #: ../../tools/remote/expert_feedback_mcp.md:148
 #: 27b4d592c1e84f89b040e031af205873
 msgid "`expert_list_pending_expert_requests`"
-msgstr ""
+msgstr "专家列表_待处理专家请求"
 
 #: ../../tools/remote/expert_feedback_mcp.md:149
 #: 1c109df76b0a45ff81af2d206da17186
 msgid "`expert_submit_expert_response`"
-msgstr ""
+msgstr "专家提交专家回复"
 
 #: ../../tools/remote/expert_feedback_mcp.md:150
 #: 7a13e3742deb4fc2bc1bf616a04a915f
 msgid "`expert_get_expert_status`"
-msgstr ""
+msgstr "expert_get_expert_status 专家获取专家状态"
 
 #: ../../tools/remote/expert_feedback_mcp.md:152
 #: 5ef124b7247e4615a967ba27fb35375f
 msgid "Example usage:"
-msgstr ""
+msgstr "示例用法："
 
 #: ../../tools/remote/expert_feedback_mcp.md:173
 #: ab27c451f79f4c64b97412056acf63b4
 msgid "Requirements"
-msgstr ""
+msgstr "要求"
 
 #: ../../tools/remote/expert_feedback_mcp.md:175
 #: 849f2b6233524af39a63584890c93752
 msgid "Python 3.8+"
-msgstr ""
+msgstr "Python 3.8 及以上版本"
 
 #: ../../tools/remote/expert_feedback_mcp.md:176
 #: 2d879a6c63b9413e9d19eca394a4c0df
@@ -381,27 +382,27 @@ msgstr ""
 #: ../../tools/remote/expert_feedback_mcp.md:177
 #: 23d0efdbb3854c8396542a4c292be8d8
 msgid "Flask (for web interface)"
-msgstr ""
+msgstr "Flask（用于网页界面）"
 
 #: ../../tools/remote/expert_feedback_mcp.md:178
 #: 8f6624f41cdc4756bffd739332b1742f
 msgid "requests"
-msgstr ""
+msgstr "请求"
 
 #: ../../tools/remote/expert_feedback_mcp.md:180
 #: 06dde256d2ad4b308310622b2d15f4d5
 msgid "Installation"
-msgstr ""
+msgstr "安装"
 
 #: ../../tools/remote/expert_feedback_mcp.md:186
 #: b7ee9ea1ebea467bb7dbf90e713cde80
 msgid "Configuration"
-msgstr ""
+msgstr "配置"
 
 #: ../../tools/remote/expert_feedback_mcp.md:188
 #: 4010f29d56ff4fa0a2eb48e638afa4d4
 msgid "The system uses default ports:"
-msgstr ""
+msgstr "系统使用默认端口："
 
 #: ../../tools/remote/expert_feedback_mcp.md:189
 #: c4d98037d8424721b3efb1cca2eb4025

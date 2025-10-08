@@ -291,103 +291,103 @@ msgstr "验证配置中的服务器 URL"
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:325
 #: 8989869ec65f47fe89d85d0dd0b951ca
 msgid "Ensure the port is not blocked by firewall"
-msgstr ""
+msgstr "确保端口未被防火墙阻塞"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:327
 #: 68fb8b7bdd414c4cb376226ce5e511e4
 msgid "**Tool Not Found**"
-msgstr ""
+msgstr "**未找到工具**"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:328
 #: 38f019417f5b4985ba818a97cabfbc7c
 msgid "Verify the tool name matches your function name with prefix"
-msgstr ""
+msgstr "验证工具名称是否与您的函数名称及其前缀匹配"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:329
 #: 487abc14d62f40a197891e32b4299604
 msgid "Check if auto_register is set to true"
-msgstr ""
+msgstr "检查 auto_register 是否设置为 true"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:330
 #: f85dcdf2f3bc42e8852e36ee7f4fa511
 msgid "Ensure the configuration file is in the correct location"
-msgstr ""
+msgstr "确保配置文件位于正确的位置"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:332
 #: fdd5857c01f641ad91d59baf0c326c89
 msgid "**Import Errors**"
-msgstr ""
+msgstr "**导入错误**"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:333
 #: 2c7f79851b6d4011aafe5c60353b4cef
 msgid "Make sure all dependencies are installed"
-msgstr ""
+msgstr "确保所有依赖项已安装"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:334
 #: 18df0a8b8a7f4585ba0de65f68b8bda4
 msgid "Check Python path for your modules"
-msgstr ""
+msgstr "检查您的模块的 Python 路径"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:335
 #: ffe63ee5317044498f03cd79c6417670
 msgid "Verify virtual environment activation"
-msgstr ""
+msgstr "验证虚拟环境激活情况"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:337
 #: 53df1ee65f7c4999a49ca51b01ec5666
 msgid "**Memory Issues**"
-msgstr ""
+msgstr "**内存问题**"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:338
 #: ea4048269b8f49ababfb1040a3b71eea
 msgid "Set appropriate environment variables (e.g., `MKL_THREADING_LAYER`)"
-msgstr ""
+msgstr "设置适当的环境变量（例如，`MKL_THREADING_LAYER`）"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:339
 #: 0ffde9b61b254edc8d0113307f713e10
 msgid "Configure model parameters for your hardware"
-msgstr ""
+msgstr "为您的硬件配置模型参数"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:340
 #: b7059fcdfd3144529ddddfbe838c9958
 msgid "Consider using model servers for large models"
-msgstr ""
+msgstr "考虑为大型模型使用模型服务器"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:342
 #: db165b45dc064d0287a879fb3e9049ea
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:344
 #: 76196123f65040faa079c3be6c0bb91a
 msgid ""
 "**Error Handling**: Add proper error handling in your MCP server functions"
-msgstr ""
+msgstr "**错误处理**：在您的 MCP 服务器功能中添加适当的错误处理机制"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:345
 #: 2db9fd04cf0e4c78a32ba717c4f7ab0d
 msgid "**Documentation**: Provide clear docstrings for all exposed functions"
-msgstr ""
+msgstr "**文档**：为所有公开函数提供清晰的文档字符串"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:346
 #: 20e43ebf92034118a4598a4d86fccccc
 msgid "**Logging**: Implement logging for debugging and monitoring"
-msgstr ""
+msgstr "**日志记录**：实现日志记录以便调试和监控"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:347
 #: 8675698edec34881959c005185ad2617
 msgid "**Security**: Consider authentication for production deployments"
-msgstr ""
+msgstr "**安全性**：考虑在生产环境部署中实施身份验证"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:348
 #: 29c276659d1c4cccbff2aa61662c727c
 msgid "**Performance**: Use appropriate timeouts and resource limits"
-msgstr ""
+msgstr "**性能**：使用适当的超时设置和资源限制"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:350
 #: 6072774583fc486ab3a71856f70a451f
 msgid "Getting Help"
-msgstr ""
+msgstr "获取帮助"
 
 #: ../../tutorials/aiscientists/MCP_Server_Tutorial.md:352
 #: f037f1d2a61a41619e2fcc517c170136

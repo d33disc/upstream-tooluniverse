@@ -286,102 +286,102 @@ msgstr "配置选项"
 msgid ""
 "The `config` parameter in the decorator supports all standard ToolUniverse "
 "configuration:"
-msgstr ""
+msgstr "装饰器中的 `config` 参数支持所有标准的 ToolUniverse 配置："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:278
 #: da7ffad401c5471e83a1a2c48df008c1
 msgid "Method 2: Manual Registration"
-msgstr ""
+msgstr "方法二：手动注册"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:280
 #: 3341a39e108e4829b97928b3eda522ab
 msgid "For dynamic tools or special cases, you can register tools at runtime:"
-msgstr ""
+msgstr "对于动态工具或特殊情况，您可以在运行时注册工具："
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:324
 #: 978cf72cc2d74989837d86bfae06b031
 msgid "Tool Configuration"
-msgstr ""
+msgstr "工具配置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:326
 #: 6b0c365e6cab4a728466c79c4a72f760
 msgid "Required Fields"
-msgstr ""
+msgstr "必填字段"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:327
 #: 42f721ed045f426eb721dd953e7476ee
 msgid "`name`: Unique identifier for your tool"
-msgstr ""
+msgstr "`name`：您的工具的唯一标识符"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:328
 #: 20e62ff12ef145059f4d96111c3cd999
 msgid "`type`: Class name (must match decorator parameter)"
-msgstr ""
+msgstr "`type`：类名（必须与装饰器参数匹配）"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:329
 #: 55e36d4c5d5b44c8aa217131242cde20
 msgid "`description`: Human-readable description"
-msgstr ""
+msgstr "`description`：人类可读的描述"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:330
 #: e4bd0cee93ec4082876f5771adf2ea35
 msgid "`parameter`: JSON Schema defining input parameters"
-msgstr ""
+msgstr "`parameter`：定义输入参数的 JSON Schema"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:332
 #: 355a68be1cbf42c3893cf753cdd79bc1
 msgid "Optional Fields"
-msgstr ""
+msgstr "可选字段"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:333
 #: 9400d40aea3e40539b26df9a7154cb2b
 msgid "`settings`: Tool-specific configuration"
-msgstr ""
+msgstr "`settings`：工具特定配置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:334
 #: cd2a504a734b4eb3b3f6528f227eb7fc
 msgid "`version`: Tool version"
-msgstr ""
+msgstr "`version`：工具版本"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:335
 #: 6a224b5e47524c648a5206bf28f55f96
 msgid "`tags`: Categorization tags"
-msgstr ""
+msgstr "`tags`：分类标签"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:336
 #: 7a2c4a45b9ad48f6a19f175d020cfcdb
 msgid "`examples`: Usage examples"
-msgstr ""
+msgstr "`examples`：使用示例"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:338
 #: 5674a2ee26824464ae3d2fa5acf28682
 msgid "Parameter Schema Examples"
-msgstr ""
+msgstr "参数模式示例"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:340
 #: 9740a353cc3e4407aa7d86eee64d6f5e
 msgid "Simple Parameters"
-msgstr ""
+msgstr "简单参数"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:352
 #: ad1eec191aa44f93bc672c86bc3e1349
 msgid "Complex Parameters"
-msgstr ""
+msgstr "复杂参数"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:379
 #: 2068b3dda0554e97a0e45712ff4f8a2b
 msgid "Real-World Examples"
-msgstr ""
+msgstr "实际案例"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:381
 #: 6c8645bfb7d747de976b2b03dd94cf7c
 msgid "Example 1: Database Query Tool"
-msgstr ""
+msgstr "示例 1：数据库查询工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:454
 #: b4020bd6b14648c6bc6775eeb2c2d06b
 msgid "Example 2: File Processing Tool"
-msgstr ""
+msgstr "示例 2：文件处理工具"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:551
 #: 11091c9a883f4751ad5fddebd5e31dcc

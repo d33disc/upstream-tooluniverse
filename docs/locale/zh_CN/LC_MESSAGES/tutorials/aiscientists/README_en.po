@@ -265,11 +265,11 @@ msgstr ""
 #: ../../tutorials/aiscientists/README_en.md:77
 #: fdf9ccd92fe145c4be5f03022c69fdc1
 msgid "🌐 [MCP Protocol Specification](https://spec.modelcontextprotocol.io/)"
-msgstr ""
+msgstr "🌐 [MCP 协议规范](https://spec.modelcontextprotocol.io/)"
 
 #: ../../tutorials/aiscientists/README_en.md:81
 #: 0132b872d8aa48ebabf9611363254982
 msgid ""
 "**Ready to get started?** Click [Adding MCP Tools](adding_mcp_tools_en.md) "
 "to begin your MCP journey!"
-msgstr ""
+msgstr "**准备好开始了吗？** 点击[添加 MCP 工具](adding_mcp_tools_en.md)开启您的 MCP 之旅！"

@@ -103,7 +103,7 @@ msgstr "1. Multi-Tool Server"
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:227
 #: 3082ded4e2c14468b15c4ada38e4d3cb
 msgid "2. 智能客户端使用"
-msgstr ""
+msgstr "2. 智能客户端的使用"
 
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:303
 #: 238c658f53554f0d9edd889507343b34
@@ -163,7 +163,7 @@ msgstr ""
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:509
 #: 6d8b306c81b740fc9b50ddab4083a007
 msgid "**工具不能被发现**"
-msgstr ""
+msgstr "**工具无法被检测到**"
 
 #: ../../tutorials/addtools/mcp_tool_registration_zh.md:517
 #: 902fc9da9cd8457590f5098985468160

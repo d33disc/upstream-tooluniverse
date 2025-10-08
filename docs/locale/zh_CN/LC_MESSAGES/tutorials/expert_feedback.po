@@ -243,51 +243,51 @@ msgstr "获取系统状态"
 
 #: ../../tutorials/expert_feedback.md:100 5bb9a4d2120b454a9e1fde69c49df0f3
 msgid "Command Options"
-msgstr ""
+msgstr "命令选项"
 
 #: ../../tutorials/expert_feedback.md:113 80d8ef752ff34c5897483fe7b850f4e0
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: ../../tutorials/expert_feedback.md:115 3c004d7b21f543ca9e028bbf153a881b
 msgid "**`tooluniverse-expert-feedback`** -  Router server"
-msgstr ""
+msgstr "**`tooluniverse-expert-feedback`** - 路由服务器"
 
 #: ../../tutorials/expert_feedback.md:116 ec238e61c98a475bad4cf3f0bb40e74c
 msgid ""
 "**`tooluniverse-expert-feedback-web`** - Launcher Router-Expert with auto-"
 "detection"
-msgstr ""
+msgstr "**`tooluniverse-expert-feedback-web`** - 启动器路由器专家，支持自动检测"
 
 #: ../../tutorials/expert_feedback.md:117 4ae45ac79c434edd804e4836cb825c0d
 msgid "**`simple_test.py`** - Basic test script"
-msgstr ""
+msgstr "**`simple_test.py`** - 基础测试脚本"
 
 #: ../../tutorials/expert_feedback.md:119 5f5ceeda009b4c67b879cdff82be337a
 msgid "Web Interface Features"
-msgstr ""
+msgstr "网页界面功能"
 
 #: ../../tutorials/expert_feedback.md:121 629ee8c38e414f77b74244647e967b13
 msgid "**Modern UI**: Gradient backgrounds, card layouts, responsive design"
-msgstr ""
+msgstr "**现代界面**：渐变背景、卡片布局、响应式设计"
 
 #: ../../tutorials/expert_feedback.md:122 6e831f893f5c4b07aa0a5bb9fd720420
 msgid "**Auto-refresh**: 15-second updates with countdown timer"
-msgstr ""
+msgstr "**自动刷新**：15秒更新，带倒计时器"
 
 #: ../../tutorials/expert_feedback.md:123 7b3a260dc913406a94ad777536da2816
 msgid ""
 "**Priority colors**: Normal (blue), High (orange), Urgent (red + animation)"
-msgstr ""
+msgstr "**优先级颜色**：普通（蓝色）、高（橙色）、紧急（红色 + 动画）"
 
 #: ../../tutorials/expert_feedback.md:124 3818dbdcbf5c4369b67e9fc745c6be3a
 msgid "**Real-time notifications**: Toast messages for user actions"
-msgstr ""
+msgstr "**实时通知**：用户操作的提示消息"
 
 #: ../../tutorials/expert_feedback.md:125 6f592f77081b4ff1a724657296be9e2b
 msgid "**Mobile-friendly**: Works on all screen sizes"
-msgstr ""
+msgstr "**移动友好**：适用于所有屏幕尺寸"
 
 #: ../../tutorials/expert_feedback.md:129 0e71d3857f584bac8eefe3582e647d98
 msgid "*🧑‍⚕️ Built for professionals and AI systems*"
-msgstr ""
+msgstr "*🧑‍⚕️ 为专业人士和人工智能系统打造*"

@@ -293,37 +293,37 @@ msgstr "类型"
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: a6865a553f024398a389800dafa56e4d
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 07b61db6c8be4c9991bdeabee59b706d
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 385299a7b600457da185de16fbec3734
 msgid "`tool_config`"
-msgstr ""
+msgstr "工具配置"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 26fe2c6d54c74af9b5d648776f21ee68
 msgid "dict"
-msgstr ""
+msgstr "字典"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 2e4aeb209b59462fbabc02e1ce718959
 msgid "Required"
-msgstr ""
+msgstr "必填"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 0687dc58f8324ca1a89e9988f55550f6
 msgid "The tool configuration to optimize"
-msgstr ""
+msgstr "工具配置优化"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 862ffb59f4224213a8c8afe7546778ee
 msgid "`max_iterations`"
-msgstr ""
+msgstr "最大迭代次数"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 7970aca3370046e8b497c4518310837d
@@ -338,17 +338,17 @@ msgstr ""
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: ec538c6fc7d047a184846531ba621ccd
 msgid "Maximum number of optimization rounds"
-msgstr ""
+msgstr "最大优化轮数"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 79b7fae0ecf44259a67816f1e0cdefb1
 msgid "`satisfaction_threshold`"
-msgstr ""
+msgstr "满意度阈值"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: ce256c9e7f914b45bd5a80583cccece5
 msgid "float"
-msgstr ""
+msgstr "浮点数"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: bc78f68087e54d8e8553132452fdb20b
@@ -358,37 +358,37 @@ msgstr ""
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 8e64fd3d4358434d84fc3b4377612593
 msgid "Quality score threshold (1-10) for satisfaction"
-msgstr ""
+msgstr "满意度的质量评分阈值（1-10）"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: c15884440cb241fd8a6dadd9b1b338c5
 msgid "`output_file`"
-msgstr ""
+msgstr "输出文件"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 29f12c47287242d9817302fe57480fb7
 msgid "string"
-msgstr ""
+msgstr "字符串"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 9fadc081c914495ab91f02b14732186a
 msgid "auto-generated"
-msgstr ""
+msgstr "自动生成"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 8add8fbd9b724c3c860f2a670cd832f3
 msgid "Custom path for the optimization report"
-msgstr ""
+msgstr "优化报告的自定义路径"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 50d13aa5ddbd40ff994bccf32a6ea8e6
 msgid "`save_to_file`"
-msgstr ""
+msgstr "保存到文件"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 5fcc5e13f2264bebb1337860d444be37
 msgid "bool"
-msgstr ""
+msgstr "布尔值"
 
 #: ../../tutorials/optimization/Tool_Description_Optimizer_Tutorial.md
 #: 4b2ea6f714634218b3472259baa43686

@@ -333,12 +333,12 @@ msgstr "故障排除"
 #: ../../guide/building_ai_scientists/codex_cli.rst:248
 #: 91fbd33007e049f0b2eaa4dc985a1858
 msgid "**Step-by-Step Debugging:**"
-msgstr ""
+msgstr "**逐步调试：**"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:250
 #: 35c40f4a954d4a9e904f387709ff1d05
 msgid "**Check Codex CLI Version:** .. code-block:: bash"
-msgstr ""
+msgstr "**检查 Codex CLI 版本：** .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:253
 #: 2819ee8c6227483b88bc806a90886757
@@ -350,12 +350,12 @@ msgstr ""
 msgid ""
 "Ensure you're using the latest version. Older versions may have MCP server "
 "issues."
-msgstr ""
+msgstr "确保您使用的是最新版本。旧版本可能存在 MCP 服务器问题。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:257
 #: a5472fab35854fbfa35547a29851294e
 msgid "**Verify Configuration File:** .. code-block:: bash"
-msgstr ""
+msgstr "**验证配置文件：** .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:260
 #: 37f89867a0704cbdaf5d8306adf051a5
@@ -365,27 +365,27 @@ msgstr ""
 #: ../../guide/building_ai_scientists/codex_cli.rst:262
 #: e322e3f52fe14be0b8d308816733cc20
 msgid "Ensure the file exists and has correct TOML syntax."
-msgstr ""
+msgstr "确保文件存在且具有正确的 TOML 语法。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:264
 #: 8eca0a3482a9456cac8b98f3a52d3218
 msgid "**Test MCP Server Manually:** .. code-block:: bash"
-msgstr ""
+msgstr "**手动测试 MCP 服务器：** .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:267
 #: f0bb4a62dd32475a96d02d7ad6d230a4
 msgid "uv --directory ~/tooluniverse-env run tooluniverse-smcp-stdio"
-msgstr ""
+msgstr "uv --directory ~/tooluniverse-env 运行 tooluniverse-smcp-stdio"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:269
 #: 6df1d348f7f54348a697f67ab0c245d9
 msgid "This should start the MCP server directly to check if it works."
-msgstr ""
+msgstr "这将直接启动 MCP 服务器以检查其是否正常运行。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:271
 #: db94477709a443369c50e612469cd6c0
 msgid "**Check Codex CLI Logs:** .. code-block:: bash"
-msgstr ""
+msgstr "**检查 Codex CLI 日志：** .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:274
 #: d2af50a73019468a8102f92502ca9325
@@ -395,13 +395,13 @@ msgstr ""
 #: ../../guide/building_ai_scientists/codex_cli.rst:276
 #: 7fc3fd330e5a407084ff3a65d1642a37
 msgid "This enables detailed logging to see MCP server connection errors."
-msgstr ""
+msgstr "这使得能够进行详细日志记录，以查看 MCP 服务器连接错误。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:278
 #: 30ae4db6d80649e4bfbbe503c1c9e09f
 msgid ""
 "**Verify MCP Server Status:** Start Codex CLI and run: .. code-block:: text"
-msgstr ""
+msgstr "**验证 MCP 服务器状态：** 启动 Codex CLI 并运行： .. code-block:: text"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:282
 #: 8aa37cdb17b2403999c6062aa5706de1
@@ -411,12 +411,12 @@ msgstr ""
 #: ../../guide/building_ai_scientists/codex_cli.rst:285
 #: f306059dad2b415694e5abe76a393e65
 msgid "Check if ToolUniverse tools are listed."
-msgstr ""
+msgstr "检查 ToolUniverse 工具是否已列出。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:287
 #: 1191ec4b9cd64f489a17ecf79da29d2f
 msgid "**Check Available Commands:** .. code-block:: bash"
-msgstr ""
+msgstr "**检查可用命令：** .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:290
 #: 789da328c9ed42e9ae29c89d03473862
@@ -426,12 +426,12 @@ msgstr ""
 #: ../../guide/building_ai_scientists/codex_cli.rst:292
 #: ac1b408ccb3b49fbbaa56a2bdaa761c6
 msgid "View all available Codex CLI options."
-msgstr ""
+msgstr "查看所有可用的 Codex CLI 选项。"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:294
 #: 8961b80ea519440ba109c0805035faec
 msgid "**Common Issues:**"
-msgstr ""
+msgstr "**常见问题：**"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:296
 #: 35ce8ae723584802b384ad76d78e0584

@@ -132,7 +132,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:27 0d3332f173834499844a378e04440a3c
 msgid "**Gene Ontology** - `Gene Ontology <http://geneontology.org/>`_"
-msgstr ""
+msgstr "**基因本体论** - `基因本体论 <http://geneontology.org/>`_"
 
 #: ../../reference/data_sources.rst:28 d1ea88e4cc764ac28a8d74bc858cb184
 msgid "**Gemini** - `Gemini <https://gemini.google.com/>`_"

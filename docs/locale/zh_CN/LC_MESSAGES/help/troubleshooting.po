@@ -164,83 +164,83 @@ msgstr "**手动工具装载：**"
 
 #: ../../help/troubleshooting.rst:167 9c42ab059ba84cee9093978220bdf4de
 msgid "API Authentication errors"
-msgstr ""
+msgstr "API 认证错误"
 
 #: ../../help/troubleshooting.rst:169 0cc1db05b93a46ccba29b2dd2f2d2b79
 msgid "**Symptom:** ``401 Unauthorized`` or ``403 Forbidden`` errors."
-msgstr ""
+msgstr "**症状：** ``401 未授权`` 或 ``403 禁止访问`` 错误。"
 
 #: ../../help/troubleshooting.rst:190 efdf13b935b6492d81c0f18ad5c42140
 msgid "**Set API keys:**"
-msgstr ""
+msgstr "**设置 API 密钥：**"
 
 #: ../../help/troubleshooting.rst:197 dc68cf91525a4d098bf6c82cc678b9b7
 msgid "**In Python:**"
-msgstr ""
+msgstr "**在 Python 中：**"
 
 #: ../../help/troubleshooting.rst:204 4f6d43ef13704ab2975da21af5031c9c
 msgid "**Use .env file:**"
-msgstr ""
+msgstr "**使用 .env 文件：**"
 
 #: ../../help/troubleshooting.rst:218 dfd22817afd74c909522b77916f924a0
 msgid "Rate limiting errors"
-msgstr ""
+msgstr "速率限制错误"
 
 #: ../../help/troubleshooting.rst:220 e80caecf4c1249bb8f12077fa305c39b
 msgid "**Symptom:** ``429 Too Many Requests`` or ``RateLimitExceeded``"
-msgstr ""
+msgstr "**症状：** ``429 请求过多`` 或 ``RateLimitExceeded``"
 
 #: ../../help/troubleshooting.rst:234 c0de769d70b54c4381d4220361cca422
 msgid "**Add delays between requests:**"
-msgstr ""
+msgstr "**在请求之间添加延迟：**"
 
 #: ../../help/troubleshooting.rst:244 f42e109428574475a6b0f93228d2de65
 msgid "**Use batch processing:**"
-msgstr ""
+msgstr "**使用批处理：**"
 
 #: ../../help/troubleshooting.rst:255 8be190cd06834c25ba99d8843fecb5d0
 msgid "**Get API keys for higher limits:**"
-msgstr ""
+msgstr "**获取 API 密钥以提升限额：**"
 
 #: ../../help/troubleshooting.rst:257 3f5dc8f6e8c34075941d3b8926a7f2fc
 msgid "Most services offer higher rate limits with API keys."
-msgstr ""
+msgstr "大多数服务通过 API 密钥提供更高的速率限制。"
 
 #: ../../help/troubleshooting.rst:260 5c23c0e842b4454d8dca93b3290d5561
 msgid "Network & Connectivity"
-msgstr ""
+msgstr "网络与连接"
 
 #: ../../help/troubleshooting.rst:263 9d0d43074eb644a5b1d072f98e5ac3ce
 msgid "Connection timeouts"
-msgstr ""
+msgstr "连接超时"
 
 #: ../../help/troubleshooting.rst:265 a7740fc6896648c089a5b7415ebd2584
 msgid "**Symptom:** ``ConnectionTimeout`` or ``ReadTimeout`` errors."
-msgstr ""
+msgstr "**症状：** ``ConnectionTimeout`` 或 ``ReadTimeout`` 错误。"
 
 #: ../../help/troubleshooting.rst:282 6526d5cb060b41f6bbc72890e7bb4c0a
 msgid "**Increase timeout:**"
-msgstr ""
+msgstr "**增加超时时间：**"
 
 #: ../../help/troubleshooting.rst:288 f97942838d4347df9918ed396ca7e56e
 msgid "**Check network connection:**"
-msgstr ""
+msgstr "**检查网络连接：**"
 
 #: ../../help/troubleshooting.rst:295 4561918a606c4e74bd5c93b991870220
 msgid "**Configure proxy (if needed):**"
-msgstr ""
+msgstr "**配置代理（如有需要）：**"
 
 #: ../../help/troubleshooting.rst:304 aae64908c88d404289bc8095242727ca
 msgid "SSL Certificate errors"
-msgstr ""
+msgstr "SSL 证书错误"
 
 #: ../../help/troubleshooting.rst:306 09cb655de2354086a97be6e3ed59316b
 msgid "**Symptom:** ``SSLError`` or certificate verification failures."
-msgstr ""
+msgstr "**症状：** ``SSLError`` 或证书验证失败。"
 
 #: ../../help/troubleshooting.rst:310 e4afaeccb3764c399d4fa354eb332ce2
 msgid "**Update certificates:**"
-msgstr ""
+msgstr "**更新证书：**"
 
 #: ../../help/troubleshooting.rst:316 646889e4a1e74da2bafed327feae4c3e
 msgid "**Temporary bypass (not recommended for production):**"

@@ -162,7 +162,7 @@ msgstr "PubMed_搜索_文章"
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: cfca0233d09a47ad89fed115c3590049
 msgid "PubMed"
-msgstr ""
+msgstr "PubMed（美国国立医学图书馆生物医学文献数据库）"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:44
 #: 73375e66fbd54b0ab6c63737554b2e59
@@ -297,12 +297,12 @@ msgstr "生物学预印本"
 #: ../../tutorials/literature_search_tools_tutorial.rst:63
 #: 8092f92a957f407aa3c802b8a13777ac
 msgid "Biology preprints"
-msgstr ""
+msgstr "生物学预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:66
 #: 0b4bf0f829d2451591e1389ade7d5abc
 msgid "MedRxiv_search_ preprints"
-msgstr ""
+msgstr "MedRxiv_search_ 预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:66
 #: 041c083dde32453db2ff881a039a6370
@@ -312,63 +312,63 @@ msgstr ""
 #: ../../tutorials/literature_search_tools_tutorial.rst:66
 #: c3bd7a2d9cb64da3ab850e91ce008b46
 msgid "Medical Preprints"
-msgstr ""
+msgstr "医学预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:66
 #: 5c196d7f3877448b9474310648f90e21
 msgid "Medical preprints"
-msgstr ""
+msgstr "医学预印本"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:69
 #: b43aa4886e9b4d468de2b61e96968fbe
 msgid "HAL_search_ archive"
-msgstr ""
+msgstr "HAL_search_ 存档"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:69
 #: 8f18120d6c2e45b48ff241c8194bf0b8
 msgid "HAL"
-msgstr ""
+msgstr "硬件抽象层（HAL）"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:69
 #: 47935d60d2a946018588be660aa0ae75
 msgid "French Research Archive"
-msgstr ""
+msgstr "法国研究档案馆"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:69
 #: 207e1c0f8ad34d42b0e641d295c3d6ad
 msgid "French academic papers"
-msgstr ""
+msgstr "法语学术论文"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:72
 #: 2b22cb4c952d45469260d2fecb6c35cb
 msgid "Unpaywall_ check_oa_status"
-msgstr ""
+msgstr "Unpaywall_检查_开放获取状态"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:72
 #: ece60a22a3c744e0986ef3a187b62c75
 msgid "Unpaywall"
-msgstr ""
+msgstr "Unpaywall（免费获取学术论文工具）"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:72
 #: 9f929d72cb004709a9c116b4a64d81c1
 msgid "Open Access Status"
-msgstr ""
+msgstr "开放获取状态"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:72
 #: 6ea7ede6dda441628d819af5a4e98677
 msgid "OA status checking"
-msgstr ""
+msgstr "OA状态检查"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:77
 #: fe646df05c4e4dd0b12b70a6aecde888
 msgid "Getting Started"
-msgstr ""
+msgstr "入门指南"
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:79
 #: 2758dbf811084b2cb3f6490debf617c8
 msgid ""
 "First, let's initialize ToolUniverse and load the literature search tools:"
-msgstr ""
+msgstr "首先，初始化 ToolUniverse 并加载文献检索工具："
 
 #: ../../tutorials/literature_search_tools_tutorial.rst:112
 #: 7573beca3edc4c738253a323d358b9df

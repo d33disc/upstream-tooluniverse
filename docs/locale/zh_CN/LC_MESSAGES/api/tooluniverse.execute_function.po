@@ -234,7 +234,7 @@ msgstr "注册名称。如果未指定，则使用类名。"
 #: 221272ec8daf41de8e03a50492f441bc of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:6
 msgid "Tool configuration dictionary to add to all_tools"
-msgstr ""
+msgstr "工具配置字典，添加到 all_tools 中"
 
 #: ../../api/tooluniverse.execute_function.rst
 #: 01d9aa94b5874ba2b4010db59abd2cb2 0b15b3a929b44f719110783f8babae88
@@ -255,12 +255,12 @@ msgstr ""
 #: cbc59f9c33e04dd798c423f2b3d7656a e1169d98266048e48a33daad5f2de9c5
 #: e5eb5df6a9bd4c1c882eb9aeb0439e81 f2f125f7da494f869476d1af1cf61990
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: 80df3f51e8d247f59311a2df2536d8b8 of
 #: tooluniverse.execute_function.ToolUniverse.register_custom_tool:9
 msgid "The name the tool was registered under"
-msgstr ""
+msgstr "工具注册时使用的名称"
 
 #: ../../api/tooluniverse.execute_function.rst
 #: 036c670366774e4c989ff23104609813 05c078da94be4f358beddc92ef4c5172
@@ -281,85 +281,85 @@ msgstr ""
 #: ee2f9a6877a84299a18f1a21c06cfe33 ee41a8dd3dc84e46a0e853c97120e460
 #: f268a6bd5fdd4ecf94af4be8b3f54c86 f650d0d1d8574f87a83b410b17e8b24c
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 7ce78eee235f4e5bb0f9f136db9fa0ff of
 #: tooluniverse.execute_function.ToolUniverse.force_full_discovery:1
 msgid "Force full tool discovery, importing all tool modules immediately."
-msgstr ""
+msgstr "强制完整工具发现，立即导入所有工具模块。"
 
 #: 267ccc842a2b493eb4b2f5db05725ea2 of
 #: tooluniverse.execute_function.ToolUniverse.force_full_discovery:3
 msgid ""
 "This can be useful when you need to ensure all tools are available "
 "immediately, bypassing lazy loading."
-msgstr ""
+msgstr "当您需要确保所有工具立即可用，绕过延迟加载时，这非常有用。"
 
 #: 132eaedae78d491d8359e1db3c2f1b0c of
 #: tooluniverse.execute_function.ToolUniverse.force_full_discovery:6
 msgid "Updated tool registry with all discovered tools"
-msgstr ""
+msgstr "已更新工具注册表，包含所有已发现的工具"
 
 #: 8995ac439311458f83fa19594cbb1b1d of
 #: tooluniverse.execute_function.ToolUniverse.get_lazy_loading_status:1
 msgid "Get information about lazy loading status and available tools."
-msgstr ""
+msgstr "获取有关懒加载状态及可用工具的信息。"
 
 #: 8752bb4bccee4c37a091c7349b7afb45 of
 #: tooluniverse.execute_function.ToolUniverse.get_lazy_loading_status:3
 msgid "Dictionary with lazy loading status and tool counts"
-msgstr ""
+msgstr "带有懒加载状态和工具计数的字典"
 
 #: 43d78d5ae40d4c1bad3fc9f1a024d43b of
 #: tooluniverse.execute_function.ToolUniverse.get_tool_types:1
 msgid "Get the types of tools available in the tool files."
-msgstr ""
+msgstr "获取工具文件中可用的工具类型。"
 
 #: e59c3a6c5abd46da942438b9b198fc7d of
 #: tooluniverse.execute_function.ToolUniverse.get_tool_types:3
 msgid "A list of tool type names (category keys)."
-msgstr ""
+msgstr "工具类型名称列表（类别键）。"
 
 #: 62514c0330cf49b4893a74248b71925a of
 #: tooluniverse.execute_function.ToolUniverse._get_api_key:1
 msgid "Get API key from environment variables or loaded sources"
-msgstr ""
+msgstr "从环境变量或已加载的源获取 API 密钥"
 
 #: 144c517e5997490aa031e70a46bdc23a of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:1
 msgid ""
 "Check if a tool's required API keys are available. Also supports "
 "optional_api_keys where at least one key from the list must be available."
-msgstr ""
+msgstr "检查工具所需的 API 密钥是否可用。也支持 optional_api_keys，其中列表中的至少一个密钥必须可用。"
 
 #: 4f968ed391634cffb8f5330f251b2587 of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:4
 msgid ""
 "Tool configuration containing optional 'required_api_keys' and "
 "'optional_api_keys' fields"
-msgstr ""
+msgstr "工具配置包含可选的“required_api_keys”和“optional_api_keys”字段"
 
 #: 1675015fa77144bdaa7c1be07e120d2a of
 #: tooluniverse.execute_function.ToolUniverse._check_api_key_requirements:7
 msgid "(bool, list) - (all_keys_available, missing_keys)"
-msgstr ""
+msgstr "(bool, list) - （all_keys_available，missing_keys）"
 
 #: 337960e728dd4b29a319780963d380bc of
 #: tooluniverse.execute_function.ToolUniverse.generate_env_template:1
 msgid "Generate a template .env file with all required API keys"
-msgstr ""
+msgstr "生成包含所有必需 API 密钥的模板 .env 文件"
 
 #: 8c2e9562d23040878216f2b1a1fab01b of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:1
 msgid "Create hook configuration from simple hook_type parameter."
-msgstr ""
+msgstr "从简单的 hook_type 参数创建钩子配置。"
 
 #: 4a83dfbcf3dd4b8b81759b296122066c of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:3
 msgid ""
 "Hook type(s) to enable. Can be 'SummarizationHook', 'FileSaveHook', or a "
 "list of both."
-msgstr ""
+msgstr "启用的钩子类型。可以是 'SummarizationHook'、'FileSaveHook'，或两者的列表。"
 
 #: d2e5bde7f2f843349e7510fa0a5cef3f of
 #: tooluniverse.execute_function.ToolUniverse._create_hook_config_from_type:7

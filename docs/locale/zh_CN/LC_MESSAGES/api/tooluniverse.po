@@ -229,77 +229,77 @@ msgstr "生成的钩子配置"
 #: 1dec73ee8f2745a4a6e383e45ed4e8b3 of
 #: tooluniverse.execute_function.ToolUniverse._execute_tool_with_stream:1
 msgid "Invoke a tool, forwarding stream callbacks when supported."
-msgstr ""
+msgstr "调用工具，在支持时转发流回调。"
 
 #: 08651a002b5043b6b871d78b22e00a82 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:1
 msgid ""
 "Filter tools based on inclusion/exclusion criteria and remove duplicates."
-msgstr ""
+msgstr "根据包含/排除标准筛选工具并去除重复项。"
 
 #: 634f278896df4b13845501366c5531e8 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:3
 msgid "Set of tool names to exclude"
-msgstr ""
+msgstr "要排除的工具名称集合"
 
 #: ea2b27779cd041a9b1584938f2622c97 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:5
 msgid "Set of tool names to include (if None, include all)"
-msgstr ""
+msgstr "要包含的工具名称集合（如果为 None，则包含全部）"
 
 #: ce11d456cd2c48529e7c6996a52d99f1 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:7
 msgid "Set of tool types to include (if None, include all)"
-msgstr ""
+msgstr "要包含的工具类型集合（如果为 None，则包含所有）"
 
 #: 4e2ca1020e2749cd9b2be72ebfff4ec5 of
 #: tooluniverse.execute_function.ToolUniverse._filter_and_deduplicate_tools:9
 msgid "Set of tool types to exclude (if None, exclude none)"
-msgstr ""
+msgstr "要排除的工具类型集合（如果为 None，则不排除任何类型）"
 
 #: b5cc19bc8a2549138ec5197f98fc9c04 of
 #: tooluniverse.execute_function.ToolUniverse._get_api_key:1
 msgid "Get API key from environment variables or loaded sources"
-msgstr ""
+msgstr "从环境变量或已加载的来源获取 API 密钥"
 
 #: 9c74778ae6d3497693e6c1ff96065dd2 of
 #: tooluniverse.execute_function.ToolUniverse._load_auto_discovered_configs:1
 msgid "Load auto-discovered configs from the decorator registry."
-msgstr ""
+msgstr "从装饰器注册表加载自动发现的配置。"
 
 #: 9abeb257b37c41b8a4d11661f7e37605 of
 #: tooluniverse.execute_function.ToolUniverse._load_auto_discovered_configs:3
 msgid ""
 "This method loads tool configurations that were registered automatically via"
 " the @register_tool decorator with config parameter."
-msgstr ""
+msgstr "该方法加载通过带有 config 参数的 @register_tool 装饰器自动注册的工具配置。"
 
 #: 04d57025e29f4ee298ce76877123ff62 of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:1
 msgid "Load tool names from a text file (one tool name per line)."
-msgstr ""
+msgstr "从文本文件中加载工具名称（每行一个工具名称）。"
 
 #: 16c0dab2d99544ac809e63f1b6b0aecf of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:3
 msgid "Path to the text file containing tool names"
-msgstr ""
+msgstr "包含工具名称的文本文件路径"
 
 #: f8d9667b041a4594a278250d6cdabef9 of
 #: tooluniverse.execute_function.ToolUniverse._load_tool_names_from_file:6
 msgid "List of tool names loaded from the file"
-msgstr ""
+msgstr "从文件加载的工具名称列表"
 
 #: d7af93d42fb24d0eb562372f55b24b90 of
 #: tooluniverse.mcp_integration._load_tools_from_mcp_server:1
 msgid "Load tools from a specific MCP server."
-msgstr ""
+msgstr "从特定的 MCP 服务器加载工具。"
 
 #: 2608be234969450eb41af53f7cd78d8d of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:1
 msgid ""
 "Process any MCPAutoLoaderTool instances to automatically discover and "
 "register MCP tools."
-msgstr ""
+msgstr "处理所有 MCPAutoLoaderTool 实例，以自动发现并注册 MCP 工具。"
 
 #: 9fe7ec493d3f48119c162f66e8c41ef2 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:3
@@ -309,22 +309,24 @@ msgid ""
 "configured servers. It handles async operations properly with cleanup and "
 "error handling."
 msgstr ""
+"该方法扫描所有已加载的工具，查找 MCPAutoLoaderTool 实例，并运行其自动发现流程，以从配置的服务器中查找并注册 MCP "
+"工具。该方法正确处理异步操作，包含清理和错误处理机制。"
 
 #: e0aa90e9742e417da809203c31e1afe6 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:7
 #: tooluniverse.execute_function.ToolUniverse.load_tools:32
 msgid "Side Effects:"
-msgstr ""
+msgstr "副作用："
 
 #: 9dc99e3d50a447749a386fdd0dbeff8d of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:8
 msgid "May add new tools to the tool registry"
-msgstr ""
+msgstr "可以向工具注册表中添加新工具"
 
 #: f7eae1b68ed8447496ad06c07e3b1f9d of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:9
 msgid "Prints debug information about the discovery process"
-msgstr ""
+msgstr "打印有关发现过程的调试信息"
 
 #: 597cc28c7a7e45f8afea19cd347f2a68 of
 #: tooluniverse.execute_function.ToolUniverse._process_mcp_auto_loaders:10

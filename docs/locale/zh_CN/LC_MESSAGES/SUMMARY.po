@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:20 e89b707879e04b82b0cb77964b1ef186
 msgid "自动生成的多语言索引页："
-msgstr ""
+msgstr "自动生成的多语言索引页面："
 
 #: ../../SUMMARY.md:21 65e19d5f69ca4411b450b9e00c06897d
 msgid "📍 位置：`_build/html/index.html`"
@@ -148,7 +148,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:90 6b5cb1c316ad48ac9964929caaca3630
 msgid "✅ 深色/浅色模式切换"
-msgstr ""
+msgstr "✅ 深色模式/浅色模式切换"
 
 #: ../../SUMMARY.md:91 3468deae1be744f19547a7dfe0dbb30e
 msgid "✅ 移动端响应式设计"

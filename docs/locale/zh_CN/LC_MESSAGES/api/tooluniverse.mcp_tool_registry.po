@@ -75,7 +75,7 @@ msgstr "请提供具体的英文文本内容，我将为您翻译成符合要求
 
 #: 4d9c351b1ba14f469935c480eca29712 of tooluniverse.mcp_tool_registry:23
 msgid ") class MyAnalysisTool:"
-msgstr ""
+msgstr ") 类 MyAnalysisTool："
 
 #: 1159bb3ea72c406ca5fc05f58165cf8d 6f6e1b16c9d145609014b81320dfd970 of
 #: tooluniverse.mcp_tool_registry:25
@@ -193,17 +193,17 @@ msgstr "配置"
 #: 0694da5a2b324b0a9e95c9e753aa920b d967931190e74c2c895e8b9e5d0eb113 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:-1
 msgid "dict, optional"
-msgstr ""
+msgstr "dict，可选项"
 
 #: 38e28e53df434b9291403caee1ffb337 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:13
 msgid "Tool configuration dictionary. Same as register_tool."
-msgstr ""
+msgstr "工具配置字典。与 register_tool 相同。"
 
 #: a378911980cb40b680de57fa9cb50edb of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:15
 msgid "mcp_config"
-msgstr ""
+msgstr "mcp_config 配置"
 
 #: 43044bd7775c42c6a23209feb83031c5 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:16
@@ -213,23 +213,29 @@ msgid ""
 " (default: 8000) - transport: \"http\" or \"stdio\" (default: \"http\") - "
 "auto_start: Whether to auto-start server when tool is registered"
 msgstr ""
+"额外的 MCP 服务器配置。可包括：  \n"
+"- server_name：MCP 服务器名称  \n"
+"- host：服务器主机（默认值：\"localhost\"）  \n"
+"- port：服务器端口（默认值：8000）  \n"
+"- transport：\"http\" 或 \"stdio\"（默认值：\"http\"）  \n"
+"- auto_start：工具注册时是否自动启动服务器"
 
 #: 050da55e053d4e68ad651bd0230e946e of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:24
 msgid "Returns:"
-msgstr ""
+msgstr "返回值："
 
 #: 41176d75e85346108b361f9e7161ea75 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:25
 msgid "function"
-msgstr ""
+msgstr "函数"
 
 #: df1e648813a54adb96f78014cbbeb3c1 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:26
 msgid ""
 "Decorator function that registers the tool class both locally and as MCP "
 "server."
-msgstr ""
+msgstr "装饰器函数，用于在本地及作为 MCP 服务器注册工具类。"
 
 #: 27c6632e44514aa9bc2074f01b2cb059 3852ed55acd0428282d71d2d2323cf93
 #: 700fe8664810484b90f59a264f875b7c 8f5b63f2d7484636acc315cb5bf58a14 of
@@ -238,7 +244,7 @@ msgstr ""
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:20
 #: tooluniverse.mcp_tool_registry.start_mcp_server:11
 msgid "Examples:"
-msgstr ""
+msgstr "示例："
 
 #: 49eb0da1833a43eaac0b341eb4a9f0af of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:31
@@ -248,29 +254,34 @@ msgid ""
 "@register_mcp_tool('CustomToolName', config={...}, mcp_config={\"port\": "
 "8001}) class MyTool:"
 msgstr ""
+"与 register_tool 相同，仅增加 MCP 暴露：```python @register_mcp_tool('CustomToolName',"
+" config={...}, mcp_config={\"port\": 8001}) class MyTool:"
 
 #: 90a7c817822d475e9c208f4a55bf9e42 fea986fdd0dd4f769f7cc7bf57ba4185 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:35
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:39
 msgid "pass"
-msgstr ""
+msgstr "通过"
 
 #: 354bfdc72cda4ae182b6b27984f29a4e of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:37
 msgid ""
 "@register_mcp_tool()  # Uses class name, default MCP config class "
 "AnotherTool:"
-msgstr ""
+msgstr "@register_mcp_tool()  # 使用类名，默认 MCP 配置类 AnotherTool："
 
 #: 9258b12ee25945f19427fd64f4134ef2 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool:40
 msgid "```"
 msgstr ""
+"```  \n"
+"上下文：文档  \n"
+"```"
 
 #: e016d0d107e14aaf9d6f00f220483450 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:1
 msgid "Register an existing tool class as MCP tool using configuration."
-msgstr ""
+msgstr "使用配置将现有工具类注册为 MCP 工具。"
 
 #: 834218427b784a059c2521996258f6d1 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:3
@@ -280,21 +291,22 @@ msgid ""
 "register_mcp_tool decorator, this does everything register_tool would do "
 "PLUS exposes the tool via MCP."
 msgstr ""
+"此函数提供了一种以编程方式注册工具为MCP工具的方法，无需使用装饰器，适用于动态工具注册。与register_mcp_tool装饰器类似，该函数完成了register_tool的所有功能，且额外通过MCP公开该工具。"
 
 #: 401c8fffd63541dc9c1c1c16c66967ba of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:10
 msgid "tool_class"
-msgstr ""
+msgstr "工具类别"
 
 #: 1643e626292c4044926934ede1691a54 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:-1
 msgid "type"
-msgstr ""
+msgstr "类型"
 
 #: 4f22aeb182944beb940fb426d0e94e41 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:11
 msgid "The tool class to register"
-msgstr ""
+msgstr "要注册的工具类"
 
 #: e15490dd3313467e8e25e8084ca5eb54 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:-1

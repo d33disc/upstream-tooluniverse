@@ -255,7 +255,7 @@ msgstr "布尔型"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 112f9b66e56f484aaf90f2ffa5e9f09b
 msgid "true"
-msgstr ""
+msgstr "真"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: dc3b2e4af67e4b29a2bce43aabdadd8d
@@ -280,32 +280,32 @@ msgstr "工具名称前缀"
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 0a63401e3d2f4528872fc0f55fd3794d
 msgid "`selected_tools`"
-msgstr ""
+msgstr "已选工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: f16b5d6ba71f4700a6fe7596ec340fb4
 msgid "array"
-msgstr ""
+msgstr "数组"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 77f9e05ea03b499ab3fd88d4b6dfa030
 msgid "null"
-msgstr ""
+msgstr "空"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: b689b09aa0ff4ba4b7fc8fb73e9dab0d
 msgid "List of specific tools to load"
-msgstr ""
+msgstr "加载的特定工具列表"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 22eb5176e0be4e4eaa5faa6b3dd9c176
 msgid "`timeout`"
-msgstr ""
+msgstr "超时"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: d8e6e34b68ff464790d4daf6b15b34fb
 msgid "integer"
-msgstr ""
+msgstr "整数"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: 06ba073dde7542479ec369e78d035218
@@ -315,58 +315,58 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md
 #: e26fd02f86904a06b24e502075135928
 msgid "Request timeout in seconds"
-msgstr ""
+msgstr "请求超时时间（秒）"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:146
 #: 09e398790dd74782979e77fe4cd09460
 msgid "Using Auto Loader for Tool Discovery"
-msgstr ""
+msgstr "使用自动加载器进行工具发现"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:167
 #: f8332ab8828149b097b1f9c756aa5400
 msgid "Proxy Tool Configuration"
-msgstr ""
+msgstr "代理工具配置"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:169
 #: 7216e8661425447db211827390592dbd
 msgid "Manual Proxy Tool Creation"
-msgstr ""
+msgstr "手动代理工具创建"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:192
 #: 5e625384866c494e912f0adfabb13100
 msgid "Batch Proxy Tool Creation"
-msgstr ""
+msgstr "批量代理工具创建"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:194
 #: af6785b4e33743f9aedcdfe8a5833978
 msgid ""
 "Use the `MCPServerDiscovery` class to batch discover and create proxy tools:"
-msgstr ""
+msgstr "使用 `MCPServerDiscovery` 类批量发现并创建代理工具："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:216
 #: 0394a074e6dc43f3827e8666c478e367
 msgid "Advanced Configuration Options"
-msgstr ""
+msgstr "高级配置选项"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:218
 #: 1c4228fbefc14be9af1b681b493e6f38
 msgid "Supported Transport Protocols"
-msgstr ""
+msgstr "支持的传输协议"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:220
 #: 35d7e186c89141178176b71834e45aba
 msgid "HTTP Transport"
-msgstr ""
+msgstr "HTTP 传输"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:228
 #: d6db587db57a4bddaeb865f2f8b04afb
 msgid "WebSocket Transport"
-msgstr ""
+msgstr "WebSocket 传输"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:236
 #: 809da9a9ea97495caaf8e8ddfd5c0679
 msgid "Environment Variable Support"
-msgstr ""
+msgstr "环境变量支持"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:238
 #: 12b3740e1168443482bd3af33db95905

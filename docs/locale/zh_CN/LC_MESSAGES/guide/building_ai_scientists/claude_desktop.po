@@ -353,6 +353,11 @@ msgid ""
 "**Gene Analysis**: - Gene information from UniProt - Protein structure "
 "analysis - Expression pattern analysis - Pathway involvement"
 msgstr ""
+"**基因分析**：  \n"
+"- 来自 UniProt 的基因信息  \n"
+"- 蛋白质结构分析  \n"
+"- 表达模式分析  \n"
+"- 途径参与分析"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:203
 #: be37ff620e504f8199617eccd73100e6
@@ -360,16 +365,21 @@ msgid ""
 "**Molecular Interactions**: - Protein-protein interactions - Drug-target "
 "interactions - Pathway analysis - Functional annotation"
 msgstr ""
+"**分子相互作用**：  \n"
+"- 蛋白质-蛋白质相互作用  \n"
+"- 药物-靶点相互作用  \n"
+"- 通路分析  \n"
+"- 功能注释"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:226
 #: 5fd176be15bf42e882166222a7f3660c
 msgid "Literature Research and Analysis"
-msgstr ""
+msgstr "文献调研与分析"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:228
 #: cbe5ef70034748719b05b2fb4884f90c
 msgid "Comprehensive literature search and analysis capabilities:"
-msgstr ""
+msgstr "全面的文献检索与分析能力："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:230
 #: 5f018a09b6e64056b7321b6f5940d287
@@ -377,6 +387,11 @@ msgid ""
 "**Literature Search**: - PubMed searches - Semantic Scholar integration - "
 "Europe PMC access - Citation analysis"
 msgstr ""
+"**文献检索**：  \n"
+"- PubMed 检索  \n"
+"- Semantic Scholar 集成  \n"
+"- Europe PMC 访问  \n"
+"- 引文分析"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:236
 #: 726f2c08968d47d1b970822a4a378c4a
@@ -384,16 +399,21 @@ msgid ""
 "**Content Analysis**: - Abstract summarization - Key finding extraction - "
 "Trend analysis - Gap identification"
 msgstr ""
+"**内容分析**：  \n"
+"- 摘要总结  \n"
+"- 关键发现提取  \n"
+"- 趋势分析  \n"
+"- 差距识别"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:259
 #: db15231d0c8c4f1890aa127021aebc9e
 msgid "Clinical Research and Trials"
-msgstr ""
+msgstr "临床研究与试验"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:261
 #: a669178f406146fdb87a20b2624f67e7
 msgid "Access clinical trial data and regulatory information:"
-msgstr ""
+msgstr "访问临床试验数据和监管信息："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:263
 #: f339bfb9cf5543cd807ec10032f1aa84
@@ -401,6 +421,11 @@ msgid ""
 "**Clinical Trials**: - ClinicalTrials.gov searches - Trial status and "
 "results - Patient population analysis - Outcome assessment"
 msgstr ""
+"**临床试验**：  \n"
+"- ClinicalTrials.gov 查询  \n"
+"- 试验状态及结果  \n"
+"- 患者群体分析  \n"
+"- 结局评估"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:269
 #: 60ee200d88dc42e596f2a849d937bac4
@@ -408,36 +433,41 @@ msgid ""
 "**Regulatory Information**: - FDA drug approvals - Safety warnings - "
 "Labeling information - Adverse event reports"
 msgstr ""
+"**法规信息**：  \n"
+"- FDA 药品批准  \n"
+"- 安全警示  \n"
+"- 标签信息  \n"
+"- 不良事件报告"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:292
 #: 5eb72bc60c0346b690b5a935c02993e0
 msgid "Drug Discovery Workflow"
-msgstr ""
+msgstr "药物发现工作流程"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:294
 #: 73cb22e457c84e48b94e9b482f4a422c
 msgid "Complete drug discovery workflow using Claude Desktop:"
-msgstr ""
+msgstr "使用 Claude Desktop 完成药物发现全流程："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:328
 #: 84603ca6ee524bc3bd3a9a29e5b0750d
 msgid "Genomics Research Workflow"
-msgstr ""
+msgstr "基因组学研究工作流程"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:330
 #: 2416859193bb4fa2b6b6c674928f14f4
 msgid "Comprehensive genomics analysis workflow:"
-msgstr ""
+msgstr "综合基因组学分析工作流程："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:364
 #: e68dd6c0cd1942589e6961022c7da839
 msgid "Settings and Configuration"
-msgstr ""
+msgstr "设置与配置"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:367
 #: 6deb5f1c29c440e8b6fec86828def83e
 msgid "Tool Selection Strategies"
-msgstr ""
+msgstr "工具选择策略"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:370
 #: 353123e39d3540cf8c8075eaf4c61615
@@ -445,21 +475,25 @@ msgid ""
 "**Selective Tool Loading**: - Load only relevant tools for specific research"
 " domains - Reduce context window usage - Improve response times"
 msgstr ""
+"**选择性工具加载**：  \n"
+"- 仅加载特定研究领域相关的工具  \n"
+"- 减少上下文窗口的使用  \n"
+"- 提升响应速度"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:375
 #: 32fac55ba8b447e7b140fabd8d3cbd50
 msgid "**Example Tool Selection**:"
-msgstr ""
+msgstr "**示例工具选择**："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:395
 #: 74f34d5f33f8463f96dc5caf562e4535
 msgid "**Custom Tool Sets**"
-msgstr ""
+msgstr "**自定义工具集**"
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:397
 #: 1fd8f76edc0c496f8dbd05733f48021f
 msgid "Create custom tool sets for specific research domains:"
-msgstr ""
+msgstr "为特定研究领域创建自定义工具集："
 
 #: ../../guide/building_ai_scientists/claude_desktop.rst:429
 #: 2495aa6fd9ec45fbbe7c419f01eecb44

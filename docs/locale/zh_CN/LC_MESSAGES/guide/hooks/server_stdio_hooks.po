@@ -290,97 +290,97 @@ msgstr "**SummarizationHook**：增加处理时间，但减小输出大小"
 #: ../../guide/hooks/server_stdio_hooks.rst:267
 #: 05479687b3f040acb58ee558a207ab3b
 msgid "**FileSaveHook**: Minimal processing overhead, good for archiving"
-msgstr ""
+msgstr "**FileSaveHook**：处理开销极小，适合归档使用"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:268
 #: 48fea58c51df4ae28685f125ca02101a
 msgid "**Thresholds**: Set appropriate output length thresholds"
-msgstr ""
+msgstr "**阈值**：设置适当的输出长度阈值"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:269
 #: 470f1c9c981e4438933257fcba3c4c74
 msgid "**Chunk Size**: Balance processing efficiency and context preservation"
-msgstr ""
+msgstr "**块大小**：平衡处理效率与上下文保留"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:272
 #: 7e22a99e2c8f4a3ba62b058b549bfd43
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:275
 #: 3af93deda2bc4ef788bf41c8bc5f66ae
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:277
 #: 87f114e9aae84c7888478738141b6bd6
 msgid "**Hooks Not Triggering:**"
-msgstr ""
+msgstr "**钩子未触发：**"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:279
 #: 7690628923cc47f086a76a4cf6a346bb
 msgid "Check output length thresholds"
-msgstr ""
+msgstr "检查输出长度阈值"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:280
 #: 4502f496583c48bfbe992650d9a5393f
 msgid "Verify hook configuration syntax"
-msgstr ""
+msgstr "验证钩子配置语法"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:281
 #: b64c36be637d4fe88a82139945524581
 msgid "Ensure hooks are enabled"
-msgstr ""
+msgstr "确保已启用钩子"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:283
 #: 8d77fa99b46445648fd5a2753eaefdd3
 msgid "**Performance Issues:**"
-msgstr ""
+msgstr "**性能问题：**"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:285
 #: 00a6ab07dbfb4f1c986860cf4720f710
 msgid "Adjust chunk sizes"
-msgstr ""
+msgstr "调整块大小"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:286
 #: 4fe6bde8c77045a1976409bf106d16ba
 msgid "Increase thresholds"
-msgstr ""
+msgstr "提高阈值"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:287
 #: acc1f31e602346e2844ecce2c447ee42
 msgid "Use tool-specific configurations"
-msgstr ""
+msgstr "使用特定工具的配置"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:289
 #: 4e81289158d840f4968fd4a949eed7c2
 msgid "**Configuration Errors:**"
-msgstr ""
+msgstr "**配置错误：**"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:291
 #: 007b62d70b9c4e6582c4d0dd43dfb1e0
 msgid "Validate JSON syntax"
-msgstr ""
+msgstr "验证 JSON 语法"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:292
 #: b89b6e8c30aa4acd96d59a5de563783f
 msgid "Check parameter names"
-msgstr ""
+msgstr "检查参数名称"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:293
 #: db0ed2e3be654d54be75d670057bc54d
 msgid "Verify hook types"
-msgstr ""
+msgstr "验证钩子类型"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:296
 #: cef1a98ffbf04b8aa611351a619df161
 msgid "Debug Mode"
-msgstr ""
+msgstr "调试模式"
 
 #: ../../guide/hooks/server_stdio_hooks.rst:298
 #: 0b44ff6c8727434ead0fe47724fc122a
 msgid "Enable verbose logging for troubleshooting:"
-msgstr ""
+msgstr "启用详细日志记录以进行故障排除："
 
 #: ../../guide/hooks/server_stdio_hooks.rst:309
 #: 8e9b736d9f944a6296538bd4fedf6d5d

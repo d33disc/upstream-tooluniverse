@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:5 c00fa8d278a04852933adf984cac74be
 msgid "✅ **完整的中英文支持** - 使用 Sphinx i18n 系统"
-msgstr ""
+msgstr "✅ **完整的中英文支持** - 使用 Sphinx 国际化（i18n）系统"
 
 #: ../../MULTILANG_README.md:6 d1064332b0eb4287a55466536c129068
 msgid "✅ **Shibuya 现代主题** - 美观的界面，完美的侧边栏导航"
@@ -139,11 +139,11 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:125 9e61af63732e464f85bb4cffc9ef3941
 msgid "✅ 高亮当前页面"
-msgstr ""
+msgstr "✅ 高亮显示当前页面"
 
 #: ../../MULTILANG_README.md:126 f88c5649247b4a83b1229b3b16ee5bf2
 msgid "✅ 深度可配置"
-msgstr ""
+msgstr "✅ 高度可配置"
 
 #: ../../MULTILANG_README.md:128 017dbf939b5745c6a8cc17300c1caa98
 msgid "顶部导航"
@@ -151,19 +151,19 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:130 d28344cf4ede42a89816b48c28c71974
 msgid "🏠 Home"
-msgstr ""
+msgstr "🏠 首页"
 
 #: ../../MULTILANG_README.md:131 8d3dbb02aa9147aa904a57d4f7ee112d
 msgid "📖 User Guide"
-msgstr ""
+msgstr "📖 用户指南"
 
 #: ../../MULTILANG_README.md:132 acffc3aacee0481897da58d203340866
 msgid "🔧 Tools"
-msgstr ""
+msgstr "🔧 工具"
 
 #: ../../MULTILANG_README.md:133 00708f20ac2c49f2bf5cb1eaeda0d1db
 msgid "🎯 Tutorials"
-msgstr ""
+msgstr "🎯 教程"
 
 #: ../../MULTILANG_README.md:134 7af2ac49f4bf44ce99f209e69308f1de
 msgid "🔍 Search"

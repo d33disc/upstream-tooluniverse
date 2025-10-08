@@ -331,46 +331,46 @@ msgstr "find_tools 方法的结果（可以是字符串、列表或元组）"
 #: 2f52118765f840ff9776a1c420585797 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM._format_as_json:4
 msgid "Original search query"
-msgstr ""
+msgstr "原始搜索查询"
 
 #: 34dae61fb3eb45d5895a59491c20f91f of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM._format_as_json:5
 msgid "Requested number of tools"
-msgstr ""
+msgstr "请求的工具数量"
 
 #: ee351649b23b4105b7310d13b105b3af of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM._format_as_json:6
 msgid "Requested categories filter"
-msgstr ""
+msgstr "请求的类别筛选器"
 
 #: 45d86d18d7134bd08cbefb94475ab9e4 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM._format_as_json:7
 msgid "Whether return_call_result was True"
-msgstr ""
+msgstr "无论 return_call_result 是否为 True"
 
 #: 9a43f4ec31084d13864ad91b7405a771 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM._format_as_json:9
 msgid "JSON formatted search results"
-msgstr ""
+msgstr "JSON 格式的搜索结果"
 
 #: 473f7397068b4256bef62a42a89c2d15 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.clear_cache:1
 msgid "Clear the tool cache to force refresh on next access."
-msgstr ""
+msgstr "清除工具缓存，以便在下次访问时强制刷新。"
 
 #: 566295961cb74ef196436d2c1be622f7 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.run:1
 msgid ""
 "Run the tool finder with given arguments following the standard tool "
 "interface."
-msgstr ""
+msgstr "按照标准工具接口，使用给定参数运行工具查找器。"
 
 #: f3a05ff1e65e4d89bdb126e9b1db2223 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.run:3
 msgid ""
 "This method now returns JSON format by default to ensure consistency with "
 "other search tools and simplify integration with SMCP."
-msgstr ""
+msgstr "此方法现默认返回 JSON 格式，以确保与其他搜索工具的一致性并简化与 SMCP 的集成。"
 
 #: dc1379ccc4524a9cae4b3a46470d3f92 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.run:6
@@ -385,15 +385,23 @@ msgid ""
 "specifications as a list - categories (list, optional): List of tool "
 "categories to filter by"
 msgstr ""
+"包含字典：  \n"
+"- description（字符串，可选）：用于查找工具的查询消息（对应 'message'）  \n"
+"- limit（整数，可选）：返回的工具数量（对应 'rag_num'），默认值为5  \n"
+"- picked_tool_names（列表，可选）：预先选择的工具名称列表以供处理  \n"
+"- return_call_result（布尔值，可选）：是否返回提示和名称，默认值为False  \n"
+"- return_format（字符串，可选）：'json'（默认）或用于旧格式的 'legacy'  \n"
+"- return_list_only（布尔值，可选）：是否仅以列表形式返回工具规格  \n"
+"- categories（列表，可选）：用于筛选的工具类别列表"
 
 #: ed08c913f1d24d55932a60828d6ee94a of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.find_tools_legacy:1
 msgid "Legacy method for finding tools with different parameter names."
-msgstr ""
+msgstr "用于查找具有不同参数名称的工具的传统方法。"
 
 #: 1b5c39c3d5354cbfab218d0c62fc3ba5 of
 #: tooluniverse.tool_finder_llm.ToolFinderLLM.find_tools_legacy:3
 msgid ""
 "This provides backward compatibility for any code that might use 'query' "
 "instead of 'description'."
-msgstr ""
+msgstr "这为可能使用“query”而非“description”的任何代码提供了向后兼容性。"

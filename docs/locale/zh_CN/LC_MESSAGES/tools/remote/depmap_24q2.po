@@ -243,72 +243,73 @@ msgstr "**模式**：无状态 HTTP"
 
 #: ../../tools/remote/depmap_24q2.md:142 8bd72c91bb474b2894a386bc611d284d
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../tools/remote/depmap_24q2.md:144 f6ed16b195dc4a69baeac3f4c9abe9f9
 msgid "**Data Directory Not Found**"
-msgstr ""
+msgstr "**未找到数据目录**"
 
 #: ../../tools/remote/depmap_24q2.md:148 65aa266dd1744cd1a9c4c5356bff52b0
 msgid "Ensure `DEPMAP_DATA_PATH` is set correctly"
-msgstr ""
+msgstr "确保正确设置 `DEPMAP_DATA_PATH`"
 
 #: ../../tools/remote/depmap_24q2.md:149 16635b2608db465eb1bdbca356ffaa60
 msgid "Verify the `depmap_24q2/` subdirectory exists"
-msgstr ""
+msgstr "验证 `depmap_24q2/` 子目录是否存在"
 
 #: ../../tools/remote/depmap_24q2.md:150 14905514170d4d748ae1be0a7f51cd97
 msgid "Check that correlation matrices are properly downloaded"
-msgstr ""
+msgstr "检查相关矩阵是否已正确下载"
 
 #: ../../tools/remote/depmap_24q2.md:152 2dca490a1a794ee7ac8af70dde70ecba
 msgid "**Gene Symbol Not Found**"
-msgstr ""
+msgstr "**未找到基因符号**"
 
 #: ../../tools/remote/depmap_24q2.md:156 21e565a6c42344dd8b7e271bd870329c
 msgid "Verify gene symbol spelling (use standard HUGO nomenclature)"
-msgstr ""
+msgstr "核实基因符号拼写（使用标准HUGO命名法）"
 
 #: ../../tools/remote/depmap_24q2.md:157 0a3b2d0570b540e78e06d8662dc0ee20
 msgid "Check if gene is present in the DepMap 24Q2 dataset"
-msgstr ""
+msgstr "检查基因是否存在于 DepMap 24Q2 数据集中"
 
 #: ../../tools/remote/depmap_24q2.md:158 c8a963a92e814c1abba06202d7240ea2
 msgid "Try alternative gene symbols or aliases"
-msgstr ""
+msgstr "尝试使用其他基因符号或别名"
 
 #: ../../tools/remote/depmap_24q2.md:160 53e3fdaa0eb64d92aed93c64f7507a74
 msgid "**Missing Correlation Data**"
-msgstr ""
+msgstr "**缺失的关联数据**"
 
 #: ../../tools/remote/depmap_24q2.md:164 9343bdd88b3b45c2a567d9c35b4eb84c
 msgid "Ensure correlation matrices are in the correct format (.npy or .h5)"
-msgstr ""
+msgstr "确保相关矩阵格式正确（.npy 或 .h5）"
 
 #: ../../tools/remote/depmap_24q2.md:165 427b7a91ea4f4c97b9a5f8c502ce05cd
 msgid ""
 "Verify gene index files are present (`gene_idx_array.npy` or "
 "`gene_names.txt`)"
-msgstr ""
+msgstr "确认基因索引文件是否存在（`gene_idx_array.npy` 或 `gene_names.txt`）"
 
 #: ../../tools/remote/depmap_24q2.md:166 3f0b63340cf84f3fb42b0fe311e0dfa9
 msgid "Check file permissions and accessibility"
-msgstr ""
+msgstr "检查文件权限及可访问性"
 
 #: ../../tools/remote/depmap_24q2.md:169 2696720407a24e3e8567f072b436ada2
 msgid "References"
-msgstr ""
+msgstr "参考文献"
 
 #: ../../tools/remote/depmap_24q2.md:171 97ca62cb90f247b695791b74808d85d3
 msgid ""
 "**DepMap Project**: [Broad Institute DepMap Portal](https://depmap.org/)"
-msgstr ""
+msgstr "**DepMap 项目**：[Broad Institute DepMap 入口网站](https://depmap.org/)"
 
 #: ../../tools/remote/depmap_24q2.md:172 5448a748182c4f948b3e98e42e53539f
 msgid ""
 "**DepMap Paper**: [Mapping the Cancer Dependency "
 "Map](https://www.nature.com/articles/s41586-019-1103-9)"
 msgstr ""
+"**DepMap 论文**：[绘制癌症依赖性图谱](https://www.nature.com/articles/s41586-019-1103-9)"
 
 #: ../../tools/remote/depmap_24q2.md:173 fb83ab6877fc41b691f5da25611a394b
 msgid ""
@@ -316,7 +317,9 @@ msgid ""
 "improves specificity of CRISPR-Cas9 essentiality screens in cancer "
 "cells](https://www.nature.com/articles/s41588-018-0194-x)"
 msgstr ""
+"**CERES算法**：[计算校正拷贝数效应提升CRISPR-"
+"Cas9在癌细胞中必需性筛选的特异性](https://www.nature.com/articles/s41588-018-0194-x)"
 
 #: ../../tools/remote/depmap_24q2.md:174 2ac5224b60d2433f8e9bf0a24a5dda68
 msgid "**Data Portal**: https://depmap.org/portal/download/"
-msgstr ""
+msgstr "**数据门户**：https://depmap.org/portal/download/"

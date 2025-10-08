@@ -301,113 +301,113 @@ msgstr "化学化合物研究"
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:199
 #: 921087722bfe4e759f55b6e98f50bf78
 msgid "Clinical Trial Analysis"
-msgstr ""
+msgstr "临床试验分析"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:204
 #: c41ffc4955164be99ae99dcfd8f7bcc5
 msgid "Multi-Tool Research Workflow"
-msgstr ""
+msgstr "多工具研究工作流程"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:212
 #: c97ba2a0db9f4135bffb8c152f659b16
 msgid "Tool Discovery and Execution"
-msgstr ""
+msgstr "工具发现与执行"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:214
 #: e58062d58b82408bb78d7caf086deac7
 msgid "Discovery Process"
-msgstr ""
+msgstr "发现过程"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:216
 #: c1f06f704a574c61938d19b9fefea238
 msgid "When the Gemini CLI starts, it:"
-msgstr ""
+msgstr "当 Gemini CLI 启动时，它会："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:218
 #: 5ac8758143d04f46bf3d269b1b26e5fc
 msgid ""
 "**Connects to ToolUniverse**: Establishes a connection using stdio transport"
 " based on your `settings.json`."
-msgstr ""
+msgstr "**连接到 ToolUniverse**：根据您的 `settings.json` 使用 stdio 传输建立连接。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:219
 #: 99e2fadcf2b44752812eabed3daadbdb
 msgid ""
 "**Discovers tools**: Fetches all available ToolUniverse tools and their "
 "schemas."
-msgstr ""
+msgstr "**发现工具**：获取所有可用的 ToolUniverse 工具及其架构。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:220
 #: b08c0d9dc16e400d9cd8f38a914a39a6
 msgid ""
 "**Validates schemas**: Ensures compatibility with Gemini API requirements."
-msgstr ""
+msgstr "**验证架构**：确保与 Gemini API 要求的兼容性。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:221
 #: f1ff2ba41297432cb1815d53c95b41ce
 msgid ""
 "**Registers tools**: Makes the tools available for use in conversations."
-msgstr ""
+msgstr "**注册工具**：使工具可用于对话中。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:223
 #: ccd8c6e5159242be8384b7ae61445786
 msgid "Tool Execution Flow"
-msgstr ""
+msgstr "工具执行流程"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:225
 #: 3d384231da274ffabcb368f988168a3b
 msgid "When you request a scientific research task:"
-msgstr ""
+msgstr "当您请求一项科学研究任务时："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:227
 #: 2cb48c7ea9a044d6af4130ef228163e5
 msgid ""
 "**Tool selection**: Gemini automatically selects the most appropriate "
 "ToolUniverse tools."
-msgstr ""
+msgstr "**工具选择**：Gemini 会自动选择最合适的 ToolUniverse 工具。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:228
 #: f50800b298ef401eb3f12b774636b5c7
 msgid ""
 "**Confirmation**: If `trust: false`, you'll be prompted to confirm the tool "
 "execution."
-msgstr ""
+msgstr "**确认**：如果设置为 `trust: false`，系统将提示您确认工具的执行。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:229
 #: de43f43450504c36917ee7a1b7fc168f
 msgid "**Execution**: The tool is called with the necessary parameters."
-msgstr ""
+msgstr "**执行**：该工具在传入必要参数后被调用。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:230
 #: 346627ed16ad46aaa61d89e9500599a9
 msgid ""
 "**Response**: Results are formatted and displayed in a user-friendly manner."
-msgstr ""
+msgstr "**响应**：结果以用户友好的方式格式化并显示。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:232
 #: ad0e938116a646d9aa53aaa10e4f4ffb
 msgid "Trust and Security"
-msgstr ""
+msgstr "信任与安全"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:234
 #: dad29d415dbf4834a9190653da18fb16
 msgid "For enhanced security, keep `trust: false` to:"
-msgstr ""
+msgstr "为了增强安全性，请保持 `trust: false`。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:235
 #: aa8d0bf25d444334b8b856276baa39ba
 msgid "Review each tool call before it runs."
-msgstr ""
+msgstr "在每次工具调用运行前进行审核。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:236
 #: d07438ee572a46f38ae4454863f2b4ad
 msgid "Understand what data is being accessed or sent."
-msgstr ""
+msgstr "了解正在访问或发送的数据内容。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:237
 #: c110b1511fb743e483d73dbc2d80a4ef
 msgid "Prevent unintended API calls to external services."
-msgstr ""
+msgstr "防止对外部服务的非预期 API 调用。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:239
 #: 6bed2486d734415b9a63d25bb75cb1a4

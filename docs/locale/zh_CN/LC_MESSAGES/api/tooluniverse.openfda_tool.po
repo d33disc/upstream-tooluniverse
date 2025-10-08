@@ -132,9 +132,9 @@ msgstr "默认的 BaseTool 实现接受一个可选的参数映射，以便与�
 #: tooluniverse.openfda_tool.FDADrugLabelSearchTool:1
 #: tooluniverse.openfda_tool.FDADrugLabelTool:1
 msgid "Bases: :py:class:`~tooluniverse.openfda_tool.FDATool`"
-msgstr ""
+msgstr "基础类：:py:class:`~tooluniverse.openfda_tool.FDATool`"
 
 #: e8d75824a5b34d0f8b207da85ea3c1be of
 #: tooluniverse.openfda_tool.FDADrugLabelGetDrugGenericNameTool:1
 msgid "Bases: :py:class:`~tooluniverse.openfda_tool.FDADrugLabelTool`"
-msgstr ""
+msgstr "基类：:py:class:`~tooluniverse.openfda_tool.FDADrugLabelTool`"

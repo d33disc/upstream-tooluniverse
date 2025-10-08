@@ -317,17 +317,17 @@ msgstr "保存配置后，验证连接："
 #: ../../guide/building_ai_scientists/claude_code.rst:188
 #: 90f16a902e2840fdbfea2ebed368db1b
 msgid "Terminal (Claude Code CLI) - Launch in your project:"
-msgstr ""
+msgstr "终端（Claude Code CLI）- 在您的项目中启动："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:196
 #: 6e1d78fe5d214005ba88e4273d4c5824
 msgid "In the chat, ask: \"What ToolUniverse tools are available?\""
-msgstr ""
+msgstr "在聊天中，询问：“有哪些 ToolUniverse 工具可用？”"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:197
 #: cfcc47776cde4310b2bc3ee27a7a6e2f
 msgid "If issues occur, run diagnostics:"
-msgstr ""
+msgstr "如遇问题，请运行诊断程序："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:203
 #: c2aaa106f638475e8357494a4e2901a7
@@ -335,6 +335,8 @@ msgid ""
 "For terminal configuration, see: `Claude Code CLI reference "
 "<https://docs.anthropic.com/en/docs/claude-code/cli-reference>`_"
 msgstr ""
+"有关终端配置，请参见：`Claude Code CLI 参考 <https://docs.anthropic.com/en/docs/claude-"
+"code/cli-reference>`_"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:205
 #: f499be7f85144010a69c8325266858d1
@@ -346,6 +348,10 @@ msgid ""
 "<https://docs.anthropic.com/en/docs/claude-code/add-claude-code-to-your-"
 "ide>`_"
 msgstr ""
+"VS Code - 重启 VS Code，然后打开命令面板并运行：“Claude: Open Chat” - 询问：“有哪些 ToolUniverse "
+"工具可用？” - 如果工具未显示，请检查 `.claude/settings.local.json` 并重新加载窗口 - 有关 VS Code "
+"设置，请参见：`将 Claude 代码添加到您的 IDE <https://docs.anthropic.com/en/docs/claude-"
+"code/add-claude-code-to-your-ide>`_"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:211
 #: 28e139e38c5643b1a6940ff548b4bb37
@@ -357,23 +363,28 @@ msgid ""
 "<https://docs.anthropic.com/en/docs/claude-code/add-claude-code-to-your-"
 "ide>`_"
 msgstr ""
+"JetBrains（IntelliJ/PyCharm 等）- 重启 IDE → 打开 Claude 工具窗口 - 询问：“有哪些 "
+"ToolUniverse 工具可用？” - 如果工具未显示，请检查 工具 → Claude Code → MCP 服务器 设置 - 有关 "
+"JetBrains 配置，请参阅：`将 Claude Code 添加到您的 IDE "
+"<https://docs.anthropic.com/en/docs/claude-code/add-claude-code-to-your-"
+"ide>`_"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:218
 #: e97325a338414c2bbae6e46ed1518e24
 msgid "Scientific Research Capabilities"
-msgstr ""
+msgstr "科学研究能力"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:221
 #: 01345ebe80fc4a5d98268cee32e6e340
 msgid "Drug Discovery and Development"
-msgstr ""
+msgstr "药物发现与开发"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:223
 #: 2bf7fc485d2b428eab9fb21384d821d7
 msgid ""
 "Claude Code with ToolUniverse enables comprehensive drug discovery "
 "workflows:"
-msgstr ""
+msgstr "Claude Code 与 ToolUniverse 搭配，实现全面的药物发现工作流程："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:225
 #: 95880f3a4be746a0bd70acd94797eb5c
@@ -381,6 +392,10 @@ msgid ""
 "**Target Identification**: - Disease analysis and EFO ID lookup - Target "
 "discovery and validation - Literature-based target assessment"
 msgstr ""
+"**靶点识别**：  \n"
+"- 疾病分析及EFO ID查询  \n"
+"- 靶点发现与验证  \n"
+"- 基于文献的靶点评估"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:230
 #: 37ff82fdd5c644b4961d4e0de0d820b9
@@ -389,16 +404,21 @@ msgid ""
 "Safety profile analysis - Drug interaction checking - Clinical trial data "
 "access"
 msgstr ""
+"**药物分析**：  \n"
+"- 从多个数据库检索药物信息  \n"
+"- 安全性分析  \n"
+"- 药物相互作用检查  \n"
+"- 临床试验数据访问"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:237
 #: 0d0ad249ea504eefb53df3225e346a1a
 msgid "Genomics and Molecular Biology"
-msgstr ""
+msgstr "基因组学与分子生物学"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:239
 #: 57b6fcd666f74a3cbc0bf2461be2281b
 msgid "Access comprehensive genomics tools for molecular research:"
-msgstr ""
+msgstr "访问全面的基因组学工具以支持分子研究："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:241
 #: 1f50bb310a2d4cdf9f9a5951f0d90db7
@@ -406,6 +426,11 @@ msgid ""
 "**Gene Analysis**: - Gene information from UniProt - Protein structure "
 "analysis - Expression pattern analysis - Pathway involvement"
 msgstr ""
+"**基因分析**：  \n"
+"- 来自 UniProt 的基因信息  \n"
+"- 蛋白质结构分析  \n"
+"- 表达模式分析  \n"
+"- 途径参与情况"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:247
 #: 9c309ec4a09c4c97a10b7b7771644190
@@ -413,16 +438,21 @@ msgid ""
 "**Molecular Interactions**: - Protein-protein interactions - Drug-target "
 "interactions - Pathway analysis - Functional annotation"
 msgstr ""
+"**分子相互作用**：  \n"
+"- 蛋白质-蛋白质相互作用  \n"
+"- 药物-靶点相互作用  \n"
+"- 通路分析  \n"
+"- 功能注释"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:254
 #: 3296cd7aa2bc41028d1e1a0849a9eb74
 msgid "Literature Research and Analysis"
-msgstr ""
+msgstr "文献调研与分析"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:256
 #: 8ecdb9b9dde0496daebd3037790b96f0
 msgid "Comprehensive literature search and analysis capabilities:"
-msgstr ""
+msgstr "全面的文献检索与分析能力："
 
 #: ../../guide/building_ai_scientists/claude_code.rst:258
 #: aa65d62fda16446e9804f66979e348a8
@@ -430,6 +460,9 @@ msgid ""
 "**Literature Search**: - PubMed, Europe PMC, and Semantic Scholar - Citation"
 " analysis and trend detection"
 msgstr ""
+"**文献检索**：  \n"
+"- PubMed、Europe PMC 及 Semantic Scholar  \n"
+"- 引文分析与趋势检测"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:262
 #: 1b5865493d584c4ba60593aada4aff10
@@ -437,11 +470,15 @@ msgid ""
 "**Content Analysis**: - Abstract summarization - Key finding extraction - "
 "Gap identification"
 msgstr ""
+"**内容分析**：  \n"
+"- 摘要总结  \n"
+"- 关键发现提取  \n"
+"- 缺口识别"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:268
 #: cf8529bb7b4b442da5394734cef4ddbd
 msgid "Multi-Step Research Workflows"
-msgstr ""
+msgstr "多步骤研究工作流程"
 
 #: ../../guide/building_ai_scientists/claude_code.rst:270
 #: f96ff750be7640b384d391cc76da1542

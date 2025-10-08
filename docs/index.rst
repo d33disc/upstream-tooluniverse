@@ -131,6 +131,7 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    guide/listing_tools
    tutorials/finding_tools
    guide/tool_caller
+   guide/mcp_support
    tutorials/tooluniverse_case_study
    tutorials/agentic_tools_tutorial
    tutorials/literature_search_tools_tutorial
@@ -156,6 +157,8 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    :maxdepth: 1
    :caption: 🔌 API
 
+   api_quick_reference
+   api_comprehensive
    api/modules
 
 .. toctree::

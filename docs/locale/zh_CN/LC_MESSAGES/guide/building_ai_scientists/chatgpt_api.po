@@ -353,7 +353,7 @@ msgid ""
 "**Hypothesis-Driven Research**: 1. Formulate research hypothesis 2. Design "
 "experimental approach 3. Gather supporting evidence 4. Validate findings 5. "
 "Generate conclusions"
-msgstr ""
+msgstr "**假设驱动的研究**：1. 制定研究假设 2. 设计实验方案 3. 收集支持证据 4. 验证研究结果 5. 得出结论"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:293
 #: 6b208200d4da43ada5b4fd42a7cc321b
@@ -361,58 +361,58 @@ msgid ""
 "**Comparative Analysis**: 1. Identify comparison targets 2. Gather data for "
 "each target 3. Perform comparative analysis 4. Identify differences and "
 "similarities 5. Draw conclusions"
-msgstr ""
+msgstr "**比较分析**：1. 确定比较对象 2. 收集各对象的数据 3. 进行比较分析 4. 识别差异与相似点 5. 得出结论"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:301
 #: ac946fa1d7bf4e3ebcfda0143c80ea7d
 msgid "Settings and Configuration"
-msgstr ""
+msgstr "设置与配置"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:304
 #: 2fe889b6465a412db2b41442c3229ff8
 msgid "Tool Discovery Options"
-msgstr ""
+msgstr "工具发现选项"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:306
 #: d00638c990894b10b6b2c5bf0c02e05d
 msgid "ToolUniverse offers multiple discovery methods:"
-msgstr ""
+msgstr "ToolUniverse 提供多种发现方法："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:332
 #: d4f4c09a59b74f79b3acfd53a6647fcf
 msgid "Advanced Configuration"
-msgstr ""
+msgstr "高级配置"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:334
 #: 6a4ee1171722437a92b7e55206e8e269
 msgid "**Batch Processing**: Handle multiple research tasks efficiently:"
-msgstr ""
+msgstr "**批量处理**：高效处理多个研究任务："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:345
 #: 626485effb4f4dd3bb1fcd7e39faf46e
 msgid ""
 "**Periodic Tool Discovery**: Re-run the finder on intermediate results:"
-msgstr ""
+msgstr "**周期性工具发现**：对中间结果重新运行查找器："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:359
 #: 49bef60a73cc4564891b8bbe218cf84a
 msgid "**Custom Tool Sets**: Load specific tools for focused research:"
-msgstr ""
+msgstr "**自定义工具集**：加载特定工具以进行重点研究："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:371
 #: b7ec1c703f7c449aad71e105d72cf908
 msgid "**Full Example (All Steps Combined)**:"
-msgstr ""
+msgstr "**完整示例（所有步骤合并）**："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:450
 #: 5fd4cdbb233c41239609622d26ed761c
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:453
 #: 015ab573cd444d499b19e56d8385ca7d
 msgid "Common Issues and Solutions"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:455
 #: 516af08187c84d848a2a3294e6e8266f
@@ -421,6 +421,10 @@ msgid ""
 " API key has function calling access - Check your OpenAI account billing "
 "status"
 msgstr ""
+"**API 密钥错误**：  \n"
+"- 确保已正确设置 `OPENAI_API_KEY`  \n"
+"- 验证您的 API 密钥是否具有函数调用权限  \n"
+"- 检查您的 OpenAI 账户计费状态"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:460
 #: 2e107cde00214fc4bac0bcc4e003c964
@@ -428,6 +432,10 @@ msgid ""
 "**Tool Not Found**: - Use the tool finder to discover available tools - "
 "Verify tool names match exactly - Check if tools require specific API keys"
 msgstr ""
+"**未找到工具**：  \n"
+"- 使用工具查找器发现可用工具  \n"
+"- 核实工具名称是否完全匹配  \n"
+"- 检查工具是否需要特定的API密钥"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:465
 #: f3f466aeef254c2c81ddede49e63b8e4
@@ -436,6 +444,10 @@ msgid ""
 "`tu.tool_specification(\"tool_name\")` - Ensure JSON arguments are properly "
 "formatted - Handle missing required parameters gracefully"
 msgstr ""
+"**函数调用错误**：  \n"
+"- 使用 `tu.tool_specification(\"tool_name\")` 检查工具参数结构  \n"
+"- 确保 JSON 参数格式正确  \n"
+"- 优雅处理缺失的必填参数"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:470
 #: 10398b24583b4c43926c0b24cf78f89a
@@ -444,30 +456,34 @@ msgid ""
 "list - Use `Tool_Finder_Keyword` instead of `Tool_Finder_LLM` for faster "
 "discovery - Implement timeout handling for long-running tools"
 msgstr ""
+"**性能问题**：  \n"
+"- 限制添加到功能列表中的工具数量  \n"
+"- 使用 `Tool_Finder_Keyword` 替代 `Tool_Finder_LLM` 以加快发现速度  \n"
+"- 对长时间运行的工具实现超时处理"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:475
 #: f20fbc48ab254ccb96e6e5048623a196
 msgid "**Debug Mode**:"
-msgstr ""
+msgstr "**调试模式**："
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:484
 #: 29518ba3515f4065a339b93339459678
 msgid "Tips"
-msgstr ""
+msgstr "提示"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:486
 #: b0c571eef9d04a1cbe09890782c4eb3b
 msgid ""
 "**Tool Selection**: Start with the tool finder, then add discovered tools "
 "incrementally."
-msgstr ""
+msgstr "**工具选择**：从工具查找器开始，然后逐步添加发现的工具。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:488
 #: f65ae29953e34b46b499d85d473540bc
 msgid ""
 "**Error Handling**: Always wrap tool execution in try-catch blocks for "
 "production use."
-msgstr ""
+msgstr "**错误处理**：在生产环境中，始终将工具执行代码包裹在 try-catch 块中。"
 
 #: ../../guide/building_ai_scientists/chatgpt_api.rst:490
 #: bd53d0aa2a484d2fb36ceeda04d2a296

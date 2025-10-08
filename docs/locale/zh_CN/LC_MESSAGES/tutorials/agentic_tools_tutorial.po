@@ -310,105 +310,105 @@ msgstr "``return_json``：为结构化数据时为 true，文本时为 false"
 #: ../../tutorials/agentic_tools_tutorial.rst:180
 #: b0b8413e6300409ea72f99523d78eb52
 msgid "3.7 Complete Tool Example"
-msgstr ""
+msgstr "3.7 完整工具示例"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:182
 #: 9bfbbea99a6743d6bb403912bccf03d4
 msgid "Here's your finished tool:"
-msgstr ""
+msgstr "这是您的成品工具："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:223
 #: 3dcaa3e1209c465894841d340a52d7bd
 msgid "Step 4: Save Your Tool"
-msgstr ""
+msgstr "步骤4：保存您的工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:226
 #: 393a6ec265d04aba9a63e8b5d2d59bc3
 msgid "4.1 Save as JSON File"
-msgstr ""
+msgstr "4.1 另存为 JSON 文件"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:228
 #: 04794a66612a43a3bbf9f07786b5dd1a
 msgid "Save your tool configuration as a `.json` file:"
-msgstr ""
+msgstr "将您的工具配置保存为 `.json` 文件："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:236
 #: aae10532b0e04ca89a84a0bbd3849257
 msgid ""
 "Then create `scientific_summarizer.json` and paste your complete tool "
 "configuration from Step 3.7:"
-msgstr ""
+msgstr "然后创建 `scientific_summarizer.json`，并粘贴第3.7步中完整的工具配置："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:249
 #: 82314e35aa244f4fa39c123e74e78536
 msgid "4.2 Important Notes"
-msgstr ""
+msgstr "4.2 重要说明"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:251
 #: 430466fb0b1542358af355ab5c1f8415
 msgid ""
 "**Key Point**: When loading from custom config files, you need to specify "
 "which tools to actually load using `include_tools` parameter."
-msgstr ""
+msgstr "**要点**：从自定义配置文件加载时，需要使用 `include_tools` 参数指定实际要加载的工具。"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:253
 #: b7e0a8008d0c45e8b89021d31dc0b5c7
 msgid ""
 "The config file only makes tools *available* - you still need to tell "
 "ToolUniverse which specific tools to load from that file."
-msgstr ""
+msgstr "配置文件仅使工具*可用*——您仍需告诉 ToolUniverse 从该文件中加载哪些具体工具。"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:256
 #: 83d5d1c17f8c41e8b4b5486089fc36cc
 msgid "**Alternative**: Add to Built-in Collection"
-msgstr ""
+msgstr "**替代方案**：添加到内置集合"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:258
 #: c72ed6b65a204fad8a0c86d9231ce883
 msgid ""
 "You can also add your tool to ToolUniverse's built-in agentic tools "
 "collection:"
-msgstr ""
+msgstr "您还可以将您的工具添加到 ToolUniverse 内置的智能代理工具集合中："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:266
 #: b3195d7e9efa4470a81adab58d8e14f4
 msgid "Step 5: Use Your Tool"
-msgstr ""
+msgstr "步骤5：使用您的工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:269
 #: c528cd4c7c354f928ac27e76aa50a39f
 msgid "5.1 Set Up Environment"
-msgstr ""
+msgstr "5.1 环境搭建"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:271
 #: 1fde9f37ed6e4f7c9f9463bb8a7e919d
 msgid "First, ensure you have API keys configured:"
-msgstr ""
+msgstr "首先，确保您已配置 API 密钥："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:283
 #: e29c19b80aea46c8b7fa9c0446bbf2df
 msgid "5.2 Load Your Tool"
-msgstr ""
+msgstr "5.2 加载您的工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:285
 #: 7785381686734c71b6501436aec6c922
 msgid "Import ToolUniverse and load your specific tool from the config file:"
-msgstr ""
+msgstr "导入 ToolUniverse 并从配置文件加载您的特定工具："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:314
 #: 5c8b1c24deb0451da207c18f3fa6fc9a
 msgid "5.3 Prepare Your Input"
-msgstr ""
+msgstr "5.3 准备您的输入"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:316
 #: 06dcd724bc0048f1a0da48c9d201aec7
 msgid "Create the arguments dictionary:"
-msgstr ""
+msgstr "创建参数字典："
 
 #: ../../tutorials/agentic_tools_tutorial.rst:333
 #: c82aa0fec6884203b215ed0cdc393ba5
 msgid "5.4 Execute the Tool"
-msgstr ""
+msgstr "5.4 执行工具"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:335
 #: fb13da10449b46b68b5e84aa4fb6bd88

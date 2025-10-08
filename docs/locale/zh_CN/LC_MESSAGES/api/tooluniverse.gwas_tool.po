@@ -182,4 +182,4 @@ msgstr "获取特定研究的所有关联。"
 #: 6bd17270ce854fc0adfb954c30b7a9d2 of
 #: tooluniverse.gwas_tool.GWASAssociationsForStudy.run:1
 msgid "Get associations for a study."
-msgstr ""
+msgstr "获取研究的关联信息。"

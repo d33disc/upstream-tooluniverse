@@ -186,9 +186,9 @@ msgstr "主要 API 功能用于执行基因富集分析。"
 #: 527480b0d68340129301371055bd22d6 of
 #: tooluniverse.enrichr_tool.EnrichrTool.enrichr_api:5
 msgid "List of enrichment libraries to use."
-msgstr ""
+msgstr "要使用的富集库列表。"
 
 #: d10c09313a9343a5aeb9b4bd327c862e of
 #: tooluniverse.enrichr_tool.EnrichrTool.enrichr_api:8
 msgid "(connected_path, connections) dictionaries."
-msgstr ""
+msgstr "(connected_path，connections) 字典。"

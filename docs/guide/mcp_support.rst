@@ -467,8 +467,8 @@ Examples and Tutorials
 API Reference
 ~~~~~~~~~~~~~
 
-- :doc:`../api_comprehensive` - Complete SMCP API documentation
-- :doc:`../api_quick_reference` - Quick reference for common MCP operations
+- :doc:`api_comprehensive` - Complete SMCP API documentation
+- :doc:`api_quick_reference` - Quick reference for common MCP operations
 
 External Resources
 ~~~~~~~~~~~~~~~~~~

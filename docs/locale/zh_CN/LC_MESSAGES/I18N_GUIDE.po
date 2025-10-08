@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../../I18N_GUIDE.md:136 1a9d1775023646358d21b35bec6c664b
 msgid "当有多个语言版本时，主题会自动在导航栏显示语言切换下拉菜单。"
-msgstr ""
+msgstr "当存在多个语言版本时，主题会在导航栏自动显示语言切换下拉菜单。"
 
 #: ../../I18N_GUIDE.md:138 9857879e02b947b68a49eb770275ae8a
 msgid "💡 翻译技巧"
@@ -149,16 +149,16 @@ msgstr ""
 
 #: ../../I18N_GUIDE.md:142 541ec1326f3843769c97159091ee52f1
 msgid "使用文本编辑器的查找替换功能："
-msgstr ""
+msgstr "使用文本编辑器的查找和替换功能："
 
 #: ../../I18N_GUIDE.md:143 fec3f763da0446548c397e49f71ef83c
 msgid "VSCode: Cmd+Shift+H"
-msgstr ""
+msgstr "VSCode：Cmd+Shift+H"
 
 #: ../../I18N_GUIDE.md:144 01fee06c73ce4cb59026cb1d8a324d11
 #, python-format
 msgid "Vim: `:%s/msgstr \"\"/msgstr \"翻译\"/g`"
-msgstr ""
+msgstr "Vim：`:%s/msgstr \"\"/msgstr \"翻译\"/g`"
 
 #: ../../I18N_GUIDE.md:146 454191c990554ac8bc2de9943b056bb4
 msgid "2. 保持格式"
@@ -170,11 +170,11 @@ msgstr ""
 
 #: ../../I18N_GUIDE.md:149 b74727aacb93478b82d871961639894f
 msgid "Emoji 图标不变"
-msgstr ""
+msgstr "Emoji 图标保持不变"
 
 #: ../../I18N_GUIDE.md:150 5c02c9f730994564b2df8033c80f1fd3
 msgid "Markdown 语法不变"
-msgstr ""
+msgstr "Markdown 语法保持不变"
 
 #: ../../I18N_GUIDE.md:151 eddf771ba3c4470e9bb63937b40c6e33
 msgid "reStructuredText 指令不变"

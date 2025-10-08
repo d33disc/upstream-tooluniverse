@@ -183,54 +183,54 @@ msgstr "要排除的工具类别"
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:1
 msgid ""
 "Perform RAG inference to find the most relevant tools for a given query."
-msgstr ""
+msgstr "执行RAG推理以查找与给定查询最相关的工具。"
 
 #: b9474c82706f453e9b6cf7d74c1d339a of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:3
 msgid ""
 "Uses semantic similarity between the query embedding and pre-computed tool "
 "embeddings to identify the most relevant tools."
-msgstr ""
+msgstr "使用查询嵌入与预先计算的工具嵌入之间的语义相似度来识别最相关的工具。"
 
 #: 8a5c7ebb18c9474797ff9d9bcdf8cc9d of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:6
 msgid "User query or description of desired functionality"
-msgstr ""
+msgstr "用户查询或所需功能描述"
 
 #: 54fd880d69414ec380102e9b65a6d66f of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:8
 msgid "Number of top tools to return. Defaults to 5."
-msgstr ""
+msgstr "返回的顶级工具数量。默认值为5。"
 
 #: ../../api/tooluniverse.tool_finder_embedding.rst
 #: 352e0cd2727e496fb0df40ecea31af65 4189c7ed8c1b4f3b9286e2161cee3076
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: ef7c066e80a149709b8911c4c1a92d16 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:11
 msgid "List of top-k tool names ranked by relevance to the query"
-msgstr ""
+msgstr "按与查询相关性排序的前 k 个工具名称列表"
 
 #: ../../api/tooluniverse.tool_finder_embedding.rst
 #: 78dd01fb5e564a67ace6eac078bfb665 8c728a89303e4c16bccc97f1a2414435
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: ../../api/tooluniverse.tool_finder_embedding.rst
 #: a2ce7eb85294448bb544e79cb310e1e5 a47c44ecffaa4705b33fa8e764d9ddb5
 msgid "Raises"
-msgstr ""
+msgstr "引发"
 
 #: e2d98bbd4de6433dac3cee315f3b3625 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.rag_infer:14
 msgid "If tool_desc_embedding is not loaded"
-msgstr ""
+msgstr "如果未加载 tool_desc_embedding"
 
 #: 62924162234245e686a96bf43a8e320e of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:1
 msgid "Find relevant tools based on a message or pre-selected tool names."
-msgstr ""
+msgstr "根据消息或预先选择的工具名称查找相关工具。"
 
 #: 8d69caebe6e64932b6e5195b669fff95 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:3
@@ -238,35 +238,35 @@ msgid ""
 "This method either uses RAG inference to find tools based on a message or "
 "processes a list of pre-selected tool names. It filters out special tools "
 "and returns tool prompts suitable for use in agent workflows."
-msgstr ""
+msgstr "该方法通过RAG推理根据消息查找工具，或处理预先选择的工具名称列表。它会过滤特殊工具，并返回适用于代理工作流的工具提示。"
 
 #: a463c2cbbd7b4699acbe767d3384d553 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:7
 msgid ""
 "Query message to find tools for. Required if picked_tool_names is None."
-msgstr ""
+msgstr "查询消息以查找工具。若 picked_tool_names 为 None，则为必填项。"
 
 #: f6d4d817449142648f1608bbc32c247b of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:9
 msgid "Pre-selected tool names to process. Required if message is None."
-msgstr ""
+msgstr "预先选择的工具名称以进行处理。若消息为 None，则为必填项。"
 
 #: 720ed3a4d9df488bb44d0fcb76e35a9b of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:11
 msgid "Number of tools to return after filtering. Defaults to 5."
-msgstr ""
+msgstr "过滤后返回的工具数量。默认值为5。"
 
 #: 54b16d91f99042b2839d5ecf6101f92d of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:13
 msgid "If True, returns both prompts and tool names. Defaults to False."
-msgstr ""
+msgstr "如果为 True，则返回提示词和工具名称。默认值为 False。"
 
 #: 9c2de34c3b7648108211424c120dcc2f of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:15
 msgid ""
 "List of tool categories to filter by. Currently not implemented for "
 "embedding-based search."
-msgstr ""
+msgstr "可用于筛选的工具类别列表。目前尚未针对基于嵌入的搜索实现该功能。"
 
 #: c1b07515137446eab1f63f3ed1d1a0b2 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:18
@@ -274,6 +274,8 @@ msgid ""
 "- If return_call_result is False: Tool prompts as a formatted string - If "
 "return_call_result is True: Tuple of (tool_prompts, tool_names)"
 msgstr ""
+"- 如果 return_call_result 为 False：工具提示为格式化字符串  \n"
+"- 如果 return_call_result 为 True：返回 (tool_prompts, tool_names) 元组"
 
 #: 4da177ab8f5f4960920a1a53ae611342 of
 #: tooluniverse.tool_finder_embedding.ToolFinderEmbedding.find_tools:18

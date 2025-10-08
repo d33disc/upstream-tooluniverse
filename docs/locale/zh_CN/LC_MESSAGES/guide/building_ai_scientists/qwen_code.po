@@ -308,22 +308,22 @@ msgstr "注意：在您的系统终端中运行此命令。"
 #: ../../guide/building_ai_scientists/qwen_code.rst:212
 #: 76fc973981f24bd69737f83b7dd0e038
 msgid "**Verify MCP Server Connection**:"
-msgstr ""
+msgstr "**验证 MCP 服务器连接**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:214
 #: f421156ac46042a7bc32e8509785eb10
 msgid "In the Qwen Code prompt, run:"
-msgstr ""
+msgstr "在 Qwen Code 提示中，运行："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:220
 #: d129e8dc2b714bd6885dfbcdb9894108
 msgid "**Verify context loading**:"
-msgstr ""
+msgstr "**验证上下文加载**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:222
 #: 094bb4c985e34559943a4e070e717e30
 msgid "Enter In the Qwen Code prompt, run:"
-msgstr ""
+msgstr "在 Qwen Code 提示中输入，运行："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:230
 #: 5efb15dacb4245f3b50fcb4b7f9d8770
@@ -332,55 +332,57 @@ msgid ""
 "Code README) <https://github.com/QwenLM/qwen-code?tab=readme-ov-"
 "file#authorization>`_."
 msgstr ""
+"有关身份验证方法（OAuth 和 API 密钥），请参见：`Authorization (Qwen Code README) "
+"<https://github.com/QwenLM/qwen-code?tab=readme-ov-file#authorization>`_。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:233
 #: 60130da2f4c846d7ac80db0259685ef2
 msgid ""
 "This will display connection status, available ToolUniverse tools, "
 "configuration details, and any errors."
-msgstr ""
+msgstr "这将显示连接状态、可用的 ToolUniverse 工具、配置详情及任何错误信息。"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:236
 #: de1c39204e224af48f790b682d8685df
 msgid "Step 7: Verify Integration"
-msgstr ""
+msgstr "第7步：验证集成"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:238
 #: fcc0638fdb224c2e81fc60032c2cdadd
 msgid "Try these prompts inside Qwen Code:"
-msgstr ""
+msgstr "在 Qwen Code 中尝试以下提示："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:240
 #: 1b9609bf94aa44dc9d936c891bdd3fbb
 msgid "**List available tools**:"
-msgstr ""
+msgstr "**列出可用工具**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:246
 #: 850b4ff75f9142349c46c380adbc54f7
 msgid "**Execute a simple tool**:"
-msgstr ""
+msgstr "**执行一个简单工具**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:252
 #: acc819f99fb947b888440a3ddf96facd
 msgid "**Perform literature search**:"
-msgstr ""
+msgstr "**进行文献检索**："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:259
 #: e52879c3368e4208818b9597b3351d89
 msgid "Scientific Research Capabilities"
-msgstr ""
+msgstr "科学研究能力"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:262
 #: 10623c75551b4c93bc74e7c717367741
 msgid "Drug Discovery and Development"
-msgstr ""
+msgstr "药物发现与开发"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:264
 #: 506ace62daef4e8484b6ca3a913844b0
 msgid ""
 "With ToolUniverse, Qwen Code supports comprehensive drug discovery "
 "workflows:"
-msgstr ""
+msgstr "借助 ToolUniverse，Qwen Code 支持全面的药物发现工作流程："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:266
 #: aa29bb5acafc42cead8c299064617268
@@ -388,6 +390,10 @@ msgid ""
 "**Target Identification**: - Disease analysis and EFO ID lookup - Target "
 "discovery and validation - Literature-based assessment"
 msgstr ""
+"**靶点识别**：  \n"
+"- 疾病分析及EFO ID查询  \n"
+"- 靶点发现与验证  \n"
+"- 基于文献的评估"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:271
 #: 343ec11ad906485f831483f32ba60b85
@@ -395,16 +401,21 @@ msgid ""
 "**Drug Analysis**: - Drug information retrieval - Safety profile analysis - "
 "Drug interaction checking - Clinical trial data access"
 msgstr ""
+"**药物分析**：  \n"
+"- 药物信息检索  \n"
+"- 安全性分析  \n"
+"- 药物相互作用检查  \n"
+"- 临床试验数据访问"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:278
 #: 63c5542fa1434f3e9c5730b71ccf71e9
 msgid "Genomics and Molecular Biology"
-msgstr ""
+msgstr "基因组学与分子生物学"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:280
 #: b88fc44167eb42e1889d5ec9e46d2c06
 msgid "Access genomics tools for molecular research:"
-msgstr ""
+msgstr "访问用于分子研究的基因组学工具："
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:282
 #: 657aa333f0bf408f9ebbdd9961a651b8
@@ -412,6 +423,10 @@ msgid ""
 "**Gene Analysis**: - Gene information from UniProt - Protein structure "
 "analysis - Expression patterns and pathways"
 msgstr ""
+"**基因分析**：  \n"
+"- 来自UniProt的基因信息  \n"
+"- 蛋白质结构分析  \n"
+"- 表达模式及通路"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:287
 #: 348e07e6de81429f9dca6ec9ffeaf850
@@ -419,6 +434,9 @@ msgid ""
 "**Molecular Interactions**: - Protein-protein and drug-target interactions -"
 " Pathway analysis and functional annotation"
 msgstr ""
+"**分子相互作用**：  \n"
+"- 蛋白质-蛋白质及药物-靶点相互作用  \n"
+"- 通路分析与功能注释"
 
 #: ../../guide/building_ai_scientists/qwen_code.rst:292
 #: 1469a385ebec4245899d2cafd0b86256

@@ -248,52 +248,52 @@ msgstr "**格式**：密集数值向量（float32 值列表）"
 
 #: ../../tools/remote/transcriptformer.md:120 7ceb563abe0c49b7b72ac92db58a842a
 msgid "**Context-specific**: Embeddings vary by cell type and disease state"
-msgstr ""
+msgstr "**特定上下文**：嵌入表示因细胞类型和疾病状态而异"
 
 #: ../../tools/remote/transcriptformer.md:121 f4fa3710a24642ef8a5b11e55aa78c77
 msgid "**Precision**: Float32 for optimal balance of accuracy and efficiency"
-msgstr ""
+msgstr "**精度**：使用 Float32 实现准确性与效率的最佳平衡"
 
 #: ../../tools/remote/transcriptformer.md:123 089fd2df06e54a4abfd8935061a94489
 msgid "MCP Server Setup"
-msgstr ""
+msgstr "MCP 服务器设置"
 
 #: ../../tools/remote/transcriptformer.md:125 ea5a8474a98e4a7b9d991f0873c787e8
 msgid "Prerequisites"
-msgstr ""
+msgstr "先决条件"
 
 #: ../../tools/remote/transcriptformer.md:134 1979eb8ec09740acb27ea0d300d4c92a
 msgid "Configuration"
-msgstr ""
+msgstr "配置"
 
 #: ../../tools/remote/transcriptformer.md:136 c48e66855158487a95d5b42912cb3594
 msgid "**Set up the environment**:"
-msgstr ""
+msgstr "**设置环境**："
 
 #: ../../tools/remote/transcriptformer.md:142 fcbb24e507e74114a4cd77997d03c3a7
 msgid "**Verify embedding files exist**:"
-msgstr ""
+msgstr "**验证嵌入文件是否存在**："
 
 #: ../../tools/remote/transcriptformer.md:148 ca3a1f63792e4e9d90131f983dfe7d94
 msgid "Running the MCP Server"
-msgstr ""
+msgstr "运行 MCP 服务器"
 
 #: ../../tools/remote/transcriptformer.md:155 d57a3f85c8834f07b46aa33d977c8a7c
 msgid "Server Configuration"
-msgstr ""
+msgstr "服务器配置"
 
 #: ../../tools/remote/transcriptformer.md:157 6afc2776d6a04214b1f357eee5e7ae4c
 msgid "**Host**: `0.0.0.0` (accepts connections from any IP)"
-msgstr ""
+msgstr "**主机**：`0.0.0.0`（接受来自任何 IP 的连接）"
 
 #: ../../tools/remote/transcriptformer.md:158 91d3c6422c8348ae8f761e3881d4f780
 msgid "**Port**: `7002` (configured to avoid conflicts with other tools)"
-msgstr ""
+msgstr "**端口**：`7002`（配置以避免与其他工具冲突）"
 
 #: ../../tools/remote/transcriptformer.md:159 8a2b8c14103f426b9df56030d19b33a0
 msgid "**Transport**: `streamable-http`"
-msgstr ""
+msgstr "**传输**：`streamable-http`"
 
 #: ../../tools/remote/transcriptformer.md:160 628a10d3e5a346bab50ac957c8019eec
 msgid "**Mode**: Stateless HTTP for scalability"
-msgstr ""
+msgstr "**模式**：无状态 HTTP 以实现可扩展性"

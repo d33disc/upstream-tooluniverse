@@ -110,6 +110,8 @@ msgid ""
 "IMVigor210: https://www.immuno-"
 "compass.com/download/model/LOCO/pft_leave_IMVigor210.pt"
 msgstr ""
+"IMVigor210：https://www.immuno-"
+"compass.com/download/model/LOCO/pft_leave_IMVigor210.pt"
 
 #: ../../tools/remote/immune_compass.md:48 3049d11e0d12442cb437bd0fd9f7485d
 msgid ""
@@ -246,79 +248,79 @@ msgstr "**模式**：无状态 HTTP"
 
 #: ../../tools/remote/immune_compass.md:159 efec81b0b9f84ff8a6474230af0685b1
 msgid "3. Server Logs"
-msgstr ""
+msgstr "3. 服务器日志"
 
 #: ../../tools/remote/immune_compass.md:161 db25a18314fa44f4b31deb35cd884194
 msgid "When starting successfully, you'll see:"
-msgstr ""
+msgstr "启动成功后，您将看到："
 
 #: ../../tools/remote/immune_compass.md:170 34f22694ffba49c6b99c5b23814da50b
 msgid "Tool Usage"
-msgstr ""
+msgstr "工具使用"
 
 #: ../../tools/remote/immune_compass.md:172 ecfc0edf2dea4c10a65d2517195c1a25
 msgid "MCP Tool Function"
-msgstr ""
+msgstr "MCP 工具功能"
 
 #: ../../tools/remote/immune_compass.md:174 431bd63c442c45669fdb856f4ef431a2
 msgid "The server exposes one main tool function:"
-msgstr ""
+msgstr "服务器提供一个主要的工具功能："
 
 #: ../../tools/remote/immune_compass.md:184 d6d1493b1c6c44ba925cf78079844003
 msgid "**Parameters:**"
-msgstr ""
+msgstr "**参数：**"
 
 #: ../../tools/remote/immune_compass.md:185 0af828251e6e4c789a6ad8d221db9244
 msgid ""
 "`gene_expression_data_path` (str): Path to the pickle file containing TPM "
 "expression data"
-msgstr ""
+msgstr "`gene_expression_data_path` (str)：包含TPM表达数据的pickle文件路径"
 
 #: ../../tools/remote/immune_compass.md:186 19c953f6850a4847b3493b9d640d0c78
 msgid ""
 "`threshold` (float): Probability threshold for responder classification "
 "(0.0-1.0)"
-msgstr ""
+msgstr "`threshold`（浮点数）：用于响应者分类的概率阈值（0.0-1.0）"
 
 #: ../../tools/remote/immune_compass.md:187 1f16fb8bf66444d286ec81be6e9fef6f
 msgid "Default: 0.5 (balanced sensitivity/specificity)"
-msgstr ""
+msgstr "默认值：0.5（灵敏度与特异性平衡）"
 
 #: ../../tools/remote/immune_compass.md:188 a6adc5492fe84d07bd18dfebfdc99932
 msgid "Lower values (~0.3): Higher sensitivity"
-msgstr ""
+msgstr "较低的数值（约0.3）：更高的灵敏度"
 
 #: ../../tools/remote/immune_compass.md:189 98f7e670945d45678ec89b22b27a2b36
 msgid "Higher values (~0.7): Higher specificity"
-msgstr ""
+msgstr "较高的数值（约0.7）：较高的特异性"
 
 #: ../../tools/remote/immune_compass.md:190 5cb1c4190d844ac9a7f60cb77784a2d7
 msgid "`root_path` (str, optional): Custom path to model checkpoint directory"
-msgstr ""
+msgstr "`root_path`（字符串，可选）：自定义模型检查点目录路径"
 
 #: ../../tools/remote/immune_compass.md:193 0babbe2f2f70483f94ee1ad15f5fb809
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tools/remote/immune_compass.md:195 5542d07c4f9c4b5ab1d8ddc8ebd06291
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../tools/remote/immune_compass.md:197 939428b2d74a4bd580eb9d01f97f2dff
 msgid "**Model Not Found Error**"
-msgstr ""
+msgstr "**模型未找到错误**"
 
 #: ../../tools/remote/immune_compass.md:201 4ba84f153b0d44acba8a4c72dca4441b
 msgid "Ensure `COMPASS_MODEL_PATH` is set correctly"
-msgstr ""
+msgstr "确保正确设置 `COMPASS_MODEL_PATH`"
 
 #: ../../tools/remote/immune_compass.md:202 96b67e2befde44d0a60b22d0fbd1551b
 msgid "Verify model weights are downloaded to the `checkpoint/` directory"
-msgstr ""
+msgstr "确认模型权重已下载至 `checkpoint/` 目录下"
 
 #: ../../tools/remote/immune_compass.md:204 7d40bb3de15c40c09259f0706c4f3aef
 msgid "**Import Error**"
-msgstr ""
+msgstr "**导入错误**"
 
 #: ../../tools/remote/immune_compass.md:208 263cd0fb15d34a64aa8d4e5e7a5ac69a
 msgid "Install COMPASS: `uv pip install immuno-compass`"

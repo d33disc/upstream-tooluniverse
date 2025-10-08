@@ -360,108 +360,108 @@ msgstr "搜索端点"
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:183
 #: 9d9eb440b7714f31b47f417bf53f044b
 msgid "Response format:"
-msgstr ""
+msgstr "响应格式："
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:211
 #: 7ac19837ce73456fb2c8adda9c875e85
 msgid "Tool Information Endpoint"
-msgstr ""
+msgstr "工具信息端点"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:218
 #: b564f85e4ce04db4a8fe9c137b8cdd48
 msgid ""
 "Returns information about available search tools and their capabilities."
-msgstr ""
+msgstr "返回有关可用搜索工具及其功能的信息。"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:221
 #: a46ba7f7a4e14f0d868ab4b4c5e979e5
 msgid "Search History Endpoint"
-msgstr ""
+msgstr "搜索历史端点"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:228
 #: e08a9a4ffd904ee6bfff1050e63f0d3a
 msgid "Returns the last 10 search queries and their results."
-msgstr ""
+msgstr "返回最近的10条搜索查询及其结果。"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:231
 #: a73615abd3e4459ebdaa92ca2ff338af
 msgid "Configuration"
-msgstr ""
+msgstr "配置"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:234
 #: c4ce2211e97b4bcfa6f6c611b92dd740
 msgid "Environment Detection"
-msgstr ""
+msgstr "环境检测"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:236
 #: 963e975f65d64633964cd9b8ce26154b
 msgid "The web UI automatically detects your ToolUniverse environment:"
-msgstr ""
+msgstr "Web UI 会自动检测您的 ToolUniverse 环境："
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:238
 #: 9bbd433d1c01437fb1f0198c66a31110
 msgid ""
 "**Full Mode**: When ToolUniverse is available, uses all integrated tools"
-msgstr ""
+msgstr "**全模式**：当 ToolUniverse 可用时，使用所有集成工具"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:239
 #: a236147e5f4b4293baf0cf3bc1c7f171
 msgid "**Demo Mode**: When ToolUniverse is not available, uses simulated data"
-msgstr ""
+msgstr "**演示模式**：当 ToolUniverse 不可用时，使用模拟数据"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:241
 #: 332541d88b4f4ea7998d61dd084d00ed
 msgid ""
 "You can check the mode in the startup messages or by calling the tools "
 "endpoint."
-msgstr ""
+msgstr "您可以通过启动信息或调用 tools 端点来检查模式。"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:244
 #: eb349257929148fe94af11367b9721cf
 msgid "Customization"
-msgstr ""
+msgstr "定制化"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:246
 #: bcb97f68937544b2aa934d6eb55129a5
 msgid "The web UI can be customized by modifying:"
-msgstr ""
+msgstr "通过修改以下内容可以自定义网页用户界面："
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:248
 #: 4dda2a02929a48b58d2189ef50cee96c
 msgid "**Port**: Change the default port (5001) in `simple_app.py`"
-msgstr ""
+msgstr "**端口**：在 `simple_app.py` 中更改默认端口（5001）"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:249
 #: 1e5dcf39519b4b74a3e04c2e4a3246db
 msgid "**Result limits**: Adjust default limits in the interface"
-msgstr ""
+msgstr "**结果限制**：调整界面中的默认限制"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:250
 #: 94f8e0f789f946459ae78e84d953b34f
 msgid "**Database selection**: Enable/disable specific databases"
-msgstr ""
+msgstr "**数据库选择**：启用/禁用特定数据库"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:251
 #: e8b937aca8c14c61b7580f15684ef281
 msgid "**UI styling**: Modify the HTML/CSS templates"
-msgstr ""
+msgstr "**UI 样式**：修改 HTML/CSS 模板"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:254
 #: 5c0c0e3c7cd84746b14e79bf16cbaaf1
 msgid "Troubleshooting"
-msgstr ""
+msgstr "故障排除"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:257
 #: 94cc5e823eba45c98b6fc844475e4d9a
 msgid "Common Issues"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:259
 #: 1e3cfc739b2946cb97adc4adb31cd1a5
 msgid ""
 "**Port Already in Use** - The default port 5001 is already occupied - "
 "Solution: Kill the process using the port or change the port in the code"
-msgstr ""
+msgstr "**端口已被占用** - 默认端口5001已被占用 - 解决方案：终止占用该端口的进程或在代码中更改端口号"
 
 #: ../../tutorials/literature_search_web_ui_tutorial.rst:263
 #: 1334fa7bc4a741b98130c4815efd2b75

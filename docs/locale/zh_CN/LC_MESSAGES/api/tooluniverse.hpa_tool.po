@@ -263,43 +263,43 @@ msgstr "根据实际的HPA XML架构全面解析基因XML数据"
 msgid ""
 "Extract tissue immunohistochemistry (IHC) images based on actual HPA XML "
 "structure"
-msgstr ""
+msgstr "根据实际 HPA XML 结构提取组织免疫组化（IHC）图像"
 
 #: 2a51943ce9b5465f8af525a57943a68d of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_if_images:1
 msgid ""
 "Extract subcellular immunofluorescence (IF) images based on actual HPA XML "
 "structure"
-msgstr ""
+msgstr "基于实际 HPA XML 结构提取亚细胞免疫荧光（IF）图像"
 
 #: 0bcdf9a8456143c3a9f220d9cfd04fde of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_antibodies:1
 msgid "Extract antibody information from actual HPA XML structure"
-msgstr ""
+msgstr "从实际 HPA XML 结构中提取抗体信息"
 
 #: 5a8b8308654e4bf69de0de32d811e76c of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_expression_summary:1
 msgid "Extract expression summary information from actual HPA XML structure"
-msgstr ""
+msgstr "从实际 HPA XML 结构中提取表达式摘要信息"
 
 #: 50fe30414991440996384ebe1f793227 of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_tissue_expression:1
 msgid "Extract detailed tissue expression data from actual HPA XML structure"
-msgstr ""
+msgstr "从实际 HPA XML 结构中提取详细的组织表达数据"
 
 #: 6f1be287a3de4328b114cf6aa2b2d448 of
 #: tooluniverse.hpa_tool.HPAGetGenePageDetailsTool._extract_cell_line_expression:1
 msgid "Extract cell line expression data from actual HPA XML structure"
-msgstr ""
+msgstr "从实际 HPA XML 结构中提取细胞系表达数据"
 
 #: 08a6f99843a74afbb92f0c692209ab68 of
 #: tooluniverse.hpa_tool.HPAGetGeneJSONTool:1
 msgid ""
 "Enhanced legacy tool - Get basic gene information using Ensembl Gene ID. Now"
 " uses the efficient JSON API instead of search API."
-msgstr ""
+msgstr "增强版传统工具 - 使用 Ensembl 基因 ID 获取基本基因信息。现改用高效的 JSON API 替代搜索 API。"
 
 #: 35039db62aa549f688a9ff96b6060668 of
 #: tooluniverse.hpa_tool.HPAGetGeneXMLTool:1
 msgid "Legacy tool - Get gene TSV format data (alternative to XML)."
-msgstr ""
+msgstr "传统工具 - 获取基因TSV格式数据（XML的替代方案）。"

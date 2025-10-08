@@ -225,47 +225,47 @@ msgstr ""
 
 #: 1a92504568644627a5174bc048772ab0 of tooluniverse.smcp:81
 msgid "Dynamic tool loading and configuration"
-msgstr ""
+msgstr "动态工具加载与配置"
 
 #: 030fa2cd5a6b4cf0bfca4a29277f8232 of tooluniverse.smcp:82
 msgid "Schema transformation and validation"
-msgstr ""
+msgstr "模式转换与验证"
 
 #: 2ee27216d05b49a5bafd8c879b4c2d80 of tooluniverse.smcp:83
 msgid "Execution wrapper with error handling"
-msgstr ""
+msgstr "带错误处理的执行包装器"
 
 #: 5e2a7bb5064b40c5a632022d2fa65430 of tooluniverse.smcp:84
 msgid "Category-based tool organization"
-msgstr ""
+msgstr "基于类别的工具组织"
 
 #: 9346ee79489849fcb40f6ceb80ec78c4 of tooluniverse.smcp:86
 msgid "AI Agent Interface:"
-msgstr ""
+msgstr "AI代理接口："
 
 #: 30733691b7fa456c9e8b94dbcd850b91 of tooluniverse.smcp:87
 msgid "Natural language tool discovery"
-msgstr ""
+msgstr "自然语言工具发现"
 
 #: 1ce6c6b561b841f9898366b2eda38e48 of tooluniverse.smcp:88
 msgid "Contextual tool recommendations"
-msgstr ""
+msgstr "上下文工具推荐"
 
 #: 511fd4d859ad46c6a16558e889ab318c of tooluniverse.smcp:89
 msgid "Structured parameter schemas"
-msgstr ""
+msgstr "结构化参数模式"
 
 #: cf8940ea59e546398a12ce9a3e9346fe of tooluniverse.smcp:90
 msgid "Comprehensive tool documentation"
-msgstr ""
+msgstr "全面的工具文档"
 
 #: 0f3ae59cbfa2463893c7c93405dab66e of tooluniverse.smcp.SMCP:1
 msgid "Bases: :py:class:`~fastmcp.server.server.FastMCP`"
-msgstr ""
+msgstr "基类：:py:class:`~fastmcp.server.server.FastMCP`"
 
 #: b9489fd2d93a4b1fafebad5b4d4f6b79 of tooluniverse.smcp.SMCP:1
 msgid "Scientific Model Context Protocol (SMCP) Server"
-msgstr ""
+msgstr "科学模型上下文协议（SMCP）服务器"
 
 #: 110db379349a4cfd933d583f1bae84e1 of tooluniverse.smcp.SMCP:3
 msgid ""
@@ -274,6 +274,8 @@ msgid ""
 "tools with the FastMCP framework. It provides a unified, AI-accessible "
 "interface for scientific computing, data analysis, and research workflows."
 msgstr ""
+"SMCP 是一种增强型 MCP（模型上下文协议）服务器，能够无缝整合 ToolUniverse 丰富的科学及科学工具集合与 FastMCP "
+"框架。它为科学计算、数据分析和研究工作流程提供了统一且可由 AI 访问的接口。"
 
 #: da90da44d0bb4a0aae91464c84cccbb5 of tooluniverse.smcp.SMCP:8
 msgid ""
@@ -283,22 +285,24 @@ msgid ""
 " hundreds of specialized tools through a consistent, well-documented "
 "interface."
 msgstr ""
+"SMCP 服务器在标准 MCP "
+"功能基础上，融合了科学领域专业知识、智能工具发现及针对科研应用的优化配置。它能够自动处理通过一致且文档完善的接口暴露数百种专业工具的复杂任务。"
 
 #: 98df892487ba4ae098cbd2aef0da1fb9 of tooluniverse.smcp.SMCP:14
 msgid "Key Features:"
-msgstr ""
+msgstr "主要特性："
 
 #: 0036a5426a9e4be5a81cae7171f2c137 of tooluniverse.smcp.SMCP:15
 msgid ""
 "🔬 **Scientific Tool Integration**: Native access to 350+ specialized tools "
 "covering"
-msgstr ""
+msgstr "🔬 **科学工具集成**：原生支持350+专业工具，涵盖"
 
 #: f02274d1d0804fc6a14c030111804203 of tooluniverse.smcp.SMCP:16
 msgid ""
 "scientific databases, literature search, clinical data, genomics, "
 "proteomics, chemical informatics, and AI-powered analysis capabilities."
-msgstr ""
+msgstr "科学数据库、文献检索、临床数据、基因组学、蛋白质组学、化学信息学及人工智能驱动的分析能力。"
 
 #: d329bb41bdf242a0a52c6f919e0e4f8d of tooluniverse.smcp.SMCP:19
 msgid ""

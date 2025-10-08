@@ -316,17 +316,17 @@ msgstr "首先使用 ToolUniverse MCP 服务器中的工具"
 #: ../../guide/building_ai_scientists/gemini_cli.rst:200
 #: 87396c3c56a04c0f9d01376f87c13f8f
 msgid "Cross-validate findings across multiple tools and databases"
-msgstr ""
+msgstr "在多个工具和数据库中交叉验证结果"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:201
 #: 57c0a522e05f47d9b6ec06237122a53a
 msgid "Use appropriate scientific terminology"
-msgstr ""
+msgstr "使用恰当的科学术语"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:203
 #: 4820e9b7c2394324ad3954156ebd90aa
 msgid "**Verify context loading**: .. code-block:: bash"
-msgstr ""
+msgstr "**验证上下文加载**：.. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:206
 #: 8399f798a2a04ff8a5625d98e1a5a5f2
@@ -336,32 +336,32 @@ msgstr ""
 #: ../../guide/building_ai_scientists/gemini_cli.rst:208
 #: 7404b4a11b574130b7cd70bf4e79225d
 msgid "This will display the loaded context files and their content."
-msgstr ""
+msgstr "这将显示已加载的上下文文件及其内容。"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:211
 #: c19c4cfd6fb14b9bb67685d58c97516a
 msgid "Step 6: Start Gemini CLI"
-msgstr ""
+msgstr "第6步：启动 Gemini CLI"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:213
 #: 6da8997a006d4b9d97e5505b731aeb9f
 msgid "After saving the configuration:"
-msgstr ""
+msgstr "保存配置后："
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:215
 #: 254a2c62b1424a7591aab7f6abe49136
 msgid "**Start Gemini CLI**: .. code-block:: bash"
-msgstr ""
+msgstr "**启动 Gemini CLI**: .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:218
 #: 8259fffaf7c9447190d47efa1d63923b
 msgid "gemini"
-msgstr ""
+msgstr "双子座"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:220
 #: 7a13797c75c04b568ee1a8d256a883c8
 msgid "**Verify MCP Server Connection**: .. code-block:: bash"
-msgstr ""
+msgstr "**验证 MCP 服务器连接**： .. code-block:: bash"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:223
 #: b1e624e6563c4fc9a9dc171a29282a10
@@ -375,41 +375,46 @@ msgid ""
 "`DISCONNECTED`) - Available ToolUniverse tools - Configuration details - Any"
 " connection errors"
 msgstr ""
+"这将显示：  \n"
+"- 服务器连接状态（`CONNECTED` 或 `DISCONNECTED`）  \n"
+"- 可用的 ToolUniverse 工具  \n"
+"- 配置详情  \n"
+"- 任何连接错误"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:232
 #: 88d3858c3c8542a3bf85446de00cdb02
 msgid "Step 7: Verify Integration"
-msgstr ""
+msgstr "第七步：验证集成"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:234
 #: 79de80f0223b4187909601e45d648708
 msgid "Test the integration by asking Gemini to:"
-msgstr ""
+msgstr "通过向 Gemini 提出以下请求来测试集成："
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:236
 #: 02c495594a254c02bd541914d66d5d8c
 msgid "**List available tools**: .. code-block:: text"
-msgstr ""
+msgstr "**列出可用工具**：.. code-block:: text"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:239
 #: 96f05b90cecd4bc995f20a85163f2a1c
 msgid "What scientific tools are available?"
-msgstr ""
+msgstr "有哪些可用的科学工具？"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:241
 #: 581d18c3317c47f6a1318cd34e704965
 msgid "**Execute a simple tool**: .. code-block:: text"
-msgstr ""
+msgstr "**执行一个简单工具**： .. code-block:: text"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:244
 #: 7d37dfa5fccf408dac9bf508e513cd6e
 msgid "Search for information about Alzheimer's disease"
-msgstr ""
+msgstr "搜索有关阿尔茨海默病的信息"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:246
 #: ec7f1fc898344cceb69f3bff4c8e35c5
 msgid "**Perform complex research**: .. code-block:: text"
-msgstr ""
+msgstr "**执行复杂研究**：.. code-block:: text"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:249
 #: 8771c9fa0f9044f29b5c75bde559f03a

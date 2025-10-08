@@ -100,7 +100,7 @@ msgstr "**[MCP工具注册系统](mcp_tool_registration_zh.md)** - 将本地工�
 
 #: ../../tutorials/aiscientists/README.md:25 36b8509473ff484282af3330ed9a99de
 msgid "快速开始"
-msgstr ""
+msgstr "快速入门"
 
 #: ../../tutorials/aiscientists/README.md:27 e0281751e7e247da80e6bfecea0fbe5e
 msgid "如果你是首次接触 MCP 工具，建议按以下顺序学习："
@@ -160,7 +160,7 @@ msgstr ""
 
 #: ../../tutorials/aiscientists/README.md 0921465e630e4b8d9ce3361e8f15452b
 msgid "**MCPClientTool**"
-msgstr ""
+msgstr "**MCP客户端工具**"
 
 #: ../../tutorials/aiscientists/README.md ae418ec9e2dd46538e0b1c01c5bc4a2a
 msgid "通用 MCP 客户端"

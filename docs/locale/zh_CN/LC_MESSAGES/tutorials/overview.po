@@ -247,30 +247,30 @@ msgstr "独立测试 MCP 服务器功能"
 
 #: ../../tutorials/overview.md:86 a1ae0e4f91844dd8ab424b627282247c
 msgid "Contributing"
-msgstr ""
+msgstr "贡献指南"
 
 #: ../../tutorials/overview.md:88 d976a35b8e8541e9b7555c83297e9824
 msgid "When adding new documentation:"
-msgstr ""
+msgstr "添加新文档时："
 
 #: ../../tutorials/overview.md:89 8e72032bd85c4816b14a388b7d378b69
 msgid "Follow the existing markdown structure"
-msgstr ""
+msgstr "遵循现有的 Markdown 结构"
 
 #: ../../tutorials/overview.md:90 9852a6c7a8f74367a09bb0b1bfeaed08
 msgid "Include practical examples"
-msgstr ""
+msgstr "包含实用示例"
 
 #: ../../tutorials/overview.md:91 ce56d0d8046b4f93b355b81bdf8b4ca9
 msgid "Test all code snippets"
-msgstr ""
+msgstr "测试所有代码片段"
 
 #: ../../tutorials/overview.md:92 1acb67cce7a34c9a89dd31872419ff5a
 msgid "Update this README if adding new files"
-msgstr ""
+msgstr "如果添加新文件，请更新此 README"
 
 #: ../../tutorials/overview.md:96 12a479a4209c4b5ea1d20d65979a0070
 msgid ""
 "For questions about TxAgent specifically, refer to the main project README "
 "in the parent directory."
-msgstr ""
+msgstr "有关 TxAgent 具体问题，请参阅上级目录中的主项目 README。"

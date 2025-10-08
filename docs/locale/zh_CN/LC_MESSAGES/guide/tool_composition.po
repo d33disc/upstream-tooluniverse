@@ -506,11 +506,11 @@ msgstr "可用的编写工具"
 msgid ""
 "ToolUniverse currently provides several pre-built compose tools that "
 "demonstrate different workflow patterns:"
-msgstr ""
+msgstr "ToolUniverse 当前提供了多种预设的组合工具，以展示不同的工作流程模式："
 
 #: ../../guide/tool_composition.rst:532 6d792efddf894438bab09821c76ed970
 msgid "**✅ Working Compose Tools**:"
-msgstr ""
+msgstr "**✅ 可用的 Compose 工具**："
 
 #: ../../guide/tool_composition.rst:534 62169bbd70484982a2b1577041d5789b
 msgid ""
@@ -518,6 +518,8 @@ msgid ""
 "EuropePMC, OpenAlex, and PubTator databases - Uses AI agent for literature "
 "summarization - Demonstrates broadcasting pattern"
 msgstr ""
+"**LiteratureSearchTool** - 文献检索与综述 - 检索 EuropePMC、OpenAlex 及 PubTator 数据库 - "
+"使用 AI 代理进行文献摘要 - 展示广播模式"
 
 #: ../../guide/tool_composition.rst:539 5e0b4390009e4394ae4c652f6e53dc1e
 msgid ""
@@ -526,6 +528,8 @@ msgid ""
 "assessment using ADMETAI tools - Literature validation - Demonstrates "
 "sequential chaining with tool integration"
 msgstr ""
+"**ComprehensiveDrugDiscoveryPipeline** - 端到端药物发现流程 - 使用 OpenTargets 进行靶点识别 -"
+" 从已知药物中发现先导化合物 - 利用 ADMETAI 工具进行安全性评估 - 文献验证 - 展示工具集成的顺序链式操作"
 
 #: ../../guide/tool_composition.rst:546 98f029230bbb4980932c404b5735468a
 msgid ""
@@ -534,6 +538,8 @@ msgid ""
 "- Comprehensive pathway analysis using HPA tools - Clinical validation using"
 " FDA data - Demonstrates multi-strategy fallbacks and error handling"
 msgstr ""
+"**BiomarkerDiscoveryWorkflow** - 生物标志物发现与验证 - 基于文献的生物标志物发现 - 使用HPA进行多策略基因搜索 "
+"- 利用HPA工具进行全面的通路分析 - 使用FDA数据进行临床验证 - 展示多策略回退机制及错误处理"
 
 #: ../../guide/tool_composition.rst:553 cddc6066b786446990980c7e6e70bf23
 msgid ""
@@ -541,6 +547,8 @@ msgid ""
 "information retrieval - EuropePMC literature search - Demonstrates safety-"
 "focused workflows"
 msgstr ""
+"**DrugSafetyAnalyzer** - 药物安全性评估 - PubChem 化合物信息检索 - EuropePMC 文献搜索 - "
+"展示以安全性为核心的工作流程"
 
 #: ../../guide/tool_composition.rst:558 62c5bc0100804c1eb26524c786ae4e5a
 msgid ""
@@ -548,13 +556,14 @@ msgid ""
 "description improvement - Test case generation and quality evaluation - "
 "Demonstrates agentic optimization loops"
 msgstr ""
+"**ToolDescriptionOptimizer** - 工具优化 - 基于人工智能的工具描述改进 - 测试用例生成与质量评估 - 展示自主优化循环"
 
 #: ../../guide/tool_composition.rst:563 b54a44082b1c4a27946b9bc5d454ae99
 msgid ""
 "**ToolDiscover** - Tool discovery and generation - AI-powered tool creation "
 "from descriptions - Iterative code improvement - Demonstrates advanced "
 "agentic workflows"
-msgstr ""
+msgstr "**ToolDiscover** - 工具发现与生成 - 基于描述的AI驱动工具创建 - 迭代代码优化 - 展示先进的自主代理工作流程"
 
 #: ../../guide/tool_composition.rst:568 93aad734ff314fababf2152bbb8b6590
 msgid ""
@@ -564,10 +573,16 @@ msgid ""
 "extraction** (e.g., SMILES from drug names) - **Multi-strategy approaches** "
 "for robust data retrieval"
 msgstr ""
+"**主要功能**：  \n"
+"- **所有工具均经过测试并可正常运行**，支持真实数据处理  \n"
+"- **全面的错误处理机制**，具备优雅的降级方案  \n"
+"- **工具链集成**，支持复杂的多步骤工作流程  \n"
+"- **动态数据提取**（例如，从药物名称中提取SMILES）  \n"
+"- **多策略方法**，确保数据检索的稳健性"
 
 #: ../../guide/tool_composition.rst:576 2ff7799489424153a5181efa349bbcdf
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: ../../guide/tool_composition.rst:578 8c9e2517ac484e27962d6d32ba09a7ff
 msgid ""
@@ -576,30 +591,32 @@ msgid ""
 "backends. The container function `compose(arguments, tooluniverse, "
 "call_tool)` serves as the execution backbone, providing:"
 msgstr ""
+"ToolUniverse 的 Tool Composer 通过结合具有异构后端的单个工具，实现复杂科学工作流的创建。容器函数 "
+"`compose(arguments, tooluniverse, call_tool)` 作为执行核心，提供："
 
 #: ../../guide/tool_composition.rst:580 cb6e9c6972c4470081e7889666372de0
 msgid ""
 "**Flexible Multi-tool Execution**: Support for chaining, broadcasting, and "
 "agentic loops"
-msgstr ""
+msgstr "**灵活的多工具执行**：支持链式调用、广播及代理循环"
 
 #: ../../guide/tool_composition.rst:581 1e660ebbde214af3b7dfe97861b0d598
 msgid ""
 "**Heterogeneous Integration**: Seamless combination of tools from different "
 "scientific databases and APIs"
-msgstr ""
+msgstr "**异构集成**：无缝整合来自不同科学数据库和API的工具"
 
 #: ../../guide/tool_composition.rst:582 8020360aad25468a84fedc260bab5b9b
 msgid ""
 "**Adaptive Analysis**: Multi-step experimental analysis with tool feedback "
 "incorporation"
-msgstr ""
+msgstr "**自适应分析**：多步骤实验分析，结合工具反馈"
 
 #: ../../guide/tool_composition.rst:583 90469d9c15b0444f976e154ac2c6b69a
 msgid ""
 "**Protocol Compliance**: Consistent interaction with tools through the "
 "ToolUniverse schema"
-msgstr ""
+msgstr "**协议合规性**：通过 ToolUniverse 架构与工具保持一致的交互"
 
 #: ../../guide/tool_composition.rst:585 475c787d68574277871e5da30a87d672
 msgid ""
@@ -608,32 +625,33 @@ msgid ""
 "architecture supports complex research patterns while maintaining simplicity"
 " and reliability."
 msgstr ""
+"Tool Caller 接口抽象了工具调用，使开发人员能够专注于工作流逻辑，而无需关注工具管理的细节。该架构支持复杂的研究模式，同时保持简洁性和可靠性。"
 
 #: ../../guide/tool_composition.rst:588 cd1ec4d0984844288d6362d5f2bc5cd2
 msgid "Next Steps"
-msgstr ""
+msgstr "下一步"
 
 #: ../../guide/tool_composition.rst:590 5d5b2dc0b52747869cfe749d9d3846ea
 msgid ""
 "**Learn Components**: :doc:`architecture` - Understand ToolUniverse "
 "architecture"
-msgstr ""
+msgstr "**了解组件**：:doc:`architecture` - 了解 ToolUniverse 架构"
 
 #: ../../guide/tool_composition.rst:591 ffe2ed07ed61454491a483ab8038d283
 msgid ""
 "**Build AI Scientists**: :doc:`building_ai_scientists/index` - Create "
 "autonomous research workflows"
-msgstr ""
+msgstr "**构建 AI 科学家**：:doc:`building_ai_scientists/index` - 创建自主研究工作流程"
 
 #: ../../guide/tool_composition.rst:592 10c67e2e4803437c8e324653df5d8e31
 msgid ""
 "**Case Studies**: :doc:`scientific_workflows` - Real composition examples"
-msgstr ""
+msgstr "**案例研究**：:doc:`scientific_workflows` - 真实组成示例"
 
 #: ../../guide/tool_composition.rst:593 1f400788395d4447829ea45a9c792e1f
 msgid ""
 "**Best Practices**: :doc:`best_practices` - Production workflow optimization"
-msgstr ""
+msgstr "**最佳实践**：:doc:`best_practices` - 生产流程优化"
 
 #: ../../guide/tool_composition.rst:596 365357159d784583a48822684e25428c
 msgid ""
@@ -641,6 +659,7 @@ msgid ""
 "LiteratureSearchTool example, then progress to more complex patterns as you "
 "become comfortable with tool composition."
 msgstr ""
+"**从简单开始**：先从像 LiteratureSearchTool 示例这样的顺序工作流入手，随着对工具组合的熟悉，再逐步过渡到更复杂的模式。"
 
 #: ../../guide/tool_composition.rst:599 0d4ea1535b6348e1829140f8135de901
 msgid ""
@@ -648,6 +667,8 @@ msgid ""
 "`src/tooluniverse/compose_scripts/` directory and registered in "
 "`src/tooluniverse/data/compose_tools.json`."
 msgstr ""
+"**Compose 工具位置**：所有 compose 脚本必须放置在 `src/tooluniverse/compose_scripts/` "
+"目录下，并在 `src/tooluniverse/data/compose_tools.json` 中注册。"
 
 #: ../../guide/tool_composition.rst:602 8a1956742a2047e8bae06b8cabd5cc53
 msgid ""
@@ -656,3 +677,5 @@ msgid ""
 "primitives, enabling flexible multi-tool execution patterns for complex "
 "scientific workflows."
 msgstr ""
+"**工具组合器架构**：工具组合器生成容器函数，将 ToolUniverse 和 Tool Caller "
+"作为内联的可执行原语暴露出来，从而实现复杂科学工作流中灵活的多工具执行模式。"

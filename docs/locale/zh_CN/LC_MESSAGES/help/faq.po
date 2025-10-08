@@ -151,85 +151,85 @@ msgstr "常见问题"
 
 #: ../../help/faq.rst:103 e203098d19ef42e287da1d9819cbde82
 msgid "Why am I getting rate limit errors?"
-msgstr ""
+msgstr "为什么会出现速率限制错误？"
 
 #: ../../help/faq.rst:105 0430a09f4ed2400ca6a9ce8dc5f80f0e
 msgid ""
 "Many scientific APIs have rate limits. ToolUniverse implements automatic "
 "rate limiting, but you may still encounter limits:"
-msgstr ""
+msgstr "许多科学API设有速率限制。ToolUniverse 实现了自动速率限制，但您仍可能遇到限制："
 
 #: ../../help/faq.rst:109 2c468b36823347c3aded147fd278b244
 msgid "Solution 1: API Keys"
-msgstr ""
+msgstr "方案一：API 密钥"
 
 #: ../../help/faq.rst:111 98d24bd200814bd0acf80e60586519cb
 msgid "Register for API keys to get higher rate limits:"
-msgstr ""
+msgstr "注册 API 密钥以获取更高的访问速率限制："
 
 #: ../../help/faq.rst:118 bf7637c0e0534223ad9fd796971c90b6
 msgid "Solution 2: Batch Requests"
-msgstr ""
+msgstr "方案二：批量请求"
 
 #: ../../help/faq.rst:120 128df1c583d04adead2dec856d23f4df
 msgid "Use batch processing for multiple queries:"
-msgstr ""
+msgstr "使用批处理处理多个查询："
 
 #: ../../help/faq.rst:129 945b74a81b514952bf7de327efb0d9ea
 msgid "Solution 3: Caching"
-msgstr ""
+msgstr "方案三：缓存"
 
 #: ../../help/faq.rst:131 1dc9a48c92e04ff9b69ae2a75ccd1b53
 msgid "Enable caching to avoid repeated requests:"
-msgstr ""
+msgstr "启用缓存以避免重复请求："
 
 #: ../../help/faq.rst:138 5ab0527b255e4788b516bc463b48742c
 msgid "Tool returns empty results?"
-msgstr ""
+msgstr "工具返回空结果？"
 
 #: ../../help/faq.rst:140 8e1cb8dc579643f6bc9811d1a7ece74b
 msgid "**Check these common issues:**"
-msgstr ""
+msgstr "**检查以下常见问题：**"
 
 #: ../../help/faq.rst:142 42d002e412ce4e84908969b189c6c938
 msgid "**Correct identifiers**: Ensure you're using the right ID format"
-msgstr ""
+msgstr "**正确的标识符**：确保您使用的是正确的 ID 格式"
 
 #: ../../help/faq.rst:143 eda56993bb64446383965cdadf477ed1
 msgid "**API connectivity**: Test your internet connection"
-msgstr ""
+msgstr "**API 连接性**：测试您的互联网连接"
 
 #: ../../help/faq.rst:144 ec95c40bbbc8410dbe90e41006c8f6d8
 msgid "**Service status**: Check if the external service is available"
-msgstr ""
+msgstr "**服务状态**：检查外部服务是否可用"
 
 #: ../../help/faq.rst:145 0548e0a4d37542f1a14b07609c825d83
 msgid "**Query parameters**: Verify your search parameters are valid"
-msgstr ""
+msgstr "**查询参数**：请确认您的搜索参数有效"
 
 #: ../../help/faq.rst:156 457d40c4d2ac4e3389d0994dc4339161
 msgid "MCP Integration"
-msgstr ""
+msgstr "MCP 集成"
 
 #: ../../help/faq.rst:159 b3f0e8a9fb4f4b81a008e5385c34324b
 msgid "How do I use ToolUniverse with Claude?"
-msgstr ""
+msgstr "我如何将 ToolUniverse 与 Claude 一起使用？"
 
 #: ../../help/faq.rst:161 ffd30d2a86ad4592a51330ccb5ed01ea
 msgid "**Start MCP Server:**"
-msgstr ""
+msgstr "**启动 MCP 服务器：**"
 
 #: ../../help/faq.rst:167 e0314b1d2c644d0ca8cdb58273d2f265
 msgid "**Configure Claude Desktop:**"
-msgstr ""
+msgstr "**配置 Claude 桌面版：**"
 
 #: ../../help/faq.rst:169 16fdbfa473e84d62bded2ad4884f746d
 msgid "Add to your Claude configuration:"
-msgstr ""
+msgstr "将以下内容添加到您的 Claude 配置中："
 
 #: ../../help/faq.rst:182 f7ac569d887b4e00983bfc08510e30de
 msgid "**Test the connection:**"
-msgstr ""
+msgstr "**测试连接：**"
 
 #: ../../help/faq.rst:184 9e033da8146846aeaf167319f01f350f
 msgid "Ask Claude: \"What tools are available from ToolUniverse?\""

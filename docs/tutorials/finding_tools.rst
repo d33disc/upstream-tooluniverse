@@ -520,7 +520,7 @@ Further Resources
 - :doc:`custom_tools` - Creating your own tools
 
 **API References**:
-- :doc:`../api_comprehensive` - Complete API documentation
+- :doc:`api_comprehensive` - Complete API documentation
 - :doc:`../reference/tool_categories` - Tool categories and descriptions
 
 **Need Help?**:

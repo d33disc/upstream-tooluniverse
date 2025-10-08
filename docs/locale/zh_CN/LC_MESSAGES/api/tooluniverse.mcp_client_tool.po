@@ -194,16 +194,16 @@ msgstr "用于发现和创建MCP服务器工具配置的辅助类。"
 msgid ""
 "Discover all tools available on an MCP server and return tool "
 "configurations."
-msgstr ""
+msgstr "发现MCP服务器上所有可用的工具并返回工具配置。"
 
 #: b934821e38e34077ab5585fc15d27f30 of
 #: tooluniverse.mcp_client_tool.MCPServerDiscovery.create_mcp_tools_config:1
 msgid "Create tool configurations for multiple MCP servers."
-msgstr ""
+msgstr "为多个 MCP 服务器创建工具配置。"
 
 #: ../../api/tooluniverse.mcp_client_tool.rst 127da0b7e8884349821908f5466c5b76
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: 73b0195557174c58aa7ed11f5a189c4e of
 #: tooluniverse.mcp_client_tool.MCPServerDiscovery.create_mcp_tools_config:3
@@ -212,19 +212,23 @@ msgid ""
 " server - transport: 'http' or 'websocket' (optional, defaults to 'http') - "
 "server_name: Name prefix for tools (optional)"
 msgstr ""
+"服务器配置列表，每项包含：  \n"
+"- server_url：MCP 服务器的 URL  \n"
+"- transport：“http” 或 “websocket”（可选，默认为 “http”）  \n"
+"- server_name：工具名称前缀（可选）"
 
 #: ../../api/tooluniverse.mcp_client_tool.rst 9fcfacd096b84a2b8afb5390e96e743e
 msgid "Returns"
-msgstr ""
+msgstr "返回值"
 
 #: 990ae035561b41398ac2e458ab40ca0e of
 #: tooluniverse.mcp_client_tool.MCPServerDiscovery.create_mcp_tools_config:8
 msgid "List of tool configurations that can be loaded into ToolUniverse"
-msgstr ""
+msgstr "可加载到 ToolUniverse 的工具配置列表"
 
 #: ../../api/tooluniverse.mcp_client_tool.rst 6397a87280ed4507ab13415ac5788a75
 msgid "Return type"
-msgstr ""
+msgstr "返回类型"
 
 #: 28721938cf8b4e80b8fd29c4cbf2eb9d of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool:1
@@ -233,38 +237,40 @@ msgid ""
 "an MCP server. It can register discovered tools as individual ToolUniverse "
 "tools for seamless usage."
 msgstr ""
+"一款先进的 MCP 工具，能够自动发现并加载来自 MCP 服务器的所有工具。它可以将发现的工具注册为独立的 ToolUniverse "
+"工具，实现无缝使用。"
 
 #: 1767d75692f5465da789b32c369dabe2 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.discover_tools:1
 msgid "Discover all available tools from the MCP server"
-msgstr ""
+msgstr "发现 MCP 服务器提供的所有可用工具"
 
 #: df524e6dec214a308af4c562457a4d2d of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.call_tool:1
 msgid "Directly call an MCP tool by name"
-msgstr ""
+msgstr "直接按名称调用 MCP 工具"
 
 #: cfd12c29da844532a5dc82159f6194fa of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.generate_proxy_tool_configs:1
 msgid "Generate proxy tool configurations for discovered tools"
-msgstr ""
+msgstr "为已发现的工具生成代理工具配置"
 
 #: 27dc715d304b4b5db80755fdcccbbc40 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.register_tools_in_engine:1
 msgid "Register discovered tools directly in the ToolUniverse engine"
-msgstr ""
+msgstr "直接在 ToolUniverse 引擎中注册已发现的工具"
 
 #: ad7aa103344f451d810f4af2067de275 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.auto_load_and_register:1
 msgid "Automatically discover, load and register all MCP tools"
-msgstr ""
+msgstr "自动发现、加载并注册所有 MCP 工具"
 
 #: 1ca4d6a4c1884950999bbf711f5ff9b0 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.run:1
 msgid "Main run method for the auto-loader tool"
-msgstr ""
+msgstr "自动加载工具的主运行方法"
 
 #: 079dd056ac6c4b6f8a970b7a315afa05 of
 #: tooluniverse.mcp_client_tool.MCPAutoLoaderTool.__del__:1
 msgid "Cleanup when object is destroyed"
-msgstr ""
+msgstr "对象销毁时的清理操作"
