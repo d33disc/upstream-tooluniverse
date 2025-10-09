@@ -83,7 +83,7 @@ The tool accepts gene symbol pairs for correlation analysis:
 
 The tool returns a structured JSON response with comprehensive correlation analysis:
 
-```javascript
+```json
 {
   "correlation_data": {
     "correlation": 0.756,

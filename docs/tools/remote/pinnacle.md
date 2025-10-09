@@ -49,7 +49,7 @@ The tool performs fuzzy matching to handle various naming conventions, spaces, h
 The tool returns a JSON object with the following structure:
 
 #### Successful Response
-```javascript
+```json
 {
   "embeddings": {
     "TP53": [0.1234, -0.5678, 0.9012, ...],

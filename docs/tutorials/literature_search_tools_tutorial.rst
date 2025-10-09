@@ -162,8 +162,8 @@ All literature search tools follow a similar usage pattern:
     result = tu.run({
         "name": "tool_name",
         "arguments": {
-            "query": "your search terms",
-            "limit": 5  # number of results
+        "query": "your search terms",
+        "limit": 5  # number of results
         }
     })
 
@@ -171,25 +171,25 @@ All literature search tools follow a similar usage pattern:
     if isinstance(result, list) and len(result) > 0:
         print(f"Found {len(result)} results")
         for i, paper in enumerate(result, 1):
-            print(f"{i}. {paper.get('title', 'No title')}")
-            print(f"   Authors: {', '.join(paper.get('authors', [])[:3])}")
-            print(f"   Year: {paper.get('year', 'Unknown')}")
-            
-            # Show data quality information
-            if 'data_quality' in paper:
-                quality = paper['data_quality']
-                available_fields = [k for k, v in quality.items() if v]
-                print(f"   Available data: {', '.join(available_fields)}")
-            
-            # Show additional metadata if available
-            if paper.get('doi'):
-                print(f"   DOI: {paper['doi']}")
-            if paper.get('citations') or paper.get('citation_count'):
-                citations = paper.get('citations') or paper.get('citation_count')
-                print(f"   Citations: {citations}")
-            if paper.get('open_access') is not None:
-                print(f"   Open Access: {paper['open_access']}")
-            print()
+        print(f"{i}. {paper.get('title', 'No title')}")
+        print(f"   Authors: {', '.join(paper.get('authors', [])[:3])}")
+        print(f"   Year: {paper.get('year', 'Unknown')}")
+        
+        # Show data quality information
+        if 'data_quality' in paper:
+            quality = paper['data_quality']
+            available_fields = [k for k, v in quality.items() if v]
+            print(f"   Available data: {', '.join(available_fields)}")
+        
+        # Show additional metadata if available
+        if paper.get('doi'):
+            print(f"   DOI: {paper['doi']}")
+        if paper.get('citations') or paper.get('citation_count'):
+            citations = paper.get('citations') or paper.get('citation_count')
+            print(f"   Citations: {citations}")
+        if paper.get('open_access') is not None:
+            print(f"   Open Access: {paper['open_access']}")
+        print()
     else:
         print(f"No results found or error: {result}")
 
@@ -207,9 +207,9 @@ Search for preprints in physics, mathematics, computer science, and other fields
     arxiv_results = tu.run({
         "name": "ArXiv_search_papers",
         "arguments": {
-            "query": "machine learning deep learning",
-            "limit": 3,
-            "sort_by": "relevance"
+        "query": "machine learning deep learning",
+        "limit": 3,
+        "sort_by": "relevance"
         }
     })
 
@@ -217,10 +217,10 @@ Search for preprints in physics, mathematics, computer science, and other fields
     recent_papers = tu.run({
         "name": "ArXiv_search_papers", 
         "arguments": {
-            "query": "quantum computing",
-            "limit": 2,
-            "sort_by": "submittedDate",
-            "sort_order": "descending"
+        "query": "quantum computing",
+        "limit": 2,
+        "sort_by": "submittedDate",
+        "sort_order": "descending"
         }
     })
 
@@ -235,8 +235,8 @@ Search for scholarly articles with rich metadata:
     crossref_results = tu.run({
         "name": "Crossref_search_works",
         "arguments": {
-            "query": "artificial intelligence",
-            "limit": 3
+        "query": "artificial intelligence",
+        "limit": 3
         }
     })
 
@@ -244,9 +244,9 @@ Search for scholarly articles with rich metadata:
     filtered_results = tu.run({
         "name": "Crossref_search_works",
         "arguments": {
-            "query": "machine learning",
-            "limit": 2,
-            "filter": "type:journal-article,from-pub-date:2020-01-01"
+        "query": "machine learning",
+        "limit": 2,
+        "filter": "type:journal-article,from-pub-date:2020-01-01"
         }
     })
 
@@ -261,8 +261,8 @@ Search medical and life sciences literature:
     pubmed_results = tu.run({
         "name": "PubMed_search_articles",
         "arguments": {
-            "query": "cancer immunotherapy",
-            "limit": 3
+        "query": "cancer immunotherapy",
+        "limit": 3
         }
     })
 
@@ -270,8 +270,8 @@ Search medical and life sciences literature:
     covid_results = tu.run({
         "name": "PubMed_search_articles",
         "arguments": {
-            "query": "COVID-19 vaccine efficacy",
-            "limit": 2
+        "query": "COVID-19 vaccine efficacy",
+        "limit": 2
         }
     })
 
@@ -286,8 +286,8 @@ AI-powered academic search with enhanced results:
     semantic_results = tu.run({
         "name": "SemanticScholar_search_papers",
         "arguments": {
-            "query": "deep learning neural networks",
-            "limit": 3
+        "query": "deep learning neural networks",
+        "limit": 3
         }
     })
 
@@ -302,8 +302,8 @@ Comprehensive academic search with advanced filtering:
     openalex_results = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "artificial intelligence",
-            "max_results": 3
+        "search_keywords": "artificial intelligence",
+        "max_results": 3
         }
     })
 
@@ -311,10 +311,10 @@ Comprehensive academic search with advanced filtering:
     recent_ai_papers = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "machine learning",
-            "max_results": 2,
-            "year_from": 2020,
-            "open_access": True
+        "search_keywords": "machine learning",
+        "max_results": 2,
+        "year_from": 2020,
+        "open_access": True
         }
     })
 
@@ -329,8 +329,8 @@ Search for preprints in specific fields:
     biorxiv_results = tu.run({
         "name": "BioRxiv_search_preprints",
         "arguments": {
-            "query": "CRISPR gene editing",
-            "max_results": 2
+        "query": "CRISPR gene editing",
+        "max_results": 2
         }
     })
 
@@ -338,8 +338,8 @@ Search for preprints in specific fields:
     medrxiv_results = tu.run({
         "name": "MedRxiv_search_preprints",
         "arguments": {
-            "query": "COVID-19 treatment",
-            "max_results": 2
+        "query": "COVID-19 treatment",
+        "max_results": 2
         }
     })
 
@@ -347,8 +347,8 @@ Search for preprints in specific fields:
     hal_results = tu.run({
         "name": "HAL_search_archive",
         "arguments": {
-            "query": "mathematics statistics",
-            "max_results": 2
+        "query": "mathematics statistics",
+        "max_results": 2
         }
     })
 
@@ -363,9 +363,9 @@ Find open access articles and check access status:
     doaj_articles = tu.run({
         "name": "DOAJ_search_articles",
         "arguments": {
-            "query": "renewable energy",
-            "max_results": 3,
-            "type": "articles"
+        "query": "renewable energy",
+        "max_results": 3,
+        "type": "articles"
         }
     })
 
@@ -373,9 +373,9 @@ Find open access articles and check access status:
     doaj_journals = tu.run({
         "name": "DOAJ_search_articles",
         "arguments": {
-            "query": "biology",
-            "max_results": 2,
-            "type": "journals"
+        "query": "biology",
+        "max_results": 2,
+        "type": "journals"
         }
     })
 
@@ -383,8 +383,8 @@ Find open access articles and check access status:
     oa_status = tu.run({
         "name": "Unpaywall_check_oa_status",
         "arguments": {
-            "doi": "10.1038/nature12373",
-            "email": "your-email@example.com"
+        "doi": "10.1038/nature12373",
+        "email": "your-email@example.com"
         }
     })
 
@@ -404,22 +404,22 @@ Search across multiple databases for comprehensive results:
         
         # Search different databases
         databases = [
-            ("ArXiv", "ArXiv_search_papers"),
-            ("Crossref", "Crossref_search_works"),
-            ("Semantic Scholar", "SemanticScholar_search_papers"),
-            ("OpenAlex", "openalex_literature_search")
+        ("ArXiv", "ArXiv_search_papers"),
+        ("Crossref", "Crossref_search_works"),
+        ("Semantic Scholar", "SemanticScholar_search_papers"),
+        ("OpenAlex", "openalex_literature_search")
         ]
         
         for db_name, tool_name in databases:
-            try:
-                result = tu.run({
-                    "name": tool_name,
-                    "arguments": {"query": query, "limit": max_results}
-                })
-                results[db_name] = result if isinstance(result, list) else []
-            except Exception as e:
-                print(f"Error searching {db_name}: {e}")
-                results[db_name] = []
+        try:
+            result = tu.run({
+        "name": tool_name,
+        "arguments": {"query": query, "limit": max_results}
+            })
+            results[db_name] = result if isinstance(result, list) else []
+        except Exception as e:
+            print(f"Error searching {db_name}: {e}")
+            results[db_name] = []
         
         return results
 
@@ -439,10 +439,10 @@ Different tools offer various filtering and sorting options:
     sorted_papers = tu.run({
         "name": "ArXiv_search_papers",
         "arguments": {
-            "query": "quantum physics",
-            "limit": 5,
-            "sort_by": "submittedDate",
-            "sort_order": "descending"
+        "query": "quantum physics",
+        "limit": 5,
+        "sort_by": "submittedDate",
+        "sort_order": "descending"
         }
     })
 
@@ -450,11 +450,11 @@ Different tools offer various filtering and sorting options:
     recent_papers = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "artificial intelligence",
-            "max_results": 5,
-            "year_from": 2022,
-            "year_to": 2024,
-            "open_access": True
+        "search_keywords": "artificial intelligence",
+        "max_results": 5,
+        "year_from": 2022,
+        "year_to": 2024,
+        "open_access": True
         }
     })
 
@@ -462,9 +462,9 @@ Different tools offer various filtering and sorting options:
     journal_articles = tu.run({
         "name": "Crossref_search_works",
         "arguments": {
-            "query": "machine learning",
-            "limit": 5,
-            "filter": "type:journal-article,from-pub-date:2020-01-01"
+        "query": "machine learning",
+        "limit": 5,
+        "filter": "type:journal-article,from-pub-date:2020-01-01"
         }
     })
 
@@ -478,20 +478,20 @@ Always include proper error handling for robust applications:
     def safe_search(tool_name, arguments):
         """Safely search with error handling."""
         try:
-            result = tu.run({
-                "name": tool_name,
-                "arguments": arguments
-            })
+        result = tu.run({
+            "name": tool_name,
+            "arguments": arguments
+        })
+        
+        if isinstance(result, list):
+            return {"success": True, "data": result, "count": len(result)}
+        elif isinstance(result, dict) and "error" in result:
+            return {"success": False, "error": result["error"]}
+        else:
+            return {"success": False, "error": "Unexpected result format"}
             
-            if isinstance(result, list):
-                return {"success": True, "data": result, "count": len(result)}
-            elif isinstance(result, dict) and "error" in result:
-                return {"success": False, "error": result["error"]}
-            else:
-                return {"success": False, "error": "Unexpected result format"}
-                
         except Exception as e:
-            return {"success": False, "error": str(e)}
+        return {"success": False, "error": str(e)}
 
     # Use safe search
     result = safe_search("ArXiv_search_papers", {
@@ -502,7 +502,7 @@ Always include proper error handling for robust applications:
     if result["success"]:
         print(f"Found {result['count']} papers")
         for paper in result["data"]:
-            print(f"- {paper.get('title', 'No title')}")
+        print(f"- {paper.get('title', 'No title')}")
     else:
         print(f"Search failed: {result['error']}")
 
@@ -560,26 +560,26 @@ Here's a complete example that demonstrates searching across multiple literature
         
         # Define tools to search
         search_tools = [
-            {
-                "name": "ArXiv_search_papers",
-                "description": "ArXiv Preprints",
-                "args": {"query": query, "limit": 2, "sort_by": "relevance"}
-            },
-            {
-                "name": "Crossref_search_works",
-                "description": "Crossref Articles", 
-                "args": {"query": query, "limit": 2}
-            },
-            {
-                "name": "SemanticScholar_search_papers",
-                "description": "Semantic Scholar",
-                "args": {"query": query, "limit": 2}
-            },
-            {
-                "name": "openalex_literature_search",
-                "description": "OpenAlex",
-                "args": {"search_keywords": query, "max_results": 2}
-            }
+        {
+            "name": "ArXiv_search_papers",
+            "description": "ArXiv Preprints",
+            "args": {"query": query, "limit": 2, "sort_by": "relevance"}
+        },
+        {
+            "name": "Crossref_search_works",
+            "description": "Crossref Articles", 
+            "args": {"query": query, "limit": 2}
+        },
+        {
+            "name": "SemanticScholar_search_papers",
+            "description": "Semantic Scholar",
+            "args": {"query": query, "limit": 2}
+        },
+        {
+            "name": "openalex_literature_search",
+            "description": "OpenAlex",
+            "args": {"search_keywords": query, "max_results": 2}
+        }
         ]
         
         print(f"Searching for: '{query}'")
@@ -588,32 +588,32 @@ Here's a complete example that demonstrates searching across multiple literature
         all_results = []
         
         for tool in search_tools:
-            print(f"\nSearching {tool['description']}...")
+        print(f"\nSearching {tool['description']}...")
+        
+        try:
+            result = tu.run({
+        "name": tool["name"],
+        "arguments": tool["args"]
+            })
             
-            try:
-                result = tu.run({
-                    "name": tool["name"],
-                    "arguments": tool["args"]
-                })
-                
-                if isinstance(result, list) and len(result) > 0:
-                    print(f"✅ Found {len(result)} results")
-                    all_results.extend(result)
-                    
-                    # Show first result
-                    first_paper = result[0]
-                    print(f"📄 Sample: {first_paper.get('title', 'No title')[:60]}...")
-                else:
-                    print(f"❌ No results or error: {result}")
-                    
-            except Exception as e:
-                print(f"❌ Exception: {str(e)[:100]}...")
+            if isinstance(result, list) and len(result) > 0:
+        print(f"✅ Found {len(result)} results")
+        all_results.extend(result)
+        
+        # Show first result
+        first_paper = result[0]
+        print(f"📄 Sample: {first_paper.get('title', 'No title')[:60]}...")
+            else:
+        print(f"❌ No results or error: {result}")
+        
+        except Exception as e:
+            print(f"❌ Exception: {str(e)[:100]}...")
         
         print(f"\n📊 Total papers found: {len(all_results)}")
         
         # Save results to file
         with open("literature_search_results.json", "w") as f:
-            json.dump(all_results, f, indent=2, ensure_ascii=False)
+        json.dump(all_results, f, indent=2, ensure_ascii=False)
         
         print("💾 Results saved to literature_search_results.json")
 
@@ -696,9 +696,9 @@ ArXiv Search:
     result = tu.run({
         "name": "ArXiv_search_papers",
         "arguments": {
-            "query": "machine learning",
-            "limit": 5,
-            "sort_by": "relevance"
+        "query": "machine learning",
+        "limit": 5,
+        "sort_by": "relevance"
         }
     })
 
@@ -708,9 +708,9 @@ Crossref Search:
     result = tu.run({
         "name": "Crossref_search_works",
         "arguments": {
-            "query": "artificial intelligence",
-            "limit": 5,
-            "filter": "type:journal-article"
+        "query": "artificial intelligence",
+        "limit": 5,
+        "filter": "type:journal-article"
         }
     })
 
@@ -720,8 +720,8 @@ PubMed Search:
     result = tu.run({
         "name": "PubMed_search_articles",
         "arguments": {
-            "query": "cancer research",
-            "limit": 5
+        "query": "cancer research",
+        "limit": 5
         }
     })
 
@@ -731,8 +731,8 @@ Semantic Scholar Search:
     result = tu.run({
         "name": "SemanticScholar_search_papers",
         "arguments": {
-            "query": "deep learning",
-            "limit": 5
+        "query": "deep learning",
+        "limit": 5
         }
     })
 
@@ -742,10 +742,10 @@ OpenAlex Search:
     result = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "artificial intelligence",
-            "max_results": 5,
-            "year_from": 2020,
-            "open_access": True
+        "search_keywords": "artificial intelligence",
+        "max_results": 5,
+        "year_from": 2020,
+        "open_access": True
         }
     })
 
@@ -756,8 +756,8 @@ Preprint Archives:
     result = tu.run({
         "name": "BioRxiv_search_preprints",
         "arguments": {
-            "query": "CRISPR",
-            "max_results": 5
+        "query": "CRISPR",
+        "max_results": 5
         }
     })
 
@@ -765,8 +765,8 @@ Preprint Archives:
     result = tu.run({
         "name": "MedRxiv_search_preprints",
         "arguments": {
-            "query": "COVID-19",
-            "max_results": 5
+        "query": "COVID-19",
+        "max_results": 5
         }
     })
 
@@ -774,8 +774,8 @@ Preprint Archives:
     result = tu.run({
         "name": "HAL_search_archive",
         "arguments": {
-            "query": "mathematics",
-            "max_results": 5
+        "query": "mathematics",
+        "max_results": 5
         }
     })
 
@@ -786,9 +786,9 @@ Open Access Tools:
     result = tu.run({
         "name": "DOAJ_search_articles",
         "arguments": {
-            "query": "renewable energy",
-            "max_results": 5,
-            "type": "articles"
+        "query": "renewable energy",
+        "max_results": 5,
+        "type": "articles"
         }
     })
 
@@ -796,8 +796,8 @@ Open Access Tools:
     result = tu.run({
         "name": "Unpaywall_check_oa_status",
         "arguments": {
-            "doi": "10.1038/nature12373",
-            "email": "your-email@example.com"
+        "doi": "10.1038/nature12373",
+        "email": "your-email@example.com"
         }
     })
 
@@ -812,8 +812,8 @@ Search the world's largest collection of open access research papers:
     result = tu.run({
         "name": "CORE_search_papers",
         "arguments": {
-            "query": "machine learning",
-            "limit": 5
+        "query": "machine learning",
+        "limit": 5
         }
     })
 
@@ -821,10 +821,10 @@ Search the world's largest collection of open access research papers:
     result = tu.run({
         "name": "CORE_search_papers",
         "arguments": {
-            "query": "artificial intelligence",
-            "limit": 3,
-            "year_from": 2020,
-            "year_to": 2024
+        "query": "artificial intelligence",
+        "limit": 3,
+        "year_from": 2020,
+        "year_to": 2024
         }
     })
 
@@ -832,9 +832,9 @@ Search the world's largest collection of open access research papers:
     result = tu.run({
         "name": "CORE_search_papers",
         "arguments": {
-            "query": "climate change",
-            "limit": 5,
-            "language": "en"
+        "query": "climate change",
+        "limit": 5,
+        "language": "en"
         }
     })
 
@@ -849,8 +849,8 @@ Search PubMed Central full-text biomedical literature:
     result = tu.run({
         "name": "PMC_search_papers",
         "arguments": {
-            "query": "cancer research",
-            "limit": 5
+        "query": "cancer research",
+        "limit": 5
         }
     })
 
@@ -858,10 +858,10 @@ Search PubMed Central full-text biomedical literature:
     result = tu.run({
         "name": "PMC_search_papers",
         "arguments": {
-            "query": "COVID-19",
-            "limit": 3,
-            "date_from": "2020/01/01",
-            "date_to": "2024/12/31"
+        "query": "COVID-19",
+        "limit": 3,
+        "date_from": "2020/01/01",
+        "date_to": "2024/12/31"
         }
     })
 
@@ -869,9 +869,9 @@ Search PubMed Central full-text biomedical literature:
     result = tu.run({
         "name": "PMC_search_papers",
         "arguments": {
-            "query": "diabetes treatment",
-            "limit": 5,
-            "article_type": "research-article"
+        "query": "diabetes treatment",
+        "limit": 5,
+        "article_type": "research-article"
         }
     })
 
@@ -886,8 +886,8 @@ Search Zenodo for research data, publications, and datasets:
     result = tu.run({
         "name": "Zenodo_search_records",
         "arguments": {
-            "query": "machine learning",
-            "max_results": 5
+        "query": "machine learning",
+        "max_results": 5
         }
     })
 
@@ -895,9 +895,9 @@ Search Zenodo for research data, publications, and datasets:
     result = tu.run({
         "name": "Zenodo_search_records",
         "arguments": {
-            "query": "climate change",
-            "max_results": 3,
-            "community": "zenodo"
+        "query": "climate change",
+        "max_results": 3,
+        "community": "zenodo"
         }
     })
 
@@ -905,8 +905,8 @@ Search Zenodo for research data, publications, and datasets:
     result = tu.run({
         "name": "Zenodo_search_records",
         "arguments": {
-            "query": "COVID-19 dataset",
-            "max_results": 5
+        "query": "COVID-19 dataset",
+        "max_results": 5
         }
     })
 
@@ -937,8 +937,8 @@ Here are examples showing the enhanced features of the optimized tools:
     result = tu.run({
         "name": "EuropePMC_search_articles",
         "arguments": {
-            "query": "machine learning",
-            "limit": 2
+        "query": "machine learning",
+        "limit": 2
         }
     })
     
@@ -960,8 +960,8 @@ Here are examples showing the enhanced features of the optimized tools:
     result = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "artificial intelligence",
-            "max_results": 2
+        "search_keywords": "artificial intelligence",
+        "max_results": 2
         }
     })
     
@@ -981,9 +981,9 @@ Here are examples showing the enhanced features of the optimized tools:
     result = tu.run({
         "name": "SemanticScholar_search_papers",
         "arguments": {
-            "query": "deep learning",
-            "limit": 2,
-            "api_key": "your_api_key_here"  # Optional for higher limits
+        "query": "deep learning",
+        "limit": 2,
+        "api_key": "your_api_key_here"  # Optional for higher limits
         }
     })
     
@@ -1001,8 +1001,8 @@ Here are examples showing the enhanced features of the optimized tools:
     result = tu.run({
         "name": "Crossref_search_works",
         "arguments": {
-            "query": "machine learning",
-            "limit": 2
+        "query": "machine learning",
+        "limit": 2
         }
     })
     
@@ -1020,34 +1020,34 @@ Here are examples showing the enhanced features of the optimized tools:
     def analyze_data_quality(results):
         """Analyze data quality across multiple tools."""
         if not isinstance(results, list):
-            return
+        return
         
         total_papers = len(results)
         quality_stats = {
-            'has_abstract': 0,
-            'has_authors': 0,
-            'has_doi': 0,
-            'has_citations': 0,
-            'has_keywords': 0
+        'has_abstract': 0,
+        'has_authors': 0,
+        'has_doi': 0,
+        'has_citations': 0,
+        'has_keywords': 0
         }
         
         for paper in results:
-            if 'data_quality' in paper:
-                for field, available in paper['data_quality'].items():
-                    if field in quality_stats and available:
-                        quality_stats[field] += 1
+        if 'data_quality' in paper:
+            for field, available in paper['data_quality'].items():
+        if field in quality_stats and available:
+            quality_stats[field] += 1
         
         print(f"Data Quality Analysis ({total_papers} papers):")
         for field, count in quality_stats.items():
-            percentage = (count / total_papers) * 100
-            print(f"  {field}: {count}/{total_papers} ({percentage:.1f}%)")
+        percentage = (count / total_papers) * 100
+        print(f"  {field}: {count}/{total_papers} ({percentage:.1f}%)")
     
     # Use with any search results
     result = tu.run({
         "name": "openalex_literature_search",
         "arguments": {
-            "search_keywords": "machine learning",
-            "max_results": 5
+        "search_keywords": "machine learning",
+        "max_results": 5
         }
     })
     
