@@ -29,6 +29,14 @@ Tool Discovery & Usage
 * **🔍 Tool Discovery** → :doc:`../tutorials/finding_tools` - Tutorial to ToolUniverse's three tool finder methods: keyword, LLM, and embedding search
 * **📚 Tools Overview** → :doc:`tools` - Comprehensive overview of all available tools
 
+Tool Collections
+----------------
+
+Specialized tool collections for specific research domains:
+
+* **🏥 Clinical Guidelines** → :doc:`clinical_guidelines_tools` - Search and extract clinical practice guidelines from NICE, WHO, PubMed, and 5 other authoritative sources
+* **📖 Literature Search** → :doc:`../tutorials/literature_search_tools_tutorial` - Comprehensive literature search across PubMed, arXiv, bioRxiv, and academic databases
+
 Building AI Scientists
 ----------------------
 

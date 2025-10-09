@@ -329,29 +329,16 @@ for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
 done
 
 # ===========================================
-# Step 3.5: Create root index redirect to English
+# Step 3.5: Create root index redirect to English and maintain /en/ path
 # ===========================================
 if [ ${#LANGUAGES[@]} -gt 1 ]; then
-  echo -e "\n${BLUE}🌍 Setting up English as default (root path)${NC}"
+  echo -e "\n${BLUE}🌍 Setting up English as default (root path) and maintaining /en/ path${NC}"
   
-  # Option 1: Simple redirect (current approach)
-  # Option 2: Copy English docs to root (making /en/ optional)
+  # Always create both root redirect AND maintain /en/ path for backward compatibility
+  echo -e "${BLUE}📋 Creating root redirect to English...${NC}"
   
-  # Ask user preference or use environment variable
-  if [ "${DOC_EN_AS_ROOT:-false}" = "true" ]; then
-    echo -e "${BLUE}📋 Copying English documentation to root directory...${NC}"
-    
-    # Copy all English content to root (excluding en folder itself)
-    rsync -a --exclude='en' "$OUTPUT_DIR/en/" "$OUTPUT_DIR/"
-    
-    # Update language switcher to handle root path as English
-    # Modify the JavaScript to detect root path as English
-    
-    echo -e "${GREEN}✅ English documentation copied to root${NC}"
-    echo -e "${YELLOW}💡 Access: http://localhost:port/ OR http://localhost:port/en/${NC}"
-  else
-    # Create simple redirect page to English version (default)
-    cat > "$OUTPUT_DIR/index.html" << 'REDIRECT'
+  # Create root redirect page to English version
+  cat > "$OUTPUT_DIR/index.html" << 'REDIRECT'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -396,8 +383,74 @@ if [ ${#LANGUAGES[@]} -gt 1 ]; then
 </html>
 REDIRECT
 
-    echo -e "${GREEN}✅ Root index redirect created (default: English)${NC}"
-    echo -e "${YELLOW}💡 To make English accessible at root, set: DOC_EN_AS_ROOT=true${NC}"
+  echo -e "${GREEN}✅ Root index redirect created (default: English)${NC}"
+  echo -e "${YELLOW}💡 Access: http://localhost:port/ (redirects to /en/) OR http://localhost:port/en/${NC}"
+  
+  # Copy .htaccess file for Apache server compatibility
+  if [ -f ".htaccess" ]; then
+    cp .htaccess "$OUTPUT_DIR/"
+    echo -e "${GREEN}✅ .htaccess file copied for Apache server compatibility${NC}"
+  else
+    echo -e "${YELLOW}⚠️ .htaccess file not found, creating one...${NC}"
+    cat > "$OUTPUT_DIR/.htaccess" << 'HTACCESS'
+# ToolUniverse Documentation - Apache .htaccess
+# This file ensures proper redirects for multi-language documentation
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect root to English documentation
+RewriteRule ^$ en/index.html [R=302,L]
+
+# Redirect old /en/ paths to new structure (if needed)
+# This ensures backward compatibility
+RewriteRule ^en/(.*)$ en/$1 [L]
+
+# Redirect old /zh_CN/ paths to new /zh-CN/ structure
+RewriteRule ^zh_CN/(.*)$ zh-CN/$1 [R=302,L]
+
+# Handle language switching
+# If someone accesses a file without language prefix, redirect to English
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(en|zh-CN)/
+RewriteRule ^(.*)$ en/$1 [R=302,L]
+
+# Set proper MIME types
+AddType text/html .html
+AddType text/css .css
+AddType application/javascript .js
+AddType image/png .png
+AddType image/jpeg .jpg
+AddType image/svg+xml .svg
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Set cache headers
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+HTACCESS
+    echo -e "${GREEN}✅ .htaccess file created${NC}"
   fi
 fi
 

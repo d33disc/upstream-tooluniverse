@@ -41,7 +41,7 @@ Overview
 -----------------------------
 
 * **Total Configuration Files**: 81
-* **Total Tools**: 683
+* **Total Tools**: 682
 
 Local Tools
 -----------
@@ -278,6 +278,11 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Literature Search Tools <literature_search_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Mcp Client Tools Example <mcp_client_tools_example>
 
 .. toctree::
@@ -294,11 +299,6 @@ Builtin Tools
    :maxdepth: 1
 
    Monarch Tools <monarch_tools>
-
-.. toctree::
-   :maxdepth: 1
-
-   Multi Agent Tools <multi_agent_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -463,7 +463,7 @@ Tools by Type
   * ADMETAI_predict_stress_response (from :doc:`admetai_tools`)
   * ADMETAI_predict_toxicity (from :doc:`admetai_tools`)
 
-**AgenticTool** (48 tools)
+**AgenticTool** (43 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Local Tools:*
@@ -481,25 +481,20 @@ Tools by Type
   * EthicalComplianceReviewer (from :doc:`agentic_tools`)
   * ExperimentalDesignScorer (from :doc:`agentic_tools`)
   * HypothesisGenerator (from :doc:`agentic_tools`)
-  * IntentAnalyzerAgent (from :doc:`agentic_tools`)
-  * IntentAnalyzerAgent (from :doc:`multi_agent_tools`)
-  * KeywordExtractorAgent (from :doc:`agentic_tools`)
-  * KeywordExtractorAgent (from :doc:`multi_agent_tools`)
+  * IntentAnalyzerAgent (from :doc:`literature_search_tools`)
+  * KeywordExtractorAgent (from :doc:`literature_search_tools`)
   * LabelGenerator (from :doc:`agentic_tools`)
   * LiteratureContextReviewer (from :doc:`agentic_tools`)
   * MedicalLiteratureReviewer (from :doc:`agentic_tools`)
   * MedicalTermNormalizer (from :doc:`agentic_tools`)
   * MethodologyRigorReviewer (from :doc:`agentic_tools`)
   * NoveltySignificanceReviewer (from :doc:`agentic_tools`)
-  * OverallSummaryAgent (from :doc:`agentic_tools`)
-  * OverallSummaryAgent (from :doc:`multi_agent_tools`)
+  * OverallSummaryAgent (from :doc:`literature_search_tools`)
   * ProtocolOptimizer (from :doc:`agentic_tools`)
-  * QualityCheckerAgent (from :doc:`agentic_tools`)
-  * QualityCheckerAgent (from :doc:`multi_agent_tools`)
+  * QualityCheckerAgent (from :doc:`literature_search_tools`)
   * QuestionRephraser (from :doc:`agentic_tools`)
   * ReproducibilityTransparencyReviewer (from :doc:`agentic_tools`)
-  * ResultSummarizerAgent (from :doc:`agentic_tools`)
-  * ResultSummarizerAgent (from :doc:`multi_agent_tools`)
+  * ResultSummarizerAgent (from :doc:`literature_search_tools`)
   * ResultsInterpretationReviewer (from :doc:`agentic_tools`)
   * ScientificTextSummarizer (from :doc:`agentic_tools`)
   * TestCaseGenerator (from :doc:`agentic_tools`)
@@ -571,7 +566,7 @@ Tools by Type
   * DrugSafetyAnalyzer (from :doc:`compose_tools`)
   * LiteratureSearchTool (from :doc:`compose_tools`)
   * MultiAgentLiteratureSearch (from :doc:`compose_tools`)
-  * MultiAgentLiteratureSearch (from :doc:`multi_agent_tools`)
+  * MultiAgentLiteratureSearch (from :doc:`literature_search_tools`)
   * OutputSummarizationComposer (from :doc:`output_summarization_tools`)
   * ToolDescriptionOptimizer (from :doc:`compose_tools`)
   * ToolDiscover (from :doc:`compose_tools`)
@@ -1097,6 +1092,12 @@ Tools by Type
 *Local Tools:*
   * get_joint_associated_diseases_by_HPO_ID_list (from :doc:`monarch_tools`)
 
+**NICEGuidelineFullTextTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * NICE_Guideline_Full_Text (from :doc:`unified_guideline_tools`)
+
 **NICEWebScrapingTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1138,6 +1139,12 @@ Tools by Type
 
 *Local Tools:*
   * OpenAIRE_search_publications (from :doc:`openaire_tools`)
+
+**OpenAlexGuidelinesTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * OpenAlex_Guidelines_Search (from :doc:`unified_guideline_tools`)
 
 **OpenAlexTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1575,6 +1582,18 @@ Tools by Type
 
 *Local Tools:*
   * Unpaywall_check_oa_status (from :doc:`unpaywall_tools`)
+
+**WHOGuidelineFullTextTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * WHO_Guideline_Full_Text (from :doc:`unified_guideline_tools`)
+
+**WHOGuidelinesTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * WHO_Guidelines_Search (from :doc:`unified_guideline_tools`)
 
 **WikidataSPARQLTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

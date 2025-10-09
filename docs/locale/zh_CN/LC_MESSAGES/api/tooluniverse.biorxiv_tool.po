@@ -7,52 +7,54 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 21:51-0400\n"
+"POT-Creation-Date: 2025-10-09 00:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/tooluniverse.biorxiv_tool.rst:2 66962f2758694cfb9e0af71d55607452
+#: ../../api/tooluniverse.biorxiv_tool.rst:2 0bde8f45421347c8b515c07d30dfa96c
 msgid "tooluniverse.biorxiv\\_tool module"
 msgstr "tooluniverse.biorxiv_tool 模块"
 
-#: ebf8d6ae43f941cfb4805339c03b5095 of tooluniverse.biorxiv_tool.BioRxivTool:1
+#: 73f25b88def94bf0aab72359249b720e of tooluniverse.biorxiv_tool.BioRxivTool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
 msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
-#: 9c434a5a2220457e8e6cb38c074209eb of tooluniverse.biorxiv_tool.BioRxivTool:1
-msgid "Search bioRxiv preprints using the public bioRxiv API."
+#: ce872646a62948a492a3c3dcee4ce4a3 of tooluniverse.biorxiv_tool.BioRxivTool:1
+#, fuzzy
+msgid "Search bioRxiv preprints using bioRxiv's API (same interface as medRxiv)."
 msgstr "使用公共 bioRxiv API 搜索 bioRxiv 预印本。"
 
-#: ../../api/tooluniverse.biorxiv_tool.rst ecbf2cbd8c7341ba9bcb2aaa6e9940dc
+#: ../../api/tooluniverse.biorxiv_tool.rst 938fd5a10e4d4d77bd56c8949ea57d26
 msgid "Parameters"
 msgstr "参数"
 
-#: d61d4e6bea1046f880f8a28d9c38e194 of tooluniverse.biorxiv_tool.BioRxivTool:3
+#: 8f13235c334a477fa0109ed083a6ae8f of tooluniverse.biorxiv_tool.BioRxivTool:3
 msgid "Search term"
 msgstr "搜索词"
 
-#: 537b886608da4e5cb58d6c5e414bdb34 of tooluniverse.biorxiv_tool.BioRxivTool:5
+#: 76871c5382f041c5a931a0bed2498726 of tooluniverse.biorxiv_tool.BioRxivTool:5
 msgid "Max results to return (default 10, max 200)"
 msgstr "返回的最大结果数（默认10，最大200）"
 
-#: 80305753f6f542099ff293fa7fedef69 of
+#: a14631b82b2948608bc03f8d9d661cc6 of
 #: tooluniverse.biorxiv_tool.BioRxivTool.run:1
 msgid "Execute the tool."
 msgstr "执行该工具。"
 
-#: a7b0cfcca70b4ee1a01798b2a9514dea of
+#: 7bb0a9e852d54418bf1d0530cfa487a4 of
 #: tooluniverse.biorxiv_tool.BioRxivTool.run:3
 msgid ""
-"The default BaseTool implementation accepts an optional arguments mapping to"
-" align with most concrete tool implementations which expect a dictionary of "
-"inputs."
+"The default BaseTool implementation accepts an optional arguments mapping"
+" to align with most concrete tool implementations which expect a "
+"dictionary of inputs."
 msgstr "默认的 BaseTool 实现接受一个可选的参数映射，以与大多数具体工具实现保持一致，这些实现通常期望接收一个输入字典。"
+

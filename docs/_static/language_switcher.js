@@ -49,10 +49,10 @@
             return;
         }
 
-        // 兜底：当前不在语言目录下（例如 /<repo>/index.html）
+        // 兜底：当前不在语言目录下（例如根路径 / 或 /<repo>/index.html）
         // 解析当前文件名
         let relativeFile = 'index.html';
-        if (currentPath !== '/') {
+        if (currentPath !== '/' && currentPath !== basePrefix) {
             const lastSlash = currentPath.lastIndexOf('/');
             const file = currentPath.substring(lastSlash + 1) || 'index.html';
             relativeFile = file;

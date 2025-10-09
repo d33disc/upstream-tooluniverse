@@ -3,7 +3,7 @@ Unified Guideline Tools
 
 **Configuration File**: ``unified_guideline_tools.json``
 **Tool Type**: Local
-**Tools Count**: 4
+**Tools Count**: 8
 
 This page contains all tools defined in the ``unified_guideline_tools.json`` configuration file.
 
@@ -78,6 +78,77 @@ Search NICE (National Institute for Health and Care Excellence) clinical guideli
       result = tu.run(query)
 
 
+**NICE_Guideline_Full_Text** (Type: NICEGuidelineFullTextTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fetch complete full text content from a NICE clinical guideline page. Takes a NICE guideline URL ...
+
+.. dropdown:: NICE_Guideline_Full_Text tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``NICE_Guideline_Full_Text``
+   * **Type**: ``NICEGuidelineFullTextTool``
+   * **Description**: Fetch complete full text content from a NICE clinical guideline page. Takes a NICE guideline URL and extracts all sections, recommendations, and complete guideline text. Use this after finding a guideline with NICE_Clinical_Guidelines_Search to get the full content.
+
+   **Parameters:**
+
+   * ``url`` (string) (required)
+     Full URL of the NICE guideline page (e.g., 'https://www.nice.org.uk/guidance/ng28'). Must be a valid NICE guideline URL.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "NICE_Guideline_Full_Text",
+          "arguments": {
+              "url": "example_value"
+          }
+      }
+      result = tu.run(query)
+
+
+**OpenAlex_Guidelines_Search** (Type: OpenAlexGuidelinesTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a c...
+
+.. dropdown:: OpenAlex_Guidelines_Search tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``OpenAlex_Guidelines_Search``
+   * **Type**: ``OpenAlexGuidelinesTool``
+   * **Description**: Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a comprehensive collection of guidelines from various sources worldwide, with citation metrics and institutional affiliations.
+
+   **Parameters:**
+
+   * ``query`` (string) (required)
+     Medical condition or clinical topic to search for guidelines (e.g., 'diabetes management', 'hypertension treatment', 'cancer screening')
+
+   * ``limit`` (integer) (optional)
+     Maximum number of guidelines to return (default: 10)
+
+   * ``year_from`` (integer) (optional)
+     Filter for guidelines published from this year onwards (optional)
+
+   * ``year_to`` (integer) (optional)
+     Filter for guidelines published up to this year (optional)
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "OpenAlex_Guidelines_Search",
+          "arguments": {
+              "query": "example_value"
+          }
+      }
+      result = tu.run(query)
+
+
 **PubMed_Guidelines_Search** (Type: PubMedGuidelinesTool)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -145,6 +216,71 @@ Search TRIP Database (Turning Research into Practice) for evidence-based clinica
 
       query = {
           "name": "TRIP_Database_Guidelines_Search",
+          "arguments": {
+              "query": "example_value"
+          }
+      }
+      result = tu.run(query)
+
+
+**WHO_Guideline_Full_Text** (Type: WHOGuidelineFullTextTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fetch full text content from a WHO (World Health Organization) guideline publication page. Extrac...
+
+.. dropdown:: WHO_Guideline_Full_Text tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``WHO_Guideline_Full_Text``
+   * **Type**: ``WHOGuidelineFullTextTool``
+   * **Description**: Fetch full text content from a WHO (World Health Organization) guideline publication page. Extracts available web content and finds PDF download links. Use this after finding a guideline with WHO_Guidelines_Search to get the full content or PDF link.
+
+   **Parameters:**
+
+   * ``url`` (string) (required)
+     Full URL of the WHO publication page (e.g., 'https://www.who.int/publications/i/item/9789240113879'). Must be a valid WHO publication URL.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "WHO_Guideline_Full_Text",
+          "arguments": {
+              "url": "example_value"
+          }
+      }
+      result = tu.run(query)
+
+
+**WHO_Guidelines_Search** (Type: WHOGuidelinesTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Search WHO (World Health Organization) official clinical guidelines and health recommendations. P...
+
+.. dropdown:: WHO_Guidelines_Search tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``WHO_Guidelines_Search``
+   * **Type**: ``WHOGuidelinesTool``
+   * **Description**: Search WHO (World Health Organization) official clinical guidelines and health recommendations. Provides access to authoritative global health guidelines published by WHO.
+
+   **Parameters:**
+
+   * ``query`` (string) (required)
+     Medical condition, disease, or health topic to search for in WHO guidelines (e.g., 'malaria', 'HIV', 'diabetes', 'tuberculosis')
+
+   * ``limit`` (integer) (optional)
+     Maximum number of guidelines to return (default: 10)
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "WHO_Guidelines_Search",
           "arguments": {
               "query": "example_value"
           }

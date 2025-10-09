@@ -6,7 +6,7 @@ This comprehensive tutorial demonstrates how to use the literature search tools 
 Overview
 --------
 
-ToolUniverse provides 15 powerful literature search tools that cover different aspects of academic research:
+ToolUniverse provides 15 powerful literature search tools that cover different aspects of academic research. All tools have been optimized with enhanced data extraction, comprehensive metadata, and data quality indicators:
 
 **Preprint Archives:**
 - ArXiv - Physics, mathematics, computer science, and other fields
@@ -39,32 +39,42 @@ Tool Overview Table
 | papers           |                  |                  | CS, Biology      |
 +------------------+------------------+------------------+------------------+
 | Crossref_search_ | Crossref         | Scholarly        | DOI metadata,    |
-| works            |                  | Articles         | Rich metadata    |
+| works            |                  | Articles         | Rich metadata,   |
+|                  |                  |                  | HTML cleaning    |
 +------------------+------------------+------------------+------------------+
 | PubMed_search_   | PubMed           | Medical/Life     | Medical          |
-| articles         |                  | Sciences         | literature       |
+| articles         |                  | Sciences         | literature,      |
+|                  |                  |                  | MeSH keywords    |
 +------------------+------------------+------------------+------------------+
 | SemanticScholar_ | Semantic Scholar | AI-powered       | AI ranking,      |
-| search_papers    |                  | Search           | Citations        |
+| search_papers    |                  | Search           | Citations,       |
+|                  |                  |                  | Rate limit       |
+|                  |                  |                  | handling         |
 +------------------+------------------+------------------+------------------+
 | openalex_        | OpenAlex         | Comprehensive    | Open access,     |
-| literature_      |                  | Academic         | Year filtering   |
-| search           |                  | Search           |                  |
+| literature_      |                  | Academic         | Year filtering,  |
+| search           |                  | Search           | Abstract         |
+|                  |                  |                  | reconstruction   |
 +------------------+------------------+------------------+------------------+
 | EuropePMC_       | Europe PMC       | Biomedical       | European         |
-| search_articles  |                  | Literature       | research         |
+| search_articles  |                  | Literature       | research,        |
+|                  |                  |                  | Core+Lite modes  |
 +------------------+------------------+------------------+------------------+
-| DBLP_search_     | DBLP             | Computer         | CS bibliography  |
-| publications     |                  | Science          |                  |
+| DBLP_search_     | DBLP             | Computer         | CS bibliography, |
+| publications     |                  | Science          | Conference       |
+|                  |                  |                  | papers           |
 +------------------+------------------+------------------+------------------+
 | DOAJ_search_     | DOAJ             | Open Access      | Articles &       |
-| articles         |                  |                  | Journals         |
+| articles         |                  |                  | Journals,        |
+|                  |                  |                  | HTML cleaning    |
 +------------------+------------------+------------------+------------------+
 | BioRxiv_search_  | BioRxiv          | Biology          | Biology          |
-| preprints        |                  | Preprints        | preprints        |
+| preprints        |                  | Preprints        | preprints,       |
+|                  |                  |                  | Abstracts        |
 +------------------+------------------+------------------+------------------+
 | MedRxiv_search_  | MedRxiv          | Medical          | Medical          |
-| preprints        |                  | Preprints        | preprints        |
+| preprints        |                  | Preprints        | preprints,       |
+|                  |                  |                  | Abstracts        |
 +------------------+------------------+------------------+------------------+
 | HAL_search_      | HAL              | French Research  | French academic  |
 | archive          |                  | Archive          | papers           |
@@ -72,6 +82,39 @@ Tool Overview Table
 | Unpaywall_       | Unpaywall        | Open Access      | OA status        |
 | check_oa_status  |                  | Status           | checking         |
 +------------------+------------------+------------------+------------------+
+
+Enhanced Features
+------------------
+
+All literature search tools have been optimized with the following enhancements:
+
+**Comprehensive Data Extraction:**
+- Authors information with proper formatting
+- DOI (Digital Object Identifier) extraction
+- Citation counts where available
+- Open access status indicators
+- Keywords and subject terms
+- Article type classification
+- Publisher information
+- Data quality indicators for transparency
+
+**Improved Error Handling:**
+- Enhanced rate limit handling with automatic retry
+- User-friendly error messages
+- Graceful handling of missing data
+- Consistent fallback values
+
+**Data Quality Transparency:**
+- Each result includes a `data_quality` object
+- Boolean indicators for field availability
+- Clear indication of missing vs. unavailable data
+- Consistent data structure across all tools
+
+**Advanced Metadata:**
+- HTML tag cleaning for abstracts
+- Abstract reconstruction from inverted indexes (OpenAlex)
+- Multi-mode API calls for comprehensive data (Europe PMC)
+- Enhanced author and affiliation extraction
 
 Getting Started
 ---------------
@@ -131,6 +174,21 @@ All literature search tools follow a similar usage pattern:
             print(f"{i}. {paper.get('title', 'No title')}")
             print(f"   Authors: {', '.join(paper.get('authors', [])[:3])}")
             print(f"   Year: {paper.get('year', 'Unknown')}")
+            
+            # Show data quality information
+            if 'data_quality' in paper:
+                quality = paper['data_quality']
+                available_fields = [k for k, v in quality.items() if v]
+                print(f"   Available data: {', '.join(available_fields)}")
+            
+            # Show additional metadata if available
+            if paper.get('doi'):
+                print(f"   DOI: {paper['doi']}")
+            if paper.get('citations') or paper.get('citation_count'):
+                citations = paper.get('citations') or paper.get('citation_count')
+                print(f"   Citations: {citations}")
+            if paper.get('open_access') is not None:
+                print(f"   Open Access: {paper['open_access']}")
             print()
     else:
         print(f"No results found or error: {result}")
@@ -866,3 +924,132 @@ Choose the right tool for your research field:
 7. **Full-Text Biomedical**: PMC
 8. **Comprehensive Open Access**: CORE
 9. **Research Data & Datasets**: Zenodo
+
+Optimized Tool Examples
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Here are examples showing the enhanced features of the optimized tools:
+
+**Europe PMC with Enhanced Data:**
+.. code-block:: python
+
+    # Europe PMC now provides comprehensive metadata
+    result = tu.run({
+        "name": "EuropePMC_search_articles",
+        "arguments": {
+            "query": "machine learning",
+            "limit": 2
+        }
+    })
+    
+    if isinstance(result, list) and result:
+        paper = result[0]
+        print(f"Title: {paper.get('title')}")
+        print(f"Authors: {paper.get('authors')}")
+        print(f"Journal: {paper.get('journal')}")
+        print(f"DOI: {paper.get('doi')}")
+        print(f"Citations: {paper.get('citations')}")
+        print(f"Open Access: {paper.get('open_access')}")
+        print(f"Keywords: {paper.get('keywords')}")
+        print(f"Data Quality: {paper.get('data_quality')}")
+
+**OpenAlex with Abstract Reconstruction:**
+.. code-block:: python
+
+    # OpenAlex now reconstructs abstracts from inverted index
+    result = tu.run({
+        "name": "openalex_literature_search",
+        "arguments": {
+            "search_keywords": "artificial intelligence",
+            "max_results": 2
+        }
+    })
+    
+    if isinstance(result, list) and result:
+        paper = result[0]
+        print(f"Title: {paper.get('title')}")
+        print(f"Abstract: {paper.get('abstract')[:200]}...")
+        print(f"Authors: {paper.get('authors')}")
+        print(f"Venue: {paper.get('venue')}")
+        print(f"Citation Count: {paper.get('citation_count')}")
+        print(f"Keywords: {paper.get('keywords')}")
+
+**Semantic Scholar with Rate Limit Handling:**
+.. code-block:: python
+
+    # Semantic Scholar now handles rate limits gracefully
+    result = tu.run({
+        "name": "SemanticScholar_search_papers",
+        "arguments": {
+            "query": "deep learning",
+            "limit": 2,
+            "api_key": "your_api_key_here"  # Optional for higher limits
+        }
+    })
+    
+    if isinstance(result, list) and result:
+        paper = result[0]
+        print(f"Title: {paper.get('title')}")
+        print(f"Abstract: {paper.get('abstract')}")
+        print(f"Journal: {paper.get('journal')}")
+        print(f"Data Quality: {paper.get('data_quality')}")
+
+**Crossref with HTML Cleaning:**
+.. code-block:: python
+
+    # Crossref now cleans HTML tags from abstracts
+    result = tu.run({
+        "name": "Crossref_search_works",
+        "arguments": {
+            "query": "machine learning",
+            "limit": 2
+        }
+    })
+    
+    if isinstance(result, list) and result:
+        paper = result[0]
+        print(f"Title: {paper.get('title')}")
+        print(f"Clean Abstract: {paper.get('abstract')}")
+        print(f"Authors: {paper.get('authors')}")
+        print(f"Publisher: {paper.get('publisher')}")
+        print(f"Article Type: {paper.get('article_type')}")
+
+**Data Quality Analysis:**
+.. code-block:: python
+
+    def analyze_data_quality(results):
+        """Analyze data quality across multiple tools."""
+        if not isinstance(results, list):
+            return
+        
+        total_papers = len(results)
+        quality_stats = {
+            'has_abstract': 0,
+            'has_authors': 0,
+            'has_doi': 0,
+            'has_citations': 0,
+            'has_keywords': 0
+        }
+        
+        for paper in results:
+            if 'data_quality' in paper:
+                for field, available in paper['data_quality'].items():
+                    if field in quality_stats and available:
+                        quality_stats[field] += 1
+        
+        print(f"Data Quality Analysis ({total_papers} papers):")
+        for field, count in quality_stats.items():
+            percentage = (count / total_papers) * 100
+            print(f"  {field}: {count}/{total_papers} ({percentage:.1f}%)")
+    
+    # Use with any search results
+    result = tu.run({
+        "name": "openalex_literature_search",
+        "arguments": {
+            "search_keywords": "machine learning",
+            "max_results": 5
+        }
+    })
+    
+    if isinstance(result, list):
+        analyze_data_quality(result)

@@ -184,6 +184,7 @@ jobs:
       run: |
         cd docs
         rm -rf _build/*
+        # Build with multi-language support and proper redirects
         DOC_LANGUAGES="en,zh_CN" DOC_SKIP_SERVER_PROMPT=1 ./quick_doc_build.sh
         
     - name: Check build output
@@ -200,6 +201,15 @@ jobs:
         # Verify key pages exist
         test -f docs/_build/html/en/expand_tooluniverse/index.html || (echo "❌ Missing English expand_tooluniverse index" && exit 1)
         test -f docs/_build/html/zh-CN/expand_tooluniverse/index.html || (echo "❌ Missing Chinese expand_tooluniverse index" && exit 1)
+        # Verify redirect functionality
+        echo "🔍 Checking redirect configuration..."
+        # Check root redirect points to English
+        grep -q "url=en/index.html" docs/_build/html/index.html || (echo "❌ Root redirect not pointing to English" && exit 1)
+        # Check .htaccess file exists for Apache servers
+        test -f docs/_build/html/.htaccess || echo "⚠️ .htaccess file not found (may not be needed for GitHub Pages)"
+        # Verify language switcher JavaScript
+        test -f docs/_build/html/_static/language_switcher.js || (echo "❌ Language switcher JavaScript not found" && exit 1)
+        echo "✅ Multi-language build verification completed"
         
     - name: Add .nojekyll file
       run: |
@@ -233,9 +243,15 @@ jobs:
           echo "✅ Documentation deployment successful!"
           echo "🎨 Modern theme with enhanced styling applied"
           echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/ToolUniverse/"
-          echo "   • English: https://zitniklab.hms.harvard.edu/ToolUniverse/en/expand_tooluniverse/index.html"
-          echo "   • Chinese: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/expand_tooluniverse/index.html"
+          echo "   • Root (auto-redirects to English): https://zitniklab.hms.harvard.edu/ToolUniverse/"
+          echo "   • English: https://zitniklab.hms.harvard.edu/ToolUniverse/en/"
+          echo "   • Chinese: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/"
+          echo "   • English API: https://zitniklab.hms.harvard.edu/ToolUniverse/en/api/modules.html"
+          echo "   • Chinese API: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/api/modules.html"
           echo "🌟 Features:"
+          echo "   • Multi-language support with automatic redirects"
+          echo "   • Backward compatibility with old /en/ links"
+          echo "   • Language switcher in navigation bar"
           echo "   • Modern responsive design"
           echo "   • Dark/light mode support (if Furo theme)"
           echo "   • Enhanced code highlighting"
