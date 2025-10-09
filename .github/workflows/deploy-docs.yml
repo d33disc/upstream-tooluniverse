@@ -42,6 +42,8 @@ jobs:
         pip install -e .[docs]
         # Install theme dependencies directly
         pip install furo pydata-sphinx-theme sphinx_rtd_theme sphinx-copybutton sphinx-tabs sphinx-design sphinx-notfound-page myst-parser linkify-it-py sphinx-autobuild docutils
+        # Install shibuya theme
+        pip install sphinx-shibuya
         
     - name: Verify documentation setup
       run: |
@@ -50,6 +52,7 @@ jobs:
         python -c "import furo; print('✅ Furo theme available')"
         python -c "import pydata_sphinx_theme; print('✅ PyData theme available')"
         python -c "import sphinx_rtd_theme; print('✅ RTD theme available')"
+        python -c "import sphinx_shibuya; print('✅ Shibuya theme available')"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
         ls -la docs/
         ls -la docs/conf*.py
