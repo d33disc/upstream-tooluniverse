@@ -48,7 +48,7 @@ jobs:
         python -c "import furo; print('✅ Furo theme available')"
         python -c "import pydata_sphinx_theme; print('✅ PyData theme available')"
         python -c "import sphinx_rtd_theme; print('✅ RTD theme available')"
-        python -c "import sphinx_shibuya; print('✅ Shibuya theme available')"
+        python -c "import shibuya; print('✅ Shibuya theme available')"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
         ls -la docs/
         ls -la docs/conf*.py
