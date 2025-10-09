@@ -249,7 +249,7 @@ class SMCP(FastMCP):
         or a list of both. Provides an easy way to enable hooks without full configuration.
         Takes precedence over hooks_enabled when specified.
 
-    **kwargs
+    **kwargs**
         Additional arguments passed to the underlying FastMCP server instance.
         Supports all FastMCP configuration options for advanced customization.
 
@@ -1697,7 +1697,7 @@ class SMCP(FastMCP):
             this will be set as the function's __doc__ attribute. If None, the
             function's existing docstring will be used.
 
-        **kwargs
+        **kwargs**
             Additional FastMCP tool configuration options:
             - parameter_schema: Custom JSON schema for parameters
             - return_schema: Schema for return values
@@ -1773,7 +1773,7 @@ class SMCP(FastMCP):
         - Support all MCP client interaction patterns
 
         Best Practices:
-        ==============
+        ===============
         - Use descriptive, unique tool names
         - Include comprehensive docstrings
         - Add proper type annotations for parameters
@@ -1804,7 +1804,7 @@ class SMCP(FastMCP):
         It's designed to be safe to call multiple times and handles errors gracefully.
 
         Cleanup Operations:
-        ==================
+        ===================
 
         **Thread Pool Shutdown:**
         - Gracefully stops the ThreadPoolExecutor used for tool execution
@@ -1824,7 +1824,7 @@ class SMCP(FastMCP):
         - Ensures critical resources are always released
 
         Usage Patterns:
-        ==============
+        ===============
 
         **Automatic Cleanup (Recommended):**
         ```python
@@ -1854,14 +1854,14 @@ class SMCP(FastMCP):
         ```
 
         Performance Considerations:
-        ==========================
+        ===========================
         - Cleanup operations are typically fast (< 1 second)
         - Thread pool shutdown may take longer if tasks are running
         - Network connections are closed immediately
         - Memory cleanup depends on garbage collection
 
         Error Recovery:
-        ==============
+        ===============
         - Individual cleanup failures don't stop the overall process
         - Critical errors are logged but don't raise exceptions
         - Cleanup is idempotent - safe to call multiple times
@@ -2011,21 +2011,21 @@ class SMCP(FastMCP):
             - Above 1024: No root privileges required
             - Check availability: Ensure port isn't already in use
 
-        **kwargs
+        **kwargs**
             Additional arguments passed to FastMCP's run() method:
             - debug (bool): Enable debug logging
             - access_log (bool): Log client requests
             - workers (int): Number of worker processes (HTTP only)
 
         Server Startup Process:
-        ======================
+        =======================
         1. **Initialization Summary**: Displays server configuration and capabilities
         2. **Transport Setup**: Configures selected communication method
         3. **Service Start**: Begins listening for client connections
         4. **Graceful Shutdown**: Handles interrupts and cleanup
 
         Deployment Scenarios:
-        ====================
+        =====================
 
         Development & Testing:
         ```python
@@ -2061,14 +2061,14 @@ class SMCP(FastMCP):
         ```
 
         Error Handling:
-        ==============
+        ===============
         - **KeyboardInterrupt**: Graceful shutdown on Ctrl+C
         - **Port in Use**: Clear error message with suggestions
         - **Transport Errors**: Detailed debugging information
         - **Cleanup**: Automatic resource cleanup on exit
 
         Logging Output:
-        ==============
+        ===============
         Provides informative startup messages:
         ```
         🚀 Starting SMCP server 'My Server'...
@@ -2078,14 +2078,14 @@ class SMCP(FastMCP):
         ```
 
         Security Considerations:
-        =======================
+        ========================
         - Use host="127.0.0.1" for local-only access
         - Configure firewall rules for production deployment
         - Consider HTTPS termination with reverse proxy
         - Validate all client inputs through MCP protocol
 
         Performance Notes:
-        =================
+        ==================
         - HTTP transport supports multiple concurrent clients
         - stdio transport is single-client but lower latency
         - SSE transport enables real-time bidirectional communication
@@ -2482,7 +2482,7 @@ def create_smcp_server(
         Recommended to keep enabled unless you have specific performance
         requirements or want to minimize dependencies.
 
-    **kwargs
+    **kwargs**
         Additional SMCP configuration options:
 
         - tooluniverse_config: Pre-configured ToolUniverse instance
