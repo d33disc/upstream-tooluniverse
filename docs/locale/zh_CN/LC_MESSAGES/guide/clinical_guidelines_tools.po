@@ -1,0 +1,744 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-09 01:15-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/clinical_guidelines_tools.rst:2 fae467715ea0410d9f6e792b83697824
+msgid "Clinical Guidelines Tools"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:4 d1586e51bdbb4730ba5c1b21fc6848ca
+msgid ""
+"ToolUniverse provides 8 clinical guideline tools for searching and "
+"extracting authoritative medical guidelines."
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:7 6401f012965d425aa220df80189e2410
+msgid "Tool List"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:9 37efb12b3be9401da80d8e2d96d988bc
+msgid "**Search Tools (6):**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:11
+#: 526618de812346d59bc30ef93676831c
+msgid "``NICE_Clinical_Guidelines_Search`` - UK NICE official guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:12
+#: fb156eaa9d514b3288ea3c8fc596899d
+msgid "``WHO_Guidelines_Search`` - WHO international guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:13
+#: c4ebe043fc7a4a7fa9cc6aa3a8cbb057
+msgid "``PubMed_Guidelines_Search`` - PubMed peer-reviewed guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:14
+#: 94185a99840a4821b41916543c8e50ee
+msgid "``EuropePMC_Guidelines_Search`` - Europe PMC guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:15
+#: e146acce974542f4acffddb1cfbcf888
+msgid "``TRIP_Database_Guidelines_Search`` - TRIP evidence-based database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:16
+#: 80abdee4e4394f1588d8f8feaf610c6e
+msgid "``OpenAlex_Guidelines_Search`` - OpenAlex scholarly database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:18
+#: 21f58bbae757408c8235558590114597
+msgid "**Full-Text Extraction (2):**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:20
+#: 0e80af5de54f4dcbbb76f8a6d8f8a68f
+msgid ""
+"``NICE_Guideline_Full_Text`` - Extract complete NICE guidelines "
+"(5,000-20,000+ chars)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:21
+#: 0e58f78fb6d2499e918ad5989f3effb3
+msgid ""
+"``WHO_Guideline_Full_Text`` - Extract WHO content + PDF links (1,500+ "
+"chars)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:24
+#: 8b1ffd0aa0c64799ba2669111e5b4bbb
+msgid "Quick Start"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:51
+#: d0265be6b59e47b385ab83d39c43c9c8
+msgid "Tool Comparison"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:54
+#: 415d0617f43a4f41a374b05157f5d204
+msgid "Tool"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:54
+#: 6b517c3cd4ef4b2d9f98119df6eae2f1
+msgid "Data Source"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:54
+#: 1bc25719e74c4ab1b413aafa03d58412
+msgid "Features"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:56
+#: 87580ee8b6f04d64956974d54668621f
+msgid "NICE_Clinical_Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:56
+#: 3f2228cd14cb4351bb8058a491bb34e3
+msgid "UK NICE official website"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:56
+#: 69c6dc7e5c834faaaf1af5f80213dd90
+msgid "Official UK guidelines with summaries"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:58
+#: 3ba9e57dc80c4f968b288bab8140b992
+msgid "WHO_Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:58
+#: 22978259b80740dbb75a8888392bc7da
+msgid "WHO publications database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:58
+#: ea7f97c730614da2ae669d425f236e74
+msgid "International health guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:60
+#: 9e551e7962bb42a3a230c25a41ccdd69
+msgid "PubMed_Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:60
+#: 69433891739e4b9cb090d2a61c54a4d9
+msgid "NCBI PubMed database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:60
+#: 3c70c6566e964257ac76ae140eab7cbc
+msgid "Peer-reviewed with abstracts & PMIDs"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:62
+#: 5fd94c5120e844bd8e094c0530f216e7
+msgid "EuropePMC_Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:62
+#: 42d3c42b9f894c14a978843cb3d36613
+msgid "Europe PMC database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:62
+#: 5612189390b94b008ad4190343ee0adb
+msgid "European & international research"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:64
+#: 2244816cbea14e69b87c7a2d271ccdcb
+msgid "TRIP_Database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:64
+#: f680227761924dd4af635dd53ea786dd
+msgid "TRIP evidence database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:64
+#: 4ca13ffcfcd64afe9cc34e29e47d1259
+msgid "Evidence-based medicine focus"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:66
+#: 2ad442b1c9194bd59bc4e499ff260cf5
+msgid "OpenAlex_Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:66
+#: 425b2edda9d94f5fbd034b1a4866aa80
+msgid "OpenAlex scholarly database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:66
+#: afb0de2699034e729256b4843727b283
+msgid "Comprehensive with citation counts"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:70
+#: 6f7af0ebe472473e8960142ff69f1967
+msgid "Usage Examples"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:73
+#: dd2e93c6539842268c5ae1f422fbdf39
+msgid "Search NICE Guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:91
+#: 5530cc66a280450eb125021d1c93ba8c
+msgid "Search Multiple Sources"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:118
+#: dfd552025b4a4a309ddd6cdbe2bf2937
+msgid "Extract NICE Full Text"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:140
+#: dad6eb168b01439cb0577173d6a883a0
+msgid "Extract WHO Content + PDF"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:162
+#: f39a9920d2804681a27c40f70fc086d1
+msgid "Complete Example"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:164
+#: 344b1f47e0234e72aae2a2d8faaa7c2f
+msgid "See ``examples/clinical_guidelines_demo.py`` for a complete demonstration:"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:171
+#: 0ff566806f8142acabd9672a244a37d7
+msgid "FAQ"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:173
+#: 4d39216c2c574fb9a179e570e7fb07e6
+msgid "**Q: What's the difference between search tools and full-text tools?**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:175
+#: 2a34c33dd7eb458eb11e2883db82fcb6
+msgid ""
+"**Search tools**: Return multiple results with title, URL, summary "
+"(200-2,500 chars each)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:176
+#: b38f0033cdde476ba747ef0a91235680
+msgid ""
+"**Full-text tools**: Extract complete guideline content (5,000-20,000+ "
+"chars) from a single URL"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:178
+#: b1749b74c19f4838946887257c632066
+msgid "**Q: When should I use full-text tools?**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:180
+#: 55544a3ef2c14a57b23f34693b1014a4
+msgid "Use full-text tools when you need:"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:182
+#: ef112efbb19f465ea4a93dd46ccd8e5a
+msgid "Complete guideline content for detailed analysis"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:183
+#: f31e90dfd6624794adcf34b894e21220
+msgid "All clinical recommendations extracted"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:184
+#: 2eba96b4019b4e48aee55cd5076d46d0
+msgid "Content to feed into LLMs"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:185
+#: cddef611238b4ca6abb43173233a0da0
+msgid "PDF download links for offline reading"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:187
+#: a733fbf35662426aa51f880f400f856a
+msgid "**Q: Which tools return the most complete content?**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:189
+#: 3f1c490ac73c4c0db4a07127d390fe2c
+msgid "**NICE search**: 300-2,500 char summaries"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:190
+#: 32ba58cb051641f9a561212081515354
+msgid "**NICE full-text**: 5,000-20,000+ char complete guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:191
+#: c55314429d334035890657e6fe2c1fd2
+msgid "**PubMed**: 200-2,000 char abstracts"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:192
+#: 0a8f1389ab3944f786a4eaee21d2dcb1
+msgid "**WHO full-text**: 1,500+ chars + PDF links"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:194
+#: 27b09908339441fea240cd1190ca4abb
+msgid "**Q: How to filter by year?**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:209
+#: daa7cc100f054606a87f282d74a7be64
+msgid "Return Fields"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:211
+#: 2c9ff8851ff84e2a8b62c56dcaf1628a
+msgid "**Search Tools Return:**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:213
+#: 098dd85fad084aba9f9b62bfedb6e4d1
+msgid "``title``: Guideline title"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:214
+#: b8555a58a7fa469bb1a91faf3b04b018
+msgid "``url``: Direct link to guideline"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:215
+#: 49cf8689bc154d5fbf56dcef303ba953
+msgid ""
+"``summary``/``abstract``/``description``: Content summary (200-2,500 "
+"chars)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:216
+#: c134d121053342ff8d66a3a321795dbc
+msgid ""
+"Tool-specific: ``pmid``, ``doi``, ``authors``, ``date``, "
+"``cited_by_count``, etc."
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:218
+#: 520a5ba7689d4432a03dbc5eac65e8c2
+msgid "**NICE Full-Text Returns:**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:220
+#: 40cf6043c5f940d6a9a9a318b08bc04d
+msgid "``full_text``: Complete guideline (5,000-20,000+ chars)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:221
+#: 99f3ded2ee6e408ea5364c43049d2be5
+msgid "``full_text_length``: Character count"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:222
+#: eba02f03a2f3458392cdf19e4fa3c378
+msgid "``sections_count``: Number of sections"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:223
+#: 0753e925c2464f4b8244e16935f03afa
+msgid "``recommendations``: List of recommendations"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:224
+#: fb71385b8457417abc9311fe3f266cb9
+msgid "``recommendations_count``: Count"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:225
+#: ../../guide/clinical_guidelines_tools.rst:236
+#: 5acc403d9cdb4bcdaeadc4c3c01dd440 d5f495c6aae3496dbe2202a15d1f7b65
+msgid "``metadata``: Publication info"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:226
+#: ../../guide/clinical_guidelines_tools.rst:237
+#: 396ee080633844a1bfa4443029706b1a 6732e58575d14e838712dd9e07b0548d
+msgid "``success``: Boolean status"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:228
+#: 70efbf9d3d7941adb218a62d5484a1a2
+msgid "**WHO Full-Text Returns:**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:230
+#: ffa534ab5da64b699617d5f5311635b8
+msgid "``overview``: Overview section"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:231
+#: eb94eed7545f42d1a125edb8dc7e4586
+msgid "``main_content``: Main content"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:232
+#: 3b05c69e056a43d1a393e92e43fb6237
+msgid "``content_length``: Character count"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:233
+#: e258bebb8293421ca5159f1e2233965d
+msgid "``has_pdf``: Boolean"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:234
+#: 23fd9104110041adadc6092802fa9621
+msgid "``pdf_download_url``: PDF link (if available)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:235
+#: 128b569ab3ad4204b0f878af8444c803
+msgid "``key_facts``: List of key facts"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:240
+#: ef6d748b9ee74661bdcba6eb32fd4cb8
+msgid "Summary"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:242
+#: e3cbb5a2daa74bb7826f54f4138f853a
+msgid "**8 Tools Covering:**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:244
+#: 68a225924f6b4f8eb75a1c8efcee7364
+msgid "✅ 6 search tools - Quick search across multiple sources"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:245
+#: 3fb7e29969e14c5092cedd00a9e25e40
+msgid "✅ 2 full-text tools - Deep content extraction"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:246
+#: 9d523e12a01140f89fcfdf593b984407
+msgid "✅ Official sources - NICE (UK), WHO (International)"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:247
+#: 2f9b7de617de43b29bf57a441978ef7b
+msgid "✅ Academic databases - PubMed, Europe PMC, OpenAlex"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:248
+#: e33c4d164b55442bbcbbefc54b899407
+msgid "✅ Evidence-based - TRIP Database"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:249
+#: 35fc102c293045978fcf586eb764506f
+msgid "✅ Complete extraction - 5,000-20,000+ characters"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:250
+#: 2faa505b7dcb4459baa5b38bbf39edf6
+msgid "✅ PDF downloads - WHO guidelines"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:251
+#: e37f189478724301a2a789b02f97ef62
+msgid "✅ 100% test coverage - 23/23 tests passing"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:253
+#: ea5864c48b9d443981e8a47b57b28d54
+msgid "**For More Information:**"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:255
+#: 57c27c9793e44033ae7c4ae60267b8bf
+msgid "Complete demo: ``examples/clinical_guidelines_demo.py``"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:256
+#: cf9ac9af1b0d4000b5bebaffb5afb9e3
+msgid "Source code: ``src/tooluniverse/unified_guideline_tools.py``"
+msgstr ""
+
+#: ../../guide/clinical_guidelines_tools.rst:257
+#: e07d9ad37bd442b881d34254d4f0f508
+msgid "Tests: ``tests/test_guideline_tools.py``"
+msgstr ""
+
+#~ msgid "**Search Tools (6 tools):**"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``NICE_Clinical_Guidelines_Search`` - UK NICE "
+#~ "official guidelines (with summaries)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``WHO_Guidelines_Search`` - WHO World Health"
+#~ " Organization guidelines (with descriptions)"
+#~ msgstr ""
+
+#~ msgid "``PubMed_Guideline_Search`` - PubMed guidelines (with full abstracts)"
+#~ msgstr ""
+
+#~ msgid "``EuropePMC_Guideline_Search`` - Europe PMC guidelines"
+#~ msgstr ""
+
+#~ msgid "``TRIP_Database_Search`` - TRIP evidence-based medicine database"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``OpenAlex_Guidelines_Search`` - OpenAlex scholarly"
+#~ " guidelines (with citation counts)"
+#~ msgstr ""
+
+#~ msgid "**Full-Text Extraction Tools (2 tools):**"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``NICEGuidelineFullTextTool`` - Extract complete "
+#~ "NICE guideline content (5000-20000+ chars)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``WHOGuidelineFullTextTool`` - Extract WHO "
+#~ "content and get PDF download links"
+#~ msgstr ""
+
+#~ msgid "Content Features"
+#~ msgstr ""
+
+#~ msgid "NICE Search"
+#~ msgstr ""
+
+#~ msgid "UK National Institute for Health and Care Excellence"
+#~ msgstr ""
+
+#~ msgid "Official UK clinical guidelines, evidence-based recommendations"
+#~ msgstr ""
+
+#~ msgid "WHO Search"
+#~ msgstr ""
+
+#~ msgid "World Health Organization"
+#~ msgstr ""
+
+#~ msgid "International health guidelines, global health policies"
+#~ msgstr ""
+
+#~ msgid "PubMed"
+#~ msgstr ""
+
+#~ msgid "NCBI PubMed Central"
+#~ msgstr ""
+
+#~ msgid "Peer-reviewed published guidelines, filtered by \"Guideline\" type"
+#~ msgstr ""
+
+#~ msgid "Europe PMC"
+#~ msgstr ""
+
+#~ msgid "Europe PMC Database"
+#~ msgstr ""
+
+#~ msgid "European biomedical literature, open access publications"
+#~ msgstr ""
+
+#~ msgid "TRIP"
+#~ msgstr ""
+
+#~ msgid "TRIP Evidence-Based Medicine Database"
+#~ msgstr ""
+
+#~ msgid "Curated evidence-based medicine resources, systematic reviews"
+#~ msgstr ""
+
+#~ msgid "OpenAlex"
+#~ msgstr ""
+
+#~ msgid "OpenAlex Scholarly Database"
+#~ msgstr ""
+
+#~ msgid "Comprehensive scholarly works, citation metrics, institution info"
+#~ msgstr ""
+
+#~ msgid "**NICE Full-Text**"
+#~ msgstr ""
+
+#~ msgid "**NICE Website**"
+#~ msgstr ""
+
+#~ msgid "**Complete guideline extraction,** **all sections & recommendations**"
+#~ msgstr ""
+
+#~ msgid "**WHO Full-Text**"
+#~ msgstr ""
+
+#~ msgid "**WHO Publications**"
+#~ msgstr ""
+
+#~ msgid "**Web content extraction,** **PDF download links**"
+#~ msgstr ""
+
+#~ msgid "1. Search NICE Guidelines"
+#~ msgstr ""
+
+#~ msgid "**Return fields**: title, url, summary, date, type, category"
+#~ msgstr ""
+
+#~ msgid "2. Search WHO Guidelines"
+#~ msgstr ""
+
+#~ msgid "**Return fields**: title, url, description, organization, official"
+#~ msgstr ""
+
+#~ msgid "3. Search PubMed Guidelines"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Return fields**: pmid, title, abstract, "
+#~ "authors, journal, publication_date, doi, url"
+#~ msgstr ""
+
+#~ msgid "4. Multi-Source Search"
+#~ msgstr ""
+
+#~ msgid "Full-Text Extraction"
+#~ msgstr ""
+
+#~ msgid "Extract Complete NICE Guidelines"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Return fields**: - ``full_text``: Complete"
+#~ " guideline content (5000-20000+ characters) "
+#~ "- ``sections_count``: Number of sections "
+#~ "- ``recommendations``: List of clinical "
+#~ "recommendations - ``metadata``: Publication "
+#~ "date, guideline code, etc."
+#~ msgstr ""
+
+#~ msgid "Extract WHO Content and PDF"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "**Return fields**: - ``overview``: Overview"
+#~ " content - ``main_content``: Main content"
+#~ " - ``pdf_download_url``: PDF download link"
+#~ " (if available) - ``key_facts``: List "
+#~ "of key facts"
+#~ msgstr ""
+
+#~ msgid "Complete Workflow"
+#~ msgstr ""
+
+#~ msgid "Search → Extract → Analyze:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Search tools: Return multiple results, "
+#~ "each with title, URL, summary (200-2500"
+#~ " chars)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Full-text tools: Take a single "
+#~ "URL, return complete content (5000-20000+ "
+#~ "chars)"
+#~ msgstr ""
+
+#~ msgid "Need complete guideline content for detailed analysis"
+#~ msgstr ""
+
+#~ msgid "Want to extract all clinical recommendations"
+#~ msgstr ""
+
+#~ msgid "Need to download PDF for offline reading"
+#~ msgstr ""
+
+#~ msgid "Want to feed complete content into LLMs for processing"
+#~ msgstr ""
+
+#~ msgid "**Q: Why don't some tools have abstracts?**"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Europe PMC and TRIP may have empty"
+#~ " abstracts for some results (depends "
+#~ "on source data). Use PubMed or "
+#~ "NICE for guaranteed abstracts."
+#~ msgstr ""
+
+#~ msgid "**Q: How to get the latest guidelines?**"
+#~ msgstr ""
+
+#~ msgid "**8 tools covering:**"
+#~ msgstr ""
+
+#~ msgid "✅ 6 search tools - Quick search, returns URL + summary"
+#~ msgstr ""
+
+#~ msgid "✅ 2 full-text tools - Deep extraction, returns complete content"
+#~ msgstr ""
+
+#~ msgid "✅ Official sources - NICE, WHO"
+#~ msgstr ""
+
+#~ msgid "✅ Academic databases - PubMed, Europe PMC, TRIP, OpenAlex"
+#~ msgstr ""
+
+#~ msgid "✅ Full-text extraction - NICE 5000+ chars, WHO content + PDF"
+#~ msgstr ""
+
+#~ msgid "✅ 100% test coverage"
+#~ msgstr ""
+
+#~ msgid "**Recommended usage:**"
+#~ msgstr ""
+
+#~ msgid "Use search tools to quickly browse multiple sources"
+#~ msgstr ""
+
+#~ msgid "Use full-text tools to extract complete content of interest"
+#~ msgstr ""
+
+#~ msgid "Combine multiple sources for comprehensive literature review"
+#~ msgstr ""
+

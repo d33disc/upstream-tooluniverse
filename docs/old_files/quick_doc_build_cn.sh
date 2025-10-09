@@ -7,11 +7,17 @@
 # 2. 生成Remote Tools文档
 # 3. 安装Sphinx文档依赖
 # 4. 生成增强API文档
-# 5. 构建HTML文档
-# 6. 提供本地服务器预览
+# 5. 构建多语言HTML文档（默认中英文）
+# 6. 创建语言切换界面
+# 7. 提供本地服务器预览
+#
+# 使用方法：
+#   ./quick_doc_build_cn.sh                        # 构建中英文文档
+#   DOC_LANGUAGES=zh_CN ./quick_doc_build_cn.sh    # 仅构建中文
+#   DOC_LANGUAGES=en ./quick_doc_build_cn.sh       # 仅构建英文
 
 # 设置错误时退出（遇到任何错误立即停止脚本）
-set -e
+set -Eeuo pipefail
 
 # ===========================================
 # 颜色定义 - 用于美化终端输出
@@ -26,6 +32,39 @@ NC='\033[0m'          # 重置颜色
 # 显示脚本标题
 echo -e "${BLUE}🧬 ToolUniverse 文档生成系统${NC}"
 echo "========================================"
+
+# 通过环境变量控制构建行为
+DOC_LANGUAGES_RAW="${DOC_LANGUAGES:-zh_CN,en}"  # 默认构建中英文
+DOC_SKIP_REMOTE="${DOC_SKIP_REMOTE:-0}"
+DOC_SKIP_SERVER_PROMPT="${DOC_SKIP_SERVER_PROMPT:-0}"
+DOCS_STRICT="${DOCS_STRICT:-0}"
+CI="${CI:-}"
+GITHUB_ACTIONS="${GITHUB_ACTIONS:-}"
+
+# 语言列表规范化（支持逗号或空格分隔）
+IFS=', ' read -r -a LANGUAGES <<< "${DOC_LANGUAGES_RAW//,/ }"
+FILTERED_LANGUAGES=()
+for RAW_LANG in "${LANGUAGES[@]}"; do
+    TRIMMED_LANG=$(echo "$RAW_LANG" | xargs)
+    if [ -n "$TRIMMED_LANG" ]; then
+        FILTERED_LANGUAGES+=("$TRIMMED_LANG")
+    fi
+done
+
+if [ ${#FILTERED_LANGUAGES[@]} -eq 0 ]; then
+    LANGUAGES=("zh_CN")
+else
+    LANGUAGES=("${FILTERED_LANGUAGES[@]}")
+fi
+
+NEEDS_TRANSLATIONS=0
+for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
+    if [ "$DOC_LANGUAGE" = "zh_CN" ]; then
+        NEEDS_TRANSLATIONS=1
+    fi
+done
+
+echo -e "${YELLOW}目标文档语言: ${LANGUAGES[*]}${NC}"
 
 # 可选严格模式：当 DOCS_STRICT=1 时，将 Sphinx 警告视为错误 (-W)
 SPHINX_FLAGS=""
@@ -63,15 +102,19 @@ echo -e "${GREEN}✅ 工具配置索引生成完成${NC}"
 # 步骤0.1: 生成Remote Tools文档（自动）
 # ===========================================
 # 这个步骤会生成远程工具的文档，包括MCP服务器等
-echo -e "\n${BLUE}🌐 生成Remote Tools文档（自动）${NC}"
-cd "$SCRIPT_DIR"
-
-# 检查是否存在远程工具文档生成脚本
-if [ -f "generate_remote_tools_docs.py" ]; then
-    python generate_remote_tools_docs.py || { echo -e "${RED}❌ 生成Remote Tools文档失败${NC}"; exit 1; }
-    echo -e "${GREEN}✅ Remote Tools文档生成完成${NC}"
+if [ "$DOC_SKIP_REMOTE" = "1" ]; then
+    echo -e "\n${YELLOW}⏭️ 跳过 Remote Tools 文档生成（DOC_SKIP_REMOTE=1）${NC}"
 else
-    echo -e "${YELLOW}⚠️ 未找到 generate_remote_tools_docs.py${NC}"
+    echo -e "\n${BLUE}🌐 生成Remote Tools文档（自动）${NC}"
+    cd "$SCRIPT_DIR"
+
+    # 检查是否存在远程工具文档生成脚本
+    if [ -f "generate_remote_tools_docs.py" ]; then
+            python generate_remote_tools_docs.py || { echo -e "${RED}❌ 生成Remote Tools文档失败${NC}"; exit 1; }
+            echo -e "${GREEN}✅ Remote Tools文档生成完成${NC}"
+    else
+            echo -e "${YELLOW}⚠️ 未找到 generate_remote_tools_docs.py${NC}"
+    fi
 fi
 
 # ===========================================
@@ -95,9 +138,9 @@ fi
 
 # 优先通过项目 extras 安装；失败则回退到显式依赖列表
 if command -v uv >/dev/null 2>&1; then
-  uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+  uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q sphinx shibuya furo pydata-sphinx-theme myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints sphinx-intl 2>/dev/null || true
 else
-  pip install -q -e '.[docs]' 2>/dev/null || pip install -q sphinx furo myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints 2>/dev/null || true
+  pip install -q -e '.[docs]' 2>/dev/null || pip install -q sphinx shibuya furo pydata-sphinx-theme myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints sphinx-intl 2>/dev/null || true
 fi
 echo -e "${GREEN}✅ 依赖安装完成${NC}"
 
@@ -166,6 +209,18 @@ cat > _templates/module.rst << 'EOF'
    :imported-members:
 EOF
 
+# ===========================================
+# 步骤2.5: 更新翻译目录
+# ===========================================
+if [ "$NEEDS_TRANSLATIONS" -eq 1 ]; then
+    echo -e "\n${BLUE}🌍 更新翻译目录${NC}"
+    mkdir -p _build/gettext
+    sphinx-build -b gettext . _build/gettext -q || true
+    sphinx-intl update -p _build/gettext -l zh_CN >/dev/null 2>&1 || true
+else
+    echo -e "\n${YELLOW}🌍 跳过翻译目录更新（DOC_LANGUAGES 不包含 zh_CN）${NC}"
+fi
+
 # 确保api目录存在
 mkdir -p api
 
@@ -231,26 +286,33 @@ fi
 echo -e "\n${BLUE}🔧 构建增强HTML文档${NC}"
 
 # 确保构建时可导入项目源码
-export PYTHONPATH="$SRC_DIR:$PYTHONPATH"
+if [ -n "${PYTHONPATH:-}" ]; then
+    export PYTHONPATH="$SRC_DIR:$PYTHONPATH"
+else
+    export PYTHONPATH="$SRC_DIR"
+fi
 
 # 使用sphinx-build构建HTML文档
-# -b html: 构建HTML格式
-# . : 当前目录（docs目录）
-# _build/html: 输出目录
-# --keep-going: 遇到错误时继续构建
-# -q: 静默模式
-sphinx-build ${SPHINX_FLAGS} -b html . _build/html --keep-going -q || true
+OUTPUT_DIR="_build/html"
 
-# ===========================================
-# 检查构建结果
-# ===========================================
-# 检查是否成功生成了主页文件
-if [ -f "_build/html/index.html" ]; then
-    echo -e "${GREEN}✅ 文档构建成功${NC}"
-else
-    echo -e "${RED}❌ 文档构建失败${NC}"
-    exit 1
-fi
+rm -rf "$OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR"
+
+for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
+  [ -z "$DOC_LANGUAGE" ] && continue
+  TARGET_DIR="$OUTPUT_DIR/${DOC_LANGUAGE//_/-}"
+  echo -e "${YELLOW}🌐 构建语言: ${DOC_LANGUAGE} -> ${TARGET_DIR}${NC}"
+  sphinx-build ${SPHINX_FLAGS} -b html -D language="$DOC_LANGUAGE" . "$TARGET_DIR" --keep-going -q || true
+
+  if [ -f "$TARGET_DIR/index.html" ]; then
+      echo -e "${GREEN}   ✅ ${DOC_LANGUAGE} 构建成功${NC}"
+  else
+      echo -e "${RED}   ❌ ${DOC_LANGUAGE} 构建失败${NC}"
+      exit 1
+  fi
+done
+
+echo -e "\n${GREEN}✅ 文档构建过程已完成${NC}"
 
 # ===========================================
 # 步骤4: 生成详细统计信息
@@ -291,10 +353,33 @@ echo -e "   🏗️ 类总数: ${CLASS_COUNT}"
 # 步骤5: 显示文档访问方式
 # ===========================================
 # 提供各种访问文档的方式和链接
-BUILD_PATH="$SCRIPT_DIR/_build/html/index.html"
+DEFAULT_LANG="${LANGUAGES[0]}"
+DEFAULT_DIR="$SCRIPT_DIR/_build/html/${DEFAULT_LANG//_/-}"
+
 echo -e "\n${BLUE}📂 访问文档:${NC}"
-echo -e "   🏠 主页: file://${BUILD_PATH}"
-echo -e "   🔧 完整API: file://${SCRIPT_DIR}/_build/html/api/modules.html"
+for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
+    TARGET_DIR="$SCRIPT_DIR/_build/html/${DOC_LANGUAGE//_/-}"
+    if [ -f "$TARGET_DIR/index.html" ]; then
+            case "$DOC_LANGUAGE" in
+                zh_CN)
+                    FLAG="🇨🇳"
+                    LABEL="中文"
+                    ;;
+                en)
+                    FLAG="🇺🇸"
+                    LABEL="English"
+                    ;;
+                *)
+                    FLAG="🌐"
+                    LABEL="$DOC_LANGUAGE"
+                    ;;
+            esac
+            echo -e "   ${FLAG} ${LABEL}: file://${TARGET_DIR}/index.html"
+            if [ -f "$TARGET_DIR/api/modules.html" ]; then
+                echo -e "   🔧 ${LABEL} API: file://${TARGET_DIR}/api/modules.html"
+            fi
+    fi
+done
 
 # ===========================================
 # 步骤6: 可选的本地服务器启动
@@ -302,6 +387,8 @@ echo -e "   🔧 完整API: file://${SCRIPT_DIR}/_build/html/api/modules.html"
 # 检查是否在CI环境中运行
 if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
     echo -e "${BLUE}🤖 CI环境检测到，跳过服务器启动${NC}"
+elif [ "$DOC_SKIP_SERVER_PROMPT" = "1" ]; then
+    echo -e "${YELLOW}⏭️ 跳过服务器提示（DOC_SKIP_SERVER_PROMPT=1）${NC}"
 else
     # 询问用户是否要启动本地HTTP服务器来预览文档
     echo -e "\n${YELLOW}启动本地服务器查看文档? (y/n)${NC}"
@@ -332,14 +419,18 @@ else
     if [ -z "$PORT" ]; then
         # 如果没有找到可用端口，提供手动启动命令
         echo -e "${RED}❌ 无法找到可用端口，请手动启动服务器${NC}"
-        echo -e "${YELLOW}💡 手动启动命令: cd _build/html && python -m http.server 8080${NC}"
+        echo -e "${YELLOW}💡 手动启动命令: cd ${DEFAULT_DIR} && python -m http.server 8080${NC}"
     else
         # 显示访问地址
         echo -e "${GREEN}📡 访问地址: http://localhost:${PORT}${NC}"
         echo -e "${YELLOW}按 Ctrl+C 停止服务器${NC}"
 
         # 切换到构建目录并启动服务器
-        cd _build/html
+        if [ ! -d "$DEFAULT_DIR" ]; then
+          echo -e "${RED}❌ 找不到默认文档目录: ${DEFAULT_DIR}${NC}"
+          exit 1
+        fi
+        cd "$DEFAULT_DIR"
         python -m http.server $PORT
     fi
 fi
