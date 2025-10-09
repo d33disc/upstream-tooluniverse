@@ -304,6 +304,9 @@ fi
 
 
 OUTPUT_DIR="_build/html"
+# Ensure we're in the docs directory
+SCRIPT_DIR="$(dirname "$0")"
+cd "$SCRIPT_DIR"
 
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
