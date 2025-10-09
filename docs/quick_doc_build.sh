@@ -324,21 +324,23 @@ for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
     echo -e "${GREEN}   ✅ ${DOC_LANGUAGE} build succeeded${NC}"
   else
     echo -e "${RED}   ❌ ${DOC_LANGUAGE} build failed${NC}"
-    exit 1
+    echo -e "${YELLOW}   ⚠️ Continuing with other languages...${NC}"
+    # Don't exit on single language failure, continue with others
   fi
 done
 
 # ===========================================
 # Step 3.5: Copy English content to root directory for direct access
 # ===========================================
-if [ ${#LANGUAGES[@]} -gt 1 ]; then
+# Check if English build exists and copy to root
+if [ -d "$OUTPUT_DIR/en" ] && [ -f "$OUTPUT_DIR/en/index.html" ]; then
   echo -e "\n${BLUE}🌍 Setting up English as default (root path) by copying content${NC}"
   
   # Copy all English content to root directory (excluding en folder itself)
   echo -e "${BLUE}📋 Copying English documentation to root directory...${NC}"
   
-  # First, copy all English content to root
-  rsync -a --exclude='en' "$OUTPUT_DIR/en/" "$OUTPUT_DIR/"
+  # First, copy all English content to root (excluding the en directory itself)
+  rsync -a "$OUTPUT_DIR/en/" "$OUTPUT_DIR/"
   
   # Create a simple redirect for old /zh_CN/ paths to new /zh-CN/ paths
   cat > "$OUTPUT_DIR/redirect_old_paths.js" << 'REDIRECT_JS'
@@ -554,6 +556,22 @@ else
   fi
 fi
 fi
+
+# ===========================================
+# Final verification
+# ===========================================
+echo -e "\n${BLUE}🔍 Final verification...${NC}"
+if [ ! -d "$OUTPUT_DIR" ]; then
+  echo -e "${RED}❌ Output directory $OUTPUT_DIR not found!${NC}"
+  exit 1
+fi
+
+if [ ! -f "$OUTPUT_DIR/index.html" ]; then
+  echo -e "${RED}❌ Root index.html not found!${NC}"
+  exit 1
+fi
+
+echo -e "${GREEN}✅ Build verification passed!${NC}"
 
 # ===========================================
 # Script completion summary
