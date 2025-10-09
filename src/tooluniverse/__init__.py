@@ -150,6 +150,9 @@ MCPAutoLoaderTool: Any
 ADMETAITool: Any
 AlphaFoldRESTTool: Any
 ComposeTool: Any
+CellosaurusSearchTool: Any
+CellosaurusQueryConverterTool: Any
+CellosaurusGetCellLineInfoTool: Any
 if not LAZY_LOADING_ENABLED:
     # Import all tool classes immediately (old behavior) with warning suppression  # noqa: E501
     with warnings.catch_warnings():
@@ -223,6 +226,11 @@ if not LAZY_LOADING_ENABLED:
         ODPHPItemList,
         ODPHPTopicSearch,
         ODPHPOutlinkFetch,
+    )
+    from .cellosaurus_tool import (
+        CellosaurusSearchTool,
+        CellosaurusQueryConverterTool,
+        CellosaurusGetCellLineInfoTool,
     )
     # Literature search tools
     from .arxiv_tool import ArXivTool
@@ -318,6 +326,15 @@ else:
     ODPHPMyHealthfinder = _LazyImportProxy("odphp_tool", "ODHPHPMyHealthfinder")
     ODPHPTopicSearch = _LazyImportProxy("odphp_tool", "ODPHPTopicSearch")
     ODPHPOutlinkFetch = _LazyImportProxy("odphp_tool", "ODPHPOutlinkFetch")
+    CellosaurusSearchTool = _LazyImportProxy(
+        "cellosaurus_tool", "CellosaurusSearchTool"
+    )
+    CellosaurusQueryConverterTool = _LazyImportProxy(
+        "cellosaurus_tool", "CellosaurusQueryConverterTool"
+    )
+    CellosaurusGetCellLineInfoTool = _LazyImportProxy(
+        "cellosaurus_tool", "CellosaurusGetCellLineInfoTool"
+    )
     # Literature search tools
     ArXivTool = _LazyImportProxy("arxiv_tool", "ArXivTool")
     CrossrefTool = _LazyImportProxy("crossref_tool", "CrossrefTool")
@@ -402,6 +419,9 @@ __all__ = [
     "ODPHPItemList",
     "ODPHPTopicSearch",
     "ODPHPOutlinkFetch",
+    "CellosaurusSearchTool",
+    "CellosaurusQueryConverterTool",
+    "CellosaurusGetCellLineInfoTool",
     # Literature search tools
     "ArXivTool",
     "CrossrefTool",
