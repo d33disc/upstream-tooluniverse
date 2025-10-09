@@ -329,92 +329,53 @@ for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
 done
 
 # ===========================================
-# Step 3.5: Create root index redirect to English and maintain /en/ path
+# Step 3.5: Copy English content to root directory for direct access
 # ===========================================
 if [ ${#LANGUAGES[@]} -gt 1 ]; then
-  echo -e "\n${BLUE}🌍 Setting up English as default (root path) and maintaining /en/ path${NC}"
+  echo -e "\n${BLUE}🌍 Setting up English as default (root path) by copying content${NC}"
   
-  # Always create both root redirect AND maintain /en/ path for backward compatibility
-  echo -e "${BLUE}📋 Creating root redirect to English...${NC}"
+  # Copy all English content to root directory (excluding en folder itself)
+  echo -e "${BLUE}📋 Copying English documentation to root directory...${NC}"
   
-  # Create root redirect page to English version
-  cat > "$OUTPUT_DIR/index.html" << 'REDIRECT'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=en/index.html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolUniverse Documentation</title>
-    <script>
-        // Immediate redirect to English documentation
-        window.location.href = 'en/index.html';
-    </script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .message {
-            font-size: 1.2rem;
-        }
-        a {
-            color: white;
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="message">
-        <p>Redirecting to documentation...</p>
-        <p>If not redirected, <a href="en/index.html">click here</a>.</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">
-            语言切换 / Language switch: Use the switcher in the navigation bar
-        </p>
-    </div>
-</body>
-</html>
-REDIRECT
-
-  echo -e "${GREEN}✅ Root index redirect created (default: English)${NC}"
-  echo -e "${YELLOW}💡 Access: http://localhost:port/ (redirects to /en/) OR http://localhost:port/en/${NC}"
+  # First, copy all English content to root
+  rsync -a --exclude='en' "$OUTPUT_DIR/en/" "$OUTPUT_DIR/"
   
-  # Copy .htaccess file for Apache server compatibility
-  if [ -f ".htaccess" ]; then
-    cp .htaccess "$OUTPUT_DIR/"
-    echo -e "${GREEN}✅ .htaccess file copied for Apache server compatibility${NC}"
-  else
-    echo -e "${YELLOW}⚠️ .htaccess file not found, creating one...${NC}"
-    cat > "$OUTPUT_DIR/.htaccess" << 'HTACCESS'
+  # Create a simple redirect for old /zh_CN/ paths to new /zh-CN/ paths
+  cat > "$OUTPUT_DIR/redirect_old_paths.js" << 'REDIRECT_JS'
+// ToolUniverse Documentation - Old Path Redirect Handler
+(function() {
+    'use strict';
+    
+    // Only run on GitHub Pages (not in development)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return;
+    }
+    
+    const currentPath = window.location.pathname;
+    const basePath = '/ToolUniverse/';
+    
+    // Handle old zh_CN paths
+    if (currentPath.includes('/zh_CN/')) {
+        const newPath = currentPath.replace('/zh_CN/', '/zh-CN/');
+        window.location.replace(newPath);
+        return;
+    }
+})();
+REDIRECT_JS
+  
+  # Add the redirect script to all HTML files in root
+  find "$OUTPUT_DIR" -maxdepth 1 -name "*.html" -exec sed -i.bak 's|</head>|    <script src="redirect_old_paths.js"></script>\n</head>|' {} \;
+  
+  # Create .htaccess file for Apache server compatibility (if needed)
+  cat > "$OUTPUT_DIR/.htaccess" << 'HTACCESS'
 # ToolUniverse Documentation - Apache .htaccess
 # This file ensures proper redirects for multi-language documentation
 
 # Enable rewrite engine
 RewriteEngine On
 
-# Redirect root to English documentation
-RewriteRule ^$ en/index.html [R=302,L]
-
-# Redirect old /en/ paths to new structure (if needed)
-# This ensures backward compatibility
-RewriteRule ^en/(.*)$ en/$1 [L]
-
 # Redirect old /zh_CN/ paths to new /zh-CN/ structure
 RewriteRule ^zh_CN/(.*)$ zh-CN/$1 [R=302,L]
-
-# Handle language switching
-# If someone accesses a file without language prefix, redirect to English
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/(en|zh-CN)/
-RewriteRule ^(.*)$ en/$1 [R=302,L]
 
 # Set proper MIME types
 AddType text/html .html
@@ -450,8 +411,11 @@ AddType image/svg+xml .svg
     ExpiresByType text/html "access plus 1 hour"
 </IfModule>
 HTACCESS
-    echo -e "${GREEN}✅ .htaccess file created${NC}"
-  fi
+  
+  echo -e "${GREEN}✅ English documentation copied to root directory${NC}"
+  echo -e "${GREEN}✅ Old path redirect script created${NC}"
+  echo -e "${GREEN}✅ .htaccess file created for Apache servers${NC}"
+  echo -e "${YELLOW}💡 Access: http://localhost:port/ (direct English content) OR http://localhost:port/en/ OR http://localhost:port/zh-CN/${NC}"
 fi
 
 # ===========================================
