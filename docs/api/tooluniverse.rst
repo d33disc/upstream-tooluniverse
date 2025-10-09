@@ -62,6 +62,7 @@ Submodules
    tooluniverse.mcp_tool_registry
    tooluniverse.medlineplus_tool
    tooluniverse.medrxiv_tool
+   tooluniverse.memory_manager
    tooluniverse.odphp_tool
    tooluniverse.openaire_tool
    tooluniverse.openalex_tool
@@ -86,6 +87,7 @@ Submodules
    tooluniverse.tool_finder_llm
    tooluniverse.tool_graph_web_ui
    tooluniverse.tool_registry
+   tooluniverse.unified_guideline_tools
    tooluniverse.uniprot_tool
    tooluniverse.unpaywall_tool
    tooluniverse.url_tool

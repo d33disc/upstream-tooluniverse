@@ -3,16 +3,16 @@ MCP Support
 
 **Complete guide to Model Context Protocol (MCP) integration with ToolUniverse**
 
-ToolUniverse provides comprehensive support for the Model Context Protocol (MCP), enabling seamless integration with AI assistants, reasoning models, and agentic systems. This guide covers everything you need to know about using ToolUniverse through MCP.
+ToolUniverse provides comprehensive support for the Model Context Protocol (MCP), enabling seamless integration with AI scientists, reasoning models, and agentic systems. This guide covers everything you need to know about using ToolUniverse through MCP.
 
 What is MCP?
 ------------
 
-The Model Context Protocol (MCP) is a standardized protocol that enables AI assistants to securely connect to external tools and data sources. ToolUniverse implements MCP through the Scientific Model Context Protocol (SMCP), extending standard MCP capabilities with scientific domain expertise.
+The Model Context Protocol (MCP) is a standardized protocol that enables AI scientists to securely connect to external tools and data sources. ToolUniverse implements MCP through the Scientific Model Context Protocol (SMCP), extending standard MCP capabilities with scientific domain expertise.
 
 Key Benefits:
-- **Standardized Integration**: Connect to any MCP-compatible AI assistant
-- **Scientific Tool Access**: Direct access to 600+ scientific tools
+- **Standardized Integration**: Connect to any MCP-compatible AI scientist
+- **Scientific Tool Access**: Direct access to 649+ scientific tools
 - **Intelligent Discovery**: AI-powered tool search and recommendation
 - **Secure Communication**: Standardized protocol ensures secure tool execution
 - **Production Ready**: High-performance architecture for real-world applications
@@ -22,7 +22,7 @@ MCP Architecture Overview
 
 .. code-block:: text
 
-   AI Assistant (Claude, ChatGPT, Gemini, etc.)
+   AI Scientist (Claude, ChatGPT, Gemini, etc.)
            │
            │ MCP Protocol
            │
@@ -35,18 +35,18 @@ MCP Architecture Overview
            │
    ┌─────────────────┐
    │ Scientific      │
-   │ Tools (600+)    │
+   │ Tools (649+)    │
    └─────────────────┘
 
 ToolUniverse MCP Implementation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ToolUniverse provides two main MCP server implementations:
+ToolUniverse provides three main MCP server implementations:
 
 1. **`tooluniverse-smcp`** - Full-featured server with configurable transport (HTTP, SSE, stdio)
 2. **`tooluniverse-smcp-stdio`** - Specialized server for stdio transport (optimized for desktop AI applications)
 
-Both servers expose the same comprehensive set of scientific tools through the MCP protocol.
+All servers expose the same comprehensive set of 649+ scientific tools through the MCP protocol.
 
 Quick Start
 -----------
@@ -63,7 +63,7 @@ The following are commonly used command-line flags for ToolUniverse MCP servers.
    tooluniverse-smcp [OPTIONS]
 
    --port INT                     Server port (HTTP/SSE). Default: 7000
-   --host TEXT                    Bind host for HTTP/SSE. Default: 127.0.0.1
+   --host TEXT                    Bind host for HTTP/SSE. Default: 0.0.0.0
    --transport [http|stdio|sse]   Transport protocol. Default: http
    --name TEXT                    Server display name
    --max-workers INT              Worker pool size for tool execution
@@ -79,7 +79,7 @@ The following are commonly used command-line flags for ToolUniverse MCP servers.
    --tool-config-files TEXT       Mapping like "custom:/path/to/custom.json"
 
    # Hooks
-   --hooks-enabled/--no-hooks     Enable/disable hooks (stdio defaults to enabled)
+   --hooks-enabled                Enable hooks (default: False)
    --hook-type [SummarizationHook|FileSaveHook]
    --hook-config-file PATH        JSON config for hooks
 
@@ -93,38 +93,14 @@ The following are commonly used command-line flags for ToolUniverse MCP servers.
    --tools-file PATH              File with one tool name per line
    --include-tool-types STR...    Include only these tool types
    --exclude-tool-types STR...    Exclude these tool types
-   --hooks-enabled/--no-hooks     Enable/disable hooks (default: enabled)
+   --hooks                        Enable hooks (default: disabled for stdio)
    --hook-type [SummarizationHook|FileSaveHook]
    --hook-config-file PATH        JSON config for hooks
 
-Environment Variables
----------------------
+Configuration
+-------------
 
-You can configure defaults via environment variables. CLI flags take precedence.
-
-.. code-block:: bash
-
-   # Server basics
-   export TU_SMCP_PORT=8000
-   export TU_SMCP_HOST=0.0.0.0
-   export TU_SMCP_TRANSPORT=http        # http | stdio | sse
-   export TU_SMCP_NAME="My ToolUniverse Server"
-   export TU_SMCP_MAX_WORKERS=10
-   export TU_SMCP_VERBOSE=1             # any non-empty enables verbose
-
-   # Tool selection
-   export TU_SMCP_CATEGORIES="uniprot ChEMBL opentarget"
-   export TU_SMCP_EXCLUDE_CATEGORIES="mcp_auto_loader special_tools"
-   export TU_SMCP_INCLUDE_TOOLS="UniProt_get_entry_by_accession ChEMBL_get_molecule_by_chembl_id"
-   export TU_SMCP_TOOLS_FILE="/path/to/tools.txt"
-   export TU_SMCP_INCLUDE_TOOL_TYPES="OpenTarget ToolFinderEmbedding"
-   export TU_SMCP_EXCLUDE_TOOL_TYPES="ToolFinderLLM Unknown"
-   export TU_SMCP_TOOL_CONFIG_FILES="custom:/path/to/custom.json"
-
-   # Hooks
-   export TU_SMCP_HOOKS_ENABLED=1       # set empty or 0 to disable
-   export TU_SMCP_HOOK_TYPE=SummarizationHook
-   export TU_SMCP_HOOK_CONFIG_FILE="/path/to/hook_config.json"
+All MCP servers support configuration through command-line arguments. See the CLI Options Reference above for available configuration options.
 
 Configuration Files
 -------------------
@@ -229,11 +205,7 @@ Claude Desktop stdio registration (example):
      "mcpServers": {
        "tooluniverse": {
          "command": "tooluniverse-smcp-stdio",
-         "args": ["--categories", "uniprot", "ChEMBL", "opentarget"],
-         "env": {
-           "TU_SMCP_HOOKS_ENABLED": "1",
-           "TU_SMCP_HOOK_TYPE": "SummarizationHook"
-         }
+         "args": ["--categories", "uniprot", "ChEMBL", "opentarget", "--hooks", "--hook-type", "SummarizationHook"]
        }
      }
    }
@@ -274,15 +246,18 @@ Hook Configuration
 
 Enable intelligent output processing hooks for MCP servers. For comprehensive hook configuration including SummarizationHook and FileSaveHook, see :ref:`hook-configuration`.
 
+.. seealso::
+   **Detailed Guide**: :doc:`hooks/server_stdio_hooks` - Complete hook integration tutorial
+
 Performance Tuning
 ^^^^^^^^^^^^^^^^^^
 
 Optimize server performance for your use case. For detailed performance configuration options, see :ref:`server-configuration`.
 
-AI Assistant Integration
+AI Scientist Integration
 ------------------------
 
-ToolUniverse MCP servers are compatible with major AI assistants and platforms:
+ToolUniverse MCP servers are compatible with major AI scientists and platforms:
 
 Claude Desktop
 ~~~~~~~~~~~~~~
@@ -291,6 +266,8 @@ Integrate ToolUniverse with Claude Desktop for powerful desktop-based scientific
 
 .. seealso::
    For complete Claude Desktop integration, see :doc:`building_ai_scientists/claude_desktop`
+   
+   **Tutorial**: :doc:`../tutorials/aiscientists/MCP_for_Claude` - Step-by-step Claude Desktop setup
 
 ChatGPT API
 ~~~~~~~~~~~
@@ -307,6 +284,8 @@ Use ToolUniverse with Gemini CLI for command-line scientific research.
 
 .. seealso::
    For Gemini CLI integration, see :doc:`building_ai_scientists/gemini_cli`
+   
+   **Tutorial**: :doc:`../tutorials/aiscientists/MCP_for_Gemini_CLI` - Complete Gemini CLI setup guide
 
 Claude Code
 ~~~~~~~~~~~
@@ -439,8 +418,11 @@ Core MCP Components
 - :doc:`tool_caller` - Tool execution engine and MCP server implementation
 - :doc:`loading_tools` - Tool loading and MCP server configuration
 - :doc:`interaction_protocol` - ToolUniverse interaction protocol and MCP schema
+- :doc:`../api/tooluniverse.smcp` - SMCP server API documentation
+- :doc:`../api/tooluniverse.mcp_integration` - MCP integration module API
+- :doc:`../api/tooluniverse.mcp_tool_registry` - MCP tool registry API
 
-AI Assistant Integration
+AI Scientist Integration
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 - :doc:`building_ai_scientists/index` - Complete guide to building AI scientists
@@ -451,12 +433,29 @@ AI Assistant Integration
 - :doc:`building_ai_scientists/qwen_code` - Qwen Code integration
 - :doc:`building_ai_scientists/codex_cli` - GPT Codex CLI integration
 
+MCP Tutorials and Guides
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+- :doc:`../tutorials/aiscientists/MCP_Server_Tutorial` - Converting tools to MCP servers
+- :doc:`../tutorials/aiscientists/MCP_for_Claude` - Claude Desktop MCP integration
+- :doc:`../tutorials/aiscientists/MCP_for_Gemini_CLI` - Gemini CLI MCP integration
+- :doc:`../tutorials/aiscientists/adding_mcp_tools` - Adding MCP tools to ToolUniverse
+- :doc:`../tutorials/addtools/mcp_tool_registration_en` - MCP tool registration tutorial
+
 Advanced Features
 ~~~~~~~~~~~~~~~~~
 
-- :doc:`hooks/index` - Output processing hooks for MCP servers
+- :doc:`hooks/server_stdio_hooks` - Output processing hooks for MCP servers
 - :doc:`scientific_workflows` - Building complex workflows with MCP
 - :doc:`tool_composition` - Composing tools for advanced research
+- :doc:`streaming_tools` - Streaming support for MCP tools
+
+MCP Tools and Examples
+~~~~~~~~~~~~~~~~~~~~~~
+
+- :doc:`../tools/mcp_client_tools_example` - MCP client tools example
+- :doc:`../tools/expert_feedback_tools` - Expert feedback MCP tools
+- :doc:`../tools/txagent_client_tools` - TXAgent client MCP tools
 
 Examples and Tutorials
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -469,6 +468,7 @@ API Reference
 
 - :doc:`api_comprehensive` - Complete SMCP API documentation
 - :doc:`api_quick_reference` - Quick reference for common MCP operations
+- :doc:`../api/tooluniverse.mcp_client_tool` - MCP client tool API
 
 External Resources
 ~~~~~~~~~~~~~~~~~~
@@ -480,14 +480,14 @@ External Resources
 Summary
 -------
 
-ToolUniverse's MCP support provides a powerful, standardized way to integrate scientific tools with AI assistants. The SMCP implementation extends standard MCP capabilities with scientific domain expertise, making it easy to build sophisticated AI-scientist workflows.
+ToolUniverse's MCP support provides a powerful, standardized way to integrate scientific tools with AI scientists. The SMCP implementation extends standard MCP capabilities with scientific domain expertise, making it easy to build sophisticated AI-scientist workflows.
 
 Key takeaways:
 
-- **Easy Integration**: Simple setup with major AI assistants
-- **Comprehensive Tools**: Access to 600+ scientific tools through MCP
+- **Easy Integration**: Simple setup with major AI scientists
+- **Comprehensive Tools**: Access to 649+ scientific tools through MCP
 - **Flexible Configuration**: Multiple transport options and tool selection
 - **Production Ready**: High-performance, secure, and reliable
 - **Extensive Documentation**: Complete guides for all major AI platforms
 
-Start with the :doc:`building_ai_scientists/index` guide to begin building your AI scientist, or explore specific integrations for your preferred AI assistant.
+Start with the :doc:`building_ai_scientists/index` guide to begin building your AI scientist, or explore specific integrations for your preferred AI scientist.

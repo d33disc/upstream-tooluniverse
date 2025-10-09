@@ -40,8 +40,8 @@ Remote tools integrate external services, APIs, and specialized systems running 
 Overview
 -----------------------------
 
-* **Total Configuration Files**: 79
-* **Total Tools**: 667
+* **Total Configuration Files**: 81
+* **Total Tools**: 683
 
 Local Tools
 -----------
@@ -298,6 +298,11 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Multi Agent Tools <multi_agent_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Odphp Tools <odphp_tools>
 
 .. toctree::
@@ -378,6 +383,11 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
+   Unified Guideline Tools <unified_guideline_tools>
+
+.. toctree::
+   :maxdepth: 1
+
    Uniprot Tools <uniprot_tools>
 
 .. toctree::
@@ -453,7 +463,7 @@ Tools by Type
   * ADMETAI_predict_stress_response (from :doc:`admetai_tools`)
   * ADMETAI_predict_toxicity (from :doc:`admetai_tools`)
 
-**AgenticTool** (38 tools)
+**AgenticTool** (48 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Local Tools:*
@@ -471,15 +481,25 @@ Tools by Type
   * EthicalComplianceReviewer (from :doc:`agentic_tools`)
   * ExperimentalDesignScorer (from :doc:`agentic_tools`)
   * HypothesisGenerator (from :doc:`agentic_tools`)
+  * IntentAnalyzerAgent (from :doc:`agentic_tools`)
+  * IntentAnalyzerAgent (from :doc:`multi_agent_tools`)
+  * KeywordExtractorAgent (from :doc:`agentic_tools`)
+  * KeywordExtractorAgent (from :doc:`multi_agent_tools`)
   * LabelGenerator (from :doc:`agentic_tools`)
   * LiteratureContextReviewer (from :doc:`agentic_tools`)
   * MedicalLiteratureReviewer (from :doc:`agentic_tools`)
   * MedicalTermNormalizer (from :doc:`agentic_tools`)
   * MethodologyRigorReviewer (from :doc:`agentic_tools`)
   * NoveltySignificanceReviewer (from :doc:`agentic_tools`)
+  * OverallSummaryAgent (from :doc:`agentic_tools`)
+  * OverallSummaryAgent (from :doc:`multi_agent_tools`)
   * ProtocolOptimizer (from :doc:`agentic_tools`)
+  * QualityCheckerAgent (from :doc:`agentic_tools`)
+  * QualityCheckerAgent (from :doc:`multi_agent_tools`)
   * QuestionRephraser (from :doc:`agentic_tools`)
   * ReproducibilityTransparencyReviewer (from :doc:`agentic_tools`)
+  * ResultSummarizerAgent (from :doc:`agentic_tools`)
+  * ResultSummarizerAgent (from :doc:`multi_agent_tools`)
   * ResultsInterpretationReviewer (from :doc:`agentic_tools`)
   * ScientificTextSummarizer (from :doc:`agentic_tools`)
   * TestCaseGenerator (from :doc:`agentic_tools`)
@@ -542,7 +562,7 @@ Tools by Type
 *Local Tools:*
   * search_clinical_trials (from :doc:`clinicaltrials_gov_tools`)
 
-**ComposeTool** (10 tools)
+**ComposeTool** (12 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Local Tools:*
@@ -550,6 +570,8 @@ Tools by Type
   * ComprehensiveDrugDiscoveryPipeline (from :doc:`compose_tools`)
   * DrugSafetyAnalyzer (from :doc:`compose_tools`)
   * LiteratureSearchTool (from :doc:`compose_tools`)
+  * MultiAgentLiteratureSearch (from :doc:`compose_tools`)
+  * MultiAgentLiteratureSearch (from :doc:`multi_agent_tools`)
   * OutputSummarizationComposer (from :doc:`output_summarization_tools`)
   * ToolDescriptionOptimizer (from :doc:`compose_tools`)
   * ToolDiscover (from :doc:`compose_tools`)
@@ -635,6 +657,12 @@ Tools by Type
 
 *Local Tools:*
   * enrichr_gene_enrichment_analysis (from :doc:`enrichr_tools`)
+
+**EuropePMCGuidelinesTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * EuropePMC_Guidelines_Search (from :doc:`unified_guideline_tools`)
 
 **EuropePMCTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1069,6 +1097,12 @@ Tools by Type
 *Local Tools:*
   * get_joint_associated_diseases_by_HPO_ID_list (from :doc:`monarch_tools`)
 
+**NICEWebScrapingTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * NICE_Clinical_Guidelines_Search (from :doc:`unified_guideline_tools`)
+
 **ODPHPItemList** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1366,6 +1400,12 @@ Tools by Type
   * PubChem_search_compounds_by_similarity (from :doc:`pubchem_tools`)
   * PubChem_search_compounds_by_substructure (from :doc:`pubchem_tools`)
 
+**PubMedGuidelinesTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * PubMed_Guidelines_Search (from :doc:`unified_guideline_tools`)
+
 **PubMedTool** (1 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1466,6 +1506,12 @@ Tools by Type
 *Local Tools:*
   * CallAgent (from :doc:`special_tools`)
   * Finish (from :doc:`special_tools`)
+
+**TRIPDatabaseTool** (1 tools)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Local Tools:*
+  * TRIP_Database_Guidelines_Search (from :doc:`unified_guideline_tools`)
 
 **ToolFinderEmbedding** (2 tools)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

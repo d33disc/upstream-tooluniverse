@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-08 22:00-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../tools/unified_guideline_tools.rst:2 5b7dd673562048a4b626793cfc323bdb
+msgid "Unified Guideline Tools"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:4 7eacd251a9a1456e8218df9263101498
+msgid ""
+"**Configuration File**: ``unified_guideline_tools.json`` **Tool Type**: "
+"Local **Tools Count**: 4"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:8 f171b41e4da54d99afa7de97b38121be
+msgid ""
+"This page contains all tools defined in the "
+"``unified_guideline_tools.json`` configuration file."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:11 255d44d8412b46fd9cbcb013532a1fa4
+msgid "Available Tools"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:14 dca8ad170da0487f9f3bb6d7b0baec28
+msgid "**EuropePMC_Guidelines_Search** (Type: EuropePMCGuidelinesTool)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:16 28b9f8a11a2546049b400d956f2b1815
+msgid ""
+"Search Europe PMC for clinical guidelines and evidence-based "
+"recommendations. Europe PMC provides..."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst c81fcb2e12314c5ead21cd0bc1093938
+msgid "EuropePMC_Guidelines_Search tool specification"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:20
+#: ../../tools/unified_guideline_tools.rst:54
+#: ../../tools/unified_guideline_tools.rst:88
+#: ../../tools/unified_guideline_tools.rst:125 4ee2b8b7a8514221bdbe65dccb2d6c6c
+#: a97e80294c5544f5a52a3afe2dacd52c d7a5605707284e298aa8041a40133d66
+#: f0006af2f47543588340ef3a5226986b
+msgid "**Tool Information:**"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:22 0751400232364e03ac01c0e9edf02ae6
+msgid "**Name**: ``EuropePMC_Guidelines_Search``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:23 8c8d213f42f64d44827c783e7a72371e
+msgid "**Type**: ``EuropePMCGuidelinesTool``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:24 6b6d344ac24c415b9862b31a558bc7bd
+msgid ""
+"**Description**: Search Europe PMC for clinical guidelines and evidence-"
+"based recommendations. Europe PMC provides free access to a comprehensive"
+" archive of life sciences literature, including clinical practice "
+"guidelines from international sources."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:26
+#: ../../tools/unified_guideline_tools.rst:60
+#: ../../tools/unified_guideline_tools.rst:94
+#: ../../tools/unified_guideline_tools.rst:131 2d689c68bcf2485cb5af25943afa8a91
+#: 715cd0198fc745faac4f2e90785c9115 9edc343ead854fc58648e84b9d71be32
+#: b72cee3cebca4c61bc63b52aca309dbb
+msgid "**Parameters:**"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:28 fbef36c2598843caa06785ac11b09502
+msgid ""
+"``query`` (string) (required) Medical condition, treatment, or clinical "
+"topic to search for (e.g., 'diabetes', 'cardiovascular disease', 'mental "
+"health')"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:31
+#: ../../tools/unified_guideline_tools.rst:99
+#: ../../tools/unified_guideline_tools.rst:136 a140594263f142dfa00caf005506da0b
+#: c3b199f765bb47e6a8560200b7ae2c5b d62f61eb5bf24e2db1a358a0496f2164
+msgid ""
+"``limit`` (integer) (optional) Maximum number of guidelines to return "
+"(default: 10)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:34
+#: ../../tools/unified_guideline_tools.rst:68
+#: ../../tools/unified_guideline_tools.rst:105
+#: ../../tools/unified_guideline_tools.rst:142 3b727ca442934268aeeefbe2e8e9b3b9
+#: 536177ab110240d9a53b65a6a18b3edb 6c3c46de223d4fdb958e94156745d07b
+#: effa2df4d2144fb8ab43f3a0d6514e81
+msgid "**Example Usage:**"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:48 c576b173cd854a468c20e0161ba16562
+msgid "**NICE_Clinical_Guidelines_Search** (Type: NICEWebScrapingTool)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:50 53c2ba778fc046c4972c656bd8132f44
+msgid ""
+"Search NICE (National Institute for Health and Care Excellence) clinical "
+"guidelines and evidence-..."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst a03636e468224609928e36af39d024b6
+msgid "NICE_Clinical_Guidelines_Search tool specification"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:56 ea6db6d2189a432582c7e40490fa36f7
+msgid "**Name**: ``NICE_Clinical_Guidelines_Search``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:57 cfc38ea39cfc43e8a6c2157b799ece78
+msgid "**Type**: ``NICEWebScrapingTool``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:58 85bd199ceaed4ea19ca353625560eb85
+msgid ""
+"**Description**: Search NICE (National Institute for Health and Care "
+"Excellence) clinical guidelines and evidence-based recommendations. "
+"Provides access to official NICE guidelines covering diagnosis, "
+"treatment, and care pathways for various medical conditions."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:62 91165cd6b9484a3689af8ac0b850a0a8
+msgid ""
+"``query`` (string) (required) Medical condition, treatment, or clinical "
+"topic to search for in NICE guidelines (e.g., 'diabetes', 'hypertension',"
+" 'cancer screening')"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:65 ec30c7b3f7e343b79a7bfb2bc70c4ee7
+msgid ""
+"``limit`` (integer) (optional) Maximum number of clinical guidelines to "
+"return (default: 10)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:82 165a46e055d044e2b66456f7f53b5cfe
+msgid "**PubMed_Guidelines_Search** (Type: PubMedGuidelinesTool)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:84 5f39fca370574b62aae10442e12d36df
+msgid ""
+"Search PubMed for peer-reviewed clinical practice guidelines using NCBI "
+"E-utilities. Filters resu..."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst 4b7eda0910ca46d69bae14715b32c917
+msgid "PubMed_Guidelines_Search tool specification"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:90 8fdd2c2ee43e4161a7d6e3fcebc01ebb
+msgid "**Name**: ``PubMed_Guidelines_Search``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:91 0f55a401fa864458819c4b8ca8d1b62d
+msgid "**Type**: ``PubMedGuidelinesTool``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:92 b35a3a826cbc4a5e94d8bd0157e6c4e4
+msgid ""
+"**Description**: Search PubMed for peer-reviewed clinical practice "
+"guidelines using NCBI E-utilities. Filters results specifically for "
+"guideline and practice guideline publication types. Provides access to "
+"high-quality, evidence-based clinical guidelines from medical journals "
+"worldwide."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:96 a402bc4899fe4406bccae095a3c62b6f
+msgid ""
+"``query`` (string) (required) Medical condition, treatment, or clinical "
+"topic to search for (e.g., 'diabetes', 'hypertension management', 'cancer"
+" treatment')"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:102 125f9ef4f46b49d693d3b2d7cf31395d
+msgid ""
+"``api_key`` (string) (optional) Optional NCBI API key for higher rate "
+"limits. Get your free key at https://www.ncbi.nlm.nih.gov/account/"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:119 7db0e51abf6e49709ca065aeeb5abc5d
+msgid "**TRIP_Database_Guidelines_Search** (Type: TRIPDatabaseTool)"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:121 553cd4810cdf4180a9231b04c8c4437e
+msgid ""
+"Search TRIP Database (Turning Research into Practice) for evidence-based "
+"clinical guidelines. TRI..."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst 506bb02738ec4eddb695d269b775d375
+msgid "TRIP_Database_Guidelines_Search tool specification"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:127 82cb3ec988a845b6802024b2edf5c46a
+msgid "**Name**: ``TRIP_Database_Guidelines_Search``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:128 4d593862fa0b435a96ab45436b610dda
+msgid "**Type**: ``TRIPDatabaseTool``"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:129 a59e4c6ca9994c03acc86f611838cf3b
+msgid ""
+"**Description**: Search TRIP Database (Turning Research into Practice) "
+"for evidence-based clinical guidelines. TRIP is a specialized clinical "
+"search engine that focuses on high-quality evidence-based content, "
+"particularly clinical guidelines from reputable sources worldwide."
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:133 45285d8cd0624ec5868452ec4c4ae37d
+msgid ""
+"``query`` (string) (required) Medical condition, treatment, or clinical "
+"question (e.g., 'diabetes management', 'stroke prevention', 'antibiotic "
+"therapy')"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:139 21f80112bde2479fa40278e670be177a
+msgid ""
+"``search_type`` (string) (optional) Type of content to search for "
+"(default: 'guideline'). Options include 'guideline', 'systematic-review',"
+" 'evidence-based-synopses'"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:156 612068c8696447239cc7a98e7c9c72ac
+msgid "Navigation"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:158 64a13255c1824b43837aae0b32bdfca1
+msgid ":doc:`tools_config_index` - Back to Tools Overview"
+msgstr ""
+
+#: ../../tools/unified_guideline_tools.rst:159 d8a644a3b6e24b51b6f1e6e992cfc4e8
+msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
+msgstr ""
+

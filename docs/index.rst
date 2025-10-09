@@ -116,13 +116,6 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
 
 .. toctree::
    :maxdepth: 1
-   :caption: 🔧 Tools
-
-   tools/tools_config_index
-   tools/remote_tools
-
-.. toctree::
-   :maxdepth: 1
    :caption: 💡 Use ToolUniverse
 
    guide/index
@@ -151,6 +144,13 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    expand_tooluniverse/remote_tool_registration
    deployment
    contributing
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 🔧 Tools
+
+   tools/tools_config_index
+   tools/remote_tools
 
 
 .. toctree::
