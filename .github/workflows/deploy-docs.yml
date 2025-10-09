@@ -27,180 +27,67 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 1  # Shallow clone for faster checkout
       
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.11'
         cache: 'pip'
+        
+    - name: Cache Sphinx build
+      uses: actions/cache@v4
+      with:
+        path: |
+          docs/_build/doctrees
+          docs/api
+        key: sphinx-${{ runner.os }}-${{ hashFiles('docs/**/*.rst', 'docs/**/*.py', 'src/**/*.py', 'pyproject.toml') }}
+        restore-keys: |
+          sphinx-${{ runner.os }}-
         
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        # Install the package with docs dependencies (includes sphinx-shibuya)
-        pip install -e .[docs]
+        python -m pip install --upgrade pip uv
+        # Use uv for faster installation
+        uv pip install --system -e .[docs]
         
     - name: Verify documentation setup
       run: |
-        python -c "import sphinx; print(f'Sphinx version: {sphinx.__version__}')"
-        # Verify theme availability
+        echo "🔍 Verifying Sphinx and theme installation..."
+        python -c "import sphinx; print(f'✅ Sphinx {sphinx.__version__}')"
         python -c "import shibuya; print('✅ Shibuya theme available')"
-        python -c "import pydata_sphinx_theme; print('✅ PyData theme available')"
-        python -c "import sphinx_rtd_theme; print('✅ RTD theme available')"
+        python -c "import shibuya; print('✅ Shibuya theme available')"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
-        ls -la docs/
-        ls -la docs/conf*.py
-        # Check logo file availability
-        ls -la img/ || echo "⚠️ img directory not found"
-        ls -la img/tooluniverse_logo.png || echo "⚠️ Logo file not found"
         
-    - name: Fix contents directive compatibility
+    - name: Prepare assets
       run: |
         cd docs
-        # Create fix script for CI environment
-        cat > fix_contents_ci.py << 'EOF'
-        import os
-        import re
-        import glob
-        
-        def fix_contents_directive(file_path):
-            try:
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # Pattern to match .. contents:: directive and its options
-                pattern = r'^\.\. contents::.*?(?=^\S|\Z)'
-                fixed_content = re.sub(pattern, '', content, flags=re.MULTILINE | re.DOTALL)
-                fixed_content = re.sub(r'\n\n\n+', '\n\n', fixed_content)
-                
-                if fixed_content != content:
-                    with open(file_path, 'w', encoding='utf-8') as f:
-                        f.write(fixed_content)
-                    print(f"✅ Fixed: {file_path}")
-                    return True
-                return False
-            except Exception as e:
-                print(f"❌ Error processing {file_path}: {e}")
-                return False
-        
-        # Process all RST files
-        rst_files = glob.glob('**/*.rst', recursive=True)
-        fixed_count = 0
-        for file_path in rst_files:
-            if fix_contents_directive(file_path):
-                fixed_count += 1
-        
-        print(f"Fixed {fixed_count} files for Sphinx compatibility")
-        EOF
-        
-        python fix_contents_ci.py
-        
-    - name: Verify Shibuya theme
-      run: |
-        cd docs
-        # Verify shibuya theme is available
-        python -c "import shibuya; print('✅ Shibuya theme verified')"
-        # Check that conf.py exists and uses shibuya theme
-        if grep -q "html_theme = \"shibuya\"" conf.py; then
-          echo "✅ conf.py correctly configured for Shibuya theme"
-        else
-          echo "❌ conf.py not configured for Shibuya theme"
-          exit 1
-        fi
-        
-        # Update logo paths in configuration files to use both original and _static paths
-        cat > update_logo_path.py << 'EOF'
-        import re
-        
-        files_to_update = ['conf.py']
-        
-        for file_name in files_to_update:
-            try:
-                with open(file_name, 'r') as f:
-                    content = f.read()
-                
-                # Update logo path to check multiple locations
-                logo_pattern = r"html_logo = '[^']*tooluniverse_logo\.png'[^']*"
-                new_logo = "html_logo = '../img/tooluniverse_logo.png' if os.path.exists('../img/tooluniverse_logo.png') else ('_static/tooluniverse_logo.png' if os.path.exists('_static/tooluniverse_logo.png') else None)"
-                
-                # Simple replacement for the logo line
-                content = re.sub(r"html_logo = '[^']*'[^']*else None", new_logo, content)
-                
-                with open(file_name, 'w') as f:
-                    f.write(content)
-                    
-                print(f"✅ Updated logo path in {file_name}")
-            except Exception as e:
-                print(f"⚠️ Could not update {file_name}: {e}")
-        EOF
-        
-        python update_logo_path.py
-        
-    - name: Prepare logo and assets
-      run: |
-        cd docs
-        # Ensure _static directory exists
         mkdir -p _static
-        # Copy logo to _static directory to ensure it's available
         if [ -f "../img/tooluniverse_logo.png" ]; then
           cp ../img/tooluniverse_logo.png _static/
-          echo "✅ Logo copied to _static directory"
-        else
-          echo "⚠️ Logo file not found at ../img/tooluniverse_logo.png"
+          echo "✅ Logo prepared"
         fi
-        # List _static contents
-        ls -la _static/
         
     - name: Build documentation
       run: |
         cd docs
-        rm -rf _build/*
-        # Build with multi-language support and proper redirects
-        echo "🔨 Starting documentation build..."
-        DOC_LANGUAGES="en,zh_CN" DOC_SKIP_SERVER_PROMPT=1 ./quick_doc_build.sh
-        echo "🔍 Build completed, checking output..."
-        ls -la _build/
-        ls -la _build/html/ || echo "❌ _build/html directory not found!"
+        # Skip dependency installation in script (already done above)
+        # Use optimized API doc generation settings
+        echo "🔨 Building documentation with optimized settings..."
+        DOC_LANGUAGES="en,zh_CN" \
+        DOC_SKIP_SERVER_PROMPT=1 \
+        DOC_SKIP_INSTALL=1 \
+        DOC_OPTIMIZED=1 \
+        ./quick_doc_build.sh
         
     - name: Check build output
       run: |
-        echo "🔍 Checking build output..."
-        ls -la docs/_build/html/ || (echo "❌ _build/html directory not found!" && exit 1)
-        
-        # Check if root index.html exists (this is critical)
-        if [ -f docs/_build/html/index.html ]; then
-          echo "✅ Root index.html found"
-        else
+        if [ ! -f docs/_build/html/index.html ]; then
           echo "❌ Root index.html not found!"
           exit 1
         fi
-        
-        # Check if logo was properly included in build
-        ls -la docs/_build/html/_static/ | grep -i logo || echo "⚠️ Logo not found in _static"
-        # Check if logo is referenced in HTML
-        grep -r "tooluniverse_logo" docs/_build/html/ || echo "⚠️ Logo not referenced in HTML"
-        
-        # Verify multilingual build structure (optional, don't fail if missing)
-        if [ -d docs/_build/html/en ]; then
-          echo "✅ English directory found"
-          test -f docs/_build/html/en/expand_tooluniverse/index.html || echo "⚠️ Missing English expand_tooluniverse index"
-        else
-          echo "⚠️ English directory not found"
-        fi
-        
-        if [ -d docs/_build/html/zh-CN ]; then
-          echo "✅ Chinese directory found"
-          test -f docs/_build/html/zh-CN/expand_tooluniverse/index.html || echo "⚠️ Missing Chinese expand_tooluniverse index"
-        else
-          echo "⚠️ Chinese directory not found"
-        fi
-        
-        # Check .htaccess file exists for Apache servers
-        test -f docs/_build/html/.htaccess || echo "⚠️ .htaccess file not found (may not be needed for GitHub Pages)"
-        # Verify language switcher JavaScript
-        test -f docs/_build/html/_static/language_switcher.js || echo "⚠️ Language switcher JavaScript not found"
-        echo "✅ Build verification completed"
+        echo "✅ Documentation built successfully"
+        du -sh docs/_build/html
         
     - name: Add .nojekyll file
       run: |

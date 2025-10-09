@@ -47,6 +47,8 @@ echo "========================================"
 DOC_LANGUAGES_RAW="${DOC_LANGUAGES:-en,zh_CN}"  # Default to both English and Chinese
 DOC_SKIP_REMOTE="${DOC_SKIP_REMOTE:-0}"
 DOC_SKIP_SERVER_PROMPT="${DOC_SKIP_SERVER_PROMPT:-0}"
+DOC_SKIP_INSTALL="${DOC_SKIP_INSTALL:-0}"  # Skip dependency installation if already done
+DOC_OPTIMIZED="${DOC_OPTIMIZED:-0}"  # Use optimized build settings
 DOCS_STRICT="${DOCS_STRICT:-0}"
 CI="${CI:-}"
 GITHUB_ACTIONS="${GITHUB_ACTIONS:-}"
@@ -131,30 +133,34 @@ fi
 # Step 1: Install Sphinx documentation dependencies
 # ===========================================
 # Install Python packages required for building documentation
-echo -e "\n${BLUE}📦 Installing enhanced documentation dependencies${NC}"
-cd "$PROJECT_ROOT"
-
-# Prefer local virtualenv if exists; otherwise, create one for isolation
-if [ -d ".venv" ]; then
-  # shellcheck disable=SC1091
-  source .venv/bin/activate || true
+if [ "${DOC_SKIP_INSTALL}" = "1" ]; then
+  echo -e "\n${YELLOW}⏭️ Skipping dependency installation (DOC_SKIP_INSTALL=1)${NC}"
 else
-  if command -v python3 >/dev/null 2>&1; then
-    python3 -m venv .venv || true
+  echo -e "\n${BLUE}📦 Installing enhanced documentation dependencies${NC}"
+  cd "$PROJECT_ROOT"
+
+  # Prefer local virtualenv if exists; otherwise, create one for isolation
+  if [ -d ".venv" ]; then
     # shellcheck disable=SC1091
     source .venv/bin/activate || true
+  else
+    if command -v python3 >/dev/null 2>&1; then
+      python3 -m venv .venv || true
+      # shellcheck disable=SC1091
+      source .venv/bin/activate || true
+    fi
   fi
-fi
 
-# Install via project extras if possible; fallback to explicit list
-COMMON_PACKAGES="sphinx shibuya furo pydata-sphinx-theme myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints sphinx-intl"
+  # Install via project extras if possible; fallback to explicit list
+  COMMON_PACKAGES="sphinx shibuya furo pydata-sphinx-theme myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints sphinx-intl"
 
-if command -v uv >/dev/null 2>&1; then
-  uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q $COMMON_PACKAGES 2>/dev/null || true
-else
-  pip install -q -e '.[docs]' 2>/dev/null || pip install -q $COMMON_PACKAGES 2>/dev/null || true
+  if command -v uv >/dev/null 2>&1; then
+    uv pip install -q -e '.[docs]' 2>/dev/null || uv pip install -q $COMMON_PACKAGES 2>/dev/null || true
+  else
+    pip install -q -e '.[docs]' 2>/dev/null || pip install -q $COMMON_PACKAGES 2>/dev/null || true
+  fi
+  echo -e "${GREEN}✅ Dependencies installation completed${NC}"
 fi
-echo -e "${GREEN}✅ Dependencies installation completed${NC}"
 
 # ===========================================
 # Step 2: Generate enhanced API documentation
@@ -225,10 +231,15 @@ EOF
 # Step 2.5: Update translation catalogs
 # ===========================================
 if [ "$NEEDS_TRANSLATIONS" -eq 1 ]; then
-  echo -e "\n${BLUE}🌍 Updating translation catalogs${NC}"
-  mkdir -p _build/gettext
-  sphinx-build -b gettext . _build/gettext -q || true
-  sphinx-intl update -p _build/gettext -l zh_CN >/dev/null 2>&1 || true
+  # Check if translation files need update (skip if unchanged in CI)
+  if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
+    echo -e "\n${YELLOW}🌍 Skipping translation catalog update in CI (use existing translations)${NC}"
+  else
+    echo -e "\n${BLUE}🌍 Updating translation catalogs${NC}"
+    mkdir -p _build/gettext
+    sphinx-build -b gettext . _build/gettext -q || true
+    sphinx-intl update -p _build/gettext -l zh_CN >/dev/null 2>&1 || true
+  fi
 else
   echo -e "\n${YELLOW}🌍 Skipping translation catalog update (no zh_CN in DOC_LANGUAGES)${NC}"
 fi
@@ -241,24 +252,18 @@ mkdir -p api
 # ===========================================
 # Check if sphinx-apidoc command is available
 if command -v sphinx-apidoc >/dev/null 2>&1; then
+    # Determine sphinx-apidoc flags based on optimization mode
+    if [ "${DOC_OPTIMIZED}" = "1" ]; then
+      # Optimized mode: faster builds, skip unchanged files
+      echo -e "${YELLOW}Using optimized API generation (skip unchanged files, maxdepth 4)${NC}"
+      APIDOC_FLAGS="-o api ../src/tooluniverse --separate --module-first --maxdepth 4 --templatedir=_templates"
+    else
+      # Full mode: regenerate everything
+      APIDOC_FLAGS="-f -o api ../src/tooluniverse --separate --module-first --maxdepth 6 --private --force --templatedir=_templates"
+    fi
+    
     # Use sphinx-apidoc to scan source code and generate API documentation
-    # -f: force overwrite existing files
-    # -o api: output to api directory
-    # ../src/tooluniverse: source code path
-    # --separate: create separate documentation file for each module
-    # --module-first: module name first
-    # --maxdepth 6: maximum recursion depth
-    # --private: include private members
-    # --force: force regeneration
-    # --templatedir=_templates: use custom templates
-    sphinx-apidoc -f -o api ../src/tooluniverse \
-        --separate \
-        --module-first \
-        --maxdepth 6 \
-        --private \
-        --force \
-        --templatedir=_templates \
-        2>/dev/null || true
+    sphinx-apidoc $APIDOC_FLAGS 2>/dev/null || true
 
     # Count generated API documentation files
     API_FILES=$(find api -name "*.rst" | wc -l | tr -d ' ')
@@ -311,6 +316,14 @@ cd "$SCRIPT_DIR"
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
+# Determine number of parallel jobs for Sphinx
+if [ "${DOC_OPTIMIZED}" = "1" ]; then
+  SPHINX_JOBS="-j auto"  # Use all available CPU cores
+  echo -e "${YELLOW}Using parallel build with auto jobs${NC}"
+else
+  SPHINX_JOBS=""
+fi
+
 for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
   if [ -z "$DOC_LANGUAGE" ]; then
     continue
@@ -321,7 +334,7 @@ for DOC_LANGUAGE in "${LANGUAGES[@]}"; do
     TARGET_DIR="$OUTPUT_DIR/zh-CN"
   fi
   echo -e "${YELLOW}🌐 Building language: ${DOC_LANGUAGE} -> ${TARGET_DIR}${NC}"
-  sphinx-build ${SPHINX_FLAGS} -b html -D language="$DOC_LANGUAGE" . "$TARGET_DIR" --keep-going -q || true
+  sphinx-build ${SPHINX_FLAGS} ${SPHINX_JOBS} -b html -D language="$DOC_LANGUAGE" . "$TARGET_DIR" --keep-going -q || true
 
   if [ -f "$TARGET_DIR/index.html" ]; then
     echo -e "${GREEN}   ✅ ${DOC_LANGUAGE} build succeeded${NC}"
