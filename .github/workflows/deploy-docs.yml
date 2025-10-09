@@ -38,12 +38,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Install the package with docs dependencies
+        # Install the package with docs dependencies (includes sphinx-shibuya)
         pip install -e .[docs]
-        # Install theme dependencies directly
-        pip install furo pydata-sphinx-theme sphinx_rtd_theme sphinx-copybutton sphinx-tabs sphinx-design sphinx-notfound-page myst-parser linkify-it-py sphinx-autobuild docutils
-        # Install shibuya theme - correct package name
-        pip install sphinx-shibuya
         
     - name: Verify documentation setup
       run: |
