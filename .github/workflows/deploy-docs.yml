@@ -45,10 +45,9 @@ jobs:
       run: |
         python -c "import sphinx; print(f'Sphinx version: {sphinx.__version__}')"
         # Verify theme availability
-        python -c "import furo; print('✅ Furo theme available')"
+        python -c "import shibuya; print('✅ Shibuya theme available')"
         python -c "import pydata_sphinx_theme; print('✅ PyData theme available')"
         python -c "import sphinx_rtd_theme; print('✅ RTD theme available')"
-        python -c "import shibuya; print('✅ Shibuya theme available')"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
         ls -la docs/
         ls -la docs/conf*.py
@@ -56,7 +55,7 @@ jobs:
         ls -la img/ || echo "⚠️ img directory not found"
         ls -la img/tooluniverse_logo.png || echo "⚠️ Logo file not found"
         
-    - name: Fix theme compatibility
+    - name: Fix contents directive compatibility
       run: |
         cd docs
         # Create fix script for CI environment
@@ -92,55 +91,29 @@ jobs:
             if fix_contents_directive(file_path):
                 fixed_count += 1
         
-        print(f"Fixed {fixed_count} files for Furo compatibility")
+        print(f"Fixed {fixed_count} files for Sphinx compatibility")
         EOF
         
         python fix_contents_ci.py
         
-    - name: Select and configure theme
+    - name: Verify Shibuya theme
       run: |
         cd docs
-        # Create theme selector script
-        cat > select_theme.py << 'EOF'
-        import importlib
-        import shutil
-        import os
-        
-        themes = [
-            ('furo', 'conf_furo.py', 'Furo'),
-            ('pydata_sphinx_theme', 'conf_pydata.py', 'PyData'),
-            ('sphinx_rtd_theme', 'conf.py', 'RTD Enhanced'),
-        ]
-        
-        selected_theme = None
-        for module, config, name in themes:
-            try:
-                importlib.import_module(module)
-                if os.path.exists(config):
-                    print(f"✅ Selecting {name} theme (config: {config})")
-                    if config != 'conf.py':
-                        shutil.copy2(config, 'conf.py')
-                    selected_theme = name
-                    break
-                else:
-                    print(f"⚠️ {name} theme module available but config {config} not found")
-            except ImportError:
-                print(f"❌ {name} theme not available")
-        
-        if not selected_theme:
-            print("❌ No suitable theme found! Build will fail.")
-            exit(1)
-        
-        print(f"🎨 Using {selected_theme} theme for documentation build")
-        EOF
-        
-        python select_theme.py
+        # Verify shibuya theme is available
+        python -c "import shibuya; print('✅ Shibuya theme verified')"
+        # Check that conf.py exists and uses shibuya theme
+        if grep -q "html_theme = \"shibuya\"" conf.py; then
+          echo "✅ conf.py correctly configured for Shibuya theme"
+        else
+          echo "❌ conf.py not configured for Shibuya theme"
+          exit 1
+        fi
         
         # Update logo paths in configuration files to use both original and _static paths
         cat > update_logo_path.py << 'EOF'
         import re
         
-        files_to_update = ['conf.py', 'conf_furo.py', 'conf_pydata.py']
+        files_to_update = ['conf.py']
         
         for file_name in files_to_update:
             try:
