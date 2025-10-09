@@ -54,7 +54,7 @@ sphinx-intl update -p _build/gettext -l zh_CN
 
 示例（`locale/zh_CN/LC_MESSAGES/index.po`）：
 
-```po
+```text
 msgid "🚀 Getting Started"
 msgstr "🚀 快速开始"
 

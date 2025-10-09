@@ -182,7 +182,7 @@ Search Endpoint
 
 Response format:
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
         "success": true,

@@ -102,7 +102,7 @@ For specifiction of how to prepare the patient TPM profile data, please refer to
 
 The tool returns a structured JSON response:
 
-```json
+```javascript
 {
   "prediction": {
     "is_responder": true,
