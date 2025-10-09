@@ -34,9 +34,9 @@ class MedRxivTool(BaseTool):
         # Format: /medrxiv/{start_date}/{end_date}/{cursor}/json
         from datetime import datetime, timedelta
 
-        # Search last 30 days
+        # Search last 365 days to get more comprehensive results
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=30)
+        start_date = end_date - timedelta(days=365)
 
         url = (f"{self.base_url}/medrxiv/"
                f"{start_date.strftime('%Y-%m-%d')}/"
@@ -78,19 +78,29 @@ class MedRxivTool(BaseTool):
             doi = item.get("doi")
             url = f"https://www.medrxiv.org/content/{doi}" if doi else None
 
-            # Filter by query if provided
-            if query and query.lower() not in (title or "").lower():
-                continue
+            # Filter by query if provided - search in both title and abstract
+            if query:
+                title_match = query.lower() in (title or "").lower()
+                abstract_match = query.lower() in (item.get("abstract", "") or "").lower()
+                if not (title_match or abstract_match):
+                    continue
 
             results.append(
                 {
-                    "title": title,
-                    "authors": authors,
+                    "title": title or "Title not available",
+                    "authors": authors if authors else "Author information not available",
                     "year": year,
-                    "doi": doi,
-                    "url": url,
-                    "abstract": item.get("abstract", ""),
+                    "doi": doi or "DOI not available",
+                    "url": url or "URL not available",
+                    "abstract": item.get("abstract", "Abstract not available"),
                     "source": "medRxiv",
+                    "data_quality": {
+                        "has_abstract": bool(item.get("abstract") and item.get("abstract") != "Abstract not available"),
+                        "has_authors": bool(authors),
+                        "has_year": bool(year),
+                        "has_doi": bool(doi),
+                        "has_url": bool(url)
+                    }
                 }
             )
 

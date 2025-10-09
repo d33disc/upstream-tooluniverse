@@ -32,6 +32,15 @@
                         "type": "string",
                         "description": "Title of the article"
                     },
+                    "abstract": {
+                        "type": "string",
+                        "description": "Abstract of the article (not available from PubMed API)"
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "List of author names"
+                    },
                     "journal": {
                         "type": "string",
                         "description": "Journal name where the article was published"
@@ -47,6 +56,41 @@
                     "url": {
                         "type": "string",
                         "description": "URL to the article on PubMed"
+                    },
+                    "citations": {
+                        "type": "integer",
+                        "description": "Number of citations (not available from PubMed API)"
+                    },
+                    "open_access": {
+                        "type": "boolean",
+                        "description": "Open access status (not available from PubMed API)"
+                    },
+                    "keywords": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "List of MeSH keywords"
+                    },
+                    "article_type": {
+                        "type": "string",
+                        "description": "Type of article"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Source identifier (always 'PubMed')"
+                    },
+                    "data_quality": {
+                        "type": "object",
+                        "description": "Data quality indicators",
+                        "properties": {
+                            "has_abstract": {"type": "boolean"},
+                            "has_authors": {"type": "boolean"},
+                            "has_journal": {"type": "boolean"},
+                            "has_year": {"type": "boolean"},
+                            "has_doi": {"type": "boolean"},
+                            "has_citations": {"type": "boolean"},
+                            "has_keywords": {"type": "boolean"},
+                            "has_url": {"type": "boolean"}
+                        }
                     }
                 }
             }
