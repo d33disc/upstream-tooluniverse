@@ -867,16 +867,15 @@ class VLLMClient(BaseLLMClient):
             raise ValueError("VLLM_SERVER_URL must be provided")
         
         self.model_name = model_name
-        self.server_url = server_url
-        self.logger = logger
-        
         # Ensure server_url ends with /v1 for OpenAI-compatible API
         if not server_url.endswith('/v1'):
             server_url = server_url.rstrip('/') + '/v1'
+        self.server_url = server_url
+        self.logger = logger
         
         self.client = OpenAI(
             api_key="EMPTY",
-            base_url=server_url,
+            base_url=self.server_url,
         )
 
     def test_api(self) -> None:
