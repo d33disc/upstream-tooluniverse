@@ -854,3 +854,80 @@ class OpenRouterClient(BaseLLMClient):
         
         self.logger.error("Max retries exceeded. Unable to complete the request.")
         return None
+    
+    
+class VLLMClient(BaseLLMClient):
+    def __init__(self, model_name: str, server_url: str, logger):
+        try:
+            from openai import OpenAI
+        except Exception as e:
+            raise RuntimeError("openai package not available for vLLM client") from e
+        
+        if not server_url:
+            raise ValueError("VLLM_SERVER_URL must be provided")
+        
+        self.model_name = model_name
+        # Ensure server_url ends with /v1 for OpenAI-compatible API
+        if not server_url.endswith('/v1'):
+            server_url = server_url.rstrip('/') + '/v1'
+        self.server_url = server_url
+        self.logger = logger
+        
+        self.client = OpenAI(
+            api_key="EMPTY",
+            base_url=self.server_url,
+        )
+
+    def test_api(self) -> None:
+        test_messages = [{"role": "user", "content": "ping"}]
+        try:
+            self.client.chat.completions.create(
+                model=self.model_name,
+                messages=test_messages,
+                max_tokens=8,
+                temperature=0,
+            )
+        except Exception as e:
+            raise ValueError(f"vLLM API test failed: {e}")
+
+    def infer(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: Optional[float],
+        max_tokens: Optional[int],
+        return_json: bool,
+        custom_format: Any = None,
+        max_retries: int = 5,
+        retry_delay: int = 5,
+    ) -> Optional[str]:
+        if custom_format is not None:
+            self.logger.warning("vLLM does not support custom format, ignoring")
+        
+        retries = 0
+        while retries < max_retries:
+            try:
+                kwargs: Dict[str, Any] = {
+                    "model": self.model_name,
+                    "messages": messages,
+                }
+                
+                if temperature is not None:
+                    kwargs["temperature"] = temperature
+                
+                if max_tokens is not None:
+                    kwargs["max_tokens"] = max_tokens
+                
+                if return_json:
+                    kwargs["response_format"] = {"type": "json_object"}
+                
+                resp = self.client.chat.completions.create(**kwargs)
+                return resp.choices[0].message.content
+                
+            except Exception as e:
+                self.logger.error(f"vLLM error: {e}")
+                retries += 1
+                if retries < max_retries:
+                    time.sleep(retry_delay * retries)
+        
+        self.logger.error("Max retries exceeded for vLLM request")
+        return None
