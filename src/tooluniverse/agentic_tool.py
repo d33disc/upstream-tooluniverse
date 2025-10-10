@@ -8,7 +8,7 @@ from typing import Any, Callable, Dict, List, Optional
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 from .logging_config import get_logger
-from .llm_clients import AzureOpenAIClient, GeminiClient, OpenRouterClient
+from .llm_clients import AzureOpenAIClient, GeminiClient, OpenRouterClient, VLLMClient
 
 
 # Global default fallback configuration
@@ -23,6 +23,7 @@ API_KEY_ENV_VARS = {
     "CHATGPT": ["AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT"],
     "OPENROUTER": ["OPENROUTER_API_KEY"],
     "GEMINI": ["GEMINI_API_KEY"],
+    "VLLM": ["VLLM_SERVER_URL"],
 }
 
 
@@ -201,7 +202,7 @@ class AgenticTool(BaseTool):
             f"Tool '{self.name}' failed to initialize with all available APIs"
         )
 
-    def _try_api(self, api_type: str, model_id: str) -> bool:
+    def _try_api(self, api_type: str, model_id: str, server_url: Optional[str] = None) -> bool:
         """Try to initialize a specific API and model."""
         try:
             if api_type == "CHATGPT":
@@ -210,6 +211,12 @@ class AgenticTool(BaseTool):
                 self._llm_client = OpenRouterClient(model_id, self.logger)
             elif api_type == "GEMINI":
                 self._llm_client = GeminiClient(model_id, self.logger)
+            elif api_type == "VLLM":
+                if not server_url:
+                    server_url = os.getenv("VLLM_SERVER_URL")
+                if not server_url:
+                    raise ValueError("VLLM_SERVER_URL environment variable not set")
+                self._llm_client = VLLMClient(model_id, server_url, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {api_type}")
 
@@ -243,7 +250,7 @@ class AgenticTool(BaseTool):
 
     # ------------------------------------------------------------------ LLM utilities -----------
     def _validate_model_config(self):
-        supported_api_types = ["CHATGPT", "OPENROUTER", "GEMINI"]
+        supported_api_types = ["CHATGPT", "OPENROUTER", "GEMINI", "VLLM"]
         if self._api_type not in supported_api_types:
             raise ValueError(
                 f"Unsupported API type: {self._api_type}. Supported types: {supported_api_types}"
@@ -518,6 +525,11 @@ class AgenticTool(BaseTool):
                 self._llm_client = OpenRouterClient(self._model_id, self.logger)
             elif self._api_type == "GEMINI":
                 self._llm_client = GeminiClient(self._gemini_model_id, self.logger)
+            elif self._api_type == "VLLM":
+                server_url = os.getenv("VLLM_SERVER_URL")
+                if not server_url:
+                    raise ValueError("VLLM_SERVER_URL environment variable not set")
+                self._llm_client = VLLMClient(self._model_id, server_url, self.logger)
             else:
                 raise ValueError(f"Unsupported API type: {self._api_type}")
 
