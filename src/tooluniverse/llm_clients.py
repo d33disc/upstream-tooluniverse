@@ -916,8 +916,7 @@ class VLLMClient(BaseLLMClient):
                 
                 if max_tokens is not None:
                     kwargs["max_tokens"] = max_tokens
-                # else:
-                #     kwargs["max_tokens"] = 16384                
+                
                 if return_json:
                     kwargs["response_format"] = {"type": "json_object"}
                 
