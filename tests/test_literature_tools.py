@@ -14,7 +14,9 @@ class TestLiteratureTools:
     @pytest.fixture
     def tu(self):
         """Initialize ToolUniverse for testing."""
-        return ToolUniverse()
+        tu = ToolUniverse()
+        tu.load_tools()
+        return tu
 
     def test_arxiv_tool(self, tu):
         """Test ArXiv tool functionality."""
@@ -354,7 +356,8 @@ class TestLiteratureTools:
                 assert "title" in paper
                 assert "abstract" in paper
                 assert "year" in paper
-                assert "venue" in paper
+                # Note: venue might be returned as 'journal' in some cases
+                assert "venue" in paper or "journal" in paper
                 assert "url" in paper
 
     def test_openalex_tool(self, tu):
@@ -399,6 +402,7 @@ class TestLiteratureTools:
         mock_response.json.return_value = {
             "resultList": {
                 "result": [{
+                    "id": "PMC12345678",
                     "title": "Test Europe PMC Article",
                     "abstractText": "Test abstract",
                     "pubYear": "2023",

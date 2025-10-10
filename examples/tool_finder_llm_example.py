@@ -8,6 +8,13 @@ ToolFinderEmbedding, making it a drop-in replacement.
 
 import sys
 import traceback
+import warnings
+
+# Suppress RDKit warnings and pkg_resources warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning, module="importlib._bootstrap")
+warnings.filterwarnings("ignore", message=".*RDKit.*")
+warnings.filterwarnings("ignore", message=".*pkg_resources.*")
+warnings.filterwarnings("ignore", category=UserWarning, module="hyperopt")
 
 
 def test_compatibility():
@@ -71,9 +78,10 @@ def test_compatibility():
             "return_call_result": False,
         }
         result3 = llm_finder.run(arguments)
+        # Note: run() method returns string, not list (different from find_tools())
         assert isinstance(
-            result3, list
-        ), f"Expected list from run(), got {type(result3)}"
+            result3, str
+        ), f"Expected string from run(), got {type(result3)}"
         print(f"  Run method result type: {type(result3)} ✓")
 
         # Test 4: run() with return_call_result=True

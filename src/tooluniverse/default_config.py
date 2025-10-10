@@ -66,6 +66,7 @@ default_tool_files = {
     "pubchem": os.path.join(current_dir, "data", "pubchem_tools.json"),
     "medlineplus": os.path.join(current_dir, "data", "medlineplus_tools.json"),
     "uniprot": os.path.join(current_dir, "data", "uniprot_tools.json"),
+    "cellosaurus": os.path.join(current_dir, "data", "cellosaurus_tools.json"),
     # 'software': os.path.join(current_dir, 'data', 'software_tools.json'),
     # Package tools - categorized software tools
     "software_bioinformatics": os.path.join(

@@ -1,15 +1,16 @@
 from tooluniverse import ToolUniverse
 import json
+import time
 
 # Step 1: Initialize tool universe
 tooluni = ToolUniverse()
 tooluni.load_tools()
 
-# Test queries for XML tools using MedlinePlus health topics data
+# Test queries for XML tools using MedlinePlus health topics data (reduced limits for faster testing)
 test_queries = [
     {
         "name": "mesh_get_subjects_by_pharmacological_action",
-        "arguments": {"query": "calcium", "limit": 10},
+        "arguments": {"query": "calcium", "limit": 3},
     },
     {
         "name": "mesh_get_subjects_by_subject_scope_or_definition",
@@ -19,14 +20,14 @@ test_queries = [
         "name": "mesh_get_subjects_by_subject_name",
         "arguments": {
             "query": "antibody",
-            "limit": 10,
+            "limit": 3,
         },
     },
     {
         "name": "mesh_get_subjects_by_subject_id",
         "arguments": {
             "query": "D007306",
-            "limit": 5,
+            "limit": 2,
         },
     },
     {
@@ -101,13 +102,20 @@ test_queries = [
 
 test_queries = test_queries
 
-# Run all test queries
+# Run all test queries (with timeout and error handling)
 for idx, query in enumerate(test_queries):
     print(f"\n[{idx+1}] Running tool: {query['name']}")
     print(f"Arguments: {query['arguments']}")
     print("-" * 60)
 
-    # try:
-    result = tooluni.run(query)
-    print("✅ Success!")
-    print(json.dumps(result, indent=2, ensure_ascii=False))
+    try:
+        start_time = time.time()
+        result = tooluni.run(query)
+        end_time = time.time()
+        
+        print(f"✅ Success! (took {end_time - start_time:.2f}s)")
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        print("Skipping to next query...")
+        continue

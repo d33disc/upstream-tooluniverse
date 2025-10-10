@@ -277,8 +277,10 @@ def test_external_file_tools(tooluni):
             "DrugSafetyAnalyzer",
             "SimpleExample",
             "TestDependencyLoading",
+            "ToolDiscover",  # Skip ToolDiscover as it requires LLM calls and may timeout
+            "ToolDescriptionOptimizer",  # Skip ToolDescriptionOptimizer as it requires LLM calls and may timeout
         ]:
-            # Skip these as they are tested in other functions
+            # Skip these as they are tested in other functions or may timeout
             continue
 
         print(f"\nTesting {tool_name}:")
@@ -287,7 +289,20 @@ def test_external_file_tools(tooluni):
             test_args = {}
             if "parameter" in tool and "properties" in tool["parameter"]:
                 for param_name, param_info in tool["parameter"]["properties"].items():
-                    if param_info["type"] == "string":
+                    if param_name == "tool_config":
+                        # Special handling for ToolDescriptionOptimizer
+                        test_args[param_name] = {
+                            "name": "test_tool",
+                            "description": "A test tool for optimization",
+                            "type": "RestfulTool",
+                            "parameter": {
+                                "type": "object",
+                                "properties": {
+                                    "query": {"type": "string", "description": "Search query"}
+                                }
+                            }
+                        }
+                    elif param_info["type"] == "string":
                         test_args[param_name] = "test_input"
                     elif param_info["type"] == "number":
                         test_args[param_name] = 1

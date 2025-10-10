@@ -7,10 +7,11 @@ Minimal test: validate API key during AgenticTool initialization.
 
 import os
 import sys
+import pytest
 
 # Ensure src/ is importable
 CURRENT_DIR = os.path.dirname(__file__)
-SRC_DIR = os.path.join(CURRENT_DIR, "src")
+SRC_DIR = os.path.join(CURRENT_DIR, "..", "src")
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
@@ -20,6 +21,47 @@ except ImportError:
     # Fallback for when running from different directory
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
     from tooluniverse.agentic_tool import AgenticTool  # type: ignore
+
+
+@pytest.mark.skipif(
+    not os.getenv("AZURE_OPENAI_ENDPOINT") or not os.getenv("AZURE_OPENAI_API_KEY"),
+    reason="Azure OpenAI credentials not available"
+)
+def test_api_key_validation():
+    """Test API key validation during AgenticTool initialization."""
+    config = {
+        "name": "api_key_validation_test",
+        "description": "Minimal API key validation test",
+        "type": "AgenticTool",
+        "prompt": "Test: {q}",
+        "input_arguments": ["q"],
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "q": {"type": "string", "description": "input", "required": True}
+            },
+        },
+        "return_schema": {"type": "string"},
+        "model": "o4-mini-0416",
+        "max_tokens": 1,
+    }
+
+    try:
+        tool = AgenticTool(config)
+        result = tool.run({"q": "test"})
+        print(f"✅ API key validation successful: {result}")
+        
+        # Check if result is a dictionary with success field
+        if isinstance(result, dict):
+            assert result.get("success", False), "Expected successful result"
+            assert "result" in result, "Expected 'result' field in response"
+            print(f"✅ API response: {result.get('result', 'No result')}")
+        else:
+            assert isinstance(result, str), "Expected string or dict result"
+            
+    except Exception as e:
+        print(f"❌ API key validation failed: {e}")
+        pytest.fail(f"API key validation failed: {e}")
 
 
 def main() -> None:

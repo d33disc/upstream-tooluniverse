@@ -7,11 +7,12 @@ Batch test: AgenticTool with multiple Azure OpenAI deployments.
 
 import os
 import sys
+import pytest
 from typing import List
 
 # Ensure src/ is importable
 CURRENT_DIR = os.path.dirname(__file__)
-SRC_DIR = os.path.join(CURRENT_DIR, "src")
+SRC_DIR = os.path.join(CURRENT_DIR, "..", "src")
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
@@ -25,7 +26,7 @@ except ImportError:
 # Chat-capable deployment IDs to test (skip embeddings)
 MODELS: List[str] = [
     "gpt-4.1",
-    "gpt-4.1-mini",
+    "gpt-4.1-mini", 
     "gpt-4.1-nano",
     "gpt-4o-1120",
     "gpt-4o-0806",
@@ -35,6 +36,16 @@ MODELS: List[str] = [
 ]
 
 
+@pytest.fixture(params=MODELS)
+def model_id(request):
+    """Fixture providing model IDs for parameterized testing."""
+    return request.param
+
+
+@pytest.mark.skipif(
+    not os.getenv("AZURE_OPENAI_ENDPOINT") or not os.getenv("AZURE_OPENAI_API_KEY"),
+    reason="Azure OpenAI credentials not available"
+)
 def test_model(model_id: str) -> None:
     print(f"\n=== Testing model: {model_id} ===")
     config = {

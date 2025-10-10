@@ -5,12 +5,15 @@
 """
 import subprocess
 import sys
+import signal
+import time
 
 
-def test_tool_call_directly(hooks_enabled=False):
+def test_tool_call_directly(hooks_enabled=False, timeout=30):
     """直接测试工具调用"""
     print(f"\n{'='*60}")
     print(f"测试模式: {'开启 hooks' if hooks_enabled else '关闭 hooks'}")
+    print(f"超时设置: {timeout}秒")
     print(f"{'='*60}")
 
     # 构建命令
@@ -83,7 +86,7 @@ print(f"结果预览: {{result_str[:200]}}...")
 
     try:
         # 等待执行完成
-        stdout, stderr = process.communicate(timeout=60)
+        stdout, stderr = process.communicate(timeout=timeout)
 
         print("标准输出:")
         print(stdout)
@@ -151,11 +154,11 @@ def main():
     print("测试工具: OpenTargets_get_target_gene_ontology_by_ensemblID")
     print("测试参数: ensemblId=ENSG00000012048")
 
-    # 测试关闭 hooks
-    result_no_hooks = test_tool_call_directly(hooks_enabled=False)
+    # 测试关闭 hooks (减少超时时间)
+    result_no_hooks = test_tool_call_directly(hooks_enabled=False, timeout=20)
 
-    # 测试开启 hooks
-    result_with_hooks = test_tool_call_directly(hooks_enabled=True)
+    # 测试开启 hooks (减少超时时间)
+    result_with_hooks = test_tool_call_directly(hooks_enabled=True, timeout=20)
 
     # 对比结果
     print(f"\n{'='*60}")

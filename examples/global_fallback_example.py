@@ -6,7 +6,7 @@ Tests the system-wide default fallback chain.
 
 import os
 import json
-from src.tooluniverse.agentic_tool import AgenticTool
+from tooluniverse.agentic_tool import AgenticTool
 
 
 def test_default_global_fallback():

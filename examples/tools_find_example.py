@@ -13,6 +13,13 @@ import json
 import asyncio
 import sys
 import os
+import warnings
+
+# Suppress RDKit warnings and pkg_resources warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning, module="importlib._bootstrap")
+warnings.filterwarnings("ignore", message=".*RDKit.*")
+warnings.filterwarnings("ignore", message=".*pkg_resources.*")
+warnings.filterwarnings("ignore", category=UserWarning, module="hyperopt")
 
 # Add the src directory to the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
