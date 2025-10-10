@@ -991,520 +991,520 @@ msgstr "**名称**：``get_plip_info``"
 msgid ""
 "**Description**: Get comprehensive information about PLIP – protein-ligand "
 "interaction profiler"
-msgstr ""
+msgstr "**描述**：获取有关 PLIP（蛋白质-配体相互作用分析器）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:666
 #: 5daf12b5f9d14b0cbe71dad22ffff107
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about PLIP"
-msgstr ""
+msgstr "``info_type``（字符串）（必需）关于 PLIP 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:683
 #: 2dddc85df99340429ee8c1157fdf7dd0
 msgid "**get_poliastro_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_poliastro_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:685
 #: 2db4d067a5974175ad6302100b30a237
 msgid "Get comprehensive information about poliastro – astrodynamics library"
-msgstr ""
+msgstr "获取有关 poliastro——航天动力学库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 5e786fe3d10d4f58bdb6d16ac20eca38
 msgid "get_poliastro_info tool specification"
-msgstr ""
+msgstr "get_poliastro_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:691
 #: 94a98e91de094090b3b4ed3e2e2c1ccb
 msgid "**Name**: ``get_poliastro_info``"
-msgstr ""
+msgstr "**名称**: ``get_poliastro_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:693
 #: 82ce72f81798458d8d3b8f248afae73f
 msgid ""
 "**Description**: Get comprehensive information about poliastro – "
 "astrodynamics library"
-msgstr ""
+msgstr "**描述**：获取有关poliastro——航天动力学库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:697
 #: 0164cb83694c4e059ed1490226f36504
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "poliastro"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关poliastro的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:714
 #: d32ca67b97fc42d296df7e1f6884a915
 msgid "**get_prody_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_prody_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:716
 #: 698e2be77c204d0aa0dbd79aedc3dced
 msgid "Get comprehensive information about ProDy – protein dynamics analysis"
-msgstr ""
+msgstr "获取有关ProDy——蛋白质动力学分析的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 37bf7f2b8f694a939c1778020c4f6bf3
 msgid "get_prody_info tool specification"
-msgstr ""
+msgstr "get_prody_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:722
 #: 694ae192ea62497dbf39df6db5c02910
 msgid "**Name**: ``get_prody_info``"
-msgstr ""
+msgstr "**名称**: ``get_prody_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:724
 #: bb394f76c9f24fd0a35cb0a78f16b0c4
 msgid ""
 "**Description**: Get comprehensive information about ProDy – protein "
 "dynamics analysis"
-msgstr ""
+msgstr "**描述**：获取有关 ProDy（蛋白质动力学分析）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:728
 #: 4c424dbae0a3427dbfb3a89a7a780ed5
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "ProDy"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 ProDy 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:745
 #: 4dd809029e9640398063cdae865428d2
 msgid "**get_pybigwig_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pybigwig_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:747
 #: 21262953148340e08b1f457035a673a4
 msgid ""
 "Get comprehensive information about pyBigWig – BigWig file access in Python"
-msgstr ""
+msgstr "获取有关 pyBigWig 的全面信息 – 在 Python 中访问 BigWig 文件"
 
 #: ../../tools/bioinformatics_core_tools.rst b6848829dd10459f84663ff4c84aab49
 msgid "get_pybigwig_info tool specification"
-msgstr ""
+msgstr "get_pybigwig_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:753
 #: 44180f131ac94e28a33f0083f20f0002
 msgid "**Name**: ``get_pybigwig_info``"
-msgstr ""
+msgstr "**名称**: ``get_pybigwig_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:755
 #: d65f7960ee5240af9528055a8d9e34b7
 msgid ""
 "**Description**: Get comprehensive information about pyBigWig – BigWig file "
 "access in Python"
-msgstr ""
+msgstr "**描述**：获取有关 pyBigWig 的全面信息——在 Python 中访问 BigWig 文件"
 
 #: ../../tools/bioinformatics_core_tools.rst:759
 #: 401114728def492fade4f330655da2dc
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "pyBigWig"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的关于 pyBigWig 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:776
 #: 04a59e9ca8334aa5bf1eb3fb50385aaa
 msgid "**get_pykalman_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pykalman_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:778
 #: d091c15342a343afafba211b352aa01b
 msgid ""
 "Get comprehensive information about PyKalman – Kalman filtering and "
 "smoothing"
-msgstr ""
+msgstr "获取有关 PyKalman 的全面信息——卡尔曼滤波与平滑"
 
 #: ../../tools/bioinformatics_core_tools.rst 9e2dc397acae4bf8b800c50e58f9677e
 msgid "get_pykalman_info tool specification"
-msgstr ""
+msgstr "get_pykalman_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:784
 #: eda4f3fdd56f451cb656296f2956ff3f
 msgid "**Name**: ``get_pykalman_info``"
-msgstr ""
+msgstr "**名称**: ``get_pykalman_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:786
 #: bcf766dac7c04d92978db6d7cf7eb9ec
 msgid ""
 "**Description**: Get comprehensive information about PyKalman – Kalman "
 "filtering and smoothing"
-msgstr ""
+msgstr "**描述**：获取有关 PyKalman 的全面信息——卡尔曼滤波与平滑"
 
 #: ../../tools/bioinformatics_core_tools.rst:790
 #: c9b98ae68a5f409eaa4ba0bb3b8e79d7
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyKalman"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PyKalman 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:807
 #: 949a7eb16cc649ec9ade54d8cbcb0baa
 msgid "**get_pymassspec_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pymassspec_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:809
 #: db08e4d28b604e90983090d66e7c4ba5
 msgid ""
 "Get comprehensive information about PyMassSpec – mass spectrometry data "
 "analysis"
-msgstr ""
+msgstr "获取有关 PyMassSpec 的全面信息——质谱数据分析"
 
 #: ../../tools/bioinformatics_core_tools.rst 1a4c0f5f19ed494889b0140e1771e6c7
 msgid "get_pymassspec_info tool specification"
-msgstr ""
+msgstr "get_pymassspec_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:815
 #: 9d25c2f4f8ee4168940e0eb3433a0b4f
 msgid "**Name**: ``get_pymassspec_info``"
-msgstr ""
+msgstr "**名称**: ``get_pymassspec_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:817
 #: 4aed8a7185ed48e98fc0755154d9b563
 msgid ""
 "**Description**: Get comprehensive information about PyMassSpec – mass "
 "spectrometry data analysis"
-msgstr ""
+msgstr "**描述**：获取关于 PyMassSpec 的全面信息——质谱数据分析"
 
 #: ../../tools/bioinformatics_core_tools.rst:821
 #: b7d8fd5fc8004f2faecef358f8857b44
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyMassSpec"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PyMassSpec 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:838
 #: 8186dcbb509b40c8a7d6e30e60e91d39
 msgid "**get_pymed_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pymed_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:840
 #: d47aac425bbc4fab806463d7bbf4cc88
 msgid "Get comprehensive information about PyMed – PubMed access in Python"
-msgstr ""
+msgstr "获取有关 PyMed 的全面信息 – 在 Python 中访问 PubMed"
 
 #: ../../tools/bioinformatics_core_tools.rst 10c5040f317d4837ba57ada558db7ec4
 msgid "get_pymed_info tool specification"
-msgstr ""
+msgstr "get_pymed_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:846
 #: edee3c845139477684393826f3ae62c8
 msgid "**Name**: ``get_pymed_info``"
-msgstr ""
+msgstr "**名称**: ``get_pymed_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:848
 #: 137e290231fb498f9fd31f66abf1a400
 msgid ""
 "**Description**: Get comprehensive information about PyMed – PubMed access "
 "in Python"
-msgstr ""
+msgstr "**描述**：获取有关 PyMed 的全面信息——在 Python 中访问 PubMed"
 
 #: ../../tools/bioinformatics_core_tools.rst:868
 #: d0aa43fee2934ef6b5bab091eaa5d187
 msgid "**get_pypdf2_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pypdf2_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:870
 #: e1eb8f3975594c8eb835181dcb5d37cc
 msgid "Get comprehensive information about PyPDF2 – PDF manipulation library"
-msgstr ""
+msgstr "获取有关 PyPDF2——PDF 操作库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 17dcd69ae0ed45d4817b63b966a4d1e7
 msgid "get_pypdf2_info tool specification"
-msgstr ""
+msgstr "get_pypdf2_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:876
 #: 4ec58e261eb842fcb7b189335bd2d2fd
 msgid "**Name**: ``get_pypdf2_info``"
-msgstr ""
+msgstr "**名称**: ``get_pypdf2_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:878
 #: d6972630416944c2bbbcc3d2c72490eb
 msgid ""
 "**Description**: Get comprehensive information about PyPDF2 – PDF "
 "manipulation library"
-msgstr ""
+msgstr "**描述**：获取有关 PyPDF2——PDF 操作库的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:882
 #: e6f5fad4c7eb451baa9a2444162e248f
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyPDF2"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PyPDF2 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:899
 #: 8fddfdf8ab914f94afc03a85f6c8bd28
 msgid "**get_pyscreener_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pyscreener_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:901
 #: 040c926de8124b71bde11eb5d527d320
 msgid ""
 "Get comprehensive information about PyScreener – high-throughput virtual "
 "screening in Python"
-msgstr ""
+msgstr "获取有关 PyScreener 的全面信息——基于 Python 的高通量虚拟筛选"
 
 #: ../../tools/bioinformatics_core_tools.rst dc903325b76d458d85de63e7821d3682
 msgid "get_pyscreener_info tool specification"
-msgstr ""
+msgstr "get_pyscreener_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:907
 #: 9ae8b3f57eca47279a4f1d1e9a3f2f4d
 msgid "**Name**: ``get_pyscreener_info``"
-msgstr ""
+msgstr "**名称**: ``get_pyscreener_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:909
 #: 635ecc6431a14d5e968a3f90afc6ab33
 msgid ""
 "**Description**: Get comprehensive information about PyScreener – high-"
 "throughput virtual screening in Python"
-msgstr ""
+msgstr "**描述**：获取有关 PyScreener 的全面信息——基于 Python 的高通量虚拟筛选"
 
 #: ../../tools/bioinformatics_core_tools.rst:913
 #: ef1e42dc67a54f189cd0f5635e8c33e6
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyScreener"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PyScreener 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:930
 #: 5cd4e036e10f4251a3f62d61c8e38bfd
 msgid "**get_pytdc_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_pytdc_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:932
 #: d3dc732edef241e18765ccf50fdc6216
 msgid ""
 "Get comprehensive information about PyTDC – Therapeutics Data Commons in "
 "Python"
-msgstr ""
+msgstr "获取有关 PyTDC – Therapeutics Data Commons in Python 的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst e7af1dbf37474757b25c230577035898
 msgid "get_pytdc_info tool specification"
-msgstr ""
+msgstr "get_pytdc_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:938
 #: 7215e13859954711a2aab05603f5943d
 msgid "**Name**: ``get_pytdc_info``"
-msgstr ""
+msgstr "**名称**: ``get_pytdc_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:940
 #: 5c49f1dd94cf471e82d7cb1658d91c68
 msgid ""
 "**Description**: Get comprehensive information about PyTDC – Therapeutics "
 "Data Commons in Python"
-msgstr ""
+msgstr "**描述**：获取有关 PyTDC – 基于 Python 的治疗数据共享平台的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:944
 #: f0e80ff6973c4d8082c2ea30025f148d
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "PyTDC"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 PyTDC 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:961
 #: 8c8fcd194e4b4ea782e1c77573d9e684
 msgid "**get_requests_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_requests_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:963
 #: dc4ff871e132499ca741f7bc9cde3a11
 msgid ""
 "Get comprehensive information about Requests - Python HTTP library for "
 "humans"
-msgstr ""
+msgstr "获取关于 Requests 的全面信息 —— 为人类设计的 Python HTTP 库"
 
 #: ../../tools/bioinformatics_core_tools.rst c517061f69454f9db474b80ee8b079b2
 msgid "get_requests_info tool specification"
-msgstr ""
+msgstr "get_requests_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:969
 #: 00a367f3477641188f15308c18d6af4e
 msgid "**Name**: ``get_requests_info``"
-msgstr ""
+msgstr "**名称**: ``get_requests_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:971
 #: 69c3960170fb45bda43c3d17bbb449b0
 msgid ""
 "**Description**: Get comprehensive information about Requests - Python HTTP "
 "library for humans"
-msgstr ""
+msgstr "**描述**：获取关于 Requests 的全面信息——为人类设计的 Python HTTP 库"
 
 #: ../../tools/bioinformatics_core_tools.rst:991
 #: 63463ee2a02a4b3981f5f5e9b274fcc5
 msgid "**get_ruptures_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_ruptures_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:993
 #: 245f088d5bde48529143f12bfd5d771a
 msgid ""
 "Get comprehensive information about ruptures – change point detection "
 "library"
-msgstr ""
+msgstr "获取关于ruptures的全面信息——变点检测库"
 
 #: ../../tools/bioinformatics_core_tools.rst 4b663d94a24740448d94258a631ecd65
 msgid "get_ruptures_info tool specification"
-msgstr ""
+msgstr "get_ruptures_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:999
 #: fda967488aa046e8a7a8225bf29824c7
 msgid "**Name**: ``get_ruptures_info``"
-msgstr ""
+msgstr "**名称**: ``get_ruptures_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:1001
 #: 6ace2e99bc814d80a9e09711987faf4d
 msgid ""
 "**Description**: Get comprehensive information about ruptures – change point"
 " detection library"
-msgstr ""
+msgstr "**描述**：获取有关 ruptures（变点检测库）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:1005
 #: e10776bb3c8b4d1c956b9023bde65072
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "ruptures"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的断裂相关信息的类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:1022
 #: 6efdcbb998d441558b95482276df8667
 msgid "**get_scholarly_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scholarly_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:1024
 #: 9767d4227d2348169fbadb4068003299
 msgid ""
 "Get comprehensive information about scholarly – Google Scholar data "
 "retrieval"
-msgstr ""
+msgstr "获取有关学术数据的全面信息 – Google Scholar 数据检索"
 
 #: ../../tools/bioinformatics_core_tools.rst e6fe8e35cab64c25bce3f63d63aa4c14
 msgid "get_scholarly_info tool specification"
-msgstr ""
+msgstr "get_scholarly_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:1030
 #: 211ed706a44b49c4ab0e1b6e5eeb6db6
 msgid "**Name**: ``get_scholarly_info``"
-msgstr ""
+msgstr "**名称**: ``get_scholarly_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:1032
 #: 3ec067bc532a4b7d938b72d823d763eb
 msgid ""
 "**Description**: Get comprehensive information about scholarly – Google "
 "Scholar data retrieval"
-msgstr ""
+msgstr "**描述**：获取有关学术信息的全面数据 —— Google Scholar 数据检索"
 
 #: ../../tools/bioinformatics_core_tools.rst:1036
 #: 680a9139408840c98ea054a4b2eae702
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "scholarly"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的学术信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:1053
 #: 5bf5109688354403bf2d5aace62f9419
 msgid "**get_scikit_bio_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_scikit_bio_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:1055
 #: 237a50abf8ec46599527478a7d3f314c
 msgid ""
 "Get comprehensive information about scikit-bio – bioinformatics library "
 "built on scientific Pytho..."
-msgstr ""
+msgstr "获取关于scikit-bio的全面信息——这是一个基于科学Python构建的生物信息学库"
 
 #: ../../tools/bioinformatics_core_tools.rst c820e27fb65d44e98236fa50d9a9aa7b
 msgid "get_scikit_bio_info tool specification"
-msgstr ""
+msgstr "get_scikit_bio_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:1061
 #: c743ecde6b804f26aad6ea52dc8b0331
 msgid "**Name**: ``get_scikit_bio_info``"
-msgstr ""
+msgstr "**名称**: ``get_scikit_bio_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:1063
 #: 0115b42d5e574e08b8b114fafaaa877e
 msgid ""
 "**Description**: Get comprehensive information about scikit-bio – "
 "bioinformatics library built on scientific Python stack"
-msgstr ""
+msgstr "**描述**：获取关于 scikit-bio 的全面信息——一个基于科学 Python 技术栈构建的生物信息学库"
 
 #: ../../tools/bioinformatics_core_tools.rst:1083
 #: 89198ec22c37451da1ddaf15caac94a5
 msgid "**get_trackpy_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_trackpy_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:1085
 #: 1e4b1e7f154d4dd98787a6a44daf1157
 msgid ""
 "Get comprehensive information about trackpy – particle tracking toolkit for "
 "Python"
-msgstr ""
+msgstr "获取有关 trackpy 的全面信息——适用于 Python 的粒子追踪工具包"
 
 #: ../../tools/bioinformatics_core_tools.rst fedaf39914ec4290af1df1f49483c9f1
 msgid "get_trackpy_info tool specification"
-msgstr ""
+msgstr "get_trackpy_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:1091
 #: 2d9c49f7a9c84f8d9cf56abb52600790
 msgid "**Name**: ``get_trackpy_info``"
-msgstr ""
+msgstr "**名称**: ``get_trackpy_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:1093
 #: ca24a14259a443c58c1d428d9baa060d
 msgid ""
 "**Description**: Get comprehensive information about trackpy – particle "
 "tracking toolkit for Python"
-msgstr ""
+msgstr "**描述**：获取关于 trackpy 的全面信息——用于 Python 的粒子跟踪工具包"
 
 #: ../../tools/bioinformatics_core_tools.rst:1097
 #: 7419ea5cef5344f98a47c0dcfc86be6e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "trackpy"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）要检索的有关 trackpy 的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:1114
 #: ef92cf26a94c408c8ba77f3ab7625f70
 msgid "**get_tskit_info** (Type: PackageTool)"
-msgstr ""
+msgstr "**get_tskit_info**（类型：PackageTool）"
 
 #: ../../tools/bioinformatics_core_tools.rst:1116
 #: 3eee0af886344ddab94daab55211732c
 msgid ""
 "Get comprehensive information about tskit – tree sequence toolkit for "
 "population genetics"
-msgstr ""
+msgstr "获取有关 tskit——用于群体遗传学的树序列工具包的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst 9209821aca484248a3e570ff1d8d981a
 msgid "get_tskit_info tool specification"
-msgstr ""
+msgstr "get_tskit_info 工具规范"
 
 #: ../../tools/bioinformatics_core_tools.rst:1122
 #: e6d7383e69b64ce392a4b25f314f0002
 msgid "**Name**: ``get_tskit_info``"
-msgstr ""
+msgstr "**名称**: ``get_tskit_info``"
 
 #: ../../tools/bioinformatics_core_tools.rst:1124
 #: 02cd9f598175459c84814e549fb67e36
 msgid ""
 "**Description**: Get comprehensive information about tskit – tree sequence "
 "toolkit for population genetics"
-msgstr ""
+msgstr "**描述**：获取有关 tskit（用于群体遗传学的树序列工具包）的全面信息"
 
 #: ../../tools/bioinformatics_core_tools.rst:1128
 #: 3da87f4b7eea497682a5177bf26d63d5
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "tskit"
-msgstr ""
+msgstr "``info_type``（字符串）（必填）关于 tskit 要检索的信息类型"
 
 #: ../../tools/bioinformatics_core_tools.rst:1145
 #: af3464446f07475bab53a51fff9765b2
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/bioinformatics_core_tools.rst:1147
 #: ac87e651f5724d219c47691e31a0e5c5
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/bioinformatics_core_tools.rst:1148
 #: d1763611625d4774b5b6e8ec3224bfe1
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

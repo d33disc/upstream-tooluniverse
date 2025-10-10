@@ -492,28 +492,28 @@ msgstr "分析您的更改："
 
 #: ../../about/contributing.rst:448 02ee4e3044a447f5a6a8355923c27e48
 msgid "Recognition"
-msgstr ""
+msgstr "识别"
 
 #: ../../about/contributing.rst:450 064b03fe97ac469a9265acb05750b1ca
 msgid "Contributors are recognized in:"
-msgstr ""
+msgstr "贡献者将被列入以下内容："
 
 #: ../../about/contributing.rst:452 35f3c38137ba409ca52b27a92041c7e9
 msgid "Release notes"
-msgstr ""
+msgstr "发布说明"
 
 #: ../../about/contributing.rst:453 c27b1a7bd1d24f0cbeec939cc820a0f3
 msgid "Contributors file"
-msgstr ""
+msgstr "贡献者文件"
 
 #: ../../about/contributing.rst:454 197b1aac5d9a44bcb6ba165585062a79
 msgid "Documentation acknowledgments"
-msgstr ""
+msgstr "文档致谢"
 
 #: ../../about/contributing.rst:455 b7d753f5707c4e99ad3bc77fb7635981
 msgid "Annual contributor highlights"
-msgstr ""
+msgstr "年度贡献者亮点"
 
 #: ../../about/contributing.rst:457 c07c4aca5e624d169faf3efb3fa65ad3
 msgid "Thank you for contributing to ToolUniverse! 🧬🔬"
-msgstr ""
+msgstr "感谢您为 ToolUniverse 做出的贡献！🧬🔬"

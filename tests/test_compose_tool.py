@@ -10,23 +10,28 @@ ComposeTool is a composable tool that supports:
 - Inline code definition (write Python code directly in JSON configuration)
 - External file definition (define complex logic through Python files)
 - Nested calling between tools (using call_tool function)
-
-Usage:
-1. Run the entire test: python test_compose_tool.py
-2. View test results to confirm all functionality works properly
 """
 
 import sys
 import os
 import json
+import pytest
 
 # Add src directory to Python path to import tooluniverse modules
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from tooluniverse.execute_function import ToolUniverse  # noqa: E402
+from tooluniverse.execute_function import ToolUniverse
 
 
-def test_nested_calls():
+@pytest.fixture(scope="session")
+def tooluni():
+    """Initialize tool universe for all tests."""
+    tu = ToolUniverse()
+    tu.load_tools()
+    return tu
+
+
+def test_nested_calls(tooluni):
     """
     Test ComposeTool nested calling functionality
 
@@ -101,7 +106,7 @@ def test_nested_calls():
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
-def test_simple_math():
+def test_simple_math(tooluni):
     """
     Test ComposeTool's mathematical operations functionality
 
@@ -178,7 +183,7 @@ def test_simple_math():
     print(f"  Result: {result}")
 
 
-def test_config_file_tools():
+def test_config_file_tools(tooluni):
     """
     Test ComposeTool loaded from configuration files
 
@@ -239,7 +244,7 @@ def test_config_file_tools():
     print(f"ComposeTool instances available: {compose_tools}")
 
 
-def test_external_file_tools():
+def test_external_file_tools(tooluni):
     """
     Test additional ComposeTool functionality
 
@@ -300,7 +305,7 @@ def test_external_file_tools():
             print("This is expected if the required atomic tools are not loaded.")
 
 
-def test_dependency_auto_loading():
+def test_dependency_auto_loading(tooluni):
     """
     Test ComposeTool automatic dependency loading functionality
 

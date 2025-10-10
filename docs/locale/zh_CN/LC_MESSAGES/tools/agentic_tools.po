@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  ToolUniverse\n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-09 00:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tools/agentic_tools.rst:2 cb08b35251ed4b1a85ad9261781da9d4
@@ -27,8 +27,8 @@ msgstr "智能体工具"
 #: ../../tools/agentic_tools.rst:4 f8815617ed62432f83cb4e0e5cb7eedf
 #, fuzzy
 msgid ""
-"**Configuration File**: ``agentic_tools.json`` **Tool Type**: Local "
-"**Tools Count**: 33"
+"**Configuration File**: ``agentic_tools.json`` **Tool Type**: Local **Tools "
+"Count**: 33"
 msgstr ""
 "**配置文件**：``agentic_tools.json``  \n"
 "**工具类型**：本地  \n"
@@ -137,8 +137,8 @@ msgstr "**类型**：``AgenticTool``"
 #: ../../tools/agentic_tools.rst:24 64bbd68fbd374f8abf78b0ed7560864d
 msgid ""
 "**Description**: Performs deep analysis of code quality including "
-"complexity, security, performance, and maintainability metrics with "
-"domain-specific expertise"
+"complexity, security, performance, and maintainability metrics with domain-"
+"specific expertise"
 msgstr "**描述**：利用领域专长对代码质量进行深入分析，包括复杂性、安全性、性能和可维护性等指标"
 
 #: ../../tools/agentic_tools.rst:26 ../../tools/agentic_tools.rst:66
@@ -179,18 +179,19 @@ msgstr "**参数：**"
 
 #: ../../tools/agentic_tools.rst:28 e6d30617330642fab3c323103235c2a4
 msgid ""
-"``source_code`` (string) (required) The source code to analyze for "
-"quality assessment"
+"``source_code`` (string) (required) The source code to analyze for quality "
+"assessment"
 msgstr "``source_code``（字符串）（必填）用于质量评估分析的源代码"
 
 #: ../../tools/agentic_tools.rst:31 055ba9b842e14571865b07f8cfc53eb1
 msgid ""
-"``language`` (string) (optional) Programming language (python, "
-"javascript, etc.)"
+"``language`` (string) (optional) Programming language (python, javascript, "
+"etc.)"
 msgstr "``language``（字符串）（可选）编程语言（如：python、javascript 等）"
 
 #: ../../tools/agentic_tools.rst:34 5d753258a8134255af73309414d0a7a8
-msgid "``analysis_depth`` (string) (optional) Level of analysis depth to perform"
+msgid ""
+"``analysis_depth`` (string) (optional) Level of analysis depth to perform"
 msgstr "``analysis_depth``（字符串）（可选）执行分析深度的级别"
 
 #: ../../tools/agentic_tools.rst:37 b0dd1c3e21ee422591ce0f9a1159fa72
@@ -241,8 +242,8 @@ msgstr "**ArgumentDescriptionOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:56 f255c177a159488cb4ed64e25a64c70e
 msgid ""
-"Optimizes the descriptions of tool arguments/parameters based on test "
-"case results and actual usa..."
+"Optimizes the descriptions of tool arguments/parameters based on test case "
+"results and actual usa..."
 msgstr "根据测试用例结果和实际使用情况优化工具参数/参数的描述。"
 
 #: ../../tools/agentic_tools.rst bd370aae12b84e9fa5d29600345e5d75
@@ -278,8 +279,8 @@ msgstr "**CodeOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:91 b48f74ba67854981b358bfba0f8f2ac2
 msgid ""
-"Optimizes code implementation for tools based on quality evaluation. "
-"Takes tool configuration and..."
+"Optimizes code implementation for tools based on quality evaluation. Takes "
+"tool configuration and..."
 msgstr "根据质量评估优化工具的代码实现。支持工具配置并..."
 
 #: ../../tools/agentic_tools.rst 542df7488c074008853465f26d9c5718
@@ -292,21 +293,21 @@ msgstr "**名称**: ``CodeOptimizer``"
 
 #: ../../tools/agentic_tools.rst:99 b43a4f1b013e4c70bf57ef1b8add0de4
 msgid ""
-"**Description**: Optimizes code implementation for tools based on quality"
-" evaluation. Takes tool configuration and quality evaluation results to "
+"**Description**: Optimizes code implementation for tools based on quality "
+"evaluation. Takes tool configuration and quality evaluation results to "
 "produce improved source code."
 msgstr "**描述**：根据质量评估优化工具的代码实现。利用工具配置和质量评估结果生成改进后的源代码。"
 
 #: ../../tools/agentic_tools.rst:103 25a762529fe14c3aa9076e2a3b3d5409
 msgid ""
-"``tool_config`` (string) (required) JSON string containing the complete "
-"tool configuration including current implementation"
+"``tool_config`` (string) (required) JSON string containing the complete tool"
+" configuration including current implementation"
 msgstr "``tool_config``（字符串）（必填）包含完整工具配置的 JSON 字符串，包括当前实现"
 
 #: ../../tools/agentic_tools.rst:106 c720840029554d71bfdea88f35f44448
 msgid ""
-"``quality_evaluation`` (string) (required) JSON string containing quality"
-" evaluation results and feedback"
+"``quality_evaluation`` (string) (required) JSON string containing quality "
+"evaluation results and feedback"
 msgstr "``quality_evaluation``（字符串）（必填）包含质量评估结果和反馈的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:124 f72190708f5840a0ae724d0d94b87cec
@@ -329,10 +330,10 @@ msgstr "**名称**：``CodeQualityAnalyzer``"
 
 #: ../../tools/agentic_tools.rst:134 ce4d3e70ebe94fb0bd879832ad5c9594
 msgid ""
-"**Description**: Analyzes code quality from multiple dimensions including"
-" algorithmic correctness, functional implementation capability, "
-"performance characteristics, and best practices. Provides detailed "
-"feedback and improvement suggestions."
+"**Description**: Analyzes code quality from multiple dimensions including "
+"algorithmic correctness, functional implementation capability, performance "
+"characteristics, and best practices. Provides detailed feedback and "
+"improvement suggestions."
 msgstr "**描述**：从算法正确性、功能实现能力、性能特性及最佳实践等多个维度分析代码质量。提供详细的反馈和改进建议。"
 
 #: ../../tools/agentic_tools.rst:138 fdb4a57ffc9e4a6089f2c9254e55f4e2
@@ -347,25 +348,27 @@ msgstr "``tool_description``（字符串）（必填）工具预期功能的描�
 
 #: ../../tools/agentic_tools.rst:144 c21c75edb42948e393503e0756129fcd
 msgid ""
-"``tool_parameters`` (string) (required) JSON string of tool parameters "
-"and their types"
+"``tool_parameters`` (string) (required) JSON string of tool parameters and "
+"their types"
 msgstr "``tool_parameters``（字符串）（必填）工具参数及其类型的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:147 c4a8ba1c3f4e428888f32bb521091ef6
 msgid ""
-"``implementation_code`` (string) (required) The actual implementation "
-"code to analyze"
+"``implementation_code`` (string) (required) The actual implementation code "
+"to analyze"
 msgstr "``implementation_code``（字符串）（必填）用于分析的实际实现代码"
 
 #: ../../tools/agentic_tools.rst:150 79300432a5f446be82714665c1204421
-msgid "``test_cases`` (string) (required) JSON string of test cases for the tool"
+msgid ""
+"``test_cases`` (string) (required) JSON string of test cases for the tool"
 msgstr "``test_cases``（字符串）（必填）工具测试用例的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:153 b3ce52b05261433fac5978f8c3a24857
 msgid ""
-"``test_execution_results`` (string) (optional) JSON string of test "
-"execution results including pass/fail status and actual outputs"
-msgstr "``test_execution_results``（字符串）（可选）包含测试执行结果的 JSON 字符串，包括通过/失败状态及实际输出内容"
+"``test_execution_results`` (string) (optional) JSON string of test execution"
+" results including pass/fail status and actual outputs"
+msgstr ""
+"``test_execution_results``（字符串）（可选）包含测试执行结果的 JSON 字符串，包括通过/失败状态及实际输出内容"
 
 #: ../../tools/agentic_tools.rst:174 68c54c814c5648408736f31d4ce6314e
 msgid "**DataAnalysisValidityReviewer** (Type: AgenticTool)"
@@ -373,8 +376,7 @@ msgstr "**数据分析有效性审核员**（类型：自主工具）"
 
 #: ../../tools/agentic_tools.rst:176 ca8b44bedb5746d1a75b190a46664da9
 msgid ""
-"Checks statistical choices, assumption testing, and reporting "
-"transparency."
+"Checks statistical choices, assumption testing, and reporting transparency."
 msgstr "检查统计选择、假设检验及报告透明度。"
 
 #: ../../tools/agentic_tools.rst 60d445a9d60140298c6cbb4c97c56be1
@@ -415,22 +417,22 @@ msgstr "**名称**：``DescriptionAnalyzer``"
 
 #: ../../tools/agentic_tools.rst:215 0fa4f50b90a9490a96965b8b7730f967
 msgid ""
-"**Description**: Analyzes a tool's original description and the results "
-"of multiple test cases, then suggests an improved description that is "
-"more accurate, comprehensive, and user-friendly. Optionally provides a "
-"rationale for the changes."
+"**Description**: Analyzes a tool's original description and the results of "
+"multiple test cases, then suggests an improved description that is more "
+"accurate, comprehensive, and user-friendly. Optionally provides a rationale "
+"for the changes."
 msgstr "**描述**：分析工具的原始描述及多个测试用例的结果，随后建议一个更准确、全面且用户友好的改进描述。可选地提供修改理由。"
 
 #: ../../tools/agentic_tools.rst:219 95a03d4f56264a258ff94f8105cffe89
 msgid ""
-"``original_description`` (string) (required) The original description of "
-"the tool."
+"``original_description`` (string) (required) The original description of the"
+" tool."
 msgstr "``original_description``（字符串）（必填）工具的原始描述。"
 
 #: ../../tools/agentic_tools.rst:222 cf2d0d3febf7410e8265bc416b6c5cd5
 msgid ""
-"``test_results`` (string) (required) A JSON string containing a list of "
-"test case input/output pairs."
+"``test_results`` (string) (required) A JSON string containing a list of test"
+" case input/output pairs."
 msgstr "``test_results``（字符串）（必填）包含测试用例输入/输出对列表的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:240 5799ae22b5e344f2801bbfd810ce1e8a
@@ -453,12 +455,13 @@ msgstr "**名称**：``DescriptionQualityEvaluator``"
 
 #: ../../tools/agentic_tools.rst:250 490ecaf4400b45f8879cbc1166b0e197
 msgid ""
-"**Description**: Evaluates the quality of tool descriptions and parameter"
-" descriptions, providing a score and specific feedback for improvements."
+"**Description**: Evaluates the quality of tool descriptions and parameter "
+"descriptions, providing a score and specific feedback for improvements."
 msgstr "**描述**：评估工具描述和参数描述的质量，提供评分及具体改进建议。"
 
 #: ../../tools/agentic_tools.rst:254 1767498acba44a47ac33b2d0c07e2dfd
-msgid "``tool_description`` (string) (required) The tool description to evaluate."
+msgid ""
+"``tool_description`` (string) (required) The tool description to evaluate."
 msgstr "``tool_description``（字符串）（必填）用于评估的工具描述。"
 
 #: ../../tools/agentic_tools.rst:257 df749babb8634c509a9fbd8968ecb6b4
@@ -516,8 +519,8 @@ msgstr "``validation_aspects``（字符串）（可选）用于验证的具体�
 
 #: ../../tools/agentic_tools.rst:302 d3274c3966cb491d8e1f283d66ffe236
 msgid ""
-"``implementation_code`` (string) (optional) Implementation code to "
-"validate (optional)"
+"``implementation_code`` (string) (optional) Implementation code to validate "
+"(optional)"
 msgstr "``implementation_code``（字符串）（可选）用于验证的实现代码（可选）"
 
 #: ../../tools/agentic_tools.rst:320 d0a4bfabc7214646ba1bc099160e4914
@@ -552,8 +555,8 @@ msgstr "**ExperimentalDesignScorer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:353 6ba25febd6314e6f9f1d86f05040a1a7
 msgid ""
-"Assesses a proposed experimental design by assigning scores and "
-"structured feedback on hypothesis..."
+"Assesses a proposed experimental design by assigning scores and structured "
+"feedback on hypothesis..."
 msgstr "通过对假设进行评分和结构化反馈，评估所提议的实验设计..."
 
 #: ../../tools/agentic_tools.rst 453d449cf666417eb7b7b4fe16536b48
@@ -566,12 +569,12 @@ msgstr "**名称**：``ExperimentalDesignScorer``"
 
 #: ../../tools/agentic_tools.rst:361 0f81e06f54854b09b8866638845197cc
 msgid ""
-"**Description**: Assesses a proposed experimental design by assigning "
-"scores and structured feedback on hypothesis clarity, variable "
-"definitions, sample size, controls, randomization, measurement methods, "
-"statistical analysis, bias mitigation, ethical considerations, and "
-"overall feasibility."
-msgstr "**描述**：通过对假设清晰度、变量定义、样本量、对照组、随机化、测量方法、统计分析、偏差控制、伦理考量及整体可行性进行评分和结构化反馈，评估所提实验设计。"
+"**Description**: Assesses a proposed experimental design by assigning scores"
+" and structured feedback on hypothesis clarity, variable definitions, sample"
+" size, controls, randomization, measurement methods, statistical analysis, "
+"bias mitigation, ethical considerations, and overall feasibility."
+msgstr ""
+"**描述**：通过对假设清晰度、变量定义、样本量、对照组、随机化、测量方法、统计分析、偏差控制、伦理考量及整体可行性进行评分和结构化反馈，评估所提实验设计。"
 
 #: ../../tools/agentic_tools.rst:365 c58a5d33e49a4545b19bad3dabdbf9e5
 msgid ""
@@ -582,8 +585,8 @@ msgstr "``hypothesis``（字符串）（必填）需明确陈述待检验的研�
 #: ../../tools/agentic_tools.rst:368 ddc46207a7134a36b0f56576ba3f3117
 msgid ""
 "``design_description`` (string) (required) A detailed description of the "
-"proposed experimental design, including variables, methods, sample "
-"details, and planned analyses."
+"proposed experimental design, including variables, methods, sample details, "
+"and planned analyses."
 msgstr "``design_description``（字符串）（必填） 对拟议实验设计的详细描述，包括变量、方法、样本详情及计划的分析内容。"
 
 #: ../../tools/agentic_tools.rst:386 7326b3205b1646ba9a732bd6c5219d48
@@ -592,8 +595,8 @@ msgstr "**HypothesisGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:388 7b54a7adc43f4ce49f32fa7f25b108bd
 msgid ""
-"Generates research hypotheses based on provided background context, "
-"domain, and desired format. U..."
+"Generates research hypotheses based on provided background context, domain, "
+"and desired format. U..."
 msgstr "根据提供的背景信息、领域和所需格式生成研究假设。U..."
 
 #: ../../tools/agentic_tools.rst 791e169b6e8a432fae16735f80a2a5a9
@@ -606,9 +609,9 @@ msgstr "**名称**：``HypothesisGenerator``"
 
 #: ../../tools/agentic_tools.rst:396 4452c59fdd9a47e18a60eda98ce962ee
 msgid ""
-"**Description**: Generates research hypotheses based on provided "
-"background context, domain, and desired format. Uses AI to propose novel,"
-" testable hypotheses for scientific exploration."
+"**Description**: Generates research hypotheses based on provided background "
+"context, domain, and desired format. Uses AI to propose novel, testable "
+"hypotheses for scientific exploration."
 msgstr "**描述**：基于提供的背景信息、领域和所需格式生成研究假设。利用人工智能提出新颖且可验证的假设，支持科学探索。"
 
 #: ../../tools/agentic_tools.rst:400 8cfd498234dc40218c6254a3bf3f72ce
@@ -637,15 +640,15 @@ msgstr "``hypothesis_format``（字符串）（可选） 可选指令，用于�
 
 #: ../../tools/agentic_tools.rst:412 dce9e9b3ee4446fdb8b68f46a22e2c45
 msgid ""
-"If–Then Statements: \"If [independent variable condition], then [expected"
-" outcome].\""
+"If–Then Statements: \"If [independent variable condition], then [expected "
+"outcome].\""
 msgstr "条件语句：“如果[自变量条件]，那么[预期结果]。”"
 
 #: ../../tools/agentic_tools.rst:413 62cc7046f525496cb60c73cdd578a7fc
 msgid ""
 "Null and Alternative (Statistical): • H₀ (Null): \"There is no "
-"difference/effect/association between X and Y.\" • H₁ (Alt): \"There is a"
-" difference/effect/association between X and Y.\""
+"difference/effect/association between X and Y.\" • H₁ (Alt): \"There is a "
+"difference/effect/association between X and Y.\""
 msgstr ""
 "零假设与备择假设（统计学）：  \n"
 "• H₀（零假设）：“X 与 Y 之间不存在差异/效应/关联。”  \n"
@@ -659,14 +662,14 @@ msgstr "关联型（以相关性为重点）：“[变量A] 与 [变量B] 之间
 
 #: ../../tools/agentic_tools.rst:417 d27e6b0a01224f05a2196647adaac048
 msgid ""
-"Directional (Non-If–Then): \"Increasing/decreasing [Variable A] will lead"
-" to [directional change] in [Variable B].\""
+"Directional (Non-If–Then): \"Increasing/decreasing [Variable A] will lead to"
+" [directional change] in [Variable B].\""
 msgstr "方向性（非条件式）：“增加/减少[变量A]将导致[变量B]的[方向性变化]。”"
 
 #: ../../tools/agentic_tools.rst:418 eb55e9f4258b4801af978faa0c4ecada
 msgid ""
-"Comparative (Group Comparison): \"Group A will show higher/lower "
-"[dependent measure] compared to Group B under [condition].\""
+"Comparative (Group Comparison): \"Group A will show higher/lower [dependent "
+"measure] compared to Group B under [condition].\""
 msgstr "比较（组间比较）：“在[条件]下，A组的[因变量]将高于/低于B组。”"
 
 #: ../../tools/agentic_tools.rst:419 9d5296d99abe4294978c43c023b565c8
@@ -677,8 +680,8 @@ msgstr "机械性：“由于[机制或过程]，[变量A]将导致[变量B]。�
 
 #: ../../tools/agentic_tools.rst:420 0711b6cf0a8646e694138c3130e13275
 msgid ""
-"Descriptive (Exploratory/Pattern-Oriented): \"Population X exhibits "
-"pattern Y in context Z.\""
+"Descriptive (Exploratory/Pattern-Oriented): \"Population X exhibits pattern "
+"Y in context Z.\""
 msgstr "描述性（探索性/模式导向）：“群体X在情境Z中表现出模式Y。”"
 
 #: ../../tools/agentic_tools.rst:422 631fbdc92eaa4b5f8a138751e222f2d6
@@ -705,9 +708,9 @@ msgstr "**名称**：``LabelGenerator``"
 
 #: ../../tools/agentic_tools.rst:450 84e6496b5c484245b9b8312b057cafae
 msgid ""
-"**Description**: Generates relevant keyword labels for tools based on "
-"their name, description, parameters, and category. Creates a "
-"comprehensive list of tags for tool discovery and categorization."
+"**Description**: Generates relevant keyword labels for tools based on their "
+"name, description, parameters, and category. Creates a comprehensive list of"
+" tags for tool discovery and categorization."
 msgstr "**描述**：根据工具的名称、描述、参数和类别生成相关的关键词标签。创建用于工具发现和分类的完整标签列表。"
 
 #: ../../tools/agentic_tools.rst:454 60047c589ae348dfaa1f911dc9c56a5e
@@ -716,14 +719,14 @@ msgstr "``tool_name``（字符串）（必填）工具名称"
 
 #: ../../tools/agentic_tools.rst:457 01ad83224b0742989b70e246f5540979
 msgid ""
-"``tool_description`` (string) (required) Detailed description of what the"
-" tool does"
+"``tool_description`` (string) (required) Detailed description of what the "
+"tool does"
 msgstr "``tool_description``（字符串）（必填）工具功能的详细描述"
 
 #: ../../tools/agentic_tools.rst:460 a32a5fc1346845feb13a9ed3f56252e4
 msgid ""
-"``tool_parameters`` (string) (required) JSON string describing the tool's"
-" input parameters and their types"
+"``tool_parameters`` (string) (required) JSON string describing the tool's "
+"input parameters and their types"
 msgstr "``tool_parameters``（字符串）（必填）描述工具输入参数及其类型的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:463 3f1cfb1ac575497d9c4885e17474745b
@@ -734,8 +737,8 @@ msgstr "``category``（字符串）（必填）工具所属的一般类别或领
 
 #: ../../tools/agentic_tools.rst:466 dc9074e2a9e14099b5b787177c08f02d
 msgid ""
-"``existing_labels`` (string) (optional) JSON array string of existing "
-"labels to consider reusing (optional)"
+"``existing_labels`` (string) (optional) JSON array string of existing labels"
+" to consider reusing (optional)"
 msgstr "``existing_labels``（字符串）（可选）用于考虑重用的现有标签的 JSON 数组字符串（可选）"
 
 #: ../../tools/agentic_tools.rst:486 493a74aace7c45ec991eb191fc3c64da
@@ -743,7 +746,8 @@ msgid "**LiteratureContextReviewer** (Type: AgenticTool)"
 msgstr "**LiteratureContextReviewer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:488 577a9dfdb8df476bb1f65bfea61e65c7
-msgid "Reviews coverage, relevance, and critical synthesis of prior scholarship."
+msgid ""
+"Reviews coverage, relevance, and critical synthesis of prior scholarship."
 msgstr "审查先前学术研究的覆盖范围、相关性及批判性综合。"
 
 #: ../../tools/agentic_tools.rst f18a9a4229ab402b9a4c2e7d98fff6ef
@@ -790,15 +794,13 @@ msgstr "**名称**：``MedicalLiteratureReviewer``"
 msgid ""
 "**Description**: Conducts systematic reviews of medical literature on "
 "specific topics. Synthesizes findings from multiple studies and provides "
-"evidence-based conclusions with structured analysis and quality "
-"assessment."
+"evidence-based conclusions with structured analysis and quality assessment."
 msgstr "**描述**：对特定主题的医学文献进行系统性综述。综合多项研究结果，提供基于证据的结论，并进行结构化分析和质量评估。"
 
 #: ../../tools/agentic_tools.rst:535 86cc2f5c2297483eb0a13e22167983e6
 msgid ""
-"``research_topic`` (string) (required) The specific medical/research "
-"topic for literature review (e.g., 'efficacy of drug X in treating "
-"condition Y')."
+"``research_topic`` (string) (required) The specific medical/research topic "
+"for literature review (e.g., 'efficacy of drug X in treating condition Y')."
 msgstr "``research_topic``（字符串）（必填） 文献综述的具体医学/研究主题（例如，“药物X治疗疾病Y的疗效”）。"
 
 #: ../../tools/agentic_tools.rst:538 de49b226901743409a026b0de744897c
@@ -809,17 +811,19 @@ msgstr "``literature_content``（字符串）（必填）文献内容，包括�
 
 #: ../../tools/agentic_tools.rst:541 50a8dcf67cd74d0eafa024caf61adf2e
 msgid ""
-"``focus_area`` (string) (required) Primary focus area for the review "
-"(e.g., 'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', "
-"'biomarker validation')."
-msgstr "``focus_area``（字符串）（必填）评审的主要关注领域（例如，“治疗效果”、“安全性概况”、“诊断准确性”、“生物标志物验证”）。"
+"``focus_area`` (string) (required) Primary focus area for the review (e.g., "
+"'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', 'biomarker "
+"validation')."
+msgstr ""
+"``focus_area``（字符串）（必填）评审的主要关注领域（例如，“治疗效果”、“安全性概况”、“诊断准确性”、“生物标志物验证”）。"
 
 #: ../../tools/agentic_tools.rst:544 6084277b22344c85a7436e4b18d330fb
 msgid ""
-"``study_types`` (string) (required) Types of studies to prioritize in the"
-" analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort"
-" studies', 'case-control studies')."
-msgstr "``study_types``（字符串）（必填）分析中优先考虑的研究类型（例如，“随机对照试验”、“荟萃分析”、“队列研究”、“病例对照研究”）。"
+"``study_types`` (string) (required) Types of studies to prioritize in the "
+"analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort "
+"studies', 'case-control studies')."
+msgstr ""
+"``study_types``（字符串）（必填）分析中优先考虑的研究类型（例如，“随机对照试验”、“荟萃分析”、“队列研究”、“病例对照研究”）。"
 
 #: ../../tools/agentic_tools.rst:547 2b29c09aad4845e183322a4d1c3ea628
 msgid ""
@@ -837,562 +841,576 @@ msgstr "``review_scope``（字符串）（必填）审查范围（例如，“�
 
 #: ../../tools/agentic_tools.rst:572 e2001989d8d34d4487c1700f5fa45e8c
 msgid "**MedicalTermNormalizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**MedicalTermNormalizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:574 7579b4bd730c48828781a737b794f5bb
 msgid ""
-"Identifies and corrects misspelled drug or disease names, returning a "
-"list of plausible standardi..."
-msgstr ""
+"Identifies and corrects misspelled drug or disease names, returning a list "
+"of plausible standardi..."
+msgstr "识别并纠正拼写错误的药物或疾病名称，返回一组可能的标准化名称列表。"
 
 #: ../../tools/agentic_tools.rst 397114e27ee242958dcc891be1e5b651
 msgid "MedicalTermNormalizer tool specification"
-msgstr ""
+msgstr "MedicalTermNormalizer 工具规范"
 
 #: ../../tools/agentic_tools.rst:580 072f18d06a2c4a2e85296ec8b092d594
 msgid "**Name**: ``MedicalTermNormalizer``"
-msgstr ""
+msgstr "**名称**: ``MedicalTermNormalizer``"
 
 #: ../../tools/agentic_tools.rst:582 63577f11b3964174a1330ca33bcff070
 msgid ""
-"**Description**: Identifies and corrects misspelled drug or disease "
-"names, returning a list of plausible standardized terms."
-msgstr ""
+"**Description**: Identifies and corrects misspelled drug or disease names, "
+"returning a list of plausible standardized terms."
+msgstr "**描述**：识别并纠正拼写错误的药物或疾病名称，返回一组可能的标准化术语列表。"
 
 #: ../../tools/agentic_tools.rst:586 2d7e0b11c1d847219e3f9fdd34bbf836
 msgid ""
-"``raw_terms`` (string) (required) A comma- or whitespace-separated string"
-" containing one misspelled drug or disease name."
-msgstr ""
+"``raw_terms`` (string) (required) A comma- or whitespace-separated string "
+"containing one misspelled drug or disease name."
+msgstr "``raw_terms``（字符串）（必填）一个以逗号或空格分隔的字符串，包含一个拼写错误的药物或疾病名称。"
 
 #: ../../tools/agentic_tools.rst:603 b4050d0140864d31bae8770237b9591f
 msgid "**MethodologyRigorReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**方法学严谨性审查器**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:605 d6ebbf4ea3914309b0e2d5f1ab2526b6
-msgid "Evaluates design appropriateness, sampling, and procedural transparency."
-msgstr ""
+msgid ""
+"Evaluates design appropriateness, sampling, and procedural transparency."
+msgstr "评估设计适用性、抽样方法和程序透明度。"
 
 #: ../../tools/agentic_tools.rst 4f6e66406d6842dbb4d6eee330579c8b
 msgid "MethodologyRigorReviewer tool specification"
-msgstr ""
+msgstr "方法学严谨性审查工具规范"
 
 #: ../../tools/agentic_tools.rst:611 c10a8f05a5e14845b0ead53d320791e9
 msgid "**Name**: ``MethodologyRigorReviewer``"
-msgstr ""
+msgstr "**名称**: ``MethodologyRigorReviewer``"
 
 #: ../../tools/agentic_tools.rst:613 b1e769d2b041481fb689b463a0a4f3f5
 msgid ""
-"**Description**: Evaluates design appropriateness, sampling, and "
-"procedural transparency."
-msgstr ""
+"**Description**: Evaluates design appropriateness, sampling, and procedural "
+"transparency."
+msgstr "**描述**：评估设计的适当性、抽样方法和程序透明性。"
 
 #: ../../tools/agentic_tools.rst:617 6edb826527d04dd2b13ba04f258d2873
 msgid "``methods_section`` (string) (required) Full Methods text"
-msgstr ""
+msgstr "``methods_section``（字符串）（必填）完整方法文本"
 
 #: ../../tools/agentic_tools.rst:634 f3c17dea7e5c41b0b75416cae6ead733
 msgid "**NoveltySignificanceReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**新颖性重要性审查者**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:636 66012af6299446c38274bc2c1551e75f
 msgid ""
-"Provides a structured peer-review of the work's originality and potential"
-" impact."
-msgstr ""
+"Provides a structured peer-review of the work's originality and potential "
+"impact."
+msgstr "提供对作品原创性和潜在影响的结构化同行评审。"
 
 #: ../../tools/agentic_tools.rst 6f9b9ac0038941c7858a02b3a57e689b
 msgid "NoveltySignificanceReviewer tool specification"
-msgstr ""
+msgstr "新颖性与重要性评审工具规范"
 
 #: ../../tools/agentic_tools.rst:642 aa5902224b9c461487efe5962ec4d477
 msgid "**Name**: ``NoveltySignificanceReviewer``"
-msgstr ""
+msgstr "**名称**: ``NoveltySignificanceReviewer``"
 
 #: ../../tools/agentic_tools.rst:644 1d7c61ea55f3418e908eb76b7deec670
 msgid ""
-"**Description**: Provides a structured peer-review of the work's "
-"originality and potential impact."
-msgstr ""
+"**Description**: Provides a structured peer-review of the work's originality"
+" and potential impact."
+msgstr "**描述**：提供对作品原创性和潜在影响的结构化同行评审。"
 
 #: ../../tools/agentic_tools.rst:648 b5476dc9636c455d98f3f1df7bb7390f
 msgid "``paper_title`` (string) (required) Manuscript title"
-msgstr ""
+msgstr "``paper_title``（字符串）（必填）稿件标题"
 
 #: ../../tools/agentic_tools.rst:651 916493e6d59643f8a9aac7360ec333f2
 msgid "``abstract`` (string) (required) Manuscript abstract"
-msgstr ""
+msgstr "``abstract``（字符串）（必填）稿件摘要"
 
 #: ../../tools/agentic_tools.rst:654 6c2ea06866854c25861d5bc3c7e15953
 msgid "``manuscript_text`` (string) (required) Full manuscript text"
-msgstr ""
+msgstr "``manuscript_text``（字符串）（必填）完整手稿文本"
 
 #: ../../tools/agentic_tools.rst:673 2ae93e04e4704101801b4f4334a31ed8
 msgid "**ProtocolOptimizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ProtocolOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:675 2ec82353588e4f14bf6ed06a98bc5a91
 msgid ""
 "Reviews an initial protocol and delivers targeted revisions that improve "
 "clarity, feasibility, ri..."
-msgstr ""
+msgstr "审查初始方案并提供针对性的修订，以提高清晰度、可行性、降低风险，并优化整体实施效果。"
 
 #: ../../tools/agentic_tools.rst 5bd4fa34392f45d0a2be61b9e9de3830
 msgid "ProtocolOptimizer tool specification"
-msgstr ""
+msgstr "协议优化器工具规范"
 
 #: ../../tools/agentic_tools.rst:681 8641751f9d11411fad7006af831ad0d5
 msgid "**Name**: ``ProtocolOptimizer``"
-msgstr ""
+msgstr "**名称**: ``ProtocolOptimizer``"
 
 #: ../../tools/agentic_tools.rst:683 ed512d3ac6db48e7aa599cc75b9e7f66
 msgid ""
-"**Description**: Reviews an initial protocol and delivers targeted "
-"revisions that improve clarity, feasibility, risk-management, and "
-"evaluation rigor."
-msgstr ""
+"**Description**: Reviews an initial protocol and delivers targeted revisions"
+" that improve clarity, feasibility, risk-management, and evaluation rigor."
+msgstr "**描述**：审查初始协议并提供针对性的修订，以提升清晰度、可行性、风险管理能力和评估的严谨性。"
 
 #: ../../tools/agentic_tools.rst:687 db9aad8750674cf285e21a9f39e67da9
 msgid "``initial_protocol`` (string) (required) No description"
-msgstr ""
+msgstr "``initial_protocol``（字符串）（必填）暂无描述"
 
 #: ../../tools/agentic_tools.rst:704 6b888a6986a64bb5b4389869e9413d76
 msgid "**QuestionRephraser** (Type: AgenticTool)"
 msgstr ""
+"**QuestionRephraser**（类型：AgenticTool）\n"
+"\n"
+"上下文：文档"
 
 #: ../../tools/agentic_tools.rst:706 deae368d36974995adaf2d94009b4373
 msgid ""
 "Generates three distinct paraphrases of a given question while ensuring "
 "answer options remain val..."
-msgstr ""
+msgstr "生成给定问题的三个不同的改写版本，同时确保答案选项保持有效。"
 
 #: ../../tools/agentic_tools.rst 87e2d37e418d4c64a3b28dbebe04ca39
 msgid "QuestionRephraser tool specification"
-msgstr ""
+msgstr "问题重述工具规格"
 
 #: ../../tools/agentic_tools.rst:712 f8c9b4b3471249a28e450ad7fbc6839a
 msgid "**Name**: ``QuestionRephraser``"
-msgstr ""
+msgstr "**名称**: ``QuestionRephraser``"
 
 #: ../../tools/agentic_tools.rst:714 96ebac1c2bc546338d7ea4d4283bc732
 msgid ""
-"**Description**: Generates three distinct paraphrases of a given question"
-" while ensuring answer options remain valid and applicable."
-msgstr ""
+"**Description**: Generates three distinct paraphrases of a given question "
+"while ensuring answer options remain valid and applicable."
+msgstr "**描述**：生成给定问题的三个不同改写版本，同时确保答案选项仍然有效且适用。"
 
 #: ../../tools/agentic_tools.rst:718 64b5d848c16e4abda00a11b91fa081a6
 msgid ""
-"``question`` (string) (required) The original question text to be "
-"rephrased"
-msgstr ""
+"``question`` (string) (required) The original question text to be rephrased"
+msgstr "``question``（字符串）（必填）需要改写的原始问题文本"
 
 #: ../../tools/agentic_tools.rst:721 8796e46090d541c9a4ddb914a3a5eb92
 msgid ""
 "``options`` (string) (optional) Answer options (e.g., multiple choice "
-"options) that should remain valid for the rephrased questions. Leave "
-"empty if no options are provided."
-msgstr ""
+"options) that should remain valid for the rephrased questions. Leave empty "
+"if no options are provided."
+msgstr "``options``（字符串）（可选）答案选项（例如，多项选择的选项），应在改写后的问题中保持有效。如果未提供选项，请留空。"
 
 #: ../../tools/agentic_tools.rst:738 755d0a23bd4245dc85669e1695976ca8
 msgid "**ReproducibilityTransparencyReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**可复现性透明性审查工具**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:740 60bc37842bf4486398b36643deeb8f81
 msgid "Evaluates data, code, and protocol availability for replication."
-msgstr ""
+msgstr "评估数据、代码和协议的可用性以进行复现。"
 
 #: ../../tools/agentic_tools.rst 8ff35e80815248ef9eec905c79a4b1cf
 msgid "ReproducibilityTransparencyReviewer tool specification"
-msgstr ""
+msgstr "可重复性透明性审查工具规范"
 
 #: ../../tools/agentic_tools.rst:746 91757f927fff451da45b8603e5fd422a
 msgid "**Name**: ``ReproducibilityTransparencyReviewer``"
-msgstr ""
+msgstr "**名称**: ``ReproducibilityTransparencyReviewer``"
 
 #: ../../tools/agentic_tools.rst:748 5b3000e81f5f4ad3914074f66a007582
 msgid ""
 "**Description**: Evaluates data, code, and protocol availability for "
 "replication."
-msgstr ""
+msgstr "**描述**：评估数据、代码和协议的可用性以进行复现。"
 
 #: ../../tools/agentic_tools.rst:752 4cb1083e7588408fb80136cc05d2b920
 msgid "``availability_statement`` (string) (required) No description"
-msgstr ""
+msgstr "``availability_statement``（字符串）（必填）暂无描述"
 
 #: ../../tools/agentic_tools.rst:769 0a3ff17428f54cb7bd9b9c38b6329dd7
 msgid "**ResultsInterpretationReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**结果解释审阅者**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:771 06f5f1fee99242ebb32e9c5fdb1518f6
-msgid "Judges whether conclusions are data-justified and limitations addressed."
-msgstr ""
+msgid ""
+"Judges whether conclusions are data-justified and limitations addressed."
+msgstr "判断结论是否有数据支持，以及是否解决了局限性。"
 
 #: ../../tools/agentic_tools.rst fea4c60fa14641aaa98267d41448aea6
 msgid "ResultsInterpretationReviewer tool specification"
-msgstr ""
+msgstr "结果解释审阅工具规范"
 
 #: ../../tools/agentic_tools.rst:777 99f1766130c647369214e73f21389934
 msgid "**Name**: ``ResultsInterpretationReviewer``"
-msgstr ""
+msgstr "**名称**: ``ResultsInterpretationReviewer``"
 
 #: ../../tools/agentic_tools.rst:779 3f114e3a44784ae7a2043613f6e5398d
 msgid ""
 "**Description**: Judges whether conclusions are data-justified and "
 "limitations addressed."
-msgstr ""
+msgstr "**描述**：判断结论是否有数据支持以及是否解决了局限性。"
 
 #: ../../tools/agentic_tools.rst:783 6ae879929339449e96cadac597c8f1ac
 msgid "``results_section`` (string) (required) No description"
-msgstr ""
+msgstr "``results_section``（字符串）（必填）无描述"
 
 #: ../../tools/agentic_tools.rst:786 e496f1f42342493896b3c925646b471d
 msgid "``discussion_section`` (string) (required) No description"
-msgstr ""
+msgstr "``discussion_section``（字符串）（必填）无描述"
 
 #: ../../tools/agentic_tools.rst:804 b067618a5b2f4721a130930d830d0383
 msgid "**ScientificTextSummarizer** (Type: AgenticTool)"
 msgstr ""
+"**ScientificTextSummarizer**（类型：AgenticTool）\n"
+"\n"
+"上下文：文档"
 
 #: ../../tools/agentic_tools.rst:806 419bf05002794b48b36e6a088836a8a0
 msgid ""
-"Summarizes biomedical research texts, abstracts, or papers with specified"
-" length and focus areas...."
-msgstr ""
+"Summarizes biomedical research texts, abstracts, or papers with specified "
+"length and focus areas...."
+msgstr "总结生物医学研究文本、摘要或论文，并根据指定的长度和重点领域进行整理。"
 
 #: ../../tools/agentic_tools.rst a6d7a57295094e198368389b5baaeacf
 msgid "ScientificTextSummarizer tool specification"
-msgstr ""
+msgstr "科学文本摘要工具规格"
 
 #: ../../tools/agentic_tools.rst:812 cc28fb87ed964cf1a140a6f8beed3888
 msgid "**Name**: ``ScientificTextSummarizer``"
-msgstr ""
+msgstr "**名称**: ``ScientificTextSummarizer``"
 
 #: ../../tools/agentic_tools.rst:814 980d279d7cc64fd6b2354f5b35eb4c00
 msgid ""
-"**Description**: Summarizes biomedical research texts, abstracts, or "
-"papers with specified length and focus areas. Uses AI to extract key "
-"findings, methodology, and conclusions from complex biomedical "
-"literature."
-msgstr ""
+"**Description**: Summarizes biomedical research texts, abstracts, or papers "
+"with specified length and focus areas. Uses AI to extract key findings, "
+"methodology, and conclusions from complex biomedical literature."
+msgstr "**描述**：总结生物医学研究文本、摘要或论文，支持指定长度和关注领域。利用人工智能从复杂的生物医学文献中提取关键发现、研究方法和结论。"
 
 #: ../../tools/agentic_tools.rst:818 3f262feee1db41e48a32d1e88546ffe7
 msgid ""
-"``text`` (string) (required) The biomedical text, abstract, or paper "
-"content to be summarized."
-msgstr ""
+"``text`` (string) (required) The biomedical text, abstract, or paper content"
+" to be summarized."
+msgstr "``text``（字符串）（必填）需要摘要的生物医学文本、摘要或论文内容。"
 
 #: ../../tools/agentic_tools.rst:821 43009b9f2ec5455283f0d22dce677241
 msgid ""
 "``summary_length`` (string) (required) Desired length of summary (e.g., "
 "'50', '100', '200 words')."
-msgstr ""
+msgstr "``summary_length``（字符串）（必填）摘要的期望长度（例如：'50'、'100'、'200 words'）。"
 
 #: ../../tools/agentic_tools.rst:824 4518b5553e5c4608b1d2c7a75f436303
 msgid ""
-"``focus_area`` (string) (required) What to focus on in the summary (e.g.,"
-" 'methodology', 'results', 'clinical implications', 'drug interactions')."
-msgstr ""
+"``focus_area`` (string) (required) What to focus on in the summary (e.g., "
+"'methodology', 'results', 'clinical implications', 'drug interactions')."
+msgstr "``focus_area``（字符串）（必填）摘要中需要关注的重点（例如：“方法论”、“结果”、“临床意义”、“药物相互作用”）。"
 
 #: ../../tools/agentic_tools.rst:843 320ba9ab29af43b49dae674c7bf1b8a9
 msgid "**TestCaseGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**TestCaseGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:845 5ade03ce0c124bc48afdc3ac75539786
 msgid ""
-"Generates diverse and representative ToolUniverse tool call dictionaries "
-"for a given tool based o..."
-msgstr ""
+"Generates diverse and representative ToolUniverse tool call dictionaries for"
+" a given tool based o..."
+msgstr "根据给定工具生成多样化且具有代表性的ToolUniverse工具调用字典。"
 
 #: ../../tools/agentic_tools.rst ff6374d772c842d0a0cb08984da0c6e7
 msgid "TestCaseGenerator tool specification"
-msgstr ""
+msgstr "TestCaseGenerator工具规范"
 
 #: ../../tools/agentic_tools.rst:851 a6431502478147afb13bdb8f7f1b48fa
 msgid "**Name**: ``TestCaseGenerator``"
-msgstr ""
+msgstr "**名称**: ``TestCaseGenerator``"
 
 #: ../../tools/agentic_tools.rst:853 f9472f026c5b42d4b0ddfc25cef67efe
 msgid ""
-"**Description**: Generates diverse and representative ToolUniverse tool "
-"call dictionaries for a given tool based on its parameter schema. Each "
-"tool call should be a JSON object with 'name' (the tool's name) and "
-"'arguments' (a dict of input arguments), covering different parameter "
-"combinations, edge cases, and typical usage. Can generate targeted test "
-"cases based on previous optimization feedback."
+"**Description**: Generates diverse and representative ToolUniverse tool call"
+" dictionaries for a given tool based on its parameter schema. Each tool call"
+" should be a JSON object with 'name' (the tool's name) and 'arguments' (a "
+"dict of input arguments), covering different parameter combinations, edge "
+"cases, and typical usage. Can generate targeted test cases based on previous"
+" optimization feedback."
 msgstr ""
+"**描述**：根据工具的参数架构，为指定工具生成多样且具有代表性的ToolUniverse工具调用字典。每个工具调用应为一个JSON对象，包含“name”（工具名称）和“arguments”（输入参数的字典），覆盖不同的参数组合、边界情况以及典型用例。还可以根据先前的优化反馈生成针对性的测试用例。"
 
 #: ../../tools/agentic_tools.rst:857 4b116c0d0ed446cb82f9230cf5c1fe75
 msgid ""
-"``tool_config`` (object) (required) The full configuration of the tool to"
-" generate test cases for. May include '_optimization_feedback' and "
+"``tool_config`` (object) (required) The full configuration of the tool to "
+"generate test cases for. May include '_optimization_feedback' and "
 "'_iteration' fields for feedback-driven test generation."
 msgstr ""
+"``tool_config``（对象）（必填）工具的完整配置，用于生成测试用例。可能包含“_optimization_feedback”和“_iteration”字段，以支持基于反馈的测试生成。"
 
 #: ../../tools/agentic_tools.rst:874 c900321bf50a411daae1cfa3821e4dd0
 msgid "**ToolImplementationGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolImplementationGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:876 5f604f441b484265a48c0d4b852adef7
 msgid ""
 "Generates domain-specific, functional code implementations based on tool "
 "descriptions and require..."
-msgstr ""
+msgstr "根据工具描述和需求生成特定领域的功能代码实现"
 
 #: ../../tools/agentic_tools.rst 64e5f4cec40644f09206a25f9af73c13
 msgid "ToolImplementationGenerator tool specification"
-msgstr ""
+msgstr "工具实现生成器工具规范"
 
 #: ../../tools/agentic_tools.rst:882 bd494ffbdf19452087997bc2a5741d9f
 msgid "**Name**: ``ToolImplementationGenerator``"
-msgstr ""
+msgstr "**名称**: ``ToolImplementationGenerator``"
 
 #: ../../tools/agentic_tools.rst:884 74f1a1cc3a7f48b48d97b589e6d1cc1e
 msgid ""
-"**Description**: Generates domain-specific, functional code "
-"implementations based on tool descriptions and requirements with "
-"intelligent algorithm selection"
-msgstr ""
+"**Description**: Generates domain-specific, functional code implementations "
+"based on tool descriptions and requirements with intelligent algorithm "
+"selection"
+msgstr "**描述**：根据工具描述和需求，生成特定领域的功能代码实现，并智能选择算法"
 
 #: ../../tools/agentic_tools.rst:888 cacd0b53eb794ab3adb24581154a19cf
 msgid ""
-"``tool_description`` (string) (required) Detailed description of what the"
-" tool should accomplish"
-msgstr ""
+"``tool_description`` (string) (required) Detailed description of what the "
+"tool should accomplish"
+msgstr "``tool_description``（字符串）（必填）工具应完成任务的详细描述"
 
 #: ../../tools/agentic_tools.rst:891 9a766057267a4b5ba4d2b611a5b245a4
 msgid ""
-"``tool_parameters`` (string) (required) JSON string of parameter schema "
-"for the tool"
-msgstr ""
+"``tool_parameters`` (string) (required) JSON string of parameter schema for "
+"the tool"
+msgstr "``tool_parameters``（字符串）（必填）工具参数模式的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:894 47461a73d8604e0184e6ad212306e1a0
-msgid "``domain`` (string) (optional) Domain area for specialized implementation"
-msgstr ""
+msgid ""
+"``domain`` (string) (optional) Domain area for specialized implementation"
+msgstr "``domain``（字符串）（可选）用于特定实现的领域区域"
 
 #: ../../tools/agentic_tools.rst:897 547c76fca12d4532b9991fc414a72aac
 msgid ""
 "``complexity_level`` (string) (optional) Desired complexity level of "
 "implementation"
-msgstr ""
+msgstr "``complexity_level``（字符串）（可选）期望的实现复杂度级别"
 
 #: ../../tools/agentic_tools.rst:900 18abeb614bc9407ab29f228a0109017e
 msgid ""
-"``performance_requirements`` (string) (optional) Performance requirements"
-" or constraints"
-msgstr ""
+"``performance_requirements`` (string) (optional) Performance requirements or"
+" constraints"
+msgstr "``performance_requirements``（字符串）（可选）性能要求或约束"
 
 #: ../../tools/agentic_tools.rst:918 822317dc19034867b2b37b495b407966
 msgid "**ToolMetadataGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolMetadataGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:920 d96b008986954384a4c33035324c723e
 msgid ""
 "Generates a JSON structure with the metadata of a tool in ToolUniverse, "
 "given the JSON configurat..."
-msgstr ""
+msgstr "根据提供的JSON配置，生成包含ToolUniverse工具元数据的JSON结构。"
 
 #: ../../tools/agentic_tools.rst 99891c38cf434262a4c3e868b7cf6133
 msgid "ToolMetadataGenerator tool specification"
-msgstr ""
+msgstr "工具元数据生成器工具规范"
 
 #: ../../tools/agentic_tools.rst:926 f9ff7cacb1804553a6934bfdedb228b8
 msgid "**Name**: ``ToolMetadataGenerator``"
-msgstr ""
+msgstr "**名称**: ``ToolMetadataGenerator``"
 
 #: ../../tools/agentic_tools.rst:928 fd99637985974c2ebb10b2f3c272a1ff
 msgid ""
-"**Description**: Generates a JSON structure with the metadata of a tool "
-"in ToolUniverse, given the JSON configuration of the tool."
-msgstr ""
+"**Description**: Generates a JSON structure with the metadata of a tool in "
+"ToolUniverse, given the JSON configuration of the tool."
+msgstr "**描述**：根据工具的JSON配置，生成包含ToolUniverse工具元数据的JSON结构。"
 
 #: ../../tools/agentic_tools.rst:932 8c4a60c13e594bf69774e4caf0393a00
 msgid ""
-"``tool_config`` (string) (required) JSON string of the tool configuration"
-" to extract metadata from"
-msgstr ""
+"``tool_config`` (string) (required) JSON string of the tool configuration to"
+" extract metadata from"
+msgstr "``tool_config``（字符串）（必填）用于提取元数据的工具配置 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:935 b83b491021ab487fbc5bb53e68624350
 #, python-brace-format
 msgid ""
 "``tool_type_mappings`` (object) (optional) A mapping from a simplified "
-"toolType to a list of tool_config.type that fall under the toolType "
-"(e.g., {'Databases': ['XMLTool']})"
+"toolType to a list of tool_config.type that fall under the toolType (e.g., "
+"{'Databases': ['XMLTool']})"
 msgstr ""
+"``tool_type_mappings``（对象）（可选）从简化的 toolType 映射到属于该 toolType 的 "
+"tool_config.type 列表的映射关系（例如：{'Databases': ['XMLTool']}）"
 
 #: ../../tools/agentic_tools.rst:952 27eb053982df4043beb5582bcbd3b6b2
 msgid "**ToolMetadataStandardizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolMetadataStandardizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:954 5f6f443093d2404e90d28aa6bbf6ed12
 msgid ""
 "Standardizes and groups semantically equivalent metadata strings (e.g., "
 "sources, tags) into canon..."
-msgstr ""
+msgstr "标准化并将语义上等效的元数据字符串（例如：来源、标签）分组为规范..."
 
 #: ../../tools/agentic_tools.rst d2a7c2379a764079ad37c8fec990c828
 msgid "ToolMetadataStandardizer tool specification"
-msgstr ""
+msgstr "工具元数据标准化工具规范"
 
 #: ../../tools/agentic_tools.rst:960 f12e32fbb2a745eb810369d70fbcccb2
 msgid "**Name**: ``ToolMetadataStandardizer``"
-msgstr ""
+msgstr "**名称**: ``ToolMetadataStandardizer``"
 
 #: ../../tools/agentic_tools.rst:962 1f3e54ed79174436ad4d74fdcb3a9073
 msgid ""
-"**Description**: Standardizes and groups semantically equivalent metadata"
-" strings (e.g., sources, tags) into canonical forms for consistent "
-"downstream usage."
-msgstr ""
+"**Description**: Standardizes and groups semantically equivalent metadata "
+"strings (e.g., sources, tags) into canonical forms for consistent downstream"
+" usage."
+msgstr "**描述**：将语义等价的元数据字符串（例如来源、标签）标准化并分组为规范形式，以确保下游使用的一致性。"
 
 #: ../../tools/agentic_tools.rst:966 90f2698cc11d4744a03378aac01bc755
 msgid ""
 "``metadata_list`` (array) (required) List of raw metadata strings (e.g., "
 "sources, tags) to standardize and group."
-msgstr ""
+msgstr "``metadata_list``（数组）（必填）原始元数据字符串的列表（例如：来源、标签），用于标准化和分组。"
 
 #: ../../tools/agentic_tools.rst:969 f906fc6db1a24cabbda8f3eba84fc58a
 msgid ""
-"``limit`` (integer) (optional) If provided, the maximum number of "
-"canonical strings to return. The LLM will group terms more aggressively "
-"to meet this limit, ensuring all raw strings are mapped."
+"``limit`` (integer) (optional) If provided, the maximum number of canonical "
+"strings to return. The LLM will group terms more aggressively to meet this "
+"limit, ensuring all raw strings are mapped."
 msgstr ""
+"``limit``（整数）（可选）如果提供，则表示返回的规范字符串的最大数量。LLM 将更积极地对术语进行分组以满足此限制，确保所有原始字符串都被映射。"
 
 #: ../../tools/agentic_tools.rst:986 38ac9d842d414df38f2fd9a74e89385e
 msgid "**ToolOptimizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:988 ff3c828f9b384eb79f6cb240ceb66bd0
 msgid ""
 "Optimizes tool configurations based on quality feedback. Improves tool "
 "specifications and impleme..."
-msgstr ""
+msgstr "根据质量反馈优化工具配置。改进工具规格并实施..."
 
 #: ../../tools/agentic_tools.rst 3ff6bde9b5a746afb4ad162677c5f2bc
 msgid "ToolOptimizer tool specification"
-msgstr ""
+msgstr "工具优化器工具规格"
 
 #: ../../tools/agentic_tools.rst:994 0bd9fc90e9234b8d921cbf6fbb821add
 msgid "**Name**: ``ToolOptimizer``"
-msgstr ""
+msgstr "**名称**: ``ToolOptimizer``"
 
 #: ../../tools/agentic_tools.rst:996 523e7fdc13124f2fa5ccb40d011c386a
 msgid ""
-"**Description**: Optimizes tool configurations based on quality feedback."
-" Improves tool specifications and implementations to address identified "
+"**Description**: Optimizes tool configurations based on quality feedback. "
+"Improves tool specifications and implementations to address identified "
 "issues."
-msgstr ""
+msgstr "**描述**：根据质量反馈优化工具配置。改进工具规格和实现方式，以解决已识别的问题。"
 
 #: ../../tools/agentic_tools.rst:1000 3bdf979a7d5346b2a6a91c637981205f
 msgid ""
 "``tool_config`` (string) (required) JSON string of the original tool "
 "configuration"
-msgstr ""
+msgstr "``tool_config``（字符串）（必填）原始工具配置的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:1003 ff788c15305240d5ba69770f9fa5e7d2
 msgid ""
-"``quality_feedback`` (string) (required) JSON string of quality "
-"evaluation feedback"
-msgstr ""
+"``quality_feedback`` (string) (required) JSON string of quality evaluation "
+"feedback"
+msgstr "``quality_feedback``（字符串）（必填）质量评估反馈的JSON字符串"
 
 #: ../../tools/agentic_tools.rst:1006 7bdab376c1594344ac3aac4a6df8530d
 msgid ""
 "``optimization_target`` (string) (optional) What to optimize for "
 "(improve_quality, enhance_performance, etc.)"
 msgstr ""
+"``optimization_target``（字符串）（可选）优化目标（如：improve_quality、enhance_performance "
+"等）。"
 
 #: ../../tools/agentic_tools.rst:1024 df7ba428c1f04509963bbae39ee6d6a1
 msgid "**ToolQualityEvaluator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolQualityEvaluator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1026 f5a9cb72c44f406c815cb3b2f530bb68
 msgid ""
-"Evaluates the quality of tool configurations and implementations. "
-"Provides detailed scoring and f..."
-msgstr ""
+"Evaluates the quality of tool configurations and implementations. Provides "
+"detailed scoring and f..."
+msgstr "评估工具配置和实施的质量。提供详细的评分和反馈，以确保最佳性能和一致性。"
 
 #: ../../tools/agentic_tools.rst d1b79a13672944de8e4573248c92b285
 msgid "ToolQualityEvaluator tool specification"
-msgstr ""
+msgstr "工具质量评估器工具规格"
 
 #: ../../tools/agentic_tools.rst:1032 34c13ef7a7c640aea47d5414f7c2cfb0
 msgid "**Name**: ``ToolQualityEvaluator``"
-msgstr ""
+msgstr "**名称**: ``ToolQualityEvaluator``"
 
 #: ../../tools/agentic_tools.rst:1034 a37a681146b64c58ab6b258856cf232e
 msgid ""
 "**Description**: Evaluates the quality of tool configurations and "
 "implementations. Provides detailed scoring and feedback for improvement."
-msgstr ""
+msgstr "**描述**：评估工具配置和实施的质量，并提供详细的评分和改进建议。"
 
 #: ../../tools/agentic_tools.rst:1038 a0b6cea3d8114c91b47ad00aaee7d261
-msgid "``tool_config`` (string) (required) JSON string of the tool configuration"
-msgstr ""
+msgid ""
+"``tool_config`` (string) (required) JSON string of the tool configuration"
+msgstr "``tool_config``（字符串）（必填）工具配置的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:1041 c47d8a7516864843957177ecae7f706b
 msgid "``test_cases`` (string) (optional) JSON string of test cases"
-msgstr ""
+msgstr "``test_cases``（字符串）（可选）测试用例的 JSON 字符串"
 
 #: ../../tools/agentic_tools.rst:1044 9b15852cbde441169a2393a20462b780
 msgid ""
 "``evaluation_aspects`` (array) (optional) Aspects to evaluate "
 "(functionality, usability, completeness, best_practices)"
-msgstr ""
+msgstr "``evaluation_aspects``（数组）（可选）需要评估的方面（功能性、可用性、完整性、最佳实践）"
 
 #: ../../tools/agentic_tools.rst:1061 8604523a18a24e8f8a7df820a2e5eafb
 msgid "**ToolRelationshipDetector** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolRelationshipDetector**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1063 44daf10341124b5483d2358cb3fa4da1
 msgid ""
 "Analyzes a primary tool against a list of other tools to identify "
 "meaningful, directional data fl..."
-msgstr ""
+msgstr "将主要工具与其他工具列表进行分析，以识别有意义的方向性数据。"
 
 #: ../../tools/agentic_tools.rst 1cf8dae32d90431c82d539890455171d
 msgid "ToolRelationshipDetector tool specification"
-msgstr ""
+msgstr "工具关系检测器工具规范"
 
 #: ../../tools/agentic_tools.rst:1069 fb3b88f7b40e448ab7bfecba7b1e78c5
 msgid "**Name**: ``ToolRelationshipDetector``"
-msgstr ""
+msgstr "**名称**: ``ToolRelationshipDetector``"
 
 #: ../../tools/agentic_tools.rst:1071 d246e745bb274721abb88559d0dc429d
 msgid ""
-"**Description**: Analyzes a primary tool against a list of other tools to"
-" identify meaningful, directional data flow compatibilities for "
-"scientific workflows. Returns a list of compatible pairs with direction "
-"and rationale."
+"**Description**: Analyzes a primary tool against a list of other tools to "
+"identify meaningful, directional data flow compatibilities for scientific "
+"workflows. Returns a list of compatible pairs with direction and rationale."
 msgstr ""
+"**描述**：分析一个主要工具与其他工具列表之间的关系，以识别科学工作流中具有意义和方向性的数据流兼容性。返回包含方向和理由的兼容工具对列表。"
 
 #: ../../tools/agentic_tools.rst:1075 fb5f8352f09c4c108281160504ead718
 msgid ""
 "``tool_a`` (string) (required) JSON string for the primary tool "
 "configuration (Tool A)."
-msgstr ""
+msgstr "``tool_a``（字符串）（必填）用于主要工具配置（工具 A）的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:1078 b04db2f274694b879df7a8ad058023c4
 msgid ""
 "``other_tools`` (string) (required) JSON string of a list of other tool "
 "configurations to compare against Tool A."
-msgstr ""
+msgstr "``other_tools``（字符串）（必填）用于与工具A进行比较的其他工具配置列表的JSON字符串。"
 
 #: ../../tools/agentic_tools.rst:1096 0a31d6668e784712b01f6a8ca331bb94
 msgid "**ToolSpecificationGenerator** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolSpecificationGenerator**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1098 e22c81a1429f4337b6d1dbae4329172c
 msgid ""
 "Generates complete ToolUniverse-compliant tool specifications based on a "
 "description and analysis..."
-msgstr ""
+msgstr "根据描述和分析生成符合ToolUniverse标准的完整工具规范..."
 
 #: ../../tools/agentic_tools.rst ae7cefc1376240bc8227e1120393bc0b
 msgid "ToolSpecificationGenerator tool specification"
-msgstr ""
+msgstr "工具规格生成器工具规格"
 
 #: ../../tools/agentic_tools.rst:1104 e580f5262b464a6e81c239f646c7af56
 msgid "**Name**: ``ToolSpecificationGenerator``"
-msgstr ""
+msgstr "**名称**: ``ToolSpecificationGenerator``"
 
 #: ../../tools/agentic_tools.rst:1106 5a05619638474585b303da04f658f62f
 msgid ""
@@ -1401,158 +1419,161 @@ msgid ""
 "tools. Creates comprehensive tool configurations including parameters, "
 "prompts, and metadata."
 msgstr ""
+"**描述**：根据对类似现有工具的描述和分析，生成符合 ToolUniverse 标准的完整工具规范。创建包含参数、提示和元数据的全面工具配置。"
 
 #: ../../tools/agentic_tools.rst:1110 c7d83af308ef403d82fed76986815f32
 msgid ""
-"``tool_description`` (string) (required) Brief description of the desired"
-" tool functionality and purpose."
-msgstr ""
+"``tool_description`` (string) (required) Brief description of the desired "
+"tool functionality and purpose."
+msgstr "``tool_description``（字符串）（必填）简要描述所需工具的功能和用途。"
 
 #: ../../tools/agentic_tools.rst:1113 0ca77a3819ab4f9099d59269a1c85f85
 msgid ""
-"``tool_category`` (string) (required) Target category for the tool (e.g.,"
-" 'biomedical', 'data_analysis', 'text_processing')."
+"``tool_category`` (string) (required) Target category for the tool (e.g., "
+"'biomedical', 'data_analysis', 'text_processing')."
 msgstr ""
+"``tool_category``（字符串）（必填）工具的目标类别（例如：'biomedical'、'data_analysis'、'text_processing'）。"
 
 #: ../../tools/agentic_tools.rst:1116 566b15e98f2e40e3ab40885f7e30fd89
 msgid ""
 "``tool_type`` (string) (required) Specific ToolUniverse tool type (e.g., "
 "'AgenticTool', 'RESTTool', 'PythonTool')."
 msgstr ""
+"``tool_type``（字符串）（必填）指定的 ToolUniverse "
+"工具类型（例如：'AgenticTool'、'RESTTool'、'PythonTool'）。"
 
 #: ../../tools/agentic_tools.rst:1119 a9cb5262b04c4037b16e918417387319
 msgid ""
-"``similar_tools`` (string) (required) JSON string containing "
-"configurations of similar existing tools for analysis and "
-"differentiation."
-msgstr ""
+"``similar_tools`` (string) (required) JSON string containing configurations "
+"of similar existing tools for analysis and differentiation."
+msgstr "``similar_tools``（字符串）（必填）包含用于分析和区分的类似现有工具配置的 JSON 字符串。"
 
 #: ../../tools/agentic_tools.rst:1122 cbb8ecea0b6146e28dc95baa370d1d3b
 msgid ""
-"``existing_tools_summary`` (string) (required) Summary of existing tools "
-"in the ecosystem to avoid duplication and identify gaps."
-msgstr ""
+"``existing_tools_summary`` (string) (required) Summary of existing tools in "
+"the ecosystem to avoid duplication and identify gaps."
+msgstr "``existing_tools_summary``（字符串）（必填）生态系统中现有工具的摘要，用于避免重复并识别空白。"
 
 #: ../../tools/agentic_tools.rst:1143 57e54f771d77470d9ff5e19049e5b700
 msgid "**ToolSpecificationOptimizer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**ToolSpecificationOptimizer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1145 052cd745260f49ab9d1dbefebd938800
 msgid ""
-"Optimizes tool specifications for clarity, completeness, and usability "
-"with comprehensive benchma..."
-msgstr ""
+"Optimizes tool specifications for clarity, completeness, and usability with "
+"comprehensive benchma..."
+msgstr "优化工具规格，以确保清晰性、完整性和可用性，并结合全面的基准测试进行验证。"
 
 #: ../../tools/agentic_tools.rst 14f96690775e4211823ace5ac2965fe9
 msgid "ToolSpecificationOptimizer tool specification"
-msgstr ""
+msgstr "工具规格优化器工具规格"
 
 #: ../../tools/agentic_tools.rst:1151 4fd2148e712d4ace8915d1d682830d8b
 msgid "**Name**: ``ToolSpecificationOptimizer``"
-msgstr ""
+msgstr "**名称**: ``ToolSpecificationOptimizer``"
 
 #: ../../tools/agentic_tools.rst:1153 317c3a8a9f044bd383e675debc895bcd
 msgid ""
-"**Description**: Optimizes tool specifications for clarity, completeness,"
-" and usability with comprehensive benchmarking against similar tools"
-msgstr ""
+"**Description**: Optimizes tool specifications for clarity, completeness, "
+"and usability with comprehensive benchmarking against similar tools"
+msgstr "**描述**：通过与类似工具的全面基准测试，优化工具规格以提高清晰度、完整性和可用性"
 
 #: ../../tools/agentic_tools.rst:1157 06481bf1c10f49268eab20876d23474c
 msgid ""
 "``tool_config`` (string) (required) JSON string of current tool "
 "configuration to optimize"
-msgstr ""
+msgstr "``tool_config``（字符串）（必填）当前工具配置的 JSON 字符串，用于优化"
 
 #: ../../tools/agentic_tools.rst:1160 3b715e05bffe4bc8b44894fb316d0028
 msgid "``optimization_focus`` (string) (optional) Primary optimization focus"
-msgstr ""
+msgstr "``optimization_focus``（字符串）（可选）主要优化重点"
 
 #: ../../tools/agentic_tools.rst:1163 b0888673085c4baea83542c87652eaab
 msgid "``target_audience`` (string) (optional) Target user expertise level"
-msgstr ""
+msgstr "``target_audience``（字符串）（可选）目标用户专业水平"
 
 #: ../../tools/agentic_tools.rst:1166 f3383580341547d28fc525a7bae430ef
 msgid ""
-"``similar_tools`` (string) (optional) JSON string array of similar tools "
-"for comparison and benchmarking"
-msgstr ""
+"``similar_tools`` (string) (optional) JSON string array of similar tools for"
+" comparison and benchmarking"
+msgstr "``similar_tools``（字符串）（可选）用于比较和基准测试的相似工具的 JSON 字符串数组"
 
 #: ../../tools/agentic_tools.rst:1183 ceb1e3cd63f94f1a9281cba30a82d8dd
 msgid "**WritingPresentationReviewer** (Type: AgenticTool)"
-msgstr ""
+msgstr "**WritingPresentationReviewer**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1185 86d788aa4594482ab8284f2343221d37
-msgid "Assesses clarity, organization, grammar, and visual presentation quality."
-msgstr ""
+msgid ""
+"Assesses clarity, organization, grammar, and visual presentation quality."
+msgstr "评估清晰度、组织性、语法以及视觉呈现质量。"
 
 #: ../../tools/agentic_tools.rst d06e2aab7ebb4034b8f482eca6cea4de
 msgid "WritingPresentationReviewer tool specification"
-msgstr ""
+msgstr "编写演示文稿审阅工具规范"
 
 #: ../../tools/agentic_tools.rst:1191 d680ee6f893b486092d2946e5f7ae0c2
 msgid "**Name**: ``WritingPresentationReviewer``"
-msgstr ""
+msgstr "**名称**: ``WritingPresentationReviewer``"
 
 #: ../../tools/agentic_tools.rst:1193 e08b71e9a7744ac89eec7fe47acf37fc
 msgid ""
 "**Description**: Assesses clarity, organization, grammar, and visual "
 "presentation quality."
-msgstr ""
+msgstr "**描述**：评估清晰度、组织性、语法以及视觉呈现质量。"
 
 #: ../../tools/agentic_tools.rst:1197 c8cc80360db1450c93b88bb7b4cc513d
 msgid "``manuscript_text`` (string) (required) No description"
-msgstr ""
+msgstr "``manuscript_text``（字符串）（必填）无描述"
 
 #: ../../tools/agentic_tools.rst:1214 65dacfa61f6846878e134824b2c1b336
 msgid "**call_agentic_human** (Type: AgenticTool)"
-msgstr ""
+msgstr "**call_agentic_human**（类型：AgenticTool）"
 
 #: ../../tools/agentic_tools.rst:1216 6c844b5ba3f844fe9145b8dc7fedb544
 msgid ""
-"Produces a concise, practical answer that emulates how a well-informed "
-"human would respond to the..."
-msgstr ""
+"Produces a concise, practical answer that emulates how a well-informed human"
+" would respond to the..."
+msgstr "生成简洁实用的答案，模拟一位知识渊博的人可能会如何回应..."
 
 #: ../../tools/agentic_tools.rst 175a0dabd2394577b884d2b19d97e7cc
 msgid "call_agentic_human tool specification"
-msgstr ""
+msgstr "call_agentic_human 工具规范"
 
 #: ../../tools/agentic_tools.rst:1222 7995143dd1b54c15a2e7d81a127ae9f8
 msgid "**Name**: ``call_agentic_human``"
-msgstr ""
+msgstr "**名称**: ``call_agentic_human``"
 
 #: ../../tools/agentic_tools.rst:1224 ae202ec56c204b47a818408a4e6ce3e8
 msgid ""
-"**Description**: Produces a concise, practical answer that emulates how a"
-" well-informed human would respond to the question."
-msgstr ""
+"**Description**: Produces a concise, practical answer that emulates how a "
+"well-informed human would respond to the question."
+msgstr "**描述**：生成简洁且实用的答案，模拟一位知识渊博的人如何回答该问题。"
 
 #: ../../tools/agentic_tools.rst:1228 a33b9a822c694beba3dd244e20ccf3d7
 msgid ""
 "``question`` (string) (required) The user's question to be answered in a "
 "human-like manner."
-msgstr ""
+msgstr "``question``（字符串）（必填）用户提出的问题，将以类似人类的方式进行回答。"
 
 #: ../../tools/agentic_tools.rst:1245 a3a40708204a4e78b2303f0cf415d7e8
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/agentic_tools.rst:1247 294f9b49acef474fb536dcc54355b99b
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/agentic_tools.rst:1248 b19351e0a89545c7b224e4d1fa7d7e83
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"
 
 #~ msgid "**IntentAnalyzerAgent** (Type: AgenticTool)"
 #~ msgstr "**DescriptionAnalyzer**（类型：AgenticTool）"
 
 #~ msgid ""
-#~ "AI agent that analyzes user research "
-#~ "intent and creates comprehensive search "
-#~ "plans"
-#~ msgstr ""
+#~ "AI agent that analyzes user research intent and creates comprehensive search"
+#~ " plans"
+#~ msgstr "用于分析用户研究意图并创建全面搜索计划的AI代理"
 
 #~ msgid "IntentAnalyzerAgent tool specification"
 #~ msgstr "DescriptionAnalyzer 工具规格说明"
@@ -1561,10 +1582,9 @@ msgstr ""
 #~ msgstr "**名称**：``DescriptionAnalyzer``"
 
 #~ msgid ""
-#~ "**Description**: AI agent that analyzes "
-#~ "user research intent and creates "
+#~ "**Description**: AI agent that analyzes user research intent and creates "
 #~ "comprehensive search plans"
-#~ msgstr ""
+#~ msgstr "**描述**：分析用户研究意图并创建全面搜索计划的AI代理"
 
 #~ msgid "``user_query`` (string) (required) The research query to analyze"
 #~ msgstr "``tool_name``（字符串）（必填）被分析工具的名称"
@@ -1573,7 +1593,7 @@ msgstr ""
 #~ msgstr "**DomainExpertValidator**（类型：AgenticTool）"
 
 #~ msgid "AI agent that extracts and refines search keywords for research plans"
-#~ msgstr ""
+#~ msgstr "用于提取和优化研究计划搜索关键词的AI代理"
 
 #~ msgid "KeywordExtractorAgent tool specification"
 #~ msgstr "DomainExpertValidator 工具规范"
@@ -1582,32 +1602,29 @@ msgstr ""
 #~ msgstr "**名称**：``DomainExpertValidator``"
 
 #~ msgid ""
-#~ "**Description**: AI agent that extracts "
-#~ "and refines search keywords for research"
-#~ " plans"
-#~ msgstr ""
+#~ "**Description**: AI agent that extracts and refines search keywords for "
+#~ "research plans"
+#~ msgstr "**描述**：用于提取和优化研究计划搜索关键词的AI代理"
 
 #~ msgid "``plan_title`` (string) (required) The title of the search plan"
 #~ msgstr "``tool_name``（字符串）（必填）工具名称"
 
 #~ msgid ""
-#~ "``plan_description`` (string) (required) The "
-#~ "description of the search plan"
+#~ "``plan_description`` (string) (required) The description of the search plan"
 #~ msgstr "``tool_description``（字符串）（必填）用于评估的工具描述。"
 
 #~ msgid ""
-#~ "``current_keywords`` (string) (required) Current "
-#~ "keywords for the plan (comma-separated)"
-#~ msgstr ""
+#~ "``current_keywords`` (string) (required) Current keywords for the plan "
+#~ "(comma-separated)"
+#~ msgstr "``current_keywords``（字符串）（必填）计划的当前关键字（以逗号分隔）"
 
 #~ msgid "**OverallSummaryAgent** (Type: AgenticTool)"
 #~ msgstr "**LabelGenerator**（类型：AgenticTool）"
 
 #~ msgid ""
-#~ "AI agent that generates comprehensive "
-#~ "overall summary of multi-agent search"
-#~ " results"
-#~ msgstr ""
+#~ "AI agent that generates comprehensive overall summary of multi-agent search "
+#~ "results"
+#~ msgstr "生成多智能体搜索结果综合总结的AI代理"
 
 #~ msgid "OverallSummaryAgent tool specification"
 #~ msgstr "LabelGenerator 工具规格说明"
@@ -1616,10 +1633,9 @@ msgstr ""
 #~ msgstr "**名称**：``LabelGenerator``"
 
 #~ msgid ""
-#~ "**Description**: AI agent that generates "
-#~ "comprehensive overall summary of multi-"
-#~ "agent search results"
-#~ msgstr ""
+#~ "**Description**: AI agent that generates comprehensive overall summary of "
+#~ "multi-agent search results"
+#~ msgstr "**描述**：生成多代理搜索结果综合总结的AI代理"
 
 #~ msgid "``user_query`` (string) (required) The original research query"
 #~ msgstr "``original_description``（字符串）（必填）工具的原始描述。"
@@ -1631,8 +1647,7 @@ msgstr ""
 #~ msgstr "``tool_name``（字符串）（必填）工具名称"
 
 #~ msgid ""
-#~ "``total_plans`` (string) (required) Total "
-#~ "number of search plans executed"
+#~ "``total_plans`` (string) (required) Total number of search plans executed"
 #~ msgstr "``tool_name``（字符串）（必填）工具名称"
 
 #~ msgid "``iterations`` (string) (required) Number of iterations performed"
@@ -1645,7 +1660,7 @@ msgstr ""
 #~ msgstr "**代码质量分析器**（类型：智能工具）"
 
 #~ msgid "AI agent that checks search result quality and suggests improvements"
-#~ msgstr ""
+#~ msgstr "用于检查搜索结果质量并提出改进建议的AI代理"
 
 #~ msgid "QualityCheckerAgent tool specification"
 #~ msgstr "CodeQualityAnalyzer 工具规范"
@@ -1654,22 +1669,20 @@ msgstr ""
 #~ msgstr "**名称**：``CodeQualityAnalyzer``"
 
 #~ msgid ""
-#~ "**Description**: AI agent that checks "
-#~ "search result quality and suggests "
+#~ "**Description**: AI agent that checks search result quality and suggests "
 #~ "improvements"
-#~ msgstr ""
+#~ msgstr "**描述**：检查搜索结果质量并提出改进建议的AI代理"
 
 #~ msgid ""
-#~ "``plans_analysis`` (string) (required) Analysis "
-#~ "of current search plans and their "
-#~ "quality scores"
+#~ "``plans_analysis`` (string) (required) Analysis of current search plans and "
+#~ "their quality scores"
 #~ msgstr "``tool_parameters``（字符串）（必填）工具参数及其类型的 JSON 字符串"
 
 #~ msgid "**ResultSummarizerAgent** (Type: AgenticTool)"
 #~ msgstr "**CodeOptimizer**（类型：AgenticTool）"
 
 #~ msgid "AI agent that summarizes search results for research plans"
-#~ msgstr ""
+#~ msgstr "用于研究计划的搜索结果摘要生成AI代理"
 
 #~ msgid "ResultSummarizerAgent tool specification"
 #~ msgstr "CodeOptimizer工具规格"
@@ -1678,15 +1691,13 @@ msgstr ""
 #~ msgstr "**名称**: ``CodeOptimizer``"
 
 #~ msgid ""
-#~ "**Description**: AI agent that summarizes "
-#~ "search results for research plans"
-#~ msgstr ""
+#~ "**Description**: AI agent that summarizes search results for research plans"
+#~ msgstr "**描述**：用于为研究计划总结搜索结果的AI代理"
 
 #~ msgid "``paper_count`` (string) (required) Number of papers found"
 #~ msgstr "``paper_title``（字符串）（必填） 无描述"
 
 #~ msgid ""
-#~ "``papers_text`` (string) (required) Formatted "
-#~ "text of the papers to summarize"
+#~ "``papers_text`` (string) (required) Formatted text of the papers to "
+#~ "summarize"
 #~ msgstr "``tool_name``（字符串）（必填）工具名称"
-

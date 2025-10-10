@@ -343,7 +343,7 @@ msgstr "**检查 Codex CLI 版本：** .. code-block:: bash"
 #: ../../guide/building_ai_scientists/codex_cli.rst:253
 #: 2819ee8c6227483b88bc806a90886757
 msgid "codex --version"
-msgstr ""
+msgstr "codex --版本"
 
 #: ../../guide/building_ai_scientists/codex_cli.rst:255
 #: 3f52d0fdf0034a1988244e3a2c26181f

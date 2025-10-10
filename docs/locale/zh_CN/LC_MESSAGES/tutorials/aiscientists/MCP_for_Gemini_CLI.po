@@ -758,121 +758,121 @@ msgstr "自动汇总复杂工具结果"
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:413
 #: 3248f8e30eb643208d44a38c3f76f023
 msgid "Improves user experience for research tasks"
-msgstr ""
+msgstr "优化用户在研究任务中的体验"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:415
 #: f3ca75c3e8eb4950b3d569b45e7d0d7d
 msgid "**Focused Tool Set**:"
-msgstr ""
+msgstr "**专用工具集**："
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:416
 #: aab6b9645c044c9eab4b9e4e5d0fbb55
 msgid "Prioritizes scientific research tools over development tools"
-msgstr ""
+msgstr "优先考虑科学研究工具而非开发工具"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:417
 #: 3aa867f718ec4fe9b351d686b93d6c03
 msgid ""
 "Better performance for literature search, chemical analysis, and clinical "
 "data"
-msgstr ""
+msgstr "文献检索、化学分析和临床数据的性能优化"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:418
 #: be5a76a98ad649e4b41cf6a2b064742b
 msgid "Reduced cognitive load with fewer irrelevant tools"
-msgstr ""
+msgstr "通过减少无关工具来降低认知负担"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:420
 #: dcbb862f8297429ca8aeda2f9d38c035
 msgid "When to Use PackageTool Exclusion"
-msgstr ""
+msgstr "何时使用 PackageTool 排除"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:422
 #: 0661663455064f51a68aaa17a7dfb5c2
 msgid "**Exclude PackageTool if you:**"
-msgstr ""
+msgstr "**如果您符合以下条件，请排除 PackageTool：**"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:423
 #: cc142c2572774396827e7502271f4a99
 msgid "Primarily conduct scientific research"
-msgstr ""
+msgstr "主要从事科学研究"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:424
 #: 0b861f3e4f964b9ba33555781b56d678
 msgid "Don't need package management capabilities"
-msgstr ""
+msgstr "不需要软件包管理功能"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:425
 #: a2fcc8a1f9754a5d84453b1249dd80d5
 msgid "Want to maximize context window for research tools"
-msgstr ""
+msgstr "想要最大化研究工具的上下文窗口"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:426
 #: 8838fdbb2fd0488a83f8029e2c70aa69
 msgid "Prefer cleaner, more focused tool interfaces"
-msgstr ""
+msgstr "更倾向于简洁且更专注的工具界面"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:428
 #: 3eacb86e742a451d98d6df95d1182f5c
 msgid "**Keep PackageTool if you:**"
-msgstr ""
+msgstr "**如果您符合以下条件，请保留 PackageTool：**"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:429
 #: 2f6686dbe484467da01307ca76ac424a
 msgid "Develop scientific software"
-msgstr ""
+msgstr "开发科学软件"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:430
 #: af4fe9f02b3b4939b5c411dc33b3055f
 msgid "Need to manage Python packages"
-msgstr ""
+msgstr "需要管理 Python 包"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:431
 #: 8ed8c272f8ef46309cf9fbd9f34b4192
 msgid "Work with custom tool development"
-msgstr ""
+msgstr "与自定义工具开发协作"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:432
 #: e9276c3a016a450998500bdf6067645b
 msgid "Require full ToolUniverse functionality"
-msgstr ""
+msgstr "需要完整的 ToolUniverse 功能"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:434
 #: d9608021d0ad4937af8884a46f3bc8d9
 msgid "Getting Help"
-msgstr ""
+msgstr "获取帮助"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:436
 #: 62bf6182b1b34b04861a10ae5f20131b
 msgid ""
 "**Status Check**: Use `/mcp` to monitor server status and available tools."
-msgstr ""
+msgstr "**状态检查**：使用 `/mcp` 监控服务器状态和可用工具。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:437
 #: 491148bc39d645d29ea6b0d0f9b0e1b4
 msgid ""
 "**Tool Documentation**: Each ToolUniverse tool includes detailed "
 "documentation and examples, which can be inspected."
-msgstr ""
+msgstr "**工具文档**：每个 ToolUniverse 工具都附带详细的文档和示例，可供查阅。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:438
 #: 01f159a65bbd4436b34dac0c8fbdbaf9
 msgid ""
 "**Debug Mode**: Use the `--debug` flag for verbose troubleshooting "
 "information."
-msgstr ""
+msgstr "**调试模式**：使用 `--debug` 标志获取详细的故障排除信息。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:439
 #: 3bd160c8031a4a05a270e7915ddc6a68
 msgid ""
 "**ToolUniverse Issues**: Report ToolUniverse-specific issues on the "
 "project's official repository."
-msgstr ""
+msgstr "**ToolUniverse 问题**：请在项目的官方代码库中报告与 ToolUniverse 相关的问题。"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:441
 #: f3579cdd9892496faa89e0b735be5fde
 msgid "Conclusion"
-msgstr ""
+msgstr "结论"
 
 #: ../../tutorials/aiscientists/MCP_for_Gemini_CLI.md:443
 #: 0d99d409358140b0bd3bffa8deba127f
@@ -882,3 +882,5 @@ msgid ""
 "access to literature databases, chemical compound information, clinical "
 "trial data, and advanced research tools through natural language."
 msgstr ""
+"当 ToolUniverse 集成为 MCP 服务器后，Gemini CLI "
+"成为一个功能强大且交互式的科学研究平台。它通过自然语言实现对文献数据库、化学化合物信息、临床试验数据以及高级研究工具的无缝访问。"

@@ -3362,6 +3362,24 @@ wheels = [
 ]
 
 [[package]]
+name = "pydata-sphinx-theme"
+version = "0.16.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "accessible-pygments" },
+    { name = "babel" },
+    { name = "beautifulsoup4" },
+    { name = "docutils" },
+    { name = "pygments" },
+    { name = "sphinx" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/00/20/bb50f9de3a6de69e6abd6b087b52fa2418a0418b19597601605f855ad044/pydata_sphinx_theme-0.16.1.tar.gz", hash = "sha256:a08b7f0b7f70387219dc659bff0893a7554d5eb39b59d3b8ef37b8401b7642d7", size = 2412693, upload-time = "2024-12-17T10:53:39.537Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e2/0d/8ba33fa83a7dcde13eb3c1c2a0c1cc29950a048bfed6d9b0d8b6bd710b4c/pydata_sphinx_theme-0.16.1-py3-none-any.whl", hash = "sha256:225331e8ac4b32682c18fcac5a57a6f717c4e632cea5dd0e247b55155faeccde", size = 6723264, upload-time = "2024-12-17T10:53:35.645Z" },
+]
+
+[[package]]
 name = "pydot"
 version = "4.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -3401,6 +3419,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b0/77/a5b8c569bf593b0140bde72ea885a803b82086995367bf2037de0159d924/pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887", size = 4968631, upload-time = "2025-06-21T13:39:12.283Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b", size = 1225217, upload-time = "2025-06-21T13:39:07.939Z" },
+]
+
+[[package]]
+name = "pygments-styles"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pygments" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/78/091f2760489400d8f42a231b9b7331ffff63c2c7f99c0fce6f09bbf1ff69/pygments_styles-0.2.0.tar.gz", hash = "sha256:49727d051518ea46cc2d78c329c6985311bf27e1826f524c229a40b32cf00cff", size = 14266, upload-time = "2025-09-26T08:39:03.68Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e6/3d/8888e7ca0c6b093b52aa5c6693b0022e66d5958adcc685ed7a6a8ae615e8/pygments_styles-0.2.0-py3-none-any.whl", hash = "sha256:40fb7f1d34ce2b2792aecabc8d3877ca364eb04bb3b7f7747cfc9a7f0569bae9", size = 34200, upload-time = "2025-09-26T08:39:02.262Z" },
 ]
 
 [[package]]
@@ -4168,6 +4198,19 @@ wheels = [
 ]
 
 [[package]]
+name = "shibuya"
+version = "2025.9.25"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pygments-styles" },
+    { name = "sphinx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/00/f3/36435b8e126b0a2cd7efa346cb366f25769094425fa0b145ab6991d20829/shibuya-2025.9.25.tar.gz", hash = "sha256:03131beb0f8e31cf4f501a4b744cd9c3f387cf23696259476d141b9ca976156b", size = 81798, upload-time = "2025-09-25T02:54:18.744Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/d7/e4831122c1cdaa66cf432d50cf24b38dd161aa69187eebfa41295c3a84ec/shibuya-2025.9.25-py3-none-any.whl", hash = "sha256:93e439181167936dd1950874880c23920d551f90ff475888ce278af1d2efa4eb", size = 97695, upload-time = "2025-09-25T02:54:17.351Z" },
+]
+
+[[package]]
 name = "simplejson"
 version = "3.20.1"
 source = { registry = "https://pypi.org/simple" }
@@ -4598,7 +4641,7 @@ wheels = [
 
 [[package]]
 name = "tooluniverse"
-version = "1.0.5"
+version = "1.0.6"
 source = { editable = "." }
 dependencies = [
     { name = "admet-ai" },
@@ -4643,6 +4686,7 @@ all = [
     { name = "myst-parser" },
     { name = "plotly" },
     { name = "pre-commit" },
+    { name = "pydata-sphinx-theme" },
     { name = "pydot" },
     { name = "pygraphviz" },
     { name = "pytest" },
@@ -4651,6 +4695,7 @@ all = [
     { name = "pytest-timeout" },
     { name = "requests-mock" },
     { name = "scipy" },
+    { name = "shibuya" },
     { name = "sphinx" },
     { name = "sphinx-autobuild" },
     { name = "sphinx-autodoc-typehints" },
@@ -4675,6 +4720,8 @@ docs = [
     { name = "furo" },
     { name = "linkify-it-py" },
     { name = "myst-parser" },
+    { name = "pydata-sphinx-theme" },
+    { name = "shibuya" },
     { name = "sphinx" },
     { name = "sphinx-autobuild" },
     { name = "sphinx-autodoc-typehints" },
@@ -4741,6 +4788,7 @@ requires-dist = [
     { name = "plotly", marker = "extra == 'graph'", specifier = ">=5.0.0" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=2.0" },
     { name = "pydantic", specifier = ">=2.11.0" },
+    { name = "pydata-sphinx-theme", marker = "extra == 'docs'", specifier = ">=0.15.0" },
     { name = "pydot", marker = "extra == 'graph'", specifier = ">=1.4.0" },
     { name = "pygraphviz", marker = "extra == 'graph'", specifier = ">=1.7" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=6.0" },
@@ -4754,6 +4802,7 @@ requires-dist = [
     { name = "scipy", marker = "extra == 'graph'", specifier = ">=1.7.0" },
     { name = "sentence-transformers", specifier = ">=5.1.0" },
     { name = "sentence-transformers", marker = "extra == 'embedding'", specifier = ">=5.1.0" },
+    { name = "shibuya", marker = "extra == 'docs'", specifier = ">=0.10.0" },
     { name = "sphinx", marker = "extra == 'docs'", specifier = ">=4.0" },
     { name = "sphinx-autobuild", marker = "extra == 'docs'", specifier = ">=2021.3.14" },
     { name = "sphinx-autodoc-typehints", marker = "extra == 'docs'", specifier = ">=1.12.0" },

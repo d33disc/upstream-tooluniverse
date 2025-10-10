@@ -793,444 +793,447 @@ msgstr "列出给定 PDB ID 的聚合物实体 ID。适用于基于单个聚合�
 
 #: ../../tools/rcsb_pdb_tools.rst ee3935e9da3c4321aeadeb106aa01959
 msgid "get_polymer_entity_ids_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_polymer_entity_ids_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:652 fff62fa85d2b4fe89ff105cf005cc86d
 msgid "**Name**: ``get_polymer_entity_ids_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_polymer_entity_ids_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:654 1f51ca69295543e59e293ca7673c0116
 msgid ""
 "**Description**: List polymer entity IDs for a given PDB ID. Useful for "
 "building further queries on individual polymer entities."
-msgstr ""
+msgstr "**描述**：列出给定 PDB ID 的聚合物实体 ID。可用于进一步查询单个聚合物实体。"
 
 #: ../../tools/rcsb_pdb_tools.rst:658 ../../tools/rcsb_pdb_tools.rst:778
 #: 024aa90bdb7c4664a82c4b0eb881d628 246cad666b284e9aa8fb2122ef6890b6
 msgid "``pdb_id`` (string) (optional) 4-character RCSB PDB ID of the protein"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）蛋白质的4字符RCSB PDB ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:674 b06029db8895486dab4937f8234b7a36
 msgid "**get_polymer_entity_type_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_polymer_entity_type_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:676 e553f4db3dd64a25bfe9436c3d0deb7d
 msgid ""
 "Get the polymer entity type (e.g., Protein, DNA) using the polymer entity "
 "ID."
-msgstr ""
+msgstr "使用聚合物实体ID获取聚合物实体类型（例如：蛋白质、DNA）。"
 
 #: ../../tools/rcsb_pdb_tools.rst e876283c9f4b45ec8dcd8cb28438dba5
 msgid "get_polymer_entity_type_by_entity_id tool specification"
-msgstr ""
+msgstr "通过实体ID获取聚合物实体类型工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:682 962160ee06d543899d1b0efed8d7829c
 msgid "**Name**: ``get_polymer_entity_type_by_entity_id``"
-msgstr ""
+msgstr "**名称**: ``get_polymer_entity_type_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:684 267fd0ff3dcc404bbbf2b72bef555c57
 msgid ""
 "**Description**: Get the polymer entity type (e.g., Protein, DNA) using the "
 "polymer entity ID."
-msgstr ""
+msgstr "**描述**：使用聚合物实体ID获取聚合物实体类型（例如，蛋白质、DNA）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:704 09cf7fe03c0b41eeb04d3ab7fd42c79a
 msgid "**get_polymer_molecular_weight_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_polymer_molecular_weight_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:706 51804c9a745a400099aed0734904738b
 msgid "Retrieve the molecular weight of a polymer entity."
-msgstr ""
+msgstr "获取聚合物实体的分子量。"
 
 #: ../../tools/rcsb_pdb_tools.rst 54f02323242f49d4967a2989e572ca98
 msgid "get_polymer_molecular_weight_by_entity_id tool specification"
-msgstr ""
+msgstr "通过实体ID获取聚合物分子量工具规格"
 
 #: ../../tools/rcsb_pdb_tools.rst:712 961fb542b2ee4d96a6d728ed0db8117b
 msgid "**Name**: ``get_polymer_molecular_weight_by_entity_id``"
-msgstr ""
+msgstr "**名称**: ``get_polymer_molecular_weight_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:714 3fd71c4ee5474a86aefce6ee1b358e77
 msgid "**Description**: Retrieve the molecular weight of a polymer entity."
-msgstr ""
+msgstr "**描述**：获取聚合物实体的分子量。"
 
 #: ../../tools/rcsb_pdb_tools.rst:734 38a0f58ff05d4562b237ae5046910e07
 msgid "**get_protein_classification_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_protein_classification_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:736 55140ed20f6d495a874a2d366c8a255c
 msgid ""
 "Get the classification of the protein structure (e.g., transferase, "
 "oxidoreductase)."
-msgstr ""
+msgstr "获取蛋白质结构的分类（例如：转移酶、氧化还原酶）。"
 
 #: ../../tools/rcsb_pdb_tools.rst 76d6eb7accf845609e01180e32ef8a92
 msgid "get_protein_classification_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取蛋白质分类工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:742 6be5950de44e4f309ac45ddad7a70d80
 msgid "**Name**: ``get_protein_classification_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_protein_classification_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:744 6b2a21657c074a3497cb139d5a6649c0
 msgid ""
 "**Description**: Get the classification of the protein structure (e.g., "
 "transferase, oxidoreductase)."
-msgstr ""
+msgstr "**描述**：获取蛋白质结构的分类（例如：转移酶、氧化还原酶）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:764 3ea275616bcb4ccea19311938ea1469b
 msgid "**get_protein_metadata_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_protein_metadata_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:766 95bc78cd0e4a463286af39d281be07ff
 msgid ""
 "Retrieve basic protein structure metadata, including structure title, "
 "experimental method, resolu..."
-msgstr ""
+msgstr "检索基本蛋白质结构元数据，包括结构标题、实验方法、分辨率..."
 
 #: ../../tools/rcsb_pdb_tools.rst e198cb1e9b5b41a99cc262a43c44c706
 msgid "get_protein_metadata_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_protein_metadata_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:772 00790b2e817c4982a3e4d1939c20b8cc
 msgid "**Name**: ``get_protein_metadata_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_protein_metadata_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:774 8ae02f29739f46f0993cb9dabb964152
 msgid ""
 "**Description**: Retrieve basic protein structure metadata, including "
 "structure title, experimental method, resolution, and initial release date."
-msgstr ""
+msgstr "**描述**：检索基本的蛋白质结构元数据，包括结构标题、实验方法、分辨率和初始发布日期。"
 
 #: ../../tools/rcsb_pdb_tools.rst:794 96f9475d794646bda5ebd97038209e46
 msgid "**get_refinement_resolution_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_refinement_resolution_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:796 7890004a01d34456b844f3ca1813e002
 msgid ""
 "Retrieve the reported resolution from refinement data for X-ray structures."
-msgstr ""
+msgstr "从精修数据中检索X射线结构的报告分辨率。"
 
 #: ../../tools/rcsb_pdb_tools.rst c4a372fd6f38457a9a7c52dab8f9ee8a
 msgid "get_refinement_resolution_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_refinement_resolution_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:802 eac3c6e3945d4565afd57e1808277ce8
 msgid "**Name**: ``get_refinement_resolution_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_refinement_resolution_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:804 2b9655229a574e5c82bd87d81c19c6e2
 msgid ""
 "**Description**: Retrieve the reported resolution from refinement data for "
 "X-ray structures."
-msgstr ""
+msgstr "**描述**：从精修数据中获取X射线结构的报告分辨率。"
 
 #: ../../tools/rcsb_pdb_tools.rst:808 14af01a9d14e412fa3b79da2e2228b9a
 msgid "``pdb_id`` (string) (optional) PDB entry ID"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）PDB 条目 ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:824 6d4ddc1cc2224a87aaa08b5ab905c508
 msgid "**get_release_deposit_dates_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_release_deposit_dates_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:826 55369d6bb05b42a5bdabb253a0e6cfca
 msgid "Get the release and deposition dates for a PDB entry."
-msgstr ""
+msgstr "获取 PDB 条目的发布日期和提交日期。"
 
 #: ../../tools/rcsb_pdb_tools.rst 91cc8fe825a842f692b6a63725acb4fa
 msgid "get_release_deposit_dates_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_release_deposit_dates_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:832 51872f7091704c16ba2ca75af1cf83c3
 msgid "**Name**: ``get_release_deposit_dates_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_release_deposit_dates_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:834 61e5d035d4ea4c5a9956476d74470e54
 msgid "**Description**: Get the release and deposition dates for a PDB entry."
-msgstr ""
+msgstr "**描述**：获取 PDB 条目的发布日期和提交日期。"
 
 #: ../../tools/rcsb_pdb_tools.rst:854 313628bdaf5a4431ba552e73c7fbc367
 msgid "**get_sequence_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_sequence_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:856 4fd9bdea1a604de3ab2aaa17207651f6
 msgid ""
 "Retrieve amino acid or nucleotide sequence of polymer entities for a given "
 "PDB structure."
-msgstr ""
+msgstr "获取指定PDB结构中聚合物实体的氨基酸或核苷酸序列。"
 
 #: ../../tools/rcsb_pdb_tools.rst 71a529a0c62a4dcb8b80dd14bf4828e6
 msgid "get_sequence_by_pdb_id tool specification"
 msgstr ""
+"根据上下文，以下是翻译内容：\n"
+"\n"
+"get_sequence_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:862 d53b5cf04651435ca6c6e7fd69f6cc8f
 msgid "**Name**: ``get_sequence_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_sequence_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:864 86a895a38de148d7b7a0e65307c28df7
 msgid ""
 "**Description**: Retrieve amino acid or nucleotide sequence of polymer "
 "entities for a given PDB structure."
-msgstr ""
+msgstr "**描述**：检索指定PDB结构中聚合物实体的氨基酸或核苷酸序列。"
 
 #: ../../tools/rcsb_pdb_tools.rst:884 265a6ff2fa8646da81f9b46cfdbbee84
 msgid "**get_sequence_lengths_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_sequence_lengths_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:886 c7529731eac540cbb3c09d3a7fb4e312
 msgid ""
 "Retrieve the sequence lengths of polymer entities for a given PDB structure."
-msgstr ""
+msgstr "获取指定PDB结构中聚合物实体的序列长度。"
 
 #: ../../tools/rcsb_pdb_tools.rst f7299ad9bad24bfab3d6bc53da19be92
 msgid "get_sequence_lengths_by_pdb_id tool specification"
-msgstr ""
+msgstr "根据PDB ID获取序列长度工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:892 ef318bbd5bab4999b0373b0d6501c688
 msgid "**Name**: ``get_sequence_lengths_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_sequence_lengths_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:894 1517fb168e754fa0945cef30e4f4d686
 msgid ""
 "**Description**: Retrieve the sequence lengths of polymer entities for a "
 "given PDB structure."
-msgstr ""
+msgstr "**描述**：检索指定PDB结构中聚合物实体的序列长度。"
 
 #: ../../tools/rcsb_pdb_tools.rst:914 efd3303e16da44448f79c8a8706114e0
 msgid "**get_sequence_positional_features_by_instance_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_sequence_positional_features_by_instance_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:916 667df005a03e4ecda796163228111265
 msgid ""
 "Retrieve sequence positional features (e.g., binding sites, motifs) for a "
 "polymer entity instance."
-msgstr ""
+msgstr "检索聚合物实体实例的序列位置特征（例如，结合位点、基序）。"
 
 #: ../../tools/rcsb_pdb_tools.rst 098ce4ccd5ee4ddda4aec8fbbff776ab
 msgid "get_sequence_positional_features_by_instance_id tool specification"
-msgstr ""
+msgstr "根据实例ID获取序列位置特征工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:922 bd0b38b6c14b4f499ee2ee7bcbf4578a
 msgid "**Name**: ``get_sequence_positional_features_by_instance_id``"
-msgstr ""
+msgstr "**名称**: ``get_sequence_positional_features_by_instance_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:924 77c74b3ee4c74593813edb4f73db3454
 msgid ""
 "**Description**: Retrieve sequence positional features (e.g., binding sites,"
 " motifs) for a polymer entity instance."
-msgstr ""
+msgstr "**描述**：检索聚合物实体实例的序列位置特征（例如，结合位点、基序）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:928 dd3432abc6334617a2e7ab66be5ae7ec
 msgid ""
 "``instance_id`` (string) (optional) Polymer entity instance ID like '1NDO.A'"
-msgstr ""
+msgstr "``instance_id``（字符串）（可选）聚合物实体实例 ID，例如 '1NDO.A'"
 
 #: ../../tools/rcsb_pdb_tools.rst:944 68d5858efe82429c9af1bf416bba6c47
 msgid "**get_source_organism_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_source_organism_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:946 51e7f45829fa469e921a001c1f10bf7b
 msgid ""
 "Retrieve the scientific name of the source organism for a given PDB "
 "structure."
-msgstr ""
+msgstr "检索指定PDB结构的来源生物的学名。"
 
 #: ../../tools/rcsb_pdb_tools.rst 599e5e1821684038ba8d78b4333628fb
 msgid "get_source_organism_by_pdb_id tool specification"
-msgstr ""
+msgstr "get_source_organism_by_pdb_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:952 a483fa6b10ad4ddebb82a03a51ce57ee
 msgid "**Name**: ``get_source_organism_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_source_organism_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:954 7a63b032154d4ed6b5b50fb0466832d0
 msgid ""
 "**Description**: Retrieve the scientific name of the source organism for a "
 "given PDB structure."
-msgstr ""
+msgstr "**描述**：检索给定PDB结构的来源生物的学名。"
 
 #: ../../tools/rcsb_pdb_tools.rst:958 65c93497d316445abc02f4d88d8bf6ba
 msgid ""
 "``pdb_id`` (string) (optional) 4-character RCSB PDB ID of the structure"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）结构的 4 个字符 RCSB PDB ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:974 5665baa0264e4d179751f96f769b7932
 msgid "**get_space_group_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_space_group_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:976 c6a9c1d5aea849a4a67c2fbdd37729a4
 msgid "Get the crystallographic space group of the structure."
-msgstr ""
+msgstr "获取该结构的晶体学空间群。"
 
 #: ../../tools/rcsb_pdb_tools.rst 6747453211c4447682adfc172cce6ec0
 msgid "get_space_group_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取空间群工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:982 08c1c5e670fc4e4da4bcc2657168db7d
 msgid "**Name**: ``get_space_group_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_space_group_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:984 85daa87ceb454565baa099ddb5e24df1
 msgid ""
 "**Description**: Get the crystallographic space group of the structure."
-msgstr ""
+msgstr "**描述**：获取结构的晶体学空间群。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1004 38b285762ff64229b662dfd75e2438f3
 msgid "**get_structure_determination_software_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_structure_determination_software_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1006 f3241273920e494b8a08e56401dbb770
 msgid "Retrieve names of software used during structure determination."
-msgstr ""
+msgstr "检索结构解析过程中使用的软件名称。"
 
 #: ../../tools/rcsb_pdb_tools.rst 761ca97ef73a462ea4da41fcdf49e5ca
 msgid "get_structure_determination_software_by_pdb_id tool specification"
-msgstr ""
+msgstr "根据PDB ID获取结构解析软件工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1012 c27c68f3662a4ce2a6d72d328f858d7d
 msgid "**Name**: ``get_structure_determination_software_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_structure_determination_software_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1014 1cabec548df9492a892ee708fa9b893f
 msgid ""
 "**Description**: Retrieve names of software used during structure "
 "determination."
-msgstr ""
+msgstr "**描述**：检索用于结构测定的软件名称。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1018 9db15db5f7464f18b1f2ea578211bb1c
 msgid "``pdb_id`` (string) (optional) RCSB PDB entry ID"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）RCSB PDB 条目 ID"
 
 #: ../../tools/rcsb_pdb_tools.rst:1034 8bf9d3b61a814d9ba26a06e7ce248c62
 msgid "**get_structure_title_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_structure_title_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1036 683badd50f4c4b8ca35d8cc9f0cd6427
 msgid "Retrieve the structure title for a given PDB entry."
-msgstr ""
+msgstr "检索指定PDB条目的结构标题。"
 
 #: ../../tools/rcsb_pdb_tools.rst cefea60bdbbc47bfb1c61bb9ad64fd01
 msgid "get_structure_title_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取结构标题工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1042 ffc7fbe3ea6c4b6db8330807999b027f
 msgid "**Name**: ``get_structure_title_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_structure_title_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1044 97ebda1b7d6f48b393db97e5db35937b
 msgid "**Description**: Retrieve the structure title for a given PDB entry."
-msgstr ""
+msgstr "**描述**：检索指定 PDB 条目的结构标题。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1064 b452beca0c9d40089c46d5340baceb9e
 msgid "**get_structure_validation_metrics_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_structure_validation_metrics_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1066 6ed75f32feae4803b89d84967c6489f7
 msgid ""
 "Retrieve structure validation metrics such as R-free, R-work, and clashscore"
 " for a PDB entry."
-msgstr ""
+msgstr "获取 PDB 条目的结构验证指标，例如 R-free、R-work 和冲突评分（clashscore）。"
 
 #: ../../tools/rcsb_pdb_tools.rst 115a03b61a3e459d9c01960f8eef3e49
 msgid "get_structure_validation_metrics_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取结构验证指标工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1072 7b4d3393bf66489f8bddd439e8fa5285
 msgid "**Name**: ``get_structure_validation_metrics_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_structure_validation_metrics_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1074 1fb68cd24c5640a09d854467d2eae8f8
 msgid ""
 "**Description**: Retrieve structure validation metrics such as R-free, "
 "R-work, and clashscore for a PDB entry."
-msgstr ""
+msgstr "**描述**：检索 PDB 条目的结构验证指标，例如 R-free、R-work 和冲突评分（clashscore）。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1094 6d55f94b01aa46f0ae5f6976ab0b0d7a
 msgid "**get_target_cofactor_info** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_target_cofactor_info**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1096 20ebda2ff30d4bb8be194904c57a72bd
 msgid ""
 "Retrieve essential cofactor information for a given target including "
 "cofactor IDs, mechanism of a..."
-msgstr ""
+msgstr "获取指定目标的关键辅因子信息，包括辅因子ID、作用机制等内容。"
 
 #: ../../tools/rcsb_pdb_tools.rst 29214fe888e947c0be1c05625ea320b4
 msgid "get_target_cofactor_info tool specification"
-msgstr ""
+msgstr "get_target_cofactor_info 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1102 6959bd5d21e44092adad3f2098af2e4c
 msgid "**Name**: ``get_target_cofactor_info``"
-msgstr ""
+msgstr "**名称**: ``get_target_cofactor_info``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1104 4c904541ee3a4ce69e6bac3ce7ea0b70
 msgid ""
 "**Description**: Retrieve essential cofactor information for a given target "
 "including cofactor IDs, mechanism of action, literature references, and "
 "resource metadata."
-msgstr ""
+msgstr "**描述**：检索指定目标的关键辅因子信息，包括辅因子ID、作用机制、文献参考以及资源元数据。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1108 157aff7cc77c46a186ae221974ea7397
 msgid ""
 "``pdb_id`` (string) (optional) Target ID or entity identifier (e.g., UniProt"
 " ID or internal target id)"
-msgstr ""
+msgstr "``pdb_id``（字符串）（可选）目标ID或实体标识符（例如，UniProt ID或内部目标ID）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1124 46413995e2534738b4c9ada98bc9dcc1
 msgid "**get_taxonomy_by_pdb_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_taxonomy_by_pdb_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1126 ae86a058cad44617ab3da92de4cacf72
 msgid ""
 "Get the scientific name and taxonomy of the organism(s) associated with a "
 "PDB entry."
-msgstr ""
+msgstr "获取与PDB条目相关的生物体的学名和分类信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst a51538ba1e2a4487b498c8b605e99dd3
 msgid "get_taxonomy_by_pdb_id tool specification"
-msgstr ""
+msgstr "通过 PDB ID 获取分类工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1132 72a5c84db0eb49b7977b7502face045c
 msgid "**Name**: ``get_taxonomy_by_pdb_id``"
-msgstr ""
+msgstr "**名称**: ``get_taxonomy_by_pdb_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1134 d3829791f7d64a048cbf0cacff84e501
 msgid ""
 "**Description**: Get the scientific name and taxonomy of the organism(s) "
 "associated with a PDB entry."
-msgstr ""
+msgstr "**描述**：获取与 PDB 条目相关的生物体的学名和分类信息。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1154 6d50eed29401466081f5171a717363b9
 msgid "**get_uniprot_accession_by_entity_id** (Type: RCSBTool)"
-msgstr ""
+msgstr "**get_uniprot_accession_by_entity_id**（类型：RCSBTool）"
 
 #: ../../tools/rcsb_pdb_tools.rst:1156 b4360b4cf22140efbdb4f60fecdca6a5
 msgid ""
 "Fetch UniProt accession numbers associated with a specific polymer entity."
-msgstr ""
+msgstr "获取与特定聚合物实体相关的UniProt登录号。"
 
 #: ../../tools/rcsb_pdb_tools.rst 86fc3cc4979948b0aa685fd85a5bd63b
 msgid "get_uniprot_accession_by_entity_id tool specification"
-msgstr ""
+msgstr "get_uniprot_accession_by_entity_id 工具规范"
 
 #: ../../tools/rcsb_pdb_tools.rst:1162 e19ce13f02524b8ba28e0914087c3339
 msgid "**Name**: ``get_uniprot_accession_by_entity_id``"
-msgstr ""
+msgstr "**名称**: ``get_uniprot_accession_by_entity_id``"
 
 #: ../../tools/rcsb_pdb_tools.rst:1164 85166a8585a24008834f464e7701dc96
 msgid ""
 "**Description**: Fetch UniProt accession numbers associated with a specific "
 "polymer entity."
-msgstr ""
+msgstr "**描述**：获取与特定聚合物实体相关的UniProt登录号。"
 
 #: ../../tools/rcsb_pdb_tools.rst:1184 7d956a916bbc4504bc63dfa8f9c64db6
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/rcsb_pdb_tools.rst:1186 ed363d60975a4ed499517365ddab8475
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/rcsb_pdb_tools.rst:1187 ff7f23cc5c57468ba90694552e82e8b8
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

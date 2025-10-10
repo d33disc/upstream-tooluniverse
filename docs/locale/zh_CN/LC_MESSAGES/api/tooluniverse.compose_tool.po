@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  ToolUniverse\n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-08 22:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.compose_tool.rst:2 569869600828424c982afafac28735bf
@@ -37,8 +37,8 @@ msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 #: 41288688389d49db9ffe25de1e6925e4 of tooluniverse.compose_tool.ComposeTool:1
 msgid ""
 "A flexible tool that can compose other tools using custom code logic. "
-"Supports both inline composition_code and external Python files. Features"
-" intelligent dependency management with automatic tool loading."
+"Supports both inline composition_code and external Python files. Features "
+"intelligent dependency management with automatic tool loading."
 msgstr ""
 "一个灵活的工具，能够通过自定义代码逻辑组合其他工具。支持内联 composition_code 及外部 Python "
 "文件。具备智能依赖管理功能，实现自动加载工具。"
@@ -130,7 +130,7 @@ msgstr "组成的输入参数"
 #: tooluniverse.compose_tool.ComposeTool._execute_inline_code:5
 #: tooluniverse.compose_tool.ComposeTool.run:5
 msgid "Callback function for streaming output"
-msgstr ""
+msgstr "用于流式输出的回调函数"
 
 #: b35b7e05652c4c3890a2379f895ca89e cf0982609d824f73920a2eca851cd735
 #: f1e7abfbda674116800e7bc4416935f5 of
@@ -143,22 +143,22 @@ msgstr "组合执行结果"
 #: a6861fcf4b764c798f372076dcbf0f11 of
 #: tooluniverse.compose_tool.ComposeTool._emit_stream_chunk:1
 msgid "Emit a stream chunk if callback is provided."
-msgstr ""
+msgstr "如果提供了回调函数，则发出一个数据流块。"
 
 #: b3c829d1157b4667a30a120cb5090a27 of
 #: tooluniverse.compose_tool.ComposeTool._emit_stream_chunk:3
 msgid "The chunk to emit"
-msgstr ""
+msgstr "要发出的块"
 
 #: 8778ff26d65d4522ab18df7d5d20e3a7 of
 #: tooluniverse.compose_tool.ComposeTool._create_event_emitter:1
 msgid "Create an event emitter function for the compose script."
-msgstr ""
+msgstr "为组合脚本创建一个事件触发器函数。"
 
 #: 3e611b7c1bda4cc6b6257b3fc91d0cd0 of
 #: tooluniverse.compose_tool.ComposeTool._create_event_emitter:6
 msgid "Event emitter function"
-msgstr ""
+msgstr "事件触发器函数"
 
 #: f11b37ff095c4a32bd4be381dbc0c718 of
 #: tooluniverse.compose_tool.ComposeTool._execute_from_file:1
@@ -195,4 +195,3 @@ msgstr "传递给工具的参数"
 #: tooluniverse.compose_tool.ComposeTool._call_tool:8
 msgid "Result from the tool execution"
 msgstr "工具执行结果"
-

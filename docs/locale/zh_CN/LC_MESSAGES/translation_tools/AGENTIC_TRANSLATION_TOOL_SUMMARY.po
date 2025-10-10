@@ -75,7 +75,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:15
 #: eb3f73db62904483a72b7d57ff920da1
 msgid "智能翻译，保持技术术语一致性"
-msgstr ""
+msgstr "智能翻译，确保技术术语的一致性"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:16
 #: 6edff6c7362d4fc3905ed92e1ae7098b
@@ -196,7 +196,7 @@ msgstr "优雅地处理翻译失败的情况"
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:46
 #: 2de1dd86998d43419c8ff9fe1f1774c6
 msgid "保留原文以防翻译失败"
-msgstr ""
+msgstr "原文已是中文，无需翻译。"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:47
 #: a44e0c9a95994bd79709db69a7688064
@@ -241,7 +241,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:93
 #: 358c69b3cc25489cb2c3975c98d7cd45
 msgid "支持查找未翻译条目"
-msgstr ""
+msgstr "支持查找未翻译的条目"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:94
 #: d9270c84afd147748ee36c52d9dbe32f
@@ -251,7 +251,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:96
 #: 97305600a5fb4ff7af225b85eef8fcf3
 msgid "使用方法"
-msgstr ""
+msgstr "使用说明"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:98
 #: abdaf0a7171a480fa88b14c7db7efbfd
@@ -286,12 +286,12 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:131
 #: 0de720e13a5e4f3487e0d7849cadbeab
 msgid "✅ .po 文件状态查看正常"
-msgstr ""
+msgstr "✅ .po 文件状态检查正常"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:132
 #: ff04888de09e46858bdb470a8ed494f7
 msgid "✅ 批量翻译功能正常"
-msgstr ""
+msgstr "✅ 批量翻译功能运行正常"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:133
 #: bc1de24ae2c04956a8dbb15ab78d0691
@@ -351,7 +351,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:162
 #: 7f1834c3f92c4f2c9226f484b11f5587
 msgid "完全在 `docs` 目录下实现"
-msgstr ""
+msgstr "完全在 `docs` 目录中实现"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:163
 #: 33c593f445ab48e596d59dd6b02eb0b4
@@ -366,7 +366,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:166
 #: 7bc4bb6b1f8e4805b0d46188463b2bf9
 msgid "2. 利用现有框架"
-msgstr ""
+msgstr "2. 使用现有框架"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:167
 #: b8428992e7dc4cf6a74831ff139b56b1
@@ -381,7 +381,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:169
 #: ed1a6cb9c5ec470585aa809f7fe1fb58
 msgid "易于扩展和定制"
-msgstr ""
+msgstr "易于扩展和自定义"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:171
 #: 9ab19c6232ba49e2b824c28e86cbe5fd
@@ -396,7 +396,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:173
 #: 49e9c29f26f1484e9848323096eefb53
 msgid "详细的日志记录"
-msgstr ""
+msgstr "Detailed logging"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:174
 #: 25ab35f7c31b43379971ecb1ba480f5e
@@ -436,12 +436,12 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:184
 #: 9c078d0f35df406c996fbff8a6800d5c
 msgid "修改 prompt 模板支持其他目标语言"
-msgstr ""
+msgstr "修改 prompt 模板以支持其他目标语言"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:185
 #: 529811721a7c4f8c87976e3df4926df8
 msgid "添加语言检测功能"
-msgstr ""
+msgstr "添加语言识别功能"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:186
 #: 340d0320aa4e49708d7e5afe8e7546b3
@@ -451,7 +451,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:188
 #: 6c21cb7a47a04df2856f0ff913ae16ca
 msgid "2. 增强翻译质量"
-msgstr ""
+msgstr "2. 提升翻译质量"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:189
 #: 5cacd77262be467892a12252f7b9ed38
@@ -476,7 +476,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:194
 #: fbe6cd1f731d48cca1dca04dfcdb191a
 msgid "支持其他文档格式（.rst, .md等）"
-msgstr ""
+msgstr "支持其他文档格式（.rst、.md 等）"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:195
 #: f076f680e5d048538af18e9a62ad8f2c
@@ -486,7 +486,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:196
 #: 44886304d5ed48b1a78e676017585ee1
 msgid "实现自动翻译工作流"
-msgstr ""
+msgstr "实现自动化翻译工作流程"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:198
 #: deae4658280b4f10b47811f035848676
@@ -517,7 +517,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:205
 #: 7b61ade9f7824096a5f70fd1753f3aa4
 msgid "🛡️ **错误处理**：优雅处理各种异常情况"
-msgstr ""
+msgstr "🛡️ **错误处理**：优雅地处理各种异常情况"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:206
 #: 1f338060717d4b79b6095db9725f46ae
@@ -532,4 +532,4 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:209
 #: 48e8a5f33d9a474493fb5014890c9db7
 msgid "这个实现为 ToolUniverse 社区提供了一个很好的示例，展示了如何利用框架的 AgenticTool 功能来解决实际的翻译需求。"
-msgstr ""
+msgstr "这个实现为 ToolUniverse 社区提供了一个极佳的示例，展示了如何利用框架的 AgenticTool 功能来解决实际的翻译需求。"

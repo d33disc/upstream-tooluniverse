@@ -604,7 +604,7 @@ if __name__ == "__main__":
             f"\n[{idx+1}] Running tool: {query['name']} with arguments: {query['arguments']}"
         )
         try:
-            result = tooluni.run(query)
+            result = test_tooluni.run(query)
             print("✅ Success. Example output snippet:")
             print(result if isinstance(result, dict) else str(result))
         except Exception as e:

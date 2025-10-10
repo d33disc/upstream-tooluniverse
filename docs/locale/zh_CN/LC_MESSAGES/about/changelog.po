@@ -173,6 +173,9 @@ msgstr "已实现安全令牌处理"
 #: ../../about/changelog.rst:59 50caaef0de15488fa2507f5c739e4daf
 msgid "[0.2.0] - 2024-11-XX"
 msgstr ""
+"[0.2.0] - 2024-11-XX\n"
+"\n"
+"上下文：文档"
 
 #: ../../about/changelog.rst:63 a95de66be65349c09d69dd02ca6fa0ab
 msgid "Basic tool framework"
@@ -205,6 +208,9 @@ msgstr "JSON 解析错误"
 #: ../../about/changelog.rst:78 491772c11ec94cdb9d04c83ccb9de574
 msgid "[0.1.0] - 2024-10-XX"
 msgstr ""
+"[0.1.0] - 2024-10-XX\n"
+"\n"
+"上下文：文档"
 
 #: ../../about/changelog.rst:82 29ba2d2419ba4cb89b51542a99031db0
 msgid "Initial release"
@@ -509,56 +515,56 @@ msgstr "致谢"
 
 #: ../../about/changelog.rst:248 9fb912bfced44cb492d1e6844b3b9776
 msgid "Contributors to 0.3.0"
-msgstr ""
+msgstr "0.3.0 版本的贡献者"
 
 #: ../../about/changelog.rst:250 a57e94b05f2f4b3ebc5aa3573e046e5f
 msgid "**Shanghua Gao** - Lead developer and maintainer"
-msgstr ""
+msgstr "**高尚华** - 首席开发者兼维护者"
 
 #: ../../about/changelog.rst:251 f098daab3b834519ab224c1af350d36c
 msgid "**Contributors** - Community bug reports and feature requests"
-msgstr ""
+msgstr "**贡献者** - 社区错误报告与功能请求"
 
 #: ../../about/changelog.rst:252 20236060f6734e9093084a705e497ef7
 msgid "**Beta Testers** - Early adoption and feedback"
-msgstr ""
+msgstr "**测试用户** - 早期采用与反馈"
 
 #: ../../about/changelog.rst:255 2c0d7451f4144b94ab28838eb172b541
 msgid "Special Thanks"
-msgstr ""
+msgstr "特别鸣谢"
 
 #: ../../about/changelog.rst:257 3c8fa07fe85a404ba508de91742940d1
 msgid "**OpenTargets Team** - API support and collaboration"
-msgstr ""
+msgstr "**OpenTargets 团队** - API 支持与协作"
 
 #: ../../about/changelog.rst:258 51dd54bc5301439ba99b4cf6f64319c1
 msgid "**FastMCP Team** - MCP protocol implementation"
-msgstr ""
+msgstr "**FastMCP 团队** - MCP 协议实现"
 
 #: ../../about/changelog.rst:259 5052d73764db4f86b932b23d44bdb88f
 msgid "**Sphinx Team** - Documentation framework"
-msgstr ""
+msgstr "**Sphinx团队** - 文档框架"
 
 #: ../../about/changelog.rst:260 60f3df62733349f9ae339df45cafd22d
 msgid "**Python Community** - Foundational libraries"
-msgstr ""
+msgstr "**Python 社区** - 基础库"
 
 #: ../../about/changelog.rst:263 ecabf9b11f63473189f2922d90cd00d4
 msgid "Support and Resources"
-msgstr ""
+msgstr "支持与资源"
 
 #: ../../about/changelog.rst:265 355d6cf238a144378d90fa2277adcb60
 msgid "**Documentation**: https://tooluniverse.readthedocs.io"
-msgstr ""
+msgstr "**文档**: https://tooluniverse.readthedocs.io"
 
 #: ../../about/changelog.rst:266 281d84c04a6d4d1d959fd06d7f9d490c
 msgid "**GitHub Repository**: https://github.com/mims-harvard/TxAgent"
-msgstr ""
+msgstr "**GitHub 仓库**: https://github.com/mims-harvard/TxAgent"
 
 #: ../../about/changelog.rst:267 d89e80ee09d74761a541a1b92715d458
 msgid "**Issue Tracker**: https://github.com/mims-harvard/TxAgent/issues"
-msgstr ""
+msgstr "**问题追踪器**: https://github.com/mims-harvard/TxAgent/issues"
 
 #: ../../about/changelog.rst:268 a9821c9346f140e9817d4080b441663d
 msgid "**Discussions**: https://github.com/mims-harvard/TxAgent/discussions"
-msgstr ""
+msgstr "**讨论**：https://github.com/mims-harvard/TxAgent/discussions"

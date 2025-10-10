@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:16 c31bb6d27f6749f7b50751535bbe8522
 msgid "**DailyMed** - `DailyMed <https://dailymed.nlm.nih.gov/>`_"
-msgstr ""
+msgstr "**每日药典** - `每日药典 <https://dailymed.nlm.nih.gov/>`_"
 
 #: ../../reference/data_sources.rst:17 0aa9f0189f6c463c92ffff6b44df9ff6
 msgid "**DeepSeek** - `DeepSeek <https://www.deepseek.com/>`_"
@@ -223,6 +223,8 @@ msgid ""
 "**OpenTargets Platform API** - `OpenTargets Platform API "
 "<https://api.platform.opentargets.org/>`_"
 msgstr ""
+"**OpenTargets 平台 API** - `OpenTargets 平台 API "
+"<https://api.platform.opentargets.org/>`_"
 
 #: ../../reference/data_sources.rst:47 7e99dc649a054a428c81cefb59e1aef5
 msgid ""
@@ -259,7 +261,7 @@ msgstr ""
 msgid ""
 "**Semantic Scholar** - `Semantic Scholar "
 "<https://www.semanticscholar.org/>`_"
-msgstr ""
+msgstr "**语义学者** - `语义学者 <https://www.semanticscholar.org/>`_"
 
 #: ../../reference/data_sources.rst:55 f34d6a5fe9c94d07983e6de39fa9833d
 msgid ""
@@ -279,4 +281,4 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:58 209a3451300a4599b0cf8dc0c9e8ea06
 msgid "**USPTO** - `USPTO <https://www.uspto.gov/>`_"
-msgstr ""
+msgstr "**美国专利商标局（USPTO）** - `美国专利商标局 <https://www.uspto.gov/>`_"

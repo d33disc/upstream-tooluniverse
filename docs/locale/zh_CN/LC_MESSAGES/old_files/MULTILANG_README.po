@@ -179,7 +179,7 @@ msgstr "🌐 语言切换方法"
 
 #: ../../old_files/MULTILANG_README.md:138 d4ea9a3a88de484597fb8ccfce3786f3
 msgid "1. 浮动切换器（所有页面）"
-msgstr ""
+msgstr "1. 浮动切换器（适用于所有页面）"
 
 #: ../../old_files/MULTILANG_README.md:140 fe7dd888c97341e0aee7612fc6a6911a
 msgid "页面右下角的下拉菜单："
@@ -191,7 +191,7 @@ msgstr "🇬🇧 英语"
 
 #: ../../old_files/MULTILANG_README.md:142 d3b9c5cb7bbd45ddb285c52cc0e68a94
 msgid "🇨🇳 简体中文"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您提供准确、流畅的中文翻译。"
 
 #: ../../old_files/MULTILANG_README.md:144 9c87c057cc4c4a7db560e89a6a996fdb
 msgid "2. 语言选择页"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:155 f501a6dee35349a29f0801bed5cf5191
 msgid "英文：`/index.html`"
-msgstr ""
+msgstr "`/index.html`"
 
 #: ../../old_files/MULTILANG_README.md:156 80bc9dd7dcd347378b826bbaf28db414
 msgid "中文：`/zh_CN/index.html`"
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:171 30fcf6654549424b828e95c444f99bfe
 msgid "待翻译"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您进行翻译。"
 
 #: ../../old_files/MULTILANG_README.md:173 aa52ce5ac0454954b270092db898224e
 msgid "需要翻译的主要文件（按优先级）："
@@ -259,7 +259,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:175 9b726ad253014b2a9a13306e85caf3eb
 msgid "☐ `quickstart.po` - 快速开始"
-msgstr ""
+msgstr "☐ `quickstart.po` - 快速入门"
 
 #: ../../old_files/MULTILANG_README.md:176 d3732823055144029606dcf7499d42c3
 msgid "☐ `installation.po` - 安装指南"
@@ -267,7 +267,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:177 5a81a533d9664548a5a4fd9fad9a7756
 msgid "☐ `getting_started.po` - 入门教程"
-msgstr ""
+msgstr "☐ `getting_started.po` - 入门指南"
 
 #: ../../old_files/MULTILANG_README.md:178 ee318867e6e54fd387da73b25cc7dd61
 msgid "☐ `faq.po` - 常见问题"
@@ -275,7 +275,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:179 d8af5e0e683743ec955e912e93a27ffc
 msgid "☐ `guide/*.po` - 用户指南"
-msgstr ""
+msgstr "☐ `guide/*.po` - 用户手册"
 
 #: ../../old_files/MULTILANG_README.md:180 3d45fc39715043ab82a747d75f48fe23
 msgid "☐ `tools/*.po` - 工具文档"
@@ -291,7 +291,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:184 7cdadc8c54af4b0ea3ec1910fdcf1033
 msgid "🛠️ 开发工作流"
-msgstr ""
+msgstr "🛠️ 开发工作流程"
 
 #: ../../old_files/MULTILANG_README.md:186 bf238e3c5444497c8cd6b7a903724368
 msgid "添加新内容"
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:191 87cefb3a38c14489b96eb267531c4e92
 msgid "翻译中文"
-msgstr ""
+msgstr "请提供需要翻译的英文文本，我将为您翻译成符合要求的中文内容。"
 
 #: ../../old_files/MULTILANG_README.md:192 2a985675f9d64223ad2c7ce589c686ad
 msgid "构建中文版测试"
@@ -323,11 +323,11 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:205 5b21a99b556d4ebd8cce559d11d770ac
 msgid "使用 AI 辅助翻译："
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您进行翻译。"
 
 #: ../../old_files/MULTILANG_README.md:215 f2ddd1cbbf074885ae961cd59f8e5d53
 msgid "📖 相关文档"
-msgstr ""
+msgstr "📖 Related Documentation"
 
 #: ../../old_files/MULTILANG_README.md:217 fb6dbd50a49844d48f2adfb94189396d
 msgid "[I18N_GUIDE.md](I18N_GUIDE.md) - 详细翻译指南"
@@ -353,7 +353,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:224 6941554c39134005b0a8f7181f242db6
 msgid "Q: 翻译后看不到效果？"
-msgstr ""
+msgstr "问：翻译后看不到效果？"
 
 #: ../../old_files/MULTILANG_README.md:226 f3f30969f1544414a78f6da701b2608b
 msgid "A: 确保："
@@ -369,19 +369,19 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:229 b89bce514b504ce5a027096adfd052a6
 msgid "重新构建对应语言版本"
-msgstr ""
+msgstr "重新构建相应的语言版本"
 
 #: ../../old_files/MULTILANG_README.md:231 6326ec139b124a90a9f354f0131966c5
 msgid "Q: 如何只翻译部分页面？"
-msgstr ""
+msgstr "问：如何仅翻译页面的部分内容？"
 
 #: ../../old_files/MULTILANG_README.md:233 046e6b3d4a40421399795895c9f0416d
 msgid "A: 可以！只翻译对应的 `.po` 文件，未翻译的会显示英文原文。"
-msgstr ""
+msgstr "A: 可以！只需翻译对应的 `.po` 文件，未翻译的内容将显示为英文原文。"
 
 #: ../../old_files/MULTILANG_README.md:235 1a42bb5bfe9c420ba2f2cf8c9360d0e7
 msgid "Q: 语言切换器不显示？"
-msgstr ""
+msgstr "问：语言切换器未显示？"
 
 #: ../../old_files/MULTILANG_README.md:237 66ac662acfa345abb88594e651f5836a
 msgid "A: 检查："
@@ -389,23 +389,23 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:238 9f6527f989aa4479a937e904fff76736
 msgid "`_static/language_switcher.js` 和 `.css` 文件存在"
-msgstr ""
+msgstr "`_static/language_switcher.js` 和 `.css` 文件已存在"
 
 #: ../../old_files/MULTILANG_README.md:239 95f84c3af0584a1693e91dc83ff0cf7d
 msgid "`conf.py` 中正确配置了 `html_js_files` 和 `html_css_files`"
-msgstr ""
+msgstr "在 `conf.py` 中正确配置了 `html_js_files` 和 `html_css_files`"
 
 #: ../../old_files/MULTILANG_README.md:240 91b265baa3c74066991cee564b5aa115
 msgid "浏览器控制台是否有错误"
-msgstr ""
+msgstr "浏览器控制台是否存在错误"
 
 #: ../../old_files/MULTILANG_README.md:242 ea29f2ffd7414f579a20e720aea9be13
 msgid "Q: 如何部署多语言文档？"
-msgstr ""
+msgstr "问：如何部署多语言文档？"
 
 #: ../../old_files/MULTILANG_README.md:244 904295b08cc54e779cf4cbe2ef76f47b
 msgid "A:"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您翻译成符合要求的中文内容。"
 
 #: ../../old_files/MULTILANG_README.md:256 5643452e377a4f4693afa674867b036c
 msgid "🚀 部署"
@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:285 d4676727738b4aaeb40726c767130974
 msgid "📝 TODO"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您提供准确、专业的中文翻译。"
 
 #: ../../old_files/MULTILANG_README.md:287 bf49df59991b4661b7e309379de2784d
 msgid "[ ] 完成所有主要页面的中文翻译"
@@ -429,7 +429,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:288 2cd197141f614427b079e8538a443a2f
 msgid "[ ] 添加更多语言（日语、韩语等）"
-msgstr ""
+msgstr "[ ] 添加更多语言（如日语、韩语等）"
 
 #: ../../old_files/MULTILANG_README.md:289 343ebde3fab94928a4b4c6d5d3393bfb
 msgid "[ ] 自动化翻译工作流"
@@ -461,7 +461,7 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:299 4972485811eb413694ff394229a741d1
 msgid "提交 Pull Request"
-msgstr ""
+msgstr "提交拉取请求"
 
 #: ../../old_files/MULTILANG_README.md:301 1c11a81bad7c443d9550fdf29ba35253
 msgid "📄 许可"
@@ -473,4 +473,4 @@ msgstr ""
 
 #: ../../old_files/MULTILANG_README.md:307 eb69b7a169a84d5690c9b7c8451b518e
 msgid "🌟 **现在就开始使用双语文档吧！**"
-msgstr ""
+msgstr "🌟 **现在就开始使用双语文档！**"

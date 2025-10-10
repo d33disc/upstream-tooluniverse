@@ -338,7 +338,7 @@ msgstr ""
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:24
 #, python-brace-format
 msgid "return {\"status\": \"processed\"}"
-msgstr ""
+msgstr "return {\"status\": \"已处理\"}"
 
 #: 8de50b6b7efe497c924fc3ac4040c0d1 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:26
@@ -358,7 +358,7 @@ msgstr ""
 #: 3b575a757f204d75a5ad7cecb2d9a2c2 of
 #: tooluniverse.mcp_tool_registry.register_mcp_tool_from_config:31
 msgid "})"
-msgstr ""
+msgstr "抱歉，您似乎没有提供完整的英文文本内容。请提供完整的英文内容，以便我为您准确翻译成中文。"
 
 #: 700f534bde4c441faac9491e783ba9d7 of
 #: tooluniverse.mcp_tool_registry.get_mcp_tool_registry:1
@@ -526,7 +526,7 @@ msgstr "将 MCP 工具从服务器加载到 ToolUniverse 实例中。"
 #: bb09c5484e01460b916dbdd2cd438c16 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:5
 msgid "tu"
-msgstr ""
+msgstr "请提供完整的英文文本以便翻译。"
 
 #: c8acab97f3f14ccfa2dd633dac2980f8 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:-1
@@ -567,7 +567,7 @@ msgstr ""
 #: 52dbfa4e274f43259a9b24879dcaf01f of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:16
 msgid "tu = ToolUniverse()"
-msgstr ""
+msgstr "tu = 工具宇宙()"
 
 #: 2fc84372caa04e7f82e6638820716b9e of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:18
@@ -582,7 +582,7 @@ msgstr "http://localhost:8001\", \"http://analysis-server:8002"
 #: 0187c5cf031840c0bf050a425a7b4153 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:22
 msgid "])"
-msgstr ""
+msgstr "请提供需要翻译的英文文本，我将为您提供符合要求的中文翻译。"
 
 #: 42e5af4b625648e899f8c790fd782e14 of
 #: tooluniverse.mcp_tool_registry.load_mcp_tools_to_tooluniverse:24

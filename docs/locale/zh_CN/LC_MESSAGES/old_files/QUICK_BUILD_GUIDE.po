@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:145 44657343946f46ac95e5c6ae15e7a591
 msgid "翻译格式："
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您提供符合要求的中文翻译。"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:154 154bd07e6a9b42269f37604df3150de4
 msgid "3. 重新构建"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:164 40afe6e061c64b8aab7417b98fbea975
 msgid "Shibuya 现代主题"
-msgstr ""
+msgstr "涩谷现代主题"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:166 878231ab0ec6441e872d011e18455d29
 msgid "✅ 美观的界面设计"
@@ -214,7 +214,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:175 6236d2b7fbdb47f0897bb5c1f45634fc
 msgid "🔄 各语言版本独立完整"
-msgstr ""
+msgstr "各语言版本独立完整"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:176 94ad7f3817ef4670bf343205eca63f03
 msgid "📱 所有设备完美适配"
@@ -226,7 +226,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:180 c5828be0ef6741a8beede6589371b06b
 msgid "第一次使用？就这么简单："
-msgstr ""
+msgstr "首次使用？就是这么简单："
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:187 b8857edf1a8f4c41a832205f4b28ab5f
 msgid "等待构建完成后："
@@ -234,15 +234,15 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:188 972e26af59474e409ab0fb332c9f49be
 msgid "选择 `y` 启动本地服务器"
-msgstr ""
+msgstr "选择 `y` 以启动本地服务器"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:189 799e265940184560af02eb3c8f4791ee
 msgid "浏览器会显示语言选择页"
-msgstr ""
+msgstr "浏览器将显示语言选择页面"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:190 f8d35545b222482cbeb09d2a3bb82bcb
 msgid "选择你想要的语言"
-msgstr ""
+msgstr "选择您想要的语言"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:191 c53f6db1565e44dfaa8a3217b5320594
 msgid "享受阅读！📖"
@@ -250,7 +250,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:193 311df92696d046c1ac8cba74209e1355
 msgid "💡 Tips"
-msgstr ""
+msgstr "💡 提示"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:195 118838cfd39c42b89313d510a9aaf5ce
 msgid "加快构建速度"
@@ -275,6 +275,9 @@ msgstr ""
 #: ../../old_files/QUICK_BUILD_GUIDE.md:226 9263f0e61dac42558c80e2e96a9717cb
 msgid "[MULTILANG_README.md](MULTILANG_README.md) - 多语言系统说明"
 msgstr ""
+"```markdown\n"
+"[MULTILANG_README.md](MULTILANG_README.md) - 多语言系统说明\n"
+"```"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:227 77d3994ed9b54bea8d8789593a38c239
 msgid "[build_lang.sh](build_lang.sh) - 交互式语言构建脚本"
@@ -286,7 +289,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:231 8dacd86d8ceb421287fc45ca8d5d8e7f
 msgid "Q: 为什么看不到中文翻译？"
-msgstr ""
+msgstr "问：为什么看不到中文翻译？"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:233 97aa99ac8d7c49209aee250562f157ee
 msgid "A: 检查："
@@ -294,11 +297,11 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:234 fc719978f47d4a808e18f89a4c73faf1
 msgid "`locale/zh_CN/LC_MESSAGES/` 目录中的 `.po` 文件是否有翻译内容"
-msgstr ""
+msgstr "`locale/zh_CN/LC_MESSAGES/` 目录中的 `.po` 文件是否包含翻译内容"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:235 607c8cab80cb449eaa5366567684cdec
 msgid "`.po` 文件中 `msgstr` 是否填写了中文"
-msgstr ""
+msgstr "`.po` 文件中 `msgstr` 是否已填写中文"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:236 c05bf2e7b827495bbce4bbc91890ce0a
 msgid "重新运行构建脚本"
@@ -306,7 +309,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:238 3bc2166d67a84cf7a20bb5520dda0c9a
 msgid "Q: 如何只看英文或中文？"
-msgstr ""
+msgstr "问：如何仅查看英文或中文？"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:240 1d6ca63b859e4bd5beca2ee47eb1dabc
 msgid "A: 使用环境变量："
@@ -314,13 +317,13 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:246 e93e3ba895064117865f8e5b26094a37
 msgid "Q: 构建很慢怎么办？"
-msgstr ""
+msgstr "问：构建速度很慢怎么办？"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:248
 #: ../../old_files/QUICK_BUILD_GUIDE.md:254 4176774ade754b14be671d9680f2f4fe
 #: a848188eb5c54594b2994f2062ce6fc4
 msgid "A:"
-msgstr ""
+msgstr "请提供具体的英文文本，我将为您翻译成符合要求的中文内容。"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:249 542ae8c1780e4351a0da6a557aec92a6
 msgid "跳过 Remote Tools：`DOC_SKIP_REMOTE=1`"
@@ -328,7 +331,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:250 cd2dbf4277f8418aa57a50decff03b16
 msgid "只构建一种语言：`DOC_LANGUAGES=en`"
-msgstr ""
+msgstr "仅构建一种语言：`DOC_LANGUAGES=en`"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:252 7630ce957bd24fb89dd7d6f2d5caf94b
 msgid "Q: 如何部署到服务器？"
@@ -340,7 +343,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:265 2f9f14b2096e40e6b8379950b96c5042
 msgid "现在就试试吧！"
-msgstr ""
+msgstr "现在就试用吧！"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:272 1d11b0f8c6504682a92db9aad5c241c7
 msgid "一键生成精美的中英文文档！🚀"

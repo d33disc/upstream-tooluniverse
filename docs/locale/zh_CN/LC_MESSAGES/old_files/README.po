@@ -44,7 +44,7 @@ msgstr "主题研究文档"
 
 #: ../../old_files/README.md:10 4fcf374a6b2b41c9b9811e9f6ba8f766
 msgid "`AI_COMPANIES_THEME_RESEARCH.md` - AI 公司文档主题研究"
-msgstr ""
+msgstr "`AI_COMPANIES_THEME_RESEARCH.md` - AI公司文档主题研究"
 
 #: ../../old_files/README.md:11 8c00d1199a6c4c279e57960354141f6f
 msgid "`COMPLETE_THEME_GUIDE.md` - 完整主题指南"

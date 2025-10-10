@@ -708,49 +708,49 @@ msgstr "将钩子类型特定的默认值应用于钩子配置。"
 msgid ""
 "This method merges hook type defaults with individual hook configuration, "
 "ensuring that each hook type gets its appropriate default values."
-msgstr ""
+msgstr "此方法将钩子类型的默认值与各个钩子的配置合并，确保每种钩子类型都能获得其适当的默认值。"
 
 #: 993fbde06c7a48848ac3fcb2e7af6ab4 of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:6
 msgid "Original hook configuration"
-msgstr ""
+msgstr "原始钩子配置"
 
 #: 6c675366c06d48eebb36e7e0c7ce847b of
 #: tooluniverse.output_hook.HookManager._apply_hook_type_defaults:9
 msgid "Enhanced configuration with defaults applied"
-msgstr ""
+msgstr "使用默认值的增强配置"
 
 #: e898ba692d8949fea4cefb690b053f81 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:1
 msgid "Check if a hook is applicable to the current tool."
-msgstr ""
+msgstr "检查挂钩是否适用于当前工具。"
 
 #: 1942851995964c6da09dc9a9df5dd658 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:3
 msgid "Hook instance to check"
-msgstr ""
+msgstr "挂钩实例以进行检查"
 
 #: 7cb5e42a1a304663991c1052ba93c5f9 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:5
 msgid "Name of the current tool"
-msgstr ""
+msgstr "当前工具的名称"
 
 #: 3f689e6d12c742ed885eff90129f6726 b9faa63ab45041ff8a3b5532bd31ae05 of
 #: tooluniverse.output_hook.FileSaveHook.process:9
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:7
 msgid "Execution context"
-msgstr ""
+msgstr "执行上下文"
 
 #: 8218cef8a2e94b88a71b181f9efb00d4 of
 #: tooluniverse.output_hook.HookManager._is_hook_applicable:10
 msgid "True if hook is applicable, False otherwise"
-msgstr ""
+msgstr "如果钩子适用，则为 True，否则为 False"
 
 #: 35cb1d16aafb42ec9ea1c5e66e585989 of tooluniverse.output_hook.FileSaveHook:1
 msgid ""
 "Hook that saves tool outputs to temporary files and returns file "
 "information."
-msgstr ""
+msgstr "用于将工具输出保存到临时文件并返回文件信息的钩子。"
 
 #: 8cc9784f8f664eb798388577cfa951c6 of tooluniverse.output_hook.FileSaveHook:3
 msgid ""
@@ -759,6 +759,7 @@ msgid ""
 " output. This is useful for handling large outputs or when you need to "
 "process outputs as files rather than in-memory data."
 msgstr ""
+"此钩子将工具的输出保存到一个临时文件中，并返回有关文件路径、数据格式和数据结构的信息，而不是原始输出。这对于处理大型输出或需要将输出作为文件而非内存数据进行处理的情况非常有用。"
 
 #: 608b69b46e814944b2a7e5d55cafb1d7 of tooluniverse.output_hook.FileSaveHook:8
 msgid ""
@@ -769,11 +770,17 @@ msgid ""
 "up old files (default: False) - cleanup_age_hours: Age in hours for auto "
 "cleanup (default: 24)"
 msgstr ""
+"配置选项：  \n"
+"- `temp_dir`：用于保存临时文件的目录（默认值：系统临时目录）  \n"
+"- `file_prefix`：生成文件名的前缀（默认值：`tool_output`）  \n"
+"- `include_metadata`：是否在响应中包含元数据（默认值：`True`）  \n"
+"- `auto_cleanup`：是否自动清理旧文件（默认值：`False`）  \n"
+"- `cleanup_age_hours`：自动清理的文件年龄（以小时为单位）（默认值：`24`）"
 
 #: 21670a3f2bd946ca9b0b422cbf33965a of
 #: tooluniverse.output_hook.FileSaveHook.__init__:1
 msgid "Initialize the FileSaveHook."
-msgstr ""
+msgstr "初始化 FileSaveHook。"
 
 #: 958bce61bf604a9f8ed835fcead5db9e of
 #: tooluniverse.output_hook.FileSaveHook.__init__:3
@@ -783,11 +790,18 @@ msgid ""
 "Include metadata flag - auto_cleanup: Auto cleanup flag - cleanup_age_hours:"
 " Cleanup age in hours"
 msgstr ""
+"钩子配置包括：  \n"
+"- name: 钩子名称  \n"
+"- temp_dir: 临时文件目录  \n"
+"- file_prefix: 文件名前缀  \n"
+"- include_metadata: 是否包含元数据标志  \n"
+"- auto_cleanup: 是否自动清理标志  \n"
+"- cleanup_age_hours: 清理时间（以小时为单位）"
 
 #: 837c7889eaac44f8ad66d5454d398e7f of
 #: tooluniverse.output_hook.FileSaveHook.process:1
 msgid "Process the tool output by saving it to a temporary file."
-msgstr ""
+msgstr "将工具的输出保存到临时文件中进行处理。"
 
 #: c7ff7f5a377945d6a21dab6233077376 of
 #: tooluniverse.output_hook.FileSaveHook.process:12
@@ -798,81 +812,88 @@ msgid ""
 "of the file in bytes     - created_at: Timestamp when file was created     -"
 " metadata: Additional metadata (if include_metadata is True)"
 msgstr ""
+"包含文件信息的字典：  \n"
+"- `file_path`：文件保存路径  \n"
+"- `data_format`：数据格式（如 json、text、binary 等）  \n"
+"- `data_structure`：数据的结构信息  \n"
+"- `file_size`：文件大小（以字节为单位）  \n"
+"- `created_at`：文件创建的时间戳  \n"
+"- `metadata`：附加的元数据（如果 `include_metadata` 为 True）"
 
 #: 9f9757faafe64712ad99fb420039f8e8 of
 #: tooluniverse.output_hook.FileSaveHook.process:14
 msgid "Dictionary containing file information:"
-msgstr ""
+msgstr "包含文件信息的字典："
 
 #: c97d3a68bc004cc88b586146ba5ef26f of
 #: tooluniverse.output_hook.FileSaveHook.process:15
 msgid "file_path: Path to the saved file"
-msgstr ""
+msgstr "file_path：保存文件的路径"
 
 #: 76eb5ffd42494d71b53e40980055a930 of
 #: tooluniverse.output_hook.FileSaveHook.process:16
 msgid "data_format: Format of the data (json, text, binary, etc.)"
-msgstr ""
+msgstr "data_format：数据的格式（json、text、binary 等）"
 
 #: c233e7cfc4b04235bedebe11c575a379 of
 #: tooluniverse.output_hook.FileSaveHook.process:17
 msgid "data_structure: Structure information about the data"
-msgstr ""
+msgstr "data_structure：关于数据的结构信息"
 
 #: 8c39c16b79a44ac3bc443be4a7868dc4 of
 #: tooluniverse.output_hook.FileSaveHook.process:18
 msgid "file_size: Size of the file in bytes"
-msgstr ""
+msgstr "file_size：文件的大小（以字节为单位）"
 
 #: 0cd38ffa2a9147978242c7de5cbec706 of
 #: tooluniverse.output_hook.FileSaveHook.process:19
 msgid "created_at: Timestamp when file was created"
-msgstr ""
+msgstr "created_at：文件创建的时间戳"
 
 #: d1fcfe270b6e4f8f895a39f379dc0e25 of
 #: tooluniverse.output_hook.FileSaveHook.process:20
 msgid "metadata: Additional metadata (if include_metadata is True)"
-msgstr ""
+msgstr "元数据：附加元数据（如果 include_metadata 为 True）"
 
 #: 3193f94689e2407eb8e342e5c0597f19 of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:1
 msgid "Analyze the data to determine its format and structure."
-msgstr ""
+msgstr "分析数据以确定其格式和结构。"
 
 #: 47b6a46f096e40c0806fb5604f5043ae of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:3
 msgid "The data to analyze"
-msgstr ""
+msgstr "需要分析的数据"
 
 #: e62342e6d05d422181d5663e5a944a4d of
 #: tooluniverse.output_hook.FileSaveHook._analyze_data:6
 msgid "(data_format, data_structure)"
-msgstr ""
+msgstr "（data_format，data_structure）"
 
 #: 02339afc0b04481080dfbebc39032cd9 of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:1
 msgid "Write data to file in the appropriate format."
-msgstr ""
+msgstr "将数据以适当的格式写入文件。"
 
 #: 5833c8af8b034fb98831c7ee691d5f98 of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:3
 msgid "The data to write"
-msgstr ""
+msgstr "要写入的数据"
 
 #: 724eca59e23943cf90718417e0a5b4cf of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:5
 msgid "Path to the file"
-msgstr ""
+msgstr "文件路径"
 
 #: 873177155be040879125173dbb3eeadc of
 #: tooluniverse.output_hook.FileSaveHook._write_data_to_file:7
 msgid "Format of the data"
-msgstr ""
+msgstr "数据格式"
 
 #: d2245d4a9837472e814514fff2158913 of
 #: tooluniverse.output_hook.FileSaveHook._cleanup_old_files:1
 msgid "Clean up old files based on the cleanup_age_hours setting."
-msgstr ""
+msgstr "根据 cleanup_age_hours 设置清理旧文件。"
 
 #~ msgid ":py:class:`Dict[str`, :py:class:`Any]`"
 #~ msgstr ""

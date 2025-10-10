@@ -2227,127 +2227,127 @@ msgstr "FDA_get_dosage_and_storage_information_by_drug_name 工具规格说明"
 #: ../../tools/fda_drug_labeling_tools.rst:847
 #: c8b6fb110ab3415c98fa94baaf2690a9
 msgid "**Name**: ``FDA_get_dosage_and_storage_information_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_dosage_and_storage_information_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:849
 #: dd42dab91e5f4fe18525148255a2feff
 msgid ""
 "**Description**: Retrieve dosage and storage information for a specific "
 "drug."
-msgstr ""
+msgstr "**描述**：检索特定药物的剂量和存储信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:875
 #: 969e7c81fbbf40d8a7f7d01740bca67f
 msgid ""
 "**FDA_get_dosage_forms_and_strengths_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_dosage_forms_and_strengths_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:877
 #: 56c8ab347615498595eedf81f3dbb8a7
 msgid ""
 "Retrieve dosage forms and strengths information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索剂型和规格信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b717017c81f44cb7899acb4eb602dc53
 msgid "FDA_get_dosage_forms_and_strengths_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_dosage_forms_and_strengths_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:883
 #: a811dca7cd174d2e864c4271288b62c0
 msgid "**Name**: ``FDA_get_dosage_forms_and_strengths_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_dosage_forms_and_strengths_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:885
 #: aefed70428ab4891b84ed03ae973fa62
 msgid ""
 "**Description**: Retrieve dosage forms and strengths information based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取剂型和规格信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:911
 #: cdd7bcb2d4f040939082ff787900df71
 msgid ""
 "**FDA_get_drug_generic_name** (Type: FDADrugLabelGetDrugGenericNameTool)"
-msgstr ""
+msgstr "**FDA_get_drug_generic_name**（类型：FDADrugLabelGetDrugGenericNameTool）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:913
 #: b62e1d3d28e04adaaff0f5f705aa764c
 msgid "Get the drug’s generic name based on the drug's generic or brand name."
-msgstr ""
+msgstr "根据药物的通用名或品牌名获取药物的通用名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7b1c89f4f0e74a6cb5550f51965e7e09
 msgid "FDA_get_drug_generic_name tool specification"
-msgstr ""
+msgstr "FDA_get_drug_generic_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:919
 #: 937a13d82de540fb8e679a9ca091500f
 msgid "**Name**: ``FDA_get_drug_generic_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_generic_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:920
 #: eef08e8a03cd40ef9c1af0d784595272
 msgid "**Type**: ``FDADrugLabelGetDrugGenericNameTool``"
-msgstr ""
+msgstr "**类型**: ``FDADrugLabelGetDrugGenericNameTool``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:921
 #: 88e81b1bf20246ffa48c7152dacb3085
 msgid ""
 "**Description**: Get the drug’s generic name based on the drug's generic or "
 "brand name."
-msgstr ""
+msgstr "**描述**：根据药物的通用名或品牌名获取药物的通用名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:925
 #: 56f65c919fc24d61b92bbb076bd78ef6
 msgid ""
 "``drug_name`` (string) (optional) The generic or brand name of the drug."
-msgstr ""
+msgstr "``drug_name``（字符串）（可选）药物的通用名或品牌名。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:941
 #: 72e3b6a0ec9241c88354edbaafe92641
 msgid "**FDA_get_drug_interactions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_interactions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:943
 #: 4a3137ebe59e43f78a9074e3d43b3b41
 msgid "Retrieve drug interactions based on the specified drug name."
-msgstr ""
+msgstr "根据指定的药物名称检索药物相互作用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6357a59cb55748c7b8ed60c99736d6f5
 msgid "FDA_get_drug_interactions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_drug_interactions_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:949
 #: 07d3eb1981064c7facf0d7da49878d8e
 msgid "**Name**: ``FDA_get_drug_interactions_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_interactions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:951
 #: 43c21ef840124115867245995daa8d11
 msgid ""
 "**Description**: Retrieve drug interactions based on the specified drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据指定的药物名称检索药物相互作用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:977
 #: 6e6e09b024204f2d8006257f5395587f
 msgid "**FDA_get_drug_name_by_SPL_ID** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_SPL_ID**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:979
 #: c86d109e15d44ffba362057f567adf29
 msgid ""
 "Retrieve the drug name based on the FDA application number, NUI unique "
 "identifier, document ID of..."
-msgstr ""
+msgstr "根据 FDA 申请编号、NUI 唯一标识符、文档 ID 检索药品名称..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 9bdb2832a7d6444a87774747f03bdcdf
 msgid "FDA_get_drug_name_by_SPL_ID tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_SPL_ID 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:985
 #: 1dc1898cd9a94728859585e0d9bbf093
 msgid "**Name**: ``FDA_get_drug_name_by_SPL_ID``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_SPL_ID``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:987
 #: 672d900c9c3f4cf69afe1fad07423a5a
@@ -2357,34 +2357,36 @@ msgid ""
 "Structured Product Label (SPL), or set ID of the drug's Structured Product "
 "Label that works across label versions."
 msgstr ""
+"**描述**：根据FDA申请编号、NUI唯一标识符、特定版本药品结构化产品标签（SPL）的文档ID，或适用于多个标签版本的药品结构化产品标签的Set "
+"ID，检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:991
 #: 7a4a9396dc5a481e85d4b3cb3c31fab1
 msgid ""
 "``field_info`` (string) (optional) The specific field information to search "
 "for."
-msgstr ""
+msgstr "``field_info``（字符串）（可选）要搜索的特定字段信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1013
 #: 7c8de2caa8b346e994a4a946d161cade
 msgid "**FDA_get_drug_name_by_adverse_reaction** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_adverse_reaction**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1015
 #: 27e28a6115df426e83b63b9a18c7cf9b
 msgid ""
 "Retrieve the drug name based on specific adverse reactions reported. "
 "Warning: This tool only outp..."
-msgstr ""
+msgstr "根据报告的特定不良反应检索药物名称。警告：此工具仅输出..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 2112ebf644584fd1a395471fa4ebd73b
 msgid "FDA_get_drug_name_by_adverse_reaction tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_adverse_reaction 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1021
 #: 0b897cd5fd9149eb8ee0d92113618c75
 msgid "**Name**: ``FDA_get_drug_name_by_adverse_reaction``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_adverse_reaction``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1023
 #: bc5a30aee95d48ebbe4d5308087131cd
@@ -2392,211 +2394,211 @@ msgid ""
 "**Description**: Retrieve the drug name based on specific adverse reactions "
 "reported. Warning: This tool only outputs a predefined limited number of "
 "drug names and does not cover all possible drugs. Use with caution."
-msgstr ""
+msgstr "**描述**：根据报告的特定不良反应检索药品名称。警告：此工具仅输出预定义的有限数量药品名称，无法涵盖所有可能的药品。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1027
 #: 5cbd306fb14041078ffabb65d81c7bee
 msgid ""
 "``adverse_reaction`` (string) (optional) The adverse reaction to search for."
-msgstr ""
+msgstr "``adverse_reaction``（字符串）（可选）要搜索的不良反应。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1049
 #: ce5c8ff22742468a86663bbaee0e23f1
 msgid "**FDA_get_drug_name_by_calibration_instructions** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_calibration_instructions**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1051
 #: 93f43db064244ba988b3a638b59ec450
 msgid "Retrieve the drug name based on the calibration instructions provided."
-msgstr ""
+msgstr "根据提供的校准说明检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 1ae4dfa459fb4348b6e67354cd5e7747
 msgid "FDA_get_drug_name_by_calibration_instructions tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_calibration_instructions 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1057
 #: e7ad9fff4de64da594420fb9d951283f
 msgid "**Name**: ``FDA_get_drug_name_by_calibration_instructions``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_calibration_instructions``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1059
 #: 751872db9bbd43a49448b4e58890c011
 msgid ""
 "**Description**: Retrieve the drug name based on the calibration "
 "instructions provided."
-msgstr ""
+msgstr "**描述**：根据校准说明检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1063
 #: ee864256a75b45b3bc649e52853cfecd
 msgid ""
 "``calibration_instructions`` (string) (optional) Instructions used for "
 "calibration of the drug."
-msgstr ""
+msgstr "``calibration_instructions``（字符串）（可选）用于药物校准的说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1085
 #: d9130982719841cea235738a08612c47
 msgid "**FDA_get_drug_name_by_dependence_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_dependence_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1087
 #: b2b7d3612bba4853acfe539d1c764b06
 msgid ""
 "Retrieve the drug name based on information about dependence "
 "characteristics."
-msgstr ""
+msgstr "根据依赖特性的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ed33a015131d45c6919519f6f635e0be
 msgid "FDA_get_drug_name_by_dependence_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_dependence_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1093
 #: 847b94d08213454f854ea2724ac847c3
 msgid "**Name**: ``FDA_get_drug_name_by_dependence_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_dependence_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1095
 #: d76c0c09279840f89cf8c1af1b9da11a
 msgid ""
 "**Description**: Retrieve the drug name based on information about "
 "dependence characteristics."
-msgstr ""
+msgstr "**描述**：根据依赖特性的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1099
 #: 8fe8bf91df524c0590c87f55b0750901
 msgid ""
 "``dependence_info`` (string) (optional) Information related to psychological"
 " and physical dependence of the drug."
-msgstr ""
+msgstr "``dependence_info``（字符串）（可选）与药物的心理和生理依赖性相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1121
 #: 5442b25501164f0eb7706107303364c2
 msgid "**FDA_get_drug_name_by_document_id** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_document_id**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1123
 #: e845c78d21ae4918a8c0fc7c3c6fcd44
 msgid "Retrieve the drug name based on the document ID."
-msgstr ""
+msgstr "根据文档ID检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 74700305a506485fb68545cbd291407c
 msgid "FDA_get_drug_name_by_document_id tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_document_id 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1129
 #: 2c1c478e78ea4d40be94f86af152c9e3
 msgid "**Name**: ``FDA_get_drug_name_by_document_id``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_document_id``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1131
 #: 2ddb9201c9274edea9526b59024021ab
 msgid "**Description**: Retrieve the drug name based on the document ID."
-msgstr ""
+msgstr "**描述**：根据文档ID获取药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1135
 #: 1197ee5302ab4bb398adccc3e4aab5cc
 msgid ""
 "``document_id`` (string) (optional) The document ID, a globally unique "
 "identifier (GUID) for the particular revision of a labeling document."
-msgstr ""
+msgstr "``document_id``（字符串）（可选）文档ID，是用于标识特定标注文档修订版本的全局唯一标识符（GUID）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1157
 #: 3604f560214c429aa751424989ba513a
 msgid "**FDA_get_drug_name_by_dosage_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_dosage_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1159
 #: 3a77c2b6bf5546b2bc0c8cbdf1c55dd0
 msgid "Retrieve the drug name based on dosage and administration information."
-msgstr ""
+msgstr "根据剂量和给药信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 0e9be4c168ba48f1b19c18354185870a
 msgid "FDA_get_drug_name_by_dosage_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_dosage_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1165
 #: 0b52bace0655428cb104778442488e2e
 msgid "**Name**: ``FDA_get_drug_name_by_dosage_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_dosage_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1167
 #: 84313e9c7a1744608b21fe66526d5540
 msgid ""
 "**Description**: Retrieve the drug name based on dosage and administration "
 "information."
-msgstr ""
+msgstr "**描述**：根据剂量和给药信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1171
 #: c486f2fbf17146319912cdf617317067
 msgid ""
 "``dosage_info`` (string) (optional) Information about the drug product’s "
 "dosage and administration recommendations."
-msgstr ""
+msgstr "``dosage_info``（字符串）（可选）药品剂量及用药建议的相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1193
 #: 52f7416132124800ba5de351fd0501a8
 msgid "**FDA_get_drug_name_by_environmental_warning** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_environmental_warning**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1195
 #: 098fa0274cfb4ec8a57764108bc279ca
 msgid "Retrieve the drug name based on the specified environmental warnings."
-msgstr ""
+msgstr "根据指定的环境警告检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst e9a53abee200475c86a00c24aa519315
 msgid "FDA_get_drug_name_by_environmental_warning tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_environmental_warning 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1201
 #: ff264f532fe54adb9953212c38224f27
 msgid "**Name**: ``FDA_get_drug_name_by_environmental_warning``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_environmental_warning``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1203
 #: 41bc62a931524684b8f9bd4c2cf45c75
 msgid ""
 "**Description**: Retrieve the drug name based on the specified environmental"
 " warnings."
-msgstr ""
+msgstr "**描述**：根据指定的环境警告检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1207
 #: 5b2360b65c5343f0b38dddba95122b1c
 msgid ""
 "``environmental_warning`` (string) (optional) The environmental warning text"
 " to search for."
-msgstr ""
+msgstr "``environmental_warning``（字符串）（可选）要搜索的环境警告文本。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1229
 #: d96e0b4300d64ba8b709e06baf90eef0
 msgid "**FDA_get_drug_name_by_inactive_ingredient** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_inactive_ingredient**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1231
 #: e234401d8b1b45de8a96a1b6ac65a708
 msgid "Retrieve the drug name based on the inactive ingredient information."
-msgstr ""
+msgstr "根据非活性成分信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 4ed3c5cef62f4d7c9ee24f0dfdb47443
 msgid "FDA_get_drug_name_by_inactive_ingredient tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_inactive_ingredient 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1237
 #: ee61a49f446a4fc8bb3ca84c13c1c906
 msgid "**Name**: ``FDA_get_drug_name_by_inactive_ingredient``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_inactive_ingredient``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1239
 #: 07a8ac71e8d54f51adf6c9e6bd64ff53
 msgid ""
 "**Description**: Retrieve the drug name based on the inactive ingredient "
 "information."
-msgstr ""
+msgstr "**描述**：根据非活性成分信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1243
 #: afd4b81cba7a4d3ebda739275ef11245
 msgid ""
 "``inactive_ingredient`` (string) (optional) The name of the inactive "
 "ingredient."
-msgstr ""
+msgstr "``inactive_ingredient``（字符串）（可选）非活性成分的名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1265
 #: c91d4565678545b1b4773726df2bc09d
@@ -2604,19 +2606,20 @@ msgid ""
 "**FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1267
 #: 9a316c95488247d4bacd27afb973428d
 msgid ""
 "Retrieve the drug names that require asking a doctor before use due to a "
 "patient's specific condi..."
-msgstr ""
+msgstr "检索因患者的特定情况而需要在使用前咨询医生的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst d6a67806ac604b76a5addae4af1d73bd
 msgid ""
 "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation tool "
 "specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1273
 #: eff25b11ab5d49afbd6a35f1e9f39fce
@@ -2624,6 +2627,7 @@ msgid ""
 "**Name**: "
 "``FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation``"
 msgstr ""
+"**名称**: ``FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1275
 #: 14fce85d854c48e1a881df30ab3a0e8e
@@ -2633,102 +2637,104 @@ msgid ""
 "tool only outputs a predefined limited number of drug names and does not "
 "cover all possible drugs. Use with caution."
 msgstr ""
+"**描述**：检索因患者的特定病情和症状而需咨询医生后才能使用的药物名称。  \n"
+"**警告**：此工具仅输出预定义的有限数量的药物名称，并未涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1279
 #: 188e1629482144cd82f8541d6be89324
 msgid ""
 "``condition`` (string) (optional) The condition or symptom that requires "
 "consulting a doctor."
-msgstr ""
+msgstr "``condition``（字符串）（可选）需要咨询医生的病症或症状。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1301
 #: 4af4c9e445ec4743a461105be856a799
 msgid "**FDA_get_drug_name_by_labor_and_delivery_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_labor_and_delivery_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1303
 #: a6ac3424fd0a4a049a0e04fb3e44ef6f
 msgid ""
 "Retrieve the drug name based on information about the drug’s use during "
 "labor or delivery."
-msgstr ""
+msgstr "根据药物在分娩或生产过程中的使用信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 1d0730ab5ee54cf58a4cb2f4939fbb98
 msgid "FDA_get_drug_name_by_labor_and_delivery_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_labor_and_delivery_info 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1309
 #: 0d60cfe720d24a09acedf5cae5631701
 msgid "**Name**: ``FDA_get_drug_name_by_labor_and_delivery_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_labor_and_delivery_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1311
 #: 5137df9da1564c248d1a5e6f71709c07
 msgid ""
 "**Description**: Retrieve the drug name based on information about the "
 "drug’s use during labor or delivery."
-msgstr ""
+msgstr "**描述**：根据药物在分娩或生产过程中的使用信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1315
 #: 03f2f78b8bf4496a979bea015b9d3357
 msgid ""
 "``labor_and_delivery_info`` (string) (optional) Information about the drug’s"
 " use during labor or delivery."
-msgstr ""
+msgstr "``labor_and_delivery_info``（字符串）（可选）有关该药物在分娩或生产期间使用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1337
 #: 54d6751cf793481ea2cf451889165fe4
 msgid "**FDA_get_drug_name_by_microbiology** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_microbiology**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1339
 #: 4db0b638c4c54f80ae634218b1261939
 msgid "Retrieve the drug name based on microbiology field information."
-msgstr ""
+msgstr "根据微生物学领域信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 889ad6bbae1b471c8c2c7c20be354004
 msgid "FDA_get_drug_name_by_microbiology tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_microbiology 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1345
 #: 7cfb458ddf944cb689fe2abb914d3052
 msgid "**Name**: ``FDA_get_drug_name_by_microbiology``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_microbiology``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1347
 #: 7f82c4eba1c04fb3910ad8a5107933aa
 msgid ""
 "**Description**: Retrieve the drug name based on microbiology field "
 "information."
-msgstr ""
+msgstr "**描述**：根据微生物学领域信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1351
 #: 2de8565de5964c04a29cfa90116eb083
 msgid ""
 "``microbiology_info`` (string) (optional) Information related to the "
 "microbiology field."
-msgstr ""
+msgstr "``microbiology_info``（字符串）（可选）与微生物学领域相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1373
 #: ae46302c4c244a1f84c30bfa07b18fea
 msgid "**FDA_get_drug_name_by_other_safety_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_other_safety_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1375
 #: 05fa669d702d4821a93297082ae7696d
 msgid ""
 "Retrieve the drug name based on the provided safety information. This tool "
 "looks through safety i..."
-msgstr ""
+msgstr "根据提供的安全信息检索药物名称。此工具会通过安全信息..."
 
 #: ../../tools/fda_drug_labeling_tools.rst fc251433c15640da8cd79647cbbde47d
 msgid "FDA_get_drug_name_by_other_safety_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_other_safety_info 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1381
 #: 5b81a603d47e4a59a52c374be11d526e
 msgid "**Name**: ``FDA_get_drug_name_by_other_safety_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_other_safety_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1383
 #: 6e65cac9e1d246d681ab122c26fef768
@@ -2736,113 +2742,113 @@ msgid ""
 "**Description**: Retrieve the drug name based on the provided safety "
 "information. This tool looks through safety information that may not be "
 "specified in other fields."
-msgstr ""
+msgstr "**描述**：根据提供的安全信息检索药物名称。此工具会查找可能未在其他字段中指定的安全信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1387
 #: 31ccc179b0a74f489b291fb1ec1ac6c0
 msgid ""
 "``safety_info`` (string) (optional) Information about safe use and handling "
 "of the product."
-msgstr ""
+msgstr "``safety_info``（字符串）（可选）有关产品安全使用和操作的相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1409
 #: cdd9b32d7964469994bee991acbfe9be
 msgid "**FDA_get_drug_name_by_pharmacodynamics** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_pharmacodynamics**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1411
 #: 0599db6cc68f45ca99912a1bac770bdf
 msgid "Retrieve the drug name based on pharmacodynamics information."
-msgstr ""
+msgstr "根据药效学信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 242ea73b84cf42b5b40278b9cee6d910
 msgid "FDA_get_drug_name_by_pharmacodynamics tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_pharmacodynamics 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1417
 #: ea7265723b4a44d0ba7cd469e302ea29
 msgid "**Name**: ``FDA_get_drug_name_by_pharmacodynamics``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_pharmacodynamics``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1419
 #: ef951dfdfe454a49927c8245077d80a0
 msgid ""
 "**Description**: Retrieve the drug name based on pharmacodynamics "
 "information."
-msgstr ""
+msgstr "**描述**：根据药效学信息获取药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1423
 #: f29d6f30b4ad4841bce573cdd07f938b
 msgid ""
 "``pharmacodynamics`` (string) (optional) Information about the biochemical "
 "or physiologic pharmacologic effects of the drug."
-msgstr ""
+msgstr "``pharmacodynamics``（字符串）（可选）药物的生化或生理药理作用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1445
 #: c94f2bf35f2c43408651cf365413fa3b
 msgid "**FDA_get_drug_name_by_pharmacogenomics** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_pharmacogenomics**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1447
 #: 6f86cb5e359c45daa1854e00a36b1f20
 msgid "Retrieve the drug name based on pharmacogenomics field information."
-msgstr ""
+msgstr "根据药物基因组学领域信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c535a994a14f4d168bf1d9233d1a3e0f
 msgid "FDA_get_drug_name_by_pharmacogenomics tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_pharmacogenomics 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1453
 #: 96b4dba8e222418b952d9e89454d32ed
 msgid "**Name**: ``FDA_get_drug_name_by_pharmacogenomics``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_pharmacogenomics``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1455
 #: f68b17adf98c4c8da53ca2f0ce3f8f98
 msgid ""
 "**Description**: Retrieve the drug name based on pharmacogenomics field "
 "information."
-msgstr ""
+msgstr "**描述**：根据药物基因组学领域信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1459
 #: 8759969bd63f423197bbc05522174346
 msgid ""
 "``pharmacogenomics`` (string) (optional) Pharmacogenomics information to "
 "search for."
-msgstr ""
+msgstr "``pharmacogenomics``（字符串）（可选）用于搜索的药物基因组学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1481
 #: 94e67c114c7e409aa312072359b41dbe
 msgid "**FDA_get_drug_name_by_precautions** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_precautions**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1483
 #: ee0bb54f94984177a64c8631da627040
 msgid "Retrieve the drug name based on the precautions field information."
-msgstr ""
+msgstr "根据注意事项字段信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c117a844583b447289933e0c64d36d1a
 msgid "FDA_get_drug_name_by_precautions tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_precautions 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1489
 #: 3c880623a6354a208ea7ea9dba99c0b7
 msgid "**Name**: ``FDA_get_drug_name_by_precautions``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_precautions``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1491
 #: 0724adff7a034a14b45aa99638531676
 msgid ""
 "**Description**: Retrieve the drug name based on the precautions field "
 "information."
-msgstr ""
+msgstr "**描述**：根据注意事项字段信息获取药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1495
 #: fef16d3a9c1a4b72b0265515687a8ed9
 msgid ""
 "``precautions`` (string) (optional) Information about any special care to be"
 " exercised for safe and effective use of the drug."
-msgstr ""
+msgstr "``precautions``（字符串）（可选）有关安全有效使用该药物需特别注意事项的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1517
 #: 97df4a883e55493a853ca52629b1512c
@@ -2850,294 +2856,295 @@ msgid ""
 "**FDA_get_drug_name_by_pregnancy_or_breastfeeding_info** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_name_by_pregnancy_or_breastfeeding_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1519
 #: 507938d5d5284f249b386e8fb3a2277c
 msgid ""
 "Retrieve the drug names based on pregnancy or breastfeeding information."
-msgstr ""
+msgstr "根据怀孕或哺乳期信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c7496198fa4e4399b9d01058d2ecfe4d
 msgid ""
 "FDA_get_drug_name_by_pregnancy_or_breastfeeding_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_pregnancy_or_breastfeeding_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1525
 #: 55a99d75f05d4072aece9e28d5b1e328
 msgid "**Name**: ``FDA_get_drug_name_by_pregnancy_or_breastfeeding_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_pregnancy_or_breastfeeding_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1527
 #: fbcf71fd7c034a168ee63816ac396095
 msgid ""
 "**Description**: Retrieve the drug names based on pregnancy or breastfeeding"
 " information."
-msgstr ""
+msgstr "**描述**：根据怀孕或哺乳期信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1531
 #: 6ac27cd1b21240ec9fd40707407b7160
 msgid ""
 "``pregnancy_info`` (string) (optional) Information related to pregnancy or "
 "breastfeeding."
-msgstr ""
+msgstr "``pregnancy_info``（字符串）（可选）与怀孕或哺乳相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1553
 #: 75d0488d7bcc455aa34f8a4d9b475786
 msgid "**FDA_get_drug_name_by_principal_display_panel** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_principal_display_panel**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1555
 #: be70b8938cca40e3aeebabcd6533fa36
 msgid ""
 "Retrieve the drug name based on the content of the principal display panel "
 "of the product package."
-msgstr ""
+msgstr "根据产品包装主要展示面板的内容提取药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 29c215cf99354a1887a83862c51e708d
 msgid "FDA_get_drug_name_by_principal_display_panel tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_principal_display_panel 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1561
 #: 7d227ff8a1fd49b5b3ba7551da76bcd6
 msgid "**Name**: ``FDA_get_drug_name_by_principal_display_panel``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_principal_display_panel``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1563
 #: a6591938b2604d7691c711c6f6074643
 msgid ""
 "**Description**: Retrieve the drug name based on the content of the "
 "principal display panel of the product package."
-msgstr ""
+msgstr "**描述**：根据产品包装主要展示面上的内容检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1567
 #: 1ea00dded0d74bb4b32f34985c9be8a2
 msgid ""
 "``display_panel_content`` (string) (optional) The content of the principal "
 "display panel of the product package."
-msgstr ""
+msgstr "``display_panel_content``（字符串）（可选）产品包装主要展示面板的内容。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1589
 #: b679428950a14ccaa37924a36a5ed900
 msgid "**FDA_get_drug_name_by_reference** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_reference**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1591
 #: 0332438902a44af49f3f2d37a7ef6a83
 msgid ""
 "Retrieve the drug name based on the reference information provided in the "
 "drug labeling."
-msgstr ""
+msgstr "根据药品标签中提供的参考信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ea3256adbd2940dc88c4c9ec526630e4
 msgid "FDA_get_drug_name_by_reference tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_reference 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1597
 #: 18a7f528c6a344c58f56816e625cf2b8
 msgid "**Name**: ``FDA_get_drug_name_by_reference``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_reference``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1599
 #: 877792e3d2104979a91024a76084658f
 msgid ""
 "**Description**: Retrieve the drug name based on the reference information "
 "provided in the drug labeling."
-msgstr ""
+msgstr "**描述**：根据药品标签中提供的参考信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1603
 #: 76aa1a34c68b4f7cbcf5afa962139113
 msgid ""
 "``reference`` (string) (optional) The reference information to search for in"
 " the drug labeling."
-msgstr ""
+msgstr "``reference``（字符串）（可选）用于在药品标签中搜索的参考信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1625
 #: 494ed64b32824038b18dda291d055a0c
 msgid "**FDA_get_drug_name_by_set_id** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_set_id**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1627
 #: 4af98452d1084f438760ffdef7e02d01
 msgid "Retrieve the drug name based on the Set ID of the labeling."
-msgstr ""
+msgstr "根据标识信息的设置ID检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 8c6f5066e51b4617b7fbe72eebf5e7d5
 msgid "FDA_get_drug_name_by_set_id tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_set_id 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1633
 #: ec0e052e3d5f46138f14a5bb2a0a6753
 msgid "**Name**: ``FDA_get_drug_name_by_set_id``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_set_id``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1635
 #: 8c16a1b0989749ca8998de13a1c768dc
 msgid ""
 "**Description**: Retrieve the drug name based on the Set ID of the labeling."
-msgstr ""
+msgstr "**描述**：根据标签的设置ID检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1639
 #: 38c5a0de92c246fdaa61ce26b3d9aa37
 msgid ""
 "``set_id`` (string) (optional) The Set ID, a globally unique identifier for "
 "the labeling."
-msgstr ""
+msgstr "``set_id``（字符串）（可选）用于标注的集合 ID，一个全局唯一标识符。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1661
 #: 0b178a555fd647e1b6385b3387d4add0
 msgid "**FDA_get_drug_name_by_stop_use_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_stop_use_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1663
 #: 3638de4d24e844be90bc6ec9b590ec67
 msgid "Retrieve the drug name based on the stop use information provided."
-msgstr ""
+msgstr "根据提供的停用信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 98f4ad83f2d14149ad4c715e8d10f903
 msgid "FDA_get_drug_name_by_stop_use_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_stop_use_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1669
 #: 4af954e15082471db73230dadc3ac01a
 msgid "**Name**: ``FDA_get_drug_name_by_stop_use_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_stop_use_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1671
 #: c916e2dca9ab4f9cabd27f38354cfd62
 msgid ""
 "**Description**: Retrieve the drug name based on the stop use information "
 "provided."
-msgstr ""
+msgstr "**描述**：根据提供的停用信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1675
 #: bc338b1dd41545d38de1db80ed141419
 msgid ""
 "``stop_use_info`` (string) (optional) Information about when use of the drug"
 " product should be discontinued immediately and a doctor consulted."
-msgstr ""
+msgstr "``stop_use_info``（字符串）（可选）关于何时应立即停止使用该药品并咨询医生的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1697
 #: 364e66e1b3504cef86ec2ad56032bfb1
 msgid ""
 "**FDA_get_drug_name_by_storage_and_handling_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_storage_and_handling_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1699
 #: 0e33e8d93f924c4497c615ae28cb56e8
 msgid "Retrieve the drug name based on storage and handling information."
-msgstr ""
+msgstr "根据储存和处理信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 74234cd7b0bc408eb6775c57117044c2
 msgid "FDA_get_drug_name_by_storage_and_handling_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_storage_and_handling_info 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1705
 #: ea5a4146a27040789dfe45ac1b10b4b3
 msgid "**Name**: ``FDA_get_drug_name_by_storage_and_handling_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_storage_and_handling_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1707
 #: 448e5427eb7b4dbbae3e715f33ede38e
 msgid ""
 "**Description**: Retrieve the drug name based on storage and handling "
 "information."
-msgstr ""
+msgstr "**描述**：根据存储和操作信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1711
 #: 2da2c1bf9f7b4daab3fdcb32475a51c3
 msgid ""
 "``storage_info`` (string) (optional) Information about the storage and "
 "handling of the drug product."
-msgstr ""
+msgstr "``storage_info``（字符串）（可选）药品产品的存储和处理信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1733
 #: 6fe4e3aca5354569aadd96df1873f748
 msgid "**FDA_get_drug_name_by_warnings** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_by_warnings**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1735
 #: 265593518aab4e82a29ce7afb0dcf796
 msgid "Retrieve the drug names based on specific warning information."
-msgstr ""
+msgstr "根据特定的警告信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst fac27b08ec494e9cb2a89943cc7c941a
 msgid "FDA_get_drug_name_by_warnings tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_by_warnings 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1741
 #: 2635f2e6d00e479d84c5738416ea211d
 msgid "**Name**: ``FDA_get_drug_name_by_warnings``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_by_warnings``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1743
 #: 7cb51be8e95547599e843c263639bb86
 msgid ""
 "**Description**: Retrieve the drug names based on specific warning "
 "information."
-msgstr ""
+msgstr "**描述**：根据特定的警告信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1747
 #: 0783f4ce3cd840afbeda74b6bf6639c0
 msgid ""
 "``warning_text`` (string) (optional) The warning text to search for in the "
 "drug labeling."
-msgstr ""
+msgstr "``warning_text``（字符串）（可选）要在药品标签中搜索的警告文本。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1769
 #: c2906a8168cb452597e0ea24b74c8d4c
 msgid "**FDA_get_drug_name_from_patient_package_insert** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_name_from_patient_package_insert**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1771
 #: 2c6bd072e9e24297a7c42da4b2929221
 msgid ""
 "Retrieve the drug name based on the information provided in the patient "
 "package insert."
-msgstr ""
+msgstr "根据患者药品说明书中提供的信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst f8cbe6a490df4967ba9d2862e41baa1f
 msgid "FDA_get_drug_name_from_patient_package_insert tool specification"
-msgstr ""
+msgstr "FDA_get_drug_name_from_patient_package_insert 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1777
 #: 8c5da07c9311457283e7b7464aa0f686
 msgid "**Name**: ``FDA_get_drug_name_from_patient_package_insert``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_name_from_patient_package_insert``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1779
 #: 2fda8262a6144e008b67bdf197836e73
 msgid ""
 "**Description**: Retrieve the drug name based on the information provided in"
 " the patient package insert."
-msgstr ""
+msgstr "**描述**：根据患者药品说明书中提供的信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1783
 #: 2993a4e2d468420b9d83a9ce6048966a
 msgid ""
 "``patient_package_insert`` (string) (optional) Information necessary for "
 "patients to use the drug safely and effectively."
-msgstr ""
+msgstr "``patient_package_insert``（字符串）（可选）患者安全有效使用药物所需的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1805
 #: 659b1300cf604ea4bec32567b71a6ed6
 msgid "**FDA_get_drug_names_by_abuse_dependence_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_abuse_dependence_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1807
 #: bc632b347ecc4efe9999f9cb1ce85ca0
 msgid ""
 "Retrieve the drug name based on information about drug abuse and dependence,"
 " including whether th..."
-msgstr ""
+msgstr "根据药物滥用和依赖相关信息（包括是否存在依赖性）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 8bc6dfa28e13462787b960399deb03fd
 msgid "FDA_get_drug_names_by_abuse_dependence_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_abuse_dependence_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1813
 #: 7e2e7ab0d4144cf28ba1327bac932506
 msgid "**Name**: ``FDA_get_drug_names_by_abuse_dependence_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_abuse_dependence_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1815
 #: fdc3cecc59ea4b32ac89e9531a70f3f1
@@ -3146,35 +3153,35 @@ msgid ""
 "abuse and dependence, including whether the drug is a controlled substances,"
 " the types of possible abuse, and adverse reactions relevant to those abuse "
 "types."
-msgstr ""
+msgstr "**描述**：根据药物滥用和依赖相关信息检索药物名称，包括该药物是否为受控物质、可能的滥用类型以及与这些滥用类型相关的不良反应。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1819
 #: bfcc1b00caa34004a3b00197fb886c9e
 msgid ""
 "``abuse_info`` (string) (optional) Information about drug abuse and "
 "dependence."
-msgstr ""
+msgstr "``abuse_info``（字符串）（可选）有关药物滥用和依赖的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1841
 #: 7058fd9ef9fc4458a921123aa452e2e6
 msgid "**FDA_get_drug_names_by_abuse_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_abuse_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1843
 #: 50d4fb2c3f9b41fc8a6f32e8aee76fe2
 msgid ""
 "Retrieve drug names based on information about types of abuse and adverse "
 "reactions pertinent to ..."
-msgstr ""
+msgstr "根据与滥用类型和不良反应相关的信息检索药物名称..."
 
 #: ../../tools/fda_drug_labeling_tools.rst a646a1e00e644928be33e2b0c286c4c6
 msgid "FDA_get_drug_names_by_abuse_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_abuse_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1849
 #: 5f4847f5468446fa98177b8d7e406965
 msgid "**Name**: ``FDA_get_drug_names_by_abuse_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_abuse_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1851
 #: 5566923ea15e4471bd1856ec513ac366
@@ -3184,13 +3191,15 @@ msgid ""
 " tool only outputs a predefined limited number of drug names and does not "
 "cover all possible drugs. Use with caution."
 msgstr ""
+"**描述**：根据与滥用类型相关的滥用信息和不良反应检索药物名称。  \n"
+"**警告**：此工具仅输出预定义的有限数量的药物名称，无法涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1855
 #: 6c28e442c1a54c4b84073570f5cf3428
 msgid ""
 "``abuse_info`` (string) (optional) Information about the types of abuse that"
 " can occur with the drug."
-msgstr ""
+msgstr "``abuse_info``（字符串）（可选）有关该药物可能导致的滥用类型的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1858
 #: ../../tools/fda_drug_labeling_tools.rst:1897
@@ -3266,94 +3275,94 @@ msgstr ""
 #: fdcf2a351644401787cddbd1123a9ef2 ff47d3fe2fd24d9f916acc2eda6c50fb
 msgid ""
 "``indication`` (string) (optional) The indication or usage of the drug."
-msgstr ""
+msgstr "``indication``（字符串）（可选）药物的适应症或用途。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1880
 #: 0d5d4d79995e4facbe996c814d29e10b
 msgid "**FDA_get_drug_names_by_accessories** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_accessories**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1882
 #: 2d37fc8ef0dd4c7481046a728ed95b0d
 msgid "Retrieve drug names based on the accessories field information."
-msgstr ""
+msgstr "根据配件字段信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 3ed6b4134fb4466e8f3f8c78edb4f93d
 msgid "FDA_get_drug_names_by_accessories tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_accessories 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1888
 #: d1149af70a03424cace873597119ed78
 msgid "**Name**: ``FDA_get_drug_names_by_accessories``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_accessories``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1890
 #: 4960bf431e524d249adf705fc93fdc62
 msgid ""
 "**Description**: Retrieve drug names based on the accessories field "
 "information."
-msgstr ""
+msgstr "**描述**：根据配件字段信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1894
 #: bbb74e3774914750ac442b214eb5f892
 msgid ""
 "``accessory_name`` (string) (optional) The name or part of the name of the "
 "accessory."
-msgstr ""
+msgstr "``accessory_name``（字符串）（可选）附件的名称或部分名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1919
 #: 43c9fb6b905a49b3958c6c28372c7b15
 msgid "**FDA_get_drug_names_by_active_ingredient** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_active_ingredient**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1921
 #: 6e5a0958091a4f35a3d313d32f46f04f
 msgid "Retrieve drug names based on the active ingredient information."
-msgstr ""
+msgstr "根据活性成分信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7d41aad69a11420eb70eff616309cf1d
 msgid "FDA_get_drug_names_by_active_ingredient tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_active_ingredient 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1927
 #: 1256bb5ce88a43b1902f7522062bf3ad
 msgid "**Name**: ``FDA_get_drug_names_by_active_ingredient``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_active_ingredient``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1929
 #: feba615c612e4431827cd6bc52086a87
 msgid ""
 "**Description**: Retrieve drug names based on the active ingredient "
 "information."
-msgstr ""
+msgstr "**描述**：根据活性成分信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1933
 #: 0cf072e7d8674fb2abc3d55535b9d1a0
 msgid ""
 "``active_ingredient`` (string) (optional) The active ingredient in the drug "
 "product."
-msgstr ""
+msgstr "``active_ingredient``（字符串）（可选）药品中的活性成分。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1958
 #: ccfeb3804e0d4d1a92724abd174c7208
 msgid "**FDA_get_drug_names_by_alarm** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_alarm**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1960
 #: 2b0b4076566f434b9010a1b5bb3d9117
 msgid ""
 "Retrieve drug names based on the presence of specific alarms, which are "
 "related to adverse reacti..."
-msgstr ""
+msgstr "根据特定警报的存在检索药物名称，这些警报与不良反应相关。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c6354adcbab6483ca180dbf9eca3878d
 msgid "FDA_get_drug_names_by_alarm tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_alarm 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1966
 #: eab1e64e8727431a966580e45867c182
 msgid "**Name**: ``FDA_get_drug_names_by_alarm``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_alarm``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1968
 #: 972e042f2337414bba0f5c098f085621
@@ -3363,33 +3372,35 @@ msgid ""
 "only outputs a predefined limited number of drug names and does not cover "
 "all possible drugs. Use with caution."
 msgstr ""
+"**描述**：根据特定警报（与不良反应事件相关）的存在检索药物名称。  \n"
+"**警告**：此工具仅输出预定义的有限数量的药物名称，并非涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1972
 #: b3664887a66b4709a2f4adc6060c47f7
 msgid "``alarm_type`` (string) (optional) The type of alarm to search for."
-msgstr ""
+msgstr "``alarm_type``（字符串）（可选）要搜索的警报类型。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1997
 #: 654af7d3a71b46e385efd1c1380b5292
 msgid ""
 "**FDA_get_drug_names_by_animal_pharmacology_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_animal_pharmacology_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:1999
 #: 841dd8ba4d58426cbeadc7ca88af6b51
 msgid ""
 "Retrieve drug names based on animal pharmacology and toxicology information."
 "  Warning: This tool ..."
-msgstr ""
+msgstr "根据动物药理学和毒理学信息检索药物名称。警告：此工具..."
 
 #: ../../tools/fda_drug_labeling_tools.rst bdf6d695b09b4667ba8ab94bafe01e13
 msgid "FDA_get_drug_names_by_animal_pharmacology_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_animal_pharmacology_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2005
 #: a6cb60a700604deb9f42fe31cbbcd8f8
 msgid "**Name**: ``FDA_get_drug_names_by_animal_pharmacology_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_animal_pharmacology_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2007
 #: a6ad7848bbc94e2780c39cd0b85a5c81
@@ -3399,71 +3410,74 @@ msgid ""
 "limited number of drug names and does not cover all possible drugs. Use with"
 " caution."
 msgstr ""
+"**描述**：根据动物药理学和毒理学信息检索药物名称。  \n"
+"**警告**：此工具仅输出预定义的有限数量的药物名称，无法涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2011
 #: 5279d7e993164fdb935a56d024a65fe2
 msgid ""
 "``pharmacology_info`` (string) (optional) Information from studies of the "
 "drug in animals."
-msgstr ""
+msgstr "``pharmacology_info``（字符串）（可选）来自药物动物研究的相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2036
 #: 2e43fe7d7fed4ffc90b25ecca2b97cb8
 msgid ""
 "**FDA_get_drug_names_by_application_number_NDC_number** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_application_number_NDC_number**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2038
 #: becd1f48ff964e8bb9edede58cc538e5
 msgid ""
 "Retrieve drug names based on the specified FDA application number or "
 "National Drug Code (NDC) num..."
-msgstr ""
+msgstr "根据指定的FDA申请编号或国家药品代码（NDC）编号检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 94b3fdec5e3043b0ac00a82d79f50d6e
 msgid "FDA_get_drug_names_by_application_number_NDC_number tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_application_number_NDC_number 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2044
 #: 7cf90b12add347f2a4d77892668d9847
 msgid "**Name**: ``FDA_get_drug_names_by_application_number_NDC_number``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_application_number_NDC_number``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2046
 #: 5d0ee2baf1034a7e95877f9ab30f773d
 msgid ""
 "**Description**: Retrieve drug names based on the specified FDA application "
 "number or National Drug Code (NDC) number."
-msgstr ""
+msgstr "**描述**：根据指定的FDA申请编号或国家药品代码（NDC）检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2050
 #: bd0a928dba4e42ab81eedbc36a56d65a
 msgid ""
 "``application_manufacturer_or_NDC_info`` (string) (optional) FDA "
 "application, manufacturer, or NDC number info"
-msgstr ""
+msgstr "``application_manufacturer_or_NDC_info``（字符串）（可选）FDA申请、制造商或NDC编号信息"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2072
 #: f6815d6fd5454472a14ef25373267e94
 msgid ""
 "**FDA_get_drug_names_by_assembly_installation_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_assembly_installation_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2074
 #: 1823f82dda014fbab70618c1f8a58475
 msgid ""
 "Retrieve drug names based on assembly or installation instructions. Warning:"
 " This tool only outpu..."
-msgstr ""
+msgstr "根据组装或安装说明检索药品名称。警告：此工具仅输出..."
 
 #: ../../tools/fda_drug_labeling_tools.rst ce9fbf283551478884ec4464de61e438
 msgid "FDA_get_drug_names_by_assembly_installation_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_assembly_installation_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2080
 #: 79fb8d8414684b0796c79f1d5f2a0133
 msgid "**Name**: ``FDA_get_drug_names_by_assembly_installation_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_assembly_installation_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2082
 #: f904e618156f4383a496ceced90383fd
@@ -3472,68 +3486,70 @@ msgid ""
 "instructions. Warning: This tool only outputs a predefined limited number of"
 " drug names and does not cover all possible drugs. Use with caution."
 msgstr ""
+"**描述**：根据组装或安装说明检索药品名称。  \n"
+"**警告**：此工具仅输出预定义的有限数量药品名称，无法涵盖所有可能的药品。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2086
 #: 06c211b4dd904250ababaa13d09ec115
 msgid ""
 "``field_info`` (string) (optional) Information related to assembly or "
 "installation instructions."
-msgstr ""
+msgstr "``field_info``（字符串）（可选）与装配或安装说明相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2111
 #: 8998da66800a43c6af1a41e12e88a6f3
 msgid "**FDA_get_drug_names_by_boxed_warning** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_boxed_warning**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2113
 #: 79c05736779c40a1b18e107b54c70402
 msgid ""
 "Retrieve drug names that have specific boxed warnings and adverse effects."
-msgstr ""
+msgstr "检索具有特定框警告和不良反应的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 10634096cc794e55991f66842e85df8c
 msgid "FDA_get_drug_names_by_boxed_warning tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_boxed_warning 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2119
 #: 3b2f0ec2eba94922846aa3a72bfcd290
 msgid "**Name**: ``FDA_get_drug_names_by_boxed_warning``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_boxed_warning``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2121
 #: f6b5f48b747744c18448d92e27c59b49
 msgid ""
 "**Description**: Retrieve drug names that have specific boxed warnings and "
 "adverse effects."
-msgstr ""
+msgstr "**描述**：检索具有特定框警告和不良反应的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2125
 #: fea89186c18b465d92233287ea5d7480
 msgid ""
 "``warning_text`` (string) (optional) The text of the boxed warning to search"
 " for."
-msgstr ""
+msgstr "``warning_text``（字符串）（可选）要搜索的框内警告文本。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2150
 #: 92724b2441f1462d821e01076649b028
 msgid "**FDA_get_drug_names_by_child_safety_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_child_safety_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2152
 #: c99c02cfbf1a43eaa0016e7988487cc1
 msgid ""
 "Retrieve drug names based on whether the product should be kept out of the "
 "reach of children and ..."
-msgstr ""
+msgstr "根据产品是否应放置在儿童无法触及的地方，检索药品名称并..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 7c602f68ec82427bbdc636754085a83c
 msgid "FDA_get_drug_names_by_child_safety_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_child_safety_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2158
 #: 6e89d7c91512416ea0a781b6a68be704
 msgid "**Name**: ``FDA_get_drug_names_by_child_safety_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_child_safety_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2160
 #: 8d72d7ff478246409b3f2fbb7d8b1b56
@@ -3541,35 +3557,35 @@ msgid ""
 "**Description**: Retrieve drug names based on whether the product should be "
 "kept out of the reach of children and instructions about what to do in the "
 "case of accidental contact or ingestion."
-msgstr ""
+msgstr "**描述**：根据产品是否应放置在儿童无法触及的地方，以及在意外接触或误食时的处理说明，检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2164
 #: bdbffd43008f40a8925c424558c348c7
 msgid ""
 "``child_safety_info`` (string) (optional) Information pertaining to whether "
 "the product should be kept out of the reach of children."
-msgstr ""
+msgstr "``child_safety_info``（字符串）（可选）关于产品是否应放置在儿童无法触及范围内的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2189
 #: def67be5a4234ad196d987e584889326
 msgid "**FDA_get_drug_names_by_clinical_pharmacology** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_clinical_pharmacology**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2191
 #: 6e339c4c31d54486931a3118e161ca72
 msgid ""
 "Retrieve drug names based on clinical pharmacology information. Warning: "
 "This tool only outputs a..."
-msgstr ""
+msgstr "根据临床药理学信息检索药物名称。警告：此工具仅输出..."
 
 #: ../../tools/fda_drug_labeling_tools.rst d5b157696a8741dc8ee1cd8848b9b410
 msgid "FDA_get_drug_names_by_clinical_pharmacology tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_clinical_pharmacology 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2197
 #: 98dea6c578274055b20805c516f97326
 msgid "**Name**: ``FDA_get_drug_names_by_clinical_pharmacology``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_clinical_pharmacology``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2199
 #: efe648831f314545aa876a5630969294
@@ -3577,48 +3593,48 @@ msgid ""
 "**Description**: Retrieve drug names based on clinical pharmacology "
 "information. Warning: This tool only outputs a predefined limited number of "
 "drug names and does not cover all possible drugs. Use with caution."
-msgstr ""
+msgstr "**描述**：根据临床药理学信息检索药物名称。警告：此工具仅输出预定义的有限数量药物名称，并非涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2203
 #: be82d0f3a25d441a80caffdd1931c701
 msgid ""
 "``clinical_pharmacology`` (string) (optional) Information about the clinical"
 " pharmacology and actions of the drug in humans. Use key words"
-msgstr ""
+msgstr "``clinical_pharmacology``（字符串）（可选）关于药物在人类中的临床药理学和作用的信息。请使用关键词"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2228
 #: 06ae3234cf0c4c11a68d2a1dfff91c4e
 msgid "**FDA_get_drug_names_by_clinical_studies** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_clinical_studies**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2230
 #: 2583eaafc1354e7291ff9ae8241ec690
 msgid ""
 "Retrieve drug names based on the presence of clinical studies information."
-msgstr ""
+msgstr "根据临床研究信息的存在检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst af3dbfe04541497b9ef6da696830b020
 msgid "FDA_get_drug_names_by_clinical_studies tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_clinical_studies 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2236
 #: 6a265a559c8a41aeb9b64765a179d703
 msgid "**Name**: ``FDA_get_drug_names_by_clinical_studies``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_clinical_studies``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2238
 #: 563b9ca5991b4c289cc4b782de31ba53
 msgid ""
 "**Description**: Retrieve drug names based on the presence of clinical "
 "studies information."
-msgstr ""
+msgstr "**描述**：根据临床研究信息的存在情况检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2242
 #: 1147e838dee045fc8f4881140c836fca
 msgid ""
 "``clinical_studies`` (string) (optional) Information related to clinical "
 "studies. Use keywords split by blank space."
-msgstr ""
+msgstr "``clinical_studies``（字符串）（可选）与临床研究相关的信息。使用以空格分隔的关键词。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2267
 #: 2bc1c26e259141748e6c8ef471b932ae
@@ -3626,23 +3642,24 @@ msgid ""
 "**FDA_get_drug_names_by_consulting_doctor_pharmacist_info** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_consulting_doctor_pharmacist_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2269
 #: 47ec27f68ec94177afb4ae03878db64a
 msgid ""
 "Retrieve drug names based on information about when a doctor or pharmacist "
 "should be consulted re..."
-msgstr ""
+msgstr "根据何时应咨询医生或药剂师的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ce9a4868088449cebe0915a55659eda6
 msgid ""
 "FDA_get_drug_names_by_consulting_doctor_pharmacist_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_consulting_doctor_pharmacist_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2275
 #: 84731fd2ada140eb828782b7cd770d47
 msgid "**Name**: ``FDA_get_drug_names_by_consulting_doctor_pharmacist_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_consulting_doctor_pharmacist_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2277
 #: 51f6ac7c009946bc97de2a2e05dfdb97
@@ -3652,46 +3669,47 @@ msgid ""
 "Warning: This tool only outputs a predefined limited number of drug names "
 "and does not cover all possible drugs. Use with caution."
 msgstr ""
+"**描述**：根据有关何时应咨询医生或药剂师以了解药物相互作用的信息，检索药物名称。警告：此工具仅输出预定义的有限数量的药物名称，无法涵盖所有可能的药物。请谨慎使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2281
 #: b12516458a6f400f86b5855e7c2b78fe
 msgid ""
 "``interaction_info`` (string) (optional) Information about when a doctor or "
 "pharmacist should be consulted regarding drug interactions."
-msgstr ""
+msgstr "``interaction_info``（字符串）（可选）有关何时应咨询医生或药剂师以了解药物相互作用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2306
 #: 40d5235b5ead4e2c89c0038dae61d5ba
 msgid "**FDA_get_drug_names_by_contraindications** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_contraindications**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2308
 #: dea4aa2e145543ec84d45dca27fcd021
 msgid "Retrieve drug names based on specific contraindications information."
-msgstr ""
+msgstr "根据特定禁忌信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 66ead50023a04d96b5a9aa4a5cdb21d3
 msgid "FDA_get_drug_names_by_contraindications tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_contraindications 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2314
 #: 8ff398b242e84f64adb7d4a6f313785d
 msgid "**Name**: ``FDA_get_drug_names_by_contraindications``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_contraindications``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2316
 #: 3a61a0eae88a47a0b16c1bea0312434a
 msgid ""
 "**Description**: Retrieve drug names based on specific contraindications "
 "information."
-msgstr ""
+msgstr "**描述**：根据特定禁忌信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2320
 #: 92f5a61ac4cf49c9ab31068821e267c2
 msgid ""
 "``contraindication_info`` (string) (optional) Information about situations "
 "in which the drug product is contraindicated."
-msgstr ""
+msgstr "``contraindication_info``（字符串）（可选）有关该药品禁忌使用情况的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2345
 #: 2a9d26c9c0af4ffe90d14141b9db2abb
@@ -3699,30 +3717,31 @@ msgid ""
 "**FDA_get_drug_names_by_controlled_substance_DEA_schedule** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_controlled_substance_DEA_schedule**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2347
 #: 0761c6fb4ac2435a8d13bb41f3845e3d
 msgid ""
 "Retrieve drug names based on the Drug Enforcement Administration (DEA) "
 "schedule information."
-msgstr ""
+msgstr "根据药物管制局（DEA）的管制级别信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ef36c35d8c8343b9a0fe73da47738f45
 msgid ""
 "FDA_get_drug_names_by_controlled_substance_DEA_schedule tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_controlled_substance_DEA_schedule 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2353
 #: 1e742bc5ae1f4d85963e4c6c13c80986
 msgid "**Name**: ``FDA_get_drug_names_by_controlled_substance_DEA_schedule``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_controlled_substance_DEA_schedule``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2355
 #: a6e789f9670d4c379cb2686d7c4ccc67
 msgid ""
 "**Description**: Retrieve drug names based on the Drug Enforcement "
 "Administration (DEA) schedule information."
-msgstr ""
+msgstr "**描述**：根据美国缉毒局（DEA）的管制药物分类信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2359
 #: 491ae67a052949bfad2814004fb45d36
@@ -3730,6 +3749,8 @@ msgid ""
 "``controlled_substance_schedule`` (string) (optional) The schedule in which "
 "the drug is controlled by the Drug Enforcement Administration."
 msgstr ""
+"``controlled_substance_schedule``（字符串）（可选）药物在美国缉毒局（Drug Enforcement "
+"Administration）管控下所属的管制级别。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2384
 #: f22140b214c14ab4b3a36416313432b9
@@ -3737,25 +3758,27 @@ msgid ""
 "**FDA_get_drug_names_by_dear_health_care_provider_letter_info** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_dear_health_care_provider_letter_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2386
 #: a08976ce70e84392ae32770d91a34637
 msgid ""
 "Fetch drug names based on information about dear health care provider "
 "letters. The letters are se..."
-msgstr ""
+msgstr "根据有关致亲爱的医疗保健提供者信函的信息获取药品名称。这些信函是..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 0d6d1c5678944ee58eca6a6e778d9c6b
 msgid ""
 "FDA_get_drug_names_by_dear_health_care_provider_letter_info tool "
 "specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_dear_health_care_provider_letter_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2392
 #: 5d66ca9ee1e54374b2e2b745ecb0515e
 msgid ""
 "**Name**: ``FDA_get_drug_names_by_dear_health_care_provider_letter_info``"
 msgstr ""
+"**名称**: ``FDA_get_drug_names_by_dear_health_care_provider_letter_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2394
 #: f9783d0c8d1e43d69387b0cb3eccf215
@@ -3763,47 +3786,47 @@ msgid ""
 "**Description**: Fetch drug names based on information about dear health "
 "care provider letters. The letters are sent by drug manufacturers to provide"
 " new or updated information about the drug."
-msgstr ""
+msgstr "**描述**：根据有关致医疗保健提供者信函的信息获取药品名称。这些信函由药品制造商发送，用于提供有关药品的新信息或更新信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2398
 #: 79a1c0edf4724b13a5772f9d9254a0ec
 msgid ""
 "``letter_info`` (string) (optional) Information about the specific dear "
 "health care provider letters."
-msgstr ""
+msgstr "``letter_info``（字符串）（可选）有关特定致亲爱的医疗保健提供者信函的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2423
 #: d73e0d66beb54ff190fa50eeeb93891f
 msgid "**FDA_get_drug_names_by_disposal_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_disposal_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2425
 #: 83cdbabc7f07462ebc9d22d837bdbeac
 msgid "Retrieve drug names based on disposal and waste handling information."
-msgstr ""
+msgstr "根据处置和废物处理信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 0b15eada75ba454e9b02b41ad7e00c68
 msgid "FDA_get_drug_names_by_disposal_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_disposal_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2431
 #: 6843b82aabd9416e8a8ca5e4e05ba0ba
 msgid "**Name**: ``FDA_get_drug_names_by_disposal_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_disposal_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2433
 #: ae77747540bf4d709fa8539a1eb9aea6
 msgid ""
 "**Description**: Retrieve drug names based on disposal and waste handling "
 "information."
-msgstr ""
+msgstr "**描述**：根据处置和废弃物处理信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2437
 #: b4e2a6ec22434a2492ed0ae4483cf8fd
 msgid ""
 "``disposal_info`` (string) (optional) Information related to the disposal "
 "and waste handling of the drug."
-msgstr ""
+msgstr "``disposal_info``（字符串）（可选）与药物的处置和废弃处理相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2462
 #: 386e5844f42e4ab485c8d0cbfe093034
@@ -3811,197 +3834,198 @@ msgid ""
 "**FDA_get_drug_names_by_dosage_forms_and_strengths_info** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_dosage_forms_and_strengths_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2464
 #: e3e745c3558d428da2021173f28efe7b
 msgid ""
 "Retrieve drug names based on specific dosage forms and strengths "
 "information."
-msgstr ""
+msgstr "根据特定的剂型和规格信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b7b8947370ef493b8316c3f571c6ffad
 msgid ""
 "FDA_get_drug_names_by_dosage_forms_and_strengths_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_dosage_forms_and_strengths_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2470
 #: a223ec3eef81496794b704cb291c7456
 msgid "**Name**: ``FDA_get_drug_names_by_dosage_forms_and_strengths_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_dosage_forms_and_strengths_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2472
 #: e0ad0826f2b645878c804a0b0ed92221
 msgid ""
 "**Description**: Retrieve drug names based on specific dosage forms and "
 "strengths information."
-msgstr ""
+msgstr "**描述**：根据特定的剂型和规格信息检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2476
 #: 32aaed5766ba4ee6b80e51f812505f6d
 msgid ""
 "``dosage_forms_and_strengths`` (string) (optional) Information about the "
 "dosage forms and strengths of the drug."
-msgstr ""
+msgstr "``dosage_forms_and_strengths``（字符串）（可选）药物的剂型和规格信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2501
 #: b233f52c8f934ce789a06427990ab2b7
 msgid "**FDA_get_drug_names_by_drug_interactions** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_drug_interactions**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2503
 #: d53b6d1bafe9404c9cae1645573f76d9
 msgid ""
 "Retrieve a list of drug names that have the specified drug interactions."
-msgstr ""
+msgstr "检索具有指定药物相互作用的药物名称列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 63d1d984dbce4992b1c49ea1a95089eb
 msgid "FDA_get_drug_names_by_drug_interactions tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_drug_interactions 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2509
 #: ef969489b4bc4caa8cfdffa91e003f12
 msgid "**Name**: ``FDA_get_drug_names_by_drug_interactions``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_drug_interactions``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2511
 #: c03cc92e49074ecb8016252d4fec256e
 msgid ""
 "**Description**: Retrieve a list of drug names that have the specified drug "
 "interactions."
-msgstr ""
+msgstr "**描述**：检索具有指定药物相互作用的药物名称列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2515
 #: 77053ea051b340f4ae0489dac2c08ae6
 msgid ""
 "``interaction_term`` (string) (optional) The term to search for in drug "
 "interactions."
-msgstr ""
+msgstr "``interaction_term``（字符串）（可选）用于搜索药物相互作用的术语。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2540
 #: 0e6eb0a0c70a424d92c498c3022172d4
 msgid "**FDA_get_drug_names_by_effective_time** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_effective_time**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2542
 #: f764c18a7bb94a3bbeac9454ccabd5bd
 msgid ""
 "Retrieve drug names based on the effective time of the labeling document."
-msgstr ""
+msgstr "根据标注文件的生效时间检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 01c8ecd94cc94e05ac8c39f5476584a9
 msgid "FDA_get_drug_names_by_effective_time tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_effective_time 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2548
 #: 8412077275e24bbd8227ccc7aac9967b
 msgid "**Name**: ``FDA_get_drug_names_by_effective_time``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_effective_time``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2550
 #: 7a9f74767fd5425eb04e8973c2c2d607
 msgid ""
 "**Description**: Retrieve drug names based on the effective time of the "
 "labeling document."
-msgstr ""
+msgstr "**描述**：根据标识文件的生效时间检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2554
 #: 78979277a78f4b009df9a929bc8d9664
 msgid ""
 "``effective_time`` (string) (optional) Date reference to the particular "
 "version of the labeling document in YYYYmmdd format."
-msgstr ""
+msgstr "``effective_time``（字符串）（可选）标注文档特定版本的日期参考，格式为YYYYmmdd。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2579
 #: 502f5c4af79a44708ac530f2ff78a671
 msgid "**FDA_get_drug_names_by_food_safety_warnings** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_food_safety_warnings**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2581
 #: 20bb35a3d9184ef0b48f659688de7770
 msgid "Retrieve drug names based on specific food safety warnings."
-msgstr ""
+msgstr "根据特定的食品安全警告检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c51a3189a1ad43d1bf0cb51c24284974
 msgid "FDA_get_drug_names_by_food_safety_warnings tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_food_safety_warnings 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2587
 #: c916685f1c3748568403411c85820314
 msgid "**Name**: ``FDA_get_drug_names_by_food_safety_warnings``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_food_safety_warnings``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2589
 #: 103c7d3c4291417884f1ca9bb1940d28
 msgid ""
 "**Description**: Retrieve drug names based on specific food safety warnings."
-msgstr ""
+msgstr "**描述**：根据特定的食品安全警告检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2593
 #: 7666be23b1874021b0328ef836c41a16
 msgid ""
 "``field_info`` (string) (optional) Information related to food safety "
 "warnings."
-msgstr ""
+msgstr "``field_info``（字符串）（可选）与食品安全警告相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2618
 #: c760cb9eaec44a82a6bcf01df83c41ac
 msgid "**FDA_get_drug_names_by_general_precautions** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_general_precautions**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2620
 #: 2b5d2514abca498abeeffc942bd88358
 msgid "Retrieve drug names based on specific general precautions information."
-msgstr ""
+msgstr "根据特定的一般注意事项信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 25c2496f136f4af5a8b44f0042633fd2
 msgid "FDA_get_drug_names_by_general_precautions tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_general_precautions 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2626
 #: 218f3def399a42f8ad82fedd4b740efd
 msgid "**Name**: ``FDA_get_drug_names_by_general_precautions``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_general_precautions``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2628
 #: 49dc17806b014625a67318d04adb45e7
 msgid ""
 "**Description**: Retrieve drug names based on specific general precautions "
 "information."
-msgstr ""
+msgstr "**描述**：根据特定的一般注意事项信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2632
 #: 3bcbcd8246414f5782db860459894be8
 msgid ""
 "``precaution_info`` (string) (optional) Information about any special care "
 "to be exercised for safe and effective use of the drug."
-msgstr ""
+msgstr "``precaution_info``（字符串）（可选）有关安全有效使用该药物需特别注意事项的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2657
 #: d95be0adab7d44c79b91a27c4555b1f8
 msgid "**FDA_get_drug_names_by_geriatric_use** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_geriatric_use**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2659
 #: 09e3a26aa34447bfab384b4db060be26
 msgid ""
 "Retrieve drug names that have specific information about geriatric use."
-msgstr ""
+msgstr "检索具有特定老年人使用信息的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst bb6a6fe1d4314ea5ab2e11d46eb1da66
 msgid "FDA_get_drug_names_by_geriatric_use tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_geriatric_use 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2665
 #: 37a6ffde31974454b89525cd074fadbe
 msgid "**Name**: ``FDA_get_drug_names_by_geriatric_use``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_geriatric_use``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2667
 #: ad6931ebd2a94c86a6fadccb8098ef1e
 msgid ""
 "**Description**: Retrieve drug names that have specific information about "
 "geriatric use."
-msgstr ""
+msgstr "**描述**：检索具有特定老年人使用信息的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2671
 #: 818eda959319469a9cd99268a1725b62
@@ -4009,98 +4033,98 @@ msgid ""
 "``geriatric_use`` (string) (optional) Information about any limitations on "
 "any geriatric indications, needs for specific monitoring, hazards associated"
 " with use of the drug in the geriatric population."
-msgstr ""
+msgstr "``geriatric_use``（字符串）（可选）有关老年人适应症的任何限制、特定监测需求以及该药物在老年人群中使用相关的风险信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2696
 #: 917177745d844517b5b83881c721db55
 msgid "**FDA_get_drug_names_by_health_claim** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_health_claim**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2698
 #: 6440992ef92d4701accc5f6b8274eeb5
 msgid "Retrieve drug names based on specific health claims."
-msgstr ""
+msgstr "根据特定的健康声明检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7949baa9b0fe4dcdb3672019d22dd464
 msgid "FDA_get_drug_names_by_health_claim tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_health_claim 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2704
 #: f0ee68dd5c374af1a782e5d2c91c3e4e
 msgid "**Name**: ``FDA_get_drug_names_by_health_claim``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_health_claim``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2706
 #: 4c9cc8f5e85b478bac8e7cd1c7c94173
 msgid "**Description**: Retrieve drug names based on specific health claims."
-msgstr ""
+msgstr "**描述**：根据特定的健康声明检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2710
 #: 75fc7cde328d4b4b8766d7934f588d6a
 msgid ""
 "``health_claim`` (string) (optional) The health claim associated with the "
 "drug."
-msgstr ""
+msgstr "``health_claim``（字符串）（可选）与该药物相关的健康声明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2735
 #: 41d3d176cf374df19f79b4610dc3f540
 msgid "**FDA_get_drug_names_by_indication** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_indication**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2737
 #: 63ef7612a6b9454eb6d9154019c48b71
 msgid "Retrieve a list of drug names based on a specific indication or usage."
-msgstr ""
+msgstr "根据特定适应症或用途检索药物名称列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 3167d0446a554dd1831d770a70ceed5a
 msgid "FDA_get_drug_names_by_indication tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_indication 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2743
 #: 171779a28b6d4fc6ba5bc734f6586667
 msgid "**Name**: ``FDA_get_drug_names_by_indication``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_indication``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2745
 #: 41f74aae6d564436ad2d28db754d551c
 msgid ""
 "**Description**: Retrieve a list of drug names based on a specific "
 "indication or usage."
-msgstr ""
+msgstr "**描述**：根据特定的适应症或用途检索药物名称列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2771
 #: 735e67a3504f4f5d8816a5b8e7d5241c
 msgid ""
 "**FDA_get_drug_names_by_info_for_nursing_mothers** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_info_for_nursing_mothers**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2773
 #: a15572f85fab46ed969ac372cbe366c6
 msgid "Retrieve drug names based on information related to nursing mothers."
-msgstr ""
+msgstr "根据与哺乳期母亲相关的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 4575cea679974af791ea6071f4610859
 msgid "FDA_get_drug_names_by_info_for_nursing_mothers tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_info_for_nursing_mothers 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2779
 #: 97bd0d6a226646ccbcdb6aeaf7b05940
 msgid "**Name**: ``FDA_get_drug_names_by_info_for_nursing_mothers``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_info_for_nursing_mothers``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2781
 #: 78578262f04f4b74bc77f7010cd75ebb
 msgid ""
 "**Description**: Retrieve drug names based on information related to nursing"
 " mothers."
-msgstr ""
+msgstr "**描述**：根据与哺乳期母亲相关的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2785
 #: 364a40b3b46a4ce9a674a97be53fc1e4
 msgid ""
 "``nursing_mothers_info`` (string) (optional) Information about excretion of "
 "the drug in human milk and effects on the nursing infant."
-msgstr ""
+msgstr "``nursing_mothers_info``（字符串）（可选）有关药物在母乳中的排泄情况及其对哺乳婴儿影响的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2810
 #: 4a7107a98b524497940411eaa044def9
@@ -4108,396 +4132,399 @@ msgid ""
 "**FDA_get_drug_names_by_information_for_owners_or_caregivers** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_information_for_owners_or_caregivers**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2812
 #: ac682635489649ff9de1bf675185a0a3
 msgid "Retrieve drug names based on information for owners or caregivers."
-msgstr ""
+msgstr "根据所有者或护理人员的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 3b9f696dd2b2415da1def97771e98034
 msgid ""
 "FDA_get_drug_names_by_information_for_owners_or_caregivers tool "
 "specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_information_for_owners_or_caregivers 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2818
 #: 88734c56635a4908918cafc435885e76
 msgid ""
 "**Name**: ``FDA_get_drug_names_by_information_for_owners_or_caregivers``"
 msgstr ""
+"**名称**: ``FDA_get_drug_names_by_information_for_owners_or_caregivers``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2820
 #: 4d0e62a25bae42e0bb7258a4c437196e
 msgid ""
 "**Description**: Retrieve drug names based on information for owners or "
 "caregivers."
-msgstr ""
+msgstr "**描述**：根据所有者或护理人员的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2824
 #: f106078bf3524449b0ede0ef680fda11
 msgid ""
 "``field_info`` (string) (optional) The specific information related to "
 "owners or caregivers to search for."
-msgstr ""
+msgstr "``field_info``（字符串）（可选）用于搜索与所有者或护理人员相关的特定信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2849
 #: 4fdb5c4ccc3a4a509dd0b0877dbb9ec5
 msgid "**FDA_get_drug_names_by_ingredient** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_ingredient**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2851
 #: ac654d3d8f0b480bb3bab18c37e70068
 msgid ""
 "Retrieve drug names based on a specific ingredient present in the drug "
 "product."
-msgstr ""
+msgstr "根据药品中包含的特定成分检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6896d8a4459f41b49cd28d9574f63bb5
 msgid "FDA_get_drug_names_by_ingredient tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_ingredient 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2857
 #: 959d36786d2f4f82abacb2069627f96c
 msgid "**Name**: ``FDA_get_drug_names_by_ingredient``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_ingredient``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2859
 #: 0584dcca58444819a8273f171b165bae
 msgid ""
 "**Description**: Retrieve drug names based on a specific ingredient present "
 "in the drug product."
-msgstr ""
+msgstr "**描述**：根据药品中包含的特定成分检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2863
 #: df27e710c98a46bbb0448a8f51c089c3
 msgid ""
 "``ingredient_name`` (string) (optional) The name of the ingredient to search"
 " for in drug products."
-msgstr ""
+msgstr "``ingredient_name``（字符串）（可选）用于在药品中搜索的成分名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2888
 #: 0cb5ee1d9e5e4739ad56158821ca6af7
 msgid "**FDA_get_drug_names_by_instructions_for_use** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_instructions_for_use**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2890
 #: 0877c2e3fc0145fb936a5f4c65d3e62c
 msgid "Retrieve drug names based on specific instructions for use."
-msgstr ""
+msgstr "根据特定的使用说明检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 175711493e9146c898a64dd9f4461063
 msgid "FDA_get_drug_names_by_instructions_for_use tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_instructions_for_use 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2896
 #: aa1ff8e44ded4d34b3ef17054c90ec0d
 msgid "**Name**: ``FDA_get_drug_names_by_instructions_for_use``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_instructions_for_use``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2898
 #: 2f374397214a4ff5af04e1cd801aa7dd
 msgid ""
 "**Description**: Retrieve drug names based on specific instructions for use."
-msgstr ""
+msgstr "**描述**：根据特定的使用说明检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2902
 #: 36cb5ca731e94210a84adc38e1ca2578
 msgid ""
 "``instructions_for_use`` (string) (optional) Information about safe handling"
 " and use of the drug product."
-msgstr ""
+msgstr "``instructions_for_use``（字符串）（可选）有关药品安全使用和操作的说明信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2927
 #: 87220df9968143bda8dab98deec3f5a9
 msgid "**FDA_get_drug_names_by_lab_test_interference** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_lab_test_interference**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2929
 #: 6e1824c0440e4caab9049c2f77e23ca9
 msgid ""
 "Retrieve drug names that have known interference with laboratory tests."
-msgstr ""
+msgstr "检索已知会干扰实验室检测的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst a93e854ba9ee43f3b665908ad42caf82
 msgid "FDA_get_drug_names_by_lab_test_interference tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_lab_test_interference 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2935
 #: e3ccf4b7eefc42469750dfb9ba517e5a
 msgid "**Name**: ``FDA_get_drug_names_by_lab_test_interference``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_lab_test_interference``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2937
 #: ae08da2ba4fd491a9556790030b7365b
 msgid ""
 "**Description**: Retrieve drug names that have known interference with "
 "laboratory tests."
-msgstr ""
+msgstr "**描述**：检索已知会干扰实验室检测的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2941
 #: 48bca74996234d48a9d60c244555a748
 msgid ""
 "``lab_test_interference`` (string) (optional) Information about any known "
 "interference by the drug with laboratory tests."
-msgstr ""
+msgstr "``lab_test_interference``（字符串）（可选）有关该药物对实验室检测可能产生的任何已知干扰的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2966
 #: 88b5e0de45384e0d9c428a792b1e5df5
 msgid "**FDA_get_drug_names_by_lab_tests** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_lab_tests**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2968
 #: fb6ec204b59f48d9bea42b3553fbc896
 msgid "Retrieve drug names based on laboratory tests information."
-msgstr ""
+msgstr "根据实验室检测信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 77fd897b60a348fbbc9e301d3d4e76cb
 msgid "FDA_get_drug_names_by_lab_tests tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_lab_tests 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2974
 #: 3579624b337b44e097beb4def72fc807
 msgid "**Name**: ``FDA_get_drug_names_by_lab_tests``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_lab_tests``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2976
 #: f88cfb05113f45ff9e0182f43fb2b6d8
 msgid ""
 "**Description**: Retrieve drug names based on laboratory tests information."
-msgstr ""
+msgstr "**描述**：根据实验室检测信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:2980
 #: 437130f01a4941c2a3e37162e66af593
 msgid ""
 "``lab_test_info`` (string) (optional) Information related to laboratory "
 "tests."
-msgstr ""
+msgstr "``lab_test_info``（字符串）（可选）与实验室测试相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3005
 #: ca8753da1ffa40cbaf4200e7cce599d0
 msgid "**FDA_get_drug_names_by_mechanism_of_action** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_mechanism_of_action**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3007
 #: 54b1823d93ca4c15a4e1cbef78688734
 msgid ""
 "Retrieve drug names based on the specified mechanism of action information."
-msgstr ""
+msgstr "根据指定的作用机制信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 4da191f198fe4636987728a1d0fae218
 msgid "FDA_get_drug_names_by_mechanism_of_action tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_mechanism_of_action 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3013
 #: b67d3664362f47318e5779dd17fa25a5
 msgid "**Name**: ``FDA_get_drug_names_by_mechanism_of_action``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_mechanism_of_action``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3015
 #: 93b1018e3b5045f292acf4748849d608
 msgid ""
 "**Description**: Retrieve drug names based on the specified mechanism of "
 "action information."
-msgstr ""
+msgstr "**描述**：根据指定的作用机制信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3019
 #: e076818db7d1482e9b796e45d7da9a3a
 msgid ""
 "``mechanism_info`` (string) (optional) Information related to the desired "
 "mechanism of action."
-msgstr ""
+msgstr "``mechanism_info``（字符串）（可选）与所需作用机制相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3044
 #: 3bea96ce89c842928fa393c53d8b13ce
 msgid "**FDA_get_drug_names_by_medication_guide** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_medication_guide**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3046
 #: 80bed19329834fe894979c97fae1f0b6
 msgid ""
 "Retrieve drug names based on the presence of specific information in the "
 "medication guide."
-msgstr ""
+msgstr "根据药品指南中特定信息的存在检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6fb9ded4353b4590b6d95e1dcd955eed
 msgid "FDA_get_drug_names_by_medication_guide tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_medication_guide 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3052
 #: 4b10c097ff684b3abf356a8704a2cd21
 msgid "**Name**: ``FDA_get_drug_names_by_medication_guide``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_medication_guide``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3054
 #: 8e8f0523847144749ec8b3eaf68a9983
 msgid ""
 "**Description**: Retrieve drug names based on the presence of specific "
 "information in the medication guide."
-msgstr ""
+msgstr "**描述**：根据药品指南中特定信息的存在情况检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3058
 #: 9c647b73e1b2491ba8de258a8d5df1c4
 msgid ""
 "``medguide_info`` (string) (optional) Information contained in the "
 "medication guide."
-msgstr ""
+msgstr "``medguide_info``（字符串）（可选）药品指南中包含的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3083
 #: db1a1ed8e2504277b043dd6d53ca5bd4
 msgid ""
 "**FDA_get_drug_names_by_nonclinical_toxicology_info** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_get_drug_names_by_nonclinical_toxicology_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3085
 #: 74813b7dd4c54e9da616265e1275142c
 msgid "Retrieve drug names based on nonclinical toxicology information."
-msgstr ""
+msgstr "根据非临床毒理学信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6ab7735468224011b78727e53bfb48c6
 msgid "FDA_get_drug_names_by_nonclinical_toxicology_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_nonclinical_toxicology_info 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3091
 #: a0fa56aa68444876a3582d742bd6f011
 msgid "**Name**: ``FDA_get_drug_names_by_nonclinical_toxicology_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_nonclinical_toxicology_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3093
 #: df4710e61dc84f30b8554ac469185926
 msgid ""
 "**Description**: Retrieve drug names based on nonclinical toxicology "
 "information."
-msgstr ""
+msgstr "**描述**：根据非临床毒理学信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3097
 #: a3cdc7a239d744d3af12903041895299
 msgid ""
 "``toxicology_info`` (string) (optional) Information about toxicology in non-"
 "human subjects."
-msgstr ""
+msgstr "``toxicology_info``（字符串）（可选）关于非人类受试者毒理学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3122
 #: 23a8d98af0094f1c8213b73a64c94886
 msgid "**FDA_get_drug_names_by_nonteratogenic_effects** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_nonteratogenic_effects**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3124
 #: 51444f7330134df2abc5576efac384c0
 msgid ""
 "Retrieve drug names based on the presence of nonteratogenic effects "
 "information."
-msgstr ""
+msgstr "根据是否存在非致畸作用信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 863126d04d454527b583c2e5a1007c9d
 msgid "FDA_get_drug_names_by_nonteratogenic_effects tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_nonteratogenic_effects 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3130
 #: b7c09855f9c74f2b912e8fd560691783
 msgid "**Name**: ``FDA_get_drug_names_by_nonteratogenic_effects``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_nonteratogenic_effects``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3132
 #: 1dc7db9c261d4c14910b77d34e25942b
 msgid ""
 "**Description**: Retrieve drug names based on the presence of nonteratogenic"
 " effects information."
-msgstr ""
+msgstr "**描述**：根据非致畸作用信息的存在情况检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3136
 #: f6ee2146edfc46568e7ef8644d2385d1
 msgid ""
 "``nonteratogenic_effects`` (string) (optional) Information about the drug’s "
 "nonteratogenic effects."
-msgstr ""
+msgstr "``nonteratogenic_effects``（字符串）（可选）有关药物非致畸作用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3161
 #: 7c77592c73a94b61a76ecf05d4051cb2
 msgid "**FDA_get_drug_names_by_overdosage_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_overdosage_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3163
 #: 33bdcbc114bf4051a9e5cc5f1da063e0
 msgid ""
 "Retrieve drug names based on information about signs, symptoms, and "
 "laboratory findings of acute ..."
-msgstr ""
+msgstr "根据急性症状、体征和实验室检查结果的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7b62ac76ab164ff586ad37639ede5565
 msgid "FDA_get_drug_names_by_overdosage_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_overdosage_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3169
 #: 848e6105c1314cbc9674809de199908a
 msgid "**Name**: ``FDA_get_drug_names_by_overdosage_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_overdosage_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3171
 #: e8e494a98fc64efe83b6d657165094ab
 msgid ""
 "**Description**: Retrieve drug names based on information about signs, "
 "symptoms, and laboratory findings of acute overdosage."
-msgstr ""
+msgstr "**描述**：根据急性过量的体征、症状和实验室检查结果检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3175
 #: 0b496d562619437f9764359f73dd4dae
 msgid ""
 "``overdosage_info`` (string) (optional) Information about signs, symptoms, "
 "and laboratory findings of acute overdosage."
-msgstr ""
+msgstr "``overdosage_info`` (字符串)（可选）有关急性过量的体征、症状和实验室检查结果的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3200
 #: 88cd08e66366405cb6ce933bb8542670
 msgid "**FDA_get_drug_names_by_pediatric_use** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_pediatric_use**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3202
 #: 618083cdfc6b4a959d099721e80cfd5d
 msgid "Retrieve drug names based on pediatric use information."
-msgstr ""
+msgstr "根据儿童用药信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 82aa2567896a4905a46afd4a4c239633
 msgid "FDA_get_drug_names_by_pediatric_use tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_pediatric_use 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3208
 #: 6d72c4c7fead43fcbd49e24bf4907e7a
 msgid "**Name**: ``FDA_get_drug_names_by_pediatric_use``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_pediatric_use``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3210
 #: 8c4ce0839c354da3bc5f44a80d426d21
 msgid ""
 "**Description**: Retrieve drug names based on pediatric use information."
-msgstr ""
+msgstr "**描述**：根据儿童用药信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3214
 #: 9c092ba02b96449db74ff26c64cd42cd
 msgid ""
 "``pediatric_use_info`` (string) (optional) Information related to the safe "
 "and effective pediatric use of the drug."
-msgstr ""
+msgstr "``pediatric_use_info``（字符串）（可选）与药物安全且有效的儿科使用相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3239
 #: 03284e3c221347d89ea32dbd898baa41
 msgid "**FDA_get_drug_names_by_pharmacokinetics** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_pharmacokinetics**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3241
 #: d0066c4f97b54e1c8300eee62a03a5a4
 msgid ""
 "Retrieve drug names based on specific pharmacokinetics information, such as "
 "absorption, distribut..."
-msgstr ""
+msgstr "根据特定的药代动力学信息（例如吸收、分布等）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 7732d6d12520484f8c0804a3955ac562
 msgid "FDA_get_drug_names_by_pharmacokinetics tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_pharmacokinetics 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3247
 #: 18a2ef65a2794fd6a97719a1fe9abace
 msgid "**Name**: ``FDA_get_drug_names_by_pharmacokinetics``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_pharmacokinetics``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3249
 #: 9c4a9ba5e9fa4e2da11e5caac00a8c12
@@ -4505,35 +4532,35 @@ msgid ""
 "**Description**: Retrieve drug names based on specific pharmacokinetics "
 "information, such as absorption, distribution, elimination, metabolism, drug"
 " interactions, and specific patient populations."
-msgstr ""
+msgstr "**描述**：根据特定的药代动力学信息（如吸收、分布、消除、代谢、药物相互作用以及特定患者群体）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3253
 #: 8e68a1dd500f497191d2d12e3e8e3a99
 msgid ""
 "``pharmacokinetics_info`` (string) (optional) Information about the "
 "clinically significant pharmacokinetics of a drug or active metabolites."
-msgstr ""
+msgstr "``pharmacokinetics_info``（字符串）（可选）有关药物或活性代谢物临床显著药代动力学的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3278
 #: 269ab709714c46848e6429e208ad37dd
 msgid "**FDA_get_drug_names_by_population_use** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_population_use**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3280
 #: 8b5d89cacd57448ab08a564b339ae4cb
 msgid ""
 "Retrieve drug names based on their use in specific populations, such as "
 "pregnant women, nursing m..."
-msgstr ""
+msgstr "根据特定人群（例如孕妇、哺乳期女性等）的使用情况检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 85ed3820b2c8486f86115f98d07c1841
 msgid "FDA_get_drug_names_by_population_use tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_population_use 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3286
 #: d057846caf8145159100ec0a8e07acf6
 msgid "**Name**: ``FDA_get_drug_names_by_population_use``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_population_use``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3288
 #: 467fe3242a5a4e3d8f3ac9980e15a355
@@ -4541,624 +4568,625 @@ msgid ""
 "**Description**: Retrieve drug names based on their use in specific "
 "populations, such as pregnant women, nursing mothers, pediatric patients, "
 "and geriatric patients."
-msgstr ""
+msgstr "**描述**：根据特定人群的使用情况（如孕妇、哺乳期母亲、儿童患者和老年患者）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3292
 #: 555f139065944ed1b21ab21414a65537
 msgid ""
 "``population_use`` (string) (optional) The specific population use to search"
 " for (e.g., pregnant women, nursing mothers)."
-msgstr ""
+msgstr "``population_use``（字符串）（可选）用于搜索的特定人群使用（例如：孕妇、哺乳期母亲）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3317
 #: 5a8ff587752c49c8b04336daa753fbac
 msgid "**FDA_get_drug_names_by_pregnancy_effects_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_pregnancy_effects_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3319
 #: 11f847594cb149cca8343a5d8b03fea1
 msgid ""
 "Retrieve drug names based on information about effects the drug may have on "
 "pregnant women or on ..."
-msgstr ""
+msgstr "根据有关药物对孕妇可能产生的影响或其他相关信息，检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 2e9b4f39f5c54968ae5e4f88efca7188
 msgid "FDA_get_drug_names_by_pregnancy_effects_info tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_pregnancy_effects_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3325
 #: 9b2b65beda2c4b99aef85a43a193f5ba
 msgid "**Name**: ``FDA_get_drug_names_by_pregnancy_effects_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_pregnancy_effects_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3327
 #: a5a4ceada53b4df5a6699016279a84d5
 msgid ""
 "**Description**: Retrieve drug names based on information about effects the "
 "drug may have on pregnant women or on a fetus."
-msgstr ""
+msgstr "**描述**：根据药物可能对孕妇或胎儿产生的影响，检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3331
 #: d121b8d9e8114c20a66df1f737c0b81e
 msgid ""
 "``pregnancy_info`` (string) (optional) Information about the effects on "
 "pregnancy to search for."
-msgstr ""
+msgstr "``pregnancy_info``（字符串）（可选）用于搜索与怀孕影响相关的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3356
 #: e5c5942e5acc46d8bd421657ccb8557c
 msgid "**FDA_get_drug_names_by_residue_warning** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_residue_warning**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3358
 #: a92cbd6a5ee64b079c03082f896eb4a9
 msgid "Retrieve drug names based on the presence of residue warnings."
-msgstr ""
+msgstr "根据是否存在残留警告检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst e533e7d1a0b547cfba68697fb6ea7769
 msgid "FDA_get_drug_names_by_residue_warning tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_residue_warning 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3364
 #: 49bedb47d0164f509c9a18ba4072716b
 msgid "**Name**: ``FDA_get_drug_names_by_residue_warning``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_residue_warning``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3366
 #: cd3740f73cd94fe7afd4979d438cecfa
 msgid ""
 "**Description**: Retrieve drug names based on the presence of residue "
 "warnings."
-msgstr ""
+msgstr "**描述**：根据残留警告的存在检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3370
 #: c9b2cdc0c08e4ef0834c31f4c155bb1e
 msgid ""
 "``residue_warning`` (string) (optional) The residue warning information to "
 "search for."
-msgstr ""
+msgstr "``residue_warning``（字符串）（可选）要搜索的残留警告信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3395
 #: 7ddd7f1ea58d4a838870e3c2422769be
 msgid "**FDA_get_drug_names_by_risk** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_risk**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3397
 #: 17782cfa8519422fa21376a5da7ccf73
 msgid ""
 "Retrieve drug names based on specific risk information, especially regarding"
 " pregnancy or breastf..."
-msgstr ""
+msgstr "根据特定的风险信息（尤其是与妊娠或哺乳相关的风险信息）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 77a5dc40657c466dad5af03d993e5bf6
 msgid "FDA_get_drug_names_by_risk tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_risk 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3403
 #: 1a16b232694f4a59914929aaeccc9dce
 msgid "**Name**: ``FDA_get_drug_names_by_risk``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_risk``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3405
 #: 22e38a133138458685c5c64fb21002e4
 msgid ""
 "**Description**: Retrieve drug names based on specific risk information, "
 "especially regarding pregnancy or breastfeeding."
-msgstr ""
+msgstr "**描述**：根据特定的风险信息（特别是关于怀孕或哺乳的风险）检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3409
 #: d3424bcbab93407f95a0490594d14a69
 msgid ""
 "``risk_info`` (string) (optional) Specific risk information to search for."
-msgstr ""
+msgstr "``risk_info``（字符串）（可选）要搜索的特定风险信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3434
 #: 0f8e7658914742f1b42746f409cc8e76
 msgid "**FDA_get_drug_names_by_route** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_route**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3436
 #: c0b2503eff0b4bb6bd54137820854513
 msgid "Retrieve the drug names based on the route of administration."
-msgstr ""
+msgstr "根据给药途径检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 0eba08cf36ab48f68c3362640d341ba8
 msgid "FDA_get_drug_names_by_route tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_route 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3442
 #: 384260c237a24655b28b7b8843a413d8
 msgid "**Name**: ``FDA_get_drug_names_by_route``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_route``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3444
 #: e075912f42514774964ca1a1260567bf
 msgid ""
 "**Description**: Retrieve the drug names based on the route of "
 "administration."
-msgstr ""
+msgstr "**描述**：根据给药途径检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3448
 #: 8e94f0f73afc4d24a39e1464843ae86d
 msgid "``route`` (string) (optional) The route of administration of the drug."
-msgstr ""
+msgstr "``route``（字符串）（可选）药物的给药途径。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3473
 #: fe5d2ea579034ceea3e7447c0010d99e
 msgid "**FDA_get_drug_names_by_safe_handling_warning** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_safe_handling_warning**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3475
 #: 1462ecde326a4f27983fb3e47ecb21e5
 msgid "Retrieve drug names that have specific safe handling warnings."
-msgstr ""
+msgstr "检索具有特定安全处理警告的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 5627975f40cb41409c23297c8cd1f766
 msgid "FDA_get_drug_names_by_safe_handling_warning tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_safe_handling_warning 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3481
 #: 66886da35bce4fa9a83445e3987a6079
 msgid "**Name**: ``FDA_get_drug_names_by_safe_handling_warning``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_safe_handling_warning``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3483
 #: a8f11f08c07648849b2b940f99dfd27f
 msgid ""
 "**Description**: Retrieve drug names that have specific safe handling "
 "warnings."
-msgstr ""
+msgstr "**描述**：检索具有特定安全处理警告的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3487
 #: abf7d44c91524ad1a75938dbe6e7c0a7
 msgid ""
 "``safe_handling_warning`` (string) (optional) The specific safe handling "
 "warning to search for."
-msgstr ""
+msgstr "``safe_handling_warning``（字符串）（可选）要搜索的特定安全处理警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3512
 #: f121e403e42340338bda8ea4d92954b6
 msgid "**FDA_get_drug_names_by_safety_summary** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_safety_summary**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3514
 #: 2f3005e0811f4b23b0ff73b1e65d2fe2
 msgid ""
 "Retrieve drug names based on the summary of safety and effectiveness "
 "information."
-msgstr ""
+msgstr "根据安全性和有效性信息摘要检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst a50bec5012804d5583e1fe92ad28564a
 msgid "FDA_get_drug_names_by_safety_summary tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_safety_summary 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3520
 #: 785b60143a844314be548ce0720b5b68
 msgid "**Name**: ``FDA_get_drug_names_by_safety_summary``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_safety_summary``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3522
 #: 849ba408cd56438284ce721307c6d0b9
 msgid ""
 "**Description**: Retrieve drug names based on the summary of safety and "
 "effectiveness information."
-msgstr ""
+msgstr "**描述**：根据安全性和有效性信息摘要检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3526
 #: c12b8911b4764866b70f02f32ad2af3c
 msgid ""
 "``summary_text`` (string) (optional) Text to search within the summary of "
 "safety and effectiveness field."
-msgstr ""
+msgstr "``summary_text``（字符串）（可选）用于在安全性和有效性摘要字段中进行搜索的文本。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3551
 #: 2cdd2f176b0e430a90b4ec6dcb820889
 msgid ""
 "**FDA_get_drug_names_by_spl_indexing_data_elements** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_spl_indexing_data_elements**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3553
 #: f2d0534cb9b145f4810c4876f54fcfcc
 msgid ""
 "Retrieve drug names based on Structured Product Labeling (SPL) indexing data"
 " elements."
-msgstr ""
+msgstr "根据结构化产品标签（SPL）索引数据元素检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 5ae17725aa404880b860b12a0d33c99e
 msgid "FDA_get_drug_names_by_spl_indexing_data_elements tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_spl_indexing_data_elements 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3559
 #: 0ce00526a52c4bd1b56c0d94a3664723
 msgid "**Name**: ``FDA_get_drug_names_by_spl_indexing_data_elements``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_spl_indexing_data_elements``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3561
 #: 91d71b394129460494ac21b42ff515c2
 msgid ""
 "**Description**: Retrieve drug names based on Structured Product Labeling "
 "(SPL) indexing data elements."
-msgstr ""
+msgstr "**描述**：根据结构化产品标签（SPL）索引数据元素检索药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3565
 #: a432268311b5469c9b9655962cd8fadb
 msgid ""
 "``spl_indexing_data_elements`` (string) (optional) The SPL indexing data "
 "elements to search for."
-msgstr ""
+msgstr "``spl_indexing_data_elements``（字符串）（可选）要搜索的SPL索引数据元素。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3590
 #: 06f18ef895294c6cabcd2aa9d235fdfc
 msgid "**FDA_get_drug_names_by_teratogenic_effects** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_teratogenic_effects**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3592
 #: 02ee9dea2bd043cea8a287b247d44e90
 msgid "Retrieve drug names based on specific teratogenic effects categories."
-msgstr ""
+msgstr "根据特定的致畸效应类别检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 72ad7113d8364cb89085e2d4924b2ad6
 msgid "FDA_get_drug_names_by_teratogenic_effects tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_teratogenic_effects 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3598
 #: 51cdfc1d48c14e08a304051b0d4e389b
 msgid "**Name**: ``FDA_get_drug_names_by_teratogenic_effects``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_teratogenic_effects``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3600
 #: 3bc575252f224dacb63595b5704fdd02
 msgid ""
 "**Description**: Retrieve drug names based on specific teratogenic effects "
 "categories."
-msgstr ""
+msgstr "**描述**：根据特定的致畸效应类别检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3604
 #: 898ccbca3daf435396851040673bed09
 msgid ""
 "``teratogenic_effects`` (string) (optional) The teratogenic effects category"
 " to search for (e.g., Pregnancy category A, B, C, D, or X)."
-msgstr ""
+msgstr "``teratogenic_effects``（字符串）（可选）用于搜索的致畸效应类别（例如，妊娠分类 A、B、C、D 或 X）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3629
 #: e00b8b79e14c4ae8b6a389433f837b41
 msgid "**FDA_get_drug_names_by_user_safety_warning** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_user_safety_warning**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3631
 #: 1b8f70484a2f4496b0a68f7cce4a0db6
 msgid "Retrieve drug names that have specific user safety warnings."
-msgstr ""
+msgstr "检索具有特定用户安全警告的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b33347cf8b164daca9ab267c06ab9313
 msgid "FDA_get_drug_names_by_user_safety_warning tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_user_safety_warning 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3637
 #: f39d8a9a13b9415c9314c8d78ff7cd24
 msgid "**Name**: ``FDA_get_drug_names_by_user_safety_warning``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_user_safety_warning``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3639
 #: ea4ca4b024c64220ab41c6372b67987b
 msgid ""
 "**Description**: Retrieve drug names that have specific user safety "
 "warnings."
-msgstr ""
+msgstr "**描述**：检索具有特定用户安全警告的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3643
 #: 4f0f34a19d34422fa8ea752ad6d94b19
 msgid ""
 "``safety_warning`` (string) (optional) The specific safety warning to search"
 " for."
-msgstr ""
+msgstr "``safety_warning``（字符串）（可选）要搜索的特定安全警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3668
 #: d64d02bdb88948d09962e8cd4fcbbfc8
 msgid "**FDA_get_drug_names_by_warnings_and_cautions** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_drug_names_by_warnings_and_cautions**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3670
 #: 5500d795b4bc44d791966cb0e18f4b7d
 msgid ""
 "Retrieve drug names based on specific warnings and cautions information."
-msgstr ""
+msgstr "根据特定的警告和注意事项信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst a574b1a234064465b009f9716660d084
 msgid "FDA_get_drug_names_by_warnings_and_cautions tool specification"
-msgstr ""
+msgstr "FDA_get_drug_names_by_warnings_and_cautions 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3676
 #: fc7534fc79344d9cbdfcfda3aabf7654
 msgid "**Name**: ``FDA_get_drug_names_by_warnings_and_cautions``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drug_names_by_warnings_and_cautions``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3678
 #: a1be1265e23b463289cb41995dc26ac5
 msgid ""
 "**Description**: Retrieve drug names based on specific warnings and cautions"
 " information."
-msgstr ""
+msgstr "**描述**：根据特定的警告和注意事项信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3682
 #: 5e2f4a90952b45fdacdab92f3654b3d3
 msgid ""
 "``warnings_and_cautions_info`` (string) (optional) The warnings and cautions"
 " text to search for."
-msgstr ""
+msgstr "``warnings_and_cautions_info``（字符串）（可选）要搜索的警告和注意事项文本。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3707
 #: 3d584fcc37494b0c85db8813c585076e
 msgid ""
 "**FDA_get_drugs_by_carcinogenic_mutagenic_fertility** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_get_drugs_by_carcinogenic_mutagenic_fertility**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3709
 #: 1fcaea6773c94aab83c193d621a4ed51
 msgid ""
 "Retrieve drug names based on the presence of carcinogenic, mutagenic, or "
 "fertility impairment inf..."
-msgstr ""
+msgstr "根据是否存在致癌性、致突变性或生育能力损害的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ec254de508824c5eae4acbb32f55f2f6
 msgid "FDA_get_drugs_by_carcinogenic_mutagenic_fertility tool specification"
-msgstr ""
+msgstr "FDA_get_drugs_by_carcinogenic_mutagenic_fertility 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3715
 #: 5cda9dfbebdb4924a4b4f768065a41eb
 msgid "**Name**: ``FDA_get_drugs_by_carcinogenic_mutagenic_fertility``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_drugs_by_carcinogenic_mutagenic_fertility``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3717
 #: fe337123307c42918c0bb3cb67535970
 msgid ""
 "**Description**: Retrieve drug names based on the presence of carcinogenic, "
 "mutagenic, or fertility impairment information."
-msgstr ""
+msgstr "**描述**：根据是否存在致癌性、致突变性或生育能力损害的信息检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3721
 #: 8b462f56d29540cab7a122627eea717a
 msgid ""
 "``carcinogenic_info`` (string) (optional) Information about carcinogenic, "
 "mutagenic, or fertility impairment potential."
-msgstr ""
+msgstr "``carcinogenic_info``（字符串）（可选）有关致癌性、致突变性或生育能力损害潜在风险的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3746
 #: 23464f65000e4014a82621fb2003cf76
 msgid "**FDA_get_effective_time_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_effective_time_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3748
 #: 4763d6af38e945cbbebc753ab790e5b3
 msgid ""
 "Retrieve effective time of the labeling document based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索标注文件的生效时间。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 57336f2630f348f494becc244470090c
 msgid "FDA_get_effective_time_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_effective_time_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3754
 #: a8b4b56cba07404fa6a969be1c71e85c
 msgid "**Name**: ``FDA_get_effective_time_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_effective_time_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3756
 #: 5219cc827dd443c1a239f2265c911d9e
 msgid ""
 "**Description**: Retrieve effective time of the labeling document based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取标注文档的生效时间。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3782
 #: ae5180b861cf49c486f0b16c928b3c1e
 msgid "**FDA_get_environmental_warning_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_environmental_warning_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3784
 #: c1743e682b5547ef926f705e07e9e4e5
 msgid "Fetch environmental warnings for a specific drug based on its name."
-msgstr ""
+msgstr "根据药物名称获取特定药物的环境警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ecb91a318ce748ecb8f67d7aceebab2a
 msgid "FDA_get_environmental_warning_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_environmental_warning_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3790
 #: 0cd8038b88054666817e3d44e8a4aa9f
 msgid "**Name**: ``FDA_get_environmental_warning_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_environmental_warning_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3792
 #: 3452dc3b538e4f03a372174ac5ec569e
 msgid ""
 "**Description**: Fetch environmental warnings for a specific drug based on "
 "its name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取特定药物的环境警告信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3818
 #: 5542bb1902644cc8bb02a85bebf05108
 msgid "**FDA_get_general_precautions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_general_precautions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3820
 #: ed5c5843cdc147c6b2003b5c7cb87f2f
 msgid "Retrieve general precautions information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索一般注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst f5cff2ee984441c9a597ea6d57fd2083
 msgid "FDA_get_general_precautions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_general_precautions_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3826
 #: 90e9968f96a545128051ee214ab4d906
 msgid "**Name**: ``FDA_get_general_precautions_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_general_precautions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3828
 #: ad010e361ef347ee83874f67855c90f6
 msgid ""
 "**Description**: Retrieve general precautions information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取一般注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3854
 #: 928a0a12ecc84ada9cab574931cf6ce4
 msgid "**FDA_get_geriatric_use_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_geriatric_use_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3856
 #: 1f7eef0c03c54c7e8fb9bde75b933b7e
 msgid "Retrieve information about geriatric use based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索老年人使用相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 24614d5367844a38a11e1c016ca92338
 msgid "FDA_get_geriatric_use_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_geriatric_use_info_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3862
 #: 7afb1548684a4b4fb354b4dc80750ae4
 msgid "**Name**: ``FDA_get_geriatric_use_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_geriatric_use_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3864
 #: 7287f131d006446e93fcb7e5bf1f81f8
 msgid ""
 "**Description**: Retrieve information about geriatric use based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索老年人使用相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3890
 #: 806877f16fd141faa0ad1d5e74882646
 msgid "**FDA_get_health_claims_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_health_claims_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3892
 #: bcfb75d1bbe84794bba7cd5378262c42
 msgid "Retrieve health claims associated with a specific drug name."
-msgstr ""
+msgstr "检索与特定药物名称相关的健康声明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 953994d26ec94099a14234424b95341f
 msgid "FDA_get_health_claims_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_health_claims_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3898
 #: 7df27719f346485295a00362b930f188
 msgid "**Name**: ``FDA_get_health_claims_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_health_claims_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3900
 #: 29095ce00dfd469386438dea42496f92
 msgid ""
 "**Description**: Retrieve health claims associated with a specific drug "
 "name."
-msgstr ""
+msgstr "**描述**：检索与特定药品名称相关的健康声明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3926
 #: 67952734aa2a45a59f3fe68654a71654
 msgid "**FDA_get_inactive_ingredient_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_inactive_ingredient_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3928
 #: 531d167f98d34e09888438f1297e65bf
 msgid ""
 "Fetch a list of inactive ingredients in a specific drug product based on the"
 " drug name."
-msgstr ""
+msgstr "根据药品名称获取特定药品中非活性成分的列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst a1cd190850c14f548ded0ba04fd9266b
 msgid "FDA_get_inactive_ingredient_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_inactive_ingredient_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3934
 #: dd1711fcdeef4d96bda414da0e704f5f
 msgid "**Name**: ``FDA_get_inactive_ingredient_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_inactive_ingredient_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3936
 #: 7cb6462a373a4da0a33089d379346d5f
 msgid ""
 "**Description**: Fetch a list of inactive ingredients in a specific drug "
 "product based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取特定药品中非活性成分的列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3962
 #: 5e3c65dd683940859fd6ec1abefb9d18
 msgid "**FDA_get_indications_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_indications_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3964
 #: 657db32275e64edba0a33d8a0344d017
 msgid ""
 "Retrieve indications and usage information based on a specific drug name."
-msgstr ""
+msgstr "根据特定药物名称检索适应症和用法信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 4b1592cc0162404c9cbda2542cb76916
 msgid "FDA_get_indications_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_indications_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3970
 #: 9a4f9b0c1e3c4ed189116c19c6625f36
 msgid "**Name**: ``FDA_get_indications_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_indications_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3972
 #: 90abd6154270402a914dd8b6d33e7cba
 msgid ""
 "**Description**: Retrieve indications and usage information based on a "
 "specific drug name."
-msgstr ""
+msgstr "**描述**：根据特定药物名称获取适应症和使用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:3998
 #: 8758f659ad3b4781bc1dcbdc60ae3ad7
 msgid "**FDA_get_info_for_nursing_mothers_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_info_for_nursing_mothers_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4000
 #: ce322204e46f454584dcec7a3687cf81
 msgid "Retrieve information about nursing mothers for a specific drug."
-msgstr ""
+msgstr "获取有关特定药物哺乳期母亲的相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 81b0246968d74ef5b65f521d1f355e17
 msgid "FDA_get_info_for_nursing_mothers_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_info_for_nursing_mothers_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4006
 #: 1c03c26d02c4404b803b1cf0bcee210f
 msgid "**Name**: ``FDA_get_info_for_nursing_mothers_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_info_for_nursing_mothers_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4008
 #: 7c34ba9a18a64a1b98e1e1758d69d8ab
 msgid ""
 "**Description**: Retrieve information about nursing mothers for a specific "
 "drug."
-msgstr ""
+msgstr "**描述**：检索有关特定药物哺乳期母亲的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4034
 #: 7d4ad78393254a71b330f91cab12e275
 msgid "**FDA_get_info_for_patients_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_info_for_patients_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4036
 #: db679b4011a74af98330c2857824cec5
 msgid "Fetch information for patients based on the drug name."
-msgstr ""
+msgstr "根据药物名称获取患者信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst bcb293722714452690e16087a581e4b2
 msgid "FDA_get_info_for_patients_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_info_for_patients_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4042
 #: b06b1a958ee74b68995fb1655335674f
 msgid "**Name**: ``FDA_get_info_for_patients_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_info_for_patients_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4044
 #: e37e3ded3aab45e68919c67b22f5e470
 msgid ""
 "**Description**: Fetch information for patients based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取患者信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4070
 #: 1724e25362a44101a24fc7d0327a2a8e
@@ -5166,19 +5194,21 @@ msgid ""
 "**FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4072
 #: 724e60a0824b459dbbfe51b4e31ef8c3
 msgid ""
 "Get information about when a doctor should be consulted before using a "
 "specific drug."
-msgstr ""
+msgstr "获取有关在使用特定药物之前何时应咨询医生的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 07c03b4fb4014c76a9a824b144ab883e
 msgid ""
 "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name tool "
 "specification"
 msgstr ""
+"FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4078
 #: 35715379ba6f44c088ee032b81ff0cdb
@@ -5186,13 +5216,14 @@ msgid ""
 "**Name**: "
 "``FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name``"
 msgstr ""
+"**名称**: ``FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4080
 #: a85bb29386664367987cf40361445b35
 msgid ""
 "**Description**: Get information about when a doctor should be consulted "
 "before using a specific drug."
-msgstr ""
+msgstr "**描述**：获取有关在使用特定药物之前何时应咨询医生的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4106
 #: 9a625a60b5b74beca6a61e257855beed
@@ -5200,31 +5231,32 @@ msgid ""
 "**FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4108
 #: 60bd84e1715241e18fc81027c2cb0e22
 msgid ""
 "Get information about when a doctor or pharmacist should be consulted "
 "regarding drug interactions..."
-msgstr ""
+msgstr "获取有关何时应咨询医生或药剂师以了解药物相互作用的信息..."
 
 #: ../../tools/fda_drug_labeling_tools.rst 5eb9e0a3fcb64c23b9a6ec52b3f72a13
 msgid ""
 "FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4114
 #: 89d87194229e448286a4db4b2f13a558
 msgid ""
 "**Name**: ``FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4116
 #: 3933fb701a90407ab5365af0a93df182
 msgid ""
 "**Description**: Get information about when a doctor or pharmacist should be"
 " consulted regarding drug interactions for a specific drug."
-msgstr ""
+msgstr "**描述**：获取有关何时应咨询医生或药剂师以了解特定药物的药物相互作用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4142
 #: b2bdec1ac82f4d7b9724c4410d967b9a
@@ -5232,186 +5264,188 @@ msgid ""
 "**FDA_get_information_for_owners_or_caregivers_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_information_for_owners_or_caregivers_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4144
 #: c55445e3dc9e437987121c87963c0f1c
 msgid ""
 "Retrieve specific information for owners or caregivers based on the drug "
 "name."
-msgstr ""
+msgstr "根据药物名称为所有者或护理人员检索特定信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ea8506c9a4994e18ab6cb088862ebac5
 msgid ""
 "FDA_get_information_for_owners_or_caregivers_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_information_for_owners_or_caregivers_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4150
 #: c99ac98a6c274b17a7098b9f9d78485e
 msgid ""
 "**Name**: ``FDA_get_information_for_owners_or_caregivers_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_information_for_owners_or_caregivers_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4152
 #: 1902dbcb2fcc426ea0a960421f58fdd7
 msgid ""
 "**Description**: Retrieve specific information for owners or caregivers "
 "based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索特定的所有者或护理人员信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4178
 #: 6bf6d4f7d68049999b5c8a16ccccacaf
 msgid "**FDA_get_ingredients_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_ingredients_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4180
 #: b50825db2383441c8e392040faa1c4a5
 msgid "Retrieve a list of drug ingredients based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索药物成分列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 30b996c3714549cb80558b65554b9eb0
 msgid "FDA_get_ingredients_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_ingredients_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4186
 #: 817027ba726c4e42804d96bdb73ed05e
 msgid "**Name**: ``FDA_get_ingredients_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_ingredients_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4188
 #: d15c327c074d4c58ab56be2f80b45b8d
 msgid ""
 "**Description**: Retrieve a list of drug ingredients based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称检索药物成分列表。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4214
 #: e61b01976a2d439b922fb8c68cd21d8c
 msgid "**FDA_get_instructions_for_use_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_instructions_for_use_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4216
 #: 7b536b063c2740c9a4cb73ff03dc6b84
 msgid "Retrieve instructions for use information based on the drug name."
-msgstr ""
+msgstr "根据药品名称获取使用说明信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 0eeee6951b734fa0a212e426e26834ae
 msgid "FDA_get_instructions_for_use_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_instructions_for_use_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4222
 #: 80b6efcca9c94ba480a2cd79a86aed44
 msgid "**Name**: ``FDA_get_instructions_for_use_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_instructions_for_use_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4224
 #: 11bc7c275d914257998e8ef382efdfea
 msgid ""
 "**Description**: Retrieve instructions for use information based on the drug"
 " name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取使用说明信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4250
 #: 0d0efb418eed48398c1e7e0986d37191
 msgid ""
 "**FDA_get_lab_test_interference_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_lab_test_interference_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4252
 #: f5de850cbd9046b3afb191958f21cef7
 msgid ""
 "Retrieve information about laboratory test interferences for a specific "
 "drug."
-msgstr ""
+msgstr "获取有关特定药物实验室检测干扰的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst f95bec782aa74cab839547f40d6af47b
 msgid "FDA_get_lab_test_interference_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_lab_test_interference_info_by_drug_name 工具规格说明"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4258
 #: cba3e9b0607d4b27b680d6ec39ffcdaf
 msgid "**Name**: ``FDA_get_lab_test_interference_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_lab_test_interference_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4260
 #: c209794a963b407db167c15c7dd95618
 msgid ""
 "**Description**: Retrieve information about laboratory test interferences "
 "for a specific drug."
-msgstr ""
+msgstr "**描述**：检索有关特定药物实验室检测干扰的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4286
 #: b86cc53414ee4ca8b0b6a10bf744e486
 msgid "**FDA_get_lab_tests_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_lab_tests_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4288
 #: 1e70f24def85497db7997fa3ecdbb9e6
 msgid "Retrieve laboratory tests information based on drug names."
-msgstr ""
+msgstr "根据药物名称检索实验室测试信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst f372a6820a914f1b97d14a436aeabee6
 msgid "FDA_get_lab_tests_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_lab_tests_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4294
 #: bef37656308148d491f7d68afcdc33e1
 msgid "**Name**: ``FDA_get_lab_tests_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_lab_tests_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4296
 #: abc3cd3beec9407eba72b67d4be886de
 msgid ""
 "**Description**: Retrieve laboratory tests information based on drug names."
-msgstr ""
+msgstr "**描述**：根据药物名称检索实验室检测信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4322
 #: 93670c584933465ca60f8f78a0536583
 msgid "**FDA_get_labor_and_delivery_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_labor_and_delivery_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4324
 #: 328a2c965a124cbab3036dc16a2f2bd0
 msgid ""
 "Retrieve information about the drug’s use during labor or delivery based on "
 "the drug name."
-msgstr ""
+msgstr "根据药物名称检索有关其在分娩或生产期间使用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst d25e7395d00147b6bf7c970343b38536
 msgid "FDA_get_labor_and_delivery_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_labor_and_delivery_info_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4330
 #: 6fa19919d8df46038de98e0115c4d838
 msgid "**Name**: ``FDA_get_labor_and_delivery_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_labor_and_delivery_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4332
 #: 28d0882282d94a099ad68c5444ba010c
 msgid ""
 "**Description**: Retrieve information about the drug’s use during labor or "
 "delivery based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索有关该药物在分娩或生产期间使用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4358
 #: 4b1bdd2870c74f91a69a5b49b4c4bfbd
 msgid ""
 "**FDA_get_manufacturer_name_NDC_number_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_get_manufacturer_name_NDC_number_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4360
 #: 7128e87d99524169af19f3aa4e829ede
 msgid ""
 "Retrieve detailed information about a drug's active ingredient, FDA "
 "application number, manufactu..."
-msgstr ""
+msgstr "获取有关药物活性成分、FDA申请编号、制造商等详细信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b79d25f643724903a90ce0eead1cf168
 msgid "FDA_get_manufacturer_name_NDC_number_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_manufacturer_name_NDC_number_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4366
 #: cc0221bdb0da47d6ac8d69a84e3d40fe
 msgid "**Name**: ``FDA_get_manufacturer_name_NDC_number_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_manufacturer_name_NDC_number_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4368
 #: 0cd06588f56f4a7cb71ee8df83bb8f0a
@@ -5419,319 +5453,319 @@ msgid ""
 "**Description**: Retrieve detailed information about a drug's active "
 "ingredient, FDA application number, manufacturer name, National Drug Code "
 "(NDC) number, and route of administration; all based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称检索有关药物活性成分、FDA申请编号、生产商名称、国家药品代码（NDC）编号以及给药途径的详细信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4394
 #: ba3a2adda78f42419170de12cea8bbb4
 msgid "**FDA_get_mechanism_of_action_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_mechanism_of_action_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4396
 #: 5fd8a22f632d47fd8b1e5196b0d6fae7
 msgid "Retrieve the mechanism of action information for a specific drug."
-msgstr ""
+msgstr "检索特定药物的作用机制信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 9a7568fc003f4e8e9584f6bfb693d39a
 msgid "FDA_get_mechanism_of_action_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_mechanism_of_action_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4402
 #: f35718b39537455b896cec71203c9c03
 msgid "**Name**: ``FDA_get_mechanism_of_action_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_mechanism_of_action_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4404
 #: b6be433691dd4c7182c9aeae57764016
 msgid ""
 "**Description**: Retrieve the mechanism of action information for a specific"
 " drug."
-msgstr ""
+msgstr "**描述**：检索特定药物的作用机制信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4430
 #: 3a0e4cce3dca456494838aca6388e4b4
 msgid "**FDA_get_medication_guide_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_medication_guide_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4432
 #: 760f0c2098ff459cb54bf3a42a34fc51
 msgid "Retrieve medication guide information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索药物指南信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 590946047e1f409e9e8f054ce908b78d
 msgid "FDA_get_medication_guide_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_medication_guide_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4438
 #: 7fa12f2570c447d4b142b6583ce5af1a
 msgid "**Name**: ``FDA_get_medication_guide_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_medication_guide_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4440
 #: 9b01ba68998e44f4bff2a6d6698551cf
 msgid ""
 "**Description**: Retrieve medication guide information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取药物指南信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4466
 #: 5ff857d38e9a4333a78a7ab28a7cf697
 msgid "**FDA_get_microbiology_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_microbiology_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4468
 #: 114076c1624b4a2baebb7b1e8c38dbff
 msgid "Retrieve microbiology information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索微生物学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst f8d87265de9e40b395265040abc3f8f6
 msgid "FDA_get_microbiology_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_microbiology_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4474
 #: 2a4d8c83d4da421da4559f74c995de7e
 msgid "**Name**: ``FDA_get_microbiology_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_microbiology_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4476
 #: aa98b2400cf046649a134224971b6c3a
 msgid ""
 "**Description**: Retrieve microbiology information based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索微生物学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4502
 #: 2f9f6492da6a4049af38c522b1aa0565
 msgid ""
 "**FDA_get_nonclinical_toxicology_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_nonclinical_toxicology_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4504
 #: 642e010a56b94f8b856fb72added0119
 msgid "Retrieve nonclinical toxicology information based on drug names."
-msgstr ""
+msgstr "根据药物名称检索非临床毒理学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst d8d5635f09e949ddb9ba9215e6c3ea58
 msgid "FDA_get_nonclinical_toxicology_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_nonclinical_toxicology_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4510
 #: 023c45194e40419a9d5dad8f2f665a81
 msgid "**Name**: ``FDA_get_nonclinical_toxicology_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_nonclinical_toxicology_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4512
 #: 6e8411fd05f648b892ed719ee96bc9ab
 msgid ""
 "**Description**: Retrieve nonclinical toxicology information based on drug "
 "names."
-msgstr ""
+msgstr "**描述**：根据药物名称检索非临床毒理学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4538
 #: 427a70c1903549c4a5046fbba56284b2
 msgid "**FDA_get_nonteratogenic_effects_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_nonteratogenic_effects_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4540
 #: ba1a874313a4414d8e47df80fcc71320
 msgid ""
 "Retrieve information about nonteratogenic effects based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索有关非致畸效应的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 358226e8b47347b3a0161fd8330e78c1
 msgid "FDA_get_nonteratogenic_effects_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_nonteratogenic_effects_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4546
 #: 9735f3e58f9c450fb7f9a59392c6f4c1
 msgid "**Name**: ``FDA_get_nonteratogenic_effects_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_nonteratogenic_effects_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4548
 #: ce1400dd9470491d8f76d88959b0f6b5
 msgid ""
 "**Description**: Retrieve information about nonteratogenic effects based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索有关非致畸作用的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4574
 #: 49662899ac2b44ca996e5656967a3998
 msgid "**FDA_get_other_safety_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_other_safety_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4576
 #: edb4e0ce1f424658bb2df215bf9d65c1
 msgid ""
 "Retrieve safety information that may not be specified in other fields based "
 "on the provided drug ..."
-msgstr ""
+msgstr "根据提供的药物信息，检索可能未在其他字段中指定的安全性信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst e04c9a560aac4c189bcf1098042006e7
 msgid "FDA_get_other_safety_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_other_safety_info_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4582
 #: 77a629dc3e38429e9c1b9d01678a1531
 msgid "**Name**: ``FDA_get_other_safety_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_other_safety_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4584
 #: 525088ab19df4994ba418a487eda1baa
 msgid ""
 "**Description**: Retrieve safety information that may not be specified in "
 "other fields based on the provided drug name."
-msgstr ""
+msgstr "**描述**：根据提供的药品名称，检索可能未在其他字段中指定的安全信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4610
 #: 6e50cbecf8fa4340afe5e40e888fdb6d
 msgid "**FDA_get_overdosage_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_overdosage_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4612
 #: 6f866f68d1db4de69da76143e9c7471b
 msgid ""
 "Retrieve information about signs, symptoms, and laboratory findings of acute"
 " overdosage based on ..."
-msgstr ""
+msgstr "根据……检索有关急性过量服用的体征、症状和实验室检查结果的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst a7232618116e4b70b26bd9258d74e22b
 msgid "FDA_get_overdosage_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_overdosage_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4618
 #: d0882d36d74440959d711b38f2abeed6
 msgid "**Name**: ``FDA_get_overdosage_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_overdosage_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4620
 #: 9bd4f67ee33a43ada22876568d91d9eb
 msgid ""
 "**Description**: Retrieve information about signs, symptoms, and laboratory "
 "findings of acute overdosage based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索急性过量服用的体征、症状和实验室检查结果的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4646
 #: fa44f02105bb4b6984c262eccecff9ca
 msgid "**FDA_get_patient_package_insert_from_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_patient_package_insert_from_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4648
 #: 34ee9b06802044c98d553d3105cb4603
 msgid ""
 "Retrieve the patient package insert information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索患者药品说明书信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 77b03cb71cdf448ebfb25e7e8c856c70
 msgid "FDA_get_patient_package_insert_from_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_patient_package_insert_from_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4654
 #: 94cefdcd74804707b8ba37d9e11feb2e
 msgid "**Name**: ``FDA_get_patient_package_insert_from_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_patient_package_insert_from_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4656
 #: 6b96a1d0b7fc40218adbdeda0110ea1c
 msgid ""
 "**Description**: Retrieve the patient package insert information based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取患者药品说明书信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4682
 #: 8468c55f270742de9dc2545c60adfdf4
 msgid "**FDA_get_pediatric_use_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_pediatric_use_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4684
 #: 3cb0de3a0a164c8a8febcadd1761380d
 msgid "Retrieve pediatric use information based on drug names."
-msgstr ""
+msgstr "根据药物名称检索儿童使用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst e3ed95a587b54e1591984ff3560c0de9
 msgid "FDA_get_pediatric_use_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pediatric_use_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4690
 #: a864ef5a15474cd5860e58b9f41167f7
 msgid "**Name**: ``FDA_get_pediatric_use_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pediatric_use_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4692
 #: b446525f7e0448ad968894da7f7f4aa7
 msgid ""
 "**Description**: Retrieve pediatric use information based on drug names."
-msgstr ""
+msgstr "**描述**：根据药物名称检索儿童用药信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4718
 #: 0ce32a7d1b1848c69d830070703bea69
 msgid "**FDA_get_pharmacodynamics_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_pharmacodynamics_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4720
 #: 060f973e44974286b02e382f4d61bcd0
 msgid "Retrieve pharmacodynamics information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索药效学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ba4fe70909904641a0399719abc339e6
 msgid "FDA_get_pharmacodynamics_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pharmacodynamics_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4726
 #: 0d783c3f66574f1da9fc54310727a2a1
 msgid "**Name**: ``FDA_get_pharmacodynamics_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pharmacodynamics_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4728
 #: d8cceb1578d64c4eac7acf29cea183e0
 msgid ""
 "**Description**: Retrieve pharmacodynamics information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索药效学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4754
 #: 4dc579655b574fd1b2325dd1f74d1e79
 msgid "**FDA_get_pharmacogenomics_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_pharmacogenomics_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4756
 #: df4a021859bb4aa89780543c7d9b7c9a
 msgid "Retrieve pharmacogenomics information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索药物基因组学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst dc49883184e4402fa3e8282b8637fea0
 msgid "FDA_get_pharmacogenomics_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pharmacogenomics_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4762
 #: e30cc80fb3ba4e54af94348a0531b8ab
 msgid "**Name**: ``FDA_get_pharmacogenomics_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pharmacogenomics_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4764
 #: b41b65a9038d4368b836d2db4e21fb8b
 msgid ""
 "**Description**: Retrieve pharmacogenomics information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索药物基因组学信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4790
 #: 64d4eadd902e431d877818c5fd0c3084
 msgid "**FDA_get_pharmacokinetics_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_pharmacokinetics_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4792
 #: fc289fa6a470427db725799e1a22ef0d
 msgid ""
 "Retrieve pharmacokinetics information (e.g. absorption, distribution, "
 "elimination, metabolism, dr..."
-msgstr ""
+msgstr "获取药代动力学信息（例如：吸收、分布、消除、代谢、药物相互作用等）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c1d23cd1701e4c138e0399d33dff4187
 msgid "FDA_get_pharmacokinetics_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pharmacokinetics_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4798
 #: 568a0081b8d247539627950a18158d6e
 msgid "**Name**: ``FDA_get_pharmacokinetics_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pharmacokinetics_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4800
 #: f404e6a109c746cabd985eb8838158b9
@@ -5739,87 +5773,87 @@ msgid ""
 "**Description**: Retrieve pharmacokinetics information (e.g. absorption, "
 "distribution, elimination, metabolism, drug interactions, and specific "
 "patient populations) for a specific drug based on its name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索特定药物的药代动力学信息（例如：吸收、分布、消除、代谢、药物相互作用以及特定患者群体）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4826
 #: e70b5008486c4090b1da494716bda34f
 msgid "**FDA_get_population_use_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_population_use_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4828
 #: bdb389b6dc424305bdc189c368550446
 msgid ""
 "Retrieve information about the use of a drug in specific populations based "
 "on the drug name."
-msgstr ""
+msgstr "根据药物名称检索特定人群中药物使用情况的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 938acbfe016143c88c4c50ae660a2b0c
 msgid "FDA_get_population_use_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_population_use_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4834
 #: 35f4cdad9f614f888ae4547191279ece
 msgid "**Name**: ``FDA_get_population_use_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_population_use_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4836
 #: 59aaf1259f0f428a852d0d2c25e606c3
 msgid ""
 "**Description**: Retrieve information about the use of a drug in specific "
 "populations based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索特定人群中药物使用情况的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4862
 #: 1d4df1ed03634f6b93ee2858f0f3739e
 msgid "**FDA_get_precautions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_precautions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4864
 #: fb73c21c8d5a44db869eced8d0efc4ce
 msgid "Retrieve precautions information based on the drug name."
-msgstr ""
+msgstr "根据药品名称获取注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 2750acdb368848c0a07516a955a73b37
 msgid "FDA_get_precautions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_precautions_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4870
 #: d28e2c47328a491999a2519fd5f8a60b
 msgid "**Name**: ``FDA_get_precautions_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_precautions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4872
 #: a5e5dec2274f4ff283eddfb58fa5f23d
 msgid ""
 "**Description**: Retrieve precautions information based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4898
 #: 759510c780a24be79cdf45f9b4440429
 msgid "**FDA_get_pregnancy_effects_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_pregnancy_effects_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4900
 #: 4f97b45dda4e4bfc9de95dd3fc51d595
 msgid ""
 "Retrieve information about the effects on pregnancy for a specific drug."
-msgstr ""
+msgstr "检索有关特定药物对妊娠影响的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 2e0add0856f54da2a32c861e05d38631
 msgid "FDA_get_pregnancy_effects_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pregnancy_effects_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4906
 #: 506e8ba835c6490987f66154235c8ca6
 msgid "**Name**: ``FDA_get_pregnancy_effects_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pregnancy_effects_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4908
 #: 4b48ce7d3a4b498d953072824fe653ab
 msgid ""
 "**Description**: Retrieve information about the effects on pregnancy for a "
 "specific drug."
-msgstr ""
+msgstr "**描述**：检索有关特定药物对妊娠影响的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4934
 #: cf294e5d3b284ac380a565c064a80857
@@ -5827,271 +5861,272 @@ msgid ""
 "**FDA_get_pregnancy_or_breastfeeding_info_by_drug_name** (Type: "
 "FDADrugLabel)"
 msgstr ""
+"**FDA_get_pregnancy_or_breastfeeding_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4936
 #: d5e5f452f9dd4619a529a86555f56ee6
 msgid ""
 "Retrieve the pregnancy or breastfeeding information based on the specified "
 "drug name."
-msgstr ""
+msgstr "根据指定的药物名称获取怀孕或哺乳期相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 62737fe4d00342dc9ebe8c9d09024ede
 msgid ""
 "FDA_get_pregnancy_or_breastfeeding_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_pregnancy_or_breastfeeding_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4942
 #: b5fad03378e042e89fc75d746b3bec95
 msgid "**Name**: ``FDA_get_pregnancy_or_breastfeeding_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_pregnancy_or_breastfeeding_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4944
 #: 78da5bdcbb804c74ae47b4305603a7d1
 msgid ""
 "**Description**: Retrieve the pregnancy or breastfeeding information based "
 "on the specified drug name."
-msgstr ""
+msgstr "**描述**：根据指定的药物名称获取怀孕或哺乳期相关信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4970
 #: a580e02d2747420aa5921bd13bf6eaba
 msgid "**FDA_get_principal_display_panel_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_principal_display_panel_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4972
 #: d3877d52a0b94857a2b1ac48013adc1d
 msgid ""
 "Retrieve the content of the principal display panel of the product package "
 "based on the drug name."
-msgstr ""
+msgstr "根据药品名称获取产品包装主要展示面板的内容。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 66e24d6084b94a2fad7c8a8cdb9997f2
 msgid "FDA_get_principal_display_panel_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_principal_display_panel_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4978
 #: a4efc5a59b704ee88131ad0c3f07bc93
 msgid "**Name**: ``FDA_get_principal_display_panel_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_principal_display_panel_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:4980
 #: 10cf90d0b6414dd7aef80b5b6af23544
 msgid ""
 "**Description**: Retrieve the content of the principal display panel of the "
 "product package based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取产品包装主要展示面板的内容。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5006
 #: 7a6f2399e3484058ba18f47e98d759be
 msgid "**FDA_get_purpose_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_purpose_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5008
 #: ed4fc6bef594489ca3fb7a386aa43a15
 msgid ""
 "Retrieve about the drug product’s indications for use based on the drug "
 "name."
-msgstr ""
+msgstr "根据药品名称检索药品的适应症信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst cfa8a70edb1e48c48c9a576ae1da6d2f
 msgid "FDA_get_purpose_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_purpose_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5014
 #: cf1718f7fe2d4825a792ee455f29416b
 msgid "**Name**: ``FDA_get_purpose_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_purpose_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5016
 #: 818cdbecd9ee4004904d36c968326cbb
 msgid ""
 "**Description**: Retrieve about the drug product’s indications for use based"
 " on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取药品的适应症信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5042
 #: 86a4bfa572964c92bdde12d5bf0f15ce
 msgid "**FDA_get_recent_changes_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_recent_changes_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5044
 #: 3e32262f34ea41cdae01f12714bac9af
 msgid "Retrieve recent major changes in labeling for a specific drug."
-msgstr ""
+msgstr "检索特定药物最近的主要标签变更。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 81af2b2665174deabe0b8323b627eb85
 msgid "FDA_get_recent_changes_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_recent_changes_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5050
 #: 72553926a6c24cc0b841b0dc096202b6
 msgid "**Name**: ``FDA_get_recent_changes_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_recent_changes_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5052
 #: bafe0ac5d17346b4a0654ec1d1478011
 msgid ""
 "**Description**: Retrieve recent major changes in labeling for a specific "
 "drug."
-msgstr ""
+msgstr "**描述**：检索特定药物的最新主要标签变更。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5078
 #: f151127ce12e4c5198b8f5851d68bc5a
 msgid "**FDA_get_reference_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_reference_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5080
 #: bdbd98d63b3f4bbc86f136f4b4fa4b5a
 msgid "Retrieve reference information based on the drug name provided."
-msgstr ""
+msgstr "根据提供的药物名称检索参考信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst b1328dda10414bc19972db9fe3000daf
 msgid "FDA_get_reference_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_reference_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5086
 #: f6c9bbb82d3e498da8a774b36f52ff19
 msgid "**Name**: ``FDA_get_reference_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_reference_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5088
 #: 553a59878f6540a498ce6ee1f30795b8
 msgid ""
 "**Description**: Retrieve reference information based on the drug name "
 "provided."
-msgstr ""
+msgstr "**描述**：根据提供的药物名称检索参考信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5114
 #: 35c3e06bb14043d887ab8d7b64c1c06c
 msgid "**FDA_get_residue_warning_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_residue_warning_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5116
 #: 90c7af6adaea4cf7a7805ac799ca85e7
 msgid "Retrieve the residue warning based on drug name."
-msgstr ""
+msgstr "根据药物名称检索残留警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 101b1e7c200d438e9425aea37bb42ded
 msgid "FDA_get_residue_warning_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_residue_warning_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5122
 #: 4c7be611aee948578ede48f57b278c76
 msgid "**Name**: ``FDA_get_residue_warning_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_residue_warning_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5124
 #: 1956d49f80d64261b3ef20e3541001cd
 msgid "**Description**: Retrieve the residue warning based on drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取残留警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5150
 #: e744c8befd714afe9cc39aa0a26bad74
 msgid "**FDA_get_risk_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_risk_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5152
 #: e6b380e98d23459f864fb3f757fc97bd
 msgid ""
 "Retrieve risk information (especially regarding pregnancy or breastfeeding) "
 "based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索风险信息（特别是关于妊娠或哺乳期的相关信息）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 8f156952a7b34466a8252f3afbfd2694
 msgid "FDA_get_risk_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_risk_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5158
 #: 60c9028e6d32440f895eda1875f157f5
 msgid "**Name**: ``FDA_get_risk_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_risk_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5160
 #: 7f2ee3f343794c8295f258715d3d8cd5
 msgid ""
 "**Description**: Retrieve risk information (especially regarding pregnancy "
 "or breastfeeding) based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索风险信息（特别是关于怀孕或哺乳期的相关信息）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5186
 #: 951b5715da3a4ca793c1aac4e1e1a0ab
 msgid "**FDA_get_route_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_route_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5188
 #: 9a6fcd4ba5db47b7bbe25b9204125778
 msgid ""
 "Retrieve the route of administration information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索给药途径信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 8095111cb65044b3a172ce5465ad195c
 msgid "FDA_get_route_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_route_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5194
 #: 288308a716954ca8a834e93a4d46cff4
 msgid "**Name**: ``FDA_get_route_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_route_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5196
 #: f70f15eb8b5149f2a3e756bd6b7c0579
 msgid ""
 "**Description**: Retrieve the route of administration information based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取给药途径信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5222
 #: dbd24b5aed6c4b3f84c27297172bd1be
 msgid "**FDA_get_safe_handling_warnings_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_safe_handling_warnings_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5224
 #: cdca774cd5794d62a99c8325a05d63aa
 msgid "Retrieve safe handling warnings for a specific drug based on its name."
-msgstr ""
+msgstr "根据药物名称检索其安全处理警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6652aa4299d94d9688285a00648ac750
 msgid "FDA_get_safe_handling_warnings_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_safe_handling_warnings_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5230
 #: 1043e2105860433eac2baa8b0a40e799
 msgid "**Name**: ``FDA_get_safe_handling_warnings_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_safe_handling_warnings_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5232
 #: cafd1d69e85e42e8906228c8ae7390d8
 msgid ""
 "**Description**: Retrieve safe handling warnings for a specific drug based "
 "on its name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取其安全处理警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5258
 #: 543ae7f377bf46fbb9f7eadc79c0b66b
 msgid "**FDA_get_safety_summary_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_safety_summary_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5260
 #: d6d969531ec04d7586a7084478687587
 msgid ""
 "Retrieve a summary of safety and effectiveness information based on the drug"
 " name."
-msgstr ""
+msgstr "根据药品名称检索安全性和有效性信息摘要。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 8c56e8d662fc45b5beb0faa6ef36624b
 msgid "FDA_get_safety_summary_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_safety_summary_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5266
 #: c0ea85b672a841fca68f097b91e580b6
 msgid "**Name**: ``FDA_get_safety_summary_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_safety_summary_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5268
 #: 596fde8c50be49af9f41796c80ddde4e
 msgid ""
 "**Description**: Retrieve a summary of safety and effectiveness information "
 "based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取安全性和有效性信息的摘要。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5272
 #: ../../tools/fda_drug_labeling_tools.rst:5452
@@ -6099,388 +6134,390 @@ msgstr ""
 msgid ""
 "``drug_name`` (string) (optional) The name of the drug (either brand name or"
 " generic name)."
-msgstr ""
+msgstr "``drug_name``（字符串）（可选）药物名称（可以是品牌名称或通用名称）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5294
 #: 5bf06064c3a9475aac3a30c1f1dbe546
 msgid ""
 "**FDA_get_spl_indexing_data_elements_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_spl_indexing_data_elements_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5296
 #: d8c3b15e312049df9aa590f97b0fcbb4
 msgid ""
 "Retrieve Structured Product Labeling (SPL) indexing data elements based on "
 "drug names."
-msgstr ""
+msgstr "根据药品名称检索结构化产品标签（SPL）索引数据元素。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 369fa236ea84449bb366af9220d80d7d
 msgid "FDA_get_spl_indexing_data_elements_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_spl_indexing_data_elements_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5302
 #: f3c6df71cf0340718069bb1c2ebbae9f
 msgid "**Name**: ``FDA_get_spl_indexing_data_elements_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_spl_indexing_data_elements_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5304
 #: 7b78717e750246bba0269ed113d2175b
 msgid ""
 "**Description**: Retrieve Structured Product Labeling (SPL) indexing data "
 "elements based on drug names."
-msgstr ""
+msgstr "**描述**：根据药品名称检索结构化产品标签（SPL）索引数据元素。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5330
 #: f6bc9937e2be47a8bf3535634964a41c
 msgid "**FDA_get_spl_unclassified_section_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_spl_unclassified_section_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5332
 #: 9be28ea2a5c246c49e87bf032ead0da6
 msgid ""
 "Retrieve the SPL unclassified section information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索SPL未分类部分的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ddf380b1200641ffbd9ba2a7dd72d225
 msgid "FDA_get_spl_unclassified_section_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_spl_unclassified_section_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5338
 #: a23f2e92bd814b908d0e1606f04ef2b4
 msgid "**Name**: ``FDA_get_spl_unclassified_section_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_spl_unclassified_section_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5340
 #: e4cf97590a1a4d148de0d83dd29b0eb2
 msgid ""
 "**Description**: Retrieve the SPL unclassified section information based on "
 "the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称检索SPL未分类部分的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5366
 #: e8ba708eef474184bfddb1333a0e24da
 msgid "**FDA_get_stop_use_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_stop_use_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5368
 #: e34e1bd159504ff8a8e5121e7a1bfc41
 msgid "Retrieve stop use information based on the drug name provided."
-msgstr ""
+msgstr "根据提供的药品名称检索停用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 4d69574bc0c54b8386969024851b7963
 msgid "FDA_get_stop_use_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_stop_use_info_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5374
 #: 5dc5d9889209432cb7c9381826012f13
 msgid "**Name**: ``FDA_get_stop_use_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_stop_use_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5376
 #: aff267503c1447dc8c00d0bebb095a2c
 msgid ""
 "**Description**: Retrieve stop use information based on the drug name "
 "provided."
-msgstr ""
+msgstr "**描述**：根据提供的药品名称检索停用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5402
 #: 7f5ebbf329614970a923a2b8936ab62a
 msgid ""
 "**FDA_get_storage_and_handling_info_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_storage_and_handling_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5404
 #: 9cc1b5482fb64ef4a896db5217890ec1
 msgid "Retrieve storage and handling information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索存储和处理信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c6664ece2ac945799a7b5fed2d6294c8
 msgid "FDA_get_storage_and_handling_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_storage_and_handling_info_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5410
 #: a81151b27d50435fb56a63edf6206a30
 msgid "**Name**: ``FDA_get_storage_and_handling_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_storage_and_handling_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5412
 #: 379e0e2cc7a044838e268f2e6f7d3bb7
 msgid ""
 "**Description**: Retrieve storage and handling information based on the drug"
 " name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取存储和处理信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5438
 #: 3eba64988f104211b7208d1258c96d58
 msgid "**FDA_get_teratogenic_effects_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_teratogenic_effects_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5440
 #: 5aa588abd48e4e3ca89757f015922961
 msgid "Retrieve teratogenic effects information based on the drug name."
-msgstr ""
+msgstr "根据药物名称检索致畸作用信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c2a52b1de01548238967456f3563cf8a
 msgid "FDA_get_teratogenic_effects_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_teratogenic_effects_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5446
 #: 91a2167c478d4901b352fce70f24d58c
 msgid "**Name**: ``FDA_get_teratogenic_effects_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_teratogenic_effects_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5448
 #: fd01493ea27441c5a94d9cf50b63858b
 msgid ""
 "**Description**: Retrieve teratogenic effects information based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称检索致畸效应信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5474
 #: 9b9eb8f093ed4f83b3414d7161191141
 msgid "**FDA_get_user_safety_warning_by_drug_names** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_user_safety_warning_by_drug_names**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5476
 #: c850eb1e7f074a6aa255566e7b61fd8e
 msgid "Retrieve specific user safety warnings based on drug names."
-msgstr ""
+msgstr "根据药物名称检索特定的用户安全警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 43426ba3c25340509ae9b71e059d6f23
 msgid "FDA_get_user_safety_warning_by_drug_names tool specification"
-msgstr ""
+msgstr "FDA_get_user_safety_warning_by_drug_names 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5482
 #: 58979b0490bb44139fed4f7a97eb43e5
 msgid "**Name**: ``FDA_get_user_safety_warning_by_drug_names``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_user_safety_warning_by_drug_names``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5484
 #: 9b0273a992394d8c853967458b349be1
 msgid ""
 "**Description**: Retrieve specific user safety warnings based on drug names."
-msgstr ""
+msgstr "**描述**：根据药物名称获取特定的用户安全警告。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5488
 #: a08b894ccf804b66a98b0b7eea3706f5
 msgid "``drug_name`` (string) (optional) The specific drug name."
-msgstr ""
+msgstr "``drug_name``（字符串）（可选）指定的药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5510
 #: 05f9b7839bc349e8adf6addbd798c66d
 msgid "**FDA_get_warnings_and_cautions_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_warnings_and_cautions_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5512
 #: 1dcd20081d874a16956359536bc0f197
 msgid ""
 "Retrieve warnings and cautions information for a specific drug based on its "
 "name."
-msgstr ""
+msgstr "根据药物名称检索特定药物的警告和注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6e5b25fd41544c0fac7e333b6bfdd248
 msgid "FDA_get_warnings_and_cautions_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_warnings_and_cautions_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5518
 #: 63422d624e824fd5a35e64a95fa78fa8
 msgid "**Name**: ``FDA_get_warnings_and_cautions_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_warnings_and_cautions_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5520
 #: 68276ccce9574579a1fc1860b7dfbeae
 msgid ""
 "**Description**: Retrieve warnings and cautions information for a specific "
 "drug based on its name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取特定药物的警告和注意事项信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5546
 #: 5c0da89addd74998a0a8dcee28f8936c
 msgid "**FDA_get_warnings_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_warnings_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5548
 #: a5982c5acd6649d3ac379827967417ed
 msgid "Retrieve warning information based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索警告信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c7bdeec4d1164c0cbccf52762ffb54e7
 msgid "FDA_get_warnings_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_get_warnings_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5554
 #: 834c1ce0df4440579714027fc17a3597
 msgid "**Name**: ``FDA_get_warnings_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_warnings_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5556
 #: cfae18b8757648df96443c9c4ba7c82a
 msgid "**Description**: Retrieve warning information based on the drug name."
-msgstr ""
+msgstr "**描述**：根据药品名称获取警告信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5582
 #: 7299fac132a44abab935538457ead60f
 msgid "**FDA_get_when_using_info** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_get_when_using_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5584
 #: e9ea140494bf4ad6848dff1f7fbb9ee7
 msgid ""
 "Retrieve information about side effects and substances or activities to "
 "avoid while using a speci..."
-msgstr ""
+msgstr "获取有关副作用以及在使用特定药物时应避免的物质或活动的信息。"
 
 #: ../../tools/fda_drug_labeling_tools.rst af7018222eec4c39b658d9fd036509e0
 msgid "FDA_get_when_using_info tool specification"
-msgstr ""
+msgstr "FDA_get_when_using_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5590
 #: f585bee386704afeae0227857d42651e
 msgid "**Name**: ``FDA_get_when_using_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_get_when_using_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5592
 #: 7cd673b9bbf946968f360e9eef195ed0
 msgid ""
 "**Description**: Retrieve information about side effects and substances or "
 "activities to avoid while using a specific drug."
-msgstr ""
+msgstr "**描述**：检索有关使用特定药物时的副作用信息，以及应避免的物质或活动。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5618
 #: 4adf0f32d8d44bf4b5590e8f87c6d8d8
 msgid "**FDA_retrieve_device_use_by_drug_name** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_retrieve_device_use_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5620
 #: 862f28d9303844368fb105194fde2851
 msgid "Retrieve the intended use of the device based on the drug name."
-msgstr ""
+msgstr "根据药品名称检索设备的预期用途。"
 
 #: ../../tools/fda_drug_labeling_tools.rst 6933adad372b4901a29281c5eeeea797
 msgid "FDA_retrieve_device_use_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_retrieve_device_use_by_drug_name 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5626
 #: b922bf25d68a46cb87088557d6882e10
 msgid "**Name**: ``FDA_retrieve_device_use_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_retrieve_device_use_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5628
 #: 4a1b64f2c29c47b1abd36684db2f40fc
 msgid ""
 "**Description**: Retrieve the intended use of the device based on the drug "
 "name."
-msgstr ""
+msgstr "**描述**：根据药物名称获取设备的预期用途。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5654
 #: 0a96eab4249940d284628f24d9186f4c
 msgid "**FDA_retrieve_drug_name_by_device_use** (Type: FDADrugLabel)"
-msgstr ""
+msgstr "**FDA_retrieve_drug_name_by_device_use**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5656
 #: 925b8e64ca0b450e945d02af0eca457b
 msgid "Retrieve the drug name based on the intended use of the device."
-msgstr ""
+msgstr "根据设备的预期用途检索药物名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst c48a81a547594d89bde9cf4a6a7ebb0f
 msgid "FDA_retrieve_drug_name_by_device_use tool specification"
-msgstr ""
+msgstr "FDA_retrieve_drug_name_by_device_use 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5662
 #: 440f2f0bcb184cc1bae78167ba7022b3
 msgid "**Name**: ``FDA_retrieve_drug_name_by_device_use``"
-msgstr ""
+msgstr "**名称**: ``FDA_retrieve_drug_name_by_device_use``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5664
 #: 2470ab1c791e433cb1d63f06cb16bcc4
 msgid ""
 "**Description**: Retrieve the drug name based on the intended use of the "
 "device."
-msgstr ""
+msgstr "**描述**：根据设备的预期用途获取药品名称。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5668
 #: 0f39149427fb408a9a05c731a6929408
 msgid ""
 "``intended_use_of_the_device`` (string) (optional) The intended use of the "
 "device."
-msgstr ""
+msgstr "``intended_use_of_the_device``（字符串）（可选）设备的预期用途。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5690
 #: 00be4f94b6ef448887f73b17907be174
 msgid ""
 "**FDA_retrieve_drug_names_by_patient_medication_info** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_retrieve_drug_names_by_patient_medication_info**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5692
 #: ef5817958b1849408fe5d6c7323060f0
 msgid ""
 "Retrieve drug names based on patient medication information, which is about "
 "safe use of the drug."
-msgstr ""
+msgstr "根据患者的用药信息检索药物名称，该信息与药物的安全使用相关。"
 
 #: ../../tools/fda_drug_labeling_tools.rst ec886a5d366c4050a9e1a053e58c4e06
 msgid "FDA_retrieve_drug_names_by_patient_medication_info tool specification"
-msgstr ""
+msgstr "FDA_retrieve_drug_names_by_patient_medication_info 工具规范"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5698
 #: ad130cc76fbc4f78980f4863abff60b6
 msgid "**Name**: ``FDA_retrieve_drug_names_by_patient_medication_info``"
-msgstr ""
+msgstr "**名称**: ``FDA_retrieve_drug_names_by_patient_medication_info``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5700
 #: ac413f27170045dba9ebd95f533ee7d4
 msgid ""
 "**Description**: Retrieve drug names based on patient medication "
 "information, which is about safe use of the drug."
-msgstr ""
+msgstr "**描述**：根据患者的用药信息检索药物名称，确保药物的安全使用。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5704
 #: 5c3536942c7442a79e24edc0181a4211
 msgid ""
 "``patient_info`` (string) (optional) Information or instructions to patients"
 " about safe use of the drug product."
-msgstr ""
+msgstr "``patient_info``（字符串）（可选）关于安全使用药品产品的患者信息或说明。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5726
 #: a2ea1690ed5541498c63926edb59df58
 msgid ""
 "**FDA_retrieve_patient_medication_info_by_drug_name** (Type: FDADrugLabel)"
 msgstr ""
+"**FDA_retrieve_patient_medication_info_by_drug_name**（类型：FDADrugLabel）"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5728
 #: d7199ea4bce54244b77bf3dabf760273
 msgid ""
 "Retrieve patient medication information (which is about safe use of the "
 "drug) based on drug names."
-msgstr ""
+msgstr "根据药物名称检索患者用药信息（有关药物安全使用的相关信息）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst eb96532d62ee4a12a64f406f7e5cf76e
 msgid "FDA_retrieve_patient_medication_info_by_drug_name tool specification"
-msgstr ""
+msgstr "FDA_retrieve_patient_medication_info_by_drug_name 工具规格"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5734
 #: c91887125d904f0b9f17cf69f75d3297
 msgid "**Name**: ``FDA_retrieve_patient_medication_info_by_drug_name``"
-msgstr ""
+msgstr "**名称**: ``FDA_retrieve_patient_medication_info_by_drug_name``"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5736
 #: f21d70845c3b498b91ff9a0288151b1f
 msgid ""
 "**Description**: Retrieve patient medication information (which is about "
 "safe use of the drug) based on drug names."
-msgstr ""
+msgstr "**描述**：根据药物名称检索患者用药信息（关于药物安全使用的相关信息）。"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5762
 #: 42dea5a9e6ea4a24bc41e6d428a9a649
 msgid "Navigation"
-msgstr ""
+msgstr "导航"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5764
 #: b4249e47ddee40afa4336527cf32e1a2
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
-msgstr ""
+msgstr ":doc:`tools_config_index` - 返回工具概览"
 
 #: ../../tools/fda_drug_labeling_tools.rst:5765
 #: daa8dceb8e49419abc7cfa99bd9393e6
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
-msgstr ""
+msgstr ":doc:`../guide/loading_tools` - 加载本地工具"

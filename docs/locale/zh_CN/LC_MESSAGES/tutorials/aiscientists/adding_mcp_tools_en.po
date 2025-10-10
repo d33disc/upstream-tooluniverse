@@ -663,24 +663,24 @@ msgstr "现在，您可以将任何 MCP 服务器的工具集成到 ToolUniverse
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:475
 #: 66047d1558e54337a61920a5c2445202
 msgid "Reference Resources"
-msgstr ""
+msgstr "参考资源"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:477
 #: 4f3ee87342b04da1835105b3e591fa58
 msgid "[MCP Protocol Specification](https://spec.modelcontextprotocol.io/)"
-msgstr ""
+msgstr "[MCP 协议规范](https://spec.modelcontextprotocol.io/)"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:478
 #: c4c47373fb5e49d0b07e7822d8e9361e
 msgid "[ToolUniverse Official Documentation](../README.md)"
-msgstr ""
+msgstr "[ToolUniverse 官方文档](../README.md)"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:479
 #: 235ab43d00f64875b4432d23a7e36c97
 msgid "[MCP Tool Configuration Examples](../../data/mcp_client_tools.json)"
-msgstr ""
+msgstr "[MCP 工具配置示例](../../data/mcp_client_tools.json)"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools_en.md:480
 #: 3f41b81cd14e42f1955f4a89ec1d5ac4
 msgid "[API Reference Documentation](../../api/mcp_tools.rst)"
-msgstr ""
+msgstr "[API参考文档](../../api/mcp_tools.rst)"

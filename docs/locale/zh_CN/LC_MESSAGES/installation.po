@@ -286,6 +286,9 @@ msgstr "创建一个 Dockerfile："
 #: ../../installation.rst:123 01363a7a62274965b44b05d14b5c42fc
 msgid "**Docker Compose**"
 msgstr ""
+"**Docker Compose**\n"
+"\n"
+"**Docker Compose**"
 
 #: ../../installation.rst:140 d89a52da162646b0af20f5154954cd2f
 msgid "Environment Configuration"

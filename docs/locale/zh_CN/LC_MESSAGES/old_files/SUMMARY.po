@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:1 746c01669fff4d57b65b6e1c2b2f5f78
 msgid "✅ ToolUniverse 中英文文档系统 - 完成总结"
-msgstr ""
+msgstr "✅ ToolUniverse 中英文文档系统 - 总结完成"
 
 #: ../../old_files/SUMMARY.md:3 4d4123ffda5d43ebaa7429db7318ebd6
 msgid "🎉 已完成的功能"
@@ -192,11 +192,11 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:115 818cb756d78b47ceba9481f3b8e350a5
 msgid "**build_multilang.sh** - 完整双语构建脚本"
-msgstr ""
+msgstr "**build_multilang.sh** - 完整的双语构建脚本"
 
 #: ../../old_files/SUMMARY.md:116 805940beb5364100b5bbd8707ee061ad
 msgid "**quick_build_zh.sh** - 快速中文构建"
-msgstr ""
+msgstr "**quick_build_zh.sh** - 快速构建中文"
 
 #: ../../old_files/SUMMARY.md:118 c49dc2f12a23467bbc9522b8ace3f969
 msgid "7. **🔄 辅助脚本**"
@@ -213,11 +213,11 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:122 c8f9671092a64a02a7549a7c100fe815
 msgid "✅ `quick_build_zh.sh` - 快速中文测试"
-msgstr ""
+msgstr "✅ `quick_build_zh.sh` - 快速构建中文测试"
 
 #: ../../old_files/SUMMARY.md:123 88582eea38024a5c9079a864e42e98d6
 msgid "✅ `show_multilang_features.sh` - 功能演示"
-msgstr ""
+msgstr "✅ `show_multilang_features.sh` - 功能展示"
 
 #: ../../old_files/SUMMARY.md:125 1fdad77661dc464280f9db3d4b212e49
 msgid "8. **📱 浮动语言切换器**"
@@ -245,7 +245,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:142 1f4e8a0a0c35483688f6adaf3227f942
 msgid "🚀 使用方法"
-msgstr ""
+msgstr "🚀 使用说明"
 
 #: ../../old_files/SUMMARY.md:144 39b8963f42344c418d6ecf8cc2e0100b
 msgid "最简单的方式"
@@ -281,7 +281,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:159 a5313451c7a94532a5992697834a7c36
 msgid "✅ 可选启动本地服务器"
-msgstr ""
+msgstr "✅ Optional: 启动本地服务器"
 
 #: ../../old_files/SUMMARY.md:161 9eb10b34ffb642c381452925a1bb1a78
 msgid "高级用法"
@@ -309,11 +309,11 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:246 92fb319031d245fbb723bb24819d71c3
 msgid "Before (之前)"
-msgstr ""
+msgstr "之前"
 
 #: ../../old_files/SUMMARY.md:254 b444223a7cc84e10862b5e43118b1cc6
 msgid "After (现在)"
-msgstr ""
+msgstr "之后 (现在)"
 
 #: ../../old_files/SUMMARY.md:263 4aa0ccc8eb45444d96b2bbbe7f1a4bb1
 msgid "📝 翻译工作流"
@@ -345,7 +345,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:287 f4fa7db8019440a6abb5da015dc400e7
 msgid "一键构建中英文"
-msgstr ""
+msgstr "一键生成中英文"
 
 #: ../../old_files/SUMMARY.md:288 569d390468914706961ba66b60133257
 msgid "自动更新翻译"
@@ -353,7 +353,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:289 b6d5a6bc06c341d481ce99285e439643
 msgid "自动创建索引页"
-msgstr ""
+msgstr "自动生成索引页"
 
 #: ../../old_files/SUMMARY.md:291 06b0938514bd4bb1859858a6d99cdf4e
 msgid "✅ 灵活性"
@@ -369,7 +369,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:294 894020f3cb5f4787a0032f48b78f8dc3
 msgid "可扩展到更多语言"
-msgstr ""
+msgstr "可扩展至更多语言"
 
 #: ../../old_files/SUMMARY.md:296 8d508f1dc39f461b9e3bb77167cfb39c
 msgid "✅ 用户友好"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:309 6b20e373efc0461c9aa76ca0efe784fb
 msgid "✅ `quick_doc_build.sh` - 主构建脚本（默认中英文）"
-msgstr ""
+msgstr "✅ `quick_doc_build.sh` - 主构建脚本（默认支持中英文）"
 
 #: ../../old_files/SUMMARY.md:310 4ae22d4f334349f5911e2516171f1877
 msgid "✅ `quick_doc_build_cn.sh` - 中文版本（默认中英文）"
@@ -457,7 +457,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:324 d2b96f107cee45ef87772961f4ed9537
 msgid "✅ `QUICK_BUILD_GUIDE.md` - 快速指南"
-msgstr ""
+msgstr "✅ `QUICK_BUILD_GUIDE.md` - 快速构建指南"
 
 #: ../../old_files/SUMMARY.md:325 332b17b0469d41909b55e3f0800f7ebd
 msgid "✅ `I18N_GUIDE.md` - 翻译指南"
@@ -477,7 +477,7 @@ msgstr ""
 
 #: ../../old_files/SUMMARY.md:331 9562bf8cf2c243adb1dbb318f55b2a93
 msgid "继续翻译"
-msgstr ""
+msgstr "请提供需要翻译的具体文本内容，我将为您提供准确的中文翻译。"
 
 #: ../../old_files/SUMMARY.md:332 60734ed222b047acb7506713bfc99fbc
 msgid "编辑以下文件以完善中文文档："
@@ -520,10 +520,18 @@ msgid ""
 "✅ **完整的中英文支持** ✅ **一键自动构建** ✅ **优雅的语言选择页** ✅ **现代化的 Shibuya 主题** ✅ "
 "**完整的左侧导航栏** ✅ **自动化的翻译工作流** ✅ **灵活的配置选项** ✅ **详尽的文档指南**"
 msgstr ""
+"✅ **完整的中英文支持**  \n"
+"✅ **一键自动构建**  \n"
+"✅ **优雅的语言选择页**  \n"
+"✅ **现代化的 Shibuya 主题**  \n"
+"✅ **完整的左侧导航栏**  \n"
+"✅ **自动化的翻译工作流**  \n"
+"✅ **灵活的配置选项**  \n"
+"✅ **详尽的文档指南**"
 
 #: ../../old_files/SUMMARY.md:369 ec641a6b78bf4dba8e7135860c31deb7
 msgid "**只需运行一个命令：**"
-msgstr ""
+msgstr "**只需运行以下命令：**"
 
 #: ../../old_files/SUMMARY.md:375 e8533d19f95a411cb114ec51ca944c90
 msgid "就能获得专业的中英文双语文档！🚀"
@@ -534,3 +542,6 @@ msgid ""
 "Created: 2025-10-07 Author: GitHub Copilot Status: ✅ Complete and Ready to "
 "Use"
 msgstr ""
+"创建日期：2025-10-07  \n"
+"作者：GitHub Copilot  \n"
+"状态：✅ 已完成且可使用"

@@ -186,7 +186,7 @@ msgstr "机器人技术"
 
 #: ../../guide/tools.rst:97 2d2d28beb0fe4d4693b10496066c6680
 msgid "1"
-msgstr ""
+msgstr "请提供完整的英文文本以便进行翻译。"
 
 #: ../../guide/tools.rst:98 0acf7f750cc449ce9031bb7634c40d18
 msgid "0.2%"
@@ -406,14 +406,19 @@ msgid ""
 "warnings * ``OpenFDA_get_drug_labels`` - Drug labeling information * "
 "``OpenFDA_search_recalls`` - Drug recall information"
 msgstr ""
+"**主要功能：**  \n"
+"* ``FAERS_count_reactions_by_drug_event`` - 按药物统计不良反应  \n"
+"* ``openfda_get_warnings_by_drug_name`` - 获取FDA警告信息  \n"
+"* ``OpenFDA_get_drug_labels`` - 药品标签信息  \n"
+"* ``OpenFDA_search_recalls`` - 药品召回信息"
 
 #: ../../guide/tools.rst:287 9b159eb07f1441e381e4adf262a437d2
 msgid "DailyMed - Drug Labeling"
-msgstr ""
+msgstr "每日药典 - 药品标签"
 
 #: ../../guide/tools.rst:289 ae31e7d60aa840b998945ca809671ba5
 msgid "Official FDA drug labeling information."
-msgstr ""
+msgstr "官方FDA药品标签信息"
 
 #: ../../guide/tools.rst:291 4f237eb51e3d45eba995abfcb44bd718
 msgid ""
@@ -421,18 +426,25 @@ msgid ""
 "* ``DailyMed_search_drugs`` - Search drugs by name * "
 "``DailyMed_get_NDC_info`` - NDC (drug code) information"
 msgstr ""
+"**主要功能：**  \n"
+"* ``DailyMed_get_drug_label`` - 获取官方药品说明书  \n"
+"* ``DailyMed_search_drugs`` - 按名称搜索药品  \n"
+"* ``DailyMed_get_NDC_info`` - 获取NDC（药品代码）信息"
 
 #: ../../guide/tools.rst:306 3e2fc930976a4e53a25bb5d43224cab4
 msgid "🧪 Clinical Research"
-msgstr ""
+msgstr "🧪 临床研究"
 
 #: ../../guide/tools.rst:309 4a1949cc6bf145139d590b10c9ce6b3e
 msgid "ClinicalTrials.gov"
 msgstr ""
+"ClinicalTrials.gov\n"
+"\n"
+"临床试验注册平台 (ClinicalTrials.gov)"
 
 #: ../../guide/tools.rst:311 9b8304cdbf624359bca20b708604f616
 msgid "Clinical trial registry and results database."
-msgstr ""
+msgstr "临床试验注册与结果数据库"
 
 #: ../../guide/tools.rst:313 b2f3adda25524f5cabfde88b97c1db34
 msgid ""
@@ -441,18 +453,23 @@ msgid ""
 "information * ``ClinicalTrials_get_trial_results`` - Get trial results * "
 "``ClinicalTrials_search_by_condition`` - Find trials by medical condition"
 msgstr ""
+"**主要功能：**  \n"
+"* ``ClinicalTrials_search_studies`` - 搜索临床试验  \n"
+"* ``ClinicalTrials_get_study_details`` - 获取详细的试验信息  \n"
+"* ``ClinicalTrials_get_trial_results`` - 获取试验结果  \n"
+"* ``ClinicalTrials_search_by_condition`` - 根据医疗条件查找试验"
 
 #: ../../guide/tools.rst:332 42c44c5ceec546cd8f960f794ea29ec2
 msgid "📚 Literature & Publications"
-msgstr ""
+msgstr "📚 文献与出版物"
 
 #: ../../guide/tools.rst:335 2a1f5cb38e194edb8965bd69df551a26
 msgid "PubTator - Biomedical Literature"
-msgstr ""
+msgstr "PubTator - 生物医学文献"
 
 #: ../../guide/tools.rst:337 6a248d56fd4f46c3b9eb2185d685ec31
 msgid "PubMed literature with named entity recognition."
-msgstr ""
+msgstr "使用命名实体识别的PubMed文献。"
 
 #: ../../guide/tools.rst:339 457e6451aa8c4957baf7766c2199e949
 msgid ""
@@ -460,14 +477,18 @@ msgid ""
 "with entities * ``PubTator_get_annotations`` - Get entity annotations * "
 "``PubTator_search_by_entity`` - Search by specific entities"
 msgstr ""
+"**主要功能：**  \n"
+"* ``PubTator_search_publications`` - 使用实体搜索文献  \n"
+"* ``PubTator_get_annotations`` - 获取实体注释  \n"
+"* ``PubTator_search_by_entity`` - 根据特定实体进行搜索"
 
 #: ../../guide/tools.rst:356 57d9410b98c84beba9c7bfe03feb90c8
 msgid "Europe PMC"
-msgstr ""
+msgstr "欧洲PMC"
 
 #: ../../guide/tools.rst:358 c951d63625b04d9c85177a33b2955b42
 msgid "European literature database with full-text access."
-msgstr ""
+msgstr "欧洲文学数据库，提供全文访问。"
 
 #: ../../guide/tools.rst:360 7937d21f66874bb5ac87629dbe393603
 msgid ""
@@ -475,14 +496,18 @@ msgid ""
 "abstracts * ``EuropePMC_get_full_text`` - Get full-text when available * "
 "``EuropePMC_get_citations`` - Get citation data"
 msgstr ""
+"**主要功能：**  \n"
+"* ``EuropePMC_search_articles`` - 搜索文章和摘要  \n"
+"* ``EuropePMC_get_full_text`` - 获取可用的全文  \n"
+"* ``EuropePMC_get_citations`` - 获取引用数据"
 
 #: ../../guide/tools.rst:375 9616b0012a254dde9dba5542023ae5c6
 msgid "Semantic Scholar"
-msgstr ""
+msgstr "语义学者"
 
 #: ../../guide/tools.rst:377 c75ce75084d040d0b25b038fac639775
 msgid "AI-powered academic search engine."
-msgstr ""
+msgstr "基于AI的学术搜索引擎"
 
 #: ../../guide/tools.rst:379 2b7af78b7cc247839cd0b03b07dc06e2
 msgid ""
@@ -490,6 +515,10 @@ msgid ""
 "papers * ``SemanticScholar_get_paper_details`` - Get detailed paper "
 "information * ``SemanticScholar_get_citations`` - Citation network analysis"
 msgstr ""
+"**主要功能：**  \n"
+"* ``SemanticScholar_search_papers`` - 搜索学术论文  \n"
+"* ``SemanticScholar_get_paper_details`` - 获取论文详细信息  \n"
+"* ``SemanticScholar_get_citations`` - 引用网络分析"
 
 #: ../../guide/tools.rst:394 22bb791f56e04d5fb1484fc203f36ea2
 msgid "OpenAlex"
@@ -497,7 +526,7 @@ msgstr ""
 
 #: ../../guide/tools.rst:396 90676f56a0874482a9e2b994a37ef9e5
 msgid "Open academic publication database."
-msgstr ""
+msgstr "开放学术出版物数据库"
 
 #: ../../guide/tools.rst:398 4d60ac011c1e4c368587e3c2ed54e335
 msgid ""
@@ -505,18 +534,22 @@ msgid ""
 "``OpenAlex_get_author_info`` - Author information and metrics * "
 "``OpenAlex_get_institution_data`` - Institution research data"
 msgstr ""
+"**主要功能：**  \n"
+"* ``OpenAlex_search_works`` - 搜索学术作品  \n"
+"* ``OpenAlex_get_author_info`` - 获取作者信息和指标  \n"
+"* ``OpenAlex_get_institution_data`` - 获取机构研究数据"
 
 #: ../../guide/tools.rst:404 8af25c00bbe1417ab3c03effe4475489
 msgid "📊 Specialized Databases"
-msgstr ""
+msgstr "📊 专用数据库"
 
 #: ../../guide/tools.rst:407 01cb5f1454444230a5b32d2f45c46fe4
 msgid "Human Protein Atlas"
-msgstr ""
+msgstr "人类蛋白质图谱"
 
 #: ../../guide/tools.rst:409 c43e6f55214a474498288df744e1e2d6
 msgid "Tissue and cell expression data."
-msgstr ""
+msgstr "组织和细胞表达数据"
 
 #: ../../guide/tools.rst:411 bc704f9739e846b8af89bc26a92a2ede
 msgid ""
@@ -524,14 +557,21 @@ msgid ""
 "patterns * ``HPA_get_cell_expression`` - Single-cell expression data * "
 "``HPA_get_protein_localization`` - Subcellular localization"
 msgstr ""
+"**主要功能：**  \n"
+"* ``HPA_get_tissue_expression`` - 组织表达模式  \n"
+"* ``HPA_get_cell_expression`` - 单细胞表达数据  \n"
+"* ``HPA_get_protein_localization`` - 亚细胞定位"
 
 #: ../../guide/tools.rst:426 4794eaa071c54efb96ee6789871c9813
 msgid "Reactome Pathways"
 msgstr ""
+"Reactome Pathways\n"
+"\n"
+"Reactome 路径"
 
 #: ../../guide/tools.rst:428 87674f501b1f4148b4c76aa43b3f9008
 msgid "Biological pathway database."
-msgstr ""
+msgstr "生物通路数据库"
 
 #: ../../guide/tools.rst:430 0a64e99a8ede47f38f45708902f99917
 msgid ""
@@ -539,6 +579,10 @@ msgid ""
 "* ``Reactome_search_pathways`` - Search pathway database * "
 "``Reactome_get_pathway_details`` - Detailed pathway information"
 msgstr ""
+"**主要功能：**  \n"
+"* ``Reactome_get_pathways_by_gene`` - 获取基因对应的通路  \n"
+"* ``Reactome_search_pathways`` - 搜索通路数据库  \n"
+"* ``Reactome_get_pathway_details`` - 获取通路详细信息"
 
 #: ../../guide/tools.rst:445 478bef82f9c34f1aa54d9e2e5e316899
 msgid "HumanBase"
@@ -546,7 +590,7 @@ msgstr ""
 
 #: ../../guide/tools.rst:447 29c4d97f55bb416685816fa4d5b8cb70
 msgid "Tissue-specific gene networks."
-msgstr ""
+msgstr "组织特异性基因网络"
 
 #: ../../guide/tools.rst:449 c18770d28d8c4083b5aaa37778edfccb
 msgid ""
@@ -554,6 +598,10 @@ msgid ""
 "networks * ``HumanBase_predict_gene_function`` - Gene function prediction * "
 "``HumanBase_get_tissue_expression`` - Tissue expression patterns"
 msgstr ""
+"**主要功能：**  \n"
+"* ``HumanBase_get_gene_networks`` - 组织特异性网络  \n"
+"* ``HumanBase_predict_gene_function`` - 基因功能预测  \n"
+"* ``HumanBase_get_tissue_expression`` - 组织表达模式"
 
 #: ../../guide/tools.rst:455 84cb20193be94ac99ec349606fdb8f3b
 msgid "MedlinePlus"
@@ -561,7 +609,7 @@ msgstr ""
 
 #: ../../guide/tools.rst:457 422a6549431947d6a9fe68f2403252a1
 msgid "Consumer health information."
-msgstr ""
+msgstr "消费者健康信息"
 
 #: ../../guide/tools.rst:459 5663bbe20446446aae011cfec654b6ac
 msgid ""
@@ -569,70 +617,74 @@ msgid ""
 "information * ``MedlinePlus_search_conditions`` - Search medical conditions "
 "* ``MedlinePlus_get_drug_info`` - Consumer drug information"
 msgstr ""
+"**主要功能：**  \n"
+"* ``MedlinePlus_get_health_topics`` - 健康主题信息  \n"
+"* ``MedlinePlus_search_conditions`` - 搜索医疗状况  \n"
+"* ``MedlinePlus_get_drug_info`` - 消费者药物信息"
 
 #: ../../guide/tools.rst:465 1a851549375f4fd6846de626f15ddc0c
 msgid "🤖 AI-Powered Tools"
-msgstr ""
+msgstr "🤖 基于AI的工具"
 
 #: ../../guide/tools.rst:468 0f355a5064f84de9b301629c7ad0a550
 msgid "Machine Learning Models (15 tools)"
-msgstr ""
+msgstr "机器学习模型（15种工具）"
 
 #: ../../guide/tools.rst:470 f618010c3a194788b1661dd7360017ef
 msgid ""
 "Apply machine learning algorithms for prediction, classification, and "
 "generation tasks."
-msgstr ""
+msgstr "将机器学习算法应用于预测、分类和生成任务。"
 
 #: ../../guide/tools.rst:472 4a85847968ed49c1af799acb7fd89e4e
 msgid "**Core ML Tools:**"
-msgstr ""
+msgstr "**Core ML 工具：**"
 
 #: ../../guide/tools.rst:474 7280897325a94c83a6721d110b2178c4
 msgid "**boltz2_docking** - Protein-ligand binding prediction"
-msgstr ""
+msgstr "**boltz2_docking** - 蛋白质-配体结合预测"
 
 #: ../../guide/tools.rst:487 ed7390656824472ab87c8ea2df37588c
 msgid "**ADMET_predict_CYP_interactions** - Drug metabolism prediction"
-msgstr ""
+msgstr "**ADMET_predict_CYP_interactions** - 药物代谢预测"
 
 #: ../../guide/tools.rst:500 0f702c0df8ed4f13a81ac1796198f952
 msgid "**run_TxAgent_biomedical_reasoning** - Therapeutic reasoning"
-msgstr ""
+msgstr "**run_TxAgent_biomedical_reasoning** - 治疗推理"
 
 #: ../../guide/tools.rst:514 34118cfa7f8849a2a19d8807402ccc60
 msgid "AI Agents (33 tools)"
-msgstr ""
+msgstr "AI代理（33个工具）"
 
 #: ../../guide/tools.rst:516 edc0a85656dc4627bfededd26706cf80
 msgid ""
 "Autonomous tools that perceive environments, make decisions, and take "
 "actions toward research goals."
-msgstr ""
+msgstr "能够感知环境、做出决策并采取行动以实现研究目标的自主工具。"
 
 #: ../../guide/tools.rst:518 70dfb65a9bc64429a8840528a777609f
 msgid "**Literature & Analysis Agents:**"
-msgstr ""
+msgstr "**文献与分析代理：**"
 
 #: ../../guide/tools.rst:520 63957196068b4e84b57be479490c0bf6
 msgid "**HypothesisGenerator** - Generate research hypotheses"
-msgstr ""
+msgstr "**HypothesisGenerator** - 生成研究假设"
 
 #: ../../guide/tools.rst:534 eb6bb41f6ebd4808987bce55b157781e
 msgid "**ExperimentalDesignScorer** - Evaluate experimental designs"
-msgstr ""
+msgstr "**ExperimentalDesignScorer** - 评估实验设计"
 
 #: ../../guide/tools.rst:547 737229fff14145c7befb5c64bd99185f
 msgid "**MedicalLiteratureReviewer** - Comprehensive literature analysis"
-msgstr ""
+msgstr "**MedicalLiteratureReviewer** - 全面文献分析"
 
 #: ../../guide/tools.rst:562 700b6df6ce3341c18f57e9f7c83d1ea8
 msgid "Tool Discovery & Composition"
-msgstr ""
+msgstr "工具发现与组合"
 
 #: ../../guide/tools.rst:564 fec4e834b50d49e3be7d56d1afcc15bb
 msgid "AI tools for discovering and combining other tools."
-msgstr ""
+msgstr "用于发现和组合其他工具的AI工具。"
 
 #: ../../guide/tools.rst:566 5a8d90a9e2c64195bc3f22046ad4bffa
 msgid ""
@@ -640,18 +692,22 @@ msgid ""
 "natural language * ``compose_tools_for_workflow`` - Create tool workflows * "
 "``optimize_tool_descriptions`` - Improve tool descriptions"
 msgstr ""
+"**主要功能：**  \n"
+"* ``discover_tools_by_description`` - 根据自然语言查找工具  \n"
+"* ``compose_tools_for_workflow`` - 创建工具工作流  \n"
+"* ``optimize_tool_descriptions`` - 优化工具描述"
 
 #: ../../guide/tools.rst:583 447cd5a501234d2790b12dcd7737e842
 msgid "🔍 Search & Integration Tools"
-msgstr ""
+msgstr "🔍 搜索与集成工具"
 
 #: ../../guide/tools.rst:586 e2eea2d3860942e1b782983bf3b78437
 msgid "Tool Finder"
-msgstr ""
+msgstr "工具查找器"
 
 #: ../../guide/tools.rst:588 e7e0ce4b60194d34afc66236a2c2e032
 msgid "Find appropriate tools for your research needs."
-msgstr ""
+msgstr "为您的研究需求寻找合适的工具。"
 
 #: ../../guide/tools.rst:590 593fd6b4fefd4e34ba114245a4c70bfc
 msgid ""
@@ -659,36 +715,40 @@ msgid ""
 " ``find_tools_by_category`` - Browse tools by category * "
 "``get_tool_recommendations`` - Get tool recommendations"
 msgstr ""
+"**主要功能：**  \n"
+"* ``find_tools_by_keyword`` - 基于关键词的工具搜索  \n"
+"* ``find_tools_by_category`` - 按类别浏览工具  \n"
+"* ``get_tool_recommendations`` - 获取工具推荐"
 
 #: ../../guide/tools.rst:605 03fc0d7337ed473fb17b4070e7b39b03
 msgid "Embedding Stores (4 tools)"
-msgstr ""
+msgstr "嵌入存储（4种工具）"
 
 #: ../../guide/tools.rst:607 eb2c76bf14444824b745e4aa16ee4a9c
 msgid ""
 "Store and retrieve vectorized representations of scientific data for "
 "semantic search."
-msgstr ""
+msgstr "存储和检索科学数据的向量化表示，以支持语义搜索。"
 
 #: ../../guide/tools.rst:609 f1efc4b64ac04340acec777fe4444b6c
 msgid "**Core Embedding Tools:**"
-msgstr ""
+msgstr "**核心嵌入工具：**"
 
 #: ../../guide/tools.rst:611 60446116d65541f5aefd209760047e03
 msgid "**embedding_tool_finder** - Semantic tool discovery"
-msgstr ""
+msgstr "**embedding_tool_finder** - 语义工具发现"
 
 #: ../../guide/tools.rst:625 4e791f4bb03145e1be6d7dbdb6c62895
 msgid "**embedding_database_search** - Vector similarity search"
-msgstr ""
+msgstr "**embedding_database_search** - 向量相似度搜索"
 
 #: ../../guide/tools.rst:640 29d78f7eee054e3b9a78964e76264025
 msgid "Data Integration"
-msgstr ""
+msgstr "数据集成"
 
 #: ../../guide/tools.rst:642 1cc740ebe13d4e47a82af13d9cfb15c6
 msgid "Tools for combining data from multiple sources."
-msgstr ""
+msgstr "用于合并来自多个来源的数据的工具。"
 
 #: ../../guide/tools.rst:644 e6d5a377668f4c35b9cddbd99f835231
 msgid ""
@@ -696,186 +756,206 @@ msgid ""
 "multiple sources * ``cross_reference_identifiers`` - Map between different "
 "ID systems * ``validate_data_consistency`` - Check data consistency"
 msgstr ""
+"**主要功能：**  \n"
+"* ``integrate_gene_data`` - 整合来自多个来源的基因数据  \n"
+"* ``cross_reference_identifiers`` - 在不同的ID系统之间进行映射  \n"
+"* ``validate_data_consistency`` - 检查数据的一致性"
 
 #: ../../guide/tools.rst:650 69236f53c938431bbee6f26baf261f6b
 msgid "🛠️ Tool Usage Patterns"
-msgstr ""
+msgstr "🛠️ 工具使用模式"
 
 #: ../../guide/tools.rst:653 7284a570d31f4ca0bb8e5b43a24adef3
 msgid "Single Tool Queries"
-msgstr ""
+msgstr "单工具查询"
 
 #: ../../guide/tools.rst:655 8320df7085434dfc959c9c814f48f28b
 msgid "Simple, focused queries for specific information:"
-msgstr ""
+msgstr "简单、专注于特定信息的查询："
 
 #: ../../guide/tools.rst:672 ../../guide/tools.rst:721
 #: 1f736cdcd1244aa5b09340eaf5e0b7ed 2ba77653c05a438eaf4dc6b8723ed070
 msgid "Multi-Tool Workflows"
-msgstr ""
+msgstr "多工具工作流程"
 
 #: ../../guide/tools.rst:674 ../../guide/tools.rst:723
 #: 008cd59e50bf488290ead5e1801b9336 3d93be218a2c4a6e9f5523692ace4e36
 msgid "Combine multiple tools for comprehensive analysis:"
-msgstr ""
+msgstr "结合多种工具进行全面分析："
 
 #: ../../guide/tools.rst:700 6ea0096a536c4b8a8c685f018a1c1877
 msgid "Batch Processing"
-msgstr ""
+msgstr "批量处理"
 
 #: ../../guide/tools.rst:702 7b2cd10623a6491b9a0eb22327d3ac11
 msgid "Process multiple related queries efficiently:"
-msgstr ""
+msgstr "高效处理多个相关查询："
 
 #: ../../guide/tools.rst:718 4d8732d0b42d4ada8e118bcee5e6d037
 msgid "Integration Patterns"
-msgstr ""
+msgstr "集成模式"
 
 #: ../../guide/tools.rst:774 a055f0792ee64a79b8b23801654f6680
 msgid "Tool Composition Patterns"
-msgstr ""
+msgstr "工具组成模式"
 
 #: ../../guide/tools.rst:776 c5d7af77e5a44a0db303a07093e7c1eb
 msgid "**Sequential Workflows:**"
-msgstr ""
+msgstr "**顺序工作流：**"
 
 #: ../../guide/tools.rst:788 420d41230d374d459de238d46408ae41
 msgid "**Parallel Data Gathering:**"
-msgstr ""
+msgstr "**并行数据收集：**"
 
 #: ../../guide/tools.rst:799 960ad05406b94621ae08478b8232f00c
 msgid "**Feedback Loops:**"
-msgstr ""
+msgstr "**反馈回路：**"
 
 #: ../../guide/tools.rst:813 e1b5db94625c44a6a3960b28742ee50e
 msgid "📈 Tool Performance Tips"
-msgstr ""
+msgstr "📈 工具性能优化提示"
 
 #: ../../guide/tools.rst:816 9fe135efb11b4cc6bbd2d9a7cfebc9b0
 msgid "Optimization Strategies"
-msgstr ""
+msgstr "优化策略"
 
 #: ../../guide/tools.rst:818 8bcfbb03ea2845cbb7f3c4897ad9c7b3
 msgid "**Use specific queries**: More specific queries return faster"
-msgstr ""
+msgstr "**使用特定查询**：更具体的查询可以更快返回结果"
 
 #: ../../guide/tools.rst:819 793a6b8494b64796a1dbf88791385cb6
 msgid "**Limit results**: Use ``limit`` parameter to control result size"
-msgstr ""
+msgstr "**限制结果**：使用 ``limit`` 参数来控制结果大小"
 
 #: ../../guide/tools.rst:820 3a793a82c95b4564b5e5bb5eb42c2955
 msgid "**Cache results**: Enable caching for repeated queries"
-msgstr ""
+msgstr "**缓存结果**：启用缓存以加速重复查询"
 
 #: ../../guide/tools.rst:821 b15b08b3679c4cb788788fcc3c6d00da
 msgid "**Batch when possible**: Some tools support batch operations"
-msgstr ""
+msgstr "**尽量批量处理**：某些工具支持批量操作"
 
 #: ../../guide/tools.rst:824 6274993e2d9e4dfcb85628723aa7ead0
 msgid "Rate Limiting"
-msgstr ""
+msgstr "速率限制"
 
 #: ../../guide/tools.rst:826 01f772dfa7d647ef85e7a28f7d8a5295
 msgid ""
 "ToolUniverse automatically handles API rate limits, but you can optimize:"
-msgstr ""
+msgstr "ToolUniverse 会自动处理 API 速率限制，但您可以进行优化："
 
 #: ../../guide/tools.rst:838 96964ade62454636add0774a52301ead
 msgid "Error Handling"
-msgstr ""
+msgstr "错误处理"
 
 #: ../../guide/tools.rst:840 87455473532347fd994a66c809c22b19
 msgid "Always include error handling for robust applications:"
-msgstr ""
+msgstr "始终包含错误处理以确保应用程序的健壮性："
 
 #: ../../guide/tools.rst:855 4f32d1bec2fb4d759435df7e5467c944
 msgid "Performance Optimization"
-msgstr ""
+msgstr "性能优化"
 
 #: ../../guide/tools.rst:858 94426389eddb4a07804557733fa68b07
 msgid "Category-Specific Considerations"
-msgstr ""
+msgstr "类别特定注意事项"
 
 #: ../../guide/tools.rst:860 0995c9fcf38f4f0593c1d4209bf91309
 msgid ""
 "**ML Models**: - Remote execution reduces local resource requirements - "
 "Batch predictions when possible - Cache results for expensive computations"
 msgstr ""
+"**ML 模型**：  \n"
+"- 远程执行可减少本地资源需求  \n"
+"- 尽可能进行批量预测  \n"
+"- 对于高成本计算结果进行缓存"
 
 #: ../../guide/tools.rst:865 88bdb0d660834353ac615ac72b30a00c
 msgid ""
 "**APIs**: - Respect rate limits and implement backoff - Use pagination for "
 "large datasets - Cache frequent queries"
 msgstr ""
+"**API**：  \n"
+"- 遵守速率限制并实现退避机制  \n"
+"- 对于大型数据集使用分页  \n"
+"- 对频繁查询结果进行缓存"
 
 #: ../../guide/tools.rst:870 3ae8e342e6d748c8962af7ae24eab8e7
 msgid ""
 "**Databases**: - Use specific field queries instead of full searches - "
 "Implement result limits for exploration - Index frequently accessed data"
 msgstr ""
+"**数据库**：  \n"
+"- 使用特定字段查询代替全文搜索  \n"
+"- 为数据检索设置结果限制  \n"
+"- 为经常访问的数据建立索引"
 
 #: ../../guide/tools.rst:875 4a8b67daae094d9e8f10fcc5336dc3ca
 msgid ""
 "**Agents**: - Configure appropriate timeout values - Use streaming for long-"
 "running tasks - Implement progress monitoring"
 msgstr ""
+"**代理**：  \n"
+"- 配置适当的超时值  \n"
+"- 对于长时间运行的任务使用流式处理  \n"
+"- 实现进度监控"
 
 #: ../../guide/tools.rst:881 3f40d1acb2de4152b7e5b16d36557a45
 msgid "Best Practices"
-msgstr ""
+msgstr "最佳实践"
 
 #: ../../guide/tools.rst:883 4337340745214b72a440f177c3b8bcd5
 msgid "**Tool Selection**: Choose the right tool for your specific use case"
-msgstr ""
+msgstr "**工具选择**：根据您的具体使用场景选择合适的工具"
 
 #: ../../guide/tools.rst:884 3f4b826a2384492ab8d371a88e5d1098
 msgid "**Rate Limiting**: Respect API rate limits to avoid blocking"
-msgstr ""
+msgstr "**速率限制**：遵守 API 速率限制以避免被阻止"
 
 #: ../../guide/tools.rst:885 aa4c38f7948a4eeeb1a1049aaf82281d
 msgid "**Error Handling**: Always handle potential API errors gracefully"
-msgstr ""
+msgstr "**错误处理**：始终以优雅的方式处理潜在的 API 错误"
 
 #: ../../guide/tools.rst:886 32b54bcc87f04a50ac50c03618c76de6
 msgid "**Caching**: Use caching for frequently accessed data"
-msgstr ""
+msgstr "**缓存**：对经常访问的数据使用缓存"
 
 #: ../../guide/tools.rst:887 03894c69a31a460cac91704c92bbd03e
 msgid ""
 "**Batch Processing**: Use batch operations when available for efficiency"
-msgstr ""
+msgstr "**批量处理**：在可能的情况下使用批量操作以提高效率"
 
 #: ../../guide/tools.rst:888 f0f2d2f4cb8148d3b6a64136919b4e9c
 msgid "**Configuration**: Configure tools appropriately for your environment"
-msgstr ""
+msgstr "**配置**：根据您的环境适当配置工具"
 
 #: ../../guide/tools.rst:891 5f12f10e825b49489c238e8a3bf5f35a
 msgid "Tool Discovery & Selection"
-msgstr ""
+msgstr "工具发现与选择"
 
 #: ../../guide/tools.rst:894 e623c889a3bd4442b2821de131dcd2df
 msgid "Finding the Right Tools"
-msgstr ""
+msgstr "选择合适的工具"
 
 #: ../../guide/tools.rst:896 b105c91bf3904e40b3db5d061c35fe13
 msgid "**By Category:**"
-msgstr ""
+msgstr "**按类别：**"
 
 #: ../../guide/tools.rst:905 b2c10369f0bb4f2c9a8220679cfca79c
 msgid "**By Functionality:**"
-msgstr ""
+msgstr "**按功能分类：**"
 
 #: ../../guide/tools.rst:923 dbeff0cc410f4d958a5c981be4c40b33
 msgid "**By Domain:**"
-msgstr ""
+msgstr "**按领域：**"
 
 #: ../../guide/tools.rst:936 1820d22263d442e78aa23f146c51c7c7
 msgid "API Authentication"
-msgstr ""
+msgstr "API 身份验证"
 
 #: ../../guide/tools.rst:955 cc690b982a614d7682a33c9f48a3b4a5
 msgid "Future Extensions"
-msgstr ""
+msgstr "未来扩展"
 
 #: ../../guide/tools.rst:957 37eb158ef7f940358a4a548e044ecb65
 msgid ""
@@ -884,6 +964,11 @@ msgid ""
 "scheduling - **Cloud Services**: Distributed computing and storage - "
 "**Compliance Tools**: Regulatory and ethics validation"
 msgstr ""
+"**计划类别**：  \n"
+"- **可视化工具**：交互式绘图和仪表板生成  \n"
+"- **工作流引擎**：高级编排和调度  \n"
+"- **云服务**：分布式计算和存储  \n"
+"- **合规工具**：法规与伦理验证"
 
 #: ../../guide/tools.rst:963 22a4c2bc792f4f94ad59501b7620f574
 msgid ""
@@ -891,41 +976,46 @@ msgid ""
 "assurance processes - Community voting and validation - Maintenance and "
 "updates"
 msgstr ""
+"**社区贡献**：  \n"
+"- 工具提交指南  \n"
+"- 质量保证流程  \n"
+"- 社区投票与验证  \n"
+"- 维护与更新"
 
 #: ../../guide/tools.rst:970 79ab12f88d3949fc95b8f1f093920532
 msgid "🎯 Next Steps"
-msgstr ""
+msgstr "🎯 下一步"
 
 #: ../../guide/tools.rst:972 9e3548442d2643fb9587e65a3640b3d2
 msgid "Now that you know what tools are available:"
-msgstr ""
+msgstr "现在您已经了解有哪些可用的工具："
 
 #: ../../guide/tools.rst:974 991a62623b034ae28349ea622494f9c4
 msgid "🚀 **Try Examples**: :doc:`examples` - See tools in action"
-msgstr ""
+msgstr "🚀 **尝试示例**：:doc:`examples` - 查看工具的实际应用"
 
 #: ../../guide/tools.rst:975 72436b98d1b2432cb4b51fade84fada8
 msgid ""
 "🔬 **Build Workflows**: :doc:`scientific_workflows` - Combine tools for "
 "research"
-msgstr ""
+msgstr "🔬 **构建工作流**：:doc:`scientific_workflows` - 组合工具以支持研究"
 
 #: ../../guide/tools.rst:976 3aa3b199b5744d2daaa44fd6fdf1dfd2
 msgid ""
 "⚡ **Optimize**: :doc:`best_practices` - Performance and production tips"
-msgstr ""
+msgstr "⚡ **优化**：:doc:`best_practices` - 性能与生产环境优化提示"
 
 #: ../../guide/tools.rst:977 7c9d5b7650454597b93f9945d2b42c61
 msgid ""
 "🛠️ **Create Custom**: :doc:`../tutorials/custom_tools` - Build your own "
 "tools"
-msgstr ""
+msgstr "🛠️ **创建自定义工具**: :doc:`../tutorials/custom_tools` - 构建您自己的工具"
 
 #: ../../guide/tools.rst:980 6f2d35d55ba34806aa26e95d86dc4a20
 msgid ""
 "**Discovery tip**: Use the AI-powered tool discovery features to find the "
 "right tools for your specific research questions!"
-msgstr ""
+msgstr "**发现提示**：使用人工智能驱动的工具发现功能，找到适合您特定研究问题的正确工具！"
 
 #: ../../guide/tools.rst:983 06664afd699c4c9db110298264f7403e
 msgid ""
@@ -934,3 +1024,5 @@ msgid ""
 "orchestrate complex workflows, while databases and embedding stores enable "
 "efficient information management."
 msgstr ""
+"**工具生态系统协同**：这八个类别旨在协同工作。API 提供数据访问，ML "
+"模型增加智能，代理负责协调复杂的工作流，而数据库和嵌入存储支持高效的信息管理。"

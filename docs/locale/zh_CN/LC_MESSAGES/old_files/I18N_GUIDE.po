@@ -158,15 +158,15 @@ msgstr "VSCode：Cmd+Shift+H"
 #: ../../old_files/I18N_GUIDE.md:144 ed0361b14ea84e238d19dc3870be2d12
 #, python-format
 msgid "Vim: `:%s/msgstr \"\"/msgstr \"翻译\"/g`"
-msgstr ""
+msgstr "Vim：`:%s/msgstr \"\"/msgstr \"翻译\"/g`"
 
 #: ../../old_files/I18N_GUIDE.md:146 b5bccb04eeaf4fcab5e946c30df33462
 msgid "2. 保持格式"
-msgstr ""
+msgstr "2. Maintain formatting"
 
 #: ../../old_files/I18N_GUIDE.md:148 a680efa7ae3443cc896ef79b0d9f1696
 msgid "翻译时保持："
-msgstr ""
+msgstr "在翻译时保持："
 
 #: ../../old_files/I18N_GUIDE.md:149 c1d479b319c44b9a95be8c075cc9af53
 msgid "Emoji 图标不变"
@@ -203,10 +203,13 @@ msgstr "Google 翻译"
 #: ../../old_files/I18N_GUIDE.md:159 ad4d8c2b43044b99b7988b37fd0b9813
 msgid "ChatGPT/Claude"
 msgstr ""
+"ChatGPT/Claude\n"
+"\n"
+"上下文：文档"
 
 #: ../../old_files/I18N_GUIDE.md:161 df149762f72944b6aba6df0eb4ab737c
 msgid "然后手动审核调整。"
-msgstr ""
+msgstr "然后手动审核和调整。"
 
 #: ../../old_files/I18N_GUIDE.md:163 dc25c789520e45b6b784f9ee6955e673
 msgid "4. 渐进式翻译"
@@ -214,15 +217,15 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:165 ceca51efeed043018114857af31b4aa7
 msgid "不需要一次翻译所有文件："
-msgstr ""
+msgstr "无需一次性翻译所有文件："
 
 #: ../../old_files/I18N_GUIDE.md:166 eeb303cd466d4b06858dfd8093dc6b5d
 msgid "先翻译首页和主要导航"
-msgstr ""
+msgstr "请先翻译首页和主要导航"
 
 #: ../../old_files/I18N_GUIDE.md:167 ffc985bad46f4152a3fbd5b4ae72a337
 msgid "再翻译快速开始和安装"
-msgstr ""
+msgstr "快速入门和安装指南"
 
 #: ../../old_files/I18N_GUIDE.md:168 6473a7069e224d33a5529d5a38ecfe04
 msgid "最后翻译详细文档和 API"
@@ -230,7 +233,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:170 2cd5144581ff40d098105ba0554a57c8
 msgid "未翻译的内容会显示英文原文。"
-msgstr ""
+msgstr "未翻译的内容将显示英文原文。"
 
 #: ../../old_files/I18N_GUIDE.md:172 d5926419273c4d8a9fd5e4dea26aebbe
 msgid "🔧 配置详解"
@@ -254,7 +257,7 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:214 657619b816be4fcfb5a1997e0cc25c66
 msgid "英文: `https://yourdomain.com/`"
-msgstr ""
+msgstr "`https://yourdomain.com/`"
 
 #: ../../old_files/I18N_GUIDE.md:215 bc2a87af3a8e4afe9c307f6e00e6ea6f
 msgid "中文: `https://yourdomain.com/zh_CN/`"
@@ -284,11 +287,11 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:225 c114448484d94caf9c538dcd71d3ff8e
 msgid "Q: 翻译后重新构建没有生效？"
-msgstr ""
+msgstr "问：翻译后重新构建未生效？"
 
 #: ../../old_files/I18N_GUIDE.md:227 6b31e5f11de74a318dfd13db32cf0854
 msgid "A: 确保："
-msgstr ""
+msgstr "确保："
 
 #: ../../old_files/I18N_GUIDE.md:228 bd9b2d042a9b446e838f4b150b85aed2
 msgid ".po 文件已保存"
@@ -304,15 +307,15 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:232 8c2110872ad84ec0a1aaa71693eb0da4
 msgid "Q: 如何只更新某个页面的翻译？"
-msgstr ""
+msgstr "问：如何仅更新某个页面的翻译？"
 
 #: ../../old_files/I18N_GUIDE.md:234 ad64e9dd2fb1471e90d0d49778336dfa
 msgid "A:"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您翻译成符合要求的中文内容。"
 
 #: ../../old_files/I18N_GUIDE.md:242 8351bb680470442da3bbca70a07b38fd
 msgid "Q: 可以添加其他语言吗？"
-msgstr ""
+msgstr "Q: Can other languages be added?"
 
 #: ../../old_files/I18N_GUIDE.md:244 04242a83a67c411e90be25438c0a099c
 msgid "A:可以！修改 conf.py："
@@ -332,4 +335,4 @@ msgstr ""
 
 #: ../../old_files/I18N_GUIDE.md:267 bca2f3d4c95e42b2aabe13defd3314ef
 msgid "Happy translating! 🌍"
-msgstr ""
+msgstr "翻译愉快！🌍"

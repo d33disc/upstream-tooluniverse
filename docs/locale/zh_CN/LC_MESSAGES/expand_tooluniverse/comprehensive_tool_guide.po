@@ -1015,36 +1015,39 @@ msgstr ""
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:772
 #: fd0e0deacae54d7fb870f4e314d3c472
 msgid "Happy coding, and thank you for contributing to ToolUniverse! 🧬🔬🤖"
-msgstr ""
+msgstr "祝您编程愉快，感谢您为 ToolUniverse 做出的贡献！🧬🔬🤖"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:774
 #: 878dfb090b9d4c40bc7f63b3060d2c93
 msgid "---"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您提供符合要求的中文翻译。"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:776
 #: ad2607a52fec443eac98a4ee6f133632
 msgid "**Additional Resources:**"
-msgstr ""
+msgstr "**其他资源：**"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:778
 #: a367af14d1064300ac1472aa391f00d2
 msgid "ToolUniverse GitHub: https://github.com/mims-harvard/ToolUniverse"
 msgstr ""
+"ToolUniverse GitHub: https://github.com/mims-harvard/ToolUniverse\n"
+"\n"
+"工具宇宙 GitHub: https://github.com/mims-harvard/ToolUniverse"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:779
 #: 034ca3fc363843b0a0eac390cbff766c
 msgid "API Documentation: https://tooluniverse.readthedocs.io"
-msgstr ""
+msgstr "API 文档：https://tooluniverse.readthedocs.io"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:780
 #: 173bcedebee249b59eb43388f4d4595f
 msgid ""
 "Community Discussions: https://github.com/mims-"
 "harvard/ToolUniverse/discussions"
-msgstr ""
+msgstr "社区讨论：https://github.com/mims-harvard/ToolUniverse/discussions"
 
 #: ../../expand_tooluniverse/comprehensive_tool_guide.rst:781
 #: 8522dc0202b9463f848298e97041b399
 msgid "Issue Tracker: https://github.com/mims-harvard/ToolUniverse/issues"
-msgstr ""
+msgstr "问题追踪器: https://github.com/mims-harvard/ToolUniverse/issues"

@@ -192,11 +192,11 @@ msgstr ""
 
 #: ../../SUMMARY.md:115 4aa08c95b45d4d25a1483e62b4432673
 msgid "**build_multilang.sh** - 完整双语构建脚本"
-msgstr ""
+msgstr "**build_multilang.sh** - 完整的双语构建脚本"
 
 #: ../../SUMMARY.md:116 5e4531549f374174939980659f73802b
 msgid "**quick_build_zh.sh** - 快速中文构建"
-msgstr ""
+msgstr "**quick_build_zh.sh** - 快速构建中文"
 
 #: ../../SUMMARY.md:118 bfe1422badd145fe89b4154022a54d7f
 msgid "7. **🔄 辅助脚本**"
@@ -217,7 +217,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:123 b30ed730104d451b99b3b805e1bdd084
 msgid "✅ `show_multilang_features.sh` - 功能演示"
-msgstr ""
+msgstr "✅ `show_multilang_features.sh` - 功能展示"
 
 #: ../../SUMMARY.md:125 025629dc1c6a40499b413a1a1e701685
 msgid "8. **📱 浮动语言切换器**"
@@ -281,7 +281,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:159 38fa490da89846e2af8a17252d91c8b9
 msgid "✅ 可选启动本地服务器"
-msgstr ""
+msgstr "✅ Optional: 启动本地服务器"
 
 #: ../../SUMMARY.md:161 802c573dedc64734bcc16571f5cc9a93
 msgid "高级用法"
@@ -309,11 +309,11 @@ msgstr ""
 
 #: ../../SUMMARY.md:246 75ffe10dc9514188a0bae3cd3c8f091c
 msgid "Before (之前)"
-msgstr ""
+msgstr "之前"
 
 #: ../../SUMMARY.md:254 f4699ae3235a441aa11bc8a07ddc4a68
 msgid "After (现在)"
-msgstr ""
+msgstr "之后 (现在)"
 
 #: ../../SUMMARY.md:263 81185fccfe2d4a0fa29fc87e852b90ed
 msgid "📝 翻译工作流"
@@ -337,7 +337,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:284 841d47c46942484ab77976c3a3f8cdfa
 msgid "🌟 主要特点"
-msgstr ""
+msgstr "🌟 主要功能"
 
 #: ../../SUMMARY.md:286 16c90f7d932c4310be39df87b1ea6931
 msgid "✅ 自动化"
@@ -345,15 +345,15 @@ msgstr ""
 
 #: ../../SUMMARY.md:287 41c25023a9ac4d92ae296fedfc59bec4
 msgid "一键构建中英文"
-msgstr ""
+msgstr "一键生成中英文"
 
 #: ../../SUMMARY.md:288 a0ec9c74f4f5439989f9e56929c26af4
 msgid "自动更新翻译"
-msgstr ""
+msgstr "自动更新"
 
 #: ../../SUMMARY.md:289 823a554926fa46c4a6e87dd5b92581a7
 msgid "自动创建索引页"
-msgstr ""
+msgstr "自动生成索引页"
 
 #: ../../SUMMARY.md:291 68dee7d0b62841f8a3d20d06719a1df6
 msgid "✅ 灵活性"
@@ -369,7 +369,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:294 f4892c5748e84f56aad32d2e6e0f3242
 msgid "可扩展到更多语言"
-msgstr ""
+msgstr "可扩展至更多语言"
 
 #: ../../SUMMARY.md:296 47c59dccdab14c7dba53d21c0354b5cf
 msgid "✅ 用户友好"
@@ -377,7 +377,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:297 e27fc867420645c4b0e1e2f30a0054be
 msgid "清晰的输出"
-msgstr ""
+msgstr "Clear Output"
 
 #: ../../SUMMARY.md:298 ba5b8584c917421a9e437b6a62fbe5fb
 msgid "多种访问方式"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:309 ecd838ced8554373aadc1e6135bc77f0
 msgid "✅ `quick_doc_build.sh` - 主构建脚本（默认中英文）"
-msgstr ""
+msgstr "✅ `quick_doc_build.sh` - 主构建脚本（默认支持中英文）"
 
 #: ../../SUMMARY.md:310 72c870e9192b4883aea97b7c4db6b57a
 msgid "✅ `quick_doc_build_cn.sh` - 中文版本（默认中英文）"
@@ -457,7 +457,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:324 c0d4d83d106841868f11ce088db6790b
 msgid "✅ `QUICK_BUILD_GUIDE.md` - 快速指南"
-msgstr ""
+msgstr "✅ `QUICK_BUILD_GUIDE.md` - 快速构建指南"
 
 #: ../../SUMMARY.md:325 39708ca9dc4144a7a9453ae64674f489
 msgid "✅ `I18N_GUIDE.md` - 翻译指南"
@@ -477,7 +477,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:331 eea6a3f263d24fb182cf08a59df5e75d
 msgid "继续翻译"
-msgstr ""
+msgstr "请提供需要翻译的具体英文文本，我将为您翻译成符合要求的中文内容。"
 
 #: ../../SUMMARY.md:332 2adfbe6b4fa7492aa729c784b67bad50
 msgid "编辑以下文件以完善中文文档："
@@ -513,24 +513,35 @@ msgstr ""
 
 #: ../../SUMMARY.md:358 a11b7dcfb028408c8579bf78b33e4f50
 msgid "现在 ToolUniverse 文档系统拥有："
-msgstr ""
+msgstr "现在 ToolUniverse 文档系统具备："
 
 #: ../../SUMMARY.md:360 8c583fd58a5d4060a1199ea82cd3fb16
 msgid ""
 "✅ **完整的中英文支持** ✅ **一键自动构建** ✅ **优雅的语言选择页** ✅ **现代化的 Shibuya 主题** ✅ "
 "**完整的左侧导航栏** ✅ **自动化的翻译工作流** ✅ **灵活的配置选项** ✅ **详尽的文档指南**"
 msgstr ""
+"✅ **完整的中英文支持**  \n"
+"✅ **一键自动构建**  \n"
+"✅ **优雅的语言选择页**  \n"
+"✅ **现代化的 Shibuya 主题**  \n"
+"✅ **完整的左侧导航栏**  \n"
+"✅ **自动化的翻译工作流**  \n"
+"✅ **灵活的配置选项**  \n"
+"✅ **详尽的文档指南**"
 
 #: ../../SUMMARY.md:369 27d9e79de86943e480e650140a3b752c
 msgid "**只需运行一个命令：**"
-msgstr ""
+msgstr "**只需运行以下命令：**"
 
 #: ../../SUMMARY.md:375 07d07304545844e593ed28bcf6e39233
 msgid "就能获得专业的中英文双语文档！🚀"
-msgstr ""
+msgstr "就能获得专业的中英双语文档！🚀"
 
 #: ../../SUMMARY.md:379 abeb3f3c02d24f4b8ce78422617484da
 msgid ""
 "Created: 2025-10-07 Author: GitHub Copilot Status: ✅ Complete and Ready to "
 "Use"
 msgstr ""
+"创建日期：2025-10-07  \n"
+"作者：GitHub Copilot  \n"
+"状态：✅ 已完成并可使用"

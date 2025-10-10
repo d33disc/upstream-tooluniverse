@@ -828,6 +828,7 @@ msgid ""
 "research questions to understand the integration, then progress to complex "
 "multi-step workflows as you become more familiar with the capabilities."
 msgstr ""
+"**从简单查询开始**：先从基础工具的探索和简单的研究问题入手，以了解集成方式，然后随着对功能的熟悉程度提高，逐步过渡到复杂的多步骤工作流程。"
 
 #: ../../guide/building_ai_scientists/gemini_cli.rst:620
 #: 71a8470c1aa040d7aef69bc215872215
@@ -835,4 +836,4 @@ msgid ""
 "**Command-Line Efficiency**: Gemini CLI provides a powerful command-line "
 "interface for scientific research, enabling both interactive exploration and"
 " automated batch processing of research tasks."
-msgstr ""
+msgstr "**命令行效率**：Gemini CLI 提供了一个功能强大的命令行界面，用于科学研究，既支持交互式探索，也支持研究任务的自动批处理。"

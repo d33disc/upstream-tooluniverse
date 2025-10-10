@@ -187,6 +187,9 @@ msgstr "ToolUniverse 支持以下 AI 提供商："
 #: 9ecb6caf19f24d1daefa329bd763a570
 msgid "**OpenAI/Azure OpenAI**"
 msgstr ""
+"**OpenAI/Azure OpenAI**  \n"
+"\n"
+"**OpenAI/Azure OpenAI**"
 
 #: ../../tutorials/agentic_tools_tutorial.rst:59
 #: 6963da0db26f42b9ab8622d13325fae1

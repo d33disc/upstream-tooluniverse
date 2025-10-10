@@ -1,11 +1,39 @@
+#!/usr/bin/env python3
+"""
+ADMETAI Tool Usage Example
+
+This example demonstrates how to use the ADMETAI tools in ToolUniverse
+to predict various ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity)
+properties of chemical compounds.
+
+The example shows:
+1. How to initialize ToolUniverse
+2. How to use ADMETAI_predict_physicochemical_properties
+3. How to use ADMETAI_predict_CYP_interactions
+4. How to use other ADMETAI prediction tools
+
+Requirements:
+- ToolUniverse installed
+- Valid API keys for ADMETAI services (if required)
+"""
+
 from tooluniverse import ToolUniverse
+import json
 
-# Step 1: Initialize tool universe
-tooluni = ToolUniverse()
-tooluni.load_tools()
 
-# Standard testing
-test_queries = [
+def main():
+    """Main function demonstrating ADMETAI tool usage."""
+    print("🧪 ADMETAI Tool Usage Example")
+    print("=" * 50)
+    
+    # Initialize ToolUniverse
+    print("Initializing ToolUniverse...")
+    tooluni = ToolUniverse()
+    tooluni.load_tools()
+    print("✅ ToolUniverse initialized successfully")
+    
+    # Example queries demonstrating different ADMETAI tools
+    example_queries = [
     {
         "name": "ADMETAI_predict_physicochemical_properties",
         "arguments": {
@@ -357,14 +385,27 @@ test_queries = [
             ]
         },
     },
-]
+    ]
+    
+    # Run example queries
+    print(f"\nRunning {len(example_queries)} example queries...")
+    
+    for idx, query in enumerate(example_queries, 1):
+        print(f"\n[{idx}] Running tool: {query['name']}")
+        print(f"Arguments: {json.dumps(query['arguments'], indent=2)}")
+        
+        try:
+            result = tooluni.run(query)
+            print("✅ Success! Result:")
+            if isinstance(result, dict):
+                print(json.dumps(result, indent=2))
+            else:
+                print(str(result))
+        except Exception as e:
+            print(f"❌ Error: {str(e)}")
+    
+    print("\n🎉 ADMETAI Tool Example completed!")
 
-for idx, query in enumerate(test_queries):
-    print(
-        f"\n[{idx+1}] Running tool: {query['name']} with arguments: {query['arguments']}"
-    )
-    result = tooluni.run(query)
-    print("✅ Success. Output:")
-    print(
-        result if isinstance(result, dict) else str(result)
-    )  # Print snippet if result is big
+
+if __name__ == "__main__":
+    main()

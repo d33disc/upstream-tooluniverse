@@ -212,7 +212,7 @@ msgstr ""
 #: bd87907452204e4e9e8d895eb09d4a46 of
 #: tooluniverse.mcp_integration.load_mcp_tools:55
 msgid ")"
-msgstr ""
+msgstr "请提供需要翻译的英文文本，我将为您提供符合要求的中文翻译。"
 
 #: 6ee5ecf082cc4e87ada5845256c987ea of
 #: tooluniverse.mcp_integration.load_mcp_tools:57

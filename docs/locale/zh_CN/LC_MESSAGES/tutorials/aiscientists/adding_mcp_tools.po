@@ -256,7 +256,7 @@ msgstr "真"
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 9a9090fe084a4c9fadb0e64dc230cb1d
 msgid "是否自动注册发现的工具"
-msgstr ""
+msgstr "是否自动注册已发现的工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: b68d04050fa24a089c718af7f32c2718
@@ -281,12 +281,12 @@ msgstr "已选择的工具"
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 5296cf562fcb4c03b57cb19279dad9ae
 msgid "array"
-msgstr ""
+msgstr "数组"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: ac90428344fa43af9ace367ceb2468fe
 msgid "null"
-msgstr ""
+msgstr "空"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 9e3fa634555d4e5fbf4fe8e16616fd0c
@@ -296,12 +296,12 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 2031a528db4346ec933ae2d4c5d2314c
 msgid "`timeout`"
-msgstr ""
+msgstr "超时"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: c7097196b269472ca44dc737b6371e52
 msgid "integer"
-msgstr ""
+msgstr "整数"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md
 #: 4cddde4fbe784a7b81088a9555f7eef7
@@ -366,12 +366,12 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:238
 #: dfa7237760c74587a315b87819a70a65
 msgid "配置中可以使用环境变量："
-msgstr ""
+msgstr "在配置中可以使用环境变量："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:247
 #: 3a9fc330dca44dbf96c91dcd017e7f5c
 msgid "错误处理和重试"
-msgstr ""
+msgstr "错误处理与重试"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:260
 #: 5149ff0fffbf4bcc93aaa56c1b495cfc
@@ -391,7 +391,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:274
 #: 7f62cd737fce48a483c2d8315c67354d
 msgid "`expert_feedback_tools.json`:"
-msgstr ""
+msgstr "`expert_feedback_tools.json`："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:315
 #: 603ba3c036b046ad86a73dcf3f4751d4
@@ -416,7 +416,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:365
 #: df2b8a0cb0e2470e96db2c5c4e206f45
 msgid "常见问题和解决方案"
-msgstr ""
+msgstr "常见问题及解决方案"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:367
 #: aec0e4dbc6be499aa134281e38f8b749
@@ -475,17 +475,17 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:393
 #: 8a291e1b1f25460e9fa0117a9c28be3b
 msgid "检查工具名称拼写"
-msgstr ""
+msgstr "检查工具名称的拼写"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:394
 #: 2d0d7eb3007543129f387e240e6b0a0c
 msgid "确认服务器已启动并运行"
-msgstr ""
+msgstr "确认服务器已启动并正常运行"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:396
 #: 7987476bc09549b697cd7b41377d98c6
 msgid "4. 参数验证失败"
-msgstr ""
+msgstr "4. 参数验证未通过"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:402
 #: e700c1bd8afc4e3c8da1dba2f91f35ba
@@ -495,12 +495,12 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:403
 #: adec7929d59a4799903bbaed58868b9b
 msgid "确保提供所有必需参数"
-msgstr ""
+msgstr "确保提供所有必要参数"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:404
 #: e239d8e1b1d147ee91401196de63f580
 msgid "验证参数数据类型"
-msgstr ""
+msgstr "验证参数的数据类型"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:406
 #: 59fdd1ad8ad745f6b672fcfcc7279ac5
@@ -530,7 +530,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:442
 #: 530cb4e24b8d4a42bb8034b6698f8348
 msgid "1. 安全考虑"
-msgstr ""
+msgstr "1. 安全注意事项"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:443
 #: e5a7beb48a3a40bf9114b59e81588046
@@ -540,7 +540,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:444
 #: 3f1101333d63489d89e6c1963a794e63
 msgid "配置适当的超时值避免长时间等待"
-msgstr ""
+msgstr "配置适当的超时值以避免长时间等待"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:445
 #: 36b215aff0c94ee996e2e86d177dc67a
@@ -565,7 +565,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:450
 #: 9a3631e9285f456289159de06ceabfcd
 msgid "使用 `selected_tools` 只加载需要的工具"
-msgstr ""
+msgstr "使用 `selected_tools` 仅加载所需工具"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:452
 #: c866d230c436440e9a6508b8e05c42b0
@@ -580,12 +580,12 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:454
 #: dc21cc68128b460d9ccaeabd8092aee1
 msgid "实现重试机制处理临时网络问题"
-msgstr ""
+msgstr "实现重试机制以处理临时网络问题"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:455
 #: e1cd8f897fc34274b78cf721e1efd270
 msgid "记录详细的错误信息便于调试"
-msgstr ""
+msgstr "记录详细的错误信息以便调试"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:457
 #: 6c6ed1b0da864b6394ea48344903b5d5
@@ -600,7 +600,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:459
 #: 1f77f882419e4ca0af5c3ce8329b3b0a
 msgid "将配置文件按功能模块组织"
-msgstr ""
+msgstr "将配置文件按功能模块进行组织"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:460
 #: 9ae9161ec8e14c719ae54ea6f7940d48
@@ -615,7 +615,7 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:464
 #: 9d5e3d3ed9f54530a0c6a4a66aa1d5b3
 msgid "通过本教程，你已经学会了："
-msgstr ""
+msgstr "通过本教程，您已经学会了："
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:466
 #: 5ccb8b2a3b184fd8b92d87b4c3f66c7a
@@ -635,22 +635,22 @@ msgstr ""
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:469
 #: e30e8a60e4c24b8c99244be78dab7736
 msgid "✅ 创建 MCPProxyTool 进行直接工具智能体"
-msgstr ""
+msgstr "✅ 创建 MCPProxyTool 以实现直接工具智能体"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:470
 #: f827d54ea3f844899cca7584ffed0480
 msgid "✅ 处理常见问题和故障排除"
-msgstr ""
+msgstr "✅ Troubleshooting常见问题和故障排除"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:471
 #: 7c8d4e2ba18343008206e151c65cace0
 msgid "✅ 应用最佳实践确保安全和性能"
-msgstr ""
+msgstr "✅ 应用最佳实践以确保安全性和性能"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:473
 #: 9d497ea26fe241b1bfa2c07a13e9179f
 msgid "现在你可以将任何 MCP 服务器的工具集成到 ToolUniverse 中，扩展你的工具生态系统！"
-msgstr ""
+msgstr "现在，您可以将任何 MCP 服务器的工具集成到 ToolUniverse 中，扩展您的工具生态系统！"
 
 #: ../../tutorials/aiscientists/adding_mcp_tools.md:475
 #: 43681ac98494412bb059aeb04a5a9d40

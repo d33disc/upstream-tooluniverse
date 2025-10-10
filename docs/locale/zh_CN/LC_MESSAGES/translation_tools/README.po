@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../../translation_tools/README.md:7 fac04b358a884725ba140d3ce4829690
 msgid "核心文件"
-msgstr ""
+msgstr "核心文档"
 
 #: ../../translation_tools/README.md:9 910f7852269042a28c49bc9aa993da50
 msgid "**`batch_translate_po.py`** - 主要的批量翻译脚本"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../../translation_tools/README.md:15 e529f0fcfc7a402db8e43e51bf22448f
 msgid "**`translation_agentic_tool.py`** - 完整的演示脚本"
-msgstr ""
+msgstr "**`translation_agentic_tool.py`** - 完整演示脚本"
 
 #: ../../translation_tools/README.md:16 81c2c104b3fa497d81907420c0e8772d
 msgid "展示如何使用 AgenticTool"
@@ -74,7 +74,7 @@ msgstr "适合学习和理解 AgenticTool 的用法"
 
 #: ../../translation_tools/README.md:20 b09fe2dbb75b48fe8d0a251304a5cf88
 msgid "**`AGENTIC_TRANSLATION_TOOL_SUMMARY.md`** - 完整的实现总结"
-msgstr ""
+msgstr "**`AGENTIC_TRANSLATION_TOOL_SUMMARY.md`** - 实现总结"
 
 #: ../../translation_tools/README.md:21 ee422de1c56641b1ab71536185f93199
 msgid "详细的技术实现说明"
