@@ -1,21 +1,11 @@
 """
 HPA_get_rna_expression_by_source
 
-Get RNA expression level (nTPM) for a gene in a specific biological source using optimized columns parameter. Supports tissue, blood, brain, and single_cell source types with comprehensive source mappings.
+Get RNA expression level (nTPM) for a gene in a specific biological source using optimized column...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_rna_expression_by_source(
@@ -28,16 +18,16 @@ def HPA_get_rna_expression_by_source(
     validate: bool = True,
 ) -> Any:
     """
-    Get RNA expression level (nTPM) for a gene in a specific biological source using optimized columns parameter. Supports tissue, blood, brain, and single_cell source types with comprehensive source mappings.
+    Get RNA expression level (nTPM) for a gene in a specific biological source using optimized column...
 
     Parameters
     ----------
     gene_name : str
         Gene name or gene symbol, e.g., 'GFAP', 'TP53', 'BRCA1', etc.
     source_type : str
-        The type of biological source. Choose from: 'tissue', 'blood', 'brain', 'single_cell'.
+        The type of biological source. Choose from: 'tissue', 'blood', 'brain', 'sing...
     source_name : str
-        The specific name of the biological source, e.g., 'liver', 'heart_muscle', 't_cell', 'hepatocytes', 'cerebellum'. Must be a valid name from the comprehensive HPA columns mapping.
+        The specific name of the biological source, e.g., 'liver', 'heart_muscle', 't...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def HPA_get_rna_expression_by_source(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_rna_expression_by_source",
             "arguments": {

@@ -5,21 +5,11 @@ Retrieve drug names based on the Drug Enforcement Administration (DEA) schedule 
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_controlled_substance_DEA_schedule(
-    controlled_substance_schedule: Optional[str] = None,
+    controlled_substance_schedule: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -34,7 +24,7 @@ def FDA_get_drug_names_by_controlled_substance_DEA_schedule(
     Parameters
     ----------
     controlled_substance_schedule : str
-        The schedule in which the drug is controlled by the Drug Enforcement Administration.
+        The schedule in which the drug is controlled by the Drug Enforcement Administ...
     indication : str
         The indication or usage of the drug.
     limit : int
@@ -52,7 +42,9 @@ def FDA_get_drug_names_by_controlled_substance_DEA_schedule(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_controlled_substance_DEA_schedule",
             "arguments": {

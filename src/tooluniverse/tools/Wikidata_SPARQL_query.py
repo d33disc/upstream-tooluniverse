@@ -1,21 +1,11 @@
 """
 Wikidata_SPARQL_query
 
-Execute SPARQL queries against Wikidata to retrieve structured data. This tool powers Scholia-style visualizations and can query academic topics, authors, institutions, and research relationships.
+Execute SPARQL queries against Wikidata to retrieve structured data. This tool powers Scholia-sty...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Wikidata_SPARQL_query(
@@ -27,14 +17,14 @@ def Wikidata_SPARQL_query(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Execute SPARQL queries against Wikidata to retrieve structured data. This tool powers Scholia-style visualizations and can query academic topics, authors, institutions, and research relationships.
+    Execute SPARQL queries against Wikidata to retrieve structured data. This tool powers Scholia-sty...
 
     Parameters
     ----------
     sparql : str
-        SPARQL query string to execute against Wikidata. Use SPARQL syntax to query academic entities, relationships, and properties.
+        SPARQL query string to execute against Wikidata. Use SPARQL syntax to query a...
     max_results : int
-        Optional result limit override. If not specified, uses the LIMIT clause in the SPARQL query or returns all results.
+        Optional result limit override. If not specified, uses the LIMIT clause in th...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def Wikidata_SPARQL_query(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Wikidata_SPARQL_query",
             "arguments": {"sparql": sparql, "max_results": max_results},

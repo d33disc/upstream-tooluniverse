@@ -1,25 +1,15 @@
 """
 FDA_get_drug_names_by_dear_health_care_provider_letter_info
 
-Fetch drug names based on information about dear health care provider letters. The letters are sent by drug manufacturers to provide new or updated information about the drug.
+Fetch drug names based on information about dear health care provider letters. The letters are se...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_dear_health_care_provider_letter_info(
-    letter_info: Optional[str] = None,
+    letter_info: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -29,7 +19,7 @@ def FDA_get_drug_names_by_dear_health_care_provider_letter_info(
     validate: bool = True,
 ) -> Any:
     """
-    Fetch drug names based on information about dear health care provider letters. The letters are sent by drug manufacturers to provide new or updated information about the drug.
+    Fetch drug names based on information about dear health care provider letters. The letters are se...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def FDA_get_drug_names_by_dear_health_care_provider_letter_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_dear_health_care_provider_letter_info",
             "arguments": {

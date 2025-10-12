@@ -1,21 +1,11 @@
 """
 eva_disease_target_score
 
-Extract disease-target association scores from EVA (European Variation Archive). EVA provides genetic variant data.
+Extract disease-target association scores from EVA (European Variation Archive). EVA provides gen...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def eva_disease_target_score(
@@ -27,12 +17,12 @@ def eva_disease_target_score(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Extract disease-target association scores from EVA (European Variation Archive). EVA provides genetic variant data.
+    Extract disease-target association scores from EVA (European Variation Archive). EVA provides gen...
 
     Parameters
     ----------
     efoId : str
-        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
+        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339'...
     pageSize : int
         Number of results per page (default: 100, max: 100)
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def eva_disease_target_score(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "eva_disease_target_score",
             "arguments": {"efoId": efoId, "pageSize": pageSize},

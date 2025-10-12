@@ -1,21 +1,11 @@
 """
 humanbase_ppi_analysis
 
-Retrieve tissue-specific protein-protein interactions and biological processes from HumanBase. Returns a NetworkX graph of tissue specific protein-protein interactions and a list of associated biological processes involeed by the given genes from Gene Ontology.
+Retrieve tissue-specific protein-protein interactions and biological processes from HumanBase. Re...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def humanbase_ppi_analysis(
@@ -30,20 +20,20 @@ def humanbase_ppi_analysis(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve tissue-specific protein-protein interactions and biological processes from HumanBase. Returns a NetworkX graph of tissue specific protein-protein interactions and a list of associated biological processes involeed by the given genes from Gene Ontology.
+    Retrieve tissue-specific protein-protein interactions and biological processes from HumanBase. Re...
 
     Parameters
     ----------
     gene_list : list[Any]
-        List of gene names or symbols to analyze for protein-protein interactions. The gene name should be the official gene symbol, not the synonym.
+        List of gene names or symbols to analyze for protein-protein interactions. Th...
     tissue : str
-        Tissue type for tissue-specific interactions. Examples: 'brain', 'heart', 'liver', 'kidney', etc.
+        Tissue type for tissue-specific interactions. Examples: 'brain', 'heart', 'li...
     max_node : int
-        Maximum number of nodes to retrieve in the interaction network. Warning: the more nodes, the more time it takes to retrieve the data. Default is 10 (~30 seconds).
+        Maximum number of nodes to retrieve in the interaction network. Warning: the ...
     interaction : str
-        Specific interaction type to filter by. Available types: 'co-expression', 'interaction', 'tf-binding', 'gsea-microrna-targets', 'gsea-perturbations'. If not specified, all types will be included.
+        Specific interaction type to filter by. Available types: 'co-expression', 'in...
     string_mode : bool
-        Whether to return the result in string mode. If True, the result will be a string of the network graph and the biological processes. If False, the result will be a NetworkX graph and a list of biological processes.
+        Whether to return the result in string mode. If True, the result will be a st...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -55,7 +45,9 @@ def humanbase_ppi_analysis(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "humanbase_ppi_analysis",
             "arguments": {

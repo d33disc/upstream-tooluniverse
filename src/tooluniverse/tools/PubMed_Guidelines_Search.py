@@ -1,21 +1,11 @@
 """
 PubMed_Guidelines_Search
 
-Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilities. Filters results specifically for guideline and practice guideline publication types. Provides access to high-quality, evidence-based clinical guidelines from medical journals worldwide.
+Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilities. Filters resu...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PubMed_Guidelines_Search(
@@ -28,16 +18,16 @@ def PubMed_Guidelines_Search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilities. Filters results specifically for guideline and practice guideline publication types. Provides access to high-quality, evidence-based clinical guidelines from medical journals worldwide.
+    Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilities. Filters resu...
 
     Parameters
     ----------
     query : str
-        Medical condition, treatment, or clinical topic to search for (e.g., 'diabetes', 'hypertension management', 'cancer treatment')
+        Medical condition, treatment, or clinical topic to search for (e.g., 'diabete...
     limit : int
         Maximum number of guidelines to return (default: 10)
     api_key : str
-        Optional NCBI API key for higher rate limits. Get your free key at https://www.ncbi.nlm.nih.gov/account/
+        Optional NCBI API key for higher rate limits. Get your free key at https://ww...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def PubMed_Guidelines_Search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PubMed_Guidelines_Search",
             "arguments": {"query": query, "limit": limit, "api_key": api_key},

@@ -1,25 +1,15 @@
 """
 dict_search
 
-Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk information by trade name, generic name, or active ingredient. Searching with exact match is not recommeded.
+Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk information by trade name...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def dict_search(
-    query: Optional[str] = None,
+    query: str,
     search_fields: Optional[list[Any]] = None,
     case_sensitive: Optional[bool] = None,
     exact_match: Optional[bool] = None,
@@ -30,14 +20,14 @@ def dict_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk information by trade name, generic name, or active ingredient. Searching with exact match is not recommeded.
+    Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk information by trade name...
 
     Parameters
     ----------
     query : str
         Free-text query (e.g. 'ZYPREXA', 'Olanzapine').
     search_fields : list[Any]
-        Columns to search. Choose from: 'Trade Name', 'Generic/Proper Name(s)', 'Active Ingredient(s)'.
+        Columns to search. Choose from: 'Trade Name', 'Generic/Proper Name(s)', 'Acti...
     case_sensitive : bool
         Match text with exact case if true.
     exact_match : bool
@@ -55,7 +45,9 @@ def dict_search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "dict_search",
             "arguments": {

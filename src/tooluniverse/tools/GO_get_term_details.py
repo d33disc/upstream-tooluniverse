@@ -1,21 +1,11 @@
 """
 GO_get_term_details
 
-Retrieves detailed information for a specific GO ID using the Biolink API, including definition, synonyms, and annotations.
+Retrieves detailed information for a specific GO ID using the Biolink API, including definition, ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def GO_get_term_details(
@@ -26,7 +16,7 @@ def GO_get_term_details(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieves detailed information for a specific GO ID using the Biolink API, including definition, synonyms, and annotations.
+    Retrieves detailed information for a specific GO ID using the Biolink API, including definition, ...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def GO_get_term_details(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "GO_get_term_details", "arguments": {"id": id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

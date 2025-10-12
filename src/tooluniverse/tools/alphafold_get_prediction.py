@@ -1,21 +1,11 @@
 """
 alphafold_get_prediction
 
-Retrieve full AlphaFold 3D structure predictions for a given protein. Input must be a UniProt accession (e.g., 'P69905'), UniProt entry name (e.g., 'HBA_HUMAN'), or CRC64 checksum. Returns residue-level metadata including sequence, per-residue confidence scores (pLDDT), and structure download links (PDB, CIF, PAE). If you do not know the accession, first call `uniprot_search` to resolve it from a protein/gene name, or `UniProt_get_entry_by_accession` if you already have the accession and want UniProt details. For a quick overview, use `alphafold_get_summary`. For mutation/variant impact, see `alphafold_get_annotations.
+Retrieve full AlphaFold 3D structure predictions for a given protein. Input must be a UniProt acc...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def alphafold_get_prediction(
@@ -27,12 +17,12 @@ def alphafold_get_prediction(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Retrieve full AlphaFold 3D structure predictions for a given protein. Input must be a UniProt accession (e.g., 'P69905'), UniProt entry name (e.g., 'HBA_HUMAN'), or CRC64 checksum. Returns residue-level metadata including sequence, per-residue confidence scores (pLDDT), and structure download links (PDB, CIF, PAE). If you do not know the accession, first call `uniprot_search` to resolve it from a protein/gene name, or `UniProt_get_entry_by_accession` if you already have the accession and want UniProt details. For a quick overview, use `alphafold_get_summary`. For mutation/variant impact, see `alphafold_get_annotations.
+    Retrieve full AlphaFold 3D structure predictions for a given protein. Input must be a UniProt acc...
 
     Parameters
     ----------
     qualifier : str
-        Protein identifier: UniProt accession (e.g., 'P69905'), entry name (e.g., 'HBA_HUMAN'), or CRC64 checksum.
+        Protein identifier: UniProt accession (e.g., 'P69905'), entry name (e.g., 'HB...
     sequence_checksum : str
         Optional CRC64 checksum of the UniProt sequence.
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def alphafold_get_prediction(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "alphafold_get_prediction",
             "arguments": {

@@ -5,21 +5,11 @@ Get all variants associated with a specific trait with pagination support.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def gwas_get_variants_for_trait(
-    efo_trait: Optional[str] = None,
+    efo_trait: str,
     size: Optional[int] = None,
     page: Optional[int] = None,
     *,
@@ -49,7 +39,9 @@ def gwas_get_variants_for_trait(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "gwas_get_variants_for_trait",
             "arguments": {"efo_trait": efo_trait, "size": size, "page": page},

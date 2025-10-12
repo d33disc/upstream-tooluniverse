@@ -1,21 +1,11 @@
 """
 AdverseEventICDMapper
 
-Extracts adverse events from narrative clinical or pharmacovigilance text and maps each event to the most specific ICD-10-CM code.
+Extracts adverse events from narrative clinical or pharmacovigilance text and maps each event to ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def AdverseEventICDMapper(
@@ -26,7 +16,7 @@ def AdverseEventICDMapper(
     validate: bool = True,
 ) -> Any:
     """
-    Extracts adverse events from narrative clinical or pharmacovigilance text and maps each event to the most specific ICD-10-CM code.
+    Extracts adverse events from narrative clinical or pharmacovigilance text and maps each event to ...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def AdverseEventICDMapper(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "AdverseEventICDMapper", "arguments": {"source_text": source_text}},
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -1,21 +1,11 @@
 """
 openalex_literature_search
 
-Search for academic literature using OpenAlex API. Retrieves papers with title, abstract, authors, publication year, and organizational affiliations based on search keywords.
+Search for academic literature using OpenAlex API. Retrieves papers with title, abstract, authors...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def openalex_literature_search(
@@ -30,20 +20,20 @@ def openalex_literature_search(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search for academic literature using OpenAlex API. Retrieves papers with title, abstract, authors, publication year, and organizational affiliations based on search keywords.
+    Search for academic literature using OpenAlex API. Retrieves papers with title, abstract, authors...
 
     Parameters
     ----------
     search_keywords : str
-        Keywords to search for in paper titles, abstracts, and content. Use relevant scientific terms or phrases.
+        Keywords to search for in paper titles, abstracts, and content. Use relevant ...
     max_results : int
         Maximum number of papers to retrieve (default: 10, maximum: 200).
     year_from : int
-        Start year for publication date filter (e.g., 2020). Optional parameter to limit search to papers published from this year onwards.
+        Start year for publication date filter (e.g., 2020). Optional parameter to li...
     year_to : int
-        End year for publication date filter (e.g., 2023). Optional parameter to limit search to papers published up to this year.
+        End year for publication date filter (e.g., 2023). Optional parameter to limi...
     open_access : bool
-        Filter for open access papers only. Set to true for open access papers, false for non-open access, or omit for all papers.
+        Filter for open access papers only. Set to true for open access papers, false...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -55,7 +45,9 @@ def openalex_literature_search(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "openalex_literature_search",
             "arguments": {

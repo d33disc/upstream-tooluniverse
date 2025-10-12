@@ -1,21 +1,11 @@
 """
 ADMETAI_predict_clearance_distribution
 
-Predicts clearance and distribution endpoints (Clearance_Hepatocyte_AZ, Clearance_Microsome_AZ, Half_Life_Obach, VDss_Lombardo, PPBR_AZ) for a given list of molecules in SMILES format.
+Predicts clearance and distribution endpoints (Clearance_Hepatocyte_AZ, Clearance_Microsome_AZ, H...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ADMETAI_predict_clearance_distribution(
@@ -26,7 +16,7 @@ def ADMETAI_predict_clearance_distribution(
     validate: bool = True,
 ) -> Any:
     """
-    Predicts clearance and distribution endpoints (Clearance_Hepatocyte_AZ, Clearance_Microsome_AZ, Half_Life_Obach, VDss_Lombardo, PPBR_AZ) for a given list of molecules in SMILES format.
+    Predicts clearance and distribution endpoints (Clearance_Hepatocyte_AZ, Clearance_Microsome_AZ, H...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def ADMETAI_predict_clearance_distribution(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ADMETAI_predict_clearance_distribution",
             "arguments": {"smiles": smiles},

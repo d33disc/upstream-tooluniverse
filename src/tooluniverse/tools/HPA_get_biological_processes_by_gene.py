@@ -1,21 +1,11 @@
 """
 HPA_get_biological_processes_by_gene
 
-Get biological process information for a gene, with special focus on key processes like apoptosis, cell cycle, etc.
+Get biological process information for a gene, with special focus on key processes like apoptosis...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_biological_processes_by_gene(
@@ -27,14 +17,14 @@ def HPA_get_biological_processes_by_gene(
     validate: bool = True,
 ) -> Any:
     """
-    Get biological process information for a gene, with special focus on key processes like apoptosis, cell cycle, etc.
+    Get biological process information for a gene, with special focus on key processes like apoptosis...
 
     Parameters
     ----------
     gene_name : str
         Gene name or gene symbol, e.g., 'TP53', 'CDK1', 'CASP3', etc.
     filter_processes : bool
-        Whether to filter and focus on specific biological processes (apoptosis, cell cycle, transcription regulation, etc.), defaults to true.
+        Whether to filter and focus on specific biological processes (apoptosis, cell...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def HPA_get_biological_processes_by_gene(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_biological_processes_by_gene",
             "arguments": {"gene_name": gene_name, "filter_processes": filter_processes},

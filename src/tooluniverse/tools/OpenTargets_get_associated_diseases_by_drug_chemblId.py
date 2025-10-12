@@ -1,32 +1,22 @@
 """
 OpenTargets_get_associated_diseases_by_drug_chemblId
 
-Retrieve the list of diseases associated with a specific drug chemblId based on clinical trial data or post-marketed drugs.
+Retrieve the list of diseases associated with a specific drug chemblId based on clinical trial da...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_associated_diseases_by_drug_chemblId(
-    chemblId: Optional[str] = None,
+    chemblId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve the list of diseases associated with a specific drug chemblId based on clinical trial data or post-marketed drugs.
+    Retrieve the list of diseases associated with a specific drug chemblId based on clinical trial da...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def OpenTargets_get_associated_diseases_by_drug_chemblId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_associated_diseases_by_drug_chemblId",
             "arguments": {"chemblId": chemblId},

@@ -1,21 +1,11 @@
 """
 cellosaurus_search_cell_lines
 
-Search Cellosaurus cell lines using the /search/cell-line endpoint. Supports Solr query syntax for precise field-based searches.
+Search Cellosaurus cell lines using the /search/cell-line endpoint. Supports Solr query syntax fo...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def cellosaurus_search_cell_lines(
@@ -28,12 +18,12 @@ def cellosaurus_search_cell_lines(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search Cellosaurus cell lines using the /search/cell-line endpoint. Supports Solr query syntax for precise field-based searches.
+    Search Cellosaurus cell lines using the /search/cell-line endpoint. Supports Solr query syntax fo...
 
     Parameters
     ----------
     q : str
-        Search query. Supports Solr syntax for field-specific searches (e.g., 'id:HeLa', 'ox:9606', 'char:cancer'). See https://api.cellosaurus.org/api-fields for available fields.
+        Search query. Supports Solr syntax for field-specific searches (e.g., 'id:HeL...
     offset : int
         Number of results to skip (for pagination)
     size : int
@@ -49,7 +39,9 @@ def cellosaurus_search_cell_lines(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "cellosaurus_search_cell_lines",
             "arguments": {"q": q, "offset": offset, "size": size},

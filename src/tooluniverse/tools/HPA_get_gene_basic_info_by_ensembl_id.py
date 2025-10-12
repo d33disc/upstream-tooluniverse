@@ -1,21 +1,11 @@
 """
 HPA_get_gene_basic_info_by_ensembl_id
 
-Get gene basic information and expression data from Human Protein Atlas using Ensembl Gene ID. Enhanced version now uses efficient JSON API.
+Get gene basic information and expression data from Human Protein Atlas using Ensembl Gene ID. En...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_gene_basic_info_by_ensembl_id(
@@ -26,7 +16,7 @@ def HPA_get_gene_basic_info_by_ensembl_id(
     validate: bool = True,
 ) -> Any:
     """
-    Get gene basic information and expression data from Human Protein Atlas using Ensembl Gene ID. Enhanced version now uses efficient JSON API.
+    Get gene basic information and expression data from Human Protein Atlas using Ensembl Gene ID. En...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def HPA_get_gene_basic_info_by_ensembl_id(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_gene_basic_info_by_ensembl_id",
             "arguments": {"ensembl_id": ensembl_id},

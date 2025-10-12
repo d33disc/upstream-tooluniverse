@@ -5,21 +5,11 @@ Retrieve the SMILES chemical structure string for a given chemical component (li
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_ligand_smiles_by_chem_comp_id(
-    chem_comp_id: Optional[str] = None,
+    chem_comp_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -43,7 +33,9 @@ def get_ligand_smiles_by_chem_comp_id(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_ligand_smiles_by_chem_comp_id",
             "arguments": {"chem_comp_id": chem_comp_id},

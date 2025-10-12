@@ -1,21 +1,11 @@
 """
 CodeQualityAnalyzer
 
-Analyzes code quality from multiple dimensions including algorithmic correctness, functional implementation capability, performance characteristics, and best practices. Provides detailed feedback and improvement suggestions.
+Analyzes code quality from multiple dimensions including algorithmic correctness, functional impl...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def CodeQualityAnalyzer(
@@ -31,7 +21,7 @@ def CodeQualityAnalyzer(
     validate: bool = True,
 ) -> Any:
     """
-    Analyzes code quality from multiple dimensions including algorithmic correctness, functional implementation capability, performance characteristics, and best practices. Provides detailed feedback and improvement suggestions.
+    Analyzes code quality from multiple dimensions including algorithmic correctness, functional impl...
 
     Parameters
     ----------
@@ -46,7 +36,7 @@ def CodeQualityAnalyzer(
     test_cases : str
         JSON string of test cases for the tool
     test_execution_results : str
-        JSON string of test execution results including pass/fail status and actual outputs
+        JSON string of test execution results including pass/fail status and actual o...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -58,7 +48,9 @@ def CodeQualityAnalyzer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "CodeQualityAnalyzer",
             "arguments": {

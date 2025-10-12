@@ -1,21 +1,11 @@
 """
 DomainExpertValidator
 
-Provides domain-specific validation and expert recommendations for tools with deep expertise across scientific and technical domains
+Provides domain-specific validation and expert recommendations for tools with deep expertise acro...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DomainExpertValidator(
@@ -29,7 +19,7 @@ def DomainExpertValidator(
     validate: bool = True,
 ) -> Any:
     """
-    Provides domain-specific validation and expert recommendations for tools with deep expertise across scientific and technical domains
+    Provides domain-specific validation and expert recommendations for tools with deep expertise acro...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def DomainExpertValidator(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DomainExpertValidator",
             "arguments": {

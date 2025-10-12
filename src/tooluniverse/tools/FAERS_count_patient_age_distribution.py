@@ -1,21 +1,11 @@
 """
 FAERS_count_patient_age_distribution
 
-Analyze the age distribution of patients experiencing adverse events for a specific drug. The age groups are: Neonate (0-28 days), Infant (29 days - 23 months), Child (2-11 years), Adolescent (12-17 years), Adult (18-64 years), Elderly (65+ years). Data source: FDA Adverse Event Reporting System (FAERS).
+Analyze the age distribution of patients experiencing adverse events for a specific drug. The age...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_patient_age_distribution(
@@ -26,7 +16,7 @@ def FAERS_count_patient_age_distribution(
     validate: bool = True,
 ) -> Any:
     """
-    Analyze the age distribution of patients experiencing adverse events for a specific drug. The age groups are: Neonate (0-28 days), Infant (29 days - 23 months), Child (2-11 years), Adolescent (12-17 years), Adult (18-64 years), Elderly (65+ years). Data source: FDA Adverse Event Reporting System (FAERS).
+    Analyze the age distribution of patients experiencing adverse events for a specific drug. The age...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def FAERS_count_patient_age_distribution(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_patient_age_distribution",
             "arguments": {"medicinalproduct": medicinalproduct},

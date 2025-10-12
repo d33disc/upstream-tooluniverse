@@ -1,21 +1,11 @@
 """
 FAERS_count_death_related_by_drug
 
-Count adverse events associated with patient death for a given drug. Data source: FDA Adverse Event Reporting System (FAERS).
+Count adverse events associated with patient death for a given drug. Data source: FDA Adverse Eve...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_death_related_by_drug(
@@ -26,7 +16,7 @@ def FAERS_count_death_related_by_drug(
     validate: bool = True,
 ) -> Any:
     """
-    Count adverse events associated with patient death for a given drug. Data source: FDA Adverse Event Reporting System (FAERS).
+    Count adverse events associated with patient death for a given drug. Data source: FDA Adverse Eve...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def FAERS_count_death_related_by_drug(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_death_related_by_drug",
             "arguments": {"medicinalproduct": medicinalproduct},

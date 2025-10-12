@@ -1,21 +1,11 @@
 """
 CodeOptimizer
 
-Optimizes code implementation for tools based on quality evaluation. Takes tool configuration and quality evaluation results to produce improved source code.
+Optimizes code implementation for tools based on quality evaluation. Takes tool configuration and...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def CodeOptimizer(
@@ -27,12 +17,12 @@ def CodeOptimizer(
     validate: bool = True,
 ) -> Any:
     """
-    Optimizes code implementation for tools based on quality evaluation. Takes tool configuration and quality evaluation results to produce improved source code.
+    Optimizes code implementation for tools based on quality evaluation. Takes tool configuration and...
 
     Parameters
     ----------
     tool_config : str
-        JSON string containing the complete tool configuration including current implementation
+        JSON string containing the complete tool configuration including current impl...
     quality_evaluation : str
         JSON string containing quality evaluation results and feedback
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def CodeOptimizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "CodeOptimizer",
             "arguments": {

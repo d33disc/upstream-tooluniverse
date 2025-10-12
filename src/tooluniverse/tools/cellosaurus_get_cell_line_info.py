@@ -1,21 +1,11 @@
 """
 cellosaurus_get_cell_line_info
 
-Get detailed information about a specific cell line using its Cellosaurus accession number (CVCL_ format).
+Get detailed information about a specific cell line using its Cellosaurus accession number (CVCL_...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def cellosaurus_get_cell_line_info(
@@ -28,7 +18,7 @@ def cellosaurus_get_cell_line_info(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get detailed information about a specific cell line using its Cellosaurus accession number (CVCL_ format).
+    Get detailed information about a specific cell line using its Cellosaurus accession number (CVCL_...
 
     Parameters
     ----------
@@ -37,7 +27,7 @@ def cellosaurus_get_cell_line_info(
     format : str
         Response format
     fields : list[Any]
-        Specific fields to retrieve (e.g., ['id', 'ox', 'char']). If not specified, all fields are returned.
+        Specific fields to retrieve (e.g., ['id', 'ox', 'char']). If not specified, a...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def cellosaurus_get_cell_line_info(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "cellosaurus_get_cell_line_info",
             "arguments": {"accession": accession, "format": format, "fields": fields},

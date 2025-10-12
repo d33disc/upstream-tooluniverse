@@ -1,25 +1,15 @@
 """
 FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation
 
-Retrieve the drug names that require asking a doctor before use due to a patient's specific conditions and symptoms.  Warning: This tool only outputs a predefined limited number of drug names and does not cover all possible drugs. Use with caution.
+Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
-    condition: Optional[str] = None,
+    condition: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -28,7 +18,7 @@ def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve the drug names that require asking a doctor before use due to a patient's specific conditions and symptoms.  Warning: This tool only outputs a predefined limited number of drug names and does not cover all possible drugs. Use with caution.
+    Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation",
             "arguments": {"condition": condition, "limit": limit, "skip": skip},

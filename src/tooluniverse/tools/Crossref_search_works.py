@@ -1,21 +1,11 @@
 """
 Crossref_search_works
 
-Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal, year, DOI, and URL. Supports filtering by publication type and date range.
+Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Crossref_search_works(
@@ -28,16 +18,16 @@ def Crossref_search_works(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal, year, DOI, and URL. Supports filtering by publication type and date range.
+    Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal...
 
     Parameters
     ----------
     query : str
-        Search query for Crossref works. Use keywords separated by spaces to refine your search.
+        Search query for Crossref works. Use keywords separated by spaces to refine y...
     limit : int
-        Number of articles to return. This sets the maximum number of articles retrieved from Crossref.
+        Number of articles to return. This sets the maximum number of articles retrie...
     filter : str
-        Optional filter string for Crossref API. Examples: 'type:journal-article,from-pub-date:2020-01-01'
+        Optional filter string for Crossref API. Examples: 'type:journal-article,from...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def Crossref_search_works(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Crossref_search_works",
             "arguments": {"query": query, "limit": limit, "filter": filter},

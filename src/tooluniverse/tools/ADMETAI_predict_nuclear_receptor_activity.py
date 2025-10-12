@@ -1,21 +1,11 @@
 """
 ADMETAI_predict_nuclear_receptor_activity
 
-Predicts nuclear receptor activity endpoints (NR-AR-LBD, NR-AR, NR-AhR, NR-Aromatase, NR-ER-LBD, NR-ER, NR-PPAR-gamma) for a given list of molecules in SMILES format.
+Predicts nuclear receptor activity endpoints (NR-AR-LBD, NR-AR, NR-AhR, NR-Aromatase, NR-ER-LBD, ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ADMETAI_predict_nuclear_receptor_activity(
@@ -26,7 +16,7 @@ def ADMETAI_predict_nuclear_receptor_activity(
     validate: bool = True,
 ) -> Any:
     """
-    Predicts nuclear receptor activity endpoints (NR-AR-LBD, NR-AR, NR-AhR, NR-Aromatase, NR-ER-LBD, NR-ER, NR-PPAR-gamma) for a given list of molecules in SMILES format.
+    Predicts nuclear receptor activity endpoints (NR-AR-LBD, NR-AR, NR-AhR, NR-Aromatase, NR-ER-LBD, ...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def ADMETAI_predict_nuclear_receptor_activity(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ADMETAI_predict_nuclear_receptor_activity",
             "arguments": {"smiles": smiles},

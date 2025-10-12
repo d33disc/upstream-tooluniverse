@@ -1,32 +1,22 @@
 """
 get_chem_comp_audit_info
 
-Fetch audit history for a chemical component: action type, date, details, ordinal, and processing site.
+Fetch audit history for a chemical component: action type, date, details, ordinal, and processing...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_chem_comp_audit_info(
-    pdb_id: Optional[str] = None,
+    pdb_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Fetch audit history for a chemical component: action type, date, details, ordinal, and processing site.
+    Fetch audit history for a chemical component: action type, date, details, ordinal, and processing...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def get_chem_comp_audit_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_chem_comp_audit_info", "arguments": {"pdb_id": pdb_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

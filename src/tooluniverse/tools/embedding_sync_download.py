@@ -1,21 +1,11 @@
 """
 embedding_sync_download
 
-Download an embedding database from HuggingFace Hub to local storage. Allows accessing databases shared by others or your own backups.
+Download an embedding database from HuggingFace Hub to local storage. Allows accessing databases ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def embedding_sync_download(
@@ -29,7 +19,7 @@ def embedding_sync_download(
     validate: bool = True,
 ) -> Any:
     """
-    Download an embedding database from HuggingFace Hub to local storage. Allows accessing databases shared by others or your own backups.
+    Download an embedding database from HuggingFace Hub to local storage. Allows accessing databases ...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def embedding_sync_download(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "embedding_sync_download",
             "arguments": {

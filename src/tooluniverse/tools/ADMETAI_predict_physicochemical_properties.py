@@ -1,21 +1,11 @@
 """
 ADMETAI_predict_physicochemical_properties
 
-Predicts physicochemical properties (molecular weight, logP, hydrogen bond acceptors/donors, Lipinski, QED, stereo centers, TPSA) for a given list of molecules in SMILES format.
+Predicts physicochemical properties (molecular weight, logP, hydrogen bond acceptors/donors, Lipi...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ADMETAI_predict_physicochemical_properties(
@@ -26,7 +16,7 @@ def ADMETAI_predict_physicochemical_properties(
     validate: bool = True,
 ) -> Any:
     """
-    Predicts physicochemical properties (molecular weight, logP, hydrogen bond acceptors/donors, Lipinski, QED, stereo centers, TPSA) for a given list of molecules in SMILES format.
+    Predicts physicochemical properties (molecular weight, logP, hydrogen bond acceptors/donors, Lipi...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def ADMETAI_predict_physicochemical_properties(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ADMETAI_predict_physicochemical_properties",
             "arguments": {"smiles": smiles},

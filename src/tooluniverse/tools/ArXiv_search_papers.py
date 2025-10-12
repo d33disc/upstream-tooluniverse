@@ -1,21 +1,11 @@
 """
 ArXiv_search_papers
 
-Search arXiv for papers by keyword using the public arXiv API. Returns papers with title, abstract, authors, publication date, category, and URL.
+Search arXiv for papers by keyword using the public arXiv API. Returns papers with title, abstrac...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ArXiv_search_papers(
@@ -29,14 +19,14 @@ def ArXiv_search_papers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search arXiv for papers by keyword using the public arXiv API. Returns papers with title, abstract, authors, publication date, category, and URL.
+    Search arXiv for papers by keyword using the public arXiv API. Returns papers with title, abstrac...
 
     Parameters
     ----------
     query : str
-        Search query for arXiv papers. Use keywords separated by spaces to refine your search.
+        Search query for arXiv papers. Use keywords separated by spaces to refine you...
     limit : int
-        Number of papers to return. This sets the maximum number of papers retrieved from arXiv.
+        Number of papers to return. This sets the maximum number of papers retrieved ...
     sort_by : str
         Sort order for results. Options: 'relevance', 'lastUpdatedDate', 'submittedDate'
     sort_order : str
@@ -52,7 +42,9 @@ def ArXiv_search_papers(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ArXiv_search_papers",
             "arguments": {

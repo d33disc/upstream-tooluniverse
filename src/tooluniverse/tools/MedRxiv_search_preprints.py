@@ -1,21 +1,11 @@
 """
 MedRxiv_search_preprints
 
-Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, year, DOI, and URL.
+Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, yea...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def MedRxiv_search_preprints(
@@ -27,12 +17,12 @@ def MedRxiv_search_preprints(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, year, DOI, and URL.
+    Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, yea...
 
     Parameters
     ----------
     query : str
-        Search query for medRxiv preprints. Use keywords separated by spaces to refine your search.
+        Search query for medRxiv preprints. Use keywords separated by spaces to refin...
     max_results : int
         Maximum number of preprints to return. Default is 10, maximum is 200.
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def MedRxiv_search_preprints(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "MedRxiv_search_preprints",
             "arguments": {"query": query, "max_results": max_results},

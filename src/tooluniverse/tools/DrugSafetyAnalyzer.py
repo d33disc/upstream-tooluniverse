@@ -1,21 +1,11 @@
 """
 DrugSafetyAnalyzer
 
-Comprehensive drug safety analysis combining adverse event data, literature review, and molecular information
+Comprehensive drug safety analysis combining adverse event data, literature review, and molecular...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DrugSafetyAnalyzer(
@@ -28,7 +18,7 @@ def DrugSafetyAnalyzer(
     validate: bool = True,
 ) -> Any:
     """
-    Comprehensive drug safety analysis combining adverse event data, literature review, and molecular information
+    Comprehensive drug safety analysis combining adverse event data, literature review, and molecular...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def DrugSafetyAnalyzer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DrugSafetyAnalyzer",
             "arguments": {

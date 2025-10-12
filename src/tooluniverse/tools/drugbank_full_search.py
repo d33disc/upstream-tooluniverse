@@ -1,25 +1,15 @@
 """
 drugbank_full_search
 
-Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or synonym. Returns identifiers, ATC, main pharmacology text fields, and protein partners. For best results, it is recommended that one uses `drugbank_vocab_search` to obtain DrugBank ID from other keywords first, and use this tool with DrugBank ID.
+Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or synonym. Returns ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_full_search(
-    query: Optional[str] = None,
+    query: str,
     search_fields: Optional[list[Any]] = None,
     case_sensitive: Optional[bool] = None,
     exact_match: Optional[bool] = None,
@@ -30,7 +20,7 @@ def drugbank_full_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or synonym. Returns identifiers, ATC, main pharmacology text fields, and protein partners. For best results, it is recommended that one uses `drugbank_vocab_search` to obtain DrugBank ID from other keywords first, and use this tool with DrugBank ID.
+    Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or synonym. Returns ...
 
     Parameters
     ----------
@@ -55,7 +45,9 @@ def drugbank_full_search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_full_search",
             "arguments": {

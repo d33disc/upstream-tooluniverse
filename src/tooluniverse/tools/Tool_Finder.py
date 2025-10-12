@@ -1,26 +1,16 @@
 """
 Tool_Finder
 
-Retrieve related tools from the toolbox based on the provided description, advanced version with more functionality.
+Retrieve related tools from the toolbox based on the provided description, advanced version with ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Tool_Finder(
-    description: Optional[str] = None,
-    limit: Optional[int] = None,
+    description: str,
+    limit: int,
     picked_tool_names: Optional[list[Any]] = None,
     return_call_result: Optional[bool] = None,
     categories: Optional[list[Any]] = None,
@@ -30,7 +20,7 @@ def Tool_Finder(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve related tools from the toolbox based on the provided description, advanced version with more functionality.
+    Retrieve related tools from the toolbox based on the provided description, advanced version with ...
 
     Parameters
     ----------
@@ -39,9 +29,9 @@ def Tool_Finder(
     limit : int
         The number of tools to retrieve
     picked_tool_names : list[Any]
-        Pre-selected tool names to process. If provided, tool selection will skip these tools.
+        Pre-selected tool names to process. If provided, tool selection will skip the...
     return_call_result : bool
-        Whether to return both prompts and tool names. If false, returns only tool prompts.
+        Whether to return both prompts and tool names. If false, returns only tool pr...
     categories : list[Any]
         Optional list of tool categories to filter by
     stream_callback : Callable, optional
@@ -55,7 +45,9 @@ def Tool_Finder(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Tool_Finder",
             "arguments": {

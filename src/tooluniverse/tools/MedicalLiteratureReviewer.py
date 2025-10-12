@@ -1,21 +1,11 @@
 """
 MedicalLiteratureReviewer
 
-Conducts systematic reviews of medical literature on specific topics. Synthesizes findings from multiple studies and provides evidence-based conclusions with structured analysis and quality assessment.
+Conducts systematic reviews of medical literature on specific topics. Synthesizes findings from m...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def MedicalLiteratureReviewer(
@@ -31,22 +21,22 @@ def MedicalLiteratureReviewer(
     validate: bool = True,
 ) -> Any:
     """
-    Conducts systematic reviews of medical literature on specific topics. Synthesizes findings from multiple studies and provides evidence-based conclusions with structured analysis and quality assessment.
+    Conducts systematic reviews of medical literature on specific topics. Synthesizes findings from m...
 
     Parameters
     ----------
     research_topic : str
-        The specific medical/research topic for literature review (e.g., 'efficacy of drug X in treating condition Y').
+        The specific medical/research topic for literature review (e.g., 'efficacy of...
     literature_content : str
-        The literature content, abstracts, full studies, or research papers to review and synthesize.
+        The literature content, abstracts, full studies, or research papers to review...
     focus_area : str
-        Primary focus area for the review (e.g., 'therapeutic efficacy', 'safety profile', 'diagnostic accuracy', 'biomarker validation').
+        Primary focus area for the review (e.g., 'therapeutic efficacy', 'safety prof...
     study_types : str
-        Types of studies to prioritize in the analysis (e.g., 'randomized controlled trials', 'meta-analyses', 'cohort studies', 'case-control studies').
+        Types of studies to prioritize in the analysis (e.g., 'randomized controlled ...
     quality_level : str
-        Minimum evidence quality level to include (e.g., 'high quality only', 'moderate and above', 'all available evidence').
+        Minimum evidence quality level to include (e.g., 'high quality only', 'modera...
     review_scope : str
-        Scope of the review (e.g., 'comprehensive systematic review', 'rapid review', 'scoping review', 'narrative review').
+        Scope of the review (e.g., 'comprehensive systematic review', 'rapid review',...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -58,7 +48,9 @@ def MedicalLiteratureReviewer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "MedicalLiteratureReviewer",
             "arguments": {

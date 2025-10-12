@@ -1,21 +1,11 @@
 """
 OpenAlex_Guidelines_Search
 
-Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a comprehensive collection of guidelines from various sources worldwide, with citation metrics and institutional affiliations.
+Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a c...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenAlex_Guidelines_Search(
@@ -29,12 +19,12 @@ def OpenAlex_Guidelines_Search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a comprehensive collection of guidelines from various sources worldwide, with citation metrics and institutional affiliations.
+    Search for clinical practice guidelines using OpenAlex scholarly database. Provides access to a c...
 
     Parameters
     ----------
     query : str
-        Medical condition or clinical topic to search for guidelines (e.g., 'diabetes management', 'hypertension treatment', 'cancer screening')
+        Medical condition or clinical topic to search for guidelines (e.g., 'diabetes...
     limit : int
         Maximum number of guidelines to return (default: 10)
     year_from : int
@@ -52,7 +42,9 @@ def OpenAlex_Guidelines_Search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenAlex_Guidelines_Search",
             "arguments": {

@@ -30,7 +30,10 @@
         },
         "output_format": {
           "type": "string",
-          "enum": ["png", "svg"],
+          "enum": [
+            "png",
+            "svg"
+          ],
           "default": "png",
           "description": "Output format"
         },
@@ -49,7 +52,8 @@
           "default": true,
           "description": "Whether to include stereochemistry information"
         }
-      }
+      },
+      "required": []
     },
     "default_width": 400,
     "default_height": 400,
@@ -87,13 +91,27 @@
             "metadata": {
               "type": "object",
               "properties": {
-                "width": {"type": "integer"},
-                "height": {"type": "integer"},
-                "output_format": {"type": "string"},
-                "input_type": {"type": "string"},
-                "show_atom_numbers": {"type": "boolean"},
-                "show_bond_numbers": {"type": "boolean"},
-                "molecular_properties": {"type": "object"}
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "output_format": {
+                  "type": "string"
+                },
+                "input_type": {
+                  "type": "string"
+                },
+                "show_atom_numbers": {
+                  "type": "boolean"
+                },
+                "show_bond_numbers": {
+                  "type": "boolean"
+                },
+                "molecular_properties": {
+                  "type": "object"
+                }
               }
             }
           }

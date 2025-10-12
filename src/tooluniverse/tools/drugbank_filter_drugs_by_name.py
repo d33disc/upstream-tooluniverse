@@ -1,21 +1,11 @@
 """
 drugbank_filter_drugs_by_name
 
-Filter DrugBank records based on conditions applied to drug names. For example, find drugs whose names end with 'cillin' (penicillin antibiotics), contain 'mab', or are exactly 'Insulin'.
+Filter DrugBank records based on conditions applied to drug names. For example, find drugs whose ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_filter_drugs_by_name(
@@ -28,14 +18,14 @@ def drugbank_filter_drugs_by_name(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Filter DrugBank records based on conditions applied to drug names. For example, find drugs whose names end with 'cillin' (penicillin antibiotics), contain 'mab', or are exactly 'Insulin'.
+    Filter DrugBank records based on conditions applied to drug names. For example, find drugs whose ...
 
     Parameters
     ----------
     condition : str
         The condition to apply for filtering.
     value : str
-        The value to use with the condition (e.g., 'Aspirin' for 'starts_with'). Required for 'contains', 'starts_with', 'ends_with', and 'exact' conditions.
+        The value to use with the condition (e.g., 'Aspirin' for 'starts_with'). Requ...
     limit : int
         Maximum number of results to return.
     stream_callback : Callable, optional
@@ -49,7 +39,9 @@ def drugbank_filter_drugs_by_name(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_filter_drugs_by_name",
             "arguments": {"condition": condition, "value": value, "limit": limit},

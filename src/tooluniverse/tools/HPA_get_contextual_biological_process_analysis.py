@@ -1,21 +1,11 @@
 """
 HPA_get_contextual_biological_process_analysis
 
-Analyze a gene's biological processes in the context of a specific tissue or cell line by integrating functional annotation with expression data to determine functional relevance.
+Analyze a gene's biological processes in the context of a specific tissue or cell line by integra...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_contextual_biological_process_analysis(
@@ -27,14 +17,14 @@ def HPA_get_contextual_biological_process_analysis(
     validate: bool = True,
 ) -> Any:
     """
-    Analyze a gene's biological processes in the context of a specific tissue or cell line by integrating functional annotation with expression data to determine functional relevance.
+    Analyze a gene's biological processes in the context of a specific tissue or cell line by integra...
 
     Parameters
     ----------
     gene_name : str
         Gene name or symbol, e.g., 'TP53', 'EGFR', 'BRCA1'.
     context_name : str
-        Name of the tissue or cell line to provide context, e.g., 'brain', 'liver', 'hela', 'mcf7'.
+        Name of the tissue or cell line to provide context, e.g., 'brain', 'liver', '...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def HPA_get_contextual_biological_process_analysis(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_contextual_biological_process_analysis",
             "arguments": {"gene_name": gene_name, "context_name": context_name},

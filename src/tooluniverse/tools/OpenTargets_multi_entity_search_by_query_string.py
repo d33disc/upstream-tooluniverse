@@ -1,25 +1,15 @@
 """
 OpenTargets_multi_entity_search_by_query_string
 
-Perform a multi-entity search based on a query string, filtering by entity names and pagination settings.
+Perform a multi-entity search based on a query string, filtering by entity names and pagination s...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_multi_entity_search_by_query_string(
-    queryString: Optional[str] = None,
+    queryString: str,
     entityNames: Optional[list[Any]] = None,
     page: Optional[dict[str, Any]] = None,
     *,
@@ -28,7 +18,7 @@ def OpenTargets_multi_entity_search_by_query_string(
     validate: bool = True,
 ) -> Any:
     """
-    Perform a multi-entity search based on a query string, filtering by entity names and pagination settings.
+    Perform a multi-entity search based on a query string, filtering by entity names and pagination s...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def OpenTargets_multi_entity_search_by_query_string(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_multi_entity_search_by_query_string",
             "arguments": {

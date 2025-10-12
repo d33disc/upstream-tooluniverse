@@ -1,21 +1,11 @@
 """
 gwas_get_studies_for_trait
 
-Get studies for a specific trait with optional filters for cohort, GxE interactions, and summary statistics.
+Get studies for a specific trait with optional filters for cohort, GxE interactions, and summary ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def gwas_get_studies_for_trait(
@@ -32,7 +22,7 @@ def gwas_get_studies_for_trait(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get studies for a specific trait with optional filters for cohort, GxE interactions, and summary statistics.
+    Get studies for a specific trait with optional filters for cohort, GxE interactions, and summary ...
 
     Parameters
     ----------
@@ -61,7 +51,9 @@ def gwas_get_studies_for_trait(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "gwas_get_studies_for_trait",
             "arguments": {

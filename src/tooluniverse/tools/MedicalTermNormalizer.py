@@ -1,21 +1,11 @@
 """
 MedicalTermNormalizer
 
-Identifies and corrects misspelled drug or disease names, returning a list of plausible standardized terms.
+Identifies and corrects misspelled drug or disease names, returning a list of plausible standardi...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def MedicalTermNormalizer(
@@ -26,12 +16,12 @@ def MedicalTermNormalizer(
     validate: bool = True,
 ) -> Any:
     """
-    Identifies and corrects misspelled drug or disease names, returning a list of plausible standardized terms.
+    Identifies and corrects misspelled drug or disease names, returning a list of plausible standardi...
 
     Parameters
     ----------
     raw_terms : str
-        A comma- or whitespace-separated string containing one misspelled drug or disease name.
+        A comma- or whitespace-separated string containing one misspelled drug or dis...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +33,9 @@ def MedicalTermNormalizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "MedicalTermNormalizer", "arguments": {"raw_terms": raw_terms}},
         stream_callback=stream_callback,
         use_cache=use_cache,

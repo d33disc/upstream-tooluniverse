@@ -1,21 +1,11 @@
 """
 OpenAIRE_search_publications
 
-Search OpenAIRE Explore for research products including publications, datasets, and software. OpenAIRE is the European open science platform that provides access to research outputs from EU-funded projects.
+Search OpenAIRE Explore for research products including publications, datasets, and software. Ope...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenAIRE_search_publications(
@@ -28,16 +18,16 @@ def OpenAIRE_search_publications(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search OpenAIRE Explore for research products including publications, datasets, and software. OpenAIRE is the European open science platform that provides access to research outputs from EU-funded projects.
+    Search OpenAIRE Explore for research products including publications, datasets, and software. Ope...
 
     Parameters
     ----------
     query : str
-        Search query for OpenAIRE research products. Use keywords to search across titles, abstracts, and metadata.
+        Search query for OpenAIRE research products. Use keywords to search across ti...
     max_results : int
         Maximum number of results to return. Default is 10, maximum is 100.
     type : str
-        Type of research product to search: 'publications', 'datasets', or 'software'. Default is 'publications'.
+        Type of research product to search: 'publications', 'datasets', or 'software'...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def OpenAIRE_search_publications(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenAIRE_search_publications",
             "arguments": {"query": query, "max_results": max_results, "type": type},

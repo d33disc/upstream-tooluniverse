@@ -1,32 +1,22 @@
 """
 get_polymer_entity_annotations
 
-Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt accession IDs for a polymer entity.
+Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt accession IDs for...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_polymer_entity_annotations(
-    entity_id: Optional[str] = None,
+    entity_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt accession IDs for a polymer entity.
+    Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt accession IDs for...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def get_polymer_entity_annotations(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_polymer_entity_annotations",
             "arguments": {"entity_id": entity_id},

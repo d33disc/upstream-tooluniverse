@@ -1,21 +1,11 @@
 """
 AdverseEventPredictionQuestionGenerator
 
-Generates a set of personalized adverse‐event prediction questions for a given disease and drug, across multiple patient subgroups.
+Generates a set of personalized adverse‐event prediction questions for a given disease and drug, ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def AdverseEventPredictionQuestionGenerator(
@@ -27,7 +17,7 @@ def AdverseEventPredictionQuestionGenerator(
     validate: bool = True,
 ) -> Any:
     """
-    Generates a set of personalized adverse‐event prediction questions for a given disease and drug, across multiple patient subgroups.
+    Generates a set of personalized adverse‐event prediction questions for a given disease and drug, ...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def AdverseEventPredictionQuestionGenerator(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "AdverseEventPredictionQuestionGenerator",
             "arguments": {"disease_name": disease_name, "drug_name": drug_name},

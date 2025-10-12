@@ -1,21 +1,11 @@
 """
 drugbank_get_drug_name_and_description_by_target_name
 
-Get associated drug names and descriptions for a particular target, enzyme, carrier, or transporter protein.
+Get associated drug names and descriptions for a particular target, enzyme, carrier, or transport...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_get_drug_name_and_description_by_target_name(
@@ -29,7 +19,7 @@ def drugbank_get_drug_name_and_description_by_target_name(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get associated drug names and descriptions for a particular target, enzyme, carrier, or transporter protein.
+    Get associated drug names and descriptions for a particular target, enzyme, carrier, or transport...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def drugbank_get_drug_name_and_description_by_target_name(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_get_drug_name_and_description_by_target_name",
             "arguments": {

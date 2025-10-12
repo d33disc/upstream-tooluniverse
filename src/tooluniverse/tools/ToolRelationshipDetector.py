@@ -1,21 +1,11 @@
 """
 ToolRelationshipDetector
 
-Analyzes a primary tool against a list of other tools to identify meaningful, directional data flow compatibilities for scientific workflows. Returns a list of compatible pairs with direction and rationale.
+Analyzes a primary tool against a list of other tools to identify meaningful, directional data fl...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolRelationshipDetector(
@@ -27,7 +17,7 @@ def ToolRelationshipDetector(
     validate: bool = True,
 ) -> Any:
     """
-    Analyzes a primary tool against a list of other tools to identify meaningful, directional data flow compatibilities for scientific workflows. Returns a list of compatible pairs with direction and rationale.
+    Analyzes a primary tool against a list of other tools to identify meaningful, directional data fl...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def ToolRelationshipDetector(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolRelationshipDetector",
             "arguments": {"tool_a": tool_a, "other_tools": other_tools},

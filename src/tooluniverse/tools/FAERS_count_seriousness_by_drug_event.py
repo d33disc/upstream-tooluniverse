@@ -1,21 +1,11 @@
 """
 FAERS_count_seriousness_by_drug_event
 
-Count the number of adverse event reports classified as serious or non-serious, filtered by drug and patient demographics. In results, term Serious means: 'The adverse event resulted in death, a life threatening condition, hospitalization, disability, congenital anomaly, or other serious condition', term Non-serious means 'The adverse event did not result in any of the above' Data source: FDA Adverse Event Reporting System (FAERS).
+Count the number of adverse event reports classified as serious or non-serious, filtered by drug ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_seriousness_by_drug_event(
@@ -29,7 +19,7 @@ def FAERS_count_seriousness_by_drug_event(
     validate: bool = True,
 ) -> Any:
     """
-    Count the number of adverse event reports classified as serious or non-serious, filtered by drug and patient demographics. In results, term Serious means: 'The adverse event resulted in death, a life threatening condition, hospitalization, disability, congenital anomaly, or other serious condition', term Non-serious means 'The adverse event did not result in any of the above' Data source: FDA Adverse Event Reporting System (FAERS).
+    Count the number of adverse event reports classified as serious or non-serious, filtered by drug ...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def FAERS_count_seriousness_by_drug_event(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_seriousness_by_drug_event",
             "arguments": {

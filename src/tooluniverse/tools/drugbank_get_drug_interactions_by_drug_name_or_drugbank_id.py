@@ -5,17 +5,7 @@ Get drug interactions and contraindications by drug name or DrugBank ID.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
@@ -52,7 +42,9 @@ def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
             "arguments": {

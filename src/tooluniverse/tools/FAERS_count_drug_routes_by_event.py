@@ -1,21 +1,11 @@
 """
 FAERS_count_drug_routes_by_event
 
-Count the most common routes of administration for drugs involved in adverse event reports. Data source: FDA Adverse Event Reporting System (FAERS).
+Count the most common routes of administration for drugs involved in adverse event reports. Data ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_drug_routes_by_event(
@@ -27,7 +17,7 @@ def FAERS_count_drug_routes_by_event(
     validate: bool = True,
 ) -> Any:
     """
-    Count the most common routes of administration for drugs involved in adverse event reports. Data source: FDA Adverse Event Reporting System (FAERS).
+    Count the most common routes of administration for drugs involved in adverse event reports. Data ...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def FAERS_count_drug_routes_by_event(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_drug_routes_by_event",
             "arguments": {"medicinalproduct": medicinalproduct, "serious": serious},

@@ -5,21 +5,11 @@ Retrieve significant adverse events reported for a specific drug chemblId.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_drug_adverse_events_by_chemblId(
-    chemblId: Optional[str] = None,
+    chemblId: str,
     page: Optional[dict[str, Any]] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -46,7 +36,9 @@ def OpenTargets_get_drug_adverse_events_by_chemblId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_drug_adverse_events_by_chemblId",
             "arguments": {"chemblId": chemblId, "page": page},

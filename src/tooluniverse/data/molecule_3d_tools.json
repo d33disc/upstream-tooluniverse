@@ -20,13 +20,30 @@
         },
         "style": {
           "type": "string",
-          "enum": ["stick", "sphere", "cartoon", "line", "spacefill"],
+          "enum": [
+            "stick",
+            "sphere",
+            "cartoon",
+            "line",
+            "spacefill"
+          ],
           "default": "stick",
           "description": "Visualization style"
         },
         "color_scheme": {
           "type": "string",
-          "enum": ["default", "spectrum", "rainbow", "ssPyMOL", "ssJmol", "Jmol", "amino", "shapely", "nucleic", "chain"],
+          "enum": [
+            "default",
+            "spectrum",
+            "rainbow",
+            "ssPyMOL",
+            "ssJmol",
+            "Jmol",
+            "amino",
+            "shapely",
+            "nucleic",
+            "chain"
+          ],
           "default": "default",
           "description": "Color scheme for the molecule"
         },
@@ -60,7 +77,8 @@
           "default": 1,
           "description": "Number of conformers to generate"
         }
-      }
+      },
+      "required": []
     },
     "default_width": 800,
     "default_height": 600,
@@ -94,16 +112,36 @@
             "metadata": {
               "type": "object",
               "properties": {
-                "width": {"type": "integer"},
-                "height": {"type": "integer"},
-                "style": {"type": "string"},
-                "color_scheme": {"type": "string"},
-                "input_type": {"type": "string"},
-                "show_hydrogens": {"type": "boolean"},
-                "show_surface": {"type": "boolean"},
-                "generate_conformers": {"type": "boolean"},
-                "conformer_count": {"type": "integer"},
-                "molecular_properties": {"type": "object"}
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "style": {
+                  "type": "string"
+                },
+                "color_scheme": {
+                  "type": "string"
+                },
+                "input_type": {
+                  "type": "string"
+                },
+                "show_hydrogens": {
+                  "type": "boolean"
+                },
+                "show_surface": {
+                  "type": "boolean"
+                },
+                "generate_conformers": {
+                  "type": "boolean"
+                },
+                "conformer_count": {
+                  "type": "integer"
+                },
+                "molecular_properties": {
+                  "type": "object"
+                }
               }
             }
           }

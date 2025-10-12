@@ -1,21 +1,11 @@
 """
 ToolSpecificationGenerator
 
-Generates complete ToolUniverse-compliant tool specifications based on a description and analysis of similar existing tools. Creates comprehensive tool configurations including parameters, prompts, and metadata.
+Generates complete ToolUniverse-compliant tool specifications based on a description and analysis...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolSpecificationGenerator(
@@ -30,20 +20,20 @@ def ToolSpecificationGenerator(
     validate: bool = True,
 ) -> Any:
     """
-    Generates complete ToolUniverse-compliant tool specifications based on a description and analysis of similar existing tools. Creates comprehensive tool configurations including parameters, prompts, and metadata.
+    Generates complete ToolUniverse-compliant tool specifications based on a description and analysis...
 
     Parameters
     ----------
     tool_description : str
         Brief description of the desired tool functionality and purpose.
     tool_category : str
-        Target category for the tool (e.g., 'biomedical', 'data_analysis', 'text_processing').
+        Target category for the tool (e.g., 'biomedical', 'data_analysis', 'text_proc...
     tool_type : str
         Specific ToolUniverse tool type (e.g., 'AgenticTool', 'RESTTool', 'PythonTool').
     similar_tools : str
-        JSON string containing configurations of similar existing tools for analysis and differentiation.
+        JSON string containing configurations of similar existing tools for analysis ...
     existing_tools_summary : str
-        Summary of existing tools in the ecosystem to avoid duplication and identify gaps.
+        Summary of existing tools in the ecosystem to avoid duplication and identify ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -55,7 +45,9 @@ def ToolSpecificationGenerator(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolSpecificationGenerator",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 ToolDiscover
 
-Generates new ToolUniverse-compliant tools based on short descriptions through an intelligent discovery and refinement process. Automatically determines the optimal tool type and category, discovers similar existing tools, generates initial specifications, and iteratively refines the tool configuration using agentic optimization tools until it meets quality standards.
+Generates new ToolUniverse-compliant tools based on short descriptions through an intelligent dis...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolDiscover(
@@ -29,18 +19,18 @@ def ToolDiscover(
     validate: bool = True,
 ) -> Any:
     """
-    Generates new ToolUniverse-compliant tools based on short descriptions through an intelligent discovery and refinement process. Automatically determines the optimal tool type and category, discovers similar existing tools, generates initial specifications, and iteratively refines the tool configuration using agentic optimization tools until it meets quality standards.
+    Generates new ToolUniverse-compliant tools based on short descriptions through an intelligent dis...
 
     Parameters
     ----------
     tool_description : str
-        Short description of the desired tool functionality and purpose. Tool Discover will automatically analyze this to determine the optimal tool type (PackageTool, RESTTool, XMLTool, or AgenticTool) and appropriate category.
+        Short description of the desired tool functionality and purpose. Tool Discove...
     max_iterations : int
         Maximum number of refinement iterations to perform.
     save_to_file : bool
         Whether to save the generated tool configuration and report to a file.
     output_file : str
-        Optional file path to save the generated tool. If not provided, uses auto-generated filename.
+        Optional file path to save the generated tool. If not provided, uses auto-gen...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -52,7 +42,9 @@ def ToolDiscover(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolDiscover",
             "arguments": {

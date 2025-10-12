@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 651 scientific tools.
+Type-safe Python interface to 654 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -10,6 +10,9 @@ Usage:
 """
 
 # Import exceptions from main package
+
+# Import shared client utilities
+from ._shared_client import get_shared_client, reset_shared_client
 
 # Import all tools
 from .ADMETAI_predict_BBB_penetrance import ADMETAI_predict_BBB_penetrance
@@ -1071,8 +1074,13 @@ from .odphp_topicsearch import odphp_topicsearch
 from .openalex_literature_search import openalex_literature_search
 from .reactome_disease_target_score import reactome_disease_target_score
 from .search_clinical_trials import search_clinical_trials
+from .visualize_molecule_2d import visualize_molecule_2d
+from .visualize_molecule_3d import visualize_molecule_3d
+from .visualize_protein_structure_3d import visualize_protein_structure_3d
 
 __all__ = [
+    "get_shared_client",
+    "reset_shared_client",
     "ADMETAI_predict_BBB_penetrance",
     "ADMETAI_predict_CYP_interactions",
     "ADMETAI_predict_bioavailability",
@@ -1724,4 +1732,7 @@ __all__ = [
     "openalex_literature_search",
     "reactome_disease_target_score",
     "search_clinical_trials",
+    "visualize_molecule_2d",
+    "visualize_molecule_3d",
+    "visualize_protein_structure_3d",
 ]

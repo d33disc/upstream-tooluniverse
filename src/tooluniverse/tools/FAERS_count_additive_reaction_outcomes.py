@@ -1,21 +1,11 @@
 """
 FAERS_count_additive_reaction_outcomes
 
-Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, resolving, fatal) across medicinal products using standardized outcome mappings. Data source: FDA Adverse Event Reporting System (FAERS).
+Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, resolving, fatal) a...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_additive_reaction_outcomes(
@@ -29,7 +19,7 @@ def FAERS_count_additive_reaction_outcomes(
     validate: bool = True,
 ) -> Any:
     """
-    Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, resolving, fatal) across medicinal products using standardized outcome mappings. Data source: FDA Adverse Event Reporting System (FAERS).
+    Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, resolving, fatal) a...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def FAERS_count_additive_reaction_outcomes(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_additive_reaction_outcomes",
             "arguments": {

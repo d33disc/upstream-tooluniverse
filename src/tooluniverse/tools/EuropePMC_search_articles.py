@@ -1,21 +1,11 @@
 """
 EuropePMC_search_articles
 
-Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web service using provided keywords and returns articles with details such as title, abstract, journal, publication year, and a URL to the full article.
+Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def EuropePMC_search_articles(
@@ -27,14 +17,14 @@ def EuropePMC_search_articles(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web service using provided keywords and returns articles with details such as title, abstract, journal, publication year, and a URL to the full article.
+    Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
 
     Parameters
     ----------
     query : str
-        Search query for Europe PMC. Use keywords separated by spaces to refine your search.
+        Search query for Europe PMC. Use keywords separated by spaces to refine your ...
     limit : int
-        Number of articles to return. This sets the maximum number of articles retrieved from Europe PMC.
+        Number of articles to return. This sets the maximum number of articles retrie...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def EuropePMC_search_articles(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "EuropePMC_search_articles",
             "arguments": {"query": query, "limit": limit},

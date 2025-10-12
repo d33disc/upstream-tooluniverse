@@ -1,21 +1,11 @@
 """
 embedding_sync_upload
 
-Upload a local embedding database to HuggingFace Hub for sharing and collaboration. Creates a dataset repository with the database files and metadata.
+Upload a local embedding database to HuggingFace Hub for sharing and collaboration. Creates a dat...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def embedding_sync_upload(
@@ -31,7 +21,7 @@ def embedding_sync_upload(
     validate: bool = True,
 ) -> Any:
     """
-    Upload a local embedding database to HuggingFace Hub for sharing and collaboration. Creates a dataset repository with the database files and metadata.
+    Upload a local embedding database to HuggingFace Hub for sharing and collaboration. Creates a dat...
 
     Parameters
     ----------
@@ -58,7 +48,9 @@ def embedding_sync_upload(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "embedding_sync_upload",
             "arguments": {

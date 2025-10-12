@@ -5,21 +5,11 @@ Retrieve the scientific name of the source organism for a given PDB structure.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_source_organism_by_pdb_id(
-    pdb_id: Optional[str] = None,
+    pdb_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -43,7 +33,9 @@ def get_source_organism_by_pdb_id(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_source_organism_by_pdb_id", "arguments": {"pdb_id": pdb_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

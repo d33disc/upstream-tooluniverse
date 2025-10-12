@@ -1,21 +1,11 @@
 """
 TRIP_Database_Guidelines_Search
 
-Search TRIP Database (Turning Research into Practice) for evidence-based clinical guidelines. TRIP is a specialized clinical search engine that focuses on high-quality evidence-based content, particularly clinical guidelines from reputable sources worldwide.
+Search TRIP Database (Turning Research into Practice) for evidence-based clinical guidelines. TRI...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def TRIP_Database_Guidelines_Search(
@@ -28,16 +18,16 @@ def TRIP_Database_Guidelines_Search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search TRIP Database (Turning Research into Practice) for evidence-based clinical guidelines. TRIP is a specialized clinical search engine that focuses on high-quality evidence-based content, particularly clinical guidelines from reputable sources worldwide.
+    Search TRIP Database (Turning Research into Practice) for evidence-based clinical guidelines. TRI...
 
     Parameters
     ----------
     query : str
-        Medical condition, treatment, or clinical question (e.g., 'diabetes management', 'stroke prevention', 'antibiotic therapy')
+        Medical condition, treatment, or clinical question (e.g., 'diabetes managemen...
     limit : int
         Maximum number of guidelines to return (default: 10)
     search_type : str
-        Type of content to search for (default: 'guideline'). Options include 'guideline', 'systematic-review', 'evidence-based-synopses'
+        Type of content to search for (default: 'guideline'). Options include 'guidel...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def TRIP_Database_Guidelines_Search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "TRIP_Database_Guidelines_Search",
             "arguments": {"query": query, "limit": limit, "search_type": search_type},

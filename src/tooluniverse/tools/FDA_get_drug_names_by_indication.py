@@ -5,21 +5,11 @@ Retrieve a list of drug names based on a specific indication or usage.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_indication(
-    indication: Optional[str] = None,
+    indication: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -49,7 +39,9 @@ def FDA_get_drug_names_by_indication(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_indication",
             "arguments": {"indication": indication, "limit": limit, "skip": skip},

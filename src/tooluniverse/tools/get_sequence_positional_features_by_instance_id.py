@@ -5,21 +5,11 @@ Retrieve sequence positional features (e.g., binding sites, motifs) for a polyme
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_sequence_positional_features_by_instance_id(
-    instance_id: Optional[str] = None,
+    instance_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -43,7 +33,9 @@ def get_sequence_positional_features_by_instance_id(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_sequence_positional_features_by_instance_id",
             "arguments": {"instance_id": instance_id},

@@ -1,21 +1,11 @@
 """
 ToolMetadataGenerator
 
-Generates a JSON structure with the metadata of a tool in ToolUniverse, given the JSON configuration of the tool.
+Generates a JSON structure with the metadata of a tool in ToolUniverse, given the JSON configurat...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolMetadataGenerator(
@@ -27,14 +17,14 @@ def ToolMetadataGenerator(
     validate: bool = True,
 ) -> Any:
     """
-    Generates a JSON structure with the metadata of a tool in ToolUniverse, given the JSON configuration of the tool.
+    Generates a JSON structure with the metadata of a tool in ToolUniverse, given the JSON configurat...
 
     Parameters
     ----------
     tool_config : str
         JSON string of the tool configuration to extract metadata from
     tool_type_mappings : dict[str, Any]
-        A mapping from a simplified toolType to a list of tool_config.type that fall under the toolType (e.g., {'Databases': ['XMLTool']})
+        A mapping from a simplified toolType to a list of tool_config.type that fall ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def ToolMetadataGenerator(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolMetadataGenerator",
             "arguments": {

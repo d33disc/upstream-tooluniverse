@@ -1,21 +1,11 @@
 """
 call_agentic_human
 
-Produces a concise, practical answer that emulates how a well-informed human would respond to the question.
+Produces a concise, practical answer that emulates how a well-informed human would respond to the...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def call_agentic_human(
@@ -26,7 +16,7 @@ def call_agentic_human(
     validate: bool = True,
 ) -> Any:
     """
-    Produces a concise, practical answer that emulates how a well-informed human would respond to the question.
+    Produces a concise, practical answer that emulates how a well-informed human would respond to the...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def call_agentic_human(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "call_agentic_human", "arguments": {"question": question}},
         stream_callback=stream_callback,
         use_cache=use_cache,

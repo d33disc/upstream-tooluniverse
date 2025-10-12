@@ -1,32 +1,22 @@
 """
 get_target_cofactor_info
 
-Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of action, literature references, and resource metadata.
+Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of a...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_target_cofactor_info(
-    pdb_id: Optional[str] = None,
+    pdb_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of action, literature references, and resource metadata.
+    Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of a...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def get_target_cofactor_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_target_cofactor_info", "arguments": {"pdb_id": pdb_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

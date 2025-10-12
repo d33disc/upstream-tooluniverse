@@ -1,21 +1,11 @@
 """
 Fatcat_search_scholar
 
-Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underlying database powering Internet Archive Scholar, providing access to millions of research papers and academic publications.
+Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underlying database pow...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Fatcat_search_scholar(
@@ -27,12 +17,12 @@ def Fatcat_search_scholar(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underlying database powering Internet Archive Scholar, providing access to millions of research papers and academic publications.
+    Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underlying database pow...
 
     Parameters
     ----------
     query : str
-        Search query for Fatcat releases. Use keywords to search across titles, abstracts, and metadata of research papers.
+        Search query for Fatcat releases. Use keywords to search across titles, abstr...
     max_results : int
         Maximum number of results to return. Default is 10, maximum is 100.
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def Fatcat_search_scholar(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Fatcat_search_scholar",
             "arguments": {"query": query, "max_results": max_results},

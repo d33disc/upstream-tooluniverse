@@ -1,21 +1,11 @@
 """
 PubTator3_LiteratureSearch
 
-Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_BRAF”), or an entity-to-entity relation expression (e.g. “relations:treat|@CHEMICAL_Doxorubicin|@DISEASE_Neoplasms”).
+Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_BRAF”), or an entity...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PubTator3_LiteratureSearch(
@@ -28,12 +18,12 @@ def PubTator3_LiteratureSearch(
     validate: bool = True,
 ) -> Any:
     """
-    Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_BRAF”), or an entity-to-entity relation expression (e.g. “relations:treat|@CHEMICAL_Doxorubicin|@DISEASE_Neoplasms”).
+    Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_BRAF”), or an entity...
 
     Parameters
     ----------
     query : str
-        What you want to search for. This can be plain keywords, a single PubTator ID, or the special relation syntax shown above.
+        What you want to search for. This can be plain keywords, a single PubTator ID...
     page : int
         Zero-based results page (optional; default = 0).
     page_size : int
@@ -49,7 +39,9 @@ def PubTator3_LiteratureSearch(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PubTator3_LiteratureSearch",
             "arguments": {"query": query, "page": page, "page_size": page_size},

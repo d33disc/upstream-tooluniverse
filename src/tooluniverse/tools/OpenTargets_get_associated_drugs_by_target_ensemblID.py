@@ -1,26 +1,16 @@
 """
 OpenTargets_get_associated_drugs_by_target_ensemblID
 
-Get known drugs and information (e.g. id, name, MoA) associated with a specific target ensemblID, including clinical trial phase and mechanism of action of the drugs.
+Get known drugs and information (e.g. id, name, MoA) associated with a specific target ensemblID,...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_associated_drugs_by_target_ensemblID(
-    ensemblId: Optional[str] = None,
-    size: Optional[int] = None,
+    ensemblId: str,
+    size: int,
     cursor: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -28,7 +18,7 @@ def OpenTargets_get_associated_drugs_by_target_ensemblID(
     validate: bool = True,
 ) -> Any:
     """
-    Get known drugs and information (e.g. id, name, MoA) associated with a specific target ensemblID, including clinical trial phase and mechanism of action of the drugs.
+    Get known drugs and information (e.g. id, name, MoA) associated with a specific target ensemblID,...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def OpenTargets_get_associated_drugs_by_target_ensemblID(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_associated_drugs_by_target_ensemblID",
             "arguments": {"ensemblId": ensemblId, "size": size, "cursor": cursor},

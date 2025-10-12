@@ -5,17 +5,7 @@ Finds all genes/proteins associated with a specific Gene Ontology term using the
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def GO_get_genes_for_term(
@@ -35,7 +25,7 @@ def GO_get_genes_for_term(
     id : str
         The standard GO term ID, e.g., 'GO:0006915'.
     taxon : str
-        Optional species filter using a NCBI taxon ID. For example, Human is 'NCBITaxon:9606', and Mouse is 'NCBITaxon:10090'.
+        Optional species filter using a NCBI taxon ID. For example, Human is 'NCBITax...
     rows : int
         The number of genes to return. Default is 100.
     stream_callback : Callable, optional
@@ -49,7 +39,9 @@ def GO_get_genes_for_term(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "GO_get_genes_for_term",
             "arguments": {"id": id, "taxon": taxon, "rows": rows},

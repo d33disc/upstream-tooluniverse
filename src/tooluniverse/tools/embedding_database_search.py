@@ -1,21 +1,11 @@
 """
 embedding_database_search
 
-Search for semantically similar documents in an embedding database. Uses OpenAI embeddings to convert query text to vectors and performs similarity search using FAISS with optional metadata filtering.
+Search for semantically similar documents in an embedding database. Uses OpenAI embeddings to con...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def embedding_database_search(
@@ -30,7 +20,7 @@ def embedding_database_search(
     validate: bool = True,
 ) -> Any:
     """
-    Search for semantically similar documents in an embedding database. Uses OpenAI embeddings to convert query text to vectors and performs similarity search using FAISS with optional metadata filtering.
+    Search for semantically similar documents in an embedding database. Uses OpenAI embeddings to con...
 
     Parameters
     ----------
@@ -55,10 +45,10 @@ def embedding_database_search(
     -------
     Any
     """
+    # Handle mutable defaults to avoid B006 linting error
     if filters is None:
         filters = {}
-
-    return _get_client().run_one_function(
+    return get_shared_client().run_one_function(
         {
             "name": "embedding_database_search",
             "arguments": {

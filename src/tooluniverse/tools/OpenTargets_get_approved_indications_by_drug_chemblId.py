@@ -5,21 +5,11 @@ Retrieve detailed information about multiple drugs using a list of ChEMBL IDs.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_approved_indications_by_drug_chemblId(
-    chemblId: Optional[str] = None,
+    chemblId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -43,7 +33,9 @@ def OpenTargets_get_approved_indications_by_drug_chemblId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_approved_indications_by_drug_chemblId",
             "arguments": {"chemblId": chemblId},

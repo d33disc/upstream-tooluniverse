@@ -1,21 +1,11 @@
 """
 ToolOptimizer
 
-Optimizes tool configurations based on quality feedback. Improves tool specifications and implementations to address identified issues.
+Optimizes tool configurations based on quality feedback. Improves tool specifications and impleme...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolOptimizer(
@@ -28,7 +18,7 @@ def ToolOptimizer(
     validate: bool = True,
 ) -> Any:
     """
-    Optimizes tool configurations based on quality feedback. Improves tool specifications and implementations to address identified issues.
+    Optimizes tool configurations based on quality feedback. Improves tool specifications and impleme...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def ToolOptimizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolOptimizer",
             "arguments": {

@@ -5,21 +5,11 @@ Retrieves the references (if any) for the clinical trials, using their NCT IDs.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_clinical_trial_references(
-    nct_ids: Optional[list[Any]] = None,
+    nct_ids: list[Any],
     references: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -46,7 +36,9 @@ def get_clinical_trial_references(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_clinical_trial_references",
             "arguments": {"nct_ids": nct_ids, "references": references},

@@ -1,25 +1,15 @@
 """
 drugbank_vocab_search
 
-Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other fields using text-based queries. Returns detailed drug information including DrugBank ID, common name, CAS number, UNII, and synonyms.
+Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other fields using tex...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_vocab_search(
-    query: Optional[str] = None,
+    query: str,
     search_fields: Optional[list[Any]] = None,
     case_sensitive: Optional[bool] = None,
     exact_match: Optional[bool] = None,
@@ -30,14 +20,14 @@ def drugbank_vocab_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other fields using text-based queries. Returns detailed drug information including DrugBank ID, common name, CAS number, UNII, and synonyms.
+    Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other fields using tex...
 
     Parameters
     ----------
     query : str
-        Search query string. Can be drug name, synonym, DrugBank ID, or any text to search for.
+        Search query string. Can be drug name, synonym, DrugBank ID, or any text to s...
     search_fields : list[Any]
-        Fields to search in. Available fields: 'DrugBank ID', 'Accession Numbers', 'Common name', 'CAS', 'UNII', 'Synonyms', 'Standard InChI Key'.
+        Fields to search in. Available fields: 'DrugBank ID', 'Accession Numbers', 'C...
     case_sensitive : bool
         Whether the search should be case sensitive.
     exact_match : bool
@@ -55,7 +45,9 @@ def drugbank_vocab_search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_vocab_search",
             "arguments": {

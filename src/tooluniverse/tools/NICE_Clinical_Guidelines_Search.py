@@ -1,21 +1,11 @@
 """
 NICE_Clinical_Guidelines_Search
 
-Search NICE (National Institute for Health and Care Excellence) clinical guidelines and evidence-based recommendations. Provides access to official NICE guidelines covering diagnosis, treatment, and care pathways for various medical conditions.
+Search NICE (National Institute for Health and Care Excellence) clinical guidelines and evidence-...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def NICE_Clinical_Guidelines_Search(
@@ -27,12 +17,12 @@ def NICE_Clinical_Guidelines_Search(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search NICE (National Institute for Health and Care Excellence) clinical guidelines and evidence-based recommendations. Provides access to official NICE guidelines covering diagnosis, treatment, and care pathways for various medical conditions.
+    Search NICE (National Institute for Health and Care Excellence) clinical guidelines and evidence-...
 
     Parameters
     ----------
     query : str
-        Medical condition, treatment, or clinical topic to search for in NICE guidelines (e.g., 'diabetes', 'hypertension', 'cancer screening')
+        Medical condition, treatment, or clinical topic to search for in NICE guideli...
     limit : int
         Maximum number of clinical guidelines to return (default: 10)
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def NICE_Clinical_Guidelines_Search(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "NICE_Clinical_Guidelines_Search",
             "arguments": {"query": query, "limit": limit},

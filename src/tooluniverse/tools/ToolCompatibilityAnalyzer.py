@@ -1,21 +1,11 @@
 """
 ToolCompatibilityAnalyzer
 
-Analyzes two tool specifications to determine if one tool's output can be used as input for another tool. Returns compatibility information and suggested parameter mappings.
+Analyzes two tool specifications to determine if one tool's output can be used as input for anoth...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolCompatibilityAnalyzer(
@@ -28,16 +18,16 @@ def ToolCompatibilityAnalyzer(
     validate: bool = True,
 ) -> Any:
     """
-    Analyzes two tool specifications to determine if one tool's output can be used as input for another tool. Returns compatibility information and suggested parameter mappings.
+    Analyzes two tool specifications to determine if one tool's output can be used as input for anoth...
 
     Parameters
     ----------
     source_tool : str
-        The source tool specification (JSON string with name, description, parameter schema, and example outputs)
+        The source tool specification (JSON string with name, description, parameter ...
     target_tool : str
-        The target tool specification (JSON string with name, description, parameter schema)
+        The target tool specification (JSON string with name, description, parameter ...
     analysis_depth : str
-        Level of analysis depth - quick for basic compatibility, detailed for parameter mapping, comprehensive for semantic analysis
+        Level of analysis depth - quick for basic compatibility, detailed for paramet...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def ToolCompatibilityAnalyzer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolCompatibilityAnalyzer",
             "arguments": {

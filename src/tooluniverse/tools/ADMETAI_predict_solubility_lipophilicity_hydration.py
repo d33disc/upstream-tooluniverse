@@ -1,21 +1,11 @@
 """
 ADMETAI_predict_solubility_lipophilicity_hydration
 
-Predicts solubility, lipophilicity, and hydration endpoints (Solubility_AqSolDB, Lipophilicity_AstraZeneca, HydrationFreeEnergy_FreeSolv) for a given list of molecules in SMILES format.
+Predicts solubility, lipophilicity, and hydration endpoints (Solubility_AqSolDB, Lipophilicity_As...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ADMETAI_predict_solubility_lipophilicity_hydration(
@@ -26,7 +16,7 @@ def ADMETAI_predict_solubility_lipophilicity_hydration(
     validate: bool = True,
 ) -> Any:
     """
-    Predicts solubility, lipophilicity, and hydration endpoints (Solubility_AqSolDB, Lipophilicity_AstraZeneca, HydrationFreeEnergy_FreeSolv) for a given list of molecules in SMILES format.
+    Predicts solubility, lipophilicity, and hydration endpoints (Solubility_AqSolDB, Lipophilicity_As...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def ADMETAI_predict_solubility_lipophilicity_hydration(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ADMETAI_predict_solubility_lipophilicity_hydration",
             "arguments": {"smiles": smiles},

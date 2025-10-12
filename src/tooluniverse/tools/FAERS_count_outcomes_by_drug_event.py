@@ -1,21 +1,11 @@
 """
 FAERS_count_outcomes_by_drug_event
 
-Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved) filtered by drug, seriousness, and demographics. Data source: FDA Adverse Event Reporting System (FAERS).
+Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved) filtered by dru...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FAERS_count_outcomes_by_drug_event(
@@ -29,7 +19,7 @@ def FAERS_count_outcomes_by_drug_event(
     validate: bool = True,
 ) -> Any:
     """
-    Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved) filtered by drug, seriousness, and demographics. Data source: FDA Adverse Event Reporting System (FAERS).
+    Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved) filtered by dru...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def FAERS_count_outcomes_by_drug_event(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_outcomes_by_drug_event",
             "arguments": {

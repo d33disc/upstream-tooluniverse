@@ -1,25 +1,15 @@
 """
 FDA_get_manufacturer_name_NDC_number_by_drug_name
 
-Retrieve detailed information about a drug's active ingredient, FDA application number, manufacturer name, National Drug Code (NDC) number, and route of administration; all based on the drug name.
+Retrieve detailed information about a drug's active ingredient, FDA application number, manufactu...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_manufacturer_name_NDC_number_by_drug_name(
-    drug_name: Optional[str] = None,
+    drug_name: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -28,7 +18,7 @@ def FDA_get_manufacturer_name_NDC_number_by_drug_name(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve detailed information about a drug's active ingredient, FDA application number, manufacturer name, National Drug Code (NDC) number, and route of administration; all based on the drug name.
+    Retrieve detailed information about a drug's active ingredient, FDA application number, manufactu...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def FDA_get_manufacturer_name_NDC_number_by_drug_name(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_manufacturer_name_NDC_number_by_drug_name",
             "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},

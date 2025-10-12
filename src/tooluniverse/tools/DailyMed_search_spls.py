@@ -1,21 +1,11 @@
 """
 DailyMed_search_spls
 
-Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and return metadata + data array.
+Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and return metadata ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DailyMed_search_spls(
@@ -33,7 +23,7 @@ def DailyMed_search_spls(
     validate: bool = True,
 ) -> Any:
     """
-    Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and return metadata + data array.
+    Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and return metadata ...
 
     Parameters
     ----------
@@ -64,7 +54,9 @@ def DailyMed_search_spls(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DailyMed_search_spls",
             "arguments": {

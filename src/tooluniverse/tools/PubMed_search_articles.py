@@ -1,21 +1,11 @@
 """
 PubMed_search_articles
 
-Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles with title, journal, year, DOI, and PubMed URL.
+Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PubMed_search_articles(
@@ -28,16 +18,16 @@ def PubMed_search_articles(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles with title, journal, year, DOI, and PubMed URL.
+    Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
 
     Parameters
     ----------
     query : str
-        Search query for PubMed articles. Use keywords separated by spaces to refine your search.
+        Search query for PubMed articles. Use keywords separated by spaces to refine ...
     limit : int
-        Number of articles to return. This sets the maximum number of articles retrieved from PubMed.
+        Number of articles to return. This sets the maximum number of articles retrie...
     api_key : str
-        Optional NCBI API key for higher rate limits. Get your free key at https://www.ncbi.nlm.nih.gov/account/
+        Optional NCBI API key for higher rate limits. Get your free key at https://ww...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def PubMed_search_articles(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PubMed_search_articles",
             "arguments": {"query": query, "limit": limit, "api_key": api_key},

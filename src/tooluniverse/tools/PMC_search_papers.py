@@ -1,21 +1,11 @@
 """
 PMC_search_papers
 
-Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine.
+Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-t...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PMC_search_papers(
@@ -30,20 +20,20 @@ def PMC_search_papers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine.
+    Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-t...
 
     Parameters
     ----------
     query : str
-        Search query for PMC papers. Use keywords separated by spaces to refine your search.
+        Search query for PMC papers. Use keywords separated by spaces to refine your ...
     limit : int
-        Maximum number of papers to return. This sets the maximum number of papers retrieved from PMC.
+        Maximum number of papers to return. This sets the maximum number of papers re...
     date_from : str
-        Start date for publication date filter (YYYY/MM/DD format). Optional parameter to limit search to papers published from this date onwards.
+        Start date for publication date filter (YYYY/MM/DD format). Optional paramete...
     date_to : str
-        End date for publication date filter (YYYY/MM/DD format). Optional parameter to limit search to papers published up to this date.
+        End date for publication date filter (YYYY/MM/DD format). Optional parameter ...
     article_type : str
-        Article type filter (e.g., 'research-article', 'review', 'case-report'). Optional parameter to limit search to specific article types.
+        Article type filter (e.g., 'research-article', 'review', 'case-report'). Opti...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -55,7 +45,9 @@ def PMC_search_papers(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PMC_search_papers",
             "arguments": {

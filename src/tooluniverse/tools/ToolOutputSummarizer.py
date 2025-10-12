@@ -1,21 +1,11 @@
 """
 ToolOutputSummarizer
 
-AI-powered tool for summarizing long tool outputs, focusing on key information relevant to the original query
+AI-powered tool for summarizing long tool outputs, focusing on key information relevant to the or...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolOutputSummarizer(
@@ -30,7 +20,7 @@ def ToolOutputSummarizer(
     validate: bool = True,
 ) -> Any:
     """
-    AI-powered tool for summarizing long tool outputs, focusing on key information relevant to the original query
+    AI-powered tool for summarizing long tool outputs, focusing on key information relevant to the or...
 
     Parameters
     ----------
@@ -55,7 +45,9 @@ def ToolOutputSummarizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolOutputSummarizer",
             "arguments": {

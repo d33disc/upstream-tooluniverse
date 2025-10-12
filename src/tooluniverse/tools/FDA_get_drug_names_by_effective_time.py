@@ -5,21 +5,11 @@ Retrieve drug names based on the effective time of the labeling document.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_effective_time(
-    effective_time: Optional[str] = None,
+    effective_time: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -34,7 +24,7 @@ def FDA_get_drug_names_by_effective_time(
     Parameters
     ----------
     effective_time : str
-        Date reference to the particular version of the labeling document in YYYYmmdd format.
+        Date reference to the particular version of the labeling document in YYYYmmdd...
     indication : str
         The indication or usage of the drug.
     limit : int
@@ -52,7 +42,9 @@ def FDA_get_drug_names_by_effective_time(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_effective_time",
             "arguments": {

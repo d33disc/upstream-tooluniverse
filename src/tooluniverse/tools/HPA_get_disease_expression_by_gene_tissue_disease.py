@@ -1,21 +1,11 @@
 """
 HPA_get_disease_expression_by_gene_tissue_disease
 
-Compare the expression level of a gene in specific disease state versus healthy state using gene name, tissue type, and disease name.
+Compare the expression level of a gene in specific disease state versus healthy state using gene ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_disease_expression_by_gene_tissue_disease(
@@ -28,7 +18,7 @@ def HPA_get_disease_expression_by_gene_tissue_disease(
     validate: bool = True,
 ) -> Any:
     """
-    Compare the expression level of a gene in specific disease state versus healthy state using gene name, tissue type, and disease name.
+    Compare the expression level of a gene in specific disease state versus healthy state using gene ...
 
     Parameters
     ----------
@@ -37,7 +27,7 @@ def HPA_get_disease_expression_by_gene_tissue_disease(
     tissue_type : str
         Tissue type, e.g., 'brain', 'breast', 'colon', 'lung', etc., optional parameter.
     disease_name : str
-        Disease name, supported diseases include: brain_cancer, breast_cancer, colon_cancer, lung_cancer, liver_cancer, prostate_cancer, kidney_cancer, pancreatic_cancer, stomach_cancer, ovarian_cancer.
+        Disease name, supported diseases include: brain_cancer, breast_cancer, colon_...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def HPA_get_disease_expression_by_gene_tissue_disease(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_disease_expression_by_gene_tissue_disease",
             "arguments": {

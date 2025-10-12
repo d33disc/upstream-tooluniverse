@@ -1,21 +1,11 @@
 """
 DescriptionAnalyzer
 
-Analyzes a tool's original description and the results of multiple test cases, then suggests an improved description that is more accurate, comprehensive, and user-friendly. Optionally provides a rationale for the changes.
+Analyzes a tool's original description and the results of multiple test cases, then suggests an i...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DescriptionAnalyzer(
@@ -27,7 +17,7 @@ def DescriptionAnalyzer(
     validate: bool = True,
 ) -> Any:
     """
-    Analyzes a tool's original description and the results of multiple test cases, then suggests an improved description that is more accurate, comprehensive, and user-friendly. Optionally provides a rationale for the changes.
+    Analyzes a tool's original description and the results of multiple test cases, then suggests an i...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def DescriptionAnalyzer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DescriptionAnalyzer",
             "arguments": {

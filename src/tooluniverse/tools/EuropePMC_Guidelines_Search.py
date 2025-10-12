@@ -1,21 +1,11 @@
 """
 EuropePMC_Guidelines_Search
 
-Search Europe PMC for clinical guidelines and evidence-based recommendations. Europe PMC provides free access to a comprehensive archive of life sciences literature, including clinical practice guidelines from international sources.
+Search Europe PMC for clinical guidelines and evidence-based recommendations. Europe PMC provides...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def EuropePMC_Guidelines_Search(
@@ -27,12 +17,12 @@ def EuropePMC_Guidelines_Search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search Europe PMC for clinical guidelines and evidence-based recommendations. Europe PMC provides free access to a comprehensive archive of life sciences literature, including clinical practice guidelines from international sources.
+    Search Europe PMC for clinical guidelines and evidence-based recommendations. Europe PMC provides...
 
     Parameters
     ----------
     query : str
-        Medical condition, treatment, or clinical topic to search for (e.g., 'diabetes', 'cardiovascular disease', 'mental health')
+        Medical condition, treatment, or clinical topic to search for (e.g., 'diabete...
     limit : int
         Maximum number of guidelines to return (default: 10)
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def EuropePMC_Guidelines_Search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "EuropePMC_Guidelines_Search",
             "arguments": {"query": query, "limit": limit},

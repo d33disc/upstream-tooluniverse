@@ -1,21 +1,11 @@
 """
 HPA_get_subcellular_location
 
-Get annotated subcellular locations for a protein using optimized columns parameter. Retrieves both main and additional subcellular locations efficiently.
+Get annotated subcellular locations for a protein using optimized columns parameter. Retrieves bo...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_subcellular_location(
@@ -26,7 +16,7 @@ def HPA_get_subcellular_location(
     validate: bool = True,
 ) -> Any:
     """
-    Get annotated subcellular locations for a protein using optimized columns parameter. Retrieves both main and additional subcellular locations efficiently.
+    Get annotated subcellular locations for a protein using optimized columns parameter. Retrieves bo...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def HPA_get_subcellular_location(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "HPA_get_subcellular_location", "arguments": {"gene_name": gene_name}},
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -1,21 +1,11 @@
 """
 AdverseEventPredictionQuestionGeneratorWithContext
 
-Generates a set of personalized adverse‐event prediction questions for a given disease and drug, incorporating additional context information such as patient medical history, clinical findings, or research data.
+Generates a set of personalized adverse‐event prediction questions for a given disease and drug, ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def AdverseEventPredictionQuestionGeneratorWithContext(
@@ -28,7 +18,7 @@ def AdverseEventPredictionQuestionGeneratorWithContext(
     validate: bool = True,
 ) -> Any:
     """
-    Generates a set of personalized adverse‐event prediction questions for a given disease and drug, incorporating additional context information such as patient medical history, clinical findings, or research data.
+    Generates a set of personalized adverse‐event prediction questions for a given disease and drug, ...
 
     Parameters
     ----------
@@ -37,7 +27,7 @@ def AdverseEventPredictionQuestionGeneratorWithContext(
     drug_name : str
         The name of the drug
     context_information : str
-        Additional context information such as patient medical history, clinical findings, research data, or other relevant background information that should inform the adverse event prediction questions
+        Additional context information such as patient medical history, clinical find...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def AdverseEventPredictionQuestionGeneratorWithContext(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "AdverseEventPredictionQuestionGeneratorWithContext",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 LiteratureSearchTool
 
-Comprehensive literature search and summary tool that searches multiple databases (EuropePMC, OpenAlex, PubTator) and generates AI-powered summaries of research findings
+Comprehensive literature search and summary tool that searches multiple databases (EuropePMC, Ope...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def LiteratureSearchTool(
@@ -26,7 +16,7 @@ def LiteratureSearchTool(
     validate: bool = True,
 ) -> Any:
     """
-    Comprehensive literature search and summary tool that searches multiple databases (EuropePMC, OpenAlex, PubTator) and generates AI-powered summaries of research findings
+    Comprehensive literature search and summary tool that searches multiple databases (EuropePMC, Ope...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def LiteratureSearchTool(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "LiteratureSearchTool",
             "arguments": {"research_topic": research_topic},

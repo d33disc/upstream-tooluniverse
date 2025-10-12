@@ -1,21 +1,11 @@
 """
 Unpaywall_check_oa_status
 
-Query Unpaywall by DOI to check open-access status and OA locations. Requires a contact email for API access.
+Query Unpaywall by DOI to check open-access status and OA locations. Requires a contact email for...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Unpaywall_check_oa_status(
@@ -27,7 +17,7 @@ def Unpaywall_check_oa_status(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Query Unpaywall by DOI to check open-access status and OA locations. Requires a contact email for API access.
+    Query Unpaywall by DOI to check open-access status and OA locations. Requires a contact email for...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def Unpaywall_check_oa_status(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Unpaywall_check_oa_status",
             "arguments": {"doi": doi, "email": email},

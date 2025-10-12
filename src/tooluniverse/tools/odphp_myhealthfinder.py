@@ -1,21 +1,11 @@
 """
 odphp_myhealthfinder
 
-This tool provides personalized preventive-care recommendations and it is helpful for different ages, sexes, pregnancy status, gives age/sex/pregnancy. It retrieves metadata, plain-language sections, and dataset links to the full article (AccessibleVersion links). If the user wants the full text of a recommendation, the `odphp_outlink_fetch` tool is helpful.
+This tool provides personalized preventive-care recommendations and it is helpful for different a...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def odphp_myhealthfinder(
@@ -30,7 +20,7 @@ def odphp_myhealthfinder(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    This tool provides personalized preventive-care recommendations and it is helpful for different ages, sexes, pregnancy status, gives age/sex/pregnancy. It retrieves metadata, plain-language sections, and dataset links to the full article (AccessibleVersion links). If the user wants the full text of a recommendation, the `odphp_outlink_fetch` tool is helpful.
+    This tool provides personalized preventive-care recommendations and it is helpful for different a...
 
     Parameters
     ----------
@@ -55,7 +45,9 @@ def odphp_myhealthfinder(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "odphp_myhealthfinder",
             "arguments": {

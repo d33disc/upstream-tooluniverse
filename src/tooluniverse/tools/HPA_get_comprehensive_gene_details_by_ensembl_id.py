@@ -1,21 +1,11 @@
 """
 HPA_get_comprehensive_gene_details_by_ensembl_id
 
-Get detailed in-depth information from gene page using Ensembl Gene ID, including image URLs, antibody data, protein expression, and comprehensive information. This is the core tool for retrieving all images (tissue immunohistochemistry, subcellular immunofluorescence).
+Get detailed in-depth information from gene page using Ensembl Gene ID, including image URLs, ant...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_comprehensive_gene_details_by_ensembl_id(
@@ -29,18 +19,18 @@ def HPA_get_comprehensive_gene_details_by_ensembl_id(
     validate: bool = True,
 ) -> Any:
     """
-    Get detailed in-depth information from gene page using Ensembl Gene ID, including image URLs, antibody data, protein expression, and comprehensive information. This is the core tool for retrieving all images (tissue immunohistochemistry, subcellular immunofluorescence).
+    Get detailed in-depth information from gene page using Ensembl Gene ID, including image URLs, ant...
 
     Parameters
     ----------
     ensembl_id : str
-        Ensembl Gene ID, e.g., 'ENSG00000064787' (BCAS1), 'ENSG00000141510' (TP53), etc. Usually obtained through HPA_search_genes_by_query tool.
+        Ensembl Gene ID, e.g., 'ENSG00000064787' (BCAS1), 'ENSG00000141510' (TP53), e...
     include_images : bool
-        Whether to include image URL information (immunofluorescence, cell line images, etc.), defaults to true.
+        Whether to include image URL information (immunofluorescence, cell line image...
     include_antibodies : bool
-        Whether to include detailed antibody information (validation status, Western blot data, etc.), defaults to true.
+        Whether to include detailed antibody information (validation status, Western ...
     include_expression : bool
-        Whether to include detailed expression data (tissue specificity, subcellular localization, etc.), defaults to true.
+        Whether to include detailed expression data (tissue specificity, subcellular ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -52,7 +42,9 @@ def HPA_get_comprehensive_gene_details_by_ensembl_id(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_comprehensive_gene_details_by_ensembl_id",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 ToolGraphComposer
 
-Builds a comprehensive graph of tool compatibility relationships in ToolUniverse. Analyzes all available tools and creates a directed graph showing which tools can be composed together.
+Builds a comprehensive graph of tool compatibility relationships in ToolUniverse. Analyzes all av...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolGraphComposer(
@@ -31,7 +21,7 @@ def ToolGraphComposer(
     validate: bool = True,
 ) -> Any:
     """
-    Builds a comprehensive graph of tool compatibility relationships in ToolUniverse. Analyzes all available tools and creates a directed graph showing which tools can be composed together.
+    Builds a comprehensive graph of tool compatibility relationships in ToolUniverse. Analyzes all av...
 
     Parameters
     ----------
@@ -42,7 +32,7 @@ def ToolGraphComposer(
     min_compatibility_score : int
         Minimum compatibility score to create an edge in the graph
     exclude_categories : list[Any]
-        Tool categories to exclude from analysis (e.g., ['tool_finder', 'special_tools'])
+        Tool categories to exclude from analysis (e.g., ['tool_finder', 'special_tool...
     max_tools_per_category : int
         Maximum number of tools to analyze per category (for performance)
     force_rebuild : bool
@@ -58,10 +48,10 @@ def ToolGraphComposer(
     -------
     Any
     """
+    # Handle mutable defaults to avoid B006 linting error
     if exclude_categories is None:
         exclude_categories = ["tool_finder", "special_tools"]
-
-    return _get_client().run_one_function(
+    return get_shared_client().run_one_function(
         {
             "name": "ToolGraphComposer",
             "arguments": {

@@ -5,17 +5,7 @@ Get comprehensive information about ruptures – change point detection library
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_ruptures_info(
@@ -43,7 +33,9 @@ def get_ruptures_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_ruptures_info", "arguments": {"info_type": info_type}},
         stream_callback=stream_callback,
         use_cache=use_cache,

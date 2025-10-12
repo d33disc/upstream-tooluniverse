@@ -1,21 +1,11 @@
 """
 PubChem_search_compounds_by_similarity
 
-Search by similarity (Tanimoto coefficient), returns CID list of compounds with similarity above threshold to given SMILES molecule, returns no more than 10 CIDs (MaxRecords=10)
+Search by similarity (Tanimoto coefficient), returns CID list of compounds with similarity above ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PubChem_search_compounds_by_similarity(
@@ -27,7 +17,7 @@ def PubChem_search_compounds_by_similarity(
     validate: bool = True,
 ) -> Any:
     """
-    Search by similarity (Tanimoto coefficient), returns CID list of compounds with similarity above threshold to given SMILES molecule, returns no more than 10 CIDs (MaxRecords=10)
+    Search by similarity (Tanimoto coefficient), returns CID list of compounds with similarity above ...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def PubChem_search_compounds_by_similarity(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PubChem_search_compounds_by_similarity",
             "arguments": {"smiles": smiles, "threshold": threshold},

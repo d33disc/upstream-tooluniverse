@@ -5,21 +5,11 @@ Retrieve publications related to a drug chemblId, including PubMed IDs and publi
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_publications_by_drug_chemblId(
-    entityId: Optional[str] = None,
+    entityId: str,
     additionalIds: Optional[list[Any]] = None,
     startYear: Optional[int] = None,
     startMonth: Optional[int] = None,
@@ -58,7 +48,9 @@ def OpenTargets_get_publications_by_drug_chemblId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_publications_by_drug_chemblId",
             "arguments": {

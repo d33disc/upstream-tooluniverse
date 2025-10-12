@@ -1,21 +1,11 @@
 """
 ToolMetadataGenerationPipeline
 
-Generates standardized metadata for a batch of ToolUniverse tool configurations by calling ToolMetadataGenerator, LabelGenerator, and ToolMetadataStandardizer for sources and tags.
+Generates standardized metadata for a batch of ToolUniverse tool configurations by calling ToolMe...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolMetadataGenerationPipeline(
@@ -29,18 +19,18 @@ def ToolMetadataGenerationPipeline(
     validate: bool = True,
 ) -> Any:
     """
-    Generates standardized metadata for a batch of ToolUniverse tool configurations by calling ToolMetadataGenerator, LabelGenerator, and ToolMetadataStandardizer for sources and tags.
+    Generates standardized metadata for a batch of ToolUniverse tool configurations by calling ToolMe...
 
     Parameters
     ----------
     tool_configs : list[Any]
-        List of raw tool configuration JSON objects to extract and standardize metadata for
+        List of raw tool configuration JSON objects to extract and standardize metada...
     tool_type_mappings : dict[str, Any]
-        Mapping of simplified toolType (keys) to lists of tool 'type' values belonging to each simplified category (e.g., {'Databases': ['XMLTool']})
+        Mapping of simplified toolType (keys) to lists of tool 'type' values belongin...
     add_existing_tooluniverse_labels : bool
-        Whether to include labels from existing ToolUniverse tools when labeling the metadata configs of the new tools. It is strongly recommended that this is set to true to minimize the number of new labels created and the possibility of redundant labels.
+        Whether to include labels from existing ToolUniverse tools when labeling the ...
     max_new_tooluniverse_labels : int
-        The maximum number of new ToolUniverse labels to use in the metadata configs of the new tools. The existing ToolUniverse labels will be used first, and then new labels will be created as needed up to this limit. If the limit is reached, the least relevant new labels will be discarded. Please try to use as few new labels as possible to avoid excessive labels.
+        The maximum number of new ToolUniverse labels to use in the metadata configs ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -52,10 +42,10 @@ def ToolMetadataGenerationPipeline(
     -------
     Any
     """
+    # Handle mutable defaults to avoid B006 linting error
     if tool_type_mappings is None:
         tool_type_mappings = {}
-
-    return _get_client().run_one_function(
+    return get_shared_client().run_one_function(
         {
             "name": "ToolMetadataGenerationPipeline",
             "arguments": {

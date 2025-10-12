@@ -1,21 +1,11 @@
 """
 QuestionRephraser
 
-Generates three distinct paraphrases of a given question while ensuring answer options remain valid and applicable.
+Generates three distinct paraphrases of a given question while ensuring answer options remain val...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def QuestionRephraser(
@@ -27,14 +17,14 @@ def QuestionRephraser(
     validate: bool = True,
 ) -> Any:
     """
-    Generates three distinct paraphrases of a given question while ensuring answer options remain valid and applicable.
+    Generates three distinct paraphrases of a given question while ensuring answer options remain val...
 
     Parameters
     ----------
     question : str
         The original question text to be rephrased
     options : str
-        Answer options (e.g., multiple choice options) that should remain valid for the rephrased questions. Leave empty if no options are provided.
+        Answer options (e.g., multiple choice options) that should remain valid for t...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def QuestionRephraser(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "QuestionRephraser",
             "arguments": {"question": question, "options": options},

@@ -5,21 +5,11 @@ Retrieve diseases associated with a list of phenotypes or symptoms by a list of 
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_joint_associated_diseases_by_HPO_ID_list(
-    HPO_ID_list: Optional[list[Any]] = None,
+    HPO_ID_list: list[Any],
     limit: Optional[int] = None,
     offset: Optional[int] = None,
     *,
@@ -49,7 +39,9 @@ def get_joint_associated_diseases_by_HPO_ID_list(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_joint_associated_diseases_by_HPO_ID_list",
             "arguments": {"HPO_ID_list": HPO_ID_list, "limit": limit, "offset": offset},

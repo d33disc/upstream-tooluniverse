@@ -1,21 +1,11 @@
 """
 UniProt_get_ptm_processing_by_accession
 
-Extract all PTM and processing sites from UniProtKB entry (feature type = MODIFIED RESIDUE or SIGNAL, etc.).
+Extract all PTM and processing sites from UniProtKB entry (feature type = MODIFIED RESIDUE or SIG...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def UniProt_get_ptm_processing_by_accession(
@@ -26,7 +16,7 @@ def UniProt_get_ptm_processing_by_accession(
     validate: bool = True,
 ) -> Any:
     """
-    Extract all PTM and processing sites from UniProtKB entry (feature type = MODIFIED RESIDUE or SIGNAL, etc.).
+    Extract all PTM and processing sites from UniProtKB entry (feature type = MODIFIED RESIDUE or SIG...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def UniProt_get_ptm_processing_by_accession(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "UniProt_get_ptm_processing_by_accession",
             "arguments": {"accession": accession},

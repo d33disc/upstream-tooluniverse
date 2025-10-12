@@ -1,21 +1,11 @@
 """
 ToolDescriptionOptimizer
 
-Optimizes a tool's description and parameter descriptions by generating test cases, executing them, analyzing the results, and suggesting improved descriptions for both the tool and its arguments. Optionally saves a comprehensive optimization report to a file without overwriting the original.
+Optimizes a tool's description and parameter descriptions by generating test cases, executing the...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolDescriptionOptimizer(
@@ -30,16 +20,16 @@ def ToolDescriptionOptimizer(
     validate: bool = True,
 ) -> Any:
     """
-    Optimizes a tool's description and parameter descriptions by generating test cases, executing them, analyzing the results, and suggesting improved descriptions for both the tool and its arguments. Optionally saves a comprehensive optimization report to a file without overwriting the original.
+    Optimizes a tool's description and parameter descriptions by generating test cases, executing the...
 
     Parameters
     ----------
     tool_config : dict[str, Any]
         The full configuration of the tool to optimize.
     save_to_file : bool
-        If true, save the optimized description to a file (do not overwrite the original).
+        If true, save the optimized description to a file (do not overwrite the origi...
     output_file : str
-        Optional file path to save the optimized description. If not provided, use '<tool_name>_optimized_description.txt'.
+        Optional file path to save the optimized description. If not provided, use '<...
     max_iterations : int
         Maximum number of optimization rounds to perform.
     satisfaction_threshold : float
@@ -55,7 +45,9 @@ def ToolDescriptionOptimizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolDescriptionOptimizer",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 embedding_database_add
 
-Add new documents to an existing embedding database. Generates embeddings for new documents using the same model as the original database and appends them to the existing FAISS index.
+Add new documents to an existing embedding database. Generates embeddings for new documents using...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def embedding_database_add(
@@ -29,7 +19,7 @@ def embedding_database_add(
     validate: bool = True,
 ) -> Any:
     """
-    Add new documents to an existing embedding database. Generates embeddings for new documents using the same model as the original database and appends them to the existing FAISS index.
+    Add new documents to an existing embedding database. Generates embeddings for new documents using...
 
     Parameters
     ----------
@@ -52,10 +42,10 @@ def embedding_database_add(
     -------
     Any
     """
+    # Handle mutable defaults to avoid B006 linting error
     if metadata is None:
         metadata = []
-
-    return _get_client().run_one_function(
+    return get_shared_client().run_one_function(
         {
             "name": "embedding_database_add",
             "arguments": {

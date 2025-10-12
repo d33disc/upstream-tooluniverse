@@ -1,21 +1,11 @@
 """
 Zenodo_search_records
 
-Search Zenodo for research data, publications, and datasets. Zenodo is an open-access repository that hosts research outputs from all fields of science, including papers, datasets, software, and more.
+Search Zenodo for research data, publications, and datasets. Zenodo is an open-access repository ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Zenodo_search_records(
@@ -28,16 +18,16 @@ def Zenodo_search_records(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search Zenodo for research data, publications, and datasets. Zenodo is an open-access repository that hosts research outputs from all fields of science, including papers, datasets, software, and more.
+    Search Zenodo for research data, publications, and datasets. Zenodo is an open-access repository ...
 
     Parameters
     ----------
     query : str
-        Free text search query for Zenodo records. Use keywords to search across titles, descriptions, authors, and other metadata.
+        Free text search query for Zenodo records. Use keywords to search across titl...
     max_results : int
         Maximum number of results to return. Must be between 1 and 200.
     community : str
-        Optional community slug to filter results by specific research community (e.g., 'zenodo', 'ecfunded').
+        Optional community slug to filter results by specific research community (e.g...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def Zenodo_search_records(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Zenodo_search_records",
             "arguments": {

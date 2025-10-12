@@ -5,17 +5,7 @@ Find MeSH (Medical Subject Heading) subjects with matching pharmacological actio
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def mesh_get_subjects_by_pharmacological_action(
@@ -36,7 +26,7 @@ def mesh_get_subjects_by_pharmacological_action(
     query : str
         Pharmacological action to search for in MeSH subjects
     case_sensitive : bool
-        Select True to perform a case-sensitive search for the pharmacological action query
+        Select True to perform a case-sensitive search for the pharmacological action...
     exact_match : bool
         Select True to require an exact match for the pharmacological action query
     limit : int
@@ -52,7 +42,9 @@ def mesh_get_subjects_by_pharmacological_action(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "mesh_get_subjects_by_pharmacological_action",
             "arguments": {

@@ -1,25 +1,15 @@
 """
 FDA_get_drug_names_by_child_safety_info
 
-Retrieve drug names based on whether the product should be kept out of the reach of children and instructions about what to do in the case of accidental contact or ingestion.
+Retrieve drug names based on whether the product should be kept out of the reach of children and ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_child_safety_info(
-    child_safety_info: Optional[str] = None,
+    child_safety_info: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -29,12 +19,12 @@ def FDA_get_drug_names_by_child_safety_info(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve drug names based on whether the product should be kept out of the reach of children and instructions about what to do in the case of accidental contact or ingestion.
+    Retrieve drug names based on whether the product should be kept out of the reach of children and ...
 
     Parameters
     ----------
     child_safety_info : str
-        Information pertaining to whether the product should be kept out of the reach of children.
+        Information pertaining to whether the product should be kept out of the reach...
     indication : str
         The indication or usage of the drug.
     limit : int
@@ -52,7 +42,9 @@ def FDA_get_drug_names_by_child_safety_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_child_safety_info",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 odphp_topicsearch
 
-Find specific health topics and get their full content. Use when the user mentions a keyword (e.g., “folic acid”, “blood pressure”) or when you already have topic/category IDs from `odphp_itemlist`. Returns detailed topic pages (Title, Sections, RelatedItems) and an AccessibleVersion link. Next: to quote or summarize the actual page text, pass the AccessibleVersion (or RelatedItems URLs) to `odphp_outlink_fetch`.
+Find specific health topics and get their full content. Use when the user mentions a keyword (e.g...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def odphp_topicsearch(
@@ -30,7 +20,7 @@ def odphp_topicsearch(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Find specific health topics and get their full content. Use when the user mentions a keyword (e.g., “folic acid”, “blood pressure”) or when you already have topic/category IDs from `odphp_itemlist`. Returns detailed topic pages (Title, Sections, RelatedItems) and an AccessibleVersion link. Next: to quote or summarize the actual page text, pass the AccessibleVersion (or RelatedItems URLs) to `odphp_outlink_fetch`.
+    Find specific health topics and get their full content. Use when the user mentions a keyword (e.g...
 
     Parameters
     ----------
@@ -55,7 +45,9 @@ def odphp_topicsearch(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "odphp_topicsearch",
             "arguments": {

@@ -1,32 +1,22 @@
 """
 get_core_refinement_statistics
 
-Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy, phase errors, and solvent model parameters.
+Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_core_refinement_statistics(
-    pdb_id: Optional[str] = None,
+    pdb_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy, phase errors, and solvent model parameters.
+    Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def get_core_refinement_statistics(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_core_refinement_statistics", "arguments": {"pdb_id": pdb_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -1,21 +1,11 @@
 """
 ScientificTextSummarizer
 
-Summarizes biomedical research texts, abstracts, or papers with specified length and focus areas. Uses AI to extract key findings, methodology, and conclusions from complex biomedical literature.
+Summarizes biomedical research texts, abstracts, or papers with specified length and focus areas....
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ScientificTextSummarizer(
@@ -28,7 +18,7 @@ def ScientificTextSummarizer(
     validate: bool = True,
 ) -> Any:
     """
-    Summarizes biomedical research texts, abstracts, or papers with specified length and focus areas. Uses AI to extract key findings, methodology, and conclusions from complex biomedical literature.
+    Summarizes biomedical research texts, abstracts, or papers with specified length and focus areas....
 
     Parameters
     ----------
@@ -37,7 +27,7 @@ def ScientificTextSummarizer(
     summary_length : str
         Desired length of summary (e.g., '50', '100', '200 words').
     focus_area : str
-        What to focus on in the summary (e.g., 'methodology', 'results', 'clinical implications', 'drug interactions').
+        What to focus on in the summary (e.g., 'methodology', 'results', 'clinical im...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def ScientificTextSummarizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ScientificTextSummarizer",
             "arguments": {

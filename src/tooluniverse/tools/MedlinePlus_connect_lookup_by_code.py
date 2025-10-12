@@ -1,21 +1,11 @@
 """
 MedlinePlus_connect_lookup_by_code
 
-Look up corresponding MedlinePlus page information through MedlinePlus Connect Web Service using clinical/drug/test codes (such as ICD-10 CM, RXCUI, LOINC, etc.), supports JSON or XML format return.
+Look up corresponding MedlinePlus page information through MedlinePlus Connect Web Service using ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def MedlinePlus_connect_lookup_by_code(
@@ -30,16 +20,16 @@ def MedlinePlus_connect_lookup_by_code(
     validate: bool = True,
 ) -> Any:
     """
-    Look up corresponding MedlinePlus page information through MedlinePlus Connect Web Service using clinical/drug/test codes (such as ICD-10 CM, RXCUI, LOINC, etc.), supports JSON or XML format return.
+    Look up corresponding MedlinePlus page information through MedlinePlus Connect Web Service using ...
 
     Parameters
     ----------
     cs : str
-        Code system OID, e.g., ICD-10 CM=2.16.840.1.113883.6.90, RXCUI=2.16.840.1.113883.6.88, LOINC=2.16.840.1.113883.6.1, etc.
+        Code system OID, e.g., ICD-10 CM=2.16.840.1.113883.6.90, RXCUI=2.16.840.1.113...
     c : str
         Specific code value to query, e.g., "E11.9" (ICD-10 CM) or "637188" (RXCUI).
     dn : str
-        Optional, descriptive name (English) corresponding to the code, for drugs can fill in "Chantix 0.5 MG Oral Tablet", can improve matching accuracy.
+        Optional, descriptive name (English) corresponding to the code, for drugs can...
     language : str
         Return information language, "en" for English, "es" for Spanish, default "en".
     format : str
@@ -55,7 +45,9 @@ def MedlinePlus_connect_lookup_by_code(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "MedlinePlus_connect_lookup_by_code",
             "arguments": {

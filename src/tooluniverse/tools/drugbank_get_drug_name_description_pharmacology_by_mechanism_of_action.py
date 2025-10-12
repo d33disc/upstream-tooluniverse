@@ -1,21 +1,11 @@
 """
 drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action
 
-Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by drug mechanism of action.
+Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by dr...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
@@ -29,7 +19,7 @@ def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by drug mechanism of action.
+    Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by dr...
 
     Parameters
     ----------
@@ -52,7 +42,9 @@ def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action",
             "arguments": {

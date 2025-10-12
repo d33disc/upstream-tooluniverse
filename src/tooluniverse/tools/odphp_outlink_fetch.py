@@ -1,21 +1,11 @@
 """
 odphp_outlink_fetch
 
-This tool retrieves readable text from ODPHP article links and information sources. This is helpful after using the `odphp_myhealthfinder` or `odphp_topicsearch` tools or when the user wants to simply dive deeper into ODPHP data.
+This tool retrieves readable text from ODPHP article links and information sources. This is helpf...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def odphp_outlink_fetch(
@@ -28,7 +18,7 @@ def odphp_outlink_fetch(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    This tool retrieves readable text from ODPHP article links and information sources. This is helpful after using the `odphp_myhealthfinder` or `odphp_topicsearch` tools or when the user wants to simply dive deeper into ODPHP data.
+    This tool retrieves readable text from ODPHP article links and information sources. This is helpf...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def odphp_outlink_fetch(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "odphp_outlink_fetch",
             "arguments": {

@@ -1,21 +1,11 @@
 """
 WHO_Guidelines_Search
 
-Search WHO (World Health Organization) official clinical guidelines and health recommendations. Provides access to authoritative global health guidelines published by WHO.
+Search WHO (World Health Organization) official clinical guidelines and health recommendations. P...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def WHO_Guidelines_Search(
@@ -27,12 +17,12 @@ def WHO_Guidelines_Search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search WHO (World Health Organization) official clinical guidelines and health recommendations. Provides access to authoritative global health guidelines published by WHO.
+    Search WHO (World Health Organization) official clinical guidelines and health recommendations. P...
 
     Parameters
     ----------
     query : str
-        Medical condition, disease, or health topic to search for in WHO guidelines (e.g., 'malaria', 'HIV', 'diabetes', 'tuberculosis')
+        Medical condition, disease, or health topic to search for in WHO guidelines (...
     limit : int
         Maximum number of guidelines to return (default: 10)
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def WHO_Guidelines_Search(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "WHO_Guidelines_Search",
             "arguments": {"query": query, "limit": limit},

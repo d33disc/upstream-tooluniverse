@@ -1,25 +1,15 @@
 """
 FDA_get_drug_names_by_consulting_doctor_pharmacist_info
 
-Retrieve drug names based on information about when a doctor or pharmacist should be consulted regarding drug interactions. Warning: This tool only outputs a predefined limited number of drug names and does not cover all possible drugs. Use with caution.
+Retrieve drug names based on information about when a doctor or pharmacist should be consulted re...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_names_by_consulting_doctor_pharmacist_info(
-    interaction_info: Optional[str] = None,
+    interaction_info: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -29,12 +19,12 @@ def FDA_get_drug_names_by_consulting_doctor_pharmacist_info(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve drug names based on information about when a doctor or pharmacist should be consulted regarding drug interactions. Warning: This tool only outputs a predefined limited number of drug names and does not cover all possible drugs. Use with caution.
+    Retrieve drug names based on information about when a doctor or pharmacist should be consulted re...
 
     Parameters
     ----------
     interaction_info : str
-        Information about when a doctor or pharmacist should be consulted regarding drug interactions.
+        Information about when a doctor or pharmacist should be consulted regarding d...
     indication : str
         The indication or usage of the drug.
     limit : int
@@ -52,7 +42,9 @@ def FDA_get_drug_names_by_consulting_doctor_pharmacist_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_names_by_consulting_doctor_pharmacist_info",
             "arguments": {

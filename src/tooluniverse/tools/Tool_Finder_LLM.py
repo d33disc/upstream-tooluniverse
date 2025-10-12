@@ -1,21 +1,11 @@
 """
 Tool_Finder_LLM
 
-LLM-based tool finder that uses natural language processing to intelligently select relevant tools based on user queries. This tool analyzes all available tool descriptions and uses an LLM to determine which tools would be most helpful for a given task or question.
+LLM-based tool finder that uses natural language processing to intelligently select relevant tool...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def Tool_Finder_LLM(
@@ -30,7 +20,7 @@ def Tool_Finder_LLM(
     validate: bool = True,
 ) -> Any:
     """
-    LLM-based tool finder that uses natural language processing to intelligently select relevant tools based on user queries. This tool analyzes all available tool descriptions and uses an LLM to determine which tools would be most helpful for a given task or question.
+    LLM-based tool finder that uses natural language processing to intelligently select relevant tool...
 
     Parameters
     ----------
@@ -39,9 +29,9 @@ def Tool_Finder_LLM(
     limit : int
         The number of tools to retrieve
     picked_tool_names : list[Any]
-        Pre-selected tool names to process. If provided, tool selection will skip these tools.
+        Pre-selected tool names to process. If provided, tool selection will skip the...
     return_call_result : bool
-        Whether to return both prompts and tool names. If false, returns only tool prompts.
+        Whether to return both prompts and tool names. If false, returns only tool pr...
     categories : list[Any]
         Optional list of tool categories to filter by
     stream_callback : Callable, optional
@@ -55,7 +45,9 @@ def Tool_Finder_LLM(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "Tool_Finder_LLM",
             "arguments": {

@@ -5,21 +5,11 @@ Get key assembly composition and symmetry summary for an assembly associated wit
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_assembly_summary(
-    assembly_id: Optional[str] = None,
+    assembly_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -43,7 +33,9 @@ def get_assembly_summary(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "get_assembly_summary", "arguments": {"assembly_id": assembly_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,

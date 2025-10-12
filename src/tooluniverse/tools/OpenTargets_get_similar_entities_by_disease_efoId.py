@@ -5,23 +5,13 @@ Retrieve similar entities for a given disease efoId using a model trained with P
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_similar_entities_by_disease_efoId(
-    efoId: Optional[str] = None,
-    threshold: Optional[float] = None,
-    size: Optional[int] = None,
+    efoId: str,
+    threshold: float,
+    size: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -49,7 +39,9 @@ def OpenTargets_get_similar_entities_by_disease_efoId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_similar_entities_by_disease_efoId",
             "arguments": {"efoId": efoId, "threshold": threshold, "size": size},

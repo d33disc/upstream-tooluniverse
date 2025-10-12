@@ -1,25 +1,15 @@
 """
 get_clinical_trial_conditions_and_interventions
 
-Retrieves the list of conditions or diseases and the interventions and arm groups that the clinical trials are focused on, using their NCT IDs.
+Retrieves the list of conditions or diseases and the interventions and arm groups that the clinic...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_clinical_trial_conditions_and_interventions(
-    nct_ids: Optional[list[Any]] = None,
+    nct_ids: list[Any],
     condition_and_intervention: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -27,7 +17,7 @@ def get_clinical_trial_conditions_and_interventions(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieves the list of conditions or diseases and the interventions and arm groups that the clinical trials are focused on, using their NCT IDs.
+    Retrieves the list of conditions or diseases and the interventions and arm groups that the clinic...
 
     Parameters
     ----------
@@ -46,7 +36,9 @@ def get_clinical_trial_conditions_and_interventions(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_clinical_trial_conditions_and_interventions",
             "arguments": {

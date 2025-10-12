@@ -1,21 +1,11 @@
 """
 embedding_database_create
 
-Create a new embedding database from a collection of documents. Generates embeddings using OpenAI or Azure OpenAI models and stores them in a searchable database with FAISS vector index and SQLite metadata storage.
+Create a new embedding database from a collection of documents. Generates embeddings using OpenAI...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def embedding_database_create(
@@ -31,7 +21,7 @@ def embedding_database_create(
     validate: bool = True,
 ) -> Any:
     """
-    Create a new embedding database from a collection of documents. Generates embeddings using OpenAI or Azure OpenAI models and stores them in a searchable database with FAISS vector index and SQLite metadata storage.
+    Create a new embedding database from a collection of documents. Generates embeddings using OpenAI...
 
     Parameters
     ----------
@@ -58,10 +48,10 @@ def embedding_database_create(
     -------
     Any
     """
+    # Handle mutable defaults to avoid B006 linting error
     if metadata is None:
         metadata = []
-
-    return _get_client().run_one_function(
+    return get_shared_client().run_one_function(
         {
             "name": "embedding_database_create",
             "arguments": {

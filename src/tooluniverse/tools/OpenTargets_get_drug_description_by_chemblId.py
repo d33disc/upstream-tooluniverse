@@ -1,32 +1,22 @@
 """
 OpenTargets_get_drug_description_by_chemblId
 
-Get drug name, year of first approval, type, cross references, and max clinical trial phase based on specified chemblId.
+Get drug name, year of first approval, type, cross references, and max clinical trial phase based...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OpenTargets_get_drug_description_by_chemblId(
-    chemblId: Optional[str] = None,
+    chemblId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Get drug name, year of first approval, type, cross references, and max clinical trial phase based on specified chemblId.
+    Get drug name, year of first approval, type, cross references, and max clinical trial phase based...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def OpenTargets_get_drug_description_by_chemblId(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OpenTargets_get_drug_description_by_chemblId",
             "arguments": {"chemblId": chemblId},

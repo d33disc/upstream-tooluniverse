@@ -1,21 +1,11 @@
 """
 DOAJ_search_articles
 
-Search DOAJ (Directory of Open Access Journals) for open-access articles. Returns articles with title, authors, year, DOI, venue, and URL.
+Search DOAJ (Directory of Open Access Journals) for open-access articles. Returns articles with t...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DOAJ_search_articles(
@@ -28,7 +18,7 @@ def DOAJ_search_articles(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search DOAJ (Directory of Open Access Journals) for open-access articles. Returns articles with title, authors, year, DOI, venue, and URL.
+    Search DOAJ (Directory of Open Access Journals) for open-access articles. Returns articles with t...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def DOAJ_search_articles(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DOAJ_search_articles",
             "arguments": {"query": query, "max_results": max_results, "type": type},

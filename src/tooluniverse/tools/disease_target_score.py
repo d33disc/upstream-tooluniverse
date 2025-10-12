@@ -1,21 +1,11 @@
 """
 disease_target_score
 
-Extract disease-target association scores from a specific data source using GraphQL API. This tool retrieves all targets associated with a disease and their scores from a specified datasource (e.g., chembl, eva, cancer_gene_census, etc.).
+Extract disease-target association scores from a specific data source using GraphQL API. This too...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def disease_target_score(
@@ -28,14 +18,14 @@ def disease_target_score(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Extract disease-target association scores from a specific data source using GraphQL API. This tool retrieves all targets associated with a disease and their scores from a specified datasource (e.g., chembl, eva, cancer_gene_census, etc.).
+    Extract disease-target association scores from a specific data source using GraphQL API. This too...
 
     Parameters
     ----------
     efoId : str
-        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
+        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339'...
     datasourceId : str
-        The datasource ID to extract scores from. Available options: 'chembl', 'eva', 'eva_somatic', 'cancer_gene_census', 'cancer_biomarkers', 'europepmc', 'expression_atlas', 'genomics_england', 'impc', 'reactome', 'uniprot_literature', 'uniprot_variants'
+        The datasource ID to extract scores from. Available options: 'chembl', 'eva',...
     pageSize : int
         Number of results per page (default: 100, max: 100)
     stream_callback : Callable, optional
@@ -49,7 +39,9 @@ def disease_target_score(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "disease_target_score",
             "arguments": {

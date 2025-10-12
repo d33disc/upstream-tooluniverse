@@ -5,17 +5,7 @@ Get external references (XRefs) for compound by CID, including links to ChEBI, D
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def PubChem_get_compound_xrefs_by_CID(
@@ -34,7 +24,7 @@ def PubChem_get_compound_xrefs_by_CID(
     cid : int
         Compound ID to query external references for, e.g., 2244.
     xref_types : list[Any]
-        List of external database types to query, e.g., ["RegistryID", "RN", "PubMedID"].
+        List of external database types to query, e.g., ["RegistryID", "RN", "PubMedI...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def PubChem_get_compound_xrefs_by_CID(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "PubChem_get_compound_xrefs_by_CID",
             "arguments": {"cid": cid, "xref_types": xref_types},

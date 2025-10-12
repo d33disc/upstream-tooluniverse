@@ -1,21 +1,11 @@
 """
 HPA_search_genes_by_query
 
-Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. This is the entry tool for many HPA query workflows.
+Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. ...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_search_genes_by_query(
@@ -26,12 +16,12 @@ def HPA_search_genes_by_query(
     validate: bool = True,
 ) -> Any:
     """
-    Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. This is the entry tool for many HPA query workflows.
+    Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. ...
 
     Parameters
     ----------
     search_query : str
-        Gene name, alias, keyword, or cell line name to search for, e.g., 'EGFR', 'TP53', or 'MCF7'.
+        Gene name, alias, keyword, or cell line name to search for, e.g., 'EGFR', 'TP...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +33,9 @@ def HPA_search_genes_by_query(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_search_genes_by_query",
             "arguments": {"search_query": search_query},

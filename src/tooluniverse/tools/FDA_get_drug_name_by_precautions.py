@@ -5,21 +5,11 @@ Retrieve the drug name based on the precautions field information.
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def FDA_get_drug_name_by_precautions(
-    precautions: Optional[str] = None,
+    precautions: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -33,7 +23,7 @@ def FDA_get_drug_name_by_precautions(
     Parameters
     ----------
     precautions : str
-        Information about any special care to be exercised for safe and effective use of the drug.
+        Information about any special care to be exercised for safe and effective use...
     limit : int
         The number of records to return.
     skip : int
@@ -49,7 +39,9 @@ def FDA_get_drug_name_by_precautions(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "FDA_get_drug_name_by_precautions",
             "arguments": {"precautions": precautions, "limit": limit, "skip": skip},

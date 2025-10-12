@@ -1,21 +1,11 @@
 """
 drugbank_vocab_filter
 
-Filter the DrugBank vocabulary dataset based on specific field criteria. Use simple field-value pairs to filter drugs by properties like names, IDs, and chemical identifiers.
+Filter the DrugBank vocabulary dataset based on specific field criteria. Use simple field-value p...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def drugbank_vocab_filter(
@@ -29,7 +19,7 @@ def drugbank_vocab_filter(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Filter the DrugBank vocabulary dataset based on specific field criteria. Use simple field-value pairs to filter drugs by properties like names, IDs, and chemical identifiers.
+    Filter the DrugBank vocabulary dataset based on specific field criteria. Use simple field-value p...
 
     Parameters
     ----------
@@ -38,7 +28,7 @@ def drugbank_vocab_filter(
     condition : str
         The type of filtering condition to apply. Filter is case-insensitive.
     value : str
-        The value to filter by. Not required when condition is 'not_empty'. Examples: 'insulin' (for contains), 'DB00' (for starts_with), 'acid' (for ends_with), 'Aspirin' (for exact)
+        The value to filter by. Not required when condition is 'not_empty'. Examples:...
     limit : int
         Maximum number of results to return.
     stream_callback : Callable, optional
@@ -52,7 +42,9 @@ def drugbank_vocab_filter(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "drugbank_vocab_filter",
             "arguments": {

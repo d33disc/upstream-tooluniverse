@@ -5,17 +5,7 @@ Get complete label corresponding to SPL Set ID, returns content in XML or JSON f
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def DailyMed_get_spl_by_setid(
@@ -46,7 +36,9 @@ def DailyMed_get_spl_by_setid(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "DailyMed_get_spl_by_setid",
             "arguments": {"setid": setid, "format": format},

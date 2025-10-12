@@ -1,21 +1,11 @@
 """
 HPA_get_cancer_prognostics_by_gene
 
-Retrieve prognostic value of a gene across various cancer types, indicating if its expression level correlates with patient survival outcomes.
+Retrieve prognostic value of a gene across various cancer types, indicating if its expression lev...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def HPA_get_cancer_prognostics_by_gene(
@@ -26,12 +16,12 @@ def HPA_get_cancer_prognostics_by_gene(
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve prognostic value of a gene across various cancer types, indicating if its expression level correlates with patient survival outcomes.
+    Retrieve prognostic value of a gene across various cancer types, indicating if its expression lev...
 
     Parameters
     ----------
     ensembl_id : str
-        Ensembl Gene ID of the gene to check, e.g., 'ENSG00000141510' for TP53, 'ENSG00000012048' for BRCA1.
+        Ensembl Gene ID of the gene to check, e.g., 'ENSG00000141510' for TP53, 'ENSG...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +33,9 @@ def HPA_get_cancer_prognostics_by_gene(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "HPA_get_cancer_prognostics_by_gene",
             "arguments": {"ensembl_id": ensembl_id},

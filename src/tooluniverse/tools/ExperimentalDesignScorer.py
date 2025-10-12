@@ -1,21 +1,11 @@
 """
 ExperimentalDesignScorer
 
-Assesses a proposed experimental design by assigning scores and structured feedback on hypothesis clarity, variable definitions, sample size, controls, randomization, measurement methods, statistical analysis, bias mitigation, ethical considerations, and overall feasibility.
+Assesses a proposed experimental design by assigning scores and structured feedback on hypothesis...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ExperimentalDesignScorer(
@@ -27,14 +17,14 @@ def ExperimentalDesignScorer(
     validate: bool = True,
 ) -> Any:
     """
-    Assesses a proposed experimental design by assigning scores and structured feedback on hypothesis clarity, variable definitions, sample size, controls, randomization, measurement methods, statistical analysis, bias mitigation, ethical considerations, and overall feasibility.
+    Assesses a proposed experimental design by assigning scores and structured feedback on hypothesis...
 
     Parameters
     ----------
     hypothesis : str
         A clear statement of the research hypothesis to be tested.
     design_description : str
-        A detailed description of the proposed experimental design, including variables, methods, sample details, and planned analyses.
+        A detailed description of the proposed experimental design, including variabl...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def ExperimentalDesignScorer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ExperimentalDesignScorer",
             "arguments": {

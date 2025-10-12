@@ -1,21 +1,11 @@
 """
 OSF_search_preprints
 
-Search OSF (Open Science Framework) Preprints for research preprints and working papers. OSF Preprints aggregates preprints from multiple providers including OSF, PsyArXiv, and others.
+Search OSF (Open Science Framework) Preprints for research preprints and working papers. OSF Prep...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OSF_search_preprints(
@@ -28,16 +18,16 @@ def OSF_search_preprints(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search OSF (Open Science Framework) Preprints for research preprints and working papers. OSF Preprints aggregates preprints from multiple providers including OSF, PsyArXiv, and others.
+    Search OSF (Open Science Framework) Preprints for research preprints and working papers. OSF Prep...
 
     Parameters
     ----------
     query : str
-        Search query for OSF preprints. Use keywords to search across titles and abstracts.
+        Search query for OSF preprints. Use keywords to search across titles and abst...
     max_results : int
         Maximum number of results to return. Default is 10, maximum is 100.
     provider : str
-        Optional preprint provider filter (e.g., 'osf', 'psyarxiv', 'socarxiv'). If not specified, searches all providers.
+        Optional preprint provider filter (e.g., 'osf', 'psyarxiv', 'socarxiv'). If n...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -49,7 +39,9 @@ def OSF_search_preprints(
     -------
     list[Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "OSF_search_preprints",
             "arguments": {

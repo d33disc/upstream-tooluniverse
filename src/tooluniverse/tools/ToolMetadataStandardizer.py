@@ -1,21 +1,11 @@
 """
 ToolMetadataStandardizer
 
-Standardizes and groups semantically equivalent metadata strings (e.g., sources, tags) into canonical forms for consistent downstream usage.
+Standardizes and groups semantically equivalent metadata strings (e.g., sources, tags) into canon...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ToolMetadataStandardizer(
@@ -27,14 +17,14 @@ def ToolMetadataStandardizer(
     validate: bool = True,
 ) -> Any:
     """
-    Standardizes and groups semantically equivalent metadata strings (e.g., sources, tags) into canonical forms for consistent downstream usage.
+    Standardizes and groups semantically equivalent metadata strings (e.g., sources, tags) into canon...
 
     Parameters
     ----------
     metadata_list : list[Any]
         List of raw metadata strings (e.g., sources, tags) to standardize and group.
     limit : int
-        If provided, the maximum number of canonical strings to return. The LLM will group terms more aggressively to meet this limit, ensuring all raw strings are mapped.
+        If provided, the maximum number of canonical strings to return. The LLM will ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,7 +36,9 @@ def ToolMetadataStandardizer(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ToolMetadataStandardizer",
             "arguments": {"metadata_list": metadata_list, "limit": limit},

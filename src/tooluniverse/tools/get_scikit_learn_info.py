@@ -1,21 +1,11 @@
 """
 get_scikit_learn_info
 
-Get comprehensive information about scikit-learn – simple and efficient tools for predictive data analysis
+Get comprehensive information about scikit-learn – simple and efficient tools for predictive data...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def get_scikit_learn_info(
@@ -26,7 +16,7 @@ def get_scikit_learn_info(
     validate: bool = True,
 ) -> Any:
     """
-    Get comprehensive information about scikit-learn – simple and efficient tools for predictive data analysis
+    Get comprehensive information about scikit-learn – simple and efficient tools for predictive data...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def get_scikit_learn_info(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "get_scikit_learn_info",
             "arguments": {"include_examples": include_examples},

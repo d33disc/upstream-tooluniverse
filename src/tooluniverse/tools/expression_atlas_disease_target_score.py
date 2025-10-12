@@ -5,17 +5,7 @@ Extract disease-target association scores from Expression Atlas. This provides g
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def expression_atlas_disease_target_score(
@@ -32,7 +22,7 @@ def expression_atlas_disease_target_score(
     Parameters
     ----------
     efoId : str
-        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
+        The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339'...
     pageSize : int
         Number of results per page (default: 100, max: 100)
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def expression_atlas_disease_target_score(
     -------
     dict[str, Any]
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "expression_atlas_disease_target_score",
             "arguments": {"efoId": efoId, "pageSize": pageSize},

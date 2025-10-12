@@ -1,21 +1,11 @@
 """
 ADMETAI_predict_toxicity
 
-Predicts toxicity endpoints (AMES, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, hERG) for a given list of molecules in SMILES format.
+Predicts toxicity endpoints (AMES, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, h...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ADMETAI_predict_toxicity(
@@ -26,7 +16,7 @@ def ADMETAI_predict_toxicity(
     validate: bool = True,
 ) -> Any:
     """
-    Predicts toxicity endpoints (AMES, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, hERG) for a given list of molecules in SMILES format.
+    Predicts toxicity endpoints (AMES, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, h...
 
     Parameters
     ----------
@@ -43,7 +33,9 @@ def ADMETAI_predict_toxicity(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "ADMETAI_predict_toxicity", "arguments": {"smiles": smiles}},
         stream_callback=stream_callback,
         use_cache=use_cache,

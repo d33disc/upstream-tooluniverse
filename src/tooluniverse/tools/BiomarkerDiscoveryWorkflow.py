@@ -1,21 +1,11 @@
 """
 BiomarkerDiscoveryWorkflow
 
-Discover and validate biomarkers for a specific disease condition using literature analysis, expression data, pathway enrichment, and clinical validation.
+Discover and validate biomarkers for a specific disease condition using literature analysis, expr...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def BiomarkerDiscoveryWorkflow(
@@ -27,12 +17,12 @@ def BiomarkerDiscoveryWorkflow(
     validate: bool = True,
 ) -> Any:
     """
-    Discover and validate biomarkers for a specific disease condition using literature analysis, expression data, pathway enrichment, and clinical validation.
+    Discover and validate biomarkers for a specific disease condition using literature analysis, expr...
 
     Parameters
     ----------
     disease_condition : str
-        The disease condition to discover biomarkers for (e.g., 'breast cancer', 'Alzheimer's disease')
+        The disease condition to discover biomarkers for (e.g., 'breast cancer', 'Alz...
     sample_type : str
         The type of sample to analyze (e.g., 'blood', 'tissue', 'plasma')
     stream_callback : Callable, optional
@@ -46,7 +36,9 @@ def BiomarkerDiscoveryWorkflow(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "BiomarkerDiscoveryWorkflow",
             "arguments": {

@@ -16,13 +16,29 @@
         },
         "style": {
           "type": "string",
-          "enum": ["cartoon", "stick", "sphere", "line"],
+          "enum": [
+            "cartoon",
+            "stick",
+            "sphere",
+            "line"
+          ],
           "default": "cartoon",
           "description": "Visualization style"
         },
         "color_scheme": {
           "type": "string",
-          "enum": ["spectrum", "rainbow", "ssPyMOL", "ssJmol", "Jmol", "amino", "shapely", "nucleic", "chain", "default"],
+          "enum": [
+            "spectrum",
+            "rainbow",
+            "ssPyMOL",
+            "ssJmol",
+            "Jmol",
+            "amino",
+            "shapely",
+            "nucleic",
+            "chain",
+            "default"
+          ],
           "default": "spectrum",
           "description": "Color scheme for the structure"
         },
@@ -46,7 +62,8 @@
           "default": false,
           "description": "Whether to show molecular surface"
         }
-      }
+      },
+      "required": []
     },
     "default_width": 800,
     "default_height": 600,
@@ -79,13 +96,27 @@
             "metadata": {
               "type": "object",
               "properties": {
-                "width": {"type": "integer"},
-                "height": {"type": "integer"},
-                "style": {"type": "string"},
-                "color_scheme": {"type": "string"},
-                "pdb_id": {"type": "string"},
-                "show_sidechains": {"type": "boolean"},
-                "show_surface": {"type": "boolean"}
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "style": {
+                  "type": "string"
+                },
+                "color_scheme": {
+                  "type": "string"
+                },
+                "pdb_id": {
+                  "type": "string"
+                },
+                "show_sidechains": {
+                  "type": "boolean"
+                },
+                "show_surface": {
+                  "type": "boolean"
+                }
               }
             }
           }

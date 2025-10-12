@@ -1,21 +1,11 @@
 """
 ChEMBL_search_similar_molecules
 
-Search for molecules similar to a given SMILES, chembl_id, or compound or drug name, using the ChEMBL Web Services.
+Search for molecules similar to a given SMILES, chembl_id, or compound or drug name, using the Ch...
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def ChEMBL_search_similar_molecules(
@@ -28,7 +18,7 @@ def ChEMBL_search_similar_molecules(
     validate: bool = True,
 ) -> Any:
     """
-    Search for molecules similar to a given SMILES, chembl_id, or compound or drug name, using the ChEMBL Web Services.
+    Search for molecules similar to a given SMILES, chembl_id, or compound or drug name, using the Ch...
 
     Parameters
     ----------
@@ -49,7 +39,9 @@ def ChEMBL_search_similar_molecules(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {
             "name": "ChEMBL_search_similar_molecules",
             "arguments": {

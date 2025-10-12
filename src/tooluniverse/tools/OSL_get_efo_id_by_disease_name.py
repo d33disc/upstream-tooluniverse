@@ -5,17 +5,7 @@ Tool to lookup Experimental Factor Ontology (EFO) IDs for diseases via the EMBL-
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
+from ._shared_client import get_shared_client
 
 
 def OSL_get_efo_id_by_disease_name(
@@ -31,7 +21,7 @@ def OSL_get_efo_id_by_disease_name(
     Parameters
     ----------
     disease : str
-        Search query for diseases. Provide the disease name to lookup the corresponding EFO ID.
+        Search query for diseases. Provide the disease name to lookup the correspondi...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +33,9 @@ def OSL_get_efo_id_by_disease_name(
     -------
     Any
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
         {"name": "OSL_get_efo_id_by_disease_name", "arguments": {"disease": disease}},
         stream_callback=stream_callback,
         use_cache=use_cache,
