@@ -21,6 +21,9 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
     """Generate one file for one tool."""
     schema = tool_config.get("parameter", {}) or {}
     description = tool_config.get("description", f"Execute {tool_name}")
+    # Wrap long descriptions
+    if len(description) > 100:
+        description = description[:97] + "..."
     properties = schema.get("properties", {}) or {}
     required = schema.get("required", []) or []
 
@@ -29,6 +32,7 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
     optional_params = []
     kwargs = []
     doc_params = []
+    mutable_defaults_code = []
 
     for name, prop in properties.items():
         py_type = json_type_to_python(prop.get("type", "string"))
@@ -37,18 +41,37 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
         if name in required:
             required_params.append(f"{name}: {py_type}")
         else:
-            default = repr(prop.get("default")) if "default" in prop else "None"
-            optional_params.append(f"{name}: Optional[{py_type}] = {default}")
+            default = prop.get("default")
+            if default is not None:
+                # Handle mutable defaults to avoid B006 linting error
+                if isinstance(default, (list, dict)):
+                    # Use None as default and handle in function body
+                    optional_params.append(f"{name}: Optional[{py_type}] = None")
+                    mutable_defaults_code.append(
+                        f"    if {name} is None:\n        {name} = {repr(default)}"
+                    )
+                else:
+                    optional_params.append(
+                        f"{name}: Optional[{py_type}] = {repr(default)}"
+                    )
+            else:
+                optional_params.append(f"{name}: Optional[{py_type}] = None")
 
         kwargs.append(f'"{name}": {name}')
+        # Wrap long descriptions
+        if len(desc) > 80:
+            desc = desc[:77] + "..."
         doc_params.append(f"    {name} : {py_type}\n        {desc}")
 
     # Combine required and optional parameters
     params = required_params + optional_params
 
     params_str = ",\n    ".join(params) if params else ""
-    kwargs_str = ",\n            ".join(kwargs) if kwargs else ""
+    kwargs_str = ",\n                ".join(kwargs) if kwargs else ""
     doc_params_str = "\n".join(doc_params) if doc_params else "    No parameters"
+    mutable_defaults_str = (
+        "\n".join(mutable_defaults_code) if mutable_defaults_code else ""
+    )
 
     # Infer return type
     return_schema = tool_config.get("return_schema", {})
@@ -63,22 +86,15 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
 """
 
 from typing import Any, Optional, Callable
-from tooluniverse import ToolUniverse
+from ._shared_client import get_shared_client
 
-_client = None
 
-def _get_client():
-    global _client
-    if _client is None:
-        _client = ToolUniverse()
-        _client.load_tools()
-    return _client
-
-def {tool_name}({params_str}{"," if params_str else ""}
+def {tool_name}(
+    {params_str}{"," if params_str else ""}
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
-    validate: bool = True
+    validate: bool = True,
 ) -> {return_type}:
     """
     {description}
@@ -97,15 +113,20 @@ def {tool_name}({params_str}{"," if params_str else ""}
     -------
     {return_type}
     """
-    return _get_client().run_one_function(
+    # Handle mutable defaults to avoid B006 linting error
+{mutable_defaults_str}
+    return get_shared_client().run_one_function(
         {{
             "name": "{tool_name}",
-            "arguments": {{{kwargs_str}}}
+            "arguments": {{
+                {kwargs_str}
+            }}
         }},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate
     )
+
 
 __all__ = ["{tool_name}"]
 '''
@@ -133,10 +154,15 @@ Usage:
 # Import exceptions from main package
 from tooluniverse.exceptions import *
 
+# Import shared client utilities
+from ._shared_client import get_shared_client, reset_shared_client
+
 # Import all tools
 {chr(10).join(imports)}
 
 __all__ = [
+    "get_shared_client",
+    "reset_shared_client",
     {all_names}
 ]
 '''

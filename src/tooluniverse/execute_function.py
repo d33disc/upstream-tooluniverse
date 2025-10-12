@@ -32,6 +32,7 @@ import string
 import os
 import time
 import hashlib
+import warnings
 from typing import Any, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
 from .exceptions import (
@@ -146,6 +147,18 @@ class ToolNamespace:
         if name in self.engine.all_tool_dict:
             return ToolCallable(self.engine, name)
         raise AttributeError(f"Tool '{name}' not found")
+
+    def __len__(self) -> int:
+        """Return the number of available tools."""
+        return len(self.engine.all_tool_dict)
+
+    def __iter__(self):
+        """Iterate over tool names."""
+        return iter(self.engine.all_tool_dict.keys())
+
+    def __contains__(self, name: str) -> bool:
+        """Check if a tool exists."""
+        return name in self.engine.all_tool_dict
 
     def refresh(self):
         """Refresh tool discovery (re-discover MCP/remote tools)."""
@@ -988,104 +1001,6 @@ class ToolUniverse:
         )
         self.logger.debug("_process_mcp_auto_loaders completed")
 
-    def select_tools(
-        self,
-        include_names=None,
-        exclude_names=None,
-        include_categories=None,
-        exclude_categories=None,
-    ):
-        """
-        Select tools based on tool names and/or categories (tool_files keys).
-
-        Args:
-            include_names (list, optional): List of tool names to include. If None, include all.
-            exclude_names (list, optional): List of tool names to exclude.
-            include_categories (list, optional): List of categories (tool_files keys) to include.
-                                               If None, include all.
-            exclude_categories (list, optional): List of categories (tool_files keys) to exclude.
-
-        Returns:
-            list: List of selected tool configurations.
-        """
-        selected_tools = []
-        # If categories are specified, use self.tool_category_dicts to filter
-        categories = set(self.tool_category_dicts.keys())
-        if include_categories is not None:
-            categories &= set(include_categories)
-        if exclude_categories is not None:
-            categories -= set(exclude_categories)
-        # Gather tools from selected categories
-        for cat in categories:
-            selected_tools.extend(self.tool_category_dicts[cat])
-        # Further filter by names if needed
-        if include_names is not None:
-            selected_tools = [
-                tool for tool in selected_tools if tool["name"] in include_names
-            ]
-        if exclude_names is not None:
-            selected_tools = [
-                tool for tool in selected_tools if tool["name"] not in exclude_names
-            ]
-        return selected_tools
-
-    def filter_tool_lists(
-        self,
-        tool_name_list,
-        tool_desc_list,
-        include_names=None,
-        exclude_names=None,
-        include_categories=None,
-        exclude_categories=None,
-    ):
-        """
-        Directly filter tool name and description lists based on names and/or categories.
-
-        This method takes existing tool name and description lists and filters them according
-        to the specified criteria using the select_tools method for category-based filtering.
-
-        Args:
-            tool_name_list (list): List of tool names to filter.
-            tool_desc_list (list): List of tool descriptions to filter (must correspond to tool_name_list).
-            include_names (list, optional): List of tool names to include.
-            exclude_names (list, optional): List of tool names to exclude.
-            include_categories (list, optional): List of categories to include.
-            exclude_categories (list, optional): List of categories to exclude.
-
-        Returns:
-            tuple: A tuple containing (filtered_tool_name_list, filtered_tool_desc_list).
-        """
-        # Build a set of allowed tool names using select_tools for category filtering
-        allowed_names = set()
-        if any([include_names, exclude_names, include_categories, exclude_categories]):
-            filtered_tools = self.select_tools(
-                include_names=include_names,
-                exclude_names=exclude_names,
-                include_categories=include_categories,
-                exclude_categories=exclude_categories,
-            )
-            allowed_names = set(tool["name"] for tool in filtered_tools)
-        else:
-            allowed_names = set(tool_name_list)
-
-        # Filter lists by allowed_names
-        filtered_tool_name_list = []
-        filtered_tool_desc_list = []
-        for name, desc in zip(tool_name_list, tool_desc_list):
-            if name in allowed_names:
-                filtered_tool_name_list.append(name)
-                filtered_tool_desc_list.append(desc)
-        return filtered_tool_name_list, filtered_tool_desc_list
-
-    def return_all_loaded_tools(self):
-        """
-        Return a deep copy of all loaded tools.
-
-        Returns:
-            list: A deep copy of the all_tools list to prevent external modification.
-        """
-        return copy.deepcopy(self.all_tools)
-
     def list_built_in_tools(self, mode="config", scan_all=False):
         """
         List all built-in tool categories and their statistics with different modes.
@@ -1296,6 +1211,39 @@ class ToolUniverse:
 
         return result
 
+    def _read_tools_from_file(self, file_path):
+        """
+        Read tools from a single JSON file with error handling.
+
+        Args:
+            file_path (str): Path to the JSON file
+
+        Returns:
+            list: List of tool configurations from the file
+        """
+        try:
+            tools_in_file = read_json_list(file_path)
+
+            # Handle different data formats
+            if isinstance(tools_in_file, dict):
+                # Convert dict of tools to list of tools
+                tools_in_file = list(tools_in_file.values())
+            elif not isinstance(tools_in_file, list):
+                # Skip files that don't contain tool configurations
+                return []
+
+            # Validate tools have required fields
+            valid_tools = []
+            for tool in tools_in_file:
+                if isinstance(tool, dict) and "name" in tool:
+                    valid_tools.append(tool)
+
+            return valid_tools
+
+        except Exception as e:
+            warning(f"Warning: Could not read tools from {file_path}: {e}")
+            return []
+
     def _scan_predefined_files(self):
         """
         Scan predefined tool files (original behavior).
@@ -1308,39 +1256,23 @@ class ToolUniverse:
         all_tool_names = set()
 
         # Read tools from each category file
-        for category, file_path in self.tool_files.items():
-            try:
-                # Read the JSON file for this category
-                tools_in_category = read_json_list(file_path)
-                all_tools.extend(tools_in_category)
-                all_tool_names.update([tool["name"] for tool in tools_in_category])
-            except Exception as e:
-                warning(
-                    f"Warning: Could not read tools from {category} ({file_path}): {e}"
-                )
+        for _category, file_path in self.tool_files.items():
+            tools_in_category = self._read_tools_from_file(file_path)
+            all_tools.extend(tools_in_category)
+            all_tool_names.update([tool["name"] for tool in tools_in_category])
 
         # Also include remote tools
         try:
             remote_dir = os.path.join(current_dir, "data", "remote_tools")
             if os.path.isdir(remote_dir):
-                remote_tools = []
                 for fname in os.listdir(remote_dir):
                     if not fname.lower().endswith(".json"):
                         continue
                     fpath = os.path.join(remote_dir, fname)
-                    try:
-                        tools_in_file = read_json_list(fpath)
-                        if isinstance(tools_in_file, dict):
-                            tools_in_file = list(tools_in_file.values())
-                        if isinstance(tools_in_file, list):
-                            remote_tools.extend(tools_in_file)
-                    except Exception as e:
-                        warning(
-                            f"Warning: Could not read remote tools from {fpath}: {e}"
-                        )
-                if remote_tools:
-                    all_tools.extend(remote_tools)
-                    all_tool_names.update([tool["name"] for tool in remote_tools])
+                    remote_tools = self._read_tools_from_file(fpath)
+                    if remote_tools:
+                        all_tools.extend(remote_tools)
+                        all_tool_names.update([tool["name"] for tool in remote_tools])
         except Exception as e:
             warning(f"Warning: Failed to scan remote tools directory: {e}")
 
@@ -1373,30 +1305,13 @@ class ToolUniverse:
 
         self.logger.debug(f"Found {len(json_files)} JSON files to scan")
 
-        # Read tools from each JSON file
+        # Read tools from each JSON file using the common method
         for json_file in json_files:
-            try:
-                tools_in_file = read_json_list(json_file)
-
-                # Handle different data formats
-                if isinstance(tools_in_file, dict):
-                    # Convert dict of tools to list of tools
-                    tools_in_file = list(tools_in_file.values())
-                elif not isinstance(tools_in_file, list):
-                    # Skip files that don't contain tool configurations
-                    continue
-
-                # Add tools to our collection
-                for tool in tools_in_file:
-                    if isinstance(tool, dict) and "name" in tool:
-                        all_tools.append(tool)
-                        all_tool_names.add(tool["name"])
-
+            tools_in_file = self._read_tools_from_file(json_file)
+            if tools_in_file:
+                all_tools.extend(tools_in_file)
+                all_tool_names.update([tool["name"] for tool in tools_in_file])
                 self.logger.debug(f"Loaded {len(tools_in_file)} tools from {json_file}")
-
-            except Exception as e:
-                warning(f"Warning: Could not read tools from {json_file}: {e}")
-                continue
 
         self.logger.info(
             f"Scanned {len(json_files)} JSON files, found {len(all_tools)} tools"
@@ -1472,63 +1387,42 @@ class ToolUniverse:
                 del tool[key]
         return tool
 
-    def prepare_tool_prompts(self, tool_list):
+    def prepare_tool_prompts(self, tool_list, mode="prompt", valid_keys=None):
         """
-        Prepare a list of tool configurations for prompt usage.
+        Prepare a list of tool configurations for different usage modes.
 
         Args:
             tool_list (list): List of tool configuration dictionaries.
+            mode (str): Preparation mode. Options:
+                - 'prompt': Keep essential keys for prompting (name, description, parameter, required)
+                - 'example': Keep extended keys for examples (name, description, parameter, required, query_schema, fields, label, type)
+                - 'custom': Use custom valid_keys parameter
+            valid_keys (list, optional): Custom list of keys to keep when mode='custom'.
 
         Returns:
-            list: List of tool configurations with only essential keys for prompting.
+            list: List of tool configurations with only specified keys.
         """
-        copied_list = []
-        for tool in tool_list:
-            copied_list.append(self.prepare_one_tool_prompt(tool))
-        return copied_list
+        if mode == "prompt":
+            valid_keys = ["name", "description", "parameter", "required"]
+        elif mode == "example":
+            valid_keys = [
+                "name",
+                "description",
+                "parameter",
+                "required",
+                "query_schema",
+                "fields",
+                "label",
+                "type",
+            ]
+        elif mode == "custom":
+            if valid_keys is None:
+                raise ValueError("valid_keys must be provided when mode='custom'")
+        else:
+            raise ValueError(
+                f"Invalid mode: {mode}. Must be 'prompt', 'example', or 'custom'"
+            )
 
-    def remove_keys(self, tool_list, invalid_keys):
-        """
-        Remove specified keys from a list of tool configurations.
-
-        Args:
-            tool_list (list): List of tool configuration dictionaries.
-            invalid_keys (list): List of keys to remove from each tool configuration.
-
-        Returns:
-            list: Deep copy of tool list with specified keys removed.
-        """
-        copied_list = copy.deepcopy(tool_list)
-        for tool in copied_list:
-            # Create a list of keys to avoid modifying the dictionary during iteration
-            for key in list(tool.keys()):
-                if key in invalid_keys:
-                    del tool[key]
-        return copied_list
-
-    def prepare_tool_examples(self, tool_list):
-        """
-        Prepare tool configurations for example usage by keeping extended set of keys.
-
-        This method is similar to prepare_tool_prompts but includes additional keys
-        useful for examples and documentation.
-
-        Args:
-            tool_list (list): List of tool configuration dictionaries.
-
-        Returns:
-            list: Deep copy of tool list with only example-relevant keys.
-        """
-        valid_keys = [
-            "name",
-            "description",
-            "parameter",
-            "required",
-            "query_schema",
-            "fields",
-            "label",
-            "type",
-        ]
         copied_list = copy.deepcopy(tool_list)
         for tool in copied_list:
             # Create a list of keys to avoid modifying the dictionary during iteration
@@ -1556,21 +1450,6 @@ class ToolUniverse:
             if tool_spec:
                 picked_tool_list.append(tool_spec)
         return picked_tool_list
-
-    def get_tool_by_name(self, tool_names, format="default"):
-        """
-        Retrieve tool configurations by their names.
-
-        Args:
-            tool_names (list): List of tool names to retrieve.
-            format (str, optional): Output format. Options: 'default', 'openai'.
-                                   If 'openai', returns OpenAI function calling format. Defaults to 'default'.
-
-        Returns:
-            list: List of tool configurations for the specified names.
-                 Tools not found will be reported but not included in the result.
-        """
-        return self.get_tool_specification_by_names(tool_names, format=format)
 
     def get_one_tool_by_one_name(self, tool_name, return_prompt=True):
         """
@@ -1606,65 +1485,58 @@ class ToolUniverse:
         Returns:
             dict or None: Tool configuration if found, None otherwise.
         """
-        if tool_name in self.all_tool_dict:
-            tool_config = self.all_tool_dict[tool_name]
-
-            if format == "openai":
-                parameters = tool_config.get("parameter", {})
-                if isinstance(parameters, dict):
-                    # 修复 required 字段格式
-                    if "properties" in parameters:
-                        for _prop_name, prop_config in parameters["properties"].items():
-                            if (
-                                isinstance(prop_config, dict)
-                                and "required" in prop_config
-                            ):
-                                del prop_config["required"]
-
-                    if "required" in parameters and not isinstance(
-                        parameters["required"], list
-                    ):
-                        if parameters["required"] is True:
-                            required_list = []
-                            if "properties" in parameters:
-                                for prop_name, prop_config in parameters[
-                                    "properties"
-                                ].items():
-                                    if (
-                                        isinstance(prop_config, dict)
-                                        and prop_config.get("required") is True
-                                    ):
-                                        required_list.append(prop_name)
-                            parameters["required"] = required_list
-                        else:
-                            parameters["required"] = []
-
-                return {
-                    "name": tool_config["name"],
-                    "description": tool_config["description"],
-                    "parameters": parameters,
-                }
-            elif return_prompt:
-                return self.prepare_one_tool_prompt(tool_config)
-            else:
-                return tool_config
-        else:
+        if tool_name not in self.all_tool_dict:
             warning(f"Tool name {tool_name} not found in the loaded tools.")
             return None
 
-    def get_tool_description(self, tool_name):
-        """
-        Get the description of a tool by its name.
+        tool_config = self.all_tool_dict[tool_name]
 
-        This is a convenience method that calls get_one_tool_by_one_name.
+        if return_prompt:
+            return self.prepare_one_tool_prompt(tool_config)
 
-        Args:
-            tool_name (str): Name of the tool.
+        # Process parameter schema based on format
+        if "parameter" in tool_config and isinstance(tool_config["parameter"], dict):
+            import copy
 
-        Returns:
-            dict or None: Tool configuration if found, None otherwise.
-        """
-        return self.get_one_tool_by_one_name(tool_name)
+            processed_config = copy.deepcopy(tool_config)
+            parameter_schema = processed_config["parameter"]
+
+            if (
+                "properties" in parameter_schema
+                and parameter_schema["properties"] is not None
+            ):
+                required_properties = parameter_schema.get("required", [])
+
+                if format == "openai":
+                    # For OpenAI format: remove property-level required fields
+                    for _prop_name, prop_config in parameter_schema[
+                        "properties"
+                    ].items():
+                        if isinstance(prop_config, dict) and "required" in prop_config:
+                            del prop_config["required"]
+
+                    # Ensure required is a list
+                    if not isinstance(parameter_schema.get("required"), list):
+                        parameter_schema["required"] = (
+                            required_properties if required_properties else []
+                        )
+
+                    return {
+                        "name": processed_config["name"],
+                        "description": processed_config["description"],
+                        "parameters": parameter_schema,
+                    }
+                else:
+                    # For default format: add required fields to properties
+                    for prop_name, prop_config in parameter_schema[
+                        "properties"
+                    ].items():
+                        if isinstance(prop_config, dict):
+                            prop_config["required"] = prop_name in required_properties
+
+                    return processed_config
+
+        return tool_config
 
     def get_tool_type_by_name(self, tool_name):
         """
@@ -1680,6 +1552,15 @@ class ToolUniverse:
             KeyError: If the tool name is not found in loaded tools.
         """
         return self.all_tool_dict[tool_name]["type"]
+
+    def call_id_gen(self):
+        """
+        Generate a random call ID for function calls.
+
+        Returns:
+            str: A random 9-character string composed of letters and digits.
+        """
+        return "".join(random.choices(string.ascii_letters + string.digits, k=9))
 
     def tool_to_str(self, tool_list):
         """
@@ -1715,14 +1596,14 @@ class ToolUniverse:
             lst, return_message=return_message, verbose=verbose, format=format
         )
 
-    def call_id_gen(self):
+    def return_all_loaded_tools(self):
         """
-        Generate a random call ID for function calls.
+        Return a deep copy of all loaded tools.
 
         Returns:
-            str: A random 9-character string composed of letters and digits.
+            list: A deep copy of the all_tools list to prevent external modification.
         """
-        return "".join(random.choices(string.ascii_letters + string.digits, k=9))
+        return copy.deepcopy(self.all_tools)
 
     def run(
         self,
@@ -2262,6 +2143,66 @@ class ToolUniverse:
             self.logger.error(f"Error exporting tool names to {output_file}: {e}")
             return []
 
+    def filter_tools(
+        self,
+        include_tools=None,
+        exclude_tools=None,
+        include_tool_types=None,
+        exclude_tool_types=None,
+    ):
+        """
+        Filter tools based on inclusion/exclusion criteria.
+
+        Args:
+            include_tools (set, optional): Set of tool names to include
+            exclude_tools (set, optional): Set of tool names to exclude
+            include_tool_types (set, optional): Set of tool types to include
+            exclude_tool_types (set, optional): Set of tool types to exclude
+
+        Returns:
+            list: Filtered list of tool configurations
+        """
+        if not hasattr(self, "all_tools") or not self.all_tools:
+            self.logger.warning("No tools loaded. Call load_tools() first.")
+            return []
+
+        filtered_tools = []
+        for tool in self.all_tools:
+            tool_name = tool.get("name", "")
+            tool_type = tool.get("type", "")
+
+            # Check inclusion/exclusion criteria
+            if include_tools and tool_name not in include_tools:
+                continue
+            if exclude_tools and tool_name in exclude_tools:
+                continue
+            if include_tool_types and tool_type not in include_tool_types:
+                continue
+            if exclude_tool_types and tool_type in exclude_tool_types:
+                continue
+
+            filtered_tools.append(tool)
+
+        return filtered_tools
+
+    def get_required_parameters(self, tool_name):
+        """
+        Get required parameters for a specific tool.
+
+        Args:
+            tool_name (str): Name of the tool
+
+        Returns:
+            list: List of required parameter names
+        """
+        if tool_name not in self.all_tool_dict:
+            self.logger.warning(f"Tool '{tool_name}' not found")
+            return []
+
+        tool_config = self.all_tool_dict[tool_name]
+        parameter_schema = tool_config.get("parameter", {})
+        return parameter_schema.get("required", [])
+
     def get_available_tools(self, category_filter=None, name_only=True):
         """
         Get available tools, optionally filtered by category.
@@ -2333,9 +2274,208 @@ class ToolUniverse:
         )
         return matching_tools
 
+    # ============ DEPRECATED METHODS (Kept for backward compatibility) ============
+    # These methods are deprecated and will be removed in v2.0. Use the recommended
+    # alternatives instead. All methods below maintain backward compatibility but
+    # issue deprecation warnings when called.
+
+    def get_tool_by_name(self, tool_names, format="default"):
+        """
+        Retrieve tool configurations by their names.
+
+        DEPRECATED: Use tool_specification() instead.
+
+        Args:
+            tool_names (list): List of tool names to retrieve.
+            format (str, optional): Output format. Options: 'default', 'openai'.
+                                   If 'openai', returns OpenAI function calling format. Defaults to 'default'.
+
+        Returns:
+            list: List of tool configurations for the specified names.
+                 Tools not found will be reported but not included in the result.
+        """
+        warnings.warn(
+            "get_tool_by_name() is deprecated and will be removed in v2.0. "
+            "Use tool_specification() instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.get_tool_specification_by_names(tool_names, format=format)
+
+    def get_tool_description(self, tool_name):
+        """
+        Get the description of a tool by its name.
+
+        DEPRECATED: Use tool_specification() instead.
+
+        Args:
+            tool_name (str): Name of the tool.
+
+        Returns:
+            dict or None: Tool configuration if found, None otherwise.
+        """
+        warnings.warn(
+            "get_tool_description() is deprecated and will be removed in v2.0. "
+            "Use tool_specification() instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.get_one_tool_by_one_name(tool_name)
+
+    def remove_keys(self, tool_list, invalid_keys):
+        """
+        Remove specified keys from a list of tool configurations.
+
+        DEPRECATED: Use prepare_tool_prompts(mode='custom', valid_keys=...) instead.
+
+        Args:
+            tool_list (list): List of tool configuration dictionaries.
+            invalid_keys (list): List of keys to remove from each tool configuration.
+
+        Returns:
+            list: Deep copy of tool list with specified keys removed.
+        """
+        warnings.warn(
+            "remove_keys() is deprecated and will be removed in v2.0. "
+            "Use prepare_tool_prompts(mode='custom', valid_keys=...) instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        copied_list = copy.deepcopy(tool_list)
+        for tool in copied_list:
+            # Create a list of keys to avoid modifying the dictionary during iteration
+            for key in list(tool.keys()):
+                if key in invalid_keys:
+                    del tool[key]
+        return copied_list
+
+    def prepare_tool_examples(self, tool_list):
+        """
+        Prepare tool configurations for example usage by keeping extended set of keys.
+
+        DEPRECATED: Use prepare_tool_prompts(mode='example') instead.
+
+        Args:
+            tool_list (list): List of tool configuration dictionaries.
+
+        Returns:
+            list: Deep copy of tool list with only example-relevant keys.
+        """
+        warnings.warn(
+            "prepare_tool_examples() is deprecated and will be removed in v2.0. "
+            "Use prepare_tool_prompts(mode='example') instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.prepare_tool_prompts(tool_list, mode="example")
+
+    def select_tools(
+        self,
+        include_names=None,
+        exclude_names=None,
+        include_categories=None,
+        exclude_categories=None,
+    ):
+        """
+        Select tools based on tool names and/or categories (tool_files keys).
+
+        DEPRECATED: Use filter_tools() instead.
+
+        Args:
+            include_names (list, optional): List of tool names to include. If None, include all.
+            exclude_names (list, optional): List of tool names to exclude.
+            include_categories (list, optional): List of categories (tool_files keys) to include.
+                                               If None, include all.
+            exclude_categories (list, optional): List of categories (tool_files keys) to exclude.
+
+        Returns:
+            list: List of selected tool configurations.
+        """
+        warnings.warn(
+            "select_tools() is deprecated and will be removed in v2.0. "
+            "Use filter_tools() instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        selected_tools = []
+        # If categories are specified, use self.tool_category_dicts to filter
+        categories = set(self.tool_category_dicts.keys())
+        if include_categories is not None:
+            categories &= set(include_categories)
+        if exclude_categories is not None:
+            categories -= set(exclude_categories)
+        # Gather tools from selected categories
+        for cat in categories:
+            selected_tools.extend(self.tool_category_dicts[cat])
+        # Further filter by names if needed
+        if include_names is not None:
+            selected_tools = [
+                tool for tool in selected_tools if tool["name"] in include_names
+            ]
+        if exclude_names is not None:
+            selected_tools = [
+                tool for tool in selected_tools if tool["name"] not in exclude_names
+            ]
+        return selected_tools
+
+    def filter_tool_lists(
+        self,
+        tool_name_list,
+        tool_desc_list,
+        include_names=None,
+        exclude_names=None,
+        include_categories=None,
+        exclude_categories=None,
+    ):
+        """
+        Directly filter tool name and description lists based on names and/or categories.
+
+        DEPRECATED: Use filter_tools() and manual list filtering instead.
+
+        Args:
+            tool_name_list (list): List of tool names to filter.
+            tool_desc_list (list): List of tool descriptions to filter (must correspond to tool_name_list).
+            include_names (list, optional): List of tool names to include.
+            exclude_names (list, optional): List of tool names to exclude.
+            include_categories (list, optional): List of categories to include.
+            exclude_categories (list, optional): List of categories to exclude.
+
+        Returns:
+            tuple: A tuple containing (filtered_tool_name_list, filtered_tool_desc_list).
+        """
+        warnings.warn(
+            "filter_tool_lists() is deprecated and will be removed in v2.0. "
+            "Use filter_tools() and manual list filtering instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        # Build a set of allowed tool names using select_tools for category filtering
+        allowed_names = set()
+        if any([include_names, exclude_names, include_categories, exclude_categories]):
+            filtered_tools = self.select_tools(
+                include_names=include_names,
+                exclude_names=exclude_names,
+                include_categories=include_categories,
+                exclude_categories=exclude_categories,
+            )
+            allowed_names = set(tool["name"] for tool in filtered_tools)
+        else:
+            allowed_names = set(tool_name_list)
+
+        # Filter lists by allowed_names
+        filtered_tool_name_list = []
+        filtered_tool_desc_list = []
+        for name, desc in zip(tool_name_list, tool_desc_list):
+            if name in allowed_names:
+                filtered_tool_name_list.append(name)
+                filtered_tool_desc_list.append(desc)
+        return filtered_tool_name_list, filtered_tool_desc_list
+
     def load_tools_from_names_list(self, tool_names, clear_existing=True):
         """
         Load only specific tools by their names.
+
+        DEPRECATED: Use load_tools(include_tools=...) instead.
 
         Args:
             tool_names (list): List of tool names to load
@@ -2344,6 +2484,12 @@ class ToolUniverse:
         Returns:
             int: Number of tools successfully loaded
         """
+        warnings.warn(
+            "load_tools_from_names_list() is deprecated and will be removed in v2.0. "
+            "Use load_tools(include_tools=...) instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         if clear_existing:
             self.all_tools = []
             self.all_tool_dict = {}
