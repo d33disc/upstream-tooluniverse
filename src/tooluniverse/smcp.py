@@ -1389,9 +1389,7 @@ class SMCP(FastMCP):
             if "Tool_Finder_LLM" in available_tool_names:
                 self.tool_finder_available = True
                 self.tool_finder_type = "Tool_Finder_LLM"
-                self.logger.info(
-                    "✅ Tool_Finder_LLM available for advanced search"
-                )
+                self.logger.info("✅ Tool_Finder_LLM available for advanced search")
                 return
 
             # Fallback to Tool_RAG (embedding-based)
@@ -1883,30 +1881,30 @@ class SMCP(FastMCP):
     def _print_tooluniverse_banner(self):
         """Print ToolUniverse branding banner after FastMCP banner with dynamic information."""
         # Get transport info if available
-        transport_display = getattr(self, '_transport_type', 'Unknown')
-        server_url = getattr(self, '_server_url', 'N/A')
+        transport_display = getattr(self, "_transport_type", "Unknown")
+        server_url = getattr(self, "_server_url", "N/A")
         tools_count = len(self._exposed_tools)
-        
+
         # Map transport types to display names
         transport_map = {
-            'stdio': 'STDIO',
-            'streamable-http': 'Streamable-HTTP',
-            'http': 'HTTP',
-            'sse': 'SSE'
+            "stdio": "STDIO",
+            "streamable-http": "Streamable-HTTP",
+            "http": "HTTP",
+            "sse": "SSE",
         }
         transport_name = transport_map.get(transport_display, transport_display)
-        
+
         # Format lines with proper alignment (matching FastMCP style)
         # Each line should be exactly 75 characters (emoji takes 2 display widths but counts as 1 in len())
         transport_line = f"                 📦 Transport:       {transport_name}"
         server_line = f"                 🔗 Server URL:      {server_url}"
         tools_line = f"                 🧰 Loaded Tools:    {tools_count}"
-        
+
         # Pad to exactly 75 characters (emoji counts as 1 in len() but displays as 2)
         transport_line = transport_line + " " * (75 - len(transport_line))
         server_line = server_line + " " * (75 - len(server_line))
         tools_line = tools_line + " " * (75 - len(tools_line))
-        
+
         banner = f"""
 ╭────────────────────────────────────────────────────────────────────────────╮
 │                                                                            │
@@ -1928,40 +1926,40 @@ class SMCP(FastMCP):
     def run(self, *args, **kwargs):
         """
         Override run method to display ToolUniverse banner after FastMCP banner.
-        
+
         This method intercepts the parent's run() call to inject our custom banner
         immediately after FastMCP displays its startup banner.
         """
         # Save transport information for banner display
-        transport = kwargs.get('transport', args[0] if args else 'unknown')
-        host = kwargs.get('host', '0.0.0.0')
-        port = kwargs.get('port', 7000)
-        
+        transport = kwargs.get("transport", args[0] if args else "unknown")
+        host = kwargs.get("host", "0.0.0.0")
+        port = kwargs.get("port", 7000)
+
         self._transport_type = transport
-        
+
         # Build server URL based on transport
-        if transport == 'streamable-http' or transport == 'http':
+        if transport == "streamable-http" or transport == "http":
             self._server_url = f"http://{host}:{port}/mcp"
-        elif transport == 'sse':
+        elif transport == "sse":
             self._server_url = f"http://{host}:{port}"
         else:
             self._server_url = "N/A (stdio mode)"
-        
+
         # Use threading to print our banner shortly after FastMCP's banner
         import threading
         import time
-        
+
         def delayed_banner():
             """Print ToolUniverse banner with a small delay to appear after FastMCP banner."""
             time.sleep(1.0)  # Delay to ensure FastMCP banner displays first
             self._print_tooluniverse_banner()
-        
+
         # Start banner thread only on first run
-        if not hasattr(self, '_tooluniverse_banner_shown'):
+        if not hasattr(self, "_tooluniverse_banner_shown"):
             self._tooluniverse_banner_shown = True
             banner_thread = threading.Thread(target=delayed_banner, daemon=True)
             banner_thread.start()
-        
+
         # Call parent's run method (blocking call)
         return super().run(*args, **kwargs)
 
@@ -2244,7 +2242,10 @@ class SMCP(FastMCP):
                                 cleaned_props[prop_name] = cleaned_prop
 
                             # Create proper JSON schema for nested object
-                            object_schema = {"type": "object", "properties": cleaned_props}
+                            object_schema = {
+                                "type": "object",
+                                "properties": cleaned_props,
+                            }
 
                             # Add required array at object level if there are required fields
                             if nested_required:
@@ -2331,9 +2332,7 @@ class SMCP(FastMCP):
                     stream_flag = bool(kwargs.get("_tooluniverse_stream"))
 
                     # Filter out None values for optional parameters (preserve streaming flag)
-                    args_dict = {
-                        k: v for k, v in kwargs.items() if v is not None
-                    }
+                    args_dict = {k: v for k, v in kwargs.items() if v is not None}
                     filtered_args = {
                         k: v
                         for k, v in args_dict.items()
@@ -2357,9 +2356,9 @@ class SMCP(FastMCP):
                     function_call = {"name": tool_name, "arguments": args_dict}
 
                     loop = asyncio.get_event_loop()
-                    stream_callback = None
 
                     if stream_flag and ctx is not None and MCPContext is not None:
+
                         def stream_callback(chunk: str) -> None:
                             if not chunk:
                                 return

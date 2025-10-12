@@ -1,0 +1,71 @@
+"""
+mesh_get_subjects_by_pharmacological_action
+
+Find MeSH (Medical Subject Heading) subjects with matching pharmacological actions.
+"""
+
+from typing import Any, Optional, Callable
+from tooluniverse import ToolUniverse
+
+_client = None
+
+
+def _get_client():
+    global _client
+    if _client is None:
+        _client = ToolUniverse()
+        _client.load_tools()
+    return _client
+
+
+def mesh_get_subjects_by_pharmacological_action(
+    query: str,
+    case_sensitive: Optional[bool] = False,
+    exact_match: Optional[bool] = False,
+    limit: Optional[int] = 50,
+    *,
+    stream_callback: Optional[Callable[[str], None]] = None,
+    use_cache: bool = False,
+    validate: bool = True,
+) -> dict[str, Any]:
+    """
+    Find MeSH (Medical Subject Heading) subjects with matching pharmacological actions.
+
+    Parameters
+    ----------
+    query : str
+        Pharmacological action to search for in MeSH subjects
+    case_sensitive : bool
+        Select True to perform a case-sensitive search for the pharmacological action query
+    exact_match : bool
+        Select True to require an exact match for the pharmacological action query
+    limit : int
+        Maximum number of results to return
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    dict[str, Any]
+    """
+    return _get_client().run_one_function(
+        {
+            "name": "mesh_get_subjects_by_pharmacological_action",
+            "arguments": {
+                "query": query,
+                "case_sensitive": case_sensitive,
+                "exact_match": exact_match,
+                "limit": limit,
+            },
+        },
+        stream_callback=stream_callback,
+        use_cache=use_cache,
+        validate=validate,
+    )
+
+
+__all__ = ["mesh_get_subjects_by_pharmacological_action"]

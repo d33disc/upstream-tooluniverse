@@ -90,6 +90,16 @@ default_tool_files = {
     "software_visualization": os.path.join(
         current_dir, "data", "packages", "visualization_tools.json"
     ),
+    # Scientific visualization tools
+    "visualization_protein_3d": os.path.join(
+        current_dir, "data", "protein_structure_3d_tools.json"
+    ),
+    "visualization_molecule_2d": os.path.join(
+        current_dir, "data", "molecule_2d_tools.json"
+    ),
+    "visualization_molecule_3d": os.path.join(
+        current_dir, "data", "molecule_3d_tools.json"
+    ),
     "software_scientific_computing": os.path.join(
         current_dir, "data", "packages", "scientific_computing_tools.json"
     ),

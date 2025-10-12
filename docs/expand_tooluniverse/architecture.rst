@@ -13,7 +13,7 @@ ToolUniverse follows a modular, registry-based architecture centered around the 
    ┌────────────────────┐
    │ Applications/Agents│  ← Your business logic, conversational systems, scripts
    └──────────┬─────────┘
-              │ SDK/MCP
+              │ Python API/MCP
    ┌──────────▼─────────┐
    │  ToolUniverse Core │  ← Tool loading, registration, routing, execution
    └──────────┬─────────┘

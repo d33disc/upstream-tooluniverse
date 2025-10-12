@@ -1,0 +1,529 @@
+Generic/Proper Name(s),Type,DrugBank ID,DIQT Concern,Severity Score
+Astemizole (Hismanal),Small Molecule,DB00637,most,5.0
+Cisapride (Propulsid),Small Molecule,DB00604,most,5.0
+Clobutinol,Small Molecule,DB09004,most,5.0
+Cloforex,,,most,5.0
+Dofetilide,Small Molecule,DB00204,most,5.0
+Encainide,Small Molecule,DB01228,most,5.0
+Grepafloxacin (Raxar),Small Molecule,DB00365,most,5.0
+Levomethadyl acetate,Small Molecule,DB01227,most,5.0
+Mibefradil,Small Molecule,DB01388,most,5.0
+Prenylamine,Small Molecule,DB04825,most,5.0
+Sertindole,Small Molecule,DB06144,most,5.0
+Sparfloxacin,Small Molecule,DB01208,most,5.0
+"Terfenadine (Seldane, Triludan)",Small Molecule,DB00342,most,5.0
+Terodiline (Micturin),Small Molecule,DB13725,most,5.0
+Thioridazine (Melleril),Small Molecule,DB00679,most,5.0
+METHADONE HYDROCHLORIDE,Small Molecule,DB00333,most,5.0
+DROPERIDOL,Small Molecule,DB00450,most,5.0
+THIORIDAZINE HYDROCHLORIDE,Small Molecule,DB00679,most,5.0
+TOREMIFENE CITRATE,Small Molecule,DB00539,most,5.0
+ARSENIC TRIOXIDE,Small Molecule,DB01169,most,5.0
+VANDETANIB,Small Molecule,DB05294,most,5.0
+NILOTINIB,Small Molecule,DB04868,most,5.0
+BEDAQUILINE FUMARATE,Small Molecule,DB08903,most,5.0
+ITRACONAZOLE,Small Molecule,DB01167,most,5.0
+KETOCONAZOLE,Small Molecule,DB01026,most,5.0
+SOTALOL HYDROCHLORIDE,Small Molecule,DB00489,most,5.0
+IBUTILIDE FUMARATE,Small Molecule,DB00308,most,5.0
+MACIMORELIN ACETATE,Small Molecule,DB13074,most,4.0
+MEFLOQUINE HYDROCHLORIDE,Small Molecule,DB00358,most,4.0
+QUININE SULFATE,Small Molecule,DB00468,most,4.0
+HYDROXYCHLOROQUINE SULFATE,Small Molecule,DB01611,most,4.0
+CHLOROQUINE PHOSPHATE,Small Molecule,DB00608,most,4.0
+TETRABENAZINE,Small Molecule,DB04844,most,4.0
+GALANTAMINE HYDROBROMIDE,Small Molecule,DB00674,most,4.0
+MIRTAZAPINE,Small Molecule,DB00370,most,4.0
+NEFAZODONE HYDROCHLORIDE,Small Molecule,DB01149,most,4.0
+TRAZODONE HYDROCHLORIDE,Small Molecule,DB00656,most,4.0
+ESCITALOPRAM OXALATE,Small Molecule,DB01175,most,4.0
+FLUVOXAMINE MALEATE,Small Molecule,DB00176,most,4.0
+SERTRALINE HYDROCHLORIDE,Small Molecule,DB01104,most,4.0
+PAROXETINE HYDROCHLORIDE HEMIHYDRATE,Small Molecule,DB00715,most,4.0
+CITALOPRAM HYDROBROMIDE,Small Molecule,DB00215,most,4.0
+FLUOXETINE HYDROCHLORIDE,Small Molecule,DB00472,most,4.0
+HYDROXYZINE HYDROCHLORIDE,Small Molecule,DB00557,most,4.0
+PIMAVANSERIN TARTRATE,Small Molecule,DB05316,most,4.0
+ILOPERIDONE,Small Molecule,DB04946,most,4.0
+PALIPERIDONE,Small Molecule,DB01267,most,4.0
+PALIPERIDONE PALMITATE,Small Molecule,DB01267,most,4.0
+RISPERIDONE,Small Molecule,DB00734,most,4.0
+QUETIAPINE FUMARATE,Small Molecule,DB01224,most,4.0
+CLOZAPINE,Small Molecule,DB00363,most,4.0
+PIMOZIDE,Small Molecule,DB01100,most,4.0
+ZIPRASIDONE HYDROCHLORIDE,Small Molecule,DB00246,most,4.0
+HALOPERIDOL,Small Molecule,DB00502,most,4.0
+PERPHENAZINE,Small Molecule,DB00850,most,4.0
+FOSPHENYTOIN SODIUM,Small Molecule,DB00252,most,4.0
+TACROLIMUS,Small Molecule,DB00864,most,4.0
+FINGOLIMOD HCL,Small Molecule,DB08868,most,4.0
+ABIRATERONE ACETATE,Small Molecule,DB05812,most,4.0
+IVOSIDENIB,Small Molecule,DB14568,most,4.0
+ANAGRELIDE HYDROCHLORIDE,Small Molecule,DB00261,most,4.0
+GLASDEGIB,Small Molecule,DB11978,most,4.0
+PANOBINOSTAT,Small Molecule,DB06603,most,4.0
+OXALIPLATIN,Small Molecule,DB00526,most,4.0
+ENTRECTINIB,Small Molecule,DB11986,most,4.0
+GILTERITINIB,Small Molecule,DB12141,most,4.0
+LENVATINIB,Small Molecule,DB09078,most,4.0
+SUNITINIB MALATE,Small Molecule,DB01268,most,4.0
+RIBOCICLIB,Small Molecule,DB11730,most,4.0
+CERITINIB,Small Molecule,DB09063,most,4.0
+ENCORAFENIB,Small Molecule,DB11718,most,4.0
+VEMURAFENIB,Small Molecule,DB08881,most,4.0
+LETERMOVIR,Small Molecule,DB12070,most,4.0
+SAQUINAVIR MESYLATE,Small Molecule,DB01232,most,4.0
+FOSCARNET SODIUM,Small Molecule,DB00529,most,4.0
+POSACONAZOLE,Small Molecule,DB01263,most,4.0
+VORICONAZOLE,Small Molecule,DB00582,most,4.0
+FLUCONAZOLE,Small Molecule,DB00196,most,4.0
+GEMIFLOXACIN MESYLATE,Small Molecule,DB01155,most,4.0
+MOXIFLOXACIN HYDROCHLORIDE,Small Molecule,DB00218,most,4.0
+LEVOFLOXACIN,Small Molecule,DB01137,most,4.0
+LOMEFLOXACIN HYDROCHLORIDE,Small Molecule,DB00978,most,4.0
+CIPROFLOXACIN,Small Molecule,DB00537,most,4.0
+OFLOXACIN,Small Molecule,DB01165,most,4.0
+TELITHROMYCIN,Small Molecule,DB00976,most,4.0
+AZITHROMYCIN MONOHYDRATE,Small Molecule,DB00207,most,4.0
+CLARITHROMYCIN,Small Molecule,DB01211,most,4.0
+ERYTHROMYCIN,Small Molecule,DB00199,most,4.0
+ETELCALCETIDE,Small Molecule,DB12865,most,4.0
+CINACALCET,Small Molecule,DB01012,most,4.0
+VASOPRESSIN,Small Molecule,DB00067,most,4.0
+IVABRADINE,Small Molecule,DB09083,most,4.0
+MILRINONE LACTATE,Small Molecule,DB00235,most,4.0
+DRONEDARONE,Small Molecule,DB04855,most,4.0
+DOFETILIDE,Small Molecule,DB00204,most,4.0
+AMIODARONE HYDROCHLORIDE,Small Molecule,DB01118,most,4.0
+FLECAINIDE ACETATE,Small Molecule,DB01195,most,4.0
+PROPAFENONE HYDROCHLORIDE,Small Molecule,DB01182,most,4.0
+DISOPYRAMIDE PHOSPHATE,Small Molecule,DB00280,most,4.0
+PROCAINAMIDE HYDROCHLORIDE,Small Molecule,DB01035,most,4.0
+QUINIDINE GLUCONATE,Small Molecule,DB00908,most,4.0
+LOPERAMIDE HYDROCHLORIDE,Small Molecule,DB00836,most,4.0
+ROLAPITANT,Small Molecule,DB09291,most,4.0
+APREPITANT,Small Molecule,DB00673,most,4.0
+DOLASETRON MESYLATE,Small Molecule,DB00757,most,4.0
+ONDANSETRON HYDROCHLORIDE,Small Molecule,DB00904,most,4.0
+RABEPRAZOLE SODIUM,Small Molecule,DB01129,most,4.0
+DEUTETRABENAZINE,Small Molecule,DB12161,most,4.0
+FOSAPREPITANT,Small Molecule,DB00673,most,4.0
+VENLAFAXINE HYDROCHLORIDE,Small Molecule,DB00285,most,4.0
+COBICISTAT,Small Molecule,DB09065,moderate,3.0
+MANNITOL,Small Molecule,DB00742,moderate,3.0
+INDACATEROL MALEATE,Small Molecule,DB05039,moderate,3.0
+SALMETEROL XINAFOATE,Small Molecule,DB00938,moderate,3.0
+VALBENAZINE,Small Molecule,DB11915,moderate,3.0
+PITOLISANT HYDROCHLORIDE,Small Molecule,DB11642,moderate,3.0
+LOFEXIDINE HYDROCHLORIDE,Small Molecule,DB04948,moderate,3.0
+TRANYLCYPROMINE SULFATE,Small Molecule,DB00752,moderate,3.0
+PROTRIPTYLINE HYDROCHLORIDE,Small Molecule,DB00344,moderate,3.0
+AMITRIPTYLINE HYDROCHLORIDE,Small Molecule,DB00321,moderate,3.0
+AMISULPRIDE,Small Molecule,DB06288,moderate,3.0
+ROCURONIUM BROMIDE,Small Molecule,DB00728,moderate,3.0
+SIPONIMOD,Small Molecule,DB12371,moderate,3.0
+OZANIMOD HYDROCHLORIDE,Small Molecule,DB12612,moderate,3.0
+INOTUZUMAB OZOGAMICIN,Biotech,DB05889,moderate,3.0
+SORAFENIB,Small Molecule,DB00398,moderate,3.0
+CRIZOTINIB,Small Molecule,DB08865,moderate,3.0
+FOSTEMSAVIR TROMETHAMINE,Small Molecule,DB11796,moderate,3.0
+RILPIVIRINE HYDROCHLORIDE,Small Molecule,DB08864,moderate,3.0
+EFAVIRENZ,Small Molecule,DB00625,moderate,3.0
+DARUNAVIR,Small Molecule,DB01264,moderate,3.0
+ATAZANAVIR,Small Molecule,DB01072,moderate,3.0
+NELFINAVIR MESYLATE,Small Molecule,DB00220,moderate,3.0
+RITONAVIR,Small Molecule,DB00503,moderate,3.0
+PRETOMANID,Small Molecule,DB05154,moderate,3.0
+TELAVANCIN HYDROCHLORIDE,Small Molecule,DB06402,moderate,3.0
+OSILODROSTAT,Small Molecule,DB11837,moderate,3.0
+PASIREOTIDE,Small Molecule,DB06663,moderate,3.0
+VARDENAFIL HYDROCHLORIDE,Small Molecule,DB00862,moderate,3.0
+SOLIFENACIN SUCCINATE,Small Molecule,DB01591,moderate,3.0
+ELIGLUSTAT,Small Molecule,DB09039,moderate,3.0
+GRANISETRON HYDROCHLORIDE,Small Molecule,DB00889,moderate,3.0
+RYDAPT,Small Molecule,DB06595,moderate,3.0
+SELPERCATINIB,Small Molecule,DB15685,moderate,3.0
+ZILEUTON,Small Molecule,DB00744,moderate,3.0
+OSIMERTINIB,Small Molecule,DB09330,moderate,3.0
+HYDROCODONE BITARTRATE,Small Molecule,DB00956,moderate,2.0
+PRIMAQUINE PHOSPHATE,Small Molecule,DB01087,moderate,2.0
+AMIFAMPRIDINE,Small Molecule,DB11640,moderate,2.0
+ATOMOXETINE,Small Molecule,DB00289,moderate,2.0
+DESVENLAFAXINE,Small Molecule,DB06700,moderate,2.0
+VENLAFAXINE,Small Molecule,DB00285,moderate,2.0
+ARIPIPRAZOLE,Small Molecule,DB01238,moderate,2.0
+ARIPIPRAZOLE LAUROXIL,Small Molecule,DB14185,moderate,2.0
+LURASIDONE HYDROCHLORIDE,Small Molecule,DB08815,moderate,2.0
+TRAMADOL HYDROCHLORIDE,Small Molecule,DB00193,moderate,2.0
+TAMOXIFEN CITRATE,Small Molecule,DB00675,moderate,2.0
+BINIMETINIB,Small Molecule,DB11967,moderate,2.0
+PONATINIB HYDROCHLORIDE,Small Molecule,DB08901,moderate,2.0
+BENDAMUSTINE HYDROCHLORIDE,Small Molecule,DB06769,moderate,2.0
+TOLTERODINE TARTRATE,Small Molecule,DB01036,moderate,2.0
+MIFEPRISTONE,Small Molecule,DB00834,moderate,2.0
+RANOLAZINE,Small Molecule,DB00243,moderate,2.0
+POTASSIUM CITRATE,Small Molecule,DB01345,moderate,2.0
+POTASSIUM CHLORIDE,Small Molecule,DB00761,moderate,2.0
+OLICERIDINE,Small Molecule,DB14881,moderate,2.0
+LUTETIUM LU 177 DOTATATE,Small Molecule,DB13985,ambiguous,1.0
+RADIUM RA 223 DICHLORIDE,Small Molecule,DB08913,ambiguous,1.0
+IOBENGUANE I-131,Small Molecule,DB06704,ambiguous,1.0
+IOPAMIDOL,Small Molecule,DB08947,ambiguous,1.0
+DEFERASIROX,Small Molecule,DB01609,ambiguous,1.0
+DEFERIPRONE,Small Molecule,DB08826,ambiguous,1.0
+IDARUCIZUMAB,Biotech,DB09264,ambiguous,1.0
+SUGAMMADEX,Small Molecule,DB06206,ambiguous,1.0
+IVACAFTOR,Small Molecule,DB08820,ambiguous,1.0
+DESLORATADINE,Small Molecule,DB00967,ambiguous,1.0
+FEXOFENADINE HYDROCHLORIDE,Small Molecule,DB00950,ambiguous,1.0
+LEVOCETIRIZINE DIHYDROCHLORIDE,Small Molecule,DB06282,ambiguous,1.0
+CETIRIZINE HYDROCHLORIDE,Small Molecule,DB00341,ambiguous,1.0
+CARBINOXAMINE MALEATE,Small Molecule,DB00748,ambiguous,1.0
+MONTELUKAST,Small Molecule,DB00471,ambiguous,1.0
+UMECLIDINIUM,Small Molecule,DB09076,ambiguous,1.0
+TIOTROPIUM BROMIDE,Small Molecule,DB01409,ambiguous,1.0
+TERBUTALINE SULFATE,Small Molecule,DB00871,ambiguous,1.0
+MOXIDECTIN,Small Molecule,DB11431,ambiguous,1.0
+TRICLABENDAZOLE,Small Molecule,DB12245,ambiguous,1.0
+TAFENOQUINE,Small Molecule,DB06608,ambiguous,1.0
+ATOVAQUONE,Small Molecule,DB01117,ambiguous,1.0
+SECNIDAZOLE,Small Molecule,DB12834,ambiguous,1.0
+AMIFAMPRIDINE PHOSPHATE,Small Molecule,DB11640,ambiguous,1.0
+MEMANTINE HYDROCHLORIDE,Small Molecule,DB01043,ambiguous,1.0
+DONEPEZIL HYDROCHLORIDE,Small Molecule,DB00843,ambiguous,1.0
+SOLRIAMFETOL,Small Molecule,DB14754,ambiguous,1.0
+DEXMETHYLPHENIDATE HYDROCHLORIDE,Small Molecule,DB06701,ambiguous,1.0
+METHYLPHENIDATE HYDROCHLORIDE,Small Molecule,DB00422,ambiguous,1.0
+VORTIOXETINE,Small Molecule,DB09068,ambiguous,1.0
+VILAZODONE HYDROCHLORIDE,Small Molecule,DB06684,ambiguous,1.0
+DOXEPIN HYDROCHLORIDE,Small Molecule,DB01142,ambiguous,1.0
+SUVOREXANT,Small Molecule,DB09034,ambiguous,1.0
+DEXMEDETOMIDINE HCL,Small Molecule,DB00633,ambiguous,1.0
+REMIMAZOLAM BESYLATE,Small Molecule,DB12404,ambiguous,1.0
+CLOBAZAM,Small Molecule,DB00349,ambiguous,1.0
+BREXPIPRAZOLE,Small Molecule,DB09128,ambiguous,1.0
+CARIPRAZINE,Small Molecule,DB06016,ambiguous,1.0
+LITHIUM CARBONATE,Small Molecule,DB14509,ambiguous,1.0
+OLANZAPINE,Small Molecule,DB00334,ambiguous,1.0
+ISTRADEFYLLINE,Small Molecule,DB11757,ambiguous,1.0
+OPICAPONE,Small Molecule,DB11632,ambiguous,1.0
+SAFINAMIDE MESYLATE,Small Molecule,DB06654,ambiguous,1.0
+PRAMIPEXOLE DIHYDROCHLORIDE,Small Molecule,DB00413,ambiguous,1.0
+ROPINIROLE,Small Molecule,DB00268,ambiguous,1.0
+BRIVARACETAM,Small Molecule,DB05541,ambiguous,1.0
+PERAMPANEL,Small Molecule,DB08883,ambiguous,1.0
+LACOSAMIDE,Small Molecule,DB06218,ambiguous,1.0
+LEVETIRACETAM,Small Molecule,DB01202,ambiguous,1.0
+GABAPENTIN ENACARBIL,Small Molecule,DB08872,ambiguous,1.0
+FELBAMATE,Small Molecule,DB00949,ambiguous,1.0
+VIGABATRIN,Small Molecule,DB01080,ambiguous,1.0
+ESLICARBAZEPINE ACETATE,Small Molecule,DB09119,ambiguous,1.0
+SUMATRIPTAN SUCCINATE,Small Molecule,DB00669,ambiguous,1.0
+TAPENTADOL HYDROCHLORIDE,Small Molecule,DB06204,ambiguous,1.0
+FEBUXOSTAT,Small Molecule,DB04854,ambiguous,1.0
+TIZANIDINE,Small Molecule,DB00697,ambiguous,1.0
+MELOXICAM,Small Molecule,DB00814,ambiguous,1.0
+MONOMETHYL FUMARATE,Small Molecule,DB14219,ambiguous,1.0
+DIMETHYL FUMARATE,Small Molecule,DB08908,ambiguous,1.0
+POMALIDOMIDE,Small Molecule,DB08910,ambiguous,1.0
+PIRFENIDONE,Small Molecule,DB04951,ambiguous,1.0
+LENALIDOMIDE,Small Molecule,DB00480,ambiguous,1.0
+SILTUXIMAB,Biotech,DB09036,ambiguous,1.0
+UPADACITINIB,Small Molecule,DB15091,ambiguous,1.0
+EMAPALUMAB-LZSG,Biotech,DB14724,ambiguous,1.0
+BARICITINIB,Small Molecule,DB11817,ambiguous,1.0
+ALEMTUZUMAB,Biotech,DB00087,ambiguous,1.0
+TERIFLUNOMIDE,Small Molecule,DB08880,ambiguous,1.0
+EVEROLIMUS,Small Molecule,DB01590,ambiguous,1.0
+DAROLUTAMIDE,Small Molecule,DB12941,ambiguous,1.0
+APALUTAMIDE,Small Molecule,DB11901,ambiguous,1.0
+ENZALUTAMIDE,Small Molecule,DB08899,ambiguous,1.0
+FULVESTRANT,Small Molecule,DB00947,ambiguous,1.0
+TRIPTORELIN PAMOATE,Small Molecule,DB06825,ambiguous,1.0
+LURBINECTEDIN,Small Molecule,DB12674,ambiguous,1.0
+SELINEXOR,Small Molecule,DB11942,ambiguous,1.0
+ENASIDENIB MESYLATE,Small Molecule,DB13874,ambiguous,1.0
+VENETOCLAX,Small Molecule,DB11581,ambiguous,1.0
+ZIV-AFLIBERCEPT,Biotech,DB08885,ambiguous,1.0
+ERIBULIN MESYLATE,Small Molecule,DB08871,ambiguous,1.0
+TALAZOPARIB,Small Molecule,DB11760,ambiguous,1.0
+RUCAPARIB,Small Molecule,DB12332,ambiguous,1.0
+NIRAPARIB,Small Molecule,DB11793,ambiguous,1.0
+OLAPARIB,Small Molecule,DB09074,ambiguous,1.0
+SONIDEGIB,Small Molecule,DB09143,ambiguous,1.0
+VISMODEGIB,Small Molecule,DB08828,ambiguous,1.0
+BELINOSTAT,Small Molecule,DB05015,ambiguous,1.0
+ROMIDEPSIN,Small Molecule,DB06176,ambiguous,1.0
+VORINOSTAT,Small Molecule,DB02546,ambiguous,1.0
+IXAZOMIB,Small Molecule,DB09570,ambiguous,1.0
+BORTEZOMIB,Small Molecule,DB00188,ambiguous,1.0
+AMINOLEVULINIC ACID HYDROCHLORIDE,Small Molecule,DB00855,ambiguous,1.0
+FAM-TRASTUZUMAB DERUXTECAN-NXKI,Biotech,DB14962,ambiguous,1.0
+ISATUXIMAB,Biotech,DB14811,ambiguous,1.0
+POLATUZUMAB VEDOTIN,Biotech,DB12240,ambiguous,1.0
+ENFORTUMAB VEDOTIN,Biotech,DB13007,ambiguous,1.0
+ATEZOLIZUMAB,Biotech,DB11595,ambiguous,1.0
+ELOTUZUMAB,Biotech,DB06317,ambiguous,1.0
+OBINUTUZUMAB,Biotech,DB08935,ambiguous,1.0
+ADO-TRASTUZUMAB EMTANSINE,Biotech,DB05773,ambiguous,1.0
+PERTUZUMAB,Biotech,DB06366,ambiguous,1.0
+BRENTUXIMAB VEDOTIN,Biotech,DB08870,ambiguous,1.0
+OFATUMUMAB,Biotech,DB06650,ambiguous,1.0
+GEMTUZUMAB OZOGAMICIN,Biotech,DB00056,ambiguous,1.0
+TRASTUZUMAB,Biotech,DB00072,ambiguous,1.0
+PEMIGATINIB,Small Molecule,DB15102,ambiguous,1.0
+RIPRETINIB,Small Molecule,DB14840,ambiguous,1.0
+AVAPRITINIB,Small Molecule,DB15233,ambiguous,1.0
+CAPMATINIB,Small Molecule,DB11791,ambiguous,1.0
+ERDAFITINIB,Small Molecule,DB12147,ambiguous,1.0
+PEXIDARTINIB,Small Molecule,DB12978,ambiguous,1.0
+LAROTRECTINIB,Small Molecule,DB14723,ambiguous,1.0
+NINTEDANIB,Small Molecule,DB09079,ambiguous,1.0
+CABOZANTINIB,Small Molecule,DB08875,ambiguous,1.0
+REGORAFENIB,Small Molecule,DB08896,ambiguous,1.0
+DUVELISIB,Small Molecule,DB11952,ambiguous,1.0
+COPANLISIB,Small Molecule,DB12483,ambiguous,1.0
+IDELALISIB,Small Molecule,DB09054,ambiguous,1.0
+ZANUBRUTINIB,Small Molecule,DB15035,ambiguous,1.0
+ACALABRUTINIB,Small Molecule,DB11703,ambiguous,1.0
+IBRUTINIB,Small Molecule,DB09053,ambiguous,1.0
+AXITINIB,Small Molecule,DB06626,ambiguous,1.0
+FEDRATINIB HYDROCHLORIDE,Small Molecule,DB12500,ambiguous,1.0
+RUXOLITINIB,Small Molecule,DB08877,ambiguous,1.0
+TUCATINIB,Small Molecule,DB11652,ambiguous,1.0
+NERATINIB,Small Molecule,DB11828,ambiguous,1.0
+LAPATINIB,Small Molecule,DB01259,ambiguous,1.0
+TEMSIROLIMUS INJECTION,Small Molecule,DB06287,ambiguous,1.0
+ABEMACICLIB,Small Molecule,DB12001,ambiguous,1.0
+PALBOCICLIB,Small Molecule,DB09073,ambiguous,1.0
+SELUMETINIB,Small Molecule,DB11689,ambiguous,1.0
+COBIMETINIB,Small Molecule,DB05239,ambiguous,1.0
+TRAMETINIB,Small Molecule,DB08911,ambiguous,1.0
+BRIGATINIB,Small Molecule,DB12267,ambiguous,1.0
+ALECTINIB HYDROCHLORIDE,Small Molecule,DB11363,ambiguous,1.0
+DABRAFENIB,Small Molecule,DB08912,ambiguous,1.0
+DACOMITINIB,Small Molecule,DB11963,ambiguous,1.0
+AFATINIB,Small Molecule,DB08916,ambiguous,1.0
+BOSUTINIB MONOHYDRATE,Small Molecule,DB06616,ambiguous,1.0
+DASATINIB,Small Molecule,DB01254,ambiguous,1.0
+IXABEPILONE,Small Molecule,DB04845,ambiguous,1.0
+TRABECTEDIN,Small Molecule,DB05109,ambiguous,1.0
+CABAZITAXEL,Small Molecule,DB06772,ambiguous,1.0
+FLUDARABINE PHOSPHATE,Small Molecule,DB01073,ambiguous,1.0
+MELPHALAN,Small Molecule,DB01042,ambiguous,1.0
+BALOXAVIR MARBOXIL,Small Molecule,DB13997,ambiguous,1.0
+TECOVIRIMAT MONOHYDRATE,Small Molecule,DB12020,ambiguous,1.0
+MARAVIROC,Small Molecule,DB04835,ambiguous,1.0
+SOFOSBUVIR,Small Molecule,DB08934,ambiguous,1.0
+DOLUTEGRAVIR SODIUM,Small Molecule,DB08930,ambiguous,1.0
+RALTEGRAVIR,Small Molecule,DB06817,ambiguous,1.0
+PERAMIVIR,Small Molecule,DB06614,ambiguous,1.0
+DORAVIRINE,Small Molecule,DB12301,ambiguous,1.0
+ETRAVIRINE,Small Molecule,DB06414,ambiguous,1.0
+TENOFOVIR ALAFENAMIDE,Small Molecule,DB14126,ambiguous,1.0
+GANCICLOVIR,Small Molecule,DB01004,ambiguous,1.0
+ANIDULAFUNGIN,Small Molecule,DB00362,ambiguous,1.0
+TEDIZOLID PHOSPHATE,Small Molecule,DB09042,ambiguous,1.0
+LINEZOLID,Small Molecule,DB00601,ambiguous,1.0
+ORITAVANCIN,Small Molecule,DB04911,ambiguous,1.0
+DALBAVANCIN,Small Molecule,DB06219,ambiguous,1.0
+DELAFLOXACIN MEGLUMINE,Small Molecule,DB11943,ambiguous,1.0
+PLAZOMICIN,Small Molecule,DB12615,ambiguous,1.0
+CEFIDEROCOL SULFATE TOSYLATE,Small Molecule,DB14879,ambiguous,1.0
+CEFTAROLINE FOSAMIL,Small Molecule,DB06590,ambiguous,1.0
+OMADACYCLINE,Small Molecule,DB12455,ambiguous,1.0
+SARECYCLINE HYDROCHLORIDE,Small Molecule,DB12035,ambiguous,1.0
+ERAVACYCLINE,Small Molecule,DB12329,ambiguous,1.0
+TIGECYCLINE,Small Molecule,DB00560,ambiguous,1.0
+ELAGOLIX,Small Molecule,DB11979,ambiguous,1.0
+SILODOSIN,Small Molecule,DB06207,ambiguous,1.0
+ALFUZOSIN HYDROCHLORIDE,Small Molecule,DB00346,ambiguous,1.0
+AVANAFIL,Small Molecule,DB06237,ambiguous,1.0
+TADALAFIL,Small Molecule,DB00820,ambiguous,1.0
+MIRABEGRON,Small Molecule,DB08893,ambiguous,1.0
+FESOTERODINE FUMARATE,Small Molecule,DB06702,ambiguous,1.0
+DARIFENACIN,Small Molecule,DB00496,ambiguous,1.0
+TROSPIUM CHLORIDE,Small Molecule,DB00209,ambiguous,1.0
+OXYBUTYNIN CHLORIDE,Small Molecule,DB01062,ambiguous,1.0
+FLIBANSERIN,Small Molecule,DB04908,ambiguous,1.0
+BROMOCRIPTINE MESYLATE,Small Molecule,DB01200,ambiguous,1.0
+BEMPEDOIC ACID,Small Molecule,DB11936,ambiguous,1.0
+LOMITAPIDE MESYLATE,Small Molecule,DB08827,ambiguous,1.0
+PITAVASTATIN CALCIUM,Small Molecule,DB08860,ambiguous,1.0
+ALISKIREN HEMIFUMARATE,Small Molecule,DB09026,ambiguous,1.0
+AZILSARTAN KAMEDOXOMIL,Small Molecule,DB08822,ambiguous,1.0
+NICARDIPINE HYDROCHLORIDE,Small Molecule,DB00622,ambiguous,1.0
+ISRADIPINE,Small Molecule,DB00270,ambiguous,1.0
+CONIVAPTAN HYDROCHLORIDE,Small Molecule,DB00872,ambiguous,1.0
+TOLVAPTAN,Small Molecule,DB06212,ambiguous,1.0
+EPLERENONE,Small Molecule,DB00700,ambiguous,1.0
+MACITENTAN,Small Molecule,DB08932,ambiguous,1.0
+AMBRISENTAN,Small Molecule,DB06403,ambiguous,1.0
+GUANFACINE,Small Molecule,DB01018,ambiguous,1.0
+LEXISCAN(R) (REGADENOSON),Small Molecule,DB06213,ambiguous,1.0
+ADENOSINE INJECTION,Small Molecule,DB00640,ambiguous,1.0
+ANGIOTENSIN II,Small Molecule,DB11842,ambiguous,1.0
+DROXIDOPA,Small Molecule,DB06262,ambiguous,1.0
+MEXILETINE HYDROCHLORIDE,Small Molecule,DB00379,ambiguous,1.0
+FOSTAMATINIB,Small Molecule,DB12010,ambiguous,1.0
+AVATROMBOPAG MALEATE,Small Molecule,DB11995,ambiguous,1.0
+LUSUTROMBOPAG,Small Molecule,DB13125,ambiguous,1.0
+ELTROMBOPAG OLAMINE,Small Molecule,DB06210,ambiguous,1.0
+TRANEXAMIC ACID,Small Molecule,DB00302,ambiguous,1.0
+DEFIBROTIDE SODIUM,Biotech,DB04932,ambiguous,1.0
+BETRIXABAN,Small Molecule,DB12364,ambiguous,1.0
+EDOXABAN TOSYLATE,Small Molecule,DB09075,ambiguous,1.0
+APIXABAN,Small Molecule,DB06605,ambiguous,1.0
+RIVAROXABAN,Small Molecule,DB06228,ambiguous,1.0
+DABIGATRAN ETEXILATE MESYLATE,Small Molecule,DB06695,ambiguous,1.0
+SELEXIPAG,Small Molecule,DB11362,ambiguous,1.0
+VORAPAXAR,Small Molecule,DB09030,ambiguous,1.0
+CILOSTAZOL,Small Molecule,DB01166,ambiguous,1.0
+TREPROSTINIL,Small Molecule,DB00374,ambiguous,1.0
+TELOTRISTAT ETHYL,Small Molecule,DB12095,ambiguous,1.0
+MIGALASTAT HYDROCHLORIDE,Small Molecule,DB05018,ambiguous,1.0
+GLYCEROL PHENYLBUTYRATE,Small Molecule,DB08909,ambiguous,1.0
+ERTUGLIFLOZIN,Small Molecule,DB11827,ambiguous,1.0
+EMPAGLIFLOZIN,Small Molecule,DB09038,ambiguous,1.0
+CANAGLIFLOZIN,Small Molecule,DB08907,ambiguous,1.0
+DAPAGLIFLOZIN,Small Molecule,DB06292,ambiguous,1.0
+ORAL SEMAGLUTIDE,Small Molecule,DB13928,ambiguous,1.0
+LINAGLIPTIN,Small Molecule,DB08882,ambiguous,1.0
+ALOGLIPTIN,Small Molecule,DB06203,ambiguous,1.0
+SAXAGLIPTIN,Small Molecule,DB06335,ambiguous,1.0
+SITAGLIPTIN,Small Molecule,DB01261,ambiguous,1.0
+LORCASERIN HYDROCHLORIDE HEMIHYDRATE,Small Molecule,DB04871,ambiguous,1.0
+FENFLURAMINE,Small Molecule,DB00574,ambiguous,1.0
+CROFELEMER,Small Molecule,DB04941,ambiguous,1.0
+ELUXADOLINE,Small Molecule,DB09272,ambiguous,1.0
+TENAPANOR HYDROCHLORIDE,Small Molecule,DB11761,ambiguous,1.0
+TEGASEROD,Small Molecule,DB01079,ambiguous,1.0
+PRUCALOPRIDE,Small Molecule,DB06480,ambiguous,1.0
+NALDEMEDINE,Small Molecule,DB11691,ambiguous,1.0
+NALOXEGOL OXALATE,Small Molecule,DB09049,ambiguous,1.0
+ALVIMOPAN,Small Molecule,DB06274,ambiguous,1.0
+METHYLNALTREXONE BROMIDE,Small Molecule,DB06800,ambiguous,1.0
+OBETICHOLIC ACID,Small Molecule,DB05990,ambiguous,1.0
+PALONOSETRON HYDROCHLORIDE,Small Molecule,DB00377,ambiguous,1.0
+"ATROPINE INJECTION, 2 MG; ATROPINE SULFATE INJECTION USP, 0.5 MG/0.7 ML; ATROPINE SULFATE INJECTION USP, 1 MG/0.7 ML",Small Molecule,DB00572,ambiguous,1.0
+ALOSETRON HYDROCHLORIDE,Small Molecule,DB00969,ambiguous,1.0
+DEXLANSOPRAZOLE,Small Molecule,DB05351,ambiguous,1.0
+FAMOTIDINE,Small Molecule,DB00927,ambiguous,1.0
+ALBUTEROL SULFATE,Small Molecule,DB01001,ambiguous,1.0
+GADOBENATE DIMEGLUMINE,Small Molecule,DB14578,ambiguous,1.0
+LEVALBUTEROL TARTRATE,Small Molecule,DB13139,ambiguous,1.0
+GADOXETATE DISODIUM,Small Molecule,DB14578,ambiguous,1.0
+GLYCOPYRROLATE,Small Molecule,DB00986,ambiguous,1.0
+LUMATEPERONE,Small Molecule,DB06077,ambiguous,1.0
+TAZEMETOSTAT,Small Molecule,DB12887,ambiguous,1.0
+BREXANOLONE,Small Molecule,DB11859,ambiguous,1.0
+DALFAMPRIDINE,Small Molecule,DB06637,ambiguous,1.0
+DIROXIMEL FUMARATE,Small Molecule,DB14783,ambiguous,1.0
+FERRIC DERISOMALTOSE,Small Molecule,DB15617,ambiguous,1.0
+FERUMOXYTOL,Small Molecule,DB06215,ambiguous,1.0
+LASMIDITAN,Small Molecule,DB11732,ambiguous,1.0
+LEVOMILNACIPRAN,Small Molecule,DB08918,ambiguous,1.0
+PRALSETINIB,Small Molecule,DB15822,ambiguous,1.0
+RIMEGEPANT SULFATE,Small Molecule,DB12457,ambiguous,1.0
+UBROGEPANT,Small Molecule,DB15328,ambiguous,1.0
+VOXELOTOR,Small Molecule,DB14975,ambiguous,1.0
+cocaine,Small Molecule,DB00907,no,0.0
+disulfiram,Small Molecule,DB00822,no,0.0
+eslicarbazepine,Small Molecule,DB14575,no,0.0
+ethosuximide,Small Molecule,DB00593,no,0.0
+ethotoin,Small Molecule,DB00754,no,0.0
+primidone,Small Molecule,DB00794,no,0.0
+quazepam,Small Molecule,DB01589,no,0.0
+ramelteon,Small Molecule,DB00980,no,0.0
+salsalate,Small Molecule,DB01399,no,0.0
+stiripentol,Small Molecule,DB09118,no,0.0
+mercaptopurine,Small Molecule,DB01033,no,0.0
+thioguanine,Small Molecule,DB00352,no,0.0
+tipranavir,Small Molecule,DB00932,no,0.0
+chlorambucil,Small Molecule,DB00291,no,0.0
+flutamide,Small Molecule,DB00499,no,0.0
+lomustine,Small Molecule,DB01206,no,0.0
+sulfonamide,Small Molecule,DB00648,no,0.0
+nitrogen,Small Molecule,DB09152,no,0.0
+valrubicin,Small Molecule,DB00385,no,0.0
+adefovir,Small Molecule,DB13868,no,0.0
+amoxicillin,Small Molecule,DB01060,no,0.0
+capreomycin,Small Molecule,DB00314,no,0.0
+cefadroxil,Small Molecule,DB01140,no,0.0
+cefditoren,Small Molecule,DB01066,no,0.0
+cefepime,Small Molecule,DB01413,no,0.0
+cefixime,Small Molecule,DB00671,no,0.0
+cefotetan,Small Molecule,DB01330,no,0.0
+cefoxitin,Small Molecule,DB01331,no,0.0
+ceftizoxime,Small Molecule,DB01332,no,0.0
+cephalexin,Small Molecule,DB00567,no,0.0
+streptomycin,Small Molecule,DB01082,no,0.0
+sulfadiazine,Small Molecule,DB00359,no,0.0
+dicloxacillin,Small Molecule,DB00485,no,0.0
+didanosine,Small Molecule,DB00900,no,0.0
+emtricitabine,Small Molecule,DB00879,no,0.0
+entecavir,Small Molecule,DB00442,no,0.0
+fosfomycin,Small Molecule,DB00828,no,0.0
+isoniazid,Small Molecule,DB00951,no,0.0
+methenamine,Small Molecule,DB06799,no,0.0
+miconazole,Small Molecule,DB01110,no,0.0
+nevirapine,Small Molecule,DB00238,no,0.0
+triamterene,Small Molecule,DB00384,no,0.0
+benzocaine,Small Molecule,DB01086,no,0.0
+bumetanide,Small Molecule,DB00887,no,0.0
+simvastatin,Small Molecule,DB00641,no,0.0
+spironolactone,Small Molecule,DB00421,no,0.0
+trimetrexate,Small Molecule,DB01157,no,0.0
+cetrorelix,Small Molecule,DB00050,no,0.0
+methimazole,Small Molecule,DB00763,no,0.0
+acarbose,Small Molecule,DB00284,no,0.0
+betaine,Small Molecule,DB06756,no,0.0
+alendronate,Small Molecule,DB00630,no,0.0
+butoconazole,Small Molecule,DB00639,no,0.0
+pyridoxine,Small Molecule,DB00165,no,0.0
+oxandrolone,Small Molecule,DB00621,no,0.0
+oxacillin,Small Molecule,DB00713,no,0.0
+piperacillin,Small Molecule,DB00319,no,0.0
+pyrazinamide,Small Molecule,DB00339,no,0.0
+rifabutin,Small Molecule,DB00615,no,0.0
+stavudine,Small Molecule,DB00649,no,0.0
+sulfacetamide,Small Molecule,DB00634,no,0.0
+tafluprost,Small Molecule,DB08819,no,0.0
+tobramycin,Small Molecule,DB00684,no,0.0
+propantheline,Small Molecule,DB00782,no,0.0
+chlorpropamide,Small Molecule,DB00672,no,0.0
+tolbutamide,Small Molecule,DB01124,no,0.0
+tolazamide,Small Molecule,DB00839,no,0.0
+nitisinone,Small Molecule,DB00348,no,0.0
+dobutamine,Small Molecule,DB00841,no,0.0
+mecamylamine,Small Molecule,DB00657,no,0.0
+phenoxybenzamine,Small Molecule,DB00925,no,0.0
+esmolol,Small Molecule,DB00187,no,0.0
+nebivolol,Small Molecule,DB04861,no,0.0
+flavoxate,Small Molecule,DB01148,no,0.0
+papaverine,Small Molecule,DB01113,no,0.0
+acetohydroxamic acid,Small Molecule,DB00551,no,0.0
+phenazopyridine,Small Molecule,DB01438,no,0.0
+dimethyl sulfoxide,Small Molecule,DB01093,no,0.0
+doripenem,Small Molecule,DB06211,no,0.0
+ethionamide,Small Molecule,DB00609,no,0.0
+rimantadine,Small Molecule,DB00478,no,0.0
+gefitinib,Small Molecule,DB00317,no,0.0
+nabumetone,Small Molecule,DB00461,no,0.0
+methocarbamol,Small Molecule,DB00423,no,0.0
+chlorzoxazone,Small Molecule,DB00356,no,0.0
+orphenadrine,Small Molecule,DB01173,no,0.0
+probenecid,Small Molecule,DB01032,no,0.0
+methsuximide,Small Molecule,DB05246,no,0.0
+trihexyphenidyl,Small Molecule,DB00376,no,0.0
+pentobarbital,Small Molecule,DB00312,no,0.0
+secobarbital,Small Molecule,DB00418,no,0.0
+bethanechol,Small Molecule,DB01019,no,0.0
+albendazole,Small Molecule,DB00518,no,0.0
+benzonatate,Small Molecule,DB00868,no,0.0
+meclizine,Small Molecule,DB00737,no,0.0
+cyproheptadine,Small Molecule,DB00434,no,0.0
+epinastine,Small Molecule,DB00751,no,0.0
+doxapram,Small Molecule,DB00561,no,0.0
+besifloxacin,Small Molecule,DB06771,no,0.0
+flumazenil,Small Molecule,DB01205,no,0.0

@@ -1,0 +1,54 @@
+"""
+get_space_group_by_pdb_id
+
+Get the crystallographic space group of the structure.
+"""
+
+from typing import Any, Optional, Callable
+from tooluniverse import ToolUniverse
+
+_client = None
+
+
+def _get_client():
+    global _client
+    if _client is None:
+        _client = ToolUniverse()
+        _client.load_tools()
+    return _client
+
+
+def get_space_group_by_pdb_id(
+    pdb_id: Optional[str] = None,
+    *,
+    stream_callback: Optional[Callable[[str], None]] = None,
+    use_cache: bool = False,
+    validate: bool = True,
+) -> Any:
+    """
+    Get the crystallographic space group of the structure.
+
+    Parameters
+    ----------
+    pdb_id : str
+        4-character RCSB PDB ID
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
+    """
+    return _get_client().run_one_function(
+        {"name": "get_space_group_by_pdb_id", "arguments": {"pdb_id": pdb_id}},
+        stream_callback=stream_callback,
+        use_cache=use_cache,
+        validate=validate,
+    )
+
+
+__all__ = ["get_space_group_by_pdb_id"]

@@ -290,7 +290,7 @@
     "fail_on_missing_tools": false,
     "required_tools": [
       "IntentAnalyzerAgent",
-      "KeywordExtractorAgent", 
+      "KeywordExtractorAgent",
       "ResultSummarizerAgent",
       "QualityCheckerAgent",
       "OverallSummaryAgent",

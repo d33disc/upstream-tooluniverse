@@ -31,12 +31,23 @@ import random
 import string
 import os
 import time
+import hashlib
+from typing import Any, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
+from .exceptions import (
+    ToolError,
+    ToolUnavailableError,
+    ToolValidationError,
+    ToolConfigError,
+    ToolServerError,
+)
 from .tool_registry import (
     auto_discover_tools,
     get_tool_registry,
     register_external_tool,
     get_tool_class_lazy,
+    get_tool_errors,
+    mark_tool_unavailable,
 )
 from .logging_config import (
     get_logger,
@@ -79,6 +90,70 @@ else:
     debug(f"Full tool registry initialized with {len(tool_type_mappings)} tools")
 for _tool_name, _tool_class in sorted(tool_type_mappings.items()):
     debug(f"  - {_tool_name}: {_tool_class.__name__}")
+
+
+class ToolCallable:
+    """
+    A callable wrapper for a tool that validates kwargs and calls run_one_function.
+
+    This class provides the dynamic function interface for tools, allowing
+    them to be called like regular Python functions with keyword arguments.
+    """
+
+    def __init__(self, engine: "ToolUniverse", tool_name: str):
+        self.engine = engine
+        self.tool_name = tool_name
+        self.schema = engine.all_tool_dict[tool_name]["parameter"]
+        self.__doc__ = engine.all_tool_dict[tool_name].get("description", tool_name)
+
+    def __call__(
+        self, *, stream_callback=None, use_cache=False, validate=True, **kwargs
+    ):
+        """
+        Execute the tool with the provided keyword arguments.
+
+        Args:
+            stream_callback: Optional callback for streaming responses
+            use_cache: Whether to use result caching
+            validate: Whether to validate parameters against schema
+            **kwargs: Tool-specific arguments
+
+        Returns:
+            Tool execution result
+        """
+        function_call = {"name": self.tool_name, "arguments": kwargs}
+        return self.engine.run_one_function(
+            function_call,
+            stream_callback=stream_callback,
+            use_cache=use_cache,
+            validate=validate,
+        )
+
+
+class ToolNamespace:
+    """
+    Dynamic namespace for accessing tools as callable functions.
+
+    This class provides the `tu.tools.tool_name(**kwargs)` interface,
+    dynamically creating ToolCallable instances for each available tool.
+    """
+
+    def __init__(self, engine: "ToolUniverse"):
+        self.engine = engine
+
+    def __getattr__(self, name: str) -> ToolCallable:
+        """Return a ToolCallable for the requested tool name."""
+        if name in self.engine.all_tool_dict:
+            return ToolCallable(self.engine, name)
+        raise AttributeError(f"Tool '{name}' not found")
+
+    def refresh(self):
+        """Refresh tool discovery (re-discover MCP/remote tools)."""
+        self.engine.refresh_tools()
+
+    def eager_load(self, names: Optional[List[str]] = None):
+        """Pre-instantiate tools to reduce first-call latency."""
+        self.engine.eager_load_tools(names)
 
 
 class ToolUniverse:
@@ -171,6 +246,16 @@ class ToolUniverse:
         else:
             self.hook_manager = None
             self.logger.debug("Output hooks disabled")
+
+        # Initialize new attributes for enhanced functionality
+        self._cache = {}  # Simple cache for tool results
+        self._cache_size = int(os.getenv("TOOLUNIVERSE_CACHE_SIZE", "100"))
+        self._strict_validation = os.getenv(
+            "TOOLUNIVERSE_STRICT_VALIDATION", "false"
+        ).lower() in ("true", "1", "yes")
+
+        # Initialize dynamic tools namespace
+        self.tools = ToolNamespace(self)
 
     def register_custom_tool(self, tool_class, tool_name=None, tool_config=None):
         """
@@ -1708,7 +1793,9 @@ class ToolUniverse:
             error("Not a function call")
             return None
 
-    def run_one_function(self, function_call_json, stream_callback=None):
+    def run_one_function(
+        self, function_call_json, stream_callback=None, use_cache=False, validate=True
+    ):
         """
         Execute a single function call.
 
@@ -1718,40 +1805,63 @@ class ToolUniverse:
 
         Args:
             function_call_json (dict): Dictionary containing function name and arguments.
+            stream_callback (callable, optional): Callback for streaming responses.
+            use_cache (bool, optional): Whether to use result caching. Defaults to False.
+            validate (bool, optional): Whether to validate parameters against schema. Defaults to True.
 
         Returns:
             str or dict: Result from the tool execution, or error message if validation fails.
         """
-        check_status, check_message = self.check_function_call(function_call_json)
-        if check_status is False:
-            return (
-                "Invalid function call: " + check_message
-            )  # + "  You must correct your invalid function call!"
         function_name = function_call_json["name"]
         arguments = function_call_json["arguments"]
+
+        # Check cache first if enabled
+        if use_cache:
+            cache_key = self._make_cache_key(function_name, arguments)
+            if cache_key in self._cache:
+                self.logger.debug(f"Cache hit for {function_name}")
+                return self._cache[cache_key]
+
+        # Validate parameters if requested
+        if validate:
+            validation_error = self._validate_parameters(function_name, arguments)
+            if validation_error:
+                return self._create_dual_format_error(validation_error)
+
+        # Check function call format (existing validation)
+        check_status, check_message = self.check_function_call(function_call_json)
+        if check_status is False:
+            error_msg = "Invalid function call: " + check_message
+            return self._create_dual_format_error(
+                ToolValidationError(error_msg, details={"check_message": check_message})
+            )
 
         # Execute the tool
         tool_instance = None
         tool_arguments = arguments
-        if function_name in self.callable_functions:
-            tool_instance = self.callable_functions[function_name]
-            result, tool_arguments = self._execute_tool_with_stream(
-                tool_instance, arguments, stream_callback
-            )
-        else:
-            if function_name in self.all_tool_dict:
-                self.logger.debug(
-                    "Initiating callable_function from loaded tool dicts."
-                )
-                tool = self.init_tool(
-                    self.all_tool_dict[function_name], add_to_cache=True
-                )
-                tool_instance = tool
+        try:
+            # Get or create tool instance (optimized to avoid duplication)
+            tool_instance = self._get_tool_instance(function_name, cache=True)
+
+            if tool_instance:
                 result, tool_arguments = self._execute_tool_with_stream(
-                    tool_instance, arguments, stream_callback
+                    tool_instance, arguments, stream_callback, use_cache, validate
                 )
             else:
-                return f"Tool '{function_name}' not found"
+                error_msg = f"Tool '{function_name}' not found"
+                return self._create_dual_format_error(
+                    ToolUnavailableError(
+                        error_msg,
+                        next_steps=[
+                            "Check tool name spelling",
+                            "Run tu.tools.refresh()",
+                        ],
+                    )
+                )
+        except Exception as e:
+            # Classify and return structured error
+            classified_error = self._classify_exception(e, function_name, arguments)
+            return self._create_dual_format_error(classified_error)
 
         # Apply output hooks if enabled
         if self.hook_manager:
@@ -1769,16 +1879,26 @@ class ToolUniverse:
                 result, function_name, tool_arguments, context
             )
 
+        # Cache result if enabled
+        if use_cache:
+            cache_key = self._make_cache_key(function_name, arguments)
+            self._cache[cache_key] = result
+            # Simple cache size management
+            if len(self._cache) > self._cache_size:
+                # Remove oldest entries (simple FIFO)
+                oldest_key = next(iter(self._cache))
+                del self._cache[oldest_key]
+
         return result
 
-    def _execute_tool_with_stream(self, tool_instance, arguments, stream_callback):
-        """Invoke a tool, forwarding stream callbacks when supported."""
+    def _execute_tool_with_stream(
+        self, tool_instance, arguments, stream_callback, use_cache=False, validate=True
+    ):
+        """Invoke a tool, forwarding stream callbacks and other parameters when supported."""
 
         tool_arguments = arguments
         stream_flag_key = (
-            getattr(tool_instance, "STREAM_FLAG_KEY", None)
-            if stream_callback
-            else None
+            getattr(tool_instance, "STREAM_FLAG_KEY", None) if stream_callback else None
         )
 
         if isinstance(arguments, dict):
@@ -1791,24 +1911,30 @@ class ToolUniverse:
             ):
                 tool_arguments[stream_flag_key] = True
 
-        if stream_callback is None:
-            return tool_instance.run(tool_arguments), tool_arguments
-
+        # Try to pass all available parameters to the tool
         try:
             signature = inspect.signature(tool_instance.run)
-            if "stream_callback" in signature.parameters:
-                return (
-                    tool_instance.run(
-                        tool_arguments, stream_callback=stream_callback
-                    ),
-                    tool_arguments,
-                )
-        except (ValueError, TypeError):
-            # If inspection fails, fall back to best-effort execution
-            pass
+            params = signature.parameters
 
-        # Tool doesn't support streaming yet; execute normally
-        return tool_instance.run(tool_arguments), tool_arguments
+            # Build kwargs based on what the tool accepts
+            kwargs = {}
+
+            # Always include arguments as first positional argument
+            if stream_callback is not None and "stream_callback" in params:
+                kwargs["stream_callback"] = stream_callback
+            if "use_cache" in params:
+                kwargs["use_cache"] = use_cache
+            if "validate" in params:
+                kwargs["validate"] = validate
+
+            # Call with all supported parameters
+            return tool_instance.run(tool_arguments, **kwargs), tool_arguments
+
+        except (ValueError, TypeError) as e:
+            # If inspection fails or tool doesn't accept extra params,
+            # fall back to simple execution with just arguments
+            self.logger.debug(f"Falling back to simple run() call: {e}")
+            return tool_instance.run(tool_arguments), tool_arguments
 
     def toggle_hooks(self, enabled: bool):
         """
@@ -1845,65 +1971,215 @@ class ToolUniverse:
             add_to_cache (bool, optional): Whether to cache the initialized tool. Defaults to True.
 
         Returns:
-            object: Initialized tool instance.
+            object: Initialized tool instance or None if initialization fails.
 
         Raises:
             KeyError: If the tool type is not found in tool_type_mappings.
         """
         global tool_type_mappings
 
-        if tool_name is not None:
-            # Use lazy loading to get the tool class
-            tool_class = get_tool_class_lazy(tool_name)
-            if tool_class is None:
-                raise KeyError(f"Tool type '{tool_name}' not found in registry")
-            new_tool = tool_class()
-        else:
-            tool_type = tool["type"]
-            tool_name = tool["name"]
-
-            # Use lazy loading to get the tool class
-            tool_class = get_tool_class_lazy(tool_type)
-            if tool_class is None:
-                # Fallback to old method if lazy loading fails
-                if tool_type not in tool_type_mappings:
-                    # Refresh registry and try again
-                    tool_type_mappings = get_tool_registry()
-                if tool_type not in tool_type_mappings:
-                    raise KeyError(f"Tool type '{tool_type}' not found in registry")
-                tool_class = tool_type_mappings[tool_type]
-
-            if "OpentargetToolDrugNameMatch" == tool_type:
-                if "FDADrugLabelGetDrugGenericNameTool" not in self.callable_functions:
-                    drug_tool_class = get_tool_class_lazy(
-                        "FDADrugLabelGetDrugGenericNameTool"
-                    )
-                    if drug_tool_class is None:
-                        drug_tool_class = tool_type_mappings[
-                            "FDADrugLabelGetDrugGenericNameTool"
-                        ]
-                    self.callable_functions["FDADrugLabelGetDrugGenericNameTool"] = (
-                        drug_tool_class()
-                    )
-                new_tool = tool_class(
-                    tool_config=tool,
-                    drug_generic_tool=self.callable_functions[
-                        "FDADrugLabelGetDrugGenericNameTool"
-                    ],
-                )
-            elif "ToolFinderEmbedding" == tool_type:
-                new_tool = tool_class(tool_config=tool, tooluniverse=self)
-            elif "ComposeTool" == tool_type:
-                new_tool = tool_class(tool_config=tool, tooluniverse=self)
-            elif "ToolFinderLLM" == tool_type:
-                new_tool = tool_class(tool_config=tool, tooluniverse=self)
-            elif "ToolFinderKeyword" == tool_type:
-                new_tool = tool_class(tool_config=tool, tooluniverse=self)
+        try:
+            if tool_name is not None:
+                # Use lazy loading to get the tool class
+                tool_class = get_tool_class_lazy(tool_name)
+                if tool_class is None:
+                    raise KeyError(f"Tool type '{tool_name}' not found in registry")
+                new_tool = tool_class()
             else:
-                new_tool = tool_class(tool_config=tool)
-        if add_to_cache:
-            self.callable_functions[tool_name] = new_tool
-        return new_tool
+                tool_type = tool["type"]
+                tool_name = tool["name"]
+
+                # Use lazy loading to get the tool class
+                tool_class = get_tool_class_lazy(tool_type)
+                if tool_class is None:
+                    # Fallback to old method if lazy loading fails
+                    if tool_type not in tool_type_mappings:
+                        # Refresh registry and try again
+                        tool_type_mappings = get_tool_registry()
+                    if tool_type not in tool_type_mappings:
+                        raise KeyError(f"Tool type '{tool_type}' not found in registry")
+                    tool_class = tool_type_mappings[tool_type]
+
+                if "OpentargetToolDrugNameMatch" == tool_type:
+                    if (
+                        "FDADrugLabelGetDrugGenericNameTool"
+                        not in self.callable_functions
+                    ):
+                        drug_tool_class = get_tool_class_lazy(
+                            "FDADrugLabelGetDrugGenericNameTool"
+                        )
+                        if drug_tool_class is None:
+                            drug_tool_class = tool_type_mappings[
+                                "FDADrugLabelGetDrugGenericNameTool"
+                            ]
+                        self.callable_functions[
+                            "FDADrugLabelGetDrugGenericNameTool"
+                        ] = drug_tool_class()
+                    new_tool = tool_class(
+                        tool_config=tool,
+                        drug_generic_tool=self.callable_functions[
+                            "FDADrugLabelGetDrugGenericNameTool"
+                        ],
+                    )
+                elif "ToolFinderEmbedding" == tool_type:
+                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
+                elif "ComposeTool" == tool_type:
+                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
+                elif "ToolFinderLLM" == tool_type:
+                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
+                elif "ToolFinderKeyword" == tool_type:
+                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
+                else:
+                    new_tool = tool_class(tool_config=tool)
+
+            if add_to_cache:
+                self.callable_functions[tool_name] = new_tool
+            return new_tool
+
+        except Exception as e:
+            tool_type = tool_name if tool_name else tool.get("type")
+            mark_tool_unavailable(tool_type, e)
+            self.logger.warning(f"Failed to initialize '{tool_type}': {e}")
+            return None  # Return None instead of raising
+
+    def _get_tool_instance(self, function_name: str, cache: bool = True):
+        """Get or create tool instance with optional caching."""
+        # Check cache first
+        if function_name in self.callable_functions:
+            return self.callable_functions[function_name]
+
+        # Check if known unavailable
+        tool_errors = get_tool_errors()
+        if function_name in tool_errors:
+            self.logger.debug(f"Tool {function_name} is unavailable")
+            return None
+
+        # Try to initialize
+        if function_name in self.all_tool_dict:
+            return self.init_tool(self.all_tool_dict[function_name], add_to_cache=cache)
+
+        return None
+
+    def _make_cache_key(self, function_name: str, arguments: dict) -> str:
+        """Generate cache key by delegating to BaseTool."""
+        tool_instance = self._get_tool_instance(function_name, cache=False)
+
+        if tool_instance:
+            return tool_instance.get_cache_key(arguments)
+
+        # Fallback: simple hash-based key
+        serialized = json.dumps(
+            {"name": function_name, "args": arguments}, sort_keys=True
+        )
+        return hashlib.md5(serialized.encode()).hexdigest()
+
+    def _validate_parameters(
+        self, function_name: str, arguments: dict
+    ) -> Optional[ToolError]:
+        """Validate parameters by delegating to BaseTool."""
+        if function_name not in self.all_tool_dict:
+            return ToolUnavailableError(f"Tool '{function_name}' not found")
+
+        tool_instance = self._get_tool_instance(function_name, cache=False)
+        if not tool_instance:
+            return ToolConfigError("Failed to initialize tool for validation")
+
+        # Check if tool has validate_parameters method (for backward compatibility)
+        if hasattr(tool_instance, "validate_parameters"):
+            return tool_instance.validate_parameters(arguments)
+        else:
+            # Fallback for old-style tools without validate_parameters
+            # Just return None (no validation) to maintain backward compatibility
+            return None
+
+    def _check_basic_type(self, value: Any, expected_type: str) -> bool:
+        """Check if value matches expected basic type."""
+        type_mapping = {
+            "string": str,
+            "integer": int,
+            "number": (int, float),
+            "boolean": bool,
+            "object": dict,
+            "array": list,
+        }
+
+        if expected_type not in type_mapping:
+            return True  # Unknown type, skip validation
+
+        expected_python_type = type_mapping[expected_type]
+        return isinstance(value, expected_python_type)
+
+    def _classify_exception(
+        self, exception: Exception, function_name: str, arguments: dict
+    ) -> ToolError:
+        """Classify exception by delegating to BaseTool."""
+        tool_instance = self._get_tool_instance(function_name, cache=False)
+
+        if tool_instance:
+            return tool_instance.handle_error(exception)
+
+        # Fallback for tool instance creation failure
+        return ToolServerError(f"Unexpected error calling {function_name}: {exception}")
+
+    def _create_dual_format_error(self, error: ToolError) -> dict:
+        """Create dual-format error response for backward compatibility."""
+        return {
+            "error": str(error),  # Backward compatible string
+            "error_details": error.to_dict(),  # New structured format
+        }
+
+    def refresh_tools(self):
+        """Refresh tool discovery (re-discover MCP/remote tools, reload configs)."""
+        # TODO: Implement MCP tool re-discovery
+        # For now, just reload tool configurations
+        self.logger.info("Refreshing tool configurations...")
+        # This could be extended to re-discover MCP tools, reload configs, etc.
+        self.logger.info("Tool refresh completed")
+
+    def eager_load_tools(self, names: Optional[List[str]] = None):
+        """Pre-instantiate tools to reduce first-call latency."""
+        tool_names = names or list(self.all_tool_dict.keys())
+        self.logger.info(f"Eager loading {len(tool_names)} tools...")
+
+        for tool_name in tool_names:
+            if (
+                tool_name in self.all_tool_dict
+                and tool_name not in self.callable_functions
+            ):
+                try:
+                    self.init_tool(self.all_tool_dict[tool_name], add_to_cache=True)
+                    self.logger.debug(f"Eager loaded: {tool_name}")
+                except Exception as e:
+                    self.logger.warning(f"Failed to eager load {tool_name}: {e}")
+
+        self.logger.info(
+            f"Eager loading completed. {len(self.callable_functions)} tools cached."
+        )
+
+    def clear_cache(self):
+        """Clear the result cache."""
+        self._cache.clear()
+        self.logger.info("Result cache cleared")
+
+    def get_tool_health(self, tool_name: str = None) -> dict:
+        """Get health status for tool(s)."""
+        tool_errors = get_tool_errors()
+
+        if tool_name:
+            if tool_name in tool_errors:
+                return tool_errors[tool_name]
+            elif tool_name in self.all_tool_dict:
+                return {"available": True}
+            return {"available": False, "error": "Not found"}
+
+        # Summary for all tools
+        return {
+            "total": len(self.all_tool_dict),
+            "available": len(self.all_tool_dict) - len(tool_errors),
+            "unavailable": len(tool_errors),
+            "unavailable_list": list(tool_errors.keys()),
+            "details": tool_errors,
+        }
 
     def check_function_call(self, fcall_str, function_config=None, format="llama"):
         """

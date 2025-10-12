@@ -1,0 +1,60 @@
+"""
+OpenTargets_drug_pharmacogenomics_data
+
+Retrieve pharmacogenomics data for a specific drug, including evidence levels and genotype annotations.
+"""
+
+from typing import Any, Optional, Callable
+from tooluniverse import ToolUniverse
+
+_client = None
+
+
+def _get_client():
+    global _client
+    if _client is None:
+        _client = ToolUniverse()
+        _client.load_tools()
+    return _client
+
+
+def OpenTargets_drug_pharmacogenomics_data(
+    chemblId: Optional[str] = None,
+    page: Optional[dict[str, Any]] = None,
+    *,
+    stream_callback: Optional[Callable[[str], None]] = None,
+    use_cache: bool = False,
+    validate: bool = True,
+) -> Any:
+    """
+    Retrieve pharmacogenomics data for a specific drug, including evidence levels and genotype annotations.
+
+    Parameters
+    ----------
+    chemblId : str
+        The ChEMBL ID of the drug.
+    page : dict[str, Any]
+        Pagination options.
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
+    """
+    return _get_client().run_one_function(
+        {
+            "name": "OpenTargets_drug_pharmacogenomics_data",
+            "arguments": {"chemblId": chemblId, "page": page},
+        },
+        stream_callback=stream_callback,
+        use_cache=use_cache,
+        validate=validate,
+    )
+
+
+__all__ = ["OpenTargets_drug_pharmacogenomics_data"]

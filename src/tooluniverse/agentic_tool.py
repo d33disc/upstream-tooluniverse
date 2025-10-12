@@ -202,7 +202,9 @@ class AgenticTool(BaseTool):
             f"Tool '{self.name}' failed to initialize with all available APIs"
         )
 
-    def _try_api(self, api_type: str, model_id: str, server_url: Optional[str] = None) -> bool:
+    def _try_api(
+        self, api_type: str, model_id: str, server_url: Optional[str] = None
+    ) -> bool:
         """Try to initialize a specific API and model."""
         try:
             if api_type == "CHATGPT":
