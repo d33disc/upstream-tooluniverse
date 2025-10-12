@@ -27,13 +27,7 @@
           "description": "If true, also return PlainSections[] with HTML removed for each topic"
         }
       },
-      "required": [
-        "lang",
-        "age",
-        "sex",
-        "pregnant",
-        "strip_html"
-      ]
+      "required": []
     },
     "fields": {
       "endpoint": "/myhealthfinder.json",
@@ -324,10 +318,7 @@
           "description": "topic or category"
         }
       },
-      "required": [
-        "lang",
-        "type"
-      ]
+      "required": []
     },
     "fields": {
       "endpoint": "/itemlist.json",
@@ -408,11 +399,9 @@
         }
       },
       "required": [
-        "lang",
         "topicId",
         "categoryId",
-        "keyword",
-        "strip_html"
+        "keyword"
       ]
     },
     "fields": {
@@ -577,9 +566,7 @@
         }
       },
       "required": [
-        "urls",
-        "max_chars",
-        "return_html"
+        "urls"
       ]
     },
     "fields": {

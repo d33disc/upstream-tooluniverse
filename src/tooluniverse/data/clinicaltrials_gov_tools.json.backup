@@ -27,7 +27,8 @@
         }
       },
       "required": [
-        "query_term"
+        "condition",
+        "intervention"
       ]
     },
     "query_schema": {
@@ -67,8 +68,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "description_type"
+        "nct_ids"
       ]
     },
     "query_schema": {
@@ -102,8 +102,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "status_and_date"
+        "nct_ids"
       ]
     },
     "query_schema": {},
@@ -136,8 +135,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "condition_and_intervention"
+        "nct_ids"
       ]
     },
     "query_schema": {},
@@ -171,8 +169,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "eligibility_criteria"
+        "nct_ids"
       ]
     },
     "query_schema": {},
@@ -204,8 +201,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "location"
+        "nct_ids"
       ]
     },
     "query_schema": {},
@@ -276,8 +272,7 @@
         }
       },
       "required": [
-        "nct_ids",
-        "references"
+        "nct_ids"
       ]
     },
     "query_schema": {},

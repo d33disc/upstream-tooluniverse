@@ -11,7 +11,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "rdkit",
     "local_info": {
@@ -55,7 +58,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "openbabel",
     "local_info": {
@@ -99,7 +105,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "deepchem",
     "local_info": {
@@ -143,7 +152,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "dscribe",
     "local_info": {
@@ -187,7 +199,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "cobra",
     "local_info": {

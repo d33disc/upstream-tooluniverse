@@ -5,7 +5,8 @@
     "description": "Indicate the end of multi-step reasoning.",
     "parameter": {
       "type": "object",
-      "properties": null
+      "properties": {},
+      "required": []
     }
   },
   {

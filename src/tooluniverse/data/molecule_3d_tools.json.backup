@@ -79,9 +79,7 @@
         }
       },
       "required": [
-        "smiles",
-        "mol_content",
-        "sdf_content"
+        "smiles"
       ]
     },
     "default_width": 800,

@@ -11,7 +11,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "biopython",
     "local_info": {
@@ -55,7 +58,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "scikit-bio",
     "local_info": {
@@ -99,7 +105,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "biotite",
     "local_info": {
@@ -143,7 +152,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "gget",
     "local_info": {
@@ -293,7 +305,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "flask",
     "local_info": {
@@ -602,7 +617,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "arxiv",
     "local_info": {
@@ -1177,7 +1195,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "requests",
     "local_info": {
@@ -1382,7 +1403,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pymed",
     "local_info": {
@@ -1479,7 +1503,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "msprime",
     "local_info": {
@@ -1685,7 +1712,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "lifelines",
     "local_info": {

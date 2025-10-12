@@ -11,7 +11,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pysam",
     "local_info": {
@@ -55,7 +58,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pyfaidx",
     "local_info": {
@@ -99,7 +105,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pyranges",
     "local_info": {
@@ -143,7 +152,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pybedtools",
     "local_info": {
@@ -187,7 +199,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pyliftover",
     "local_info": {
@@ -390,7 +405,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "cyvcf2",
     "local_info": {
@@ -434,7 +452,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "gseapy",
     "local_info": {
@@ -637,7 +658,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "viennarna",
     "local_info": {
@@ -681,7 +705,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "reportlab",
     "local_info": {

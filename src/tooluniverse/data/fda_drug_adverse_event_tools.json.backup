@@ -53,12 +53,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry",
-        "serious",
-        "seriousnessdeath"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -128,12 +123,7 @@
           "description": "Whether the event was serious."
         }
       },
-      "required": [
-        "patientsex",
-        "patientagegroup",
-        "occurcountry",
-        "serious"
-      ]
+      "required": []
     },
     "fields": {
       "search_fields": {
@@ -196,10 +186,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "patientsex",
-        "patientagegroup",
-        "serious"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -263,10 +250,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "patientsex",
-        "patientagegroup",
-        "serious"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -327,10 +311,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -394,10 +375,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -451,8 +429,7 @@
         }
       },
       "required": [
-        "medicinalproduct",
-        "serious"
+        "medicinalproduct"
       ]
     },
     "fields": {
@@ -670,12 +647,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry",
-        "serious",
-        "seriousnessdeath"
+        "medicinalproducts"
       ]
     },
     "fields": {
@@ -748,10 +720,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "patientsex",
-        "patientagegroup",
-        "serious"
+        "medicinalproducts"
       ]
     },
     "fields": {
@@ -818,10 +787,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "patientsex",
-        "patientagegroup",
-        "serious"
+        "medicinalproducts"
       ]
     },
     "fields": {
@@ -885,10 +851,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry"
+        "medicinalproducts"
       ]
     },
     "fields": {
@@ -955,10 +918,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "patientsex",
-        "patientagegroup",
-        "occurcountry"
+        "medicinalproducts"
       ]
     },
     "fields": {
@@ -1015,8 +975,7 @@
         }
       },
       "required": [
-        "medicinalproducts",
-        "serious"
+        "medicinalproducts"
       ]
     },
     "fields": {
