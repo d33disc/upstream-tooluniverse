@@ -11,7 +11,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "biopandas",
     "local_info": {
@@ -55,7 +58,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "openmm",
     "local_info": {
@@ -151,7 +157,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "ase",
     "local_info": {
@@ -195,7 +204,10 @@
           "description": "Whether to include usage examples and quick start guide",
           "default": true
         }
-      }
+      },
+      "required": [
+        "include_examples"
+      ]
     },
     "package_name": "pyscf",
     "local_info": {

@@ -52,9 +52,7 @@ class ZenodoTool(BaseTool):
         for h in hits:
             md = h.get("metadata", {})
             title = md.get("title")
-            creators = [
-                c.get("name") for c in md.get("creators", []) if c.get("name")
-            ]
+            creators = [c.get("name") for c in md.get("creators", []) if c.get("name")]
             publication_date = md.get("publication_date")
             doi = md.get("doi") or h.get("doi")
             url = h.get("links", {}).get("html")

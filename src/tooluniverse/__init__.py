@@ -9,6 +9,15 @@ from .default_config import default_tool_files
 __version__ = version("tooluniverse")
 from .tool_registry import register_tool, get_tool_registry
 
+# Import tools with graceful fallback
+try:
+    from . import tools
+
+    _TOOLS_AVAILABLE = True
+except ImportError:
+    _TOOLS_AVAILABLE = False
+    tools = None  # type: ignore
+
 # Check if lazy loading is enabled
 # LAZY_LOADING_ENABLED = os.getenv('TOOLUNIVERSE_LAZY_LOADING', 'true').lower() in ('true', '1', 'yes')
 LAZY_LOADING_ENABLED = (
@@ -232,6 +241,7 @@ if not LAZY_LOADING_ENABLED:
         CellosaurusQueryConverterTool,
         CellosaurusGetCellLineInfoTool,
     )
+
     # Literature search tools
     from .arxiv_tool import ArXivTool
     from .crossref_tool import CrossrefTool
@@ -355,6 +365,7 @@ __all__ = [
     "BaseTool",
     "register_tool",
     "get_tool_registry",
+    "tools",
     "MonarchTool",
     "MonarchDiseasesForMultiplePhenoTool",
     "ClinicalTrialsSearchTool",
