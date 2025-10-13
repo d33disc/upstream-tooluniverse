@@ -7,7 +7,7 @@
       "repo_id": "agenticx/DrugbankVocabulary",
       "path_in_repo": "drugbank_vocabulary.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -145,7 +145,7 @@
       "repo_id": "agenticx/DrugbankVocabulary",
       "path_in_repo": "drugbank_vocabulary.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -281,7 +281,7 @@
       "repo_id": "agenticx/DrugbankRawParquet",
       "path_in_repo": "drugbank_raw.parquet",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -471,7 +471,7 @@
       "repo_id": "agenticx/DrugLinks",
       "path_in_repo": "drug_links.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -707,7 +707,7 @@
       "repo_id": "agenticx/DICTrank",
       "path_in_repo": "DICTrank.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -845,7 +845,7 @@
       "repo_id": "agenticx/DILIrank",
       "path_in_repo": "DILIrank.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",
@@ -963,7 +963,7 @@
       "repo_id": "agenticx/DIQTA",
       "path_in_repo": "DIQTA.csv",
       "token": null,
-      "save_to_local_dir": "src/tooluniverse/test"
+      "save_to_local_dir": null
     },
     "parameter": {
       "type": "object",

@@ -4,6 +4,7 @@ import re
 import hashlib
 import os
 import time
+import sys
 from typing import Dict, Any, Union, List
 from huggingface_hub import hf_hub_download
 from pydantic._internal._model_construction import ModelMetaclass
@@ -15,11 +16,22 @@ def download_from_hf(tool_config):
     relative_local_path = hf_parameters.get("save_to_local_dir")
 
     # Compute absolute path to save locally
-    if not os.path.isabs(relative_local_path):
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-        absolute_local_dir = os.path.join(project_root, relative_local_path)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
+    # If not provided, default to user cache directory under datasets
+    is_missing_path = relative_local_path is None
+    is_empty_string = (
+        isinstance(relative_local_path, str) and relative_local_path.strip() == ""
+    )
+    if is_missing_path or is_empty_string:
+        absolute_local_dir = os.path.join(get_user_cache_dir(), "datasets")
     else:
-        absolute_local_dir = relative_local_path
+        # Expand '~' and environment variables
+        expanded_path = os.path.expanduser(os.path.expandvars(relative_local_path))
+        if os.path.isabs(expanded_path):
+            absolute_local_dir = expanded_path
+        else:
+            absolute_local_dir = os.path.join(project_root, expanded_path)
 
     # Ensure the directory exists
     os.makedirs(absolute_local_dir, exist_ok=True)
@@ -60,6 +72,38 @@ def get_md5(input_str):
 
     # Return the hexadecimal MD5 digest
     return md5_hash.hexdigest()
+
+
+def get_user_cache_dir() -> str:
+    """
+    Return a cross-platform user cache directory for ToolUniverse.
+
+    macOS: ~/Library/Caches/ToolUniverse
+    Linux: $XDG_CACHE_HOME or ~/.cache/tooluniverse
+    Windows: %LOCALAPPDATA%\\ToolUniverse\\Cache
+    """
+    # Allow explicit override via environment variable
+    override_dir = os.getenv("TOOLUNIVERSE_TMPDIR")
+    if override_dir and override_dir.strip():
+        return os.path.expanduser(os.path.expandvars(override_dir))
+
+    platform = sys.platform
+    home_dir = os.path.expanduser("~")
+
+    if platform == "darwin":
+        return os.path.join(home_dir, "Library", "Caches", "ToolUniverse")
+
+    if platform.startswith("win"):
+        local_app_data = os.getenv("LOCALAPPDATA") or os.path.join(
+            home_dir, "AppData", "Local"
+        )
+        return os.path.join(local_app_data, "ToolUniverse", "Cache")
+
+    # Default: Linux/Unix
+    xdg_cache = os.getenv("XDG_CACHE_HOME")
+    if xdg_cache and xdg_cache.strip():
+        return os.path.join(xdg_cache, "tooluniverse")
+    return os.path.join(home_dir, ".cache", "tooluniverse")
 
 
 def yaml_to_dict(yaml_file_path):

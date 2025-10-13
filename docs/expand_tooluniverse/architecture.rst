@@ -325,7 +325,7 @@ Directory Quick Reference
 - **MCP & Servers**: `src/tooluniverse/smcp.py`, `src/tooluniverse/smcp_server.py`, root `smcp_tooluniverse_server.py`
 - **External Integrations**: `src/tooluniverse/remote/`
 - **Visualization & Graphs**: `src/tooluniverse/scripts/`, `src/tooluniverse/tool_graph_web_ui.py`
-- **Tests**: `src/tooluniverse/test/`
+- **Temp/cache outputs**: user cache directory (macOS: `~/Library/Caches/ToolUniverse`, Linux: `~/.cache/tooluniverse`, Windows: `%LOCALAPPDATA%\\ToolUniverse\\Cache`)
 
 Summary
 -------

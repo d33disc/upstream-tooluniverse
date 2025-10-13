@@ -8,7 +8,7 @@
         "repo_id": "agenticx/MeSH2025",
         "path_in_repo": "MeSH_desc2025.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "record_xpath": "DescriptorRecord",
       "search_fields": [
@@ -175,7 +175,7 @@
         "repo_id": "agenticx/MeSH2025",
         "path_in_repo": "MeSH_desc2025.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "record_xpath": "DescriptorRecord",
       "search_fields": [
@@ -342,7 +342,7 @@
         "repo_id": "agenticx/MeSH2025",
         "path_in_repo": "MeSH_desc2025.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "record_xpath": "DescriptorRecord",
       "search_fields": [
@@ -511,7 +511,7 @@
         "repo_id": "agenticx/MeSH2025",
         "path_in_repo": "MeSH_desc2025.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "record_xpath": "DescriptorRecord",
       "search_fields": [
@@ -678,7 +678,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -860,7 +860,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1036,7 +1036,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1176,7 +1176,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1358,7 +1358,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1538,7 +1538,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1703,7 +1703,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -1976,7 +1976,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -2134,7 +2134,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -2369,7 +2369,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
@@ -2521,7 +2521,7 @@
         "repo_id": "agenticx/DrugBank",
         "path_in_repo": "drugbank_full_database.xml",
         "token": null,
-        "save_to_local_dir": "src/tooluniverse/test"
+        "save_to_local_dir": null
       },
       "namespaces": {
         "db": "http://www.drugbank.ca"
