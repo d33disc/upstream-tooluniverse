@@ -2265,22 +2265,17 @@ class SMCP(FastMCP):
 
                     # Filter out None values for optional parameters (preserve streaming flag)
                     args_dict = {k: v for k, v in kwargs.items() if v is not None}
-                    filtered_args = {
-                        k: v
-                        for k, v in args_dict.items()
-                        if k != "_tooluniverse_stream"
-                    }
 
-                    # Validate required parameters
+                    # Validate required parameters (check against args_dict, not filtered_args)
                     missing_required = [
-                        param for param in required_params if param not in filtered_args
+                        param for param in required_params if param not in args_dict
                     ]
                     if missing_required:
                         return json.dumps(
                             {
                                 "error": f"Missing required parameters: {missing_required}",
                                 "required": required_params,
-                                "provided": list(filtered_args.keys()),
+                                "provided": list(args_dict.keys()),
                             },
                             indent=2,
                         )

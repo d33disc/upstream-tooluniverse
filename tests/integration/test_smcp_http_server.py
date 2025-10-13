@@ -17,7 +17,20 @@ import signal
 import os
 import requests
 import pytest
-from src.tooluniverse.smcp import SMCP
+import sys
+
+# Ensure src/ is importable
+CURRENT_DIR = os.path.dirname(__file__)
+SRC_DIR = os.path.join(CURRENT_DIR, "..", "..", "src")
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+try:
+    from tooluniverse.smcp import SMCP  # type: ignore
+except ImportError:
+    # Fallback for when running from different directory
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    from tooluniverse.smcp import SMCP  # type: ignore
 
 
 class TestSMCPHTTPServer:
@@ -28,11 +41,11 @@ class TestSMCPHTTPServer:
         """Start SMCP HTTP server in background process."""
         # Start server on a different port to avoid conflicts
         process = subprocess.Popen([
-            "python", "-m", "src.tooluniverse.smcp_server",
+            "python", "-m", "tooluniverse.smcp_server",
             "--port", "8002",
             "--host", "127.0.0.1",
             "--tool-categories", "uniprot,pubmed"
-        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=SRC_DIR)
         
         # Wait for server to start
         time.sleep(5)

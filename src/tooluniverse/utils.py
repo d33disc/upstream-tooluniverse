@@ -138,6 +138,9 @@ def evaluate_function_call(tool_definition, function_call):
     type_mismatches = []
 
     for param, value in function_call["arguments"].items():
+        # Skip validation for special parameters that are handled internally
+        if param == "_tooluniverse_stream":
+            continue
         if param not in valid_params:
             invalid_params.append(param)
         else:

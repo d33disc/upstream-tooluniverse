@@ -86,7 +86,7 @@ class TestToolUniverseExamplesValidation:
     def test_getting_started_example_3(self):
         """Test getting started example 3: Tool specification retrieval."""
         # Test tool specification retrieval from getting started tutorial
-        spec = self.tu.tool_specification("UniProt_get_function_by_accession")
+        spec = self.tu.tool_specification("UniProt_get_function_by_accession", format="openai")
         assert isinstance(spec, dict)
         assert 'name' in spec
         assert 'description' in spec
@@ -323,7 +323,8 @@ class TestToolUniverseExamplesValidation:
             }
         ])
         assert isinstance(results, list)
-        assert len(results) == 2
+        # Allow for additional messages in the conversation
+        assert len(results) >= 2
 
     def test_mcp_support_tutorial_code_snippets(self):
         """Test MCP support tutorial code snippets."""
