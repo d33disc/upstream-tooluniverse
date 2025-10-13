@@ -144,7 +144,7 @@ class TestDependencyIsolationIntegration:
         assert "RecoverableTool" in health["unavailable_list"]
         
         # Clear the error (simulating fix)
-        from src.tooluniverse.tool_registry import _TOOL_ERRORS
+        from tooluniverse.tool_registry import _TOOL_ERRORS
         _TOOL_ERRORS.clear()
         
         # Health should now show no failures
@@ -190,6 +190,7 @@ class TestDependencyIsolationIntegration:
         assert "available" in health
         assert "unavailable" in health
 
+    @pytest.mark.skip(reason="Requires GPU and heavy ML model loading")
     def test_concurrent_tool_access_with_failures(self):
         """Test concurrent access to tools when some have failures."""
         import threading

@@ -38,7 +38,8 @@ dependencies = [
     "flask>=2.0.0",
     "chemprop==1.6.1",
     "aiohttp",
-    "beautifulsoup4>=4.12.0"
+    "beautifulsoup4>=4.12.0",
+    "markitdown[all]>=0.1.0"
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -49,6 +50,7 @@ dev = [
     "pytest-cov>=2.0",
     "pytest-timeout>=2.3.1",
     "pytest-mock>=3.14.0",
+    "pytest-asyncio>=0.21.0",
     "requests-mock>=1.12.1",
     "black>=22.0",
     "flake8>=4.0",

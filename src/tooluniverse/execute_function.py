@@ -1041,9 +1041,14 @@ class ToolUniverse:
             - When scan_all=True, all JSON files in data/ and subdirectories are scanned
         """
         if mode not in ["config", "type", "list_name", "list_spec"]:
-            raise ValueError(
-                "Mode must be one of: 'config', 'type', 'list_name', 'list_spec'"
-            )
+            # Handle invalid modes gracefully
+            if mode is None:
+                mode = "config"  # Default to config mode
+            else:
+                # For invalid string modes, return error info instead of raising
+                return {
+                    "error": f"Invalid mode '{mode}'. Must be one of: 'config', 'type', 'list_name', 'list_spec'"
+                }
 
         # For list_name and list_spec modes, we can return early with just the data
         if mode in ["list_name", "list_spec"]:
@@ -1693,8 +1698,17 @@ class ToolUniverse:
         Returns:
             str or dict: Result from the tool execution, or error message if validation fails.
         """
-        function_name = function_call_json["name"]
-        arguments = function_call_json["arguments"]
+        function_name = function_call_json.get("name", "")
+        arguments = function_call_json.get("arguments", {})
+
+        # Handle malformed queries gracefully
+        if not function_name:
+            return {"error": "Missing or empty function name"}
+
+        if not isinstance(arguments, dict):
+            return {
+                "error": f"Arguments must be a dictionary, got {type(arguments).__name__}"
+            }
 
         # Check cache first if enabled
         if use_cache:
@@ -2247,6 +2261,10 @@ class ToolUniverse:
         if not hasattr(self, "all_tools") or not self.all_tools:
             self.logger.warning("No tools loaded. Call load_tools() first.")
             return []
+
+        # Handle None or empty pattern
+        if pattern is None or pattern == "":
+            return self.all_tools
 
         import re
 

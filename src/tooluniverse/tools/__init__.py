@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 654 scientific tools.
+Type-safe Python interface to 655 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -744,6 +744,7 @@ from .cellosaurus_get_cell_line_info import cellosaurus_get_cell_line_info
 from .cellosaurus_query_converter import cellosaurus_query_converter
 from .cellosaurus_search_cell_lines import cellosaurus_search_cell_lines
 from .chembl_disease_target_score import chembl_disease_target_score
+from .convert_to_markdown import convert_to_markdown
 from .dict_search import dict_search
 from .dili_search import dili_search
 from .diqt_search import diqt_search
@@ -1456,6 +1457,7 @@ __all__ = [
     "cellosaurus_query_converter",
     "cellosaurus_search_cell_lines",
     "chembl_disease_target_score",
+    "convert_to_markdown",
     "dict_search",
     "dili_search",
     "diqt_search",

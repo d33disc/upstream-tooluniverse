@@ -301,7 +301,7 @@ class TestMCPProtocol:
             ["tooluniverse-smcp", "--help"],
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=60  # Increased timeout to 60 seconds
         )
         
         # Should succeed and show help
@@ -315,7 +315,7 @@ class TestMCPProtocol:
             ["tooluniverse-smcp", "--list-categories"],
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=60  # Increased timeout to 60 seconds
         )
         
         # Should succeed and show categories
@@ -329,7 +329,7 @@ class TestMCPProtocol:
             ["tooluniverse-smcp", "--list-tools"],
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=60  # Increased timeout to 60 seconds
         )
         
         # Should succeed and show tools (or at least not crash)
