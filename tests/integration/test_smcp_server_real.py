@@ -16,8 +16,8 @@ import threading
 import requests
 import pytest
 from unittest.mock import patch, MagicMock
-from src.tooluniverse.smcp import SMCP
-from src.tooluniverse.smcp_server import run_http_server
+from tooluniverse.smcp import SMCP
+from tooluniverse.smcp_server import run_http_server
 
 
 class TestSMCPRealServer:

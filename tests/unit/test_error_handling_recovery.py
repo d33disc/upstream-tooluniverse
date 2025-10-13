@@ -2,12 +2,12 @@
 
 import pytest
 from unittest.mock import patch, MagicMock
-from src.tooluniverse.tool_registry import (
+from tooluniverse.tool_registry import (
     mark_tool_unavailable,
     get_tool_errors,
     _TOOL_ERRORS,
 )
-from src.tooluniverse.execute_function import ToolUniverse
+from tooluniverse.execute_function import ToolUniverse
 
 
 class TestErrorHandlingAndRecovery:
