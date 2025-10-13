@@ -10,8 +10,8 @@ from ._shared_client import get_shared_client
 
 def PubMed_search_articles(
     query: str,
-    limit: int,
-    api_key: str,
+    limit: int = 10,
+    api_key: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -41,10 +41,14 @@ def PubMed_search_articles(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    arguments: dict[str, Any] = {"query": query, "limit": limit}
+    if api_key:
+        arguments["api_key"] = api_key
+
     return get_shared_client().run_one_function(
         {
             "name": "PubMed_search_articles",
-            "arguments": {"query": query, "limit": limit, "api_key": api_key},
+            "arguments": arguments,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

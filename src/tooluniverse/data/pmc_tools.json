@@ -32,10 +32,7 @@
       },
       "required": [
         "query",
-        "limit",
-        "date_from",
-        "date_to",
-        "article_type"
+        "limit"
       ]
     },
     "return_schema": {

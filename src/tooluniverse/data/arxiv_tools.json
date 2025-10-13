@@ -27,10 +27,7 @@
         }
       },
       "required": [
-        "query",
-        "limit",
-        "sort_by",
-        "sort_order"
+        "query"
       ]
     },
     "return_schema": {

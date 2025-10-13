@@ -24,8 +24,7 @@
       },
       "required": [
         "query",
-        "max_results",
-        "community"
+        "max_results"
       ]
     },
     "return_schema": {

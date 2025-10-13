@@ -10,10 +10,10 @@ from ._shared_client import get_shared_client
 
 def openalex_literature_search(
     search_keywords: str,
-    max_results: int,
-    year_from: int,
-    year_to: int,
-    open_access: bool,
+    max_results: int = 10,
+    year_from: Optional[int] = None,
+    year_to: Optional[int] = None,
+    open_access: Optional[bool] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -47,16 +47,21 @@ def openalex_literature_search(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    arguments: dict[str, Any] = {
+        "search_keywords": search_keywords,
+        "max_results": max_results,
+    }
+    if year_from is not None:
+        arguments["year_from"] = year_from
+    if year_to is not None:
+        arguments["year_to"] = year_to
+    if open_access is not None:
+        arguments["open_access"] = open_access
+
     return get_shared_client().run_one_function(
         {
             "name": "openalex_literature_search",
-            "arguments": {
-                "search_keywords": search_keywords,
-                "max_results": max_results,
-                "year_from": year_from,
-                "year_to": year_to,
-                "open_access": open_access,
-            },
+            "arguments": arguments,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

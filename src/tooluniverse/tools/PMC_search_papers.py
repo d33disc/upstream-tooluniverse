@@ -10,10 +10,10 @@ from ._shared_client import get_shared_client
 
 def PMC_search_papers(
     query: str,
-    limit: int,
-    date_from: str,
-    date_to: str,
-    article_type: str,
+    limit: int = 10,
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    article_type: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -47,16 +47,18 @@ def PMC_search_papers(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    arguments: dict[str, Any] = {"query": query, "limit": limit}
+    if date_from is not None:
+        arguments["date_from"] = date_from
+    if date_to is not None:
+        arguments["date_to"] = date_to
+    if article_type is not None:
+        arguments["article_type"] = article_type
+
     return get_shared_client().run_one_function(
         {
             "name": "PMC_search_papers",
-            "arguments": {
-                "query": query,
-                "limit": limit,
-                "date_from": date_from,
-                "date_to": date_to,
-                "article_type": article_type,
-            },
+            "arguments": arguments,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

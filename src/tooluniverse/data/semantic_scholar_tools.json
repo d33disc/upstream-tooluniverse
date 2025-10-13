@@ -22,8 +22,7 @@
       },
       "required": [
         "query",
-        "limit",
-        "api_key"
+        "limit"
       ]
     },
     "return_schema": {

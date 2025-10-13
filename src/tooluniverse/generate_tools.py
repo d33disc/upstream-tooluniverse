@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Minimal tools generator - one tool, one file."""
 
+import os
+import shutil
+import subprocess
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional, List
 
 
 def json_type_to_python(json_type: str) -> str:
@@ -17,7 +20,11 @@ def json_type_to_python(json_type: str) -> str:
     }.get(json_type, "Any")
 
 
-def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: Path):
+def generate_tool_file(
+    tool_name: str,
+    tool_config: Dict[str, Any],
+    output_dir: Path,
+) -> Path:
     """Generate one file for one tool."""
     schema = tool_config.get("parameter", {}) or {}
     description = tool_config.get("description", f"Execute {tool_name}")
@@ -48,7 +55,9 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
                     # Use None as default and handle in function body
                     optional_params.append(f"{name}: Optional[{py_type}] = None")
                     mutable_defaults_code.append(
-                        f"    if {name} is None:\n        {name} = {repr(default)}"
+                        ("    if {n} is None:\n" "        {n} = {d}").format(
+                            n=name, d=repr(default)
+                        )
                     )
                 else:
                     optional_params.append(
@@ -75,9 +84,10 @@ def generate_tool_file(tool_name: str, tool_config: Dict[str, Any], output_dir: 
 
     # Infer return type
     return_schema = tool_config.get("return_schema", {})
-    return_type = (
-        json_type_to_python(return_schema.get("type", "")) if return_schema else "Any"
-    )
+    if return_schema:
+        return_type = json_type_to_python(return_schema.get("type", ""))
+    else:
+        return_type = "Any"
 
     content = f'''"""
 {tool_name}
@@ -131,10 +141,12 @@ def {tool_name}(
 __all__ = ["{tool_name}"]
 '''
 
-    (output_dir / f"{tool_name}.py").write_text(content)
+    output_path = output_dir / f"{tool_name}.py"
+    output_path.write_text(content)
+    return output_path
 
 
-def generate_init(tool_names: list, output_dir: Path):
+def generate_init(tool_names: list, output_dir: Path) -> Path:
     """Generate __init__.py with all imports."""
     imports = [f"from .{name} import {name}" for name in sorted(tool_names)]
 
@@ -167,11 +179,92 @@ __all__ = [
 ]
 '''
 
-    (output_dir / "__init__.py").write_text(content)
+    init_path = output_dir / "__init__.py"
+    init_path.write_text(content)
+    return init_path
 
 
-def main():
-    """Generate tools."""
+def _chunked(sequence: List[str], chunk_size: int) -> List[List[str]]:
+    """Yield chunks of the sequence with up to chunk_size elements."""
+    if chunk_size <= 0:
+        return [sequence]
+    return [sequence[i : i + chunk_size] for i in range(0, len(sequence), chunk_size)]
+
+
+def _format_files(paths: List[str]) -> None:
+    """Format files using pre-commit if available, else ruff/autoflake/black.
+
+    Honors TOOLUNIVERSE_SKIP_FORMAT=1 to skip formatting entirely.
+    """
+    if not paths:
+        return
+    if os.getenv("TOOLUNIVERSE_SKIP_FORMAT") == "1":
+        return
+
+    pre_commit = shutil.which("pre-commit")
+    if pre_commit:
+        # Run pre-commit on specific files to match repo config filters
+        for batch in _chunked(paths, 80):
+            try:
+                subprocess.run(
+                    [pre_commit, "run", "--files", *batch],
+                    check=False,
+                )
+            except Exception:
+                # Best-effort; continue to fallback below
+                pass
+        return
+
+    # Fallback to direct formatter CLIs in the same spirit/order as hooks
+    ruff = shutil.which("ruff")
+    if ruff:
+        try:
+            subprocess.run(
+                [
+                    ruff,
+                    "--fix",
+                    "--line-length=88",
+                    "--ignore=E203",
+                    *paths,
+                ],
+                check=False,
+            )
+        except Exception:
+            pass
+
+    autoflake = shutil.which("autoflake")
+    if autoflake:
+        try:
+            subprocess.run(
+                [
+                    autoflake,
+                    "--remove-all-unused-imports",
+                    "--remove-unused-variables",
+                    "--in-place",
+                    *paths,
+                ],
+                check=False,
+            )
+        except Exception:
+            pass
+
+    black = shutil.which("black")
+    if black:
+        try:
+            subprocess.run(
+                [black, "--line-length=88", *paths],
+                check=False,
+            )
+        except Exception:
+            pass
+
+
+def main(format_enabled: Optional[bool] = None) -> None:
+    """Generate tools and format the generated files if enabled.
+
+    If format_enabled is None, decide based on TOOLUNIVERSE_SKIP_FORMAT env var
+    (skip when set to "1").
+    """
     from tooluniverse import ToolUniverse
 
     print("🔧 Generating tools...")
@@ -182,17 +275,39 @@ def main():
     output = Path("src/tooluniverse/tools")
     output.mkdir(parents=True, exist_ok=True)
 
+    generated_paths: List[str] = []
+
     # Generate all tools
     for i, (tool_name, tool_config) in enumerate(tu.all_tool_dict.items(), 1):
-        generate_tool_file(tool_name, tool_config, output)
+        path = generate_tool_file(tool_name, tool_config, output)
+        generated_paths.append(str(path))
         if i % 50 == 0:
             print(f"  Generated {i} tools...")
 
     # Generate __init__.py
-    generate_init(list(tu.all_tool_dict.keys()), output)
+    init_path = generate_init(list(tu.all_tool_dict.keys()), output)
+    generated_paths.append(str(init_path))
+
+    # Determine formatting behavior
+    if format_enabled is None:
+        # Enabled unless explicitly opted-out via env
+        format_enabled = os.getenv("TOOLUNIVERSE_SKIP_FORMAT") != "1"
+
+    if format_enabled:
+        _format_files(generated_paths)
 
     print(f"✅ Generated {len(tu.all_tool_dict)} tools in {output}")
 
 
 if __name__ == "__main__":
-    main()
+    # Lightweight CLI to allow opting out of formatting when run directly
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate ToolUniverse tools")
+    parser.add_argument(
+        "--no-format",
+        action="store_true",
+        help="Do not run formatters on generated files",
+    )
+    args = parser.parse_args()
+    main(format_enabled=not args.no_format)

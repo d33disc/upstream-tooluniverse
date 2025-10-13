@@ -32,10 +32,7 @@
       },
       "required": [
         "query",
-        "limit",
-        "year_from",
-        "year_to",
-        "language"
+        "limit"
       ]
     },
     "return_schema": {

@@ -32,7 +32,8 @@ class ZenodoTool(BaseTool):
             "size": max(1, min(max_results, 200)),
             "all_versions": 1,
         }
-        if community:
+        # Only add communities filter if community is provided and not empty
+        if community and community.strip():
             params["communities"] = community
 
         try:

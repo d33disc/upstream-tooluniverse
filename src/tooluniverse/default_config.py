@@ -143,6 +143,8 @@ default_tool_files = {
     ),
     "odphp": os.path.join(current_dir, "data", "odphp_tools.json"),
     "markitdown": os.path.join(current_dir, "data", "markitdown_tools.json"),
+    # Genomics tools
+    "genomics": os.path.join(current_dir, "data", "genomics_tools.json"),
     # Guideline and health policy tools
     "guidelines": os.path.join(current_dir, "data", "unified_guideline_tools.json"),
 }

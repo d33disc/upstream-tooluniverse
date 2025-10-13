@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def EuropePMC_search_articles(
     query: str,
-    limit: int,
+    limit: int = 5,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

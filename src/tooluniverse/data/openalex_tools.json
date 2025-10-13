@@ -31,11 +31,7 @@
         }
       },
       "required": [
-        "search_keywords",
-        "max_results",
-        "year_from",
-        "year_to",
-        "open_access"
+        "search_keywords"
       ]
     },
     "return_schema": {
