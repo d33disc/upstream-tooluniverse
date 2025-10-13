@@ -83,9 +83,8 @@ def test_model(model_id: str) -> None:
     try:
         out = tool.run({"q": "ping"})
         ok = isinstance(out, (str, dict))
-        print(
-            f"- Run : {'OK' if ok else 'WARN'} -> {str(out)[:120].replace('\n', ' ')}"
-        )
+        output_str = str(out)[:120].replace('\n', ' ')
+        print(f"- Run : {'OK' if ok else 'WARN'} -> {output_str}")
     except Exception as e:
         print(f"- Run : FAIL -> {e}")
 
