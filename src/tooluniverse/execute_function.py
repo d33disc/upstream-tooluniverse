@@ -33,7 +33,7 @@ import os
 import time
 import hashlib
 import warnings
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
 from .exceptions import (
     ToolError,
@@ -218,9 +218,9 @@ class ToolUniverse:
         self.logger = get_logger("ToolUniverse")
 
         # Initialize any necessary attributes here FIRST
-        self.all_tools = []
-        self.all_tool_dict = {}
-        self.tool_category_dicts = {}
+        self.all_tools: List[Dict[str, Any]] = []
+        self.all_tool_dict: Dict[str, Dict[str, Any]] = {}
+        self.tool_category_dicts: Dict[str, List[Dict[str, Any]]] = {}
         self.tool_finder = None
         if tool_files is None:
             tool_files = default_tool_files

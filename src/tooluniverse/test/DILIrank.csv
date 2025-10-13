@@ -1,0 +1,1037 @@
+Compound Name,Severity Class,DILI Concern
+mercaptopurine,8,most
+acetaminophen,5,most
+azathioprine,5,most
+chlorpheniramine,0,no
+clofibrate,3,less
+cyclophosphamide,5,less
+dopamine,0,no
+estradiol,2,less
+fluoxetine,3,less
+gemfibrozil,4,most
+indomethacin,8,most
+ketoprofen,3,less
+mannitol,0,no
+methotrexate,3,most
+phenobarbital,3,less
+phenytoin,8,most
+rifampin,8,most
+tetracycline,2,less
+abacavir,8,most
+aciclovir,5,less
+allopurinol,8,most
+amineptine,8,most
+amiodarone,8,most
+amitriptyline,5,less
+amphotericin b,3,less
+ampicillin,3,less
+donepezil,3,less
+aspirin,0,less
+aminohippurate,0,no
+bicalutamide,8,most
+bupropion,5,less
+captopril,7,less
+carbamazepine,7,most
+carboplatin,3,less
+ceftazidime,3,less
+chenodiol,8,ambiguous
+chlorcyclizine,0,less
+chlorzoxazone,8,most
+chlorpromazine,2,less
+cisplatin,3,less
+dimercaprol,0,no
+colchicine,6,ambiguous
+corticotropin,0,no
+dactinomycin,8,most
+dantrolene,8,most
+demeclocycline,3,ambiguous
+dexamethasone,3,ambiguous
+propoxyphene,3,less
+diclofenac,8,most
+diflunisal,8,most
+diphenhydramine,0,no
+epirubicin,3,ambiguous
+erythromycin,5,most
+etoposide,3,less
+famotidine,3,less
+felbamate,7,most
+fenofibrate,3,less
+fenoprofen,8,most
+flutamide,8,most
+hydroxyurea,8,most
+imatinib,8,most
+imipramine,3,less
+iproniazid,8,most
+hydroxyprogesterone caproate,2,ambiguous
+ketoconazole,8,most
+labetalol,8,most
+leflunomide,8,most
+mefenamic acid,8,most
+meloxicam,3,less
+metformin,0,less
+methyldopa,8,most
+nefazodone,8,most
+nitrofurantoin,8,most
+olsalazine,8,less
+paroxetine,8,less
+pentamidine,3,less
+pentobarbital,3,ambiguous
+perhexiline,8,most
+physostigmine,0,no
+pioglitazone,3,less
+propylthiouracil,8,most
+pseudoephedrine,0,no
+ranitidine,5,less
+rifabutin,5,less
+rosiglitazone,3,less
+indocyanine green,0,no
+simvastatin,3,less
+spironolactone,2,less
+stavudine,8,most
+streptomycin,0,no
+sulfadiazine,3,less
+sulfasalazine,5,most
+sulindac,8,most
+tamoxifen,8,most
+temozolomide,4,less
+theophylline,0,no
+tizanidine,8,most
+tolcapone,8,most
+toremifene,3,ambiguous
+valproic acid,8,most
+vancomycin,0,less
+vitamin a,3,less
+zidovudine,8,most
+zolpidem,7,ambiguous
+zonisamide,2,less
+pyrazinamide,3,less
+finasteride,0,less
+troglitazone,8,most
+fluvastatin,3,less
+glimepiride,7,less
+venlafaxine,7,less
+amlodipine,5,less
+vinblastine,0,no
+ciprofloxacin,7,most
+fluconazole,8,most
+prednisone,3,less
+lorazepam,3,ambiguous
+itraconazole,8,most
+raloxifene,0,no
+mifepristone,0,no
+clomipramine,8,most
+pravastatin,3,less
+clarithromycin,8,most
+hydrocortisone,0,no
+progesterone,2,less
+ergocalciferol,0,no
+ibuprofen,3,less
+isoproterenol,0,no
+ketorolac,3,less
+promethazine,5,less
+omeprazole,4,less
+carvedilol,3,less
+cytarabine,3,most
+norethindrone,3,ambiguous
+tromethamine,6,ambiguous
+pergolide,3,ambiguous
+nisoldipine,3,ambiguous
+citalopram,7,less
+megestrol,1,ambiguous
+methyltestosterone,2,less
+testosterone,8,most
+praziquantel,3,ambiguous
+ticlopidine,4,most
+diazepam,4,ambiguous
+clomiphene,3,less
+isotretinoin,5,most
+oxymetholone,7,most
+etodolac,8,most
+glipizide,3,less
+pemoline,8,most
+clotrimazole,3,less
+celecoxib,3,less
+amoxapine,3,ambiguous
+iothalamate sodium,0,no
+atorvastatin,5,most
+olanzapine,3,less
+nevirapine,8,most
+primidone,0,no
+vinorelbine,3,ambiguous
+anastrozole,3,less
+rabeprazole,3,less
+azithromycin,7,less
+tolazamide,2,less
+quetiapine,3,less
+famciclovir,3,ambiguous
+atenolol,4,less
+benzbromarone,8,most
+bromocriptine,3,less
+busulfan,8,most
+chlorambucil,3,less
+clozapine,5,most
+dacarbazine,6,most
+dapsone,3,less
+digoxin,0,no
+dipyridamole,3,ambiguous
+disulfiram,8,most
+enalapril,7,less
+flurbiprofen,3,ambiguous
+furosemide,2,ambiguous
+gabapentin,3,less
+glibenclamide,3,less
+isoniazid,8,most
+lansoprazole,3,less
+mebendazole,3,less
+metoprolol,5,less
+mycophenolic acid,3,ambiguous
+naltrexone,3,ambiguous
+niacin,7,most
+nifedipine,3,less
+nimesulide,8,most
+nizatidine,5,less
+methenamine hippurate,3,ambiguous
+dextrose,0,no
+cholestyramine,3,ambiguous
+sodium lactate,0,no
+verapamil,3,less
+doxorubicin,3,less
+tretinoin,3,ambiguous
+isorbide mononitrate,3,ambiguous
+clorazepate,3,ambiguous
+protirelin,0,no
+sincalide,0,no
+secretin,0,no
+sucralfate,0,no
+cupric chloride,0,no
+trientine hydrochloride,1,no
+chlorpropamide,2,less
+cyclosporine,7,most
+enalaprilat,7,ambiguous
+decitabine,4,ambiguous
+deferoxamine,0,less
+doxycycline,3,less
+exemestane,4,most
+felodipine,3,less
+fludrocortisone,0,no
+fluphenazine,3,ambiguous
+fulvestrant,7,ambiguous
+gefitinib,4,most
+haloperidol,5,less
+mesalazine,7,less
+minocycline,8,most
+ioversol,0,no
+histrelin acetate,3,ambiguous
+oxaprozin,3,less
+paclitaxel,4,less
+phentolamine,0,no
+prazosin,3,ambiguous
+prochlorperazine,2,less
+corticorelin ovine triflutate,0,no
+sodium thiosulfate,0,no
+sirolimus,8,less
+tacrolimus,5,less
+thalidomide,4,less
+thioridazine,5,less
+thioguanine,2,less
+tolbutamide,2,ambiguous
+topiramate,3,less
+trifluoperazine,2,ambiguous
+triptorelin pamoate,3,less
+alatrofloxacin mesylate,8,most
+vorinostat,0,no
+sacrosidase,3,ambiguous
+doxercalciferol,3,ambiguous
+nesiritide,0,no
+ganirelix acetate,0,no
+gemtuzumab ozogamicin,8,most
+methylprednisolone,3,less
+gamma hydroxybutyric acid,0,no
+l-glutamine,3,ambiguous
+cetrorelix,3,ambiguous
+tegaserod,3,ambiguous
+penicillamine,2,less
+pramlintide,0,no
+lanthanum carbonate,0,no
+fomepizole,3,ambiguous
+acetazolamide,8,most
+albendazole,7,most
+alprazolam,7,less
+altretamine,2,ambiguous
+amantadine,3,ambiguous
+4-aminosalicylic acid,5,most
+amoxicillin,5,less
+atropine,0,no
+balsalazide,8,ambiguous
+benoxaprofen,8,most
+emtricitabine,2,ambiguous
+trospium,0,no
+bromfenac,8,most
+gadofosveset trisodium,0,no
+clonazepam,3,less
+exenatide,0,no
+entecavir,7,ambiguous
+danazol,8,most
+daunorubicin,0,no
+dimenhydrinate,0,no
+doxapram,0,no
+febuxostat,8,most
+granisetron,3,ambiguous
+griseofulvin,8,most
+hydralazine,3,less
+ibufenac,8,most
+ifosfamide,4,less
+deferasirox,7,most
+rufinamide,3,ambiguous
+sunitinib,8,most
+ivermectin,3,less
+lamivudine,3,less
+methylnaltrexone bromide,0,no
+lisdexamfetamine,3,ambiguous
+letrozole,2,less
+desvenlafaxine,3,less
+lomefloxacin,4,ambiguous
+lomustine,3,less
+lovastatin,3,less
+telbivudine,2,ambiguous
+methimazole,8,most
+methocarbamol,5,ambiguous
+metronidazole,3,less
+minoxidil,0,no
+mitomycin,0,less
+modafinil,3,less
+fesoterodine,0,no
+naloxone,0,no
+naproxen,3,less
+nateglinide,3,ambiguous
+neomycin,0,no
+levocetirizine dihydrochloride,4,less
+nystatin,0,no
+oxytetracycline,2,ambiguous
+pantoprazole,3,less
+nilotinib,4,ambiguous
+pralidoxime,3,ambiguous
+prednisolone,3,less
+primaquine,0,no
+procarbazine,3,less
+lanreotide acetate,2,ambiguous
+ambrisentan,7,ambiguous
+doripenem,3,ambiguous
+secobarbital,3,ambiguous
+sertraline,3,less
+sotalol,3,ambiguous
+streptozocin,3,ambiguous
+sulfathiazole,8,most
+terbinafine,8,most
+thiabendazole,7,most
+ticrynafen,8,most
+tinidazole,3,less
+torasemide,2,ambiguous
+maraviroc,3,most
+raltegravir,7,most
+clevidipine,0,no
+trovafloxacin,8,most
+regadenoson,0,no
+warfarin,5,less
+zaleplon,0,no
+zileuton,5,most
+ferumoxytol,0,no
+etravirine,8,most
+iloperidone,2,ambiguous
+degarelix,3,ambiguous
+silodosin,3,ambiguous
+fospropofol,0,less
+bendamustine,0,no
+lacosamide,3,ambiguous
+tolvaptan,8,most
+eltrombopag olamine,4,most
+tapentadol,0,no
+prasugrel hydrochloride,0,less
+saxagliptin,0,no
+pitavastatin,3,ambiguous
+romidepsin,0,no
+fenofibric acid,2,ambiguous
+dronedarone,7,most
+pazopanib,8,most
+pralatrexate,3,ambiguous
+pancrelipase,0,no
+estropipate,2,ambiguous
+dexchlorpheniramine,0,no
+ecallantide,0,no
+divalproex sodium,8,most
+lumiracoxib,8,most
+tasosartan,8,most
+oxyphenisatin,8,most
+tilbroquinol,8,most
+alclofenac,8,most
+aplaviroc,8,most
+clomacran,8,most
+dermatan,8,most
+isaxonine,8,most
+pipamazine,8,most
+pralnacasan,8,most
+sulfacarbamide,8,most
+triacetyldiphenolisatin,8,most
+fiduxosin,8,most
+pafuraidine,8,most
+phenoxypropazine,8,most
+histamine diphosphate,0,no
+butabarbital,3,ambiguous
+guanidine,3,ambiguous
+aminophylline,0,no
+meperidine,0,no
+methamphetamine,0,no
+methadone,3,ambiguous
+hyaluronidase,0,no
+doxylamine,0,no
+protamine sulfate,0,no
+bethanechol,0,no
+cortisone acetate,0,no
+dicyclomine,0,no
+norepinephrine,0,no
+dyphylline,0,no
+epinephrine,0,no
+succinylcholine,0,no
+thyrotropin alfa,0,no
+levorphanol,0,no
+propantheline,0,no
+carbinoxamine,0,no
+edetic acid,3,ambiguous
+diatrizoate,0,no
+phytonadione,0,no
+mecamylamine,0,no
+liothyronine,0,no
+methsuximide,0,no
+mepenzolate,0,no
+meclizine,0,no
+ethotoin,3,ambiguous
+triprolidine,0,no
+benzonatate,0,less
+Sodium polystyrene sulfonate,0,no
+dichlorphenamide,0,no
+methohexital,3,ambiguous
+phentermine,0,less
+diethylpropion,0,no
+oxymorphone,0,no
+dexbrompheniramine,0,no
+hydroflumethiazide,2,ambiguous
+biperiden,0,no
+isosorbide dinitrate,0,no
+mepivacaine,0,no
+bendroflumethiazide,5,less
+phendimetrazine,0,no
+oxytocin,0,no
+guanethidine,0,no
+ethosuximide,3,ambiguous
+benzphetamine,0,no
+methyclothiazide,2,ambiguous
+glycopyrrolate,0,no
+metyrapone,0,no
+metaxalone,5,less
+oxandrolone,8,most
+oxazepam,5,ambiguous
+protriptyline,0,no
+cosyntropin,0,no
+flavoxate,0,no
+ketamine,0,less
+diazoxide,3,ambiguous
+pancuronium,0,no
+pentagastrin,0,no
+dextroamphetamine,0,no
+terbutaline,3,less
+calcitonin salmon,0,no
+pentetic acid,0,no
+nitroprusside,0,no
+colestipol,3,ambiguous
+lactulose,0,no
+somatropin recombinant,0,no
+fluorescein,0,no
+metyrosine,0,no
+desmopressin,3,ambiguous
+carboprost tromethamine,0,no
+calcitriol,0,no
+morphine,0,no
+marinol,3,ambiguous
+nabilone,0,no
+acetohydroxamic acid,3,ambiguous
+vecuronium,0,no
+atracurium,0,no
+hydromorphone,3,ambiguous
+sufentanil,0,no
+misoprostol,3,ambiguous
+tranexamic acid,0,no
+alfentanil,0,no
+ethanolamine oleate,0,no
+rubidium chloride rb-82,0,no
+urofollitropin,0,no
+milrinone,3,ambiguous
+teriparatide,0,no
+l-cysteine,3,ambiguous
+gadopentetate dimeglumine,0,no
+rimantadine,0,no
+goserelin,3,ambiguous
+pegademase bovine,0,no
+fenoldopam,0,no
+metoprolol succinate,3,ambiguous
+calcium acetate,0,no
+mivacurium,0,no
+gadodiamide,3,ambiguous
+gadoteridol,0,no
+enoxaparin,3,less
+perindopril,3,ambiguous
+pentosan polysulfate,3,ambiguous
+rocuronium,0,no
+dalteparin sodium,3,less
+aprotinin,7,ambiguous
+anagrelide,3,ambiguous
+ferumoxsil,0,no
+ferumoxides,0,no
+vigabatrin,2,ambiguous
+epoprostenol,7,ambiguous
+porfimer,0,no
+tinzaparin,3,ambiguous
+ibutilide,0,no
+cisatracurium besylate,0,no
+oxycodone,0,no
+alendronate,0,less
+tamsulosin,0,less
+glatiramer acetate,3,ambiguous
+dolasetron,3,ambiguous
+remifentanil,3,less
+sibutramine,4,less
+tiagabine,3,ambiguous
+ropinirole,4,less
+pramipexole,2,ambiguous
+miglitol,0,no
+polyethylene glycol 3350,0,no
+delavirdine,5,ambiguous
+tiludronate,0,no
+eptifibatide,0,no
+eprosartan,3,ambiguous
+repaglinide,5,less
+irbesartan,5,less
+naratriptan,4,ambiguous
+zolmitriptan,3,ambiguous
+tolterodine,0,no
+nelfinavir,3,less
+lepirudin,3,ambiguous
+paricalcitol,3,ambiguous
+rivastigmine,3,less
+ziprasidone,3,less
+risedronate,3,ambiguous
+candesartan,3,less
+clopidogrel,7,less
+cilostazol,5,ambiguous
+rizatriptan,0,no
+bivalirudin,0,no
+azacitidine,8,ambiguous
+fluorouracil,0,less
+argatroban,0,no
+sildenafil,3,less
+acarbose,8,most
+acebutolol,3,less
+tirofiban,0,no
+sevelamer,0,no
+dofetilide,0,no
+acetylcysteine,0,no
+acitretin,5,most
+gadoversetamide,0,no
+adenosine,0,no
+cevimeline,3,ambiguous
+salbutamol,0,no
+almotriptan,0,no
+frovatriptan,0,no
+amprenavir,3,ambiguous
+oxcarbazepine,3,less
+rifapentine,4,ambiguous
+levetiracetam,8,less
+alpidem,8,most
+dexmedetomidine,4,ambiguous
+bexarotene,8,most
+perflutren,0,no
+amifostine,0,no
+amikacin,0,no
+pegvisomant,3,ambiguous
+alosetron,4,less
+aminocaproic acid,0,no
+levothyroxine,3,less
+verteporfin,3,ambiguous
+amrinone,5,ambiguous
+linezolid,3,less
+colesevelam,3,ambiguous
+choriogonadotropin alfa,3,ambiguous
+gemifloxacin,3,less
+desloratadine,3,less
+galantamine,3,ambiguous
+cefditoren,2,ambiguous
+zoledronate,0,less
+caspofungin,7,ambiguous
+nitisinone,7,ambiguous
+arsenic trioxide,3,ambiguous
+atovaquone,8,ambiguous
+voriconazole,8,most
+guaifenesin,0,no
+olmesartan,4,ambiguous
+alfuzosin,5,less
+valganciclovir,3,ambiguous
+aztreonam,5,ambiguous
+dutasteride,0,no
+baclofen,3,less
+benazepril,4,less
+bendazac,8,most
+benzarone,8,most
+benziodarone,8,most
+ertapenem,3,ambiguous
+benztropine,0,no
+fondaparinux sodium,3,less
+miglustat,0,no
+gadobenate dimeglumine,0,no
+rifaximin,7,ambiguous
+tadalafil,3,ambiguous
+palonosetron,4,ambiguous
+betaxolol,3,ambiguous
+vardenafil,3,ambiguous
+bisoprolol,3,ambiguous
+bleomycin,3,ambiguous
+atomoxetine,8,most
+bosentan,7,most
+acamprosate,3,less
+aripiprazole,5,ambiguous
+budesonide,0,no
+bumetanide,3,ambiguous
+buspirone,3,ambiguous
+eplerenone,4,ambiguous
+butorphanol,0,no
+cabergoline,0,no
+ezetimibe,3,less
+pregabalin,0,less
+adefovir,2,less
+ibandronate,0,no
+pemetrexed,3,ambiguous
+carbenicillin,3,less
+carbidopa,3,ambiguous
+eszopiclone,3,ambiguous
+cefaclor,3,less
+cefadroxil,7,less
+enfuvirtide,3,ambiguous
+cefazolin,3,less
+cefepime,3,less
+cefixime,4,ambiguous
+cefoperazone,3,less
+cefotaxime,5,less
+cefotetan,3,ambiguous
+cefoxitin,3,ambiguous
+cefpodoxime,3,ambiguous
+oxaliplatin,4,most
+cefprozil,4,less
+ceftibuten,3,ambiguous
+nitazoxanide,0,no
+ceftriaxone,4,less
+cefuroxime,5,less
+micafungin,7,most
+darifenacin,0,no
+cephalexin,4,less
+cetirizine,3,less
+solifenacin,3,ambiguous
+ranolazine,0,no
+etonogestrel,5,ambiguous
+fosamprenavir,3,ambiguous
+aprepitant,3,ambiguous
+chloramphenicol,0,no
+chlordiazepoxide,5,less
+atazanavir,3,less
+daptomycin,5,less
+chlormezanone,8,most
+bortezomib,7,most
+anidulafungin,7,ambiguous
+rasagiline,3,ambiguous
+clofarabine,8,ambiguous
+chloroquine,3,less
+chlorothiazide,2,less
+cinacalcet,0,no
+conivaptan,0,no
+nebivolol,3,ambiguous
+chlorthalidone,2,ambiguous
+erlotinib,8,most
+alvimopan,0,no
+cidofovir,5,ambiguous
+ramelteon,0,no
+cimetidine,2,less
+cinchophen,8,most
+tipranavir,8,most
+tigecycline,8,ambiguous
+cladribine,3,ambiguous
+clindamycin,3,less
+mecasermin,3,ambiguous
+clometacin,8,most
+urokinase,0,no
+armodafinil,3,ambiguous
+clonidine,3,ambiguous
+nelarabine,4,less
+cloxacillin,3,less
+lenalidomide,3,less
+tetrabenazine,3,ambiguous
+lubiprostone,0,no
+sorafenib,8,most
+varenicline,2,less
+darunavir,8,most
+aliskiren,0,less
+dasatinib,4,less
+cyclobenzaprine,5,less
+cyclofenil,8,most
+sitagliptin,4,less
+paliperidone,0,no
+cycloserine,3,ambiguous
+posaconazole,8,ambiguous
+cyproheptadine,7,less
+cysteamine,3,ambiguous
+fosaprepitant,3,ambiguous
+hydroxocobalamin,3,ambiguous
+temsirolimus,0,no
+tetrahydrobiopterin,0,no
+milnacipran,7,most
+desipramine,3,ambiguous
+dexlansoprazole,4,less
+everolimus,4,ambiguous
+codeine,0,no
+dexrazoxane,4,ambiguous
+colistimethate,0,no
+benzylpenicilloyl polylysine,0,no
+cephradine,4,ambiguous
+ceftizoxime,4,ambiguous
+didanosine,8,most
+mycophenolate mofetil,3,less
+cefdinir,7,less
+polymyxin b sulfate,0,no
+diltiazem,4,most
+sterile water,0,no
+disopyramide,2,less
+asparaginase,7,most
+botulinum toxin type a,0,no
+interferon alfa-2b,8,most
+dobutamine,0,no
+docetaxel,3,less
+"interferon alfa-2a, recombinant",8,most
+doxazosin,3,ambiguous
+doxepin,4,less
+alteplase,0,no
+epoetin alfa,0,no
+droperidol,0,no
+droxicam,8,most
+aldesleukin,3,ambiguous
+filgrastim,1,ambiguous
+sargramostim,0,no
+pegaspargase,3,less
+efavirenz,7,most
+muromonab-cd3,3,ambiguous
+interferon beta-1b,7,most
+abciximab,0,no
+interferon beta-1a,7,most
+esmolol,0,no
+estazolam,0,no
+interferon alfacon-1,7,most
+oprelvekin,0,no
+estramustine,4,most
+ethacrynic acid,5,ambiguous
+ethambutol,8,most
+basiliximab,0,no
+denileukin diftitox,3,ambiguous
+ethionamide,3,less
+palivizumab,0,no
+infliximab,8,most
+reteplase,0,no
+trastuzumab,0,less
+etanercept,3,less
+interferon gamma-1b,3,ambiguous
+etidronic acid,0,no
+botulinum toxin type b,0,no
+etomidate,0,no
+exifone,8,most
+tenecteplase,0,no
+rasburicase,0,no
+alemtuzumab,0,no
+peginterferon alfa-2b,4,most
+fexofenadine,0,no
+fialuridine,8,most
+fipexide,8,most
+anakinra,0,less
+darbepoetin alfa,0,less
+flecainide,7,less
+peginterferon alfa-2a,7,ambiguous
+omalizumab,0,no
+ibritumomab tiuxetan,0,no
+pegfilgrastim,0,no
+flucytosine,3,ambiguous
+fludarabine,0,no
+flumazenil,0,no
+adalimumab,7,less
+cetuximab,0,no
+bevacizumab,0,no
+palifermin,0,no
+natalizumab,5,most
+flurazepam,4,less
+fluvoxamine,3,ambiguous
+foscarnet,3,ambiguous
+fosfomycin,6,less
+fosinopril,3,less
+fosphenytoin,8,most
+galsulfase,0,no
+abatacept,0,less
+alglucosidase alfa,0,no
+ganciclovir,7,ambiguous
+gemcitabine,8,most
+panitumumab,0,no
+idursulfase,0,no
+certolizumab pegol,4,ambiguous
+eculizumab,0,no
+rilonacept,0,no
+ustekinumab,0,no
+romiplostim,0,no
+golimumab,8,ambiguous
+ofatumumab,0,no
+guanfacine,3,ambiguous
+heparin sodium,3,less
+hydrochlorothiazide,2,less
+hydroxyzine,0,no
+idarubicin,3,ambiguous
+antithymocyte globulin,3,ambiguous
+indapamide,5,ambiguous
+indinavir,8,ambiguous
+iodipamide meglumine,0,no
+irinotecan,3,less
+l-methionine,0,no
+isocarboxazid,5,ambiguous
+isradipine,3,less
+kanamycin,0,no
+riboflavin,0,no
+lamotrigine,7,most
+l-carnitine,0,no
+levofloxacin,8,most
+levonorgestrel,0,no
+lincomycin,3,ambiguous
+lisinopril,3,less
+loracarbef,3,less
+loratadine,0,no
+losartan,4,less
+loxapine,5,ambiguous
+maprotiline,5,ambiguous
+mebanazine,8,most
+mechlorethamine,3,ambiguous
+meclofenamic acid,3,ambiguous
+medroxyprogesterone,2,ambiguous
+mefloquine,7,less
+vitamin e,0,no
+melphalan,5,less
+mephenytoin,5,ambiguous
+meprobamate,0,no
+meropenem,3,less
+mesna,3,ambiguous
+mesoridazine,5,ambiguous
+methazolamide,7,less
+methoxsalen,3,less
+methylphenidate,3,less
+methylscopolamine bromide,0,no
+metoclopramide,5,less
+mexiletine,3,most
+midazolam,0,no
+midodrine,0,no
+mirtazapine,3,less
+mitotane,0,no
+mitoxantrone,3,less
+moexipril,3,ambiguous
+moricizine,5,ambiguous
+moxisylyte,8,most
+folic acid,0,no
+nabumetone,3,ambiguous
+nadolol,3,ambiguous
+nafcillin,3,less
+nalbuphine,0,no
+nalidixic acid,3,ambiguous
+nalmefene hydrochloride,3,ambiguous
+esomeprazole Sodium,4,less
+nialamide,8,most
+nicardipine,3,ambiguous
+nilutamide,8,most
+nimodipine,3,ambiguous
+niperotidine,8,most
+nitroglycerin,0,no
+nomifensine,8,most
+norfloxacin,3,less
+nortriptyline,8,most
+octreotide,2,less
+ondansetron,7,less
+ofloxacin,3,less
+diphenoxylate,0,no
+oxacillin,3,less
+ambenonium,0,no
+papaverine,5,most
+penbutolol,0,no
+penicillin g,3,less
+penicillin v,0,no
+pentazocine,0,no
+pentostatin,3,most
+pentoxifylline,5,ambiguous
+perphenazine,3,less
+phenelzine,3,less
+ephedrine,0,no
+pilocarpine,3,ambiguous
+pimozide,0,no
+pindolol,0,no
+piperacillin,3,ambiguous
+piroxicam,3,less
+pirprofen,8,most
+salsalate,3,less
+polythiazide,2,ambiguous
+probenecid,6,ambiguous
+procainamide,4,less
+propafenone,3,less
+propranolol,3,ambiguous
+propofol,3,less
+pyrantel,0,no
+pyrimethamine,3,less
+quazepam,0,no
+quinapril,3,less
+quinidine,3,less
+ramipril,7,less
+reserpine,0,no
+ribavirin,7,ambiguous
+riluzole,8,most
+risperidone,3,less
+ritonavir,8,most
+saquinavir,3,less
+selegiline,0,no
+spectinomycin,3,ambiguous
+succimer,2,less
+sumatriptan,3,ambiguous
+temazepam,3,ambiguous
+teniposide,3,less
+terazosin,0,no
+thiotepa,3,less
+thiothixene,2,ambiguous
+timolol,5,ambiguous
+sulcotidil,8,most
+tiopronin,3,ambiguous
+tolmetin,3,less
+tolrestat,8,most
+topotecan,0,no
+tramadol,7,ambiguous
+trandolapril,4,less
+tranylcypromine,3,less
+trazodone,5,less
+triamterene,5,less
+triazolam,4,ambiguous
+trihexyphenidyl,0,no
+trimethadione,5,ambiguous
+trimethobenzamide,5,ambiguous
+trimethoprim,4,less
+trimetrexate,3,ambiguous
+trimipramine,2,ambiguous
+fenclozic acid,8,most
+ebrotidine,8,most
+aceclofenac,0,less
+nitrefazole,8,most
+ursodeoxycholic acid,0,ambiguous
+valaciclovir,3,less
+valsartan,3,less
+tetrabamate,8,most
+vincristine,8,less
+xenazoic acid,8,most
+zafirlukast,8,most
+falnidamol,8,most
+zimelidine,8,most
+caffeine,0,no
+capreomycin,3,ambiguous
+lidocaine,0,no
+memantine,7,less
+pamidronate,3,ambiguous
+quinine,3,less
+rosuvastatin,3,less
+sulfamethizole,0,less
+telithromycin,8,most
+follitropin alfa/beta,3,ambiguous
+entacapone,0,less
+valdecoxib,3,less
+dexpanthenol,0,no
+scopolamine,0,no
+pyridoxine,0,no
+thiamine,0,no
+cyanocobalamin,0,no
+cromoglicate,3,less
+montelukast,3,less
+moxifloxacin,8,less
+vitamin c,0,no
+sorbitol,0,no
+capecitabine,2,ambiguous
+leuprolide,3,less
+eletriptan,3,ambiguous
+hydroxychloroquine,7,less
+fluoxymesterone,8,ambiguous
+ximelagatran,8,most
+duloxetine,8,most
+carisoprodol,0,no
+dicloxacillin,3,less
+estrone,2,ambiguous
+metolazone,3,ambiguous
+pamabrom,0,no
+dextromethorphan,0,no
+bacitracin,0,no
+paromomycin,0,no
+telmisartan,3,less
+gallium nitrate,3,ambiguous
+ammonium chloride,0,no
+amiloride,3,less
+methysergide,0,no
+methylergonovine,0,no
+brompheniramine,0,no
+l-arginine,0,no
+pyridostigmine,0,no
+phenoxybenzamine,0,no
+oxybutynin,0,no
+orphenadrine,0,no
+orciprenaline,0,no
+loperamide,0,no
+isoxsuprine,0,no
+glafenine,8,most
+edrophonium,0,no
+acetylcholine chloride,0,no
+amphetamine,0,less
+mepazine,8,most
+nandrolone decanoate,7,most
+auranofin,3,less
+simethicone,0,no
+betaine,0,no
+bisacodyl,0,no
+leucovorin,0,no
+ixabepilone,7,ambiguous
+lapatinib,8,most
+oseltamivir,3,ambiguous
+alaproclate,8,most
+orlistat,8,most
+apomorphine,0,no
+dihydroergotamine,0,no
+procyclidine,0,no
+clemastine,0,no
+tenofovir,3,less
+norethindrone acetate,0,no
+exametazime,0,no
+erythropoietin,0,no
+Argipressin,0,no
+sodium bicarbonate,0,no
+plerixafor,0,no
+4-phenylbutyric acid,4,ambiguous
+clindamycin-2-phosphate,3,ambiguous
+tyramine,0,no
+Hetastarch,0,no
+imiglucerase,0,no
+agalsidase beta,0,no
+gadolinium ethoxybenzyl DTPA,0,no
+"Estrogens, Conjugated",1,ambiguous
+haloperidol decanoate,3,ambiguous
+canakinumab,3,less
+Levoleucovorin,0,no
+levomefolate calcium,0,no
+sitaxsentan,8,most
+laronidase,4,ambiguous
+dexmethylphenidate,7,less
+hyaluronidase recombinant human,0,no
+escitalopram,7,less

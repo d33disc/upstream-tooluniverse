@@ -3,6 +3,7 @@ import json
 import re
 import hashlib
 import os
+import time
 from typing import Dict, Any, Union, List
 from huggingface_hub import hf_hub_download
 from pydantic._internal._model_construction import ModelMetaclass
@@ -228,11 +229,23 @@ def compare_function_calls(
 
 
 def extract_function_call_json(lst, return_message=False, verbose=True, format="llama"):
-    if type(lst) is dict:
+    # Handle different input types
+    if isinstance(lst, dict):
         if return_message:
             return lst, ""
         return lst
-    result_str = "".join(lst)
+    elif isinstance(lst, list):
+        # Check if it's a list of function call dictionaries
+        if all(isinstance(item, dict) and "name" in item for item in lst):
+            if return_message:
+                return lst, ""
+            return lst
+        # Otherwise, treat as string list to join
+        result_str = "".join(lst)
+    else:
+        # Single string or other type
+        result_str = str(lst)
+
     if verbose:
         print("\033[1;34mPossible LLM outputs for function call:\033[0m", result_str)
     try:
@@ -279,6 +292,62 @@ def extract_function_call_json(lst, return_message=False, verbose=True, format="
             if return_message:
                 return None, result_str
             return None
+
+
+def format_error_response(
+    error: Exception, tool_name: str = None, context: Dict[str, Any] = None
+) -> Dict[str, Any]:
+    """
+    Format error responses in a consistent structure.
+
+    This function ensures all error responses follow the same format for better
+    error handling and debugging.
+
+    Args:
+        error (Exception): The error that occurred
+        tool_name (str, optional): Name of the tool that failed
+        context (Dict[str, Any], optional): Additional context about the error
+
+    Returns:
+        Dict[str, Any]: Standardized error response
+    """
+    from .exceptions import ToolError
+
+    # If it's already a ToolError, use its structured format
+    if isinstance(error, ToolError):
+        return {
+            "error": str(error),
+            "error_type": error.error_type,
+            "retriable": error.retriable,
+            "next_steps": error.next_steps,
+            "details": error.details,
+            "tool_name": tool_name,
+            "timestamp": time.time(),
+        }
+
+    # For regular exceptions, create a basic structure
+    return {
+        "error": str(error),
+        "error_type": type(error).__name__,
+        "retriable": False,
+        "next_steps": [],
+        "details": context or {},
+        "tool_name": tool_name,
+        "timestamp": time.time(),
+    }
+
+
+def get_parameter_schema(tool_config: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Get parameter schema from tool configuration.
+
+    Args:
+        tool_config (Dict[str, Any]): Tool configuration dictionary
+
+    Returns:
+        Dict[str, Any]: Parameter schema dictionary
+    """
+    return tool_config.get("parameter", {})
 
 
 def validate_query(query: Dict[str, Any]) -> bool:

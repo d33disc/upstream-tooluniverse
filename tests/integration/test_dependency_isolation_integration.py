@@ -2,9 +2,14 @@
 
 import pytest
 import sys
+from pathlib import Path
 from unittest.mock import patch, MagicMock
-from src.tooluniverse import ToolUniverse
-from src.tooluniverse.tool_registry import get_tool_errors, mark_tool_unavailable
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
+
+from tooluniverse import ToolUniverse
+from tooluniverse.tool_registry import get_tool_errors, mark_tool_unavailable
 
 
 class TestDependencyIsolationIntegration:
@@ -12,7 +17,7 @@ class TestDependencyIsolationIntegration:
 
     def setup_method(self):
         """Clear error registry before each test."""
-        from src.tooluniverse.tool_registry import _TOOL_ERRORS
+        from tooluniverse.tool_registry import _TOOL_ERRORS
         _TOOL_ERRORS.clear()
 
     def test_real_tool_loading_with_isolation(self):
@@ -120,7 +125,7 @@ class TestDependencyIsolationIntegration:
 
     def test_doctor_cli_integration(self):
         """Test doctor CLI with real ToolUniverse."""
-        from src.tooluniverse.doctor import main
+        from tooluniverse.doctor import main
         
         # Should run without crashing
         result = main()

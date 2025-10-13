@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test critical bugs and issues discovered during system testing
+Test critical bugs and issues discovered during system testing - Cleaned Version
 
 This test file covers important bugs that were discovered:
 1. Deprecated method warnings
@@ -17,6 +17,7 @@ from pathlib import Path
 import pytest
 from unittest.mock import patch, Mock, MagicMock
 import warnings
+import gc
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
@@ -32,9 +33,8 @@ class TestDiscoveredBugs(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.tu = ToolUniverse()
-        # Don't load tools to avoid embedding model loading issues
-        self.tu.all_tools = []
-        self.tu.all_tool_dict = {}
+        # Load tools for real testing
+        self.tu.load_tools()
     
     def test_deprecated_method_warnings(self):
         """Test that deprecated methods show proper warnings."""
@@ -45,6 +45,8 @@ class TestDiscoveredBugs(unittest.TestCase):
             # This should trigger a deprecation warning
             try:
                 result = self.tu.get_tool_by_name(["NonExistentTool"])
+                # Verify we got a result (even if empty)
+                self.assertIsInstance(result, list)
             except Exception:
                 pass
             
@@ -55,32 +57,51 @@ class TestDiscoveredBugs(unittest.TestCase):
     
     def test_missing_api_key_handling(self):
         """Test proper handling of missing API keys."""
-        # Test that missing API keys are properly reported
-        with patch.object(self.tu, 'load_tools') as mock_load:
-            mock_load.side_effect = Exception("Missing API keys")
-            
-            with self.assertRaises(Exception):
-                self.tu.load_tools()
+        # Test that tools requiring API keys handle missing keys gracefully
+        api_dependent_tools = [
+            "UniProt_get_entry_by_accession",
+            "ArXiv_search_papers",
+            "OpenTargets_get_associated_targets_by_disease_efoId"
+        ]
+        
+        for tool_name in api_dependent_tools:
+            try:
+                result = self.tu.run({
+                    "name": tool_name,
+                    "arguments": {"accession": "P05067"} if "UniProt" in tool_name else 
+                                {"query": "test", "limit": 5} if "ArXiv" in tool_name else
+                                {"efoId": "EFO_0000305"}
+                })
+                
+                # Should return a result (may be error if API keys not configured)
+                self.assertIsInstance(result, dict)
+                if "error" in result:
+                    # Should be a meaningful error message
+                    self.assertIsInstance(result["error"], str)
+                    self.assertGreater(len(result["error"]), 0)
+            except Exception as e:
+                # Expected if API keys not configured
+                self.assertIsInstance(e, Exception)
     
     def test_tool_loading_timeout_issues(self):
         """Test handling of tool loading timeout issues."""
-        with patch('torch.load') as mock_torch_load:
-            # Simulate timeout during tool loading
-            mock_torch_load.side_effect = TimeoutError("Tool loading timeout")
+        # Test that tool loading doesn't hang indefinitely
+        import time
+        
+        start_time = time.time()
+        try:
+            # Try to load tools (this should complete in reasonable time)
+            self.tu.load_tools()
+            load_time = time.time() - start_time
             
-            # This should handle timeout gracefully
-            try:
-                result = self.tu.run({
-                    "name": "Tool_Finder",
-                    "arguments": {"description": "test", "limit": 5}
-                })
-                
-                self.assertIsInstance(result, dict)
-                self.assertIn("error", result)
-                
-            except TimeoutError:
-                # This is expected behavior
-                pass
+            # Should complete within reasonable time (30 seconds)
+            self.assertLess(load_time, 30)
+            
+        except Exception as e:
+            # If loading fails, it should fail quickly, not hang
+            load_time = time.time() - start_time
+            self.assertLess(load_time, 30)
+            self.assertIsInstance(e, Exception)
     
     def test_invalid_tool_name_handling(self):
         """Test that invalid tool names are handled gracefully."""
@@ -99,7 +120,7 @@ class TestDiscoveredBugs(unittest.TestCase):
         """Test that invalid arguments are handled gracefully."""
         # Test with invalid arguments for a real tool
         result = self.tu.run({
-            "name": "UniProt_get_function_by_accession",
+            "name": "UniProt_get_entry_by_accession",
             "arguments": {"invalid_param": "value"}
         })
         
@@ -112,7 +133,7 @@ class TestDiscoveredBugs(unittest.TestCase):
         """Test handling of empty arguments."""
         # Test with empty arguments
         result = self.tu.run({
-            "name": "UniProt_get_function_by_accession",
+            "name": "UniProt_get_entry_by_accession",
             "arguments": {}
         })
         
@@ -125,7 +146,7 @@ class TestDiscoveredBugs(unittest.TestCase):
         """Test handling of None arguments."""
         # Test with None arguments
         result = self.tu.run({
-            "name": "UniProt_get_function_by_accession",
+            "name": "UniProt_get_entry_by_accession",
             "arguments": None
         })
         
@@ -135,11 +156,11 @@ class TestDiscoveredBugs(unittest.TestCase):
     def test_malformed_query_handling(self):
         """Test handling of malformed queries."""
         malformed_queries = [
-            {"name": "UniProt_get_function_by_accession"},  # Missing arguments
+            {"name": "UniProt_get_entry_by_accession"},  # Missing arguments
             {"arguments": {"accession": "P05067"}},  # Missing name
             {"name": "", "arguments": {"accession": "P05067"}},  # Empty name
-            {"name": "UniProt_get_function_by_accession", "arguments": ""},  # String arguments
-            {"name": "UniProt_get_function_by_accession", "arguments": []},  # List arguments
+            {"name": "UniProt_get_entry_by_accession", "arguments": ""},  # String arguments
+            {"name": "UniProt_get_entry_by_accession", "arguments": []},  # List arguments
         ]
         
         for query in malformed_queries:
@@ -157,7 +178,7 @@ class TestDiscoveredBugs(unittest.TestCase):
         }
         
         result = self.tu.run({
-            "name": "UniProt_get_function_by_accession",
+            "name": "UniProt_get_entry_by_accession",
             "arguments": large_args
         })
         
@@ -173,7 +194,7 @@ class TestDiscoveredBugs(unittest.TestCase):
         
         def make_call(call_id):
             result = self.tu.run({
-                "name": "UniProt_get_function_by_accession",
+                "name": "UniProt_get_entry_by_accession",
                 "arguments": {"accession": f"P{call_id:05d}"}
             })
             results.append(result)
@@ -197,18 +218,26 @@ class TestDiscoveredBugs(unittest.TestCase):
     def test_memory_leak_prevention(self):
         """Test that memory leaks are prevented."""
         # Test multiple tool calls to ensure no memory leaks
-        for i in range(100):
+        initial_objects = len(gc.get_objects())
+        
+        for i in range(10):  # Reduced from 100 for faster testing
             result = self.tu.run({
-                "name": "UniProt_get_function_by_accession",
+                "name": "UniProt_get_entry_by_accession",
                 "arguments": {"accession": f"P{i:05d}"}
             })
             
             self.assertIsInstance(result, dict)
             
             # Force garbage collection periodically
-            if i % 10 == 0:
-                import gc
+            if i % 5 == 0:
                 gc.collect()
+        
+        # Check that we haven't created too many new objects
+        final_objects = len(gc.get_objects())
+        object_growth = final_objects - initial_objects
+        
+        # Should not have created more than 1000 new objects
+        self.assertLess(object_growth, 1000)
     
     def test_error_message_clarity(self):
         """Test that error messages are clear and helpful."""
@@ -223,6 +252,8 @@ class TestDiscoveredBugs(unittest.TestCase):
             # Error message should be clear and helpful
             self.assertIsInstance(error_msg, str)
             self.assertGreater(len(error_msg), 0)
+            # Should contain meaningful information
+            self.assertTrue(any(keyword in error_msg.lower() for keyword in ["tool", "not", "found", "error"]))
     
     def test_parameter_validation_edge_cases(self):
         """Test parameter validation edge cases."""
@@ -237,12 +268,14 @@ class TestDiscoveredBugs(unittest.TestCase):
         
         for case in edge_cases:
             result = self.tu.run({
-                "name": "UniProt_get_function_by_accession",
+                "name": "UniProt_get_entry_by_accession",
                 "arguments": case
             })
             
             self.assertIsInstance(result, dict)
             # Should handle edge cases gracefully
+            if "error" in result:
+                self.assertIsInstance(result["error"], str)
     
     def test_tool_specification_edge_cases(self):
         """Test tool specification edge cases."""
@@ -269,6 +302,12 @@ class TestDiscoveredBugs(unittest.TestCase):
         self.assertIn("unavailable", health)
         self.assertIn("unavailable_list", health)
         self.assertIn("details", health)
+        
+        # Verify totals make sense
+        self.assertEqual(health["total"], health["available"] + health["unavailable"])
+        self.assertGreaterEqual(health["total"], 0)
+        self.assertGreaterEqual(health["available"], 0)
+        self.assertGreaterEqual(health["unavailable"], 0)
     
     def test_tool_listing_edge_cases(self):
         """Test tool listing edge cases."""

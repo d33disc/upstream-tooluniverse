@@ -424,7 +424,29 @@ class AgenticTool(BaseTool):
                     },
                 }
             else:
-                return f"error: {str(e)} error_type: {type(e).__name__}"
+                from .utils import format_error_response
+
+                return format_error_response(
+                    e,
+                    self.name,
+                    {
+                        "prompt_used": (
+                            formatted_prompt
+                            if "formatted_prompt" in locals()
+                            else "Failed to format prompt"
+                        ),
+                        "input_arguments": {
+                            arg: arguments.get(arg) for arg in self._input_arguments
+                        },
+                        "model_info": {
+                            "api_type": self._api_type,
+                            "model_id": self._model_id,
+                            "temperature": self._temperature,
+                            "max_new_tokens": self._max_new_tokens,
+                        },
+                        "execution_time_seconds": execution_time,
+                    },
+                )
 
     @staticmethod
     def _iter_chunks(text: str, size: int = 800):
