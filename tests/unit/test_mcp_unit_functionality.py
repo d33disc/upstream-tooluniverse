@@ -268,18 +268,15 @@ class TestMCPFunctionality(unittest.TestCase):
             from tooluniverse.mcp_client_tool import MCPClientTool
             import time
             
-            client_tool = MCPClientTool(
-                tooluniverse=self.tu,
-                config={
-                    "name": "performance_test_client",
-                    "description": "A performance test client",
-                    "transport": "stdio",
-                    "command": "echo"
-                }
-            )
-            
-            # Test execution time
+            # Initialize start_time before any potential exceptions
             start_time = time.time()
+            
+            client_tool = MCPClientTool({
+                "name": "performance_test_client",
+                "description": "A performance test client",
+                "transport": "stdio",
+                "command": "echo"
+            })
             
             result = client_tool.run({
                 "name": "test_tool",
