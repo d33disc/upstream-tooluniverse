@@ -6,6 +6,7 @@ Performance benchmarks for ToolUniverse direct import functionality
 import unittest
 import time
 import statistics
+import pytest
 from tooluniverse.tools import (
     OpenTargets_get_disease_id_description_by_name,
     ChEMBL_search_similar_molecules,
@@ -16,6 +17,7 @@ from tooluniverse.tools import (
 )
 
 
+@pytest.mark.slow
 class TestPerformanceBenchmarks(unittest.TestCase):
     """Test performance benchmarks for direct import functionality."""
     

@@ -10,8 +10,8 @@ from ._shared_client import get_shared_client
 
 def DOAJ_search_articles(
     query: str,
-    max_results: int,
-    type: str,
+    max_results: Optional[int] = 10,
+    type: Optional[str] = "articles",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

@@ -10,9 +10,9 @@ from ._shared_client import get_shared_client
 
 def ArXiv_search_papers(
     query: str,
-    limit: int = 10,
-    sort_by: str = "relevance",
-    sort_order: str = "descending",
+    limit: Optional[int] = 10,
+    sort_by: Optional[str] = "relevance",
+    sort_order: Optional[str] = "descending",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

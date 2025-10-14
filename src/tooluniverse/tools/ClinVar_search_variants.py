@@ -1,33 +1,30 @@
 """
-PubMed_search_articles
+ClinVar_search_variants
 
-Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
+Search ClinVar via NCBI E-utilities (esearch→esummary) and return concise variant records for a q...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def PubMed_search_articles(
+def ClinVar_search_variants(
     query: str,
-    limit: Optional[int] = 10,
-    api_key: Optional[str] = None,
+    retmax: Optional[int] = 5,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
+    Search ClinVar via NCBI E-utilities (esearch→esummary) and return concise variant records for a q...
 
     Parameters
     ----------
     query : str
-        Search query for PubMed articles. Use keywords separated by spaces to refine ...
-    limit : int
-        Number of articles to return. This sets the maximum number of articles retrie...
-    api_key : str
-        Optional NCBI API key for higher rate limits. Get your free key at https://ww...
+        ClinVar search term (e.g., BRCA1).
+    retmax : int
+        Max records.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,8 +40,8 @@ def PubMed_search_articles(
 
     return get_shared_client().run_one_function(
         {
-            "name": "PubMed_search_articles",
-            "arguments": {"query": query, "limit": limit, "api_key": api_key},
+            "name": "ClinVar_search_variants",
+            "arguments": {"query": query, "retmax": retmax},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +49,4 @@ def PubMed_search_articles(
     )
 
 
-__all__ = ["PubMed_search_articles"]
+__all__ = ["ClinVar_search_variants"]

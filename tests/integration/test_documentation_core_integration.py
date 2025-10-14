@@ -71,8 +71,8 @@ class TestToolUniverseCoreIntegration:
         # Verify all calls completed
         assert len(results) == 3
         for result in results:
-            # Allow for None results (API failures) or dict results
-            assert result is None or isinstance(result, dict)
+            # Allow for None results (API failures), dict results, or list results
+            assert result is None or isinstance(result, (dict, list))
 
     def test_tool_specification_real(self):
         """Test real tool specification retrieval."""

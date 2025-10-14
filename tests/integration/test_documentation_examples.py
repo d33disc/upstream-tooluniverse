@@ -18,6 +18,7 @@ from tooluniverse import ToolUniverse
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestToolUniverseExamplesValidation:
     """Test examples validation with real execution."""
 

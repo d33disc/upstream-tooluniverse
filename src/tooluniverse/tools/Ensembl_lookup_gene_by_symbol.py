@@ -1,25 +1,30 @@
 """
-MarkItDown_list_plugins
+Ensembl_lookup_gene_by_symbol
 
-List available MarkItDown plugins for enhanced file conversion capabilities.
+Lookup Ensembl gene by species and gene symbol, returning core metadata and coordinates (uses /xr...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def MarkItDown_list_plugins(
+def Ensembl_lookup_gene_by_symbol(
+    symbol: str,
+    species: Optional[str] = "homo_sapiens",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    List available MarkItDown plugins for enhanced file conversion capabilities.
+    Lookup Ensembl gene by species and gene symbol, returning core metadata and coordinates (uses /xr...
 
     Parameters
     ----------
-    No parameters
+    species : str
+        Species name (e.g., 'homo_sapiens').
+    symbol : str
+        Gene symbol (e.g., BRCA1).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,11 +39,14 @@ def MarkItDown_list_plugins(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "MarkItDown_list_plugins", "arguments": {}},
+        {
+            "name": "Ensembl_lookup_gene_by_symbol",
+            "arguments": {"species": species, "symbol": symbol},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["MarkItDown_list_plugins"]
+__all__ = ["Ensembl_lookup_gene_by_symbol"]

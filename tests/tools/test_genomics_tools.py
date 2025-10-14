@@ -8,6 +8,7 @@ import unittest
 import sys
 import os
 import json
+import pytest
 
 # Add src to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
@@ -15,6 +16,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 from tooluniverse import ToolUniverse
 
 
+@pytest.mark.network
 class TestGenomicsToolsIntegration(unittest.TestCase):
     """Test genomics tools integration with ToolUniverse."""
     

@@ -132,7 +132,7 @@ class TestDependencyIsolation:
         assert health["unavailable"] >= 0
         assert health["total"] == health["available"] + health["unavailable"]
 
-    @patch('src.tooluniverse.execute_function.get_tool_class_lazy')
+    @patch('tooluniverse.execute_function.get_tool_class_lazy')
     def test_init_tool_handles_failure_gracefully(self, mock_get_tool_class):
         """Test that init_tool handles failures gracefully."""
         tu = ToolUniverse()
@@ -150,7 +150,7 @@ class TestDependencyIsolation:
         errors = get_tool_errors()
         assert "TestTool" in errors
 
-    @patch('src.tooluniverse.execute_function.get_tool_class_lazy')
+    @patch('tooluniverse.execute_function.get_tool_class_lazy')
     def test_get_tool_instance_checks_error_registry(self, mock_get_tool_class):
         """Test that _get_tool_instance checks error registry."""
         tu = ToolUniverse()
@@ -213,13 +213,13 @@ class TestDependencyIsolation:
 
     def test_doctor_cli_import(self):
         """Test that doctor CLI can be imported."""
-        from src.tooluniverse.doctor import main
+        from tooluniverse.doctor import main
         assert callable(main)
 
     @patch('tooluniverse.ToolUniverse')
     def test_doctor_cli_with_failures(self, mock_tu_class):
         """Test doctor CLI with simulated failures."""
-        from src.tooluniverse.doctor import main
+        from tooluniverse.doctor import main
         
         # Mock ToolUniverse instance
         mock_tu = MagicMock()
@@ -252,7 +252,7 @@ class TestDependencyIsolation:
     @patch('tooluniverse.ToolUniverse')
     def test_doctor_cli_all_tools_working(self, mock_tu_class):
         """Test doctor CLI when all tools are working."""
-        from src.tooluniverse.doctor import main
+        from tooluniverse.doctor import main
         
         # Mock ToolUniverse instance
         mock_tu = MagicMock()
@@ -272,7 +272,7 @@ class TestDependencyIsolation:
     @patch('tooluniverse.ToolUniverse')
     def test_doctor_cli_initialization_failure(self, mock_tu_class):
         """Test doctor CLI when ToolUniverse initialization fails."""
-        from src.tooluniverse.doctor import main
+        from tooluniverse.doctor import main
         
         # Mock ToolUniverse to raise exception
         mock_tu_class.side_effect = Exception("Initialization failed")

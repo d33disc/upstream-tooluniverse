@@ -25,6 +25,15 @@ def tools_generated():
     return tools_dir
 
 
+@pytest.fixture(scope="session")
+def tooluniverse_instance():
+    """Session-scoped ToolUniverse instance for better performance."""
+    from tooluniverse import ToolUniverse
+    tu = ToolUniverse()
+    tu.load_tools()
+    return tu
+
+
 @pytest.fixture
 def disable_network(monkeypatch: pytest.MonkeyPatch):
     """Disable network by patching requests' adapters. Use for unit tests."""

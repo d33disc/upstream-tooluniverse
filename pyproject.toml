@@ -39,15 +39,16 @@ dependencies = [
     "chemprop==1.6.1",
     "aiohttp",
     "beautifulsoup4>=4.12.0",
-    "markitdown[all]>=0.1.0"
+    "markitdown[all]>=0.1.0",
+    "psutil>=5.9.0"
 ]
 requires-python = ">=3.10"
 readme = "README.md"
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=6.0",
-    "pytest-cov>=2.0",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
     "pytest-timeout>=2.3.1",
     "pytest-mock>=3.14.0",
     "pytest-asyncio>=0.21.0",
@@ -55,6 +56,8 @@ dev = [
     "black>=22.0",
     "flake8>=4.0",
     "pre-commit>=2.0",
+    "pytest-xdist>=3.0",
+    "pytest-html>=3.0",
 ]
 docs = [
     "sphinx>=4.0",

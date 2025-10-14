@@ -21,6 +21,7 @@ from tooluniverse.unified_guideline_tools import (
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestNICEGuidelinesTool:
     """Tests for NICE Clinical Guidelines Search tool."""
     
@@ -69,6 +70,7 @@ class TestNICEGuidelinesTool:
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestPubMedGuidelinesTool:
     """Tests for PubMed Guidelines Search tool."""
     
@@ -140,6 +142,7 @@ class TestPubMedGuidelinesTool:
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestEuropePMCGuidelinesTool:
     """Tests for Europe PMC Guidelines Search tool."""
     
@@ -199,6 +202,7 @@ class TestEuropePMCGuidelinesTool:
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestTRIPDatabaseTool:
     """Tests for TRIP Database Guidelines Search tool."""
     
@@ -315,6 +319,7 @@ class TestGuidelineToolsIntegration:
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestWHOGuidelinesTool:
     """Tests for WHO Guidelines Search tool."""
     
@@ -373,6 +378,7 @@ class TestWHOGuidelinesTool:
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestOpenAlexGuidelinesTool:
     """Tests for OpenAlex Guidelines Search tool."""
     

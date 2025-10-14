@@ -11,7 +11,7 @@ from ._shared_client import get_shared_client
 def Zenodo_search_records(
     query: str,
     max_results: int,
-    community: str,
+    community: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

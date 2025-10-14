@@ -228,35 +228,45 @@ class TestSimpleExamples(unittest.TestCase):
     
     def test_example_imports(self):
         """Test that example modules can be imported."""
+        import sys
+        import os
+        from pathlib import Path
+        
+        # Add examples directory to Python path
+        examples_dir = Path(__file__).parent.parent.parent / "examples"
+        if str(examples_dir) not in sys.path:
+            sys.path.insert(0, str(examples_dir))
+        
+        # Test importing actual example files that exist
         try:
-            import examples.drug_discovery_simple
+            import literature_search_example
             self.assertTrue(True)
         except ImportError as e:
-            self.fail(f"Could not import drug_discovery_simple: {e}")
+            self.fail(f"Could not import literature_search_example: {e}")
         
         try:
-            import examples.genomics_simple
+            import opentargets_example
             self.assertTrue(True)
         except ImportError as e:
-            self.fail(f"Could not import genomics_simple: {e}")
+            self.fail(f"Could not import opentargets_example: {e}")
         
         try:
-            import examples.literature_search_simple
+            import pubchem_tool_example
             self.assertTrue(True)
         except ImportError as e:
-            self.fail(f"Could not import literature_search_simple: {e}")
+            self.fail(f"Could not import pubchem_tool_example: {e}")
         
         try:
-            import examples.protein_structure_simple
+            import hpa_example
             self.assertTrue(True)
         except ImportError as e:
-            self.fail(f"Could not import protein_structure_simple: {e}")
+            self.fail(f"Could not import hpa_example: {e}")
         
         try:
-            import examples.clinical_trial_simple
+            import gwas_tool_example
             self.assertTrue(True)
         except ImportError as e:
-            self.fail(f"Could not import clinical_trial_simple: {e}")
+            self.fail(f"Could not import gwas_tool_example: {e}")
 
 
 if __name__ == "__main__":

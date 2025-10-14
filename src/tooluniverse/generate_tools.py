@@ -266,6 +266,7 @@ def main(format_enabled: Optional[bool] = None) -> None:
     (skip when set to "1").
     """
     from tooluniverse import ToolUniverse
+    from .build_optimizer import cleanup_orphaned_files, get_changed_tools
 
     print("🔧 Generating tools...")
 
@@ -275,16 +276,35 @@ def main(format_enabled: Optional[bool] = None) -> None:
     output = Path("src/tooluniverse/tools")
     output.mkdir(parents=True, exist_ok=True)
 
+    # Cleanup orphaned files
+    current_tool_names = set(tu.all_tool_dict.keys())
+    cleaned_count = cleanup_orphaned_files(output, current_tool_names)
+    if cleaned_count > 0:
+        print(f"🧹 Removed {cleaned_count} orphaned tool files")
+
+    # Check for changes
+    metadata_file = output / ".tool_metadata.json"
+    new_tools, changed_tools, unchanged_tools = get_changed_tools(
+        tu.all_tool_dict, metadata_file
+    )
+
+    # Only generate if there are changes
+    if not new_tools and not changed_tools:
+        print("✨ No changes detected, skipping generation")
+        return
+
+    print(f"🔄 Generating {len(new_tools + changed_tools)} changed tools...")
     generated_paths: List[str] = []
 
-    # Generate all tools
+    # Generate only changed tools
     for i, (tool_name, tool_config) in enumerate(tu.all_tool_dict.items(), 1):
-        path = generate_tool_file(tool_name, tool_config, output)
-        generated_paths.append(str(path))
+        if tool_name in new_tools or tool_name in changed_tools:
+            path = generate_tool_file(tool_name, tool_config, output)
+            generated_paths.append(str(path))
         if i % 50 == 0:
-            print(f"  Generated {i} tools...")
+            print(f"  Processed {i} tools...")
 
-    # Generate __init__.py
+    # Always regenerate __init__.py to include all tools
     init_path = generate_init(list(tu.all_tool_dict.keys()), output)
     generated_paths.append(str(init_path))
 
@@ -296,7 +316,7 @@ def main(format_enabled: Optional[bool] = None) -> None:
     if format_enabled:
         _format_files(generated_paths)
 
-    print(f"✅ Generated {len(tu.all_tool_dict)} tools in {output}")
+    print(f"✅ Generated {len(generated_paths)} files in {output}")
 
 
 if __name__ == "__main__":

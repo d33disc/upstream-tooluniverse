@@ -10,7 +10,7 @@ from ._shared_client import get_shared_client
 
 def SemanticScholar_search_papers(
     query: str,
-    limit: int = 5,
+    limit: int,
     api_key: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -41,14 +41,10 @@ def SemanticScholar_search_papers(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    arguments: dict[str, Any] = {"query": query, "limit": limit}
-    if api_key:
-        arguments["api_key"] = api_key
-
     return get_shared_client().run_one_function(
         {
             "name": "SemanticScholar_search_papers",
-            "arguments": arguments,
+            "arguments": {"query": query, "limit": limit, "api_key": api_key},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

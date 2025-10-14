@@ -51,6 +51,9 @@ default_tool_files = {
     "fatcat": os.path.join(current_dir, "data", "fatcat_tools.json"),
     "wikidata_sparql": os.path.join(current_dir, "data", "wikidata_sparql_tools.json"),
     "agents": os.path.join(current_dir, "data", "agentic_tools.json"),
+    "drug_discovery_agents": os.path.join(
+        current_dir, "data", "drug_discovery_agents.json"
+    ),
     "dataset": os.path.join(current_dir, "data", "dataset_tools.json"),
     # 'mcp_clients': os.path.join(current_dir, 'data', 'mcp_client_tools_example.json'),
     "mcp_auto_loader_txagent": os.path.join(

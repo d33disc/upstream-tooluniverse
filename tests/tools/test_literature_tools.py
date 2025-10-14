@@ -10,6 +10,7 @@ from tooluniverse import ToolUniverse
 
 
 @pytest.mark.integration
+@pytest.mark.network
 class TestLiteratureTools:
     """Test cases for all literature search tools with real execution."""
 

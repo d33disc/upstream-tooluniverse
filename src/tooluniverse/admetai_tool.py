@@ -30,13 +30,15 @@ class ADMETAITool(BaseTool):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        # Initialize the model once during tool initialization
+        self.model = ADMETModel()
 
     def _predict(self, smiles: str) -> dict:
         """
         Gets ADMET predictions for the given smiles
         """
-        model = ADMETModel()
-        preds = model.predict(smiles=smiles)
+        # Reuse the pre-loaded model instead of creating a new one
+        preds = self.model.predict(smiles=smiles)
         return preds
 
     def run(self, arguments: dict) -> dict:
@@ -47,7 +49,8 @@ class ADMETAITool(BaseTool):
             smiles: The SMILES string(s) of the molecule(s).
 
         Returns:
-            A dictionary mapping each SMILES string to a subdictionary of selected ADMET properties and their predicted values.
+            A dictionary mapping each SMILES string to a subdictionary of
+            selected ADMET properties and their predicted values.
         """
         smiles = arguments.get("smiles", [])
         if not smiles:
@@ -65,7 +68,8 @@ class ADMETAITool(BaseTool):
             ):
                 return {"error": "No predictions could be extracted."}
 
-            # Expand columns to include _drugbank_approved_percentile columns if present
+            # Expand columns to include _drugbank_approved_percentile columns
+            # if present
             if columns is not None:
                 expanded_columns = []
                 for col in columns:

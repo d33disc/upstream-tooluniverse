@@ -39,7 +39,7 @@ class TestErrorHandlingAndRecovery:
 
     def test_missing_package_extraction_edge_cases(self):
         """Test edge cases in missing package extraction."""
-        from src.tooluniverse.tool_registry import _extract_missing_package
+        from tooluniverse.tool_registry import _extract_missing_package
         
         # Test various error message formats
         test_cases = [

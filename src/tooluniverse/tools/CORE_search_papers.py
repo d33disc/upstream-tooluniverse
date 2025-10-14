@@ -11,9 +11,9 @@ from ._shared_client import get_shared_client
 def CORE_search_papers(
     query: str,
     limit: int,
-    year_from: int,
-    year_to: int,
-    language: str,
+    year_from: Optional[int] = None,
+    year_to: Optional[int] = None,
+    language: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,

@@ -1,30 +1,30 @@
 """
-EuropePMC_search_articles
+GWAS_search_associations_by_gene
 
-Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
+Search GWAS Catalog associations by gene name (returns strongest risk allele and p-value fields).
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def EuropePMC_search_articles(
-    query: str,
-    limit: Optional[int] = 5,
+def GWAS_search_associations_by_gene(
+    gene_name: str,
+    size: Optional[int] = 5,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
+    Search GWAS Catalog associations by gene name (returns strongest risk allele and p-value fields).
 
     Parameters
     ----------
-    query : str
-        Search query for Europe PMC. Use keywords separated by spaces to refine your ...
-    limit : int
-        Number of articles to return. This sets the maximum number of articles retrie...
+    gene_name : str
+        Gene symbol (e.g., BRCA1).
+    size : int
+        Max associations to return.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,14 +34,14 @@ def EuropePMC_search_articles(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "EuropePMC_search_articles",
-            "arguments": {"query": query, "limit": limit},
+            "name": "GWAS_search_associations_by_gene",
+            "arguments": {"gene_name": gene_name, "size": size},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def EuropePMC_search_articles(
     )
 
 
-__all__ = ["EuropePMC_search_articles"]
+__all__ = ["GWAS_search_associations_by_gene"]

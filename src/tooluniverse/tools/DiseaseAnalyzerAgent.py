@@ -1,30 +1,30 @@
 """
-EuropePMC_search_articles
+DiseaseAnalyzerAgent
 
-Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
+AI agent that analyzes disease characteristics and identifies potential therapeutic targets using...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def EuropePMC_search_articles(
-    query: str,
-    limit: Optional[int] = 5,
+def DiseaseAnalyzerAgent(
+    disease_name: str,
+    context: Optional[str] = "",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web servic...
+    AI agent that analyzes disease characteristics and identifies potential therapeutic targets using...
 
     Parameters
     ----------
-    query : str
-        Search query for Europe PMC. Use keywords separated by spaces to refine your ...
-    limit : int
-        Number of articles to return. This sets the maximum number of articles retrie...
+    disease_name : str
+        Name of the disease to analyze
+    context : str
+        Additional context or specific focus areas
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,14 +34,14 @@ def EuropePMC_search_articles(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "EuropePMC_search_articles",
-            "arguments": {"query": query, "limit": limit},
+            "name": "DiseaseAnalyzerAgent",
+            "arguments": {"disease_name": disease_name, "context": context},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def EuropePMC_search_articles(
     )
 
 
-__all__ = ["EuropePMC_search_articles"]
+__all__ = ["DiseaseAnalyzerAgent"]
