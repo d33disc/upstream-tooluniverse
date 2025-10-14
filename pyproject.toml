@@ -128,8 +128,8 @@ where = ["src"]
 [tool.setuptools.package-data]
 tooluniverse = ["data/*", "data/packages/*"]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "tooluniverse[dev,embedding]",
 ]
 

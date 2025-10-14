@@ -171,7 +171,11 @@ class TestDependencyIsolation:
     def test_get_tool_instance_caches_successful_tools(self):
         """Test that successful tools are cached."""
         tu = ToolUniverse()
-        tu.load_tools()
+        # Load only a small subset of tools to avoid timeout
+        tu.load_tools(include_tools=[
+            "UniProt_get_entry_by_accession", 
+            "ChEMBL_get_molecule_by_chembl_id"
+        ])
         
         # Find a tool that can be successfully initialized
         successful_tool = None
