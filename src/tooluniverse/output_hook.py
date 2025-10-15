@@ -433,10 +433,34 @@ class HookManager:
         # Validate LLM API keys before loading hooks
         if not self._validate_llm_api_keys():
             print("⚠️  Warning: LLM API keys not available. Hooks will be disabled.")
-            print(
-                "   To enable hooks, please set AZURE_OPENAI_API_KEY environment variable."
-            )
+            print("   To enable hooks, please set LLM API keys environment variable.")
+            # Disable hook processing but still ensure required tools are available
+            # Tests expect hook-related tools (e.g., ToolOutputSummarizer) to be registered
+            # in ToolUniverse.callable_functions even when hooks are disabled.
             self.enabled = False
+
+            try:
+                # Proactively load tools required by summarization hooks so they are discoverable
+                all_hook_configs = []
+                global_hooks = (
+                    self.config.get("hooks", [])
+                    if isinstance(self.config, dict)
+                    else []
+                )
+                for hook_cfg in global_hooks:
+                    all_hook_configs.append(hook_cfg)
+
+                # Attempt auto-load based on config; if config is empty, fall back to ensuring summarization tools
+                self._auto_load_hook_tools(all_hook_configs)
+                # Ensure tools are pre-instantiated into callable_functions if possible
+                self._ensure_hook_tools_loaded()
+            except Exception as _e:
+                # Non-fatal: we still proceed with disabled hooks
+                print(
+                    f"⚠️  Warning: Failed to preload hook tools without API keys: {_e}"
+                )
+
+            # Do not proceed to create hook instances when disabled
             return
 
         self._load_hooks()
