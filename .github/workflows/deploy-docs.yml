@@ -48,10 +48,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip uv
-        # Install CI-specific documentation dependencies
-        pip install -r docs/requirements_ci.txt
-        # Also install project with docs extras as fallback
+        # Install project with docs extras (includes all documentation dependencies)
         uv pip install --system -e .[docs]
+        # Install additional requirements from docs/requirements.txt
+        pip install -r docs/requirements.txt
         
     - name: Verify documentation setup
       run: |
@@ -60,9 +60,12 @@ jobs:
         python -c "import furo; print('✅ Furo theme available')" || echo "⚠️ Furo theme not available"
         python -c "import pydata_sphinx_theme; print('✅ PyData theme available')" || echo "⚠️ PyData theme not available"
         python -c "import sphinx_rtd_theme; print('✅ RTD theme available')" || echo "⚠️ RTD theme not available"
+        python -c "import shibuya; print('✅ Shibuya theme available')" || echo "⚠️ Shibuya theme not available"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
         python -c "import myst_parser; print('✅ MyST parser available')"
         python -c "import sphinx_design; print('✅ Sphinx Design available')"
+        python -c "import sphinx_copybutton; print('✅ Sphinx Copybutton available')"
+        python -c "import sphinx_tabs; print('✅ Sphinx Tabs available')"
         
     - name: Prepare assets
       run: |
@@ -143,7 +146,7 @@ jobs:
           echo "❌ Documentation deployment failed!"
           echo "Build status: ${{ needs.build-and-deploy.result }}"
           echo "📝 Common issues:"
-          echo "   • Missing theme dependencies (run: pip install -r docs/requirements_ci.txt)"
+          echo "   • Missing theme dependencies (run: pip install -r docs/requirements.txt)"
           echo "   • Theme compatibility problems (check .. contents:: directives)"
           echo "   • Configuration errors (verify conf*.py files)"
           echo "💡 Check the build logs for specific error messages"
