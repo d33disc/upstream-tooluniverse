@@ -117,6 +117,7 @@ class TestHooksComprehensive:
         if os.path.exists(file_path):
             os.remove(file_path)
 
+    @pytest.mark.require_api_keys
     def test_hook_configuration_validation(self):
         """Test hook configuration validation and error handling"""
         # Test valid configuration
@@ -216,6 +217,7 @@ class TestHooksComprehensive:
         assert hasattr(tu, 'hook_manager')
         assert tu.hook_manager is not None
 
+    @pytest.mark.require_api_keys
     def test_hook_error_handling(self):
         """Test hook error handling and graceful degradation"""
         # Test with invalid hook type
@@ -243,6 +245,7 @@ class TestHooksComprehensive:
             # If an exception is raised, it should be informative
             assert "NonExistentHook" in str(e) or "hook" in str(e).lower()
 
+    @pytest.mark.require_api_keys
     def test_hook_priority_and_execution_order(self):
         """Test hook priority and execution order"""
         priority_config = {
@@ -281,6 +284,7 @@ class TestHooksComprehensive:
         assert hasattr(tu, 'hook_manager')
         assert len(tu.hook_manager.hooks) >= 2
 
+    @pytest.mark.require_api_keys
     def test_hook_caching_functionality(self):
         """Test hook caching functionality"""
         cache_config = {
@@ -348,6 +352,7 @@ class TestHooksComprehensive:
             time.sleep(0.1)
             # Note: Actual cleanup testing would require more sophisticated timing
 
+    @pytest.mark.require_api_keys
     def test_hook_metadata_and_logging(self):
         """Test hook metadata and logging functionality"""
         # Test that hook operations can be logged
@@ -388,6 +393,7 @@ class TestHooksComprehensive:
             assert result is not None
             assert isinstance(result, str) or isinstance(result, dict)
 
+    @pytest.mark.require_api_keys
     def test_hook_configuration_precedence(self):
         """Test hook configuration precedence rules"""
         # Test that hook_config takes precedence over hook_type
