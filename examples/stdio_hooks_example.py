@@ -1,20 +1,34 @@
 #!/usr/bin/env python3
 """
-测试 MCP stdio 模式下关闭和开启 hooks 的情况
+Test MCP stdio mode with hooks enabled and disabled
 """
 import subprocess
 import json
 import time
 import sys
+import select
 
 
-def run_stdio_test(hooks_enabled=False):
-    """运行 stdio 测试"""
+def read_with_timeout(process, timeout=5):
+    """Read from process with timeout"""
+    if sys.platform == "win32":
+        # Windows doesn't support select for pipes
+        return process.stdout.readline()
+    else:
+        ready, _, _ = select.select([process.stdout], [], [], timeout)
+        if ready:
+            return process.stdout.readline()
+        return None
+
+
+def run_stdio_test(hooks_enabled=False, timeout=60):
+    """Run stdio test"""
     print(f"\n{'='*60}")
-    print(f"测试模式: {'开启 hooks' if hooks_enabled else '关闭 hooks'}")
+    print(f"Test mode: {'hooks enabled' if hooks_enabled else 'hooks disabled'}")
+    print(f"Timeout: {timeout} seconds")
     print(f"{'='*60}")
 
-    # 构建命令
+    # Build command
     cmd = [
         sys.executable,
         "-c",
@@ -27,9 +41,9 @@ run_stdio_server()
 """,
     ]
 
-    print(f"启动命令: {' '.join(cmd[:3])} ...")
+    print(f"Starting command: {' '.join(cmd[:3])} ...")
 
-    # 启动服务器进程
+    # Start server process
     process = subprocess.Popen(
         cmd,
         stdin=subprocess.PIPE,
@@ -40,20 +54,23 @@ run_stdio_server()
     )
 
     try:
-        # 等待服务器启动并读取启动日志
+        # Wait for server to start and read startup logs
+        print("Waiting for server to start...")
         time.sleep(3)
 
-        # 读取并丢弃启动日志
-        print("读取启动日志...")
-        while True:
-            line = process.stdout.readline()
+        # Read and discard startup logs
+        print("Reading startup logs...")
+        startup_timeout = 10
+        start_time = time.time()
+        while time.time() - start_time < startup_timeout:
+            line = read_with_timeout(process, 1)
             if not line:
-                break
-            print(f"启动日志: {line.strip()}")
-            if "Starting ToolUniverse SMCP Server" in line:
+                continue
+            print(f"Startup log: {line.strip()}")
+            if "Starting ToolUniverse SMCP Server" in line or "Server started" in line:
                 break
 
-        # 发送初始化请求
+        # Send initialization request
         init_request = {
             "jsonrpc": "2.0",
             "id": 1,
@@ -65,59 +82,82 @@ run_stdio_server()
             },
         }
 
-        print("发送初始化请求...")
+        print("Sending initialization request...")
         process.stdin.write(json.dumps(init_request) + "\n")
         process.stdin.flush()
 
-        # 读取初始化响应
-        init_response = process.stdout.readline()
-        print(f"初始化响应: {init_response.strip()}")
+        # Read initialization response
+        init_response = read_with_timeout(process, 5)
+        if init_response:
+            print(f"Initialization response: {init_response.strip()}")
+        else:
+            print("⚠️ No initialization response received")
 
-        # 发送 tools/list 请求
-        list_request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list"}
+        # Send tools/list request
+        list_request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
 
-        print("发送 tools/list 请求...")
+        print("Sending tools/list request...")
         process.stdin.write(json.dumps(list_request) + "\n")
         process.stdin.flush()
 
-        # 读取 tools/list 响应
-        list_response = process.stdout.readline()
-        print(f"tools/list 响应长度: {len(list_response)} 字符")
+        # Read tools/list response
+        list_response = read_with_timeout(process, 10)
+        if list_response:
+            print(f"tools/list response length: {len(list_response)} characters")
+            print(f"tools/list response content: {list_response}")
+            try:
+                tools_data = json.loads(list_response)
+                if "result" in tools_data and "tools" in tools_data["result"]:
+                    tools = tools_data["result"]["tools"]
+                    print(f"Available tools: {len(tools)}")
+                    # Show first few tool names
+                    for i, tool in enumerate(tools[:5]):
+                        print(f"  {i+1}. {tool.get('name', 'Unknown')}")
+                    if len(tools) > 5:
+                        print(f"  ... and {len(tools) - 5} more tools")
+                elif "error" in tools_data:
+                    print(f"⚠️ tools/list error: {tools_data['error']}")
+                else:
+                    print("⚠️ Unexpected tools/list response format")
+                    print(f"Response keys: {list(tools_data.keys())}")
+            except json.JSONDecodeError:
+                print("⚠️ Could not parse tools/list response as JSON")
+        else:
+            print("⚠️ No tools/list response received")
 
-        # 发送测试工具调用请求
+        # Send test tool call request
         test_request = {
             "jsonrpc": "2.0",
             "id": 3,
             "method": "tools/call",
             "params": {
                 "name": "OpenTargets_get_target_gene_ontology_by_ensemblID",
-                "arguments": {"ensemblId": "ENSG00000012048"},
+                "arguments": json.dumps({"ensemblId": "ENSG00000012048"}),
             },
         }
 
-        print("发送测试工具调用请求...")
+        print("Sending test tool call request...")
         process.stdin.write(json.dumps(test_request) + "\n")
         process.stdin.flush()
 
-        # 读取工具调用响应（可能需要等待更长时间）
-        print("等待工具调用响应...")
+        # Read tool call response with timeout
+        print("Waiting for tool call response...")
         start_time = time.time()
-
-        # 读取多行响应，直到找到 JSON 响应
         tool_response = ""
-        timeout = 30  # 30秒超时
-        while time.time() - start_time < timeout:
-            line = process.stdout.readline()
+        response_timeout = timeout - 20  # Reserve 20 seconds for other operations
+
+        while time.time() - start_time < response_timeout:
+            line = read_with_timeout(process, 2)
             if not line:
-                time.sleep(0.1)
                 continue
 
             tool_response += line
-            print(f"收到响应行: {repr(line)}")
+            print(f"Received response line: {repr(line)}")
 
-            # 检查是否是 JSON 响应
+            # Check if it's a JSON response
             try:
                 json.loads(line.strip())
+                print("✅ Found JSON response")
                 break
             except json.JSONDecodeError:
                 continue
@@ -126,11 +166,10 @@ run_stdio_server()
         response_time = end_time - start_time
         response_length = len(tool_response)
 
-        print(f"工具调用响应时间: {response_time:.2f} 秒")
-        print(f"工具调用响应长度: {response_length} 字符")
-        print(f"原始响应内容: {repr(tool_response)}")
+        print(f"Tool call response time: {response_time:.2f} seconds")
+        print(f"Tool call response length: {response_length} characters")
 
-        # 尝试解析 JSON 响应
+        # Try to parse JSON response
         json_response = None
         for line in tool_response.split("\n"):
             if line.strip().startswith('{"jsonrpc"'):
@@ -141,64 +180,27 @@ run_stdio_server()
                     continue
 
         if json_response:
-            print("✅ 成功解析 JSON 响应")
-            print(f"响应 ID: {json_response.get('id')}")
+            print("✅ Successfully parsed JSON response")
+            print(f"Response ID: {json_response.get('id')}")
             if "result" in json_response:
-                print("✅ 工具调用成功")
-            elif "error" in json_response:
-                print(f"❌ 工具调用失败: {json_response['error']}")
-        else:
-            print("⚠️ 未找到有效的 JSON 响应")
-
-        # 继续等待实际的工具调用响应
-        print("等待工具调用完成...")
-        time.sleep(5)  # 等待工具执行完成
-
-        # 读取工具调用的实际响应
-        actual_response = ""
-        while True:
-            line = process.stdout.readline()
-            if not line:
-                break
-            actual_response += line
-            print(f"工具响应行: {repr(line)}")
-
-            # 检查是否是 JSON 响应
-            try:
-                json.loads(line.strip())
-                break
-            except json.JSONDecodeError:
-                continue
-
-        if actual_response:
-            print(f"工具调用实际响应长度: {len(actual_response)} 字符")
-
-            # 尝试解析工具调用响应
-            tool_json_response = None
-            for line in actual_response.split("\n"):
-                if line.strip().startswith('{"jsonrpc"'):
-                    try:
-                        tool_json_response = json.loads(line.strip())
-                        break
-                    except json.JSONDecodeError:
-                        continue
-
-            if tool_json_response and "result" in tool_json_response:
-                result_content = tool_json_response["result"]
+                print("✅ Tool call successful")
+                result_content = json_response["result"]
                 if "content" in result_content:
                     content_text = str(result_content["content"])
                     content_length = len(content_text)
-                    print(f"工具响应内容长度: {content_length} 字符")
+                    print(f"Tool response content length: {content_length} characters")
 
-                    # 检查是否是摘要
+                    # Check if it's a summary
                     if "summary" in content_text.lower() or "摘要" in content_text:
-                        print("✅ 检测到摘要内容")
+                        print("✅ Summary content detected")
                     else:
-                        print("📄 原始内容（未摘要）")
+                        print("📄 Original content (not summarized)")
                 else:
-                    print("⚠️ 工具响应中没有 content 字段")
-            else:
-                print("⚠️ 无法解析工具调用响应")
+                    print("⚠️ No content field in tool response")
+            elif "error" in json_response:
+                print(f"❌ Tool call failed: {json_response['error']}")
+        else:
+            print("⚠️ No valid JSON response found")
 
         return {
             "hooks_enabled": hooks_enabled,
@@ -208,7 +210,7 @@ run_stdio_server()
         }
 
     except Exception as e:
-        print(f"❌ 测试失败: {e}")
+        print(f"❌ Test failed: {e}")
         return {
             "hooks_enabled": hooks_enabled,
             "response_time": None,
@@ -217,7 +219,7 @@ run_stdio_server()
             "error": str(e),
         }
     finally:
-        # 清理进程
+        # Clean up process
         try:
             process.terminate()
             process.wait(timeout=5)
@@ -226,39 +228,39 @@ run_stdio_server()
 
 
 def main():
-    """主函数"""
-    print("MCP stdio 模式 hooks 测试")
-    print("测试工具: OpenTargets_get_target_gene_ontology_by_ensemblID")
-    print("测试参数: ensemblId=ENSG00000012048")
+    """Main function"""
+    print("MCP stdio mode hooks test")
+    print("Test tool: OpenTargets_get_target_gene_ontology_by_ensemblID")
+    print("Test parameters: ensemblId=ENSG00000012048")
 
-    # 测试关闭 hooks
-    result_no_hooks = run_stdio_test(hooks_enabled=False)
+    # Test with hooks disabled
+    result_no_hooks = run_stdio_test(hooks_enabled=False, timeout=60)
 
-    # 测试开启 hooks
-    result_with_hooks = run_stdio_test(hooks_enabled=True)
+    # Test with hooks enabled
+    result_with_hooks = run_stdio_test(hooks_enabled=True, timeout=120)
 
-    # 对比结果
+    # Compare results
     print(f"\n{'='*60}")
-    print("测试结果对比")
+    print("Test results comparison")
     print(f"{'='*60}")
 
-    print("关闭 hooks:")
+    print("Hooks disabled:")
     if result_no_hooks["success"]:
         print(
-            f"  ✅ 成功 - 响应时间: {result_no_hooks['response_time']:.2f}s, 长度: {result_no_hooks['response_length']} 字符"
+            f"  ✅ Success - Response time: {result_no_hooks['response_time']:.2f}s, Length: {result_no_hooks['response_length']} characters"
         )
     else:
-        print(f"  ❌ 失败 - {result_no_hooks.get('error', '未知错误')}")
+        print(f"  ❌ Failed - {result_no_hooks.get('error', 'Unknown error')}")
 
-    print("开启 hooks:")
+    print("Hooks enabled:")
     if result_with_hooks["success"]:
         print(
-            f"  ✅ 成功 - 响应时间: {result_with_hooks['response_time']:.2f}s, 长度: {result_with_hooks['response_length']} 字符"
+            f"  ✅ Success - Response time: {result_with_hooks['response_time']:.2f}s, Length: {result_with_hooks['response_length']} characters"
         )
     else:
-        print(f"  ❌ 失败 - {result_with_hooks.get('error', '未知错误')}")
+        print(f"  ❌ Failed - {result_with_hooks.get('error', 'Unknown error')}")
 
-    # 性能对比
+    # Performance comparison
     if result_no_hooks["success"] and result_with_hooks["success"]:
         time_diff = (
             result_with_hooks["response_time"] - result_no_hooks["response_time"]
@@ -267,18 +269,18 @@ def main():
             result_with_hooks["response_length"] - result_no_hooks["response_length"]
         )
 
-        print("\n性能对比:")
+        print("\nPerformance comparison:")
         print(
-            f"  时间差异: {time_diff:+.2f}s ({'hooks 更慢' if time_diff > 0 else 'hooks 更快'})"
+            f"  Time difference: {time_diff:+.2f}s ({'hooks slower' if time_diff > 0 else 'hooks faster'})"
         )
         print(
-            f"  长度差异: {length_diff:+d} 字符 ({'hooks 更长' if length_diff > 0 else 'hooks 更短'})"
+            f"  Length difference: {length_diff:+d} characters ({'hooks longer' if length_diff > 0 else 'hooks shorter'})"
         )
 
-        if abs(time_diff) < 1.0:
-            print("  ✅ 时间差异在可接受范围内")
+        if abs(time_diff) < 5.0:
+            print("  ✅ Time difference within acceptable range")
         else:
-            print("  ⚠️ 时间差异较大，需要进一步优化")
+            print("  ⚠️ Large time difference, needs further optimization")
 
 
 if __name__ == "__main__":

@@ -196,8 +196,18 @@ def _summarize_chunk(
         )
 
         # Handle different result formats
-        if isinstance(result, dict) and result.get("success"):
-            return result.get("result", "")
+        if isinstance(result, dict):
+            if result.get("success"):
+                return result.get("result", "")
+            else:
+                # If it's a dict but not successful, it might be an error response
+                # Check if it has an 'error' field that contains the actual summary
+                if "error" in result and isinstance(result["error"], str):
+                    # Sometimes the LLM response is in the error field
+                    return result["error"]
+                else:
+                    print(f"⚠️ ToolOutputSummarizer returned error: {result}")
+                    return ""
         elif isinstance(result, str):
             return result
         else:

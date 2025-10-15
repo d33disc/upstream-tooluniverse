@@ -228,7 +228,9 @@ class SummarizationHook(OutputHook):
         self.max_summary_length = hook_config.get("max_summary_length", 3000)
         # Optional timeout to prevent hangs in composer / LLM calls
         # If the composer does not return within this window, we gracefully fall back
-        self.composer_timeout_sec = hook_config.get("composer_timeout_sec", 20)
+        self.composer_timeout_sec = hook_config.get(
+            "composer_timeout_sec", 60
+        )  # Increased from 20 to 60 seconds
 
     def process(
         self,
@@ -664,8 +666,8 @@ class HookManager:
         # Auto-load required tools for hooks
         self._auto_load_hook_tools(all_hook_configs)
 
-        # Ensure hook tools are loaded
-        self._ensure_hook_tools_loaded()
+        # Note: Hook tools will be pre-loaded when ToolUniverse.load_tools() is called
+        # This is handled in the _load_pending_tools method
 
         # Create hook instances
         for hook_config in all_hook_configs:
@@ -782,27 +784,42 @@ class HookManager:
                 print("🔧 Loading output_summarization tools for hooks")
                 self.tooluniverse.load_tools(["output_summarization"])
 
-                # Verify the tools were loaded
-                missing_tools = []
-                required_tools = ["ToolOutputSummarizer", "OutputSummarizationComposer"]
-                for tool in required_tools:
-                    if (
-                        hasattr(self.tooluniverse, "callable_functions")
-                        and tool not in self.tooluniverse.callable_functions
-                        and hasattr(self.tooluniverse, "all_tool_dict")
-                        and tool not in self.tooluniverse.all_tool_dict
-                    ):
-                        missing_tools.append(tool)
+            # Pre-instantiate hook tools to ensure they're available in callable_functions
+            required_tools = ["ToolOutputSummarizer", "OutputSummarizationComposer"]
+            for tool_name in required_tools:
+                if (
+                    tool_name in self.tooluniverse.all_tool_dict
+                    and tool_name not in self.tooluniverse.callable_functions
+                ):
+                    try:
+                        self.tooluniverse.init_tool(
+                            self.tooluniverse.all_tool_dict[tool_name],
+                            add_to_cache=True,
+                        )
+                        print(f"✅ Pre-loaded hook tool: {tool_name}")
+                    except Exception as e:
+                        print(
+                            f"⚠️  Warning: Failed to pre-load hook tool {tool_name}: {e}"
+                        )
 
-                if missing_tools:
-                    print(
-                        f"⚠️  Warning: Some hook tools could not be loaded: {missing_tools}"
-                    )
-                    print("   This may cause summarization hooks to fail")
-                else:
-                    print(f"✅ Hook tools loaded successfully: {required_tools}")
+            # Verify the tools were loaded
+            missing_tools = []
+            for tool in required_tools:
+                if (
+                    hasattr(self.tooluniverse, "callable_functions")
+                    and tool not in self.tooluniverse.callable_functions
+                    and hasattr(self.tooluniverse, "all_tool_dict")
+                    and tool not in self.tooluniverse.all_tool_dict
+                ):
+                    missing_tools.append(tool)
+
+            if missing_tools:
+                print(
+                    f"⚠️  Warning: Some hook tools could not be loaded: {missing_tools}"
+                )
+                print("   This may cause summarization hooks to fail")
             else:
-                print("🔧 Output_summarization tools already loaded")
+                print(f"✅ Hook tools loaded successfully: {required_tools}")
 
         except Exception as e:
             print(f"❌ Error loading hook tools: {e}")
@@ -825,6 +842,9 @@ class HookManager:
                 self._pending_tools_to_load = []  # Clear the pending list
             except Exception as e:
                 print(f"⚠️  Warning: Could not load pending hook tools: {e}")
+
+        # Pre-load hook tools if they're available but not instantiated
+        self._ensure_hook_tools_loaded()
 
     def _is_hook_tool(self, tool_name: str) -> bool:
         """

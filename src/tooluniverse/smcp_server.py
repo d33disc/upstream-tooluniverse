@@ -7,6 +7,7 @@ It creates a minimal SMCP server that exposes all ToolUniverse tools as MCP tool
 """
 
 import argparse
+import os
 import sys
 from .smcp import SMCP
 
@@ -134,6 +135,14 @@ def run_stdio_server():
     This function provides compatibility with the original MCP server's run_claude_desktop function.
     It accepts the same arguments as run_smcp_server but forces transport='stdio'.
     """
+    # Set environment variable and reconfigure logging for stdio mode
+    os.environ["TOOLUNIVERSE_STDIO_MODE"] = "1"
+
+    # Import and reconfigure logging to stderr
+    from .logging_config import reconfigure_for_stdio
+
+    reconfigure_for_stdio()
+
     parser = argparse.ArgumentParser(
         description="Start SMCP (Scientific Model Context Protocol) Server with stdio transport",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -554,7 +563,7 @@ Examples:
             print("🔗 Hooks disabled", file=sys.stderr)
 
         print(f"⚡ Max workers: {args.max_workers}", file=sys.stderr)
-        print()
+        print(file=sys.stderr)
 
         # Create SMCP server with hook support
         server = SMCP(

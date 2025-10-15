@@ -115,10 +115,10 @@ generate-mcp-tools = "tooluniverse.generate_mcp_tools:run_generate"
 # Human Expert Feedback System
 tooluniverse-expert-feedback = "tooluniverse.remote.expert_feedback.human_expert_mcp_tools:main"
 tooluniverse-expert-feedback-web = "tooluniverse.remote.expert_feedback.start_web_interface:main"
-# Literature Search Web UIs
-tooluniverse-regular-search = "tooluniverse.web_tools.literature_search_ui.regular_search_app:main"
-tooluniverse-agent-search = "tooluniverse.web_tools.literature_search_ui.agent_search_app:main"
-tooluniverse-wide-research = "tooluniverse.web_tools.literature_search_ui.simple_app:main"
+# Literature Search Web UIs (Under testing)
+# tooluniverse-regular-search = "tooluniverse.web_tools.literature_search_ui.regular_search_app:main"
+# tooluniverse-agent-search = "tooluniverse.web_tools.literature_search_ui.agent_search_app:main"
+# tooluniverse-wide-research = "tooluniverse.web_tools.literature_search_ui.simple_app:main"
 # Health Check Tool
 tooluniverse-doctor = "tooluniverse.doctor:main"
 

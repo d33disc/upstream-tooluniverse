@@ -95,12 +95,11 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         test_key = "test_cache_key"
         test_value = {"result": "cached_data"}
         
-        # Add to cache
-        self.tu._cache[test_key] = test_value
+        # Add to cache using proper API
+        self.tu._cache.set(test_key, test_value)
         
         # Verify it's in cache
-        self.assertIn(test_key, self.tu._cache)
-        self.assertEqual(self.tu._cache[test_key], test_value)
+        self.assertEqual(self.tu._cache.get(test_key), test_value)
         
         # Clear cache
         self.tu.clear_cache()
