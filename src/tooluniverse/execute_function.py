@@ -2130,6 +2130,13 @@ class ToolUniverse:
             f"Eager loading completed. {len(self.callable_functions)} tools cached."
         )
 
+    @property
+    def _cache(self):
+        """Access to the internal cache for testing purposes."""
+        if self.cache_manager:
+            return self.cache_manager.memory
+        return {}
+
     def clear_cache(self):
         """Clear the result cache."""
         if self.cache_manager:
