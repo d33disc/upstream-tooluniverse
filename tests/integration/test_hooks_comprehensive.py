@@ -37,6 +37,7 @@ class TestHooksComprehensive:
         self.tu = ToolUniverse()
         self.tu.load_tools()
 
+    @pytest.mark.require_api_keys
     def test_summarization_hook_basic_functionality(self):
         """Test basic SummarizationHook functionality"""
         # Enable SummarizationHook
@@ -61,6 +62,7 @@ class TestHooksComprehensive:
         # but we can verify the hook system is working
         assert True  # Hook system is functional
 
+    @pytest.mark.require_api_keys
     def test_file_save_hook_functionality(self):
         """Test FileSaveHook functionality"""
         # Configure FileSaveHook
@@ -145,6 +147,7 @@ class TestHooksComprehensive:
         assert tu.hook_manager is not None
         assert len(tu.hook_manager.hooks) > 0
 
+    @pytest.mark.require_api_keys
     def test_hook_performance_impact(self):
         """Test hook performance impact"""
         function_call = {
@@ -180,6 +183,7 @@ class TestHooksComprehensive:
             overhead_ratio = time_with_hooks / time_no_hooks
             assert overhead_ratio < 200.0, f"Hook overhead too high: {overhead_ratio:.2f}x"
 
+    @pytest.mark.require_api_keys
     def test_tool_specific_hook_configuration(self):
         """Test tool-specific hook configuration"""
         tool_specific_config = {
@@ -303,6 +307,7 @@ class TestHooksComprehensive:
         assert hasattr(tu, 'hook_manager')
         # Note: Specific caching behavior would need to be tested with actual hook execution
 
+    @pytest.mark.require_api_keys
     def test_hook_cleanup_and_resource_management(self):
         """Test hook cleanup and resource management"""
         # Test FileSaveHook with auto-cleanup
@@ -364,6 +369,7 @@ class TestHooksComprehensive:
             # Verify execution succeeded
             assert result is not None
 
+    @pytest.mark.require_api_keys
     def test_hook_integration_with_different_tools(self):
         """Test hook integration with different tool types"""
         # Test with different tool categories
@@ -418,6 +424,7 @@ class TestHooksComprehensive:
 class TestHooksPerformance:
     """Hook performance and optimization tests"""
 
+    @pytest.mark.require_api_keys
     def test_hook_performance_benchmarks(self):
         """Test hook performance benchmarks"""
         function_call = {
@@ -457,6 +464,7 @@ class TestHooksPerformance:
         overhead_ratio = avg_time_with_hooks / avg_time_no_hooks
         assert overhead_ratio < 5.0, f"Hook overhead too high: {overhead_ratio:.2f}x"
 
+    @pytest.mark.require_api_keys
     def test_hook_memory_usage(self):
         """Test hook memory usage impact"""
         # This is a basic test - in a real scenario, you'd use memory profiling tools

@@ -11,6 +11,7 @@ This test file covers important edge cases:
 import sys
 import unittest
 from pathlib import Path
+import pytest
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
@@ -294,6 +295,7 @@ class TestToolFinderEdgeCases(unittest.TestCase):
             # Expected if tool not available
             self.assertIsInstance(e, Exception)
     
+    @pytest.mark.require_gpu
     def test_tool_finder_embedding_edge_cases_real(self):
         """Test Tool_Finder (embedding) edge cases using real ToolUniverse."""
         try:
