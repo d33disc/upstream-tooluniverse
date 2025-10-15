@@ -48,16 +48,21 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip uv
-        # Use uv for faster installation
+        # Install CI-specific documentation dependencies
+        pip install -r docs/requirements_ci.txt
+        # Also install project with docs extras as fallback
         uv pip install --system -e .[docs]
         
     - name: Verify documentation setup
       run: |
         echo "🔍 Verifying Sphinx and theme installation..."
         python -c "import sphinx; print(f'✅ Sphinx {sphinx.__version__}')"
-        python -c "import shibuya; print('✅ Shibuya theme available')"
-        python -c "import shibuya; print('✅ Shibuya theme available')"
+        python -c "import furo; print('✅ Furo theme available')" || echo "⚠️ Furo theme not available"
+        python -c "import pydata_sphinx_theme; print('✅ PyData theme available')" || echo "⚠️ PyData theme not available"
+        python -c "import sphinx_rtd_theme; print('✅ RTD theme available')" || echo "⚠️ RTD theme not available"
         python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
+        python -c "import myst_parser; print('✅ MyST parser available')"
+        python -c "import sphinx_design; print('✅ Sphinx Design available')"
         
     - name: Prepare assets
       run: |
