@@ -2284,9 +2284,12 @@ class SMCP(FastMCP):
 
                     loop = asyncio.get_event_loop()
 
+                    # Initialize stream_callback to None by default
+                    stream_callback = None
+
                     if stream_flag and ctx is not None:
 
-                        def stream_callback(chunk: str) -> None:
+                        def _stream_callback(chunk: str) -> None:
                             if not chunk:
                                 return
                             try:
@@ -2306,6 +2309,9 @@ class SMCP(FastMCP):
                                 self.logger.debug(
                                     f"Failed to dispatch stream chunk for {tool_name}: {cb_error}"
                                 )
+
+                        # Assign the function to stream_callback
+                        stream_callback = _stream_callback
 
                         # Ensure downstream tools see the streaming flag
                         if "_tooluniverse_stream" not in args_dict:

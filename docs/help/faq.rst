@@ -133,7 +133,6 @@ Many scientific APIs have rate limits. ToolUniverse implements automatic rate li
       .. code-block:: python
 
          tu = ToolUniverse(enable_cache=True)
-
 Tool returns empty results?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

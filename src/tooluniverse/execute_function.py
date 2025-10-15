@@ -33,6 +33,8 @@ import os
 import time
 import hashlib
 import warnings
+from pathlib import Path
+from contextlib import nullcontext
 from typing import Any, Dict, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
 from .exceptions import (
@@ -58,6 +60,7 @@ from .logging_config import (
     error,
     set_log_level,
 )
+from .cache.result_cache_manager import ResultCacheManager
 from .output_hook import HookManager
 from .default_config import default_tool_files, get_default_hook_config
 
@@ -260,9 +263,39 @@ class ToolUniverse:
             self.hook_manager = None
             self.logger.debug("Output hooks disabled")
 
-        # Initialize new attributes for enhanced functionality
-        self._cache = {}  # Simple cache for tool results
-        self._cache_size = int(os.getenv("TOOLUNIVERSE_CACHE_SIZE", "100"))
+        # Initialize caching configuration
+        cache_enabled = os.getenv("TOOLUNIVERSE_CACHE_ENABLED", "true").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
+        persistence_enabled = os.getenv(
+            "TOOLUNIVERSE_CACHE_PERSIST", "true"
+        ).lower() in ("true", "1", "yes")
+        memory_size = int(os.getenv("TOOLUNIVERSE_CACHE_MEMORY_SIZE", "256"))
+        default_ttl_env = os.getenv("TOOLUNIVERSE_CACHE_DEFAULT_TTL")
+        default_ttl = int(default_ttl_env) if default_ttl_env else None
+        singleflight_enabled = os.getenv(
+            "TOOLUNIVERSE_CACHE_SINGLEFLIGHT", "true"
+        ).lower() in ("true", "1", "yes")
+
+        cache_path = os.getenv("TOOLUNIVERSE_CACHE_PATH")
+        if not cache_path and persistence_enabled:
+            base_dir = os.getenv("TOOLUNIVERSE_CACHE_DIR")
+            if not base_dir:
+                base_dir = os.path.join(str(Path.home()), ".tooluniverse")
+            os.makedirs(base_dir, exist_ok=True)
+            cache_path = os.path.join(base_dir, "cache.sqlite")
+
+        self.cache_manager = ResultCacheManager(
+            memory_size=memory_size,
+            persistent_path=cache_path if persistence_enabled else None,
+            enabled=cache_enabled,
+            persistence_enabled=persistence_enabled,
+            singleflight=singleflight_enabled,
+            default_ttl=default_ttl,
+        )
+
         self._strict_validation = os.getenv(
             "TOOLUNIVERSE_STRICT_VALIDATION", "false"
         ).lower() in ("true", "1", "yes")
@@ -1710,81 +1743,127 @@ class ToolUniverse:
                 "error": f"Arguments must be a dictionary, got {type(arguments).__name__}"
             }
 
-        # Check cache first if enabled
-        if use_cache:
-            cache_key = self._make_cache_key(function_name, arguments)
-            if cache_key in self._cache:
-                self.logger.debug(f"Cache hit for {function_name}")
-                return self._cache[cache_key]
-
-        # Validate parameters if requested
-        if validate:
-            validation_error = self._validate_parameters(function_name, arguments)
-            if validation_error:
-                return self._create_dual_format_error(validation_error)
-
-        # Check function call format (existing validation)
-        check_status, check_message = self.check_function_call(function_call_json)
-        if check_status is False:
-            error_msg = "Invalid function call: " + check_message
-            return self._create_dual_format_error(
-                ToolValidationError(error_msg, details={"check_message": check_message})
-            )
-
-        # Execute the tool
         tool_instance = None
-        tool_arguments = arguments
-        try:
-            # Get or create tool instance (optimized to avoid duplication)
-            tool_instance = self._get_tool_instance(function_name, cache=True)
+        cache_namespace = None
+        cache_version = None
+        cache_key = None
+        composed_cache_key = None
+        cache_guard = nullcontext()
 
-            if tool_instance:
-                result, tool_arguments = self._execute_tool_with_stream(
-                    tool_instance, arguments, stream_callback, use_cache, validate
+        cache_enabled = (
+            use_cache and self.cache_manager is not None and self.cache_manager.enabled
+        )
+
+        if cache_enabled:
+            tool_instance = self._get_tool_instance(function_name, cache=True)
+            if tool_instance and tool_instance.supports_caching():
+                cache_namespace = tool_instance.get_cache_namespace()
+                cache_version = tool_instance.get_cache_version()
+                cache_key = self._make_cache_key(function_name, arguments)
+                composed_cache_key = self.cache_manager.compose_key(
+                    cache_namespace, cache_version, cache_key
                 )
+                cached_value = self.cache_manager.get(
+                    namespace=cache_namespace,
+                    version=cache_version,
+                    cache_key=cache_key,
+                )
+                if cached_value is not None:
+                    self.logger.debug(f"Cache hit for {function_name}")
+                    return cached_value
+                cache_guard = self.cache_manager.singleflight_guard(composed_cache_key)
             else:
-                error_msg = f"Tool '{function_name}' not found"
+                cache_enabled = False
+
+        with cache_guard:
+            if cache_enabled:
+                cached_value = self.cache_manager.get(
+                    namespace=cache_namespace,
+                    version=cache_version,
+                    cache_key=cache_key,
+                )
+                if cached_value is not None:
+                    self.logger.debug(
+                        f"Cache hit for {function_name} (after singleflight wait)"
+                    )
+                    return cached_value
+
+            # Validate parameters if requested
+            if validate:
+                validation_error = self._validate_parameters(function_name, arguments)
+                if validation_error:
+                    return self._create_dual_format_error(validation_error)
+
+            # Check function call format (existing validation)
+            check_status, check_message = self.check_function_call(function_call_json)
+            if check_status is False:
+                error_msg = "Invalid function call: " + check_message
                 return self._create_dual_format_error(
-                    ToolUnavailableError(
-                        error_msg,
-                        next_steps=[
-                            "Check tool name spelling",
-                            "Run tu.tools.refresh()",
-                        ],
+                    ToolValidationError(
+                        error_msg, details={"check_message": check_message}
                     )
                 )
-        except Exception as e:
-            # Classify and return structured error
-            classified_error = self._classify_exception(e, function_name, arguments)
-            return self._create_dual_format_error(classified_error)
 
-        # Apply output hooks if enabled
-        if self.hook_manager:
-            context = {
-                "tool_name": function_name,
-                "tool_type": (
-                    tool_instance.__class__.__name__
-                    if tool_instance is not None
-                    else "unknown"
-                ),
-                "execution_time": time.time(),
-                "arguments": tool_arguments,
-            }
-            result = self.hook_manager.apply_hooks(
-                result, function_name, tool_arguments, context
-            )
+            # Execute the tool
+            tool_arguments = arguments
+            try:
+                if tool_instance is None:
+                    tool_instance = self._get_tool_instance(function_name, cache=True)
 
-        # Cache result if enabled
-        if use_cache:
-            cache_key = self._make_cache_key(function_name, arguments)
-            self._cache[cache_key] = result
-            # Simple cache size management
-            if len(self._cache) > self._cache_size:
-                # Remove oldest entries (simple FIFO)
-                oldest_key = next(iter(self._cache))
-                del self._cache[oldest_key]
+                if tool_instance:
+                    result, tool_arguments = self._execute_tool_with_stream(
+                        tool_instance, arguments, stream_callback, use_cache, validate
+                    )
+                else:
+                    error_msg = f"Tool '{function_name}' not found"
+                    return self._create_dual_format_error(
+                        ToolUnavailableError(
+                            error_msg,
+                            next_steps=[
+                                "Check tool name spelling",
+                                "Run tu.tools.refresh()",
+                            ],
+                        )
+                    )
+            except Exception as e:
+                # Classify and return structured error
+                classified_error = self._classify_exception(e, function_name, arguments)
+                return self._create_dual_format_error(classified_error)
 
-        return result
+            # Apply output hooks if enabled
+            if self.hook_manager:
+                context = {
+                    "tool_name": function_name,
+                    "tool_type": (
+                        tool_instance.__class__.__name__
+                        if tool_instance is not None
+                        else "unknown"
+                    ),
+                    "execution_time": time.time(),
+                    "arguments": tool_arguments,
+                }
+                result = self.hook_manager.apply_hooks(
+                    result, function_name, tool_arguments, context
+                )
+
+            # Cache result if enabled
+            if cache_enabled and tool_instance and tool_instance.supports_caching():
+                if cache_key is None:
+                    cache_key = self._make_cache_key(function_name, arguments)
+                if cache_namespace is None:
+                    cache_namespace = tool_instance.get_cache_namespace()
+                if cache_version is None:
+                    cache_version = tool_instance.get_cache_version()
+                ttl = tool_instance.get_cache_ttl(result)
+                self.cache_manager.set(
+                    namespace=cache_namespace,
+                    version=cache_version,
+                    cache_key=cache_key,
+                    value=result,
+                    ttl=ttl,
+                )
+
+            return result
 
     def _execute_tool_with_stream(
         self, tool_instance, arguments, stream_callback, use_cache=False, validate=True
@@ -2053,8 +2132,32 @@ class ToolUniverse:
 
     def clear_cache(self):
         """Clear the result cache."""
-        self._cache.clear()
+        if self.cache_manager:
+            self.cache_manager.clear()
         self.logger.info("Result cache cleared")
+
+    def get_cache_stats(self) -> Dict[str, Any]:
+        """Return cache statistics."""
+        if not self.cache_manager:
+            return {"enabled": False}
+        return self.cache_manager.stats()
+
+    def dump_cache(self, namespace: Optional[str] = None):
+        """Iterate over cached entries (persistent layer only)."""
+        if not self.cache_manager:
+            return iter([])
+        return self.cache_manager.dump(namespace=namespace)
+
+    def close(self):
+        """Release resources."""
+        if self.cache_manager:
+            self.cache_manager.close()
+
+    def __del__(self):
+        try:
+            self.close()
+        except Exception:
+            pass
 
     def get_tool_health(self, tool_name: str = None) -> dict:
         """Get health status for tool(s)."""
