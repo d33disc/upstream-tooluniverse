@@ -64,6 +64,20 @@ def compose(arguments: Dict[str, Any], tooluniverse, call_tool) -> Dict[str, Any
         print(f"🔍 Starting output summarization for {tool_name}")
         print(f"📊 Original output length: {len(tool_output)} characters")
 
+        # Check if text is long enough to warrant summarization
+        if len(tool_output) < chunk_size:
+            print(
+                f"📝 Text is shorter than chunk_size ({chunk_size}), no summarization needed"
+            )
+            return {
+                "success": True,
+                "original_length": len(tool_output),
+                "summary_length": len(tool_output),
+                "chunks_processed": 0,
+                "summary": tool_output,
+                "tool_name": tool_name,
+            }
+
         # Step 1: Chunk the output
         chunks = _chunk_output(tool_output, chunk_size)
         print(f"📝 Split into {len(chunks)} chunks")
@@ -203,12 +217,14 @@ def _summarize_chunk(
                 # If it's a dict but not successful, it might be an error response
                 # Check if it has an 'error' field that contains the actual summary
                 if "error" in result and isinstance(result["error"], str):
-                    # Sometimes the LLM response is in the error field
+                    # When return_metadata=False, AgenticTool puts the LLM response in the error field
+                    # This is actually the summary content, not an error
                     return result["error"]
                 else:
                     print(f"⚠️ ToolOutputSummarizer returned error: {result}")
                     return ""
         elif isinstance(result, str):
+            # When return_metadata=False and successful, AgenticTool returns the string directly
             return result
         else:
             print(

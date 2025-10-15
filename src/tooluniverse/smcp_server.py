@@ -427,10 +427,17 @@ Examples:
             # Group tools by category
             tools_by_category = {}
             for tool in tu.all_tools:
-                tool_type = getattr(tool, "tool_type", "unknown")
+                # Handle both dict and object tool formats
+                if isinstance(tool, dict):
+                    tool_type = tool.get("tool_type", "unknown")
+                    tool_name = tool.get("name", "unknown")
+                else:
+                    tool_type = getattr(tool, "tool_type", "unknown")
+                    tool_name = getattr(tool, "name", "unknown")
+
                 if tool_type not in tools_by_category:
                     tools_by_category[tool_type] = []
-                tools_by_category[tool_type].append(tool.name)
+                tools_by_category[tool_type].append(tool_name)
 
             total_tools = 0
             for category in sorted(tools_by_category.keys()):
@@ -888,10 +895,17 @@ Examples:
             # Group tools by category
             tools_by_category = {}
             for tool in tu.all_tools:
-                tool_type = getattr(tool, "tool_type", "unknown")
+                # Handle both dict and object tool formats
+                if isinstance(tool, dict):
+                    tool_type = tool.get("tool_type", "unknown")
+                    tool_name = tool.get("name", "unknown")
+                else:
+                    tool_type = getattr(tool, "tool_type", "unknown")
+                    tool_name = getattr(tool, "name", "unknown")
+
                 if tool_type not in tools_by_category:
                     tools_by_category[tool_type] = []
-                tools_by_category[tool_type].append(tool.name)
+                tools_by_category[tool_type].append(tool_name)
 
             total_tools = 0
             for category in sorted(tools_by_category.keys()):

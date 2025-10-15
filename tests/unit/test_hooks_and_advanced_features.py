@@ -240,6 +240,178 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         # Should contain some tool types
         self.assertGreater(len(tool_types), 0)
 
+    def test_summarization_hook_basic_functionality(self):
+        """Test basic SummarizationHook functionality"""
+        from tooluniverse.output_hook import SummarizationHook
+        
+        # Create a mock tooluniverse
+        mock_tu = MagicMock()
+        mock_tu.callable_functions = {
+            "OutputSummarizationComposer": MagicMock()
+        }
+        
+        # Test hook initialization
+        hook_config = {
+            "composer_tool_name": "OutputSummarizationComposer",
+            "chunk_size": 1000,
+            "focus_areas": "key findings, results",
+            "max_summary_length": 500
+        }
+        
+        hook = SummarizationHook(
+            config={"hook_config": hook_config},
+            tooluniverse=mock_tu
+        )
+        
+        self.assertEqual(hook.composer_tool_name, "OutputSummarizationComposer")
+        self.assertEqual(hook.chunk_size, 1000)
+        self.assertEqual(hook.focus_areas, "key findings, results")
+        self.assertEqual(hook.max_summary_length, 500)
+
+    def test_summarization_hook_short_text(self):
+        """Test SummarizationHook with short text (should not summarize)"""
+        from tooluniverse.output_hook import SummarizationHook
+        
+        # Create a mock tooluniverse
+        mock_tu = MagicMock()
+        mock_tu.callable_functions = {
+            "OutputSummarizationComposer": MagicMock()
+        }
+        
+        hook_config = {
+            "composer_tool_name": "OutputSummarizationComposer",
+            "chunk_size": 1000,
+            "focus_areas": "key findings, results",
+            "max_summary_length": 500
+        }
+        
+        hook = SummarizationHook(
+            config={"hook_config": hook_config},
+            tooluniverse=mock_tu
+        )
+        
+        # Short text should not be summarized
+        short_text = "This is a short text."
+        result = hook.process(short_text)
+        self.assertEqual(result, short_text)
+
+    def test_summarization_hook_long_text(self):
+        """Test SummarizationHook with long text (should summarize)"""
+        from tooluniverse.output_hook import SummarizationHook
+        
+        # Create a mock tooluniverse
+        mock_tu = MagicMock()
+        mock_tu.callable_functions = {
+            "OutputSummarizationComposer": MagicMock()
+        }
+        
+        # Mock the composer tool
+        mock_tu.run_one_function.return_value = "This is a summarized version."
+        
+        hook_config = {
+            "composer_tool_name": "OutputSummarizationComposer",
+            "chunk_size": 1000,
+            "focus_areas": "key findings, results",
+            "max_summary_length": 500
+        }
+        
+        hook = SummarizationHook(
+            config={"hook_config": hook_config},
+            tooluniverse=mock_tu
+        )
+        
+        # Long text should be summarized
+        long_text = "This is a very long text. " * 100
+        result = hook.process(long_text)
+        
+        self.assertNotEqual(result, long_text)
+        self.assertIn("summarized", result.lower())
+
+    def test_hook_manager_basic_functionality(self):
+        """Test HookManager basic functionality"""
+        from tooluniverse.output_hook import HookManager
+        
+        # Create a mock tooluniverse
+        mock_tu = MagicMock()
+        mock_tu.all_tool_dict = {
+            "ToolOutputSummarizer": {},
+            "OutputSummarizationComposer": {}
+        }
+        mock_tu.callable_functions = {}
+        
+        hook_manager = HookManager(mock_tu)
+        
+        # Test enabling hooks
+        hook_manager.enable_hooks()
+        self.assertTrue(hook_manager.hooks_enabled)
+        
+        # Test disabling hooks
+        hook_manager.disable_hooks()
+        self.assertFalse(hook_manager.hooks_enabled)
+
+    def test_hook_error_handling(self):
+        """Test hook error handling"""
+        from tooluniverse.output_hook import SummarizationHook
+        
+        # Create a mock tooluniverse that raises an exception
+        mock_tu = MagicMock()
+        mock_tu.callable_functions = {
+            "OutputSummarizationComposer": MagicMock()
+        }
+        mock_tu.run_one_function.side_effect = Exception("Test error")
+        
+        hook_config = {
+            "composer_tool_name": "OutputSummarizationComposer",
+            "chunk_size": 1000,
+            "focus_areas": "key findings, results",
+            "max_summary_length": 500
+        }
+        
+        hook = SummarizationHook(
+            config={"hook_config": hook_config},
+            tooluniverse=mock_tu
+        )
+        
+        # Should handle error gracefully
+        long_text = "This is a very long text. " * 100
+        result = hook.process(long_text)
+        
+        # Should return original text on error
+        self.assertEqual(result, long_text)
+
+    def test_hook_with_different_output_types(self):
+        """Test hook with different output types"""
+        from tooluniverse.output_hook import SummarizationHook
+        
+        # Create a mock tooluniverse
+        mock_tu = MagicMock()
+        mock_tu.callable_functions = {
+            "OutputSummarizationComposer": MagicMock()
+        }
+        mock_tu.run_one_function.return_value = "Summarized content"
+        
+        hook_config = {
+            "composer_tool_name": "OutputSummarizationComposer",
+            "chunk_size": 1000,
+            "focus_areas": "key findings, results",
+            "max_summary_length": 500
+        }
+        
+        hook = SummarizationHook(
+            config={"hook_config": hook_config},
+            tooluniverse=mock_tu
+        )
+        
+        # Test with string
+        string_output = "This is a string output. " * 50
+        result = hook.process(string_output)
+        self.assertIsInstance(result, str)
+        
+        # Test with dict
+        dict_output = {"data": "This is a dict output. " * 50}
+        result = hook.process(dict_output)
+        self.assertIsInstance(result, (str, dict))
+
 
 if __name__ == "__main__":
     unittest.main()
