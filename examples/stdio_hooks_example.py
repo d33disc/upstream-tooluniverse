@@ -98,8 +98,18 @@ run_stdio_server()
         else:
             print("⚠️ No initialization response received")
 
-        # Send tools/list request
-        list_request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list"}
+        # Send initialized notification per MCP before listing tools
+        initialized_notif = {"jsonrpc": "2.0", "method": "notifications/initialized"}
+        process.stdin.write(json.dumps(initialized_notif) + "\n")
+        process.stdin.flush()
+
+        # Send tools/list request (with empty params)
+        list_request = {
+            "jsonrpc": "2.0",
+            "id": 2,
+            "method": "tools/list",
+            "params": {},
+        }
 
         print("Sending tools/list request...")
         process.stdin.write(json.dumps(list_request) + "\n")
@@ -140,8 +150,8 @@ run_stdio_server()
             "id": 3,
             "method": "tools/call",
             "params": {
-                "name": "OpenTargets_get_target_gene_ontology_by_ensemblID",
-                "arguments": {"ensemblId": "ENSG00000012048"},
+                "name": "get_server_info",
+                "arguments": {},
             },
         }
 
@@ -243,8 +253,8 @@ run_stdio_server()
 def main():
     """Main function"""
     print("MCP stdio mode hooks test")
-    print("Test tool: OpenTargets_get_target_gene_ontology_by_ensemblID")
-    print("Test parameters: ensemblId=ENSG00000012048")
+    print("Test tool: get_server_info")
+    print("Test parameters: none")
 
     # Test with hooks disabled
     result_no_hooks = run_stdio_test(hooks_enabled=False, timeout=60)

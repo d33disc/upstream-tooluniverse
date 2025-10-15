@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from tooluniverse import ToolUniverse
 from tooluniverse.output_hook import SummarizationHook, HookManager
+from tooluniverse.default_config import get_default_hook_config
 
 
 @pytest.mark.integration
@@ -37,7 +38,7 @@ class TestHooksFunctionality:
     def test_summarization_hook_initialization(self):
         """Test SummarizationHook can be initialized"""
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500
@@ -49,7 +50,7 @@ class TestHooksFunctionality:
         )
         
         assert hook is not None
-        assert hook.composer_tool_name == "OutputSummarizationComposer"
+        assert hook.composer_tool == "OutputSummarizationComposer"
         assert hook.chunk_size == 1000
         assert hook.focus_areas == "key findings, results, conclusions"
         assert hook.max_summary_length == 500
@@ -87,7 +88,7 @@ class TestHooksFunctionality:
     def test_summarization_hook_with_short_text(self):
         """Test SummarizationHook with short text (should not summarize)"""
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500
@@ -115,7 +116,7 @@ class TestHooksFunctionality:
         self.tu.toggle_hooks(True)
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500
@@ -142,14 +143,14 @@ class TestHooksFunctionality:
 
     def test_hook_manager_initialization(self):
         """Test HookManager can be initialized and configured"""
-        hook_manager = HookManager(self.tu)
+        hook_manager = HookManager(get_default_hook_config(), self.tu)
         
         assert hook_manager is not None
         assert hook_manager.tooluniverse == self.tu
 
     def test_hook_manager_enable_hooks(self):
         """Test HookManager can enable hooks"""
-        hook_manager = HookManager(self.tu)
+        hook_manager = HookManager(get_default_hook_config(), self.tu)
         
         # Enable hooks
         hook_manager.enable_hooks()
@@ -160,7 +161,7 @@ class TestHooksFunctionality:
 
     def test_hook_manager_disable_hooks(self):
         """Test HookManager can disable hooks"""
-        hook_manager = HookManager(self.tu)
+        hook_manager = HookManager(get_default_hook_config(), self.tu)
         
         # Enable then disable hooks
         hook_manager.enable_hooks()
@@ -176,7 +177,7 @@ class TestHooksFunctionality:
         self.tu.toggle_hooks(True)
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500
@@ -230,7 +231,7 @@ class TestHooksFunctionality:
         self.tu.toggle_hooks(True)
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500,
@@ -273,16 +274,15 @@ class TestHooksFunctionality:
         """Test hook configuration validation"""
         # Test with invalid configuration
         invalid_config = {
-            "composer_tool_name": "NonExistentTool",
+            "composer_tool": "NonExistentTool",
             "chunk_size": -1,  # Invalid
             "max_summary_length": -1  # Invalid
         }
         
         # Should handle invalid config gracefully
         hook = SummarizationHook(
-            tooluniverse=self.tu,
-            tool_name="test_tool",
-            hook_config=invalid_config
+            config={"hook_config": invalid_config},
+            tooluniverse=self.tu
         )
         
         assert hook is not None
@@ -296,7 +296,7 @@ class TestHooksFunctionality:
         self.tu.toggle_hooks(True)
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500
@@ -329,7 +329,7 @@ class TestHooksFunctionality:
         self.tu.toggle_hooks(True)
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results, conclusions",
             "max_summary_length": 500

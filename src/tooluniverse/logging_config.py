@@ -186,6 +186,32 @@ def reconfigure_for_stdio() -> None:
     to ensure all logs go to stderr instead of stdout.
     """
     _logger_manager.reconfigure_for_stdio()
+    # Ensure third-party rich/traceback pretty outputs do not go to stdout
+    try:
+        import rich
+        from rich.console import Console
+
+        # Redirect rich default console to stderr in stdio mode
+        rich_console = Console(
+            file=sys.stderr,
+            force_terminal=False,
+            markup=False,
+            highlight=False,
+            emoji=False,
+            soft_wrap=False,
+        )
+        rich.get_console = lambda: rich_console
+    except Exception:
+        pass
+    # Force Python warnings and tracebacks to stderr
+    try:
+        import warnings
+
+        warnings.showwarning = lambda *args, **kwargs: print(
+            warnings.formatwarning(*args, **kwargs), file=sys.stderr
+        )
+    except Exception:
+        pass
 
 
 def setup_logging(level: Optional[str] = None) -> None:

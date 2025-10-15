@@ -41,7 +41,7 @@ class TestStdioMode:
     def test_stdio_server_startup(self):
         """Test that stdio server can start without errors"""
         # Test with minimal configuration
-        with patch('sys.argv', ['tooluniverse-stdio', '--no-hooks']):
+        with patch('sys.argv', ['tooluniverse-smcp-stdio']):
             try:
                 # This should not raise an exception during startup
                 # We'll test the actual server startup in a subprocess
@@ -59,7 +59,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--no-hooks']
+sys.argv = ['tooluniverse-smcp-stdio']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -88,7 +88,19 @@ run_stdio_server()
             process.stdin.flush()
             
             # Read response
-            response = process.stdout.readline()
+            response = ""
+            for _ in range(200):
+                line = process.stdout.readline()
+                if not line:
+                    continue
+                s = line.strip()
+                if not s:
+                    continue
+                # Skip any non-JSON decorations accidentally printed to stdout
+                if not s.startswith("{") and not s.startswith("["):
+                    continue
+                response = line
+                break
             assert response.strip()
             
             # Parse response
@@ -117,7 +129,18 @@ run_stdio_server()
             process.stdin.flush()
             
             # Read tools list response
-            response = process.stdout.readline()
+            response = ""
+            for _ in range(200):
+                line = process.stdout.readline()
+                if not line:
+                    continue
+                s = line.strip()
+                if not s:
+                    continue
+                if not s.startswith("{") and not s.startswith("["):
+                    continue
+                response = line
+                break
             assert response.strip()
             
             # Parse response
@@ -141,7 +164,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--no-hooks']
+sys.argv = ['tooluniverse-smcp-stdio']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -219,7 +242,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -300,7 +323,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--no-hooks']
+sys.argv = ['tooluniverse-smcp-stdio']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -352,7 +375,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--no-hooks']
+sys.argv = ['tooluniverse-smcp-stdio']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,

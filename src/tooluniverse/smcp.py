@@ -1842,7 +1842,14 @@ class SMCP(FastMCP):
 │                                                                            │
 ╰────────────────────────────────────────────────────────────────────────────╯
 """
-        print(banner)
+        # In stdio mode, ensure the banner goes to stderr to avoid polluting stdout
+        # which must exclusively carry JSON-RPC messages.
+        import sys as _sys
+
+        if getattr(self, "_transport_type", None) == "stdio":
+            print(banner, file=_sys.stderr)
+        else:
+            print(banner)
 
     def run(self, *args, **kwargs):
         """

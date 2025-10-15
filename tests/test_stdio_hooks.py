@@ -86,7 +86,8 @@ def run_quick_tests():
     )
     print("✅ SummarizationHook initialization test passed")
     
-    hook_manager = HookManager(mock_tu, mock_tu)
+    from tooluniverse.default_config import get_default_hook_config
+    hook_manager = HookManager(get_default_hook_config(), mock_tu)
     print("✅ HookManager initialization test passed")
     
     return True

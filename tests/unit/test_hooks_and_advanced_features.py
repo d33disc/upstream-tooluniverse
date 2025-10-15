@@ -252,7 +252,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         
         # Test hook initialization
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results",
             "max_summary_length": 500
@@ -263,7 +263,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
             tooluniverse=mock_tu
         )
         
-        self.assertEqual(hook.composer_tool_name, "OutputSummarizationComposer")
+        self.assertEqual(hook.composer_tool, "OutputSummarizationComposer")
         self.assertEqual(hook.chunk_size, 1000)
         self.assertEqual(hook.focus_areas, "key findings, results")
         self.assertEqual(hook.max_summary_length, 500)
@@ -279,7 +279,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         }
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results",
             "max_summary_length": 500
@@ -309,7 +309,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         mock_tu.run_one_function.return_value = "This is a summarized version."
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results",
             "max_summary_length": 500
@@ -330,6 +330,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
     def test_hook_manager_basic_functionality(self):
         """Test HookManager basic functionality"""
         from tooluniverse.output_hook import HookManager
+        from tooluniverse.default_config import get_default_hook_config
         
         # Create a mock tooluniverse
         mock_tu = MagicMock()
@@ -339,7 +340,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         }
         mock_tu.callable_functions = {}
         
-        hook_manager = HookManager(mock_tu)
+        hook_manager = HookManager(get_default_hook_config(), mock_tu)
         
         # Test enabling hooks
         hook_manager.enable_hooks()
@@ -361,7 +362,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         mock_tu.run_one_function.side_effect = Exception("Test error")
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results",
             "max_summary_length": 500
@@ -391,7 +392,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
         mock_tu.run_one_function.return_value = "Summarized content"
         
         hook_config = {
-            "composer_tool_name": "OutputSummarizationComposer",
+            "composer_tool": "OutputSummarizationComposer",
             "chunk_size": 1000,
             "focus_areas": "key findings, results",
             "max_summary_length": 500

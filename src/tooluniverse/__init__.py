@@ -184,6 +184,14 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
         warnings.filterwarnings("ignore", category=RuntimeWarning)
         warnings.filterwarnings("ignore", category=UserWarning)
         warnings.filterwarnings("ignore", category=FutureWarning)
+        # Suppress specific third-party warnings
+        warnings.filterwarnings("ignore", category=UserWarning, module="hyperopt")
+        warnings.filterwarnings(
+            "ignore", category=DeprecationWarning, module="pkg_resources"
+        )
+        warnings.filterwarnings(
+            "ignore", category=RuntimeWarning, module="importlib._bootstrap"
+        )
 
         from .restful_tool import MonarchTool, MonarchDiseasesForMultiplePhenoTool
         from .ctg_tool import ClinicalTrialsSearchTool, ClinicalTrialsDetailsTool

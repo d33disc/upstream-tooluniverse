@@ -149,7 +149,38 @@ class ToolNamespace:
         """Return a ToolCallable for the requested tool name."""
         if name in self.engine.all_tool_dict:
             return ToolCallable(self.engine, name)
-        raise AttributeError(f"Tool '{name}' not found")
+
+        # Attempt a targeted on-demand load for this tool name
+        try:
+            self.engine.load_tools(include_tools=[name])
+        except Exception:
+            # Ignore load errors here; we'll surface a clearer error below if still missing
+            pass
+        if name in self.engine.all_tool_dict:
+            return ToolCallable(self.engine, name)
+
+        # As a fallback, force full discovery once
+        try:
+            self.engine.force_full_discovery()
+        except Exception:
+            # Ignore discovery errors; report consolidated reason below
+            pass
+        if name in self.engine.all_tool_dict:
+            return ToolCallable(self.engine, name)
+
+        # Build a helpful reason summary
+        try:
+            status = self.engine.get_lazy_loading_status()
+            reason = (
+                f"after targeted load and full discovery; "
+                f"lazy_loading_enabled={status.get('lazy_loading_enabled')}, "
+                f"loaded_tools_count={status.get('loaded_tools_count')}, "
+                f"immediately_available_tools={status.get('immediately_available_tools')}"
+            )
+        except Exception:
+            reason = "after targeted load and full discovery"
+
+        raise AttributeError(f"Tool '{name}' not found ({reason})")
 
     def __len__(self) -> int:
         """Return the number of available tools."""
