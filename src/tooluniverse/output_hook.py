@@ -196,7 +196,9 @@ class OutputHook:
 @dataclass
 class SummarizationHookConfig:
     composer_tool: str = "OutputSummarizationComposer"
-    chunk_size: int = 2000
+    chunk_size: int = (
+        30000  # Increased to 30000 to minimize chunk count and improve success rate
+    )
     focus_areas: str = "key_findings_and_results"
     max_summary_length: int = 3000
     composer_timeout_sec: int = 60
@@ -204,7 +206,7 @@ class SummarizationHookConfig:
     def validate(self) -> "SummarizationHookConfig":
         # Validate numeric fields; clamp to sensible defaults if invalid
         if not isinstance(self.chunk_size, int) or self.chunk_size <= 0:
-            self.chunk_size = 2000
+            self.chunk_size = 30000
         if not isinstance(self.max_summary_length, int) or self.max_summary_length <= 0:
             self.max_summary_length = 3000
         if (

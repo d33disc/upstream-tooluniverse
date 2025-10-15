@@ -213,16 +213,16 @@ def _summarize_chunk(
         if isinstance(result, dict):
             if result.get("success"):
                 return result.get("result", "")
+            elif "result" in result and isinstance(result["result"], str):
+                # ComposeTool._call_tool returns {'result': 'content'} format
+                return result["result"]
+            elif "error" in result and isinstance(result["error"], str):
+                # Backward compatibility: ComposeTool._call_tool used to put string results in error field
+                # This workaround handles both old and new behavior
+                return result["error"]
             else:
-                # If it's a dict but not successful, it might be an error response
-                # Check if it has an 'error' field that contains the actual summary
-                if "error" in result and isinstance(result["error"], str):
-                    # When return_metadata=False, AgenticTool puts the LLM response in the error field
-                    # This is actually the summary content, not an error
-                    return result["error"]
-                else:
-                    print(f"⚠️ ToolOutputSummarizer returned error: {result}")
-                    return ""
+                print(f"⚠️ ToolOutputSummarizer returned error: {result}")
+                return ""
         elif isinstance(result, str):
             # When return_metadata=False and successful, AgenticTool returns the string directly
             return result
