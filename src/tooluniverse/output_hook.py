@@ -164,9 +164,9 @@ class OutputHook:
     def process(
         self,
         result: Any,
-        tool_name: str,
-        arguments: Dict[str, Any],
-        context: Dict[str, Any],
+        tool_name: str | None = None,
+        arguments: Dict[str, Any] | None = None,
+        context: Dict[str, Any] | None = None,
     ) -> Any:
         """
         Process the tool output.
@@ -235,9 +235,9 @@ class SummarizationHook(OutputHook):
     def process(
         self,
         result: Any,
-        tool_name: str,
-        arguments: Dict[str, Any],
-        context: Dict[str, Any],
+        tool_name: Optional[str] = None,
+        arguments: Optional[Dict[str, Any]] = None,
+        context: Optional[Dict[str, Any]] = None,
     ) -> Any:
         """
         Execute summarization processing using Compose Summarizer Tool.
@@ -257,6 +257,13 @@ class SummarizationHook(OutputHook):
             Any: The summarized output, or original output if summarization fails
         """
         try:
+            # Backward-compat: allow calling process(result) only
+            if tool_name is None:
+                tool_name = "unknown_tool"
+            if arguments is None:
+                arguments = {}
+            if context is None:
+                context = {}
             # Debug: basic context
             try:
                 _len = len(str(result))

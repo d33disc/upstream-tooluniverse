@@ -24,7 +24,9 @@ def read_with_timeout(process, timeout=5):
 def run_stdio_test(hooks_enabled=False, timeout=60):
     """Run stdio test"""
     print(f"\n{'='*60}")
-    print(f"Test mode: {'hooks enabled' if hooks_enabled else 'hooks disabled'}")
+    print(
+        f"Test mode: {'hooks enabled' if hooks_enabled else 'hooks disabled'}"
+    )
     print(f"Timeout: {timeout} seconds")
     print(f"{'='*60}")
 
@@ -67,7 +69,10 @@ run_stdio_server()
             if not line:
                 continue
             print(f"Startup log: {line.strip()}")
-            if "Starting ToolUniverse SMCP Server" in line or "Server started" in line:
+            if (
+                "Starting ToolUniverse SMCP Server" in line
+                or "Server started" in line
+            ):
                 break
 
         # Send initialization request
@@ -94,7 +99,7 @@ run_stdio_server()
             print("⚠️ No initialization response received")
 
         # Send tools/list request
-        list_request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+        list_request = {"jsonrpc": "2.0", "id": 2, "method": "tools/list"}
 
         print("Sending tools/list request...")
         process.stdin.write(json.dumps(list_request) + "\n")
@@ -103,7 +108,9 @@ run_stdio_server()
         # Read tools/list response
         list_response = read_with_timeout(process, 10)
         if list_response:
-            print(f"tools/list response length: {len(list_response)} characters")
+            print(
+                f"tools/list response length: {len(list_response)} characters"
+            )
             print(f"tools/list response content: {list_response}")
             try:
                 tools_data = json.loads(list_response)
@@ -116,7 +123,9 @@ run_stdio_server()
                     if len(tools) > 5:
                         print(f"  ... and {len(tools) - 5} more tools")
                 elif "error" in tools_data:
-                    print(f"⚠️ tools/list error: {tools_data['error']}")
+                    print(
+                        f"⚠️ tools/list error: {tools_data['error']}"
+                    )
                 else:
                     print("⚠️ Unexpected tools/list response format")
                     print(f"Response keys: {list(tools_data.keys())}")
@@ -132,7 +141,7 @@ run_stdio_server()
             "method": "tools/call",
             "params": {
                 "name": "OpenTargets_get_target_gene_ontology_by_ensemblID",
-                "arguments": json.dumps({"ensemblId": "ENSG00000012048"}),
+                "arguments": {"ensemblId": "ENSG00000012048"},
             },
         }
 
@@ -167,7 +176,9 @@ run_stdio_server()
         response_length = len(tool_response)
 
         print(f"Tool call response time: {response_time:.2f} seconds")
-        print(f"Tool call response length: {response_length} characters")
+        print(
+            f"Tool call response length: {response_length} characters"
+        )
 
         # Try to parse JSON response
         json_response = None
@@ -188,7 +199,9 @@ run_stdio_server()
                 if "content" in result_content:
                     content_text = str(result_content["content"])
                     content_length = len(content_text)
-                    print(f"Tool response content length: {content_length} characters")
+                    print(
+                        f"Tool response content length: {content_length} characters"
+                    )
 
                     # Check if it's a summary
                     if "summary" in content_text.lower() or "摘要" in content_text:
@@ -247,7 +260,8 @@ def main():
     print("Hooks disabled:")
     if result_no_hooks["success"]:
         print(
-            f"  ✅ Success - Response time: {result_no_hooks['response_time']:.2f}s, Length: {result_no_hooks['response_length']} characters"
+            f"  ✅ Success - Response time: {result_no_hooks['response_time']:.2f}s, "
+            f"Length: {result_no_hooks['response_length']} characters"
         )
     else:
         print(f"  ❌ Failed - {result_no_hooks.get('error', 'Unknown error')}")
@@ -255,7 +269,8 @@ def main():
     print("Hooks enabled:")
     if result_with_hooks["success"]:
         print(
-            f"  ✅ Success - Response time: {result_with_hooks['response_time']:.2f}s, Length: {result_with_hooks['response_length']} characters"
+            f"  ✅ Success - Response time: {result_with_hooks['response_time']:.2f}s, "
+            f"Length: {result_with_hooks['response_length']} characters"
         )
     else:
         print(f"  ❌ Failed - {result_with_hooks.get('error', 'Unknown error')}")
@@ -270,12 +285,10 @@ def main():
         )
 
         print("\nPerformance comparison:")
-        print(
-            f"  Time difference: {time_diff:+.2f}s ({'hooks slower' if time_diff > 0 else 'hooks faster'})"
-        )
-        print(
-            f"  Length difference: {length_diff:+d} characters ({'hooks longer' if length_diff > 0 else 'hooks shorter'})"
-        )
+        print(f"  Time difference: {time_diff:+.2f}s "
+              f"({'hooks slower' if time_diff > 0 else 'hooks faster'})")
+        print(f"  Length difference: {length_diff:+d} characters "
+              f"({'hooks longer' if length_diff > 0 else 'hooks shorter'})")
 
         if abs(time_diff) < 5.0:
             print("  ✅ Time difference within acceptable range")
