@@ -378,11 +378,12 @@ Examples:
             total_tools = 0
             for category in sorted(tools_by_category.keys()):
                 tools = sorted(tools_by_category[category])
-                print(f"\n📁 {category} ({len(tools, file=sys.stderr)} tools):")
+                print(f"\n📁 {category} ({len(tools)} tools):", file=sys.stderr)
                 for tool in tools[:10]:  # Show first 10 tools per category
                     print(f"  {tool}", file=sys.stderr)
                 if len(tools) > 10:
-                    print(f"  ... and {len(tools, file=sys.stderr) - 10} more tools")
+                    # Print remaining count to stderr
+                    print(f"  ... and {len(tools) - 10} more tools", file=sys.stderr)
                 total_tools += len(tools)
 
             print(f"\nTotal: {total_tools} tools available", file=sys.stderr)
