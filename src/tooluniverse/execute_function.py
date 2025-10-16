@@ -33,8 +33,11 @@ import os
 import time
 import hashlib
 import warnings
+import threading
 from pathlib import Path
 from contextlib import nullcontext
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from .utils import read_json_list, evaluate_function_call, extract_function_call_json
 from .exceptions import (
@@ -94,6 +97,26 @@ else:
     debug(f"Full tool registry initialized with {len(tool_type_mappings)} tools")
 for _tool_name, _tool_class in sorted(tool_type_mappings.items()):
     debug(f"  - {_tool_name}: {_tool_class.__name__}")
+
+
+@dataclass
+class _BatchCacheInfo:
+    namespace: str
+    version: str
+    cache_key: str
+
+
+@dataclass
+class _BatchJob:
+    signature: str
+    call: Dict[str, Any]
+    function_name: str
+    arguments: Dict[str, Any]
+    indices: List[int] = field(default_factory=list)
+    tool_instance: Any = None
+    cache_info: Optional[_BatchCacheInfo] = None
+    cache_key_composed: Optional[str] = None
+    skip_execution: bool = False
 
 
 class ToolCallable:
@@ -1674,6 +1697,198 @@ class ToolUniverse:
         """
         return copy.deepcopy(self.all_tools)
 
+    def _execute_function_call_list(
+        self,
+        function_calls: List[Dict[str, Any]],
+        stream_callback=None,
+        use_cache: bool = False,
+        max_workers: Optional[int] = None,
+    ) -> List[Any]:
+        """Execute a list of function calls, optionally in parallel.
+
+        Args:
+            function_calls: Ordered list of function call dictionaries.
+            stream_callback: Optional streaming callback.
+            use_cache: Whether to enable cache lookups for each call.
+            max_workers: Maximum parallel workers; values <=1 fall back to sequential execution.
+
+        Returns:
+            List of results aligned with ``function_calls`` order.
+        """
+
+        if not function_calls:
+            return []
+
+        if stream_callback is not None and max_workers and max_workers > 1:
+            # Streaming multiple calls concurrently is ambiguous; fall back to sequential execution.
+            self.logger.warning(
+                "stream_callback is not supported with parallel batch execution; falling back to sequential mode"
+            )
+            max_workers = 1
+
+        jobs = self._build_batch_jobs(function_calls)
+        results: List[Any] = [None] * len(function_calls)
+
+        jobs_to_run = self._prime_batch_cache(jobs, use_cache, results)
+        if not jobs_to_run:
+            return results
+
+        self._execute_batch_jobs(
+            jobs_to_run,
+            results,
+            stream_callback=stream_callback,
+            use_cache=use_cache,
+            max_workers=max_workers,
+        )
+
+        return results
+
+    def _build_batch_jobs(
+        self, function_calls: List[Dict[str, Any]]
+    ) -> List[_BatchJob]:
+        signature_to_job: Dict[str, _BatchJob] = {}
+        jobs: List[_BatchJob] = []
+
+        for idx, call in enumerate(function_calls):
+            function_name = call.get("name", "")
+            arguments = call.get("arguments", {})
+            if not isinstance(arguments, dict):
+                arguments = {}
+
+            signature = json.dumps(
+                {"name": function_name, "arguments": arguments}, sort_keys=True
+            )
+
+            job = signature_to_job.get(signature)
+            if job is None:
+                job = _BatchJob(
+                    signature=signature,
+                    call=call,
+                    function_name=function_name,
+                    arguments=arguments,
+                )
+                signature_to_job[signature] = job
+                jobs.append(job)
+
+            job.indices.append(idx)
+
+        return jobs
+
+    def _prime_batch_cache(
+        self,
+        jobs: List[_BatchJob],
+        use_cache: bool,
+        results: List[Any],
+    ) -> List[_BatchJob]:
+        if not (
+            use_cache and self.cache_manager is not None and self.cache_manager.enabled
+        ):
+            return jobs
+
+        cache_requests: List[Dict[str, str]] = []
+        for job in jobs:
+            if not job.function_name:
+                continue
+
+            tool_instance = self._ensure_tool_instance(job)
+            if not tool_instance or not tool_instance.supports_caching():
+                continue
+
+            cache_key = tool_instance.get_cache_key(job.arguments or {})
+            cache_info = _BatchCacheInfo(
+                namespace=tool_instance.get_cache_namespace(),
+                version=tool_instance.get_cache_version(),
+                cache_key=cache_key,
+            )
+            job.cache_info = cache_info
+            job.cache_key_composed = self.cache_manager.compose_key(
+                cache_info.namespace, cache_info.version, cache_info.cache_key
+            )
+            cache_requests.append(
+                {
+                    "namespace": cache_info.namespace,
+                    "version": cache_info.version,
+                    "cache_key": cache_info.cache_key,
+                }
+            )
+
+        if cache_requests:
+            cache_hits = self.cache_manager.bulk_get(cache_requests)
+            if cache_hits:
+                for job in jobs:
+                    if job.cache_key_composed and job.cache_key_composed in cache_hits:
+                        cached_value = cache_hits[job.cache_key_composed]
+                        for idx in job.indices:
+                            results[idx] = cached_value
+                        job.skip_execution = True
+
+        return [job for job in jobs if not job.skip_execution]
+
+    def _execute_batch_jobs(
+        self,
+        jobs_to_run: List[_BatchJob],
+        results: List[Any],
+        *,
+        stream_callback,
+        use_cache: bool,
+        max_workers: Optional[int],
+    ) -> None:
+        if not jobs_to_run:
+            return
+
+        tool_semaphores: Dict[str, Optional[threading.Semaphore]] = {}
+
+        def run_job(job: _BatchJob):
+            semaphore = self._get_tool_semaphore(job, tool_semaphores)
+            if semaphore:
+                semaphore.acquire()
+            try:
+                result = self.run_one_function(
+                    job.call,
+                    stream_callback=stream_callback,
+                    use_cache=use_cache,
+                )
+            finally:
+                if semaphore:
+                    semaphore.release()
+
+            for idx in job.indices:
+                results[idx] = result
+
+        if max_workers and max_workers > 1:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = [executor.submit(run_job, job) for job in jobs_to_run]
+                for future in as_completed(futures):
+                    future.result()
+        else:
+            for job in jobs_to_run:
+                run_job(job)
+
+    def _ensure_tool_instance(self, job: _BatchJob):
+        if job.tool_instance is None and job.function_name:
+            job.tool_instance = self._get_tool_instance(job.function_name, cache=True)
+        return job.tool_instance
+
+    def _get_tool_semaphore(
+        self,
+        job: _BatchJob,
+        tool_semaphores: Dict[str, Optional[threading.Semaphore]],
+    ) -> Optional[threading.Semaphore]:
+        if job.function_name not in tool_semaphores:
+            tool_instance = self._ensure_tool_instance(job)
+            limit = (
+                tool_instance.get_batch_concurrency_limit()
+                if tool_instance is not None
+                else 0
+            )
+            self.logger.debug("Batch concurrency for %s: %s", job.function_name, limit)
+            if limit and limit > 0:
+                tool_semaphores[job.function_name] = threading.Semaphore(limit)
+            else:
+                tool_semaphores[job.function_name] = None
+
+        return tool_semaphores[job.function_name]
+
     def run(
         self,
         fcall_str,
@@ -1681,6 +1896,8 @@ class ToolUniverse:
         verbose=True,
         format="llama",
         stream_callback=None,
+        use_cache: bool = False,
+        max_workers: Optional[int] = None,
     ):
         """
         Execute function calls from input string or data.
@@ -1711,14 +1928,18 @@ class ToolUniverse:
             message = ""  # Initialize message for cases where return_message=False
         if function_call_json is not None:
             if isinstance(function_call_json, list):
-                # return the function call+result message with call id.
+                # Execute the batch (optionally in parallel) and attach call IDs to maintain downstream compatibility.
+                batch_results = self._execute_function_call_list(
+                    function_call_json,
+                    stream_callback=stream_callback,
+                    use_cache=use_cache,
+                    max_workers=max_workers,
+                )
+
                 call_results = []
-                for i in range(len(function_call_json)):
-                    call_result = self.run_one_function(
-                        function_call_json[i], stream_callback=stream_callback
-                    )
+                for idx, call_result in enumerate(batch_results):
                     call_id = self.call_id_gen()
-                    function_call_json[i]["call_id"] = call_id
+                    function_call_json[idx]["call_id"] = call_id
                     call_results.append(
                         {
                             "role": "tool",
@@ -1737,7 +1958,9 @@ class ToolUniverse:
                 return revised_messages
             else:
                 return self.run_one_function(
-                    function_call_json, stream_callback=stream_callback
+                    function_call_json,
+                    stream_callback=stream_callback,
+                    use_cache=use_cache,
                 )
         else:
             error("Not a function call")

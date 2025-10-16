@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -197,6 +198,39 @@ def test_dump_cache(tool_config):
             entries = list(tu.dump_cache())
             assert entries
             assert any(e["namespace"] == "CountingToolTest" for e in entries)
+
+            tu.close()
+        finally:
+            _restore_env(old_env)
+
+
+def test_batch_run_deduplicates_work(tool_config):
+    with TemporaryDirectory() as tmpdir:
+        env_vars, old_env = _with_env(
+            TOOLUNIVERSE_CACHE_PATH=str(Path(tmpdir) / "cache.sqlite")
+        )
+        try:
+            CountingTool.call_count = 0
+            tu = ToolUniverse(tool_files={}, keep_default_tools=False)
+            _register_tool(tu, tool_config)
+
+            batch_calls = [
+                {"name": "CountingToolTest", "arguments": {"value": 1}},
+                {"name": "CountingToolTest", "arguments": {"value": 1}},
+                {"name": "CountingToolTest", "arguments": {"value": 2}},
+                {"name": "CountingToolTest", "arguments": {"value": 2}},
+            ]
+
+            messages = tu.run(batch_calls, use_cache=True, max_workers=4)
+
+            assert CountingTool.call_count == 2  # one execution per unique arguments
+
+            tool_payloads = [
+                json.loads(msg["content"])["content"]
+                for msg in messages[1:]
+                if msg["role"] == "tool"
+            ]
+            assert [payload["value"] for payload in tool_payloads] == [1, 1, 2, 2]
 
             tu.close()
         finally:

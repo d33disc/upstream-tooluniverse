@@ -290,6 +290,17 @@ class BaseTool:
         """
         return self.tool_config.get("cacheable", True)
 
+    def get_batch_concurrency_limit(self) -> int:
+        """Return maximum concurrent executions allowed during batch runs (0 = unlimited)."""
+        limit = self.tool_config.get("batch_max_concurrency")
+        if limit is None:
+            return 0
+        try:
+            parsed = int(limit)
+        except (TypeError, ValueError):
+            return 0
+        return max(0, parsed)
+
     def get_cache_namespace(self) -> str:
         """Return cache namespace identifier for this tool."""
         return self.tool_config.get("name", self.__class__.__name__)

@@ -6,9 +6,11 @@ from __future__ import annotations
 
 import logging
 import os
+import queue
+import threading
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, Optional
+from typing import Any, Dict, Iterator, Optional, Sequence
 
 from .memory_cache import LRUCache, SingleFlight
 from .sqlite_backend import CacheEntry, PersistentCache
@@ -36,6 +38,8 @@ class ResultCacheManager:
         persistence_enabled: bool = True,
         singleflight: bool = True,
         default_ttl: Optional[int] = None,
+        async_persist: Optional[bool] = None,
+        async_queue_size: int = 10000,
     ):
         self.enabled = enabled
         self.default_ttl = default_ttl
@@ -55,6 +59,7 @@ class ResultCacheManager:
                 self.persistent = None
 
         self.singleflight = SingleFlight() if singleflight else None
+        self._init_async_persistence(async_persist, async_queue_size)
 
     # ------------------------------------------------------------------
     # Helper methods
@@ -68,6 +73,33 @@ class ResultCacheManager:
 
     def _ttl_or_default(self, ttl: Optional[int]) -> Optional[int]:
         return ttl if ttl is not None else self.default_ttl
+
+    def _init_async_persistence(
+        self, async_persist: Optional[bool], async_queue_size: int
+    ) -> None:
+        if async_persist is None:
+            async_persist = os.getenv(
+                "TOOLUNIVERSE_CACHE_ASYNC_PERSIST", "true"
+            ).lower() in ("true", "1", "yes")
+
+        self.async_persist = (
+            async_persist and self.persistent is not None and self.enabled
+        )
+
+        self._persist_queue: Optional["queue.Queue[tuple[str, Dict[str, Any]]]"] = None
+        self._worker_thread: Optional[threading.Thread] = None
+
+        if not self.async_persist:
+            return
+
+        queue_size = max(1, async_queue_size)
+        self._persist_queue = queue.Queue(maxsize=queue_size)
+        self._worker_thread = threading.Thread(
+            target=self._async_worker,
+            name="ResultCacheWriter",
+            daemon=True,
+        )
+        self._worker_thread.start()
 
     # ------------------------------------------------------------------
     # Public API
@@ -126,17 +158,15 @@ class ResultCacheManager:
         )
 
         if self.persistent:
-            try:
-                self.persistent.set(
-                    composed,
-                    value,
-                    namespace=namespace,
-                    version=version,
-                    ttl=effective_ttl,
-                )
-            except Exception as exc:
-                logger.warning("Persistent cache write failed: %s", exc)
-                self.persistent = None
+            payload = {
+                "composed": composed,
+                "value": value,
+                "namespace": namespace,
+                "version": version,
+                "ttl": effective_ttl,
+            }
+            if not self._schedule_persist("set", payload):
+                self._perform_persist_set(**payload)
 
     def delete(self, *, namespace: str, version: str, cache_key: str):
         composed = self.compose_key(namespace, version, cache_key)
@@ -162,9 +192,39 @@ class ResultCacheManager:
 
         if self.persistent:
             try:
+                self.flush()
                 self.persistent.clear(namespace=namespace)
             except Exception as exc:
                 logger.warning("Persistent cache clear failed: %s", exc)
+
+    def bulk_get(self, requests: Sequence[Dict[str, str]]) -> Dict[str, Any]:
+        """Fetch multiple cache entries at once.
+
+        Args:
+            requests: Iterable of dicts containing ``namespace``, ``version`` and ``cache_key``.
+
+        Returns:
+            Mapping of composed cache keys to cached values.
+        """
+
+        if not self.enabled:
+            return {}
+
+        hits: Dict[str, Any] = {}
+        for request in requests:
+            namespace = request["namespace"]
+            version = request["version"]
+            cache_key = request["cache_key"]
+            value = self.get(
+                namespace=namespace,
+                version=version,
+                cache_key=cache_key,
+            )
+            if value is not None:
+                composed = self.compose_key(namespace, version, cache_key)
+                hits[composed] = value
+
+        return hits
 
     def stats(self) -> Dict[str, Any]:
         return {
@@ -173,11 +233,18 @@ class ResultCacheManager:
             "persistent": (
                 self.persistent.stats() if self.persistent else {"enabled": False}
             ),
+            "async_persist": self.async_persist,
+            "pending_writes": (
+                self._persist_queue.qsize()
+                if self.async_persist and self._persist_queue is not None
+                else 0
+            ),
         }
 
     def dump(self, namespace: Optional[str] = None) -> Iterator[Dict[str, Any]]:
         if not self.persistent:
             return iter([])
+        self.flush()
         return (
             {
                 "cache_key": entry.key,
@@ -220,11 +287,99 @@ class ResultCacheManager:
         return _DummyContext()
 
     def close(self):
+        self.flush()
+        self._shutdown_async_worker()
         if self.persistent:
             try:
                 self.persistent.close()
             except Exception as exc:
                 logger.warning("Persistent cache close failed: %s", exc)
+
+    # ------------------------------------------------------------------
+    # Async persistence helpers
+    # ------------------------------------------------------------------
+
+    def flush(self):
+        if self.async_persist and self._persist_queue is not None:
+            self._persist_queue.join()
+
+    def _schedule_persist(self, op: str, payload: Dict[str, Any]) -> bool:
+        if not self.async_persist or self._persist_queue is None:
+            return False
+        try:
+            self._persist_queue.put_nowait((op, payload))
+            return True
+        except queue.Full:
+            logger.warning(
+                "Async cache queue full; falling back to synchronous persistence"
+            )
+            return False
+
+    def _async_worker(self):
+        queue_ref = self._persist_queue
+        if queue_ref is None:
+            return
+
+        while True:
+            try:
+                op, payload = queue_ref.get()
+            except Exception:
+                continue
+
+            if op == "__STOP__":
+                queue_ref.task_done()
+                break
+
+            try:
+                if op == "set":
+                    self._perform_persist_set(**payload)
+                else:
+                    logger.warning("Unknown async cache operation: %s", op)
+            except Exception as exc:
+                logger.warning("Async cache write failed: %s", exc)
+                # Disable async persistence to avoid repeated failures
+                self.async_persist = False
+            finally:
+                queue_ref.task_done()
+
+    def _perform_persist_set(
+        self,
+        *,
+        composed: str,
+        value: Any,
+        namespace: str,
+        version: str,
+        ttl: Optional[int],
+    ):
+        if not self.persistent:
+            return
+        try:
+            self.persistent.set(
+                composed,
+                value,
+                namespace=namespace,
+                version=version,
+                ttl=ttl,
+            )
+        except Exception as exc:
+            logger.warning("Persistent cache write failed: %s", exc)
+            self.persistent = None
+            raise
+
+    def _shutdown_async_worker(self) -> None:
+        if not self.async_persist or self._persist_queue is None:
+            return
+
+        try:
+            self._persist_queue.put_nowait(("__STOP__", {}))
+        except queue.Full:
+            self._persist_queue.put(("__STOP__", {}))
+
+        if self._worker_thread is not None:
+            self._worker_thread.join(timeout=5)
+
+        self._worker_thread = None
+        self._persist_queue = None
 
 
 class _DummyContext:

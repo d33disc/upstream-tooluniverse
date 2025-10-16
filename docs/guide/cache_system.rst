@@ -39,6 +39,40 @@ calling a tool to reuse results:
         "arguments": {"accession": "P05067"},
     }, use_cache=True)
 
+For model-training style workloads you can pass a list of calls to ``tu.run`` and
+enable parallel workers. Each call still consults the cache before hitting the
+network:
+
+.. code-block:: python
+
+    import json
+
+    batch = [
+        {"name": "UniProt_get_entry_by_accession", "arguments": {"accession": acc}}
+        for acc in accession_list
+    ]
+    messages = tu.run(batch, use_cache=True, max_workers=16)
+
+    # Extract tool payloads (assistant metadata is at messages[0])
+    payloads = [json.loads(msg["content"])["content"] for msg in messages[1:]]
+
+Batch Execution Tips
+--------------------
+
+The batch runner performs several optimisations automatically:
+
+* **Call deduplication** – identical ``name``/``arguments`` pairs are executed
+  once and fanned out to every requester. With ``use_cache=True`` the result is
+  also stored so later batches return instantly.
+* **Per-tool concurrency** – each tool can advertise a
+  ``batch_max_concurrency`` limit in its JSON/definition. During a batch run the
+  scheduler enforces that limit so that a slow or rate-limited API does not
+  seize all workers.
+* **Configurable capacity** – increase
+  ``TOOLUNIVERSE_CACHE_MEMORY_SIZE`` if you expect millions of cached entries.
+  For example, setting it to ``5000000`` keeps roughly five million results in
+  RAM (watch RSS usage and adjust according to payload size).
+
 Configuration
 -------------
 
@@ -56,6 +90,7 @@ Variable                         Description
 ``TOOLUNIVERSE_CACHE_MEMORY_SIZE``  Max entries in the in-memory LRU (default 256)
 ``TOOLUNIVERSE_CACHE_DEFAULT_TTL``  Expiration in seconds (None disables TTL)
 ``TOOLUNIVERSE_CACHE_SINGLEFLIGHT``  Deduplicate concurrent misses (``true``)
+``TOOLUNIVERSE_CACHE_ASYNC_PERSIST``  Write cache entries to SQLite on a background thread (``true``)
 ===============================  ==============================================
 
 Example configuration:
@@ -96,6 +131,35 @@ if you want finer control (for example, adding a manual ``STATIC_CACHE_VERSION``
 counter). Tools can also override ``get_cache_ttl`` to specify per-result
 expiration.
 
+Asynchronous Persistence
+------------------------
+
+SQLite persistence is still enabled by default, but writes now happen on a
+background thread so tool calls are not blocked on disk I/O. You can tune this
+behaviour in two ways:
+
+* Set ``TOOLUNIVERSE_CACHE_ASYNC_PERSIST=false`` before constructing
+  ``ToolUniverse`` to fall back to fully synchronous writes (useful when you
+  need the result on disk immediately).
+* Create a custom ``ResultCacheManager`` with a larger queue if you expect an
+  extremely write-heavy workload:
+
+  .. code-block:: python
+
+      from tooluniverse import ToolUniverse
+      from tooluniverse.cache.result_cache_manager import ResultCacheManager
+
+      tu = ToolUniverse()
+      tu.cache_manager.close()  # replace the default manager
+      tu.cache_manager = ResultCacheManager(
+          memory_size=1_000_000,
+          async_queue_size=50_000,
+      )
+
+Use ``tu.cache_manager.flush()`` if you need to wait for pending writes (for
+example, before shutting down a worker). ``tu.get_cache_stats()`` now reports
+``pending_writes`` so you can monitor the queue depth during batch jobs.
+
 Best Practices
 --------------
 
@@ -105,3 +169,11 @@ Best Practices
 * Call ``tu.clear_cache()`` in long-running services if you need a fresh start.
 * For hands-on demos, run ``examples/cache_usage_example.py`` (basic walkthrough)
   or ``examples/cache_stress_test.py`` (randomized load test with summary stats).
+  .. code-block:: json
+
+      {
+        "name": "SlowTool",
+        "type": "SlowTool",
+        "batch_max_concurrency": 2,
+        "parameter": {"type": "object", "properties": {}}
+      }
