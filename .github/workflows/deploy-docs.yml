@@ -117,38 +117,3 @@ jobs:
       id: deployment
       uses: actions/deploy-pages@v4
 
-  test-deployment:
-    runs-on: ubuntu-latest
-    needs: build-and-deploy
-    if: always()
-    
-    steps:
-    - name: Report deployment status
-      run: |
-        if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
-          echo "✅ Documentation deployment successful!"
-          echo "🎨 Modern theme with enhanced styling applied"
-          echo "📖 Documentation available at: https://zitniklab.hms.harvard.edu/ToolUniverse/"
-          echo "   • Root (auto-redirects to English): https://zitniklab.hms.harvard.edu/ToolUniverse/"
-          echo "   • English: https://zitniklab.hms.harvard.edu/ToolUniverse/en/"
-          echo "   • Chinese: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/"
-          echo "   • English API: https://zitniklab.hms.harvard.edu/ToolUniverse/en/api/modules.html"
-          echo "   • Chinese API: https://zitniklab.hms.harvard.edu/ToolUniverse/zh-CN/api/modules.html"
-          echo "🌟 Features:"
-          echo "   • Multi-language support with automatic redirects"
-          echo "   • Backward compatibility with old /en/ links"
-          echo "   • Language switcher in navigation bar"
-          echo "   • Modern responsive design"
-          echo "   • Dark/light mode support (if Furo theme)"
-          echo "   • Enhanced code highlighting"
-          echo "   • Improved navigation"
-        else
-          echo "❌ Documentation deployment failed!"
-          echo "Build status: ${{ needs.build-and-deploy.result }}"
-          echo "📝 Common issues:"
-          echo "   • Missing theme dependencies (run: pip install -r docs/requirements.txt)"
-          echo "   • Theme compatibility problems (check .. contents:: directives)"
-          echo "   • Configuration errors (verify conf*.py files)"
-          echo "💡 Check the build logs for specific error messages"
-          exit 1
-        fi
