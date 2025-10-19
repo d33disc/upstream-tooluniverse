@@ -28,7 +28,7 @@ Search for papers on Semantic Scholar including abstracts. This tool queries the
    * ``query`` (string) (required)
      Search query for Semantic Scholar. Use keywords separated by spaces to refine the search.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of papers to return from Semantic Scholar.
 
    * ``api_key`` (string) (optional)
@@ -41,7 +41,8 @@ Search for papers on Semantic Scholar including abstracts. This tool queries the
       query = {
           "name": "SemanticScholar_search_papers",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

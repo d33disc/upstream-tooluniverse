@@ -25,7 +25,7 @@ Get information about drug abuse and dependence based on the drug name, specific
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -41,6 +41,7 @@ Get information about drug abuse and dependence based on the drug name, specific
       query = {
           "name": "FDA_get_abuse_dependence_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -61,7 +62,7 @@ Retrieve information about types of abuse based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -77,6 +78,7 @@ Retrieve information about types of abuse based on the drug name.
       query = {
           "name": "FDA_get_abuse_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -97,7 +99,7 @@ Retrieve information about accessories based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -113,6 +115,7 @@ Retrieve information about accessories based on the drug name.
       query = {
           "name": "FDA_get_accessories_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -133,7 +136,7 @@ Fetch a list of active ingredients in a specific drug product.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -149,6 +152,7 @@ Fetch a list of active ingredients in a specific drug product.
       query = {
           "name": "FDA_get_active_ingredient_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -169,7 +173,7 @@ Retrieve adverse reactions information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -185,6 +189,7 @@ Retrieve adverse reactions information based on the drug name.
       query = {
           "name": "FDA_get_adverse_reactions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -205,7 +210,7 @@ Retrieve alarms based on the specified drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -221,6 +226,7 @@ Retrieve alarms based on the specified drug name.
       query = {
           "name": "FDA_get_alarms_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -241,7 +247,7 @@ Retrieve animal pharmacology and toxicology information based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -257,6 +263,7 @@ Retrieve animal pharmacology and toxicology information based on drug names.
       query = {
           "name": "FDA_get_animal_pharmacology_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -277,7 +284,7 @@ Retrieve assembly or installation instructions based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -293,6 +300,7 @@ Retrieve assembly or installation instructions based on drug names.
       query = {
           "name": "FDA_get_assembly_installation_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -313,7 +321,7 @@ Retrieve boxed warning and adverse effects information for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -329,6 +337,7 @@ Retrieve boxed warning and adverse effects information for a specific drug.
       query = {
           "name": "FDA_get_boxed_warning_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -349,7 +358,7 @@ Retrieve the brand name and generic name from generic name or brand name of a dr
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The generic name or the brand name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -362,6 +371,7 @@ Retrieve the brand name and generic name from generic name or brand name of a dr
       query = {
           "name": "FDA_get_brand_name_generic_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -382,7 +392,7 @@ Retrieve calibration instructions based on the specified drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -398,6 +408,7 @@ Retrieve calibration instructions based on the specified drug name.
       query = {
           "name": "FDA_get_calibration_instructions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -418,7 +429,7 @@ Retrieve carcinogenic, mutagenic, or fertility impairment information based on t
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -434,6 +445,7 @@ Retrieve carcinogenic, mutagenic, or fertility impairment information based on t
       query = {
           "name": "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -454,7 +466,7 @@ Retrieve child safety information for a specific drug based on its name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -470,6 +482,7 @@ Retrieve child safety information for a specific drug based on its name.
       query = {
           "name": "FDA_get_child_safety_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -490,7 +503,7 @@ Retrieve clinical pharmacology information based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -506,6 +519,7 @@ Retrieve clinical pharmacology information based on drug names.
       query = {
           "name": "FDA_get_clinical_pharmacology_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -526,7 +540,7 @@ Retrieve clinical studies information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -542,6 +556,7 @@ Retrieve clinical studies information based on the drug name.
       query = {
           "name": "FDA_get_clinical_studies_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -562,7 +577,7 @@ Retrieve information on who to contact with questions about the drug based on th
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -578,6 +593,7 @@ Retrieve information on who to contact with questions about the drug based on th
       query = {
           "name": "FDA_get_contact_for_questions_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -598,7 +614,7 @@ Retrieve contraindications information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -614,6 +630,7 @@ Retrieve contraindications information based on the drug name.
       query = {
           "name": "FDA_get_contraindications_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -634,7 +651,7 @@ Retrieve information about the controlled substance Drug Enforcement Administrat
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -650,6 +667,7 @@ Retrieve information about the controlled substance Drug Enforcement Administrat
       query = {
           "name": "FDA_get_controlled_substance_DEA_schedule_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -670,7 +688,7 @@ Fetch information about dear health care provider letters for a specific drug. T
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -686,6 +704,7 @@ Fetch information about dear health care provider letters for a specific drug. T
       query = {
           "name": "FDA_get_dear_health_care_provider_letter_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -706,7 +725,7 @@ Retrieve information about dependence characteristics based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -722,6 +741,7 @@ Retrieve information about dependence characteristics based on the drug name.
       query = {
           "name": "FDA_get_dependence_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -742,7 +762,7 @@ Retrieve disposal and waste handling information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -758,6 +778,7 @@ Retrieve disposal and waste handling information based on the drug name.
       query = {
           "name": "FDA_get_disposal_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -778,7 +799,7 @@ Retrieve information about all contraindications for use based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -794,6 +815,7 @@ Retrieve information about all contraindications for use based on the drug name.
       query = {
           "name": "FDA_get_do_not_use_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -814,7 +836,7 @@ Retrieve the document ID based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -830,6 +852,7 @@ Retrieve the document ID based on the drug name.
       query = {
           "name": "FDA_get_document_id_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -850,7 +873,7 @@ Retrieve dosage and storage information for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -866,6 +889,7 @@ Retrieve dosage and storage information for a specific drug.
       query = {
           "name": "FDA_get_dosage_and_storage_information_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -886,7 +910,7 @@ Retrieve dosage forms and strengths information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -902,6 +926,7 @@ Retrieve dosage forms and strengths information based on the drug name.
       query = {
           "name": "FDA_get_dosage_forms_and_strengths_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -922,7 +947,7 @@ Get the drug’s generic name based on the drug's generic or brand name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The generic or brand name of the drug.
 
    **Example Usage:**
@@ -932,6 +957,7 @@ Get the drug’s generic name based on the drug's generic or brand name.
       query = {
           "name": "FDA_get_drug_generic_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -952,7 +978,7 @@ Retrieve drug interactions based on the specified drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -968,6 +994,7 @@ Retrieve drug interactions based on the specified drug name.
       query = {
           "name": "FDA_get_drug_interactions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -988,7 +1015,7 @@ Retrieve the drug name based on the FDA application number, NUI unique identifie
 
    **Parameters:**
 
-   * ``field_info`` (string) (optional)
+   * ``field_info`` (string) (required)
      The specific field information to search for.
 
    * ``limit`` (integer) (optional)
@@ -1004,6 +1031,7 @@ Retrieve the drug name based on the FDA application number, NUI unique identifie
       query = {
           "name": "FDA_get_drug_name_by_SPL_ID",
           "arguments": {
+              "field_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1024,7 +1052,7 @@ Retrieve the drug name based on specific adverse reactions reported. Warning: Th
 
    **Parameters:**
 
-   * ``adverse_reaction`` (string) (optional)
+   * ``adverse_reaction`` (string) (required)
      The adverse reaction to search for.
 
    * ``limit`` (integer) (optional)
@@ -1040,6 +1068,7 @@ Retrieve the drug name based on specific adverse reactions reported. Warning: Th
       query = {
           "name": "FDA_get_drug_name_by_adverse_reaction",
           "arguments": {
+              "adverse_reaction": "example_value"
           }
       }
       result = tu.run(query)
@@ -1060,7 +1089,7 @@ Retrieve the drug name based on the calibration instructions provided.
 
    **Parameters:**
 
-   * ``calibration_instructions`` (string) (optional)
+   * ``calibration_instructions`` (string) (required)
      Instructions used for calibration of the drug.
 
    * ``limit`` (integer) (optional)
@@ -1076,6 +1105,7 @@ Retrieve the drug name based on the calibration instructions provided.
       query = {
           "name": "FDA_get_drug_name_by_calibration_instructions",
           "arguments": {
+              "calibration_instructions": "example_value"
           }
       }
       result = tu.run(query)
@@ -1096,7 +1126,7 @@ Retrieve the drug name based on information about dependence characteristics.
 
    **Parameters:**
 
-   * ``dependence_info`` (string) (optional)
+   * ``dependence_info`` (string) (required)
      Information related to psychological and physical dependence of the drug.
 
    * ``limit`` (integer) (optional)
@@ -1112,6 +1142,7 @@ Retrieve the drug name based on information about dependence characteristics.
       query = {
           "name": "FDA_get_drug_name_by_dependence_info",
           "arguments": {
+              "dependence_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1132,7 +1163,7 @@ Retrieve the drug name based on the document ID.
 
    **Parameters:**
 
-   * ``document_id`` (string) (optional)
+   * ``document_id`` (string) (required)
      The document ID, a globally unique identifier (GUID) for the particular revision of a labeling document.
 
    * ``limit`` (integer) (optional)
@@ -1148,6 +1179,7 @@ Retrieve the drug name based on the document ID.
       query = {
           "name": "FDA_get_drug_name_by_document_id",
           "arguments": {
+              "document_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1168,7 +1200,7 @@ Retrieve the drug name based on dosage and administration information.
 
    **Parameters:**
 
-   * ``dosage_info`` (string) (optional)
+   * ``dosage_info`` (string) (required)
      Information about the drug product’s dosage and administration recommendations.
 
    * ``limit`` (integer) (optional)
@@ -1184,6 +1216,7 @@ Retrieve the drug name based on dosage and administration information.
       query = {
           "name": "FDA_get_drug_name_by_dosage_info",
           "arguments": {
+              "dosage_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1204,7 +1237,7 @@ Retrieve the drug name based on the specified environmental warnings.
 
    **Parameters:**
 
-   * ``environmental_warning`` (string) (optional)
+   * ``environmental_warning`` (string) (required)
      The environmental warning text to search for.
 
    * ``limit`` (integer) (optional)
@@ -1220,6 +1253,7 @@ Retrieve the drug name based on the specified environmental warnings.
       query = {
           "name": "FDA_get_drug_name_by_environmental_warning",
           "arguments": {
+              "environmental_warning": "example_value"
           }
       }
       result = tu.run(query)
@@ -1240,7 +1274,7 @@ Retrieve the drug name based on the inactive ingredient information.
 
    **Parameters:**
 
-   * ``inactive_ingredient`` (string) (optional)
+   * ``inactive_ingredient`` (string) (required)
      The name of the inactive ingredient.
 
    * ``limit`` (integer) (optional)
@@ -1256,6 +1290,7 @@ Retrieve the drug name based on the inactive ingredient information.
       query = {
           "name": "FDA_get_drug_name_by_inactive_ingredient",
           "arguments": {
+              "inactive_ingredient": "example_value"
           }
       }
       result = tu.run(query)
@@ -1276,7 +1311,7 @@ Retrieve the drug names that require asking a doctor before use due to a patient
 
    **Parameters:**
 
-   * ``condition`` (string) (optional)
+   * ``condition`` (string) (required)
      The condition or symptom that requires consulting a doctor.
 
    * ``limit`` (integer) (optional)
@@ -1292,6 +1327,7 @@ Retrieve the drug names that require asking a doctor before use due to a patient
       query = {
           "name": "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation",
           "arguments": {
+              "condition": "example_value"
           }
       }
       result = tu.run(query)
@@ -1312,7 +1348,7 @@ Retrieve the drug name based on information about the drug’s use during labor 
 
    **Parameters:**
 
-   * ``labor_and_delivery_info`` (string) (optional)
+   * ``labor_and_delivery_info`` (string) (required)
      Information about the drug’s use during labor or delivery.
 
    * ``limit`` (integer) (optional)
@@ -1328,6 +1364,7 @@ Retrieve the drug name based on information about the drug’s use during labor 
       query = {
           "name": "FDA_get_drug_name_by_labor_and_delivery_info",
           "arguments": {
+              "labor_and_delivery_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1348,7 +1385,7 @@ Retrieve the drug name based on microbiology field information.
 
    **Parameters:**
 
-   * ``microbiology_info`` (string) (optional)
+   * ``microbiology_info`` (string) (required)
      Information related to the microbiology field.
 
    * ``limit`` (integer) (optional)
@@ -1364,6 +1401,7 @@ Retrieve the drug name based on microbiology field information.
       query = {
           "name": "FDA_get_drug_name_by_microbiology",
           "arguments": {
+              "microbiology_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1384,7 +1422,7 @@ Retrieve the drug name based on the provided safety information. This tool looks
 
    **Parameters:**
 
-   * ``safety_info`` (string) (optional)
+   * ``safety_info`` (string) (required)
      Information about safe use and handling of the product.
 
    * ``limit`` (integer) (optional)
@@ -1400,6 +1438,7 @@ Retrieve the drug name based on the provided safety information. This tool looks
       query = {
           "name": "FDA_get_drug_name_by_other_safety_info",
           "arguments": {
+              "safety_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1420,7 +1459,7 @@ Retrieve the drug name based on pharmacodynamics information.
 
    **Parameters:**
 
-   * ``pharmacodynamics`` (string) (optional)
+   * ``pharmacodynamics`` (string) (required)
      Information about the biochemical or physiologic pharmacologic effects of the drug.
 
    * ``limit`` (integer) (optional)
@@ -1436,6 +1475,7 @@ Retrieve the drug name based on pharmacodynamics information.
       query = {
           "name": "FDA_get_drug_name_by_pharmacodynamics",
           "arguments": {
+              "pharmacodynamics": "example_value"
           }
       }
       result = tu.run(query)
@@ -1456,7 +1496,7 @@ Retrieve the drug name based on pharmacogenomics field information.
 
    **Parameters:**
 
-   * ``pharmacogenomics`` (string) (optional)
+   * ``pharmacogenomics`` (string) (required)
      Pharmacogenomics information to search for.
 
    * ``limit`` (integer) (optional)
@@ -1472,6 +1512,7 @@ Retrieve the drug name based on pharmacogenomics field information.
       query = {
           "name": "FDA_get_drug_name_by_pharmacogenomics",
           "arguments": {
+              "pharmacogenomics": "example_value"
           }
       }
       result = tu.run(query)
@@ -1492,7 +1533,7 @@ Retrieve the drug name based on the precautions field information.
 
    **Parameters:**
 
-   * ``precautions`` (string) (optional)
+   * ``precautions`` (string) (required)
      Information about any special care to be exercised for safe and effective use of the drug.
 
    * ``limit`` (integer) (optional)
@@ -1508,6 +1549,7 @@ Retrieve the drug name based on the precautions field information.
       query = {
           "name": "FDA_get_drug_name_by_precautions",
           "arguments": {
+              "precautions": "example_value"
           }
       }
       result = tu.run(query)
@@ -1528,7 +1570,7 @@ Retrieve the drug names based on pregnancy or breastfeeding information.
 
    **Parameters:**
 
-   * ``pregnancy_info`` (string) (optional)
+   * ``pregnancy_info`` (string) (required)
      Information related to pregnancy or breastfeeding.
 
    * ``limit`` (integer) (optional)
@@ -1544,6 +1586,7 @@ Retrieve the drug names based on pregnancy or breastfeeding information.
       query = {
           "name": "FDA_get_drug_name_by_pregnancy_or_breastfeeding_info",
           "arguments": {
+              "pregnancy_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1564,7 +1607,7 @@ Retrieve the drug name based on the content of the principal display panel of th
 
    **Parameters:**
 
-   * ``display_panel_content`` (string) (optional)
+   * ``display_panel_content`` (string) (required)
      The content of the principal display panel of the product package.
 
    * ``limit`` (integer) (optional)
@@ -1580,6 +1623,7 @@ Retrieve the drug name based on the content of the principal display panel of th
       query = {
           "name": "FDA_get_drug_name_by_principal_display_panel",
           "arguments": {
+              "display_panel_content": "example_value"
           }
       }
       result = tu.run(query)
@@ -1600,7 +1644,7 @@ Retrieve the drug name based on the reference information provided in the drug l
 
    **Parameters:**
 
-   * ``reference`` (string) (optional)
+   * ``reference`` (string) (required)
      The reference information to search for in the drug labeling.
 
    * ``limit`` (integer) (optional)
@@ -1616,6 +1660,7 @@ Retrieve the drug name based on the reference information provided in the drug l
       query = {
           "name": "FDA_get_drug_name_by_reference",
           "arguments": {
+              "reference": "example_value"
           }
       }
       result = tu.run(query)
@@ -1636,7 +1681,7 @@ Retrieve the drug name based on the Set ID of the labeling.
 
    **Parameters:**
 
-   * ``set_id`` (string) (optional)
+   * ``set_id`` (string) (required)
      The Set ID, a globally unique identifier for the labeling.
 
    * ``limit`` (integer) (optional)
@@ -1652,6 +1697,7 @@ Retrieve the drug name based on the Set ID of the labeling.
       query = {
           "name": "FDA_get_drug_name_by_set_id",
           "arguments": {
+              "set_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1672,7 +1718,7 @@ Retrieve the drug name based on the stop use information provided.
 
    **Parameters:**
 
-   * ``stop_use_info`` (string) (optional)
+   * ``stop_use_info`` (string) (required)
      Information about when use of the drug product should be discontinued immediately and a doctor consulted.
 
    * ``limit`` (integer) (optional)
@@ -1688,6 +1734,7 @@ Retrieve the drug name based on the stop use information provided.
       query = {
           "name": "FDA_get_drug_name_by_stop_use_info",
           "arguments": {
+              "stop_use_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1708,7 +1755,7 @@ Retrieve the drug name based on storage and handling information.
 
    **Parameters:**
 
-   * ``storage_info`` (string) (optional)
+   * ``storage_info`` (string) (required)
      Information about the storage and handling of the drug product.
 
    * ``limit`` (integer) (optional)
@@ -1724,6 +1771,7 @@ Retrieve the drug name based on storage and handling information.
       query = {
           "name": "FDA_get_drug_name_by_storage_and_handling_info",
           "arguments": {
+              "storage_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1744,7 +1792,7 @@ Retrieve the drug names based on specific warning information.
 
    **Parameters:**
 
-   * ``warning_text`` (string) (optional)
+   * ``warning_text`` (string) (required)
      The warning text to search for in the drug labeling.
 
    * ``limit`` (integer) (optional)
@@ -1760,6 +1808,7 @@ Retrieve the drug names based on specific warning information.
       query = {
           "name": "FDA_get_drug_name_by_warnings",
           "arguments": {
+              "warning_text": "example_value"
           }
       }
       result = tu.run(query)
@@ -1780,7 +1829,7 @@ Retrieve the drug name based on the information provided in the patient package 
 
    **Parameters:**
 
-   * ``patient_package_insert`` (string) (optional)
+   * ``patient_package_insert`` (string) (required)
      Information necessary for patients to use the drug safely and effectively.
 
    * ``limit`` (integer) (optional)
@@ -1796,6 +1845,7 @@ Retrieve the drug name based on the information provided in the patient package 
       query = {
           "name": "FDA_get_drug_name_from_patient_package_insert",
           "arguments": {
+              "patient_package_insert": "example_value"
           }
       }
       result = tu.run(query)
@@ -1816,7 +1866,7 @@ Retrieve the drug name based on information about drug abuse and dependence, inc
 
    **Parameters:**
 
-   * ``abuse_info`` (string) (optional)
+   * ``abuse_info`` (string) (required)
      Information about drug abuse and dependence.
 
    * ``limit`` (integer) (optional)
@@ -1832,6 +1882,7 @@ Retrieve the drug name based on information about drug abuse and dependence, inc
       query = {
           "name": "FDA_get_drug_names_by_abuse_dependence_info",
           "arguments": {
+              "abuse_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1852,7 +1903,7 @@ Retrieve drug names based on information about types of abuse and adverse reacti
 
    **Parameters:**
 
-   * ``abuse_info`` (string) (optional)
+   * ``abuse_info`` (string) (required)
      Information about the types of abuse that can occur with the drug.
 
    * ``indication`` (string) (optional)
@@ -1871,6 +1922,7 @@ Retrieve drug names based on information about types of abuse and adverse reacti
       query = {
           "name": "FDA_get_drug_names_by_abuse_info",
           "arguments": {
+              "abuse_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -1891,7 +1943,7 @@ Retrieve drug names based on the accessories field information.
 
    **Parameters:**
 
-   * ``accessory_name`` (string) (optional)
+   * ``accessory_name`` (string) (required)
      The name or part of the name of the accessory.
 
    * ``indication`` (string) (optional)
@@ -1910,6 +1962,7 @@ Retrieve drug names based on the accessories field information.
       query = {
           "name": "FDA_get_drug_names_by_accessories",
           "arguments": {
+              "accessory_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -1930,7 +1983,7 @@ Retrieve drug names based on the active ingredient information.
 
    **Parameters:**
 
-   * ``active_ingredient`` (string) (optional)
+   * ``active_ingredient`` (string) (required)
      The active ingredient in the drug product.
 
    * ``indication`` (string) (optional)
@@ -1949,6 +2002,7 @@ Retrieve drug names based on the active ingredient information.
       query = {
           "name": "FDA_get_drug_names_by_active_ingredient",
           "arguments": {
+              "active_ingredient": "example_value"
           }
       }
       result = tu.run(query)
@@ -1969,7 +2023,7 @@ Retrieve drug names based on the presence of specific alarms, which are related 
 
    **Parameters:**
 
-   * ``alarm_type`` (string) (optional)
+   * ``alarm_type`` (string) (required)
      The type of alarm to search for.
 
    * ``indication`` (string) (optional)
@@ -1988,6 +2042,7 @@ Retrieve drug names based on the presence of specific alarms, which are related 
       query = {
           "name": "FDA_get_drug_names_by_alarm",
           "arguments": {
+              "alarm_type": "example_value"
           }
       }
       result = tu.run(query)
@@ -2008,7 +2063,7 @@ Retrieve drug names based on animal pharmacology and toxicology information.  Wa
 
    **Parameters:**
 
-   * ``pharmacology_info`` (string) (optional)
+   * ``pharmacology_info`` (string) (required)
      Information from studies of the drug in animals.
 
    * ``indication`` (string) (optional)
@@ -2027,6 +2082,7 @@ Retrieve drug names based on animal pharmacology and toxicology information.  Wa
       query = {
           "name": "FDA_get_drug_names_by_animal_pharmacology_info",
           "arguments": {
+              "pharmacology_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2047,7 +2103,7 @@ Retrieve drug names based on the specified FDA application number or National Dr
 
    **Parameters:**
 
-   * ``application_manufacturer_or_NDC_info`` (string) (optional)
+   * ``application_manufacturer_or_NDC_info`` (string) (required)
      FDA application, manufacturer, or NDC number info
 
    * ``limit`` (integer) (optional)
@@ -2063,6 +2119,7 @@ Retrieve drug names based on the specified FDA application number or National Dr
       query = {
           "name": "FDA_get_drug_names_by_application_number_NDC_number",
           "arguments": {
+              "application_manufacturer_or_NDC_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2083,7 +2140,7 @@ Retrieve drug names based on assembly or installation instructions. Warning: Thi
 
    **Parameters:**
 
-   * ``field_info`` (string) (optional)
+   * ``field_info`` (string) (required)
      Information related to assembly or installation instructions.
 
    * ``indication`` (string) (optional)
@@ -2102,6 +2159,7 @@ Retrieve drug names based on assembly or installation instructions. Warning: Thi
       query = {
           "name": "FDA_get_drug_names_by_assembly_installation_info",
           "arguments": {
+              "field_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2122,7 +2180,7 @@ Retrieve drug names that have specific boxed warnings and adverse effects.
 
    **Parameters:**
 
-   * ``warning_text`` (string) (optional)
+   * ``warning_text`` (string) (required)
      The text of the boxed warning to search for.
 
    * ``indication`` (string) (optional)
@@ -2141,6 +2199,7 @@ Retrieve drug names that have specific boxed warnings and adverse effects.
       query = {
           "name": "FDA_get_drug_names_by_boxed_warning",
           "arguments": {
+              "warning_text": "example_value"
           }
       }
       result = tu.run(query)
@@ -2161,7 +2220,7 @@ Retrieve drug names based on whether the product should be kept out of the reach
 
    **Parameters:**
 
-   * ``child_safety_info`` (string) (optional)
+   * ``child_safety_info`` (string) (required)
      Information pertaining to whether the product should be kept out of the reach of children.
 
    * ``indication`` (string) (optional)
@@ -2180,6 +2239,7 @@ Retrieve drug names based on whether the product should be kept out of the reach
       query = {
           "name": "FDA_get_drug_names_by_child_safety_info",
           "arguments": {
+              "child_safety_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2200,7 +2260,7 @@ Retrieve drug names based on clinical pharmacology information. Warning: This to
 
    **Parameters:**
 
-   * ``clinical_pharmacology`` (string) (optional)
+   * ``clinical_pharmacology`` (string) (required)
      Information about the clinical pharmacology and actions of the drug in humans. Use key words
 
    * ``indication`` (string) (optional)
@@ -2219,6 +2279,7 @@ Retrieve drug names based on clinical pharmacology information. Warning: This to
       query = {
           "name": "FDA_get_drug_names_by_clinical_pharmacology",
           "arguments": {
+              "clinical_pharmacology": "example_value"
           }
       }
       result = tu.run(query)
@@ -2239,10 +2300,10 @@ Retrieve drug names based on the presence of clinical studies information.
 
    **Parameters:**
 
-   * ``clinical_studies`` (string) (optional)
+   * ``clinical_studies`` (string) (required)
      Information related to clinical studies. Use keywords split by blank space.
 
-   * ``indication`` (string) (optional)
+   * ``indication`` (string) (required)
      The indication or usage of the drug.
 
    * ``limit`` (integer) (optional)
@@ -2258,6 +2319,8 @@ Retrieve drug names based on the presence of clinical studies information.
       query = {
           "name": "FDA_get_drug_names_by_clinical_studies",
           "arguments": {
+              "clinical_studies": "example_value",
+              "indication": "example_value"
           }
       }
       result = tu.run(query)
@@ -2278,7 +2341,7 @@ Retrieve drug names based on information about when a doctor or pharmacist shoul
 
    **Parameters:**
 
-   * ``interaction_info`` (string) (optional)
+   * ``interaction_info`` (string) (required)
      Information about when a doctor or pharmacist should be consulted regarding drug interactions.
 
    * ``indication`` (string) (optional)
@@ -2297,6 +2360,7 @@ Retrieve drug names based on information about when a doctor or pharmacist shoul
       query = {
           "name": "FDA_get_drug_names_by_consulting_doctor_pharmacist_info",
           "arguments": {
+              "interaction_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2317,7 +2381,7 @@ Retrieve drug names based on specific contraindications information.
 
    **Parameters:**
 
-   * ``contraindication_info`` (string) (optional)
+   * ``contraindication_info`` (string) (required)
      Information about situations in which the drug product is contraindicated.
 
    * ``indication`` (string) (optional)
@@ -2336,6 +2400,7 @@ Retrieve drug names based on specific contraindications information.
       query = {
           "name": "FDA_get_drug_names_by_contraindications",
           "arguments": {
+              "contraindication_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2356,7 +2421,7 @@ Retrieve drug names based on the Drug Enforcement Administration (DEA) schedule 
 
    **Parameters:**
 
-   * ``controlled_substance_schedule`` (string) (optional)
+   * ``controlled_substance_schedule`` (string) (required)
      The schedule in which the drug is controlled by the Drug Enforcement Administration.
 
    * ``indication`` (string) (optional)
@@ -2375,6 +2440,7 @@ Retrieve drug names based on the Drug Enforcement Administration (DEA) schedule 
       query = {
           "name": "FDA_get_drug_names_by_controlled_substance_DEA_schedule",
           "arguments": {
+              "controlled_substance_schedule": "example_value"
           }
       }
       result = tu.run(query)
@@ -2395,7 +2461,7 @@ Fetch drug names based on information about dear health care provider letters. T
 
    **Parameters:**
 
-   * ``letter_info`` (string) (optional)
+   * ``letter_info`` (string) (required)
      Information about the specific dear health care provider letters.
 
    * ``indication`` (string) (optional)
@@ -2414,6 +2480,7 @@ Fetch drug names based on information about dear health care provider letters. T
       query = {
           "name": "FDA_get_drug_names_by_dear_health_care_provider_letter_info",
           "arguments": {
+              "letter_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2434,7 +2501,7 @@ Retrieve drug names based on disposal and waste handling information.
 
    **Parameters:**
 
-   * ``disposal_info`` (string) (optional)
+   * ``disposal_info`` (string) (required)
      Information related to the disposal and waste handling of the drug.
 
    * ``indication`` (string) (optional)
@@ -2453,6 +2520,7 @@ Retrieve drug names based on disposal and waste handling information.
       query = {
           "name": "FDA_get_drug_names_by_disposal_info",
           "arguments": {
+              "disposal_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2473,7 +2541,7 @@ Retrieve drug names based on specific dosage forms and strengths information.
 
    **Parameters:**
 
-   * ``dosage_forms_and_strengths`` (string) (optional)
+   * ``dosage_forms_and_strengths`` (string) (required)
      Information about the dosage forms and strengths of the drug.
 
    * ``indication`` (string) (optional)
@@ -2492,6 +2560,7 @@ Retrieve drug names based on specific dosage forms and strengths information.
       query = {
           "name": "FDA_get_drug_names_by_dosage_forms_and_strengths_info",
           "arguments": {
+              "dosage_forms_and_strengths": "example_value"
           }
       }
       result = tu.run(query)
@@ -2512,7 +2581,7 @@ Retrieve a list of drug names that have the specified drug interactions.
 
    **Parameters:**
 
-   * ``interaction_term`` (string) (optional)
+   * ``interaction_term`` (string) (required)
      The term to search for in drug interactions.
 
    * ``indication`` (string) (optional)
@@ -2531,6 +2600,7 @@ Retrieve a list of drug names that have the specified drug interactions.
       query = {
           "name": "FDA_get_drug_names_by_drug_interactions",
           "arguments": {
+              "interaction_term": "example_value"
           }
       }
       result = tu.run(query)
@@ -2551,7 +2621,7 @@ Retrieve drug names based on the effective time of the labeling document.
 
    **Parameters:**
 
-   * ``effective_time`` (string) (optional)
+   * ``effective_time`` (string) (required)
      Date reference to the particular version of the labeling document in YYYYmmdd format.
 
    * ``indication`` (string) (optional)
@@ -2570,6 +2640,7 @@ Retrieve drug names based on the effective time of the labeling document.
       query = {
           "name": "FDA_get_drug_names_by_effective_time",
           "arguments": {
+              "effective_time": "example_value"
           }
       }
       result = tu.run(query)
@@ -2590,7 +2661,7 @@ Retrieve drug names based on specific food safety warnings.
 
    **Parameters:**
 
-   * ``field_info`` (string) (optional)
+   * ``field_info`` (string) (required)
      Information related to food safety warnings.
 
    * ``indication`` (string) (optional)
@@ -2609,6 +2680,7 @@ Retrieve drug names based on specific food safety warnings.
       query = {
           "name": "FDA_get_drug_names_by_food_safety_warnings",
           "arguments": {
+              "field_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2629,7 +2701,7 @@ Retrieve drug names based on specific general precautions information.
 
    **Parameters:**
 
-   * ``precaution_info`` (string) (optional)
+   * ``precaution_info`` (string) (required)
      Information about any special care to be exercised for safe and effective use of the drug.
 
    * ``indication`` (string) (optional)
@@ -2648,6 +2720,7 @@ Retrieve drug names based on specific general precautions information.
       query = {
           "name": "FDA_get_drug_names_by_general_precautions",
           "arguments": {
+              "precaution_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2668,7 +2741,7 @@ Retrieve drug names that have specific information about geriatric use.
 
    **Parameters:**
 
-   * ``geriatric_use`` (string) (optional)
+   * ``geriatric_use`` (string) (required)
      Information about any limitations on any geriatric indications, needs for specific monitoring, hazards associated with use of the drug in the geriatric population.
 
    * ``indication`` (string) (optional)
@@ -2687,6 +2760,7 @@ Retrieve drug names that have specific information about geriatric use.
       query = {
           "name": "FDA_get_drug_names_by_geriatric_use",
           "arguments": {
+              "geriatric_use": "example_value"
           }
       }
       result = tu.run(query)
@@ -2707,7 +2781,7 @@ Retrieve drug names based on specific health claims.
 
    **Parameters:**
 
-   * ``health_claim`` (string) (optional)
+   * ``health_claim`` (string) (required)
      The health claim associated with the drug.
 
    * ``indication`` (string) (optional)
@@ -2726,6 +2800,7 @@ Retrieve drug names based on specific health claims.
       query = {
           "name": "FDA_get_drug_names_by_health_claim",
           "arguments": {
+              "health_claim": "example_value"
           }
       }
       result = tu.run(query)
@@ -2746,7 +2821,7 @@ Retrieve a list of drug names based on a specific indication or usage.
 
    **Parameters:**
 
-   * ``indication`` (string) (optional)
+   * ``indication`` (string) (required)
      The indication or usage of the drug.
 
    * ``limit`` (integer) (optional)
@@ -2762,6 +2837,7 @@ Retrieve a list of drug names based on a specific indication or usage.
       query = {
           "name": "FDA_get_drug_names_by_indication",
           "arguments": {
+              "indication": "example_value"
           }
       }
       result = tu.run(query)
@@ -2782,7 +2858,7 @@ Retrieve drug names based on information related to nursing mothers.
 
    **Parameters:**
 
-   * ``nursing_mothers_info`` (string) (optional)
+   * ``nursing_mothers_info`` (string) (required)
      Information about excretion of the drug in human milk and effects on the nursing infant.
 
    * ``indication`` (string) (optional)
@@ -2801,6 +2877,7 @@ Retrieve drug names based on information related to nursing mothers.
       query = {
           "name": "FDA_get_drug_names_by_info_for_nursing_mothers",
           "arguments": {
+              "nursing_mothers_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2821,7 +2898,7 @@ Retrieve drug names based on information for owners or caregivers.
 
    **Parameters:**
 
-   * ``field_info`` (string) (optional)
+   * ``field_info`` (string) (required)
      The specific information related to owners or caregivers to search for.
 
    * ``indication`` (string) (optional)
@@ -2840,6 +2917,7 @@ Retrieve drug names based on information for owners or caregivers.
       query = {
           "name": "FDA_get_drug_names_by_information_for_owners_or_caregivers",
           "arguments": {
+              "field_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -2860,7 +2938,7 @@ Retrieve drug names based on a specific ingredient present in the drug product.
 
    **Parameters:**
 
-   * ``ingredient_name`` (string) (optional)
+   * ``ingredient_name`` (string) (required)
      The name of the ingredient to search for in drug products.
 
    * ``indication`` (string) (optional)
@@ -2879,6 +2957,7 @@ Retrieve drug names based on a specific ingredient present in the drug product.
       query = {
           "name": "FDA_get_drug_names_by_ingredient",
           "arguments": {
+              "ingredient_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -2899,7 +2978,7 @@ Retrieve drug names based on specific instructions for use.
 
    **Parameters:**
 
-   * ``instructions_for_use`` (string) (optional)
+   * ``instructions_for_use`` (string) (required)
      Information about safe handling and use of the drug product.
 
    * ``indication`` (string) (optional)
@@ -2918,6 +2997,7 @@ Retrieve drug names based on specific instructions for use.
       query = {
           "name": "FDA_get_drug_names_by_instructions_for_use",
           "arguments": {
+              "instructions_for_use": "example_value"
           }
       }
       result = tu.run(query)
@@ -2938,7 +3018,7 @@ Retrieve drug names that have known interference with laboratory tests.
 
    **Parameters:**
 
-   * ``lab_test_interference`` (string) (optional)
+   * ``lab_test_interference`` (string) (required)
      Information about any known interference by the drug with laboratory tests.
 
    * ``indication`` (string) (optional)
@@ -2957,6 +3037,7 @@ Retrieve drug names that have known interference with laboratory tests.
       query = {
           "name": "FDA_get_drug_names_by_lab_test_interference",
           "arguments": {
+              "lab_test_interference": "example_value"
           }
       }
       result = tu.run(query)
@@ -2977,7 +3058,7 @@ Retrieve drug names based on laboratory tests information.
 
    **Parameters:**
 
-   * ``lab_test_info`` (string) (optional)
+   * ``lab_test_info`` (string) (required)
      Information related to laboratory tests.
 
    * ``indication`` (string) (optional)
@@ -2996,6 +3077,7 @@ Retrieve drug names based on laboratory tests information.
       query = {
           "name": "FDA_get_drug_names_by_lab_tests",
           "arguments": {
+              "lab_test_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3016,7 +3098,7 @@ Retrieve drug names based on the specified mechanism of action information.
 
    **Parameters:**
 
-   * ``mechanism_info`` (string) (optional)
+   * ``mechanism_info`` (string) (required)
      Information related to the desired mechanism of action.
 
    * ``indication`` (string) (optional)
@@ -3035,6 +3117,7 @@ Retrieve drug names based on the specified mechanism of action information.
       query = {
           "name": "FDA_get_drug_names_by_mechanism_of_action",
           "arguments": {
+              "mechanism_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3055,7 +3138,7 @@ Retrieve drug names based on the presence of specific information in the medicat
 
    **Parameters:**
 
-   * ``medguide_info`` (string) (optional)
+   * ``medguide_info`` (string) (required)
      Information contained in the medication guide.
 
    * ``indication`` (string) (optional)
@@ -3074,6 +3157,7 @@ Retrieve drug names based on the presence of specific information in the medicat
       query = {
           "name": "FDA_get_drug_names_by_medication_guide",
           "arguments": {
+              "medguide_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3094,7 +3178,7 @@ Retrieve drug names based on nonclinical toxicology information.
 
    **Parameters:**
 
-   * ``toxicology_info`` (string) (optional)
+   * ``toxicology_info`` (string) (required)
      Information about toxicology in non-human subjects.
 
    * ``indication`` (string) (optional)
@@ -3113,6 +3197,7 @@ Retrieve drug names based on nonclinical toxicology information.
       query = {
           "name": "FDA_get_drug_names_by_nonclinical_toxicology_info",
           "arguments": {
+              "toxicology_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3133,7 +3218,7 @@ Retrieve drug names based on the presence of nonteratogenic effects information.
 
    **Parameters:**
 
-   * ``nonteratogenic_effects`` (string) (optional)
+   * ``nonteratogenic_effects`` (string) (required)
      Information about the drug’s nonteratogenic effects.
 
    * ``indication`` (string) (optional)
@@ -3152,6 +3237,7 @@ Retrieve drug names based on the presence of nonteratogenic effects information.
       query = {
           "name": "FDA_get_drug_names_by_nonteratogenic_effects",
           "arguments": {
+              "nonteratogenic_effects": "example_value"
           }
       }
       result = tu.run(query)
@@ -3172,7 +3258,7 @@ Retrieve drug names based on information about signs, symptoms, and laboratory f
 
    **Parameters:**
 
-   * ``overdosage_info`` (string) (optional)
+   * ``overdosage_info`` (string) (required)
      Information about signs, symptoms, and laboratory findings of acute overdosage.
 
    * ``indication`` (string) (optional)
@@ -3191,6 +3277,7 @@ Retrieve drug names based on information about signs, symptoms, and laboratory f
       query = {
           "name": "FDA_get_drug_names_by_overdosage_info",
           "arguments": {
+              "overdosage_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3211,7 +3298,7 @@ Retrieve drug names based on pediatric use information.
 
    **Parameters:**
 
-   * ``pediatric_use_info`` (string) (optional)
+   * ``pediatric_use_info`` (string) (required)
      Information related to the safe and effective pediatric use of the drug.
 
    * ``indication`` (string) (optional)
@@ -3230,6 +3317,7 @@ Retrieve drug names based on pediatric use information.
       query = {
           "name": "FDA_get_drug_names_by_pediatric_use",
           "arguments": {
+              "pediatric_use_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3250,7 +3338,7 @@ Retrieve drug names based on specific pharmacokinetics information, such as abso
 
    **Parameters:**
 
-   * ``pharmacokinetics_info`` (string) (optional)
+   * ``pharmacokinetics_info`` (string) (required)
      Information about the clinically significant pharmacokinetics of a drug or active metabolites.
 
    * ``indication`` (string) (optional)
@@ -3269,6 +3357,7 @@ Retrieve drug names based on specific pharmacokinetics information, such as abso
       query = {
           "name": "FDA_get_drug_names_by_pharmacokinetics",
           "arguments": {
+              "pharmacokinetics_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3289,7 +3378,7 @@ Retrieve drug names based on their use in specific populations, such as pregnant
 
    **Parameters:**
 
-   * ``population_use`` (string) (optional)
+   * ``population_use`` (string) (required)
      The specific population use to search for (e.g., pregnant women, nursing mothers).
 
    * ``indication`` (string) (optional)
@@ -3308,6 +3397,7 @@ Retrieve drug names based on their use in specific populations, such as pregnant
       query = {
           "name": "FDA_get_drug_names_by_population_use",
           "arguments": {
+              "population_use": "example_value"
           }
       }
       result = tu.run(query)
@@ -3328,7 +3418,7 @@ Retrieve drug names based on information about effects the drug may have on preg
 
    **Parameters:**
 
-   * ``pregnancy_info`` (string) (optional)
+   * ``pregnancy_info`` (string) (required)
      Information about the effects on pregnancy to search for.
 
    * ``indication`` (string) (optional)
@@ -3347,6 +3437,7 @@ Retrieve drug names based on information about effects the drug may have on preg
       query = {
           "name": "FDA_get_drug_names_by_pregnancy_effects_info",
           "arguments": {
+              "pregnancy_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3367,7 +3458,7 @@ Retrieve drug names based on the presence of residue warnings.
 
    **Parameters:**
 
-   * ``residue_warning`` (string) (optional)
+   * ``residue_warning`` (string) (required)
      The residue warning information to search for.
 
    * ``indication`` (string) (optional)
@@ -3386,6 +3477,7 @@ Retrieve drug names based on the presence of residue warnings.
       query = {
           "name": "FDA_get_drug_names_by_residue_warning",
           "arguments": {
+              "residue_warning": "example_value"
           }
       }
       result = tu.run(query)
@@ -3406,7 +3498,7 @@ Retrieve drug names based on specific risk information, especially regarding pre
 
    **Parameters:**
 
-   * ``risk_info`` (string) (optional)
+   * ``risk_info`` (string) (required)
      Specific risk information to search for.
 
    * ``indication`` (string) (optional)
@@ -3425,6 +3517,7 @@ Retrieve drug names based on specific risk information, especially regarding pre
       query = {
           "name": "FDA_get_drug_names_by_risk",
           "arguments": {
+              "risk_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3445,7 +3538,7 @@ Retrieve the drug names based on the route of administration.
 
    **Parameters:**
 
-   * ``route`` (string) (optional)
+   * ``route`` (string) (required)
      The route of administration of the drug.
 
    * ``indication`` (string) (optional)
@@ -3464,6 +3557,7 @@ Retrieve the drug names based on the route of administration.
       query = {
           "name": "FDA_get_drug_names_by_route",
           "arguments": {
+              "route": "example_value"
           }
       }
       result = tu.run(query)
@@ -3484,7 +3578,7 @@ Retrieve drug names that have specific safe handling warnings.
 
    **Parameters:**
 
-   * ``safe_handling_warning`` (string) (optional)
+   * ``safe_handling_warning`` (string) (required)
      The specific safe handling warning to search for.
 
    * ``indication`` (string) (optional)
@@ -3503,6 +3597,7 @@ Retrieve drug names that have specific safe handling warnings.
       query = {
           "name": "FDA_get_drug_names_by_safe_handling_warning",
           "arguments": {
+              "safe_handling_warning": "example_value"
           }
       }
       result = tu.run(query)
@@ -3523,7 +3618,7 @@ Retrieve drug names based on the summary of safety and effectiveness information
 
    **Parameters:**
 
-   * ``summary_text`` (string) (optional)
+   * ``summary_text`` (string) (required)
      Text to search within the summary of safety and effectiveness field.
 
    * ``indication`` (string) (optional)
@@ -3542,6 +3637,7 @@ Retrieve drug names based on the summary of safety and effectiveness information
       query = {
           "name": "FDA_get_drug_names_by_safety_summary",
           "arguments": {
+              "summary_text": "example_value"
           }
       }
       result = tu.run(query)
@@ -3562,7 +3658,7 @@ Retrieve drug names based on Structured Product Labeling (SPL) indexing data ele
 
    **Parameters:**
 
-   * ``spl_indexing_data_elements`` (string) (optional)
+   * ``spl_indexing_data_elements`` (string) (required)
      The SPL indexing data elements to search for.
 
    * ``indication`` (string) (optional)
@@ -3581,6 +3677,7 @@ Retrieve drug names based on Structured Product Labeling (SPL) indexing data ele
       query = {
           "name": "FDA_get_drug_names_by_spl_indexing_data_elements",
           "arguments": {
+              "spl_indexing_data_elements": "example_value"
           }
       }
       result = tu.run(query)
@@ -3601,7 +3698,7 @@ Retrieve drug names based on specific teratogenic effects categories.
 
    **Parameters:**
 
-   * ``teratogenic_effects`` (string) (optional)
+   * ``teratogenic_effects`` (string) (required)
      The teratogenic effects category to search for (e.g., Pregnancy category A, B, C, D, or X).
 
    * ``indication`` (string) (optional)
@@ -3620,6 +3717,7 @@ Retrieve drug names based on specific teratogenic effects categories.
       query = {
           "name": "FDA_get_drug_names_by_teratogenic_effects",
           "arguments": {
+              "teratogenic_effects": "example_value"
           }
       }
       result = tu.run(query)
@@ -3640,7 +3738,7 @@ Retrieve drug names that have specific user safety warnings.
 
    **Parameters:**
 
-   * ``safety_warning`` (string) (optional)
+   * ``safety_warning`` (string) (required)
      The specific safety warning to search for.
 
    * ``indication`` (string) (optional)
@@ -3659,6 +3757,7 @@ Retrieve drug names that have specific user safety warnings.
       query = {
           "name": "FDA_get_drug_names_by_user_safety_warning",
           "arguments": {
+              "safety_warning": "example_value"
           }
       }
       result = tu.run(query)
@@ -3679,7 +3778,7 @@ Retrieve drug names based on specific warnings and cautions information.
 
    **Parameters:**
 
-   * ``warnings_and_cautions_info`` (string) (optional)
+   * ``warnings_and_cautions_info`` (string) (required)
      The warnings and cautions text to search for.
 
    * ``indication`` (string) (optional)
@@ -3698,6 +3797,7 @@ Retrieve drug names based on specific warnings and cautions information.
       query = {
           "name": "FDA_get_drug_names_by_warnings_and_cautions",
           "arguments": {
+              "warnings_and_cautions_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3718,7 +3818,7 @@ Retrieve drug names based on the presence of carcinogenic, mutagenic, or fertili
 
    **Parameters:**
 
-   * ``carcinogenic_info`` (string) (optional)
+   * ``carcinogenic_info`` (string) (required)
      Information about carcinogenic, mutagenic, or fertility impairment potential.
 
    * ``indication`` (string) (optional)
@@ -3737,6 +3837,7 @@ Retrieve drug names based on the presence of carcinogenic, mutagenic, or fertili
       query = {
           "name": "FDA_get_drugs_by_carcinogenic_mutagenic_fertility",
           "arguments": {
+              "carcinogenic_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -3757,7 +3858,7 @@ Retrieve effective time of the labeling document based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3773,6 +3874,7 @@ Retrieve effective time of the labeling document based on the drug name.
       query = {
           "name": "FDA_get_effective_time_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3793,7 +3895,7 @@ Fetch environmental warnings for a specific drug based on its name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3809,6 +3911,7 @@ Fetch environmental warnings for a specific drug based on its name.
       query = {
           "name": "FDA_get_environmental_warning_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3829,7 +3932,7 @@ Retrieve general precautions information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3845,6 +3948,7 @@ Retrieve general precautions information based on the drug name.
       query = {
           "name": "FDA_get_general_precautions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3865,7 +3969,7 @@ Retrieve information about geriatric use based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3881,6 +3985,7 @@ Retrieve information about geriatric use based on the drug name.
       query = {
           "name": "FDA_get_geriatric_use_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3901,7 +4006,7 @@ Retrieve health claims associated with a specific drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3917,6 +4022,7 @@ Retrieve health claims associated with a specific drug name.
       query = {
           "name": "FDA_get_health_claims_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3937,7 +4043,7 @@ Fetch a list of inactive ingredients in a specific drug product based on the dru
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3953,6 +4059,7 @@ Fetch a list of inactive ingredients in a specific drug product based on the dru
       query = {
           "name": "FDA_get_inactive_ingredient_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -3973,7 +4080,7 @@ Retrieve indications and usage information based on a specific drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -3989,6 +4096,7 @@ Retrieve indications and usage information based on a specific drug name.
       query = {
           "name": "FDA_get_indications_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4009,7 +4117,7 @@ Retrieve information about nursing mothers for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4025,6 +4133,7 @@ Retrieve information about nursing mothers for a specific drug.
       query = {
           "name": "FDA_get_info_for_nursing_mothers_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4045,7 +4154,7 @@ Fetch information for patients based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4061,6 +4170,7 @@ Fetch information for patients based on the drug name.
       query = {
           "name": "FDA_get_info_for_patients_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4081,7 +4191,7 @@ Get information about when a doctor should be consulted before using a specific 
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4097,6 +4207,7 @@ Get information about when a doctor should be consulted before using a specific 
       query = {
           "name": "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4117,7 +4228,7 @@ Get information about when a doctor or pharmacist should be consulted regarding 
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4133,6 +4244,7 @@ Get information about when a doctor or pharmacist should be consulted regarding 
       query = {
           "name": "FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4153,7 +4265,7 @@ Retrieve specific information for owners or caregivers based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4169,6 +4281,7 @@ Retrieve specific information for owners or caregivers based on the drug name.
       query = {
           "name": "FDA_get_information_for_owners_or_caregivers_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4189,7 +4302,7 @@ Retrieve a list of drug ingredients based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4205,6 +4318,7 @@ Retrieve a list of drug ingredients based on the drug name.
       query = {
           "name": "FDA_get_ingredients_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4225,7 +4339,7 @@ Retrieve instructions for use information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4241,6 +4355,7 @@ Retrieve instructions for use information based on the drug name.
       query = {
           "name": "FDA_get_instructions_for_use_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4261,7 +4376,7 @@ Retrieve information about laboratory test interferences for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4277,6 +4392,7 @@ Retrieve information about laboratory test interferences for a specific drug.
       query = {
           "name": "FDA_get_lab_test_interference_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4297,7 +4413,7 @@ Retrieve laboratory tests information based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4313,6 +4429,7 @@ Retrieve laboratory tests information based on drug names.
       query = {
           "name": "FDA_get_lab_tests_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4333,7 +4450,7 @@ Retrieve information about the drug’s use during labor or delivery based on th
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4349,6 +4466,7 @@ Retrieve information about the drug’s use during labor or delivery based on th
       query = {
           "name": "FDA_get_labor_and_delivery_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4369,7 +4487,7 @@ Retrieve detailed information about a drug's active ingredient, FDA application 
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4385,6 +4503,7 @@ Retrieve detailed information about a drug's active ingredient, FDA application 
       query = {
           "name": "FDA_get_manufacturer_name_NDC_number_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4405,7 +4524,7 @@ Retrieve the mechanism of action information for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4421,6 +4540,7 @@ Retrieve the mechanism of action information for a specific drug.
       query = {
           "name": "FDA_get_mechanism_of_action_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4441,7 +4561,7 @@ Retrieve medication guide information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4457,6 +4577,7 @@ Retrieve medication guide information based on the drug name.
       query = {
           "name": "FDA_get_medication_guide_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4477,7 +4598,7 @@ Retrieve microbiology information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4493,6 +4614,7 @@ Retrieve microbiology information based on the drug name.
       query = {
           "name": "FDA_get_microbiology_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4513,7 +4635,7 @@ Retrieve nonclinical toxicology information based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4529,6 +4651,7 @@ Retrieve nonclinical toxicology information based on drug names.
       query = {
           "name": "FDA_get_nonclinical_toxicology_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4549,7 +4672,7 @@ Retrieve information about nonteratogenic effects based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4565,6 +4688,7 @@ Retrieve information about nonteratogenic effects based on the drug name.
       query = {
           "name": "FDA_get_nonteratogenic_effects_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4585,7 +4709,7 @@ Retrieve safety information that may not be specified in other fields based on t
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4601,6 +4725,7 @@ Retrieve safety information that may not be specified in other fields based on t
       query = {
           "name": "FDA_get_other_safety_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4621,7 +4746,7 @@ Retrieve information about signs, symptoms, and laboratory findings of acute ove
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4637,6 +4762,7 @@ Retrieve information about signs, symptoms, and laboratory findings of acute ove
       query = {
           "name": "FDA_get_overdosage_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4657,7 +4783,7 @@ Retrieve the patient package insert information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4673,6 +4799,7 @@ Retrieve the patient package insert information based on the drug name.
       query = {
           "name": "FDA_get_patient_package_insert_from_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4693,7 +4820,7 @@ Retrieve pediatric use information based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4709,6 +4836,7 @@ Retrieve pediatric use information based on drug names.
       query = {
           "name": "FDA_get_pediatric_use_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4729,7 +4857,7 @@ Retrieve pharmacodynamics information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4745,6 +4873,7 @@ Retrieve pharmacodynamics information based on the drug name.
       query = {
           "name": "FDA_get_pharmacodynamics_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4765,7 +4894,7 @@ Retrieve pharmacogenomics information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4781,6 +4910,7 @@ Retrieve pharmacogenomics information based on the drug name.
       query = {
           "name": "FDA_get_pharmacogenomics_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4801,7 +4931,7 @@ Retrieve pharmacokinetics information (e.g. absorption, distribution, eliminatio
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4817,6 +4947,7 @@ Retrieve pharmacokinetics information (e.g. absorption, distribution, eliminatio
       query = {
           "name": "FDA_get_pharmacokinetics_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4837,7 +4968,7 @@ Retrieve information about the use of a drug in specific populations based on th
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4853,6 +4984,7 @@ Retrieve information about the use of a drug in specific populations based on th
       query = {
           "name": "FDA_get_population_use_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4873,7 +5005,7 @@ Retrieve precautions information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4889,6 +5021,7 @@ Retrieve precautions information based on the drug name.
       query = {
           "name": "FDA_get_precautions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4909,7 +5042,7 @@ Retrieve information about the effects on pregnancy for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4925,6 +5058,7 @@ Retrieve information about the effects on pregnancy for a specific drug.
       query = {
           "name": "FDA_get_pregnancy_effects_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4945,7 +5079,7 @@ Retrieve the pregnancy or breastfeeding information based on the specified drug 
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4961,6 +5095,7 @@ Retrieve the pregnancy or breastfeeding information based on the specified drug 
       query = {
           "name": "FDA_get_pregnancy_or_breastfeeding_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -4981,7 +5116,7 @@ Retrieve the content of the principal display panel of the product package based
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -4997,6 +5132,7 @@ Retrieve the content of the principal display panel of the product package based
       query = {
           "name": "FDA_get_principal_display_panel_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5017,7 +5153,7 @@ Retrieve about the drug product’s indications for use based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5033,6 +5169,7 @@ Retrieve about the drug product’s indications for use based on the drug name.
       query = {
           "name": "FDA_get_purpose_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5053,7 +5190,7 @@ Retrieve recent major changes in labeling for a specific drug.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5069,6 +5206,7 @@ Retrieve recent major changes in labeling for a specific drug.
       query = {
           "name": "FDA_get_recent_changes_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5089,7 +5227,7 @@ Retrieve reference information based on the drug name provided.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5105,6 +5243,7 @@ Retrieve reference information based on the drug name provided.
       query = {
           "name": "FDA_get_reference_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5125,7 +5264,7 @@ Retrieve the residue warning based on drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5141,6 +5280,7 @@ Retrieve the residue warning based on drug name.
       query = {
           "name": "FDA_get_residue_warning_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5161,7 +5301,7 @@ Retrieve risk information (especially regarding pregnancy or breastfeeding) base
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5177,6 +5317,7 @@ Retrieve risk information (especially regarding pregnancy or breastfeeding) base
       query = {
           "name": "FDA_get_risk_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5197,7 +5338,7 @@ Retrieve the route of administration information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5213,6 +5354,7 @@ Retrieve the route of administration information based on the drug name.
       query = {
           "name": "FDA_get_route_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5233,7 +5375,7 @@ Retrieve safe handling warnings for a specific drug based on its name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5249,6 +5391,7 @@ Retrieve safe handling warnings for a specific drug based on its name.
       query = {
           "name": "FDA_get_safe_handling_warnings_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5269,7 +5412,7 @@ Retrieve a summary of safety and effectiveness information based on the drug nam
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug (either brand name or generic name).
 
    * ``limit`` (integer) (optional)
@@ -5285,6 +5428,7 @@ Retrieve a summary of safety and effectiveness information based on the drug nam
       query = {
           "name": "FDA_get_safety_summary_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5305,7 +5449,7 @@ Retrieve Structured Product Labeling (SPL) indexing data elements based on drug 
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5321,6 +5465,7 @@ Retrieve Structured Product Labeling (SPL) indexing data elements based on drug 
       query = {
           "name": "FDA_get_spl_indexing_data_elements_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5341,7 +5486,7 @@ Retrieve the SPL unclassified section information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5357,6 +5502,7 @@ Retrieve the SPL unclassified section information based on the drug name.
       query = {
           "name": "FDA_get_spl_unclassified_section_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5377,7 +5523,7 @@ Retrieve stop use information based on the drug name provided.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5393,6 +5539,7 @@ Retrieve stop use information based on the drug name provided.
       query = {
           "name": "FDA_get_stop_use_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5413,7 +5560,7 @@ Retrieve storage and handling information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5429,6 +5576,7 @@ Retrieve storage and handling information based on the drug name.
       query = {
           "name": "FDA_get_storage_and_handling_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5449,7 +5597,7 @@ Retrieve teratogenic effects information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug (either brand name or generic name).
 
    * ``limit`` (integer) (optional)
@@ -5465,6 +5613,7 @@ Retrieve teratogenic effects information based on the drug name.
       query = {
           "name": "FDA_get_teratogenic_effects_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5485,7 +5634,7 @@ Retrieve specific user safety warnings based on drug names.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The specific drug name.
 
    * ``limit`` (integer) (optional)
@@ -5501,6 +5650,7 @@ Retrieve specific user safety warnings based on drug names.
       query = {
           "name": "FDA_get_user_safety_warning_by_drug_names",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5521,7 +5671,7 @@ Retrieve warnings and cautions information for a specific drug based on its name
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5537,6 +5687,7 @@ Retrieve warnings and cautions information for a specific drug based on its name
       query = {
           "name": "FDA_get_warnings_and_cautions_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5557,7 +5708,7 @@ Retrieve warning information based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5573,6 +5724,7 @@ Retrieve warning information based on the drug name.
       query = {
           "name": "FDA_get_warnings_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5593,7 +5745,7 @@ Retrieve information about side effects and substances or activities to avoid wh
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5609,6 +5761,7 @@ Retrieve information about side effects and substances or activities to avoid wh
       query = {
           "name": "FDA_get_when_using_info",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5629,7 +5782,7 @@ Retrieve the intended use of the device based on the drug name.
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5645,6 +5798,7 @@ Retrieve the intended use of the device based on the drug name.
       query = {
           "name": "FDA_retrieve_device_use_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -5665,7 +5819,7 @@ Retrieve the drug name based on the intended use of the device.
 
    **Parameters:**
 
-   * ``intended_use_of_the_device`` (string) (optional)
+   * ``intended_use_of_the_device`` (string) (required)
      The intended use of the device.
 
    * ``limit`` (integer) (optional)
@@ -5681,6 +5835,7 @@ Retrieve the drug name based on the intended use of the device.
       query = {
           "name": "FDA_retrieve_drug_name_by_device_use",
           "arguments": {
+              "intended_use_of_the_device": "example_value"
           }
       }
       result = tu.run(query)
@@ -5701,7 +5856,7 @@ Retrieve drug names based on patient medication information, which is about safe
 
    **Parameters:**
 
-   * ``patient_info`` (string) (optional)
+   * ``patient_info`` (string) (required)
      Information or instructions to patients about safe use of the drug product.
 
    * ``limit`` (integer) (optional)
@@ -5717,6 +5872,7 @@ Retrieve drug names based on patient medication information, which is about safe
       query = {
           "name": "FDA_retrieve_drug_names_by_patient_medication_info",
           "arguments": {
+              "patient_info": "example_value"
           }
       }
       result = tu.run(query)
@@ -5737,7 +5893,7 @@ Retrieve patient medication information (which is about safe use of the drug) ba
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      The name of the drug.
 
    * ``limit`` (integer) (optional)
@@ -5753,6 +5909,7 @@ Retrieve patient medication information (which is about safe use of the drug) ba
       query = {
           "name": "FDA_retrieve_patient_medication_info_by_drug_name",
           "arguments": {
+              "drug_name": "example_value"
           }
       }
       result = tu.run(query)

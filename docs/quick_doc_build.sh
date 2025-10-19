@@ -9,19 +9,9 @@
 # 4. Generate enhanced API documentation
 # 5. Build multi-language HTML documentation (English + Chinese by default)
 # 6. Create language switcher interface
-# 7. Provide local server# Display script execution completion and new features introduction
-echo -e "\n${GREEN}✅ Enhanced documentation system completed!${NC}"
-echo -e "${BLUE}💡 Features:${NC}"
-echo -e "   ✨ Automatic discovery of all modules and functions"
-echo -e "   🌍 Multi-language support (English & Chinese)"
-echo -e "   🔄 Language switcher in navigation bar"
-echo -e "   📊 Detailed statistics"
-echo -e "   🔍 Enhanced module discovery"
-echo -e "   📚 Comprehensive API index"
-echo -e "   🎨 Modern Shibuya theme"
-echo -e "   📱 Responsive design"
-echo -e "   🔍 Built-in search functionality"
-echo -e "   🌓 Dark/Light mode toggle"Usage:
+# 7. Provide local server startup
+
+# Usage:
 #   ./quick_doc_build.sh                    # Build both English and Chinese
 #   DOC_LANGUAGES=en ./quick_doc_build.sh   # Build English only
 #   DOC_LANGUAGES=zh_CN ./quick_doc_build.sh # Build Chinese only
@@ -46,8 +36,8 @@ echo "========================================"
 # Configure build behavior via environment flags
 DOC_LANGUAGES_RAW="${DOC_LANGUAGES:-en,zh_CN}"  # Default to both English and Chinese
 DOC_SKIP_REMOTE="${DOC_SKIP_REMOTE:-0}"
-DOC_SKIP_SERVER_PROMPT="${DOC_SKIP_SERVER_PROMPT:-0}"
-DOC_SKIP_INSTALL="${DOC_SKIP_INSTALL:-0}"  # Skip dependency installation if already done
+DOC_SKIP_SERVER_PROMPT="${DOC_SKIP_SERVER_PROMPT:-1}"
+DOC_SKIP_INSTALL="${DOC_SKIP_INSTALL:-1}"  # Skip dependency installation if already done
 DOC_OPTIMIZED="${DOC_OPTIMIZED:-0}"  # Use optimized build settings
 DOCS_STRICT="${DOCS_STRICT:-0}"
 CI="${CI:-}"
@@ -135,21 +125,10 @@ fi
 # Install Python packages required for building documentation
 if [ "${DOC_SKIP_INSTALL}" = "1" ]; then
   echo -e "\n${YELLOW}⏭️ Skipping dependency installation (DOC_SKIP_INSTALL=1)${NC}"
+  echo -e "${BLUE}💡 To install dependencies manually: pip install sphinx shibuya furo myst-parser${NC}"
 else
   echo -e "\n${BLUE}📦 Installing enhanced documentation dependencies${NC}"
   cd "$PROJECT_ROOT"
-
-  # Prefer local virtualenv if exists; otherwise, create one for isolation
-  if [ -d ".venv" ]; then
-    # shellcheck disable=SC1091
-    source .venv/bin/activate || true
-  else
-    if command -v python3 >/dev/null 2>&1; then
-      python3 -m venv .venv || true
-      # shellcheck disable=SC1091
-      source .venv/bin/activate || true
-    fi
-  fi
 
   # Install via project extras if possible; fallback to explicit list
   COMMON_PACKAGES="sphinx shibuya furo pydata-sphinx-theme myst-parser linkify-it-py sphinx-copybutton sphinx-design sphinx-tabs sphinx-notfound-page sphinx-autodoc-typehints sphinx-intl"
@@ -251,19 +230,24 @@ mkdir -p api
 # Use sphinx-apidoc to generate API documentation
 # ===========================================
 # Check if sphinx-apidoc command is available
+SPHINX_APIDOC=""
 if command -v sphinx-apidoc >/dev/null 2>&1; then
+  SPHINX_APIDOC="sphinx-apidoc"
+fi
+
+if [ -n "$SPHINX_APIDOC" ]; then
     # Determine sphinx-apidoc flags based on optimization mode
     if [ "${DOC_OPTIMIZED}" = "1" ]; then
-      # Optimized mode: faster builds, skip unchanged files
-      echo -e "${YELLOW}Using optimized API generation (skip unchanged files, maxdepth 4)${NC}"
-      APIDOC_FLAGS="-o api ../src/tooluniverse --separate --module-first --maxdepth 4 --templatedir=_templates"
+      # Optimized mode: faster builds, group functions by module
+      echo -e "${YELLOW}Using optimized API generation (grouped by module, maxdepth 3)${NC}"
+      APIDOC_FLAGS="-o api ../src/tooluniverse --module-first --maxdepth 3 --templatedir=_templates"
     else
-      # Full mode: regenerate everything
-      APIDOC_FLAGS="-f -o api ../src/tooluniverse --separate --module-first --maxdepth 6 --private --force --templatedir=_templates"
+      # Full mode: regenerate everything but group by module for better performance
+      APIDOC_FLAGS="-f -o api ../src/tooluniverse --module-first --maxdepth 4 --private --force --templatedir=_templates"
     fi
     
     # Use sphinx-apidoc to scan source code and generate API documentation
-    sphinx-apidoc $APIDOC_FLAGS 2>/dev/null || true
+    $SPHINX_APIDOC $APIDOC_FLAGS 2>/dev/null || true
 
     # Count generated API documentation files
     API_FILES=$(find api -name "*.rst" | wc -l | tr -d ' ')
@@ -316,6 +300,8 @@ fi
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR"
 OUTPUT_DIR="_build/html"
+
+echo -e "${YELLOW}Using system Python: $(which python)${NC}"
 
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
@@ -536,6 +522,7 @@ if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ]; then
     echo -e "${BLUE}🤖 CI environment detected, skipping server startup${NC}"
 elif [ "$DOC_SKIP_SERVER_PROMPT" = "1" ]; then
   echo -e "${YELLOW}⏭️ Skipping server prompt (DOC_SKIP_SERVER_PROMPT=1)${NC}"
+  echo -e "${BLUE}💡 To start server manually: cd _build/html && python -m http.server 8080${NC}"
 else
     # Ask user if they want to start local HTTP server to preview documentation
     echo -e "\n${YELLOW}Start local server to view documentation? (y/n)${NC}"

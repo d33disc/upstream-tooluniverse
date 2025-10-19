@@ -104,10 +104,10 @@ Multi-agent literature search system that uses AI agents to analyze intent, extr
    * ``query`` (string) (required)
      The research query to search for
 
-   * ``max_iterations`` (integer) (optional)
+   * ``max_iterations`` (integer) (required)
      Maximum number of iterations (default: 3)
 
-   * ``quality_threshold`` (number) (optional)
+   * ``quality_threshold`` (number) (required)
      Quality threshold for completion (default: 0.7)
 
    **Example Usage:**
@@ -117,7 +117,9 @@ Multi-agent literature search system that uses AI agents to analyze intent, extr
       query = {
           "name": "MultiAgentLiteratureSearch",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_iterations": 10,
+              "quality_threshold": "example_value"
           }
       }
       result = tu.run(query)

@@ -7,672 +7,745 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  ToolUniverse\n"
+"Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-09 12:42-0400\n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:1
-#: 74acff72da7b4fb4a6d2f4d46c2d3c1b
+#: 2c55c1f583ae4e59bbf19d4aa89d8c42
 msgid "Adding Tools to ToolUniverse - Complete Tutorial"
 msgstr "将工具添加到 ToolUniverse —— 完整教程"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:3
-#: 851bd847032b4f369f73ddfde9ecf045
+#: 361f22f0740b41ee8c24a9f1da45c1b4
+#, fuzzy
 msgid ""
-"This tutorial covers everything you need to know about adding custom "
-"tools to ToolUniverse using the new decorator-based auto-registration "
-"system."
+"This tutorial covers everything you need to know about adding custom tools "
+"to ToolUniverse using the decorator-based auto-registration system."
 msgstr "本教程涵盖了使用基于装饰器的新自动注册系统向 ToolUniverse 添加自定义工具所需了解的所有内容。"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:5
-#: a713a4b32be146339ac3dc9db2094fe8
+#: 19c31ec83067405391f798257a624618
 msgid "Table of Contents"
 msgstr "目录"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:6
-#: 9d71990bb00844568b625d80698525fd
+#: bd6b46c83a29460a9bb635acab549904
 #, fuzzy
 msgid ":ref:`overview`"
 msgstr "概述"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:7
-#: b9a3f613c8914c2e986bbf812b3b973c
+#: 9d481a6e5e584aa0ae601e68135b4292
 #, fuzzy
 msgid ":ref:`development-environment-setup`"
 msgstr "开发环境设置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:8
-#: 13bd0b59e2b14779a540abc7fb1cdc7c
+#: c83d2b8ce2c34aaabea601030004a479
 #, fuzzy
 msgid ":ref:`quick-start`"
 msgstr "快速入门"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:9
-#: 589ac13db4fb41c2a8628b7868a9c68c
+#: a447b37bb33a4df598600ccbdef4b3f3
 #, fuzzy
 msgid ":ref:`method-1-decorator-registration-recommended`"
 msgstr "方法一：装饰器注册（推荐）"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:10
-#: 98d4986501fe4d1abeb930cf852bddc5
+#: 7c6428b491994151a7f76f1e85ead3b5
 #, fuzzy
 msgid ":ref:`method-2-manual-registration`"
 msgstr "方法二：手动注册"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:11
-#: ba2334a9a17d424c9e70df0038820261
+#: b40dfcba0e144ecd995eb825fb7b7e9d
 #, fuzzy
 msgid ":ref:`tool-configuration`"
 msgstr "工具配置"
 
 #: ../../tutorials/addtools/Adding_Tools_Tutorial.md:12
-#: 3dfa73cf8ec1415893ba3884bec8d03b
+#: 3884c17a148f41d19148659bd944cd21
+msgid ":ref:`parameter-validation-and-error-handling`"
+msgstr ":ref:`参数验证与错误处理`"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:13
+#: 107fd755f8684e3f88ccd29ed4788122
 #, fuzzy
 msgid ":ref:`real-world-examples`"
 msgstr "实际案例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:13
-#: 0eaa7c0c5e184a7c96fd1dba3860cda1
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:14
+#: fcb9e06dd6cf403d82f6d5e029fe2301
 #, fuzzy
 msgid ":ref:`best-practices`"
 msgstr "最佳实践"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:14
-#: 78dce3d62b294158a2be1335dabf129b
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:15
+#: e8f847f8221045db97a0a047020238db
 #, fuzzy
 msgid ":ref:`troubleshooting`"
 msgstr "故障排除"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:16
-#: 88332f15d7bd4e69ab1950185ff7ba02
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:17
+#: 7f9e4e7dcf7443eb8d995394d7222e0d
 #, fuzzy
 msgid ".. _overview:"
 msgstr "概述"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:18
-#: 5dc70ee9535f4442a7428d5e789554ca
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:19
+#: eed5857bc645403bbdb178c71d780c71
 msgid "Overview"
 msgstr "概述"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:20
-#: 4c674432e2da489a934da3ca23d9cc86
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:21
+#: b89c527e1b6a4e529c1d26e3831d3635
+#, fuzzy
 msgid ""
-"ToolUniverse now supports **automatic tool discovery** through "
-"decorators. When you add a new tool, it's automatically registered and "
-"available without needing to manually edit core files."
+"ToolUniverse supports **automatic tool discovery** through decorators. When "
+"you add a new tool, it's automatically registered and available without "
+"needing to manually edit core files."
 msgstr "ToolUniverse 现在通过装饰器支持**自动工具发现**功能。添加新工具时，系统会自动注册并使其可用，无需手动编辑核心文件。"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:22
-#: 3df0f241d0624fb4aed6c20385084d44
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:23
+#: f8bee48abcfc490e8ca4afb5c2fbd8e7
 msgid "What You Can Add"
 msgstr "您可以添加"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:23
-#: fdbac6729290454fb0a200cd6d168768
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:24
+#: 0349640e039846d2a7e18c8c730c4f43
 msgid "Custom API wrappers"
 msgstr "自定义 API 封装"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:24
-#: ac5f791c8dc84ccdacca5cf1a854e007
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:25
+#: d5083f4805194a04bdc4afb805f798a4
 msgid "Data processing tools"
 msgstr "数据处理工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:25
-#: 81cce00be18b47318b268a36d54cfac4
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:26
+#: b0f94485c23d46949c336d6311df92c2
 msgid "File manipulation utilities"
 msgstr "文件操作工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:26
-#: 865fb5157bc047fa87390d9d6225370e
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:27
+#: c05f2eb2d31d4a34843e0bdb3a6c03b6
 msgid "External service integrations"
 msgstr "外部服务集成"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:27
-#: 58d2ec4cd7094a97b0dc677dd7e32f7a
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:28
+#: 605ed0ae82a54616b0133054a6806593
 msgid "Analysis and computation tools"
 msgstr "分析与计算工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:29
-#: 7a489e5978d74a019a73e8ba2bdc4c7c
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:30
+#: ff697ad3225e46e59416c8cc2e8cf000
 msgid "What Changed"
 msgstr "变更内容"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:30
-#: 6d6ee727b5604893bd904678129f9dd5
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:31
+#: b2da19e2ce39493ea0137977a701aacf
 msgid "❌ **Before**: Manual imports and mappings in `execute_function.py`"
 msgstr "❌ **之前**：在 `execute_function.py` 中的手动导入和映射"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:31
-#: 887aeca621024d6996ff203e4c0579ed
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:32
+#: b0644fc0a49145b2b4363109ce6ac2ea
 msgid "✅ **Now**: Simple decorator registration with auto-discovery"
 msgstr "✅ **现在**：使用自动发现功能进行简单的装饰器注册"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:33
-#: 05c187ac14044bf1b837525739a968ea
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:34
+#: 02d947c93def41b188c7e6e6da4a5ea5
 #, fuzzy
 msgid ".. _development-environment-setup:"
 msgstr "开发环境设置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:35
-#: 51651d6f100545d2bc15a006ad7efba5
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:36
+#: 62138460fc8843179bb4903e7c2fb8f1
 msgid "Development Environment Setup"
 msgstr "开发环境设置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:37
-#: dc3f90473dd14190a3f1e196a0c514a8
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:38
+#: 98ae9f3601c14af4adcad5a4ba2c8314
 msgid ""
-"Before adding tools, ensure you have the proper development environment "
-"set up:"
+"Before adding tools, ensure you have the proper development environment set "
+"up:"
 msgstr "在添加工具之前，请确保已正确设置开发环境："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:39
-#: 748571eef5bb4782ba329cafc55a6a07
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:40
+#: 89b7c4c7c49a49ceb6983f916791ae3d
 msgid "1. Clone and Install ToolUniverse"
 msgstr "1. 克隆并安装 ToolUniverse"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:50
-#: 5cd054db0f344a9bab4f7c176819f201
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:51
+#: 76b786a40b534d36aa60eb2283ade281
 msgid "2. Set Up Pre-commit Hooks (Recommended)"
 msgstr "2. 设置预提交钩子（推荐）"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:52
-#: b5b28279765244839a157e84699e3013
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:53
+#: 2ab417d978c9437f95158747c58a0323
 msgid "**Automatic Setup:**"
 msgstr "**自动设置：**"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:58
-#: 8cda5d9637d54902bf82bff958be4899
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:59
+#: 6d56a3e83a7e413b9eebf037a4ca8a18
 msgid "**Manual Setup:**"
 msgstr "**手动设置：**"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:70
-#: de4b74e30de14522b4bcd4f9555bf644
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:71
+#: d979bdde539d485f90f9cb8444d40737
 msgid "**Pre-commit Benefits:**"
 msgstr "**预提交的优势：**"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:71
-#: 35b28ba22046470298566117a55c8cf0
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:72
+#: 9caee218225f49f4a42e67d70b45deb5
 msgid "✅ **Automatic code formatting** with Black"
 msgstr "✅ **使用 Black 进行自动代码格式化**"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:72
-#: 8334e719b91843a3974288de556425ef
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:73
+#: 7f98c2fa7da84d479b3324a7cdf3a6c9
 msgid "✅ **Code linting** with flake8 and ruff"
 msgstr "✅ 使用 flake8 和 ruff 进行代码静态检查"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:73
-#: df17491e806544289cab6d355624befe
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:74
+#: 61e3f034d9df47b58b0bf1e5017c6924
 msgid "✅ **Import cleanup** with autoflake"
 msgstr "✅ 使用 autoflake 进行 **导入清理**"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:74
-#: 825e3389c69b4f42a5634ed4f33bc4b9
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:75
+#: 80767901a58047a0a1e2d4788f4af1cb
 msgid "✅ **File validation** (YAML, TOML, AST checks)"
 msgstr "✅ **文件验证**（YAML、TOML、AST 检查）"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:75
-#: 0b5fef5a73754f9ea882e02470c687cc
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:76
+#: 71fe606401d64e5c9ae940eefe3151e9
 msgid "✅ **Runs on every commit** to ensure code quality"
 msgstr "✅ **在每次提交时运行**，以确保代码质量"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:77
-#: 24ce4a19e6214585a9066eb0ab678be2
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:78
+#: 4304da801b0c4015aa0525b05feed642
 msgid "3. Verify Installation"
 msgstr "3. 验证安装"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:87
-#: 5aa5efe74f124515824cd6192c7cade8
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:88
+#: 5ffcf62ebfc54ec491d198955ca84db3
 #, fuzzy
 msgid ".. _quick-start:"
 msgstr "快速入门"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:89
-#: 84148819fe1e4b22b49b7a34e16b173e
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:90
+#: ef135e0ff716496f90a1ab0e706e2ace
 msgid "Quick Start"
 msgstr "快速入门"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:91
-#: 3bab3d80cb03466a9cea46ad1ecb92d0
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:92
+#: a91501e09a0544319a15a9617d62638f
 msgid "Here's the fastest way to add a new tool:"
 msgstr "以下是添加新工具的最快方法："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:134
-#: 887477a4261549c3a85037f81d1f5ad7
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:135
+#: b620c299c6b945ea875ee9d888716c7d
 msgid "That's it! Your tool is automatically discovered and ready to use."
 msgstr "就是这样！您的工具已被自动发现，随时可用。"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:136
-#: 4f82177b40c0403c9ae219b0d86bf76f
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:137
+#: 85c232351ab4491dbe3675b2e4d040b8
 #, fuzzy
 msgid ".. _method-1-decorator-registration-recommended:"
 msgstr "方法一：装饰器注册（推荐）"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:138
-#: 477269450e064fcfb00780340e421b16
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:139
+#: e369243cc8da4bbd8d81c701bc8af21e
 msgid "Method 1: Decorator Registration (Recommended)"
 msgstr "方法一：装饰器注册（推荐）"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:140
-#: 347246b1b198492f84255e6f24210415
-msgid "The decorator approach is the simplest and most powerful way to add tools."
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:141
+#: fecd2dbaf47f41f5959a1428b7c925ed
+msgid ""
+"The decorator approach is the simplest and most powerful way to add tools."
 msgstr "装饰器方法是添加工具最简单且最强大的方式。"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:142
-#: 2b9d2257c27142e9bdba0a034f0835a7
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:143
+#: 696a26a78d904815b53236f71de211f6
 msgid "Basic Structure"
 msgstr "基本结构"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:158
-#: f44f675c71f442ceb99360c3e14d662c
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:159
+#: ca1ad81d7ee9410dafae78395de53095
 msgid "Step-by-Step Tutorial"
 msgstr "逐步教程"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:160
-#: 376a8ecba7ec45f480c0f732a9f544a2
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:161
+#: 1c03f508df1a4098b6e99d0e11322b56
 msgid "1. Create Your Tool File"
 msgstr "1. 创建您的工具文件"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:161
-#: d0cc555440634069b2917ed7cafd22e8
-msgid "Create a new Python file ending with `_tool.py` (e.g., `weather_tool.py`):"
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:162
+#: 3ddf5ecff4074b86b73620530e4adb5a
+msgid ""
+"Create a new Python file ending with `_tool.py` (e.g., `weather_tool.py`):"
 msgstr "创建一个以 `_tool.py` 结尾的新 Python 文件（例如，`weather_tool.py`）："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:223
-#: 6e330f80c6b04242a855e16368f08df7
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:224
+#: 65ffec0767eb40a797d475c7adabf7bf
 msgid "2. Place in ToolUniverse Package"
 msgstr "2. 放置于 ToolUniverse 软件包中"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:224
-#: 137b746098774fc19cfb35d4f9cd08e1
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:225
+#: 7977ee1b72fc4a2995f9d78a651c6b21
 msgid "Move your file to the ToolUniverse source directory:"
 msgstr "将您的文件移动到 ToolUniverse 源目录："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:229
-#: 939f053d95b44799a2048546d7f9c3bb
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:230
+#: 5c4234bdb1f947c2bce5ed88eb296088
 msgid "3. Use Your Tool"
 msgstr "3. 使用您的工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:230
-#: 3cc1713d60624947ba558e78ef5fc88e
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:231
+#: 887577ff50c84453997a6d31aff8766f
 msgid "Your tool is automatically discovered:"
 msgstr "您的工具已被自动发现："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:247
-#: 1bd5d5411e07411583dfa346f7ac6ac1
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:248
+#: e069c87ab59544e9b9416b0d1e60a98d
 msgid "Configuration Options"
 msgstr "配置选项"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:249
-#: a91616fef1c5463fa4602e4ecda5287a
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:250
+#: 43fd6d17c0c544bc9e215ba17bf1df7a
 msgid ""
-"The `config` parameter in the decorator supports all standard "
-"ToolUniverse configuration:"
+"The `config` parameter in the decorator supports all standard ToolUniverse "
+"configuration:"
 msgstr "装饰器中的 `config` 参数支持所有标准的 ToolUniverse 配置："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:286
-#: c807ada65888494691bef964bf5669e1
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:287
+#: eb38541ccde540d3a59fd42f973c3f61
 #, fuzzy
 msgid ".. _method-2-manual-registration:"
 msgstr "方法二：手动注册"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:288
-#: d0bb55fbf0ef4f499c02da9b604dd23a
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:289
+#: 59511ce9b84a4e35aa21b0d9f5429d2b
 msgid "Method 2: Manual Registration"
 msgstr "方法二：手动注册"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:290
-#: bb29089c7cd04d7594c5d0bc576ec710
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:291
+#: cd283de0b09743d4a4e8074f2e0c7865
 msgid "For dynamic tools or special cases, you can register tools at runtime:"
 msgstr "对于动态工具或特殊情况，您可以在运行时注册工具："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:334
-#: e47a6f354eef4f588d2a7665647abb4e
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:335
+#: 5bbc4a3c5889441e82299c2be576d283
 #, fuzzy
 msgid ".. _tool-configuration:"
 msgstr "工具配置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:336
-#: 3a5616acccc743c0894555b37e8dd4da
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:337
+#: e2bd1a08df6a432a9dc957d39ee33256
 msgid "Tool Configuration"
 msgstr "工具配置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:338
-#: 5f4f508655d94bd6b3552bcaa167dbf6
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:339
+#: c71e20e79b4940fb8e35c985bff61767
 msgid "Required Fields"
 msgstr "必填字段"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:339
-#: 777c50b543324ad7bbef344e3b42bc70
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:340
+#: 5dcbc976bf0e4357abd8c2b64e930526
 msgid "`name`: Unique identifier for your tool"
 msgstr "`name`：您的工具的唯一标识符"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:340
-#: 6ca153c6afd2415e9b2bc34434be4d7f
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:341
+#: 8f5e830679d240b6a9c311f810f151ea
 msgid "`type`: Class name (must match decorator parameter)"
 msgstr "`type`：类名（必须与装饰器参数匹配）"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:341
-#: abe435aaf5fd411db116808a8746ee34
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:342
+#: e3f7a5c0418a4d00a7eb5d1deea9324f
 msgid "`description`: Human-readable description"
 msgstr "`description`：人类可读的描述"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:342
-#: 1c43c25a5c994f2dbd2bfe3a887c6043
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:343
+#: 83f5f2d76de048c8b09e1434f6e6b767
 msgid "`parameter`: JSON Schema defining input parameters"
 msgstr "`parameter`：定义输入参数的 JSON Schema"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:344
-#: a828838a85bc406d8371e4455d51dbbe
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:345
+#: dfc477fb958f416dab01e2c4f699b7e2
 msgid "Optional Fields"
 msgstr "可选字段"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:345
-#: 7025c39c9b9b44d2bbf78bd14c20bf77
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:346
+#: 20aad1a0375a43429f810ada7779644b
 msgid "`settings`: Tool-specific configuration"
 msgstr "`settings`：工具特定配置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:346
-#: 2d74a22632a045ba8f649d449941bb19
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:347
+#: 8e7ebc66a41f4610b023156423f2033b
 msgid "`version`: Tool version"
 msgstr "`version`：工具版本"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:347
-#: 664ec22c03094908ba330137d087d02a
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:348
+#: bde37101cbff46b5929710c64edf8e0c
 msgid "`tags`: Categorization tags"
 msgstr "`tags`：分类标签"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:348
-#: 8af7c7f580c446cfb9a41bd2d850c792
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:349
+#: 73425d93603842acaad13068f7de43e5
 msgid "`examples`: Usage examples"
 msgstr "`examples`：使用示例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:350
-#: 5d6f04cd9efe4c2a98b8a91c24c70705
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:351
+#: d646ff0cc0114d1798c320043666d007
 msgid "Parameter Schema Examples"
 msgstr "参数模式示例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:352
-#: 944a93dd805e4993addbc29b704e1bff
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:353
+#: 70249cf820354041b93eb24f3da04f04
 msgid "Simple Parameters"
 msgstr "简单参数"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:364
-#: 4a088d0b070f44e78db22b695156f4cd
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:365
+#: 211d650712bb42be8c0b0b1ee94fb664
 msgid "Complex Parameters"
 msgstr "复杂参数"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:391
-#: 4607de6e0c3340c2ba7f3ec65ee3162b
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:392
+#: 37e856fc0ac04a8f8be6b574da9cd717
+msgid ".. _parameter-validation-and-error-handling:"
+msgstr ""
+".. _参数验证与错误处理:\n"
+"\n"
+"文档"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:394
+#: ff500871c38d42b89b2d9679e4914047
+msgid "Parameter Validation and Error Handling"
+msgstr "参数验证与错误处理"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:396
+#: f69dd9760e064c6a918a8ffb81e0d716
+msgid ""
+"ToolUniverse provides built-in support for parameter validation and "
+"structured error handling to help you create robust tools."
+msgstr "ToolUniverse 提供内置支持，用于参数验证和结构化错误处理，帮助您创建稳健的工具。"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:398
+#: 4cd5c00150d2416ab350fcbb5b5727cb
+msgid "Parameter Validation"
+msgstr "参数验证"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:400
+#: 47d78dd84f1b467f81a9bd5ae29ed2cb
+msgid ""
+"You can implement custom parameter validation by overriding the "
+"`validate_parameters()` method:"
+msgstr "您可以通过重写 `validate_parameters()` 方法来实现自定义参数验证："
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:425
+#: 4e26cd451d904d6795f282e71987834b
+#, fuzzy
+msgid "Error Handling"
+msgstr "3. 错误处理"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:427
+#: 96c900eb42fc43b889069fff9cf0176c
+msgid ""
+"Override `handle_error()` to provide tool-specific error classification:"
+msgstr "重写 `handle_error()` 以提供工具特定的错误分类："
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:451
+#: 4818d43a5fae41128db9dd8ef0457fbe
+msgid "Exception System Migration"
+msgstr "异常系统迁移"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:453
+#: ab8c858eced6411395f55a7c67459d52
+msgid ""
+"If you're using older exception classes, migrate to the new structured "
+"system:"
+msgstr "如果您正在使用较旧的异常类，请迁移到新的结构化系统："
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:469
+#: acbd03f578b04b8dbd796258d113c1f5
+msgid ""
+"For more information about the exception system, see the [API "
+"documentation](../api/tooluniverse.exceptions.rst)."
+msgstr "有关异常系统的更多信息，请参阅[API 文档](../api/tooluniverse.exceptions.rst)。"
+
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:471
+#: fb564d10838145128d17fc8cbcfa8f11
 #, fuzzy
 msgid ".. _real-world-examples:"
 msgstr "实际案例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:393
-#: e24581a3683d4d0a8dde0a6d184d0b4b
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:473
+#: 4547b283efb94cee955ab1eec588a267
 msgid "Real-World Examples"
 msgstr "实际案例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:395
-#: 84602967255c474ba84222236b41ee2c
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:475
+#: f18ebad811a547c8a41d06067e8543ed
 msgid "Example 1: Database Query Tool"
 msgstr "示例 1：数据库查询工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:468
-#: 7c9b0119ac27460e8ad2b485b5538883
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:548
+#: 861b98a535bf4e77bee0c03153a57567
 msgid "Example 2: File Processing Tool"
 msgstr "示例 2：文件处理工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:565
-#: 3cebc73e65f7406a9ce2ec9ee53fbe59
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:645
+#: bfcc1ff8ca7b4d669e42485663040bb2
 msgid "Example 3: API Integration Tool"
 msgstr "示例 3：API 集成工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:652
-#: 77e1f6b16b634d47a9fb7292181981b9
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:732
+#: 224cdc57425346de90d3bfb2df7beb36
 #, fuzzy
 msgid ".. _best-practices:"
 msgstr "最佳实践"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:654
-#: 43d65bf68708476eb8f420c4e9870b98
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:734
+#: 942695372024453e81f836270f98a6ce
 msgid "Best Practices"
 msgstr "最佳实践"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:656
-#: 306adb0a86ed4105ae1e0b55a6039e36
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:736
+#: 86c273773cca4621b00cbcf430ca1f4e
 msgid "1. File Naming"
 msgstr "1. 文件命名"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:657
-#: dc9b4a7f10aa4bfcbc1d0bb5e0208ec8
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:737
+#: 3ff1b7afe422439fa92eb9af74a6eee6
 msgid "Name your tool files with `_tool.py` suffix"
 msgstr "将您的工具文件命名为以 `_tool.py` 结尾"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:658
-#: 5cc069be8f224a989a2da4179cbb5e47
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:738
+#: 46e36d3f27f44ffe8d06d08617514843
 msgid "Use descriptive names: `weather_tool.py`, `database_tool.py`"
 msgstr "使用描述性名称：`weather_tool.py`、`database_tool.py`"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:660
-#: fbebfc671c94497c9aa13351f4761e58
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:740
+#: ff0a27d6a6044230bc18c936f5e2c3c8
 msgid "2. Class Design"
 msgstr "2. 类设计"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:680
-#: 7993b6054693434abf74ba451451bfae
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:760
+#: e6febd81e67340fba4670f9959f6d4c8
 msgid "3. Error Handling"
 msgstr "3. 错误处理"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:695
-#: 85df82de3168495dafb1463aad63287e
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:775
+#: a8b75e93d6b04dd9a845d04791188b9c
 msgid "4. Configuration Management"
 msgstr "4. 配置管理"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:716
-#: 83115a3e72784f2aa28dc1d067779e26
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:796
+#: 368870425219412aa2d75d97932c4b70
 msgid "5. Return Format Consistency"
 msgstr "5. 返回格式一致性"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:717
-#: 2be0e215e55c43cb948df0d26abe2d01
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:797
+#: c177b0482a7d4c08b97a9241296b7389
 msgid "Always return dictionaries with consistent structure:"
 msgstr "始终返回结构一致的字典："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:734
-#: 4f61e7c04333467caf29b41e9c1a9bbb
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:814
+#: bfe2c9a78aca463d9f7233776d057a96
 #, fuzzy
 msgid ".. _troubleshooting:"
 msgstr "故障排除"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:736
-#: cf6f297738224dd9923a07f547d80ad5
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:816
+#: 0e7262323db748909f323c862ad93abf
 msgid "Troubleshooting"
 msgstr "故障排除"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:738
-#: c151e1d0f5264de293e0134d7518d9c8
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:818
+#: b394b50c214a4ebe9dcfef326f699e05
 msgid "Tool Not Found"
 msgstr "未找到工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:739
-#: 3ec4585ac91f4017859d4d0f041b67fa
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:819
+#: da8270384d884ba8b5196c9ba131f286
 msgid "**Problem**: Your tool isn't being discovered **Solutions**:"
 msgstr ""
 "**问题**：您的工具未被发现  \n"
 "**解决方案**："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:741
-#: 518f9114da96485db173a8c5feb946ee
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:821
+#: 2d2a170761024dfcaaf732d79887ef89
 msgid "Ensure file ends with `_tool.py`"
 msgstr "确保文件以 `_tool.py` 结尾"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:742
-#: d59f7d114c504906b223d123e8d86d75
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:822
+#: e63ea1afeedf48fa911eb8ccbd2c0c15
 msgid "Check file is in the correct directory"
 msgstr "检查文件是否位于正确的目录中"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:743
-#: 5d3feb5f3ebc4d3b985c9366dc8014e3
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:823
+#: ef0c4b34247a4f8ebac3822ec87d33e5
 msgid "Verify the import doesn't fail:"
 msgstr "验证导入是否成功："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:748
-#: 711cd2460d7349e99291d85b71117e02
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:828
+#: be4dcf1d53ac4ee99f3983f9151a1020
 msgid "Import Errors"
 msgstr "导入错误"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:749
-#: 05c61efdabc5435ea4389404423f5dad
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:829
+#: 846206cd704d492bbd0989985c8ea664
 msgid "**Problem**: Module import fails during auto-discovery **Solutions**:"
 msgstr ""
 "**问题**：模块导入在自动发现过程中失败  \n"
 "**解决方案**："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:751
-#: e9e483a0ade94096853ebc92ad20440a
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:831
+#: 9f1fea4664014906984deb8bcd89b918
 msgid "Check all dependencies are installed"
 msgstr "确认所有依赖项已安装"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:752
-#: 9f446cdf7a3249dc8882f404aa9532b4
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:832
+#: 20d1a13e6a234fd792110fb4acbbd766
 msgid "Ensure relative imports use proper syntax"
 msgstr "确保相对导入使用正确的语法"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:753
-#: 406c85ed9c314b36b345456900db232b
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:833
+#: a2db3d8d38774bc9a4f756ac4dfca37e
 msgid "Test import manually:"
 msgstr "手动导入测试："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:760
-#: 525b652810ab4b41910100e5ba159d29
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:840
+#: 6eb4640e88ae49ad94b87309694749ea
 msgid "Configuration Issues"
 msgstr "配置问题"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:761
-#: cf3779c887e34d428155e05fb7095aab
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:841
+#: 175b79673bfc4a85872b5c0ca61818d9
 msgid "**Problem**: Tool config not loading properly **Solutions**:"
 msgstr ""
 "**问题**：工具配置未能正确加载  \n"
 "**解决方案**："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:763
-#: 246dcf0abb724e96816458d7cd534e75
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:843
+#: 96b0bcd9c99a4276abad2e7a4dc5558f
 msgid "Validate JSON syntax in config"
 msgstr "验证配置中的 JSON 语法"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:764
-#: ddece8fd2f6842e3bb68ac5060cd4184
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:844
+#: ac1519f06d8c489f89ab769b5216bbf4
 msgid "Check required fields are present"
 msgstr "检查必填字段是否存在"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:765
-#: 0f949465d79e4c688d45211b29735561
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:845
+#: c95efb7452a54ab5af4b2f0636ddeb9b
 msgid "Test config separately:"
 msgstr "单独测试配置："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:772
-#: 8908cef378264b6d9bb3615f552588c1
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:852
+#: b4fa7de896954ca1bbb6d4f7c55a3e6c
 msgid "Runtime Errors"
 msgstr "运行时错误"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:773
-#: cd6f8069175b4d108da7326a01c7af79
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:853
+#: 8dede1346219460dbde05cc5c439ab5a
 msgid "**Problem**: Tool fails during execution **Solutions**:"
 msgstr ""
 "**问题**：工具执行过程中失败  \n"
 "**解决方案**："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:775
-#: 10ffb73b626f48819dc98417aa792587
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:855
+#: e47b45fa805e41fbbc57d03b3cc81fdd
 msgid "Add comprehensive error handling"
 msgstr "添加全面的错误处理"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:776
-#: c886c3f85c1646b19b926faf8270be81
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:856
+#: d9af56f8fff04d85a612fcc7d0193a12
 msgid "Validate all inputs in `run()` method"
 msgstr "在 `run()` 方法中验证所有输入"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:777
-#: 5f6a76be9d4544e1876e0e842bd9443b
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:857
+#: c223bb1bcaac4c5b80893cd3b23342fc
 msgid "Return error details:"
 msgstr "返回错误详情："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:787
-#: 338d15d0ae684eff94b64f4eeb83ced4
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:867
+#: 98619537bea74134ae40d2acbc9d9b22
 msgid "Testing Your Tool"
 msgstr "测试您的工具"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:788
-#: c35197413dc64aa99cf44971b54f2460
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:868
+#: 16f1ebc74ceb4cb0952ee6db565adaec
 msgid "Create a simple test script:"
 msgstr "创建一个简单的测试脚本："
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:811
-#: 8ac366482b2641139034fb77988ba997
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:891
+#: 70a7bc14f46a49028652e332299c7ced
 msgid "Next Steps"
 msgstr "后续步骤"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:813
-#: 1e6442cb440b417fb2df4f167dd5a302
-msgid "**Start Simple**: Begin with a basic tool using the quick start example"
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:893
+#: 5d6d66ec55b54924a14315aa8387de24
+msgid ""
+"**Start Simple**: Begin with a basic tool using the quick start example"
 msgstr "**从简开始**：使用快速入门示例，从基础工具入手"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:814
-#: ee53c420348a41f5bae9113efc9f49cb
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:894
+#: 2f8d8a677e594da4b5e981bf0cb1e7f8
 msgid "**Add Complexity**: Gradually add more features and configuration"
 msgstr "**增加复杂度**：逐步添加更多功能和配置"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:815
-#: 1fbfcdbcaca94c2ab23f0c276569e3b2
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:895
+#: 158a29c9ea3540e2bfacedfc7155d447
 msgid "**Test Thoroughly**: Create test cases for different scenarios"
 msgstr "**彻底测试**：为不同场景创建测试用例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:816
-#: 4c89040424e14dbc8832c76f0916aeae
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:896
+#: 753bb0e33cbf41439d1f02f78490fa94
 msgid "**Document**: Add clear descriptions and examples"
 msgstr "**文档**：添加清晰的描述和示例"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:817
-#: af21a3d0ba78460799b9d19f3a1bfedd
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:897
+#: bed0bcd2626a4276a9647b9c7e97a37c
 msgid "**Share**: Consider contributing useful tools back to the community"
 msgstr "**分享**：考虑将有用的工具贡献回社区"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:819
-#: b955d14f6cc94aacac82a48064ef8b3c
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:899
+#: 652bb71f95924739a1e724a458c0898e
 msgid "Need Help?"
 msgstr "需要帮助？"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:821
-#: b57c7a0189194e61a352e0bd86fd6cc3
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:901
+#: 9f1fb6b5ab9741dca5f9fbf6d9b4063f
 msgid "Check existing tools in the ToolUniverse codebase for examples"
 msgstr "请检查 ToolUniverse 代码库中的现有工具示例。"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:822
-#: 5aa70944326742b7b12b23873c37e7ea
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:902
+#: 20b6f68ae4f0493e8b659c3c3166acb6
 msgid "Review the configuration schemas of similar tools"
 msgstr "审查类似工具的配置架构"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:823
-#: 43153304b58d4a94a902d597b1d17825
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:903
+#: 88498be5e075459dbec0231461217c4c
 msgid "Test incrementally - start with basic functionality"
 msgstr "逐步测试——从基本功能开始"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:824
-#: a7295dc1cfc04fa19e9e01bd46fc8b1e
-msgid "Use the troubleshooting Tutorial for common issues"
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:904
+#: 0baafe31365647da887e7853b35440d1
+#, fuzzy
+msgid "Use the troubleshooting section for common issues"
 msgstr "使用故障排除教程解决常见问题"
 
-#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:826
-#: 8ca5c6d97de04ade9dc6f60ad6ac2cd7
+#: ../../tutorials/addtools/Adding_Tools_Tutorial.md:906
+#: 0540b5d892094efeb9425281996cac06
 msgid ""
 "The decorator-based system makes adding tools straightforward while "
 "maintaining all the power and flexibility of ToolUniverse. Happy tool "
@@ -689,9 +762,8 @@ msgstr "基于装饰器的系统使添加工具变得简便，同时保持了 To
 #~ msgstr "[快速开始](#quick-start)"
 
 #~ msgid ""
-#~ "[Method 1: Decorator Registration "
-#~ "(Recommended)](#method-1-decorator-registration-"
-#~ "recommended)"
+#~ "[Method 1: Decorator Registration (Recommended)](#method-1-decorator-"
+#~ "registration-recommended)"
 #~ msgstr "[方法一：装饰器注册（推荐）](#method-1-decorator-registration-recommended)"
 
 #~ msgid "[Method 2: Manual Registration](#method-2-manual-registration)"
@@ -708,4 +780,3 @@ msgstr "基于装饰器的系统使添加工具变得简便，同时保持了 To
 
 #~ msgid "[Troubleshooting](#troubleshooting)"
 #~ msgstr "[故障排除](#troubleshooting)"
-

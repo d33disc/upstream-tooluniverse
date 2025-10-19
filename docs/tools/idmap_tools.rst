@@ -25,7 +25,7 @@ Given an EFO ID, retrieve all cross-referenced external disease IDs including MO
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease or phenotype.
 
    **Example Usage:**
@@ -35,6 +35,7 @@ Given an EFO ID, retrieve all cross-referenced external disease IDs including MO
       query = {
           "name": "OpenTargets_get_disease_ids_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -55,7 +56,7 @@ Given a disease or phenotype name, find all cross-referenced external IDs (e.g.,
 
    **Parameters:**
 
-   * ``name`` (string) (optional)
+   * ``name`` (string) (required)
      The name of the disease or phenotype (e.g. 'rheumatoid arthritis').
 
    **Example Usage:**
@@ -65,6 +66,7 @@ Given a disease or phenotype name, find all cross-referenced external IDs (e.g.,
       query = {
           "name": "OpenTargets_get_disease_ids_by_name",
           "arguments": {
+              "name": "example_value"
           }
       }
       result = tu.run(query)
@@ -85,7 +87,7 @@ Given any known disease or phenotype ID (EFO, OMIM, MONDO, UMLS, ICD10, MedDRA, 
 
    **Parameters:**
 
-   * ``inputId`` (string) (optional)
+   * ``inputId`` (string) (required)
      Any known disease ID (e.g. OMIM:604302, UMLS:C0003873, ICD10:M05, EFO_0000685, etc.)
 
    **Example Usage:**
@@ -95,6 +97,7 @@ Given any known disease or phenotype ID (EFO, OMIM, MONDO, UMLS, ICD10, MedDRA, 
       query = {
           "name": "OpenTargets_map_any_disease_id_to_all_other_ids",
           "arguments": {
+              "inputId": "example_value"
           }
       }
       result = tu.run(query)

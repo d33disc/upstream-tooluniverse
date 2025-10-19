@@ -28,10 +28,10 @@ Search OSF (Open Science Framework) Preprints for research preprints and working
    * ``query`` (string) (required)
      Search query for OSF preprints. Use keywords to search across titles and abstracts.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of results to return. Default is 10, maximum is 100.
 
-   * ``provider`` (string) (optional)
+   * ``provider`` (string) (required)
      Optional preprint provider filter (e.g., 'osf', 'psyarxiv', 'socarxiv'). If not specified, searches all providers.
 
    **Example Usage:**
@@ -41,7 +41,9 @@ Search OSF (Open Science Framework) Preprints for research preprints and working
       query = {
           "name": "OSF_search_preprints",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10,
+              "provider": "example_value"
           }
       }
       result = tu.run(query)

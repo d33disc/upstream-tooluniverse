@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../ENGLISH_AS_DEFAULT.md:1 b6c59d6c80f849268ee0afe5769c950d
 msgid "英文作为默认语言配置说明"
-msgstr ""
+msgstr "英文作为默认语言的配置说明"
 
 #: ../../ENGLISH_AS_DEFAULT.md:3 02c7a791c8a64994ae5ff19a5796f273
 msgid "📋 两种模式"

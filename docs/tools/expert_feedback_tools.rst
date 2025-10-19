@@ -28,16 +28,16 @@ Consult a human expert for complex scientific questions requiring human judgment
    * ``question`` (string) (required)
      The scientific question or case requiring expert consultation
 
-   * ``specialty`` (string) (optional)
+   * ``specialty`` (string) (required)
      Area of expertise needed (e.g., 'cardiology', 'oncology', 'pharmacology', 'neurology', 'emergency', 'general')
 
-   * ``priority`` (string) (optional)
+   * ``priority`` (string) (required)
      Request priority level
 
-   * ``context`` (string) (optional)
+   * ``context`` (string) (required)
      Additional context or background information about the case
 
-   * ``timeout_minutes`` (integer) (optional)
+   * ``timeout_minutes`` (integer) (required)
      How long to wait for expert response (default: 5 minutes)
 
    **Example Usage:**
@@ -47,7 +47,11 @@ Consult a human expert for complex scientific questions requiring human judgment
       query = {
           "name": "consult_human_expert",
           "arguments": {
-              "question": "example_value"
+              "question": "example_value",
+              "specialty": "example_value",
+              "priority": "example_value",
+              "context": "example_value",
+              "timeout_minutes": 10
           }
       }
       result = tu.run(query)

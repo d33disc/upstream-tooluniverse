@@ -262,7 +262,7 @@ msgstr ""
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:213 d8c9a58f347b4974a14cf3a35ddec7ea
 msgid "清理缓存"
-msgstr ""
+msgstr "清除缓存"
 
 #: ../../old_files/QUICK_BUILD_GUIDE.md:223 0cdd1c16e02f466a8470d290c4f95221
 msgid "📚 更多文档"

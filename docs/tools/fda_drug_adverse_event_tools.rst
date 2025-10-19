@@ -28,7 +28,7 @@ Additive multi-drug data: Enumerate and count administration routes for adverse 
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Filter by seriousness.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Additive multi-drug data: Enumerate and count administration routes for adverse 
       query = {
           "name": "FAERS_count_additive_administration_routes",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -62,19 +63,19 @@ Additive multi-drug data: Aggregate adverse reaction counts across specified med
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Filter by patient sex.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Filter by patient age group.
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      Filter by ISO2 country code of occurrence.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Filter by seriousness classification.
 
-   * ``seriousnessdeath`` (string) (optional)
+   * ``seriousnessdeath`` (string) (required)
      Filter for fatal outcomes.
 
    **Example Usage:**
@@ -84,7 +85,12 @@ Additive multi-drug data: Aggregate adverse reaction counts across specified med
       query = {
           "name": "FAERS_count_additive_adverse_reactions",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value",
+              "serious": "example_value",
+              "seriousnessdeath": "example_value"
           }
       }
       result = tu.run(query)
@@ -108,13 +114,13 @@ Additive multi-drug data: Aggregate report counts by country of occurrence acros
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Filter by sex.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Filter by age group.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Filter by seriousness.
 
    **Example Usage:**
@@ -124,7 +130,10 @@ Additive multi-drug data: Aggregate report counts by country of occurrence acros
       query = {
           "name": "FAERS_count_additive_event_reports_by_country",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -148,13 +157,13 @@ Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, re
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      No description
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      No description
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      No description
 
    **Example Usage:**
@@ -164,7 +173,10 @@ Additive multi-drug data: Determine reaction outcome counts (e.g., recovered, re
       query = {
           "name": "FAERS_count_additive_reaction_outcomes",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value"
           }
       }
       result = tu.run(query)
@@ -188,13 +200,13 @@ Additive multi-drug data: Aggregate adverse event reports by primary reporter co
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Filter by sex.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Filter by age group.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Filter by seriousness.
 
    **Example Usage:**
@@ -204,7 +216,10 @@ Additive multi-drug data: Aggregate adverse event reports by primary reporter co
       query = {
           "name": "FAERS_count_additive_reports_by_reporter_country",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -228,13 +243,13 @@ Additive multi-drug data: Quantify serious vs non-serious classifications across
    * ``medicinalproducts`` (array) (required)
      Array of medicinal product names.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Filter by sex.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Filter by age group.
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      ISO2 country code filter.
 
    **Example Usage:**
@@ -244,7 +259,10 @@ Additive multi-drug data: Quantify serious vs non-serious classifications across
       query = {
           "name": "FAERS_count_additive_seriousness_classification",
           "arguments": {
-              "medicinalproducts": ["item1", "item2"]
+              "medicinalproducts": ["item1", "item2"],
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value"
           }
       }
       result = tu.run(query)
@@ -265,16 +283,16 @@ Count the number of adverse event reports per country of occurrence, filtered by
 
    **Parameters:**
 
-   * ``medicinalproduct`` (string) (optional)
+   * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Patient sex, leave it blank if you don't want to apply a filter.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Patient age group.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Whether the event was serious.
 
    **Example Usage:**
@@ -284,6 +302,10 @@ Count the number of adverse event reports per country of occurrence, filtered by
       query = {
           "name": "FAERS_count_country_by_drug_event",
           "arguments": {
+              "medicinalproduct": "example_value",
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -338,7 +360,7 @@ Count the most common routes of administration for drugs involved in adverse eve
    * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Seriousness of event.
 
    **Example Usage:**
@@ -348,7 +370,8 @@ Count the most common routes of administration for drugs involved in adverse eve
       query = {
           "name": "FAERS_count_drug_routes_by_event",
           "arguments": {
-              "medicinalproduct": "example_value"
+              "medicinalproduct": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -369,16 +392,16 @@ Count the number of different drugs involved in FDA adverse event reports, filte
 
    **Parameters:**
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Patient sex, leave it blank if you don't want to apply a filter.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Patient age group.
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      Country where event occurred.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Whether the event was serious.
 
    **Example Usage:**
@@ -388,6 +411,10 @@ Count the number of different drugs involved in FDA adverse event reports, filte
       query = {
           "name": "FAERS_count_drugs_by_drug_event",
           "arguments": {
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -411,13 +438,13 @@ Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved
    * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      No description
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      No description
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      No description
 
    **Example Usage:**
@@ -427,7 +454,10 @@ Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved
       query = {
           "name": "FAERS_count_outcomes_by_drug_event",
           "arguments": {
-              "medicinalproduct": "example_value"
+              "medicinalproduct": "example_value",
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value"
           }
       }
       result = tu.run(query)
@@ -482,19 +512,19 @@ Count the number of adverse reactions reported for a given drug, filtered by pat
    * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Patient sex, leave it blank if you don't want to apply a filter.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Patient age group.
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      Country where event occurred.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Whether the event was serious.
 
-   * ``seriousnessdeath`` (string) (optional)
+   * ``seriousnessdeath`` (string) (required)
      Was death reported?
 
    **Example Usage:**
@@ -504,7 +534,12 @@ Count the number of adverse reactions reported for a given drug, filtered by pat
       query = {
           "name": "FAERS_count_reactions_by_drug_event",
           "arguments": {
-              "medicinalproduct": "example_value"
+              "medicinalproduct": "example_value",
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value",
+              "serious": "example_value",
+              "seriousnessdeath": "example_value"
           }
       }
       result = tu.run(query)
@@ -525,16 +560,16 @@ Count the number of FDA adverse event reports grouped by the country of the prim
 
    **Parameters:**
 
-   * ``medicinalproduct`` (string) (optional)
+   * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Patient sex, leave it blank if you don't want to apply a filter.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Patient age group.
 
-   * ``serious`` (string) (optional)
+   * ``serious`` (string) (required)
      Whether the event was serious.
 
    **Example Usage:**
@@ -544,6 +579,10 @@ Count the number of FDA adverse event reports grouped by the country of the prim
       query = {
           "name": "FAERS_count_reportercountry_by_drug_event",
           "arguments": {
+              "medicinalproduct": "example_value",
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "serious": "example_value"
           }
       }
       result = tu.run(query)
@@ -564,16 +603,16 @@ Count the number of adverse event reports classified as serious or non-serious, 
 
    **Parameters:**
 
-   * ``medicinalproduct`` (string) (optional)
+   * ``medicinalproduct`` (string) (required)
      Drug name.
 
-   * ``patientsex`` (string) (optional)
+   * ``patientsex`` (string) (required)
      Patient sex, leave it blank if you don't want to apply a filter.
 
-   * ``patientagegroup`` (string) (optional)
+   * ``patientagegroup`` (string) (required)
      Patient age group.
 
-   * ``occurcountry`` (string) (optional)
+   * ``occurcountry`` (string) (required)
      Country where event occurred.
 
    **Example Usage:**
@@ -583,6 +622,10 @@ Count the number of adverse event reports classified as serious or non-serious, 
       query = {
           "name": "FAERS_count_seriousness_by_drug_event",
           "arguments": {
+              "medicinalproduct": "example_value",
+              "patientsex": "example_value",
+              "patientagegroup": "example_value",
+              "occurcountry": "example_value"
           }
       }
       result = tu.run(query)

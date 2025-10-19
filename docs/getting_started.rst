@@ -273,14 +273,16 @@ Tools
   * **Hook Configuration** → :doc:`guide/hooks/hook_configuration` - Advanced configuration and customization
   * **Server & Stdio Hooks** → :doc:`guide/hooks/server_stdio_hooks` - Using hooks with server and stdio interfaces
 
-🛠️ Expand ToolUniverse
+🛠️ Add Tools to ToolUniverse
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Tool Development Overview** → :doc:`expand_tooluniverse/index` - Learn how to extend ToolUniverse with your own custom tools
-* **Architecture Overview** → :doc:`expand_tooluniverse/architecture` - ToolUniverse's code architecture and extension points
-* **Local Tool Registration** → :doc:`expand_tooluniverse/local_tool_registration` - Create tools that run within ToolUniverse
-* **Remote Tool Registration** → :doc:`expand_tooluniverse/remote_tool_registration` - Integrate external services and APIs
-* **Contributing Tools** → :doc:`expand_tooluniverse/index` - Submit your custom tools to the ToolUniverse repository
+* **Quick Start** → :doc:`expand_tooluniverse/quick_start` - 5-minute tutorial to create your first tool
+* **Local Tools** → :doc:`expand_tooluniverse/local_tools/index` - Create tools that run within ToolUniverse
+* **Remote Tools** → :doc:`expand_tooluniverse/remote_tools/index` - Integrate external services and APIs
+* **Contributing** → :doc:`expand_tooluniverse/contributing/index` - Submit your custom tools to the ToolUniverse repository
+* **Tool Comparison** → :doc:`expand_tooluniverse/reference/comparison` - Compare different tool types and approaches
+* **Architecture** → :doc:`expand_tooluniverse/architecture` - ToolUniverse's code architecture and extension points
 * **Deployment** → :doc:`deployment` - Deployment guide for production environments
 * **Contributing** → :doc:`contributing` - How to contribute to ToolUniverse development
 

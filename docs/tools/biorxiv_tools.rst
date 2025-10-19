@@ -28,7 +28,7 @@ Search bioRxiv preprints using the public bioRxiv API. Returns preprints with ti
    * ``query`` (string) (required)
      Search query for bioRxiv preprints. Use keywords separated by spaces to refine your search.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of preprints to return. Default is 10, maximum is 200.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Search bioRxiv preprints using the public bioRxiv API. Returns preprints with ti
       query = {
           "name": "BioRxiv_search_preprints",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)

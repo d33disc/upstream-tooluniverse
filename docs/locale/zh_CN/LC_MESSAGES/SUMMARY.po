@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:1 6b19fdf1603f41d4b43620e6d483c2e1
 msgid "✅ ToolUniverse 中英文文档系统 - 完成总结"
-msgstr ""
+msgstr "✅ ToolUniverse 中英文文档系统 - 总结完成"
 
 #: ../../SUMMARY.md:3 fc1d3f048b41454b9a9807c83930408c
 msgid "🎉 已完成的功能"
@@ -245,7 +245,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:142 a08030f791f24e00ad9072a6f74c236b
 msgid "🚀 使用方法"
-msgstr ""
+msgstr "🚀 使用说明"
 
 #: ../../SUMMARY.md:144 145783ae94694202ae7b7c4cfefb8f11
 msgid "最简单的方式"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../../SUMMARY.md:156 2e4d2feececd49829e0cdf7ce47c9a2a
 msgid "✅ 构建中文版本"
-msgstr ""
+msgstr "✅ 构建中文版"
 
 #: ../../SUMMARY.md:158 ccb16e2aa89f4c04a2a4b090f4c81fb7
 msgid "✅ 显示访问链接"

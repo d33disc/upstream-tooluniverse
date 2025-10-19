@@ -28,7 +28,7 @@ Search DBLP Computer Science Bibliography for publications. Returns publications
    * ``query`` (string) (required)
      Search query for DBLP publications. Use keywords separated by spaces to refine your search.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Number of publications to return. This sets the maximum number of publications retrieved from DBLP.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Search DBLP Computer Science Bibliography for publications. Returns publications
       query = {
           "name": "DBLP_search_publications",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

@@ -28,7 +28,7 @@ Search for open access academic papers using CORE API. CORE is the world's large
    * ``query`` (string) (required)
      Search query for CORE papers. Use keywords separated by spaces to refine your search.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of papers to return. This sets the maximum number of papers retrieved from CORE.
 
    * ``year_from`` (integer) (optional)
@@ -47,7 +47,8 @@ Search for open access academic papers using CORE API. CORE is the world's large
       query = {
           "name": "CORE_search_papers",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

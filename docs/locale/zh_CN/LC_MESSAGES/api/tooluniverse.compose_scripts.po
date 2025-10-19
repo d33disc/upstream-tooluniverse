@@ -7,25 +7,725 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"POT-Creation-Date: 2025-10-19 01:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../api/tooluniverse.compose_scripts.rst:2
-#: 9e558da0262949ad99b7b6985d8c06ef
+#: 618ad0050ea045a4b3e3727b32672b88
 msgid "tooluniverse.compose\\_scripts package"
 msgstr "tooluniverse.compose_scripts 包"
 
-#: ../../api/tooluniverse.compose_scripts.rst:11
-#: 9eec0807f3e547ccb1cb0a785bd194cb
+#: ../../api/tooluniverse.compose_scripts.rst:10
+#: 34d08d204bba47ed90ba498c13b111a9
 msgid "Submodules"
 msgstr "子模块"
+
+#: ../../api/tooluniverse.compose_scripts.rst:13
+#: ce9f94f5a68c47628bec637bd981671c
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.biomarker\\_discovery module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: 7bf34c7255354f9aaf75bacc098e63c8 of
+#: tooluniverse.compose_scripts.biomarker_discovery:1
+msgid ""
+"Biomarker Discovery Workflow Discover and validate biomarkers for a "
+"specific disease condition using compose tools"
+msgstr ""
+
+#: 93ffea2035e44042aa53660a48dcfd67 of
+#: tooluniverse.compose_scripts.biomarker_discovery.compose:1
+msgid "Discover and validate biomarkers for a specific disease condition"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:21
+#: 6fdf75f121c1423b8f9554eca14ebc6b
+msgid "tooluniverse.compose\\_scripts.comprehensive\\_drug\\_discovery module"
+msgstr ""
+
+#: 4f1c590757f2421aae3ede2300f06032 of
+#: tooluniverse.compose_scripts.comprehensive_drug_discovery:1
+msgid ""
+"Comprehensive Drug Discovery Pipeline Complete end-to-end drug discovery "
+"workflow from disease to optimized candidates"
+msgstr ""
+
+#: 98c2b453372d45479b033dd36292b9b6 of
+#: tooluniverse.compose_scripts.comprehensive_drug_discovery.compose:1
+msgid "End-to-end drug discovery: Target → Lead → Optimization → Validation"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:29
+#: 3f5161c3a15a4fb6b6115a17a9ba668a
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.drug\\_safety\\_analyzer module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: 1fa7ac447d2c46019fd4a320f0b03f1e of
+#: tooluniverse.compose_scripts.drug_safety_analyzer:1
+msgid ""
+"Drug Safety Analysis Pipeline Comprehensive drug safety analysis "
+"combining adverse event data, literature review, and molecular "
+"information"
+msgstr ""
+
+#: 1ec13e0a013a43d683b5407e564791fc of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:1
+msgid "Main composition function for DrugSafetyAnalyzer"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst 001c056f322f43bbabfd5bd813a1d628
+#: 019ab0a072d944ceb1c64fd1ee9bc734 075147fc4cbc4d47ad6ef29d0ca2c602
+#: 327241f6da5a42e79e04959c3686d287 f720ea2442274750b27942a460a342e0
+msgid "Parameters"
+msgstr ""
+
+#: e02a2f53381f4d498463f1eeedd3e817 of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:3
+msgid "Input arguments containing drug_name, patient_sex, serious_events_only"
+msgstr ""
+
+#: 00f57511cc8242d386ffee5a59f85a7a 7fa5b58ef2414d488eb6f5dd84874e55
+#: a7e36755317b4e7eb1682379f34102e0 of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:5
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:4
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:5
+msgid "ToolUniverse instance"
+msgstr ""
+
+#: 32d8374d9d474c19b2b6ed4c3a5b2157 3b4022c2dfea41e18bd1a81353dfe5d2
+#: 5246f512ad8b498db1394553c419ebe9 a16fbb94f672492db6f63e5043a232ee of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:6
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:7
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:5
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:6
+msgid "Function to call other tools"
+msgstr ""
+
+#: 71b50c3e8bdd4168948fc1f87b4b2c43 a95f0d58fefb46198f504476da0bcd36
+#: d6d5e5b49d0f46f7a4c2d3fdced664ca dc5958b167fb4c9da216057a881993a7
+#: ebf3b5c8904d431f8f13494223a6d16b of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:8
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:12
+#: tooluniverse.compose_scripts.output_summarizer.compose:20
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:7
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:8
+msgid "Returns"
+msgstr ""
+
+#: f73323aa6673492487fb584919cfca65 of
+#: tooluniverse.compose_scripts.drug_safety_analyzer.compose:9
+msgid "dict: Comprehensive drug safety analysis result"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:37
+#: 0a8d779e3d6b42c6a2f67351afe14e34
+msgid ""
+"tooluniverse.compose\\_scripts.enhanced\\_multi\\_agent\\_literature\\_search"
+" module"
+msgstr ""
+
+#: b1729dfda28543faafb0e2d62273f049 of
+#: tooluniverse.compose_scripts.enhanced_multi_agent_literature_search:1
+msgid ""
+"Enhanced Multi-Agent Literature Search System Uses MemoryManager for "
+"session-based memory management"
+msgstr ""
+
+#: 1b044b93c62246eb901a56e75c266eac of
+#: tooluniverse.compose_scripts.enhanced_multi_agent_literature_search.compose:1
+msgid "使用MemoryManager的enhanced multi-agent系统"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:45
+#: 1fcf5fc7f13248409d9bd897e55f1c26
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.literature\\_tool module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: 3f5bb807f019477ba3a08696b3b540f0 of
+#: tooluniverse.compose_scripts.literature_tool:1
+msgid ""
+"Literature Search & Summary Tool Minimal compose tool perfect for paper "
+"screenshots"
+msgstr ""
+
+#: c5ac74dfab7c49a6a93d2687fcee0386 of
+#: tooluniverse.compose_scripts.literature_tool.compose:1
+msgid "Search literature and generate summary"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:53
+#: 11d4767cfd364a1e9b34cc041ec96854
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.multi\\_agent\\_literature\\_search module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: aae8e895956d44a19426307e83710d7f of
+#: tooluniverse.compose_scripts.multi_agent_literature_search:2
+msgid "Multi-Agent Literature Search Compose Function"
+msgstr ""
+
+#: 9e581e99f6a149e3bbebf74617e9987a of
+#: tooluniverse.compose_scripts.multi_agent_literature_search:4
+msgid ""
+"This module implements the compose function for the multi-agent "
+"literature search system."
+msgstr ""
+
+#: c36c27a40a28499595aaa476b03dd4aa of
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:1
+msgid "Multi-agent literature search compose function"
+msgstr ""
+
+#: 3eeb9a50534a46078d0d07c0316ab081 of
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:3
+msgid "Input parameters from the tool call"
+msgstr ""
+
+#: e2356a8a79a7470784fe49bb746208b1 of
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:5
+msgid "Reference to the ToolUniverse instance"
+msgstr ""
+
+#: 6353edf47cf449fd9d6df0b20861c1a0 of
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:9
+msgid "Callback function for streaming output"
+msgstr ""
+
+#: ba0ca7cf2a9a4e91827c77ff3a8cec51 of
+#: tooluniverse.compose_scripts.multi_agent_literature_search.compose:13
+msgid "dict: The result of the multi-agent search"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:61
+#: ca2418fb552742a5918687a5a40eb8eb
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.output\\_summarizer module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: 65a3aa585496490d941dde38295fa933 of
+#: tooluniverse.compose_scripts.output_summarizer:1
+msgid "Output Summarization Composer Script"
+msgstr ""
+
+#: 713988f0135d4caf958ac5ad6e7f3190 of
+#: tooluniverse.compose_scripts.output_summarizer:3
+msgid ""
+"This script handles the intelligent summarization of tool outputs by: 1. "
+"Chunking large outputs into manageable pieces 2. Processing each chunk "
+"with AI-powered summarization 3. Merging the summarized chunks into a "
+"coherent final summary"
+msgstr ""
+
+#: 065aa89047004f18a1458e100afdb05b of
+#: tooluniverse.compose_scripts.output_summarizer:8
+msgid ""
+"The script leverages ToolUniverse's AgenticTool infrastructure to provide"
+" intelligent, context-aware summarization that focuses on information "
+"relevant to the original query."
+msgstr ""
+
+#: 4d049bfdf1bf44f48dbc236aa0c64a2a of
+#: tooluniverse.compose_scripts.output_summarizer.compose:1
+msgid "Main composition function for output summarization."
+msgstr ""
+
+#: 12e34b9ad4584e908a712b617e520740 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:3
+msgid ""
+"This function orchestrates the complete summarization workflow: - Chunks "
+"the input text into manageable pieces - Summarizes each chunk using AI - "
+"Merges the summaries into a final coherent result"
+msgstr ""
+
+#: bc915e9b1ecc42b592a36eb5299adc82 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:8
+msgid ""
+"Dictionary containing: - tool_output (str): The original tool output to "
+"be summarized - query_context (str): Context about the original query - "
+"tool_name (str): Name of the tool that generated the output - chunk_size "
+"(int, optional): Size of each chunk for processing - focus_areas (str, "
+"optional): Areas to focus on in summarization - max_summary_length (int, "
+"optional): Maximum length of final   summary"
+msgstr ""
+
+#: c15fc73eb7694d90b276e46e172bb2ed of
+#: tooluniverse.compose_scripts.output_summarizer.compose:8
+msgid ""
+"Dictionary containing: - tool_output (str): The original tool output to "
+"be summarized - query_context (str): Context about the original query - "
+"tool_name (str): Name of the tool that generated the output - chunk_size "
+"(int, optional): Size of each chunk for processing - focus_areas (str, "
+"optional): Areas to focus on in summarization - max_summary_length (int, "
+"optional): Maximum length of final"
+msgstr ""
+
+#: 1d933b9a5b4649378c24c84e58b751a5 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:15
+msgid "summary"
+msgstr ""
+
+#: f08359c0ecf94583b06a53190f3bf55a of
+#: tooluniverse.compose_scripts.output_summarizer.compose:17
+msgid "ToolUniverse instance for tool execution"
+msgstr ""
+
+#: 0ae5835ff1f24f07a510a86ff9bb53ba of
+#: tooluniverse.compose_scripts.output_summarizer.compose:18
+msgid "Function to call other tools within the composition"
+msgstr ""
+
+#: 019f366748544ddd88760d5ff19ecb6c of
+#: tooluniverse.compose_scripts.output_summarizer.compose:21
+msgid "Dict[str, Any]: Dictionary containing:"
+msgstr ""
+
+#: 9dc3076af51c4624aa7dd3ff796cb5d6 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:22
+msgid "success (bool): Whether summarization was successful"
+msgstr ""
+
+#: 0bc446f1c87f4a86a0acb9df99e3e499 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:23
+msgid "original_length (int): Length of original output"
+msgstr ""
+
+#: d7b7fef1f1634ac8a1eac1e5bfb88e80 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:24
+msgid "summary_length (int): Length of final summary"
+msgstr ""
+
+#: b612ef768a6e47e5a911968aeb3cf32b of
+#: tooluniverse.compose_scripts.output_summarizer.compose:25
+msgid "chunks_processed (int): Number of chunks processed"
+msgstr ""
+
+#: 0356bcfe49004dac821dab1623772039 of
+#: tooluniverse.compose_scripts.output_summarizer.compose:26
+msgid "summary (str): The summarized output"
+msgstr ""
+
+#: e96da342479440848ae2f11f73cc450a of
+#: tooluniverse.compose_scripts.output_summarizer.compose:27
+msgid "tool_name (str): Name of the original tool"
+msgstr ""
+
+#: 477d4c3ca79c48e1a433c716ddba4f9a of
+#: tooluniverse.compose_scripts.output_summarizer.compose:28
+msgid "error (str, optional): Error message if summarization failed"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:69
+#: 952eba6cca4c45aeab7a30712cbc322a
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.tool\\_description\\_optimizer module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: ../../api/tooluniverse.compose_scripts.rst:77
+#: 9af7405c8ee44b2e9150715fbebd7f6e
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.tool\\_discover module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: c57393a4a3ad4df7adc66ee1d8b059da of
+#: tooluniverse.compose_scripts.tool_discover.iterative_code_improvement:1
+msgid ""
+"Iteratively improve code implementation until target quality score is "
+"reached"
+msgstr ""
+
+#: 7f05c807b3e040798f5f63e09dcc8aaa of
+#: tooluniverse.compose_scripts.tool_discover.compose:1
+msgid "General tool discovery and generation system"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:85
+#: 44789ecbbba54d7c939ba56e98abaad2
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.tool\\_graph\\_composer module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: 7293527052d04d99bf14b3dc19bccd62 of
+#: tooluniverse.compose_scripts.tool_graph_composer:1
+msgid ""
+"Simplified and fixed tool_graph_composer.py This version includes better "
+"error handling and avoids the 'unhashable type' issue."
+msgstr ""
+
+#: 62176ea33d4d4deaabd28fa7023741d1 of
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:1
+msgid "Compose function for building tool compatibility graphs."
+msgstr ""
+
+#: 355555349ffb4e158de9904744f05b69 of
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:3
+msgid "Dictionary with composition parameters"
+msgstr ""
+
+#: 61d93e54c7ab4e99a936069589477487 of
+#: tooluniverse.compose_scripts.tool_graph_composer.compose:8
+msgid "Dictionary with results and file paths"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:93
+#: 7acf7c8b18104cc0830735bfaeedb82f
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.tool\\_graph\\_generation module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: dc89696ef2e64aebaea832cebc990210 of
+#: tooluniverse.compose_scripts.tool_graph_generation:1
+msgid "Tool Graph Generation Compose Script"
+msgstr ""
+
+#: 7a5e07eb00ed4e368ac680461944fc3b of
+#: tooluniverse.compose_scripts.tool_graph_generation:3
+msgid ""
+"Efficiently evaluates directional data-flow relationships between all "
+"unique pairs of provided tool configs using one agentic tool:"
+msgstr ""
+
+#: 4bc22057b1844c019ba9b942f0bfa97f of
+#: tooluniverse.compose_scripts.tool_graph_generation:5
+msgid "ToolRelationshipDetector"
+msgstr ""
+
+#: a29b41b903b34cfe976f728e344cdd07 of
+#: tooluniverse.compose_scripts.tool_graph_generation:7
+msgid ""
+"Outputs a graph structure with edges representing valid directional "
+"relationships. Each edge stores: source, target, rationale."
+msgstr ""
+
+#: f10a13ae92c74b4b9a099cc622a54998 of
+#: tooluniverse.compose_scripts.tool_graph_generation:10
+msgid "Performance considerations:"
+msgstr ""
+
+#: c72e660bcff64674b11750b0955a3077 of
+#: tooluniverse.compose_scripts.tool_graph_generation:11
+msgid "Iterates i<j once (O(N^2/2) pairs)"
+msgstr ""
+
+#: 9976517149f54d53be595ffffacf514a of
+#: tooluniverse.compose_scripts.tool_graph_generation:12
+msgid "Lightweight JSON serialization of minimal fields"
+msgstr ""
+
+#: ea7cecff00e44e25bfe8c19aa1e86dac of
+#: tooluniverse.compose_scripts.tool_graph_generation:13
+msgid ""
+"Optional batching hook (currently sequential because call_tool likely "
+"remote)"
+msgstr ""
+
+#: c4fdda1650e445e49a9bd21fd20f866d of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param tool_configs"
+msgstr ""
+
+#: 213cba5277e94c84ba01aa83c6eab694 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type tool_configs"
+msgstr ""
+
+#: f8e2756a4fc74b829c7c4451ef5d7c8e of
+#: tooluniverse.compose_scripts.tool_graph_generation:16
+msgid ":py:class:`list[dict]`"
+msgstr ""
+
+#: fceb6aed73044c5caa3d78b488c7f2fc of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param max_tools"
+msgstr ""
+
+#: 1bd6dba54b5f4a58b5501f7b35c30e50 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type max_tools"
+msgstr ""
+
+#: 92a818f330da4e20b6c5e11fc8baaf17 of
+#: tooluniverse.compose_scripts.tool_graph_generation:18
+msgid ":py:class:`int`"
+msgstr ""
+
+#: 7b5a17ab6582479898c5c173badfa588 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param output_path"
+msgstr ""
+
+#: eed2a4f1480f4deb8a7cd412edb24535 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type output_path"
+msgstr ""
+
+#: 37cc9bf06ad346f3aa17c1d3ebd86db3 of
+#: tooluniverse.compose_scripts.tool_graph_generation:20
+msgid ""
+":py:class:`str) path` to write resulting graph JSON (default "
+"``'./tool_relationship_graph.json'``"
+msgstr ""
+
+#: 968dabf2078542beb85d21066e3c5473 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "param save_intermediate_every"
+msgstr ""
+
+#: 347a8a6c40a34c00b0c99939f7dc5d31 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "type save_intermediate_every"
+msgstr ""
+
+#: da8c55d1431740d1b9e9937fac5a772e of
+#: tooluniverse.compose_scripts.tool_graph_generation:22
+msgid ":py:class:`int) checkpoint frequency (default 5000 pairs processed`"
+msgstr ""
+
+#: 9814233e1b5c4b5da6d83a31b3699244 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "returns"
+msgstr ""
+
+#: 4718b9aa27e34c20a3a3d1180922bcc5 of
+#: tooluniverse.compose_scripts.tool_graph_generation:24
+msgid "nodes, edges, stats"
+msgstr ""
+
+#: 93301812d81f4f18b266e57aba7b7ad4 of
+#: tooluniverse.compose_scripts.tool_graph_generation
+msgid "rtype"
+msgstr ""
+
+#: b7b72ba2e96e449db2c2cf6193933684 of
+#: tooluniverse.compose_scripts.tool_graph_generation:25
+msgid "dict with keys"
+msgstr ""
+
+#: ../../api/tooluniverse.compose_scripts.rst:101
+#: a31c2d44c8aa4152a571593414b10617
+#, fuzzy
+msgid "tooluniverse.compose\\_scripts.tool\\_metadata\\_generator module"
+msgstr "tooluniverse.compose_scripts 包"
+
+#: a04505c0c63c4cb8be629d429d8a16af of
+#: tooluniverse.compose_scripts.tool_metadata_generator:1
+msgid ""
+"Tool Metadata Generation Pipeline Generates comprehensive metadata for a "
+"list of tools by extracting details from their configuration files"
+msgstr ""
+
+#: 8f908543cc62413e8572c4cfb801599b of
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:1
+msgid "Main composition function for Tool Metadata Generation"
+msgstr ""
+
+#: 25a198cb3242446aa94c9718a3285ef9 of
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:3
+#, python-brace-format
+msgid ""
+"Input arguments containing a list of tool config JSONs as well as a "
+"tool_type_mappings dict for non-API tools (e.g., {'Databases': "
+"['XMLTool']})"
+msgstr ""
+
+#: 44010fa5eb22424cb8e162cd1fc07f3d of
+#: tooluniverse.compose_scripts.tool_metadata_generator.compose:9
+msgid "list: List of tool metadata dictionaries (JSON-compatible)"
+msgstr ""
+
+#~ msgid "Comprehensive drug safety analysis result"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "The result of the multi-agent search"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Dictionary containing:     - success (bool):"
+#~ " Whether summarization was successful     -"
+#~ " original_length (int): Length of original"
+#~ " output     - summary_length (int): Length"
+#~ " of final summary     - chunks_processed"
+#~ " (int): Number of chunks processed     "
+#~ "- summary (str): The summarized output"
+#~ "     - tool_name (str): Name of the"
+#~ " original tool     - error (str, "
+#~ "optional): Error message if summarization "
+#~ "failed"
+#~ msgstr ""
+
+#~ msgid "Dictionary containing:"
+#~ msgstr ""
+
+#~ msgid "List of text chunks"
+#~ msgstr ""
+
+#~ msgid "Summarized chunk text, or empty string if summarization fails"
+#~ msgstr ""
+
+#~ msgid "Final merged summary"
+#~ msgstr ""
+
+#~ msgid "List of tool metadata dictionaries (JSON-compatible)"
+#~ msgstr ""
+
+#~ msgid "解析工具结果，确保返回字典格式"
+#~ msgstr ""
+
+#~ msgid "格式化论文用于总结"
+#~ msgstr ""
+
+#~ msgid "Format papers for summary generation"
+#~ msgstr ""
+
+#~ msgid "Calculate quality score for a search plan"
+#~ msgstr ""
+
+#~ msgid "Format plans for quality analysis"
+#~ msgstr ""
+
+#~ msgid "Apply improvements to existing plans and add new plans"
+#~ msgstr ""
+
+#~ msgid "Format plan summaries for overall summary generation"
+#~ msgstr ""
+
+#~ msgid "Create structured plan summaries for return"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Split text into chunks of specified "
+#~ "size with intelligent boundary detection."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This function attempts to break text "
+#~ "at natural boundaries (sentences) to "
+#~ "maintain coherence within chunks while "
+#~ "respecting the size limit."
+#~ msgstr ""
+
+#~ msgid "The text to be chunked"
+#~ msgstr ""
+
+#~ msgid "Maximum size of each chunk"
+#~ msgstr ""
+
+#~ msgid "List[str]: List of text chunks"
+#~ msgstr ""
+
+#~ msgid "Summarize a single chunk using the AgenticTool summarizer."
+#~ msgstr ""
+
+#~ msgid "The text chunk to summarize"
+#~ msgstr ""
+
+#~ msgid "Context about the original query"
+#~ msgstr ""
+
+#~ msgid "Name of the tool that generated the output"
+#~ msgstr ""
+
+#~ msgid "Areas to focus on during summarization"
+#~ msgstr ""
+
+#~ msgid "Function to call the summarizer tool"
+#~ msgstr ""
+
+#~ msgid "str: Summarized chunk text, or empty string if summarization fails"
+#~ msgstr ""
+
+#~ msgid "Merge chunk summaries into a final coherent summary."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If the combined summaries exceed the "
+#~ "maximum length, they are further "
+#~ "summarized to create a concise final "
+#~ "result."
+#~ msgstr ""
+
+#~ msgid "List of summarized chunks"
+#~ msgstr ""
+
+#~ msgid "Maximum length of final summary"
+#~ msgstr ""
+
+#~ msgid "str: Final merged summary"
+#~ msgstr ""
+
+#~ msgid "Discover similar tools"
+#~ msgstr ""
+
+#~ msgid "Generate tool specification"
+#~ msgstr ""
+
+#~ msgid "Generate implementation code for all tool types"
+#~ msgstr ""
+
+#~ msgid "Generate test cases"
+#~ msgstr ""
+
+#~ msgid "Validate test cases"
+#~ msgstr ""
+
+#~ msgid "Execute test cases to validate code functionality"
+#~ msgstr ""
+
+#~ msgid "评估代码质量 - 使用增强的CodeQualityAnalyzer + 实际测试执行"
+#~ msgstr ""
+
+#~ msgid "Expand test coverage"
+#~ msgstr ""
+
+#~ msgid "General code optimization"
+#~ msgstr ""
+
+#~ msgid "Save tool files"
+#~ msgstr ""
+
+#~ msgid "Recursively convert JSON object booleans and types to Python format"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Recursively convert Python type objects "
+#~ "to string representations for JSON "
+#~ "serialization"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Generate Python code for all tool "
+#~ "types using correct register_tool method"
+#~ msgstr ""
+
+#~ msgid "Load all available tools from ToolUniverse."
+#~ msgstr ""
+
+#~ msgid "Build the compatibility graph by analyzing tool pairs."
+#~ msgstr ""
+
+#~ msgid "Extract structured compatibility information from analysis result."
+#~ msgstr ""
+
+#~ msgid "Save the graph in multiple formats."
+#~ msgstr ""
+
+#~ msgid "Generate statistics about the graph."
+#~ msgstr ""
+
+#~ msgid "Load a previously cached graph."
+#~ msgstr ""
+

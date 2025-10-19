@@ -317,7 +317,7 @@ msgstr "之后 (现在)"
 
 #: ../../old_files/SUMMARY.md:263 4aa0ccc8eb45444d96b2bbbe7f1a4bb1
 msgid "📝 翻译工作流"
-msgstr ""
+msgstr "📝 翻译工作流程"
 
 #: ../../old_files/SUMMARY.md:265 0ba930ce5ac7421889d06e9492299141
 msgid "1. 构建（自动更新翻译）"

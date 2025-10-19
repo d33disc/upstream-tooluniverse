@@ -28,7 +28,7 @@ Render a URL as PDF and extract its text (JavaScript supported).
    * ``url`` (string) (required)
      Webpage URL to fetch and render
 
-   * ``timeout`` (integer) (optional)
+   * ``timeout`` (integer) (required)
      Request timeout in seconds
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Render a URL as PDF and extract its text (JavaScript supported).
       query = {
           "name": "get_webpage_text_from_url",
           "arguments": {
-              "url": "example_value"
+              "url": "example_value",
+              "timeout": 10
           }
       }
       result = tu.run(query)
@@ -62,7 +63,7 @@ Fetch a webpage and return the content of its <title> tag.
    * ``url`` (string) (required)
      HTTP or HTTPS URL to fetch (e.g. https://www.example.com)
 
-   * ``timeout`` (integer) (optional)
+   * ``timeout`` (integer) (required)
      Request timeout in seconds
 
    **Example Usage:**
@@ -72,7 +73,8 @@ Fetch a webpage and return the content of its <title> tag.
       query = {
           "name": "get_webpage_title",
           "arguments": {
-              "url": "example_value"
+              "url": "example_value",
+              "timeout": 10
           }
       }
       result = tu.run(query)

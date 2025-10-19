@@ -25,7 +25,7 @@ Add new documents to an existing embedding database. Generates embeddings for ne
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to add documents to existing database
 
    * ``database_name`` (string) (required)
@@ -34,7 +34,7 @@ Add new documents to an existing embedding database. Generates embeddings for ne
    * ``documents`` (array) (required)
      List of new document texts to embed and add
 
-   * ``metadata`` (array) (optional)
+   * ``metadata`` (array) (required)
      Optional metadata for each new document (same length as documents)
 
    **Example Usage:**
@@ -44,8 +44,10 @@ Add new documents to an existing embedding database. Generates embeddings for ne
       query = {
           "name": "embedding_database_add",
           "arguments": {
+              "action": "example_value",
               "database_name": "example_value",
-              "documents": ["item1", "item2"]
+              "documents": ["item1", "item2"],
+              "metadata": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -66,7 +68,7 @@ Create a new embedding database from a collection of documents. Generates embedd
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to create database from documents
 
    * ``database_name`` (string) (required)
@@ -75,13 +77,13 @@ Create a new embedding database from a collection of documents. Generates embedd
    * ``documents`` (array) (required)
      List of document texts to embed and store
 
-   * ``metadata`` (array) (optional)
+   * ``metadata`` (array) (required)
      Optional metadata for each document (same length as documents)
 
-   * ``model`` (string) (optional)
+   * ``model`` (string) (required)
      OpenAI/Azure OpenAI embedding model to use
 
-   * ``description`` (string) (optional)
+   * ``description`` (string) (required)
      Optional description for the database
 
    **Example Usage:**
@@ -91,8 +93,12 @@ Create a new embedding database from a collection of documents. Generates embedd
       query = {
           "name": "embedding_database_create",
           "arguments": {
+              "action": "example_value",
               "database_name": "example_value",
-              "documents": ["item1", "item2"]
+              "documents": ["item1", "item2"],
+              "metadata": ["item1", "item2"],
+              "model": "example_value",
+              "description": "example_value"
           }
       }
       result = tu.run(query)
@@ -113,7 +119,7 @@ Load an existing embedding database from a local path or external source. Allows
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to load database from external source
 
    * ``database_path`` (string) (required)
@@ -122,7 +128,7 @@ Load an existing embedding database from a local path or external source. Allows
    * ``database_name`` (string) (required)
      Local name to assign to the loaded database
 
-   * ``overwrite`` (boolean) (optional)
+   * ``overwrite`` (boolean) (required)
      Whether to overwrite existing database with same name
 
    **Example Usage:**
@@ -132,8 +138,10 @@ Load an existing embedding database from a local path or external source. Allows
       query = {
           "name": "embedding_database_load",
           "arguments": {
+              "action": "example_value",
               "database_path": "example_value",
-              "database_name": "example_value"
+              "database_name": "example_value",
+              "overwrite": true
           }
       }
       result = tu.run(query)
@@ -154,7 +162,7 @@ Search for semantically similar documents in an embedding database. Uses OpenAI 
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to search the database
 
    * ``database_name`` (string) (required)
@@ -163,10 +171,10 @@ Search for semantically similar documents in an embedding database. Uses OpenAI 
    * ``query`` (string) (required)
      Query text to find similar documents for
 
-   * ``top_k`` (integer) (optional)
+   * ``top_k`` (integer) (required)
      Number of most similar documents to return
 
-   * ``filters`` (object) (optional)
+   * ``filters`` (object) (required)
      Optional metadata filters to apply to search results
 
    **Example Usage:**
@@ -176,8 +184,11 @@ Search for semantically similar documents in an embedding database. Uses OpenAI 
       query = {
           "name": "embedding_database_search",
           "arguments": {
+              "action": "example_value",
               "database_name": "example_value",
-              "query": "example_value"
+              "query": "example_value",
+              "top_k": 10,
+              "filters": "example_value"
           }
       }
       result = tu.run(query)
@@ -198,16 +209,16 @@ Download an embedding database from HuggingFace Hub to local storage. Allows acc
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to download database from HuggingFace
 
    * ``repository`` (string) (required)
      HuggingFace repository to download from (format: username/repo-name)
 
-   * ``local_name`` (string) (optional)
+   * ``local_name`` (string) (required)
      Local name for the downloaded database (optional, defaults to repo name)
 
-   * ``overwrite`` (boolean) (optional)
+   * ``overwrite`` (boolean) (required)
      Whether to overwrite existing local database with same name
 
    **Example Usage:**
@@ -217,7 +228,10 @@ Download an embedding database from HuggingFace Hub to local storage. Allows acc
       query = {
           "name": "embedding_sync_download",
           "arguments": {
-              "repository": "example_value"
+              "action": "example_value",
+              "repository": "example_value",
+              "local_name": "example_value",
+              "overwrite": true
           }
       }
       result = tu.run(query)
@@ -238,7 +252,7 @@ Upload a local embedding database to HuggingFace Hub for sharing and collaborati
 
    **Parameters:**
 
-   * ``action`` (string) (optional)
+   * ``action`` (string) (required)
      Action to upload database to HuggingFace
 
    * ``database_name`` (string) (required)
@@ -247,13 +261,13 @@ Upload a local embedding database to HuggingFace Hub for sharing and collaborati
    * ``repository`` (string) (required)
      HuggingFace repository name (format: username/repo-name)
 
-   * ``description`` (string) (optional)
+   * ``description`` (string) (required)
      Description for the HuggingFace dataset
 
-   * ``private`` (boolean) (optional)
+   * ``private`` (boolean) (required)
      Whether to create a private repository
 
-   * ``commit_message`` (string) (optional)
+   * ``commit_message`` (string) (required)
      Commit message for the upload
 
    **Example Usage:**
@@ -263,8 +277,12 @@ Upload a local embedding database to HuggingFace Hub for sharing and collaborati
       query = {
           "name": "embedding_sync_upload",
           "arguments": {
+              "action": "example_value",
               "database_name": "example_value",
-              "repository": "example_value"
+              "repository": "example_value",
+              "description": "example_value",
+              "private": true,
+              "commit_message": "example_value"
           }
       }
       result = tu.run(query)

@@ -25,7 +25,7 @@ Get comprehensive information about Cooler – sparse Hi-C contact matrix storag
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -35,6 +35,7 @@ Get comprehensive information about Cooler – sparse Hi-C contact matrix storag
       query = {
           "name": "get_cooler_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -144,7 +145,7 @@ Get comprehensive information about h5py – HDF5 for Python
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -154,6 +155,7 @@ Get comprehensive information about h5py – HDF5 for Python
       query = {
           "name": "get_h5py_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -203,7 +205,7 @@ Get comprehensive information about NumPy - the fundamental package for scientif
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -213,6 +215,7 @@ Get comprehensive information about NumPy - the fundamental package for scientif
       query = {
           "name": "get_numpy_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -264,7 +267,7 @@ Get comprehensive information about pandas - powerful data structures and data a
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -274,6 +277,7 @@ Get comprehensive information about pandas - powerful data structures and data a
       query = {
           "name": "get_pandas_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -416,7 +420,7 @@ Get comprehensive information about tqdm – fast progress bars for Python
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -426,6 +430,7 @@ Get comprehensive information about tqdm – fast progress bars for Python
       query = {
           "name": "get_tqdm_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)

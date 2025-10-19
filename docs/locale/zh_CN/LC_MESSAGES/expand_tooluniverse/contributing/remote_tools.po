@@ -1,0 +1,843 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:2
+#: a0ed21caa94e492caafde1f9aeda2f4d
+msgid "Contributing Remote Tools to ToolUniverse"
+msgstr ""
+"将远程工具贡献给ToolUniverse\n"
+"\n"
+"Context: 文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:4
+#: 3b0b7fc336fe40eda377ea0b16404905
+msgid ""
+"This guide covers how to contribute remote tools to the ToolUniverse "
+"repository. Remote tools run on separate servers and are accessed via MCP "
+"(Model Context Protocol) or REST APIs."
+msgstr ""
+"本指南介绍了如何向 ToolUniverse 仓库贡献远程工具。远程工具运行在独立的服务器上，并通过 MCP（模型上下文协议）或 REST API "
+"进行访问。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:7
+#: 78e85d8b593f40539d72dd0e478fe1f4
+msgid ""
+"**Key Difference**: Remote tools don't require modifying ``__init__.py``, "
+"but you must provide a publicly accessible server or detailed deployment "
+"instructions."
+msgstr "**关键区别**：远程工具无需修改``__init__.py``，但您必须提供一个可公开访问的服务器或详细的部署说明。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:10
+#: 8c9e19bf490d4b8198d1ec0213717fe4
+msgid "Quick Overview"
+msgstr "快速概览"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:12
+#: eade530946a842bdab02031aeafbdaf8
+msgid "**10 Steps to Contribute a Remote Tool:**"
+msgstr "**贡献远程工具的10个步骤：**"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:14
+#: 49388b79dcb54e04ad10a39d974c31bf
+msgid "**Environment Setup** - Fork, clone, install dependencies"
+msgstr "**环境设置** - 分叉、克隆、安装依赖项"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:15
+#: 162e0a93a8d94be28d966643954db2ec
+msgid "**Choose Implementation** - Independent server vs register_mcp_tool"
+msgstr "**选择实现方式** - 独立服务器 vs register_mcp_tool"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:16
+#: 441427adc04d4a39b4c0524333864e68
+msgid "**Create MCP Server** - Implement server with your tool logic"
+msgstr "**创建 MCP 服务器** - 使用您的工具逻辑实现服务器"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:17
+#: 155bdd21146147b2a3096d1c927b591d
+msgid "**Create Config** - JSON file in ``data/remote_tools/xxx_tools.json``"
+msgstr "**创建配置** - JSON 文件位于 ``data/remote_tools/xxx_tools.json``"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:18
+#: 167a9b1c52db4f668ec426e1462c961c
+msgid "**Deploy Server** - Make it publicly accessible"
+msgstr "**部署服务器** - 使其公开可访问"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:19
+#: 6ddd133e40aa4780abf3ad80e0d5fcd0
+msgid "**Write Tests** - Integration tests with mocked server"
+msgstr "**编写测试** - 使用模拟服务器的集成测试"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:20
+#: daaed5fc4d8244879d22296750502fab
+msgid "**Code Quality** - Pre-commit hooks (automatic)"
+msgstr "**代码质量** - 预提交钩子（自动）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:21
+#: fd113c9201a64fd6a3bc7a22df620acd
+msgid "**Documentation** - Server README and API docs"
+msgstr "**文档** - 服务器README和API文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:22
+#: a064d9b47efb41e7819554428fbbb4a8
+msgid "**Create Examples** - Working examples in ``examples/``"
+msgstr "**创建示例** - 在``examples/``中创建工作示例"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:23
+#: d5d86b5128604d969785f7605985a6ec
+msgid "**Submit PR** - Include server code and deployment docs"
+msgstr "**提交 PR** - 包括服务器代码和部署文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:26
+#: d8582e29c3074645a137b85da1f460d5
+msgid "Step-by-Step Guide"
+msgstr "分步指南"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:29
+#: 69aec3b439dd424b95d06f18fbc245a4
+msgid "Step 1: Environment Setup"
+msgstr "步骤 1：环境设置"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:48
+#: 87c7f0cb4e0e4108bb3e203e2d65e046
+msgid "Step 2: Choose Implementation"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:50
+#: 4d1ca851256c440183acfc007f167037
+msgid ""
+"**Option A: Independent MCP Server (Recommended)** - Create separate server "
+"(any language) - More flexible and maintainable - Server code goes in "
+"``src/tooluniverse/remote/``"
+msgstr ""
+"**选项A：独立的MCP服务器（推荐）** - 创建独立服务器（任意语言） - 更灵活且易于维护 - "
+"服务器代码存放于``src/tooluniverse/remote/``"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:55
+#: 77771f64527f4f8d91768dc0df3e561e
+msgid ""
+"**Option B: register_mcp_tool Decorator** - Python class as both local and "
+"MCP tool - Simpler but less flexible - Good for simple tools"
+msgstr ""
+"**选项 B：register_mcp_tool 装饰器** - Python 类同时作为本地工具和 MCP 工具 - 更简单但灵活性较低 - "
+"适用于简单工具"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:60
+#: 34a1ae449d2445a5b7f820c3127c2a15
+msgid "This guide focuses on **Option A** (Independent server)."
+msgstr "本指南重点介绍**选项A**（独立服务器）。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:63
+#: a5c99745076a4d598f58d704f4f06fb2
+msgid "Step 3: Create MCP Server"
+msgstr "步骤 3：创建 MCP 服务器"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:65
+#: 32e3ddd78bf44eaa91de18484a898f17
+msgid "Create server directory: ``src/tooluniverse/remote/my_service/``"
+msgstr "创建服务器目录：``src/tooluniverse/remote/my_service/``"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:67
+#: d7e8910372944826bbb80898a0cf99a7
+msgid "**Server Structure:** .. code-block:: text"
+msgstr "**服务器结构：** .. code-block:: text"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:70
+#: 315fdc5fba7a432e86cc2fb677b25e71
+msgid ""
+"src/tooluniverse/remote/my_service/ ├── __init__.py ├── server.py"
+"              # Main server file ├── tools.py               # Tool "
+"implementations ├── requirements.txt       # Server dependencies ├── "
+"README.md              # Deployment instructions └── docker-compose.yml     "
+"# Optional: Docker setup"
+msgstr ""
+"src/tooluniverse/remote/my_service/  \n"
+"├── __init__.py  \n"
+"├── server.py              # 主服务器文件  \n"
+"├── tools.py               # 工具实现  \n"
+"├── requirements.txt       # 服务器依赖项  \n"
+"├── README.md              # 部署说明  \n"
+"└── docker-compose.yml     # 可选：Docker 设置"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:78
+#: b1319f025ef849319cfb60b7ffa6e0a8
+msgid "**Example server.py:** .. code-block:: python"
+msgstr "**示例 server.py:** .. code-block:: python"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:81
+#: 7b183fe2441440fbb1b92a9df0d7d5e7
+msgid ""
+"from fastapi import FastAPI from tooluniverse.smcp import SMCP import "
+"uvicorn"
+msgstr ""
+"从 fastapi 导入 FastAPI  \n"
+"从 tooluniverse.smcp 导入 SMCP  \n"
+"导入 uvicorn"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:85
+#: 8db855b43bf6481a8c5f7dfe29f2f9bf
+msgid "app = FastAPI(title=\"My Service MCP Server\") mcp = SMCP()"
+msgstr ""
+"app = FastAPI(title=\"我的服务MCP服务器\")  \n"
+"mcp = SMCP()"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:88
+#: 68cab292d9984c6eae6561b1242fc7ae
+msgid ""
+"@mcp.tool(\"my_remote_tool\") def my_remote_tool(input_text: str, operation:"
+" str = \"uppercase\") -> dict:"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:90
+#: 4fe7990516e240a48dfabf04f8e55ffe
+msgid "\"\"\"Convert text using specified operation.\"\"\" if operation == \"uppercase\":"
+msgstr "\"\"\"使用指定的操作转换文本。\"\"\" 如果操作 == \"uppercase\":"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:92
+#: 47faad69192e4eb59dca3d5527fda274
+msgid "result = input_text.upper()"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:93
+#: c84b9c932ccc4f6d9b1986ed0a6bc1e5
+msgid "elif operation == \"lowercase\":"
+msgstr "elif 操作 == \"小写\":"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:94
+#: 970f7a814e144123b0ad0314c399a170
+msgid "result = input_text.lower()"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:95
+#: 30c6f944bdcd4359a389db65b1a6d620
+msgid "else:"
+msgstr "否则："
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:96
+#: fe79adde04b44ea2aa782c8d267271c1
+#, python-brace-format
+msgid "raise ValueError(f\"Unknown operation: {operation}\")"
+msgstr "raise ValueError(f\"未知操作: {operation}\")"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:98
+#: ed3cd4ffa92847eea78ed234d67c5bbb
+msgid "return {"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:99
+#: f3f9836d2e6c44b9b84eba74b9cb10c3
+msgid "\"result\": result, \"operation\": operation, \"success\": True"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:102
+#: 6cdc748cde3943a18df6670dd1194239
+msgid "}"
+msgstr "请提供具体的英文文本内容，我将为您进行翻译。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:104
+#: d2dfed4fbcbe468a8252d4b3022f5a1a
+msgid "@mcp.tool(\"health_check\") def health_check() -> dict:"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:106
+#: 7d77321418884ed584239d2778865aad
+#, python-brace-format
+msgid "\"\"\"Health check endpoint.\"\"\" return {\"status\": \"healthy\", \"service\": \"my_service\"}"
+msgstr "\"\"\"健康检查端点。\"\"\" return {\"status\": \"健康\", \"service\": \"my_service\"}"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:109
+#: ec27ac3aa39a4580b780504c020c439b
+msgid "# Mount MCP endpoints app.mount(\"/mcp\", mcp.app)"
+msgstr ""
+"# 挂载 MCP 端点  \n"
+"app.mount(\"/mcp\", mcp.app)"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:112
+#: 818e38c172b74586aa9d7279c389daf5
+msgid "if __name__ == \"__main__\":"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:113
+#: b037f9b91fd849c68d1278ee331a91f0
+msgid "uvicorn.run(app, host=\"0.0.0.0\", port=8000)"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:115
+#: e0a8f57187aa4f199dee200666f6c9dc
+msgid "**requirements.txt:** .. code-block:: text"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:118
+#: 50858e2335914d378a896f466c54d997
+msgid "fastapi>=0.100.0 uvicorn>=0.20.0 tooluniverse>=1.0.0"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:123
+#: 426d9e2d00df4d36a8ecc737781422a8
+msgid "Step 4: Create Configuration File"
+msgstr "步骤 4：创建配置文件"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:125
+#: f8541d009ed546cfa71f5f04a37c4a0f
+msgid "Create ``src/tooluniverse/data/remote_tools/my_service_tools.json``:"
+msgstr "创建 ``src/tooluniverse/data/remote_tools/my_service_tools.json``:"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:172
+#: 1633a137fd2c4f00bba97b7ee26b240a
+msgid "Step 5: Deploy Server"
+msgstr "步骤 5：部署服务器"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:174
+#: a8ef07bd158c4e819eb5a288e75fba49
+msgid ""
+"**Option A: Cloud Deployment (Recommended)** - Deploy to cloud platform "
+"(AWS, GCP, Azure, Heroku, etc.) - Provide public URL - Include deployment "
+"documentation"
+msgstr "**选项A：云部署（推荐）** - 部署至云平台（AWS、GCP、Azure、Heroku等） - 提供公共URL - 包含部署文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:179
+#: e35bb09fba7a469d9314dbe68bf4c2b1
+msgid ""
+"**Option B: Self-hosted with Documentation** - Provide detailed setup "
+"instructions - Include Docker configuration - Document requirements and "
+"dependencies"
+msgstr "**选项 B：自托管与文档支持** - 提供详细的设置说明 - 包括 Docker 配置 - 记录需求和依赖项"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:184
+#: 41d574dac1ce4b99bd5722481ec47fef
+msgid ""
+"**Example deployment documentation (README.md):** .. code-block:: markdown"
+msgstr "**示例部署文档 (README.md):** .. code-block:: markdown"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:187
+#: 10a4770bd7e64938806a87cd23030e29
+msgid "# My Service MCP Server"
+msgstr "# 我的服务 MCP 服务器"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:189
+#: 437fae85298148219abce261ba205d1f
+msgid "## Quick Start"
+msgstr "## 快速开始"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:191
+#: c36dc1a40358485585c1a8e3aed0cfd2
+msgid "```bash # Install dependencies pip install -r requirements.txt"
+msgstr ""
+"```bash\n"
+"# 安装依赖项\n"
+"pip install -r requirements.txt\n"
+"```"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:195
+#: 665bc7f71f5a433fa2802df713701856
+msgid "# Run server python server.py ```"
+msgstr ""
+"# 运行服务器  \n"
+"python server.py  \n"
+"```"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:199
+#: afd614db341b4f7889edb580ecef86e2
+msgid "## Docker Deployment"
+msgstr "## Docker 部署"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:201
+#: 09b64976ae2d4034bad13d9cecf2bab7
+msgid "```bash # Build image docker build -t my-service ."
+msgstr ""
+"```bash\n"
+"# 构建镜像\n"
+"docker build -t my-service .\n"
+"```"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:205
+#: 0d313de65da6410d8512dde1a363fadf
+msgid "# Run container docker run -p 8000:8000 my-service ```"
+msgstr ""
+"# 运行容器  \n"
+"docker run -p 8000:8000 my-service ```"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:209
+#: 58ab6c56d93f47b3b8cb4f6413335231
+msgid "## Environment Variables"
+msgstr "## 环境变量"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:211
+#: 91e0d540511241f684d3f3dca64bb409
+msgid "`PORT`: Server port (default: 8000)"
+msgstr "`PORT`: 服务器端口（默认值：8000）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:212
+#: b7c502e98ca242e59fdbd6b6a5612133
+msgid "`HOST`: Server host (default: 0.0.0.0)"
+msgstr "`HOST`: 服务器主机（默认值：0.0.0.0）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:214
+#: 701ea36e555e4cc89253dea00d46adbe
+msgid "## API Endpoints"
+msgstr "## API 端点"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:216
+#: 039271cb03f54f7896cc2e9810f74961
+msgid "`GET /mcp/tools` - List available tools"
+msgstr "`GET /mcp/tools` - 列出可用工具"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:217
+#: 8816d1e5005a49d1b43a78bc6c8470ce
+msgid "`POST /mcp/tools/my_remote_tool` - Execute tool"
+msgstr "`POST /mcp/tools/my_remote_tool` - 执行工具"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:220
+#: e5f3dca48efa40729fe1d72fb53913ed
+msgid "Step 6: Write Tests"
+msgstr "步骤 6：编写测试"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:222
+#: 88a4e4f4f01f4d52b4a97172554262a8
+msgid "Create ``tests/integration/test_my_remote_tool.py``:"
+msgstr "创建 ``tests/integration/test_my_remote_tool.py``:"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:288
+#: 5e428c2f483448799b11e2ddfe3e1044
+msgid "Run tests: .. code-block:: bash"
+msgstr "运行测试：.. code-block:: bash"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:291
+#: b322d6e2637c45729b45b1339e6b4bf5
+msgid "pytest tests/integration/test_my_remote_tool.py -v"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:294
+#: 66b36c72991148e9a031fd6c5ca51fd0
+msgid "Step 7: Code Quality Check (Automatic)"
+msgstr "第七步：代码质量检查（自动）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:296
+#: e4a0d136f4d448f5b23e9313325b68fa
+msgid "Pre-commit hooks will automatically run when you commit:"
+msgstr "在提交代码时，预提交钩子会自动运行："
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:305
+#: ef674e5de72c45f084d713e99bad677b
+msgid "Step 8: Documentation"
+msgstr "步骤 8：文档编制"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:307
+#: c3655c93bbac4ff996bafeda6733dbb7
+msgid "**Server Documentation (README.md):** .. code-block:: markdown"
+msgstr "**服务器文档 (README.md):** .. code-block:: markdown"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:310
+#: 63909421c41c49839802cd2c44acb455
+msgid "# My Service"
+msgstr "# 我的服务"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:312
+#: f3b3bafcd26945e090483e82f8166218
+msgid "Remote MCP server providing text processing tools."
+msgstr "远程MCP服务器提供文本处理工具。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:314
+#: a92e279b527e44899b2a603f83a1d9f9
+msgid "## Features"
+msgstr "## 功能"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:316
+#: 3a70f4887c7e476bbe5cf17024a8a690
+msgid "Text case conversion (uppercase/lowercase)"
+msgstr "文本大小写转换（大写/小写）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:317
+#: 7c30391edd104d10ba6842627b22a34e
+msgid "Health check endpoint"
+msgstr "健康检查端点"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:318
+#: 0e202c9adc2c480eaad4cf476b45f700
+msgid "MCP protocol support"
+msgstr "MCP协议支持"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:320
+#: d7a1ff4fd33e46c79d3b03436e090f59
+msgid "## API Reference"
+msgstr "## API参考"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:322
+#: 59e29d8a6f4640d4971b00e1cb4864d2
+msgid "### my_remote_tool"
+msgstr ""
+"### my_remote_tool\n"
+"\n"
+"我的远程工具"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:324
+#: b3beb157a2f645eebac6593f4221ace0
+msgid "Convert text using specified operation."
+msgstr "使用指定操作转换文本。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:326
+#: 20c9730cfd384df39e5b5ea5f9af8289
+msgid ""
+"**Parameters:** - `input_text` (string, required): Text to process - "
+"`operation` (string, optional): Operation to perform (uppercase/lowercase)"
+msgstr ""
+"**参数：**  \n"
+"- `input_text`（字符串，必填）：需要处理的文本  \n"
+"- `operation`（字符串，可选）：要执行的操作（大写/小写）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:330
+#: 4a07ba12d3b54910a5e84b8bce5145d4
+msgid ""
+"**Returns:** - `result` (string): Processed text - `operation` (string): "
+"Operation performed - `success` (boolean): Success status"
+msgstr ""
+"**返回值：**  \n"
+"- `result`（字符串）：处理后的文本  \n"
+"- `operation`（字符串）：执行的操作  \n"
+"- `success`（布尔值）：成功状态"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:335
+#: a06e479d461648a7a9e301ffb60e7cb7
+msgid ""
+"**Tool Documentation:** Add comprehensive docstrings to your tool functions "
+"in the server code."
+msgstr "**工具文档：** 在服务器代码中的工具函数添加全面的文档字符串。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:339
+#: 29e48f42b0fe4224b0fd79215e26e4ac
+msgid "Step 9: Create Examples"
+msgstr "步骤9：创建示例"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:341
+#: e6f88ed14cb54480a40f5217d08d265c
+msgid "Create ``examples/my_remote_tool_example.py``:"
+msgstr "创建 ``examples/my_remote_tool_example.py``："
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:378
+#: a355c8b0c850483194396f4445dd99cf
+msgid "Step 10: Submit Pull Request"
+msgstr "第10步：提交拉取请求"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:404
+#: dd6b345c0d5341db9e77d07c58234b3a
+msgid "**PR Template:** .. code-block:: markdown"
+msgstr ""
+"**PR模板:** .. code-block:: markdown\n"
+"\n"
+"上下文: 文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:407
+#: 04c695cc69b24709a17a334370e67945
+msgid "## Description"
+msgstr ""
+"## 描述\n"
+"\n"
+"上下文：文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:409
+#: a23a5578bb764415b0954ce3fc3a2ea3
+msgid "This PR adds MyRemoteTool, a new MCP server for text processing."
+msgstr "此PR新增了MyRemoteTool，一个用于文本处理的MCP服务器。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:411
+#: f593fb585b4b48899e5804f377b091dc
+msgid "## Changes Made"
+msgstr "## 修改内容"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:413
+#: bc26432e50cb45b2947db0d2003a885b
+msgid "✅ **MCP Server**: Complete server implementation in remote/my_service/"
+msgstr "✅ **MCP 服务器**：完整的服务器实现位于 remote/my_service/"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:414
+#: 5d0be1441c794529838a32a1c27dd1c7
+msgid "✅ **Configuration**: JSON config in data/remote_tools/"
+msgstr "✅ **配置**：位于 data/remote_tools/ 的 JSON 配置"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:415
+#: 019e96b452394a71a53d8e0f95ac27e5
+msgid "✅ **Testing**: Integration tests with mocked server"
+msgstr "✅ **测试**：使用模拟服务器进行集成测试"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:416
+#: 1ca33234d7124fc4b46f1f32710a380c
+msgid "✅ **Documentation**: Server README and API docs"
+msgstr "✅ **文档**：服务器README和API文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:417
+#: 238c6d881be247baba6fc1b1b9cacf7e
+msgid "✅ **Examples**: Working usage examples"
+msgstr "✅ **示例**：工作使用示例"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:418
+#: b92aceee74784d34931e0f628cb41817
+msgid "✅ **Deployment**: Docker and cloud deployment instructions"
+msgstr "✅ **部署**：Docker 和云部署说明"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:420
+#: 834386260c6b46a49a02ac9261121f77
+msgid "## Server Information"
+msgstr "## 服务器信息"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:422
+#: 24e2a70d5a6543ec9074c26796aabb20
+msgid "**Protocol**: MCP (Model Context Protocol)"
+msgstr "**协议**：MCP（模型上下文协议）"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:423
+#: a558071cffa1484fb6c3fe94b51b0a7e
+msgid "**Transport**: HTTP"
+msgstr "**传输**：HTTP"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:424
+#: c42c9ee367b0493a89c6e4a004192062
+msgid "**Deployment**: [Cloud platform / Self-hosted]"
+msgstr "**部署**：[云平台 / 自托管]"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:425
+#: 84dc7972e13443cbaa33defdf2402857
+msgid "**URL**: https://my-service.example.com/mcp"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:427
+#: e7c79cc1f7d549fa9d5dcda12deedc7e
+msgid "## Testing"
+msgstr "## 测试"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:429
+#: 4a277f8d0cad4437924c9b45ceeec2cd
+msgid ""
+"```bash pytest tests/integration/test_my_remote_tool.py python "
+"examples/my_remote_tool_example.py ```"
+msgstr ""
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:434
+#: 3997e669f14c4f8cb524591b80bc0fd4
+msgid "## Deployment"
+msgstr "## 部署"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:436
+#: 97306b9ddb914f2a96c74c08b8885ed4
+msgid ""
+"See `src/tooluniverse/remote/my_service/README.md` for deployment "
+"instructions."
+msgstr "请参阅 `src/tooluniverse/remote/my_service/README.md` 了解部署说明。"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:438
+#: cfcd21977f2c47f6b271c9b797a909a7
+msgid "## Checklist"
+msgstr "## 清单"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:440
+#: 50e23051ca7a4ff4a0865ef2bf5cd7dd
+msgid "[x] Tests pass locally"
+msgstr "[x] 测试在本地通过"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:441
+#: 10bd9bf21cde4b65b105379de28aaa63
+msgid "[x] Server is publicly accessible or deployment docs provided"
+msgstr "[x] 服务器可公开访问或已提供部署文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:442
+#: 539ce184943049b284cecbbd666eac2f
+msgid "[x] Code follows project style guidelines"
+msgstr "[x] 代码遵循项目风格指南"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:443
+#: a43fa94937a9415390b3cf9b47b10544
+msgid "[x] Documentation is complete"
+msgstr "[x] 文档已完成"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:444
+#: 477804ab7950425da4ebb3956cd3a4e3
+msgid "[x] Examples work as expected"
+msgstr "[x] 示例按预期运行"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:447
+#: 6e0d603240354baaaff920d344cf3959
+msgid "Key Differences from Local Tools"
+msgstr "与本地工具的主要区别"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:449
+#: cb3e977eb8c5414fa0aa0e035f8c0477
+msgid "Aspect | Local Tools | Remote Tools |"
+msgstr "方面 | 本地工具 | 远程工具 |"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:450
+#: 7b635349d82b4e888da27aa5b110b8f7
+msgid ""
+"|--------|-------------|--------------| | **__init__.py** | ✅ Must modify 4 "
+"locations | ❌ No modification needed | | **File Location** | "
+"``src/tooluniverse/xxx_tool.py`` | ``src/tooluniverse/remote/xxx/`` | | "
+"**Config Location** | ``data/xxx_tools.json`` | "
+"``data/remote_tools/xxx_tools.json`` | | **Server Deployment** | Not needed "
+"| ✅ Must provide public access | | **Testing** | Unit tests | Integration "
+"tests (mock server) | | **Dependencies** | Python only | Server + "
+"dependencies |"
+msgstr ""
+"|--------|-------------|--------------|  \n"
+"| **__init__.py** | ✅ 必须修改 4 处 | ❌ 无需修改 |  \n"
+"| **文件位置** | ``src/tooluniverse/xxx_tool.py`` | ``src/tooluniverse/remote/xxx/`` |  \n"
+"| **配置文件位置** | ``data/xxx_tools.json`` | ``data/remote_tools/xxx_tools.json`` |  \n"
+"| **服务器部署** | 不需要 | ✅ 必须提供公共访问 |  \n"
+"| **测试** | 单元测试 | 集成测试（模拟服务器） |  \n"
+"| **依赖** | 仅 Python | 服务器 + 依赖 |"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:459
+#: 08e8706b59a346e391ed2efacaa0ef51
+msgid "Common Mistakes"
+msgstr "常见错误"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:461
+#: db8a500fd6164e53b6c94025b6d68ea9
+msgid ""
+"**❌ Server not accessible** - Tool will fail with connection errors - "
+"Solution: Ensure server is publicly accessible or provide clear deployment "
+"docs"
+msgstr "**❌ 服务器无法访问** - 工具将因连接错误而失败 - 解决方案：确保服务器可公开访问或提供明确的部署文档"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:465
+#: 2411c45ca17e4a458d65049c5773a811
+msgid ""
+"**❌ Wrong config location** - Config must be in ``data/remote_tools/`` - Not"
+" in ``data/``"
+msgstr "**❌ 配置文件位置错误** - 配置文件必须位于 ``data/remote_tools/`` - 而不是 ``data/``"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:469
+#: e5ee432a8879453abca483c35b4bb2f4
+msgid ""
+"**❌ Missing server code** - Include complete server implementation - Don't "
+"just provide config"
+msgstr "**❌ 缺少服务器代码** - 请包含完整的服务器实现 - 不要仅提供配置"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:473
+#: 620c9d03f60d45798918bf955a80c2ea
+msgid ""
+"**❌ No deployment documentation** - Users need to know how to run the server"
+" - Include setup and deployment instructions"
+msgstr "**❌ 缺少部署文档** - 用户需要了解如何运行服务器 - 请包含设置和部署说明"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:477
+#: f27da8be0b5347deb0ace925fb8d5a6e
+msgid ""
+"**❌ Poor error handling** - Server should return proper error responses - "
+"Tool should handle network failures gracefully"
+msgstr "**❌ 错误处理不佳** - 服务器应返回正确的错误响应 - 工具应能够优雅地处理网络故障"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:482
+#: 54bc67dbae614e0abac4685837ce3329
+msgid "Troubleshooting"
+msgstr "故障排除"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:484
+#: 1838ea79c0334df38a739b5e8a18ca1f
+msgid "**Connection Error: Server not accessible** .. code-block:: python"
+msgstr "**连接错误：服务器无法访问** .. code-block:: python"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:487
+#: e0aab018c42843bd93cde4e6e07f0653
+#, python-brace-format
+msgid ""
+"# Test server connectivity import requests response = "
+"requests.get(\"https://your-server.com/mcp/tools\") print(f\"Status: "
+"{response.status_code}\") print(f\"Response: {response.json()}\")"
+msgstr ""
+"# 测试服务器连接  \n"
+"import requests  \n"
+"response = requests.get(\"https://your-server.com/mcp/tools\")  \n"
+"print(f\"状态码: {response.status_code}\")  \n"
+"print(f\"响应内容: {response.json()}\")"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:493
+#: 9798dbb1600742949a4258ebc0345962
+msgid "**Tool not found in ToolUniverse** .. code-block:: python"
+msgstr "**在 ToolUniverse 中未找到工具** .. code-block:: python"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:496
+#: 1ed57c0f47db44d98e6d85ad67710153
+msgid ""
+"# Check if config is loaded from tooluniverse import ToolUniverse tu = "
+"ToolUniverse() tu.load_tools()"
+msgstr ""
+"# 检查是否已加载配置  \n"
+"从 tooluniverse 导入 ToolUniverse  \n"
+"tu = ToolUniverse()  \n"
+"tu.load_tools()"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:501
+#: 70abbfc516104e4a9ab13dfb6086a56a
+msgid ""
+"tools = tu.list_tools() print(\"my_remote_tool\" in tools)  # Should be True"
+msgstr ""
+"tools = tu.list_tools()  \n"
+"print(\"my_remote_tool\" in tools)  # 应为 True"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:504
+#: 4de4a3b05a0e46569f1043994d536220
+msgid ""
+"**Server returns unexpected format** - Ensure server follows MCP protocol - "
+"Check that responses match expected schema - Verify tool parameter "
+"validation"
+msgstr "**服务器返回意外格式** - 确保服务器遵循MCP协议 - 检查响应是否符合预期的架构 - 验证工具参数的有效性"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:510
+#: 0f8ebbfba11c48f281c8343622e14db9
+msgid "Next Steps"
+msgstr "下一步"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:512
+#: cc09341c6ae44115bd82f095920da739
+msgid "After successfully contributing your remote tool:"
+msgstr "成功提交您的远程工具后："
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:514
+#: 4610628f5fc840e9b46ca35b56ad7065
+msgid ""
+"🏠 **Local Tools**: :doc:`local_tools` - Learn about contributing local tools"
+msgstr "🏠 **本地工具**：:doc:`local_tools` - 了解如何贡献本地工具"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:515
+#: a6ae3687a9cd4fdb98024ad81c83436a
+msgid ""
+"📚 **MCP Server Development**: :doc:`../remote_tools/mcp_server` - Advanced "
+"MCP server patterns"
+msgstr "📚 **MCP服务器开发**：:doc:`../remote_tools/mcp_server` - 高级MCP服务器模式"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:516
+#: 71b2db39ed624edeb1690ae8d3565599
+msgid ""
+"🔍 **Architecture**: :doc:`../reference/architecture` - Understand "
+"ToolUniverse internals"
+msgstr "🔍 **架构**: :doc:`../reference/architecture` - 了解 ToolUniverse 的内部结构"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:517
+#: 4001736110ab48f8985dd6cb4f245a54
+msgid ""
+"📊 **Comparison**: :doc:`../reference/comparison` - Compare tool types and "
+"usage scenarios"
+msgstr "📊 **比较**：:doc:`../reference/comparison` - 比较工具类型和使用场景"
+
+#: ../../expand_tooluniverse/contributing/remote_tools.rst:520
+#: 25418d8e58134673a874a2c3cad82123
+msgid ""
+"**Success Tips**: Start with simple servers, test thoroughly with real "
+"deployments, and provide clear documentation for users to run your service!"
+msgstr "**成功提示**：从简单的服务器开始，使用真实部署进行充分测试，并提供清晰的文档以帮助用户运行您的服务！"

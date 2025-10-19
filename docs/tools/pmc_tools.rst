@@ -28,7 +28,7 @@ Search for full-text biomedical literature using PMC (PubMed Central) API. PMC i
    * ``query`` (string) (required)
      Search query for PMC papers. Use keywords separated by spaces to refine your search.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of papers to return. This sets the maximum number of papers retrieved from PMC.
 
    * ``date_from`` (string) (optional)
@@ -47,7 +47,8 @@ Search for full-text biomedical literature using PMC (PubMed Central) API. PMC i
       query = {
           "name": "PMC_search_papers",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

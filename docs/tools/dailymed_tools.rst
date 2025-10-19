@@ -28,7 +28,7 @@ Get complete label corresponding to SPL Set ID, returns content in XML or JSON f
    * ``setid`` (string) (required)
      SPL Set ID to query.
 
-   * ``format`` (string) (optional)
+   * ``format`` (string) (required)
      Return format, only supports 'xml'.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Get complete label corresponding to SPL Set ID, returns content in XML or JSON f
       query = {
           "name": "DailyMed_get_spl_by_setid",
           "arguments": {
-              "setid": "example_value"
+              "setid": "example_value",
+              "format": "example_value"
           }
       }
       result = tu.run(query)
@@ -59,28 +60,28 @@ Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and
 
    **Parameters:**
 
-   * ``drug_name`` (string) (optional)
+   * ``drug_name`` (string) (required)
      Generic or brand name of the drug, e.g., 'TAMSULOSIN HYDROCHLORIDE'.
 
-   * ``ndc`` (string) (optional)
+   * ``ndc`` (string) (required)
      National Drug Code (NDC).
 
-   * ``rxcui`` (string) (optional)
+   * ``rxcui`` (string) (required)
      RxNorm Code (RXCUI).
 
-   * ``setid`` (string) (optional)
+   * ``setid`` (string) (required)
      Set ID corresponding to the SPL.
 
-   * ``published_date_gte`` (string) (optional)
+   * ``published_date_gte`` (string) (required)
      Published date >= specified date, format 'YYYY-MM-DD'.
 
-   * ``published_date_eq`` (string) (optional)
+   * ``published_date_eq`` (string) (required)
      Published date == specified date, format 'YYYY-MM-DD'.
 
-   * ``pagesize`` (integer) (optional)
+   * ``pagesize`` (integer) (required)
      Number of items per page, maximum 100, default 100.
 
-   * ``page`` (integer) (optional)
+   * ``page`` (integer) (required)
      Page number, starts from 1, default 1.
 
    **Example Usage:**
@@ -90,6 +91,14 @@ Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and
       query = {
           "name": "DailyMed_search_spls",
           "arguments": {
+              "drug_name": "example_value",
+              "ndc": "example_value",
+              "rxcui": "example_value",
+              "setid": "example_value",
+              "published_date_gte": "example_value",
+              "published_date_eq": "example_value",
+              "pagesize": 10,
+              "page": 10
           }
       }
       result = tu.run(query)

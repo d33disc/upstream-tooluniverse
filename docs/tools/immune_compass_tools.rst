@@ -28,10 +28,10 @@ Predicts immune checkpoint inhibitor (ICI) response using COMPASS model. This to
    * ``gene_expression_data_path`` (string) (required)
      Path to the TPM expression data file. Keys should be standard gene symbols (e.g., 'CD274', 'PDCD1', 'CTLA4'). Values should be normalized expression in TPM (Transcripts Per Million). Minimum ~100 genes recommended for reliable predictions.
 
-   * ``threshold`` (number) (optional)
+   * ``threshold`` (number) (required)
      Probability threshold for responder classification (0.0-1.0). Values ≥ threshold classify sample as likely responder. Default 0.5 provides balanced sensitivity/specificity. Consider lower thresholds (~0.3) for higher sensitivity.
 
-   * ``root_path`` (string) (optional)
+   * ``root_path`` (string) (required)
      Path to the directory containing model checkpoints. If None, uses COMPASS_MODEL_PATH/immune-compass/checkpoint.
 
    **Example Usage:**
@@ -41,7 +41,9 @@ Predicts immune checkpoint inhibitor (ICI) response using COMPASS model. This to
       query = {
           "name": "run_compass_prediction",
           "arguments": {
-              "gene_expression_data_path": "example_value"
+              "gene_expression_data_path": "example_value",
+              "threshold": "example_value",
+              "root_path": "example_value"
           }
       }
       result = tu.run(query)

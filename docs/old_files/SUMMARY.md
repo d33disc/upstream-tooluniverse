@@ -73,7 +73,7 @@ msgstr "🔧 工具"
 msgid "💡 Use ToolUniverse"
 msgstr "💡 使用 ToolUniverse"
 
-msgid "🔨 Expand ToolUniverse"
+msgid "🔨 Add Tools to ToolUniverse"
 msgstr "🔨 扩展 ToolUniverse"
 
 msgid "🔌 API"

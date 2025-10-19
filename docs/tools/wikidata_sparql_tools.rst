@@ -28,7 +28,7 @@ Execute SPARQL queries against Wikidata to retrieve structured data. This tool p
    * ``sparql`` (string) (required)
      SPARQL query string to execute against Wikidata. Use SPARQL syntax to query academic entities, relationships, and properties.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Optional result limit override. If not specified, uses the LIMIT clause in the SPARQL query or returns all results.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Execute SPARQL queries against Wikidata to retrieve structured data. This tool p
       query = {
           "name": "Wikidata_SPARQL_query",
           "arguments": {
-              "sparql": "example_value"
+              "sparql": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)

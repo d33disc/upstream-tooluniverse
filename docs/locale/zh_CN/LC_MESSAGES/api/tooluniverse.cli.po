@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-19 00:41-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/tooluniverse.cli.rst:2 d4f6f542e96543a8bb6928bafbd8dbad
+msgid "tooluniverse.cli package"
+msgstr ""
+
+#~ msgid "ToolSpace CLI Management Tool"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This module provides command-line tools"
+#~ " for managing ToolSpace configurations."
+#~ msgstr ""
+
+#~ msgid "Main CLI entry point."
+#~ msgstr ""
+
+#~ msgid "Handle list command."
+#~ msgstr ""
+
+#~ msgid "Handle validate command."
+#~ msgstr ""
+
+#~ msgid "Handle create command."
+#~ msgstr ""
+
+#~ msgid "Handle search command (placeholder)."
+#~ msgstr ""
+
+#~ msgid "Handle info command."
+#~ msgstr ""
+
+#~ msgid "Submodules"
+#~ msgstr ""
+
+#~ msgid "tooluniverse.cli.toolspace\\_cli module"
+#~ msgstr ""
+
+#~ msgid "ToolUniverse CLI Tools"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This package contains command-line tools"
+#~ " for managing ToolUniverse configurations."
+#~ msgstr ""
+

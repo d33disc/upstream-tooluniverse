@@ -31,22 +31,22 @@ Perform protein-ligand docking via Boltz-2: input a protein sequence plus one or
    * ``ligands`` (array) (required)
      List of ligand definitions to dock against the protein.
 
-   * ``recycling_steps`` (integer) (optional)
+   * ``recycling_steps`` (integer) (required)
      Number of recycling steps (overfold iterations).
 
-   * ``sampling_steps`` (integer) (optional)
+   * ``sampling_steps`` (integer) (required)
      Number of sampling steps for diffusion process.
 
-   * ``diffusion_samples`` (integer) (optional)
+   * ``diffusion_samples`` (integer) (required)
      How many diffusion-sampled structures to generate.
 
-   * ``step_scale`` (number) (optional)
+   * ``step_scale`` (number) (required)
      Scaling factor for diffusion step size.
 
-   * ``use_potentials`` (boolean) (optional)
+   * ``use_potentials`` (boolean) (required)
      If true, omit external force-field potentials from the diffusion process.
 
-   * ``return_structure`` (boolean) (optional)
+   * ``return_structure`` (boolean) (required)
      If false, the predicted structure will not be read or returned. Defaults to false.
 
    **Example Usage:**
@@ -57,7 +57,13 @@ Perform protein-ligand docking via Boltz-2: input a protein sequence plus one or
           "name": "boltz2_docking",
           "arguments": {
               "sequence": "example_value",
-              "ligands": ["item1", "item2"]
+              "ligands": ["item1", "item2"],
+              "recycling_steps": 10,
+              "sampling_steps": 10,
+              "diffusion_samples": 10,
+              "step_scale": "example_value",
+              "use_potentials": true,
+              "return_structure": true
           }
       }
       result = tu.run(query)

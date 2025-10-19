@@ -1,0 +1,530 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:2
+#: 55ca0cc469c2470a9d2ef5686575f932
+msgid "Remote Tools"
+msgstr "远程工具"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:4
+#: 0c66fe4c560b42d5a5cab8c2ccdecc14
+msgid ""
+"Remote tools allow you to integrate external services, APIs, or tools "
+"running on different servers with ToolUniverse."
+msgstr "远程工具允许您将外部服务、API或运行在不同服务器上的工具与ToolUniverse集成。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:7
+#: eb56a995a6b347eebb700ed51c1bf22b
+msgid "What are Remote Tools?"
+msgstr "什么是远程工具？"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:9
+#: a26652fc5a324d55a93a911dd1dd9095
+msgid ""
+"Remote tools connect ToolUniverse with external services and systems. They "
+"provide:"
+msgstr "远程工具将 ToolUniverse 与外部服务和系统连接起来。它们提供："
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:11
+#: 179fac8763ab46f7886394edb861c4c5
+msgid "**Scalability**: Offload heavy computation to dedicated servers"
+msgstr "**可扩展性**：将繁重的计算任务卸载到专用服务器"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:12
+#: 27a63565627f4a27ad030238de34c6b9
+msgid "**Integration**: Connect with existing systems and services"
+msgstr "**集成**：与现有系统和服务连接"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:13
+#: 401a932679944146878535f38fcd39cc
+msgid "**Flexibility**: Use tools in different programming languages"
+msgstr "**灵活性**：使用不同编程语言的工具"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:14
+#: 200b5ee819fd4d6aba71de89ded41db1
+msgid "**Isolation**: Keep sensitive operations separate"
+msgstr "**隔离**：将敏感操作分离开"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:16
+#: e7f46bba40d249519d24fa8219337cb7
+msgid ""
+"**Best for:** - External API integrations - Microservice connections - "
+"Cloud-based AI services - Proprietary system connections"
+msgstr ""
+"**最佳适用场景：**  \n"
+"- 外部 API 集成  \n"
+"- 微服务连接  \n"
+"- 基于云的 AI 服务  \n"
+"- 专有系统连接"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:23
+#: 74a954b62c3f4c949e7f867293b601f0
+msgid "Quick Start"
+msgstr "快速入门"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:25
+#: d4fdcd18cab24e1f8bf1b1bdce2d3976
+msgid ""
+"**I want to quickly try remote tools:** → :doc:`tutorial` - Learn basic "
+"remote tool integration"
+msgstr "**我想快速尝试远程工具：** → :doc:`教程` - 了解基本的远程工具集成"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:28
+#: d21dde542e634f1eb1ef18b1474a4f50
+msgid ""
+"**I want to create an MCP server:** → :doc:`mcp_server` - Learn MCP server "
+"development"
+msgstr "**我想创建一个MCP服务器：** → :doc:`mcp_server` - 了解MCP服务器开发"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:31
+#: 420e7bee9bbf4cbd82b50b7bd8969403
+msgid ""
+"**I want to contribute a remote tool:** → "
+":doc:`../contributing/remote_tools` - Submit your tool to ToolUniverse"
+msgstr ""
+"**我想贡献一个远程工具：** → :doc:`../contributing/remote_tools` - 将您的工具提交至 "
+"ToolUniverse"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:34
+#: 314de331711c4cccb847fba7399724de
+msgid ""
+"**I want to learn advanced patterns:** → :doc:`advanced_patterns` - Circuit "
+"breakers, load balancing, etc."
+msgstr "**我想学习高级模式：** → :doc:`advanced_patterns` - 断路器、负载均衡等。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:38
+#: ed144688f20246d2957f6688853b72ec
+msgid "Key Concepts"
+msgstr "关键概念"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:40
+#: f5392db244724f389a205ae9550635d7
+msgid ""
+"**MCP (Model Context Protocol)** - Standardized protocol for tool "
+"communication - Language agnostic - Supports authentication and error "
+"handling - Recommended approach for remote tools"
+msgstr "**MCP（模型上下文协议）** - 标准化的工具通信协议 - 与编程语言无关 - 支持身份验证和错误处理 - 远程工具的推荐方法"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:46
+#: 85e373e743674d8e93032b39e2cf9d77
+msgid ""
+"**REST API Integration** - Simple HTTP-based integration - Good for existing"
+" APIs - Easier to implement but less standardized"
+msgstr "**REST API 集成** - 基于简单的 HTTP 集成 - 适用于现有 API - 实现更容易但标准化程度较低"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:51
+#: 42d781460b6a49b081048d23de169217
+msgid ""
+"**Configuration** - Remote tools defined in JSON configuration files - "
+"Specify server URLs, authentication, and parameters - No ``__init__.py`` "
+"modifications needed"
+msgstr "**配置** - 在JSON配置文件中定义远程工具 - 指定服务器URL、认证信息和参数 - 无需修改``__init__.py``"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:56
+#: 3913e8da4dcc4732829a8a63fea56ad2
+msgid ""
+"**Self-Use vs Contribution** - **Self-Use**: Local server or private "
+"deployment - **Contribution**: Public server or detailed deployment docs"
+msgstr "**自用与贡献** - **自用**：本地服务器或私有部署 - **贡献**：公共服务器或详细部署文档"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:61
+#: 081b8c2e3a7d4aff8b7315cf01ecb627
+msgid "Examples"
+msgstr "示例"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:64
+#: 36dc953dca5745fa88d2972be6422e13
+msgid "MCP Server"
+msgstr "MCP服务器"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:99
+#: d0db40c3698b4312a694c186549be574
+msgid "REST API Wrapper"
+msgstr "REST API 封装"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:146
+#: bfe60ff2a3e241288ff23dbcd6bbd5e7
+msgid "Connecting to Remote Tools"
+msgstr "连接到远程工具"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:148
+#: f37ab6e2f0a34bba9c690a367548a106
+msgid "**MCP Auto-Discovery** .. code-block:: python"
+msgstr "**MCP 自动发现** .. code-block:: python"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:151
+#: 32c10c7498a74ea9acb463e1ff056b9e
+msgid ""
+"from tooluniverse import ToolUniverse from tooluniverse.mcp_tool_registry "
+"import load_mcp_tools_to_tooluniverse"
+msgstr ""
+"从 tooluniverse 导入 ToolUniverse  \n"
+"从 tooluniverse.mcp_tool_registry 导入 load_mcp_tools_to_tooluniverse"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:154
+#: 3b25bf27584843a7b1a711ed8fb4d33e
+msgid "tu = ToolUniverse() tu.load_tools()"
+msgstr ""
+"tu = ToolUniverse()  \n"
+"tu.load_tools()"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:157
+#: 26014c88a0ff4f6c91d9e9c7da6b8277
+msgid "# Auto-discover tools from MCP server load_mcp_tools_to_tooluniverse("
+msgstr "# 从MCP服务器自动发现工具 load_mcp_tools_to_tooluniverse("
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:159
+#: 02b904935d5c40379c615447a0fc8ae6
+msgid "tu, mcp_server_url=\"http://localhost:8000\", tool_prefix=\"remote_\""
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:162
+#: 4d4237fce9ed464ab2a6a14e3388887f
+msgid ")"
+msgstr "请提供具体的英文文本，我将为您翻译成符合要求的中文。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:164
+#: d01bc8853b8f4bd8a9c1c0cb38edfc08
+msgid "**Configuration File** .. code-block:: json"
+msgstr "**配置文件** .. code-block:: json"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:167
+#: 935ed36889b840fb81d015843bf4d56e
+msgid "["
+msgstr "请提供您需要翻译的具体英文文本，我将根据您的要求进行翻译。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:168
+#: ba5a1d082a8e4e7c8f6be114279867e6
+msgid "{"
+msgstr "请提供需要翻译的具体文本内容，我将为您进行翻译。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:169
+#: 6d515749429842319902b5cf152369dc
+msgid ""
+"\"type\": \"RemoteTool\", \"name\": \"my_remote_tool\", \"description\": "
+"\"My remote tool\", \"parameter\": {"
+msgstr "\"type\": \"远程工具\", \"name\": \"我的远程工具\", \"description\": \"我的远程工具\", \"parameter\": {"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:173
+#: 66c6f4d0ed9f4e16a84df3181195624f
+msgid "\"type\": \"object\", \"properties\": {"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:175
+#: 6770bf51d0a44057a7811cc90a3ac0c6
+#, python-brace-format
+msgid "\"input\": {\"type\": \"string\", \"description\": \"Input parameter\"}"
+msgstr "\"input\": {\"type\": \"string\", \"description\": \"输入参数\"}"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:176
+#: 0651a55323864f94bf46c9a5eefe3f0c
+msgid "}, \"required\": [\"input\"]"
+msgstr "}, \"required\": [\"输入\"]"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:178
+#: 1bb39199aced4748802a968082700017
+msgid "}, \"remote_info\": {"
+msgstr "}, \"远程信息\": {"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:180
+#: 2080a77e470a47078a951b22351fb723
+msgid "\"server_type\": \"MCP\", \"transport\": \"http\", \"url\": \"http://localhost:8000/mcp\""
+msgstr "server_type\": \"MCP\", \"transport\": \"http\", \"url\": \"http://localhost:8000/mcp"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:183
+#: ../../expand_tooluniverse/remote_tools/index.rst:184
+#: b44d80b94ba24e6c85143308944a1da3 efa7e544a609443c8de65858fda85d9e
+msgid "}"
+msgstr "请提供需要翻译的具体文本内容，我将根据要求进行翻译。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:185
+#: 08f9c281bbda4cd4ab6b17d888ce741f
+msgid "]"
+msgstr "请提供您需要翻译的具体英文文本，我将为您翻译成自然流畅的中文，同时保持技术准确性和专业文档语气，并保留任何HTML标签或格式。"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:188
+#: 605c670c8fa14ab3afe32c03995b3b79
+msgid "Common Patterns"
+msgstr "常见模式"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:190
+#: b355e76332c342ab8e2841c8ff4422e9
+msgid "**Error Handling** .. code-block:: python"
+msgstr "**错误处理** .. code-block:: python"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:193
+#: ../../expand_tooluniverse/remote_tools/index.rst:213
+#: 654184cff0bf462fbf4022d50c20bfd5 e0da5007b6624da6a39693e411f842e2
+msgid "def run(self, arguments):"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:194
+#: 92966bffb54a406f8ce5e9b4fb8070fe
+msgid "try:"
+msgstr "尝试："
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:195
+#: d0f48ebbaaed470db14c28316deabdb1
+#, python-brace-format
+msgid ""
+"# Make remote call result = self.call_remote_service(arguments) return "
+"{\"result\": result, \"success\": True}"
+msgstr ""
+"# 进行远程调用  \n"
+"result = self.call_remote_service(arguments)  \n"
+"return {\"result\": result, \"success\": True}"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:198
+#: fa5316ad85884993995f9b4daf44ab51
+msgid "except requests.Timeout:"
+msgstr ""
+"except requests.Timeout:  \n"
+"除非请求超时："
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:199
+#: dfed26c2d3394a79b1517e33ebafdab1
+#, python-brace-format
+msgid "return {\"error\": \"Request timeout\", \"success\": False}"
+msgstr "return {\"error\": \"请求超时\", \"success\": False}"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:200
+#: 3e0d923d6e674d9bab4e29ad020f4f68
+msgid "except requests.ConnectionError:"
+msgstr ""
+"except requests.ConnectionError:  \n"
+"除非出现 requests.ConnectionError:"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:201
+#: 3c8d2e48ff4e422891609da7d44aa292
+#, python-brace-format
+msgid "return {\"error\": \"Connection failed\", \"success\": False}"
+msgstr "return {\"error\": \"连接失败\", \"success\": False}"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:202
+#: 85222b12b70442f5936826ed31c3c1d8
+msgid "except Exception as e:"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:203
+#: 0813649fd52f4535924f5ee1f8370550
+#, python-brace-format
+msgid "return {\"error\": str(e), \"success\": False}"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:205
+#: aba893cc7ade443c91c937275291e9cf
+msgid "**Authentication** .. code-block:: python"
+msgstr "**身份验证** .. code-block:: python"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:208
+#: c5fb2fc2f6aa4551896fc1537be09115
+msgid "def __init__(self, tool_config=None):"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:209
+#: a8254166d6b9440c9e5417daca83a24c
+#, python-brace-format
+msgid ""
+"super().__init__(tool_config) self.api_key = self.config.get(\"settings\", "
+"{}).get(\"api_key\") self.base_url = self.config.get(\"settings\", "
+"{}).get(\"base_url\")"
+msgstr ""
+"super().__init__(tool_config)  \n"
+"self.api_key = self.config.get(\"settings\", {}).get(\"api_key\")  \n"
+"self.base_url = self.config.get(\"settings\", {}).get(\"base_url\")"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:214
+#: 5eaa5e65ec4247da92c86d71a36579d4
+#, python-brace-format
+msgid ""
+"headers = {\"Authorization\": f\"Bearer {self.api_key}\"} # Use headers in "
+"request"
+msgstr "headers = {\"Authorization\": f\"Bearer {self.api_key}\"} # 在请求中使用请求头"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:217
+#: 65ba44429f3a441485d3fed89c335424
+msgid "**Caching** .. code-block:: python"
+msgstr "**缓存** .. code-block:: python"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:220
+#: 84734b389a7f44ca8a704f6b34c1e1e6
+msgid "from functools import lru_cache"
+msgstr "从 functools 导入 lru_cache"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:222
+#: fc4bbffd0815423caacaad82d64db203
+msgid "@lru_cache(maxsize=100) def cached_remote_call(self, url, params):"
+msgstr ""
+"@lru_cache(maxsize=100)  \n"
+"def cached_remote_call(self, url, params):"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:224
+#: bb229f62541c490f86227430a9b12853
+msgid "# Make remote call return result"
+msgstr "# 使远程调用返回结果"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:227
+#: 71af53bd3b75435ebec4071abe1909ed
+msgid "**Rate Limiting** .. code-block:: python"
+msgstr "**速率限制** .. code-block:: python"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:230
+#: fd7200b366284d11846df437bf4a55e3
+msgid "import time from collections import defaultdict"
+msgstr ""
+"从 collections 导入 defaultdict  \n"
+"导入 time"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:233
+#: 9b81be0b6c7649e384b0ab199d5dfec5
+msgid "class RateLimiter:"
+msgstr "类 RateLimiter:"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:234
+#: 96d6e545adb940f8bad0c82237dd922c
+msgid "def __init__(self, max_requests=100, window_size=60):"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:235
+#: b0011eaac38147aabf2d3497c7ee53d4
+msgid ""
+"self.max_requests = max_requests self.window_size = window_size "
+"self.requests = defaultdict(list)"
+msgstr ""
+"self.max_requests = max_requests  \n"
+"self.window_size = window_size  \n"
+"self.requests = defaultdict(list)"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:239
+#: 28eb27889d734985b8c54e5a7557cc22
+msgid "def is_allowed(self, client_id):"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:240
+#: bfbe9f8510ff419cbeb01f5ef62d3b1a
+msgid "now = time.time() client_requests = self.requests[client_id]"
+msgstr ""
+"现在 = time.time()  \n"
+"client_requests = self.requests[client_id]"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:243
+#: f35747d363074211abc761e51a29877a
+msgid ""
+"# Remove old requests client_requests[:] = [req_time for req_time in "
+"client_requests"
+msgstr ""
+"# 删除旧请求  \n"
+"client_requests[:] = [req_time for req_time in client_requests"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:245
+#: 0755a3a97c4649dcb79b067fd1255d3f
+msgid "if now - req_time < self.window_size]"
+msgstr "如果现在 - req_time < self.window_size]"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:247
+#: ba02cbac4de147bd83762def1e04d306
+msgid "if len(client_requests) >= self.max_requests:"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:248
+#: f3eef6cdf9414e0fa73680c2fac67ee1
+msgid "return False"
+msgstr "返回 False"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:250
+#: 3b2e178a3bbb4eb9a0f04aa99b49ac08
+msgid "client_requests.append(now) return True"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:254
+#: 576f5b7d9923446096d670d1aa75a8e4
+msgid "Troubleshooting"
+msgstr "故障排除"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:256
+#: 92b93fd5055c45c5ae8c9376033e571f
+msgid ""
+"**Connection Errors** - Check server URL and port - Verify network "
+"connectivity - Check firewall settings"
+msgstr "**连接错误** - 检查服务器 URL 和端口 - 验证网络连接 - 检查防火墙设置"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:261
+#: 25b22696a77945ff920fab0ffbab0d11
+msgid ""
+"**Authentication Failures** - Verify API keys and tokens - Check "
+"authentication headers - Ensure credentials are valid"
+msgstr "**身份验证失败** - 验证 API 密钥和令牌 - 检查身份验证头 - 确保凭证有效"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:266
+#: af579df235244c5fb825d2b75ff1c315
+msgid ""
+"**Timeout Issues** - Increase timeout settings - Check server performance - "
+"Implement retry logic"
+msgstr "**超时问题** - 增加超时设置 - 检查服务器性能 - 实施重试逻辑"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:271
+#: a66aa2fe90974187aac97905e66c2a1b
+msgid ""
+"**Tool Discovery Problems** - Verify MCP server is running - Check tool "
+"registration - Ensure proper configuration"
+msgstr "**工具发现问题** - 验证MCP服务器是否正在运行 - 检查工具注册情况 - 确保配置正确"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:277
+#: db2215d802914306a182c35dad9c91f3
+msgid "Next Steps"
+msgstr "下一步"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:279
+#: 1c7d1778b4db48c2aded2293e9108b62
+msgid "📚 **Tutorial**: :doc:`tutorial` - Learn remote tool integration"
+msgstr "📚 **教程**: :doc:`tutorial` - 了解远程工具集成"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:280
+#: 79d48a66d4e44f6cb675a19547dbef56
+msgid "🔧 **MCP Server**: :doc:`mcp_server` - Learn MCP server development"
+msgstr "🔧 **MCP服务器**：:doc:`mcp_server` - 了解MCP服务器开发"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:281
+#: bafe5f206ded48f988d2167efdecfa47
+msgid "🚀 **Advanced**: :doc:`advanced_patterns` - Learn advanced patterns"
+msgstr "🚀 **高级**: :doc:`advanced_patterns` - 学习高级模式"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:282
+#: af7e35e6763d46c29559bfab5cfc868e
+msgid ""
+"🎁 **Contributing**: :doc:`../contributing/remote_tools` - Submit tools to "
+"ToolUniverse"
+msgstr "🎁 **贡献**：:doc:`../contributing/remote_tools` - 向 ToolUniverse 提交工具"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:283
+#: c486baf0b2c94158b158e9bd4610c0aa
+msgid ""
+"🔍 **Compare**: :doc:`../reference/comparison` - Compare with local tools"
+msgstr "🔍 **比较**: :doc:`../reference/comparison` - 与本地工具进行比较"
+
+#: ../../expand_tooluniverse/remote_tools/index.rst:286
+#: 3f72e1c48f7c4c51a838b86b1a5c1313
+msgid ""
+"**Getting Started**: We recommend starting with the tutorial to understand "
+"basic concepts, then choosing the appropriate guide based on your needs. MCP"
+" is the recommended approach for new remote tools."
+msgstr "**入门指南**：我们建议从教程开始，以了解基本概念，然后根据您的需求选择适合的指南。对于新的远程工具，推荐使用MCP方法。"

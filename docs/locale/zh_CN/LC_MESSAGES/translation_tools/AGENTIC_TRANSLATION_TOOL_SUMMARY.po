@@ -120,7 +120,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:27
 #: c47a02d760e74eb88cdfce915e205ce0
 msgid "2. 核心功能特性"
-msgstr ""
+msgstr "2. 核心功能特点"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:29
 #: 1180baaf27494284a3dc14f071f5253d
@@ -311,7 +311,7 @@ msgstr ""
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:137
 #: 95e8eff18a044148ae89ebb76b90f2fa
 msgid "技术文档翻译质量良好"
-msgstr ""
+msgstr "技术文档翻译质量优秀"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:138
 #: 2caaed0671ae4d548f41ba8fc266ec2f
@@ -386,7 +386,7 @@ msgstr "易于扩展和自定义"
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:171
 #: 9ab19c6232ba49e2b824c28e86cbe5fd
 msgid "3. 生产就绪"
-msgstr ""
+msgstr "3. 生产准备就绪"
 
 #: ../../translation_tools/AGENTIC_TRANSLATION_TOOL_SUMMARY.md:172
 #: 54d410a83a074e17a8526f1eb25efdd3

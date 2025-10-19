@@ -26,6 +26,8 @@ clean:
 livehtml:
 	sphinx-autobuild -b html $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/html
 
+live: livehtml
+
 install-deps:
 	pip install sphinx sphinx-rtd-theme myst-parser sphinx-autobuild
 

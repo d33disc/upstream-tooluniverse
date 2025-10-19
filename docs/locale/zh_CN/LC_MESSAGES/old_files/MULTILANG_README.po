@@ -361,7 +361,7 @@ msgstr "确保："
 
 #: ../../old_files/MULTILANG_README.md:227 caf663155130426cad39d882e5347250
 msgid "`.po` 文件已保存"
-msgstr ""
+msgstr "`.po` 文件已成功保存"
 
 #: ../../old_files/MULTILANG_README.md:228 c830ba864b5e4790a66b91aff9aa33dc
 msgid "运行 `make clean`"

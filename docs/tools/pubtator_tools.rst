@@ -28,10 +28,10 @@ Provides suggestions for the best‐matching standardized PubTator IDs for a par
    * ``text`` (string) (required)
      A few characters or the full name of the biomedical concept you are trying to look up (e.g. “BRAF V6”).
 
-   * ``entity_type`` (string) (optional)
+   * ``entity_type`` (string) (required)
      Optional filter to restrict suggestions to a single category such as GENE, DISEASE, CHEMICAL, or VARIANT.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of suggestions to return (1 - 50, default = 10).
 
    **Example Usage:**
@@ -41,7 +41,9 @@ Provides suggestions for the best‐matching standardized PubTator IDs for a par
       query = {
           "name": "PubTator3_EntityAutocomplete",
           "arguments": {
-              "text": "example_value"
+              "text": "example_value",
+              "entity_type": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)
@@ -65,10 +67,10 @@ Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_B
    * ``query`` (string) (required)
      What you want to search for. This can be plain keywords, a single PubTator ID, or the special relation syntax shown above.
 
-   * ``page`` (integer) (optional)
+   * ``page`` (integer) (required)
      Zero-based results page (optional; default = 0).
 
-   * ``page_size`` (integer) (optional)
+   * ``page_size`` (integer) (required)
      How many PMIDs to return per page (optional; default = 20, maximum = 200).
 
    **Example Usage:**
@@ -78,7 +80,9 @@ Find PubMed articles that match a keyword, a PubTator entity ID (e.g. “@GENE_B
       query = {
           "name": "PubTator3_LiteratureSearch",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "page": 10,
+              "page_size": 10
           }
       }
       result = tu.run(query)

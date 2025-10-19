@@ -1,0 +1,625 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:2
+#: a2fa4a76873643638ae98a4ada8b998e
+msgid "ToolUniverse Architecture"
+msgstr "ToolUniverse 架构"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:4
+#: ae30d213807049e48c0c68b42d142e7c
+msgid ""
+"This document provides a technical overview of ToolUniverse's architecture, "
+"helping you understand how the system works internally."
+msgstr "本文档提供了ToolUniverse架构的技术概述，帮助您了解系统的内部工作原理。"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:7
+#: 31f6bc2d1b304d90bbf80c257fec34d8
+msgid "System Overview"
+msgstr "系统概述"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:9
+#: 3cbb7f0889f44f33addafe507c50dcdf
+msgid ""
+"ToolUniverse is built around a modular, registry-based architecture that "
+"supports both local and remote tools through a unified interface."
+msgstr "ToolUniverse 基于模块化的注册表架构构建，通过统一界面支持本地和远程工具。"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:11
+#: 7c75247d107e47beb9bb34871160cbed
+msgid "**Core Components:**"
+msgstr "**核心组件：**"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:30
+#: 0e4eb7b8bd294c1188b0672ed6a4ab00
+msgid ""
+"**Key Design Principles:** - **Modularity**: Tools are independent modules -"
+" **Extensibility**: Easy to add new tool types - **Unified Interface**: Same"
+" API for local and remote tools - **Lazy Loading**: Tools loaded on demand -"
+" **Error Isolation**: Tool failures don't crash the system"
+msgstr ""
+"**关键设计原则：**  \n"
+"- **模块化**：工具是独立的模块  \n"
+"- **可扩展性**：易于添加新工具类型  \n"
+"- **统一接口**：本地工具和远程工具使用相同的 API  \n"
+"- **延迟加载**：按需加载工具  \n"
+"- **错误隔离**：工具故障不会导致系统崩溃"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:38
+#: 0836c29258e643e68238eec6fede9da3
+msgid "Tool Registry System"
+msgstr "工具注册系统"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:40
+#: ed86d2f723934b89892039ea9e6744b4
+msgid ""
+"**Local Tool Registry** The local tool registry manages Python-based tools "
+"that run within the ToolUniverse process."
+msgstr ""
+"**本地工具注册表**  \n"
+"本地工具注册表管理在 ToolUniverse 进程中运行的基于 Python 的工具。"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:43
+#: d22be5b701b646bcb93cda9ee0f863a3
+msgid ""
+"**Registration Process:** 1. Tool class decorated with ``@register_tool`` 2."
+" Tool metadata stored in registry 3. Tool available for discovery and "
+"execution"
+msgstr ""
+"**注册流程：**  \n"
+"1. 使用 ``@register_tool`` 装饰器标记工具类  \n"
+"2. 工具元数据存储在注册表中  \n"
+"3. 工具可用于发现和执行"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:48
+#: 91e66e44146e454098cf7fe4c9f65ca2
+msgid ""
+"**Key Classes:** - ``ToolRegistry``: Manages tool registration and discovery"
+" - ``BaseTool``: Base class for all local tools - ``ToolMetadata``: Stores "
+"tool configuration and metadata"
+msgstr ""
+"**关键类：**  \n"
+"- ``ToolRegistry``：管理工具注册和发现  \n"
+"- ``BaseTool``：所有本地工具的基类  \n"
+"- ``ToolMetadata``：存储工具配置和元数据"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:53
+#: 41358bde41694a428e10c7bc85d530ed
+msgid ""
+"**Remote Tool Registry** The remote tool registry manages external tools "
+"accessed via MCP or REST APIs."
+msgstr ""
+"**远程工具注册表**  \n"
+"远程工具注册表负责管理通过 MCP 或 REST API 访问的外部工具。"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:56
+#: 60600f933d484777abf1a11310d5c5fb
+msgid ""
+"**Registration Process:** 1. Tool configuration loaded from JSON files 2. "
+"MCP client connections established 3. Tool capabilities discovered and "
+"registered"
+msgstr ""
+"**注册流程：**  \n"
+"1. 从 JSON 文件加载工具配置  \n"
+"2. 建立 MCP 客户端连接  \n"
+"3. 发现并注册工具功能"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:61
+#: 6d0ead192c144d569b4cad6e4f5c80c8
+msgid ""
+"**Key Classes:** - ``MCPToolRegistry``: Manages MCP tool connections - "
+"``RemoteTool``: Wrapper for remote tool execution - ``MCPClientTool``: "
+"Handles MCP protocol communication"
+msgstr ""
+"**关键类：**  \n"
+"- ``MCPToolRegistry``：管理MCP工具连接  \n"
+"- ``RemoteTool``：远程工具执行的包装器  \n"
+"- ``MCPClientTool``：处理MCP协议通信"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:67
+#: c9b6f3fd41ce4daca8eeac57945a1a63
+msgid "Tool Execution Engine"
+msgstr "工具执行引擎"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:69
+#: fc10dc5a352b46cfaebbd9278472c86a
+msgid ""
+"**Execution Flow:** 1. **Request Parsing**: Parse tool name and arguments 2."
+" **Tool Discovery**: Find tool in registry 3. **Parameter Validation**: "
+"Validate arguments against schema 4. **Tool Execution**: Execute tool (local"
+" or remote) 5. **Result Processing**: Format and return results 6. **Error "
+"Handling**: Handle and report errors"
+msgstr ""
+"**执行流程：**  \n"
+"1. **请求解析**：解析工具名称和参数  \n"
+"2. **工具发现**：在注册表中查找工具  \n"
+"3. **参数验证**：根据模式验证参数  \n"
+"4. **工具执行**：执行工具（本地或远程）  \n"
+"5. **结果处理**：格式化并返回结果  \n"
+"6. **错误处理**：处理并报告错误"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:77
+#: 2e6bdf37e41c48d99a021ddea6aadc33
+msgid ""
+"**Key Components:** - ``ToolExecutor``: Main execution engine - "
+"``ParameterValidator``: Validates tool parameters - ``ResultProcessor``: "
+"Formats tool results - ``ErrorHandler``: Manages error reporting"
+msgstr ""
+"**关键组件：**  \n"
+"- ``ToolExecutor``：主要执行引擎  \n"
+"- ``ParameterValidator``：验证工具参数  \n"
+"- ``ResultProcessor``：格式化工具结果  \n"
+"- ``ErrorHandler``：管理错误报告"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:83
+#: fbbf86e61b8042a79e22c9550db076a5
+msgid ""
+"**Execution Modes:** - **Synchronous**: Blocking execution for immediate "
+"results - **Asynchronous**: Non-blocking execution for long-running tasks - "
+"**Batch**: Execute multiple tools in sequence"
+msgstr ""
+"**执行模式：**  \n"
+"- **同步**：阻塞执行以获取即时结果  \n"
+"- **异步**：非阻塞执行以处理长时间运行的任务  \n"
+"- **批处理**：按顺序执行多个工具"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:89
+#: a4bc9ecc45b749c388ad623b50efb4d7
+msgid "Configuration System"
+msgstr "配置系统"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:91
+#: f7ed067ca0cf4904aa36f8c52472913a
+msgid ""
+"**Configuration Hierarchy:** 1. **Default Configuration**: Built-in tool "
+"configurations 2. **User Configuration**: User-provided configurations 3. "
+"**Runtime Configuration**: Dynamic configuration updates"
+msgstr ""
+"**配置层次结构：**  \n"
+"1. **默认配置**：内置工具配置  \n"
+"2. **用户配置**：用户提供的配置  \n"
+"3. **运行时配置**：动态配置更新"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:96
+#: f4b484a702804b518ed9aff3082b0a7c
+msgid ""
+"**Configuration Sources:** - JSON files in ``data/`` directory - Environment"
+" variables - Command-line arguments - Runtime API calls"
+msgstr ""
+"**配置来源：**  \n"
+"- ``data/`` 目录中的 JSON 文件  \n"
+"- 环境变量  \n"
+"- 命令行参数  \n"
+"- 运行时 API 调用"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:102
+#: e51007b310e84ff0872412a5ab834c9a
+msgid ""
+"**Configuration Validation:** - JSON Schema validation - Type checking - "
+"Required field validation - Dependency resolution"
+msgstr ""
+"**配置验证：**  \n"
+"- JSON Schema 验证  \n"
+"- 类型检查  \n"
+"- 必填字段验证  \n"
+"- 依赖关系解析"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:108
+#: 57e68e4979fa49e988707c498db4909c
+msgid ""
+"**Key Classes:** - ``ConfigManager``: Manages configuration loading and "
+"validation - ``ToolConfig``: Represents individual tool configuration - "
+"``ConfigValidator``: Validates configuration schemas"
+msgstr ""
+"**关键类：**  \n"
+"- ``ConfigManager``：负责管理配置加载和验证  \n"
+"- ``ToolConfig``：表示单个工具的配置  \n"
+"- ``ConfigValidator``：用于验证配置模式"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:114
+#: c5795281988c43b7a295c654db94aa3e
+msgid "MCP Integration"
+msgstr "MCP 集成"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:116
+#: 8be9a061a31644e898c2c5187bc8711e
+msgid ""
+"**MCP (Model Context Protocol)** MCP provides a standardized way to "
+"integrate external tools and services."
+msgstr "**MCP（模型上下文协议）** MCP 提供了一种标准化的方法，用于集成外部工具和服务。"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:119
+#: bc6c8576fd3a474a99052d2ab7afbb33
+msgid ""
+"**MCP Components:** - **MCP Server**: External service providing tools - "
+"**MCP Client**: ToolUniverse component connecting to servers - **MCP "
+"Protocol**: Communication protocol between client and server"
+msgstr ""
+"**MCP组件：**  \n"
+"- **MCP服务器**：提供工具的外部服务  \n"
+"- **MCP客户端**：连接到服务器的ToolUniverse组件  \n"
+"- **MCP协议**：客户端与服务器之间的通信协议"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:124
+#: e20ed211bedc40f6802511bc38f0cc85
+msgid ""
+"**MCP Features:** - **Tool Discovery**: Automatic discovery of available "
+"tools - **Parameter Validation**: Server-side parameter validation - **Error"
+" Handling**: Standardized error reporting - **Authentication**: Secure "
+"communication protocols"
+msgstr ""
+"**MCP 功能：**  \n"
+"- **工具发现**：自动发现可用工具  \n"
+"- **参数验证**：服务器端参数验证  \n"
+"- **错误处理**：标准化错误报告  \n"
+"- **身份验证**：安全通信协议"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:130
+#: 033b68ad101e4cb5b633d52270943aff
+msgid ""
+"**Key Classes:** - ``MCPClient``: Handles MCP protocol communication - "
+"``MCPServer``: Base class for MCP servers - ``MCPTool``: Represents MCP-"
+"based tools"
+msgstr ""
+"**关键类：**  \n"
+"- ``MCPClient``：处理 MCP 协议通信  \n"
+"- ``MCPServer``：MCP 服务器的基类  \n"
+"- ``MCPTool``：表示基于 MCP 的工具"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:135
+#: 2c86f4a14cc64a9f8e9df521e9e5b93e
+msgid ""
+"**MCP Communication Flow:** 1. **Connection**: Establish connection to MCP "
+"server 2. **Discovery**: Query available tools and capabilities 3. "
+"**Registration**: Register tools in local registry 4. **Execution**: Execute"
+" tools via MCP protocol 5. **Result Handling**: Process and return results"
+msgstr ""
+"**MCP通信流程：**  \n"
+"1. **连接**：建立与MCP服务器的连接  \n"
+"2. **发现**：查询可用工具和功能  \n"
+"3. **注册**：将工具注册到本地注册表  \n"
+"4. **执行**：通过MCP协议执行工具  \n"
+"5. **结果处理**：处理并返回结果"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:143
+#: 4f5ed6113b29414a8930bd0f11cd46f3
+msgid "Error Handling and Logging"
+msgstr "错误处理与日志记录"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:145
+#: 4576b2a2b61f40b8bae838b4181fbfb3
+msgid ""
+"**Error Types:** - **Validation Errors**: Parameter validation failures - "
+"**Execution Errors**: Tool execution failures - **Network Errors**: Remote "
+"tool connection failures - **System Errors**: Internal system failures"
+msgstr ""
+"**错误类型：**  \n"
+"- **验证错误**：参数验证失败  \n"
+"- **执行错误**：工具执行失败  \n"
+"- **网络错误**：远程工具连接失败  \n"
+"- **系统错误**：内部系统故障"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:151
+#: def1b26f868346e79f5e5e04e2248f37
+msgid ""
+"**Error Handling Strategy:** - **Graceful Degradation**: System continues "
+"with partial failures - **Error Isolation**: Tool failures don't affect "
+"other tools - **Detailed Logging**: Comprehensive error logging and "
+"reporting - **User-Friendly Messages**: Clear error messages for users"
+msgstr ""
+"**错误处理策略：**  \n"
+"- **优雅降级**：系统在部分故障情况下继续运行  \n"
+"- **错误隔离**：工具故障不会影响其他工具  \n"
+"- **详细日志记录**：全面的错误日志记录和报告  \n"
+"- **用户友好的消息**：为用户提供清晰的错误信息"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:157
+#: 5a33c5e03bfa49a0b18d792b667635fa
+msgid ""
+"**Logging System:** - **Structured Logging**: JSON-formatted log entries - "
+"**Log Levels**: DEBUG, INFO, WARNING, ERROR, CRITICAL - **Log Rotation**: "
+"Automatic log file rotation - **Remote Logging**: Optional remote log "
+"aggregation"
+msgstr ""
+"**日志系统：**  \n"
+"- **结构化日志记录**：JSON格式的日志条目  \n"
+"- **日志级别**：DEBUG、INFO、WARNING、ERROR、CRITICAL  \n"
+"- **日志轮换**：自动日志文件轮换  \n"
+"- **远程日志记录**：可选的远程日志聚合"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:163
+#: 8c95ce36b49d4d5e8bd5a89c5922c0f9
+msgid ""
+"**Key Classes:** - ``ErrorHandler``: Centralized error handling - "
+"``Logger``: Logging system - ``ErrorReporter``: Error reporting and "
+"notification"
+msgstr ""
+"**关键类：**  \n"
+"- ``ErrorHandler``：集中化错误处理  \n"
+"- ``Logger``：日志系统  \n"
+"- ``ErrorReporter``：错误报告与通知"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:169
+#: c130b9664cf64e3fba3bee9323201666
+msgid "Performance and Scalability"
+msgstr "性能与可扩展性"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:171
+#: f3a705dad7be432fac101657287d8b92
+msgid ""
+"**Performance Optimizations:** - **Lazy Loading**: Tools loaded on demand - "
+"**Caching**: Result caching for expensive operations - **Connection "
+"Pooling**: Reuse connections for remote tools - **Async Execution**: Non-"
+"blocking tool execution"
+msgstr ""
+"**性能优化：**  \n"
+"- **延迟加载**：按需加载工具  \n"
+"- **缓存**：对耗时操作的结果进行缓存  \n"
+"- **连接池**：重复利用远程工具的连接  \n"
+"- **异步执行**：非阻塞式工具执行"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:177
+#: e97d0ec494944e4bae5c3a2f68ed917f
+msgid ""
+"**Scalability Features:** - **Horizontal Scaling**: Multiple ToolUniverse "
+"instances - **Load Balancing**: Distribute load across instances - "
+"**Resource Management**: Monitor and limit resource usage - **Auto-"
+"scaling**: Automatic scaling based on load"
+msgstr ""
+"**可扩展性功能：**  \n"
+"- **水平扩展**：支持多个 ToolUniverse 实例  \n"
+"- **负载均衡**：在实例之间分配负载  \n"
+"- **资源管理**：监控并限制资源使用  \n"
+"- **自动扩展**：根据负载自动调整扩展"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:183
+#: 4c12cd976d6a45eeae2983929fc6a013
+msgid ""
+"**Monitoring:** - **Performance Metrics**: Execution time, memory usage - "
+"**Health Checks**: System and tool health monitoring - **Alerting**: "
+"Automated alerting for failures - **Dashboards**: Real-time monitoring "
+"dashboards"
+msgstr ""
+"**监控：**  \n"
+"- **性能指标**：执行时间、内存使用情况  \n"
+"- **健康检查**：系统和工具健康监控  \n"
+"- **警报**：故障自动警报  \n"
+"- **仪表板**：实时监控仪表板"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:189
+#: c4af392ff02849dbb85d821d58c5fa43
+msgid ""
+"**Key Classes:** - ``PerformanceMonitor``: Tracks performance metrics - "
+"``ResourceManager``: Manages system resources - ``HealthChecker``: Monitors "
+"system health"
+msgstr ""
+"**关键类：**  \n"
+"- ``PerformanceMonitor``：跟踪性能指标  \n"
+"- ``ResourceManager``：管理系统资源  \n"
+"- ``HealthChecker``：监控系统运行状况"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:195
+#: 3b44e9e27713477bbead8ea02f0a7a56
+msgid "Security Considerations"
+msgstr "安全注意事项"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:197
+#: 2a3ea8afe9bf42e0afe1656113f48e1d
+msgid ""
+"**Security Features:** - **Input Validation**: Strict parameter validation -"
+" **Authentication**: Secure authentication for remote tools - "
+"**Authorization**: Role-based access control - **Encryption**: Encrypted "
+"communication for sensitive data"
+msgstr ""
+"**安全功能：**  \n"
+"- **输入验证**：严格的参数验证  \n"
+"- **身份验证**：远程工具的安全身份验证  \n"
+"- **授权**：基于角色的访问控制  \n"
+"- **加密**：敏感数据的加密通信"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:203
+#: de54f1bfffca47038db566bf67eb0152
+msgid ""
+"**Security Best Practices:** - **Principle of Least Privilege**: Minimal "
+"required permissions - **Secure Defaults**: Secure configuration by default "
+"- **Regular Updates**: Keep dependencies updated - **Security Auditing**: "
+"Regular security audits"
+msgstr ""
+"**安全最佳实践：**  \n"
+"- **最小权限原则**：仅授予最低必要权限  \n"
+"- **安全默认值**：默认采用安全配置  \n"
+"- **定期更新**：保持依赖项为最新版本  \n"
+"- **安全审计**：定期进行安全审计"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:209
+#: bbb3ed16af8045b397391d6933ef4c69
+msgid ""
+"**Key Classes:** - ``SecurityManager``: Manages security policies - "
+"``Authenticator``: Handles authentication - ``Authorizer``: Manages "
+"authorization"
+msgstr ""
+"**关键类：**  \n"
+"- ``SecurityManager``：管理安全策略  \n"
+"- ``Authenticator``：处理身份验证  \n"
+"- ``Authorizer``：管理授权"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:215
+#: 31187db011444eccb2eee0a9db983357
+msgid "Testing Framework"
+msgstr "测试框架"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:217
+#: 25cbba8c73744da38c1a725ff0670df7
+msgid ""
+"**Testing Strategy:** - **Unit Tests**: Test individual components - "
+"**Integration Tests**: Test component interactions - **End-to-End Tests**: "
+"Test complete workflows - **Performance Tests**: Test system performance"
+msgstr ""
+"**测试策略：**  \n"
+"- **单元测试**：测试单个组件  \n"
+"- **集成测试**：测试组件之间的交互  \n"
+"- **端到端测试**：测试完整的工作流程  \n"
+"- **性能测试**：测试系统性能"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:223
+#: f8a2007235d74d5b9361af5259deb4b6
+msgid ""
+"**Testing Tools:** - **pytest**: Primary testing framework - **Mocking**: "
+"Mock external dependencies - **Fixtures**: Reusable test components - "
+"**Coverage**: Code coverage reporting"
+msgstr ""
+"**测试工具：**  \n"
+"- **pytest**：主要测试框架  \n"
+"- **Mocking**：模拟外部依赖  \n"
+"- **Fixtures**：可重复使用的测试组件  \n"
+"- **Coverage**：代码覆盖率报告"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:229
+#: 133bf3ad89364b8c965e55ef479d624b
+msgid ""
+"**Key Classes:** - ``TestRunner``: Executes test suites - ``TestFixtures``: "
+"Provides test data and setup - ``MockTool``: Mock tool for testing"
+msgstr ""
+"**关键类：**  \n"
+"- ``TestRunner``：执行测试套件  \n"
+"- ``TestFixtures``：提供测试数据和设置  \n"
+"- ``MockTool``：用于测试的模拟工具"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:235
+#: dd7af80b3f1a429e92658182d53f8f0c
+msgid "Development Guidelines"
+msgstr "开发指南"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:237
+#: 2ec5ea9962704b30958ffdbce7c3942d
+msgid ""
+"**Code Organization:** - **Modular Design**: Clear separation of concerns - "
+"**Interface Segregation**: Small, focused interfaces - **Dependency "
+"Injection**: Loose coupling between components - **Configuration "
+"Management**: Centralized configuration"
+msgstr ""
+"**代码组织：**  \n"
+"- **模块化设计**：清晰的关注点分离  \n"
+"- **接口隔离**：小而专注的接口  \n"
+"- **依赖注入**：组件之间的低耦合  \n"
+"- **配置管理**：集中化配置"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:243
+#: 4ccd698c39b343689178b75fcc46094c
+msgid ""
+"**Code Quality:** - **Type Hints**: Complete type annotations - "
+"**Documentation**: Comprehensive docstrings - **Code Formatting**: "
+"Consistent code style - **Linting**: Automated code quality checks"
+msgstr ""
+"**代码质量：**  \n"
+"- **类型提示**：完整的类型注解  \n"
+"- **文档**：全面的文档字符串  \n"
+"- **代码格式**：一致的代码风格  \n"
+"- **代码检查**：自动化的代码质量检查"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:249
+#: 76e61f71e9794ca9a2b19e48614b8810
+msgid ""
+"**Key Classes:** - ``CodeFormatter``: Ensures consistent code style - "
+"``Linter``: Performs code quality checks - ``DocumentationGenerator``: "
+"Generates documentation"
+msgstr ""
+"**关键类：**  \n"
+"- ``CodeFormatter``：确保代码风格一致性  \n"
+"- ``Linter``：执行代码质量检查  \n"
+"- ``DocumentationGenerator``：生成文档"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:255
+#: e77c10152bff4ba8b3b2f6b8e3085bea
+msgid "Future Architecture"
+msgstr "未来架构"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:257
+#: a68efed16db04f548fd3d4ab264e4b53
+msgid ""
+"**Planned Improvements:** - **Microservices**: Break down into smaller "
+"services - **Event-Driven**: Event-based communication - **GraphQL**: More "
+"flexible API queries - **Containerization**: Docker and Kubernetes support"
+msgstr ""
+"**计划改进：**  \n"
+"- **微服务**：拆分为更小的服务  \n"
+"- **事件驱动**：基于事件的通信  \n"
+"- **GraphQL**：更灵活的 API 查询  \n"
+"- **容器化**：支持 Docker 和 Kubernetes"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:263
+#: a30bcccf86f94b7cbcab91f874336b19
+msgid ""
+"**Research Areas:** - **AI Integration**: Better AI tool integration - "
+"**Performance**: Further performance optimizations - **Security**: Enhanced "
+"security features - **Usability**: Improved user experience"
+msgstr ""
+"**研究领域：**  \n"
+"- **AI集成**：更好的AI工具集成  \n"
+"- **性能**：进一步优化性能  \n"
+"- **安全性**：增强的安全功能  \n"
+"- **可用性**：改进的用户体验"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:269
+#: deab12e5671a4f0dbd3ae596d9393173
+msgid ""
+"**Key Classes:** - ``FutureArchitecture``: Planned architecture changes - "
+"``ResearchManager``: Manages research initiatives - ``InnovationLab``: "
+"Experimental features"
+msgstr ""
+"**关键类：**  \n"
+"- ``FutureArchitecture``：规划的架构变更  \n"
+"- ``ResearchManager``：管理研究项目  \n"
+"- ``InnovationLab``：实验性功能"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:275
+#: 50c7bce1abc54eb4afb51fc9dadf2bb8
+msgid "Next Steps"
+msgstr "下一步"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:277
+#: 9245bcb93a1a4701bc4c13e438f3317b
+msgid "📚 **Tutorials**: Learn how to use ToolUniverse"
+msgstr "📚 **教程**：学习如何使用 ToolUniverse"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:278
+#: 0cad77fc1b9d4ea7aa6a2205f9ce4ef0
+msgid "🔧 **Development**: Learn how to develop tools"
+msgstr "🔧 **开发**：了解如何开发工具"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:279
+#: 314482c1bb984f318fe7b168f999a54a
+msgid "🎁 **Contributing**: Learn how to contribute to ToolUniverse"
+msgstr "🎁 **贡献**：了解如何为 ToolUniverse 做出贡献"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:280
+#: 29eb6a2ba9fc48e2b1a91c1582f44d14
+msgid "🔍 **Comparison**: Compare different tool types"
+msgstr "🔍 **比较**：比较不同工具类型"
+
+#: ../../expand_tooluniverse/reference/architecture.rst:283
+#: d41b9d904b9349f7a264534146f3edc8
+msgid ""
+"**Understanding the Architecture**: This document provides a high-level "
+"overview. For specific implementation details, refer to the source code and "
+"API documentation."
+msgstr "**理解架构**：本文档提供了一个高层次概述。有关具体的实现细节，请参考源代码和API文档。"

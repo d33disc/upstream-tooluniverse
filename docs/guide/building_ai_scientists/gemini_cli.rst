@@ -234,17 +234,17 @@ Step 7: Verify Integration
 Test the integration by asking Gemini to:
 
 1. **List available tools**:
-   .. code-block:: text
+   .. code-block::
 
       What scientific tools are available?
 
 2. **Execute a simple tool**:
-   .. code-block:: text
+   .. code-block::
 
       Search for information about Alzheimer's disease
 
 3. **Perform complex research**:
-   .. code-block:: text
+   .. code-block::
 
       Find recent papers about CRISPR gene editing in cancer therapy
 

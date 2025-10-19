@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh_CN <LL@li.org>\n"
@@ -20,17 +20,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/tooluniverse.dailymed_tool.rst:2 9106177f77dc4080a1231072b6fa3237
+#: ../../api/tooluniverse.dailymed_tool.rst:2 79042b503b334decb9d2608c93f7d95e
 msgid "tooluniverse.dailymed\\_tool module"
 msgstr "tooluniverse.dailymed_tool 模块"
 
-#: 12f564ba4ce64359bfd2705c4f86024a c297c4e8f1004defbb1f91ad40adc862 of
+#: 7e214a157ca541fba7084c78f4c3d642 bef7ac59016041ffa3bd474658331918 of
 #: tooluniverse.dailymed_tool.GetSPLBySetIDTool:1
 #: tooluniverse.dailymed_tool.SearchSPLTool:1
 msgid "Bases: :py:class:`~tooluniverse.base_tool.BaseTool`"
 msgstr "基础类：:py:class:`~tooluniverse.base_tool.BaseTool`"
 
-#: efa456025e174ea6be447290abb4ce66 of
+#: 1c1e279f29fd4e48bbc3c506edeaa675 of
 #: tooluniverse.dailymed_tool.SearchSPLTool:1
 msgid ""
 "Search SPL list based on multiple filter conditions "
@@ -40,13 +40,13 @@ msgstr ""
 "根据多个筛选条件（drug_name/ndc/rxcui/setid/published_date）搜索SPL列表。返回原始DailyMed API "
 "JSON（包括元数据和数据数组）。"
 
-#: c1b28970916a49929a239699eb93aeef f99252cd191c4e87b8d57dc40bd64961 of
+#: 34ca6f73b4a04afc8d52a3f29b30349f 3e25782131784659a47787e6be14e804 of
 #: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:1
 #: tooluniverse.dailymed_tool.SearchSPLTool.run:1
 msgid "Execute the tool."
 msgstr "执行该工具。"
 
-#: d5a3548d16c14b59a0944d6525ae1211 df96ed82acb74b12a08f27b29add5c0d of
+#: 2abc96f691fa41ad9d99fc3fe8027484 af1d786c68154e52a2ee9c388ab68efc of
 #: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:3
 #: tooluniverse.dailymed_tool.SearchSPLTool.run:3
 msgid ""
@@ -55,7 +55,55 @@ msgid ""
 "inputs."
 msgstr "默认的 BaseTool 实现接受一个可选的参数映射，以符合大多数具体工具实现所期望的输入字典。"
 
-#: af6a42a69a1f43c0ac47a9db24f1862e of
+#: ../../api/tooluniverse.dailymed_tool.rst 2e25234a4a16459aa38260cd4dadf7a9
+#: 43945d65b49b4d729d0257e751ee11b0
+msgid "Parameters"
+msgstr "参数"
+
+#: 0de88e3eca8a45ef8cb1094a7f5475ea 3e6b32f6ee6341659550cb007dcbd3a1 of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:7
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:7
+msgid "Tool-specific arguments"
+msgstr "工具专用参数"
+
+#: 621264e4415749a29dfcd9b7feac1937 91e5c7b29a7640af83341808051b9897 of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:9
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:9
+msgid "Callback for streaming responses"
+msgstr "用于流式响应的回调"
+
+#: 913f4d5607124ae294948af8c8b915ad 976731971988429a97eefc3cc30c8d4a of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:11
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:11
+msgid "Whether result caching is enabled"
+msgstr "是否启用结果缓存"
+
+#: 05855d2d673c4fae87372889bae041c3 e71cef5c53394d388e68b20e1200f072 of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:13
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:13
+msgid "Whether parameter validation was performed"
+msgstr "是否已执行参数验证"
+
+#: 2e79b069753440fc9829d4845c97333c 77b47ea14525401b9c577f04fbe35748 of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:18
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:18
+msgid ""
+"These additional parameters (stream_callback, use_cache, validate) are "
+"passed from run_one_function() to provide context about the execution. Tools"
+" can use these for optimization or special handling."
+msgstr ""
+"这些附加参数（stream_callback、use_cache、validate）由 run_one_function() "
+"传递，用于提供有关执行的上下文。工具可以利用这些参数进行优化或特殊处理。"
+
+#: 3a5fca8767d14a72b17dc580fdc00ea1 8bba0093932241adb9ba499451187105 of
+#: tooluniverse.dailymed_tool.GetSPLBySetIDTool.run:22
+#: tooluniverse.dailymed_tool.SearchSPLTool.run:22
+msgid ""
+"For backward compatibility, tools that don't accept these parameters will "
+"still work - they will only receive the arguments parameter."
+msgstr "为了向后兼容，不接受这些参数的工具仍然可以正常工作——它们将仅接收 arguments 参数。"
+
+#: f20d5b137d8f4c798237ed92be8de93b of
 #: tooluniverse.dailymed_tool.GetSPLBySetIDTool:1
 msgid ""
 "Get complete SPL label based on SPL Set ID, returns content in XML or JSON "

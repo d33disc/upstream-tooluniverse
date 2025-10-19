@@ -7,24 +7,24 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 10:37-0400\n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../tools/cheminformatics_tools.rst:2 619424afb19540b7836365514206f76f
+#: ../../tools/cheminformatics_tools.rst:2 13ddbc07b15545d683bd034000a4bb88
 msgid "Cheminformatics Tools"
 msgstr "化学信息学工具"
 
-#: ../../tools/cheminformatics_tools.rst:4 98df235e60f946d698a484c21ce11359
+#: ../../tools/cheminformatics_tools.rst:4 1e3172ae31fa4bb59fcd9dcb79cf66b7
 msgid ""
 "**Configuration File**: ``packages/cheminformatics_tools.json`` **Tool "
 "Type**: Local **Tools Count**: 12"
@@ -33,77 +33,77 @@ msgstr ""
 "**工具类型**：本地  \n"
 "**工具数量**：12"
 
-#: ../../tools/cheminformatics_tools.rst:8 ec5aa36cae1441798c390013bcd0e9f8
+#: ../../tools/cheminformatics_tools.rst:8 99ca50a485d74ca9b89a26521fab5f60
 msgid ""
-"This page contains all tools defined in the ``cheminformatics_tools.json`` "
-"configuration file."
+"This page contains all tools defined in the "
+"``cheminformatics_tools.json`` configuration file."
 msgstr "此页面包含在 ``cheminformatics_tools.json`` 配置文件中定义的所有工具。"
 
-#: ../../tools/cheminformatics_tools.rst:11 7265bb2806d64bd9b53fa1a5926e37ee
+#: ../../tools/cheminformatics_tools.rst:11 0d2487a620144a449c8c8fe5a870ffe0
 msgid "Available Tools"
 msgstr "可用工具"
 
-#: ../../tools/cheminformatics_tools.rst:14 385fba03809d4a879fd1e0e40eedf6ef
+#: ../../tools/cheminformatics_tools.rst:14 d44ab0c8ced64f2b9e7d0e7051087743
 msgid "**get_chembl_webresource_client_info** (Type: PackageTool)"
 msgstr "**get_chembl_webresource_client_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:16 ec15e11014514cb6a4f1934ebe9db28a
+#: ../../tools/cheminformatics_tools.rst:16 cb0938bce414441db752ae898ff7652d
 msgid ""
-"Get information about the chembl-webresource-client package. Python client "
-"for ChEMBL web services"
+"Get information about the chembl-webresource-client package. Python "
+"client for ChEMBL web services"
 msgstr "获取有关 chembl-webresource-client 软件包的信息。ChEMBL 网络服务的 Python 客户端。"
 
-#: ../../tools/cheminformatics_tools.rst 5a2fd7fae00542229f0ed719569318f1
+#: ../../tools/cheminformatics_tools.rst d4e105df6ee74d48a310c222ded13823
 msgid "get_chembl_webresource_client_info tool specification"
 msgstr "get_chembl_webresource_client_info 工具规格说明"
 
 #: ../../tools/cheminformatics_tools.rst:20
 #: ../../tools/cheminformatics_tools.rst:49
-#: ../../tools/cheminformatics_tools.rst:79
-#: ../../tools/cheminformatics_tools.rst:108
-#: ../../tools/cheminformatics_tools.rst:138
-#: ../../tools/cheminformatics_tools.rst:168
-#: ../../tools/cheminformatics_tools.rst:197
-#: ../../tools/cheminformatics_tools.rst:226
-#: ../../tools/cheminformatics_tools.rst:255
-#: ../../tools/cheminformatics_tools.rst:285
-#: ../../tools/cheminformatics_tools.rst:316
-#: ../../tools/cheminformatics_tools.rst:345 107b4c3ba2524514b7c49b85ba19a6bb
-#: 1d180d17854244589930678522753297 36595075211c4055832e3c2881d19df1
-#: 3ab68f9d9fee4a61bd7438edde92d426 615f9445e9ea4c198b9ab8664726e7c6
-#: 68f6d25862ee4f70bb11bf5eb41b247a 6c537a5fa57d470bbd6ebc1761f7100e
-#: c678c64adeaa4ad08708f376a8d302eb cc72d379cc4f4047a298db417e105b52
-#: e1c74eccce9145ae8a7230a057d606e9 efdea2e7f4be4ce89b35cdc933e8e61e
-#: f23ee2b6076449b79e17e01ea59cc458
+#: ../../tools/cheminformatics_tools.rst:80
+#: ../../tools/cheminformatics_tools.rst:109
+#: ../../tools/cheminformatics_tools.rst:140
+#: ../../tools/cheminformatics_tools.rst:171
+#: ../../tools/cheminformatics_tools.rst:200
+#: ../../tools/cheminformatics_tools.rst:229
+#: ../../tools/cheminformatics_tools.rst:258
+#: ../../tools/cheminformatics_tools.rst:289
+#: ../../tools/cheminformatics_tools.rst:320
+#: ../../tools/cheminformatics_tools.rst:349 120a58d1575240c4b98e4dd30f76cee2
+#: 1de79edea93b4c51a17b13a49492b93f 21e3ba9ac1ff4f99bde82d9cd0721a91
+#: 42ac19d1ee0d440eae06e436865160d7 61e7e1befa7249a285b9cc517ec829db
+#: aa6947ab723041fd89fcdcf91dab13b3 bc03097bb07b4903807e3849bd473181
+#: c9805e938c4a479ab3d41521b50122ab d309485b9378460188c86a87d71ddf46
+#: d3c73d90bf9f43a0a7f1a30b9105493f d544e0c4c8994e979f2c881ecbbc110a
+#: e8968819b72e42619d024dcbcdf1718a
 msgid "**Tool Information:**"
 msgstr "**工具信息：**"
 
-#: ../../tools/cheminformatics_tools.rst:22 7e1b1767aa514f789cbdd496845a9710
+#: ../../tools/cheminformatics_tools.rst:22 10d004e8b00b450db5a052c26d6f850b
 msgid "**Name**: ``get_chembl_webresource_client_info``"
 msgstr "**名称**：``get_chembl_webresource_client_info``"
 
 #: ../../tools/cheminformatics_tools.rst:23
 #: ../../tools/cheminformatics_tools.rst:52
-#: ../../tools/cheminformatics_tools.rst:82
-#: ../../tools/cheminformatics_tools.rst:111
-#: ../../tools/cheminformatics_tools.rst:141
-#: ../../tools/cheminformatics_tools.rst:171
-#: ../../tools/cheminformatics_tools.rst:200
-#: ../../tools/cheminformatics_tools.rst:229
-#: ../../tools/cheminformatics_tools.rst:258
-#: ../../tools/cheminformatics_tools.rst:288
-#: ../../tools/cheminformatics_tools.rst:319
-#: ../../tools/cheminformatics_tools.rst:348 02016a6b9e6b45f9b237d5b33538c231
-#: 1a8833ba0aa14416a9b737b25fca717f 21d62bcd926c423a876e598195706b75
-#: 6ac7ba09c5f745cd9913cba643b9423b 6ee722ff0e4642e8838796445f5ae240
-#: 736b3d26cad342bba96eeb6c145b9fc0 8ae0364806244469b3f45ac98841623e
-#: a72b5c2738984498977db9994106a0d2 afbfbe0d5da64c24b18bb950061b529c
-#: c2e24d3ef840461ebc8f5ccfb106b0ad cf695a94f4f646aea9dd7002f5550e9b
-#: d60ffe53aad84f27ab303130e1218aac
+#: ../../tools/cheminformatics_tools.rst:83
+#: ../../tools/cheminformatics_tools.rst:112
+#: ../../tools/cheminformatics_tools.rst:143
+#: ../../tools/cheminformatics_tools.rst:174
+#: ../../tools/cheminformatics_tools.rst:203
+#: ../../tools/cheminformatics_tools.rst:232
+#: ../../tools/cheminformatics_tools.rst:261
+#: ../../tools/cheminformatics_tools.rst:292
+#: ../../tools/cheminformatics_tools.rst:323
+#: ../../tools/cheminformatics_tools.rst:352 435ce0a2023e47c3b672c9bc9b7737de
+#: 60b2e4ff9eba414da3c284a65864387d 7d93b7d6e00245f08d2a7b1b5903a538
+#: 931ef5de58b240ac8195deac87593115 94610467b2a74ce6bcf7f4e1f7cddf58
+#: afefdbec43be45d78c8af369cac34516 b63dbd449ac6479d8324f50d2eae6d31
+#: bc7e9be95b90437086f46f6c125edc28 c861b80251c54052b42142c27a86c8f0
+#: ce88c3325eca4e8f9af56dbd54ce1515 ed5ce6bbe0cc4e4c8cc79488252d61c3
+#: f9a0032a807940c4bb8e045019b63fbb
 msgid "**Type**: ``PackageTool``"
 msgstr "**类型**：``PackageTool``"
 
-#: ../../tools/cheminformatics_tools.rst:24 a4d0f7d3a2ca4c86a9a198574c880547
+#: ../../tools/cheminformatics_tools.rst:24 3c355c42ddd34a569030ecaab3cd957f
 msgid ""
 "**Description**: Get information about the chembl-webresource-client "
 "package. Python client for ChEMBL web services"
@@ -111,347 +111,349 @@ msgstr "**描述**：获取有关 chembl-webresource-client 包的信息。用�
 
 #: ../../tools/cheminformatics_tools.rst:26
 #: ../../tools/cheminformatics_tools.rst:55
-#: ../../tools/cheminformatics_tools.rst:85
-#: ../../tools/cheminformatics_tools.rst:114
-#: ../../tools/cheminformatics_tools.rst:144
-#: ../../tools/cheminformatics_tools.rst:174
-#: ../../tools/cheminformatics_tools.rst:203
-#: ../../tools/cheminformatics_tools.rst:232
-#: ../../tools/cheminformatics_tools.rst:261
-#: ../../tools/cheminformatics_tools.rst:291
-#: ../../tools/cheminformatics_tools.rst:322
-#: ../../tools/cheminformatics_tools.rst:351 064ef37c090141f382cde84cab2dd4ee
-#: 113587c62c4941e29feb0bc8d76aaaed 184a6779c0ba448487fc9a1b8869c1ab
-#: 29ef651e44434bc1b881fc5ea80d41ee 34154bce06fb4acfa69277e385fe5063
-#: 4b377f8b614b48beb0071105cbaed875 55982c1456d44242adf51332b7ee8d18
-#: 5b3c5546abe841dab71b43c0cd0cd0fe 674eecbf3b094f298858d44babd71ac7
-#: cb7a621567104669b42a2e4ca488c645 d9313c51c7e5498aa538c085ca3d9265
-#: ecd40eb66df740ddbb3ab76deb9a1c65
+#: ../../tools/cheminformatics_tools.rst:86
+#: ../../tools/cheminformatics_tools.rst:115
+#: ../../tools/cheminformatics_tools.rst:146
+#: ../../tools/cheminformatics_tools.rst:177
+#: ../../tools/cheminformatics_tools.rst:206
+#: ../../tools/cheminformatics_tools.rst:235
+#: ../../tools/cheminformatics_tools.rst:264
+#: ../../tools/cheminformatics_tools.rst:295
+#: ../../tools/cheminformatics_tools.rst:326
+#: ../../tools/cheminformatics_tools.rst:355 020ffca3a7d24dbbb0cf5e3d7d2c0955
+#: 0c06437d3d9446b0869e421bcfaa72c5 2011cdc903f1498ab65ec81d7fd71536
+#: 24ba49a163aa4c58892b5324467d4051 28ba139c5c874bb587ccca46047db76e
+#: 8692ec2f7e3948d7bc09eca58302b6bb 9434b7d334194a88982de91c966cc8f3
+#: a16c2ef67f374d13b5549680dfab3ce2 a33d0fb6957848df9157a24040be37f0
+#: a747ddf211db46709dc4aac8ba21c60d c220adaddd0b4720a4ed75cdad6251fe
+#: dacd92aef67a4d69a6de1f7a87d0704e
 msgid "**Parameters:**"
 msgstr "**参数：**"
 
 #: ../../tools/cheminformatics_tools.rst:28
-#: ../../tools/cheminformatics_tools.rst:87
-#: ../../tools/cheminformatics_tools.rst:176
-#: ../../tools/cheminformatics_tools.rst:205
-#: ../../tools/cheminformatics_tools.rst:234
-#: ../../tools/cheminformatics_tools.rst:324 2051ee82199548e2bbbf1a2c94611389
-#: 2cb9c353b3264d1a9057b3bf48b49a23 5b8c147445b042368d89f3330d0c72e9
-#: 8dc55f44da20471ca95411c8884620f9 9f15e57b594f47b5b1f58bc0dc47ceb0
-#: e4bc2fb69e5a42a58186cc7586550711
+#: ../../tools/cheminformatics_tools.rst:88
+#: ../../tools/cheminformatics_tools.rst:179
+#: ../../tools/cheminformatics_tools.rst:208
+#: ../../tools/cheminformatics_tools.rst:237
+#: ../../tools/cheminformatics_tools.rst:328 4a68c2e6cc46453bb60bdf2fac59bd6a
+#: 4bae282e37664ec7b661ac0c87f5e4ac 781b3cb4d0984835a14326273397dd16
+#: 7f8592d9a20b407bb5b2e74065a59770 8d04d5f2f94245349ab352be6e21f0b5
+#: adb29236b1004cf5b6bfb6ebf45cf2ea
 msgid "No parameters required."
 msgstr "无需参数。"
 
 #: ../../tools/cheminformatics_tools.rst:30
 #: ../../tools/cheminformatics_tools.rst:60
-#: ../../tools/cheminformatics_tools.rst:89
-#: ../../tools/cheminformatics_tools.rst:119
-#: ../../tools/cheminformatics_tools.rst:149
-#: ../../tools/cheminformatics_tools.rst:178
-#: ../../tools/cheminformatics_tools.rst:207
-#: ../../tools/cheminformatics_tools.rst:236
-#: ../../tools/cheminformatics_tools.rst:266
-#: ../../tools/cheminformatics_tools.rst:296
-#: ../../tools/cheminformatics_tools.rst:326
-#: ../../tools/cheminformatics_tools.rst:356 13f5fb2f8130423d9fff18552e601e43
-#: 17c569d5b4b64c7e88c44f865a1c49c8 4fcded3b2e6b4c2eba8c55d34c8ea6b1
-#: 5cf3fc7e58e34a66ae0f4181a3495a3e 65d20bc27a544b138ab25aa795279b9e
-#: 88cce17f103b4acfbc67be6e1d378895 965b8f6c847c462798952d3357b0ba5c
-#: b1e0d639c2ab4b7da4f20632fb60c06d b5ccc730e37d4da7873ba624b819d6c5
-#: b8f20bca8a194ce3887b50336f68e187 c2196766ec1a4ed8af890f768e72cd96
-#: f37dfb1d759c4c71a6ace0cd7880b8c9
+#: ../../tools/cheminformatics_tools.rst:90
+#: ../../tools/cheminformatics_tools.rst:120
+#: ../../tools/cheminformatics_tools.rst:151
+#: ../../tools/cheminformatics_tools.rst:181
+#: ../../tools/cheminformatics_tools.rst:210
+#: ../../tools/cheminformatics_tools.rst:239
+#: ../../tools/cheminformatics_tools.rst:269
+#: ../../tools/cheminformatics_tools.rst:300
+#: ../../tools/cheminformatics_tools.rst:330
+#: ../../tools/cheminformatics_tools.rst:360 41e6ccdd97c84087b0c58064f0ba6a0d
+#: 43e629c3fe3f4723a2aa549afb96e0f1 60783a442a5e45fcb60ef53ff3bbccc3
+#: 6262526b20b9412e9de0ced4f212977c 68e91de8f83d42899e99fe2a2f900d82
+#: 69f49c8b4280439db2cf2632d463b67e 7e63f57646c74b92b6d7fc42bfcb8c94
+#: 975b06c7064c4341883423dbc02a5146 9cc500d7e7b44b60ab0e250d29d5c8f1
+#: a336e897b30a492a9c9e12017eaea08f cab61d4a1e7d44649177a30be9f78ded
+#: f0d4f457d96b48fa9c5eb81aea2ba20e
 msgid "**Example Usage:**"
 msgstr "**示例用法：**"
 
-#: ../../tools/cheminformatics_tools.rst:43 fec8f08b4b964d37826c54c92a659a6c
+#: ../../tools/cheminformatics_tools.rst:43 175f4d55af99416dabba1677e6b50653
 msgid "**get_cobra_info** (Type: PackageTool)"
 msgstr "**get_cobra_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:45 18702c9b48ef4e5b96053dfc0987b99f
+#: ../../tools/cheminformatics_tools.rst:45 35fe26e898c54af28579e3113d5331c8
 msgid ""
 "Get comprehensive information about COBRApy – constraint-based metabolic "
 "modeling"
 msgstr "获取有关COBRApy的全面信息——基于约束的代谢建模"
 
-#: ../../tools/cheminformatics_tools.rst 4a2c3d391aee4827974cb9cdd4bb9eab
+#: ../../tools/cheminformatics_tools.rst 505ed979ca40449bb0411b6c8093f02d
 msgid "get_cobra_info tool specification"
 msgstr "get_cobra_info 工具规范"
 
-#: ../../tools/cheminformatics_tools.rst:51 d2a3fe2f0a05424f8232d879270cfbd5
+#: ../../tools/cheminformatics_tools.rst:51 5c334c868d384915a4fedccc760819b6
 msgid "**Name**: ``get_cobra_info``"
 msgstr "**名称**: ``get_cobra_info``"
 
-#: ../../tools/cheminformatics_tools.rst:53 7af27e68399049488aec7205f8af0b9e
+#: ../../tools/cheminformatics_tools.rst:53 de304a0d33db4a32826a9a47748d5324
 msgid ""
-"**Description**: Get comprehensive information about COBRApy – constraint-"
-"based metabolic modeling"
+"**Description**: Get comprehensive information about COBRApy – "
+"constraint-based metabolic modeling"
 msgstr "**描述**：获取关于COBRApy（基于约束的代谢建模）的全面信息"
 
 #: ../../tools/cheminformatics_tools.rst:57
-#: ../../tools/cheminformatics_tools.rst:116
-#: ../../tools/cheminformatics_tools.rst:146
-#: ../../tools/cheminformatics_tools.rst:263
-#: ../../tools/cheminformatics_tools.rst:353 00881954e5de40f2a929fc0c2b966e30
-#: c0e0e1b9c7ef40fca9cc8b7c064e3e1c c1eb0ece43a540f09d244db4af4060a4
-#: cb60d65b29a84c0abd0d08a10da74a29 dd87deb1e3c14681901fd76768c67cde
+#: ../../tools/cheminformatics_tools.rst:117
+#: ../../tools/cheminformatics_tools.rst:148
+#: ../../tools/cheminformatics_tools.rst:266
+#: ../../tools/cheminformatics_tools.rst:357 08e324ea0b4c45909e26f5240b20e93c
+#: 3de6f3c84bd34aa19ced726ac6b916d8 4ea3618c19f24a4490af23369008ba36
+#: 63e77995aabd4fe6bf0ba5b3808ad06f 9b0fc4daa289451aa208eaec4eadba9b
+#, fuzzy
 msgid ""
-"``include_examples`` (boolean) (optional) Whether to include usage examples "
-"and quick start guide"
+"``include_examples`` (boolean) (required) Whether to include usage "
+"examples and quick start guide"
 msgstr "``include_examples``（布尔值）（可选）是否包含使用示例和快速入门指南"
 
-#: ../../tools/cheminformatics_tools.rst:73 76a7a40395f14f169889f12d985421af
+#: ../../tools/cheminformatics_tools.rst:74 54c44b3e799f4ceabf2e160a811a4f8f
 msgid "**get_datamol_info** (Type: PackageTool)"
 msgstr "**get_datamol_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:75 3806f42818de46ebbd01c0a952282a80
+#: ../../tools/cheminformatics_tools.rst:76 f4680a380221489d8386a4c8e33e118f
 msgid ""
-"Get information about the datamol package. Molecular manipulation made easy"
+"Get information about the datamol package. Molecular manipulation made "
+"easy"
 msgstr "获取有关 datamol 包的信息。轻松实现分子操作。"
 
-#: ../../tools/cheminformatics_tools.rst e5ff88d044ff45229648ea2aa787977f
+#: ../../tools/cheminformatics_tools.rst d51c059f374a45039ae6623933d01c5c
 msgid "get_datamol_info tool specification"
 msgstr "get_datamol_info 工具规范"
 
-#: ../../tools/cheminformatics_tools.rst:81 1767d1a331364bb1858be94d2f805f10
+#: ../../tools/cheminformatics_tools.rst:82 3ceebdd1f0384ac5a5c9e01d952df233
 msgid "**Name**: ``get_datamol_info``"
 msgstr "**名称**: ``get_datamol_info``"
 
-#: ../../tools/cheminformatics_tools.rst:83 4dc2c65a84f247eda6c4c90240c00d1e
+#: ../../tools/cheminformatics_tools.rst:84 f6952dfe15404b3498dca03c6c43780a
 msgid ""
 "**Description**: Get information about the datamol package. Molecular "
 "manipulation made easy"
 msgstr "**描述**：获取有关datamol软件包的信息。轻松实现分子操作"
 
-#: ../../tools/cheminformatics_tools.rst:102 ffabcec11de04b3e9eaf9bc55f373ff6
+#: ../../tools/cheminformatics_tools.rst:103 e503df69e79740819701c1896d681fce
 msgid "**get_deepchem_info** (Type: PackageTool)"
 msgstr "**get_deepchem_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:104 3d2fd2c09f5041ed80e38a584449d2d8
+#: ../../tools/cheminformatics_tools.rst:105 e40d6b696b0d4cdbbbae1aa001058f10
 msgid ""
-"Get comprehensive information about DeepChem – an open-source toolkit that "
-"brings advanced AI/ML ..."
+"Get comprehensive information about DeepChem – an open-source toolkit "
+"that brings advanced AI/ML ..."
 msgstr "获取关于DeepChem的全面信息——一个开源工具包，提供先进的人工智能/机器学习..."
 
-#: ../../tools/cheminformatics_tools.rst a11a0c54c7634d4293f5310f644f947a
+#: ../../tools/cheminformatics_tools.rst 2839e4a1d2214db3b7d1b3dd701f421d
 msgid "get_deepchem_info tool specification"
 msgstr "get_deepchem_info 工具规范"
 
-#: ../../tools/cheminformatics_tools.rst:110 ba82d913b35744bd9423a49a1fd60292
+#: ../../tools/cheminformatics_tools.rst:111 a99809e35a7e4cb49b8e681ecaa7d4ce
 msgid "**Name**: ``get_deepchem_info``"
 msgstr "**名称**: ``get_deepchem_info``"
 
-#: ../../tools/cheminformatics_tools.rst:112 fcb0c4d7bff5460e81f01fe7cf9dd0c9
+#: ../../tools/cheminformatics_tools.rst:113 5fc0ea0d9bac49a49bd0f05023f94241
 msgid ""
 "**Description**: Get comprehensive information about DeepChem – an open-"
 "source toolkit that brings advanced AI/ML techniques to drug discovery, "
 "materials science and quantum chemistry."
 msgstr "**描述**：获取关于DeepChem的全面信息——一个开源工具包，将先进的人工智能/机器学习技术应用于药物发现、材料科学和量子化学领域。"
 
-#: ../../tools/cheminformatics_tools.rst:132 7ccc238dfafe4379a43ad3da9a0ab7fc
+#: ../../tools/cheminformatics_tools.rst:134 c1a65aad7cec4e728eff4c394a31c22a
 msgid "**get_dscribe_info** (Type: PackageTool)"
 msgstr "**get_dscribe_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:134 de8b9986534044a1b5e5ff4aba903cfe
+#: ../../tools/cheminformatics_tools.rst:136 70bafadd4b7940f78c1c9d1b080e1395
 msgid ""
 "Get comprehensive information about DScribe – a library for generating "
 "machine-learning descripto..."
 msgstr "获取有关 DScribe 的全面信息——一个用于生成机器学习描述符的库..."
 
-#: ../../tools/cheminformatics_tools.rst 38016de22aea442e9d9992234e43cd49
+#: ../../tools/cheminformatics_tools.rst 32d6f6c9027e466b8f39f896882414c9
 msgid "get_dscribe_info tool specification"
 msgstr "get_dscribe_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:140 c98e376298e940f2be12e5490d2b5e30
+#: ../../tools/cheminformatics_tools.rst:142 71ed3ddec6664b098a1216e7393b145c
 msgid "**Name**: ``get_dscribe_info``"
 msgstr "**名称**：``get_dscribe_info``"
 
-#: ../../tools/cheminformatics_tools.rst:142 72f19628a21d453c87a10917be906c0c
+#: ../../tools/cheminformatics_tools.rst:144 3673e9f0a8f24c3c8420cfa1874a04f4
 msgid ""
-"**Description**: Get comprehensive information about DScribe – a library for"
-" generating machine-learning descriptors for materials and molecules."
+"**Description**: Get comprehensive information about DScribe – a library "
+"for generating machine-learning descriptors for materials and molecules."
 msgstr "**描述**：获取关于 DScribe 的全面信息——一个用于生成材料和分子机器学习描述符的库。"
 
-#: ../../tools/cheminformatics_tools.rst:162 6ac427b76fb94c098d4f731ac944e60a
+#: ../../tools/cheminformatics_tools.rst:165 bcffb63cf958416a9416b1f3c60aded9
 msgid "**get_molfeat_info** (Type: PackageTool)"
 msgstr "**get_molfeat_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:164 f61602ab6d10436f86c6d0a376f9b38d
+#: ../../tools/cheminformatics_tools.rst:167 f3e4ebf90d0e4cdab2b885f369d2c848
 msgid ""
 "Get information about the molfeat package. Simple and robust molecular "
 "featurization"
 msgstr "获取有关 molfeat 软件包的信息。简单且稳健的分子特征提取工具"
 
-#: ../../tools/cheminformatics_tools.rst 06391e317dde4d49b57695d943c69577
+#: ../../tools/cheminformatics_tools.rst fd905c624e1f425282c1d8c1b48ea149
 msgid "get_molfeat_info tool specification"
 msgstr "get_molfeat_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:170 593bdee155eb443c9608aa1e2ca19f85
+#: ../../tools/cheminformatics_tools.rst:173 db609bc782f747269820869bdee5c84b
 msgid "**Name**: ``get_molfeat_info``"
 msgstr "**名称**：``get_molfeat_info``"
 
-#: ../../tools/cheminformatics_tools.rst:172 0ab5d6f59fdd462cb30e118c50be40b3
+#: ../../tools/cheminformatics_tools.rst:175 a3d67383327941afa75bdd199f6415fe
 msgid ""
 "**Description**: Get information about the molfeat package. Simple and "
 "robust molecular featurization"
 msgstr "**描述**：获取有关 molfeat 软件包的信息。简单且稳健的分子特征提取工具。"
 
-#: ../../tools/cheminformatics_tools.rst:191 70ae60bdd94845b78b38856587237844
+#: ../../tools/cheminformatics_tools.rst:194 2412900ed15741a2906b56b946318d7c
 msgid "**get_molvs_info** (Type: PackageTool)"
 msgstr "**get_molvs_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:193 6f49ef9d69d740b396ecb3f2e8406769
+#: ../../tools/cheminformatics_tools.rst:196 c177532a372c48758dfd379ba3c574ba
 msgid ""
 "Get information about the molvs package. Molecule validation and "
 "standardization"
 msgstr "获取有关 molvs 软件包的信息。分子验证与标准化"
 
-#: ../../tools/cheminformatics_tools.rst 24068a7d42d94ae38b9169a71595e1c0
+#: ../../tools/cheminformatics_tools.rst 667636d4b3974549ba6f837669b4eda0
 msgid "get_molvs_info tool specification"
 msgstr "get_molvs_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:199 31af52a9f2024bfd9087ce6ca5ae1d26
+#: ../../tools/cheminformatics_tools.rst:202 95ad0404c50c46e1951303df4a1252d7
 msgid "**Name**: ``get_molvs_info``"
 msgstr "**名称**：``get_molvs_info``"
 
-#: ../../tools/cheminformatics_tools.rst:201 f5c8fcbe3d1e4faeb3c6e79909fa9419
+#: ../../tools/cheminformatics_tools.rst:204 f71c5794aa1e4b5ba73aabbc0c87842e
 msgid ""
 "**Description**: Get information about the molvs package. Molecule "
 "validation and standardization"
 msgstr "**描述**：获取有关 molvs 包的信息。分子验证与标准化"
 
-#: ../../tools/cheminformatics_tools.rst:220 e0f3bb0f222e42efaff3d448c6967fa3
+#: ../../tools/cheminformatics_tools.rst:223 7d95be7f1ce84c1b9e60469c7d7d1d04
 msgid "**get_mordred_info** (Type: PackageTool)"
 msgstr "**get_mordred_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:222 2148e1d860e94ae7b31173919ec7d2d5
-msgid ""
-"Get information about the mordred package. Molecular descriptor calculator"
+#: ../../tools/cheminformatics_tools.rst:225 14b6aae11a404076b08e14f59e8987dc
+msgid "Get information about the mordred package. Molecular descriptor calculator"
 msgstr "获取有关 mordred 软件包的信息。分子描述符计算器"
 
-#: ../../tools/cheminformatics_tools.rst 36b60d09328b40ca8f0f6b8beafa854a
+#: ../../tools/cheminformatics_tools.rst a91172ac2ab04849881c77e5d7e4907b
 msgid "get_mordred_info tool specification"
 msgstr "get_mordred_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:228 2e745ebe81b0477bbc59697ef7ce915f
+#: ../../tools/cheminformatics_tools.rst:231 56f9c9b0e2be47fcbe87bd729cac8f7f
 msgid "**Name**: ``get_mordred_info``"
 msgstr "**名称**：``get_mordred_info``"
 
-#: ../../tools/cheminformatics_tools.rst:230 714fac1bbe494d8b912be9dd7e9550a2
+#: ../../tools/cheminformatics_tools.rst:233 9fbf9615dd4648e8907b750fba71313e
 msgid ""
 "**Description**: Get information about the mordred package. Molecular "
 "descriptor calculator"
 msgstr "**描述**：获取有关mordred包的信息。分子描述符计算器"
 
-#: ../../tools/cheminformatics_tools.rst:249 6709ab5984674bb8a5fe322ff3e71e82
+#: ../../tools/cheminformatics_tools.rst:252 f53ca33ff1a5400f8500c4c5771d31cc
 msgid "**get_openbabel_info** (Type: PackageTool)"
 msgstr "**get_openbabel_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:251 d530907722814d90b6a679463363670c
+#: ../../tools/cheminformatics_tools.rst:254 1b020d6c94de4d8e8dc2a017dcc5ec88
 msgid ""
-"Get comprehensive information about OpenBabel – chemical format conversion "
-"and analysis"
+"Get comprehensive information about OpenBabel – chemical format "
+"conversion and analysis"
 msgstr "获取关于 OpenBabel——化学格式转换与分析的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst 8ac4814169a44538b0c68bb09147aefc
+#: ../../tools/cheminformatics_tools.rst 71982e075ce045ee93abe1d9fdbcb834
 msgid "get_openbabel_info tool specification"
 msgstr "get_openbabel_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:257 ea4d54b214c44ff3928fe88081622dac
+#: ../../tools/cheminformatics_tools.rst:260 99e2153fb9734ae496b131f4ce140e54
 msgid "**Name**: ``get_openbabel_info``"
 msgstr "**名称**：``get_openbabel_info``"
 
-#: ../../tools/cheminformatics_tools.rst:259 45f511ad4d2242899ca20c4abddbb64b
+#: ../../tools/cheminformatics_tools.rst:262 f7ccdbafbe5b49e99401727df0458b4d
 msgid ""
-"**Description**: Get comprehensive information about OpenBabel – chemical "
-"format conversion and analysis"
+"**Description**: Get comprehensive information about OpenBabel – chemical"
+" format conversion and analysis"
 msgstr "**描述**：获取关于 OpenBabel——化学格式转换与分析的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst:279 b2e90312ad5d4de8b3e6dc05629bd0a3
+#: ../../tools/cheminformatics_tools.rst:283 ac66fc5ef957460cbdce5f59289bf08c
 msgid "**get_openchem_info** (Type: PackageTool)"
 msgstr "**get_openchem_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:281 559af35ac9a04f1eb549a7712964039e
+#: ../../tools/cheminformatics_tools.rst:285 8e25fd047c7e4d38920753a63c728d6b
 msgid ""
 "Get comprehensive information about OpenChem – deep learning toolkit for "
 "drug discovery"
 msgstr "获取关于 OpenChem —— 用于药物发现的深度学习工具包的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst 790aef92cb934a56964720b72f12311d
+#: ../../tools/cheminformatics_tools.rst 37728d35bec6401e9acd675ba576dbc7
 msgid "get_openchem_info tool specification"
 msgstr "get_openchem_info 工具规范"
 
-#: ../../tools/cheminformatics_tools.rst:287 5df0d756da9c4c59b325dea57049b289
+#: ../../tools/cheminformatics_tools.rst:291 1a1c560ff9e64295b4908c7844528163
 msgid "**Name**: ``get_openchem_info``"
 msgstr "**名称**：``get_openchem_info``"
 
-#: ../../tools/cheminformatics_tools.rst:289 6deee2efd588446cbdd63317da2b7e51
+#: ../../tools/cheminformatics_tools.rst:293 1ae9d35ebbd54a19bcb5b0b688009c8b
 msgid ""
 "**Description**: Get comprehensive information about OpenChem – deep "
 "learning toolkit for drug discovery"
 msgstr "**描述**：获取关于 OpenChem —— 用于药物发现的深度学习工具包的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst:293 406483339fab4d1c9f02d45f0a5c71a1
+#: ../../tools/cheminformatics_tools.rst:297 6ac68d687c3e45ffbf0655345cf7b69e
 msgid ""
 "``info_type`` (string) (required) Type of information to retrieve about "
 "OpenChem"
 msgstr "``info_type``（字符串）（必填） 要检索的关于 OpenChem 的信息类型"
 
-#: ../../tools/cheminformatics_tools.rst:310 21eb6df70aba49ab83b4e51c1dadb7dd
+#: ../../tools/cheminformatics_tools.rst:314 5e62ee8a05644b31a7f5ec11c63b1209
 msgid "**get_pubchempy_info** (Type: PackageTool)"
 msgstr "**get_pubchempy_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:312 703973108e7f418895b69a4a73cdae7b
+#: ../../tools/cheminformatics_tools.rst:316 6b96f907fd194d568bc8c699d49c3b23
 msgid ""
-"Get information about the pubchempy package. Python interface for PubChem "
-"REST API"
+"Get information about the pubchempy package. Python interface for PubChem"
+" REST API"
 msgstr "获取有关 pubchempy 包的信息。PubChem REST API 的 Python 接口"
 
-#: ../../tools/cheminformatics_tools.rst 99f9884a8edb494a9901f4dc71bfa0e2
+#: ../../tools/cheminformatics_tools.rst b7dca9f86de9436ea402523589398180
 msgid "get_pubchempy_info tool specification"
 msgstr "get_pubchempy_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:318 0623f09f16fb4ab09e77f9c9047f6b79
+#: ../../tools/cheminformatics_tools.rst:322 e9ee17880ec847de943bf8494884baf1
 msgid "**Name**: ``get_pubchempy_info``"
 msgstr "**名称**：``get_pubchempy_info``"
 
-#: ../../tools/cheminformatics_tools.rst:320 f9f18ead53454ad59eee43185d332ea1
+#: ../../tools/cheminformatics_tools.rst:324 3a8b54c399ea46a788933b06c4053528
 msgid ""
 "**Description**: Get information about the pubchempy package. Python "
 "interface for PubChem REST API"
 msgstr "**描述**：获取有关 pubchempy 包的信息。PubChem REST API 的 Python 接口"
 
-#: ../../tools/cheminformatics_tools.rst:339 c9f416d5dbfe4169846ca547699c454e
+#: ../../tools/cheminformatics_tools.rst:343 5b0f5e6fb5ba4f65842a86c30f4a5100
 msgid "**get_rdkit_info** (Type: PackageTool)"
 msgstr "**get_rdkit_info**（类型：PackageTool）"
 
-#: ../../tools/cheminformatics_tools.rst:341 6c45d44afadc44228070e0e0e2fd3365
+#: ../../tools/cheminformatics_tools.rst:345 7ee0f8e4ea3541cc9b5fe23dd9d370c4
 msgid ""
 "Get comprehensive information about RDKit – cheminformatics and machine "
 "learning toolkit"
 msgstr "获取关于 RDKit —— 化学信息学与机器学习工具包的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst 1eca752b5f9c456890da6d0ab5f5d0db
+#: ../../tools/cheminformatics_tools.rst 8771a3ee25294de3967485ddf67d4b27
 msgid "get_rdkit_info tool specification"
 msgstr "get_rdkit_info 工具规格说明"
 
-#: ../../tools/cheminformatics_tools.rst:347 5d22caae3f274b3f93aae5affb680c04
+#: ../../tools/cheminformatics_tools.rst:351 efe0222a1a544ca7805654c6ce8e010f
 msgid "**Name**: ``get_rdkit_info``"
 msgstr "**名称**：``get_rdkit_info``"
 
-#: ../../tools/cheminformatics_tools.rst:349 503161df1cb44f00a0ec508386339998
+#: ../../tools/cheminformatics_tools.rst:353 1a8f0b6a852e4ca987db61fcf71a2e47
 msgid ""
-"**Description**: Get comprehensive information about RDKit – cheminformatics"
-" and machine learning toolkit"
+"**Description**: Get comprehensive information about RDKit – "
+"cheminformatics and machine learning toolkit"
 msgstr "**描述**：获取关于 RDKit —— 化学信息学与机器学习工具包的全面信息"
 
-#: ../../tools/cheminformatics_tools.rst:369 0fd89e3df7cc4a9e9f74d2c58208c63e
+#: ../../tools/cheminformatics_tools.rst:374 ad3d753fcc284748add659f411358d09
 msgid "Navigation"
 msgstr "导航"
 
-#: ../../tools/cheminformatics_tools.rst:371 ed0c0b96105a4404bf20217f4086d3d9
+#: ../../tools/cheminformatics_tools.rst:376 c805b09a2a7e412db9073512b79f3497
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
 msgstr ":doc:`tools_config_index` - 返回工具概览"
 
-#: ../../tools/cheminformatics_tools.rst:372 b0542ad1ad6041838e45fa933e1f84c9
+#: ../../tools/cheminformatics_tools.rst:377 7a63eac87a5d4759a003d28f168e42d4
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ":doc:`../guide/loading_tools` - 加载本地工具"
+

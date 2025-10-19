@@ -116,7 +116,7 @@ Get comprehensive information about DeepXDE – a library for physics-informed n
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and a quick-start guide
 
    **Example Usage:**
@@ -126,6 +126,7 @@ Get comprehensive information about DeepXDE – a library for physics-informed n
       query = {
           "name": "get_deepxde_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -146,7 +147,7 @@ Get comprehensive information about Faiss – efficient similarity search and cl
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -156,6 +157,7 @@ Get comprehensive information about Faiss – efficient similarity search and cl
       query = {
           "name": "get_faiss_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -238,7 +240,7 @@ Get comprehensive information about Hyperopt – distributed hyperparameter opti
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -248,6 +250,7 @@ Get comprehensive information about Hyperopt – distributed hyperparameter opti
       query = {
           "name": "get_hyperopt_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -417,7 +420,7 @@ Get comprehensive information about PyTorch – an open source machine learning 
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -427,6 +430,7 @@ Get comprehensive information about PyTorch – an open source machine learning 
       query = {
           "name": "get_pytorch_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -447,7 +451,7 @@ Get comprehensive information about SchNetPack – a deep-learning toolbox for m
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and a quick-start guide
 
    **Example Usage:**
@@ -457,6 +461,7 @@ Get comprehensive information about SchNetPack – a deep-learning toolbox for m
       query = {
           "name": "get_schnetpack_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -477,7 +482,7 @@ Get comprehensive information about scikit-learn – simple and efficient tools 
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -487,6 +492,7 @@ Get comprehensive information about scikit-learn – simple and efficient tools 
       query = {
           "name": "get_scikit_learn_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -536,7 +542,7 @@ Get comprehensive information about statsmodels – statistical modeling and eco
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -546,6 +552,7 @@ Get comprehensive information about statsmodels – statistical modeling and eco
       query = {
           "name": "get_statsmodels_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -566,7 +573,7 @@ Get comprehensive information about PyTorch Geometric – a high-performance lib
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -576,6 +583,7 @@ Get comprehensive information about PyTorch Geometric – a high-performance lib
       query = {
           "name": "get_torch_geometric_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -596,7 +604,7 @@ Get comprehensive information about UMAP-learn – dimensionality reduction tech
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -606,6 +614,7 @@ Get comprehensive information about UMAP-learn – dimensionality reduction tech
       query = {
           "name": "get_umap_learn_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)

@@ -28,7 +28,7 @@ Retrieves cell-type-specific protein-protein interaction embeddings from PINNACL
    * ``cell_type`` (string) (required)
      Target cell type for embedding retrieval. Supports flexible naming: Standard formats: 'b_cell', 'hepatocyte', 'cardiomyocyte'; Alternative formats: 'B-cell', 'T cell', 'NK cells'; Tissue types: 'liver', 'heart', 'brain', 'immune'. The tool performs intelligent matching to find the best available match.
 
-   * ``embed_path`` (string) (optional)
+   * ``embed_path`` (string) (required)
      Path to the PINNACLE embeddings file (.pth format). If None, uses PINNACLE_DATA_PATH/pinnacle_embeds/ppi_embed_dict.pth.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Retrieves cell-type-specific protein-protein interaction embeddings from PINNACL
       query = {
           "name": "run_pinnacle_ppi_retrieval",
           "arguments": {
-              "cell_type": "example_value"
+              "cell_type": "example_value",
+              "embed_path": "example_value"
           }
       }
       result = tu.run(query)
