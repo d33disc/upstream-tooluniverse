@@ -26,12 +26,12 @@ msgid "tooluniverse.cli.toolspace\\_cli module"
 msgstr ""
 
 #: 55674f3f4024403eabc660ce292b4e71 of tooluniverse.cli.toolspace_cli:1
-msgid "ToolSpace CLI Management Tool"
+msgid "Space CLI Management Tool"
 msgstr ""
 
 #: 953bed70ed98470b90f2594328f8e467 of tooluniverse.cli.toolspace_cli:3
 msgid ""
-"This module provides command-line tools for managing ToolSpace "
+"This module provides command-line tools for managing Space "
 "configurations."
 msgstr ""
 

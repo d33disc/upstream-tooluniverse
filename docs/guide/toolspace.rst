@@ -1,12 +1,12 @@
-ToolSpace Configuration System
+Space Configuration System
 ==============================
 
-ToolSpace is a powerful configuration system that allows you to easily load, share, and manage tool configurations for ToolUniverse. It supports both simple presets and complex workspaces with AI integration.
+Space is a powerful configuration system that allows you to easily load, share, and manage tool configurations for ToolUniverse. It supports both simple presets and complex workspaces with AI integration.
 
 Quick Start
 -----------
 
-Load a ToolSpace configuration in just one line:
+Load a Space configuration in just one line:
 
 .. code-block:: python
 
@@ -14,15 +14,15 @@ Load a ToolSpace configuration in just one line:
    
    # Load from local file
    tu = ToolUniverse()
-   config = tu.load_toolspace("./my-config.yaml")
+   config = tu.load_space("./my-config.yaml")
    
    # Or load from HuggingFace
-   config = tu.load_toolspace("hf:username/repo")
+   config = tu.load_space("hf:username/repo")
 
 Command Line Usage
 ------------------
 
-Use ToolSpace configurations with MCP servers:
+Use Space configurations with MCP servers:
 
 .. code-block:: bash
 
@@ -35,10 +35,10 @@ Use ToolSpace configurations with MCP servers:
    # Load from HTTP URL
    tooluniverse-smcp-stdio --load "https://example.com/config.yaml"
 
-What is ToolSpace?
+What is Space?
 ------------------
 
-ToolSpace is a unified system for managing tool configurations that supports:
+Space is a unified system for managing tool configurations that supports:
 
 - **Presets**: Simple tool collections for specific domains
 - **Workspaces**: Complete environments with tools, AI config, and workflows
@@ -105,13 +105,13 @@ Load configurations from HuggingFace Hub:
 .. code-block:: python
 
    # Simple format
-   tu.load_toolspace("username/repo-name")
+   tu.load_space("username/repo-name")
    
    # With version
-   tu.load_toolspace("username/repo-name@v1.0.0")
+   tu.load_space("username/repo-name@v1.0.0")
    
    # Explicit format
-   tu.load_toolspace("hf:username/repo-name")
+   tu.load_space("hf:username/repo-name")
 
 Local Files
 ~~~~~~~~~~~
@@ -121,13 +121,13 @@ Load from local files:
 .. code-block:: python
 
    # Relative path
-   tu.load_toolspace("./my-config.yaml")
+   tu.load_space("./my-config.yaml")
    
    # Absolute path
-   tu.load_toolspace("/path/to/config.yaml")
+   tu.load_space("/path/to/config.yaml")
    
    # File protocol
-   tu.load_toolspace("file:///path/to/config.yaml")
+   tu.load_space("file:///path/to/config.yaml")
 
 HTTP URLs
 ~~~~~~~~~
@@ -136,17 +136,17 @@ Load from any HTTP URL:
 
 .. code-block:: python
 
-   tu.load_toolspace("https://example.com/config.yaml")
+   tu.load_space("https://example.com/config.yaml")
 
 Configuration Overrides
 -----------------------
 
-Override ToolSpace settings with parameters:
+Override Space settings with parameters:
 
 .. code-block:: python
 
    # Load configuration with overrides
-   config = tu.load_toolspace(
+   config = tu.load_space(
        "./my-config.yaml",
        exclude_tools=["slow_tool"],      # Additional exclusions
        include_tools=["extra_tool"],     # Additional inclusions
@@ -156,11 +156,11 @@ Override ToolSpace settings with parameters:
 Configuration Merging
 ---------------------
 
-Command line arguments take priority over ToolSpace configuration:
+Command line arguments take priority over Space configuration:
 
 .. code-block:: bash
 
-   # ToolSpace provides defaults, command line overrides
+   # Space provides defaults, command line overrides
    tooluniverse-smcp-stdio \
        --load "./my-config.yaml" \
        --exclude-tools "problematic_tool" \
@@ -176,7 +176,7 @@ Create a simple preset:
 
 .. code-block:: python
 
-   from tooluniverse.toolspace_validator import validate_with_schema
+   from tooluniverse.space import validate_with_schema
    import yaml
    
    # Create preset configuration
@@ -206,7 +206,7 @@ Create a complete workspace:
 
 .. code-block:: python
 
-   from tooluniverse.toolspace_validator import validate_with_schema
+   from tooluniverse.space import validate_with_schema
    import yaml
    
    # Create workspace configuration
@@ -244,7 +244,7 @@ Validate configurations before using:
 
 .. code-block:: python
 
-   from tooluniverse.toolspace_validator import validate_yaml_file_with_schema
+   from tooluniverse.space import validate_yaml_file_with_schema
    
    # Validate file with default filling
    is_valid, errors, processed_config = validate_yaml_file_with_schema(
@@ -264,7 +264,7 @@ Validate from command line using Python:
 
    # Validate configuration using Python
    python -c "
-   from tooluniverse.toolspace_validator import validate_yaml_file_with_schema
+   from tooluniverse.space import validate_yaml_file_with_schema
    is_valid, errors, data = validate_yaml_file_with_schema('my-config.yaml')
    print('✅ Configuration is valid' if is_valid else f'❌ Found {len(errors)} validation error(s): {errors}')
    "

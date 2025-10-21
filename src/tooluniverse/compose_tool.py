@@ -65,7 +65,7 @@ class ComposeTool(BaseTool):
         """
         Automatically discover tool dependencies from composition code.
 
-        Returns:
+        Returns
             set: Set of tool names that this composition calls
         """
         dependencies = set()
@@ -89,7 +89,7 @@ class ComposeTool(BaseTool):
         """
         Create a mapping from tool names to their categories.
 
-        Returns:
+        Returns
             dict: Mapping of tool names to category names
         """
         tool_to_category = {}
@@ -119,7 +119,7 @@ class ComposeTool(BaseTool):
         Args:
             missing_tools (set): Set of missing tool names
 
-        Returns:
+        Returns
             tuple: (successfully_loaded, failed_to_load)
         """
         if not self.tooluniverse or not self.auto_load_dependencies:
@@ -173,7 +173,7 @@ class ComposeTool(BaseTool):
         """
         Load composition code from external Python file.
 
-        Returns:
+        Returns
             str: The composition code as a string
         """
         if not self.composition_file:
@@ -213,7 +213,7 @@ class ComposeTool(BaseTool):
             arguments (dict): Input arguments for the composition
             stream_callback (callable, optional): Callback function for streaming output
 
-        Returns:
+        Returns
             Any: Result from the composition execution
         """
         if not self.tooluniverse:
@@ -303,7 +303,7 @@ class ComposeTool(BaseTool):
         Args:
             stream_callback (callable, optional): Callback function for streaming output
 
-        Returns:
+        Returns
             callable: Event emitter function
         """
 
@@ -327,7 +327,7 @@ class ComposeTool(BaseTool):
             arguments (dict): Input arguments
             stream_callback (callable, optional): Callback function for streaming output
 
-        Returns:
+        Returns
             Any: Result from the composition execution
         """
         # Resolve file path
@@ -377,7 +377,7 @@ class ComposeTool(BaseTool):
             arguments (dict): Input arguments
             stream_callback (callable, optional): Callback function for streaming output
 
-        Returns:
+        Returns
             Any: Result from the composition execution
         """
         # Initialize execution context
@@ -408,7 +408,7 @@ class ComposeTool(BaseTool):
             tool_name (str): Name of the tool to call
             arguments (dict): Arguments to pass to the tool
 
-        Returns:
+        Returns
             Any: Result from the tool execution
         """
         # Check if tool is available (check both callable_functions and all_tool_dict)

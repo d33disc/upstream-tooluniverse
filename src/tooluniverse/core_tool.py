@@ -43,7 +43,7 @@ class CoreTool(BaseTool):
             year_to: End year filter
             language: Language filter (e.g., 'en', 'es', 'fr')
 
-        Returns:
+        Returns
             List of paper dictionaries
         """
         try:
@@ -134,7 +134,7 @@ class CoreTool(BaseTool):
         Args:
             tool_arguments: Dictionary containing search parameters
 
-        Returns:
+        Returns
             List of paper dictionaries
         """
         query = tool_arguments.get("query", "")

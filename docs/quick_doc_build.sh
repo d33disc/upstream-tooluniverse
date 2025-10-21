@@ -238,9 +238,9 @@ fi
 if [ -n "$SPHINX_APIDOC" ]; then
     # Determine sphinx-apidoc flags based on optimization mode
     if [ "${DOC_OPTIMIZED}" = "1" ]; then
-      # Optimized mode: faster builds, group functions by module
-      echo -e "${YELLOW}Using optimized API generation (grouped by module, maxdepth 3)${NC}"
-      APIDOC_FLAGS="-o api ../src/tooluniverse --module-first --maxdepth 3 --templatedir=_templates"
+      # Optimized mode: generate core APIs with specific modules
+      echo -e "${YELLOW}Using minimal API generation (core modules only)${NC}"
+      APIDOC_FLAGS="-o api ../src/tooluniverse --module-first --maxdepth 2 --templatedir=_templates"
     else
       # Full mode: regenerate everything but group by module for better performance
       APIDOC_FLAGS="-f -o api ../src/tooluniverse --module-first --maxdepth 4 --private --force --templatedir=_templates"
@@ -249,9 +249,176 @@ if [ -n "$SPHINX_APIDOC" ]; then
     # Use sphinx-apidoc to scan source code and generate API documentation
     $SPHINX_APIDOC $APIDOC_FLAGS 2>/dev/null || true
 
+    # Clean up problematic files but keep core API files
+    echo -e "${YELLOW}Cleaning up problematic API files...${NC}"
+    
+    # Remove only the problematic large files
+    rm -f api/tooluniverse.tools.rst
+    rm -f api/tooluniverse.data.rst
+    rm -f api/tooluniverse.web_tools.rst
+    rm -f api/tooluniverse.web_tools.literature_search_ui.rst
+    
+    # Check if we have any API files generated
+    API_COUNT=$(find api -name "*.rst" | wc -l | tr -d ' ')
+    if [ "$API_COUNT" -gt 1 ]; then
+      echo -e "${GREEN}✅ Found ${API_COUNT} API documentation files${NC}"
+      
+      # Create a comprehensive API index with actual generated files
+      cat > api/modules.rst << 'EOF'
+API Reference
+=============
+
+This section provides the complete Python API reference for ToolUniverse.
+
+Core Infrastructure
+-------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse
+   tooluniverse.execute_function
+   tooluniverse.cache
+   tooluniverse.space
+
+Core Classes & Utilities
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.base_tool
+   tooluniverse.core_tool
+   tooluniverse.exceptions
+   tooluniverse.tool_registry
+   tooluniverse.logging_config
+   tooluniverse.utils
+   tooluniverse.default_config
+
+Important Tools
+---------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.agentic_tool
+   tooluniverse.remote_tool
+   tooluniverse.compose_tool
+
+Tool Finders
+------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.tool_finder_embedding
+   tooluniverse.tool_finder_keyword
+   tooluniverse.tool_finder_llm
+
+MCP Support
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.smcp
+   tooluniverse.smcp_server
+   tooluniverse.mcp_client_tool
+   tooluniverse.mcp_integration
+   tooluniverse.mcp_tool_registry
+
+Embedding & Output Management
+-----------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.embedding_database
+   tooluniverse.embedding_sync
+   tooluniverse.output_hook
+EOF
+    else
+      echo -e "${YELLOW}⚠️ No API files generated, creating minimal documentation...${NC}"
+      
+      # Create a minimal API index with only core modules
+      cat > api/modules.rst << 'EOF'
+API Reference
+=============
+
+This section provides the complete Python API reference for ToolUniverse.
+
+Core Infrastructure
+-------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse
+   tooluniverse.execute_function
+   tooluniverse.cache
+   tooluniverse.space
+
+Core Classes & Utilities
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.base_tool
+   tooluniverse.core_tool
+   tooluniverse.exceptions
+   tooluniverse.tool_registry
+   tooluniverse.logging_config
+   tooluniverse.utils
+   tooluniverse.default_config
+
+Important Tools
+---------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.agentic_tool
+   tooluniverse.remote_tool
+   tooluniverse.compose_tool
+
+Tool Finders
+------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.tool_finder_embedding
+   tooluniverse.tool_finder_keyword
+   tooluniverse.tool_finder_llm
+
+MCP Support
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.smcp
+   tooluniverse.smcp_server
+   tooluniverse.mcp_client_tool
+   tooluniverse.mcp_integration
+   tooluniverse.mcp_tool_registry
+
+Embedding & Output Management
+-----------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   tooluniverse.embedding_database
+   tooluniverse.embedding_sync
+   tooluniverse.output_hook
+EOF
+    fi
+
     # Count generated API documentation files
     API_FILES=$(find api -name "*.rst" | wc -l | tr -d ' ')
-    echo -e "${GREEN}✅ Generated ${API_FILES} API documentation files${NC}"
+    echo -e "${GREEN}✅ Generated ${API_FILES} API documentation files (core modules only)${NC}"
 
     # ===========================================
     # Display discovered module information

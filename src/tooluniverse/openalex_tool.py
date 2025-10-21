@@ -37,14 +37,14 @@ class OpenAlexTool(BaseTool):
         """
         Search for literature using OpenAlex API.
 
-        Parameters:
+        Parameters
             search_keywords (str): Keywords to search for in title, abstract, and content.
             max_results (int): Maximum number of results to return (default: 10).
             year_from (int): Start year for publication date filter (optional).
             year_to (int): End year for publication date filter (optional).
             open_access (bool): Filter for open access papers only (optional).
 
-        Returns:
+        Returns
             list: List of dictionaries containing paper information.
         """
         # Encode search keywords for URL
@@ -98,10 +98,10 @@ class OpenAlexTool(BaseTool):
         """
         Extract relevant information from a work object returned by OpenAlex API.
 
-        Parameters:
+        Parameters
             work (dict): Work object from OpenAlex API response.
 
-        Returns:
+        Returns
             dict: Formatted paper information.
         """
         # Extract title
@@ -204,10 +204,10 @@ class OpenAlexTool(BaseTool):
         """
         Retrieve a specific paper by its DOI.
 
-        Parameters:
+        Parameters
             doi (str): DOI of the paper to retrieve.
 
-        Returns:
+        Returns
             dict: Paper information or None if not found.
         """
         try:
@@ -229,11 +229,11 @@ class OpenAlexTool(BaseTool):
         """
         Retrieve papers by a specific author.
 
-        Parameters:
+        Parameters
             author_name (str): Name of the author to search for.
             max_results (int): Maximum number of results to return.
 
-        Returns:
+        Returns
             list: List of papers by the author.
         """
         try:

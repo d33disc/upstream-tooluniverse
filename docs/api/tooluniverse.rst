@@ -16,6 +16,7 @@ Subpackages
    tooluniverse.cache
    tooluniverse.compose_scripts
    tooluniverse.data
+   tooluniverse.space
    tooluniverse.tools
    tooluniverse.web_tools
 
@@ -746,24 +747,6 @@ tooluniverse.tool\_registry module
 ----------------------------------
 
 .. automodule:: tooluniverse.tool_registry
-   :members:
-   :private-members:
-   :show-inheritance:
-   :undoc-members:
-
-tooluniverse.toolspace\_loader module
--------------------------------------
-
-.. automodule:: tooluniverse.toolspace_loader
-   :members:
-   :private-members:
-   :show-inheritance:
-   :undoc-members:
-
-tooluniverse.toolspace\_validator module
-----------------------------------------
-
-.. automodule:: tooluniverse.toolspace_validator
    :members:
    :private-members:
    :show-inheritance:

@@ -37,7 +37,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -123,7 +123,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -210,7 +210,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -288,7 +288,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -372,7 +372,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,
@@ -428,7 +428,7 @@ sys.path.insert(0, 'src')
 from tooluniverse.smcp_server import run_stdio_server
 import os
 os.environ['TOOLUNIVERSE_STDIO_MODE'] = '1'
-sys.argv = ['tooluniverse-stdio', '--hooks']
+sys.argv = ['tooluniverse-smcp-stdio', '--hooks']
 run_stdio_server()
 """],
             stdin=subprocess.PIPE,

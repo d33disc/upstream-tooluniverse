@@ -85,11 +85,11 @@ def extract_sentences_with_keywords(text_list, keywords):
     """
     Extracts sentences containing any of the specified keywords from the text.
 
-    Parameters:
+    Parameters
     - text (str): The input text from which to extract sentences.
     - keywords (list): A list of keywords to search for in the text.
 
-    Returns:
+    Returns
     - list: A list of sentences containing any of the keywords.
     """
     sentences_with_keywords = []

@@ -157,7 +157,7 @@ def get_default_hook_config():
     """
     Get default hook configuration.
 
-    Returns:
+    Returns
         dict: Default hook configuration with basic settings
     """
     return {

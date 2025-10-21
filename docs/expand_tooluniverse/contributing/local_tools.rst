@@ -244,7 +244,7 @@ Create ``examples/my_new_tool_example.py``:
        tu.load_tools()
        
        # Use the tool
-       result = tu.run_one_function({
+       result = tu.run({
            "name": "my_new_tool",
            "arguments": {"input": "hello world"}
        })
@@ -254,7 +254,7 @@ Create ``examples/my_new_tool_example.py``:
        # Test with different inputs
        test_inputs = ["hello", "world", "python"]
        for text in test_inputs:
-           result = tu.run_one_function({
+           result = tu.run({
                "name": "my_new_tool",
                "arguments": {"input": text}
            })
@@ -379,9 +379,8 @@ Next Steps
 After successfully contributing your local tool:
 
 * 🚀 **Remote Tools**: :doc:`remote_tools` - Learn about contributing remote tools
-* 📚 **Advanced Features**: :doc:`../local_tools/advanced_features` - Learn BaseTool advanced capabilities
 * 🔍 **Architecture**: :doc:`../reference/architecture` - Understand ToolUniverse internals
-* 📊 **Comparison**: :doc:`../reference/comparison` - Compare tool types and usage scenarios
+* 📊 **Comparison**: Review the tool type comparison table in :doc:`../contributing/index`
 
 .. tip::
    **Success Tips**: Start with simple tools, test thoroughly, and ask for help in GitHub discussions if you get stuck!

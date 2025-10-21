@@ -101,7 +101,7 @@ class PinnaclePPITool:
                            The method handles various naming conventions including spaces,
                            hyphens, underscores, and capitalization differences.
 
-        Returns:
+        Returns
             Tuple[Dict[str, torch.Tensor], str]: A tuple containing:
                 - Dict mapping protein/gene names to their embedding tensors (empty if no match)
                 - Status message indicating match quality and selected cell type
@@ -198,7 +198,7 @@ async def run_pinnacle_ppi_retrieval(cell_type: str, embed_path: Optional[str] =
                         - Tissue types: 'liver', 'heart', 'brain', 'immune'
                         The tool performs intelligent matching to find the best available match.
 
-    Returns:
+    Returns
         dict: Comprehensive embedding retrieval results containing:
             - 'embeddings' (dict, optional): Protein-to-embedding mapping where:
                 * Keys: Gene/protein symbols (e.g., 'TP53', 'EGFR', 'BRCA1')

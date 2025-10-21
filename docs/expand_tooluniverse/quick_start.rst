@@ -1,4 +1,4 @@
-Quick Start: Create Your First Tool
+Create Your First Tool
 ====================================
 
 Get up and running with ToolUniverse in 5 minutes! This guide shows you how to create a simple local tool for your own use.
@@ -94,7 +94,7 @@ Create ``main.py`` in the same directory:
            print(f"\nTest {i}: {test_case['operation']}")
            print(f"Input:  '{test_case['text']}'")
            
-           result = tu.run_one_function({
+           result = tu.run({
                "name": "text_processor",
                "arguments": test_case
            })
@@ -155,7 +155,7 @@ Key Concepts Explained
 - Return a dictionary with ``success`` and result data
 
 **Tool Execution**
-- Use ``tu.run_one_function()`` to execute tools
+- Use ``tu.run()`` to execute tools
 - Pass tool name and arguments as a dictionary
 - ToolUniverse handles parameter validation and execution
 
@@ -172,7 +172,7 @@ Now that you have a working tool, you can:
 **📚 Learn More:**
 - :doc:`local_tools/tutorial` - Comprehensive local tool development
 - :doc:`remote_tools/tutorial` - Create remote tools and MCP servers
-- :doc:`reference/comparison` - Compare different tool types and usage scenarios
+- Review the tool type comparison table in :doc:`contributing/index`
 
 **🎁 Contribute to Community:**
 - :doc:`contributing/local_tools` - Submit your tool to ToolUniverse (requires additional steps)

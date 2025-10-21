@@ -7,471 +7,489 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"POT-Creation-Date: 2025-10-19 16:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
+#: ../../expand_tooluniverse/contributing/index.rst:29
+#, fuzzy
+msgid "Tool Contribution Guides"
+msgstr "本地工具贡献"
+
 #: ../../expand_tooluniverse/contributing/index.rst:2
-#: 8ad2e2538dce4d6790080e29b31da389
-msgid "Contributing Tools to ToolUniverse"
+#: 20449b1feba74dff89124c1e9b966722
+#, fuzzy
+msgid "Contributing to ToolUniverse"
 msgstr ""
 "将工具贡献给ToolUniverse\n"
 "\n"
 "Context: 文档"
 
 #: ../../expand_tooluniverse/contributing/index.rst:4
-#: 43cd95064a434c878a03fcffe0cc9955
+#: b8773c75fefd41f4a27d7cff462f7a5b
 msgid ""
-"This section covers how to contribute tools to the ToolUniverse repository. "
-"Contributing tools requires additional steps compared to using them locally."
-msgstr "本章节介绍如何向 ToolUniverse 仓库贡献工具。贡献工具相比于本地使用工具需要额外的步骤。"
+"Welcome! Choose the type of tool you want to contribute and follow the "
+"detailed guide."
+msgstr ""
 
 #: ../../expand_tooluniverse/contributing/index.rst:7
-#: 504eacffb17e45a6ab608b6ba8282c66
-msgid "Overview"
-msgstr "概述"
-
-#: ../../expand_tooluniverse/contributing/index.rst:9
-#: 1d6b9513403a4e0999b407c4b239e813
-msgid "**Two Types of Tool Contributions:**"
-msgstr "**两种工具贡献类型：**"
-
-#: ../../expand_tooluniverse/contributing/index.rst:11
-#: d4385a95118741c9bf0c98cac5b3ce93
-msgid "**Local Tools** - Python classes that run within ToolUniverse"
-msgstr "**本地工具** - 在ToolUniverse中运行的Python类"
-
-#: ../../expand_tooluniverse/contributing/index.rst:12
-#: ce9c523456314cc4b74b79bf91ea82bc
-msgid "**Remote Tools** - MCP servers that run independently"
-msgstr "**远程工具** - 独立运行的MCP服务器"
-
-#: ../../expand_tooluniverse/contributing/index.rst:14
-#: 5fb1f7362eb243109f37fb29aa35228d
-msgid "**Key Differences from Self-Use:**"
-msgstr "**与自用的主要区别：**"
-
-#: ../../expand_tooluniverse/contributing/index.rst:16
-#: a456b9b125424337b5cc9781a1f89b0c
-msgid "Aspect | Self-Use | Contributing |"
-msgstr "方面 | 自用 | 贡献 |"
-
-#: ../../expand_tooluniverse/contributing/index.rst:17
-#: 487490b68fd947e1923c05ddfd64da95
-#, python-format
-msgid ""
-"|--------|----------|--------------| | **Local Tools** | No ``__init__.py`` "
-"changes | **Must modify ``__init__.py`` in 4 locations** | | **Remote "
-"Tools** | Local/private deployment | **Must provide public server or "
-"deployment docs** | | **Testing** | Optional | Required (>90% coverage for "
-"local, integration for remote) | | **Documentation** | Optional | Required "
-"(docstrings + examples) | | **Examples** | Optional | Required (in "
-"``examples/`` directory) | | **Code Quality** | Optional | Required (pre-"
-"commit checks) |"
-msgstr ""
-"|--------|----------|--------------|  \n"
-"| **本地工具** | 无需修改 ``__init__.py`` | **必须在4个位置修改 ``__init__.py``** |  \n"
-"| **远程工具** | 本地/私有部署 | **必须提供公共服务器或部署文档** |  \n"
-"| **测试** | 可选 | 必须（本地测试覆盖率 >90%，远程需进行集成测试） |  \n"
-"| **文档** | 可选 | 必须（包括文档字符串和示例） |  \n"
-"| **示例** | 可选 | 必须（存放于 ``examples/`` 目录中） |  \n"
-"| **代码质量** | 可选 | 必须（需通过 pre-commit 检查） |"
-
-#: ../../expand_tooluniverse/contributing/index.rst:26
-#: 4a9cb66b1238450db9d288403575a42c
+#: 70ca8e984017417bafb444260863b056
 msgid "Choose Your Tool Type"
 msgstr "选择工具类型"
 
-#: ../../expand_tooluniverse/contributing/index.rst:28
-#: 4c20c546853f4d61b874faec290d4fb9
-msgid ""
-"**I want to contribute a Local Tool:** → :doc:`local_tools` - Python class "
-"that runs in ToolUniverse process"
-msgstr "**我想贡献一个本地工具：** → :doc:`local_tools` - 在ToolUniverse进程中运行的Python类"
+#: ../../expand_tooluniverse/contributing/index.rst:9
+#: 6331ebaec9a74bea9cb0d05b12804e15
+msgid "Feature | Local Tools | Remote Tools |"
+msgstr ""
 
-#: ../../expand_tooluniverse/contributing/index.rst:31
-#: ef703a5eb154481daa91ee94613425b9
-msgid ""
-"**I want to contribute a Remote Tool:** → :doc:`remote_tools` - MCP server "
-"that runs independently"
-msgstr "**我想贡献一个远程工具：** → :doc:`remote_tools` - 独立运行的MCP服务器"
-
-#: ../../expand_tooluniverse/contributing/index.rst:34
-#: 563172e4f2a54d849a366686c897ea4d
-msgid ""
-"**I'm not sure which type to choose:** → :doc:`../reference/comparison` - "
-"Compare tool types and requirements"
-msgstr "**我不确定该选择哪种类型：** → :doc:`../reference/comparison` - 比较工具类型和需求"
-
-#: ../../expand_tooluniverse/contributing/index.rst:38
-#: 96303ff77b534aeaa3e4ee2e77e06455
-msgid "Local Tools Contribution"
-msgstr "本地工具贡献"
-
-#: ../../expand_tooluniverse/contributing/index.rst:40
-#: 96d8c96f32dc4b94ac71e40954501827
+#: ../../expand_tooluniverse/contributing/index.rst:10
+#: 60dd96388d5b47dd8b34dbe039c66eb0
 #, python-format
 msgid ""
-"**What you need to do:** 1. Create Python class in ``src/tooluniverse/`` 2. "
-"Use ``@register_tool`` decorator 3. Create JSON config in "
-"``data/xxx_tools.json`` 4. **🔑 Modify ``__init__.py`` in 4 locations** (most"
-" critical step!) 5. Write tests (>90% coverage) 6. Create examples 7. Submit"
-" PR"
+"|---------|-------------|--------------| | **Runs** | In ToolUniverse "
+"process | Independent server | | **Language** | Python only | Any "
+"language | | **Setup** | Modify __init__.py in 4 locations | Deploy "
+"server publicly | | **Testing** | Unit tests (>90% coverage) | "
+"Integration tests | | **Best For** | API wrappers, data processing | "
+"Heavy computation, external services |"
 msgstr ""
-"**您需要完成以下任务：**  \n"
-"1. 在``src/tooluniverse/``目录中创建Python类  \n"
-"2. 使用``@register_tool``装饰器  \n"
-"3. 在``data/xxx_tools.json``中创建JSON配置文件  \n"
-"4. **🔑 在4个位置修改``__init__.py``文件**（最关键的步骤！）  \n"
-"5. 编写测试（覆盖率需超过90%）  \n"
-"6. 创建示例  \n"
-"7. 提交PR"
 
-#: ../../expand_tooluniverse/contributing/index.rst:49
-#: 48ddbad7bf504c639a257a483efedc31
-msgid ""
-"**Key Requirements:** - Must modify ``src/tooluniverse/__init__.py`` in 4 "
-"specific locations - Config must be in ``data/`` folder, not in decorator - "
-"Comprehensive testing required - Examples must be in ``examples/`` directory"
+#: ../../expand_tooluniverse/contributing/index.rst:17
+#: b7b082d70656438fa25b86bcea653102
+msgid "**Quick Decision Guide:**"
 msgstr ""
-"**关键要求：**  \n"
-"- 必须在``src/tooluniverse/__init__.py``中的4个特定位置进行修改  \n"
-"- 配置文件必须位于``data/``文件夹中，而不是在装饰器中  \n"
-"- 需要进行全面测试  \n"
-"- 示例文件必须存放在``examples/``目录中"
 
-#: ../../expand_tooluniverse/contributing/index.rst:55
-#: b751e057414444239ac6b36220446340
+#: ../../expand_tooluniverse/contributing/index.rst:19
+#: 7e906280f6224a5fa1f59c68e63a6e7a
 msgid ""
-"**Common Mistakes:** - Forgetting to modify ``__init__.py`` (tool won't be "
-"importable) - Putting config in decorator instead of JSON file - "
-"Insufficient test coverage"
+"I want to... - Build a Python tool that processes data → "
+":doc:`local_tools` - Integrate an external API or service → "
+":doc:`local_tools` or :doc:`remote_tools` - Run heavy computations "
+"separately → :doc:`remote_tools` - Use a language other than Python → "
+":doc:`remote_tools` - Not sure which to choose? → Review the comparison "
+"table above, or read the introductions in both detailed guides"
 msgstr ""
-"**常见错误：**  \n"
-"- 忘记修改``__init__.py``（工具将无法被导入）  \n"
-"- 将配置放在装饰器中而不是JSON文件中  \n"
-"- 测试覆盖率不足"
 
-#: ../../expand_tooluniverse/contributing/index.rst:61
-#: 84e09a7796a84665a4cbdcb188821201
-msgid "Remote Tools Contribution"
-msgstr "远程工具贡献"
-
-#: ../../expand_tooluniverse/contributing/index.rst:63
-#: e88dcea7c2674d49bba9ff11c1e34956
-msgid ""
-"**What you need to do:** 1. Create MCP server (any language) 2. Deploy "
-"server publicly or provide deployment docs 3. Create JSON config in "
-"``data/remote_tools/xxx_tools.json`` 4. Write integration tests 5. Create "
-"examples 6. Submit PR"
+#: ../../expand_tooluniverse/contributing/index.rst:27
+#: 95ef61da5aa54010a8574b3493c2cc45
+msgid "Detailed Guides"
 msgstr ""
-"**您需要完成以下任务：**  \n"
-"1. 创建 MCP 服务器（任意编程语言）  \n"
-"2. 将服务器公开部署或提供部署文档  \n"
-"3. 在 ``data/remote_tools/xxx_tools.json`` 中创建 JSON 配置文件  \n"
-"4. 编写集成测试  \n"
-"5. 创建示例  \n"
-"6. 提交 PR"
 
-#: ../../expand_tooluniverse/contributing/index.rst:71
-#: cde839cdb64e46b19aa0cf59e7d87246
-msgid ""
-"**Key Requirements:** - Server must be publicly accessible or have detailed "
-"deployment docs - Config must be in ``data/remote_tools/`` folder - No "
-"``__init__.py`` modifications needed - Integration testing required"
-msgstr ""
-"**关键要求：**  \n"
-"- 服务器必须公开可访问或提供详细的部署文档  \n"
-"- 配置文件必须位于``data/remote_tools/``文件夹中  \n"
-"- 无需修改``__init__.py``文件  \n"
-"- 需要进行集成测试"
-
-#: ../../expand_tooluniverse/contributing/index.rst:77
-#: 50f388a484d44254a05b14a00d7253da
-msgid ""
-"**Common Mistakes:** - Server not accessible (connection errors) - Config in"
-" wrong location (``data/`` instead of ``data/remote_tools/``) - Missing "
-"deployment documentation"
-msgstr ""
-"**常见错误：**  \n"
-"- 服务器无法访问（连接错误）  \n"
-"- 配置文件位置错误（``data/`` 而非 ``data/remote_tools/``）  \n"
-"- 缺少部署文档"
-
-#: ../../expand_tooluniverse/contributing/index.rst:83
-#: 8fba8a76c4844838bd2dd3df2cc4e825
-msgid "Contribution Process"
-msgstr "贡献流程"
-
-#: ../../expand_tooluniverse/contributing/index.rst:85
-#: 0f64b282b2d4457482c7a425b2f4c233
-msgid "**Fork and Clone** .. code-block:: bash"
-msgstr "**分叉和克隆** .. code-block:: bash"
-
-#: ../../expand_tooluniverse/contributing/index.rst:88
-#: a956b7ad64ba4416a49ad16cf49085db
-msgid ""
-"git clone https://github.com/yourusername/ToolUniverse.git cd ToolUniverse "
-"python -m venv venv source venv/bin/activate pip install -e \".[dev]\" "
-"./setup_precommit.sh"
-msgstr ""
-"git clone https://github.com/yourusername/ToolUniverse.git  \n"
-"cd ToolUniverse  \n"
-"python -m venv venv  \n"
-"source venv/bin/activate  \n"
-"pip install -e \".[dev]\"  \n"
-"./setup_precommit.sh"
-
-#: ../../expand_tooluniverse/contributing/index.rst:95
-#: 4aff7243c8c646f8bc952f26dc74488e
-msgid ""
-"**Develop Your Tool** - Follow the specific guide for your tool type - "
-"Implement all required functionality - Add comprehensive tests"
-msgstr "**开发您的工具** - 遵循针对您的工具类型的具体指南 - 实现所有必要功能 - 添加全面的测试"
-
-#: ../../expand_tooluniverse/contributing/index.rst:100
-#: b7698db620154384af5cf26fa2b15202
-msgid ""
-"**Quality Checks** - Pre-commit hooks run automatically - Ensure all tests "
-"pass - Verify examples work"
-msgstr "**质量检查** - 自动运行预提交钩子 - 确保所有测试通过 - 验证示例可正常运行"
-
-#: ../../expand_tooluniverse/contributing/index.rst:105
-#: 416819d20fd74d278596cabd584a7f06
-msgid ""
-"**Submit PR** - Create feature branch - Push changes - Create pull request "
-"with detailed description"
-msgstr "**提交 PR** - 创建功能分支 - 推送更改 - 创建包含详细描述的拉取请求"
-
-#: ../../expand_tooluniverse/contributing/index.rst:110
-#: f9091275597c4aa98b3eb8cc66546f5a
-msgid ""
-"**Address Feedback** - Respond to review comments - Make requested changes -"
-" Update documentation if needed"
-msgstr "**处理反馈** - 回复审查意见 - 进行所需更改 - 如有必要，更新文档"
-
-#: ../../expand_tooluniverse/contributing/index.rst:116
-#: 154551aff6ab435d9661aefe3134b4c3
-msgid "Code Quality Standards"
-msgstr "代码质量标准"
-
-#: ../../expand_tooluniverse/contributing/index.rst:118
-#: 2ac3f3fb5b8c4cb78403a6a82161c2d2
-msgid ""
-"**Required for all contributions:** - **Code Formatting**: Black formatting "
-"(88 character line limit) - **Linting**: Pass flake8 and ruff checks - "
-"**Type Hints**: Complete type annotations - **Documentation**: Google-style "
-"docstrings with examples - **Testing**: Comprehensive test coverage - "
-"**Examples**: Working examples in ``examples/`` directory"
-msgstr ""
-"**所有贡献的必需要求：**  \n"
-"- **代码格式化**：使用 Black 格式化（限制每行字符数为 88）  \n"
-"- **代码检查**：通过 flake8 和 ruff 检查  \n"
-"- **类型提示**：完整的类型注解  \n"
-"- **文档编写**：采用 Google 风格的文档字符串，并附带示例  \n"
-"- **测试**：全面的测试覆盖率  \n"
-"- **示例**：在 ``examples/`` 目录中提供可运行的示例"
-
-#: ../../expand_tooluniverse/contributing/index.rst:126
-#: e7d200b4d1544868b7689179155e1f18
-msgid ""
-"**Pre-commit Hooks:** The project uses pre-commit hooks that automatically "
-"run: - Black (code formatting) - Flake8 (linting) - Ruff (fast linting) - "
-"Autoflake (import cleanup) - File validation (YAML, TOML, AST checks)"
-msgstr ""
-"**预提交钩子：**  \n"
-"该项目使用预提交钩子自动运行以下工具：  \n"
-"- Black（代码格式化）  \n"
-"- Flake8（代码静态检查）  \n"
-"- Ruff（快速静态检查）  \n"
-"- Autoflake（导入清理）  \n"
-"- 文件验证（YAML、TOML、AST检查）"
-
-#: ../../expand_tooluniverse/contributing/index.rst:135
-#: c35253cb70e046619252617510834d1a
-msgid "Testing Requirements"
-msgstr "测试要求"
-
-#: ../../expand_tooluniverse/contributing/index.rst:137
-#: c427e4ac8f4740a681d14adcfee381ea
-#, python-format
-msgid ""
-"**Local Tools:** - Unit tests with >90% coverage - Test all public methods -"
-" Test error conditions and edge cases - Mock external dependencies"
-msgstr ""
-"**本地工具：**  \n"
-"- 单元测试覆盖率 >90%  \n"
-"- 测试所有公共方法  \n"
-"- 测试错误条件和边界情况  \n"
-"- 模拟外部依赖"
-
-#: ../../expand_tooluniverse/contributing/index.rst:143
-#: 1b08ce39079949988fbaf0baa0663adc
-msgid ""
-"**Remote Tools:** - Integration tests with mocked server - Test "
-"configuration loading - Test tool discovery and execution - Test error "
-"handling"
-msgstr ""
-"**远程工具：**  \n"
-"- 集成测试与模拟服务器  \n"
-"- 测试配置加载  \n"
-"- 测试工具发现与执行  \n"
-"- 测试错误处理"
-
-#: ../../expand_tooluniverse/contributing/index.rst:150
-#: 0d932cdc0ae84e25a5b5c6db32cc2e6c
-msgid "Documentation Requirements"
-msgstr "文档要求"
-
-#: ../../expand_tooluniverse/contributing/index.rst:152
-#: bbc4cd48490f42e6a20de3c6ba0c0d28
-msgid ""
-"**Required Documentation:** - Comprehensive docstrings for all public "
-"methods - Usage examples in docstrings - README for remote tools (deployment"
-" instructions) - Examples in ``examples/`` directory"
-msgstr ""
-"**所需文档：**  \n"
-"- 所有公共方法的全面文档字符串  \n"
-"- 文档字符串中的使用示例  \n"
-"- 远程工具的README文件（部署说明）  \n"
-"- ``examples/``目录中的示例"
-
-#: ../../expand_tooluniverse/contributing/index.rst:158
-#: 4d97e81022b04d50add72619f275e30f
-msgid ""
-"**Documentation Standards:** - Clear, scientist-friendly parameter "
-"descriptions - Real-world usage examples - Error handling documentation - "
-"Configuration options clearly explained"
-msgstr ""
-"**文档标准：**  \n"
-"- 清晰且适合科研人员的参数描述  \n"
-"- 真实场景的使用示例  \n"
-"- 错误处理文档  \n"
-"- 配置选项的详细说明"
-
-#: ../../expand_tooluniverse/contributing/index.rst:165
-#: d335eb6fa5794f9084e108932c584863
-msgid "Getting Help"
-msgstr "获取帮助"
-
-#: ../../expand_tooluniverse/contributing/index.rst:167
-#: aa5a1b344423433b84a35bc4446da8dd
-msgid ""
-"**Before Contributing:** - Read the specific guide for your tool type - "
-"Check existing tools for patterns - Test your tool thoroughly"
-msgstr ""
-"**在贡献之前：**  \n"
-"- 阅读针对您的工具类型的特定指南  \n"
-"- 检查现有工具的模式  \n"
-"- 彻底测试您的工具"
-
-#: ../../expand_tooluniverse/contributing/index.rst:172
-#: 92a96171e4b24c5083e948154c64817f
-msgid ""
-"**During Development:** - Use GitHub discussions for questions - Check "
-"existing issues for similar problems - Ask for help early if stuck"
-msgstr ""
-"**开发期间：**  \n"
-"- 使用 GitHub 讨论功能提出问题  \n"
-"- 检查现有问题以寻找类似问题  \n"
-"- 如果遇到困难，请尽早寻求帮助"
-
-#: ../../expand_tooluniverse/contributing/index.rst:177
-#: 480902d71cbc411ca05abfe4d69ffb6f
-msgid ""
-"**After Submission:** - Respond promptly to review feedback - Be open to "
-"suggestions and improvements - Help others by sharing your experience"
-msgstr "**提交后：** - 及时回应审核反馈 - 接受建议并寻求改进 - 通过分享您的经验帮助他人"
-
-#: ../../expand_tooluniverse/contributing/index.rst:183
-#: 6c7c32a451f7469fb0e93a70c2d65c3d
-msgid "Resources"
-msgstr "资源"
-
-#: ../../expand_tooluniverse/contributing/index.rst:185
-#: c0f8cc00994842ce967fbbb20b1c74a3
-msgid "**Local Tools Guide**: :doc:`local_tools`"
-msgstr "**本地工具指南**：:doc:`local_tools`"
-
-#: ../../expand_tooluniverse/contributing/index.rst:186
-#: b014a909a6cb4356877d0249636c65a9
-msgid "**Remote Tools Guide**: :doc:`remote_tools`"
-msgstr "**远程工具指南**：:doc:`remote_tools`"
-
-#: ../../expand_tooluniverse/contributing/index.rst:187
-#: e2ea45e2300e4954aa13f4d76f79b1b5
-msgid "**Tool Comparison**: :doc:`../reference/comparison`"
-msgstr "**工具比较**: :doc:`../reference/comparison`"
-
-#: ../../expand_tooluniverse/contributing/index.rst:188
-#: 6caf0e60b03b46c1a011dc6ec7f5898f
-msgid "**Architecture**: :doc:`../reference/architecture`"
-msgstr "**架构**：:doc:`../reference/architecture`"
-
-#: ../../expand_tooluniverse/contributing/index.rst:189
-#: 68f1224e665c483bafa689a8313bbd22
-msgid "**GitHub Repository**: https://github.com/mims-harvard/ToolUniverse"
-msgstr "**GitHub 仓库**: https://github.com/mims-harvard/ToolUniverse"
-
-#: ../../expand_tooluniverse/contributing/index.rst:190
-#: ed89e64334c04a479269beadc734b13b
-msgid "**Issue Tracker**: https://github.com/mims-harvard/ToolUniverse/issues"
-msgstr "**问题追踪器**: https://github.com/mims-harvard/ToolUniverse/issues"
-
-#: ../../expand_tooluniverse/contributing/index.rst:191
-#: a56b2c5a1ab742d5b01a007142034171
-msgid ""
-"**Discussions**: https://github.com/mims-harvard/ToolUniverse/discussions"
-msgstr "**讨论**: https://github.com/mims-harvard/ToolUniverse/discussions"
-
-#: ../../expand_tooluniverse/contributing/index.rst:194
-#: 56af3a3070c440d898c6da5739245dc7
+#: ../../expand_tooluniverse/contributing/index.rst:37
+#: 9efe71c98c4a44ce8b8578b9f7876200
 msgid "Next Steps"
 msgstr "下一步"
 
-#: ../../expand_tooluniverse/contributing/index.rst:196
-#: fb48086fe90044e4ab10df0b478189fa
-msgid "Ready to contribute? Choose your path:"
-msgstr "准备好贡献了吗？请选择您的路径："
-
-#: ../../expand_tooluniverse/contributing/index.rst:198
-#: b43c089cdcce4fe7b35b69c497c57310
+#: ../../expand_tooluniverse/contributing/index.rst:39
+#: 0a9fc5f4c5da4a32b70eaa88bd8300d7
+#, fuzzy
 msgid ""
-"🏠 **Local Tools**: :doc:`local_tools` - Submit Python tools to ToolUniverse"
+"**Local Tools**: :doc:`local_tools` - Complete 10-step guide with "
+"environment setup"
 msgstr "🏠 **本地工具**：:doc:`local_tools` - 提交 Python 工具至 ToolUniverse"
 
-#: ../../expand_tooluniverse/contributing/index.rst:199
-#: 8f9f7571d32146fba09968f48c8f61f5
+#: ../../expand_tooluniverse/contributing/index.rst:40
+#: 548715dd6fa245c0b0e7c2109a5d99ea
 msgid ""
-"🔗 **Remote Tools**: :doc:`remote_tools` - Submit MCP servers to ToolUniverse"
-msgstr "🔗 **远程工具**：:doc:`remote_tools` - 将MCP服务器提交至ToolUniverse"
+"**Remote Tools**: :doc:`remote_tools` - Complete 10-step guide with "
+"deployment instructions"
+msgstr ""
 
-#: ../../expand_tooluniverse/contributing/index.rst:200
-#: 9e541782ba6548e7acee69b58954ade3
+#: ../../expand_tooluniverse/contributing/index.rst:41
+#: 400c1e5e7a634b0bab1a31e8e63ef700
+#, fuzzy
 msgid ""
-"🔍 **Compare Types**: :doc:`../reference/comparison` - Understand the "
-"differences"
+"**Compare Types**: Review the comparison table above to understand tool "
+"type differences"
 msgstr "🔍 **比较类型**：:doc:`../reference/comparison` - 了解差异"
 
-#: ../../expand_tooluniverse/contributing/index.rst:201
-#: cebeaa6f801545858652733960e8c854
+#: ../../expand_tooluniverse/contributing/index.rst:44
+#: 8400e7af2d5b4a1f82779810b43d7df9
 msgid ""
-"📚 **Learn First**: :doc:`../quick_start` - Try creating tools before "
-"contributing"
-msgstr "📚 **先学习**：:doc:`../quick_start` - 在贡献之前尝试创建工具"
+"Each guide includes complete setup instructions, code examples, and "
+"troubleshooting. Start with the guide that matches your tool type."
+msgstr ""
 
-#: ../../expand_tooluniverse/contributing/index.rst:204
-#: 315d2f0a6d9847cf8515656b431d8a21
-msgid ""
-"**Success Tips**: Start with simple tools, test thoroughly, and don't "
-"hesitate to ask for help. The community is here to support you!"
-msgstr "**成功提示**：从简单的工具开始，进行充分测试，并且不要犹豫寻求帮助。社区随时支持您！"
+#~ msgid ""
+#~ "This section covers how to contribute"
+#~ " tools to the ToolUniverse repository. "
+#~ "Contributing tools requires additional steps"
+#~ " compared to using them locally."
+#~ msgstr "本章节介绍如何向 ToolUniverse 仓库贡献工具。贡献工具相比于本地使用工具需要额外的步骤。"
+
+#~ msgid "Overview"
+#~ msgstr "概述"
+
+#~ msgid "**Two Types of Tool Contributions:**"
+#~ msgstr "**两种工具贡献类型：**"
+
+#~ msgid "**Local Tools** - Python classes that run within ToolUniverse"
+#~ msgstr "**本地工具** - 在ToolUniverse中运行的Python类"
+
+#~ msgid "**Remote Tools** - MCP servers that run independently"
+#~ msgstr "**远程工具** - 独立运行的MCP服务器"
+
+#~ msgid "**Key Differences from Self-Use:**"
+#~ msgstr "**与自用的主要区别：**"
+
+#~ msgid "Aspect | Self-Use | Contributing |"
+#~ msgstr "方面 | 自用 | 贡献 |"
+
+#~ msgid ""
+#~ "|--------|----------|--------------| | **Local "
+#~ "Tools** | No ``__init__.py`` changes |"
+#~ " **Must modify ``__init__.py`` in 4 "
+#~ "locations** | | **Remote Tools** | "
+#~ "Local/private deployment | **Must provide "
+#~ "public server or deployment docs** | "
+#~ "| **Testing** | Optional | Required "
+#~ "(>90% coverage for local, integration "
+#~ "for remote) | | **Documentation** | "
+#~ "Optional | Required (docstrings + "
+#~ "examples) | | **Examples** | Optional"
+#~ " | Required (in ``examples/`` directory)"
+#~ " | | **Code Quality** | Optional "
+#~ "| Required (pre-commit checks) |"
+#~ msgstr ""
+#~ "|--------|----------|--------------|  \n"
+#~ "| **本地工具** | 无需修改 ``__init__.py`` | **必须在4个位置修改 ``__init__.py``** |  \n"
+#~ "| **远程工具** | 本地/私有部署 | **必须提供公共服务器或部署文档** |  \n"
+#~ "| **测试** | 可选 | 必须（本地测试覆盖率 >90%，远程需进行集成测试） |  \n"
+#~ "| **文档** | 可选 | 必须（包括文档字符串和示例） |  \n"
+#~ "| **示例** | 可选 | 必须（存放于 ``examples/`` 目录中） |  \n"
+#~ "| **代码质量** | 可选 | 必须（需通过 pre-commit 检查） |"
+
+#~ msgid ""
+#~ "**I want to contribute a Local "
+#~ "Tool:** → :doc:`local_tools` - Python "
+#~ "class that runs in ToolUniverse process"
+#~ msgstr "**我想贡献一个本地工具：** → :doc:`local_tools` - 在ToolUniverse进程中运行的Python类"
+
+#~ msgid ""
+#~ "**I want to contribute a Remote "
+#~ "Tool:** → :doc:`remote_tools` - MCP "
+#~ "server that runs independently"
+#~ msgstr "**我想贡献一个远程工具：** → :doc:`remote_tools` - 独立运行的MCP服务器"
+
+#~ msgid ""
+#~ "**I'm not sure which type to "
+#~ "choose:** → :doc:`../reference/comparison` - "
+#~ "Compare tool types and requirements"
+#~ msgstr "**我不确定该选择哪种类型：** → :doc:`../reference/comparison` - 比较工具类型和需求"
+
+#~ msgid ""
+#~ "**What you need to do:** 1. Create"
+#~ " Python class in ``src/tooluniverse/`` 2."
+#~ " Use ``@register_tool`` decorator 3. Create"
+#~ " JSON config in ``data/xxx_tools.json`` 4."
+#~ " **🔑 Modify ``__init__.py`` in 4 "
+#~ "locations** (most critical step!) 5. "
+#~ "Write tests (>90% coverage) 6. Create"
+#~ " examples 7. Submit PR"
+#~ msgstr ""
+#~ "**您需要完成以下任务：**  \n"
+#~ "1. 在``src/tooluniverse/``目录中创建Python类  \n"
+#~ "2. 使用``@register_tool``装饰器  \n"
+#~ "3. 在``data/xxx_tools.json``中创建JSON配置文件  \n"
+#~ "4. **🔑 在4个位置修改``__init__.py``文件**（最关键的步骤！）  \n"
+#~ "5. 编写测试（覆盖率需超过90%）  \n"
+#~ "6. 创建示例  \n"
+#~ "7. 提交PR"
+
+#~ msgid ""
+#~ "**Key Requirements:** - Must modify "
+#~ "``src/tooluniverse/__init__.py`` in 4 specific "
+#~ "locations - Config must be in "
+#~ "``data/`` folder, not in decorator - "
+#~ "Comprehensive testing required - Examples "
+#~ "must be in ``examples/`` directory"
+#~ msgstr ""
+#~ "**关键要求：**  \n"
+#~ "- 必须在``src/tooluniverse/__init__.py``中的4个特定位置进行修改  \n"
+#~ "- 配置文件必须位于``data/``文件夹中，而不是在装饰器中  \n"
+#~ "- 需要进行全面测试  \n"
+#~ "- 示例文件必须存放在``examples/``目录中"
+
+#~ msgid ""
+#~ "**Common Mistakes:** - Forgetting to "
+#~ "modify ``__init__.py`` (tool won't be "
+#~ "importable) - Putting config in "
+#~ "decorator instead of JSON file - "
+#~ "Insufficient test coverage"
+#~ msgstr ""
+#~ "**常见错误：**  \n"
+#~ "- 忘记修改``__init__.py``（工具将无法被导入）  \n"
+#~ "- 将配置放在装饰器中而不是JSON文件中  \n"
+#~ "- 测试覆盖率不足"
+
+#~ msgid "Remote Tools Contribution"
+#~ msgstr "远程工具贡献"
+
+#~ msgid ""
+#~ "**What you need to do:** 1. Create"
+#~ " MCP server (any language) 2. Deploy"
+#~ " server publicly or provide deployment "
+#~ "docs 3. Create JSON config in "
+#~ "``data/remote_tools/xxx_tools.json`` 4. Write "
+#~ "integration tests 5. Create examples 6."
+#~ " Submit PR"
+#~ msgstr ""
+#~ "**您需要完成以下任务：**  \n"
+#~ "1. 创建 MCP 服务器（任意编程语言）  \n"
+#~ "2. 将服务器公开部署或提供部署文档  \n"
+#~ "3. 在 ``data/remote_tools/xxx_tools.json`` 中创建 JSON 配置文件  \n"
+#~ "4. 编写集成测试  \n"
+#~ "5. 创建示例  \n"
+#~ "6. 提交 PR"
+
+#~ msgid ""
+#~ "**Key Requirements:** - Server must be"
+#~ " publicly accessible or have detailed "
+#~ "deployment docs - Config must be "
+#~ "in ``data/remote_tools/`` folder - No "
+#~ "``__init__.py`` modifications needed - "
+#~ "Integration testing required"
+#~ msgstr ""
+#~ "**关键要求：**  \n"
+#~ "- 服务器必须公开可访问或提供详细的部署文档  \n"
+#~ "- 配置文件必须位于``data/remote_tools/``文件夹中  \n"
+#~ "- 无需修改``__init__.py``文件  \n"
+#~ "- 需要进行集成测试"
+
+#~ msgid ""
+#~ "**Common Mistakes:** - Server not "
+#~ "accessible (connection errors) - Config "
+#~ "in wrong location (``data/`` instead of"
+#~ " ``data/remote_tools/``) - Missing deployment "
+#~ "documentation"
+#~ msgstr ""
+#~ "**常见错误：**  \n"
+#~ "- 服务器无法访问（连接错误）  \n"
+#~ "- 配置文件位置错误（``data/`` 而非 ``data/remote_tools/``）  \n"
+#~ "- 缺少部署文档"
+
+#~ msgid "Contribution Process"
+#~ msgstr "贡献流程"
+
+#~ msgid "**Fork and Clone** .. code-block:: bash"
+#~ msgstr "**分叉和克隆** .. code-block:: bash"
+
+#~ msgid ""
+#~ "git clone https://github.com/yourusername/ToolUniverse.git"
+#~ " cd ToolUniverse python -m venv venv"
+#~ " source venv/bin/activate pip install -e"
+#~ " \".[dev]\" ./setup_precommit.sh"
+#~ msgstr ""
+#~ "git clone https://github.com/yourusername/ToolUniverse.git  \n"
+#~ "cd ToolUniverse  \n"
+#~ "python -m venv venv  \n"
+#~ "source venv/bin/activate  \n"
+#~ "pip install -e \".[dev]\"  \n"
+#~ "./setup_precommit.sh"
+
+#~ msgid ""
+#~ "**Develop Your Tool** - Follow the "
+#~ "specific guide for your tool type "
+#~ "- Implement all required functionality -"
+#~ " Add comprehensive tests"
+#~ msgstr "**开发您的工具** - 遵循针对您的工具类型的具体指南 - 实现所有必要功能 - 添加全面的测试"
+
+#~ msgid ""
+#~ "**Quality Checks** - Pre-commit hooks"
+#~ " run automatically - Ensure all tests"
+#~ " pass - Verify examples work"
+#~ msgstr "**质量检查** - 自动运行预提交钩子 - 确保所有测试通过 - 验证示例可正常运行"
+
+#~ msgid ""
+#~ "**Submit PR** - Create feature branch"
+#~ " - Push changes - Create pull "
+#~ "request with detailed description"
+#~ msgstr "**提交 PR** - 创建功能分支 - 推送更改 - 创建包含详细描述的拉取请求"
+
+#~ msgid ""
+#~ "**Address Feedback** - Respond to review"
+#~ " comments - Make requested changes -"
+#~ " Update documentation if needed"
+#~ msgstr "**处理反馈** - 回复审查意见 - 进行所需更改 - 如有必要，更新文档"
+
+#~ msgid "Code Quality Standards"
+#~ msgstr "代码质量标准"
+
+#~ msgid ""
+#~ "**Required for all contributions:** - "
+#~ "**Code Formatting**: Black formatting (88 "
+#~ "character line limit) - **Linting**: "
+#~ "Pass flake8 and ruff checks - "
+#~ "**Type Hints**: Complete type annotations "
+#~ "- **Documentation**: Google-style docstrings"
+#~ " with examples - **Testing**: Comprehensive"
+#~ " test coverage - **Examples**: Working "
+#~ "examples in ``examples/`` directory"
+#~ msgstr ""
+#~ "**所有贡献的必需要求：**  \n"
+#~ "- **代码格式化**：使用 Black 格式化（限制每行字符数为 88）  \n"
+#~ "- **代码检查**：通过 flake8 和 ruff 检查  \n"
+#~ "- **类型提示**：完整的类型注解  \n"
+#~ "- **文档编写**：采用 Google 风格的文档字符串，并附带示例  \n"
+#~ "- **测试**：全面的测试覆盖率  \n"
+#~ "- **示例**：在 ``examples/`` 目录中提供可运行的示例"
+
+#~ msgid ""
+#~ "**Pre-commit Hooks:** The project uses"
+#~ " pre-commit hooks that automatically "
+#~ "run: - Black (code formatting) - "
+#~ "Flake8 (linting) - Ruff (fast linting)"
+#~ " - Autoflake (import cleanup) - File"
+#~ " validation (YAML, TOML, AST checks)"
+#~ msgstr ""
+#~ "**预提交钩子：**  \n"
+#~ "该项目使用预提交钩子自动运行以下工具：  \n"
+#~ "- Black（代码格式化）  \n"
+#~ "- Flake8（代码静态检查）  \n"
+#~ "- Ruff（快速静态检查）  \n"
+#~ "- Autoflake（导入清理）  \n"
+#~ "- 文件验证（YAML、TOML、AST检查）"
+
+#~ msgid "Testing Requirements"
+#~ msgstr "测试要求"
+
+#~ msgid ""
+#~ "**Local Tools:** - Unit tests with "
+#~ ">90% coverage - Test all public "
+#~ "methods - Test error conditions and "
+#~ "edge cases - Mock external dependencies"
+#~ msgstr ""
+#~ "**本地工具：**  \n"
+#~ "- 单元测试覆盖率 >90%  \n"
+#~ "- 测试所有公共方法  \n"
+#~ "- 测试错误条件和边界情况  \n"
+#~ "- 模拟外部依赖"
+
+#~ msgid ""
+#~ "**Remote Tools:** - Integration tests "
+#~ "with mocked server - Test configuration"
+#~ " loading - Test tool discovery and"
+#~ " execution - Test error handling"
+#~ msgstr ""
+#~ "**远程工具：**  \n"
+#~ "- 集成测试与模拟服务器  \n"
+#~ "- 测试配置加载  \n"
+#~ "- 测试工具发现与执行  \n"
+#~ "- 测试错误处理"
+
+#~ msgid "Documentation Requirements"
+#~ msgstr "文档要求"
+
+#~ msgid ""
+#~ "**Required Documentation:** - Comprehensive "
+#~ "docstrings for all public methods - "
+#~ "Usage examples in docstrings - README"
+#~ " for remote tools (deployment instructions)"
+#~ " - Examples in ``examples/`` directory"
+#~ msgstr ""
+#~ "**所需文档：**  \n"
+#~ "- 所有公共方法的全面文档字符串  \n"
+#~ "- 文档字符串中的使用示例  \n"
+#~ "- 远程工具的README文件（部署说明）  \n"
+#~ "- ``examples/``目录中的示例"
+
+#~ msgid ""
+#~ "**Documentation Standards:** - Clear, "
+#~ "scientist-friendly parameter descriptions - "
+#~ "Real-world usage examples - Error "
+#~ "handling documentation - Configuration options"
+#~ " clearly explained"
+#~ msgstr ""
+#~ "**文档标准：**  \n"
+#~ "- 清晰且适合科研人员的参数描述  \n"
+#~ "- 真实场景的使用示例  \n"
+#~ "- 错误处理文档  \n"
+#~ "- 配置选项的详细说明"
+
+#~ msgid "Getting Help"
+#~ msgstr "获取帮助"
+
+#~ msgid ""
+#~ "**Before Contributing:** - Read the "
+#~ "specific guide for your tool type "
+#~ "- Check existing tools for patterns "
+#~ "- Test your tool thoroughly"
+#~ msgstr ""
+#~ "**在贡献之前：**  \n"
+#~ "- 阅读针对您的工具类型的特定指南  \n"
+#~ "- 检查现有工具的模式  \n"
+#~ "- 彻底测试您的工具"
+
+#~ msgid ""
+#~ "**During Development:** - Use GitHub "
+#~ "discussions for questions - Check "
+#~ "existing issues for similar problems -"
+#~ " Ask for help early if stuck"
+#~ msgstr ""
+#~ "**开发期间：**  \n"
+#~ "- 使用 GitHub 讨论功能提出问题  \n"
+#~ "- 检查现有问题以寻找类似问题  \n"
+#~ "- 如果遇到困难，请尽早寻求帮助"
+
+#~ msgid ""
+#~ "**After Submission:** - Respond promptly "
+#~ "to review feedback - Be open to"
+#~ " suggestions and improvements - Help "
+#~ "others by sharing your experience"
+#~ msgstr "**提交后：** - 及时回应审核反馈 - 接受建议并寻求改进 - 通过分享您的经验帮助他人"
+
+#~ msgid "Resources"
+#~ msgstr "资源"
+
+#~ msgid "**Local Tools Guide**: :doc:`local_tools`"
+#~ msgstr "**本地工具指南**：:doc:`local_tools`"
+
+#~ msgid "**Remote Tools Guide**: :doc:`remote_tools`"
+#~ msgstr "**远程工具指南**：:doc:`remote_tools`"
+
+#~ msgid "**Tool Comparison**: :doc:`../reference/comparison`"
+#~ msgstr "**工具比较**: :doc:`../reference/comparison`"
+
+#~ msgid "**Architecture**: :doc:`../reference/architecture`"
+#~ msgstr "**架构**：:doc:`../reference/architecture`"
+
+#~ msgid "**GitHub Repository**: https://github.com/mims-harvard/ToolUniverse"
+#~ msgstr "**GitHub 仓库**: https://github.com/mims-harvard/ToolUniverse"
+
+#~ msgid "**Issue Tracker**: https://github.com/mims-harvard/ToolUniverse/issues"
+#~ msgstr "**问题追踪器**: https://github.com/mims-harvard/ToolUniverse/issues"
+
+#~ msgid ""
+#~ "**Discussions**: https://github.com/mims-"
+#~ "harvard/ToolUniverse/discussions"
+#~ msgstr "**讨论**: https://github.com/mims-harvard/ToolUniverse/discussions"
+
+#~ msgid "Ready to contribute? Choose your path:"
+#~ msgstr "准备好贡献了吗？请选择您的路径："
+
+#~ msgid ""
+#~ "🔗 **Remote Tools**: :doc:`remote_tools` - "
+#~ "Submit MCP servers to ToolUniverse"
+#~ msgstr "🔗 **远程工具**：:doc:`remote_tools` - 将MCP服务器提交至ToolUniverse"
+
+#~ msgid ""
+#~ "📚 **Learn First**: :doc:`../quick_start` - "
+#~ "Try creating tools before contributing"
+#~ msgstr "📚 **先学习**：:doc:`../quick_start` - 在贡献之前尝试创建工具"
+
+#~ msgid ""
+#~ "**Success Tips**: Start with simple "
+#~ "tools, test thoroughly, and don't "
+#~ "hesitate to ask for help. The "
+#~ "community is here to support you!"
+#~ msgstr "**成功提示**：从简单的工具开始，进行充分测试，并且不要犹豫寻求帮助。社区随时支持您！"
+

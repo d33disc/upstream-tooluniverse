@@ -94,7 +94,7 @@ class URLToPDFTextTool(BaseTool):
         """
         Ensure Playwright browser binaries are installed.
 
-        Returns:
+        Returns
             None on success, or an error string on failure.
         """
         # Allow user to skip auto-install via env var

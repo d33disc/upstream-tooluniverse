@@ -24,12 +24,12 @@ msgstr ""
 msgid "tooluniverse.cli package"
 msgstr ""
 
-#~ msgid "ToolSpace CLI Management Tool"
+#~ msgid "Space CLI Management Tool"
 #~ msgstr ""
 
 #~ msgid ""
 #~ "This module provides command-line tools"
-#~ " for managing ToolSpace configurations."
+#~ " for managing Space configurations."
 #~ msgstr ""
 
 #~ msgid "Main CLI entry point."

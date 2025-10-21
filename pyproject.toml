@@ -99,8 +99,13 @@ visualization = [
     "matplotlib>=3.5.0",
     "networkx>=3.4.0",
 ]
+space = [
+    "huggingface_hub>=0.34.0",
+    "pyyaml>=6.0.0",
+    "requests>=2.32.0",
+]
 all = [
-    "tooluniverse[dev,docs,graph,visualization]",
+    "tooluniverse[dev,docs,graph,visualization,space]",
 ]
 
 [project.urls]

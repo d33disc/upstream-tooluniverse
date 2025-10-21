@@ -113,7 +113,7 @@ def yaml_to_dict(yaml_file_path):
     Args:
         yaml_file_path (str): Path to the YAML file.
 
-    Returns:
+    Returns
         dict: Dictionary representation of the YAML file content.
     """
     try:
@@ -130,10 +130,10 @@ def read_json_list(file_path):
     """
     Reads a list of JSON objects from a file.
 
-    Parameters:
+    Parameters
     file_path (str): The path to the JSON file.
 
-    Returns:
+    Returns
     list: A list of dictionaries containing the JSON objects.
     """
     with open(file_path, "r") as file:
@@ -355,7 +355,7 @@ def format_error_response(
         tool_name (str, optional): Name of the tool that failed
         context (Dict[str, Any], optional): Additional context about the error
 
-    Returns:
+    Returns
         Dict[str, Any]: Standardized error response
     """
     from .exceptions import ToolError
@@ -391,7 +391,7 @@ def get_parameter_schema(tool_config: Dict[str, Any]) -> Dict[str, Any]:
     Args:
         tool_config (Dict[str, Any]): Tool configuration dictionary
 
-    Returns:
+    Returns
         Dict[str, Any]: Parameter schema dictionary
     """
     return tool_config.get("parameter", {})
@@ -404,7 +404,7 @@ def validate_query(query: Dict[str, Any]) -> bool:
     Args:
         query (Dict[str, Any]): The query dictionary to validate
 
-    Returns:
+    Returns
         bool: True if query is valid, False otherwise
     """
     if not isinstance(query, dict):
@@ -427,7 +427,7 @@ def normalize_gene_symbol(gene_symbol: str) -> str:
     Args:
         gene_symbol (str): The gene symbol to normalize
 
-    Returns:
+    Returns
         str: Normalized gene symbol
     """
     if not isinstance(gene_symbol, str):
@@ -454,7 +454,7 @@ def format_api_response(
         response_data (Any): The response data to format
         format_type (str): The desired output format ('json', 'pretty', 'minimal')
 
-    Returns:
+    Returns
         Union[str, Dict[str, Any]]: Formatted response
     """
     if format_type == "json":
@@ -493,7 +493,7 @@ def validate_hook_config(config: Dict[str, Any]) -> bool:
     Args:
         config (Dict[str, Any]): Hook configuration to validate
 
-    Returns:
+    Returns
         bool: True if configuration is valid, False otherwise
     """
     try:
@@ -561,7 +561,7 @@ def validate_hook_conditions(conditions: Dict[str, Any]) -> bool:
     Args:
         conditions (Dict[str, Any]): Hook conditions to validate
 
-    Returns:
+    Returns
         bool: True if conditions are valid, False otherwise
     """
     try:

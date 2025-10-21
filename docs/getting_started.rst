@@ -281,7 +281,7 @@ Tools
 * **Local Tools** → :doc:`expand_tooluniverse/local_tools/index` - Create tools that run within ToolUniverse
 * **Remote Tools** → :doc:`expand_tooluniverse/remote_tools/index` - Integrate external services and APIs
 * **Contributing** → :doc:`expand_tooluniverse/contributing/index` - Submit your custom tools to the ToolUniverse repository
-* **Tool Comparison** → :doc:`expand_tooluniverse/reference/comparison` - Compare different tool types and approaches
+* **Tool Comparison** → Review the tool type comparison table in :doc:`expand_tooluniverse/contributing/index`
 * **Architecture** → :doc:`expand_tooluniverse/architecture` - ToolUniverse's code architecture and extension points
 * **Deployment** → :doc:`deployment` - Deployment guide for production environments
 * **Contributing** → :doc:`contributing` - How to contribute to ToolUniverse development

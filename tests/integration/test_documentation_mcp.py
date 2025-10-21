@@ -6,9 +6,7 @@ Tests real MCP functionality with actual tool execution.
 """
 
 import pytest
-import json
-import tempfile
-from pathlib import Path
+import time
 
 from tooluniverse import ToolUniverse
 from tooluniverse.smcp import SMCP
@@ -131,16 +129,57 @@ class TestToolUniverseMCPIntegration:
         
         assert registry is not None
         assert isinstance(registry, dict)
+        
+        # Test that registry is accessible and can be modified
+        initial_count = len(registry)
+        registry["test_key"] = "test_value"
+        assert registry["test_key"] == "test_value"
+        assert len(registry) == initial_count + 1
+        
+        # Clean up
+        del registry["test_key"]
 
     def test_mcp_tool_registration_real(self):
         """Test real MCP tool registration."""
-        from tooluniverse.mcp_tool_registry import get_mcp_tool_registry
+        from tooluniverse.mcp_tool_registry import get_mcp_tool_registry, register_mcp_tool
         
         # Test tool registry functionality
         registry = get_mcp_tool_registry()
         
         assert registry is not None
         assert isinstance(registry, dict)
+        
+        # Test decorator registration
+        @register_mcp_tool(
+            tool_type_name="test_doc_tool",
+            config={
+                "name": "test_doc_tool",
+                "description": "A test tool for documentation",
+                "type": "TestDocTool",
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "message": {"type": "string", "description": "A message"}
+                    },
+                    "required": ["message"]
+                }
+            }
+        )
+        class TestDocTool:
+            def __init__(self, tool_config=None):
+                self.tool_config = tool_config
+            
+            def run(self, arguments):
+                return {"result": f"Echo: {arguments.get('message', '')}"}
+        
+        # Get registry again after registration
+        registry = get_mcp_tool_registry()
+        
+        # Verify tool was registered
+        assert "test_doc_tool" in registry
+        tool_info = registry["test_doc_tool"]
+        assert tool_info["name"] == "test_doc_tool"
+        assert tool_info["description"] == "A test tool for documentation"
         
         # Test that registry has expected structure
         assert "tools" in registry or len(registry) >= 0
@@ -277,7 +316,7 @@ class TestToolUniverseMCPIntegration:
 
     def test_mcp_tool_validation_real(self):
         """Test real MCP tool validation."""
-        from tooluniverse.mcp_tool_registry import get_mcp_tool_registry
+        from tooluniverse.mcp_tool_registry import get_mcp_tool_registry, register_mcp_tool
         
         # Test tool registry functionality
         registry = get_mcp_tool_registry()
@@ -285,8 +324,44 @@ class TestToolUniverseMCPIntegration:
         assert registry is not None
         assert isinstance(registry, dict)
         
-        # Test that registry has expected structure
-        assert "tools" in registry or len(registry) >= 0
+        # Test decorator registration with validation
+        @register_mcp_tool(
+            tool_type_name="test_validation_tool",
+            config={
+                "name": "test_validation_tool",
+                "description": "A test tool for validation",
+                "type": "TestValidationTool",
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "required_param": {"type": "string", "description": "Required parameter"},
+                        "optional_param": {"type": "integer", "description": "Optional parameter"}
+                    },
+                    "required": ["required_param"]
+                }
+            }
+        )
+        class TestValidationTool:
+            def __init__(self, tool_config=None):
+                self.tool_config = tool_config
+            
+            def run(self, arguments):
+                return {"result": f"Validated: {arguments.get('required_param', '')}"}
+        
+        # Get registry again after registration
+        registry = get_mcp_tool_registry()
+        
+        # Verify tool was registered with proper schema
+        assert "test_validation_tool" in registry
+        tool_info = registry["test_validation_tool"]
+        assert tool_info["name"] == "test_validation_tool"
+        assert "parameter_schema" in tool_info
+        # Check that parameter_schema exists and has the expected MCP structure
+        assert tool_info["parameter_schema"]["type"] == "object"
+        assert "properties" in tool_info["parameter_schema"]
+        # Check that the original tool config is preserved
+        assert "tool_config" in tool_info
+        assert tool_info["tool_config"]["parameter"]["required"] == ["required_param"]
 
     def test_mcp_tool_error_recovery_real(self):
         """Test real MCP tool error recovery."""
@@ -316,7 +391,6 @@ class TestToolUniverseMCPIntegration:
 
     def test_mcp_tool_performance_real(self):
         """Test real MCP tool performance."""
-        import time
         
         from tooluniverse.mcp_client_tool import MCPClientTool
         
@@ -351,7 +425,6 @@ class TestToolUniverseMCPIntegration:
     def test_mcp_tool_concurrent_execution_real(self):
         """Test real concurrent MCP tool execution."""
         import threading
-        import time
         
         from tooluniverse.mcp_client_tool import MCPClientTool
         

@@ -35,7 +35,7 @@ def run_boltz2(query: dict):
             - without_potentials (bool): Whether to run without potentials (default: False)
             - diffusion_samples (int): Number of diffusion samples to generate (default: 1)
             - Additional constraint keys may be included as needed
-    Returns:
+    Returns
         dict: A dictionary containing the docking results with the following structure:
             - predicted_structure (str): The predicted protein-ligand complex structure in CIF format
             - structure_format (str): Format of the structure file (typically 'cif')

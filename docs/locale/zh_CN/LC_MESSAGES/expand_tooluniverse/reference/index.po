@@ -1,0 +1,294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-19 16:01-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/reference/index.rst:2
+#: 7cc3b6e815eb467396ee3af4c5fd8c7e
+msgid "Reference Documentation"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:4
+#: 308b6f49afdb4afd992ceec97e0fb180
+msgid ""
+"This section provides detailed reference information for tool development"
+" in ToolUniverse."
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:7
+#: 71dffd33d62b48ac8469ce2c815631c6
+msgid "Architecture"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:9
+#: 6d56b6ef74ec48b5a00a5a7ccd1dd3fa
+msgid ""
+"Understanding the internal architecture of ToolUniverse helps you build "
+"better tools and integrate more effectively with the system."
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:11
+#: 60e01dfdddd74251860d2cac5137cd72
+msgid ""
+"**I want to understand the overall architecture:** → :doc:`architecture` "
+"- System architecture and design patterns"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:14
+#: e305495dd8074d8893f689c158aa10dc
+msgid ""
+"**I want to compare tool types:** → Review the tool type comparison table"
+" in :doc:`../contributing/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:18
+#: 5b70381dfacc4e50b755c2350db63adf
+msgid "Tool Comparison"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:20
+#: 290417199f174ce1b0ae51b09bf8197c
+msgid ""
+"Understanding the differences between local and remote tools helps you "
+"choose the right approach for your needs."
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:22
+#: 4833de53662c41e2bb2e2b15b450645a
+msgid "**Key Differences:**"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:24
+#: 7a233937c671428c8d0d7a96d765230e
+msgid "Aspect | Local Tools | Remote Tools |"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:25
+#: 4fd21060366a42fd825b9d75591d25d8
+msgid ""
+"|--------|-------------|--------------| | **Performance** | High (no "
+"network overhead) | Lower (network latency) | | **Development** | Simple "
+"Python classes | MCP servers or API wrappers | | **Deployment** | Part of"
+" ToolUniverse | Independent servers | | **Scalability** | Limited by "
+"process | Highly scalable | | **Integration** | Full ToolUniverse access "
+"| Limited to MCP/API | | **Contribution** | Requires ``__init__.py`` "
+"changes | No code changes needed |"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:33
+#: 7716ede3efa24c90b3a47d50bac620b7
+msgid ""
+"**When to Use Local Tools:** - Data processing and analysis - File "
+"manipulation utilities - Simple API wrappers - Tools that need full "
+"ToolUniverse integration"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:39
+#: c87cb586483f4561b86bd9888344779a
+msgid ""
+"**When to Use Remote Tools:** - External service integration - Heavy "
+"computational tasks - Microservice architecture - Tools in different "
+"programming languages"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:46
+#: 46af4e256f3c4cbd8e985135a0caf33a
+msgid "Architecture Details"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:48
+#: 7466e9cb8bf942f0addf283f459dea6a
+msgid ""
+"**ToolUniverse Core Components:** - **Tool Registry**: Manages tool "
+"discovery and registration - **Execution Engine**: Handles tool execution"
+" and error management - **Configuration System**: Manages tool parameters"
+" and settings - **MCP Integration**: Connects with remote tools via MCP "
+"protocol"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:54
+#: b1c5be435cd24cd3b05d1b4f7aa152ed
+msgid ""
+"**Tool Lifecycle:** 1. **Registration**: Tools register with the registry"
+" 2. **Discovery**: ToolUniverse discovers available tools 3. "
+"**Configuration**: Tools load their configuration 4. **Execution**: Tools"
+" are called with parameters 5. **Response**: Results are returned to the "
+"caller"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:61
+#: 097a492c502c4b8b943e2bb7fe7cf555
+msgid ""
+"**Error Handling:** - Input validation at multiple levels - Graceful "
+"error recovery - Comprehensive error reporting - Timeout management for "
+"remote tools"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:68
+#: ba7bb6cbaa6b4d33b2bc0f59f1661c50
+msgid "Best Practices"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:70
+#: bb81100409a341efb0f392564fe9f236
+msgid ""
+"**Local Tools:** - Keep tools focused and single-purpose - Use proper "
+"error handling - Implement input validation - Add comprehensive tests - "
+"Document all parameters clearly"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:77
+#: 4b93c9a407574406a8119e89132e8b07
+msgid ""
+"**Remote Tools:** - Implement proper authentication - Use circuit "
+"breakers for resilience - Add retry logic for transient failures - "
+"Monitor performance and errors - Provide clear deployment documentation"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:84
+#: 7bc1a51450ae4fd3abb17a0a8634cf38
+msgid ""
+"**General:** - Follow naming conventions - Use descriptive parameter "
+"names - Provide clear error messages - Include usage examples - Test with"
+" real-world data"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:92
+#: 76baaa4fc651425785794080cf5ede7d
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:94
+#: 9eab5eb8cb634ce0b1d241900f1d7e9f
+msgid "**Common Issues:**"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:96
+#: 94b5d1f342aa4893876afc31ec17af71
+msgid ""
+"**Local Tools:** - Tool not found: Check registration and imports - "
+"Parameter errors: Verify JSON schema - Execution failures: Check BaseTool"
+" inheritance - Import errors: Verify module structure"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:102
+#: a391612cbb1a47a08088a8a80c5b0c92
+msgid ""
+"**Remote Tools:** - Connection errors: Check server URL and network - "
+"Authentication failures: Verify credentials - Timeout issues: Check "
+"server performance - Discovery problems: Verify MCP server status"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:108
+#: 9c95d334d5c34284a127871c37e497e2
+msgid ""
+"**General:** - Configuration errors: Check JSON syntax - Permission "
+"issues: Verify file access - Version conflicts: Check dependencies - "
+"Performance issues: Profile and optimize"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:115
+#: 509099f4530240a7adbb8d8ac3ee3afd
+msgid "Resources"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:117
+#: d519716ff64e40fd86f28a7df43eac5a
+msgid "**Local Tools Guide**: :doc:`../local_tools/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:118
+#: 60e1ee53a8364f4bbc7bfb66328e7dde
+msgid "**Remote Tools Guide**: :doc:`../remote_tools/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:119
+#: 56db88a0f6774ddfa782f9821c945451
+msgid "**Contributing Guide**: :doc:`../contributing/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:120
+#: cf2a9830358f45fea3cb194a8dfec7a5
+msgid "**Quick Start**: :doc:`../quick_start`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:121
+#: 6dcc2f5c8a524369a01b66fe537bc847
+msgid "**Architecture**: :doc:`architecture`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:122
+#: 649559233c7845d2bbd7ee925ccb1b6d
+msgid ""
+"**Comparison**: Review the comparison table in "
+":doc:`../contributing/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:125
+#: 7505172b1ee844f3a35759499f17e44c
+msgid "Next Steps"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:127
+#: f4c66cfb2a744357973381d9b1a76510
+msgid "Ready to dive deeper? Choose your focus:"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:129
+#: 132b8bf8746d4c4cb5747878e0faf3ef
+msgid "🏗️ **Architecture**: :doc:`architecture` - Understand system design"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:130
+#: fb0f92b10296437590a8b171cb7eb82d
+msgid ""
+"⚖️ **Comparison**: Review the tool type comparison table in "
+":doc:`../contributing/index`"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:131
+#: f8c7822ffc094795937f5af3f534df68
+msgid ""
+"🏠 **Local Tools**: :doc:`../local_tools/index` - Learn local tool "
+"development"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:132
+#: 742190e159ca44aeaecb05435e0523ad
+msgid ""
+"🔗 **Remote Tools**: :doc:`../remote_tools/index` - Learn remote tool "
+"integration"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:133
+#: ec6f45defed040ea9de44848a52cf60f
+msgid ""
+"🎁 **Contributing**: :doc:`../contributing/index` - Submit tools to "
+"ToolUniverse"
+msgstr ""
+
+#: ../../expand_tooluniverse/reference/index.rst:136
+#: 9ae76cc3a5124b7eb38e72172b710ea4
+msgid ""
+"**Reference First**: Understanding the architecture and differences "
+"between tool types will help you make better decisions about which "
+"approach to use for your specific needs."
+msgstr ""
+

@@ -37,10 +37,10 @@ class EnrichrTool(BaseTool):
         """
         Retrieve the official gene symbol for a given gene name or synonym using the MyGene.info API.
 
-        Parameters:
+        Parameters
             gene_name (str): The gene name or synonym to query.
 
-        Returns:
+        Returns
             str: The official gene symbol if found; otherwise, raises an Exception.
         """
         # URL-encode the gene_name to handle special characters
@@ -89,10 +89,10 @@ class EnrichrTool(BaseTool):
         """
         Submit the gene list to Enrichr and return the user list ID.
 
-        Parameters:
+        Parameters
             gene_list (str): Newline-separated string of gene names.
 
-        Returns:
+        Returns
             str: The user list ID from Enrichr.
         """
         payload = {
@@ -110,11 +110,11 @@ class EnrichrTool(BaseTool):
         """
         Fetch enrichment results for a specific library.
 
-        Parameters:
+        Parameters
             user_list_id (str): The user list ID from Enrichr.
             library (str): The name of the enrichment library.
 
-        Returns:
+        Returns
             dict: The enrichment results.
         """
         query_string = f"?userListId={user_list_id}&backgroundType={library}"
@@ -129,11 +129,11 @@ class EnrichrTool(BaseTool):
         """
         Initialize and build the graph with gene nodes and enriched terms.
 
-        Parameters:
+        Parameters
             genes (list): List of gene names.
             enrichment_results (dict): Dictionary of enrichment results by library.
 
-        Returns:
+        Returns
             networkx.Graph: The constructed graph.
         """
         G = nx.Graph()
@@ -159,12 +159,12 @@ class EnrichrTool(BaseTool):
         """
         Find and rank paths between source and target based on total edge weight.
 
-        Parameters:
+        Parameters
             G (networkx.Graph): The graph to search.
             source (str): The source node.
             target (str): The target node.
 
-        Returns:
+        Returns
             list: List of tuples (path, weight) sorted by weight descending.
         """
         all_paths = list(nx.all_simple_paths(G, source=source, target=target))
@@ -182,12 +182,12 @@ class EnrichrTool(BaseTool):
         """
         Find and rank paths from each gene to a specified term based on total edge weight.
 
-        Parameters:
+        Parameters
             G (networkx.Graph): The graph to search.
             gene (str): The source gene.
             term (str): The target term.
 
-        Returns:
+        Returns
             list or None: List of tuples (path, weight) sorted by weight descending, or None if no paths.
         """
         all_paths = list(nx.all_simple_paths(G, source=gene, target=term))
@@ -207,11 +207,11 @@ class EnrichrTool(BaseTool):
         """
         Main API function to perform gene enrichment analysis.
 
-        Parameters:
+        Parameters
             genes (list): List of gene names.
             libs (list): List of enrichment libraries to use.
 
-        Returns:
+        Returns
             tuple: (connected_path, connections) dictionaries.
         """
         # Convert each gene to its official name and log the result

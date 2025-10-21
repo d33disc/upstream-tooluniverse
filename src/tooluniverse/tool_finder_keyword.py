@@ -182,7 +182,7 @@ class ToolFinderKeyword(BaseTool):
         Args:
             text (str): Input text to tokenize
 
-        Returns:
+        Returns
             List[str]: List of processed tokens
         """
         if not text:
@@ -210,7 +210,7 @@ class ToolFinderKeyword(BaseTool):
         Args:
             word (str): Word to stem
 
-        Returns:
+        Returns
             str: Stemmed word
         """
         if len(word) <= 3:
@@ -232,7 +232,7 @@ class ToolFinderKeyword(BaseTool):
             tokens (List[str]): Tokenized words
             max_phrase_length (int): Maximum length of phrases to extract
 
-        Returns:
+        Returns
             List[str]: List of phrases and individual tokens
         """
         phrases = []
@@ -305,7 +305,7 @@ class ToolFinderKeyword(BaseTool):
         Args:
             parameter_schema (Dict): Tool parameter schema
 
-        Returns:
+        Returns
             List[str]: List of text elements from parameters
         """
         text_elements = []
@@ -329,7 +329,7 @@ class ToolFinderKeyword(BaseTool):
             query_terms (List[str]): Processed query terms and phrases
             tool_name (str): Name of the tool to score
 
-        Returns:
+        Returns
             float: TF-IDF relevance score
         """
         if tool_name not in self._tool_index:
@@ -364,7 +364,7 @@ class ToolFinderKeyword(BaseTool):
             query (str): Original query string
             tool (Dict): Tool configuration
 
-        Returns:
+        Returns
             float: Exact match bonus score
         """
         query_lower = query.lower()
@@ -414,7 +414,7 @@ class ToolFinderKeyword(BaseTool):
             return_call_result (bool, optional): If True, returns both prompts and tool names. Defaults to False.
             categories (list, optional): List of tool categories to filter by.
 
-        Returns:
+        Returns
             str or tuple:
                 - If return_call_result is False: Tool prompts as a formatted string
                 - If return_call_result is True: Tuple of (tool_prompts, tool_names)
@@ -472,7 +472,7 @@ class ToolFinderKeyword(BaseTool):
                 - picked_tool_names (list, optional): Pre-selected tool names to process
                 - return_call_result (bool, optional): Whether to return both prompts and names. Defaults to False.
 
-        Returns:
+        Returns
             str or tuple:
                 - If return_call_result is False: Tool prompts as a formatted string
                 - If return_call_result is True: Tuple of (tool_prompts, tool_names)
@@ -504,7 +504,7 @@ class ToolFinderKeyword(BaseTool):
         Args:
             arguments (dict): Search arguments
 
-        Returns:
+        Returns
             str: JSON string containing search results with relevance scores
         """
         try:

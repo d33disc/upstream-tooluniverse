@@ -1,4 +1,4 @@
-Extending ToolUniverse
+Navigation
 ======================
 
 Learn how to extend ToolUniverse with your own custom tools. This section provides comprehensive guides for creating, registering, and contributing tools to the ToolUniverse ecosystem.
@@ -26,9 +26,10 @@ Quick Start
 → Choose your tool type:
    - **Local tools**: :doc:`contributing/local_tools` - Submit Python tools (requires modifying ``__init__.py``)
    - **Remote tools**: :doc:`contributing/remote_tools` - Submit MCP servers (requires deployment)
+   - **Complete guide**: :doc:`contributing/index` - Full contribution guidelines with code examples
 
 **I want to understand the differences:**
-→ :doc:`reference/comparison` - Compare tool types and usage scenarios
+→ :doc:`reference/index` - Compare tool types and usage scenarios
 
 Tool Types Overview
 -------------------
@@ -115,14 +116,6 @@ If you need help with tool development:
 - **Community**: Ask questions in GitHub discussions
 - **Issues**: Report bugs or request features
 
-Resources
----------
-
-- **ToolUniverse Repository**: https://github.com/mims-harvard/ToolUniverse
-- **Issue Tracker**: https://github.com/mims-harvard/ToolUniverse/issues
-- **Discussions**: https://github.com/mims-harvard/ToolUniverse/discussions
-- **Documentation**: https://tooluniverse.readthedocs.io
-
 Next Steps
 ----------
 
@@ -132,7 +125,7 @@ Ready to start? Choose your path:
 * 🏠 **Local Tools**: :doc:`local_tools/tutorial` - Learn local tool development
 * 🔗 **Remote Tools**: :doc:`remote_tools/tutorial` - Learn remote tool integration
 * 🎁 **Contributing**: :doc:`contributing/index` - Submit tools to the community
-* 🔍 **Understanding**: :doc:`reference/comparison` - Compare different approaches
+* 🔍 **Understanding**: Review the tool type comparison table in :doc:`contributing/index`
 
 .. tip::
    **Getting Started**: We recommend starting with the quick start tutorial to understand the basics, then choosing the appropriate detailed guide based on your needs. The community is here to help you succeed!

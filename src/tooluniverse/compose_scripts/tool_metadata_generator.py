@@ -13,7 +13,7 @@ def compose(arguments, tooluniverse, call_tool):
         tooluniverse: ToolUniverse instance
         call_tool: Function to call other tools
 
-    Returns:
+    Returns
         list: List of tool metadata dictionaries (JSON-compatible)
     """
     import json

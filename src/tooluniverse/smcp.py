@@ -10,8 +10,8 @@ The SMCP module provides a complete solution for exposing scientific computation
 resources through the standardized MCP protocol, making it easy for AI agents to
 discover, understand, and execute scientific tools in a unified manner.
 
-Usage Patterns:
-===============
+Usage Patterns
+--------------
 
 Quick Start:
 
@@ -47,8 +47,8 @@ result = await client.call_tool("UniProt_get_entry_by_accession", {
 })
 ```
 
-Architecture:
-=============
+Architecture
+------------
 
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   MCP Client    │◄──►│      SMCP        │◄──►│  ToolUniverse   │
@@ -69,8 +69,8 @@ The SMCP server acts as an intelligent middleware layer that:
 4. Returns formatted results via MCP protocol
 5. Provides intelligent tool discovery and recommendation
 
-Integration Points:
-==================
+Integration Points
+------------------
 
 MCP Protocol Layer:
     - Standard MCP methods (tools/list, tools/call, etc.)
@@ -219,6 +219,21 @@ class SMCP(FastMCP):
         during tool loading. Useful for excluding entire categories of tools
         (e.g., all ToolFinder types or all OpenTarget tools).
 
+    space : str or list of str, optional
+        Space configuration URI(s) to load. Can be a single URI string or a list
+        of URIs for loading multiple Space configurations. Supported formats:
+        - Local file: "./config.yaml" or "/path/to/config.yaml"
+        - HuggingFace: "hf:username/repo" or "hf:username/repo/file.yaml"
+        - HTTP URL: "https://example.com/config.yaml"
+
+        When provided, Space configurations are loaded after tool initialization,
+        applying LLM settings, hooks, and tool selections from the configuration files.
+        Multiple spaces can be loaded sequentially, with later configurations
+        potentially overriding earlier ones.
+
+        Example: space="./my-workspace.yaml"
+        Example: space=["hf:community/bio-tools", "./custom-tools.yaml"]
+
     auto_expose_tools : bool, default True
         Whether to automatically expose ToolUniverse tools as MCP tools.
         When True, all loaded tools become available via the MCP interface
@@ -281,6 +296,7 @@ class SMCP(FastMCP):
         tool_config_files: Optional[Dict[str, str]] = None,
         include_tool_types: Optional[List[str]] = None,
         exclude_tool_types: Optional[List[str]] = None,
+        space: Optional[Union[str, List[str]]] = None,
         auto_expose_tools: bool = True,
         search_enabled: bool = True,
         max_workers: int = 5,
@@ -325,6 +341,7 @@ class SMCP(FastMCP):
         self.tool_config_files = tool_config_files or {}
         self.include_tool_types = include_tool_types or []
         self.exclude_tool_types = exclude_tool_types or []
+        self.space = space
         self.auto_expose_tools = auto_expose_tools
         self.search_enabled = search_enabled
         self.max_workers = max_workers
@@ -332,17 +349,60 @@ class SMCP(FastMCP):
         self.hook_config = hook_config
         self.hook_type = hook_type
 
+        # Space configuration storage
+        self.space_llm_config = None
+        self.space_metadata = None
+
         # Thread pool for concurrent tool execution
         self.executor = ThreadPoolExecutor(max_workers=max_workers)
 
         # Track exposed tools to avoid duplicates
         self._exposed_tools = set()
 
-        # Initialize SMCP-specific features
+        # Load Space configurations first if provided
+        if space:
+            self._load_space_configs(space)
+
+        # Initialize SMCP-specific features (after Space is loaded)
         self._setup_smcp_tools()
 
         # Register custom MCP methods
         self._register_custom_mcp_methods()
+
+    def _load_space_configs(self, space: Union[str, List[str]]):
+        """
+        Load Space configurations.
+
+        This method loads Space configuration(s) and retrieves the LLM config
+        and metadata from ToolUniverse. It completely reuses ToolUniverse's
+        load_space functionality without reimplementing any logic.
+
+        Args:
+            space: Space URI or list of URIs (e.g., "./config.yaml",
+                      "hf:user/repo", or ["config1.yaml", "config2.yaml"])
+        """
+        space_list = [space] if isinstance(space, str) else space
+
+        for uri in space_list:
+            print(f"📦 Loading Space: {uri}")
+
+            # Directly call ToolUniverse's method (complete reuse)
+            config = self.tooluniverse.load_space(uri)
+
+            # Get configurations from ToolUniverse (complete reuse)
+            self.space_metadata = self.tooluniverse.get_space_metadata()
+            self.space_llm_config = self.tooluniverse.get_space_llm_config()
+
+            print(f"✅ Space loaded: {config.get('name', 'Unknown')}")
+
+    def get_llm_config(self) -> Optional[Dict[str, Any]]:
+        """
+        Get the current Space LLM configuration.
+
+        Returns:
+            LLM configuration dictionary or None if not set
+        """
+        return self.space_llm_config
 
     def _register_custom_mcp_methods(self):
         """
@@ -857,9 +917,28 @@ class SMCP(FastMCP):
         - All setup phases include comprehensive error handling
         - Performance scales with the number of tools being loaded and exposed
         """
-        # Always ensure full tool set is loaded (hooks may have preloaded a minimal set)
-        # Deduplication in ToolUniverse.load_tools prevents duplicates, so reloading is safe
-        if self.tool_categories:
+        # Determine if ToolUniverse already has tools loaded (e.g., provided pre-configured instance)
+        preloaded_tools = getattr(self.tooluniverse, "all_tools", [])
+        preloaded_count = (
+            len(preloaded_tools) if isinstance(preloaded_tools, list) else 0
+        )
+
+        if preloaded_count > 0:
+            self.logger.info(
+                f"ToolUniverse already pre-configured with {preloaded_count} tool(s); skipping automatic loading."
+            )
+
+        # Check if Space has already loaded specific tools
+        if (
+            self.space
+            and hasattr(self.tooluniverse, "_current_space_config")
+            and preloaded_count > 0
+        ):
+            # Space has already loaded specific tools, don't reload all tools
+            self.logger.info(
+                f"Space configuration loaded {preloaded_count} tool(s), skipping additional loading"
+            )
+        elif preloaded_count == 0 and self.tool_categories:
             try:
                 # Validate categories first
                 valid_categories = self._get_valid_categories()
@@ -924,8 +1003,10 @@ class SMCP(FastMCP):
                     include_tool_types=self.include_tool_types,
                     exclude_tool_types=self.exclude_tool_types,
                 )
-        elif self.auto_expose_tools:
-            # Load all tools by default
+        elif self.auto_expose_tools and not (
+            self.space and hasattr(self.tooluniverse, "_current_space_config")
+        ):
+            # Load all tools by default (unless Space already handled tool loading)
             self.tooluniverse.load_tools(
                 exclude_tools=self.exclude_tools,
                 exclude_categories=self.exclude_categories,

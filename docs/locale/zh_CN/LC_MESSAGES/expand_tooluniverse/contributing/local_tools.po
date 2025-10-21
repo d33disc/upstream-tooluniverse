@@ -7,192 +7,193 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"POT-Creation-Date: 2025-10-19 16:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:2
-#: 1c4117bcfbfc4fffa12451aa6a8f3cce
+#: d9ef98f0708b4251b329ca5a1f45b7eb
 msgid "Contributing Local Tools to ToolUniverse"
 msgstr "将本地工具贡献至 ToolUniverse"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:4
-#: 168f4b12869244069eaa2157c9bf8e64
+#: 8d8a05e27a12402698508333ef225e96
 msgid ""
-"This guide covers how to contribute local Python tools to the ToolUniverse "
-"repository. Local tools run within the ToolUniverse process and are "
-"available to all users."
+"This guide covers how to contribute local Python tools to the "
+"ToolUniverse repository. Local tools run within the ToolUniverse process "
+"and are available to all users."
 msgstr ""
-"本指南介绍了如何将本地 Python 工具贡献到 ToolUniverse 仓库。本地工具在 ToolUniverse 进程中运行，并可供所有用户使用。"
+"本指南介绍了如何将本地 Python 工具贡献到 ToolUniverse 仓库。本地工具在 ToolUniverse "
+"进程中运行，并可供所有用户使用。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:7
-#: 7d87346efc74487c92de7ad2f54d599c
+#: 6ecfe22eae20449d8bdabbf3bf598c58
 msgid ""
-"**Key Difference**: Contributing to the repository requires additional steps"
-" compared to using tools locally. The most critical step is modifying "
-"``__init__.py`` in 4 specific locations."
-msgstr ""
-"**关键区别**：向代码库贡献内容相比于本地使用工具需要额外的步骤。最关键的步骤是修改 ``__init__.py`` 文件中的 4 个特定位置。"
+"**Key Difference**: Contributing to the repository requires additional "
+"steps compared to using tools locally. The most critical step is "
+"modifying ``__init__.py`` in 4 specific locations."
+msgstr "**关键区别**：向代码库贡献内容相比于本地使用工具需要额外的步骤。最关键的步骤是修改 ``__init__.py`` 文件中的 4 个特定位置。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:10
-#: 63d2eed269674e85a0dd2a82b6c4f009
+#: bcec43f797da4365a78c3c9fdb06ce7a
 msgid "Quick Overview"
 msgstr "快速概览"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:12
-#: b687e4b27e5d495486c86e2838c59ec3
+#: 5dcd5ae4038942ea8bb1ce2e8ed106aa
 msgid "**10 Steps to Contribute a Local Tool:**"
 msgstr "**贡献本地工具的10个步骤：**"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:14
-#: 1e10296fc1d241299ee3e58481e2ed1a
+#: 3031f5c02cb445feb8183111c0576a59
 msgid "**Environment Setup** - Fork, clone, install dependencies"
 msgstr "**环境设置** - 分叉、克隆、安装依赖项"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:15
-#: c762cc76e2bc41198a2943718ce02805
+#: e122eb7e76e0410d93ee5ecc08f4e78f
 msgid "**Create Tool File** - Python class in ``src/tooluniverse/``"
 msgstr "**创建工具文件** - 位于``src/tooluniverse/``中的Python类"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:16
-#: 2fc6e65be22a45f5ada61e605da92b4f
+#: 6e70803149c84f95a82932f3e046b710
 msgid "**Register Tool** - Use ``@register_tool('Type')`` decorator"
 msgstr "**注册工具** - 使用 ``@register_tool('Type')`` 装饰器"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:17
-#: aa247517ed06461e96e418c49e570670
+#: 4ff8e8cbc239408c8ff69fa8b411be90
 msgid "**Create Config** - JSON file in ``data/xxx_tools.json``"
 msgstr "**创建配置** - JSON 文件位于 ``data/xxx_tools.json``"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:18
-#: f7a6c10674944de2b380b249ac7055d0
+#: ecc61ffc504c40c0a5be513443e598b9
 msgid "**🔑 Modify __init__.py** - Add tool in 4 locations (critical!)"
 msgstr "**🔑 修改 __init__.py** - 在4个位置添加工具（关键！）"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:19
-#: a3b1ed4e4dc640e9b179124e7568f016
+#: 8296023c96764121864395c69b3edd40
 #, python-format
 msgid "**Write Tests** - >90% coverage required"
 msgstr "**编写测试** - >90%覆盖率要求"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:20
-#: 28dd1e968ba645f6ab544b592a943809
+#: 4a93a33c2d8e49da9871251acab7ceb8
 msgid "**Code Quality** - Pre-commit hooks (automatic)"
 msgstr "**代码质量** - 提交前钩子（自动）"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:21
-#: 680f2e83918441fdbc69289e0df0b896
+#: e12c83e74be349b1a168d74646cf41be
 msgid "**Documentation** - Docstrings and examples"
 msgstr "**文档** - 文档字符串和示例"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:22
-#: e05412d3841c4c79ba871d4c705db671
+#: 4c51d411f5b94f0c890d6baf09127c85
 msgid "**Create Examples** - Working examples in ``examples/``"
 msgstr "**创建示例** - 在``examples/``中创建工作示例"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:23
-#: 9bab4696fdcd47ffb2b95982d91e33fa
+#: 495982d4f1cb423aad68f59cdd2e5d1e
 msgid "**Submit PR** - Follow contribution guidelines"
 msgstr "**提交 PR** - 请遵循贡献指南"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:26
-#: 36a8ac547370450ba96afa5db9acbfc0
+#: 269e9c98db864d339d22240e3f24498b
 msgid "Step-by-Step Guide"
 msgstr "分步指南"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:29
-#: 82675d2cef9d4443a8dbe253cf0d5525
+#: f310d2fca11144b2af1d19953b25b122
 msgid "Step 1: Environment Setup"
 msgstr "步骤 1：环境设置"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:48
-#: ff8bcb0453654a3f9e42f17e7d758953
+#: 824036e7b72a4f7ab2a9c81fba1b30c8
 msgid "Step 2: Create Tool File"
 msgstr "步骤 2：创建工具文件"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:50
-#: d2a9b2c6f7b1444cad31442e4b776dad
+#: 141abef95ebe423e8425a7cdaf7fd94e
 msgid "Create your tool file in ``src/tooluniverse/xxx_tool.py``:"
 msgstr "在``src/tooluniverse/xxx_tool.py``中创建您的工具文件："
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:78
-#: a2217ef8cdb64cac81eebb50f9aa3853
+#: a1d5c4a457de44fcbca7f089752b978a
 msgid "Step 3: Register Tool"
 msgstr "步骤 3：注册工具"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:80
-#: 0cae5aa57de44abbb1f314ad551fd899
+#: d326c16488ad40309c017daccbb4681d
 msgid ""
 "The ``@register_tool('MyNewTool')`` decorator registers your tool class. "
-"Note that for contributions, we don't include the config in the decorator - "
-"that goes in a separate JSON file."
+"Note that for contributions, we don't include the config in the decorator"
+" - that goes in a separate JSON file."
 msgstr ""
 "``@register_tool('MyNewTool')`` "
 "装饰器用于注册您的工具类。请注意，对于贡献部分，我们不会在装饰器中包含配置——配置应放在单独的 JSON 文件中。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:83
-#: 655a2ec9c5144174bda53776520f615d
+#: 8e5194950ef0425da7ac25a06d019ef0
 msgid "Step 4: Create Configuration File"
 msgstr "步骤 4：创建配置文件"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:85
-#: d02d0d9fdeaa4d54a2ea663303091efc
+#: 2f1f12b400494fcf8d8e6898b55e2b27
 msgid "Create or edit ``src/tooluniverse/data/xxx_tools.json``:"
 msgstr "创建或编辑 ``src/tooluniverse/data/xxx_tools.json``:"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:117
-#: 4a61699e75ef4242b91f45418465d481
+#: 1bbd4caaf3224161a9933fadecefe501
 msgid "Step 5: 🔑 Modify __init__.py (Critical!)"
 msgstr "步骤 5：🔑 修改 __init__.py（关键！）"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:119
-#: aa6aa90a946045aab53dcce34999e617
+#: 0196fe6495ee462683a530cad1ceda61
 msgid ""
 "This is the most important step that's often missed. You must modify "
 "``src/tooluniverse/__init__.py`` in **4 specific locations**:"
 msgstr "这是最重要但经常被忽略的一步。您必须在 **4 个特定位置** 修改 ``src/tooluniverse/__init__.py``。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:121
-#: a05dca5e3530401fb8f924234b744f00
+#: 3a33ea0295f14de7a8bf536c44f783d3
 msgid ""
-"**Location 1 (~105-165 lines): Add type declaration** .. code-block:: python"
+"**Location 1 (~105-165 lines): Add type declaration** .. code-block:: "
+"python"
 msgstr "**位置 1 (~105-165 行)：添加类型声明** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:124
-#: 2982d6b9443a4265a4f8f01ba69a7145
+#: 850c6d2b3b4a45be96efc1b3dae053bf
 msgid "# Find the section with other tool type declarations MyNewTool: Any"
 msgstr "# 查找包含其他工具类型声明的部分 MyNewTool: Any"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:127
-#: e9ad303da9844ab485283f48280efcc3
+#: eeb30b9c93b645b8be4d0c42015a0b6a
 msgid ""
-"**Location 2 (~173-258 lines): Add import statement (non-lazy section)** .. "
-"code-block:: python"
+"**Location 2 (~173-258 lines): Add import statement (non-lazy section)** "
+".. code-block:: python"
 msgstr "**位置 2（约173-258行）：添加导入语句（非惰性部分）** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:130
-#: 2897bb4528a54bd4b040f7afb84f90cf
+#: 83bf920624b241c8abec9413b3a80eeb
 msgid "# Find the non-lazy loading section from .my_new_tool import MyNewTool"
 msgstr "# 从 .my_new_tool 导入 MyNewTool 中找到非惰性加载部分"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:133
-#: 7272ac66f06c4944a19f1464ff2c40ba
+#: af4ce76bc4b843b0903389fedd923c56
 msgid ""
 "**Location 3 (~260-360 lines): Add lazy import proxy** .. code-block:: "
 "python"
 msgstr "**位置 3（约260-360行）：添加延迟导入代理** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:136
-#: 0e63b680afdb42bbb633f520842ff899
+#: 5e865147c10b46bca83cf2216a5aa160
 msgid ""
 "# Find the else block for lazy loading MyNewTool = "
 "_LazyImportProxy(\"my_new_tool\", \"MyNewTool\")"
@@ -201,33 +202,34 @@ msgstr ""
 "\"MyNewTool\")"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:139
-#: 49702e3544c245388b8ac8ef835f7e92
+#: 727a9a2ce4e04d49814d8ec9f4044090
 msgid ""
-"**Location 4 (~362-449 lines): Add to __all__ list** .. code-block:: python"
+"**Location 4 (~362-449 lines): Add to __all__ list** .. code-block:: "
+"python"
 msgstr "**位置 4（约第 362-449 行）：添加到 __all__ 列表** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:142
-#: d6986a28087c420c85825b46ce890d26
+#: 17ce4365f769406687d9da6cddbce3df
 msgid "__all__ = ["
 msgstr ""
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:143
-#: 35b63125074f4c2ab1c4bde0e5e9222b
+#: bad3692e3da14aa2b9c54d9411a82299
 msgid "# ... existing tools ... \"MyNewTool\","
 msgstr "# ...现有工具... \"MyNewTool\","
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:145
-#: 679735b6c2b14176a7a40a82ba7040b2
+#: d712ba23ec39467a90ef75915c5c788a
 msgid "]"
 msgstr "请提供需要翻译的具体文本，我将为您进行专业的翻译。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:147
-#: 70c8962c4ba94ac9b39d5ed423d694d7
+#: f4863e7b449e42e781238bbfe4cfbc3d
 msgid "**Verification:** .. code-block:: python"
 msgstr "**验证：** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:150
-#: add09d5d2bdd4ff9be75a5394b7be05e
+#: 10a31e6d096944c5887cda922758fcd6
 msgid ""
 "# Test that your tool can be imported from tooluniverse import MyNewTool "
 "print(MyNewTool)  # Should show the class or lazy proxy"
@@ -237,68 +239,67 @@ msgstr ""
 "print(MyNewTool)  # 应显示类或延迟代理"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:155
-#: 32008e4acd5f4bd5b72356f428eb5262
+#: 51fc4eb784d544b09c9b0b5fecdc2d56
 msgid "Step 6: Write Tests"
 msgstr "步骤 6：编写测试"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:157
-#: 9f2c6df926cf4897b342af977d91c60b
+#: 3fcb63b5b31f4a76a41471615f4d420d
 msgid "Create tests in ``tests/unit/test_my_new_tool.py``:"
 msgstr "在``tests/unit/test_my_new_tool.py``中创建测试："
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:185
-#: 418877cae6bf4ddb85b281aab6cab91d
+#: a8d68e23e42c4635b8afcedc86cc35b6
 msgid "Run tests with coverage: .. code-block:: bash"
 msgstr "运行带覆盖率的测试：.. code-block:: bash"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:188
-#: aaa0b7aa276341448b3c1b3471724ad0
-msgid ""
-"pytest tests/unit/test_my_new_tool.py --cov=tooluniverse --cov-report=html"
+#: 1c96c2c0e13c4a3e9c0a0a4c405f8e3b
+msgid "pytest tests/unit/test_my_new_tool.py --cov=tooluniverse --cov-report=html"
 msgstr ""
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:191
-#: 8fde2ff5f6964fcd9d4e3672d0e09991
+#: 7b288d1e8aff4b55a7d86e245cf0ac51
 msgid "Step 7: Code Quality Check (Automatic)"
 msgstr "第七步：代码质量检查（自动）"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:193
-#: 8fef551a6a274b909e53f943def38350
+#: 896fc29f980543779cc96680b7d5ddef
 msgid "Pre-commit hooks will automatically run when you commit:"
 msgstr "在提交代码时，预提交钩子会自动运行："
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:203
-#: 0460f21a590c47d999ceb486c6bf17a8
+#: 58b708218aac402f8fb4932428fcb82e
 msgid "Step 8: Documentation"
 msgstr "步骤 8：文档编制"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:205
-#: ca97e3b1388b49f6bbebc3c93b33ffe3
+#: b0d5a98cb3a546e5b6395e6c5f4d8d89
 msgid "Add comprehensive docstrings to your tool class:"
 msgstr "为您的工具类添加全面的文档字符串："
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:228
-#: de41845a2b9b4a189a6f9d39e41816ed
+#: ebcb76f28e4e4d8382184782591fe898
 msgid "```"
 msgstr "请提供需要翻译的具体文本内容，我将为您进行翻译。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:231
-#: bdddd33eaa344ca4beed7bbc99d96133
+#: c8bd4bf3a9a44e0aa72a279ddcdc3b2b
 msgid "Step 9: Create Examples"
 msgstr "步骤 9：创建示例"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:233
-#: 6ee23af0e74a4d839ef76c4e3660c05e
+#: 45ef276a19a048f7a6beeb98eba9e02a
 msgid "Create ``examples/my_new_tool_example.py``:"
 msgstr "创建 ``examples/my_new_tool_example.py``:"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:267
-#: 15620b994d0d429d843464da2e7393c0
+#: fa701adcdd994536ab22b34c3557f20a
 msgid "Step 10: Submit Pull Request"
 msgstr "第10步：提交拉取请求"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:294
-#: 638338106ec646e9b5b3daee725ef90b
+#: b26fb1b10dae44ddb150b5ab0e64212b
 msgid "**PR Template:** .. code-block:: markdown"
 msgstr ""
 "**PR 模板:** .. code-block:: markdown\n"
@@ -306,7 +307,7 @@ msgstr ""
 "上下文: 文档"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:297
-#: f07b0811f41548fa8892d486a5579336
+#: a95b5cb7c3ba4e8fb6d0d1834b27aeb7
 msgid "## Description"
 msgstr ""
 "## 描述\n"
@@ -314,90 +315,90 @@ msgstr ""
 "上下文：文档"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:299
-#: b708b5c4a47449ac906191bbc3c666d3
+#: 6ef61cd5751a423e962fcfeb832d806a
 msgid "This PR adds MyNewTool, a new local tool for text processing."
 msgstr "此PR新增了MyNewTool，一款用于文本处理的本地新工具。"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:301
-#: 53a5cf6c71234aad8e5a13e5cf937b4a
+#: f6c4c28ffc5d4ff99efa327648469bd3
 msgid "## Changes Made"
 msgstr "## 修改内容"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:303
-#: b211afa3c7a646f88070cddae019570f
+#: 05f2c5729ec240be861da42f27a90f6b
 msgid "✅ **Tool Implementation**: Complete MyNewTool class"
 msgstr "✅ **工具实施**：完成 MyNewTool 类"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:304
-#: 27764dd7fe7c416d8ceedbc911b49b8b
+#: f059906447334e7eb05912e56ba0d9fe
 #, python-format
 msgid "✅ **Testing**: Unit tests with >95% coverage"
 msgstr "✅ **测试**：单元测试覆盖率超过 95%"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:305
-#: 5c0d901ce6f243f9a83062c5ca0771a0
+#: ab5e61c6b6e842468acf817b0e7e7eb5
 msgid "✅ **Documentation**: Comprehensive docstrings and examples"
 msgstr "✅ **文档**：详尽的文档字符串和示例"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:306
-#: f5351c9210254198b958728f21321782
+#: c51f445ffa5c4ca4b61ba13b6f92d782
 msgid "✅ **Configuration**: JSON config in data/xxx_tools.json"
 msgstr "✅ **配置**：位于 data/xxx_tools.json 的 JSON 配置"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:307
-#: 52671f30950c4cf69bf89ba45105c4b8
+#: a3d0b7e1100c44bb9f6c2b786d3d78f9
 msgid "✅ **Integration**: Modified __init__.py in 4 locations"
 msgstr "✅ **集成**：在 4 个位置修改了 __init__.py"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:309
-#: 227138cb48524eb0874b5ac48ad3c546
+#: 18a0a3d8f6c9473e9e3a7fe393a44956
 msgid "## Testing"
 msgstr "## 测试"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:311
-#: 80efdb94f7f34d478fc04107d309d390
+#: 35c259bdbe7646f297f7aaa215c4c7b8
 msgid ""
 "```bash pytest tests/unit/test_my_new_tool.py --cov=tooluniverse python "
 "examples/my_new_tool_example.py ```"
 msgstr ""
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:316
-#: 4a66e404279a42ad930224dac3f4f994
+#: e2e70935253d4fdc8bf5f318dc0aed54
 msgid "## Checklist"
 msgstr "## 检查清单"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:318
-#: 8b577e83151343c5bdb55118aa7ddd08
+#: 89bcdb076c1d45e58fe3bbe136a78aa2
 msgid "[x] Tests pass locally"
 msgstr "[x] 测试在本地通过"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:319
-#: 5e9740b63a504b098b97fbfd2cea04c2
+#: d01afcc0fb4b40e491066e892490d9a2
 msgid "[x] Code follows project style guidelines"
 msgstr "[x] 代码遵循项目风格指南"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:320
-#: 3162eb753aec49b4bd48fe2b0914dcab
+#: c7ffcd37c89247cf9da5a747a7ec9fd6
 msgid "[x] Documentation is complete"
 msgstr "[x] 文档已完成"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:321
-#: cef548b5e2554d5a8da004f9b0285fa9
+#: 01497926cbf346fca7b7f82a0458fa5c
 msgid "[x] __init__.py modified in all 4 locations"
 msgstr "[x] __init__.py 已在所有 4 个位置进行了修改"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:322
-#: 3c172c471b7948cb8be4f539fb354641
+#: c1e26cdb03e642bf9222f13e0512b6ad
 msgid "[x] Examples work as expected"
 msgstr "[x] 示例按预期运行"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:325
-#: b0e3df1ccf9343029c2d79dd32b3ae83
+#: 1f91b742d62f46e682bd1a1306ee335a
 msgid "Common Mistakes"
 msgstr "常见错误"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:327
-#: edd1e1e11f9741cb86540a4fd04c5336
+#: 66834fa35a274a2c8a7aa98c363073c6
 msgid ""
 "**❌ Most Common: Forgetting to modify __init__.py** - Tool won't be "
 "importable: ``ImportError: cannot import name 'MyNewTool'`` - Solution: "
@@ -407,7 +408,7 @@ msgstr ""
 "'MyNewTool'`` - 解决方法：检查 __init__.py 中的所有 4 个位置"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:331
-#: 6af2bff05a1a4257b1347a4d94b7600f
+#: 5520432c9d19472bbadbb9f1d2fcfd6a
 msgid ""
 "**❌ Config in wrong place** - Don't put config in ``@register_tool()`` "
 "decorator - Put it in ``data/xxx_tools.json`` instead"
@@ -416,38 +417,38 @@ msgstr ""
 "``data/xxx_tools.json`` 文件中"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:335
-#: af60a529044e4075b7db63f0aef758a4
+#: 94a176301c044eda81e959ee0f3a4cba
 msgid ""
-"**❌ Wrong file location** - Tool file must be in ``src/tooluniverse/`` - Not"
-" in your project directory"
+"**❌ Wrong file location** - Tool file must be in ``src/tooluniverse/`` - "
+"Not in your project directory"
 msgstr "**❌ 文件位置错误** - 工具文件必须位于 ``src/tooluniverse/`` - 不应放在您的项目目录中"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:339
-#: 0f586f6ea0934f8d9d448fd7e6517249
+#: 26935fa250b240c1abcbecec53ccefd0
 msgid ""
-"**❌ Missing tests** - Coverage must be >90% - Test both success and error "
-"cases"
+"**❌ Missing tests** - Coverage must be >90% - Test both success and error"
+" cases"
 msgstr "**❌ 缺少测试** - 覆盖率必须 >90% - 测试成功和错误情况"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:343
-#: ec688c7a3e4d427581b34514930ace1b
+#: 71e15eb9436c40f1a40db3383bbdf9fb
 msgid ""
-"**❌ Import errors** - Check module name matches file name - Check class name"
-" matches exactly (case-sensitive)"
+"**❌ Import errors** - Check module name matches file name - Check class "
+"name matches exactly (case-sensitive)"
 msgstr "**❌ 导入错误** - 检查模块名称是否与文件名称匹配 - 检查类名称是否完全一致（区分大小写）"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:348
-#: 6789098c52e5479ba143605b2ead3d08
+#: eb6de76d6fcb4d48985fd12b06d5e6e5
 msgid "Troubleshooting"
 msgstr "故障排除"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:350
-#: 75583a6b76374dcca2e28fc648bc796f
+#: eb87de499c9e4744b8ace6ae91e7cf0f
 msgid "**ImportError: cannot import name 'MyNewTool'** .. code-block:: python"
 msgstr "**ImportError: 无法导入名称 'MyNewTool'** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:353
-#: ac01d3ef26d548f29cf6ed2abb131a3c
+#: becf05e23bf34230b0b450e56016dfbe
 msgid ""
 "# Check if tool is in __all__ list from tooluniverse import __all__ "
 "print(\"MyNewTool\" in __all__)  # Should be True"
@@ -457,14 +458,14 @@ msgstr ""
 "print(\"MyNewTool\" in __all__)  # 应为 True"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:357
-#: 1b1a7a8cd7774a4b80a9ac427cae62e0
+#: 717c66d634f749d7a974f15650e1e97a
 msgid ""
 "# Check if import statement exists # Look for: from .my_new_tool import "
 "MyNewTool"
 msgstr "# 检查是否存在导入语句 # 查找：from .my_new_tool import MyNewTool"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:360
-#: e74278e8d2a24e1fb89efe92ee50c602
+#: 79e900f14ea542a595ba9aff2ada6b58
 msgid ""
 "**AttributeError: module 'tooluniverse' has no attribute 'MyNewTool'** - "
 "Verify the tool name is in ``__all__`` list - Check that the tool name "
@@ -474,12 +475,12 @@ msgstr ""
 "``__all__`` 列表中 - 检查工具名称是否与类名完全匹配"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:364
-#: b5b1952dbb5d4ae2b5dadc4504579f7c
+#: e52dab239c34408d97800124dfd93318
 msgid "**Tool not found when using ToolUniverse** .. code-block:: python"
 msgstr "**使用 ToolUniverse 时未找到工具** .. code-block:: python"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:367
-#: e28790f9dc92472f9d1d8bb7bce2d59a
+#: d1055eff09704117b1a6983f6dacf64f
 msgid ""
 "# Verify tool loads correctly from tooluniverse import ToolUniverse tu = "
 "ToolUniverse() tu.load_tools()"
@@ -490,7 +491,7 @@ msgstr ""
 "tu.load_tools()"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:372
-#: 6787f8d6cc6e4efc8258b53b3643a528
+#: d335e88c0fb84422a8b79a3279e9f3ce
 msgid ""
 "# Check if tool is in the loaded tools tools = tu.list_tools() "
 "print(\"my_new_tool\" in tools)  # Should be True"
@@ -500,47 +501,53 @@ msgstr ""
 "print(\"my_new_tool\" in tools)  # 应为 True"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:377
-#: 31b9906d081a423fb1aeb9777dff207a
+#: f4b9a470783a42ea89aa99107d56e4fc
 msgid "Next Steps"
 msgstr "下一步"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:379
-#: c1d0acb40c194656a24320c3acf69dd0
+#: 0bc01f76ac55415a915568837ae5a106
 msgid "After successfully contributing your local tool:"
 msgstr "在成功提交您的本地工具后："
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:381
-#: 9e767f48e3df47eaa39ce81092f3bb08
+#: a69c0a074ec041809b48fb5a40eef0c3
 msgid ""
-"🚀 **Remote Tools**: :doc:`remote_tools` - Learn about contributing remote "
-"tools"
+"🚀 **Remote Tools**: :doc:`remote_tools` - Learn about contributing remote"
+" tools"
 msgstr "🚀 **远程工具**: :doc:`remote_tools` - 了解如何贡献远程工具"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:382
-#: 594b70776cd746cb92bdddc03fd68880
+#: 42af79270ee64fb1a3e125c954fdb005
 msgid ""
 "📚 **Advanced Features**: :doc:`../local_tools/advanced_features` - Learn "
 "BaseTool advanced capabilities"
-msgstr ""
-"📚 **高级功能**: :doc:`../local_tools/advanced_features` - 了解 BaseTool 的高级功能"
+msgstr "📚 **高级功能**: :doc:`../local_tools/advanced_features` - 了解 BaseTool 的高级功能"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:383
-#: 384ee2daf0e14fc685b14bef3ea33d4c
+#: e8b28aa01e664e98892be5ad00edef04
 msgid ""
 "🔍 **Architecture**: :doc:`../reference/architecture` - Understand "
 "ToolUniverse internals"
 msgstr "🔍 **架构**: :doc:`../reference/architecture` - 了解 ToolUniverse 的内部结构"
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:384
-#: cf0a539e850b495c9c29720ca4587e16
+#: ca92d587d8b34eaf9c1aabeb86875662
 msgid ""
-"📊 **Comparison**: :doc:`../reference/comparison` - Compare tool types and "
-"usage scenarios"
-msgstr "📊 **比较**：:doc:`../reference/comparison` - 比较工具类型和使用场景"
+"📊 **Comparison**: Review the tool type comparison table in "
+":doc:`../contributing/index`"
+msgstr ""
 
 #: ../../expand_tooluniverse/contributing/local_tools.rst:387
-#: ff4c6c86d36e46aba9f4ff3fc18b6180
+#: 4e8aeb3d17864e3a9ed51788773bd870
 msgid ""
-"**Success Tips**: Start with simple tools, test thoroughly, and ask for help"
-" in GitHub discussions if you get stuck!"
+"**Success Tips**: Start with simple tools, test thoroughly, and ask for "
+"help in GitHub discussions if you get stuck!"
 msgstr "**成功提示**：从简单的工具开始，进行充分测试，如果遇到问题，可以在 GitHub 讨论中寻求帮助！"
+
+#~ msgid ""
+#~ "📊 **Comparison**: :doc:`../reference/comparison` -"
+#~ " Compare tool types and usage "
+#~ "scenarios"
+#~ msgstr "📊 **比较**：:doc:`../reference/comparison` - 比较工具类型和使用场景"
+

@@ -26,12 +26,12 @@ msgid "tooluniverse.toolspace\\_validator module"
 msgstr ""
 
 #: c54c411e53714f5ab2e897fcc7e7d7d9 of tooluniverse.toolspace_validator:1
-msgid "ToolSpace Configuration Validator"
+msgid "Space Configuration Validator"
 msgstr ""
 
 #: f7f6f36b5ae84e76933c0dead2b9b936 of tooluniverse.toolspace_validator:3
 msgid ""
-"This module provides validation functionality for ToolSpace "
+"This module provides validation functionality for Space "
 "configurations, ensuring they conform to the expected schema and contain "
 "valid values."
 msgstr ""
@@ -48,7 +48,7 @@ msgstr ""
 
 #: c51273a7877d474392b036a18198ba91 of
 #: tooluniverse.toolspace_validator.validate_toolspace_config:1
-msgid "Validate a ToolSpace configuration."
+msgid "Validate a Space configuration."
 msgstr ""
 
 #: ../../api/tooluniverse.toolspace_validator.rst
@@ -59,7 +59,7 @@ msgstr ""
 
 #: 3ac31dde822d48e8a07186113d5e160c of
 #: tooluniverse.toolspace_validator.validate_toolspace_config:3
-msgid "Configuration dictionary or ToolSpaceConfig object"
+msgid "Configuration dictionary or SpaceConfig object"
 msgstr ""
 
 #: ../../api/tooluniverse.toolspace_validator.rst
@@ -127,7 +127,7 @@ msgstr ""
 
 #: f9d48d50b743479cb146b2786d63fc15 of
 #: tooluniverse.toolspace_validator.validate_file:1
-msgid "Validate a ToolSpace configuration file."
+msgid "Validate a Space configuration file."
 msgstr ""
 
 #: 949dc8604a2349b69683662dd49c45e7 of

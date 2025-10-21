@@ -118,7 +118,7 @@ class CompassTool:
             exclude (List[str]): List of column names to exclude from results.
                                Defaults to ['CANCER', 'Reference'].
 
-        Returns:
+        Returns
             List[List[Tuple[str, float]]]: For each sample, a list of tuples containing
                                          (concept_name, concept_score) sorted by score descending.
         """
@@ -161,7 +161,7 @@ class CompassTool:
             batch_size (int): Batch size for model inference. Larger values may improve speed
                             but require more memory. Defaults to 128.
 
-        Returns:
+        Returns
             Tuple[bool, List[Tuple[str, float]]]: A tuple containing:
                 - bool: True if predicted as responder (probability ≥ threshold), False otherwise
                 - List[Tuple[str, float]]: Top immune cell concepts ranked by importance,
@@ -222,7 +222,7 @@ async def run_compass_prediction(
                          Default 0.5 provides balanced sensitivity/specificity.
                          Consider lower thresholds (~0.3) for higher sensitivity.
 
-    Returns:
+    Returns
         dict: Structured prediction results containing:
             - 'prediction' (dict): Core prediction results with:
                 * 'is_responder' (bool): True if predicted responder (probability ≥ threshold)

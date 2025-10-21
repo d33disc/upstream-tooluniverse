@@ -2080,13 +2080,13 @@ msgstr "成功加载的工具数量"
 #: 7291dbfdba084f569fe73a7c4917bd9d of
 #: tooluniverse.execute_function.ToolUniverse.load_toolspace:1
 #, fuzzy
-msgid "Load ToolSpace configuration and apply it to the ToolUniverse instance."
+msgid "Load Space configuration and apply it to the ToolUniverse instance."
 msgstr "将MCP工具从远程服务器加载到此ToolUniverse实例中。"
 
 #: b0ab0f4e05734d1ea55c28617c079999 of
 #: tooluniverse.execute_function.ToolUniverse.load_toolspace:3
 msgid ""
-"This is a high-level method that loads a ToolSpace configuration from "
+"This is a high-level method that loads a Space configuration from "
 "various sources (HuggingFace, GitHub, local files, etc.) and applies the "
 "tool settings to the current instance."
 msgstr ""
@@ -2094,21 +2094,21 @@ msgstr ""
 #: ca5ecaaaeb61492d926c8eb6d2dad900 of
 #: tooluniverse.execute_function.ToolUniverse.load_toolspace:7
 msgid ""
-"ToolSpace URI (e.g., \"drug-discovery\", \"hf:user/repo\", "
+"Space URI (e.g., \"drug-discovery\", \"hf:user/repo\", "
 "\"./config.yaml\")"
 msgstr ""
 
 #: cea8b3f4de8c42759ad6faa92c709d76 of
 #: tooluniverse.execute_function.ToolUniverse.load_toolspace:8
 msgid ""
-"Additional parameters to override ToolSpace configuration (e.g., "
+"Additional parameters to override Space configuration (e.g., "
 "exclude_tools=[\"tool1\"], include_tools=[\"tool2\"])"
 msgstr ""
 
 #: c0419817ae5f4e7b87035fe32ff691c7 of
 #: tooluniverse.execute_function.ToolUniverse.load_toolspace:11
 #, fuzzy
-msgid "The loaded ToolSpace configuration"
+msgid "The loaded Space configuration"
 msgstr "已加载工具配置列表"
 
 #: db97d30949c34d08ae96bee43939e307 of

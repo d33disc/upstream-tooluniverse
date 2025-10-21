@@ -252,7 +252,7 @@ def get_shared_client(
                         shared instance already exists, these parameters are
                         ignored.
 
-    Returns:
+    Returns
         ToolUniverse: The client instance to use for tool execution
 
     Thread Safety:
@@ -264,7 +264,7 @@ def get_shared_client(
         of the shared instance. Subsequent calls with different parameters
         will not affect the already-created instance.
 
-    Examples:
+    Examples
         # Basic usage
         client = get_shared_client()
 
@@ -313,7 +313,7 @@ def reset_shared_client():
         may cause unexpected behavior. It's recommended to only call this
         function when you're certain no other threads are accessing the client.
 
-    Examples:
+    Examples
         # Reset for testing
         reset_shared_client()
 

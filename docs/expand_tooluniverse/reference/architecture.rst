@@ -277,7 +277,7 @@ Next Steps
 * 📚 **Tutorials**: Learn how to use ToolUniverse
 * 🔧 **Development**: Learn how to develop tools
 * 🎁 **Contributing**: Learn how to contribute to ToolUniverse
-* 🔍 **Comparison**: Compare different tool types
+* 🔍 **Comparison**: Review the tool type comparison table in :doc:`../contributing/index`
 
 .. tip::
    **Understanding the Architecture**: This document provides a high-level overview. For specific implementation details, refer to the source code and API documentation.

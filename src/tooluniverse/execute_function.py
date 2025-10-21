@@ -357,36 +357,102 @@ class ToolUniverse:
         # Initialize dynamic tools namespace
         self.tools = ToolNamespace(self)
 
-    def register_custom_tool(self, tool_class, tool_name=None, tool_config=None):
+    def register_custom_tool(
+        self,
+        tool_class,
+        tool_name=None,
+        tool_config=None,
+        instantiate=False,
+        tool_instance=None,
+    ):
         """
-        Register a custom tool class at runtime.
+        Register a custom tool class or instance at runtime.
 
         Args:
-            tool_class: The tool class to register
+            tool_class: The tool class to register (required if tool_instance is None)
             tool_name (str, optional): Name to register under. Uses class name if None.
             tool_config (dict, optional): Tool configuration dictionary to add to all_tools
+            instantiate (bool, optional): If True, immediately instantiate and cache the tool.
+                                         Defaults to False for backward compatibility.
+            tool_instance (optional): Pre-instantiated tool object. If provided, tool_class
+                                     is inferred from the instance.
 
         Returns:
             str: The name the tool was registered under
+
+        Examples:
+            # Register tool class only (lazy instantiation)
+            tu.register_custom_tool(MyTool, tool_config={...})
+
+            # Register and immediately instantiate
+            tu.register_custom_tool(MyTool, tool_config={...}, instantiate=True)
+
+            # Register pre-instantiated tool
+            instance = MyTool({...})
+            tu.register_custom_tool(tool_class=MyTool, tool_instance=instance, tool_config={...})
         """
+        # If tool_instance is provided, infer tool_class from it
+        if tool_instance is not None:
+            tool_class = tool_instance.__class__
+        elif tool_class is None:
+            raise ValueError("Either tool_class or tool_instance must be provided")
+
         name = tool_name or tool_class.__name__
 
-        # Register the tool class
+        # Register the tool class to global registry
         register_external_tool(name, tool_class)
 
         # Update the global tool_type_mappings
         global tool_type_mappings
         tool_type_mappings = get_tool_registry()
 
-        # If tool_config is provided, add it to all_tools
+        # Process tool_config if provided
         if tool_config:
             # Ensure the config has the correct type
             if "type" not in tool_config:
                 tool_config["type"] = name
 
             self.all_tools.append(tool_config)
-            if "name" in tool_config:
-                self.all_tool_dict[tool_config["name"]] = tool_config
+            tool_name_in_config = tool_config.get("name", name)
+            self.all_tool_dict[tool_name_in_config] = tool_config
+
+            # Handle tool instantiation
+            if tool_instance is not None:
+                # Use provided instance
+                self.callable_functions[tool_name_in_config] = tool_instance
+                self.logger.debug(
+                    f"Registered pre-instantiated tool '{tool_name_in_config}'"
+                )
+            elif instantiate:
+                # Instantiate now
+                try:
+                    # Use the same logic as _get_or_initialize_tool (line 2318)
+                    # Try to instantiate with tool_config parameter
+                    try:
+                        instance = tool_class(
+                            tool_config=tool_config
+                        )  # ✅ 使用关键字参数
+                    except TypeError:
+                        # If tool doesn't accept tool_config, try without parameters
+                        instance = tool_class()
+
+                    self.callable_functions[tool_name_in_config] = instance
+                    self.logger.debug(
+                        f"Instantiated and cached tool '{tool_name_in_config}'"
+                    )
+                except Exception as e:
+                    self.logger.error(
+                        f"Failed to instantiate tool '{tool_name_in_config}': {e}"
+                    )
+                    raise
+            # else: lazy instantiation (existing behavior)
+
+            # Add to category for proper organization
+            category = tool_config.get("category", "custom")
+            if category not in self.tool_category_dicts:
+                self.tool_category_dicts[category] = []
+            if tool_name_in_config not in self.tool_category_dicts[category]:
+                self.tool_category_dicts[category].append(tool_name_in_config)
 
         self.logger.info(f"Custom tool '{name}' registered successfully!")
         return name
@@ -922,7 +988,9 @@ class ToolUniverse:
             for _tool_type, config in discovered_configs.items():
                 # Add to all_tools if not already present
                 if "name" in config and config["name"] not in [
-                    tool.get("name") for tool in self.all_tools
+                    tool.get("name")
+                    for tool in self.all_tools
+                    if isinstance(tool, dict)
                 ]:
                     self.all_tools.append(config)
                     self.logger.debug(f"Added auto-discovered config: {config['name']}")
@@ -2881,3 +2949,217 @@ class ToolUniverse:
         original_count = len(self.all_tools)
         self.load_tools(include_tools=tool_names)
         return len(self.all_tools) - original_count
+
+    def load_space(self, uri: str, **kwargs) -> Dict[str, Any]:
+        """
+        Load Space configuration and apply it to the ToolUniverse instance.
+
+        This is a high-level method that loads a Space configuration from various
+        sources (HuggingFace, local files, HTTP URLs) and applies the tool settings
+        to the current instance.
+
+        Args:
+            uri: Space URI (e.g., "hf:user/repo", "./config.yaml", "https://example.com/config.yaml")
+            **kwargs: Additional parameters to override Space configuration
+                     (e.g., exclude_tools=["tool1"], include_tools=["tool2"])
+
+        Returns:
+            dict: The loaded Space configuration
+
+        Examples:
+            # Load from HuggingFace
+            config = tu.load_space("hf:community/proteomics-toolkit")
+
+            # Load local file with overrides
+            config = tu.load_space("./my-config.yaml", exclude_tools=["slow_tool"])
+
+            # Load from HTTP URL
+            config = tu.load_space("https://example.com/config.yaml")
+        """
+        # Lazy import to avoid circular import issues
+        from .space import SpaceLoader
+
+        # Load Space configuration
+        loader = SpaceLoader()
+        config = loader.load(uri)
+
+        # Extract tool configuration
+        tools_config = config.get("tools", {})
+
+        # Merge with override parameters
+        tool_type = kwargs.get("tool_type") or tools_config.get("categories")
+        exclude_tools = kwargs.get("exclude_tools") or tools_config.get(
+            "exclude_tools", []
+        )
+        exclude_categories = kwargs.get("exclude_categories") or tools_config.get(
+            "exclude_categories", []
+        )
+        include_tools = kwargs.get("include_tools") or tools_config.get(
+            "include_tools", []
+        )
+        include_tool_types = kwargs.get("include_tool_types") or tools_config.get(
+            "include_tool_types", []
+        )
+        exclude_tool_types = kwargs.get("exclude_tool_types") or tools_config.get(
+            "exclude_tool_types", []
+        )
+
+        # Load tools with merged configuration
+        self.load_tools(
+            tool_type=tool_type,
+            exclude_tools=exclude_tools,
+            exclude_categories=exclude_categories,
+            include_tools=include_tools,
+            include_tool_types=include_tool_types,
+            exclude_tool_types=exclude_tool_types,
+        )
+
+        # Store the configuration for reference
+        self._current_space_config = config
+
+        # Apply additional configurations (LLM, hooks, etc.)
+        try:
+            # Apply LLM configuration if present
+            llm_config = config.get("llm_config")
+            if llm_config:
+                self._apply_llm_config(llm_config)
+
+            # Apply hooks configuration if present
+            hooks_config = config.get("hooks")
+            if hooks_config:
+                self._apply_hooks_config(hooks_config)
+
+            # Store metadata
+            self._store_space_metadata(config)
+
+        except Exception as e:
+            # Use print since logging might not be available
+            print(f"⚠️  Failed to apply Space configurations: {e}")
+
+        return config
+
+    def _apply_llm_config(self, llm_config: Dict[str, Any]):
+        """
+        Apply LLM configuration from Space.
+
+        Args:
+            llm_config: LLM configuration dictionary
+        """
+        try:
+            import os
+
+            # Store LLM configuration
+            self._space_llm_config = llm_config
+
+            # Set environment variables for LLM configuration
+            # Set configuration mode
+            mode = llm_config.get("mode", "default")
+            os.environ["TOOLUNIVERSE_LLM_CONFIG_MODE"] = mode
+
+            # Set default provider
+            if "default_provider" in llm_config:
+                os.environ["TOOLUNIVERSE_LLM_DEFAULT_PROVIDER"] = llm_config[
+                    "default_provider"
+                ]
+
+            # Set model mappings
+            models = llm_config.get("models", {})
+            for task, model in models.items():
+                env_var = f"TOOLUNIVERSE_LLM_MODEL_{task.upper()}"
+                os.environ[env_var] = model
+
+            # Set temperature
+            temperature = llm_config.get("temperature")
+            if temperature is not None:
+                os.environ["TOOLUNIVERSE_LLM_TEMPERATURE"] = str(temperature)
+
+            # Note: max_tokens is handled by LLM client automatically, not needed here
+
+            print(
+                f"🤖 LLM configuration applied: {llm_config.get('default_provider', 'unknown')}"
+            )
+
+        except Exception as e:
+            print(f"⚠️  Failed to apply LLM configuration: {e}")
+
+    def _apply_hooks_config(self, hooks_config: List[Dict[str, Any]]):
+        """
+        Apply hooks configuration from Space.
+
+        Args:
+            hooks_config: Hooks configuration list
+        """
+        try:
+            # Convert Space hooks format to ToolUniverse hook_config format
+            hook_config = {
+                "hooks": hooks_config,
+                "global_settings": {
+                    "default_timeout": 30,
+                    "max_hook_depth": 3,
+                    "enable_hook_caching": True,
+                    "hook_execution_order": "priority_desc",
+                },
+            }
+
+            # Enable hooks if not already enabled
+            if not self.hooks_enabled:
+                self.toggle_hooks(True)
+
+            # Update hook manager configuration
+            if self.hook_manager:
+                self.hook_manager.config = hook_config
+                self.hook_manager._load_hooks()
+                print(f"🔗 Hooks configuration applied: {len(hooks_config)} hooks")
+            else:
+                print("⚠️  Hook manager not available")
+
+        except Exception as e:
+            print(f"⚠️  Failed to apply hooks configuration: {e}")
+
+    def _store_space_metadata(self, config: Dict[str, Any]):
+        """
+        Store Space metadata for reference.
+
+        Args:
+            config: Space configuration dictionary
+        """
+        try:
+            # Store metadata
+            self._space_metadata = {
+                "name": config.get("name"),
+                "version": config.get("version"),
+                "description": config.get("description"),
+                "tags": config.get("tags", []),
+                "required_env": config.get("required_env", []),
+            }
+
+            # Check for missing environment variables
+            if config.get("required_env"):
+                import os
+
+                missing_env = [
+                    env for env in config["required_env"] if not os.getenv(env)
+                ]
+                if missing_env:
+                    print(f"⚠️  Missing environment variables: {', '.join(missing_env)}")
+
+        except Exception as e:
+            print(f"⚠️  Failed to store Space metadata: {e}")
+
+    def get_space_llm_config(self) -> Optional[Dict[str, Any]]:
+        """
+        Get the current Space LLM configuration.
+
+        Returns:
+            LLM configuration dictionary or None if not set
+        """
+        return getattr(self, "_space_llm_config", None)
+
+    def get_space_metadata(self) -> Optional[Dict[str, Any]]:
+        """
+        Get the current Space metadata.
+
+        Returns:
+            Space metadata dictionary or None if not set
+        """
+        return getattr(self, "_space_metadata", None)

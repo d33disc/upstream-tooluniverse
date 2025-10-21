@@ -403,13 +403,26 @@ run_stdio_server()
             process.stdin.write(json.dumps(invalid_request) + "\n")
             process.stdin.flush()
             
-            # Read error response
-            response = process.stdout.readline()
-            assert response.strip()
+            # Read responses until we find an error response
+            error_found = False
+            for _ in range(10):  # Read up to 10 lines
+                response = process.stdout.readline()
+                if not response:
+                    break
+                    
+                if response.strip():
+                    try:
+                        response_data = json.loads(response.strip())
+                        if "error" in response_data:
+                            error_found = True
+                            break
+                        # Skip notifications and other non-error responses
+                        elif response_data.get("method") == "notifications/message":
+                            continue
+                    except json.JSONDecodeError:
+                        continue
             
-            # Parse response - should be an error
-            response_data = json.loads(response.strip())
-            assert "error" in response_data
+            assert error_found, "No error response found in server output"
             
         finally:
             # Clean up

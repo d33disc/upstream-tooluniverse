@@ -161,7 +161,7 @@ class ToolFinderEmbedding(BaseTool):
             query (str): User query or description of desired functionality
             top_k (int, optional): Number of top tools to return. Defaults to 5.
 
-        Returns:
+        Returns
             list: List of top-k tool names ranked by relevance to the query
 
         Raises:
@@ -203,7 +203,7 @@ class ToolFinderEmbedding(BaseTool):
             return_call_result (bool, optional): If True, returns both prompts and tool names. Defaults to False.
             categories (list, optional): List of tool categories to filter by. Currently not implemented for embedding-based search.
 
-        Returns:
+        Returns
             str or tuple:
                 - If return_call_result is False: Tool prompts as a formatted string
                 - If return_call_result is True: Tuple of (tool_prompts, tool_names)

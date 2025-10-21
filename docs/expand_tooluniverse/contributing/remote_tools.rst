@@ -246,7 +246,7 @@ Create ``tests/integration/test_my_remote_tool.py``:
            mock_post.return_value = mock_response
 
            # Test tool execution
-           result = self.tu.run_one_function({
+           result = self.tu.run({
                "name": "my_remote_tool",
                "arguments": {
                    "input_text": "hello",
@@ -269,7 +269,7 @@ Create ``tests/integration/test_my_remote_tool.py``:
            mock_response.status_code = 400
            mock_post.return_value = mock_response
 
-           result = self.tu.run_one_function({
+           result = self.tu.run({
                "name": "my_remote_tool",
                "arguments": {
                    "input_text": "hello",
@@ -361,7 +361,7 @@ Create ``examples/my_remote_tool_example.py``:
        for i, test_case in enumerate(test_cases, 1):
            print(f"\nTest {i}: {test_case}")
            
-           result = tu.run_one_function({
+           result = tu.run({
                "name": "my_remote_tool",
                "arguments": test_case
            })
@@ -514,7 +514,7 @@ After successfully contributing your remote tool:
 * 🏠 **Local Tools**: :doc:`local_tools` - Learn about contributing local tools
 * 📚 **MCP Server Development**: :doc:`../remote_tools/mcp_server` - Advanced MCP server patterns
 * 🔍 **Architecture**: :doc:`../reference/architecture` - Understand ToolUniverse internals
-* 📊 **Comparison**: :doc:`../reference/comparison` - Compare tool types and usage scenarios
+* 📊 **Comparison**: Review the tool type comparison table in :doc:`../contributing/index`
 
 .. tip::
    **Success Tips**: Start with simple servers, test thoroughly with real deployments, and provide clear documentation for users to run your service!

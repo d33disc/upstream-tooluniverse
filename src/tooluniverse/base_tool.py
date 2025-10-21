@@ -38,7 +38,7 @@ class BaseTool:
 
         Override this method in subclasses to specify a custom defaults file.
 
-        Returns:
+        Returns
             Path or resource object pointing to the defaults file
         """
         tool_type = cls.__name__
@@ -154,7 +154,7 @@ class BaseTool:
     def get_required_parameters(self):
         """
         Retrieve required parameters from the endpoint definition.
-        Returns:
+        Returns
         list: List of required parameters for the given endpoint.
         """
         schema = self.tool_config.get("parameter", {})
@@ -172,7 +172,7 @@ class BaseTool:
         Args:
             arguments: Dictionary of arguments to validate
 
-        Returns:
+        Returns
             ToolError if validation fails, None if validation passes
         """
         schema = self.tool_config.get("parameter", {})
@@ -207,7 +207,7 @@ class BaseTool:
         Args:
             exception: The raw exception to classify
 
-        Returns:
+        Returns
             Structured ToolError instance
         """
         error_str = str(exception).lower()
@@ -261,7 +261,7 @@ class BaseTool:
         Args:
             arguments: Dictionary of arguments for the tool call
 
-        Returns:
+        Returns
             String cache key
         """
         # Include tool name and arguments in cache key
@@ -276,7 +276,7 @@ class BaseTool:
         """
         Check if this tool supports streaming responses.
 
-        Returns:
+        Returns
             True if tool supports streaming, False otherwise
         """
         return self.tool_config.get("supports_streaming", False)
@@ -285,7 +285,7 @@ class BaseTool:
         """
         Check if this tool's results can be cached.
 
-        Returns:
+        Returns
             True if tool results can be cached, False otherwise
         """
         return self.tool_config.get("cacheable", True)
@@ -337,7 +337,7 @@ class BaseTool:
         """
         Get comprehensive information about this tool.
 
-        Returns:
+        Returns
             Dictionary containing tool metadata
         """
         return {

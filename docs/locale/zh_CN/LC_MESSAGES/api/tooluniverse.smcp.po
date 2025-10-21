@@ -825,7 +825,7 @@ msgstr "返回类型"
 
 #: 68f61ee2134a4506911118ba4adc3178 of
 #: tooluniverse.smcp.SMCP._load_toolspace_configs:1
-msgid "Load ToolSpace configurations and apply them to the ToolUniverse instance."
+msgid "Load Space configurations and apply them to the ToolUniverse instance."
 msgstr ""
 
 #: 07b0488b560e4e72b3da289ea22a7299 b8995581c720490eb669acdef2e5fd47 of
@@ -836,18 +836,18 @@ msgstr "参数："
 
 #: cdcb86add80d45399203346d14842a7f of
 #: tooluniverse.smcp.SMCP._load_toolspace_configs:3
-msgid "ToolSpace URI(s) to load. Can be a single string or list of strings."
+msgid "Space URI(s) to load. Can be a single string or list of strings."
 msgstr ""
 
 #: b697c8014dc54527ab40d10fbdaee5e2 of
 #: tooluniverse.smcp.SMCP._apply_toolspace_config:1
 #, fuzzy
-msgid "Apply a ToolSpace configuration to the ToolUniverse instance."
+msgid "Apply a Space configuration to the ToolUniverse instance."
 msgstr "tooluniverse_config：预配置的 ToolUniverse 实例"
 
 #: fdecd178d84a43588f470c33d6d1a604 of
 #: tooluniverse.smcp.SMCP._apply_toolspace_config:3
-msgid "ToolSpace configuration dictionary"
+msgid "Space configuration dictionary"
 msgstr ""
 
 #: 4471971b8e554bb6b8b7beffb1dee966 of

@@ -55,7 +55,7 @@ class ADMETAITool(BaseTool):
         Args:
             smiles: The SMILES string(s) of the molecule(s).
 
-        Returns:
+        Returns
             A dictionary mapping each SMILES string to a subdictionary of
             selected ADMET properties and their predicted values.
         """

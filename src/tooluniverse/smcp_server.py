@@ -37,6 +37,31 @@ Examples:
 
   # Start with custom hook configuration
   tooluniverse-smcp-server --hook-config-file /path/to/hook_config.json
+
+  # Load Space configuration
+  tooluniverse-smcp-server --load "community/proteomics-toolkit"
+  tooluniverse-smcp-server --load "./my-config.yaml"
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -106,9 +131,10 @@ Examples:
 
         print()
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             auto_expose_tools=True,
             search_enabled=True,
             max_workers=5,
@@ -157,47 +183,73 @@ def run_stdio_server():
         epilog="""
 Examples:
   # Start server with all tools using stdio transport (hooks enabled by default)
-  tooluniverse-stdio
+  tooluniverse-smcp-stdio
 
   # Start with specific categories
-  tooluniverse-stdio --categories uniprot ChEMBL opentarget
+  tooluniverse-smcp-stdio --categories uniprot ChEMBL opentarget
 
   # Enable hooks
-  tooluniverse-stdio --hooks
+  tooluniverse-smcp-stdio --hooks
 
   # Use FileSaveHook instead of SummarizationHook
-  tooluniverse-stdio --hook-type FileSaveHook
+  tooluniverse-smcp-stdio --hook-type FileSaveHook
 
   # Use custom hook configuration
-  tooluniverse-stdio --hook-config-file /path/to/hook_config.json
+  tooluniverse-smcp-stdio --hook-config-file /path/to/hook_config.json
 
   # Start with categories but exclude specific tools
-  tooluniverse-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-smcp-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
 
   # Start with all tools but exclude entire categories
-  tooluniverse-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
+  tooluniverse-smcp-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
 
   # Load only specific tools by name
-  tooluniverse-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-smcp-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
 
   # Load tools from a file
-  tooluniverse-stdio --tools-file "/path/to/tool_names.txt"
+  tooluniverse-smcp-stdio --tools-file "/path/to/tool_names.txt"
 
   # Load additional config files
-  tooluniverse-stdio --tool-config-files "custom:/path/to/custom_tools.json"
+  tooluniverse-smcp-stdio --tool-config-files "custom:/path/to/custom_tools.json"
 
   # Include/exclude specific tool types
-  tooluniverse-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
-  tooluniverse-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
+  tooluniverse-smcp-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
+  tooluniverse-smcp-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
 
   # List available categories
-  tooluniverse-stdio --list-categories
+  tooluniverse-smcp-stdio --list-categories
 
   # List all available tools
-  tooluniverse-stdio --list-tools
+  tooluniverse-smcp-stdio --list-tools
 
   # Start minimal server with just search tools
-  tooluniverse-stdio --categories special_tools tool_finder
+  tooluniverse-smcp-stdio --categories special_tools tool_finder
+
+  # Load Space configuration
+  tooluniverse-smcp-stdio --load "hf:community/proteomics-toolkit"
+  tooluniverse-smcp-stdio --load "./my-config.yaml"
+  tooluniverse-smcp-stdio --load "https://example.com/config.yaml"
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -509,9 +561,10 @@ Examples:
         print(f"⚡ Max workers: {args.max_workers}", file=sys.stderr)
         print(file=sys.stderr)
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space and tool configuration support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -589,6 +642,31 @@ Examples:
 
   # Start server for Claude Desktop (stdio transport)
   tooluniverse-smcp --transport stdio
+
+  # Load Space configuration
+  tooluniverse-smcp --load "community/proteomics-toolkit" --port 8000
+  tooluniverse-smcp --load "./my-config.yaml" --transport stdio
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -874,9 +952,10 @@ Examples:
         print(f"⚡ Max workers: {args.max_workers}")
         print()
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space and hook support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,

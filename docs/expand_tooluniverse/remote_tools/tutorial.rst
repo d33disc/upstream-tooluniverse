@@ -1,422 +1,330 @@
 Remote Tools Tutorial
 =====================
 
-Learn how to create and integrate remote tools with ToolUniverse. Remote tools run on separate servers and are accessed via MCP (Model Context Protocol) or REST APIs.
-
-.. note::
-   💡 **Self-Use**: This tutorial covers using remote tools in your own projects.
-   
-   🚀 **Contributing**: If you want to contribute remote tools to the ToolUniverse repository, see :doc:`../contributing/remote_tools` for additional steps.
+Learn how to create and integrate remote tools with ToolUniverse using the `@register_mcp_tool` decorator. Remote tools run on separate servers and are automatically discovered and loaded via configuration files.
 
 What are Remote Tools?
 ----------------------
 
-Remote tools allow you to integrate external services, APIs, or tools running on different servers. They provide:
+Remote tools are Python classes decorated with `@register_mcp_tool` that run on separate servers and are accessed via MCP (Model Context Protocol). They provide:
 
 - **Scalability**: Offload heavy computation to dedicated servers
-- **Integration**: Connect with existing systems and services
+- **Integration**: Connect with existing systems and services  
 - **Flexibility**: Use tools in different programming languages
 - **Isolation**: Keep sensitive operations separate
+- **Auto-Discovery**: Automatic loading via configuration files
 
 **Best for:**
 - External API integrations
-- Microservice connections
+- Machine learning models with heavy dependencies
 - Cloud-based AI services
 - Proprietary system connections
+- Tools requiring specialized hardware
 
-Quick Start with MCP
---------------------
+Quick Checklist
+---------------
 
-Here's the fastest way to integrate a remote tool using MCP (Model Context Protocol):
+**How to create a remote tool:**
 
-.. code-block:: python
+1. **Create Python class** with `@register_mcp_tool` decorator
+2. **Implement `run()` method** with your tool logic
+3. **Start MCP server** using `start_mcp_server()`
+4. **Configure ToolUniverse** to load the remote tool
+5. **Use remote tools** via ToolUniverse's standard interface
 
-   # Configure MCP tools in your ToolUniverse setup
-   from tooluniverse import ToolUniverse
-   from tooluniverse.mcp_tool_registry import load_mcp_tools_to_tooluniverse
+Step 1: Create Your Remote Tool
+-------------------------------
 
-   # Initialize ToolUniverse
-   tu = ToolUniverse()
-
-   # Load MCP tools from a remote server
-   load_mcp_tools_to_tooluniverse(
-       tu,
-       mcp_server_url="http://localhost:8000",
-       tool_prefix="remote_"
-   )
-
-   # Use remote tools
-   result = tu.run_one_function({
-       "name": "remote_complex_analysis",
-       "arguments": {"data": [1, 2, 3, 4, 5]}
-   })
-
-MCP (Model Context Protocol) Integration
-----------------------------------------
-
-MCP is the recommended way to integrate remote tools with ToolUniverse. It provides a standardized protocol for tool communication.
-
-Setting up an MCP Server
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create a simple MCP server:
+Create a Python class with the `@register_mcp_tool` decorator:
 
 .. code-block:: python
 
-   # mcp_server.py
-   from fastapi import FastAPI
-   from tooluniverse.smcp import SMCP
-   import uvicorn
+   from tooluniverse.mcp_tool_registry import register_mcp_tool, start_mcp_server
+   from typing import Dict, Any
 
-   app = FastAPI()
-   mcp = SMCP()
-
-   @mcp.tool("complex_analysis")
-   def complex_analysis(data: list) -> dict:
-       """Perform complex analysis on data."""
-       # Heavy computation here
-       result = sum(data) * 2  # Simplified example
-       return {"analysis_result": result, "data_points": len(data)}
-
-   @mcp.tool("weather_forecast")
-   def weather_forecast(city: str, days: int = 7) -> dict:
-       """Get weather forecast for a city."""
-       # Simulate API call
-       return {
-           "city": city,
-           "forecast": [{"day": i, "temp": 20 + i, "condition": "sunny"} for i in range(days)]
+   @register_mcp_tool(
+       tool_type_name="remote_text_processor",
+       config={
+           "description": "Processes text using remote computation",
+           "parameter_schema": {
+               "type": "object",
+               "properties": {
+                   "text": {"type": "string", "description": "Text to process"},
+                   "operation": {
+                       "type": "string", 
+                       "enum": ["uppercase", "lowercase", "reverse"],
+                       "description": "Operation to perform"
+                   }
+               },
+               "required": ["text"]
+           }
+       },
+       mcp_config={
+           "server_name": "Text Processing Server",
+           "host": "0.0.0.0",
+           "port": 8001
        }
+   )
+   class RemoteTextProcessor:
+       """Processes text using remote computation resources."""
+       
+       def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+           """Execute text processing."""
+           text = arguments.get("text", "")
+           operation = arguments.get("operation", "uppercase")
+           
+           # Your processing logic here
+           if operation == "uppercase":
+               result = text.upper()
+           elif operation == "lowercase":
+               result = text.lower()
+           elif operation == "reverse":
+               result = text[::-1]
+           else:
+               result = text
+           
+           return {
+               "result": result,
+               "operation": operation,
+               "success": True
+           }
 
-   # Mount MCP endpoints
-   app.mount("/mcp", mcp.app)
-
+   # Start the MCP server
    if __name__ == "__main__":
-       uvicorn.run(app, host="0.0.0.0", port=8000)
+       start_mcp_server()
 
-Connecting to MCP Servers
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 2: Configure ToolUniverse to Load Remote Tools
+---------------------------------------------------
 
-Connect to remote MCP servers from ToolUniverse:
+Create a configuration file to automatically load your remote tool:
+
+**Create `remote_tools_config.json`:**
+
+.. code-block:: json
+
+   [
+       {
+           "name": "mcp_auto_loader_text_processor",
+           "description": "Automatically discover and load text processing tools from MCP Server",
+           "type": "MCPAutoLoaderTool",
+           "tool_prefix": "remote_",
+           "server_url": "http://localhost:8001/mcp",
+           "required_api_keys": []
+       }
+   ]
+
+**Alternative: Use `tu.tools` attribute:**
+
+.. code-block:: python
+
+   # Direct tool access (if tool is loaded)
+   result = tu.tools.remote_text_processor(
+       text="Hello World",
+       operation="uppercase"
+   )
+   print(result)
+
+**Load the configuration in ToolUniverse:**
 
 .. code-block:: python
 
    from tooluniverse import ToolUniverse
-   from tooluniverse.mcp_tool_registry import load_mcp_tools_to_tooluniverse
 
    # Initialize ToolUniverse
    tu = ToolUniverse()
 
-   # Load tools from multiple MCP servers
-   load_mcp_tools_to_tooluniverse(
-       tu,
-       mcp_server_url="http://localhost:8000",
-       tool_prefix="local_",
-       auth_token="your-api-token"
+   # Load remote tools from configuration
+   tu.load_tools(tool_config_files={"remote_tools": "remote_tools_config.json"})
+
+   # Use remote tools like any other ToolUniverse tool
+   result = tu.run({
+       "name": "remote_text_processor",
+       "arguments": {
+           "text": "Hello World",
+           "operation": "uppercase"
+       }
+   })
+   print(result)
+
+Step 3: Advanced Configuration
+------------------------------
+
+**Multiple Tools on Same Server:**
+
+You can register multiple tools on the same MCP server:
+
+.. code-block:: python
+
+   @register_mcp_tool(
+       tool_type_name="remote_data_analyzer",
+       config={"description": "Analyzes data using remote resources"},
+       mcp_config={"port": 8001}  # Same port as text processor
    )
+   class RemoteDataAnalyzer:
+       def run(self, arguments):
+           # Analysis logic
+           return {"analysis": "complete"}
 
-   load_mcp_tools_to_tooluniverse(
-       tu,
-       mcp_server_url="https://remote-server.com/mcp",
-       tool_prefix="cloud_",
-       auth_token="cloud-api-token"
+   @register_mcp_tool(
+       tool_type_name="remote_model_predictor", 
+       config={"description": "Makes predictions using remote ML models"},
+       mcp_config={"port": 8001}  # Same port
    )
-
-   # Use tools from different servers
-   result1 = tu.run_one_function({
-       "name": "local_complex_analysis",
-       "arguments": {"data": [1, 2, 3]}
-   })
-
-   result2 = tu.run_one_function({
-       "name": "cloud_weather_forecast",
-       "arguments": {"city": "New York", "days": 5}
-   })
-
-REST API Integration
---------------------
-
-For simple REST API integration, create wrapper tools:
-
-Basic REST API Wrapper
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   from tooluniverse.tool_registry import register_tool
-   import requests
-
-   @register_tool('RESTAPITool', config={
-       "name": "rest_api_call",
-       "type": "RESTAPITool",
-       "description": "Make REST API calls to external services",
-       "parameter": {
-           "type": "object",
-           "properties": {
-               "url": {"type": "string", "description": "API endpoint URL"},
-               "method": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"], "default": "GET"},
-               "headers": {"type": "object", "description": "HTTP headers"},
-               "data": {"type": "object", "description": "Request body data"},
-               "params": {"type": "object", "description": "URL parameters"}
-           },
-           "required": ["url"]
-       },
-       "settings": {
-           "default_timeout": 30,
-           "max_retries": 3
-       }
-   })
-   class RESTAPITool:
-       def __init__(self, tool_config=None):
-           self.tool_config = tool_config or {}
-           self.default_timeout = self.tool_config.get("settings", {}).get("default_timeout", 30)
-           self.max_retries = self.tool_config.get("settings", {}).get("max_retries", 3)
-
+   class RemoteModelPredictor:
        def run(self, arguments):
-           try:
-               url = arguments["url"]
-               method = arguments.get("method", "GET").upper()
-               headers = arguments.get("headers", {})
-               data = arguments.get("data", {})
-               params = arguments.get("params", {})
+           # Prediction logic
+           return {"prediction": "result"}
 
-               response = requests.request(
-                   method=method,
-                   url=url,
-                   headers=headers,
-                   json=data if method in ["POST", "PUT"] else None,
-                   params=params,
-                   timeout=self.default_timeout
-               )
+**Environment Variables:**
 
-               response.raise_for_status()
+Use environment variables for configuration:
 
-               return {
-                   "status_code": response.status_code,
-                   "data": response.json() if response.content else None,
-                   "headers": dict(response.headers),
-                   "success": True
-               }
-           except requests.RequestException as e:
-               return {"error": str(e), "success": False}
+.. code-block:: json
 
-Specialized API Wrappers
-------------------------
-
-OpenAI API Wrapper
-~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   @register_tool('OpenAITool', config={
-       "name": "openai_completion",
-       "type": "OpenAITool",
-       "description": "Generate text completions using OpenAI API",
-       "parameter": {
-           "type": "object",
-           "properties": {
-               "prompt": {"type": "string", "description": "Text prompt"},
-               "model": {"type": "string", "enum": ["gpt-3.5-turbo", "gpt-4"], "default": "gpt-3.5-turbo"},
-               "max_tokens": {"type": "integer", "minimum": 1, "maximum": 4000, "default": 100},
-               "temperature": {"type": "number", "minimum": 0, "maximum": 2, "default": 0.7}
-           },
-           "required": ["prompt"]
-       },
-       "settings": {
-           "api_key": "env:OPENAI_API_KEY",
-           "base_url": "https://api.openai.com/v1"
+   [
+       {
+           "name": "mcp_auto_loader_expert_feedback",
+           "description": "Load expert feedback tools",
+           "type": "MCPAutoLoaderTool",
+           "tool_prefix": "expert_",
+           "server_url": "http://${EXPERT_FEEDBACK_MCP_SERVER_URL}/mcp",
+           "required_api_keys": ["EXPERT_FEEDBACK_MCP_SERVER_URL"]
        }
-   })
-   class OpenAITool:
-       def __init__(self, tool_config=None):
-           self.tool_config = tool_config or {}
-           self.api_key = self.tool_config.get("settings", {}).get("api_key")
-           self.base_url = self.tool_config.get("settings", {}).get("base_url")
+   ]
 
-       def run(self, arguments):
-           try:
-               import openai
+**Tool Composition:**
 
-               openai.api_key = self.api_key
-
-               response = openai.ChatCompletion.create(
-                   model=arguments.get("model", "gpt-3.5-turbo"),
-                   messages=[{"role": "user", "content": arguments["prompt"]}],
-                   max_tokens=arguments.get("max_tokens", 100),
-                   temperature=arguments.get("temperature", 0.7)
-               )
-
-               return {
-                   "completion": response.choices[0].message.content,
-                   "usage": response.usage,
-                   "model": response.model,
-                   "success": True
-               }
-           except Exception as e:
-               return {"error": str(e), "success": False}
-
-Weather API Wrapper
-~~~~~~~~~~~~~~~~~~~
+Remote tools can be composed with local tools:
 
 .. code-block:: python
 
-   @register_tool('WeatherAPITool', config={
-       "name": "weather_api",
-       "type": "WeatherAPITool",
-       "description": "Get weather data from OpenWeatherMap API",
-       "parameter": {
-           "type": "object",
-           "properties": {
-               "city": {"type": "string", "description": "City name"},
-               "country_code": {"type": "string", "description": "Country code (e.g., 'US')"},
-               "units": {"type": "string", "enum": ["metric", "imperial", "kelvin"], "default": "metric"}
-           },
-           "required": ["city"]
-       },
-       "settings": {
-           "api_key": "env:OPENWEATHER_API_KEY",
-           "base_url": "https://api.openweathermap.org/data/2.5/weather"
-       }
-   })
-   class WeatherAPITool:
-       def __init__(self, tool_config=None):
-           self.tool_config = tool_config or {}
-           self.api_key = self.tool_config.get("settings", {}).get("api_key")
-           self.base_url = self.tool_config.get("settings", {}).get("base_url")
+   # Sequential execution
+   result1 = tu.run({"name": "remote_data_fetcher", "arguments": {...}})
+   result2 = tu.run({"name": "local_data_processor", "arguments": {...}})
 
-       def run(self, arguments):
-           try:
-               city = arguments["city"]
-               country_code = arguments.get("country_code")
-               units = arguments.get("units", "metric")
-
-               params = {
-                   "q": f"{city},{country_code}" if country_code else city,
-                   "appid": self.api_key,
-                   "units": units
-               }
-
-               response = requests.get(self.base_url, params=params)
-               response.raise_for_status()
-
-               data = response.json()
-
-               return {
-                   "city": data["name"],
-                   "country": data["sys"]["country"],
-                   "temperature": data["main"]["temp"],
-                   "feels_like": data["main"]["feels_like"],
-                   "humidity": data["main"]["humidity"],
-                   "pressure": data["main"]["pressure"],
-                   "description": data["weather"][0]["description"],
-                   "wind_speed": data["wind"]["speed"],
-                   "success": True
-               }
-           except Exception as e:
-               return {"error": str(e), "success": False}
-
-Testing Remote Tools
---------------------
-
-Unit Testing
-~~~~~~~~~~~~
-
-Test remote tools with mocked responses:
-
-.. code-block:: python
-
-   import pytest
-   from unittest.mock import patch, Mock
-
-   class TestRemoteAPITool:
-       @patch('requests.get')
-       def test_successful_request(self, mock_get):
-           mock_response = Mock()
-           mock_response.json.return_value = {"result": "success"}
-           mock_response.raise_for_status.return_value = None
-           mock_get.return_value = mock_response
-
-           tool = RESTAPITool()
-           result = tool.run({"url": "https://api.example.com/test"})
-
-           assert result["success"] is True
-           assert result["data"]["result"] == "success"
-
-       @patch('requests.get')
-       def test_request_failure(self, mock_get):
-           mock_get.side_effect = requests.RequestException("Connection error")
-
-           tool = RESTAPITool()
-           result = tool.run({"url": "https://api.example.com/test"})
-
-           assert result["success"] is False
-           assert "error" in result
-
-Integration Testing
-~~~~~~~~~~~~~~~~~~~
-
-Test with actual remote services:
-
-.. code-block:: python
-
-   def test_weather_api_integration():
-       tool = WeatherAPITool()
-       result = tool.run({"city": "London"})
-
-       assert result["success"] is True
-       assert "temperature" in result
-       assert "city" in result
+   # Parallel execution (using list format)
+   results = tu.run([
+       {"name": "remote_ml_model", "arguments": {...}},
+       {"name": "remote_api_call", "arguments": {...}}
+   ])
 
 Troubleshooting
 ---------------
 
-Common Issues
-~~~~~~~~~~~~~
+**Common Issues:**
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
+**Connection refused**
+- Check if MCP server is running: `python your_tool_file.py`
+- Verify the server URL in configuration
+- Check firewall settings
 
-   * - Problem
-     - Solution
-   * - Connection timeout
-     - Increase timeout setting, check network connectivity
-   * - Authentication failed
-     - Verify API keys and authentication headers
-   * - Service unavailable
-     - Implement retry logic and circuit breaker
-   * - Rate limiting
-     - Add rate limiting and exponential backoff
-   * - SSL certificate errors
-     - Update certificates or disable SSL verification for testing
+**Tool not found**
+- Verify tool names (check if prefix is correct)
+- Check MCP server logs
+- Ensure tool is properly registered with `@register_mcp_tool`
 
-Debugging Tools
-~~~~~~~~~~~~~~~
+**Configuration errors**
+- Validate JSON configuration syntax
+- Check required API keys are set
+- Verify server URLs are accessible
 
-Enable detailed logging:
+**Timeout errors**
+- Check network connectivity
+- Verify server performance
+- Increase timeout in configuration if needed
+
+Real-World Example: Human Expert Feedback
+------------------------------------------
+
+The Human Expert Feedback system demonstrates a complete remote tool implementation:
+
+**Server Side (`examples/remote_tools/create_remote_tool.py`):**
 
 .. code-block:: python
 
-   import logging
-   logging.basicConfig(level=logging.DEBUG)
+   @register_mcp_tool(
+       tool_type_name="consult_human_expert",
+       config={
+           "description": "Consult human experts for complex decisions",
+           "parameter_schema": {
+               "type": "object",
+               "properties": {
+                   "question": {"type": "string", "description": "Question for expert"},
+                   "specialty": {"type": "string", "default": "general"},
+                   "priority": {"type": "string", "enum": ["low", "normal", "high", "urgent"]}
+               },
+               "required": ["question"]
+           }
+       },
+       mcp_config={
+           "server_name": "Human Expert Consultation Server",
+           "host": "0.0.0.0",
+           "port": 9876
+       }
+   )
+   class ConsultHumanExpertTool:
+       def run(self, arguments):
+           # Expert consultation logic
+           return {"expert_response": "..."}
 
-   # Enable requests logging
-   import urllib3
-   urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+   if __name__ == "__main__":
+       start_mcp_server()
 
-   # Test connectivity
-   import requests
-   response = requests.get("https://api.example.com/health", timeout=10)
-   print(f"Status: {response.status_code}")
+**Client Configuration (`examples/remote_tools/expert_feedback_config.json`):**
+
+.. code-block:: json
+
+   [
+       {
+           "name": "mcp_auto_loader_expert_feedback",
+           "description": "Load expert feedback tools",
+           "type": "MCPAutoLoaderTool",
+           "tool_prefix": "expert_",
+           "server_url": "http://${EXPERT_FEEDBACK_MCP_SERVER_URL}/mcp",
+           "required_api_keys": ["EXPERT_FEEDBACK_MCP_SERVER_URL"]
+       }
+   ]
+
+**Usage:**
+
+.. code-block:: python
+
+   from tooluniverse import ToolUniverse
+   
+   tu = ToolUniverse()
+   tu.load_tools(tool_config_files={"expert_feedback": "expert_feedback_tools.json"})
+   
+   result = tu.run({
+       "name": "expert_consult_human_expert",
+       "arguments": {
+           "question": "Is this drug interaction safe?",
+           "specialty": "pharmacology",
+           "priority": "high"
+       }
+   })
+
+Examples
+--------
+
+Complete working examples are available in the `examples/remote_tools/` directory:
+
+* **`create_remote_tool.py`** - Create and start a remote tool server
+* **`use_remote_tool.py`** - Use remote tools in ToolUniverse
+
+**Quick Start:**
+```bash
+cd examples/remote_tools
+python create_remote_tool.py  # In one terminal
+python use_remote_tool.py     # In another terminal
+```
 
 Next Steps
 ----------
 
-Now that you can integrate remote tools:
-
+* 🔧 **MCP Integration**: :doc:`mcp_integration` - Detailed MCP integration guide
 * 🏠 **Local Tools**: :doc:`../local_tools/tutorial` - Learn about local tool development
-* 🚀 **Contributing**: :doc:`../contributing/remote_tools` - Submit your tools to ToolUniverse
-* 🔧 **Advanced Patterns**: :doc:`advanced_patterns` - Advanced development patterns
-* 🤖 **AI Integration**: :doc:`../guide/building_ai_scientists/mcp_integration` - Connect with AI assistants
+* 🚀 **Contributing**: :doc:`../contributing/remote_tools` - Submit remote tools to ToolUniverse
+* 🔍 **Architecture**: :doc:`../reference/architecture` - Understand ToolUniverse internals
 
 .. tip::
-   **Integration tip**: Start with simple REST API wrappers, then move to MCP for more complex integrations. Always implement proper error handling and monitoring!
+   **Integration tip**: Start with simple MCP servers and gradually add complexity. The ToolUniverse ecosystem supports over 600 tools including machine learning models, datasets, and APIs!

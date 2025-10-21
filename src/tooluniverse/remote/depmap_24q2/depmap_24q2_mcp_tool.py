@@ -163,7 +163,7 @@ class DepmapCorrelationTool:
             gene_a (str): First gene symbol (e.g., 'BRAF', 'TP53'). Must be present in dataset.
             gene_b (str): Second gene symbol (e.g., 'MAPK1', 'MDM2'). Must be present in dataset.
 
-        Returns:
+        Returns
             Dict[str, float]: Dictionary containing correlation analysis results:
                 - 'correlation': Pearson correlation coefficient (-1.0 to 1.0)
                 - 'p_value': Statistical significance of correlation
@@ -272,7 +272,7 @@ async def compute_depmap24q2_gene_correlations(
         gene_b (str): Second gene symbol for correlation analysis (e.g., 'MAPK1', 'MDM2').
                      Must use standard HUGO gene nomenclature.
 
-    Returns:
+    Returns
         dict: Comprehensive correlation analysis results containing:
             - 'correlation_data' (dict): Statistical measures including:
                 * 'correlation': Pearson correlation coefficient (-1.0 to 1.0)

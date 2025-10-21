@@ -91,7 +91,7 @@ class Boltz2DockingTool(BaseTool):
                 - other optional boltz CLI flags (e.g., 'recycling_steps').
             timeout (int): The maximum time in seconds to wait for the Boltz command to complete.
 
-        Returns:
+        Returns
             dict: A dictionary containing the path to the predicted structure and affinity data, or an error.
         """
         arguments = arguments or {}

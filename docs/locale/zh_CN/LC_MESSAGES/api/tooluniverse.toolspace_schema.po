@@ -26,12 +26,12 @@ msgid "tooluniverse.toolspace\\_schema module"
 msgstr ""
 
 #: 11178640f74747ceb6224fef50e609d8 of tooluniverse.toolspace_schema:1
-msgid "ToolSpace Configuration Schema and Validation"
+msgid "Space Configuration Schema and Validation"
 msgstr ""
 
 #: 77bfe6db6e5c4ff99f11b9896be3b446 of tooluniverse.toolspace_schema:3
 msgid ""
-"This module defines the schema for ToolSpace configurations, including "
+"This module defines the schema for Space configurations, including "
 "validation rules and data structures for both presets and workspaces."
 msgstr ""
 
@@ -40,13 +40,13 @@ msgstr ""
 #: tooluniverse.toolspace_schema.HookConfig:1
 #: tooluniverse.toolspace_schema.LLMConfig:1
 #: tooluniverse.toolspace_schema.ToolConfig:1
-#: tooluniverse.toolspace_schema.ToolSpaceConfig:1
+#: tooluniverse.toolspace_schema.SpaceConfig:1
 msgid "Bases: :py:class:`object`"
 msgstr ""
 
 #: 7a6da4a24d05409b844ea68fe52b5c7c of
 #: tooluniverse.toolspace_schema.ToolConfig:1
-msgid "Configuration for tools within a ToolSpace."
+msgid "Configuration for tools within a Space."
 msgstr ""
 
 #: f73925688f64425da5b4b38b82f4ede6 of
@@ -60,27 +60,27 @@ msgid "Hook configuration for workspaces."
 msgstr ""
 
 #: cf5976791d8e42728f2a235456eab8fa of
-#: tooluniverse.toolspace_schema.ToolSpaceConfig:1
-msgid "Main ToolSpace configuration structure."
+#: tooluniverse.toolspace_schema.SpaceConfig:1
+msgid "Main Space configuration structure."
 msgstr ""
 
 #: 48a2e2dc0ef1497a90fc2b0a5e26513b of
-#: tooluniverse.toolspace_schema.ToolSpaceConfig.to_dict:1
+#: tooluniverse.toolspace_schema.SpaceConfig.to_dict:1
 msgid "Convert to dictionary for serialization."
 msgstr ""
 
 #: acf731b666b9419abc956821be4b930b of
-#: tooluniverse.toolspace_schema.ToolSpaceConfig.from_dict:1
+#: tooluniverse.toolspace_schema.SpaceConfig.from_dict:1
 msgid "Create from dictionary."
 msgstr ""
 
 #: c76a5c9a0a064d29a54aef0ce0e21849 of
-#: tooluniverse.toolspace_schema.ToolSpaceConfig.save:1
+#: tooluniverse.toolspace_schema.SpaceConfig.save:1
 msgid "Save configuration to file."
 msgstr ""
 
 #: dfeba043a52247a2bc94226141afe5c6 of
-#: tooluniverse.toolspace_schema.ToolSpaceConfig.load:1
+#: tooluniverse.toolspace_schema.SpaceConfig.load:1
 msgid "Load configuration from file."
 msgstr ""
 

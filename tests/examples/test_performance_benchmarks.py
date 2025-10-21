@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """
 Performance benchmarks for ToolUniverse direct import functionality
+
+Note: These tests are marked as @pytest.mark.manual because they:
+1. Depend on external APIs (unstable)
+2. Have loose assertions (15-30 second timeouts)
+3. Don't provide regression detection
+4. Should be run manually for performance analysis
+
+To run manually: pytest tests/examples/test_performance_benchmarks.py -v
 """
 
 import unittest
@@ -18,6 +26,7 @@ from tooluniverse.tools import (
 
 
 @pytest.mark.slow
+@pytest.mark.manual
 class TestPerformanceBenchmarks(unittest.TestCase):
     """Test performance benchmarks for direct import functionality."""
     

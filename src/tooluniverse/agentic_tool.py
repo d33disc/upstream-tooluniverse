@@ -38,7 +38,7 @@ class AgenticTool(BaseTool):
         """
         Check if any API keys are available across all supported API types.
 
-        Returns:
+        Returns
             bool: True if at least one API type has all required keys, False otherwise
         """
         for _api_type, required_vars in API_KEY_ENV_VARS.items():
@@ -74,16 +74,44 @@ class AgenticTool(BaseTool):
         # Get configuration from nested 'configs' dict or fallback to top-level
         configs = tool_config.get("configs", {})
 
-        # Helper function to get config values with fallback
+        # Helper function to get config values with Space support
         def get_config(key: str, default: Any) -> Any:
-            return configs.get(key, tool_config.get(key, default))
+            tool_value = configs.get(key, tool_config.get(key))
+
+            # Get environment value directly (avoid calling self method during init)
+            env_value = None
+            if key == "api_type":
+                # Direct use of AgenticTool api_type values from Space
+                env_value = os.getenv("TOOLUNIVERSE_LLM_DEFAULT_PROVIDER")
+            elif key == "model_id":
+                task = tool_config.get("llm_task", "default").upper()
+                env_value = os.getenv(f"TOOLUNIVERSE_LLM_MODEL_{task}") or os.getenv(
+                    "TOOLUNIVERSE_LLM_MODEL_DEFAULT"
+                )
+            elif key == "temperature":
+                temp_str = os.getenv("TOOLUNIVERSE_LLM_TEMPERATURE")
+                env_value = float(temp_str) if temp_str else None
+
+            mode = os.getenv("TOOLUNIVERSE_LLM_CONFIG_MODE", "default")
+
+            if mode == "default":
+                # Space as default: tool config > env > built-in default
+                if tool_value is not None:
+                    return tool_value
+                if env_value is not None:
+                    return env_value
+                return default
+            else:  # mode == "fallback"
+                # Space as fallback: tool config > built-in default (env as fallback later)
+                if tool_value is not None:
+                    return tool_value
+                return default
 
         # LLM configuration
         self._api_type: str = get_config("api_type", "CHATGPT")
         self._model_id: str = get_config("model_id", "o1-mini")
         self._temperature: Optional[float] = get_config("temperature", 0.1)
-        # Ignore configured max_new_tokens; client will resolve per model/env
-        self._max_new_tokens: Optional[int] = None
+        # max_new_tokens is handled by LLM client automatically
         self._return_json: bool = get_config("return_json", False)
         self._max_retries: int = get_config("max_retries", 5)
         self._retry_delay: int = get_config("retry_delay", 5)
@@ -96,9 +124,8 @@ class AgenticTool(BaseTool):
 
         # Global fallback configuration
         self._use_global_fallback: bool = get_config("use_global_fallback", True)
-        self._global_fallback_chain: List[Dict[str, str]] = (
-            self._get_global_fallback_chain()
-        )
+        # Initialize fallback chain later after environment config is set
+        self._global_fallback_chain: List[Dict[str, str]] = []
 
         # Gemini model configuration (optional; env override)
         self._gemini_model_id: str = get_config(
@@ -133,11 +160,40 @@ class AgenticTool(BaseTool):
         self._current_api_type = None
         self._current_model_id = None
 
+        # Store environment config for fallback mode
+        # Direct use of AgenticTool api_type values from Space
+        self._env_api_type = os.getenv("TOOLUNIVERSE_LLM_DEFAULT_PROVIDER")
+
+        task = tool_config.get("llm_task", "default").upper()
+        self._env_model_id = os.getenv(f"TOOLUNIVERSE_LLM_MODEL_{task}") or os.getenv(
+            "TOOLUNIVERSE_LLM_MODEL_DEFAULT"
+        )
+
+        # Initialize global fallback chain now that environment config is set
+        self._global_fallback_chain = self._get_global_fallback_chain()
+
         # Try primary API first, then fallback if configured
         self._try_initialize_api()
 
     def _get_global_fallback_chain(self) -> List[Dict[str, str]]:
         """Get the global fallback chain from environment or use default."""
+        mode = os.getenv("TOOLUNIVERSE_LLM_CONFIG_MODE", "default")
+
+        # In fallback mode, prepend environment config to fallback chain
+        if mode == "fallback" and self._env_api_type and self._env_model_id:
+            env_fallback = {
+                "api_type": self._env_api_type,
+                "model_id": self._env_model_id,
+            }
+
+            # Check if env fallback is different from primary config
+            if (
+                env_fallback["api_type"] != self._api_type
+                or env_fallback["model_id"] != self._model_id
+            ):
+                # Add environment config as first fallback
+                return [env_fallback] + DEFAULT_FALLBACK_CHAIN.copy()
+
         # Check environment variable for custom fallback chain
         env_chain = os.getenv("AGENTIC_TOOL_FALLBACK_CHAIN")
         if env_chain:
@@ -257,8 +313,6 @@ class AgenticTool(BaseTool):
             raise ValueError(
                 f"Unsupported API type: {self._api_type}. Supported types: {supported_api_types}"
             )
-        if self._max_new_tokens is not None and self._max_new_tokens <= 0:
-            raise ValueError("max_new_tokens must be positive or None")
 
     # ------------------------------------------------------------------ public API --------------
     def run(
@@ -386,7 +440,6 @@ class AgenticTool(BaseTool):
                             "api_type": self._api_type,
                             "model_id": self._model_id,
                             "temperature": self._temperature,
-                            "max_new_tokens": self._max_new_tokens,
                         },
                         "execution_time_seconds": execution_time,
                         "timestamp": start_time.isoformat(),
@@ -417,7 +470,6 @@ class AgenticTool(BaseTool):
                             "api_type": self._api_type,
                             "model_id": self._model_id,
                             "temperature": self._temperature,
-                            "max_new_tokens": self._max_new_tokens,
                         },
                         "execution_time_seconds": execution_time,
                         "timestamp": start_time.isoformat(),
@@ -442,7 +494,6 @@ class AgenticTool(BaseTool):
                             "api_type": self._api_type,
                             "model_id": self._model_id,
                             "temperature": self._temperature,
-                            "max_new_tokens": self._max_new_tokens,
                         },
                         "execution_time_seconds": execution_time,
                     },
@@ -511,7 +562,6 @@ class AgenticTool(BaseTool):
             "api_type": self._api_type,
             "model_id": self._model_id,
             "temperature": self._temperature,
-            "max_new_tokens": self._max_new_tokens,
             "return_json": self._return_json,
             "max_retries": self._max_retries,
             "retry_delay": self._retry_delay,
@@ -595,9 +645,7 @@ class AgenticTool(BaseTool):
     def estimate_token_usage(self, arguments: Dict[str, Any]) -> Dict[str, int]:
         prompt = self._format_prompt(arguments)
         estimated_input_tokens = len(prompt) // 4
-        estimated_max_output_tokens = (
-            self._max_new_tokens if self._max_new_tokens is not None else 2048
-        )
+        estimated_max_output_tokens = 2048  # Default estimation
         estimated_total_tokens = estimated_input_tokens + estimated_max_output_tokens
         return {
             "estimated_input_tokens": estimated_input_tokens,

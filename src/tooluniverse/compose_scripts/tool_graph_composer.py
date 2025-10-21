@@ -18,7 +18,7 @@ def compose(arguments, tooluniverse, call_tool):
         tooluniverse: ToolUniverse instance
         call_tool: Function to call other tools
 
-    Returns:
+    Returns
         Dictionary with results and file paths
     """
     try:

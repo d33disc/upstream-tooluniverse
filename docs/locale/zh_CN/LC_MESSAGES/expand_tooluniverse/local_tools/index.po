@@ -7,68 +7,70 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"POT-Creation-Date: 2025-10-19 16:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:2
-#: 57877667e18547f4bc224661c81524b0
+#: ../../expand_tooluniverse/local_tools/index.rst:233
+#: 2272351f892441c28fa94426d342bc6e
 msgid "Local Tools"
 msgstr "本地工具"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:4
-#: 660e25c4846f4523936fe6ee1822f0b2
+#: 7033435bb1b147e89d753b4c18a8112e
 msgid ""
 "Local tools are Python classes that run within the ToolUniverse process. "
-"They provide high performance and easy integration for custom functionality."
+"They provide high performance and easy integration for custom "
+"functionality."
 msgstr "本地工具是运行在 ToolUniverse 进程中的 Python 类。它们提供高性能并且易于集成自定义功能。"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:7
-#: bd97a2d2f8b54f50a94ccd9cb8526db3
+#: ece86b60f115485dbbf31cfe791b182d
 msgid "What are Local Tools?"
 msgstr "什么是本地工具？"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:9
-#: a73079d3c4e24d299d4ac4988ba20951
+#: a228ed90371c4ad0aa747097531eb0ee
 msgid ""
-"Local tools extend ToolUniverse with custom Python functionality. They run "
-"in the same process as ToolUniverse and provide:"
+"Local tools extend ToolUniverse with custom Python functionality. They "
+"run in the same process as ToolUniverse and provide:"
 msgstr "本地工具通过自定义 Python 功能扩展 ToolUniverse。它们与 ToolUniverse 在同一进程中运行，并提供："
 
 #: ../../expand_tooluniverse/local_tools/index.rst:11
-#: e9fac3cb14c540de851d58e4df0a1041
+#: 2417256ffb2b44fd8e2d07235d98a81b
 msgid "**High Performance**: No network overhead"
 msgstr "**高性能**：无网络开销"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:12
-#: b57ab31493dc477e86b25dabe5a666cf
+#: 78b93ee90bdb42c9b10b71e7d7154a42
 msgid "**Easy Development**: Simple Python classes"
 msgstr "**轻松开发**：简单的 Python 类"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:13
-#: b014a7b17e584ae2b76db9398e9b7638
+#: eb46b7a3b3ca4e6f88355ec569a43089
 msgid "**Automatic Discovery**: Tools auto-register with decorators"
 msgstr "**自动发现**：工具通过装饰器自动注册"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:14
-#: 859109124fbb4261bce796c6ae5bdf60
+#: dd430ca550c94b1c97c76a7449dd075c
 msgid "**Full Integration**: Access to all ToolUniverse features"
 msgstr "**完全集成**：访问所有 ToolUniverse 功能"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:16
-#: df5380dde1534446913e83dc0f768b09
+#: a98dc2867450440b9d8b61185ec3d79f
 msgid ""
-"**Best for:** - Data processing and analysis - File manipulation utilities -"
-" Simple API wrappers - Computational tools"
+"**Best for:** - Data processing and analysis - File manipulation "
+"utilities - Simple API wrappers - Computational tools"
 msgstr ""
 "**最佳用途：**  \n"
 "- 数据处理与分析  \n"
@@ -77,56 +79,57 @@ msgstr ""
 "- 计算工具"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:23
-#: 754e56594ef0445282f1f30492bbc6cc
+#: a0350fe98a024bc08d86cfe796c7589e
 msgid "Quick Start"
 msgstr "快速入门"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:25
-#: bea4bf4a76e744ef8c894f4217c81d98
+#: 105500d02b71486ea234861b5a76163e
 msgid ""
-"**I want to quickly try creating a local tool:** → :doc:`../quick_start` - "
-"5-minute tutorial to create your first tool"
+"**I want to quickly try creating a local tool:** → :doc:`../quick_start` "
+"- 5-minute tutorial to create your first tool"
 msgstr "**我想快速尝试创建一个本地工具：** → :doc:`../quick_start` - 5分钟教程，帮助您创建第一个工具"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:28
-#: 2626d09c899d43ebba957e44b8cb0b86
+#: 69173e6deaed4e898e2cd67fa91b4639
 msgid ""
 "**I want to learn local tool development:** → :doc:`tutorial` - "
 "Comprehensive guide with examples"
 msgstr "**我想学习本地工具开发：** → :doc:`教程` - 包含示例的全面指南"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:31
-#: a7255356c3f742718fc664998dd7d995
+#: 3a5e708d04784685a420c40f5b7614ec
 msgid ""
-"**I want to contribute a local tool:** → :doc:`../contributing/local_tools` "
-"- Submit your tool to ToolUniverse"
+"**I want to contribute a local tool:** → "
+":doc:`../contributing/local_tools` - Submit your tool to ToolUniverse"
 msgstr ""
-"**我想贡献一个本地工具：** → :doc:`../contributing/local_tools` - 将您的工具提交到 ToolUniverse"
+"**我想贡献一个本地工具：** → :doc:`../contributing/local_tools` - 将您的工具提交到 "
+"ToolUniverse"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:34
-#: 692b30e90be24087a5a688199c5a1c80
+#: c7af5c412a4d4003813990387ffee416
 msgid ""
 "**I want to understand advanced features:** → :doc:`advanced_features` - "
 "Learn BaseTool capabilities"
 msgstr "**我想了解高级功能：** → :doc:`advanced_features` - 了解 BaseTool 的功能"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:38
-#: def105b5f9f744c98dc5fb15c31cd081
+#: d7ef5bd0aad14eb9911c918aaa6195ec
 msgid "Key Concepts"
 msgstr "关键概念"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:40
-#: 9412bf4cbe224e40805d9b6874c8668a
+#: f6525cef7bb64851a91b83fca34236a1
 msgid ""
-"**Tool Registration** - Use ``@register_tool`` decorator to register your "
-"tool - Tools are automatically discovered by ToolUniverse - Configuration "
-"can be inline or in separate JSON files"
+"**Tool Registration** - Use ``@register_tool`` decorator to register your"
+" tool - Tools are automatically discovered by ToolUniverse - "
+"Configuration can be inline or in separate JSON files"
 msgstr ""
 "**工具注册** - 使用 ``@register_tool`` 装饰器注册您的工具 - 工具会被 ToolUniverse 自动发现 - "
 "配置可以内联或存储在单独的 JSON 文件中"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:45
-#: 75f6eefeac08438b9f0f3d8ba4c6f599
+#: e8eb4f49cb0046219cd6fdbf574db21c
 msgid ""
 "**BaseTool Class** - All local tools must inherit from ``BaseTool`` - "
 "Implement the ``run()`` method with your tool logic - Add "
@@ -136,89 +139,91 @@ msgstr ""
 "``validate_input()`` 进行参数验证"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:50
-#: 8558ecd8e5194a82b83fdd665162de8d
+#: 7ababdf98f3c40d89177faddd8c9c956
 msgid ""
 "**Configuration** - Define tool parameters using JSON Schema - Specify "
 "required and optional parameters - Add examples and descriptions"
 msgstr "**配置** - 使用 JSON Schema 定义工具参数 - 指定必需和可选参数 - 添加示例和描述"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:55
-#: e121fb6565774711b90f260454f8b731
+#: e5d4e7ba05dd4247b63b8567bcea47cf
 msgid ""
 "**Self-Use vs Contribution** - **Self-Use**: Config in decorator, no "
-"``__init__.py`` changes - **Contribution**: Config in JSON file, must modify"
-" ``__init__.py``"
+"``__init__.py`` changes - **Contribution**: Config in JSON file, must "
+"modify ``__init__.py``"
 msgstr ""
 "**自用与贡献** - **自用**：在装饰器中配置，无需修改``__init__.py`` - "
 "**贡献**：在JSON文件中配置，必须修改``__init__.py``"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:60
-#: 2fdb9e7294f2401393ed04df83d8e05b
+#: b8a63d3a8e004876865d868b19520a0d
 msgid "Examples"
 msgstr "示例"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:63
-#: 4212ca613d4348c6bdea812d5f947644
+#: ffc31c652c26441092603664e8e34223
 msgid "Simple Calculator"
 msgstr "简单计算器"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:104
-#: c7e719ee965a47c3b74dc25eae5a2836
+#: 4173efd6461d43b78d886d713c0294a6
 msgid "API Wrapper"
 msgstr "API 包装器"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:158
-#: 4c4c0f9772154d9c8934c288bda5cc2f
+#: 249e8abd3b244da4a5549ff858e5dd56
 msgid "Common Patterns"
 msgstr "常见模式"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:160
-#: 2d5575af41634f03a3628b43178a653f
+#: 32671189f1004ed28e8831fd19d6cdcc
 msgid "**Input Validation** .. code-block:: python"
 msgstr "**输入验证** .. code-block:: python"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:163
-#: 03fc419b45b84923974dbcc2aae67a8f
+#: 44ac4655563043ef8d16dc7069a7d072
 msgid "def validate_input(self, **kwargs):"
 msgstr ""
 
 #: ../../expand_tooluniverse/local_tools/index.rst:164
-#: 4528a293b756479b84d0b53287d85277
-msgid "\"\"\"Validate input parameters.\"\"\" if \"required_param\" not in kwargs:"
+#: 501b866d1d454f71a042c0a9109fccb2
+msgid ""
+"\"\"\"Validate input parameters.\"\"\" if \"required_param\" not in "
+"kwargs:"
 msgstr "\"\"\"验证输入参数。\"\"\" 如果 \"required_param\" 不在 kwargs 中："
 
 #: ../../expand_tooluniverse/local_tools/index.rst:166
-#: 7d92de7ac9c0454dbb78d24877d15b2a
+#: 972341d87c6b4df1ae7f003cebecc91c
 msgid "raise ValueError(\"required_param is required\")"
 msgstr "raise ValueError(\"必须提供 required_param\")"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:168
-#: d57e584b82844529a8d72eae1ac38354
+#: 145da1f779c442e0a430da2b33a5fc84
 msgid "if not isinstance(kwargs[\"required_param\"], str):"
 msgstr "如果不是 isinstance(kwargs[\"required_param\"], str):"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:169
-#: d41ff0f4d1434764bb51e53b41e977d0
+#: 2061f8232d6549f798bdf8231071b97f
 msgid "raise ValueError(\"required_param must be a string\")"
 msgstr "raise ValueError(\"required_param 必须是字符串\")"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:171
-#: c84a3e8b43354d84aa2465903b3f0d42
+#: 2d9d4dd9bb0f4b939ddc7b99af82f4ab
 msgid "**Error Handling** .. code-block:: python"
 msgstr "**错误处理** .. code-block:: python"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:174
-#: a0b35157407749319ed148e13aa38d90
+#: 67c074a9f20941feb2b067b0b762e90b
 msgid "def run(self, arguments):"
 msgstr ""
 
 #: ../../expand_tooluniverse/local_tools/index.rst:175
-#: baeeb3f518f343b992ad9ef69de14f2f
+#: 396b8fe554554a73bd0e74eb3df55e2f
 msgid "try:"
 msgstr "尝试："
 
 #: ../../expand_tooluniverse/local_tools/index.rst:176
-#: 89ab476c92b54215b81330859191250a
+#: d54601e3d7ce49b7928aaf9449298049
 #, python-brace-format
 msgid ""
 "# Your tool logic here result = self.process_data(arguments) return "
@@ -229,91 +234,91 @@ msgstr ""
 "return {\"result\": result, \"success\": True}"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:179
-#: e8161c48217040eb9f3a6daf964662aa
+#: b2353352d3a94fa4b66d129f1e607745
 msgid "except ValueError as e:"
 msgstr ""
 
 #: ../../expand_tooluniverse/local_tools/index.rst:180
-#: 69849d927fba4c8f844aa063cb215478
+#: ca43846664614af19df24f4ba8b0af30
 #, python-brace-format
 msgid "return {\"error\": f\"Invalid input: {str(e)}\", \"success\": False}"
 msgstr "return {\"error\": f\"输入无效：{str(e)}\", \"success\": False}"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:181
-#: 65ce56dec31147e197705aa739bc7edd
+#: bdde936d66e640a6b54314b54800f231
 msgid "except Exception as e:"
 msgstr ""
 
 #: ../../expand_tooluniverse/local_tools/index.rst:182
-#: 6fcc42ffe28e4451a4602c4808e00c8b
+#: 98fb47157aa74c8a90daacd9b43e2a21
 #, python-brace-format
 msgid "return {\"error\": f\"Unexpected error: {str(e)}\", \"success\": False}"
 msgstr "return {\"error\": f\"意外错误: {str(e)}\", \"success\": False}"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:184
-#: b78530b0688b43faab74bc23bea7fad5
+#: 2fcb1968c27f4cf0a2595552f355e026
 msgid "**Using Environment Variables** .. code-block:: python"
 msgstr "**使用环境变量** .. code-block:: python"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:187
-#: 96c11df2732b4389a58a3c589c58b5d7
+#: baaa479142fa40269c0856f565575405
 msgid "def __init__(self, tool_config=None):"
 msgstr ""
 
 #: ../../expand_tooluniverse/local_tools/index.rst:188
-#: bf4deb81978b46349406690a9967adce
+#: d8701df2c7d344ac9ff73ebb94924cf7
 #, python-brace-format
 msgid ""
-"super().__init__(tool_config) self.api_key = self.config.get(\"settings\", "
-"{}).get(\"api_key\")"
+"super().__init__(tool_config) self.api_key = "
+"self.config.get(\"settings\", {}).get(\"api_key\")"
 msgstr ""
 "super().__init__(tool_config)  \n"
 "self.api_key = self.config.get(\"settings\", {}).get(\"api_key\")"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:191
-#: 0eb090957ae44830aedd5ffa97481795
+#: 44a81a4b7ba647c7aa73d499864252bd
 msgid "**Caching Results** .. code-block:: python"
 msgstr "**缓存结果** .. code-block:: python"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:194
-#: 14c4bf7e9c824d6a8a97bf9545fa7390
+#: 770fc0270bf545f1801fc5b2c20e4eb0
 msgid "from functools import lru_cache"
 msgstr "从 functools 导入 lru_cache"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:196
-#: 8cf7e245bca54c2c9baaebf4eceaaaa9
+#: e36d11a6d4304fefb7da7cfd9e1d8c29
 msgid "@lru_cache(maxsize=100) def expensive_calculation(self, n):"
 msgstr ""
 "@lru_cache(maxsize=100)  \n"
 "def expensive_calculation(self, n):"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:198
-#: d1cc1e1b13014192869c6b531414bdc7
+#: 4b05df17973b4da5b2317c5efe8aeee4
 msgid "# Expensive computation here return result"
 msgstr "# 复杂计算在此处返回结果"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:202
-#: c51625ba4ee84ea49a5d7d257d27aad7
+#: b80b5302b3ba412f8ff989e0f57bc4f1
 msgid "Troubleshooting"
 msgstr "故障排除"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:204
-#: 23eb137a18d544a98ecc2cbc69ac51ba
+#: ebd32443edfb4a55968a860a88168f73
 msgid ""
-"**Tool not found** - Check if tool is imported - Verify ``@register_tool`` "
-"decorator - Ensure ToolUniverse is instantiated after import"
-msgstr ""
-"**工具未找到** - 检查工具是否已导入 - 验证 ``@register_tool`` 装饰器 - 确保在导入后实例化 ToolUniverse"
+"**Tool not found** - Check if tool is imported - Verify "
+"``@register_tool`` decorator - Ensure ToolUniverse is instantiated after "
+"import"
+msgstr "**工具未找到** - 检查工具是否已导入 - 验证 ``@register_tool`` 装饰器 - 确保在导入后实例化 ToolUniverse"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:209
-#: 1fb9b4f2c51b4aeeb4112d4f7941b32c
+#: bee39e534df7410cae5ae25a2ec6a049
 msgid ""
 "**Parameter errors** - Check parameter definitions in config - Verify "
 "required parameters are listed - Ensure parameter types are correct"
 msgstr "**参数错误** - 检查配置中的参数定义 - 验证是否列出了必需的参数 - 确保参数类型正确"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:214
-#: 7fde889ad2cd489fa4daefa257fae576
+#: b04d1d25b7824df78d223b75bbe3a0de
 msgid ""
 "**Execution failures** - Verify class inherits from ``BaseTool`` - Check "
 "``__init__`` calls ``super().__init__(tool_config)`` - Ensure ``run()`` "
@@ -324,53 +329,60 @@ msgstr ""
 "确保``run()``返回包含``\"success\"``字段的字典"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:219
-#: 98a55cecd64049fd91fe04f7934faf63
+#: dfb3802348ac43778ace03a90a1c11f4
 msgid ""
-"**Import errors** - Check module name matches file name - Verify class name "
-"matches exactly - Ensure all dependencies are installed"
+"**Import errors** - Check module name matches file name - Verify class "
+"name matches exactly - Ensure all dependencies are installed"
 msgstr "**导入错误** - 检查模块名称是否与文件名匹配 - 验证类名是否完全一致 - 确保所有依赖项已安装"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:225
-#: 2999461d2ed149d19ccf394bb4ba56d3
+#: 4e978cd41cb2481899c94267c6d71d6e
 msgid "Next Steps"
 msgstr "下一步"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:227
-#: 965e5ca303214efe986126c6b20b165c
+#: 023629fa1f2341bfa9b8131f1e202eff
 msgid ""
 "🚀 **Quick Start**: :doc:`../quick_start` - Create your first tool in 5 "
 "minutes"
 msgstr "🚀 **快速开始**: :doc:`../quick_start` - 在5分钟内创建您的第一个工具"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:228
-#: ea414d6c40ae4270b10eb866bb561217
+#: 65d53a003b0e419182e5006f75424698
 msgid "📚 **Tutorial**: :doc:`tutorial` - Learn local tool development"
 msgstr "📚 **教程**: :doc:`tutorial` - 学习本地工具开发"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:229
-#: aa8c43956edf4381ad799f335027056b
+#: 41db26a2447e41a4beee803e23388701
 msgid ""
 "🎁 **Contributing**: :doc:`../contributing/local_tools` - Submit tools to "
 "ToolUniverse"
 msgstr "🎁 **贡献**: :doc:`../contributing/local_tools` - 向 ToolUniverse 提交工具"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:230
-#: 59b11f1126514ec5b181fb91fa162824
+#: 3d1d9355f65a43ed9950166e294ec6b7
 msgid ""
 "🔧 **Advanced**: :doc:`advanced_features` - Learn advanced BaseTool "
 "capabilities"
 msgstr "🔧 **高级**：:doc:`advanced_features` - 了解 BaseTool 的高级功能"
 
 #: ../../expand_tooluniverse/local_tools/index.rst:231
-#: 942342c2e764419da1c24ac051b6d1b2
+#: 52a8496a23cd427b920d853ddfdb1ada
 msgid ""
-"🔍 **Compare**: :doc:`../reference/comparison` - Compare with remote tools"
-msgstr "🔍 **比较**: :doc:`../reference/comparison` - 与远程工具进行比较"
+"🔍 **Compare**: Review the tool type comparison table in "
+":doc:`../contributing/index`"
+msgstr ""
 
-#: ../../expand_tooluniverse/local_tools/index.rst:234
-#: 997adb83fc1e4966b3d241df99b882b2
+#: ../../expand_tooluniverse/local_tools/index.rst:241
+#: fd122891c1274ad5bd8cc133f8ec465e
 msgid ""
-"**Getting Started**: We recommend starting with the quick start tutorial to "
-"understand the basics, then following the comprehensive tutorial for "
+"**Getting Started**: We recommend starting with the quick start tutorial "
+"to understand the basics, then following the comprehensive tutorial for "
 "detailed development guidance."
 msgstr "**入门指南**：我们建议先从快速入门教程开始，以了解基础内容，然后再参考综合教程以获得详细的开发指导。"
+
+#~ msgid ""
+#~ "🔍 **Compare**: :doc:`../reference/comparison` - "
+#~ "Compare with remote tools"
+#~ msgstr "🔍 **比较**: :doc:`../reference/comparison` - 与远程工具进行比较"
+

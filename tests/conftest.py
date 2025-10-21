@@ -1,5 +1,6 @@
 import os
 import pytest
+import warnings
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -13,6 +14,35 @@ def pytest_configure(config):
     """Configure pytest with custom markers."""
     config.addinivalue_line("markers", "slow: slow tests (deselect with -m 'not slow')")
     config.addinivalue_line("markers", "require_api_keys: tests requiring API keys")
+    config.addinivalue_line("markers", "manual: manual tests (not run in CI)")
+    config.addinivalue_line("markers", "unit: unit tests (fast, isolated)")
+    config.addinivalue_line("markers", "integration: integration tests (may use network)")
+
+
+def pytest_collection_modifyitems(items):
+    """Ensure test quality by checking for required elements."""
+    for item in items:
+        # Check for docstring
+        if not item.function.__doc__:
+            warnings.warn(
+                f"Test {item.nodeid} missing docstring - consider adding one",
+                category=UserWarning
+            )
+        
+        # Check for appropriate markers
+        marks = [m.name for m in item.iter_markers()]
+        if not any(m in marks for m in ['unit', 'integration', 'slow', 'manual']):
+            warnings.warn(
+                f"Test {item.nodeid} missing category marker (unit/integration/slow/manual)",
+                category=UserWarning
+            )
+        
+        # Check for meaningful test names
+        if not any(keyword in item.name.lower() for keyword in ['test_', 'check_', 'verify_']):
+            warnings.warn(
+                f"Test {item.nodeid} may not follow naming convention (should start with test_)",
+                category=UserWarning
+            )
 
 
 @pytest.fixture(scope="session")

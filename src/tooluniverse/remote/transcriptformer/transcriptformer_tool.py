@@ -105,7 +105,7 @@ class TranscriptformerEmbeddingTool:
         Args:
             disease (str): Disease identifier (normalized to lowercase with underscores).
 
-        Returns:
+        Returns
             Dict: Cached metadata dictionary containing:
                 - store_path: Path to disease-specific embedding store
                 - ensembl_ids_ordered: Ordered list of Ensembl gene IDs
@@ -213,7 +213,7 @@ class TranscriptformerEmbeddingTool:
             disease (str): Disease context identifier (e.g., 'breast_cancer', 'diabetes').
                          Must match available disease stores.
 
-        Returns:
+        Returns
             Tuple[Optional[Dict[str, np.ndarray]], List[str]]: A tuple containing:
                 - Dictionary mapping gene names to embedding vectors (None if failed)
                 - List of context information and error messages
@@ -416,7 +416,7 @@ async def run_transcriptformer_embedding_retrieval(
                     - 'alzheimer': Alzheimer's disease contexts
                     Must match available disease stores.
 
-    Returns:
+    Returns
         dict: Comprehensive embedding retrieval results containing:
             - 'embeddings' (dict, optional): Gene-to-embedding mapping where:
                 * Keys: Gene identifiers (symbols or Ensembl IDs as provided)
