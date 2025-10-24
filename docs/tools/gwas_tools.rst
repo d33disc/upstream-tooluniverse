@@ -25,7 +25,7 @@ Get a specific GWAS association by its unique identifier.
 
    **Parameters:**
 
-   * ``association_id`` (string) (required)
+   * ``association_id`` (string) (optional)
      GWAS association identifier
 
    **Example Usage:**
@@ -35,7 +35,6 @@ Get a specific GWAS association by its unique identifier.
       query = {
           "name": "gwas_get_association_by_id",
           "arguments": {
-              "association_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -56,7 +55,7 @@ Get all associations for a specific SNP with optional sorting.
 
    **Parameters:**
 
-   * ``rs_id`` (string) (required)
+   * ``rs_id`` (string) (optional)
      dbSNP rs identifier
 
    * ``sort`` (string) (optional)
@@ -78,7 +77,6 @@ Get all associations for a specific SNP with optional sorting.
       query = {
           "name": "gwas_get_associations_for_snp",
           "arguments": {
-              "rs_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -99,7 +97,7 @@ Get all associations for a specific study, sorted by p-value.
 
    **Parameters:**
 
-   * ``accession_id`` (string) (required)
+   * ``accession_id`` (string) (optional)
      Study accession identifier
 
    * ``size`` (integer) (optional)
@@ -115,7 +113,6 @@ Get all associations for a specific study, sorted by p-value.
       query = {
           "name": "gwas_get_associations_for_study",
           "arguments": {
-              "accession_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -136,7 +133,7 @@ Get all associations for a specific trait, sorted by p-value (most significant f
 
    **Parameters:**
 
-   * ``efo_trait`` (string) (required)
+   * ``efo_trait`` (string) (optional)
      EFO trait identifier or name
 
    * ``size`` (integer) (optional)
@@ -152,7 +149,6 @@ Get all associations for a specific trait, sorted by p-value (most significant f
       query = {
           "name": "gwas_get_associations_for_trait",
           "arguments": {
-              "efo_trait": "example_value"
           }
       }
       result = tu.run(query)
@@ -173,7 +169,7 @@ Get a specific GWAS SNP by its rs ID.
 
    **Parameters:**
 
-   * ``rs_id`` (string) (required)
+   * ``rs_id`` (string) (optional)
      dbSNP rs identifier
 
    **Example Usage:**
@@ -183,7 +179,6 @@ Get a specific GWAS SNP by its rs ID.
       query = {
           "name": "gwas_get_snp_by_id",
           "arguments": {
-              "rs_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -204,7 +199,7 @@ Get all SNPs mapped to a specific gene.
 
    **Parameters:**
 
-   * ``mapped_gene`` (string) (required)
+   * ``mapped_gene`` (string) (optional)
      Gene name or symbol
 
    * ``size`` (integer) (optional)
@@ -220,7 +215,6 @@ Get all SNPs mapped to a specific gene.
       query = {
           "name": "gwas_get_snps_for_gene",
           "arguments": {
-              "mapped_gene": "example_value"
           }
       }
       result = tu.run(query)
@@ -289,7 +283,7 @@ Get a specific GWAS study by its unique identifier.
 
    **Parameters:**
 
-   * ``study_id`` (string) (required)
+   * ``study_id`` (string) (optional)
      GWAS study identifier
 
    **Example Usage:**
@@ -299,7 +293,6 @@ Get a specific GWAS study by its unique identifier.
       query = {
           "name": "gwas_get_study_by_id",
           "arguments": {
-              "study_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -320,7 +313,7 @@ Get all variants associated with a specific trait with pagination support.
 
    **Parameters:**
 
-   * ``efo_trait`` (string) (required)
+   * ``efo_trait`` (string) (optional)
      EFO trait identifier or name
 
    * ``size`` (integer) (optional)
@@ -336,7 +329,6 @@ Get all variants associated with a specific trait with pagination support.
       query = {
           "name": "gwas_get_variants_for_trait",
           "arguments": {
-              "efo_trait": "example_value"
           }
       }
       result = tu.run(query)

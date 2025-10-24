@@ -16,8 +16,8 @@ def load_mcp_tools(self, server_urls: List[str] = None, **kwargs):
     This method automatically discovers tools from MCP servers and registers them
     as ToolUniverse tools, enabling seamless usage of remote capabilities.
 
-    Parameters
-    ----------
+    Parameters:
+    ===========
     server_urls : list of str, optional
         List of MCP server URLs to load tools from. Examples:
 
@@ -35,34 +35,31 @@ def load_mcp_tools(self, server_urls: List[str] = None, **kwargs):
         - selected_tools (list): Specific tools to load from each server
         - categories (list): Tool categories to filter by
 
-    Returns
-    -------
+    Returns:
+    ========
     dict
         Summary of loaded tools with counts and any errors encountered.
 
-    Examples
-    --------
+    Examples:
+    =========
 
     Load from specific servers:
+    ```python
+    tu = ToolUniverse()
 
-    .. code-block:: python
+    # Load tools from multiple MCP servers
+    result = tu.load_mcp_tools([
+        "http://localhost:8001",  # Local analysis server
+        "http://ml-server:8002",  # Remote ML server
+        "ws://realtime:9000"      # WebSocket server
+    ])
 
-        tu = ToolUniverse()
-
-        # Load tools from multiple MCP servers
-        result = tu.load_mcp_tools([
-            "http://localhost:8001",  # Local analysis server
-            "http://ml-server:8002",  # Remote ML server
-            "ws://realtime:9000"      # WebSocket server
-        ])
-
-        print(f"Loaded {result['total_tools']} tools from {result['servers_connected']} servers")
+    print(f"Loaded {result['total_tools']} tools from {result['servers_connected']} servers")
+    ```
 
     Load with custom configuration:
-
-    .. code-block:: python
-
-        tu.load_mcp_tools(
+    ```python
+    tu.load_mcp_tools(
         server_urls=["http://localhost:8001"],
         tool_prefix="analysis\\_",
         timeout=60,
@@ -226,8 +223,8 @@ def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[st
     without actually registering them in ToolUniverse. Useful for exploration
     and selective tool loading.
 
-    Parameters
-    ----------
+    Parameters:
+    ===========
     server_urls : list of str, optional
         List of MCP server URLs to discover from
     **kwargs
@@ -235,28 +232,28 @@ def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[st
         - timeout (int): Connection timeout (default: 30)
         - include_schemas (bool): Include tool parameter schemas (default: True)
 
-    Returns
-    -------
+    Returns:
+    ========
     dict
         Discovery results with tools organized by server
 
-    Examples
-    --------
-    .. code-block:: python
+    Examples:
+    =========
+    ```python
+    tu = ToolUniverse()
 
-        tu = ToolUniverse()
+    # Discover what's available
+    discovery = tu.discover_mcp_tools([
+        "http://localhost:8001",
+        "http://ml-server:8002"
+    ])
 
-        # Discover what's available
-        discovery = tu.discover_mcp_tools([
-            "http://localhost:8001",
-            "http://ml-server:8002"
-        ])
-
-        # Show available tools
-        for server, info in discovery["servers"].items():
-            print(f"\\n{server}:")
-            for tool in info.get("tools", []):
-                print(f"  - {tool['name']}: {tool['description']}")
+    # Show available tools
+    for server, info in discovery["servers"].items():
+        print(f"\\n{server}:")
+        for tool in info.get("tools", []):
+            print(f"  - {tool['name']}: {tool['description']}")
+    ```
     """
     if server_urls is None:
         try:
@@ -337,20 +334,20 @@ def list_mcp_connections(self) -> Dict[str, Any]:
     """
     List all active MCP connections and loaded tools.
 
-    Returns
-    -------
+    Returns:
+    ========
     dict
         Information about MCP connections, auto-loaders, and loaded tools
 
-    Examples
-    --------
-    .. code-block:: python
+    Examples:
+    =========
+    ```python
+    tu = ToolUniverse()
+    tu.load_mcp_tools(["http://localhost:8001"])
 
-        tu = ToolUniverse()
-        tu.load_mcp_tools(["http://localhost:8001"])
-
-        connections = tu.list_mcp_connections()
-        print(f"Active MCP connections: {len(connections['connections'])}")
+    connections = tu.list_mcp_connections()
+    print(f"Active MCP connections: {len(connections['connections'])}")
+    ```
     """
     mcp_tools = {}
     mcp_loaders = {}

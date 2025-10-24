@@ -16,12 +16,8 @@ leveraging AgenticTool and ComposeTool for intelligent output processing.
 """
 
 import json
-from dataclasses import dataclass
 from typing import Dict, Any, List, Optional
 from pathlib import Path
-from tooluniverse.logging_config import get_logger
-
-_logger = get_logger(__name__)
 
 
 class HookRule:
@@ -65,7 +61,7 @@ class HookRule:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns
+        Returns:
             bool: True if conditions are met, False otherwise
         """
         # Evaluate output length conditions
@@ -158,7 +154,7 @@ class OutputHook:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns
+        Returns:
             bool: True if hook should trigger, False otherwise
         """
         if not self.enabled:
@@ -168,9 +164,9 @@ class OutputHook:
     def process(
         self,
         result: Any,
-        tool_name: str | None = None,
-        arguments: Dict[str, Any] | None = None,
-        context: Dict[str, Any] | None = None,
+        tool_name: str,
+        arguments: Dict[str, Any],
+        context: Dict[str, Any],
     ) -> Any:
         """
         Process the tool output.
@@ -184,39 +180,13 @@ class OutputHook:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns
+        Returns:
             Any: The processed output
 
         Raises:
             NotImplementedError: If not implemented by subclass
         """
         raise NotImplementedError("Subclasses must implement process method")
-
-
-@dataclass
-class SummarizationHookConfig:
-    composer_tool: str = "OutputSummarizationComposer"
-    chunk_size: int = (
-        30000  # Increased to 30000 to minimize chunk count and improve success rate
-    )
-    focus_areas: str = "key_findings_and_results"
-    max_summary_length: int = 3000
-    composer_timeout_sec: int = 60
-
-    def validate(self) -> "SummarizationHookConfig":
-        # Validate numeric fields; clamp to sensible defaults if invalid
-        if not isinstance(self.chunk_size, int) or self.chunk_size <= 0:
-            self.chunk_size = 30000
-        if not isinstance(self.max_summary_length, int) or self.max_summary_length <= 0:
-            self.max_summary_length = 3000
-        if (
-            not isinstance(self.composer_timeout_sec, int)
-            or self.composer_timeout_sec <= 0
-        ):
-            self.composer_timeout_sec = 60
-        if not isinstance(self.composer_tool, str) or not self.composer_tool:
-            self.composer_tool = "OutputSummarizationComposer"
-        return self
 
 
 class SummarizationHook(OutputHook):
@@ -233,13 +203,13 @@ class SummarizationHook(OutputHook):
 
     Attributes:
         tooluniverse: ToolUniverse instance for tool execution
-        composer_tool (str): Name of the ComposeTool for summarization
+        composer_tool_name (str): Name of the ComposeTool for summarization
         chunk_size (int): Size of chunks for processing large outputs
         focus_areas (str): Areas to focus on during summarization
         max_summary_length (int): Maximum length of final summary
     """
 
-    def __init__(self, config: Dict[str, Any] | SummarizationHookConfig, tooluniverse):
+    def __init__(self, config: Dict[str, Any], tooluniverse):
         """
         Initialize the summarization hook.
 
@@ -247,34 +217,25 @@ class SummarizationHook(OutputHook):
             config (Dict[str, Any]): Hook configuration
             tooluniverse: ToolUniverse instance for executing summarization tools
         """
-        super().__init__(config if isinstance(config, dict) else {"hook_config": {}})
+        super().__init__(config)
         self.tooluniverse = tooluniverse
-        # Normalize input to config dataclass
-        if isinstance(config, SummarizationHookConfig):
-            cfg = config
-        else:
-            raw = config.get("hook_config", {}) if isinstance(config, dict) else {}
-            # Breaking change: only support composer_tool going forward
-            cfg = SummarizationHookConfig(
-                composer_tool=raw.get("composer_tool", "OutputSummarizationComposer"),
-                chunk_size=raw.get("chunk_size", 2000),
-                focus_areas=raw.get("focus_areas", "key_findings_and_results"),
-                max_summary_length=raw.get("max_summary_length", 3000),
-                composer_timeout_sec=raw.get("composer_timeout_sec", 60),
-            )
-        self.config_obj = cfg.validate()
-        self.composer_tool = self.config_obj.composer_tool
-        self.chunk_size = self.config_obj.chunk_size
-        self.focus_areas = self.config_obj.focus_areas
-        self.max_summary_length = self.config_obj.max_summary_length
-        self.composer_timeout_sec = self.config_obj.composer_timeout_sec
+        hook_config = config.get("hook_config", {})
+        self.composer_tool_name = hook_config.get(
+            "composer_tool", "OutputSummarizationComposer"
+        )
+        self.chunk_size = hook_config.get("chunk_size", 2000)
+        self.focus_areas = hook_config.get("focus_areas", "key_findings_and_results")
+        self.max_summary_length = hook_config.get("max_summary_length", 3000)
+        # Optional timeout to prevent hangs in composer / LLM calls
+        # If the composer does not return within this window, we gracefully fall back
+        self.composer_timeout_sec = hook_config.get("composer_timeout_sec", 20)
 
     def process(
         self,
         result: Any,
-        tool_name: Optional[str] = None,
-        arguments: Optional[Dict[str, Any]] = None,
-        context: Optional[Dict[str, Any]] = None,
+        tool_name: str,
+        arguments: Dict[str, Any],
+        context: Dict[str, Any],
     ) -> Any:
         """
         Execute summarization processing using Compose Summarizer Tool.
@@ -290,43 +251,35 @@ class SummarizationHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns
+        Returns:
             Any: The summarized output, or original output if summarization fails
         """
         try:
-            # Backward-compat: allow calling process(result) only
-            if tool_name is None:
-                tool_name = "unknown_tool"
-            if arguments is None:
-                arguments = {}
-            if context is None:
-                context = {}
-            # Explicitly preserve None and empty string semantics
-            if result is None:
-                return None
-            if isinstance(result, str) and result == "":
-                return ""
             # Debug: basic context
             try:
                 _len = len(str(result))
             except Exception:
                 _len = -1
-            _logger.debug(
-                "SummarizationHook process: tool=%s, result_len=%s, chunk_size=%s, max_summary_length=%s",
-                tool_name,
-                _len,
-                self.chunk_size,
-                self.max_summary_length,
+            import sys as _sys
+
+            print(
+                f"[SummarizationHook] process: tool={tool_name}, result_len={_len}, "
+                f"chunk_size={self.chunk_size}, max_summary_length={self.max_summary_length}",
+                file=_sys.stderr,
+                flush=True,
             )
             # Check if the required tools are available
             if (
-                self.composer_tool not in self.tooluniverse.callable_functions
-                and self.composer_tool not in self.tooluniverse.all_tool_dict
+                self.composer_tool_name not in self.tooluniverse.callable_functions
+                and self.composer_tool_name not in self.tooluniverse.all_tool_dict
             ):
-                _logger.warning(
-                    "Summarization tool '%s' not available; returning original output",
-                    self.composer_tool,
+                print(
+                    f"❌ SummarizationHook: {self.composer_tool_name} tool is not available."
                 )
+                print(
+                    "   This usually means the output_summarization tools are not loaded."
+                )
+                print("   Returning original output without summarization.")
                 return result
 
             # Prepare parameters for Compose Summarizer Tool
@@ -340,10 +293,10 @@ class SummarizationHook(OutputHook):
             }
 
             # Call Compose Summarizer Tool through ToolUniverse
-            _logger.debug(
-                "Calling composer tool '%s' (timeout=%ss)",
-                self.composer_tool,
-                self.composer_timeout_sec,
+            print(
+                f"[SummarizationHook] calling composer tool: {self.composer_tool_name} (timeout={self.composer_timeout_sec}s)",
+                file=_sys.stderr,
+                flush=True,
             )
             # Run composer with timeout to avoid hangs
             try:
@@ -353,7 +306,7 @@ class SummarizationHook(OutputHook):
 
                 def _call_composer():
                     return self.tooluniverse.run_one_function(
-                        {"name": self.composer_tool, "arguments": composer_args}
+                        {"name": self.composer_tool_name, "arguments": composer_args}
                     )
 
                 with ThreadPoolExecutor(max_workers=1) as _pool:
@@ -361,20 +314,28 @@ class SummarizationHook(OutputHook):
                     composer_result = _future.result(timeout=self.composer_timeout_sec)
             except Exception as _e_timeout:
                 # Timeout or execution error; log and fall back to original output
-                _logger.warning("Composer execution failed/timeout: %s", _e_timeout)
+                print(
+                    f"[SummarizationHook] composer execution failed/timeout: {_e_timeout}",
+                    file=_sys.stderr,
+                    flush=True,
+                )
                 return result
             # Debug: show composer result meta
             try:
                 if isinstance(composer_result, dict):
                     success = composer_result.get("success", False)
                     summary_len = len(composer_result.get("summary", ""))
-                    _logger.debug(
-                        "Composer result: success=%s summary_len=%s",
-                        success,
-                        summary_len,
+                    print(
+                        f"[SummarizationHook] composer_result: success={success} summary_len={summary_len}",
+                        file=_sys.stderr,
+                        flush=True,
                     )
             except Exception as _e_dbg:
-                _logger.debug("Debug error inspecting composer_result: %s", _e_dbg)
+                print(
+                    f"[SummarizationHook] debug error inspecting composer_result: {_e_dbg}",
+                    file=_sys.stderr,
+                    flush=True,
+                )
 
             # Process Compose Tool result
             if isinstance(composer_result, dict) and composer_result.get("success"):
@@ -382,20 +343,28 @@ class SummarizationHook(OutputHook):
             elif isinstance(composer_result, str):
                 return composer_result
             else:
-                _logger.warning(
-                    "Compose Summarizer Tool returned unexpected result: %s",
-                    composer_result,
+                print(
+                    f"Warning: Compose Summarizer Tool returned unexpected result: {composer_result}"
                 )
                 return result
 
         except Exception as e:
             error_msg = str(e)
-            _logger.error("Error in summarization hook: %s", error_msg)
+            import sys as _sys
+
+            print(
+                f"Error in summarization hook: {error_msg}",
+                file=_sys.stderr,
+                flush=True,
+            )
+
             # Check if the error is due to missing tools
             if "not found" in error_msg.lower() or "ToolOutputSummarizer" in error_msg:
-                _logger.error(
-                    "Required summarization tools are not available. Please ensure the SMCP server is started with hooks enabled."
+                print(
+                    "❌ SummarizationHook: Required summarization tools are not available."
                 )
+                print("   Please ensure the SMCP server is started with hooks enabled.")
+
             return result
 
     def _extract_query_context(self, context: Dict[str, Any]) -> str:
@@ -408,7 +377,7 @@ class SummarizationHook(OutputHook):
         Args:
             context (Dict[str, Any]): Execution context containing arguments and metadata
 
-        Returns
+        Returns:
             str: Extracted query context or fallback description
         """
         arguments = context.get("arguments", {})
@@ -455,49 +424,20 @@ class HookManager:
         self.tooluniverse = tooluniverse
         self.hooks: List[OutputHook] = []
         self.enabled = True
-        # Alias for tests that expect hooks_enabled flag
-        self.hooks_enabled = self.enabled
         self.config_path = config.get("config_path", "template/hook_config.json")
         self._pending_tools_to_load: List[str] = []
         self._load_hook_config()
 
         # Validate LLM API keys before loading hooks
         if not self._validate_llm_api_keys():
-            _logger.warning("LLM API keys not available. Hooks will be disabled.")
-            _logger.info(
-                "To enable hooks, please set LLM API keys environment variable."
+            print("⚠️  Warning: LLM API keys not available. Hooks will be disabled.")
+            print(
+                "   To enable hooks, please set AZURE_OPENAI_API_KEY environment variable."
             )
-            # Disable hook processing but still ensure required tools are available
-            # Tests expect hook-related tools (e.g., ToolOutputSummarizer) to be registered
-            # in ToolUniverse.callable_functions even when hooks are disabled.
             self.enabled = False
-
-            try:
-                # Proactively load tools required by summarization hooks so they are discoverable
-                all_hook_configs = []
-                global_hooks = (
-                    self.config.get("hooks", [])
-                    if isinstance(self.config, dict)
-                    else []
-                )
-                for hook_cfg in global_hooks:
-                    all_hook_configs.append(hook_cfg)
-
-                # Attempt auto-load based on config; if config is empty, fall back to ensuring summarization tools
-                self._auto_load_hook_tools(all_hook_configs)
-                # Ensure tools are pre-instantiated into callable_functions if possible
-                self._ensure_hook_tools_loaded()
-            except Exception as _e:
-                # Non-fatal: we still proceed with disabled hooks
-                _logger.warning("Failed to preload hook tools without API keys: %s", _e)
-
-            # Do not proceed to create hook instances when disabled
-            # Keep hooks list empty and reflect flags
-            self.hooks_enabled = self.enabled
             return
 
         self._load_hooks()
-        self.hooks_enabled = self.enabled
 
     def apply_hooks(
         self,
@@ -519,7 +459,7 @@ class HookManager:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns
+        Returns:
             Any: The processed output after applying all applicable hooks
         """
         if not self.enabled:
@@ -542,9 +482,7 @@ class HookManager:
             # Check if hook is applicable to current tool
             if self._is_hook_applicable(hook, tool_name, context):
                 if hook.should_trigger(result, tool_name, arguments, context):
-                    _logger.debug(
-                        "Applying hook: %s for tool: %s", hook.name, tool_name
-                    )
+                    print(f"🔧 Applying hook: {hook.name} for tool: {tool_name}")
                     result = hook.process(result, tool_name, arguments, context)
 
         return result
@@ -553,17 +491,17 @@ class HookManager:
         """
         Validate that LLM API keys are available for hook tools.
 
-        Returns
+        Returns:
             bool: True if API keys are available, False otherwise
         """
         from .agentic_tool import AgenticTool
 
         if AgenticTool.has_any_api_keys():
-            _logger.debug("LLM API keys validated successfully")
+            print("✅ LLM API keys validated successfully")
             return True
         else:
-            _logger.error("LLM API key validation failed: No API keys available")
-            _logger.info("To enable hooks, please set API key environment variables.")
+            print("❌ LLM API key validation failed: No API keys available")
+            print("   To enable hooks, please set API key environment variables.")
             return False
 
     def enable_hook(self, hook_name: str):
@@ -576,9 +514,9 @@ class HookManager:
         hook = self.get_hook(hook_name)
         if hook:
             hook.enabled = True
-            _logger.info("Enabled hook: %s", hook_name)
+            print(f"✅ Enabled hook: {hook_name}")
         else:
-            _logger.error("Hook not found: %s", hook_name)
+            print(f"❌ Hook not found: {hook_name}")
 
     def disable_hook(self, hook_name: str):
         """
@@ -590,9 +528,9 @@ class HookManager:
         hook = self.get_hook(hook_name)
         if hook:
             hook.enabled = False
-            _logger.info("Disabled hook: %s", hook_name)
+            print(f"❌ Disabled hook: {hook_name}")
         else:
-            _logger.error("Hook not found: %s", hook_name)
+            print(f"❌ Hook not found: {hook_name}")
 
     def toggle_hooks(self, enabled: bool):
         """
@@ -602,23 +540,8 @@ class HookManager:
             enabled (bool): True to enable all hooks, False to disable
         """
         self.enabled = enabled
-        self.hooks_enabled = enabled
         status = "enabled" if enabled else "disabled"
-        _logger.info("Hooks %s", status)
-
-    # Backward-compat: tests reference enable_hooks/disable_hooks APIs
-    def enable_hooks(self):
-        """Enable hooks and (re)load configurations and required tools."""
-        self.toggle_hooks(True)
-        # Ensure tools and hooks are ready
-        self._ensure_hook_tools_loaded()
-        self._load_hooks()
-
-    def disable_hooks(self):
-        """Disable hooks and clear in-memory hook instances."""
-        self.toggle_hooks(False)
-        # Do not destroy config; just clear active hooks
-        self.hooks = []
+        print(f"🔧 Hooks {status}")
 
     def reload_config(self, config_path: Optional[str] = None):
         """
@@ -632,7 +555,7 @@ class HookManager:
             self.config_path = config_path
         self._load_hook_config()
         self._load_hooks()
-        _logger.info("Reloaded hook configuration")
+        print("🔄 Reloaded hook configuration")
 
     def get_hook(self, hook_name: str) -> Optional[OutputHook]:
         """
@@ -641,7 +564,7 @@ class HookManager:
         Args:
             hook_name (str): Name of the hook to retrieve
 
-        Returns
+        Returns:
             Optional[OutputHook]: Hook instance if found, None otherwise
         """
         for hook in self.hooks:
@@ -684,7 +607,7 @@ class HookManager:
         """
         Get the path to the hook configuration file.
 
-        Returns
+        Returns:
             Path: Path to the configuration file
         """
         try:
@@ -741,8 +664,8 @@ class HookManager:
         # Auto-load required tools for hooks
         self._auto_load_hook_tools(all_hook_configs)
 
-        # Note: Hook tools will be pre-loaded when ToolUniverse.load_tools() is called
-        # This is handled in the _load_pending_tools method
+        # Ensure hook tools are loaded
+        self._ensure_hook_tools_loaded()
 
         # Create hook instances
         for hook_config in all_hook_configs:
@@ -819,25 +742,23 @@ class HookManager:
                                 missing_tools.append(tool)
 
                         if missing_tools:
-                            _logger.warning(
-                                "Some hook tools could not be loaded: %s", missing_tools
+                            print(
+                                f"⚠️  Warning: Some hook tools could not be loaded: {missing_tools}"
                             )
-                            _logger.info("This may cause summarization hooks to fail.")
+                            print("   This may cause summarization hooks to fail.")
                         else:
-                            _logger.info(
-                                "Auto-loaded hook tools: %s",
-                                ", ".join(tools_to_load),
+                            print(
+                                f"🔧 Auto-loaded hook tools: {', '.join(tools_to_load)}"
                             )
                     else:
                         # Store tools to load later when ToolUniverse is ready
                         self._pending_tools_to_load = tools_to_load
-                        _logger.info(
-                            "Hook tools queued for loading: %s",
-                            ", ".join(tools_to_load),
+                        print(
+                            f"🔧 Hook tools queued for loading: {', '.join(tools_to_load)}"
                         )
                 except Exception as e:
-                    _logger.warning("Could not auto-load hook tools: %s", e)
-                    _logger.info("This will cause summarization hooks to fail.")
+                    print(f"⚠️  Warning: Could not auto-load hook tools: {e}")
+                    print("   This will cause summarization hooks to fail.")
 
     def _ensure_hook_tools_loaded(self):
         """
@@ -858,49 +779,34 @@ class HookManager:
                 not hasattr(self.tooluniverse, "tool_category_dicts")
                 or "output_summarization" not in self.tooluniverse.tool_category_dicts
             ):
-                _logger.info("Loading output_summarization tools for hooks")
+                print("🔧 Loading output_summarization tools for hooks")
                 self.tooluniverse.load_tools(["output_summarization"])
 
-            # Pre-instantiate hook tools to ensure they're available in callable_functions
-            required_tools = ["ToolOutputSummarizer", "OutputSummarizationComposer"]
-            for tool_name in required_tools:
-                if (
-                    tool_name in self.tooluniverse.all_tool_dict
-                    and tool_name not in self.tooluniverse.callable_functions
-                ):
-                    try:
-                        self.tooluniverse.init_tool(
-                            self.tooluniverse.all_tool_dict[tool_name],
-                            add_to_cache=True,
-                        )
-                        _logger.debug("Pre-loaded hook tool: %s", tool_name)
-                    except Exception as e:
-                        _logger.warning(
-                            "Failed to pre-load hook tool %s: %s", tool_name, e
-                        )
+                # Verify the tools were loaded
+                missing_tools = []
+                required_tools = ["ToolOutputSummarizer", "OutputSummarizationComposer"]
+                for tool in required_tools:
+                    if (
+                        hasattr(self.tooluniverse, "callable_functions")
+                        and tool not in self.tooluniverse.callable_functions
+                        and hasattr(self.tooluniverse, "all_tool_dict")
+                        and tool not in self.tooluniverse.all_tool_dict
+                    ):
+                        missing_tools.append(tool)
 
-            # Verify the tools were loaded
-            missing_tools = []
-            for tool in required_tools:
-                if (
-                    hasattr(self.tooluniverse, "callable_functions")
-                    and tool not in self.tooluniverse.callable_functions
-                    and hasattr(self.tooluniverse, "all_tool_dict")
-                    and tool not in self.tooluniverse.all_tool_dict
-                ):
-                    missing_tools.append(tool)
-
-            if missing_tools:
-                _logger.warning(
-                    "Some hook tools could not be loaded: %s", missing_tools
-                )
-                _logger.info("This may cause summarization hooks to fail")
+                if missing_tools:
+                    print(
+                        f"⚠️  Warning: Some hook tools could not be loaded: {missing_tools}"
+                    )
+                    print("   This may cause summarization hooks to fail")
+                else:
+                    print(f"✅ Hook tools loaded successfully: {required_tools}")
             else:
-                _logger.info("Hook tools loaded successfully: %s", required_tools)
+                print("🔧 Output_summarization tools already loaded")
 
         except Exception as e:
-            _logger.error("Error loading hook tools: %s", e)
-            _logger.info("This will cause summarization hooks to fail")
+            print(f"❌ Error loading hook tools: {e}")
+            print("   This will cause summarization hooks to fail")
 
     def _load_pending_tools(self):
         """
@@ -913,16 +819,12 @@ class HookManager:
         if self._pending_tools_to_load and hasattr(self.tooluniverse, "all_tools"):
             try:
                 self.tooluniverse.load_tools(self._pending_tools_to_load)
-                _logger.info(
-                    "Loaded pending hook tools: %s",
-                    ", ".join(self._pending_tools_to_load),
+                print(
+                    f"🔧 Loaded pending hook tools: {', '.join(self._pending_tools_to_load)}"
                 )
                 self._pending_tools_to_load = []  # Clear the pending list
             except Exception as e:
-                _logger.warning("Could not load pending hook tools: %s", e)
-
-        # Pre-load hook tools if they're available but not instantiated
-        self._ensure_hook_tools_loaded()
+                print(f"⚠️  Warning: Could not load pending hook tools: {e}")
 
     def _is_hook_tool(self, tool_name: str) -> bool:
         """
@@ -934,7 +836,7 @@ class HookManager:
         Args:
             tool_name (str): Name of the tool to check
 
-        Returns
+        Returns:
             bool: True if the tool is a hook tool and should be excluded from hook processing
         """
         hook_tool_names = [
@@ -956,7 +858,7 @@ class HookManager:
         Args:
             hook_config (Dict[str, Any]): Hook configuration
 
-        Returns
+        Returns:
             Optional[OutputHook]: Created hook instance or None if type not supported
         """
         hook_type = hook_config.get("type", "SummarizationHook")
@@ -972,7 +874,7 @@ class HookManager:
             file_save_config.update(enhanced_config.get("hook_config", {}))
             return FileSaveHook(file_save_config)
         else:
-            _logger.error("Unknown hook type: %s", hook_type)
+            print(f"Unknown hook type: {hook_type}")
             return None
 
     def _apply_hook_type_defaults(self, hook_config: Dict[str, Any]) -> Dict[str, Any]:
@@ -985,7 +887,7 @@ class HookManager:
         Args:
             hook_config (Dict[str, Any]): Original hook configuration
 
-        Returns
+        Returns:
             Dict[str, Any]: Enhanced configuration with defaults applied
         """
         hook_type = hook_config.get("type", "SummarizationHook")
@@ -1016,7 +918,38 @@ class HookManager:
                     "default_max_summary_length", 3000
                 ),
             }
-        # Removed unsupported hook types to avoid confusion
+        elif hook_type == "FilteringHook":
+            defaults = {
+                "replacement_text": hook_type_defaults.get(
+                    "default_replacement_text", "[REDACTED]"
+                ),
+                "preserve_structure": hook_type_defaults.get(
+                    "default_preserve_structure", True
+                ),
+                "log_filtered_items": hook_type_defaults.get(
+                    "default_log_filtered_items", False
+                ),
+            }
+        elif hook_type == "FormattingHook":
+            defaults = {
+                "indent_size": hook_type_defaults.get("default_indent_size", 2),
+                "sort_keys": hook_type_defaults.get("default_sort_keys", True),
+                "pretty_print": hook_type_defaults.get("default_pretty_print", True),
+                "max_line_length": hook_type_defaults.get(
+                    "default_max_line_length", 100
+                ),
+            }
+        elif hook_type == "ValidationHook":
+            defaults = {
+                "strict_mode": hook_type_defaults.get("default_strict_mode", False),
+                "error_action": hook_type_defaults.get("default_error_action", "warn"),
+            }
+        elif hook_type == "LoggingHook":
+            defaults = {
+                "log_level": hook_type_defaults.get("default_log_level", "INFO"),
+                "log_format": hook_type_defaults.get("default_log_format", "simple"),
+                "max_log_size": hook_type_defaults.get("default_max_log_size", 1000),
+            }
         elif hook_type == "FileSaveHook":
             defaults = {
                 "temp_dir": hook_type_defaults.get("default_temp_dir", None),
@@ -1052,7 +985,7 @@ class HookManager:
             tool_name (str): Name of the current tool
             context (Dict[str, Any]): Execution context
 
-        Returns
+        Returns:
             bool: True if hook is applicable, False otherwise
         """
         # Check tool-specific hooks
@@ -1138,7 +1071,7 @@ class FileSaveHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Execution context
 
-        Returns
+        Returns:
             Dict[str, Any]: Dictionary containing file information:
                 - file_path: Path to the saved file
                 - data_format: Format of the data (json, text, binary, etc.)
@@ -1213,7 +1146,7 @@ class FileSaveHook(OutputHook):
         Args:
             data (Any): The data to analyze
 
-        Returns
+        Returns:
             tuple[str, str]: (data_format, data_structure)
         """
         if isinstance(data, dict):

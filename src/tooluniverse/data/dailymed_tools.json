@@ -42,16 +42,7 @@
           "default": 1
         }
       },
-      "required": [
-        "drug_name",
-        "ndc",
-        "rxcui",
-        "setid",
-        "published_date_gte",
-        "published_date_eq",
-        "pagesize",
-        "page"
-      ]
+      "required": []
     }
   },
   {
@@ -68,17 +59,12 @@
         },
         "format": {
           "type": "string",
-          "enum": [
-            "xml"
-          ],
+          "enum": ["xml"],
           "default": "xml",
           "description": "Return format, only supports 'xml'."
         }
       },
-      "required": [
-        "setid",
-        "format"
-      ]
+      "required": ["setid"]
     }
   }
 ]

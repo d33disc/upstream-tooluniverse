@@ -55,19 +55,19 @@ Example MCP client to connect to an existing MCP server. Supports all MCP operat
    * ``operation`` (string) (required)
      The MCP operation to perform
 
-   * ``tool_name`` (string) (required)
+   * ``tool_name`` (string) (optional)
      Name of the tool to call (required for call_tool operation)
 
-   * ``tool_arguments`` (object) (required)
+   * ``tool_arguments`` (object) (optional)
      Arguments to pass to the tool (for call_tool operation)
 
-   * ``uri`` (string) (required)
+   * ``uri`` (string) (optional)
      Resource URI (required for read_resource operation)
 
-   * ``prompt_name`` (string) (required)
+   * ``prompt_name`` (string) (optional)
      Name of the prompt to get (required for get_prompt operation)
 
-   * ``prompt_arguments`` (object) (required)
+   * ``prompt_arguments`` (object) (optional)
      Arguments to pass to the prompt (for get_prompt operation)
 
    **Example Usage:**
@@ -77,12 +77,7 @@ Example MCP client to connect to an existing MCP server. Supports all MCP operat
       query = {
           "name": "mcp_client_example",
           "arguments": {
-              "operation": "example_value",
-              "tool_name": "example_value",
-              "tool_arguments": "example_value",
-              "uri": "example_value",
-              "prompt_name": "example_value",
-              "prompt_arguments": "example_value"
+              "operation": "example_value"
           }
       }
       result = tu.run(query)
@@ -145,7 +140,7 @@ A simple greeting tool
    * ``name`` (string) (required)
      Name to greet
 
-   * ``language`` (string) (required)
+   * ``language`` (string) (optional)
      Language for greeting
 
    **Example Usage:**
@@ -155,8 +150,7 @@ A simple greeting tool
       query = {
           "name": "mcp_mock_greeter",
           "arguments": {
-              "name": "example_value",
-              "language": "example_value"
+              "name": "example_value"
           }
       }
       result = tu.run(query)

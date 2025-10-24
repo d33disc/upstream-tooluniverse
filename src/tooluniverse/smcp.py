@@ -10,8 +10,8 @@ The SMCP module provides a complete solution for exposing scientific computation
 resources through the standardized MCP protocol, making it easy for AI agents to
 discover, understand, and execute scientific tools in a unified manner.
 
-Usage Patterns
---------------
+Usage Patterns:
+===============
 
 Quick Start:
 
@@ -47,8 +47,8 @@ result = await client.call_tool("UniProt_get_entry_by_accession", {
 })
 ```
 
-Architecture
-------------
+Architecture:
+=============
 
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   MCP Client    │◄──►│      SMCP        │◄──►│  ToolUniverse   │
@@ -69,8 +69,8 @@ The SMCP server acts as an intelligent middleware layer that:
 4. Returns formatted results via MCP protocol
 5. Provides intelligent tool discovery and recommendation
 
-Integration Points
-------------------
+Integration Points:
+==================
 
 MCP Protocol Layer:
     - Standard MCP methods (tools/list, tools/call, etc.)
@@ -92,7 +92,6 @@ AI Agent Interface:
 """
 
 import asyncio
-import functools
 import json
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Union, Callable, Literal
@@ -219,21 +218,6 @@ class SMCP(FastMCP):
         during tool loading. Useful for excluding entire categories of tools
         (e.g., all ToolFinder types or all OpenTarget tools).
 
-    space : str or list of str, optional
-        Space configuration URI(s) to load. Can be a single URI string or a list
-        of URIs for loading multiple Space configurations. Supported formats:
-        - Local file: "./config.yaml" or "/path/to/config.yaml"
-        - HuggingFace: "hf:username/repo" or "hf:username/repo/file.yaml"
-        - HTTP URL: "https://example.com/config.yaml"
-
-        When provided, Space configurations are loaded after tool initialization,
-        applying LLM settings, hooks, and tool selections from the configuration files.
-        Multiple spaces can be loaded sequentially, with later configurations
-        potentially overriding earlier ones.
-
-        Example: space="./my-workspace.yaml"
-        Example: space=["hf:community/bio-tools", "./custom-tools.yaml"]
-
     auto_expose_tools : bool, default True
         Whether to automatically expose ToolUniverse tools as MCP tools.
         When True, all loaded tools become available via the MCP interface
@@ -264,7 +248,7 @@ class SMCP(FastMCP):
         or a list of both. Provides an easy way to enable hooks without full configuration.
         Takes precedence over hooks_enabled when specified.
 
-    **kwargs**
+    **kwargs
         Additional arguments passed to the underlying FastMCP server instance.
         Supports all FastMCP configuration options for advanced customization.
 
@@ -296,7 +280,6 @@ class SMCP(FastMCP):
         tool_config_files: Optional[Dict[str, str]] = None,
         include_tool_types: Optional[List[str]] = None,
         exclude_tool_types: Optional[List[str]] = None,
-        space: Optional[Union[str, List[str]]] = None,
         auto_expose_tools: bool = True,
         search_enabled: bool = True,
         max_workers: int = 5,
@@ -341,7 +324,6 @@ class SMCP(FastMCP):
         self.tool_config_files = tool_config_files or {}
         self.include_tool_types = include_tool_types or []
         self.exclude_tool_types = exclude_tool_types or []
-        self.space = space
         self.auto_expose_tools = auto_expose_tools
         self.search_enabled = search_enabled
         self.max_workers = max_workers
@@ -349,69 +331,26 @@ class SMCP(FastMCP):
         self.hook_config = hook_config
         self.hook_type = hook_type
 
-        # Space configuration storage
-        self.space_llm_config = None
-        self.space_metadata = None
-
         # Thread pool for concurrent tool execution
         self.executor = ThreadPoolExecutor(max_workers=max_workers)
 
         # Track exposed tools to avoid duplicates
         self._exposed_tools = set()
 
-        # Load Space configurations first if provided
-        if space:
-            self._load_space_configs(space)
-
-        # Initialize SMCP-specific features (after Space is loaded)
+        # Initialize SMCP-specific features
         self._setup_smcp_tools()
 
         # Register custom MCP methods
         self._register_custom_mcp_methods()
-
-    def _load_space_configs(self, space: Union[str, List[str]]):
-        """
-        Load Space configurations.
-
-        This method loads Space configuration(s) and retrieves the LLM config
-        and metadata from ToolUniverse. It completely reuses ToolUniverse's
-        load_space functionality without reimplementing any logic.
-
-        Args:
-            space: Space URI or list of URIs (e.g., "./config.yaml",
-                      "hf:user/repo", or ["config1.yaml", "config2.yaml"])
-        """
-        space_list = [space] if isinstance(space, str) else space
-
-        for uri in space_list:
-            print(f"📦 Loading Space: {uri}")
-
-            # Directly call ToolUniverse's method (complete reuse)
-            config = self.tooluniverse.load_space(uri)
-
-            # Get configurations from ToolUniverse (complete reuse)
-            self.space_metadata = self.tooluniverse.get_space_metadata()
-            self.space_llm_config = self.tooluniverse.get_space_llm_config()
-
-            print(f"✅ Space loaded: {config.get('name', 'Unknown')}")
-
-    def get_llm_config(self) -> Optional[Dict[str, Any]]:
-        """
-        Get the current Space LLM configuration.
-
-        Returns:
-            LLM configuration dictionary or None if not set
-        """
-        return self.space_llm_config
 
     def _register_custom_mcp_methods(self):
         """
         Register custom MCP protocol methods for enhanced functionality.
 
         This method extends the standard MCP protocol by registering custom handlers
-        for scientific tool discovery and search operations. It uses FastMCP's
-        middleware system to handle custom methods while maintaining compatibility
-        with standard MCP operations.
+        for scientific tool discovery and search operations. It safely patches the
+        FastMCP request handler to support additional methods while maintaining
+        compatibility with standard MCP operations.
 
         Custom Methods Registered:
         =========================
@@ -420,20 +359,38 @@ class SMCP(FastMCP):
 
         Implementation Details:
         ======================
-        - Uses FastMCP's middleware system instead of request handler patching
-        - Implements custom middleware methods for tools/find and tools/search
-        - Standard MCP methods (tools/list, tools/call) are handled by FastMCP
+        - Preserves original FastMCP request handler for standard methods
+        - Uses method interception pattern to handle custom methods first
+        - Falls back to original handler for unrecognized methods
         - Implements proper error handling and JSON-RPC 2.0 compliance
+
+        Error Handling:
+        ==============
+        - Gracefully handles missing request handlers
+        - Logs warnings for debugging when handler patching fails
+        - Ensures server continues to function even if custom methods fail to register
 
         Notes:
         ======
         This method is called automatically during SMCP initialization and should
-        not be called manually.
+        not be called manually. It uses a guard to prevent double-patching.
         """
         try:
-            # Add custom middleware for tools/find and tools/search
-            self.add_middleware(self._tools_find_middleware)
-            self.logger.info("✅ Custom MCP methods registered successfully")
+            # Override the default request handler to support custom methods
+            if hasattr(self, "_original_handle_request"):
+                return  # Already patched
+
+            # Store original handler
+            self._original_handle_request = getattr(self, "_handle_request", None)
+
+            # Replace with custom handler
+            if hasattr(self, "_handle_request"):
+                self._handle_request = self._custom_handle_request
+            elif hasattr(self, "handle_request"):
+                self._original_handle_request = self.handle_request
+                self.handle_request = self._custom_handle_request
+            else:
+                self.logger.warning("Could not find request handler to override")
 
         except Exception as e:
             self.logger.error(f"Error registering custom MCP methods: {e}")
@@ -457,32 +414,117 @@ class SMCP(FastMCP):
             self.logger.error(f"❌ Error getting valid categories: {e}")
             return set()
 
-    async def _tools_find_middleware(self, context, call_next):
+    async def _custom_handle_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Middleware for handling tools/find and tools/search requests.
+        Custom MCP request handler that supports enhanced scientific tool operations.
 
-        This middleware intercepts tools/find and tools/search requests and
-        provides AI-powered tool discovery functionality.
+        This handler intercepts MCP requests and provides specialized handling for
+        scientific tool discovery methods while maintaining full compatibility with
+        standard MCP protocol operations.
+
+        Parameters:
+        ===========
+        request : dict
+            JSON-RPC 2.0 request object containing:
+            - method: The MCP method being called
+            - id: Request identifier for response correlation
+            - params: Method-specific parameters
+
+        Returns:
+        ========
+        dict
+            JSON-RPC 2.0 response object with either:
+            - result: Successful operation result
+            - error: Error information with code and message
+
+        Supported Custom Methods:
+        ========================
+        tools/find:
+            Search for tools using natural language queries with AI-powered recommendations.
+            Parameters:
+            - query (required): Natural language description of desired functionality
+            - categories (optional): List of tool categories to filter by
+            - limit (optional): Maximum number of results (default: 10)
+            - use_advanced_search (optional): Use AI vs keyword search (default: True)
+            - search_method (optional): Specific search method - 'auto', 'llm', 'embedding', 'keyword' (default: 'auto')
+            - format (optional): Response format - 'detailed' or 'mcp_standard'
+
+        tools/search:
+            Alias for tools/find method with identical parameters and behavior.
+
+        Standard MCP Methods:
+            All other methods are forwarded to the original FastMCP handler,
+            ensuring full compatibility with MCP specification.
+
+        Error Codes:
+        ============
+        - -32601: Method not found (unknown method)
+        - -32602: Invalid params (missing required parameters)
+        - -32603: Internal error (server-side failures)
+
+        Examples:
+        =========
+        Request for tool discovery:
+        ```json
+        {
+            "jsonrpc": "2.0",
+            "id": "search_123",
+            "method": "tools/find",
+            "params": {
+                "query": "protein structure analysis",
+                "limit": 5,
+                "format": "mcp_standard"
+            }
+        }
+        ```
+
+        Successful response:
+        ```json
+        {
+            "jsonrpc": "2.0",
+            "id": "search_123",
+            "result": {
+                "tools": [...],
+                "_meta": {
+                    "search_query": "protein structure analysis",
+                    "search_method": "AI-powered (ToolFinderLLM)",
+                    "total_matches": 5
+                }
+            }
+        }
+        ```
         """
-        # Check if this is a tools/find or tools/search request
-        if hasattr(context, "method") and context.method in [
-            "tools/find",
-            "tools/search",
-        ]:
-            try:
-                # Handle the custom method
-                result = await self._handle_tools_find(context.id, context.params)
-                return result
-            except Exception as e:
-                self.logger.error(f"Error in tools/find middleware: {e}")
+        try:
+            method = request.get("method")
+            request_id = request.get("id")
+            params = request.get("params", {})
+
+            # Handle custom methods
+            if method == "tools/find":
+                return await self._handle_tools_find(request_id, params)
+            elif method == "tools/search":  # Alternative endpoint name
+                return await self._handle_tools_find(request_id, params)
+
+            # For all other methods, use the original handler
+            if self._original_handle_request:
+                if asyncio.iscoroutinefunction(self._original_handle_request):
+                    return await self._original_handle_request(request)
+                else:
+                    return self._original_handle_request(request)
+            else:
+                # Fallback: return method not found error
                 return {
                     "jsonrpc": "2.0",
-                    "id": context.id,
-                    "error": {"code": -32603, "message": f"Internal error: {str(e)}"},
+                    "id": request_id,
+                    "error": {"code": -32601, "message": f"Method not found: {method}"},
                 }
 
-        # For all other methods, call the next middleware/handler
-        return await call_next(context)
+        except Exception as e:
+            return {
+                "jsonrpc": "2.0",
+                "id": request.get("id"),
+                "error": {"code": -32603, "message": f"Internal error: {str(e)}"},
+            }
 
     async def _handle_tools_find(
         self, request_id: str, params: Dict[str, Any]
@@ -602,40 +644,11 @@ class SMCP(FastMCP):
             # Parse the search result
             search_data = json.loads(search_result)
 
-            # Handle different response formats
-            if isinstance(search_data, list):
-                # If search_data is a list, treat it as tools directly
-                tools_list = search_data
-                search_metadata = {
-                    "search_query": query,
-                    "search_method": "unknown",
-                    "total_matches": len(tools_list),
-                    "categories_filtered": categories,
-                }
-            elif isinstance(search_data, dict):
-                # If search_data is a dict, extract tools and metadata
-                tools_list = search_data.get("tools", [])
-                search_metadata = {
-                    "search_query": query,
-                    "search_method": search_data.get("search_method", "unknown"),
-                    "total_matches": search_data.get("total_matches", len(tools_list)),
-                    "categories_filtered": categories,
-                }
-            else:
-                # Fallback for unexpected format
-                tools_list = []
-                search_metadata = {
-                    "search_query": query,
-                    "search_method": "unknown",
-                    "total_matches": 0,
-                    "categories_filtered": categories,
-                }
-
             # Format response based on requested format
             if format_type == "mcp_standard":
                 # Format as standard MCP tools/list style response
-                mcp_tools_list = []
-                for tool in tools_list:
+                tools_list = []
+                for tool in search_data.get("tools", []):
                     mcp_tool = {
                         "name": tool.get("name"),
                         "description": tool.get("description", ""),
@@ -645,11 +658,16 @@ class SMCP(FastMCP):
                             "required": tool.get("required", []),
                         },
                     }
-                    mcp_tools_list.append(mcp_tool)
+                    tools_list.append(mcp_tool)
 
                 result = {
-                    "tools": mcp_tools_list,
-                    "_meta": search_metadata,
+                    "tools": tools_list,
+                    "_meta": {
+                        "search_query": query,
+                        "search_method": search_data.get("search_method"),
+                        "total_matches": search_data.get("total_matches"),
+                        "categories_filtered": categories,
+                    },
                 }
             else:
                 # Return detailed format (default)
@@ -917,28 +935,9 @@ class SMCP(FastMCP):
         - All setup phases include comprehensive error handling
         - Performance scales with the number of tools being loaded and exposed
         """
-        # Determine if ToolUniverse already has tools loaded (e.g., provided pre-configured instance)
-        preloaded_tools = getattr(self.tooluniverse, "all_tools", [])
-        preloaded_count = (
-            len(preloaded_tools) if isinstance(preloaded_tools, list) else 0
-        )
-
-        if preloaded_count > 0:
-            self.logger.info(
-                f"ToolUniverse already pre-configured with {preloaded_count} tool(s); skipping automatic loading."
-            )
-
-        # Check if Space has already loaded specific tools
-        if (
-            self.space
-            and hasattr(self.tooluniverse, "_current_space_config")
-            and preloaded_count > 0
-        ):
-            # Space has already loaded specific tools, don't reload all tools
-            self.logger.info(
-                f"Space configuration loaded {preloaded_count} tool(s), skipping additional loading"
-            )
-        elif preloaded_count == 0 and self.tool_categories:
+        # Always ensure full tool set is loaded (hooks may have preloaded a minimal set)
+        # Deduplication in ToolUniverse.load_tools prevents duplicates, so reloading is safe
+        if self.tool_categories:
             try:
                 # Validate categories first
                 valid_categories = self._get_valid_categories()
@@ -1003,10 +1002,8 @@ class SMCP(FastMCP):
                     include_tool_types=self.include_tool_types,
                     exclude_tool_types=self.exclude_tool_types,
                 )
-        elif self.auto_expose_tools and not (
-            self.space and hasattr(self.tooluniverse, "_current_space_config")
-        ):
-            # Load all tools by default (unless Space already handled tool loading)
+        elif self.auto_expose_tools:
+            # Load all tools by default
             self.tooluniverse.load_tools(
                 exclude_tools=self.exclude_tools,
                 exclude_categories=self.exclude_categories,
@@ -1391,7 +1388,9 @@ class SMCP(FastMCP):
             if "Tool_Finder_LLM" in available_tool_names:
                 self.tool_finder_available = True
                 self.tool_finder_type = "Tool_Finder_LLM"
-                self.logger.info("✅ Tool_Finder_LLM available for advanced search")
+                self.logger.info(
+                    "✅ Tool_Finder_LLM (cost-optimized) available for advanced search"
+                )
                 return
 
             # Fallback to Tool_RAG (embedding-based)
@@ -1697,7 +1696,7 @@ class SMCP(FastMCP):
             this will be set as the function's __doc__ attribute. If None, the
             function's existing docstring will be used.
 
-        **kwargs**
+        **kwargs
             Additional FastMCP tool configuration options:
             - parameter_schema: Custom JSON schema for parameters
             - return_schema: Schema for return values
@@ -1773,7 +1772,7 @@ class SMCP(FastMCP):
         - Support all MCP client interaction patterns
 
         Best Practices:
-        ===============
+        ==============
         - Use descriptive, unique tool names
         - Include comprehensive docstrings
         - Add proper type annotations for parameters
@@ -1804,7 +1803,7 @@ class SMCP(FastMCP):
         It's designed to be safe to call multiple times and handles errors gracefully.
 
         Cleanup Operations:
-        ===================
+        ==================
 
         **Thread Pool Shutdown:**
         - Gracefully stops the ThreadPoolExecutor used for tool execution
@@ -1824,7 +1823,7 @@ class SMCP(FastMCP):
         - Ensures critical resources are always released
 
         Usage Patterns:
-        ===============
+        ==============
 
         **Automatic Cleanup (Recommended):**
         ```python
@@ -1854,14 +1853,14 @@ class SMCP(FastMCP):
         ```
 
         Performance Considerations:
-        ===========================
+        ==========================
         - Cleanup operations are typically fast (< 1 second)
         - Thread pool shutdown may take longer if tasks are running
         - Network connections are closed immediately
         - Memory cleanup depends on garbage collection
 
         Error Recovery:
-        ===============
+        ==============
         - Individual cleanup failures don't stop the overall process
         - Critical errors are logged but don't raise exceptions
         - Cleanup is idempotent - safe to call multiple times
@@ -1879,98 +1878,6 @@ class SMCP(FastMCP):
             self.executor.shutdown(wait=True)
         except Exception:
             pass
-
-    def _print_tooluniverse_banner(self):
-        """Print ToolUniverse branding banner after FastMCP banner with dynamic information."""
-        # Get transport info if available
-        transport_display = getattr(self, "_transport_type", "Unknown")
-        server_url = getattr(self, "_server_url", "N/A")
-        tools_count = len(self._exposed_tools)
-
-        # Map transport types to display names
-        transport_map = {
-            "stdio": "STDIO",
-            "streamable-http": "Streamable-HTTP",
-            "http": "HTTP",
-            "sse": "SSE",
-        }
-        transport_name = transport_map.get(transport_display, transport_display)
-
-        # Format lines with proper alignment (matching FastMCP style)
-        # Each line should be exactly 75 characters (emoji takes 2 display widths but counts as 1 in len())
-        transport_line = f"                 📦 Transport:       {transport_name}"
-        server_line = f"                 🔗 Server URL:      {server_url}"
-        tools_line = f"                 🧰 Loaded Tools:    {tools_count}"
-
-        # Pad to exactly 75 characters (emoji counts as 1 in len() but displays as 2)
-        transport_line = transport_line + " " * (75 - len(transport_line))
-        server_line = server_line + " " * (75 - len(server_line))
-        tools_line = tools_line + " " * (75 - len(tools_line))
-
-        banner = f"""
-╭────────────────────────────────────────────────────────────────────────────╮
-│                                                                            │
-│                         🧬 ToolUniverse SMCP Server 🧬                     │
-│                                                                            │
-│            Bridging AI Agents with Scientific Computing Tools              │
-│                                                                            │
-│{transport_line}│
-│{server_line}│
-│{tools_line}│
-│                                                                            │
-│                 🌐 Website:  https://aiscientist.tools/                    │
-│                 💻 GitHub:   https://github.com/mims-harvard/ToolUniverse  │
-│                                                                            │
-╰────────────────────────────────────────────────────────────────────────────╯
-"""
-        # In stdio mode, ensure the banner goes to stderr to avoid polluting stdout
-        # which must exclusively carry JSON-RPC messages.
-        import sys as _sys
-
-        if getattr(self, "_transport_type", None) == "stdio":
-            print(banner, file=_sys.stderr)
-        else:
-            print(banner)
-
-    def run(self, *args, **kwargs):
-        """
-        Override run method to display ToolUniverse banner after FastMCP banner.
-
-        This method intercepts the parent's run() call to inject our custom banner
-        immediately after FastMCP displays its startup banner.
-        """
-        # Save transport information for banner display
-        transport = kwargs.get("transport", args[0] if args else "unknown")
-        host = kwargs.get("host", "0.0.0.0")
-        port = kwargs.get("port", 7000)
-
-        self._transport_type = transport
-
-        # Build server URL based on transport
-        if transport == "streamable-http" or transport == "http":
-            self._server_url = f"http://{host}:{port}/mcp"
-        elif transport == "sse":
-            self._server_url = f"http://{host}:{port}"
-        else:
-            self._server_url = "N/A (stdio mode)"
-
-        # Use threading to print our banner shortly after FastMCP's banner
-        import threading
-        import time
-
-        def delayed_banner():
-            """Print ToolUniverse banner with a small delay to appear after FastMCP banner."""
-            time.sleep(1.0)  # Delay to ensure FastMCP banner displays first
-            self._print_tooluniverse_banner()
-
-        # Start banner thread only on first run
-        if not hasattr(self, "_tooluniverse_banner_shown"):
-            self._tooluniverse_banner_shown = True
-            banner_thread = threading.Thread(target=delayed_banner, daemon=True)
-            banner_thread.start()
-
-        # Call parent's run method (blocking call)
-        return super().run(*args, **kwargs)
 
     def run_simple(
         self,
@@ -2018,21 +1925,21 @@ class SMCP(FastMCP):
             - Above 1024: No root privileges required
             - Check availability: Ensure port isn't already in use
 
-        **kwargs**
+        **kwargs
             Additional arguments passed to FastMCP's run() method:
             - debug (bool): Enable debug logging
             - access_log (bool): Log client requests
             - workers (int): Number of worker processes (HTTP only)
 
         Server Startup Process:
-        =======================
+        ======================
         1. **Initialization Summary**: Displays server configuration and capabilities
         2. **Transport Setup**: Configures selected communication method
         3. **Service Start**: Begins listening for client connections
         4. **Graceful Shutdown**: Handles interrupts and cleanup
 
         Deployment Scenarios:
-        =====================
+        ====================
 
         Development & Testing:
         ```python
@@ -2068,14 +1975,14 @@ class SMCP(FastMCP):
         ```
 
         Error Handling:
-        ===============
+        ==============
         - **KeyboardInterrupt**: Graceful shutdown on Ctrl+C
         - **Port in Use**: Clear error message with suggestions
         - **Transport Errors**: Detailed debugging information
         - **Cleanup**: Automatic resource cleanup on exit
 
         Logging Output:
-        ===============
+        ==============
         Provides informative startup messages:
         ```
         🚀 Starting SMCP server 'My Server'...
@@ -2085,14 +1992,14 @@ class SMCP(FastMCP):
         ```
 
         Security Considerations:
-        ========================
+        =======================
         - Use host="127.0.0.1" for local-only access
         - Configure firewall rules for production deployment
         - Consider HTTPS termination with reverse proxy
         - Validate all client inputs through MCP protocol
 
         Performance Notes:
-        ==================
+        =================
         - HTTP transport supports multiple concurrent clients
         - stdio transport is single-client but lower latency
         - SSE transport enables real-time bidirectional communication
@@ -2115,29 +2022,6 @@ class SMCP(FastMCP):
                 self.logger.info("🔗 Hooks enabled: default configuration")
         else:
             self.logger.info("🔗 Hooks disabled")
-
-        # Configure logger for stdio mode to avoid stdout pollution
-        if transport == "stdio":
-            import logging
-            import sys
-
-            # Redirect all logger output to stderr for stdio mode
-            for handler in self.logger.handlers[:]:
-                self.logger.removeHandler(handler)
-
-            stderr_handler = logging.StreamHandler(sys.stderr)
-            stderr_handler.setLevel(logging.INFO)
-            formatter = logging.Formatter("%(message)s")
-            stderr_handler.setFormatter(formatter)
-            self.logger.addHandler(stderr_handler)
-            self.logger.setLevel(logging.INFO)
-
-            # Also redirect root logger to stderr
-            root_logger = logging.getLogger()
-            for handler in root_logger.handlers[:]:
-                root_logger.removeHandler(handler)
-            root_logger.addHandler(stderr_handler)
-            root_logger.setLevel(logging.INFO)
 
         try:
             if transport == "stdio":
@@ -2201,234 +2085,208 @@ class SMCP(FastMCP):
             func_params = []
             param_annotations = {}
 
-            # Process parameters in two phases: required first, then optional
-            # This ensures Python function signature validity (no default args before non-default)
-            for is_required_phase in [True, False]:
-                for param_name, param_info in properties.items():
-                    param_type = param_info.get("type", "string")
-                    param_description = param_info.get(
-                        "description", f"{param_name} parameter"
-                    )
-                    is_required = param_name in required_params
-
-                    # Skip if not in current phase
-                    if is_required != is_required_phase:
-                        continue
-
-                    # Map JSON schema types to Python types and create appropriate Field
-                    field_kwargs = {"description": param_description}
-
-                    if param_type == "string":
-                        python_type = str
-                        # For string type, don't add json_schema_extra - let Pydantic handle it
-                    elif param_type == "integer":
-                        python_type = int
-                        # For integer type, don't add json_schema_extra - let Pydantic handle it
-                    elif param_type == "number":
-                        python_type = float
-                        # For number type, don't add json_schema_extra - let Pydantic handle it
-                    elif param_type == "boolean":
-                        python_type = bool
-                        # For boolean type, don't add json_schema_extra - let Pydantic handle it
-                    elif param_type == "array":
-                        python_type = list
-                        # Add array-specific schema information only for complex cases
-                        items_info = param_info.get("items", {})
-                        if items_info:
-                            # Clean up items definition - remove invalid fields
-                            cleaned_items = items_info.copy()
-
-                            # Remove 'required' field from items (not valid in JSON Schema for array items)
-                            if "required" in cleaned_items:
-                                cleaned_items.pop("required")
-
-                            field_kwargs["json_schema_extra"] = {
-                                "type": "array",
-                                "items": cleaned_items,
-                            }
-                        else:
-                            # If no items specified, default to string items
-                            field_kwargs["json_schema_extra"] = {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            }
-                    elif param_type == "object":
-                        python_type = dict
-                        # Add object-specific schema information
-                        object_props = param_info.get("properties", {})
-                        if object_props:
-                            # Clean up the nested object properties - fix common schema issues
-                            cleaned_props = {}
-                            nested_required = []
-
-                            for prop_name, prop_info in object_props.items():
-                                cleaned_prop = prop_info.copy()
-
-                                # Fix string "True"/"False" in required field (common ToolUniverse issue)
-                                if "required" in cleaned_prop:
-                                    req_value = cleaned_prop.pop("required")
-                                    if req_value in ["True", "true", True]:
-                                        nested_required.append(prop_name)
-                                    # Remove the individual required field as it should be at object level
-
-                                cleaned_props[prop_name] = cleaned_prop
-
-                            # Create proper JSON schema for nested object
-                            object_schema = {
-                                "type": "object",
-                                "properties": cleaned_props,
-                            }
-
-                            # Add required array at object level if there are required fields
-                            if nested_required:
-                                object_schema["required"] = nested_required
-
-                            field_kwargs["json_schema_extra"] = object_schema
-                    else:
-                        # For unknown types, default to string and only add type info if it's truly unknown
-                        python_type = str
-                        if param_type not in [
-                            "string",
-                            "integer",
-                            "number",
-                            "boolean",
-                            "array",
-                            "object",
-                        ]:
-                            field_kwargs["json_schema_extra"] = {"type": param_type}
-
-                    # Create Pydantic Field with enhanced schema information
-                    pydantic_field = Field(**field_kwargs)
-
-                    if is_required:
-                        # Required parameter with description and schema info
-                        annotated_type = Annotated[python_type, pydantic_field]
-                        param_annotations[param_name] = annotated_type
-                        func_params.append(
-                            inspect.Parameter(
-                                param_name,
-                                inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                                annotation=annotated_type,
-                            )
-                        )
-                    else:
-                        # Optional parameter with description, schema info and default value
-                        annotated_type = Annotated[
-                            Union[python_type, type(None)], pydantic_field
-                        ]
-                        param_annotations[param_name] = annotated_type
-                        func_params.append(
-                            inspect.Parameter(
-                                param_name,
-                                inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                                default=None,
-                                annotation=annotated_type,
-                            )
-                        )
-
-            # Add optional streaming parameter to signature
-            stream_field = Field(
-                description="Set to true to receive incremental streaming output (experimental)."
-            )
-            stream_annotation = Annotated[Union[bool, type(None)], stream_field]
-            param_annotations["_tooluniverse_stream"] = stream_annotation
-            func_params.append(
-                inspect.Parameter(
-                    "_tooluniverse_stream",
-                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                    default=None,
-                    annotation=stream_annotation,
+            for param_name, param_info in properties.items():
+                param_type = param_info.get("type", "string")
+                param_description = param_info.get(
+                    "description", f"{param_name} parameter"
                 )
-            )
+                is_required = param_name in required_params
 
-            # Note: ctx parameter removed as it causes Pydantic schema issues
-            # FastMCP context injection is handled internally by FastMCP
+                # Map JSON schema types to Python types and create appropriate Field
+                field_kwargs = {"description": param_description}
 
-            async def dynamic_tool_function(**kwargs) -> str:
-                """Execute ToolUniverse tool with provided arguments."""
-                try:
-                    # Remove ctx if present (legacy support)
-                    ctx = kwargs.pop("ctx", None) if "ctx" in kwargs else None
-                    stream_flag = bool(kwargs.get("_tooluniverse_stream"))
+                if param_type == "string":
+                    python_type = str
+                    # For string type, don't add json_schema_extra - let Pydantic handle it
+                elif param_type == "integer":
+                    python_type = int
+                    # For integer type, don't add json_schema_extra - let Pydantic handle it
+                elif param_type == "number":
+                    python_type = float
+                    # For number type, don't add json_schema_extra - let Pydantic handle it
+                elif param_type == "boolean":
+                    python_type = bool
+                    # For boolean type, don't add json_schema_extra - let Pydantic handle it
+                elif param_type == "array":
+                    python_type = list
+                    # Add array-specific schema information only for complex cases
+                    items_info = param_info.get("items", {})
+                    if items_info:
+                        # Clean up items definition - remove invalid fields
+                        cleaned_items = items_info.copy()
 
-                    # Filter out None values for optional parameters (preserve streaming flag)
-                    args_dict = {k: v for k, v in kwargs.items() if v is not None}
+                        # Remove 'required' field from items (not valid in JSON Schema for array items)
+                        if "required" in cleaned_items:
+                            cleaned_items.pop("required")
 
-                    # Validate required parameters (check against args_dict, not filtered_args)
-                    missing_required = [
-                        param for param in required_params if param not in args_dict
-                    ]
-                    if missing_required:
-                        return json.dumps(
-                            {
-                                "error": f"Missing required parameters: {missing_required}",
-                                "required": required_params,
-                                "provided": list(args_dict.keys()),
-                            },
-                            indent=2,
+                        field_kwargs["json_schema_extra"] = {
+                            "type": "array",
+                            "items": cleaned_items,
+                        }
+                    else:
+                        # If no items specified, default to string items
+                        field_kwargs["json_schema_extra"] = {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        }
+                elif param_type == "object":
+                    python_type = dict
+                    # Add object-specific schema information
+                    object_props = param_info.get("properties", {})
+                    if object_props:
+                        # Clean up the nested object properties - fix common schema issues
+                        cleaned_props = {}
+                        nested_required = []
+
+                        for prop_name, prop_info in object_props.items():
+                            cleaned_prop = prop_info.copy()
+
+                            # Fix string "True"/"False" in required field (common ToolUniverse issue)
+                            if "required" in cleaned_prop:
+                                req_value = cleaned_prop.pop("required")
+                                if req_value in ["True", "true", True]:
+                                    nested_required.append(prop_name)
+                                # Remove the individual required field as it should be at object level
+
+                            cleaned_props[prop_name] = cleaned_prop
+
+                        # Create proper JSON schema for nested object
+                        object_schema = {"type": "object", "properties": cleaned_props}
+
+                        # Add required array at object level if there are required fields
+                        if nested_required:
+                            object_schema["required"] = nested_required
+
+                        field_kwargs["json_schema_extra"] = object_schema
+                else:
+                    # For unknown types, default to string and only add type info if it's truly unknown
+                    python_type = str
+                    if param_type not in [
+                        "string",
+                        "integer",
+                        "number",
+                        "boolean",
+                        "array",
+                        "object",
+                    ]:
+                        field_kwargs["json_schema_extra"] = {"type": param_type}
+
+                # Create Pydantic Field with enhanced schema information
+                pydantic_field = Field(**field_kwargs)
+
+                if is_required:
+                    # Required parameter with description and schema info
+                    annotated_type = Annotated[python_type, pydantic_field]
+                    param_annotations[param_name] = annotated_type
+                    func_params.append(
+                        inspect.Parameter(
+                            param_name,
+                            inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                            annotation=annotated_type,
                         )
-
-                    function_call = {"name": tool_name, "arguments": args_dict}
-
-                    loop = asyncio.get_event_loop()
-
-                    # Initialize stream_callback to None by default
-                    stream_callback = None
-
-                    if stream_flag and ctx is not None:
-
-                        def _stream_callback(chunk: str) -> None:
-                            if not chunk:
-                                return
-                            try:
-                                future = asyncio.run_coroutine_threadsafe(
-                                    ctx.info(chunk), loop
-                                )
-
-                                def _log_future_result(fut) -> None:
-                                    exc = fut.exception()
-                                    if exc:
-                                        self.logger.debug(
-                                            f"Streaming callback error for {tool_name}: {exc}"
-                                        )
-
-                                future.add_done_callback(_log_future_result)
-                            except Exception as cb_error:  # noqa: BLE001
-                                self.logger.debug(
-                                    f"Failed to dispatch stream chunk for {tool_name}: {cb_error}"
-                                )
-
-                        # Assign the function to stream_callback
-                        stream_callback = _stream_callback
-
-                        # Ensure downstream tools see the streaming flag
-                        if "_tooluniverse_stream" not in args_dict:
-                            args_dict["_tooluniverse_stream"] = True
-
-                    run_callable = functools.partial(
-                        self.tooluniverse.run_one_function,
-                        function_call,
-                        stream_callback=stream_callback,
+                    )
+                else:
+                    # Optional parameter with description, schema info and default value
+                    annotated_type = Annotated[
+                        Union[python_type, type(None)], pydantic_field
+                    ]
+                    param_annotations[param_name] = annotated_type
+                    func_params.append(
+                        inspect.Parameter(
+                            param_name,
+                            inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                            default=None,
+                            annotation=annotated_type,
+                        )
                     )
 
-                    result = await loop.run_in_executor(self.executor, run_callable)
+            # Create the async function with dynamic signature
+            if not properties:
+                # Tool has no parameters - create simple function
+                async def dynamic_tool_function() -> str:
+                    """Execute ToolUniverse tool with no arguments."""
+                    try:
+                        # Prepare function call with empty arguments
+                        function_call = {"name": tool_name, "arguments": {}}
 
-                    if isinstance(result, str):
-                        return result
-                    else:
-                        return json.dumps(result, indent=2, default=str)
+                        # Execute in thread pool to avoid blocking
+                        loop = asyncio.get_event_loop()
+                        result = await loop.run_in_executor(
+                            self.executor,
+                            self.tooluniverse.run_one_function,
+                            function_call,
+                        )
 
-                except Exception as e:
-                    error_msg = f"Error executing {tool_name}: {str(e)}"
-                    self.logger.error(error_msg)
-                    return json.dumps({"error": error_msg}, indent=2)
+                        # Format the result
+                        if isinstance(result, str):
+                            return result
+                        else:
+                            return json.dumps(result, indent=2, default=str)
 
-            # Set function metadata
-            dynamic_tool_function.__name__ = tool_name
-            dynamic_tool_function.__signature__ = inspect.Signature(func_params)
-            annotations = param_annotations.copy()
-            annotations["return"] = str
-            dynamic_tool_function.__annotations__ = annotations
+                    except Exception as e:
+                        error_msg = f"Error executing {tool_name}: {str(e)}"
+                        self.logger.error(error_msg)
+                        return json.dumps({"error": error_msg}, indent=2)
+
+                # Set function metadata
+                dynamic_tool_function.__name__ = tool_name
+                dynamic_tool_function.__signature__ = inspect.Signature([])
+                dynamic_tool_function.__annotations__ = {"return": str}
+
+            else:
+                # Tool has parameters - create function with dynamic signature
+                async def dynamic_tool_function(**kwargs) -> str:
+                    """Execute ToolUniverse tool with provided arguments."""
+                    try:
+                        # Filter out None values for optional parameters
+                        args_dict = {k: v for k, v in kwargs.items() if v is not None}
+
+                        # Validate required parameters
+                        missing_required = [
+                            param for param in required_params if param not in args_dict
+                        ]
+                        if missing_required:
+                            return json.dumps(
+                                {
+                                    "error": f"Missing required parameters: {missing_required}",
+                                    "required": required_params,
+                                    "provided": list(args_dict.keys()),
+                                },
+                                indent=2,
+                            )
+
+                        # Prepare function call
+                        function_call = {"name": tool_name, "arguments": args_dict}
+
+                        # Execute in thread pool to avoid blocking
+                        loop = asyncio.get_event_loop()
+                        result = await loop.run_in_executor(
+                            self.executor,
+                            self.tooluniverse.run_one_function,
+                            function_call,
+                        )
+
+                        # Format the result
+                        if isinstance(result, str):
+                            return result
+                        else:
+                            return json.dumps(result, indent=2, default=str)
+
+                    except Exception as e:
+                        error_msg = f"Error executing {tool_name}: {str(e)}"
+                        self.logger.error(error_msg)
+                        return json.dumps({"error": error_msg}, indent=2)
+
+                # Set function metadata
+                dynamic_tool_function.__name__ = tool_name
+
+                # Set function signature dynamically for tools with parameters
+                if func_params:
+                    dynamic_tool_function.__signature__ = inspect.Signature(func_params)
+
+                # Set annotations for type hints
+                dynamic_tool_function.__annotations__ = param_annotations.copy()
+                dynamic_tool_function.__annotations__["return"] = str
 
             # Create detailed docstring for internal use, but use clean description for FastMCP
             param_docs = []
@@ -2453,10 +2311,6 @@ Returns:
 
         except Exception as e:
             self.logger.error(f"Error creating MCP tool from config: {e}")
-            self.logger.error(f"Error type: {type(e)}")
-            import traceback
-
-            self.logger.error(f"Traceback: {traceback.format_exc()}")
             self.logger.debug(f"Tool config: {tool_config}")
             # Don't raise - continue with other tools
             return
@@ -2506,7 +2360,7 @@ def create_smcp_server(
         Recommended to keep enabled unless you have specific performance
         requirements or want to minimize dependencies.
 
-    **kwargs**
+    **kwargs
         Additional SMCP configuration options:
 
         - tooluniverse_config: Pre-configured ToolUniverse instance

@@ -25,7 +25,7 @@ Give a solution plan to the agent and let it solve the problem. Solution plan sh
 
    **Parameters:**
 
-   * ``solution`` (string) (required)
+   * ``solution`` (string) (optional)
      A feasible and concise solution plan that address the question.
 
    **Example Usage:**
@@ -35,7 +35,6 @@ Give a solution plan to the agent and let it solve the problem. Solution plan sh
       query = {
           "name": "CallAgent",
           "arguments": {
-              "solution": "example_value"
           }
       }
       result = tu.run(query)

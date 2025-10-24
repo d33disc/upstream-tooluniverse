@@ -2,12 +2,15 @@ name: Deploy ToolUniverse Documentation
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
     paths:
-      - 'docs/**'
-      - 'src/**'
-      - 'pyproject.toml'
-      - '.github/workflows/deploy-docs.yml'
+      - 'ToolUniverse/docs/**'
+      - 'ToolUniverse/src/**'
+      - 'ToolUniverse/pyproject.toml'
+      - 'ToolUniverse/.github/workflows/deploy-docs.yml'
+      - 'ToolUniverse/validate_simple.py'
+      - 'ToolUniverse/quick_doc_build.sh'
+      - 'ToolUniverse/build_docs.sh'
   workflow_dispatch:
 
 permissions:
@@ -22,98 +25,112 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        fetch-depth: 1  # Shallow clone for faster checkout
-      
+        fetch-depth: 0
+
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.10'
         cache: 'pip'
-        
-    - name: Cache Sphinx build
-      uses: actions/cache@v4
-      with:
-        path: |
-          docs/_build/doctrees
-          docs/api
-        key: sphinx-${{ runner.os }}-${{ hashFiles('docs/**/*.rst', 'docs/**/*.py', 'src/**/*.py', 'pyproject.toml') }}
-        restore-keys: |
-          sphinx-${{ runner.os }}-
-        
+
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip uv
-        # Install project with docs extras (includes all documentation dependencies)
-        uv pip install --system -e .[docs]
-        # Install additional requirements from docs/requirements.txt
-        pip install -r docs/requirements.txt
-        
-    - name: Verify documentation setup
+        python -m pip install --upgrade pip
+        # Install the package with all documentation dependencies
+        pip install -e .[docs]
+        # Verify all extensions are available
+        python -c "import sphinx_copybutton, sphinx_tabs, sphinx_design, notfound.extension; print('✅ All Sphinx extensions installed')"
+
+    - name: Validate documentation code examples
       run: |
-        echo "🔍 Verifying Sphinx and theme installation..."
-        python -c "import sphinx; print(f'✅ Sphinx {sphinx.__version__}')"
-        python -c "import furo; print('✅ Furo theme available')" || echo "⚠️ Furo theme not available"
-        python -c "import pydata_sphinx_theme; print('✅ PyData theme available')" || echo "⚠️ PyData theme not available"
-        python -c "import sphinx_rtd_theme; print('✅ RTD theme available')" || echo "⚠️ RTD theme not available"
-        python -c "import shibuya; print('✅ Shibuya theme available')" || echo "⚠️ Shibuya theme not available"
-        python -c "from linkify_it import LinkifyIt; print('✅ Linkify available')"
-        python -c "import myst_parser; print('✅ MyST parser available')"
-        python -c "import sphinx_design; print('✅ Sphinx Design available')"
-        python -c "import sphinx_copybutton; print('✅ Sphinx Copybutton available')"
-        python -c "import sphinx_tabs; print('✅ Sphinx Tabs available')"
-        
-    - name: Prepare assets
-      run: |
-        cd docs
-        mkdir -p _static
-        if [ -f "../img/tooluniverse_logo.png" ]; then
-          cp ../img/tooluniverse_logo.png _static/
-          echo "✅ Logo prepared"
+        python -c "import sphinx; print(f'Sphinx version: {sphinx.__version__}')"
+        ls -la docs/
+        # Run code validation before building
+        if [ -f "validate_simple.py" ]; then
+          echo "🔍 Validating documentation code examples..."
+          python validate_simple.py
+          echo "✅ Code validation completed"
         fi
-        
-    - name: Build documentation
+
+    - name: Build documentation with enhanced script
       run: |
-        cd docs
-        # Skip dependency installation in script (already done above)
-        # Use optimized API doc generation settings
-        echo "🔨 Building documentation with optimized settings..."
-        DOC_LANGUAGES="en,zh_CN" \
-        DOC_SKIP_SERVER_PROMPT=1 \
-        DOC_SKIP_INSTALL=1 \
-        DOC_OPTIMIZED=1 \
-        ./quick_doc_build.sh
-        
-    - name: Check build output
-      run: |
-        if [ ! -f docs/_build/html/index.html ]; then
-          echo "❌ Root index.html not found!"
-          exit 1
+        # Use our enhanced build script if available, fallback to standard make
+        if [ -f "quick_doc_build.sh" ]; then
+          echo "🚀 Using enhanced documentation build script..."
+          chmod +x quick_doc_build.sh
+          ./quick_doc_build.sh
+        else
+          echo "📚 Using standard Sphinx build..."
+          cd docs
+          make clean
+          make html
         fi
-        echo "✅ Documentation built successfully"
-        du -sh docs/_build/html
-        
+
+    - name: Check build output and validation results
+      run: |
+        ls -la docs/_build/html/
+        test -f docs/_build/html/index.html || (echo "❌ index.html not found!" && exit 1)
+
+        # Check for validation report if available
+        if [ -f "validation_report.txt" ]; then
+          echo "📊 Validation Report:"
+          cat validation_report.txt
+        fi
+
+        # Count built files for reporting
+        html_count=$(find docs/_build/html -name "*.html" | wc -l)
+        echo "📈 Built $html_count HTML files"
+
     - name: Add .nojekyll file
       run: |
         touch docs/_build/html/.nojekyll
-        
-    # Note: Do NOT create a CNAME here. This project is served under
-    # https://zitniklab.hms.harvard.edu/ToolUniverse/.
-    # Adding a CNAME would incorrectly claim the root domain.
-        
+
+    - name: Create CNAME file for custom domain
+      run: |
+        echo "zitniklab.hms.harvard.edu" > docs/_build/html/CNAME
+
     - name: Setup Pages
       uses: actions/configure-pages@v4
-      
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: './docs/_build/html'
-        
+
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
 
+  test-deployment:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: always()
+
+    steps:
+    - name: Report deployment status with enhanced feedback
+      run: |
+        if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
+          echo "✅ Documentation deployment successful!"
+          echo "📖 Documentation should be available at: https://zitniklab.hms.harvard.edu/bioagent/"
+          echo "🔗 Alternative URL: https://[github-username].github.io/ToolUniverse/"
+          echo ""
+          echo "🎯 Enhanced Features Available:"
+          echo "   - Code validation system ✅"
+          echo "   - Reorganized user guide structure ✅"
+          echo "   - Quick start examples ✅"
+          echo "   - Comprehensive troubleshooting ✅"
+        else
+          echo "❌ Documentation deployment failed!"
+          echo "Build status: ${{ needs.build-and-deploy.result }}"
+          echo ""
+          echo "🔍 Troubleshooting steps:"
+          echo "   1. Check code validation errors in logs"
+          echo "   2. Verify Sphinx build output"
+          echo "   3. Ensure all documentation dependencies are installed"
+          exit 1
+        fi

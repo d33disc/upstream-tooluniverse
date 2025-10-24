@@ -3,7 +3,10 @@ WeChat Community
 
 Join our WeChat community to connect with other ToolUniverse users, get help, and share your experiences!
 
-**WeChat QR Code**: Visit `https://aiscientist.tools/wechat <https://aiscientist.tools/wechat>`_ to get the latest WeChat QR code for joining our community.
+.. image:: _static/wechat.jpg
+   :alt: WeChat QR Code
+   :align: center
+   :width: 300px
 
 Alternative Ways to Connect
 ---------------------------

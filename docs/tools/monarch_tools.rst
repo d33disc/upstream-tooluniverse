@@ -25,7 +25,7 @@ Retrieve the HPO ID of a phenotype or symptom.
 
    **Parameters:**
 
-   * ``query`` (string) (required)
+   * ``query`` (string) (optional)
      One query phenotype or symptom.
 
    * ``limit`` (integer) (optional)
@@ -41,7 +41,6 @@ Retrieve the HPO ID of a phenotype or symptom.
       query = {
           "name": "get_HPO_ID_by_phenotype",
           "arguments": {
-              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -62,7 +61,7 @@ Retrieve diseases associated with a list of phenotypes or symptoms by a list of 
 
    **Parameters:**
 
-   * ``HPO_ID_list`` (array) (required)
+   * ``HPO_ID_list`` (array) (optional)
      List of phenotypes or symptoms
 
    * ``limit`` (integer) (optional)
@@ -78,7 +77,6 @@ Retrieve diseases associated with a list of phenotypes or symptoms by a list of 
       query = {
           "name": "get_joint_associated_diseases_by_HPO_ID_list",
           "arguments": {
-              "HPO_ID_list": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -99,7 +97,7 @@ Retrieve a phenotype or symptom by its HPO ID.
 
    **Parameters:**
 
-   * ``id`` (string) (required)
+   * ``id`` (string) (optional)
      The HPO ID of the phenotype or symptom.
 
    **Example Usage:**
@@ -109,7 +107,6 @@ Retrieve a phenotype or symptom by its HPO ID.
       query = {
           "name": "get_phenotype_by_HPO_ID",
           "arguments": {
-              "id": "example_value"
           }
       }
       result = tu.run(query)

@@ -28,7 +28,7 @@ Get biological process information for a gene, with special focus on key process
    * ``gene_name`` (string) (required)
      Gene name or gene symbol, e.g., 'TP53', 'CDK1', 'CASP3', etc.
 
-   * ``filter_processes`` (boolean) (required)
+   * ``filter_processes`` (boolean) (optional)
      Whether to filter and focus on specific biological processes (apoptosis, cell cycle, transcription regulation, etc.), defaults to true.
 
    **Example Usage:**
@@ -38,8 +38,7 @@ Get biological process information for a gene, with special focus on key process
       query = {
           "name": "HPA_get_biological_processes_by_gene",
           "arguments": {
-              "gene_name": "example_value",
-              "filter_processes": true
+              "gene_name": "example_value"
           }
       }
       result = tu.run(query)
@@ -129,13 +128,13 @@ Get detailed in-depth information from gene page using Ensembl Gene ID, includin
    * ``ensembl_id`` (string) (required)
      Ensembl Gene ID, e.g., 'ENSG00000064787' (BCAS1), 'ENSG00000141510' (TP53), etc. Usually obtained through HPA_search_genes_by_query tool.
 
-   * ``include_images`` (boolean) (required)
+   * ``include_images`` (boolean) (optional)
      Whether to include image URL information (immunofluorescence, cell line images, etc.), defaults to true.
 
-   * ``include_antibodies`` (boolean) (required)
+   * ``include_antibodies`` (boolean) (optional)
      Whether to include detailed antibody information (validation status, Western blot data, etc.), defaults to true.
 
-   * ``include_expression`` (boolean) (required)
+   * ``include_expression`` (boolean) (optional)
      Whether to include detailed expression data (tissue specificity, subcellular localization, etc.), defaults to true.
 
    **Example Usage:**
@@ -145,10 +144,7 @@ Get detailed in-depth information from gene page using Ensembl Gene ID, includin
       query = {
           "name": "HPA_get_comprehensive_gene_details_by_ensembl_id",
           "arguments": {
-              "ensembl_id": "example_value",
-              "include_images": true,
-              "include_antibodies": true,
-              "include_expression": true
+              "ensembl_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -207,7 +203,7 @@ Compare the expression level of a gene in specific disease state versus healthy 
    * ``gene_name`` (string) (required)
      Gene name or gene symbol, e.g., 'TP53', 'BRCA1', 'KRAS', etc.
 
-   * ``tissue_type`` (string) (required)
+   * ``tissue_type`` (string) (optional)
      Tissue type, e.g., 'brain', 'breast', 'colon', 'lung', etc., optional parameter.
 
    * ``disease_name`` (string) (required)
@@ -221,7 +217,6 @@ Compare the expression level of a gene in specific disease state versus healthy 
           "name": "HPA_get_disease_expression_by_gene_tissue_disease",
           "arguments": {
               "gene_name": "example_value",
-              "tissue_type": "example_value",
               "disease_name": "example_value"
           }
       }

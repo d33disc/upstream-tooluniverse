@@ -28,10 +28,10 @@ Search for molecules similar to a given SMILES, chembl_id, or compound or drug n
    * ``query`` (string) (required)
      SMILES string, chembl_id, or compound or drug name.
 
-   * ``similarity_threshold`` (integer) (required)
+   * ``similarity_threshold`` (integer) (optional)
      Similarity threshold (0–100).
 
-   * ``max_results`` (integer) (required)
+   * ``max_results`` (integer) (optional)
      Maximum number of results to return.
 
    **Example Usage:**
@@ -41,9 +41,7 @@ Search for molecules similar to a given SMILES, chembl_id, or compound or drug n
       query = {
           "name": "ChEMBL_search_similar_molecules",
           "arguments": {
-              "query": "example_value",
-              "similarity_threshold": 10,
-              "max_results": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)

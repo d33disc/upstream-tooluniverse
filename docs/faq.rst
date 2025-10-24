@@ -15,8 +15,8 @@ ToolUniverse is a collection of 600+ scientific tools for AI agents, providing u
    tu.load_tools()
 
    result = tu.run({
-      "name": "UniProt_get_function_by_accession",
-      "arguments": {"accession": "P05067"}
+       "name": "UniProt_get_protein_info",
+       "arguments": {"gene_symbol": "BRCA1"}
    })
 
 How do I install it?
@@ -46,5 +46,5 @@ How do I use it with Claude?
 Need more help?
 ---------------
 
-- **Troubleshooting**: :doc:`help/troubleshooting`
+- **Troubleshooting**: :doc:`troubleshooting`
 - **GitHub Issues**: `Report problems <https://github.com/mims-harvard/ToolUniverse/issues>`_

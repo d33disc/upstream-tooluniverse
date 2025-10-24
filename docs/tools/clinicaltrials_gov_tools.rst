@@ -25,7 +25,7 @@ Extracts detailed adverse event results from clinicaltrials.gov, using their NCT
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
    * ``organ_systems`` (array) (optional)
@@ -41,7 +41,6 @@ Extracts detailed adverse event results from clinicaltrials.gov, using their NCT
       query = {
           "name": "extract_clinical_trial_adverse_events",
           "arguments": {
-              "nct_ids": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -62,7 +61,7 @@ Extracts detailed trial outcome results (e.g., overall survival months, p-values
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
    * ``outcome_measure`` (string) (optional)
@@ -75,7 +74,6 @@ Extracts detailed trial outcome results (e.g., overall survival months, p-values
       query = {
           "name": "extract_clinical_trial_outcomes",
           "arguments": {
-              "nct_ids": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -96,10 +94,10 @@ Retrieves the list of conditions or diseases and the interventions and arm group
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``condition_and_intervention`` (string) (required)
+   * ``condition_and_intervention`` (string) (optional)
      Placeholder.
 
    **Example Usage:**
@@ -109,8 +107,6 @@ Retrieves the list of conditions or diseases and the interventions and arm group
       query = {
           "name": "get_clinical_trial_conditions_and_interventions",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "condition_and_intervention": "example_value"
           }
       }
       result = tu.run(query)
@@ -131,10 +127,10 @@ Retrieves detailed identification information for trials, including titles, phas
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``description_type`` (string) (required)
+   * ``description_type`` (string) (optional)
      Type of information to retrieve. Options are 'brief' for brief descriptions or 'full' for full descriptions.
 
    **Example Usage:**
@@ -144,8 +140,6 @@ Retrieves detailed identification information for trials, including titles, phas
       query = {
           "name": "get_clinical_trial_descriptions",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "description_type": "example_value"
           }
       }
       result = tu.run(query)
@@ -166,10 +160,10 @@ Retrieves the eligibility criteria for the clinical trials, using their NCT IDs.
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``eligibility_criteria`` (string) (required)
+   * ``eligibility_criteria`` (string) (optional)
      Placeholder.
 
    **Example Usage:**
@@ -179,8 +173,6 @@ Retrieves the eligibility criteria for the clinical trials, using their NCT IDs.
       query = {
           "name": "get_clinical_trial_eligibility_criteria",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "eligibility_criteria": "example_value"
           }
       }
       result = tu.run(query)
@@ -201,10 +193,10 @@ Retrieves the locations where the clinical trials are being conducted, using the
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``location`` (string) (required)
+   * ``location`` (string) (optional)
      Placeholder.
 
    **Example Usage:**
@@ -214,8 +206,6 @@ Retrieves the locations where the clinical trials are being conducted, using the
       query = {
           "name": "get_clinical_trial_locations",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "location": "example_value"
           }
       }
       result = tu.run(query)
@@ -236,7 +226,7 @@ Retrieves the outcome measures for the clinical trials, using their NCT IDs.
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
    * ``outcome_measures`` (string) (optional)
@@ -249,7 +239,6 @@ Retrieves the outcome measures for the clinical trials, using their NCT IDs.
       query = {
           "name": "get_clinical_trial_outcome_measures",
           "arguments": {
-              "nct_ids": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -270,10 +259,10 @@ Retrieves the references (if any) for the clinical trials, using their NCT IDs.
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``references`` (string) (required)
+   * ``references`` (string) (optional)
      Placeholder.
 
    **Example Usage:**
@@ -283,8 +272,6 @@ Retrieves the references (if any) for the clinical trials, using their NCT IDs.
       query = {
           "name": "get_clinical_trial_references",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "references": "example_value"
           }
       }
       result = tu.run(query)
@@ -305,10 +292,10 @@ Retrieves trial status and start and completion dates, using their NCT IDs.
 
    **Parameters:**
 
-   * ``nct_ids`` (array) (required)
+   * ``nct_ids`` (array) (optional)
      List of NCT IDs of the clinical trials (e.g., ['NCT04852770', 'NCT01728545']).
 
-   * ``status_and_date`` (string) (required)
+   * ``status_and_date`` (string) (optional)
      Placeholder.
 
    **Example Usage:**
@@ -318,8 +305,6 @@ Retrieves trial status and start and completion dates, using their NCT IDs.
       query = {
           "name": "get_clinical_trial_status_and_dates",
           "arguments": {
-              "nct_ids": ["item1", "item2"],
-              "status_and_date": "example_value"
           }
       }
       result = tu.run(query)
@@ -346,7 +331,7 @@ Search for clinical trials registered on clinicaltrials.gov based on title, cond
    * ``intervention`` (string) (optional)
      Query for intervention/treatment using Essie expression syntax (e.g., 'chemotherapy', 'immunotherapy', 'olaparib', 'combination therapy').
 
-   * ``query_term`` (string) (required)
+   * ``query_term`` (string) (optional)
      Query for 'other terms' with Essie expression syntax (e.g., 'combination', 'AREA[LastUpdatePostDate]RANGE[2023-01-15,MAX]', 'Phase II'). Can be used to search for all other protocol fields, including but not limited to title, outcome measures, status, phase, location, etc.
 
    * ``pageSize`` (integer) (optional)
@@ -362,7 +347,6 @@ Search for clinical trials registered on clinicaltrials.gov based on title, cond
       query = {
           "name": "search_clinical_trials",
           "arguments": {
-              "query_term": "example_value"
           }
       }
       result = tu.run(query)

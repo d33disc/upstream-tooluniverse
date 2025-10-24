@@ -35,7 +35,7 @@ Create a ToolUniverse instance and load scientific tools. This step sets up the 
    # Initialize ToolUniverse
    tu = ToolUniverse()
 
-   # Load all tools
+   # Load all tools (this may take 10-15 seconds)
    print("Loading scientific tools...")
    tu.load_tools()
 
@@ -68,14 +68,14 @@ We support three search methods: keyword search, LLM-based search, and embedding
    protein_tools = tu.run({
        "name": "Tool_Finder_Keyword", # or Tool_Finder_LLM (LLM-API based) or Tool_Finder (Embedding-based)
        "arguments": {
-           "description": "protein structure",
+           "query": "protein structure",
            "limit": 5
        }
    })
    print(f"Found {len(protein_tools)} protein-related tools")
 
 .. seealso::
-     For comprehensive tool search methods, see :doc:`tutorials/finding_tools`
+     For comprehensive tool search methods, see :doc:`guide/finding_tools`
 
 Step 3: Load Tool Specifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,7 +85,7 @@ Inspect tool specifications to understand their parameters and capabilities befo
 .. code-block:: python
 
    # Get tool specification by name
-   spec = tu.tool_specification("UniProt_get_function_by_accession")
+   spec = tu.tool_specification("UniProt_get_protein_info")
    print("Tool specification:")
    print(f"Name: {spec['name']}")
    print(f"Description: {spec['description']}")
@@ -137,10 +137,10 @@ Retrieve comprehensive protein and gene information from UniProt database. Get p
 .. code-block:: python
 
    # Get comprehensive gene information
-   gene_query = tu.run({
-      "name": "UniProt_get_function_by_accession",
-      "arguments": {"accession": "P05067"}
-   })
+   gene_query = {
+       "name": "UniProt_get_protein_info",
+       "arguments": {"gene_symbol": "BRCA1"}
+   }
    gene_info = tu.run(gene_query)
    print(gene_info)
 
@@ -265,7 +265,7 @@ Tools
 * **Tool Composition** → :doc:`guide/tool_composition` - Chain ToolUniverse's 600+ tools into powerful scientific workflows using Tool Composer
 * **Scientific Workflows** → :doc:`guide/scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **Expert Feedback** → :doc:`tutorials/expert_feedback` - Human-in-the-loop consultation platform for AI systems with web interface
-* **Embedding Tools** → :doc:`tools/embedding_tools` - Setup and configuration for embedding storage
+* **Embedding Store Guide** → :doc:`tool_setup_guides/Embedding_store_guide` - Setup and configuration for embedding storage
 * **Hooks System** → :doc:`guide/hooks/index` - Intelligent output processing with AI-powered hooks
 
   * **SummarizationHook** → :doc:`guide/hooks/summarization_hook` - AI-powered output summarization
@@ -273,16 +273,14 @@ Tools
   * **Hook Configuration** → :doc:`guide/hooks/hook_configuration` - Advanced configuration and customization
   * **Server & Stdio Hooks** → :doc:`guide/hooks/server_stdio_hooks` - Using hooks with server and stdio interfaces
 
-🛠️ Add Tools to ToolUniverse
+🛠️ Expand ToolUniverse
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Tool Development Overview** → :doc:`expand_tooluniverse/index` - Learn how to extend ToolUniverse with your own custom tools
-* **Quick Start** → :doc:`expand_tooluniverse/quick_start` - 5-minute tutorial to create your first tool
-* **Local Tools** → :doc:`expand_tooluniverse/local_tools/index` - Create tools that run within ToolUniverse
-* **Remote Tools** → :doc:`expand_tooluniverse/remote_tools/index` - Integrate external services and APIs
-* **Contributing** → :doc:`expand_tooluniverse/contributing/index` - Submit your custom tools to the ToolUniverse repository
-* **Tool Comparison** → Review the tool type comparison table in :doc:`expand_tooluniverse/contributing/index`
-* **Architecture** → :doc:`expand_tooluniverse/architecture` - ToolUniverse's code architecture and extension points
+* **Architecture Overview** → :doc:`expand_tooluniverse/architecture` - ToolUniverse's code architecture and extension points
+* **Local Tool Registration** → :doc:`expand_tooluniverse/local_tool_registration` - Create tools that run within ToolUniverse
+* **Remote Tool Registration** → :doc:`expand_tooluniverse/remote_tool_registration` - Integrate external services and APIs
+* **Contributing Tools** → :doc:`expand_tooluniverse/contributing_tools` - Submit your custom tools to the ToolUniverse repository
 * **Deployment** → :doc:`deployment` - Deployment guide for production environments
 * **Contributing** → :doc:`contributing` - How to contribute to ToolUniverse development
 

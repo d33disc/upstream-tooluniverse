@@ -63,7 +63,7 @@ Retrieve full AlphaFold 3D structure predictions for a given protein. Input must
    * ``qualifier`` (string) (required)
      Protein identifier: UniProt accession (e.g., 'P69905'), entry name (e.g., 'HBA_HUMAN'), or CRC64 checksum.
 
-   * ``sequence_checksum`` (string) (required)
+   * ``sequence_checksum`` (string) (optional)
      Optional CRC64 checksum of the UniProt sequence.
 
    **Example Usage:**
@@ -73,8 +73,7 @@ Retrieve full AlphaFold 3D structure predictions for a given protein. Input must
       query = {
           "name": "alphafold_get_prediction",
           "arguments": {
-              "qualifier": "example_value",
-              "sequence_checksum": "example_value"
+              "qualifier": "example_value"
           }
       }
       result = tu.run(query)

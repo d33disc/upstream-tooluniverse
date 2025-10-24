@@ -213,7 +213,7 @@ Step 6: Start Qwen Code and Verify MCP
 
    In the Qwen Code prompt, run:
 
-   .. code-block::
+   .. code-block:: text
 
       /mcp
 
@@ -222,7 +222,7 @@ Step 6: Start Qwen Code and Verify MCP
    Enter
    In the Qwen Code prompt, run:
 
-   .. code-block::
+   .. code-block:: text
 
       /memory show
 
@@ -239,19 +239,19 @@ Try these prompts inside Qwen Code:
 
 **List available tools**:
 
-   .. code-block::
+   .. code-block:: text
 
       What scientific tools are available?
 
 **Execute a simple tool**:
 
-   .. code-block::
+   .. code-block:: text
 
       Search for information about Alzheimer's disease
 
 **Perform literature search**:
 
-   .. code-block::
+   .. code-block:: text
 
       Find recent papers about CRISPR gene editing in cancer therapy
 

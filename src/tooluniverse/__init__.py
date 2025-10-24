@@ -1,54 +1,30 @@
 from importlib.metadata import version
-import os
 import warnings
 from typing import Any, Optional, List
-
 from .execute_function import ToolUniverse
 from .base_tool import BaseTool
 from .default_config import default_tool_files
-from .tool_registry import register_tool, get_tool_registry
-
-_LIGHT_IMPORT = os.getenv("TOOLUNIVERSE_LIGHT_IMPORT", "false").lower() in (
-    "true",
-    "1",
-    "yes",
-)
 
 # Version information - read from package metadata or pyproject.toml
 __version__ = version("tooluniverse")
-
-# Import tools with graceful fallback
-if not _LIGHT_IMPORT:
-    try:
-        from . import tools
-
-        _TOOLS_AVAILABLE = True
-    except ImportError:
-        _TOOLS_AVAILABLE = False
-        tools = None  # type: ignore
-else:
-    _TOOLS_AVAILABLE = False
-    tools = None  # type: ignore
+from .tool_registry import register_tool, get_tool_registry
 
 # Check if lazy loading is enabled
-# LAZY_LOADING_ENABLED = os.getenv('TOOLUNIVERSE_LAZY_LOADING', 'true').lower() in (
-#     'true', '1', 'yes'
-# )
+# LAZY_LOADING_ENABLED = os.getenv('TOOLUNIVERSE_LAZY_LOADING', 'true').lower() in ('true', '1', 'yes')
 LAZY_LOADING_ENABLED = (
     False  # LAZY LOADING DISABLED BECAUSE IT'S STILL UNDER DEVELOPMENT
 )
 
 # Import MCP functionality
-if not _LIGHT_IMPORT:
-    try:
-        from .mcp_integration import _patch_tooluniverse
+try:
+    from .mcp_integration import _patch_tooluniverse
 
-        # Automatically patch ToolUniverse with MCP methods
-        _patch_tooluniverse()
+    # Automatically patch ToolUniverse with MCP methods
+    _patch_tooluniverse()
 
-    except ImportError:
-        # MCP functionality not available
-        pass
+except ImportError:
+    # MCP functionality not available
+    pass
 
 # Import SMCP with graceful fallback and consistent signatures for type checking
 try:
@@ -174,24 +150,13 @@ MCPAutoLoaderTool: Any
 ADMETAITool: Any
 AlphaFoldRESTTool: Any
 ComposeTool: Any
-CellosaurusSearchTool: Any
-CellosaurusQueryConverterTool: Any
-CellosaurusGetCellLineInfoTool: Any
-if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
+if not LAZY_LOADING_ENABLED:
     # Import all tool classes immediately (old behavior) with warning suppression  # noqa: E501
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=DeprecationWarning)
         warnings.filterwarnings("ignore", category=RuntimeWarning)
         warnings.filterwarnings("ignore", category=UserWarning)
         warnings.filterwarnings("ignore", category=FutureWarning)
-        # Suppress specific third-party warnings
-        warnings.filterwarnings("ignore", category=UserWarning, module="hyperopt")
-        warnings.filterwarnings(
-            "ignore", category=DeprecationWarning, module="pkg_resources"
-        )
-        warnings.filterwarnings(
-            "ignore", category=RuntimeWarning, module="importlib._bootstrap"
-        )
 
         from .restful_tool import MonarchTool, MonarchDiseasesForMultiplePhenoTool
         from .ctg_tool import ClinicalTrialsSearchTool, ClinicalTrialsDetailsTool
@@ -259,25 +224,6 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
         ODPHPTopicSearch,
         ODPHPOutlinkFetch,
     )
-    from .cellosaurus_tool import (
-        CellosaurusSearchTool,
-        CellosaurusQueryConverterTool,
-        CellosaurusGetCellLineInfoTool,
-    )
-
-    # Literature search tools
-    from .arxiv_tool import ArXivTool
-    from .crossref_tool import CrossrefTool
-    from .dblp_tool import DBLPTool
-    from .pubmed_tool import PubMedTool
-    from .doaj_tool import DOAJTool
-    from .unpaywall_tool import UnpaywallTool
-    from .biorxiv_tool import BioRxivTool
-    from .medrxiv_tool import MedRxivTool
-    from .hal_tool import HALTool
-    from .core_tool import CoreTool
-    from .pmc_tool import PMCTool
-    from .zenodo_tool import ZenodoTool
 else:
     # With lazy loading, create lazy import proxies that import modules only when accessed
     MonarchTool = _LazyImportProxy("restful_tool", "MonarchTool")
@@ -359,28 +305,6 @@ else:
     ODPHPMyHealthfinder = _LazyImportProxy("odphp_tool", "ODHPHPMyHealthfinder")
     ODPHPTopicSearch = _LazyImportProxy("odphp_tool", "ODPHPTopicSearch")
     ODPHPOutlinkFetch = _LazyImportProxy("odphp_tool", "ODPHPOutlinkFetch")
-    CellosaurusSearchTool = _LazyImportProxy(
-        "cellosaurus_tool", "CellosaurusSearchTool"
-    )
-    CellosaurusQueryConverterTool = _LazyImportProxy(
-        "cellosaurus_tool", "CellosaurusQueryConverterTool"
-    )
-    CellosaurusGetCellLineInfoTool = _LazyImportProxy(
-        "cellosaurus_tool", "CellosaurusGetCellLineInfoTool"
-    )
-    # Literature search tools
-    ArXivTool = _LazyImportProxy("arxiv_tool", "ArXivTool")
-    CrossrefTool = _LazyImportProxy("crossref_tool", "CrossrefTool")
-    DBLPTool = _LazyImportProxy("dblp_tool", "DBLPTool")
-    PubMedTool = _LazyImportProxy("pubmed_tool", "PubMedTool")
-    DOAJTool = _LazyImportProxy("doaj_tool", "DOAJTool")
-    UnpaywallTool = _LazyImportProxy("unpaywall_tool", "UnpaywallTool")
-    BioRxivTool = _LazyImportProxy("biorxiv_tool", "BioRxivTool")
-    MedRxivTool = _LazyImportProxy("medrxiv_tool", "MedRxivTool")
-    HALTool = _LazyImportProxy("hal_tool", "HALTool")
-    CoreTool = _LazyImportProxy("core_tool", "CoreTool")
-    PMCTool = _LazyImportProxy("pmc_tool", "PMCTool")
-    ZenodoTool = _LazyImportProxy("zenodo_tool", "ZenodoTool")
 
 __all__ = [
     "__version__",
@@ -388,7 +312,6 @@ __all__ = [
     "BaseTool",
     "register_tool",
     "get_tool_registry",
-    "tools",
     "MonarchTool",
     "MonarchDiseasesForMultiplePhenoTool",
     "ClinicalTrialsSearchTool",
@@ -453,20 +376,15 @@ __all__ = [
     "ODPHPItemList",
     "ODPHPTopicSearch",
     "ODPHPOutlinkFetch",
-    "CellosaurusSearchTool",
-    "CellosaurusQueryConverterTool",
-    "CellosaurusGetCellLineInfoTool",
-    # Literature search tools
-    "ArXivTool",
-    "CrossrefTool",
-    "DBLPTool",
-    "PubMedTool",
-    "DOAJTool",
-    "UnpaywallTool",
-    "BioRxivTool",
-    "MedRxivTool",
-    "HALTool",
-    "CoreTool",
-    "PMCTool",
-    "ZenodoTool",
+    "ContextKeeperTool",
+    "HarvestCandidateTesterTool",
+    "ToolNavigatorTool",
 ]
+
+# Force-load VSD modules so their @register_tool decorators execute.
+from . import vsd_tool       # registers VerifiedSourceDiscoveryTool + VerifiedSourceRegisterTool
+from . import vsd_api_tool   # registers GenericRESTTool + GenericGraphQLTool
+from . import context_keeper_tool  # registers ContextKeeperTool
+from . import candidate_tester_tool  # registers HarvestCandidateTesterTool
+from . import tool_navigator_tool  # registers ToolNavigatorTool
+

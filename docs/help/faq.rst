@@ -123,7 +123,7 @@ Many scientific APIs have rate limits. ToolUniverse implements automatic rate li
 
          # Process in batches
          for batch in batches(gene_list, batch_size=10):
-             results = tu.run(batch, use_cache=True, max_workers=8)
+             results = tu.run_batch(batch)
              time.sleep(1)  # Add delay between batches
 
    .. tab:: Solution 3: Caching
@@ -133,6 +133,7 @@ Many scientific APIs have rate limits. ToolUniverse implements automatic rate li
       .. code-block:: python
 
          tu = ToolUniverse(enable_cache=True)
+
 Tool returns empty results?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -145,10 +146,10 @@ Tool returns empty results?
 
 .. code-block:: python
 
-   # Example: Retrieve UniProt function by accession
+   # Example: Check if gene symbol is valid
    query = {
-       "name": "UniProt_get_function_by_accession",
-       "arguments": {"accession": "P38398"}  # BRCA1 accession
+       "name": "UniProt_get_protein_info",
+       "arguments": {"gene_symbol": "BRCA1"}  # Use standard gene symbol
    }
 
 MCP Integration

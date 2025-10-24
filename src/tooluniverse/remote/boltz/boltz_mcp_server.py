@@ -17,7 +17,7 @@ except FileNotFoundError as e:
     )
     sys.exit(1)
 
-server = FastMCP("Your MCP Server")
+server = FastMCP("Your MCP Server", stateless_http=True)
 agents = {}
 for tool_config in boltz_tools:
     agents[tool_config["name"]] = Boltz2DockingTool(tool_config=tool_config)
@@ -35,7 +35,7 @@ def run_boltz2(query: dict):
             - without_potentials (bool): Whether to run without potentials (default: False)
             - diffusion_samples (int): Number of diffusion samples to generate (default: 1)
             - Additional constraint keys may be included as needed
-    Returns
+    Returns:
         dict: A dictionary containing the docking results with the following structure:
             - predicted_structure (str): The predicted protein-ligand complex structure in CIF format
             - structure_format (str): Format of the structure file (typically 'cif')
@@ -47,6 +47,4 @@ def run_boltz2(query: dict):
 
 
 if __name__ == "__main__":
-    server.run(
-        transport="streamable-http", host="0.0.0.0", port=8080, stateless_http=True
-    )
+    server.run(transport="streamable-http", host="0.0.0.0", port=8080)

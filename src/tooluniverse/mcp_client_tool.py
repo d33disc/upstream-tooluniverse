@@ -8,11 +8,11 @@ supporting all MCP functionality including tools, resources, and prompts.
 import json
 import asyncio
 import websockets
+import aiohttp
+import uuid
 from typing import Dict, List, Any, Optional
 from urllib.parse import urljoin
 import warnings
-from mcp.client.session import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 import os
@@ -26,25 +26,37 @@ class BaseMCPClient:
 
     def __init__(self, server_url: str, transport: str = "http", timeout: int = 30):
         self.server_url = os.path.expandvars(server_url)
-        # Normalize transport for backward compatibility: treat 'stdio' as HTTP
-        normalized_transport = (
-            transport.lower() if isinstance(transport, str) else "http"
-        )
-        if normalized_transport == "stdio":
-            normalized_transport = "http"
-        self.transport = normalized_transport
+        self.transport = transport
         self.timeout = timeout
         self.session = None
+        self.mcp_session_id = None
+        self._initialized = False
 
-        # Validate transport (accept 'stdio' via normalization above)
+        # Validate transport
         supported_transports = ["http", "websocket"]
         if self.transport not in supported_transports:
-            # Keep message concise to satisfy line length rules
-            raise ValueError("Invalid transport")
+            raise ValueError(
+                f"Invalid transport '{self.transport}'. Supported: {supported_transports}"
+            )
+
+    async def _ensure_session(self):
+        """Ensure HTTP session is available for HTTP transport"""
+        if self.transport == "http" and self.session is None:
+            connector = aiohttp.TCPConnector()
+            timeout = aiohttp.ClientTimeout(total=self.timeout)
+            self.session = aiohttp.ClientSession(connector=connector, timeout=timeout)
 
     async def _close_session(self):
-        """Placeholder for compatibility; HTTP client calls are scoped per request."""
-        return
+        """Close HTTP session if exists"""
+        if self.session:
+            try:
+                await self.session.close()
+            except Exception:
+                pass  # Ignore errors during cleanup
+            finally:
+                self.session = None
+                self.mcp_session_id = None
+                self._initialized = False
 
     def _get_mcp_endpoint(self, path: str) -> str:
         """Get the full MCP endpoint URL"""
@@ -55,55 +67,115 @@ class BaseMCPClient:
             return urljoin(base_url + "/", path)
         return self.server_url
 
+    async def _initialize_mcp_session(self):
+        """Initialize MCP session if needed (for compatibility with different MCP servers)"""
+        if self._initialized:
+            return
+
+        await self._ensure_session()
+
+        # Try to get session ID from server
+        try:
+            url = f"{self.server_url.rstrip('/')}/mcp"
+            test_payload = {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}
+
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/event-stream",
+            }
+
+            async with self.session.post(
+                url, json=test_payload, headers=headers
+            ) as response:
+                session_id = response.headers.get("mcp-session-id")
+                if session_id:
+                    self.mcp_session_id = session_id
+
+                if response.status in [200, 400, 406, 500]:
+                    self._initialized = True
+                    return
+
+        except Exception:
+            pass
+
+        # Fallback: generate session ID
+        if not self.mcp_session_id:
+            self.mcp_session_id = str(uuid.uuid4()).replace("-", "")
+
+        self._initialized = True
+
     async def _make_mcp_request(
         self, method: str, params: Optional[Dict] = None
     ) -> Dict[str, Any]:
         """Make an MCP JSON-RPC request"""
+        request_id = "1"
+
+        payload = {"jsonrpc": "2.0", "id": request_id, "method": method}
+
+        if params:
+            payload["params"] = params
+
         if self.transport == "http":
+            await self._ensure_session()
+            await self._initialize_mcp_session()  # Ensure session is initialized
+
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/event-stream",
+            }
+
+            # Add session ID if available
+            if self.mcp_session_id:
+                headers["mcp-session-id"] = self.mcp_session_id
+
             endpoint = self._get_mcp_endpoint("")
-            async with streamablehttp_client(endpoint, timeout=self.timeout) as (
-                read_stream,
-                write_stream,
-                _,
-            ):
-                async with ClientSession(read_stream, write_stream) as session:
-                    await session.initialize()
 
-                    if method == "tools/list":
-                        result = await session.list_tools()
-                    elif method == "tools/call":
-                        if not params or "name" not in params:
-                            raise ValueError("Missing tool name for tools/call")
-                        result = await session.call_tool(
-                            params["name"], params.get("arguments") or {}
-                        )
-                    elif method == "resources/list":
-                        result = await session.list_resources()
-                    elif method == "resources/read":
-                        if not params or "uri" not in params:
-                            raise ValueError("Missing uri for resources/read")
-                        result = await session.read_resource(params["uri"])
-                    elif method == "prompts/list":
-                        result = await session.list_prompts()
-                    elif method == "prompts/get":
-                        if not params or "name" not in params:
-                            raise ValueError("Missing prompt name for prompts/get")
-                        result = await session.get_prompt(
-                            params["name"], params.get("arguments")
-                        )
+            async with self.session.post(
+                endpoint, json=payload, headers=headers
+            ) as response:
+                if response.status != 200:
+                    raise Exception(
+                        f"MCP request failed with status {response.status}: {await response.text()}"
+                    )
+
+                content_type = response.headers.get("content-type", "").lower()
+
+                if "text/event-stream" in content_type:
+                    # Handle Server-Sent Events format
+                    response_text = await response.text()
+
+                    for line in response_text.split("\n"):
+                        line = line.strip()
+                        if line.startswith("data: "):
+                            json_data = line[6:]
+                            try:
+                                result = json.loads(json_data)
+                                break
+                            except json.JSONDecodeError:
+                                continue
                     else:
-                        raise ValueError(f"Unsupported MCP method: {method}")
+                        raise Exception(
+                            f"Failed to parse SSE response: {response_text}"
+                        )
 
-                    if hasattr(result, "model_dump"):
-                        return result.model_dump(mode="json")
-                    return result
+                elif "application/json" in content_type:
+                    result = await response.json()
+                else:
+                    try:
+                        result = await response.json()
+                    except Exception:
+                        response_text = await response.text()
+                        raise Exception(
+                            f"Unexpected content type {content_type}. Response: {response_text}"
+                        )
+
+                if "error" in result:
+                    raise Exception(f"MCP error: {result['error']}")
+
+                return result.get("result", {})
 
         elif self.transport == "websocket":
             async with websockets.connect(self.server_url) as websocket:
-                request_id = "1"
-                payload = {"jsonrpc": "2.0", "id": request_id, "method": method}
-                if params:
-                    payload["params"] = params
                 await websocket.send(json.dumps(payload))
                 response = await websocket.recv()
                 result = json.loads(response)
@@ -498,6 +570,7 @@ class MCPAutoLoaderTool(BaseTool, BaseMCPClient):
     async def discover_tools(self) -> Dict[str, Any]:
         """Discover all available tools from the MCP server"""
         try:
+            await self._initialize_mcp_session()
             tools_response = await self._make_mcp_request("tools/list")
             tools = tools_response.get("tools", [])
 
@@ -553,28 +626,22 @@ class MCPAutoLoaderTool(BaseTool, BaseMCPClient):
         return configs
 
     def register_tools_in_engine(self, engine):
-        """Register discovered tools using ToolUniverse public API"""
+        """Register discovered tools directly in the ToolUniverse engine"""
         try:
             configs = self.generate_proxy_tool_configs()
 
             for config in configs:
-                config["type"]
+                # Add configuration to engine's all_tools list for validation
+                engine.all_tools.append(config)
+
+                # Create MCPProxyTool instance for execution
+                proxy_tool = MCPProxyTool(config)
+
+                # Register both config (for validation) and tool instance (for execution)
                 tool_name = config["name"]
-
-                # Use public API to register tool
-                engine.register_custom_tool(
-                    tool_class=MCPProxyTool,
-                    tool_name=tool_name,
-                    tool_config=config,
-                    instantiate=True,  # Immediately instantiate and cache
-                )
-
-                # Keep reference for tracking
-                # Use the actual key that register_custom_tool uses
-                actual_key = config.get("name", tool_name)
-                self._registered_tools[tool_name] = engine.callable_functions[
-                    actual_key
-                ]
+                engine.all_tool_dict[tool_name] = config  # For validation
+                engine.callable_functions[tool_name] = proxy_tool  # For execution
+                self._registered_tools[tool_name] = proxy_tool
 
             return len(configs)
         except Exception as e:

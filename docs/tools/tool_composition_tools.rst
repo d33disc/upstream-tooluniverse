@@ -31,7 +31,7 @@ Analyzes two tool specifications to determine if one tool's output can be used a
    * ``target_tool`` (string) (required)
      The target tool specification (JSON string with name, description, parameter schema)
 
-   * ``analysis_depth`` (string) (required)
+   * ``analysis_depth`` (string) (optional)
      Level of analysis depth - quick for basic compatibility, detailed for parameter mapping, comprehensive for semantic analysis
 
    **Example Usage:**
@@ -42,8 +42,7 @@ Analyzes two tool specifications to determine if one tool's output can be used a
           "name": "ToolCompatibilityAnalyzer",
           "arguments": {
               "source_tool": "example_value",
-              "target_tool": "example_value",
-              "analysis_depth": "example_value"
+              "target_tool": "example_value"
           }
       }
       result = tu.run(query)
@@ -64,22 +63,22 @@ Builds a comprehensive graph of tool compatibility relationships in ToolUniverse
 
    **Parameters:**
 
-   * ``output_path`` (string) (required)
+   * ``output_path`` (string) (optional)
      Path to save the generated graph files (JSON and pickle formats)
 
-   * ``analysis_depth`` (string) (required)
+   * ``analysis_depth`` (string) (optional)
      Level of compatibility analysis to perform
 
-   * ``min_compatibility_score`` (integer) (required)
+   * ``min_compatibility_score`` (integer) (optional)
      Minimum compatibility score to create an edge in the graph
 
-   * ``exclude_categories`` (array) (required)
+   * ``exclude_categories`` (array) (optional)
      Tool categories to exclude from analysis (e.g., ['tool_finder', 'special_tools'])
 
-   * ``max_tools_per_category`` (integer) (required)
+   * ``max_tools_per_category`` (integer) (optional)
      Maximum number of tools to analyze per category (for performance)
 
-   * ``force_rebuild`` (boolean) (required)
+   * ``force_rebuild`` (boolean) (optional)
      Whether to force rebuild even if cached graph exists
 
    **Example Usage:**
@@ -89,12 +88,6 @@ Builds a comprehensive graph of tool compatibility relationships in ToolUniverse
       query = {
           "name": "ToolGraphComposer",
           "arguments": {
-              "output_path": "example_value",
-              "analysis_depth": "example_value",
-              "min_compatibility_score": 10,
-              "exclude_categories": ["item1", "item2"],
-              "max_tools_per_category": 10,
-              "force_rebuild": true
           }
       }
       result = tu.run(query)

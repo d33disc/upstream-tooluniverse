@@ -6,8 +6,7 @@ import os
 import json
 import glob
 import logging
-import re
-from typing import Dict, Optional
+from typing import Dict
 
 # Initialize logger for this module
 logger = logging.getLogger("ToolRegistry")
@@ -18,32 +17,6 @@ _config_registry = {}
 _lazy_registry: Dict[str, str] = {}  # Maps tool names to module names
 _discovery_completed = False
 _lazy_cache = {}
-
-# Global error tracking
-_TOOL_ERRORS = {}
-
-
-def _extract_missing_package(error_msg: str) -> Optional[str]:
-    """Extract package name from ImportError."""
-    match = re.search(r"No module named ['\"]([^'\"]+)['\"]", error_msg)
-    if match:
-        return match.group(1).split(".")[0]
-    return None
-
-
-def mark_tool_unavailable(tool_name: str, error: Exception, module: str = None):
-    """Record tool failure."""
-    _TOOL_ERRORS[tool_name] = {
-        "error": str(error),
-        "error_type": type(error).__name__,
-        "module": module,
-        "missing_package": _extract_missing_package(str(error)),
-    }
-
-
-def get_tool_errors() -> dict:
-    """Get all tool errors."""
-    return _TOOL_ERRORS.copy()
 
 
 def register_tool(tool_type_name=None, config=None):
@@ -98,7 +71,7 @@ def lazy_import_tool(tool_name):
     Lazily import a tool by name without importing all tool modules.
     Only imports the specific module containing the requested tool.
     """
-    global _tool_registry, _lazy_registry, _lazy_cache  # noqa: F824
+    global _tool_registry, _lazy_registry, _lazy_cache
 
     # If tool is already in registry, return it
     if tool_name in _tool_registry:
@@ -135,12 +108,7 @@ def lazy_import_tool(tool_name):
 
             except ImportError as e:
                 logger.warning(f"Failed to lazy import {full_module_name}: {e}")
-                mark_tool_unavailable(tool_name, e, full_module_name)
                 # Remove this bad mapping so we don't try again
-                del _lazy_registry[tool_name]
-            except Exception as e:
-                logger.warning(f"Failed to load {full_module_name}: {e}")
-                mark_tool_unavailable(tool_name, e, full_module_name)
                 del _lazy_registry[tool_name]
         else:
             # Module was already imported, check if tool is now available
@@ -162,7 +130,7 @@ def build_lazy_registry(package_name=None):
     Build a mapping of tool names to module names using config files and naming patterns.
     This is truly lazy - it doesn't import any modules, just creates the mapping.
     """
-    global _lazy_registry  # noqa: F824
+    global _lazy_registry
 
     if package_name is None:
         package_name = "tooluniverse"
@@ -446,3 +414,18 @@ def get_tool_class_lazy(tool_name):
         return _tool_registry.get(tool_name)
 
     return None
+
+# --- VSD / compatibility shims ---
+def get_tool_class(name: str):
+    """
+    Backwards-compatible accessor used by scripts like SampleVDSRun.py.
+    Prefer get_tool_class_lazy(name) internally.
+    """
+    return get_tool_class_lazy(name)
+
+class _RegistryShim:
+    def get_tool_class(self, name: str):
+        return get_tool_class_lazy(name)
+
+# Expose a 'registry' object with get_tool_class, if callers expect it
+registry = _RegistryShim()

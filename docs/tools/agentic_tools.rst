@@ -1003,7 +1003,7 @@ Optimizes tool configurations based on quality feedback. Improves tool specifica
    * ``quality_feedback`` (string) (required)
      JSON string of quality evaluation feedback
 
-   * ``optimization_target`` (string) (required)
+   * ``optimization_target`` (string) (optional)
      What to optimize for (improve_quality, enhance_performance, etc.)
 
    **Example Usage:**
@@ -1014,8 +1014,7 @@ Optimizes tool configurations based on quality feedback. Improves tool specifica
           "name": "ToolOptimizer",
           "arguments": {
               "tool_config": "example_value",
-              "quality_feedback": "example_value",
-              "optimization_target": "example_value"
+              "quality_feedback": "example_value"
           }
       }
       result = tu.run(query)
@@ -1039,10 +1038,10 @@ Evaluates the quality of tool configurations and implementations. Provides detai
    * ``tool_config`` (string) (required)
      JSON string of the tool configuration
 
-   * ``test_cases`` (string) (required)
+   * ``test_cases`` (string) (optional)
      JSON string of test cases
 
-   * ``evaluation_aspects`` (array) (required)
+   * ``evaluation_aspects`` (array) (optional)
      Aspects to evaluate (functionality, usability, completeness, best_practices)
 
    **Example Usage:**
@@ -1052,9 +1051,7 @@ Evaluates the quality of tool configurations and implementations. Provides detai
       query = {
           "name": "ToolQualityEvaluator",
           "arguments": {
-              "tool_config": "example_value",
-              "test_cases": "example_value",
-              "evaluation_aspects": ["item1", "item2"]
+              "tool_config": "example_value"
           }
       }
       result = tu.run(query)

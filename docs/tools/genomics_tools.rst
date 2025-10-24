@@ -118,7 +118,7 @@ Get comprehensive information about cyvcf2 – fast VCF/BCF file processing
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -128,7 +128,6 @@ Get comprehensive information about cyvcf2 – fast VCF/BCF file processing
       query = {
           "name": "get_cyvcf2_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -180,7 +179,7 @@ Get comprehensive information about GSEApy – Gene Set Enrichment Analysis in P
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -190,7 +189,6 @@ Get comprehensive information about GSEApy – Gene Set Enrichment Analysis in P
       query = {
           "name": "get_gseapy_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -300,7 +298,7 @@ Get comprehensive information about pybedtools – Python wrapper for BEDTools
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -310,7 +308,6 @@ Get comprehensive information about pybedtools – Python wrapper for BEDTools
       query = {
           "name": "get_pybedtools_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -391,7 +388,7 @@ Get comprehensive information about pyfaidx – efficient FASTA file indexing an
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -401,7 +398,6 @@ Get comprehensive information about pyfaidx – efficient FASTA file indexing an
       query = {
           "name": "get_pyfaidx_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -451,7 +447,7 @@ Get comprehensive information about PyLiftover – genomic coordinate conversion
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -461,7 +457,6 @@ Get comprehensive information about PyLiftover – genomic coordinate conversion
       query = {
           "name": "get_pyliftover_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -482,7 +477,7 @@ Get comprehensive information about PyRanges – efficient genomic interval oper
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -492,7 +487,6 @@ Get comprehensive information about PyRanges – efficient genomic interval oper
       query = {
           "name": "get_pyranges_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -513,7 +507,7 @@ Get comprehensive information about pysam – interface to SAM/BAM/CRAM files
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -523,7 +517,6 @@ Get comprehensive information about pysam – interface to SAM/BAM/CRAM files
       query = {
           "name": "get_pysam_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -573,7 +566,7 @@ Get comprehensive information about ReportLab – PDF generation library
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -583,7 +576,6 @@ Get comprehensive information about ReportLab – PDF generation library
       query = {
           "name": "get_reportlab_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -604,7 +596,7 @@ Get comprehensive information about ViennaRNA – RNA structure prediction and a
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -614,7 +606,6 @@ Get comprehensive information about ViennaRNA – RNA structure prediction and a
       query = {
           "name": "get_viennarna_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)

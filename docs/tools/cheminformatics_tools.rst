@@ -54,7 +54,7 @@ Get comprehensive information about COBRApy – constraint-based metabolic model
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -64,7 +64,6 @@ Get comprehensive information about COBRApy – constraint-based metabolic model
       query = {
           "name": "get_cobra_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -114,7 +113,7 @@ Get comprehensive information about DeepChem – an open-source toolkit that bri
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -124,7 +123,6 @@ Get comprehensive information about DeepChem – an open-source toolkit that bri
       query = {
           "name": "get_deepchem_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -145,7 +143,7 @@ Get comprehensive information about DScribe – a library for generating machine
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -155,7 +153,6 @@ Get comprehensive information about DScribe – a library for generating machine
       query = {
           "name": "get_dscribe_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -263,7 +260,7 @@ Get comprehensive information about OpenBabel – chemical format conversion and
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -273,7 +270,6 @@ Get comprehensive information about OpenBabel – chemical format conversion and
       query = {
           "name": "get_openbabel_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -354,7 +350,7 @@ Get comprehensive information about RDKit – cheminformatics and machine learni
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -364,7 +360,6 @@ Get comprehensive information about RDKit – cheminformatics and machine learni
       query = {
           "name": "get_rdkit_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)

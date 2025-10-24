@@ -59,10 +59,10 @@ Finds all genes/proteins associated with a specific Gene Ontology term using the
    * ``id`` (string) (required)
      The standard GO term ID, e.g., 'GO:0006915'.
 
-   * ``taxon`` (string) (required)
+   * ``taxon`` (string) (optional)
      Optional species filter using a NCBI taxon ID. For example, Human is 'NCBITaxon:9606', and Mouse is 'NCBITaxon:10090'.
 
-   * ``rows`` (integer) (required)
+   * ``rows`` (integer) (optional)
      The number of genes to return. Default is 100.
 
    **Example Usage:**
@@ -72,9 +72,7 @@ Finds all genes/proteins associated with a specific Gene Ontology term using the
       query = {
           "name": "GO_get_genes_for_term",
           "arguments": {
-              "id": "example_value",
-              "taxon": "example_value",
-              "rows": 10
+              "id": "example_value"
           }
       }
       result = tu.run(query)

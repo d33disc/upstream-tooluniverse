@@ -7,7 +7,6 @@ It creates a minimal SMCP server that exposes all ToolUniverse tools as MCP tool
 """
 
 import argparse
-import os
 import sys
 from .smcp import SMCP
 
@@ -37,31 +36,6 @@ Examples:
 
   # Start with custom hook configuration
   tooluniverse-smcp-server --hook-config-file /path/to/hook_config.json
-
-  # Load Space configuration
-  tooluniverse-smcp-server --load "community/proteomics-toolkit"
-  tooluniverse-smcp-server --load "./my-config.yaml"
-        """,
-    )
-
-    # Space configuration options
-    space_group = parser.add_argument_group("Space Configuration")
-    space_group.add_argument(
-        "--load",
-        "-l",
-        type=str,
-        metavar="CONFIG",
-        help="""Load space configuration (preset/workspace).
-
-Supports multiple formats:
-  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
-  • Local files:      ./config.yaml, /absolute/path.yaml
-  • HTTP URLs:        https://example.com/config.yaml
-
-Examples:
-  --load "community/proteomics-toolkit"
-  --load "./my-config.yaml"
-  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -131,13 +105,13 @@ Examples:
 
         print()
 
-        # Create SMCP server with Space support
+        # Create SMCP server with hook support
         server = SMCP(
             name=args.name,
-            space=args.load,  # Pass Space URI directly to SMCP
             auto_expose_tools=True,
             search_enabled=True,
             max_workers=5,
+            stateless_http=True,  # Enable stateless mode for MCPAutoLoaderTool compatibility
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=args.hook_type,
@@ -161,95 +135,53 @@ def run_stdio_server():
     This function provides compatibility with the original MCP server's run_claude_desktop function.
     It accepts the same arguments as run_smcp_server but forces transport='stdio'.
     """
-    # Set environment variable and reconfigure logging for stdio mode
-    os.environ["TOOLUNIVERSE_STDIO_MODE"] = "1"
-
-    # Import and reconfigure logging to stderr
-    from .logging_config import reconfigure_for_stdio
-
-    reconfigure_for_stdio()
-    # Ensure stdout is line-buffered for immediate JSON-RPC flushing in stdio mode
-    try:
-        import sys as _sys
-
-        if hasattr(_sys.stdout, "reconfigure"):
-            _sys.stdout.reconfigure(line_buffering=True)
-    except Exception:
-        pass
-
     parser = argparse.ArgumentParser(
         description="Start SMCP (Scientific Model Context Protocol) Server with stdio transport",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Start server with all tools using stdio transport (hooks enabled by default)
-  tooluniverse-smcp-stdio
+  tooluniverse-stdio
 
   # Start with specific categories
-  tooluniverse-smcp-stdio --categories uniprot ChEMBL opentarget
+  tooluniverse-stdio --categories uniprot ChEMBL opentarget
 
   # Enable hooks
-  tooluniverse-smcp-stdio --hooks
+  tooluniverse-stdio --hooks
 
   # Use FileSaveHook instead of SummarizationHook
-  tooluniverse-smcp-stdio --hook-type FileSaveHook
+  tooluniverse-stdio --hook-type FileSaveHook
 
   # Use custom hook configuration
-  tooluniverse-smcp-stdio --hook-config-file /path/to/hook_config.json
+  tooluniverse-stdio --hook-config-file /path/to/hook_config.json
 
   # Start with categories but exclude specific tools
-  tooluniverse-smcp-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
 
   # Start with all tools but exclude entire categories
-  tooluniverse-smcp-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
+  tooluniverse-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
 
   # Load only specific tools by name
-  tooluniverse-smcp-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
 
   # Load tools from a file
-  tooluniverse-smcp-stdio --tools-file "/path/to/tool_names.txt"
+  tooluniverse-stdio --tools-file "/path/to/tool_names.txt"
 
   # Load additional config files
-  tooluniverse-smcp-stdio --tool-config-files "custom:/path/to/custom_tools.json"
+  tooluniverse-stdio --tool-config-files "custom:/path/to/custom_tools.json"
 
   # Include/exclude specific tool types
-  tooluniverse-smcp-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
-  tooluniverse-smcp-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
+  tooluniverse-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
+  tooluniverse-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
 
   # List available categories
-  tooluniverse-smcp-stdio --list-categories
+  tooluniverse-stdio --list-categories
 
   # List all available tools
-  tooluniverse-smcp-stdio --list-tools
+  tooluniverse-stdio --list-tools
 
   # Start minimal server with just search tools
-  tooluniverse-smcp-stdio --categories special_tools tool_finder
-
-  # Load Space configuration
-  tooluniverse-smcp-stdio --load "hf:community/proteomics-toolkit"
-  tooluniverse-smcp-stdio --load "./my-config.yaml"
-  tooluniverse-smcp-stdio --load "https://example.com/config.yaml"
-        """,
-    )
-
-    # Space configuration options
-    space_group = parser.add_argument_group("Space Configuration")
-    space_group.add_argument(
-        "--load",
-        "-l",
-        type=str,
-        metavar="CONFIG",
-        help="""Load space configuration (preset/workspace).
-
-Supports multiple formats:
-  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
-  • Local files:      ./config.yaml, /absolute/path.yaml
-  • HTTP URLs:        https://example.com/config.yaml
-
-Examples:
-  --load "community/proteomics-toolkit"
-  --load "./my-config.yaml"
-  --load "https://example.com/config.yaml"
+  tooluniverse-stdio --categories special_tools tool_finder
         """,
     )
 
@@ -322,8 +254,8 @@ Examples:
     # Server configuration (stdio-specific)
     parser.add_argument(
         "--name",
-        default="ToolUniverse SMCP Server",
-        help="Server name (default: ToolUniverse SMCP Server)",
+        default="SMCP ToolUniverse Server",
+        help="Server name (default: SMCP ToolUniverse Server)",
     )
     parser.add_argument(
         "--no-search",
@@ -366,38 +298,99 @@ Examples:
             from .execute_function import ToolUniverse
 
             tu = ToolUniverse()
-            # Use ToolUniverse API to list categories consistently
-            stats = tu.list_built_in_tools(mode="config", scan_all=False)
+            tool_types = tu.get_tool_types()
 
-            print("Available tool categories:", file=sys.stderr)
-            print("=" * 50, file=sys.stderr)
+            print("Available tool categories:")
+            print("=" * 50)
 
-            categories = stats.get("categories", {})
-            # Sort by count desc, then name asc
-            sorted_items = sorted(
-                categories.items(), key=lambda kv: (-kv[1].get("count", 0), kv[0])
-            )
-            for key, info in sorted_items:
-                display = key.replace("_", " ").title()
-                count = info.get("count", 0)
-                print(f"  {display}: {count}", file=sys.stderr)
+            # Group categories for better readability
+            scientific_db = []
+            literature = []
+            software = []
+            special = []
+            clinical = []
+            other = []
 
-            print(
-                f"\nTotal categories: {stats.get('total_categories', 0)}",
-                file=sys.stderr,
-            )
-            print(
-                f"Total unique tools: {stats.get('total_tools', 0)}",
-                file=sys.stderr,
-            )
+            for category in sorted(tool_types):
+                if category in [
+                    "uniprot",
+                    "ChEMBL",
+                    "opentarget",
+                    "pubchem",
+                    "hpa",
+                    "rcsb_pdb",
+                    "reactome",
+                    "go",
+                ]:
+                    scientific_db.append(category)
+                elif category in [
+                    "EuropePMC",
+                    "semantic_scholar",
+                    "pubtator",
+                    "OpenAlex",
+                ]:
+                    literature.append(category)
+                elif category.startswith("software_"):
+                    software.append(category)
+                elif category in [
+                    "special_tools",
+                    "tool_finder",
+                    "tool_composition",
+                    "agents",
+                ]:
+                    special.append(category)
+                elif category in [
+                    "clinical_trials",
+                    "fda_drug_label",
+                    "fda_drug_adverse_event",
+                    "dailymed",
+                    "medlineplus",
+                ]:
+                    clinical.append(category)
+                else:
+                    other.append(category)
 
-            print(
-                "\nTip: Use --exclude-categories or --include-tools to customize loading",
-                file=sys.stderr,
-            )
+            if scientific_db:
+                print("\n🔬 Scientific Databases:")
+                for cat in scientific_db:
+                    print(f"  {cat}")
+
+            if literature:
+                print("\n📚 Literature & Knowledge:")
+                for cat in literature:
+                    print(f"  {cat}")
+
+            if clinical:
+                print("\n🏥 Clinical & Drug Information:")
+                for cat in clinical:
+                    print(f"  {cat}")
+
+            if software:
+                print("\n💻 Software Tools:")
+                for cat in software[:5]:  # Show first 5
+                    print(f"  {cat}")
+                if len(software) > 5:
+                    print(f"  ... and {len(software) - 5} more software categories")
+
+            if special:
+                print("\n🛠 Special & Meta Tools:")
+                for cat in special:
+                    print(f"  {cat}")
+
+            if other:
+                print("\n📂 Other Categories:")
+                for cat in other:
+                    print(f"  {cat}")
+
+            print(f"\nTotal: {len(tool_types)} categories available")
+            print("\nCommon combinations:")
+            print("  Scientific research: uniprot ChEMBL opentarget pubchem hpa")
+            print("  Drug discovery: ChEMBL fda_drug_label clinical_trials pubchem")
+            print("  Literature analysis: EuropePMC semantic_scholar pubtator")
+            print("  Minimal setup: special_tools tool_finder")
 
         except Exception as e:
-            print(f"❌ Error listing categories: {e}", file=sys.stderr)
+            print(f"❌ Error listing categories: {e}")
             sys.exit(1)
         return
 
@@ -409,66 +402,50 @@ Examples:
             tu = ToolUniverse()
             tu.load_tools()  # Load all tools to list them
 
-            print("Available tools:", file=sys.stderr)
-            print("=" * 50, file=sys.stderr)
+            print("Available tools:")
+            print("=" * 50)
 
-            # Group tools by category (use ToolUniverse's canonical 'type' field)
+            # Group tools by category
             tools_by_category = {}
             for tool in tu.all_tools:
-                # Handle both dict and object tool formats
-                if isinstance(tool, dict):
-                    tool_type = tool.get("type", "unknown")
-                    tool_name = tool.get("name", "unknown")
-                else:
-                    tool_type = getattr(tool, "type", "unknown")
-                    tool_name = getattr(tool, "name", "unknown")
-
+                tool_type = getattr(tool, "tool_type", "unknown")
                 if tool_type not in tools_by_category:
                     tools_by_category[tool_type] = []
-                tools_by_category[tool_type].append(tool_name)
+                tools_by_category[tool_type].append(tool.name)
 
             total_tools = 0
             for category in sorted(tools_by_category.keys()):
                 tools = sorted(tools_by_category[category])
-                print(f"\n📁 {category} ({len(tools)} tools):", file=sys.stderr)
+                print(f"\n📁 {category} ({len(tools)} tools):")
                 for tool in tools[:10]:  # Show first 10 tools per category
-                    print(f"  {tool}", file=sys.stderr)
+                    print(f"  {tool}")
                 if len(tools) > 10:
-                    # Print remaining count to stderr
-                    print(f"  ... and {len(tools) - 10} more tools", file=sys.stderr)
+                    print(f"  ... and {len(tools) - 10} more tools")
                 total_tools += len(tools)
 
-            print(f"\nTotal: {total_tools} tools available", file=sys.stderr)
-            print(
-                "\nNote: Use --exclude-tools to exclude specific tools by name",
-                file=sys.stderr,
-            )
-            print(
-                "      Use --exclude-categories to exclude entire categories",
-                file=sys.stderr,
-            )
+            print(f"\nTotal: {total_tools} tools available")
+            print("\nNote: Use --exclude-tools to exclude specific tools by name")
+            print("      Use --exclude-categories to exclude entire categories")
 
         except Exception as e:
-            print(f"❌ Error listing tools: {e}", file=sys.stderr)
+            print(f"❌ Error listing tools: {e}")
             sys.exit(1)
         return
 
     try:
-        print(f"🚀 Starting {args.name}...", file=sys.stderr)
-        print("📡 Transport: stdio (for Claude Desktop)", file=sys.stderr)
-        print(f"🔍 Search enabled: {not args.no_search}", file=sys.stderr)
+        print(f"🚀 Starting {args.name}...")
+        print("📡 Transport: stdio (for Claude Desktop)")
+        print(f"🔍 Search enabled: {not args.no_search}")
 
         if args.categories is not None:
             if len(args.categories) == 0:
-                print("📂 No categories specified, loading all tools", file=sys.stderr)
+                print("📂 No categories specified, loading all tools")
                 tool_categories = None
             else:
-                print(
-                    f"📂 Tool categories: {', '.join(args.categories)}", file=sys.stderr
-                )
+                print(f"📂 Tool categories: {', '.join(args.categories)}")
                 tool_categories = args.categories
         else:
-            print("📂 Loading all tool categories", file=sys.stderr)
+            print("📂 Loading all tool categories")
             tool_categories = None
 
         # Handle exclusions and inclusions
@@ -487,45 +464,24 @@ Examples:
                     category, path = config_spec.split(":", 1)
                     tool_config_files[category] = path
                 else:
-                    print(
-                        f"❌ Invalid tool config file format: {config_spec}",
-                        file=sys.stderr,
-                    )
-                    print(
-                        "   Expected format: 'category:/path/to/config.json'",
-                        file=sys.stderr,
-                    )
+                    print(f"❌ Invalid tool config file format: {config_spec}")
+                    print("   Expected format: 'category:/path/to/config.json'")
                     sys.exit(1)
 
         if exclude_tools:
-            print(f"🚫 Excluding tools: {', '.join(exclude_tools)}", file=sys.stderr)
+            print(f"🚫 Excluding tools: {', '.join(exclude_tools)}")
         if exclude_categories:
-            print(
-                f"🚫 Excluding categories: {', '.join(exclude_categories)}",
-                file=sys.stderr,
-            )
+            print(f"🚫 Excluding categories: {', '.join(exclude_categories)}")
         if include_tools:
-            print(
-                f"✅ Including only specific tools: {len(include_tools)} tools",
-                file=sys.stderr,
-            )
+            print(f"✅ Including only specific tools: {len(include_tools)} tools")
         if tools_file:
-            print(f"📄 Loading tools from file: {tools_file}", file=sys.stderr)
+            print(f"📄 Loading tools from file: {tools_file}")
         if tool_config_files:
-            print(
-                f"📦 Additional config files: {', '.join(tool_config_files.keys())}",
-                file=sys.stderr,
-            )
+            print(f"📦 Additional config files: {', '.join(tool_config_files.keys())}")
         if include_tool_types:
-            print(
-                f"🎯 Including tool types: {', '.join(include_tool_types)}",
-                file=sys.stderr,
-            )
+            print(f"🎯 Including tool types: {', '.join(include_tool_types)}")
         if exclude_tool_types:
-            print(
-                f"🚫 Excluding tool types: {', '.join(exclude_tool_types)}",
-                file=sys.stderr,
-            )
+            print(f"🚫 Excluding tool types: {', '.join(exclude_tool_types)}")
 
         # Load hook configuration if specified
         hook_config = None
@@ -534,9 +490,7 @@ Examples:
 
             with open(args.hook_config_file, "r") as f:
                 hook_config = json.load(f)
-            print(
-                f"🔗 Hook config loaded from: {args.hook_config_file}", file=sys.stderr
-            )
+            print(f"🔗 Hook config loaded from: {args.hook_config_file}")
 
         # Determine hook settings (default disabled for stdio)
         hooks_enabled = (
@@ -549,22 +503,21 @@ Examples:
             hook_type = "SummarizationHook"
         if hooks_enabled:
             if hook_type:
-                print(f"🔗 Hooks enabled: {hook_type}", file=sys.stderr)
+                print(f"🔗 Hooks enabled: {hook_type}")
             elif hook_config:
                 hook_count = len(hook_config.get("hooks", []))
-                print(f"🔗 Hooks enabled: {hook_count} custom hooks", file=sys.stderr)
+                print(f"🔗 Hooks enabled: {hook_count} custom hooks")
             else:
-                print("🔗 Hooks enabled: default configuration", file=sys.stderr)
+                print("🔗 Hooks enabled: default configuration")
         else:
-            print("🔗 Hooks disabled", file=sys.stderr)
+            print("🔗 Hooks disabled")
 
-        print(f"⚡ Max workers: {args.max_workers}", file=sys.stderr)
-        print(file=sys.stderr)
+        print(f"⚡ Max workers: {args.max_workers}")
+        print()
 
-        # Create SMCP server with Space and tool configuration support
+        # Create SMCP server with hook support
         server = SMCP(
             name=args.name,
-            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -575,6 +528,7 @@ Examples:
             exclude_tool_types=exclude_tool_types,
             search_enabled=not args.no_search,
             max_workers=args.max_workers,
+            stateless_http=True,  # Enable stateless mode for MCPAutoLoaderTool compatibility
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=hook_type,
@@ -584,10 +538,10 @@ Examples:
         server.run_simple(transport="stdio")
 
     except KeyboardInterrupt:
-        print("\n🛑 Server stopped by user", file=sys.stderr)
+        print("\n🛑 Server stopped by user")
         sys.exit(0)
     except Exception as e:
-        print(f"❌ Error starting server: {e}", file=sys.stderr)
+        print(f"❌ Error starting server: {e}")
         if args.verbose:
             import traceback
 
@@ -642,31 +596,6 @@ Examples:
 
   # Start server for Claude Desktop (stdio transport)
   tooluniverse-smcp --transport stdio
-
-  # Load Space configuration
-  tooluniverse-smcp --load "community/proteomics-toolkit" --port 8000
-  tooluniverse-smcp --load "./my-config.yaml" --transport stdio
-        """,
-    )
-
-    # Space configuration options
-    space_group = parser.add_argument_group("Space Configuration")
-    space_group.add_argument(
-        "--load",
-        "-l",
-        type=str,
-        metavar="CONFIG",
-        help="""Load space configuration (preset/workspace).
-
-Supports multiple formats:
-  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
-  • Local files:      ./config.yaml, /absolute/path.yaml
-  • HTTP URLs:        https://example.com/config.yaml
-
-Examples:
-  --load "community/proteomics-toolkit"
-  --load "./my-config.yaml"
-  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -756,8 +685,8 @@ Examples:
     )
     parser.add_argument(
         "--name",
-        default="ToolUniverse SMCP Server",
-        help="Server name (default: ToolUniverse SMCP Server)",
+        default="SMCP ToolUniverse Server",
+        help="Server name (default: SMCP ToolUniverse Server)",
     )
     parser.add_argument(
         "--no-search",
@@ -800,27 +729,96 @@ Examples:
             from .execute_function import ToolUniverse
 
             tu = ToolUniverse()
-            # Use ToolUniverse API to list categories consistently
-            stats = tu.list_built_in_tools(mode="config", scan_all=False)
+            tool_types = tu.get_tool_types()
 
             print("Available tool categories:")
             print("=" * 50)
 
-            categories = stats.get("categories", {})
-            # Sort by count desc, then name asc
-            sorted_items = sorted(
-                categories.items(), key=lambda kv: (-kv[1].get("count", 0), kv[0])
-            )
-            for key, info in sorted_items:
-                display = key.replace("_", " ").title()
-                count = info.get("count", 0)
-                print(f"  {display}: {count}")
+            # Group categories for better readability
+            scientific_db = []
+            literature = []
+            software = []
+            special = []
+            clinical = []
+            other = []
 
-            print(f"\nTotal categories: {stats.get('total_categories', 0)}")
-            print(f"Total unique tools: {stats.get('total_tools', 0)}")
-            print(
-                "\nTip: Use --exclude-categories or --include-tools to customize loading"
-            )
+            for category in sorted(tool_types):
+                if category in [
+                    "uniprot",
+                    "ChEMBL",
+                    "opentarget",
+                    "pubchem",
+                    "hpa",
+                    "rcsb_pdb",
+                    "reactome",
+                    "go",
+                ]:
+                    scientific_db.append(category)
+                elif category in [
+                    "EuropePMC",
+                    "semantic_scholar",
+                    "pubtator",
+                    "OpenAlex",
+                ]:
+                    literature.append(category)
+                elif category.startswith("software_"):
+                    software.append(category)
+                elif category in [
+                    "special_tools",
+                    "tool_finder",
+                    "tool_composition",
+                    "agents",
+                ]:
+                    special.append(category)
+                elif category in [
+                    "clinical_trials",
+                    "fda_drug_label",
+                    "fda_drug_adverse_event",
+                    "dailymed",
+                    "medlineplus",
+                ]:
+                    clinical.append(category)
+                else:
+                    other.append(category)
+
+            if scientific_db:
+                print("\n🔬 Scientific Databases:")
+                for cat in scientific_db:
+                    print(f"  {cat}")
+
+            if literature:
+                print("\n📚 Literature & Knowledge:")
+                for cat in literature:
+                    print(f"  {cat}")
+
+            if clinical:
+                print("\n🏥 Clinical & Drug Information:")
+                for cat in clinical:
+                    print(f"  {cat}")
+
+            if software:
+                print("\n💻 Software Tools:")
+                for cat in software[:5]:  # Show first 5
+                    print(f"  {cat}")
+                if len(software) > 5:
+                    print(f"  ... and {len(software) - 5} more software categories")
+
+            if special:
+                print("\n🛠 Special & Meta Tools:")
+                for cat in special:
+                    print(f"  {cat}")
+
+            if other:
+                print("\n📂 Other Categories:")
+                for cat in other:
+                    print(f"  {cat}")
+
+            print(f"\nTotal: {len(tool_types)} categories available")
+            print("\nCommon combinations:")
+            print("  Scientific research: uniprot ChEMBL opentarget pubchem hpa")
+            print("  Drug discovery: ChEMBL fda_drug_label clinical_trials pubchem")
+            print("  Literature analysis: EuropePMC semantic_scholar pubtator")
+            print("  Minimal setup: special_tools tool_finder")
 
         except Exception as e:
             print(f"❌ Error listing categories: {e}")
@@ -833,37 +831,30 @@ Examples:
             from .execute_function import ToolUniverse
 
             tu = ToolUniverse()
-            # Reuse ToolUniverse selection logic directly (applies API key skipping internally)
-            tool_config_files = {}
-            if args.tool_config_files:
-                for config_spec in args.tool_config_files:
-                    if ":" in config_spec:
-                        category, path = config_spec.split(":", 1)
-                        tool_config_files[category] = path
+            tu.load_tools()  # Load all tools to list them
 
-            tu.load_tools(
-                tool_type=(
-                    args.categories
-                    if args.categories and len(args.categories) > 0
-                    else None
-                ),
-                exclude_tools=args.exclude_tools,
-                exclude_categories=args.exclude_categories,
-                include_tools=args.include_tools,
-                tool_config_files=(tool_config_files or None),
-                tools_file=args.tools_file,
-                include_tool_types=args.include_tool_types,
-                exclude_tool_types=args.exclude_tool_types,
-            )
-
-            # Names of tools that are actually available under current configuration
-            tool_names = tu.get_available_tools(name_only=True)
-
-            print("Available tools (for this server configuration):")
+            print("Available tools:")
             print("=" * 50)
-            for name in sorted(tool_names)[:200]:  # cap output for readability
-                print(f"  {name}")
-            print(f"\nTotal: {len(tool_names)} tools available")
+
+            # Group tools by category
+            tools_by_category = {}
+            for tool in tu.all_tools:
+                tool_type = getattr(tool, "tool_type", "unknown")
+                if tool_type not in tools_by_category:
+                    tools_by_category[tool_type] = []
+                tools_by_category[tool_type].append(tool.name)
+
+            total_tools = 0
+            for category in sorted(tools_by_category.keys()):
+                tools = sorted(tools_by_category[category])
+                print(f"\n📁 {category} ({len(tools)} tools):")
+                for tool in tools[:10]:  # Show first 10 tools per category
+                    print(f"  {tool}")
+                if len(tools) > 10:
+                    print(f"  ... and {len(tools) - 10} more tools")
+                total_tools += len(tools)
+
+            print(f"\nTotal: {total_tools} tools available")
             print("\nNote: Use --exclude-tools to exclude specific tools by name")
             print("      Use --exclude-categories to exclude entire categories")
 
@@ -952,10 +943,9 @@ Examples:
         print(f"⚡ Max workers: {args.max_workers}")
         print()
 
-        # Create SMCP server with Space and hook support
+        # Create SMCP server with hook support
         server = SMCP(
             name=args.name,
-            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -966,6 +956,7 @@ Examples:
             exclude_tool_types=exclude_tool_types,
             search_enabled=not args.no_search,
             max_workers=args.max_workers,
+            stateless_http=True,  # Enable stateless mode for MCPAutoLoaderTool compatibility
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=args.hook_type,

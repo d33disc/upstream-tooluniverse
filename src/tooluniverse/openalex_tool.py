@@ -37,14 +37,14 @@ class OpenAlexTool(BaseTool):
         """
         Search for literature using OpenAlex API.
 
-        Parameters
+        Parameters:
             search_keywords (str): Keywords to search for in title, abstract, and content.
             max_results (int): Maximum number of results to return (default: 10).
             year_from (int): Start year for publication date filter (optional).
             year_to (int): End year for publication date filter (optional).
             open_access (bool): Filter for open access papers only (optional).
 
-        Returns
+        Returns:
             list: List of dictionaries containing paper information.
         """
         # Encode search keywords for URL
@@ -98,10 +98,10 @@ class OpenAlexTool(BaseTool):
         """
         Extract relevant information from a work object returned by OpenAlex API.
 
-        Parameters
+        Parameters:
             work (dict): Work object from OpenAlex API response.
 
-        Returns
+        Returns:
             dict: Formatted paper information.
         """
         # Extract title
@@ -151,26 +151,6 @@ class OpenAlexTool(BaseTool):
         open_access = work.get("open_access", {}).get("is_oa", False)
         pdf_url = work.get("open_access", {}).get("oa_url")
 
-        # Extract keywords/concepts
-        keywords = []
-        concepts = work.get("concepts", [])
-        if isinstance(concepts, list):
-            for concept in concepts:
-                if isinstance(concept, dict):
-                    concept_name = concept.get("display_name", "")
-                    if concept_name:
-                        keywords.append(concept_name)
-
-        # Extract article type
-        article_type = work.get("type", "Unknown")
-
-        # Extract publisher
-        publisher = (
-            work.get("primary_location", {})
-            .get("source", {})
-            .get("publisher", "Unknown")
-        )
-
         return {
             "title": title,
             "abstract": abstract,
@@ -182,32 +162,18 @@ class OpenAlexTool(BaseTool):
             "citation_count": citation_count,
             "open_access": open_access,
             "pdf_url": pdf_url,
-            "keywords": keywords if keywords else "Keywords not available",
-            "article_type": article_type,
-            "publisher": publisher,
             "openalex_id": work.get("id", ""),
             "url": work.get("doi") if work.get("doi") else work.get("id", ""),
-            "data_quality": {
-                "has_abstract": bool(abstract and abstract != "Abstract not available"),
-                "has_authors": bool(authors),
-                "has_venue": bool(venue and venue != "Unknown venue"),
-                "has_year": bool(
-                    publication_year and publication_year != "Year not available"
-                ),
-                "has_doi": bool(doi and doi != "No DOI"),
-                "has_citation_count": bool(citation_count and citation_count > 0),
-                "has_keywords": bool(keywords),
-            },
         }
 
     def get_paper_by_doi(self, doi):
         """
         Retrieve a specific paper by its DOI.
 
-        Parameters
+        Parameters:
             doi (str): DOI of the paper to retrieve.
 
-        Returns
+        Returns:
             dict: Paper information or None if not found.
         """
         try:
@@ -229,11 +195,11 @@ class OpenAlexTool(BaseTool):
         """
         Retrieve papers by a specific author.
 
-        Parameters
+        Parameters:
             author_name (str): Name of the author to search for.
             max_results (int): Maximum number of results to return.
 
-        Returns
+        Returns:
             list: List of papers by the author.
         """
         try:

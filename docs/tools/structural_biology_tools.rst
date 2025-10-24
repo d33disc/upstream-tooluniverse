@@ -25,7 +25,7 @@ Get comprehensive information about ASE (Atomic Simulation Environment) – a to
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -35,7 +35,6 @@ Get comprehensive information about ASE (Atomic Simulation Environment) – a to
       query = {
           "name": "get_ase_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -56,7 +55,7 @@ Get comprehensive information about BioPandas – pandas-based molecular structu
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -66,7 +65,6 @@ Get comprehensive information about BioPandas – pandas-based molecular structu
       query = {
           "name": "get_biopandas_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -296,7 +294,7 @@ Get comprehensive information about OpenMM – molecular dynamics simulation too
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -306,7 +304,6 @@ Get comprehensive information about OpenMM – molecular dynamics simulation too
       query = {
           "name": "get_openmm_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -356,7 +353,7 @@ Get comprehensive information about PySCF – a versatile quantum-chemistry fram
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -366,7 +363,6 @@ Get comprehensive information about PySCF – a versatile quantum-chemistry fram
       query = {
           "name": "get_pyscf_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)

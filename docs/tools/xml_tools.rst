@@ -28,10 +28,10 @@ Filter DrugBank records based on conditions applied to drug names. For example, 
    * ``condition`` (string) (required)
      The condition to apply for filtering.
 
-   * ``value`` (string) (required)
+   * ``value`` (string) (optional)
      The value to use with the condition (e.g., 'Aspirin' for 'starts_with'). Required for 'contains', 'starts_with', 'ends_with', and 'exact' conditions.
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return.
 
    **Example Usage:**
@@ -41,9 +41,7 @@ Filter DrugBank records based on conditions applied to drug names. For example, 
       query = {
           "name": "drugbank_filter_drugs_by_name",
           "arguments": {
-              "condition": "example_value",
-              "value": "example_value",
-              "limit": 10
+              "condition": "example_value"
           }
       }
       result = tu.run(query)
@@ -67,13 +65,13 @@ Get basic drug information including name, description, CAS number, and approval
    * ``query`` (string) (required)
      Drug name or DrugBank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match with the queried name or ID
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -83,10 +81,7 @@ Get basic drug information including name, description, CAS number, and approval
       query = {
           "name": "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -110,13 +105,13 @@ Get drug chemical properties including molecular formula, weight, and structure 
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -126,10 +121,7 @@ Get drug chemical properties including molecular formula, weight, and structure 
       query = {
           "name": "drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -153,13 +145,13 @@ Get drug interactions and contraindications by drug name or DrugBank ID.
    * ``query`` (string) (required)
      Drug name to search for interactions
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -169,10 +161,7 @@ Get drug interactions and contraindications by drug name or DrugBank ID.
       query = {
           "name": "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -196,13 +185,13 @@ Get drug name, Drugbank ID, and description by its indication.
    * ``query`` (string) (required)
      Drug indication to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -212,10 +201,7 @@ Get drug name, Drugbank ID, and description by its indication.
       query = {
           "name": "drugbank_get_drug_name_and_description_by_indication",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -239,13 +225,13 @@ Get drug names and descriptions by pathway name.
    * ``query`` (string) (required)
      Pathway name to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -255,10 +241,7 @@ Get drug names and descriptions by pathway name.
       query = {
           "name": "drugbank_get_drug_name_and_description_by_pathway_name",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -282,13 +265,13 @@ Get associated drug names and descriptions for a particular target, enzyme, carr
    * ``query`` (string) (required)
      Target, enzyme, carrier, or transporter name to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -298,10 +281,7 @@ Get associated drug names and descriptions for a particular target, enzyme, carr
       query = {
           "name": "drugbank_get_drug_name_and_description_by_target_name",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -325,13 +305,13 @@ Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharm
    * ``query`` (string) (required)
      Query string to search for in mechanism of action descriptions
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -341,10 +321,7 @@ Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharm
       query = {
           "name": "drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -368,13 +345,13 @@ Get drug pathways and metabolic reactions by drug name or DrugBank ID.
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -384,10 +361,7 @@ Get drug pathways and metabolic reactions by drug name or DrugBank ID.
       query = {
           "name": "drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -411,13 +385,13 @@ Get commercial drug products, dosage forms, and pricing informatiomon by drug na
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -427,10 +401,7 @@ Get commercial drug products, dosage forms, and pricing informatiomon by drug na
       query = {
           "name": "drugbank_get_drug_products_by_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -454,13 +425,13 @@ Get drug literature references, patents, and external links by drug name or Drug
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for references
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -470,10 +441,7 @@ Get drug literature references, patents, and external links by drug name or Drug
       query = {
           "name": "drugbank_get_drug_references_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -497,13 +465,13 @@ Get drug indications and therapeutic uses by drug name or DrugBank ID.
    * ``query`` (string) (required)
      Drug name or ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -513,10 +481,7 @@ Get drug indications and therapeutic uses by drug name or DrugBank ID.
       query = {
           "name": "drugbank_get_indications_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -540,13 +505,13 @@ Get drug pharmacodynamics, mechanism of action, and pharmacokinetics by drug nam
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -556,10 +521,7 @@ Get drug pharmacodynamics, mechanism of action, and pharmacokinetics by drug nam
       query = {
           "name": "drugbank_get_pharmacology_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -583,13 +545,13 @@ Get drug toxicity, contraindications, and safety information by drug name or Dru
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -599,10 +561,7 @@ Get drug toxicity, contraindications, and safety information by drug name or Dru
       query = {
           "name": "drugbank_get_safety_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -626,13 +585,13 @@ Get drug targets, enzymes, carriers, and transporters by drug name or DrugBank I
    * ``query`` (string) (required)
      Drug name or Drugbank ID to search for
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -642,10 +601,7 @@ Get drug targets, enzymes, carriers, and transporters by drug name or DrugBank I
       query = {
           "name": "drugbank_get_targets_by_drug_name_or_drugbank_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -669,13 +625,13 @@ Find MeSH (Medical Subject Heading) subjects with matching pharmacological actio
    * ``query`` (string) (required)
      Pharmacological action to search for in MeSH subjects
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search for the pharmacological action query
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match for the pharmacological action query
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -685,10 +641,7 @@ Find MeSH (Medical Subject Heading) subjects with matching pharmacological actio
       query = {
           "name": "mesh_get_subjects_by_pharmacological_action",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -712,13 +665,13 @@ Find MeSH (Medical Subject Heading) subjects with a matching subject ID (also ca
    * ``query`` (string) (required)
      Query ID to search for among the MeSH subject IDs
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search for the query
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match for the query
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -728,10 +681,7 @@ Find MeSH (Medical Subject Heading) subjects with a matching subject ID (also ca
       query = {
           "name": "mesh_get_subjects_by_subject_id",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -755,13 +705,13 @@ Find MeSH (Medical Subject Heading) subjects with matching names.
    * ``query`` (string) (required)
      Query string to search for in the name of each MeSH subject and the names of the subject's key concepts and concept synonyms.
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search for the query
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match for the query
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -771,10 +721,7 @@ Find MeSH (Medical Subject Heading) subjects with matching names.
       query = {
           "name": "mesh_get_subjects_by_subject_name",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -798,13 +745,13 @@ Find MeSH (Medical Subject Heading) subjects with matching scopes (definitions).
    * ``query`` (string) (required)
      Query string to search for in the scope notes of MeSH subjects
 
-   * ``case_sensitive`` (boolean) (required)
+   * ``case_sensitive`` (boolean) (optional)
      Select True to perform a case-sensitive search for the query
 
-   * ``exact_match`` (boolean) (required)
+   * ``exact_match`` (boolean) (optional)
      Select True to require an exact match for the query
 
-   * ``limit`` (integer) (required)
+   * ``limit`` (integer) (optional)
      Maximum number of results to return
 
    **Example Usage:**
@@ -814,10 +761,7 @@ Find MeSH (Medical Subject Heading) subjects with matching scopes (definitions).
       query = {
           "name": "mesh_get_subjects_by_subject_scope_or_definition",
           "arguments": {
-              "query": "example_value",
-              "case_sensitive": true,
-              "exact_match": true,
-              "limit": 10
+              "query": "example_value"
           }
       }
       result = tu.run(query)

@@ -8,8 +8,6 @@ Choose the section that matches your current needs:
 
 💡 **For Python API documentation**, see the dedicated :doc:`../api/index` section.
 
-💡 **For MCP integration and server setup**, see the comprehensive :doc:`mcp_support` guide.
-
 Core Concepts
 -------------
 
@@ -17,12 +15,9 @@ Core Concepts
 * **📋 Listing Tools** → :doc:`listing_tools` - Discover and filter tools by capability, domain, and IO
 * **🔧 Tool Caller** → :doc:`tool_caller` - Primary execution engine with dynamic loading, validation, and MCP server integration
 * **🔗 Tool Composition** → :doc:`tool_composition` - Chain ToolUniverse's 600+ tools into powerful scientific workflows using Tool Composer
-* **🐍 Coding API** → :doc:`coding_api` - Import and call tools like normal Python functions with type safety
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol integration and server setup
-* **🔊 Streaming Tools** → :doc:`streaming_tools` - Real-time streaming output and custom tool integration
 * **📝 Logging** → :doc:`logging` - Comprehensive logging configuration and debugging
-* **🗃️ Result Caching** → :doc:`cache_system` - Configure in-memory and persistent caches for tool results
 * **🔗 Interaction Protocol** → :doc:`interaction_protocol` - Understanding tool interaction patterns
 
 Tool Discovery & Usage
@@ -55,11 +50,3 @@ Advanced Features
 
 .. note::
    **New to ToolUniverse?** Start with the :doc:`../quickstart` Tutorial for a 5-minute introduction, then come back here for in-depth learning.
-
-Tool Collections
-----------------
-
-Specialized tool collections for specific research domains:
-
-* **🏥 Clinical Guidelines** → :doc:`clinical_guidelines_tools` - Search and extract clinical practice guidelines from NICE, WHO, PubMed, and 5 other authoritative sources
-* **📖 Literature Search** → :doc:`../tutorials/literature_search_tools_tutorial` - Comprehensive literature search across PubMed, arXiv, bioRxiv, and academic databases

@@ -25,7 +25,7 @@ Retrieve all associated biological assembly details for a given PDB structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -35,7 +35,6 @@ Retrieve all associated biological assembly details for a given PDB structure.
       query = {
           "name": "get_assembly_info_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -56,7 +55,7 @@ Get key assembly composition and symmetry summary for an assembly associated wit
 
    **Parameters:**
 
-   * ``assembly_id`` (string) (required)
+   * ``assembly_id`` (string) (optional)
      Assembly ID in format 'PDBID-assemblyNumber' (e.g., '1A8M-1')
 
    **Example Usage:**
@@ -66,7 +65,6 @@ Get key assembly composition and symmetry summary for an assembly associated wit
       query = {
           "name": "get_assembly_summary",
           "arguments": {
-              "assembly_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -87,7 +85,7 @@ Retrieve binding affinity constants (Kd, Ki, IC50) associated with ligands in a 
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      RCSB PDB ID (e.g., 1A8M)
 
    **Example Usage:**
@@ -97,7 +95,6 @@ Retrieve binding affinity constants (Kd, Ki, IC50) associated with ligands in a 
       query = {
           "name": "get_binding_affinity_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -118,7 +115,7 @@ Fetch audit history for a chemical component: action type, date, details, ordina
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      Chemical component ID to retrieve audit info for
 
    **Example Usage:**
@@ -128,7 +125,6 @@ Fetch audit history for a chemical component: action type, date, details, ordina
       query = {
           "name": "get_chem_comp_audit_info",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -149,7 +145,7 @@ Retrieve the formal charge and ambiguity flag of a chemical component.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      Chemical component ID to query charge and ambiguity
 
    **Example Usage:**
@@ -159,7 +155,6 @@ Retrieve the formal charge and ambiguity flag of a chemical component.
       query = {
           "name": "get_chem_comp_charge_and_ambiguity",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -180,7 +175,7 @@ Retrieve citation information (authors, journal, year) for a given PDB structure
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -190,7 +185,6 @@ Retrieve citation information (authors, journal, year) for a given PDB structure
       query = {
           "name": "get_citation_info_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -211,7 +205,7 @@ Retrieve essential refinement statistics for a given PDB structure including R-f
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB entry ID (e.g., '1ABC')
 
    **Example Usage:**
@@ -221,7 +215,6 @@ Retrieve essential refinement statistics for a given PDB structure including R-f
       query = {
           "name": "get_core_refinement_statistics",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -242,7 +235,7 @@ Get information about the crystallization method and conditions for a structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB ID of the structure
 
    **Example Usage:**
@@ -252,7 +245,6 @@ Get information about the crystallization method and conditions for a structure.
       query = {
           "name": "get_crystal_growth_conditions_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -273,7 +265,7 @@ Fetch the pH used during crystallization of the sample.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      RCSB PDB ID of the structure
 
    **Example Usage:**
@@ -283,7 +275,6 @@ Fetch the pH used during crystallization of the sample.
       query = {
           "name": "get_crystallization_ph_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -304,7 +295,7 @@ Retrieve crystallographic properties such as unit cell dimensions and space grou
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB ID of the structure
 
    **Example Usage:**
@@ -314,7 +305,6 @@ Retrieve crystallographic properties such as unit cell dimensions and space grou
       query = {
           "name": "get_crystallographic_properties_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -335,7 +325,7 @@ Retrieve the Enzyme Commission (EC) number(s) for an entity.
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Polymer entity ID (e.g., '1A8M_1')
 
    **Example Usage:**
@@ -345,7 +335,6 @@ Retrieve the Enzyme Commission (EC) number(s) for an entity.
       query = {
           "name": "get_ec_number_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -366,7 +355,7 @@ Retrieve EM 3D fitting model details and associated 3D reconstruction info for a
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -376,7 +365,6 @@ Retrieve EM 3D fitting model details and associated 3D reconstruction info for a
       query = {
           "name": "get_em_3d_fitting_and_reconstruction_details",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -397,7 +385,7 @@ Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB entry.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character PDB ID
 
    **Example Usage:**
@@ -407,7 +395,6 @@ Retrieve Electron Microscopy Data Bank (EMDB) identifiers linked to a PDB entry.
       query = {
           "name": "get_emdb_ids_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -428,7 +415,7 @@ Retrieve gene name(s) associated with a polymer entity.
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Entity ID like '1A8M_1'
 
    **Example Usage:**
@@ -438,7 +425,6 @@ Retrieve gene name(s) associated with a polymer entity.
       query = {
           "name": "get_gene_name_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -459,7 +445,7 @@ Get the host organism used for protein expression in a PDB entry.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character PDB ID
 
    **Example Usage:**
@@ -469,7 +455,6 @@ Get the host organism used for protein expression in a PDB entry.
       query = {
           "name": "get_host_organism_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -490,7 +475,7 @@ Get the number of bonds for each ligand in a given PDB structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB ID of the entry
 
    **Example Usage:**
@@ -500,7 +485,6 @@ Get the number of bonds for each ligand in a given PDB structure.
       query = {
           "name": "get_ligand_bond_count_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -521,7 +505,7 @@ Retrieve the SMILES chemical structure string for a given chemical component (li
 
    **Parameters:**
 
-   * ``chem_comp_id`` (string) (required)
+   * ``chem_comp_id`` (string) (optional)
      Chemical component ID (e.g., 'ATP')
 
    **Example Usage:**
@@ -531,7 +515,6 @@ Retrieve the SMILES chemical structure string for a given chemical component (li
       query = {
           "name": "get_ligand_smiles_by_chem_comp_id",
           "arguments": {
-              "chem_comp_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -552,7 +535,7 @@ Retrieve mutation annotations for a given PDB structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -562,7 +545,6 @@ Retrieve mutation annotations for a given PDB structure.
       query = {
           "name": "get_mutation_annotations_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -583,7 +565,7 @@ Retrieve structural descriptors for branched entities (e.g., oligosaccharides) i
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Branched entity ID like '5FMB_2'
 
    **Example Usage:**
@@ -593,7 +575,6 @@ Retrieve structural descriptors for branched entities (e.g., oligosaccharides) i
       query = {
           "name": "get_oligosaccharide_descriptors_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -614,7 +595,7 @@ Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt 
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Polymer entity ID like '1A8M_1'
 
    **Example Usage:**
@@ -624,7 +605,6 @@ Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt 
       query = {
           "name": "get_polymer_entity_annotations",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -645,7 +625,7 @@ Get the number of distinct polymer entities (chains) in a structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character PDB ID
 
    **Example Usage:**
@@ -655,7 +635,6 @@ Get the number of distinct polymer entities (chains) in a structure.
       query = {
           "name": "get_polymer_entity_count_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -676,7 +655,7 @@ List polymer entity IDs for a given PDB ID. Useful for building further queries 
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID of the protein
 
    **Example Usage:**
@@ -686,7 +665,6 @@ List polymer entity IDs for a given PDB ID. Useful for building further queries 
       query = {
           "name": "get_polymer_entity_ids_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -707,7 +685,7 @@ Get the polymer entity type (e.g., Protein, DNA) using the polymer entity ID.
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Polymer entity ID like '1A8M_1'
 
    **Example Usage:**
@@ -717,7 +695,6 @@ Get the polymer entity type (e.g., Protein, DNA) using the polymer entity ID.
       query = {
           "name": "get_polymer_entity_type_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -738,7 +715,7 @@ Retrieve the molecular weight of a polymer entity.
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Polymer entity ID like '1A8M_1'
 
    **Example Usage:**
@@ -748,7 +725,6 @@ Retrieve the molecular weight of a polymer entity.
       query = {
           "name": "get_polymer_molecular_weight_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -769,7 +745,7 @@ Get the classification of the protein structure (e.g., transferase, oxidoreducta
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB ID of the entry
 
    **Example Usage:**
@@ -779,7 +755,6 @@ Get the classification of the protein structure (e.g., transferase, oxidoreducta
       query = {
           "name": "get_protein_classification_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -800,7 +775,7 @@ Retrieve basic protein structure metadata, including structure title, experiment
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID of the protein
 
    **Example Usage:**
@@ -810,7 +785,6 @@ Retrieve basic protein structure metadata, including structure title, experiment
       query = {
           "name": "get_protein_metadata_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -831,7 +805,7 @@ Retrieve the reported resolution from refinement data for X-ray structures.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB entry ID
 
    **Example Usage:**
@@ -841,7 +815,6 @@ Retrieve the reported resolution from refinement data for X-ray structures.
       query = {
           "name": "get_refinement_resolution_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -862,7 +835,7 @@ Get the release and deposition dates for a PDB entry.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -872,7 +845,6 @@ Get the release and deposition dates for a PDB entry.
       query = {
           "name": "get_release_deposit_dates_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -893,7 +865,7 @@ Retrieve amino acid or nucleotide sequence of polymer entities for a given PDB s
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -903,7 +875,6 @@ Retrieve amino acid or nucleotide sequence of polymer entities for a given PDB s
       query = {
           "name": "get_sequence_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -924,7 +895,7 @@ Retrieve the sequence lengths of polymer entities for a given PDB structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -934,7 +905,6 @@ Retrieve the sequence lengths of polymer entities for a given PDB structure.
       query = {
           "name": "get_sequence_lengths_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -955,7 +925,7 @@ Retrieve sequence positional features (e.g., binding sites, motifs) for a polyme
 
    **Parameters:**
 
-   * ``instance_id`` (string) (required)
+   * ``instance_id`` (string) (optional)
      Polymer entity instance ID like '1NDO.A'
 
    **Example Usage:**
@@ -965,7 +935,6 @@ Retrieve sequence positional features (e.g., binding sites, motifs) for a polyme
       query = {
           "name": "get_sequence_positional_features_by_instance_id",
           "arguments": {
-              "instance_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -986,7 +955,7 @@ Retrieve the scientific name of the source organism for a given PDB structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID of the structure
 
    **Example Usage:**
@@ -996,7 +965,6 @@ Retrieve the scientific name of the source organism for a given PDB structure.
       query = {
           "name": "get_source_organism_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1017,7 +985,7 @@ Get the crystallographic space group of the structure.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -1027,7 +995,6 @@ Get the crystallographic space group of the structure.
       query = {
           "name": "get_space_group_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1048,7 +1015,7 @@ Retrieve names of software used during structure determination.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      RCSB PDB entry ID
 
    **Example Usage:**
@@ -1058,7 +1025,6 @@ Retrieve names of software used during structure determination.
       query = {
           "name": "get_structure_determination_software_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1079,7 +1045,7 @@ Retrieve the structure title for a given PDB entry.
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character PDB ID
 
    **Example Usage:**
@@ -1089,7 +1055,6 @@ Retrieve the structure title for a given PDB entry.
       query = {
           "name": "get_structure_title_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1110,7 +1075,7 @@ Retrieve structure validation metrics such as R-free, R-work, and clashscore for
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      PDB ID of the structure
 
    **Example Usage:**
@@ -1120,7 +1085,6 @@ Retrieve structure validation metrics such as R-free, R-work, and clashscore for
       query = {
           "name": "get_structure_validation_metrics_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1141,7 +1105,7 @@ Retrieve essential cofactor information for a given target including cofactor ID
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      Target ID or entity identifier (e.g., UniProt ID or internal target id)
 
    **Example Usage:**
@@ -1151,7 +1115,6 @@ Retrieve essential cofactor information for a given target including cofactor ID
       query = {
           "name": "get_target_cofactor_info",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1172,7 +1135,7 @@ Get the scientific name and taxonomy of the organism(s) associated with a PDB en
 
    **Parameters:**
 
-   * ``pdb_id`` (string) (required)
+   * ``pdb_id`` (string) (optional)
      4-character RCSB PDB ID
 
    **Example Usage:**
@@ -1182,7 +1145,6 @@ Get the scientific name and taxonomy of the organism(s) associated with a PDB en
       query = {
           "name": "get_taxonomy_by_pdb_id",
           "arguments": {
-              "pdb_id": "example_value"
           }
       }
       result = tu.run(query)
@@ -1203,7 +1165,7 @@ Fetch UniProt accession numbers associated with a specific polymer entity.
 
    **Parameters:**
 
-   * ``entity_id`` (string) (required)
+   * ``entity_id`` (string) (optional)
      Polymer entity ID (e.g., '1A8M_1')
 
    **Example Usage:**
@@ -1213,7 +1175,6 @@ Fetch UniProt accession numbers associated with a specific polymer entity.
       query = {
           "name": "get_uniprot_accession_by_entity_id",
           "arguments": {
-              "entity_id": "example_value"
           }
       }
       result = tu.run(query)

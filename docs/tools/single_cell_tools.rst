@@ -25,7 +25,7 @@ Get comprehensive information about AnnData – annotated data for computational
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -35,7 +35,6 @@ Get comprehensive information about AnnData – annotated data for computational
       query = {
           "name": "get_anndata_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -114,7 +113,7 @@ Get comprehensive information about MuData – multimodal annotated data for com
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -124,7 +123,6 @@ Get comprehensive information about MuData – multimodal annotated data for com
       query = {
           "name": "get_mudata_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -234,7 +232,7 @@ Get comprehensive information about Scanpy – scalable single-cell analysis in 
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -244,7 +242,6 @@ Get comprehensive information about Scanpy – scalable single-cell analysis in 
       query = {
           "name": "get_scanpy_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -265,7 +262,7 @@ Get comprehensive information about Scrublet – single-cell doublet detection
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -275,7 +272,6 @@ Get comprehensive information about Scrublet – single-cell doublet detection
       query = {
           "name": "get_scrublet_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -296,7 +292,7 @@ Get comprehensive information about scVelo – RNA velocity analysis in single c
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -306,7 +302,6 @@ Get comprehensive information about scVelo – RNA velocity analysis in single c
       query = {
           "name": "get_scvelo_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)

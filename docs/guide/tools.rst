@@ -111,7 +111,7 @@ UniProt - Protein Information
 Access comprehensive protein and gene information.
 
 **Key Functions:**
-* ``UniProt_get_function_by_accession`` - Get functional annotations by UniProt accession
+* ``UniProt_get_protein_info`` - Get detailed protein information by gene symbol
 * ``UniProt_search_proteins`` - Search proteins by keywords
 * ``UniProt_get_protein_sequence`` - Retrieve protein sequences
 
@@ -120,8 +120,8 @@ Access comprehensive protein and gene information.
 .. code-block:: python
 
    query = {
-       "name": "UniProt_get_function_by_accession",
-       "arguments": {"accession": "P38398"}  # BRCA1 accession
+       "name": "UniProt_get_protein_info",
+       "arguments": {"gene_symbol": "BRCA1"}
    }
    result = tu.run(query)
 
@@ -188,7 +188,7 @@ Comprehensive disease-target association data.
    # Get targets for Alzheimer's disease
    query = {
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
-       "arguments": {"efoId": "EFO_0000537"}  # hypertension
+       "arguments": {"efoId": "EFO_0000249"}
    }
 
 EFO - Experimental Factor Ontology
@@ -656,10 +656,10 @@ Simple, focused queries for specific information:
 
 .. code-block:: python
 
-   # Get protein function by accession (EGFR → P00533)
+   # Get protein info
    protein_query = {
-       "name": "UniProt_get_function_by_accession",
-       "arguments": {"accession": "P00533"}
+       "name": "UniProt_get_protein_info",
+       "arguments": {"gene_symbol": "EGFR"}
    }
 
    # Search adverse events
@@ -707,12 +707,12 @@ Process multiple related queries efficiently:
    genes = ["BRCA1", "BRCA2", "TP53", "ATM"]
 
    results = {}
-   for accession in ["P38398", "P51587", "P04637", "Q13315"]:  # BRCA1, BRCA2, TP53, ATM
+   for gene in genes:
        query = {
-           "name": "UniProt_get_function_by_accession",
-           "arguments": {"accession": accession}
+           "name": "UniProt_get_protein_info",
+           "arguments": {"gene_symbol": gene}
        }
-       results[accession] = tu.run(query)
+       results[gene] = tu.run(query)
 
 Integration Patterns
 ~~~~~~~~~~~~~~~~~~~~

@@ -9,7 +9,6 @@ import traceback
 import os
 import importlib.util
 import re
-from datetime import datetime
 from typing import Set
 from .base_tool import BaseTool
 from .tool_registry import register_tool
@@ -65,7 +64,7 @@ class ComposeTool(BaseTool):
         """
         Automatically discover tool dependencies from composition code.
 
-        Returns
+        Returns:
             set: Set of tool names that this composition calls
         """
         dependencies = set()
@@ -89,7 +88,7 @@ class ComposeTool(BaseTool):
         """
         Create a mapping from tool names to their categories.
 
-        Returns
+        Returns:
             dict: Mapping of tool names to category names
         """
         tool_to_category = {}
@@ -119,7 +118,7 @@ class ComposeTool(BaseTool):
         Args:
             missing_tools (set): Set of missing tool names
 
-        Returns
+        Returns:
             tuple: (successfully_loaded, failed_to_load)
         """
         if not self.tooluniverse or not self.auto_load_dependencies:
@@ -173,7 +172,7 @@ class ComposeTool(BaseTool):
         """
         Load composition code from external Python file.
 
-        Returns
+        Returns:
             str: The composition code as a string
         """
         if not self.composition_file:
@@ -205,15 +204,14 @@ class ComposeTool(BaseTool):
             print(f"Error loading composition file {self.composition_file}: {e}")
             return f"# Error loading file: {e}\nresult = {{'error': 'Failed to load composition code'}}"
 
-    def run(self, arguments, stream_callback=None):
+    def run(self, arguments):
         """
         Execute the composed tool with custom code logic.
 
         Args:
             arguments (dict): Input arguments for the composition
-            stream_callback (callable, optional): Callback function for streaming output
 
-        Returns
+        Returns:
             Any: Result from the composition execution
         """
         if not self.tooluniverse:
@@ -270,10 +268,10 @@ class ComposeTool(BaseTool):
         try:
             if self.composition_file:
                 # Execute function from external file
-                return self._execute_from_file(arguments, stream_callback)
+                return self._execute_from_file(arguments)
             else:
                 # Execute inline code (existing behavior)
-                return self._execute_inline_code(arguments, stream_callback)
+                return self._execute_inline_code(arguments)
 
         except Exception as e:
             error_msg = f"Error in ComposeTool '{self.name}': {str(e)}"
@@ -282,52 +280,14 @@ class ComposeTool(BaseTool):
 
             return {"error": error_msg, "traceback": traceback.format_exc()}
 
-    def _emit_stream_chunk(self, chunk, stream_callback):
-        """
-        Emit a stream chunk if callback is provided.
-
-        Args:
-            chunk (str): The chunk to emit
-            stream_callback (callable, optional): Callback function for streaming output
-        """
-        if stream_callback and chunk:
-            try:
-                stream_callback(chunk)
-            except Exception as e:
-                print(f"Error in stream callback: {e}")
-
-    def _create_event_emitter(self, stream_callback):
-        """
-        Create an event emitter function for the compose script.
-
-        Args:
-            stream_callback (callable, optional): Callback function for streaming output
-
-        Returns
-            callable: Event emitter function
-        """
-
-        def emit_event(event_type, data=None):
-            """Emit an event via stream callback"""
-            if stream_callback:
-                event = {
-                    "type": event_type,
-                    "timestamp": datetime.now().isoformat(),
-                    "data": data or {},
-                }
-                self._emit_stream_chunk(json.dumps(event), stream_callback)
-
-        return emit_event
-
-    def _execute_from_file(self, arguments, stream_callback=None):
+    def _execute_from_file(self, arguments):
         """
         Execute composition code from external file.
 
         Args:
             arguments (dict): Input arguments
-            stream_callback (callable, optional): Callback function for streaming output
 
-        Returns
+        Returns:
             Any: Result from the composition execution
         """
         # Resolve file path
@@ -342,42 +302,17 @@ class ComposeTool(BaseTool):
         # Get the composition function
         compose_func = getattr(compose_module, self.composition_function)
 
-        # Import memory manager
-        from .memory_manager import memory_manager
+        # Execute the function with context
+        return compose_func(arguments, self.tooluniverse, self._call_tool)
 
-        # Execute the function with backward-compatible parameters
-        import inspect
-
-        sig = inspect.signature(compose_func)
-        params = list(sig.parameters.keys())
-
-        # Build arguments based on function signature
-        call_args = {
-            "arguments": arguments,
-            "tooluniverse": self.tooluniverse,
-            "call_tool": self._call_tool,
-        }
-
-        # Add optional parameters if the function accepts them
-        if "stream_callback" in params:
-            call_args["stream_callback"] = stream_callback
-        if "emit_event" in params:
-            call_args["emit_event"] = self._create_event_emitter(stream_callback)
-        if "memory_manager" in params:
-            call_args["memory_manager"] = memory_manager
-
-        # Call with only the parameters the function expects
-        return compose_func(**{k: v for k, v in call_args.items() if k in params})
-
-    def _execute_inline_code(self, arguments, stream_callback=None):
+    def _execute_inline_code(self, arguments):
         """
         Execute inline composition code (existing behavior).
 
         Args:
             arguments (dict): Input arguments
-            stream_callback (callable, optional): Callback function for streaming output
 
-        Returns
+        Returns:
             Any: Result from the composition execution
         """
         # Initialize execution context
@@ -408,7 +343,7 @@ class ComposeTool(BaseTool):
             tool_name (str): Name of the tool to call
             arguments (dict): Arguments to pass to the tool
 
-        Returns
+        Returns:
             Any: Result from the tool execution
         """
         # Check if tool is available (check both callable_functions and all_tool_dict)
@@ -433,24 +368,4 @@ class ComposeTool(BaseTool):
 
         function_call = {"name": tool_name, "arguments": arguments}
 
-        result = self.tooluniverse.run_one_function(function_call)
-
-        # Ensure consistent result format for backward compatibility
-        if isinstance(result, str):
-            # If result is a string, it might be an error message or JSON string
-            try:
-                import json
-
-                parsed_result = json.loads(result)
-                if isinstance(parsed_result, dict):
-                    return parsed_result
-                else:
-                    return {"result": parsed_result}
-            except (json.JSONDecodeError, TypeError):
-                # If it's not JSON, treat as normal string result
-                return {"result": result}
-        elif isinstance(result, dict):
-            return result
-        else:
-            # For other types, wrap in a standard format
-            return {"result": result}
+        return self.tooluniverse.run_one_function(function_call)

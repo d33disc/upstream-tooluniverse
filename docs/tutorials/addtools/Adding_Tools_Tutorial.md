@@ -1,24 +1,21 @@
 # Adding Tools to ToolUniverse - Complete Tutorial
 
-This tutorial covers everything you need to know about adding custom tools to ToolUniverse using the decorator-based auto-registration system.
+This tutorial covers everything you need to know about adding custom tools to ToolUniverse using the new decorator-based auto-registration system.
 
 ## Table of Contents
-1. :ref:`overview`
-2. :ref:`development-environment-setup`
-3. :ref:`quick-start`
-4. :ref:`method-1-decorator-registration-recommended`
-5. :ref:`method-2-manual-registration`
-6. :ref:`tool-configuration`
-7. :ref:`parameter-validation-and-error-handling`
-8. :ref:`real-world-examples`
-9. :ref:`best-practices`
-10. :ref:`troubleshooting`
-
-.. _overview:
+1. [Overview](#overview)
+2. [Development Environment Setup](#development-environment-setup)
+3. [Quick Start](#quick-start)
+4. [Method 1: Decorator Registration (Recommended)](#method-1-decorator-registration-recommended)
+5. [Method 2: Manual Registration](#method-2-manual-registration)
+6. [Tool Configuration](#tool-configuration)
+7. [Real-World Examples](#real-world-examples)
+8. [Best Practices](#best-practices)
+9. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
-ToolUniverse supports **automatic tool discovery** through decorators. When you add a new tool, it's automatically registered and available without needing to manually edit core files.
+ToolUniverse now supports **automatic tool discovery** through decorators. When you add a new tool, it's automatically registered and available without needing to manually edit core files.
 
 ### What You Can Add
 - Custom API wrappers
@@ -30,8 +27,6 @@ ToolUniverse supports **automatic tool discovery** through decorators. When you 
 ### What Changed
 - ❌ **Before**: Manual imports and mappings in `execute_function.py`
 - ✅ **Now**: Simple decorator registration with auto-discovery
-
-.. _development-environment-setup:
 
 ## Development Environment Setup
 
@@ -85,8 +80,6 @@ tu.load_tools()
 print(f"✅ Loaded {len(tu.all_tools)} tools!")
 ```
 
-.. _quick-start:
-
 ## Quick Start
 
 Here's the fastest way to add a new tool:
@@ -133,8 +126,6 @@ print(result)
 ```
 
 That's it! Your tool is automatically discovered and ready to use.
-
-.. _method-1-decorator-registration-recommended:
 
 ## Method 1: Decorator Registration (Recommended)
 
@@ -284,8 +275,6 @@ The `config` parameter in the decorator supports all standard ToolUniverse confi
 })
 ```
 
-.. _method-2-manual-registration:
-
 ## Method 2: Manual Registration
 
 For dynamic tools or special cases, you can register tools at runtime:
@@ -331,8 +320,6 @@ result = tu.run_one_function({
     "arguments": {"input": "test"}
 })
 ```
-
-.. _tool-configuration:
 
 ## Tool Configuration
 
@@ -388,87 +375,6 @@ result = tu.run_one_function({
     "required": ["data"]
 }
 ```
-
-.. _parameter-validation-and-error-handling:
-
-## Parameter Validation and Error Handling
-
-ToolUniverse provides built-in support for parameter validation and structured error handling to help you create robust tools.
-
-### Parameter Validation
-
-You can implement custom parameter validation by overriding the `validate_parameters()` method:
-
-```python
-from tooluniverse.exceptions import ToolValidationError
-
-class MyTool:
-    def validate_parameters(self, arguments):
-        # First run base validation
-        base_error = super().validate_parameters(arguments)
-        if base_error:
-            return base_error
-        
-        # Add custom validation
-        if "email" in arguments:
-            email = arguments["email"]
-            if "@" not in email:
-                return ToolValidationError(
-                    "Invalid email format",
-                    next_steps=["Provide a valid email address"],
-                    details={"field": "email", "value": email}
-                )
-        
-        return None  # Validation passed
-```
-
-### Error Handling
-
-Override `handle_error()` to provide tool-specific error classification:
-
-```python
-from tooluniverse.exceptions import ToolAuthError, ToolRateLimitError
-
-class APITool:
-    def handle_error(self, exception):
-        error_str = str(exception).lower()
-        
-        if "api key" in error_str:
-            return ToolAuthError(
-                "API authentication failed",
-                next_steps=["Check API key", "Verify environment variables"]
-            )
-        elif "rate limit" in error_str:
-            return ToolRateLimitError(
-                "API rate limit exceeded",
-                next_steps=["Wait and retry", "Check quota limits"]
-            )
-        
-        # Fall back to base error handling
-        return super().handle_error(exception)
-```
-
-### Exception System Migration
-
-If you're using older exception classes, migrate to the new structured system:
-
-```python
-# Old way (deprecated)
-from tooluniverse.base_tool import ValidationError
-raise ValidationError("Invalid input")
-
-# New way (recommended)
-from tooluniverse.exceptions import ToolValidationError
-raise ToolValidationError(
-    "Invalid input",
-    next_steps=["Check parameter format"],
-    details={"field": "email"}
-)
-```
-
-For more information about the exception system, see the [API documentation](../api/tooluniverse.exceptions.rst).
-
-.. _real-world-examples:
 
 ## Real-World Examples
 
@@ -729,8 +635,6 @@ class APIClientTool:
         return {"error": "Max retries exceeded", "success": False}
 ```
 
-.. _best-practices:
-
 ## Best Practices
 
 ### 1. File Naming
@@ -810,8 +714,6 @@ return {
     "details": {...}  # optional error details
 }
 ```
-
-.. _troubleshooting:
 
 ## Troubleshooting
 
@@ -901,6 +803,6 @@ if __name__ == "__main__":
 - Check existing tools in the ToolUniverse codebase for examples
 - Review the configuration schemas of similar tools
 - Test incrementally - start with basic functionality
-- Use the troubleshooting section for common issues
+- Use the troubleshooting Tutorial for common issues
 
 The decorator-based system makes adding tools straightforward while maintaining all the power and flexibility of ToolUniverse. Happy tool building! 🛠️

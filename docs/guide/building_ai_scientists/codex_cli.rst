@@ -277,7 +277,7 @@ Troubleshooting
 
 5. **Verify MCP Server Status:**
    Start Codex CLI and run:
-   .. code-block::
+   .. code-block:: text
 
       codex
       /mcp

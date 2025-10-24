@@ -83,7 +83,7 @@ Get comprehensive information about Cellpose – cell segmentation algorithm
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -93,7 +93,6 @@ Get comprehensive information about Cellpose – cell segmentation algorithm
       query = {
           "name": "get_cellpose_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -172,7 +171,7 @@ Get comprehensive information about igraph – network analysis and visualizatio
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -182,7 +181,6 @@ Get comprehensive information about igraph – network analysis and visualizatio
       query = {
           "name": "get_igraph_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -203,7 +201,7 @@ Get comprehensive information about Matplotlib – comprehensive library for cre
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -213,7 +211,6 @@ Get comprehensive information about Matplotlib – comprehensive library for cre
       query = {
           "name": "get_matplotlib_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -234,7 +231,7 @@ Get comprehensive information about OpenCV-Python – computer vision library
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -244,7 +241,6 @@ Get comprehensive information about OpenCV-Python – computer vision library
       query = {
           "name": "get_opencv_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -385,7 +381,7 @@ Get comprehensive information about Seaborn – statistical data visualization
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (required)
+   * ``include_examples`` (boolean) (optional)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -395,7 +391,6 @@ Get comprehensive information about Seaborn – statistical data visualization
       query = {
           "name": "get_seaborn_info",
           "arguments": {
-              "include_examples": true
           }
       }
       result = tu.run(query)

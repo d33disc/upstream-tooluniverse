@@ -33,27 +33,7 @@ default_tool_files = {
     "Enrichr": os.path.join(current_dir, "data", "enrichr_tools.json"),
     "HumanBase": os.path.join(current_dir, "data", "humanbase_tools.json"),
     "OpenAlex": os.path.join(current_dir, "data", "openalex_tools.json"),
-    # Literature search tools
-    "arxiv": os.path.join(current_dir, "data", "arxiv_tools.json"),
-    "crossref": os.path.join(current_dir, "data", "crossref_tools.json"),
-    "dblp": os.path.join(current_dir, "data", "dblp_tools.json"),
-    "pubmed": os.path.join(current_dir, "data", "pubmed_tools.json"),
-    "doaj": os.path.join(current_dir, "data", "doaj_tools.json"),
-    "unpaywall": os.path.join(current_dir, "data", "unpaywall_tools.json"),
-    "biorxiv": os.path.join(current_dir, "data", "biorxiv_tools.json"),
-    "medrxiv": os.path.join(current_dir, "data", "medrxiv_tools.json"),
-    "hal": os.path.join(current_dir, "data", "hal_tools.json"),
-    "core": os.path.join(current_dir, "data", "core_tools.json"),
-    "pmc": os.path.join(current_dir, "data", "pmc_tools.json"),
-    "zenodo": os.path.join(current_dir, "data", "zenodo_tools.json"),
-    "openaire": os.path.join(current_dir, "data", "openaire_tools.json"),
-    "osf_preprints": os.path.join(current_dir, "data", "osf_preprints_tools.json"),
-    "fatcat": os.path.join(current_dir, "data", "fatcat_tools.json"),
-    "wikidata_sparql": os.path.join(current_dir, "data", "wikidata_sparql_tools.json"),
     "agents": os.path.join(current_dir, "data", "agentic_tools.json"),
-    "drug_discovery_agents": os.path.join(
-        current_dir, "data", "drug_discovery_agents.json"
-    ),
     "dataset": os.path.join(current_dir, "data", "dataset_tools.json"),
     # 'mcp_clients': os.path.join(current_dir, 'data', 'mcp_client_tools_example.json'),
     "mcp_auto_loader_txagent": os.path.join(
@@ -69,7 +49,6 @@ default_tool_files = {
     "pubchem": os.path.join(current_dir, "data", "pubchem_tools.json"),
     "medlineplus": os.path.join(current_dir, "data", "medlineplus_tools.json"),
     "uniprot": os.path.join(current_dir, "data", "uniprot_tools.json"),
-    "cellosaurus": os.path.join(current_dir, "data", "cellosaurus_tools.json"),
     # 'software': os.path.join(current_dir, 'data', 'software_tools.json'),
     # Package tools - categorized software tools
     "software_bioinformatics": os.path.join(
@@ -92,16 +71,6 @@ default_tool_files = {
     ),
     "software_visualization": os.path.join(
         current_dir, "data", "packages", "visualization_tools.json"
-    ),
-    # Scientific visualization tools
-    "visualization_protein_3d": os.path.join(
-        current_dir, "data", "protein_structure_3d_tools.json"
-    ),
-    "visualization_molecule_2d": os.path.join(
-        current_dir, "data", "molecule_2d_tools.json"
-    ),
-    "visualization_molecule_3d": os.path.join(
-        current_dir, "data", "molecule_3d_tools.json"
     ),
     "software_scientific_computing": os.path.join(
         current_dir, "data", "packages", "scientific_computing_tools.json"
@@ -145,11 +114,6 @@ default_tool_files = {
         current_dir, "data", "output_summarization_tools.json"
     ),
     "odphp": os.path.join(current_dir, "data", "odphp_tools.json"),
-    "markitdown": os.path.join(current_dir, "data", "markitdown_tools.json"),
-    # Genomics tools
-    "genomics": os.path.join(current_dir, "data", "genomics_tools.json"),
-    # Guideline and health policy tools
-    "guidelines": os.path.join(current_dir, "data", "unified_guideline_tools.json"),
 }
 
 
@@ -157,7 +121,7 @@ def get_default_hook_config():
     """
     Get default hook configuration.
 
-    Returns
+    Returns:
         dict: Default hook configuration with basic settings
     """
     return {
