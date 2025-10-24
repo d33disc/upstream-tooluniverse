@@ -70,6 +70,13 @@ default_tool_files = {
     "medlineplus": os.path.join(current_dir, "data", "medlineplus_tools.json"),
     "uniprot": os.path.join(current_dir, "data", "uniprot_tools.json"),
     "cellosaurus": os.path.join(current_dir, "data", "cellosaurus_tools.json"),
+    "interpro": os.path.join(current_dir, "data", "interpro_tools.json"),
+    "kegg": os.path.join(current_dir, "data", "kegg_tools.json"),
+    "iucn_red_list": os.path.join(current_dir, "data", "iucn_tools.json"),
+    "jaspar": os.path.join(current_dir, "data", "jaspar_tools.json"),
+    "marine_species": os.path.join(current_dir, "data", "marine_species_tools.json"),
+    "cbioportal": os.path.join(current_dir, "data", "cbioportal_tools.json"),
+    "phenome_jax": os.path.join(current_dir, "data", "phenome_jax_tools.json"),
     # 'software': os.path.join(current_dir, 'data', 'software_tools.json'),
     # Package tools - categorized software tools
     "software_bioinformatics": os.path.join(

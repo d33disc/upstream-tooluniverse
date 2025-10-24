@@ -1,0 +1,27 @@
+[
+  {
+    "type": "KEGGTool",
+    "name": "KEGG_find_entries",
+    "description": "Find KEGG entries matching a query within a selected database.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search term (e.g., gene symbol, compound name)."
+        },
+        "database": {
+          "type": "string",
+          "description": "KEGG database name (pathway, compound, gene, etc.).",
+          "default": "pathway"
+        },
+        "max_results": {
+          "type": "integer",
+          "description": "Optional limit on number of results to return.",
+          "minimum": 1
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]
