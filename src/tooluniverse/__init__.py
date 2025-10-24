@@ -278,6 +278,11 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
     from .core_tool import CoreTool
     from .pmc_tool import PMCTool
     from .zenodo_tool import ZenodoTool
+    from . import vsd_tool       # registers VerifiedSourceDiscoveryTool + VerifiedSourceRegisterTool
+    from . import vsd_api_tool   # registers GenericRESTTool + GenericGraphQLTool
+    from . import context_keeper_tool  # registers ContextKeeperTool
+    from . import candidate_tester_tool  # registers HarvestCandidateTesterTool
+    from . import tool_navigator_tool  # registers ToolNavigatorTool
 else:
     # With lazy loading, create lazy import proxies that import modules only when accessed
     MonarchTool = _LazyImportProxy("restful_tool", "MonarchTool")
@@ -453,6 +458,9 @@ __all__ = [
     "ODPHPItemList",
     "ODPHPTopicSearch",
     "ODPHPOutlinkFetch",
+    "ContextKeeperTool",
+    "HarvestCandidateTesterTool",
+    "ToolNavigatorTool",
     "CellosaurusSearchTool",
     "CellosaurusQueryConverterTool",
     "CellosaurusGetCellLineInfoTool",
