@@ -1,0 +1,21 @@
+[
+  {
+    "type": "IUCNRedListTool",
+    "name": "IUCN_get_species_status",
+    "description": "Retrieve conservation status information from the IUCN Red List (requires IUCN_RED_LIST_TOKEN).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "species": {
+          "type": "string",
+          "description": "Scientific name of the species (spaces allowed)."
+        },
+        "token": {
+          "type": "string",
+          "description": "Optional API token; falls back to IUCN_RED_LIST_TOKEN environment variable."
+        }
+      },
+      "required": ["species"]
+    }
+  }
+]

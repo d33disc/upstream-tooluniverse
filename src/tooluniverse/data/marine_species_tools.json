@@ -1,0 +1,27 @@
+[
+  {
+    "type": "MarineSpeciesTool",
+    "name": "MarineSpecies_lookup",
+    "description": "Lookup marine taxa using the World Register of Marine Species (WoRMS).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "scientific_name": {
+          "type": "string",
+          "description": "Scientific name to search (exact or partial when like=true)."
+        },
+        "like": {
+          "type": "boolean",
+          "description": "Use fuzzy matching when true.",
+          "default": true
+        },
+        "marine_only": {
+          "type": "boolean",
+          "description": "Restrict results to marine taxa only.",
+          "default": true
+        }
+      },
+      "required": ["scientific_name"]
+    }
+  }
+]

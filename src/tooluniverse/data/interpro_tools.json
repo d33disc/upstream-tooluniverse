@@ -1,0 +1,30 @@
+[
+  {
+    "type": "InterProTool",
+    "name": "InterPro_search_entries",
+    "description": "Search InterPro entries by keyword using the official REST API.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keyword or accession to search within InterPro."
+        },
+        "page": {
+          "type": "integer",
+          "description": "Results page number (1-indexed).",
+          "default": 1,
+          "minimum": 1
+        },
+        "page_size": {
+          "type": "integer",
+          "description": "Number of records per page (max 200).",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 200
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]

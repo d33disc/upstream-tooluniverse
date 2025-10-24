@@ -1,0 +1,38 @@
+[
+  {
+    "type": "JASPARRestTool",
+    "name": "JASPAR_search_motifs",
+    "description": "Search transcription factor binding motifs in the JASPAR database.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search term (matrix ID, gene symbol, or motif name)."
+        },
+        "tax_group": {
+          "type": "string",
+          "description": "Optional taxonomic group filter (e.g., vertebrates)."
+        },
+        "collection": {
+          "type": "string",
+          "description": "Optional collection filter (e.g., CORE, UNVALIDATED)."
+        },
+        "page": {
+          "type": "integer",
+          "description": "Page number (1-indexed).",
+          "default": 1,
+          "minimum": 1
+        },
+        "page_size": {
+          "type": "integer",
+          "description": "Number of results per page.",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]

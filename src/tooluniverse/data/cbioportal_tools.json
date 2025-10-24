@@ -1,0 +1,34 @@
+[
+  {
+    "type": "CBioPortalTool",
+    "name": "cBioPortal_search_studies",
+    "description": "Search cBioPortal studies by keyword (supports optional API token).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "description": "Keyword to search in study identifiers and descriptions."
+        },
+        "page": {
+          "type": "integer",
+          "description": "Zero-based page index.",
+          "default": 0,
+          "minimum": 0
+        },
+        "page_size": {
+          "type": "integer",
+          "description": "Number of records per page.",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "token": {
+          "type": "string",
+          "description": "Optional API token (falls back to CBIOPORTAL_API_TOKEN environment variable)."
+        }
+      },
+      "required": ["keyword"]
+    }
+  }
+]

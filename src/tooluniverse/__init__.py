@@ -278,6 +278,13 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
     from .core_tool import CoreTool
     from .pmc_tool import PMCTool
     from .zenodo_tool import ZenodoTool
+    from . import interpro_tool
+    from . import kegg_tool
+    from . import iucn_tool
+    from . import jaspar_tool
+    from . import marine_species_tool
+    from . import cbioportal_tool
+    from . import phenome_jax_tool
 else:
     # With lazy loading, create lazy import proxies that import modules only when accessed
     MonarchTool = _LazyImportProxy("restful_tool", "MonarchTool")
@@ -368,6 +375,13 @@ else:
     CellosaurusGetCellLineInfoTool = _LazyImportProxy(
         "cellosaurus_tool", "CellosaurusGetCellLineInfoTool"
     )
+    InterProTool = _LazyImportProxy("interpro_tool", "InterProTool")
+    KEGGTool = _LazyImportProxy("kegg_tool", "KEGGTool")
+    IUCNRedListTool = _LazyImportProxy("iucn_tool", "IUCNRedListTool")
+    JASPARRestTool = _LazyImportProxy("jaspar_tool", "JASPARRestTool")
+    MarineSpeciesTool = _LazyImportProxy("marine_species_tool", "MarineSpeciesTool")
+    CBioPortalTool = _LazyImportProxy("cbioportal_tool", "CBioPortalTool")
+    PhenomeJaxTool = _LazyImportProxy("phenome_jax_tool", "PhenomeJaxTool")
     # Literature search tools
     ArXivTool = _LazyImportProxy("arxiv_tool", "ArXivTool")
     CrossrefTool = _LazyImportProxy("crossref_tool", "CrossrefTool")
