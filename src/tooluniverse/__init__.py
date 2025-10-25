@@ -177,6 +177,7 @@ ComposeTool: Any
 CellosaurusSearchTool: Any
 CellosaurusQueryConverterTool: Any
 CellosaurusGetCellLineInfoTool: Any
+OLSTool: Any
 if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
     # Import all tool classes immediately (old behavior) with warning suppression  # noqa: E501
     with warnings.catch_warnings():
@@ -264,6 +265,7 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
         CellosaurusQueryConverterTool,
         CellosaurusGetCellLineInfoTool,
     )
+    from .ols_tool import OLSTool
 
     # Literature search tools
     from .arxiv_tool import ArXivTool
@@ -368,6 +370,7 @@ else:
     CellosaurusGetCellLineInfoTool = _LazyImportProxy(
         "cellosaurus_tool", "CellosaurusGetCellLineInfoTool"
     )
+    OLSTool = _LazyImportProxy("ols_tool", "OLSTool")
     # Literature search tools
     ArXivTool = _LazyImportProxy("arxiv_tool", "ArXivTool")
     CrossrefTool = _LazyImportProxy("crossref_tool", "CrossrefTool")
@@ -456,6 +459,7 @@ __all__ = [
     "CellosaurusSearchTool",
     "CellosaurusQueryConverterTool",
     "CellosaurusGetCellLineInfoTool",
+    "OLSTool",
     # Literature search tools
     "ArXivTool",
     "CrossrefTool",
