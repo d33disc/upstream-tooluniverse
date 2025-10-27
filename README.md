@@ -232,26 +232,6 @@ Our comprehensive documentation covers everything from quick start to advanced w
 - **[Adding Tools Tutorial](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/addtools/Adding_Tools_Tutorial.html)**: Step-by-step tool addition guide
 - **[MCP Tool Registration](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/addtools/mcp_tool_registration_en.html)**: Register tools via MCP
 
-### MedTok + MedLog Integrations
-
-ToolUniverse now ships with first-class support for the MedTok tokenizer service and the MedLog reference collector/FHIR bridge.
-
-- **MedTok REST tools** (`tool_type=["medtok"]`) expose `/tokenize`, `/embed`, `/nearest_neighbors`, `/map_text_to_code`, `/search_text`, and `/codes/{system}/{code}`. Point them at a running service by setting `MEDTOK_BASE_URL` (defaults to `http://localhost:8000`).
-- **MedTok MCP auto-loader** (`tool_type=["medtok_mcp_auto_loader"]`) can register tools from the FastMCP wrapper. Set `MEDTOK_MCP_SERVER_HOST` to the host running the `medtok_tool.py` MCP server.
-- **MedLog collector + FHIR tools** (`tool_type=["medlog"]`) wrap the reference implementation's REST APIs. Configure the collectors' endpoints with `MEDLOG_COLLECTOR_BASE_URL` (default `http://localhost:7001`) and `MEDLOG_FHIR_BASE_URL` (default `http://localhost:7003`).
-
-See `tests/integration/test_medtok_medlog_tools.py` for end-to-end examples that start the services, invoke the tools, and validate responses.
-
-### End-to-End Demo Script
-
-To launch the reference services and exercise the toolchain automatically, run:
-
-```bash
-python scripts/run_full_demo.py          # adds -h for options
-```
-
-The script starts MedTok + MedLog locally, runs representative tool calls (including optional external APIs like InterPro, KEGG, IUCN, JASPAR, MarineSpecies, cBioPortal, and Phenome Jax), and prints a success/failure summary.
-
 ### 📚 API Reference
 - **[API Directory](https://zitniklab.hms.harvard.edu/ToolUniverse/api/modules.html)**: Complete module listing
 - **[Core Modules](https://zitniklab.hms.harvard.edu/ToolUniverse/api/tooluniverse.html)**: Main ToolUniverse class and utilities
