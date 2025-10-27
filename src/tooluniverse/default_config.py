@@ -181,6 +181,8 @@ default_tool_files = {
     "geo": os.path.join(current_dir, "data", "geo_tools.json"),
     "dbsnp": os.path.join(current_dir, "data", "dbsnp_tools.json"),
     "gnomad": os.path.join(current_dir, "data", "gnomad_tools.json"),
+    # Ontology tools
+    "ols": os.path.join(current_dir, "data", "ols_tools.json"),
 }
 
 
