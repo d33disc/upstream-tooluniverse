@@ -174,6 +174,8 @@ MCPAutoLoaderTool: Any
 ADMETAITool: Any
 AlphaFoldRESTTool: Any
 ComposeTool: Any
+PythonCodeExecutor: Any
+PythonScriptRunner: Any
 CellosaurusSearchTool: Any
 CellosaurusQueryConverterTool: Any
 CellosaurusGetCellLineInfoTool: Any
@@ -227,6 +229,10 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
         )
         from .chem_tool import ChEMBLTool
         from .compose_tool import ComposeTool
+        from .python_executor_tool import (
+            PythonCodeExecutor,
+            PythonScriptRunner,
+        )
         from .europe_pmc_tool import EuropePMCTool
         from .semantic_scholar_tool import SemanticScholarTool
         from .pubtator_tool import PubTatorTool
@@ -338,6 +344,8 @@ else:
     )
     ChEMBLTool = _LazyImportProxy("chem_tool", "ChEMBLTool")
     ComposeTool = _LazyImportProxy("compose_tool", "ComposeTool")
+    PythonCodeExecutor = _LazyImportProxy("python_executor_tool", "PythonCodeExecutor")
+    PythonScriptRunner = _LazyImportProxy("python_executor_tool", "PythonScriptRunner")
     EuropePMCTool = _LazyImportProxy("europe_pmc_tool", "EuropePMCTool")
     SemanticScholarTool = _LazyImportProxy(
         "semantic_scholar_tool", "SemanticScholarTool"
