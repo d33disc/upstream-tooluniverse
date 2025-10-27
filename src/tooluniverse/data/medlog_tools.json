@@ -1,0 +1,134 @@
+[
+  {
+    "name": "MedLog_init_event",
+    "description": "Initialize or overwrite a MedLog event record. Supply the 9-field MedLog payload to capture headers, inputs, identities, and initial artifacts.",
+    "type": "MedLogInitEventTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "MedLog header block including event_id, timestamps, risk metadata, and parent relationships."
+        },
+        "model_instance": {
+          "type": "object",
+          "description": "Model provenance metadata (model name, version, risk posture, vendor, etc.)."
+        },
+        "user_identity": {
+          "type": "object",
+          "description": "Information about the requesting user, clinician, or agent."
+        },
+        "target_identity": {
+          "type": "object",
+          "description": "Optional target entity such as patient or device identifiers."
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Structured input payload captured at initialization."
+        },
+        "retention_tier": {
+          "type": "string",
+          "description": "Retention tier label (steady, critical, transient, etc.)."
+        }
+      },
+      "required": ["header", "model_instance", "user_identity"]
+    }
+  },
+  {
+    "name": "MedLog_append_fragment",
+    "description": "Append outputs, outcomes, artifacts, or feedback fragments to an existing MedLog event.",
+    "type": "MedLogAppendFragmentTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "description": "Identifier of the event to update."
+        },
+        "fragment": {
+          "type": "object",
+          "description": "Fragment payload containing any of internal_artifacts, outputs, outcomes, or user_feedback."
+        }
+      },
+      "required": ["event_id", "fragment"]
+    }
+  },
+  {
+    "name": "MedLog_get_provenance",
+    "description": "Fetch PROV-JSON bundle for a given event to support audit trails and lineage review.",
+    "type": "MedLogGetProvenanceTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "description": "Identifier of the event to retrieve."
+        }
+      },
+      "required": ["event_id"]
+    }
+  },
+  {
+    "name": "MedLog_query_events",
+    "description": "Query MedLog events by run or event identifier. Useful for dashboarding, analytics, and sampling inspection.",
+    "type": "MedLogQueryEventsTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "description": "Optional run identifier to filter results."
+        },
+        "event_id": {
+          "type": "string",
+          "description": "Optional event identifier to narrow results."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of rows to return (default 50).",
+          "minimum": 1,
+          "maximum": 500
+        }
+      }
+    }
+  },
+  {
+    "name": "MedLog_export_parquet",
+    "description": "Trigger MedLog parquet export to the configured artifact directory.",
+    "type": "MedLogExportParquetTool",
+    "parameter": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "MedLog_fhir_bundle",
+    "description": "Retrieve the FHIR bundle synthesised for an individual MedLog event (Patient, Practitioner, Device, AuditEvent, Observations, Documents).",
+    "type": "MedLogFHIRBundleTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "description": "Identifier of the event to export."
+        }
+      },
+      "required": ["event_id"]
+    }
+  },
+  {
+    "name": "MedLog_fhir_run_bundle",
+    "description": "Aggregate all events in a run into a consolidated FHIR bundle for care-path review.",
+    "type": "MedLogFHIRRunBundleTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "description": "Run identifier to export."
+        }
+      },
+      "required": ["run_id"]
+    }
+  }
+]
