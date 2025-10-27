@@ -3046,6 +3046,9 @@ class ToolUniverse:
         # Extract tool configuration
         tools_config = config.get("tools", {})
 
+        # Handle tools_file parameter
+        tools_file_param = kwargs.get("tools_file")
+
         # Merge with override parameters
         tool_type = kwargs.get("tool_type") or tools_config.get("categories")
         exclude_tools = kwargs.get("exclude_tools") or tools_config.get(
@@ -3070,6 +3073,7 @@ class ToolUniverse:
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
             include_tools=include_tools,
+            tools_file=tools_file_param,  # KEY FIX: Pass tools_file
             include_tool_types=include_tool_types,
             exclude_tool_types=exclude_tool_types,
         )

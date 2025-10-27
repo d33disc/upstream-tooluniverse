@@ -386,8 +386,16 @@ class SMCP(FastMCP):
         for uri in space_list:
             print(f"📦 Loading Space: {uri}")
 
-            # Directly call ToolUniverse's method (complete reuse)
-            config = self.tooluniverse.load_space(uri)
+            # Pass filtering parameters from SMCP to load_space
+            config = self.tooluniverse.load_space(
+                uri,
+                exclude_tools=self.exclude_tools,
+                exclude_categories=self.exclude_categories,
+                include_tools=self.include_tools,
+                tools_file=self.tools_file,  # KEY FIX: Pass tools_file filter
+                include_tool_types=self.include_tool_types,
+                exclude_tool_types=self.exclude_tool_types,
+            )
 
             # Get configurations from ToolUniverse (complete reuse)
             self.space_metadata = self.tooluniverse.get_space_metadata()
