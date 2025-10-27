@@ -232,6 +232,44 @@ Our comprehensive documentation covers everything from quick start to advanced w
 - **[Adding Tools Tutorial](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/addtools/Adding_Tools_Tutorial.html)**: Step-by-step tool addition guide
 - **[MCP Tool Registration](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/addtools/mcp_tool_registration_en.html)**: Register tools via MCP
 
+### Verified Source Discovery (VSD) + Harvest Workflow
+
+ToolUniverse ships a “harvest → verify → register” pipeline that turns external REST endpoints into first-class Dynamic REST tools.
+
+1. **Harvest candidates** – `GenericHarvestTool` searches the static Harvest catalog or wraps ad‑hoc URLs you supply with `{"urls": [...]}`.
+2. **Probe readiness** – `HarvestCandidateTesterTool` (optional) performs a dry run against the candidate, suggesting default query params or headers.
+3. **Register verified tools** – `VerifiedSourceRegisterTool` stamps metadata, persists the tool in `~/.tooluniverse/vsd/generated_tools.json` (override with `TOOLUNIVERSE_VSD_DIR`), and hot-loads it through the Dynamic REST runner.
+4. **Inspect / prune** – `VerifiedSourceDiscoveryTool` lists everything in the verified catalog, while `VerifiedSourceRemoveTool` deletes entries and unregisters their dynamic bindings.
+
+```python
+from tooluniverse.vsd_tool import (
+    GenericHarvestTool,
+    HarvestCandidateTesterTool,
+    VerifiedSourceRegisterTool,
+    VerifiedSourceDiscoveryTool,
+    VerifiedSourceRemoveTool,
+)
+
+harvest = GenericHarvestTool({})
+candidate = harvest.run({"query": "clinical"})["candidates"][0]
+
+tester = HarvestCandidateTesterTool({})
+probe = tester.run({"candidate": candidate})
+
+register = VerifiedSourceRegisterTool({})
+register.run(
+    "ClinicalTrialsREST",
+    candidate,
+    default_params={"search": "cancer"},
+    force=True,  # bypass strict validation once endpoint is known-good
+)
+
+print(VerifiedSourceDiscoveryTool({}).run({})["tools"])
+VerifiedSourceRemoveTool({}).run({"tool_name": "ClinicalTrialsREST"})
+```
+
+Registered tools are immediately available to agents via normal loading (e.g., `ToolUniverse().load_tools(tool_type=["dynamic_rest"])`). This workflow keeps internal sources (Harvest/VSD) separate from public REST integrations so they can ship on their own release cadence.
+
 ### 📚 API Reference
 - **[API Directory](https://zitniklab.hms.harvard.edu/ToolUniverse/api/modules.html)**: Complete module listing
 - **[Core Modules](https://zitniklab.hms.harvard.edu/ToolUniverse/api/tooluniverse.html)**: Main ToolUniverse class and utilities
