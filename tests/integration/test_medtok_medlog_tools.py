@@ -1,11 +1,6 @@
-import importlib.util
-import json
 import os
-import sys
-import tempfile
 import threading
 import time
-from pathlib import Path
 
 import pytest
 import uvicorn
@@ -34,40 +29,142 @@ class _ServerHandle:
         self.thread.join(timeout=5)
 
 
-def _import_medtok_app(module_path: Path):
-    spec = importlib.util.spec_from_file_location("medtok_service_app", module_path)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(module)
-    return module
-
-
 @pytest.fixture(scope="session")
 def medtok_server():
-    repo_root = Path(__file__).resolve().parents[3]
-    medtok_root = repo_root / "MedTok-FHIR-Starter"
-    service_dir = medtok_root / "services" / "medtok_service"
-    sys.path.insert(0, str(service_dir))
+    """
+    Launch a minimal in-memory MedTok stub so MedTokTool wrappers can be tested
+    without cloning the full MedTok repository.
+    """
 
-    base_config_path = medtok_root / "config" / "medtok_config.json"
-    config_data = json.loads(base_config_path.read_text(encoding="utf-8"))
-    config_data["code_metadata_path"] = str(
-        medtok_root / "samples" / "code_metadata.csv"
-    )
-    config_data["graph_edges_path"] = str(
-        medtok_root / "samples" / "code_graph_edges.csv"
-    )
-    tmp_config = tempfile.NamedTemporaryFile(
-        "w", suffix="_medtok_config.json", delete=False
-    )
-    json.dump(config_data, tmp_config)
-    tmp_config.flush()
-    tmp_config.close()
-    os.environ["MEDTOK_CONFIG"] = tmp_config.name
+    codes = {
+        "ICD-10": {
+            "A00": {
+                "code": "A00",
+                "system": "ICD-10",
+                "name": "Cholera",
+                "description": "Infection caused by Vibrio cholerae",
+                "aliases": ["cholera"],
+                "embedding": [0.9, 0.05, 0.05, 0.0],
+                "token_id": 101,
+            },
+            "E11": {
+                "code": "E11",
+                "system": "ICD-10",
+                "name": "Type 2 diabetes mellitus",
+                "description": "Chronic condition impacting glucose metabolism",
+                "aliases": ["type 2 diabetes", "diabetes"],
+                "embedding": [0.1, 0.8, 0.1, 0.0],
+                "token_id": 202,
+            },
+            "I10": {
+                "code": "I10",
+                "system": "ICD-10",
+                "name": "Essential (primary) hypertension",
+                "description": "Persistently high blood pressure",
+                "aliases": ["hypertension", "high blood pressure"],
+                "embedding": [0.05, 0.05, 0.85, 0.05],
+                "token_id": 303,
+            },
+        }
+    }
 
-    module = _import_medtok_app(service_dir / "app.py")
-    module.MAPPING_CSV = str(medtok_root / "samples" / "code_mapping.csv")
-    app = module.app
+    def _build_stub_app() -> FastAPI:
+        app = FastAPI(title="MedTok Stub Service", version="0.0.1")
+
+        def _normalise_system(system: str) -> str:
+            return (system or "ICD-10").upper()
+
+        def _fetch_code(system: str, code: str):
+            return codes.get(system, {}).get(code)
+
+        def _match_text(system: str, text: str):
+            text_lower = (text or "").lower()
+            for record in codes.get(system, {}).values():
+                if text_lower in record["code"].lower():
+                    return record
+                for alias in record.get("aliases", []):
+                    if text_lower in alias.lower():
+                        return record
+            values = list(codes.get(system, {}).values())
+            return values[0] if values else None
+
+        @app.post("/tokenize")
+        def tokenize(payload: dict):
+            system = _normalise_system(payload.get("system"))
+            include_metadata = bool(payload.get("include_metadata"))
+            token_ids = []
+            metadata = []
+            for code in payload.get("codes", []):
+                record = _fetch_code(system, code)
+                if not record:
+                    continue
+                token_ids.append(record["token_id"])
+                if include_metadata:
+                    metadata.append(record)
+            response = {"token_ids": token_ids}
+            if include_metadata:
+                response["metadata"] = metadata
+            return response
+
+        @app.post("/embed")
+        def embed(payload: dict):
+            embeddings = []
+            for code in payload.get("codes", []):
+                record = _fetch_code(_normalise_system(payload.get("system")), code)
+                if record:
+                    embeddings.append(record["embedding"])
+            dim = len(embeddings[0]) if embeddings else 0
+            return {"embeddings": embeddings, "dim": dim}
+
+        @app.post("/nearest_neighbors")
+        def nearest_neighbors(payload: dict):
+            neighbors = [
+                {"code": "E11", "score": 0.42},
+                {"code": "I10", "score": 0.33},
+                {"code": "A00", "score": 0.28},
+            ]
+            k = max(1, min(int(payload.get("k", 5)), len(neighbors)))
+            return {"code": payload.get("code"), "neighbors": neighbors[:k]}
+
+        @app.post("/map_text_to_code")
+        def map_text(payload: dict):
+            system = _normalise_system(payload.get("system"))
+            match = _match_text(system, payload.get("text"))
+            if not match:
+                raise HTTPException(404, "No matching code found")
+            return {
+                "code": match["code"],
+                "system": match["system"],
+                "name": match["name"],
+            }
+
+        @app.post("/search_text")
+        def search_text(payload: dict):
+            system = _normalise_system(payload.get("system"))
+            match = _match_text(system, payload.get("text"))
+            results = []
+            if match:
+                results.append(
+                    {
+                        "code": match["code"],
+                        "system": match["system"],
+                        "description": match["description"],
+                        "score": 0.9,
+                    }
+                )
+            k = int(payload.get("k", 5))
+            return {"query": payload.get("text"), "matches": results[:k]}
+
+        @app.get("/codes/{system}/{code}")
+        def code_info(system: str, code: str):
+            record = _fetch_code(_normalise_system(system), code)
+            if not record:
+                raise HTTPException(404, "Code not found")
+            return record
+
+        return app
+
+    app = _build_stub_app()
 
     host = "127.0.0.1"
     port = 8910
@@ -81,12 +178,6 @@ def medtok_server():
 
     server.stop()
     os.environ.pop("MEDTOK_BASE_URL", None)
-    os.environ.pop("MEDTOK_CONFIG", None)
-    try:
-        os.remove(tmp_config.name)
-    except FileNotFoundError:
-        pass
-    sys.path.remove(str(service_dir))
 
 
 def _build_medlog_collector(store):
