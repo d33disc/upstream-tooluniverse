@@ -45,12 +45,12 @@ class ToolUniverseFormatter(logging.Formatter):
 
     # Emoji prefixes for different log levels
     EMOJI_PREFIX = {
-        "DEBUG": "🔧 ",
-        "INFO": "ℹ️  ",
-        "PROGRESS": "⏳ ",
-        "WARNING": "⚠️  ",
-        "ERROR": "❌ ",
-        "CRITICAL": "🚨 ",
+        "DEBUG": "[DEBUG] ",
+        "INFO": "[INFO] ",
+        "PROGRESS": "[PROGRESS] ",
+        "WARNING": "[WARN] ",
+        "ERROR": "[ERROR] ",
+        "CRITICAL": "[CRITICAL] ",
     }
 
     def format(self, record):

@@ -157,6 +157,11 @@ default_tool_files = {
     "genomics": os.path.join(current_dir, "data", "genomics_tools.json"),
     # Guideline and health policy tools
     "guidelines": os.path.join(current_dir, "data", "unified_guideline_tools.json"),
+    "medtok": os.path.join(current_dir, "data", "medtok_tools.json"),
+    "medtok_mcp_auto_loader": os.path.join(
+        current_dir, "data", "medtok_mcp_tools.json"
+    ),
+    "medlog": os.path.join(current_dir, "data", "medlog_tools.json"),
 }
 
 

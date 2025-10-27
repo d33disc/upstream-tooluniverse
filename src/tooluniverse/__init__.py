@@ -474,6 +474,7 @@ __all__ = [
     "ODPHPOutlinkFetch",
     "ContextKeeperTool",
     "HarvestCandidateTesterTool",
+    "GenericHarvestTool",
     "ToolNavigatorTool",
     "CellosaurusSearchTool",
     "CellosaurusQueryConverterTool",

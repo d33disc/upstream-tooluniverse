@@ -136,7 +136,7 @@ def read_json_list(file_path):
     Returns
     list: A list of dictionaries containing the JSON objects.
     """
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
     return data
 

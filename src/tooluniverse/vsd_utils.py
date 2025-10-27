@@ -79,12 +79,16 @@ def _apply_overrides(candidate: Dict[str, Any], cfg: Dict[str, Any]) -> None:
 
     overrides = HOST_OVERRIDES.get(host)
     if overrides:
+        fields = cfg.setdefault("fields", {})
         if overrides.get("endpoint"):
             cfg["endpoint"] = overrides["endpoint"]
+            fields["base_url"] = overrides["endpoint"]
         if overrides.get("default_params"):
             cfg.setdefault("default_params", {}).update(overrides["default_params"])
+            fields.setdefault("default_params", {}).update(overrides["default_params"])
         if overrides.get("default_headers"):
             cfg.setdefault("default_headers", {}).update(overrides["default_headers"])
+            fields.setdefault("headers", {}).update(overrides["default_headers"])
         if overrides.get("notes"):
             cfg.setdefault("metadata", {}).setdefault("notes", []).append(overrides["notes"])
 
@@ -100,6 +104,7 @@ def _apply_overrides(candidate: Dict[str, Any], cfg: Dict[str, Any]) -> None:
         )
         if requirements.get("default_headers"):
             cfg.setdefault("default_headers", {}).update(requirements["default_headers"])
+            cfg.setdefault("fields", {}).setdefault("headers", {}).update(requirements["default_headers"])
 
 
 # ------------------------------------------------------------------------------
@@ -120,15 +125,43 @@ def build_config(
     merged_params = deepcopy(candidate.get("default_params") or candidate.get("params") or {})
     merged_headers = deepcopy(candidate.get("default_headers") or candidate.get("headers") or {})
 
-    cfg: Dict[str, Any] = {
-        "type": tool_type,
-        "endpoint": endpoint,
+    # Allow overrides provided via arguments
+    if default_params:
+        merged_params.update(default_params)
+    if default_headers:
+        merged_headers.update(default_headers)
+
+    # Determine implementation class
+    declared_type = str(candidate.get("tool_type") or tool_type or "").lower()
+    impl_type = "GenericRESTTool"
+    if declared_type in {"graphql", "genericgraphqltool", "graph_ql"} or endpoint.endswith(".graphql"):
+        impl_type = "GenericGraphQLTool"
+
+    # Provide a permissive parameter schema with defaults from known params
+    parameter_schema: Dict[str, Any] = deepcopy(candidate.get("parameter_schema") or candidate.get("parameter") or {})
+    if not parameter_schema:
+        properties = {
+            key: {"description": f"Override default query parameter '{key}'", "default": value}
+            for key, value in merged_params.items()
+        }
+        parameter_schema = {
+            "type": "object",
+            "properties": properties,
+            "additionalProperties": True,
+        }
+
+    fields: Dict[str, Any] = {
+        "base_url": endpoint,
         "method": method,
         "default_params": merged_params,
-        "default_headers": merged_headers,
-        "auth": candidate.get("auth") or {"type": "none"},
+        "headers": merged_headers,
+    }
+
+    cfg: Dict[str, Any] = {
+        "type": impl_type,
         "description": candidate.get("description") or "",
-        "tool_type": candidate.get("tool_type") or "dynamic_rest",
+        "fields": fields,
+        "parameter": parameter_schema,
         "metadata": {
             "source": candidate.get("source"),
             "trust": candidate.get("trust"),
@@ -138,16 +171,18 @@ def build_config(
             "host": candidate.get("host"),
         },
         "vsd": candidate,
+        # Backwards compatibility fields expected by older utilities
+        "tool_type": candidate.get("tool_type") or tool_type or "dynamic_rest",
+        "endpoint": endpoint,
+        "method": method,
+        "default_params": merged_params,
+        "default_headers": merged_headers,
+        "auth": candidate.get("auth") or {"type": "none"},
     }
 
     response_key = candidate.get("response_key")
     if response_key:
         cfg["response_key"] = response_key
-
-    if default_params:
-        cfg["default_params"].update(default_params)
-    if default_headers:
-        cfg["default_headers"].update(default_headers)
 
     _apply_overrides(candidate, cfg)
 
@@ -159,10 +194,11 @@ def probe_config(cfg: Dict[str, Any]) -> Dict[str, Any]:
     Execute a lightweight HTTP request to validate the generated configuration.
     Returns diagnostic information including HTTP status and a JSON snippet if available.
     """
-    url = cfg.get("endpoint")
-    method = (cfg.get("method") or "GET").upper()
-    params = deepcopy(cfg.get("default_params") or {})
-    headers = deepcopy(cfg.get("default_headers") or {})
+    fields = cfg.get("fields") or {}
+    url = cfg.get("endpoint") or fields.get("base_url")
+    method = (fields.get("method") or cfg.get("method") or "GET").upper()
+    params = deepcopy(fields.get("default_params") or cfg.get("default_params") or {})
+    headers = deepcopy(fields.get("headers") or cfg.get("default_headers") or {})
     headers.setdefault("Accept", "application/json")
 
     try:
