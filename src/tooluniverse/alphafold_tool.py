@@ -11,7 +11,7 @@ ALPHAFOLD_BASE_URL = "https://alphafold.ebi.ac.uk/api"
 class AlphaFoldRESTTool(BaseTool):
     """
     AlphaFold Protein Structure Database API tool.
-    Generic wrapper for AlphaFold API endpoints from alphafold_tools.json
+    Generic wrapper for AlphaFold API endpoints from alphafold_tools.json.
     """
 
     def __init__(self, tool_config):
