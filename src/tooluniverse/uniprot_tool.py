@@ -184,8 +184,7 @@ class UniProtRESTTool(BaseTool):
                 return {
                     "total_results": data.get("resultsFound", 0),
                     "returned": len(results),
-                    "results": results,  # Return raw results when
-                    # custom fields used
+                    "results": results,  # Return raw results when custom fields used
                 }
 
             # Otherwise, use formatted extraction logic
