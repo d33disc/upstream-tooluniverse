@@ -210,28 +210,36 @@
     },
     {
       "name": "UniProt_search",
-      "description": "Search UniProtKB database using flexible query syntax. Supports gene names (e.g., 'gene:TP53'), protein names, organism filters (e.g., 'organism:9606'), and complex queries using AND/OR operators. Returns matching proteins with accession numbers and key information. Use this to find UniProt accessions from gene or protein names.",
+      "description": "Search UniProtKB database with flexible query syntax. Returns protein entries with accession numbers and metadata. Query syntax supports: field searches (gene:TP53, organism_id:9606, reviewed:true), ranges (length:[100 TO 500], mass:[20000 TO 50000]), wildcards (gene:MEIOB*), boolean operators (AND/OR/NOT), and parentheses for grouping. Examples: 'gene:TP53 AND organism_id:9606', 'length:[400 TO 500] AND reviewed:true', 'tissue:brain NOT organism_id:10090'.",
       "parameter": {
         "type": "object",
         "properties": {
           "query": {
             "type": "string",
-            "description": "Search query. Can be simple (e.g., 'MEIOB') or advanced ('gene:TP53 AND organism:9606'). Keywords: gene, protein_name, organism, reviewed, etc."
+            "description": "Search query using UniProt syntax. Simple: 'MEIOB', 'insulin'. Field searches: 'gene:TP53', 'protein_name:insulin', 'organism_id:9606', 'reviewed:true'. Ranges: 'length:[100 TO 500]', 'mass:[20000 TO 50000]'. Wildcards: 'gene:MEIOB*'. Boolean: 'gene:TP53 AND organism_id:9606', 'tissue:brain OR tissue:liver', 'reviewed:true NOT fragment:true'. Use parentheses for grouping: '(organism_id:9606 OR organism_id:10090) AND gene:TP53'. Note: 'organism:' auto-converts to 'organism_id:'."
           },
           "organism": {
             "type": "string",
-            "description": "Optional organism filter. Can use common name ('human') or taxonomy ID ('9606'). Automatically combined with query using AND."
+            "description": "Optional organism filter. Use common names ('human', 'mouse', 'rat', 'yeast') or taxonomy ID ('9606'). Automatically combined with query using AND. Will not duplicate if organism is already in query."
           },
           "limit": {
             "type": "integer",
-            "description": "Maximum number of results to return (default: 25, max: 500)"
+            "description": "Maximum number of results to return (default: 25, max: 500). Accepts string or integer."
+          },
+          "min_length": {
+            "type": "integer",
+            "description": "Minimum sequence length. Auto-converts to 'length:[min TO *]' range query."
+          },
+          "max_length": {
+            "type": "integer",
+            "description": "Maximum sequence length. Auto-converts to 'length:[* TO max]' range query."
           },
           "fields": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Optional list of fields to return. Default returns: accession, id, protein_name, gene_names, organism, length"
+            "description": "List of field names to return (e.g., ['accession','gene_primary','length','organism_name']). When specified, returns raw API response with requested fields. Common fields: accession, id, gene_names, gene_primary, protein_name, organism_name, organism_id, length, mass, sequence, reviewed, cc_function. See UniProt API docs for full list. Default (no fields): returns formatted response with accession, id, protein_name, gene_names, organism, length."
           }
         },
         "required": ["query"]

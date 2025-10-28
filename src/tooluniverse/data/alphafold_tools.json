@@ -387,31 +387,26 @@
   },
   {
     "name": "alphafold_get_annotations",
-    "description": "Retrieve AlphaFold variant annotations (e.g., missense mutations) for a given UniProt accession. IMPORTANT: The qualifier must be a UniProt ACCESSION (e.g., 'P69905'), along with an annotation type (currently only 'MUTAGEN'). Do NOT use UniProt entry names as they will cause API errors. To find UniProt accession from a gene/protein name, use `UniProt_search` (e.g., query='gene:TP53' organism='human') or `UniProt_id_mapping` for ID conversion. Use this tool to explore predicted pathogenicity or functional effects of substitutions. For experimentally curated variants, use `UniProt_get_disease_variants_by_accession`. To view the full 3D structure, call `alphafold_get_prediction`; for overall model metadata, use `alphafold_get_summary`.",
+    "description": "Retrieve AlphaFold MUTAGEN annotations for a given UniProt accession. Returns experimental mutagenesis data mapped onto protein structures from UniProt. The qualifier must be a UniProt ACCESSION (e.g., 'P69905'). Note: Not all proteins have MUTAGEN annotations available in the database.",
     "type": "AlphaFoldRESTTool",
     "parameter": {
       "type": "object",
       "properties": {
         "qualifier": {
           "type": "string",
-          "description": "Protein identifier: UniProt ACCESSION (e.g., 'P69905'). Do NOT use entry names. To find accession from gene name: use `UniProt_search` or `UniProt_id_mapping`."
-        },
-        "type": {
-          "type": "string",
-          "description": "Annotation type (currently only 'MUTAGEN' is supported).",
-          "enum": [
-            "MUTAGEN"
-          ]
+          "description": "UniProt ACCESSION (e.g., 'P69905'). Must be an accession number, not an entry name."
         }
       },
       "required": [
-        "qualifier",
-        "type"
+        "qualifier"
       ]
     },
     "fields": {
       "endpoint": "/annotations/{qualifier}.json",
-      "return_format": "JSON"
+      "return_format": "JSON",
+      "auto_query_params": {
+        "type": "MUTAGEN"
+      }
     },
     "return_schema": {
       "type": "object",

@@ -2230,13 +2230,16 @@ class SMCP(FastMCP):
                         python_type = str
                         # For string type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "integer":
-                        python_type = int
+                        # Allow both string and int for lenient coercion
+                        python_type = Union[int, str]
                         # For integer type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "number":
-                        python_type = float
+                        # Allow both string and float for lenient coercion
+                        python_type = Union[float, str]
                         # For number type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "boolean":
-                        python_type = bool
+                        # Allow both string and bool for lenient coercion
+                        python_type = Union[bool, str]
                         # For boolean type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "array":
                         python_type = list
@@ -2334,32 +2337,21 @@ class SMCP(FastMCP):
                             )
                         )
 
-            # Add optional streaming parameter to signature
-            stream_field = Field(
-                description="Set to true to receive incremental streaming output (experimental)."
-            )
-            stream_annotation = Annotated[Union[bool, type(None)], stream_field]
-            param_annotations["_tooluniverse_stream"] = stream_annotation
-            func_params.append(
-                inspect.Parameter(
-                    "_tooluniverse_stream",
-                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                    default=None,
-                    annotation=stream_annotation,
-                )
-            )
-
-            # Note: ctx parameter removed as it causes Pydantic schema issues
-            # FastMCP context injection is handled internally by FastMCP
+            # Add _tooluniverse_stream as an optional parameter for streaming support
+            # This parameter is NOT exposed in the MCP schema (it's in kwargs but not in param_annotations)
+            # Users can pass it to enable streaming, but it won't appear in the tool schema
 
             async def dynamic_tool_function(**kwargs) -> str:
                 """Execute ToolUniverse tool with provided arguments."""
                 try:
                     # Remove ctx if present (legacy support)
                     ctx = kwargs.pop("ctx", None) if "ctx" in kwargs else None
-                    stream_flag = bool(kwargs.get("_tooluniverse_stream"))
+                    # Extract streaming flag (users can optionally pass this)
+                    stream_flag = bool(kwargs.pop("_tooluniverse_stream", False))
 
-                    # Filter out None values for optional parameters (preserve streaming flag)
+                    # Filter out None values for optional parameters
+                    # Note: _tooluniverse_stream was extracted and popped above
+                    # so it won't be in args_dict, which is what we want
                     args_dict = {k: v for k, v in kwargs.items() if v is not None}
 
                     # Validate required parameters (check against args_dict, not filtered_args)
@@ -2409,9 +2401,9 @@ class SMCP(FastMCP):
                         # Assign the function to stream_callback
                         stream_callback = _stream_callback
 
-                        # Ensure downstream tools see the streaming flag
-                        if "_tooluniverse_stream" not in args_dict:
-                            args_dict["_tooluniverse_stream"] = True
+                        # Note: _tooluniverse_stream was extracted from kwargs above
+                        # and is not passed to the tool. The stream_callback is sufficient
+                        # to enable streaming for downstream tools.
 
                     run_callable = functools.partial(
                         self.tooluniverse.run_one_function,

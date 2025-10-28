@@ -183,7 +183,15 @@ class BaseTool:
         try:
             import jsonschema
 
-            jsonschema.validate(arguments, schema)
+            # Filter out internal control parameters before validation
+            # Only filter known internal parameters, not all underscore-prefixed params
+            # to allow optional streaming parameter _tooluniverse_stream
+            internal_params = {"ctx", "_tooluniverse_stream"}
+            filtered_arguments = {
+                k: v for k, v in arguments.items() if k not in internal_params
+            }
+
+            jsonschema.validate(filtered_arguments, schema)
             return None
         except jsonschema.ValidationError as e:
             return ToolValidationError(

@@ -206,20 +206,15 @@ class BasePythonExecutor:
         raise TimeoutError("Code execution timed out")
 
     def _execute_with_timeout(self, func, timeout_seconds: int, *args, **kwargs):
-        """Execute function with timeout using signal (Unix only)."""
-        if hasattr(signal, "SIGALRM"):  # Unix systems
-            old_handler = signal.signal(signal.SIGALRM, self._handle_timeout)
-            signal.alarm(timeout_seconds)
-            try:
-                result = func(*args, **kwargs)
-                return result
-            finally:
-                signal.alarm(0)
-                signal.signal(signal.SIGALRM, old_handler)
-        else:  # Windows or other systems
-            # Fallback to threading timeout (simpler but less reliable)
-            import threading
+        """Execute function with timeout using signal or threading."""
+        import threading
 
+        # Check if we're in the main thread
+        is_main_thread = threading.current_thread() is threading.main_thread()
+
+        # Use threading timeout if not in main thread or on Windows
+        if not is_main_thread or not hasattr(signal, "SIGALRM"):
+            # Use threading timeout (works in all threads)
             result_container = [None]
             exception_container = [None]
 
@@ -241,6 +236,41 @@ class BasePythonExecutor:
                 raise exception_container[0]
 
             return result_container[0]
+
+        # Use signal timeout only in main thread on Unix systems
+        else:
+            try:
+                old_handler = signal.signal(signal.SIGALRM, self._handle_timeout)
+                signal.alarm(timeout_seconds)
+                try:
+                    result = func(*args, **kwargs)
+                    return result
+                finally:
+                    signal.alarm(0)
+                    signal.signal(signal.SIGALRM, old_handler)
+            except (ValueError, AttributeError):
+                # Fallback to threading if signal fails for any reason
+                result_container = [None]
+                exception_container = [None]
+
+                def target():
+                    try:
+                        result_container[0] = func(*args, **kwargs)
+                    except Exception as e:
+                        exception_container[0] = e
+
+                thread = threading.Thread(target=target)
+                thread.daemon = True
+                thread.start()
+                thread.join(timeout_seconds)
+
+                if thread.is_alive():
+                    raise TimeoutError("Code execution timed out")
+
+                if exception_container[0]:
+                    raise exception_container[0]
+
+                return result_container[0]
 
     def _format_error_response(
         self,

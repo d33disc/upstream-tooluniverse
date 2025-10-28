@@ -20,6 +20,14 @@ tu = ToolUniverse()
 tu.load_tools()
 print("✅ ToolUniverse loaded successfully\n")
 
+result1 = tu.run({
+    "name": "UniProt_get_entry_by_accession",
+    "arguments": {
+        "accession": "Q6ZNX1",
+    }
+})
+print(result1)
+exit()
 # =============================================================================
 # PART 1: Search Functionality (NEW)
 # =============================================================================
