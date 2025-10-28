@@ -2493,6 +2493,7 @@ class ToolUniverse:
                 if "." not in value:
                     return int(value)
             except (ValueError, TypeError):
+                # If coercion fails, return the original value as per function design
                 pass
         elif expected_type == "number":
             try:
