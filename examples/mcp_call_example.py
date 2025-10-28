@@ -2,7 +2,6 @@
 """MCP call example - demonstrates type coercion"""
 
 import asyncio
-import json
 import sys
 from pathlib import Path
 
