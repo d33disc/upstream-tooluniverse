@@ -1,7 +1,7 @@
 import time
 import requests
-from typing import Any, Dict
-from .base_tool import BaseTool
+from typing import Any, Dict, Optional
+from .base_tool import BaseTool, ToolError
 from .tool_registry import register_tool
 
 
@@ -12,6 +12,21 @@ class UniProtRESTTool(BaseTool):
         self.endpoint = tool_config["fields"]["endpoint"]
         self.extract_path = tool_config["fields"].get("extract_path")
         self.timeout = 15  # Increase timeout for large entries
+
+    def validate_parameters(self, arguments: Dict[str, Any]) -> Optional[ToolError]:
+        """
+        Validate parameters with automatic type coercion for limit.
+        """
+        # Coerce limit to integer if passed as string
+        if "limit" in arguments and isinstance(arguments["limit"], str):
+            try:
+                arguments["limit"] = int(arguments["limit"])
+            except (ValueError, TypeError):
+                # Let schema validation handle the error
+                pass
+
+        # Call parent validation
+        return super().validate_parameters(arguments)
 
     def _build_url(self, args: Dict[str, Any]) -> str:
         url = self.endpoint
@@ -107,8 +122,19 @@ class UniProtRESTTool(BaseTool):
         """Handle search queries with flexible parameters"""
         query = arguments.get("query", "")
         organism = arguments.get("organism", "")
-        limit = min(arguments.get("limit", 25), 500)
         fields = arguments.get("fields")
+        min_length = arguments.get("min_length")
+        max_length = arguments.get("max_length")
+
+        # Coerce limit to integer if passed as string
+        limit_value = arguments.get("limit", 25)
+        if isinstance(limit_value, str):
+            limit_value = int(limit_value)
+        limit = min(limit_value, 500)
+
+        # Normalize query: replace 'organism:' with 'organism_id:'
+        # for UniProt API compatibility
+        query = query.replace("organism:", "organism_id:")
 
         # Build query string
         query_parts = [query]
@@ -121,7 +147,18 @@ class UniProtRESTTool(BaseTool):
                 "yeast": "559292",
             }
             taxon_id = organism_map.get(organism.lower(), organism)
-            query_parts.append(f"organism_id:{taxon_id}")
+
+            # Check if query already includes organism_id filter
+            # to avoid duplication
+            if "organism_id:" not in query.lower():
+                query_parts.append(f"organism_id:{taxon_id}")
+            # If it does, skip adding the organism filter
+
+        # Auto-convert length parameters to range syntax
+        if min_length or max_length:
+            min_val = min_length if min_length else "*"
+            max_val = max_length if max_length else "*"
+            query_parts.append(f"length:[{min_val} TO {max_val}]")
 
         full_query = " AND ".join(query_parts)
 
@@ -141,6 +178,16 @@ class UniProtRESTTool(BaseTool):
 
             # Extract results
             results = data.get("results", [])
+
+            # If custom fields requested, return raw API response for flexibility
+            if fields and isinstance(fields, list):
+                return {
+                    "total_results": data.get("resultsFound", 0),
+                    "returned": len(results),
+                    "results": results,  # Return raw results when custom fields used
+                }
+
+            # Otherwise, use formatted extraction logic
             formatted_results = []
 
             for entry in results:

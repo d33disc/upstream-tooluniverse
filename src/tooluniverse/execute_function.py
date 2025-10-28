@@ -354,6 +354,12 @@ class ToolUniverse:
             "TOOLUNIVERSE_STRICT_VALIDATION", "false"
         ).lower() in ("true", "1", "yes")
 
+        # Initialize lenient type coercion feature
+        # Default: True for better user experience
+        self.lenient_type_coercion = os.getenv(
+            "TOOLUNIVERSE_COERCE_TYPES", "true"
+        ).lower() in ("true", "1", "yes")
+
         # Initialize dynamic tools namespace
         self.tools = ToolNamespace(self)
 
@@ -2113,21 +2119,28 @@ class ToolUniverse:
                     )
                     return cached_value
 
+            # Coerce types if lenient coercion is enabled
+            if self.lenient_type_coercion:
+                arguments = self._coerce_arguments_to_schema(function_name, arguments)
+                # Update the original dict so coerced arguments are used
+                function_call_json["arguments"] = arguments
+
             # Validate parameters if requested
             if validate:
                 validation_error = self._validate_parameters(function_name, arguments)
                 if validation_error:
                     return self._create_dual_format_error(validation_error)
-
-            # Check function call format (existing validation)
-            check_status, check_message = self.check_function_call(function_call_json)
-            if check_status is False:
-                error_msg = "Invalid function call: " + check_message
-                return self._create_dual_format_error(
-                    ToolValidationError(
-                        error_msg, details={"check_message": check_message}
+            else:
+                # When validate=False, perform lightweight checks:
+                # 1. Verify tool exists in all_tool_dict
+                # 2. No parameter validation (for performance)
+                if function_name not in self.all_tool_dict:
+                    return self._create_dual_format_error(
+                        ToolValidationError(
+                            f"Tool '{function_name}' not found",
+                            details={"tool_name": function_name},
+                        )
                     )
-                )
 
             # Execute the tool
             tool_arguments = arguments
@@ -2420,6 +2433,123 @@ class ToolUniverse:
             {"name": function_name, "args": arguments}, sort_keys=True
         )
         return hashlib.md5(serialized.encode()).hexdigest()
+
+    def _coerce_value_to_type(self, value: Any, schema: dict) -> Any:
+        """
+        Coerce a value to match the schema's expected type.
+
+        This function attempts to convert string values to integers, floats,
+        or booleans when the schema expects those types. This makes the
+        system more lenient with user input from LLMs that provide numeric
+        values as strings.
+
+        Args:
+            value: The value to coerce
+            schema: The JSON schema definition for this value
+
+        Returns:
+            The coerced value (or original if coercion fails or not applicable)
+        """
+        # Only coerce string values
+        if not isinstance(value, str):
+            return value
+
+        # Handle anyOf/oneOf schemas by recursively trying each option
+        if "anyOf" in schema:
+            for option in schema["anyOf"]:
+                coerced = self._coerce_value_to_type(value, option)
+                if coerced is not value:  # Coercion succeeded
+                    return coerced
+            return value
+
+        if "oneOf" in schema:
+            for option in schema["oneOf"]:
+                coerced = self._coerce_value_to_type(value, option)
+                if coerced is not value:  # Coercion succeeded
+                    return coerced
+            return value
+
+        # Handle array types
+        if schema.get("type") == "array" and "items" in schema:
+            if isinstance(value, list):
+                # Recursively coerce array items
+                items_schema = schema["items"]
+                return [
+                    self._coerce_value_to_type(item, items_schema) for item in value
+                ]
+            return value
+
+        # Get the expected type
+        expected_type = schema.get("type")
+
+        # Don't coerce if schema expects string type
+        if expected_type == "string":
+            return value
+
+        # Try to coerce based on expected type
+        if expected_type == "integer":
+            try:
+                # Only parse as int if it represents an integer (not a float)
+                if "." not in value:
+                    return int(value)
+            except (ValueError, TypeError):
+                # If coercion fails, return the original value as per function design
+                pass
+        elif expected_type == "number":
+            try:
+                return float(value)
+            except (ValueError, TypeError):
+                pass
+        elif expected_type == "boolean":
+            # Handle common boolean string representations
+            lower_value = value.lower().strip()
+            if lower_value in ("true", "1", "yes", "on"):
+                return True
+            elif lower_value in ("false", "0", "no", "off"):
+                return False
+
+        return value
+
+    def _coerce_arguments_to_schema(self, function_name: str, arguments: dict) -> dict:
+        """
+        Coerce all arguments for a tool to match their schema expectations.
+
+        Args:
+            function_name: Name of the tool
+            arguments: Dictionary of arguments to coerce
+
+        Returns:
+            New dictionary with coerced arguments
+        """
+        if function_name not in self.all_tool_dict:
+            return arguments
+
+        tool_config = self.all_tool_dict[function_name]
+        parameter_schema = tool_config.get("parameter", {})
+        properties = parameter_schema.get("properties", {})
+
+        if not properties:
+            return arguments
+
+        coerced_args = {}
+        for param_name, param_value in arguments.items():
+            if param_name in properties:
+                param_schema = properties[param_name]
+                coerced_value = self._coerce_value_to_type(param_value, param_schema)
+
+                # Log when coercion occurs
+                if coerced_value != param_value:
+                    self.logger.debug(
+                        f"Coerced parameter '{param_name}' from "
+                        f"{param_value!r} ({type(param_value).__name__}) "
+                        f"to {coerced_value!r} ({type(coerced_value).__name__})"
+                    )
+
+                coerced_args[param_name] = coerced_value
+            else:
+                coerced_args[param_name] = param_value
+
+        return coerced_args
 
     def _validate_parameters(
         self, function_name: str, arguments: dict

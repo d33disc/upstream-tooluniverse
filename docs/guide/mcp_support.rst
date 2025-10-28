@@ -174,28 +174,7 @@ JavaScript MCP client (conceptual) against HTTP server:
  }
   run();
 
-Streaming Output
-----------------
 
-All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` flag. When set to
-``true``, compatible tools send incremental text chunks as MCP log notifications while
-still returning the final result payload at completion. Example request payload:
-
-.. code-block:: json
-
-   {
-     "method": "tools/call",
-     "params": {
-       "name": "AgenticTool_example",
-       "arguments": {
-         "question": "Summarise recent literature",
-         "_tooluniverse_stream": true
-       }
-     }
-   }
-
-Make sure your client surfaces ``notifications/log`` (FastMCP ``ctx.info``) messages to
-display the streamed output.
 
 Claude Desktop stdio registration (example):
 

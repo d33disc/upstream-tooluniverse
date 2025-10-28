@@ -441,19 +441,7 @@ class TestToolUniverseExamplesValidation:
         assert "mcpServers" in claude_config
         assert "tooluniverse" in claude_config["mcpServers"]
         assert claude_config["mcpServers"]["tooluniverse"]["command"] == "tooluniverse-smcp-stdio"
-        
-        # Snippet 2: ChatGPT API function calling
-        function_call = {
-            "name": "UniProt_get_entry_by_accession",
-            "arguments": {
-                "accession": "P05067"
-            }
-        }
-        
-        # Validate function call structure
-        assert "name" in function_call
-        assert "arguments" in function_call
-        assert function_call["name"] == "UniProt_get_entry_by_accession"
+
 
     def test_examples_execution_validation(self):
         """Test that example files can be executed without syntax errors."""
