@@ -1421,20 +1421,30 @@ class ToolUniverse:
             all_tools.extend(tools_in_category)
             all_tool_names.update([tool["name"] for tool in tools_in_category])
 
-        # Also include remote tools
+        # Also include remote tools from package data and user overrides
+        def _include_remote_dir(base_dir):
+            if not os.path.isdir(base_dir):
+                return
+            for fname in os.listdir(base_dir):
+                if not fname.lower().endswith(".json"):
+                    continue
+                fpath = os.path.join(base_dir, fname)
+                remote_tools = self._read_tools_from_file(fpath)
+                if remote_tools:
+                    all_tools.extend(remote_tools)
+                    all_tool_names.update([tool["name"] for tool in remote_tools])
+
         try:
             remote_dir = os.path.join(current_dir, "data", "remote_tools")
-            if os.path.isdir(remote_dir):
-                for fname in os.listdir(remote_dir):
-                    if not fname.lower().endswith(".json"):
-                        continue
-                    fpath = os.path.join(remote_dir, fname)
-                    remote_tools = self._read_tools_from_file(fpath)
-                    if remote_tools:
-                        all_tools.extend(remote_tools)
-                        all_tool_names.update([tool["name"] for tool in remote_tools])
+            _include_remote_dir(remote_dir)
         except Exception as e:
             warning(f"Warning: Failed to scan remote tools directory: {e}")
+
+        try:
+            user_remote_dir = os.path.join(str(Path.home()), ".tooluniverse", "remote_tools")
+            _include_remote_dir(user_remote_dir)
+        except Exception as e:
+            warning(f"Warning: Failed to scan user remote tools directory: {e}")
 
         return all_tools, all_tool_names
 
@@ -1462,6 +1472,13 @@ class ToolUniverse:
             for file in files:
                 if file.lower().endswith(".json"):
                     json_files.append(os.path.join(root, file))
+
+        # Include user-level remote tool configurations
+        user_remote_dir = os.path.join(str(Path.home()), ".tooluniverse", "remote_tools")
+        if os.path.isdir(user_remote_dir):
+            for file in os.listdir(user_remote_dir):
+                if file.lower().endswith(".json"):
+                    json_files.append(os.path.join(user_remote_dir, file))
 
         self.logger.debug(f"Found {len(json_files)} JSON files to scan")
 

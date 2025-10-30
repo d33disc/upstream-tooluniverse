@@ -458,6 +458,8 @@ from .GO_get_term_details import GO_get_term_details
 from .GO_search_terms import GO_search_terms
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
 from .HAL_search_archive import HAL_search_archive
+from .HarvestAutoRegistrar import HarvestAutoRegistrar
+from .DockerLLMProvisioner import DockerLLMProvisioner
 from .HPA_get_biological_processes_by_gene import HPA_get_biological_processes_by_gene
 from .HPA_get_cancer_prognostics_by_gene import HPA_get_cancer_prognostics_by_gene
 from .HPA_get_comparative_expression_by_gene_and_cellline import (
@@ -1127,6 +1129,7 @@ __all__ = [
     "Crossref_search_works",
     "DBLP_search_publications",
     "DOAJ_search_articles",
+    "DockerLLMProvisioner",
     "DailyMed_get_spl_by_setid",
     "DailyMed_search_spls",
     "DataAnalysisValidityReviewer",
@@ -1323,6 +1326,7 @@ __all__ = [
     "GO_search_terms",
     "GWAS_search_associations_by_gene",
     "HAL_search_archive",
+    "HarvestAutoRegistrar",
     "HPA_get_biological_processes_by_gene",
     "HPA_get_cancer_prognostics_by_gene",
     "HPA_get_comparative_expression_by_gene_and_cellline",
