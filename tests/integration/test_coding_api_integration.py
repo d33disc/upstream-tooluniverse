@@ -13,8 +13,11 @@ import shutil
 from pathlib import Path
 import pytest
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+# Add repository src/ directory to path so we import the checked-in package
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = REPO_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 from tooluniverse import ToolUniverse  # noqa: E402
 from tooluniverse.generate_tools import main as generate_tools  # noqa: E402
