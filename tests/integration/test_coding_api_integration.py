@@ -20,9 +20,13 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 # Ensure we import the repo copy even if another version is already loaded
-for module_name in list(sys.modules.keys()):
-    if module_name == "tooluniverse" or module_name.startswith("tooluniverse."):
-        del sys.modules[module_name]
+package = sys.modules.get("tooluniverse")
+if package is not None:
+    module_path = Path(getattr(package, "__file__", "")).resolve()
+    if SRC_DIR not in module_path.parents:
+        for module_name in list(sys.modules.keys()):
+            if module_name == "tooluniverse" or module_name.startswith("tooluniverse."):
+                del sys.modules[module_name]
 
 from tooluniverse import ToolUniverse  # noqa: E402
 from tooluniverse.generate_tools import main as generate_tools  # noqa: E402
