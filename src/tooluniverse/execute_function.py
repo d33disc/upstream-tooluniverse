@@ -1404,8 +1404,12 @@ class ToolUniverse:
             # Validate tools have required fields
             valid_tools = []
             for tool in tools_in_file:
+                # Validate that tool is a dict, has "name" field, and name is a string
                 if isinstance(tool, dict) and "name" in tool:
-                    valid_tools.append(tool)
+                    name_value = tool["name"]
+                    # Ensure name is a string (not a dict/object) - this filters out schema files
+                    if isinstance(name_value, str):
+                        valid_tools.append(tool)
 
             return valid_tools
 
@@ -1428,7 +1432,13 @@ class ToolUniverse:
         for _category, file_path in self.tool_files.items():
             tools_in_category = self._read_tools_from_file(file_path)
             all_tools.extend(tools_in_category)
-            all_tool_names.update([tool["name"] for tool in tools_in_category])
+            # Only add string names to the set (filter out any non-string names as extra safety)
+            tool_names = [
+                tool["name"]
+                for tool in tools_in_category
+                if isinstance(tool.get("name"), str)
+            ]
+            all_tool_names.update(tool_names)
 
         # Also include remote tools
         try:
@@ -1441,7 +1451,13 @@ class ToolUniverse:
                     remote_tools = self._read_tools_from_file(fpath)
                     if remote_tools:
                         all_tools.extend(remote_tools)
-                        all_tool_names.update([tool["name"] for tool in remote_tools])
+                        # Only add string names to the set (filter out any non-string names as extra safety)
+                        tool_names = [
+                            tool["name"]
+                            for tool in remote_tools
+                            if isinstance(tool.get("name"), str)
+                        ]
+                        all_tool_names.update(tool_names)
         except Exception as e:
             warning(f"Warning: Failed to scan remote tools directory: {e}")
 
@@ -1465,11 +1481,17 @@ class ToolUniverse:
             warning(f"Warning: Data directory not found: {data_dir}")
             return all_tools, all_tool_names
 
-        # Recursively find all JSON files
+        # Recursively find all JSON files, excluding schema files
         json_files = []
         for root, _dirs, files in os.walk(data_dir):
+            # Skip schemas directory (contains JSON schema definition files, not tool configs)
+            if "schemas" in root:
+                continue
             for file in files:
                 if file.lower().endswith(".json"):
+                    # Skip files with "schema" in the name
+                    if "schema" in file.lower():
+                        continue
                     json_files.append(os.path.join(root, file))
 
         self.logger.debug(f"Found {len(json_files)} JSON files to scan")
@@ -1479,7 +1501,13 @@ class ToolUniverse:
             tools_in_file = self._read_tools_from_file(json_file)
             if tools_in_file:
                 all_tools.extend(tools_in_file)
-                all_tool_names.update([tool["name"] for tool in tools_in_file])
+                # Only add string names to the set (filter out any non-string names as extra safety)
+                tool_names = [
+                    tool["name"]
+                    for tool in tools_in_file
+                    if isinstance(tool.get("name"), str)
+                ]
+                all_tool_names.update(tool_names)
                 self.logger.debug(f"Loaded {len(tools_in_file)} tools from {json_file}")
 
         self.logger.info(
@@ -1868,7 +1896,10 @@ class ToolUniverse:
                 continue
 
             tool_instance = self._ensure_tool_instance(job)
-            if not tool_instance or not tool_instance.supports_caching():
+            if (
+                not tool_instance
+                or not getattr(tool_instance, "supports_caching", lambda: True)()
+            ):
                 continue
 
             cache_key = tool_instance.get_cache_key(job.arguments or {})
@@ -2087,7 +2118,10 @@ class ToolUniverse:
 
         if cache_enabled:
             tool_instance = self._get_tool_instance(function_name, cache=True)
-            if tool_instance and tool_instance.supports_caching():
+            if (
+                tool_instance
+                and getattr(tool_instance, "supports_caching", lambda: True)()
+            ):
                 cache_namespace = tool_instance.get_cache_namespace()
                 cache_version = tool_instance.get_cache_version()
                 cache_key = self._make_cache_key(function_name, arguments)
@@ -2211,7 +2245,11 @@ class ToolUniverse:
                 )
 
             # Cache result if enabled
-            if cache_enabled and tool_instance and tool_instance.supports_caching():
+            if (
+                cache_enabled
+                and tool_instance
+                and getattr(tool_instance, "supports_caching", lambda: True)()
+            ):
                 if cache_key is None:
                     cache_key = self._make_cache_key(function_name, arguments)
                 if cache_namespace is None:

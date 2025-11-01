@@ -51,6 +51,8 @@ default_tool_files = {
     "fatcat": os.path.join(current_dir, "data", "fatcat_tools.json"),
     "wikidata_sparql": os.path.join(current_dir, "data", "wikidata_sparql_tools.json"),
     "agents": os.path.join(current_dir, "data", "agentic_tools.json"),
+    # Smolagents tool wrapper configs
+    "smolagents": os.path.join(current_dir, "data", "smolagent_tools.json"),
     "tool_discovery_agents": os.path.join(
         current_dir, "data", "tool_discovery_agents.json"
     ),
@@ -181,8 +183,18 @@ default_tool_files = {
     "geo": os.path.join(current_dir, "data", "geo_tools.json"),
     "dbsnp": os.path.join(current_dir, "data", "dbsnp_tools.json"),
     "gnomad": os.path.join(current_dir, "data", "gnomad_tools.json"),
+    # Newly added database tools
+    "gbif": os.path.join(current_dir, "data", "gbif_tools.json"),
+    "obis": os.path.join(current_dir, "data", "obis_tools.json"),
+    "wikipathways": os.path.join(current_dir, "data", "wikipathways_tools.json"),
+    "rnacentral": os.path.join(current_dir, "data", "rnacentral_tools.json"),
+    "encode": os.path.join(current_dir, "data", "encode_tools.json"),
+    "gtex": os.path.join(current_dir, "data", "gtex_tools.json"),
+    "mgnify": os.path.join(current_dir, "data", "mgnify_tools.json"),
+    "gdc": os.path.join(current_dir, "data", "gdc_tools.json"),
     # Ontology tools
     "ols": os.path.join(current_dir, "data", "ols_tools.json"),
+    "optimizer": os.path.join(current_dir, "data", "optimizer_tools.json"),
 }
 
 

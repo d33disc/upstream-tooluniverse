@@ -5,6 +5,7 @@ import time
 from datetime import datetime, timedelta
 from typing import Dict, Any
 from .tool_registry import register_tool
+from .base_tool import BaseTool
 
 
 @register_tool(
@@ -39,7 +40,7 @@ from .tool_registry import register_tool
         },
     },
 )
-class PyPIPackageInspector:
+class PyPIPackageInspector(BaseTool):
     """
     Extracts comprehensive package information from PyPI and GitHub.
     Provides detailed metrics on popularity, maintenance, security,
@@ -47,7 +48,7 @@ class PyPIPackageInspector:
     """
 
     def __init__(self, tool_config: Dict[str, Any] = None):
-        self.tool_config = tool_config or {}
+        BaseTool.__init__(self, tool_config or {})
         self.pypi_api_url = "https://pypi.org/pypi/{package}/json"
         self.pypistats_api_url = "https://pypistats.org/api/packages/{package}/recent"
         self.github_api_url = "https://api.github.com/repos/{owner}/{repo}"

@@ -455,7 +455,7 @@ Examples:
 
     try:
         print(f"🚀 Starting {args.name}...", file=sys.stderr)
-        print("📡 Transport: stdio (for Claude Desktop)", file=sys.stderr)
+        print("📡 Transport: stdio", file=sys.stderr)
         print(f"🔍 Search enabled: {not args.no_search}", file=sys.stderr)
 
         if args.categories is not None:

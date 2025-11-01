@@ -1,8 +1,7 @@
 """
 download_binary_file
 
-Download binary files (images, videos, executables) with chunked
-streaming for better memory management.
+Download binary files (images, videos, executables) with chunked streaming for better memory mana...
 """
 
 from typing import Any, Optional, Callable
@@ -20,16 +19,14 @@ def download_binary_file(
     validate: bool = True,
 ) -> Any:
     """
-    Download binary files (images, videos, executables) with chunked
-    streaming for better memory management.
+    Download binary files (images, videos, executables) with chunked streaming for better memory mana...
 
     Parameters
     ----------
     url : str
         HTTP or HTTPS URL to download from
     output_path : str
-        Full path where to save the binary file
-        (e.g., /tmp/image.jpg or C:/Users/Downloads/file.pdf)
+        Full path where to save the binary file (e.g., /tmp/image.jpg or C:/Users/Dow...
     chunk_size : int
         Download chunk size in bytes (default: 1MB for binary files)
     timeout : int

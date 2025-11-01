@@ -1,7 +1,7 @@
 """
 alphafold_get_annotations
 
-Retrieve AlphaFold variant annotations (e.g., missense mutations) for a given UniProt accession. ...
+Retrieve AlphaFold MUTAGEN annotations for a given UniProt accession. Returns experimental mutage...
 """
 
 from typing import Any, Optional, Callable
@@ -10,21 +10,18 @@ from ._shared_client import get_shared_client
 
 def alphafold_get_annotations(
     qualifier: str,
-    type: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve AlphaFold variant annotations (e.g., missense mutations) for a given UniProt accession. ...
+    Retrieve AlphaFold MUTAGEN annotations for a given UniProt accession. Returns experimental mutage...
 
     Parameters
     ----------
     qualifier : str
-        Protein identifier: UniProt ACCESSION (e.g., 'P69905'). Do NOT use entry name...
-    type : str
-        Annotation type (currently only 'MUTAGEN' is supported).
+        UniProt ACCESSION (e.g., 'P69905'). Must be an accession number, not an entry...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,10 +36,7 @@ def alphafold_get_annotations(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "alphafold_get_annotations",
-            "arguments": {"qualifier": qualifier, "type": type},
-        },
+        {"name": "alphafold_get_annotations", "arguments": {"qualifier": qualifier}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

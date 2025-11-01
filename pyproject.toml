@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tooluniverse"
-version = "1.0.11.2"
+version = "1.0.12"
 description = "A comprehensive collection of scientific tools for Agentic AI, offering integration with the ToolUniverse SDK and MCP Server to support advanced scientific workflows."
 authors = [
     { name = "Shanghua Gao", email = "shanghuagao@gmail.com" }
@@ -48,6 +48,9 @@ requires-python = ">=3.10"
 readme = "README.md"
 
 [project.optional-dependencies]
+smolagents = [
+    "smolagents>=1.22.0",
+]
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",

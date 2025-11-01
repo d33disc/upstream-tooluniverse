@@ -13,6 +13,7 @@ def ToolDiscover(
     max_iterations: Optional[int] = 2,
     save_to_file: Optional[bool] = True,
     output_file: Optional[str] = None,
+    save_dir: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -31,6 +32,8 @@ def ToolDiscover(
         Whether to save the generated tool files
     output_file : str
         Optional file path to save the generated tool
+    save_dir : str
+        Directory path to save the generated tool files (defaults to current working ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -52,6 +55,7 @@ def ToolDiscover(
                 "max_iterations": max_iterations,
                 "save_to_file": save_to_file,
                 "output_file": output_file,
+                "save_dir": save_dir,
             },
         },
         stream_callback=stream_callback,

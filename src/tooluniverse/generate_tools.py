@@ -5,7 +5,7 @@ import os
 import shutil
 import subprocess
 from pathlib import Path
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Tuple
 
 
 def json_type_to_python(json_type: str) -> str:
@@ -18,6 +18,55 @@ def json_type_to_python(json_type: str) -> str:
         "array": "list[Any]",
         "object": "dict[str, Any]",
     }.get(json_type, "Any")
+
+
+def validate_generated_code(
+    tool_name: str, tool_config: Dict[str, Any], generated_file: Path
+) -> Tuple[bool, list]:
+    """Validate that generated code matches the tool configuration.
+
+    Args:
+        tool_name: Name of the tool
+        tool_config: Original tool configuration
+        generated_file: Path to the generated Python file
+
+    Returns:
+        Tuple of (is_valid, list_of_issues)
+    """
+    issues = []
+
+    if not generated_file.exists():
+        return False, [f"Generated file does not exist: {generated_file}"]
+
+    try:
+        content = generated_file.read_text(encoding="utf-8")
+
+        # Check that function name matches tool name
+        if f"def {tool_name}(" not in content:
+            issues.append(f"Function definition not found for {tool_name}")
+
+        # Check that all required parameters are present
+        schema = tool_config.get("parameter", {}) or {}
+        properties = schema.get("properties", {}) or {}
+        required = schema.get("required", []) or []
+
+        for param_name in required:
+            # Check if parameter appears in function signature
+            if f"{param_name}:" not in content:
+                issues.append(
+                    f"Required parameter '{param_name}' missing from function signature"
+                )
+
+        # Check that all parameters in config appear in generated code
+        for param_name in properties.keys():
+            # Parameter should appear either in signature or in kwargs
+            if f'"{param_name}"' not in content and f"{param_name}:" not in content:
+                issues.append(f"Parameter '{param_name}' missing from generated code")
+
+    except Exception as e:
+        issues.append(f"Error reading generated file: {e}")
+
+    return len(issues) == 0, issues
 
 
 def generate_tool_file(
@@ -403,11 +452,18 @@ def _format_files(paths: List[str]) -> None:
             pass
 
 
-def main(format_enabled: Optional[bool] = None) -> None:
+def main(
+    format_enabled: Optional[bool] = None,
+    force_regenerate: bool = False,
+    verbose: bool = False,
+) -> None:
     """Generate tools and format the generated files if enabled.
 
-    If format_enabled is None, decide based on TOOLUNIVERSE_SKIP_FORMAT env var
-    (skip when set to "1").
+    Args:
+        format_enabled: If None, decide based on TOOLUNIVERSE_SKIP_FORMAT env var
+                       (skip when set to "1").
+        force_regenerate: If True, regenerate all tools regardless of changes
+        verbose: If True, print detailed change information
     """
     from tooluniverse import ToolUniverse
     from .build_optimizer import cleanup_orphaned_files, get_changed_tools
@@ -428,23 +484,64 @@ def main(format_enabled: Optional[bool] = None) -> None:
 
     # Check for changes
     metadata_file = output / ".tool_metadata.json"
-    new_tools, changed_tools, unchanged_tools = get_changed_tools(
-        tu.all_tool_dict, metadata_file
+    # Allow override via environment variable or function parameter
+    force_regenerate = force_regenerate or (
+        os.getenv("TOOLUNIVERSE_FORCE_REGENERATE") == "1"
+    )
+    verbose = verbose or (os.getenv("TOOLUNIVERSE_VERBOSE") == "1")
+
+    new_tools, changed_tools, unchanged_tools, change_details = get_changed_tools(
+        tu.all_tool_dict,
+        metadata_file,
+        force_regenerate=force_regenerate,
+        verbose=verbose,
     )
 
     generated_paths: List[str] = []
 
     # Generate only changed tools if there are changes
     if new_tools or changed_tools:
-        print(f"🔄 Generating {len(new_tools + changed_tools)} changed tools...")
+        total_changed = len(new_tools + changed_tools)
+        print(f"🔄 Generating {total_changed} changed tools...")
+        if new_tools:
+            print(f"  ✨ {len(new_tools)} new tools")
+        if changed_tools:
+            print(f"  🔄 {len(changed_tools)} modified tools")
+            if (
+                verbose and len(changed_tools) <= 20
+            ):  # Only show details for reasonable number
+                for tool_name in changed_tools[:20]:
+                    print(f"    - {tool_name}")
+                if len(changed_tools) > 20:
+                    print(f"    ... and {len(changed_tools) - 20} more")
+
+        validation_errors = []
         for i, (tool_name, tool_config) in enumerate(tu.all_tool_dict.items(), 1):
             if tool_name in new_tools or tool_name in changed_tools:
                 path = generate_tool_file(tool_name, tool_config, output)
                 generated_paths.append(str(path))
+
+                # Validate generated code matches configuration
+                is_valid, issues = validate_generated_code(tool_name, tool_config, path)
+                if not is_valid:
+                    validation_errors.extend([(tool_name, issue) for issue in issues])
+                    if verbose:
+                        print(f"  ⚠️  Validation issues for {tool_name}:")
+                        for issue in issues:
+                            print(f"      - {issue}")
+
             if i % 50 == 0:
-                print(f"  Processed {i} tools...")
+                print(f"  Processed {i}/{len(tu.all_tool_dict)} tools...")
+
+        if validation_errors:
+            print(f"\n⚠️  Found {len(validation_errors)} validation issue(s):")
+            for tool_name, issue in validation_errors[:10]:  # Show first 10
+                print(f"  - {tool_name}: {issue}")
+            if len(validation_errors) > 10:
+                print(f"  ... and {len(validation_errors) - 10} more issues")
     else:
         print("✨ No changes detected, skipping tool generation")
+        print(f"  📊 Status: {len(unchanged_tools)} tools unchanged")
 
     # Always regenerate __init__.py to include all tools
     init_path = generate_init(list(tu.all_tool_dict.keys()), output)
@@ -477,5 +574,20 @@ if __name__ == "__main__":
         action="store_true",
         help="Do not run formatters on generated files",
     )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force regeneration of all tools regardless of changes",
+    )
+    parser.add_argument(
+        "--verbose",
+        "-v",
+        action="store_true",
+        help="Print detailed change information",
+    )
     args = parser.parse_args()
-    main(format_enabled=not args.no_format)
+    main(
+        format_enabled=not args.no_format,
+        force_regenerate=args.force,
+        verbose=args.verbose,
+    )

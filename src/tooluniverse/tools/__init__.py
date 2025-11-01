@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 713 scientific tools.
+Type-safe Python interface to 734 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -42,6 +42,7 @@ from .AdverseEventPredictionQuestionGeneratorWithContext import (
     AdverseEventPredictionQuestionGeneratorWithContext,
 )
 from .ArXiv_search_papers import ArXiv_search_papers
+from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
 from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
 from .BioRxiv_search_preprints import BioRxiv_search_preprints
@@ -68,6 +69,8 @@ from .DrugInteractionAnalyzerAgent import DrugInteractionAnalyzerAgent
 from .DrugOptimizationAgent import DrugOptimizationAgent
 from .DrugSafetyAnalyzer import DrugSafetyAnalyzer
 from .EMDB_get_structure import EMDB_get_structure
+from .ENCODE_list_files import ENCODE_list_files
+from .ENCODE_search_experiments import ENCODE_search_experiments
 from .EthicalComplianceReviewer import EthicalComplianceReviewer
 from .EuropePMC_Guidelines_Search import EuropePMC_Guidelines_Search
 from .EuropePMC_search_articles import EuropePMC_search_articles
@@ -449,12 +452,18 @@ from .FDA_retrieve_patient_medication_info_by_drug_name import (
 )
 from .Fatcat_search_scholar import Fatcat_search_scholar
 from .Finish import Finish
+from .GBIF_search_occurrences import GBIF_search_occurrences
+from .GBIF_search_species import GBIF_search_species
+from .GDC_list_files import GDC_list_files
+from .GDC_search_cases import GDC_search_cases
 from .GIN_Guidelines_Search import GIN_Guidelines_Search
 from .GO_get_annotations_for_gene import GO_get_annotations_for_gene
 from .GO_get_genes_for_term import GO_get_genes_for_term
 from .GO_get_term_by_id import GO_get_term_by_id
 from .GO_get_term_details import GO_get_term_details
 from .GO_search_terms import GO_search_terms
+from .GTEx_get_expression_summary import GTEx_get_expression_summary
+from .GTEx_query_eqtl import GTEx_query_eqtl
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
 from .GtoPdb_get_targets import GtoPdb_get_targets
 from .HAL_search_archive import HAL_search_archive
@@ -490,6 +499,8 @@ from .LabelGenerator import LabelGenerator
 from .LiteratureContextReviewer import LiteratureContextReviewer
 from .LiteratureSearchTool import LiteratureSearchTool
 from .LiteratureSynthesisAgent import LiteratureSynthesisAgent
+from .MGnify_list_analyses import MGnify_list_analyses
+from .MGnify_search_studies import MGnify_search_studies
 from .MPD_get_phenotype_data import MPD_get_phenotype_data
 from .MedRxiv_search_preprints import MedRxiv_search_preprints
 from .MedicalLiteratureReviewer import MedicalLiteratureReviewer
@@ -505,6 +516,8 @@ from .MethodologyRigorReviewer import MethodologyRigorReviewer
 from .NICE_Clinical_Guidelines_Search import NICE_Clinical_Guidelines_Search
 from .NICE_Guideline_Full_Text import NICE_Guideline_Full_Text
 from .NoveltySignificanceReviewer import NoveltySignificanceReviewer
+from .OBIS_search_occurrences import OBIS_search_occurrences
+from .OBIS_search_taxa import OBIS_search_taxa
 from .OSF_search_preprints import OSF_search_preprints
 from .OSL_get_efo_id_by_disease_name import OSL_get_efo_id_by_disease_name
 from .OpenAIRE_search_publications import OpenAIRE_search_publications
@@ -698,6 +711,8 @@ from .PubTator3_EntityAutocomplete import PubTator3_EntityAutocomplete
 from .PubTator3_LiteratureSearch import PubTator3_LiteratureSearch
 from .PyPIPackageInspector import PyPIPackageInspector
 from .QuestionRephraser import QuestionRephraser
+from .RNAcentral_get_by_accession import RNAcentral_get_by_accession
+from .RNAcentral_search import RNAcentral_search
 from .ReMap_get_transcription_factor_binding import (
     ReMap_get_transcription_factor_binding,
 )
@@ -710,8 +725,10 @@ from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
 from .ScientificTextSummarizer import ScientificTextSummarizer
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
+from .TestCaseGenerator import TestCaseGenerator
 from .TestResultsAnalyzer import TestResultsAnalyzer
 from .ToolCompatibilityAnalyzer import ToolCompatibilityAnalyzer
+from .ToolDescriptionOptimizer import ToolDescriptionOptimizer
 from .ToolDiscover import ToolDiscover
 from .ToolGraphComposer import ToolGraphComposer
 from .ToolGraphGenerationPipeline import ToolGraphGenerationPipeline
@@ -751,11 +768,14 @@ from .UnifiedToolGenerator import UnifiedToolGenerator
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
 from .WHO_Guideline_Full_Text import WHO_Guideline_Full_Text
 from .WHO_Guidelines_Search import WHO_Guidelines_Search
+from .WikiPathways_get_pathway import WikiPathways_get_pathway
+from .WikiPathways_search import WikiPathways_search
 from .Wikidata_SPARQL_query import Wikidata_SPARQL_query
 from .WoRMS_search_species import WoRMS_search_species
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .XMLToolOptimizer import XMLToolOptimizer
 from .Zenodo_search_records import Zenodo_search_records
+from .advanced_literature_search_agent import advanced_literature_search_agent
 from .alphafold_get_annotations import alphafold_get_annotations
 from .alphafold_get_prediction import alphafold_get_prediction
 from .alphafold_get_summary import alphafold_get_summary
@@ -1128,6 +1148,7 @@ from .ols_get_term_children import ols_get_term_children
 from .ols_get_term_info import ols_get_term_info
 from .ols_search_ontologies import ols_search_ontologies
 from .ols_search_terms import ols_search_terms
+from .open_deep_research_agent import open_deep_research_agent
 from .openalex_literature_search import openalex_literature_search
 from .python_code_executor import python_code_executor
 from .python_script_runner import python_script_runner
@@ -1157,6 +1178,7 @@ __all__ = [
     "AdverseEventPredictionQuestionGenerator",
     "AdverseEventPredictionQuestionGeneratorWithContext",
     "ArXiv_search_papers",
+    "ArgumentDescriptionOptimizer",
     "BLAST_nucleotide_search",
     "BLAST_protein_search",
     "BioRxiv_search_preprints",
@@ -1183,6 +1205,8 @@ __all__ = [
     "DrugOptimizationAgent",
     "DrugSafetyAnalyzer",
     "EMDB_get_structure",
+    "ENCODE_list_files",
+    "ENCODE_search_experiments",
     "EthicalComplianceReviewer",
     "EuropePMC_Guidelines_Search",
     "EuropePMC_search_articles",
@@ -1360,12 +1384,18 @@ __all__ = [
     "FDA_retrieve_patient_medication_info_by_drug_name",
     "Fatcat_search_scholar",
     "Finish",
+    "GBIF_search_occurrences",
+    "GBIF_search_species",
+    "GDC_list_files",
+    "GDC_search_cases",
     "GIN_Guidelines_Search",
     "GO_get_annotations_for_gene",
     "GO_get_genes_for_term",
     "GO_get_term_by_id",
     "GO_get_term_details",
     "GO_search_terms",
+    "GTEx_get_expression_summary",
+    "GTEx_query_eqtl",
     "GWAS_search_associations_by_gene",
     "GtoPdb_get_targets",
     "HAL_search_archive",
@@ -1391,6 +1421,8 @@ __all__ = [
     "LiteratureContextReviewer",
     "LiteratureSearchTool",
     "LiteratureSynthesisAgent",
+    "MGnify_list_analyses",
+    "MGnify_search_studies",
     "MPD_get_phenotype_data",
     "MedRxiv_search_preprints",
     "MedicalLiteratureReviewer",
@@ -1404,6 +1436,8 @@ __all__ = [
     "NICE_Clinical_Guidelines_Search",
     "NICE_Guideline_Full_Text",
     "NoveltySignificanceReviewer",
+    "OBIS_search_occurrences",
+    "OBIS_search_taxa",
     "OSF_search_preprints",
     "OSL_get_efo_id_by_disease_name",
     "OpenAIRE_search_publications",
@@ -1485,6 +1519,8 @@ __all__ = [
     "PubTator3_LiteratureSearch",
     "PyPIPackageInspector",
     "QuestionRephraser",
+    "RNAcentral_get_by_accession",
+    "RNAcentral_search",
     "ReMap_get_transcription_factor_binding",
     "Reactome_get_pathway_reactions",
     "ReferenceInfoAnalyzer",
@@ -1495,8 +1531,10 @@ __all__ = [
     "ScientificTextSummarizer",
     "SemanticScholar_search_papers",
     "TRIP_Database_Guidelines_Search",
+    "TestCaseGenerator",
     "TestResultsAnalyzer",
     "ToolCompatibilityAnalyzer",
+    "ToolDescriptionOptimizer",
     "ToolDiscover",
     "ToolGraphComposer",
     "ToolGraphGenerationPipeline",
@@ -1526,11 +1564,14 @@ __all__ = [
     "Unpaywall_check_oa_status",
     "WHO_Guideline_Full_Text",
     "WHO_Guidelines_Search",
+    "WikiPathways_get_pathway",
+    "WikiPathways_search",
     "Wikidata_SPARQL_query",
     "WoRMS_search_species",
     "WritingPresentationReviewer",
     "XMLToolOptimizer",
     "Zenodo_search_records",
+    "advanced_literature_search_agent",
     "alphafold_get_annotations",
     "alphafold_get_prediction",
     "alphafold_get_summary",
@@ -1845,6 +1886,7 @@ __all__ = [
     "ols_get_term_info",
     "ols_search_ontologies",
     "ols_search_terms",
+    "open_deep_research_agent",
     "openalex_literature_search",
     "python_code_executor",
     "python_script_runner",
