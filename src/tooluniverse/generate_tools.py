@@ -501,6 +501,22 @@ def main(
         verbose=verbose,
     )
 
+    # Check for missing files - tools that exist in config but not as files
+    missing_files = []
+    for tool_name in tu.all_tool_dict.keys():
+        tool_file = output / f"{tool_name}.py"
+        if not tool_file.exists():
+            if tool_name not in new_tools and tool_name not in changed_tools:
+                missing_files.append(tool_name)
+                changed_tools.append(tool_name)
+                change_details[tool_name] = ["missing_file"]
+                # Remove from unchanged_tools if present
+                if tool_name in unchanged_tools:
+                    unchanged_tools.remove(tool_name)
+
+    if missing_files:
+        print(f"🔍 Found {len(missing_files)} missing tool files - " "will regenerate")
+
     generated_paths: List[str] = []
 
     # Generate only changed tools if there are changes
