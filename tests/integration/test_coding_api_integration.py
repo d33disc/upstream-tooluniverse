@@ -10,6 +10,7 @@ import sys
 import unittest
 import tempfile
 import shutil
+import importlib
 from pathlib import Path
 import pytest
 
@@ -177,6 +178,16 @@ class TestSDKIntegration(unittest.TestCase):
         
         # Generate SDK for testing
         generate_tools()
+        
+        # Invalidate import caches to ensure newly generated modules are loaded
+        # Remove all tooluniverse.tools modules from cache
+        modules_to_remove = [
+            mod for mod in list(sys.modules.keys())
+            if mod.startswith('tooluniverse.tools')
+        ]
+        for mod in modules_to_remove:
+            del sys.modules[mod]
+        importlib.invalidate_caches()
         
         # Add to Python path
         sys.path.insert(0, self.temp_dir)

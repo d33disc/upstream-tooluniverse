@@ -80,6 +80,8 @@ def generate_tool_file(
     # Wrap long descriptions
     if len(description) > 100:
         description = description[:97] + "..."
+    # Escape backslashes in description to avoid Unicode escape errors
+    description = description.replace("\\", "\\\\")
     properties = schema.get("properties", {}) or {}
     required = schema.get("required", []) or []
 
@@ -93,6 +95,8 @@ def generate_tool_file(
     for name, prop in properties.items():
         py_type = json_type_to_python(prop.get("type", "string"))
         desc = prop.get("description", "")
+        # Escape backslashes to avoid Unicode escape errors in docstrings
+        desc = desc.replace("\\", "\\\\")
 
         if name in required:
             required_params.append(f"{name}: {py_type}")
