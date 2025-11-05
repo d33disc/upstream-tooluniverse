@@ -814,6 +814,9 @@ from .drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id import (
 from .drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id import (
     drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id,
 )
+from .drugbank_get_drug_desc_pharmacology_by_moa import (
+    drugbank_get_drug_desc_pharmacology_by_moa,
+)
 from .drugbank_get_drug_interactions_by_drug_name_or_drugbank_id import (
     drugbank_get_drug_interactions_by_drug_name_or_drugbank_id,
 )
@@ -826,12 +829,6 @@ from .drugbank_get_drug_name_and_description_by_pathway_name import (
 from .drugbank_get_drug_name_and_description_by_target_name import (
     drugbank_get_drug_name_and_description_by_target_name,
 )
-from .drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action import (
-    drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action,
-)
-from .drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id import (
-    drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id,
-)
 from .drugbank_get_drug_products_by_name_or_drugbank_id import (
     drugbank_get_drug_products_by_name_or_drugbank_id,
 )
@@ -840,6 +837,9 @@ from .drugbank_get_drug_references_by_drug_name_or_drugbank_id import (
 )
 from .drugbank_get_indications_by_drug_name_or_drugbank_id import (
     drugbank_get_indications_by_drug_name_or_drugbank_id,
+)
+from .drugbank_get_pathways_reactions_by_drug_or_id import (
+    drugbank_get_pathways_reactions_by_drug_or_id,
 )
 from .drugbank_get_pharmacology_by_drug_name_or_drugbank_id import (
     drugbank_get_pharmacology_by_drug_name_or_drugbank_id,
@@ -1602,15 +1602,15 @@ __all__ = [
     "drugbank_full_search",
     "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id",
     "drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id",
+    "drugbank_get_drug_desc_pharmacology_by_moa",
     "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
     "drugbank_get_drug_name_and_description_by_indication",
     "drugbank_get_drug_name_and_description_by_pathway_name",
     "drugbank_get_drug_name_and_description_by_target_name",
-    "drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action",
-    "drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id",
     "drugbank_get_drug_products_by_name_or_drugbank_id",
     "drugbank_get_drug_references_by_drug_name_or_drugbank_id",
     "drugbank_get_indications_by_drug_name_or_drugbank_id",
+    "drugbank_get_pathways_reactions_by_drug_or_id",
     "drugbank_get_pharmacology_by_drug_name_or_drugbank_id",
     "drugbank_get_safety_by_drug_name_or_drugbank_id",
     "drugbank_get_targets_by_drug_name_or_drugbank_id",
