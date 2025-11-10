@@ -63,3 +63,4 @@ Specialized tool collections for specific research domains:
 
 * **🏥 Clinical Guidelines** → :doc:`clinical_guidelines_tools` - Search and extract clinical practice guidelines from NICE, WHO, PubMed, and 5 other authoritative sources
 * **📖 Literature Search** → :doc:`../tutorials/literature_search_tools_tutorial` - Comprehensive literature search across PubMed, arXiv, bioRxiv, and academic databases
+* **⚙️ Space Configurations** → :doc:`toolspace` - Pre-configured tool collections for protein research, genomics, bioinformatics, structural biology, cheminformatics, disease research, drug discovery, literature search, and clinical research. Load directly from GitHub or customize for your needs.
