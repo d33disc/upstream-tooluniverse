@@ -257,21 +257,35 @@ class FDACountAdditiveReactionsTool(FDADrugAdverseEventTool):
         # Combine additional filters
         filters = []
         for k, v in arguments.items():
-            mapping_error, mapped = self._map_value(k, v)
+            # Get FDA field name(s) from search_fields mapping
+            fda_fields = self.search_fields.get(k, [k])
+            # Use the first field name for value mapping
+            fda_field = fda_fields[0] if fda_fields else k
+            
+            # Map value using FDA field name (for proper enum mapping)
+            mapping_error, mapped = self._map_value(fda_field, v)
             if mapping_error:
                 return {"error": mapping_error}
             if mapped is None:
                 continue  # Skip this field if instructed
-            filters.append(f"{k}:{mapped}")
+            
+            # Use FDA field name(s) in the query
+            for fda_field_name in fda_fields:
+                if isinstance(mapped, str) and " " in mapped:
+                    filters.append(f'{fda_field_name}:"{mapped}"')
+                else:
+                    filters.append(f"{fda_field_name}:{mapped}")
 
         filter_str = "+AND+".join(filters) if filters else ""
         search_query = f"({or_clause})" + (f"+AND+{filter_str}" if filter_str else "")
+        # URL encode the search query, preserving +, :, and " as safe characters
+        search_encoded = urllib.parse.quote(search_query, safe='+:"')
 
         # Call API
         if self.api_key:
-            url = f"{self.endpoint_url}?api_key={self.api_key}&search={search_query}&count={self.count_field}"
+            url = f"{self.endpoint_url}?api_key={self.api_key}&search={search_encoded}&count={self.count_field}"
         else:
-            url = f"{self.endpoint_url}?search={search_query}&count={self.count_field}"
+            url = f"{self.endpoint_url}?search={search_encoded}&count={self.count_field}"
 
         try:
             resp = requests.get(url)
