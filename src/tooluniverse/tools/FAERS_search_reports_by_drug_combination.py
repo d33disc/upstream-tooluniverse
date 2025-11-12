@@ -1,15 +1,17 @@
 """
-FAERS_count_additive_event_reports_by_country
+FAERS_search_reports_by_drug_combination
 
-Aggregate report counts by country of occurrence across specified medicinal products. Only medici...
+Search and retrieve detailed adverse event reports involving multiple drugs (drug interactions). ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FAERS_count_additive_event_reports_by_country(
+def FAERS_search_reports_by_drug_combination(
     medicinalproducts: list[Any],
+    limit: Optional[int] = 10,
+    skip: Optional[int] = 0,
     patientsex: Optional[str] = None,
     patientagegroup: Optional[str] = None,
     serious: Optional[str] = None,
@@ -17,14 +19,18 @@ def FAERS_count_additive_event_reports_by_country(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
-    Aggregate report counts by country of occurrence across specified medicinal products. Only medici...
+    Search and retrieve detailed adverse event reports involving multiple drugs (drug interactions). ...
 
     Parameters
     ----------
     medicinalproducts : list[Any]
-        Array of medicinal product names.
+        List of at least 2 drug names (required). Reports will include cases where al...
+    limit : int
+        Maximum number of reports to return. Must be between 1 and 100.
+    skip : int
+        Number of reports to skip for pagination. Must be non-negative.
     patientsex : str
         Optional: Filter by patient sex. Omit this parameter if you don't want to fil...
     patientagegroup : str
@@ -40,15 +46,17 @@ def FAERS_count_additive_event_reports_by_country(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "FAERS_count_additive_event_reports_by_country",
+            "name": "FAERS_search_reports_by_drug_combination",
             "arguments": {
                 "medicinalproducts": medicinalproducts,
+                "limit": limit,
+                "skip": skip,
                 "patientsex": patientsex,
                 "patientagegroup": patientagegroup,
                 "serious": serious,
@@ -60,4 +68,4 @@ def FAERS_count_additive_event_reports_by_country(
     )
 
 
-__all__ = ["FAERS_count_additive_event_reports_by_country"]
+__all__ = ["FAERS_search_reports_by_drug_combination"]

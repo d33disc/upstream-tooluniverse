@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 734 scientific tools.
+Type-safe Python interface to 740 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -104,6 +104,20 @@ from .FAERS_count_reportercountry_by_drug_event import (
     FAERS_count_reportercountry_by_drug_event,
 )
 from .FAERS_count_seriousness_by_drug_event import FAERS_count_seriousness_by_drug_event
+from .FAERS_search_adverse_event_reports import FAERS_search_adverse_event_reports
+from .FAERS_search_reports_by_drug_and_indication import (
+    FAERS_search_reports_by_drug_and_indication,
+)
+from .FAERS_search_reports_by_drug_and_outcome import (
+    FAERS_search_reports_by_drug_and_outcome,
+)
+from .FAERS_search_reports_by_drug_and_reaction import (
+    FAERS_search_reports_by_drug_and_reaction,
+)
+from .FAERS_search_reports_by_drug_combination import (
+    FAERS_search_reports_by_drug_combination,
+)
+from .FAERS_search_serious_reports_by_drug import FAERS_search_serious_reports_by_drug
 from .FDA_get_abuse_dependence_info_by_drug_name import (
     FDA_get_abuse_dependence_info_by_drug_name,
 )
@@ -1226,6 +1240,12 @@ __all__ = [
     "FAERS_count_reactions_by_drug_event",
     "FAERS_count_reportercountry_by_drug_event",
     "FAERS_count_seriousness_by_drug_event",
+    "FAERS_search_adverse_event_reports",
+    "FAERS_search_reports_by_drug_and_indication",
+    "FAERS_search_reports_by_drug_and_outcome",
+    "FAERS_search_reports_by_drug_and_reaction",
+    "FAERS_search_reports_by_drug_combination",
+    "FAERS_search_serious_reports_by_drug",
     "FDA_get_abuse_dependence_info_by_drug_name",
     "FDA_get_abuse_info_by_drug_name",
     "FDA_get_accessories_info_by_drug_name",

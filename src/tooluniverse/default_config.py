@@ -23,6 +23,9 @@ default_tool_files = {
     "fda_drug_adverse_event": os.path.join(
         current_dir, "data", "fda_drug_adverse_event_tools.json"
     ),
+    "fda_drug_adverse_event_detail": os.path.join(
+        current_dir, "data", "fda_drug_adverse_event_detail_tools.json"
+    ),
     "ChEMBL": os.path.join(current_dir, "data", "chembl_tools.json"),
     "EuropePMC": os.path.join(current_dir, "data", "europe_pmc_tools.json"),
     "semantic_scholar": os.path.join(
