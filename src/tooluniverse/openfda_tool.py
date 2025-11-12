@@ -5,6 +5,51 @@ import copy
 import re
 import os
 
+# Cache for GraphQL query to avoid repeated string operations
+_OPENTARGETS_DRUG_NAMES_QUERY = None
+_OPENTARGETS_ENDPOINT = "https://api.platform.opentargets.org/api/v4/graphql"
+
+
+def _get_drug_names_query():
+    """Get the GraphQL query for drug names (cached)"""
+    global _OPENTARGETS_DRUG_NAMES_QUERY
+    if _OPENTARGETS_DRUG_NAMES_QUERY is None:
+        _OPENTARGETS_DRUG_NAMES_QUERY = (
+            "\n      query drugNames($chemblId: String!) {\n        "
+            "drug(chemblId: $chemblId) {\n          id\n          name\n          "  # noqa: E501
+            "tradeNames\n          synonyms\n        }\n      }\n    "
+        )
+    return _OPENTARGETS_DRUG_NAMES_QUERY
+
+
+def _execute_opentargets_query(chembl_id):
+    """Directly execute OpenTargets GraphQL query (most efficient)"""
+    try:
+        from tooluniverse.graphql_tool import execute_query
+        query = _get_drug_names_query()
+        variables = {"chemblId": chembl_id}
+        return execute_query(
+            endpoint_url=_OPENTARGETS_ENDPOINT,
+            query=query,
+            variables=variables
+        )
+    except ImportError:
+        # Fallback if graphql_tool not available
+        import requests
+        query = _get_drug_names_query()
+        variables = {"chemblId": chembl_id}
+        response = requests.post(
+            _OPENTARGETS_ENDPOINT,
+            json={"query": query, "variables": variables}
+        )
+        try:
+            result = response.json()
+            if "errors" in result:
+                return None
+            return result
+        except Exception:
+            return None
+
 
 def check_keys_present(api_capabilities_dict, keys):
     for key in keys:
@@ -272,6 +317,85 @@ class FDADrugLabelTool(FDATool):
     def __init__(self, tool_config, api_key=None):
         endpoint_url = "https://api.fda.gov/drug/label.json"
         super().__init__(tool_config, endpoint_url, api_key)
+
+    def _is_chembl_id(self, value):
+        """Check if the value looks like a ChEMBL ID"""
+        if not isinstance(value, str):
+            return False
+        # Normalize to uppercase for consistent handling
+        return value.upper().startswith("CHEMBL")
+
+    def _convert_id_to_drug_name(self, chembl_id):
+        """Convert ChEMBL ID to drug name using OpenTargets API"""
+        try:
+            # Directly call GraphQL API (most efficient, no tool overhead)
+            result = _execute_opentargets_query(chembl_id)
+
+            if result and isinstance(result, dict):
+                # Extract drug name from result
+                drug = None
+                if "drug" in result:
+                    drug = result["drug"]
+                elif "data" in result and "drug" in result["data"]:
+                    drug = result["data"]["drug"]
+
+                if drug:
+                    # Prefer generic name, fallback to name, then trade names
+                    name = drug.get("name")
+                    if name:
+                        msg = (f"Converted ChEMBL ID {chembl_id} "
+                               f"to drug name: {name}")
+                        print(msg)
+                        return name
+
+                    # Try trade names as fallback
+                    trade_names = drug.get("tradeNames", [])
+                    if trade_names:
+                        msg = (f"Converted ChEMBL ID {chembl_id} "
+                               f"to trade name: {trade_names[0]}")
+                        print(msg)
+                        return trade_names[0]
+
+            msg = (f"Warning: Could not convert ChEMBL ID {chembl_id} "
+                   f"to drug name")
+            print(msg)
+            return None
+        except Exception as e:
+            msg = (f"Error converting ChEMBL ID {chembl_id} "
+                   f"to drug name: {e}")
+            print(msg)
+            return None
+
+    def run(self, arguments):
+        """Override run to support ChEMBL ID conversion"""
+        arguments = copy.deepcopy(arguments)
+
+        # Check if drug_name parameter is a ChEMBL ID
+        drug_name = arguments.get("drug_name")
+        # Only process if drug_name is a non-empty string
+        if drug_name and isinstance(drug_name, str) and drug_name.strip():
+            # Strip whitespace before checking
+            drug_name = drug_name.strip()
+            if self._is_chembl_id(drug_name):
+                # Normalize ChEMBL ID to uppercase (OpenTargets API expects uppercase)
+                chembl_id = drug_name.upper()
+                # Convert ChEMBL ID to drug name
+                converted_name = self._convert_id_to_drug_name(chembl_id)
+                if converted_name:
+                    arguments["drug_name"] = converted_name
+                else:
+                    # If conversion fails, return error
+                    error_msg = (
+                        f"Could not convert ChEMBL ID {drug_name} to drug name. "
+                        f"Please provide a drug name directly."
+                    )
+                    return {"error": error_msg}
+            else:
+                # Not a ChEMBL ID, use original value (strip whitespace)
+                arguments["drug_name"] = drug_name
+
+        # Call parent run method
+        return super().run(arguments)
 
 
 @register_tool("FDADrugLabelSearchTool")

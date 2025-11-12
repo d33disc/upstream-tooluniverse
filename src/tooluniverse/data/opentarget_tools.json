@@ -1076,6 +1076,84 @@
     "type": "OpenTarget"
   },
   {
+    "name": "OpenTargets_get_drug_names_by_chemblId",
+    "description": "Get drug generic name and brand names (trade names) based on ChEMBL ID. Returns the drug name (typically generic name), trade names (brand names), and synonyms.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "chemblId": {
+          "type": "string",
+          "description": "The ChEMBL ID of the drug."
+        }
+      },
+      "required": [
+        "chemblId"
+      ]
+    },
+    "query_schema": "\n      query drugNames($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          tradeNames\n          synonyms\n        }\n      }\n    ",
+    "return_schema": {
+      "type": "object",
+      "description": "Drug name information including generic name, trade names, and synonyms",
+      "properties": {
+        "data": {
+          "type": "object",
+          "description": "GraphQL response data",
+          "properties": {
+            "drug": {
+              "type": "object",
+              "description": "Drug information object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ChEMBL ID of the drug"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Drug name, typically the generic name or preferred name"
+                },
+                "tradeNames": {
+                  "type": "array",
+                  "description": "List of trade names (brand names) for the drug",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "synonyms": {
+                  "type": "array",
+                  "description": "List of synonyms for the drug, which may include alternative generic names and other identifiers",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "chemblId": "CHEMBL25"
+      },
+      {
+        "chemblId": "CHEMBL1200746"
+      },
+      {
+        "chemblId": "CHEMBL1201581"
+      }
+    ],
+    "label": [
+      "Drug",
+      "OpenTarget",
+      "Drug Information",
+      "Name",
+      "Generic Name",
+      "Brand Name",
+      "GraphQL"
+    ],
+    "type": "OpenTarget"
+  },
+  {
     "name": "OpenTargets_get_drug_approval_status_by_chemblId",
     "description": "Retrieve the approval status of a specific drug chemblId.",
     "parameter": {
