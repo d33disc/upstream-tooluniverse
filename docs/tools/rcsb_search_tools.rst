@@ -126,4 +126,3 @@ Navigation
 * :doc:`tools_config_index` - Back to Tools Overview
 * :doc:`../guide/loading_tools` - Loading Local Tools
 * :doc:`chembl_tools` - ChEMBL Tools (for small molecules)
-
