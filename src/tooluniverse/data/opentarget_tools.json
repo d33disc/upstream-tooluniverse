@@ -1018,7 +1018,7 @@
         "chemblId"
       ]
     },
-    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          yearOfFirstApproval\n          drugType\n          crossReferences {\n            source\n            reference\n          }\n          maximumClinicalTrialPhase\n        }\n      }\n    ",
+    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          yearOfFirstApproval\n          drugType\n          crossReferences {\n            source\n            ids\n          }\n          maximumClinicalTrialPhase\n        }\n      }\n    ",
     "label": [
       "OpenTarget",
       "Drug",
@@ -1463,7 +1463,7 @@
         "entityId"
       ]
     },
-    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        disease(efoId: $entityId) {\n          id\n          name\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n              sentences {\n                section\n                matches {\n                  mappedId\n                  matchedLabel\n                  sectionStart\n                  sectionEnd\n                  startInSentence\n                  endInSentence\n                  matchedType\n                }\n              }\n            }\n          }\n        }\n      }\n    ",
+    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        disease(efoId: $entityId) {\n          id\n          name\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n            }\n          }\n        }\n      }\n    ",
     "label": [
       "Publications",
       "Data Retrieval and Aggregation",
@@ -1510,7 +1510,7 @@
         "entityId"
       ]
     },
-    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        target(ensemblId: $entityId) {\n          id\n          approvedSymbol\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n              sentences {\n                section\n                matches {\n                  mappedId\n                  matchedLabel\n                  sectionStart\n                  sectionEnd\n                  startInSentence\n                  endInSentence\n                  matchedType\n                }\n              }\n            }\n          }\n        }\n      }\n    ",
+    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        target(ensemblId: $entityId) {\n          id\n          approvedSymbol\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n            }\n          }\n        }\n      }\n    ",
     "label": [
       "Publications",
       "Data Retrieval and Aggregation",
@@ -1557,7 +1557,7 @@
         "entityId"
       ]
     },
-    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        drug(chemblId: $entityId) {\n          id\n          name\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n              sentences {\n                section\n                matches {\n                  mappedId\n                  matchedLabel\n                  sectionStart\n                  sectionEnd\n                  startInSentence\n                  endInSentence\n                  matchedType\n                }\n              }\n            }\n          }\n        }\n      }\n    ",
+    "query_schema": "\n      query entityPublications($entityId: String!, $additionalIds: [String!], $startYear: Int, $startMonth: Int, $endYear: Int, $endMonth: Int) {\n        drug(chemblId: $entityId) {\n          id\n          name\n          literatureOcurrences(additionalIds: $additionalIds, startYear: $startYear, startMonth: $startMonth, endYear: $endYear, endMonth: $endMonth) {\n            count\n            filteredCount\n            earliestPubYear\n            rows {\n              pmid\n              pmcid\n              publicationDate\n            }\n          }\n        }\n      }\n    ",
     "label": [
       "Publications",
       "Data Retrieval and Aggregation",
