@@ -65,6 +65,24 @@ Behind the scenes, the agent uses the tools defined in
 
 ---
 
+How search methods are chosen
+-----------------------------------
+
+The public tools accept ``method="keyword"|"embedding"|"hybrid"`` (default ``"hybrid"``).
+
+* If your local EUHealth library is the **shared/official build** (embedded with
+  ``text-embedding-3-small``), then:
+  
+  - ``embedding``/``hybrid`` are **allowed** only when the caller resolves to **Azure + text-embedding-3-small**. (e.g. AZURE_OPENAI_DEPLOYMENT=text-embedding-3-small, EMBED_PROVIDER=azure)
+  - Otherwise, we **silently fall back to** ``"keyword"`` (so tools still work without errors).
+
+* If you **built the library yourself** (any provider/model), the requested method is honored
+  (no fallback).
+
+This guarantees the prebuilt library “just works” everywhere, while advanced users still get full embedding/hybrid behavior with their own builds.
+
+---
+
 Optional: quick terminal “smoke test”
 ----------------------------------------
 
@@ -212,4 +230,4 @@ If you later want the nitty-gritty (how we crawl, embed, index), see the develop
 .. note::
 
 Want to build or share your **own** searchable dataset or tool (like EUHealth)?
-See: `docs/tutorials/build_search_and_share_datastores.rst`: the 3-minute guide to creating and publishing your own ToolUniverse datastore.
+See: `docs/tutorials/make_your_data_agent_searchable.rst`: the 3-minute guide to creating and publishing your own ToolUniverse datastore.

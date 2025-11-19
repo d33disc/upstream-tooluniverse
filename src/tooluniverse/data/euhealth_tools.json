@@ -10,7 +10,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'cancer'" },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
     "required": []
     },
@@ -29,9 +47,14 @@
           "snippet": { "type": "string" }
         }
       }
-    }
+    },
+  "test_examples": [
+    { "limit": 5 },
+    { "country": "Germany" },
+    { "term_override": "oncology" }
+  ]
   },
-  
+
 
   {
     "type": "EuHealthTopicSearchTool",
@@ -44,7 +67,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'cancer registry'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -57,7 +98,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "France" },
+      { "term_override": "tumor registry" }
+    ]
   },
 
   {
@@ -71,7 +117,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'death'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -83,7 +147,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Italy" },
+      { "term_override": "mortality rates" }
+    ]
   },
 
   {
@@ -97,7 +166,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'causes of death'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -109,7 +196,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Spain" },
+      { "term_override": "cause specific mortality" }
+    ]
   },
 
   {
@@ -123,7 +215,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'births'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -135,7 +245,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Sweden" },
+      { "term_override": "fertility rate" }
+    ]
   },
 
   {
@@ -149,7 +264,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search infectious diseases'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -161,7 +294,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Germany" },
+      { "term_override": "epidemic surveillance" }
+    ]
   },
 
   {
@@ -175,7 +313,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'covid-19'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -187,7 +343,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "France" },
+      { "term_override": "vaccination coverage" }
+    ]
   },
 
   {
@@ -201,7 +362,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'healthcare expenditure'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -213,7 +392,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Italy" },
+      { "term_override": "health spending" }
+    ]
   },
 
   {
@@ -227,7 +411,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search diabetes mellitus epidemiology registry'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -239,7 +441,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Germany" },
+      { "term_override": "type 2 diabetes registry" }
+    ]
   },
 
   {
@@ -253,7 +460,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search hospital in patient data'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -265,7 +490,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Sweden" },
+      { "term_override": "hospital admissions" }
+    ]
   },
 
   {
@@ -279,7 +509,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search population health survey'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -291,7 +539,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "France" },
+      { "term_override": "health survey 2020" }
+    ]
   },
 
   {
@@ -305,7 +558,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search key indicators registries surveys'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -317,7 +588,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Italy" },
+      { "term_override": "public health indicators" }
+    ]
   },
 
   {
@@ -331,7 +607,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search surveillance mortality rates'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -343,7 +637,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Germany" },
+      { "term_override": "excess mortality" }
+    ]
   },
 
   {
@@ -357,7 +656,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search surveillance'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -369,7 +686,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Spain" },
+      { "term_override": "disease monitoring" }
+    ]
   },
 
   {
@@ -383,7 +705,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search primary care workforce'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -395,7 +735,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "France" },
+      { "term_override": "general practitioners" }
+    ]
   },
 
   {
@@ -409,7 +754,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search obesity'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -421,7 +784,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Italy" },
+      { "term_override": "BMI prevalence" }
+    ]
   },
 
   {
@@ -435,7 +803,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search vaccination'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -447,7 +833,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Germany" },
+      { "term_override": "measles immunization" }
+    ]
   },
 
   {
@@ -461,7 +852,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search mental health'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -473,7 +882,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Spain" },
+      { "term_override": "depression survey" }
+    ]
   },
 
   {
@@ -487,7 +901,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search disability'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -499,7 +931,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "France" },
+      { "term_override": "accessibility data" }
+    ]
   },
 
   {
@@ -513,7 +950,25 @@
         "limit": { "type": "integer", "default": 25, "description": "Maximum number of results to return. Default 25." },
         "country": { "type": "string", "description": "Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed." },
         "language": { "type": "string", "description": "Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed." },
-        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string." }
+        "term_override": { "type": "string", "description": "Override the default topic seed terms with a custom query string. Defaults internally to 'search alcohol/tobacco psychoactive use'." },
+        "method": {
+          "type": "string",
+          "enum": ["keyword", "embedding", "hybrid"],
+          "default": "hybrid",
+          "description": "Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend)."
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": 0.5,
+          "description": "Blend ratio used when method='hybrid' (0=text, 1=embedding)."
+        },
+        "top_k": {
+          "type": "integer",
+          "default": 25,
+          "description": "Number of candidate documents to retrieve before filtering."
+        }
       },
       "required": []
     },
@@ -525,7 +980,12 @@
         "language": { "type": "array", "items": { "type": "string" } },
         "spatial": { "type": "string" }, "snippet": { "type": "string" }
       }
-    }}
+    }},
+    "test_examples": [
+      { "limit": 5 },
+      { "country": "Italy" },
+      { "term_override": "tobacco use" }
+    ]
   },
 
   {
@@ -565,7 +1025,25 @@
         "term_override": {
           "type": "string",
           "description": "Overrides the default topic seed terms with a custom query string when using 'topic'."
-        }
+        },
+      "method": {
+        "type": "string",
+        "enum": ["keyword", "embedding", "hybrid"],
+        "default": "hybrid",
+        "description": "Search strategy used when resolving from topic (ignored if 'uuids' are given)."
+      },
+      "alpha": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "default": 0.5,
+        "description": "Blend ratio used when method='hybrid'."
+      },
+      "top_k": {
+        "type": "integer",
+        "default": 25,
+        "description": "Number of candidate documents to retrieve before filtering."
+      }
       },
       "oneOf": [
         { "required": ["uuids"] },
@@ -593,6 +1071,10 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      { "topic": "euhealthinfo_search_cancer", "limit": 2, "links_per": 2 },
+      { "topic": "euhealthinfo_search_vaccination", "limit": 1, "links_per": 1 }
+    ]
   }
 ]
