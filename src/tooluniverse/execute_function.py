@@ -2397,15 +2397,18 @@ class ToolUniverse:
                             "FDADrugLabelGetDrugGenericNameTool"
                         ],
                     )
-                elif "ToolFinderEmbedding" == tool_type:
-                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
-                elif "ComposeTool" == tool_type:
-                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
-                elif "ToolFinderLLM" == tool_type:
-                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
-                elif "ToolFinderKeyword" == tool_type:
-                    new_tool = tool_class(tool_config=tool, tooluniverse=self)
-                elif "SmolAgentTool" == tool_type:
+                elif tool_type in [
+                    "ToolFinderEmbedding",
+                    "ComposeTool",
+                    "ToolFinderLLM",
+                    "ToolFinderKeyword",
+                    "SmolAgentTool",
+                    "ListTools",
+                    "GrepTools",
+                    "GetToolInfo",
+                    "ExecuteTool",
+                ]:
+                    # Tool discovery tools need tooluniverse parameter
                     new_tool = tool_class(tool_config=tool, tooluniverse=self)
                 else:
                     new_tool = tool_class(tool_config=tool)

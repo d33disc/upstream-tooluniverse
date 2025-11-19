@@ -5677,7 +5677,7 @@ wheels = [
 
 [[package]]
 name = "tooluniverse"
-version = "1.0.12"
+version = "1.0.12.7"
 source = { editable = "." }
 dependencies = [
     { name = "aiohttp" },

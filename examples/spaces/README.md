@@ -1,33 +1,209 @@
-# Space Example Configurations
+# ToolUniverse Space Configurations
 
-This directory contains example Space configurations demonstrating different use cases and complexity levels.
+This directory contains pre-configured Space configurations for various research domains. Space allows you to easily load, share, and manage tool configurations for ToolUniverse.
 
-## Configuration Files
+## Quick Start
 
-### 1. `drug-discovery.yaml`
-**Purpose**: Essential tools for drug discovery research
-**Complexity**: Preset (intermediate)
-**Tools**: ChEMBL, Clinical Trials, OpenTargets, FDA data
-**Use Case**: Chemical compound analysis, clinical trial search, safety assessment
+All Space configurations can be loaded directly from GitHub:
 
-### 2. `literature-search.yaml`
-**Purpose**: Scientific literature search and analysis
-**Complexity**: Preset (intermediate)
-**Tools**: EuropePMC, Semantic Scholar, PubTator, arXiv, Crossref
-**Use Case**: Paper search, citation analysis, systematic reviews
+```python
+from tooluniverse import ToolUniverse
 
-### 3. `clinical-research.yaml`
-**Purpose**: Clinical research and regulatory affairs
-**Complexity**: Preset (intermediate)
-**Tools**: Clinical Trials, FDA, Monarch, EFO, HPA
-**Use Case**: Trial design, safety monitoring, regulatory submissions
+tu = ToolUniverse()
+# Load from GitHub raw URL
+config = tu.load_space("https://raw.githubusercontent.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/protein-research.yaml")
 
-### 4. `full-workspace.yaml`
-**Purpose**: Complete research environment
-**Complexity**: Workspace (advanced)
-**Tools**: 32 categories covering all major domains (449 tools)
-**Features**: LLM config, hooks, comprehensive tool coverage
-**Use Case**: End-to-end research workflows
+# Or load from local file
+config = tu.load_space("./examples/spaces/protein-research.yaml")
+```
+
+## Available Space Configurations
+
+### Drug Discovery & Pharmaceutical Research
+
+#### `drug-discovery.yaml`
+- **Description**: Essential tools for drug discovery research
+- **Tools**: ~200 tools from ChEMBL, Clinical Trials, OpenTargets, FDA, PubChem, DrugBank, ADMET AI
+- **Use Cases**: 
+  - Chemical compound analysis
+  - Clinical trial search
+  - Drug safety assessment
+  - ADMET property prediction
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/drug-discovery.yaml
+
+### Clinical Research
+
+#### `clinical-research.yaml`
+- **Description**: Comprehensive tools for clinical research and regulatory affairs
+- **Tools**: ~100 tools from Clinical Trials, FDA, Clinical Guidelines, Monarch, EFO, HPA
+- **Use Cases**:
+  - Trial design and monitoring
+  - Safety monitoring
+  - Regulatory submissions
+  - Clinical guideline access
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/clinical-research.yaml
+
+### Literature & Publications
+
+#### `literature-search.yaml`
+- **Description**: Scientific literature search and analysis tools
+- **Tools**: ~40 tools from EuropePMC, Semantic Scholar, PubTator, arXiv, Crossref, PubMed
+- **Use Cases**:
+  - Paper search and discovery
+  - Citation analysis
+  - Systematic reviews
+  - Literature annotation
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/literature-search.yaml
+
+### Protein Research
+
+#### `protein-research.yaml`
+- **Description**: Comprehensive tools for protein structure, function, and interaction research
+- **Tools**: ~60 tools from UniProt, RCSB PDB, AlphaFold, HPA, InterPro
+- **Use Cases**:
+  - Protein structure analysis
+  - Functional annotation
+  - Protein-protein interactions
+  - Domain analysis
+  - Subcellular localization
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/protein-research.yaml
+
+### Genomics
+
+#### `genomics.yaml`
+- **Description**: Comprehensive tools for genomics research
+- **Tools**: ~25 tools from GWAS, Ensembl, ClinVar, dbSNP, gnomAD, GTEx, ENCODE, GDC
+- **Use Cases**:
+  - Genome-wide association studies
+  - Variant analysis
+  - Gene expression analysis
+  - Genomic data access
+  - Clinical variant interpretation
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/genomics.yaml
+
+### Bioinformatics
+
+#### `bioinformatics.yaml`
+- **Description**: Bioinformatics analysis and pathway research tools
+- **Tools**: ~15 tools from BLAST, Gene Ontology, KEGG, Reactome, Enrichr, HumanBase, WikiPathways
+- **Use Cases**:
+  - Pathway analysis
+  - Functional annotation
+  - Enrichment analysis
+  - Sequence similarity search
+  - Protein-protein interaction analysis
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/bioinformatics.yaml
+
+### Structural Biology
+
+#### `structural-biology.yaml`
+- **Description**: Protein and molecular structure analysis tools
+- **Tools**: ~35 tools from RCSB PDB, AlphaFold, EMDB, 3D visualization
+- **Use Cases**:
+  - Protein structure analysis
+  - Structure prediction
+  - Electron microscopy data
+  - Molecular visualization
+  - Structure validation
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/structural-biology.yaml
+
+### Cheminformatics
+
+#### `cheminformatics.yaml`
+- **Description**: Chemical compound research and ADMET prediction tools
+- **Tools**: ~20 tools from PubChem, ChEMBL, ADMET AI, molecular visualization
+- **Use Cases**:
+  - Compound search and discovery
+  - ADMET property prediction
+  - Molecular similarity
+  - Chemical database queries
+  - Molecular visualization
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/cheminformatics.yaml
+
+### Disease Research
+
+#### `disease-research.yaml`
+- **Description**: Disease research and target-disease association tools
+- **Tools**: ~30 tools from OpenTargets, Monarch, disease target scoring, GWAS, HPA
+- **Use Cases**:
+  - Disease-target associations
+  - Phenotype analysis
+  - Disease scoring
+  - Genetic associations
+  - Disease ontology queries
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/disease-research.yaml
+
+### Comprehensive Workspace
+
+#### `full-workspace.yaml`
+- **Description**: Complete research environment with all major domains
+- **Tools**: 449 tools from 32 categories
+- **Features**: 
+  - LLM configuration
+  - Hooks for output processing
+  - Comprehensive tool coverage
+- **Use Cases**:
+  - End-to-end research workflows
+  - Multi-domain research
+  - AI-powered analysis
+- **GitHub**: https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/full-workspace.yaml
+
+## Usage Examples
+
+### Loading a Space from GitHub
+
+```python
+from tooluniverse import ToolUniverse
+
+tu = ToolUniverse()
+
+# Load protein research toolkit from GitHub
+config = tu.load_space(
+    "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/protein-research.yaml"
+)
+
+# Use the loaded tools
+print(f"Loaded {len(tu.all_tools)} tools from {config.get('name')}")
+```
+
+### Loading a Space from Local File
+
+```python
+from tooluniverse import ToolUniverse
+
+tu = ToolUniverse()
+
+# Load from local file
+config = tu.load_space("./examples/spaces/protein-research.yaml")
+
+# Use the loaded tools
+print(f"Loaded {len(tu.all_tools)} tools")
+```
+
+### Using with MCP Server
+
+```bash
+# Load from GitHub URL
+tooluniverse-smcp-stdio --load "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/protein-research.yaml"
+
+# Load from local file
+tooluniverse-smcp-stdio --load "./examples/spaces/protein-research.yaml"
+```
+
+## Space Selection Guide
+
+Choose a Space based on your research needs:
+
+- **Drug Discovery**: Use `drug-discovery.yaml` for pharmaceutical research
+- **Protein Research**: Use `protein-research.yaml` for protein structure and function studies
+- **Genomics**: Use `genomics.yaml` for genetic and genomic analysis
+- **Bioinformatics**: Use `bioinformatics.yaml` for pathway and functional analysis
+- **Structural Biology**: Use `structural-biology.yaml` for structure-focused research
+- **Cheminformatics**: Use `cheminformatics.yaml` for chemical compound research
+- **Disease Research**: Use `disease-research.yaml` for disease-related studies
+- **Literature**: Use `literature-search.yaml` for paper search and analysis
+- **Clinical Research**: Use `clinical-research.yaml` for clinical and regulatory work
+- **Comprehensive**: Use `full-workspace.yaml` for multi-domain research
 
 ## Tool Configuration
 
@@ -112,98 +288,6 @@ llm_config:
 
 **Use case**: Tools have specific LLM preferences, but you want a reliable fallback.
 
-### Example: Tool with Specific Config
-
-```json
-{
-  "name": "SpecializedTool",
-  "type": "AgenticTool",
-  "configs": {
-    "api_type": "GEMINI",
-    "model_id": "gemini-pro"
-  }
-}
-```
-
-**Note**: All AgenticTools use the `default` model from Space configuration.
-
-- **Default mode**: Uses Space default (CHATGPT)
-- **Fallback mode**: Uses tool's built-in default first, falls back to Space if unavailable
-
-### Space LLM Configuration Fields
-
-| Field | Type | Required | Description | Maps to AgenticTool |
-|-------|------|----------|-------------|-------------------|
-| `mode` | string | Yes | `"default"` or `"fallback"` | Environment variable |
-| `default_provider` | string | No | AgenticTool api_type values | `api_type` field |
-| `models` | object | No | Model configuration (only `default` used) | `model_id` field |
-| `temperature` | float | No | 0.0-2.0 | `temperature` field |
-
-### Supported Provider Values
-
-| Space Provider | Required API Keys |
-|-------------------|-------------------|
-| `CHATGPT` | `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` |
-| `GEMINI` | `GEMINI_API_KEY` |
-| `OPENROUTER` | `OPENROUTER_API_KEY` |
-| `VLLM` | `VLLM_SERVER_URL` |
-
-### AgenticTool Direct Configuration Fields
-
-These fields can be set directly in AgenticTool JSON configurations:
-
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `api_type` | string | `"CHATGPT"` | `"CHATGPT"`, `"GEMINI"`, `"OPENROUTER"`, `"VLLM"` |
-| `model_id` | string | `"o1-mini"` | Model identifier |
-| `temperature` | float | `0.1` | 0.0-2.0 |
-| `return_json` | boolean | `false` | Return JSON format |
-| `max_retries` | integer | `5` | Maximum retry attempts |
-| `retry_delay` | integer | `5` | Delay between retries (seconds) |
-| `return_metadata` | boolean | `true` | Include metadata in response |
-| `validate_api_key` | boolean | `true` | Validate API key on init |
-| `fallback_api_type` | string | `null` | Fallback API type |
-| `fallback_model_id` | string | `null` | Fallback model ID |
-| `use_global_fallback` | boolean | `true` | Use global fallback chain |
-| `gemini_model_id` | string | `"gemini-2.0-flash"` | Gemini-specific model |
-| `llm_task` | string | `"default"` | Task type for model selection |
-
-## Usage Examples
-
-### Loading a Preset
-```python
-from tooluniverse import ToolUniverse
-
-# Load drug discovery configuration
-tu = ToolUniverse()
-config = tu.load_space("./drug-discovery.yaml")
-
-# Use with overrides
-config = tu.load_space("./drug-discovery.yaml", 
-                          exclude_tools=["slow_tool"])
-```
-
-### Loading from File
-```python
-# Load local configuration
-config = tu.load_space("./drug-discovery.yaml")
-
-# Load from HuggingFace
-config = tu.load_space("hf:username/repo")
-```
-
-### Command Line Usage
-```bash
-# Load local file via MCP server
-tooluniverse-smcp-stdio --load "./drug-discovery.yaml"
-
-# Load from HuggingFace
-tooluniverse-smcp-stdio --load "hf:username/repo"
-
-# Load from HTTP URL
-tooluniverse-smcp-stdio --load "https://example.com/config.yaml"
-```
-
 ## Configuration Structure
 
 ### Basic Preset
@@ -255,4 +339,21 @@ hooks:
     config:
       output_dir: "./outputs"
       file_prefix: "analysis"
+```
 
+## Contributing
+
+To contribute new Space configurations:
+
+1. Create a new YAML file in `examples/spaces/`
+2. Follow the existing Space configuration format
+3. Use explicit tool lists (`include_tools`) for clarity
+4. Add a GitHub link comment at the top
+5. Update this README.md file
+
+## Support
+
+For questions or issues:
+- GitHub Issues: https://github.com/mims-harvard/ToolUniverse/issues
+- Documentation: https://zitniklab.hms.harvard.edu/ToolUniverse/
+- Website: https://aiscientist.tools

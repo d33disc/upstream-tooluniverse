@@ -1,14 +1,14 @@
 """
-drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action
+drugbank_get_pathways_reactions_by_drug_or_id
 
-Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by dr...
+Get drug pathways and metabolic reactions by drug name or DrugBank ID.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
+def drugbank_get_pathways_reactions_by_drug_or_id(
     query: str,
     case_sensitive: bool,
     exact_match: bool,
@@ -19,12 +19,12 @@ def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by dr...
+    Get drug pathways and metabolic reactions by drug name or DrugBank ID.
 
     Parameters
     ----------
     query : str
-        Query string to search for in mechanism of action descriptions
+        Drug name or Drugbank ID to search for
     case_sensitive : bool
         Select True to perform a case-sensitive search
     exact_match : bool
@@ -46,7 +46,7 @@ def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
 
     return get_shared_client().run_one_function(
         {
-            "name": "drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action",
+            "name": "drugbank_get_pathways_reactions_by_drug_or_id",
             "arguments": {
                 "query": query,
                 "case_sensitive": case_sensitive,
@@ -60,4 +60,4 @@ def drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action(
     )
 
 
-__all__ = ["drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action"]
+__all__ = ["drugbank_get_pathways_reactions_by_drug_or_id"]
