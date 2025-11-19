@@ -193,6 +193,9 @@ def search_openfda(
                 value = value.upper()  # all generic names are in uppercase
             value = value.replace(" and ", " ")  # remove 'and' in the search query
             value = value.replace(" AND ", " ")  # remove 'AND' in the search query
+            # Remove quotes to avoid query errors
+            value = value.replace('"', '')
+            value = value.replace("'", "")
             value = " ".join(value.split())
             if search_keyword_option == "AND":
                 search_query.append(f'{field}:({value.replace(" ", "+AND+")})')
@@ -963,6 +966,9 @@ class FDADrugLabelGetDrugNamesByIndicationStats(FDADrugLabelTool):
         indication_processed = indication.replace(" and ", " ")
         indication_processed = indication_processed.replace(" AND ", " ")
         indication_processed = " ".join(indication_processed.split())
+        # Remove or escape quotes to avoid query errors
+        indication_processed = indication_processed.replace('"', '')
+        indication_processed = indication_processed.replace("'", "")
         indication_query = indication_processed.replace(" ", "+")
         search_query = f'indications_and_usage:"{indication_query}"'
 
@@ -981,19 +987,30 @@ class FDADrugLabelGetDrugNamesByIndicationStats(FDADrugLabelTool):
             exist_option="OR",
         )
 
-        if generic_count_result is None or "error" in generic_count_result:
-            return generic_count_result if generic_count_result else {
-                "error": "Failed to get generic names"
-            }
+        # Handle no matches found as empty result, not error
+        if generic_count_result is None:
+            all_generic_names_data = []
+        elif "error" in generic_count_result:
+            # Check if it's a "No matches found" error
+            error_msg = str(generic_count_result.get("error", {}))
+            if "No matches found" in error_msg or "NOT_FOUND" in error_msg:
+                all_generic_names_data = []
+            else:
+                return generic_count_result
+        else:
+            all_generic_names_data = generic_count_result.get("results", [])
 
-        all_generic_names_data = generic_count_result.get("results", [])
         if not all_generic_names_data:
             return {
                 "meta": {
                     "total_generic_names": 0,
+                    "total_brand_names": 0,
                     "indication": indication
                 },
-                "results": []
+                "results": {
+                    "generic_names": [],
+                    "brand_names": []
+                }
             }
 
         # Step 2: Get all brand names using count API (only 2 API calls total)
@@ -1011,9 +1028,17 @@ class FDADrugLabelGetDrugNamesByIndicationStats(FDADrugLabelTool):
             exist_option="OR",
         )
 
-        if brand_count_result is None or "error" in brand_count_result:
-            # If brand count fails, still return generic names
+        # Handle no matches found as empty result, not error
+        if brand_count_result is None:
             brand_names_data = []
+        elif "error" in brand_count_result:
+            # Check if it's a "No matches found" error
+            error_msg = str(brand_count_result.get("error", {}))
+            if "No matches found" in error_msg or "NOT_FOUND" in error_msg:
+                brand_names_data = []
+            else:
+                # For other errors, still return generic names if available
+                brand_names_data = []
         else:
             brand_names_data = brand_count_result.get("results", [])
 
