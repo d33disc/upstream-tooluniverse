@@ -1,5 +1,3 @@
-from sentence_transformers import SentenceTransformer
-import torch
 import json
 import gc
 from .utils import get_md5
@@ -47,11 +45,30 @@ class ToolFinderEmbedding(BaseTool):
                 "exclude_tools", ["Tool_RAG", "Tool_Finder", "Finish", "CallAgent"]
             ),
         )
-        self.load_rag_model()
-        print(
-            f"Using toolfinder model: {toolfinder_model}, GPU is required for this model for fast speed..."
-        )
-        self.load_tool_desc_embedding(tooluniverse, exclude_names=self.exclude_tools)
+        self._dependencies_available = False
+        self._dependency_error = None
+
+        try:
+            self.load_rag_model()
+            print(
+                f"Using toolfinder model: {toolfinder_model}, GPU is required for this model for fast speed..."
+            )
+            self.load_tool_desc_embedding(
+                tooluniverse, exclude_names=self.exclude_tools
+            )
+            self._dependencies_available = True
+        except ImportError as e:
+            self._dependency_error = e
+            # Don't raise - allow tool to be created but mark as unavailable
+            import warnings
+
+            warnings.warn(
+                "ToolFinderEmbedding initialized without dependencies. "
+                "Install missing packages with: pip install tooluniverse[embedding] "
+                "or pip install tooluniverse[ml]",
+                UserWarning,
+                stacklevel=2,
+            )
 
     def load_rag_model(self):
         """
@@ -59,7 +76,18 @@ class ToolFinderEmbedding(BaseTool):
 
         Configures the model with appropriate sequence length and tokenizer settings
         for optimal performance in tool description encoding.
+
+        Raises:
+            ImportError: If sentence-transformers is not installed.
         """
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ImportError as e:
+            raise ImportError(
+                "ToolFinderEmbedding requires 'sentence-transformers' package. "
+                "Install it with: pip install tooluniverse[embedding] or pip install tooluniverse[ml]"
+            ) from e
+
         self.rag_model = SentenceTransformer(self.toolfinder_model)
         self.rag_model.max_seq_length = 4096
         self.rag_model.tokenizer.padding_side = "right"
@@ -112,6 +140,16 @@ class ToolFinderEmbedding(BaseTool):
         self.tool_embedding_path = (
             self.toolfinder_model.split("/")[-1] + "tool_embedding_" + md5_value + ".pt"
         )
+
+        # Lazy import torch for loading/saving embeddings
+        try:
+            import torch
+        except ImportError:
+            raise ImportError(
+                "ToolFinderEmbedding requires 'torch' package. "
+                "Install it with: pip install tooluniverse[embedding] or pip install tooluniverse[ml]"
+            ) from None
+
         try:
             self.tool_desc_embedding = torch.load(
                 self.tool_embedding_path, weights_only=False
@@ -161,13 +199,31 @@ class ToolFinderEmbedding(BaseTool):
             query (str): User query or description of desired functionality
             top_k (int, optional): Number of top tools to return. Defaults to 5.
 
-        Returns:
+        Returns
             list: List of top-k tool names ranked by relevance to the query
 
         Raises:
+            ImportError: If dependencies are not available.
             SystemExit: If tool_desc_embedding is not loaded
         """
-        torch.cuda.empty_cache()
+        if not self._dependencies_available:
+            raise ImportError(
+                "ToolFinderEmbedding requires dependencies. "
+                "Install with: pip install tooluniverse[embedding] or "
+                "pip install tooluniverse[ml]"
+            ) from self._dependency_error
+
+        # Lazy import torch (should already be imported, but for safety)
+        try:
+            import torch
+        except ImportError:
+            raise ImportError(
+                "ToolFinderEmbedding requires 'torch' package. "
+                "Install it with: pip install tooluniverse[embedding] or pip install tooluniverse[ml]"
+            ) from None
+
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         queries = [query]
         query_embeddings = self.rag_model.encode(
             queries, prompt="", normalize_embeddings=True
@@ -203,7 +259,7 @@ class ToolFinderEmbedding(BaseTool):
             return_call_result (bool, optional): If True, returns both prompts and tool names. Defaults to False.
             categories (list, optional): List of tool categories to filter by. Currently not implemented for embedding-based search.
 
-        Returns:
+        Returns
             str or tuple:
                 - If return_call_result is False: Tool prompts as a formatted string
                 - If return_call_result is True: Tuple of (tool_prompts, tool_names)
@@ -225,7 +281,9 @@ class ToolFinderEmbedding(BaseTool):
         picked_tool_names_no_special = picked_tool_names_no_special[:rag_num]
         picked_tool_names = picked_tool_names_no_special[:rag_num]
 
-        picked_tools = self.tooluniverse.get_tool_by_name(picked_tool_names)
+        picked_tools = self.tooluniverse.get_tool_specification_by_names(
+            picked_tool_names
+        )
         picked_tools_prompt = self.tooluniverse.prepare_tool_prompts(picked_tools)
         if return_call_result:
             return picked_tools_prompt, picked_tool_names

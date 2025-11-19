@@ -1,0 +1,368 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-19 13:50-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../guide/toolspace.rst:2 19d584bd1669456287c1cb68a5273206
+msgid "Space Configuration System"
+msgstr ""
+
+#: ../../guide/toolspace.rst:4 27151bf2b8fe45c28ebc9de0b800fc5b
+msgid ""
+"Space is a powerful configuration system that allows you to easily load, "
+"share, and manage tool configurations for ToolUniverse. It supports both "
+"simple presets and complex workspaces with AI integration."
+msgstr ""
+
+#: ../../guide/toolspace.rst:7 212ef185a6a74fbf84ffc6cd16a1d9e0
+msgid "Quick Start"
+msgstr ""
+
+#: ../../guide/toolspace.rst:9 06721a0278d44bc4ae36810d86ac76dc
+msgid "Load a Space configuration in just one line:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:23 ec12207a9d924978ae8720128fb86bff
+msgid "Command Line Usage"
+msgstr ""
+
+#: ../../guide/toolspace.rst:25 2e757e7125a4435e82b6e9a3c90e72be
+msgid "Use Space configurations with MCP servers:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:39 82a077f0ba374299bb0dad7514725d63
+msgid "What is Space?"
+msgstr ""
+
+#: ../../guide/toolspace.rst:41 c8def458b9724f07ad74bd682182825a
+msgid "Space is a unified system for managing tool configurations that supports:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:43 fb256058dbfa486f87845aac592a6fbf
+msgid "**Presets**: Simple tool collections for specific domains"
+msgstr ""
+
+#: ../../guide/toolspace.rst:44 aa2fcb0c849b4a9cb79aefe3285e5021
+msgid "**Workspaces**: Complete environments with tools, AI config, and workflows"
+msgstr ""
+
+#: ../../guide/toolspace.rst:45 16f6ca10650d4ebcaa108b787919aca4
+msgid "**Sharing**: Easy sharing via HuggingFace Hub, HTTP URLs, or local files"
+msgstr ""
+
+#: ../../guide/toolspace.rst:46 32720c5177ee4c62b461a1edb151db41
+msgid "**Versioning**: Support for versioned configurations"
+msgstr ""
+
+#: ../../guide/toolspace.rst:47 bdfec7de981148b4bf18bebd6befb1fd
+msgid "**Validation**: Built-in configuration validation"
+msgstr ""
+
+#: ../../guide/toolspace.rst:50 81b9300760b647e0ba6ee9eb2278eb7d
+msgid "Configuration Types"
+msgstr ""
+
+#: ../../guide/toolspace.rst:53 3403ce0d92824bdeb1025f2d74838180
+msgid "Preset (Simple)"
+msgstr ""
+
+#: ../../guide/toolspace.rst:55 5caa1e1f3631416cb8bbe5f03b31dac0
+msgid "A preset is a collection of tools with basic configuration:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:71 5dd785c531af4354b46e5a88f1cc22da
+msgid "Workspace (Advanced)"
+msgstr ""
+
+#: ../../guide/toolspace.rst:73 93191042410f49b2ae8b2c834719b709
+msgid "A workspace includes tools plus AI configuration and workflows:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:98 418adb0474e04ea889f6e82c6403bcfb
+msgid "Loading Configurations"
+msgstr ""
+
+#: ../../guide/toolspace.rst:101 c896b61da2a346ea89063b794cf710e7
+msgid "HuggingFace Hub"
+msgstr ""
+
+#: ../../guide/toolspace.rst:103 45b1bac30e52408885ff9381d75df1c0
+msgid "Load configurations from HuggingFace Hub:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:117 571c2c6de8434394bfc9c94abb62eedf
+msgid "Local Files"
+msgstr ""
+
+#: ../../guide/toolspace.rst:119 96d027f42cb549d8a4618f4ebf48dba7
+msgid "Load from local files:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:133 2ab90d1246a640638593a53ed9bd3fc6
+msgid "HTTP URLs"
+msgstr ""
+
+#: ../../guide/toolspace.rst:135 0a860fe3020c4c24bc020403b487a34b
+msgid "Load from any HTTP URL:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:142 e46c74a434c64b3da1d9238516f3c732
+msgid "Configuration Overrides"
+msgstr ""
+
+#: ../../guide/toolspace.rst:144 6280b9ec31b440c99adc44975211bc9e
+msgid "Override Space settings with parameters:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:157 6160a6e5d1b849ba9df5310a1e7dc86e
+msgid "Configuration Merging"
+msgstr ""
+
+#: ../../guide/toolspace.rst:159 792a5280888f43c88180f380bacbe58e
+msgid "Command line arguments take priority over Space configuration:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:170 72a2b8442a9240daa61426e9f13240d8
+msgid "Creating Configurations"
+msgstr ""
+
+#: ../../guide/toolspace.rst:173 dd9940c350a64abb93dfc717e4f24588
+msgid "Basic Preset"
+msgstr ""
+
+#: ../../guide/toolspace.rst:175 61fe7d7427414f1ead0cacf85f1fe123
+msgid "Create a simple preset:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:203 5b9b4b5541194f6596d0b0771f393e7a
+msgid "Advanced Workspace"
+msgstr ""
+
+#: ../../guide/toolspace.rst:205 ba9087f3a133462fb4a07531c604d548
+msgid "Create a complete workspace:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:241 04d77048965549f5ba2c62dc6fe43011
+msgid "Configuration Validation"
+msgstr ""
+
+#: ../../guide/toolspace.rst:243 143fe4dc926340ef964b3af40a9d0569
+msgid "Validate configurations before using:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:259 6db505091f2046c6b95d90c30a5032cf
+msgid "Command Line Validation"
+msgstr ""
+
+#: ../../guide/toolspace.rst:261 39da09ffb43a44bdbfdf83091f358703
+msgid "Validate from command line using Python:"
+msgstr ""
+
+#: ../../guide/toolspace.rst:273 9498c794961f47fbbc3899b198cb184c
+msgid "Configuration Schema"
+msgstr ""
+
+#: ../../guide/toolspace.rst:276 4c2a208f94224957a0c9d0498f7578f4
+msgid "Basic Fields"
+msgstr ""
+
+#: ../../guide/toolspace.rst:287 64a7b6d365944aa3b66942b587d8412d
+msgid "Tool Configuration"
+msgstr ""
+
+#: ../../guide/toolspace.rst:304 a1648b11aeca4945b50149b7258e41c2
+msgid "Prompt Templates"
+msgstr ""
+
+#: ../../guide/toolspace.rst:316 a9b7246421e44fb9b4d0ee3066618590
+msgid "LLM Configuration"
+msgstr ""
+
+#: ../../guide/toolspace.rst:328 41cf28f59ca54a3c91503c3dbd1dad8e
+msgid "Hooks Configuration"
+msgstr ""
+
+#: ../../guide/toolspace.rst:346 800ed82ecff74b1dadd435aaf8d3cd9c
+msgid "Environment Variables"
+msgstr ""
+
+#: ../../guide/toolspace.rst:356 b5e988382ede464c9408c2f70636c216
+msgid "Usage Instructions"
+msgstr ""
+
+#~ msgid "Sharing Configurations"
+#~ msgstr ""
+
+#~ msgid "Local Sharing"
+#~ msgstr ""
+
+#~ msgid "Share files directly:"
+#~ msgstr ""
+
+#~ msgid "GitHub Sharing"
+#~ msgstr ""
+
+#~ msgid "Share via GitHub:"
+#~ msgstr ""
+
+#~ msgid "HuggingFace Hub (Coming Soon)"
+#~ msgstr ""
+
+#~ msgid "Publish to HuggingFace Hub:"
+#~ msgstr ""
+
+#~ msgid "Best Practices"
+#~ msgstr ""
+
+#~ msgid "Naming"
+#~ msgstr ""
+
+#~ msgid "Use descriptive names: \"drug-discovery\", \"literature-search\""
+#~ msgstr ""
+
+#~ msgid "Include version numbers: \"v1.0.0\""
+#~ msgstr ""
+
+#~ msgid "Add meaningful descriptions"
+#~ msgstr ""
+
+#~ msgid "Tool Selection"
+#~ msgstr ""
+
+#~ msgid "Include only relevant tools"
+#~ msgstr ""
+
+#~ msgid "Exclude problematic or slow tools"
+#~ msgstr ""
+
+#~ msgid "Use tool types for broader selection"
+#~ msgstr ""
+
+#~ msgid "Prompts"
+#~ msgstr ""
+
+#~ msgid "Write clear, specific prompts"
+#~ msgstr ""
+
+#~ msgid "Use placeholders for variables: ``{variable}``"
+#~ msgstr ""
+
+#~ msgid "Include examples and context"
+#~ msgstr ""
+
+#~ msgid "Documentation"
+#~ msgstr ""
+
+#~ msgid "Add comprehensive usage instructions"
+#~ msgstr ""
+
+#~ msgid "Include example workflows"
+#~ msgstr ""
+
+#~ msgid "Document required environment variables"
+#~ msgstr ""
+
+#~ msgid "Testing"
+#~ msgstr ""
+
+#~ msgid "Test configurations before sharing"
+#~ msgstr ""
+
+#~ msgid "Validate with validation tools"
+#~ msgstr ""
+
+#~ msgid "Test with different use cases"
+#~ msgstr ""
+
+#~ msgid "Troubleshooting"
+#~ msgstr ""
+
+#~ msgid "Common Issues"
+#~ msgstr ""
+
+#~ msgid "Configuration Not Found"
+#~ msgstr ""
+
+#~ msgid "Validation Errors"
+#~ msgstr ""
+
+#~ msgid "Tool Loading Fails"
+#~ msgstr ""
+
+#~ msgid "Network Issues"
+#~ msgstr ""
+
+#~ msgid "Getting Help"
+#~ msgstr ""
+
+#~ msgid "Check the main documentation"
+#~ msgstr ""
+
+#~ msgid "Review example configurations"
+#~ msgstr ""
+
+#~ msgid "Test with simple configurations first"
+#~ msgstr ""
+
+#~ msgid "Use validation tools to debug issues"
+#~ msgstr ""
+
+#~ msgid "Check API keys and network connectivity"
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
+
+#~ msgid "Complete Workflow"
+#~ msgstr ""
+
+#~ msgid "MCP Server Integration"
+#~ msgstr ""
+
+#~ msgid "Configuration with Overrides"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This completes the Space documentation. "
+#~ "The system provides a powerful and "
+#~ "flexible way to manage tool "
+#~ "configurations, making it easy to share"
+#~ " research setups and maintain consistent"
+#~ " workflows across different projects."
+#~ msgstr ""
+
+#~ msgid "**Sharing**: Easy sharing via HuggingFace Hub, GitHub, or local files"
+#~ msgstr ""
+
+#~ msgid "Official Aliases"
+#~ msgstr ""
+
+#~ msgid "Use short names for common configurations:"
+#~ msgstr ""
+
+#~ msgid "GitHub"
+#~ msgstr ""
+
+#~ msgid "Load from GitHub repositories:"
+#~ msgstr ""
+
+#~ msgid "Validate from command line:"
+#~ msgstr ""
+

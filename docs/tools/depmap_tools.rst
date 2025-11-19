@@ -31,7 +31,7 @@ Analyzes gene-gene correlations from DepMap CRISPR knockout screening data. This
    * ``gene_b`` (string) (required)
      Second gene symbol for correlation analysis (e.g., 'MAPK1', 'MDM2'). Must use standard HUGO gene nomenclature.
 
-   * ``data_dir`` (string) (optional)
+   * ``data_dir`` (string) (required)
      Path to directory containing DepMap correlation matrices. If None, uses DEPMAP_DATA_PATH/depmap_24q2.
 
    **Example Usage:**
@@ -42,7 +42,8 @@ Analyzes gene-gene correlations from DepMap CRISPR knockout screening data. This
           "name": "compute_depmap24q2_gene_correlations",
           "arguments": {
               "gene_a": "example_value",
-              "gene_b": "example_value"
+              "gene_b": "example_value",
+              "data_dir": "example_value"
           }
       }
       result = tu.run(query)

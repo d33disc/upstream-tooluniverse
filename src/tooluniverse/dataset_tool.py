@@ -123,7 +123,7 @@ class DatasetTool(BaseTool):
                 - exact_match (bool): Whether to perform exact matching
                 - limit (int): Maximum number of results
 
-        Returns:
+        Returns
             dict: Search results with matched records and metadata
         """
         query = arguments.get("query", "")
@@ -206,7 +206,7 @@ class DatasetTool(BaseTool):
                 - value (str): Value to filter by (optional for not_empty condition)
                 - limit (int): Maximum number of results
 
-        Returns:
+        Returns
             dict: Filtered results with matched records and applied filters
         """
         field = arguments.get("field")

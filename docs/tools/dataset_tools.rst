@@ -25,19 +25,19 @@ Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk informat
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Free-text query (e.g. 'ZYPREXA', 'Olanzapine').
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Columns to search. Choose from: 'Trade Name', 'Generic/Proper Name(s)', 'Active Ingredient(s)'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Match text with exact case if true.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Field value must equal query exactly if true; otherwise substring match.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of rows to return.
 
    **Example Usage:**
@@ -47,6 +47,11 @@ Search the DICTrank dataset for drug-induced cardiotoxicity (DICT) risk informat
       query = {
           "name": "dict_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -67,19 +72,19 @@ Search the DILIrank dataset for drug-induced liver-injury (DILI) risk informatio
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Free-text query (e.g. 'acetaminophen').
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Columns to search. Choose from: 'Compound Name'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Match text with exact case if true.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Field value must equal query exactly if true; otherwise substring match.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of rows to return.
 
    **Example Usage:**
@@ -89,6 +94,11 @@ Search the DILIrank dataset for drug-induced liver-injury (DILI) risk informatio
       query = {
           "name": "dili_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -109,19 +119,19 @@ Search the DIQTA dataset for drug-induced QT-interval prolongation risk informat
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Free-text query (e.g. 'Astemizole', 'DB00637').
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Columns to search. Choose from: 'Generic/Proper Name(s)', 'DrugBank ID'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Match text with exact case if true.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Field value must equal query exactly if true; otherwise substring match.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of rows to return.
 
    **Example Usage:**
@@ -131,6 +141,11 @@ Search the DIQTA dataset for drug-induced QT-interval prolongation risk informat
       query = {
           "name": "diqt_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -151,19 +166,19 @@ Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or 
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Free-text query (e.g. 'DB00945', 'acetylsalicylic', 'Acarbosa').
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Columns to search in. Choose from: 'drugbank_id', 'name', 'synonyms'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Match text with exact case if true.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Field value must equal query exactly if true; otherwise substring match.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Max number of rows to return.
 
    **Example Usage:**
@@ -173,6 +188,11 @@ Search the cleaned DrugBank dataframe (one row per drug) by ID, common name, or 
       query = {
           "name": "drugbank_full_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -193,19 +213,19 @@ Search the cross-reference table linking DrugBank IDs to external identifiers (C
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Free-text query (e.g. 'DB00002', 'Cetuximab').
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Columns to search. Choose from: 'DrugBank ID', 'Name', 'CAS Number', 'Drug Type', 'KEGG Compound ID', 'KEGG Drug ID', 'PubChem Compound ID', 'PubChem Substance ID', 'ChEBI ID', 'PharmGKB ID', 'HET ID', 'UniProt ID', 'Wikipedia ID', 'Drugs.com Link', 'NDC ID', 'ChemSpider ID', 'BindingDB ID', 'TTD ID'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Match text with exact case if true.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Field value must equal query exactly if true; otherwise substring match.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of rows to return.
 
    **Example Usage:**
@@ -215,6 +235,11 @@ Search the cross-reference table linking DrugBank IDs to external identifiers (C
       query = {
           "name": "drugbank_links_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -235,16 +260,16 @@ Filter the DrugBank vocabulary dataset based on specific field criteria. Use sim
 
    **Parameters:**
 
-   * ``field`` (string) (optional)
+   * ``field`` (string) (required)
      The field to filter on
 
-   * ``condition`` (string) (optional)
+   * ``condition`` (string) (required)
      The type of filtering condition to apply. Filter is case-insensitive.
 
    * ``value`` (string) (optional)
      The value to filter by. Not required when condition is 'not_empty'. Examples: 'insulin' (for contains), 'DB00' (for starts_with), 'acid' (for ends_with), 'Aspirin' (for exact)
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of results to return.
 
    **Example Usage:**
@@ -254,6 +279,9 @@ Filter the DrugBank vocabulary dataset based on specific field criteria. Use sim
       query = {
           "name": "drugbank_vocab_filter",
           "arguments": {
+              "field": "example_value",
+              "condition": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -274,19 +302,19 @@ Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Search query string. Can be drug name, synonym, DrugBank ID, or any text to search for.
 
-   * ``search_fields`` (array) (optional)
+   * ``search_fields`` (array) (required)
      Fields to search in. Available fields: 'DrugBank ID', 'Accession Numbers', 'Common name', 'CAS', 'UNII', 'Synonyms', 'Standard InChI Key'.
 
-   * ``case_sensitive`` (boolean) (optional)
+   * ``case_sensitive`` (boolean) (required)
      Whether the search should be case sensitive.
 
-   * ``exact_match`` (boolean) (optional)
+   * ``exact_match`` (boolean) (required)
      Whether to perform exact matching instead of substring matching.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of results to return.
 
    **Example Usage:**
@@ -296,6 +324,11 @@ Search the DrugBank vocabulary dataset for drugs by name, ID, synonyms, or other
       query = {
           "name": "drugbank_vocab_search",
           "arguments": {
+              "query": "example_value",
+              "search_fields": ["item1", "item2"],
+              "case_sensitive": true,
+              "exact_match": true,
+              "limit": 10
           }
       }
       result = tu.run(query)

@@ -11,13 +11,8 @@ Tests actual MCP protocol functionality including:
 
 import pytest
 import asyncio
-import json
 import subprocess
-import time
-import tempfile
-import os
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, AsyncMock
 
 from tooluniverse import ToolUniverse
 from tooluniverse.smcp import SMCP
@@ -74,14 +69,6 @@ class TestMCPProtocol:
             tool_categories=["uniprot"],
             search_enabled=True
         )
-        
-        # Create a tools/list request
-        request = {
-            "jsonrpc": "2.0",
-            "id": "test-1",
-            "method": "tools/list",
-            "params": {}
-        }
         
         # Test tools/list by calling get_tools directly
         tools = await server.get_tools()
@@ -189,14 +176,6 @@ class TestMCPProtocol:
             search_enabled=True
         )
         
-        # Test invalid method
-        request = {
-            "jsonrpc": "2.0",
-            "id": "error-1",
-            "method": "invalid/method",
-            "params": {}
-        }
-        
         # Test that invalid method is handled gracefully
         # Since we removed _custom_handle_request, we'll test that the server
         # doesn't crash when given invalid input
@@ -210,89 +189,84 @@ class TestMCPProtocol:
     @pytest.mark.asyncio
     async def test_mcp_client_tool_connection(self):
         """Test MCPClientTool can connect and list tools"""
-        # Create a mock MCP server response
-        mock_response = {
-            "result": {
-                "tools": [
-                    {
-                        "name": "test_tool",
-                        "description": "A test tool",
-                        "inputSchema": {
-                            "type": "object",
-                            "properties": {
-                                "param1": {"type": "string"}
-                            }
+        # Mock the streamablehttp_client and ClientSession
+        mock_session = AsyncMock()
+        mock_session.initialize = AsyncMock()
+        mock_session.list_tools = AsyncMock(return_value={
+            "tools": [
+                {
+                    "name": "test_tool",
+                    "description": "A test tool",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "param1": {"type": "string"}
                         }
                     }
-                ]
-            }
-        }
+                }
+            ]
+        })
         
-        # Mock the MCP client
-        with patch('aiohttp.ClientSession.post') as mock_post:
-            mock_response_obj = MagicMock()
-            mock_response_obj.status = 200
-            mock_response_obj.headers = {"content-type": "application/json"}
+        mock_read_stream = AsyncMock()
+        mock_write_stream = AsyncMock()
+        
+        with patch('tooluniverse.mcp_client_tool.streamablehttp_client') as mock_client:
+            mock_client.return_value.__aenter__.return_value = (mock_read_stream, mock_write_stream, None)
             
-            async def mock_json():
-                return mock_response
-            mock_response_obj.json = mock_json
-            
-            mock_post.return_value.__aenter__.return_value = mock_response_obj
-            
-            # Create MCP client tool
-            tool_config = {
-                "name": "test_mcp_client",
-                "server_url": "http://localhost:8000",
-                "transport": "http"
-            }
-            
-            client_tool = MCPClientTool(tool_config)
-            
-            # Test listing tools
-            tools = await client_tool.list_tools()
-            assert len(tools) > 0
-            assert tools[0]["name"] == "test_tool"
+            with patch('tooluniverse.mcp_client_tool.ClientSession') as mock_session_class:
+                mock_session_class.return_value.__aenter__.return_value = mock_session
+                
+                # Create MCP client tool
+                tool_config = {
+                    "name": "test_mcp_client",
+                    "server_url": "http://localhost:8000",
+                    "transport": "http"
+                }
+                
+                client_tool = MCPClientTool(tool_config)
+                
+                # Test listing tools
+                tools = await client_tool.list_tools()
+                assert len(tools) > 0
+                assert tools[0]["name"] == "test_tool"
 
     @pytest.mark.asyncio
     async def test_mcp_client_tool_execution(self):
         """Test MCPClientTool can execute tools"""
-        # Create a mock MCP server response
-        mock_response = {
-            "result": {
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "Tool execution result"
-                    }
-                ]
-            }
-        }
+        # Mock the streamablehttp_client and ClientSession
+        mock_session = AsyncMock()
+        mock_session.initialize = AsyncMock()
+        mock_session.call_tool = AsyncMock(return_value={
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Tool execution result"
+                }
+            ]
+        })
         
-        # Mock the MCP client
-        with patch('aiohttp.ClientSession.post') as mock_post:
-            mock_response_obj = MagicMock()
-            mock_response_obj.status = 200
-            mock_response_obj.headers = {"content-type": "application/json"}
-            async def mock_json():
-                return mock_response
-            mock_response_obj.json = mock_json
+        mock_read_stream = AsyncMock()
+        mock_write_stream = AsyncMock()
+        
+        with patch('tooluniverse.mcp_client_tool.streamablehttp_client') as mock_client:
+            mock_client.return_value.__aenter__.return_value = (mock_read_stream, mock_write_stream, None)
             
-            mock_post.return_value.__aenter__.return_value = mock_response_obj
-            
-            # Create MCP client tool
-            tool_config = {
-                "name": "test_mcp_client",
-                "server_url": "http://localhost:8000",
-                "transport": "http"
-            }
-            
-            client_tool = MCPClientTool(tool_config)
-            
-            # Test tool execution
-            result = await client_tool.call_tool("test_tool", {"param1": "value1"})
-            assert "content" in result
-            assert result["content"][0]["text"] == "Tool execution result"
+            with patch('tooluniverse.mcp_client_tool.ClientSession') as mock_session_class:
+                mock_session_class.return_value.__aenter__.return_value = mock_session
+                
+                # Create MCP client tool
+                tool_config = {
+                    "name": "test_mcp_client",
+                    "server_url": "http://localhost:8000",
+                    "transport": "http"
+                }
+                
+                client_tool = MCPClientTool(tool_config)
+                
+                # Test tool execution
+                result = await client_tool.call_tool("test_tool", {"param1": "value1"})
+                assert "content" in result
+                assert result["content"][0]["text"] == "Tool execution result"
 
     def test_mcp_server_cli_commands(self):
         """Test MCP server CLI commands work"""

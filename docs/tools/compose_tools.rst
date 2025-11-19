@@ -3,7 +3,7 @@ Compose Tools
 
 **Configuration File**: ``compose_tools.json``
 **Tool Type**: Local
-**Tools Count**: 9
+**Tools Count**: 8
 
 This page contains all tools defined in the ``compose_tools.json`` configuration file.
 
@@ -28,7 +28,7 @@ Discover and validate biomarkers for a specific disease condition using literatu
    * ``disease_condition`` (string) (required)
      The disease condition to discover biomarkers for (e.g., 'breast cancer', 'Alzheimer's disease')
 
-   * ``sample_type`` (string) (optional)
+   * ``sample_type`` (string) (required)
      The type of sample to analyze (e.g., 'blood', 'tissue', 'plasma')
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Discover and validate biomarkers for a specific disease condition using literatu
       query = {
           "name": "BiomarkerDiscoveryWorkflow",
           "arguments": {
-              "disease_condition": "example_value"
+              "disease_condition": "example_value",
+              "sample_type": "example_value"
           }
       }
       result = tu.run(query)
@@ -93,10 +94,10 @@ Comprehensive drug safety analysis combining adverse event data, literature revi
    * ``drug_name`` (string) (required)
      Name of the drug to analyze
 
-   * ``patient_sex`` (string) (optional)
+   * ``patient_sex`` (string) (required)
      Filter by patient sex (optional)
 
-   * ``serious_events_only`` (boolean) (optional)
+   * ``serious_events_only`` (boolean) (required)
      Focus only on serious adverse events
 
    **Example Usage:**
@@ -106,7 +107,9 @@ Comprehensive drug safety analysis combining adverse event data, literature revi
       query = {
           "name": "DrugSafetyAnalyzer",
           "arguments": {
-              "drug_name": "example_value"
+              "drug_name": "example_value",
+              "patient_sex": "example_value",
+              "serious_events_only": true
           }
       }
       result = tu.run(query)
@@ -143,43 +146,6 @@ Comprehensive literature search and summary tool that searches multiple database
       result = tu.run(query)
 
 
-**MultiAgentLiteratureSearch** (Type: ComposeTool)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Multi-agent literature search system that uses AI agents to analyze intent, extract keywords, exe...
-
-.. dropdown:: MultiAgentLiteratureSearch tool specification
-
-   **Tool Information:**
-
-   * **Name**: ``MultiAgentLiteratureSearch``
-   * **Type**: ``ComposeTool``
-   * **Description**: Multi-agent literature search system that uses AI agents to analyze intent, extract keywords, execute parallel searches, summarize results, and check quality iteratively
-
-   **Parameters:**
-
-   * ``query`` (string) (required)
-     The research query to search for
-
-   * ``max_iterations`` (integer) (optional)
-     Maximum number of iterations (default: 3)
-
-   * ``quality_threshold`` (number) (optional)
-     Quality threshold for completion (default: 0.7)
-
-   **Example Usage:**
-
-   .. code-block:: python
-
-      query = {
-          "name": "MultiAgentLiteratureSearch",
-          "arguments": {
-              "query": "example_value"
-          }
-      }
-      result = tu.run(query)
-
-
 **ToolDescriptionOptimizer** (Type: ComposeTool)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -198,16 +164,16 @@ Optimizes a tool's description and parameter descriptions by generating test cas
    * ``tool_config`` (object) (required)
      The full configuration of the tool to optimize.
 
-   * ``save_to_file`` (boolean) (optional)
+   * ``save_to_file`` (boolean) (required)
      If true, save the optimized description to a file (do not overwrite the original).
 
-   * ``output_file`` (string) (optional)
+   * ``output_file`` (string) (required)
      Optional file path to save the optimized description. If not provided, use '<tool_name>_optimized_description.txt'.
 
-   * ``max_iterations`` (integer) (optional)
+   * ``max_iterations`` (integer) (required)
      Maximum number of optimization rounds to perform.
 
-   * ``satisfaction_threshold`` (number) (optional)
+   * ``satisfaction_threshold`` (number) (required)
      Quality score threshold (1-10) to consider optimization satisfactory.
 
    **Example Usage:**
@@ -217,7 +183,11 @@ Optimizes a tool's description and parameter descriptions by generating test cas
       query = {
           "name": "ToolDescriptionOptimizer",
           "arguments": {
-              "tool_config": "example_value"
+              "tool_config": "example_value",
+              "save_to_file": true,
+              "output_file": "example_value",
+              "max_iterations": 10,
+              "satisfaction_threshold": "example_value"
           }
       }
       result = tu.run(query)
@@ -241,13 +211,13 @@ Generates new ToolUniverse-compliant tools based on short descriptions through a
    * ``tool_description`` (string) (required)
      Short description of the desired tool functionality and purpose. Tool Discover will automatically analyze this to determine the optimal tool type (PackageTool, RESTTool, XMLTool, or AgenticTool) and appropriate category.
 
-   * ``max_iterations`` (integer) (optional)
+   * ``max_iterations`` (integer) (required)
      Maximum number of refinement iterations to perform.
 
-   * ``save_to_file`` (boolean) (optional)
+   * ``save_to_file`` (boolean) (required)
      Whether to save the generated tool configuration and report to a file.
 
-   * ``output_file`` (string) (optional)
+   * ``output_file`` (string) (required)
      Optional file path to save the generated tool. If not provided, uses auto-generated filename.
 
    **Example Usage:**
@@ -257,7 +227,10 @@ Generates new ToolUniverse-compliant tools based on short descriptions through a
       query = {
           "name": "ToolDiscover",
           "arguments": {
-              "tool_description": "example_value"
+              "tool_description": "example_value",
+              "max_iterations": 10,
+              "save_to_file": true,
+              "output_file": "example_value"
           }
       }
       result = tu.run(query)
@@ -281,13 +254,13 @@ Generates a directed tool relationship graph among provided tool configs using T
    * ``tool_configs`` (array) (required)
      List of tool configuration objects
 
-   * ``max_tools`` (integer) (optional)
+   * ``max_tools`` (integer) (required)
      Optional max number of tools to process (debug)
 
-   * ``output_path`` (string) (optional)
+   * ``output_path`` (string) (required)
      Path for output graph JSON
 
-   * ``save_intermediate_every`` (integer) (optional)
+   * ``save_intermediate_every`` (integer) (required)
      Checkpoint every N processed pairs
 
    **Example Usage:**
@@ -297,7 +270,10 @@ Generates a directed tool relationship graph among provided tool configs using T
       query = {
           "name": "ToolGraphGenerationPipeline",
           "arguments": {
-              "tool_configs": ["item1", "item2"]
+              "tool_configs": ["item1", "item2"],
+              "max_tools": 10,
+              "output_path": "example_value",
+              "save_intermediate_every": 10
           }
       }
       result = tu.run(query)
@@ -321,13 +297,13 @@ Generates standardized metadata for a batch of ToolUniverse tool configurations 
    * ``tool_configs`` (array) (required)
      List of raw tool configuration JSON objects to extract and standardize metadata for
 
-   * ``tool_type_mappings`` (object) (optional)
+   * ``tool_type_mappings`` (object) (required)
      Mapping of simplified toolType (keys) to lists of tool 'type' values belonging to each simplified category (e.g., {'Databases': ['XMLTool']})
 
-   * ``add_existing_tooluniverse_labels`` (boolean) (optional)
+   * ``add_existing_tooluniverse_labels`` (boolean) (required)
      Whether to include labels from existing ToolUniverse tools when labeling the metadata configs of the new tools. It is strongly recommended that this is set to true to minimize the number of new labels created and the possibility of redundant labels.
 
-   * ``max_new_tooluniverse_labels`` (integer) (optional)
+   * ``max_new_tooluniverse_labels`` (integer) (required)
      The maximum number of new ToolUniverse labels to use in the metadata configs of the new tools. The existing ToolUniverse labels will be used first, and then new labels will be created as needed up to this limit. If the limit is reached, the least relevant new labels will be discarded. Please try to use as few new labels as possible to avoid excessive labels.
 
    **Example Usage:**
@@ -337,7 +313,10 @@ Generates standardized metadata for a batch of ToolUniverse tool configurations 
       query = {
           "name": "ToolMetadataGenerationPipeline",
           "arguments": {
-              "tool_configs": ["item1", "item2"]
+              "tool_configs": ["item1", "item2"],
+              "tool_type_mappings": "example_value",
+              "add_existing_tooluniverse_labels": true,
+              "max_new_tooluniverse_labels": 10
           }
       }
       result = tu.run(query)

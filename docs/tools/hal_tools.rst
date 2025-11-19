@@ -28,7 +28,7 @@ Search the French HAL open archive via its public API. Returns documents with ti
    * ``query`` (string) (required)
      Search query for HAL archive. Supports Lucene syntax for advanced queries.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of documents to return. Default is 10, maximum is 100.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Search the French HAL open archive via its public API. Returns documents with ti
       query = {
           "name": "HAL_search_archive",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)

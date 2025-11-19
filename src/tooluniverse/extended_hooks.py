@@ -68,7 +68,7 @@ class FilteringHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The filtered output, or original output if filtering fails
         """
         try:
@@ -153,7 +153,7 @@ class FormattingHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The formatted output, or original output if formatting fails
         """
         try:
@@ -263,7 +263,7 @@ class ValidationHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The validated output, or original output if validation fails
         """
         try:
@@ -380,7 +380,7 @@ class LoggingHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The original output (logging doesn't modify the output)
         """
         try:

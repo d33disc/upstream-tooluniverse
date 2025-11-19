@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-18 23:04-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:2
+#: abbf980b2f6d4ef58b66beeee434b5d1
+msgid "Advanced BaseTool Features"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:4
+#: b427161725bb413cb92403526f08227e
+msgid ""
+"This guide explains how to leverage advanced BaseTool capabilities for "
+"local tools. These features help you build more robust, efficient, and "
+"feature-rich tools."
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:7
+#: fde8e23122be427bb28081431225d068
+msgid ""
+"**New to local tools?** Start with :doc:`tutorial` for basic tool "
+"creation, then return here for advanced features."
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:10
+#: d98e5bcb08fe4aa8bec87feb8ad4b38d
+msgid "Overview"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:12
+#: 17fda11200c844fda9dc57ff99ee08a7
+msgid ""
+"The BaseTool class now provides several standard capabilities that can be"
+" overridden by custom tool implementations:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:14
+#: ab6811d4198f4fb78aeefe2cc9d09005
+msgid ""
+"**Parameter Validation**: `validate_parameters()` - Validate input "
+"parameters against schemas"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:15
+#: be0486f067874e8d90b00a7d5732fe0a
+msgid ""
+"**Error Handling**: `handle_error()` - Classify exceptions into "
+"structured errors"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:16
+#: 689a318f52834076b0e6c802cb98b61e
+msgid "**Caching**: `get_cache_key()` - Generate cache keys for tool calls"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:17
+#: a3b44ec89f464112a16c34acf0000c4b
+msgid ""
+"**Capability Queries**: `supports_streaming()`, `supports_caching()` - "
+"Declare tool capabilities"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:18
+#: dec8d9b21b824add862a85967395542a
+msgid ""
+"**Tool Information**: `get_tool_info()` - Provide comprehensive tool "
+"metadata"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:21
+#: ceef8ad6ba8d44aa8f5e008796a46cdb
+msgid "Custom Parameter Validation"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:23
+#: df5ce0e27ee84cc3bfedf5065e8c0e68
+msgid "Override `validate_parameters()` to implement custom validation logic:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:45
+#: 4a8a13ab10c54781ad29865e623514ea
+msgid "Custom Error Handling"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:47
+#: 6331ac89abf9452281c1953ff1f6fc7d
+msgid "Override `handle_error()` to provide tool-specific error classification:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:66
+#: e4b7dc82d67e4c28acdcec817c06f751
+msgid "Custom Caching"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:68
+#: cf8b74ee424a46debd1717e6f7225d78
+msgid "Override `get_cache_key()` for custom cache key generation:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:83
+#: 791b0d6a0f1c44fdbaaf9af9fa396cf5
+msgid "Capability Declaration"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:85
+#: 885843783e5b47bba566bf509246ff8a
+msgid "Override capability methods to declare tool features:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:98
+#: f7d46b3584074de3aeff8c2a28142f22
+msgid "Complete Example"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:100
+#: a76905cb9c8d4a8ea6ad2da50c6b83aa
+msgid "Here's a complete example of a custom tool with all capabilities:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:188
+#: 8bf6e8535a3b452fa7ae131018f4adb4
+msgid "Migration Guide"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:190
+#: 0b0dc902282245da826ea36f6e1a8f14
+msgid ""
+"If you have existing tools, here's how to migrate them to use the new "
+"capabilities:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:192
+#: 76cddeb080a44397a871709ed19b8a7e
+msgid ""
+"**No Changes Required**: Existing tools will continue to work without "
+"modification. The new methods have sensible defaults."
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:194
+#: c7dba7cb0f304ade93dc17e0ffb251f4
+msgid ""
+"**Gradual Enhancement**: You can gradually add custom validation and "
+"error handling:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:216
+#: fb2becab9bcf4938aed2603882cbc683
+msgid ""
+"**Exception Handling**: If you're catching old exception classes, "
+"consider migrating to new ones:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:234
+#: 12a43fe70a904dbeb3b7f33ac7d8d951
+msgid "Best Practices"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:236
+#: eba99543030a4b3fa5647270b0a82af7
+msgid ""
+"**Always Call Super**: When overriding methods, call the parent "
+"implementation first:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:249
+#: 3da5a7290a694d2d98e841ec26a17044
+msgid "**Provide Recovery Steps**: Include helpful next steps in error messages:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:262
+#: 15b55715c68f487abca05aba45113a27
+msgid ""
+"**Use Structured Details**: Include structured information in error "
+"details:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:275
+#: d92539b899d2428fad41d957f6ef981c
+msgid "**Cache Appropriately**: Only cache results that are safe to cache:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:284
+#: 88fb4ee59f5f4a569098436287d41050
+msgid "Testing Custom Tools"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:286
+#: 09c521b3db4d4ac0bf3ef94514b51092
+msgid "Test your custom tools using the standard testing patterns:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:306
+#: ecf954d1e2724c4ba4923aab8a161056
+msgid "Backward Compatibility"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:308
+#: a62c0918488047849f32cc4e00f8f05a
+msgid "All existing tools and code will continue to work without modification:"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:310
+#: 16a56a56f6f145698a67028571677dca
+msgid "Old exception classes still work (with deprecation warnings)"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:311
+#: 32ebf7ce3f714b09b79feba5f595b31e
+msgid "Tools without new methods use default implementations"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:312
+#: 2ae9d2c4d54b4034a19c50d20d0882fd
+msgid "ToolUniverse provides fallback logic for missing methods"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:313
+#: 4e62acc540834a72823d1ea7744c237d
+msgid "All existing APIs remain unchanged"
+msgstr ""
+
+#: ../../expand_tooluniverse/local_tools/advanced_features.rst:315
+#: 4f9970cc109c4e98a6a8eb49671b439a
+msgid ""
+"The refactoring is designed to be completely backward compatible while "
+"providing enhanced capabilities for new development."
+msgstr ""
+

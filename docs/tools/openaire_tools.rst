@@ -28,10 +28,10 @@ Search OpenAIRE Explore for research products including publications, datasets, 
    * ``query`` (string) (required)
      Search query for OpenAIRE research products. Use keywords to search across titles, abstracts, and metadata.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of results to return. Default is 10, maximum is 100.
 
-   * ``type`` (string) (optional)
+   * ``type`` (string) (required)
      Type of research product to search: 'publications', 'datasets', or 'software'. Default is 'publications'.
 
    **Example Usage:**
@@ -41,7 +41,9 @@ Search OpenAIRE Explore for research products including publications, datasets, 
       query = {
           "name": "OpenAIRE_search_publications",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10,
+              "type": "example_value"
           }
       }
       result = tu.run(query)

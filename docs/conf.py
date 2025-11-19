@@ -71,41 +71,35 @@ html_theme_options = {
     # GitHub integration
     "github_url": "https://github.com/mims-harvard/ToolUniverse",
     
-    # Dark mode
-    "dark_mode": True,
+    # Design options
+    "page_layout": "default",
+    "color_mode": "auto",  # auto, light, dark
+    "accent_color": "blue",
     
-    # Colors (light mode)
+    # Logo configuration
     "light_logo": "_static/logo.png",
     "dark_logo": "_static/logo.png",
     
-    # Accent color
-    "accent_color": "blue",
-    
-    # Sidebar
+    # Sidebar configuration
     "globaltoc_expand_depth": 2,
+    "toctree_collapse": False,
+    "toctree_maxdepth": 4,
+    "toctree_titles_only": True,
+    "toctree_includehidden": True,
     
-    # Footer
-    "twitter_site": False,
-    "twitter_creator": False,
-    "twitter_url": False,
-    "discord_url": False,
-    
-    # Language switcher (for future i18n support)
-    "language_switch": {
-        "zh_CN": "简体中文",
-        "en": "English",
-    },
-    
-    # Page layout
-    "page_layout": "default",
+    # Social links (disabled)
+    "twitter_site": "",
+    "twitter_creator": "",
+    "twitter_url": "",
+    "discord_url": "",
+    "discussion_url": "",
     
     # Carbon ads (disabled)
-    "carbon_ads_code": None,
+    "carbon_ads_code": "",
+    "carbon_ads_placement": "",
     
-    # Analytics (disabled)
-    "analytics": {
-        "google_analytics_id": "",
-    },
+    # Ethical ads (disabled)
+    "ethical_ads_publisher": "",
 }
 
 # HTML options
@@ -134,6 +128,12 @@ autodoc_default_options = {
     "exclude-members": "__weakref__",
     "show-inheritance": True,
 }
+
+# Skip problematic modules that have import issues
+autodoc_mock_imports = [
+    "flask_cors",
+    "tooluniverse.web_tools.literature_search_ui",
+]
 
 autodoc_typehints = "description"
 autodoc_typehints_description_target = "documented"
@@ -186,6 +186,10 @@ copybutton_prompt_is_regexp = True
 # Autosummary settings
 autosummary_generate = True
 autosummary_imported_members = True
+
+# Autosectionlabel settings
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 2  # Don't label deep sections in docstrings
 
 # Source file suffixes
 source_suffix = {

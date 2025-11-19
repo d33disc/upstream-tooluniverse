@@ -3,12 +3,47 @@ Unified Guideline Tools
 
 **Configuration File**: ``unified_guideline_tools.json``
 **Tool Type**: Local
-**Tools Count**: 8
+**Tools Count**: 10
 
 This page contains all tools defined in the ``unified_guideline_tools.json`` configuration file.
 
 Available Tools
 ---------------
+
+**CMA_Guidelines_Search** (Type: CMAGuidelinesTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Search Canadian Medical Association (CMA) Infobase guidelines. Contains over 1200 evidence-based ...
+
+.. dropdown:: CMA_Guidelines_Search tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``CMA_Guidelines_Search``
+   * **Type**: ``CMAGuidelinesTool``
+   * **Description**: Search Canadian Medical Association (CMA) Infobase guidelines. Contains over 1200 evidence-based clinical practice guidelines developed or endorsed by Canadian healthcare organizations.
+
+   **Parameters:**
+
+   * ``query`` (string) (required)
+     Medical condition, treatment, or clinical topic to search for in CMA guidelines (e.g., 'diabetes management', 'hypertension treatment', 'cancer screening')
+
+   * ``limit`` (integer) (required)
+     Maximum number of guidelines to return (default: 10)
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "CMA_Guidelines_Search",
+          "arguments": {
+              "query": "example_value",
+              "limit": 10
+          }
+      }
+      result = tu.run(query)
+
 
 **EuropePMC_Guidelines_Search** (Type: EuropePMCGuidelinesTool)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,7 +63,7 @@ Search Europe PMC for clinical guidelines and evidence-based recommendations. Eu
    * ``query`` (string) (required)
      Medical condition, treatment, or clinical topic to search for (e.g., 'diabetes', 'cardiovascular disease', 'mental health')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of guidelines to return (default: 10)
 
    **Example Usage:**
@@ -38,7 +73,43 @@ Search Europe PMC for clinical guidelines and evidence-based recommendations. Eu
       query = {
           "name": "EuropePMC_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
+          }
+      }
+      result = tu.run(query)
+
+
+**GIN_Guidelines_Search** (Type: GINGuidelinesTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Search Guidelines International Network (GIN) guidelines database. GIN maintains the world's larg...
+
+.. dropdown:: GIN_Guidelines_Search tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``GIN_Guidelines_Search``
+   * **Type**: ``GINGuidelinesTool``
+   * **Description**: Search Guidelines International Network (GIN) guidelines database. GIN maintains the world's largest database of clinical guidelines with over 6400 guidelines from various organizations worldwide.
+
+   **Parameters:**
+
+   * ``query`` (string) (required)
+     Medical condition, treatment, or clinical topic to search for in GIN guidelines (e.g., 'diabetes management', 'hypertension treatment', 'cancer screening')
+
+   * ``limit`` (integer) (required)
+     Maximum number of guidelines to return (default: 10)
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "GIN_Guidelines_Search",
+          "arguments": {
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -62,7 +133,7 @@ Search NICE (National Institute for Health and Care Excellence) clinical guideli
    * ``query`` (string) (required)
      Medical condition, treatment, or clinical topic to search for in NICE guidelines (e.g., 'diabetes', 'hypertension', 'cancer screening')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of clinical guidelines to return (default: 10)
 
    **Example Usage:**
@@ -72,7 +143,8 @@ Search NICE (National Institute for Health and Care Excellence) clinical guideli
       query = {
           "name": "NICE_Clinical_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -127,13 +199,13 @@ Search for clinical practice guidelines using OpenAlex scholarly database. Provi
    * ``query`` (string) (required)
      Medical condition or clinical topic to search for guidelines (e.g., 'diabetes management', 'hypertension treatment', 'cancer screening')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of guidelines to return (default: 10)
 
-   * ``year_from`` (integer) (optional)
+   * ``year_from`` (integer) (required)
      Filter for guidelines published from this year onwards (optional)
 
-   * ``year_to`` (integer) (optional)
+   * ``year_to`` (integer) (required)
      Filter for guidelines published up to this year (optional)
 
    **Example Usage:**
@@ -143,7 +215,10 @@ Search for clinical practice guidelines using OpenAlex scholarly database. Provi
       query = {
           "name": "OpenAlex_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10,
+              "year_from": 10,
+              "year_to": 10
           }
       }
       result = tu.run(query)
@@ -167,10 +242,10 @@ Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilit
    * ``query`` (string) (required)
      Medical condition, treatment, or clinical topic to search for (e.g., 'diabetes', 'hypertension management', 'cancer treatment')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of guidelines to return (default: 10)
 
-   * ``api_key`` (string) (optional)
+   * ``api_key`` (string) (required)
      Optional NCBI API key for higher rate limits. Get your free key at https://www.ncbi.nlm.nih.gov/account/
 
    **Example Usage:**
@@ -180,7 +255,9 @@ Search PubMed for peer-reviewed clinical practice guidelines using NCBI E-utilit
       query = {
           "name": "PubMed_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10,
+              "api_key": "example_value"
           }
       }
       result = tu.run(query)
@@ -204,10 +281,10 @@ Search TRIP Database (Turning Research into Practice) for evidence-based clinica
    * ``query`` (string) (required)
      Medical condition, treatment, or clinical question (e.g., 'diabetes management', 'stroke prevention', 'antibiotic therapy')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of guidelines to return (default: 10)
 
-   * ``search_type`` (string) (optional)
+   * ``search_type`` (string) (required)
      Type of content to search for (default: 'guideline'). Options include 'guideline', 'systematic-review', 'evidence-based-synopses'
 
    **Example Usage:**
@@ -217,7 +294,9 @@ Search TRIP Database (Turning Research into Practice) for evidence-based clinica
       query = {
           "name": "TRIP_Database_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10,
+              "search_type": "example_value"
           }
       }
       result = tu.run(query)
@@ -272,7 +351,7 @@ Search WHO (World Health Organization) official clinical guidelines and health r
    * ``query`` (string) (required)
      Medical condition, disease, or health topic to search for in WHO guidelines (e.g., 'malaria', 'HIV', 'diabetes', 'tuberculosis')
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Maximum number of guidelines to return (default: 10)
 
    **Example Usage:**
@@ -282,7 +361,8 @@ Search WHO (World Health Organization) official clinical guidelines and health r
       query = {
           "name": "WHO_Guidelines_Search",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

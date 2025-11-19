@@ -28,7 +28,7 @@ Perform gene enrichment analysis using Enrichr to find biological pathways, proc
    * ``gene_list`` (array) (required)
      List of gene names or symbols to analyze. At least 2 genes are required for path ranking analysis.
 
-   * ``libs`` (array) (optional)
+   * ``libs`` (array) (required)
      List of enrichment libraries to use for analysis.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Perform gene enrichment analysis using Enrichr to find biological pathways, proc
       query = {
           "name": "enrichr_gene_enrichment_analysis",
           "arguments": {
-              "gene_list": ["item1", "item2"]
+              "gene_list": ["item1", "item2"],
+              "libs": ["item1", "item2"]
           }
       }
       result = tu.run(query)

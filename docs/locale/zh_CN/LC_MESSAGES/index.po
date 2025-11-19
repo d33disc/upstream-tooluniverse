@@ -37,7 +37,7 @@ msgid "💡 Use ToolUniverse"
 msgstr "💡 使用 ToolUniverse"
 
 #: ../../index.rst:133
-msgid "🔨 Expand ToolUniverse"
+msgid "🔨 Add Tools to ToolUniverse"
 msgstr "🔨 扩展 ToolUniverse"
 
 #: ../../index.rst:145

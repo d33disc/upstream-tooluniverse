@@ -251,7 +251,7 @@ msgstr "`conf_backup_pydata.py` - PyData 主题的备份配置"
 
 #: ../../old_files/README.md:22 a38af102fe3f4e0fbe80231f225cd8d5
 msgid "`conf_enhanced.py` - Enhanced 主题配置"
-msgstr ""
+msgstr "`conf_enhanced.py` - 增强型主题配置"
 
 #: ../../old_files/README.md:23 18beded8a6c446b8a24a1c9f5789c602
 msgid "`conf_furo.py` - Furo 主题配置"

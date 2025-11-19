@@ -78,6 +78,9 @@ The following are commonly used command-line flags for ToolUniverse MCP servers.
    --exclude-tool-types STR...    Exclude these tool types
    --tool-config-files TEXT       Mapping like "custom:/path/to/custom.json"
 
+   # Compact mode
+   --compact-mode                 Enable compact mode (only expose core tools)
+
    # Hooks
    --hooks-enabled                Enable hooks (default: False)
    --hook-type [SummarizationHook|FileSaveHook]
@@ -93,6 +96,7 @@ The following are commonly used command-line flags for ToolUniverse MCP servers.
    --tools-file PATH              File with one tool name per line
    --include-tool-types STR...    Include only these tool types
    --exclude-tool-types STR...    Exclude these tool types
+   --compact-mode                 Enable compact mode (only expose core tools)
    --hooks                        Enable hooks (default: disabled for stdio)
    --hook-type [SummarizationHook|FileSaveHook]
    --hook-config-file PATH        JSON config for hooks
@@ -174,28 +178,7 @@ JavaScript MCP client (conceptual) against HTTP server:
  }
   run();
 
-Streaming Output
-----------------
 
-All MCP-exposed tools now accept an optional ``_tooluniverse_stream`` flag. When set to
-``true``, compatible tools send incremental text chunks as MCP log notifications while
-still returning the final result payload at completion. Example request payload:
-
-.. code-block:: json
-
-   {
-     "method": "tools/call",
-     "params": {
-       "name": "AgenticTool_example",
-       "arguments": {
-         "question": "Summarise recent literature",
-         "_tooluniverse_stream": true
-       }
-     }
-   }
-
-Make sure your client surfaces ``notifications/log`` (FastMCP ``ctx.info``) messages to
-display the streamed output.
 
 Claude Desktop stdio registration (example):
 
@@ -445,6 +428,7 @@ MCP Tutorials and Guides
 Advanced Features
 ~~~~~~~~~~~~~~~~~
 
+- :doc:`compact_mode` - Optimize context window usage by exposing only core tools
 - :doc:`hooks/server_stdio_hooks` - Output processing hooks for MCP servers
 - :doc:`scientific_workflows` - Building complex workflows with MCP
 - :doc:`tool_composition` - Composing tools for advanced research

@@ -81,7 +81,7 @@ class CustomTool(BaseTool):
         Args:
             arguments: Input arguments for the tool
 
-        Returns:
+        Returns
             Dict containing the result of tool execution
         """
         try:

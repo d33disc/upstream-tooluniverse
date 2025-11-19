@@ -27,7 +27,7 @@ class PackageTool(BaseTool):
         Args:
             arguments (dict): Optional parameters for customization
 
-        Returns:
+        Returns
             dict: Package information including name, description, installation, docs, usage
         """
         include_examples = arguments.get("include_examples", True)

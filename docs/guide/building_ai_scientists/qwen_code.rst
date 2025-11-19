@@ -128,9 +128,9 @@ Note: Edit the JSON in your system terminal/editor.
        "tooluniverse": {
          "command": "uv",
          "args": [
-           "--directory",
-           "/path/to/your/qwen_running_env",
-           "run",
+        "--directory",
+        "/path/to/tooluniverse-env",  # Working directory: uv manages .venv here
+        "run",
            "tooluniverse-smcp-stdio"
          ]
        }
@@ -146,9 +146,9 @@ Note: Edit the JSON in your system terminal/editor.
        "tooluniverse": {
          "command": "uv",
          "args": [
-           "--directory",
-           "/path/to/your/qwen_running_env",
-           "run",
+        "--directory",
+        "/path/to/tooluniverse-env",  # Working directory: uv manages .venv here
+        "run",
            "tooluniverse-smcp-stdio",
            "--exclude-tool-types",
            "PackageTool",
@@ -171,7 +171,8 @@ Note: Edit the JSON in your system terminal/editor.
 
 **Important Notes**:
 
-- Replace ``/path/to/your/qwen_running_env`` with the absolute path to your Qwen working folder
+- Replace `/path/to/tooluniverse-env` with your actual ToolUniverse working directory
+- The working directory is where uv will create and manage the virtual environment (`.venv`)
 - Prefer absolute paths for reliability
 
 Step 5: Configure Context File (QWEN.md)
@@ -213,7 +214,7 @@ Step 6: Start Qwen Code and Verify MCP
 
    In the Qwen Code prompt, run:
 
-   .. code-block:: text
+   .. code-block::
 
       /mcp
 
@@ -222,7 +223,7 @@ Step 6: Start Qwen Code and Verify MCP
    Enter
    In the Qwen Code prompt, run:
 
-   .. code-block:: text
+   .. code-block::
 
       /memory show
 
@@ -239,19 +240,19 @@ Try these prompts inside Qwen Code:
 
 **List available tools**:
 
-   .. code-block:: text
+   .. code-block::
 
       What scientific tools are available?
 
 **Execute a simple tool**:
 
-   .. code-block:: text
+   .. code-block::
 
       Search for information about Alzheimer's disease
 
 **Perform literature search**:
 
-   .. code-block:: text
+   .. code-block::
 
       Find recent papers about CRISPR gene editing in cancer therapy
 
@@ -318,9 +319,9 @@ Optimize tool usage:
        "tooluniverse": {
          "command": "uv",
          "args": [
-           "--directory",
-           "/path/to/your/qwen_running_env",
-           "run",
+        "--directory",
+        "/path/to/tooluniverse-env",  # Working directory: uv manages .venv here
+        "run",
            "tooluniverse-smcp-stdio"
          ],
          "includeTools": [
@@ -345,9 +346,9 @@ Run multiple ToolUniverse instances for different purposes:
        "tooluniverse-research": {
          "command": "uv",
          "args": [
-           "--directory",
-           "/path/to/your/qwen_running_env",
-           "run",
+        "--directory",
+        "/path/to/tooluniverse-env",  # Working directory: uv manages .venv here
+        "run",
            "tooluniverse-smcp-stdio"
          ],
          "timeout": 30000
@@ -355,9 +356,9 @@ Run multiple ToolUniverse instances for different purposes:
        "tooluniverse-analysis": {
          "command": "uv",
          "args": [
-           "--directory",
-           "/path/to/your/qwen_running_env",
-           "run",
+        "--directory",
+        "/path/to/tooluniverse-env",  # Working directory: uv manages .venv here
+        "run",
            "tooluniverse-smcp-stdio"
          ],
          "timeout": 45000

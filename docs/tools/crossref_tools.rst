@@ -28,10 +28,10 @@ Search Crossref Works API for articles by keyword. Returns articles with title, 
    * ``query`` (string) (required)
      Search query for Crossref works. Use keywords separated by spaces to refine your search.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      Number of articles to return. This sets the maximum number of articles retrieved from Crossref.
 
-   * ``filter`` (string) (optional)
+   * ``filter`` (string) (required)
      Optional filter string for Crossref API. Examples: 'type:journal-article,from-pub-date:2020-01-01'
 
    **Example Usage:**
@@ -41,7 +41,9 @@ Search Crossref Works API for articles by keyword. Returns articles with title, 
       query = {
           "name": "Crossref_search_works",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "limit": 10,
+              "filter": "example_value"
           }
       }
       result = tu.run(query)

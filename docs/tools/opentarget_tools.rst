@@ -25,7 +25,7 @@ Retrieve pharmacogenomics data for a specific drug, including evidence levels an
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    * ``page`` (object) (optional)
@@ -38,6 +38,7 @@ Retrieve pharmacogenomics data for a specific drug, including evidence levels an
       query = {
           "name": "OpenTargets_drug_pharmacogenomics_data",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -58,7 +59,7 @@ Retrieve detailed information about multiple drugs using a list of ChEMBL IDs.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -68,6 +69,7 @@ Retrieve detailed information about multiple drugs using a list of ChEMBL IDs.
       query = {
           "name": "OpenTargets_get_approved_indications_by_drug_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -88,7 +90,7 @@ Retrieve the list of diseases associated with a specific drug chemblId based on 
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -98,6 +100,7 @@ Retrieve the list of diseases associated with a specific drug chemblId based on 
       query = {
           "name": "OpenTargets_get_associated_diseases_by_drug_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -118,10 +121,10 @@ Retrieve known drugs associated with a specific disease by disease efoId.
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
-   * ``size`` (integer) (optional)
+   * ``size`` (integer) (required)
      Number of entries to fetch, recomanding a large number to avoid missing drugs.
 
    **Example Usage:**
@@ -131,6 +134,8 @@ Retrieve known drugs associated with a specific disease by disease efoId.
       query = {
           "name": "OpenTargets_get_associated_drugs_by_disease_efoId",
           "arguments": {
+              "efoId": "example_value",
+              "size": 10
           }
       }
       result = tu.run(query)
@@ -151,10 +156,10 @@ Get known drugs and information (e.g. id, name, MoA) associated with a specific 
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
-   * ``size`` (integer) (optional)
+   * ``size`` (integer) (required)
      Number of entries to fetch.
 
    * ``cursor`` (string) (optional)
@@ -167,6 +172,8 @@ Get known drugs and information (e.g. id, name, MoA) associated with a specific 
       query = {
           "name": "OpenTargets_get_associated_drugs_by_target_ensemblID",
           "arguments": {
+              "ensemblId": "example_value",
+              "size": 10
           }
       }
       result = tu.run(query)
@@ -187,7 +194,7 @@ Find HPO phenotypes asosciated with the specified disease efoId.
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The efoId of a disease or phenotype.
 
    **Example Usage:**
@@ -197,6 +204,7 @@ Find HPO phenotypes asosciated with the specified disease efoId.
       query = {
           "name": "OpenTargets_get_associated_phenotypes_by_disease_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -217,7 +225,7 @@ Find targets associated with a specific disease or phenotype based on efoId.
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The efoId of a disease or phenotype.
 
    **Example Usage:**
@@ -227,6 +235,7 @@ Find targets associated with a specific disease or phenotype based on efoId.
       query = {
           "name": "OpenTargets_get_associated_targets_by_disease_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -247,7 +256,7 @@ Retrieve the list of targets linked to a specific drug chemblId based on its mec
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -257,6 +266,7 @@ Retrieve the list of targets linked to a specific drug chemblId based on its mec
       query = {
           "name": "OpenTargets_get_associated_targets_by_drug_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -277,7 +287,7 @@ Retrieve biological mouse models, including allelic compositions and genetic bac
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -287,6 +297,7 @@ Retrieve biological mouse models, including allelic compositions and genetic bac
       query = {
           "name": "OpenTargets_get_biological_mouse_models_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -307,7 +318,7 @@ Retrieve chemical probes associated with a specific target using its ensemblID.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target for which to retrieve chemical probes.
 
    **Example Usage:**
@@ -317,6 +328,7 @@ Retrieve chemical probes associated with a specific target using its ensemblID.
       query = {
           "name": "OpenTargets_get_chemical_probes_by_target_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -337,7 +349,7 @@ Retrieve the disease ancestors and parents in the ontology using the disease EFO
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -347,6 +359,7 @@ Retrieve the disease ancestors and parents in the ontology using the disease EFO
       query = {
           "name": "OpenTargets_get_disease_ancestors_parents_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -367,7 +380,7 @@ Retrieve the disease descendants and children in the ontology using the disease 
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -377,6 +390,7 @@ Retrieve the disease descendants and children in the ontology using the disease 
       query = {
           "name": "OpenTargets_get_disease_descendants_children_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -397,7 +411,7 @@ Retrieve disease description, name, database cros references, obsolete terms, an
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -407,6 +421,7 @@ Retrieve disease description, name, database cros references, obsolete terms, an
       query = {
           "name": "OpenTargets_get_disease_description_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -427,7 +442,7 @@ Retrieve the efoId and additional details of a disease based on its name.
 
    **Parameters:**
 
-   * ``diseaseName`` (string) (optional)
+   * ``diseaseName`` (string) (required)
      The name of the disease to search for.
 
    **Example Usage:**
@@ -437,6 +452,7 @@ Retrieve the efoId and additional details of a disease based on its name.
       query = {
           "name": "OpenTargets_get_disease_id_description_by_name",
           "arguments": {
+              "diseaseName": "example_value"
           }
       }
       result = tu.run(query)
@@ -457,7 +473,7 @@ Retrieve the disease's direct location and indirect location disease terms and I
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -467,6 +483,7 @@ Retrieve the disease's direct location and indirect location disease terms and I
       query = {
           "name": "OpenTargets_get_disease_locations_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -487,7 +504,7 @@ Retrieve disease synonyms by its EFO ID.
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -497,6 +514,7 @@ Retrieve disease synonyms by its EFO ID.
       query = {
           "name": "OpenTargets_get_disease_synonyms_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -517,7 +535,7 @@ Retrieve the therapeutic areas associated with a specific disease efoId.
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
    **Example Usage:**
@@ -527,6 +545,7 @@ Retrieve the therapeutic areas associated with a specific disease efoId.
       query = {
           "name": "OpenTargets_get_disease_therapeutic_areas_by_efoId",
           "arguments": {
+              "efoId": "example_value"
           }
       }
       result = tu.run(query)
@@ -547,7 +566,7 @@ Find diseases or phenotypes associated with a specific target using ensemblId.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The ensemblId of a target.
 
    **Example Usage:**
@@ -557,6 +576,7 @@ Find diseases or phenotypes associated with a specific target using ensemblId.
       query = {
           "name": "OpenTargets_get_diseases_phenotypes_by_target_ensembl",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -577,7 +597,7 @@ Retrieve significant adverse events reported for a specific drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    * ``page`` (object) (optional)
@@ -590,6 +610,7 @@ Retrieve significant adverse events reported for a specific drug chemblId.
       query = {
           "name": "OpenTargets_get_drug_adverse_events_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -610,7 +631,7 @@ Retrieve the approval status of a specific drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -620,6 +641,7 @@ Retrieve the approval status of a specific drug chemblId.
       query = {
           "name": "OpenTargets_get_drug_approval_status_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -640,7 +662,7 @@ Fetch the drug chemblId and description based on the drug generic name.
 
    **Parameters:**
 
-   * ``drugName`` (string) (optional)
+   * ``drugName`` (string) (required)
      The generic name of the drug for which the ID is required.
 
    **Example Usage:**
@@ -650,6 +672,7 @@ Fetch the drug chemblId and description based on the drug generic name.
       query = {
           "name": "OpenTargets_get_drug_chembId_by_generic_name",
           "arguments": {
+              "drugName": "example_value"
           }
       }
       result = tu.run(query)
@@ -670,7 +693,7 @@ Get drug name, year of first approval, type, cross references, and max clinical 
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -680,6 +703,7 @@ Get drug name, year of first approval, type, cross references, and max clinical 
       query = {
           "name": "OpenTargets_get_drug_description_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -700,7 +724,7 @@ Fetch the drug chemblId and description based on the drug generic name.
 
    **Parameters:**
 
-   * ``drugName`` (string) (optional)
+   * ``drugName`` (string) (required)
      The name of the drug for which the ID is required.
 
    **Example Usage:**
@@ -710,6 +734,7 @@ Fetch the drug chemblId and description based on the drug generic name.
       query = {
           "name": "OpenTargets_get_drug_id_description_by_name",
           "arguments": {
+              "drugName": "example_value"
           }
       }
       result = tu.run(query)
@@ -730,7 +755,7 @@ Fetch indications (treatable phenotypes/diseases) for a given drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The chemblId of the drug for which to retrieve treatable phenotypes information.
 
    **Example Usage:**
@@ -740,6 +765,7 @@ Fetch indications (treatable phenotypes/diseases) for a given drug chemblId.
       query = {
           "name": "OpenTargets_get_drug_indications_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -760,7 +786,7 @@ Retrieve the mechanisms of action associated with a specific drug using chemblId
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -770,6 +796,7 @@ Retrieve the mechanisms of action associated with a specific drug using chemblId
       query = {
           "name": "OpenTargets_get_drug_mechanisms_of_action_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -790,7 +817,7 @@ Retrieve the synonyms associated with a specific drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -800,6 +827,7 @@ Retrieve the synonyms associated with a specific drug chemblId.
       query = {
           "name": "OpenTargets_get_drug_synonyms_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -820,7 +848,7 @@ Retrieve the trade names associated with a specific drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -830,6 +858,7 @@ Retrieve the trade names associated with a specific drug chemblId.
       query = {
           "name": "OpenTargets_get_drug_trade_names_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -850,7 +879,7 @@ Retrieve warnings for a specific drug using ChEMBL ID.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -860,6 +889,7 @@ Retrieve warnings for a specific drug using ChEMBL ID.
       query = {
           "name": "OpenTargets_get_drug_warnings_by_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -880,7 +910,7 @@ Find withdrawn and black-box warning statuses for a specific drug by chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (array) (optional)
+   * ``chemblId`` (array) (required)
      The chemblId of a drug.
 
    **Example Usage:**
@@ -890,6 +920,7 @@ Find withdrawn and black-box warning statuses for a specific drug by chemblId.
       query = {
           "name": "OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId",
           "arguments": {
+              "chemblId": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -910,7 +941,7 @@ Retrieve Gene Ontology terms based on a list of GO IDs.
 
    **Parameters:**
 
-   * ``goIds`` (array) (optional)
+   * ``goIds`` (array) (required)
      A list of Gene Ontology (GO) IDs to fetch the corresponding terms.
 
    **Example Usage:**
@@ -920,6 +951,7 @@ Retrieve Gene Ontology terms based on a list of GO IDs.
       query = {
           "name": "OpenTargets_get_gene_ontology_terms_by_goID",
           "arguments": {
+              "goIds": ["item1", "item2"]
           }
       }
       result = tu.run(query)
@@ -940,7 +972,7 @@ Get a list of known drugs and associated information using the specified chemblI
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -950,6 +982,7 @@ Get a list of known drugs and associated information using the specified chemblI
       query = {
           "name": "OpenTargets_get_known_drugs_by_drug_chemblId",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -970,7 +1003,7 @@ Get parent and child molecules of specified drug chemblId.
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The ChEMBL ID of the drug.
 
    **Example Usage:**
@@ -980,6 +1013,7 @@ Get parent and child molecules of specified drug chemblId.
       query = {
           "name": "OpenTargets_get_parent_child_molecules_by_drug_chembl_ID",
           "arguments": {
+              "chemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1000,7 +1034,7 @@ Retrieve publications related to a disease efoId, including PubMed IDs and publi
 
    **Parameters:**
 
-   * ``entityId`` (string) (optional)
+   * ``entityId`` (string) (required)
      The ID of the entity (efoId).
 
    * ``additionalIds`` (array) (optional)
@@ -1025,6 +1059,7 @@ Retrieve publications related to a disease efoId, including PubMed IDs and publi
       query = {
           "name": "OpenTargets_get_publications_by_disease_efoId",
           "arguments": {
+              "entityId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1045,7 +1080,7 @@ Retrieve publications related to a drug chemblId, including PubMed IDs and publi
 
    **Parameters:**
 
-   * ``entityId`` (string) (optional)
+   * ``entityId`` (string) (required)
      The ID of the entity (chemblId).
 
    * ``additionalIds`` (array) (optional)
@@ -1070,6 +1105,7 @@ Retrieve publications related to a drug chemblId, including PubMed IDs and publi
       query = {
           "name": "OpenTargets_get_publications_by_drug_chemblId",
           "arguments": {
+              "entityId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1090,7 +1126,7 @@ Retrieve publications related to a target ensemblID, including PubMed IDs and pu
 
    **Parameters:**
 
-   * ``entityId`` (string) (optional)
+   * ``entityId`` (string) (required)
      The ID of the entity (ensemblID).
 
    * ``additionalIds`` (array) (optional)
@@ -1115,6 +1151,7 @@ Retrieve publications related to a target ensemblID, including PubMed IDs and pu
       query = {
           "name": "OpenTargets_get_publications_by_target_ensemblID",
           "arguments": {
+              "entityId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1135,13 +1172,13 @@ Retrieve similar entities for a given disease efoId using a model trained with P
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The EFO ID of the disease.
 
-   * ``threshold`` (number) (optional)
+   * ``threshold`` (number) (required)
      Threshold similarity between 0 and 1. Only results above threshold are returned.
 
-   * ``size`` (integer) (optional)
+   * ``size`` (integer) (required)
      Number of similar entities to fetch.
 
    **Example Usage:**
@@ -1151,6 +1188,9 @@ Retrieve similar entities for a given disease efoId using a model trained with P
       query = {
           "name": "OpenTargets_get_similar_entities_by_disease_efoId",
           "arguments": {
+              "efoId": "example_value",
+              "threshold": "example_value",
+              "size": 10
           }
       }
       result = tu.run(query)
@@ -1171,13 +1211,13 @@ Retrieve similar entities for a given drug chemblId using a model trained with P
 
    **Parameters:**
 
-   * ``chemblId`` (string) (optional)
+   * ``chemblId`` (string) (required)
      The chemblId of the disease.
 
-   * ``threshold`` (number) (optional)
+   * ``threshold`` (number) (required)
      Threshold similarity between 0 and 1. Only results above threshold are returned.
 
-   * ``size`` (integer) (optional)
+   * ``size`` (integer) (required)
      Number of similar entities to fetch.
 
    **Example Usage:**
@@ -1187,6 +1227,9 @@ Retrieve similar entities for a given drug chemblId using a model trained with P
       query = {
           "name": "OpenTargets_get_similar_entities_by_drug_chemblId",
           "arguments": {
+              "chemblId": "example_value",
+              "threshold": "example_value",
+              "size": 10
           }
       }
       result = tu.run(query)
@@ -1207,13 +1250,13 @@ Retrieve similar entities for a given target ensemblID using a model trained wit
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The ensemblID of the disease.
 
-   * ``threshold`` (number) (optional)
+   * ``threshold`` (number) (required)
      Threshold similarity between 0 and 1. Only results above threshold are returned.
 
-   * ``size`` (integer) (optional)
+   * ``size`` (integer) (required)
      Number of similar entities to fetch.
 
    **Example Usage:**
@@ -1223,6 +1266,9 @@ Retrieve similar entities for a given target ensemblID using a model trained wit
       query = {
           "name": "OpenTargets_get_similar_entities_by_target_ensemblID",
           "arguments": {
+              "ensemblId": "example_value",
+              "threshold": "example_value",
+              "size": 10
           }
       }
       result = tu.run(query)
@@ -1243,7 +1289,7 @@ Retrieve the target classes associated with a specific target ensemblID.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -1253,6 +1299,7 @@ Retrieve the target classes associated with a specific target ensemblID.
       query = {
           "name": "OpenTargets_get_target_classes_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1273,7 +1320,7 @@ Retrieve genetic constraint information for a specific target ensemblID, includi
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -1283,6 +1330,7 @@ Retrieve genetic constraint information for a specific target ensemblID, includi
       query = {
           "name": "OpenTargets_get_target_constraint_info_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1303,7 +1351,7 @@ Retrieve the Target Enabling Packages (TEP) associated with a specific target en
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -1313,6 +1361,7 @@ Retrieve the Target Enabling Packages (TEP) associated with a specific target en
       query = {
           "name": "OpenTargets_get_target_enabling_packages_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1333,7 +1382,7 @@ Retrieve Gene Ontology annotations for a specific target by Ensembl ID.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target for which to retrieve Gene Ontology annotations.
 
    **Example Usage:**
@@ -1343,6 +1392,7 @@ Retrieve Gene Ontology annotations for a specific target by Ensembl ID.
       query = {
           "name": "OpenTargets_get_target_gene_ontology_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1363,7 +1413,7 @@ Retrieve genomic location data for a specific target, including chromosome, star
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target for which to retrieve genomic location information.
 
    **Example Usage:**
@@ -1373,6 +1423,7 @@ Retrieve genomic location data for a specific target, including chromosome, star
       query = {
           "name": "OpenTargets_get_target_genomic_location_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1393,7 +1444,7 @@ Fetch homologues for a specific target by Ensembl ID.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target for which to retrieve homologues.
 
    **Example Usage:**
@@ -1403,6 +1454,7 @@ Fetch homologues for a specific target by Ensembl ID.
       query = {
           "name": "OpenTargets_get_target_homologues_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1423,7 +1475,7 @@ Get the ensemblId and description based on the target name.
 
    **Parameters:**
 
-   * ``targetName`` (string) (optional)
+   * ``targetName`` (string) (required)
      The name of the target for which the ID is required.
 
    **Example Usage:**
@@ -1433,6 +1485,7 @@ Get the ensemblId and description based on the target name.
       query = {
           "name": "OpenTargets_get_target_id_description_by_name",
           "arguments": {
+              "targetName": "example_value"
           }
       }
       result = tu.run(query)
@@ -1453,7 +1506,7 @@ Retrieve interaction data for a specific target ensemblID, including interaction
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    * ``page`` (object) (optional)
@@ -1466,6 +1519,7 @@ Retrieve interaction data for a specific target ensemblID, including interaction
       query = {
           "name": "OpenTargets_get_target_interactions_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1486,7 +1540,7 @@ Retrieve known target safety liabilities for a specific target Ensembl ID.
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target for which to retrieve safety liabilities.
 
    **Example Usage:**
@@ -1496,6 +1550,7 @@ Retrieve known target safety liabilities for a specific target Ensembl ID.
       query = {
           "name": "OpenTargets_get_target_safety_profile_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1516,7 +1571,7 @@ Retrieve information about subcellular locations for a specific target ensemblID
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The ensemblId of a target.
 
    **Example Usage:**
@@ -1526,6 +1581,7 @@ Retrieve information about subcellular locations for a specific target ensemblID
       query = {
           "name": "OpenTargets_get_target_subcellular_locations_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1546,7 +1602,7 @@ Retrieve synonyms for specified target, including alternative names and symbols,
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -1556,6 +1612,7 @@ Retrieve synonyms for specified target, including alternative names and symbols,
       query = {
           "name": "OpenTargets_get_target_synonyms_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1576,7 +1633,7 @@ Retrieve tractability assessments, including modality and values, for a specific
 
    **Parameters:**
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The Ensembl ID of the target.
 
    **Example Usage:**
@@ -1586,6 +1643,7 @@ Retrieve tractability assessments, including modality and values, for a specific
       query = {
           "name": "OpenTargets_get_target_tractability_by_ensemblID",
           "arguments": {
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)
@@ -1606,7 +1664,7 @@ Perform a multi-entity search based on a query string, filtering by entity names
 
    **Parameters:**
 
-   * ``queryString`` (string) (optional)
+   * ``queryString`` (string) (required)
      The search string for querying information.
 
    * ``entityNames`` (array) (optional)
@@ -1622,6 +1680,7 @@ Perform a multi-entity search based on a query string, filtering by entity names
       query = {
           "name": "OpenTargets_multi_entity_search_by_query_string",
           "arguments": {
+              "queryString": "example_value"
           }
       }
       result = tu.run(query)
@@ -1642,7 +1701,7 @@ Get the count of entries in each entity category (disease, target, drug) based o
 
    **Parameters:**
 
-   * ``queryString`` (string) (optional)
+   * ``queryString`` (string) (required)
      The search string for querying information.
 
    **Example Usage:**
@@ -1652,6 +1711,7 @@ Get the count of entries in each entity category (disease, target, drug) based o
       query = {
           "name": "OpenTargets_search_category_counts_by_query_string",
           "arguments": {
+              "queryString": "example_value"
           }
       }
       result = tu.run(query)
@@ -1672,10 +1732,10 @@ Explore evidence that supports a specific target-disease association. Input is d
 
    **Parameters:**
 
-   * ``efoId`` (string) (optional)
+   * ``efoId`` (string) (required)
      The efoId of a disease or phenotype.
 
-   * ``ensemblId`` (string) (optional)
+   * ``ensemblId`` (string) (required)
      The ensemblId of a target.
 
    **Example Usage:**
@@ -1685,6 +1745,8 @@ Explore evidence that supports a specific target-disease association. Input is d
       query = {
           "name": "OpenTargets_target_disease_evidence",
           "arguments": {
+              "efoId": "example_value",
+              "ensemblId": "example_value"
           }
       }
       result = tu.run(query)

@@ -28,7 +28,7 @@ Extract disease-target association scores from cancer biomarkers data. This incl
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Extract disease-target association scores from cancer biomarkers data. This incl
       query = {
           "name": "cancer_biomarkers_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -62,7 +63,7 @@ Extract disease-target association scores from Cancer Gene Census. This provides
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -72,7 +73,8 @@ Extract disease-target association scores from Cancer Gene Census. This provides
       query = {
           "name": "cancer_gene_census_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -96,7 +98,7 @@ Extract disease-target association scores specifically from ChEMBL database. ChE
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -106,7 +108,8 @@ Extract disease-target association scores specifically from ChEMBL database. ChE
       query = {
           "name": "chembl_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -133,7 +136,7 @@ Extract disease-target association scores from a specific data source using Grap
    * ``datasourceId`` (string) (required)
      The datasource ID to extract scores from. Available options: 'chembl', 'eva', 'eva_somatic', 'cancer_gene_census', 'cancer_biomarkers', 'europepmc', 'expression_atlas', 'genomics_england', 'impc', 'reactome', 'uniprot_literature', 'uniprot_variants'
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -144,7 +147,8 @@ Extract disease-target association scores from a specific data source using Grap
           "name": "disease_target_score",
           "arguments": {
               "efoId": "example_value",
-              "datasourceId": "example_value"
+              "datasourceId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -168,7 +172,7 @@ Extract disease-target association scores from Europe PMC literature. This inclu
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -178,7 +182,8 @@ Extract disease-target association scores from Europe PMC literature. This inclu
       query = {
           "name": "europepmc_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -202,7 +207,7 @@ Extract disease-target association scores from EVA (European Variation Archive).
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -212,7 +217,8 @@ Extract disease-target association scores from EVA (European Variation Archive).
       query = {
           "name": "eva_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -236,7 +242,7 @@ Extract disease-target association scores from EVA somatic mutations. This inclu
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -246,7 +252,8 @@ Extract disease-target association scores from EVA somatic mutations. This inclu
       query = {
           "name": "eva_somatic_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -270,7 +277,7 @@ Extract disease-target association scores from Expression Atlas. This provides g
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -280,7 +287,8 @@ Extract disease-target association scores from Expression Atlas. This provides g
       query = {
           "name": "expression_atlas_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -304,7 +312,7 @@ Extract disease-target association scores from Genomics England data. This inclu
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -314,7 +322,8 @@ Extract disease-target association scores from Genomics England data. This inclu
       query = {
           "name": "genomics_england_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)
@@ -338,7 +347,7 @@ Extract disease-target association scores from Reactome pathway data. This inclu
    * ``efoId`` (string) (required)
      The EFO (Experimental Factor Ontology) ID of the disease, e.g., 'EFO_0000339' for chronic myelogenous leukemia
 
-   * ``pageSize`` (integer) (optional)
+   * ``pageSize`` (integer) (required)
      Number of results per page (default: 100, max: 100)
 
    **Example Usage:**
@@ -348,7 +357,8 @@ Extract disease-target association scores from Reactome pathway data. This inclu
       query = {
           "name": "reactome_disease_target_score",
           "arguments": {
-              "efoId": "example_value"
+              "efoId": "example_value",
+              "pageSize": 10
           }
       }
       result = tu.run(query)

@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../reference/data_sources.rst:13 bf34e67316b3449a9fbf57870c7e4828
 msgid "**Claude Code** - `Claude Code <https://claude.ai/>`_"
-msgstr ""
+msgstr "**Claude代码** - `Claude代码 <https://claude.ai/>`_"
 
 #: ../../reference/data_sources.rst:14 ff3c3aa270c14be08d75559ccc4af126
 msgid ""

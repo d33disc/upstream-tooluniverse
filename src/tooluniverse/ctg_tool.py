@@ -34,7 +34,7 @@ class ClinicalTrialsTool(RESTfulTool):
         Args:
             arguments (dict): Runtime arguments provided to the tool's run method.
 
-        Returns:
+        Returns
             dict: A new dictionary with mapped parameter names.
         """
 
@@ -54,7 +54,7 @@ class ClinicalTrialsTool(RESTfulTool):
         Args:
             arguments (dict): Runtime arguments provided to the tool's run method.
 
-        Returns:
+        Returns
             dict: A dictionary of parameters ready for the API requests.
         """
         api_params = {}
@@ -77,7 +77,7 @@ class ClinicalTrialsTool(RESTfulTool):
         Args:
             arguments (dict): Runtime arguments provided to the tool's run method.
 
-        Returns:
+        Returns
             str: The formatted endpoint URL.
         """
         url_to_format = self.endpoint_url
@@ -185,7 +185,7 @@ class ClinicalTrialsSearchTool(ClinicalTrialsTool):
         Args:
             arguments (dict): A dictionary containing parameters provided by the user/LLM
 
-        Returns:
+        Returns
             dict or str: The JSON response from the API as a dictionary,
                          or raw text for non-JSON responses, or an error dictionary.
         """

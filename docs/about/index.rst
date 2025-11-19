@@ -6,13 +6,12 @@ About ToolUniverse
 .. toctree::
    :maxdepth: 2
 
-   changelog
    contributing
    deployment
    license
 
 📋 Project Information
----------------------
+-----------------------
 
 **Version**: 0.3.0
 
@@ -23,7 +22,7 @@ About ToolUniverse
 **Documentation**: You're reading it!
 
 🎯 Project Goals
----------------
+----------------
 
 ToolUniverse aims to:
 
@@ -33,26 +32,25 @@ ToolUniverse aims to:
 * **Foster collaboration** - Community-driven tool development
 
 👥 Community
------------
+------------
 
 * **Contributors**: Scientists, developers, and researchers worldwide
 * **Maintainers**: MIMS Lab at Harvard Medical School
 * **Users**: Research institutions, pharmaceutical companies, academic labs
 
 📈 Development
--------------
+--------------
 
 * :doc:`contributing` - How to contribute code, tools, and documentation
 * :doc:`deployment` - Production deployment Tutorial
-* :doc:`changelog` - Version history and updates
 
 📄 Legal
--------
+--------
 
 * :doc:`license` - MIT License terms and data source licenses
 
 🙏 Acknowledgments
------------------
+------------------
 
 ToolUniverse is built on the work of many scientific databases and APIs:
 

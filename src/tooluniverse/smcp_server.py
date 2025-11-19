@@ -37,6 +37,34 @@ Examples:
 
   # Start with custom hook configuration
   tooluniverse-smcp-server --hook-config-file /path/to/hook_config.json
+
+  # Start with compact mode (only expose core tools)
+  tooluniverse-smcp-server --compact-mode
+
+  # Load Space configuration
+  tooluniverse-smcp-server --load "community/proteomics-toolkit"
+  tooluniverse-smcp-server --load "./my-config.yaml"
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -71,6 +99,11 @@ Examples:
         default="ToolUniverse SMCP Server",
         help="Server name (default: ToolUniverse SMCP Server)",
     )
+    parser.add_argument(
+        "--compact-mode",
+        action="store_true",
+        help="Enable compact mode: only expose core tools (~15 tools) to prevent context window overflow. All tools are still loaded in background for execute_tool to work.",
+    )
 
     args = parser.parse_args()
 
@@ -85,7 +118,7 @@ Examples:
         if args.hook_config_file:
             import json
 
-            with open(args.hook_config_file, "r") as f:
+            with open(args.hook_config_file, "r", encoding="utf-8") as f:
                 hook_config = json.load(f)
             print(f"🔗 Hook config loaded from: {args.hook_config_file}")
 
@@ -104,17 +137,22 @@ Examples:
         else:
             print("🔗 Hooks disabled")
 
+        if args.compact_mode:
+            print("📦 Compact mode enabled: only core tools will be exposed")
+
         print()
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             auto_expose_tools=True,
             search_enabled=True,
             max_workers=5,
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=args.hook_type,
+            compact_mode=args.compact_mode,
         )
 
         # Run server with streamable-http transport
@@ -157,47 +195,76 @@ def run_stdio_server():
         epilog="""
 Examples:
   # Start server with all tools using stdio transport (hooks enabled by default)
-  tooluniverse-stdio
+  tooluniverse-smcp-stdio
 
   # Start with specific categories
-  tooluniverse-stdio --categories uniprot ChEMBL opentarget
+  tooluniverse-smcp-stdio --categories uniprot ChEMBL opentarget
 
   # Enable hooks
-  tooluniverse-stdio --hooks
+  tooluniverse-smcp-stdio --hooks
 
   # Use FileSaveHook instead of SummarizationHook
-  tooluniverse-stdio --hook-type FileSaveHook
+  tooluniverse-smcp-stdio --hook-type FileSaveHook
 
   # Use custom hook configuration
-  tooluniverse-stdio --hook-config-file /path/to/hook_config.json
+  tooluniverse-smcp-stdio --hook-config-file /path/to/hook_config.json
 
   # Start with categories but exclude specific tools
-  tooluniverse-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-smcp-stdio --categories uniprot ChEMBL --exclude-tools "ChEMBL_get_molecule_by_chembl_id"
 
   # Start with all tools but exclude entire categories
-  tooluniverse-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
+  tooluniverse-smcp-stdio --exclude-categories mcp_auto_loader_boltz mcp_auto_loader_expert_feedback
 
   # Load only specific tools by name
-  tooluniverse-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
+  tooluniverse-smcp-stdio --include-tools "UniProt_get_entry_by_accession" "ChEMBL_get_molecule_by_chembl_id"
 
   # Load tools from a file
-  tooluniverse-stdio --tools-file "/path/to/tool_names.txt"
+  tooluniverse-smcp-stdio --tools-file "/path/to/tool_names.txt"
 
   # Load additional config files
-  tooluniverse-stdio --tool-config-files "custom:/path/to/custom_tools.json"
+  tooluniverse-smcp-stdio --tool-config-files "custom:/path/to/custom_tools.json"
 
   # Include/exclude specific tool types
-  tooluniverse-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
-  tooluniverse-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
+  tooluniverse-smcp-stdio --include-tool-types "OpenTarget" "ToolFinderEmbedding"
+  tooluniverse-smcp-stdio --exclude-tool-types "ToolFinderLLM" "Unknown"
 
   # List available categories
-  tooluniverse-stdio --list-categories
+  tooluniverse-smcp-stdio --list-categories
 
   # List all available tools
-  tooluniverse-stdio --list-tools
+  tooluniverse-smcp-stdio --list-tools
 
   # Start minimal server with just search tools
-  tooluniverse-stdio --categories special_tools tool_finder
+  tooluniverse-smcp-stdio --categories special_tools tool_finder
+
+  # Start with compact mode (only expose core tools)
+  tooluniverse-smcp-stdio --compact-mode
+
+  # Load Space configuration
+  tooluniverse-smcp-stdio --load "hf:community/proteomics-toolkit"
+  tooluniverse-smcp-stdio --load "./my-config.yaml"
+  tooluniverse-smcp-stdio --load "https://example.com/config.yaml"
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -286,6 +353,11 @@ Examples:
     )
     parser.add_argument(
         "--verbose", "-v", action="store_true", help="Enable verbose logging"
+    )
+    parser.add_argument(
+        "--compact-mode",
+        action="store_true",
+        help="Enable compact mode: only expose core tools (~15 tools) to prevent context window overflow. All tools are still loaded in background for execute_tool to work.",
     )
 
     # Hook configuration options (default disabled for stdio)
@@ -403,7 +475,7 @@ Examples:
 
     try:
         print(f"🚀 Starting {args.name}...", file=sys.stderr)
-        print("📡 Transport: stdio (for Claude Desktop)", file=sys.stderr)
+        print("📡 Transport: stdio", file=sys.stderr)
         print(f"🔍 Search enabled: {not args.no_search}", file=sys.stderr)
 
         if args.categories is not None:
@@ -474,13 +546,18 @@ Examples:
                 f"🚫 Excluding tool types: {', '.join(exclude_tool_types)}",
                 file=sys.stderr,
             )
+        if args.compact_mode:
+            print(
+                "📦 Compact mode enabled: only core tools will be exposed",
+                file=sys.stderr,
+            )
 
         # Load hook configuration if specified
         hook_config = None
         if args.hook_config_file:
             import json
 
-            with open(args.hook_config_file, "r") as f:
+            with open(args.hook_config_file, "r", encoding="utf-8") as f:
                 hook_config = json.load(f)
             print(
                 f"🔗 Hook config loaded from: {args.hook_config_file}", file=sys.stderr
@@ -509,9 +586,10 @@ Examples:
         print(f"⚡ Max workers: {args.max_workers}", file=sys.stderr)
         print(file=sys.stderr)
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space and tool configuration support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -525,6 +603,7 @@ Examples:
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=hook_type,
+            compact_mode=args.compact_mode,
         )
 
         # Run server with stdio transport (forced)
@@ -587,8 +666,39 @@ Examples:
   # Start minimal server with just search tools
   tooluniverse-smcp --categories special_tools tool_finder --port 7000
 
+  # Start with compact mode (only expose core tools)
+  tooluniverse-smcp --compact-mode --port 8000
+
   # Start server for Claude Desktop (stdio transport)
   tooluniverse-smcp --transport stdio
+
+  # Start with compact mode for Claude Desktop
+  tooluniverse-smcp --compact-mode --transport stdio
+
+  # Load Space configuration
+  tooluniverse-smcp --load "community/proteomics-toolkit" --port 8000
+  tooluniverse-smcp --load "./my-config.yaml" --transport stdio
+        """,
+    )
+
+    # Space configuration options
+    space_group = parser.add_argument_group("Space Configuration")
+    space_group.add_argument(
+        "--load",
+        "-l",
+        type=str,
+        metavar="CONFIG",
+        help="""Load space configuration (preset/workspace).
+
+Supports multiple formats:
+  • HuggingFace:      username/repo, hf:username/repo@v1.0.0
+  • Local files:      ./config.yaml, /absolute/path.yaml
+  • HTTP URLs:        https://example.com/config.yaml
+
+Examples:
+  --load "community/proteomics-toolkit"
+  --load "./my-config.yaml"
+  --load "https://example.com/config.yaml"
         """,
     )
 
@@ -712,6 +822,11 @@ Examples:
         "--hook-config-file",
         type=str,
         help="Path to custom hook configuration JSON file",
+    )
+    parser.add_argument(
+        "--compact-mode",
+        action="store_true",
+        help="Enable compact mode: only expose core tools (~15 tools) to prevent context window overflow. All tools are still loaded in background for execute_tool to work.",
     )
 
     args = parser.parse_args()
@@ -846,13 +961,15 @@ Examples:
             print(f"🎯 Including tool types: {', '.join(include_tool_types)}")
         if exclude_tool_types:
             print(f"🚫 Excluding tool types: {', '.join(exclude_tool_types)}")
+        if args.compact_mode:
+            print("📦 Compact mode enabled: only core tools will be exposed")
 
         # Load hook configuration if specified
         hook_config = None
         if args.hook_config_file:
             import json
 
-            with open(args.hook_config_file, "r") as f:
+            with open(args.hook_config_file, "r", encoding="utf-8") as f:
                 hook_config = json.load(f)
             print(f"🔗 Hook config loaded from: {args.hook_config_file}")
 
@@ -874,9 +991,10 @@ Examples:
         print(f"⚡ Max workers: {args.max_workers}")
         print()
 
-        # Create SMCP server with hook support
+        # Create SMCP server with Space and hook support
         server = SMCP(
             name=args.name,
+            space=args.load,  # Pass Space URI directly to SMCP
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -890,6 +1008,7 @@ Examples:
             hooks_enabled=hooks_enabled,
             hook_config=hook_config,
             hook_type=args.hook_type,
+            compact_mode=args.compact_mode,
         )
 
         # Run server

@@ -232,7 +232,7 @@ def get_logger(name: Optional[str] = None) -> logging.Logger:
     Args:
         name (str, optional): Logger name (usually __name__)
 
-    Returns:
+    Returns
         logging.Logger: Logger instance
     """
     return _logger_manager.get_logger(name)
@@ -291,7 +291,7 @@ def get_hook_logger(name: str = "HookManager") -> logging.Logger:
     Args:
         name (str): Name of the logger. Defaults to 'HookManager'
 
-    Returns:
+    Returns
         logging.Logger: Configured logger for hook operations
     """
     return get_logger(name)

@@ -23,6 +23,9 @@ default_tool_files = {
     "fda_drug_adverse_event": os.path.join(
         current_dir, "data", "fda_drug_adverse_event_tools.json"
     ),
+    "fda_drug_adverse_event_detail": os.path.join(
+        current_dir, "data", "fda_drug_adverse_event_detail_tools.json"
+    ),
     "ChEMBL": os.path.join(current_dir, "data", "chembl_tools.json"),
     "EuropePMC": os.path.join(current_dir, "data", "europe_pmc_tools.json"),
     "semantic_scholar": os.path.join(
@@ -51,6 +54,18 @@ default_tool_files = {
     "fatcat": os.path.join(current_dir, "data", "fatcat_tools.json"),
     "wikidata_sparql": os.path.join(current_dir, "data", "wikidata_sparql_tools.json"),
     "agents": os.path.join(current_dir, "data", "agentic_tools.json"),
+    # Smolagents tool wrapper configs
+    "smolagents": os.path.join(current_dir, "data", "smolagent_tools.json"),
+    "tool_discovery_agents": os.path.join(
+        current_dir, "data", "tool_discovery_agents.json"
+    ),
+    "web_search_tools": os.path.join(current_dir, "data", "web_search_tools.json"),
+    "package_discovery_tools": os.path.join(
+        current_dir, "data", "package_discovery_tools.json"
+    ),
+    "pypi_package_inspector_tools": os.path.join(
+        current_dir, "data", "pypi_package_inspector_tools.json"
+    ),
     "drug_discovery_agents": os.path.join(
         current_dir, "data", "drug_discovery_agents.json"
     ),
@@ -100,6 +115,20 @@ default_tool_files = {
     "visualization_molecule_2d": os.path.join(
         current_dir, "data", "molecule_2d_tools.json"
     ),
+    # New database tools
+    "interpro": os.path.join(current_dir, "data", "interpro_tools.json"),
+    "blast": os.path.join(current_dir, "data", "blast_tools.json"),
+    "cbioportal": os.path.join(current_dir, "data", "cbioportal_tools.json"),
+    "regulomedb": os.path.join(current_dir, "data", "regulomedb_tools.json"),
+    "jaspar": os.path.join(current_dir, "data", "jaspar_tools.json"),
+    "remap": os.path.join(current_dir, "data", "remap_tools.json"),
+    "screen": os.path.join(current_dir, "data", "screen_tools.json"),
+    "pride": os.path.join(current_dir, "data", "pride_tools.json"),
+    "emdb": os.path.join(current_dir, "data", "emdb_tools.json"),
+    "gtopdb": os.path.join(current_dir, "data", "gtopdb_tools.json"),
+    "mpd": os.path.join(current_dir, "data", "mpd_tools.json"),
+    "worms": os.path.join(current_dir, "data", "worms_tools.json"),
+    "paleobiology": os.path.join(current_dir, "data", "paleobiology_tools.json"),
     "visualization_molecule_3d": os.path.join(
         current_dir, "data", "molecule_3d_tools.json"
     ),
@@ -120,6 +149,7 @@ default_tool_files = {
     ),
     "go": os.path.join(current_dir, "data", "gene_ontology_tools.json"),
     "compose": os.path.join(current_dir, "data", "compose_tools.json"),
+    "python_executor": os.path.join(current_dir, "data", "python_executor_tools.json"),
     "idmap": os.path.join(current_dir, "data", "idmap_tools.json"),
     "disease_target_score": os.path.join(
         current_dir, "data", "disease_target_score_tools.json"
@@ -131,8 +161,10 @@ default_tool_files = {
     "xml": os.path.join(current_dir, "data", "xml_tools.json"),
     "mcp_auto_loader_boltz": os.path.join(current_dir, "data", "boltz_tools.json"),
     "url": os.path.join(current_dir, "data", "url_fetch_tools.json"),
+    "file_download": os.path.join(current_dir, "data", "file_download_tools.json"),
     # 'langchain': os.path.join(current_dir, 'data', 'langchain_tools.json'),
     "rcsb_pdb": os.path.join(current_dir, "data", "rcsb_pdb_tools.json"),
+    "rcsb_search": os.path.join(current_dir, "data", "rcsb_search_tools.json"),
     "tool_composition": os.path.join(
         current_dir, "data", "tool_composition_tools.json"
     ),
@@ -147,10 +179,31 @@ default_tool_files = {
     "odphp": os.path.join(current_dir, "data", "odphp_tools.json"),
     "euhealth": os.path.join(current_dir, "data", "euhealth_tools.json"),
     "markitdown": os.path.join(current_dir, "data", "markitdown_tools.json"),
-    # Genomics tools
-    "genomics": os.path.join(current_dir, "data", "genomics_tools.json"),
     # Guideline and health policy tools
     "guidelines": os.path.join(current_dir, "data", "unified_guideline_tools.json"),
+    # Database tools
+    "kegg": os.path.join(current_dir, "data", "kegg_tools.json"),
+    "ensembl": os.path.join(current_dir, "data", "ensembl_tools.json"),
+    "clinvar": os.path.join(current_dir, "data", "clinvar_tools.json"),
+    "geo": os.path.join(current_dir, "data", "geo_tools.json"),
+    "dbsnp": os.path.join(current_dir, "data", "dbsnp_tools.json"),
+    "gnomad": os.path.join(current_dir, "data", "gnomad_tools.json"),
+    # Newly added database tools
+    "gbif": os.path.join(current_dir, "data", "gbif_tools.json"),
+    "obis": os.path.join(current_dir, "data", "obis_tools.json"),
+    "wikipathways": os.path.join(current_dir, "data", "wikipathways_tools.json"),
+    "rnacentral": os.path.join(current_dir, "data", "rnacentral_tools.json"),
+    "encode": os.path.join(current_dir, "data", "encode_tools.json"),
+    "gtex": os.path.join(current_dir, "data", "gtex_tools.json"),
+    "mgnify": os.path.join(current_dir, "data", "mgnify_tools.json"),
+    "gdc": os.path.join(current_dir, "data", "gdc_tools.json"),
+    # Ontology tools
+    "ols": os.path.join(current_dir, "data", "ols_tools.json"),
+    "optimizer": os.path.join(current_dir, "data", "optimizer_tools.json"),
+    # Compact mode core tools
+    "compact_mode": os.path.join(
+        current_dir, "data", "compact_mode_tools.json"
+    ),
 }
 
 
@@ -158,7 +211,7 @@ def get_default_hook_config():
     """
     Get default hook configuration.
 
-    Returns:
+    Returns
         dict: Default hook configuration with basic settings
     """
     return {

@@ -1,0 +1,444 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Shanghua Gao
+# This file is distributed under the same license as the ToolUniverse
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ToolUniverse\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:2
+#: b4e43bdf889345fda9b6d2eb894e0c6a
+msgid "MCP Server Development"
+msgstr "MCP服务器开发"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:4
+#: ad565ebb06ac4db583e7eabd637375b8
+msgid ""
+"Learn how to create MCP (Model Context Protocol) servers for remote tool "
+"integration with ToolUniverse."
+msgstr "了解如何创建用于远程工具集成的MCP（模型上下文协议）服务器与ToolUniverse。"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:7
+#: 3548461febb948d981e686613514c01a
+msgid "What is MCP?"
+msgstr "什么是MCP？"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:9
+#: 73d1c23a27794fd3b0d0a6f1e977dd3f
+msgid ""
+"MCP is a standardized protocol for tool communication that allows: - "
+"**Standardized Interface**: Consistent tool discovery and execution - "
+"**Language Agnostic**: Servers can be written in any language - "
+"**Scalable**: Support for multiple tools on one server - **Secure**: Built-"
+"in authentication and error handling"
+msgstr ""
+"MCP是一种用于工具通信的标准化协议，具有以下特点：  \n"
+"- **标准化接口**：实现一致的工具发现和执行  \n"
+"- **与语言无关**：服务器可使用任何语言编写  \n"
+"- **可扩展性**：支持在一个服务器上运行多个工具  \n"
+"- **安全性**：内置认证和错误处理"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:16
+#: c595449d9d934b60856b0d663d537fa2
+msgid "MCP Server Basics"
+msgstr "MCP服务器基础知识"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:18
+#: 0c43fb5900844dcdb9da0cde3db55d5d
+msgid "**Server Structure:** .. code-block:: text"
+msgstr "**服务器结构：** .. code-block:: text"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:21
+#: 6071fe20e8444935b40e8963c0172627
+msgid ""
+"my_mcp_server/ ├── server.py              # Main server file ├── tools.py"
+"               # Tool implementations ├── requirements.txt       # "
+"Dependencies ├── README.md              # Documentation └── docker-"
+"compose.yml     # Optional: Docker setup"
+msgstr ""
+"my_mcp_server/  \n"
+"├── server.py              # 主服务器文件  \n"
+"├── tools.py               # 工具实现  \n"
+"├── requirements.txt       # 依赖项  \n"
+"├── README.md              # 文档说明  \n"
+"└── docker-compose.yml     # 可选：Docker 配置"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:29
+#: 1bdfb4f8a19942dfbe6f81c835fec13e
+msgid "Basic MCP Server"
+msgstr "基本MCP服务器"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:87
+#: 6e81fefc614d4ca39925b598833e7a62
+msgid "Advanced MCP Server with Authentication"
+msgstr "高级MCP服务器与身份验证"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:124
+#: f74a227ccfb340b8aa7c97fc0c1bae63
+msgid "MCP Server with Database Integration"
+msgstr "MCP服务器与数据库集成"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:219
+#: 594a371b85be43dfb66b97bb6c86d943
+msgid "Error Handling and Validation"
+msgstr "错误处理与验证"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:222
+#: 933769fa92154a869a2d177e6d509c37
+msgid "Robust Error Handling"
+msgstr "<strong>健壮的错误处理</strong>"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:288
+#: f527a8ec09914684867e746018b1bfb3
+msgid "Rate Limiting and Caching"
+msgstr "速率限制与缓存"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:356
+#: bb1466c934f7454d848e288eff9822bc
+msgid "Deployment Options"
+msgstr "部署选项"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:359
+#: bb5cb2235b69436fb2ccf4c2fedc791d
+msgid "Docker Deployment"
+msgstr "Docker 部署"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:361
+#: 0f6f9577038c40d7b2a333003c35aaf6
+msgid "**Dockerfile:** .. code-block:: dockerfile"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:364
+#: 93f559ca16364f6c9b31bd26b45a2d1a
+msgid "FROM python:3.9-slim"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:366
+#: ce8eb469bcb249e8a64f26ff03271387
+msgid "WORKDIR /app"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:368
+#: a42558a828e3436885734162402a6b08
+msgid ""
+"COPY requirements.txt . RUN pip install --no-cache-dir -r requirements.txt"
+msgstr ""
+"COPY requirements.txt .  \n"
+"RUN pip install --no-cache-dir -r requirements.txt"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:371
+#: 0948ca4ba2e54bb7bc4a1b7941b3cd0d
+msgid "COPY . ."
+msgstr "复制 . ."
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:373
+#: 0e4a14d9fe22426bac2c331b8689f2e2
+msgid "EXPOSE 8000"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:375
+#: 1724e7b7e6d84f06b6bacbb475a192b8
+msgid "CMD [\"uvicorn\", \"server:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:377
+#: 2ce2bec57f094ea6b02d76ed32c2ece7
+msgid "**docker-compose.yml:** .. code-block:: yaml"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:380
+#: 7c9e9baef858410c942503b7401b96fb
+msgid "version: '3.8' services:"
+msgstr ""
+"version: '3.8'  \n"
+"services:"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:382
+#: 30df5bd29e8e4f89a6b863d395a11a49
+msgid "mcp-server:"
+msgstr ""
+"mcp-server:  \n"
+"\n"
+"上下文：文档"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:383
+#: a717c1cf7d5b484a934d550ebc0cc96f
+msgid "build: . ports:"
+msgstr "构建：. 端口："
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:385
+#: ed7fe2c2bee74f09bf8d36ce41c95c09
+msgid "\"8000:8000\""
+msgstr "8000:8000"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:386
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:437
+#: 0c71935454b84739a437210228a94c28 3f0d635653e543f9a487b8c6891e1ec5
+msgid "environment:"
+msgstr "环境："
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:387
+#: 0703683635c84bdca30d175ba236ab5c
+msgid "MCP_API_TOKEN=your-secret-token"
+msgstr "MCP_API_TOKEN=你的密钥令牌"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:388
+#: dbf7cfce5f6d4559ac6bcfe5f069bfbe
+msgid "volumes:"
+msgstr "卷:"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:389
+#: 897ee6838ab04dfb979093913f1de17b
+msgid "./data:/app/data"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:390
+#: 383312bffcec42dea7125d382d9cfbf6
+msgid "restart: unless-stopped"
+msgstr "重启：除非已停止"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:393
+#: c41a9c316fab41238bb82115891945ee
+msgid "Cloud Deployment"
+msgstr "云部署"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:395
+#: 9a204ea2716b418eb68c57a21d919971
+msgid "**Heroku (app.json):** .. code-block:: json"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:398
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:403
+#: 0a6cde0ca3964b13a0ca55697c5a52b7 58de0eb441ab402a847d18e14ad3d977
+msgid "{"
+msgstr "请提供您需要翻译的具体英文文本内容，我将为您进行翻译。"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:399
+#: 6d1d17a66aed40f783f2debe9881ca24
+msgid ""
+"\"name\": \"my-mcp-server\", \"description\": \"MCP server for "
+"ToolUniverse\", \"image\": \"heroku/python\", \"addons\": ["
+msgstr ""
+"\"name\": \"my-mcp-server\", \"description\": \"用于ToolUniverse的MCP服务器\", "
+"\"image\": \"heroku/python\", \"addons\": ["
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:404
+#: a1e7962df46943b5a09d262c6c70e942
+msgid "\"plan\": \"heroku-postgresql:hobby-dev\""
+msgstr "plan\": \"heroku-postgresql:hobby-dev"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:405
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:410
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:416
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:417
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:418
+#: 33d84cf37be0402693b17cd9ca495072 34a95ce247594cc8b14c9e77d28ff0e5
+#: 470191dd27e34835b65d0a38f26ca348 5313fc5260a3418892e92113740d0c2f
+#: fed76122c5fc4e79ac39c4cad8df2b4b
+msgid "}"
+msgstr "请提供您需要翻译的具体英文文本，我将为您进行翻译。"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:406
+#: 1e3bc6a418244265b740a7cef68a82f8
+msgid "], \"env\": {"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:408
+#: 63667c0f1d204905b76b0c5a65093a0b
+msgid "\"MCP_API_TOKEN\": {"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:409
+#: d17caf35dbe74250a1740d0598b2b66d
+msgid "\"description\": \"API token for authentication\""
+msgstr "description\": \"用于身份验证的API令牌"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:411
+#: b303b28e556a4e1aaaf2b636d71173c0
+msgid "}, \"formation\": {"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:413
+#: 1f497082496c440f9ab4b247515a540d
+msgid "\"web\": {"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:414
+#: 207dfdb785514eada66f84471f29f287
+msgid "\"quantity\": 1, \"size\": \"basic\""
+msgstr "quantity\": 1, \"size\": \"基础"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:420
+#: c2a6ed192e4b46a18e42e5837e9ea675
+msgid "**AWS Lambda (serverless.yml):** .. code-block:: yaml"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:423
+#: a88139b568264ce3a2be1cb084eac115
+msgid "service: mcp-server"
+msgstr "服务：mcp-server"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:425
+#: 2a07f467e9e44837902823afba89a1b1
+msgid "provider:"
+msgstr "提供者："
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:426
+#: 4cd1fb9acbc94d87bb7799bd4ad6071e
+msgid "name: aws runtime: python3.9 region: us-east-1"
+msgstr ""
+"名称: aws  \n"
+"运行时: python3.9  \n"
+"区域: us-east-1"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:430
+#: 190a4923605e4396a709648c7f6174ca
+msgid "functions:"
+msgstr "功能："
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:431
+#: 96c9c2a78d6b413bb8ef3bcae0ab716b
+msgid "api:"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:432
+#: ab8b60275cba4de5a0d544ae898f0a4d
+msgid "handler: server.handler events:"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:434
+#: a6e733420cf74c56b7612ee10dac4917
+msgid "http:"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:435
+#: 33f499bfb7b947e885a1d96499fb3acd
+#, python-brace-format
+msgid "path: /{proxy+} method: ANY"
+msgstr "路径：/{proxy+} 方法：ANY"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:438
+#: f6ffe6b5b2ef4e3b819ff8bc75533e25
+#, python-brace-format
+msgid "MCP_API_TOKEN: ${env:MCP_API_TOKEN}"
+msgstr ""
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:441
+#: d4aa71e724f84a7c91489cf8af6a595b
+msgid "Testing MCP Servers"
+msgstr "测试 MCP 服务器"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:444
+#: 2e428dfacd564c30b6bc64bcf8ab68bd
+msgid "Unit Testing"
+msgstr "单元测试"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:491
+#: 9999487ded7b485aba5dc866edd2c5c1
+msgid "Integration Testing"
+msgstr "集成测试"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:522
+#: d21749055349468bb058db688c0ede21
+msgid "Performance Testing"
+msgstr "性能测试"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:556
+#: 2cff7c24b55c4058ae45084ed8930f56
+msgid "Best Practices"
+msgstr "最佳实践"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:558
+#: 7f86f9c87b7e4c8795e8039b3613fc2d
+msgid ""
+"**1. Error Handling** - Always return structured error responses - Include "
+"helpful error messages - Log errors for debugging"
+msgstr "**1. 错误处理** - 始终返回结构化的错误响应 - 包含有帮助的错误信息 - 记录错误以便调试"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:563
+#: b4ae4d94da9d4a3082a5586c7b5ed62b
+msgid ""
+"**2. Input Validation** - Validate all inputs thoroughly - Use Pydantic "
+"models for complex validation - Return clear validation error messages"
+msgstr "**2. 输入验证** - 彻底验证所有输入 - 使用 Pydantic 模型进行复杂验证 - 返回清晰的验证错误信息"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:568
+#: dbdb3a92882b4b8fb302a88a09f1b451
+msgid ""
+"**3. Performance** - Implement caching for expensive operations - Use "
+"async/await for I/O operations - Add rate limiting for public APIs"
+msgstr "**3. 性能** - 为耗时操作实现缓存 - 对 I/O 操作使用 async/await - 为公共 API 添加速率限制"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:573
+#: 6d00408b49ee4aa78b90cc7cce6cd4c0
+msgid ""
+"**4. Security** - Implement authentication for sensitive tools - Validate "
+"and sanitize all inputs - Use HTTPS in production"
+msgstr "**4. 安全性** - 为敏感工具实施身份验证 - 验证并清理所有输入 - 在生产环境中使用 HTTPS"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:578
+#: 3b809e409da14b94833dd0007260683b
+msgid ""
+"**5. Monitoring** - Add health check endpoints - Log important operations - "
+"Monitor server performance"
+msgstr "**5. 监控** - 添加健康检查端点 - 记录重要操作 - 监控服务器性能"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:583
+#: bdff5b844ad9412186f106079348aafd
+msgid ""
+"**6. Documentation** - Document all tools and parameters - Provide usage "
+"examples - Include deployment instructions"
+msgstr "**6. 文档** - 记录所有工具和参数 - 提供使用示例 - 包括部署说明"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:589
+#: d19ed775ef3c43d2aebb19d2cb99c326
+msgid "Next Steps"
+msgstr "下一步"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:591
+#: c0d1837264554390919a67f71de1140e
+msgid ""
+"🔧 **Advanced Patterns**: :doc:`advanced_patterns` - Circuit breakers, load "
+"balancing, etc."
+msgstr "🔧 **高级模式**: :doc:`advanced_patterns` - 断路器、负载均衡等。"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:592
+#: 1e535ad603f3477895460a53189f5369
+msgid ""
+"🚀 **Contributing**: :doc:`../contributing/remote_tools` - Submit your MCP "
+"server to ToolUniverse"
+msgstr ""
+"🚀 **贡献**：:doc:`../contributing/remote_tools` - 将您的MCP服务器提交至ToolUniverse"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:593
+#: 8e0ddfba8284463b9516892d26c139ce
+msgid "📚 **Tutorial**: :doc:`tutorial` - Learn about remote tool integration"
+msgstr "📚 **教程**: :doc:`tutorial` - 了解远程工具集成"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:594
+#: 4e3eb8948e1940ef996d76cba9c1466c
+msgid ""
+"🔍 **Architecture**: :doc:`../reference/architecture` - Understand "
+"ToolUniverse internals"
+msgstr "🔍 **架构**: :doc:`../reference/architecture` - 了解 ToolUniverse 内部结构"
+
+#: ../../expand_tooluniverse/remote_tools/mcp_server.rst:597
+#: 1c511eb419f644c1aa8a5016168f6aaa
+msgid ""
+"**Development tip**: Start with simple servers and gradually add complexity."
+" Test thoroughly and document everything!"
+msgstr "**开发提示**：从简单的服务器开始，逐步增加复杂性。进行充分测试并记录所有内容！"

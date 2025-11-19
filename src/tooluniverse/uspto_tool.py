@@ -132,7 +132,7 @@ class USPTOOpenDataPortalTool(BaseTool):
         Args:
             arguments: A dictionary of arguments for the tool, matching the parameters in the tool definition.
 
-        Returns:
+        Returns
             The result of the API call, either as a dictionary (for JSON) or a string (for CSV).
         """
         endpoint = self.tool_config.get("api_endpoint")

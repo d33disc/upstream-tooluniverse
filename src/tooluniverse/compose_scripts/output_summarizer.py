@@ -39,7 +39,7 @@ def compose(arguments: Dict[str, Any], tooluniverse, call_tool) -> Dict[str, Any
         tooluniverse: ToolUniverse instance for tool execution
         call_tool: Function to call other tools within the composition
 
-    Returns:
+    Returns
         Dict[str, Any]: Dictionary containing:
             - success (bool): Whether summarization was successful
             - original_length (int): Length of original output
@@ -165,7 +165,7 @@ def _chunk_output(text: str, chunk_size: int) -> List[str]:
         text (str): The text to be chunked
         chunk_size (int): Maximum size of each chunk
 
-    Returns:
+    Returns
         List[str]: List of text chunks
     """
     if len(text) <= chunk_size:
@@ -208,7 +208,7 @@ def _summarize_chunk(
         focus_areas (str): Areas to focus on during summarization
         call_tool: Function to call the summarizer tool
 
-    Returns:
+    Returns
         str: Summarized chunk text, or empty string if summarization fails
     """
     try:
@@ -296,7 +296,7 @@ def _merge_summaries(
         max_length (int): Maximum length of final summary
         call_tool: Function to call the summarizer tool
 
-    Returns:
+    Returns
         str: Final merged summary
     """
     if not chunk_summaries:

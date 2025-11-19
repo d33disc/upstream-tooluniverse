@@ -43,7 +43,7 @@ class PMCTool(BaseTool):
             date_to: End date filter (YYYY/MM/DD)
             article_type: Article type filter (e.g., 'research-article', 'review')
 
-        Returns:
+        Returns
             List of paper dictionaries
         """
         try:
@@ -158,7 +158,7 @@ class PMCTool(BaseTool):
         Args:
             tool_arguments: Dictionary containing search parameters
 
-        Returns:
+        Returns
             List of paper dictionaries
         """
         query = tool_arguments.get("query", "")

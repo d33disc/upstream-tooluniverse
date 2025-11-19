@@ -374,6 +374,180 @@ class TestMCPIntegrationEdgeCases(unittest.TestCase):
             # Expected if load testing fails
             self.assertIsInstance(e, Exception)
 
+    def test_mcp_tool_registration_edge_cases(self):
+        """Test MCP tool registration edge cases."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            
+            # Test with minimal configuration
+            minimal_config = {
+                "name": "minimal_loader",
+                "server_url": "http://localhost:8000"
+            }
+            
+            auto_loader = MCPAutoLoaderTool(minimal_config)
+            self.assertIsNotNone(auto_loader)
+            self.assertEqual(auto_loader.server_url, "http://localhost:8000")
+            self.assertEqual(auto_loader.tool_prefix, "mcp_")  # Default value
+            self.assertTrue(auto_loader.auto_register)  # Default value
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+
+    def test_mcp_tool_registration_with_invalid_config(self):
+        """Test MCP tool registration with invalid configuration."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            
+            # Test with invalid server URL
+            invalid_config = {
+                "name": "invalid_loader",
+                "server_url": "invalid-url",
+                "transport": "invalid_transport"
+            }
+            
+            # Should handle invalid config gracefully
+            auto_loader = MCPAutoLoaderTool(invalid_config)
+            self.assertIsNotNone(auto_loader)
+            self.assertEqual(auto_loader.server_url, "invalid-url")
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+        except Exception as e:
+            # Should be a configuration error
+            self.assertIsInstance(e, Exception)
+
+    def test_mcp_tool_registration_with_empty_discovered_tools(self):
+        """Test MCP tool registration with empty discovered tools."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            
+            auto_loader = MCPAutoLoaderTool({
+                "name": "empty_loader",
+                "server_url": "http://localhost:8000"
+            })
+            
+            # Set empty discovered tools
+            auto_loader._discovered_tools = {}
+            
+            # Generate proxy configs should return empty list
+            configs = auto_loader.generate_proxy_tool_configs()
+            self.assertEqual(len(configs), 0)
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+
+    def test_mcp_tool_registration_with_selected_tools_filter(self):
+        """Test MCP tool registration with selected tools filter."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            
+            auto_loader = MCPAutoLoaderTool({
+                "name": "filtered_loader",
+                "server_url": "http://localhost:8000",
+                "selected_tools": ["tool1", "tool3"]  # Only select tool1 and tool3
+            })
+            
+            # Mock discovered tools
+            auto_loader._discovered_tools = {
+                "tool1": {"name": "tool1", "description": "Tool 1", "inputSchema": {}},
+                "tool2": {"name": "tool2", "description": "Tool 2", "inputSchema": {}},
+                "tool3": {"name": "tool3", "description": "Tool 3", "inputSchema": {}},
+                "tool4": {"name": "tool4", "description": "Tool 4", "inputSchema": {}}
+            }
+            
+            # Generate proxy configs
+            configs = auto_loader.generate_proxy_tool_configs()
+            
+            # Should only include selected tools
+            self.assertEqual(len(configs), 2)
+            tool_names = [config["name"] for config in configs]
+            self.assertIn("mcp_tool1", tool_names)
+            self.assertIn("mcp_tool3", tool_names)
+            self.assertNotIn("mcp_tool2", tool_names)
+            self.assertNotIn("mcp_tool4", tool_names)
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+
+    def test_mcp_tool_registration_with_tooluniverse_integration(self):
+        """Test MCP tool registration integration with ToolUniverse."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            
+            # Create a fresh ToolUniverse instance
+            tu = ToolUniverse()
+            
+            auto_loader = MCPAutoLoaderTool({
+                "name": "integration_loader",
+                "server_url": "http://localhost:8000",
+                "tool_prefix": "test_"
+            })
+            
+            # Mock discovered tools
+            auto_loader._discovered_tools = {
+                "test_tool": {
+                    "name": "test_tool",
+                    "description": "A test tool",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {"param": {"type": "string"}},
+                        "required": ["param"]
+                    }
+                }
+            }
+            
+            # Test registration
+            registered_count = auto_loader.register_tools_in_engine(tu)
+            
+            self.assertEqual(registered_count, 1)
+            self.assertIn("test_test_tool", tu.all_tool_dict)
+            self.assertIn("test_test_tool", tu.callable_functions)
+            
+            # Verify tool configuration
+            tool_config = tu.all_tool_dict["test_test_tool"]
+            self.assertEqual(tool_config["type"], "MCPProxyTool")
+            self.assertEqual(tool_config["target_tool_name"], "test_tool")
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+        except Exception as e:
+            # Expected if connection fails
+            self.assertIsInstance(e, Exception)
+
+    def test_mcp_tool_registration_error_handling(self):
+        """Test MCP tool registration error handling."""
+        try:
+            from tooluniverse.mcp_client_tool import MCPAutoLoaderTool
+            from unittest.mock import MagicMock
+            
+            auto_loader = MCPAutoLoaderTool({
+                "name": "error_loader",
+                "server_url": "http://localhost:8000"
+            })
+            
+            # Mock discovered tools
+            auto_loader._discovered_tools = {
+                "error_tool": {
+                    "name": "error_tool",
+                    "description": "A tool that causes errors",
+                    "inputSchema": {}
+                }
+            }
+            
+            # Create a mock ToolUniverse that raises an error
+            mock_engine = MagicMock()
+            mock_engine.register_custom_tool.side_effect = Exception("Registration failed")
+            
+            # Test registration error handling
+            with self.assertRaises(Exception) as context:
+                auto_loader.register_tools_in_engine(mock_engine)
+            
+            self.assertIn("Failed to register tools", str(context.exception))
+            
+        except ImportError:
+            self.skipTest("MCPAutoLoaderTool not available")
+
 
 if __name__ == "__main__":
     unittest.main()

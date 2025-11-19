@@ -25,10 +25,10 @@ This tools browses and returns available topics and categories and it is helpful
 
    **Parameters:**
 
-   * ``lang`` (string) (optional)
+   * ``lang`` (string) (required)
      Language code (en or es)
 
-   * ``type`` (string) (optional)
+   * ``type`` (string) (required)
      topic or category
 
    **Example Usage:**
@@ -38,6 +38,8 @@ This tools browses and returns available topics and categories and it is helpful
       query = {
           "name": "odphp_itemlist",
           "arguments": {
+              "lang": "example_value",
+              "type": "example_value"
           }
       }
       result = tu.run(query)
@@ -58,19 +60,19 @@ This tool provides personalized preventive-care recommendations and it is helpfu
 
    **Parameters:**
 
-   * ``lang`` (string) (optional)
+   * ``lang`` (string) (required)
      Language code (en or es)
 
-   * ``age`` (integer) (optional)
+   * ``age`` (integer) (required)
      Age in years (0–120)
 
-   * ``sex`` (string) (optional)
+   * ``sex`` (string) (required)
      Male or Female
 
-   * ``pregnant`` (string) (optional)
+   * ``pregnant`` (string) (required)
      "Yes" or "No"
 
-   * ``strip_html`` (boolean) (optional)
+   * ``strip_html`` (boolean) (required)
      If true, also return PlainSections[] with HTML removed for each topic
 
    **Example Usage:**
@@ -80,6 +82,11 @@ This tool provides personalized preventive-care recommendations and it is helpfu
       query = {
           "name": "odphp_myhealthfinder",
           "arguments": {
+              "lang": "example_value",
+              "age": 10,
+              "sex": "example_value",
+              "pregnant": "example_value",
+              "strip_html": true
           }
       }
       result = tu.run(query)
@@ -103,10 +110,10 @@ This tool retrieves readable text from ODPHP article links and information sourc
    * ``urls`` (array) (required)
      1–3 absolute URLs from AccessibleVersion or RelatedItems.Url
 
-   * ``max_chars`` (integer) (optional)
+   * ``max_chars`` (integer) (required)
      Optional hard cap on extracted text length (e.g., 5000)
 
-   * ``return_html`` (boolean) (optional)
+   * ``return_html`` (boolean) (required)
      If true, also return minimally cleaned HTML
 
    **Example Usage:**
@@ -116,7 +123,9 @@ This tool retrieves readable text from ODPHP article links and information sourc
       query = {
           "name": "odphp_outlink_fetch",
           "arguments": {
-              "urls": ["item1", "item2"]
+              "urls": ["item1", "item2"],
+              "max_chars": 10,
+              "return_html": true
           }
       }
       result = tu.run(query)
@@ -137,19 +146,19 @@ Find specific health topics and get their full content. Use when the user mentio
 
    **Parameters:**
 
-   * ``lang`` (string) (optional)
+   * ``lang`` (string) (required)
      Language code (en or es)
 
-   * ``topicId`` (string) (optional)
+   * ``topicId`` (string) (required)
      Comma-separated topic IDs
 
-   * ``categoryId`` (string) (optional)
+   * ``categoryId`` (string) (required)
      Comma-separated category IDs
 
-   * ``keyword`` (string) (optional)
+   * ``keyword`` (string) (required)
      Keyword search for topics
 
-   * ``strip_html`` (boolean) (optional)
+   * ``strip_html`` (boolean) (required)
      If true, also return PlainSections[] with HTML removed for each topic
 
    **Example Usage:**
@@ -159,6 +168,11 @@ Find specific health topics and get their full content. Use when the user mentio
       query = {
           "name": "odphp_topicsearch",
           "arguments": {
+              "lang": "example_value",
+              "topicId": "example_value",
+              "categoryId": "example_value",
+              "keyword": "example_value",
+              "strip_html": true
           }
       }
       result = tu.run(query)

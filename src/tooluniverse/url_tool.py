@@ -94,7 +94,7 @@ class URLToPDFTextTool(BaseTool):
         """
         Ensure Playwright browser binaries are installed.
 
-        Returns:
+        Returns
             None on success, or an error string on failure.
         """
         # Allow user to skip auto-install via env var
@@ -187,6 +187,24 @@ class URLToPDFTextTool(BaseTool):
             return {"error": "URL must start with http:// or https://"}
 
         timeout = arguments.get("timeout", 30)
+
+        # First, check if the URL returns HTML or a downloadable file
+        try:
+            resp = requests.head(url, timeout=timeout, allow_redirects=True)
+            content_type = resp.headers.get("Content-Type", "").lower()
+            # If it's not HTML, handle it as a simple text download
+            is_html = "text/html" in content_type or "application/xhtml" in content_type
+            if not is_html:
+                # Download the file directly and return its text content
+                resp = requests.get(url, timeout=timeout, allow_redirects=True)
+                if resp.status_code != 200:
+                    return {"error": f"HTTP {resp.status_code}"}
+                text = resp.text
+                if not text.strip():
+                    return {"error": "File appears to be empty or binary."}
+                return {self.return_key: text.strip()}
+        except requests.exceptions.RequestException as e:
+            return {"error": f"Failed to check content type: {e}"}
 
         # Ensure browsers are installed (auto-install if needed)
         ensure_error = self._ensure_playwright_browsers(

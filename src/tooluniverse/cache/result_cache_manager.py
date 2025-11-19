@@ -203,7 +203,7 @@ class ResultCacheManager:
         Args:
             requests: Iterable of dicts containing ``namespace``, ``version`` and ``cache_key``.
 
-        Returns:
+        Returns
             Mapping of composed cache keys to cached values.
         """
 

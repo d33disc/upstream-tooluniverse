@@ -45,7 +45,7 @@ class RemoteTool(BaseTool):
         Args:
             arguments (dict, optional): Tool arguments (ignored)
 
-        Returns:
+        Returns
             dict: Error message indicating the tool is not available locally
         """
         server_type = self.remote_info.get("server_type", "Unknown")
@@ -69,7 +69,7 @@ class RemoteTool(BaseTool):
         """
         Get information about the remote server hosting this tool.
 
-        Returns:
+        Returns
             dict: Remote server information including server type, URL, and original tool type
         """
         return self.remote_info.copy()
@@ -78,7 +78,7 @@ class RemoteTool(BaseTool):
         """
         Check if this tool is available for local execution.
 
-        Returns:
+        Returns
             bool: Always False for RemoteTool instances
         """
         return False
@@ -87,7 +87,7 @@ class RemoteTool(BaseTool):
         """
         Get server connection information for this remote tool.
 
-        Returns:
+        Returns
             dict: Server connection details
         """
         return {

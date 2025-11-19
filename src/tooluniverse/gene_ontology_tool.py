@@ -99,7 +99,7 @@ class GeneOntologyTool(BaseTool):
         Args:
             arguments (Dict[str, Any]): Parameters for the API call.
 
-        Returns:
+        Returns
             Any: The JSON data from the API or an error dictionary.
         """
         # Normalize arguments

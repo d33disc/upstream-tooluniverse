@@ -295,7 +295,7 @@ msgstr "确保："
 
 #: ../../I18N_GUIDE.md:228 506ccc8b33f14e008c321643119e6a55
 msgid ".po 文件已保存"
-msgstr ""
+msgstr ".po 文件已成功保存"
 
 #: ../../I18N_GUIDE.md:229 b98c5eaef58b4f8686a0301973e85977
 msgid "运行 `make clean` 清理缓存"

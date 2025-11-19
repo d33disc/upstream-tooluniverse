@@ -314,7 +314,7 @@ msgstr "请提供需要翻译的具体英文文本，我将为您提供专业的
 
 #: ../../MULTILANG_README.md:192 fde5a71d94be4b05bca11fd5fea7dfdb
 msgid "构建中文版测试"
-msgstr ""
+msgstr "构建测试的中文版"
 
 #: ../../MULTILANG_README.md:203 99872a4e056d46f2887318a65c1e662d
 msgid "批量翻译技巧"
@@ -480,7 +480,7 @@ msgstr ""
 
 #: ../../MULTILANG_README.md:299 9206fac052e54248adcb5c53f035d57f
 msgid "提交 Pull Request"
-msgstr ""
+msgstr "提交拉取请求"
 
 #: ../../MULTILANG_README.md:301 85dc0b80cdbc4470a7053e1f22ad5124
 msgid "📄 许可"

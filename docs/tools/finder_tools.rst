@@ -25,10 +25,10 @@ Retrieve related tools from the toolbox based on the provided description, advan
 
    **Parameters:**
 
-   * ``description`` (string) (optional)
+   * ``description`` (string) (required)
      The description of the tool capability required.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      The number of tools to retrieve
 
    * ``picked_tool_names`` (array) (optional)
@@ -47,6 +47,8 @@ Retrieve related tools from the toolbox based on the provided description, advan
       query = {
           "name": "Tool_Finder",
           "arguments": {
+              "description": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -67,10 +69,10 @@ Simple keyword-based tool finder for discovering relevant tools using text match
 
    **Parameters:**
 
-   * ``description`` (string) (optional)
+   * ``description`` (string) (required)
      The description of the tool capability required.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      The number of tools to retrieve
 
    * ``picked_tool_names`` (array) (optional)
@@ -89,6 +91,8 @@ Simple keyword-based tool finder for discovering relevant tools using text match
       query = {
           "name": "Tool_Finder_Keyword",
           "arguments": {
+              "description": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)
@@ -153,10 +157,10 @@ Retrieve related tools from the toolbox based on the provided description
 
    **Parameters:**
 
-   * ``description`` (string) (optional)
+   * ``description`` (string) (required)
      The description of the tool capability required.
 
-   * ``limit`` (integer) (optional)
+   * ``limit`` (integer) (required)
      The number of tools to retrieve
 
    **Example Usage:**
@@ -166,6 +170,8 @@ Retrieve related tools from the toolbox based on the provided description
       query = {
           "name": "Tool_RAG",
           "arguments": {
+              "description": "example_value",
+              "limit": 10
           }
       }
       result = tu.run(query)

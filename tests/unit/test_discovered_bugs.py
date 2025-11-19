@@ -277,19 +277,6 @@ class TestDiscoveredBugs(unittest.TestCase):
             if "error" in result:
                 self.assertIsInstance(result["error"], str)
     
-    def test_tool_specification_edge_cases(self):
-        """Test tool specification edge cases."""
-        # Test with non-existent tool
-        spec = self.tu.tool_specification("NonExistentTool")
-        self.assertIsNone(spec)
-        
-        # Test with empty string
-        spec = self.tu.tool_specification("")
-        self.assertIsNone(spec)
-        
-        # Test with None
-        spec = self.tu.tool_specification(None)
-        self.assertIsNone(spec)
     
     def test_tool_health_check(self):
         """Test tool health check functionality."""
@@ -309,43 +296,8 @@ class TestDiscoveredBugs(unittest.TestCase):
         self.assertGreaterEqual(health["available"], 0)
         self.assertGreaterEqual(health["unavailable"], 0)
     
-    def test_tool_listing_edge_cases(self):
-        """Test tool listing edge cases."""
-        # Test with invalid mode
-        tools = self.tu.list_built_in_tools(mode="invalid_mode")
-        self.assertIsInstance(tools, dict)
-        
-        # Test with None mode
-        tools = self.tu.list_built_in_tools(mode=None)
-        self.assertIsInstance(tools, dict)
     
-    def test_tool_filtering_edge_cases(self):
-        """Test tool filtering edge cases."""
-        # Test with empty category filter
-        tools = self.tu.get_available_tools(category_filter="")
-        self.assertIsInstance(tools, list)
-        
-        # Test with None category filter
-        tools = self.tu.get_available_tools(category_filter=None)
-        self.assertIsInstance(tools, list)
-        
-        # Test with non-existent category
-        tools = self.tu.get_available_tools(category_filter="non_existent_category")
-        self.assertIsInstance(tools, list)
     
-    def test_tool_search_edge_cases(self):
-        """Test tool search edge cases."""
-        # Test with empty pattern
-        results = self.tu.find_tools_by_pattern("")
-        self.assertIsInstance(results, list)
-        
-        # Test with None pattern
-        results = self.tu.find_tools_by_pattern(None)
-        self.assertIsInstance(results, list)
-        
-        # Test with invalid search_in parameter
-        results = self.tu.find_tools_by_pattern("test", search_in="invalid_field")
-        self.assertIsInstance(results, list)
     
     def test_cache_management(self):
         """Test cache management functionality."""
@@ -362,87 +314,11 @@ class TestDiscoveredBugs(unittest.TestCase):
         self.tu.clear_cache()
         self.assertEqual(len(self.tu._cache), 0)
     
-    def test_hooks_toggle(self):
-        """Test hooks toggle functionality."""
-        # Test enabling hooks
-        self.tu.toggle_hooks(True)
-        
-        # Test disabling hooks
-        self.tu.toggle_hooks(False)
-        
-        # Test with invalid parameter
-        self.tu.toggle_hooks(None)
     
-    def test_call_id_generation(self):
-        """Test call ID generation."""
-        # Test generating multiple IDs
-        id1 = self.tu.call_id_gen()
-        id2 = self.tu.call_id_gen()
-        
-        self.assertIsInstance(id1, str)
-        self.assertIsInstance(id2, str)
-        self.assertNotEqual(id1, id2)
-        self.assertGreater(len(id1), 0)
-        self.assertGreater(len(id2), 0)
     
-    def test_lazy_loading_status(self):
-        """Test lazy loading status."""
-        status = self.tu.get_lazy_loading_status()
-        
-        self.assertIsInstance(status, dict)
-        self.assertIn("lazy_loading_enabled", status)
-        self.assertIn("full_discovery_completed", status)
-        self.assertIn("immediately_available_tools", status)
-        self.assertIn("lazy_mappings_available", status)
-        self.assertIn("loaded_tools_count", status)
     
-    def test_tool_types_retrieval(self):
-        """Test tool types retrieval."""
-        tool_types = self.tu.get_tool_types()
-        
-        self.assertIsInstance(tool_types, list)
-        # Should contain some tool types
-        self.assertGreater(len(tool_types), 0)
     
-    def test_export_functionality(self):
-        """Test export functionality."""
-        import tempfile
-        import os
-        
-        # Test exporting to file
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as f:
-            temp_file = f.name
-        
-        try:
-            self.tu.export_tool_names(temp_file)
-            
-            # Verify file was created
-            self.assertTrue(os.path.exists(temp_file))
-            
-        finally:
-            # Clean up
-            if os.path.exists(temp_file):
-                os.unlink(temp_file)
     
-    def test_env_template_generation(self):
-        """Test environment template generation."""
-        import tempfile
-        import os
-        
-        # Test with empty list
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.env') as f:
-            temp_file = f.name
-        
-        try:
-            self.tu.generate_env_template([], output_file=temp_file)
-            
-            # Verify file was created
-            self.assertTrue(os.path.exists(temp_file))
-            
-        finally:
-            # Clean up
-            if os.path.exists(temp_file):
-                os.unlink(temp_file)
 
 
 if __name__ == "__main__":

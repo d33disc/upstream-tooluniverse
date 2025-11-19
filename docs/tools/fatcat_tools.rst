@@ -28,7 +28,7 @@ Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underl
    * ``query`` (string) (required)
      Search query for Fatcat releases. Use keywords to search across titles, abstracts, and metadata of research papers.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of results to return. Default is 10, maximum is 100.
 
    **Example Usage:**
@@ -38,7 +38,8 @@ Search Internet Archive Scholar via Fatcat releases search. Fatcat is the underl
       query = {
           "name": "Fatcat_search_scholar",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)

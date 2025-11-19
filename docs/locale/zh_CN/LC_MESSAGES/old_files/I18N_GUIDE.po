@@ -237,7 +237,7 @@ msgstr "未翻译的内容将显示英文原文。"
 
 #: ../../old_files/I18N_GUIDE.md:172 d5926419273c4d8a9fd5e4dea26aebbe
 msgid "🔧 配置详解"
-msgstr ""
+msgstr "🔧 配置详细说明"
 
 #: ../../old_files/I18N_GUIDE.md:174 f7b2a6609b654fd5ae16852d6a1a96f5
 msgid "conf.py 国际化配置"

@@ -13,7 +13,7 @@ def compose(arguments, tooluniverse, call_tool):
         tooluniverse: ToolUniverse instance
         call_tool: Function to call other tools
 
-    Returns:
+    Returns
         dict: Comprehensive drug safety analysis result
     """
     drug_name = arguments["drug_name"]

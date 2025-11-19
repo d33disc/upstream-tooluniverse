@@ -46,7 +46,7 @@ def compose(arguments, tooluniverse, call_tool, stream_callback=None):
         call_tool (function): Function to call other tools
         stream_callback (callable, optional): Callback function for streaming output
 
-    Returns:
+    Returns
         dict: The result of the multi-agent search
     """
     query = arguments.get("query", "")

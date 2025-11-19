@@ -7,106 +7,107 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ToolUniverse\n"
+"Project-Id-Version:  ToolUniverse\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 21:40-0400\n"
+"POT-Creation-Date: 2025-10-17 01:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../tools/wikidata_sparql_tools.rst:2 7557ce3724b34a5aae49a8f74618317d
+#: ../../tools/wikidata_sparql_tools.rst:2 e50d1e5b758347ba9a74f062f5120637
 msgid "Wikidata Sparql Tools"
 msgstr "Wikidata Sparql 工具"
 
-#: ../../tools/wikidata_sparql_tools.rst:4 ac2d878bce8a471cbda75d14a225e984
+#: ../../tools/wikidata_sparql_tools.rst:4 4fd92180cdc545818c07087aa204dc27
 msgid ""
-"**Configuration File**: ``wikidata_sparql_tools.json`` **Tool Type**: Local "
-"**Tools Count**: 1"
+"**Configuration File**: ``wikidata_sparql_tools.json`` **Tool Type**: "
+"Local **Tools Count**: 1"
 msgstr ""
 "**配置文件**：``wikidata_sparql_tools.json``  \n"
 "**工具类型**：本地  \n"
 "**工具数量**：1"
 
-#: ../../tools/wikidata_sparql_tools.rst:8 776437a796034b95ad13c27a1129214b
+#: ../../tools/wikidata_sparql_tools.rst:8 49a18d733f6d435fb7a15611654df2ed
 msgid ""
-"This page contains all tools defined in the ``wikidata_sparql_tools.json`` "
-"configuration file."
+"This page contains all tools defined in the "
+"``wikidata_sparql_tools.json`` configuration file."
 msgstr "此页面包含在 ``wikidata_sparql_tools.json`` 配置文件中定义的所有工具。"
 
-#: ../../tools/wikidata_sparql_tools.rst:11 1e59d4c13569427d991a373ac9424053
+#: ../../tools/wikidata_sparql_tools.rst:11 13c6b493563f4011baeb24070323c361
 msgid "Available Tools"
 msgstr "可用工具"
 
-#: ../../tools/wikidata_sparql_tools.rst:14 3fd488b505a94100947700a4e4e3eaaa
+#: ../../tools/wikidata_sparql_tools.rst:14 54666341d47c44df9030cf44bb9967b3
 msgid "**Wikidata_SPARQL_query** (Type: WikidataSPARQLTool)"
 msgstr "**Wikidata_SPARQL查询**（类型：WikidataSPARQL工具）"
 
-#: ../../tools/wikidata_sparql_tools.rst:16 89b51495dcb3449c8cc6e56be34fdf3a
+#: ../../tools/wikidata_sparql_tools.rst:16 64081f15504c4348b544568e0e25c642
 msgid ""
-"Execute SPARQL queries against Wikidata to retrieve structured data. This "
-"tool powers Scholia-sty..."
+"Execute SPARQL queries against Wikidata to retrieve structured data. This"
+" tool powers Scholia-sty..."
 msgstr "针对Wikidata执行SPARQL查询以检索结构化数据。该工具为Scholia-sty...提供支持。"
 
-#: ../../tools/wikidata_sparql_tools.rst 2a818583ed9f450686d44c391be1e0e4
+#: ../../tools/wikidata_sparql_tools.rst 3e47412c90694a898322caa92f21c41f
 msgid "Wikidata_SPARQL_query tool specification"
 msgstr "Wikidata_SPARQL查询工具规范"
 
-#: ../../tools/wikidata_sparql_tools.rst:20 31a254520bb84a0ca2771def7227154e
+#: ../../tools/wikidata_sparql_tools.rst:20 9cadc759db9b40f59d79d727b91f6ac3
 msgid "**Tool Information:**"
 msgstr "**工具信息：**"
 
-#: ../../tools/wikidata_sparql_tools.rst:22 a0cbd3b3a24e4fb383bb1b5ddb059a65
+#: ../../tools/wikidata_sparql_tools.rst:22 9274c86dc3524a76a76e81efb08441f3
 msgid "**Name**: ``Wikidata_SPARQL_query``"
 msgstr "**名称**：``Wikidata_SPARQL_查询``"
 
-#: ../../tools/wikidata_sparql_tools.rst:23 e272caf753f741838f154e113d22d467
+#: ../../tools/wikidata_sparql_tools.rst:23 6aacaebb37c14f19ad64bd7546b0c47c
 msgid "**Type**: ``WikidataSPARQLTool``"
 msgstr "**类型**：``WikidataSPARQLTool``"
 
-#: ../../tools/wikidata_sparql_tools.rst:24 657c08c5783641b0b32e6752bcd839ba
+#: ../../tools/wikidata_sparql_tools.rst:24 50839a5eb18b45c78871d070cd85bbc1
 msgid ""
 "**Description**: Execute SPARQL queries against Wikidata to retrieve "
-"structured data. This tool powers Scholia-style visualizations and can query"
-" academic topics, authors, institutions, and research relationships."
-msgstr ""
-"**描述**：针对Wikidata执行SPARQL查询以检索结构化数据。该工具支持Scholia风格的可视化展示，能够查询学术主题、作者、机构及研究关系。"
+"structured data. This tool powers Scholia-style visualizations and can "
+"query academic topics, authors, institutions, and research relationships."
+msgstr "**描述**：针对Wikidata执行SPARQL查询以检索结构化数据。该工具支持Scholia风格的可视化展示，能够查询学术主题、作者、机构及研究关系。"
 
-#: ../../tools/wikidata_sparql_tools.rst:26 e0e22d6da9524f06afd313613dbe2c88
+#: ../../tools/wikidata_sparql_tools.rst:26 f2da7ee2ac2a4ccfb13adb0b37062ab9
 msgid "**Parameters:**"
 msgstr "**参数：**"
 
-#: ../../tools/wikidata_sparql_tools.rst:28 4725c0f38e7e431a9ee5ae66a143d03f
+#: ../../tools/wikidata_sparql_tools.rst:28 9558524b12c14cb9aa4d03cf46b81984
 msgid ""
 "``sparql`` (string) (required) SPARQL query string to execute against "
-"Wikidata. Use SPARQL syntax to query academic entities, relationships, and "
-"properties."
+"Wikidata. Use SPARQL syntax to query academic entities, relationships, "
+"and properties."
 msgstr "``sparql``（字符串）（必填）用于对Wikidata执行的SPARQL查询字符串。使用SPARQL语法查询学术实体、关系和属性。"
 
-#: ../../tools/wikidata_sparql_tools.rst:31 28423d60ce9d4812b4c3d0765cabbdb8
+#: ../../tools/wikidata_sparql_tools.rst:31 01ce6b99888740b7a6428ed8c64a7828
+#, fuzzy
 msgid ""
-"``max_results`` (integer) (optional) Optional result limit override. If not "
-"specified, uses the LIMIT clause in the SPARQL query or returns all results."
-msgstr ""
-"``max_results``（整数）（可选） 可选的结果数量限制覆盖。如果未指定，则使用SPARQL查询中的LIMIT子句，或返回所有结果。"
+"``max_results`` (integer) (required) Optional result limit override. If "
+"not specified, uses the LIMIT clause in the SPARQL query or returns all "
+"results."
+msgstr "``max_results``（整数）（可选） 可选的结果数量限制覆盖。如果未指定，则使用SPARQL查询中的LIMIT子句，或返回所有结果。"
 
-#: ../../tools/wikidata_sparql_tools.rst:34 746373f5a2f84d909c461f74031e5d47
+#: ../../tools/wikidata_sparql_tools.rst:34 282c8a09d8d64edf91ed8a4c9428ab87
 msgid "**Example Usage:**"
 msgstr "**示例用法：**"
 
-#: ../../tools/wikidata_sparql_tools.rst:48 677fb63da691487fb6987241ec0d5752
+#: ../../tools/wikidata_sparql_tools.rst:49 079cb2df586648129ec95aba75c99307
 msgid "Navigation"
 msgstr "导航"
 
-#: ../../tools/wikidata_sparql_tools.rst:50 b2c4dd619ec848a7b08021fcd9a144c8
+#: ../../tools/wikidata_sparql_tools.rst:51 9481af52003b445d8052589d90b1c1e1
 msgid ":doc:`tools_config_index` - Back to Tools Overview"
 msgstr ":doc:`tools_config_index` - 返回工具总览"
 
-#: ../../tools/wikidata_sparql_tools.rst:51 5a71bec32e0d41b59f6d90aa1891cf09
+#: ../../tools/wikidata_sparql_tools.rst:52 7c8ae6e338274b3684759f2d821de186
 msgid ":doc:`../guide/loading_tools` - Loading Local Tools"
 msgstr ":doc:`../guide/loading_tools` - 加载本地工具"
+

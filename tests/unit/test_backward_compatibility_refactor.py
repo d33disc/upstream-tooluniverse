@@ -248,6 +248,138 @@ class TestBackwardCompatibility:
         assert "error" in result
         assert "not found" in result["error"]
 
+    def test_smcp_server_initialization(self):
+        """Test that SMCP server can still be initialized."""
+        try:
+            from tooluniverse import SMCP
+            server = SMCP()
+            assert server is not None
+            assert server.tooluniverse is not None
+        except ImportError:
+            # SMCP not available, skip test
+            pytest.skip("SMCP not available")
+
+    def test_direct_tool_class_usage(self):
+        """Test that direct tool class usage still works."""
+        try:
+            from tooluniverse import UniProtRESTTool
+            
+            # Create tool instance directly with required fields
+            tool_config = {
+                "name": "test_tool",
+                "type": "UniProtRESTTool",
+                "fields": {
+                    "endpoint": "test_endpoint"
+                },
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "accession": {"type": "string"}
+                    },
+                    "required": ["accession"]
+                }
+            }
+            
+            tool = UniProtRESTTool(tool_config)
+            assert tool is not None
+            
+        except ImportError:
+            # Tool class not available, skip test
+            pytest.skip("UniProtRESTTool not available")
+
+    def test_new_parameters_have_defaults(self):
+        """Test that new parameters have sensible defaults."""
+        # Test use_cache parameter
+        result1 = self.tu.run_one_function({
+            "name": "UniProt_get_entry_by_accession",
+            "arguments": {"accession": "P05067"}
+        })
+        
+        result2 = self.tu.run_one_function({
+            "name": "UniProt_get_entry_by_accession",
+            "arguments": {"accession": "P05067"}
+        }, use_cache=False)
+        
+        # Results should be the same (both with cache disabled)
+        assert type(result1) == type(result2)
+        
+        # Test validate parameter
+        result3 = self.tu.run_one_function({
+            "name": "UniProt_get_entry_by_accession",
+            "arguments": {"accession": "P05067"}
+        }, validate=True)
+        
+        # Should work with validation enabled
+        assert result3 is not None
+
+    def test_dynamic_tools_namespace(self):
+        """Test that new dynamic tools namespace works."""
+        # Test that tools attribute exists
+        assert hasattr(self.tu, 'tools')
+        
+        # Test that it's a ToolNamespace
+        from tooluniverse.execute_function import ToolNamespace
+        assert isinstance(self.tu.tools, ToolNamespace)
+        
+        # Test that we can access a tool
+        try:
+            tool_callable = self.tu.tools.UniProt_get_entry_by_accession
+            assert tool_callable is not None
+        except AttributeError:
+            # Tool not available, that's okay
+            pass
+
+    def test_lifecycle_methods_exist(self):
+        """Test that new lifecycle methods exist."""
+        # Test that new methods exist
+        assert hasattr(self.tu, 'refresh_tools')
+        assert hasattr(self.tu, 'eager_load_tools')
+        assert hasattr(self.tu, 'clear_cache')
+        
+        # Test that they can be called
+        self.tu.refresh_tools()
+        self.tu.eager_load_tools([])
+        self.tu.clear_cache()
+
+    def test_cache_functionality(self):
+        """Test that caching functionality works."""
+        # Test cache operations
+        self.tu.clear_cache()
+        
+        # Test that cache is empty initially
+        assert len(self.tu._cache) == 0
+        
+        # Test caching a result
+        try:
+            result1 = self.tu.run_one_function({
+                "name": "UniProt_get_entry_by_accession",
+                "arguments": {"accession": "P05067"}
+            }, use_cache=True)
+            
+            # Cache should have one entry if successful
+            if result1 is not None:
+                assert len(self.tu._cache) == 1
+                
+                # Test cache hit
+                result2 = self.tu.run_one_function({
+                    "name": "UniProt_get_entry_by_accession",
+                    "arguments": {"accession": "P05067"}
+                }, use_cache=True)
+                
+                # Results should be the same
+                assert result1 == result2
+            else:
+                # If tool execution failed, cache should still be empty
+                assert len(self.tu._cache) == 0
+                
+        except Exception:
+            # If tool execution fails, cache should still be empty
+            assert len(self.tu._cache) == 0
+        
+        # Clear cache
+        self.tu.clear_cache()
+        assert len(self.tu._cache) == 0
+
 
 if __name__ == "__main__":
     pytest.main([__file__])

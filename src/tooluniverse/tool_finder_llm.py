@@ -167,7 +167,7 @@ Requirements:
         Args:
             force_refresh (bool): Whether to force refresh the cache
 
-        Returns:
+        Returns
             list: List of tool dictionaries with names and descriptions
         """
         current_time = datetime.now()
@@ -220,7 +220,7 @@ Requirements:
             query (str): User query
             max_tools (int): Maximum number of tools to send to LLM
 
-        Returns:
+        Returns
             list: Filtered list of tools
         """
         if len(available_tools) <= max_tools:
@@ -269,7 +269,7 @@ Requirements:
         Args:
             tools (list): List of tool dictionaries
 
-        Returns:
+        Returns
             str: Compact formatted tool descriptions for the prompt
         """
         formatted_tools = []
@@ -296,7 +296,7 @@ Requirements:
             include_reasoning (bool): Whether to include selection reasoning
             categories (list, optional): List of tool categories to filter by
 
-        Returns:
+        Returns
             dict: Dictionary containing selected tools and metadata
         """
         try:
@@ -387,7 +387,9 @@ Requirements:
 
             # Get actual tool objects
             if tool_names:
-                selected_tool_objects = self.tooluniverse.get_tool_by_name(tool_names)
+                selected_tool_objects = (
+                    self.tooluniverse.get_tool_specification_by_names(tool_names)
+                )
                 tool_prompts = self.tooluniverse.prepare_tool_prompts(
                     selected_tool_objects
                 )
@@ -452,7 +454,7 @@ Requirements:
             categories (list, optional): List of tool categories to filter by. Applied before LLM selection.
             return_list_only (bool, optional): If True, returns only a list of tool specifications. Overrides other return options.
 
-        Returns:
+        Returns
             str, tuple, or list:
                 - If return_list_only is True: List of tool specifications
                 - If return_call_result is False: Tool prompts as a formatted string
@@ -495,7 +497,9 @@ Requirements:
         picked_tool_names = picked_tool_names_no_special[:rag_num]
 
         # Get tool objects and prepare prompts (needed for both list and other formats)
-        picked_tools = self.tooluniverse.get_tool_by_name(picked_tool_names)
+        picked_tools = self.tooluniverse.get_tool_specification_by_names(
+            picked_tool_names
+        )
         picked_tools_prompt = self.tooluniverse.prepare_tool_prompts(picked_tools)
 
         # If only list format is requested, return the tool specifications as a list
@@ -532,7 +536,7 @@ Requirements:
             categories: Requested categories filter
             return_call_result: Whether return_call_result was True
 
-        Returns:
+        Returns
             str: JSON formatted search results
         """
         import json

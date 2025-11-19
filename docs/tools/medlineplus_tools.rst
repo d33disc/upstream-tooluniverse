@@ -31,13 +31,13 @@ Look up corresponding MedlinePlus page information through MedlinePlus Connect W
    * ``c`` (string) (required)
      Specific code value to query, e.g., "E11.9" (ICD-10 CM) or "637188" (RXCUI).
 
-   * ``dn`` (string) (optional)
+   * ``dn`` (string) (required)
      Optional, descriptive name (English) corresponding to the code, for drugs can fill in "Chantix 0.5 MG Oral Tablet", can improve matching accuracy.
 
-   * ``language`` (string) (optional)
+   * ``language`` (string) (required)
      Return information language, "en" for English, "es" for Spanish, default "en".
 
-   * ``format`` (string) (optional)
+   * ``format`` (string) (required)
      Return format, options "json" or "xml", default "json".
 
    **Example Usage:**
@@ -48,7 +48,10 @@ Look up corresponding MedlinePlus page information through MedlinePlus Connect W
           "name": "MedlinePlus_connect_lookup_by_code",
           "arguments": {
               "cs": "example_value",
-              "c": "example_value"
+              "c": "example_value",
+              "dn": "example_value",
+              "language": "example_value",
+              "format": "example_value"
           }
       }
       result = tu.run(query)
@@ -72,7 +75,7 @@ Get detailed information from MedlinePlus Genetics corresponding to genetic cond
    * ``condition`` (string) (required)
      URL slug of genetic condition, e.g., "alzheimer-disease", must match MedlinePlus page path.
 
-   * ``format`` (string) (optional)
+   * ``format`` (string) (required)
      Return format, options "json" or "xml", default "json".
 
    **Example Usage:**
@@ -82,7 +85,8 @@ Get detailed information from MedlinePlus Genetics corresponding to genetic cond
       query = {
           "name": "MedlinePlus_get_genetics_condition_by_name",
           "arguments": {
-              "condition": "example_value"
+              "condition": "example_value",
+              "format": "example_value"
           }
       }
       result = tu.run(query)
@@ -106,7 +110,7 @@ Get detailed information from MedlinePlus Genetics corresponding to gene name, s
    * ``gene`` (string) (required)
      URL slug of gene name, e.g., "BRCA1", must match MedlinePlus page path.
 
-   * ``format`` (string) (optional)
+   * ``format`` (string) (required)
      Return format, options "json" or "xml", default "json".
 
    **Example Usage:**
@@ -116,7 +120,8 @@ Get detailed information from MedlinePlus Genetics corresponding to gene name, s
       query = {
           "name": "MedlinePlus_get_genetics_gene_by_name",
           "arguments": {
-              "gene": "example_value"
+              "gene": "example_value",
+              "format": "example_value"
           }
       }
       result = tu.run(query)
@@ -172,7 +177,7 @@ Search for relevant information in MedlinePlus Web Service by keyword across hea
    * ``db`` (string) (required)
      Specify the database to search, e.g., healthTopics (English health topics), healthTopicsSpanish (Spanish health topics), drugs (English drugs), etc.
 
-   * ``rettype`` (string) (optional)
+   * ``rettype`` (string) (required)
      Result return format, options: brief (concise information, default), topic (detailed XML record), all (includes all available information).
 
    **Example Usage:**
@@ -183,7 +188,8 @@ Search for relevant information in MedlinePlus Web Service by keyword across hea
           "name": "MedlinePlus_search_topics_by_keyword",
           "arguments": {
               "term": "example_value",
-              "db": "example_value"
+              "db": "example_value",
+              "rettype": "example_value"
           }
       }
       result = tu.run(query)

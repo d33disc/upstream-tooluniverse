@@ -10,8 +10,8 @@ The SMCP module provides a complete solution for exposing scientific computation
 resources through the standardized MCP protocol, making it easy for AI agents to
 discover, understand, and execute scientific tools in a unified manner.
 
-Usage Patterns:
-===============
+Usage Patterns
+--------------
 
 Quick Start:
 
@@ -47,8 +47,8 @@ result = await client.call_tool("UniProt_get_entry_by_accession", {
 })
 ```
 
-Architecture:
-=============
+Architecture
+------------
 
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   MCP Client    │◄──►│      SMCP        │◄──►│  ToolUniverse   │
@@ -69,8 +69,8 @@ The SMCP server acts as an intelligent middleware layer that:
 4. Returns formatted results via MCP protocol
 5. Provides intelligent tool discovery and recommendation
 
-Integration Points:
-==================
+Integration Points
+------------------
 
 MCP Protocol Layer:
     - Standard MCP methods (tools/list, tools/call, etc.)
@@ -94,6 +94,7 @@ AI Agent Interface:
 import asyncio
 import functools
 import json
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Union, Callable, Literal
 
@@ -102,9 +103,10 @@ try:
 
     FASTMCP_AVAILABLE = True
 except ImportError:
-    # Use a simple print here since logging isn't available yet
+    # Use stderr to avoid polluting stdout in stdio mode
     print(
-        "FastMCP is not available. SMCP is built on top of FastMCP, which is a required dependency."
+        "FastMCP is not available. SMCP is built on top of FastMCP, which is a required dependency.",
+        file=sys.stderr
     )
 
 from .execute_function import ToolUniverse
@@ -219,6 +221,21 @@ class SMCP(FastMCP):
         during tool loading. Useful for excluding entire categories of tools
         (e.g., all ToolFinder types or all OpenTarget tools).
 
+    space : str or list of str, optional
+        Space configuration URI(s) to load. Can be a single URI string or a list
+        of URIs for loading multiple Space configurations. Supported formats:
+        - Local file: "./config.yaml" or "/path/to/config.yaml"
+        - HuggingFace: "hf:username/repo" or "hf:username/repo/file.yaml"
+        - HTTP URL: "https://example.com/config.yaml"
+
+        When provided, Space configurations are loaded after tool initialization,
+        applying LLM settings, hooks, and tool selections from the configuration files.
+        Multiple spaces can be loaded sequentially, with later configurations
+        potentially overriding earlier ones.
+
+        Example: space="./my-workspace.yaml"
+        Example: space=["hf:community/bio-tools", "./custom-tools.yaml"]
+
     auto_expose_tools : bool, default True
         Whether to automatically expose ToolUniverse tools as MCP tools.
         When True, all loaded tools become available via the MCP interface
@@ -248,6 +265,18 @@ class SMCP(FastMCP):
         Simple hook type selection. Can be 'SummarizationHook', 'FileSaveHook',
         or a list of both. Provides an easy way to enable hooks without full configuration.
         Takes precedence over hooks_enabled when specified.
+
+    compact_mode : bool, default False
+        Enable compact mode that only exposes core tools to prevent context window overflow.
+        When True:
+        - Only exposes search tools (find_tools), execute tool (execute_tool),
+          and tool discovery tools (list_tools, grep_tools, get_tool_info)
+        - All tools are still loaded in background for execute_tool to work
+        - Prevents automatic exposure of all tools, reducing context window usage
+        - Maintains full functionality through search and execute capabilities
+        - Tool discovery tools enable progressive disclosure: start with minimal info, request details when needed
+        - Agent-friendly features: simple text search (no regex required), natural language task discovery,
+          combined search+detail tools to reduce tool call overhead
 
     **kwargs**
         Additional arguments passed to the underlying FastMCP server instance.
@@ -281,12 +310,14 @@ class SMCP(FastMCP):
         tool_config_files: Optional[Dict[str, str]] = None,
         include_tool_types: Optional[List[str]] = None,
         exclude_tool_types: Optional[List[str]] = None,
+        space: Optional[Union[str, List[str]]] = None,
         auto_expose_tools: bool = True,
         search_enabled: bool = True,
         max_workers: int = 5,
         hooks_enabled: bool = False,
         hook_config: Optional[Dict[str, Any]] = None,
         hook_type: Optional[str] = None,
+        compact_mode: bool = False,
         **kwargs,
     ):
         if not FASTMCP_AVAILABLE:
@@ -325,12 +356,19 @@ class SMCP(FastMCP):
         self.tool_config_files = tool_config_files or {}
         self.include_tool_types = include_tool_types or []
         self.exclude_tool_types = exclude_tool_types or []
-        self.auto_expose_tools = auto_expose_tools
+        self.space = space
+        self.compact_mode = compact_mode
+        # In compact mode, don't auto-expose all tools
+        self.auto_expose_tools = False if compact_mode else auto_expose_tools
         self.search_enabled = search_enabled
         self.max_workers = max_workers
         self.hooks_enabled = hooks_enabled
         self.hook_config = hook_config
         self.hook_type = hook_type
+
+        # Space configuration storage
+        self.space_llm_config = None
+        self.space_metadata = None
 
         # Thread pool for concurrent tool execution
         self.executor = ThreadPoolExecutor(max_workers=max_workers)
@@ -338,11 +376,58 @@ class SMCP(FastMCP):
         # Track exposed tools to avoid duplicates
         self._exposed_tools = set()
 
-        # Initialize SMCP-specific features
+        # Load Space configurations first if provided
+        if space:
+            self._load_space_configs(space)
+
+        # Initialize SMCP-specific features (after Space is loaded)
         self._setup_smcp_tools()
 
         # Register custom MCP methods
         self._register_custom_mcp_methods()
+
+    def _load_space_configs(self, space: Union[str, List[str]]):
+        """
+        Load Space configurations.
+
+        This method loads Space configuration(s) and retrieves the LLM config
+        and metadata from ToolUniverse. It completely reuses ToolUniverse's
+        load_space functionality without reimplementing any logic.
+
+        Args:
+            space: Space URI or list of URIs (e.g., "./config.yaml",
+                      "hf:user/repo", or ["config1.yaml", "config2.yaml"])
+        """
+        space_list = [space] if isinstance(space, str) else space
+
+        for uri in space_list:
+            self.logger.info("📦 Loading Space: %s", uri)
+
+            # Pass filtering parameters from SMCP to load_space
+            config = self.tooluniverse.load_space(
+                uri,
+                exclude_tools=self.exclude_tools,
+                exclude_categories=self.exclude_categories,
+                include_tools=self.include_tools,
+                tools_file=self.tools_file,  # KEY FIX: Pass tools_file filter
+                include_tool_types=self.include_tool_types,
+                exclude_tool_types=self.exclude_tool_types,
+            )
+
+            # Get configurations from ToolUniverse (complete reuse)
+            self.space_metadata = self.tooluniverse.get_space_metadata()
+            self.space_llm_config = self.tooluniverse.get_space_llm_config()
+
+            self.logger.info("✅ Space loaded: %s", config.get("name", "Unknown"))
+
+    def get_llm_config(self) -> Optional[Dict[str, Any]]:
+        """
+        Get the current Space LLM configuration.
+
+        Returns:
+            LLM configuration dictionary or None if not set
+        """
+        return self.space_llm_config
 
     def _register_custom_mcp_methods(self):
         """
@@ -371,9 +456,10 @@ class SMCP(FastMCP):
         not be called manually.
         """
         try:
+            # Temporarily disabled for Codex compatibility
             # Add custom middleware for tools/find and tools/search
-            self.add_middleware(self._tools_find_middleware)
-            self.logger.info("✅ Custom MCP methods registered successfully")
+            # self.add_middleware(self._tools_find_middleware)
+            self.logger.info("✅ Custom MCP methods registration skipped for Codex compatibility")
 
         except Exception as e:
             self.logger.error(f"Error registering custom MCP methods: {e}")
@@ -663,28 +749,41 @@ class SMCP(FastMCP):
                 function_call["arguments"]["categories"] = categories
 
             # Execute the search tool
-            loop = asyncio.get_event_loop()
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                loop = asyncio.get_event_loop()
             result = await loop.run_in_executor(
                 self.executor, self.tooluniverse.run_one_function, function_call
             )
 
             # All search tools now return JSON format directly
+            # Ensure result is properly serialized to JSON
             if isinstance(result, str):
-                return result
+                # Try to parse as JSON to validate, if fails wrap it
+                try:
+                    json.loads(result)
+                    return result
+                except (json.JSONDecodeError, ValueError):
+                    # Not valid JSON, wrap it
+                    return json.dumps({"tools": [], "result": result}, ensure_ascii=False)
             elif isinstance(result, dict) or isinstance(result, list):
-                return json.dumps(result, indent=2)
+                return json.dumps(result, ensure_ascii=False, default=str)
             else:
-                return str(result)
+                # For other types, convert to JSON
+                return json.dumps({"tools": [], "result": str(result)}, ensure_ascii=False)
 
         except Exception as e:
+            error_msg = f"Search error: {str(e)}"
+            self.logger.error(f"_perform_tool_search failed: {error_msg}", exc_info=True)
             return json.dumps(
                 {
-                    "error": f"Search error: {str(e)}",
+                    "error": error_msg,
+                    "error_type": type(e).__name__,
                     "query": query,
-                    "fallback_used": True,
                     "tools": [],
                 },
-                indent=2,
+                ensure_ascii=False,
             )
 
     def _select_search_tool(self, search_method: str, use_advanced_search: bool) -> str:
@@ -857,9 +956,44 @@ class SMCP(FastMCP):
         - All setup phases include comprehensive error handling
         - Performance scales with the number of tools being loaded and exposed
         """
-        # Always ensure full tool set is loaded (hooks may have preloaded a minimal set)
-        # Deduplication in ToolUniverse.load_tools prevents duplicates, so reloading is safe
-        if self.tool_categories:
+        # Determine if ToolUniverse already has tools loaded (e.g., provided pre-configured instance)
+        preloaded_tools = getattr(self.tooluniverse, "all_tools", [])
+        preloaded_count = (
+            len(preloaded_tools) if isinstance(preloaded_tools, list) else 0
+        )
+
+        if preloaded_count > 0:
+            self.logger.info(
+                f"ToolUniverse already pre-configured with {preloaded_count} tool(s); skipping automatic loading."
+            )
+            # In compact mode, ensure tool discovery tools are loaded even if tools are preloaded
+            if self.compact_mode:
+                discovery_categories = ["tool_finder", "compact_mode"]
+                for category in discovery_categories:
+                    try:
+                        self.tooluniverse.load_tools(tool_type=[category])
+                    except Exception as e:
+                        self.logger.debug(f"Could not load category {category}: {e}")
+
+        # Check if Space has already loaded specific tools
+        if (
+            self.space
+            and hasattr(self.tooluniverse, "_current_space_config")
+            and preloaded_count > 0
+        ):
+            # Space has already loaded specific tools, don't reload all tools
+            self.logger.info(
+                f"Space configuration loaded {preloaded_count} tool(s), skipping additional loading"
+            )
+            # In compact mode, ensure tool discovery tools are loaded
+            if self.compact_mode:
+                discovery_categories = ["tool_finder", "compact_mode"]
+                for category in discovery_categories:
+                    try:
+                        self.tooluniverse.load_tools(tool_type=[category])
+                    except Exception as e:
+                        self.logger.debug(f"Could not load category {category}: {e}")
+        elif preloaded_count == 0 and self.tool_categories:
             try:
                 # Validate categories first
                 valid_categories = self._get_valid_categories()
@@ -912,6 +1046,15 @@ class SMCP(FastMCP):
                         include_tool_types=self.include_tool_types,
                         exclude_tool_types=self.exclude_tool_types,
                     )
+                # In compact mode, ensure tool discovery tools are loaded
+                # even when specific categories are specified
+                if self.compact_mode:
+                    discovery_categories = ["tool_finder", "compact_mode"]
+                    for category in discovery_categories:
+                        try:
+                            self.tooluniverse.load_tools(tool_type=[category])
+                        except Exception as e:
+                            self.logger.debug(f"Could not load category {category}: {e}")
             except Exception as e:
                 self.logger.error(f"Error loading specified categories: {e}")
                 self.logger.info("Falling back to loading all tools")
@@ -924,8 +1067,19 @@ class SMCP(FastMCP):
                     include_tool_types=self.include_tool_types,
                     exclude_tool_types=self.exclude_tool_types,
                 )
-        elif self.auto_expose_tools:
-            # Load all tools by default
+                # In compact mode, ensure tool discovery tools are loaded
+                if self.compact_mode:
+                    discovery_categories = ["tool_finder", "compact_mode"]
+                    for category in discovery_categories:
+                        try:
+                            self.tooluniverse.load_tools(tool_type=[category])
+                        except Exception as e:
+                            self.logger.debug(f"Could not load category {category}: {e}")
+        elif (self.auto_expose_tools or self.compact_mode) and not (
+            self.space and hasattr(self.tooluniverse, "_current_space_config")
+        ):
+            # Load all tools by default (unless Space already handled tool loading)
+            # In compact mode, still load all tools in background for execute_tool
             self.tooluniverse.load_tools(
                 exclude_tools=self.exclude_tools,
                 exclude_categories=self.exclude_categories,
@@ -935,9 +1089,21 @@ class SMCP(FastMCP):
                 include_tool_types=self.include_tool_types,
                 exclude_tool_types=self.exclude_tool_types,
             )
+            # In compact mode, ensure tool discovery tools are loaded
+            if self.compact_mode:
+                discovery_categories = ["tool_finder", "compact_mode"]
+                for category in discovery_categories:
+                    try:
+                        self.tooluniverse.load_tools(tool_type=[category])
+                    except Exception as e:
+                        self.logger.debug(f"Could not load category {category}: {e}")
+                self.logger.info(
+                    f"Compact mode: Loaded {len(self.tooluniverse.all_tools)} tools in background"
+            )
 
         # Auto-expose ToolUniverse tools as MCP tools
-        if self.auto_expose_tools:
+        # In compact mode, _expose_tooluniverse_tools will call _expose_core_discovery_tools
+        if self.auto_expose_tools or self.compact_mode:
             self._expose_tooluniverse_tools()
 
         # Add search functionality if enabled
@@ -1039,6 +1205,16 @@ class SMCP(FastMCP):
             self.logger.warning("No all_tools attribute in tooluniverse")
             return
 
+        # Skip automatic tool exposure in compact mode
+        if self.compact_mode:
+            self.logger.info(
+                "Compact mode: Skipping automatic tool exposure. "
+                "Only core tools will be exposed."
+            )
+            # In compact mode, explicitly expose only core discovery tools
+            self._expose_core_discovery_tools()
+            return
+
         self.logger.info(
             f"Exposing {len(self.tooluniverse.all_tools)} tools from ToolUniverse"
         )
@@ -1078,6 +1254,41 @@ class SMCP(FastMCP):
 
         exposed_count = len(self._exposed_tools)
         self.logger.info(f"Successfully exposed {exposed_count} tools to MCP interface")
+
+    def _expose_core_discovery_tools(self):
+        """
+        Expose only core tool discovery tools in compact mode.
+        """
+        core_tool_names = [
+            "list_tools",
+            "grep_tools",
+            "get_tool_info",
+            "execute_tool",
+        ]
+
+        exposed_count = 0
+        for tool_config in self.tooluniverse.all_tools:
+            if not isinstance(tool_config, dict):
+                continue
+
+            tool_name = tool_config.get("name")
+            if tool_name in core_tool_names:
+                try:
+                    if tool_name not in self._exposed_tools:
+                        self._create_mcp_tool_from_tooluniverse(tool_config)
+                        self._exposed_tools.add(tool_name)
+                        exposed_count += 1
+                        self.logger.debug(
+                            f"Exposed core tool: {tool_name}"
+                        )
+                except Exception as e:
+                    self.logger.warning(
+                        f"Failed to expose core tool {tool_name}: {e}"
+                    )
+
+        self.logger.info(
+            f"Compact mode: Exposed {exposed_count} core discovery tools"
+        )
 
     def _add_search_tools(self):
         """
@@ -1384,25 +1595,11 @@ class SMCP(FastMCP):
         Registered Utility Tools:
         ========================
 
-        get_server_info:
-            Comprehensive server status and capability reporting.
-
-            Returns detailed JSON with:
-            - Server identification (name, type, version info)
-            - Tool statistics (total tools, exposed tools, categories)
-            - Feature flags (search enabled, FastMCP status)
-            - Resource usage (max workers, thread pool status)
-
-            Use cases:
-            - Health checks and monitoring
-            - Capability discovery by clients
-            - Debugging server configuration issues
-
-        execute_tooluniverse_function:
-            Direct interface for executing ToolUniverse functions with custom parameters.
+        execute_tool:
+            Direct interface for executing ToolUniverse tools with custom parameters.
 
             Parameters:
-            - function_name (str): Name of the ToolUniverse tool to execute
+            - tool_name (str): Name of the tool to execute
             - arguments (str): JSON string containing tool parameters
 
             Features:
@@ -1416,19 +1613,6 @@ class SMCP(FastMCP):
             - Debugging tool behavior
             - Custom automation scripts
 
-        list_available_tooluniverse_tools:
-            Comprehensive inventory of all available ToolUniverse tools.
-
-            Returns:
-            - Complete tool catalog with names, descriptions, types
-            - Parameter schemas and requirements for each tool
-            - Tool statistics and categorization
-
-            Use cases:
-            - Tool discovery and exploration
-            - Documentation generation
-            - Client capability mapping
-            - Integration planning
 
         Implementation Details:
         ======================
@@ -1446,7 +1630,7 @@ class SMCP(FastMCP):
             - Non-blocking I/O for network operations
 
         Security Considerations:
-            - execute_tooluniverse_function provides direct tool access
+            - execute_tool provides direct tool access
             - JSON parsing with proper validation
             - No file system access beyond ToolUniverse scope
             - Appropriate error message sanitization
@@ -1460,131 +1644,25 @@ class SMCP(FastMCP):
         Examples:
         =========
 
-        Server health check:
-        ```python
-        info = await get_server_info()
-        status = json.loads(info)
-        if status['total_tooluniverse_tools'] > 0:
-            # Server healthy
-            pass
-        ```
-
         Direct tool execution:
         ```python
-        result = await execute_tooluniverse_function(
-            function_name="UniProt_get_entry_by_accession",
+        result = await execute_tool(
+            tool_name="UniProt_get_entry_by_accession",
             arguments='{"accession": "P05067"}'
         )
         ```
 
         Tool inventory:
         ```python
-        tools = await list_available_tooluniverse_tools()
+        tools = await list_tools(mode="summary")
         catalog = json.loads(tools)
         # Available: {catalog['total_tools']} tools
         ```
         """
 
-        @self.tool()
-        async def get_server_info() -> str:
-            """
-            Get information about the SMCP server and its capabilities.
-
-            Returns:
-                JSON string containing server information
-            """
-            try:
-                info = {
-                    "server_name": self.name,
-                    "server_type": "SMCP (Scientific Model Context Protocol)",
-                    "fastmcp_available": FASTMCP_AVAILABLE,
-                    "tooluniverse_loaded": hasattr(self, "tooluniverse"),
-                    "total_exposed_tools": len(self._exposed_tools),
-                    "search_enabled": self.search_enabled,
-                    "max_workers": self.max_workers,
-                    "tool_categories_loaded": len(
-                        getattr(self.tooluniverse, "tool_category_dicts", {})
-                    ),
-                    "total_tooluniverse_tools": len(
-                        getattr(self.tooluniverse, "all_tools", [])
-                    ),
-                }
-                return json.dumps(info, indent=2)
-
-            except Exception as e:
-                return f"Error getting server info: {str(e)}"
-
-        @self.tool()
-        async def execute_tooluniverse_function(
-            function_name: str, arguments: str
-        ) -> str:
-            """
-            Execute a ToolUniverse function directly with custom arguments.
-
-            Args:
-                function_name: Name of the ToolUniverse function to execute
-                arguments: JSON string of arguments to pass to the function
-
-            Returns:
-                Function execution result
-            """
-            try:
-                # Parse arguments from JSON string
-                import json
-
-                if isinstance(arguments, str):
-                    parsed_args = json.loads(arguments)
-                else:
-                    parsed_args = arguments
-
-                function_call = {"name": function_name, "arguments": parsed_args}
-
-                # Execute in thread pool
-                loop = asyncio.get_event_loop()
-                result = await loop.run_in_executor(
-                    self.executor, self.tooluniverse.run_one_function, function_call
-                )
-
-                return str(result)
-
-            except Exception as e:
-                return f"Error executing {function_name}: {str(e)}"
-
-        @self.tool()
-        async def list_available_tooluniverse_tools() -> str:
-            """
-            List all available ToolUniverse tools that can be executed.
-
-            Returns:
-                JSON string containing available tools and their descriptions
-            """
-            try:
-                # Check if ToolUniverse has loaded tools
-                if (
-                    not hasattr(self.tooluniverse, "all_tools")
-                    or not self.tooluniverse.all_tools
-                ):
-                    return json.dumps({"error": "No ToolUniverse tools loaded"})
-
-                tools_info = []
-                for tool_config in self.tooluniverse.all_tools:
-                    if isinstance(tool_config, dict):
-                        tool_info = {
-                            "name": tool_config.get("name", "Unknown"),
-                            "description": tool_config.get(
-                                "description", "No description available"
-                            ),
-                            "type": tool_config.get("type", "Unknown"),
-                            "parameter_schema": tool_config.get("parameter", {}),
-                        }
-                        tools_info.append(tool_info)
-
-                return json.dumps(
-                    {"total_tools": len(tools_info), "tools": tools_info}, indent=2
-                )
-
-            except Exception as e:
-                return json.dumps({"error": f"Error listing tools: {str(e)}"}, indent=2)
+        # Note: execute_tool is now a ToolUniverse native tool
+        # It is exposed via _expose_core_discovery_tools() in compact mode
+        # or via _expose_tooluniverse_tools() in normal mode
 
     def add_custom_tool(
         self, name: str, function: Callable, description: Optional[str] = None, **kwargs
@@ -2141,13 +2219,16 @@ class SMCP(FastMCP):
                         python_type = str
                         # For string type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "integer":
-                        python_type = int
+                        # Allow both string and int for lenient coercion
+                        python_type = Union[int, str]
                         # For integer type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "number":
-                        python_type = float
+                        # Allow both string and float for lenient coercion
+                        python_type = Union[float, str]
                         # For number type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "boolean":
-                        python_type = bool
+                        # Allow both string and bool for lenient coercion
+                        python_type = Union[bool, str]
                         # For boolean type, don't add json_schema_extra - let Pydantic handle it
                     elif param_type == "array":
                         python_type = list
@@ -2245,32 +2326,23 @@ class SMCP(FastMCP):
                             )
                         )
 
-            # Add optional streaming parameter to signature
-            stream_field = Field(
-                description="Set to true to receive incremental streaming output (experimental)."
-            )
-            stream_annotation = Annotated[Union[bool, type(None)], stream_field]
-            param_annotations["_tooluniverse_stream"] = stream_annotation
-            func_params.append(
-                inspect.Parameter(
-                    "_tooluniverse_stream",
-                    inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                    default=None,
-                    annotation=stream_annotation,
-                )
-            )
-
-            # Note: ctx parameter removed as it causes Pydantic schema issues
-            # FastMCP context injection is handled internally by FastMCP
+            # Add _tooluniverse_stream as an optional parameter for streaming support
+            # This parameter is NOT exposed in the MCP schema (it's in kwargs but not in param_annotations)
+            # Users can pass it to enable streaming, but it won't appear in the tool schema
 
             async def dynamic_tool_function(**kwargs) -> str:
                 """Execute ToolUniverse tool with provided arguments."""
+                import json
+                
                 try:
                     # Remove ctx if present (legacy support)
                     ctx = kwargs.pop("ctx", None) if "ctx" in kwargs else None
-                    stream_flag = bool(kwargs.get("_tooluniverse_stream"))
+                    # Extract streaming flag (users can optionally pass this)
+                    stream_flag = bool(kwargs.pop("_tooluniverse_stream", False))
 
-                    # Filter out None values for optional parameters (preserve streaming flag)
+                    # Filter out None values for optional parameters
+                    # Note: _tooluniverse_stream was extracted and popped above
+                    # so it won't be in args_dict, which is what we want
                     args_dict = {k: v for k, v in kwargs.items() if v is not None}
 
                     # Validate required parameters (check against args_dict, not filtered_args)
@@ -2284,12 +2356,15 @@ class SMCP(FastMCP):
                                 "required": required_params,
                                 "provided": list(args_dict.keys()),
                             },
-                            indent=2,
+                            ensure_ascii=False,
                         )
 
                     function_call = {"name": tool_name, "arguments": args_dict}
 
-                    loop = asyncio.get_event_loop()
+                    try:
+                        loop = asyncio.get_running_loop()
+                    except RuntimeError:
+                        loop = asyncio.get_event_loop()
 
                     # Initialize stream_callback to None by default
                     stream_callback = None
@@ -2320,27 +2395,79 @@ class SMCP(FastMCP):
                         # Assign the function to stream_callback
                         stream_callback = _stream_callback
 
-                        # Ensure downstream tools see the streaming flag
-                        if "_tooluniverse_stream" not in args_dict:
-                            args_dict["_tooluniverse_stream"] = True
+                        # Note: _tooluniverse_stream was extracted from kwargs above
+                        # and is not passed to the tool. The stream_callback is sufficient
+                        # to enable streaming for downstream tools.
 
-                    run_callable = functools.partial(
-                        self.tooluniverse.run_one_function,
-                        function_call,
-                        stream_callback=stream_callback,
-                    )
+                    # In stdio mode, capture stdout to prevent pollution of JSON-RPC stream
+                    is_stdio_mode = getattr(self, "_transport_type", None) == "stdio"
+                    
+                    if is_stdio_mode:
+                        # Wrap tool execution to capture stdout and redirect to stderr
+                        def _run_with_stdout_capture():
+                            import io
+                            old_stdout = sys.stdout
+                            try:
+                                # Capture stdout during tool execution
+                                stdout_capture = io.StringIO()
+                                sys.stdout = stdout_capture
+                                
+                                # Execute the tool
+                                result = self.tooluniverse.run_one_function(
+                                    function_call,
+                                    stream_callback=stream_callback,
+                                )
+                                
+                                # Get captured output and redirect to stderr
+                                captured_output = stdout_capture.getvalue()
+                                if captured_output:
+                                    self.logger.debug(
+                                        f"[{tool_name}] Captured stdout: {captured_output}"
+                                    )
+                                    # Write to stderr to avoid polluting stdout
+                                    print(captured_output, file=sys.stderr, end="")
+                                
+                                return result
+                            finally:
+                                sys.stdout = old_stdout
+                        
+                        run_callable = _run_with_stdout_capture
+                    else:
+                        # In HTTP/SSE mode, no need to capture stdout
+                        run_callable = functools.partial(
+                            self.tooluniverse.run_one_function,
+                            function_call,
+                            stream_callback=stream_callback,
+                        )
 
                     result = await loop.run_in_executor(self.executor, run_callable)
 
+                    # Ensure result is properly serialized to JSON
                     if isinstance(result, str):
-                        return result
+                        # Try to parse as JSON to validate, if fails wrap it
+                        try:
+                            json.loads(result)
+                            return result
+                        except (json.JSONDecodeError, ValueError):
+                            # Not valid JSON, wrap it
+                            return json.dumps(
+                                {"result": result}, ensure_ascii=False
+                            )
+                    elif isinstance(result, (dict, list)):
+                        return json.dumps(result, ensure_ascii=False, default=str)
                     else:
-                        return json.dumps(result, indent=2, default=str)
+                        # For other types, convert to JSON
+                        return json.dumps(
+                            {"result": str(result)}, ensure_ascii=False
+                        )
 
                 except Exception as e:
                     error_msg = f"Error executing {tool_name}: {str(e)}"
-                    self.logger.error(error_msg)
-                    return json.dumps({"error": error_msg}, indent=2)
+                    self.logger.error(f"{tool_name} execution failed: {error_msg}", exc_info=True)
+                    return json.dumps(
+                        {"error": error_msg, "error_type": type(e).__name__},
+                        ensure_ascii=False,
+                    )
 
             # Set function metadata
             dynamic_tool_function.__name__ = tool_name

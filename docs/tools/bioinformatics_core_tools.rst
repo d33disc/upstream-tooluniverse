@@ -25,7 +25,7 @@ Get comprehensive information about arxiv – access to arXiv preprint repositor
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -35,6 +35,7 @@ Get comprehensive information about arxiv – access to arXiv preprint repositor
       query = {
           "name": "get_arxiv_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -55,7 +56,7 @@ Get comprehensive information about Biopython – powerful tools for computation
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -65,6 +66,7 @@ Get comprehensive information about Biopython – powerful tools for computation
       query = {
           "name": "get_biopython_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -114,7 +116,7 @@ Get comprehensive information about Biotite – comprehensive computational mole
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -124,6 +126,7 @@ Get comprehensive information about Biotite – comprehensive computational mole
       query = {
           "name": "get_biotite_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -264,7 +267,7 @@ Get comprehensive information about Flask - a lightweight WSGI web application f
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -274,6 +277,7 @@ Get comprehensive information about Flask - a lightweight WSGI web application f
       query = {
           "name": "get_flask_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -356,7 +360,7 @@ Get comprehensive information about gget – genomics command-line tool and Pyth
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -366,6 +370,7 @@ Get comprehensive information about gget – genomics command-line tool and Pyth
       query = {
           "name": "get_gget_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -448,7 +453,7 @@ Get comprehensive information about lifelines – survival analysis in Python
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -458,6 +463,7 @@ Get comprehensive information about lifelines – survival analysis in Python
       query = {
           "name": "get_lifelines_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -540,7 +546,7 @@ Get comprehensive information about msprime – coalescent simulation framework
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -550,6 +556,7 @@ Get comprehensive information about msprime – coalescent simulation framework
       query = {
           "name": "get_msprime_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -849,7 +856,7 @@ Get comprehensive information about PyMed – PubMed access in Python
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -859,6 +866,7 @@ Get comprehensive information about PyMed – PubMed access in Python
       query = {
           "name": "get_pymed_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -972,7 +980,7 @@ Get comprehensive information about Requests - Python HTTP library for humans
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -982,6 +990,7 @@ Get comprehensive information about Requests - Python HTTP library for humans
       query = {
           "name": "get_requests_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)
@@ -1064,7 +1073,7 @@ Get comprehensive information about scikit-bio – bioinformatics library built 
 
    **Parameters:**
 
-   * ``include_examples`` (boolean) (optional)
+   * ``include_examples`` (boolean) (required)
      Whether to include usage examples and quick start guide
 
    **Example Usage:**
@@ -1074,6 +1083,7 @@ Get comprehensive information about scikit-bio – bioinformatics library built 
       query = {
           "name": "get_scikit_bio_info",
           "arguments": {
+              "include_examples": true
           }
       }
       result = tu.run(query)

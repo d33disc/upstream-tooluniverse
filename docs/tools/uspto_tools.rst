@@ -25,7 +25,7 @@ Obtains metadata for documents associated with an application, such as publicati
 
    **Parameters:**
 
-   * ``applicationNumberText`` (string) (optional)
+   * ``applicationNumberText`` (string) (required)
      The application number of the patent.
 
    **Example Usage:**
@@ -35,6 +35,7 @@ Obtains metadata for documents associated with an application, such as publicati
       query = {
           "name": "get_associated_documents_metadata",
           "arguments": {
+              "applicationNumberText": "example_value"
           }
       }
       result = tu.run(query)
@@ -55,7 +56,7 @@ Retrieves only the metadata for a specific patent application by its application
 
    **Parameters:**
 
-   * ``applicationNumberText`` (string) (optional)
+   * ``applicationNumberText`` (string) (required)
      The application number of the patent.
 
    **Example Usage:**
@@ -65,6 +66,7 @@ Retrieves only the metadata for a specific patent application by its application
       query = {
           "name": "get_patent_application_metadata",
           "arguments": {
+              "applicationNumberText": "example_value"
           }
       }
       result = tu.run(query)
@@ -85,7 +87,7 @@ Fetches the parent and child continuity data for a patent application, showing i
 
    **Parameters:**
 
-   * ``applicationNumberText`` (string) (optional)
+   * ``applicationNumberText`` (string) (required)
      The application number of the patent.
 
    **Example Usage:**
@@ -95,6 +97,7 @@ Fetches the parent and child continuity data for a patent application, showing i
       query = {
           "name": "get_patent_continuity_data",
           "arguments": {
+              "applicationNumberText": "example_value"
           }
       }
       result = tu.run(query)
@@ -115,7 +118,7 @@ Accesses information about any foreign priority claims associated with an applic
 
    **Parameters:**
 
-   * ``applicationNumberText`` (string) (optional)
+   * ``applicationNumberText`` (string) (required)
      The application number of the patent.
 
    **Example Usage:**
@@ -125,6 +128,7 @@ Accesses information about any foreign priority claims associated with an applic
       query = {
           "name": "get_patent_foreign_priority_data",
           "arguments": {
+              "applicationNumberText": "example_value"
           }
       }
       result = tu.run(query)
@@ -145,7 +149,7 @@ Search for patent application overviews using a query string of the format 'appl
 
    **Parameters:**
 
-   * ``query`` (string) (optional)
+   * ``query`` (string) (required)
      Keyword or keyphrase to search for in the patent application title. This field is required.
 
    * ``exact_match`` (boolean) (optional)
@@ -170,6 +174,7 @@ Search for patent application overviews using a query string of the format 'appl
       query = {
           "name": "get_patent_overview_by_text_query",
           "arguments": {
+              "query": "example_value"
           }
       }
       result = tu.run(query)
@@ -190,7 +195,7 @@ Obtains the patent term adjustment details for a given application number.
 
    **Parameters:**
 
-   * ``applicationNumberText`` (string) (optional)
+   * ``applicationNumberText`` (string) (required)
      The application number of the patent.
 
    **Example Usage:**
@@ -200,6 +205,7 @@ Obtains the patent term adjustment details for a given application number.
       query = {
           "name": "get_patent_term_adjustment_data",
           "arguments": {
+              "applicationNumberText": "example_value"
           }
       }
       result = tu.run(query)

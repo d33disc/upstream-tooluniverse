@@ -1351,7 +1351,8 @@
   },
   {
     "type": "XMLTool",
-    "name": "drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action",
+    "name": "drugbank_get_drug_desc_pharmacology_by_moa",
+    "aliases": ["drugbank_get_drug_name_description_pharmacology_by_mechanism_of_action"],
     "description": "Get drug name, ID, description, pharmacodynamics, mechanism of action, and pharmacokinetics by drug mechanism of action.",
     "settings": {
       "hf_dataset_path": {
@@ -2921,7 +2922,8 @@
   },
   {
     "type": "XMLTool",
-    "name": "drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id",
+    "name": "drugbank_get_pathways_reactions_by_drug_or_id",
+    "aliases": ["drugbank_get_drug_pathways_and_reactions_by_drug_name_or_drugbank_id"],
     "description": "Get drug pathways and metabolic reactions by drug name or DrugBank ID.",
     "settings": {
       "hf_dataset_path": {

@@ -14,7 +14,7 @@ def TestCaseGenerator(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Generates diverse and representative ToolUniverse tool call dictionaries for a given tool based o...
 
@@ -31,7 +31,7 @@ def TestCaseGenerator(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

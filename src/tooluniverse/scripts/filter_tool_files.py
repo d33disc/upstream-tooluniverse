@@ -46,7 +46,7 @@ def filter_tool_relationship_graph(data, valid_tool_names):
         data: The loaded JSON data
         valid_tool_names: Set of valid tool names
 
-    Returns:
+    Returns
         Filtered data
     """
     if not isinstance(data, dict):
@@ -111,7 +111,7 @@ def filter_v4_all_tools(data, valid_tool_names):
         data: The loaded JSON data
         valid_tool_names: Set of valid tool names
 
-    Returns:
+    Returns
         Filtered data
     """
     if not isinstance(data, list):

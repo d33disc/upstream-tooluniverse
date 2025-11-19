@@ -121,7 +121,7 @@ Get 2D structure image (PNG format) of compound by CID.
    * ``cid`` (integer) (required)
      Compound ID to get image for, e.g., 2244.
 
-   * ``image_size`` (string) (optional)
+   * ``image_size`` (string) (required)
      Optional parameter, image size, like "200x200" (default).
 
    **Example Usage:**
@@ -131,7 +131,8 @@ Get 2D structure image (PNG format) of compound by CID.
       query = {
           "name": "PubChem_get_compound_2D_image_by_CID",
           "arguments": {
-              "cid": 10
+              "cid": 10,
+              "image_size": "example_value"
           }
       }
       result = tu.run(query)
@@ -252,7 +253,7 @@ Search by similarity (Tanimoto coefficient), returns CID list of compounds with 
    * ``smiles`` (string) (required)
      SMILES expression of target molecule.
 
-   * ``threshold`` (number) (optional)
+   * ``threshold`` (number) (required)
      Similarity threshold (between 0 and 1), e.g., 0.9 means 90% similarity.
 
    **Example Usage:**
@@ -262,7 +263,8 @@ Search by similarity (Tanimoto coefficient), returns CID list of compounds with 
       query = {
           "name": "PubChem_search_compounds_by_similarity",
           "arguments": {
-              "smiles": "example_value"
+              "smiles": "example_value",
+              "threshold": "example_value"
           }
       }
       result = tu.run(query)

@@ -28,7 +28,7 @@ Search Zenodo for research data, publications, and datasets. Zenodo is an open-a
    * ``query`` (string) (required)
      Free text search query for Zenodo records. Use keywords to search across titles, descriptions, authors, and other metadata.
 
-   * ``max_results`` (integer) (optional)
+   * ``max_results`` (integer) (required)
      Maximum number of results to return. Must be between 1 and 200.
 
    * ``community`` (string) (optional)
@@ -41,7 +41,8 @@ Search Zenodo for research data, publications, and datasets. Zenodo is an open-a
       query = {
           "name": "Zenodo_search_records",
           "arguments": {
-              "query": "example_value"
+              "query": "example_value",
+              "max_results": 10
           }
       }
       result = tu.run(query)

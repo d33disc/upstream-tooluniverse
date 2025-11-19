@@ -12,7 +12,6 @@ populations and pathways that contribute to treatment response prediction.
 
 import os
 import sys
-import torch
 import pandas as pd
 import asyncio
 import uuid
@@ -83,6 +82,15 @@ class CompassTool:
         self.model_path = os.path.join(root_path, ckp_path)
         self.device = device
 
+        # Lazy import torch for device handling
+        try:
+            import torch
+        except ImportError:
+            raise ImportError(
+                "COMPASS tool requires 'torch' package. "
+                "Install it with: pip install torch"
+            ) from None
+
         # Load the pre-trained COMPASS model
         print(f"🛠️  Initializing COMPASS tool from checkpoint: {self.model_path}...")
         self.finetuner = loadcompass(
@@ -118,7 +126,7 @@ class CompassTool:
             exclude (List[str]): List of column names to exclude from results.
                                Defaults to ['CANCER', 'Reference'].
 
-        Returns:
+        Returns
             List[List[Tuple[str, float]]]: For each sample, a list of tuples containing
                                          (concept_name, concept_score) sorted by score descending.
         """
@@ -161,7 +169,7 @@ class CompassTool:
             batch_size (int): Batch size for model inference. Larger values may improve speed
                             but require more memory. Defaults to 128.
 
-        Returns:
+        Returns
             Tuple[bool, List[Tuple[str, float]]]: A tuple containing:
                 - bool: True if predicted as responder (probability ≥ threshold), False otherwise
                 - List[Tuple[str, float]]: Top immune cell concepts ranked by importance,
@@ -222,7 +230,7 @@ async def run_compass_prediction(
                          Default 0.5 provides balanced sensitivity/specificity.
                          Consider lower thresholds (~0.3) for higher sensitivity.
 
-    Returns:
+    Returns
         dict: Structured prediction results containing:
             - 'prediction' (dict): Core prediction results with:
                 * 'is_responder' (bool): True if predicted responder (probability ≥ threshold)

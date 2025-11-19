@@ -35,19 +35,19 @@ class HumanBaseTool(BaseTool):
         """
         Retrieve the official gene symbol (same as EnrichrTool method)
 
-        Parameters:
+        Parameters
             gene_name (str): The gene name or synonym to query.
 
-        Returns:
+        Returns
             str: The official gene symbol.
         """
         """
         Retrieve the official gene symbol for a given gene name or synonym using the MyGene.info API.
 
-        Parameters:
+        Parameters
             gene_name (str): The gene name or synonym to query.
 
-        Returns:
+        Returns
             str: The official gene symbol if found; otherwise, raises an Exception.
         """
         # URL-encode the gene_name to handle special characters
@@ -96,10 +96,10 @@ class HumanBaseTool(BaseTool):
         """
         Convert gene names to Entrez IDs using NCBI Entrez API.
 
-        Parameters:
+        Parameters
             gene_names (list): List of gene names to convert.
 
-        Returns:
+        Returns
             list: List of Entrez IDs corresponding to the gene names.
         """
         # Define the NCBI Entrez API URL for querying gene information
@@ -149,13 +149,13 @@ class HumanBaseTool(BaseTool):
         """
         Retrieve protein-protein interactions and biological processes from HumanBase.
 
-        Parameters:
+        Parameters
             genes (list): List of gene names to analyze.
             tissue (str): Tissue type for tissue-specific interactions.
             max_node (int): Maximum number of nodes to retrieve.
             interaction (str): Specific interaction type to filter by.
 
-        Returns:
+        Returns
             tuple: (NetworkX Graph of interactions, list of biological processes)
         """
         genes = self.get_entrez_ids(genes)
@@ -243,13 +243,13 @@ class HumanBaseTool(BaseTool):
         """
         Convert NetworkX graph and biological processes to string representation.
 
-        Parameters:
+        Parameters
             graph (networkx.Graph): The network graph.
             bp_collection (list): List of biological processes.
             original_genes (list): Original gene list provided by user.
             tissue (str): Tissue type used for analysis.
 
-        Returns:
+        Returns
             str: Comprehensive string representation of the network data.
         """
         output = []

@@ -1,85 +1,264 @@
 #!/usr/bin/env python3
 """
-Backward Compatibility Tests for ToolUniverse
+Backward compatibility tests for BaseTool refactoring.
 
-Tests that existing APIs continue to work unchanged after enhancements.
+This module ensures that existing code continues to work after the refactoring.
 """
 
-import sys
-import unittest
-from pathlib import Path
 import pytest
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
+import warnings
+from unittest.mock import Mock, patch
 from tooluniverse import ToolUniverse
+from tooluniverse.exceptions import (
+    ToolError, ToolValidationError, ToolAuthError, ToolRateLimitError
+)
 
 
 @pytest.mark.unit
-class TestBackwardCompatibility(unittest.TestCase):
-    """Test backward compatibility of existing APIs."""
-    
-    def setUp(self):
+class TestBackwardCompatibility:
+    """Test backward compatibility after BaseTool refactoring."""
+
+    def setup_method(self):
         """Set up test fixtures."""
         self.tu = ToolUniverse()
-    
-    def test_run_one_function_signature(self):
-        """Test that run_one_function signature is backward compatible."""
-        # Test original signature still works
-        result = self.tu.run_one_function({
-            "name": "UniProt_get_entry_by_accession",
-            "arguments": {"accession": "P05067"}
-        })
+
+    def test_old_exception_classes_removed(self):
+        """Test that old exception classes are no longer available."""
+        # These should no longer be available
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import ToolExecutionError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import ValidationError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import AuthenticationError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import RateLimitError
+
+    def test_new_exception_classes_work(self):
+        """Test that new exception classes work without warnings."""
+        # These should work without warnings
+        ToolError("test message")
+        ToolValidationError("test message")
+        ToolAuthError("test message")
+        ToolRateLimitError("test message")
+
+    def test_tooluniverse_run_one_function_compatibility(self):
+        """Test that ToolUniverse.run_one_function still works with old signature."""
+        # Test with old signature (no new parameters)
+        function_call = {
+            "name": "nonexistent_tool",
+            "arguments": {"param": "value"}
+        }
         
-        # Should return a result (may be error if tool not available)
-        self.assertIsNotNone(result)
-    
-    def test_run_one_function_with_stream_callback(self):
-        """Test that stream_callback parameter still works."""
-        callback_called = False
+        result = self.tu.run_one_function(function_call)
         
-        def test_callback(chunk):
-            nonlocal callback_called
-            callback_called = True
+        # Should return error in old format
+        assert isinstance(result, dict)
+        assert "error" in result
+        assert "Tool 'nonexistent_tool' not found" in result["error"]
+
+    def test_tooluniverse_run_one_function_new_parameters(self):
+        """Test that new parameters work with backward compatibility."""
+        function_call = {
+            "name": "nonexistent_tool",
+            "arguments": {"param": "value"}
+        }
         
+        # Test with new parameters
         result = self.tu.run_one_function(
-            {"name": "UniProt_get_entry_by_accession", "arguments": {"accession": "P05067"}},
-            stream_callback=test_callback
+            function_call, 
+            use_cache=True, 
+            validate=True
         )
         
-        # Callback may or may not be called depending on tool implementation
-        self.assertIsNotNone(result)
-    
-    def test_error_format_backward_compatibility(self):
-        """Test that error format includes backward-compatible 'error' field."""
-        # Test with non-existent tool
-        result = self.tu.run_one_function({
-            "name": "NonExistentTool",
-            "arguments": {}
-        })
+        # Should still return error in compatible format
+        assert isinstance(result, dict)
+        assert "error" in result
+
+    def test_tooluniverse_error_format_compatibility(self):
+        """Test that error format remains backward compatible."""
+        function_call = {
+            "name": "nonexistent_tool",
+            "arguments": {"param": "value"}
+        }
         
-        # Should return error in dual format
-        self.assertIsInstance(result, dict)
-        self.assertIn("error", result)
-        self.assertIsInstance(result["error"], str)
+        result = self.tu.run_one_function(function_call)
         
-        # Should also include new structured format
-        self.assertIn("error_details", result)
-        self.assertIsInstance(result["error_details"], dict)
-        self.assertIn("type", result["error_details"])
-    
+        # Old format: simple error string
+        assert "error" in result
+        assert isinstance(result["error"], str)
+        
+        # New format: structured error details
+        assert "error_details" in result
+        assert isinstance(result["error_details"], dict)
+        assert "type" in result["error_details"]
+        assert "message" in result["error_details"]
+
+    def test_tool_check_function_call_compatibility(self):
+        """Test that tool.check_function_call still works."""
+        from tooluniverse.base_tool import BaseTool
+        
+        tool_config = {
+            "name": "test_tool",
+            "parameter": {
+                "type": "object",
+                "properties": {
+                    "param": {"type": "string", "required": True}
+                }
+            }
+        }
+        
+        tool = BaseTool(tool_config)
+        
+        # Test valid function call
+        valid_call = {
+            "name": "test_tool",
+            "arguments": {"param": "value"}
+        }
+        
+        is_valid, message = tool.check_function_call(valid_call)
+        assert is_valid is True
+        assert "valid" in message.lower()  # Check for success message
+        
+        # Test invalid function call
+        invalid_call = {
+            "name": "test_tool",
+            "arguments": {}  # Missing required param
+        }
+        
+        is_valid, message = tool.check_function_call(invalid_call)
+        assert is_valid is False
+        assert "param" in message
+
+    def test_tool_get_required_parameters_compatibility(self):
+        """Test that tool.get_required_parameters still works."""
+        from tooluniverse.base_tool import BaseTool
+        
+        tool_config = {
+            "name": "test_tool",
+            "parameter": {
+                "type": "object",
+                "properties": {
+                    "required_param": {"type": "string"},
+                    "optional_param": {"type": "string"}
+                },
+                "required": ["required_param"]
+            }
+        }
+        
+        tool = BaseTool(tool_config)
+        required_params = tool.get_required_parameters()
+        
+        assert "required_param" in required_params
+        assert "optional_param" not in required_params
+
+    def test_tool_config_defaults_compatibility(self):
+        """Test that tool config defaults loading still works."""
+        from tooluniverse.base_tool import BaseTool
+        
+        # Test with minimal config
+        tool_config = {"name": "minimal_tool"}
+        tool = BaseTool(tool_config)
+        
+        # Should not crash
+        assert tool.tool_config["name"] == "minimal_tool"
+
+    def test_tooluniverse_fallback_logic(self):
+        """Test that ToolUniverse fallback logic works for tools without new methods."""
+        # Mock a tool without new methods
+        class OldStyleTool:
+            def __init__(self, tool_config):
+                self.tool_config = tool_config
+            
+            def run(self, arguments=None):
+                return "old_style_result"
+        
+        # Mock tool discovery and add to all_tool_dict
+        with patch.object(self.tu, 'init_tool') as mock_init_tool:
+            mock_init_tool.return_value = OldStyleTool({"name": "old_tool"})
+            
+            # Add tool to all_tool_dict so it can be found
+            self.tu.all_tool_dict["old_tool"] = {
+                "name": "old_tool",
+                "parameter": {
+                    "type": "object",
+                    "properties": {}
+                }
+            }
+            
+            function_call = {
+                "name": "old_tool",
+                "arguments": {}
+            }
+            
+            result = self.tu.run_one_function(function_call)
+            
+            # Should work with fallback logic
+            assert result == "old_style_result"
+
+    def test_deprecation_warnings_are_issued(self):
+        """Test that old exception classes are no longer available (they were removed)."""
+        # These should no longer be available since we removed them completely
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import ToolExecutionError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import ValidationError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import AuthenticationError
+        with pytest.raises(ImportError):
+            from tooluniverse.base_tool import RateLimitError
+
+    def test_new_exception_classes_work_without_warnings(self):
+        """Test that new exception classes work without deprecation warnings."""
+        # Should not issue deprecation warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter("error")  # Turn warnings into errors
+            
+            # These should not raise any warnings
+            ToolError("test message")
+            ToolValidationError("test message")
+            ToolAuthError("test message")
+            ToolRateLimitError("test message")
+
+    def test_tooluniverse_caching_compatibility(self):
+        """Test that caching works with both old and new tools."""
+        function_call = {
+            "name": "nonexistent_tool",
+            "arguments": {"param": "value"}
+        }
+        
+        # Test caching with non-existent tool (should not cache errors)
+        result1 = self.tu.run_one_function(function_call, use_cache=True)
+        result2 = self.tu.run_one_function(function_call, use_cache=True)
+        
+        # Both should return the same error
+        assert result1["error"] == result2["error"]
+
+    def test_tooluniverse_validation_compatibility(self):
+        """Test that validation works with both old and new tools."""
+        function_call = {
+            "name": "nonexistent_tool",
+            "arguments": {"param": "value"}
+        }
+        
+        # Test validation with non-existent tool
+        result = self.tu.run_one_function(function_call, validate=True)
+        
+        # Should return validation error
+        assert "error" in result
+        assert "not found" in result["error"]
+
     def test_smcp_server_initialization(self):
         """Test that SMCP server can still be initialized."""
         try:
             from tooluniverse import SMCP
             server = SMCP()
-            self.assertIsNotNone(server)
-            self.assertIsNotNone(server.tooluniverse)
+            assert server is not None
+            assert server.tooluniverse is not None
         except ImportError:
             # SMCP not available, skip test
-            self.skipTest("SMCP not available")
-    
+            pytest.skip("SMCP not available")
+
     def test_direct_tool_class_usage(self):
         """Test that direct tool class usage still works."""
         try:
@@ -102,12 +281,12 @@ class TestBackwardCompatibility(unittest.TestCase):
             }
             
             tool = UniProtRESTTool(tool_config)
-            self.assertIsNotNone(tool)
+            assert tool is not None
             
         except ImportError:
             # Tool class not available, skip test
-            self.skipTest("UniProtRESTTool not available")
-    
+            pytest.skip("UniProtRESTTool not available")
+
     def test_new_parameters_have_defaults(self):
         """Test that new parameters have sensible defaults."""
         # Test use_cache parameter
@@ -122,7 +301,7 @@ class TestBackwardCompatibility(unittest.TestCase):
         }, use_cache=False)
         
         # Results should be the same (both with cache disabled)
-        self.assertEqual(type(result1), type(result2))
+        assert type(result1) == type(result2)
         
         # Test validate parameter
         result3 = self.tu.run_one_function({
@@ -131,44 +310,44 @@ class TestBackwardCompatibility(unittest.TestCase):
         }, validate=True)
         
         # Should work with validation enabled
-        self.assertIsNotNone(result3)
-    
+        assert result3 is not None
+
     def test_dynamic_tools_namespace(self):
         """Test that new dynamic tools namespace works."""
         # Test that tools attribute exists
-        self.assertTrue(hasattr(self.tu, 'tools'))
+        assert hasattr(self.tu, 'tools')
         
         # Test that it's a ToolNamespace
         from tooluniverse.execute_function import ToolNamespace
-        self.assertIsInstance(self.tu.tools, ToolNamespace)
+        assert isinstance(self.tu.tools, ToolNamespace)
         
         # Test that we can access a tool
         try:
             tool_callable = self.tu.tools.UniProt_get_entry_by_accession
-            self.assertIsNotNone(tool_callable)
+            assert tool_callable is not None
         except AttributeError:
             # Tool not available, that's okay
             pass
-    
+
     def test_lifecycle_methods_exist(self):
         """Test that new lifecycle methods exist."""
         # Test that new methods exist
-        self.assertTrue(hasattr(self.tu, 'refresh_tools'))
-        self.assertTrue(hasattr(self.tu, 'eager_load_tools'))
-        self.assertTrue(hasattr(self.tu, 'clear_cache'))
+        assert hasattr(self.tu, 'refresh_tools')
+        assert hasattr(self.tu, 'eager_load_tools')
+        assert hasattr(self.tu, 'clear_cache')
         
         # Test that they can be called
         self.tu.refresh_tools()
         self.tu.eager_load_tools([])
         self.tu.clear_cache()
-    
+
     def test_cache_functionality(self):
         """Test that caching functionality works."""
         # Test cache operations
         self.tu.clear_cache()
         
         # Test that cache is empty initially
-        self.assertEqual(len(self.tu._cache), 0)
+        assert len(self.tu._cache) == 0
         
         # Test caching a result
         try:
@@ -179,7 +358,7 @@ class TestBackwardCompatibility(unittest.TestCase):
             
             # Cache should have one entry if successful
             if result1 is not None:
-                self.assertEqual(len(self.tu._cache), 1)
+                assert len(self.tu._cache) == 1
                 
                 # Test cache hit
                 result2 = self.tu.run_one_function({
@@ -188,63 +367,19 @@ class TestBackwardCompatibility(unittest.TestCase):
                 }, use_cache=True)
                 
                 # Results should be the same
-                self.assertEqual(result1, result2)
+                assert result1 == result2
             else:
                 # If tool execution failed, cache should still be empty
-                self.assertEqual(len(self.tu._cache), 0)
+                assert len(self.tu._cache) == 0
                 
         except Exception:
             # If tool execution fails, cache should still be empty
-            self.assertEqual(len(self.tu._cache), 0)
+            assert len(self.tu._cache) == 0
         
         # Clear cache
         self.tu.clear_cache()
-        self.assertEqual(len(self.tu._cache), 0)
-
-
-class TestErrorHandlingCompatibility(unittest.TestCase):
-    """Test error handling backward compatibility."""
-    
-    def setUp(self):
-        """Set up test fixtures."""
-        self.tu = ToolUniverse()
-    
-    def test_validation_error_format(self):
-        """Test validation error format."""
-        # Test with invalid parameters
-        result = self.tu.run_one_function({
-            "name": "UniProt_get_entry_by_accession",
-            "arguments": {"invalid_param": "test"}
-        }, validate=True)
-        
-        # Should return dual-format error
-        self.assertIsInstance(result, dict)
-        self.assertIn("error", result)
-        self.assertIn("error_details", result)
-        
-        # Error details should be structured
-        error_details = result["error_details"]
-        self.assertIn("type", error_details)
-        self.assertIn("message", error_details)
-        self.assertIn("retriable", error_details)
-        self.assertIn("next_steps", error_details)
-    
-    def test_tool_not_found_error(self):
-        """Test tool not found error format."""
-        result = self.tu.run_one_function({
-            "name": "NonExistentTool",
-            "arguments": {}
-        })
-        
-        # Should return dual-format error
-        self.assertIsInstance(result, dict)
-        self.assertIn("error", result)
-        self.assertIn("error_details", result)
-        
-        # Error should indicate tool not found
-        self.assertIn("not found", result["error"].lower())
-        self.assertEqual(result["error_details"]["type"], "ToolUnavailableError")
+        assert len(self.tu._cache) == 0
 
 
 if __name__ == "__main__":
-    unittest.main()
+    pytest.main([__file__])

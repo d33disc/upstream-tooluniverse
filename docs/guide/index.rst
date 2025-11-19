@@ -17,8 +17,10 @@ Core Concepts
 * **📋 Listing Tools** → :doc:`listing_tools` - Discover and filter tools by capability, domain, and IO
 * **🔧 Tool Caller** → :doc:`tool_caller` - Primary execution engine with dynamic loading, validation, and MCP server integration
 * **🔗 Tool Composition** → :doc:`tool_composition` - Chain ToolUniverse's 600+ tools into powerful scientific workflows using Tool Composer
+* **🐍 Coding API** → :doc:`coding_api` - Import and call tools like normal Python functions with type safety
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol integration and server setup
+* **📦 Compact Mode** → :doc:`compact_mode` - Optimize context window usage by exposing only core tools (~15 tools) while maintaining full functionality
 * **🔊 Streaming Tools** → :doc:`streaming_tools` - Real-time streaming output and custom tool integration
 * **📝 Logging** → :doc:`logging` - Comprehensive logging configuration and debugging
 * **🗃️ Result Caching** → :doc:`cache_system` - Configure in-memory and persistent caches for tool results
@@ -62,3 +64,4 @@ Specialized tool collections for specific research domains:
 
 * **🏥 Clinical Guidelines** → :doc:`clinical_guidelines_tools` - Search and extract clinical practice guidelines from NICE, WHO, PubMed, and 5 other authoritative sources
 * **📖 Literature Search** → :doc:`../tutorials/literature_search_tools_tutorial` - Comprehensive literature search across PubMed, arXiv, bioRxiv, and academic databases
+* **⚙️ Space Configurations** → :doc:`toolspace` - Pre-configured tool collections for protein research, genomics, bioinformatics, structural biology, cheminformatics, disease research, drug discovery, literature search, and clinical research. Load directly from GitHub or customize for your needs.

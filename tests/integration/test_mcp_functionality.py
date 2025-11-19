@@ -11,10 +11,8 @@ Tests that MCP-related functionality actually works:
 
 import pytest
 import asyncio
-import json
 from unittest.mock import patch, MagicMock
 
-from tooluniverse import ToolUniverse
 from tooluniverse.smcp import SMCP
 from tooluniverse.mcp_client_tool import MCPClientTool, MCPAutoLoaderTool
 
@@ -120,47 +118,47 @@ class TestMCPFunctionality:
     @pytest.mark.asyncio
     async def test_mcp_client_tool_with_mock_server(self):
         """Test MCP client tool with mocked server responses"""
-        # Mock successful response
-        mock_response = {
-            "result": {
-                "tools": [
-                    {
-                        "name": "test_tool",
-                        "description": "A test tool",
-                        "inputSchema": {
-                            "type": "object",
-                            "properties": {
-                                "param1": {"type": "string"}
-                            }
+        from unittest.mock import patch, MagicMock, AsyncMock
+        
+        # Mock the streamablehttp_client and ClientSession
+        mock_session = AsyncMock()
+        mock_session.initialize = AsyncMock()
+        mock_session.list_tools = AsyncMock(return_value={
+            "tools": [
+                {
+                    "name": "test_tool",
+                    "description": "A test tool",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "param1": {"type": "string"}
                         }
                     }
-                ]
-            }
-        }
+                }
+            ]
+        })
         
-        async def mock_json():
-            return mock_response
+        mock_read_stream = AsyncMock()
+        mock_write_stream = AsyncMock()
+        
+        with patch('tooluniverse.mcp_client_tool.streamablehttp_client') as mock_client:
+            mock_client.return_value.__aenter__.return_value = (mock_read_stream, mock_write_stream, None)
             
-        with patch('aiohttp.ClientSession.post') as mock_post:
-            mock_response_obj = MagicMock()
-            mock_response_obj.status = 200
-            mock_response_obj.headers = {"content-type": "application/json"}
-            mock_response_obj.json = mock_json
-            
-            mock_post.return_value.__aenter__.return_value = mock_response_obj
-            
-            tool_config = {
-                "name": "test_client",
-                "server_url": "http://localhost:8000",
-                "transport": "http"
-            }
-            
-            client = MCPClientTool(tool_config)
-            
-            # Test listing tools
-            tools = await client.list_tools()
-            assert len(tools) > 0
-            assert tools[0]["name"] == "test_tool"
+            with patch('tooluniverse.mcp_client_tool.ClientSession') as mock_session_class:
+                mock_session_class.return_value.__aenter__.return_value = mock_session
+                
+                tool_config = {
+                    "name": "test_client",
+                    "server_url": "http://localhost:8000",
+                    "transport": "http"
+                }
+                
+                client = MCPClientTool(tool_config)
+                
+                # Test listing tools
+                tools = await client.list_tools()
+                assert len(tools) > 0
+                assert tools[0]["name"] == "test_tool"
 
     def test_smcp_server_utility_tools(self):
         """Test that SMCP server has utility tools"""
@@ -368,3 +366,238 @@ class TestMCPFunctionality:
         # Test with auto_expose_tools enabled (default)
         server = SMCP(name="Auto Expose")
         assert server.auto_expose_tools is True
+
+    def test_mcp_auto_loader_tool_configuration(self):
+        """Test MCPAutoLoaderTool configuration options"""
+        # Test basic configuration
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "timeout": 30,
+            "tool_prefix": "mcp_",
+            "auto_register": True
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        assert auto_loader is not None
+        assert auto_loader.server_url == "http://localhost:8000"
+        assert auto_loader.transport == "http"
+        assert auto_loader.timeout == 30
+        assert auto_loader.tool_prefix == "mcp_"
+        assert auto_loader.auto_register is True
+
+    def test_mcp_auto_loader_tool_proxy_config_generation(self):
+        """Test MCPAutoLoaderTool proxy configuration generation"""
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "tool_prefix": "test_",
+            "selected_tools": ["tool1", "tool2"]
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        
+        # Mock discovered tools
+        auto_loader._discovered_tools = {
+            "tool1": {
+                "name": "tool1",
+                "description": "Test tool 1",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"param1": {"type": "string"}},
+                    "required": ["param1"]
+                }
+            },
+            "tool2": {
+                "name": "tool2", 
+                "description": "Test tool 2",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"param2": {"type": "integer"}},
+                    "required": ["param2"]
+                }
+            },
+            "tool3": {
+                "name": "tool3",
+                "description": "Test tool 3",
+                "inputSchema": {"type": "object", "properties": {}}
+            }
+        }
+        
+        # Generate proxy configs
+        configs = auto_loader.generate_proxy_tool_configs()
+        
+        # Should only include selected tools
+        assert len(configs) == 2
+        assert any(config["name"] == "test_tool1" for config in configs)
+        assert any(config["name"] == "test_tool2" for config in configs)
+        assert not any(config["name"] == "test_tool3" for config in configs)
+        
+        # Check config structure
+        for config in configs:
+            assert "name" in config
+            assert "description" in config
+            assert "type" in config
+            assert config["type"] == "MCPProxyTool"
+            assert "server_url" in config
+            assert "target_tool_name" in config
+            assert "parameter" in config
+
+    @pytest.mark.asyncio
+    async def test_mcp_auto_loader_tool_discovery(self):
+        """Test MCPAutoLoaderTool tool discovery functionality"""
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "timeout": 5
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        
+        # Mock the MCP request to avoid actual network calls
+        with patch.object(auto_loader, '_make_mcp_request') as mock_request:
+            mock_request.return_value = {
+                "tools": [
+                    {
+                        "name": "mock_tool",
+                        "description": "A mock tool for testing",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {"text": {"type": "string"}},
+                            "required": ["text"]
+                        }
+                    }
+                ]
+            }
+            
+            # Test discovery
+            discovered = await auto_loader.discover_tools()
+            
+            assert len(discovered) == 1
+            assert "mock_tool" in discovered
+            assert discovered["mock_tool"]["description"] == "A mock tool for testing"
+
+    @pytest.mark.asyncio
+    async def test_mcp_auto_loader_tool_registration(self):
+        """Test MCPAutoLoaderTool tool registration with ToolUniverse"""
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "tool_prefix": "test_",
+            "auto_register": True
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        
+        # Mock discovered tools
+        auto_loader._discovered_tools = {
+            "test_tool": {
+                "name": "test_tool",
+                "description": "A test tool",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"param": {"type": "string"}},
+                    "required": ["param"]
+                }
+            }
+        }
+        
+        # Create a mock ToolUniverse engine
+        mock_engine = MagicMock()
+        mock_engine.callable_functions = {}
+        
+        def mock_register_custom_tool(tool_class, tool_name, tool_config, instantiate=False, tool_instance=None):
+            # Simulate the actual behavior of register_custom_tool
+            actual_key = tool_config.get("name", tool_name)
+            if instantiate:
+                mock_engine.callable_functions[actual_key] = MagicMock()
+        
+        mock_register_custom_tool_mock = MagicMock(side_effect=mock_register_custom_tool)
+        mock_engine.register_custom_tool = mock_register_custom_tool_mock
+        
+        # Test registration
+        registered_count = auto_loader.register_tools_in_engine(mock_engine)
+        
+        assert registered_count == 1
+        mock_engine.register_custom_tool.assert_called_once()
+        
+        # Check the call arguments
+        call_args = mock_engine.register_custom_tool.call_args
+        assert call_args[1]["tool_name"] == "test_test_tool"
+        assert call_args[1]["instantiate"] is True
+
+    @pytest.mark.asyncio
+    async def test_mcp_auto_loader_tool_auto_load_and_register(self):
+        """Test MCPAutoLoaderTool complete auto-load and register process"""
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "tool_prefix": "auto_",
+            "auto_register": True
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        
+        # Mock the discovery and registration process
+        with patch.object(auto_loader, 'discover_tools') as mock_discover, \
+             patch.object(auto_loader, 'register_tools_in_engine') as mock_register:
+            
+            mock_discover.return_value = {
+                "discovered_tool": {
+                    "name": "discovered_tool",
+                    "description": "A discovered tool",
+                    "inputSchema": {"type": "object", "properties": {}}
+                }
+            }
+            mock_register.return_value = 1
+            
+            # Create a mock ToolUniverse engine
+            mock_engine = MagicMock()
+            
+            # Test auto-load and register
+            result = await auto_loader.auto_load_and_register(mock_engine)
+            
+            # Verify the result
+            assert "discovered_count" in result
+            assert "registered_count" in result
+            assert "tools" in result
+            assert "registered_tools" in result
+            
+            assert result["discovered_count"] == 1
+            assert result["registered_count"] == 1
+            assert "discovered_tool" in result["tools"]
+            
+            # Verify methods were called
+            mock_discover.assert_called_once()
+            mock_register.assert_called_once_with(mock_engine)
+
+    def test_mcp_auto_loader_tool_with_disabled_auto_register(self):
+        """Test MCPAutoLoaderTool with auto_register disabled"""
+        tool_config = {
+            "name": "test_auto_loader",
+            "server_url": "http://localhost:8000",
+            "transport": "http",
+            "auto_register": False
+        }
+        
+        auto_loader = MCPAutoLoaderTool(tool_config)
+        assert auto_loader.auto_register is False
+        
+        # Mock discovered tools
+        auto_loader._discovered_tools = {
+            "test_tool": {
+                "name": "test_tool",
+                "description": "A test tool",
+                "inputSchema": {"type": "object", "properties": {}}
+            }
+        }
+        
+        # Generate configs should work even with auto_register disabled
+        configs = auto_loader.generate_proxy_tool_configs()
+        assert len(configs) == 1
+        assert configs[0]["name"] == "mcp_test_tool"  # Default prefix is "mcp_"

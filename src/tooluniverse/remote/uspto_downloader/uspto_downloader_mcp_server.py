@@ -29,7 +29,7 @@ def download_abst(query: dict):
     """Retrieve the abstract of a patent application by its application number.
     Args:
         "query" dict: A dictionary containing the application number under the key "applicationNumberText".
-    Returns:
+    Returns
         dict: A dictionary containing the abstract text under the 'result' key or an error message under the 'error' key if the document could not be retrieved.
     """
     return agents["get_abstract_from_patent_app_number"].run(query)
@@ -40,7 +40,7 @@ def download_claims(query: dict):
     """Retrieve the claims of a patent application by its application number.
     Args:
         "query" dict: A dictionary containing the application number under the key "applicationNumberText".
-    Returns:
+    Returns
         dict: A dictionary containing the claims text under the 'result' key or an error message under the 'error' key if the document could not be retrieved.
     """
     return agents["get_claims_from_patent_app_number"].run(query)
@@ -51,7 +51,7 @@ def download_full_text(query: dict):
     """Retrieve the full text of a patent application by its application number.
     Args:
         "query" dict: A dictionary containing the application number under the key "applicationNumberText".
-    Returns:
+    Returns
         dict: A dictionary containing the full text under the 'result' key or an error message under the 'error' key if the document could not be retrieved.
     """
     return agents["get_full_text_from_patent_app_number"].run(query)

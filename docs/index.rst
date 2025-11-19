@@ -125,6 +125,7 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    tutorials/finding_tools
    guide/tool_caller
    guide/mcp_support
+   guide/coding_api
    tutorials/tooluniverse_case_study
    tutorials/agentic_tools_tutorial
    tutorials/literature_search_tools_tutorial
@@ -136,15 +137,16 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    guide/hooks/index
 
 .. toctree::
-   :maxdepth: 1
-   :caption: 🔨 Expand ToolUniverse
+   :maxdepth: 3
+   :caption: 🔨 Add Tools to ToolUniverse
 
    expand_tooluniverse/index
+   expand_tooluniverse/quick_start
+   expand_tooluniverse/local_tools/index
+   expand_tooluniverse/remote_tools/index
+   expand_tooluniverse/contributing/index
    expand_tooluniverse/architecture
-   expand_tooluniverse/local_tool_registration
-   expand_tooluniverse/remote_tool_registration
    deployment
-   contributing
 
 .. toctree::
    :maxdepth: 1
@@ -158,8 +160,6 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    :maxdepth: 1
    :caption: 🔌 API
 
-   api_quick_reference
-   api_comprehensive
    api/modules
 
 .. toctree::

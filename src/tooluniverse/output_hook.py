@@ -65,7 +65,7 @@ class HookRule:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             bool: True if conditions are met, False otherwise
         """
         # Evaluate output length conditions
@@ -158,7 +158,7 @@ class OutputHook:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             bool: True if hook should trigger, False otherwise
         """
         if not self.enabled:
@@ -184,7 +184,7 @@ class OutputHook:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The processed output
 
         Raises:
@@ -290,7 +290,7 @@ class SummarizationHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The summarized output, or original output if summarization fails
         """
         try:
@@ -408,7 +408,7 @@ class SummarizationHook(OutputHook):
         Args:
             context (Dict[str, Any]): Execution context containing arguments and metadata
 
-        Returns:
+        Returns
             str: Extracted query context or fallback description
         """
         arguments = context.get("arguments", {})
@@ -519,7 +519,7 @@ class HookManager:
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Additional context information
 
-        Returns:
+        Returns
             Any: The processed output after applying all applicable hooks
         """
         if not self.enabled:
@@ -553,7 +553,7 @@ class HookManager:
         """
         Validate that LLM API keys are available for hook tools.
 
-        Returns:
+        Returns
             bool: True if API keys are available, False otherwise
         """
         from .agentic_tool import AgenticTool
@@ -641,7 +641,7 @@ class HookManager:
         Args:
             hook_name (str): Name of the hook to retrieve
 
-        Returns:
+        Returns
             Optional[OutputHook]: Hook instance if found, None otherwise
         """
         for hook in self.hooks:
@@ -684,7 +684,7 @@ class HookManager:
         """
         Get the path to the hook configuration file.
 
-        Returns:
+        Returns
             Path: Path to the configuration file
         """
         try:
@@ -934,7 +934,7 @@ class HookManager:
         Args:
             tool_name (str): Name of the tool to check
 
-        Returns:
+        Returns
             bool: True if the tool is a hook tool and should be excluded from hook processing
         """
         hook_tool_names = [
@@ -956,7 +956,7 @@ class HookManager:
         Args:
             hook_config (Dict[str, Any]): Hook configuration
 
-        Returns:
+        Returns
             Optional[OutputHook]: Created hook instance or None if type not supported
         """
         hook_type = hook_config.get("type", "SummarizationHook")
@@ -985,7 +985,7 @@ class HookManager:
         Args:
             hook_config (Dict[str, Any]): Original hook configuration
 
-        Returns:
+        Returns
             Dict[str, Any]: Enhanced configuration with defaults applied
         """
         hook_type = hook_config.get("type", "SummarizationHook")
@@ -1052,7 +1052,7 @@ class HookManager:
             tool_name (str): Name of the current tool
             context (Dict[str, Any]): Execution context
 
-        Returns:
+        Returns
             bool: True if hook is applicable, False otherwise
         """
         # Check tool-specific hooks
@@ -1138,7 +1138,7 @@ class FileSaveHook(OutputHook):
             arguments (Dict[str, Any]): Arguments passed to the tool
             context (Dict[str, Any]): Execution context
 
-        Returns:
+        Returns
             Dict[str, Any]: Dictionary containing file information:
                 - file_path: Path to the saved file
                 - data_format: Format of the data (json, text, binary, etc.)
@@ -1213,7 +1213,7 @@ class FileSaveHook(OutputHook):
         Args:
             data (Any): The data to analyze
 
-        Returns:
+        Returns
             tuple[str, str]: (data_format, data_structure)
         """
         if isinstance(data, dict):
