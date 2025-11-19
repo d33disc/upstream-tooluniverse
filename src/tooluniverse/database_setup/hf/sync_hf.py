@@ -20,7 +20,7 @@ download(repo, collection, overwrite=False, include_tools=False)
 
 Notes
 -----
-- Requires HF_TOKEN (env or HfFolder) for private repos or authenticated uploads.
+- Requires HF_TOKEN (env or HF cache) for private repos or authenticated uploads.
 - Upload streams large files; download uses tooluniverse.utils.download_from_hf.
 - Existing local files are preserved unless overwrite=True.
 """
@@ -29,7 +29,7 @@ import os
 import shutil
 from pathlib import Path
 from dotenv import load_dotenv
-from huggingface_hub import HfApi, HfFolder, whoami
+from huggingface_hub import HfApi, whoami, get_token
 from tooluniverse.utils import download_from_hf
 from tooluniverse.utils import get_user_cache_dir  # ensure imported for DATA_DIR setup
 
@@ -53,7 +53,7 @@ def db_path_for_collection(collection: str) -> Path:
 
 def get_hf_api():
     """Return an authenticated (HfApi, token) tuple."""
-    token = os.getenv("HF_TOKEN") or HfFolder.get_token()
+    token = os.getenv("HF_TOKEN") or get_token()
     if not token:
         raise RuntimeError("HF_TOKEN not set in environment or .env file")
     return HfApi(token=token), token
@@ -141,7 +141,7 @@ def _download_one(
     Helper to fetch one file (DB or FAISS) using tooluniverse.utils.download_from_hf.
     """
 
-    token = os.getenv("HF_TOKEN") or HfFolder.get_token() or ""
+    token = os.getenv("HF_TOKEN") or get_token() or ""
     cfg = {
         "hf_dataset_path": {
             "repo_id": repo,
@@ -212,7 +212,7 @@ def download(
     # (1) Optionally fetch tool JSONs (*.json)
     # -------------------------------------------------
     if include_tools:
-        token = os.getenv("HF_TOKEN") or HfFolder.get_token()
+        token = os.getenv("HF_TOKEN") or get_token()
         api = HfApi(token=token) if token else HfApi()
 
         try:

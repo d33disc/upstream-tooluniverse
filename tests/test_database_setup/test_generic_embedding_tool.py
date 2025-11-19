@@ -29,6 +29,7 @@ def _require_online_env_or_fail():
     return prov, model
 
 @pytest.mark.api
+@pytest.mark.skip(reason="Requires EMBED_PROVIDER environment variable")
 def test_generic_embedding_tool_hybrid_real(tmp_path):
     provider, model = _require_online_env_or_fail()
 
