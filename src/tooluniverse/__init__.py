@@ -258,8 +258,8 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
     from .tool_finder_embedding import ToolFinderEmbedding
     from .tool_finder_keyword import ToolFinderKeyword
     from .tool_finder_llm import ToolFinderLLM
-    from .embedding_database import EmbeddingDatabase
-    from .embedding_sync import EmbeddingSync
+    from .database_setup.embedding_database import EmbeddingDatabase
+    from .database_setup.embedding_sync import EmbeddingSync
     from .rcsb_pdb_tool import RCSBTool
     from .rcsb_search_tool import RCSBSearchTool
     from .web_search_tool import (

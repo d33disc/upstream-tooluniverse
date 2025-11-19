@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 748 scientific tools.
+Type-safe Python interface to 768 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -880,7 +880,6 @@ from .drugbank_vocab_search import drugbank_vocab_search
 from .dynamic_package_discovery import dynamic_package_discovery
 from .embedding_database_add import embedding_database_add
 from .embedding_database_create import embedding_database_create
-from .embedding_database_load import embedding_database_load
 from .embedding_database_search import embedding_database_search
 from .embedding_sync_download import embedding_sync_download
 from .embedding_sync_upload import embedding_sync_upload
@@ -888,6 +887,45 @@ from .enrichr_gene_enrichment_analysis import enrichr_gene_enrichment_analysis
 from .ensembl_get_sequence import ensembl_get_sequence
 from .ensembl_get_variants import ensembl_get_variants
 from .ensembl_lookup_gene import ensembl_lookup_gene
+from .euhealthinfo_deepdive import euhealthinfo_deepdive
+from .euhealthinfo_search_alcohol_tobacco_psychoactive_use import (
+    euhealthinfo_search_alcohol_tobacco_psychoactive_use,
+)
+from .euhealthinfo_search_births import euhealthinfo_search_births
+from .euhealthinfo_search_cancer import euhealthinfo_search_cancer
+from .euhealthinfo_search_cancer_registry import euhealthinfo_search_cancer_registry
+from .euhealthinfo_search_causes_of_death import euhealthinfo_search_causes_of_death
+from .euhealthinfo_search_covid_19 import euhealthinfo_search_covid_19
+from .euhealthinfo_search_deaths import euhealthinfo_search_deaths
+from .euhealthinfo_search_diabetes_mellitus_epidemiology_registry import (
+    euhealthinfo_search_diabetes_mellitus_epidemiology_registry,
+)
+from .euhealthinfo_search_disability import euhealthinfo_search_disability
+from .euhealthinfo_search_healthcare_expenditure import (
+    euhealthinfo_search_healthcare_expenditure,
+)
+from .euhealthinfo_search_hospital_in_patient_data import (
+    euhealthinfo_search_hospital_in_patient_data,
+)
+from .euhealthinfo_search_infectious_diseases import (
+    euhealthinfo_search_infectious_diseases,
+)
+from .euhealthinfo_search_key_indicators_registries_surveys import (
+    euhealthinfo_search_key_indicators_registries_surveys,
+)
+from .euhealthinfo_search_mental_health import euhealthinfo_search_mental_health
+from .euhealthinfo_search_obesity import euhealthinfo_search_obesity
+from .euhealthinfo_search_population_health_survey import (
+    euhealthinfo_search_population_health_survey,
+)
+from .euhealthinfo_search_primary_care_workforce import (
+    euhealthinfo_search_primary_care_workforce,
+)
+from .euhealthinfo_search_surveillance import euhealthinfo_search_surveillance
+from .euhealthinfo_search_surveillance_mortality_rates import (
+    euhealthinfo_search_surveillance_mortality_rates,
+)
+from .euhealthinfo_search_vaccination import euhealthinfo_search_vaccination
 from .europepmc_disease_target_score import europepmc_disease_target_score
 from .eva_disease_target_score import eva_disease_target_score
 from .eva_somatic_disease_target_score import eva_somatic_disease_target_score
@@ -1658,7 +1696,6 @@ __all__ = [
     "dynamic_package_discovery",
     "embedding_database_add",
     "embedding_database_create",
-    "embedding_database_load",
     "embedding_database_search",
     "embedding_sync_download",
     "embedding_sync_upload",
@@ -1666,6 +1703,27 @@ __all__ = [
     "ensembl_get_sequence",
     "ensembl_get_variants",
     "ensembl_lookup_gene",
+    "euhealthinfo_deepdive",
+    "euhealthinfo_search_alcohol_tobacco_psychoactive_use",
+    "euhealthinfo_search_births",
+    "euhealthinfo_search_cancer",
+    "euhealthinfo_search_cancer_registry",
+    "euhealthinfo_search_causes_of_death",
+    "euhealthinfo_search_covid_19",
+    "euhealthinfo_search_deaths",
+    "euhealthinfo_search_diabetes_mellitus_epidemiology_registry",
+    "euhealthinfo_search_disability",
+    "euhealthinfo_search_healthcare_expenditure",
+    "euhealthinfo_search_hospital_in_patient_data",
+    "euhealthinfo_search_infectious_diseases",
+    "euhealthinfo_search_key_indicators_registries_surveys",
+    "euhealthinfo_search_mental_health",
+    "euhealthinfo_search_obesity",
+    "euhealthinfo_search_population_health_survey",
+    "euhealthinfo_search_primary_care_workforce",
+    "euhealthinfo_search_surveillance",
+    "euhealthinfo_search_surveillance_mortality_rates",
+    "euhealthinfo_search_vaccination",
     "europepmc_disease_target_score",
     "eva_disease_target_score",
     "eva_somatic_disease_target_score",
