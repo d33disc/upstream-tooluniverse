@@ -154,6 +154,66 @@ Add the ToolUniverse MCP server configuration to your `settings.json`:
 - ``--hook-type SummarizationHook``: Provides summary of the output that is too long to fit in the context window
 - ``AZURE_OPENAI_API_KEY`` and ``AZURE_OPENAI_ENDPOINT``: Required for SummarizationHook functionality
 
+**Using Space Configuration (Recommended for Gemini CLI):**
+
+Gemini CLI has a 500 tool limit. To stay within this limit while accessing essential scientific tools, use the pre-configured ``gemini-essential.yaml`` Space:
+
+.. code-block:: json
+
+   {
+     "mcpServers": {
+       "tooluniverse": {
+         "command": "uv",
+         "args": [
+           "--directory",
+           "/path/to/tooluniverse-env",
+           "run",
+           "tooluniverse-smcp-stdio",
+           "--load",
+           "./examples/spaces/gemini-essential.yaml"
+         ]
+       }
+     }
+   }
+
+**Benefits of gemini-essential.yaml:**
+
+- **Under 500 tools**: Carefully selected ~400-450 essential tools, well within Gemini CLI's limit
+- **Comprehensive coverage**: Includes core databases (FDA, OpenTargets, UniProt, PubChem), literature search tools, clinical data, structural biology, and genomics tools
+- **Excludes unnecessary tools**: Automatically excludes agentic tools, MCP auto-loaders, and package info tools
+- **Ready to use**: No need to manually configure tool selection
+
+**Using Compact Mode (Alternative for Minimal Context Usage):**
+
+For maximum context window efficiency, use compact mode which exposes only 4-5 core tools:
+
+.. code-block:: json
+
+   {
+     "mcpServers": {
+       "tooluniverse": {
+         "command": "uv",
+         "args": [
+           "--directory",
+           "/path/to/tooluniverse-env",
+           "run",
+           "tooluniverse-smcp-stdio",
+           "--compact-mode"
+         ]
+       }
+     }
+   }
+
+**Compact Mode Benefits:**
+
+- **99% reduction**: Only 4-5 tools exposed instead of 750+
+- **Full functionality**: All tools still accessible via ``execute_tool``
+- **Minimal context usage**: Ideal for AI agents with limited context windows
+- **Progressive disclosure**: Use ``list_tools``, ``grep_tools``, and ``get_tool_info`` to discover tools on demand
+
+.. seealso::
+   For detailed information about compact mode, see :doc:`../compact_mode`
+
 **Important Configuration Notes**:
 
 - Replace `/path/to/tooluniverse-env` with your actual ToolUniverse working directory
@@ -464,6 +524,11 @@ Optimize tool usage for better performance:
 - Load only relevant tools for specific research domains
 - Reduce context window usage
 - Improve response times
+
+**Gemini CLI 500 Tool Limit**:
+- Gemini CLI has a 500 tool limit per MCP server
+- Use ``gemini-essential.yaml`` Space configuration to stay within limits
+- Or use compact mode for minimal context usage
 
 **Example Tool Selection**:
 

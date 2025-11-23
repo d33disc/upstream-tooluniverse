@@ -64,6 +64,38 @@ Add to ``~/Library/Application Support/Claude/claude_desktop_config.json``:
      }
    }
 
+Gemini CLI Configuration
+------------------------
+
+Add to ``~/.gemini/settings.json`` or project ``.gemini/settings.json``:
+
+.. code-block:: json
+
+   {
+     "mcpServers": {
+       "tooluniverse": {
+         "command": "uv",
+         "args": [
+           "--directory",
+           "/path/to/tooluniverse-env",
+           "run",
+           "tooluniverse-smcp-stdio",
+           "--compact-mode"
+         ]
+       }
+     }
+   }
+
+**Why Compact Mode for Gemini CLI?**
+
+- **500 tool limit**: Gemini CLI has a 500 tool limit per MCP server
+- **Minimal context usage**: Compact mode exposes only 4-5 tools, well within limits
+- **Full functionality**: All 750+ tools still accessible via ``execute_tool``
+- **Progressive disclosure**: Discover tools on demand using ``list_tools``, ``grep_tools``, and ``get_tool_info``
+
+.. note::
+   For Gemini CLI, you can also use the ``gemini-essential.yaml`` Space configuration which provides ~400-450 essential tools, staying within the 500 tool limit while providing direct access to commonly used tools. See :doc:`building_ai_scientists/gemini_cli` for details.
+
 Usage
 -----
 
@@ -99,12 +131,20 @@ When to Use
 -----------
 
 **Use Compact Mode when:**
-- Working with AI agents (Claude Desktop, etc.)
+- Working with AI agents (Claude Desktop, Gemini CLI, etc.)
 - Context window is limited
+- Working with Gemini CLI (500 tool limit)
+- You want minimal context usage
 
 **Use Normal Mode when:**
 - Context window is not a concern
 - You want direct access to all tools
+- Working with platforms without tool limits
+
+**Alternative for Gemini CLI:**
+- Use ``gemini-essential.yaml`` Space configuration for ~400-450 essential tools
+- Provides direct tool access while staying within 500 tool limit
+- See :doc:`building_ai_scientists/gemini_cli` for configuration details
 
 Examples
 --------
@@ -116,3 +156,4 @@ Related Documentation
 
 - :doc:`mcp_support` - General MCP support
 - :doc:`building_ai_scientists/claude_desktop` - Claude Desktop integration
+- :doc:`building_ai_scientists/gemini_cli` - Gemini CLI integration with Space configuration
