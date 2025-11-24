@@ -73,6 +73,11 @@ class BasePythonExecutor:
         "fractions",
         "statistics",
         "random",
+        # Mathematical computing libraries
+        "sympy",
+        "numpy",
+        "scipy",
+        "matplotlib",
     }
 
     # Forbidden AST node types and their dangerous attributes

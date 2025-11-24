@@ -147,6 +147,7 @@ PubChemRESTTool: Any
 URLHTMLTagTool: Any
 URLToPDFTextTool: Any
 MedlinePlusRESTTool: Any
+RxNormTool: Any
 UniProtRESTTool: Any
 PackageTool: Any
 USPTOOpenDataPortalTool: Any
@@ -251,6 +252,7 @@ if not _LIGHT_IMPORT and not LAZY_LOADING_ENABLED:
     from .pubchem_tool import PubChemRESTTool
     from .url_tool import URLHTMLTagTool, URLToPDFTextTool
     from .medlineplus_tool import MedlinePlusRESTTool
+    from .rxnorm_tool import RxNormTool
     from .uniprot_tool import UniProtRESTTool
     from .package_tool import PackageTool
     from .uspto_tool import USPTOOpenDataPortalTool
@@ -372,6 +374,7 @@ else:
     URLHTMLTagTool = _LazyImportProxy("url_tool", "URLHTMLTagTool")
     URLToPDFTextTool = _LazyImportProxy("url_tool", "URLToPDFTextTool")
     MedlinePlusRESTTool = _LazyImportProxy("medlineplus_tool", "MedlinePlusRESTTool")
+    RxNormTool = _LazyImportProxy("rxnorm_tool", "RxNormTool")
     UniProtRESTTool = _LazyImportProxy("uniprot_tool", "UniProtRESTTool")
     PackageTool = _LazyImportProxy("package_tool", "PackageTool")
     USPTOOpenDataPortalTool = _LazyImportProxy("uspto_tool", "USPTOOpenDataPortalTool")
@@ -481,6 +484,7 @@ __all__ = [
     "ReactomeRESTTool",
     "PubChemRESTTool",
     "MedlinePlusRESTTool",
+    "RxNormTool",
     "UniProtRESTTool",
     "PackageTool",
     "SMCP",

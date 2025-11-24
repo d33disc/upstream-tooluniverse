@@ -53,6 +53,8 @@ default_tool_files = {
     "osf_preprints": os.path.join(current_dir, "data", "osf_preprints_tools.json"),
     "fatcat": os.path.join(current_dir, "data", "fatcat_tools.json"),
     "wikidata_sparql": os.path.join(current_dir, "data", "wikidata_sparql_tools.json"),
+    "wikipedia": os.path.join(current_dir, "data", "wikipedia_tools.json"),
+    "dbpedia": os.path.join(current_dir, "data", "dbpedia_tools.json"),
     "agents": os.path.join(current_dir, "data", "agentic_tools.json"),
     # Smolagents tool wrapper configs
     "smolagents": os.path.join(current_dir, "data", "smolagent_tools.json"),
@@ -83,6 +85,7 @@ default_tool_files = {
     "reactome": os.path.join(current_dir, "data", "reactome_tools.json"),
     "pubchem": os.path.join(current_dir, "data", "pubchem_tools.json"),
     "medlineplus": os.path.join(current_dir, "data", "medlineplus_tools.json"),
+    "rxnorm": os.path.join(current_dir, "data", "rxnorm_tools.json"),
     "uniprot": os.path.join(current_dir, "data", "uniprot_tools.json"),
     "cellosaurus": os.path.join(current_dir, "data", "cellosaurus_tools.json"),
     # 'software': os.path.join(current_dir, 'data', 'software_tools.json'),
