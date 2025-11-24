@@ -163,7 +163,15 @@ Gemini CLI has a **500 tool limit** per MCP server. ToolUniverse provides 750+ t
 
 **Solution 1: Space Configuration (Recommended for Gemini CLI)**
 
-Use the pre-configured ``gemini-essential.yaml`` Space to access ~400-450 essential scientific tools:
+Use the pre-configured ``gemini-essential.yaml`` Space to access ~400-450 essential scientific tools.
+
+**Download the configuration file:**
+
+Download `gemini-essential.yaml <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/gemini-essential.yaml>`_ from the ToolUniverse repository and save it to your project directory (e.g., ``./examples/spaces/gemini-essential.yaml``).
+
+Alternatively, if you have cloned the ToolUniverse repository, the file is already available at ``examples/spaces/gemini-essential.yaml``.
+
+**Configuration:**
 
 .. code-block:: json
 
