@@ -8,16 +8,15 @@ exclude: |
   )
 
 repos:
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
-      - id: check-ast
       - id: check-yaml
       - id: check-toml
 
+<<<<<<< HEAD
   - repo: https://github.com/psf/black
     rev: 25.11.0
     hooks:
@@ -40,6 +39,13 @@ repos:
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.7
+=======
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.5
+>>>>>>> d2a1cb6ef1ba49e5d209fe538f10ebd89f07bf92
     hooks:
-      - id: ruff
-        args: ["--fix", "--line-length=88", "--ignore=E203"]
+      # Run the linter.
+      - id: ruff-check
+        args: [ --fix ] # automatically fix linting issues
+      # Run the formatter.
+      - id: ruff-format
