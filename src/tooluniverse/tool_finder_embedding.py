@@ -154,9 +154,9 @@ class ToolFinderEmbedding(BaseTool):
             self.tool_desc_embedding = torch.load(
                 self.tool_embedding_path, weights_only=False
             )
-            assert len(self.tool_desc_embedding) == len(
-                self.tool_name
-            ), "The number of tools in the tool_name list is not equal to the number of tool_desc_embedding."
+            assert len(self.tool_desc_embedding) == len(self.tool_name), (
+                "The number of tools in the tool_name list is not equal to the number of tool_desc_embedding."
+            )
             print("\033[92mSuccessfully loaded cached embeddings.\033[0m")
         except (RuntimeError, AssertionError, OSError):
             self.tool_desc_embedding = None

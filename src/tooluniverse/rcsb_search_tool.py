@@ -123,9 +123,7 @@ class RCSBSearchTool(BaseTool):
             },
         }
 
-    def _build_text_query(
-        self, search_text: str, max_results: int
-    ) -> Dict[str, Any]:
+    def _build_text_query(self, search_text: str, max_results: int) -> Dict[str, Any]:
         """
         Build text search query.
 
@@ -381,9 +379,7 @@ class RCSBSearchTool(BaseTool):
                     if isinstance(error_response, dict):
                         api_message = error_response.get("message", "")
                         if api_message:
-                            error_detail = (
-                                f"{str(e)}. API message: {api_message}"
-                            )
+                            error_detail = f"{str(e)}. API message: {api_message}"
             except Exception:
                 pass  # Use default error message if parsing fails
 
@@ -401,11 +397,7 @@ class RCSBSearchTool(BaseTool):
             elif e.response.status_code == 404:
                 # 404 can mean the PDB ID doesn't exist or
                 # doesn't support this search type
-                pdb_id_msg = (
-                    query
-                    if search_type == "structure"
-                    else "provided"
-                )
+                pdb_id_msg = query if search_type == "structure" else "provided"
                 error_msg = (
                     "Structure not found or does not support "
                     "similarity search. "
@@ -425,8 +417,7 @@ class RCSBSearchTool(BaseTool):
         except requests.exceptions.RequestException as e:
             return {
                 "error": (
-                    "Network error while connecting to "
-                    f"RCSB PDB Search API: {str(e)}"
+                    f"Network error while connecting to RCSB PDB Search API: {str(e)}"
                 ),
             }
         except Exception as e:

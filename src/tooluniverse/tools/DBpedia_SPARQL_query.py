@@ -1,30 +1,30 @@
 """
-XMLToolOptimizer
+DBpedia_SPARQL_query
 
-Optimizes tools defined in XML format based on test results and quality feedback
+Execute SPARQL queries against DBpedia to retrieve structured knowledge. DBpedia extracts structu...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def XMLToolOptimizer(
-    xml_tool: str,
-    optimization_context: str,
+def DBpedia_SPARQL_query(
+    sparql: str,
+    max_results: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> str:
+) -> list[Any]:
     """
-    Optimizes tools defined in XML format based on test results and quality feedback
+    Execute SPARQL queries against DBpedia to retrieve structured knowledge. DBpedia extracts structu...
 
     Parameters
     ----------
-    xml_tool : str
-        Current XML-formatted tool definition with code and spec sections
-    optimization_context : str
-        JSON string containing test results, quality feedback, iteration info, improv...
+    sparql : str
+        SPARQL query string to execute against DBpedia. Use SPARQL syntax to query en...
+    max_results : int
+        Optional result limit override. If not specified, uses the LIMIT clause in th...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,17 +34,14 @@ def XMLToolOptimizer(
 
     Returns
     -------
-    str
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "XMLToolOptimizer",
-            "arguments": {
-                "xml_tool": xml_tool,
-                "optimization_context": optimization_context,
-            },
+            "name": "DBpedia_SPARQL_query",
+            "arguments": {"sparql": sparql, "max_results": max_results},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +49,4 @@ def XMLToolOptimizer(
     )
 
 
-__all__ = ["XMLToolOptimizer"]
+__all__ = ["DBpedia_SPARQL_query"]

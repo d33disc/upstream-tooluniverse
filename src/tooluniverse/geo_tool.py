@@ -100,7 +100,7 @@ class GEORESTTool(NCBIEUtilsTool):
             # See: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
             "term": f"{dataset_id}[ACCN]",
             "retmode": "json",
-            "retmax": 1
+            "retmax": 1,
         }
         return self._make_request("/esearch.fcgi", search_params)
 
@@ -173,11 +173,11 @@ class GEOGetDatasetInfo(GEORESTTool):
 
         # Detect database type
         db = self._detect_database(dataset_id)
-        
+
         # Check if dataset_id is already a numeric UID
         if dataset_id.isdigit():
             return {"db": db, "id": dataset_id, "retmode": "json"}
-        
+
         # For accession numbers, we need to convert to UID first
         # This will be handled in the run method
         return {"db": db, "id": dataset_id, "retmode": "json"}
@@ -205,7 +205,7 @@ class GEOGetDatasetInfo(GEORESTTool):
 
         # For accession numbers, first convert to UID using esearch
         search_result = self._accession_to_uid(dataset_id, db)
-        
+
         if search_result.get("status") != "success":
             return search_result
 
@@ -217,7 +217,7 @@ class GEOGetDatasetInfo(GEORESTTool):
             return {
                 "status": "error",
                 "error": f"No UID found for accession {dataset_id} in database {db}",
-                "data": search_data
+                "data": search_data,
             }
 
         # Use the first UID from the search results
@@ -245,11 +245,11 @@ class GEOGetSampleInfo(GEORESTTool):
 
         # Detect database type
         db = self._detect_database(dataset_id)
-        
+
         # Check if dataset_id is already a numeric UID
         if dataset_id.isdigit():
             return {"db": db, "id": dataset_id, "retmode": "json"}
-        
+
         # For accession numbers, we need to convert to UID first
         # This will be handled in the run method
         return {"db": db, "id": dataset_id, "retmode": "json"}
@@ -277,7 +277,7 @@ class GEOGetSampleInfo(GEORESTTool):
 
         # For accession numbers, first convert to UID using esearch
         search_result = self._accession_to_uid(dataset_id, db)
-        
+
         if search_result.get("status") != "success":
             return search_result
 
@@ -289,7 +289,7 @@ class GEOGetSampleInfo(GEORESTTool):
             return {
                 "status": "error",
                 "error": f"No UID found for accession {dataset_id} in database {db}",
-                "data": search_data
+                "data": search_data,
             }
 
         # Use the first UID from the search results

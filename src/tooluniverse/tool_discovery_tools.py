@@ -40,12 +40,12 @@ from .tool_registry import register_tool
 def _get_tool_category(tool, tool_name, tooluniverse):
     """
     Get the category for a tool, looking it up from tool_category_dicts if not in tool config.
-    
+
     Args:
         tool: Tool configuration dict
         tool_name: Name of the tool
         tooluniverse: ToolUniverse instance with tool_category_dicts
-        
+
     Returns:
         str: Category name, or "unknown" if not found
     """
@@ -54,7 +54,7 @@ def _get_tool_category(tool, tool_name, tooluniverse):
         category = tool.get("category")
         if category and category != "unknown":
             return category
-    
+
     # If not found, look up in tool_category_dicts
     if tooluniverse and hasattr(tooluniverse, "tool_category_dicts"):
         for cat_name, tools_in_cat in tooluniverse.tool_category_dicts.items():
@@ -67,10 +67,8 @@ def _get_tool_category(tool, tool_name, tooluniverse):
                     elif isinstance(item, str):
                         if item == tool_name:
                             return cat_name
-    
+
     return "unknown"
-
-
 
 
 @register_tool("GrepTools")
@@ -98,9 +96,7 @@ class GrepToolsTool(BaseTool):
         Returns:
             dict: Dictionary with matching tools (name + description)
         """
-        if not self.tooluniverse or not hasattr(
-            self.tooluniverse, "all_tool_dict"
-        ):
+        if not self.tooluniverse or not hasattr(self.tooluniverse, "all_tool_dict"):
             return {"error": "ToolUniverse not available"}
 
         pattern = arguments.get("pattern", "")
@@ -165,20 +161,24 @@ class GrepToolsTool(BaseTool):
         # Apply pagination
         total_matches = len(matching_tools)
         if offset > 0 or limit:
-            matching_tools = matching_tools[offset:offset + limit] if limit else matching_tools[offset:]
-        
+            matching_tools = (
+                matching_tools[offset : offset + limit]
+                if limit
+                else matching_tools[offset:]
+            )
+
         return {
             "total_matches": total_matches,
             "limit": limit,
             "offset": offset,
-            "has_more": (offset + len(matching_tools)) < total_matches if limit else False,
+            "has_more": (offset + len(matching_tools)) < total_matches
+            if limit
+            else False,
             "pattern": pattern,
             "field": field,
             "search_mode": search_mode,
             "tools": matching_tools,
         }
-
-
 
 
 @register_tool("ListTools")
@@ -213,9 +213,7 @@ class ListToolsTool(BaseTool):
         Returns:
             dict: Dictionary with tools in requested format
         """
-        if not self.tooluniverse or not hasattr(
-            self.tooluniverse, "all_tool_dict"
-        ):
+        if not self.tooluniverse or not hasattr(self.tooluniverse, "all_tool_dict"):
             return {"error": "ToolUniverse not available"}
 
         mode = arguments.get("mode")
@@ -233,8 +231,7 @@ class ListToolsTool(BaseTool):
         if mode not in valid_modes:
             return {
                 "error": (
-                    f"Invalid mode: {mode}. "
-                    f"Must be one of: {', '.join(valid_modes)}"
+                    f"Invalid mode: {mode}. Must be one of: {', '.join(valid_modes)}"
                 )
             }
 
@@ -256,33 +253,37 @@ class ListToolsTool(BaseTool):
         try:
             if mode == "names":
                 # Return only tool names
-                tool_names = [
-                    tool_name
-                    for tool_name, tool in tools
-                    if tool_name
-                ]
+                tool_names = [tool_name for tool_name, tool in tools if tool_name]
 
                 if group_by_category:
                     # Group by category
                     tools_by_category = {}
                     for tool_name, tool in tools:
                         if tool_name:
-                            category = _get_tool_category(tool, tool_name, self.tooluniverse)
+                            category = _get_tool_category(
+                                tool, tool_name, self.tooluniverse
+                            )
                             if category not in tools_by_category:
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_name)
-                    
+
                     # Apply pagination to each category if needed
                     if limit or offset > 0:
                         paginated_by_category = {}
                         for cat, names in tools_by_category.items():
                             if offset > 0 or limit:
-                                paginated_by_category[cat] = names[offset:offset + limit] if limit else names[offset:]
+                                paginated_by_category[cat] = (
+                                    names[offset : offset + limit]
+                                    if limit
+                                    else names[offset:]
+                                )
                             else:
                                 paginated_by_category[cat] = names
                         tools_by_category = paginated_by_category
-                    
-                    total_count = sum(len(names) for names in tools_by_category.values())
+
+                    total_count = sum(
+                        len(names) for names in tools_by_category.values()
+                    )
                     return {
                         "tools_by_category": tools_by_category,
                         "total_tools": total_count,
@@ -294,14 +295,20 @@ class ListToolsTool(BaseTool):
                     # Apply pagination
                     total_count = len(tool_names)
                     if offset > 0 or limit:
-                        tool_names = tool_names[offset:offset + limit] if limit else tool_names[offset:]
-                    
+                        tool_names = (
+                            tool_names[offset : offset + limit]
+                            if limit
+                            else tool_names[offset:]
+                        )
+
                     # Simple list of names
                     return {
                         "total_tools": total_count,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": (offset + len(tool_names)) < total_count if limit else False,
+                        "has_more": (offset + len(tool_names)) < total_count
+                        if limit
+                        else False,
                         "tools": tool_names,
                     }
 
@@ -315,7 +322,7 @@ class ListToolsTool(BaseTool):
                             # Truncate to first sentence or 100 chars
                             sentence_end = description.find(". ")
                             if sentence_end > 0 and sentence_end <= 100:
-                                description = description[:sentence_end + 1]
+                                description = description[: sentence_end + 1]
                             else:
                                 description = description[:100] + "..."
 
@@ -330,22 +337,30 @@ class ListToolsTool(BaseTool):
                         tool_name = tool_info["name"]
                         tool = self.tooluniverse.all_tool_dict.get(tool_name)
                         if tool:
-                            category = _get_tool_category(tool, tool_name, self.tooluniverse)
+                            category = _get_tool_category(
+                                tool, tool_name, self.tooluniverse
+                            )
                             if category not in tools_by_category:
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_info)
-                    
+
                     # Apply pagination to each category if needed
                     if limit or offset > 0:
                         paginated_by_category = {}
                         for cat, infos in tools_by_category.items():
                             if offset > 0 or limit:
-                                paginated_by_category[cat] = infos[offset:offset + limit] if limit else infos[offset:]
+                                paginated_by_category[cat] = (
+                                    infos[offset : offset + limit]
+                                    if limit
+                                    else infos[offset:]
+                                )
                             else:
                                 paginated_by_category[cat] = infos
                         tools_by_category = paginated_by_category
-                    
-                    total_count = sum(len(infos) for infos in tools_by_category.values())
+
+                    total_count = sum(
+                        len(infos) for infos in tools_by_category.values()
+                    )
                     return {
                         "tools_by_category": tools_by_category,
                         "total_tools": total_count,
@@ -357,13 +372,19 @@ class ListToolsTool(BaseTool):
                     # Apply pagination
                     total_count = len(tools_info)
                     if offset > 0 or limit:
-                        tools_info = tools_info[offset:offset + limit] if limit else tools_info[offset:]
-                    
+                        tools_info = (
+                            tools_info[offset : offset + limit]
+                            if limit
+                            else tools_info[offset:]
+                        )
+
                     return {
                         "total_tools": total_count,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": (offset + len(tools_info)) < total_count if limit else False,
+                        "has_more": (offset + len(tools_info)) < total_count
+                        if limit
+                        else False,
                         "tools": tools_info,
                     }
 
@@ -372,9 +393,7 @@ class ListToolsTool(BaseTool):
                 category_counts = {}
                 for tool_name, tool in tools:
                     category = _get_tool_category(tool, tool_name, self.tooluniverse)
-                    category_counts[category] = (
-                        category_counts.get(category, 0) + 1
-                    )
+                    category_counts[category] = category_counts.get(category, 0) + 1
                 return {"categories": category_counts}
 
             elif mode == "by_category":
@@ -382,21 +401,27 @@ class ListToolsTool(BaseTool):
                 tools_by_category = {}
                 for tool_name, tool in tools:
                     if tool_name:
-                        category = _get_tool_category(tool, tool_name, self.tooluniverse)
+                        category = _get_tool_category(
+                            tool, tool_name, self.tooluniverse
+                        )
                         if category not in tools_by_category:
                             tools_by_category[category] = []
                         tools_by_category[category].append(tool_name)
-                
+
                 # Apply pagination to each category if needed
                 if limit or offset > 0:
                     paginated_by_category = {}
                     for cat, names in tools_by_category.items():
                         if offset > 0 or limit:
-                            paginated_by_category[cat] = names[offset:offset + limit] if limit else names[offset:]
+                            paginated_by_category[cat] = (
+                                names[offset : offset + limit]
+                                if limit
+                                else names[offset:]
+                            )
                         else:
                             paginated_by_category[cat] = names
                     tools_by_category = paginated_by_category
-                
+
                 total_count = sum(len(names) for names in tools_by_category.values())
                 return {
                     "tools_by_category": tools_by_category,
@@ -415,7 +440,7 @@ class ListToolsTool(BaseTool):
                         if brief and len(description) > 100:
                             sentence_end = description.find(". ")
                             if sentence_end > 0 and sentence_end <= 100:
-                                description = description[:sentence_end + 1]
+                                description = description[: sentence_end + 1]
                             else:
                                 description = description[:100] + "..."
 
@@ -434,22 +459,30 @@ class ListToolsTool(BaseTool):
                         tool_name = tool_info["name"]
                         tool = self.tooluniverse.all_tool_dict.get(tool_name)
                         if tool:
-                            category = _get_tool_category(tool, tool_name, self.tooluniverse)
+                            category = _get_tool_category(
+                                tool, tool_name, self.tooluniverse
+                            )
                             if category not in tools_by_category:
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_info)
-                    
+
                     # Apply pagination to each category if needed
                     if limit or offset > 0:
                         paginated_by_category = {}
                         for cat, infos in tools_by_category.items():
                             if offset > 0 or limit:
-                                paginated_by_category[cat] = infos[offset:offset + limit] if limit else infos[offset:]
+                                paginated_by_category[cat] = (
+                                    infos[offset : offset + limit]
+                                    if limit
+                                    else infos[offset:]
+                                )
                             else:
                                 paginated_by_category[cat] = infos
                         tools_by_category = paginated_by_category
-                    
-                    total_count = sum(len(infos) for infos in tools_by_category.values())
+
+                    total_count = sum(
+                        len(infos) for infos in tools_by_category.values()
+                    )
                     return {
                         "tools_by_category": tools_by_category,
                         "total_tools": total_count,
@@ -461,13 +494,19 @@ class ListToolsTool(BaseTool):
                     # Apply pagination
                     total_count = len(tools_info)
                     if offset > 0 or limit:
-                        tools_info = tools_info[offset:offset + limit] if limit else tools_info[offset:]
-                    
+                        tools_info = (
+                            tools_info[offset : offset + limit]
+                            if limit
+                            else tools_info[offset:]
+                        )
+
                     return {
                         "total_tools": total_count,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": (offset + len(tools_info)) < total_count if limit else False,
+                        "has_more": (offset + len(tools_info)) < total_count
+                        if limit
+                        else False,
                         "tools": tools_info,
                     }
 
@@ -475,12 +514,7 @@ class ListToolsTool(BaseTool):
                 # Return user-specified fields
                 fields = arguments.get("fields", [])
                 if not fields:
-                    return {
-                        "error": (
-                            "fields parameter is required "
-                            "for mode='custom'"
-                        )
-                    }
+                    return {"error": ("fields parameter is required for mode='custom'")}
 
                 tools_info = []
                 for tool_name, tool in tools:
@@ -489,7 +523,9 @@ class ListToolsTool(BaseTool):
                         for field in fields:
                             if field == "category":
                                 # Special handling for category field
-                                tool_info[field] = _get_tool_category(tool, tool_name, self.tooluniverse)
+                                tool_info[field] = _get_tool_category(
+                                    tool, tool_name, self.tooluniverse
+                                )
                             elif field in tool:
                                 tool_info[field] = tool[field]
                         tools_info.append(tool_info)
@@ -497,13 +533,19 @@ class ListToolsTool(BaseTool):
                 # Apply pagination
                 total_count = len(tools_info)
                 if offset > 0 or limit:
-                    tools_info = tools_info[offset:offset + limit] if limit else tools_info[offset:]
+                    tools_info = (
+                        tools_info[offset : offset + limit]
+                        if limit
+                        else tools_info[offset:]
+                    )
 
                 return {
                     "total_tools": total_count,
                     "limit": limit,
                     "offset": offset,
-                    "has_more": (offset + len(tools_info)) < total_count if limit else False,
+                    "has_more": (offset + len(tools_info)) < total_count
+                    if limit
+                    else False,
                     "tools": tools_info,
                 }
 
@@ -538,8 +580,9 @@ class GetToolInfoTool(BaseTool):
             - Batch tools: {"tools": [...], "total_requested": N, "total_found": M}
         """
         import time
+
         start_time = time.time()
-        
+
         if not self.tooluniverse:
             return {"error": "ToolUniverse not available"}
 
@@ -569,10 +612,7 @@ class GetToolInfoTool(BaseTool):
         MAX_TOOLS = 20
         if len(tool_names) > MAX_TOOLS:
             return {
-                "error": (
-                    f"Maximum {MAX_TOOLS} tools allowed, "
-                    f"got {len(tool_names)}"
-                )
+                "error": (f"Maximum {MAX_TOOLS} tools allowed, got {len(tool_names)}")
             }
 
         try:
@@ -582,9 +622,7 @@ class GetToolInfoTool(BaseTool):
                 for tool_name in tool_names:
                     tool_config = self.tooluniverse.all_tool_dict.get(tool_name)
                     if not tool_config:
-                        results.append(
-                            {"name": tool_name, "error": "not found"}
-                        )
+                        results.append({"name": tool_name, "error": "not found"})
                     else:
                         results.append(
                             {
@@ -597,9 +635,7 @@ class GetToolInfoTool(BaseTool):
                 if is_single:
                     return results[0]
                 else:
-                    found_count = sum(
-                        1 for r in results if "error" not in r
-                    )
+                    found_count = sum(1 for r in results if "error" not in r)
                     return {
                         "total_requested": len(tool_names),
                         "total_found": found_count,
@@ -619,9 +655,7 @@ class GetToolInfoTool(BaseTool):
                 else:
                     # Batch: use get_tool_specification_by_names
                     tools_definitions = (
-                        self.tooluniverse.get_tool_specification_by_names(
-                            tool_names
-                        )
+                        self.tooluniverse.get_tool_specification_by_names(tool_names)
                     )
 
                     # Handle tools not found
@@ -712,7 +746,7 @@ class ExecuteToolTool(BaseTool):
             error_msg = (
                 f"arguments must be a JSON object (dictionary), not a {received_type}. "
                 f"Received: {repr(tool_arguments)[:100]}. "
-                f"Example of correct format: {{\"param1\": \"value1\", \"param2\": 5}}. "
+                f'Example of correct format: {{"param1": "value1", "param2": 5}}. '
                 f"Do NOT use string format like 'param1=value1' or JSON string format."
             )
             self.logger.error(f"{tool_name}: {error_msg}")
@@ -721,7 +755,7 @@ class ExecuteToolTool(BaseTool):
         # Directly use tooluniverse.run_one_function - it handles everything
         function_call = {"name": tool_name, "arguments": parsed_args}
         result = self.tooluniverse.run_one_function(function_call)
-        
+
         # Convert result to dict if it's a JSON string
         if isinstance(result, str):
             try:
@@ -729,6 +763,6 @@ class ExecuteToolTool(BaseTool):
             except (json.JSONDecodeError, ValueError):
                 # If it's not valid JSON, return as string wrapped in dict
                 return {"result": result}
-        
+
         # Return as dict (FastMCP will serialize if needed)
         return result if isinstance(result, dict) else {"result": result}

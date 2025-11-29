@@ -204,9 +204,7 @@ default_tool_files = {
     "ols": os.path.join(current_dir, "data", "ols_tools.json"),
     "optimizer": os.path.join(current_dir, "data", "optimizer_tools.json"),
     # Compact mode core tools
-    "compact_mode": os.path.join(
-        current_dir, "data", "compact_mode_tools.json"
-    ),
+    "compact_mode": os.path.join(current_dir, "data", "compact_mode_tools.json"),
 }
 
 

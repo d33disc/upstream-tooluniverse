@@ -18,9 +18,7 @@ import uuid
 from fastmcp import FastMCP
 from typing import List, Tuple, Optional
 
-sys.path.insert(
-    0, f'{os.getenv("COMPASS_MODEL_PATH")}/immune-compass/COMPASS'
-)  # noqa: E402
+sys.path.insert(0, f"{os.getenv('COMPASS_MODEL_PATH')}/immune-compass/COMPASS")  # noqa: E402
 
 from compass import loadcompass  # noqa: E402
 

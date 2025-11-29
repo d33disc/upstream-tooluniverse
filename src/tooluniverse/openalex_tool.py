@@ -82,7 +82,7 @@ class OpenAlexTool(BaseTool):
                 try:
                     paper_info = self._extract_paper_info(work)
                     papers.append(paper_info)
-                except Exception as e:
+                except Exception:
                     # Skip papers with missing data rather than failing completely
                     continue
 

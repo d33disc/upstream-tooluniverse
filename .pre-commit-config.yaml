@@ -16,33 +16,8 @@ repos:
       - id: check-yaml
       - id: check-toml
 
-<<<<<<< HEAD
-  - repo: https://github.com/psf/black
-    rev: 25.11.0
-    hooks:
-      - id: black
-        args: ["--line-length=88"]
-        language_version: python3
-
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v2.3.1
-    hooks:
-      - id: autoflake
-        args: ["--remove-all-unused-imports", "--remove-unused-variables", "--in-place"]
-
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.3.0
-    hooks:
-      - id: flake8
-        additional_dependencies: ["flake8-bugbear"]
-        args: ["--max-line-length=88", "--extend-ignore=E501,F401,F541,E203,W503"]
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.7
-=======
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.5
->>>>>>> d2a1cb6ef1ba49e5d209fe538f10ebd89f07bf92
     hooks:
       # Run the linter.
       - id: ruff-check

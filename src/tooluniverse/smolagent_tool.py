@@ -383,7 +383,7 @@ class SmolAgentTool(BaseTool):
                 return AgentToolCls()
 
             for idx, sub in enumerate(sub_agents):
-                name = getattr(sub, "name", f"sub_agent_{idx+1}")
+                name = getattr(sub, "name", f"sub_agent_{idx + 1}")
                 top_tools.append(_wrap_agent_as_tool(sub, name))
 
             # Construct the orchestrator agent (CodeAgent) with both native tools and agent-tools

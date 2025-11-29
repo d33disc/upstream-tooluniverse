@@ -108,7 +108,7 @@ class FDADrugAdverseEventTool(BaseTool):
 
         # Store reactionmeddraverse for filtering results
         reaction_filter = arguments.get("reactionmeddraverse")
-        
+
         response = self._search(arguments)
         return self._post_process(response, reaction_filter=reaction_filter)
 
@@ -130,25 +130,27 @@ class FDADrugAdverseEventTool(BaseTool):
             try:
                 term = item.get("term")
                 count = item.get("count", 0)
-                
+
                 # If reaction_filter is specified, only include matching reactions
                 if reaction_filter is not None:
                     # Case-insensitive comparison
                     if term and term.upper() != reaction_filter.upper():
                         continue
-                
+
                 # Apply mapping if available
                 if self.return_fields_mapping:
-                    mapped_term = self.return_fields_mapping.get(self.count_field, {}).get(
-                        str(term), term
-                    )
+                    mapped_term = self.return_fields_mapping.get(
+                        self.count_field, {}
+                    ).get(str(term), term)
                     mapped_results.append({"term": mapped_term, "count": count})
                 else:
                     mapped_results.append({"term": term, "count": count})
             except Exception:
                 # Keep the original term in case of an exception
-                if reaction_filter is None or (isinstance(item, dict) and 
-                    item.get("term", "").upper() == reaction_filter.upper()):
+                if reaction_filter is None or (
+                    isinstance(item, dict)
+                    and item.get("term", "").upper() == reaction_filter.upper()
+                ):
                     mapped_results.append(item)
 
         return mapped_results
@@ -316,9 +318,7 @@ class FDACountAdditiveReactionsTool(FDADrugAdverseEventTool):
                     filters.append(f"{fda_field_name}:{mapped}")
 
         filter_str = "+AND+".join(filters) if filters else ""
-        search_query = (
-            f"({or_clause})" + (f"+AND+{filter_str}" if filter_str else "")
-        )
+        search_query = f"({or_clause})" + (f"+AND+{filter_str}" if filter_str else "")
         # URL encode the search query, preserving +, :, and " as safe chars
         search_encoded = urllib.parse.quote(search_query, safe='+:"')
 
@@ -330,8 +330,7 @@ class FDACountAdditiveReactionsTool(FDADrugAdverseEventTool):
             )
         else:
             url = (
-                f"{self.endpoint_url}?search={search_encoded}"
-                f"&count={self.count_field}"
+                f"{self.endpoint_url}?search={search_encoded}&count={self.count_field}"
             )
 
         try:
@@ -461,8 +460,7 @@ class FDADrugAdverseEventDetailTool(BaseTool):
             )
         else:
             url = (
-                f"{self.endpoint_url}?search={search_encoded}"
-                f"&limit={limit}&skip={skip}"
+                f"{self.endpoint_url}?search={search_encoded}&limit={limit}&skip={skip}"
             )
 
         # API request
@@ -495,7 +493,9 @@ class FDADrugAdverseEventDetailTool(BaseTool):
                             if isinstance(value, dict):
                                 value = value.get(part)
                             elif isinstance(value, list) and part.isdigit():
-                                value = value[int(part)] if int(part) < len(value) else None
+                                value = (
+                                    value[int(part)] if int(part) < len(value) else None
+                                )
                             else:
                                 value = None
                                 break
@@ -569,9 +569,7 @@ class FDADrugAdverseEventDetailTool(BaseTool):
                     essential_drug = {
                         "medicinalproduct": drug.get("medicinalproduct"),
                         "drugindication": drug.get("drugindication"),
-                        "drugadministrationroute": drug.get(
-                            "drugadministrationroute"
-                        ),
+                        "drugadministrationroute": drug.get("drugadministrationroute"),
                         "drugdosagetext": drug.get("drugdosagetext"),
                         "drugdosageform": drug.get("drugdosageform"),
                         "drugstartdate": drug.get("drugstartdate"),
@@ -600,9 +598,7 @@ class FDADrugAdverseEventDetailTool(BaseTool):
                     }
                     # Only include non-empty fields
                     essential_reaction = {
-                        k: v
-                        for k, v in essential_reaction.items()
-                        if v is not None
+                        k: v for k, v in essential_reaction.items() if v is not None
                     }
                     if essential_reaction:
                         essential_reactions.append(essential_reaction)
@@ -757,7 +753,9 @@ class FDADrugInteractionDetailTool(BaseTool):
         if not drugs:
             return [{"error": "medicinalproducts list is required"}]
         if not isinstance(drugs, list) or len(drugs) < 2:
-            return [{"error": "medicinalproducts must be a list of at least 2 drug names"}]
+            return [
+                {"error": "medicinalproducts must be a list of at least 2 drug names"}
+            ]
 
         # Build AND clause for multiple drugs (all must be present)
         drug_parts = []
@@ -801,8 +799,7 @@ class FDADrugInteractionDetailTool(BaseTool):
             )
         else:
             url = (
-                f"{self.endpoint_url}?search={search_encoded}"
-                f"&limit={limit}&skip={skip}"
+                f"{self.endpoint_url}?search={search_encoded}&limit={limit}&skip={skip}"
             )
 
         # API request
@@ -835,7 +832,9 @@ class FDADrugInteractionDetailTool(BaseTool):
                             if isinstance(value, dict):
                                 value = value.get(part)
                             elif isinstance(value, list) and part.isdigit():
-                                value = value[int(part)] if int(part) < len(value) else None
+                                value = (
+                                    value[int(part)] if int(part) < len(value) else None
+                                )
                             else:
                                 value = None
                                 break
@@ -909,9 +908,7 @@ class FDADrugInteractionDetailTool(BaseTool):
                     essential_drug = {
                         "medicinalproduct": drug.get("medicinalproduct"),
                         "drugindication": drug.get("drugindication"),
-                        "drugadministrationroute": drug.get(
-                            "drugadministrationroute"
-                        ),
+                        "drugadministrationroute": drug.get("drugadministrationroute"),
                         "drugdosagetext": drug.get("drugdosagetext"),
                         "drugdosageform": drug.get("drugdosageform"),
                         "drugstartdate": drug.get("drugstartdate"),
@@ -940,9 +937,7 @@ class FDADrugInteractionDetailTool(BaseTool):
                     }
                     # Only include non-empty fields
                     essential_reaction = {
-                        k: v
-                        for k, v in essential_reaction.items()
-                        if v is not None
+                        k: v for k, v in essential_reaction.items() if v is not None
                     }
                     if essential_reaction:
                         essential_reactions.append(essential_reaction)

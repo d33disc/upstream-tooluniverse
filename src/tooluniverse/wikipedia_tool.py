@@ -53,9 +53,7 @@ class WikipediaSearchTool(BaseTool):
         }
 
         try:
-            resp = requests.get(
-                api_url, params=params, headers=headers, timeout=30
-            )
+            resp = requests.get(api_url, params=params, headers=headers, timeout=30)
             resp.raise_for_status()
             data = resp.json()
 
@@ -65,13 +63,15 @@ class WikipediaSearchTool(BaseTool):
             search_results = data.get("query", {}).get("search", [])
             results = []
             for item in search_results:
-                results.append({
-                    "title": item.get("title", ""),
-                    "snippet": item.get("snippet", ""),
-                    "size": item.get("size", 0),
-                    "wordcount": item.get("wordcount", 0),
-                    "timestamp": item.get("timestamp", ""),
-                })
+                results.append(
+                    {
+                        "title": item.get("title", ""),
+                        "snippet": item.get("snippet", ""),
+                        "size": item.get("size", 0),
+                        "wordcount": item.get("wordcount", 0),
+                        "timestamp": item.get("timestamp", ""),
+                    }
+                )
 
             return {
                 "query": query,
@@ -157,9 +157,7 @@ class WikipediaContentTool(BaseTool):
         }
 
         try:
-            resp = requests.get(
-                api_url, params=params, headers=headers, timeout=30
-            )
+            resp = requests.get(api_url, params=params, headers=headers, timeout=30)
             resp.raise_for_status()
             data = resp.json()
 
@@ -193,9 +191,7 @@ class WikipediaContentTool(BaseTool):
             # Add links if available
             if links:
                 # Limit to 20 links
-                result["links"] = [
-                    link.get("title", "") for link in links[:20]
-                ]
+                result["links"] = [link.get("title", "") for link in links[:20]]
 
             return result
 

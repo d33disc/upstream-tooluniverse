@@ -106,7 +106,7 @@ except ImportError:
     # Use stderr to avoid polluting stdout in stdio mode
     print(
         "FastMCP is not available. SMCP is built on top of FastMCP, which is a required dependency.",
-        file=sys.stderr
+        file=sys.stderr,
     )
 
 from .execute_function import ToolUniverse
@@ -459,7 +459,9 @@ class SMCP(FastMCP):
             # Temporarily disabled for Codex compatibility
             # Add custom middleware for tools/find and tools/search
             # self.add_middleware(self._tools_find_middleware)
-            self.logger.info("✅ Custom MCP methods registration skipped for Codex compatibility")
+            self.logger.info(
+                "✅ Custom MCP methods registration skipped for Codex compatibility"
+            )
 
         except Exception as e:
             self.logger.error(f"Error registering custom MCP methods: {e}")
@@ -766,16 +768,22 @@ class SMCP(FastMCP):
                     return result
                 except (json.JSONDecodeError, ValueError):
                     # Not valid JSON, wrap it
-                    return json.dumps({"tools": [], "result": result}, ensure_ascii=False)
+                    return json.dumps(
+                        {"tools": [], "result": result}, ensure_ascii=False
+                    )
             elif isinstance(result, dict) or isinstance(result, list):
                 return json.dumps(result, ensure_ascii=False, default=str)
             else:
                 # For other types, convert to JSON
-                return json.dumps({"tools": [], "result": str(result)}, ensure_ascii=False)
+                return json.dumps(
+                    {"tools": [], "result": str(result)}, ensure_ascii=False
+                )
 
         except Exception as e:
             error_msg = f"Search error: {str(e)}"
-            self.logger.error(f"_perform_tool_search failed: {error_msg}", exc_info=True)
+            self.logger.error(
+                f"_perform_tool_search failed: {error_msg}", exc_info=True
+            )
             return json.dumps(
                 {
                     "error": error_msg,
@@ -1054,7 +1062,9 @@ class SMCP(FastMCP):
                         try:
                             self.tooluniverse.load_tools(tool_type=[category])
                         except Exception as e:
-                            self.logger.debug(f"Could not load category {category}: {e}")
+                            self.logger.debug(
+                                f"Could not load category {category}: {e}"
+                            )
             except Exception as e:
                 self.logger.error(f"Error loading specified categories: {e}")
                 self.logger.info("Falling back to loading all tools")
@@ -1074,7 +1084,9 @@ class SMCP(FastMCP):
                         try:
                             self.tooluniverse.load_tools(tool_type=[category])
                         except Exception as e:
-                            self.logger.debug(f"Could not load category {category}: {e}")
+                            self.logger.debug(
+                                f"Could not load category {category}: {e}"
+                            )
         elif (self.auto_expose_tools or self.compact_mode) and not (
             self.space and hasattr(self.tooluniverse, "_current_space_config")
         ):
@@ -1099,7 +1111,7 @@ class SMCP(FastMCP):
                         self.logger.debug(f"Could not load category {category}: {e}")
                 self.logger.info(
                     f"Compact mode: Loaded {len(self.tooluniverse.all_tools)} tools in background"
-            )
+                )
 
         # Auto-expose ToolUniverse tools as MCP tools
         # In compact mode, _expose_tooluniverse_tools will call _expose_core_discovery_tools
@@ -1278,17 +1290,11 @@ class SMCP(FastMCP):
                         self._create_mcp_tool_from_tooluniverse(tool_config)
                         self._exposed_tools.add(tool_name)
                         exposed_count += 1
-                        self.logger.debug(
-                            f"Exposed core tool: {tool_name}"
-                        )
+                        self.logger.debug(f"Exposed core tool: {tool_name}")
                 except Exception as e:
-                    self.logger.warning(
-                        f"Failed to expose core tool {tool_name}: {e}"
-                    )
+                    self.logger.warning(f"Failed to expose core tool {tool_name}: {e}")
 
-        self.logger.info(
-            f"Compact mode: Exposed {exposed_count} core discovery tools"
-        )
+        self.logger.info(f"Compact mode: Exposed {exposed_count} core discovery tools")
 
     def _add_search_tools(self):
         """
@@ -2333,7 +2339,7 @@ class SMCP(FastMCP):
             async def dynamic_tool_function(**kwargs) -> str:
                 """Execute ToolUniverse tool with provided arguments."""
                 import json
-                
+
                 try:
                     # Remove ctx if present (legacy support)
                     ctx = kwargs.pop("ctx", None) if "ctx" in kwargs else None
@@ -2401,23 +2407,24 @@ class SMCP(FastMCP):
 
                     # In stdio mode, capture stdout to prevent pollution of JSON-RPC stream
                     is_stdio_mode = getattr(self, "_transport_type", None) == "stdio"
-                    
+
                     if is_stdio_mode:
                         # Wrap tool execution to capture stdout and redirect to stderr
                         def _run_with_stdout_capture():
                             import io
+
                             old_stdout = sys.stdout
                             try:
                                 # Capture stdout during tool execution
                                 stdout_capture = io.StringIO()
                                 sys.stdout = stdout_capture
-                                
+
                                 # Execute the tool
                                 result = self.tooluniverse.run_one_function(
                                     function_call,
                                     stream_callback=stream_callback,
                                 )
-                                
+
                                 # Get captured output and redirect to stderr
                                 captured_output = stdout_capture.getvalue()
                                 if captured_output:
@@ -2426,11 +2433,11 @@ class SMCP(FastMCP):
                                     )
                                     # Write to stderr to avoid polluting stdout
                                     print(captured_output, file=sys.stderr, end="")
-                                
+
                                 return result
                             finally:
                                 sys.stdout = old_stdout
-                        
+
                         run_callable = _run_with_stdout_capture
                     else:
                         # In HTTP/SSE mode, no need to capture stdout
@@ -2450,20 +2457,18 @@ class SMCP(FastMCP):
                             return result
                         except (json.JSONDecodeError, ValueError):
                             # Not valid JSON, wrap it
-                            return json.dumps(
-                                {"result": result}, ensure_ascii=False
-                            )
+                            return json.dumps({"result": result}, ensure_ascii=False)
                     elif isinstance(result, (dict, list)):
                         return json.dumps(result, ensure_ascii=False, default=str)
                     else:
                         # For other types, convert to JSON
-                        return json.dumps(
-                            {"result": str(result)}, ensure_ascii=False
-                        )
+                        return json.dumps({"result": str(result)}, ensure_ascii=False)
 
                 except Exception as e:
                     error_msg = f"Error executing {tool_name}: {str(e)}"
-                    self.logger.error(f"{tool_name} execution failed: {error_msg}", exc_info=True)
+                    self.logger.error(
+                        f"{tool_name} execution failed: {error_msg}", exc_info=True
+                    )
                     return json.dumps(
                         {"error": error_msg, "error_type": type(e).__name__},
                         ensure_ascii=False,

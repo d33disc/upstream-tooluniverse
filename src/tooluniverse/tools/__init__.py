@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 768 scientific tools.
+Type-safe Python interface to 773 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -10,6 +10,7 @@ Usage:
 """
 
 # Import exceptions from main package
+from tooluniverse.exceptions import *
 
 # Import shared client utilities
 from ._shared_client import get_shared_client, reset_shared_client
@@ -57,6 +58,7 @@ from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
 from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeline
 from .Crossref_search_works import Crossref_search_works
 from .DBLP_search_publications import DBLP_search_publications
+from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
 from .DOAJ_search_articles import DOAJ_search_articles
 from .DailyMed_get_spl_by_setid import DailyMed_get_spl_by_setid
 from .DailyMed_search_spls import DailyMed_search_spls
@@ -745,6 +747,7 @@ from .ReferenceInfoAnalyzer import ReferenceInfoAnalyzer
 from .RegulomeDB_query_variant import RegulomeDB_query_variant
 from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyReviewer
 from .ResultsInterpretationReviewer import ResultsInterpretationReviewer
+from .RxNorm_get_drug_names import RxNorm_get_drug_names
 from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
 from .ScientificTextSummarizer import ScientificTextSummarizer
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
@@ -795,6 +798,9 @@ from .WHO_Guidelines_Search import WHO_Guidelines_Search
 from .WikiPathways_get_pathway import WikiPathways_get_pathway
 from .WikiPathways_search import WikiPathways_search
 from .Wikidata_SPARQL_query import Wikidata_SPARQL_query
+from .Wikipedia_get_content import Wikipedia_get_content
+from .Wikipedia_get_summary import Wikipedia_get_summary
+from .Wikipedia_search import Wikipedia_search
 from .WoRMS_search_species import WoRMS_search_species
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .XMLToolOptimizer import XMLToolOptimizer
@@ -1259,6 +1265,7 @@ __all__ = [
     "ComprehensiveDrugDiscoveryPipeline",
     "Crossref_search_works",
     "DBLP_search_publications",
+    "DBpedia_SPARQL_query",
     "DOAJ_search_articles",
     "DailyMed_get_spl_by_setid",
     "DailyMed_search_spls",
@@ -1603,6 +1610,7 @@ __all__ = [
     "RegulomeDB_query_variant",
     "ReproducibilityTransparencyReviewer",
     "ResultsInterpretationReviewer",
+    "RxNorm_get_drug_names",
     "SCREEN_get_regulatory_elements",
     "ScientificTextSummarizer",
     "SemanticScholar_search_papers",
@@ -1643,6 +1651,9 @@ __all__ = [
     "WikiPathways_get_pathway",
     "WikiPathways_search",
     "Wikidata_SPARQL_query",
+    "Wikipedia_get_content",
+    "Wikipedia_get_summary",
+    "Wikipedia_search",
     "WoRMS_search_species",
     "WritingPresentationReviewer",
     "XMLToolOptimizer",

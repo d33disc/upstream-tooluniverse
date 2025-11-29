@@ -108,7 +108,7 @@ def generate_tool_file(
                     # Use None as default and handle in function body
                     optional_params.append(f"{name}: Optional[{py_type}] = None")
                     mutable_defaults_code.append(
-                        ("    if {n} is None:\n" "        {n} = {d}").format(
+                        ("    if {n} is None:\n        {n} = {d}").format(
                             n=name, d=repr(default)
                         )
                     )
@@ -515,7 +515,7 @@ def main(
                     unchanged_tools.remove(tool_name)
 
     if missing_files:
-        print(f"🔍 Found {len(missing_files)} missing tool files - " "will regenerate")
+        print(f"🔍 Found {len(missing_files)} missing tool files - will regenerate")
 
     generated_paths: List[str] = []
 

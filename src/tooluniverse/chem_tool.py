@@ -11,10 +11,10 @@ from indigo import Indigo
 class ChEMBLTool(BaseTool):
     """
     Tool to search for molecules similar to a given compound name or SMILES using the ChEMBL Web Services API.
-    
-    Note: This tool is designed for small molecule compounds only. Biologics (antibodies, proteins, 
-    oligonucleotides, etc.) do not have SMILES structures and cannot be used for structure-based 
-    similarity search. The tool will provide detailed error messages when biologics are queried, 
+
+    Note: This tool is designed for small molecule compounds only. Biologics (antibodies, proteins,
+    oligonucleotides, etc.) do not have SMILES structures and cannot be used for structure-based
+    similarity search. The tool will provide detailed error messages when biologics are queried,
     explaining the reason and suggesting alternative tools.
     """
 
@@ -123,17 +123,28 @@ class ChEMBLTool(BaseTool):
                     )
                 else:
                     # Store info about molecules found but without SMILES
-                    molecules_without_smiles.append({
-                        "chembl_id": chembl_id,
-                        "pref_name": pref_name,
-                        "molecule_type": molecule_type
-                    })
+                    molecules_without_smiles.append(
+                        {
+                            "chembl_id": chembl_id,
+                            "pref_name": pref_name,
+                            "molecule_type": molecule_type,
+                        }
+                    )
         if not output:
             # Provide detailed error message with reason and alternative tools
             error_msg = "No ChEMBL IDs or SMILES found for the compound name."
             if molecules_without_smiles:
-                molecule_types = set([m.get("molecule_type") for m in molecules_without_smiles if m.get("molecule_type")])
-                if any(mt in ["Antibody", "Protein", "Oligonucleotide", "Oligosaccharide"] for mt in molecule_types):
+                molecule_types = set(
+                    [
+                        m.get("molecule_type")
+                        for m in molecules_without_smiles
+                        if m.get("molecule_type")
+                    ]
+                )
+                if any(
+                    mt in ["Antibody", "Protein", "Oligonucleotide", "Oligosaccharide"]
+                    for mt in molecule_types
+                ):
                     error_msg = (
                         f"The compound '{compound_name}' was found in ChEMBL but does not have a SMILES structure. "
                         f"This tool is designed for small molecule compounds only. "
@@ -197,7 +208,12 @@ class ChEMBLTool(BaseTool):
                         molecule = results[0]
                         molecule_type = molecule.get("molecule_type", "Unknown")
                         chembl_id = molecule.get("molecule_chembl_id")
-                        if molecule_type in ["Antibody", "Protein", "Oligonucleotide", "Oligosaccharide"]:
+                        if molecule_type in [
+                            "Antibody",
+                            "Protein",
+                            "Oligonucleotide",
+                            "Oligosaccharide",
+                        ]:
                             return {
                                 "error": (
                                     f"The compound '{query}' was found in ChEMBL (ChEMBL ID: {chembl_id}) "

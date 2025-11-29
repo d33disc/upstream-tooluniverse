@@ -556,8 +556,7 @@ class PyPIPackageInspector(BaseTool):
             github_data = {}
             if include_github and pypi_data.get("github_url"):
                 print(
-                    f"  🐙 Fetching GitHub statistics from "
-                    f"{pypi_data['github_url']}..."
+                    f"  🐙 Fetching GitHub statistics from {pypi_data['github_url']}..."
                 )
                 github_data = self._get_github_stats(pypi_data["github_url"])
                 time.sleep(0.5)  # Rate limiting
@@ -580,8 +579,7 @@ class PyPIPackageInspector(BaseTool):
             }
 
             print(
-                f"✅ Inspection complete - Overall score: "
-                f"{scores['overall_score']}/100"
+                f"✅ Inspection complete - Overall score: {scores['overall_score']}/100"
             )
 
             return result

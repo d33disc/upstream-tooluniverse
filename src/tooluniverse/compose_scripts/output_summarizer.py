@@ -91,15 +91,15 @@ def compose(arguments: Dict[str, Any], tooluniverse, call_tool) -> Dict[str, Any
         # Step 2: Summarize each chunk
         chunk_summaries = []
         for i, chunk in enumerate(chunks):
-            logger.info(f"🤖 Processing chunk {i+1}/{len(chunks)}")
+            logger.info(f"🤖 Processing chunk {i + 1}/{len(chunks)}")
             summary = _summarize_chunk(
                 chunk, query_context, tool_name, focus_areas, call_tool
             )
             if summary:
                 chunk_summaries.append(summary)
-                logger.info(f"✅ Chunk {i+1} summarized successfully")
+                logger.info(f"✅ Chunk {i + 1} summarized successfully")
             else:
-                logger.warning(f"❌ Chunk {i+1} summarization failed")
+                logger.warning(f"❌ Chunk {i + 1} summarization failed")
 
         # Step 3: Merge summaries (or gracefully fall back)
         if chunk_summaries:
@@ -132,7 +132,7 @@ def compose(arguments: Dict[str, Any], tooluniverse, call_tool) -> Dict[str, Any
             logger.warning("   2. The output_summarization tools are not loaded")
             logger.warning("   3. There was an error in the summarization process")
             logger.warning(
-                "   Please check that the SMCP server is started with hooks " "enabled."
+                "   Please check that the SMCP server is started with hooks enabled."
             )
             return {
                 "success": False,
@@ -228,8 +228,7 @@ def _summarize_chunk(
         )
 
         logger.debug(
-            f"🔍 ToolOutputSummarizer returned: {type(result)} - "
-            f"{str(result)[:100]}..."
+            f"🔍 ToolOutputSummarizer returned: {type(result)} - {str(result)[:100]}..."
         )
 
         # Handle different result formats
