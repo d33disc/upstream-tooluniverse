@@ -398,7 +398,7 @@
   "Tool_RAG": "2d243277f395ad8d444acda917b37881",
   "UniProt_get_alternative_names_by_accession": "68014dcd30eaba96eddf764d026bf241",
   "UniProt_get_disease_variants_by_accession": "c08f0c55235c2b454540b193374e8b03",
-  "UniProt_get_entry_by_accession": "04c18b75ae295488a0d6b62d4d95fe25",
+  "UniProt_get_entry_by_accession": "9f33ec2557ab0a9b20377c1221c55a3b",
   "UniProt_get_function_by_accession": "303c03171852dc67370d1e0a8e7a2d2a",
   "UniProt_get_isoform_ids_by_accession": "bd2ed21f0053e41b8992790d1cdcadc2",
   "UniProt_get_organism_by_accession": "61942c722f0c55f41790d6b3f6601635",
