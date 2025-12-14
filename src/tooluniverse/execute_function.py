@@ -2424,6 +2424,14 @@ class ToolUniverse:
             tool_type = tool_name if tool_name else tool.get("type")
             mark_tool_unavailable(tool_type, e)
             self.logger.warning(f"Failed to initialize '{tool_type}': {e}")
+            try:
+                with open("/tmp/tu_init_error.txt", "a") as f:
+                    f.write(f"Failed to initialize '{tool_type}': {e}\nTraceback:\n")
+                    import traceback
+                    traceback.print_exc(file=f)
+            except:
+                pass
+
             # Hide tools that cannot be initialized (e.g., missing optional deps)
             try:
                 # Remove from dictionaries so it doesn't appear in listings
@@ -2635,6 +2643,13 @@ class ToolUniverse:
 
         tool_instance = self._get_tool_instance(function_name, cache=False)
         if not tool_instance:
+            # Check if we have a recorded error for this tool
+            tool_errors = get_tool_errors()
+            if function_name in tool_errors:
+                error_info = tool_errors[function_name]
+                return ToolConfigError(
+                    f"Failed to initialize tool for validation: {error_info['error']}"
+                )
             return ToolConfigError("Failed to initialize tool for validation")
 
         # Check if tool has validate_parameters method (for backward compatibility)

@@ -18,8 +18,8 @@ Quick Overview
 2. **Create Tool File** - Python class in ``src/tooluniverse/``
 3. **Register Tool** - Use ``@register_tool('Type')`` decorator
 4. **Create Config** - JSON file in ``data/xxx_tools.json``
-5. **🔑 Modify __init__.py** - Add tool in 4 locations (critical!)
-6. **Write Tests** - >90% coverage required
+5. **(Optional)** Add unit tests
+6. **Done!** Tool is auto-discovered.
 7. **Code Quality** - Pre-commit hooks (automatic)
 8. **Documentation** - Docstrings and examples
 9. **Create Examples** - Working examples in ``examples/``
@@ -116,41 +116,18 @@ Create or edit ``src/tooluniverse/data/xxx_tools.json``:
      }
    ]
 
-Step 5: 🔑 Modify __init__.py (Critical!)
+Step 5: No Modifications Needed in __init__.py!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the most important step that's often missed. You must modify ``src/tooluniverse/__init__.py`` in **4 specific locations**:
+With the new automated discovery system, **you do NOT need to modify `src/tooluniverse/__init__.py`**. 
 
-**Location 1 (~105-165 lines): Add type declaration**
-.. code-block:: python
-
-   # Find the section with other tool type declarations
-   MyNewTool: Any
-
-**Location 2 (~173-258 lines): Add import statement (non-lazy section)**
-.. code-block:: python
-
-   # Find the non-lazy loading section
-   from .my_new_tool import MyNewTool
-
-**Location 3 (~260-360 lines): Add lazy import proxy**
-.. code-block:: python
-
-   # Find the else block for lazy loading
-   MyNewTool = _LazyImportProxy("my_new_tool", "MyNewTool")
-
-**Location 4 (~362-449 lines): Add to __all__ list**
-.. code-block:: python
-
-   __all__ = [
-       # ... existing tools ...
-       "MyNewTool",
-   ]
+The system will automatically find your tool class if it is decorated with `@register_tool` and located inside the `src/tooluniverse` package tree.
 
 **Verification:**
+
 .. code-block:: python
 
-   # Test that your tool can be imported
+   # Test that your tool can be imported immediately
    from tooluniverse import MyNewTool
    print(MyNewTool)  # Should show the class or lazy proxy
 
@@ -357,9 +334,9 @@ Step 10: Submit Pull Request
 Common Mistakes
 ----------------
 
-**❌ Most Common: Forgetting to modify __init__.py**
-- Tool won't be importable: ``ImportError: cannot import name 'MyNewTool'``
-- Solution: Check all 4 locations in __init__.py
+**❌ Most Common: Missing @register_tool decorator**
+- Tool won't be discovered if not decorated
+- Solution: Add ``@register_tool("MyTool")``
 
 **❌ Config in wrong place**
 - Don't put config in ``@register_tool()`` decorator (for contributions)
