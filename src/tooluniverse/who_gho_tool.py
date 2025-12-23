@@ -8,21 +8,38 @@ WHO_GHO_BASE_URL = "https://ghoapi.azureedge.net/api"
 
 # Common country name to ISO code mappings
 COUNTRY_MAPPINGS = {
-    "usa": "USA", "united states": "USA", "us": "USA",
-    "uk": "GBR", "united kingdom": "GBR", "britain": "GBR",
-    "china": "CHN", "chinese": "CHN",
-    "india": "IND", "indian": "IND",
-    "japan": "JPN", "japanese": "JPN",
-    "germany": "DEU", "german": "DEU",
-    "france": "FRA", "french": "FRA",
-    "italy": "ITA", "italian": "ITA",
-    "spain": "ESP", "spanish": "ESP",
-    "canada": "CAN", "canadian": "CAN",
-    "australia": "AUS", "australian": "AUS",
-    "brazil": "BRA", "brazilian": "BRA",
-    "russia": "RUS", "russian": "RUS",
-    "south korea": "KOR", "korea": "KOR",
-    "mexico": "MEX", "mexican": "MEX",
+    "usa": "USA",
+    "united states": "USA",
+    "us": "USA",
+    "uk": "GBR",
+    "united kingdom": "GBR",
+    "britain": "GBR",
+    "china": "CHN",
+    "chinese": "CHN",
+    "india": "IND",
+    "indian": "IND",
+    "japan": "JPN",
+    "japanese": "JPN",
+    "germany": "DEU",
+    "german": "DEU",
+    "france": "FRA",
+    "french": "FRA",
+    "italy": "ITA",
+    "italian": "ITA",
+    "spain": "ESP",
+    "spanish": "ESP",
+    "canada": "CAN",
+    "canadian": "CAN",
+    "australia": "AUS",
+    "australian": "AUS",
+    "brazil": "BRA",
+    "brazilian": "BRA",
+    "russia": "RUS",
+    "russian": "RUS",
+    "south korea": "KOR",
+    "korea": "KOR",
+    "mexico": "MEX",
+    "mexican": "MEX",
 }
 
 
@@ -36,9 +53,7 @@ class WHOGHORESTTool(BaseTool):
         fields = tool_config.get("fields", {})
         self.filter_by_code = fields.get("filter_by_code", False)
 
-    def _make_request(
-        self, params: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+    def _make_request(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Make request to WHO GHO API."""
         # Build OData query parameters
         odata_params = {}
@@ -63,8 +78,11 @@ class WHOGHORESTTool(BaseTool):
 
         if params:
             # Handle OData $filter syntax for Indicator endpoint
-            if (self.filter_by_code and "indicator_code" in params and
-                    not use_direct_indicator_endpoint):
+            if (
+                self.filter_by_code
+                and "indicator_code" in params
+                and not use_direct_indicator_endpoint
+            ):
                 code = params["indicator_code"]
                 filter_parts.append(f"IndicatorCode eq '{code}'")
 
@@ -90,11 +108,10 @@ class WHOGHORESTTool(BaseTool):
                 if "indicator_code" in params:
                     code = params["indicator_code"]
                     filter_parts.append(f"IndicatorCode eq '{code}'")
-                if ("country_code" in params and
-                        params.get("country_code")):
+                if "country_code" in params and params.get("country_code"):
                     code = params["country_code"]
                     filter_parts.append(f"SpatialDim eq '{code}'")
-                if (params.get("year") is not None):
+                if params.get("year") is not None:
                     year = params["year"]
                     filter_parts.append(f"TimeDim eq {year}")
 
@@ -157,7 +174,7 @@ class WHOGHORESTTool(BaseTool):
         result = {"topic": None, "country_code": None, "year": None}
 
         # Extract year (4-digit number)
-        year_match = re.search(r'\b(19|20)\d{2}\b', query)
+        year_match = re.search(r"\b(19|20)\d{2}\b", query)
         if year_match:
             result["year"] = int(year_match.group())
 
@@ -170,16 +187,14 @@ class WHOGHORESTTool(BaseTool):
         # Extract health topic (remove country and year, keep rest)
         topic_query = query_lower
         if result["year"]:
-            topic_query = re.sub(r'\b(19|20)\d{2}\b', '', topic_query)
+            topic_query = re.sub(r"\b(19|20)\d{2}\b", "", topic_query)
         if result["country_code"]:
             for country_name in COUNTRY_MAPPINGS.keys():
-                topic_query = topic_query.replace(country_name, '')
+                topic_query = topic_query.replace(country_name, "")
         # Remove common words
-        common_words_pattern = (
-            r'\b(in|for|of|the|a|an|rate|prevalence|percentage)\b'
-        )
-        topic_query = re.sub(common_words_pattern, '', topic_query)
-        topic_query = re.sub(r'\s+', ' ', topic_query).strip()
+        common_words_pattern = r"\b(in|for|of|the|a|an|rate|prevalence|percentage)\b"
+        topic_query = re.sub(common_words_pattern, "", topic_query)
+        topic_query = re.sub(r"\s+", " ", topic_query).strip()
         result["topic"] = topic_query if topic_query else query_lower
 
         return result
@@ -204,14 +219,14 @@ class WHOGHORESTTool(BaseTool):
             Ranked list of indicators
         """
         query_lower = query.lower()
-        query_words = set(re.findall(r'\b\w+\b', query_lower))
+        query_words = set(re.findall(r"\b\w+\b", query_lower))
 
         def score_indicator(indicator: Dict[str, Any]) -> float:
-            name = indicator.get('IndicatorName', '').lower()
-            code = indicator.get('IndicatorCode', '').lower()
+            name = indicator.get("IndicatorName", "").lower()
+            code = indicator.get("IndicatorCode", "").lower()
 
             score = 0.0
-            name_words = set(re.findall(r'\b\w+\b', name))
+            name_words = set(re.findall(r"\b\w+\b", name))
 
             # Exact phrase match
             if query_lower in name:
@@ -235,7 +250,7 @@ class WHOGHORESTTool(BaseTool):
         value: Any,
         indicator_name: str,
         country_code: Optional[str] = None,
-        year: Optional[int] = None
+        year: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Format health data into a human-readable answer.
@@ -261,9 +276,7 @@ class WHOGHORESTTool(BaseTool):
         if value is not None:
             if isinstance(value, (int, float)):
                 name_lower = indicator_name.lower()
-                is_percentage = (
-                    "%" in name_lower or "prevalence" in name_lower
-                )
+                is_percentage = "%" in name_lower or "prevalence" in name_lower
                 if is_percentage:
                     answer_parts.append(f"{value}%")
                 else:
@@ -282,16 +295,12 @@ class WHOGHORESTTool(BaseTool):
         if year:
             context["year"] = str(year)
 
-        answer_text = (
-            " ".join(answer_parts)
-            if answer_parts
-            else "No data available"
-        )
+        answer_text = " ".join(answer_parts) if answer_parts else "No data available"
         return {
             "answer": answer_text,
             "value": value,
             **context,
-            "source": "WHO Global Health Observatory"
+            "source": "WHO Global Health Observatory",
         }
 
     @staticmethod
@@ -371,18 +380,18 @@ class WHOGHOQueryTool(WHOGHORESTTool):
         parsed = self.parse_query(query)
 
         # Use provided country/year or extracted ones
-        country_code = (
-            arguments.get("country_code") or parsed.get("country_code")
-        )
+        country_code = arguments.get("country_code") or parsed.get("country_code")
         year = arguments.get("year") or parsed.get("year")
         topic = parsed.get("topic") or query
         top = arguments.get("top", 5)
 
         # Step 1: Search for relevant indicators
-        search_result = self._make_request({
-            "search_term": topic,
-            "top": min(top * 3, 50)  # Get more candidates for ranking
-        })
+        search_result = self._make_request(
+            {
+                "search_term": topic,
+                "top": min(top * 3, 50),  # Get more candidates for ranking
+            }
+        )
 
         if "error" in search_result:
             return search_result
@@ -393,7 +402,7 @@ class WHOGHOQueryTool(WHOGHORESTTool):
         if not indicators:
             return {
                 "error": f"No indicators found for query: '{query}'",
-                "suggestion": "Try different keywords or check spelling"
+                "suggestion": "Try different keywords or check spelling",
             }
 
         # Step 2: Rank indicators by relevance
@@ -417,22 +426,14 @@ class WHOGHOQueryTool(WHOGHORESTTool):
             if "error" not in data_result:
                 data_obj = data_result.get("data", {})
                 values = data_obj.get("value", [])
-                values = [
-                    v for v in values if self.is_value_available(v)
-                ]
+                values = [v for v in values if self.is_value_available(v)]
                 if values:
                     value_obj = values[0]
-                    value = (
-                        value_obj.get("NumericValue") or
-                        value_obj.get("Value")
+                    value = value_obj.get("NumericValue") or value_obj.get("Value")
+                    result_year = value_obj.get("TimeDim") or (
+                        str(year) if year else None
                     )
-                    result_year = (
-                        value_obj.get("TimeDim") or
-                        (str(year) if year else None)
-                    )
-                    result_country = (
-                        value_obj.get("SpatialDim") or country_code
-                    )
+                    result_country = value_obj.get("SpatialDim") or country_code
 
                     # Convert year to int if possible
                     year_int = None
@@ -452,7 +453,7 @@ class WHOGHOQueryTool(WHOGHORESTTool):
                         value=value,
                         indicator_name=indicator_name,
                         country_code=result_country,
-                        year=year_int
+                        year=year_int,
                     )
                     formatted["indicator_code"] = indicator_code
                     results.append(formatted)
@@ -461,16 +462,12 @@ class WHOGHOQueryTool(WHOGHORESTTool):
             return {
                 "error": f"No data found for query: '{query}'",
                 "matched_indicators": [
-                    {
-                        "code": ind.get("IndicatorCode"),
-                        "name": ind.get("IndicatorName")
-                    }
+                    {"code": ind.get("IndicatorCode"), "name": ind.get("IndicatorName")}
                     for ind in ranked_indicators[:3]
                 ],
                 "suggestion": (
-                    "Try a different country, year, or check if data is "
-                    "available"
-                )
+                    "Try a different country, year, or check if data is available"
+                ),
             }
 
         # Return best match (first result)
@@ -480,8 +477,8 @@ class WHOGHOQueryTool(WHOGHORESTTool):
                 "source": "WHO Global Health Observatory",
                 "query": query,
                 "indicators_searched": len(ranked_indicators),
-                "results_found": len(results)
-            }
+                "results_found": len(results),
+            },
         }
 
 
@@ -502,10 +499,12 @@ class WHOGHOTopicTool(WHOGHORESTTool):
         top = arguments.get("top", 10)
 
         # Search for indicators
-        search_result = self._make_request({
-            "search_term": topic,
-            "top": min(top * 2, 100)  # Get more for ranking
-        })
+        search_result = self._make_request(
+            {
+                "search_term": topic,
+                "top": min(top * 2, 100),  # Get more for ranking
+            }
+        )
 
         if "error" in search_result:
             return search_result
@@ -516,7 +515,7 @@ class WHOGHOTopicTool(WHOGHORESTTool):
         if not indicators:
             return {
                 "error": f"No indicators found for topic: '{topic}'",
-                "suggestion": "Try different keywords or check spelling"
+                "suggestion": "Try different keywords or check spelling",
             }
 
         # Rank indicators by relevance
@@ -526,26 +525,22 @@ class WHOGHOTopicTool(WHOGHORESTTool):
         result_indicators = []
         for idx, indicator in enumerate(ranked_indicators[:top]):
             # Simple relevance score based on position
-            score = (
-                (len(ranked_indicators) - idx) /
-                len(ranked_indicators) * 10
+            score = (len(ranked_indicators) - idx) / len(ranked_indicators) * 10
+            result_indicators.append(
+                {
+                    "IndicatorCode": indicator.get("IndicatorCode"),
+                    "IndicatorName": indicator.get("IndicatorName"),
+                    "relevance_score": round(score, 2),
+                }
             )
-            result_indicators.append({
-                "IndicatorCode": indicator.get("IndicatorCode"),
-                "IndicatorName": indicator.get("IndicatorName"),
-                "relevance_score": round(score, 2)
-            })
 
         return {
             "data": {
                 "indicators": result_indicators,
                 "topic": topic,
-                "total_found": len(indicators)
+                "total_found": len(indicators),
             },
-            "metadata": {
-                "source": "WHO Global Health Observatory",
-                "topic": topic
-            }
+            "metadata": {"source": "WHO Global Health Observatory", "topic": topic},
         }
 
 
@@ -569,10 +564,7 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
             return {"error": "country_code parameter is required"}
 
         # Step 1: Search for matching indicator
-        search_result = self._make_request({
-            "search_term": indicator_name,
-            "top": 20
-        })
+        search_result = self._make_request({"search_term": indicator_name, "top": 20})
 
         if "error" in search_result:
             return search_result
@@ -583,7 +575,7 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
         if not indicators:
             return {
                 "error": f"No indicators found matching: '{indicator_name}'",
-                "suggestion": "Try different keywords or check spelling"
+                "suggestion": "Try different keywords or check spelling",
             }
 
         # Step 2: Rank and get best match
@@ -596,7 +588,7 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
         data_params = {
             "indicator_code": indicator_code,
             "country_code": country_code,
-            "top": 1
+            "top": 1,
         }
         if year:
             data_params["year"] = year
@@ -608,12 +600,11 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
                 "error": data_result["error"],
                 "indicator_found": {
                     "code": indicator_code,
-                    "name": full_indicator_name
+                    "name": full_indicator_name,
                 },
                 "suggestion": (
-                    "Data may not be available for this country/year "
-                    "combination"
-                )
+                    "Data may not be available for this country/year combination"
+                ),
             }
 
         data_obj = data_result.get("data", {})
@@ -626,46 +617,33 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
                 data_params_no_year = {
                     "indicator_code": indicator_code,
                     "country_code": country_code,
-                    "top": 10
+                    "top": 10,
                 }
-                data_result_no_year = self._make_request_for_data(
-                    data_params_no_year
-                )
+                data_result_no_year = self._make_request_for_data(data_params_no_year)
                 if "error" not in data_result_no_year:
                     data_obj_no_year = data_result_no_year.get("data", {})
                     values = data_obj_no_year.get("value", [])
-                    values = [
-                        v for v in values if self.is_value_available(v)
-                    ]
+                    values = [v for v in values if self.is_value_available(v)]
                     if values:
                         # Get most recent year
-                        values.sort(
-                            key=lambda x: x.get("TimeDim", ""), reverse=True
-                        )
+                        values.sort(key=lambda x: x.get("TimeDim", ""), reverse=True)
                         values = [values[0]]
 
         if not values:
             return {
                 "error": (
-                    f"No data available for '{indicator_name}' in "
-                    f"{country_code}"
+                    f"No data available for '{indicator_name}' in {country_code}"
                 ),
                 "indicator_found": {
                     "code": indicator_code,
-                    "name": full_indicator_name
+                    "name": full_indicator_name,
                 },
-                "suggestion": (
-                    "Try a different country or check data availability"
-                )
+                "suggestion": ("Try a different country or check data availability"),
             }
 
         value_obj = values[0]
-        value = (
-            value_obj.get("NumericValue") or value_obj.get("Value")
-        )
-        result_year = (
-            value_obj.get("TimeDim") or (str(year) if year else None)
-        )
+        value = value_obj.get("NumericValue") or value_obj.get("Value")
+        result_year = value_obj.get("TimeDim") or (str(year) if year else None)
         result_country = value_obj.get("SpatialDim") or country_code
 
         # Convert year to int if possible
@@ -686,13 +664,13 @@ class WHOGHOStatisticTool(WHOGHORESTTool):
             value=value,
             indicator_name=full_indicator_name,
             country_code=result_country,
-            year=year_int
+            year=year_int,
         )
 
         return {
             "data": formatted,
             "metadata": {
                 "source": "WHO Global Health Observatory",
-                "indicator_code": indicator_code
-            }
+                "indicator_code": indicator_code,
+            },
         }

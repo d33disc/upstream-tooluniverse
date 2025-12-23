@@ -20,9 +20,7 @@ from .sqlite_backend import CacheEntry, PersistentCache
 logger = logging.getLogger(__name__)
 
 # Global registry for cleanup on exit
-_active_cache_managers: weakref.WeakSet[
-    "ResultCacheManager"
-] = weakref.WeakSet()
+_active_cache_managers: weakref.WeakSet["ResultCacheManager"] = weakref.WeakSet()
 
 
 def _cleanup_all_cache_managers():
@@ -80,7 +78,7 @@ class ResultCacheManager:
 
         self.singleflight = SingleFlight() if singleflight else None
         self._init_async_persistence(async_persist, async_queue_size)
-        
+
         # Register this instance for cleanup on exit
         _active_cache_managers.add(self)
 
@@ -338,7 +336,7 @@ class ResultCacheManager:
                 self.persistent.close()
             except Exception as exc:
                 logger.warning("Persistent cache close failed: %s", exc)
-        
+
         # Remove from global registry
         _active_cache_managers.discard(self)
 
@@ -346,12 +344,15 @@ class ResultCacheManager:
         """Ensure cleanup happens even if close() is not called explicitly."""
         try:
             # Only shutdown if attributes exist (object not partially constructed)
-            if hasattr(self, '_shutdown_event'):
+            if hasattr(self, "_shutdown_event"):
                 self._shutdown_event.set()
-            if hasattr(self, '_worker_thread') and self._worker_thread is not None:
+            if hasattr(self, "_worker_thread") and self._worker_thread is not None:
                 if self._worker_thread.is_alive():
                     # Signal shutdown and wait briefly
-                    if hasattr(self, '_persist_queue') and self._persist_queue is not None:
+                    if (
+                        hasattr(self, "_persist_queue")
+                        and self._persist_queue is not None
+                    ):
                         try:
                             self._persist_queue.put_nowait(("__STOP__", {}))
                         except Exception:
@@ -389,7 +390,7 @@ class ResultCacheManager:
         # Use longer timeout to reduce CPU wakeups, but Event can wake immediately
         # Event.wait() can be interrupted immediately by setting the event
         TIMEOUT = 1.0  # Check every second, but Event can wake immediately
-        
+
         while True:
             # Wait for shutdown event or timeout
             # If shutdown is set, wait() returns immediately (True)
@@ -397,7 +398,7 @@ class ResultCacheManager:
             if self._shutdown_event.wait(timeout=TIMEOUT):
                 # Shutdown was signaled
                 break
-            
+
             # Timeout occurred - check queue for work
             # Use non-blocking get to avoid blocking when shutdown is signaled
             try:
@@ -453,16 +454,16 @@ class ResultCacheManager:
             raise
 
     def _shutdown_async_worker(self) -> None:
-        if not hasattr(self, '_worker_thread') or self._worker_thread is None:
+        if not hasattr(self, "_worker_thread") or self._worker_thread is None:
             return
-            
-        if not hasattr(self, '_persist_queue') or self._persist_queue is None:
+
+        if not hasattr(self, "_persist_queue") or self._persist_queue is None:
             return
 
         # Signal shutdown first - this will cause worker to exit on next timeout check
-        if hasattr(self, '_shutdown_event'):
+        if hasattr(self, "_shutdown_event"):
             self._shutdown_event.set()
-        
+
         # Try to send stop message to worker thread (non-blocking)
         try:
             self._persist_queue.put_nowait(("__STOP__", {}))
@@ -477,12 +478,14 @@ class ResultCacheManager:
         if self._worker_thread.is_alive():
             self._worker_thread.join(timeout=2.0)
             if self._worker_thread.is_alive():
-                logger.warning("Cache worker thread did not terminate within timeout, but shutdown was signaled")
+                logger.warning(
+                    "Cache worker thread did not terminate within timeout, but shutdown was signaled"
+                )
 
         # Clean up
         self._worker_thread = None
         self._persist_queue = None
-        if hasattr(self, '_shutdown_event'):
+        if hasattr(self, "_shutdown_event"):
             self._shutdown_event.clear()
 
 

@@ -24,46 +24,60 @@ class NHANESTool(BaseTool):
         """Get NHANES dataset information."""
         year = arguments.get("year")
         component = arguments.get("component")
-        
+
         base_url = "https://wwwn.cdc.gov/Nchs/Nhanes"
-        
+
         # Common NHANES cycles
         cycles = [
-            "2017-2018", "2015-2016", "2013-2014", 
-            "2011-2012", "2009-2010", "2007-2008"
+            "2017-2018",
+            "2015-2016",
+            "2013-2014",
+            "2011-2012",
+            "2009-2010",
+            "2007-2008",
         ]
-        
+
         datasets = []
-        
+
         if year:
             cycles_to_show = [year] if year in cycles else cycles[:2]
         else:
             cycles_to_show = cycles[:2]  # Show most recent
-        
+
         for cycle in cycles_to_show:
             if component:
-                datasets.append({
-                    "name": f"NHANES {component} - {cycle}",
-                    "year": cycle,
-                    "component": component,
-                    "download_url": f"{base_url}/{cycle}/{component.lower()}_{cycle}.aspx",
-                    "description": f"NHANES {component} data for {cycle}"
-                })
+                datasets.append(
+                    {
+                        "name": f"NHANES {component} - {cycle}",
+                        "year": cycle,
+                        "component": component,
+                        "download_url": f"{base_url}/{cycle}/{component.lower()}_{cycle}.aspx",
+                        "description": f"NHANES {component} data for {cycle}",
+                    }
+                )
             else:
                 # Show all components
-                for comp in ["Demographics", "Dietary", "Examination", "Laboratory", "Questionnaire"]:
-                    datasets.append({
-                        "name": f"NHANES {comp} - {cycle}",
-                        "year": cycle,
-                        "component": comp,
-                        "download_url": f"{base_url}/{cycle}/{comp.lower()}_{cycle}.aspx",
-                        "description": f"NHANES {comp} data for {cycle}"
-                    })
-        
+                for comp in [
+                    "Demographics",
+                    "Dietary",
+                    "Examination",
+                    "Laboratory",
+                    "Questionnaire",
+                ]:
+                    datasets.append(
+                        {
+                            "name": f"NHANES {comp} - {cycle}",
+                            "year": cycle,
+                            "component": comp,
+                            "download_url": f"{base_url}/{cycle}/{comp.lower()}_{cycle}.aspx",
+                            "description": f"NHANES {comp} data for {cycle}",
+                        }
+                    )
+
         return {
             "data": {
                 "datasets": datasets[:20],  # Limit results
-                "note": "NHANES data is available as downloadable files (SAS, XPT formats) from the CDC website. Visit the download URLs to access datasets. Files may require SAS or conversion tools to read."
+                "note": "NHANES data is available as downloadable files (SAS, XPT formats) from the CDC website. Visit the download URLs to access datasets. Files may require SAS or conversion tools to read.",
             },
             "metadata": {
                 "source": "CDC NHANES",
@@ -77,33 +91,41 @@ class NHANESTool(BaseTool):
         search_term = arguments.get("search_term", "").lower()
         year = arguments.get("year")
         limit = arguments.get("limit", 20)
-        
+
         # Common NHANES dataset keywords
         common_datasets = [
-            {"name": "Demographics", "keywords": ["demographics", "age", "gender", "race"]},
+            {
+                "name": "Demographics",
+                "keywords": ["demographics", "age", "gender", "race"],
+            },
             {"name": "Glucose", "keywords": ["glucose", "blood sugar", "diabetes"]},
-            {"name": "Blood Pressure", "keywords": ["blood pressure", "hypertension", "bp"]},
+            {
+                "name": "Blood Pressure",
+                "keywords": ["blood pressure", "hypertension", "bp"],
+            },
             {"name": "Body Measures", "keywords": ["body", "bmi", "weight", "height"]},
             {"name": "Dietary", "keywords": ["diet", "nutrition", "food", "calories"]},
             {"name": "Laboratory", "keywords": ["lab", "laboratory", "test", "blood"]},
         ]
-        
+
         datasets = []
         for ds in common_datasets:
             if not search_term or any(kw in search_term for kw in ds["keywords"]):
                 cycle = year or "2017-2018"
-                datasets.append({
-                    "name": f"NHANES {ds['name']} - {cycle}",
-                    "year": cycle,
-                    "download_url": f"https://wwwn.cdc.gov/Nchs/Nhanes/{cycle}/"
-                })
+                datasets.append(
+                    {
+                        "name": f"NHANES {ds['name']} - {cycle}",
+                        "year": cycle,
+                        "download_url": f"https://wwwn.cdc.gov/Nchs/Nhanes/{cycle}/",
+                    }
+                )
                 if len(datasets) >= limit:
                     break
-        
+
         return {
             "data": {
                 "datasets": datasets,
-                "note": "NHANES datasets are available for download from the CDC website. Use the download URLs to access data files."
+                "note": "NHANES datasets are available for download from the CDC website. Use the download URLs to access data files.",
             },
             "metadata": {
                 "source": "CDC NHANES",
@@ -120,4 +142,3 @@ class NHANESTool(BaseTool):
             return self._search_datasets(arguments)
         else:
             return {"error": f"Unknown endpoint: {self.endpoint}"}
-

@@ -257,11 +257,9 @@ def _derive_category_from_config(tool_config: Dict) -> Optional[str]:
         for cat_name, file_path in default_tool_files.items():
             file_path_normalized = os.path.normpath(file_path)
             # Match by full path or just filename
-            if (
-                source_file_normalized == file_path_normalized
-                or os.path.basename(source_file_normalized)
-                == os.path.basename(file_path_normalized)
-            ):
+            if source_file_normalized == file_path_normalized or os.path.basename(
+                source_file_normalized
+            ) == os.path.basename(file_path_normalized):
                 return cat_name
 
     return None
@@ -285,5 +283,3 @@ def add_annotations_to_tool_config(tool_config: Dict) -> Dict:
     """
     get_annotations_for_tool(tool_config=tool_config, update_config=True)
     return tool_config
-
-

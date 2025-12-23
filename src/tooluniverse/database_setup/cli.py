@@ -31,7 +31,6 @@ Exit codes
 0 on success; non-zero on I/O, validation, or runtime errors.
 """
 
-
 import argparse
 import json
 import os
@@ -63,6 +62,7 @@ def resolve_provider_model(provider_arg, model_arg):
         )
     return provider, model
 
+
 USER_TOOLS_DIR = os.path.expanduser("~/.tooluniverse/data/user_tools")
 
 
@@ -88,7 +88,10 @@ def add_tool(json_file: str, name: str | None = None, overwrite: bool = False):
 
     shutil.copyfile(src, dest)
     print(f"[INFO] Copied tool JSON to: {dest}")
-    print("[INFO] Any ToolUniverse/Codex instance that reads ~/.tooluniverse/data/user_tools will now see this tool.")
+    print(
+        "[INFO] Any ToolUniverse/Codex instance that reads ~/.tooluniverse/data/user_tools will now see this tool."
+    )
+
 
 def main():
     p = argparse.ArgumentParser(
@@ -192,7 +195,7 @@ def main():
     at.add_argument(
         "--name",
         help="Optional filename to use under ~/.tooluniverse/data/user_tools "
-             "(default = source filename)",
+        "(default = source filename)",
     )
     at.add_argument(
         "--overwrite",

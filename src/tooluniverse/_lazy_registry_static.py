@@ -245,5 +245,5 @@ STATIC_LAZY_REGISTRY = {
     "dbSNPRESTTool": "dbsnp_tool",
     "dbSNPSearchByGene": "dbsnp_tool",
     "gnomADGetGeneConstraints": "gnomad_tool",
-    "gnomADGraphQLTool": "gnomad_tool"
+    "gnomADGraphQLTool": "gnomad_tool",
 }

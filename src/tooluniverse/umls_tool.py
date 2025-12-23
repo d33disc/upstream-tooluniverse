@@ -36,9 +36,7 @@ class UMLSRESTTool(BaseTool):
 
         return f"{self.base_url}{endpoint}"
 
-    def _make_request(
-        self, arguments: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    def _make_request(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Make request to UMLS API."""
         api_key = self._get_api_key()
         if not api_key:

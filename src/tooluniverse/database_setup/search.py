@@ -60,6 +60,7 @@ class SearchEngine:
     - If a collection's `embedding_model` is "precomputed", you MUST pass (provider, model)
       when calling `embedding_search` or `hybrid_search`.
     """
+
     def __init__(self, db_path: str = "embeddings.db"):
         self.sqlite = SQLiteStore(db_path)
         self.vectors = VectorStore(db_path)

@@ -1088,8 +1088,7 @@ class ToolUniverse:
                         # Get timeout from loader config or use default (30 seconds)
                         timeout = loader_config.get("timeout", 30)
                         result = await asyncio.wait_for(
-                            loader.auto_load_and_register(self),
-                            timeout=timeout
+                            loader.auto_load_and_register(self), timeout=timeout
                         )
                         return result
                     except asyncio.TimeoutError:
@@ -1101,7 +1100,7 @@ class ToolUniverse:
                             "registered_count": 0,
                             "tools": [],
                             "registered_tools": [],
-                            "error": "timeout"
+                            "error": "timeout",
                         }
                     finally:
                         # Ensure session cleanup
@@ -2468,8 +2467,9 @@ class ToolUniverse:
                 with open("/tmp/tu_init_error.txt", "a") as f:
                     f.write(f"Failed to initialize '{tool_type}': {e}\nTraceback:\n")
                     import traceback
+
                     traceback.print_exc(file=f)
-            except:
+            except Exception:
                 pass
 
             # Hide tools that cannot be initialized (e.g., missing optional deps)

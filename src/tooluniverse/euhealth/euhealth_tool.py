@@ -75,12 +75,12 @@ class EuHealthTopicSearchTool(BaseTool):
             return {"error": f"Topic function '{topic}' not found in tools_runtime"}
 
         # ---- pull ALL supported parameters ----
-        limit       = int(arguments.get("limit", 25))
-        method      = arguments.get("method", "hybrid")
-        alpha       = float(arguments.get("alpha", 0.5))
-        top_k       = int(arguments.get("top_k", 25))
-        country     = arguments.get("country", "")
-        language    = arguments.get("language", "")
+        limit = int(arguments.get("limit", 25))
+        method = arguments.get("method", "hybrid")
+        alpha = float(arguments.get("alpha", 0.5))
+        top_k = int(arguments.get("top_k", 25))
+        country = arguments.get("country", "")
+        language = arguments.get("language", "")
         term_override = arguments.get("term_override", "")
 
         try:
@@ -124,16 +124,16 @@ class EuHealthDeepDiveTool(BaseTool):
     """
 
     def run(self, arguments: Dict[str, Any]) -> Any:
-        uuids        = arguments.get("uuids")
-        topic        = arguments.get("topic")
-        limit        = int(arguments.get("limit", 10))
-        links_per    = int(arguments.get("links_per", 3))
+        uuids = arguments.get("uuids")
+        topic = arguments.get("topic")
+        limit = int(arguments.get("limit", 10))
+        links_per = int(arguments.get("links_per", 3))
 
-        method       = arguments.get("method", "hybrid")
-        alpha        = float(arguments.get("alpha", 0.5))
-        top_k        = int(arguments.get("top_k", 25))
-        country      = arguments.get("country", "")
-        language     = arguments.get("language", "")
+        method = arguments.get("method", "hybrid")
+        alpha = float(arguments.get("alpha", 0.5))
+        top_k = int(arguments.get("top_k", 25))
+        country = arguments.get("country", "")
+        language = arguments.get("language", "")
         term_override = arguments.get("term_override", "")
 
         if not uuids and not topic:

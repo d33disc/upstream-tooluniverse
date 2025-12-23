@@ -307,6 +307,7 @@ def _match_language(langs: Optional[List[str]], want: str) -> bool:
             return True
     return False
 
+
 def _topic_search(
     topic: str,
     limit: int = 25,
@@ -445,14 +446,17 @@ def _caller_is_azure_small() -> bool:
     mdl = (resolve_model(prov, None) or "").strip().lower()
     return prov == "azure" and mdl == _SHARED_MODEL_NAME
 
+
 def _env_supports_fts5() -> bool:
     import sqlite3
+
     try:
         con = sqlite3.connect(":memory:")
         con.execute("CREATE VIRTUAL TABLE t USING fts5(x)")
         return True
     except Exception:
         return False
+
 
 def _maybe_force_keyword(method: str) -> str:
     """
@@ -472,7 +476,7 @@ def _maybe_force_keyword(method: str) -> str:
     """
     if not os.path.exists(_euhealth_db_path()):
         return "missing_db"
-    
+
     # 1. If runtime cannot do FTS5 → embedding/hybrid MUST fall back
     if method in ("embedding", "hybrid") and not _env_supports_fts5():
         return "keyword"
@@ -580,7 +584,7 @@ def euhealthinfo_deepdive(
                     "Please download or build the euhealth collection.\n"
                     "To install the official datastore:\n"
                     "  export HF_TOKEN=YOUR_HF_TOKEN\n"
-                    "  tu-datastore sync-hf download --repo \"agenticx/tooluniverse-datastores\" --collection euhealth --overwrite\n"
+                    '  tu-datastore sync-hf download --repo "agenticx/tooluniverse-datastores" --collection euhealth --overwrite\n'
                 ),
                 "results": [],
             }
@@ -626,7 +630,6 @@ for _fname in TOPICS.keys():
             language: str = "",
             term_override: str = "",
         ):
-
             # --- enforce fallback BEFORE SearchEngine is ever touched ---
             actual_method = _maybe_force_keyword(method)
             if actual_method == "missing_db":
@@ -636,12 +639,11 @@ for _fname in TOPICS.keys():
                         "Please download or build the euhealth collection.\n"
                         "To install the official datastore:\n"
                         "  export HF_TOKEN=YOUR_HF_TOKEN\n"
-                        "  tu-datastore sync-hf download --repo \"agenticx/tooluniverse-datastores\" --collection euhealth --overwrite\n"
+                        '  tu-datastore sync-hf download --repo "agenticx/tooluniverse-datastores" --collection euhealth --overwrite\n'
                     ),
                     "results": [],
                 }
 
-            
             if actual_method != method:
                 # run keyword version
                 results = _topic_search(

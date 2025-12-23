@@ -26,35 +26,39 @@ class HealthDisparitiesTool(BaseTool):
         """Get SVI data source information."""
         year = arguments.get("year")
         geography = arguments.get("geography", "county")
-        
+
         # SVI is typically released every 2 years
         # Common years: 2020, 2018, 2016, 2014, etc.
         base_url = "https://www.atsdr.cdc.gov/placeandhealth/svi"
-        
+
         data_sources = []
-        
+
         # Provide information about available SVI datasets
         if year:
-            data_sources.append({
-                "year": year,
-                "geography": geography,
-                "download_url": f"{base_url}/data_documentation_download.html",
-                "documentation_url": f"{base_url}/index.html"
-            })
+            data_sources.append(
+                {
+                    "year": year,
+                    "geography": geography,
+                    "download_url": f"{base_url}/data_documentation_download.html",
+                    "documentation_url": f"{base_url}/index.html",
+                }
+            )
         else:
             # Provide info for recent years
             for y in [2020, 2018, 2016]:
-                data_sources.append({
-                    "year": y,
-                    "geography": geography,
-                    "download_url": f"{base_url}/data_documentation_download.html",
-                    "documentation_url": f"{base_url}/index.html"
-                })
-        
+                data_sources.append(
+                    {
+                        "year": y,
+                        "geography": geography,
+                        "download_url": f"{base_url}/data_documentation_download.html",
+                        "documentation_url": f"{base_url}/index.html",
+                    }
+                )
+
         return {
             "data": {
                 "data_sources": data_sources,
-                "note": "SVI data is available as downloadable CSV files. Visit the download URL to access the data. Data includes social vulnerability indicators at county, census tract, and state levels."
+                "note": "SVI data is available as downloadable CSV files. Visit the download URL to access the data. Data includes social vulnerability indicators at county, census tract, and state levels.",
             },
             "metadata": {
                 "source": "CDC ATSDR Social Vulnerability Index",
@@ -67,19 +71,21 @@ class HealthDisparitiesTool(BaseTool):
         """Get County Health Rankings information."""
         year = arguments.get("year")
         state = arguments.get("state")
-        
+
         base_url = "https://www.countyhealthrankings.org"
-        
-        data_sources = [{
-            "year": year or "latest",
-            "state": state or "all",
-            "access_url": f"{base_url}/explore-health-rankings"
-        }]
-        
+
+        data_sources = [
+            {
+                "year": year or "latest",
+                "state": state or "all",
+                "access_url": f"{base_url}/explore-health-rankings",
+            }
+        ]
+
         return {
             "data": {
                 "data_sources": data_sources,
-                "note": "County Health Rankings data is available through their website. Visit the access URL to explore and download county-level health data. Data includes health outcomes, health factors, and health behaviors by county."
+                "note": "County Health Rankings data is available through their website. Visit the access URL to explore and download county-level health data. Data includes health outcomes, health factors, and health behaviors by county.",
             },
             "metadata": {
                 "source": "County Health Rankings & Roadmaps",
@@ -96,4 +102,3 @@ class HealthDisparitiesTool(BaseTool):
             return self._get_county_rankings_info(arguments)
         else:
             return {"error": f"Unknown endpoint: {self.endpoint}"}
-

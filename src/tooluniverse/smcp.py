@@ -1383,7 +1383,9 @@ class SMCP(FastMCP):
         self._init_tool_finder()
 
         if "tool_finder" in (self.exclude_categories or []):
-            self.logger.info("🚫 Skipping 'find_tools' registration (tool_finder excluded)")
+            self.logger.info(
+                "🚫 Skipping 'find_tools' registration (tool_finder excluded)"
+            )
             return
 
         from mcp.types import ToolAnnotations
@@ -1561,7 +1563,9 @@ class SMCP(FastMCP):
                 self.logger.debug("tool_finder category is excluded, skipping load")
             elif not self.tool_finder_available:
                 # Only load if search tools aren't already available
-                self.logger.info("Attempting to load tool_finder category for search functionality")
+                self.logger.info(
+                    "Attempting to load tool_finder category for search functionality"
+                )
                 try:
                     self.tooluniverse.load_tools(tool_type=["tool_finder"])
                 except Exception as e:

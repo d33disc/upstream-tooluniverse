@@ -11,7 +11,7 @@ from .tool_registry import (
     register_tool,
     get_tool_registry,
     get_tool_class_lazy,
-    auto_discover_tools
+    auto_discover_tools,
 )
 
 _LIGHT_IMPORT = os.getenv("TOOLUNIVERSE_LIGHT_IMPORT", "false").lower() in (
@@ -24,8 +24,10 @@ _LIGHT_IMPORT = os.getenv("TOOLUNIVERSE_LIGHT_IMPORT", "false").lower() in (
 __version__ = version("tooluniverse")
 
 # Check if lazy loading is enabled
-LAZY_LOADING_ENABLED = os.getenv('TOOLUNIVERSE_LAZY_LOADING', 'true').lower() in (
-    'true', '1', 'yes'
+LAZY_LOADING_ENABLED = os.getenv("TOOLUNIVERSE_LAZY_LOADING", "true").lower() in (
+    "true",
+    "1",
+    "yes",
 )
 
 # Import MCP functionality

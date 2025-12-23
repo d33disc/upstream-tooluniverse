@@ -116,6 +116,7 @@ def safe_for_fts(query: str) -> str:
     q = q.strip('"').strip("'")
     return q.strip()
 
+
 def _ensure_fts5(conn):
     """
     Ensure that the current sqlite3 build supports FTS5.

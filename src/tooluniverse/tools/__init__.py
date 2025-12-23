@@ -10,7 +10,16 @@ Usage:
 """
 
 # Import exceptions from main package
-from tooluniverse.exceptions import *
+from tooluniverse.exceptions import (
+    ToolError,
+    ToolAuthError,
+    ToolUnavailableError,
+    ToolRateLimitError,
+    ToolValidationError,
+    ToolConfigError,
+    ToolDependencyError,
+    ToolServerError,
+)
 
 # Import shared client utilities
 from ._shared_client import get_shared_client, reset_shared_client

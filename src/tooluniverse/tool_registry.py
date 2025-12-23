@@ -159,14 +159,14 @@ def lazy_import_tool(tool_name):
         # Check if the tool is in the registry
         if tool_name in _tool_registry:
             return _tool_registry[tool_name]
-            
+
         # Fallback: Check if the tool class exists directly in the module
         # This handles cases where @register_tool("Alias") is used, but we are looking
         # for the class name itself (e.g. MonarchTool vs Monarch), which AST discovery found.
         if hasattr(module, tool_name):
             tool_class = getattr(module, tool_name)
             # Optionally cache it in registry for next time?
-            # _tool_registry[tool_name] = tool_class 
+            # _tool_registry[tool_name] = tool_class
             return tool_class
 
         logger.warning(
@@ -186,7 +186,7 @@ def _discover_from_ast():
     """
     import ast
     import tooluniverse
-    
+
     mapping = {}
     try:
         package_path = tooluniverse.__path__[0]
@@ -198,36 +198,55 @@ def _discover_from_ast():
 
     # Directories to exclude from scanning
     EXCLUDED_DIRS = {
-        "tools", "space", "data", "compose_scripts", "cache", "remote", "scripts",
-        "__pycache__", "tests", "venv", "build", "dist", ".git", ".idea", ".vscode"
+        "tools",
+        "space",
+        "data",
+        "compose_scripts",
+        "cache",
+        "remote",
+        "scripts",
+        "__pycache__",
+        "tests",
+        "venv",
+        "build",
+        "dist",
+        ".git",
+        ".idea",
+        ".vscode",
     }
 
     # Walk through the directory
     for root, dirs, files in os.walk(package_path):
         # Modify dirs in-place to skip excluded directories
         dirs[:] = [d for d in dirs if d not in EXCLUDED_DIRS]
-        
+
         for file in files:
             if not file.endswith(".py"):
                 continue
-            
+
             # Skip known non-tool files
-            if file in ["__init__.py", "main.py", "generate_tools.py", "conftest.py", "setup.py"]:
+            if file in [
+                "__init__.py",
+                "main.py",
+                "generate_tools.py",
+                "conftest.py",
+                "setup.py",
+            ]:
                 continue
-                
+
             # Determine if this is an explicit tool file (legacy naming convention)
             is_explicit_tool_file = (
-                file.endswith("_tool.py") or 
-                file.endswith("_tools.py") or 
-                file in ["compose_tool.py", "agentic_tool.py"]
+                file.endswith("_tool.py")
+                or file.endswith("_tools.py")
+                or file in ["compose_tool.py", "agentic_tool.py"]
             )
-            
+
             file_path = os.path.join(root, file)
-            
+
             # Determine module name relative to tooluniverse package
             rel_path = os.path.relpath(file_path, package_path)
             module_name = os.path.splitext(rel_path)[0].replace(os.sep, ".")
-            
+
             try:
                 with open(file_path, "r", encoding="utf-8") as f:
                     try:
@@ -237,9 +256,9 @@ def _discover_from_ast():
                                 # Skip private classes
                                 if n.name.startswith("_"):
                                     continue
-                                    
+
                                 has_registered_alias = False
-                                
+
                                 # Check for @register_tool("Alias") decorators
                                 for decorator in n.decorator_list:
                                     # We look for calls to 'register_tool'
@@ -247,11 +266,17 @@ def _discover_from_ast():
                                         func = decorator.func
                                         # Handle @register_tool(...)
                                         is_register_tool = False
-                                        if isinstance(func, ast.Name) and func.id == 'register_tool':
+                                        if (
+                                            isinstance(func, ast.Name)
+                                            and func.id == "register_tool"
+                                        ):
                                             is_register_tool = True
-                                        elif isinstance(func, ast.Attribute) and func.attr == 'register_tool':
+                                        elif (
+                                            isinstance(func, ast.Attribute)
+                                            and func.attr == "register_tool"
+                                        ):
                                             is_register_tool = True
-                                            
+
                                         if is_register_tool:
                                             # It is decorated, so we definitely want to register it
                                             has_registered_alias = True
@@ -259,25 +284,29 @@ def _discover_from_ast():
                                                 # Extract the first argument as the alias
                                                 arg = decorator.args[0]
                                                 alias = None
-                                                if isinstance(arg, ast.Constant): # Python 3.8+
+                                                if isinstance(
+                                                    arg, ast.Constant
+                                                ):  # Python 3.8+
                                                     alias = arg.value
-                                                elif isinstance(arg, ast.Str): # Older Python
+                                                elif isinstance(
+                                                    arg, ast.Str
+                                                ):  # Older Python
                                                     alias = arg.s
-                                                
+
                                                 if alias and isinstance(alias, str):
                                                     mapping[alias] = module_name
-                                
+
                                 # Registration Logic:
                                 # 1. If it has @register_tool, we register the class name.
                                 # 2. If it is in an explicit tool file (*_tool.py), we register the class name (legacy behavior).
                                 if has_registered_alias or is_explicit_tool_file:
                                     mapping[n.name] = module_name
-                                                
+
                     except SyntaxError:
                         logger.warning(f"Syntax error parsing {file_path}")
             except Exception as e:
                 logger.warning(f"Error reading {file_path}: {e}")
-                
+
     return mapping
 
 
@@ -298,19 +327,26 @@ def build_lazy_registry(package_name=None):
         # We import it here dynamically, but we should make sure the build handles it.
         # Adding explicit print for debugging in bundle.
         from tooluniverse._lazy_registry_static import STATIC_LAZY_REGISTRY
-        print(f"DEBUG: Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} tools.", file=sys.stderr)
+
+        print(
+            f"DEBUG: Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} tools.",
+            file=sys.stderr,
+        )
         _lazy_registry.update(STATIC_LAZY_REGISTRY)
         return _lazy_registry.copy()
     except ImportError:
-        print("DEBUG: No static lazy registry found. Proceeding with AST discovery.", file=sys.stderr)
+        print(
+            "DEBUG: No static lazy registry found. Proceeding with AST discovery.",
+            file=sys.stderr,
+        )
 
     logger.debug(f"Building lazy registry using AST for package: {package_name}")
 
     # 2. Use AST-based discovery as the primary source of truth (dev environment)
     ast_mappings = _discover_from_ast()
-    
+
     for tool_name, module_name in ast_mappings.items():
-         _lazy_registry[tool_name] = module_name
+        _lazy_registry[tool_name] = module_name
 
     logger.info(
         f"Built lazy registry: {len(_lazy_registry)} tools discovered via AST (no modules imported)"
@@ -333,7 +369,7 @@ def auto_discover_tools(package_name=None, lazy=True):
     if lazy:
         if not _lazy_registry:
             build_lazy_registry(package_name)
-            
+
             # CRITICAL FIX FOR FROZEN/BUNDLED ENVIRONMENTS:
             # If AST discovery yielded 0 results (e.g. no .py files found in Nuitka/PyInstaller bundle),
             # we MUST fallback to eager loading using pkgutil/importlib.
@@ -344,7 +380,7 @@ def auto_discover_tools(package_name=None, lazy=True):
                     "Falling back to eager loading."
                 )
                 return auto_discover_tools(package_name, lazy=False)
-                
+
             logger.debug(
                 f"Lazy discovery complete. Registry contains {len(_lazy_registry)} tool mappings (no modules imported)"
             )
@@ -379,12 +415,12 @@ def auto_discover_tools(package_name=None, lazy=True):
                 imported_count += 1
             except ImportError as e:
                 logger.warning(f"Could not import {modname}: {e}")
-                
-    # Also need to handle subpackages if we want full parity, but for now 
+
+    # Also need to handle subpackages if we want full parity, but for now
     # pkgutil.iter_modules only does top level unless recursive.
     # But `auto_discover_tools` non-lazy mode was originally just iterating top-level modules.
     # The AST discovery covers subdirectories, so lazy mode is actually BETTER now.
-    
+
     # Let's preserve the original behavior for non-lazy mode which seemed to utilize pkgutil
     # But wait, original code only iterated package_path, so it missed subdirectories?
     # Original code:
