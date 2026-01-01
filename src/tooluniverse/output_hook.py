@@ -201,7 +201,7 @@ class SummarizationHookConfig:
     )
     focus_areas: str = "key_findings_and_results"
     max_summary_length: int = 3000
-    composer_timeout_sec: int = 60
+    composer_timeout_sec: int = 300
 
     def validate(self) -> "SummarizationHookConfig":
         # Validate numeric fields; clamp to sensible defaults if invalid
@@ -213,7 +213,7 @@ class SummarizationHookConfig:
             not isinstance(self.composer_timeout_sec, int)
             or self.composer_timeout_sec <= 0
         ):
-            self.composer_timeout_sec = 60
+            self.composer_timeout_sec = 300
         if not isinstance(self.composer_tool, str) or not self.composer_tool:
             self.composer_tool = "OutputSummarizationComposer"
         return self
@@ -260,7 +260,7 @@ class SummarizationHook(OutputHook):
                 chunk_size=raw.get("chunk_size", 2000),
                 focus_areas=raw.get("focus_areas", "key_findings_and_results"),
                 max_summary_length=raw.get("max_summary_length", 3000),
-                composer_timeout_sec=raw.get("composer_timeout_sec", 60),
+                composer_timeout_sec=raw.get("composer_timeout_sec", 300),
             )
         self.config_obj = cfg.validate()
         self.composer_tool = self.config_obj.composer_tool
