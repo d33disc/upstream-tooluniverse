@@ -771,6 +771,8 @@
   "reactome_disease_target_score": "4cb0bc7caf8b13a6ec13438eb9b3ab4a",
   "search_clinical_trials": "1b6774249e244f9a15f8cc2510523dff",
   "snomed_search_concepts": "e057fd38546a88bf5a2e56d7d791e447",
+  "test_decorator_tool": "e0657af2d62815ada029f65bd07ac5c7",
+  "test_server_tool": "10f49cf8f666e13982548ec7eee67635",
   "umls_get_concept_details": "cfb27bca3040773bdbe75c0510671b07",
   "umls_search_concepts": "adaf7bb945cfc1e17415f9b539e7cd30",
   "visualize_molecule_2d": "97c6136ff32edc82cacc8daec95754a7",

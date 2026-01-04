@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 781 scientific tools.
+Type-safe Python interface to 783 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1239,6 +1239,8 @@ from .python_script_runner import python_script_runner
 from .reactome_disease_target_score import reactome_disease_target_score
 from .search_clinical_trials import search_clinical_trials
 from .snomed_search_concepts import snomed_search_concepts
+from .test_decorator_tool import test_decorator_tool
+from .test_server_tool import test_server_tool
 from .umls_get_concept_details import umls_get_concept_details
 from .umls_search_concepts import umls_search_concepts
 from .visualize_molecule_2d import visualize_molecule_2d
@@ -2024,6 +2026,8 @@ __all__ = [
     "reactome_disease_target_score",
     "search_clinical_trials",
     "snomed_search_concepts",
+    "test_decorator_tool",
+    "test_server_tool",
     "umls_get_concept_details",
     "umls_search_concepts",
     "visualize_molecule_2d",

@@ -257,7 +257,8 @@ class SummarizationHook(OutputHook):
             # Breaking change: only support composer_tool going forward
             cfg = SummarizationHookConfig(
                 composer_tool=raw.get("composer_tool", "OutputSummarizationComposer"),
-                chunk_size=raw.get("chunk_size", 2000),
+                # Default should match SummarizationHookConfig and documentation.
+                chunk_size=raw.get("chunk_size", 30000),
                 focus_areas=raw.get("focus_areas", "key_findings_and_results"),
                 max_summary_length=raw.get("max_summary_length", 3000),
                 composer_timeout_sec=raw.get("composer_timeout_sec", 300),
@@ -1022,7 +1023,9 @@ class HookManager:
         if hook_type == "SummarizationHook":
             defaults = {
                 "composer_tool": "OutputSummarizationComposer",
-                "chunk_size": hook_type_defaults.get("default_chunk_size", 2000),
+                # Default chunk_size is intentionally large; chunk_size controls
+                # chunking, not whether summarization is needed.
+                "chunk_size": hook_type_defaults.get("default_chunk_size", 30000),
                 "focus_areas": hook_type_defaults.get(
                     "default_focus_areas", "key_findings_and_results"
                 ),
