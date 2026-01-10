@@ -1,5 +1,37 @@
 [
   {
+    "type": "HPASearchTool",
+    "name": "HPA_generic_search",
+    "description": "Generic search tool for Human Protein Atlas. Allows custom search queries and retrieval of specific columns.",
+    "fields": {
+      "endpoint": "https://www.proteinatlas.org/api/search_download.php",
+      "timeout": 30,
+      "format": "json"
+    },
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search_query": {
+          "type": "string",
+          "description": "Search term for the query"
+        },
+        "columns": {
+          "type": "string",
+          "description": "Comma-separated list of columns to retrieve. Defaults to 'g,gs,gd'. Common options: 'g' (Gene), 'gs' (Synonym), 'e' (Ensembl), 'u' (UniProt), 'pe' (Protein existence), 's' (Subcellular location), 'scml' (Main location), 'scal' (Addl location), 'rnat' (RNA tissue specificity), 'rnatsm' (RNA tissue nTPM), 'rnablm' (RNA blood nTPM), 'rnascm' (RNA single cell nTPM)."
+        },
+        "format": {
+          "type": "string",
+          "description": "Response format (json or tsv). Defaults to 'json'."
+        }
+      },
+      "required": [
+        "search_query"
+      ]
+    },
+    "input_description": "Input a search query and optional columns/format.",
+    "output_description": "Returns a list of matching entries from the Human Protein Atlas."
+  },
+  {
     "type": "HPASearchGenesTool",
     "name": "HPA_search_genes_by_query",
     "description": "Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. This is the entry tool for many HPA query workflows.",

@@ -130,6 +130,86 @@ class HPAXmlApiTool(BaseTool):
             raise Exception(f"Failed to parse HPA XML response: {str(e)}")
 
 
+@register_tool("HPASearchTool")
+class HPASearchTool(HPASearchApiTool):
+    """
+    Generic search tool for Human Protein Atlas.
+
+    This tool allows custom search queries and retrieval of specific columns from the
+    Human Protein Atlas API. It provides more flexibility than the specialized tools
+    by allowing direct access to the search API with custom parameters.
+
+    Args:
+        search_query (str): The search term to query for (e.g., gene name, description).
+        columns (str, optional): Comma-separated list of columns to retrieve.
+            Defaults to "g,gs,gd" (Gene, Gene synonym, Gene description).
+
+            Available columns and their specifiers:
+            - g: Gene name
+            - gs: Gene synonym
+            - gd: Gene description
+            - e: Ensembl ID
+            - u: UniProt ID
+            - en: Enhanced
+            - pe: Protein existence
+            - r: Reliability
+            - p: Pathology
+            - c: Cancer
+            - pt: Protein tissue
+            - ptm: Predicted Transmembrane
+            - s: Subcellular location
+            - scml: Subcellular main location
+            - scal: Subcellular additional location
+            - rnat: RNA tissue specificity
+            - rnats: RNA tissue specific score
+            - rnatsm: RNA tissue specific nTPM
+            - rnablm: RNA blood lineage specific nTPM
+            - rnabrm: RNA brain region specific nTPM
+            - rnascm: RNA single cell type specific nTPM
+
+            See HPA API documentation for the full list of over 40 available columns.
+
+        format (str, optional): Response format, "json" or "tsv". Defaults to "json".
+
+    Returns:
+        dict: A dictionary containing the search results.
+            If successful, returns the API response (list of entries).
+            If failed, returns a dictionary with an "error" key.
+
+    Example:
+        >>> tool = HPASearchTool()
+        >>> result = tool.run({
+        ...     "search_query": "p53",
+        ...     "columns": "g,gs,scml,rnat",
+        ...     "format": "json"
+        ... })
+        >>> print(result[0]["Gene"])
+        TP53
+    """
+
+    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Execute the search tool.
+
+        Args:
+            arguments (Dict[str, Any]): Dictionary containing:
+                - search_query (str): The term to search for.
+                - columns (str, optional): Columns to retrieve.
+                - format (str, optional): Response format.
+
+        Returns:
+            Dict[str, Any]: Search results or error message.
+        """
+        search_query = arguments.get("search_query")
+        columns = arguments.get("columns", "g,gs,gd")
+        format_type = arguments.get("format", "json")
+
+        if not search_query:
+            return {"error": "Parameter 'search_query' is required"}
+
+        return self._make_api_request(search_query, columns, format_type)
+
+
 # --- New Enhanced Tools Based on Your Optimization Plan ---
 
 

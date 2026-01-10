@@ -372,6 +372,18 @@ comprehensive_test_queries = [
         "biological_context": "Should provide example of correct format",
         "expected_output": "Error with tissue name examples",
     },
+    # === GENERIC SEARCH TOOL ===
+    {
+        "name": "HPA_generic_search",
+        "arguments": {
+            "search_query": "Insulin",
+            "columns": "g,gs,gd",
+            "format": "json"
+        },
+        "description": "Generic search for Insulin using the new HPASearchTool",
+        "biological_context": "Testing the generic search capability for a well-known protein",
+        "expected_output": "List of entries matching 'Insulin' with specified columns",
+    },
 ]
 
 # Execute all test cases with detailed output
@@ -623,3 +635,4 @@ print("🔍 Results include functional interpretation")
 print("⚡ Both original and optimized tools available")
 print("🛡️ Error handling demonstrates robustness")
 print("\n" + "=" * 80)
+

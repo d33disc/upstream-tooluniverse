@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 783 scientific tools.
+Type-safe Python interface to 781 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -498,6 +498,7 @@ from .GTEx_query_eqtl import GTEx_query_eqtl
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
 from .GtoPdb_get_targets import GtoPdb_get_targets
 from .HAL_search_archive import HAL_search_archive
+from .HPA_generic_search import HPA_generic_search
 from .HPA_get_biological_processes_by_gene import HPA_get_biological_processes_by_gene
 from .HPA_get_cancer_prognostics_by_gene import HPA_get_cancer_prognostics_by_gene
 from .HPA_get_comparative_expression_by_gene_and_cellline import (
@@ -1189,7 +1190,6 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
-from .ghost_tool import ghost_tool
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .grep_tools import grep_tools
 from .gwas_get_association_by_id import gwas_get_association_by_id
@@ -1239,8 +1239,6 @@ from .python_script_runner import python_script_runner
 from .reactome_disease_target_score import reactome_disease_target_score
 from .search_clinical_trials import search_clinical_trials
 from .snomed_search_concepts import snomed_search_concepts
-from .test_decorator_tool import test_decorator_tool
-from .test_server_tool import test_server_tool
 from .umls_get_concept_details import umls_get_concept_details
 from .umls_search_concepts import umls_search_concepts
 from .visualize_molecule_2d import visualize_molecule_2d
@@ -1499,6 +1497,7 @@ __all__ = [
     "GWAS_search_associations_by_gene",
     "GtoPdb_get_targets",
     "HAL_search_archive",
+    "HPA_generic_search",
     "HPA_get_biological_processes_by_gene",
     "HPA_get_cancer_prognostics_by_gene",
     "HPA_get_comparative_expression_by_gene_and_cellline",
@@ -1980,7 +1979,6 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
-    "ghost_tool",
     "gnomad_get_gene_constraints",
     "grep_tools",
     "gwas_get_association_by_id",
@@ -2026,8 +2024,6 @@ __all__ = [
     "reactome_disease_target_score",
     "search_clinical_trials",
     "snomed_search_concepts",
-    "test_decorator_tool",
-    "test_server_tool",
     "umls_get_concept_details",
     "umls_search_concepts",
     "visualize_molecule_2d",
