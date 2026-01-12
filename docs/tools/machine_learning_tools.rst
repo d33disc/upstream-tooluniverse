@@ -3,7 +3,7 @@ Machine Learning Tools
 
 **Configuration File**: ``packages/machine_learning_tools.json``
 **Tool Type**: Local
-**Tools Count**: 21
+**Tools Count**: 20
 
 This page contains all tools defined in the ``machine_learning_tools.json`` configuration file.
 

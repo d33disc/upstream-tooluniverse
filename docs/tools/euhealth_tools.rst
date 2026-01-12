@@ -1,253 +1,1034 @@
-EUHealth tools: find and explore EU public-health datasets
-=========================================================
+Euhealth Tools
+==============
 
-Use these tools to:
+**Configuration File**: ``euhealth_tools.json``
+**Tool Type**: Local
+**Tools Count**: 21
 
-* **Search** public EU health datasets by topic (e.g., cancer, vaccination, obesity, mental health…)
-* **Deep-dive** a dataset’s landing page to surface useful outgoing links (download portals, etc.)
+This page contains all tools defined in the ``euhealth_tools.json`` configuration file.
 
-You do **not** need to understand embeddings or FAISS. Everything is handled automatically.
-All you need is a Hugging Face token (for downloading or uploading); ToolUniverse handles embedding models, caching, and FAISS indexing under the hood.
+Available Tools
+---------------
 
-The tools read from a local library (a small database + index)::
+**euhealthinfo_deepdive** (Type: EuHealthDeepDiveTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<user_cache_dir>/embeddings/euhealth.db
-<user_cache_dir>/embeddings/euhealth.faiss
+This tool identifies and retrieves relevant links related to publicly accessible datasets and inf...
 
-Most users will never open these files — the tools use them behind the scenes.
+.. dropdown:: euhealthinfo_deepdive tool specification
 
-.. note::
+   **Tool Information:**
 
-   All search methods (``keyword``, ``embedding``, ``hybrid``) always work.  
-   If your environment does not support vector search,
-   the tools automatically fall back to ``keyword`` with a helpful message.  
-   You will still get correct results.
+   * **Name**: ``euhealthinfo_deepdive``
+   * **Type**: ``EuHealthDeepDiveTool``
+   * **Description**: This tool identifies and retrieves relevant links related to publicly accessible datasets and information sources. Using metadata or topic-specific queries, it generates structured outputs of categorized links, including direct download pages, resource portals, and other associated materials. When metadata is unavailable or incomplete, the tool dynamically navigates query results to provide actionable outputs. It also classifies links by type and provides additional contextual details, ensuring users can access pertinent resources for their informational needs.
 
----
+   **Parameters:**
 
-Quick start (recommended): use the prebuilt library
----------------------------------------------------
+   * ``uuids`` (array) (optional)
+     Dataset UUIDs to deep-dive (format 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'). If provided, the tool inspects exactly these datasets.
 
-1. **Get a Hugging Face token** (free account).
-   Copy it once (Settings → Access Tokens).
+   * ``topic`` (string) (optional)
+     Topic name to resolve seeds from (e.g., 'euhealthinfo_search_cancer'). Used when 'uuids' are not provided.
 
-2. **Download the ready-to-use EUHealth library:**
+   * ``limit`` (integer) (optional)
+     Maximum number of datasets to resolve when using 'topic'. Default 10.
 
-.. code-block:: bash
+   * ``links_per`` (integer) (optional)
+     Maximum number of outgoing links to classify per dataset. Default 3.
 
-# download from your own or any public Hugging Face repo
+   * ``country`` (string) (optional)
+     Country filter applied when resolving seeds from 'topic'. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
 
-export HF_TOKEN=YOUR_HF_TOKEN
-tu-datastore sync-hf download --repo "agenticx/tooluniverse-datastores" --collection euhealth --overwrite
+   * ``language`` (string) (optional)
+     Language filter applied when resolving seeds from 'topic'. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
 
-That’s it — the files land in `<user_cache_dir>/embeddings/` and the tools will now work with the ToolUniverse agent.
+   * ``term_override`` (string) (optional)
+     Overrides the default topic seed terms with a custom query string when using 'topic'.
 
-Don’t have a token or prefer not to make an account?
-Skip to “Build it yourself” below.
+   * ``method`` (string) (optional)
+     Search strategy used when resolving from topic (ignored if 'uuids' are given).
 
-Tip:
-If you previously uploaded your own copy of the EUHealth datastore (`tu-datastore sync-hf upload --collection euhealth`),
-it lives at `huggingface.co/<your_username>/euhealth`.
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid'.
 
----
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
 
-Use it
-------
+   **Example Usage:**
 
-With ToolUniverse
------------------
+   .. code-block:: python
 
-In codex, just talk to your agent in plain English. Examples:
+      query = {
+          "name": "euhealthinfo_deepdive",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
 
-* “**Find cancer datasets for Germany**.”
-  → The agent may use the *euhealth cancer search* tool and returns a list.
 
-* “**Show vaccination datasets in English using euhealth vaccination tools.**.”
-  → The agent can call the vaccination topic tool with a language filter.
+**euhealthinfo_search_alcohol_tobacco_psychoactive_use** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* “**Deep-dive the first 3 results and give me the best download links**.”
-  → The agent calls the deep-dive tool to classify links from each dataset’s landing page (e.g., `html_portal`, `login_or_error`, etc.).
+This tool provides centralized access to datasets focused on substance usage, including alcohol, ...
 
-Behind the scenes, the agent uses the tools defined in
-`src/tooluniverse/data/euhealth_tools.json`
-(20 topics are pre-wired; you don’t have to touch this).
+.. dropdown:: euhealthinfo_search_alcohol_tobacco_psychoactive_use tool specification
 
-**OR**
+   **Tool Information:**
 
-Non-agent use
--------------
+   * **Name**: ``euhealthinfo_search_alcohol_tobacco_psychoactive_use``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool provides centralized access to datasets focused on substance usage, including alcohol, tobacco, vaping, and psychoactive substances. It enables users to investigate behavioral trends, societal perceptions, and related impacts by retrieving both metadata and dataset links, offering a streamlined gateway to resources for population-level analysis and study of substance-use patterns. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
 
-If you want to sanity-check from Terminal (no coding):
+   **Parameters:**
 
-.. code-block:: bash
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
 
-# Keyword search (works without any API keys)
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
 
-tu-datastore search --collection euhealth --query cancer --method keyword --top-k 5
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
 
-You should see a few JSON results (uuid, title, landing_page, etc.).
-(Inside the agent you’ll get nicely formatted results. This is just a quick check.)
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search alcohol/tobacco psychoactive use'.
 
-**That's it!!**
----
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
 
-Advanced:
----------
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
 
-Build it yourself (only if you can’t use the prebuilt)
-------------------------------------------------------
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
 
-If you can’t download from Hugging Face, you can build locally. You’ll need any one of:
+   **Example Usage:**
 
-* **OpenAI** (simplest): `OPENAI_API_KEY`, `EMBED_PROVIDER=openai`, `EMBED_MODEL=text-embedding-3-small`
-* **Azure OpenAI**: `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT`, `OPENAI_API_VERSION`
-* **Hugging Face**: `HF_TOKEN`, `EMBED_PROVIDER=huggingface`, `EMBED_MODEL=sentence-transformers/all-MiniLM-L6-v2`
+   .. code-block:: python
 
-Then run:
+      query = {
+          "name": "euhealthinfo_search_alcohol_tobacco_psychoactive_use",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
 
-.. code-block:: bash
 
-# pick one provider, for example OpenAI:
+**euhealthinfo_search_births** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export EMBED_PROVIDER=openai
-export EMBED_MODEL=text-embedding-3-small
-export OPENAI_API_KEY=YOUR_KEY
+This tool identifies and retrieves data related to fertility, birth trends, and perinatal indicat...
 
-# build (crawl the portal, normalize, embed, index)
+.. dropdown:: euhealthinfo_search_births tool specification
 
-python -m tooluniverse.euhealth.euhealth_live
+   **Tool Information:**
 
-This writes the same two files to `<user_cache_dir>/embeddings/`.
-Re-running is safe; it adds new items and skips duplicates.
+   * **Name**: ``euhealthinfo_search_births``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool identifies and retrieves data related to fertility, birth trends, and perinatal indicators for use in structured analysis. It generates metadata or summary outputs designed for comparisons across geographical regions or countries, providing a foundation for statistical or demographic exploration. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
 
-.. note::
+   **Parameters:**
 
-   A self-built datastore is treated as a **custom build**, so the tools will
-   **honor embedding/hybrid directly** with whichever provider/model you used.
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
 
----
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
 
-Optional (for understanding):
------------------------------
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
 
-How search methods are chosen
------------------------------------
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'births'.
 
-The public tools accept ``method="keyword"|"embedding"|"hybrid"`` (default ``"hybrid"``).
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
 
-The EUHealth library downloaded from Hugging Face is built using:
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
 
-**Azure OpenAI + text-embedding-3-small**
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
 
-To keep everything working smoothly:
+   **Example Usage:**
 
-1. **If your environment resolves to Azure + text-embedding-3-small**  
-   (e.g., you set::
+   .. code-block:: python
 
-       export EMBED_PROVIDER=azure
-       export EMBED_MODEL=text-embedding-3-small
-       export AZURE_OPENAI_API_KEY=...
-       export AZURE_OPENAI_ENDPOINT=...
+      query = {
+          "name": "euhealthinfo_search_births",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
 
-   )  
-   → the tools perform **true vector search** (embedding or hybrid).
 
-2. **Otherwise**  
-   → ToolUniverse **automatically falls back to keyword search** so everything keeps working.
+**euhealthinfo_search_cancer** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   You will see a message like:
+This tool provides a curated list of datasets and resources relevant to cancer-related topics, in...
 
-   ``Requested 'embedding' is not available without Azure + text-embedding-3-small. Falling back to 'keyword'.``
+.. dropdown:: euhealthinfo_search_cancer tool specification
 
-3. **If you build the EUHealth library yourself**  
-   using any provider/model (OpenAI, Azure, HuggingFace, local),  
-   the requested method is **always honored with no fallback**.
+   **Tool Information:**
 
-This design ensures the **prebuilt library “just works” everywhere**,  
-while advanced users can opt-in to embedding search.
+   * **Name**: ``euhealthinfo_search_cancer``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool provides a curated list of datasets and resources relevant to cancer-related topics, including detailed information on incidence, prevalence, survival rates, screening, and tumor registries. It analyzes data from a cached database and presents structured output featuring dataset summaries, metadata, identifiers, and other relevant attributes for users to explore cancer-related data across various contexts and regions. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
 
-What each tool returns
-----------------------
+   **Parameters:**
 
-**Topic search tools** (e.g., cancer, vaccination, mental health) return a list of:
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
 
-.. code-block:: json
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
 
-   {
-     "uuid": "…",
-     "title": "…",
-     "landing_page": "https://…",
-     "license": "…",
-     "keywords": ["…"],
-     "themes": ["…"],
-     "language": ["…"],
-     "spatial": "…",
-     "snippet": "first ~280 chars of text"
-   }
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
 
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'cancer'
 
-**Deep-dive tool** (for selected datasets) returns:
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
 
-.. code-block:: json
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
 
-   {
-     "uuid": "…",
-     "title": "…",
-     "landing_page": "…",
-     "candidates": [
-       {
-         "url": "…",
-         "classification": "html_portal | login_or_error | error",
-         "http_status": 200,
-         "content_type": "text/html",
-         "notes": "…"
-       }
-     ]
-   }
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
 
----
+   **Example Usage:**
 
-Common questions
--------------------
+   .. code-block:: python
 
-* **Do I need to configure anything in code?**
-  No, the tools are already registered. If the library exists in `<user_cache_dir>/embeddings/`, you can just ask the agent.
+      query = {
+          "name": "euhealthinfo_search_cancer",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
 
-* **Can I filter by country/language?**
-  Yes, just say ask for it in your query (“Germany”, “DE”, “English”, “en”). The tools accept both plain names and codes.
 
-* **What if some links say `login_or_error`?**
-  Some portals require accounts or block automated requests. The tool still shows you what’s there.
+**euhealthinfo_search_cancer_registry** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* **My agent says the EUHealth library isn’t found.**
-  Make sure the files exist at::
+This tool identifies and retrieves datasets containing cancer-related statistical information. It...
 
-  <user_cache_dir>/embeddings/euhealth.db
-  <user_cache_dir>/embeddings/euhealth.faiss
+.. dropdown:: euhealthinfo_search_cancer_registry tool specification
 
-  If not, use the **Quick start** download or the **Build it yourself** step.
+   **Tool Information:**
 
-* **Why did embedding fall back to keyword?**  
-Because the shared library requires Azure + text-embedding-3-small.  
-If you don’t configure that, the system safely uses keyword.
+   * **Name**: ``euhealthinfo_search_cancer_registry``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool identifies and retrieves datasets containing cancer-related statistical information. It is designed to assist users in exploring resources about cancer incidence, prevalence, mortality, and survival across various geographic, linguistic, and thematic contexts. The tool provides links to relevant datasets and accompanying metadata to support further examination and utilization. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
 
-* **Where does my data upload now?**
-  When you run `tu-datastore sync-hf upload --collection euhealth`, ToolUniverse automatically detects your `HF_TOKEN` and uploads to **your own Hugging Face namespace** (`your_username/euhealth`).
-  The `--repo` flag is optional; if omitted, it defaults to `<your_username>/<collection>`.
+   **Parameters:**
 
----
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
 
-You’re set
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'cancer registry'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_cancer_registry",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_causes_of_death** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool enables users to search and retrieve datasets that provide insights into cause-specific...
+
+.. dropdown:: euhealthinfo_search_causes_of_death tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_causes_of_death``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool enables users to search and retrieve datasets that provide insights into cause-specific mortality data. It generates outputs that may include summaries of mortality trends, metadata, and links to external resources, helping users analyze patterns in public health data across different regions and countries. The tool is designed to support exploration of mortality-related information organized by standardized categorizations while maintaining regional or national specificity in its outputs. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'causes of death'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_causes_of_death",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_covid_19** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool facilitates the discovery of datasets and resources relevant to COVID-19 or SARS-CoV-2....
+
+.. dropdown:: euhealthinfo_search_covid_19 tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_covid_19``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool facilitates the discovery of datasets and resources relevant to COVID-19 or SARS-CoV-2. It enables users to efficiently locate information across diverse topics, such as vaccination, hospitalization, seroprevalence, and wastewater monitoring, and provides access to associated data sources or portals for further exploration. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'covid-19'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_covid_19",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_deaths** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool facilitates the exploration and analysis of datasets related to mortality metrics, enab...
+
+.. dropdown:: euhealthinfo_search_deaths tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_deaths``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool facilitates the exploration and analysis of datasets related to mortality metrics, enabling users to examine trends and comparisons across various geographic regions. It is designed to retrieve relevant datasets based on user queries, assisting in identifying patterns and addressing key questions about mortality outcomes. The tool functions consistently to provide structured outputs relevant to the requested queries. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'death'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_deaths",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_diabetes_mellitus_epidemiology_registry** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool is designed to search and retrieve datasets related to epidemiological and registry-bas...
+
+.. dropdown:: euhealthinfo_search_diabetes_mellitus_epidemiology_registry tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_diabetes_mellitus_epidemiology_registry``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool is designed to search and retrieve datasets related to epidemiological and registry-based health data, focusing on diabetes and associated conditions. Users can conduct searches to identify datasets covering prevalence, incidence, and other metrics across varying geographic regions and demographic groups. The tool returns structured datasets enriched with metadata and may provide links to external data sources or downloadable files. It is specialized for accessing curated, health-related information within its defined dataset scope and supports exploration across diverse topics within the diabetes domain. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search diabetes mellitus epidemiology registry'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_diabetes_mellitus_epidemiology_registry",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_disability** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool performs searches across multiple dataset repositories to identify datasets related to ...
+
+.. dropdown:: euhealthinfo_search_disability tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_disability``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool performs searches across multiple dataset repositories to identify datasets related to disabilities, accessibility, functional limitations, and quality of care. It provides links to accessible datasets when available and flags areas requiring further investigation when specific datasets cannot be directly retrieved. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search disability'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_disability",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_healthcare_expenditure** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool enables the discovery of healthcare-related datasets focusing on expenditure and spendi...
+
+.. dropdown:: euhealthinfo_search_healthcare_expenditure tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_healthcare_expenditure``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool enables the discovery of healthcare-related datasets focusing on expenditure and spending trends. It is designed to support users in identifying relevant datasets for comparative analysis across countries or national contexts and provides outputs that indicate dataset availability or absence for specified criteria. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'healthcare expenditure'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_healthcare_expenditure",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_hospital_in_patient_data** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool is designed to retrieve and explore datasets related to hospital inpatient activity, in...
+
+.. dropdown:: euhealthinfo_search_hospital_in_patient_data tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_hospital_in_patient_data``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool is designed to retrieve and explore datasets related to hospital inpatient activity, including admissions, discharges, diagnoses, and medical procedures. It aims to provide users with a curated subset of information to identify patterns and trends in inpatient healthcare and enable exploration of broader healthcare contexts. The tool generates results that align with specified search criteria, offering insights into healthcare dynamics across various regions or facility types. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search hospital in patient data'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_hospital_in_patient_data",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_infectious_diseases** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool enables users to discover publicly available health-related datasets by searching and a...
+
+.. dropdown:: euhealthinfo_search_infectious_diseases tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_infectious_diseases``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool enables users to discover publicly available health-related datasets by searching and aggregating data from multiple sources. It uniquely identifies relevant datasets within areas such as epidemiology, disease statistics, and health indicators, providing detailed metadata including access information and thematic classifications. The tool is designed to facilitate exploration of health trends by consolidating resources into a cohesive output tailored to the user's search context. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search infectious diseases'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_infectious_diseases",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_key_indicators_registries_surveys** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool identifies and retrieves aggregated datasets that include high-level health indicators ...
+
+.. dropdown:: euhealthinfo_search_key_indicators_registries_surveys tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_key_indicators_registries_surveys``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool identifies and retrieves aggregated datasets that include high-level health indicators derived from various sources such as registries and surveys. It provides organized metadata and links to these datasets, enabling users to explore public health information across diverse geographic regions and topics. The tool primarily focuses on simplifying access to comprehensive health data summaries suitable for broad analysis and decision-making. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search key indicators registries surveys'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_key_indicators_registries_surveys",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_mental_health** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool identifies publicly accessible datasets pertaining to mental health topics. It retrieve...
+
+.. dropdown:: euhealthinfo_search_mental_health tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_mental_health``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool identifies publicly accessible datasets pertaining to mental health topics. It retrieves datasets from structured studies and aggregated collections, providing insights into mental health, behavioral factors, and related conditions across diverse populations. The tool generates results that align with high-level thematic criteria, enabling informed decision-making for research, policy formation, and intervention strategies. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search mental health'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_mental_health",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_obesity** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool facilitates the discovery of datasets related to health topics, specializing in areas s...
+
+.. dropdown:: euhealthinfo_search_obesity tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_obesity``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool facilitates the discovery of datasets related to health topics, specializing in areas such as obesity, overweight status, BMI, and associated risk factors. Its primary function is to enable users to locate diverse health information resources, focusing on prevalence, trends, and determinants of health conditions and behaviors. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search obesity'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_obesity",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_population_health_survey** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool allows users to identify and retrieve datasets from population health surveys conducted...
+
+.. dropdown:: euhealthinfo_search_population_health_survey tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_population_health_survey``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool allows users to identify and retrieve datasets from population health surveys conducted by international and national organizations. It assists in discovering health-related information, such as survey results and derived indicators, tailored to general thematic interests and geographic contexts. The tool produces a selection of curated survey datasets and relevant access links, offering insights into health trends and research-ready data resources. It ensures its search results are aligned with health-focused global and regional queries, with an emphasis on meaningful and actionable outputs. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search population health survey'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_population_health_survey",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_primary_care_workforce** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool is designed to conduct metadata searches for datasets related to the primary-care workf...
+
+.. dropdown:: euhealthinfo_search_primary_care_workforce tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_primary_care_workforce``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool is designed to conduct metadata searches for datasets related to the primary-care workforce. Its primary purpose is to assist users in identifying data sources that may provide insights into workforce composition and geographic distribution patterns, as well as potentially relevant topics in healthcare professions. Note that the tool requires valid inputs for successful execution and provides either metadata results or error messages indicating invalid parameters when applicable. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search primary care workforce'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_primary_care_workforce",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_surveillance** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The tool facilitates the identification and exploration of health-related datasets across diverse...
+
+.. dropdown:: euhealthinfo_search_surveillance tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_surveillance``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: The tool facilitates the identification and exploration of health-related datasets across diverse domains. It aggregates information from various sources and provides outputs that help users uncover patterns, trends, and relationships within datasets related to public health, epidemiology, and surveillance activities. It is particularly designed for broad searches and enables access to datasets focused on monitoring health issues globally or regionally. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search surveillance'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_surveillance",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_surveillance_mortality_rates** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The tool identifies and retrieves publicly available sources and systems related to mortality tre...
+
+.. dropdown:: euhealthinfo_search_surveillance_mortality_rates tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_surveillance_mortality_rates``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: The tool identifies and retrieves publicly available sources and systems related to mortality trends, with a focus on excess mortality and similar patterns. Outputs include details on relevant monitoring systems and resources that provide insights into mortality dynamics within specific geographic or thematic contexts, subject to data availability. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search surveillance mortality rates'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_surveillance_mortality_rates",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+**euhealthinfo_search_vaccination** (Type: EuHealthTopicSearchTool)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This tool enables users to discover and access datasets related to vaccination and immunization s...
+
+.. dropdown:: euhealthinfo_search_vaccination tool specification
+
+   **Tool Information:**
+
+   * **Name**: ``euhealthinfo_search_vaccination``
+   * **Type**: ``EuHealthTopicSearchTool``
+   * **Description**: This tool enables users to discover and access datasets related to vaccination and immunization statistics, including global and regional trends and coverage rates. It provides summaries of relevant datasets and facilitates access to comprehensive resources for analyzing health-related data on immunization. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.
+
+   **Parameters:**
+
+   * ``limit`` (integer) (optional)
+     Maximum number of results to return. Default 25.
+
+   * ``country`` (string) (optional)
+     Country filter. Accepts full names (e.g., 'Germany') or ISO-3166 codes ('DE', 'DEU'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``language`` (string) (optional)
+     Language filter. Accepts ISO 639-1 codes (e.g., 'en') or full names (e.g., 'English'). Case-insensitive; substring/IRI-tail matching allowed.
+
+   * ``term_override`` (string) (optional)
+     Override the default topic seed terms with a custom query string. Defaults internally to 'search vaccination'.
+
+   * ``method`` (string) (optional)
+     Search strategy: 'keyword' (text only), 'embedding' (vector), or 'hybrid' (blend).
+
+   * ``alpha`` (number) (optional)
+     Blend ratio used when method='hybrid' (0=text, 1=embedding).
+
+   * ``top_k`` (integer) (optional)
+     Number of candidate documents to retrieve before filtering.
+
+   **Example Usage:**
+
+   .. code-block:: python
+
+      query = {
+          "name": "euhealthinfo_search_vaccination",
+          "arguments": {
+          }
+      }
+      result = tu.run(query)
+
+
+Navigation
 ----------
 
-* Prefer the **Quick start** download.
-* Ask the agent normal questions (“Find cancer datasets in Germany”). Or use tu-datastore search from Terminal if you don't want to use agents.
-* Use **deep-dive** when you want the actual outgoing links.
-
-If you later want the nitty-gritty (how we crawl, embed, index), see the developer notes in:
-`src/tooluniverse/euhealth/*` and `src/tooluniverse/database_setup/*`.
-
-.. note::
-
-Want to build or share your **own** searchable dataset or tool (like EUHealth)?
-See: `docs/tutorials/make_your_data_agent_searchable.rst`: the 3-minute guide to creating and publishing your own ToolUniverse datastore.
+* :doc:`tools_config_index` - Back to Tools Overview
+* :doc:`../guide/loading_tools` - Loading Local Tools
