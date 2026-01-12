@@ -51,7 +51,7 @@ jobs:
         uses: astral-sh/ruff-action@v3
         with:
           version: "latest"
-        run: ruff check
+
 
       - name: Generate SDK
         run: python scripts/build_tools.py
