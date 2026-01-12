@@ -18,14 +18,17 @@ def _require_online_env_or_fail():
         return prov, model
     if prov == "openai":
         assert os.getenv("OPENAI_API_KEY"), "Missing OPENAI_API_KEY"
-        model = os.getenv("EMBED_MODEL"); assert model, "Set EMBED_MODEL"
+        model = os.getenv("EMBED_MODEL")
+        assert model, "Set EMBED_MODEL"
         return prov, model
     if prov == "huggingface":
         assert os.getenv("HF_TOKEN"), "Missing HF_TOKEN"
-        model = os.getenv("EMBED_MODEL"); assert model, "Set EMBED_MODEL"
+        model = os.getenv("EMBED_MODEL")
+        assert model, "Set EMBED_MODEL"
         return prov, model
     # local
-    model = os.getenv("EMBED_MODEL"); assert model, "Set EMBED_MODEL for local"
+    model = os.getenv("EMBED_MODEL")
+    assert model, "Set EMBED_MODEL for local"
     return prov, model
 
 @pytest.mark.api

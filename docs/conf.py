@@ -32,7 +32,18 @@ extensions = [
 ]
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = [
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+    "old_files",
+    "tutorials/addtools",
+    "tutorials/aiscientists",
+    "translation_tools",
+    "tutorials/overview.md",
+    "tutorials/optimization",
+    "guide/ODPHPtools_tutorial.md",
+]
 
 # -- Options for HTML output with Shibuya theme -----------------------------
 html_theme = "shibuya"

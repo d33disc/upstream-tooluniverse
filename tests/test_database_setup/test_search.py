@@ -30,7 +30,8 @@ def test_search_engine_embedding(tmp_path):
     store.insert_docs("demo", docs)
 
     rows = store.fetch_docs("demo")
-    ids = [r["id"] for r in rows]; texts = [r["text"] for r in rows]
+    ids = [r["id"] for r in rows]
+    texts = [r["text"] for r in rows]
     emb = Embedder(provider=provider, model=model)
     vecs = emb.embed(texts).astype("float32")
     dim = int(vecs.shape[1])
@@ -57,7 +58,8 @@ def test_search_engine_hybrid(tmp_path):
         ("uuid-2", "Diabetes prevention programs in Germany", {"topic":"dm"}, "h2"),
     ])
     rows = store.fetch_docs("demo")
-    ids = [r["id"] for r in rows]; texts = [r["text"] for r in rows]
+    ids = [r["id"] for r in rows]
+    texts = [r["text"] for r in rows]
     emb = Embedder(provider=provider, model=model)
     vecs = emb.embed(texts).astype("float32")
     dim = int(vecs.shape[1])

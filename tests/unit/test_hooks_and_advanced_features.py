@@ -168,8 +168,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
     
     def test_export_functionality_real(self):
         """Test export functionality with real ToolUniverse."""
-        import tempfile
-        import os
+
         
         # Test exporting to file
         with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as f:
@@ -191,8 +190,7 @@ class TestHooksAndAdvancedFeatures(unittest.TestCase):
     
     def test_env_template_generation_real(self):
         """Test environment template generation with real ToolUniverse."""
-        import tempfile
-        import os
+
         
         # Test with some missing keys
         missing_keys = ["API_KEY_1", "API_KEY_2"]

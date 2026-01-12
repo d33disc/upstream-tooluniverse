@@ -212,8 +212,7 @@ class TestToolExecution:
 
     def test_tool_export_real(self):
         """Test real tool export functionality."""
-        import tempfile
-        import os
+
         
         # Test exporting to file
         with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as f:
@@ -235,8 +234,7 @@ class TestToolExecution:
 
     def test_tool_env_template_real(self):
         """Test real environment template generation."""
-        import tempfile
-        import os
+
         
         # Test with some missing keys
         missing_keys = ["API_KEY_1", "API_KEY_2"]
@@ -521,7 +519,7 @@ class TestToolComposition:
 
     def test_compose_tool_performance_real(self):
         """Test real performance characteristics of compose tools."""
-        import time
+
         
         # Test execution time
         start_time = time.time()
@@ -597,8 +595,7 @@ class TestToolConcurrency:
 
     def test_tool_concurrent_execution_real(self):
         """Test real concurrent tool execution."""
-        import threading
-        import time
+
         
         results = []
         
@@ -627,7 +624,7 @@ class TestToolConcurrency:
 
     def test_tool_memory_management_real(self):
         """Test real memory management."""
-        import gc
+
         
         # Test multiple calls to ensure no memory leaks
         initial_objects = len(gc.get_objects())
@@ -653,7 +650,7 @@ class TestToolConcurrency:
 
     def test_tool_performance_real(self):
         """Test real tool performance."""
-        import time
+
         
         # Test execution time
         start_time = time.time()

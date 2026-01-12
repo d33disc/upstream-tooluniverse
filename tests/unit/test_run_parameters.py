@@ -61,7 +61,7 @@ class TestRunParameterPassing:
         
         # Call with all parameters
         callback = Mock()
-        result = self.tu.run_one_function(
+        _ = self.tu.run_one_function(
             {"name": "test_tool", "arguments": {"test_param": "value"}},
             stream_callback=callback,
             use_cache=True,
@@ -326,7 +326,7 @@ class TestDynamicAPIParameterPassing:
         
         # Call through dynamic API
         callback = Mock()
-        result = self.tu.tools.dynamic_test(
+        _ = self.tu.tools.dynamic_test(
             stream_callback=callback,
             use_cache=True,
             validate=False

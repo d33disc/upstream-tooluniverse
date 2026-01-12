@@ -8,8 +8,10 @@ Architecture
 
 Understanding the internal architecture of ToolUniverse helps you build better tools and integrate more effectively with the system.
 
-**I want to understand the overall architecture:**
-→ :doc:`architecture` - System architecture and design patterns
+.. toctree::
+   :maxdepth: 1
+
+   architecture
 
 **I want to compare tool types:**
 → Review the tool type comparison table in :doc:`../contributing/index`

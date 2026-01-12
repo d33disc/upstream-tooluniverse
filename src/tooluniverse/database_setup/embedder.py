@@ -124,7 +124,7 @@ class Embedder:
                         )
                         all_vectors.extend([d.embedding for d in resp.data])
                         break
-                    except Exception as e:
+                    except Exception:
                         retries += 1
                         if retries > self.max_retries:
                             raise
@@ -138,11 +138,11 @@ class Embedder:
                         try:
                             resp = self.client.embeddings.create(
                                 model=self.model,  # deployment name
-                                input=text,       # SINGLE STRING ONLY
+                                input=text,  # SINGLE STRING ONLY
                             )
                             all_vectors.append(resp.data[0].embedding)
                             break
-                        except Exception as e:
+                        except Exception:
                             retries += 1
                             if retries > self.max_retries:
                                 raise
@@ -165,6 +165,7 @@ class Embedder:
                 raise ValueError(f"Unsupported provider: {self.provider}")
 
         return np.array(all_vectors, dtype="float32")
+
 
 if __name__ == "__main__":
     store = SQLiteStore("embeddings.db")

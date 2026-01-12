@@ -168,7 +168,7 @@ class TestToolUniverseExamplesValidation:
             # Test that the example file can be imported and executed
             spec = importlib.util.spec_from_file_location("uniprot_example", example_file)
             if spec and spec.loader:
-                module = importlib.util.module_from_spec(spec)
+                _ = importlib.util.module_from_spec(spec)
                 # Don't actually execute the module to avoid side effects
                 assert spec is not None
 
@@ -179,7 +179,7 @@ class TestToolUniverseExamplesValidation:
             # Test that the example file can be imported
             spec = importlib.util.spec_from_file_location("tool_finder_example", example_file)
             if spec and spec.loader:
-                module = importlib.util.module_from_spec(spec)
+                _ = importlib.util.module_from_spec(spec)
                 assert spec is not None
 
     def test_mcp_server_example(self):
@@ -189,7 +189,7 @@ class TestToolUniverseExamplesValidation:
             # Test that the example file can be imported
             spec = importlib.util.spec_from_file_location("mcp_server_example", example_file)
             if spec and spec.loader:
-                module = importlib.util.module_from_spec(spec)
+                _ = importlib.util.module_from_spec(spec)
                 assert spec is not None
 
     def test_literature_search_example(self):
@@ -199,7 +199,7 @@ class TestToolUniverseExamplesValidation:
             # Test that the example file can be imported
             spec = importlib.util.spec_from_file_location("literature_search_example", example_file)
             if spec and spec.loader:
-                module = importlib.util.module_from_spec(spec)
+                _ = importlib.util.module_from_spec(spec)
                 assert spec is not None
 
     def test_quickstart_tutorial_code_snippets(self):
@@ -486,7 +486,7 @@ class TestToolUniverseExamplesValidation:
                 
             except SyntaxError as e:
                 pytest.fail(f"Syntax error in {py_file}: {e}")
-            except Exception as e:
+            except Exception:
                 # Other errors (like import errors) are acceptable for examples
                 # that require specific setup or API keys
                 pass
@@ -534,10 +534,10 @@ class TestToolUniverseExamplesValidation:
                     # Try to import the module
                     spec = importlib.util.spec_from_file_location("example", file_path)
                     if spec and spec.loader:
-                        module = importlib.util.module_from_spec(spec)
+                        _ = importlib.util.module_from_spec(spec)
                         # Don't actually load to avoid side effects
                         assert spec is not None
-                except ImportError as e:
+                except ImportError:
                     # Import errors are acceptable for examples that require
                     # specific setup or API keys
                     pass

@@ -282,7 +282,7 @@ class TestAgenticToolEnvironmentVariables:
         }
         
         with patch.object(AgenticTool, '_try_initialize_api'):
-            tool = AgenticTool(tool_config)
+            _ = AgenticTool(tool_config)
             
             # Verify the VLLM server URL was correctly read
             # This is tested indirectly through the VLLM client initialization

@@ -79,8 +79,10 @@ class TestErrorHandlingAndRecovery:
             # Should be the same error
             assert health1["details"]["PersistentTool"] == health2["details"]["PersistentTool"]
         finally:
-            if 'tu1' in locals(): tu1.close()
-            if 'tu2' in locals(): tu2.close()
+            if 'tu1' in locals():
+                tu1.close()
+            if 'tu2' in locals():
+                tu2.close()
 
     def test_error_clearing_and_recovery(self):
         """Test clearing errors and system recovery."""
@@ -105,7 +107,8 @@ class TestErrorHandlingAndRecovery:
             health = tu.get_tool_health()
             assert health["unavailable"] == 0
         finally:
-            if 'tu' in locals(): tu.close()
+            if 'tu' in locals():
+                tu.close()
 
     def test_partial_error_recovery(self):
         """Test recovering from some errors while keeping others."""

@@ -9,6 +9,8 @@ About ToolUniverse
    contributing
    deployment
    license
+   changelog
+   faq
 
 📋 Project Information
 -----------------------

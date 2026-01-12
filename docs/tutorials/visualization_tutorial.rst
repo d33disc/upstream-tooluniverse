@@ -83,7 +83,7 @@ Generate 2D molecular structure images.
 - ``output_format``: "png" or "svg" (default: "png")
 
 3. Molecule 3D Visualization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Tool:** ``visualize_molecule_3d``
 
@@ -171,6 +171,7 @@ Troubleshooting
 
 1. **Missing dependencies:**
    .. code-block:: bash
+
        pip install py3Dmol rdkit
 
 2. **Invalid SMILES:**

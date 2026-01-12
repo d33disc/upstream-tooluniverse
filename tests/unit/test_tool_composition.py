@@ -285,7 +285,7 @@ class TestToolComposition(unittest.TestCase):
         
         for i, tool_name in enumerate(test_tools):
             try:
-                result = self.tu.run({
+                _ = self.tu.run({
                     "name": tool_name,
                     "arguments": {"accession": "P05067"} if "UniProt" in tool_name else {"query": "test", "limit": 5}
                 })
@@ -335,17 +335,17 @@ class TestToolComposition(unittest.TestCase):
         for api in external_apis:
             try:
                 if "OpenTargets" in api:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": api,
                         "arguments": {"efoId": "EFO_0000305"}
                     })
                 elif "UniProt" in api:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": api,
                         "arguments": {"accession": "P05067"}
                     })
                 else:  # ArXiv
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": api,
                         "arguments": {"query": "test", "limit": 5}
                     })
@@ -368,17 +368,17 @@ class TestToolComposition(unittest.TestCase):
         for i, tool_name in enumerate(test_tools):
             try:
                 if "UniProt" in tool_name:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": tool_name,
                         "arguments": {"accession": "P05067"}
                     })
                 elif "ArXiv" in tool_name:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": tool_name,
                         "arguments": {"query": "test", "limit": 5}
                     })
                 else:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": tool_name,
                         "arguments": {"test": "data"}
                     })

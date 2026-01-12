@@ -191,4 +191,4 @@ class TestSpaceSchema:
         assert SPACE_SCHEMA['properties']['version']['default'] == '1.0.0'
         assert SPACE_SCHEMA['properties']['tags']['default'] == []
         assert SPACE_SCHEMA['properties']['llm_config']['properties']['mode']['default'] == 'default'
-        assert SPACE_SCHEMA['properties']['hooks']['items']['properties']['enabled']['default'] == True
+        assert SPACE_SCHEMA['properties']['hooks']['items']['properties']['enabled']['default'] is True

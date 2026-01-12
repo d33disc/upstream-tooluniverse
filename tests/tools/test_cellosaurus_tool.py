@@ -238,7 +238,7 @@ def test_cellosaurus_tool_memory_usage(tooluni):
         # Create multiple search calls
         for i in range(5):
             try:
-                result = tooluni.run({
+                _ = tooluni.run({
                     "name": "cellosaurus_search_cell_lines",
                     "arguments": {
                         "q": f"test query {i}",

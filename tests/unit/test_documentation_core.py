@@ -618,7 +618,7 @@ class TestToolUniverseCore:
         
         # Test listing time
         start_time = time.time()
-        stats = self.tu.list_built_in_tools()
+        _ = self.tu.list_built_in_tools()
         end_time = time.time()
         
         # Should be very fast

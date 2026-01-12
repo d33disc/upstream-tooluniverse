@@ -316,7 +316,7 @@ class TestLiteratureTools:
             # Create multiple search calls
             for i in range(5):
                 try:
-                    result = tu.run({
+                    _ = tu.run({
                         "name": "ArXiv_search_papers",
                         "arguments": {
                             "query": f"test query {i}",

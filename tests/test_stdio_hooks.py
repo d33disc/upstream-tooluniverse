@@ -80,14 +80,14 @@ def run_quick_tests():
         "OutputSummarizationComposer": MagicMock()
     }
     
-    hook = SummarizationHook(
+    _ = SummarizationHook(
         config={"hook_config": {}},
         tooluniverse=mock_tu
     )
     print("✅ SummarizationHook initialization test passed")
     
     from tooluniverse.default_config import get_default_hook_config
-    hook_manager = HookManager(get_default_hook_config(), mock_tu)
+    _ = HookManager(get_default_hook_config(), mock_tu)
     print("✅ HookManager initialization test passed")
     
     return True

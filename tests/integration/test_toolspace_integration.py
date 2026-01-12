@@ -130,7 +130,7 @@ llm_config:
             # Test LLM configuration application
             tu = ToolUniverse()
             try:
-                tools = tu.load_space(f.name)
+                _ = tu.load_space(f.name)
                 
                 # Verify environment variables are set
                 assert os.environ.get('TOOLUNIVERSE_LLM_DEFAULT_PROVIDER') == 'CHATGPT'

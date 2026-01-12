@@ -61,46 +61,60 @@ def main():
     # --- HCA Tool ---
     logger.info("\n--- Human Cell Atlas (HCA) ---")
     # 1. Happy Path
-    if not run_test("HCA", "Search 'heart'", tu.tools.hca_search_projects, action="search_projects", organ="heart", limit=1): overall_success = False
+    if not run_test("HCA", "Search 'heart'", tu.tools.hca_search_projects, action="search_projects", organ="heart", limit=1):
+        overall_success = False
     # 2. Empty Search
-    if not run_test("HCA", "Search unlikely organ 'xylophone'", tu.tools.hca_search_projects, action="search_projects", organ="xylophone"): overall_success = False
+    if not run_test("HCA", "Search unlikely organ 'xylophone'", tu.tools.hca_search_projects, action="search_projects", organ="xylophone"):
+        overall_success = False
     # 3. Invalid Project ID (Get Manifest)
-    if not run_test("HCA", "Get manifest for invalid ID", tu.tools.hca_get_file_manifest, action="get_file_manifest", project_id="INVALID_UUID_123"): overall_success = False
+    if not run_test("HCA", "Get manifest for invalid ID", tu.tools.hca_get_file_manifest, action="get_file_manifest", project_id="INVALID_UUID_123"):
+        overall_success = False
 
     # --- ClinicalTrials.gov Tool ---
     logger.info("\n--- ClinicalTrials.gov ---")
     # 1. Happy Path
-    if not run_test("ClinicalTrials", "Search 'diabetes'", tu.tools.clinical_trials_search, action="search_studies", condition="diabetes", limit=1): overall_success = False
+    if not run_test("ClinicalTrials", "Search 'diabetes'", tu.tools.clinical_trials_search, action="search_studies", condition="diabetes", limit=1):
+        overall_success = False
     # 2. Empty Search
-    if not run_test("ClinicalTrials", "Search unlikely condition 'zombification'", tu.tools.clinical_trials_search, action="search_studies", condition="zombification"): overall_success = False
+    if not run_test("ClinicalTrials", "Search unlikely condition 'zombification'", tu.tools.clinical_trials_search, action="search_studies", condition="zombification"):
+        overall_success = False
     # 3. Invalid NCT ID
-    if not run_test("ClinicalTrials", "Get details for invalid NCT ID", tu.tools.clinical_trials_get_details, action="get_study_details", nct_id="NCT0000000000INVALID"): overall_success = False
+    if not run_test("ClinicalTrials", "Get details for invalid NCT ID", tu.tools.clinical_trials_get_details, action="get_study_details", nct_id="NCT0000000000INVALID"):
+        overall_success = False
 
     # --- IEDB Tool ---
     logger.info("\n--- IEDB ---")
     # 1. Happy Path
-    if not run_test("IEDB", "Search sequence 'KVF'", tu.tools.iedb_search_epitopes, action="search_epitopes", query="KVF", limit=1): overall_success = False
+    if not run_test("IEDB", "Search sequence 'KVF'", tu.tools.iedb_search_epitopes, action="search_epitopes", query="KVF", limit=1):
+        overall_success = False
     # 2. Empty Search
-    if not run_test("IEDB", "Search unlikely sequence 'XZXZXZ'", tu.tools.iedb_search_epitopes, action="search_epitopes", query="XZXZXZ"): overall_success = False
+    if not run_test("IEDB", "Search unlikely sequence 'XZXZXZ'", tu.tools.iedb_search_epitopes, action="search_epitopes", query="XZXZXZ"):
+        overall_success = False
     
     # --- Pathway Commons ---
     logger.info("\n--- Pathway Commons ---")
     # 1. Happy Path
-    if not run_test("PathwayCommons", "Search 'glycolysis'", tu.tools.pc_search_pathways, action="search_pathways", keyword="glycolysis", limit=1): overall_success = False
+    if not run_test("PathwayCommons", "Search 'glycolysis'", tu.tools.pc_search_pathways, action="search_pathways", keyword="glycolysis", limit=1):
+        overall_success = False
     # 2. Empty Search
-    if not run_test("PathwayCommons", "Search unlikely keyword 'supercalifragilistic'", tu.tools.pc_search_pathways, action="search_pathways", keyword="supercalifragilistic"): overall_success = False
+    if not run_test("PathwayCommons", "Search unlikely keyword 'supercalifragilistic'", tu.tools.pc_search_pathways, action="search_pathways", keyword="supercalifragilistic"):
+        overall_success = False
     # 3. Empty Interaction Graph (Single non-interacting gene)
     # Asking for interaction of a single gene might return empty or just the node
-    if not run_test("PathwayCommons", "Interaction graph for single unknown gene", tu.tools.pc_get_interactions, action="get_interaction_graph", gene_list=["NON_EXISTENT_GENE_123"]): overall_success = False
+    if not run_test("PathwayCommons", "Interaction graph for single unknown gene", tu.tools.pc_get_interactions, action="get_interaction_graph", gene_list=["NON_EXISTENT_GENE_123"]):
+        overall_success = False
 
     # --- BioModels ---
     logger.info("\n--- BioModels ---")
     # 1. Happy Path
-    if not run_test("BioModels", "Search 'circulation'", tu.tools.biomodels_search, action="search_models", query="circulation", limit=1): overall_success = False
+    if not run_test("BioModels", "Search 'circulation'", tu.tools.biomodels_search, action="search_models", query="circulation", limit=1):
+        overall_success = False
     # 2. Empty Search
-    if not run_test("BioModels", "Search unlikely query 'flux_capacitor_model'", tu.tools.biomodels_search, action="search_models", query="flux_capacitor_model"): overall_success = False
+    if not run_test("BioModels", "Search unlikely query 'flux_capacitor_model'", tu.tools.biomodels_search, action="search_models", query="flux_capacitor_model"):
+        overall_success = False
     # 3. Invalid Model ID
-    if not run_test("BioModels", "Get files for invalid ID", tu.tools.biomodels_get_files, action="get_model_files", model_id="INVALID_MODEL_ID"): overall_success = False
+    if not run_test("BioModels", "Get files for invalid ID", tu.tools.biomodels_get_files, action="get_model_files", model_id="INVALID_MODEL_ID"):
+        overall_success = False
 
     if overall_success:
         logger.info("\n✅ ALL INTEGRITY TESTS PASSED. Tools are stable.")

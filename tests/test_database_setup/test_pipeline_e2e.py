@@ -18,7 +18,7 @@ def test_build_search_roundtrip(tmp_path):
     provider, model = _resolve_provider_model_or_skip()
 
     # infer dimension for portability across models
-    dim = int(Embedder(provider, model).embed(["x"]).shape[1])
+    _ = int(Embedder(provider, model).embed(["x"]).shape[1])
 
     docs = [
         ("uuid-1", "Hypertension treatment guidelines", {"title": "HTN"}, "h1"),

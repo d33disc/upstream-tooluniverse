@@ -158,7 +158,7 @@ Builtin Tools
 .. toctree::
    :maxdepth: 1
 
-   Boltz Tools <boltz_tools>
+   Boltz Mcp Loader Tools <boltz_mcp_loader_tools>
 
 .. toctree::
    :maxdepth: 1
@@ -1712,7 +1712,7 @@ Tools by Type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Local Tools:*
-  * mcp_auto_loader_boltz (from :doc:`boltz_tools`)
+  * mcp_auto_loader_boltz (from :doc:`boltz_mcp_loader_tools`)
   * mcp_auto_loader_expert_feedback (from :doc:`expert_feedback_tools`)
   * mcp_auto_loader_server1 (from :doc:`mcp_client_tools_example`)
   * mcp_auto_loader_txagent (from :doc:`txagent_client_tools`)

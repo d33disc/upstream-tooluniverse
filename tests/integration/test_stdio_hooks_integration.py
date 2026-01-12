@@ -300,9 +300,9 @@ run_stdio_server()
         
         try:
             # Wait for server to start
-            start_time = time.time()
+            _ = time.time()
             time.sleep(8)
-            startup_time = time.time() - start_time
+
             
             # Initialize
             init_request = {

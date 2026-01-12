@@ -188,7 +188,7 @@ class TestCriticalErrorHandling(unittest.TestCase):
     def test_resource_cleanup(self):
         """Test proper resource cleanup."""
         # Test that resources are properly cleaned up
-        initial_tools = len(self.tu.all_tools)
+        _ = len(self.tu.all_tools)
         
         # Add some tools
         test_tool = {

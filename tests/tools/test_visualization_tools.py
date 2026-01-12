@@ -256,7 +256,7 @@ class TestVisualizationTools:
             # Create multiple visualization calls
             for i in range(5):
                 try:
-                    result = self.tu.run({
+                    _ = self.tu.run({
                         "name": "visualize_molecule_2d",
                         "arguments": {
                             "smiles": "CCO",

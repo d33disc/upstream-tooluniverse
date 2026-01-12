@@ -138,6 +138,16 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    guide/scientific_workflows
    tutorials/expert_feedback
    guide/hooks/index
+   guide/cache_system
+   guide/examples
+   guide/logging
+   guide/openrouter_support
+   guide/streaming_tools
+   guide/tools
+   guide/vllm_support
+   wechat_community
+   tutorials/make_your_data_agent_searchable
+   tutorials/visualization_tutorial
 
 .. toctree::
    :maxdepth: 3
@@ -149,7 +159,6 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    expand_tooluniverse/remote_tools/index
    expand_tooluniverse/contributing/index
    expand_tooluniverse/architecture
-   deployment
 
 .. toctree::
    :maxdepth: 1
@@ -170,3 +179,6 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    :caption: ❓ Reference
 
    reference/data_sources
+   help/index
+   expand_tooluniverse/reference/index
+   about/index
