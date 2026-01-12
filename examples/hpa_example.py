@@ -70,6 +70,13 @@ comprehensive_test_queries = [
         "biological_context": "TP53 basic info should include transcription regulation functions",
         "expected_output": "Gene name, synonyms, Uniprot ID, biological processes",
     },
+    {
+        "name": "HPA_get_gene_tsv_data_by_ensembl_id",
+        "arguments": {"ensembl_id": VALID_ENSEMBL_ID_2},
+        "description": "Get detailed gene data in TSV format for TP53",
+        "biological_context": "Legacy format often used for bulk data processing",
+        "expected_output": "TSV string containing gene data",
+    },
     # === EXPRESSION ANALYSIS TOOLS ===
     {
         "name": "HPA_get_comparative_expression_by_gene_and_cellline",
