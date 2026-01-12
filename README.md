@@ -3,7 +3,8 @@
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue)](https://arxiv.org/abs/2509.23426)
 [![PyPI version](https://badge.fury.io/py/tooluniverse.svg)](https://badge.fury.io/py/tooluniverse)
 [![ToolUniverse](https://img.shields.io/badge/Code-ToolUniverse-purple)](https://github.com/mims-harvard/ToolUniverse)
-[![Model context protocol (MCP)](https://img.shields.io/badge/Model_Context_Protocol_(MCP)_Supported-green)](README_USAGE.md#running-the-mcp-server)
+[![Model context protocol (MCP)](https://img.shields.io/badge/Model_Context_Protocol_(MCP)_Supported-green)](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcp_support.html)
+[![MCPB](https://img.shields.io/badge/Download-MCPB-red)](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcpb_introduction.html)
 [![Documentation](https://img.shields.io/badge/Documentation-Available-green)](https://zitniklab.hms.harvard.edu/ToolUniverse/)
 [![🌐Web](https://img.shields.io/badge/Website-aiscientist.tools-blue)](https://aiscientist.tools)
 [![Slack](https://img.shields.io/badge/Slack-Join_Community-orange)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
@@ -147,6 +148,12 @@ result = tu.run({
 tooluniverse-smcp
 ```
 → **Complete Tutorial**: [MCP Support](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcp_support.html)
+
+### MCPB Support
+
+The **Model Context Protocol Bundle (MCPB)** wraps ToolUniverse as a standalone executable MCP server. This bundle is designed to work seamlessly with Claude Desktop and other MCPB-aware clients without complex environment setup.
+
+> [Read our Introduction to MCPB](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcpb_introduction.html)
 
 
 ## 🚀 AI Scientists Projects Powered by ToolUniverse
