@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 781 scientific tools.
+Type-safe Python interface to 791 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -819,6 +819,8 @@ from .advanced_literature_search_agent import advanced_literature_search_agent
 from .alphafold_get_annotations import alphafold_get_annotations
 from .alphafold_get_prediction import alphafold_get_prediction
 from .alphafold_get_summary import alphafold_get_summary
+from .biomodels_get_files import biomodels_get_files
+from .biomodels_search import biomodels_search
 from .cBioPortal_get_cancer_studies import cBioPortal_get_cancer_studies
 from .cBioPortal_get_mutations import cBioPortal_get_mutations
 from .call_agentic_human import call_agentic_human
@@ -832,6 +834,8 @@ from .cellosaurus_get_cell_line_info import cellosaurus_get_cell_line_info
 from .cellosaurus_query_converter import cellosaurus_query_converter
 from .cellosaurus_search_cell_lines import cellosaurus_search_cell_lines
 from .chembl_disease_target_score import chembl_disease_target_score
+from .clinical_trials_get_details import clinical_trials_get_details
+from .clinical_trials_search import clinical_trials_search
 from .clinvar_get_clinical_significance import clinvar_get_clinical_significance
 from .clinvar_get_variant_details import clinvar_get_variant_details
 from .clinvar_search_variants import clinvar_search_variants
@@ -1190,6 +1194,7 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
+from .ghost_tool import ghost_tool
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .grep_tools import grep_tools
 from .gwas_get_association_by_id import gwas_get_association_by_id
@@ -1204,8 +1209,11 @@ from .gwas_get_variants_for_trait import gwas_get_variants_for_trait
 from .gwas_search_associations import gwas_search_associations
 from .gwas_search_snps import gwas_search_snps
 from .gwas_search_studies import gwas_search_studies
+from .hca_get_file_manifest import hca_get_file_manifest
+from .hca_search_projects import hca_search_projects
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
 from .icd_search_codes import icd_search_codes
+from .iedb_search_epitopes import iedb_search_epitopes
 from .kegg_find_genes import kegg_find_genes
 from .kegg_get_gene_info import kegg_get_gene_info
 from .kegg_get_pathway_info import kegg_get_pathway_info
@@ -1234,6 +1242,8 @@ from .ols_search_ontologies import ols_search_ontologies
 from .ols_search_terms import ols_search_terms
 from .open_deep_research_agent import open_deep_research_agent
 from .openalex_literature_search import openalex_literature_search
+from .pc_get_interactions import pc_get_interactions
+from .pc_search_pathways import pc_search_pathways
 from .python_code_executor import python_code_executor
 from .python_script_runner import python_script_runner
 from .reactome_disease_target_score import reactome_disease_target_score
@@ -1680,6 +1690,8 @@ __all__ = [
     "alphafold_get_annotations",
     "alphafold_get_prediction",
     "alphafold_get_summary",
+    "biomodels_get_files",
+    "biomodels_search",
     "cBioPortal_get_cancer_studies",
     "cBioPortal_get_mutations",
     "call_agentic_human",
@@ -1689,6 +1701,8 @@ __all__ = [
     "cellosaurus_query_converter",
     "cellosaurus_search_cell_lines",
     "chembl_disease_target_score",
+    "clinical_trials_get_details",
+    "clinical_trials_search",
     "clinvar_get_clinical_significance",
     "clinvar_get_variant_details",
     "clinvar_search_variants",
@@ -1979,6 +1993,7 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
+    "ghost_tool",
     "gnomad_get_gene_constraints",
     "grep_tools",
     "gwas_get_association_by_id",
@@ -1993,8 +2008,11 @@ __all__ = [
     "gwas_search_associations",
     "gwas_search_snps",
     "gwas_search_studies",
+    "hca_get_file_manifest",
+    "hca_search_projects",
     "humanbase_ppi_analysis",
     "icd_search_codes",
+    "iedb_search_epitopes",
     "kegg_find_genes",
     "kegg_get_gene_info",
     "kegg_get_pathway_info",
@@ -2019,6 +2037,8 @@ __all__ = [
     "ols_search_terms",
     "open_deep_research_agent",
     "openalex_literature_search",
+    "pc_get_interactions",
+    "pc_search_pathways",
     "python_code_executor",
     "python_script_runner",
     "reactome_disease_target_score",

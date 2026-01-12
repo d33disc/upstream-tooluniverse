@@ -209,6 +209,16 @@ default_tool_files = {
     "optimizer": os.path.join(current_dir, "data", "optimizer_tools.json"),
     # Compact mode core tools
     "compact_mode": os.path.join(current_dir, "data", "compact_mode_tools.json"),
+    # New Life Science Tools
+    "hca_tools": os.path.join(current_dir, "data", "hca_tools.json"),
+    "clinical_trials_tools": os.path.join(
+        current_dir, "data", "clinical_trials_tools.json"
+    ),
+    "iedb_tools": os.path.join(current_dir, "data", "iedb_tools.json"),
+    "pathway_commons_tools": os.path.join(
+        current_dir, "data", "pathway_commons_tools.json"
+    ),
+    "biomodels_tools": os.path.join(current_dir, "data", "biomodels_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
