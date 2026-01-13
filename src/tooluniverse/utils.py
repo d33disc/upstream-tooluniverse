@@ -279,7 +279,7 @@ def evaluate_function_call(tool_definition, function_call):
 
 def evaluate_function_call_from_toolbox(toolbox, function_call):
     tool_name = function_call["name"]
-    this_tool_dec = toolbox.get_one_tool_by_one_name(tool_name)
+    this_tool_dec = toolbox.tool_specification(tool_name, return_prompt=True)
     if this_tool_dec is None:
         return False, "Tool not found."
     results, results_message = evaluate_function_call(this_tool_dec, function_call)
