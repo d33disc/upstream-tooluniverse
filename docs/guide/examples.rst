@@ -997,9 +997,8 @@ Common issues and solutions:
 You've now seen ToolUniverse in action! Here's what to explore next:
 
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Ready for real research? See domain-specific workflows for drug discovery, literature review, and more
-* **🛠️ All Available Tools** → :doc:`tools` - Explore the complete catalog of 600+ scientific tools and their capabilities
-* **⚡ Best Practices** → :doc:`best_practices` - Learn optimization techniques, security practices, and production deployment tips
-* **🎯 Custom Development** → :doc:`../tutorials/index` - Want to create your own tools or integrate with AI assistants? Check out our tutorials
+* **🛠️ All Available Tools** → :doc:`../tools/tools_config_index` - Explore the complete catalog of 600+ scientific tools and their capabilities
+* **🎯 Custom Development** → :doc:`../tutorials/finding_tools` - Want to create your own tools or integrate with AI assistants? Check out our tutorials
 
 .. tip::
    **Practice tip**: Try modifying the examples above with your own research interests. Change gene names, diseases, or drug names to explore data relevant to your work!

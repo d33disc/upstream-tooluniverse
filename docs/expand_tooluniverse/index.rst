@@ -19,7 +19,7 @@ Quick Start
 
 **I want to learn tool development systematically:**
 → Choose your path:
-   - **Local tools**: :doc:`local_tools/tutorial` - Python classes for API wrappers, data processing
+   - **Local tools**: :doc:`local_tools/local_tools_tutorial` - Python classes for API wrappers, data processing
    - **Remote tools**: :doc:`remote_tools/tutorial` - MCP servers for microservices, heavy computation
 
 **I want to contribute tools to the community:**
@@ -102,7 +102,7 @@ Examples
 
 For detailed examples and code samples, see:
 
-- **Local Tools**: :doc:`local_tools/tutorial` - Complete examples with step-by-step instructions
+- **Local Tools**: :doc:`local_tools/local_tools_tutorial` - Complete examples with step-by-step instructions
 - **Remote Tools**: :doc:`remote_tools/tutorial` - MCP integration and API examples
 - **Quick Start**: :doc:`quick_start` - Simple 5-minute example to get started
 
@@ -122,7 +122,7 @@ Next Steps
 Ready to start? Choose your path:
 
 * 🚀 **Quick Start**: :doc:`quick_start` - Create your first tool in 5 minutes
-* 🏠 **Local Tools**: :doc:`local_tools/tutorial` - Learn local tool development
+* 🏠 **Local Tools**: :doc:`local_tools/local_tools_tutorial` - Learn local tool development
 * 🔗 **Remote Tools**: :doc:`remote_tools/tutorial` - Learn remote tool integration
 * 🎁 **Contributing**: :doc:`contributing/index` - Submit tools to the community
 * 🔍 **Understanding**: Review the tool type comparison table in :doc:`contributing/index`

@@ -170,7 +170,7 @@ Next Steps
 Now that you have a working tool, you can:
 
 **📚 Learn More:**
-- :doc:`local_tools/tutorial` - Comprehensive local tool development
+- :doc:`local_tools/local_tools_tutorial` - Comprehensive local tool development
 - :doc:`remote_tools/tutorial` - Create remote tools and MCP servers
 - Review the tool type comparison table in :doc:`contributing/index`
 

@@ -322,7 +322,7 @@ Next Steps
 ----------
 
 * 🔧 **MCP Integration**: :doc:`mcp_integration` - Detailed MCP integration guide
-* 🏠 **Local Tools**: :doc:`../local_tools/tutorial` - Learn about local tool development
+* 🏠 **Local Tools**: :doc:`../local_tools/local_tools_tutorial` - Learn about local tool development
 * 🚀 **Contributing**: :doc:`../contributing/remote_tools` - Submit remote tools to ToolUniverse
 * 🔍 **Architecture**: :doc:`../reference/architecture` - Understand ToolUniverse internals
 

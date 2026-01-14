@@ -7,4 +7,4 @@ Python classes that run within ToolUniverse for high-performance custom function
    :maxdepth: 2
    :caption: Local Tools
 
-   tutorial
+   local_tools_tutorial

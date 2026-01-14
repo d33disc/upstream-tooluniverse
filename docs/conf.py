@@ -37,7 +37,7 @@ exclude_patterns = [
     "Thumbs.db",
     ".DS_Store",
     "old_files",
-    "tutorials/addtools",
+
     "tutorials/aiscientists",
     "translation_tools",
     "tutorials/overview.md",
