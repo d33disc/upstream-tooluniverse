@@ -329,7 +329,7 @@ def build_lazy_registry(package_name=None):
         from tooluniverse._lazy_registry_static import STATIC_LAZY_REGISTRY
 
         print(
-            f"DEBUG: Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} tools.",
+            f"DEBUG: Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} classes.",
             file=sys.stderr,
         )
         _lazy_registry.update(STATIC_LAZY_REGISTRY)
@@ -349,7 +349,7 @@ def build_lazy_registry(package_name=None):
         _lazy_registry[tool_name] = module_name
 
     logger.info(
-        f"Built lazy registry: {len(_lazy_registry)} tools discovered via AST (no modules imported)"
+        f"Built lazy registry: {len(_lazy_registry)} classes discovered via AST (no modules imported)"
     )
     return _lazy_registry.copy()
 

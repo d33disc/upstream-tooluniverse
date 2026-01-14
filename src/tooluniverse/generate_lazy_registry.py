@@ -33,7 +33,7 @@ def main():
     if not registry:
         print("⚠️  Warning: No tools discovered! The static registry will be empty.")
     else:
-        print(f"✅ Discovered {len(registry)} tools.")
+        print(f"✅ Discovered {len(registry)} tool classes.")
 
     # Generate the static file content
     output_path = Path(__file__).parent / "_lazy_registry_static.py"
