@@ -194,12 +194,29 @@ class BaseTool:
             jsonschema.validate(filtered_arguments, schema)
             return None
         except jsonschema.ValidationError as e:
+            # Create a more agent-friendly error message
+            error_msg = f"Parameter validation failed for '{e.path[-1] if e.path else 'root'}': {e.message}"
+
+            # Add type hint if it's a type error
+            if e.validator == "type":
+                error_msg += (
+                    f". Expected {e.validator_value}, got {type(e.instance).__name__}."
+                )
+
+            # Add allowed values if it's an enum error
+            if e.validator == "enum":
+                error_msg += f". Allowed values: {e.validator_value}."
+
             return ToolValidationError(
-                f"Parameter validation failed: {e.message}",
+                error_msg,
                 details={
                     "validation_error": str(e),
                     "path": list(e.absolute_path) if e.absolute_path else [],
                     "schema": schema,
+                    "parameter": str(e.path[-1]) if e.path else "root",
+                    "expected": str(e.validator_value)
+                    if hasattr(e, "validator_value")
+                    else None,
                 },
             )
         except Exception as e:

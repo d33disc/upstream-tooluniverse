@@ -15,6 +15,7 @@ def execute_tool(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
+    **kwargs: Any,
 ) -> dict[str, Any]:
     """
     Execute a ToolUniverse tool directly with custom arguments. This is the primary way to run any to...
