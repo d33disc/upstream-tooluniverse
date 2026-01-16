@@ -41,6 +41,7 @@ default_tool_files = {
     # Literature search tools
     "arxiv": os.path.join(current_dir, "data", "arxiv_tools.json"),
     "crossref": os.path.join(current_dir, "data", "crossref_tools.json"),
+    "simbad": os.path.join(current_dir, "data", "simbad_tools.json"),
     "dblp": os.path.join(current_dir, "data", "dblp_tools.json"),
     "pubmed": os.path.join(current_dir, "data", "pubmed_tools.json"),
     "doaj": os.path.join(current_dir, "data", "doaj_tools.json"),
