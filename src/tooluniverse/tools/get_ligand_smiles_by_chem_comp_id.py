@@ -14,7 +14,7 @@ def get_ligand_smiles_by_chem_comp_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the SMILES chemical structure string for a given chemical component (ligand) ID.
 
@@ -31,7 +31,7 @@ def get_ligand_smiles_by_chem_comp_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -16,7 +16,7 @@ def FDA_retrieve_drug_names_by_patient_medication_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve drug names based on patient medication information, which is about safe use of the drug.
 
@@ -37,7 +37,7 @@ def FDA_retrieve_drug_names_by_patient_medication_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

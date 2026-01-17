@@ -17,7 +17,7 @@ def FDA_get_drug_names_by_pharmacokinetics(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve drug names based on specific pharmacokinetics information, such as absorption, distribut...
 
@@ -40,7 +40,7 @@ def FDA_get_drug_names_by_pharmacokinetics(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

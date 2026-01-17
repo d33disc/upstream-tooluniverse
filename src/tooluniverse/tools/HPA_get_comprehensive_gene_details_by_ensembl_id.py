@@ -17,7 +17,7 @@ def HPA_get_comprehensive_gene_details_by_ensembl_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get detailed in-depth information from gene page using Ensembl Gene ID, including image URLs, ant...
 
@@ -40,7 +40,7 @@ def HPA_get_comprehensive_gene_details_by_ensembl_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -16,7 +16,7 @@ def OpenTargets_get_associated_drugs_by_target_ensemblID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get known drugs and information (e.g. id, name, MoA) associated with a specific target ensemblID,...
 
@@ -37,7 +37,7 @@ def OpenTargets_get_associated_drugs_by_target_ensemblID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

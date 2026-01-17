@@ -14,7 +14,7 @@ def PubChem_search_compounds_by_substructure(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search for all CIDs in PubChem that contain the given substructure (SMILES).
 
@@ -31,7 +31,7 @@ def PubChem_search_compounds_by_substructure(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

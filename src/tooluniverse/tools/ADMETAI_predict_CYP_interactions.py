@@ -14,7 +14,7 @@ def ADMETAI_predict_CYP_interactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Predicts CYP enzyme interactions for a given list of molecules in SMILES format.
 
@@ -31,7 +31,7 @@ def ADMETAI_predict_CYP_interactions(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

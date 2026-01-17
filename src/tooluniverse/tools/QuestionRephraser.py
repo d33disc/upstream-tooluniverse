@@ -15,7 +15,7 @@ def QuestionRephraser(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Generates three distinct paraphrases of a given question while ensuring answer options remain val...
 
@@ -34,7 +34,7 @@ def QuestionRephraser(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

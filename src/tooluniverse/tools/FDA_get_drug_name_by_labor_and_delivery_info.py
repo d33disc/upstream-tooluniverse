@@ -16,7 +16,7 @@ def FDA_get_drug_name_by_labor_and_delivery_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on information about the drug’s use during labor or delivery.
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_by_labor_and_delivery_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

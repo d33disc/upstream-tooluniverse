@@ -12,7 +12,11 @@
         },
         "search_type": {
           "type": "string",
-          "enum": ["sequence", "structure", "text"],
+          "enum": [
+            "sequence",
+            "structure",
+            "text"
+          ],
           "default": "sequence",
           "description": "Type of search: 'sequence' for sequence-based similarity search, 'structure' for structure-based similarity search using PDB ID, 'text' for text-based search by name or keyword"
         },
@@ -71,6 +75,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "search_type": "sequence",
+        "similarity_threshold": 0.7,
+        "max_results": 1
+      }
+    ]
   }
 ]

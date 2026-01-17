@@ -14,7 +14,7 @@ def Reactome_get_pathway_reactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Query all Reactions contained under a Pathway using Pathway Stable ID. This is currently the only...
 
@@ -31,7 +31,7 @@ def Reactome_get_pathway_reactions(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

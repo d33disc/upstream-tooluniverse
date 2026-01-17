@@ -227,7 +227,17 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "exact_match": false,
+        "sort": "relevance",
+        "offset": 0,
+        "limit": 1,
+        "rangeFilters": "[]"
+      }
+    ]
   },
   {
     "type": "USPTOOpenDataPortalTool",
@@ -429,7 +439,12 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   },
   {
     "type": "USPTOOpenDataPortalTool",
@@ -508,7 +523,12 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   },
   {
     "type": "USPTOOpenDataPortalTool",
@@ -653,7 +673,12 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   },
   {
     "type": "USPTOOpenDataPortalTool",
@@ -730,7 +755,12 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   },
   {
     "type": "USPTOOpenDataPortalTool",
@@ -825,6 +855,11 @@
           "description": "Unique identifier for the API request"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "applicationNumberText": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   }
 ]

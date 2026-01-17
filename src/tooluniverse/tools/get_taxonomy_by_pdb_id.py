@@ -14,7 +14,7 @@ def get_taxonomy_by_pdb_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get the scientific name and taxonomy of the organism(s) associated with a PDB entry.
 
@@ -31,7 +31,7 @@ def get_taxonomy_by_pdb_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

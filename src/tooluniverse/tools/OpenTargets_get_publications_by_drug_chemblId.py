@@ -19,7 +19,7 @@ def OpenTargets_get_publications_by_drug_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve publications related to a drug chemblId, including PubMed IDs and publication dates.
 
@@ -46,7 +46,7 @@ def OpenTargets_get_publications_by_drug_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def FAERS_count_death_related_by_drug(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Count adverse events associated with patient death for a given drug. Only medicinalproduct is req...
 
@@ -31,7 +31,7 @@ def FAERS_count_death_related_by_drug(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

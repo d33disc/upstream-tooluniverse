@@ -16,7 +16,7 @@ def FDA_get_drug_name_by_adverse_reaction(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on specific adverse reactions reported. Warning: This tool only outp...
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_by_adverse_reaction(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

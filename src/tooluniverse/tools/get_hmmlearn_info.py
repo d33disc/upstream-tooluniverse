@@ -14,7 +14,7 @@ def get_hmmlearn_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get comprehensive information about hmmlearn – Hidden Markov Models in Python
 
@@ -31,7 +31,7 @@ def get_hmmlearn_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

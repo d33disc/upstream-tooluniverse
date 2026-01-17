@@ -16,7 +16,7 @@ def FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about when a doctor should be consulted before using a specific drug.
 
@@ -37,7 +37,7 @@ def FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

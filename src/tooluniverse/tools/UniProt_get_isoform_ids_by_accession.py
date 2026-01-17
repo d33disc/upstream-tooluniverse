@@ -14,7 +14,7 @@ def UniProt_get_isoform_ids_by_accession(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Extract all splice isoform IDs from UniProtKB entry (isoformNames).
 
@@ -31,7 +31,7 @@ def UniProt_get_isoform_ids_by_accession(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

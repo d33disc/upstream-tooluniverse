@@ -16,7 +16,7 @@ def FDA_retrieve_drug_name_by_device_use(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on the intended use of the device.
 
@@ -37,7 +37,7 @@ def FDA_retrieve_drug_name_by_device_use(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

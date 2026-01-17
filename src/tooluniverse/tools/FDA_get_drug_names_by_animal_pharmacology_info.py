@@ -17,7 +17,7 @@ def FDA_get_drug_names_by_animal_pharmacology_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve drug names based on animal pharmacology and toxicology information.  Warning: This tool ...
 
@@ -40,7 +40,7 @@ def FDA_get_drug_names_by_animal_pharmacology_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

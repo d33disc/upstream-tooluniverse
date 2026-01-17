@@ -17,7 +17,7 @@ def ols_find_similar_terms(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Find similar terms using LLM-based similarity
 
@@ -40,7 +40,7 @@ def ols_find_similar_terms(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

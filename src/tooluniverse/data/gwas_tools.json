@@ -180,7 +180,18 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "efo_trait": "EFO_0004321",
+        "rs_id": "rs123456",
+        "accession_id": "GCST000001",
+        "sort": "p_value",
+        "direction": "asc",
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASStudySearch",
@@ -371,7 +382,18 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "efo_trait": "EFO_0000400",
+        "disease_trait": "breast cancer",
+        "cohort": "UKB",
+        "gxe": true,
+        "full_pvalue_set": false,
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASSNPSearch",
@@ -510,7 +532,15 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "rs_id": "rs12345",
+        "mapped_gene": "BRCA1",
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASAssociationByID",
@@ -634,7 +664,12 @@
           "description": "API links"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "association_id": "GCST000001"
+      }
+    ]
   },
   {
     "type": "GWASStudyByID",
@@ -766,7 +801,12 @@
           "description": "API links"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "study_id": "GCST000001"
+      }
+    ]
   },
   {
     "type": "GWASSNPByID",
@@ -858,7 +898,12 @@
           "description": "API links"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "rs_id": "rs1234"
+      }
+    ]
   },
   {
     "type": "GWASVariantsForTrait",
@@ -995,7 +1040,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "efo_trait": "asthma",
+        "size": 20,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASAssociationsForTrait",
@@ -1164,7 +1216,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "efo_trait": "EFO_0000400",
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASAssociationsForSNP",
@@ -1341,7 +1400,16 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "rs_id": "rs12345",
+        "sort": "p_value",
+        "direction": "asc",
+        "size": 20,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASStudiesForTrait",
@@ -1532,7 +1600,18 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "efo_trait": "EFO_0003767",
+        "disease_trait": "breast cancer",
+        "cohort": "UKB",
+        "gxe": true,
+        "full_pvalue_set": false,
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASSNPsForGene",
@@ -1669,7 +1748,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "mapped_gene": "BRCA1",
+        "size": 10,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASAssociationsForStudy",
@@ -1838,7 +1924,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "accession_id": "GCST000001",
+        "size": 20,
+        "page": 1
+      }
+    ]
   },
   {
     "type": "GWASGeneSearch",
@@ -1847,29 +1940,56 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "gene_name": {"type": "string", "description": "Gene symbol (e.g., BRCA1)."},
-        "size": {"type": "integer", "description": "Max associations to return.", "default": 5}
+        "gene_name": {
+          "type": "string",
+          "description": "Gene symbol (e.g., BRCA1)."
+        },
+        "size": {
+          "type": "integer",
+          "description": "Max associations to return.",
+          "default": 5
+        }
       },
-      "required": ["gene_name"]
+      "required": [
+        "gene_name"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "gene_name": {"type": "string"},
-        "association_count": {"type": "integer"},
+        "gene_name": {
+          "type": "string"
+        },
+        "association_count": {
+          "type": "integer"
+        },
         "associations": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "study": {"type": "string"},
-              "strongestRiskAllele": {"type": "string"},
-              "pvalue": {"type": "number"}
+              "study": {
+                "type": "string"
+              },
+              "strongestRiskAllele": {
+                "type": "string"
+              },
+              "pvalue": {
+                "type": "number"
+              }
             }
           }
         },
-        "total_found": {"type": "integer"}
+        "total_found": {
+          "type": "integer"
+        }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "gene_name": "TP53",
+        "size": 5
+      }
+    ]
   }
 ]

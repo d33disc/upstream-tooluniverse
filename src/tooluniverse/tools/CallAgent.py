@@ -14,7 +14,7 @@ def CallAgent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Give a solution plan to the agent and let it solve the problem. Solution plan should reflect a di...
 
@@ -31,7 +31,7 @@ def CallAgent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

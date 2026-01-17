@@ -17,7 +17,7 @@ def download_binary_file(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Download binary files (images, videos, executables) with chunked streaming for better memory mana...
 
@@ -40,7 +40,7 @@ def download_binary_file(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

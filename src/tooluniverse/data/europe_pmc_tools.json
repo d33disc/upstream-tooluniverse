@@ -108,6 +108,12 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "cancer therapy",
+        "limit": 5
+      }
+    ]
   }
 ]

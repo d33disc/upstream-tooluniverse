@@ -14,7 +14,7 @@ def OpenTargets_get_known_drugs_by_drug_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get a list of known drugs and associated information using the specified chemblId.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_known_drugs_by_drug_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

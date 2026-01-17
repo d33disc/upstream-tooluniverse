@@ -14,7 +14,7 @@ def call_agentic_human(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Produces a concise, practical answer that emulates how a well-informed human would respond to the...
 
@@ -31,7 +31,7 @@ def call_agentic_human(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

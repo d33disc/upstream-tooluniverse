@@ -17,7 +17,7 @@ def FDA_get_drug_names_by_dear_health_care_provider_letter_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch drug names based on information about dear health care provider letters. The letters are se...
 
@@ -40,7 +40,7 @@ def FDA_get_drug_names_by_dear_health_care_provider_letter_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -17,7 +17,7 @@ def ClinicalTrialDesignAgent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     AI agent that designs clinical trial protocols based on preclinical data and regulatory requirements
 
@@ -40,7 +40,7 @@ def ClinicalTrialDesignAgent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

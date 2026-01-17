@@ -16,7 +16,7 @@ def ScientificTextSummarizer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Summarizes biomedical research texts, abstracts, or papers with specified length and focus areas....
 
@@ -37,7 +37,7 @@ def ScientificTextSummarizer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

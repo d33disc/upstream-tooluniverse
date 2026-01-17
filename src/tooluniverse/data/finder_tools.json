@@ -3,7 +3,10 @@
     "type": "ToolFinderEmbedding",
     "name": "Tool_RAG",
     "description": "Retrieve related tools from the toolbox based on the provided description",
-    "required_packages": ["sentence_transformers", "torch"],
+    "required_packages": [
+      "sentence_transformers",
+      "torch"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -35,13 +38,27 @@
         "Tool_Finder_LLM",
         "Tool_Finder_Keyword"
       ]
+    },
+    "test_examples": [
+      {
+        "description": "Find tools that can perform sequence alignment",
+        "limit": 5
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
     "type": "ToolFinderEmbedding",
     "name": "Tool_Finder",
     "description": "Retrieve related tools from the toolbox based on the provided description, advanced version with more functionality.",
-    "required_packages": ["sentence_transformers", "torch"],
+    "required_packages": [
+      "sentence_transformers",
+      "torch"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -91,6 +108,20 @@
         "Tool_Finder_LLM",
         "Tool_Finder_Keyword"
       ]
+    },
+    "test_examples": [
+      {
+        "description": "Find tools for analyzing gene expression data",
+        "limit": 1,
+        "picked_tool_names": [],
+        "return_call_result": true,
+        "categories": []
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -147,6 +178,20 @@
         "Tool_Finder_LLM",
         "Tool_Finder_Keyword"
       ]
+    },
+    "test_examples": [
+      {
+        "description": "Find tools for analyzing gene expression data",
+        "limit": 1,
+        "picked_tool_names": [],
+        "return_call_result": true,
+        "categories": []
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -201,6 +246,20 @@
         "Tool_Finder_LLM",
         "Tool_Finder_Keyword"
       ]
+    },
+    "test_examples": [
+      {
+        "description": "Find tools for analyzing gene expression data",
+        "limit": 1,
+        "picked_tool_names": [],
+        "return_call_result": true,
+        "categories": []
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   }
 ]

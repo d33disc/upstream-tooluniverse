@@ -17,7 +17,7 @@ def AdvancedCodeQualityAnalyzer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Performs deep analysis of code quality including complexity, security, performance, and maintaina...
 
@@ -40,7 +40,7 @@ def AdvancedCodeQualityAnalyzer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

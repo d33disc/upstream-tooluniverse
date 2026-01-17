@@ -14,7 +14,7 @@ def get_gene_name_by_entity_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve gene name(s) associated with a polymer entity.
 
@@ -31,7 +31,7 @@ def get_gene_name_by_entity_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

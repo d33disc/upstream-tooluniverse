@@ -38,7 +38,19 @@
       "EuropePMC_search_articles"
     ],
     "composition_file": "drug_safety_analyzer.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "drug_name": "Aspirin",
+        "patient_sex": "Female",
+        "serious_events_only": true
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   },
   {
     "type": "ComposeTool",
@@ -65,7 +77,17 @@
       "MedicalLiteratureReviewer"
     ],
     "composition_file": "literature_tool.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "research_topic": "cancer immunotherapy"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   },
   {
     "type": "ComposeTool",
@@ -96,7 +118,17 @@
       "LiteratureSearchTool"
     ],
     "composition_file": "comprehensive_drug_discovery.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "disease_efo_id": "EFO_0001074"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   },
   {
     "type": "ComposeTool",
@@ -133,7 +165,18 @@
       "FDA_get_drug_names_by_clinical_pharmacology"
     ],
     "composition_file": "biomarker_discovery.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "disease_condition": "breast cancer",
+        "sample_type": "tissue"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   },
   {
     "type": "ComposeTool",
@@ -180,7 +223,29 @@
       "ToolMetadataStandardizer"
     ],
     "composition_file": "tool_metadata_generator.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "tool_configs": [
+          {
+            "type": "XMLTool",
+            "name": "ExampleXMLTool",
+            "description": "Parses XML files",
+            "parameter": {}
+          }
+        ],
+        "tool_type_mappings": {
+          "Database": [
+            "XMLTool"
+          ]
+        }
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   },
   {
     "type": "ComposeTool",
@@ -224,6 +289,25 @@
       "ToolRelationshipDetector"
     ],
     "composition_file": "tool_graph_generation.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "tool_configs": [
+          {
+            "type": "SampleTool",
+            "name": "ExampleTool",
+            "description": "A sample tool configuration"
+          }
+        ],
+        "max_tools": 10,
+        "output_path": "./tool_relationship_graph.json",
+        "save_intermediate_every": 5000
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   }
 ]

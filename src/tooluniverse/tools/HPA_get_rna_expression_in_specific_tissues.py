@@ -15,7 +15,7 @@ def HPA_get_rna_expression_in_specific_tissues(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Query RNA expression levels (nTPM) for a specific gene in one or more user-specified tissues with...
 
@@ -34,7 +34,7 @@ def HPA_get_rna_expression_in_specific_tissues(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

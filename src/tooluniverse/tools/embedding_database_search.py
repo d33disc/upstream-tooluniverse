@@ -20,7 +20,7 @@ def embedding_database_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Semantic search over a per-collection datastore using FAISS (cosine via L2-normalized vectors). S...
 
@@ -49,7 +49,7 @@ def embedding_database_search(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
     if filters is None:

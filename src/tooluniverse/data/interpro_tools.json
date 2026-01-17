@@ -11,7 +11,9 @@
           "description": "UniProt protein ID (e.g., P05067, Q9Y6K9)"
         }
       },
-      "required": ["protein_id"]
+      "required": [
+        "protein_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/UniProt/{protein_id}",
@@ -19,74 +21,22 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": "array",
-      "description": "List of InterPro entries for the protein",
-      "items": {
-        "type": "object",
-        "properties": {
-          "metadata": {
-            "type": "object",
-            "properties": {
-              "accession": {"type": "string"},
-              "name": {"type": "string"},
-              "type": {"type": "string"},
-              "source_database": {"type": "string"},
-              "integrated": {"type": "string"},
-              "member_databases": {"type": "object"},
-              "go_terms": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "identifier": {"type": "string"},
-                    "name": {"type": "string"},
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "code": {"type": "string"},
-                        "name": {"type": "string"}
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "proteins": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "accession": {"type": "string"},
-                "protein_length": {"type": "integer"},
-                "source_database": {"type": "string"},
-                "organism": {"type": "string"},
-                "in_alphafold": {"type": "boolean"},
-                "in_bfvd": {"type": "boolean"},
-                "entry_protein_locations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "fragments": {"type": "array"},
-                      "representative": {"type": "boolean"},
-                      "model": {"type": "string"},
-                      "score": {"type": "number"}
-                    }
-                  }
-                }
-              }
-            }
-          }
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
         }
       }
     },
     "test_examples": [
       {
-        "protein_id": "P05067"
-      },
-      {
-        "protein_id": "Q9Y6K9"
+        "protein_id": "P04637"
       }
     ]
   },
@@ -109,7 +59,9 @@
           "maximum": 100
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/interpro/api/entry/interpro/search?query={query}&size={size}",
@@ -117,31 +69,23 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": "array",
-      "description": "List of matching InterPro entries",
-      "items": {
-        "type": "object",
-        "properties": {
-          "metadata": {
-            "type": "object",
-            "properties": {
-              "accession": {"type": "string"},
-              "name": {"type": "string"},
-              "type": {"type": "string"},
-              "source_database": {"type": "string"}
-            }
-          }
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
         }
       }
     },
     "test_examples": [
       {
-        "query": "kinase",
-        "size": 5
-      },
-      {
-        "query": "IPR000719",
-        "size": 1
+        "query": "machine learning optimization",
+        "size": 20
       }
     ]
   },
@@ -157,7 +101,9 @@
           "description": "InterPro accession ID (e.g., IPR000719, IPR000719)"
         }
       },
-      "required": ["accession"]
+      "required": [
+        "accession"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/interpro/api/entry/interpro/{accession}",
@@ -170,11 +116,21 @@
         "metadata": {
           "type": "object",
           "properties": {
-            "accession": {"type": "string"},
-            "name": {"type": "string"},
-            "type": {"type": "string"},
-            "source_database": {"type": "string"},
-            "description": {"type": "string"}
+            "accession": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "source_database": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
           }
         },
         "hierarchy": {

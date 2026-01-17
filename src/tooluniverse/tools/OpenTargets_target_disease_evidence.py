@@ -15,7 +15,7 @@ def OpenTargets_target_disease_evidence(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Explore evidence that supports a specific target-disease association. Input is disease efoId and ...
 
@@ -34,7 +34,7 @@ def OpenTargets_target_disease_evidence(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

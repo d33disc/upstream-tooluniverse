@@ -12,7 +12,11 @@
         },
         "geography": {
           "type": "string",
-          "enum": ["county", "tract", "state"],
+          "enum": [
+            "county",
+            "tract",
+            "state"
+          ],
           "description": "Geographic level: 'county' for county-level, 'tract' for census tract, 'state' for state-level"
         }
       },
@@ -51,7 +55,13 @@
           "description": "Information about data format and access"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "year": 1,
+        "geography": "county"
+      }
+    ]
   },
   {
     "name": "health_disparities_get_county_rankings_info",
@@ -101,6 +111,12 @@
           "description": "Information about data access"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "year": 2023,
+        "state": "California"
+      }
+    ]
   }
 ]

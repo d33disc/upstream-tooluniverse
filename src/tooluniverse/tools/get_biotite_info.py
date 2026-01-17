@@ -14,7 +14,7 @@ def get_biotite_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get comprehensive information about Biotite – comprehensive computational molecular biology library
 
@@ -31,7 +31,7 @@ def get_biotite_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

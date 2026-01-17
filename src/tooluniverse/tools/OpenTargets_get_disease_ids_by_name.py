@@ -14,7 +14,7 @@ def OpenTargets_get_disease_ids_by_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Given a disease or phenotype name, find all cross-referenced external IDs (e.g., OMIM, MONDO, MeS...
 
@@ -31,7 +31,7 @@ def OpenTargets_get_disease_ids_by_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

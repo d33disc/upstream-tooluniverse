@@ -56,7 +56,15 @@
           "type": "integer"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "search_query": "machine learning optimization",
+        "category": "mortality",
+        "limit": 1,
+        "offset": 0
+      }
+    ]
   },
   {
     "name": "cdc_data_get_dataset",
@@ -88,7 +96,9 @@
           "description": "Optional column name to order by (e.g., 'year')"
         }
       },
-      "required": ["dataset_id"]
+      "required": [
+        "dataset_id"
+      ]
     },
     "fields": {
       "endpoint": "/api/views/{dataset_id}/rows.json",
@@ -109,6 +119,15 @@
           "description": "Metadata about the dataset"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "dataset_id": "mcd3",
+        "limit": 1,
+        "offset": 0,
+        "where_clause": "year > 2020",
+        "order_by": "date DESC"
+      }
+    ]
   }
 ]

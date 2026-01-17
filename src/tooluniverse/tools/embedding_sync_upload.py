@@ -19,7 +19,7 @@ def embedding_sync_upload(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Upload a per-collection datastore to Hugging Face Hub: <name>.db and <name>.faiss, plus metadata ...
 
@@ -46,7 +46,7 @@ def embedding_sync_upload(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

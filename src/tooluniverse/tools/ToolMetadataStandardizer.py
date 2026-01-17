@@ -15,7 +15,7 @@ def ToolMetadataStandardizer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Standardizes and groups semantically equivalent metadata strings (e.g., sources, tags) into canon...
 
@@ -34,7 +34,7 @@ def ToolMetadataStandardizer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

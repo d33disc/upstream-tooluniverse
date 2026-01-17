@@ -12,7 +12,13 @@
         },
         "component": {
           "type": "string",
-          "enum": ["Demographics", "Dietary", "Examination", "Laboratory", "Questionnaire"],
+          "enum": [
+            "Demographics",
+            "Dietary",
+            "Examination",
+            "Laboratory",
+            "Questionnaire"
+          ],
           "description": "Optional component type to filter datasets"
         }
       },
@@ -56,7 +62,13 @@
           "description": "Information about data format and access"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "year": 2023,
+        "component": "Demographics"
+      }
+    ]
   },
   {
     "name": "nhanes_search_datasets",
@@ -106,6 +118,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "search_term": "diabetes",
+        "year": 2023,
+        "limit": 1
+      }
+    ]
   }
 ]

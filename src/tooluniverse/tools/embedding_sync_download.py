@@ -17,7 +17,7 @@ def embedding_sync_download(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Download a per-collection datastore from Hugging Face Hub into ./data/embeddings as <name>.db and...
 
@@ -40,7 +40,7 @@ def embedding_sync_download(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

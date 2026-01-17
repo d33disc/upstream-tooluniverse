@@ -14,7 +14,7 @@ def UniProt_get_disease_variants_by_accession(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Extract all variants (feature type = VARIANT) and their related annotations from UniProtKB entry.
 
@@ -31,7 +31,7 @@ def UniProt_get_disease_variants_by_accession(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

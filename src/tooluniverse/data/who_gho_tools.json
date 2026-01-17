@@ -29,7 +29,9 @@
           "default": 0
         }
       },
-      "required": ["indicator_code"]
+      "required": [
+        "indicator_code"
+      ]
     },
     "fields": {
       "endpoint": "/Data",
@@ -59,10 +61,17 @@
                 "type": "string"
               },
               "Value": {
-                "type": ["number", "string", "null"]
+                "type": [
+                  "number",
+                  "string",
+                  "null"
+                ]
               },
               "NumericValue": {
-                "type": ["number", "null"]
+                "type": [
+                  "number",
+                  "null"
+                ]
               },
               "Date": {
                 "type": "string"
@@ -71,7 +80,16 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "indicator_code": "WHOSIS_000001",
+        "country_code": 1,
+        "year": 2023,
+        "top": 100,
+        "skip": 0
+      }
+    ]
   },
   {
     "name": "who_gho_query_health_data",
@@ -98,7 +116,9 @@
           "default": 5
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "query",
@@ -111,14 +131,18 @@
           "type": "string"
         },
         "value": {
-          "type": ["number", "string", "null"]
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
         },
         "indicator": {
           "type": "string"
         },
         "country": {
           "type": "string"
-              },
+        },
         "year": {
           "type": "string"
         },
@@ -126,6 +150,14 @@
           "type": "string"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "country_code": 1,
+        "year": 2023,
+        "top": 5
+      }
+    ]
   }
 ]

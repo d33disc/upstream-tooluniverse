@@ -15,7 +15,7 @@ def ExperimentalDesignScorer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Assesses a proposed experimental design by assigning scores and structured feedback on hypothesis...
 
@@ -34,7 +34,7 @@ def ExperimentalDesignScorer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

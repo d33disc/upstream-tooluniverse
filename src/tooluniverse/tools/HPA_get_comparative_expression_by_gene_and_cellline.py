@@ -15,7 +15,7 @@ def HPA_get_comparative_expression_by_gene_and_cellline(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Compare the expression level differences of a gene between a specific cell line and healthy tissu...
 
@@ -34,7 +34,7 @@ def HPA_get_comparative_expression_by_gene_and_cellline(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

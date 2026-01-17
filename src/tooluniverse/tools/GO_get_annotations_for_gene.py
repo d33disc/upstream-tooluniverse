@@ -14,7 +14,7 @@ def GO_get_annotations_for_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Finds all GO annotations for a specific gene/protein using GOlr search.
 
@@ -31,7 +31,7 @@ def GO_get_annotations_for_gene(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

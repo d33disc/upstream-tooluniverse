@@ -14,7 +14,7 @@ def PubChem_get_compound_synonyms_by_CID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get complete list of synonyms for compound by CID.
 
@@ -31,7 +31,7 @@ def PubChem_get_compound_synonyms_by_CID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

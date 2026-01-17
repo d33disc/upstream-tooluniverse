@@ -14,7 +14,7 @@ def get_polymer_entity_annotations(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve functional annotations (Pfam domains, GO terms) and associated UniProt accession IDs for...
 
@@ -31,7 +31,7 @@ def get_polymer_entity_annotations(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

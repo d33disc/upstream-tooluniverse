@@ -16,7 +16,7 @@ def ToolQualityEvaluator(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Evaluates the quality of tool configurations and implementations. Provides detailed scoring and f...
 
@@ -37,7 +37,7 @@ def ToolQualityEvaluator(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

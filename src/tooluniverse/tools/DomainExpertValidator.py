@@ -17,7 +17,7 @@ def DomainExpertValidator(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Provides domain-specific validation and expert recommendations for tools with deep expertise acro...
 
@@ -40,7 +40,7 @@ def DomainExpertValidator(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

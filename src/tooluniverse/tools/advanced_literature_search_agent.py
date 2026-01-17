@@ -14,7 +14,7 @@ def advanced_literature_search_agent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Advanced multi-agent deep literature search system. This is a SEARCH-FIRST system: agents must ex...
 
@@ -31,7 +31,7 @@ def advanced_literature_search_agent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

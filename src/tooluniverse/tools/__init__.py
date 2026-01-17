@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 791 scientific tools.
+Type-safe Python interface to 790 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -151,9 +151,6 @@ from .FDA_get_boxed_warning_info_by_drug_name import (
     FDA_get_boxed_warning_info_by_drug_name,
 )
 from .FDA_get_brand_name_generic_name import FDA_get_brand_name_generic_name
-from .FDA_get_calibration_instructions_by_drug_name import (
-    FDA_get_calibration_instructions_by_drug_name,
-)
 from .FDA_get_carcinogenic_mutagenic_fertility_by_drug_name import (
     FDA_get_carcinogenic_mutagenic_fertility_by_drug_name,
 )
@@ -194,9 +191,6 @@ from .FDA_get_drug_interactions_by_drug_name import (
 )
 from .FDA_get_drug_name_by_SPL_ID import FDA_get_drug_name_by_SPL_ID
 from .FDA_get_drug_name_by_adverse_reaction import FDA_get_drug_name_by_adverse_reaction
-from .FDA_get_drug_name_by_calibration_instructions import (
-    FDA_get_drug_name_by_calibration_instructions,
-)
 from .FDA_get_drug_name_by_dependence_info import FDA_get_drug_name_by_dependence_info
 from .FDA_get_drug_name_by_document_id import FDA_get_drug_name_by_document_id
 from .FDA_get_drug_name_by_dosage_info import FDA_get_drug_name_by_dosage_info
@@ -445,7 +439,6 @@ from .FDA_get_principal_display_panel_by_drug_name import (
 from .FDA_get_purpose_info_by_drug_name import FDA_get_purpose_info_by_drug_name
 from .FDA_get_recent_changes_by_drug_name import FDA_get_recent_changes_by_drug_name
 from .FDA_get_reference_info_by_drug_name import FDA_get_reference_info_by_drug_name
-from .FDA_get_residue_warning_by_drug_name import FDA_get_residue_warning_by_drug_name
 from .FDA_get_risk_info_by_drug_name import FDA_get_risk_info_by_drug_name
 from .FDA_get_route_info_by_drug_name import FDA_get_route_info_by_drug_name
 from .FDA_get_safe_handling_warnings_by_drug_name import (
@@ -759,6 +752,8 @@ from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyRevi
 from .ResultsInterpretationReviewer import ResultsInterpretationReviewer
 from .RxNorm_get_drug_names import RxNorm_get_drug_names
 from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
+from .SIMBAD_advanced_query import SIMBAD_advanced_query
+from .SIMBAD_query_object import SIMBAD_query_object
 from .ScientificTextSummarizer import ScientificTextSummarizer
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
@@ -1342,7 +1337,6 @@ __all__ = [
     "FDA_get_assembly_installation_info_by_drug_name",
     "FDA_get_boxed_warning_info_by_drug_name",
     "FDA_get_brand_name_generic_name",
-    "FDA_get_calibration_instructions_by_drug_name",
     "FDA_get_carcinogenic_mutagenic_fertility_by_drug_name",
     "FDA_get_child_safety_info_by_drug_name",
     "FDA_get_clinical_pharmacology_by_drug_name",
@@ -1361,7 +1355,6 @@ __all__ = [
     "FDA_get_drug_interactions_by_drug_name",
     "FDA_get_drug_name_by_SPL_ID",
     "FDA_get_drug_name_by_adverse_reaction",
-    "FDA_get_drug_name_by_calibration_instructions",
     "FDA_get_drug_name_by_dependence_info",
     "FDA_get_drug_name_by_document_id",
     "FDA_get_drug_name_by_dosage_info",
@@ -1472,7 +1465,6 @@ __all__ = [
     "FDA_get_purpose_info_by_drug_name",
     "FDA_get_recent_changes_by_drug_name",
     "FDA_get_reference_info_by_drug_name",
-    "FDA_get_residue_warning_by_drug_name",
     "FDA_get_risk_info_by_drug_name",
     "FDA_get_route_info_by_drug_name",
     "FDA_get_safe_handling_warnings_by_drug_name",
@@ -1640,6 +1632,8 @@ __all__ = [
     "ResultsInterpretationReviewer",
     "RxNorm_get_drug_names",
     "SCREEN_get_regulatory_elements",
+    "SIMBAD_advanced_query",
+    "SIMBAD_query_object",
     "ScientificTextSummarizer",
     "SemanticScholar_search_papers",
     "TRIP_Database_Guidelines_Search",

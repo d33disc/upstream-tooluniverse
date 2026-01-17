@@ -49,6 +49,21 @@
         "prompt_name",
         "prompt_arguments"
       ]
+    },
+    "test_examples": [
+      {
+        "operation": "list_tools",
+        "tool_name": "calculator",
+        "tool_arguments": {},
+        "uri": "https://example.com/file.txt",
+        "prompt_name": "greeting",
+        "prompt_arguments": {}
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -85,6 +100,18 @@
         "a",
         "b"
       ]
+    },
+    "test_examples": [
+      {
+        "operation": "add",
+        "a": 1.0,
+        "b": 1.0
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -116,6 +143,17 @@
         "name",
         "language"
       ]
+    },
+    "test_examples": [
+      {
+        "name": "rheumatoid arthritis",
+        "language": "en"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -123,6 +161,14 @@
     "description": "Automatically discover and load all tools from MCP Server 1. Can register discovered tools as individual ToolUniverse tools or provide tool configurations.",
     "type": "MCPAutoLoaderTool",
     "server_url": "http://localhost:8000",
-    "tool_prefix": "mcp_s1_"
+    "tool_prefix": "mcp_s1_",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   }
 ]

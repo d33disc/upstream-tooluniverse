@@ -14,7 +14,7 @@ def OpenTargets_get_chemical_probes_by_target_ensemblID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve chemical probes associated with a specific target using its ensemblID.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_chemical_probes_by_target_ensemblID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

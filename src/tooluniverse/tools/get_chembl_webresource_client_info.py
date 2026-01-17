@@ -13,7 +13,7 @@ def get_chembl_webresource_client_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the chembl-webresource-client package. Python client for ChEMBL web services
 
@@ -29,7 +29,7 @@ def get_chembl_webresource_client_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

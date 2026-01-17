@@ -25,8 +25,12 @@
           "default": 25
         }
       },
-      "required": ["query"],
-      "required_api_keys": ["UMLS_API_KEY"]
+      "required": [
+        "query"
+      ],
+      "required_api_keys": [
+        "UMLS_API_KEY"
+      ]
     },
     "fields": {
       "endpoint": "/search/current",
@@ -59,7 +63,15 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "sabs": "SNOMEDCT_US",
+        "pageNumber": 1,
+        "pageSize": 25
+      }
+    ]
   },
   {
     "name": "umls_get_concept_details",
@@ -83,8 +95,12 @@
           "default": 25
         }
       },
-      "required": ["cui"],
-      "required_api_keys": ["UMLS_API_KEY"]
+      "required": [
+        "cui"
+      ],
+      "required_api_keys": [
+        "UMLS_API_KEY"
+      ]
     },
     "fields": {
       "endpoint": "/content/current/CUI/{cui}",
@@ -109,7 +125,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "cui": "C0011849",
+        "pageNumber": 1,
+        "pageSize": 25
+      }
+    ]
   },
   {
     "name": "icd_search_codes",
@@ -124,7 +147,11 @@
         },
         "version": {
           "type": "string",
-          "enum": ["ICD10CM", "ICD10", "ICD11"],
+          "enum": [
+            "ICD10CM",
+            "ICD10",
+            "ICD11"
+          ],
           "description": "ICD version to search (ICD10CM for US clinical modification, ICD10 for international, ICD11 for ICD-11)",
           "default": "ICD10CM"
         },
@@ -139,8 +166,12 @@
           "default": 25
         }
       },
-      "required": ["query"],
-      "required_api_keys": ["UMLS_API_KEY"]
+      "required": [
+        "query"
+      ],
+      "required_api_keys": [
+        "UMLS_API_KEY"
+      ]
     },
     "fields": {
       "endpoint": "/search/current",
@@ -174,7 +205,15 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "version": "ICD10CM",
+        "pageNumber": 1,
+        "pageSize": 25
+      }
+    ]
   },
   {
     "name": "snomed_search_concepts",
@@ -198,8 +237,12 @@
           "default": 25
         }
       },
-      "required": ["query"],
-      "required_api_keys": ["UMLS_API_KEY"]
+      "required": [
+        "query"
+      ],
+      "required_api_keys": [
+        "UMLS_API_KEY"
+      ]
     },
     "fields": {
       "endpoint": "/search/current",
@@ -233,7 +276,14 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "pageNumber": 1,
+        "pageSize": 25
+      }
+    ]
   },
   {
     "name": "loinc_search_codes",
@@ -257,8 +307,12 @@
           "default": 25
         }
       },
-      "required": ["query"],
-      "required_api_keys": ["UMLS_API_KEY"]
+      "required": [
+        "query"
+      ],
+      "required_api_keys": [
+        "UMLS_API_KEY"
+      ]
     },
     "fields": {
       "endpoint": "/search/current",
@@ -292,6 +346,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "pageNumber": 1,
+        "pageSize": 25
+      }
+    ]
   }
 ]

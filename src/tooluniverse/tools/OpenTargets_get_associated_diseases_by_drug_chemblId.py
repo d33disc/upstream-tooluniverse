@@ -14,7 +14,7 @@ def OpenTargets_get_associated_diseases_by_drug_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the list of diseases associated with a specific drug chemblId based on clinical trial da...
 
@@ -31,7 +31,7 @@ def OpenTargets_get_associated_diseases_by_drug_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

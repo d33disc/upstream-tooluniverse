@@ -15,7 +15,7 @@ def BiomarkerDiscoveryWorkflow(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Discover and validate biomarkers for a specific disease condition using literature analysis, expr...
 
@@ -34,7 +34,7 @@ def BiomarkerDiscoveryWorkflow(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

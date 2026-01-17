@@ -14,7 +14,7 @@ def RxNorm_get_drug_names(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get RXCUI (RxNorm Concept Unique Identifier) and all associated names (generic names, brand names...
 
@@ -31,7 +31,7 @@ def RxNorm_get_drug_names(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

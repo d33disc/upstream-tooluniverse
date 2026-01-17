@@ -16,7 +16,7 @@ def NoveltySignificanceReviewer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Provides a structured peer-review of the work's originality and potential impact.
 
@@ -37,7 +37,7 @@ def NoveltySignificanceReviewer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

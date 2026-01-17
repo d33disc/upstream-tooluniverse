@@ -14,7 +14,7 @@ def OpenTargets_get_drug_trade_names_by_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the trade names associated with a specific drug chemblId.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_drug_trade_names_by_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

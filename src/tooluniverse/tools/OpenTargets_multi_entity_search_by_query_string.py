@@ -16,7 +16,7 @@ def OpenTargets_multi_entity_search_by_query_string(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Perform a multi-entity search based on a query string, filtering by entity names and pagination s...
 
@@ -37,7 +37,7 @@ def OpenTargets_multi_entity_search_by_query_string(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

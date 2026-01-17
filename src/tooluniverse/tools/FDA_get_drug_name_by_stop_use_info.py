@@ -16,7 +16,7 @@ def FDA_get_drug_name_by_stop_use_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on the stop use information provided.
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_by_stop_use_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

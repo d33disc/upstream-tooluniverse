@@ -14,7 +14,7 @@ def ADMETAI_predict_bioavailability(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Predicts bioavailability endpoints (Bioavailability_Ma, HIA_Hou, PAMPA_NCATS, Caco2_Wang, Pgp_Bro...
 
@@ -31,7 +31,7 @@ def ADMETAI_predict_bioavailability(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

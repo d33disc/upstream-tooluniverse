@@ -16,7 +16,7 @@ def FDA_get_drug_name_by_warnings(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug names based on specific warning information.
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_by_warnings(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

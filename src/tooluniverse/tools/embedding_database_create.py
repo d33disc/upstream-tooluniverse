@@ -20,7 +20,7 @@ def embedding_database_create(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Create a per-collection datastore: <name>.db (SQLite) + <name>.faiss (FAISS). Embeds documents us...
 
@@ -49,7 +49,7 @@ def embedding_database_create(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
     if metadata is None:

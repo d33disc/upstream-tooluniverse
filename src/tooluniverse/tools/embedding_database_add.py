@@ -19,7 +19,7 @@ def embedding_database_add(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Append documents to an existing per-collection datastore (<name>.db + <name>.faiss). Uses the sam...
 
@@ -46,7 +46,7 @@ def embedding_database_add(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
     if metadata is None:

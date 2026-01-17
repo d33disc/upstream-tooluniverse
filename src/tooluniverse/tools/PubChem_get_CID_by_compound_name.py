@@ -14,7 +14,7 @@ def PubChem_get_CID_by_compound_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve corresponding CID list (IdentifierList) by chemical name.
 
@@ -31,7 +31,7 @@ def PubChem_get_CID_by_compound_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

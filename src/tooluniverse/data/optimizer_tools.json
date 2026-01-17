@@ -84,7 +84,16 @@
         "optimized_tool",
         "optimization_report"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "tool_config": {},
+        "save_to_file": false,
+        "output_file": "output.json",
+        "max_iterations": 3,
+        "satisfaction_threshold": 8
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -144,7 +153,28 @@
       "required": [
         "test_cases"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "tool_config": {
+          "type": "AgenticTool",
+          "name": "ExampleTool",
+          "description": "An example tool for demonstration purposes.",
+          "parameter": {
+            "type": "object",
+            "properties": {
+              "example_param": {
+                "type": "string",
+                "description": "An example parameter."
+              }
+            },
+            "required": [
+              "example_param"
+            ]
+          }
+        }
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -196,7 +226,13 @@
       "required": [
         "optimized_parameters"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "parameter_schema": "{\"username\": {\"type\": \"string\", \"description\": \"User login name\"}}",
+        "test_results": "[{\"input\": {\"username\": \"jdoe\"}, \"output\": \"success\"}]"
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -230,6 +266,17 @@
       "temperature": 0.4,
       "max_new_tokens": 1024,
       "return_json": true
+    },
+    "test_examples": [
+      {
+        "original_description": "Extracts keywords from text and returns a ranked list of terms.",
+        "test_results": "[{\"input\":\"Analyze this sentence\",\"output\":\"[{\\\"keyword\\\": \\\"sentence\\\", \\\"score\\\": 0.95}]\"}]"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -270,6 +317,18 @@
       "temperature": 1.0,
       "max_new_tokens": 1024,
       "return_json": true
+    },
+    "test_examples": [
+      {
+        "tool_description": "A tool that converts temperatures between Celsius and Fahrenheit scales.",
+        "parameter_descriptions": "{\"temperature\": \"Numerical value representing the temperature to convert.\", \"scale\": \"Target scale for conversion, either 'C' or 'F'.\"}",
+        "test_results": "{\"test1\": \"passed\", \"test2\": \"failed\"}"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   }
 ]

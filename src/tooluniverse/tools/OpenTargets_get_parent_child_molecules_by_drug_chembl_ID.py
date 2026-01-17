@@ -14,7 +14,7 @@ def OpenTargets_get_parent_child_molecules_by_drug_chembl_ID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get parent and child molecules of specified drug chemblId.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_parent_child_molecules_by_drug_chembl_ID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

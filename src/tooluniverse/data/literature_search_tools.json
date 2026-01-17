@@ -31,6 +31,17 @@
       "temperature": 0.7,
       "max_new_tokens": 2048,
       "return_json": false
+    },
+    "test_examples": [
+      {
+        "user_query": "machine learning optimization",
+        "context": "The quick brown fox jumps over the lazy dog."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -77,6 +88,19 @@
       "temperature": 0.5,
       "max_new_tokens": 1024,
       "return_json": false
+    },
+    "test_examples": [
+      {
+        "plan_title": "Literature review on COVID-19 treatments",
+        "plan_description": "Systematic review of antiviral therapies",
+        "current_keywords": "COVID-19, antiviral, treatment",
+        "context": "The quick brown fox jumps over the lazy dog."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -129,6 +153,20 @@
       "temperature": 0.3,
       "max_new_tokens": 1024,
       "return_json": false
+    },
+    "test_examples": [
+      {
+        "plan_title": "Literature review on COVID-19 treatments",
+        "plan_description": "Systematic review of antiviral therapies",
+        "paper_count": 1,
+        "papers_text": "The quick brown fox jumps over the lazy dog.",
+        "context": "The quick brown fox jumps over the lazy dog."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -163,6 +201,17 @@
       "temperature": 0.5,
       "max_new_tokens": 1536,
       "return_json": false
+    },
+    "test_examples": [
+      {
+        "plans_analysis": "{\"coverage\": 0.85, \"quality\": \"high\"}",
+        "context": "The quick brown fox jumps over the lazy dog."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -227,6 +276,22 @@
       "temperature": 0.3,
       "max_new_tokens": 2048,
       "return_json": false
+    },
+    "test_examples": [
+      {
+        "user_query": "machine learning optimization",
+        "user_intent": "Find recent advances in cancer immunotherapy",
+        "total_papers": "150",
+        "total_plans": "3",
+        "iterations": "2",
+        "plan_summaries": "Key findings on immunotherapy efficacy",
+        "context": "The quick brown fox jumps over the lazy dog."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -281,6 +346,18 @@
       "Zenodo_search_records"
     ],
     "composition_file": "enhanced_multi_agent_literature_search.py",
-    "composition_function": "compose"
+    "composition_function": "compose",
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "max_iterations": 3,
+        "quality_threshold": 0.7
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    }
   }
 ]

@@ -14,7 +14,7 @@ def get_em_3d_fitting_and_reconstruction_details(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve EM 3D fitting model details and associated 3D reconstruction info for a given PDB entry.
 
@@ -31,7 +31,7 @@ def get_em_3d_fitting_and_reconstruction_details(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

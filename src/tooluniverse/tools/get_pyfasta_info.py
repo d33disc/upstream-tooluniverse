@@ -13,7 +13,7 @@ def get_pyfasta_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the pyfasta package. Python library for efficient random access to fasta su...
 
@@ -29,7 +29,7 @@ def get_pyfasta_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

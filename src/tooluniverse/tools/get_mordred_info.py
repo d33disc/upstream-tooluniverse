@@ -13,7 +13,7 @@ def get_mordred_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the mordred package. Molecular descriptor calculator
 
@@ -29,7 +29,7 @@ def get_mordred_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

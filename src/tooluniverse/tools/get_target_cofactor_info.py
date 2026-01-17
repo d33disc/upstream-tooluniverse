@@ -14,7 +14,7 @@ def get_target_cofactor_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve essential cofactor information for a given target including cofactor IDs, mechanism of a...
 
@@ -31,7 +31,7 @@ def get_target_cofactor_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

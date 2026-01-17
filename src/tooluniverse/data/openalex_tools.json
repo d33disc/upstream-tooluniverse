@@ -56,7 +56,10 @@
             "description": "List of author names"
           },
           "year": {
-            "type": ["integer", "string"],
+            "type": [
+              "integer",
+              "string"
+            ],
             "description": "Publication year (integer) or 'Year not available' (string)"
           },
           "organizations": {
@@ -83,11 +86,17 @@
             "description": "Open access status"
           },
           "pdf_url": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "URL to PDF if available, or null if not available"
           },
           "keywords": {
-            "type": ["array", "string"],
+            "type": [
+              "array",
+              "string"
+            ],
             "description": "List of keywords/concepts associated with the paper, or 'Keywords not available' if none"
           },
           "article_type": {
@@ -142,6 +151,15 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "search_keywords": "deep learning",
+        "max_results": 10,
+        "year_from": 2020,
+        "year_to": 2023,
+        "open_access": true
+      }
+    ]
   }
 ]

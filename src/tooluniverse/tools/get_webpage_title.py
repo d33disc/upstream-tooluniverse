@@ -15,7 +15,7 @@ def get_webpage_title(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch a webpage and return the content of its <title> tag.
 
@@ -34,7 +34,7 @@ def get_webpage_title(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

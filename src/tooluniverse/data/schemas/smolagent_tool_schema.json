@@ -3,54 +3,113 @@
   "title": "SmolAgentTool Configuration Schema",
   "description": "Complete schema for defining smolagents agents in ToolUniverse",
   "type": "object",
-  "required": ["type", "name", "description", "parameter", "settings"],
+  "required": [
+    "type",
+    "name",
+    "description",
+    "parameter",
+    "settings"
+  ],
   "properties": {
-    "type": {"type": "string", "const": "SmolAgentTool"},
-    "name": {"type": "string", "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"},
-    "description": {"type": "string"},
+    "type": {
+      "type": "string",
+      "const": "SmolAgentTool"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+    },
+    "description": {
+      "type": "string"
+    },
     "parameter": {
       "type": "object",
-      "required": ["type", "properties", "required"],
+      "required": [
+        "type",
+        "properties",
+        "required"
+      ],
       "properties": {
-        "type": {"const": "object"},
+        "type": {
+          "const": "object"
+        },
         "properties": {
           "type": "object",
           "properties": {
             "task": {
               "type": "object",
-              "required": ["type", "description"],
+              "required": [
+                "type",
+                "description"
+              ],
               "properties": {
-                "type": {"const": "string"},
-                "description": {"type": "string"}
+                "type": {
+                  "const": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
               }
             }
           }
         },
-        "required": {"type": "array", "items": {"type": "string"}}
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "settings": {
       "type": "object",
-      "required": ["agent_type", "model"],
+      "required": [
+        "agent_type",
+        "model"
+      ],
       "properties": {
         "agent_type": {
           "type": "string",
-          "enum": ["Agent", "CodeAgent", "ToolCallingAgent", "ManagedAgent"]
+          "enum": [
+            "Agent",
+            "CodeAgent",
+            "ToolCallingAgent",
+            "ManagedAgent"
+          ]
         },
         "available_tools": {
           "type": "array",
           "items": {
             "oneOf": [
-              {"type": "string"},
+              {
+                "type": "string"
+              },
               {
                 "type": "object",
-                "required": ["type"],
+                "required": [
+                  "type"
+                ],
                 "properties": {
-                  "type": {"type": "string", "enum": ["smolagents", "tooluniverse"]},
-                  "class": {"type": "string"},
-                  "import_path": {"type": "string", "default": "smolagents.tools"},
-                  "kwargs": {"type": "object"},
-                  "name": {"type": "string"}
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "smolagents",
+                      "tooluniverse"
+                    ]
+                  },
+                  "class": {
+                    "type": "string"
+                  },
+                  "import_path": {
+                    "type": "string",
+                    "default": "smolagents.tools"
+                  },
+                  "kwargs": {
+                    "type": "object"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
                 }
               }
             ]
@@ -58,7 +117,10 @@
         },
         "model": {
           "type": "object",
-          "required": ["provider", "model_id"],
+          "required": [
+            "provider",
+            "model_id"
+          ],
           "properties": {
             "provider": {
               "type": "string",
@@ -72,10 +134,18 @@
                 "AmazonBedrockModel"
               ]
             },
-            "model_id": {"type": "string"},
-            "api_key": {"type": "string"},
-            "api_base": {"type": "string"},
-            "provider_name": {"type": "string"},
+            "model_id": {
+              "type": "string"
+            },
+            "api_key": {
+              "type": "string"
+            },
+            "api_base": {
+              "type": "string"
+            },
+            "provider_name": {
+              "type": "string"
+            },
             "azure_endpoint": {
               "type": "string",
               "description": "Azure OpenAI endpoint, e.g. https://<resource>.openai.azure.com/"
@@ -89,27 +159,74 @@
         "agent_init_params": {
           "type": "object",
           "properties": {
-            "prompt_templates": {"type": "object"},
-            "planning_interval": {"type": ["integer", "null"]},
-            "stream_outputs": {"type": "boolean"},
-            "max_tool_threads": {"type": "integer"},
-            "max_steps": {"type": "integer"},
-            "max_execution_time": {"type": "integer"},
-            "add_base_tools": {"type": "boolean"},
-            "additional_authorized_imports": {"type": "array", "items": {"type": "string"}},
-            "verbosity_level": {"type": "integer"},
-            "executor_type": {"type": "string", "enum": ["local", "e2b", "docker"]},
-            "executor_kwargs": {"type": "object"}
+            "prompt_templates": {
+              "type": "object"
+            },
+            "planning_interval": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "stream_outputs": {
+              "type": "boolean"
+            },
+            "max_tool_threads": {
+              "type": "integer"
+            },
+            "max_steps": {
+              "type": "integer"
+            },
+            "max_execution_time": {
+              "type": "integer"
+            },
+            "add_base_tools": {
+              "type": "boolean"
+            },
+            "additional_authorized_imports": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verbosity_level": {
+              "type": "integer"
+            },
+            "executor_type": {
+              "type": "string",
+              "enum": [
+                "local",
+                "e2b",
+                "docker"
+              ]
+            },
+            "executor_kwargs": {
+              "type": "object"
+            }
           },
           "additionalProperties": true
         },
         "sub_agents": {
           "type": "array",
-          "items": {"$ref": "#/properties/settings"}
+          "items": {
+            "$ref": "#/properties/settings"
+          }
         }
       }
     },
-    "return_schema": {"type": "object"},
-    "metadata": {"type": "object"}
+    "return_schema": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "test_examples": [
+    {}
+  ],
+  "return_schema": {
+    "type": "object",
+    "description": "Output of the tool execution.",
+    "properties": {}
   }
 }

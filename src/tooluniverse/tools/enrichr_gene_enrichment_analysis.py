@@ -15,7 +15,7 @@ def enrichr_gene_enrichment_analysis(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Perform gene enrichment analysis using Enrichr to find biological pathways, processes, and molecu...
 
@@ -34,7 +34,7 @@ def enrichr_gene_enrichment_analysis(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 

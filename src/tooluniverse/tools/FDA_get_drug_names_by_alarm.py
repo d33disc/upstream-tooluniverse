@@ -17,7 +17,7 @@ def FDA_get_drug_names_by_alarm(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve drug names based on the presence of specific alarms, which are related to adverse reacti...
 
@@ -40,7 +40,7 @@ def FDA_get_drug_names_by_alarm(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

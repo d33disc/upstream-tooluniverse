@@ -42,7 +42,138 @@
       "Search"
     ],
     "type": "ClinicalTrialsSearchTool",
-    "tool_url": "/studies"
+    "tool_url": "/studies",
+    "test_examples": [
+      {
+        "condition": "diabetes-mellitus",
+        "intervention": "aspirin",
+        "query_term": "gene:TP53",
+        "pageSize": 1,
+        "pageToken": 1
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "error_details": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "retriable": {
+              "type": "boolean"
+            },
+            "next_steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "details": {
+              "type": "object",
+              "properties": {
+                "validation_error": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "intervention": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "query_term": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "pageSize": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "pageToken": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "parameter": {
+                  "type": "string"
+                },
+                "expected": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_descriptions",
@@ -81,7 +212,38 @@
       "Description"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "description_type": "brief"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "brief_title": {
+            "type": "string"
+          },
+          "brief_summary": {
+            "type": "string"
+          },
+          "phase": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_status_and_dates",
@@ -115,7 +277,38 @@
       "Dates"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "status_and_date": "recruiting"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "overall_status": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "primary_completion_date": {
+            "type": "string"
+          },
+          "completion_date": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_conditions_and_interventions",
@@ -150,7 +343,63 @@
       "Arm Group"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "condition_and_intervention": "diabetes-mellitus"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "arm_groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "interventions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_eligibility_criteria",
@@ -183,7 +432,41 @@
       "Eligibility Criteria"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "eligibility_criteria": "E11.9"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "eligibility_criteria": {
+            "type": "string"
+          },
+          "healthy_volunteers": {
+            "type": "boolean"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "minimum_age": {
+            "type": "string"
+          },
+          "maximum_age": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_locations",
@@ -216,7 +499,43 @@
       "Location"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "location": "E11.9"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "facility": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_outcome_measures",
@@ -255,7 +574,40 @@
       "Outcome Measures"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "outcome_measures": "primary"
+      }
+    ],
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "NCT ID": {
+            "type": "string"
+          },
+          "primary_outcomes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "measure": {
+                  "type": "string"
+                },
+                "timeFrame": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   {
     "name": "get_clinical_trial_references",
@@ -288,7 +640,18 @@
       "References"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "references": "Study"
+      }
+    ],
+    "return_schema": {
+      "type": "string"
+    }
   },
   {
     "name": "extract_clinical_trial_outcomes",
@@ -325,7 +688,18 @@
       "Secondary Outcome"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "outcome_measure": "E11.9"
+      }
+    ],
+    "return_schema": {
+      "type": "string"
+    }
   },
   {
     "name": "extract_clinical_trial_adverse_events",
@@ -396,6 +770,20 @@
       "Safety"
     ],
     "type": "ClinicalTrialsDetailsTool",
-    "tool_url": "/studies/{nctId}"
+    "tool_url": "/studies/{nctId}",
+    "test_examples": [
+      {
+        "nct_ids": [
+          "NCT01158625"
+        ],
+        "organ_systems": [
+          "Cardiac Disorders"
+        ],
+        "adverse_event_type": "serious"
+      }
+    ],
+    "return_schema": {
+      "type": "string"
+    }
   }
 ]

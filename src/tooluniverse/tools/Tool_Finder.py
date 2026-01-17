@@ -18,7 +18,7 @@ def Tool_Finder(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve related tools from the toolbox based on the provided description, advanced version with ...
 
@@ -43,7 +43,7 @@ def Tool_Finder(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

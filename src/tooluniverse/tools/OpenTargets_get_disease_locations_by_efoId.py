@@ -14,7 +14,7 @@ def OpenTargets_get_disease_locations_by_efoId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the disease's direct location and indirect location disease terms and IDs using the dise...
 
@@ -31,7 +31,7 @@ def OpenTargets_get_disease_locations_by_efoId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

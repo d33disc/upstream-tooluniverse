@@ -16,7 +16,7 @@ def download_text_content(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Download and return text content from URLs. Optimized for text files with automatic encoding dete...
 
@@ -37,7 +37,7 @@ def download_text_content(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

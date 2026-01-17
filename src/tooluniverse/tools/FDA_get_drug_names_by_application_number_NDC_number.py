@@ -16,7 +16,7 @@ def FDA_get_drug_names_by_application_number_NDC_number(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve drug names based on the specified FDA application number or National Drug Code (NDC) num...
 
@@ -37,7 +37,7 @@ def FDA_get_drug_names_by_application_number_NDC_number(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

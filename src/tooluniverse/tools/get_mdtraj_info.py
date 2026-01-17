@@ -13,7 +13,7 @@ def get_mdtraj_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the mdtraj package. Modern library for molecular dynamics trajectory analysis
 
@@ -29,7 +29,7 @@ def get_mdtraj_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

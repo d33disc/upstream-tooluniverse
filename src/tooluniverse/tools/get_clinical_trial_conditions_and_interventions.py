@@ -15,7 +15,7 @@ def get_clinical_trial_conditions_and_interventions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Retrieves the list of conditions or diseases and the interventions and arm groups that the clinic...
 
@@ -34,7 +34,7 @@ def get_clinical_trial_conditions_and_interventions(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

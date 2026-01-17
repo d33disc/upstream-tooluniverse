@@ -16,7 +16,7 @@ def ToolCompatibilityAnalyzer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Analyzes two tool specifications to determine if one tool's output can be used as input for anoth...
 
@@ -37,7 +37,7 @@ def ToolCompatibilityAnalyzer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

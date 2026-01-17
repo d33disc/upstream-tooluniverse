@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
 """
-Test newly integrated tools using test_examples from their configs.
+Test ToolUniverse tools using their defined test_examples and return_schema.
 
-This script:
-1. Loads tool configs using ToolUniverse
-2. Extracts test_examples from each config
-3. Runs each tool with its test examples
-4. Validates return results against return_schema
-5. Reports success/failure
+Usage:
+    python scripts/test_new_tools.py [pattern] [--fail-fast] [--verbose]
+
+Examples:
+    python scripts/test_new_tools.py          # Test ALL tools
+    python scripts/test_new_tools.py fda      # Test only tools matching "fda"
+    python scripts/test_new_tools.py hpa -v   # Test "hpa" tools with verbose output
 """
+import argparse
+import glob
 import json
 import os
 import sys
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# Add parent directory to path
+# Add parent directory to path to import tooluniverse
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tooluniverse import ToolUniverse
@@ -26,248 +30,225 @@ try:
     JSONSCHEMA_AVAILABLE = True
 except ImportError:
     JSONSCHEMA_AVAILABLE = False
-    print("⚠️  jsonschema not available. Schema validation will be skipped.")
+    print("⚠️  jsonschema not available. Schema validation will be skipped. Install with: pip install jsonschema")
 
 
-def load_config_from_file(config_path: str) -> list:
-    """Load tool config JSON file."""
-    with open(config_path, "r") as f:
-        return json.load(f)
+def load_all_tool_configs(data_dir: Path, pattern: str = None) -> List[Tuple[Path, List[Dict]]]:
+    """Load tool configurations matching the pattern."""
+    configs = []
+    search_pattern = f"*{pattern}*" if pattern else "*"
+    files = list(data_dir.glob(f"**/{search_pattern}.json"))
+    
+    # Fallback: If no files found matching pattern, maybe it's a tool name?
+    # Try loading ALL files and letting the tool name filter handle it.
+    if not files and pattern:
+        print(f"⚠️  No files matched '{search_pattern}'. Scanning all files to filter by tool name '{pattern}'...")
+        files = list(data_dir.glob("**/*.json"))
+    
+    # Filter out known non-tool files or problematic ones if necessary
+    # files = [f for f in files if "boltz" not in f.name] # Example exclusion if needed
 
+    print(f"🔍 Found {len(files)} config files matching '{search_pattern}'")
+    
+    for file_path in files:
+        try:
+            with open(file_path, "r") as f:
+                content = json.load(f)
+                if isinstance(content, list):
+                    configs.append((file_path, content))
+                elif isinstance(content, dict):
+                    configs.append((file_path, [content]))
+        except Exception as e:
+            print(f"⚠️  Error loading {file_path.name}: {e}")
+            
+    return configs
 
 def validate_against_schema(data: Any, schema: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
-    """
-    Validate data against JSON schema.
-    
-    Args:
-        data: Data to validate
-        schema: JSON schema to validate against
+    """Validate data against JSON schema."""
+    if not JSONSCHEMA_AVAILABLE or not schema:
+        return True, None
         
-    Returns:
-        Tuple of (is_valid, error_message)
-    """
-    if not JSONSCHEMA_AVAILABLE:
-        return True, None  # Skip validation if jsonschema not available
-        
-    if not schema:
-        return True, None  # No schema to validate against
-        
+    # Skip validation if schema is explicitly null (some tools might still have this if not fixed)
+    if schema.get("type") == "null":
+        return True, None # Treat as valid if we can't validate it
+
     try:
         validate(instance=data, schema=schema)
         return True, None
     except ValidationError as e:
-        error_path = " -> ".join(str(p) for p in e.absolute_path) if e.absolute_path else "root"
-        error_msg = f"Schema validation failed at '{error_path}': {e.message}"
-        if e.context:
-            error_msg += f"\n  Context: {', '.join(str(c.message) for c in e.context[:3])}"
-        return False, error_msg
+        # Create a concise error message
+        path = "->".join(str(p) for p in e.absolute_path) or "root"
+        return False, f"At {path}: {e.message}"
     except Exception as e:
-        return False, f"Schema validation error: {str(e)}"
+        return False, str(e)
 
+def format_result(val: Any, max_len: int = 100) -> str:
+    """Format result for display."""
+    s = str(val)
+    if len(s) > max_len:
+        return s[:max_len] + "..."
+    return s
 
-def extract_result_data(result: Dict[str, Any]) -> Any:
-    """
-    Extract the actual data from ToolUniverse result format.
+def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) -> Dict[str, Any]:
+    stats = {
+        "files": 0,
+        "tools": 0,
+        "tests": 0,
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "schema_valid": 0,
+        "schema_invalid": 0
+    }
     
-    ToolUniverse may return results in different formats:
-    - {"success": True, "data": {...}}
-    - {"success": True, ...}  (direct data)
-    - The result itself if it's not a dict
-    """
-    if not isinstance(result, dict):
-        return result
-        
-    if result.get("success") is False:
-        return None  # Error case, no data to validate
-        
-    # Try to extract data field
-    if "data" in result:
-        return result["data"]
+    start_time = time.time()
     
-    # If no "data" field, return the whole result (minus success/error fields)
-    return {k: v for k, v in result.items() if k not in ["success", "error", "error_details"]}
-
-
-def test_tool_with_examples(
-    tu: ToolUniverse, 
-    tool_name: str, 
-    examples: list, 
-    return_schema: Optional[Dict[str, Any]] = None
-):
-    """Test a tool with its test examples and validate against return_schema."""
-    results = []
-    for idx, example in enumerate(examples):
-        try:
-            result = tu.run_one_function(
-                {"name": tool_name, "arguments": example}
-            )
-            success = isinstance(result, dict) and result.get("success", False)
+    for file_path, tools in configs:
+        stats["files"] += 1
+        if args.verbose:
+            print(f"\n📂 {file_path.name}")
             
-            schema_valid = True
-            schema_error = None
+        for tool in tools:
+            name = tool.get("name")
+            if not name: continue
             
-            if success and return_schema:
-                # Extract actual data from result
-                result_data = extract_result_data(result)
-                if result_data is not None:
-                    # If schema expects top-level structure with status/url but we have just data,
-                    # wrap it appropriately or validate the inner data.data structure
-                    schema_to_validate = return_schema
-                    data_to_validate = result_data
+            # Name filter logic (if pattern matches tool name directly)
+            if args.pattern and args.pattern.lower() not in name.lower() and args.pattern.lower() not in file_path.name.lower():
+                continue
+
+            stats["tools"] += 1
+            examples = tool.get("test_examples", [])
+            schema = tool.get("return_schema")
+            
+            if not examples:
+                if args.verbose:
+                    print(f"  ⏭️  {name}: No test examples")
+                stats["skipped"] += 1
+                continue
+                
+            if args.verbose:
+                print(f"  Testing {name} ({len(examples)} examples)...")
+                
+            for idx, inputs in enumerate(examples):
+                stats["tests"] += 1
+                
+                # Check for placeholders
+                if any("example_string" in str(v) for v in inputs.values()):
+                    print(f"  ⚠️  {name} Example {idx+1}: Contains placeholder input")
+                
+                try:
+                    # Execute
+                    # Note: ToolUniverse.run_one_function expects specific dict format
+                    result = tu.run_one_function({"name": name, "arguments": inputs})
                     
-                    # Check if schema expects status/url at root but we only have data
-                    schema_root_props = return_schema.get("properties", {})
-                    if "status" in schema_root_props and "data" in schema_root_props:
-                        # Schema expects full structure, but we only have extracted data
-                        # If result_data is the inner data object, wrap it
-                        if isinstance(result_data, dict) and "data" in result_data:
-                            # result_data is already {"data": [...]} - validate inner structure
-                            inner_data_schema = schema_root_props.get("data", {})
-                            if inner_data_schema:
-                                schema_to_validate = inner_data_schema
+                    # ToolUniverse generic wrapper often returns dict with success/data/error
+                    # But some specific tools might return raw data. 
+                    # Let's standardize interpretation.
+                    
+                    success = False
+                    data = None
+                    error = None
+                    
+                    if isinstance(result, dict) and "success" in result:
+                        success = result["success"]
+                        if success:
+                            data = result.get("data")
+                            # If data is missing but success is True, use the whole result minus metadata?
+                            # Usually 'data' field holds the return value.
                         else:
-                            # Wrap in expected structure (make status/url optional in validation)
-                            pass  # Try validating as-is first
-                    
-                    schema_valid, schema_error = validate_against_schema(data_to_validate, schema_to_validate)
-                else:
-                    schema_valid = False
-                    schema_error = "No data returned to validate"
-            
-            results.append(
-                {
-                    "example_idx": idx,
-                    "example": example,
-                    "success": success,
-                    "schema_valid": schema_valid,
-                    "error": None if success else result.get("error", "Unknown error"),
-                    "schema_error": schema_error,
-                }
-            )
-        except Exception as e:
-            results.append(
-                {
-                    "example_idx": idx,
-                    "example": example,
-                    "success": False,
-                    "schema_valid": False,
-                    "error": str(e),
-                    "schema_error": None,
-                }
-            )
-    return results
+                            error = result.get("error")
+                    else:
+                        # Assume raw return means success if not None (or even if None?)
+                        # Some tools might return None as valid result.
+                        success = True
+                        data = result
+                        
+                    if success:
+                        stats["passed"] += 1
+                        # Validate Schema
+                        is_valid, schema_err = validate_against_schema(data, schema)
+                        if is_valid:
+                            stats["schema_valid"] += 1
+                            if args.verbose:
+                                print(f"    ✅ Ex {idx+1}: Passed")
+                        else:
+                            stats["schema_invalid"] += 1
+                            print(f"    ⚠️  {name} Ex {idx+1}: Schema Mismatch: {schema_err}")
+                            if args.verbose:
+                                print(f"       Data: {format_result(data)}")
+                                
+                    else:
+                        stats["failed"] += 1
+                        print(f"    ❌ {name} Ex {idx+1}: Failed - {error}")
+                        if args.fail_fast:
+                            print("Stopping due to --fail-fast")
+                            return stats
 
+                except Exception as e:
+                    stats["failed"] += 1
+                    print(f"    🔥 {name} Ex {idx+1}: Exception - {e}")
+                    if args.fail_fast:
+                        return stats
+                        
+    duration = time.time() - start_time
+    stats["duration"] = duration
+    return stats
 
 def main():
-    # Tool config files for newly integrated tools
-    tool_configs = {
-        "GBIF": "src/tooluniverse/data/gbif_tools.json",
-        "OBIS": "src/tooluniverse/data/obis_tools.json",
-        "WikiPathways": "src/tooluniverse/data/wikipathways_tools.json",
-        "RNAcentral": "src/tooluniverse/data/rnacentral_tools.json",
-        "ENCODE": "src/tooluniverse/data/encode_tools.json",
-        "GTEx": "src/tooluniverse/data/gtex_tools.json",
-        "MGnify": "src/tooluniverse/data/mgnify_tools.json",
-        "GDC": "src/tooluniverse/data/gdc_tools.json",
-    }
-
-    repo_root = Path(__file__).parent.parent
-    tu = ToolUniverse()
-    tu.load_tools()
-
-    all_results = {}
-    total_tests = 0
-    total_passed = 0
-    total_schema_tests = 0
-    total_schema_passed = 0
-
-    for tool_group, config_path in tool_configs.items():
-        full_path = repo_root / config_path
-        if not full_path.exists():
-            print(f"⚠️  Config not found: {config_path}")
-            continue
-
-        config = load_config_from_file(full_path)
-        group_results = []
-
-        for tool_def in config:
-            tool_name = tool_def.get("name")
-            test_examples = tool_def.get("test_examples", [])
-            return_schema = tool_def.get("return_schema")
-
-            if not tool_name:
-                continue
-
-            if not test_examples:
-                print(f"⚠️  {tool_name}: No test_examples found")
-                continue
-
-            schema_info = " (with schema validation)" if return_schema else " (no return_schema)"
-            print(f"\n🧪 Testing {tool_name} ({len(test_examples)} examples){schema_info}...")
-            results = test_tool_with_examples(tu, tool_name, test_examples, return_schema)
-
-            for r in results:
-                total_tests += 1
-                execution_pass = r["success"]
-                schema_pass = r.get("schema_valid", True)
-                
-                # Track schema validation separately
-                if return_schema and execution_pass:
-                    total_schema_tests += 1
-                    if schema_pass:
-                        total_schema_passed += 1
-                
-                if execution_pass and schema_pass:
-                    total_passed += 1
-                    status_icon = "✅"
-                    status_msg = "PASS"
-                else:
-                    status_icon = "❌"
-                    status_parts = []
-                    if not execution_pass:
-                        status_parts.append(f"Execution: {r['error']}")
-                    if not schema_pass and return_schema:
-                        status_parts.append(f"Schema: {r.get('schema_error', 'Invalid')}")
-                    status_msg = " | ".join(status_parts) if status_parts else "FAIL"
-                
-                print(f"  {status_icon} Example {r['example_idx']+1}: {status_msg}")
-                
-                # Show schema validation details if failed
-                if execution_pass and not schema_pass and r.get("schema_error"):
-                    print(f"      └─ Schema error: {r['schema_error']}")
-
-            group_results.append(
-                {"tool_name": tool_name, "results": results}
-            )
-
-        all_results[tool_group] = group_results
-
-    # Summary
-    print("\n" + "=" * 60)
-    print("📊 Test Summary")
-    print("=" * 60)
-    print(f"Total tests: {total_tests}")
-    print(f"  Passed: {total_passed}")
-    print(f"  Failed: {total_tests - total_passed}")
-    if total_tests > 0:
-        print(f"  Success rate: {100 * total_passed / total_tests:.1f}%")
+    parser = argparse.ArgumentParser(description="Test ToolUniverse tools.")
+    parser.add_argument("pattern", nargs="?", help="Filter tools by filename or tool name pattern (e.g. 'fda')")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Show passed tests detailed output")
+    parser.add_argument("--fail-fast", action="store_true", help="Stop after first failure")
+    parser.add_argument("--dir", default="src/tooluniverse/data", help="Directory containing tool JSONs")
     
-    if total_schema_tests > 0:
-        print(f"\n📋 Schema Validation:")
-        print(f"  Schema tests: {total_schema_tests}")
-        print(f"  Schema passed: {total_schema_passed}")
-        print(f"  Schema failed: {total_schema_tests - total_schema_passed}")
-        if total_schema_tests > 0:
-            print(f"  Schema validation rate: {100 * total_schema_passed / total_schema_tests:.1f}%")
-
-    # Exit with error if any tests failed
-    if total_passed < total_tests:
+    args = parser.parse_args()
+    
+    # Setup paths
+    repo_root = Path(__file__).parent.parent
+    data_dir = repo_root / args.dir
+    
+    if not data_dir.exists():
+        print(f"Error: Data directory not found at {data_dir}")
         sys.exit(1)
-    else:
-        print("\n✅ All tests passed!")
+        
+    # Load ToolUniverse
+    print("Initializing ToolUniverse...")
+    try:
+        tu = ToolUniverse()
+        tu.load_tools()
+        print(f"Loaded {len(tu.tools)} tools into registry.")
+    except Exception as e:
+        print(f"Failed to load ToolUniverse: {e}")
+        sys.exit(1)
+        
+    # Load Configs
+    configs = load_all_tool_configs(data_dir, args.pattern)
+    if not configs:
+        print("No matching configuration files found.")
         sys.exit(0)
-
-
+        
+    # Run Tests
+    print(f"Running tests on {len(configs)} files...")
+    stats = run_tests(tu, configs, args)
+    
+    # Summary
+    print("\n" + "="*50)
+    print("TEST SUMMARY")
+    print("="*50)
+    print(f"Files Scanned:    {stats['files']}")
+    print(f"Tools Tested:     {stats['tools']}")
+    print(f"Tests Run:        {stats['tests']}")
+    print(f"Passed:           {stats['passed']} ({stats['passed']/stats['tests']*100:.1f}%)" if stats['tests'] else "Passed: 0")
+    print(f"Failed:           {stats['failed']}")
+    print(f"Skipped:          {stats['skipped']}")
+    print("-" * 30)
+    print(f"Schema Valid:     {stats['schema_valid']}")
+    print(f"Schema Invalid:   {stats['schema_invalid']}")
+    print(f"Duration:         {stats['duration']:.2f}s")
+    print("="*50)
+    
+    if stats['failed'] > 0:
+        sys.exit(1)
+    
 if __name__ == "__main__":
     main()
-

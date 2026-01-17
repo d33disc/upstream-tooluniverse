@@ -14,7 +14,7 @@ def get_crystallization_ph_by_pdb_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch the pH used during crystallization of the sample.
 
@@ -31,7 +31,7 @@ def get_crystallization_ph_by_pdb_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

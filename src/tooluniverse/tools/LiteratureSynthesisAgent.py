@@ -16,7 +16,7 @@ def LiteratureSynthesisAgent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     AI agent that synthesizes literature findings and provides evidence-based insights
 
@@ -37,7 +37,7 @@ def LiteratureSynthesisAgent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

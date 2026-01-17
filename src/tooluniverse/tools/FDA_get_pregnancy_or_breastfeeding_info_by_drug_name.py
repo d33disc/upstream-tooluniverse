@@ -16,7 +16,7 @@ def FDA_get_pregnancy_or_breastfeeding_info_by_drug_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the pregnancy or breastfeeding information based on the specified drug name.
 
@@ -37,7 +37,7 @@ def FDA_get_pregnancy_or_breastfeeding_info_by_drug_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

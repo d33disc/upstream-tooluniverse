@@ -15,7 +15,7 @@ def AdverseEventPredictionQuestionGenerator(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Generates a set of personalized adverse‐event prediction questions for a given disease and drug, ...
 
@@ -34,7 +34,7 @@ def AdverseEventPredictionQuestionGenerator(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 

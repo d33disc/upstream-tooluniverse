@@ -14,7 +14,7 @@ def OpenTargets_map_any_disease_id_to_all_other_ids(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Given any known disease or phenotype ID (EFO, OMIM, MONDO, UMLS, ICD10, MedDRA, etc.), return all...
 
@@ -31,7 +31,7 @@ def OpenTargets_map_any_disease_id_to_all_other_ids(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

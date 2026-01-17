@@ -11,7 +11,9 @@
           "description": "Search keyword for pathway names or descriptions (e.g., 'diabetes', 'metabolism')"
         }
       },
-      "required": ["keyword"]
+      "required": [
+        "keyword"
+      ]
     },
     "fields": {
       "endpoint": "/find/pathway",
@@ -66,7 +68,11 @@
       "Search"
     ],
     "metadata": {
-      "tags": ["pathway", "metabolism", "search"],
+      "tags": [
+        "pathway",
+        "metabolism",
+        "search"
+      ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
     }
@@ -83,7 +89,9 @@
           "description": "KEGG pathway identifier (e.g., 'hsa00010', 'path:hsa00010')"
         }
       },
-      "required": ["pathway_id"]
+      "required": [
+        "pathway_id"
+      ]
     },
     "fields": {
       "endpoint": "/get",
@@ -135,7 +143,11 @@
       "Information"
     ],
     "metadata": {
-      "tags": ["pathway", "details", "genes"],
+      "tags": [
+        "pathway",
+        "details",
+        "genes"
+      ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
     }
@@ -157,7 +169,9 @@
           "default": ""
         }
       },
-      "required": ["keyword"]
+      "required": [
+        "keyword"
+      ]
     },
     "fields": {
       "endpoint": "/find/genes",
@@ -213,7 +227,11 @@
       "Search"
     ],
     "metadata": {
-      "tags": ["gene", "search", "organism"],
+      "tags": [
+        "gene",
+        "search",
+        "organism"
+      ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
     }
@@ -230,7 +248,9 @@
           "description": "KEGG gene identifier (e.g., 'hsa:348', 'hsa:3480')"
         }
       },
-      "required": ["gene_id"]
+      "required": [
+        "gene_id"
+      ]
     },
     "fields": {
       "endpoint": "/get",
@@ -282,7 +302,11 @@
       "Information"
     ],
     "metadata": {
-      "tags": ["gene", "details", "sequence"],
+      "tags": [
+        "gene",
+        "details",
+        "sequence"
+      ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
     }
@@ -348,7 +372,11 @@
       "List"
     ],
     "metadata": {
-      "tags": ["organism", "list", "taxonomy"],
+      "tags": [
+        "organism",
+        "list",
+        "taxonomy"
+      ],
       "difficulty_level": "easy",
       "estimated_execution_time": "< 2 seconds"
     }

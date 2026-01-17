@@ -14,7 +14,7 @@ def GO_search_terms(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Searches for Gene Ontology (GO) terms by a keyword using the GOlr search engine. Returns GO terms...
 
@@ -31,7 +31,7 @@ def GO_search_terms(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

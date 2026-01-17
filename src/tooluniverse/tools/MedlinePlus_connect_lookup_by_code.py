@@ -18,7 +18,7 @@ def MedlinePlus_connect_lookup_by_code(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Look up corresponding MedlinePlus page information through MedlinePlus Connect Web Service using ...
 
@@ -43,7 +43,7 @@ def MedlinePlus_connect_lookup_by_code(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

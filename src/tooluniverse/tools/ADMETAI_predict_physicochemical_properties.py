@@ -14,7 +14,7 @@ def ADMETAI_predict_physicochemical_properties(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Predicts physicochemical properties (molecular weight, logP, hydrogen bond acceptors/donors, Lipi...
 
@@ -31,7 +31,7 @@ def ADMETAI_predict_physicochemical_properties(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

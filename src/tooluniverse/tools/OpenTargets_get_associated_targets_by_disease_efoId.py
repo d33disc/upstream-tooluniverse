@@ -14,7 +14,7 @@ def OpenTargets_get_associated_targets_by_disease_efoId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Find targets associated with a specific disease or phenotype based on efoId.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_associated_targets_by_disease_efoId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

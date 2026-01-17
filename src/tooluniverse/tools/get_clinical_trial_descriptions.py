@@ -15,7 +15,7 @@ def get_clinical_trial_descriptions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Retrieves detailed identification information for trials, including titles, phases, and descripti...
 
@@ -34,7 +34,7 @@ def get_clinical_trial_descriptions(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

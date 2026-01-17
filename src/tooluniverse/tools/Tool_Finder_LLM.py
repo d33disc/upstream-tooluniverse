@@ -18,7 +18,7 @@ def Tool_Finder_LLM(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     LLM-based tool finder that uses natural language processing to intelligently select relevant tool...
 
@@ -43,7 +43,7 @@ def Tool_Finder_LLM(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

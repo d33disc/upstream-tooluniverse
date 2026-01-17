@@ -10,18 +10,18 @@ from ._shared_client import get_shared_client
 
 def DailyMed_search_spls(
     drug_name: str,
-    ndc: str,
-    rxcui: str,
-    setid: str,
-    published_date_gte: str,
-    published_date_eq: str,
-    pagesize: int,
-    page: int,
+    ndc: Optional[str] = None,
+    rxcui: Optional[str] = None,
+    setid: Optional[str] = None,
+    published_date_gte: Optional[str] = None,
+    published_date_eq: Optional[str] = None,
+    pagesize: Optional[int] = 100,
+    page: Optional[int] = 1,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search SPL list using multiple filter conditions (drug_name/ndc/rxcui/setid) and return metadata ...
 
@@ -52,7 +52,7 @@ def DailyMed_search_spls(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

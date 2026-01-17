@@ -17,7 +17,7 @@ def FDA_get_drug_names_by_route(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug names based on the route of administration.
 
@@ -40,7 +40,7 @@ def FDA_get_drug_names_by_route(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

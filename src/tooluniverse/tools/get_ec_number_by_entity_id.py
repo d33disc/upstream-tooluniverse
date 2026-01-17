@@ -14,7 +14,7 @@ def get_ec_number_by_entity_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the Enzyme Commission (EC) number(s) for an entity.
 
@@ -31,7 +31,7 @@ def get_ec_number_by_entity_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

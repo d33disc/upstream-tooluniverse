@@ -17,7 +17,7 @@ def DrugOptimizationAgent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     AI agent that analyzes drug optimization strategies based on ADMET and efficacy data
 
@@ -40,7 +40,7 @@ def DrugOptimizationAgent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def OpenTargets_get_disease_ids_by_efoId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Given an EFO ID, retrieve all cross-referenced external disease IDs including MONDO, OMIM, MeSH, ...
 
@@ -31,7 +31,7 @@ def OpenTargets_get_disease_ids_by_efoId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

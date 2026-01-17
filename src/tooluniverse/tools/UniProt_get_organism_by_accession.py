@@ -14,7 +14,7 @@ def UniProt_get_organism_by_accession(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Extract the organism scientific name from UniProtKB entry.
 
@@ -31,7 +31,7 @@ def UniProt_get_organism_by_accession(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 

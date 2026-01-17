@@ -14,7 +14,7 @@ def get_binding_affinity_by_pdb_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve binding affinity constants (Kd, Ki, IC50) associated with ligands in a PDB entry.
 
@@ -31,7 +31,7 @@ def get_binding_affinity_by_pdb_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

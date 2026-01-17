@@ -14,7 +14,7 @@ def get_assembly_info_by_pdb_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve all associated biological assembly details for a given PDB structure.
 
@@ -31,7 +31,7 @@ def get_assembly_info_by_pdb_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

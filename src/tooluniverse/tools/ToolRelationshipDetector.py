@@ -15,7 +15,7 @@ def ToolRelationshipDetector(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Analyzes a primary tool against a list of other tools to identify meaningful, directional data fl...
 
@@ -34,7 +34,7 @@ def ToolRelationshipDetector(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

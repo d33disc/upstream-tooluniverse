@@ -14,7 +14,7 @@ def get_chem_comp_audit_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch audit history for a chemical component: action type, date, details, ordinal, and processing...
 
@@ -31,7 +31,7 @@ def get_chem_comp_audit_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

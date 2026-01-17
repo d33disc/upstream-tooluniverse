@@ -53,6 +53,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1,
+        "api_key": ""
+      }
+    ]
   }
 ]

@@ -19,7 +19,7 @@ def OutputSummarizationComposer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Composes output summarization workflow by chunking long outputs, processing each chunk with AI su...
 
@@ -46,7 +46,7 @@ def OutputSummarizationComposer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

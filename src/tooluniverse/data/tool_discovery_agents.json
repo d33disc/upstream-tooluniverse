@@ -39,15 +39,22 @@
       "return_json": false
     },
     "return_schema": {
-                "type": "string",
+      "type": "string",
       "description": "XML-formatted tool definition with code and spec sections"
-    }
+    },
+    "test_examples": [
+      {
+        "tool_description": "A tool that searches for drugs",
+        "reference_info": "PubMed API documentation for literature search",
+        "xml_template": "<tool><name>example</name></tool>"
+      }
+    ]
   },
   {
     "type": "AgenticTool",
     "name": "XMLToolOptimizer",
     "description": "Optimizes tools defined in XML format based on test results and quality feedback",
-    "prompt": "You are an expert code and spec optimizer. Optimize the XML-defined tool based on comprehensive context.\n\n## CURRENT XML TOOL\n{xml_tool}\n\n## OPTIMIZATION CONTEXT\n{optimization_context}\n\n## CRITICAL: CHECK FOR INSTRUCTIONS\n\nIf optimization_context contains an \"instruction\" field, follow it as TOP PRIORITY:\n- User refused dependencies → Use standard library only\n- Installation failed → Use different packages\n- Reimplementation required → Generate completely new approach\n\n## OPTIMIZATION STRATEGY\n\n### Analyze Test Results First\nIf test_results.test_details exists:\n1. Examine ALL test outputs - each test has `output.result`\n2. Look for error patterns in test outputs\n3. Check if errors are from:\n   - Schema validation (spec issue - fix the <spec>)\n   - Code execution (code issue - fix the <code>)\n   - Both (fix both)\n4. Schema issues: Check \"required\" fields, parameter types, format\n5. Code issues: Check imports, logic, error handling\n\n### Fix Schema Issues (Common Problems)\nIf validation errors appear:\n- \"required\": true should be \"required\": [\"field1\", \"field2\"] (array format)\n- Check parameter types match tool expectations\n- Ensure return_schema matches actual returns\n- Verify all referenced fields exist\n\n### Fix Code Issues\nIf test outputs show errors:\n1. Analyze each error type from test outputs\n2. Identify root cause from error message\n3. Apply targeted fixes to the <code> section\n4. Ensure fixes don't break existing functionality\n\n### Improve Code Quality\n1. Simplify complex logic\n2. Remove unnecessary code\n3. Optimize algorithms and data structures\n4. Improve error handling\n5. Enhance input validation\n\n### Learn from History\n- Check improvement_history for past attempts\n- Avoid repeating failed approaches\n- If same error persists, completely change strategy\n\n## RESPONSE FORMAT\n\nReturn the optimized XML in the EXACT same format as xml_tool:\n\n<code><![CDATA[\n  [optimized Python code]\n]]></code>\n<spec><![CDATA[\n  [updated JSON spec if needed]\n]]></spec>\n\n## RULES\n1. Optimize BOTH <code> AND <spec> - spec issues are common causes of failures\n2. Keep the same XML structure with CDATA sections\n3. MUST wrap content in CDATA: <code><![CDATA[...]]></code>\n4. When fixing validation errors, update <spec> parameter.required field\n5. Maintain tool name and core functionality\n6. Ensure code is executable and syntactically correct\n7. Return ONLY the XML (no markdown blocks, no explanations)\n\nMake it work, make it simple, make it better!",
+    "prompt": "You are an expert code and spec optimizer. Optimize the XML-defined tool based on comprehensive context.\n\n## CURRENT XML TOOL\n{xml_tool}\n\n## OPTIMIZATION CONTEXT\n{optimization_context}\n\n## CRITICAL: CHECK FOR INSTRUCTIONS\n\nIf optimization_context contains an \"instruction\" field, follow it as TOP PRIORITY:\n- User refused dependencies \u2192 Use standard library only\n- Installation failed \u2192 Use different packages\n- Reimplementation required \u2192 Generate completely new approach\n\n## OPTIMIZATION STRATEGY\n\n### Analyze Test Results First\nIf test_results.test_details exists:\n1. Examine ALL test outputs - each test has `output.result`\n2. Look for error patterns in test outputs\n3. Check if errors are from:\n   - Schema validation (spec issue - fix the <spec>)\n   - Code execution (code issue - fix the <code>)\n   - Both (fix both)\n4. Schema issues: Check \"required\" fields, parameter types, format\n5. Code issues: Check imports, logic, error handling\n\n### Fix Schema Issues (Common Problems)\nIf validation errors appear:\n- \"required\": true should be \"required\": [\"field1\", \"field2\"] (array format)\n- Check parameter types match tool expectations\n- Ensure return_schema matches actual returns\n- Verify all referenced fields exist\n\n### Fix Code Issues\nIf test outputs show errors:\n1. Analyze each error type from test outputs\n2. Identify root cause from error message\n3. Apply targeted fixes to the <code> section\n4. Ensure fixes don't break existing functionality\n\n### Improve Code Quality\n1. Simplify complex logic\n2. Remove unnecessary code\n3. Optimize algorithms and data structures\n4. Improve error handling\n5. Enhance input validation\n\n### Learn from History\n- Check improvement_history for past attempts\n- Avoid repeating failed approaches\n- If same error persists, completely change strategy\n\n## RESPONSE FORMAT\n\nReturn the optimized XML in the EXACT same format as xml_tool:\n\n<code><![CDATA[\n  [optimized Python code]\n]]></code>\n<spec><![CDATA[\n  [updated JSON spec if needed]\n]]></spec>\n\n## RULES\n1. Optimize BOTH <code> AND <spec> - spec issues are common causes of failures\n2. Keep the same XML structure with CDATA sections\n3. MUST wrap content in CDATA: <code><![CDATA[...]]></code>\n4. When fixing validation errors, update <spec> parameter.required field\n5. Maintain tool name and core functionality\n6. Ensure code is executable and syntactically correct\n7. Return ONLY the XML (no markdown blocks, no explanations)\n\nMake it work, make it simple, make it better!",
     "input_arguments": [
       "xml_tool",
       "optimization_context"
@@ -56,7 +63,7 @@
       "type": "object",
       "properties": {
         "xml_tool": {
-                "type": "string",
+          "type": "string",
           "description": "Current XML-formatted tool definition with code and spec sections"
         },
         "optimization_context": {
@@ -77,9 +84,15 @@
       "return_json": false
     },
     "return_schema": {
-          "type": "string",
+      "type": "string",
       "description": "Optimized XML-formatted tool definition"
-    }
+    },
+    "test_examples": [
+      {
+        "xml_tool": "<tool><name>example</name></tool>",
+        "optimization_context": "The quick brown fox jumps over the lazy dog."
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -130,9 +143,9 @@
           "description": "Confidence in the quality of curated information (0-10)"
         },
         "recommendations": {
-              "type": "array",
-              "items": {
-                "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
           },
           "description": "Specific recommendations for implementation"
         }
@@ -141,7 +154,13 @@
         "curated_info",
         "summary"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "tool_description": "A tool that searches for drugs",
+        "raw_reference_info": "REST API endpoint: https://api.example.com/v1"
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -180,8 +199,8 @@
       "type": "object",
       "properties": {
         "recommended_packages": {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
             "type": "object"
           },
           "description": "Top recommended packages with detailed analysis"
@@ -191,25 +210,31 @@
           "description": "How to use recommended packages together"
         },
         "alternatives": {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
             "type": "object"
-              },
-          "description": "Alternative packages to consider"
-            },
-        "warnings": {
-              "type": "array",
-              "items": {
-                    "type": "string"
-                  },
-          "description": "Potential issues or considerations"
-            }
           },
-          "required": [
+          "description": "Alternative packages to consider"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Potential issues or considerations"
+        }
+      },
+      "required": [
         "recommended_packages",
         "implementation_strategy"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "tool_description": "A tool that searches for drugs",
+        "package_candidates": "[\"requests\", \"httpx\", \"aiohttp\"]"
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -250,21 +275,21 @@
         "key_issues": {
           "type": "array",
           "items": {
-              "type": "object"
-            },
+            "type": "object"
+          },
           "description": "Main issues identified from test failures"
-            },
+        },
         "optimization_priorities": {
-              "type": "array",
-              "items": {
-                    "type": "object"
-                  },
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
           "description": "Prioritized list of optimization actions"
         },
         "error_patterns": {
-              "type": "array",
-              "items": {
-              "type": "object"
+          "type": "array",
+          "items": {
+            "type": "object"
           },
           "description": "Recurring error patterns found"
         },
@@ -275,15 +300,15 @@
         "detailed_errors": {
           "type": "array",
           "items": {
-              "type": "object"
-            },
+            "type": "object"
+          },
           "description": "Detailed breakdown of each error"
         },
         "recommendations": {
           "type": "array",
           "items": {
             "type": "string"
-        },
+          },
           "description": "Overall recommendations"
         }
       },
@@ -291,7 +316,13 @@
         "key_issues",
         "optimization_priorities"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "test_results": "{\"passed\": 8, \"failed\": 2, \"errors\": []}",
+        "tool_implementation": "def search(): pass"
+      }
+    ]
   },
   {
     "type": "AgenticTool",
@@ -353,7 +384,17 @@
     "return_schema": {
       "type": "object",
       "description": "Code quality analysis results including scores, feedback, and recommendations"
-    }
+    },
+    "test_examples": [
+      {
+        "tool_name": "ExampleTool",
+        "tool_description": "A sample utility that performs arithmetic operations",
+        "tool_parameters": "{\"operand1\":\"number\",\"operand2\":\"number\"}",
+        "implementation_code": "def add(a, b):\n    return a + b",
+        "test_cases": "[{\"input\": [1, 2], \"expected\": 3}, {\"input\": [5, -2], \"expected\": 3}]",
+        "test_execution_results": "[{\"input\": [1, 2], \"expected\": 3, \"actual\": 3, \"status\": \"pass\"}, {\"input\": [5, -2], \"expected\": 3, \"actual\": 3, \"status\": \"pass\"}]"
+      }
+    ]
   },
   {
     "type": "ComposeTool",
@@ -423,6 +464,15 @@
         "quality_score",
         "saved_files"
       ]
-    }
+    },
+    "test_examples": [
+      {
+        "tool_description": "A tool that searches for drugs",
+        "max_iterations": 2,
+        "save_to_file": true,
+        "output_file": "output.json",
+        "save_dir": "./generated_tools"
+      }
+    ]
   }
 ]

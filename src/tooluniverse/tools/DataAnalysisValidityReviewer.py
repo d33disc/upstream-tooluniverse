@@ -14,7 +14,7 @@ def DataAnalysisValidityReviewer(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Checks statistical choices, assumption testing, and reporting transparency.
 
@@ -31,7 +31,7 @@ def DataAnalysisValidityReviewer(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

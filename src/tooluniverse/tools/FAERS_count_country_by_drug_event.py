@@ -17,7 +17,7 @@ def FAERS_count_country_by_drug_event(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Count the number of adverse event reports per country of occurrence. Only medicinalproduct is req...
 
@@ -40,7 +40,7 @@ def FAERS_count_country_by_drug_event(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

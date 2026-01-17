@@ -16,7 +16,7 @@ def FDA_get_drug_names_by_abuse_dependence_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on information about drug abuse and dependence, including whether th...
 
@@ -37,7 +37,7 @@ def FDA_get_drug_names_by_abuse_dependence_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

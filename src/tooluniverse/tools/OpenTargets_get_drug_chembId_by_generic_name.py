@@ -14,7 +14,7 @@ def OpenTargets_get_drug_chembId_by_generic_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch the drug chemblId and description based on the drug generic name.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_drug_chembId_by_generic_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

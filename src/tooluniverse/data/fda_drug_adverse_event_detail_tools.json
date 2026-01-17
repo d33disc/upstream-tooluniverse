@@ -147,23 +147,38 @@
             "description": "Patient information",
             "properties": {
               "patientonsetage": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Patient age at onset of event"
               },
               "patientonsetageunit": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Unit for patient age"
               },
               "patientagegroup": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Patient age group"
               },
               "patientsex": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Patient sex (1=Male, 2=Female, 0=Unknown)"
               },
               "patientweight": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "description": "Patient weight"
               },
               "drug": {

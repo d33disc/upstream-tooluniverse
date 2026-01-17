@@ -14,7 +14,7 @@ def OpenTargets_search_category_counts_by_query_string(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get the count of entries in each entity category (disease, target, drug) based on a query string.
 
@@ -31,7 +31,7 @@ def OpenTargets_search_category_counts_by_query_string(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

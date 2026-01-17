@@ -14,7 +14,7 @@ def OpenTargets_get_disease_id_description_by_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the efoId and additional details of a disease based on its name.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_disease_id_description_by_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

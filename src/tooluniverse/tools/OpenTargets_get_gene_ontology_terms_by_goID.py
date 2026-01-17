@@ -14,7 +14,7 @@ def OpenTargets_get_gene_ontology_terms_by_goID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve Gene Ontology terms based on a list of GO IDs.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_gene_ontology_terms_by_goID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

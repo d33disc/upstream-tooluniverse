@@ -14,7 +14,7 @@ def OpenTargets_get_approved_indications_by_drug_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve detailed information about multiple drugs using a list of ChEMBL IDs.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_approved_indications_by_drug_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

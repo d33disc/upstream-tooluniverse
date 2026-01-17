@@ -65,7 +65,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1
+      }
+    ]
   },
   {
     "type": "PubMedGuidelinesTool",
@@ -170,7 +176,14 @@
           "description": "Source database (PubMed)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1,
+        "api_key": ""
+      }
+    ]
   },
   {
     "type": "EuropePMCGuidelinesTool",
@@ -235,14 +248,14 @@
                 "type": "string",
                 "description": "Type of publication"
               },
-          "abstract": {
-            "type": "string",
-            "description": "Abstract or summary of the guideline"
-          },
-          "content": {
-            "type": "string",
-            "description": "Extended clinical content extracted from Europe PMC when available"
-          },
+              "abstract": {
+                "type": "string",
+                "description": "Abstract or summary of the guideline"
+              },
+              "content": {
+                "type": "string",
+                "description": "Extended clinical content extracted from Europe PMC when available"
+              },
               "is_guideline": {
                 "type": "boolean",
                 "description": "Indicates if this is a clinical guideline"
@@ -271,7 +284,13 @@
           "description": "Source database (Europe PMC)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1
+      }
+    ]
   },
   {
     "type": "TRIPDatabaseTool",
@@ -396,7 +415,14 @@
           "description": "Source database (TRIP Database)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1,
+        "search_type": "guidelines"
+      }
+    ]
   },
   {
     "type": "WHOGuidelinesTool",
@@ -478,7 +504,13 @@
           "description": "Additional notes about the search results (if any)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1
+      }
+    ]
   },
   {
     "type": "OpenAlexGuidelinesTool",
@@ -592,7 +624,15 @@
           "description": "Source database (OpenAlex)"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1,
+        "year_from": 2023,
+        "year_to": 2023
+      }
+    ]
   },
   {
     "type": "NICEGuidelineFullTextTool",
@@ -672,7 +712,12 @@
           "description": "Whether full text extraction was successful"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "url": "https://www.wikipedia.org"
+      }
+    ]
   },
   {
     "type": "WHOGuidelineFullTextTool",
@@ -760,7 +805,12 @@
           "description": "Additional notes about content availability"
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "url": "https://www.wikipedia.org"
+      }
+    ]
   },
   {
     "type": "GINGuidelinesTool",
@@ -832,7 +882,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1
+      }
+    ]
   },
   {
     "type": "CMAGuidelinesTool",
@@ -904,6 +960,12 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization",
+        "limit": 1
+      }
+    ]
   }
 ]

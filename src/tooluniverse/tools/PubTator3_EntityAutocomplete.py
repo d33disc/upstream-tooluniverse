@@ -16,7 +16,7 @@ def PubTator3_EntityAutocomplete(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Provides suggestions for the best‐matching standardized PubTator IDs for a partial biomedical ter...
 
@@ -37,7 +37,7 @@ def PubTator3_EntityAutocomplete(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

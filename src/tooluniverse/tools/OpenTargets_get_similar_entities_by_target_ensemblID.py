@@ -16,7 +16,7 @@ def OpenTargets_get_similar_entities_by_target_ensemblID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve similar entities for a given target ensemblID using a model trained with PubMed.
 
@@ -37,7 +37,7 @@ def OpenTargets_get_similar_entities_by_target_ensemblID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

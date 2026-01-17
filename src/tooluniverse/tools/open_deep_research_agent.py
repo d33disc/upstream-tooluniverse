@@ -14,7 +14,7 @@ def open_deep_research_agent(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Research manager agent that decomposes the user task, delegates focused subtasks to domain sub‑ag...
 
@@ -31,7 +31,7 @@ def open_deep_research_agent(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

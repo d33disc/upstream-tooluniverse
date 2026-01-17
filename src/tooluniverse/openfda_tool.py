@@ -4,6 +4,7 @@ from .tool_registry import register_tool
 import copy
 import re
 import os
+import urllib.parse
 
 # Cache for GraphQL query to avoid repeated string operations
 _OPENTARGETS_DRUG_NAMES_QUERY = None
@@ -116,8 +117,8 @@ def map_properties_to_openfda_fields(arguments, search_fields):
             # print("key in search_fields:", key)
             openfda_fields = search_fields[key]
             if isinstance(openfda_fields, list):
-                for field in openfda_fields:
-                    mapped_arguments[field] = value
+                # Use tuple key to indicate these fields should be OR'd
+                mapped_arguments[tuple(openfda_fields)] = value
             else:
                 mapped_arguments[openfda_fields] = value
             del arguments[key]
@@ -181,6 +182,19 @@ def search_openfda(
     keywords_list = []
     if search_fields:
         for field, value in search_fields.items():
+            if isinstance(field, tuple):
+                value = value.replace(" and ", " ")
+                value = value.replace(" AND ", " ")
+                value = " ".join(value.split())
+                group_queries = []
+                for sub_field in field:
+                    val_for_field = value
+                    if sub_field == "openfda.generic_name":
+                        val_for_field = val_for_field.upper()
+                    group_queries.append(f'{sub_field}:"{val_for_field}"')
+                search_query.append(f"({'+OR+'.join(group_queries)})")
+                continue
+
             # Merge multiple continuous black spaces into one and use one '+'
             if (
                 keywords_filter
@@ -192,14 +206,20 @@ def search_openfda(
                 value = value.upper()  # all generic names are in uppercase
             value = value.replace(" and ", " ")  # remove 'and' in the search query
             value = value.replace(" AND ", " ")  # remove 'AND' in the search query
-            # Remove quotes to avoid query errors
-            value = value.replace('"', "")
-            value = value.replace("'", "")
+            # Quote stripping removed to allow manual quotes and support Special chars
+            # value = value.replace('"', "")
+            # value = value.replace("'", "")
             value = " ".join(value.split())
             if search_keyword_option == "AND":
-                search_query.append(f"{field}:({value.replace(' ', '+AND+')})")
+                # Use quotes to ensure special characters like '-' are treated as part of the string, not operators
+                search_query.append(f'{field}:"{value}"')
             elif search_keyword_option == "OR":
-                search_query.append(f"{field}:({value.replace(' ', '+')})")
+                # Fallback for OR (though rare for name fields) - keep original logic or quote?
+                # OR usually implies we want any of the terms.
+                # If we use quotes, we treat the whole string as one term.
+                # Let's keep original OR logic for now or just force quotes?
+                # If user asks for OR, they probably lists distinct items.
+                search_query.append(f"{field}:({value.replace(' ', '+OR+')})")
             else:
                 print("Invalid search_keyword_option. Please use 'AND' or 'OR'.")
         del params["search_fields"]
@@ -235,7 +255,7 @@ def search_openfda(
             elif exist_option == "OR":
                 params["search"] += (
                     "+AND+("
-                    + "+".join([f"_exists_:{keyword}" for keyword in exists])
+                    + "+OR+".join([f"_exists_:{keyword}" for keyword in exists])
                     + ")"
                 )
         else:
@@ -244,33 +264,39 @@ def search_openfda(
                     [f"_exists_:{keyword}" for keyword in exists]
                 )
             elif exist_option == "OR":
-                params["search"] = "+".join(
+                params["search"] = "+OR+".join(
                     [f"_exists_:{keyword}" for keyword in exists]
                 )
         # Ensure that at least one of the search fields exists
+        flat_fields = []
+        for k in search_fields.keys():
+            if isinstance(k, tuple):
+                flat_fields.extend(k)
+            else:
+                flat_fields.append(k)
+
         params["search"] += (
-            "+AND+("
-            + "+".join([f"_exists_:{field}" for field in search_fields.keys()])
-            + ")"
+            "+AND+(" + "+OR+".join([f"_exists_:{field}" for field in flat_fields]) + ")"
         )
         # params['search']+="+AND+_exists_:openfda"
 
     # Construct full query with additional parameters
     query = "&".join(
-        [f"{key}={value}" for key, value in params.items() if value is not None]
+        [
+            f"{key}={urllib.parse.quote(str(value), safe='+')}"
+            for key, value in params.items()
+            if value is not None
+        ]
     )
     full_url = f"{endpoint_url}?{query}"
     if api_key:
         full_url += f"&api_key={api_key}"
-
-    print(full_url)
 
     response = requests.get(full_url)
 
     # Get the JSON response
     response_data = response.json()
     if "error" in response_data:
-        print("Invalid Query: ", response_data["error"])
         return None
 
     # Extract meta information
@@ -284,7 +310,13 @@ def search_openfda(
     # If count parameter is used, return results directly (count API format)
     if params.get("count") or count:
         return {"meta": meta_info, "results": results}
-    required_fields = list(search_fields.keys()) + return_fields
+    flat_keys = []
+    for k in search_fields.keys():
+        if isinstance(k, tuple):
+            flat_keys.extend(k)
+        else:
+            flat_keys.append(k)
+    required_fields = flat_keys + return_fields
     extracted_results = extract_nested_fields(results, required_fields, keywords_list)
     return {"meta": meta_info, "results": extracted_results}
 

@@ -33,6 +33,19 @@
         "gene_list",
         "libs"
       ]
+    },
+    "test_examples": [
+      {
+        "gene_list": [
+          "TP53",
+          "BRCA1",
+          "EGFR"
+        ],
+        "libs": []
+      }
+    ],
+    "return_schema": {
+      "type": "string"
     }
   }
 ]

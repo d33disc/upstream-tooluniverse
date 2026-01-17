@@ -14,7 +14,7 @@ def HPA_search_genes_by_query(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search for matching genes by gene name, keywords, or cell line names and return Ensembl ID list. ...
 
@@ -31,7 +31,7 @@ def HPA_search_genes_by_query(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

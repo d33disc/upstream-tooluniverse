@@ -16,7 +16,7 @@ def GO_get_genes_for_term(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> list[Any]:
     """
     Finds all genes/proteins associated with a specific Gene Ontology term using the Biolink API.
 
@@ -37,7 +37,7 @@ def GO_get_genes_for_term(
 
     Returns
     -------
-    Any
+    list[Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -14,7 +14,7 @@ def OpenTargets_get_disease_ancestors_parents_by_efoId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the disease ancestors and parents in the ontology using the disease EFO ID.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_disease_ancestors_parents_by_efoId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

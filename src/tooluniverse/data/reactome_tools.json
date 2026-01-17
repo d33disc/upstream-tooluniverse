@@ -12,8 +12,26 @@
           "description": "Pathway Stable ID, e.g., 'R-HSA-73817' (verified valid)."
         }
       },
-      "required": ["stId"]
+      "required": [
+        "stId"
+      ]
     },
-    "type": "ReactomeRESTTool"
+    "type": "ReactomeRESTTool",
+    "test_examples": [
+      {
+        "stId": "1"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      }
+    }
   }
 ]

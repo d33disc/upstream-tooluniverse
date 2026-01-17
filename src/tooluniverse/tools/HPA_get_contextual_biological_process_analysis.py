@@ -15,7 +15,7 @@ def HPA_get_contextual_biological_process_analysis(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Analyze a gene's biological processes in the context of a specific tissue or cell line by integra...
 
@@ -34,7 +34,7 @@ def HPA_get_contextual_biological_process_analysis(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -15,7 +15,7 @@ def PubChem_search_compounds_by_similarity(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Search by similarity (Tanimoto coefficient), returns CID list of compounds with similarity above ...
 
@@ -34,7 +34,7 @@ def PubChem_search_compounds_by_similarity(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

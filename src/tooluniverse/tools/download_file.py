@@ -19,7 +19,7 @@ def download_file(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Download files from HTTP/HTTPS URLs with cross-platform support (Windows, Mac, Linux). Similar to...
 
@@ -46,7 +46,7 @@ def download_file(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

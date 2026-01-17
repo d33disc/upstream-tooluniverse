@@ -11,7 +11,9 @@
           "description": "Research query or topic to search in academic literature. The agent will automatically determine search strategy, database selection, filters, and result limits based on the query content and research domain."
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "settings": {
       "agent_type": "ManagedAgent",
@@ -45,7 +47,9 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json"],
+            "additional_authorized_imports": [
+              "json"
+            ],
             "max_steps": 8,
             "stream_outputs": true,
             "verbosity_level": 1
@@ -53,7 +57,7 @@
         },
         {
           "name": "web_foundation_searcher",
-          "description": "FOUNDATION WEB SEARCH (seed generator). Purpose: quickly gather seed queries, authoritative source links, and recent topic variants using ONLY base web tools (web_search, visit_webpage). Output: a compact JSON with fields: seeds (list of refined search queries), sources (list of authoritative URLs/domains), keywords (expanded keyword variants). STRICT RULES: Do NOT summarize content; do NOT generate a literature report; DO NOT call any ToolUniverse literature tools here. Keep steps ≤ 6, focus on producing high‑quality seeds for downstream specialized database searchers.",
+          "description": "FOUNDATION WEB SEARCH (seed generator). Purpose: quickly gather seed queries, authoritative source links, and recent topic variants using ONLY base web tools (web_search, visit_webpage). Output: a compact JSON with fields: seeds (list of refined search queries), sources (list of authoritative URLs/domains), keywords (expanded keyword variants). STRICT RULES: Do NOT summarize content; do NOT generate a literature report; DO NOT call any ToolUniverse literature tools here. Keep steps \u2264 6, focus on producing high\u2011quality seeds for downstream specialized database searchers.",
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
@@ -65,7 +69,9 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json"],
+            "additional_authorized_imports": [
+              "json"
+            ],
             "max_steps": 6,
             "stream_outputs": true,
             "verbosity_level": 1
@@ -91,7 +97,13 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json", "concurrent.futures", "datetime", "urllib.parse", "re"],
+            "additional_authorized_imports": [
+              "json",
+              "concurrent.futures",
+              "datetime",
+              "urllib.parse",
+              "re"
+            ],
             "max_steps": 10,
             "stream_outputs": true,
             "verbosity_level": 1,
@@ -116,7 +128,13 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json", "concurrent.futures", "datetime", "urllib.parse", "re"],
+            "additional_authorized_imports": [
+              "json",
+              "concurrent.futures",
+              "datetime",
+              "urllib.parse",
+              "re"
+            ],
             "max_steps": 10,
             "stream_outputs": true,
             "verbosity_level": 1,
@@ -142,7 +160,13 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json", "concurrent.futures", "datetime", "urllib.parse", "re"],
+            "additional_authorized_imports": [
+              "json",
+              "concurrent.futures",
+              "datetime",
+              "urllib.parse",
+              "re"
+            ],
             "max_steps": 10,
             "stream_outputs": true,
             "verbosity_level": 1,
@@ -163,7 +187,14 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json", "collections", "re", "difflib", "datetime", "math"],
+            "additional_authorized_imports": [
+              "json",
+              "collections",
+              "re",
+              "difflib",
+              "datetime",
+              "math"
+            ],
             "max_steps": 15,
             "stream_outputs": true,
             "verbosity_level": 1
@@ -171,7 +202,7 @@
         },
         {
           "name": "literature_synthesizer",
-          "description": "Literature synthesis and report generation specialist. Input: result_analyzer ranked list from multi-database searches. Produce a structured markdown report with sections: Executive Summary, Key Findings, Research Trends, Methodology Overview, Top Papers with rationale (10–15), Research Gaps, References (with DOIs/URLs). CRITICAL: Base ALL content strictly on the searched and analyzed literature results. Do NOT supplement with your own knowledge. Use only information from the analyzed items; cite actual papers with DOIs/URLs. Do not invent citations or add information not found in the search results.",
+          "description": "Literature synthesis and report generation specialist. Input: result_analyzer ranked list from multi-database searches. Produce a structured markdown report with sections: Executive Summary, Key Findings, Research Trends, Methodology Overview, Top Papers with rationale (10\u201315), Research Gaps, References (with DOIs/URLs). CRITICAL: Base ALL content strictly on the searched and analyzed literature results. Do NOT supplement with your own knowledge. Use only information from the analyzed items; cite actual papers with DOIs/URLs. Do not invent citations or add information not found in the search results.",
           "agent_type": "CodeAgent",
           "available_tools": [],
           "model": {
@@ -183,25 +214,45 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["json", "collections", "datetime", "statistics"],
+            "additional_authorized_imports": [
+              "json",
+              "collections",
+              "datetime",
+              "statistics"
+            ],
             "max_steps": 20,
             "stream_outputs": true,
             "verbosity_level": 1
           }
         }
       ]
+    },
+    "test_examples": [
+      {
+        "query": "machine learning optimization"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
     "type": "SmolAgentTool",
     "name": "open_deep_research_agent",
-    "description": "Research manager agent that decomposes the user task, delegates focused subtasks to domain sub‑agents (web researcher, synthesizer), enforces evidence use, requires numeric outputs with units, and returns a concise final answer with citations. It should: (1) draft a brief plan, (2) ask web_researcher to gather authoritative facts (URLs + extracted numbers), (3) validate consistency across sources, (4) instruct synthesizer to compute/compose the final result, and (5) output only the final, unit‑aware answer plus one short rationale line.",
+    "description": "Research manager agent that decomposes the user task, delegates focused subtasks to domain sub\u2011agents (web researcher, synthesizer), enforces evidence use, requires numeric outputs with units, and returns a concise final answer with citations. It should: (1) draft a brief plan, (2) ask web_researcher to gather authoritative facts (URLs + extracted numbers), (3) validate consistency across sources, (4) instruct synthesizer to compute/compose the final result, and (5) output only the final, unit\u2011aware answer plus one short rationale line.",
     "parameter": {
       "type": "object",
       "properties": {
-        "task": {"type": "string", "description": "Research query/task to execute"}
+        "task": {
+          "type": "string",
+          "description": "Research query/task to execute"
+        }
       },
-      "required": ["task"]
+      "required": [
+        "task"
+      ]
     },
     "settings": {
       "agent_type": "ManagedAgent",
@@ -222,11 +273,19 @@
       "sub_agents": [
         {
           "name": "web_researcher",
-          "description": "Web research specialist that (a) formulates robust search queries, (b) selects authoritative sources (official sites, Wikipedia with corroboration, reputable databases), (c) visits pages and extracts exact figures (units, context), (d) records 1–2 key quotes/snippets and the canonical URL, and (e) returns a short, source‑linked note ready for synthesis.",
+          "description": "Web research specialist that (a) formulates robust search queries, (b) selects authoritative sources (official sites, Wikipedia with corroboration, reputable databases), (c) visits pages and extracts exact figures (units, context), (d) records 1\u20132 key quotes/snippets and the canonical URL, and (e) returns a short, source\u2011linked note ready for synthesis.",
           "agent_type": "CodeAgent",
           "available_tools": [
-            {"type": "smolagents", "class": "WebSearchTool", "import_path": "smolagents.default_tools"},
-            {"type": "smolagents", "class": "VisitWebpageTool", "import_path": "smolagents.default_tools"}
+            {
+              "type": "smolagents",
+              "class": "WebSearchTool",
+              "import_path": "smolagents.default_tools"
+            },
+            {
+              "type": "smolagents",
+              "class": "VisitWebpageTool",
+              "import_path": "smolagents.default_tools"
+            }
           ],
           "model": {
             "provider": "AzureOpenAIModel",
@@ -237,7 +296,11 @@
           },
           "agent_init_params": {
             "add_base_tools": true,
-            "additional_authorized_imports": ["requests", "bs4", "lxml"],
+            "additional_authorized_imports": [
+              "requests",
+              "bs4",
+              "lxml"
+            ],
             "max_steps": 12,
             "stream_outputs": true,
             "verbosity_level": 1,
@@ -246,10 +309,14 @@
         },
         {
           "name": "synthesizer",
-          "description": "Synthesis specialist that reads prior research notes, performs any light calculation (unit conversion, division, rounding), resolves minor conflicts by favoring higher‑authority sources, and produces a single, precise answer with units and 1–2 citations. Keep prose minimal; prioritize the final numeric result and rationale.",
+          "description": "Synthesis specialist that reads prior research notes, performs any light calculation (unit conversion, division, rounding), resolves minor conflicts by favoring higher\u2011authority sources, and produces a single, precise answer with units and 1\u20132 citations. Keep prose minimal; prioritize the final numeric result and rationale.",
           "agent_type": "ToolCallingAgent",
           "available_tools": [
-            {"type": "smolagents", "class": "WebSearchTool", "import_path": "smolagents.default_tools"}
+            {
+              "type": "smolagents",
+              "class": "WebSearchTool",
+              "import_path": "smolagents.default_tools"
+            }
           ],
           "model": {
             "provider": "AzureOpenAIModel",
@@ -265,6 +332,16 @@
           }
         }
       ]
+    },
+    "test_examples": [
+      {
+        "task": "What are the symptoms of COVID-19?"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   }
 ]

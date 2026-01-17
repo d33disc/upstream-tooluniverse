@@ -7,6 +7,14 @@
       "type": "object",
       "properties": {},
       "required": []
+    },
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   },
   {
@@ -24,6 +32,16 @@
       "required": [
         "solution"
       ]
+    },
+    "test_examples": [
+      {
+        "solution": "Step 1: Search for gene data. Step 2: Analyze mutations."
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
     }
   }
 ]

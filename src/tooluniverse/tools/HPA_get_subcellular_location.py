@@ -14,7 +14,7 @@ def HPA_get_subcellular_location(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get annotated subcellular locations for a protein using optimized columns parameter. Retrieves bo...
 
@@ -31,7 +31,7 @@ def HPA_get_subcellular_location(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

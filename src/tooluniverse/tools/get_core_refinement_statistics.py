@@ -14,7 +14,7 @@ def get_core_refinement_statistics(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve essential refinement statistics for a given PDB structure including R-factors, occupancy...
 
@@ -31,7 +31,7 @@ def get_core_refinement_statistics(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

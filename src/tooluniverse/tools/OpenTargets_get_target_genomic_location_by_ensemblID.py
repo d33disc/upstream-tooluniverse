@@ -14,7 +14,7 @@ def OpenTargets_get_target_genomic_location_by_ensemblID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve genomic location data for a specific target, including chromosome, start, end, and strand.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_target_genomic_location_by_ensemblID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

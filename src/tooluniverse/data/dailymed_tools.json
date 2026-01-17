@@ -43,15 +43,61 @@
         }
       },
       "required": [
-        "drug_name",
-        "ndc",
-        "rxcui",
-        "setid",
-        "published_date_gte",
-        "published_date_eq",
-        "pagesize",
-        "page"
+        "drug_name"
       ]
+    },
+    "test_examples": [
+      {
+        "drug_name": "Aspirin",
+        "ndc": "0002-3228-30",
+        "rxcui": "1191",
+        "setid": "030d9bca-a934-6ef9-e063-6394a90a8277",
+        "pagesize": 1,
+        "page": 1
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "db_published_date": {
+              "type": "string"
+            },
+            "elements_per_page": {
+              "type": "integer"
+            },
+            "current_url": {
+              "type": "string"
+            },
+            "next_page_url": {
+              "type": "string"
+            },
+            "total_elements": {
+              "type": "integer"
+            },
+            "total_pages": {
+              "type": "integer"
+            },
+            "current_page": {
+              "type": "integer"
+            },
+            "previous_page": {
+              "type": "string"
+            },
+            "previous_page_url": {
+              "type": "string"
+            },
+            "next_page": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   },
   {
@@ -79,6 +125,113 @@
         "setid",
         "format"
       ]
+    },
+    "test_examples": [
+      {
+        "setid": "030d9bca-a934-6ef9-e063-6394a90a8277",
+        "format": "json"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "error_details": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "retriable": {
+              "type": "boolean"
+            },
+            "next_steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "details": {
+              "type": "object",
+              "properties": {
+                "validation_error": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {
+                        "setid": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "format": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "format": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "enum": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "default": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "parameter": {
+                  "type": "string"
+                },
+                "expected": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 ]

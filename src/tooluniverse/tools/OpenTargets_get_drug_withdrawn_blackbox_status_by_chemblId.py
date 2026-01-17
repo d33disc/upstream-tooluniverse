@@ -14,7 +14,7 @@ def OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Find withdrawn and black-box warning statuses for a specific drug by chemblId.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

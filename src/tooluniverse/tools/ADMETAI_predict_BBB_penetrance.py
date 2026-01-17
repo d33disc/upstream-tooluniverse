@@ -14,7 +14,7 @@ def ADMETAI_predict_BBB_penetrance(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Predicts blood-brain barrier (BBB) penetrance for a given list of molecules in SMILES format.
 
@@ -31,7 +31,7 @@ def ADMETAI_predict_BBB_penetrance(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -16,7 +16,7 @@ def FDA_get_drug_name_by_environmental_warning(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on the specified environmental warnings.
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_by_environmental_warning(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

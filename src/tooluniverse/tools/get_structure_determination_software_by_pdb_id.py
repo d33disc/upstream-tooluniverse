@@ -14,7 +14,7 @@ def get_structure_determination_software_by_pdb_id(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve names of software used during structure determination.
 
@@ -31,7 +31,7 @@ def get_structure_determination_software_by_pdb_id(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

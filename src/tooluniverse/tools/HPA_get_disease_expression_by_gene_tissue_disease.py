@@ -16,7 +16,7 @@ def HPA_get_disease_expression_by_gene_tissue_disease(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Compare the expression level of a gene in specific disease state versus healthy state using gene ...
 
@@ -37,7 +37,7 @@ def HPA_get_disease_expression_by_gene_tissue_disease(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

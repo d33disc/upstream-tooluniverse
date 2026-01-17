@@ -14,7 +14,7 @@ def FDA_get_drug_names_by_indication_aggregated(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve and aggregate drug names by indication, grouping by generic name with all brand names. T...
 
@@ -31,7 +31,7 @@ def FDA_get_drug_names_by_indication_aggregated(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

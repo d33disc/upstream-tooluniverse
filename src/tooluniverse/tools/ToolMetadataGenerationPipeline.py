@@ -17,7 +17,7 @@ def ToolMetadataGenerationPipeline(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Generates standardized metadata for a batch of ToolUniverse tool configurations by calling ToolMe...
 
@@ -40,7 +40,7 @@ def ToolMetadataGenerationPipeline(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

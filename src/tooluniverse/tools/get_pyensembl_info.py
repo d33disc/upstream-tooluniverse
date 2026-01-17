@@ -13,7 +13,7 @@ def get_pyensembl_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the pyensembl package. Python interface to Ensembl reference genome metadata
 
@@ -29,7 +29,7 @@ def get_pyensembl_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

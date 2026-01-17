@@ -14,7 +14,7 @@ def OpenTargets_get_target_tractability_by_ensemblID(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve tractability assessments, including modality and values, for a specific target ensembl ID.
 
@@ -31,7 +31,7 @@ def OpenTargets_get_target_tractability_by_ensemblID(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

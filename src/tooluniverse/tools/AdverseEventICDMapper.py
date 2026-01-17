@@ -14,7 +14,7 @@ def AdverseEventICDMapper(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Extracts adverse events from narrative clinical or pharmacovigilance text and maps each event to ...
 
@@ -31,7 +31,7 @@ def AdverseEventICDMapper(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 

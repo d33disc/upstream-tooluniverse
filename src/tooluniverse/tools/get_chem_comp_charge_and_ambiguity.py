@@ -14,7 +14,7 @@ def get_chem_comp_charge_and_ambiguity(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the formal charge and ambiguity flag of a chemical component.
 
@@ -31,7 +31,7 @@ def get_chem_comp_charge_and_ambiguity(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

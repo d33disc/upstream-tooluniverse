@@ -15,7 +15,7 @@ def OpenTargets_get_drug_adverse_events_by_chemblId(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve significant adverse events reported for a specific drug chemblId.
 
@@ -34,7 +34,7 @@ def OpenTargets_get_drug_adverse_events_by_chemblId(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

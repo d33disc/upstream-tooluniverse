@@ -226,7 +226,13 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "qualifier": "F1",
+        "sequence_checksum": "MVLSEGEWQLVLHVWAKVEADVAGHGQDILIRLFKSHPETLEKFDRVKHLKTEAEMKASEDLKKHGVTVLTALGAilKKKGHHEAELKPLAQSHATKHKIPIKYLEFISEAIIHVLHSRHPGDFGADAQGAMNKALELFRKDMASNYKELGFQG"
+      }
+    ]
   },
   {
     "name": "alphafold_get_summary",
@@ -383,7 +389,12 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "qualifier": "F1"
+      }
+    ]
   },
   {
     "name": "alphafold_get_annotations",
@@ -470,6 +481,11 @@
           }
         }
       }
-    }
+    },
+    "test_examples": [
+      {
+        "qualifier": "F1"
+      }
+    ]
   }
 ]

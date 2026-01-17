@@ -13,7 +13,7 @@ def get_cupy_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get information about the cupy package. NumPy-compatible array library accelerated with CUDA
 
@@ -29,7 +29,7 @@ def get_cupy_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

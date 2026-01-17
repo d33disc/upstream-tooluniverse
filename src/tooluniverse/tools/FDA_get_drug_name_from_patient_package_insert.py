@@ -16,7 +16,7 @@ def FDA_get_drug_name_from_patient_package_insert(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the drug name based on the information provided in the patient package insert.
 
@@ -37,7 +37,7 @@ def FDA_get_drug_name_from_patient_package_insert(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

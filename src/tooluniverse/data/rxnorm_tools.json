@@ -23,6 +23,34 @@
       "NLM",
       "standardization",
       "rxcui"
-    ]
+    ],
+    "test_examples": [
+      {
+        "drug_name": "Aspirin"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "rxcui": {
+          "type": "string"
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "all_rxcuis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 ]

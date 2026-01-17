@@ -16,7 +16,7 @@ def DescriptionQualityEvaluator(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Evaluates the quality of tool descriptions and parameter descriptions, providing a score and spec...
 
@@ -37,7 +37,7 @@ def DescriptionQualityEvaluator(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

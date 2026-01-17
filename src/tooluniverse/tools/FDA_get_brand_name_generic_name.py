@@ -15,7 +15,7 @@ def FDA_get_brand_name_generic_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve the brand name and generic name from generic name or brand name of a drug.
 
@@ -34,7 +34,7 @@ def FDA_get_brand_name_generic_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

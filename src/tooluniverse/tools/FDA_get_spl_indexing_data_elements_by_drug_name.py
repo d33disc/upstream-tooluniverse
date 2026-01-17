@@ -16,7 +16,7 @@ def FDA_get_spl_indexing_data_elements_by_drug_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve Structured Product Labeling (SPL) indexing data elements based on drug names.
 
@@ -37,7 +37,7 @@ def FDA_get_spl_indexing_data_elements_by_drug_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

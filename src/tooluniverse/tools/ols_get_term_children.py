@@ -18,7 +18,7 @@ def ols_get_term_children(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get child terms of a specific term in an ontology
 
@@ -43,7 +43,7 @@ def ols_get_term_children(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

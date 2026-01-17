@@ -23,52 +23,60 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of medRxiv preprints matching the search query",
       "items": {
         "type": "object",
         "properties": {
           "title": {
-            "type": "string",
-            "description": "Title of the preprint"
+            "type": "string"
           },
           "authors": {
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "description": "List of author names"
+            }
           },
           "year": {
-            "type": "integer",
-            "description": "Publication year"
+            "type": "integer"
           },
           "doi": {
-            "type": "string",
-            "description": "Digital Object Identifier"
+            "type": "string"
           },
           "url": {
-            "type": "string",
-            "description": "URL to the preprint on medRxiv"
+            "type": "string"
           },
           "abstract": {
-            "type": "string",
-            "description": "Abstract of the preprint"
+            "type": "string"
           },
           "source": {
-            "type": "string",
-            "description": "Source identifier (always 'medRxiv')"
+            "type": "string"
+          },
+          "data_quality": {
+            "type": "object",
+            "properties": {
+              "has_abstract": {
+                "type": "boolean"
+              },
+              "has_authors": {
+                "type": "boolean"
+              },
+              "has_year": {
+                "type": "boolean"
+              },
+              "has_doi": {
+                "type": "boolean"
+              },
+              "has_url": {
+                "type": "boolean"
+              }
+            }
           }
         }
       }
     },
     "test_examples": [
       {
-        "query": "COVID",
-        "max_results": 2
-      },
-      {
-        "query": "vaccine",
-        "max_results": 1
+        "query": "covid-19",
+        "max_results": 5
       }
     ]
   }

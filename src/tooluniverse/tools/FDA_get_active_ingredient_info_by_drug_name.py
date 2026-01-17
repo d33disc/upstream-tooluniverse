@@ -16,7 +16,7 @@ def FDA_get_active_ingredient_info_by_drug_name(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Fetch a list of active ingredients in a specific drug product.
 
@@ -37,7 +37,7 @@ def FDA_get_active_ingredient_info_by_drug_name(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

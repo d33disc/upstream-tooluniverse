@@ -50,67 +50,20 @@
       }
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Successfully downloaded file",
-          "properties": {
-            "file_path": {
-              "type": "string",
-              "description": "Absolute path to the downloaded file"
-            },
-            "file_size": {
-              "type": "integer",
-              "description": "Size of the file in bytes"
-            },
-            "url": {
-              "type": "string",
-              "description": "Original URL that was downloaded"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of the downloaded content"
-            },
-            "status_code": {
-              "type": "integer",
-              "description": "HTTP status code"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Returned content (when return_content=true)",
-          "properties": {
-            "content": {
-              "type": "string",
-              "description": "File content as text"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of the content"
-            },
-            "size": {
-              "type": "integer",
-              "description": "Size of content in characters"
-            },
-            "url": {
-              "type": "string",
-              "description": "Original URL"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Error response",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message"
-            }
-          }
-        }
-      ]
-    }
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    },
+    "test_examples": [
+      {
+        "url": "https://www.wikipedia.org",
+        "output_path": "./downloads/output.txt",
+        "timeout": 30,
+        "return_content": false,
+        "chunk_size": 8192,
+        "follow_redirects": true
+      }
+    ]
   },
   {
     "type": "BinaryDownloadTool",
@@ -154,49 +107,18 @@
       }
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Successfully downloaded binary file",
-          "properties": {
-            "file_path": {
-              "type": "string",
-              "description": "Absolute path to the downloaded file"
-            },
-            "size": {
-              "type": "integer",
-              "description": "Size of the file in bytes"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of the downloaded content"
-            },
-            "content_length": {
-              "type": "string",
-              "description": "Content-Length header value"
-            },
-            "url": {
-              "type": "string",
-              "description": "Original URL"
-            },
-            "status_code": {
-              "type": "integer",
-              "description": "HTTP status code"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Error response",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message"
-            }
-          }
-        }
-      ]
-    }
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    },
+    "test_examples": [
+      {
+        "url": "https://www.wikipedia.org",
+        "output_path": "./downloads/output.txt",
+        "chunk_size": 1048576,
+        "timeout": 30
+      }
+    ]
   },
   {
     "type": "TextDownloadTool",
@@ -232,44 +154,16 @@
       }
     },
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "description": "Successfully downloaded text content",
-          "properties": {
-            "content": {
-              "type": "string",
-              "description": "Text content from the URL"
-            },
-            "encoding": {
-              "type": "string",
-              "description": "Detected or specified encoding"
-            },
-            "size": {
-              "type": "integer",
-              "description": "Size of content in characters"
-            },
-            "url": {
-              "type": "string",
-              "description": "Original URL"
-            },
-            "content_type": {
-              "type": "string",
-              "description": "MIME type of the content"
-            }
-          }
-        },
-        {
-          "type": "object",
-          "description": "Error response",
-          "properties": {
-            "error": {
-              "type": "string",
-              "description": "Error message"
-            }
-          }
-        }
-      ]
-    }
+      "type": "object",
+      "description": "Output of the tool execution.",
+      "properties": {}
+    },
+    "test_examples": [
+      {
+        "url": "https://www.wikipedia.org",
+        "encoding": "utf-8",
+        "timeout": 30
+      }
+    ]
   }
 ]

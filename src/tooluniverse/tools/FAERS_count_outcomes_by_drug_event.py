@@ -17,7 +17,7 @@ def FAERS_count_outcomes_by_drug_event(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Count the outcome of adverse reactions (recovered, recovering, fatal, unresolved). Only medicinal...
 
@@ -40,7 +40,7 @@ def FAERS_count_outcomes_by_drug_event(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

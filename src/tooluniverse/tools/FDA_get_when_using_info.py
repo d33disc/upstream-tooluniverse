@@ -16,7 +16,7 @@ def FDA_get_when_using_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve information about side effects and substances or activities to avoid while using a speci...
 
@@ -37,7 +37,7 @@ def FDA_get_when_using_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

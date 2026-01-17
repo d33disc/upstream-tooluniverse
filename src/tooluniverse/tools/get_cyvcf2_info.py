@@ -14,7 +14,7 @@ def get_cyvcf2_info(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Get comprehensive information about cyvcf2 – fast VCF/BCF file processing
 
@@ -31,7 +31,7 @@ def get_cyvcf2_info(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
