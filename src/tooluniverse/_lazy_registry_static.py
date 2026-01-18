@@ -254,4 +254,17 @@ STATIC_LAZY_REGISTRY = {
     "dbSNPSearchByGene": "dbsnp_tool",
     "gnomADGetGeneConstraints": "gnomad_tool",
     "gnomADGraphQLTool": "gnomad_tool",
+    # BioThings APIs (MyGene, MyVariant, MyChem)
+    "MyGeneTool": "mygene_tool",
+    "MyVariantTool": "mygene_tool",
+    "MyChemTool": "mygene_tool",
+    # Metabolomics Workbench
+    "MetabolomicsWorkbenchTool": "metabolomics_workbench_tool",
+    # PharmGKB
+    "PharmGKBTool": "pharmgkb_tool",
+    # DisGeNET
+    # DGIdb
+    "DGIdbTool": "dgidb_tool",
+    # STITCH
+    "STITCHTool": "stitch_tool",
 }

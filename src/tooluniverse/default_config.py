@@ -165,7 +165,9 @@ default_tool_files = {
     ),
     "uspto": os.path.join(current_dir, "data", "uspto_tools.json"),
     "xml": os.path.join(current_dir, "data", "xml_tools.json"),
-    "mcp_auto_loader_boltz": os.path.join(current_dir, "data", "boltz_tools.json"),
+    "mcp_auto_loader_boltz": os.path.join(
+        current_dir, "data", "boltz_mcp_loader_tools.json"
+    ),
     "url": os.path.join(current_dir, "data", "url_fetch_tools.json"),
     "file_download": os.path.join(current_dir, "data", "file_download_tools.json"),
     # 'langchain': os.path.join(current_dir, 'data', 'langchain_tools.json'),
@@ -220,6 +222,23 @@ default_tool_files = {
         current_dir, "data", "pathway_commons_tools.json"
     ),
     "biomodels_tools": os.path.join(current_dir, "data", "biomodels_tools.json"),
+    # BioThings APIs (MyGene, MyVariant, MyChem)
+    "biothings": os.path.join(current_dir, "data", "biothings_tools.json"),
+    # FDA Pharmacogenomic Biomarkers
+    "fda_pharmacogenomic_biomarkers": os.path.join(
+        current_dir, "data", "fda_pharmacogenomic_biomarkers_tools.json"
+    ),
+    # Metabolomics Workbench
+    "metabolomics_workbench": os.path.join(
+        current_dir, "data", "metabolomics_workbench_tools.json"
+    ),
+    # PharmGKB - Pharmacogenomics
+    "pharmgkb": os.path.join(current_dir, "data", "pharmgkb_tools.json"),
+    # DisGeNET - Gene-Disease Associations
+    # DGIdb - Drug Gene Interactions
+    "dgidb": os.path.join(current_dir, "data", "dgidb_tools.json"),
+    # STITCH - Chemical-Protein Interactions
+    "stitch": os.path.join(current_dir, "data", "stitch_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

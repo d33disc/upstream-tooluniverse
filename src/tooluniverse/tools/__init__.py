@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 790 scientific tools.
+Type-safe Python interface to 817 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -68,6 +68,10 @@ from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeli
 from .Crossref_search_works import Crossref_search_works
 from .DBLP_search_publications import DBLP_search_publications
 from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
+from .DGIdb_get_drug_gene_interactions import DGIdb_get_drug_gene_interactions
+from .DGIdb_get_drug_info import DGIdb_get_drug_info
+from .DGIdb_get_gene_druggability import DGIdb_get_gene_druggability
+from .DGIdb_get_gene_info import DGIdb_get_gene_info
 from .DOAJ_search_articles import DOAJ_search_articles
 from .DailyMed_get_spl_by_setid import DailyMed_get_spl_by_setid
 from .DailyMed_search_spls import DailyMed_search_spls
@@ -537,7 +541,26 @@ from .MedlinePlus_get_genetics_condition_by_name import (
 from .MedlinePlus_get_genetics_gene_by_name import MedlinePlus_get_genetics_gene_by_name
 from .MedlinePlus_get_genetics_index import MedlinePlus_get_genetics_index
 from .MedlinePlus_search_topics_by_keyword import MedlinePlus_search_topics_by_keyword
+from .MetabolomicsWorkbench_get_compound_by_pubchem_cid import (
+    MetabolomicsWorkbench_get_compound_by_pubchem_cid,
+)
+from .MetabolomicsWorkbench_get_refmet_info import MetabolomicsWorkbench_get_refmet_info
+from .MetabolomicsWorkbench_get_study import MetabolomicsWorkbench_get_study
+from .MetabolomicsWorkbench_search_by_exact_mass import (
+    MetabolomicsWorkbench_search_by_exact_mass,
+)
+from .MetabolomicsWorkbench_search_by_mz import MetabolomicsWorkbench_search_by_mz
+from .MetabolomicsWorkbench_search_compound_by_name import (
+    MetabolomicsWorkbench_search_compound_by_name,
+)
 from .MethodologyRigorReviewer import MethodologyRigorReviewer
+from .MyChem_get_chemical_annotation import MyChem_get_chemical_annotation
+from .MyChem_query_chemicals import MyChem_query_chemicals
+from .MyGene_batch_query import MyGene_batch_query
+from .MyGene_get_gene_annotation import MyGene_get_gene_annotation
+from .MyGene_query_genes import MyGene_query_genes
+from .MyVariant_get_variant_annotation import MyVariant_get_variant_annotation
+from .MyVariant_query_variants import MyVariant_query_variants
 from .NICE_Clinical_Guidelines_Search import NICE_Clinical_Guidelines_Search
 from .NICE_Guideline_Full_Text import NICE_Guideline_Full_Text
 from .NoveltySignificanceReviewer import NoveltySignificanceReviewer
@@ -718,6 +741,13 @@ from .PMC_search_papers import PMC_search_papers
 from .PRIDE_search_proteomics import PRIDE_search_proteomics
 from .PackageAnalyzer import PackageAnalyzer
 from .Paleobiology_get_fossils import Paleobiology_get_fossils
+from .PharmGKB_get_clinical_annotations import PharmGKB_get_clinical_annotations
+from .PharmGKB_get_dosing_guidelines import PharmGKB_get_dosing_guidelines
+from .PharmGKB_get_drug_details import PharmGKB_get_drug_details
+from .PharmGKB_get_gene_details import PharmGKB_get_gene_details
+from .PharmGKB_search_drugs import PharmGKB_search_drugs
+from .PharmGKB_search_genes import PharmGKB_search_genes
+from .PharmGKB_search_variants import PharmGKB_search_variants
 from .ProtocolOptimizer import ProtocolOptimizer
 from .PubChem_get_CID_by_SMILES import PubChem_get_CID_by_SMILES
 from .PubChem_get_CID_by_compound_name import PubChem_get_CID_by_compound_name
@@ -754,6 +784,11 @@ from .RxNorm_get_drug_names import RxNorm_get_drug_names
 from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
 from .SIMBAD_advanced_query import SIMBAD_advanced_query
 from .SIMBAD_query_object import SIMBAD_query_object
+from .STITCH_get_chemical_protein_interactions import (
+    STITCH_get_chemical_protein_interactions,
+)
+from .STITCH_get_interaction_partners import STITCH_get_interaction_partners
+from .STITCH_resolve_identifier import STITCH_resolve_identifier
 from .ScientificTextSummarizer import ScientificTextSummarizer
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
@@ -948,6 +983,7 @@ from .execute_tool import execute_tool
 from .expression_atlas_disease_target_score import expression_atlas_disease_target_score
 from .extract_clinical_trial_adverse_events import extract_clinical_trial_adverse_events
 from .extract_clinical_trial_outcomes import extract_clinical_trial_outcomes
+from .fda_pharmacogenomic_biomarkers import fda_pharmacogenomic_biomarkers
 from .genomics_england_disease_target_score import genomics_england_disease_target_score
 from .geo_get_dataset_info import geo_get_dataset_info
 from .geo_get_sample_info import geo_get_sample_info
@@ -1189,7 +1225,6 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
-from .ghost_tool import ghost_tool
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .grep_tools import grep_tools
 from .gwas_get_association_by_id import gwas_get_association_by_id
@@ -1288,6 +1323,10 @@ __all__ = [
     "Crossref_search_works",
     "DBLP_search_publications",
     "DBpedia_SPARQL_query",
+    "DGIdb_get_drug_gene_interactions",
+    "DGIdb_get_drug_info",
+    "DGIdb_get_gene_druggability",
+    "DGIdb_get_gene_info",
     "DOAJ_search_articles",
     "DailyMed_get_spl_by_setid",
     "DailyMed_search_spls",
@@ -1533,7 +1572,20 @@ __all__ = [
     "MedlinePlus_get_genetics_gene_by_name",
     "MedlinePlus_get_genetics_index",
     "MedlinePlus_search_topics_by_keyword",
+    "MetabolomicsWorkbench_get_compound_by_pubchem_cid",
+    "MetabolomicsWorkbench_get_refmet_info",
+    "MetabolomicsWorkbench_get_study",
+    "MetabolomicsWorkbench_search_by_exact_mass",
+    "MetabolomicsWorkbench_search_by_mz",
+    "MetabolomicsWorkbench_search_compound_by_name",
     "MethodologyRigorReviewer",
+    "MyChem_get_chemical_annotation",
+    "MyChem_query_chemicals",
+    "MyGene_batch_query",
+    "MyGene_get_gene_annotation",
+    "MyGene_query_genes",
+    "MyVariant_get_variant_annotation",
+    "MyVariant_query_variants",
     "NICE_Clinical_Guidelines_Search",
     "NICE_Guideline_Full_Text",
     "NoveltySignificanceReviewer",
@@ -1606,6 +1658,13 @@ __all__ = [
     "PRIDE_search_proteomics",
     "PackageAnalyzer",
     "Paleobiology_get_fossils",
+    "PharmGKB_get_clinical_annotations",
+    "PharmGKB_get_dosing_guidelines",
+    "PharmGKB_get_drug_details",
+    "PharmGKB_get_gene_details",
+    "PharmGKB_search_drugs",
+    "PharmGKB_search_genes",
+    "PharmGKB_search_variants",
     "ProtocolOptimizer",
     "PubChem_get_CID_by_SMILES",
     "PubChem_get_CID_by_compound_name",
@@ -1634,6 +1693,9 @@ __all__ = [
     "SCREEN_get_regulatory_elements",
     "SIMBAD_advanced_query",
     "SIMBAD_query_object",
+    "STITCH_get_chemical_protein_interactions",
+    "STITCH_get_interaction_partners",
+    "STITCH_resolve_identifier",
     "ScientificTextSummarizer",
     "SemanticScholar_search_papers",
     "TRIP_Database_Guidelines_Search",
@@ -1768,6 +1830,7 @@ __all__ = [
     "expression_atlas_disease_target_score",
     "extract_clinical_trial_adverse_events",
     "extract_clinical_trial_outcomes",
+    "fda_pharmacogenomic_biomarkers",
     "genomics_england_disease_target_score",
     "geo_get_dataset_info",
     "geo_get_sample_info",
@@ -1987,7 +2050,6 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
-    "ghost_tool",
     "gnomad_get_gene_constraints",
     "grep_tools",
     "gwas_get_association_by_id",

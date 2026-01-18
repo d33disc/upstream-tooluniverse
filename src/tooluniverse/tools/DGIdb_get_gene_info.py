@@ -1,27 +1,27 @@
 """
-ghost_tool
+DGIdb_get_gene_info
 
-A ghost tool that exists in code but not in JSON configs.
+Get detailed gene information from DGIdb including aliases, categories, and interaction counts.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ghost_tool(
-    msg: Optional[str] = None,
+def DGIdb_get_gene_info(
+    genes: list[str],
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    A ghost tool that exists in code but not in JSON configs.
+    Get detailed gene information from DGIdb including aliases, categories, and interaction counts.
 
     Parameters
     ----------
-    msg : str
-
+    genes : list[str]
+        List of gene symbols.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,16 @@ def ghost_tool(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "ghost_tool", "arguments": {"msg": msg}},
+        {"name": "DGIdb_get_gene_info", "arguments": {"genes": genes}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ghost_tool"]
+__all__ = ["DGIdb_get_gene_info"]
