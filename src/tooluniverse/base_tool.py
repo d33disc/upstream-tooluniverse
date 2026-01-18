@@ -182,7 +182,11 @@ class BaseTool:
 
         try:
             import jsonschema
+        except ImportError:
+            # jsonschema not available, skip validation
+            return None
 
+        try:
             # Filter out internal control parameters before validation
             # Only filter known internal parameters, not all underscore-prefixed params
             # to allow optional streaming parameter _tooluniverse_stream

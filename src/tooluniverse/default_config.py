@@ -123,6 +123,14 @@ default_tool_files = {
     ),
     # New database tools
     "interpro": os.path.join(current_dir, "data", "interpro_tools.json"),
+    "ebi_search": os.path.join(current_dir, "data", "ebi_search_tools.json"),
+    "intact": os.path.join(current_dir, "data", "intact_tools.json"),
+    "metabolights": os.path.join(current_dir, "data", "metabolights_tools.json"),
+    "proteins_api": os.path.join(current_dir, "data", "proteins_api_tools.json"),
+    "arrayexpress": os.path.join(current_dir, "data", "arrayexpress_tools.json"),
+    "dbfetch": os.path.join(current_dir, "data", "dbfetch_tools.json"),
+    "pdbe_api": os.path.join(current_dir, "data", "pdbe_api_tools.json"),
+    "ena_browser": os.path.join(current_dir, "data", "ena_browser_tools.json"),
     "blast": os.path.join(current_dir, "data", "blast_tools.json"),
     "cbioportal": os.path.join(current_dir, "data", "cbioportal_tools.json"),
     "regulomedb": os.path.join(current_dir, "data", "regulomedb_tools.json"),
@@ -239,6 +247,8 @@ default_tool_files = {
     "dgidb": os.path.join(current_dir, "data", "dgidb_tools.json"),
     # STITCH - Chemical-Protein Interactions
     "stitch": os.path.join(current_dir, "data", "stitch_tools.json"),
+    # CIViC - Clinical Interpretation of Variants in Cancer
+    "civic": os.path.join(current_dir, "data", "civic_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

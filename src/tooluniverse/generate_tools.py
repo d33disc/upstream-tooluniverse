@@ -60,6 +60,37 @@ def prop_to_python_type(prop: Dict[str, Any]) -> str:
 
     # Fall back to regular type handling
     json_type = prop.get("type", "string")
+
+    # Handle when type is a list (e.g., ["string", "array"])
+    if isinstance(json_type, list):
+        types = []
+        for item_type in json_type:
+            if item_type == "string":
+                types.append("str")
+            elif item_type == "array":
+                # Check if it's an array of strings
+                items = prop.get("items", {})
+                if items.get("type") == "string":
+                    types.append("list[str]")
+                else:
+                    types.append("list[Any]")
+            elif item_type:
+                types.append(json_type_to_python(item_type))
+
+        if len(types) == 1:
+            return types[0]
+        elif len(types) > 1:
+            # Remove duplicates while preserving order
+            seen = set()
+            unique_types = []
+            for t in types:
+                if t not in seen:
+                    seen.add(t)
+                    unique_types.append(t)
+            return " | ".join(unique_types)
+        else:
+            return "Any"
+
     if json_type == "array":
         # Check if it's an array of a specific type
         items = prop.get("items", {})

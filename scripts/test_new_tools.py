@@ -110,7 +110,8 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
             
         for tool in tools:
             name = tool.get("name")
-            if not name: continue
+            if not name:
+                continue
             
             # Name filter logic (if pattern matches tool name directly)
             if args.pattern and args.pattern.lower() not in name.lower() and args.pattern.lower() not in file_path.name.lower():

@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 817 scientific tools.
+Type-safe Python interface to 870 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -849,6 +849,10 @@ from .advanced_literature_search_agent import advanced_literature_search_agent
 from .alphafold_get_annotations import alphafold_get_annotations
 from .alphafold_get_prediction import alphafold_get_prediction
 from .alphafold_get_summary import alphafold_get_summary
+from .arrayexpress_get_experiment import arrayexpress_get_experiment
+from .arrayexpress_get_experiment_files import arrayexpress_get_experiment_files
+from .arrayexpress_get_experiment_samples import arrayexpress_get_experiment_samples
+from .arrayexpress_search_experiments import arrayexpress_search_experiments
 from .biomodels_get_files import biomodels_get_files
 from .biomodels_search import biomodels_search
 from .cBioPortal_get_cancer_studies import cBioPortal_get_cancer_studies
@@ -864,12 +868,28 @@ from .cellosaurus_get_cell_line_info import cellosaurus_get_cell_line_info
 from .cellosaurus_query_converter import cellosaurus_query_converter
 from .cellosaurus_search_cell_lines import cellosaurus_search_cell_lines
 from .chembl_disease_target_score import chembl_disease_target_score
+from .civic_get_assertion import civic_get_assertion
+from .civic_get_evidence_item import civic_get_evidence_item
+from .civic_get_molecular_profile import civic_get_molecular_profile
+from .civic_get_variant import civic_get_variant
+from .civic_get_variants_by_gene import civic_get_variants_by_gene
+from .civic_search_assertions import civic_search_assertions
+from .civic_search_diseases import civic_search_diseases
+from .civic_search_evidence_items import civic_search_evidence_items
+from .civic_search_genes import civic_search_genes
+from .civic_search_molecular_profiles import civic_search_molecular_profiles
+from .civic_search_therapies import civic_search_therapies
+from .civic_search_variants import civic_search_variants
 from .clinical_trials_get_details import clinical_trials_get_details
 from .clinical_trials_search import clinical_trials_search
 from .clinvar_get_clinical_significance import clinvar_get_clinical_significance
 from .clinvar_get_variant_details import clinvar_get_variant_details
 from .clinvar_search_variants import clinvar_search_variants
 from .convert_to_markdown import convert_to_markdown
+from .dbfetch_fetch_batch import dbfetch_fetch_batch
+from .dbfetch_fetch_entry import dbfetch_fetch_entry
+from .dbfetch_list_databases import dbfetch_list_databases
+from .dbfetch_list_formats import dbfetch_list_formats
 from .dbsnp_get_frequencies import dbsnp_get_frequencies
 from .dbsnp_get_variant_by_rsid import dbsnp_get_variant_by_rsid
 from .dbsnp_search_by_gene import dbsnp_search_by_gene
@@ -928,11 +948,23 @@ from .drugbank_links_search import drugbank_links_search
 from .drugbank_vocab_filter import drugbank_vocab_filter
 from .drugbank_vocab_search import drugbank_vocab_search
 from .dynamic_package_discovery import dynamic_package_discovery
+from .ebi_cross_reference_search import ebi_cross_reference_search
+from .ebi_get_domain_fields import ebi_get_domain_fields
+from .ebi_get_domain_info import ebi_get_domain_info
+from .ebi_get_entry import ebi_get_entry
+from .ebi_list_domains import ebi_list_domains
+from .ebi_search_domain import ebi_search_domain
+from .ebi_search_with_facets import ebi_search_with_facets
 from .embedding_database_add import embedding_database_add
 from .embedding_database_create import embedding_database_create
 from .embedding_database_search import embedding_database_search
 from .embedding_sync_download import embedding_sync_download
 from .embedding_sync_upload import embedding_sync_upload
+from .ena_get_entry import ena_get_entry
+from .ena_get_entry_history import ena_get_entry_history
+from .ena_get_sequence_embl import ena_get_sequence_embl
+from .ena_get_sequence_fasta import ena_get_sequence_fasta
+from .ena_get_sequence_xml import ena_get_sequence_xml
 from .enrichr_gene_enrichment_analysis import enrichr_gene_enrichment_analysis
 from .ensembl_get_sequence import ensembl_get_sequence
 from .ensembl_get_variants import ensembl_get_variants
@@ -1244,6 +1276,11 @@ from .hca_search_projects import hca_search_projects
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
 from .icd_search_codes import icd_search_codes
 from .iedb_search_epitopes import iedb_search_epitopes
+from .intact_get_interaction_details import intact_get_interaction_details
+from .intact_get_interaction_network import intact_get_interaction_network
+from .intact_get_interactions import intact_get_interactions
+from .intact_get_interactor import intact_get_interactor
+from .intact_search_interactions import intact_search_interactions
 from .kegg_find_genes import kegg_find_genes
 from .kegg_get_gene_info import kegg_get_gene_info
 from .kegg_get_pathway_info import kegg_get_pathway_info
@@ -1259,6 +1296,12 @@ from .mesh_get_subjects_by_subject_name import mesh_get_subjects_by_subject_name
 from .mesh_get_subjects_by_subject_scope_or_definition import (
     mesh_get_subjects_by_subject_scope_or_definition,
 )
+from .metabolights_get_study import metabolights_get_study
+from .metabolights_get_study_assays import metabolights_get_study_assays
+from .metabolights_get_study_files import metabolights_get_study_files
+from .metabolights_get_study_samples import metabolights_get_study_samples
+from .metabolights_list_studies import metabolights_list_studies
+from .metabolights_search_studies import metabolights_search_studies
 from .odphp_itemlist import odphp_itemlist
 from .odphp_myhealthfinder import odphp_myhealthfinder
 from .odphp_outlink_fetch import odphp_outlink_fetch
@@ -1274,6 +1317,16 @@ from .open_deep_research_agent import open_deep_research_agent
 from .openalex_literature_search import openalex_literature_search
 from .pc_get_interactions import pc_get_interactions
 from .pc_search_pathways import pc_search_pathways
+from .pdbe_get_entry_assemblies import pdbe_get_entry_assemblies
+from .pdbe_get_entry_publications import pdbe_get_entry_publications
+from .pdbe_get_entry_quality import pdbe_get_entry_quality
+from .pdbe_get_entry_secondary_structure import pdbe_get_entry_secondary_structure
+from .pdbe_get_entry_summary import pdbe_get_entry_summary
+from .proteins_api_get_epitopes import proteins_api_get_epitopes
+from .proteins_api_get_protein import proteins_api_get_protein
+from .proteins_api_get_proteomics import proteins_api_get_proteomics
+from .proteins_api_get_variants import proteins_api_get_variants
+from .proteins_api_search import proteins_api_search
 from .python_code_executor import python_code_executor
 from .python_script_runner import python_script_runner
 from .reactome_disease_target_score import reactome_disease_target_score
@@ -1746,6 +1799,10 @@ __all__ = [
     "alphafold_get_annotations",
     "alphafold_get_prediction",
     "alphafold_get_summary",
+    "arrayexpress_get_experiment",
+    "arrayexpress_get_experiment_files",
+    "arrayexpress_get_experiment_samples",
+    "arrayexpress_search_experiments",
     "biomodels_get_files",
     "biomodels_search",
     "cBioPortal_get_cancer_studies",
@@ -1757,12 +1814,28 @@ __all__ = [
     "cellosaurus_query_converter",
     "cellosaurus_search_cell_lines",
     "chembl_disease_target_score",
+    "civic_get_assertion",
+    "civic_get_evidence_item",
+    "civic_get_molecular_profile",
+    "civic_get_variant",
+    "civic_get_variants_by_gene",
+    "civic_search_assertions",
+    "civic_search_diseases",
+    "civic_search_evidence_items",
+    "civic_search_genes",
+    "civic_search_molecular_profiles",
+    "civic_search_therapies",
+    "civic_search_variants",
     "clinical_trials_get_details",
     "clinical_trials_search",
     "clinvar_get_clinical_significance",
     "clinvar_get_variant_details",
     "clinvar_search_variants",
     "convert_to_markdown",
+    "dbfetch_fetch_batch",
+    "dbfetch_fetch_entry",
+    "dbfetch_list_databases",
+    "dbfetch_list_formats",
     "dbsnp_get_frequencies",
     "dbsnp_get_variant_by_rsid",
     "dbsnp_search_by_gene",
@@ -1793,11 +1866,23 @@ __all__ = [
     "drugbank_vocab_filter",
     "drugbank_vocab_search",
     "dynamic_package_discovery",
+    "ebi_cross_reference_search",
+    "ebi_get_domain_fields",
+    "ebi_get_domain_info",
+    "ebi_get_entry",
+    "ebi_list_domains",
+    "ebi_search_domain",
+    "ebi_search_with_facets",
     "embedding_database_add",
     "embedding_database_create",
     "embedding_database_search",
     "embedding_sync_download",
     "embedding_sync_upload",
+    "ena_get_entry",
+    "ena_get_entry_history",
+    "ena_get_sequence_embl",
+    "ena_get_sequence_fasta",
+    "ena_get_sequence_xml",
     "enrichr_gene_enrichment_analysis",
     "ensembl_get_sequence",
     "ensembl_get_variants",
@@ -2069,6 +2154,11 @@ __all__ = [
     "humanbase_ppi_analysis",
     "icd_search_codes",
     "iedb_search_epitopes",
+    "intact_get_interaction_details",
+    "intact_get_interaction_network",
+    "intact_get_interactions",
+    "intact_get_interactor",
+    "intact_search_interactions",
     "kegg_find_genes",
     "kegg_get_gene_info",
     "kegg_get_pathway_info",
@@ -2080,6 +2170,12 @@ __all__ = [
     "mesh_get_subjects_by_subject_id",
     "mesh_get_subjects_by_subject_name",
     "mesh_get_subjects_by_subject_scope_or_definition",
+    "metabolights_get_study",
+    "metabolights_get_study_assays",
+    "metabolights_get_study_files",
+    "metabolights_get_study_samples",
+    "metabolights_list_studies",
+    "metabolights_search_studies",
     "odphp_itemlist",
     "odphp_myhealthfinder",
     "odphp_outlink_fetch",
@@ -2095,6 +2191,16 @@ __all__ = [
     "openalex_literature_search",
     "pc_get_interactions",
     "pc_search_pathways",
+    "pdbe_get_entry_assemblies",
+    "pdbe_get_entry_publications",
+    "pdbe_get_entry_quality",
+    "pdbe_get_entry_secondary_structure",
+    "pdbe_get_entry_summary",
+    "proteins_api_get_epitopes",
+    "proteins_api_get_protein",
+    "proteins_api_get_proteomics",
+    "proteins_api_get_variants",
+    "proteins_api_search",
     "python_code_executor",
     "python_script_runner",
     "reactome_disease_target_score",
