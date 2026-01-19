@@ -1,0 +1,185 @@
+[
+  {
+    "type": "PDBeAPIRESTTool",
+    "name": "pdbe_get_entry_summary",
+    "description": "Get summary information for a PDB entry including title, authors, release date, and basic structure metadata.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatically."
+        }
+      },
+      "required": ["pdb_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/summary/{pdb_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "PDB entry summary"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1A2B"
+      },
+      {
+        "pdb_id": "1CRN"
+      }
+    ]
+  },
+  {
+    "type": "PDBeAPIRESTTool",
+    "name": "pdbe_get_entry_quality",
+    "description": "Get quality metrics and validation information for a PDB entry including resolution, R-free, Ramachandran statistics, and validation scores. Note: Quality endpoint may not be available for all PDB entries. If this returns 404, try pdbe_get_entry_summary which includes basic quality information.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB entry ID"
+        }
+      },
+      "required": ["pdb_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/quality/{pdb_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Quality metrics and validation data"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1A2B"
+      }
+    ]
+  },
+  {
+    "type": "PDBeAPIRESTTool",
+    "name": "pdbe_get_entry_publications",
+    "description": "Get publication information associated with a PDB entry including authors, journal, DOI, and citation details.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB entry ID"
+        }
+      },
+      "required": ["pdb_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/publications/{pdb_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Publication information"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1A2B"
+      }
+    ]
+  },
+  {
+    "type": "PDBeAPIRESTTool",
+    "name": "pdbe_get_entry_assemblies",
+    "description": "Get biological assembly information for a PDB entry including assembly IDs, symmetry operations, and assembly composition. Note: The assemblies endpoint may return 404 for some entries. This tool automatically falls back to extracting assembly information from the summary endpoint. If both methods fail, use pdbe_get_entry_summary for comprehensive structure information.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB entry ID"
+        }
+      },
+      "required": ["pdb_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/assemblies/{pdb_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Biological assembly information"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1A2B"
+      }
+    ]
+  },
+  {
+    "type": "PDBeAPIRESTTool",
+    "name": "pdbe_get_entry_secondary_structure",
+    "description": "Get secondary structure information for a PDB entry including helix, sheet, and turn assignments.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pdb_id": {
+          "type": "string",
+          "description": "PDB entry ID"
+        }
+      },
+      "required": ["pdb_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/pdbe/api/pdb/entry/secondary_structure/{pdb_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Secondary structure assignments"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pdb_id": "1A2B"
+      }
+    ]
+  }
+]

@@ -1,0 +1,264 @@
+[
+  {
+    "type": "IntActRESTTool",
+    "name": "intact_get_interactor",
+    "description": "Get detailed information about a specific interactor from IntAct database by IntAct identifier (e.g., 'EBI-1004115'). Note: This requires an IntAct-specific identifier, not UniProt IDs. For UniProt IDs, use intact_get_interactions instead. Returns interactor details including names, aliases, organism, and cross-references.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "IntAct identifier (e.g., 'EBI-1004115') or UniProt ID (e.g., 'P04637') or gene name"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json",
+          "description": "Response format"
+        }
+      },
+      "required": ["identifier"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/intact/ws/interactor/{identifier}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Request status"
+        },
+        "data": {
+          "type": "object",
+          "description": "Interactor information including names, organism, cross-references"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "identifier": "EBI-1004115"
+      },
+      {
+        "identifier": "P04637"
+      }
+    ]
+  },
+  {
+    "type": "IntActRESTTool",
+    "name": "intact_get_interactions",
+    "description": "Get all interactions involving a specific interactor (protein or gene) by identifier. Uses EBI Search API (IntAct domain) for reliable access. Returns list of interactions with interaction IDs (e.g., 'EBI-366083-EBI-366083') in the 'interaction_ids' field. These IDs can be used with intact_get_interaction_details or intact_get_interaction_network to get detailed information. Accepts UniProt IDs, gene names, or IntAct identifiers.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "IntAct identifier, UniProt ID, or gene name"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["identifier"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/intact/ws/interaction/{identifier}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of interactions involving the interactor"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of interactions found"
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of IntAct interaction IDs (e.g., 'EBI-366083-EBI-366083') that can be used with intact_get_interaction_details or intact_get_interaction_network"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "identifier": "P04637"
+      },
+      {
+        "identifier": "EBI-1004115"
+      }
+    ]
+  },
+  {
+    "type": "IntActRESTTool",
+    "name": "intact_search_interactions",
+    "description": "Search for interactions in IntAct database using EBI Search API (IntAct domain). Supports searching by protein names, gene names, interaction types, or other criteria. Use '*' as query to get all interactions (may be slow). Returns interaction entries with interaction IDs (e.g., 'EBI-366083-EBI-366083') in the 'interaction_ids' field. These IDs can be used with intact_get_interaction_details or intact_get_interaction_network to get detailed information.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query string (e.g., protein name, gene name, interaction type)"
+        },
+        "first": {
+          "type": "integer",
+          "description": "First result index for pagination (default: 0)",
+          "default": 0,
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "description": "Maximum number of results to return (default: 25, max: 100)",
+          "default": 25,
+          "maximum": 100
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/intact/ws/interaction/search",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Search results with interactions"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of IntAct interaction IDs (e.g., 'EBI-366083-EBI-366083') that can be used with intact_get_interaction_details or intact_get_interaction_network"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "query": "P04637",
+        "max": 10
+      },
+      {
+        "query": "BRCA1",
+        "max": 20
+      }
+    ]
+  },
+  {
+    "type": "IntActRESTTool",
+    "name": "intact_get_interaction_details",
+    "description": "Get detailed information about a specific interaction by its IntAct interaction ID. Requires an IntAct interaction ID in format 'EBI-XXXXXX-EBI-YYYYYY' (e.g., 'EBI-366083-EBI-366083'). To get interaction IDs: 1) Use intact_get_interactions with a protein/gene identifier - it returns 'interaction_ids' field, or 2) Use intact_search_interactions - it also returns 'interaction_ids' field. Then use one of those IDs with this tool to get detailed interaction information. Returns complete interaction data including participants, interaction type, detection methods, and publications.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "interaction_id": {
+          "type": "string",
+          "description": "IntAct interaction ID in format 'EBI-XXXXXX-EBI-YYYYYY' (e.g., 'EBI-366083-EBI-366083'). Get these IDs from intact_get_interactions or intact_search_interactions results (see 'interaction_ids' field)"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["interaction_id"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/intact/ws/interaction/{interaction_id}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Complete interaction details"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "interaction_id": "EBI-10000001"
+      }
+    ]
+  },
+  {
+    "type": "IntActRESTTool",
+    "name": "intact_get_interaction_network",
+    "description": "Get interaction network centered on a specific interactor. Returns network of interactions with configurable depth (direct interactions or extended network). Accepts IntAct identifiers (e.g., 'EBI-1004115'), UniProt IDs (e.g., 'P04637'), or gene names. Note: For interaction-specific networks, use interaction IDs from intact_get_interactions or intact_search_interactions results.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "IntAct identifier, UniProt ID, or gene name"
+        },
+        "depth": {
+          "type": "integer",
+          "description": "Network depth: 1 for direct interactions only, 2 for 2-hop network, etc. (default: 1)",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 3
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["identifier"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/intact/ws/interaction/network/{identifier}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Interaction network data with nodes and edges"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "identifier": "P04637",
+        "depth": 1
+      }
+    ]
+  }
+]

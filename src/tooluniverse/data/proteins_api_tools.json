@@ -1,0 +1,238 @@
+[
+  {
+    "type": "ProteinsAPIRESTTool",
+    "name": "proteins_api_get_protein",
+    "description": "Get comprehensive protein information from Proteins API by UniProt accession. Returns protein annotations, sequences, features, and cross-references.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "accession": {
+          "type": "string",
+          "description": "UniProt protein accession (e.g., 'P05067', 'P04637')"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["accession"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/proteins/api/proteins/{accession}",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Complete protein information"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "accession": "P05067"
+      },
+      {
+        "accession": "P04637"
+      }
+    ]
+  },
+  {
+    "type": "ProteinsAPIRESTTool",
+    "name": "proteins_api_get_variants",
+    "description": "Get variation data for a protein including ClinVar, COSMIC, and other variant annotations. Note: Variations endpoint may not be available for all proteins. If this returns 404, use proteins_api_get_protein instead which includes variant information. Returns variant information with clinical significance and population frequencies.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "accession": {
+          "type": "string",
+          "description": "UniProt protein accession"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["accession"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/proteins/api/proteins/{accession}/variations",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of protein variations"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "accession": "P04637"
+      }
+    ]
+  },
+  {
+    "type": "ProteinsAPIRESTTool",
+    "name": "proteins_api_get_proteomics",
+    "description": "Get proteomics data for a protein including mass spectrometry evidence, PTM sites, and expression data.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "accession": {
+          "type": "string",
+          "description": "UniProt protein accession"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["accession"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/proteins/api/proteins/{accession}/proteomics",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "Proteomics data"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "accession": "P05067"
+      }
+    ]
+  },
+  {
+    "type": "ProteinsAPIRESTTool",
+    "name": "proteins_api_get_epitopes",
+    "description": "Get epitope sequences for a protein. Returns B-cell and T-cell epitope information with antigenicity predictions.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "accession": {
+          "type": "string",
+          "description": "UniProt protein accession"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["accession"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/proteins/api/proteins/{accession}/epitopes",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "Epitope sequences and annotations"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "accession": "P04637"
+      }
+    ]
+  },
+  {
+    "type": "ProteinsAPIRESTTool",
+    "name": "proteins_api_search",
+    "description": "Search proteins in Proteins API. Note: The Proteins API search endpoint may have limitations. For reliable protein search, consider using ebi_search_domain with domain='uniprot' instead. This tool attempts to search by name or accession, but may not work for all query types.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query (e.g., protein name, gene name, organism). Internally converted to 'q' parameter for Proteins API."
+        },
+        "size": {
+          "type": "integer",
+          "description": "Number of results to return (default: 25)",
+          "default": 25,
+          "maximum": 100
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Offset for pagination (default: 0)",
+          "default": 0
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "xml"],
+          "default": "json"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/proteins/api/proteins",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "description": "Search results"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "query": "BRCA1",
+        "size": 10
+      },
+      {
+        "query": "Homo sapiens",
+        "size": 20
+      }
+    ]
+  }
+]
