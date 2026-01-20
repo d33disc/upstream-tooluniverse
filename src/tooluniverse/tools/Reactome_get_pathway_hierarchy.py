@@ -1,14 +1,14 @@
 """
-Reactome_get_pathway_reactions
+Reactome_get_pathway_hierarchy
 
-Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def Reactome_get_pathway_reactions(
+def Reactome_get_pathway_hierarchy(
     stId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -16,7 +16,7 @@ def Reactome_get_pathway_reactions(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+    Get the hierarchy (parent pathways) for a pathway. Returns list of parent pathways.
 
     Parameters
     ----------
@@ -36,11 +36,11 @@ def Reactome_get_pathway_reactions(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "Reactome_get_pathway_reactions", "arguments": {"stId": stId}},
+        {"name": "Reactome_get_pathway_hierarchy", "arguments": {"stId": stId}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["Reactome_get_pathway_reactions"]
+__all__ = ["Reactome_get_pathway_hierarchy"]

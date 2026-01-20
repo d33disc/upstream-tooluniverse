@@ -1,27 +1,27 @@
 """
-Reactome_get_pathway_reactions
+Reactome_list_top_pathways
 
-Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+List top-level pathways for a specific species. Returns pathways that have no parent pathways, in...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def Reactome_get_pathway_reactions(
-    stId: str,
+def Reactome_list_top_pathways(
+    species: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> list[Any]:
     """
-    Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+    List top-level pathways for a specific species. Returns pathways that have no parent pathways, in...
 
     Parameters
     ----------
-    stId : str
-        Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_li...
+    species : str
+        Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). To find availab...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -36,11 +36,11 @@ def Reactome_get_pathway_reactions(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "Reactome_get_pathway_reactions", "arguments": {"stId": stId}},
+        {"name": "Reactome_list_top_pathways", "arguments": {"species": species}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["Reactome_get_pathway_reactions"]
+__all__ = ["Reactome_list_top_pathways"]

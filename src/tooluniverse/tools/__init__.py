@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 870 scientific tools.
+Type-safe Python interface to 918 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -60,7 +60,37 @@ from .BiomarkerDiscoveryWorkflow import BiomarkerDiscoveryWorkflow
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
 from .CORE_search_papers import CORE_search_papers
 from .CallAgent import CallAgent
+from .ChEMBL_get_activity import ChEMBL_get_activity
+from .ChEMBL_get_assay import ChEMBL_get_assay
+from .ChEMBL_get_assay_activities import ChEMBL_get_assay_activities
+from .ChEMBL_get_compound_record import ChEMBL_get_compound_record
+from .ChEMBL_get_compound_record_activities import ChEMBL_get_compound_record_activities
+from .ChEMBL_get_drug import ChEMBL_get_drug
+from .ChEMBL_get_drug_mechanisms import ChEMBL_get_drug_mechanisms
+from .ChEMBL_get_molecule import ChEMBL_get_molecule
+from .ChEMBL_get_molecule_image import ChEMBL_get_molecule_image
+from .ChEMBL_get_molecule_targets import ChEMBL_get_molecule_targets
+from .ChEMBL_get_target import ChEMBL_get_target
+from .ChEMBL_get_target_activities import ChEMBL_get_target_activities
+from .ChEMBL_get_target_assays import ChEMBL_get_target_assays
+from .ChEMBL_search_activities import ChEMBL_search_activities
+from .ChEMBL_search_assays import ChEMBL_search_assays
+from .ChEMBL_search_atc_classification import ChEMBL_search_atc_classification
+from .ChEMBL_search_binding_sites import ChEMBL_search_binding_sites
+from .ChEMBL_search_cell_lines import ChEMBL_search_cell_lines
+from .ChEMBL_search_compound_structural_alerts import (
+    ChEMBL_search_compound_structural_alerts,
+)
+from .ChEMBL_search_documents import ChEMBL_search_documents
+from .ChEMBL_search_drugs import ChEMBL_search_drugs
+from .ChEMBL_search_mechanisms import ChEMBL_search_mechanisms
+from .ChEMBL_search_molecules import ChEMBL_search_molecules
+from .ChEMBL_search_protein_classification import ChEMBL_search_protein_classification
 from .ChEMBL_search_similar_molecules import ChEMBL_search_similar_molecules
+from .ChEMBL_search_similarity import ChEMBL_search_similarity
+from .ChEMBL_search_substructure import ChEMBL_search_substructure
+from .ChEMBL_search_targets import ChEMBL_search_targets
+from .ChEMBL_search_tissue import ChEMBL_search_tissue
 from .ClinicalTrialDesignAgent import ClinicalTrialDesignAgent
 from .CodeQualityAnalyzer import CodeQualityAnalyzer
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
@@ -775,7 +805,29 @@ from .RNAcentral_search import RNAcentral_search
 from .ReMap_get_transcription_factor_binding import (
     ReMap_get_transcription_factor_binding,
 )
+from .Reactome_get_complex import Reactome_get_complex
+from .Reactome_get_database_version import Reactome_get_database_version
+from .Reactome_get_diseases import Reactome_get_diseases
+from .Reactome_get_entity_compartment import Reactome_get_entity_compartment
+from .Reactome_get_entity_events import Reactome_get_entity_events
+from .Reactome_get_event_ancestors import Reactome_get_event_ancestors
+from .Reactome_get_events_hierarchy import Reactome_get_events_hierarchy
+from .Reactome_get_interactor import Reactome_get_interactor
+from .Reactome_get_participant_reference_entities import (
+    Reactome_get_participant_reference_entities,
+)
+from .Reactome_get_participants import Reactome_get_participants
+from .Reactome_get_pathway import Reactome_get_pathway
+from .Reactome_get_pathway_hierarchy import Reactome_get_pathway_hierarchy
 from .Reactome_get_pathway_reactions import Reactome_get_pathway_reactions
+from .Reactome_get_pathways_low_entity import Reactome_get_pathways_low_entity
+from .Reactome_get_reaction import Reactome_get_reaction
+from .Reactome_list_species import Reactome_list_species
+from .Reactome_list_top_pathways import Reactome_list_top_pathways
+from .Reactome_map_uniprot_to_pathways import Reactome_map_uniprot_to_pathways
+from .Reactome_map_uniprot_to_reactions import Reactome_map_uniprot_to_reactions
+from .Reactome_query_by_ids import Reactome_query_by_ids
+from .Reactome_query_enhanced import Reactome_query_enhanced
 from .ReferenceInfoAnalyzer import ReferenceInfoAnalyzer
 from .RegulomeDB_query_variant import RegulomeDB_query_variant
 from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyReviewer
@@ -1368,7 +1420,35 @@ __all__ = [
     "CMA_Guidelines_Search",
     "CORE_search_papers",
     "CallAgent",
+    "ChEMBL_get_activity",
+    "ChEMBL_get_assay",
+    "ChEMBL_get_assay_activities",
+    "ChEMBL_get_compound_record",
+    "ChEMBL_get_compound_record_activities",
+    "ChEMBL_get_drug",
+    "ChEMBL_get_drug_mechanisms",
+    "ChEMBL_get_molecule",
+    "ChEMBL_get_molecule_image",
+    "ChEMBL_get_molecule_targets",
+    "ChEMBL_get_target",
+    "ChEMBL_get_target_activities",
+    "ChEMBL_get_target_assays",
+    "ChEMBL_search_activities",
+    "ChEMBL_search_assays",
+    "ChEMBL_search_atc_classification",
+    "ChEMBL_search_binding_sites",
+    "ChEMBL_search_cell_lines",
+    "ChEMBL_search_compound_structural_alerts",
+    "ChEMBL_search_documents",
+    "ChEMBL_search_drugs",
+    "ChEMBL_search_mechanisms",
+    "ChEMBL_search_molecules",
+    "ChEMBL_search_protein_classification",
     "ChEMBL_search_similar_molecules",
+    "ChEMBL_search_similarity",
+    "ChEMBL_search_substructure",
+    "ChEMBL_search_targets",
+    "ChEMBL_search_tissue",
     "ClinicalTrialDesignAgent",
     "CodeQualityAnalyzer",
     "CompoundDiscoveryAgent",
@@ -1737,7 +1817,27 @@ __all__ = [
     "RNAcentral_get_by_accession",
     "RNAcentral_search",
     "ReMap_get_transcription_factor_binding",
+    "Reactome_get_complex",
+    "Reactome_get_database_version",
+    "Reactome_get_diseases",
+    "Reactome_get_entity_compartment",
+    "Reactome_get_entity_events",
+    "Reactome_get_event_ancestors",
+    "Reactome_get_events_hierarchy",
+    "Reactome_get_interactor",
+    "Reactome_get_participant_reference_entities",
+    "Reactome_get_participants",
+    "Reactome_get_pathway",
+    "Reactome_get_pathway_hierarchy",
     "Reactome_get_pathway_reactions",
+    "Reactome_get_pathways_low_entity",
+    "Reactome_get_reaction",
+    "Reactome_list_species",
+    "Reactome_list_top_pathways",
+    "Reactome_map_uniprot_to_pathways",
+    "Reactome_map_uniprot_to_reactions",
+    "Reactome_query_by_ids",
+    "Reactome_query_enhanced",
     "ReferenceInfoAnalyzer",
     "RegulomeDB_query_variant",
     "ReproducibilityTransparencyReviewer",

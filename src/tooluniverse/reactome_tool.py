@@ -70,11 +70,58 @@ class ReactomeRESTTool(BaseTool):
 
         # 4. Make HTTP request
         try:
+            # Check if this is an attribute query endpoint (returns TSV, not JSON)
+            is_attribute_query = (
+                "/query/" in self.endpoint_template
+                and "/" in self.endpoint_template.split("/query/")[-1]
+                and self.endpoint_template.split("/query/")[-1].count("/") > 0
+            )
+
+            # Special handling for database version endpoint (returns plain text)
+            is_version_endpoint = self.endpoint_template == "/data/database/version"
+
+            headers = {"Accept": "application/json"}
+            if is_attribute_query:
+                # Attribute queries return TSV format, need text/plain
+                headers["Accept"] = "text/plain"
+            elif is_version_endpoint:
+                # Version endpoint returns plain text integer
+                headers["Accept"] = "text/plain"
+
             if self.method == "GET":
-                resp = requests.get(url, params=query_params, timeout=10)
+                resp = requests.get(
+                    url, params=query_params, headers=headers, timeout=10
+                )
             else:
-                # If POST support needed in future, can extend here
-                resp = requests.post(url, json=query_params, timeout=10)
+                # POST requests: Reactome API expects text/plain for query endpoints
+                # Special handling for /data/query/ids endpoint
+                if "/data/query/ids" in url:
+                    # For query/ids, send comma-separated IDs as plain text
+                    if "ids" in query_params:
+                        ids = query_params["ids"]
+                        if isinstance(ids, list):
+                            body = ",".join(str(id) for id in ids)
+                        else:
+                            body = str(ids)
+                        headers = {
+                            "Content-Type": "text/plain",
+                            "Accept": "application/json",
+                        }
+                        resp = requests.post(
+                            url, data=body, headers=headers, timeout=10
+                        )
+                    else:
+                        # Fallback to JSON for other POST endpoints
+                        headers = {"Content-Type": "application/json"}
+                        resp = requests.post(
+                            url, json=query_params, headers=headers, timeout=10
+                        )
+                else:
+                    # For other POST endpoints, use JSON
+                    headers = {"Content-Type": "application/json"}
+                    resp = requests.post(
+                        url, json=query_params, headers=headers, timeout=10
+                    )
         except Exception as e:
             return {"error": f"Failed to request Reactome Content Service: {str(e)}"}
 
@@ -85,13 +132,57 @@ class ReactomeRESTTool(BaseTool):
                 "detail": resp.text,
             }
 
-        # 6. Parse JSON
+        # 6. Parse response (JSON or TSV)
         try:
-            data = resp.json()
-        except ValueError:
+            content_type = resp.headers.get("Content-Type", "").lower()
+
+            # Check if response is TSV (for attribute queries)
+            if "text/plain" in content_type or is_attribute_query:
+                # Parse TSV format
+                lines = resp.text.strip().split("\n")
+                if not lines or not lines[0]:
+                    return []
+
+                # Parse TSV into list of dictionaries
+                # First line might be header, or might be data
+                data = []
+                for line in lines:
+                    if not line.strip():
+                        continue
+                    parts = line.split("\t")
+                    # Create dict with indexed keys or use header if available
+                    if len(parts) >= 3:
+                        # Typical TSV format: ID, Name, Type
+                        item = {
+                            "id": parts[0] if len(parts) > 0 else "",
+                            "name": parts[1] if len(parts) > 1 else "",
+                            "type": parts[2] if len(parts) > 2 else "",
+                            "raw": line,
+                        }
+                        # Add additional fields if present
+                        if len(parts) > 3:
+                            item["additional"] = parts[3:]
+                        data.append(item)
+                    else:
+                        # Single value or simple format
+                        data.append({"value": line.strip()})
+
+                return data if len(data) > 1 else (data[0] if data else {})
+            else:
+                # Parse JSON
+                data = resp.json()
+        except (ValueError, requests.exceptions.JSONDecodeError):
+            # Special handling for /data/database/version which returns plain integer
+            if self.endpoint_template == "/data/database/version":
+                try:
+                    return int(resp.text.strip())
+                except ValueError:
+                    return resp.text.strip()
+
             return {
-                "error": "Unable to parse Reactome returned JSON.",
-                "content": resp.text,
+                "error": "Unable to parse Reactome returned response.",
+                "content": resp.text[:500],
+                "content_type": content_type,
             }
 
         # 7. If no extract_path in config, return complete JSON

@@ -1,14 +1,14 @@
 """
-Reactome_get_pathway_reactions
+Reactome_get_participant_reference_entities
 
-Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+Get reference entities for participants of a reaction or event. Returns list of reference entitie...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def Reactome_get_pathway_reactions(
+def Reactome_get_participant_reference_entities(
     stId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -16,12 +16,12 @@ def Reactome_get_pathway_reactions(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+    Get reference entities for participants of a reaction or event. Returns list of reference entitie...
 
     Parameters
     ----------
     stId : str
-        Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_li...
+        Event Stable ID (reaction or pathway, e.g., 'R-HSA-111289'). To find reaction...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -36,11 +36,14 @@ def Reactome_get_pathway_reactions(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "Reactome_get_pathway_reactions", "arguments": {"stId": stId}},
+        {
+            "name": "Reactome_get_participant_reference_entities",
+            "arguments": {"stId": stId},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["Reactome_get_pathway_reactions"]
+__all__ = ["Reactome_get_participant_reference_entities"]

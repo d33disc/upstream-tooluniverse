@@ -1,10 +1,174 @@
+"""
+ChEMBL API Tools
+
+This module provides tools for accessing the ChEMBL database:
+- ChEMBLTool: Specialized tool for similarity search
+- ChEMBLRESTTool: Generic REST API tool for ChEMBL endpoints
+"""
+
 import requests
 from urllib.parse import quote
+from typing import Any, Dict, Optional
 
 # from rdkit import Chem
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 from indigo import Indigo
+
+
+@register_tool("ChEMBLRESTTool")
+class ChEMBLRESTTool(BaseTool):
+    """
+    Generic ChEMBL REST API tool.
+    Wrapper for ChEMBL API endpoints defined in chembl_tools.json.
+    Supports all ChEMBL data resources: molecules, targets, assays, activities, drugs, etc.
+    """
+
+    def __init__(self, tool_config: Dict):
+        super().__init__(tool_config)
+        self.base_url = "https://www.ebi.ac.uk/chembl/api/data"
+        self.session = requests.Session()
+        self.session.headers.update(
+            {"Accept": "application/json", "User-Agent": "ToolUniverse/1.0"}
+        )
+        self.timeout = 30
+
+    def _build_url(self, args: Dict[str, Any]) -> str:
+        """Build URL from endpoint template and arguments"""
+        endpoint_template = self.tool_config.get("fields", {}).get("endpoint", "")
+        tool_name = self.tool_config.get("name", "")
+
+        if endpoint_template:
+            url = endpoint_template
+            # Replace placeholders in URL
+            for k, v in args.items():
+                url = url.replace(f"{{{k}}}", str(v))
+            # If URL doesn't start with http, prepend base_url
+            if not url.startswith("http"):
+                url = self.base_url + url
+            return url
+
+        # Build URL based on tool name patterns
+        if tool_name.startswith("ChEMBL_get_molecule"):
+            chembl_id = args.get("chembl_id", "")
+            if chembl_id:
+                return f"{self.base_url}/molecule/{chembl_id}.json"
+        elif tool_name.startswith("ChEMBL_get_target"):
+            target_id = args.get("target_chembl_id", "")
+            if target_id:
+                return f"{self.base_url}/target/{target_id}.json"
+        elif tool_name.startswith("ChEMBL_get_assay"):
+            assay_id = args.get("assay_chembl_id", "")
+            if assay_id:
+                return f"{self.base_url}/assay/{assay_id}.json"
+        elif tool_name.startswith("ChEMBL_get_activity"):
+            activity_id = args.get("activity_id", "")
+            if activity_id:
+                return f"{self.base_url}/activity/{activity_id}.json"
+        elif tool_name.startswith("ChEMBL_get_drug"):
+            drug_id = args.get("drug_chembl_id", "")
+            if drug_id:
+                return f"{self.base_url}/drug/{drug_id}.json"
+
+        return self.base_url
+
+    def _build_params(self, args: Dict[str, Any]) -> Dict[str, Any]:
+        """Build query parameters for ChEMBL API"""
+        params = {}
+        self.tool_config.get("name", "")
+
+        # ChEMBL API uses query parameters for filtering
+        # Common parameters: limit, offset, format, ordering
+        if "limit" in args:
+            params["limit"] = args["limit"]
+        if "offset" in args:
+            params["offset"] = args["offset"]
+        if "format" in args:
+            params["format"] = args["format"]
+        else:
+            params["format"] = "json"
+        if "ordering" in args:
+            params["ordering"] = args["ordering"]
+
+        # Add any filter parameters (ChEMBL uses field__filter syntax)
+        # e.g., molecule_chembl_id__exact, pref_name__contains
+        for key, value in args.items():
+            if (
+                key
+                not in [
+                    "limit",
+                    "offset",
+                    "format",
+                    "ordering",
+                    "chembl_id",
+                    "target_chembl_id",
+                    "assay_chembl_id",
+                    "activity_id",
+                    "drug_chembl_id",
+                ]
+                and value is not None
+            ):
+                params[key] = value
+
+        return params
+
+    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute the ChEMBL API call"""
+        try:
+            url = self._build_url(arguments)
+            params = self._build_params(arguments)
+
+            response = self.session.get(url, params=params, timeout=self.timeout)
+            response.raise_for_status()
+
+            data = response.json()
+
+            response_data = {
+                "status": "success",
+                "data": data,
+                "url": response.url,
+            }
+
+            # Extract count if available (ChEMBL pagination)
+            if isinstance(data, dict):
+                if "page_meta" in data:
+                    response_data["page_meta"] = data["page_meta"]
+                if "page" in data:
+                    response_data["pagination"] = data["page"]
+
+            # Count results if it's a list or has a results key
+            if isinstance(data, list):
+                response_data["count"] = len(data)
+            elif isinstance(data, dict):
+                # ChEMBL often returns data in a key matching the resource name
+                for key in [
+                    "molecules",
+                    "targets",
+                    "assays",
+                    "activities",
+                    "drugs",
+                    "mechanisms",
+                    "indications",
+                    "binding_sites",
+                ]:
+                    if key in data and isinstance(data[key], list):
+                        response_data["count"] = len(data[key])
+                        break
+
+            return response_data
+
+        except requests.exceptions.RequestException as e:
+            return {
+                "status": "error",
+                "error": f"ChEMBL API error: {str(e)}",
+                "url": url if "url" in locals() else None,
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"Unexpected error: {str(e)}",
+                "url": url if "url" in locals() else None,
+            }
 
 
 @register_tool("ChEMBLTool")

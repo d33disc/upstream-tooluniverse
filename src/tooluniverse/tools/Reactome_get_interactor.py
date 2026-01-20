@@ -1,27 +1,27 @@
 """
-Reactome_get_pathway_reactions
+Reactome_get_interactor
 
-Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+Get detailed information about an interactor (protein, complex, or small molecule) by its Stable ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def Reactome_get_pathway_reactions(
+def Reactome_get_interactor(
     stId: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Query all reactions and subpathways contained under a Pathway using Pathway Stable ID. Returns li...
+    Get detailed information about an interactor (protein, complex, or small molecule) by its Stable ...
 
     Parameters
     ----------
     stId : str
-        Pathway Stable ID (e.g., 'R-HSA-73817'). To find pathway IDs, use Reactome_li...
+        Interactor Stable ID. To find interactor IDs, use Reactome_get_participants w...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,16 @@ def Reactome_get_pathway_reactions(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "Reactome_get_pathway_reactions", "arguments": {"stId": stId}},
+        {"name": "Reactome_get_interactor", "arguments": {"stId": stId}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["Reactome_get_pathway_reactions"]
+__all__ = ["Reactome_get_interactor"]
