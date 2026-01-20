@@ -183,7 +183,13 @@ class GrepToolsTool(BaseTool):
 
 @register_tool("ListTools")
 class ListToolsTool(BaseTool):
-    """Unified tool listing with multiple modes."""
+    """Unified tool listing with multiple modes.
+
+    Note: Defaults to mode='names' to avoid huge outputs when many tools are loaded.
+    For getting tool descriptions or detailed information, use the 'get_tool_info' tool instead
+    (supports single or batch queries), as modes like 'basic'/'summary' can return
+    very large payloads.
+    """
 
     def __init__(self, tool_config, tooluniverse=None):
         super().__init__(tool_config)
@@ -195,14 +201,16 @@ class ListToolsTool(BaseTool):
 
         Args:
             arguments (dict): Dictionary containing:
-                - mode (str, required): Output mode
-                  - "names": Return only tool names
-                  - "basic": Return name + description
+                - mode (str, optional, default="names"): Output mode
+                  - "names": Return only tool names (default, recommended for large tool sets)
+                  - "basic": Return name + description (warning: can return very large payloads)
                   - "categories": Return category statistics
                   - "by_category": Return tools grouped by category
-                  - "summary": Return name + description + type +
-                    has_parameters
+                  - "summary": Return name + description + type + has_parameters
+                    (warning: can return very large payloads)
                   - "custom": Return user-specified fields
+                Note: For getting tool descriptions, use 'get_tool_info' tool instead of
+                'basic'/'summary' modes to avoid large payloads.
                 - categories (list, optional): Filter by categories
                 - fields (list, required for mode="custom"): Fields to include
                 - group_by_category (bool, optional): Group by category
@@ -218,7 +226,7 @@ class ListToolsTool(BaseTool):
 
         mode = arguments.get("mode")
         if not mode:
-            return {"error": "mode parameter is required"}
+            mode = "names"
 
         valid_modes = [
             "names",
@@ -607,13 +615,6 @@ class GetToolInfoTool(BaseTool):
             is_single = False
         else:
             return {"error": "tool_names must be a string or list"}
-
-        # Limit to 20 tools to prevent context overflow
-        MAX_TOOLS = 20
-        if len(tool_names) > MAX_TOOLS:
-            return {
-                "error": (f"Maximum {MAX_TOOLS} tools allowed, got {len(tool_names)}")
-            }
 
         try:
             if detail_level == "description":

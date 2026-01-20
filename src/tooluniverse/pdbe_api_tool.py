@@ -35,6 +35,9 @@ class PDBeAPIRESTTool(BaseTool):
         if endpoint_template:
             url = endpoint_template
             for k, v in args.items():
+                # Convert pdb_id to lowercase for PDBe API consistency
+                if k == "pdb_id":
+                    v = str(v).lower()
                 url = url.replace(f"{{{k}}}", str(v))
             return url
 

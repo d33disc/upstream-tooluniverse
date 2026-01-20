@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def proteins_api_get_xrefs(
-    accession: str,
+    accession: str | list[Any],
     format: Optional[str] = "json",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -21,8 +21,8 @@ def proteins_api_get_xrefs(
 
     Parameters
     ----------
-    accession : str
-        UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or e...
+    accession : str | list[Any]
+        UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), com...
     format : str
         Response format. JSON is recommended for most use cases.
     stream_callback : Callable, optional

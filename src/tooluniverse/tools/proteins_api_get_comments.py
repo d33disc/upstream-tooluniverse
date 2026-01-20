@@ -1,7 +1,7 @@
 """
 proteins_api_get_comments
 
-Get functional annotations and comments for a protein from the Proteins API. This includes curate...
+Get functional annotations and comments for a protein from the Proteins API. Supports batch opera...
 """
 
 from typing import Any, Optional, Callable
@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def proteins_api_get_comments(
-    accession: str,
+    accession: str | list[Any],
     format: Optional[str] = "json",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -17,12 +17,12 @@ def proteins_api_get_comments(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get functional annotations and comments for a protein from the Proteins API. This includes curate...
+    Get functional annotations and comments for a protein from the Proteins API. Supports batch opera...
 
     Parameters
     ----------
-    accession : str
-        UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or e...
+    accession : str | list[Any]
+        UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), com...
     format : str
         Response format. JSON is recommended for most use cases.
     stream_callback : Callable, optional

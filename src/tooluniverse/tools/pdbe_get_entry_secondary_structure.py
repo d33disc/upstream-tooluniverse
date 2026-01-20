@@ -21,7 +21,7 @@ def pdbe_get_entry_secondary_structure(
     Parameters
     ----------
     pdb_id : str
-        PDB entry ID
+        PDB entry ID (e.g., '1A2B', '1CRN'). Will be converted to lowercase automatic...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

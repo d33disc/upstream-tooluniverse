@@ -2,13 +2,13 @@
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_protein",
-    "description": "Get comprehensive protein information from Proteins API by UniProt accession. Returns protein annotations, sequences, features, and cross-references.",
+    "description": "Get comprehensive protein information from Proteins API by UniProt accession. Returns protein annotations, sequences, features, and cross-references. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -31,8 +31,28 @@
           "description": "Execution status ('success' or 'error')."
         },
         "data": {
-          "type": "object",
-          "description": "Complete protein information including annotations, sequences, features, and cross-references."
+          "oneOf": [
+            {
+              "type": "object",
+              "description": "Single protein information (when single accession provided) including annotations, sequences, features, and cross-references. Contains fields: accession, id, proteinExistence, info, organism, secondaryAccession, protein, gene, comments, features, dbReferences, references, etc."
+            },
+            {
+              "type": "array",
+              "description": "List of protein results (when multiple accessions provided in batch). Each item contains 'accession', 'status', 'data', and 'url' fields."
+            }
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results returned. Only present for batch operations (when multiple accessions provided)."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         },
         "url": {
           "type": "string",
@@ -46,19 +66,25 @@
       },
       {
         "accession": "P04637"
+      },
+      {
+        "accession": ["P05067", "P04637"]
+      },
+      {
+        "accession": "P05067,P04637"
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_variants",
-    "description": "Get variation data for a protein including ClinVar, COSMIC, and other variant annotations. Note: Variations endpoint may not be available for all proteins. If this returns 404, use proteins_api_get_protein instead which includes variant information. Returns variant information with clinical significance and population frequencies.",
+    "description": "Get variation data for a protein including ClinVar, COSMIC, and other variant annotations. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Note: Variations endpoint may not be available for all proteins. If this returns 404, use proteins_api_get_protein instead which includes variant information. Returns variant information with clinical significance and population frequencies.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -78,19 +104,35 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Execution status ('success' or 'error')."
+          "description": "Execution status ('success' or 'error'). Returns 'error' if variations endpoint is not available for the protein."
         },
         "data": {
           "type": "array",
-          "description": "List of protein variations with clinical significance and population frequencies."
+          "description": "List of protein variations with clinical significance and population frequencies. Only present when status is 'success'."
         },
         "count": {
           "type": "integer",
-          "description": "Number of variations returned."
+          "description": "Number of variations returned. Only present when status is 'success' (single request) or for batch operations."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         },
         "url": {
           "type": "string",
           "description": "Final request URL used for the API call."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message explaining why variations are not available. Only present when status is 'error' (single request)."
+        },
+        "note": {
+          "type": "string",
+          "description": "Suggestion for alternative approach when variations endpoint is not available. Only present when status is 'error' (single request) or for batch operations with partial failures."
         }
       }
     },
@@ -103,13 +145,13 @@
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_proteomics",
-    "description": "Get proteomics data for a protein including mass spectrometry evidence, PTM sites, and expression data. Note: This tool extracts proteomics-related data from the main protein endpoint (the separate proteomics endpoint is not available). Returns PTM comments, modified residues, and related features.",
+    "description": "Get proteomics data for a protein including mass spectrometry evidence, PTM sites, and expression data. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Note: This tool extracts proteomics-related data from the main protein endpoint (the separate proteomics endpoint is not available). Returns PTM comments, modified residues, and related features.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -137,7 +179,7 @@
         },
         "count": {
           "type": "integer",
-          "description": "Number of proteomics data items returned."
+          "description": "Number of proteomics data items returned. For batch operations, this is the number of successful results."
         },
         "url": {
           "type": "string",
@@ -154,25 +196,36 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P05067"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_epitopes",
-    "description": "Get epitope sequences for a protein. Returns B-cell and T-cell epitope information with antigenicity predictions. Note: This tool extracts epitope-related data from the main protein endpoint (the separate epitopes endpoint is not available). Returns immunology comments and epitope features if present.",
+    "description": "Get epitope sequences for a protein. Returns B-cell and T-cell epitope information with antigenicity predictions. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Note: This tool extracts epitope-related data from the main protein endpoint (the separate epitopes endpoint is not available). Returns immunology comments and epitope features if present.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -217,12 +270,23 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P04637"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
@@ -266,19 +330,27 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Execution status ('success' or 'error')."
+          "description": "Execution status ('success' or 'error'). Returns 'error' if search endpoint is not available or query is invalid."
         },
         "data": {
           "type": "object",
-          "description": "Search results containing protein entries matching the query."
+          "description": "Search results containing protein entries matching the query. Only present when status is 'success'."
         },
         "count": {
           "type": "integer",
-          "description": "Number of results returned."
+          "description": "Number of results returned. Only present when status is 'success'."
         },
         "url": {
           "type": "string",
           "description": "Final request URL used for the API call."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message explaining why search failed. Only present when status is 'error'."
+        },
+        "suggestion": {
+          "type": "string",
+          "description": "Suggestion for alternative approach when search endpoint is not available. Only present when status is 'error'."
         }
       }
     },
@@ -296,13 +368,13 @@
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_genome_mappings",
-    "description": "Get reference genome mappings for a protein using the Proteins API. This extracts genome-related cross-references (Ensembl, RefSeq, EMBL, GenBank) from the main protein endpoint, which may contain genomic location information. Note: The separate genome endpoint is not available, so this tool extracts genome-related cross-references from the main protein data. Use UniProt or EBI Search (domain='uniprot') to find accessions such as 'P05067' or 'P04637'.",
+    "description": "Get reference genome mappings for a protein using the Proteins API. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. This extracts genome-related cross-references (Ensembl, RefSeq, EMBL, GenBank) from the main protein endpoint, which may contain genomic location information. Note: The separate genome endpoint is not available, so this tool extracts genome-related cross-references from the main protein data. Use UniProt or EBI Search (domain='uniprot') to find accessions such as 'P05067' or 'P04637'.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -352,25 +424,36 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P05067"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_features",
-    "description": "Get detailed sequence features for a protein, including domains, regions, motifs, modified residues, and other annotated features. Note: This tool extracts features from the main protein endpoint (the separate features endpoint is not available). Returns all sequence feature annotations for the protein.",
+    "description": "Get detailed sequence features for a protein, including domains, regions, motifs, modified residues, and other annotated features. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Note: This tool extracts features from the main protein endpoint (the separate features endpoint is not available). Returns all sequence feature annotations for the protein.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -420,25 +503,36 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P05067"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_xrefs",
-    "description": "Get cross-references for a protein from the Proteins API, including links to other databases (Ensembl, PDB, Reactome, EMBL, RefSeq, etc.). Note: This tool extracts cross-references from the main protein endpoint (the separate xrefs endpoint is not available). Returns database cross-reference records.",
+    "description": "Get cross-references for a protein from the Proteins API, including links to other databases (Ensembl, PDB, Reactome, EMBL, RefSeq, etc.). Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Note: This tool extracts cross-references from the main protein endpoint (the separate xrefs endpoint is not available). Returns database cross-reference records.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -488,25 +582,36 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P04637"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_comments",
-    "description": "Get functional annotations and comments for a protein from the Proteins API. This includes curated comments on function, subcellular location, disease involvement, and other annotations. Note: This tool extracts comments from the main protein endpoint (the separate comments endpoint is not available). Returns all functional annotation comments.",
+    "description": "Get functional annotations and comments for a protein from the Proteins API. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. This includes curated comments on function, subcellular location, disease involvement, and other annotations. Note: This tool extracts comments from the main protein endpoint (the separate comments endpoint is not available). Returns all functional annotation comments.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -556,25 +661,36 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P05067"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   },
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_get_publications",
-    "description": "Get publications associated with a protein from the Proteins API. Returns literature references linked to the UniProt accession, including PubMed IDs and citation details. Note: This tool extracts publications from the main protein endpoint (the separate publications endpoint is not available). Returns all publication references.",
+    "description": "Get publications associated with a protein from the Proteins API. Supports batch operations: pass a list of accessions or comma-separated string to retrieve multiple proteins in parallel. Returns literature references linked to the UniProt accession, including PubMed IDs and citation details. Note: This tool extracts publications from the main protein endpoint (the separate publications endpoint is not available). Returns all publication references.",
     "parameter": {
       "type": "object",
       "properties": {
         "accession": {
-          "type": "string",
-          "description": "UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
+          "type": ["string", "array"],
+          "description": "UniProt protein accession(s). Can be a single accession (e.g., 'P05067'), comma-separated string (e.g., 'P05067,P04637'), or list (e.g., ['P05067', 'P04637']). Use UniProt search or ebi_search_domain with domain='uniprot' to find valid accessions."
         },
         "format": {
           "type": "string",
@@ -624,12 +740,23 @@
         "source": {
           "type": "string",
           "description": "Source of the data (e.g., 'main_protein_endpoint')."
+        },
+        "total_requested": {
+          "type": "integer",
+          "description": "Total number of accessions requested. Only present for batch operations."
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of errors for failed accessions. Only present for batch operations when some accessions fail."
         }
       }
     },
     "test_examples": [
       {
         "accession": "P04637"
+      },
+      {
+        "accession": ["P05067", "P04637"]
       }
     ]
   }

@@ -1,6 +1,8 @@
 import json
 import gc
-from .utils import get_md5
+import os
+from pathlib import Path
+from .utils import get_md5, get_user_cache_dir
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
@@ -137,9 +139,14 @@ class ToolFinderEmbedding(BaseTool):
         ]
         md5_value = get_md5(str(all_tools_str))
         print("get the md value of tools:", md5_value)
-        self.tool_embedding_path = (
+
+        # Use ToolUniverse cache directory for embeddings
+        cache_dir = Path(get_user_cache_dir()) / "embeddings"
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        embedding_filename = (
             self.toolfinder_model.split("/")[-1] + "tool_embedding_" + md5_value + ".pt"
         )
+        self.tool_embedding_path = str(cache_dir / embedding_filename)
 
         # Lazy import torch for loading/saving embeddings
         try:

@@ -2,9 +2,7 @@
   {
     "type": "ListTools",
     "name": "list_tools",
-    "description": "Unified tool listing with multiple modes for different use cases. Supports listing tool names, basic info, categories, grouped by category, summary info, or custom fields. Replaces the previous separate list tools (list_tool_names, list_categories, list_tools_by_category, list_tools_basic, list_tools_by_fields, list_available_tooluniverse_tools).",
-    "use_case": "List and explore tools with flexible output formats. Use different modes based on your needs: 'names' for quick scanning, 'basic' for name+description, 'categories' for category overview, 'by_category' for grouped listing, 'summary' for detailed overview, or 'custom' for specific fields.",
-    "workflow_hint": "Start with mode='names' or mode='categories' to get overview, then use mode='basic' or mode='summary' for more details. Use mode='custom' when you need specific fields only.",
+    "description": "List tools with multiple output modes. Default mode='names' for quick scanning. Recommended workflow: start with default or mode='categories' for overview, then use 'get_tool_info' tool to get descriptions/details for specific tools (supports batch queries). Warning: modes like 'basic'/'summary' return very large payloads; use 'get_tool_info' instead for descriptions. If you must use these modes, use 'limit'/'offset' or filter by 'categories'. Modes: 'names' (default), 'basic', 'categories', 'by_category', 'summary', 'custom'.",
     "related_tools": [
       "grep_tools",
       "find_tools",
@@ -23,7 +21,8 @@
             "summary",
             "custom"
           ],
-          "description": "Output mode: 'names' (tool names only), 'basic' (name+description), 'categories' (category statistics), 'by_category' (grouped by category), 'summary' (name+description+type+has_parameters), 'custom' (user-specified fields)"
+          "default": "names",
+          "description": "Output mode (default: 'names'). Warning: non-'names' modes like 'basic'/'summary' can return very large payloads when many tools are loaded. For getting tool descriptions, use 'get_tool_info' tool instead. Modes: 'names' (tool names only), 'basic' (name+description), 'categories' (category statistics), 'by_category' (grouped by category), 'summary' (name+description+type+has_parameters), 'custom' (user-specified fields)"
         },
         "categories": {
           "type": "array",
@@ -59,13 +58,9 @@
           "description": "Number of tools to skip (optional, for pagination, default: 0)"
         }
       },
-      "required": [
-        "mode"
-      ]
+      "required": []
     },
-    "required": [
-      "mode"
-    ],
+    "required": [],
     "return_schema": {
       "type": "object",
       "description": "Tool listing results. Format varies by mode: 'names' returns {total_tools, limit, offset, has_more, tools: string[]}, 'basic' returns {total_tools, limit, offset, has_more, tools: [{name, description}]}, 'categories' returns {categories: {category: count}}, 'by_category' returns {total_tools, limit, offset, has_more, tools_by_category: {category: [tool_names]}}, 'summary' returns {total_tools, limit, offset, has_more, tools: [{name, description, type, has_parameters}]}, 'custom' returns {total_tools, limit, offset, has_more, tools: [...]}.",
@@ -300,7 +295,7 @@
     "name": "get_tool_info",
     "description": "Get tool information with configurable detail level. Supports single tool (string) or multiple tools (list). Use detail_level='description' to get only the description field, or detail_level='full' to get complete tool definition including parameter schema.",
     "use_case": "Get tool information when you need either just the description or the full definition. Supports both single and batch queries.",
-    "workflow_hint": "Use detail_level='description' for quick overviews, detail_level='full' when you need complete parameter details. Can query single tool (string) or multiple tools (list, max 20).",
+    "workflow_hint": "Use detail_level='description' for quick overviews, detail_level='full' when you need complete parameter details. Can query single tool (string) or multiple tools (list).",
     "related_tools": [
       "list_tools",
       "grep_tools",
@@ -310,7 +305,7 @@
       "type": "object",
       "properties": {
         "tool_names": {
-          "description": "Single tool name (string) or list of tool names (max 20 tools)",
+          "description": "Single tool name (string) or list of tool names",
           "oneOf": [
             {
               "type": "string"

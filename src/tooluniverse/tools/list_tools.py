@@ -1,7 +1,7 @@
 """
 list_tools
 
-Unified tool listing with multiple modes for different use cases. Supports listing tool names, ba...
+List tools with multiple output modes. Default mode='names' for quick scanning. Recommended workf...
 """
 
 from typing import Any, Optional, Callable
@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def list_tools(
-    mode: str,
+    mode: Optional[str] = "names",
     categories: Optional[list[str]] = None,
     fields: Optional[list[str]] = None,
     group_by_category: Optional[bool] = False,
@@ -22,12 +22,12 @@ def list_tools(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Unified tool listing with multiple modes for different use cases. Supports listing tool names, ba...
+    List tools with multiple output modes. Default mode='names' for quick scanning. Recommended workf...
 
     Parameters
     ----------
     mode : str
-        Output mode: 'names' (tool names only), 'basic' (name+description), 'categori...
+        Output mode (default: 'names'). Warning: non-'names' modes like 'basic'/'summ...
     categories : list[str]
         Optional list of tool categories to filter by (applies to all modes except 'c...
     fields : list[str]

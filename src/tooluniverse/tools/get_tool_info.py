@@ -22,7 +22,7 @@ def get_tool_info(
     Parameters
     ----------
     tool_names : str | list[str]
-        Single tool name (string) or list of tool names (max 20 tools)
+        Single tool name (string) or list of tool names
     detail_level : str
         Detail level: 'description' returns only the description field (complete, not...
     stream_callback : Callable, optional

@@ -254,5 +254,128 @@
         "study_id": "MTBLS1"
       }
     ]
+  },
+  {
+    "type": "MetaboLightsRESTTool",
+    "name": "metabolights_get_study_protocols",
+    "description": "Get experimental protocols used in a MetaboLights study. Returns detailed protocol information including sample collection, extraction, chromatography, and data acquisition methods. Each protocol includes name, type, description, and controlled vocabulary annotations. Use this to understand the experimental methodology used in the study.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "study_id": {
+          "type": "string",
+          "description": "MetaboLights study ID (e.g., 'MTBLS1'). Use metabolights_list_studies or metabolights_search_studies to discover study IDs."
+        }
+      },
+      "required": [
+        "study_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/metabolights/ws/studies/{study_id}/protocols",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of protocols associated with the study"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "study_id": "MTBLS1"
+      }
+    ]
+  },
+  {
+    "type": "MetaboLightsRESTTool",
+    "name": "metabolights_get_study_factors",
+    "description": "Get experimental factors (variables) for a MetaboLights study. Returns factor definitions such as treatment groups, time points, disease states, or other experimental variables. Each factor includes name, type, and controlled vocabulary annotations. Use this to understand what variables were studied and how samples were grouped.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "study_id": {
+          "type": "string",
+          "description": "MetaboLights study ID (e.g., 'MTBLS1'). Use metabolights_list_studies or metabolights_search_studies to discover study IDs."
+        }
+      },
+      "required": [
+        "study_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/metabolights/ws/studies/{study_id}/factors",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of experimental factors defined for the study"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "study_id": "MTBLS1"
+      }
+    ]
+  },
+  {
+    "type": "MetaboLightsRESTTool",
+    "name": "metabolights_get_study_data_files",
+    "description": "Get data file listings for a MetaboLights study. Returns metadata about analytical data files (raw or processed spectra, peak lists, etc.) available for the study. This endpoint focuses specifically on data files and may differ from the generic files endpoint. Use this to discover which data files are available for download and analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "study_id": {
+          "type": "string",
+          "description": "MetaboLights study ID (e.g., 'MTBLS1'). Use metabolights_list_studies or metabolights_search_studies to discover study IDs."
+        }
+      },
+      "required": [
+        "study_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://www.ebi.ac.uk/metabolights/ws/studies/{study_id}/data-files",
+      "return_format": "JSON"
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of data files associated with the study"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "study_id": "MTBLS1"
+      }
+    ]
   }
 ]

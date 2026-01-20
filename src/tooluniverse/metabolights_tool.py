@@ -268,19 +268,48 @@ class MetaboLightsRESTTool(BaseTool):
             response.raise_for_status()
             data = response.json()
 
+            # Extract arrays from dict wrappers for protocols, factors, data-files endpoints
+            # These endpoints return {'protocols': [...]}, {'factors': [...]}, {'files': [...]}
+            tool_name = self.tool_config.get("name", "")
+            extracted_data = data
+            count = None
+
+            if isinstance(data, dict):
+                # Check for common array wrapper keys
+                for key in ["protocols", "factors", "files", "assays", "samples"]:
+                    if key in data and isinstance(data[key], list):
+                        extracted_data = data[key]
+                        count = len(data[key])
+                        break
+
+                # Handle nested structure like {'data': {'assays': [...]}}
+                if "data" in data and isinstance(data["data"], dict):
+                    for key in ["assays", "protocols", "factors", "files"]:
+                        if key in data["data"] and isinstance(data["data"][key], list):
+                            extracted_data = data["data"][key]
+                            count = len(data["data"][key])
+                            break
+
+                # Fallback: check for other common patterns
+                if count is None:
+                    if "content" in data and isinstance(data["content"], list):
+                        extracted_data = data["content"]
+                        count = len(data["content"])
+                    elif "studies" in data and isinstance(data["studies"], list):
+                        extracted_data = data["studies"]
+                        count = len(data["studies"])
+            elif isinstance(data, list):
+                extracted_data = data
+                count = len(data)
+
             response_data = {
                 "status": "success",
-                "data": data,
+                "data": extracted_data,
                 "url": response.url,
             }
 
-            if isinstance(data, list):
-                response_data["count"] = len(data)
-            elif isinstance(data, dict):
-                if "content" in data and isinstance(data["content"], list):
-                    response_data["count"] = len(data["content"])
-                elif "studies" in data and isinstance(data["studies"], list):
-                    response_data["count"] = len(data["studies"])
+            if count is not None:
+                response_data["count"] = count
 
             return response_data
 

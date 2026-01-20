@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 923 scientific tools.
+Type-safe Python interface to 931 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1350,7 +1350,10 @@ from .mesh_get_subjects_by_subject_scope_or_definition import (
 )
 from .metabolights_get_study import metabolights_get_study
 from .metabolights_get_study_assays import metabolights_get_study_assays
+from .metabolights_get_study_data_files import metabolights_get_study_data_files
+from .metabolights_get_study_factors import metabolights_get_study_factors
 from .metabolights_get_study_files import metabolights_get_study_files
+from .metabolights_get_study_protocols import metabolights_get_study_protocols
 from .metabolights_get_study_samples import metabolights_get_study_samples
 from .metabolights_list_studies import metabolights_list_studies
 from .metabolights_search_studies import metabolights_search_studies
@@ -1370,9 +1373,16 @@ from .openalex_literature_search import openalex_literature_search
 from .pc_get_interactions import pc_get_interactions
 from .pc_search_pathways import pc_search_pathways
 from .pdbe_get_entry_assemblies import pdbe_get_entry_assemblies
+from .pdbe_get_entry_experiment import pdbe_get_entry_experiment
+from .pdbe_get_entry_molecules import pdbe_get_entry_molecules
+from .pdbe_get_entry_observed_residues_ratio import (
+    pdbe_get_entry_observed_residues_ratio,
+)
 from .pdbe_get_entry_publications import pdbe_get_entry_publications
 from .pdbe_get_entry_quality import pdbe_get_entry_quality
+from .pdbe_get_entry_related_publications import pdbe_get_entry_related_publications
 from .pdbe_get_entry_secondary_structure import pdbe_get_entry_secondary_structure
+from .pdbe_get_entry_status import pdbe_get_entry_status
 from .pdbe_get_entry_summary import pdbe_get_entry_summary
 from .proteins_api_get_comments import proteins_api_get_comments
 from .proteins_api_get_epitopes import proteins_api_get_epitopes
@@ -2277,7 +2287,10 @@ __all__ = [
     "mesh_get_subjects_by_subject_scope_or_definition",
     "metabolights_get_study",
     "metabolights_get_study_assays",
+    "metabolights_get_study_data_files",
+    "metabolights_get_study_factors",
     "metabolights_get_study_files",
+    "metabolights_get_study_protocols",
     "metabolights_get_study_samples",
     "metabolights_list_studies",
     "metabolights_search_studies",
@@ -2297,9 +2310,14 @@ __all__ = [
     "pc_get_interactions",
     "pc_search_pathways",
     "pdbe_get_entry_assemblies",
+    "pdbe_get_entry_experiment",
+    "pdbe_get_entry_molecules",
+    "pdbe_get_entry_observed_residues_ratio",
     "pdbe_get_entry_publications",
     "pdbe_get_entry_quality",
+    "pdbe_get_entry_related_publications",
     "pdbe_get_entry_secondary_structure",
+    "pdbe_get_entry_status",
     "pdbe_get_entry_summary",
     "proteins_api_get_comments",
     "proteins_api_get_epitopes",

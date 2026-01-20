@@ -6,7 +6,8 @@ annotations, variation data, proteomics, and reference genome mappings.
 """
 
 import requests
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List, Union
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
@@ -262,9 +263,131 @@ class ProteinsAPIRESTTool(BaseTool):
         except Exception:
             return None
 
+    def _parse_accessions(self, accession: Union[str, List[str]]) -> List[str]:
+        """Parse accession parameter - handle string, list, or comma-separated string"""
+        if isinstance(accession, list):
+            return [str(acc).strip() for acc in accession if acc]
+        elif isinstance(accession, str):
+            # Check if it's comma-separated
+            if "," in accession:
+                return [acc.strip() for acc in accession.split(",") if acc.strip()]
+            else:
+                return [accession.strip()]
+        else:
+            return [str(accession).strip()]
+
+    def _handle_batch_request(
+        self, accessions: List[str], tool_name: str, format: str = "json"
+    ) -> Dict[str, Any]:
+        """Handle batch requests by making multiple API calls and aggregating results"""
+        results = []
+        errors = []
+        successful_count = 0
+
+        # Use ThreadPoolExecutor for parallel requests (max 5 concurrent)
+        max_workers = min(5, len(accessions))
+
+        def fetch_single(
+            acc: str,
+        ) -> tuple[str, Optional[Dict[str, Any]], Optional[str]]:
+            """Fetch data for a single accession"""
+            try:
+                # Build arguments for single accession
+                single_args = {"accession": acc, "format": format}
+                url = self._build_url(single_args)
+                params = self._build_params(single_args)
+
+                response = self.session.get(url, params=params, timeout=self.timeout)
+
+                # Handle fallback for endpoints that may not exist
+                fallback_tools = [
+                    "proteins_api_get_proteomics",
+                    "proteins_api_get_epitopes",
+                    "proteins_api_get_features",
+                    "proteins_api_get_comments",
+                    "proteins_api_get_xrefs",
+                    "proteins_api_get_publications",
+                    "proteins_api_get_genome_mappings",
+                ]
+
+                if tool_name in fallback_tools and response.status_code == 404:
+                    fallback_result = self._extract_from_protein_endpoint(
+                        acc, tool_name
+                    )
+                    if fallback_result:
+                        return (acc, fallback_result, None)
+
+                response.raise_for_status()
+                data = response.json()
+
+                return (
+                    acc,
+                    {"status": "success", "data": data, "url": response.url},
+                    None,
+                )
+            except Exception as e:
+                return (acc, None, str(e))
+
+        # Execute requests in parallel
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_acc = {
+                executor.submit(fetch_single, acc): acc for acc in accessions
+            }
+
+            for future in as_completed(future_to_acc):
+                acc, result, error = future.result()
+                if result:
+                    results.append({"accession": acc, **result})
+                    successful_count += 1
+                else:
+                    errors.append({"accession": acc, "error": error})
+
+        # Aggregate results
+        response_data = {
+            "status": "success" if successful_count > 0 else "error",
+            "data": results,
+            "count": successful_count,
+            "total_requested": len(accessions),
+            "errors": errors if errors else None,
+        }
+
+        if errors:
+            response_data["note"] = (
+                f"Successfully retrieved {successful_count} of {len(accessions)} accessions. {len(errors)} accessions failed."
+            )
+
+        return response_data
+
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the Proteins API call"""
         tool_name = self.tool_config.get("name", "")
+
+        # Check if this is a batch operation (accession is list or comma-separated)
+        # Only apply to tools that use accession parameter
+        batch_tools = [
+            "proteins_api_get_protein",
+            "proteins_api_get_variants",
+            "proteins_api_get_proteomics",
+            "proteins_api_get_epitopes",
+            "proteins_api_get_features",
+            "proteins_api_get_comments",
+            "proteins_api_get_xrefs",
+            "proteins_api_get_publications",
+            "proteins_api_get_genome_mappings",
+        ]
+
+        if tool_name in batch_tools and "accession" in arguments:
+            accession = arguments.get("accession")
+            accessions = self._parse_accessions(accession)
+
+            # If multiple accessions, use batch handler
+            if len(accessions) > 1:
+                format_param = arguments.get("format", "json")
+                return self._handle_batch_request(accessions, tool_name, format_param)
+            # Single accession - continue with normal flow
+            elif len(accessions) == 1:
+                arguments["accession"] = accessions[0]
+
         try:
             url = self._build_url(arguments)
             params = self._build_params(arguments)
