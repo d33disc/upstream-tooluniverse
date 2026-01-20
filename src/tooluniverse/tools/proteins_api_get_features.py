@@ -1,14 +1,14 @@
 """
-proteins_api_get_protein
+proteins_api_get_features
 
-Get comprehensive protein information from Proteins API by UniProt accession. Returns protein ann...
+Get detailed sequence features for a protein, including domains, regions, motifs, modified residu...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def proteins_api_get_protein(
+def proteins_api_get_features(
     accession: str,
     format: Optional[str] = "json",
     *,
@@ -17,7 +17,7 @@ def proteins_api_get_protein(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get comprehensive protein information from Proteins API by UniProt accession. Returns protein ann...
+    Get detailed sequence features for a protein, including domains, regions, motifs, modified residu...
 
     Parameters
     ----------
@@ -40,7 +40,7 @@ def proteins_api_get_protein(
 
     return get_shared_client().run_one_function(
         {
-            "name": "proteins_api_get_protein",
+            "name": "proteins_api_get_features",
             "arguments": {"accession": accession, "format": format},
         },
         stream_callback=stream_callback,
@@ -49,4 +49,4 @@ def proteins_api_get_protein(
     )
 
 
-__all__ = ["proteins_api_get_protein"]
+__all__ = ["proteins_api_get_features"]

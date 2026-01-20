@@ -22,9 +22,9 @@ def proteins_api_get_epitopes(
     Parameters
     ----------
     accession : str
-        UniProt protein accession
+        UniProt protein accession (e.g., 'P05067', 'P04637'). Use UniProt search or e...
     format : str
-
+        Response format. JSON is recommended for most use cases.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

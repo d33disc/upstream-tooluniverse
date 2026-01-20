@@ -1,7 +1,7 @@
 """
 proteins_api_search
 
-Search proteins in Proteins API. Note: The Proteins API search endpoint may have limitations. For...
+Search proteins in Proteins API. Returns search results matching the query. Note: The Proteins AP...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def proteins_api_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search proteins in Proteins API. Note: The Proteins API search endpoint may have limitations. For...
+    Search proteins in Proteins API. Returns search results matching the query. Note: The Proteins AP...
 
     Parameters
     ----------
@@ -30,7 +30,7 @@ def proteins_api_search(
     offset : int
         Offset for pagination (default: 0)
     format : str
-
+        Response format. JSON is recommended for most use cases.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

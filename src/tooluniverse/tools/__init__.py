@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 918 scientific tools.
+Type-safe Python interface to 923 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1374,10 +1374,15 @@ from .pdbe_get_entry_publications import pdbe_get_entry_publications
 from .pdbe_get_entry_quality import pdbe_get_entry_quality
 from .pdbe_get_entry_secondary_structure import pdbe_get_entry_secondary_structure
 from .pdbe_get_entry_summary import pdbe_get_entry_summary
+from .proteins_api_get_comments import proteins_api_get_comments
 from .proteins_api_get_epitopes import proteins_api_get_epitopes
+from .proteins_api_get_features import proteins_api_get_features
+from .proteins_api_get_genome_mappings import proteins_api_get_genome_mappings
 from .proteins_api_get_protein import proteins_api_get_protein
 from .proteins_api_get_proteomics import proteins_api_get_proteomics
+from .proteins_api_get_publications import proteins_api_get_publications
 from .proteins_api_get_variants import proteins_api_get_variants
+from .proteins_api_get_xrefs import proteins_api_get_xrefs
 from .proteins_api_search import proteins_api_search
 from .python_code_executor import python_code_executor
 from .python_script_runner import python_script_runner
@@ -2296,10 +2301,15 @@ __all__ = [
     "pdbe_get_entry_quality",
     "pdbe_get_entry_secondary_structure",
     "pdbe_get_entry_summary",
+    "proteins_api_get_comments",
     "proteins_api_get_epitopes",
+    "proteins_api_get_features",
+    "proteins_api_get_genome_mappings",
     "proteins_api_get_protein",
     "proteins_api_get_proteomics",
+    "proteins_api_get_publications",
     "proteins_api_get_variants",
+    "proteins_api_get_xrefs",
     "proteins_api_search",
     "python_code_executor",
     "python_script_runner",

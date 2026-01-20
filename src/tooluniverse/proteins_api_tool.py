@@ -101,7 +101,7 @@ class ProteinsAPIRESTTool(BaseTool):
     def _extract_from_protein_endpoint(
         self, accession: str, tool_name: str
     ) -> Optional[Dict[str, Any]]:
-        """Extract proteomics/epitopes data from main protein endpoint"""
+        """Extract data from main protein endpoint when specific endpoints don't exist"""
         try:
             protein_url = f"{self.base_url}/proteins/{accession}"
             response = self.session.get(protein_url, timeout=self.timeout)
@@ -178,6 +178,87 @@ class ProteinsAPIRESTTool(BaseTool):
                     "fallback_used": True,
                     "source": "main_protein_endpoint",
                 }
+
+            elif tool_name == "proteins_api_get_features":
+                # Extract features directly from main protein endpoint
+                features_data = protein_data.get("features", [])
+                return {
+                    "status": "success",
+                    "data": features_data,
+                    "url": response.url,
+                    "count": len(features_data),
+                    "note": "Features extracted from main protein endpoint (features endpoint not available as separate endpoint).",
+                    "fallback_used": True,
+                    "source": "main_protein_endpoint",
+                }
+
+            elif tool_name == "proteins_api_get_comments":
+                # Extract comments directly from main protein endpoint
+                comments_data = protein_data.get("comments", [])
+                return {
+                    "status": "success",
+                    "data": comments_data,
+                    "url": response.url,
+                    "count": len(comments_data),
+                    "note": "Comments extracted from main protein endpoint (comments endpoint not available as separate endpoint).",
+                    "fallback_used": True,
+                    "source": "main_protein_endpoint",
+                }
+
+            elif tool_name == "proteins_api_get_xrefs":
+                # Extract cross-references (dbReferences) from main protein endpoint
+                xrefs_data = protein_data.get("dbReferences", [])
+                return {
+                    "status": "success",
+                    "data": xrefs_data,
+                    "url": response.url,
+                    "count": len(xrefs_data),
+                    "note": "Cross-references extracted from main protein endpoint (xrefs endpoint not available as separate endpoint).",
+                    "fallback_used": True,
+                    "source": "main_protein_endpoint",
+                }
+
+            elif tool_name == "proteins_api_get_publications":
+                # Extract references (publications) from main protein endpoint
+                publications_data = protein_data.get("references", [])
+                return {
+                    "status": "success",
+                    "data": publications_data,
+                    "url": response.url,
+                    "count": len(publications_data),
+                    "note": "Publications extracted from main protein endpoint (publications endpoint not available as separate endpoint).",
+                    "fallback_used": True,
+                    "source": "main_protein_endpoint",
+                }
+
+            elif tool_name == "proteins_api_get_genome_mappings":
+                # Extract genome-related cross-references (Ensembl, RefSeq, etc.)
+                genome_mappings = []
+                db_references = protein_data.get("dbReferences", [])
+
+                # Look for Ensembl, RefSeq, and other genome-related cross-references
+                genome_db_types = ["Ensembl", "RefSeq", "EMBL", "GenBank"]
+                for ref in db_references:
+                    ref_type = ref.get("type", "")
+                    if ref_type in genome_db_types:
+                        # Try to extract genome-related information
+                        mapping_entry = {
+                            "database": ref_type,
+                            "id": ref.get("id", ""),
+                            "properties": ref.get("properties", {}),
+                        }
+                        genome_mappings.append(mapping_entry)
+
+                return {
+                    "status": "success",
+                    "data": genome_mappings,
+                    "url": response.url,
+                    "count": len(genome_mappings),
+                    "note": "Genome mappings extracted from cross-references in main protein endpoint (genome endpoint not available as separate endpoint). Includes Ensembl, RefSeq, EMBL, and GenBank cross-references that may contain genomic location information.",
+                    "fallback_used": True,
+                    "source": "main_protein_endpoint",
+                }
+
         except Exception:
             return None
 
@@ -190,11 +271,17 @@ class ProteinsAPIRESTTool(BaseTool):
 
             response = self.session.get(url, params=params, timeout=self.timeout)
 
-            # Handle proteomics/epitopes endpoints - fallback to main protein endpoint
-            if tool_name in [
+            # Handle endpoints that may not exist - fallback to main protein endpoint
+            fallback_tools = [
                 "proteins_api_get_proteomics",
                 "proteins_api_get_epitopes",
-            ]:
+                "proteins_api_get_features",
+                "proteins_api_get_comments",
+                "proteins_api_get_xrefs",
+                "proteins_api_get_publications",
+                "proteins_api_get_genome_mappings",
+            ]
+            if tool_name in fallback_tools:
                 if response.status_code == 404:
                     fallback_result = self._extract_from_protein_endpoint(
                         arguments.get("accession", ""), tool_name
@@ -231,12 +318,24 @@ class ProteinsAPIRESTTool(BaseTool):
         except requests.exceptions.RequestException as e:
             tool_name = self.tool_config.get("name", "")
 
-            # For proteomics/epitopes endpoints, try fallback
-            if tool_name in [
+            # For endpoints that may not exist, try fallback
+            fallback_tools = [
                 "proteins_api_get_proteomics",
                 "proteins_api_get_epitopes",
-            ]:
-                if "404" in str(e):
+                "proteins_api_get_features",
+                "proteins_api_get_comments",
+                "proteins_api_get_xrefs",
+                "proteins_api_get_publications",
+                "proteins_api_get_genome_mappings",
+            ]
+            if tool_name in fallback_tools:
+                # Check if it's a 404 error (either in exception message or response status)
+                is_404 = "404" in str(e) or (
+                    hasattr(e, "response")
+                    and e.response is not None
+                    and e.response.status_code == 404
+                )
+                if is_404:
                     fallback_result = self._extract_from_protein_endpoint(
                         arguments.get("accession", ""), tool_name
                     )
