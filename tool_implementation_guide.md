@@ -294,6 +294,13 @@ python3 -m py_compile src/tooluniverse/{category}_tool.py  # Check syntax
 - [ ] Validation checks
 - [ ] Documentation updates
 
+**For large API expansions (many endpoints in one category):**
+- [ ] Use a generic REST tool + JSON configs to cover multiple endpoints.
+- [ ] Verify real API behavior with live requests and prefer working patterns over docs.
+- [ ] Make `return_schema` match the tool’s wrapper (at least `status` and `data`).
+- [ ] Use real IDs from search/list endpoints in `test_examples`.
+- [ ] Remove tools for endpoints that have no working or replacement API.
+
 ---
 
 ## 3. Quick Reference: Common Commands

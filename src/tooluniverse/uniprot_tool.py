@@ -244,30 +244,40 @@ class UniProtRESTTool(BaseTool):
         ids = arguments.get("ids", [])
         from_db = arguments.get("from_db", "")
         to_db = arguments.get("to_db", "UniProtKB")
-        max_wait_time = arguments.get("max_wait_time", 30)
+        # UniProt mapping jobs can take >30s even for small inputs.
+        max_wait_time = arguments.get("max_wait_time", 120)
 
         # Normalize IDs to list
         if isinstance(ids, str):
             ids = [ids]
 
         # Normalize database names
+        # Map user-friendly names to UniProt ID mapping database names.
+        # Important: do NOT map target UniProtKB to UniProtKB_AC-ID.
         db_mapping = {
             "Ensembl": "Ensembl",
             "Gene_Name": "Gene_Name",
             "RefSeq_Protein": "RefSeq_Protein_ID",
             "PDB": "PDB_ID",
             "EMBL": "EMBL_ID",
-            "UniProtKB": "UniProtKB_AC-ID",
+            "UniProtKB": "UniProtKB",
+            "UniProtKB_AC-ID": "UniProtKB_AC-ID",
         }
         from_db_normalized = db_mapping.get(from_db, from_db)
         to_db_normalized = db_mapping.get(to_db, to_db)
 
         # Step 1: Submit mapping job
         submit_url = "https://rest.uniprot.org/idmapping/run"
-        payload = {"ids": ids, "from": from_db_normalized, "to": to_db_normalized}
+        # UniProt ID mapping API expects application/x-www-form-urlencoded,
+        # not JSON.
+        payload = {
+            "ids": ",".join(ids),
+            "from": from_db_normalized,
+            "to": to_db_normalized,
+        }
 
         try:
-            resp = requests.post(submit_url, json=payload, timeout=self.timeout)
+            resp = requests.post(submit_url, data=payload, timeout=self.timeout)
             resp.raise_for_status()
             job_data = resp.json()
             job_id = job_data.get("jobId")
@@ -332,8 +342,85 @@ class UniProtRESTTool(BaseTool):
 
                 time.sleep(1)  # Wait 1 second before next poll
 
-            return {"error": (f"ID mapping timed out after {max_wait_time} seconds")}
+            return {
+                "status": "running",
+                "job_id": job_id,
+                "status_url": status_url,
+                "results_url": results_url,
+                "note": (
+                    "ID mapping job is still running. Poll status_url until "
+                    "status == FINISHED, then fetch results_url."
+                ),
+                "max_wait_time": max_wait_time,
+            }
 
+        except requests.exceptions.Timeout:
+            return {"error": "Request to UniProt API timed out"}
+        except requests.exceptions.RequestException as e:
+            return {"error": f"Request to UniProt API failed: {e}"}
+        except ValueError as e:
+            return {"error": f"Failed to parse JSON response: {e}"}
+
+    def _handle_uniref_search(self, arguments: Dict[str, Any]) -> Any:
+        """Handle UniRef search queries"""
+        query = arguments.get("query", "")
+        cluster_type = arguments.get("cluster_type", "")
+        limit_value = arguments.get("limit", 25)
+        if isinstance(limit_value, str):
+            limit_value = int(limit_value)
+        limit = min(limit_value, 500)
+
+        # Build query - if cluster_type specified and not in query, add it
+        # Note: UniRef search accepts queries like "P04637" or "id:UniRef50_P04637"
+        full_query = query
+        if cluster_type and "uniref" not in query.lower():
+            # User can filter by cluster type in their query if needed
+            # For now, just use the query as-is - API will return matching clusters
+            pass
+
+        params = {"query": full_query, "size": str(limit), "format": "json"}
+        url = "https://rest.uniprot.org/uniref/search"
+
+        try:
+            resp = requests.get(url, params=params, timeout=self.timeout)
+            resp.raise_for_status()
+            data = resp.json()
+
+            results = data.get("results", [])
+            return {
+                "total_results": data.get("resultsFound", len(results)),
+                "returned": len(results),
+                "results": results,
+            }
+        except requests.exceptions.Timeout:
+            return {"error": "Request to UniProt API timed out"}
+        except requests.exceptions.RequestException as e:
+            return {"error": f"Request to UniProt API failed: {e}"}
+        except ValueError as e:
+            return {"error": f"Failed to parse JSON response: {e}"}
+
+    def _handle_uniparc_search(self, arguments: Dict[str, Any]) -> Any:
+        """Handle UniParc search queries"""
+        query = arguments.get("query", "")
+        limit_value = arguments.get("limit", 25)
+        if isinstance(limit_value, str):
+            limit_value = int(limit_value)
+        limit = min(limit_value, 500)
+
+        params = {"query": query, "size": str(limit), "format": "json"}
+        url = "https://rest.uniprot.org/uniparc/search"
+
+        try:
+            resp = requests.get(url, params=params, timeout=self.timeout)
+            resp.raise_for_status()
+            data = resp.json()
+
+            results = data.get("results", [])
+            return {
+                "total_results": data.get("resultsFound", len(results)),
+                "returned": len(results),
+                "results": results,
+            }
         except requests.exceptions.Timeout:
             return {"error": "Request to UniProt API timed out"}
         except requests.exceptions.RequestException as e:
@@ -348,6 +435,10 @@ class UniProtRESTTool(BaseTool):
 
         if search_type == "search":
             return self._handle_search(arguments)
+        elif search_type == "uniref_search":
+            return self._handle_uniref_search(arguments)
+        elif search_type == "uniparc_search":
+            return self._handle_uniparc_search(arguments)
         elif mapping_type == "async":
             return self._handle_id_mapping(arguments)
 

@@ -1022,14 +1022,353 @@
         ],
         "from_db": "UniProtKB_AC-ID",
         "to_db": "UniProtKB",
-        "max_wait_time": 30
+        "max_wait_time": 120
       }
     ],
     "return_schema": {
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "When successful: omitted; when timed out: 'running'; when failed: omitted with error."
+        },
+        "job_id": {
+          "type": "string",
+          "description": "UniProt ID mapping job ID when status='running'."
+        },
+        "status_url": {
+          "type": "string",
+          "description": "URL to poll for job status when status='running'."
+        },
+        "results_url": {
+          "type": "string",
+          "description": "URL to fetch job results when finished."
+        },
+        "note": {
+          "type": "string",
+          "description": "Human-readable guidance when job is still running."
+        },
+        "max_wait_time": {
+          "type": "integer",
+          "description": "The max wait time used before returning status='running'."
+        },
         "error": {
           "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "UniProt_get_proteome",
+    "description": "Get proteome information by proteome ID. Returns comprehensive proteome data including taxonomy, components, gene/protein counts, and annotation scores. Proteome IDs are typically in format UP000005640 (human), UP000000589 (mouse), etc. Use UniProt search with proteome filters to find proteome IDs for specific organisms.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "proteome_id": {
+          "type": "string",
+          "description": "UniProt proteome ID (e.g., 'UP000005640' for human, 'UP000000589' for mouse). Find proteome IDs using UniProt search with proteome filters or by querying organism-specific proteomes."
+        }
+      },
+      "required": [
+        "proteome_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://rest.uniprot.org/proteomes/{proteome_id}",
+      "input_description": "Input UniProt proteome ID, e.g., UP000005640.",
+      "output_description": "Returns comprehensive proteome information including taxonomy, components, gene/protein counts, and annotation scores."
+    },
+    "type": "UniProtRESTTool",
+    "test_examples": [
+      {
+        "proteome_id": "UP000005640"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Proteome ID"
+        },
+        "description": {
+          "type": "string",
+          "description": "Proteome description"
+        },
+        "taxonomy": {
+          "type": "object",
+          "description": "Taxonomy information"
+        },
+        "proteomeType": {
+          "type": "string",
+          "description": "Type of proteome (e.g., 'Reference proteome', 'Complete proteome')"
+        },
+        "components": {
+          "type": "array",
+          "description": "Proteome components (chromosomes, plasmids, etc.)"
+        },
+        "geneCount": {
+          "type": "integer",
+          "description": "Total gene count"
+        },
+        "proteinCount": {
+          "type": "integer",
+          "description": "Total protein count"
+        },
+        "annotationScore": {
+          "type": "number",
+          "description": "Annotation quality score"
+        }
+      }
+    }
+  },
+  {
+    "name": "UniProt_get_uniref_cluster",
+    "description": "Get UniRef cluster information by cluster ID. UniRef clusters group proteins that share 100% (UniRef100), 90% (UniRef90), or 50% (UniRef50) sequence identity. Returns cluster metadata, representative member, member count, and member list. Cluster IDs are in format UniRef100_P04637, UniRef90_P04637, or UniRef50_P04637.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "cluster_id": {
+          "type": "string",
+          "description": "UniRef cluster ID (e.g., 'UniRef50_P04637', 'UniRef90_P04637', 'UniRef100_P04637'). Use UniProt_get_uniref_search to find cluster IDs."
+        }
+      },
+      "required": [
+        "cluster_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://rest.uniprot.org/uniref/{cluster_id}",
+      "input_description": "Input UniRef cluster ID, e.g., UniRef50_P04637.",
+      "output_description": "Returns UniRef cluster information including representative member, member count, and member list."
+    },
+    "type": "UniProtRESTTool",
+    "test_examples": [
+      {
+        "cluster_id": "UniRef50_P04637"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Cluster ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Cluster name"
+        },
+        "memberCount": {
+          "type": "integer",
+          "description": "Number of members in cluster"
+        },
+        "representativeMember": {
+          "type": "object",
+          "description": "Representative member of the cluster"
+        },
+        "members": {
+          "type": "array",
+          "description": "List of cluster members"
+        },
+        "commonTaxon": {
+          "type": "object",
+          "description": "Common taxon for cluster members"
+        }
+      }
+    }
+  },
+  {
+    "name": "UniProt_search_uniref",
+    "description": "Search UniRef clusters. Returns clusters matching the query. Use this to find UniRef clusters for specific proteins or organisms. Query syntax supports protein accessions, gene names, organism filters, etc.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query. Examples: 'P04637' (protein accession), 'name:TP53', 'organism_id:9606' (human). Supports UniProt query syntax."
+        },
+        "cluster_type": {
+          "type": "string",
+          "enum": ["UniRef100", "UniRef90", "UniRef50"],
+          "default": "UniRef50",
+          "description": "UniRef cluster type: UniRef100 (100% identity), UniRef90 (90% identity), UniRef50 (50% identity)"
+        },
+        "limit": {
+          "type": "integer",
+          "default": 25,
+          "description": "Maximum number of results to return (default: 25, max: 500)"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://rest.uniprot.org/uniref/search",
+      "search_type": "uniref_search",
+      "format": "json"
+    },
+    "type": "UniProtRESTTool",
+    "test_examples": [
+      {
+        "query": "P04637",
+        "cluster_type": "UniRef50",
+        "limit": 10
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "total_results": {
+          "type": "integer",
+          "description": "Total number of results found"
+        },
+        "returned": {
+          "type": "integer",
+          "description": "Number of results returned"
+        },
+        "results": {
+          "type": "array",
+          "description": "Array of UniRef cluster results",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Cluster ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Cluster name"
+              },
+              "memberCount": {
+                "type": "integer",
+                "description": "Member count"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "UniProt_get_uniparc_entry",
+    "description": "Get UniParc entry by UniParc ID (UPI). UniParc is a non-redundant archive of all publicly available protein sequences. Returns sequence, cross-references, and sequence features. UniParc IDs are in format UPI000002ED67. Use UniProt_get_entry_by_accession to find the UniParc ID for a UniProt entry (in extraAttributes.uniParcId).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "upi": {
+          "type": "string",
+          "description": "UniParc ID (UPI) in format UPI000002ED67. Find UPI from UniProt entry (extraAttributes.uniParcId) or use UniProt_search_uniparc."
+        }
+      },
+      "required": [
+        "upi"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://rest.uniprot.org/uniparc/{upi}",
+      "input_description": "Input UniParc ID (UPI), e.g., UPI000002ED67.",
+      "output_description": "Returns UniParc entry information including sequence, cross-references, and sequence features."
+    },
+    "type": "UniProtRESTTool",
+    "test_examples": [
+      {
+        "upi": "UPI000002ED67"
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "uniParcId": {
+          "type": "string",
+          "description": "UniParc ID"
+        },
+        "sequence": {
+          "type": "object",
+          "description": "Protein sequence information",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Sequence string"
+            },
+            "length": {
+              "type": "integer",
+              "description": "Sequence length"
+            }
+          }
+        },
+        "uniParcCrossReferences": {
+          "type": "array",
+          "description": "Cross-references to source databases"
+        },
+        "sequenceFeatures": {
+          "type": "array",
+          "description": "Sequence features"
+        }
+      }
+    }
+  },
+  {
+    "name": "UniProt_search_uniparc",
+    "description": "Search UniParc entries. Returns UniParc entries matching the query. Use this to find UniParc entries for specific proteins or sequences. Query syntax supports protein accessions, gene names, organism filters, etc.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query. Examples: 'P04637' (protein accession), 'name:TP53', 'organism_id:9606' (human). Supports UniProt query syntax."
+        },
+        "limit": {
+          "type": "integer",
+          "default": 25,
+          "description": "Maximum number of results to return (default: 25, max: 500)"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://rest.uniprot.org/uniparc/search",
+      "search_type": "uniparc_search",
+      "format": "json"
+    },
+    "type": "UniProtRESTTool",
+    "test_examples": [
+      {
+        "query": "P04637",
+        "limit": 10
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "total_results": {
+          "type": "integer",
+          "description": "Total number of results found"
+        },
+        "returned": {
+          "type": "integer",
+          "description": "Number of results returned"
+        },
+        "results": {
+          "type": "array",
+          "description": "Array of UniParc entry results",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uniParcId": {
+                "type": "string",
+                "description": "UniParc ID"
+              },
+              "sequence": {
+                "type": "object",
+                "description": "Sequence information"
+              }
+            }
+          }
         }
       }
     }

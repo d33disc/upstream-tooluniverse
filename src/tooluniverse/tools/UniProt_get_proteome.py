@@ -1,30 +1,27 @@
 """
-ensembl_lookup_gene
+UniProt_get_proteome
 
-Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+Get proteome information by proteome ID. Returns comprehensive proteome data including taxonomy, ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_lookup_gene(
-    gene_id: str,
-    species: Optional[str] = None,
+def UniProt_get_proteome(
+    proteome_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+    Get proteome information by proteome ID. Returns comprehensive proteome data including taxonomy, ...
 
     Parameters
     ----------
-    gene_id : str
-        Ensembl gene ID or symbol (e.g., 'ENSG00000139618' or 'BRCA1'). If using a st...
-    species : str
-        Species name required for gene symbols (default 'homo_sapiens'). Examples: 'h...
+    proteome_id : str
+        UniProt proteome ID (e.g., 'UP000005640' for human, 'UP000000589' for mouse)....
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,14 +36,11 @@ def ensembl_lookup_gene(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "ensembl_lookup_gene",
-            "arguments": {"gene_id": gene_id, "species": species},
-        },
+        {"name": "UniProt_get_proteome", "arguments": {"proteome_id": proteome_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ensembl_lookup_gene"]
+__all__ = ["UniProt_get_proteome"]

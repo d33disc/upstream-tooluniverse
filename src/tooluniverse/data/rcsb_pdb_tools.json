@@ -815,7 +815,7 @@
     },
     "test_examples": [
       {
-        "assembly_id": "1"
+        "assembly_id": "1A8M-1"
       }
     ],
     "return_schema": {
@@ -1208,7 +1208,7 @@
     },
     "test_examples": [
       {
-        "entity_id": "1"
+        "entity_id": "5FMB_2"
       }
     ],
     "return_schema": {
@@ -1621,7 +1621,7 @@
     },
     "test_examples": [
       {
-        "instance_id": "1"
+        "instance_id": "1NDO.A"
       }
     ],
     "return_schema": {
@@ -2518,7 +2518,7 @@
     },
     "test_examples": [
       {
-        "chem_comp_id": "1"
+        "chem_comp_id": "ATP"
       }
     ],
     "return_schema": {

@@ -108,12 +108,19 @@ class IntActRESTTool(BaseTool):
         """Execute the IntAct API call"""
         tool_name = self.tool_config.get("name", "")
 
+        # Use Complex Web Service for complex queries
+        if tool_name == "intact_get_interactions_by_complex":
+            return self._use_complex_web_service(arguments)
+
+        elif tool_name == "intact_get_complex_details":
+            return self._get_complex_details(arguments)
         # Use EBI Search API as primary method since IntAct direct API is unreliable
         # EBI Search has an 'intact' domain that works reliably
         if tool_name in [
             "intact_get_interactions",
             "intact_search_interactions",
             "intact_get_interactor",
+            "intact_get_interactions_by_organism",
         ]:
             return self._use_ebi_search(arguments, tool_name)
 
@@ -187,6 +194,24 @@ class IntActRESTTool(BaseTool):
                     # Search for the interactor by ID
                     params["query"] = identifier
                     params["size"] = 10
+            elif tool_name == "intact_get_interactions_by_publication":
+                pubmed_id = arguments.get("pubmed_id", "")
+                if pubmed_id:
+                    # Search for interactions by PubMed ID
+                    params["query"] = pubmed_id
+                    params["size"] = arguments.get("size", 25)
+            elif tool_name == "intact_get_interactions_by_experiment":
+                experiment_id = arguments.get("experiment_id", "")
+                if experiment_id:
+                    # Search for interactions by experiment ID
+                    params["query"] = experiment_id
+                    params["size"] = arguments.get("size", 25)
+            elif tool_name == "intact_get_interactions_by_organism":
+                taxid = arguments.get("taxid", "")
+                if taxid:
+                    # Search for interactions by organism taxonomy ID
+                    params["query"] = taxid
+                    params["size"] = arguments.get("size", 25)
 
             response = self.session.get(
                 ebi_search_url, params=params, timeout=self.timeout
@@ -228,9 +253,118 @@ class IntActRESTTool(BaseTool):
                 "note": "Data retrieved via EBI Search API (IntAct domain). Use interaction_ids to get details with intact_get_interaction_details or intact_get_interaction_network.",
             }
 
+            # Add tool-specific notes
+            if tool_name == "intact_get_interactions_by_organism":
+                response_data["note"] = (
+                    "Interactions retrieved via EBI Search API (IntAct domain) filtered by organism taxonomy ID. Use interaction_ids to get detailed interaction information."
+                )
+
             return response_data
         except Exception as e:
             return {
                 "status": "error",
                 "error": f"IntAct query failed (tried EBI Search fallback): {str(e)}",
+            }
+
+    def _use_complex_web_service(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Use IntAct Complex Web Service for complex queries"""
+        try:
+            complex_id = arguments.get("complex_id", "")
+            if not complex_id:
+                return {
+                    "status": "error",
+                    "error": "complex_id parameter is required",
+                }
+
+            # Complex Web Service endpoint - query goes in path, not params
+            from urllib.parse import quote
+
+            complex_id_encoded = quote(complex_id, safe="")
+            complex_url = (
+                f"https://www.ebi.ac.uk/intact/complex-ws/search/{complex_id_encoded}"
+            )
+            params = {
+                "format": "json",
+                "first": arguments.get("first", 0),
+                "number": arguments.get("size", 25),
+            }
+
+            response = self.session.get(
+                complex_url, params=params, timeout=self.timeout
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            # Extract complex information
+            elements = data.get("elements", [])
+            total = data.get("totalNumberOfResults", 0)
+
+            # Extract complex ACs for reference
+            complex_ac_list = []
+            for element in elements:
+                complex_ac = element.get("complexAC", "")
+                if complex_ac:
+                    complex_ac_list.append(complex_ac)
+
+            return {
+                "status": "success",
+                "data": elements,
+                "url": response.url,
+                "count": len(elements),
+                "totalNumberOfResults": total,
+                "complex_ac_list": complex_ac_list,
+                "note": "Data retrieved via IntAct Complex Web Service. Use complex_ac_list to reference specific complexes.",
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"IntAct Complex Web Service query failed: {str(e)}",
+            }
+
+    def _get_complex_details(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """Get detailed information about a specific complex by complex AC"""
+        try:
+            complex_ac = arguments.get("complex_ac", "")
+            if not complex_ac:
+                return {
+                    "status": "error",
+                    "error": "complex_ac parameter is required (e.g., 'CPX-915')",
+                }
+
+            # Complex Web Service details endpoint
+            complex_url = (
+                f"https://www.ebi.ac.uk/intact/complex-ws/complex/{complex_ac}"
+            )
+            params = {
+                "format": "json",
+            }
+
+            response = self.session.get(
+                complex_url, params=params, timeout=self.timeout
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            return {
+                "status": "success",
+                "data": data,
+                "url": response.url,
+                "complex_ac": data.get("complexAc", complex_ac),
+                "complex_name": data.get("name", ""),
+                "note": "Data retrieved via IntAct Complex Web Service. Includes complex details, participants, functions, properties, and related information.",
+            }
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 404:
+                return {
+                    "status": "error",
+                    "error": f"Complex '{complex_ac}' not found. Verify the complex AC is correct (e.g., 'CPX-915'). Use intact_get_interactions_by_complex to search for complexes.",
+                }
+            return {
+                "status": "error",
+                "error": f"IntAct Complex Web Service query failed: {str(e)}",
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"IntAct Complex Web Service query failed: {str(e)}",
             }

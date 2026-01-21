@@ -1,33 +1,33 @@
 """
-ensembl_get_variants
+ensembl_get_xrefs_by_name
 
-Get genetic variants (SNPs, indels) in a genomic region. Returns variant information including po...
+Get cross-references for an Ensembl object by its name/symbol. Returns mappings to external datab...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_get_variants(
-    region: str,
-    species: Optional[str] = "human",
-    feature: Optional[str] = "variation",
+def ensembl_get_xrefs_by_name(
+    name: str,
+    species: Optional[str] = "homo_sapiens",
+    external_db: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get genetic variants (SNPs, indels) in a genomic region. Returns variant information including po...
+    Get cross-references for an Ensembl object by its name/symbol. Returns mappings to external datab...
 
     Parameters
     ----------
-    region : str
-        Genomic region in format 'chromosome:start-end' (e.g., '13:32315086-32400268'...
+    name : str
+        Gene symbol or name (e.g., 'BRCA1', 'TP53')
     species : str
-        Species name (default 'human'). Examples: 'human', 'mouse', 'rat'
-    feature : str
-        Feature type to retrieve (default 'variation')
+        Species name (default 'homo_sapiens')
+    external_db : str
+        Filter by external database name (optional)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,8 +43,8 @@ def ensembl_get_variants(
 
     return get_shared_client().run_one_function(
         {
-            "name": "ensembl_get_variants",
-            "arguments": {"region": region, "species": species, "feature": feature},
+            "name": "ensembl_get_xrefs_by_name",
+            "arguments": {"name": name, "species": species, "external_db": external_db},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +52,4 @@ def ensembl_get_variants(
     )
 
 
-__all__ = ["ensembl_get_variants"]
+__all__ = ["ensembl_get_xrefs_by_name"]

@@ -1,30 +1,33 @@
 """
-ensembl_lookup_gene
+intact_get_interactions_by_organism
 
-Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+Get all interactions for a specific organism by taxonomy ID. Uses EBI Search API (IntAct domain) ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_lookup_gene(
-    gene_id: str,
-    species: Optional[str] = None,
+def intact_get_interactions_by_organism(
+    taxid: str,
+    size: Optional[int] = 25,
+    format: Optional[str] = "json",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+    Get all interactions for a specific organism by taxonomy ID. Uses EBI Search API (IntAct domain) ...
 
     Parameters
     ----------
-    gene_id : str
-        Ensembl gene ID or symbol (e.g., 'ENSG00000139618' or 'BRCA1'). If using a st...
-    species : str
-        Species name required for gene symbols (default 'homo_sapiens'). Examples: 'h...
+    taxid : str
+        NCBI taxonomy ID (e.g., '9606' for human, '10090' for mouse). Find taxonomy I...
+    size : int
+        Maximum number of results to return (default: 25, max: 100)
+    format : str
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +43,8 @@ def ensembl_lookup_gene(
 
     return get_shared_client().run_one_function(
         {
-            "name": "ensembl_lookup_gene",
-            "arguments": {"gene_id": gene_id, "species": species},
+            "name": "intact_get_interactions_by_organism",
+            "arguments": {"taxid": taxid, "size": size, "format": format},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +52,4 @@ def ensembl_lookup_gene(
     )
 
 
-__all__ = ["ensembl_lookup_gene"]
+__all__ = ["intact_get_interactions_by_organism"]

@@ -1,30 +1,30 @@
 """
-ensembl_lookup_gene
+intact_get_complex_details
 
-Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+Get detailed information about a specific protein complex by its complex AC (Complex Accession, e...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_lookup_gene(
-    gene_id: str,
-    species: Optional[str] = None,
+def intact_get_complex_details(
+    complex_ac: str,
+    format: Optional[str] = "json",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+    Get detailed information about a specific protein complex by its complex AC (Complex Accession, e...
 
     Parameters
     ----------
-    gene_id : str
-        Ensembl gene ID or symbol (e.g., 'ENSG00000139618' or 'BRCA1'). If using a st...
-    species : str
-        Species name required for gene symbols (default 'homo_sapiens'). Examples: 'h...
+    complex_ac : str
+        Complex AC (Complex Accession) in format 'CPX-XXXXX' (e.g., 'CPX-915', 'CPX-1...
+    format : str
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +40,8 @@ def ensembl_lookup_gene(
 
     return get_shared_client().run_one_function(
         {
-            "name": "ensembl_lookup_gene",
-            "arguments": {"gene_id": gene_id, "species": species},
+            "name": "intact_get_complex_details",
+            "arguments": {"complex_ac": complex_ac, "format": format},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def ensembl_lookup_gene(
     )
 
 
-__all__ = ["ensembl_lookup_gene"]
+__all__ = ["intact_get_complex_details"]

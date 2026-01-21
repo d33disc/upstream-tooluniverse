@@ -1,30 +1,27 @@
 """
-ensembl_lookup_gene
+UniProt_get_uniref_cluster
 
-Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+Get UniRef cluster information by cluster ID. UniRef clusters group proteins that share 100% (Uni...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_lookup_gene(
-    gene_id: str,
-    species: Optional[str] = None,
+def UniProt_get_uniref_cluster(
+    cluster_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Lookup gene information by Ensembl gene ID or symbol. Returns gene details including location, de...
+    Get UniRef cluster information by cluster ID. UniRef clusters group proteins that share 100% (Uni...
 
     Parameters
     ----------
-    gene_id : str
-        Ensembl gene ID or symbol (e.g., 'ENSG00000139618' or 'BRCA1'). If using a st...
-    species : str
-        Species name required for gene symbols (default 'homo_sapiens'). Examples: 'h...
+    cluster_id : str
+        UniRef cluster ID (e.g., 'UniRef50_P04637', 'UniRef90_P04637', 'UniRef100_P04...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,14 +36,11 @@ def ensembl_lookup_gene(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "ensembl_lookup_gene",
-            "arguments": {"gene_id": gene_id, "species": species},
-        },
+        {"name": "UniProt_get_uniref_cluster", "arguments": {"cluster_id": cluster_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ensembl_lookup_gene"]
+__all__ = ["UniProt_get_uniref_cluster"]

@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 931 scientific tools.
+Type-safe Python interface to 945 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -871,6 +871,7 @@ from .UniProt_get_entry_by_accession import UniProt_get_entry_by_accession
 from .UniProt_get_function_by_accession import UniProt_get_function_by_accession
 from .UniProt_get_isoform_ids_by_accession import UniProt_get_isoform_ids_by_accession
 from .UniProt_get_organism_by_accession import UniProt_get_organism_by_accession
+from .UniProt_get_proteome import UniProt_get_proteome
 from .UniProt_get_ptm_processing_by_accession import (
     UniProt_get_ptm_processing_by_accession,
 )
@@ -881,8 +882,12 @@ from .UniProt_get_sequence_by_accession import UniProt_get_sequence_by_accession
 from .UniProt_get_subcellular_location_by_accession import (
     UniProt_get_subcellular_location_by_accession,
 )
+from .UniProt_get_uniparc_entry import UniProt_get_uniparc_entry
+from .UniProt_get_uniref_cluster import UniProt_get_uniref_cluster
 from .UniProt_id_mapping import UniProt_id_mapping
 from .UniProt_search import UniProt_search
+from .UniProt_search_uniparc import UniProt_search_uniparc
+from .UniProt_search_uniref import UniProt_search_uniref
 from .UnifiedToolGenerator import UnifiedToolGenerator
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
 from .WHO_Guideline_Full_Text import WHO_Guideline_Full_Text
@@ -1018,8 +1023,14 @@ from .ena_get_sequence_embl import ena_get_sequence_embl
 from .ena_get_sequence_fasta import ena_get_sequence_fasta
 from .ena_get_sequence_xml import ena_get_sequence_xml
 from .enrichr_gene_enrichment_analysis import enrichr_gene_enrichment_analysis
+from .ensembl_get_genetree import ensembl_get_genetree
+from .ensembl_get_regulatory_features import ensembl_get_regulatory_features
 from .ensembl_get_sequence import ensembl_get_sequence
 from .ensembl_get_variants import ensembl_get_variants
+from .ensembl_get_variation import ensembl_get_variation
+from .ensembl_get_variation_phenotypes import ensembl_get_variation_phenotypes
+from .ensembl_get_xrefs import ensembl_get_xrefs
+from .ensembl_get_xrefs_by_name import ensembl_get_xrefs_by_name
 from .ensembl_lookup_gene import ensembl_lookup_gene
 from .euhealthinfo_deepdive import euhealthinfo_deepdive
 from .euhealthinfo_search_alcohol_tobacco_psychoactive_use import (
@@ -1328,9 +1339,12 @@ from .hca_search_projects import hca_search_projects
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
 from .icd_search_codes import icd_search_codes
 from .iedb_search_epitopes import iedb_search_epitopes
+from .intact_get_complex_details import intact_get_complex_details
 from .intact_get_interaction_details import intact_get_interaction_details
 from .intact_get_interaction_network import intact_get_interaction_network
 from .intact_get_interactions import intact_get_interactions
+from .intact_get_interactions_by_complex import intact_get_interactions_by_complex
+from .intact_get_interactions_by_organism import intact_get_interactions_by_organism
 from .intact_get_interactor import intact_get_interactor
 from .intact_search_interactions import intact_search_interactions
 from .kegg_find_genes import kegg_find_genes
@@ -1890,12 +1904,17 @@ __all__ = [
     "UniProt_get_function_by_accession",
     "UniProt_get_isoform_ids_by_accession",
     "UniProt_get_organism_by_accession",
+    "UniProt_get_proteome",
     "UniProt_get_ptm_processing_by_accession",
     "UniProt_get_recommended_name_by_accession",
     "UniProt_get_sequence_by_accession",
     "UniProt_get_subcellular_location_by_accession",
+    "UniProt_get_uniparc_entry",
+    "UniProt_get_uniref_cluster",
     "UniProt_id_mapping",
     "UniProt_search",
+    "UniProt_search_uniparc",
+    "UniProt_search_uniref",
     "UnifiedToolGenerator",
     "Unpaywall_check_oa_status",
     "WHO_Guideline_Full_Text",
@@ -1999,8 +2018,14 @@ __all__ = [
     "ena_get_sequence_fasta",
     "ena_get_sequence_xml",
     "enrichr_gene_enrichment_analysis",
+    "ensembl_get_genetree",
+    "ensembl_get_regulatory_features",
     "ensembl_get_sequence",
     "ensembl_get_variants",
+    "ensembl_get_variation",
+    "ensembl_get_variation_phenotypes",
+    "ensembl_get_xrefs",
+    "ensembl_get_xrefs_by_name",
     "ensembl_lookup_gene",
     "euhealthinfo_deepdive",
     "euhealthinfo_search_alcohol_tobacco_psychoactive_use",
@@ -2269,9 +2294,12 @@ __all__ = [
     "humanbase_ppi_analysis",
     "icd_search_codes",
     "iedb_search_epitopes",
+    "intact_get_complex_details",
     "intact_get_interaction_details",
     "intact_get_interaction_network",
     "intact_get_interactions",
+    "intact_get_interactions_by_complex",
+    "intact_get_interactions_by_organism",
     "intact_get_interactor",
     "intact_search_interactions",
     "kegg_find_genes",

@@ -78,10 +78,10 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "search_type": "sequence",
+        "query": "hemoglobin",
+        "search_type": "text",
         "similarity_threshold": 0.7,
-        "max_results": 1
+        "max_results": 5
       }
     ]
   }

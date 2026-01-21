@@ -1,7 +1,7 @@
 """
 ensembl_get_sequence
 
-Get DNA sequence for a gene, transcript, or genomic region. Returns sequence in FASTA format.
+Get DNA or protein sequence for a gene, transcript, or genomic region. Returns sequence in JSON f...
 """
 
 from typing import Any, Optional, Callable
@@ -9,22 +9,28 @@ from ._shared_client import get_shared_client
 
 
 def ensembl_get_sequence(
-    sequence_id: str,
+    id: str,
     type: Optional[str] = "genomic",
+    species: Optional[str] = None,
+    multiple_sequences: Optional[bool] = True,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get DNA sequence for a gene, transcript, or genomic region. Returns sequence in FASTA format.
+    Get DNA or protein sequence for a gene, transcript, or genomic region. Returns sequence in JSON f...
 
     Parameters
     ----------
-    sequence_id : str
-        Ensembl gene/transcript ID or genomic region (e.g., 'ENSG00000139618' or '1:1...
+    id : str
+        Ensembl gene/transcript ID (e.g., 'ENSG00000139618' or 'ENST00000380152')
     type : str
-        Sequence type: 'genomic', 'cds', 'cdna', 'peptide'
+        Sequence type: 'genomic' (genomic DNA), 'cds' (coding sequence), 'cdna' (cDNA...
+    species : str
+        Species name (optional, defaults to human)
+    multiple_sequences : bool
+        Return multiple sequences if available (e.g., all transcripts)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -41,7 +47,12 @@ def ensembl_get_sequence(
     return get_shared_client().run_one_function(
         {
             "name": "ensembl_get_sequence",
-            "arguments": {"sequence_id": sequence_id, "type": type},
+            "arguments": {
+                "id": id,
+                "type": type,
+                "species": species,
+                "multiple_sequences": multiple_sequences,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

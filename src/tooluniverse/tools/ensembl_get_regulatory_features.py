@@ -1,33 +1,33 @@
 """
-ensembl_get_variants
+ensembl_get_regulatory_features
 
-Get genetic variants (SNPs, indels) in a genomic region. Returns variant information including po...
+Get regulatory features (promoters, enhancers, transcription factor binding sites) in a genomic r...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ensembl_get_variants(
+def ensembl_get_regulatory_features(
     region: str,
+    feature: str,
     species: Optional[str] = "human",
-    feature: Optional[str] = "variation",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get genetic variants (SNPs, indels) in a genomic region. Returns variant information including po...
+    Get regulatory features (promoters, enhancers, transcription factor binding sites) in a genomic r...
 
     Parameters
     ----------
     region : str
-        Genomic region in format 'chromosome:start-end' (e.g., '13:32315086-32400268'...
+        Genomic region in format 'chromosome:start-end' (e.g., '1:1000000-2000000')
     species : str
-        Species name (default 'human'). Examples: 'human', 'mouse', 'rat'
+        Species name (default 'human')
     feature : str
-        Feature type to retrieve (default 'variation')
+        Feature type (must be 'regulatory' for this tool)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +43,7 @@ def ensembl_get_variants(
 
     return get_shared_client().run_one_function(
         {
-            "name": "ensembl_get_variants",
+            "name": "ensembl_get_regulatory_features",
             "arguments": {"region": region, "species": species, "feature": feature},
         },
         stream_callback=stream_callback,
@@ -52,4 +52,4 @@ def ensembl_get_variants(
     )
 
 
-__all__ = ["ensembl_get_variants"]
+__all__ = ["ensembl_get_regulatory_features"]
