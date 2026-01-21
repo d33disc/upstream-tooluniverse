@@ -9,6 +9,7 @@ import re
 import requests
 from .base_tool import BaseTool
 from .tool_registry import register_tool
+from .http_utils import request_with_retry
 
 # Ensembl REST API Base URL
 ENSEMBL_BASE_URL = "https://rest.ensembl.org"
@@ -112,29 +113,17 @@ class EnsemblRESTTool(BaseTool):
                 "Content-Type": "application/json",
                 "User-Agent": "ToolUniverse/1.0",
             }
-
-            for attempt in range(3):
-                try:
-                    response = requests.get(
-                        url,
-                        params=query_params,
-                        headers=headers,
-                        timeout=self.timeout,
-                    )
-                    # Retry on transient server errors
-                    if response.status_code in {502, 503, 504} and attempt < 2:
-                        continue
-                    response.raise_for_status()
-                    break
-                except requests.exceptions.Timeout:
-                    if attempt < 2:
-                        continue
-                    raise
-                except requests.exceptions.RequestException:
-                    # Retry on transient errors if possible
-                    if attempt < 2:
-                        continue
-                    raise
+            response = request_with_retry(
+                requests,
+                "GET",
+                url,
+                params=query_params,
+                headers=headers,
+                timeout=self.timeout,
+                max_attempts=3,
+                backoff_seconds=0.5,
+            )
+            response.raise_for_status()
 
             data = response.json()
             return {
@@ -149,9 +138,7 @@ class EnsemblRESTTool(BaseTool):
         except requests.exceptions.Timeout:
             return {
                 "status": "error",
-                "error": (
-                    f"Ensembl API request timed out after {self.timeout} seconds"
-                ),
+                "error": (f"Ensembl API request timed out after {self.timeout}s"),
                 "url": url,
             }
         except requests.exceptions.HTTPError as e:

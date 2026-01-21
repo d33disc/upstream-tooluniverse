@@ -13,6 +13,7 @@ from typing import Any, Dict, Optional
 # from rdkit import Chem
 from .base_tool import BaseTool
 from .tool_registry import register_tool
+from .http_utils import request_with_retry
 from indigo import Indigo
 
 
@@ -118,7 +119,15 @@ class ChEMBLRESTTool(BaseTool):
             url = self._build_url(arguments)
             params = self._build_params(arguments)
 
-            response = self.session.get(url, params=params, timeout=self.timeout)
+            response = request_with_retry(
+                self.session,
+                "GET",
+                url,
+                params=params,
+                timeout=self.timeout,
+                max_attempts=3,
+                backoff_seconds=0.5,
+            )
             response.raise_for_status()
 
             data = response.json()

@@ -4,6 +4,7 @@ import requests
 import re
 from .base_tool import BaseTool
 from .tool_registry import register_tool
+from .http_utils import request_with_retry
 
 # Reactome Content Service Base URL
 REACTOME_BASE_URL = "https://reactome.org/ContentService"
@@ -34,6 +35,8 @@ class ReactomeRESTTool(BaseTool):
             if ep is not None and isinstance(ep, str) and ep.strip() != "":
                 # Only effective when extract_path is a non-empty string
                 self.extract_path = ep.strip()
+        # Allow per-tool timeout override via JSON config
+        self.timeout = int(tool_config.get("timeout", 10))
 
     def _build_url(self, arguments: dict) -> str:
         """
@@ -49,7 +52,15 @@ class ReactomeRESTTool(BaseTool):
             url_path = url_path.replace(f"{{{key}}}", str(arguments[key]))
         return REACTOME_BASE_URL + url_path
 
-    def run(self, arguments: dict):
+    def run(
+        self, arguments: dict, stream_callback=None, use_cache=False, validate=True
+    ):
+        # Optional schema validation (when jsonschema is available)
+        if validate:
+            validation_error = self.validate_parameters(arguments)
+            if validation_error is not None:
+                return {"error": str(validation_error)}
+
         # 1. Validate required parameters (check from required_params list)
         for required_param in self.required_params:
             if required_param not in arguments:
@@ -89,8 +100,15 @@ class ReactomeRESTTool(BaseTool):
                 headers["Accept"] = "text/plain"
 
             if self.method == "GET":
-                resp = requests.get(
-                    url, params=query_params, headers=headers, timeout=10
+                resp = request_with_retry(
+                    requests,
+                    "GET",
+                    url,
+                    params=query_params,
+                    headers=headers,
+                    timeout=self.timeout,
+                    max_attempts=3,
+                    backoff_seconds=0.5,
                 )
             else:
                 # POST requests: Reactome API expects text/plain for query endpoints
@@ -107,20 +125,41 @@ class ReactomeRESTTool(BaseTool):
                             "Content-Type": "text/plain",
                             "Accept": "application/json",
                         }
-                        resp = requests.post(
-                            url, data=body, headers=headers, timeout=10
+                        resp = request_with_retry(
+                            requests,
+                            "POST",
+                            url,
+                            data=body,
+                            headers=headers,
+                            timeout=self.timeout,
+                            max_attempts=3,
+                            backoff_seconds=0.5,
                         )
                     else:
                         # Fallback to JSON for other POST endpoints
                         headers = {"Content-Type": "application/json"}
-                        resp = requests.post(
-                            url, json=query_params, headers=headers, timeout=10
+                        resp = request_with_retry(
+                            requests,
+                            "POST",
+                            url,
+                            json=query_params,
+                            headers=headers,
+                            timeout=self.timeout,
+                            max_attempts=3,
+                            backoff_seconds=0.5,
                         )
                 else:
                     # For other POST endpoints, use JSON
                     headers = {"Content-Type": "application/json"}
-                    resp = requests.post(
-                        url, json=query_params, headers=headers, timeout=10
+                    resp = request_with_retry(
+                        requests,
+                        "POST",
+                        url,
+                        json=query_params,
+                        headers=headers,
+                        timeout=self.timeout,
+                        max_attempts=3,
+                        backoff_seconds=0.5,
                     )
         except Exception as e:
             return {"error": f"Failed to request Reactome Content Service: {str(e)}"}
@@ -130,6 +169,7 @@ class ReactomeRESTTool(BaseTool):
             return {
                 "error": f"Reactome API returned HTTP {resp.status_code}",
                 "detail": resp.text,
+                "url": url,
             }
 
         # 6. Parse response (JSON or TSV)
