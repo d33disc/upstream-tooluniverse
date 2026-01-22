@@ -16519,4 +16519,101 @@
       }
     }
   }
+  ,
+  {
+    "name": "FDA_get_drug_label_info_by_field_value",
+    "description": "Retrieve FDA drug label information by searching a specific FDA drug label field for a given value (field:value). This is a generic field-based lookup. Use `return_fields` to choose which sections/fields to return, or pass \"ALL\" to return full label records. Note: for `openfda.generic_name`, values are typically uppercase (e.g., \"ASPIRIN\").\n\nAllowed fields (use these for both `field` and `return_fields`): abuse, accessories, active_ingredient, adverse_reactions, alarms, animal_pharmacology_and_or_toxicology, ask_doctor, ask_doctor_or_pharmacist, assembly_or_installation_instructions, boxed_warning, calibration_instructions, carcinogenesis_and_mutagenesis_and_impairment_of_fertility, cleaning, clinical_pharmacology, clinical_studies, compatible_accessories, components, contraindications, controlled_substance, dependence, description, diagram_of_device, disposal_and_waste_handling, do_not_use, dosage_and_administration, dosage_forms_and_strengths, drug_abuse_and_dependence, drug_and_or_laboratory_test_interactions, drug_interactions, effective_time, environmental_warning, food_safety_warning, general_precautions, geriatric_use, guaranteed_analysis_of_feed, health_care_provider_letter, health_claim, how_supplied, id, inactive_ingredient, indications_and_usage, information_for_owners_or_caregivers, information_for_patients, instructions_for_use, intended_use_of_the_device, keep_out_of_reach_of_children, labor_and_delivery, laboratory_tests, mechanism_of_action, microbiology, nonclinical_toxicology, nonteratogenic_effects, nursing_mothers, openfda, openfda.brand_name, openfda.generic_name, other_safety_information, overdosage, package_label_principal_display_panel, patient_medication_information, pediatric_use, pharmacodynamics, pharmacogenomics, pharmacokinetics, precautions, pregnancy, pregnancy_or_breast_feeding, purpose, questions, recent_major_changes, references, residue_warning, risks, route, safe_handling_warning, set_id, spl_indexing_data_elements, spl_medguide, spl_patient_package_insert, spl_product_data_elements, spl_unclassified_section, statement_of_identity, stop_use, storage_and_handling, summary_of_safety_and_effectiveness, teratogenic_effects, troubleshooting, use_in_specific_populations, user_safety_warnings, version, warnings, warnings_and_cautions, when_using.",
+    "label": [
+      "FDADrugLabel",
+      "Search",
+      "FDA",
+      "FieldValue"
+    ],
+    "type": "FDADrugLabelFieldValueTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Which field to search. Choose one value from the Allowed fields list in this tool's description. Common choices: `openfda.generic_name`, `openfda.brand_name`, `id`, `set_id`, `indications_and_usage`, `dosage_and_administration`."
+        },
+        "field_value": {
+          "type": "string",
+          "description": "The value to search for in the specified field (exact match)."
+        },
+        "return_fields": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "ALL"
+              ],
+              "description": "Return full label records."
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Fields/sections to return. Choose any subset from the Allowed fields list in this tool's description. Tip: include `openfda.brand_name`, `openfda.generic_name`, `id`, `set_id` for identifiers."
+            }
+          ],
+          "description": "Which fields/sections to return. Use \"ALL\" to return full label records. If omitted, defaults to a small set of identifiers (brand/generic/id/set_id)."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The number of records to return (default: 100)."
+        },
+        "skip": {
+          "type": "integer",
+          "description": "The number of records to skip (default: 0)."
+        }
+      },
+      "required": [
+        "field",
+        "field_value"
+      ]
+    },
+    "test_examples": [
+      {
+        "field": "openfda.generic_name",
+        "field_value": "ASPIRIN",
+        "return_fields": [
+          "openfda.brand_name",
+          "openfda.generic_name",
+          "id",
+          "set_id",
+          "indications_and_usage"
+        ],
+        "limit": 1,
+        "skip": 0
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "properties": {
+            "skip": {
+              "type": "integer"
+            },
+            "limit": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            }
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
 ]

@@ -153,7 +153,7 @@
   {
     "type": "ChEMBLRESTTool",
     "name": "ChEMBL_search_molecules",
-    "description": "Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination.",
+    "description": "Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination. Note: some text-based filters (especially `pref_name__contains`) may legitimately return zero results because `pref_name` coverage is incomplete and may not contain common drug names. For reliable retrieval, prefer ID-based filters like `molecule_chembl_id` or use `ChEMBL_get_molecule` when you already have a ChEMBL ID.",
     "fields": {
       "endpoint": "/molecule.json"
     },
@@ -166,11 +166,30 @@
         },
         "pref_name__contains": {
           "type": "string",
-          "description": "Filter by preferred name (contains)"
+          "description": "Filter by preferred name (contains). Note: `pref_name` coverage is incomplete in ChEMBL, so this can legitimately return zero results even for common names; prefer `molecule_chembl_id` for reliable retrieval."
         },
         "molecule_type": {
           "type": "string",
           "description": "Filter by molecule type (e.g., 'Small molecule', 'Antibody')"
+        },
+        "fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "molecule_chembl_id",
+              "pref_name",
+              "molecule_type",
+              "max_phase",
+              "first_approval",
+              "black_box_warning",
+              "withdrawn_flag",
+              "molecule_structures",
+              "molecule_properties"
+            ]
+          },
+          "description": "Optional list of ChEMBL molecule fields to include in each returned molecule object (projection). ToolUniverse maps this to ChEMBL's `only` query parameter (comma-separated). Supported fields: molecule_chembl_id, pref_name, molecule_type, max_phase, first_approval, black_box_warning, withdrawn_flag, molecule_structures, molecule_properties."
         },
         "limit": {
           "type": "integer",
@@ -207,7 +226,8 @@
             "molecules": {
               "type": "array",
               "items": {
-                "type": "object"
+                "type": "object",
+                "description": "Molecule objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
               }
             },
             "page_meta": {
@@ -222,8 +242,23 @@
     },
     "test_examples": [
       {
-        "pref_name__contains": "aspirin",
-        "limit": 10
+        "molecule_chembl_id": "CHEMBL25",
+        "limit": 1
+      },
+      {
+        "molecule_chembl_id": "CHEMBL25",
+        "limit": 1,
+        "fields": ["molecule_chembl_id", "pref_name", "max_phase"]
+      },
+      {
+        "molecule_chembl_id": "CHEMBL25",
+        "limit": 1,
+        "fields": ["molecule_chembl_id"]
+      },
+      {
+        "molecule_chembl_id": "CHEMBL25",
+        "limit": 1,
+        "fields": ["molecule_properties"]
       }
     ]
   },
@@ -356,6 +391,21 @@
           "type": "string",
           "description": "Filter by target type (e.g., 'SINGLE PROTEIN', 'PROTEIN COMPLEX')"
         },
+        "fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "target_chembl_id",
+              "pref_name",
+              "organism",
+              "target_type",
+              "target_components"
+            ]
+          },
+          "description": "Optional list of ChEMBL target fields to include in each returned target object (projection). ToolUniverse maps this to ChEMBL's `only` query parameter (comma-separated). Supported fields: target_chembl_id, pref_name, organism, target_type, target_components."
+        },
         "limit": {
           "type": "integer",
           "default": 20,
@@ -380,7 +430,8 @@
             "targets": {
               "type": "array",
               "items": {
-                "type": "object"
+                "type": "object",
+                "description": "Target objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
               }
             }
           }
@@ -395,6 +446,42 @@
         "pref_name__contains": "kinase",
         "organism": "Homo sapiens",
         "limit": 10
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["target_chembl_id", "pref_name", "target_type"]
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["target_chembl_id"]
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["pref_name"]
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["organism"]
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["target_type"]
+      },
+      {
+        "pref_name__contains": "kinase",
+        "organism": "Homo sapiens",
+        "limit": 1,
+        "fields": ["target_components"]
       }
     ]
   },
@@ -452,6 +539,46 @@
       {
         "target_chembl_id__exact": "CHEMBL2074",
         "limit": 10
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_chembl_id", "assay_type", "confidence_score"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["description"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_type"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["confidence_score"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["target_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["organism"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["bao_label"]
       }
     ]
   },
@@ -580,6 +707,23 @@
           "type": "string",
           "description": "Filter by target ChEMBL ID"
         },
+        "fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "assay_chembl_id",
+              "description",
+              "assay_type",
+              "confidence_score",
+              "target_chembl_id",
+              "assay_organism",
+              "bao_label"
+            ]
+          },
+          "description": "Optional list of ChEMBL assay fields to include in each returned assay object (projection). ToolUniverse maps this to ChEMBL's `only` query parameter (comma-separated). Supported fields: assay_chembl_id, description, assay_type, confidence_score, target_chembl_id, assay_organism, bao_label."
+        },
         "limit": {
           "type": "integer",
           "default": 20,
@@ -604,7 +748,8 @@
             "assays": {
               "type": "array",
               "items": {
-                "type": "object"
+                "type": "object",
+                "description": "Assay objects returned by ChEMBL. When 'fields' is provided, each object will contain only the selected fields."
               }
             }
           }
@@ -618,6 +763,41 @@
       {
         "target_chembl_id__exact": "CHEMBL2074",
         "limit": 10
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["description"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_type"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["confidence_score"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["target_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_organism"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["bao_label"]
       }
     ]
   },
@@ -681,7 +861,7 @@
   {
     "type": "ChEMBLRESTTool",
     "name": "ChEMBL_search_activities",
-    "description": "Search activity data by molecule, target, assay, or activity values. Supports filtering by IC50, Ki, EC50, etc. To find molecule or target IDs, use ChEMBL_search_molecules or ChEMBL_search_targets.",
+    "description": "Search activity data by molecule, target, assay, or activity values. Supports filtering by IC50, Ki, EC50, etc. Note: activity data is sparse and depends on curation; some specific filter combinations can legitimately return zero results. For reliable retrieval, prefer starting from a known target (`target_chembl_id__exact`) or assay (`assay_chembl_id__exact`). To find molecule or target IDs, use ChEMBL_search_molecules or ChEMBL_search_targets.",
     "fields": {
       "endpoint": "/activity.json"
     },
@@ -711,6 +891,26 @@
         "standard_value__gte": {
           "type": "number",
           "description": "Filter by minimum activity value"
+        },
+        "fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "activity_id",
+              "molecule_chembl_id",
+              "target_chembl_id",
+              "assay_chembl_id",
+              "standard_type",
+              "standard_value",
+              "standard_units",
+              "pchembl_value",
+              "standard_relation",
+              "standard_flag"
+            ]
+          },
+          "description": "Optional list of ChEMBL activity fields to include in each returned activity object (projection). ToolUniverse maps this to ChEMBL's `only` query parameter (comma-separated). Supported fields: activity_id, molecule_chembl_id, target_chembl_id, assay_chembl_id, standard_type, standard_value, standard_units, pchembl_value, standard_relation, standard_flag."
         },
         "limit": {
           "type": "integer",
@@ -745,7 +945,7 @@
                     "type": "string"
                   },
                   "standard_value": {
-                    "type": "number"
+                    "type": ["string", "number", "null"]
                   },
                   "standard_type": {
                     "type": "string"
@@ -765,9 +965,63 @@
     },
     "test_examples": [
       {
-        "molecule_chembl_id__exact": "CHEMBL6329",
-        "standard_type": "IC50",
-        "limit": 20
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 3
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["activity_id", "molecule_chembl_id", "pchembl_value"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["activity_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["molecule_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["target_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["assay_chembl_id"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["standard_type"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["standard_value"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["standard_units"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["pchembl_value"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["standard_relation"]
+      },
+      {
+        "target_chembl_id__exact": "CHEMBL2074",
+        "limit": 1,
+        "fields": ["standard_flag"]
       }
     ]
   },

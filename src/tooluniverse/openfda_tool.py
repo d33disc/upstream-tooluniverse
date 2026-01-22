@@ -288,15 +288,48 @@ def search_openfda(
             if value is not None
         ]
     )
+
+    def _is_valid_api_key(v):
+        if v is None:
+            return False
+        if not isinstance(v, str):
+            return True
+        vv = v.strip()
+        if not vv:
+            return False
+        # Avoid common placeholder values that users put into env vars.
+        placeholders = {
+            "none",
+            "null",
+            "your_fda_key_here",
+            "your_key_here",
+        }
+        if vv.lower() in placeholders:
+            return False
+        return True
+
     full_url = f"{endpoint_url}?{query}"
-    if api_key:
+    used_api_key = False
+    if _is_valid_api_key(api_key):
         full_url += f"&api_key={api_key}"
+        used_api_key = True
 
     response = requests.get(full_url)
 
     # Get the JSON response
     response_data = response.json()
-    if "error" in response_data:
+
+    # If an invalid API key was supplied, retry once without it.
+    if (
+        used_api_key
+        and isinstance(response_data, dict)
+        and isinstance(response_data.get("error"), dict)
+        and response_data["error"].get("code") == "API_KEY_INVALID"
+    ):
+        response = requests.get(f"{endpoint_url}?{query}")
+        response_data = response.json()
+
+    if isinstance(response_data, dict) and "error" in response_data:
         return None
 
     # Extract meta information
@@ -757,6 +790,170 @@ class FDADrugLabelSearchIDTool(FDATool):
             api_key=self.api_key,
             return_fields=return_fields,
             exists=return_fields,
+            exist_option="OR",
+        )
+
+
+@register_tool("FDADrugLabelFieldValueTool")
+class FDADrugLabelFieldValueTool(BaseTool):
+    """
+    Search the openFDA drug label dataset by specifying a single openFDA field
+    (e.g., "openfda.generic_name") and a corresponding field_value.
+
+    This tool is intentionally generic and does not modify any existing
+    FDA tools.
+    """
+
+    def __init__(self, tool_config, api_key=None):
+        super().__init__(tool_config)
+        self.endpoint_url = "https://api.fda.gov/drug/label.json"
+        self.api_key = api_key or os.getenv("FDA_API_KEY")
+
+    def run(self, arguments):
+        arguments = copy.deepcopy(arguments)
+
+        field = arguments.pop("field", None)
+        field_value = arguments.pop("field_value", None)
+        if not field or not field_value:
+            return {"error": "`field` and `field_value` are required."}
+
+        # Runtime enforcement: keep the JSON config small by not inlining
+        # huge enums, but still validate inputs against a known allow-list.
+        allowed_fields = {
+            "abuse",
+            "accessories",
+            "active_ingredient",
+            "adverse_reactions",
+            "alarms",
+            "animal_pharmacology_and_or_toxicology",
+            "ask_doctor",
+            "ask_doctor_or_pharmacist",
+            "assembly_or_installation_instructions",
+            "boxed_warning",
+            "calibration_instructions",
+            "carcinogenesis_and_mutagenesis_and_impairment_of_fertility",
+            "cleaning",
+            "clinical_pharmacology",
+            "clinical_studies",
+            "compatible_accessories",
+            "components",
+            "contraindications",
+            "controlled_substance",
+            "dependence",
+            "description",
+            "diagram_of_device",
+            "disposal_and_waste_handling",
+            "do_not_use",
+            "dosage_and_administration",
+            "dosage_forms_and_strengths",
+            "drug_abuse_and_dependence",
+            "drug_and_or_laboratory_test_interactions",
+            "drug_interactions",
+            "effective_time",
+            "environmental_warning",
+            "food_safety_warning",
+            "general_precautions",
+            "geriatric_use",
+            "guaranteed_analysis_of_feed",
+            "health_care_provider_letter",
+            "health_claim",
+            "how_supplied",
+            "id",
+            "inactive_ingredient",
+            "indications_and_usage",
+            "information_for_owners_or_caregivers",
+            "information_for_patients",
+            "instructions_for_use",
+            "intended_use_of_the_device",
+            "keep_out_of_reach_of_children",
+            "labor_and_delivery",
+            "laboratory_tests",
+            "mechanism_of_action",
+            "microbiology",
+            "nonclinical_toxicology",
+            "nonteratogenic_effects",
+            "nursing_mothers",
+            "openfda",
+            "openfda.brand_name",
+            "openfda.generic_name",
+            "other_safety_information",
+            "overdosage",
+            "package_label_principal_display_panel",
+            "patient_medication_information",
+            "pediatric_use",
+            "pharmacodynamics",
+            "pharmacogenomics",
+            "pharmacokinetics",
+            "precautions",
+            "pregnancy",
+            "pregnancy_or_breast_feeding",
+            "purpose",
+            "questions",
+            "recent_major_changes",
+            "references",
+            "residue_warning",
+            "risks",
+            "route",
+            "safe_handling_warning",
+            "set_id",
+            "spl_indexing_data_elements",
+            "spl_medguide",
+            "spl_patient_package_insert",
+            "spl_product_data_elements",
+            "spl_unclassified_section",
+            "statement_of_identity",
+            "stop_use",
+            "storage_and_handling",
+            "summary_of_safety_and_effectiveness",
+            "teratogenic_effects",
+            "troubleshooting",
+            "use_in_specific_populations",
+            "user_safety_warnings",
+            "version",
+            "warnings",
+            "warnings_and_cautions",
+            "when_using",
+        }
+
+        if field not in allowed_fields:
+            return {
+                "error": (
+                    f"Invalid `field`: {field}. "
+                    "Use one of the documented FDA drug label fields."
+                )
+            }
+
+        return_fields = arguments.pop("return_fields", None)
+        if return_fields is None:
+            # Keep output small by default.
+            return_fields = [
+                "openfda.brand_name",
+                "openfda.generic_name",
+                "id",
+                "set_id",
+            ]
+        if return_fields != "ALL":
+            if not isinstance(return_fields, list) or not return_fields:
+                return {"error": ('`return_fields` must be "ALL" or a non-empty list.')}
+            invalid = [rf for rf in return_fields if rf not in allowed_fields]
+            if invalid:
+                return {
+                    "error": (
+                        "Invalid `return_fields` value(s): "
+                        + ", ".join(invalid)
+                        + ". Use only documented FDA drug label fields."
+                    )
+                }
+
+        # Build openFDA search_fields mapping expected by search_openfda()
+        arguments["search_fields"] = {field: str(field_value)}
+
+        return search_openfda(
+            arguments,
+            endpoint_url=self.endpoint_url,
+            api_key=self.api_key,
+            return_fields=return_fields,
+            exists=return_fields if return_fields != "ALL" else None,
             exist_option="OR",
         )
 

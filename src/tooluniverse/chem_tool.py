@@ -8,7 +8,7 @@ This module provides tools for accessing the ChEMBL database:
 
 import requests
 from urllib.parse import quote
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 # from rdkit import Chem
 from .base_tool import BaseTool
@@ -88,6 +88,18 @@ class ChEMBLRESTTool(BaseTool):
             params["format"] = args["format"]
         else:
             params["format"] = "json"
+        # Optional field projection to reduce payload size on heavy endpoints.
+        # ChEMBL supports projection via the `only` query parameter.
+        # We accept ToolUniverse argument name `fields` and map it to `only`.
+        # Power users can also pass `only` directly.
+        only_value = args.get("only", None)
+        fields_value = args.get("fields", None)
+        projection_value = only_value if only_value is not None else fields_value
+        if projection_value is not None:
+            if isinstance(projection_value, (list, tuple)):
+                params["only"] = ",".join(str(f) for f in projection_value)
+            else:
+                params["only"] = str(projection_value)
         if "ordering" in args:
             params["ordering"] = args["ordering"]
 
@@ -100,6 +112,8 @@ class ChEMBLRESTTool(BaseTool):
                     "limit",
                     "offset",
                     "format",
+                    "fields",
+                    "only",
                     "ordering",
                     "chembl_id",
                     "target_chembl_id",
@@ -118,7 +132,6 @@ class ChEMBLRESTTool(BaseTool):
         try:
             url = self._build_url(arguments)
             params = self._build_params(arguments)
-
             response = request_with_retry(
                 self.session,
                 "GET",
@@ -166,17 +179,34 @@ class ChEMBLRESTTool(BaseTool):
 
             return response_data
 
+        except requests.exceptions.HTTPError as e:
+            resp = e.response
+            status_code = getattr(resp, "status_code", None)
+            detail = None
+            if getattr(resp, "text", None):
+                # Include a short preview of the response body for debugging,
+                # but avoid returning huge payloads.
+                detail = resp.text[:500]
+            return {
+                "status": "error",
+                "error": f"ChEMBL API returned HTTP {status_code}",
+                "url": getattr(resp, "url", url if "url" in locals() else None),
+                "status_code": status_code,
+                "detail": detail,
+            }
         except requests.exceptions.RequestException as e:
             return {
                 "status": "error",
-                "error": f"ChEMBL API error: {str(e)}",
+                "error": f"ChEMBL API request failed: {str(e)}",
                 "url": url if "url" in locals() else None,
+                "detail": repr(e),
             }
         except Exception as e:
             return {
                 "status": "error",
                 "error": f"Unexpected error: {str(e)}",
                 "url": url if "url" in locals() else None,
+                "detail": repr(e),
             }
 
 
