@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 953 scientific tools.
+Type-safe Python interface to 971 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1323,7 +1323,13 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
+from .gnomad_get_gene import gnomad_get_gene
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
+from .gnomad_get_region import gnomad_get_region
+from .gnomad_get_transcript import gnomad_get_transcript
+from .gnomad_get_variant import gnomad_get_variant
+from .gnomad_search_genes import gnomad_search_genes
+from .gnomad_search_variants import gnomad_search_variants
 from .grep_tools import grep_tools
 from .gwas_get_association_by_id import gwas_get_association_by_id
 from .gwas_get_associations_for_snp import gwas_get_associations_for_snp
@@ -1341,7 +1347,14 @@ from .hca_get_file_manifest import hca_get_file_manifest
 from .hca_search_projects import hca_search_projects
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
 from .icd_search_codes import icd_search_codes
+from .iedb_get_epitope_antigens import iedb_get_epitope_antigens
+from .iedb_get_epitope_mhc import iedb_get_epitope_mhc
+from .iedb_get_epitope_references import iedb_get_epitope_references
+from .iedb_search_antigens import iedb_search_antigens
+from .iedb_search_bcell import iedb_search_bcell
 from .iedb_search_epitopes import iedb_search_epitopes
+from .iedb_search_mhc import iedb_search_mhc
+from .iedb_search_references import iedb_search_references
 from .intact_get_complex_details import intact_get_complex_details
 from .intact_get_interaction_details import intact_get_interaction_details
 from .intact_get_interaction_network import intact_get_interaction_network
@@ -1386,10 +1399,15 @@ from .odphp_myhealthfinder import odphp_myhealthfinder
 from .odphp_outlink_fetch import odphp_outlink_fetch
 from .odphp_topicsearch import odphp_topicsearch
 from .ols_find_similar_terms import ols_find_similar_terms
+from .ols_get_efo_ontology_info import ols_get_efo_ontology_info
+from .ols_get_efo_term import ols_get_efo_term
+from .ols_get_efo_term_children import ols_get_efo_term_children
 from .ols_get_ontology_info import ols_get_ontology_info
 from .ols_get_term_ancestors import ols_get_term_ancestors
 from .ols_get_term_children import ols_get_term_children
 from .ols_get_term_info import ols_get_term_info
+from .ols_list_ontologies import ols_list_ontologies
+from .ols_search_efo_terms import ols_search_efo_terms
 from .ols_search_ontologies import ols_search_ontologies
 from .ols_search_terms import ols_search_terms
 from .open_deep_research_agent import open_deep_research_agent
@@ -2286,7 +2304,13 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
+    "gnomad_get_gene",
     "gnomad_get_gene_constraints",
+    "gnomad_get_region",
+    "gnomad_get_transcript",
+    "gnomad_get_variant",
+    "gnomad_search_genes",
+    "gnomad_search_variants",
     "grep_tools",
     "gwas_get_association_by_id",
     "gwas_get_associations_for_snp",
@@ -2304,7 +2328,14 @@ __all__ = [
     "hca_search_projects",
     "humanbase_ppi_analysis",
     "icd_search_codes",
+    "iedb_get_epitope_antigens",
+    "iedb_get_epitope_mhc",
+    "iedb_get_epitope_references",
+    "iedb_search_antigens",
+    "iedb_search_bcell",
     "iedb_search_epitopes",
+    "iedb_search_mhc",
+    "iedb_search_references",
     "intact_get_complex_details",
     "intact_get_interaction_details",
     "intact_get_interaction_network",
@@ -2345,10 +2376,15 @@ __all__ = [
     "odphp_outlink_fetch",
     "odphp_topicsearch",
     "ols_find_similar_terms",
+    "ols_get_efo_ontology_info",
+    "ols_get_efo_term",
+    "ols_get_efo_term_children",
     "ols_get_ontology_info",
     "ols_get_term_ancestors",
     "ols_get_term_children",
     "ols_get_term_info",
+    "ols_list_ontologies",
+    "ols_search_efo_terms",
     "ols_search_ontologies",
     "ols_search_terms",
     "open_deep_research_agent",

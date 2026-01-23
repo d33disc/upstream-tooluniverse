@@ -1,30 +1,39 @@
 """
-gnomad_get_gene_constraints
+gnomad_get_region
 
-Get gene constraint metrics from gnomAD for a gene symbol (GRCh38). Returns constraint fields und...
+Get basic regional information from gnomAD by genomic interval. Returns genes overlapping the reg...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def gnomad_get_gene_constraints(
-    gene_symbol: str,
+def gnomad_get_region(
+    chrom: str,
+    start: int,
+    stop: int,
     reference_genome: Optional[str] = "GRCh38",
+    dataset: Optional[str] = "gnomad_r3",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get gene constraint metrics from gnomAD for a gene symbol (GRCh38). Returns constraint fields und...
+    Get basic regional information from gnomAD by genomic interval. Returns genes overlapping the reg...
 
     Parameters
     ----------
-    gene_symbol : str
-        Gene symbol (e.g., 'BRCA1', 'TP53')
+    chrom : str
+        Chromosome (e.g., '19').
+    start : int
+        1-based start position.
+    stop : int
+        1-based stop position.
     reference_genome : str
         Reference genome.
+    dataset : str
+        gnomAD dataset ID used for `variants(dataset: ...)`. Allowed values: gnomad_r...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,10 +49,13 @@ def gnomad_get_gene_constraints(
 
     return get_shared_client().run_one_function(
         {
-            "name": "gnomad_get_gene_constraints",
+            "name": "gnomad_get_region",
             "arguments": {
-                "gene_symbol": gene_symbol,
+                "chrom": chrom,
+                "start": start,
+                "stop": stop,
                 "reference_genome": reference_genome,
+                "dataset": dataset,
             },
         },
         stream_callback=stream_callback,
@@ -52,4 +64,4 @@ def gnomad_get_gene_constraints(
     )
 
 
-__all__ = ["gnomad_get_gene_constraints"]
+__all__ = ["gnomad_get_region"]

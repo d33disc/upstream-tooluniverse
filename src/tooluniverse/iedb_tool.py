@@ -1,81 +1,131 @@
-from typing import Dict, Any, List, Optional
+from __future__ import annotations
+
+from typing import Any, Dict, Mapping
+
 import requests
+
 from .base_tool import BaseTool
+from .http_utils import request_with_retry
 from .tool_registry import register_tool
 
 
 @register_tool("IEDBTool")
 class IEDBTool(BaseTool):
     """
-    Tool for interacting with the Immune Epitope Database (IEDB).
+    Tool for interacting with the IEDB Query API (PostgREST).
+
+    This tool is JSON-config driven: each tool config supplies
+    `fields.endpoint` and (optionally) `fields.default_params` +
+    `fields.shorthand_filters` to map
+    friendly arguments into PostgREST filter expressions (e.g., `eq.123`,
+    `ilike.*KVF*`).
     """
 
     QUERY_API_URL = "https://query-api.iedb.org"
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Executes the IEDB tool action.
+        fields = self.tool_config.get("fields") or {}
+        endpoint = fields.get("endpoint")
+        if not endpoint or not isinstance(endpoint, str):
+            return {
+                "status": "error",
+                "error": "Tool misconfigured: missing fields.endpoint",
+                "detail": (
+                    "Expected tool_config.fields.endpoint (string) like "
+                    "'/epitope_search'."
+                ),
+            }
 
-        Args:
-            arguments (Dict[str, Any]):
-                - action (str): "search_epitopes"
-                - query (str, optional): Sequence fragment (e.g., "KVF") to search in linear sequence.
-                - structure_type (str, optional): "Linear peptide", etc.
-                - organism (str, optional): Source organism name.
-                - limit (int, default 10).
+        url = f"{self.QUERY_API_URL}{endpoint}"
 
-        Returns:
-            Dict[str, Any]: Search results.
-        """
-        action = arguments.get("action")
+        params: Dict[str, Any] = {}
+        default_params = fields.get("default_params") or {}
+        if isinstance(default_params, Mapping):
+            params.update(default_params)
 
-        if action == "search_epitopes":
-            return self.search_epitopes(
-                query=arguments.get("query"),
-                structure_type=arguments.get("structure_type"),
-                organism=arguments.get("organism"),
-                limit=arguments.get("limit", 10),
-            )
-        else:
-            raise ValueError(f"Unknown action: {action}")
+        # Common paging / projection knobs (PostgREST)
+        if arguments.get("limit") is not None:
+            params["limit"] = arguments.get("limit")
+        if arguments.get("offset") is not None:
+            params["offset"] = arguments.get("offset")
+        if arguments.get("order"):
+            params["order"] = arguments.get("order")
 
-    def search_epitopes(
-        self,
-        query: Optional[str] = None,
-        structure_type: Optional[str] = None,
-        organism: Optional[str] = None,
-        limit: int = 10,
-    ) -> Dict[str, Any]:
-        """
-        Search for epitopes.
-        """
-        url = f"{self.QUERY_API_URL}/epitope_search"
-        params = {"limit": limit, "order": "structure_id.asc"}
+        select = arguments.get("select")
+        if select:
+            if isinstance(select, list):
+                params["select"] = ",".join(str(x) for x in select if x)
+            else:
+                params["select"] = str(select)
 
-        if query:
-            # Using ilike on linear_sequence as confirmed working
-            params["linear_sequence"] = f"ilike.*{query}*"
+        # Advanced filters: caller provides PostgREST expressions, e.g.:
+        # {"linear_sequence": "ilike.*KVF*", "structure_type": "eq.Linear peptide"}
+        raw_filters = arguments.get("filters") or {}
+        if isinstance(raw_filters, Mapping):
+            for k, v in raw_filters.items():
+                if k and v is not None:
+                    params[str(k)] = str(v)
 
-        if structure_type:
-            params["structure_type"] = f"eq.{structure_type}"
+        # Shorthand filters: map friendly args into PostgREST expressions.
+        # Example in tool config:
+        # "shorthand_filters": {"sequence_contains": {"column": "linear_sequence",
+        #                                             "op": "ilike_contains"}}
+        shorthand = fields.get("shorthand_filters") or {}
+        if isinstance(shorthand, Mapping):
+            for arg_name, spec in shorthand.items():
+                if not arg_name:
+                    continue
+                val = arguments.get(arg_name)
+                if val is None:
+                    continue
+                if not isinstance(spec, Mapping):
+                    continue
+                column = spec.get("column") or arg_name
+                op = spec.get("op") or "eq"
+                if op == "eq":
+                    params[str(column)] = f"eq.{val}"
+                elif op == "ilike_contains":
+                    params[str(column)] = f"ilike.*{val}*"
+                elif op == "raw":
+                    params[str(column)] = str(val)
 
+        timeout_s = fields.get("timeout", 30)
         try:
-            response = requests.get(url, params=params, timeout=30)
-            response.raise_for_status()
-            data = response.json()
+            resp = request_with_retry(
+                requests,
+                "GET",
+                url,
+                params=params,
+                timeout=timeout_s,
+            )
 
-            epitopes = []
-            for item in data:
-                epitopes.append(
-                    {
-                        "id": item.get("structure_id"),
-                        "type": item.get("structure_type"),
-                        "sequence": item.get("linear_sequence"),
-                        "description": item.get("structure_descriptions"),
-                        "antigens": item.get("curated_source_antigens"),
-                    }
-                )
+            if not (200 <= resp.status_code < 300):
+                detail: Any
+                try:
+                    detail = resp.json()
+                except Exception:
+                    detail = resp.text[:2000]
+                return {
+                    "status": "error",
+                    "url": resp.url,
+                    "status_code": resp.status_code,
+                    "error": "HTTP request failed",
+                    "detail": detail,
+                }
 
-            return {"count": len(epitopes), "epitopes": epitopes}
+            try:
+                data: Any = resp.json()
+            except Exception:
+                data = resp.text
+
+            out: Dict[str, Any] = {
+                "status": "success",
+                "url": resp.url,
+                "data": data,
+            }
+            if isinstance(data, list):
+                out["count"] = len(data)
+            return out
+
         except Exception as e:
-            return {"error": str(e)}
+            return {"status": "error", "url": url, "error": str(e)}

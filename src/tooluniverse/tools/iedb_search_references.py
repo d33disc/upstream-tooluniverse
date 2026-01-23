@@ -1,16 +1,14 @@
 """
-iedb_search_epitopes
+iedb_search_references
 
-Search immune epitopes (IEDB Query API). Use this to discover epitope `structure_id` values, then...
+Search references/citations (IEDB Query API). Use this to discover `reference_id` values, PubMed ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def iedb_search_epitopes(
-    sequence_contains: Optional[str] = None,
-    structure_type: Optional[str] = None,
+def iedb_search_references(
     limit: Optional[int] = 10,
     offset: Optional[int] = 0,
     order: Optional[str] = None,
@@ -22,24 +20,20 @@ def iedb_search_epitopes(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search immune epitopes (IEDB Query API). Use this to discover epitope `structure_id` values, then...
+    Search references/citations (IEDB Query API). Use this to discover `reference_id` values, PubMed ...
 
     Parameters
     ----------
-    sequence_contains : str
-        Sequence fragment to search within `linear_sequence` using a contains match. ...
-    structure_type : str
-        Filter by epitope structure type. Example: 'Linear peptide'.
     limit : int
         Maximum number of rows to return.
     offset : int
         Pagination offset.
     order : str
-        Optional PostgREST order clause (e.g., 'structure_id.asc').
+        Optional PostgREST order clause.
     select : str
-        Optional projection list to reduce payload size. Provide a comma-separated st...
+        Optional projection list (comma-separated string or array of field names).
     filters : dict[str, Any]
-        Advanced PostgREST filters mapping column -> filter expression (e.g., {"linea...
+        Advanced PostgREST filters mapping column -> filter expression.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -55,10 +49,8 @@ def iedb_search_epitopes(
 
     return get_shared_client().run_one_function(
         {
-            "name": "iedb_search_epitopes",
+            "name": "iedb_search_references",
             "arguments": {
-                "sequence_contains": sequence_contains,
-                "structure_type": structure_type,
                 "limit": limit,
                 "offset": offset,
                 "order": order,
@@ -72,4 +64,4 @@ def iedb_search_epitopes(
     )
 
 
-__all__ = ["iedb_search_epitopes"]
+__all__ = ["iedb_search_references"]

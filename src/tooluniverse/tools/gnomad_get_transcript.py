@@ -1,15 +1,15 @@
 """
-gnomad_get_gene_constraints
+gnomad_get_transcript
 
-Get gene constraint metrics from gnomAD for a gene symbol (GRCh38). Returns constraint fields und...
+Get basic transcript metadata from gnomAD by Ensembl transcript ID (e.g., ENST...). The response ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def gnomad_get_gene_constraints(
-    gene_symbol: str,
+def gnomad_get_transcript(
+    transcript_id: str,
     reference_genome: Optional[str] = "GRCh38",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -17,12 +17,12 @@ def gnomad_get_gene_constraints(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get gene constraint metrics from gnomAD for a gene symbol (GRCh38). Returns constraint fields und...
+    Get basic transcript metadata from gnomAD by Ensembl transcript ID (e.g., ENST...). The response ...
 
     Parameters
     ----------
-    gene_symbol : str
-        Gene symbol (e.g., 'BRCA1', 'TP53')
+    transcript_id : str
+        Ensembl transcript ID (e.g., 'ENST00000357654').
     reference_genome : str
         Reference genome.
     stream_callback : Callable, optional
@@ -40,9 +40,9 @@ def gnomad_get_gene_constraints(
 
     return get_shared_client().run_one_function(
         {
-            "name": "gnomad_get_gene_constraints",
+            "name": "gnomad_get_transcript",
             "arguments": {
-                "gene_symbol": gene_symbol,
+                "transcript_id": transcript_id,
                 "reference_genome": reference_genome,
             },
         },
@@ -52,4 +52,4 @@ def gnomad_get_gene_constraints(
     )
 
 
-__all__ = ["gnomad_get_gene_constraints"]
+__all__ = ["gnomad_get_transcript"]
