@@ -1,15 +1,15 @@
 """
-JASPAR_get_transcription_factors
+jaspar_get_matrix_versions
 
-List transcription factor binding site matrices (PFMs/PWMs metadata) from JASPAR. Use this to bro...
+List all versions available for a JASPAR matrix base ID (e.g., base_id MA0002). This is useful fo...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def JASPAR_get_transcription_factors(
-    collection: Optional[str] = "CORE",
+def jaspar_get_matrix_versions(
+    base_id: str,
     page: Optional[int] = 1,
     page_size: Optional[int] = 20,
     *,
@@ -18,16 +18,16 @@ def JASPAR_get_transcription_factors(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    List transcription factor binding site matrices (PFMs/PWMs metadata) from JASPAR. Use this to bro...
+    List all versions available for a JASPAR matrix base ID (e.g., base_id MA0002). This is useful fo...
 
     Parameters
     ----------
-    collection : str
-        JASPAR collection (e.g., CORE).
+    base_id : str
+        JASPAR base matrix ID without version (e.g., 'MA0002'). You can get `base_id`...
     page : int
         Page number (1-based).
     page_size : int
-        Results per page (JASPAR `page_size`).
+        Results per page.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,12 +43,8 @@ def JASPAR_get_transcription_factors(
 
     return get_shared_client().run_one_function(
         {
-            "name": "JASPAR_get_transcription_factors",
-            "arguments": {
-                "collection": collection,
-                "page": page,
-                "page_size": page_size,
-            },
+            "name": "jaspar_get_matrix_versions",
+            "arguments": {"base_id": base_id, "page": page, "page_size": page_size},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -56,4 +52,4 @@ def JASPAR_get_transcription_factors(
     )
 
 
-__all__ = ["JASPAR_get_transcription_factors"]
+__all__ = ["jaspar_get_matrix_versions"]

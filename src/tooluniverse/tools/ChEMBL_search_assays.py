@@ -12,6 +12,7 @@ def ChEMBL_search_assays(
     assay_chembl_id: Optional[str] = None,
     assay_type: Optional[str] = None,
     target_chembl_id: Optional[str] = None,
+    fields: Optional[list[str]] = None,
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
     *,
@@ -30,6 +31,8 @@ def ChEMBL_search_assays(
         Filter by assay type (e.g., 'B', 'F', 'A')
     target_chembl_id : str
         Filter by target ChEMBL ID
+    fields : list[str]
+        Optional list of ChEMBL assay fields to include in each returned assay object...
     limit : int
 
     offset : int
@@ -54,6 +57,7 @@ def ChEMBL_search_assays(
                 "assay_chembl_id": assay_chembl_id,
                 "assay_type": assay_type,
                 "target_chembl_id": target_chembl_id,
+                "fields": fields,
                 "limit": limit,
                 "offset": offset,
             },

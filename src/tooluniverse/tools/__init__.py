@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 945 scientific tools.
+Type-safe Python interface to 953 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -222,6 +222,9 @@ from .FDA_get_dosage_forms_and_strengths_by_drug_name import (
 from .FDA_get_drug_generic_name import FDA_get_drug_generic_name
 from .FDA_get_drug_interactions_by_drug_name import (
     FDA_get_drug_interactions_by_drug_name,
+)
+from .FDA_get_drug_label_info_by_field_value import (
+    FDA_get_drug_label_info_by_field_value,
 )
 from .FDA_get_drug_name_by_SPL_ID import FDA_get_drug_name_by_SPL_ID
 from .FDA_get_drug_name_by_adverse_reaction import FDA_get_drug_name_by_adverse_reaction
@@ -1347,6 +1350,13 @@ from .intact_get_interactions_by_complex import intact_get_interactions_by_compl
 from .intact_get_interactions_by_organism import intact_get_interactions_by_organism
 from .intact_get_interactor import intact_get_interactor
 from .intact_search_interactions import intact_search_interactions
+from .jaspar_get_matrix import jaspar_get_matrix
+from .jaspar_get_matrix_versions import jaspar_get_matrix_versions
+from .jaspar_list_collections import jaspar_list_collections
+from .jaspar_list_releases import jaspar_list_releases
+from .jaspar_list_species import jaspar_list_species
+from .jaspar_list_taxa import jaspar_list_taxa
+from .jaspar_search_matrices import jaspar_search_matrices
 from .kegg_find_genes import kegg_find_genes
 from .kegg_get_gene_info import kegg_get_gene_info
 from .kegg_get_pathway_info import kegg_get_pathway_info
@@ -1554,6 +1564,7 @@ __all__ = [
     "FDA_get_dosage_forms_and_strengths_by_drug_name",
     "FDA_get_drug_generic_name",
     "FDA_get_drug_interactions_by_drug_name",
+    "FDA_get_drug_label_info_by_field_value",
     "FDA_get_drug_name_by_SPL_ID",
     "FDA_get_drug_name_by_adverse_reaction",
     "FDA_get_drug_name_by_dependence_info",
@@ -2302,6 +2313,13 @@ __all__ = [
     "intact_get_interactions_by_organism",
     "intact_get_interactor",
     "intact_search_interactions",
+    "jaspar_get_matrix",
+    "jaspar_get_matrix_versions",
+    "jaspar_list_collections",
+    "jaspar_list_releases",
+    "jaspar_list_species",
+    "jaspar_list_taxa",
+    "jaspar_search_matrices",
     "kegg_find_genes",
     "kegg_get_gene_info",
     "kegg_get_pathway_info",

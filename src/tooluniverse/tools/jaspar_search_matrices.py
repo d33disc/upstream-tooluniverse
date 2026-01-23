@@ -1,15 +1,19 @@
 """
-JASPAR_get_transcription_factors
+jaspar_search_matrices
 
-List transcription factor binding site matrices (PFMs/PWMs metadata) from JASPAR. Use this to bro...
+Search/filter JASPAR matrices using common query parameters. Typical filters include `search` (fr...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def JASPAR_get_transcription_factors(
-    collection: Optional[str] = "CORE",
+def jaspar_search_matrices(
+    search: Optional[str] = None,
+    name: Optional[str] = None,
+    collection: Optional[str] = None,
+    tax_group: Optional[str] = None,
+    species: Optional[str] = None,
     page: Optional[int] = 1,
     page_size: Optional[int] = 20,
     *,
@@ -18,16 +22,24 @@ def JASPAR_get_transcription_factors(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    List transcription factor binding site matrices (PFMs/PWMs metadata) from JASPAR. Use this to bro...
+    Search/filter JASPAR matrices using common query parameters. Typical filters include `search` (fr...
 
     Parameters
     ----------
+    search : str
+        Free-text search across matrices (e.g., 'CTCF').
+    name : str
+        Filter by TF name (e.g., 'CTCF').
     collection : str
-        JASPAR collection (e.g., CORE).
+        Filter by collection (e.g., 'CORE').
+    tax_group : str
+        Filter by taxonomic group (e.g., 'vertebrates').
+    species : str
+        Filter by NCBI taxonomy ID (e.g., '9606' for human).
     page : int
         Page number (1-based).
     page_size : int
-        Results per page (JASPAR `page_size`).
+        Results per page.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,9 +55,13 @@ def JASPAR_get_transcription_factors(
 
     return get_shared_client().run_one_function(
         {
-            "name": "JASPAR_get_transcription_factors",
+            "name": "jaspar_search_matrices",
             "arguments": {
+                "search": search,
+                "name": name,
                 "collection": collection,
+                "tax_group": tax_group,
+                "species": species,
                 "page": page,
                 "page_size": page_size,
             },
@@ -56,4 +72,4 @@ def JASPAR_get_transcription_factors(
     )
 
 
-__all__ = ["JASPAR_get_transcription_factors"]
+__all__ = ["jaspar_search_matrices"]

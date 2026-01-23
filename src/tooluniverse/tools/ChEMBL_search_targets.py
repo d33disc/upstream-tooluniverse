@@ -13,6 +13,7 @@ def ChEMBL_search_targets(
     pref_name__contains: Optional[str] = None,
     organism: Optional[str] = None,
     target_type: Optional[str] = None,
+    fields: Optional[list[str]] = None,
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
     *,
@@ -33,6 +34,8 @@ def ChEMBL_search_targets(
         Filter by organism (e.g., 'Homo sapiens')
     target_type : str
         Filter by target type (e.g., 'SINGLE PROTEIN', 'PROTEIN COMPLEX')
+    fields : list[str]
+        Optional list of ChEMBL target fields to include in each returned target obje...
     limit : int
 
     offset : int
@@ -58,6 +61,7 @@ def ChEMBL_search_targets(
                 "pref_name__contains": pref_name__contains,
                 "organism": organism,
                 "target_type": target_type,
+                "fields": fields,
                 "limit": limit,
                 "offset": offset,
             },

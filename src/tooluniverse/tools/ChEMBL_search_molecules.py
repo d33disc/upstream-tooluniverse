@@ -1,7 +1,7 @@
 """
 ChEMBL_search_molecules
 
-Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination.
+Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination. Note: ...
 """
 
 from typing import Any, Optional, Callable
@@ -12,6 +12,7 @@ def ChEMBL_search_molecules(
     molecule_chembl_id: Optional[str] = None,
     pref_name__contains: Optional[str] = None,
     molecule_type: Optional[str] = None,
+    fields: Optional[list[str]] = None,
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
     format: Optional[str] = "json",
@@ -21,16 +22,18 @@ def ChEMBL_search_molecules(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination.
+    Search molecules by name, ChEMBL ID, or other criteria. Supports filtering and pagination. Note: ...
 
     Parameters
     ----------
     molecule_chembl_id : str
         Filter by ChEMBL ID (exact match)
     pref_name__contains : str
-        Filter by preferred name (contains)
+        Filter by preferred name (contains). Note: `pref_name` coverage is incomplete...
     molecule_type : str
         Filter by molecule type (e.g., 'Small molecule', 'Antibody')
+    fields : list[str]
+        Optional list of ChEMBL molecule fields to include in each returned molecule ...
     limit : int
         Maximum number of results (default: 20, max: 1000)
     offset : int
@@ -57,6 +60,7 @@ def ChEMBL_search_molecules(
                 "molecule_chembl_id": molecule_chembl_id,
                 "pref_name__contains": pref_name__contains,
                 "molecule_type": molecule_type,
+                "fields": fields,
                 "limit": limit,
                 "offset": offset,
                 "format": format,

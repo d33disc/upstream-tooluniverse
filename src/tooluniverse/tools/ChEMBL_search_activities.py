@@ -15,6 +15,7 @@ def ChEMBL_search_activities(
     standard_type: Optional[str] = None,
     standard_value__lte: Optional[float] = None,
     standard_value__gte: Optional[float] = None,
+    fields: Optional[list[str]] = None,
     limit: Optional[int] = 20,
     offset: Optional[int] = 0,
     *,
@@ -39,6 +40,8 @@ def ChEMBL_search_activities(
         Filter by maximum activity value
     standard_value__gte : float
         Filter by minimum activity value
+    fields : list[str]
+        Optional list of ChEMBL activity fields to include in each returned activity ...
     limit : int
 
     offset : int
@@ -66,6 +69,7 @@ def ChEMBL_search_activities(
                 "standard_type": standard_type,
                 "standard_value__lte": standard_value__lte,
                 "standard_value__gte": standard_value__gte,
+                "fields": fields,
                 "limit": limit,
                 "offset": offset,
             },
