@@ -169,6 +169,33 @@ def search_openfda(
     search_keyword_option="AND",
     keywords_filter=True,
 ):
+    # Return-field fallback mapping:
+    # Some label sections are absent in many Rx labels (e.g., `do_not_use`), but
+    # the closest equivalent section exists (e.g., `contraindications`). When a
+    # tool requests a sparse section and the query yields NOT_FOUND due to
+    # `_exists_` filtering, we can retry using the fallback section and map the
+    # content back into the originally requested key in the final output.
+    #
+    # Extend this mapping as needed. Keys are the primary requested field; values
+    # are ordered fallback fields to try.
+    RETURN_FIELD_FALLBACKS = {
+        "do_not_use": ["contraindications"],
+        # OTC-style sections that are frequently absent; for Rx labels, the
+        # closest equivalents are typically warnings/precautions or contraindications.
+        "ask_doctor": ["warnings_and_precautions", "warnings"],
+        "ask_doctor_or_pharmacist": [
+            "warnings_and_precautions",
+            "drug_interactions",
+            "warnings",
+        ],
+        "stop_use": ["warnings_and_precautions", "warnings"],
+        "when_using": ["warnings_and_precautions", "warnings"],
+        "warnings_and_cautions": ["warnings_and_precautions", "warnings"],
+        # Ingredient fields are frequently missing for Rx injectables; fall back
+        # to product elements/description so we return best-effort info.
+        "inactive_ingredient": ["spl_product_data_elements", "description"],
+        "active_ingredient": ["spl_product_data_elements", "description"],
+    }
     # Initialize params if not provided
     if params is None:
         params = {}
@@ -228,6 +255,61 @@ def search_openfda(
     if search_query:
         params["search"] = "+".join(search_query)
         params["search"] = "(" + params["search"] + ")"
+
+    def _normalize_indication_terms(text: str) -> list[str]:
+        """Normalize indication text into tokens for term-based search fallback."""
+        if not isinstance(text, str):
+            return []
+        t = text.strip().lower()
+        if not t:
+            return []
+        # Basic normalization
+        for ch in ["-", "/", ",", ";", "(", ")", "[", "]", "{", "}", "®", "™"]:
+            t = t.replace(ch, " ")
+        t = " ".join(t.split())
+
+        # Tokenize
+        tokens = [x for x in t.split(" ") if x]
+
+        # Drop common stopwords (keep medical abbreviations)
+        stop = {
+            "in",
+            "with",
+            "for",
+            "of",
+            "and",
+            "or",
+            "to",
+            "the",
+            "a",
+            "an",
+            "on",
+            "at",
+            "by",
+            "from",
+            "patients",
+            "patient",
+            "adult",
+            "adults",
+        }
+        tokens = [x for x in tokens if x not in stop]
+
+        # Expand common abbreviations
+        expanded: list[str] = []
+        for tok in tokens:
+            expanded.append(tok)
+            if tok == "mds":
+                expanded.extend(["myelodysplastic", "myelodysplastic", "syndrome"])
+        # De-dupe while preserving order
+        seen = set()
+        out = []
+        for x in expanded:
+            if x in seen:
+                continue
+            seen.add(x)
+            out.append(x)
+        return out
+
     # Validate the presence of at least one of search, count, or sort
     if not (
         params.get("search")
@@ -333,180 +415,335 @@ def search_openfda(
         response = requests.get(f"{endpoint_url}?{query}")
         response_data = response.json()
 
-    # If the strict openfda.* name query yields NOT_FOUND, fall back to a broad
-    # text search. This handles label records that have an empty `openfda` block
-    # (e.g., OCALIVA) but still contain the drug name in free-text fields like
-    # spl_product_data_elements / indications_and_usage.
+    # ===== Generic NOT_FOUND fallback engine (applies to all FDADrugLabel tools) =====
+    requested_return_fields = return_fields
+    applied_return_field_mapping = {}  # primary_field -> fallback_field
+    fallback_terms: list[str] = []
+    used_generic_fallback = False
+
+    def _all_search_fields_from_orig() -> list[str]:
+        out = []
+        for k in (orig_search_fields or {}).keys():
+            if isinstance(k, tuple):
+                out.extend(list(k))
+            else:
+                out.append(k)
+        return out
+
+    def _first_query_text() -> str:
+        for v in (orig_search_fields or {}).values():
+            if isinstance(v, str) and v.strip():
+                return v.strip()
+        return ""
+
+    def _normalize_terms(text: str) -> list[str]:
+        if not isinstance(text, str):
+            return []
+        t = text.strip().lower()
+        if not t:
+            return []
+        for ch in ["-", "/", ",", ";", "(", ")", "[", "]", "{", "}", "®", "™"]:
+            t = t.replace(ch, " ")
+        t = " ".join(t.split())
+        toks = [x for x in t.split(" ") if x]
+        # Drop very low-signal tokens (numbers / single letters)
+        toks = [x for x in toks if not x.isdigit() and len(x) > 1]
+        stop = {
+            "in",
+            "with",
+            "for",
+            "of",
+            "and",
+            "or",
+            "to",
+            "the",
+            "a",
+            "an",
+            "on",
+            "at",
+            "by",
+            "from",
+            "patients",
+            "patient",
+            "adult",
+            "adults",
+        }
+        toks = [x for x in toks if x not in stop]
+        expanded = []
+        for tok in toks:
+            expanded.append(tok)
+        seen = set()
+        out = []
+        for x in expanded:
+            if x in seen:
+                continue
+            seen.add(x)
+            out.append(x)
+        return out
+
+    def _filter_exists(ex: object, allowed_fields: set[str]) -> list[str] | None:
+        if ex is None:
+            return None
+        ex_list = ex if isinstance(ex, list) else [ex]
+        cleaned = []
+        for e in ex_list:
+            if not isinstance(e, str):
+                continue
+            if e.startswith("openfda.") and e not in allowed_fields:
+                # don't force openfda existence when we are not querying openfda
+                continue
+            cleaned.append(e)
+        return cleaned
+
+    def _run_search(search: str, limit_override: int | None = None) -> dict | None:
+        p = {k: v for k, v in params.items() if k != "search"}
+        p["search"] = search
+        if limit_override is not None:
+            p["limit"] = limit_override
+        q = "&".join(
+            [
+                f"{key}={urllib.parse.quote(str(value), safe='+')}"
+                for key, value in p.items()
+                if value is not None
+            ]
+        )
+        url = f"{endpoint_url}?{q}"
+        if _is_valid_api_key(api_key):
+            url += f"&api_key={api_key}"
+        resp = requests.get(url)
+        try:
+            return resp.json()
+        except Exception:
+            return {"error": {"code": "BAD_JSON", "message": "Non-JSON response"}}
+
+    # Only run fallbacks on NOT_FOUND
     if (
         isinstance(response_data, dict)
         and isinstance(response_data.get("error"), dict)
         and response_data["error"].get("code") == "NOT_FOUND"
         and orig_search_fields
     ):
-        # Only attempt this fallback for tools that search by openfda brand/generic.
-        has_openfda_name_field = any(
-            (
-                isinstance(k, tuple)
-                and any(
-                    sf in {"openfda.brand_name", "openfda.generic_name"} for sf in k
-                )
-            )
-            or (k in {"openfda.brand_name", "openfda.generic_name"})
-            for k in orig_search_fields.keys()
+        orig_fields_flat = set(_all_search_fields_from_orig())
+        qtext = _first_query_text()
+        fallback_terms = _normalize_terms(qtext)
+        is_name_based = bool(
+            {"openfda.brand_name", "openfda.generic_name"} & orig_fields_flat
         )
-        if has_openfda_name_field:
-            # Extract a representative search term from the original search fields.
-            fallback_term = None
-            for v in orig_search_fields.values():
-                if isinstance(v, str) and v.strip():
-                    fallback_term = v.strip()
+
+        # Return-field fallback mapping (generic):
+        # If NOT_FOUND is likely caused by `_exists_:{primary}` for a requested
+        # field, retry using `_exists_:{fallback}` and later map extracted content
+        # back into `{primary}`.
+        if isinstance(requested_return_fields, list) and isinstance(
+            params.get("search"), str
+        ):
+            search_str = params["search"]
+            for primary, fallbacks in RETURN_FIELD_FALLBACKS.items():
+                if primary not in requested_return_fields:
+                    continue
+                if f"_exists_:{primary}" not in search_str:
+                    continue
+                for fb in fallbacks:
+                    swapped = search_str.replace(
+                        f"_exists_:{primary}", f"_exists_:{fb}"
+                    )
+                    tmp = _run_search(swapped)
+                    if isinstance(tmp, dict) and "error" not in tmp:
+                        response_data = tmp
+                        requested_return_fields = [fb]
+                        applied_return_field_mapping[primary] = fb
+                        used_generic_fallback = True
+                        break
+                if used_generic_fallback:
                     break
-            if fallback_term:
-                # Avoid overly-broad fallbacks like `search=(Obeticholic acid)`
-                # which can match huge numbers of unrelated labels.
-                # Instead, target fields that commonly include names even when
-                # `openfda` is empty (e.g., spl_product_data_elements).
-                term = " ".join(fallback_term.replace('"', " ").split())
-                term_upper = term.upper()
-                is_single_token = (" " not in term) and (len(term) >= 5)
-                candidates = {term, term_upper}
-                if is_single_token:
-                    # Data-driven fallback: find close brand-name matches from the
-                    # bundled FDA brand/generic name list (more general than
-                    # hand-written string mutation rules).
-                    try:
-                        import difflib
-                        from tooluniverse.data.fda_drugs_with_brand_generic_names_for_tool import (
-                            drug_list,
-                        )
 
-                        # Reduce search space: same first letter and similar length.
-                        t_upper = term_upper
-                        t0 = t_upper[:1]
-                        filtered = []
-                        upper_to_original = {}
-                        for item in drug_list:
-                            b = item.get("brand_name")
-                            if not isinstance(b, str) or not b:
-                                continue
-                            bu = b.upper()
-                            if bu[:1] != t0:
-                                continue
-                            if abs(len(bu) - len(t_upper)) > 2:
-                                continue
-                            filtered.append(bu)
-                            # keep first seen original for display/search
-                            upper_to_original.setdefault(bu, b)
-
-                        for m in difflib.get_close_matches(
-                            t_upper, filtered, n=5, cutoff=0.8
-                        ):
-                            orig = upper_to_original.get(m, m)
-                            candidates.add(orig)
-                            candidates.add(m)
-                    except Exception:
-                        # If the local lookup list isn't available for some
-                        # reason, just proceed with the original term.
-                        pass
-
-                fallback_field_queries = []
-                for t in candidates:
-                    if not t:
-                        continue
-                    fallback_field_queries.append(f'spl_product_data_elements:"{t}"')
-                    fallback_field_queries.append(f'indications_and_usage:"{t}"')
-                fallback_search = "(" + "+OR+".join(fallback_field_queries) + ")"
-
-                if exists is not None:
-                    fallback_search += (
-                        "+AND+("
-                        + "+OR+".join([f"_exists_:{keyword}" for keyword in exists])
-                        + ")"
-                    )
-                fallback_params = {k: v for k, v in params.items() if k != "search"}
-                fallback_params["search"] = fallback_search
-                fallback_query = "&".join(
-                    [
-                        f"{key}={urllib.parse.quote(str(value), safe='+')}"
-                        for key, value in fallback_params.items()
-                        if value is not None
-                    ]
+        # Stage A: phrase -> terms within the same search field(s)
+        if (
+            not used_generic_fallback
+            and fallback_terms
+            and isinstance(response_data, dict)
+            and response_data.get("error", {}).get("code") == "NOT_FOUND"
+        ):
+            # Use explicit boolean AND between terms to avoid very broad matches.
+            term_expr = "+AND+".join(fallback_terms)
+            per_field = []
+            for f in orig_fields_flat:
+                per_field.append(f"{f}:({term_expr})")
+            search_a = "(" + "+OR+".join(per_field) + ")"
+            # Respect exists only for fields we are actually using in this stage.
+            ex_a = _filter_exists(exists, set(orig_fields_flat))
+            if ex_a:
+                search_a += (
+                    "+AND+(" + "+OR+".join([f"_exists_:{e}" for e in ex_a]) + ")"
                 )
-                fallback_url = f"{endpoint_url}?{fallback_query}"
-                if _is_valid_api_key(api_key):
-                    fallback_url += f"&api_key={api_key}"
-                response = requests.get(fallback_url)
-                response_data = response.json()
+            tmp = _run_search(
+                search_a, limit_override=max(int(params.get("limit") or 0), 25)
+            )
+            if isinstance(tmp, dict) and "error" not in tmp:
+                response_data = tmp
+                used_generic_fallback = True
 
-                # Last resort: for single-token names (e.g., "Gliolan"), a broad
-                # search is less likely to explode. Only use this when the
-                # targeted-field fallback still yields NOT_FOUND.
-                if (
-                    is_single_token
-                    and isinstance(response_data, dict)
-                    and isinstance(response_data.get("error"), dict)
-                    and response_data["error"].get("code") == "NOT_FOUND"
-                ):
-                    broad_search = f"({term})"
-                    if exists is not None:
-                        broad_search += (
-                            "+AND+("
-                            + "+OR+".join([f"_exists_:{keyword}" for keyword in exists])
-                            + ")"
-                        )
-                    broad_params = {k: v for k, v in params.items() if k != "search"}
-                    broad_params["search"] = broad_search
-                    broad_query = "&".join(
-                        [
-                            f"{key}={urllib.parse.quote(str(value), safe='+')}"
-                            for key, value in broad_params.items()
-                            if value is not None
-                        ]
+        # Stage B: expand to label-text fields (robust when openfda is empty or name mismatched)
+        if (
+            fallback_terms
+            and isinstance(response_data, dict)
+            and response_data.get("error", {}).get("code") == "NOT_FOUND"
+        ):
+            term_expr = "+AND+".join(fallback_terms)
+            if is_name_based:
+                fields_b = [
+                    "spl_product_data_elements",
+                    "indications_and_usage",
+                    "description",
+                ]
+            else:
+                # Generic expansion for non-name tools
+                fields_b = list(orig_fields_flat) + ["clinical_studies"]
+            per_field = [f"{f}:({term_expr})" for f in fields_b]
+            search_b = "(" + "+OR+".join(per_field) + ")"
+            ex_b = _filter_exists(exists, set(fields_b))
+            if ex_b:
+                search_b += (
+                    "+AND+(" + "+OR+".join([f"_exists_:{e}" for e in ex_b]) + ")"
+                )
+            tmp = _run_search(
+                search_b, limit_override=max(int(params.get("limit") or 0), 25)
+            )
+            if isinstance(tmp, dict) and "error" not in tmp:
+                response_data = tmp
+                used_generic_fallback = True
+
+        # Stage C: data-driven closest-name candidates (name-based only, single token)
+        if (
+            is_name_based
+            and isinstance(response_data, dict)
+            and response_data.get("error", {}).get("code") == "NOT_FOUND"
+        ):
+            term = qtext.strip().replace('"', " ")
+            term = " ".join(term.split())
+            if term and (" " not in term):
+                try:
+                    import difflib
+                    from tooluniverse.data.fda_drugs_with_brand_generic_names_for_tool import (
+                        drug_list,
                     )
-                    broad_url = f"{endpoint_url}?{broad_query}"
-                    if _is_valid_api_key(api_key):
-                        broad_url += f"&api_key={api_key}"
-                    response = requests.get(broad_url)
-                    response_data = response.json()
 
-    # Special-case fallback: some Rx labels do not have an OTC-style `do_not_use`
-    # section, but do have `contraindications`. If a do_not_use tool returns
-    # NOT_FOUND due to existence filtering, retry with contraindications and map
-    # it into the do_not_use output key later.
-    requested_return_fields = return_fields
-    do_not_use_fallback_used = False
-    if (
-        isinstance(response_data, dict)
-        and isinstance(response_data.get("error"), dict)
-        and response_data["error"].get("code") == "NOT_FOUND"
-        and isinstance(requested_return_fields, list)
-        and "do_not_use" in requested_return_fields
-        and isinstance(params.get("search"), str)
-        and "_exists_:do_not_use" in params["search"]
-    ):
-        fallback_search = params["search"].replace(
-            "_exists_:do_not_use",
-            "_exists_:contraindications",
-        )
-        fallback_params = {k: v for k, v in params.items()}
-        fallback_params["search"] = fallback_search
-        fallback_query = "&".join(
-            [
-                f"{key}={urllib.parse.quote(str(value), safe='+')}"
-                for key, value in fallback_params.items()
-                if value is not None
-            ]
-        )
-        fallback_url = f"{endpoint_url}?{fallback_query}"
-        if _is_valid_api_key(api_key):
-            fallback_url += f"&api_key={api_key}"
-        response = requests.get(fallback_url)
-        response_data = response.json()
-        if not (isinstance(response_data, dict) and "error" in response_data):
-            requested_return_fields = ["contraindications"]
-            do_not_use_fallback_used = True
+                    def _edit_distance_leq2(a: str, b: str) -> bool:
+                        """Fast check for edit distance <= 2 (length-sensitive)."""
+                        if a == b:
+                            return True
+                        la, lb = len(a), len(b)
+                        if abs(la - lb) > 2:
+                            return False
+                        # Simple DP with early exit; strings are short.
+                        prev = list(range(lb + 1))
+                        for i, ca in enumerate(a, start=1):
+                            cur = [i] + [0] * lb
+                            row_min = cur[0]
+                            for j, cb in enumerate(b, start=1):
+                                cost = 0 if ca == cb else 1
+                                cur[j] = min(
+                                    prev[j] + 1,  # deletion
+                                    cur[j - 1] + 1,  # insertion
+                                    prev[j - 1] + cost,  # substitution
+                                )
+                                if cur[j] < row_min:
+                                    row_min = cur[j]
+                            if row_min > 2:
+                                return False
+                            prev = cur
+                        return prev[lb] <= 2
+
+                    t_upper = term.upper()
+                    t0 = t_upper[:1]
+                    filtered = []
+                    candidate_set = set()
+                    for item in drug_list:
+                        b = item.get("brand_name")
+                        g = item.get("generic_name")
+                        for cand in [b, g]:
+                            if not isinstance(cand, str) or not cand:
+                                continue
+                            cu = cand.upper()
+                            if cu[:1] != t0:
+                                continue
+                            if abs(len(cu) - len(t_upper)) > 2:
+                                continue
+                            candidate_set.add(cu)
+                    filtered = list(candidate_set)
+                    # Keep cutoff moderate; we use edit-distance <=2 as the
+                    # strong guard against wrong-drug matches.
+                    matches = difflib.get_close_matches(
+                        t_upper, filtered, n=5, cutoff=0.8
+                    )
+                    if matches:
+                        # Guard against wrong-drug matches: only accept very close
+                        # candidates by edit distance (<=2).
+                        near = [
+                            m for m in set(matches) if _edit_distance_leq2(t_upper, m)
+                        ]
+                        if not near:
+                            raise RuntimeError(
+                                "No close-enough match after edit-distance filter"
+                            )
+                        per_field = [f'spl_product_data_elements:"{m}"' for m in near]
+                        search_c = "(" + "+OR+".join(per_field) + ")"
+                        tmp = _run_search(
+                            search_c,
+                            limit_override=max(int(params.get("limit") or 0), 25),
+                        )
+                        if isinstance(tmp, dict) and "error" not in tmp:
+                            response_data = tmp
+                            used_generic_fallback = True
+                except Exception:
+                    pass
 
     if isinstance(response_data, dict) and "error" in response_data:
+        # When no results are found, return a helpful suggestion instead of None.
+        err = response_data.get("error") if isinstance(response_data, dict) else None
+        code = err.get("code") if isinstance(err, dict) else None
+        if code == "NOT_FOUND":
+            orig_fields_flat = set(_all_search_fields_from_orig())
+            query_text = _first_query_text()
+            is_abbrev_like = (
+                isinstance(query_text, str)
+                and len(query_text.strip()) <= 6
+                and any(ch.isdigit() for ch in query_text)
+            )
+            name_based = bool(
+                {"openfda.brand_name", "openfda.generic_name"} & orig_fields_flat
+            )
+            section = None
+            if isinstance(requested_return_fields, list) and requested_return_fields:
+                section = requested_return_fields[0]
+
+            suggestion_parts = []
+            if is_abbrev_like:
+                suggestion_parts.append(
+                    "Try using the full generic/brand name instead of an abbreviation."
+                )
+            if name_based:
+                suggestion_parts.append(
+                    "Try removing punctuation/hyphens, checking spelling, or using a longer drug name."
+                )
+            if section:
+                suggestion_parts.append(
+                    f"This label section ('{section}') may be missing for that product; try a related section like 'contraindications' or 'warnings_and_precautions'."
+                )
+            suggestion_parts.append(
+                "As a fallback, try searching label text fields (e.g., spl_product_data_elements) and then pivot to the desired section."
+            )
+            suggestion = " ".join(suggestion_parts)
+            return {
+                "error": err,
+                "suggestion": suggestion,
+                "meta": {
+                    "skip": params.get("skip", 0) or 0,
+                    "limit": params.get("limit", 0) or 0,
+                    "total": 0,
+                },
+                "results": [],
+            }
         return None
 
     # Extract meta information
@@ -529,12 +766,75 @@ def search_openfda(
         else:
             flat_keys.append(k)
     required_fields = flat_keys + requested_return_fields
+    # If the tool expects openfda names, include stable IDs in case openfda is empty.
+    if isinstance(requested_return_fields, list) and any(
+        x in {"openfda.brand_name", "openfda.generic_name"}
+        for x in requested_return_fields
+    ):
+        required_fields.extend(["set_id", "id"])
     extracted_results = extract_nested_fields(results, required_fields, keywords_list)
 
-    if do_not_use_fallback_used:
+    # Apply return-field mapping after extraction (generic)
+    if applied_return_field_mapping:
         for r in extracted_results:
-            # Map contraindications payload into do_not_use key
-            r["do_not_use"] = r.pop("contraindications", None)
+            for primary, fb in applied_return_field_mapping.items():
+                r[primary] = r.pop(fb, None)
+
+    # General dedupe + rank (helps any fallback avoid garbage top-N).
+    if extracted_results and fallback_terms:
+
+        def _first_str(v):
+            if isinstance(v, list) and v:
+                return v[0]
+            return v if isinstance(v, str) else None
+
+        def _score(r):
+            score = 0
+            # Prefer having openfda names when present
+            if _first_str(r.get("openfda.brand_name")):
+                score += 6
+            if _first_str(r.get("openfda.generic_name")):
+                score += 4
+            # Prefer term coverage in high-signal fields
+            txt = (
+                _first_str(r.get("spl_product_data_elements"))
+                or _first_str(r.get("indications_and_usage"))
+                or ""
+            )
+            txt_l = txt.lower()
+            hit = 0
+            for t in fallback_terms[:12]:
+                if t and t in txt_l:
+                    hit += 1
+            score += hit
+            if hit == min(len(fallback_terms), 6):
+                score += 3
+            return score
+
+        dedup = {}
+        for r in extracted_results:
+            key = (
+                _first_str(r.get("set_id"))
+                or _first_str(r.get("id"))
+                or (
+                    (_first_str(r.get("openfda.brand_name")) or "")
+                    + "|"
+                    + (_first_str(r.get("openfda.generic_name")) or "")
+                )
+            )
+            s = _score(r)
+            prev = dedup.get(key)
+            if prev is None or s > prev[0]:
+                dedup[key] = (s, r)
+        ranked = sorted(dedup.values(), key=lambda x: x[0], reverse=True)
+        extracted_results = [r for _, r in ranked]
+        try:
+            user_limit_final = int(params.get("limit") or 0)
+        except Exception:
+            user_limit_final = 0
+        if user_limit_final:
+            extracted_results = extracted_results[:user_limit_final]
+
     return {"meta": meta_info, "results": extracted_results}
 
 
