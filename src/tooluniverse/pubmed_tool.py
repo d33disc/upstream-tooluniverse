@@ -1,173 +1,136 @@
 import requests
+from typing import Any, Dict, Optional
 from .base_tool import BaseTool
+from .base_rest_tool import BaseRESTTool
+from .http_utils import request_with_retry
 from .tool_registry import register_tool
 
 
-@register_tool("PubMedTool")
-class PubMedTool(BaseTool):
-    """
-    Search PubMed using NCBI E-utilities (esearch + esummary) and return
-    articles.
-    """
+@register_tool("PubMedRESTTool")
+class PubMedRESTTool(BaseRESTTool):
+    """Generic REST tool for PubMed E-utilities (efetch, elink)."""
 
-    def __init__(self, tool_config):
-        super().__init__(tool_config)
-        self.esearch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-        self.esummary_url = (
-            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
-        )
-
-    def run(self, arguments):
-        query = arguments.get("query")
-        limit = int(arguments.get("limit", 10))
-        api_key = arguments.get("api_key")  # optional NCBI API key
-        if not query:
-            return {"error": "`query` parameter is required."}
-        return self._search(query, limit, api_key)
-
-    def _search(self, query, limit, api_key=None):
-        params = {
-            "db": "pubmed",
-            "term": query,
-            "retmax": max(1, min(limit, 200)),
-            "retmode": "json",
+    def _get_param_mapping(self) -> Dict[str, str]:
+        """Map PubMed E-utilities parameter names."""
+        return {
+            "limit": "retmax",  # limit -> retmax for E-utilities
         }
-        if api_key:
-            params["api_key"] = api_key
 
+    def _build_params(self, args: Dict[str, Any]) -> Dict[str, Any]:
+        """Build E-utilities parameters with special handling."""
+        params = {}
+
+        # Start with default params from config (db, dbfrom, cmd, linkname, retmode, rettype)
+        for key in ["db", "dbfrom", "cmd", "linkname", "retmode", "rettype"]:
+            if key in self.tool_config["fields"]:
+                params[key] = self.tool_config["fields"][key]
+
+        # Handle PMID as 'id' parameter (for efetch, elink)
+        if "pmid" in args:
+            params["id"] = args["pmid"]
+
+        # Handle query as 'term' parameter (for esearch)
+        if "query" in args:
+            params["term"] = args["query"]
+
+        # Add API key if provided
+        if "api_key" in args and args["api_key"]:
+            params["api_key"] = args["api_key"]
+
+        # Handle limit
+        if "limit" in args and args["limit"]:
+            params["retmax"] = args["limit"]
+
+        # Set retmode to json for elink and esearch (easier parsing)
+        endpoint = self.tool_config["fields"]["endpoint"]
+        if "retmode" not in params and ("elink" in endpoint or "esearch" in endpoint):
+            params["retmode"] = "json"
+
+        return params
+
+    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        PubMed E-utilities need special handling for direct endpoint URLs.
+        """
+        url = None
         try:
-            r = requests.get(self.esearch_url, params=params, timeout=20)
-        except requests.RequestException as e:
-            return {
-                "error": "Network error calling PubMed esearch",
-                "reason": str(e),
-            }
-        if r.status_code != 200:
-            return {
-                "error": f"PubMed esearch error {r.status_code}",
-                "reason": r.reason,
-            }
+            endpoint = self.tool_config["fields"]["endpoint"]
+            params = self._build_params(arguments)
 
-        data = r.json()
-        id_list = data.get("esearchresult", {}).get("idlist", [])
-        if not id_list:
-            return []
-
-        summary_params = {
-            "db": "pubmed",
-            "id": ",".join(id_list),
-            "retmode": "json",
-        }
-        if api_key:
-            summary_params["api_key"] = api_key
-
-        try:
-            s = requests.get(
-                self.esummary_url,
-                params=summary_params,
-                timeout=20,
+            response = request_with_retry(
+                self.session,
+                "GET",
+                endpoint,
+                params=params,
+                timeout=self.timeout,
+                max_attempts=3,
             )
-        except requests.RequestException as e:
-            return {
-                "error": "Network error calling PubMed esummary",
-                "reason": str(e),
-            }
-        if s.status_code != 200:
-            return {
-                "error": f"PubMed esummary error {s.status_code}",
-                "reason": s.reason,
-            }
 
-        result = s.json().get("result", {})
-        uids = result.get("uids", [])
-        articles = []
-        for uid in uids:
-            rec = result.get(uid, {})
-            title = rec.get("title")
-            journal = rec.get("fulljournalname") or rec.get("source")
-
-            # Extract author information
-            authors = []
-            author_list = rec.get("authors", [])
-            if isinstance(author_list, list):
-                for author in author_list:
-                    if isinstance(author, dict):
-                        name = author.get("name", "")
-                        if name:
-                            authors.append(name)
-
-            # Extract year
-            year = None
-            pubdate = rec.get("pubdate")
-            if pubdate and len(pubdate) >= 4 and pubdate[:4].isdigit():
-                year = int(pubdate[:4])
-
-            # Extract DOI
-            doi = None
-            for id_obj in rec.get("articleids", []):
-                if id_obj.get("idtype") == "doi":
-                    doi = id_obj.get("value")
-                    break
-
-            # Extract citation count (PubMed doesn't provide this directly)
-            citations = 0
-            # PubMed API itself doesn't provide citation count, keeping it as 0
-
-            # Extract open access status
-            open_access = False
-            # PubMed API itself doesn't directly provide open access status
-
-            # Extract keywords
-            keywords = []
-            mesh_terms = rec.get("meshterms", [])
-            if isinstance(mesh_terms, list):
-                for term in mesh_terms:
-                    if isinstance(term, dict):
-                        keyword = term.get("term", "")
-                        if keyword:
-                            keywords.append(keyword)
-
-            # Extract article type
-            article_type = rec.get("pubtype", [])
-            if isinstance(article_type, list) and article_type:
-                article_type = (
-                    article_type[0]
-                    if isinstance(article_type[0], str)
-                    else str(article_type[0])
-                )
-            else:
-                article_type = "Unknown"
-
-            # Build URL
-            url = f"https://pubmed.ncbi.nlm.nih.gov/{uid}/"
-
-            articles.append(
-                {
-                    "title": title or "Title not available",
-                    "abstract": "Abstract not available",  # PubMed API itself doesn't provide abstracts
-                    "authors": (
-                        authors if authors else "Author information not available"
-                    ),
-                    "journal": journal or "Journal information not available",
-                    "year": year,
-                    "doi": doi or "DOI not available",
-                    "url": url,
-                    "citations": citations,
-                    "open_access": open_access,
-                    "keywords": keywords if keywords else "Keywords not available",
-                    "article_type": article_type,
-                    "source": "PubMed",
-                    "data_quality": {
-                        "has_abstract": False,  # PubMed API itself doesn't provide abstracts
-                        "has_authors": bool(authors),
-                        "has_journal": bool(journal),
-                        "has_year": bool(year),
-                        "has_doi": bool(doi),
-                        "has_citations": False,  # PubMed API itself doesn't provide citation count
-                        "has_keywords": bool(keywords),
-                        "has_url": bool(url),
-                    },
+            if response.status_code != 200:
+                return {
+                    "status": "error",
+                    "error": "PubMed API error",
+                    "url": response.url,
+                    "status_code": response.status_code,
+                    "detail": (response.text or "")[:500],
                 }
-            )
 
-        return articles
+            # Try JSON first (elink, esearch)
+            try:
+                data = response.json()
+
+                # For esearch responses, extract ID list
+                if "esearchresult" in data:
+                    esearch_result = data.get("esearchresult", {})
+                    id_list = esearch_result.get("idlist", [])
+                    return {
+                        "status": "success",
+                        "data": id_list,
+                        "count": len(id_list),
+                        "total_count": int(esearch_result.get("count", 0)),
+                        "url": response.url,
+                    }
+
+                # For elink responses, extract linksets
+                if "linksets" in data:
+                    linksets = data.get("linksets", [])
+                    if linksets and len(linksets) > 0:
+                        linkset = linksets[0]
+                        # Extract linked IDs
+                        if "linksetdbs" in linkset:
+                            linksetdbs = linkset.get("linksetdbs", [])
+                            if linksetdbs and len(linksetdbs) > 0:
+                                links = linksetdbs[0].get("links", [])
+                                return {
+                                    "status": "success",
+                                    "data": links,
+                                    "count": len(links),
+                                    "url": response.url,
+                                }
+                        # Extract LinkOut URLs
+                        elif "idurllist" in linkset:
+                            return {
+                                "status": "success",
+                                "data": linkset.get("idurllist", {}),
+                                "url": response.url,
+                            }
+
+                return {
+                    "status": "success",
+                    "data": data,
+                    "url": response.url,
+                }
+            except Exception:
+                # For XML responses (efetch), return as text
+                return {
+                    "status": "success",
+                    "data": response.text,
+                    "url": response.url,
+                }
+
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"PubMed API error: {str(e)}",
+                "url": url,
+            }

@@ -1,6 +1,7 @@
 import requests
 from .base_tool import BaseTool
 from .tool_registry import register_tool
+from .http_utils import request_with_retry
 
 
 @register_tool("EuropePMCTool")
@@ -103,7 +104,12 @@ class EuropePMCTool(BaseTool):
                     citations = 0
 
             # Extract open access status
-            open_access = rec.get("isOpenAccess", False)
+            open_access_raw = rec.get("isOpenAccess", False)
+            # Normalize to boolean (API can return 'Y'/'N' or True/False)
+            if isinstance(open_access_raw, str):
+                open_access = open_access_raw.upper() == "Y"
+            else:
+                open_access = bool(open_access_raw)
 
             # Extract keywords
             keywords = []
@@ -165,3 +171,71 @@ class EuropePMCTool(BaseTool):
                 }
             )
         return articles
+
+
+@register_tool("EuropePMCRESTTool")
+class EuropePMCRESTTool(BaseTool):
+    """
+    Generic REST tool for Europe PMC API endpoints.
+    Supports citations, references, and other article-related endpoints.
+    """
+
+    def __init__(self, tool_config):
+        super().__init__(tool_config)
+        self.base_url = "https://www.ebi.ac.uk/europepmc/webservices/rest"
+        self.session = requests.Session()
+        self.session.headers.update({"Accept": "application/json"})
+        self.timeout = 30
+
+    def _build_url(self, arguments):
+        """Build URL from endpoint template and arguments."""
+        endpoint = self.tool_config["fields"]["endpoint"]
+        url = endpoint
+        for key, value in arguments.items():
+            placeholder = f"{{{key}}}"
+            if placeholder in url:
+                url = url.replace(placeholder, str(value))
+        return url
+
+    def run(self, arguments):
+        """Execute the Europe PMC REST API request."""
+        try:
+            url = self._build_url(arguments)
+
+            # Extract query parameters (those not in URL path)
+            params = {"format": "json"}
+            endpoint_template = self.tool_config["fields"]["endpoint"]
+
+            # Add parameters that are not path parameters
+            for key, value in arguments.items():
+                placeholder = f"{{{key}}}"
+                if placeholder not in endpoint_template and value is not None:
+                    params[key] = value
+
+            response = request_with_retry(
+                self.session,
+                "GET",
+                url,
+                params=params,
+                timeout=self.timeout,
+                max_attempts=3,
+            )
+
+            if response.status_code == 200:
+                data = response.json()
+                return {"status": "success", "data": data, "url": response.url}
+            else:
+                return {
+                    "status": "error",
+                    "error": f"Europe PMC API returned status {response.status_code}",
+                    "url": response.url,
+                    "status_code": response.status_code,
+                    "detail": response.text[:200] if response.text else None,
+                }
+
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"Europe PMC API request failed: {str(e)}",
+                "url": url if "url" in locals() else None,
+            }

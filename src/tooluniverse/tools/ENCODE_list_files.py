@@ -1,7 +1,7 @@
 """
 ENCODE_list_files
 
-List ENCODE files with filters (file_format, output_type, assay). Use to programmatically retriev...
+List ENCODE data files with filters by file format, output type, or assay. Returns file metadata ...
 """
 
 from typing import Any, Optional, Callable
@@ -18,16 +18,16 @@ def ENCODE_list_files(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    List ENCODE files with filters (file_format, output_type, assay). Use to programmatically retriev...
+    List ENCODE data files with filters by file format, output type, or assay. Returns file metadata ...
 
     Parameters
     ----------
     file_type : str
-        File type filter (e.g., 'fastq', 'bam', 'bigWig').
+        File format filter (e.g., 'fastq', 'bam', 'bigWig', 'bed'). Common formats: f...
     assay_title : str
-        Assay filter (e.g., 'ChIP-seq').
+        Assay filter (e.g., 'ChIP-seq', 'RNA-seq'). Filters files by the experimental...
     limit : int
-        Max number of results (1–100).
+        Maximum number of results to return (1–100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

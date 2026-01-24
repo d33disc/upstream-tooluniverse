@@ -1,7 +1,7 @@
 """
 GtoPdb_get_targets
 
-Get pharmacological targets from Guide to Pharmacology database
+Search the IUPHAR/BPS Guide to Pharmacology (GtoPdb) for pharmacological targets including protei...
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def GtoPdb_get_targets(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Get pharmacological targets from Guide to Pharmacology database
+    Search the IUPHAR/BPS Guide to Pharmacology (GtoPdb) for pharmacological targets including protei...
 
     Parameters
     ----------
     target_type : str
-        Target type
+        Type of pharmacological target. Examples: 'protein', 'receptor', 'enzyme', 'i...
     limit : int
-        Number of results
+        Maximum number of targets to return (default: 20, max: 1000)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def GtoPdb_get_targets(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

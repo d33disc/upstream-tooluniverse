@@ -11,45 +11,52 @@ Examples:
     python scripts/test_new_tools.py hpa -v   # Test "hpa" tools with verbose output
 """
 import argparse
-import glob
 import json
-import os
 import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# Add parent directory to path to import tooluniverse
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Ensure we can import the package in a src/ layout checkout.
+repo_root = Path(__file__).parent.parent
+sys.path.insert(0, str(repo_root / "src"))
+sys.path.insert(0, str(repo_root))
 
-from tooluniverse import ToolUniverse
+from tooluniverse import ToolUniverse  # noqa: E402
 
 try:
-    import jsonschema
     from jsonschema import validate, ValidationError
     JSONSCHEMA_AVAILABLE = True
 except ImportError:
     JSONSCHEMA_AVAILABLE = False
-    print("⚠️  jsonschema not available. Schema validation will be skipped. Install with: pip install jsonschema")
+    print(
+        "⚠️  jsonschema not available. Schema validation will be skipped. "
+        "Install with: pip install jsonschema"
+    )
 
 
-def load_all_tool_configs(data_dir: Path, pattern: str = None) -> List[Tuple[Path, List[Dict]]]:
+def load_all_tool_configs(
+    data_dir: Path, pattern: str = None
+) -> List[Tuple[Path, List[Dict]]]:
     """Load tool configurations matching the pattern."""
     configs = []
     search_pattern = f"*{pattern}*" if pattern else "*"
     files = list(data_dir.glob(f"**/{search_pattern}.json"))
-    
+
     # Fallback: If no files found matching pattern, maybe it's a tool name?
     # Try loading ALL files and letting the tool name filter handle it.
     if not files and pattern:
-        print(f"⚠️  No files matched '{search_pattern}'. Scanning all files to filter by tool name '{pattern}'...")
+        print(
+            f"⚠️  No files matched '{search_pattern}'. Scanning all files to filter "
+            f"by tool name '{pattern}'..."
+        )
         files = list(data_dir.glob("**/*.json"))
-    
+
     # Filter out known non-tool files or problematic ones if necessary
     # files = [f for f in files if "boltz" not in f.name] # Example exclusion if needed
 
     print(f"🔍 Found {len(files)} config files matching '{search_pattern}'")
-    
+
     for file_path in files:
         try:
             with open(file_path, "r") as f:
@@ -60,17 +67,17 @@ def load_all_tool_configs(data_dir: Path, pattern: str = None) -> List[Tuple[Pat
                     configs.append((file_path, [content]))
         except Exception as e:
             print(f"⚠️  Error loading {file_path.name}: {e}")
-            
+
     return configs
 
 def validate_against_schema(data: Any, schema: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
     """Validate data against JSON schema."""
     if not JSONSCHEMA_AVAILABLE or not schema:
         return True, None
-        
+
     # Skip validation if schema is explicitly null (some tools might still have this if not fixed)
     if schema.get("type") == "null":
-        return True, None # Treat as valid if we can't validate it
+        return True, None  # Treat as valid if we can't validate it
 
     try:
         validate(instance=data, schema=schema)
@@ -102,54 +109,58 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
     }
     
     start_time = time.time()
-    
+
     for file_path, tools in configs:
         stats["files"] += 1
         if args.verbose:
             print(f"\n📂 {file_path.name}")
-            
+
         for tool in tools:
             name = tool.get("name")
             if not name:
                 continue
-            
+
             # Name filter logic (if pattern matches tool name directly)
-            if args.pattern and args.pattern.lower() not in name.lower() and args.pattern.lower() not in file_path.name.lower():
+            if (
+                args.pattern
+                and args.pattern.lower() not in name.lower()
+                and args.pattern.lower() not in file_path.name.lower()
+            ):
                 continue
 
             stats["tools"] += 1
             examples = tool.get("test_examples", [])
             schema = tool.get("return_schema")
-            
+
             if not examples:
                 if args.verbose:
                     print(f"  ⏭️  {name}: No test examples")
                 stats["skipped"] += 1
                 continue
-                
+
             if args.verbose:
                 print(f"  Testing {name} ({len(examples)} examples)...")
-                
+
             for idx, inputs in enumerate(examples):
                 stats["tests"] += 1
-                
+
                 # Check for placeholders
                 if any("example_string" in str(v) for v in inputs.values()):
                     print(f"  ⚠️  {name} Example {idx+1}: Contains placeholder input")
-                
+
                 try:
                     # Execute
                     # Note: ToolUniverse.run_one_function expects specific dict format
                     result = tu.run_one_function({"name": name, "arguments": inputs})
-                    
+
                     # ToolUniverse generic wrapper often returns dict with success/data/error
-                    # But some specific tools might return raw data. 
+                    # But some specific tools might return raw data.
                     # Let's standardize interpretation.
-                    
+
                     success = False
                     data = None
                     error = None
-                    
+
                     if isinstance(result, dict) and "success" in result:
                         success = result["success"]
                         if success:
@@ -163,7 +174,7 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
                         # Some tools might return None as valid result.
                         success = True
                         data = result
-                        
+
                     if success:
                         stats["passed"] += 1
                         # Validate Schema
@@ -177,7 +188,7 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
                             print(f"    ⚠️  {name} Ex {idx+1}: Schema Mismatch: {schema_err}")
                             if args.verbose:
                                 print(f"       Data: {format_result(data)}")
-                                
+
                     else:
                         stats["failed"] += 1
                         print(f"    ❌ {name} Ex {idx+1}: Failed - {error}")
@@ -190,28 +201,41 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
                     print(f"    🔥 {name} Ex {idx+1}: Exception - {e}")
                     if args.fail_fast:
                         return stats
-                        
+
     duration = time.time() - start_time
     stats["duration"] = duration
     return stats
 
 def main():
     parser = argparse.ArgumentParser(description="Test ToolUniverse tools.")
-    parser.add_argument("pattern", nargs="?", help="Filter tools by filename or tool name pattern (e.g. 'fda')")
-    parser.add_argument("-v", "--verbose", action="store_true", help="Show passed tests detailed output")
+    parser.add_argument(
+        "pattern",
+        nargs="?",
+        help="Filter tools by filename or tool name pattern (e.g. 'fda')",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Show passed tests detailed output",
+    )
     parser.add_argument("--fail-fast", action="store_true", help="Stop after first failure")
-    parser.add_argument("--dir", default="src/tooluniverse/data", help="Directory containing tool JSONs")
-    
+    parser.add_argument(
+        "--dir",
+        default="src/tooluniverse/data",
+        help="Directory containing tool JSONs",
+    )
+
     args = parser.parse_args()
-    
+
     # Setup paths
     repo_root = Path(__file__).parent.parent
     data_dir = repo_root / args.dir
-    
+
     if not data_dir.exists():
         print(f"Error: Data directory not found at {data_dir}")
         sys.exit(1)
-        
+
     # Load ToolUniverse
     print("Initializing ToolUniverse...")
     try:
@@ -221,17 +245,17 @@ def main():
     except Exception as e:
         print(f"Failed to load ToolUniverse: {e}")
         sys.exit(1)
-        
+
     # Load Configs
     configs = load_all_tool_configs(data_dir, args.pattern)
     if not configs:
         print("No matching configuration files found.")
         sys.exit(0)
-        
+
     # Run Tests
     print(f"Running tests on {len(configs)} files...")
     stats = run_tests(tu, configs, args)
-    
+
     # Summary
     print("\n" + "="*50)
     print("TEST SUMMARY")
@@ -239,7 +263,11 @@ def main():
     print(f"Files Scanned:    {stats['files']}")
     print(f"Tools Tested:     {stats['tools']}")
     print(f"Tests Run:        {stats['tests']}")
-    print(f"Passed:           {stats['passed']} ({stats['passed']/stats['tests']*100:.1f}%)" if stats['tests'] else "Passed: 0")
+    if stats["tests"]:
+        pct = stats["passed"] / stats["tests"] * 100
+        print(f"Passed:           {stats['passed']} ({pct:.1f}%)")
+    else:
+        print("Passed: 0")
     print(f"Failed:           {stats['failed']}")
     print(f"Skipped:          {stats['skipped']}")
     print("-" * 30)
@@ -248,8 +276,8 @@ def main():
     print(f"Duration:         {stats['duration']:.2f}s")
     print("="*50)
     
-    if stats['failed'] > 0:
+    if stats["failed"] > 0:
         sys.exit(1)
-    
+
 if __name__ == "__main__":
     main()

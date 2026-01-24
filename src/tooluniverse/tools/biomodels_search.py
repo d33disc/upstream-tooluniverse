@@ -1,7 +1,7 @@
 """
 biomodels_search
 
-Searches for computational biological models in the EBI BioModels database. Use this tool to find...
+Search for computational biological models in the EBI BioModels database by keyword. Returns mode...
 """
 
 from typing import Any, Optional, Callable
@@ -9,7 +9,6 @@ from ._shared_client import get_shared_client
 
 
 def biomodels_search(
-    action: str,
     query: str,
     limit: Optional[int] = 10,
     *,
@@ -18,16 +17,14 @@ def biomodels_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Searches for computational biological models in the EBI BioModels database. Use this tool to find...
+    Search for computational biological models in the EBI BioModels database by keyword. Returns mode...
 
     Parameters
     ----------
-    action : str
-        The specific action to perform. Must be set to 'search_models'.
     query : str
-        The search term to query the BioModels database. Example queries include path...
+        Search query for biological models
     limit : int
-        The maximum number of model results to return. The default is 10.
+        Maximum number of results to return
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -42,10 +39,7 @@ def biomodels_search(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "biomodels_search",
-            "arguments": {"action": action, "query": query, "limit": limit},
-        },
+        {"name": "biomodels_search", "arguments": {"query": query, "limit": limit}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

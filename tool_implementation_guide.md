@@ -35,6 +35,10 @@ Based on `docs/expand_tooluniverse/contributing/local_tools.rst` and the current
 3.  **Configuration**:
     *   **Do NOT** embed large configs in the decorator based on current best practices for contributed tools. Use the external JSON file.
     *   The configuration file must define the tool's `name` (snake_case), `type` (matching the class name), `description`, `parameter` schema (JSON Schema), **`return_schema`** (output structure), and `test_examples`.
+    *   **Conventions**:
+        *   Put example inputs in `test_examples` (and optionally short usage examples in the tool's `description`).
+        *   Avoid adding JSON Schema `examples` blocks inside `parameter`/`return_schema`. They bloat configs and often drift from reality.
+        *   If you need an allow-list with many values, prefer listing values in the tool `description` and enforcing in Python at runtime (instead of a huge schema `enum`).
 
     **Example `src/tooluniverse/data/my_new_tools.json`**:
     ```json
@@ -123,12 +127,12 @@ Based on `docs/expand_tooluniverse/contributing/local_tools.rst` and the current
 - [ ] Check each tool's description field
 - [ ] Description includes: purpose, input, output, use cases
 - [ ] Description is clear to users unfamiliar with API
-- [ ] Add examples if missing
+- [ ] Add usage guidance and example inputs (prefer `test_examples`; optionally include short examples in `description`, not in JSON Schema)
 
 
 #### Step 3.2: Review Parameter Descriptions
 For each parameter:
-- [ ] Has clear description with examples
+- [ ] Has clear description (include example values in the description text if helpful)
 - [ ] Has default value if optional
 - [ ] Has constraints (min/max/enum) if applicable
 - [ ] Type is correct
@@ -136,9 +140,14 @@ For each parameter:
 
 #### Step 3.3: Review Return Schema
 - [ ] return_schema field exists
-- [ ] Schema matches actual tool output
-- [ ] All important fields documented
-- [ ] Nested structures fully documented
+- [ ] Schema matches actual tool output (test live responses; do not rely on docs alone)
+- [ ] Schema is **meaningful** (avoid `data: { additionalProperties: true }` as the only definition)
+- [ ] Model the common response shapes explicitly:
+  - [ ] Paginated lists: `count`, `next`, `previous`, `results[]`
+  - [ ] Detail objects: required identifiers + the key domain fields users actually need
+- [ ] For nested structures, type the important subfields (e.g., arrays vs objects; required keys), but allow extra fields with `additionalProperties: true` to avoid brittleness
+- [ ] Handle real-world type variability (e.g., values sometimes returned as string vs number): use union types like `["string","number","null"]` when needed
+- [ ] If the tool wraps upstream responses (e.g., adds `status`, `url`, `error`), ensure `return_schema` reflects the wrapper shape consistently across tools
 
 ### Phase 4: Error Handling Improvement
 
@@ -153,12 +162,14 @@ For each parameter:
 - [ ] Errors suggest actionable solutions
 - [ ] Errors include context (status_code, endpoint)
 - [ ] Errors are user-friendly
+- [ ] If introducing a standardized error envelope (e.g., `status/error/url/detail/status_code`), apply it consistently within that tool family and **do not change the success payload shape**
 
 #### Step 4.3: Add Retry Logic (if needed)
 - [ ] Identify transient failures (ConnectionError, Timeout)
 - [ ] Implement retry with exponential backoff
 - [ ] Set max retries (typically 2-3)
 - [ ] Handle final failure appropriately
+- [ ] Prefer using a shared retry helper if one exists in the codebase (keeps behavior consistent across tools)
 
 ### Phase 5: Finding Missing Tools
 
@@ -181,6 +192,8 @@ For each parameter:
 - [ ] **Identify Subsets**: Common fields users need (diseases, pathways, etc.)
 - [ ] **Add Subset Tools**: Create tools that extract specific data types
 - [ ] **Implement Method**: Create `_extract_subset()` helper if needed
+- [ ] **Add field selection / projection** when supported upstream: expose a small, well-documented parameter (e.g., `fields`, `return_fields`, `select`) that reduces payload size without confusing users
+- [ ] If projection fields are many: document the allowed values in the tool `description` and enforce in code (avoid giant schema enums)
 
 ### Phase 6: Fix Common Issues
 
@@ -297,9 +310,11 @@ python3 -m py_compile src/tooluniverse/{category}_tool.py  # Check syntax
 **For large API expansions (many endpoints in one category):**
 - [ ] Use a generic REST tool + JSON configs to cover multiple endpoints.
 - [ ] Verify real API behavior with live requests and prefer working patterns over docs.
-- [ ] Make `return_schema` match the tool’s wrapper (at least `status` and `data`).
+- [ ] Make `return_schema` match the tool’s wrapper and validate the upstream payload structure at a useful depth (paging shapes, required IDs, important nested fields).
 - [ ] Use real IDs from search/list endpoints in `test_examples`.
 - [ ] Remove tools for endpoints that have no working or replacement API.
+- [ ] Design “research-first”: include discovery tools (search/list) to find IDs, detail tools (get by ID), and (when relevant) version/release tools for reproducibility.
+- [ ] Keep schemas and parameter surfaces LLM-friendly: avoid enormous enums; keep descriptions explicit; enforce strict validation in code when needed.
 
 ---
 

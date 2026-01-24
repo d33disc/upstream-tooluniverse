@@ -1,7 +1,7 @@
 """
 PRIDE_search_proteomics
 
-Search PRIDE proteomics database for experiments
+Search the PRIDE Archive for proteomics experiments and mass spectrometry datasets. Returns proje...
 """
 
 from typing import Any, Optional, Callable
@@ -17,14 +17,14 @@ def PRIDE_search_proteomics(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search PRIDE proteomics database for experiments
+    Search the PRIDE Archive for proteomics experiments and mass spectrometry datasets. Returns proje...
 
     Parameters
     ----------
     query : str
-        Search query
+        Search keywords for proteomics experiments. Examples: 'cancer', 'phosphorylat...
     page_size : int
-        Results per page
+        Number of projects to return per page (default: 20, max: 100)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

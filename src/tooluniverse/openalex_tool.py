@@ -1,5 +1,7 @@
 import requests
+from typing import Any, Dict, Optional
 from .base_tool import BaseTool
+from .http_utils import request_with_retry
 from .tool_registry import register_tool
 
 
@@ -257,3 +259,119 @@ class OpenAlexTool(BaseTool):
 
         except requests.exceptions.RequestException as e:
             return f"Error retrieving papers by author {author_name}: {e}"
+
+
+@register_tool("OpenAlexRESTTool")
+class OpenAlexRESTTool(BaseTool):
+    """
+    Generic JSON-config driven OpenAlex REST tool.
+
+    Notes:
+    - OpenAlex strongly encourages providing a contact email via the `mailto` query param.
+    - This tool returns a consistent wrapper: {status, data, url} (plus error fields on failure).
+    """
+
+    def __init__(self, tool_config):
+        super().__init__(tool_config)
+        self.base_url = "https://api.openalex.org"
+        self.session = requests.Session()
+        self.session.headers.update({"Accept": "application/json"})
+        self.timeout = 30
+
+    @staticmethod
+    def _normalize_openalex_id(value: Any) -> Any:
+        if isinstance(value, str) and "openalex.org/" in value:
+            return value.rstrip("/").split("/")[-1]
+        return value
+
+    @staticmethod
+    def _normalize_doi(value: Any) -> Any:
+        if not isinstance(value, str):
+            return value
+        v = value.strip()
+        if "doi.org/" in v:
+            return v.split("doi.org/")[-1]
+        if v.lower().startswith("doi:"):
+            return v[4:]
+        return v
+
+    def _build_url_and_params(
+        self, arguments: Dict[str, Any]
+    ) -> tuple[str, Dict[str, Any]]:
+        fields = self.tool_config.get("fields", {}) or {}
+        path_tmpl = fields.get("path", "")
+        if not path_tmpl:
+            raise ValueError("OpenAlexRESTTool requires fields.path in tool config")
+
+        # Replace placeholders in the path.
+        path = path_tmpl
+        for k, v in (arguments or {}).items():
+            if v is None:
+                continue
+            if k == "doi":
+                v = self._normalize_doi(v)
+            elif k.endswith("_id") or k in {
+                "openalex_id",
+                "author_id",
+                "institution_id",
+                "concept_id",
+                "work_id",
+            }:
+                v = self._normalize_openalex_id(v)
+            path = path.replace(f"{{{k}}}", str(v))
+
+        url = f"{self.base_url}{path}"
+
+        # Build query params (optional).
+        params: Dict[str, Any] = {}
+        default_params = fields.get("default_params")
+        if isinstance(default_params, dict):
+            params.update(default_params)
+
+        param_map = (
+            fields.get("param_map") if isinstance(fields.get("param_map"), dict) else {}
+        )
+        path_params = set(fields.get("path_params") or [])
+
+        for k, v in (arguments or {}).items():
+            if v is None or k in path_params:
+                continue
+            api_key = param_map.get(k, k)
+            params[api_key] = v
+
+        # Provide a default mailto unless user overrides.
+        if "mailto" not in params:
+            params["mailto"] = "support@openalex.org"
+
+        return url, params
+
+    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        url: Optional[str] = None
+        try:
+            url, params = self._build_url_and_params(arguments or {})
+            resp = request_with_retry(
+                self.session,
+                "GET",
+                url,
+                params=params,
+                timeout=self.timeout,
+                max_attempts=3,
+            )
+            final_url = getattr(resp, "url", None) or url
+
+            if resp.status_code != 200:
+                return {
+                    "status": "error",
+                    "error": "OpenAlex API error",
+                    "url": final_url,
+                    "status_code": resp.status_code,
+                    "detail": (resp.text or "")[:500],
+                }
+
+            return {"status": "success", "data": resp.json(), "url": final_url}
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": f"OpenAlex API error: {str(e)}",
+                "url": url,
+            }

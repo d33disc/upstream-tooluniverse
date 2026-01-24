@@ -1,7 +1,7 @@
 """
 Crossref_search_works
 
-Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal...
+Search Crossref Works API for scholarly articles, publications, and research outputs by keyword. ...
 """
 
 from typing import Any, Optional, Callable
@@ -16,9 +16,9 @@ def Crossref_search_works(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Search Crossref Works API for articles by keyword. Returns articles with title, abstract, journal...
+    Search Crossref Works API for scholarly articles, publications, and research outputs by keyword. ...
 
     Parameters
     ----------
@@ -27,7 +27,7 @@ def Crossref_search_works(
     limit : int
         Number of articles to return. This sets the maximum number of articles retrie...
     filter : str
-        Optional filter string for Crossref API. Examples: 'type:journal-article,from...
+        Optional filter string for Crossref API. Examples: 'type:journal-article' (on...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def Crossref_search_works(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 PubMed_search_articles
 
-Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
+Search PubMed biomedical literature database using NCBI E-utilities (esearch + esummary). Returns...
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def PubMed_search_articles(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Search PubMed using NCBI E-utilities (esearch + esummary) and return articles. Returns articles w...
+    Search PubMed biomedical literature database using NCBI E-utilities (esearch + esummary). Returns...
 
     Parameters
     ----------
     query : str
-        Search query for PubMed articles. Use keywords separated by spaces to refine ...
+        Search query for PubMed articles. Use keywords, author names, journal names, ...
     limit : int
         Number of articles to return. This sets the maximum number of articles retrie...
     api_key : str
-        Optional NCBI API key for higher rate limits. Get your free key at https://ww...
+        Optional NCBI API key for higher rate limits (10 req/sec vs 3 req/sec). Get y...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def PubMed_search_articles(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

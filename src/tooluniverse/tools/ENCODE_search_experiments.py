@@ -1,7 +1,7 @@
 """
 ENCODE_search_experiments
 
-Search ENCODE functional genomics experiments (e.g., ChIP-seq, ATAC-seq) by assay/target/organism...
+Search ENCODE functional genomics experiments (e.g., ChIP-seq, ATAC-seq, RNA-seq) by assay type, ...
 """
 
 from typing import Any, Optional, Callable
@@ -20,20 +20,20 @@ def ENCODE_search_experiments(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search ENCODE functional genomics experiments (e.g., ChIP-seq, ATAC-seq) by assay/target/organism...
+    Search ENCODE functional genomics experiments (e.g., ChIP-seq, ATAC-seq, RNA-seq) by assay type, ...
 
     Parameters
     ----------
     assay_title : str
-        Assay name filter (e.g., 'ChIP-seq', 'ATAC-seq').
+        Assay name filter (e.g., 'ChIP-seq', 'ATAC-seq', 'RNA-seq', 'Hi-C'). Leave em...
     target : str
-        Target filter (e.g., 'CTCF').
+        Target protein/factor filter (e.g., 'CTCF', 'H3K4me3', 'POLR2A'). Use for ChI...
     organism : str
-        Organism filter (e.g., 'Homo sapiens', 'Mus musculus').
+        Organism filter (e.g., 'Homo sapiens', 'Mus musculus', 'Drosophila melanogast...
     status : str
-        Record status filter (default 'released').
+        Record status filter. Use 'released' for public data (default), 'archived' fo...
     limit : int
-        Max number of results (1–100).
+        Maximum number of results to return (1–100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

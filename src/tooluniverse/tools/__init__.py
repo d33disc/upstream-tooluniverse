@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 971 scientific tools.
+Type-safe Python interface to 1015 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -55,6 +55,10 @@ from .ArXiv_search_papers import ArXiv_search_papers
 from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
 from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
+from .BioModels_download_model import BioModels_download_model
+from .BioModels_get_model import BioModels_get_model
+from .BioModels_list_files import BioModels_list_files
+from .BioModels_search_parameters import BioModels_search_parameters
 from .BioRxiv_search_preprints import BioRxiv_search_preprints
 from .BiomarkerDiscoveryWorkflow import BiomarkerDiscoveryWorkflow
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
@@ -95,6 +99,11 @@ from .ClinicalTrialDesignAgent import ClinicalTrialDesignAgent
 from .CodeQualityAnalyzer import CodeQualityAnalyzer
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
 from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeline
+from .Crossref_get_funder import Crossref_get_funder
+from .Crossref_get_journal import Crossref_get_journal
+from .Crossref_get_work import Crossref_get_work
+from .Crossref_list_funders import Crossref_list_funders
+from .Crossref_list_types import Crossref_list_types
 from .Crossref_search_works import Crossref_search_works
 from .DBLP_search_publications import DBLP_search_publications
 from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
@@ -113,11 +122,23 @@ from .DomainExpertValidator import DomainExpertValidator
 from .DrugInteractionAnalyzerAgent import DrugInteractionAnalyzerAgent
 from .DrugOptimizationAgent import DrugOptimizationAgent
 from .DrugSafetyAnalyzer import DrugSafetyAnalyzer
+from .EMDB_get_imaging_info import EMDB_get_imaging_info
+from .EMDB_get_map_info import EMDB_get_map_info
+from .EMDB_get_publications import EMDB_get_publications
+from .EMDB_get_sample_info import EMDB_get_sample_info
 from .EMDB_get_structure import EMDB_get_structure
+from .EMDB_get_validation import EMDB_get_validation
+from .EMDB_search_structures import EMDB_search_structures
+from .ENCODE_get_biosample import ENCODE_get_biosample
+from .ENCODE_get_experiment import ENCODE_get_experiment
+from .ENCODE_get_file import ENCODE_get_file
 from .ENCODE_list_files import ENCODE_list_files
+from .ENCODE_search_biosamples import ENCODE_search_biosamples
 from .ENCODE_search_experiments import ENCODE_search_experiments
 from .EthicalComplianceReviewer import EthicalComplianceReviewer
 from .EuropePMC_Guidelines_Search import EuropePMC_Guidelines_Search
+from .EuropePMC_get_citations import EuropePMC_get_citations
+from .EuropePMC_get_references import EuropePMC_get_references
 from .EuropePMC_search_articles import EuropePMC_search_articles
 from .ExperimentalDesignScorer import ExperimentalDesignScorer
 from .FAERS_count_additive_administration_routes import (
@@ -526,7 +547,14 @@ from .GO_search_terms import GO_search_terms
 from .GTEx_get_expression_summary import GTEx_get_expression_summary
 from .GTEx_query_eqtl import GTEx_query_eqtl
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
+from .GtoPdb_get_disease import GtoPdb_get_disease
+from .GtoPdb_get_ligand import GtoPdb_get_ligand
+from .GtoPdb_get_target import GtoPdb_get_target
+from .GtoPdb_get_target_interactions import GtoPdb_get_target_interactions
 from .GtoPdb_get_targets import GtoPdb_get_targets
+from .GtoPdb_list_diseases import GtoPdb_list_diseases
+from .GtoPdb_list_ligands import GtoPdb_list_ligands
+from .GtoPdb_search_interactions import GtoPdb_search_interactions
 from .HAL_search_archive import HAL_search_archive
 from .HPA_generic_search import HPA_generic_search
 from .HPA_get_biological_processes_by_gene import HPA_get_biological_processes_by_gene
@@ -771,6 +799,8 @@ from .OpenTargets_target_disease_evidence import OpenTargets_target_disease_evid
 from .OutputSummarizationComposer import OutputSummarizationComposer
 from .PDB_search_similar_structures import PDB_search_similar_structures
 from .PMC_search_papers import PMC_search_papers
+from .PRIDE_get_project import PRIDE_get_project
+from .PRIDE_get_project_files import PRIDE_get_project_files
 from .PRIDE_search_proteomics import PRIDE_search_proteomics
 from .PackageAnalyzer import PackageAnalyzer
 from .Paleobiology_get_fossils import Paleobiology_get_fossils
@@ -798,6 +828,10 @@ from .PubChem_search_compounds_by_substructure import (
     PubChem_search_compounds_by_substructure,
 )
 from .PubMed_Guidelines_Search import PubMed_Guidelines_Search
+from .PubMed_get_article import PubMed_get_article
+from .PubMed_get_cited_by import PubMed_get_cited_by
+from .PubMed_get_links import PubMed_get_links
+from .PubMed_get_related import PubMed_get_related
 from .PubMed_search_articles import PubMed_search_articles
 from .PubTator3_EntityAutocomplete import PubTator3_EntityAutocomplete
 from .PubTator3_LiteratureSearch import PubTator3_LiteratureSearch
@@ -904,6 +938,10 @@ from .Wikipedia_search import Wikipedia_search
 from .WoRMS_search_species import WoRMS_search_species
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .XMLToolOptimizer import XMLToolOptimizer
+from .Zenodo_get_license import Zenodo_get_license
+from .Zenodo_get_record import Zenodo_get_record
+from .Zenodo_get_record_files import Zenodo_get_record_files
+from .Zenodo_list_licenses import Zenodo_list_licenses
 from .Zenodo_search_records import Zenodo_search_records
 from .advanced_literature_search_agent import advanced_literature_search_agent
 from .alphafold_get_annotations import alphafold_get_annotations
@@ -913,7 +951,6 @@ from .arrayexpress_get_experiment import arrayexpress_get_experiment
 from .arrayexpress_get_experiment_files import arrayexpress_get_experiment_files
 from .arrayexpress_get_experiment_samples import arrayexpress_get_experiment_samples
 from .arrayexpress_search_experiments import arrayexpress_search_experiments
-from .biomodels_get_files import biomodels_get_files
 from .biomodels_search import biomodels_search
 from .cBioPortal_get_cancer_studies import cBioPortal_get_cancer_studies
 from .cBioPortal_get_mutations import cBioPortal_get_mutations
@@ -1411,7 +1448,14 @@ from .ols_search_efo_terms import ols_search_efo_terms
 from .ols_search_ontologies import ols_search_ontologies
 from .ols_search_terms import ols_search_terms
 from .open_deep_research_agent import open_deep_research_agent
+from .openalex_get_author import openalex_get_author
+from .openalex_get_institution import openalex_get_institution
+from .openalex_get_work import openalex_get_work
+from .openalex_get_work_by_doi import openalex_get_work_by_doi
 from .openalex_literature_search import openalex_literature_search
+from .openalex_search_authors import openalex_search_authors
+from .openalex_search_institutions import openalex_search_institutions
+from .openalex_search_works import openalex_search_works
 from .pc_get_interactions import pc_get_interactions
 from .pc_search_pathways import pc_search_pathways
 from .pdbe_get_entry_assemblies import pdbe_get_entry_assemblies
@@ -1472,6 +1516,10 @@ __all__ = [
     "ArgumentDescriptionOptimizer",
     "BLAST_nucleotide_search",
     "BLAST_protein_search",
+    "BioModels_download_model",
+    "BioModels_get_model",
+    "BioModels_list_files",
+    "BioModels_search_parameters",
     "BioRxiv_search_preprints",
     "BiomarkerDiscoveryWorkflow",
     "CMA_Guidelines_Search",
@@ -1510,6 +1558,11 @@ __all__ = [
     "CodeQualityAnalyzer",
     "CompoundDiscoveryAgent",
     "ComprehensiveDrugDiscoveryPipeline",
+    "Crossref_get_funder",
+    "Crossref_get_journal",
+    "Crossref_get_work",
+    "Crossref_list_funders",
+    "Crossref_list_types",
     "Crossref_search_works",
     "DBLP_search_publications",
     "DBpedia_SPARQL_query",
@@ -1528,11 +1581,23 @@ __all__ = [
     "DrugInteractionAnalyzerAgent",
     "DrugOptimizationAgent",
     "DrugSafetyAnalyzer",
+    "EMDB_get_imaging_info",
+    "EMDB_get_map_info",
+    "EMDB_get_publications",
+    "EMDB_get_sample_info",
     "EMDB_get_structure",
+    "EMDB_get_validation",
+    "EMDB_search_structures",
+    "ENCODE_get_biosample",
+    "ENCODE_get_experiment",
+    "ENCODE_get_file",
     "ENCODE_list_files",
+    "ENCODE_search_biosamples",
     "ENCODE_search_experiments",
     "EthicalComplianceReviewer",
     "EuropePMC_Guidelines_Search",
+    "EuropePMC_get_citations",
+    "EuropePMC_get_references",
     "EuropePMC_search_articles",
     "ExperimentalDesignScorer",
     "FAERS_count_additive_administration_routes",
@@ -1727,7 +1792,14 @@ __all__ = [
     "GTEx_get_expression_summary",
     "GTEx_query_eqtl",
     "GWAS_search_associations_by_gene",
+    "GtoPdb_get_disease",
+    "GtoPdb_get_ligand",
+    "GtoPdb_get_target",
+    "GtoPdb_get_target_interactions",
     "GtoPdb_get_targets",
+    "GtoPdb_list_diseases",
+    "GtoPdb_list_ligands",
+    "GtoPdb_search_interactions",
     "HAL_search_archive",
     "HPA_generic_search",
     "HPA_get_biological_processes_by_gene",
@@ -1846,6 +1918,8 @@ __all__ = [
     "OutputSummarizationComposer",
     "PDB_search_similar_structures",
     "PMC_search_papers",
+    "PRIDE_get_project",
+    "PRIDE_get_project_files",
     "PRIDE_search_proteomics",
     "PackageAnalyzer",
     "Paleobiology_get_fossils",
@@ -1867,6 +1941,10 @@ __all__ = [
     "PubChem_search_compounds_by_similarity",
     "PubChem_search_compounds_by_substructure",
     "PubMed_Guidelines_Search",
+    "PubMed_get_article",
+    "PubMed_get_cited_by",
+    "PubMed_get_links",
+    "PubMed_get_related",
     "PubMed_search_articles",
     "PubTator3_EntityAutocomplete",
     "PubTator3_LiteratureSearch",
@@ -1957,6 +2035,10 @@ __all__ = [
     "WoRMS_search_species",
     "WritingPresentationReviewer",
     "XMLToolOptimizer",
+    "Zenodo_get_license",
+    "Zenodo_get_record",
+    "Zenodo_get_record_files",
+    "Zenodo_list_licenses",
     "Zenodo_search_records",
     "advanced_literature_search_agent",
     "alphafold_get_annotations",
@@ -1966,7 +2048,6 @@ __all__ = [
     "arrayexpress_get_experiment_files",
     "arrayexpress_get_experiment_samples",
     "arrayexpress_search_experiments",
-    "biomodels_get_files",
     "biomodels_search",
     "cBioPortal_get_cancer_studies",
     "cBioPortal_get_mutations",
@@ -2388,7 +2469,14 @@ __all__ = [
     "ols_search_ontologies",
     "ols_search_terms",
     "open_deep_research_agent",
+    "openalex_get_author",
+    "openalex_get_institution",
+    "openalex_get_work",
+    "openalex_get_work_by_doi",
     "openalex_literature_search",
+    "openalex_search_authors",
+    "openalex_search_institutions",
+    "openalex_search_works",
     "pc_get_interactions",
     "pc_search_pathways",
     "pdbe_get_entry_assemblies",

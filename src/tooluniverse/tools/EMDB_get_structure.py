@@ -1,7 +1,7 @@
 """
 EMDB_get_structure
 
-Get electron microscopy structure data from EMDB
+Get 3D electron microscopy (EM) structure data from the Electron Microscopy Data Bank (EMDB). Ret...
 """
 
 from typing import Any, Optional, Callable
@@ -16,12 +16,12 @@ def EMDB_get_structure(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get electron microscopy structure data from EMDB
+    Get 3D electron microscopy (EM) structure data from the Electron Microscopy Data Bank (EMDB). Ret...
 
     Parameters
     ----------
     emdb_id : str
-        EMDB structure ID (e.g., EMD-1234)
+        EMDB structure identifier in format 'EMD-####' (e.g., 'EMD-1234', 'EMD-0001')...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

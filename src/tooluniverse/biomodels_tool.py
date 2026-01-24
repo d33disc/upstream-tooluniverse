@@ -1,95 +1,55 @@
 from typing import Dict, Any, List, Optional
 import requests
 from .base_tool import BaseTool
+from .base_rest_tool import BaseRESTTool
 from .tool_registry import register_tool
 
 
-@register_tool("BioModelsTool")
-class BioModelsTool(BaseTool):
-    """
-    Tool for searching and retrieving models from EBI BioModels.
-    """
+@register_tool("BioModelsRESTTool")
+class BioModelsRESTTool(BaseRESTTool):
+    """Generic REST tool for BioModels API endpoints."""
 
-    BASE_URL = "https://www.ebi.ac.uk/biomodels"
-
-    def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Executes the BioModels tool action.
-        """
-        action = arguments.get("action")
-
-        if action == "search_models":
-            return self.search_models(
-                query=arguments.get("query"), limit=arguments.get("limit", 10)
-            )
-        elif action == "get_model_files":
-            model_id = arguments.get("model_id")
-            if not model_id:
-                raise ValueError("model_id is required for get_model_files")
-            return self.get_model_files(model_id)
-        else:
-            raise ValueError(f"Unknown action: {action}")
-
-    def search_models(self, query: str, limit: int = 10) -> Dict[str, Any]:
-        """
-        Search for biological models.
-        """
-        url = f"{self.BASE_URL}/search"
-        params = {"query": query, "format": "json", "numResults": limit}
-
-        try:
-            response = requests.get(url, params=params, timeout=30)
-            response.raise_for_status()
-            data = response.json()
-
-            # The API returns 'models' list directly? Or wrapped?
-            # Test output showed `{"models": [...]}`
-
-            models = []
-            for m in data.get("models", []):
-                models.append(
-                    {
-                        "id": m.get("id"),
-                        "name": m.get("name"),
-                        "format": m.get("format"),
-                        "url": m.get("url"),
-                    }
-                )
-
-            return {"count": len(models), "models": models}
-        except Exception as e:
-            return {"error": str(e)}
-
-    def get_model_files(self, model_id: str) -> Dict[str, Any]:
-        """
-        Get file download links for a model.
-        Usually returning the main SBML file link is sufficient.
-        The search result usually gives a URL.
-        Constructing download URL: https://www.ebi.ac.uk/biomodels/model/download/MODEL_ID?filename=MODEL_ID_url.xml ??
-        Actually, API might have an endpoint for files.
-        Documentation says `get_model_files(model_id)`.
-        Let's try to find a specific endpoint or just return the model page/download link.
-        Common pattern: https://www.ebi.ac.uk/biomodels/{model_id}#Files
-        Or https://www.ebi.ac.uk/biomodels/model/download/{model_id}
-
-        I'll return the download URL.
-        """
-        # If I want to list files, I might need another endpoint.
-        # But simply returning the download link for the main model file is often what's needed.
-        # Download URL: https://www.ebi.ac.uk/biomodels/{model_id}?format=sbml (maybe?)
-
-        # Let's check `search` result 'url'.
-        # Sample: "url": "https://www.ebi.ac.uk/biomodels/BIOMD0000000469"
-
-        # I'll rely on a known pattern or just return the main URL.
-        # A more specific API call `GET /model/files/{modelId}`?
-        # I'll assume just returning the main page URL and formulated download URL is enough for now.
-        download_url = (
-            f"{self.BASE_URL}/model/download/{model_id}?filename={model_id}_url.xml"
-        )
-
+    def _get_param_mapping(self) -> Dict[str, str]:
+        """Map BioModels-specific parameter names."""
         return {
-            "model_id": model_id,
-            "main_page": f"{self.BASE_URL}/{model_id}",
-            "download_url": download_url,  # This is a best guess, user might need to verify
+            "limit": "numResults",  # limit -> numResults
+            # query and filename use their original names
         }
+
+    def _handle_special_endpoint(
+        self, url: str, response: requests.Response, arguments: Dict[str, Any]
+    ) -> Optional[Dict[str, Any]]:
+        """Handle download endpoints specially."""
+        if "download" in url:
+            content_disposition = response.headers.get("Content-Disposition", "")
+            content_type = response.headers.get("Content-Type", "")
+
+            return {
+                "status": "success",
+                "download_url": url,
+                "url": url,
+                "filename": content_disposition,
+                "content_type": content_type,
+            }
+        return None
+
+    def _process_response(
+        self, response: requests.Response, url: str
+    ) -> Dict[str, Any]:
+        """Process BioModels API response."""
+        data = response.json()
+
+        # Build result
+        result = {
+            "status": "success",
+            "data": data,
+            "url": url,
+        }
+
+        # Add count for lists or search results
+        if isinstance(data, list):
+            result["count"] = len(data)
+        elif isinstance(data, dict) and "matches" in data:
+            result["count"] = len(data.get("matches", []))
+
+        return result
