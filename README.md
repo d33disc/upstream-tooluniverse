@@ -1,5 +1,5 @@
 # <img src="docs/_static/logo.png" alt="ToolUniverse Logo" height="28" style="vertical-align: middle; margin-right: 8px;" /> ToolUniverse: Democratizing AI scientists
-
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/tooluniverse?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=BLACK&left_text=downloads)](https://pepy.tech/projects/tooluniverse)
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue)](https://arxiv.org/abs/2509.23426)
 [![PyPI version](https://badge.fury.io/py/tooluniverse.svg)](https://badge.fury.io/py/tooluniverse)
 [![ToolUniverse](https://img.shields.io/badge/Code-ToolUniverse-purple)](https://github.com/mims-harvard/ToolUniverse)
