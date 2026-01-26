@@ -77,6 +77,13 @@ You can also configure vLLM directly in tool configs:
 
 **Note**: Still requires ``VLLM_SERVER_URL`` environment variable.
 
+Limitations
+-----------
+
+- **Streaming**: VLLM integration currently uses buffered responses (simulated streaming). Real-time token streaming is not supported effectively for this backend yet.
+- **Token Limits**: The ``max_tokens`` or ``max_new_tokens`` configuration is not supported per-tool for VLLM. The generation length defaults to the VLLM server's configuration or client defaults.
+- **JSON Mode**: Setting ``return_json: true`` relies on the VLLM server supporting OpenAI-compatible JSON mode. Ensure your model and vLLM version support this features.
+
 Using with Space Configurations
 --------------------------------
 

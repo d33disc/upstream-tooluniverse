@@ -179,7 +179,6 @@ Set up AI model settings:
            "api_type": "CHATGPT",
            "model_id": "o4-mini-0416",
            "temperature": 1.0,
-           "max_new_tokens": 4096,
            "return_json": false
        }
    }
@@ -191,7 +190,6 @@ Set up AI model settings:
   - For vLLM: Must match the model name loaded on your vLLM server
   - Set ``VLLM_SERVER_URL`` environment variable when using vLLM
 - ``temperature``: 0.0-2.0 (higher = more creative)
-- ``max_new_tokens``: Response length limit (1024-8192 typical)
 - ``return_json``: true for structured data, false for text
 
 **Using vLLM**: Set ``api_type: "VLLM"`` and ensure ``VLLM_SERVER_URL`` is set. See :doc:`../guide/vllm_support` for complete setup instructions.
@@ -234,7 +232,6 @@ Here's your finished tool:
            "api_type": "CHATGPT",
            "model_id": "o4-mini-0416",
            "temperature": 1.0,
-           "max_new_tokens": 4096,
            "return_json": false
        }
    }
@@ -435,7 +432,6 @@ Create a tool that returns structured data:
            "api_type": "CHATGPT",
            "model_id": "o4-mini-0416",
            "temperature": 0.3,
-           "max_new_tokens": 2048,
            "return_json": true
        }
    }
@@ -486,7 +482,6 @@ Create a tool with both required and optional inputs:
            "api_type": "CHATGPT",
            "model_id": "o4-mini-0416",
            "temperature": 1.0,
-           "max_new_tokens": 4096,
            "return_json": false
        }
    }

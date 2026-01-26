@@ -395,33 +395,36 @@ class ResultCacheManager:
             # Wait for shutdown event or timeout
             # If shutdown is set, wait() returns immediately (True)
             # Otherwise, wait up to TIMEOUT seconds
-            if self._shutdown_event.wait(timeout=TIMEOUT):
-                # Shutdown was signaled
-                break
+            shutdown_signaled = self._shutdown_event.wait(timeout=TIMEOUT)
 
-            # Timeout occurred - check queue for work
+            # Process all available queue items before checking shutdown
             # Use non-blocking get to avoid blocking when shutdown is signaled
-            try:
-                op, payload = queue_ref.get_nowait()
-            except queue.Empty:
-                # No work available, continue loop to check shutdown again
-                continue
+            while True:
+                try:
+                    op, payload = queue_ref.get_nowait()
+                except queue.Empty:
+                    # No work available
+                    break
 
-            if op == "__STOP__":
-                queue_ref.task_done()
+                if op == "__STOP__":
+                    queue_ref.task_done()
+                    return
+
+                try:
+                    if op == "set":
+                        self._perform_persist_set(**payload)
+                    else:
+                        logger.warning("Unknown async cache operation: %s", op)
+                except Exception as exc:
+                    logger.warning("Async cache write failed: %s", exc)
+                    # Disable async persistence to avoid repeated failures
+                    self.async_persist = False
+                finally:
+                    queue_ref.task_done()
+
+            # Only break after processing all items if shutdown was signaled
+            if shutdown_signaled:
                 break
-
-            try:
-                if op == "set":
-                    self._perform_persist_set(**payload)
-                else:
-                    logger.warning("Unknown async cache operation: %s", op)
-            except Exception as exc:
-                logger.warning("Async cache write failed: %s", exc)
-                # Disable async persistence to avoid repeated failures
-                self.async_persist = False
-            finally:
-                queue_ref.task_done()
 
     def _perform_persist_set(
         self,

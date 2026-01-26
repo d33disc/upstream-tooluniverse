@@ -132,7 +132,9 @@ Many scientific APIs have rate limits. ToolUniverse implements automatic rate li
 
       .. code-block:: python
 
-         tu = ToolUniverse(enable_cache=True)
+         # Caching is enabled by default
+         tu = ToolUniverse()
+         result = tu.run(..., use_cache=True)
 Tool returns empty results?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -265,7 +267,10 @@ How can I speed up queries?
 
       .. code-block:: python
 
-         tu = ToolUniverse(enable_cache=True, cache_ttl=3600)
+         import os
+         os.environ["TOOLUNIVERSE_CACHE_DEFAULT_TTL"] = "3600"  # 1 hour
+         tu = ToolUniverse()
+         result = tu.run(..., use_cache=True)
 
    .. tab:: Batch Processing
 

@@ -2166,7 +2166,9 @@ class ToolUniverse:
             ):
                 cache_namespace = tool_instance.get_cache_namespace()
                 cache_version = tool_instance.get_cache_version()
-                cache_key = self._make_cache_key(function_name, arguments)
+                cache_key = self._make_cache_key(
+                    function_name, arguments, tool_instance
+                )
                 composed_cache_key = self.cache_manager.compose_key(
                     cache_namespace, cache_version, cache_key
                 )
@@ -2293,7 +2295,9 @@ class ToolUniverse:
                 and getattr(tool_instance, "supports_caching", lambda: True)()
             ):
                 if cache_key is None:
-                    cache_key = self._make_cache_key(function_name, arguments)
+                    cache_key = self._make_cache_key(
+                        function_name, arguments, tool_instance
+                    )
                 if cache_namespace is None:
                     cache_namespace = tool_instance.get_cache_namespace()
                 if cache_version is None:
@@ -2536,9 +2540,21 @@ class ToolUniverse:
                 return False
         return True
 
-    def _make_cache_key(self, function_name: str, arguments: dict) -> str:
-        """Generate cache key by delegating to BaseTool."""
-        tool_instance = self._get_tool_instance(function_name, cache=False)
+    def _make_cache_key(
+        self, function_name: str, arguments: dict, tool_instance=None
+    ) -> str:
+        """Generate cache key by delegating to BaseTool.
+
+        Args:
+            function_name: Name of the tool/function
+            arguments: Arguments passed to the tool
+            tool_instance: Optional pre-fetched tool instance to avoid recreation
+
+        Returns:
+            Cache key string
+        """
+        if tool_instance is None:
+            tool_instance = self._get_tool_instance(function_name, cache=True)
 
         if tool_instance:
             return tool_instance.get_cache_key(arguments)

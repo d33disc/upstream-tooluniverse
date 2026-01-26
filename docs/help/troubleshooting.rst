@@ -352,7 +352,10 @@ Slow query performance
 
    .. code-block:: python
 
-      tu = ToolUniverse(enable_cache=True, cache_ttl=3600)
+      import os
+      os.environ["TOOLUNIVERSE_CACHE_DEFAULT_TTL"] = "3600"  # 1 hour
+      tu = ToolUniverse()
+      result = tu.run(..., use_cache=True)
 
 2. **Use async operations:**
 
