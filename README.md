@@ -13,7 +13,7 @@
 
 **Democratizing AI scientists using ToolUniverse**
 
-We are currently looking for partners to help host ToolUniverse server. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
+We are currently looking for partners. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
 
 ToolUniverse is an ecosystem for creating AI scientist systems from any open or closed large language model (LLM). Powered by AI-Tool Interaction Protocol, it standardizes how LLMs identify and call tools, integrating more than **700 machine learning models, datasets, APIs, and scientific packages** for data analysis, knowledge retrieval, and experimental design.
 
