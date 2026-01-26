@@ -1,5 +1,5 @@
 # <img src="docs/_static/logo.png" alt="ToolUniverse Logo" height="28" style="vertical-align: middle; margin-right: 8px;" /> ToolUniverse: Democratizing AI scientists
-
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/tooluniverse?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=BLACK&left_text=downloads)](https://pepy.tech/projects/tooluniverse)
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue)](https://arxiv.org/abs/2509.23426)
 [![PyPI version](https://badge.fury.io/py/tooluniverse.svg)](https://badge.fury.io/py/tooluniverse)
 [![ToolUniverse](https://img.shields.io/badge/Code-ToolUniverse-purple)](https://github.com/mims-harvard/ToolUniverse)
@@ -13,7 +13,7 @@
 
 **Democratizing AI scientists using ToolUniverse**
 
-We are currently looking for partners to help host ToolUniverse server. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
+We are currently looking for partners. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
 
 ToolUniverse is an ecosystem for creating AI scientist systems from any open or closed large language model (LLM). Powered by AI-Tool Interaction Protocol, it standardizes how LLMs identify and call tools, integrating more than **700 machine learning models, datasets, APIs, and scientific packages** for data analysis, knowledge retrieval, and experimental design.
 
