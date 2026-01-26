@@ -2697,7 +2697,7 @@ class ToolUniverse:
                     f"Tool '{function_name}' not found even after loading tools"
                 )
 
-        tool_instance = self._get_tool_instance(function_name, cache=False)
+        tool_instance = self._get_tool_instance(function_name, cache=True)
         if not tool_instance:
             # Check if we have a recorded error for this tool
             tool_errors = get_tool_errors()
@@ -2737,7 +2737,7 @@ class ToolUniverse:
         self, exception: Exception, function_name: str, arguments: dict
     ) -> ToolError:
         """Classify exception by delegating to BaseTool."""
-        tool_instance = self._get_tool_instance(function_name, cache=False)
+        tool_instance = self._get_tool_instance(function_name, cache=True)
 
         if tool_instance:
             return tool_instance.handle_error(exception)
