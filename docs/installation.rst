@@ -51,6 +51,7 @@ Choose the installation method that best fits your needs:
 
       .. code-block:: bash
 
+         # Test MCP Server (default port 8000)
          tooluniverse-mcp --help
 
    .. tab:: 🔧 Development Installation
@@ -118,7 +119,7 @@ Choose the installation method that best fits your needs:
          RUN pip install -r requirements.txt
          RUN pip install tooluniverse
 
-         CMD ["python", "-m", "tooluniverse.smcp_server"]
+         CMD ["tooluniverse-smcp", "--host", "0.0.0.0", "--port", "7000"]
 
       **Docker Compose**
 
@@ -129,7 +130,7 @@ Choose the installation method that best fits your needs:
            tooluniverse:
              build: .
              ports:
-               - "8000:8000"
+               - "7000:7000"
              environment:
                - OPENTARGETS_API_KEY=${OPENTARGETS_API_KEY}
                - NCBI_API_KEY=${NCBI_API_KEY}
@@ -214,10 +215,10 @@ Test MCP Server:
 .. code-block:: bash
 
    # Test MCP server
-   tooluniverse-mcp --help
+   tooluniverse-smcp --help
 
    # Start MCP server
-   python -m tooluniverse.smcp_server
+   tooluniverse-smcp
 
 Test Basic Functionality:
 

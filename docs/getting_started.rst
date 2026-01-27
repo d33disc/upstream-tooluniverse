@@ -219,7 +219,7 @@ Connect ToolUniverse to AI assistants through the Model Context Protocol (MCP). 
    )
 
    # Start server
-   server.run_simple(transport="http", host="localhost", port=8000)
+   server.run_simple(transport="http", host="localhost", port=7000)
 
 .. seealso::
    For complete MCP server setup, configuration, and integration, see :doc:`guide/mcp_support`

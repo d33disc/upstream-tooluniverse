@@ -144,7 +144,7 @@ result = tu.run({
 ### MCP Support
 
 ```python
-# run one command to launch the tooluniverse mcp server
+# run one command to launch the tooluniverse smcp server
 tooluniverse-smcp
 ```
 → **Complete Tutorial**: [MCP Support](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcp_support.html)

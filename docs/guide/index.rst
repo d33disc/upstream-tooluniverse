@@ -20,6 +20,7 @@ Core Concepts
 * **🐍 Coding API** → :doc:`coding_api` - Import and call tools like normal Python functions with type safety
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol integration and server setup
+* **✂️ MCP Name Shortening** → :doc:`mcp_name_shortening` - Automatic tool name shortening for MCP 64-character limit compatibility
 * **📦 MCPB Support** → :doc:`mcpb_introduction` - Standalone executable bundle for Claude Desktop and other clients
 * **🌐 HTTP API** → :doc:`http_api` - Remote access via HTTP/REST with auto-updating server and minimal client dependencies
 * **📦 Compact Mode** → :doc:`compact_mode` - Optimize context window usage by exposing only core tools (4 tools) while maintaining full functionality
