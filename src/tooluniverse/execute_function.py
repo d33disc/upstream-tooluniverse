@@ -250,6 +250,7 @@ class ToolUniverse:
         hooks_enabled: bool = False,
         hook_config: dict = None,
         hook_type: str = None,
+        enable_name_shortening: bool = False,
     ):
         """
         Initialize the ToolUniverse with tool file configurations.
@@ -266,6 +267,8 @@ class ToolUniverse:
             hook_type (str or list, optional): Simple hook type selection. Can be 'SummarizationHook',
                                              'FileSaveHook', or a list of both. Defaults to 'SummarizationHook'.
                                              If both hook_config and hook_type are provided, hook_config takes precedence.
+            enable_name_shortening (bool, optional): Whether to enable automatic tool name shortening
+                                                   for MCP compatibility. Defaults to False.
         """
         # Set log level if specified
         if log_level is not None:
@@ -273,6 +276,15 @@ class ToolUniverse:
 
         # Get logger for this class
         self.logger = get_logger("ToolUniverse")
+
+        # Initialize name mapper if requested
+        if enable_name_shortening:
+            from .tool_name_utils import ToolNameMapper
+
+            self.name_mapper = ToolNameMapper()
+            self.logger.debug("Name shortening enabled for MCP compatibility")
+        else:
+            self.name_mapper = None
 
         # Initialize any necessary attributes here FIRST
         self.all_tools: List[Dict[str, Any]] = []
@@ -2138,6 +2150,10 @@ class ToolUniverse:
         function_name = function_call_json.get("name", "")
         arguments = function_call_json.get("arguments", {})
 
+        # Resolve shortened names transparently
+        if self.name_mapper and function_name:
+            function_name = self.name_mapper.get_original(function_name)
+
         # Handle malformed queries gracefully
         if not function_name:
             return {"error": "Missing or empty function name"}
@@ -2501,6 +2517,10 @@ class ToolUniverse:
 
     def _get_tool_instance(self, function_name: str, cache: bool = True):
         """Get or create tool instance with optional caching."""
+        # Resolve shortened names transparently
+        if self.name_mapper:
+            function_name = self.name_mapper.get_original(function_name)
+
         # Check cache first
         if function_name in self.callable_functions:
             return self.callable_functions[function_name]
@@ -2976,6 +2996,24 @@ class ToolUniverse:
         tool_config = self.all_tool_dict[tool_name]
         parameter_schema = tool_config.get("parameter", {})
         return parameter_schema.get("required", [])
+
+    def get_exposed_name(self, tool_name: str, max_length: int = 55) -> str:
+        """
+        Get the name that should be exposed externally (e.g., to MCP clients).
+
+        If name_mapper is set, returns the shortened name. Otherwise returns original name.
+        This encapsulates all name shortening logic within ToolUniverse.
+
+        Args:
+            tool_name: Original tool name
+            max_length: Maximum length for shortened name (default: 55 for MCP with 'tu' prefix)
+
+        Returns:
+            str: Name to expose (shortened if name_mapper is set, otherwise original)
+        """
+        if self.name_mapper:
+            return self.name_mapper.get_shortened(tool_name, max_length=max_length)
+        return tool_name
 
     def get_available_tools(self, category_filter=None, name_only=True):
         """

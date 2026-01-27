@@ -65,6 +65,22 @@ except ImportError:
         raise ImportError("SMCP requires FastMCP. Install with: pip install fastmcp")
 
 
+# Import HTTP Client with graceful fallback for minimal installation
+try:
+    from .http_client import ToolUniverseClient
+
+    _HTTP_CLIENT_AVAILABLE = True
+except ImportError:
+    _HTTP_CLIENT_AVAILABLE = False
+
+    class ToolUniverseClient:  # type: ignore[no-redef]
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            raise ImportError(
+                "HTTP Client requires requests and pydantic. "
+                "Install with: pip install tooluniverse[client]"
+            )
+
+
 def __getattr__(name: str) -> Any:
     """
     Dynamic dispatch for tool classes.
@@ -118,6 +134,7 @@ __all__ = [
     "get_tool_registry",
     "SMCP",
     "create_smcp_server",
+    "ToolUniverseClient",
     "default_tool_files",
 ]
 

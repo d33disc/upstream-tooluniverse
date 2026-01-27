@@ -78,13 +78,26 @@ Based on `docs/expand_tooluniverse/contributing/local_tools.rst` and the current
 4.  **Auto-Discovery**:
     *   Modern `ToolUniverse` uses automated discovery. You generally **do not** need to modify `src/tooluniverse/__init__.py` if you place your file correctly in `src/tooluniverse/`.
 
-### C. Development Checklist
+### C. Tool Naming Guidelines
+
+**Important**: Tool names should be kept reasonably short for MCP compatibility.
+
+- **Recommended**: ≤ 55 characters (fits in MCP with `mcp__tu__` prefix)
+- **Maximum**: 64 characters (MCP hard limit without prefix)
+- **Automatic shortening**: Long names are automatically shortened for MCP exposure
+- **Best practice**: Use concise but descriptive names (e.g., `FDA_get_drug_info` not `FDA_get_detailed_information_about_drug`)
+
+If your tool name exceeds 55 characters, it will be automatically shortened when exposed via MCP using intelligent word truncation. See [MCP Name Shortening Guide](docs/mcp_name_shortening.md) for details.
+
+### D. Development Checklist
 1.  [ ] Create `src/tooluniverse/xxx_tool.py` with `@register_tool`.
 2.  [ ] Create `src/tooluniverse/data/xxx_tools.json` including `returns` schema.
-3.  [ ] Implement `run(arguments)` method.
-4.  [ ] Implement `validate_parameters` (optional but recommended).
-5.  [ ] Write unit tests in `tests/unit/`.
-6.  [ ] Verify tool load with `tu.load_tools()`.
+3.  [ ] Ensure tool names are ≤ 55 characters (or they will be auto-shortened for MCP).
+4.  [ ] Implement `run(arguments)` method.
+5.  [ ] Implement `validate_parameters` (optional but recommended).
+6.  [ ] Write unit tests in `tests/unit/`.
+7.  [ ] Verify tool load with `tu.load_tools()`.
+8.  [ ] Run `python scripts/check_tool_name_lengths.py --test-shortening` to validate.
 
 ---
 

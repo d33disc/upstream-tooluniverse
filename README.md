@@ -155,6 +155,42 @@ The **Model Context Protocol Bundle (MCPB)** wraps ToolUniverse as a standalone 
 
 > [Read our Introduction to MCPB](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcpb_introduction.html)
 
+### 🌐 HTTP API - Remote Access
+
+Deploy ToolUniverse on a **separate server** and access all 49+ methods remotely with minimal client dependencies!
+
+**Server** (with full ToolUniverse):
+```bash
+pip install tooluniverse
+tooluniverse-http-api --host 0.0.0.0 --port 8080
+```
+
+**Client** (only needs `requests` + `pydantic`):
+```bash
+pip install tooluniverse[client]  # Minimal installation
+```
+
+```python
+from tooluniverse import ToolUniverseClient
+
+client = ToolUniverseClient("http://your-server:8080")
+
+# Use exactly like local ToolUniverse!
+client.load_tools(tool_type=['uniprot', 'ChEMBL', 'opentarget'])
+result = client.run_one_function({
+    "name": "UniProt_get_entry_by_accession",
+    "arguments": {"accession": "P05067"}
+})
+```
+
+**Key Features:**
+- ✅ **Auto-updating**: New methods work automatically (zero maintenance!)
+- ✅ **Minimal client**: Only `requests` + `pydantic` required
+- ✅ **Full API access**: All ToolUniverse methods available remotely
+- ✅ **Stateful server**: Maintains loaded tools across requests
+
+→ **Complete Guide**: [HTTP API Documentation](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/http_api.html)
+
 
 ## 🚀 AI Scientists Projects Powered by ToolUniverse
 

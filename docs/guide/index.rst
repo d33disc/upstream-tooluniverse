@@ -21,6 +21,7 @@ Core Concepts
 * **🔬 Scientific Workflows** → :doc:`scientific_workflows` - Real-world research scenarios: drug discovery, safety analysis, literature review
 * **📡 MCP Support** → :doc:`mcp_support` - Model Context Protocol integration and server setup
 * **📦 MCPB Support** → :doc:`mcpb_introduction` - Standalone executable bundle for Claude Desktop and other clients
+* **🌐 HTTP API** → :doc:`http_api` - Remote access via HTTP/REST with auto-updating server and minimal client dependencies
 * **📦 Compact Mode** → :doc:`compact_mode` - Optimize context window usage by exposing only core tools (4 tools) while maintaining full functionality
 * **🔊 Streaming Tools** → :doc:`streaming_tools` - Real-time streaming output and custom tool integration
 * **📝 Logging** → :doc:`logging` - Comprehensive logging configuration and debugging

@@ -50,6 +50,10 @@ requires-python = ">=3.10"
 readme = "README.md"
 
 [project.optional-dependencies]
+client = [
+    "requests>=2.32.0",
+    "pydantic>=2.11.0",
+]
 smolagents = [
     "smolagents>=1.22.0",
     "gradio>=4.0.0",  # Required for GradioUI web interface
@@ -128,10 +132,11 @@ Homepage = "https://github.com/mims-harvard/ToolUniverse"
 
 [project.scripts]
 tooluniverse-mcp = "tooluniverse.smcp_server:run_http_server"
-tooluniverse-mcp-claude = "tooluniverse.smcp_server:run_stdio_server"
 tooluniverse-smcp = "tooluniverse.smcp_server:run_smcp_server"
 tooluniverse-smcp-server = "tooluniverse.smcp_server:run_http_server"
 tooluniverse-smcp-stdio = "tooluniverse.smcp_server:run_stdio_server"
+# HTTP API Server for ToolUniverse class methods
+tooluniverse-http-api = "tooluniverse.http_api_server_cli:run_http_api_server"
 generate-mcp-tools = "tooluniverse.generate_mcp_tools:run_generate"
 # Human Expert Feedback System
 tooluniverse-expert-feedback = "tooluniverse.remote.expert_feedback.human_expert_mcp_tools:main"

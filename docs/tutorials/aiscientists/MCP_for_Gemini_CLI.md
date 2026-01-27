@@ -306,8 +306,8 @@ You can selectively trust tools by choosing "Always allow this tool" during conf
 **Symptoms**: ToolUniverse server shows `DISCONNECTED` status in `/mcp`.
 
 **Solutions**:
-1.  Verify ToolUniverse is properly installed and the `tooluniverse-mcp-claude` command is runnable. Test it directly in your terminal:
-    `cd /path/to/your/ToolUniverse && uv run tooluniverse-mcp-claude --help`
+1.  Verify ToolUniverse is properly installed and the `tooluniverse-smcp-stdio` command is runnable. Test it directly in your terminal:
+    `cd /path/to/your/ToolUniverse && uv run tooluniverse-smcp-stdio --help`
 2.  Check that the `cwd` path in your configuration is correct and absolute.
 3.  Ensure `uv` is installed and accessible in your system's PATH.
 4.  Review any error messages in the CLI output, possibly with debug mode.
