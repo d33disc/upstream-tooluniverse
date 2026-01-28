@@ -8,14 +8,14 @@
       "properties": {},
       "required": []
     },
-    "test_examples": [
-      {}
-    ],
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
       "properties": {}
-    }
+    },
+    "test_examples": [
+      {}
+    ]
   },
   {
     "type": "SpecialTool",
@@ -33,15 +33,15 @@
         "solution"
       ]
     },
-    "test_examples": [
-      {
-        "solution": "Step 1: Search for gene data. Step 2: Analyze mutations."
-      }
-    ],
     "return_schema": {
       "type": "object",
       "description": "Output of the tool execution.",
       "properties": {}
-    }
+    },
+    "test_examples": [
+      {
+        "solution": "Step 1: Search for gene data. Step 2: Analyze mutations."
+      }
+    ]
   }
 ]
