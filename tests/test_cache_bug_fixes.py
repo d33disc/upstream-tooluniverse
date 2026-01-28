@@ -224,7 +224,7 @@ def test_cache_key_consistency():
             assert result2 == result1
             
             # Different arguments - should execute
-            result3 = tu.run_one_function(
+            _result3 = tu.run_one_function(
                 {"name": "TestTool", "arguments": {"value": 99}},
                 use_cache=True,
             )
