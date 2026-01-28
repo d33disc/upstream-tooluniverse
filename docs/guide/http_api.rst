@@ -24,38 +24,76 @@ On the machine with ToolUniverse installed:
 Use Client
 ~~~~~~~~~~
 
-On any machine that needs to call ToolUniverse remotely:
+Install minimal client on any machine:
 
 .. code-block:: bash
 
-    # Install with minimal dependencies
-    pip install tooluniverse[client]
-    # This only installs: requests>=2.32.0, pydantic>=2.11.0
+    pip install tooluniverse[client]  # Only needs: requests + pydantic
 
 .. code-block:: python
 
     from tooluniverse import ToolUniverseClient
 
     client = ToolUniverseClient("http://your-server:8080")
+    client.load_tools(tool_type=['uniprot', 'ChEMBL'])
+    result = client.run_one_function({
+        "name": "UniProt_get_entry_by_accession",
+        "arguments": {"accession": "P05067"}
+    })
 
-    # Use exactly like local ToolUniverse!
-    client.load_tools(
-        tool_type=['tool_finder', 'opentarget', 'fda_drug_label',
-                  'special_tools', 'monarch', 'fda_drug_adverse_event',
-                  'ChEMBL', 'EuropePMC', 'semantic_scholar', 
-                  'pubtator', 'EFO']
-    )
+Client Usage Details
+--------------------
 
-    # Get tool specification
-    spec = client.tool_specification("UniProt_get_entry_by_accession")
+Official Client Features
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # Execute tool
-    result = client.run_one_function(
-        function_call_json={
-            "name": "UniProt_get_entry_by_accession",
-            "arguments": {"accession": "P05067"}
-        }
-    )
+The official ``ToolUniverseClient`` includes:
+
+- ✅ Automatic method discovery: ``client.list_available_methods()``
+- ✅ Built-in help: ``client.help("method_name")``
+- ✅ Health check: ``client.health_check()``
+- ✅ Context manager support: ``with ToolUniverseClient(url) as client:``
+- ✅ All ToolUniverse methods via dynamic proxy
+
+Custom Client Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you need a custom client, ensure discovery methods are **real methods** (not proxied):
+
+.. code-block:: python
+
+    import requests
+    
+    class CustomToolUniverseClient:
+        def __init__(self, url):
+            self.base_url = url.rstrip("/")
+        
+        # Real methods for discovery endpoints (not proxied)
+        def list_available_methods(self):
+            """Uses GET /api/methods (not POST /api/call)"""
+            response = requests.get(f"{self.base_url}/api/methods")
+            return response.json()["methods"]
+        
+        def health_check(self):
+            """Uses GET /health"""
+            response = requests.get(f"{self.base_url}/health")
+            return response.json()
+        
+        # Proxy for ToolUniverse methods
+        def __getattr__(self, method_name):
+            """Only ToolUniverse methods use POST /api/call"""
+            def proxy(**kwargs):
+                response = requests.post(
+                    f"{self.base_url}/api/call",
+                    json={"method": method_name, "kwargs": kwargs}
+                )
+                result = response.json()
+                if not result.get("success"):
+                    raise Exception(f"{result['error_type']}: {result['error']}")
+                return result["result"]
+            return proxy
+
+**Important**: ``list_available_methods()`` must be a real method, not proxied through ``__getattr__``, because it needs to use ``GET /api/methods``, not ``POST /api/call``.
 
 How It Works
 ------------
@@ -113,61 +151,53 @@ API Endpoints
 
 The server exposes the following REST endpoints:
 
-- ``GET /`` - API information
-- ``GET /health`` - Health check
-- ``GET /api/methods`` - List all available methods with signatures
-- ``POST /api/call`` - Call any ToolUniverse method
-- ``POST /api/reset`` - Reset ToolUniverse instance
-- ``GET /docs`` - Interactive Swagger UI documentation
-- ``GET /redoc`` - Alternative ReDoc documentation
+.. list-table:: API Endpoints Reference
+   :header-rows: 1
+   :widths: 20 10 40 30
+
+   * - Endpoint
+     - Method
+     - Purpose
+     - Client Usage
+   * - ``/health``
+     - GET
+     - Server health check
+     - ``client.health_check()``
+   * - ``/api/methods``
+     - GET
+     - List all ToolUniverse methods
+     - ``client.list_available_methods()``
+   * - ``/api/call``
+     - POST
+     - Call any ToolUniverse method
+     - ``client.method_name(**kwargs)``
+   * - ``/api/reset``
+     - POST
+     - Reset ToolUniverse instance
+     - ``client.reset_server(config)``
+   * - ``/docs``
+     - GET
+     - Interactive Swagger UI docs
+     - Open in browser
+   * - ``/redoc``
+     - GET
+     - Alternative ReDoc docs
+     - Open in browser
+
+**Key distinction:**
+
+- **Discovery endpoints** (``/health``, ``/api/methods``): Use GET, handled by client as real methods
+- **Execution endpoint** (``/api/call``): Use POST, calls actual ToolUniverse methods
 
 Example Usage
 -------------
 
-List Available Methods
-~~~~~~~~~~~~~~~~~~~~~~
+See ``examples/http_api_usage_example.py`` for comprehensive examples including:
 
-.. code-block:: python
-
-    from tooluniverse import ToolUniverseClient
-
-    client = ToolUniverseClient("http://localhost:8080")
-
-    # See what methods are available
-    methods = client.list_available_methods()
-    for m in methods[:10]:
-        print(f"{m['name']}: {m['docstring']}")
-
-    # Get help for specific method
-    client.help("load_tools")
-
-Load and Use Tools
-~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-    client = ToolUniverseClient("http://server:8080")
-
-    # Load specific tools
-    client.load_tools(tool_type=['uniprot', 'ChEMBL'])
-
-    # Get tool specification
-    spec = client.tool_specification("UniProt_get_entry_by_accession")
-
-    # Execute tool
-    result = client.run_one_function({
-        "name": "UniProt_get_entry_by_accession",
-        "arguments": {"accession": "P05067"}
-    })
-
-Health Check
-~~~~~~~~~~~~
-
-.. code-block:: python
-
-    health = client.health_check()
-    print(f"Status: {health['status']}")
-    print(f"Loaded tools: {health['loaded_tools_count']}")
+- Listing methods and getting help
+- Loading tools and getting specifications  
+- Executing tools and checking health
+- Tool prompts preparation
 
 Production Deployment
 ---------------------
@@ -219,52 +249,19 @@ For development with auto-reload:
 Installation
 ------------
 
-Server Installation
-~~~~~~~~~~~~~~~~~~~
-
-Install the full ToolUniverse package on the server:
-
-.. code-block:: bash
-
-    pip install tooluniverse
-
-Client Installation
-~~~~~~~~~~~~~~~~~~~
-
-Install with minimal dependencies on client machines:
-
-.. code-block:: bash
-
-    pip install tooluniverse[client]
-
-This only installs:
-
-- ``requests>=2.32.0``
-- ``pydantic>=2.11.0``
+- **Server**: ``pip install tooluniverse``
+- **Client**: ``pip install tooluniverse[client]`` (only requests + pydantic)
 
 Testing
 -------
 
-Run Unit Tests
-~~~~~~~~~~~~~~
-
 .. code-block:: bash
 
+    # Run tests
     pytest tests/test_http_api_server.py -v
-
-Run Examples
-~~~~~~~~~~~~
-
-.. code-block:: bash
-
+    
+    # Run examples
     python examples/http_api_usage_example.py
-
-Test Client Import
-~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    python -c "from tooluniverse import ToolUniverseClient; print('✅ Client imported successfully')"
 
 Implementation Files
 --------------------
@@ -435,3 +432,94 @@ Once the server is running, you can access interactive API documentation:
 - **ReDoc**: http://server:8080/redoc
 
 These provide a web interface to explore and test all API endpoints.
+
+Troubleshooting
+---------------
+
+Most Common Issue
+~~~~~~~~~~~~~~~~~
+
+**Error: "Method 'list_available_methods' not found on ToolUniverse"**
+
+This is the most common error when using a custom client.
+
+**What's happening:**
+
+Your custom client uses ``__getattr__`` to proxy ALL method calls to ``POST /api/call``, including ``list_available_methods()``. But ``list_available_methods()`` is NOT a ToolUniverse method - it's a client-side utility that should use ``GET /api/methods``.
+
+**Why this happens:**
+
+.. code-block:: python
+
+    # Your custom client code:
+    client.list_available_methods()
+    ↓
+    __getattr__("list_available_methods") intercepts it
+    ↓
+    POST /api/call {"method": "list_available_methods", "kwargs": {}}
+    ↓
+    Server tries: tu.list_available_methods()
+    ↓
+    ❌ ERROR: "Method 'list_available_methods' not found on ToolUniverse"
+
+**The fix:**
+
+❌ **Wrong**: Custom client that proxies everything
+
+.. code-block:: python
+
+    class ToolUniverseClient:
+        def __getattr__(self, method_name):
+            # This proxies EVERYTHING, including list_available_methods!
+            def proxy(**kwargs):
+                return requests.post(url, json={"method": method_name, "kwargs": kwargs})
+            return proxy
+
+    client.list_available_methods()  # ❌ Tries to call it on ToolUniverse (doesn't exist)
+
+✅ **Solution**: Use the official client
+
+.. code-block:: python
+
+    from tooluniverse import ToolUniverseClient
+    
+    client = ToolUniverseClient("http://server:8080")
+    methods = client.list_available_methods()  # ✅ Works correctly
+
+Or if implementing a custom client, see the "Custom Client Implementation" section above for the correct pattern.
+
+**Key insight**: ``list_available_methods()`` must be a real method using ``GET /api/methods``, not proxied through ``__getattr__`` to ``POST /api/call``.
+
+**Server Not Starting**
+
+.. code-block:: bash
+
+    # Check if port is in use
+    lsof -i :8080
+    
+    # Use different port
+    tooluniverse-http-api --port 8081
+
+**High Memory Usage**
+
+If you see multiple worker processes consuming GPU memory:
+
+.. code-block:: bash
+
+    # Use single worker (default)
+    tooluniverse-http-api --workers 1
+    
+    # Increase thread pool instead
+    tooluniverse-http-api --thread-pool-size 50
+
+**Connection Refused**
+
+Ensure server is accessible:
+
+.. code-block:: bash
+
+    # Listen on all interfaces
+    tooluniverse-http-api --host 0.0.0.0 --port 8080
+    
+    # Check firewall
+    curl http://server:8080/health
