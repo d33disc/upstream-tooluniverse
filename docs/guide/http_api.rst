@@ -523,3 +523,27 @@ Ensure server is accessible:
     
     # Check firewall
     curl http://server:8080/health
+
+**Tool_RAG Tensor Copy Error**
+
+If you encounter a tensor copy error when using ``Tool_RAG``:
+
+.. code-block:: text
+
+    RuntimeError: Trying to copy tensor from CPU to CUDA device...
+
+This was a device mismatch bug where cached embeddings (CPU) didn't match the model device (GPU). 
+
+**Fixed in latest version:**
+
+- Tool_RAG model automatically loads on GPU if available
+- Cached embeddings are automatically moved to model's device
+- Device compatibility checks before tensor operations
+
+**Solution**: Update to the latest version:
+
+.. code-block:: bash
+
+    pip install --upgrade tooluniverse[embedding]
+
+The model will now automatically use GPU when available for faster inference.

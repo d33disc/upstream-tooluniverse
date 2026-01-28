@@ -79,20 +79,35 @@ class ToolFinderEmbedding(BaseTool):
         Configures the model with appropriate sequence length and tokenizer settings
         for optimal performance in tool description encoding.
 
+        The model is automatically moved to GPU if available for faster inference.
+
         Raises:
             ImportError: If sentence-transformers is not installed.
         """
         try:
             from sentence_transformers import SentenceTransformer
+            import torch
         except ImportError as e:
             raise ImportError(
                 "ToolFinderEmbedding requires 'sentence-transformers' package. "
                 "Install it with: pip install tooluniverse[embedding] or pip install tooluniverse[ml]"
             ) from e
 
-        self.rag_model = SentenceTransformer(self.toolfinder_model)
+        # Determine device: use GPU if available, otherwise CPU
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+
+        # Load model on the appropriate device
+        self.rag_model = SentenceTransformer(self.toolfinder_model, device=device)
         self.rag_model.max_seq_length = 4096
         self.rag_model.tokenizer.padding_side = "right"
+
+        # Log device information
+        if torch.cuda.is_available():
+            print(
+                f"\033[92m✅ Tool_RAG model loaded on GPU: {torch.cuda.get_device_name(0)}\033[0m"
+            )
+        else:
+            print("\033[93m⚠️  Tool_RAG model loaded on CPU (GPU not available)\033[0m")
 
     def load_tool_desc_embedding(
         self,
@@ -161,6 +176,14 @@ class ToolFinderEmbedding(BaseTool):
             self.tool_desc_embedding = torch.load(
                 self.tool_embedding_path, weights_only=False
             )
+            # Bug fix: Ensure embeddings are on the same device as the model
+            # Cached embeddings are loaded on CPU by default, but the model is on GPU if available
+            # This prevents "RuntimeError: Trying to copy tensor from CPU to CUDA device" errors
+            # Move embeddings to model's device (GPU if model is on GPU, CPU otherwise)
+            if hasattr(self.rag_model, "device"):
+                self.tool_desc_embedding = self.tool_desc_embedding.to(
+                    self.rag_model.device
+                )
             assert len(self.tool_desc_embedding) == len(self.tool_name), (
                 "The number of tools in the tool_name list is not equal to the number of tool_desc_embedding."
             )
@@ -238,6 +261,19 @@ class ToolFinderEmbedding(BaseTool):
         if self.tool_desc_embedding is None:
             print("No tool_desc_embedding")
             exit()
+
+        # Bug fix: Ensure both embeddings are on the same device before similarity calculation
+        # Query embeddings are created on the model's device (GPU if available)
+        # But tool embeddings might be on a different device (e.g., moved from CPU cache)
+        # This prevents tensor device mismatch errors during similarity computation
+        if isinstance(query_embeddings, torch.Tensor) and isinstance(
+            self.tool_desc_embedding, torch.Tensor
+        ):
+            if query_embeddings.device != self.tool_desc_embedding.device:
+                self.tool_desc_embedding = self.tool_desc_embedding.to(
+                    query_embeddings.device
+                )
+
         scores = self.rag_model.similarity(query_embeddings, self.tool_desc_embedding)
         top_k = min(top_k, len(self.tool_name))
         top_k_indices = torch.topk(scores, top_k).indices.tolist()[0]
