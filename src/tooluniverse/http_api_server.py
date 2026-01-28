@@ -11,10 +11,14 @@ Usage:
     python -m tooluniverse.http_api_server --host 0.0.0.0 --port 8080
 """
 
+import asyncio
 import inspect
 import json
+import os
 import threading
 import traceback
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
@@ -24,6 +28,14 @@ from .execute_function import ToolUniverse
 from .logging_config import get_logger
 
 logger = get_logger("HTTPAPIServer")
+
+# Thread pool for running sync ToolUniverse methods asynchronously
+# Can be configured via TOOLUNIVERSE_THREAD_POOL_SIZE environment variable
+_thread_pool_size = int(os.getenv("TOOLUNIVERSE_THREAD_POOL_SIZE", "20"))
+_thread_pool = ThreadPoolExecutor(max_workers=_thread_pool_size)
+logger.info(
+    f"Initialized thread pool with {_thread_pool_size} workers for async execution"
+)
 
 
 class CallMethodRequest(BaseModel):
@@ -286,7 +298,12 @@ async def call_method(request: CallMethodRequest):
         logger.info(
             f"Calling method: {request.method} with kwargs: {list(request.kwargs.keys())}"
         )
-        result = method(**request.kwargs)
+
+        # Run the synchronous method in a thread pool to avoid blocking the event loop
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(
+            _thread_pool, partial(method, **request.kwargs)
+        )
 
         # Serialize result (handle non-JSON-serializable objects)
         try:

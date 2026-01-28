@@ -18,7 +18,7 @@ On the machine with ToolUniverse installed:
     # Install full ToolUniverse package
     pip install tooluniverse
 
-    # Start HTTP API server (8 workers by default)
+    # Start HTTP API server (single worker with async thread pool)
     tooluniverse-http-api --host 0.0.0.0 --port 8080
 
 Use Client
@@ -172,18 +172,40 @@ Health Check
 Production Deployment
 ---------------------
 
-Multi-Worker Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPU-Optimized Configuration (Recommended)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For production use with high concurrency:
+For GPU-based inference workloads (default, recommended):
 
 .. code-block:: bash
 
-    # 8 workers (default)
+    # Single worker with async thread pool (default: 20 threads)
     tooluniverse-http-api --host 0.0.0.0 --port 8080
 
-    # Custom number of workers
-    tooluniverse-http-api --host 0.0.0.0 --port 8080 --workers 16
+    # High concurrency: increase thread pool size
+    tooluniverse-http-api --host 0.0.0.0 --port 8080 --thread-pool-size 50
+
+    # Very high concurrency
+    tooluniverse-http-api --host 0.0.0.0 --port 8080 --thread-pool-size 100
+
+**Why single worker for GPU?**
+
+- ✅ Single ToolUniverse instance → Single GPU model in memory (~2GB)
+- ✅ Multiple workers → Multiple GPU model copies (~16GB+ wasted memory)
+- ✅ High concurrency via async thread pool (20-100 concurrent operations)
+- ✅ Efficient GPU memory usage
+
+Multi-Worker Configuration (CPU-Only Workloads)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Only use multiple workers for CPU-only workloads without GPU:
+
+.. code-block:: bash
+
+    # Multiple workers (only for CPU-only operations)
+    tooluniverse-http-api --host 0.0.0.0 --port 8080 --workers 8
+
+**Warning**: Multiple workers create separate ToolUniverse instances, each consuming GPU memory if GPU is used.
 
 Development Mode
 ~~~~~~~~~~~~~~~~
@@ -260,6 +282,52 @@ Examples & Tests
 - ``examples/http_api_usage_example.py`` - 7 comprehensive usage examples
 - ``tests/test_http_api_server.py`` - Comprehensive test suite
 
+Configuration Options
+---------------------
+
+Command-Line Arguments
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    tooluniverse-http-api --help
+
+Available options:
+
+- ``--host`` - Host to bind to (default: 127.0.0.1)
+- ``--port`` - Port to bind to (default: 8080)
+- ``--workers`` - Number of worker processes (default: 1, recommended for GPU)
+- ``--thread-pool-size`` - Async thread pool size per worker (default: 20)
+- ``--log-level`` - Log level: debug, info, warning, error, critical
+- ``--reload`` - Enable auto-reload for development
+
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    # Set thread pool size via environment variable
+    export TOOLUNIVERSE_THREAD_POOL_SIZE=50
+    tooluniverse-http-api --host 0.0.0.0 --port 8080
+
+Performance Tuning
+~~~~~~~~~~~~~~~~~~
+
+For GPU workloads, scale concurrency with thread pool size:
+
+.. code-block:: bash
+
+    # Low traffic (20 concurrent requests)
+    tooluniverse-http-api --thread-pool-size 20
+
+    # Medium traffic (50 concurrent requests)
+    tooluniverse-http-api --thread-pool-size 50
+
+    # High traffic (100 concurrent requests)
+    tooluniverse-http-api --thread-pool-size 100
+
+**Rule of thumb**: ``thread_pool_size = GPU_batch_size × 2 to 5``
+
 Benefits
 --------
 
@@ -270,7 +338,93 @@ Benefits
 5. ✅ **Type Discovery** - Client can query available methods at runtime
 6. ✅ **Automatic** - Both server and client use introspection/magic methods
 7. ✅ **Flexible Install** - Server needs full package, client uses ``tooluniverse[client]``
-8. ✅ **Production Ready** - Multi-worker support with 8 workers by default
+8. ✅ **GPU-Optimized** - Single worker with async thread pool for efficient GPU usage
+9. ✅ **High Concurrency** - 20-100+ concurrent operations via async thread pool
+
+Docker Deployment
+-----------------
+
+With GPU Support
+~~~~~~~~~~~~~~~~
+
+.. code-block:: dockerfile
+
+    FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+
+    WORKDIR /app
+    COPY . .
+    RUN pip install tooluniverse uvicorn fastapi
+
+    EXPOSE 8080
+
+    # Single worker with high thread pool for GPU
+    CMD ["tooluniverse-http-api", \
+         "--host", "0.0.0.0", \
+         "--port", "8080", \
+         "--workers", "1", \
+         "--thread-pool-size", "50"]
+
+Run with GPU:
+
+.. code-block:: bash
+
+    docker run --gpus all -p 8080:8080 tooluniverse-api
+
+Without GPU (CPU-Only)
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: dockerfile
+
+    FROM python:3.12-slim
+
+    WORKDIR /app
+    COPY . .
+    RUN pip install tooluniverse uvicorn fastapi
+
+    EXPOSE 8080
+
+    # Multiple workers for CPU workloads
+    CMD ["tooluniverse-http-api", \
+         "--host", "0.0.0.0", \
+         "--port", "8080", \
+         "--workers", "4"]
+
+Monitoring
+----------
+
+GPU Memory Usage
+~~~~~~~~~~~~~~~~
+
+Check GPU memory usage:
+
+.. code-block:: bash
+
+    # Monitor GPU in real-time
+    watch -n 1 nvidia-smi
+
+Expected output with single worker:
+
+.. code-block:: text
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   PID   Type   Process name                             GPU Memory    |
+    |============================================================================|
+    |    0   12345  C     python3 tooluniverse-http-api              2048MiB    |
+    +-----------------------------------------------------------------------------+
+
+Only ONE process should be using GPU memory.
+
+Server Health
+~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    # Check server health
+    curl http://localhost:8080/health
+
+    # Monitor logs
+    tooluniverse-http-api --log-level info
 
 Interactive Documentation
 --------------------------

@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import os
 import sys
 
 
@@ -20,23 +21,33 @@ def run_http_api_server():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Start server on default port
+  # Start server with default settings (single worker, 20 threads)
   tooluniverse-http-api
 
   # Start on specific host and port
   tooluniverse-http-api --host 0.0.0.0 --port 8080
 
-  # Start with multiple workers for production
-  tooluniverse-http-api --host 0.0.0.0 --port 8080 --workers 4
+  # Start with larger thread pool for high concurrency (recommended for GPU)
+  tooluniverse-http-api --host 0.0.0.0 --port 8080 --thread-pool-size 50
 
   # Start with reload for development
   tooluniverse-http-api --reload
+
+  # Start with multiple workers (only for CPU-only workloads, not GPU)
+  tooluniverse-http-api --host 0.0.0.0 --port 8080 --workers 4
 
 Features:
   - Auto-discovers all ToolUniverse methods via introspection
   - No manual updates needed when ToolUniverse changes
   - Thread-safe singleton ToolUniverse instance
+  - Async execution with thread pool for high concurrency
   - Full API documentation at /docs
+
+Note:
+  - Default is 1 worker (recommended for GPU workloads)
+  - Single worker uses async + thread pool (default: 20 threads) for concurrency
+  - Multiple workers create separate ToolUniverse instances (not recommended for GPU)
+  - For CPU-only workloads, you can increase workers if needed
         """,
     )
 
@@ -51,7 +62,10 @@ Features:
     )
 
     parser.add_argument(
-        "--workers", type=int, default=8, help="Number of worker processes (default: 8)"
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of worker processes (default: 1). WARNING: Multiple workers create separate ToolUniverse instances, each consuming GPU memory. Use single worker with larger thread pool for GPU workloads.",
     )
 
     parser.add_argument(
@@ -67,7 +81,17 @@ Features:
         help="Log level (default: info)",
     )
 
+    parser.add_argument(
+        "--thread-pool-size",
+        type=int,
+        default=20,
+        help="Size of thread pool for async execution per worker (default: 20). Increase this for higher concurrency instead of adding workers.",
+    )
+
     args = parser.parse_args()
+
+    # Set thread pool size via environment variable
+    os.environ["TOOLUNIVERSE_THREAD_POOL_SIZE"] = str(args.thread_pool_size)
 
     print("=" * 70)
     print("🚀 ToolUniverse HTTP API Server")
@@ -75,6 +99,17 @@ Features:
     print(f"📡 Host: {args.host}")
     print(f"🔌 Port: {args.port}")
     print(f"⚙️  Workers: {args.workers}")
+    if args.workers == 1:
+        print(
+            f"   ⚡ Single worker with {args.thread_pool_size}-thread pool for async concurrency"
+        )
+    else:
+        print(
+            f"   🔄 {args.workers} worker processes (each with separate ToolUniverse instance)"
+        )
+        print(
+            f"   ⚡ Each worker uses {args.thread_pool_size}-thread pool for async operations"
+        )
     print(f"📝 Log Level: {args.log_level}")
     print(f"🔄 Auto-reload: {'Enabled' if args.reload else 'Disabled'}")
     print()
