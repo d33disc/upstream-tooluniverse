@@ -230,6 +230,10 @@ class ToolFinderEmbedding(BaseTool):
             # This prevents "RuntimeError: Trying to copy tensor from CPU to CUDA device" errors
             # Move embeddings to model's device (GPU if model is on GPU, CPU otherwise)
             if hasattr(self.rag_model, "device"):
+                # Ensure it is a tensor first
+                if not isinstance(self.tool_desc_embedding, torch.Tensor):
+                    self.tool_desc_embedding = torch.tensor(self.tool_desc_embedding)
+                
                 self.tool_desc_embedding = self.tool_desc_embedding.to(
                     self.rag_model.device
                 )
@@ -243,7 +247,7 @@ class ToolFinderEmbedding(BaseTool):
 
             # Generate embeddings
             self.tool_desc_embedding = self.rag_model.encode(
-                all_tools_str, prompt="", normalize_embeddings=True
+                all_tools_str, prompt="", normalize_embeddings=True, convert_to_tensor=True
             )
 
             # Save embeddings to disk
@@ -313,7 +317,7 @@ class ToolFinderEmbedding(BaseTool):
 
         queries = [query]
         query_embeddings = self.rag_model.encode(
-            queries, prompt="", normalize_embeddings=True
+            queries, prompt="", normalize_embeddings=True, convert_to_tensor=True
         )
 
         # Bug fix: Ensure both embeddings are on the same device before similarity calculation
