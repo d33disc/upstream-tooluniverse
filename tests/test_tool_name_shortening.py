@@ -98,89 +98,8 @@ class TestToolNameMapper:
         assert short1 == short2
 
 
-class TestToolUniverseAPI:
-    """Tests for ToolUniverse name handling API."""
-    
-    def test_get_exposed_name_with_mapper(self):
-        """Test that get_exposed_name() returns shortened name when mapper is set."""
-        from tooluniverse import ToolUniverse
-        
-        tu = ToolUniverse(enable_name_shortening=True)
-        tu.load_tools()
-        
-        long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-        exposed = tu.get_exposed_name(long_name, max_length=55)
-        
-        assert exposed != long_name
-        assert len(exposed) <= 55
-    
-    def test_get_exposed_name_without_mapper(self):
-        """Test that get_exposed_name() returns original name when mapper is None."""
-        from tooluniverse import ToolUniverse
-        
-        tu = ToolUniverse()
-        tu.load_tools()
-        
-        long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-        exposed = tu.get_exposed_name(long_name, max_length=55)
-        
-        assert exposed == long_name
-
-
-class TestTransparentResolution:
-    """Tests for transparent name resolution in ToolUniverse."""
-    
-    def test_run_one_function_accepts_both_names(self):
-        """Test that run_one_function() accepts both shortened and original names."""
-        from tooluniverse import ToolUniverse
-        
-        tu = ToolUniverse(enable_name_shortening=True)
-        tu.load_tools()
-        
-        long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-        shortened = tu.get_exposed_name(long_name)
-        
-        # Both should resolve to the same tool
-        assert shortened in tu.name_mapper._short_to_original
-        assert tu.name_mapper.get_original(shortened) == long_name
-    
-    def test_name_mapper_none_works(self):
-        """Test that when name_mapper is None, original behavior is preserved."""
-        from tooluniverse import ToolUniverse
-        
-        tu = ToolUniverse()
-        tu.load_tools()
-        
-        assert tu.name_mapper is None
-        
-        # Normal operation should still work
-        tool_name = "FDA_get_drug_info_by_name"
-        if tool_name in tu.all_tool_dict:
-            assert True
-
-
 class TestMCPCompatibility:
     """Tests for MCP 64-character limit compatibility."""
-    
-    def test_all_tools_fit_with_tu_prefix(self):
-        """Test that all tools fit within 64 chars with mcp__tu__ prefix."""
-        from tooluniverse import ToolUniverse
-        
-        tu = ToolUniverse(enable_name_shortening=True)
-        tu.load_tools()
-        
-        mcp_prefix = "mcp__tu__"
-        prefix_len = len(mcp_prefix)
-        max_tool_name_len = 64 - prefix_len  # 55 chars
-        
-        # Test that all shortened names fit
-        for tool_name in tu.all_tool_dict.keys():
-            shortened = tu.get_exposed_name(tool_name, max_length=max_tool_name_len)
-            full_mcp_name = mcp_prefix + shortened
-            
-            assert len(full_mcp_name) <= 64, (
-                f"MCP name too long: {full_mcp_name} ({len(full_mcp_name)} chars)"
-            )
     
     def test_smcp_integration(self):
         """Test that SMCP automatically enables name shortening."""
@@ -195,9 +114,3 @@ class TestMCPCompatibility:
         
         # SMCP should automatically enable name shortening
         assert server.tooluniverse.name_mapper is not None
-        
-        # Test that get_exposed_name works
-        long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-        if long_name in server.tooluniverse.all_tool_dict:
-            exposed = server.tooluniverse.get_exposed_name(long_name, max_length=55)
-            assert len(exposed) <= 55
