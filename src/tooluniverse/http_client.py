@@ -124,7 +124,7 @@ class ToolUniverseClient:
                 response = self.session.post(
                     f"{self.base_url}/api/call",
                     json={"method": method_name, "kwargs": kwargs},
-                    timeout=300,  # 5 minutes for long operations
+                    timeout=30,  # 30s for fast training operations
                 )
                 response.raise_for_status()
 
@@ -136,9 +136,13 @@ class ToolUniverseClient:
                     raise Exception(f"[{error_type}] {error_msg}")
 
                 return result.get("result")
+            
+            except requests.exceptions.ReadTimeout:
+                print(method_name, kwargs, "timed out")
+                return f"Error: Tool execution timed out after 30 seconds"
 
             except requests.exceptions.RequestException as e:
-                raise Exception(f"HTTP request failed for '{method_name}': {e}")
+                return f"Error: HTTP request failed for '{method_name}': {e}"
 
         # Try to add docstring from server (best effort)
         try:

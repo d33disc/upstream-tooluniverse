@@ -3245,15 +3245,21 @@ class ToolUniverse:
             stacklevel=2,
         )
         selected_tools = []
-        # If categories are specified, use self.tool_category_dicts to filter
-        categories = set(self.tool_category_dicts.keys())
-        if include_categories is not None:
-            categories &= set(include_categories)
-        if exclude_categories is not None:
-            categories -= set(exclude_categories)
-        # Gather tools from selected categories
-        for cat in categories:
-            selected_tools.extend(self.tool_category_dicts[cat])
+        
+        # If no category filters are specified, use all_tools directly
+        # This ensures we include auto-discovered tools that might not be in tool_category_dicts
+        if include_categories is None and exclude_categories is None:
+            selected_tools = list(self.all_tools)
+        else:
+            # If categories are specified, use self.tool_category_dicts to filter
+            categories = set(self.tool_category_dicts.keys())
+            if include_categories is not None:
+                categories &= set(include_categories)
+            if exclude_categories is not None:
+                categories -= set(exclude_categories)
+            # Gather tools from selected categories
+            for cat in categories:
+                selected_tools.extend(self.tool_category_dicts[cat])
         # Further filter by names if needed
         if include_names is not None:
             selected_tools = [
