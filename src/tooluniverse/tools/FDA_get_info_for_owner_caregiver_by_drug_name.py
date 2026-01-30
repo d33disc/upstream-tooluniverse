@@ -1,27 +1,33 @@
 """
-OpenTargets_get_target_subcellular_locations_by_ensemblID
+FDA_get_info_for_owner_caregiver_by_drug_name
 
-Retrieve information about subcellular locations for a specific target ensemblID.
+Retrieve specific information for owners or caregivers based on the drug name.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def OpenTargets_get_target_subcellular_locations_by_ensemblID(
-    ensemblId: str,
+def FDA_get_info_for_owner_caregiver_by_drug_name(
+    drug_name: str,
+    limit: Optional[int] = None,
+    skip: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve information about subcellular locations for a specific target ensemblID.
+    Retrieve specific information for owners or caregivers based on the drug name.
 
     Parameters
     ----------
-    ensemblId : str
-        The ensemblId of a target.
+    drug_name : str
+        The name of the drug.
+    limit : int
+        The number of records to return.
+    skip : int
+        The number of records to skip.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,8 +43,8 @@ def OpenTargets_get_target_subcellular_locations_by_ensemblID(
 
     return get_shared_client().run_one_function(
         {
-            "name": "OpenTargets_get_target_subcellular_locations_by_ensemblID",
-            "arguments": {"ensemblId": ensemblId},
+            "name": "FDA_get_info_for_owner_caregiver_by_drug_name",
+            "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -46,4 +52,4 @@ def OpenTargets_get_target_subcellular_locations_by_ensemblID(
     )
 
 
-__all__ = ["OpenTargets_get_target_subcellular_locations_by_ensemblID"]
+__all__ = ["FDA_get_info_for_owner_caregiver_by_drug_name"]

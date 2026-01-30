@@ -703,7 +703,10 @@
   },
   {
     "type": "XMLTool",
-    "name": "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id",
+    "name": "drugbank_get_drug_basic_info_by_drug_name_or_id",
+    "aliases": [
+      "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id"
+    ],
     "description": "Get basic drug information including name, description, CAS number, and approval status by drug name or DrugBank ID.",
     "settings": {
       "hf_dataset_path": {
@@ -1606,7 +1609,10 @@
   },
   {
     "type": "XMLTool",
-    "name": "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
+    "name": "drugbank_get_drug_interactions_by_drug_name_or_id",
+    "aliases": [
+      "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id"
+    ],
     "description": "Get drug interactions and contraindications by drug name or DrugBank ID.",
     "settings": {
       "hf_dataset_path": {
@@ -2839,7 +2845,10 @@
   },
   {
     "type": "XMLTool",
-    "name": "drugbank_get_drug_references_by_drug_name_or_drugbank_id",
+    "name": "drugbank_get_drug_references_by_drug_name_or_id",
+    "aliases": [
+      "drugbank_get_drug_references_by_drug_name_or_drugbank_id"
+    ],
     "description": "Get drug literature references, patents, and external links by drug name or DrugBank ID.",
     "settings": {
       "hf_dataset_path": {

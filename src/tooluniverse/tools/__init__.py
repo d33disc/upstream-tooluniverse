@@ -184,6 +184,9 @@ from .FAERS_search_reports_by_drug_combination import (
     FAERS_search_reports_by_drug_combination,
 )
 from .FAERS_search_serious_reports_by_drug import FAERS_search_serious_reports_by_drug
+from .FDA_get_DEA_schedule_info_by_drug_name import (
+    FDA_get_DEA_schedule_info_by_drug_name,
+)
 from .FDA_get_abuse_dependence_info_by_drug_name import (
     FDA_get_abuse_dependence_info_by_drug_name,
 )
@@ -218,19 +221,20 @@ from .FDA_get_clinical_pharmacology_by_drug_name import (
 from .FDA_get_clinical_studies_info_by_drug_name import (
     FDA_get_clinical_studies_info_by_drug_name,
 )
+from .FDA_get_conditions_info_for_doctor_consult_by_drug_name import (
+    FDA_get_conditions_info_for_doctor_consult_by_drug_name,
+)
+from .FDA_get_consulting_doctor_pharmacist_info_by_drug_name import (
+    FDA_get_consulting_doctor_pharmacist_info_by_drug_name,
+)
 from .FDA_get_contact_for_questions_info_by_drug_name import (
     FDA_get_contact_for_questions_info_by_drug_name,
 )
 from .FDA_get_contraindications_by_drug_name import (
     FDA_get_contraindications_by_drug_name,
 )
-from .FDA_get_controlled_substance_DEA_schedule_info_by_drug_name import (
-    FDA_get_controlled_substance_DEA_schedule_info_by_drug_name,
-)
-from .FDA_get_dear_health_care_provider_letter_info_by_drug_name import (
-    FDA_get_dear_health_care_provider_letter_info_by_drug_name,
-)
 from .FDA_get_dependence_info_by_drug_name import FDA_get_dependence_info_by_drug_name
+from .FDA_get_dhcp_letter_info_by_drug_name import FDA_get_dhcp_letter_info_by_drug_name
 from .FDA_get_disposal_info_by_drug_name import FDA_get_disposal_info_by_drug_name
 from .FDA_get_do_not_use_info_by_drug_name import FDA_get_do_not_use_info_by_drug_name
 from .FDA_get_document_id_by_drug_name import FDA_get_document_id_by_drug_name
@@ -249,6 +253,9 @@ from .FDA_get_drug_label_info_by_field_value import (
 )
 from .FDA_get_drug_name_by_SPL_ID import FDA_get_drug_name_by_SPL_ID
 from .FDA_get_drug_name_by_adverse_reaction import FDA_get_drug_name_by_adverse_reaction
+from .FDA_get_drug_name_by_conditions_for_doctor_consult import (
+    FDA_get_drug_name_by_conditions_for_doctor_consult,
+)
 from .FDA_get_drug_name_by_dependence_info import FDA_get_drug_name_by_dependence_info
 from .FDA_get_drug_name_by_document_id import FDA_get_drug_name_by_document_id
 from .FDA_get_drug_name_by_dosage_info import FDA_get_drug_name_by_dosage_info
@@ -257,9 +264,6 @@ from .FDA_get_drug_name_by_environmental_warning import (
 )
 from .FDA_get_drug_name_by_inactive_ingredient import (
     FDA_get_drug_name_by_inactive_ingredient,
-)
-from .FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation import (
-    FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation,
 )
 from .FDA_get_drug_name_by_labor_and_delivery_info import (
     FDA_get_drug_name_by_labor_and_delivery_info,
@@ -324,8 +328,8 @@ from .FDA_get_drug_names_by_contraindications import (
 from .FDA_get_drug_names_by_controlled_substance_DEA_schedule import (
     FDA_get_drug_names_by_controlled_substance_DEA_schedule,
 )
-from .FDA_get_drug_names_by_dear_health_care_provider_letter_info import (
-    FDA_get_drug_names_by_dear_health_care_provider_letter_info,
+from .FDA_get_drug_names_by_dhcp_letter_info import (
+    FDA_get_drug_names_by_dhcp_letter_info,
 )
 from .FDA_get_drug_names_by_disposal_info import FDA_get_drug_names_by_disposal_info
 from .FDA_get_drug_names_by_dosage_forms_and_strengths_info import (
@@ -353,8 +357,8 @@ from .FDA_get_drug_names_by_indication_stats import (
 from .FDA_get_drug_names_by_info_for_nursing_mothers import (
     FDA_get_drug_names_by_info_for_nursing_mothers,
 )
-from .FDA_get_drug_names_by_information_for_owners_or_caregivers import (
-    FDA_get_drug_names_by_information_for_owners_or_caregivers,
+from .FDA_get_drug_names_by_info_for_owner_or_caregiver import (
+    FDA_get_drug_names_by_info_for_owner_or_caregiver,
 )
 from .FDA_get_drug_names_by_ingredient import FDA_get_drug_names_by_ingredient
 from .FDA_get_drug_names_by_instructions_for_use import (
@@ -425,17 +429,11 @@ from .FDA_get_indications_by_drug_name import FDA_get_indications_by_drug_name
 from .FDA_get_info_for_nursing_mothers_by_drug_name import (
     FDA_get_info_for_nursing_mothers_by_drug_name,
 )
+from .FDA_get_info_for_owner_caregiver_by_drug_name import (
+    FDA_get_info_for_owner_caregiver_by_drug_name,
+)
 from .FDA_get_info_for_patients_by_drug_name import (
     FDA_get_info_for_patients_by_drug_name,
-)
-from .FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name import (
-    FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name,
-)
-from .FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name import (
-    FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name,
-)
-from .FDA_get_information_for_owners_or_caregivers_by_drug_name import (
-    FDA_get_information_for_owners_or_caregivers_by_drug_name,
 )
 from .FDA_get_ingredients_by_drug_name import FDA_get_ingredients_by_drug_name
 from .FDA_get_instructions_for_use_by_drug_name import (
@@ -693,6 +691,9 @@ from .OpenTargets_get_drug_adverse_events_by_chemblId import (
 from .OpenTargets_get_drug_approval_status_by_chemblId import (
     OpenTargets_get_drug_approval_status_by_chemblId,
 )
+from .OpenTargets_get_drug_blackbox_status_by_chembl_ID import (
+    OpenTargets_get_drug_blackbox_status_by_chembl_ID,
+)
 from .OpenTargets_get_drug_chembId_by_generic_name import (
     OpenTargets_get_drug_chembId_by_generic_name,
 )
@@ -720,17 +721,14 @@ from .OpenTargets_get_drug_trade_names_by_chemblId import (
 from .OpenTargets_get_drug_warnings_by_chemblId import (
     OpenTargets_get_drug_warnings_by_chemblId,
 )
-from .OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId import (
-    OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId,
-)
 from .OpenTargets_get_gene_ontology_terms_by_goID import (
     OpenTargets_get_gene_ontology_terms_by_goID,
 )
 from .OpenTargets_get_known_drugs_by_drug_chemblId import (
     OpenTargets_get_known_drugs_by_drug_chemblId,
 )
-from .OpenTargets_get_parent_child_molecules_by_drug_chembl_ID import (
-    OpenTargets_get_parent_child_molecules_by_drug_chembl_ID,
+from .OpenTargets_get_parent_child_molecules_by_chembl_ID import (
+    OpenTargets_get_parent_child_molecules_by_chembl_ID,
 )
 from .OpenTargets_get_publications_by_disease_efoId import (
     OpenTargets_get_publications_by_disease_efoId,
@@ -777,8 +775,8 @@ from .OpenTargets_get_target_interactions_by_ensemblID import (
 from .OpenTargets_get_target_safety_profile_by_ensemblID import (
     OpenTargets_get_target_safety_profile_by_ensemblID,
 )
-from .OpenTargets_get_target_subcellular_locations_by_ensemblID import (
-    OpenTargets_get_target_subcellular_locations_by_ensemblID,
+from .OpenTargets_get_target_subcell_locations_by_ensembl_ID import (
+    OpenTargets_get_target_subcell_locations_by_ensembl_ID,
 )
 from .OpenTargets_get_target_synonyms_by_ensemblID import (
     OpenTargets_get_target_synonyms_by_ensemblID,
@@ -999,8 +997,8 @@ from .download_file import download_file
 from .download_text_content import download_text_content
 from .drugbank_filter_drugs_by_name import drugbank_filter_drugs_by_name
 from .drugbank_full_search import drugbank_full_search
-from .drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id import (
-    drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id,
+from .drugbank_get_drug_basic_info_by_drug_name_or_id import (
+    drugbank_get_drug_basic_info_by_drug_name_or_id,
 )
 from .drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id import (
     drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id,
@@ -1008,8 +1006,8 @@ from .drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id import (
 from .drugbank_get_drug_desc_pharmacology_by_moa import (
     drugbank_get_drug_desc_pharmacology_by_moa,
 )
-from .drugbank_get_drug_interactions_by_drug_name_or_drugbank_id import (
-    drugbank_get_drug_interactions_by_drug_name_or_drugbank_id,
+from .drugbank_get_drug_interactions_by_drug_name_or_id import (
+    drugbank_get_drug_interactions_by_drug_name_or_id,
 )
 from .drugbank_get_drug_name_and_description_by_indication import (
     drugbank_get_drug_name_and_description_by_indication,
@@ -1023,8 +1021,8 @@ from .drugbank_get_drug_name_and_description_by_target_name import (
 from .drugbank_get_drug_products_by_name_or_drugbank_id import (
     drugbank_get_drug_products_by_name_or_drugbank_id,
 )
-from .drugbank_get_drug_references_by_drug_name_or_drugbank_id import (
-    drugbank_get_drug_references_by_drug_name_or_drugbank_id,
+from .drugbank_get_drug_references_by_drug_name_or_id import (
+    drugbank_get_drug_references_by_drug_name_or_id,
 )
 from .drugbank_get_indications_by_drug_name_or_drugbank_id import (
     drugbank_get_indications_by_drug_name_or_drugbank_id,
@@ -1082,8 +1080,8 @@ from .euhealthinfo_search_cancer_registry import euhealthinfo_search_cancer_regi
 from .euhealthinfo_search_causes_of_death import euhealthinfo_search_causes_of_death
 from .euhealthinfo_search_covid_19 import euhealthinfo_search_covid_19
 from .euhealthinfo_search_deaths import euhealthinfo_search_deaths
-from .euhealthinfo_search_diabetes_mellitus_epidemiology_registry import (
-    euhealthinfo_search_diabetes_mellitus_epidemiology_registry,
+from .euhealthinfo_search_diabetes_epidemiology_registry import (
+    euhealthinfo_search_diabetes_epidemiology_registry,
 )
 from .euhealthinfo_search_disability import euhealthinfo_search_disability
 from .euhealthinfo_search_healthcare_expenditure import (
@@ -1621,6 +1619,7 @@ __all__ = [
     "FAERS_search_reports_by_drug_and_reaction",
     "FAERS_search_reports_by_drug_combination",
     "FAERS_search_serious_reports_by_drug",
+    "FDA_get_DEA_schedule_info_by_drug_name",
     "FDA_get_abuse_dependence_info_by_drug_name",
     "FDA_get_abuse_info_by_drug_name",
     "FDA_get_accessories_info_by_drug_name",
@@ -1635,11 +1634,12 @@ __all__ = [
     "FDA_get_child_safety_info_by_drug_name",
     "FDA_get_clinical_pharmacology_by_drug_name",
     "FDA_get_clinical_studies_info_by_drug_name",
+    "FDA_get_conditions_info_for_doctor_consult_by_drug_name",
+    "FDA_get_consulting_doctor_pharmacist_info_by_drug_name",
     "FDA_get_contact_for_questions_info_by_drug_name",
     "FDA_get_contraindications_by_drug_name",
-    "FDA_get_controlled_substance_DEA_schedule_info_by_drug_name",
-    "FDA_get_dear_health_care_provider_letter_info_by_drug_name",
     "FDA_get_dependence_info_by_drug_name",
+    "FDA_get_dhcp_letter_info_by_drug_name",
     "FDA_get_disposal_info_by_drug_name",
     "FDA_get_do_not_use_info_by_drug_name",
     "FDA_get_document_id_by_drug_name",
@@ -1650,12 +1650,12 @@ __all__ = [
     "FDA_get_drug_label_info_by_field_value",
     "FDA_get_drug_name_by_SPL_ID",
     "FDA_get_drug_name_by_adverse_reaction",
+    "FDA_get_drug_name_by_conditions_for_doctor_consult",
     "FDA_get_drug_name_by_dependence_info",
     "FDA_get_drug_name_by_document_id",
     "FDA_get_drug_name_by_dosage_info",
     "FDA_get_drug_name_by_environmental_warning",
     "FDA_get_drug_name_by_inactive_ingredient",
-    "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation",
     "FDA_get_drug_name_by_labor_and_delivery_info",
     "FDA_get_drug_name_by_microbiology",
     "FDA_get_drug_name_by_other_safety_info",
@@ -1685,7 +1685,7 @@ __all__ = [
     "FDA_get_drug_names_by_consulting_doctor_pharmacist_info",
     "FDA_get_drug_names_by_contraindications",
     "FDA_get_drug_names_by_controlled_substance_DEA_schedule",
-    "FDA_get_drug_names_by_dear_health_care_provider_letter_info",
+    "FDA_get_drug_names_by_dhcp_letter_info",
     "FDA_get_drug_names_by_disposal_info",
     "FDA_get_drug_names_by_dosage_forms_and_strengths_info",
     "FDA_get_drug_names_by_drug_interactions",
@@ -1698,7 +1698,7 @@ __all__ = [
     "FDA_get_drug_names_by_indication_aggregated",
     "FDA_get_drug_names_by_indication_stats",
     "FDA_get_drug_names_by_info_for_nursing_mothers",
-    "FDA_get_drug_names_by_information_for_owners_or_caregivers",
+    "FDA_get_drug_names_by_info_for_owner_or_caregiver",
     "FDA_get_drug_names_by_ingredient",
     "FDA_get_drug_names_by_instructions_for_use",
     "FDA_get_drug_names_by_lab_test_interference",
@@ -1730,10 +1730,8 @@ __all__ = [
     "FDA_get_inactive_ingredient_info_by_drug_name",
     "FDA_get_indications_by_drug_name",
     "FDA_get_info_for_nursing_mothers_by_drug_name",
+    "FDA_get_info_for_owner_caregiver_by_drug_name",
     "FDA_get_info_for_patients_by_drug_name",
-    "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name",
-    "FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name",
-    "FDA_get_information_for_owners_or_caregivers_by_drug_name",
     "FDA_get_ingredients_by_drug_name",
     "FDA_get_instructions_for_use_by_drug_name",
     "FDA_get_lab_test_interference_info_by_drug_name",
@@ -1880,6 +1878,7 @@ __all__ = [
     "OpenTargets_get_diseases_phenotypes_by_target_ensembl",
     "OpenTargets_get_drug_adverse_events_by_chemblId",
     "OpenTargets_get_drug_approval_status_by_chemblId",
+    "OpenTargets_get_drug_blackbox_status_by_chembl_ID",
     "OpenTargets_get_drug_chembId_by_generic_name",
     "OpenTargets_get_drug_description_by_chemblId",
     "OpenTargets_get_drug_id_description_by_name",
@@ -1889,10 +1888,9 @@ __all__ = [
     "OpenTargets_get_drug_synonyms_by_chemblId",
     "OpenTargets_get_drug_trade_names_by_chemblId",
     "OpenTargets_get_drug_warnings_by_chemblId",
-    "OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId",
     "OpenTargets_get_gene_ontology_terms_by_goID",
     "OpenTargets_get_known_drugs_by_drug_chemblId",
-    "OpenTargets_get_parent_child_molecules_by_drug_chembl_ID",
+    "OpenTargets_get_parent_child_molecules_by_chembl_ID",
     "OpenTargets_get_publications_by_disease_efoId",
     "OpenTargets_get_publications_by_drug_chemblId",
     "OpenTargets_get_publications_by_target_ensemblID",
@@ -1908,7 +1906,7 @@ __all__ = [
     "OpenTargets_get_target_id_description_by_name",
     "OpenTargets_get_target_interactions_by_ensemblID",
     "OpenTargets_get_target_safety_profile_by_ensemblID",
-    "OpenTargets_get_target_subcellular_locations_by_ensemblID",
+    "OpenTargets_get_target_subcell_locations_by_ensembl_ID",
     "OpenTargets_get_target_synonyms_by_ensemblID",
     "OpenTargets_get_target_tractability_by_ensemblID",
     "OpenTargets_map_any_disease_id_to_all_other_ids",
@@ -2092,15 +2090,15 @@ __all__ = [
     "download_text_content",
     "drugbank_filter_drugs_by_name",
     "drugbank_full_search",
-    "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id",
+    "drugbank_get_drug_basic_info_by_drug_name_or_id",
     "drugbank_get_drug_chemistry_by_drug_name_or_drugbank_id",
     "drugbank_get_drug_desc_pharmacology_by_moa",
-    "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
+    "drugbank_get_drug_interactions_by_drug_name_or_id",
     "drugbank_get_drug_name_and_description_by_indication",
     "drugbank_get_drug_name_and_description_by_pathway_name",
     "drugbank_get_drug_name_and_description_by_target_name",
     "drugbank_get_drug_products_by_name_or_drugbank_id",
-    "drugbank_get_drug_references_by_drug_name_or_drugbank_id",
+    "drugbank_get_drug_references_by_drug_name_or_id",
     "drugbank_get_indications_by_drug_name_or_drugbank_id",
     "drugbank_get_pathways_reactions_by_drug_or_id",
     "drugbank_get_pharmacology_by_drug_name_or_drugbank_id",
@@ -2145,7 +2143,7 @@ __all__ = [
     "euhealthinfo_search_causes_of_death",
     "euhealthinfo_search_covid_19",
     "euhealthinfo_search_deaths",
-    "euhealthinfo_search_diabetes_mellitus_epidemiology_registry",
+    "euhealthinfo_search_diabetes_epidemiology_registry",
     "euhealthinfo_search_disability",
     "euhealthinfo_search_healthcare_expenditure",
     "euhealthinfo_search_hospital_in_patient_data",

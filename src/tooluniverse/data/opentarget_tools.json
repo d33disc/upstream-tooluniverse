@@ -856,7 +856,10 @@
     }
   },
   {
-    "name": "OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId",
+    "name": "OpenTargets_get_drug_blackbox_status_by_chembl_ID",
+    "aliases": [
+      "OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId"
+    ],
     "description": "Find withdrawn and black-box warning statuses for a specific drug by chemblId.",
     "parameter": {
       "type": "object",
@@ -1698,7 +1701,10 @@
     }
   },
   {
-    "name": "OpenTargets_get_target_subcellular_locations_by_ensemblID",
+    "name": "OpenTargets_get_target_subcell_locations_by_ensembl_ID",
+    "aliases": [
+      "OpenTargets_get_target_subcellular_locations_by_ensemblID"
+    ],
     "description": "Retrieve information about subcellular locations for a specific target ensemblID.",
     "parameter": {
       "type": "object",
@@ -2915,7 +2921,10 @@
     }
   },
   {
-    "name": "OpenTargets_get_parent_child_molecules_by_drug_chembl_ID",
+    "name": "OpenTargets_get_parent_child_molecules_by_chembl_ID",
+    "aliases": [
+      "OpenTargets_get_parent_child_molecules_by_drug_chembl_ID"
+    ],
     "description": "Get parent and child molecules of specified drug chemblId.",
     "parameter": {
       "type": "object",

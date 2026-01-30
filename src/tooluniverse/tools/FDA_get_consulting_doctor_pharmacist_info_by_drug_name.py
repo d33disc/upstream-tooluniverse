@@ -1,15 +1,15 @@
 """
-FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation
+FDA_get_consulting_doctor_pharmacist_info_by_drug_name
 
-Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
+Get information about when a doctor or pharmacist should be consulted regarding drug interactions...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
-    condition: str,
+def FDA_get_consulting_doctor_pharmacist_info_by_drug_name(
+    drug_name: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -18,12 +18,12 @@ def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
+    Get information about when a doctor or pharmacist should be consulted regarding drug interactions...
 
     Parameters
     ----------
-    condition : str
-        The condition or symptom that requires consulting a doctor.
+    drug_name : str
+        The name of the drug.
     limit : int
         The number of records to return.
     skip : int
@@ -43,8 +43,8 @@ def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
 
     return get_shared_client().run_one_function(
         {
-            "name": "FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation",
-            "arguments": {"condition": condition, "limit": limit, "skip": skip},
+            "name": "FDA_get_consulting_doctor_pharmacist_info_by_drug_name",
+            "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +52,4 @@ def FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation(
     )
 
 
-__all__ = ["FDA_get_drug_name_by_info_on_conditions_for_doctor_consultation"]
+__all__ = ["FDA_get_consulting_doctor_pharmacist_info_by_drug_name"]

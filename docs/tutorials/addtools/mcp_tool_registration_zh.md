@@ -101,10 +101,10 @@ result = tu.load_mcp_tools(["http://localhost:8001"])
 print(f"✅ Loaded {result['total_tools']} tools from {result['servers_connected']} servers")
 
 # 使用远程蛋白质分析工具
-protein_result = tu.run_tool("mcp_protein_analyzer", {
-    "operation": "call_tool",
-    "tool_name": "protein_analyzer",
-    "tool_arguments": {
+protein_result = tu.tools.mcp_protein_analyzer(
+    operation="call_tool",
+    tool_name="protein_analyzer",
+    tool_arguments={
         "sequence": "MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCPFEDHVKLVNEVTEFAKTCVADESAENCDKSLHTLFGDKLCTVATLRETYGEMADCCAKQEPERNECFLQHKDDNPNLPRLVRPEVDVMCTAFHDNEETFLKKYLYEIARRHPYFYAPELLFFAKRYKAAFTECCQAADKAACLLPKLDELRDEGKASSAKQRLKCASLQKFGERAFKAWAVARLSQRFPKAEFAEVSKLVTDLTKVHTECCHGDLLECADDRADLAKYICENQDSISSKLKECCEKPLLEKSHCIAEVENDEMPADLPSLAADFVESKDVCKNYAEAKDVFLGMFLYEYARRHPDYSVVLLLRLAKTYETTLEKCCAAADPHECYAKVFDEFKPLVEEPQNLIKQNCELFEQLGEYKFQNALLVRYTKKVPQVSTPTLVEVSRNLGKVGSKCCKHPEAKRMPCAEDYLSVVLNQLCVLHEKTPVSDRVTKCCTESLVNRRPCFSALEVDETYVPKEFNAETFTFHADICTLSEKERQIKKQTALVELVKHKPKATKEQLKAVMDDFAAFVEKCCKADDKETCFAEEGKKLVAASQAALGL",
         "analysis_type": "detailed"
     }
@@ -259,30 +259,30 @@ def main():
     print("\n🧪 Testing tools...")
 
     # 文本情感分析
-    sentiment_result = tu.run_tool("mcp_text_sentiment", {
-        "operation": "call_tool",
-        "tool_name": "text_sentiment",
-        "tool_arguments": {
+    sentiment_result = tu.tools.mcp_text_sentiment(
+        operation="call_tool",
+        tool_name="text_sentiment",
+        tool_arguments={
             "text": "这个工具真的很棒！它的功能amazing，我觉得很好用。"
         }
     })
     print(f"📝 Sentiment Analysis: {sentiment_result}")
 
     # 数据统计
-    stats_result = tu.run_tool("mcp_data_stats", {
-        "operation": "call_tool",
-        "tool_name": "data_stats",
-        "tool_arguments": {
+    stats_result = tu.tools.mcp_data_stats(
+        operation="call_tool",
+        tool_name="data_stats",
+        tool_arguments={
             "data": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         }
     })
     print(f"📊 Data Statistics: {stats_result}")
 
     # 文件分析
-    file_result = tu.run_tool("mcp_file_analyzer", {
-        "operation": "call_tool",
-        "tool_name": "file_analyzer",
-        "tool_arguments": {
+    file_result = tu.tools.mcp_file_analyzer(
+        operation="call_tool",
+        tool_name="file_analyzer",
+        tool_arguments={
             "filepath": __file__  # 分析当前文件
         }
     })

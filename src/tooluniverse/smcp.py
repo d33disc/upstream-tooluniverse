@@ -1249,10 +1249,8 @@ class SMCP(FastMCP):
                     continue
 
                 if tool_name and tool_name not in self._exposed_tools:
-                    exposed_name = self.tooluniverse.get_exposed_name(
-                        tool_name, max_length=55
-                    )
-                    self._create_mcp_tool_from_tooluniverse(tool_config, exposed_name)
+                    # tool_name is already shortened (primary identifier)
+                    self._create_mcp_tool_from_tooluniverse(tool_config, tool_name)
                     self._exposed_tools.add(tool_name)
 
             except Exception as e:

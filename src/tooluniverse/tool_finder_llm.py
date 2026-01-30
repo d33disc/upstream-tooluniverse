@@ -196,6 +196,7 @@ Requirements:
             available_tools = []
             for name, desc in zip(tool_names, tool_descriptions):
                 if name not in self.exclude_tools:
+                    # name is already shortened (primary identifier)
                     available_tools.append({"name": name, "description": desc})
 
             # Update cache

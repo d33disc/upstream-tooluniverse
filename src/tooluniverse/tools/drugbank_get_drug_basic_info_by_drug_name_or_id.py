@@ -1,5 +1,5 @@
 """
-drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id
+drugbank_get_drug_basic_info_by_drug_name_or_id
 
 Get basic drug information including name, description, CAS number, and approval status by drug n...
 """
@@ -8,7 +8,7 @@ from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id(
+def drugbank_get_drug_basic_info_by_drug_name_or_id(
     query: str,
     case_sensitive: bool,
     exact_match: bool,
@@ -46,7 +46,7 @@ def drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id(
 
     return get_shared_client().run_one_function(
         {
-            "name": "drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id",
+            "name": "drugbank_get_drug_basic_info_by_drug_name_or_id",
             "arguments": {
                 "query": query,
                 "case_sensitive": case_sensitive,
@@ -60,4 +60,4 @@ def drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id(
     )
 
 
-__all__ = ["drugbank_get_drug_basic_info_by_drug_name_or_drugbank_id"]
+__all__ = ["drugbank_get_drug_basic_info_by_drug_name_or_id"]

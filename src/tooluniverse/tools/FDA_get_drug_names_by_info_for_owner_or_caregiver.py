@@ -1,5 +1,5 @@
 """
-FDA_get_drug_names_by_information_for_owners_or_caregivers
+FDA_get_drug_names_by_info_for_owner_or_caregiver
 
 Retrieve drug names based on information for owners or caregivers.
 """
@@ -8,7 +8,7 @@ from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FDA_get_drug_names_by_information_for_owners_or_caregivers(
+def FDA_get_drug_names_by_info_for_owner_or_caregiver(
     field_info: str,
     indication: Optional[str] = None,
     limit: Optional[int] = None,
@@ -46,7 +46,7 @@ def FDA_get_drug_names_by_information_for_owners_or_caregivers(
 
     return get_shared_client().run_one_function(
         {
-            "name": "FDA_get_drug_names_by_information_for_owners_or_caregivers",
+            "name": "FDA_get_drug_names_by_info_for_owner_or_caregiver",
             "arguments": {
                 "field_info": field_info,
                 "indication": indication,
@@ -60,4 +60,4 @@ def FDA_get_drug_names_by_information_for_owners_or_caregivers(
     )
 
 
-__all__ = ["FDA_get_drug_names_by_information_for_owners_or_caregivers"]
+__all__ = ["FDA_get_drug_names_by_info_for_owner_or_caregiver"]

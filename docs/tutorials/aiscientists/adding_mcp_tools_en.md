@@ -87,16 +87,14 @@ from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 
 # Call MCP tool
-result = tu.run_tool("my_mcp_client", {
-    "operation": "call_tool",
-    "tool_name": "calculator",
-    "tool_arguments": {"expression": "2 + 2"}
-})
+result = tu.tools.my_mcp_client(
+    operation="call_tool",
+    tool_name="calculator",
+    tool_arguments={"expression": "2 + 2"}
+)
 
 # List available tools
-tools = tu.run_tool("my_mcp_client", {
-    "operation": "list_tools"
-})
+tools = tu.tools.my_mcp_client(operation="list_tools")
 ```
 
 ## Using Auto Loader
@@ -147,21 +145,17 @@ tools = tu.run_tool("my_mcp_client", {
 
 ```python
 # Discover tools
-discovered = tu.run_tool("mcp_auto_loader", {
-    "operation": "discover"
-})
+discovered = tu.tools.mcp_auto_loader(operation="discover")
 
 # Generate proxy tool configurations
-configs = tu.run_tool("mcp_auto_loader", {
-    "operation": "generate_configs"
-})
+configs = tu.tools.mcp_auto_loader(operation="generate_configs")
 
 # Directly call MCP tool
-result = tu.run_tool("mcp_auto_loader", {
-    "operation": "call_tool",
-    "tool_name": "calculator",
-    "tool_arguments": {"expression": "10 * 5"}
-})
+result = tu.tools.mcp_auto_loader(
+    operation="call_tool",
+    tool_name="calculator",
+    tool_arguments={"expression": "10 * 5"}
+)
 ```
 
 ## Proxy Tool Configuration
@@ -326,10 +320,10 @@ expert_config = {
 }
 
 # Use expert tool
-consultation = tu.run_tool("medical_expert", {
-    "operation": "call_tool",
-    "tool_name": "consult_expert",
-    "tool_arguments": {
+consultation = tu.tools.medical_expert(
+    operation="call_tool",
+    tool_name="consult_expert",
+    tool_arguments={
         "question": "Patient presents with chest pain and shortness of breath, how to diagnose?",
         "specialty": "cardiology",
         "priority": "high"
@@ -354,10 +348,10 @@ analysis_loader = {
 }
 
 # Run statistical analysis
-stats_result = tu.run_tool("analysis_statistical_analysis", {
-    "data": [1, 2, 3, 4, 5],
-    "test_type": "t_test"
-})
+stats_result = tu.tools.analysis_statistical_analysis(
+    data=[1, 2, 3, 4, 5],
+    test_type="t_test"
+)
 ```
 
 ## Troubleshooting
@@ -416,9 +410,7 @@ logging.basicConfig(level=logging.DEBUG)
 #### Test Connection
 ```python
 # Test basic connection
-connection_test = tu.run_tool("my_mcp_client", {
-    "operation": "list_tools"
-})
+connection_test = tu.tools.my_mcp_client(operation="list_tools")
 
 if "error" in connection_test:
     print("Connection failed:", connection_test["error"])
@@ -429,9 +421,7 @@ else:
 #### Validate Tool Configuration
 ```python
 # Validate auto loader discovered tools
-discovery_result = tu.run_tool("mcp_auto_loader", {
-    "operation": "discover"
-})
+discovery_result = tu.tools.mcp_auto_loader(operation="discover")
 
 print("Number of discovered tools:", discovery_result["discovered_count"])
 print("Tool list:", discovery_result["tools"])

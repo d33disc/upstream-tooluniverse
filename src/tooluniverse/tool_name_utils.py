@@ -15,7 +15,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def shorten_tool_name(name: str, max_length: int = 55) -> str:
+def shorten_tool_name(name: str, max_length: int = 50) -> str:
     """
     Intelligently shorten tool name by truncating words.
 
@@ -31,8 +31,8 @@ def shorten_tool_name(name: str, max_length: int = 55) -> str:
 
     Args:
         name: Original tool name to shorten
-        max_length: Maximum allowed length (default: 55 for mcp__tu__
-            prefix)
+        max_length: Maximum allowed length (default: 50 to account for MCP
+            client prefixes like 'tooluniverse__' which is 14 chars, total 64)
 
     Returns:
         Shortened tool name that fits within max_length
@@ -41,7 +41,7 @@ def shorten_tool_name(name: str, max_length: int = 55) -> str:
         >>> shorten_tool_name(
         ...     "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
         ... )
-        "FDA_get_info_on_cond_for_doc_cons_by_drug_name"
+        "FDA_get_info_on_cond_for_doct_cons_by_drug_name"
 
         >>> shorten_tool_name(
         ...     "euhealthinfo_search_diabetes_mellitus_epidemiology_registry"
@@ -96,14 +96,16 @@ def shorten_tool_name(name: str, max_length: int = 55) -> str:
 
 class ToolNameMapper:
     """
-    Bidirectional mapping between original and shortened tool names.
+    Bidirectional mapping between original and shortened tool names, with alias support.
 
     This class manages the mapping of tool names to their shortened versions,
-    ensuring uniqueness and providing reverse lookup capability.
+    ensuring uniqueness and providing reverse lookup capability. It also handles
+    aliases, allowing multiple names to resolve to the same primary tool name.
 
     Attributes:
         _original_to_short: Dict mapping original names to shortened names
         _short_to_original: Dict mapping shortened names to original names
+        _alias_to_primary: Dict mapping alias names to primary tool names
 
     Examples:
         >>> mapper = ToolNameMapper()
@@ -115,14 +117,18 @@ class ToolNameMapper:
         >>> original = mapper.get_original(short)
         >>> print(original)
         "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
+        >>> mapper.add_alias("old_name", "new_name")
+        >>> mapper.resolve("old_name")
+        "new_name"
     """
 
     def __init__(self):
         """Initialize the mapper with empty dictionaries."""
         self._original_to_short: Dict[str, str] = {}
         self._short_to_original: Dict[str, str] = {}
+        self._alias_to_primary: Dict[str, str] = {}
 
-    def get_shortened(self, original: str, max_length: int = 55) -> str:
+    def get_shortened(self, original: str, max_length: int = 50) -> str:
         """
         Get or create shortened name for original tool name.
 
@@ -176,3 +182,60 @@ class ToolNameMapper:
             Original tool name, or the input if no mapping exists
         """
         return self._short_to_original.get(shortened, shortened)
+
+    def add_alias(self, alias: str, primary_name: str) -> None:
+        """
+        Add an alias that resolves to a primary tool name.
+
+        Aliases allow old or alternative names to resolve to the current
+        primary tool name, enabling backward compatibility when tools are renamed.
+
+        Args:
+            alias: The alias name (e.g., old tool name)
+            primary_name: The primary tool name to resolve to
+        """
+        if (
+            alias in self._alias_to_primary
+            and self._alias_to_primary[alias] != primary_name
+        ):
+            logger.warning(
+                f"Alias '{alias}' already mapped to '{self._alias_to_primary[alias]}', "
+                f"overwriting with '{primary_name}'"
+            )
+        self._alias_to_primary[alias] = primary_name
+
+    def resolve(self, name: str, max_length: int = 50) -> str:
+        """
+        Resolve any tool name (alias, original, or shortened) to its primary name.
+
+        Resolution order:
+        1. Check if it's an alias -> return primary name
+        2. Check if it's an original name -> return shortened name (computing if needed)
+        3. Return as-is (already a primary/shortened name)
+
+        Args:
+            name: Tool name to resolve (can be alias, original, or shortened)
+            max_length: Maximum allowed length for shortened names (default: 50)
+
+        Returns:
+            Primary tool name (shortened if applicable)
+        """
+        # First check if it's an alias
+        if name in self._alias_to_primary:
+            return self._alias_to_primary[name]
+
+        # Then check if it's an original name that needs shortening
+        if name in self._original_to_short:
+            return self._original_to_short[name]
+
+        # If name shortening is being used and this could be an original name,
+        # compute the shortened version (this will cache it for future use)
+        if len(name) > max_length or name not in self._short_to_original:
+            # Try to compute shortened version
+            shortened = self.get_shortened(name, max_length)
+            # Only return shortened if it's different (i.e., shortening was applied)
+            if shortened != name and shortened in self._short_to_original:
+                return shortened
+
+        # Otherwise return as-is (already a primary name)
+        return name

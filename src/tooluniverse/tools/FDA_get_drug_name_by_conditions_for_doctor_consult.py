@@ -1,15 +1,15 @@
 """
-FDA_get_information_for_owners_or_caregivers_by_drug_name
+FDA_get_drug_name_by_conditions_for_doctor_consult
 
-Retrieve specific information for owners or caregivers based on the drug name.
+Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FDA_get_information_for_owners_or_caregivers_by_drug_name(
-    drug_name: str,
+def FDA_get_drug_name_by_conditions_for_doctor_consult(
+    condition: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -18,12 +18,12 @@ def FDA_get_information_for_owners_or_caregivers_by_drug_name(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Retrieve specific information for owners or caregivers based on the drug name.
+    Retrieve the drug names that require asking a doctor before use due to a patient's specific condi...
 
     Parameters
     ----------
-    drug_name : str
-        The name of the drug.
+    condition : str
+        The condition or symptom that requires consulting a doctor.
     limit : int
         The number of records to return.
     skip : int
@@ -43,8 +43,8 @@ def FDA_get_information_for_owners_or_caregivers_by_drug_name(
 
     return get_shared_client().run_one_function(
         {
-            "name": "FDA_get_information_for_owners_or_caregivers_by_drug_name",
-            "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
+            "name": "FDA_get_drug_name_by_conditions_for_doctor_consult",
+            "arguments": {"condition": condition, "limit": limit, "skip": skip},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +52,4 @@ def FDA_get_information_for_owners_or_caregivers_by_drug_name(
     )
 
 
-__all__ = ["FDA_get_information_for_owners_or_caregivers_by_drug_name"]
+__all__ = ["FDA_get_drug_name_by_conditions_for_doctor_consult"]

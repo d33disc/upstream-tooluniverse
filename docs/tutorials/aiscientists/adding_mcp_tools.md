@@ -87,16 +87,14 @@ from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 
 # 调用 MCP 工具
-result = tu.run_tool("my_mcp_client", {
-    "operation": "call_tool",
-    "tool_name": "calculator",
-    "tool_arguments": {"expression": "2 + 2"}
-})
+result = tu.tools.my_mcp_client(
+    operation="call_tool",
+    tool_name="calculator",
+    tool_arguments={"expression": "2 + 2"}
+)
 
 # 列出可用工具
-tools = tu.run_tool("my_mcp_client", {
-    "operation": "list_tools"
-})
+tools = tu.tools.my_mcp_client(operation="list_tools")
 ```
 
 ## 使用自动加载器
@@ -147,21 +145,17 @@ tools = tu.run_tool("my_mcp_client", {
 
 ```python
 # 发现工具
-discovered = tu.run_tool("mcp_auto_loader", {
-    "operation": "discover"
-})
+discovered = tu.tools.mcp_auto_loader(operation="discover")
 
 # 生成智能体工具配置
-configs = tu.run_tool("mcp_auto_loader", {
-    "operation": "generate_configs"
-})
+configs = tu.tools.mcp_auto_loader(operation="generate_configs")
 
 # 直接调用 MCP 工具
-result = tu.run_tool("mcp_auto_loader", {
-    "operation": "call_tool",
-    "tool_name": "calculator",
-    "tool_arguments": {"expression": "10 * 5"}
-})
+result = tu.tools.mcp_auto_loader(
+    operation="call_tool",
+    tool_name="calculator",
+    tool_arguments={"expression": "10 * 5"}
+)
 ```
 
 ## 智能体工具配置
@@ -326,10 +320,10 @@ expert_config = {
 }
 
 # 使用专家工具
-consultation = tu.run_tool("medical_expert", {
-    "operation": "call_tool",
-    "tool_name": "consult_expert",
-    "tool_arguments": {
+consultation = tu.tools.medical_expert(
+    operation="call_tool",
+    tool_name="consult_expert",
+    tool_arguments={
         "question": "患者出现胸痛和呼吸困难，如何诊断？",
         "specialty": "cardiology",
         "priority": "high"
@@ -354,10 +348,10 @@ analysis_loader = {
 }
 
 # 运行统计分析
-stats_result = tu.run_tool("analysis_statistical_analysis", {
-    "data": [1, 2, 3, 4, 5],
-    "test_type": "t_test"
-})
+stats_result = tu.tools.analysis_statistical_analysis(
+    data=[1, 2, 3, 4, 5],
+    test_type="t_test"
+)
 ```
 
 ## 故障排除
@@ -416,9 +410,7 @@ logging.basicConfig(level=logging.DEBUG)
 #### 测试连接
 ```python
 # 测试基本连接
-connection_test = tu.run_tool("my_mcp_client", {
-    "operation": "list_tools"
-})
+connection_test = tu.tools.my_mcp_client(operation="list_tools")
 
 if "error" in connection_test:
     print("连接失败:", connection_test["error"])
@@ -429,9 +421,7 @@ else:
 #### 验证工具配置
 ```python
 # 验证自动加载器发现的工具
-discovery_result = tu.run_tool("mcp_auto_loader", {
-    "operation": "discover"
-})
+discovery_result = tu.tools.mcp_auto_loader(operation="discover")
 
 print("发现的工具数量:", discovery_result["discovered_count"])
 print("工具列表:", discovery_result["tools"])

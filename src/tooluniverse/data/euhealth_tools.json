@@ -402,9 +402,12 @@
 
   {
     "type": "EuHealthTopicSearchTool",
-    "name": "euhealthinfo_search_diabetes_mellitus_epidemiology_registry",
+    "name": "euhealthinfo_search_diabetes_epidemiology_registry",
+    "aliases": [
+      "euhealthinfo_search_diabetes_mellitus_epidemiology_registry"
+    ],
     "description": "This tool is designed to search and retrieve datasets related to epidemiological and registry-based health data, focusing on diabetes and associated conditions. Users can conduct searches to identify datasets covering prevalence, incidence, and other metrics across varying geographic regions and demographic groups. The tool returns structured datasets enriched with metadata and may provide links to external data sources or downloadable files. It is specialized for accessing curated, health-related information within its defined dataset scope and supports exploration across diverse topics within the diabetes domain. If the user wants to look into the actual data, the 'euhealthinfo_deepdive' tool is helpful.",
-    "fields": { "topic": "euhealthinfo_search_diabetes_mellitus_epidemiology_registry" },
+    "fields": { "topic": "euhealthinfo_search_diabetes_epidemiology_registry" },
     "parameter": {
       "type": "object",
       "properties": {

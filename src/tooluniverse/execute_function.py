@@ -242,6 +242,10 @@ class ToolUniverse:
         callable_functions (dict): Cache of instantiated tool objects
     """
 
+    # Maximum tool name length for MCP compatibility
+    # 50 chars for tool name + 14 chars for 'tooluniverse__' prefix = 64 chars (Claude's limit)
+    MAX_TOOL_NAME_LENGTH = 45
+
     def __init__(
         self,
         tool_files=default_tool_files,
@@ -277,14 +281,16 @@ class ToolUniverse:
         # Get logger for this class
         self.logger = get_logger("ToolUniverse")
 
-        # Initialize name mapper if requested
-        if enable_name_shortening:
-            from .tool_name_utils import ToolNameMapper
+        # Initialize name mapper for shortening and alias support
+        from .tool_name_utils import ToolNameMapper
 
-            self.name_mapper = ToolNameMapper()
+        self.name_mapper = ToolNameMapper()
+        self.enable_name_shortening = enable_name_shortening
+
+        if enable_name_shortening:
             self.logger.debug("Name shortening enabled for MCP compatibility")
         else:
-            self.name_mapper = None
+            self.logger.debug("Name mapper initialized for alias support only")
 
         # Initialize any necessary attributes here FIRST
         self.all_tools: List[Dict[str, Any]] = []
@@ -1597,12 +1603,32 @@ class ToolUniverse:
         tool_name_list = []
         tool_desc_list = []
         for tool in self.all_tools:
-            tool_name_list.append(tool["name"])
+            original_name = tool["name"]
+
+            # If shortening enabled, use shortened name as primary key
+            if self.enable_name_shortening:
+                shortened_name = self.name_mapper.get_shortened(
+                    original_name, max_length=self.MAX_TOOL_NAME_LENGTH
+                )
+                tool["name"] = shortened_name  # Overwrite with shortened name
+                tool["original_name"] = original_name  # Store original for reference
+            else:
+                shortened_name = original_name
+
+            # Use shortened name throughout (it's now the primary identifier)
+            tool_name_list.append(shortened_name)
             if enable_full_desc:
                 tool_desc_list.append(json.dumps(tool))
             else:
-                tool_desc_list.append(tool["name"] + ": " + tool["description"])
-            self.all_tool_dict[tool["name"]] = tool
+                tool_desc_list.append(shortened_name + ": " + tool["description"])
+
+            # Store with SHORTENED name as key (primary identifier)
+            self.all_tool_dict[shortened_name] = tool
+
+            # Register aliases with the name mapper for backward compatibility
+            if "aliases" in tool and tool["aliases"]:
+                for alias in tool["aliases"]:
+                    self.name_mapper.add_alias(alias, shortened_name)
 
         # Apply filtering if any filter argument is provided
         if any([include_names, exclude_names, include_categories, exclude_categories]):
@@ -2128,6 +2154,31 @@ class ToolUniverse:
             error("Not a function call")
             return None
 
+    def _resolve_tool_name(self, function_name: str) -> str:
+        """
+        Resolve tool name to its primary identifier.
+
+        Uses the ToolNameMapper to handle:
+        1. Aliases (e.g., old tool names) -> primary name
+        2. Original names -> shortened names (if shortening enabled)
+        3. Already primary names -> return as-is
+
+        Args:
+            function_name: Tool name (can be alias, original, or shortened)
+
+        Returns:
+            str: Resolved tool name (primary identifier in all_tool_dict)
+        """
+        if function_name:
+            # Let the mapper handle all resolution (aliases, original->short, etc.)
+            resolved = self.name_mapper.resolve(
+                function_name, max_length=self.MAX_TOOL_NAME_LENGTH
+            )
+            # Only return resolved name if it exists in all_tool_dict
+            if resolved in self.all_tool_dict:
+                return resolved
+        return function_name
+
     def run_one_function(
         self, function_call_json, stream_callback=None, use_cache=False, validate=True
     ):
@@ -2150,9 +2201,8 @@ class ToolUniverse:
         function_name = function_call_json.get("name", "")
         arguments = function_call_json.get("arguments", {})
 
-        # Resolve shortened names transparently
-        if self.name_mapper and function_name:
-            function_name = self.name_mapper.get_original(function_name)
+        # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
+        function_name = self._resolve_tool_name(function_name)
 
         # Handle malformed queries gracefully
         if not function_name:
@@ -2517,9 +2567,8 @@ class ToolUniverse:
 
     def _get_tool_instance(self, function_name: str, cache: bool = True):
         """Get or create tool instance with optional caching."""
-        # Resolve shortened names transparently
-        if self.name_mapper:
-            function_name = self.name_mapper.get_original(function_name)
+        # Resolve original names to shortened names (all_tool_dict uses shortened as keys)
+        function_name = self._resolve_tool_name(function_name)
 
         # Check cache first
         if function_name in self.callable_functions:
@@ -2996,24 +3045,6 @@ class ToolUniverse:
         tool_config = self.all_tool_dict[tool_name]
         parameter_schema = tool_config.get("parameter", {})
         return parameter_schema.get("required", [])
-
-    def get_exposed_name(self, tool_name: str, max_length: int = 55) -> str:
-        """
-        Get the name that should be exposed externally (e.g., to MCP clients).
-
-        If name_mapper is set, returns the shortened name. Otherwise returns original name.
-        This encapsulates all name shortening logic within ToolUniverse.
-
-        Args:
-            tool_name: Original tool name
-            max_length: Maximum length for shortened name (default: 55 for MCP with 'tu' prefix)
-
-        Returns:
-            str: Name to expose (shortened if name_mapper is set, otherwise original)
-        """
-        if self.name_mapper:
-            return self.name_mapper.get_shortened(tool_name, max_length=max_length)
-        return tool_name
 
     def get_available_tools(self, category_filter=None, name_only=True):
         """

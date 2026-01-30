@@ -1,14 +1,14 @@
 """
-drugbank_get_drug_interactions_by_drug_name_or_drugbank_id
+drugbank_get_drug_references_by_drug_name_or_id
 
-Get drug interactions and contraindications by drug name or DrugBank ID.
+Get drug literature references, patents, and external links by drug name or DrugBank ID.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
+def drugbank_get_drug_references_by_drug_name_or_id(
     query: str,
     case_sensitive: bool,
     exact_match: bool,
@@ -19,12 +19,12 @@ def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get drug interactions and contraindications by drug name or DrugBank ID.
+    Get drug literature references, patents, and external links by drug name or DrugBank ID.
 
     Parameters
     ----------
     query : str
-        Drug name to search for interactions
+        Drug name or Drugbank ID to search for references
     case_sensitive : bool
         Select True to perform a case-sensitive search
     exact_match : bool
@@ -46,7 +46,7 @@ def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
 
     return get_shared_client().run_one_function(
         {
-            "name": "drugbank_get_drug_interactions_by_drug_name_or_drugbank_id",
+            "name": "drugbank_get_drug_references_by_drug_name_or_id",
             "arguments": {
                 "query": query,
                 "case_sensitive": case_sensitive,
@@ -60,4 +60,4 @@ def drugbank_get_drug_interactions_by_drug_name_or_drugbank_id(
     )
 
 
-__all__ = ["drugbank_get_drug_interactions_by_drug_name_or_drugbank_id"]
+__all__ = ["drugbank_get_drug_references_by_drug_name_or_id"]

@@ -1,27 +1,33 @@
 """
-OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId
+FDA_get_DEA_schedule_info_by_drug_name
 
-Find withdrawn and black-box warning statuses for a specific drug by chemblId.
+Retrieve information about the controlled substance Drug Enforcement Administratino (DEA) schedul...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId(
-    chemblId: list[str],
+def FDA_get_DEA_schedule_info_by_drug_name(
+    drug_name: str,
+    limit: Optional[int] = None,
+    skip: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Find withdrawn and black-box warning statuses for a specific drug by chemblId.
+    Retrieve information about the controlled substance Drug Enforcement Administratino (DEA) schedul...
 
     Parameters
     ----------
-    chemblId : list[str]
-        The chemblId of a drug.
+    drug_name : str
+        The name of the drug.
+    limit : int
+        The number of records to return.
+    skip : int
+        The number of records to skip.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,8 +43,8 @@ def OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId(
 
     return get_shared_client().run_one_function(
         {
-            "name": "OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId",
-            "arguments": {"chemblId": chemblId},
+            "name": "FDA_get_DEA_schedule_info_by_drug_name",
+            "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -46,4 +52,4 @@ def OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId(
     )
 
 
-__all__ = ["OpenTargets_get_drug_withdrawn_blackbox_status_by_chemblId"]
+__all__ = ["FDA_get_DEA_schedule_info_by_drug_name"]

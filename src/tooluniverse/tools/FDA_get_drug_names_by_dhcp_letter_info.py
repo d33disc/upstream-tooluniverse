@@ -1,15 +1,16 @@
 """
-FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name
+FDA_get_drug_names_by_dhcp_letter_info
 
-Get information about when a doctor or pharmacist should be consulted regarding drug interactions...
+Fetch drug names based on information about dear health care provider letters. The letters are se...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name(
-    drug_name: str,
+def FDA_get_drug_names_by_dhcp_letter_info(
+    letter_info: str,
+    indication: Optional[str] = None,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
     *,
@@ -18,12 +19,14 @@ def FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get information about when a doctor or pharmacist should be consulted regarding drug interactions...
+    Fetch drug names based on information about dear health care provider letters. The letters are se...
 
     Parameters
     ----------
-    drug_name : str
-        The name of the drug.
+    letter_info : str
+        Information about the specific dear health care provider letters.
+    indication : str
+        The indication or usage of the drug.
     limit : int
         The number of records to return.
     skip : int
@@ -43,8 +46,13 @@ def FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name(
 
     return get_shared_client().run_one_function(
         {
-            "name": "FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name",
-            "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
+            "name": "FDA_get_drug_names_by_dhcp_letter_info",
+            "arguments": {
+                "letter_info": letter_info,
+                "indication": indication,
+                "limit": limit,
+                "skip": skip,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -52,4 +60,4 @@ def FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name(
     )
 
 
-__all__ = ["FDA_get_info_on_consulting_doctor_pharmacist_by_drug_name"]
+__all__ = ["FDA_get_drug_names_by_dhcp_letter_info"]

@@ -45,10 +45,10 @@ from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 tu.load_mcp_tools(["http://localhost:8001"])
 
-result = tu.run_tool("mcp_my_analyzer", {
-    "operation": "call_tool",
-    "tool_name": "my_analyzer",
-    "tool_arguments": {"data": "test data"}
+result = tu.tools.mcp_my_analyzer(
+    operation="call_tool",
+    tool_name="my_analyzer",
+    tool_arguments={"data": "test data"}
 })
 print(result)
 ```
@@ -188,10 +188,10 @@ print(f"Found {discovery['total_tools']} tools")
 ### 3. Test Tool Execution
 ```python
 tu.load_mcp_tools(["http://localhost:8001"])
-result = tu.run_tool("mcp_my_tool", {
-    "operation": "call_tool",
-    "tool_name": "my_tool",
-    "tool_arguments": {"param": "test"}
+result = tu.tools.mcp_my_tool(
+    operation="call_tool",
+    tool_name="my_tool",
+    tool_arguments={"param": "test"}
 })
 print(result)
 ```
@@ -309,10 +309,10 @@ result = tu.load_mcp_tools(["http://localhost:8001"])
 print(f"✅ Loaded {result['total_tools']} tools from {result['servers_connected']} servers")
 
 # Use remote protein analysis tool
-protein_result = tu.run_tool("mcp_protein_analyzer", {
-    "operation": "call_tool",
-    "tool_name": "protein_analyzer",
-    "tool_arguments": {
+protein_result = tu.tools.mcp_protein_analyzer(
+    operation="call_tool",
+    tool_name="protein_analyzer",
+    tool_arguments={
         "sequence": "MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCPFEDHVKLVNEVTEFAKTCVADESAENCDKSLHTLFGDKLCTVATLRETYGEMADCCAKQEPERNECFLQHKDDNPNLPRLVRPEVDVMCTAFHDNEETFLKKYLYEIARRHPYFYAPELLFFAKRYKAAFTECCQAADKAACLLPKLDELRDEGKASSAKQRLKCASLQKFGERAFKAWAVARLSQRFPKAEFAEVSKLVTDLTKVHTECCHGDLLECADDRADLAKYICENQDSISSKLKECCEKPLLEKSHCIAEVENDEMPADLPSLAADFVESKDVCKNYAEAKDVFLGMFLYEYARRHPDYSVVLLLRLAKTYETTLEKCCAAADPHECYAKVFDEFKPLVEEPQNLIKQNCELFEQLGEYKFQNALLVRYTKKVPQVSTPTLVEVSRNLGKVGSKCCKHPEAKRMPCAEDYLSVVLNQLCVLHEKTPVSDRVTKCCTESLVNRRPCFSALEVDETYVPKEFNAETFTFHADICTLSEKERQIKKQTALVELVKHKPKATKEQLKAVMDDFAAFVEKCCKADDKETCFAEEGKKLVAASQAALGL",
         "analysis_type": "detailed"
     }
@@ -468,30 +468,30 @@ def main():
     print("\n🧪 Testing tools...")
 
     # Text sentiment analysis
-    sentiment_result = tu.run_tool("mcp_text_sentiment", {
-        "operation": "call_tool",
-        "tool_name": "text_sentiment",
-        "tool_arguments": {
+    sentiment_result = tu.tools.mcp_text_sentiment(
+        operation="call_tool",
+        tool_name="text_sentiment",
+        tool_arguments={
             "text": "This tool is amazing! The functionality is excellent and I think it's wonderful."
         }
     })
     print(f"📝 Sentiment Analysis: {sentiment_result}")
 
     # Data statistics
-    stats_result = tu.run_tool("mcp_data_stats", {
-        "operation": "call_tool",
-        "tool_name": "data_stats",
-        "tool_arguments": {
+    stats_result = tu.tools.mcp_data_stats(
+        operation="call_tool",
+        tool_name="data_stats",
+        tool_arguments={
             "data": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         }
     })
     print(f"📊 Data Statistics: {stats_result}")
 
     # File analysis
-    file_result = tu.run_tool("mcp_file_analyzer", {
-        "operation": "call_tool",
-        "tool_name": "file_analyzer",
-        "tool_arguments": {
+    file_result = tu.tools.mcp_file_analyzer(
+        operation="call_tool",
+        tool_name="file_analyzer",
+        tool_arguments={
             "filepath": __file__  # Analyze current file
         }
     })

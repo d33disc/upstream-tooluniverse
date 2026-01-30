@@ -277,26 +277,74 @@ def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[st
 
     for url in server_urls:
         try:
+            # Detect transport from URL
+            if url.startswith("stdio://"):
+                transport = "stdio"
+            elif url.startswith("ws://") or url.startswith("wss://"):
+                transport = "websocket"
+            else:
+                transport = "http"
+
             # Create temporary discovery client
             discovery_config = {
                 "name": f"temp_discovery_{hash(url)}",
+                "description": f"Temporary MCP client for discovery from {url}",
                 "type": "MCPClientTool",
                 "server_url": url,
+                "transport": transport,
                 "timeout": config["timeout"],
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "operation": {
+                            "type": "string",
+                            "enum": [
+                                "list_tools",
+                                "call_tool",
+                                "list_resources",
+                                "read_resource",
+                                "list_prompts",
+                                "get_prompt",
+                            ],
+                        }
+                    },
+                    "required": ["operation"],
+                },
             }
 
+            # Use lazy loading to get the MCPClientTool class
+            from .tool_registry import get_tool_class_lazy
+
+            mcp_client_tool_class = get_tool_class_lazy("MCPClientTool")
+
+            if mcp_client_tool_class is None:
+                raise ValueError("MCPClientTool class not found in tool registry")
+
             # Register temporary tool for discovery
+            # Use the unique name from config, not the class name
             self.register_custom_tool(
-                tool_class=None, tool_type="MCPClientTool", config=discovery_config
+                tool_class=mcp_client_tool_class,
+                tool_name=discovery_config["name"],  # Use the unique hashed name
+                tool_config=discovery_config,
             )
 
-            # Discover tools
-            discovery_result = self.run_tool(
-                discovery_config["name"], {"operation": "list_tools"}
-            )
+            # Discover tools using the tools namespace
+            tool_callable = getattr(self.tools, discovery_config["name"])
+            discovery_result = tool_callable(operation="list_tools")
 
-            if discovery_result.get("success", False):
-                tools = discovery_result.get("tools", [])
+            # Check for error first
+            if "error" in discovery_result:
+                error_msg = discovery_result["error"]
+                results["servers"][url] = {
+                    "tools": [],
+                    "count": 0,
+                    "status": "error",
+                    "error": error_msg,
+                }
+                print(f"❌ {url}: {error_msg}")
+            elif "tools" in discovery_result:
+                # Success - got tools
+                tools = discovery_result["tools"]
                 results["servers"][url] = {
                     "tools": tools,
                     "count": len(tools),
@@ -305,7 +353,8 @@ def discover_mcp_tools(self, server_urls: List[str] = None, **kwargs) -> Dict[st
                 results["total_tools"] += len(tools)
                 print(f"✅ {url}: {len(tools)} tools discovered")
             else:
-                error_msg = discovery_result.get("error", "Unknown error")
+                # Unexpected response format
+                error_msg = f"Unexpected response format: {discovery_result}"
                 results["servers"][url] = {
                     "tools": [],
                     "count": 0,

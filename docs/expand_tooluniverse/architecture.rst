@@ -247,7 +247,7 @@ Execution Flow (Configuration to Invocation)
    - Merges `BaseTool` default configurations with entry-specific config
 
 4. **Execution & Validation**
-   - `ToolUniverse.run_tool(tool_name, params)`:
+   - `ToolUniverse.tools.tool_name(**params)`:
      - Locate instance by name → Parameter validation (required fields) → Call concrete implementation
      - Unified error handling and return structure
 

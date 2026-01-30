@@ -1,5 +1,5 @@
 """
-euhealthinfo_search_diabetes_mellitus_epidemiology_registry
+euhealthinfo_search_diabetes_epidemiology_registry
 
 This tool is designed to search and retrieve datasets related to epidemiological and registry-bas...
 """
@@ -8,7 +8,7 @@ from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def euhealthinfo_search_diabetes_mellitus_epidemiology_registry(
+def euhealthinfo_search_diabetes_epidemiology_registry(
     limit: Optional[int] = 25,
     country: Optional[str] = None,
     language: Optional[str] = None,
@@ -55,7 +55,7 @@ def euhealthinfo_search_diabetes_mellitus_epidemiology_registry(
 
     return get_shared_client().run_one_function(
         {
-            "name": "euhealthinfo_search_diabetes_mellitus_epidemiology_registry",
+            "name": "euhealthinfo_search_diabetes_epidemiology_registry",
             "arguments": {
                 "limit": limit,
                 "country": country,
@@ -72,4 +72,4 @@ def euhealthinfo_search_diabetes_mellitus_epidemiology_registry(
     )
 
 
-__all__ = ["euhealthinfo_search_diabetes_mellitus_epidemiology_registry"]
+__all__ = ["euhealthinfo_search_diabetes_epidemiology_registry"]

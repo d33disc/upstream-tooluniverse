@@ -1,27 +1,27 @@
 """
-OpenTargets_get_parent_child_molecules_by_drug_chembl_ID
+OpenTargets_get_drug_blackbox_status_by_chembl_ID
 
-Get parent and child molecules of specified drug chemblId.
+Find withdrawn and black-box warning statuses for a specific drug by chemblId.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def OpenTargets_get_parent_child_molecules_by_drug_chembl_ID(
-    chemblId: str,
+def OpenTargets_get_drug_blackbox_status_by_chembl_ID(
+    chemblId: list[str],
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get parent and child molecules of specified drug chemblId.
+    Find withdrawn and black-box warning statuses for a specific drug by chemblId.
 
     Parameters
     ----------
-    chemblId : str
-        The ChEMBL ID of the drug.
+    chemblId : list[str]
+        The chemblId of a drug.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def OpenTargets_get_parent_child_molecules_by_drug_chembl_ID(
 
     return get_shared_client().run_one_function(
         {
-            "name": "OpenTargets_get_parent_child_molecules_by_drug_chembl_ID",
+            "name": "OpenTargets_get_drug_blackbox_status_by_chembl_ID",
             "arguments": {"chemblId": chemblId},
         },
         stream_callback=stream_callback,
@@ -46,4 +46,4 @@ def OpenTargets_get_parent_child_molecules_by_drug_chembl_ID(
     )
 
 
-__all__ = ["OpenTargets_get_parent_child_molecules_by_drug_chembl_ID"]
+__all__ = ["OpenTargets_get_drug_blackbox_status_by_chembl_ID"]

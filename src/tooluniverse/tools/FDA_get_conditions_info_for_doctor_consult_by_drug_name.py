@@ -1,14 +1,14 @@
 """
-FDA_get_dear_health_care_provider_letter_info_by_drug_name
+FDA_get_conditions_info_for_doctor_consult_by_drug_name
 
-Fetch information about dear health care provider letters for a specific drug. The letters are se...
+Get information about when a doctor should be consulted before using a specific drug.
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def FDA_get_dear_health_care_provider_letter_info_by_drug_name(
+def FDA_get_conditions_info_for_doctor_consult_by_drug_name(
     drug_name: str,
     limit: Optional[int] = None,
     skip: Optional[int] = None,
@@ -18,7 +18,7 @@ def FDA_get_dear_health_care_provider_letter_info_by_drug_name(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Fetch information about dear health care provider letters for a specific drug. The letters are se...
+    Get information about when a doctor should be consulted before using a specific drug.
 
     Parameters
     ----------
@@ -43,7 +43,7 @@ def FDA_get_dear_health_care_provider_letter_info_by_drug_name(
 
     return get_shared_client().run_one_function(
         {
-            "name": "FDA_get_dear_health_care_provider_letter_info_by_drug_name",
+            "name": "FDA_get_conditions_info_for_doctor_consult_by_drug_name",
             "arguments": {"drug_name": drug_name, "limit": limit, "skip": skip},
         },
         stream_callback=stream_callback,
@@ -52,4 +52,4 @@ def FDA_get_dear_health_care_provider_letter_info_by_drug_name(
     )
 
 
-__all__ = ["FDA_get_dear_health_care_provider_letter_info_by_drug_name"]
+__all__ = ["FDA_get_conditions_info_for_doctor_consult_by_drug_name"]
