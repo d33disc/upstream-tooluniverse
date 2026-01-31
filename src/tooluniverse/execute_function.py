@@ -95,6 +95,7 @@ if LAZY_LOADING_ENABLED:
     )
 else:
     debug(f"Full tool registry initialized with {len(tool_type_mappings)} tools")
+
 for _tool_name, _tool_class in sorted(tool_type_mappings.items()):
     debug(f"  - {_tool_name}: {_tool_class.__name__}")
 
@@ -224,6 +225,7 @@ class ToolNamespace:
     def eager_load(self, names: Optional[List[str]] = None):
         """Pre-instantiate tools to reduce first-call latency."""
         self.engine.eager_load_tools(names)
+
 
 
 class ToolUniverse:

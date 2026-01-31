@@ -437,29 +437,29 @@ def list_mcp_connections(self) -> Dict[str, Any]:
 
 
 # Monkey patch methods into ToolUniverse
-def _patch_tooluniverse():
-    """Add MCP integration methods to ToolUniverse class."""
+def _patch_tooluniverse(tool_universe_cls):
+    """
+    Add MCP integration methods to ToolUniverse class.
+
+    Args:
+        tool_universe_cls: The ToolUniverse class to patch (passed purely to avoid circular imports)
+    """
     try:
-        from .execute_function import ToolUniverse
-
         # Add methods to ToolUniverse if they don't exist
-        if not hasattr(ToolUniverse, "load_mcp_tools"):
-            ToolUniverse.load_mcp_tools = load_mcp_tools
+        if not hasattr(tool_universe_cls, "load_mcp_tools"):
+            tool_universe_cls.load_mcp_tools = load_mcp_tools
 
-        if not hasattr(ToolUniverse, "discover_mcp_tools"):
-            ToolUniverse.discover_mcp_tools = discover_mcp_tools
+        if not hasattr(tool_universe_cls, "discover_mcp_tools"):
+            tool_universe_cls.discover_mcp_tools = discover_mcp_tools
 
-        if not hasattr(ToolUniverse, "list_mcp_connections"):
-            ToolUniverse.list_mcp_connections = list_mcp_connections
+        if not hasattr(tool_universe_cls, "list_mcp_connections"):
+            tool_universe_cls.list_mcp_connections = list_mcp_connections
 
-        if not hasattr(ToolUniverse, "_load_tools_from_mcp_server"):
-            ToolUniverse._load_tools_from_mcp_server = _load_tools_from_mcp_server
+        if not hasattr(tool_universe_cls, "_load_tools_from_mcp_server"):
+            tool_universe_cls._load_tools_from_mcp_server = _load_tools_from_mcp_server
 
         # print("✅ ToolUniverse MCP integration methods added")
 
-    except ImportError as e:
+    except Exception as e:
         print(f"⚠️ Could not patch ToolUniverse: {e}")
 
-
-# Auto-patch when module is imported
-_patch_tooluniverse()

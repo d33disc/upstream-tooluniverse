@@ -30,17 +30,16 @@ LAZY_LOADING_ENABLED = os.getenv("TOOLUNIVERSE_LAZY_LOADING", "true").lower() in
     "yes",
 )
 
-# Import MCP functionality
+# Import MCP functionality (but don't patch yet to avoid circular imports)
 if not _LIGHT_IMPORT:
     try:
         from .mcp_integration import _patch_tooluniverse
-
-        # Automatically patch ToolUniverse with MCP methods
-        _patch_tooluniverse()
-
+        _MCP_PATCH_AVAILABLE = True
     except ImportError:
         # MCP functionality not available
-        pass
+        _MCP_PATCH_AVAILABLE = False
+        _patch_tooluniverse = None
+
 
 # Import SMCP with graceful fallback and consistent signatures for type checking
 try:
@@ -148,3 +147,8 @@ if not _LIGHT_IMPORT:
         __all__.extend(list(_registry.keys()))
     except Exception:
         pass
+
+# Apply MCP patches after all imports are complete to avoid circular imports
+if not _LIGHT_IMPORT and _MCP_PATCH_AVAILABLE and _patch_tooluniverse is not None:
+    _patch_tooluniverse(ToolUniverse)
+
