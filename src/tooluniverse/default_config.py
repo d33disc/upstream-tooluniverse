@@ -249,6 +249,22 @@ default_tool_files = {
     "stitch": os.path.join(current_dir, "data", "stitch_tools.json"),
     # CIViC - Clinical Interpretation of Variants in Cancer
     "civic": os.path.join(current_dir, "data", "civic_tools.json"),
+    # Single-cell RNA-seq data
+    "cellxgene_census": os.path.join(
+        current_dir, "data", "cellxgene_census_tools.json"
+    ),
+    # Chromatin and epigenetics data
+    "chipatlas": os.path.join(current_dir, "data", "chipatlas_tools.json"),
+    # 4DN Data Portal - 3D genome organization
+    "fourdn": os.path.join(current_dir, "data", "fourdn_tools.json"),
+    # GTEx Portal API V2 - Tissue-specific gene expression and eQTLs
+    "gtex_v2": os.path.join(current_dir, "data", "gtex_v2_tools.json"),
+    # Rfam Database API - RNA families (v15.1, January 2026)
+    "rfam": os.path.join(current_dir, "data", "rfam_tools.json"),
+    # BiGG Models API - Genome-scale metabolic models
+    "bigg_models": os.path.join(current_dir, "data", "bigg_models_tools.json"),
+    # Protein-Protein Interaction (PPI) tools - STRING and BioGRID
+    "ppi": os.path.join(current_dir, "data", "ppi_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
