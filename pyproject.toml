@@ -58,6 +58,11 @@ smolagents = [
     "smolagents>=1.22.0",
     "gradio>=4.0.0",  # Required for GradioUI web interface
 ]
+# Single-cell and spatial transcriptomics tools
+singlecell = [
+    "cellxgene-census>=1.10.0",  # CELLxGENE Census API
+    "tiledbsoma>=1.15.3",  # Required for spatial data
+]
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",

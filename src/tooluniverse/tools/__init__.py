@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1016 scientific tools.
+Type-safe Python interface to 1068 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -55,12 +55,27 @@ from .ArXiv_search_papers import ArXiv_search_papers
 from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
 from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
+from .BiGG_get_database_version import BiGG_get_database_version
+from .BiGG_get_metabolite import BiGG_get_metabolite
+from .BiGG_get_model import BiGG_get_model
+from .BiGG_get_model_reactions import BiGG_get_model_reactions
+from .BiGG_get_reaction import BiGG_get_reaction
+from .BiGG_list_models import BiGG_list_models
+from .BiGG_search import BiGG_search
+from .BioGRID_get_interactions import BioGRID_get_interactions
 from .BioModels_download_model import BioModels_download_model
 from .BioModels_get_model import BioModels_get_model
 from .BioModels_list_files import BioModels_list_files
 from .BioModels_search_parameters import BioModels_search_parameters
 from .BioRxiv_search_preprints import BioRxiv_search_preprints
 from .BiomarkerDiscoveryWorkflow import BiomarkerDiscoveryWorkflow
+from .CELLxGENE_download_h5ad import CELLxGENE_download_h5ad
+from .CELLxGENE_get_cell_metadata import CELLxGENE_get_cell_metadata
+from .CELLxGENE_get_census_versions import CELLxGENE_get_census_versions
+from .CELLxGENE_get_embeddings import CELLxGENE_get_embeddings
+from .CELLxGENE_get_expression_data import CELLxGENE_get_expression_data
+from .CELLxGENE_get_gene_metadata import CELLxGENE_get_gene_metadata
+from .CELLxGENE_get_presence_matrix import CELLxGENE_get_presence_matrix
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
 from .CORE_search_papers import CORE_search_papers
 from .CallAgent import CallAgent
@@ -95,6 +110,10 @@ from .ChEMBL_search_similarity import ChEMBL_search_similarity
 from .ChEMBL_search_substructure import ChEMBL_search_substructure
 from .ChEMBL_search_targets import ChEMBL_search_targets
 from .ChEMBL_search_tissue import ChEMBL_search_tissue
+from .ChIPAtlas_enrichment_analysis import ChIPAtlas_enrichment_analysis
+from .ChIPAtlas_get_experiments import ChIPAtlas_get_experiments
+from .ChIPAtlas_get_peak_data import ChIPAtlas_get_peak_data
+from .ChIPAtlas_search_datasets import ChIPAtlas_search_datasets
 from .ClinicalTrialDesignAgent import ClinicalTrialDesignAgent
 from .CodeQualityAnalyzer import CodeQualityAnalyzer
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
@@ -532,6 +551,10 @@ from .FDA_retrieve_patient_medication_info_by_drug_name import (
 )
 from .Fatcat_search_scholar import Fatcat_search_scholar
 from .Finish import Finish
+from .FourDN_get_download_url import FourDN_get_download_url
+from .FourDN_get_experiment_metadata import FourDN_get_experiment_metadata
+from .FourDN_get_file_metadata import FourDN_get_file_metadata
+from .FourDN_search_data import FourDN_search_data
 from .GBIF_search_occurrences import GBIF_search_occurrences
 from .GBIF_search_species import GBIF_search_species
 from .GDC_list_files import GDC_list_files
@@ -542,7 +565,17 @@ from .GO_get_genes_for_term import GO_get_genes_for_term
 from .GO_get_term_by_id import GO_get_term_by_id
 from .GO_get_term_details import GO_get_term_details
 from .GO_search_terms import GO_search_terms
+from .GTEx_calculate_eqtl import GTEx_calculate_eqtl
+from .GTEx_get_dataset_info import GTEx_get_dataset_info
+from .GTEx_get_eqtl_genes import GTEx_get_eqtl_genes
 from .GTEx_get_expression_summary import GTEx_get_expression_summary
+from .GTEx_get_gene_expression import GTEx_get_gene_expression
+from .GTEx_get_median_gene_expression import GTEx_get_median_gene_expression
+from .GTEx_get_multi_tissue_eqtls import GTEx_get_multi_tissue_eqtls
+from .GTEx_get_sample_info import GTEx_get_sample_info
+from .GTEx_get_single_tissue_eqtls import GTEx_get_single_tissue_eqtls
+from .GTEx_get_tissue_sites import GTEx_get_tissue_sites
+from .GTEx_get_top_expressed_genes import GTEx_get_top_expressed_genes
 from .GTEx_query_eqtl import GTEx_query_eqtl
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
 from .GtoPdb_get_disease import GtoPdb_get_disease
@@ -867,6 +900,15 @@ from .ReferenceInfoAnalyzer import ReferenceInfoAnalyzer
 from .RegulomeDB_query_variant import RegulomeDB_query_variant
 from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyReviewer
 from .ResultsInterpretationReviewer import ResultsInterpretationReviewer
+from .Rfam_accession_to_id import Rfam_accession_to_id
+from .Rfam_get_alignment import Rfam_get_alignment
+from .Rfam_get_covariance_model import Rfam_get_covariance_model
+from .Rfam_get_family import Rfam_get_family
+from .Rfam_get_sequence_regions import Rfam_get_sequence_regions
+from .Rfam_get_structure_mapping import Rfam_get_structure_mapping
+from .Rfam_get_tree_data import Rfam_get_tree_data
+from .Rfam_id_to_accession import Rfam_id_to_accession
+from .Rfam_search_sequence import Rfam_search_sequence
 from .RxNorm_get_drug_names import RxNorm_get_drug_names
 from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
 from .SIMBAD_advanced_query import SIMBAD_advanced_query
@@ -876,6 +918,7 @@ from .STITCH_get_chemical_protein_interactions import (
 )
 from .STITCH_get_interaction_partners import STITCH_get_interaction_partners
 from .STITCH_resolve_identifier import STITCH_resolve_identifier
+from .STRING_get_protein_interactions import STRING_get_protein_interactions
 from .ScientificTextSummarizer import ScientificTextSummarizer
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
@@ -1061,15 +1104,25 @@ from .ena_get_sequence_embl import ena_get_sequence_embl
 from .ena_get_sequence_fasta import ena_get_sequence_fasta
 from .ena_get_sequence_xml import ena_get_sequence_xml
 from .enrichr_gene_enrichment_analysis import enrichr_gene_enrichment_analysis
+from .ensembl_get_alignment import ensembl_get_alignment
+from .ensembl_get_archive import ensembl_get_archive
 from .ensembl_get_genetree import ensembl_get_genetree
+from .ensembl_get_homology import ensembl_get_homology
+from .ensembl_get_ontology_ancestors import ensembl_get_ontology_ancestors
+from .ensembl_get_ontology_descendants import ensembl_get_ontology_descendants
+from .ensembl_get_ontology_term import ensembl_get_ontology_term
+from .ensembl_get_overlap_features import ensembl_get_overlap_features
 from .ensembl_get_regulatory_features import ensembl_get_regulatory_features
 from .ensembl_get_sequence import ensembl_get_sequence
+from .ensembl_get_species import ensembl_get_species
+from .ensembl_get_taxonomy import ensembl_get_taxonomy
 from .ensembl_get_variants import ensembl_get_variants
 from .ensembl_get_variation import ensembl_get_variation
 from .ensembl_get_variation_phenotypes import ensembl_get_variation_phenotypes
 from .ensembl_get_xrefs import ensembl_get_xrefs
 from .ensembl_get_xrefs_by_name import ensembl_get_xrefs_by_name
 from .ensembl_lookup_gene import ensembl_lookup_gene
+from .ensembl_vep_region import ensembl_vep_region
 from .euhealthinfo_deepdive import euhealthinfo_deepdive
 from .euhealthinfo_search_alcohol_tobacco_psychoactive_use import (
     euhealthinfo_search_alcohol_tobacco_psychoactive_use,
@@ -1358,7 +1411,6 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
-from .ghost_tool import ghost_tool
 from .gnomad_get_gene import gnomad_get_gene
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .gnomad_get_region import gnomad_get_region
@@ -1515,12 +1567,27 @@ __all__ = [
     "ArgumentDescriptionOptimizer",
     "BLAST_nucleotide_search",
     "BLAST_protein_search",
+    "BiGG_get_database_version",
+    "BiGG_get_metabolite",
+    "BiGG_get_model",
+    "BiGG_get_model_reactions",
+    "BiGG_get_reaction",
+    "BiGG_list_models",
+    "BiGG_search",
+    "BioGRID_get_interactions",
     "BioModels_download_model",
     "BioModels_get_model",
     "BioModels_list_files",
     "BioModels_search_parameters",
     "BioRxiv_search_preprints",
     "BiomarkerDiscoveryWorkflow",
+    "CELLxGENE_download_h5ad",
+    "CELLxGENE_get_cell_metadata",
+    "CELLxGENE_get_census_versions",
+    "CELLxGENE_get_embeddings",
+    "CELLxGENE_get_expression_data",
+    "CELLxGENE_get_gene_metadata",
+    "CELLxGENE_get_presence_matrix",
     "CMA_Guidelines_Search",
     "CORE_search_papers",
     "CallAgent",
@@ -1553,6 +1620,10 @@ __all__ = [
     "ChEMBL_search_substructure",
     "ChEMBL_search_targets",
     "ChEMBL_search_tissue",
+    "ChIPAtlas_enrichment_analysis",
+    "ChIPAtlas_get_experiments",
+    "ChIPAtlas_get_peak_data",
+    "ChIPAtlas_search_datasets",
     "ClinicalTrialDesignAgent",
     "CodeQualityAnalyzer",
     "CompoundDiscoveryAgent",
@@ -1778,6 +1849,10 @@ __all__ = [
     "FDA_retrieve_patient_medication_info_by_drug_name",
     "Fatcat_search_scholar",
     "Finish",
+    "FourDN_get_download_url",
+    "FourDN_get_experiment_metadata",
+    "FourDN_get_file_metadata",
+    "FourDN_search_data",
     "GBIF_search_occurrences",
     "GBIF_search_species",
     "GDC_list_files",
@@ -1788,7 +1863,17 @@ __all__ = [
     "GO_get_term_by_id",
     "GO_get_term_details",
     "GO_search_terms",
+    "GTEx_calculate_eqtl",
+    "GTEx_get_dataset_info",
+    "GTEx_get_eqtl_genes",
     "GTEx_get_expression_summary",
+    "GTEx_get_gene_expression",
+    "GTEx_get_median_gene_expression",
+    "GTEx_get_multi_tissue_eqtls",
+    "GTEx_get_sample_info",
+    "GTEx_get_single_tissue_eqtls",
+    "GTEx_get_tissue_sites",
+    "GTEx_get_top_expressed_genes",
     "GTEx_query_eqtl",
     "GWAS_search_associations_by_gene",
     "GtoPdb_get_disease",
@@ -1977,6 +2062,15 @@ __all__ = [
     "RegulomeDB_query_variant",
     "ReproducibilityTransparencyReviewer",
     "ResultsInterpretationReviewer",
+    "Rfam_accession_to_id",
+    "Rfam_get_alignment",
+    "Rfam_get_covariance_model",
+    "Rfam_get_family",
+    "Rfam_get_sequence_regions",
+    "Rfam_get_structure_mapping",
+    "Rfam_get_tree_data",
+    "Rfam_id_to_accession",
+    "Rfam_search_sequence",
     "RxNorm_get_drug_names",
     "SCREEN_get_regulatory_elements",
     "SIMBAD_advanced_query",
@@ -1984,6 +2078,7 @@ __all__ = [
     "STITCH_get_chemical_protein_interactions",
     "STITCH_get_interaction_partners",
     "STITCH_resolve_identifier",
+    "STRING_get_protein_interactions",
     "ScientificTextSummarizer",
     "SemanticScholar_search_papers",
     "TRIP_Database_Guidelines_Search",
@@ -2127,15 +2222,25 @@ __all__ = [
     "ena_get_sequence_fasta",
     "ena_get_sequence_xml",
     "enrichr_gene_enrichment_analysis",
+    "ensembl_get_alignment",
+    "ensembl_get_archive",
     "ensembl_get_genetree",
+    "ensembl_get_homology",
+    "ensembl_get_ontology_ancestors",
+    "ensembl_get_ontology_descendants",
+    "ensembl_get_ontology_term",
+    "ensembl_get_overlap_features",
     "ensembl_get_regulatory_features",
     "ensembl_get_sequence",
+    "ensembl_get_species",
+    "ensembl_get_taxonomy",
     "ensembl_get_variants",
     "ensembl_get_variation",
     "ensembl_get_variation_phenotypes",
     "ensembl_get_xrefs",
     "ensembl_get_xrefs_by_name",
     "ensembl_lookup_gene",
+    "ensembl_vep_region",
     "euhealthinfo_deepdive",
     "euhealthinfo_search_alcohol_tobacco_psychoactive_use",
     "euhealthinfo_search_births",
@@ -2384,7 +2489,6 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
-    "ghost_tool",
     "gnomad_get_gene",
     "gnomad_get_gene_constraints",
     "gnomad_get_region",

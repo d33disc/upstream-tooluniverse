@@ -1,27 +1,30 @@
 """
-ghost_tool
+FourDN_get_download_url
 
-A ghost tool that exists in code but not in JSON configs.
+Get download URL and DRS (Data Repository Service) API endpoint for 4DN files. Prerequisites: Req...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ghost_tool(
-    msg: Optional[str] = None,
+def FourDN_get_download_url(
+    operation: str,
+    file_accession: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    A ghost tool that exists in code but not in JSON configs.
+    Get download URL and DRS (Data Repository Service) API endpoint for 4DN files. Prerequisites: Req...
 
     Parameters
     ----------
-    msg : str
+    operation : str
 
+    file_accession : str
+        4DN file accession
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +34,19 @@ def ghost_tool(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "ghost_tool", "arguments": {"msg": msg}},
+        {
+            "name": "FourDN_get_download_url",
+            "arguments": {"operation": operation, "file_accession": file_accession},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ghost_tool"]
+__all__ = ["FourDN_get_download_url"]
