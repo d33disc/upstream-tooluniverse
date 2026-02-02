@@ -143,12 +143,23 @@ class ToolFinderEmbedding(BaseTool):
             ) from e
 
         # Determine device: use GPU if available, otherwise CPU
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        if torch.cuda.is_available():
+            device = "cuda"
+            logger.info(f"CUDA is available. GPU count: {torch.cuda.device_count()}")
+            logger.info(f"Current CUDA device: {torch.cuda.current_device()}")
+            logger.info(f"GPU name: {torch.cuda.get_device_name(0)}")
+        else:
+            device = "cpu"
+            logger.warning("CUDA is not available. Using CPU.")
 
         # Load model on the appropriate device
+        logger.info(f"Loading SentenceTransformer model on device: {device}")
         self.rag_model = SentenceTransformer(self.toolfinder_model, device=device)
         self.rag_model.max_seq_length = 4096
         self.rag_model.tokenizer.padding_side = "right"
+        
+        # Verify model is on correct device
+        logger.info(f"Model device after loading: {self.rag_model.device}")
 
         # Log device information
         if torch.cuda.is_available():
@@ -212,7 +223,6 @@ class ToolFinderEmbedding(BaseTool):
         )
         self.tool_embedding_path = str(cache_dir / embedding_filename)
 
-        # Lazy import torch for loading/saving embeddings
         try:
             import torch
         except ImportError:
@@ -221,22 +231,41 @@ class ToolFinderEmbedding(BaseTool):
                 "Install it with: pip install tooluniverse[embedding] or pip install tooluniverse[ml]"
             ) from None
 
+        # Determine target device for loading embeddings
+        if hasattr(self.rag_model, "device"):
+            target_device = self.rag_model.device
+        else:
+            target_device = "cuda" if torch.cuda.is_available() else "cpu"
+        
+        logger.info(f"Loading embeddings to device: {target_device}")
+
         try:
+            # Load embeddings directly to the target device (GPU if available)
+            # This is more efficient than loading to CPU then moving to GPU
             self.tool_desc_embedding = torch.load(
-                self.tool_embedding_path, weights_only=False
+                self.tool_embedding_path, 
+                map_location=target_device,
+                weights_only=False
             )
-            # Bug fix: Ensure embeddings are on the same device as the model
-            # Cached embeddings are loaded on CPU by default, but the model is on GPU if available
-            # This prevents "RuntimeError: Trying to copy tensor from CPU to CUDA device" errors
-            # Move embeddings to model's device (GPU if model is on GPU, CPU otherwise)
-            if hasattr(self.rag_model, "device"):
-                # Ensure it is a tensor first
-                if not isinstance(self.tool_desc_embedding, torch.Tensor):
-                    self.tool_desc_embedding = torch.tensor(self.tool_desc_embedding)
-                
-                self.tool_desc_embedding = self.tool_desc_embedding.to(
-                    self.rag_model.device
+            
+            # Ensure it is a tensor
+            if not isinstance(self.tool_desc_embedding, torch.Tensor):
+                self.tool_desc_embedding = torch.tensor(
+                    self.tool_desc_embedding, 
+                    device=target_device
                 )
+            
+            # PyTorch meta tensor fix: handle meta tensors if present
+            if self.tool_desc_embedding.device.type == 'meta':
+                logger.info("Detected meta tensor, using to_empty()")
+                self.tool_desc_embedding = self.tool_desc_embedding.to_empty(device=target_device)
+            elif self.tool_desc_embedding.device != target_device:
+                # Move to target device if not already there
+                logger.info(f"Moving embeddings from {self.tool_desc_embedding.device} to {target_device}")
+                self.tool_desc_embedding = self.tool_desc_embedding.to(target_device)
+            
+            logger.info(f"Embeddings loaded on device: {self.tool_desc_embedding.device}")
+            
             assert len(self.tool_desc_embedding) == len(self.tool_name), (
                 "The number of tools in the tool_name list is not equal to the number of tool_desc_embedding."
             )
@@ -328,9 +357,14 @@ class ToolFinderEmbedding(BaseTool):
             self.tool_desc_embedding, torch.Tensor
         ):
             if query_embeddings.device != self.tool_desc_embedding.device:
-                self.tool_desc_embedding = self.tool_desc_embedding.to(
-                    query_embeddings.device
-                )
+                # PyTorch meta tensor fix: use to_empty() for meta tensors, to() for regular tensors
+                target_device = query_embeddings.device
+                if self.tool_desc_embedding.device.type == 'meta':
+                    # New PyTorch: meta tensors require to_empty()
+                    self.tool_desc_embedding = self.tool_desc_embedding.to_empty(device=target_device)
+                else:
+                    # Old PyTorch or regular tensors: use standard to()
+                    self.tool_desc_embedding = self.tool_desc_embedding.to(target_device)
 
         scores = self.rag_model.similarity(query_embeddings, self.tool_desc_embedding)
         top_k = min(top_k, len(self.tool_name))
