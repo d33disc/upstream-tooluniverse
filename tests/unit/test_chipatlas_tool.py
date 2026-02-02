@@ -110,7 +110,6 @@ class TestChIPAtlasTools:
         assert "status" in result or "error" in result
         
         if result.get("status") == "error" or "error" in result:
-            error_text = result.get("error", "")
             # Test should pass whether parameter validation fails or tool handles it
             assert True  # Simplified assertion - tool behavior is correct either way
 
