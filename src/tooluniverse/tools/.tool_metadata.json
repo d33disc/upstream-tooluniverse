@@ -957,6 +957,7 @@
   "get_xesmf_info": "4a923ae08c9dc16450c2dbdea5062811",
   "get_xgboost_info": "ce1da1eb906dc3af31bfb9e590da3f17",
   "get_zarr_info": "83476a88675bbffb51b68a117e0ec427",
+  "ghost_tool": "fb4d2380e011f0cd3ed3e0011877fbc5",
   "gnomad_get_gene": "407e7f4c7ab2cf0a5bc9a9f93fc37b09",
   "gnomad_get_gene_constraints": "7f9d0675b2a03954ebb122f25110b7f4",
   "gnomad_get_region": "1ff9f8aea5436e5275d7a3ef5fc6d218",
