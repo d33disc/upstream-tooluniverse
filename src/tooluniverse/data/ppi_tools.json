@@ -92,7 +92,7 @@
   {
     "type": "BioGRIDRESTTool",
     "name": "BioGRID_get_interactions",
-    "description": "Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive database of physical and genetic interactions with detailed experimental evidence.",
+    "description": "Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive database of physical and genetic interactions with detailed experimental evidence. Requires free BioGRID API key (register at https://webservice.thebiogrid.org/). Set BIOGRID_API_KEY environment variable in .env file.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -106,7 +106,7 @@
         },
         "organism": {
           "type": "string",
-          "description": "Organism name (e.g., 'Homo sapiens', 'Mus musculus')",
+          "description": "Organism name (e.g., 'Homo sapiens', 'Mus musculus') or NCBI taxonomy ID (e.g., '9606' for human)",
           "default": "Homo sapiens"
         },
         "interaction_type": {
@@ -147,6 +147,9 @@
         "gene_names"
       ]
     },
+    "required_api_keys": [
+      "BIOGRID_API_KEY"
+    ],
     "return_schema": {
       "type": ["object", "array"],
       "description": "BioGRID API response - can be an object with interaction data or an array of interactions"

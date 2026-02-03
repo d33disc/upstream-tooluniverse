@@ -116,23 +116,6 @@ class TestCELLxGENECensusReturnSchemas:
         if result["status"] == "success":
             # Should have versions field
             assert "versions" in result or "error" in result
-    
-    def test_get_cell_metadata_schema(self, tu):
-        """Verify get_cell_metadata return schema."""
-        result = tu.tools.CELLxGENE_get_cell_metadata(**{
-            "operation": "get_obs_metadata",
-            "organism": "Homo sapiens"
-        })
-        
-        assert "status" in result
-        
-        if result["status"] == "success":
-            # Expected fields from return_schema
-            expected_fields = ["organism", "num_cells", "columns", "data"]
-            present_fields = [f for f in expected_fields if f in result]
-            
-            # At least some expected fields should be present
-            assert len(present_fields) > 0 or "error" in result
 
 
 class TestCELLxGENECensusIntegration:

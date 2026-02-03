@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1091 scientific tools.
+Type-safe Python interface to 1090 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -62,7 +62,6 @@ from .BiGG_get_model_reactions import BiGG_get_model_reactions
 from .BiGG_get_reaction import BiGG_get_reaction
 from .BiGG_list_models import BiGG_list_models
 from .BiGG_search import BiGG_search
-from .BioGRID_get_interactions import BioGRID_get_interactions
 from .BioModels_download_model import BioModels_download_model
 from .BioModels_get_model import BioModels_get_model
 from .BioModels_list_files import BioModels_list_files
@@ -1599,7 +1598,6 @@ __all__ = [
     "BiGG_get_reaction",
     "BiGG_list_models",
     "BiGG_search",
-    "BioGRID_get_interactions",
     "BioModels_download_model",
     "BioModels_get_model",
     "BioModels_list_files",

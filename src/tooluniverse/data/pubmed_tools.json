@@ -123,8 +123,8 @@
       "cmd": "neighbor_score"
     },
     "return_schema": {
-      "type": ["array", "object"],
-      "description": "List of related PMIDs or linkset data structure"
+      "type": ["array", "object", "string"],
+      "description": "List of related PMIDs, linkset data structure, or error message"
     },
     "test_examples": [
       {
@@ -171,8 +171,8 @@
       "linkname": "pubmed_pubmed_citedin"
     },
     "return_schema": {
-      "type": ["array", "object"],
-      "description": "List of PMIDs that cite the input article or linkset data structure"
+      "type": ["array", "object", "string"],
+      "description": "List of PMIDs that cite the input article, linkset data structure, or error message"
     },
     "test_examples": [
       {
@@ -207,11 +207,11 @@
       "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi",
       "method": "GET",
       "dbfrom": "pubmed",
-      "cmd": "llinkslib"
+      "cmd": "llinks"
     },
     "return_schema": {
-      "type": ["object", "string"],
-      "description": "LinkOut URLs and provider information"
+      "type": ["array", "object", "string"],
+      "description": "LinkOut URLs and provider information (array of link objects or structured data)"
     },
     "test_examples": [
       {

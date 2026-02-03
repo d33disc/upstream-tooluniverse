@@ -118,6 +118,15 @@ class PubMedRESTTool(BaseRESTTool):
             try:
                 data = response.json()
 
+                # Check for API errors in response
+                if "ERROR" in data:
+                    error_msg = data.get("ERROR", "Unknown API error")
+                    return {
+                        "status": "error",
+                        "data": f"NCBI API error: {error_msg[:200]}",
+                        "url": response.url,
+                    }
+
                 # For esearch responses, extract ID list
                 if "esearchresult" in data:
                     esearch_result = data.get("esearchresult", {})
@@ -130,9 +139,18 @@ class PubMedRESTTool(BaseRESTTool):
                         "url": response.url,
                     }
 
-                # For elink responses, extract linksets
+                # For elink responses with LinkOut URLs (llinks command)
                 if "linksets" in data:
                     linksets = data.get("linksets", [])
+                    # Check for empty linksets with errors
+                    if not linksets or (linksets and len(linksets) == 0):
+                        return {
+                            "status": "success",
+                            "data": [],
+                            "count": 0,
+                            "url": response.url,
+                        }
+
                     if linksets and len(linksets) > 0:
                         linkset = linksets[0]
                         # Extract linked IDs
@@ -146,13 +164,21 @@ class PubMedRESTTool(BaseRESTTool):
                                     "count": len(links),
                                     "url": response.url,
                                 }
-                        # Extract LinkOut URLs
+                        # Extract LinkOut URLs (idurllist)
                         elif "idurllist" in linkset:
                             return {
                                 "status": "success",
                                 "data": linkset.get("idurllist", {}),
                                 "url": response.url,
                             }
+
+                # For elink responses with LinkOut URLs (llinks returns direct idurllist)
+                if "idurllist" in data:
+                    return {
+                        "status": "success",
+                        "data": data.get("idurllist", []),
+                        "url": response.url,
+                    }
 
                 return {
                     "status": "success",

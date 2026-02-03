@@ -286,14 +286,14 @@
     },
     "test_examples": [
       {
-        "script_path": "./examples/hello_world.py"
+        "script_path": "./examples/code_executor/hello_world.py"
       },
       {
-        "script_path": "./examples/data_processor.py",
+        "script_path": "./examples/code_executor/data_processor.py",
         "script_args": ["--input", "data.csv", "--output", "result.csv"]
       },
       {
-        "script_path": "./examples/configurable_script.py",
+        "script_path": "./examples/code_executor/configurable_script.py",
         "env_vars": {"DEBUG": "true", "LOG_LEVEL": "info"}
       }
     ],
