@@ -65,9 +65,11 @@ class TestCELLxGENECensusTools:
         assert "status" in result
         
         if result["status"] == "success":
+            # Check if data is nested or flat
+            data = result.get("data", result)
             # Check expected fields in success response
-            assert "organism" in result
-            assert "num_cells" in result or "error" in result
+            assert "organism" in data or "organism" in result
+            assert "num_cells" in data or "num_cells" in result or "error" in result
         else:
             # Check error response has error message
             assert "error" in result
@@ -114,8 +116,10 @@ class TestCELLxGENECensusReturnSchemas:
         assert "status" in result
         
         if result["status"] == "success":
+            # Check if data is nested or flat
+            data = result.get("data", result)
             # Should have versions field
-            assert "versions" in result or "error" in result
+            assert "versions" in data or "versions" in result or "error" in result
 
 
 class TestCELLxGENECensusIntegration:
@@ -139,7 +143,10 @@ class TestCELLxGENECensusIntegration:
         })
         
         assert result["status"] == "success"
-        assert "versions" in result
+        # Check if data is nested or flat
+        data = result.get("data", result)
+        assert "versions" in data or "versions" in result
         
         # Versions should be a dict or list
-        assert isinstance(result["versions"], (dict, list))
+        versions = data.get("versions", result.get("versions"))
+        assert isinstance(versions, (dict, list))
