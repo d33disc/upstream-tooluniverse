@@ -414,7 +414,7 @@ Space Complexity
 ----------------
 
 - **Per mapping:** ~50 bytes
-- **750 tools:** ~37KB memory
+- **1000 tools:** ~50KB memory
 - **Negligible overhead**
 
 Benchmark Results
@@ -436,7 +436,7 @@ Benchmark Results
    * - Resolve shortened to original
      - 0.0001ms
      - 0 bytes
-   * - Total overhead (750 tools)
+   * - Total overhead (1000 tools)
      - <1ms
      - <50KB
 

@@ -2,7 +2,8 @@
   {
     "type": "SemanticScholarTool",
     "name": "SemanticScholar_search_papers",
-    "description": "Search for papers on Semantic Scholar including abstracts. This tool queries the Semantic Scholar API using natural language keywords and returns papers with details such as title, abstract, publication year, journal (venue), and URL.",
+    "description": "Search for papers on Semantic Scholar including abstracts. This tool queries the Semantic Scholar API using natural language keywords and returns papers with details such as title, abstract, publication year, journal (venue), and URL. Rate limits: 1 req/sec without API key, 100 req/sec with SEMANTIC_SCHOLAR_API_KEY environment variable set.",
+    "optional_api_keys": ["SEMANTIC_SCHOLAR_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
@@ -14,10 +15,6 @@
           "type": "integer",
           "description": "Maximum number of papers to return from Semantic Scholar.",
           "default": 5
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional API key for Semantic Scholar to obtain a higher quota."
         }
       },
       "required": [
@@ -57,8 +54,7 @@
     "test_examples": [
       {
         "query": "machine learning optimization",
-        "limit": 1,
-        "api_key": ""
+        "limit": 1
       }
     ]
   }

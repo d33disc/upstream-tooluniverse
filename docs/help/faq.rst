@@ -1,7 +1,12 @@
-FAQ - Frequently Asked Questions
-==================================
+Comprehensive FAQ
+=================
 
-This page contains answers to the most frequently asked questions about ToolUniverse.
+This page contains detailed answers to frequently asked questions about ToolUniverse.
+
+.. tip::
+   **Need a quick answer?**
+   
+   For brief answers to the most common questions, see :doc:`../faq`. This page provides comprehensive information with detailed explanations, troubleshooting tips, and advanced topics.
 
 General Questions
 -----------------
@@ -29,7 +34,7 @@ ToolUniverse is a comprehensive collection of scientific tools for Agentic AI, o
 
       .. code-block:: bash
 
-         python -m tooluniverse.smcp_server
+         tooluniverse-smcp
 
    .. tab:: Command Line
 
@@ -163,7 +168,7 @@ How do I use ToolUniverse with Claude?
 
    .. code-block:: bash
 
-      python -m tooluniverse.smcp_server
+      tooluniverse-smcp
 
 2. **Configure Claude Desktop:**
 

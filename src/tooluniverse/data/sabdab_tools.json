@@ -1,0 +1,90 @@
+[
+  {
+    "name": "SAbDab_search_structures",
+    "description": "Search SAbDab structural antibody database. SAbDab contains all antibody structures from PDB with CDR annotations, chain pairings, and antigen information. Search by antigen, species, or keywords. No authentication required.",
+    "type": "SAbDabTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "search_structures"
+        },
+        "query": {
+          "type": "string",
+          "description": "Search query - antigen name, species, or keywords"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum results (default: 50)",
+          "default": 50
+        }
+      },
+      "required": ["operation", "query"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "search_structures", "query": "anti-CD20"}
+    ]
+  },
+  {
+    "name": "SAbDab_get_structure",
+    "description": "Get antibody structure details from SAbDab by PDB ID. Returns CDR annotations, chain information, and antigen binding data. Useful for structural analysis of antibody-antigen complexes.",
+    "type": "SAbDabTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_structure"
+        },
+        "pdb_id": {
+          "type": "string",
+          "description": "4-character PDB ID (e.g., 1IGT, 6W41)"
+        }
+      },
+      "required": ["operation", "pdb_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_structure", "pdb_id": "1AHW"}
+    ]
+  },
+  {
+    "name": "SAbDab_get_summary",
+    "description": "Get SAbDab database summary and statistics. Returns information about database content, features, and access URLs. Good starting point for exploring antibody structural data.",
+    "type": "SAbDabTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_summary"
+        }
+      },
+      "required": ["operation"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_summary"}
+    ]
+  }
+]

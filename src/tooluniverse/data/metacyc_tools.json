@@ -1,0 +1,106 @@
+[
+  {
+    "name": "MetaCyc_search_pathways",
+    "description": "Search MetaCyc for metabolic pathways by name or keyword. Returns pathway IDs and basic information. MetaCyc contains 2,800+ experimentally elucidated metabolic pathways.",
+    "type": "MetaCycTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "search_pathways"},
+        "query": {
+          "type": "string",
+          "description": "Search query - pathway name or keyword (e.g., 'glycolysis', 'TCA cycle')"
+        }
+      },
+      "required": ["operation", "query"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "search_pathways", "query": "glycolysis"}
+    ]
+  },
+  {
+    "name": "MetaCyc_get_pathway",
+    "description": "Get metabolic pathway details from MetaCyc by pathway ID. Returns pathway information, URL to pathway diagram, and associated reactions/compounds.",
+    "type": "MetaCycTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_pathway"},
+        "pathway_id": {
+          "type": "string",
+          "description": "MetaCyc pathway ID (e.g., PWY-5177, GLYCOLYSIS)"
+        }
+      },
+      "required": ["operation", "pathway_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_pathway", "pathway_id": "GLYCOLYSIS"}
+    ]
+  },
+  {
+    "name": "MetaCyc_get_compound",
+    "description": "Get metabolite/compound details from MetaCyc by compound ID. Returns compound information and URL to compound page.",
+    "type": "MetaCycTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_compound"},
+        "compound_id": {
+          "type": "string",
+          "description": "MetaCyc compound ID (e.g., CPD-1, PYRUVATE)"
+        }
+      },
+      "required": ["operation", "compound_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_compound", "compound_id": "PYRUVATE"}
+    ]
+  },
+  {
+    "name": "MetaCyc_get_reaction",
+    "description": "Get reaction details from MetaCyc by reaction ID. Returns reaction information including substrates, products, enzymes, and URL to reaction page.",
+    "type": "MetaCycTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_reaction"},
+        "reaction_id": {
+          "type": "string",
+          "description": "MetaCyc reaction ID (e.g., RXN-14500)"
+        }
+      },
+      "required": ["operation", "reaction_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_reaction", "reaction_id": "PEPDEPHOS-RXN"}
+    ]
+  }
+]

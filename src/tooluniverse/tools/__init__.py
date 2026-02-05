@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1091 scientific tools.
+Type-safe Python interface to 1136 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -55,6 +55,7 @@ from .ArXiv_search_papers import ArXiv_search_papers
 from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
 from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
+from .BRENDA_get_inhibitors import BRENDA_get_inhibitors
 from .BiGG_get_database_version import BiGG_get_database_version
 from .BiGG_get_metabolite import BiGG_get_metabolite
 from .BiGG_get_model import BiGG_get_model
@@ -62,6 +63,9 @@ from .BiGG_get_model_reactions import BiGG_get_model_reactions
 from .BiGG_get_reaction import BiGG_get_reaction
 from .BiGG_list_models import BiGG_list_models
 from .BiGG_search import BiGG_search
+from .BindingDB_get_by_pdb import BindingDB_get_by_pdb
+from .BindingDB_get_by_target_name import BindingDB_get_by_target_name
+from .BindingDB_get_by_uniprot import BindingDB_get_by_uniprot
 from .BioModels_download_model import BioModels_download_model
 from .BioModels_get_model import BioModels_get_model
 from .BioModels_list_files import BioModels_list_files
@@ -77,6 +81,8 @@ from .CELLxGENE_get_gene_metadata import CELLxGENE_get_gene_metadata
 from .CELLxGENE_get_presence_matrix import CELLxGENE_get_presence_matrix
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
 from .CORE_search_papers import CORE_search_papers
+from .COSMIC_get_mutations_by_gene import COSMIC_get_mutations_by_gene
+from .COSMIC_search_mutations import COSMIC_search_mutations
 from .CallAgent import CallAgent
 from .ChEMBL_get_activity import ChEMBL_get_activity
 from .ChEMBL_get_assay import ChEMBL_get_assay
@@ -153,6 +159,10 @@ from .ENCODE_get_file import ENCODE_get_file
 from .ENCODE_list_files import ENCODE_list_files
 from .ENCODE_search_biosamples import ENCODE_search_biosamples
 from .ENCODE_search_experiments import ENCODE_search_experiments
+from .Enamine_get_compound import Enamine_get_compound
+from .Enamine_get_libraries import Enamine_get_libraries
+from .Enamine_search_catalog import Enamine_search_catalog
+from .Enamine_search_smiles import Enamine_search_smiles
 from .EthicalComplianceReviewer import EthicalComplianceReviewer
 from .EuropePMC_Guidelines_Search import EuropePMC_Guidelines_Search
 from .EuropePMC_get_citations import EuropePMC_get_citations
@@ -564,6 +574,11 @@ from .GO_get_genes_for_term import GO_get_genes_for_term
 from .GO_get_term_by_id import GO_get_term_by_id
 from .GO_get_term_details import GO_get_term_details
 from .GO_search_terms import GO_search_terms
+from .GPCRdb_get_ligands import GPCRdb_get_ligands
+from .GPCRdb_get_mutations import GPCRdb_get_mutations
+from .GPCRdb_get_protein import GPCRdb_get_protein
+from .GPCRdb_get_structures import GPCRdb_get_structures
+from .GPCRdb_list_proteins import GPCRdb_list_proteins
 from .GTEx_calculate_eqtl import GTEx_calculate_eqtl
 from .GTEx_get_dataset_info import GTEx_get_dataset_info
 from .GTEx_get_eqtl_genes import GTEx_get_eqtl_genes
@@ -586,6 +601,9 @@ from .GtoPdb_list_diseases import GtoPdb_list_diseases
 from .GtoPdb_list_ligands import GtoPdb_list_ligands
 from .GtoPdb_search_interactions import GtoPdb_search_interactions
 from .HAL_search_archive import HAL_search_archive
+from .HMDB_get_diseases import HMDB_get_diseases
+from .HMDB_get_metabolite import HMDB_get_metabolite
+from .HMDB_search import HMDB_search
 from .HPA_generic_search import HPA_generic_search
 from .HPA_get_biological_processes_by_gene import HPA_get_biological_processes_by_gene
 from .HPA_get_cancer_prognostics_by_gene import HPA_get_cancer_prognostics_by_gene
@@ -611,6 +629,9 @@ from .HPA_get_rna_expression_in_specific_tissues import (
 from .HPA_get_subcellular_location import HPA_get_subcellular_location
 from .HPA_search_genes_by_query import HPA_search_genes_by_query
 from .HypothesisGenerator import HypothesisGenerator
+from .IMGT_get_gene_info import IMGT_get_gene_info
+from .IMGT_get_sequence import IMGT_get_sequence
+from .IMGT_search_genes import IMGT_search_genes
 from .IntentAnalyzerAgent import IntentAnalyzerAgent
 from .InterPro_get_domain_details import InterPro_get_domain_details
 from .InterPro_get_protein_domains import InterPro_get_protein_domains
@@ -634,6 +655,10 @@ from .MedlinePlus_get_genetics_condition_by_name import (
 from .MedlinePlus_get_genetics_gene_by_name import MedlinePlus_get_genetics_gene_by_name
 from .MedlinePlus_get_genetics_index import MedlinePlus_get_genetics_index
 from .MedlinePlus_search_topics_by_keyword import MedlinePlus_search_topics_by_keyword
+from .MetaCyc_get_compound import MetaCyc_get_compound
+from .MetaCyc_get_pathway import MetaCyc_get_pathway
+from .MetaCyc_get_reaction import MetaCyc_get_reaction
+from .MetaCyc_search_pathways import MetaCyc_search_pathways
 from .MetabolomicsWorkbench_get_compound_by_pubchem_cid import (
     MetabolomicsWorkbench_get_compound_by_pubchem_cid,
 )
@@ -665,6 +690,11 @@ from .OBIS_search_occurrences import OBIS_search_occurrences
 from .OBIS_search_taxa import OBIS_search_taxa
 from .OSF_search_preprints import OSF_search_preprints
 from .OSL_get_efo_id_by_disease_name import OSL_get_efo_id_by_disease_name
+from .OncoKB_annotate_copy_number import OncoKB_annotate_copy_number
+from .OncoKB_annotate_variant import OncoKB_annotate_variant
+from .OncoKB_get_cancer_genes import OncoKB_get_cancer_genes
+from .OncoKB_get_gene_info import OncoKB_get_gene_info
+from .OncoKB_get_levels import OncoKB_get_levels
 from .OpenAIRE_search_publications import OpenAIRE_search_publications
 from .OpenAlex_Guidelines_Search import OpenAlex_Guidelines_Search
 from .OpenTargets_drug_pharmacogenomics_data import (
@@ -832,6 +862,11 @@ from .OpenTargets_search_category_counts_by_query_string import (
     OpenTargets_search_category_counts_by_query_string,
 )
 from .OpenTargets_target_disease_evidence import OpenTargets_target_disease_evidence
+from .Orphanet_get_classification import Orphanet_get_classification
+from .Orphanet_get_disease import Orphanet_get_disease
+from .Orphanet_get_genes import Orphanet_get_genes
+from .Orphanet_search_by_name import Orphanet_search_by_name
+from .Orphanet_search_diseases import Orphanet_search_diseases
 from .OutputSummarizationComposer import OutputSummarizationComposer
 from .OverallSummaryAgent import OverallSummaryAgent
 from .PDB_search_similar_structures import PDB_search_similar_structures
@@ -917,6 +952,9 @@ from .Rfam_get_tree_data import Rfam_get_tree_data
 from .Rfam_id_to_accession import Rfam_id_to_accession
 from .Rfam_search_sequence import Rfam_search_sequence
 from .RxNorm_get_drug_names import RxNorm_get_drug_names
+from .SAbDab_get_structure import SAbDab_get_structure
+from .SAbDab_get_summary import SAbDab_get_summary
+from .SAbDab_search_structures import SAbDab_search_structures
 from .SCREEN_get_regulatory_elements import SCREEN_get_regulatory_elements
 from .SIMBAD_advanced_query import SIMBAD_advanced_query
 from .SIMBAD_query_object import SIMBAD_query_object
@@ -986,6 +1024,10 @@ from .Wikipedia_search import Wikipedia_search
 from .WoRMS_search_species import WoRMS_search_species
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .XMLToolOptimizer import XMLToolOptimizer
+from .ZINC_get_catalogs import ZINC_get_catalogs
+from .ZINC_get_substance import ZINC_get_substance
+from .ZINC_search_by_name import ZINC_search_by_name
+from .ZINC_search_by_smiles import ZINC_search_by_smiles
 from .Zenodo_get_license import Zenodo_get_license
 from .Zenodo_get_record import Zenodo_get_record
 from .Zenodo_get_record_files import Zenodo_get_record_files
@@ -1103,6 +1145,10 @@ from .drugbank_links_search import drugbank_links_search
 from .drugbank_vocab_filter import drugbank_vocab_filter
 from .drugbank_vocab_search import drugbank_vocab_search
 from .dynamic_package_discovery import dynamic_package_discovery
+from .eMolecules_get_compound import eMolecules_get_compound
+from .eMolecules_get_vendors import eMolecules_get_vendors
+from .eMolecules_search import eMolecules_search
+from .eMolecules_search_smiles import eMolecules_search_smiles
 from .ebi_cross_reference_search import ebi_cross_reference_search
 from .ebi_get_domain_fields import ebi_get_domain_fields
 from .ebi_get_domain_info import ebi_get_domain_info
@@ -1429,7 +1475,6 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
-from .ghost_tool import ghost_tool
 from .gnomad_get_gene import gnomad_get_gene
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .gnomad_get_region import gnomad_get_region
@@ -1592,6 +1637,7 @@ __all__ = [
     "ArgumentDescriptionOptimizer",
     "BLAST_nucleotide_search",
     "BLAST_protein_search",
+    "BRENDA_get_inhibitors",
     "BiGG_get_database_version",
     "BiGG_get_metabolite",
     "BiGG_get_model",
@@ -1599,6 +1645,9 @@ __all__ = [
     "BiGG_get_reaction",
     "BiGG_list_models",
     "BiGG_search",
+    "BindingDB_get_by_pdb",
+    "BindingDB_get_by_target_name",
+    "BindingDB_get_by_uniprot",
     "BioModels_download_model",
     "BioModels_get_model",
     "BioModels_list_files",
@@ -1614,6 +1663,8 @@ __all__ = [
     "CELLxGENE_get_presence_matrix",
     "CMA_Guidelines_Search",
     "CORE_search_papers",
+    "COSMIC_get_mutations_by_gene",
+    "COSMIC_search_mutations",
     "CallAgent",
     "ChEMBL_get_activity",
     "ChEMBL_get_assay",
@@ -1688,6 +1739,10 @@ __all__ = [
     "ENCODE_list_files",
     "ENCODE_search_biosamples",
     "ENCODE_search_experiments",
+    "Enamine_get_compound",
+    "Enamine_get_libraries",
+    "Enamine_search_catalog",
+    "Enamine_search_smiles",
     "EthicalComplianceReviewer",
     "EuropePMC_Guidelines_Search",
     "EuropePMC_get_citations",
@@ -1887,6 +1942,11 @@ __all__ = [
     "GO_get_term_by_id",
     "GO_get_term_details",
     "GO_search_terms",
+    "GPCRdb_get_ligands",
+    "GPCRdb_get_mutations",
+    "GPCRdb_get_protein",
+    "GPCRdb_get_structures",
+    "GPCRdb_list_proteins",
     "GTEx_calculate_eqtl",
     "GTEx_get_dataset_info",
     "GTEx_get_eqtl_genes",
@@ -1909,6 +1969,9 @@ __all__ = [
     "GtoPdb_list_ligands",
     "GtoPdb_search_interactions",
     "HAL_search_archive",
+    "HMDB_get_diseases",
+    "HMDB_get_metabolite",
+    "HMDB_search",
     "HPA_generic_search",
     "HPA_get_biological_processes_by_gene",
     "HPA_get_cancer_prognostics_by_gene",
@@ -1924,6 +1987,9 @@ __all__ = [
     "HPA_get_subcellular_location",
     "HPA_search_genes_by_query",
     "HypothesisGenerator",
+    "IMGT_get_gene_info",
+    "IMGT_get_sequence",
+    "IMGT_search_genes",
     "IntentAnalyzerAgent",
     "InterPro_get_domain_details",
     "InterPro_get_protein_domains",
@@ -1945,6 +2011,10 @@ __all__ = [
     "MedlinePlus_get_genetics_gene_by_name",
     "MedlinePlus_get_genetics_index",
     "MedlinePlus_search_topics_by_keyword",
+    "MetaCyc_get_compound",
+    "MetaCyc_get_pathway",
+    "MetaCyc_get_reaction",
+    "MetaCyc_search_pathways",
     "MetabolomicsWorkbench_get_compound_by_pubchem_cid",
     "MetabolomicsWorkbench_get_refmet_info",
     "MetabolomicsWorkbench_get_study",
@@ -1970,6 +2040,11 @@ __all__ = [
     "OBIS_search_taxa",
     "OSF_search_preprints",
     "OSL_get_efo_id_by_disease_name",
+    "OncoKB_annotate_copy_number",
+    "OncoKB_annotate_variant",
+    "OncoKB_get_cancer_genes",
+    "OncoKB_get_gene_info",
+    "OncoKB_get_levels",
     "OpenAIRE_search_publications",
     "OpenAlex_Guidelines_Search",
     "OpenTargets_drug_pharmacogenomics_data",
@@ -2029,6 +2104,11 @@ __all__ = [
     "OpenTargets_multi_entity_search_by_query_string",
     "OpenTargets_search_category_counts_by_query_string",
     "OpenTargets_target_disease_evidence",
+    "Orphanet_get_classification",
+    "Orphanet_get_disease",
+    "Orphanet_get_genes",
+    "Orphanet_search_by_name",
+    "Orphanet_search_diseases",
     "OutputSummarizationComposer",
     "OverallSummaryAgent",
     "PDB_search_similar_structures",
@@ -2104,6 +2184,9 @@ __all__ = [
     "Rfam_id_to_accession",
     "Rfam_search_sequence",
     "RxNorm_get_drug_names",
+    "SAbDab_get_structure",
+    "SAbDab_get_summary",
+    "SAbDab_search_structures",
     "SCREEN_get_regulatory_elements",
     "SIMBAD_advanced_query",
     "SIMBAD_query_object",
@@ -2161,6 +2244,10 @@ __all__ = [
     "WoRMS_search_species",
     "WritingPresentationReviewer",
     "XMLToolOptimizer",
+    "ZINC_get_catalogs",
+    "ZINC_get_substance",
+    "ZINC_search_by_name",
+    "ZINC_search_by_smiles",
     "Zenodo_get_license",
     "Zenodo_get_record",
     "Zenodo_get_record_files",
@@ -2246,6 +2333,10 @@ __all__ = [
     "drugbank_vocab_filter",
     "drugbank_vocab_search",
     "dynamic_package_discovery",
+    "eMolecules_get_compound",
+    "eMolecules_get_vendors",
+    "eMolecules_search",
+    "eMolecules_search_smiles",
     "ebi_cross_reference_search",
     "ebi_get_domain_fields",
     "ebi_get_domain_info",
@@ -2532,7 +2623,6 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
-    "ghost_tool",
     "gnomad_get_gene",
     "gnomad_get_gene_constraints",
     "gnomad_get_region",

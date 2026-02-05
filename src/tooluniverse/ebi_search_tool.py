@@ -25,7 +25,7 @@ class EBISearchRESTTool(BaseTool):
         self.session.headers.update(
             {"Accept": "application/json", "User-Agent": "ToolUniverse/1.0"}
         )
-        self.timeout = 30
+        self.timeout = 60  # Increased from 30 to handle slow facet queries
 
     def _build_url(self, args: Dict[str, Any]) -> str:
         """Build URL from endpoint template and arguments"""

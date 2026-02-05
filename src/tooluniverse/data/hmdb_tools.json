@@ -1,0 +1,85 @@
+[
+  {
+    "name": "HMDB_get_metabolite",
+    "description": "Get human metabolite information from HMDB by ID. Returns name, formula, SMILES, classification, pathways, and disease associations. HMDB contains 220,000+ metabolites. No authentication required.",
+    "type": "HMDBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_metabolite"},
+        "hmdb_id": {
+          "type": "string",
+          "description": "HMDB ID (e.g., HMDB0000001 or 0000001)"
+        }
+      },
+      "required": ["operation", "hmdb_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_metabolite", "hmdb_id": "HMDB0000001"}
+    ]
+  },
+  {
+    "name": "HMDB_search",
+    "description": "Search HMDB for metabolites by name, formula, or mass. Returns matching metabolites with HMDB IDs and basic information. Essential for metabolite identification.",
+    "type": "HMDBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "search"},
+        "query": {
+          "type": "string",
+          "description": "Search query - metabolite name, formula, or keyword"
+        },
+        "search_type": {
+          "type": "string",
+          "description": "Search type: name, formula, mass (default: name)",
+          "default": "name"
+        }
+      },
+      "required": ["operation", "query"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "search", "query": "glucose"}
+    ]
+  },
+  {
+    "name": "HMDB_get_diseases",
+    "description": "Get disease and pathway associations for a metabolite from HMDB. Returns diseases linked to abnormal metabolite levels and metabolic pathways. Useful for biomarker discovery and metabolic disorder research.",
+    "type": "HMDBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_diseases"},
+        "hmdb_id": {
+          "type": "string",
+          "description": "HMDB ID"
+        }
+      },
+      "required": ["operation", "hmdb_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_diseases", "hmdb_id": "HMDB0000122"}
+    ]
+  }
+]

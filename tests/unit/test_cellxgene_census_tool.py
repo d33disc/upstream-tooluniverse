@@ -56,10 +56,15 @@ class TestCELLxGENECensusTools:
     
     def test_get_cell_metadata_return_schema(self, tu):
         """Test that return matches expected schema."""
+        # NOTE: MUST use a restrictive filter - without it, the query would try to
+        # fetch ALL 50M+ cells from CELLxGENE Census, causing a timeout.
         result = tu.tools.CELLxGENE_get_cell_metadata(**{
             "operation": "get_obs_metadata",
             "organism": "Homo sapiens",
-            "census_version": "stable"
+            "census_version": "stable",
+            # Use restrictive filter to limit query to a small subset
+            "obs_value_filter": 'tissue_general == "blood" and cell_type == "T cell" and disease == "normal"',
+            "column_names": ["soma_joinid", "cell_type", "tissue_general", "disease"]
         })
         
         assert "status" in result

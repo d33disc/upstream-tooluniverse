@@ -60,11 +60,44 @@
 Democratizing AI Scientists for Science
 ---------------------------
 
-
-
-ToolUniverse is a unified ecosystem that transforms any large language model (LLM)—open or closed—into a powerful AI scientist. By standardizing how LLMs identify and call tools, it integrates over 600 scientific resources, including machine learning models, datasets, APIs, and analysis packages.
+ToolUniverse is a unified ecosystem that transforms any large language model (LLM)—open or closed—into a powerful AI scientist. By standardizing how LLMs identify and call tools, it integrates over 1000 scientific resources, including machine learning models, datasets, APIs, and analysis packages.
 
 With its **AI-Tool Interaction Protocol**, ToolUniverse provides a common interface for seamless communication between LLMs and tools, ensuring compatibility across platforms such as GPT, Claude, Gemini, and open-source models.
+
+🚀 Start Here
+-------------
+
+**New to ToolUniverse?** Follow this path:
+
+1. **Quickstart** (5 min) → :doc:`quickstart`
+   
+   Try your first query without reading lengthy docs
+
+2. **Getting Started** (30 min) → :doc:`getting_started`
+   
+   Step-by-step tutorial covering core concepts
+
+3. **Choose Your Integration** → :doc:`guide/building_ai_scientists/index`
+   
+   Connect to Claude, ChatGPT, Gemini, or use Python API
+
+**Already familiar?** Jump to:
+
+- :doc:`guide/index` - Complete feature guide
+- :doc:`tools/tools_config_index` - Browse 1000+ tools
+- :doc:`help/troubleshooting` - Fix issues
+- :doc:`reference/cli_tools` - Command-line tools reference
+
+.. important::
+   **🔍 Looking for specific tools?**
+   
+   ToolUniverse has 3 specialized search tools to find what you need:
+   
+   - **Tool_Finder_Keyword** - Fast keyword search ("protein structure", "drug interactions")
+   - **Tool_Finder_LLM** - Natural language search ("find tools for analyzing gene expression")
+   - **Tool_Finder** - Semantic embedding search (most powerful, finds by meaning)
+   
+   → See :doc:`tutorials/finding_tools` for detailed guide on finding and using tools.
 
 
 Building your AI Scientists
@@ -106,6 +139,7 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
 
    quickstart
    installation
+   api_keys
    getting_started
 
 .. toctree::
@@ -178,6 +212,9 @@ Transform any LLM/Reasoning Model/Agent into a powerful research scientist with 
    :maxdepth: 1
    :caption: ❓ Reference
 
+   reference/cli_tools
+   reference/environment_variables
+   glossary
    reference/data_sources
    help/index
    expand_tooluniverse/reference/index

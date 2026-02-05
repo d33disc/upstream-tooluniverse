@@ -277,6 +277,36 @@ default_tool_files = {
     "ppi": os.path.join(current_dir, "data", "ppi_tools.json"),
     # NVIDIA NIM Healthcare APIs - Structure prediction, molecular docking, genomics
     "nvidia_nim": os.path.join(current_dir, "data", "nvidia_nim_tools.json"),
+    # COSMIC - Catalogue of Somatic Mutations in Cancer
+    "cosmic": os.path.join(current_dir, "data", "cosmic_tools.json"),
+    # OncoKB - Precision Oncology Knowledge Base
+    "oncokb": os.path.join(current_dir, "data", "oncokb_tools.json"),
+    # OMIM - Online Mendelian Inheritance in Man
+    "omim": os.path.join(current_dir, "data", "omim_tools.json"),
+    # Orphanet - Rare Disease Encyclopedia
+    "orphanet": os.path.join(current_dir, "data", "orphanet_tools.json"),
+    # DisGeNET - Gene-Disease Associations
+    "disgenet": os.path.join(current_dir, "data", "disgenet_tools.json"),
+    # BindingDB - Protein-Ligand Binding Affinities
+    "bindingdb": os.path.join(current_dir, "data", "bindingdb_tools.json"),
+    # GPCRdb - G Protein-Coupled Receptor Database
+    "gpcrdb": os.path.join(current_dir, "data", "gpcrdb_tools.json"),
+    # BRENDA - Enzyme Kinetics Database
+    "brenda": os.path.join(current_dir, "data", "brenda_tools.json"),
+    # SAbDab - Structural Antibody Database
+    "sabdab": os.path.join(current_dir, "data", "sabdab_tools.json"),
+    # IMGT - International ImMunoGeneTics Information System
+    "imgt": os.path.join(current_dir, "data", "imgt_tools.json"),
+    # HMDB - Human Metabolome Database
+    "hmdb": os.path.join(current_dir, "data", "hmdb_tools.json"),
+    # MetaCyc - Metabolic Pathway Database
+    "metacyc": os.path.join(current_dir, "data", "metacyc_tools.json"),
+    # ZINC - Virtual Screening Library
+    "zinc": os.path.join(current_dir, "data", "zinc_tools.json"),
+    # Enamine - Make-on-Demand Compounds
+    "enamine": os.path.join(current_dir, "data", "enamine_tools.json"),
+    # eMolecules - Vendor Aggregator
+    "emolecules": os.path.join(current_dir, "data", "emolecules_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

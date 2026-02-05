@@ -52,7 +52,7 @@ Choose the installation method that best fits your needs:
       .. code-block:: bash
 
          # Test MCP Server (default port 8000)
-         tooluniverse-mcp --help
+         tooluniverse-smcp --help
 
    .. tab:: 🔧 Development Installation
 
@@ -140,37 +140,59 @@ Choose the installation method that best fits your needs:
 Environment Configuration
 -------------------------
 
-**Environment Variables**
+**API Keys and Authentication**
 
-Set up API keys for enhanced functionality:
+ToolUniverse supports 1000+ scientific tools. Some require API keys for access, while others benefit from API keys through higher rate limits.
+
+For comprehensive information about API keys, including:
+
+* Which APIs are required vs optional
+* How to obtain each API key
+* Rate limits with and without keys
+* Configuration methods and best practices
+
+See the dedicated :doc:`api_keys` documentation.
+
+**Quick Start - Essential API Keys**
+
+Required for specific features:
 
 .. code-block:: bash
 
-   # Optional API keys for better performance
-   # Required API Keys
-   USPTO_API_KEY=your_uspto_key_here
-   HF_TOKEN=your_huggingface_token_here
+   # Structure prediction & molecular modeling (NVIDIA NIM)
    NVIDIA_API_KEY=your_nvidia_key_here
 
-   # MCP Server Hosts
-   USPTO_MCP_SERVER_HOST=full_url_of_uspto_mcp_server
-   BOLTZ_MCP_SERVER_HOST=full_url_of_boltz_mcp_server
-   TXAGENT_MCP_SERVER_HOST=full_url_of_txagent_mcp_server
-   EXPERT_FEEDBACK_MCP_SERVER_URL=http://localhost:9877
+   # Patent data (USPTO)
+   USPTO_API_KEY=your_uspto_key_here
 
-   # Optional API Keys (for enhanced features)
-   OPENAI_API_KEY=your_openai_key_here
-   AZURE_OPENAI_API_KEY=your_azure_key_here
-   GEMINI_API_KEY=your_gemini_key_here
-   FDA_API_KEY=your_fda_key_here
-   OPENTARGETS_API_KEY=your_opentargets_key_here
-   NCBI_API_KEY=your_ncbi_key_here
-   SEMANTIC_SCHOLAR_API_KEY=your_semantic_scholar_key_here
+   # Model hosting (Hugging Face)
+   HF_TOKEN=your_huggingface_token_here
 
-   # Additional Configuration
-   OPENAI_BASE_URL=https://api.openai.com/v1
-   AZURE_OPENAI_ENDPOINT=https://your-endpoint.openai.azure.com
-   AZURE_OPENAI_API_VERSION=version_of_your_azure_api
+**Recommended for Better Performance**
+
+.. code-block:: bash
+
+   # Higher rate limits for common databases (set once, used everywhere)
+   NCBI_API_KEY=your_ncbi_key_here              # 3x faster PubMed/sequence queries
+   SEMANTIC_SCHOLAR_API_KEY=your_key_here       # 100x faster literature search
+   FDA_API_KEY=your_fda_key_here                # 6x faster drug safety queries
+
+   # Note: NCBI and Semantic Scholar keys can also be passed as tool parameters
+   # for per-call control, but environment variables are more convenient
+
+**Using a .env File**
+
+Create a ``.env`` file in your project directory:
+
+.. code-block:: bash
+
+   # Copy the template
+   cp docs/.env.template .env
+
+   # Edit with your API keys
+   nano .env
+
+See :doc:`api_keys` for complete configuration details and all available API keys.
 
 
 Dependencies
@@ -230,6 +252,21 @@ Test Basic Functionality:
    tu = ToolUniverse()
    tu.load_tools()
    print(f"✅ Loaded {len(tu.all_tools)} tools successfully!")
+
+What's Next?
+------------
+
+Now that ToolUniverse is installed, you're ready to start using it!
+
+**Recommended next steps**:
+
+1. **Try the Quickstart** (:doc:`quickstart`) - Run your first query in 5 minutes
+2. **Follow the Tutorial** (:doc:`getting_started`) - Step-by-step guide to core features
+3. **Integrate with AI Assistants** (:doc:`guide/building_ai_scientists/index`) - Connect to Claude, ChatGPT, or Gemini
+4. **Explore Available Tools** (:doc:`tools/tools_config_index`) - Browse 1000+ scientific tools
+5. **Configure API Keys** (:doc:`api_keys`) - Optional: Set up API keys for enhanced performance
+
+**Need help?** See :doc:`help/troubleshooting` or :doc:`help/faq`.
 
 Troubleshooting
 ---------------

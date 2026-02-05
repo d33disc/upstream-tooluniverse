@@ -262,7 +262,7 @@ MCP Integration
 **Server Side:**
 - `smcp.py` provides `SMCP` object for one-click exposure of all ToolUniverse tools
 - `smcp_server.py` and root `smcp_tooluniverse_server.py` provide convenient startup
-- `pyproject.toml` exposes commands: `tooluniverse-mcp`, `tooluniverse-smcp*`, etc.
+- `pyproject.toml` exposes commands: `tooluniverse-smcp`, `tooluniverse-smcp-stdio`, `tooluniverse-smcp-server`, etc.
 
 **Client/Remote Tools:**
 - `mcp_client_tool.py`, `mcp_integration.py` support discovery and dynamic registration from remote MCP servers

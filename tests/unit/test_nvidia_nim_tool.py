@@ -37,6 +37,21 @@ def mock_api_key():
 
 
 @pytest.fixture
+def tu_with_api_key(mock_api_key):
+    """Create ToolUniverse instance with tools loaded and NVIDIA_API_KEY set.
+    
+    This ensures NVIDIA NIM tools are not filtered out due to missing API key.
+    Note: mock_api_key fixture must be listed first to ensure env var is set
+    before ToolUniverse is created.
+    """
+    # Double-check the env var is set
+    assert os.environ.get("NVIDIA_API_KEY") == "test-api-key-12345"
+    tu = ToolUniverse()
+    tu.load_tools()
+    return tu
+
+
+@pytest.fixture
 def nvidia_nim_tool():
     """Create a NvidiaNIMTool instance directly for unit testing."""
     from tooluniverse.nvidia_nim_tool import NvidiaNIMTool
@@ -219,9 +234,9 @@ class TestNvidiaNIMToolUnit:
 class TestNvidiaNIMToolsLoad:
     """Level 2: Test tool loading and schema validation."""
     
-    def test_all_nvidia_tools_load(self, tu):
+    def test_all_nvidia_tools_load(self, tu_with_api_key):
         """Test that all 16 NVIDIA NIM tools load correctly."""
-        tool_names = [tool.get("name") for tool in tu.all_tools if isinstance(tool, dict)]
+        tool_names = [tool.get("name") for tool in tu_with_api_key.all_tools if isinstance(tool, dict)]
         
         expected_tools = [
             "NvidiaNIM_alphafold2",
@@ -245,10 +260,10 @@ class TestNvidiaNIMToolsLoad:
         for tool_name in expected_tools:
             assert tool_name in tool_names, f"Tool {tool_name} not found"
     
-    def test_tool_has_required_fields(self, tu):
+    def test_tool_has_required_fields(self, tu_with_api_key):
         """Test that NVIDIA tools have required configuration fields."""
         nvidia_tools = [
-            tool for tool in tu.all_tools 
+            tool for tool in tu_with_api_key.all_tools 
             if isinstance(tool, dict) and tool.get("name", "").startswith("NvidiaNIM_")
         ]
         
@@ -259,10 +274,10 @@ class TestNvidiaNIMToolsLoad:
             assert "type" in tool, f"Tool {tool.get('name')} missing 'type'"
             assert tool["type"] == "NvidiaNIMTool"
     
-    def test_tool_has_api_key_requirement(self, tu):
+    def test_tool_has_api_key_requirement(self, tu_with_api_key):
         """Test that NVIDIA tools declare API key requirement."""
         nvidia_tools = [
-            tool for tool in tu.all_tools 
+            tool for tool in tu_with_api_key.all_tools 
             if isinstance(tool, dict) and tool.get("name", "").startswith("NvidiaNIM_")
         ]
         
@@ -272,10 +287,10 @@ class TestNvidiaNIMToolsLoad:
                 f"Tool {tool.get('name')} should require NVIDIA_API_KEY"
             )
     
-    def test_tool_has_test_examples(self, tu):
+    def test_tool_has_test_examples(self, tu_with_api_key):
         """Test that NVIDIA tools have test examples."""
         nvidia_tools = [
-            tool for tool in tu.all_tools 
+            tool for tool in tu_with_api_key.all_tools 
             if isinstance(tool, dict) and tool.get("name", "").startswith("NvidiaNIM_")
         ]
         
@@ -285,10 +300,10 @@ class TestNvidiaNIMToolsLoad:
                 f"Tool {tool.get('name')} should have at least one test example"
             )
     
-    def test_parameter_schema_valid(self, tu):
+    def test_parameter_schema_valid(self, tu_with_api_key):
         """Test that parameter schemas are valid JSON Schema."""
         nvidia_tools = [
-            tool for tool in tu.all_tools 
+            tool for tool in tu_with_api_key.all_tools 
             if isinstance(tool, dict) and tool.get("name", "").startswith("NvidiaNIM_")
         ]
         
@@ -301,8 +316,10 @@ class TestNvidiaNIMToolsLoad:
                 f"Tool {tool.get('name')} should have 'properties' in parameter"
             )
     
-    def test_async_tools_marked_correctly(self, tu):
+    def test_async_tools_marked_correctly(self, tu_with_api_key):
         """Test that async tools have async_expected=true in fields."""
+        # These tools require async polling for long-running operations
+        # Note: MAISI and Vista3D are synchronous (async_expected=false)
         async_tools = [
             "NvidiaNIM_alphafold2",
             "NvidiaNIM_alphafold2_multimer",
@@ -312,13 +329,11 @@ class TestNvidiaNIMToolsLoad:
             "NvidiaNIM_rfdiffusion",
             "NvidiaNIM_diffdock",
             "NvidiaNIM_msa_search",
-            "NvidiaNIM_maisi",
-            "NvidiaNIM_vista3d",
         ]
         
         nvidia_tools = {
             tool.get("name"): tool 
-            for tool in tu.all_tools 
+            for tool in tu_with_api_key.all_tools 
             if isinstance(tool, dict) and tool.get("name", "").startswith("NvidiaNIM_")
         }
         
@@ -335,7 +350,7 @@ class TestNvidiaNIMToolsInterface:
     """Level 2: Test ToolUniverse interface for NVIDIA tools."""
     
     @patch("requests.post")
-    def test_run_function_with_mock(self, mock_post, tu, mock_api_key):
+    def test_run_function_with_mock(self, mock_post, tu_with_api_key):
         """Test running NVIDIA tool through ToolUniverse interface."""
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -343,7 +358,7 @@ class TestNvidiaNIMToolsInterface:
         mock_response.headers = {"Content-Type": "application/json"}
         mock_post.return_value = mock_response
         
-        result = tu.run_one_function({
+        result = tu_with_api_key.run_one_function({
             "name": "NvidiaNIM_esmfold",
             "arguments": {"sequence": "MVLSPADKTNVKAAWGKVG"}
         })
@@ -422,12 +437,17 @@ class TestRateLimiting:
     def test_rate_limit_enforced(self):
         """Test that rate limiting enforces minimum interval."""
         import time
-        from tooluniverse.nvidia_nim_tool import _enforce_rate_limit, _last_request_time
+        import tooluniverse.nvidia_nim_tool as nim_module
+        from tooluniverse.nvidia_nim_tool import _enforce_rate_limit
+        
+        # Reset the last request time to ensure test isolation
+        nim_module._last_request_time = 0.0
         
         # First call should not wait
         start = time.time()
         _enforce_rate_limit()
         first_elapsed = time.time() - start
+        assert first_elapsed < 0.5, "First call should not wait"
         
         # Second call should wait (minimum 1.5s between requests)
         start = time.time()

@@ -1,7 +1,7 @@
 Available Tools
 ==========================
 
-ToolUniverse provides over 600 scientific tools organized into local and remote categories. This overview helps you discover and navigate the available tools for your research needs.
+ToolUniverse provides over 1000 scientific tools organized into local and remote categories. This overview helps you discover and navigate the available tools for your research needs.
 
 Tool Registry
 ---------------

@@ -29,6 +29,9 @@ This Tutorial gets you from zero to your first successful query in 5 minutes. Fo
 
 **Success!** You now have access to 1000+ scientific tools.
 
+.. note::
+   Most tools work without API keys! For tools that require authentication or to get higher rate limits, see :doc:`api_keys`.
+
 Building AI Scientists
 -----------------------------------------------------------
 

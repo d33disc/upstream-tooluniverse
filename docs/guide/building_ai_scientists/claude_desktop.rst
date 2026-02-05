@@ -384,11 +384,11 @@ Tool Selection Strategies
          "command": "uv",
          "args": [
            "--directory",
-           "/path/to/tooluniverse-env",  # Working directory
-           "run",
-           "tooluniverse-mcp-stdio",
-           "--tools",
-           "drug_discovery,genomics,literature"
+          "/path/to/tooluniverse-env",  # Working directory
+          "run",
+          "tooluniverse-smcp-stdio",
+          "--tools",
+          "drug_discovery,genomics,literature"
          ]
        }
      }
@@ -406,11 +406,11 @@ Create custom tool sets for specific research domains:
          "command": "uv",
          "args": [
            "--directory",
-           "/path/to/tooluniverse-env",  # Working directory
-           "run",
-           "tooluniverse-mcp-stdio",
-           "--toolset",
-           "drug_discovery"
+          "/path/to/tooluniverse-env",  # Working directory
+          "run",
+          "tooluniverse-smcp-stdio",
+          "--toolset",
+          "drug_discovery"
          ]
        },
        "tooluniverse-genomics": {

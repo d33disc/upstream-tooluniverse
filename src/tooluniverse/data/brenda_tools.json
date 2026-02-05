@@ -1,0 +1,163 @@
+[
+  {
+    "name": "BRENDA_get_km",
+    "description": "Get Km (Michaelis constant) values from BRENDA enzyme database. Km indicates substrate affinity - lower Km means higher affinity. Returns values in mM with organism and substrate information. Requires free BRENDA account (register at brenda-enzymes.org/register.php).",
+    "type": "BRENDATool",
+    "required_api_keys": ["BRENDA_EMAIL", "BRENDA_PASSWORD"],
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_km",
+          "description": "Operation type (fixed: get_km)"
+        },
+        "ec_number": {
+          "type": "string",
+          "description": "EC number (e.g., 1.1.1.1 for alcohol dehydrogenase, 2.7.1.1 for hexokinase)"
+        },
+        "organism": {
+          "type": "string",
+          "description": "Optional organism filter (e.g., 'Homo sapiens', 'Escherichia coli')"
+        }
+      },
+      "required": ["operation", "ec_number"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "properties": {
+            "ec_number": {"type": "string"},
+            "km_values": {"type": "array"},
+            "count": {"type": "integer"}
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {"operation": "get_km", "ec_number": "1.1.1.1"}
+    ]
+  },
+  {
+    "name": "BRENDA_get_kcat",
+    "description": "Get kcat (turnover number) values from BRENDA enzyme database. kcat is the maximum number of substrate molecules converted to product per enzyme per second. Returns values in 1/s. Requires free BRENDA account.",
+    "type": "BRENDATool",
+    "required_api_keys": ["BRENDA_EMAIL", "BRENDA_PASSWORD"],
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_kcat",
+          "description": "Operation type (fixed: get_kcat)"
+        },
+        "ec_number": {
+          "type": "string",
+          "description": "EC number"
+        },
+        "organism": {
+          "type": "string",
+          "description": "Optional organism filter"
+        }
+      },
+      "required": ["operation", "ec_number"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "properties": {
+            "ec_number": {"type": "string"},
+            "kcat_values": {"type": "array"},
+            "count": {"type": "integer"}
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {"operation": "get_kcat", "ec_number": "1.1.1.1"}
+    ]
+  },
+  {
+    "name": "BRENDA_get_inhibitors",
+    "description": "Get enzyme inhibitor data from BRENDA via SPARQL endpoint. Returns Ki (inhibition constant) values in mM with inhibitor names and organisms. Lower Ki means more potent inhibition. No authentication required.",
+    "type": "BRENDATool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_inhibitors",
+          "description": "Operation type (fixed: get_inhibitors)"
+        },
+        "ec_number": {
+          "type": "string",
+          "description": "EC number"
+        },
+        "organism": {
+          "type": "string",
+          "description": "Optional organism filter"
+        }
+      },
+      "required": ["operation", "ec_number"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "properties": {
+            "inhibitors": {"type": "array"},
+            "count": {"type": "integer"}
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {"operation": "get_inhibitors", "ec_number": "1.1.1.1"}
+    ]
+  },
+  {
+    "name": "BRENDA_get_enzyme_info",
+    "description": "Get general enzyme information from BRENDA by EC number. Returns enzyme name, systematic name, and catalyzed reaction. Requires free BRENDA account (register at brenda-enzymes.org/register.php).",
+    "type": "BRENDATool",
+    "required_api_keys": ["BRENDA_EMAIL", "BRENDA_PASSWORD"],
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_enzyme_info",
+          "description": "Operation type (fixed: get_enzyme_info)"
+        },
+        "ec_number": {
+          "type": "string",
+          "description": "EC number (e.g., 1.1.1.1)"
+        }
+      },
+      "required": ["operation", "ec_number"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {
+          "type": "object",
+          "properties": {
+            "ec_number": {"type": "string"},
+            "info": {"type": "array"}
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {"operation": "get_enzyme_info", "ec_number": "1.1.1.1"}
+    ]
+  }
+]

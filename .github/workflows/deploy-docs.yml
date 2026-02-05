@@ -76,6 +76,15 @@ jobs:
           echo "✅ Logo prepared"
         fi
         
+    - name: Regenerate tool documentation
+      run: |
+        cd docs
+        echo "🔧 Regenerating tool reference documentation..."
+        python generate_config_index.py || echo "⚠️ generate_config_index.py not found or failed"
+        python generate_remote_tools_docs.py || echo "⚠️ generate_remote_tools_docs.py not found or failed"
+        python generate_tool_reference.py || echo "⚠️ generate_tool_reference.py not found or failed"
+        echo "✅ Tool documentation regeneration complete"
+        
     - name: Build documentation
       run: |
         cd docs

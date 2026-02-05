@@ -1,0 +1,121 @@
+[
+  {
+    "name": "eMolecules_search",
+    "description": "Search eMolecules vendor aggregator by keyword or compound name. eMolecules aggregates compounds from 200+ suppliers with pricing and availability information.",
+    "type": "EMoleculesTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "search"},
+        "query": {
+          "type": "string",
+          "description": "Search query - compound name or keyword"
+        },
+        "max_results": {
+          "type": "integer",
+          "description": "Maximum results (default: 20)",
+          "default": 20
+        }
+      },
+      "required": ["operation", "query"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "search", "query": "caffeine"}
+    ]
+  },
+  {
+    "name": "eMolecules_search_smiles",
+    "description": "Search eMolecules by chemical structure (SMILES). Supports exact match, substructure, and similarity search. Returns compounds from multiple vendors with pricing.",
+    "type": "EMoleculesTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "search_smiles"},
+        "smiles": {
+          "type": "string",
+          "description": "SMILES string for the query compound"
+        },
+        "search_type": {
+          "type": "string",
+          "description": "Search type: exact, substructure, similarity (default: similarity)",
+          "default": "similarity"
+        },
+        "max_results": {
+          "type": "integer",
+          "description": "Maximum results (default: 20)",
+          "default": 20
+        }
+      },
+      "required": ["operation", "smiles"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "search_smiles", "smiles": "Cn1cnc2c1c(=O)n(c(=O)n2C)C", "search_type": "exact"}
+    ]
+  },
+  {
+    "name": "eMolecules_get_vendors",
+    "description": "Get list of chemical suppliers for a compound by SMILES. Returns vendor names, pricing, and availability. Essential for compound sourcing and cost comparison.",
+    "type": "EMoleculesTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_vendors"},
+        "smiles": {
+          "type": "string",
+          "description": "SMILES string for the compound"
+        }
+      },
+      "required": ["operation", "smiles"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_vendors", "smiles": "CC(=O)Oc1ccccc1C(=O)O"}
+    ]
+  },
+  {
+    "name": "eMolecules_get_compound",
+    "description": "Get compound details by eMolecules ID. Returns structure, vendors, pricing, and availability information.",
+    "type": "EMoleculesTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {"type": "string", "const": "get_compound"},
+        "emol_id": {
+          "type": "string",
+          "description": "eMolecules compound/vendor ID"
+        }
+      },
+      "required": ["operation", "emol_id"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {"type": "string"},
+        "data": {"type": "object"}
+      }
+    },
+    "test_examples": [
+      {"operation": "get_compound", "emol_id": "1234567"}
+    ]
+  }
+]

@@ -10,9 +10,49 @@ What is MCP?
 
 The Model Context Protocol (MCP) is a standardized protocol that enables AI scientists to securely connect to external tools and data sources. ToolUniverse implements MCP through the Scientific Model Context Protocol (SMCP), extending standard MCP capabilities with scientific domain expertise.
 
-Key Benefits:
+Why Use MCP?
+------------
+
+**Without MCP**:
+
+- Write Python code to call each tool manually
+- Manually integrate tools with each AI assistant
+- Programming required for every query
+- Tools not discoverable by AI assistants
+- Separate setup for each application
+
+**With MCP**:
+
+- AI assistants autonomously discover and call tools
+- Conversational access to 1000+ scientific tools  
+- Non-programmers can leverage scientific databases
+- Single setup works across multiple AI assistants (Claude, Cursor, etc.)
+- AI can intelligently chain tools based on research questions
+
+**Use MCP when**:
+
+✅ Building AI agent workflows for research  
+✅ Enabling conversational scientific data access  
+✅ Integrating with Claude Desktop, Cursor, or other AI assistants  
+✅ Non-technical users need to query scientific databases  
+✅ Want AI to autonomously discover and compose tool sequences
+
+**Use Python API when**:
+
+✅ Writing reproducible analysis scripts  
+✅ Building custom applications with programmatic control  
+✅ Need fine-grained error handling and control flow  
+✅ Batch processing or automated pipelines  
+✅ Integration with existing Python codebase
+
+.. seealso::
+   For Python API usage, see :doc:`coding_api` and :doc:`../getting_started`.
+
+Key Benefits
+~~~~~~~~~~~~
+
 - **Standardized Integration**: Connect to any MCP-compatible AI scientist
-- **Scientific Tool Access**: Direct access to 649+ scientific tools
+- **Scientific Tool Access**: Direct access to 1000+ scientific tools
 - **Intelligent Discovery**: AI-powered tool search and recommendation
 - **Secure Communication**: Standardized protocol ensures secure tool execution
 - **Production Ready**: High-performance architecture for real-world applications
@@ -35,7 +75,7 @@ MCP Architecture Overview
            │
    ┌─────────────────┐
    │ Scientific      │
-   │ Tools (649+)    │
+   │ Tools (1000+)   │
    └─────────────────┘
 
 ToolUniverse MCP Implementation
@@ -46,7 +86,7 @@ ToolUniverse provides three main MCP server implementations:
 1. **`tooluniverse-smcp`** - Full-featured server with configurable transport (HTTP, SSE, stdio)
 2. **`tooluniverse-smcp-stdio`** - Specialized server for stdio transport (optimized for desktop AI applications)
 
-All servers expose the same comprehensive set of 649+ scientific tools through the MCP protocol.
+All servers expose the same comprehensive set of 1000+ scientific tools through the MCP protocol.
 
 Quick Start
 -----------
@@ -469,7 +509,7 @@ ToolUniverse's MCP support provides a powerful, standardized way to integrate sc
 Key takeaways:
 
 - **Easy Integration**: Simple setup with major AI scientists
-- **Comprehensive Tools**: Access to 649+ scientific tools through MCP
+- **Comprehensive Tools**: Access to 1000+ scientific tools through MCP
 - **Flexible Configuration**: Multiple transport options and tool selection
 - **Production Ready**: High-performance, secure, and reliable
 - **Extensive Documentation**: Complete guides for all major AI platforms

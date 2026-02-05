@@ -3,7 +3,20 @@ Getting Started with ToolUniverse
 
 This tutorial provides detailed, step-by-step instructions for using ToolUniverse effectively.
 
-**Prerequisites**: You should have already completed the :doc:`quickstart` Tutorial and have ToolUniverse installed (see :doc:`installation`). This tutorial assumes basic Python knowledge and internet access for API calls.
+.. tip::
+   **Coming from the quickstart?** Great! This tutorial goes deeper into ToolUniverse features.
+   
+   **New here?** This tutorial works standalone, but you might enjoy the :doc:`quickstart` for a quick overview first.
+
+**Prerequisites**: 
+
+- Python 3.10+ installed
+- ToolUniverse installed (see :doc:`installation`)
+- Basic Python knowledge
+- Internet access for API calls
+
+.. note::
+   Many tools work without API keys, but some require authentication. For information about which API keys you need and how to obtain them, see :doc:`api_keys`.
 
 🧪 Step-by-Step Tutorial
 ----------------
@@ -59,6 +72,30 @@ List built-in tools in ToolUniverse: This method supports two different organiza
 .. seealso::
    For comprehensive tool listing methods, see :doc:`guide/listing_tools`
 
+.. tip::
+   **Pro tip: Don't browse 1000+ tools manually!**
+   
+   Instead of listing all tools, use Tool Finder to search by what you need:
+   
+   .. code-block:: python
+   
+      # Find tools for your research question
+      results = tu.run({
+          "name": "Tool_Finder_Keyword",
+          "arguments": {"description": "protein structure prediction", "limit": 5}
+      })
+      
+      for tool in results:
+          print(f"• {tool['name']}: {tool['description']}")
+   
+   **Three search methods available**:
+   
+   - **Tool_Finder_Keyword**: Fast keyword search
+   - **Tool_Finder_LLM**: Natural language search using LLM
+   - **Tool_Finder**: Semantic embedding search (most accurate)
+   
+   See :doc:`tutorials/finding_tools` for complete guide.
+
 To find tools by description, use the Find Tool operation. This feature helps you or your AI scientists discover relevant tools based on their descriptions.
 We support three search methods: keyword search, LLM-based search, and embedding search.
 
@@ -80,7 +117,14 @@ We support three search methods: keyword search, LLM-based search, and embedding
 Step 3: Load Tool Specifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Inspect tool specifications to understand their parameters and capabilities before execution. This helps you or your AI scientists understand what arguments each tool expects and how to use them effectively.
+A :term:`tool specification <Tool Specification>` is like an instruction manual for each tool - it describes:
+
+- What the tool does
+- What input parameters it needs
+- What output format to expect
+- Any constraints or requirements
+
+Inspect tool specifications to understand their parameters and capabilities before execution:
 
 .. code-block:: python
 
@@ -163,6 +207,7 @@ Explore disease-target relationships using OpenTargets platform. Discover therap
 .. code-block:: python
 
    # Find targets associated with a disease
+   # Note: EFO_0000685 is the EFO ID (Experimental Factor Ontology identifier) for rheumatoid arthritis
    disease_query = {
        "name": "OpenTargets_get_associated_targets_by_disease_efoId",
        "arguments": {"efoId": "EFO_0000685"}  # Rheumatoid arthritis

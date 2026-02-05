@@ -1,0 +1,284 @@
+[
+  {
+    "name": "OncoKB_annotate_variant",
+    "description": "Annotate a cancer variant for oncogenic potential and treatment implications using OncoKB. Returns evidence level, oncogenicity, mutation effect, and FDA-approved therapies. Requires ONCOKB_API_TOKEN env var (demo mode available for BRAF, TP53, ROS1). Example: BRAF V600E in melanoma.",
+    "type": "OncoKBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "annotate_variant",
+          "description": "Operation type (fixed: annotate_variant)"
+        },
+        "gene": {
+          "type": "string",
+          "description": "Gene symbol (e.g., BRAF, EGFR, TP53, KRAS)"
+        },
+        "variant": {
+          "type": "string",
+          "description": "Variant notation - protein change (e.g., V600E, T790M, G12D)"
+        },
+        "tumor_type": {
+          "type": "string",
+          "description": "Optional OncoTree tumor type code (e.g., MEL for melanoma, LUAD for lung adenocarcinoma)"
+        }
+      },
+      "required": ["operation", "gene", "variant"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["success", "error"]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "oncogenic": {
+              "type": "string",
+              "description": "Oncogenicity classification (Oncogenic, Likely Oncogenic, etc.)"
+            },
+            "mutationEffect": {
+              "type": "object",
+              "description": "Mutation effect on protein function"
+            },
+            "highestSensitiveLevel": {
+              "type": "string",
+              "description": "Highest level of evidence for drug sensitivity"
+            },
+            "treatments": {
+              "type": "array",
+              "description": "List of treatment options with evidence levels"
+            }
+          }
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "operation": "annotate_variant",
+        "gene": "BRAF",
+        "variant": "V600E"
+      },
+      {
+        "operation": "annotate_variant",
+        "gene": "BRAF",
+        "variant": "V600E",
+        "tumor_type": "MEL"
+      }
+    ]
+  },
+  {
+    "name": "OncoKB_get_gene_info",
+    "description": "Get gene-level oncogenic information from OncoKB. Returns whether gene is an oncogene, tumor suppressor, or both. Includes curated background information. Requires ONCOKB_API_TOKEN env var (demo mode available for BRAF, TP53, ROS1).",
+    "type": "OncoKBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_gene_info",
+          "description": "Operation type (fixed: get_gene_info)"
+        },
+        "gene": {
+          "type": "string",
+          "description": "Gene symbol (e.g., BRAF, TP53, EGFR, KRAS)"
+        }
+      },
+      "required": ["operation", "gene"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "hugoSymbol": {
+              "type": "string",
+              "description": "Official gene symbol"
+            },
+            "oncogene": {
+              "type": "boolean",
+              "description": "Whether gene is classified as oncogene"
+            },
+            "tsg": {
+              "type": "boolean",
+              "description": "Whether gene is a tumor suppressor gene"
+            },
+            "geneAliases": {
+              "type": "array",
+              "description": "Alternative gene names"
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "operation": "get_gene_info",
+        "gene": "BRAF"
+      },
+      {
+        "operation": "get_gene_info",
+        "gene": "TP53"
+      }
+    ]
+  },
+  {
+    "name": "OncoKB_get_cancer_genes",
+    "description": "Get list of all cancer genes curated in OncoKB. Returns genes classified as oncogenes and/or tumor suppressors. Useful for checking if a gene is a known cancer driver. Requires ONCOKB_API_TOKEN env var.",
+    "type": "OncoKBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_cancer_genes",
+          "description": "Operation type (fixed: get_cancer_genes)"
+        }
+      },
+      "required": ["operation"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "total_genes": {
+              "type": "integer",
+              "description": "Total genes in database"
+            },
+            "cancer_genes_count": {
+              "type": "integer",
+              "description": "Number of cancer-related genes"
+            },
+            "genes": {
+              "type": "array",
+              "description": "List of cancer genes with classifications"
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "operation": "get_cancer_genes"
+      }
+    ]
+  },
+  {
+    "name": "OncoKB_get_levels",
+    "description": "Get OncoKB evidence level definitions. Returns descriptions of all therapeutic actionability levels (1, 2, 3A, 3B, 4, R1, R2). Level 1 = FDA-approved, Level 2 = Standard care, Level 3A = Compelling clinical evidence, etc.",
+    "type": "OncoKBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "get_levels",
+          "description": "Operation type (fixed: get_levels)"
+        }
+      },
+      "required": ["operation"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "level": {
+                "type": "string",
+                "description": "Level code (LEVEL_1, LEVEL_2, etc.)"
+              },
+              "description": {
+                "type": "string",
+                "description": "Level description"
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "operation": "get_levels"
+      }
+    ]
+  },
+  {
+    "name": "OncoKB_annotate_copy_number",
+    "description": "Annotate copy number alterations (amplification/deletion) for oncogenic potential. Returns evidence for gene amplification or deletion in cancer. Example: ERBB2 amplification in breast cancer, CDKN2A deletion.",
+    "type": "OncoKBTool",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "const": "annotate_copy_number",
+          "description": "Operation type (fixed: annotate_copy_number)"
+        },
+        "gene": {
+          "type": "string",
+          "description": "Gene symbol (e.g., ERBB2, MYC, CDKN2A)"
+        },
+        "copy_number_type": {
+          "type": "string",
+          "enum": ["AMPLIFICATION", "DELETION"],
+          "description": "Type of copy number alteration"
+        },
+        "tumor_type": {
+          "type": "string",
+          "description": "Optional OncoTree tumor type code"
+        }
+      },
+      "required": ["operation", "gene", "copy_number_type"]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "oncogenic": {
+              "type": "string"
+            },
+            "highestSensitiveLevel": {
+              "type": "string"
+            },
+            "treatments": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "operation": "annotate_copy_number",
+        "gene": "ERBB2",
+        "copy_number_type": "AMPLIFICATION"
+      }
+    ]
+  }
+]

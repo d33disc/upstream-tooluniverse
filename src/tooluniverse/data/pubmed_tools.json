@@ -2,7 +2,8 @@
   {
     "type": "PubMedRESTTool",
     "name": "PubMed_search_articles",
-    "description": "Search PubMed biomedical literature database using NCBI E-utilities (esearch + esummary). Returns articles with title, journal, authors, publication year, DOI, MeSH keywords, and PubMed URL. Use this to discover medical/life sciences literature, find articles by topic, or search for publications by author or journal. Find PMIDs (PubMed IDs) to use with other PubMed tools for detailed information, abstracts, citations, or related articles. Rate limiting is automatically handled (3 req/sec without API key, 10 req/sec with key).",
+    "description": "Search PubMed biomedical literature database using NCBI E-utilities (esearch + esummary). Returns articles with title, journal, authors, publication year, DOI, MeSH keywords, and PubMed URL. Use this to discover medical/life sciences literature, find articles by topic, or search for publications by author or journal. Find PMIDs (PubMed IDs) to use with other PubMed tools for detailed information, abstracts, citations, or related articles. Rate limiting is automatically handled (3 req/sec without API key, 10 req/sec with key set via NCBI_API_KEY environment variable).",
+    "optional_api_keys": ["NCBI_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
@@ -14,10 +15,6 @@
           "type": "integer",
           "description": "Number of articles to return. This sets the maximum number of articles retrieved from PubMed (max: 200).",
           "default": 10
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional NCBI API key for higher rate limits (10 req/sec vs 3 req/sec). Get your free key at https://www.ncbi.nlm.nih.gov/account/"
         }
       },
       "required": [
@@ -53,16 +50,13 @@
     "type": "PubMedRESTTool",
     "name": "PubMed_get_article",
     "description": "Get complete metadata for a specific PubMed article by its PMID (PubMed ID) using efetch. Returns comprehensive article information including title, full abstract, complete author list with affiliations, journal details (name, volume, issue, pages), publication dates, DOI, MeSH terms, article type, grant information, and references. Essential for accessing full abstracts, detailed metadata, and citation information. Find PMIDs using PubMed_search_articles (format: integer like 12345678).",
+    "optional_api_keys": ["NCBI_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
         "pmid": {
           "type": "string",
           "description": "PubMed ID (PMID) as string or integer (e.g., '12345678', '33250470'). Find PMIDs using PubMed_search_articles. Can also accept comma-separated PMIDs for multiple articles."
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional NCBI API key for higher rate limits. Get free key at https://www.ncbi.nlm.nih.gov/account/"
         }
       },
       "required": [
@@ -92,6 +86,7 @@
     "type": "PubMedRESTTool",
     "name": "PubMed_get_related",
     "description": "Get related PubMed articles for a specific PMID using elink. Returns a list of computationally similar articles based on title, abstract, and MeSH terms. Use this to discover additional relevant literature, find similar studies, or explore a research topic more comprehensively. The algorithm identifies articles with similar content, methodology, or subject matter. Find PMIDs using PubMed_search_articles.",
+    "optional_api_keys": ["NCBI_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
@@ -105,10 +100,6 @@
           "default": 20,
           "minimum": 1,
           "maximum": 100
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional NCBI API key for higher rate limits."
         }
       },
       "required": [
@@ -140,6 +131,7 @@
     "type": "PubMedRESTTool",
     "name": "PubMed_get_cited_by",
     "description": "Get a list of PubMed articles that cite a specific PMID using elink. Returns PMIDs of articles that have cited the input article in their reference list. Use this to track citation impact, find more recent work building on a paper, or explore how research has been applied. Essential for literature reviews, impact analysis, and staying current with research developments. Find PMIDs using PubMed_search_articles.",
+    "optional_api_keys": ["NCBI_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
@@ -153,10 +145,6 @@
           "default": 20,
           "minimum": 1,
           "maximum": 100
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional NCBI API key for higher rate limits."
         }
       },
       "required": [
@@ -187,16 +175,13 @@
     "type": "PubMedRESTTool",
     "name": "PubMed_get_links",
     "description": "Get external links (LinkOut) for a specific PubMed article by its PMID using elink. Returns URLs to full-text providers, supplementary data, related resources, clinical trials, and other external content. Use this to access full-text articles, find supplementary materials, or discover related datasets and resources. Essential for accessing paywalled content via institutional subscriptions or finding open-access versions. Find PMIDs using PubMed_search_articles.",
+    "optional_api_keys": ["NCBI_API_KEY"],
     "parameter": {
       "type": "object",
       "properties": {
         "pmid": {
           "type": "string",
           "description": "PubMed ID (PMID) for which to retrieve external links (e.g., '19880848', '19822630'). Find PMIDs using PubMed_search_articles."
-        },
-        "api_key": {
-          "type": "string",
-          "description": "Optional NCBI API key for higher rate limits."
         }
       },
       "required": [

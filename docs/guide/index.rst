@@ -63,8 +63,8 @@ Advanced Features
   * **⚙️ Hook Configuration** → :doc:`hooks/hook_configuration` - Advanced configuration and customization
   * **🖥️ Server & Stdio Hooks** → :doc:`hooks/server_stdio_hooks` - Using hooks with server and stdio interfaces
 
-.. note::
-   **New to ToolUniverse?** Start with the :doc:`../quickstart` Tutorial for a 5-minute introduction, then come back here for in-depth learning.
+.. tip::
+   **New to ToolUniverse?** Check out the "Start Here" section on the :doc:`../index` page for a recommended learning path.
 
 Tool Collections
 ----------------

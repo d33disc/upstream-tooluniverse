@@ -44,7 +44,7 @@
       "cellxgene_census",
       "tiledbsoma"
     ],
-    "description": "Query cell (observation) metadata from CELLxGENE Census. Returns cell type, tissue, disease, donor information, and experimental metadata. Filter by tissue, cell type, disease, or any metadata field. Use for: finding cells matching criteria, exploring available cell types, quality filtering, cohort selection.",
+    "description": "Query cell metadata from CELLxGENE Census (50M+ human/mouse single cells). CRITICAL: obs_value_filter is REQUIRED - unfiltered queries will timeout. Common filters: tissue_general (brain, heart, lung, liver, blood, kidney, skin, eye, intestine), cell_type (T cell, B cell, neuron, macrophage, fibroblast), disease (normal, COVID-19, Alzheimer disease, cancer). Start with: obs_value_filter='tissue_general == \"lung\" and disease == \"normal\"'. Returns cell type, tissue, disease, donor info. Use for: finding cells by criteria, cohort selection, exploring cell populations.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -62,7 +62,7 @@
         },
         "obs_value_filter": {
           "type": "string",
-          "description": "Filter cells using SQL-like syntax. Format: 'field == \"value\"'. Operators: ==, !=, in, <, >, <=, >=. Combine with 'and'/'or'. Common fields: tissue, cell_type, disease, assay, sex, ethnicity, donor_id, suspension_type, development_stage. Examples: 'tissue == \"lung\"', 'disease == \"COVID-19\" and tissue == \"lung\"', 'cell_type in [\"T cell\", \"B cell\"]'."
+          "description": "REQUIRED - filter cells using SQL-like syntax. Unfiltered queries timeout (50M+ cells). Format: 'field == \"value\"'. Operators: ==, !=, in, <, >, <=, >=. Combine with 'and'/'or'. Common fields and values: tissue_general (brain, heart, lung, liver, blood, kidney, skin, eye, intestine, pancreas, bone marrow), cell_type (T cell, B cell, neuron, macrophage, fibroblast, epithelial cell, endothelial cell), disease (normal, COVID-19, Alzheimer disease, lung adenocarcinoma), assay (10x 3' v3, Smart-seq2), sex (male, female). Examples: 'tissue_general == \"lung\"', 'disease == \"COVID-19\" and tissue_general == \"blood\"', 'cell_type in [\"T cell\", \"B cell\"] and disease == \"normal\"'."
         },
         "column_names": {
           "type": "array",
@@ -75,7 +75,7 @@
           "default": "stable"
         }
       },
-      "required": ["operation"]
+      "required": ["operation", "obs_value_filter"]
     },
     "return_schema": {
       "type": "object",
@@ -94,7 +94,7 @@
       {
         "operation": "get_obs_metadata",
         "organism": "Homo sapiens",
-        "obs_value_filter": "tissue == 'brain'",
+        "obs_value_filter": "tissue_general == 'brain' and disease == 'normal'",
         "census_version": "stable"
       }
     ]
@@ -168,7 +168,7 @@
       "cellxgene_census",
       "tiledbsoma"
     ],
-    "description": "Query gene expression data from CELLxGENE Census as AnnData object summary. Filter cells and genes simultaneously. Returns dataset dimensions and metadata structure. For actual matrix data, use Python API directly with larger memory. Use for: understanding query size, validating filters, preparing for full data download.",
+    "description": "Query gene expression data from CELLxGENE Census (50M+ cells, 60K+ genes). CRITICAL: At least one filter REQUIRED - unfiltered queries timeout. Start with: obs_value_filter='tissue_general == \"lung\" and disease == \"normal\"' AND var_value_filter='feature_name in [\"TP53\", \"EGFR\"]'. Returns AnnData summary (dimensions, metadata). For full matrix data, use Python API with sufficient memory.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -186,11 +186,11 @@
         },
         "obs_value_filter": {
           "type": "string",
-          "description": "Cell filter (e.g., 'tissue == \"lung\" and disease == \"COVID-19\"')"
+          "description": "REQUIRED (or use var_value_filter) - Cell filter. Common values: tissue_general (brain, lung, heart, blood, liver), cell_type (T cell, B cell, neuron, macrophage), disease (normal, COVID-19, Alzheimer disease). Example: 'tissue_general == \"lung\" and disease == \"normal\"'"
         },
         "var_value_filter": {
           "type": "string",
-          "description": "Gene filter (e.g., 'feature_name in [\"CD4\", \"CD8A\"]')"
+          "description": "REQUIRED (or use obs_value_filter) - Gene filter by symbol or Ensembl ID. Examples: 'feature_name in [\"TP53\", \"BRCA1\", \"EGFR\"]', 'feature_name == \"CD4\"'. Common genes: TP53, EGFR, BRCA1, CD4, CD8A, IL6, TNF, GAPDH."
         },
         "obs_column_names": {
           "type": "array",
@@ -228,8 +228,8 @@
       {
         "operation": "get_anndata",
         "organism": "Homo sapiens",
-        "obs_value_filter": "tissue == 'brain'",
-        "var_value_filter": "feature_name in ['SOX2', 'GFAP']",
+        "obs_value_filter": "tissue_general == 'brain' and disease == 'normal'",
+        "var_value_filter": "feature_name in ['SOX2', 'GFAP', 'OLIG2']",
         "census_version": "stable"
       }
     ]

@@ -8,12 +8,39 @@ Compact mode exposes only 4-5 core tools instead of 1000+ tools, reducing contex
 What is Compact Mode?
 ---------------------
 
-When enabled, compact mode exposes only 4-5 essential tools instead of all 1000+ tools. All tools are still accessible via ``execute_tool``.
+Compact mode is a context window optimization that exposes only 4-5 core discovery tools instead of listing all 1000+ tools. All tools remain accessible through the ``execute_tool`` function.
 
-**Benefits:**
-- 99% reduction in exposed tools (4-5 vs 1000+)
-- Full functionality maintained
-- Ideal for AI agents with limited context windows
+Why Use Compact Mode?
+---------------------
+
+**The Problem**: AI assistants have limited context windows. Listing 1000+ tools consumes significant context space, leaving less room for:
+
+- Your research questions
+- Tool outputs and data
+- Conversation history
+- Analysis and reasoning
+
+**The Solution**: Compact mode exposes only 4-5 discovery tools. The AI uses these to find and execute the specific tools it needs.
+
+**Impact**:
+
+- **99% reduction** in exposed tools (4-5 vs 1000+)
+- **Full functionality** - All 1000+ tools still accessible via ``execute_tool``
+- **Better AI reasoning** - More context available for analysis
+- **Faster responses** - Less token processing overhead
+
+**When to use**:
+
+✅ **Always recommended** for MCP integration with Claude, Cursor, ChatGPT  
+✅ AI agent workflows with long conversations  
+✅ Complex multi-step research tasks  
+✅ Working with large datasets or outputs
+
+**When to skip**:
+
+❌ Python API usage (context windows don't apply)  
+❌ Single-use scripts or batch processing  
+❌ When you need to see all available tools at once
 
 Core Tools
 ----------
@@ -118,7 +145,7 @@ Comparison
      - Normal Mode
      - Compact Mode
    * - Tools Exposed
-     - ~750 tools
+     - ~1000 tools
      - 4-5 tools (4 core + find_tools if search enabled)
    * - Context Usage
      - High

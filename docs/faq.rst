@@ -1,7 +1,12 @@
-FAQ - Frequently Asked Questions
-==================================
+Quick FAQ
+=========
 
 Quick answers to the most common questions about ToolUniverse.
+
+.. note::
+   **Looking for more detailed answers?**
+   
+   This page provides brief answers to get you started quickly. For comprehensive FAQ with detailed explanations, troubleshooting, and advanced topics, see :doc:`help/faq`.
 
 What is ToolUniverse?
 ---------------------
@@ -29,17 +34,25 @@ How do I install it?
 Do I need API keys?
 -------------------
 
-Most tools work without API keys. For enhanced features, set these as environment variables:
+Most tools work without API keys! However, some tools require authentication or provide higher rate limits with API keys.
 
-.. code-block:: bash
+**Quick answer:**
 
-   export OPENTARGETS_API_KEY=your_key_here
-   export NCBI_API_KEY=your_ncbi_key
+- **No API keys needed** for most tools (PubMed, UniProt, ChEMBL, etc.)
+- **Recommended for better performance**: NCBI, OpenTargets, FDA (3-10x faster)
+- **Required for specific features**: NVIDIA NIM (structure prediction), USPTO (patents), DisGeNET, OMIM
+
+**For complete details**, see :doc:`api_keys` which covers:
+
+- Which APIs are required vs optional
+- How to obtain each API key
+- Rate limits with and without keys
+- Configuration methods
 
 How do I use it with Claude?
 -----------------------------
 
-1. Start the MCP server: ``python -m tooluniverse.smcp_server``
+1. Start the MCP server: ``tooluniverse-smcp``
 2. Configure Claude Desktop with the MCP server
 3. Ask Claude: "What tools are available from ToolUniverse?"
 
