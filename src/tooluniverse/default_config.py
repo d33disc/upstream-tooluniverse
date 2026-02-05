@@ -275,6 +275,8 @@ default_tool_files = {
     "bigg_models": os.path.join(current_dir, "data", "bigg_models_tools.json"),
     # Protein-Protein Interaction (PPI) tools - STRING and BioGRID
     "ppi": os.path.join(current_dir, "data", "ppi_tools.json"),
+    # NVIDIA NIM Healthcare APIs - Structure prediction, molecular docking, genomics
+    "nvidia_nim": os.path.join(current_dir, "data", "nvidia_nim_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

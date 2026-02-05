@@ -155,6 +155,13 @@ result = tu.run({
 # run one command to launch the tooluniverse smcp server
 tooluniverse-smcp
 ```
+
+**Quick Setup for Claude Code:**
+```bash
+pip install tooluniverse
+claude mcp add --transport stdio tooluniverse -- tooluniverse-smcp-stdio --compact-mode
+```
+
 → **Complete Tutorial**: [MCP Support](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcp_support.html)
 
 ### MCPB Support

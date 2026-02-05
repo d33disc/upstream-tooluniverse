@@ -40,10 +40,8 @@ Prerequisites
 Before setting up Claude Code integration, ensure you have:
 
 - **Claude Code**: Installed in your IDE or CLI
-- **ToolUniverse**: Installed
-- **UV Package Manager**: For running the MCP server
-- **System Requirements**: macOS, Windows, or Linux with Python 3.10+
-- **API Keys**: For specific tools or optional hooks (e.g., Azure OpenAI for summarization)
+- **Python 3.10+**: macOS, Windows, or Linux
+- **API Keys** (optional): For specific tools or hooks (e.g., Azure OpenAI for summarization)
 
 Installation and Setup
 ----------------------
@@ -90,98 +88,30 @@ For details, see: `Anthropic — Set up Claude Code <https://docs.anthropic.com/
 
 For Windows installation, see: `Anthropic — Windows setup <https://docs.anthropic.com/en/docs/claude-code/setup#windows-setup>`_.
 
-Step 1: Install uv and ToolUniverse
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Install uv package manager:
+Step 1: Install ToolUniverse
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   # macOS/Linux: official installer
-   curl -LsSf https://astral.sh/uv/install.sh | sh
+   # Using pip
+   pip install tooluniverse
 
-   # Verify installation
-   uv --version
+   # Or using uv (faster)
+   uv pip install tooluniverse
 
-For Windows installation and other methods, see: `uv installation Tutorial <https://docs.astral.sh/uv/getting-started/installation/>`_.
-
-Set up a dedicated uv environment and install ToolUniverse:
-
-.. code-block:: bash
-
-   # Create working directory for ToolUniverse
-   # uv will automatically create and manage a virtual environment (.venv) inside this directory
-   mkdir -p /path/to/tooluniverse-env
-
-   # Install ToolUniverse into that uv environment
-   uv --directory /path/to/tooluniverse-env pip install tooluniverse
-
-   # Verify installation
-   uv --directory /path/to/tooluniverse-env run python -c "import tooluniverse; print('ToolUniverse installed successfully')"
-
-Step 2: Test ToolUniverse MCP server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Test that the ToolUniverse MCP server works:
+Step 2: Add ToolUniverse to Claude Code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   # Test the MCP server command
-   uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio --help
+   claude mcp add --transport stdio tooluniverse -- tooluniverse-smcp-stdio --compact-mode
 
-Step 3: Add ToolUniverse MCP server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Use Claude Code's built-in command to add ToolUniverse as an MCP server:
-
-.. code-block:: bash
-
-   # Add ToolUniverse MCP server with local scope (recommended for personal use)
-   claude mcp add tooluniverse --scope local --env AZURE_OPENAI_API_KEY=your-key --env AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio
-
-**Alternative scope options:**
-
-- ``--scope local`` (default): Available only in current project directory
-- ``--scope project``: Shared across project team via ``.claude/.mcp.json``
-- ``--scope user``: Available across all your projects
-
-**Environment variables (optional):**
-
-Add ``--env`` flags only if you need summarization hooks or tools requiring API keys:
-
-.. code-block:: bash
-
-   # Minimal setup (no API keys needed for most tools)
-   claude mcp add tooluniverse --scope local -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio
-
-**Optimized Configuration for Research Users (Recommended):**
-
-.. code-block:: bash
-
-   # Add ToolUniverse with optimized settings for research
-   claude mcp add tooluniverse --scope local --env AZURE_OPENAI_API_KEY=your-key --env AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio --exclude-tool-types PackageTool --hook-type SummarizationHook
-
-**Configuration Benefits:**
-
-- ``--exclude-tool-types PackageTool``: Removes package management tools to save context window space if you don't have coding needs
-- ``--hook-type SummarizationHook``: Provides summary of the output that is too long to fit in the context window
-- ``AZURE_OPENAI_API_KEY`` and ``AZURE_OPENAI_ENDPOINT``: Required for SummarizationHook functionality
-
-**Verify the server was added:**
-
-.. code-block:: bash
-
-   # List all MCP servers
+   # Verify it was added successfully
    claude mcp list
 
-   # Get details about ToolUniverse server
-   claude mcp get tooluniverse
+You should see ``tooluniverse`` in the list of MCP servers. The ``--compact-mode`` flag optimizes tool descriptions for better context efficiency.
 
-See: `Claude Code MCP documentation <https://docs.anthropic.com/en/docs/claude-code/mcp>`_ for advanced configuration options.
-
-For MCP scope management, see: `MCP installation scopes <https://docs.anthropic.com/en/docs/claude-code/mcp#mcp-installation-scopes>`_.
-
-Step 4: Verify in IDE/CLI
+Step 3: Verify in IDE/CLI
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After saving the configuration, verify connectivity:
@@ -277,82 +207,64 @@ Claude Code excels at complex, multi-step research workflows:
 4. Validate findings
 5. Generate conclusions
 
-Settings and Configuration
---------------------------
+Advanced Configuration
+----------------------
 
-Tool Selection Strategies
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Tool Selection
+~~~~~~~~~~~~~~
 
-Optimize tool usage for better performance:
-
-**Selective Tool Loading**:
-- Load only relevant tools for specific research domains
-- Reduce context usage and improve response times
-
-**Example Tool Selection**:
+Load only specific tools for focused research domains:
 
 .. code-block:: bash
 
-   # Add ToolUniverse with specific tool filtering
-   claude mcp add tooluniverse-research --scope local -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio --include-tools EuropePMC_search_articles,ChEMBL_search_similar_molecules,openalex_literature_search,search_clinical_trials
+   # Add ToolUniverse with specific tools only
+   claude mcp add --transport stdio tooluniverse -- tooluniverse-smcp-stdio --compact-mode --include-tools EuropePMC_search_articles,ChEMBL_search_similar_molecules,openalex_literature_search
 
-   # Verify the server configuration
-   claude mcp get tooluniverse-research
+Summarization Hook
+~~~~~~~~~~~~~~~~~~
 
-Multiple MCP Servers
-~~~~~~~~~~~~~~~~~~~~
-
-Run multiple ToolUniverse instances for different purposes:
+Enable automatic summarization for long outputs (requires Azure OpenAI):
 
 .. code-block:: bash
 
-   # Add research-focused instance
-   claude mcp add tooluniverse-research --scope local -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio --include-tools EuropePMC_search_articles,openalex_literature_search
+   claude mcp add --transport stdio tooluniverse --env AZURE_OPENAI_API_KEY=your-key --env AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com -- tooluniverse-smcp-stdio --compact-mode --hook-type SummarizationHook
 
-   # Add analysis-focused instance
-   claude mcp add tooluniverse-analysis --scope local -- uv --directory /path/to/tooluniverse-env run tooluniverse-smcp-stdio --include-tools ChEMBL_search_similar_molecules,search_clinical_trials
+Multiple Instances
+~~~~~~~~~~~~~~~~~~
 
-   # List all configured servers
+Run separate instances for different purposes:
+
+.. code-block:: bash
+
+   # Literature research instance
+   claude mcp add --transport stdio tooluniverse-literature -- tooluniverse-smcp-stdio --compact-mode --include-tools EuropePMC_search_articles,openalex_literature_search
+
+   # Drug analysis instance
+   claude mcp add --transport stdio tooluniverse-drugs -- tooluniverse-smcp-stdio --compact-mode --include-tools ChEMBL_search_similar_molecules,search_clinical_trials
+
+   # List all servers
    claude mcp list
 
-   # Remove a server if needed
-   claude mcp remove tooluniverse-research
+   # Remove a server
+   claude mcp remove tooluniverse-literature
 
 Troubleshooting
 ---------------
 
-Common Issues and Solutions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 **MCP Server Not Loading**:
-- Verify ToolUniverse installation path and absolute paths
-- Check UV package manager installation
-- Run `claude mcp list` to see current servers
-- Check server logs with `claude mcp get tooluniverse`
-- For troubleshooting, see: `Claude Code troubleshooting <https://docs.anthropic.com/en/docs/claude-code/troubleshooting>`_
+
+- Verify ToolUniverse is installed: ``python -c "import tooluniverse; print('OK')"``
+- Check server status: ``claude mcp list``
+- Run diagnostics: ``claude doctor``
 
 **No Tools Discovered**:
-- Verify the ToolUniverse MCP server command runs locally
-- Check if your tool filters are too restrictive
-- Ensure all ToolUniverse dependencies are installed
-- Use `claude doctor` for system diagnostics
+
+- Check if tool filters are too restrictive
+- Verify the command works: ``tooluniverse-smcp-stdio --help``
 
 **Tools Not Executing**:
-- Provide required API keys via `--env` flags when adding the server
-- Verify network connectivity to external APIs
-- Check MCP output limits, see: `MCP output limits <https://docs.anthropic.com/en/docs/claude-code/mcp#mcp-output-limits-and-warnings>`_
 
-Tips
-----
+- Provide required API keys via ``--env`` flags
+- Verify network connectivity
 
-**Tool Selection**: Use `--include-tools` to load only the tools you need for better performance.
-
-**Status Check**: Use `claude mcp list` and `claude mcp get <server>` to inspect MCP servers.
-
-**Keep Paths Absolute**: Avoid relative paths in MCP config to prevent resolution issues.
-
-**Authentication**: For OAuth-based MCP servers, use `/mcp` command in Claude Code chat for secure authentication.
-
-**Resources**: Reference external resources with `@server:protocol://path` syntax in your prompts.
-
-For comprehensive documentation, see: `Claude Code documentation <https://docs.anthropic.com/en/docs/claude-code/>`_.
+For more help, see: `Claude Code troubleshooting <https://docs.anthropic.com/en/docs/claude-code/troubleshooting>`_.

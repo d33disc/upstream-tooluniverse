@@ -186,6 +186,7 @@ STATIC_LAZY_REGISTRY = {
     "NCBIBlastTool": "blast_tool",
     "NCBIEUtilsTool": "ncbi_eutils_tool",
     "NHANESTool": "nhanes_tool",
+    "NvidiaNIMTool": "nvidia_nim_tool",
     "NICEGuidelineFullTextTool": "unified_guideline_tools",
     "NICEWebScrapingTool": "unified_guideline_tools",
     "OBISOccurrenceTool": "obis_tool",
