@@ -14,6 +14,7 @@ def PMC_search_papers(
     date_from: Optional[str] = None,
     date_to: Optional[str] = None,
     article_type: Optional[str] = None,
+    include_abstract: Optional[bool] = False,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -34,6 +35,8 @@ def PMC_search_papers(
         End date for publication date filter (YYYY/MM/DD format). Optional parameter ...
     article_type : str
         Article type filter (e.g., 'research-article', 'review', 'case-report'). Opti...
+    include_abstract : bool
+        If true, attempts to enrich results with an abstract (best-effort) by fetchin...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -56,6 +59,7 @@ def PMC_search_papers(
                 "date_from": date_from,
                 "date_to": date_to,
                 "article_type": article_type,
+                "include_abstract": include_abstract,
             },
         },
         stream_callback=stream_callback,

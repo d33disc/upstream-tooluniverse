@@ -1,30 +1,30 @@
 """
-MedRxiv_search_preprints
+DailyMed_parse_adverse_reactions
 
-Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, yea...
+Parse adverse reactions section from SPL XML into structured table format. Returns AE frequencies...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def MedRxiv_search_preprints(
-    query: str,
-    max_results: int,
+def DailyMed_parse_adverse_reactions(
+    operation: str,
+    setid: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> dict[str, Any]:
     """
-    Search medRxiv preprints using the public medRxiv API. Returns preprints with title, authors, yea...
+    Parse adverse reactions section from SPL XML into structured table format. Returns AE frequencies...
 
     Parameters
     ----------
-    query : str
-        Search query for medRxiv preprints. Use keywords separated by spaces to refin...
-    max_results : int
-        Maximum number of preprints to return. Default is 10, maximum is 200.
+    operation : str
+        Operation type (fixed)
+    setid : str
+        SPL Set ID to parse
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,14 +34,14 @@ def MedRxiv_search_preprints(
 
     Returns
     -------
-    list[Any]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "MedRxiv_search_preprints",
-            "arguments": {"query": query, "max_results": max_results},
+            "name": "DailyMed_parse_adverse_reactions",
+            "arguments": {"operation": operation, "setid": setid},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def MedRxiv_search_preprints(
     )
 
 
-__all__ = ["MedRxiv_search_preprints"]
+__all__ = ["DailyMed_parse_adverse_reactions"]

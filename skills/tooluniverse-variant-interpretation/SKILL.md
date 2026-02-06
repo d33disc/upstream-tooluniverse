@@ -99,6 +99,14 @@ Use this skill when users:
 
 ---
 
+## NVIDIA API Key Check
+
+If `NVIDIA_API_KEY` env var is not set, tell the user:
+
+> **NVIDIA API Key not configured.** Structural impact analysis (Phase 4) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB / PDB structures.
+
+---
+
 ## Phase Details
 
 ### Phase 1: Variant Identity & Normalization
@@ -794,8 +802,7 @@ def validate_expression_context(tu, gene_symbol, phenotype_tissues):
 |------|---------|----------|
 | `PubMed_search` | Peer-reviewed studies | Comprehensive |
 | `EuropePMC_search` | Additional literature | Europe PMC |
-| `BioRxiv_search_preprints` | Biology preprints | Recent findings |
-| `MedRxiv_search_preprints` | Clinical preprints | Clinical studies |
+| `EuropePMC_search` (source='PPR') | Preprints (bioRxiv/medRxiv) | Recent findings |
 | `openalex_search_works` | Citation analysis | Impact metrics |
 | `SemanticScholar_search_papers` | AI-ranked search | Relevance |
 
@@ -810,16 +817,18 @@ def comprehensive_literature_search(tu, gene, variant, phenotype):
         max_results=30
     )
     
-    # 2. BioRxiv: Recent preprints
-    biorxiv = tu.tools.BioRxiv_search_preprints(
+    # 2. EuropePMC: Recent preprints (bioRxiv/medRxiv)
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{gene} {phenotype}",
-        limit=10
+        source="PPR",  # PPR = Preprints only
+        pageSize=10
     )
     
-    # 3. MedRxiv: Clinical preprints
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{gene} variant {phenotype}",
-        limit=10
+    # 3. MedRxiv: Clinical preprints via EuropePMC
+    clinical_preprints = tu.tools.EuropePMC_search_articles(
+        query=f"{gene} variant {phenotype} clinical",
+        source="PPR",
+        pageSize=10
     )
     
     # 4. Citation analysis

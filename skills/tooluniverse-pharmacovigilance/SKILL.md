@@ -532,16 +532,18 @@ def comprehensive_safety_literature(tu, drug_name, key_aes):
         limit=30
     )
     
-    # BioRxiv: Preprints
-    biorxiv = tu.tools.BioRxiv_search_preprints(
+    # EuropePMC: Preprints for mechanism insights
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{drug_name} mechanism toxicity",
-        limit=10
+        source="PPR",  # PPR = Preprints only
+        pageSize=10
     )
     
-    # MedRxiv: Clinical preprints
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{drug_name} safety",
-        limit=10
+    # MedRxiv: Clinical preprints via EuropePMC
+    clinical_preprints = tu.tools.EuropePMC_search_articles(
+        query=f"{drug_name} safety clinical",
+        source="PPR",
+        pageSize=10
     )
     
     # Citation analysis for key papers

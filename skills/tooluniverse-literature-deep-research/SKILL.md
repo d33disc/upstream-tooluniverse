@@ -276,11 +276,12 @@ Example for bacterial TraG collision:
 **Literature Search** (use all relevant):
 - `PubMed_search_articles` - Primary biomedical
 - `PMC_search_papers` - Full-text
-- `EuropePMC_search_articles` - European coverage
+- `EuropePMC_search_articles` - European coverage (use `source='PPR'` for preprints)
 - `openalex_literature_search` - Broad academic
 - `Crossref_search_works` - DOI registry
 - `SemanticScholar_search_papers` - AI-ranked
-- `BioRxiv_search_preprints` / `MedRxiv_search_preprints` - Preprints
+- **Preprints**: Use `EuropePMC_search_articles` with `source='PPR'` or `web_search` with `site:biorxiv.org`
+- `BioRxiv_get_preprint` / `MedRxiv_get_preprint` - Get preprint by DOI (not for search)
 
 **Citation Tools** (with failure handling):
 - `PubMed_get_cited_by` - Primary (NCBI elink can be flaky)
@@ -771,7 +772,7 @@ For V-ATPase target example:
 ## Quick Reference: Tool Categories
 
 ### Literature Tools
-`PubMed_search_articles`, `PMC_search_papers`, `EuropePMC_search_articles`, `openalex_literature_search`, `Crossref_search_works`, `SemanticScholar_search_papers`, `BioRxiv_search_preprints`, `MedRxiv_search_preprints`
+`PubMed_search_articles`, `PMC_search_papers`, `EuropePMC_search_articles` (use `source='PPR'` for preprints), `openalex_literature_search`, `Crossref_search_works`, `SemanticScholar_search_papers`, `BioRxiv_get_preprint`, `MedRxiv_get_preprint` (DOI retrieval only)
 
 ### Citation Tools
 `PubMed_get_cited_by`, `PubMed_get_related`, `EuropePMC_get_citations`, `EuropePMC_get_references`

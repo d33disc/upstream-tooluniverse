@@ -22,13 +22,22 @@ Complete reference for 50+ tools used in drug research, organized by use case.
 | Trials | `search_clinical_trials` | - |
 | Trial outcomes | `extract_clinical_trial_outcomes` | - |
 | Trial AEs | `extract_clinical_trial_adverse_events` | - |
-| FAERS | `FAERS_count_reactions_by_drug_event` | - |
-| Label | `DailyMed_search_spls` | `PubChem_get_drug_label_info_by_CID` |
+| FAERS counts | `FAERS_count_reactions_by_drug_event` | - |
+| **🆕 FAERS stats** | **`FAERS_calculate_disproportionality`** | **ROR/PRR/IC** |
+| **🆕 FAERS stratify** | **`FAERS_stratify_by_demographics`** | **Age/sex/country** |
+| **🆕 FAERS serious** | **`FAERS_filter_serious_events`** | **Deaths/hospitalizations** |
+| **🆕 Label parsing** | **`DailyMed_parse_adverse_reactions`** | **Structured AE tables** |
+| **🆕 Label dosing** | **`DailyMed_parse_dosing`** | **Dose tables** |
+| **🆕 Label DDI** | **`DailyMed_parse_drug_interactions`** | **Interaction tables** |
+| **🆕 FDA approvals** | **`FDA_OrangeBook_get_approval_history`** | **Timeline** |
+| **🆕 FDA patents** | **`FDA_OrangeBook_get_patent_info`** | **Patent guidance** |
+| **🆕 FDA generics** | **`FDA_OrangeBook_check_generic_availability`** | **Generic count** |
+| Label search | `DailyMed_search_spls` | `PubChem_get_drug_label_info_by_CID` |
 | PGx Drug | `PharmGKB_search_drugs` | - |
 | CPIC | `PharmGKB_get_dosing_guidelines` | - |
 | Literature | `PubMed_search_articles` | `EuropePMC_search_articles` |
 | Similar compounds | `PubChem_search_compounds_by_similarity` | ChEMBL |
-| Patents | `PubChem_get_associated_patents_by_CID` | - |
+| Patents | `PubChem_get_associated_patents_by_CID` | `FDA_OrangeBook_get_patent_info` |
 
 ---
 
@@ -168,7 +177,243 @@ All ADMET-AI tools require SMILES input in list format: `smiles=["CC(=O)Oc1ccccc
 
 ---
 
-## Drug Labeling
+## 🆕 FAERS Analytics (Statistical Signal Detection)
+
+**NEW**: Priority 1 tools for pharmacovigilance with regulatory-grade statistics.
+
+### Disproportionality Analysis
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_calculate_disproportionality` | Calculate ROR, PRR, IC with 95% CI | Signal strength, contingency table, statistical measures |
+
+**Example**:
+```python
+result = tu.tools.FAERS_calculate_disproportionality(
+    operation="calculate_disproportionality",
+    drug_name="IBUPROFEN",
+    adverse_event="Gastrointestinal haemorrhage"
+)
+# Returns: ROR 2.8 [2.71-2.89], "Moderate signal"
+```
+
+**Interpretation**:
+- **ROR > 1**: Positive association (higher reporting than expected)
+- **Signal detected**: ROR lower CI > 1.0 AND case count ≥ 3
+- **Signal strength**: Strong (ROR ≥4), Moderate (ROR ≥2), Weak (ROR <2)
+- ⚠️ **Caution**: Disproportionality ≠ causation (association only)
+
+### Demographic Stratification
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_stratify_by_demographics` | Stratify by sex, age, country | Counts and percentages by group |
+
+**Example**:
+```python
+result = tu.tools.FAERS_stratify_by_demographics(
+    operation="stratify_by_demographics",
+    drug_name="IBUPROFEN",
+    adverse_event="Gastrointestinal haemorrhage",
+    stratify_by="sex"  # Options: sex, age, country
+)
+# Returns: Female 60%, Male 40%
+```
+
+### Serious Events Filtering
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_filter_serious_events` | Filter by FDA seriousness criteria | Top serious reactions with counts |
+
+**Example**:
+```python
+result = tu.tools.FAERS_filter_serious_events(
+    operation="filter_serious_events",
+    drug_name="IBUPROFEN",
+    seriousness_type="death"  # Options: all, death, hospitalization, disability, life_threatening
+)
+# Returns: Total deaths, top fatal reactions
+```
+
+### Drug Comparison
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_compare_drugs` | Compare safety signals between drugs | Side-by-side ROR/PRR/IC comparison |
+
+**Example**:
+```python
+result = tu.tools.FAERS_compare_drugs(
+    operation="compare_drugs",
+    drug1="IBUPROFEN",
+    drug2="NAPROXEN",
+    adverse_event="Gastrointestinal haemorrhage"
+)
+# Returns: Comparative analysis with ROR for both drugs
+```
+
+### Temporal Trend Analysis
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_analyze_temporal_trends` | Analyze reporting trends over time | Yearly counts, trend direction, percent change |
+
+**Example**:
+```python
+result = tu.tools.FAERS_analyze_temporal_trends(
+    operation="analyze_temporal_trends",
+    drug_name="IBUPROFEN",
+    adverse_event="Gastrointestinal haemorrhage"
+)
+# Returns: Increasing/Decreasing/Stable trend with percent change
+```
+
+### MedDRA Hierarchy
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FAERS_rollup_meddra_hierarchy` | Aggregate by Preferred Term level | Top 50 PTs with counts |
+
+**Example**:
+```python
+result = tu.tools.FAERS_rollup_meddra_hierarchy(
+    operation="rollup_meddra_hierarchy",
+    drug_name="IBUPROFEN"
+)
+# Returns: List of PTs with case counts
+```
+
+---
+
+## 🆕 DailyMed SPL Parser (Structured Label Extraction)
+
+**NEW**: Priority 1 tools for extracting structured data from FDA product labels.
+
+### Parse Operations
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `DailyMed_parse_adverse_reactions` | Extract AE frequency tables | Tables with headers, rows, and text sections |
+| `DailyMed_parse_dosing` | Extract dosing tables | Dosing regimens, administration instructions |
+| `DailyMed_parse_contraindications` | Extract contraindication lists | Contraindication items and text |
+| `DailyMed_parse_drug_interactions` | Extract interaction tables | Drug-drug interactions with severity |
+| `DailyMed_parse_clinical_pharmacology` | Extract PK/PD data | Pharmacokinetic parameters, mechanism |
+
+**Requirements**: Install `lxml` with `pip install lxml`
+
+**Example**:
+```python
+# First, get setid from search
+search = tu.tools.DailyMed_search_spls(drug_name="ibuprofen")
+setid = search['data']['results'][0]['setid']
+
+# Parse adverse reactions
+result = tu.tools.DailyMed_parse_adverse_reactions(
+    operation="parse_adverse_reactions",
+    setid=setid
+)
+# Returns: {"tables": [...], "text_sections": [...]}
+```
+
+**Use Cases**:
+- Systematic AE frequency extraction (no more manual PDF parsing)
+- Structured dose modification rules
+- Contraindication screening
+- Drug-drug interaction tables for clinical decision support
+
+---
+
+## 🆕 FDA Orange Book (US Regulatory Intelligence)
+
+**NEW**: Priority 1 tools for FDA approval data, patents, and generic availability.
+
+### Search & Basic Info
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FDA_OrangeBook_search_drug` | Search by brand/generic name or NDA | Application numbers, drug info |
+
+**Example**:
+```python
+result = tu.tools.FDA_OrangeBook_search_drug(
+    operation="search_drug",
+    brand_name="ADVIL"
+)
+# Or search by application number
+result = tu.tools.FDA_OrangeBook_search_drug(
+    operation="search_drug",
+    application_number="NDA020402"
+)
+```
+
+### Regulatory Timeline
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FDA_OrangeBook_get_approval_history` | Get approval timeline | Submission history, approval date, milestones |
+
+**Example**:
+```python
+result = tu.tools.FDA_OrangeBook_get_approval_history(
+    operation="get_approval_history",
+    application_number="NDA020402"
+)
+# Returns: Approval date, submissions, review documents
+```
+
+### Patent & Exclusivity
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FDA_OrangeBook_get_patent_info` | Get patent information | Patent guidance, download URL |
+| `FDA_OrangeBook_get_exclusivity` | Get exclusivity periods | Exclusivity types, expiry dates |
+
+**Example**:
+```python
+# Patent info (guidance + download URL)
+patents = tu.tools.FDA_OrangeBook_get_patent_info(
+    operation="get_patent_info",
+    brand_name="ADVIL"
+)
+
+# Exclusivity info
+exclusivity = tu.tools.FDA_OrangeBook_get_exclusivity(
+    operation="get_exclusivity",
+    brand_name="ADVIL"
+)
+```
+
+### Generic Availability
+| Tool | Purpose | Key Output |
+|------|---------|------------|
+| `FDA_OrangeBook_check_generic_availability` | Compare reference vs generics | Generic products count, comparison |
+| `FDA_OrangeBook_get_te_code` | Get Therapeutic Equivalence codes | TE codes with interpretation |
+
+**Example**:
+```python
+# Check generic availability
+generics = tu.tools.FDA_OrangeBook_check_generic_availability(
+    operation="check_generic_availability",
+    brand_name="ADVIL"
+)
+# Returns: Reference product, generic count, TE codes
+
+# Get TE code interpretation
+te_codes = tu.tools.FDA_OrangeBook_get_te_code(
+    operation="get_te_code",
+    brand_name="ADVIL"
+)
+# Returns: TE codes (e.g., "AB") with interpretation
+```
+
+**TE Code Guide**:
+- **A**: Therapeutically equivalent
+  - **AB**: Bioequivalence standards met
+  - **AP**: Multi-source with equivalence
+- **B**: NOT therapeutically equivalent
+  - **BC**: Extended-release dosage form issues
+  - **BN**: Active ingredient issues
+
+**Use Cases**:
+- Market entry planning (patent cliffs, exclusivity expiry)
+- Generic competition landscape
+- Regulatory submission timelines
+- Therapeutic equivalence assessment
+
+---
+
+## Drug Labeling (Legacy)
 
 ### DailyMed Tools
 | Tool | Purpose | Key Parameters |
@@ -203,8 +448,9 @@ All ADMET-AI tools require SMILES input in list format: `smiles=["CC(=O)Oc1ccccc
 | `openalex_literature_search` | Broad academic | query, limit |
 | `Crossref_search_works` | DOI-based | query, limit |
 | `SemanticScholar_search_papers` | AI-ranked | query, limit |
-| `BioRxiv_search_preprints` | Biology preprints | query, limit |
-| `MedRxiv_search_preprints` | Medical preprints | query, limit |
+| `EuropePMC_search_articles` | Preprints (use source='PPR') | query, source, pageSize |
+| `BioRxiv_get_preprint` | Get by DOI | doi |
+| `MedRxiv_get_preprint` | Get by DOI | doi, server |
 
 ### Citation Tools
 | Tool | Purpose |

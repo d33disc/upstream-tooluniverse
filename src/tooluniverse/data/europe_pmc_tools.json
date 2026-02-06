@@ -14,6 +14,11 @@
           "type": "integer",
           "description": "Number of articles to return. This sets the maximum number of articles retrieved from Europe PMC.",
           "default": 5
+        },
+        "enrich_missing_abstract": {
+          "type": "boolean",
+          "description": "If true, best-effort fills missing abstracts by fetching Europe PMC fullTextXML (bounded to a few results).",
+          "default": false
         }
       },
       "required": [
@@ -31,7 +36,10 @@
             "description": "Title of the article"
           },
           "abstract": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Abstract of the article"
           },
           "authors": {
@@ -42,20 +50,68 @@
             "description": "List of author names"
           },
           "journal": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Journal name where the article was published"
           },
           "year": {
-            "type": ["integer", "string", "null"],
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
             "description": "Publication year"
           },
           "doi": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Digital Object Identifier"
           },
+          "doi_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "DOI resolver URL"
+          },
           "url": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "URL to the article on Europe PMC"
+          },
+          "pmid": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PubMed ID (when available)"
+          },
+          "pmcid": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PubMed Central ID (when available)"
+          },
+          "fulltext_xml_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Europe PMC fullTextXML URL (when derivable)"
+          },
+          "abstract_source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Source of abstract text (e.g., Europe PMC core or fullTextXML)"
           },
           "citations": {
             "type": "integer",
@@ -66,11 +122,11 @@
             "description": "Open access status"
           },
           "keywords": {
-            "type": ["array", "string"],
+            "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "List of keywords or 'Keywords not available'"
+            "description": "List of keywords"
           },
           "source": {
             "type": "string",
@@ -146,7 +202,9 @@
           "minimum": 1
         }
       },
-      "required": ["article_id"]
+      "required": [
+        "article_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/{source}/{article_id}/citations"
@@ -156,13 +214,20 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
           "properties": {
-            "version": {"type": "string"},
-            "hitCount": {"type": "integer"},
+            "version": {
+              "type": "string"
+            },
+            "hitCount": {
+              "type": "integer"
+            },
             "citationList": {
               "type": "object",
               "properties": {
@@ -171,13 +236,30 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {"type": "string"},
-                      "source": {"type": "string"},
-                      "title": {"type": "string"},
-                      "authorString": {"type": "string"},
-                      "journalAbbreviation": {"type": "string"},
-                      "pubYear": {"type": ["integer", "string"]},
-                      "citedOrder": {"type": "integer"}
+                      "id": {
+                        "type": "string"
+                      },
+                      "source": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "authorString": {
+                        "type": "string"
+                      },
+                      "journalAbbreviation": {
+                        "type": "string"
+                      },
+                      "pubYear": {
+                        "type": [
+                          "integer",
+                          "string"
+                        ]
+                      },
+                      "citedOrder": {
+                        "type": "integer"
+                      }
                     }
                   }
                 }
@@ -185,9 +267,15 @@
             }
           }
         },
-        "url": {"type": "string"},
-        "error": {"type": "string"},
-        "status_code": {"type": "integer"}
+        "url": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "status_code": {
+          "type": "integer"
+        }
       }
     },
     "test_examples": [
@@ -228,7 +316,9 @@
           "minimum": 1
         }
       },
-      "required": ["article_id"]
+      "required": [
+        "article_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/{source}/{article_id}/references"
@@ -238,13 +328,20 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
           "properties": {
-            "version": {"type": "string"},
-            "hitCount": {"type": "integer"},
+            "version": {
+              "type": "string"
+            },
+            "hitCount": {
+              "type": "integer"
+            },
             "referenceList": {
               "type": "object",
               "properties": {
@@ -253,13 +350,30 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {"type": "string"},
-                      "source": {"type": "string"},
-                      "title": {"type": "string"},
-                      "authorString": {"type": "string"},
-                      "journalAbbreviation": {"type": "string"},
-                      "pubYear": {"type": ["integer", "string"]},
-                      "citedOrder": {"type": "integer"}
+                      "id": {
+                        "type": "string"
+                      },
+                      "source": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "authorString": {
+                        "type": "string"
+                      },
+                      "journalAbbreviation": {
+                        "type": "string"
+                      },
+                      "pubYear": {
+                        "type": [
+                          "integer",
+                          "string"
+                        ]
+                      },
+                      "citedOrder": {
+                        "type": "integer"
+                      }
                     }
                   }
                 }
@@ -267,9 +381,15 @@
             }
           }
         },
-        "url": {"type": "string"},
-        "error": {"type": "string"},
-        "status_code": {"type": "integer"}
+        "url": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "status_code": {
+          "type": "integer"
+        }
       }
     },
     "test_examples": [
@@ -277,6 +397,117 @@
         "source": "MED",
         "article_id": "25428363",
         "page_size": 10
+      }
+    ]
+  }
+  ,
+  {
+    "type": "EuropePMCFullTextSnippetsTool",
+    "name": "EuropePMC_get_fulltext_snippets",
+    "description": "Fetch an article's Europe PMC fullTextXML (open access) and return bounded text snippets around provided terms. Use this when a key detail is likely in the full text (methods, figure captions, section titles) rather than the abstract.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "fulltext_xml_url": {
+          "type": "string",
+          "description": "Direct Europe PMC fullTextXML URL (recommended when you already have it from EuropePMC_search_articles)."
+        },
+        "pmcid": {
+          "type": "string",
+          "description": "PMC ID (e.g., 'PMC11237425' or '11237425'). If provided, the tool derives the Europe PMC fullTextXML URL."
+        },
+        "source_db": {
+          "type": "string",
+          "description": "Europe PMC source database (e.g., 'MED' or 'PMC'). Used with `article_id` to derive the fullTextXML URL."
+        },
+        "article_id": {
+          "type": "string",
+          "description": "Europe PMC article ID within `source_db` (e.g., PMID for source_db='MED')."
+        },
+        "terms": {
+          "type": "array",
+          "description": "Terms to search for in the extracted full text (case-insensitive).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "window_chars": {
+          "type": "integer",
+          "description": "Context window size (characters) before and after each match.",
+          "default": 220,
+          "minimum": 20,
+          "maximum": 2000
+        },
+        "max_snippets_per_term": {
+          "type": "integer",
+          "description": "Maximum number of snippets returned per term.",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 10
+        },
+        "max_total_chars": {
+          "type": "integer",
+          "description": "Hard cap on total characters returned across all snippets.",
+          "default": 8000,
+          "minimum": 1000,
+          "maximum": 50000
+        }
+      },
+      "required": [
+        "terms"
+      ]
+    },
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "snippets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "term": {
+                "type": "string"
+              },
+              "snippet": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "snippets_count": {
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        },
+        "status_code": {
+          "type": "integer"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "test_examples": [
+      {
+        "pmcid": "PMC11237425",
+        "terms": [
+          "ciprofloxacin",
+          "evolved resistance"
+        ]
       }
     ]
   }

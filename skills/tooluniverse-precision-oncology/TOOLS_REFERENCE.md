@@ -459,10 +459,20 @@ pathways = tu.tools.kegg_get_gene_info(gene_id="hsa:1956")  # EGFR
 
 | Tool | Purpose | Key Parameters |
 |------|---------|----------------|
-| `BioRxiv_search_preprints` | Cancer preprints | `query`, `limit` |
-| `MedRxiv_search_preprints` | Clinical preprints | `query`, `limit` |
+| `EuropePMC_search_articles` | Search preprints (bioRxiv/medRxiv) | `query`, `source='PPR'`, `pageSize` |
+| `BioRxiv_get_preprint` | Get preprint by DOI | `doi` |
+| `MedRxiv_get_preprint` | Get preprint by DOI | `doi`, `server='medrxiv'` |
 
 **⚠️ Important**: Flag preprints as NOT peer-reviewed in reports.
+
+**Example - Search preprints**:
+```python
+# bioRxiv/medRxiv don't have search APIs, use EuropePMC
+preprints = tu.tools.EuropePMC_search_articles(
+    query="EGFR inhibitor resistance",
+    source="PPR",  # PPR = Preprints only
+    pageSize=20
+)
 
 ### OpenAlex - Citation Analysis
 

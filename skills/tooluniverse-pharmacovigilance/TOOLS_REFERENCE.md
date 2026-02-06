@@ -202,23 +202,25 @@ papers = tu.tools.PubMed_search_articles(
 
 | Tool | Purpose | Key Parameters |
 |------|---------|----------------|
-| `BioRxiv_search_preprints` | Biology preprints | `query`, `limit` |
-| `MedRxiv_search_preprints` | Clinical preprints | `query`, `limit` |
+| `EuropePMC_search_articles` | Search preprints (bioRxiv/medRxiv) | `query`, `source='PPR'`, `pageSize` |
+| `BioRxiv_get_preprint` | Get preprint by DOI | `doi` |
 
 **⚠️ Preprints are NOT peer-reviewed but may contain emerging safety signals!**
 
-**Example - Search preprints for emerging signals**:
+**Example - Search preprints for emerging signals** (bioRxiv/medRxiv don't have search APIs, use EuropePMC):
 ```python
-# BioRxiv for mechanism insights
-biorxiv = tu.tools.BioRxiv_search_preprints(
+# EuropePMC for mechanism insights
+preprints = tu.tools.EuropePMC_search_articles(
     query="metformin toxicity mechanism",
-    limit=15
+    source="PPR",  # PPR = Preprints only
+    pageSize=15
 )
 
-# MedRxiv for real-world safety data
-medrxiv = tu.tools.MedRxiv_search_preprints(
+# MedRxiv for real-world safety data (via EuropePMC)
+clinical_preprints = tu.tools.EuropePMC_search_articles(
     query="metformin real-world safety",
-    limit=15
+    source="PPR",
+    pageSize=15
 )
 ```
 
@@ -439,7 +441,7 @@ def detect_emerging_signals(tu, drug_name, threshold_prr=3.0):
 | Primary | Fallback 1 | Fallback 2 |
 |---------|------------|------------|
 | `PubMed_search_articles` | `openalex_search_works` | `SemanticScholar_search` |
-| `BioRxiv_search_preprints` | `MedRxiv_search_preprints` | Skip preprints |
+| `EuropePMC_search_articles` (source='PPR') | `web_search` (site:medrxiv.org) | Skip preprints |
 
 ---
 

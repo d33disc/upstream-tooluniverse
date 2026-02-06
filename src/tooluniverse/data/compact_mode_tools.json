@@ -340,9 +340,16 @@
           "description": "Name of the tool to execute (e.g., 'example_tool_name')"
         },
         "arguments": {
-          "type": "object",
-          "description": "Tool arguments as a JSON object (dictionary), NOT a JSON string. Pass the parameters required by the target tool as key-value pairs. Example: {\"param1\": \"value1\", \"param2\": 5}. Do NOT use string format like 'param1=value1' or '\"{\\\"param1\\\":\\\"value1\\\"}\"'. Must be a proper JSON object.",
-          "additionalProperties": true
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": true
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "Tool arguments as either (1) a JSON object dictionary or (2) a JSON string that decodes to an object. Object example: {\"param1\": \"value1\", \"param2\": 5}. JSON string example: \"{\\\"param1\\\": \\\"value1\\\", \\\"param2\\\": 5}\"."
         }
       },
       "required": [
@@ -356,15 +363,17 @@
     },
     "test_examples": [
       {
-        "tool_name": "UniProt_get_entry_by_accession",
+        "tool_name": "list_tools",
         "arguments": {
-          "accession": "P05067"
+          "mode": "names",
+          "limit": "3"
         }
       },
       {
-        "tool_name": "ChEMBL_get_molecule",
+        "tool_name": "get_tool_info",
         "arguments": {
-          "chembl_id": "CHEMBL25"
+          "tool_names": "execute_tool",
+          "detail_level": "description"
         }
       }
     ]

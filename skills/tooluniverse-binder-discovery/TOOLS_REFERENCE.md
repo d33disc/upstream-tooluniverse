@@ -746,25 +746,35 @@ result = tu.tools.PubMed_search_articles(
 # Returns: articles with pmid, title, abstract, publication date
 ```
 
-### BioRxiv_search_preprints
-**Purpose**: Search biology preprints (latest findings, not peer-reviewed)
+### EuropePMC_search_articles (for Preprints)
+**Purpose**: Search preprints from bioRxiv, medRxiv, and other sources (latest findings, not peer-reviewed)
 ```python
-result = tu.tools.BioRxiv_search_preprints(
+# Search preprints using EuropePMC (bioRxiv/medRxiv don't have search APIs)
+result = tu.tools.EuropePMC_search_articles(
     query="EGFR small molecule discovery",
-    limit=15
+    source="PPR",  # PPR = Preprints only
+    pageSize=15
 )
+
+# If you have a DOI, get full bioRxiv metadata:
+full_metadata = tu.tools.BioRxiv_get_preprint(doi="10.1101/2023.12.01.569554")
 # Returns: preprints with doi, title, posted date
 ```
 **⚠️ Note**: Preprints NOT peer-reviewed. Use for emerging compounds/methods.
 
-### MedRxiv_search_preprints
-**Purpose**: Search clinical preprints
+### MedRxiv_get_preprint
+**Purpose**: Get medRxiv preprint by DOI (for search, use EuropePMC with source='PPR')
 ```python
-result = tu.tools.MedRxiv_search_preprints(
+# Get preprint by DOI
+result = tu.tools.MedRxiv_get_preprint(doi="10.1101/2021.04.29.21256344")
+
+# For searching clinical preprints, use EuropePMC:
+search = tu.tools.EuropePMC_search_articles(
     query="EGFR inhibitor clinical trial",
-    limit=10
+    source="PPR",
+    pageSize=10
 )
-# Returns: preprints with doi, title, posted date
+# Returns: preprints with doi, title, abstract, etc.
 ```
 
 ### openalex_search_works
@@ -856,8 +866,7 @@ Primary: get_protein_metadata_by_pdb_id (for each PDB)
 Primary: PubMed_search_articles (peer-reviewed)
 ├─ Success → Use published literature
 └─ Supplement with:
-         ├─ BioRxiv_search_preprints (latest biology)
-         ├─ MedRxiv_search_preprints (clinical data)
+         ├─ EuropePMC_search_articles (source='PPR' for preprints)
          └─ openalex_search_works (citation analysis)
 ```
 

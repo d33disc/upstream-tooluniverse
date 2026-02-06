@@ -185,5 +185,47 @@
             "tags": ["crispr", "gene_effect", "essentiality", "target_validation"],
             "estimated_execution_time": "< 5 seconds"
         }
+    },
+    {
+        "name": "DepMap_search_genes",
+        "description": "Search for genes in DepMap/Sanger by symbol or name. Returns matching genes with Ensembl IDs and exact-match flags. Use this helper to find the correct gene symbol before querying dependencies, especially when DepMap_get_gene_dependencies returns mismatched genes.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Gene symbol or name to search (e.g., 'WDR7', 'EGFR', 'TP53')"
+                }
+            },
+            "required": ["query"]
+        },
+        "fields": {
+            "operation": "search_genes"
+        },
+        "type": "DepMapTool",
+        "test_examples": [
+            {"query": "EGFR"},
+            {"query": "WDR7"}
+        ],
+        "return_schema": {
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "enum": ["success", "error"]},
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string"},
+                        "genes": {"type": "array"},
+                        "count": {"type": "integer"}
+                    }
+                },
+                "error": {"type": "string"}
+            }
+        },
+        "label": ["DepMap", "Gene Search"],
+        "metadata": {
+            "tags": ["gene_search", "symbol_validation"],
+            "estimated_execution_time": "< 3 seconds"
+        }
     }
 ]

@@ -207,22 +207,28 @@ papers = tu.tools.PubMed_search_articles(
 
 | Tool | Purpose | Key Parameters |
 |------|---------|----------------|
-| `BioRxiv_search_preprints` | Biology preprints | `query`, `limit` |
-| `MedRxiv_search_preprints` | Clinical preprints | `query`, `limit` |
+| `EuropePMC_search_articles` | Search preprints (bioRxiv, medRxiv) | `query`, `source='PPR'`, `pageSize` |
 | `ArXiv_search_papers` | Physics/ML preprints | `query`, `category` |
+| `BioRxiv_get_preprint` | Get preprint by DOI | `doi`, `server='biorxiv'` |
+| `MedRxiv_get_preprint` | Get preprint by DOI | `doi`, `server='medrxiv'` |
 
 **⚠️ Preprints are NOT peer-reviewed but critical for emerging outbreaks!**
 
-**Example - Search preprints**:
+**Example - Search preprints** (bioRxiv/medRxiv don't have search APIs, use EuropePMC):
 ```python
-# Newest biology findings
-biorxiv = tu.tools.BioRxiv_search_preprints(
+# Search for newest preprint findings
+preprints = tu.tools.EuropePMC_search_articles(
     query=f"{pathogen_name} mechanism resistance",
-    limit=20
+    source="PPR",  # PPR = Preprints (bioRxiv, medRxiv, etc.)
+    pageSize=20
 )
 
-# Clinical data
-medrxiv = tu.tools.MedRxiv_search_preprints(
+# If you have a specific DOI, retrieve full metadata:
+if doi_from_search.startswith('10.1101/'):
+    full_preprint = tu.tools.BioRxiv_get_preprint(doi=doi_from_search)
+
+# Alternative: Use web search for bioRxiv
+web_results = tu.tools.web_search(
     query=f"{pathogen_name} clinical trial effectiveness",
     limit=20
 )
@@ -446,7 +452,7 @@ def transfer_knowledge(tu, novel_pathogen, reference_pathogen):
 | Primary | Fallback 1 | Fallback 2 |
 |---------|------------|------------|
 | `PubMed_search_articles` | `openalex_search_works` | Google Scholar |
-| `BioRxiv_search_preprints` | `MedRxiv_search_preprints` | ArXiv q-bio |
+| `EuropePMC_search_articles` (source='PPR') | `web_search` (site:biorxiv.org) | ArXiv q-bio |
 | `openalex_search_works` | `SemanticScholar_search` | Manual citation |
 
 ---

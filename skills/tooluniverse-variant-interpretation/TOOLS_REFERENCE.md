@@ -580,15 +580,16 @@ expression = tu.tools.CELLxGENE_get_expression_data(
 
 | Tool | Purpose | Key Parameters |
 |------|---------|----------------|
-| `BioRxiv_search_preprints` | Biology preprints | `query`, `limit` |
-| `MedRxiv_search_preprints` | Clinical preprints | `query`, `limit` |
+| `EuropePMC_search_articles` | Search preprints (bioRxiv/medRxiv) | `query`, `source='PPR'`, `pageSize` |
+| `BioRxiv_get_preprint` | Get preprint by DOI | `doi` |
 
-**Example - Search preprints**:
+**Example - Search preprints** (bioRxiv/medRxiv don't have search APIs, use EuropePMC):
 ```python
 # Search for recent findings
-preprints = tu.tools.BioRxiv_search_preprints(
+preprints = tu.tools.EuropePMC_search_articles(
     query="BRCA1 variant functional",
-    limit=10
+    source="PPR",  # PPR = Preprints only
+    pageSize=10
 )
 ```
 

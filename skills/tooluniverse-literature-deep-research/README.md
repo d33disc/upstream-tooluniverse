@@ -129,7 +129,7 @@ autophagy [★★☆: PMID:23456789].
 ## Tool Categories Used
 
 ### Literature Search
-`PubMed_search_articles`, `EuropePMC_search_articles`, `openalex_literature_search`, `SemanticScholar_search_papers`, `BioRxiv_search_preprints`
+`PubMed_search_articles`, `EuropePMC_search_articles` (use `source='PPR'` for preprints), `openalex_literature_search`, `SemanticScholar_search_papers`
 
 ### Citation Analysis (with fallbacks)
 `PubMed_get_cited_by` → `EuropePMC_get_citations`

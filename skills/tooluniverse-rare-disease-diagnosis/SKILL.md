@@ -64,6 +64,12 @@ Every finding MUST include source:
 
 **CRITICAL**: Verify tool parameters before calling.
 
+### NVIDIA API Key Check
+
+If `NVIDIA_API_KEY` env var is not set, tell the user:
+
+> **NVIDIA API Key not configured.** VUS structural analysis (Phase 5) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB lookups.
+
 ### Known Parameter Corrections
 
 | Tool | WRONG Parameter | CORRECT Parameter |
@@ -1034,10 +1040,11 @@ def search_disease_literature(tu, disease_name, genes):
 def search_preprints(tu, disease_name, genes):
     """Search preprints for cutting-edge findings."""
     
-    # BioRxiv search
-    biorxiv = tu.tools.BioRxiv_search_preprints(
+    # EuropePMC preprints search (bioRxiv/medRxiv don't have search APIs)
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{disease_name} genetics",
-        limit=10
+        source="PPR",  # PPR = Preprints only
+        pageSize=10
     )
     
     # ArXiv for computational methods

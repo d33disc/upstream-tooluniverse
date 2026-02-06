@@ -60,6 +60,12 @@ Apply when user asks:
 
 ## Phase 0: Tool Verification
 
+### NVIDIA API Key Check
+
+If `NVIDIA_API_KEY` env var is not set, tell the user:
+
+> **NVIDIA API Key not configured.** Structure prediction and drug docking (`NvidiaNIM_*` tools) require it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB; docking phases will be skipped.
+
 ### Known Parameter Corrections
 
 | Tool | WRONG Parameter | CORRECT Parameter |
@@ -513,16 +519,19 @@ def comprehensive_outbreak_literature(tu, pathogen_name):
         sort="date"
     )
     
-    # BioRxiv: CRITICAL for outbreaks - newest findings
-    biorxiv = tu.tools.BioRxiv_search_preprints(
+    # EuropePMC: CRITICAL for outbreaks - newest preprint findings
+    # Note: BioRxiv API doesn't support search. Use EuropePMC with source='PPR' for preprints
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{pathogen_name} treatment mechanism",
-        limit=20
+        source="PPR",  # Preprints only (includes bioRxiv, medRxiv, etc.)
+        pageSize=20
     )
     
-    # MedRxiv: Clinical preprints
-    medrxiv = tu.tools.MedRxiv_search_preprints(
+    # MedRxiv: Clinical preprints via EuropePMC
+    clinical_preprints = tu.tools.EuropePMC_search_articles(
         query=f"{pathogen_name} clinical trial",
-        limit=20
+        source="PPR",
+        pageSize=20
     )
     
     # ArXiv: Computational/ML papers

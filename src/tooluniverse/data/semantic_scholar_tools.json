@@ -3,7 +3,9 @@
     "type": "SemanticScholarTool",
     "name": "SemanticScholar_search_papers",
     "description": "Search for papers on Semantic Scholar including abstracts. This tool queries the Semantic Scholar API using natural language keywords and returns papers with details such as title, abstract, publication year, journal (venue), and URL. Rate limits: 1 req/sec without API key, 100 req/sec with SEMANTIC_SCHOLAR_API_KEY environment variable set.",
-    "optional_api_keys": ["SEMANTIC_SCHOLAR_API_KEY"],
+    "optional_api_keys": [
+      "SEMANTIC_SCHOLAR_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -15,6 +17,11 @@
           "type": "integer",
           "description": "Maximum number of papers to return from Semantic Scholar.",
           "default": 5
+        },
+        "include_abstract": {
+          "type": "boolean",
+          "description": "If true, best-effort fetches missing abstracts via the paper detail endpoint (only when abstract is missing in search results).",
+          "default": false
         }
       },
       "required": [
@@ -33,20 +40,88 @@
             "description": "Title of the paper"
           },
           "abstract": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Abstract of the paper"
           },
           "journal": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Journal or venue name"
           },
           "year": {
-            "type": "integer",
+            "type": [
+              "integer",
+              "null"
+            ],
             "description": "Publication year"
           },
           "url": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "URL to the paper on Semantic Scholar"
+          },
+          "paper_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Semantic Scholar paperId"
+          },
+          "doi": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "DOI (if available in externalIds)"
+          },
+          "doi_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "DOI resolver URL"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of author names"
+          },
+          "citation_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Citation count (if provided)"
+          },
+          "reference_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Reference count (if provided)"
+          },
+          "open_access": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Open access flag (if provided)"
+          },
+          "open_access_pdf_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Open access PDF URL (if provided)"
           }
         }
       }

@@ -10,9 +10,9 @@
 ```python
 'PubMed_search_articles'          # 35M+ papers - primary biomedical
 'PMC_search_papers'               # Full-text biomedical archive (NIH)
-'EuropePMC_search_articles'       # 42M+ European biomedical
-'BioRxiv_search_preprints'        # Biology preprints
-'MedRxiv_search_preprints'        # Medical/clinical preprints
+'EuropePMC_search_articles'       # 42M+ European biomedical (use source='PPR' for preprints)
+'BioRxiv_get_preprint'            # Get bioRxiv preprint by DOI (not search)
+'MedRxiv_get_preprint'            # Get medRxiv preprint by DOI (not search)
 ```
 
 ### Computer Science
@@ -281,14 +281,14 @@
 
 ### Literature (18)
 1. `ArXiv_search_papers`
-2. `BioRxiv_search_preprints`
+2. `BioRxiv_get_preprint` (DOI retrieval)
 3. `Crossref_search_works`
 4. `DBLP_search_publications`
 5. `DOAJ_search_articles`
 6. `EuropePMC_search_articles`
 7. `Fatcat_search_scholar`
 8. `HAL_search_archive`
-9. `MedRxiv_search_preprints`
+9. `MedRxiv_get_preprint` (DOI retrieval)
 10. `OpenAIRE_search_publications`
 11. `OSF_search_preprints`
 12. `PMC_search_papers`

@@ -111,6 +111,12 @@ Phase 7: Report Synthesis
 tool_info = tu.tools.get_tool_info(tool_name="ChEMBL_get_target_activities")
 ```
 
+### NVIDIA API Key Check
+
+If `NVIDIA_API_KEY` env var is not set, tell the user:
+
+> **NVIDIA API Key not configured.** Structure prediction, docking, and de novo generation (`NvidiaNIM_*` tools) require it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB lookups; docking and generation phases will be skipped.
+
 ### Known Parameter Corrections
 
 | Tool | WRONG Parameter | CORRECT Parameter |
@@ -1055,14 +1061,15 @@ def search_binder_literature(tu, target_name, compound_scaffolds):
         limit=30
     )
     
-    # BioRxiv: Latest unpublished findings
-    preprints = tu.tools.BioRxiv_search_preprints(
+    # EuropePMC: Latest preprint findings (bioRxiv, medRxiv, etc.)
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{target_name} small molecule discovery",
-        limit=15
+        source="PPR",  # PPR = Preprints only
+        pageSize=15
     )
     
     # MedRxiv: Clinical data on inhibitors
-    clinical = tu.tools.MedRxiv_search_preprints(
+    clinical = tu.tools.EuropePMC_search_articles(
         query=f"{target_name} inhibitor clinical trial",
         limit=10
     )
@@ -1386,8 +1393,8 @@ Apply to all candidate compounds:
 | Tool | Purpose |
 |------|---------|
 | `PubMed_search_articles` | Published SAR studies |
-| `BioRxiv_search_preprints` | Latest biology preprints |
-| `MedRxiv_search_preprints` | Clinical preprints |
+| `EuropePMC_search_articles` (source='PPR') | Latest preprints (biology/clinical) |
+| `BioRxiv_get_preprint` | Get preprint by DOI |
 | `openalex_search_works` | Citation analysis |
 | `SemanticScholar_search` | AI-ranked papers |
 
@@ -1408,7 +1415,7 @@ Apply to all candidate compounds:
 | `ADMETAI_*` | SwissADME tools | Basic Lipinski | Invalid SMILES |
 | `PDB_search_similar_structures` | `emdb_search` + PDB | `NvidiaNIM_alphafold2` | Membrane proteins |
 | `PubMed_search_articles` | `openalex_search_works` | `SemanticScholar_search` | Literature search |
-| `BioRxiv_search_preprints` | `MedRxiv_search_preprints` | Skip preprints | Preprint sources |
+| `EuropePMC_search_articles` (source='PPR') | `web_search` (site:biorxiv.org) | Skip preprints | Preprint sources |
 
 **NVIDIA NIM API Key Required**: Tools with `NvidiaNIM_` prefix require `NVIDIA_API_KEY` environment variable. Check availability at start:
 ```python

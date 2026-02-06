@@ -540,16 +540,22 @@ papers = tu.tools.PubMed_search_articles(
 
 | Tool | Purpose | Key Parameters |
 |------|---------|----------------|
-| `BioRxiv_search_preprints` | Search BioRxiv | `query`, `limit` |
+| `EuropePMC_search_articles` | Search preprints (bioRxiv/medRxiv) | `query`, `source='PPR'`, `pageSize` |
+| `BioRxiv_get_preprint` | Get preprint by DOI | `doi` |
 | `ArXiv_search_papers` | Search ArXiv | `query`, `category`, `limit` |
 
-**Example - Search preprints**:
+**Example - Search preprints** (bioRxiv/medRxiv don't have search APIs, use EuropePMC):
 ```python
 # Search for recent preprints
-preprints = tu.tools.BioRxiv_search_preprints(
+preprints = tu.tools.EuropePMC_search_articles(
     query="Marfan syndrome genetics",
-    limit=10
+    source="PPR",  # PPR = Preprints only
+    pageSize=10
 )
+
+# Get full metadata if you have a DOI
+if doi_from_results.startswith('10.1101/'):
+    full = tu.tools.BioRxiv_get_preprint(doi=doi_from_results)
 # Returns: Recent preprints (not peer-reviewed)
 ```
 
@@ -734,7 +740,7 @@ def analyze_vus_structure(tu, uniprot_id, variant_position):
 | Primary | Fallback 1 | Fallback 2 |
 |---------|------------|------------|
 | `PubMed_search_articles` | `EuropePMC_search_articles` | `SemanticScholar_search_papers` |
-| `BioRxiv_search_preprints` | `openalex_search_works` | Direct search |
+| `EuropePMC_search_articles` (source='PPR') | `web_search` (site:biorxiv.org) | Skip preprints |
 | `openalex_search_works` | `Crossref_search_works` | PubMed |
 
 ---

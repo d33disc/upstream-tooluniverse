@@ -11,6 +11,7 @@ from ._shared_client import get_shared_client
 def EuropePMC_search_articles(
     query: str,
     limit: Optional[int] = 5,
+    enrich_missing_abstract: Optional[bool] = False,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -25,6 +26,8 @@ def EuropePMC_search_articles(
         Search query for Europe PMC. Use keywords separated by spaces to refine your ...
     limit : int
         Number of articles to return. This sets the maximum number of articles retrie...
+    enrich_missing_abstract : bool
+        If true, best-effort fills missing abstracts by fetching Europe PMC fullTextX...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -41,7 +44,11 @@ def EuropePMC_search_articles(
     return get_shared_client().run_one_function(
         {
             "name": "EuropePMC_search_articles",
-            "arguments": {"query": query, "limit": limit},
+            "arguments": {
+                "query": query,
+                "limit": limit,
+                "enrich_missing_abstract": enrich_missing_abstract,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

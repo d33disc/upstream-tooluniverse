@@ -81,6 +81,12 @@ Every design MUST include:
 | `NvidiaNIM_alphafold2` | High-accuracy validation | Yes |
 | `NvidiaNIM_esm2_650m` | Sequence embeddings | Yes |
 
+### NVIDIA API Key Check (MANDATORY — STOP if missing)
+
+If `NVIDIA_API_KEY` env var is not set, tell the user and **stop**:
+
+> **NVIDIA API Key required.** This workflow depends on RFdiffusion, ProteinMPNN, ESMFold, and AlphaFold2 — no viable fallbacks exist. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`.
+
 ### Parameter Verification
 
 | Tool | WRONG Parameter | CORRECT Parameter |

@@ -241,6 +241,96 @@
     }
   },
   {
+    "name": "OpenTargets_get_evidence_by_datasource",
+    "description": "Get target-disease evidence from Open Targets filtered by configurable data sources. Unlike OpenTargets_target_disease_evidence (intogen-only), this tool accepts any datasourceIds. Valid sources include: ot_genetics_portal, eva, eva_somatic, gene_burden, genomics_england, intogen, cancer_gene_census, chembl, crispr, europepmc, expression_atlas, gene2phenotype, orphanet, uniprot_literature, uniprot_variants, clingen, phewas_catalog, reactome, progeny, slapenrich, sysbio. Returns evidence rows with scores, literature references, and source attribution.",
+    "label": [
+      "Target",
+      "Disease",
+      "Evidence",
+      "Association",
+      "OpenTarget",
+      "GraphQL"
+    ],
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "efoId": {
+          "type": "string",
+          "description": "Disease EFO ID (e.g., 'EFO_0000384' for Crohn's disease)"
+        },
+        "ensemblId": {
+          "type": "string",
+          "description": "Target Ensembl gene ID (e.g., 'ENSG00000141510' for TP53)"
+        },
+        "datasourceIds": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of datasource IDs to filter evidence. Examples: ['chembl', 'europepmc'], ['eva', 'clinvar'], ['intogen', 'cancer_gene_census']. Omit or pass empty array for all sources."
+        },
+        "size": {
+          "type": "integer",
+          "description": "Maximum evidence rows to return (default: 50)",
+          "default": 50
+        }
+      },
+      "required": [
+        "efoId",
+        "ensemblId"
+      ]
+    },
+    "query_schema": "\nquery getEvidenceByDatasource($efoId: String!, $ensemblId: String!, $datasourceIds: [String!], $size: Int) {\n  disease(efoId: $efoId) {\n    id\n    name\n    evidences(datasourceIds: $datasourceIds, ensemblIds: [$ensemblId], size: $size) {\n      count\n      rows {\n        datasourceId\n        datatypeId\n        disease {\n          id\n          name\n        }\n        diseaseFromSource\n        target {\n          id\n          approvedSymbol\n        }\n        score\n        resourceScore\n        literature\n        urls {\n          url\n          niceName\n        }\n      }\n    }\n  }\n}\n",
+    "type": "OpenTarget",
+    "test_examples": [
+      {
+        "efoId": "EFO_0000384",
+        "ensemblId": "ENSG00000141510",
+        "datasourceIds": ["europepmc"],
+        "size": 10
+      },
+      {
+        "efoId": "EFO_0000311",
+        "ensemblId": "ENSG00000157764",
+        "datasourceIds": ["chembl", "intogen"],
+        "size": 20
+      }
+    ],
+    "return_schema": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "disease": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "evidences": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "datasourceId": {"type": "string"},
+                          "datatypeId": {"type": "string"},
+                          "score": {"type": "number"},
+                          "literature": {"type": "array"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
     "name": "OpenTargets_get_drug_warnings_by_chemblId",
     "description": "Retrieve warnings for a specific drug using ChEMBL ID.",
     "parameter": {

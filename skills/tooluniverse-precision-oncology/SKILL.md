@@ -37,6 +37,12 @@ Apply when user asks:
 | `OpenTargets_*` | `ensemblID` | `ensemblId` (camelCase) |
 | `search_clinical_trials` | `disease` | `condition` |
 
+### NVIDIA API Key Check
+
+If `NVIDIA_API_KEY` env var is not set, tell the user:
+
+> **NVIDIA API Key not configured.** Structural resistance analysis (Phase 4) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Resistance analysis will use database evidence only.
+
 ---
 
 ## Workflow Overview
@@ -921,16 +927,18 @@ def search_treatment_literature(tu, cancer_type, biomarker, drug_name):
 def search_preprints(tu, cancer_type, biomarker):
     """Search preprints for cutting-edge findings."""
     
-    # BioRxiv cancer research
-    biorxiv = tu.tools.BioRxiv_search_preprints(
+    # EuropePMC preprints (bioRxiv/medRxiv indexed here)
+    preprints = tu.tools.EuropePMC_search_articles(
         query=f"{cancer_type} {biomarker} treatment",
-        limit=10
+        source="PPR",  # PPR = Preprints only
+        pageSize=10
     )
     
-    # MedRxiv clinical studies
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{cancer_type} {biomarker}",
-        limit=10
+    # MedRxiv clinical studies via EuropePMC
+    clinical_preprints = tu.tools.EuropePMC_search_articles(
+        query=f"{cancer_type} {biomarker} clinical",
+        source="PPR",
+        pageSize=10
     )
     
     return {

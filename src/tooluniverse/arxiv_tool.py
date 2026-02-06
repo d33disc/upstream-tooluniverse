@@ -1,7 +1,9 @@
 import requests
 import xml.etree.ElementTree as ET
+import time
 from .base_tool import BaseTool
 from .tool_registry import register_tool
+from .http_utils import request_with_retry
 
 
 @register_tool("ArXivTool")
@@ -17,6 +19,13 @@ class ArXivTool(BaseTool):
     ):
         super().__init__(tool_config)
         self.base_url = base_url
+        self.session = requests.Session()
+        self.session.headers.update(
+            {
+                "User-Agent": "ToolUniverse/1.0 (arxiv client; contact: support@tooluniverse.ai)"
+            }
+        )
+        self._last_request_time = 0.0
 
     def run(self, arguments):
         query = arguments.get("query")
@@ -41,7 +50,16 @@ class ArXivTool(BaseTool):
         }
 
         try:
-            response = requests.get(self.base_url, params=params, timeout=20)
+            self._respect_rate_limit()
+            response = request_with_retry(
+                self.session,
+                "GET",
+                self.base_url,
+                params=params,
+                timeout=20,
+                max_attempts=5,
+                backoff_seconds=1.0,
+            )
         except requests.RequestException as e:
             return {
                 "error": "Network error calling arXiv API",
@@ -107,3 +125,11 @@ class ArXivTool(BaseTool):
             )
 
         return entries
+
+    def _respect_rate_limit(self):
+        """arXiv asks clients to avoid rapid-fire requests; keep a 3s gap."""
+        now = time.time()
+        elapsed = now - self._last_request_time
+        if elapsed < 3.0:
+            time.sleep(3.0 - elapsed)
+        self._last_request_time = time.time()
