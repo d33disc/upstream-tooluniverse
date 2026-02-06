@@ -178,7 +178,7 @@ def test_basic_import():
     
     try:
         from tooluniverse import ToolUniverse
-        tu = ToolUniverse()
+        _tu = ToolUniverse()
         print("   ✓ Import successful")
         return True
     except ImportError as e:

@@ -99,7 +99,7 @@ def check_python_environment(report):
     try:
         import site
         report.add_line(f"Site packages: {site.getsitepackages()}")
-    except:
+    except Exception:
         report.add_warning("Could not determine site-packages location")
 
 
@@ -262,7 +262,7 @@ def check_common_issues(report):
             report.add_line("Ensure you're using the correct one")
         else:
             report.add_success(f"Single Python installation: {python_installs[0]}")
-    except:
+    except Exception:
         pass  # Windows or other systems
     
     # Issue 3: Disk space
@@ -273,7 +273,7 @@ def check_common_issues(report):
             report.add_warning(f"Low disk space: {free_gb:.2f} GB free")
         else:
             report.add_success(f"Disk space: {free_gb:.2f} GB free")
-    except:
+    except Exception:
         pass
 
 
