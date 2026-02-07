@@ -12,9 +12,11 @@
 
 [//]: # (mcp-name: io.github.mims-harvard/tooluniverse)
 
+## INSTALL ToolUniverse
 
-
-**Democratizing AI scientists using ToolUniverse**
+<table>
+<tr>
+<td width="50%" valign="top">
 
 **1️⃣ MCP Setup** – Add to your MCP config:
 ```json
@@ -29,15 +31,23 @@
 }
 ```
 
-**2️⃣ Install Skills** – For Claude Code, Cursor, Codex CLI:
-```bash
-npx skills add mims-harvard/ToolUniverse
-```
+</td>
+<td width="50%" valign="top">
 
-**3️⃣ Python Package** (Optional) – For full functions and Python access:
-```bash
-uv pip install tooluniverse
-```
+**2️⃣ Install Agent Skills**
+
+`npx skills add mims-harvard/ToolUniverse`
+
+**3️⃣ Install Package** (Optional)
+
+`uv pip install tooluniverse`
+
+</td>
+</tr>
+</table>
+
+----
+
 
 We are currently looking for partners. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
 
