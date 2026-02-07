@@ -22,11 +22,10 @@
         },
         "extract_terms_from_fulltext": {
           "type": "array",
-          "description": "Optional list of terms to extract from full text (open access only). When provided, automatically fetches fullTextXML for open-access articles and returns snippets around these terms. Max 5 terms, bounded to first 3 OA articles to avoid latency. Returns snippets in a 'fulltext_snippets' field for each article.",
+          "description": "Optional list of terms to extract from full text (open access only). When provided, automatically fetches fullTextXML for open-access articles and returns snippets around these terms. Terms are processed in batches of 5 internally, so any number of terms is accepted. Bounded to first 3 OA articles to avoid latency. Returns snippets in a 'fulltext_snippets' field for each article.",
           "items": {
             "type": "string"
-          },
-          "maxItems": 5
+          }
         }
       },
       "required": [

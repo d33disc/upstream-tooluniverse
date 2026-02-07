@@ -326,14 +326,21 @@ class EuropePMCTool(BaseTool):
         if extract_terms_from_fulltext and isinstance(
             extract_terms_from_fulltext, list
         ):
-            # Filter valid terms (max 5)
-            valid_terms = [
+            # Filter valid terms -- accept any number, process in batches of 5
+            all_valid_terms = [
                 t.strip()
                 for t in extract_terms_from_fulltext
                 if isinstance(t, str) and t.strip()
-            ][:5]
+            ]
 
-            if valid_terms:
+            if all_valid_terms:
+                # Chunk terms into batches of 5 to stay within safe limits
+                batch_size = 5
+                term_batches = [
+                    all_valid_terms[i : i + batch_size]
+                    for i in range(0, len(all_valid_terms), batch_size)
+                ]
+
                 # Process up to 3 OA articles to avoid latency
                 max_snippet_articles = 3
                 processed = 0
@@ -369,7 +376,7 @@ class EuropePMCTool(BaseTool):
                         except ET.ParseError:
                             continue
 
-                        # Extract snippets around terms
+                        # Extract snippets around terms, processing all batches
                         snippets = []
                         total_chars = 0
                         max_total_chars = 8000
@@ -377,20 +384,24 @@ class EuropePMCTool(BaseTool):
                         max_snippets_per_term = 3
                         low = text.lower()
 
-                        for term in valid_terms:
-                            needle = term.lower()
-                            found = 0
-                            for m in re.finditer(re.escape(needle), low):
-                                if found >= max_snippets_per_term:
-                                    break
-                                start = max(0, m.start() - window_chars)
-                                end = min(len(text), m.end() + window_chars)
-                                snippet = text[start:end].strip()
-                                if total_chars + len(snippet) > max_total_chars:
-                                    break
-                                snippets.append({"term": term, "snippet": snippet})
-                                total_chars += len(snippet)
-                                found += 1
+                        for batch in term_batches:
+                            for term in batch:
+                                needle = term.lower()
+                                found = 0
+                                for m in re.finditer(re.escape(needle), low):
+                                    if found >= max_snippets_per_term:
+                                        break
+                                    start = max(0, m.start() - window_chars)
+                                    end = min(len(text), m.end() + window_chars)
+                                    snippet = text[start:end].strip()
+                                    if total_chars + len(snippet) > max_total_chars:
+                                        break
+                                    snippets.append({"term": term, "snippet": snippet})
+                                    total_chars += len(snippet)
+                                    found += 1
+                            # Stop processing more batches if char budget exhausted
+                            if total_chars >= max_total_chars:
+                                break
 
                         if snippets:
                             a["fulltext_snippets"] = snippets

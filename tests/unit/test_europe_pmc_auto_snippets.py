@@ -279,6 +279,87 @@ def test_europe_pmc_auto_snippets_no_terms(monkeypatch):
 
 
 @pytest.mark.unit
+def test_europe_pmc_auto_snippets_more_than_5_terms(monkeypatch):
+    """Test that >5 terms are auto-chunked in batches of 5, not rejected or truncated."""
+    tool = EuropePMCTool({"name": "EuropePMC_search_articles"})
+
+    search_json = {
+        "resultList": {
+            "result": [
+                {
+                    "id": "12345",
+                    "source": "MED",
+                    "pmid": "12345",
+                    "pmcid": "PMC12345",
+                    "title": "Multi-drug resistance study",
+                    "abstractText": "We studied multiple antibiotics.",
+                    "authorList": {"author": [{"fullName": "Smith J"}]},
+                    "pubYear": "2023",
+                    "doi": "10.1234/test",
+                    "isOpenAccess": "Y",
+                    "citedByCount": 10,
+                }
+            ]
+        }
+    }
+
+    fulltext_xml = """<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <body>
+    <sec>
+      <title>Methods</title>
+      <p>We tested ciprofloxacin, meropenem, amoxicillin, tetracycline, and
+      erythromycin. We also evaluated gentamicin, rifampicin, and vancomycin
+      for synergistic effects.</p>
+    </sec>
+  </body>
+</article>
+"""
+
+    def mock_request(session, method, url, **kwargs):
+        if "search" in url:
+            return _FakeResponse(status_code=200, json_data=search_json, url=url)
+        elif "fullTextXML" in url:
+            return _FakeResponse(status_code=200, text=fulltext_xml, url=url)
+        return _FakeResponse(status_code=404, url=url)
+
+    monkeypatch.setattr("tooluniverse.europe_pmc_tool.request_with_retry", mock_request)
+
+    # Pass 8 terms -- more than the old max of 5
+    eight_terms = [
+        "ciprofloxacin",
+        "meropenem",
+        "amoxicillin",
+        "tetracycline",
+        "erythromycin",
+        "gentamicin",
+        "rifampicin",
+        "vancomycin",
+    ]
+    results = tool.run(
+        {
+            "query": "multi-drug resistance",
+            "limit": 5,
+            "extract_terms_from_fulltext": eight_terms,
+        }
+    )
+
+    assert isinstance(results, list)
+    assert len(results) == 1
+
+    article = results[0]
+    assert "fulltext_snippets" in article
+    assert article["fulltext_snippets_count"] > 0
+
+    # Verify terms from BOTH batches (batch 1: first 5, batch 2: last 3) are found
+    terms_found = {s["term"] for s in article["fulltext_snippets"]}
+    # At minimum, terms from the second batch (beyond index 5) must appear
+    assert "gentamicin" in terms_found, "Term from 2nd batch was not extracted"
+    assert "rifampicin" in terms_found, "Term from 2nd batch was not extracted"
+    assert "vancomycin" in terms_found, "Term from 2nd batch was not extracted"
+
+
+@pytest.mark.unit
 def test_europe_pmc_auto_snippets_empty_terms(monkeypatch):
     """Test handling of empty/invalid terms list."""
     tool = EuropePMCTool({"name": "EuropePMC_search_articles"})
