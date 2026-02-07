@@ -16,12 +16,27 @@
 
 **Democratizing AI scientists using ToolUniverse**
 
-📦 **Install Package** &nbsp;|&nbsp; 🛠️ **Install Skills** (Claude Code, Cursor, Codex CLI)
-```bash
-uv pip install tooluniverse
+**1️⃣ MCP Setup** – Add to your MCP config:
+```json
+{
+  "mcpServers": {
+    "tooluniverse": {
+      "command": "uvx",
+      "args": ["tooluniverse"],
+      "env": {"PYTHONIOENCODING": "utf-8"}
+    }
+  }
+}
 ```
+
+**2️⃣ Install Skills** – For Claude Code, Cursor, Codex CLI:
 ```bash
 npx skills add mims-harvard/ToolUniverse
+```
+
+**3️⃣ Python Package** (Optional) – For full functions and Python access:
+```bash
+uv pip install tooluniverse
 ```
 
 We are currently looking for partners. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
@@ -84,6 +99,30 @@ ToolUniverse addresses this challenge by providing a standardized ecosystem that
 
 
 ## 🚀 Quick Start
+
+### Fast MCP Setup (Recommended)
+
+For instant access via MCP (Model Context Protocol), add this to your MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "tooluniverse": {
+      "command": "uvx",
+      "args": [
+        "tooluniverse"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}
+```
+
+This enables immediate tool access without manual installation. `uvx` automatically handles dependencies.
+
+### Python SDK Usage
 
 ```python
 # 1. Install ToolUniverse
