@@ -232,7 +232,7 @@ def test_arxiv_pdf_snippets_with_prefix():
         tool.md_converter = _FakeMarkItDown("test content")
         arxiv_module.MARKITDOWN_AVAILABLE = True
 
-        result = tool.run({"arxiv_id": "arXiv:2301.12345v1", "terms": ["test"]})
+        tool.run({"arxiv_id": "arXiv:2301.12345v1", "terms": ["test"]})
 
         # Verify URL built correctly (strips prefix and version)
         assert len(captured_url) > 0
@@ -310,8 +310,8 @@ def test_pdf_snippets_window_size_limits():
     """Test that window_chars parameter is properly bounded."""
     tool = ArXivPDFSnippetsTool({"name": "ArXiv_get_pdf_snippets"})
 
-    # Test with extreme values
-    result = tool.run(
+    # Test with extreme values - too small
+    tool.run(
         {
             "arxiv_id": "2301.12345",
             "terms": ["test"],
@@ -320,7 +320,8 @@ def test_pdf_snippets_window_size_limits():
     )
     # Should be clamped to minimum (20)
 
-    result = tool.run(
+    # Test with extreme values - too large
+    tool.run(
         {
             "arxiv_id": "2301.12345",
             "terms": ["test"],
