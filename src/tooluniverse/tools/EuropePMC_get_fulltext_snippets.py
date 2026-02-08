@@ -9,11 +9,12 @@ from ._shared_client import get_shared_client
 
 
 def EuropePMC_get_fulltext_snippets(
-    terms: list[str],
     fulltext_xml_url: Optional[str] = None,
     pmcid: Optional[str] = None,
     source_db: Optional[str] = None,
     article_id: Optional[str] = None,
+    terms: Optional[list[str]] = None,
+    keywords: Optional[list[str]] = None,
     window_chars: Optional[int] = 220,
     max_snippets_per_term: Optional[int] = 3,
     max_total_chars: Optional[int] = 8000,
@@ -37,6 +38,8 @@ def EuropePMC_get_fulltext_snippets(
         Europe PMC article ID within `source_db` (e.g., PMID for source_db='MED').
     terms : list[str]
         Terms to search for in the extracted full text (case-insensitive).
+    keywords : list[str]
+        Alias for `terms` (case-insensitive). Provided for backwards/UX compatibility.
     window_chars : int
         Context window size (characters) before and after each match.
     max_snippets_per_term : int
@@ -65,6 +68,7 @@ def EuropePMC_get_fulltext_snippets(
                 "source_db": source_db,
                 "article_id": article_id,
                 "terms": terms,
+                "keywords": keywords,
                 "window_chars": window_chars,
                 "max_snippets_per_term": max_snippets_per_term,
                 "max_total_chars": max_total_chars,

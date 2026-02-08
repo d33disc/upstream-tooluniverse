@@ -192,6 +192,34 @@ When querying multiple databases:
 3. **Handle conflicts** - Document when sources disagree
 4. **Prefer curated** - Weight RefSeq over GenBank, UniProt over predictions
 
+## Strategy 3.1: Abstract Search vs Full-Text Search (Literature)
+
+**CRITICAL**: Many biomedical “needle” terms (rsIDs reagent catalog numbers, supplementary-table IDs) never appear in titles/abstracts. If you only search abstracts, you will miss papers even when they are open access.
+
+### Quick rule
+
+- If your keywords look like **body-only terms** (rsIDs, figure/table references, “Supplementary Table”), use **full-text-aware** tools first.
+
+### Tools that can match full text (indexed or retrieved)
+
+| Goal | Tools | Notes |
+|------|-------|------|
+| **Indexed full-text search (biomed OA)** | `PMC_search_papers` | NCBI “pmc” database indexes full text; good for rsIDs. |
+| **Indexed full-text search (Europe PMC subset)** | `EuropePMC_search_articles` with `require_has_ft=true` + `fulltext_terms=[...]` | Uses Europe PMC `HAS_FT:Y` + `BODY:\"...\"` fielded queries; works only when Europe PMC has indexed full text. |
+| **Best-effort full-text retrieval + keyword snippets** | `EuropePMC_get_fulltext_snippets` | Fetches full text (XML → HTML fallbacks) and returns bounded snippets with `retrieval_trace`. |
+| **OA aggregation + (sometimes) full-text search** | `CORE_search_papers` | Coverage varies; a paper may not exist in CORE even if OA elsewhere. |
+| **Download-and-scan fallback** | `CORE_get_fulltext_snippets` | Local PDF scan for body-only terms when index-based search misses; can fail if the “PDF” URL returns HTML/403 (check trace/content-type). |
+| **Partial full-text indexing (not guaranteed)** | `openalex_search_works` / `openalex_literature_search` with `require_has_fulltext` / `fulltext_terms` | Only matches works where OpenAlex has indexed full text; can miss PMC-hosted full text. Use as a secondary signal. |
+
+### Recommended flow for body-only keywords
+
+1. Try `PMC_search_papers` and `EuropePMC_search_articles` (with `require_has_ft` + `fulltext_terms`).
+2. If you have a PMCID/PMID, use `EuropePMC_get_fulltext_snippets` to **confirm the term is in the paper**.
+3. If you only have a PDF URL, use `CORE_get_fulltext_snippets` as a last resort, and treat HTTP `200` as “request succeeded”, not “PDF succeeded” (validate `content_type`).
+
+---
+
+
 ---
 
 ## Strategy 4: Disambiguation First

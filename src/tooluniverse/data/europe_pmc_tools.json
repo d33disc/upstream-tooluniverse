@@ -2,18 +2,28 @@
   {
     "type": "EuropePMCTool",
     "name": "EuropePMC_search_articles",
-    "description": "Search for articles on Europe PMC including abstracts. The tool queries the Europe PMC web service using provided keywords and returns articles with details such as title, abstract, journal, publication year, and a URL to the full article.",
+    "description": "Search for articles on Europe PMC including abstracts and metadata. Europe PMC supports fielded queries for indexed full text (e.g., BODY:\"term\") but only for records where Europe PMC has full text indexed (HAS_FT:Y). Use require_has_ft/fulltext_terms to avoid confusing 'has a full-text link somewhere' with 'full text searchable in Europe PMC'.",
     "parameter": {
       "type": "object",
       "properties": {
         "query": {
           "type": "string",
-          "description": "Search query for Europe PMC. Use keywords separated by spaces to refine your search."
+          "description": "Search query for Europe PMC. Supports Lucene-like fielded syntax (e.g., BODY:\"term\", INTRO:\"term\", METHODS:\"term\")."
         },
         "limit": {
           "type": "integer",
           "description": "Number of articles to return. This sets the maximum number of articles retrieved from Europe PMC.",
           "default": 5
+        },
+        "require_has_ft": {
+          "type": "boolean",
+          "description": "If true, appends `HAS_FT:Y` to the query to restrict results to records where Europe PMC has full text indexed. This is NOT the same as having a link to free full text elsewhere (e.g., PMC) and is often the key reason body-only keywords cannot be found via Europe PMC search.",
+          "default": false
+        },
+        "fulltext_terms": {
+          "type": "array",
+          "description": "Optional list of terms that must occur in the indexed full text (Europe PMC BODY field). When provided, the tool adds a BODY:\"...\" clause and automatically enables `require_has_ft`.",
+          "items": { "type": "string" }
         },
         "enrich_missing_abstract": {
           "type": "boolean",
@@ -658,6 +668,11 @@
             "type": "string"
           }
         },
+        "keywords": {
+          "type": "array",
+          "description": "Alias for `terms` (case-insensitive). Provided for backwards/UX compatibility.",
+          "items": { "type": "string" }
+        },
         "window_chars": {
           "type": "integer",
           "description": "Context window size (characters) before and after each match.",
@@ -680,8 +695,9 @@
           "maximum": 50000
         }
       },
-      "required": [
-        "terms"
+      "anyOf": [
+        { "required": ["terms"] },
+        { "required": ["keywords"] }
       ]
     },
     "return_schema": {

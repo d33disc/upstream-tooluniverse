@@ -2,18 +2,28 @@
   {
     "type": "OpenAlexTool",
     "name": "openalex_literature_search",
-    "description": "Search for academic literature using OpenAlex API. Retrieves papers with title, abstract, authors, publication year, and organizational affiliations based on search keywords.",
+    "description": "Search for academic literature using OpenAlex. Supports optional full-text-index filtering (has_fulltext + fulltext.search) when you need body-only term discovery, but note: OpenAlex full-text indexing is incomplete, and a work can be open-access elsewhere (e.g., PMC) while still having has_fulltext=false in OpenAlex. Returns paper metadata and (when available) OA links/content URLs.",
     "parameter": {
       "type": "object",
       "properties": {
         "search_keywords": {
           "type": "string",
-          "description": "Keywords to search for in paper titles, abstracts, and content. Use relevant scientific terms or phrases."
+          "description": "Keywords to search for in paper titles/abstracts/etc. For full-text-index-only matching, also use require_has_fulltext/fulltext_terms."
+        },
+        "query": {
+          "type": "string",
+          "description": "Alias for `search_keywords` (recommended when you standardize on `query` across multiple paper-search tools)."
         },
         "max_results": {
           "type": "integer",
           "description": "Maximum number of papers to retrieve (default: 10, maximum: 200).",
           "default": 10,
+          "minimum": 1,
+          "maximum": 200
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Alias for `max_results` (OpenAlex max 200).",
           "minimum": 1,
           "maximum": 200
         },
@@ -28,10 +38,21 @@
         "open_access": {
           "type": "boolean",
           "description": "Filter for open access papers only. Set to true for open access papers, false for non-open access, or omit for all papers."
+        },
+        "require_has_fulltext": {
+          "type": "boolean",
+          "description": "If true, filters to works where OpenAlex indicates a full-text index is available (has_fulltext:true).",
+          "default": false
+        },
+        "fulltext_terms": {
+          "type": "array",
+          "description": "Optional list of terms that must occur in OpenAlex full-text index (adds fulltext.search:<term> filters and implicitly enables require_has_fulltext).",
+          "items": { "type": "string" }
         }
       },
-      "required": [
-        "search_keywords"
+      "anyOf": [
+        {"required": ["search_keywords"]},
+        {"required": ["query"]}
       ]
     },
     "return_schema": {
@@ -165,22 +186,42 @@
   {
     "type": "OpenAlexRESTTool",
     "name": "openalex_search_works",
-    "description": "Search OpenAlex works (papers) via the /works endpoint. Use this to discover OpenAlex Work IDs (W...) and DOIs, then follow up with openalex_get_work or openalex_get_work_by_doi. For advanced filtering, pass a filter string like \"from_publication_date:2020-01-01,is_oa:true\".",
+    "description": "Search OpenAlex works (papers) via the /works endpoint. Supports both general search and optional full-text-index filtering: set require_has_fulltext=true and/or pass fulltext_terms to add OpenAlex filters (has_fulltext:true and fulltext.search:<term>). Important: has_fulltext/fulltext.search only match works where OpenAlex has indexed full text; this can miss papers whose full text is available elsewhere (e.g., PMC) but not indexed by OpenAlex. Use this to discover Work IDs (W...) and DOIs, then follow up with openalex_get_work/openalex_get_work_by_doi to retrieve OA links and (sometimes) content_urls.",
     "parameter": {
       "type": "object",
       "properties": {
         "search": {
           "type": "string",
-          "description": "Full-text search query for works (title/abstract/etc.). Example: \"attention is all you need\"."
+          "description": "Search query for works. Use filter + fulltext_terms/require_has_fulltext when you need full-text-index-only matching."
+        },
+        "query": {
+          "type": "string",
+          "description": "Alias for `search` (recommended when you standardize on `query` across multiple paper-search tools)."
         },
         "filter": {
           "type": "string",
           "description": "OpenAlex filter string (comma-separated). Example: \"from_publication_date:2020-01-01,is_oa:true\"."
         },
+        "require_has_fulltext": {
+          "type": "boolean",
+          "description": "If true, appends OpenAlex filter has_fulltext:true (keeps only works with full-text index available).",
+          "default": false
+        },
+        "fulltext_terms": {
+          "type": "array",
+          "description": "Optional list of terms to match in OpenAlex full-text index. Adds one or more fulltext.search:<term> filters and implicitly enables require_has_fulltext.",
+          "items": { "type": "string" }
+        },
         "per_page": {
           "type": "integer",
           "description": "Results per page (OpenAlex max 200).",
           "default": 10,
+          "minimum": 1,
+          "maximum": 200
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Alias for `per_page` (OpenAlex max 200).",
           "minimum": 1,
           "maximum": 200
         },
@@ -199,13 +240,16 @@
           "description": "Optional contact email for OpenAlex polite pool. If omitted, ToolUniverse uses a default."
         }
       },
-      "required": ["search"]
+      "anyOf": [
+        {"required": ["search"]},
+        {"required": ["query"]}
+      ]
     },
     "fields": {
       "path": "/works",
       "path_params": [],
       "param_map": {"per_page": "per-page"},
-      "default_params": {"sort": "cited_by_count:desc"}
+      "default_params": {}
     },
     "return_schema": {
       "type": ["object", "null"],

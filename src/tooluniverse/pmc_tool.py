@@ -390,7 +390,10 @@ class PMCTool(BaseTool):
                 }
             ]
 
-        limit = tool_arguments.get("limit", 10)
+        # Accept common aliases for NCBI-style tools.
+        limit = tool_arguments.get("limit")
+        if limit is None:
+            limit = tool_arguments.get("retmax", 10)
         date_from = tool_arguments.get("date_from")
         date_to = tool_arguments.get("date_to")
         article_type = tool_arguments.get("article_type")
