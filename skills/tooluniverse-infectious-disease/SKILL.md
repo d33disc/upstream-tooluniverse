@@ -14,6 +14,7 @@ Rapid response system for emerging pathogens using taxonomy analysis, target ide
 4. **Structure-guided** - Use NvidiaNIM for rapid structure prediction and docking
 5. **Evidence-graded** - Grade repurposing candidates by evidence strength
 6. **Actionable output** - Prioritized drug candidates with rationale
+7. **English-first queries** - Always use English terms in tool calls (pathogen names, protein names, drug names), even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -59,12 +60,6 @@ Apply when user asks:
 ---
 
 ## Phase 0: Tool Verification
-
-### NVIDIA API Key Check
-
-If `NVIDIA_API_KEY` env var is not set, tell the user:
-
-> **NVIDIA API Key not configured.** Structure prediction and drug docking (`NvidiaNIM_*` tools) require it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB; docking phases will be skipped.
 
 ### Known Parameter Corrections
 
@@ -519,19 +514,16 @@ def comprehensive_outbreak_literature(tu, pathogen_name):
         sort="date"
     )
     
-    # EuropePMC: CRITICAL for outbreaks - newest preprint findings
-    # Note: BioRxiv API doesn't support search. Use EuropePMC with source='PPR' for preprints
-    preprints = tu.tools.EuropePMC_search_articles(
+    # BioRxiv: CRITICAL for outbreaks - newest findings
+    biorxiv = tu.tools.BioRxiv_search_preprints(
         query=f"{pathogen_name} treatment mechanism",
-        source="PPR",  # Preprints only (includes bioRxiv, medRxiv, etc.)
-        pageSize=20
+        limit=20
     )
     
-    # MedRxiv: Clinical preprints via EuropePMC
-    clinical_preprints = tu.tools.EuropePMC_search_articles(
+    # MedRxiv: Clinical preprints
+    medrxiv = tu.tools.MedRxiv_search_preprints(
         query=f"{pathogen_name} clinical trial",
-        source="PPR",
-        pageSize=20
+        limit=20
     )
     
     # ArXiv: Computational/ML papers

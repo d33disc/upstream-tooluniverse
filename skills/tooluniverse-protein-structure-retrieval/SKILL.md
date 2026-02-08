@@ -7,6 +7,8 @@ description: Retrieves protein structure data from RCSB PDB, PDBe, and AlphaFold
 
 Retrieve protein structures with proper disambiguation, quality assessment, and comprehensive metadata.
 
+**IMPORTANT**: Always use English terms in tool calls (protein names, organism names), even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+
 ## Workflow Overview
 
 ```
@@ -297,53 +299,36 @@ Retrieved: [date]
 
 ---
 
-## Quality Assessment Tiers (Aligned with Evidence Grading)
+## Quality Assessment Tiers
 
 ### Experimental Structures
-| Tier | Symbol | Criteria | Evidence Equivalent |
-|------|--------|----------|---------------------|
-| Excellent | ●●●● | X-ray <1.5Å, complete, R-free <0.22 | ★★★ |
-| High | ●●●○ | X-ray <2.0Å OR Cryo-EM <3.0Å | ★★★ |
-| Good | ●●○○ | X-ray 2.0-3.0Å OR Cryo-EM 3.0-4.0Å | ★★☆ |
-| Moderate | ●○○○ | X-ray >3.0Å OR NMR ensemble | ★★☆ |
-| Low | ○○○○ | >4.0Å, incomplete, or problematic | ★☆☆ |
 
-### Resolution Guide & Evidence Implications
+| Tier | Symbol | Criteria |
+|------|--------|----------|
+| Excellent | ●●●● | X-ray <1.5Å, complete, R-free <0.22 |
+| High | ●●●○ | X-ray <2.0Å OR Cryo-EM <3.0Å |
+| Good | ●●○○ | X-ray 2.0-3.0Å OR Cryo-EM 3.0-4.0Å |
+| Moderate | ●○○○ | X-ray >3.0Å OR NMR ensemble |
+| Low | ○○○○ | >4.0Å, incomplete, or problematic |
 
-| Resolution | Use Case | Reliability |
-|------------|----------|-------------|
-| <1.5 Å | Atomic detail, H-bond analysis | ★★★ atomic positions precise |
-| 1.5-2.0 Å | Drug design, mechanism studies | ★★★ side chains reliable |
-| 2.0-2.5 Å | Structure-based design | ★★☆ backbone reliable, some side chain ambiguity |
-| 2.5-3.5 Å | Overall architecture, fold | ★★☆ for fold, ★☆☆ for details |
-| >3.5 Å | Domain arrangement only | ★☆☆ interpret with caution |
+### Resolution Guide
 
-### AlphaFold Confidence & Evidence Tiers
+| Resolution | Use Case |
+|------------|----------|
+| <1.5 Å | Atomic detail, H-bond analysis |
+| 1.5-2.0 Å | Drug design, mechanism studies |
+| 2.0-2.5 Å | Structure-based design |
+| 2.5-3.5 Å | Overall architecture, fold |
+| >3.5 Å | Domain arrangement only |
 
-| pLDDT Score | Interpretation | Evidence Equivalent |
-|-------------|----------------|---------------------|
-| >90 | Very high confidence, experimental-like | ★★☆ (validated models) |
-| 70-90 | Good backbone confidence | ★★☆ for fold, ★☆☆ for details |
-| 50-70 | Uncertain, flexible regions | ★☆☆ use for domain boundaries only |
-| <50 | Low confidence, likely disordered | ☆☆☆ not suitable for structural analysis |
+### AlphaFold Confidence
 
-### When to Use Which Source
-```markdown
-**For Drug Discovery Applications**:
-- Binding site analysis: Require ★★★ (X-ray <2.5Å with ligand)
-- Virtual screening: Accept ★★☆ (X-ray <3.0Å or good AlphaFold)
-- Homology modeling: AlphaFold ★★☆ acceptable as template
-
-**For Mechanism Studies**:
-- Active site geometry: ★★★ required (high-resolution X-ray)
-- Domain architecture: ★★☆ sufficient (AlphaFold acceptable)
-- Disordered regions: AlphaFold pLDDT <50 = likely real disorder
-
-**Citing Structures in Research Reports**:
-EGFR kinase domain structure [★★★: PDB 1M17, 2.6Å X-ray with erlotinib] 
-shows the DFG-out conformation. AlphaFold prediction [★★☆: AF-P00533-F1, 
-pLDDT 92] covers disordered regions not captured crystallographically.
-```
+| pLDDT Score | Interpretation |
+|-------------|----------------|
+| >90 | Very high confidence, experimental-like |
+| 70-90 | Good backbone confidence |
+| 50-70 | Uncertain, flexible regions |
+| <50 | Low confidence, likely disordered |
 
 ---
 

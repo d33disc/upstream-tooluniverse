@@ -16,6 +16,7 @@ Master strategies for using ToolUniverse's 10000+ scientific tools effectively. 
 3. **Multi-hop persistence** - Many answers require 3-5 tool calls in sequence
 4. **Never give up easily** - If one tool fails, try alternatives
 5. **Comprehensive reports** - Use all available data; detail is valuable
+6. **English-first queries** - Always use English terms in tool calls, even if the user writes in another language
 
 ---
 
@@ -386,7 +387,7 @@ No pathogen interactions identified in literature or databases.
 | Variant interpretation | `tooluniverse-variant-interpretation` |
 | **Discovery & Design** | |
 | Small molecule binder discovery | `tooluniverse-binder-discovery` |
-| Drug repurposing | `tooluniverse-drug-repurposing` |
+| Drug repurposing | `drug-repurposing` |
 | Protein therapeutic design | `tooluniverse-protein-therapeutic-design` |
 | **Outbreak Response** | |
 | Infectious disease analysis | `tooluniverse-infectious-disease` |
@@ -557,6 +558,44 @@ ClinicalTrials.gov, FAERS, PharmGKB, DailyMed tools
 
 ---
 
+## Strategy 10: English-First Tool Queries
+
+**CRITICAL**: Most ToolUniverse tools only accept English terms. Always translate queries to English before calling tools, regardless of the user's language.
+
+### Language Handling Rules
+
+1. **Default to English** - All tool calls must use English search terms, entity names, and parameters
+2. **Translate non-English input** - If the user's question is in Chinese, Japanese, Korean, or any other language, translate the relevant scientific terms to English before making tool calls
+3. **Respond in the user's language** - While tools must be queried in English, deliver the final report/answer in the user's original language
+4. **Fallback to original language** - Only if an English search returns no results, retry with the original-language terms
+5. **Check tool descriptions** - A few tools may explicitly document multi-language support; use the original language only when the tool description says so
+
+### Examples
+
+```
+User (Chinese): "研究EGFR靶点"
+  → Tool calls: use "EGFR", "epidermal growth factor receptor" (English)
+  → Report: deliver in Chinese
+
+User (Japanese): "メトホルミンの安全性プロファイル"
+  → Tool calls: use "metformin", "safety profile" (English)
+  → Report: deliver in Japanese
+
+User (Korean): "알츠하이머병 관련 유전자"
+  → Tool calls: use "Alzheimer's disease", "associated genes" (English)
+  → Report: deliver in Korean
+```
+
+### Why This Matters
+
+| Scenario | Wrong Approach | Correct Approach |
+|----------|---------------|-----------------|
+| User asks in Chinese about "二甲双胍" | Pass "二甲双胍" to PubChem search | Translate to "metformin", search in English |
+| User asks in Japanese about a disease | Pass Japanese disease name to OpenTargets | Translate to English disease name first |
+| User asks in Spanish about a gene | Pass Spanish description to tool | Use standard gene symbol (e.g., TP53) |
+
+---
+
 ## Summary: The ToolUniverse Mindset
 
 | Principle | Action |
@@ -571,5 +610,6 @@ ClinicalTrials.gov, FAERS, PharmGKB, DailyMed tools
 | **Use specialized skills** | Apply domain-specific skills for focused tasks |
 | **Execute in parallel** | Speed through concurrent execution |
 | **Check completeness** | Ask "what's missing?" and fill gaps iteratively |
+| **English-first queries** | Translate to English for tool calls; respond in user's language |
 
 **The goal: Transform 10000+ tools into comprehensive, reliable scientific intelligence.**

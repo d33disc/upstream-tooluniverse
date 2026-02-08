@@ -7,6 +7,8 @@ description: Retrieves biological sequences (DNA, RNA, protein) from NCBI and EN
 
 Retrieve DNA, RNA, and protein sequences with proper disambiguation and cross-database handling.
 
+**IMPORTANT**: Always use English terms in tool calls (gene names, organism names, sequence descriptions), even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+
 ## Workflow Overview
 
 ```
@@ -285,38 +287,22 @@ Database: NCBI Nucleotide
 
 ---
 
-## Curation Level Tiers (Aligned with Evidence Grading)
+## Curation Level Tiers
 
-### Sequence Curation Levels
-| Tier | Symbol | Accession Prefix | Description | Evidence Equivalent |
-|------|--------|------------------|-------------|---------------------|
-| RefSeq Reference | ●●●● | NC_, NM_, NP_ | NCBI-curated, gold standard | ★★★ |
-| RefSeq Predicted | ●●●○ | XM_, XP_, XR_ | Computationally predicted | ★★☆ |
-| GenBank Validated | ●●○○ | Various | Submitted, some curation | ★★☆ |
-| GenBank Direct | ●○○○ | Various | Direct submission | ★☆☆ |
-| Third Party | ○○○○ | TPA_ | Third-party annotation | ★☆☆ |
-
-### Data Reliability Mapping
-| Data Type | Reliability | Notes |
-|-----------|-------------|-------|
-| RefSeq curated sequence | ★★★ | Gold standard for reference |
-| RefSeq annotations | ★★★ | Validated gene models |
-| GenBank sequence | ★★☆ | Submitted, generally reliable |
-| GenBank annotations | ★☆☆ | Submitter-provided, verify |
-| Predicted genes (XM_) | ★★☆ | Computational, may lack validation |
-| Genome assembly | ★★★-★☆☆ | Depends on assembly quality |
+| Tier | Symbol | Accession Prefix | Description |
+|------|--------|------------------|-------------|
+| RefSeq Reference | ●●●● | NC_, NM_, NP_ | NCBI-curated, gold standard |
+| RefSeq Predicted | ●●●○ | XM_, XP_, XR_ | Computationally predicted |
+| GenBank Validated | ●●○○ | Various | Submitted, some curation |
+| GenBank Direct | ●○○○ | Various | Direct submission |
+| Third Party | ○○○○ | TPA_ | Third-party annotation |
 
 Include in report:
 ```markdown
-**Curation Level**: ●●●● RefSeq Reference (★★★)
+**Curation Level**: ●●●● RefSeq Reference
 - Curated by NCBI RefSeq project
 - Regular updates and validation
 - Recommended for reference use
-
-**Data Reliability Note**: 
-- Sequence: ★★★ (experimentally derived)
-- Gene annotations: ★★★ (curated models)
-- Variant annotations: ★★☆ (computational)
 ```
 
 ---

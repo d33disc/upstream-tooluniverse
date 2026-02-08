@@ -24,6 +24,7 @@ Clinical labs and researchers face critical challenges in variant interpretation
 3. **Population Context** - gnomAD frequencies with ancestry-specific data
 4. **Gene-Disease Validity** - ClinGen curation status for clinical relevance
 5. **Actionable Output** - Clear recommendations, not just classifications
+6. **English-first queries** - Always use English terms in tool calls (gene names, variant descriptions, disease names), even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -96,14 +97,6 @@ Use this skill when users:
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
----
-
-## NVIDIA API Key Check
-
-If `NVIDIA_API_KEY` env var is not set, tell the user:
-
-> **NVIDIA API Key not configured.** Structural impact analysis (Phase 4) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB / PDB structures.
 
 ---
 
@@ -802,7 +795,8 @@ def validate_expression_context(tu, gene_symbol, phenotype_tissues):
 |------|---------|----------|
 | `PubMed_search` | Peer-reviewed studies | Comprehensive |
 | `EuropePMC_search` | Additional literature | Europe PMC |
-| `EuropePMC_search` (source='PPR') | Preprints (bioRxiv/medRxiv) | Recent findings |
+| `BioRxiv_search_preprints` | Biology preprints | Recent findings |
+| `MedRxiv_search_preprints` | Clinical preprints | Clinical studies |
 | `openalex_search_works` | Citation analysis | Impact metrics |
 | `SemanticScholar_search_papers` | AI-ranked search | Relevance |
 
@@ -817,18 +811,16 @@ def comprehensive_literature_search(tu, gene, variant, phenotype):
         max_results=30
     )
     
-    # 2. EuropePMC: Recent preprints (bioRxiv/medRxiv)
-    preprints = tu.tools.EuropePMC_search_articles(
+    # 2. BioRxiv: Recent preprints
+    biorxiv = tu.tools.BioRxiv_search_preprints(
         query=f"{gene} {phenotype}",
-        source="PPR",  # PPR = Preprints only
-        pageSize=10
+        limit=10
     )
     
-    # 3. MedRxiv: Clinical preprints via EuropePMC
-    clinical_preprints = tu.tools.EuropePMC_search_articles(
-        query=f"{gene} variant {phenotype} clinical",
-        source="PPR",
-        pageSize=10
+    # 3. MedRxiv: Clinical preprints
+    medrxiv = tu.tools.MedRxiv_search_preprints(
+        query=f"{gene} variant {phenotype}",
+        limit=10
     )
     
     # 4. Citation analysis

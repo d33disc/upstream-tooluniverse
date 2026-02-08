@@ -14,6 +14,7 @@ AI-guided de novo protein design using RFdiffusion backbone generation, ProteinM
 4. **Developability-aware** - Consider aggregation, immunogenicity, expression
 5. **Evidence-graded** - Grade designs by confidence metrics
 6. **Actionable output** - Provide sequences ready for experimental testing
+7. **English-first queries** - Always use English terms in tool calls (protein names, target names), even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -80,12 +81,6 @@ Every design MUST include:
 | `NvidiaNIM_esmfold` | Fast structure validation | Yes |
 | `NvidiaNIM_alphafold2` | High-accuracy validation | Yes |
 | `NvidiaNIM_esm2_650m` | Sequence embeddings | Yes |
-
-### NVIDIA API Key Check (MANDATORY — STOP if missing)
-
-If `NVIDIA_API_KEY` env var is not set, tell the user and **stop**:
-
-> **NVIDIA API Key required.** This workflow depends on RFdiffusion, ProteinMPNN, ESMFold, and AlphaFold2 — no viable fallbacks exist. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`.
 
 ### Parameter Verification
 

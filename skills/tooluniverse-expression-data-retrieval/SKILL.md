@@ -7,6 +7,8 @@ description: Retrieves gene expression and omics datasets from ArrayExpress and 
 
 Retrieve gene expression experiments and multi-omics datasets with proper disambiguation and quality assessment.
 
+**IMPORTANT**: Always use English terms in tool calls (gene names, tissue names, condition descriptions), even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+
 ## Workflow Overview
 
 ```
@@ -256,47 +258,24 @@ Retrieved: [date]
 
 ---
 
-## Data Quality Tiers (Aligned with Evidence Grading)
+## Data Quality Tiers
 
-### Experiment Quality Assessment
-| Tier | Symbol | Criteria | Evidence Equivalent |
-|------|--------|----------|---------------------|
-| High Quality | ●●● | ≥3 bio replicates, complete metadata, processed data | ★★★ |
-| Medium Quality | ●●○ | 2-3 replicates OR some metadata gaps, accessible | ★★☆ |
-| Low Quality | ●○○ | No replicates, sparse metadata, data access issues | ★☆☆ |
-| Use with Caution | ○○○ | Single sample, no replication, outdated platform | ☆☆☆ |
+Assessment criteria for expression experiments:
 
-### Data Reliability by Source
-| Data Source | Reliability | Notes |
-|-------------|-------------|-------|
-| GTEx | ★★★ | Large-scale, well-curated, standardized |
-| HPA | ★★★ | Validated, multiple antibodies |
-| ArrayExpress (curated) | ★★☆-★★★ | Depends on individual study |
-| GEO/ArrayExpress (direct) | ★☆☆-★★☆ | Submitter-provided, verify |
-| Single-cell (CELLxGENE) | ★★☆ | High resolution but technical variation |
-| Microarray (legacy) | ★★☆ | Platform-specific, may need normalization |
-
-### Using Expression Evidence in Research
-When citing expression data in research reports, include reliability:
-```markdown
-**Tissue Expression**: 
-EGFR shows highest expression in skin (156 TPM) [★★★: GTEx], consistent with 
-HPA immunohistochemistry [★★★: HPA, strong staining]. A smaller study 
-found elevated expression in tumors [★★☆: E-MTAB-1234, N=30 samples].
-```
+| Tier | Symbol | Criteria |
+|------|--------|----------|
+| High Quality | ●●● | ≥3 bio replicates, complete metadata, processed data available |
+| Medium Quality | ●●○ | 2-3 replicates OR some metadata gaps, data accessible |
+| Low Quality | ●○○ | No replicates, sparse metadata, or data access issues |
+| Use with Caution | ○○○ | Single sample, no replication, outdated platform |
 
 Include assessment rationale:
 ```markdown
-**Quality**: ●●● High (★★★)
+**Quality**: ●●● High
 - ✓ 4 biological replicates per condition
 - ✓ Complete sample annotations
 - ✓ Processed and raw data available
-- ✓ Recent RNA-seq platform (Illumina NovaSeq)
-
-**Reliability for Use**: 
-- Differential expression calls: ★★★ (well-powered)
-- Absolute expression values: ★★☆ (compare within study)
-- Cross-study comparison: ★☆☆ (requires batch correction)
+- ✓ Recent RNA-seq platform
 ```
 
 ---

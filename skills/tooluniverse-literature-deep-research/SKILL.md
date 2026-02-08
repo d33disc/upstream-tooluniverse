@@ -14,6 +14,7 @@ A systematic approach to comprehensive literature research that **starts with ta
 4. **Evidence grading** - Grade every claim by evidence strength (mechanistic paper vs screen hit vs review vs text-mined)
 5. **Mandatory completeness** - All checklist sections must exist, even if "unknown/limited evidence"
 6. **Source attribution** - Every piece of information traceable to database/tool
+7. **English-first queries** - Always use English terms for literature searches and tool calls, even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language
 
 ---
 

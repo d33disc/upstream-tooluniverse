@@ -7,6 +7,8 @@ description: Retrieves chemical compound information from PubChem and ChEMBL wit
 
 Retrieve comprehensive chemical compound data with proper disambiguation and cross-database validation.
 
+**IMPORTANT**: Always use English compound names and search terms in tool calls, even if the user writes in another language (e.g., translate "阿司匹林" to "aspirin"). Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+
 ## Workflow Overview
 
 ```
@@ -215,9 +217,8 @@ Top 5 structurally similar compounds:
 
 ## Data Quality Tiers
 
-Apply to data completeness and reliability assessment:
+Apply to data completeness assessment:
 
-### Data Completeness
 | Tier | Symbol | Criteria |
 |------|--------|----------|
 | Complete | ●●● | All core properties + bioactivity + drug info |
@@ -225,31 +226,9 @@ Apply to data completeness and reliability assessment:
 | Basic | ●○○ | Core properties only |
 | Minimal | ○○○ | CID/name only, limited data |
 
-### Data Reliability (Aligned with Research Skill Evidence Tiers)
-| Tier | Symbol | Data Source | Reliability |
-|------|--------|-------------|-------------|
-| **T1** | ★★★ | Experimental measurement (PubChem curated, ChEMBL assay) | High confidence |
-| **T2** | ★★☆ | Calculated/validated (computed but validated against experimental) | Good confidence |
-| **T3** | ★☆☆ | Predicted (ADMET-AI, computed without validation) | Use with caution |
-| **T4** | ☆☆☆ | Estimated/inferred (text-mined, database propagated) | Verify before use |
-
 Include in report header:
 ```markdown
 **Data Completeness**: ●●● Complete (properties, bioactivity, drug data)
-**Data Reliability**: Properties ★★★ (experimental), Bioactivity ★★★ (ChEMBL assays)
-```
-
-### Apply Reliability Tiers to Properties
-```markdown
-### Molecular Properties
-
-| Property | Value | Reliability | Source |
-|----------|-------|-------------|--------|
-| **Molecular Weight** | 180.16 g/mol | ★★★ | PubChem (calculated) |
-| **LogP (experimental)** | 1.19 | ★★★ | Measured |
-| **LogP (predicted)** | 1.24 | ★★☆ | ADMET-AI |
-| **Solubility** | 4.6 mg/mL | ★★★ | Experimental |
-| **Solubility (pred)** | ~5 mg/mL | ★☆☆ | ADMET-AI prediction |
 ```
 
 ---

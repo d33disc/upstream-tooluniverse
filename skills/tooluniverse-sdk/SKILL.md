@@ -7,6 +7,8 @@ description: Build AI scientist systems using ToolUniverse Python SDK for scient
 
 ToolUniverse provides programmatic access to 1000++ scientific tools through a unified interface. It implements the AI-Tool Interaction Protocol for building AI scientist systems that integrate ML models, databases, APIs, and scientific packages.
 
+**IMPORTANT - Language Handling**: Most tools accept English terms only. When building workflows, always translate non-English input to English before passing to tool parameters. Only try original-language terms as a fallback if English returns no results.
+
 ## Installation
 
 ```bash
