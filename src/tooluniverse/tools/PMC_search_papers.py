@@ -1,7 +1,7 @@
 """
 PMC_search_papers
 
-Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-t...
+Search for full-text biomedical literature using the PMC (PubMed Central) API. PMC is the free fu...
 """
 
 from typing import Any, Optional, Callable
@@ -10,7 +10,8 @@ from ._shared_client import get_shared_client
 
 def PMC_search_papers(
     query: str,
-    limit: int,
+    limit: Optional[int] = 10,
+    retmax: Optional[int] = None,
     date_from: Optional[str] = None,
     date_to: Optional[str] = None,
     article_type: Optional[str] = None,
@@ -21,7 +22,7 @@ def PMC_search_papers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-t...
+    Search for full-text biomedical literature using the PMC (PubMed Central) API. PMC is the free fu...
 
     Parameters
     ----------
@@ -29,6 +30,8 @@ def PMC_search_papers(
         Search query for PMC papers. Use keywords separated by spaces to refine your ...
     limit : int
         Maximum number of papers to return. This sets the maximum number of papers re...
+    retmax : int
+        Alias for limit (NCBI eutils naming). If both retmax and limit are provided, ...
     date_from : str
         Start date for publication date filter (YYYY/MM/DD format). Optional paramete...
     date_to : str
@@ -56,6 +59,7 @@ def PMC_search_papers(
             "arguments": {
                 "query": query,
                 "limit": limit,
+                "retmax": retmax,
                 "date_from": date_from,
                 "date_to": date_to,
                 "article_type": article_type,

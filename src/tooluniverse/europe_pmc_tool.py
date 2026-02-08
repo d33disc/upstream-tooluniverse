@@ -71,18 +71,64 @@ def _extract_text_from_html(html_text: str) -> str:
     if m:
         html_text = m.group(1)
 
-    # Strip scripts/styles/noscript, then tags, then collapse whitespace.
-    # NOTE: use a real backreference (`</\1>`), not a literal `</\\1>`.
-    html_text = re.sub(r"(?is)<(script|style|noscript).*?>.*?</\1>", " ", html_text)
-    text = re.sub(r"(?s)<[^>]+>", " ", html_text)
-    # Basic HTML entity decoding.
+    # Parse using stdlib HTMLParser (more robust than regex-only stripping).
     try:
-        from html import unescape
+        from html.parser import HTMLParser
 
-        text = unescape(text)
+        class _TextExtractor(HTMLParser):
+            def __init__(self):
+                super().__init__(convert_charrefs=True)
+                self._parts: list[str] = []
+                self._skip_depth = 0
+
+            def handle_starttag(self, tag, attrs):
+                t = (tag or "").lower()
+                if t in {"script", "style", "noscript"}:
+                    self._skip_depth += 1
+                    return
+                if self._skip_depth:
+                    return
+                if t in {
+                    "p",
+                    "br",
+                    "div",
+                    "section",
+                    "li",
+                    "tr",
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6",
+                }:
+                    self._parts.append(" ")
+
+            def handle_endtag(self, tag):
+                t = (tag or "").lower()
+                if t in {"script", "style", "noscript"} and self._skip_depth:
+                    self._skip_depth -= 1
+                    return
+                if self._skip_depth:
+                    return
+                if t in {"p", "br", "div", "section", "li", "tr"}:
+                    self._parts.append(" ")
+
+            def handle_data(self, data):
+                if self._skip_depth:
+                    return
+                if data:
+                    self._parts.append(data)
+
+        parser = _TextExtractor()
+        parser.feed(html_text)
+        text = "".join(parser._parts)
     except Exception:
-        pass
-    return " ".join(text.split())
+        # Fallback: regex stripping (kept for safety).
+        html_text = re.sub(r"(?is)<(script|style|noscript).*?>.*?</\1>", " ", html_text)
+        text = re.sub(r"(?s)<[^>]+>", " ", html_text)
+
+    return " ".join((text or "").split())
 
 
 def _extract_abstract_from_pmc_html(html_text: str) -> str | None:
@@ -303,6 +349,8 @@ class EuropePMCTool(BaseTool):
         limit = arguments.get("limit", 5)
         enrich_missing_abstract = bool(arguments.get("enrich_missing_abstract", False))
         extract_terms_from_fulltext = arguments.get("extract_terms_from_fulltext")
+        require_has_ft = bool(arguments.get("require_has_ft", False))
+        fulltext_terms = arguments.get("fulltext_terms")
         if not query:
             return [
                 {
@@ -322,6 +370,22 @@ class EuropePMCTool(BaseTool):
                     "retryable": False,
                 }
             ]
+        if isinstance(fulltext_terms, list) and [
+            t for t in fulltext_terms if isinstance(t, str) and t.strip()
+        ]:
+            require_has_ft = True
+            terms = [
+                t.strip() for t in fulltext_terms if isinstance(t, str) and t.strip()
+            ]
+
+            def _escape_phrase(s: str) -> str:
+                # Europe PMC uses a Lucene-like syntax; keep this conservative.
+                return s.replace('"', '\\"')
+
+            clause = " OR ".join([f'BODY:"{_escape_phrase(t)}"' for t in terms])
+            query = f"({query}) AND ({clause})"
+        if require_has_ft:
+            query = f"({query}) AND HAS_FT:Y"
         return self._search(
             query,
             limit,
@@ -810,21 +874,13 @@ class EuropePMCFullTextSnippetsTool(BaseTool):
         return " ".join("".join(root.itertext()).split())
 
     def _extract_text_from_html(self, html_text: str) -> str:
-        # Dependency-light parsing: strip scripts/styles, tags, and collapse whitespace.
-        html_text = re.sub(r"(?is)<(script|style).*?>.*?</\1>", " ", html_text or "")
-        text = re.sub(r"(?s)<[^>]+>", " ", html_text)
-        # Basic HTML entity decoding.
-        try:
-            from html import unescape
-
-            text = unescape(text)
-        except Exception:
-            pass
-        return " ".join(text.split())
+        return _extract_text_from_html(html_text or "")
 
     def run(self, arguments):
         fulltext_url = self._build_fulltext_xml_url(arguments)
         terms = arguments.get("terms")
+        if terms is None:
+            terms = arguments.get("keywords")
 
         if not fulltext_url:
             return {
@@ -837,7 +893,7 @@ class EuropePMCFullTextSnippetsTool(BaseTool):
         ]:
             return {
                 "status": "error",
-                "error": "`terms` must be a non-empty list of strings.",
+                "error": "Provide a non-empty list of search terms via `terms` (preferred) or `keywords` (alias).",
                 "retryable": False,
             }
 

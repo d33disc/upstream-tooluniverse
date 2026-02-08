@@ -2,7 +2,7 @@
   {
     "type": "PMCTool",
     "name": "PMC_search_papers",
-    "description": "Search for full-text biomedical literature using PMC (PubMed Central) API. PMC is the free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine.",
+    "description": "Search for full-text biomedical literature using the PMC (PubMed Central) API. PMC is the free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine. Uses `limit` (default 10); accepts `retmax` as an alias for `limit`.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -14,6 +14,12 @@
           "type": "integer",
           "description": "Maximum number of papers to return. This sets the maximum number of papers retrieved from PMC.",
           "default": 10,
+          "minimum": 1,
+          "maximum": 100
+        },
+        "retmax": {
+          "type": "integer",
+          "description": "Alias for limit (NCBI eutils naming). If both retmax and limit are provided, limit is used.",
           "minimum": 1,
           "maximum": 100
         },
@@ -36,8 +42,7 @@
         }
       },
       "required": [
-        "query",
-        "limit"
+        "query"
       ]
     },
     "return_schema": {

@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1228 scientific tools.
+Type-safe Python interface to 1229 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -88,6 +88,7 @@ from .CELLxGENE_get_expression_data import CELLxGENE_get_expression_data
 from .CELLxGENE_get_gene_metadata import CELLxGENE_get_gene_metadata
 from .CELLxGENE_get_presence_matrix import CELLxGENE_get_presence_matrix
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
+from .CORE_get_fulltext_snippets import CORE_get_fulltext_snippets
 from .CORE_search_papers import CORE_search_papers
 from .COSMIC_get_mutations_by_gene import COSMIC_get_mutations_by_gene
 from .COSMIC_search_mutations import COSMIC_search_mutations
@@ -1768,6 +1769,7 @@ __all__ = [
     "CELLxGENE_get_gene_metadata",
     "CELLxGENE_get_presence_matrix",
     "CMA_Guidelines_Search",
+    "CORE_get_fulltext_snippets",
     "CORE_search_papers",
     "COSMIC_get_mutations_by_gene",
     "COSMIC_search_mutations",

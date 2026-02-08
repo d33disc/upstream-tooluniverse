@@ -43,7 +43,9 @@ def test_europe_pmc_fulltext_snippets_finds_terms_in_xml(monkeypatch):
 </article>
 """
 
-    def fake_request_with_retry(session, method, url, *, timeout=None, max_attempts=None, **kwargs):
+    def fake_request_with_retry(
+        session, method, url, *, timeout=None, max_attempts=None, **kwargs
+    ):
         assert url.endswith("/PMC11237425/fullTextXML")
         return _FakeResponse(status_code=200, text=xml_payload, url=url)
 
@@ -63,14 +65,56 @@ def test_europe_pmc_fulltext_snippets_finds_terms_in_xml(monkeypatch):
 
     assert out["status"] == "success"
     assert out["snippets_count"] >= 3
-    assert any("evolved resistance to ciprofloxacin" in s["snippet"].lower() for s in out["snippets"])
+    assert any(
+        "evolved resistance to ciprofloxacin" in s["snippet"].lower()
+        for s in out["snippets"]
+    )
+
+
+@pytest.mark.unit
+def test_europe_pmc_fulltext_snippets_accepts_keywords_alias(monkeypatch):
+    tool = EuropePMCFullTextSnippetsTool({"name": "EuropePMC_get_fulltext_snippets"})
+
+    xml_payload = """<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <body>
+    <p>Selection experiments used ciprofloxacin.</p>
+  </body>
+</article>
+"""
+
+    def fake_request_with_retry(
+        session, method, url, *, timeout=None, max_attempts=None, **kwargs
+    ):
+        assert url.endswith("/PMC11237425/fullTextXML")
+        return _FakeResponse(status_code=200, text=xml_payload, url=url)
+
+    monkeypatch.setattr(
+        "tooluniverse.europe_pmc_tool.request_with_retry", fake_request_with_retry
+    )
+
+    out = tool.run(
+        {
+            "pmcid": "PMC11237425",
+            "keywords": ["ciprofloxacin"],
+            "window_chars": 60,
+            "max_snippets_per_term": 2,
+            "max_total_chars": 2000,
+        }
+    )
+
+    assert out["status"] == "success"
+    assert out["snippets_count"] >= 1
+    assert any("ciprofloxacin" in s["snippet"].lower() for s in out["snippets"])
 
 
 @pytest.mark.unit
 def test_europe_pmc_fulltext_snippets_falls_back_to_pmc_oai(monkeypatch):
     tool = EuropePMCFullTextSnippetsTool({"name": "EuropePMC_get_fulltext_snippets"})
 
-    def fake_request_with_retry(session, method, url, *, timeout=None, max_attempts=None, **kwargs):
+    def fake_request_with_retry(
+        session, method, url, *, timeout=None, max_attempts=None, **kwargs
+    ):
         # Primary Europe PMC fullTextXML missing
         if url.endswith("/PMC11237425/fullTextXML"):
             return _FakeResponse(status_code=404, text="not found", url=url)
@@ -120,7 +164,9 @@ def test_europe_pmc_fulltext_snippets_falls_back_to_pmc_oai(monkeypatch):
 def test_europe_pmc_fulltext_snippets_falls_back_to_pmc_html(monkeypatch):
     tool = EuropePMCFullTextSnippetsTool({"name": "EuropePMC_get_fulltext_snippets"})
 
-    def fake_request_with_retry(session, method, url, *, timeout=None, max_attempts=None, **kwargs):
+    def fake_request_with_retry(
+        session, method, url, *, timeout=None, max_attempts=None, **kwargs
+    ):
         # Primary Europe PMC fullTextXML missing
         if url.endswith("/PMC5234727/fullTextXML"):
             return _FakeResponse(status_code=404, text="not found", url=url)
@@ -128,13 +174,16 @@ def test_europe_pmc_fulltext_snippets_falls_back_to_pmc_html(monkeypatch):
         if "ncbi.nlm.nih.gov/pmc/oai/oai.cgi" in url:
             return _FakeResponse(
                 status_code=400,
-                text="<OAI-PMH><error code=\"cannotDisseminateFormat\"/></OAI-PMH>",
+                text='<OAI-PMH><error code="cannotDisseminateFormat"/></OAI-PMH>',
                 url=url,
             )
         # efetch may return an XML stub indicating download restriction
-        if "eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi" in url and "db=pmc" in url:
+        if (
+            "eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi" in url
+            and "db=pmc" in url
+        ):
             stub = (
-                "<?xml version=\"1.0\"?><pmc-articleset>"
+                '<?xml version="1.0"?><pmc-articleset>'
                 "<article><!--The publisher of this article does not allow download--></article>"
                 "</pmc-articleset>"
             )
