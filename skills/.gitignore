@@ -1,0 +1,8 @@
+# Development tools - not part of product distribution
+devtu-*/
+devtu-create-tool/
+devtu-fix-tool/
+devtu-optimize-descriptions/
+devtu-optimize-skills/
+devtu-docs-quality/
+devtu-audit-docs/
