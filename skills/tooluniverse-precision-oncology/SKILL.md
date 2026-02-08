@@ -12,6 +12,7 @@ Provide actionable treatment recommendations for cancer patients based on their 
 2. **Evidence-graded** - Every recommendation has evidence level
 3. **Actionable output** - Prioritized treatment options, not data dumps
 4. **Clinical focus** - Answer "what should we do?" not "what exists?"
+5. **English-first queries** - Always use English terms in tool calls (mutations, drug names, cancer types), even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -36,12 +37,6 @@ Apply when user asks:
 | `civic_get_evidence_item` | `variant_id` | `id` |
 | `OpenTargets_*` | `ensemblID` | `ensemblId` (camelCase) |
 | `search_clinical_trials` | `disease` | `condition` |
-
-### NVIDIA API Key Check
-
-If `NVIDIA_API_KEY` env var is not set, tell the user:
-
-> **NVIDIA API Key not configured.** Structural resistance analysis (Phase 4) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Resistance analysis will use database evidence only.
 
 ---
 
@@ -927,18 +922,16 @@ def search_treatment_literature(tu, cancer_type, biomarker, drug_name):
 def search_preprints(tu, cancer_type, biomarker):
     """Search preprints for cutting-edge findings."""
     
-    # EuropePMC preprints (bioRxiv/medRxiv indexed here)
-    preprints = tu.tools.EuropePMC_search_articles(
+    # BioRxiv cancer research
+    biorxiv = tu.tools.BioRxiv_search_preprints(
         query=f"{cancer_type} {biomarker} treatment",
-        source="PPR",  # PPR = Preprints only
-        pageSize=10
+        limit=10
     )
     
-    # MedRxiv clinical studies via EuropePMC
-    clinical_preprints = tu.tools.EuropePMC_search_articles(
-        query=f"{cancer_type} {biomarker} clinical",
-        source="PPR",
-        pageSize=10
+    # MedRxiv clinical studies
+    medrxiv = tu.tools.MedRxiv_search_preprints(
+        query=f"{cancer_type} {biomarker}",
+        limit=10
     )
     
     return {

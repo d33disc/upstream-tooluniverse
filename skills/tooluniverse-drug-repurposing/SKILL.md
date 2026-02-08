@@ -7,6 +7,8 @@ description: Identify drug repurposing candidates using ToolUniverse for target-
 
 Systematically identify and evaluate drug repurposing candidates using multiple computational strategies.
 
+**IMPORTANT**: Always use English terms in tool calls (drug names, disease names, target names), even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+
 ## Core Strategies
 
 ### 1. Target-Based Repurposing

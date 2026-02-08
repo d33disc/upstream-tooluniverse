@@ -14,6 +14,7 @@ Systematic discovery of novel small molecule binders using 60+ ToolUniverse tool
 4. **ADMET-aware filtering** - Eliminate poor compounds early
 5. **Evidence grading** - Grade candidates by supporting evidence
 6. **Actionable output** - Provide prioritized candidates with rationale
+7. **English-first queries** - Always use English terms in tool calls, even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -110,12 +111,6 @@ Phase 7: Report Synthesis
 # Check tool params to prevent silent failures
 tool_info = tu.tools.get_tool_info(tool_name="ChEMBL_get_target_activities")
 ```
-
-### NVIDIA API Key Check
-
-If `NVIDIA_API_KEY` env var is not set, tell the user:
-
-> **NVIDIA API Key not configured.** Structure prediction, docking, and de novo generation (`NvidiaNIM_*` tools) require it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB lookups; docking and generation phases will be skipped.
 
 ### Known Parameter Corrections
 
@@ -1061,15 +1056,14 @@ def search_binder_literature(tu, target_name, compound_scaffolds):
         limit=30
     )
     
-    # EuropePMC: Latest preprint findings (bioRxiv, medRxiv, etc.)
-    preprints = tu.tools.EuropePMC_search_articles(
+    # BioRxiv: Latest unpublished findings
+    preprints = tu.tools.BioRxiv_search_preprints(
         query=f"{target_name} small molecule discovery",
-        source="PPR",  # PPR = Preprints only
-        pageSize=15
+        limit=15
     )
     
     # MedRxiv: Clinical data on inhibitors
-    clinical = tu.tools.EuropePMC_search_articles(
+    clinical = tu.tools.MedRxiv_search_preprints(
         query=f"{target_name} inhibitor clinical trial",
         limit=10
     )
@@ -1393,8 +1387,8 @@ Apply to all candidate compounds:
 | Tool | Purpose |
 |------|---------|
 | `PubMed_search_articles` | Published SAR studies |
-| `EuropePMC_search_articles` (source='PPR') | Latest preprints (biology/clinical) |
-| `BioRxiv_get_preprint` | Get preprint by DOI |
+| `BioRxiv_search_preprints` | Latest biology preprints |
+| `MedRxiv_search_preprints` | Clinical preprints |
 | `openalex_search_works` | Citation analysis |
 | `SemanticScholar_search` | AI-ranked papers |
 
@@ -1415,7 +1409,7 @@ Apply to all candidate compounds:
 | `ADMETAI_*` | SwissADME tools | Basic Lipinski | Invalid SMILES |
 | `PDB_search_similar_structures` | `emdb_search` + PDB | `NvidiaNIM_alphafold2` | Membrane proteins |
 | `PubMed_search_articles` | `openalex_search_works` | `SemanticScholar_search` | Literature search |
-| `EuropePMC_search_articles` (source='PPR') | `web_search` (site:biorxiv.org) | Skip preprints | Preprint sources |
+| `BioRxiv_search_preprints` | `MedRxiv_search_preprints` | Skip preprints | Preprint sources |
 
 **NVIDIA NIM API Key Required**: Tools with `NvidiaNIM_` prefix require `NVIDIA_API_KEY` environment variable. Check availability at start:
 ```python

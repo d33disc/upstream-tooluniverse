@@ -13,6 +13,7 @@ Comprehensive drug investigation using 50+ ToolUniverse tools across chemical da
 3. **Citation requirements** - Every fact must have inline source attribution
 4. **Evidence grading** - Grade claims by evidence strength
 5. **Mandatory completeness** - All sections must exist, even if "data unavailable"
+6. **English-first queries** - Always use English drug/compound names in tool calls, even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 

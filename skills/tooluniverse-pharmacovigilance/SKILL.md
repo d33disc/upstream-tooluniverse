@@ -14,6 +14,7 @@ Systematic drug safety analysis using FAERS adverse event data, FDA labeling, Ph
 4. **Multi-source triangulation** - FAERS, labels, trials, literature
 5. **Pharmacogenomic context** - Include genetic risk factors
 6. **Actionable output** - Risk-benefit summary with recommendations
+7. **English-first queries** - Always use English drug names and search terms in tool calls, even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -532,18 +533,16 @@ def comprehensive_safety_literature(tu, drug_name, key_aes):
         limit=30
     )
     
-    # EuropePMC: Preprints for mechanism insights
-    preprints = tu.tools.EuropePMC_search_articles(
+    # BioRxiv: Preprints
+    biorxiv = tu.tools.BioRxiv_search_preprints(
         query=f"{drug_name} mechanism toxicity",
-        source="PPR",  # PPR = Preprints only
-        pageSize=10
+        limit=10
     )
     
-    # MedRxiv: Clinical preprints via EuropePMC
-    clinical_preprints = tu.tools.EuropePMC_search_articles(
-        query=f"{drug_name} safety clinical",
-        source="PPR",
-        pageSize=10
+    # MedRxiv: Clinical preprints
+    medrxiv = tu.tools.MedRxiv_search_preprints(
+        query=f"{drug_name} safety",
+        limit=10
     )
     
     # Citation analysis for key papers

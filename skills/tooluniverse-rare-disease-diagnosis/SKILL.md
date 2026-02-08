@@ -14,6 +14,7 @@ Systematic diagnosis support for rare diseases using phenotype matching, gene pa
 4. **Evidence grading** - Grade diagnoses by supporting evidence strength
 5. **Actionable output** - Prioritized differential diagnosis with next steps
 6. **Genetic counseling aware** - Consider inheritance patterns and family history
+7. **English-first queries** - Always use English terms in tool calls (phenotype descriptions, gene names, disease names), even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
 
 ---
 
@@ -63,12 +64,6 @@ Every finding MUST include source:
 ## Phase 0: Tool Verification
 
 **CRITICAL**: Verify tool parameters before calling.
-
-### NVIDIA API Key Check
-
-If `NVIDIA_API_KEY` env var is not set, tell the user:
-
-> **NVIDIA API Key not configured.** VUS structural analysis (Phase 5) requires it. Get a free key at https://build.nvidia.com and set `NVIDIA_API_KEY`. Falling back to AlphaFold DB lookups.
 
 ### Known Parameter Corrections
 
@@ -1040,11 +1035,10 @@ def search_disease_literature(tu, disease_name, genes):
 def search_preprints(tu, disease_name, genes):
     """Search preprints for cutting-edge findings."""
     
-    # EuropePMC preprints search (bioRxiv/medRxiv don't have search APIs)
-    preprints = tu.tools.EuropePMC_search_articles(
+    # BioRxiv search
+    biorxiv = tu.tools.BioRxiv_search_preprints(
         query=f"{disease_name} genetics",
-        source="PPR",  # PPR = Preprints only
-        pageSize=10
+        limit=10
     )
     
     # ArXiv for computational methods

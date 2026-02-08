@@ -16,6 +16,7 @@ Gather complete target intelligence by exploring 9 parallel research paths. Supp
 6. **Disambiguation first** - Resolve all identifiers before research
 7. **Negative results documented** - "No drugs found" is data; empty sections are failures
 8. **Collision-aware literature search** - Detect and filter naming collisions
+9. **English-first queries** - Always use English terms in tool calls, even if the user writes in another language. Translate gene names, disease names, and search terms to English. Only try original-language terms as a fallback if English returns no results. Respond in the user's language
 
 ---
 

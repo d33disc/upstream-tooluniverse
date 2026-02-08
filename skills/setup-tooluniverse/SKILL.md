@@ -117,19 +117,33 @@ Now we'll add ToolUniverse to your app's MCP configuration. Based on the client 
 | **Claude Desktop** | `~/Library/Application Support/Claude/claude_desktop_config.json` | Settings → Developer → Edit Config |
 | **Claude Code** | `~/.claude.json` (user) or `.mcp.json` (project) | `claude mcp add` CLI or edit directly |
 | **Windsurf** | `~/.codeium/windsurf/mcp_config.json` | Click MCP hammer icon → Configure |
-| **VS Code (Copilot)** | `.vscode/mcp.json` (workspace) or user `settings.json` | Settings → Chat > MCP |
-| **Cline** | `cline_mcp_settings.json` | Cline UI → MCP Servers → Configure |
+| **VS Code (Copilot)** | `.vscode/mcp.json` (workspace) or user profile `mcp.json` | Cmd Palette → "MCP: Add Server" (see different format below) |
+| **Cline** | `cline_mcp_settings.json` (in VS Code extension globalStorage) | Cline panel → MCP Servers → Configure |
 | **Codex (OpenAI)** | `~/.codex/config.toml` | Create/edit manually (TOML format, see below) |
 | **Gemini CLI** | `~/.gemini/settings.json` (user) or `.gemini/settings.json` (project) | `gemini mcp add` CLI or edit directly |
 | **Antigravity** | `mcp_config.json` | "..." dropdown → Manage MCP Servers → View raw config |
-| **Trae** | `~/.cursor/mcp.json` (global) or `.trae/mcp.json` (project) | Trae Settings → MCP |
+| **Trae** | `.trae/mcp.json` (project) or global via Trae UI | Ctrl+U → AI Management → MCP → Configure Manually |
 | **OpenCode** | `~/.config/opencode/opencode.json` or `opencode.json` (project) | Edit directly |
 
 **Windows/Linux paths differ** -- check your client's documentation for the exact location.
 
-Most clients use the same JSON `mcpServers` format shown above. Add the `tooluniverse` entry into the `mcpServers` section of your config file, merging with any existing servers.
+Most clients use the same JSON `mcpServers` format shown above. **Exceptions**: VS Code uses `"servers"` key, Codex uses TOML, and OpenCode uses a `"mcp"` key -- see below for their specific formats.
 
 #### Clients with Different Config Formats
+
+**VS Code (Copilot)** -- uses `"servers"` key (not `"mcpServers"`) and requires `"type"` field. Add to `.vscode/mcp.json`:
+```json
+{
+  "servers": {
+    "tooluniverse": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["tooluniverse"],
+      "env": { "PYTHONIOENCODING": "utf-8" }
+    }
+  }
+}
+```
 
 **Codex (TOML format)** -- add to `~/.codex/config.toml`:
 ```toml
@@ -327,30 +341,32 @@ mkdir -p .cursor/skills && cp -r /tmp/tu-skills/skills/* .cursor/skills/
 mkdir -p .windsurf/skills && cp -r /tmp/tu-skills/skills/* .windsurf/skills/
 ```
 
-**Codex (OpenAI)** -- reference key skills from `AGENTS.md` in project root:
+**Codex (OpenAI)** -- uses `.agents/skills/` directory (auto-discovered):
 ```bash
-mkdir -p .codex/skills && cp -r /tmp/tu-skills/skills/* .codex/skills/
+mkdir -p .agents/skills && cp -r /tmp/tu-skills/skills/* .agents/skills/
 ```
-Then add to your `AGENTS.md`: `For scientific research, follow instructions in .codex/skills/<skill-name>/SKILL.md`
 
-**Gemini CLI** -- use `GEMINI.md` in project root:
+**Gemini CLI** -- uses `.gemini/skills/` directory (auto-discovered):
 ```bash
 mkdir -p .gemini/skills && cp -r /tmp/tu-skills/skills/* .gemini/skills/
 ```
-Then add to your `GEMINI.md`: `For scientific research, follow instructions in .gemini/skills/<skill-name>/SKILL.md`
 
-**Claude Code / Claude Desktop** -- reference from `CLAUDE.md`:
+**Claude Code** -- uses `.claude/skills/` directory (auto-discovered):
 ```bash
 mkdir -p .claude/skills && cp -r /tmp/tu-skills/skills/* .claude/skills/
 ```
-Then add to your `CLAUDE.md`: `For scientific research, follow instructions in .claude/skills/<skill-name>/SKILL.md`
 
-**Trae** -- supports skills via `.trae/`:
+**OpenCode** -- uses `.opencode/skills/` directory (auto-discovered):
+```bash
+mkdir -p .opencode/skills && cp -r /tmp/tu-skills/skills/* .opencode/skills/
+```
+
+**Trae** -- supports skills via `.trae/skills/`:
 ```bash
 mkdir -p .trae/skills && cp -r /tmp/tu-skills/skills/* .trae/skills/
 ```
 
-**Cline / VS Code / Qwen / OpenCode** -- copy skills into the project and reference as needed:
+**Cline / VS Code / Qwen** -- copy skills into the project and reference as needed:
 ```bash
 mkdir -p .skills && cp -r /tmp/tu-skills/skills/* .skills/
 ```
@@ -376,36 +392,11 @@ Explain to the user:
 
 ### Issue 1: Python Version Incompatibility
 
-**Symptom**: `requires-python = ">=3.10"` error
-
-**Solution**:
-```bash
-# Check version
-python3 --version
-
-# If < 3.10 or >= 3.14, install compatible Python
-# macOS with Homebrew:
-brew install python@3.12
-
-# Then use specific version:
-python3.12 -m pip install tooluniverse
-```
+**Symptom**: `requires-python = ">=3.10"` error. **Fix**: `brew install python@3.12` then `python3.12 -m pip install tooluniverse`
 
 ### Issue 2: uvx or uv Not Found
 
-**Symptom**: `uvx: command not found` or MCP server fails to start
-
-**Solution**:
-```bash
-# Install uv (which includes uvx)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Verify it works
-uvx --version
-
-# If installed but not found, restart your shell or add to PATH:
-source ~/.bashrc  # or ~/.zshrc
-```
+**Symptom**: `uvx: command not found`. **Fix**: `curl -LsSf https://astral.sh/uv/install.sh | sh` then restart shell (`source ~/.zshrc`)
 
 ### Issue 3: Context Window Overflow
 
@@ -470,6 +461,10 @@ For pip users:
 pip install --upgrade tooluniverse
 ```
 
+### Still stuck?
+
+If you run into an issue that can't be resolved with the steps above, encourage the user to open a GitHub issue at https://github.com/mims-harvard/ToolUniverse/issues or reach out to [Shanghua Gao](mailto:shanghuagao@gmail.com), the creator of ToolUniverse.
+
 ## What's Next?
 
 After setup is complete, suggest the user try one of these to get started:
@@ -490,3 +485,4 @@ Point them to the **`tooluniverse` general skill** for tips on getting the most 
 - **Agentic features** need at least one LLM key (Gemini has a good free tier)
 - **Detailed API key docs**: [API_KEYS_REFERENCE.md](API_KEYS_REFERENCE.md)
 - **Skills repo**: https://github.com/mims-harvard/ToolUniverse/tree/main/skills
+- **Need help?** Open a [GitHub issue](https://github.com/mims-harvard/ToolUniverse/issues) or email [Shanghua Gao](mailto:shanghuagao@gmail.com)
