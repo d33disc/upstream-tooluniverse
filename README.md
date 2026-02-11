@@ -3,7 +3,6 @@
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue)](https://arxiv.org/abs/2509.23426)
 [![PyPI version](https://badge.fury.io/py/tooluniverse.svg)](https://badge.fury.io/py/tooluniverse)
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-Listed-blue)](https://registry.modelcontextprotocol.io)
-
 [![🌐Web](https://img.shields.io/badge/Website-aiscientist.tools-blue)](https://aiscientist.tools)
 [![Slack](https://img.shields.io/badge/Slack-Join_Community-orange)](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ)
 [![WeChat](https://img.shields.io/badge/WeChat-Community-07C160)](https://aiscientist.tools/wechat)
