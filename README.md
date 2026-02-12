@@ -76,7 +76,8 @@ ToolUniverse addresses this challenge by providing a standardized ecosystem that
 - [**AI-Tool Interaction Protocol**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/interaction_protocol.html): Standardized interface governing how AI scientists issue tool requests and receive results
 - [**Universal AI Model Support**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/building_ai_scientists/index.html): Works with any LLM, AI agent, or large reasoning model (GPT5, Claude, Gemini, Qwen, Deepseek, open models)
 - [**OpenRouter Integration**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/openrouter_support.html): Access 100+ models from OpenAI, Anthropic, Google, Qwen, and more through a single API
-- [**Easy to Load & Find & Call Tool**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/index.html) (*[WebService](https://aiscientist.tools/), [PythonAPI](https://zitniklab.hms.harvard.edu/ToolUniverse/api/modules.html), [MCP](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/building_ai_scientists/mcp_support.html)*): Maps natural-language descriptions to tool specifications and executes tools with structured results 
+- [**MCP Tasks for Async Operations**](docs/MCP_TASKS_GUIDE.md): Native support for long-running operations (protein docking, molecular simulations) with automatic progress tracking, parallel execution, and cancellation
+- [**Easy to Load & Find & Call Tool**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/index.html) (*[WebService](https://aiscientist.tools/), [PythonAPI](https://zitniklab.hms.harvard.edu/ToolUniverse/api/modules.html), [MCP](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/building_ai_scientists/mcp_support.html)*): Maps natural-language descriptions to tool specifications and executes tools with structured results
 - [**Tool Composition & Scientific Workflows**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/tool_composition.html): Chains tools for sequential or parallel execution in self-directed scientific workflows
 - [**Continuous Expansion**](https://zitniklab.hms.harvard.edu/ToolUniverse/expand_tooluniverse/index.html): New tools can be easily registered locally or remotely without additional configuration
 - [**Multi-Agent Tool Creation & Optimization**](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/scientific_workflows.html): Multi-agent powered tool construction and iterative tool optimization
@@ -155,10 +156,30 @@ Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_i
 - **[AI Agent Skills](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/skills_showcase.html)**: Pre-built research skills for AI agents
 - **[API Keys](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/api_keys.html)**: Configure API keys for external services
 
+<<<<<<< HEAD
+### 🚀 Getting Started
+- **[Quick Start Tutorial](https://zitniklab.hms.harvard.edu/ToolUniverse/quickstart.html)**: 5-minute setup and first query
+- **[Installation](https://zitniklab.hms.harvard.edu/ToolUniverse/installation.html)**: Complete installation options
+- **[Getting Started](https://zitniklab.hms.harvard.edu/ToolUniverse/getting_started.html)**: Step-by-step tutorial
+- **[AI-Tool Protocol](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/interaction_protocol.html)**: Understanding the interaction protocol
+
+### 📖 User Guides
+- **[Loading Tools](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/loading_tools.html)**: Complete Tutorial to loading tools
+- **[Tool Discovery](https://zitniklab.hms.harvard.edu/ToolUniverse/tutorials/finding_tools.html)**: Find tools by keyword, LLM, and embedding search
+- **[Tool Caller](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/tool_caller.html)**: Primary execution engine
+- **[Tool Composition](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/tool_composition.html)**: Chain tools into workflows
+- **[Scientific Workflows](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/scientific_workflows.html)**: Real-world research scenarios
+- **[MCP Support](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/mcp_support.html)**: Model Context Protocol integration
+- **[Logging](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/logging.html)**: Comprehensive logging configuration
+
+### 🛠️ Advanced Features
+- **[MCP Tasks & Async Operations](docs/MCP_TASKS_GUIDE.md)**: Long-running operations with progress tracking, parallel execution, and cancellation support
+=======
 ### 💡 Tutorials & Advanced
 - **[Tutorials Overview](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/index.html)**: Guides for tool discovery, agentic tools, literature search, and more
 - **[AI-Tool Interaction Protocol](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/interaction_protocol.html)**: How AI scientists issue tool requests
 - **[Scientific Workflows](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/scientific_workflows.html)**: Multi-agent tool creation and optimization
+>>>>>>> origin/main
 - **[Hooks System](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/hooks/index.html)**: Intelligent output processing
 
 ### 🔧 Expanding ToolUniverse
