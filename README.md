@@ -156,7 +156,6 @@ Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_i
 - **[AI Agent Skills](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/skills_showcase.html)**: Pre-built research skills for AI agents
 - **[API Keys](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/api_keys.html)**: Configure API keys for external services
 
-<<<<<<< HEAD
 ### 🚀 Getting Started
 - **[Quick Start Tutorial](https://zitniklab.hms.harvard.edu/ToolUniverse/quickstart.html)**: 5-minute setup and first query
 - **[Installation](https://zitniklab.hms.harvard.edu/ToolUniverse/installation.html)**: Complete installation options
