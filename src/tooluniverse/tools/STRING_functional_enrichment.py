@@ -1,7 +1,7 @@
 """
 STRING_functional_enrichment
 
-Perform functional enrichment analysis on a set of proteins using STRING. Returns enriched GO ter...
+Identify enriched biological functions, pathways, and processes for a protein set using STRING database. Performs statistical enrichment analysis against GO (Gene Ontology) terms, KEGG pathways, Reactome pathways, and other annotation databases. Returns significantly enriched terms with FDR-corrected p-values. **Minimum 3-4 proteins required** for meaningful statistical analysis. No API key required. Use for: discovering pathways enriched in protein network, identifying biological processes, finding shared functions among proteins, interpreting omics data (proteomics, interactomics), hypothesis generation.
 """
 
 from typing import Any, Optional, Callable

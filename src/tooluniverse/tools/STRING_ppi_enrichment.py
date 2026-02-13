@@ -1,7 +1,7 @@
 """
 STRING_ppi_enrichment
 
-Test if a set of proteins have more interactions among themselves than would be expected by chanc...
+Test if your protein set has more interactions than expected by chance (PPI = Protein-Protein Interaction enrichment). Compares observed interactions in your network to random expectation - significant enrichment suggests proteins work together functionally. Returns enrichment p-value and expected vs observed interaction counts. Useful for validating that your protein list forms a real functional module rather than random proteins. No API key required. Use for: validating protein complex predictions, testing if proteins form functional module, quality control for network analysis, distinguishing real complexes from random protein lists, assessing functional coherence.
 """
 
 from typing import Any, Optional, Callable

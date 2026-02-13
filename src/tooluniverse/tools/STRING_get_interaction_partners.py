@@ -1,7 +1,7 @@
 """
 STRING_get_interaction_partners
 
-Get direct interaction partners for a protein with confidence scores from STRING database. Return...
+Find direct interaction partners for a single protein from STRING (Search Tool for Retrieval of Interacting Genes/Proteins). Simpler alternative to STRING_get_network when analyzing one protein - returns ranked list of interacting partners with confidence scores (0-1.0). Use this for focused analysis of single proteins; use STRING_get_network for complete network between multiple proteins. No API key required. Returns: partner protein IDs, confidence scores, evidence types, partner annotations. Use for: discovering interacting partners of a single protein, identifying potential drug targets, finding binding partners, exploring single protein biology, quick partner lookup.
 """
 
 from typing import Any, Optional, Callable

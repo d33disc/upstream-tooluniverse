@@ -3,11 +3,18 @@
 import os
 
 import requests
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
 BIOGRID_BASE_URL = "https://webservice.thebiogrid.org"
+
+
+def _join_pipe_delimited(value: Union[str, list]) -> str:
+    """Convert a string or list to a pipe-delimited string for BioGRID parameters."""
+    if isinstance(value, list):
+        return "|".join(str(item) for item in value)
+    return str(value)
 
 
 @register_tool("BioGRIDRESTTool")
@@ -35,6 +42,15 @@ class BioGRIDRESTTool(BaseTool):
         "saccharomyces cerevisiae": 559292,
     }
 
+    # Maps argument keys to their BioGRID API parameter names (pipe-delimited).
+    _LIST_PARAM_MAP = {
+        "gene_names": "geneList",
+        "chemical_names": "chemicalList",
+        "pubmed_ids": "pubmedList",
+        "ptm_type": "ptmType",
+        "evidence_types": "evidenceList",
+    }
+
     def _build_params(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Build parameters for BioGRID API request."""
         params = {"format": "json", "interSpeciesExcluded": "false"}
@@ -56,29 +72,10 @@ class BioGRIDRESTTool(BaseTool):
 
         params["accesskey"] = api_key
 
-        # Map gene names to BioGRID format
-        if "gene_names" in arguments:
-            gene_names = arguments["gene_names"]
-            if isinstance(gene_names, list):
-                params["geneList"] = "|".join(gene_names)
-            else:
-                params["geneList"] = str(gene_names)
-
-        # Map chemical names for chemical interaction queries
-        if "chemical_names" in arguments:
-            chemical_names = arguments["chemical_names"]
-            if isinstance(chemical_names, list):
-                params["chemicalList"] = "|".join(chemical_names)
-            else:
-                params["chemicalList"] = str(chemical_names)
-
-        # Map PubMed IDs for publication-based queries
-        if "pubmed_ids" in arguments:
-            pubmed_ids = arguments["pubmed_ids"]
-            if isinstance(pubmed_ids, list):
-                params["pubmedList"] = "|".join([str(pid) for pid in pubmed_ids])
-            else:
-                params["pubmedList"] = str(pubmed_ids)
+        # Map list-or-string arguments to pipe-delimited BioGRID parameters
+        for arg_key, api_key_name in self._LIST_PARAM_MAP.items():
+            if arg_key in arguments and arguments[arg_key]:
+                params[api_key_name] = _join_pipe_delimited(arguments[arg_key])
 
         if "organism" in arguments:
             organism = arguments["organism"]
@@ -87,57 +84,35 @@ class BioGRIDRESTTool(BaseTool):
         # Handle interaction type filtering
         if "interaction_type" in arguments:
             interaction_type = arguments["interaction_type"]
-            if interaction_type == "physical":
-                params["evidenceList"] = "physical"
-            elif interaction_type == "genetic":
-                params["evidenceList"] = "genetic"
-            # "both" means no evidence filter
-
-        # Handle PTM type filtering
-        if "ptm_type" in arguments:
-            ptm_type = arguments["ptm_type"]
-            if isinstance(ptm_type, list):
-                params["ptmType"] = "|".join(ptm_type)
-            else:
-                params["ptmType"] = str(ptm_type)
+            if interaction_type in ("physical", "genetic"):
+                params["evidenceList"] = interaction_type
 
         # Handle residue filtering for PTMs
-        if "residue" in arguments and arguments["residue"]:
+        if arguments.get("residue"):
             params["residue"] = arguments["residue"]
 
-        # Handle evidence types filtering
-        if "evidence_types" in arguments and arguments["evidence_types"]:
-            evidence_types = arguments["evidence_types"]
-            if isinstance(evidence_types, list):
-                params["evidenceList"] = "|".join(evidence_types)
-            else:
-                params["evidenceList"] = str(evidence_types)
-
         # Handle throughput filtering
-        if "throughput" in arguments and arguments["throughput"]:
+        if arguments.get("throughput"):
             params["throughputTag"] = arguments["throughput"]
 
         # Handle interaction action for chemical interactions
-        if "interaction_action" in arguments and arguments["interaction_action"]:
+        if arguments.get("interaction_action"):
             params["action"] = arguments["interaction_action"]
 
-        # Include evidence details
+        # Boolean flags
         if "include_evidence" in arguments:
             params["includeEvidence"] = (
                 "true" if arguments["include_evidence"] else "false"
             )
 
-        # Include enzyme/interactor details
         if "include_enzymes" in arguments:
             params["includeInteractors"] = (
                 "true" if arguments["include_enzymes"] else "false"
             )
 
-        # Set limit
         if "limit" in arguments:
             params["max"] = arguments["limit"]
 
-        # Default search by official gene symbols
         params["searchNames"] = "true"
 
         return params
@@ -163,7 +138,11 @@ class BioGRIDRESTTool(BaseTool):
         for param in self.required:
             if param not in arguments:
                 error_msg = f"Missing required parameter: {param}"
-                return {"status": "error", "data": {"error": error_msg}, "error": error_msg}
+                return {
+                    "status": "error",
+                    "data": {"error": error_msg},
+                    "error": error_msg,
+                }
 
         url = self._build_url()
 
@@ -176,6 +155,10 @@ class BioGRIDRESTTool(BaseTool):
         api_response = self._make_request(url, params)
 
         if "error" in api_response:
-            return {"status": "error", "data": api_response, "error": api_response.get("error")}
+            return {
+                "status": "error",
+                "data": api_response,
+                "error": api_response.get("error"),
+            }
 
         return {"status": "success", "data": api_response}

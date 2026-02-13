@@ -1,7 +1,7 @@
 """
 BioGRID_get_chemical_interactions
 
-Get chemical-protein interactions from BioGRID database. Returns interactions between chemical co...
+Find proteins that interact with chemical compounds (drugs, metabolites, small molecules) from BioGRID. Returns protein targets of chemicals with interaction types (binding, modification, inhibition), evidence methods, and literature citations. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (request at https://webservice.thebiogrid.org/). Chemicals include: FDA-approved drugs, experimental compounds, metabolites, small molecule inhibitors, natural products. Use for: finding drug targets, discovering protein targets of compounds, understanding drug mechanisms, identifying off-target effects, drug repurposing studies, metabolite-protein interactions.
 """
 
 from typing import Any, Optional, Callable

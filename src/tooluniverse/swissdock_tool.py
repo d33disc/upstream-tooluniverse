@@ -4,7 +4,6 @@ Converted to use AsyncPollingTool for cleaner code and automatic polling managem
 API Documentation: https://www.swissdock.ch/command-line.php
 """
 
-import asyncio
 import uuid
 from urllib.parse import urlencode
 import requests
@@ -72,7 +71,9 @@ class SwissDockTool(AsyncPollingTool):
 
         response = requests.get(url, params=params, timeout=self.timeout)
         if response.status_code != 200:
-            raise RuntimeError(f"Ligand preparation failed: HTTP {response.status_code}")
+            raise RuntimeError(
+                f"Ligand preparation failed: HTTP {response.status_code}"
+            )
 
     def _prepare_target(self, session_id: str, pdb_id: str):
         """Prepare target protein from PDB ID (raises on error)."""
@@ -82,7 +83,9 @@ class SwissDockTool(AsyncPollingTool):
 
         response = requests.post(url, params=params, data=data, timeout=self.timeout)
         if response.status_code != 200:
-            raise RuntimeError(f"Target preparation failed: HTTP {response.status_code}")
+            raise RuntimeError(
+                f"Target preparation failed: HTTP {response.status_code}"
+            )
 
     def _set_docking_parameters(
         self,
@@ -117,6 +120,13 @@ class SwissDockTool(AsyncPollingTool):
         if response.status_code != 200:
             raise RuntimeError(f"Docking start failed: HTTP {response.status_code}")
 
+    # Maps keywords found in status text to canonical status values.
+    _STATUS_KEYWORD_MAP = [
+        (("COMPLETE", "FINISHED", "DONE"), "FINISHED"),
+        (("RUNNING", "PROGRESS"), "RUNNING"),
+        (("ERROR", "FAIL"), "ERROR"),
+    ]
+
     def _check_status_api(self, session_id: str) -> Dict[str, Any]:
         """Check docking job status (returns status dict)."""
         url = f"{SWISSDOCK_BASE_URL}/checkstatus"
@@ -127,21 +137,17 @@ class SwissDockTool(AsyncPollingTool):
 
             if response.status_code == 404:
                 return {"status": "NOT_FOUND"}
-            elif response.status_code != 200:
+            if response.status_code != 200:
                 return {"status": "ERROR", "error": f"HTTP {response.status_code}"}
 
-            # Parse status from response text
             status_text = response.text.strip().upper()
 
-            if "COMPLETE" in status_text or "FINISHED" in status_text or "DONE" in status_text:
-                return {"status": "FINISHED"}
-            elif "RUNNING" in status_text or "PROGRESS" in status_text:
-                return {"status": "RUNNING"}
-            elif "ERROR" in status_text or "FAIL" in status_text:
-                return {"status": "ERROR"}
-            else:
-                # Assume still running if unclear
-                return {"status": "RUNNING"}
+            for keywords, canonical_status in self._STATUS_KEYWORD_MAP:
+                if any(kw in status_text for kw in keywords):
+                    return {"status": canonical_status}
+
+            # Assume still running if status text is unrecognized
+            return {"status": "RUNNING"}
 
         except Exception as e:
             return {"status": "ERROR", "error": str(e)}
@@ -185,7 +191,9 @@ class SwissDockTool(AsyncPollingTool):
         """
         # Check server
         if not self._check_server_status():
-            raise RuntimeError("SwissDock server is not responding. Please try again later.")
+            raise RuntimeError(
+                "SwissDock server is not responding. Please try again later."
+            )
 
         # Validate required parameters
         ligand_smiles = arguments.get("ligand_smiles")
@@ -218,7 +226,9 @@ class SwissDockTool(AsyncPollingTool):
         # Execute multi-step workflow (each method raises on error)
         self._prepare_ligand(session_id, ligand_smiles)
         self._prepare_target(session_id, pdb_id)
-        self._set_docking_parameters(session_id, exhaustiveness, box_center, box_size, docking_engine)
+        self._set_docking_parameters(
+            session_id, exhaustiveness, box_center, box_size, docking_engine
+        )
         self._start_docking(session_id)
 
         return session_id
@@ -241,26 +251,21 @@ class SwissDockTool(AsyncPollingTool):
         job_status = status_result["status"]
 
         if job_status == "FINISHED":
-            # Retrieve results
             try:
                 results = self._retrieve_results(job_id)
                 return {"done": True, "result": results, "progress": 100}
             except Exception as e:
                 return {"done": False, "error": f"Failed to retrieve results: {e}"}
 
-        elif job_status == "ERROR":
+        if job_status == "ERROR":
             error_msg = status_result.get("error", "Unknown error")
             return {"done": False, "error": f"Docking job failed: {error_msg}"}
 
-        elif job_status == "NOT_FOUND":
+        if job_status == "NOT_FOUND":
             return {"done": False, "error": "Docking session not found"}
 
-        elif job_status == "RUNNING":
-            return {"done": False, "progress": 50}
-
-        else:
-            # Unknown status, assume still running
-            return {"done": False, "progress": 25}
+        # RUNNING or unknown status
+        return {"done": False, "progress": 50}
 
     def format_result(self, result: Any) -> Dict[str, Any]:
         """Format SwissDock results into standard response format."""
@@ -276,6 +281,11 @@ class SwissDockTool(AsyncPollingTool):
     # Override run() for operation routing
     # ========================================================================
 
+    _OPERATION_HANDLERS = {
+        "check_job_status": "_check_job_status_operation",
+        "retrieve_results": "_retrieve_results_operation",
+    }
+
     async def run(
         self, arguments: Dict[str, Any], progress: Optional["TaskProgress"] = None
     ) -> Dict[str, Any]:
@@ -284,24 +294,18 @@ class SwissDockTool(AsyncPollingTool):
 
         Routes to appropriate operation handler based on tool configuration.
         """
-        operation = self.operation
-
-        if operation == "dock_ligand":
-            # Use AsyncPollingTool's run() for async docking
+        if self.operation == "dock_ligand":
             return await super().run(arguments, progress)
 
-        elif operation == "check_job_status":
-            # Instant operation - check status directly
-            return await self._check_job_status_operation(arguments)
+        handler_name = self._OPERATION_HANDLERS.get(self.operation)
+        if handler_name:
+            return await getattr(self, handler_name)(arguments)
 
-        elif operation == "retrieve_results":
-            # Instant operation - retrieve results directly
-            return await self._retrieve_results_operation(arguments)
+        return {"error": f"Unknown operation: {self.operation}"}
 
-        else:
-            return {"error": f"Unknown operation: {operation}"}
-
-    async def _check_job_status_operation(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    async def _check_job_status_operation(
+        self, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Check the status of a docking job by session ID (instant operation)."""
         session_id = arguments.get("session_id")
 
@@ -321,7 +325,9 @@ class SwissDockTool(AsyncPollingTool):
             }
         }
 
-    async def _retrieve_results_operation(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    async def _retrieve_results_operation(
+        self, arguments: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Retrieve results for a completed docking job (instant operation)."""
         session_id = arguments.get("session_id")
 

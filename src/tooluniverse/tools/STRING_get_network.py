@@ -1,7 +1,7 @@
 """
 STRING_get_network
 
-Retrieve protein-protein interaction network from STRING with full details including confidence s...
+Retrieve protein-protein interaction network from STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database. Returns complete network with all pairwise interactions between your proteins, including confidence scores (0-1.0) based on multiple evidence types (experimental data, databases, co-expression, text mining). Can expand network by adding top interaction partners. No API key required. Use for: building interaction networks for pathway analysis, finding protein complexes, identifying network hubs and key regulators, visualizing protein relationships, exporting to Cytoscape/network analysis tools.
 """
 
 from typing import Any, Optional, Callable

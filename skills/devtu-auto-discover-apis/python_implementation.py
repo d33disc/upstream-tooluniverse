@@ -38,9 +38,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 try:
     from tooluniverse import ToolUniverse
     from tooluniverse.tool_registry import get_tool_registry
-    from tooluniverse.default_config import TOOLS_CONFIGS
+    from tooluniverse.default_config import default_tool_files
 except ImportError:
-    print("⚠️  ToolUniverse not found in path. Some functions may not work.")
+    print("ToolUniverse not found in path. Some functions may not work.")
 
 
 class APIDiscoveryAgent:

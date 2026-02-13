@@ -1,7 +1,7 @@
 """
 SASBDB_get_entry_data
 
-Retrieve comprehensive metadata and experimental conditions for a specific SASBDB entry. Returns ...
+Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) entry. Returns experimental conditions, sample information, derived structural parameters (radius of gyration, molecular weight), quality metrics, and links to raw data files. Use after searching with SASBDB_search_entries to get complete information about an entry. No API key required. Entry data includes: protein name and organism, experimental method (SAXS/SANS), temperature and buffer conditions, structural parameters (Rg, Dmax, molecular weight), quality assessment scores, associated publication, download links for scattering profiles and models. Use for: accessing structural parameters for proteins, downloading scattering data, getting experimental conditions, quality checking SAXS/SANS data, finding associated publications.
 """
 
 from typing import Any, Optional, Callable

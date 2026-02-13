@@ -1,7 +1,7 @@
 """
 BioGRID_search_by_pubmed
 
-Get all interactions curated from specific publications in BioGRID using PubMed IDs. Returns prot...
+Retrieve all protein interactions curated from a specific published study using PubMed ID. Returns all interactions reported in that paper with experimental methods and evidence codes. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (request at https://webservice.thebiogrid.org/). Useful for verifying literature findings, extracting data from specific studies, or analyzing experimental approaches. Each BioGRID interaction is linked to the original publication. Use for: extracting interactions from specific papers, reproducing published networks, validating your results against literature, analyzing curation quality, finding experimental methods used in study.
 """
 
 from typing import Any, Optional, Callable
