@@ -122,8 +122,8 @@ def domain_analysis_pipeline(
 
         # Multiple databases in parallel
         try:
-            result1 = tu.tools.DATABASE4_TOOL(param=input_param_3)
-            result2 = tu.tools.DATABASE5_TOOL(param=input_param_3)
+            _result1 = tu.tools.DATABASE4_TOOL(param=input_param_3)
+            _result2 = tu.tools.DATABASE5_TOOL(param=input_param_3)
             # Process and combine results
         except Exception as e:
             report.append(f"\n*Error in Phase 3: {str(e)}*\n")

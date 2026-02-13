@@ -156,7 +156,7 @@ def test_empty_input_handling():
 
         print(f"✅ Test 5 PASSED: {output}")
 
-    except Exception as e:
+    except Exception:
         # If skill requires inputs, this is expected
         print(f"⚠️  Test 5 SKIPPED: Skill requires at least one input (expected)")
 
