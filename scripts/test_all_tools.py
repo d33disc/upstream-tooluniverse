@@ -144,73 +144,44 @@ def run_test_for_pattern(
         }
 
 
+# Maps a label found in test output to the stats key it populates.
+# All values are parsed as int except "Duration" which is float.
+_OUTPUT_LABELS: List[Tuple[str, str]] = [
+    ("Tools Tested:", "tools_tested"),
+    ("Tests Run:", "tests_run"),
+    ("Passed:", "passed"),
+    ("Failed:", "failed"),
+    ("404 Errors:", "errors_404"),
+    ("Other Errors:", "errors_other"),
+    ("Schema Valid:", "schema_valid"),
+    ("Schema Invalid:", "schema_invalid"),
+]
+
+
 def parse_test_output(output: str) -> Dict[str, Any]:
     """Parse test output to extract statistics."""
-    stats = {
-        "tools_tested": 0,
-        "tests_run": 0,
-        "passed": 0,
-        "failed": 0,
-        "errors_404": 0,
-        "errors_other": 0,
-        "schema_valid": 0,
-        "schema_invalid": 0,
-        "duration": 0.0
-    }
-    
+    stats: Dict[str, Any] = {key: 0 for _, key in _OUTPUT_LABELS}
+    stats["duration"] = 0.0
+
     for line in output.split('\n'):
         line = line.strip()
-        
-        if "Tools Tested:" in line:
-            try:
-                stats["tools_tested"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "Tests Run:" in line:
-            try:
-                stats["tests_run"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif line.startswith("Passed:"):
-            try:
-                # Extract number from "Passed: 12 (100.0%)"
-                parts = line.split(':')[1].strip().split()
-                stats["passed"] = int(parts[0])
-            except (ValueError, IndexError):
-                pass
-        elif line.startswith("Failed:"):
-            try:
-                stats["failed"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "404 Errors:" in line:
-            try:
-                stats["errors_404"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "Other Errors:" in line:
-            try:
-                stats["errors_other"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "Schema Valid:" in line:
-            try:
-                stats["schema_valid"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "Schema Invalid:" in line:
-            try:
-                stats["schema_invalid"] = int(line.split(':')[1].strip())
-            except (ValueError, IndexError):
-                pass
-        elif "Duration:" in line:
-            try:
-                # Extract duration from "Duration: 1.23s"
-                duration_str = line.split(':')[1].strip().rstrip('s')
-                stats["duration"] = float(duration_str)
-            except (ValueError, IndexError):
-                pass
-    
+
+        for label, key in _OUTPUT_LABELS:
+            if label in line:
+                try:
+                    # Take the first token after the colon (handles "Passed: 12 (100.0%)")
+                    stats[key] = int(line.split(':')[1].strip().split()[0])
+                except (ValueError, IndexError):
+                    pass
+                break
+        else:
+            # Duration is a float with a trailing 's'
+            if "Duration:" in line:
+                try:
+                    stats["duration"] = float(line.split(':')[1].strip().rstrip('s'))
+                except (ValueError, IndexError):
+                    pass
+
     return stats
 
 
