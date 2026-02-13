@@ -1,7 +1,7 @@
 """
 BioGRID_get_interactions
 
-Query experimentally validated protein and genetic interactions from BioGRID (Biological General Repository for Interaction Datasets). Returns curated interactions from published studies with evidence methods, PubMed citations, and throughput information. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (free academic API key at https://webservice.thebiogrid.org/). BioGRID contains 2.3M+ interactions from 80+ organisms, all experimentally validated (no predictions). Use for: finding experimentally proven interactions, getting literature evidence for interactions, validating predicted interactions, finding interaction methods used, accessing high-confidence curated data.
+Query experimentally validated protein and genetic interactions from BioGRID (Biological General ...
 """
 
 from typing import Any, Optional, Callable
@@ -21,7 +21,7 @@ def BioGRID_get_interactions(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive data...
+    Query experimentally validated protein and genetic interactions from BioGRID (Biological General ...
 
     Parameters
     ----------

@@ -1,7 +1,7 @@
 """
 BioGRID_get_ptms
 
-Retrieve post-translational modifications (PTMs) for proteins from BioGRID. Returns phosphorylation, ubiquitination, acetylation, methylation, and other covalent protein modifications with site positions, modifying enzymes, and literature evidence. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (request at https://webservice.thebiogrid.org/). PTMs regulate protein activity, localization, and interactions - critical for understanding protein regulation and signaling. Use for: finding regulatory modifications of proteins, identifying kinases/enzymes that modify proteins, discovering regulation mechanisms, analyzing signaling cascades, drug target identification.
+Retrieve post-translational modifications (PTM = Protein modifications after translation) for pro...
 """
 
 from typing import Any, Optional, Callable
@@ -22,7 +22,7 @@ def BioGRID_get_ptms(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get post-translational modification (PTM) data from BioGRID. Returns PTMs including phosphorylati...
+    Retrieve post-translational modifications (PTM = Protein modifications after translation) for pro...
 
     Parameters
     ----------

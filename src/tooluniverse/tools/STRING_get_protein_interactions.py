@@ -1,7 +1,7 @@
 """
 STRING_get_protein_interactions
 
-Alternative method to retrieve protein interactions from STRING (Search Tool for Retrieval of Interacting Genes/Proteins). Provides similar functionality to STRING_get_network but may return different response format. **Recommend using STRING_get_network for most analyses** - more commonly used and better documented. No API key required. Use for: alternative interaction retrieval if get_network has issues, specific data format requirements, compatibility with legacy code.
+Alternative method to retrieve protein interactions from STRING (Search Tool for Retrieval of Int...
 """
 
 from typing import Any, Optional, Callable
@@ -20,7 +20,7 @@ def STRING_get_protein_interactions(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Query protein-protein interactions from the STRING database. STRING is a comprehensive database o...
+    Alternative method to retrieve protein interactions from STRING (Search Tool for Retrieval of Int...
 
     Parameters
     ----------

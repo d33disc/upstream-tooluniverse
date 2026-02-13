@@ -1,7 +1,7 @@
 """
 SASBDB_search_entries
 
-Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB contains 2,000+ structural biology experiments using SAXS (Small Angle X-ray Scattering) and SANS (Small Angle Neutron Scattering) - techniques that measure protein shape, size, and complex formation in solution (not crystal structures). No API key required. SAXS/SANS data reveals: protein size and shape, protein-protein complex formation, conformational changes, flexibility, oligomeric state (monomer, dimer, etc.). Complementary to X-ray crystallography and Cryo-EM. Use for: finding structural data for protein complexes, analyzing protein conformations in solution, discovering oligomeric states, validating protein-protein interaction by structure, accessing raw scattering data for reanalysis.
+Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def SASBDB_search_entries(
     validate: bool = True,
 ) -> Optional[dict[str, Any]]:
     """
-    Search the Small Angle Scattering Biological Data Bank (SASBDB) for SAXS/SANS experimental entrie...
+    Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB...
 
     Parameters
     ----------

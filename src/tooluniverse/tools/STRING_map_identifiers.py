@@ -1,7 +1,7 @@
 """
 STRING_map_identifiers
 
-Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database IDs. Essential first step before using other STRING tools - converts your protein names (gene symbols, UniProt IDs, Ensembl IDs) to STRING's internal identifiers. STRING database contains 14M+ proteins from 5,000+ organisms with functional association networks. No API key required (public API with rate limits). Use for: preparing protein lists for network analysis, converting between identifier types, validating protein names exist in STRING, batch identifier conversion.
+Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) datab...
 """
 
 from typing import Any, Optional, Callable
@@ -19,22 +19,16 @@ def STRING_map_identifiers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database IDs.
-
-    Essential first step before using other STRING tools - converts your protein names to STRING's internal
-    identifiers. No API key required.
+    Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) datab...
 
     Parameters
     ----------
     protein_ids : list[str]
-        List of protein identifiers in any format (gene symbols like 'TP53', UniProt IDs like 'P04637',
-        Ensembl IDs like 'ENSP00000269305'). Accepts mixed formats. Example: ['TP53', 'MDM2', 'P53_HUMAN'].
+        List of protein identifiers to map (UniProt IDs, gene names, Ensembl IDs, Ref...
     species : int
-        NCBI taxonomy ID specifying organism. Common values: 9606 (Homo sapiens/human), 10090 (Mus musculus/mouse),
-        10116 (Rattus norvegicus/rat), 7227 (Drosophila melanogaster). Default 9606 (human).
+        NCBI taxonomy ID (default: 9606 for human, 10090 for mouse)
     limit : int
-        Maximum matches per identifier. 1 (default, most common match), 2-5 (include close matches),
-        higher (get all possibilities). Recommend keeping default 1 unless identifier is ambiguous.
+        Maximum number of matches per identifier (default: 1)
     echo_query : int
         Include query identifier in response (1=yes, 0=no, default: 1)
     stream_callback : Callable, optional

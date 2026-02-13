@@ -1,27 +1,27 @@
 """
-SASBDB_get_entry_data
+BioModels_list_files
 
-Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+Get detailed file listing for a specific BioModels entry including file names, types, sizes, and ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_get_entry_data(
-    sasbdb_id: str,
+def BioModels_list_files(
+    model_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
-    Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+    Get detailed file listing for a specific BioModels entry including file names, types, sizes, and ...
 
     Parameters
     ----------
-    sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5', 'SASDP92'). Find IDs via...
+    model_id : str
+        BioModels identifier (e.g., 'BIOMD0000000469'). Find IDs using biomodels_search.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,16 @@ def SASBDB_get_entry_data(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "SASBDB_get_entry_data", "arguments": {"sasbdb_id": sasbdb_id}},
+        {"name": "BioModels_list_files", "arguments": {"model_id": model_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["SASBDB_get_entry_data"]
+__all__ = ["BioModels_list_files"]

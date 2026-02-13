@@ -1,27 +1,27 @@
 """
-SASBDB_get_entry_data
+AllenBrain_get_structure
 
-Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+Get detailed information about a brain structure by its Allen Brain Atlas structure ID. Returns f...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_get_entry_data(
-    sasbdb_id: str,
+def AllenBrain_get_structure(
+    structure_id: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> Any:
     """
-    Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+    Get detailed information about a brain structure by its Allen Brain Atlas structure ID. Returns f...
 
     Parameters
     ----------
-    sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5', 'SASDP92'). Find IDs via...
+    structure_id : int
+        Allen Brain Atlas structure ID. Examples: 382 (CA1), 375 (Hippocampus), 315 (...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,19 @@ def SASBDB_get_entry_data(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "SASBDB_get_entry_data", "arguments": {"sasbdb_id": sasbdb_id}},
+        {
+            "name": "AllenBrain_get_structure",
+            "arguments": {"structure_id": structure_id},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["SASBDB_get_entry_data"]
+__all__ = ["AllenBrain_get_structure"]

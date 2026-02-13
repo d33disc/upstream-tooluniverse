@@ -2,7 +2,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_get_protein_interactions",
-    "description": "Query protein-protein interactions from the STRING database. STRING is a comprehensive database of known and predicted protein-protein interactions with confidence scores and functional annotations.",
+    "description": "Alternative method to retrieve protein interactions from STRING (Search Tool for Retrieval of Interacting Genes/Proteins). Provides similar functionality to STRING_get_network but may return different response format. **Recommend using STRING_get_network for most analyses** - more commonly used and better documented. No API key required. Use for: alternative interaction retrieval if get_network has issues, specific data format requirements, compatibility with legacy code.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -92,7 +92,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_get_interaction_partners",
-    "description": "Get direct interaction partners for a protein with confidence scores from STRING database. Returns a list of proteins that directly interact with the query protein, including interaction confidence scores and evidence channels (experimental, database, text mining, etc.).",
+    "description": "Find direct interaction partners for a single protein from STRING (Search Tool for Retrieval of Interacting Genes/Proteins). Simpler alternative to STRING_get_network when analyzing one protein - returns ranked list of interacting partners with confidence scores (0-1.0). Use this for focused analysis of single proteins; use STRING_get_network for complete network between multiple proteins. No API key required. Returns: partner protein IDs, confidence scores, evidence types, partner annotations. Use for: discovering interacting partners of a single protein, identifying potential drug targets, finding binding partners, exploring single protein biology, quick partner lookup.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -163,7 +163,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_functional_enrichment",
-    "description": "Perform functional enrichment analysis on a set of proteins using STRING. Returns enriched GO terms, KEGG pathways, Reactome pathways, and other functional categories with p-values and FDR corrections. Useful for understanding biological processes, molecular functions, and pathways associated with a protein set.",
+    "description": "Identify enriched biological functions, pathways, and processes for a protein set using STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database. Performs statistical enrichment analysis against GO (Gene Ontology) terms, KEGG pathways, Reactome pathways, and other annotation databases. Returns significantly enriched terms with FDR-corrected p-values. Minimum 3-4 proteins required for meaningful statistical analysis. No API key required. Use for: discovering pathways enriched in protein network, identifying biological processes, finding shared functions among proteins, interpreting omics data (proteomics, interactomics), hypothesis generation.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -222,7 +222,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_map_identifiers",
-    "description": "Map protein identifiers (UniProt, Ensembl, gene names, etc.) to STRING database IDs. Essential for identifier conversion when working with STRING API. Returns STRING IDs with preferred names and annotations that can be used in other STRING tools.",
+    "description": "Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database IDs. Essential first step before using other STRING tools - converts your protein names (gene symbols, UniProt IDs, Ensembl IDs) to STRING's internal identifiers. STRING database contains 14M+ proteins from 5,000+ organisms with functional association networks. No API key required (public API with rate limits). Use for: preparing protein lists for network analysis, converting between identifier types, validating protein names exist in STRING, batch identifier conversion.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -286,7 +286,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_get_network",
-    "description": "Retrieve protein-protein interaction network from STRING with full details including confidence scores by evidence channel. Returns network edges with separate scores for neighborhood, gene fusion, cooccurrence, coexpression, experiments, databases, and text mining evidence. Supports regulatory network mode (STRING 12.5+) for directionality.",
+    "description": "Retrieve protein-protein interaction network from STRING (Search Tool for Retrieval of Interacting Genes/Proteins) database. Returns complete network with all pairwise interactions between your proteins, including confidence scores (0-1.0) based on multiple evidence types (experimental data, databases, co-expression, text mining). Can expand network by adding top interaction partners. No API key required. Use for: building interaction networks for pathway analysis, finding protein complexes, identifying network hubs and key regulators, visualizing protein relationships, exporting to Cytoscape/network analysis tools.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -364,7 +364,7 @@
   {
     "type": "STRINGRESTTool",
     "name": "STRING_ppi_enrichment",
-    "description": "Test if a set of proteins have more interactions among themselves than would be expected by chance. Performs PPI enrichment analysis and returns p-value indicating whether the protein set forms a connected network module. Useful for validating disease modules, pathways, or functional clusters.",
+    "description": "Test if your protein set has more interactions than expected by chance (PPI = Protein-Protein Interaction enrichment). Compares observed interactions in your network to random expectation - significant enrichment suggests proteins work together functionally. Returns enrichment p-value and expected vs observed interaction counts. Useful for validating that your protein list forms a real functional module rather than random proteins. No API key required. Use for: validating protein complex predictions, testing if proteins form functional module, quality control for network analysis, distinguishing real complexes from random protein lists, assessing functional coherence.",
     "parameter": {
       "type": "object",
       "properties": {
