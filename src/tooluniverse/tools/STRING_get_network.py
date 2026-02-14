@@ -1,7 +1,7 @@
 """
 STRING_get_network
 
-Retrieve protein-protein interaction network from STRING with full details including confidence s...
+Retrieve protein-protein interaction network from STRING (Search Tool for Retrieval of Interactin...
 """
 
 from typing import Any, Optional, Callable
@@ -20,7 +20,7 @@ def STRING_get_network(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Retrieve protein-protein interaction network from STRING with full details including confidence s...
+    Retrieve protein-protein interaction network from STRING (Search Tool for Retrieval of Interactin...
 
     Parameters
     ----------

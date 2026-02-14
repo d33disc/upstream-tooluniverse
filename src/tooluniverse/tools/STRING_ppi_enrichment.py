@@ -1,7 +1,7 @@
 """
 STRING_ppi_enrichment
 
-Test if a set of proteins have more interactions among themselves than would be expected by chanc...
+Test if your protein set has more interactions than expected by chance (PPI = Protein-Protein Int...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def STRING_ppi_enrichment(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Test if a set of proteins have more interactions among themselves than would be expected by chanc...
+    Test if your protein set has more interactions than expected by chance (PPI = Protein-Protein Int...
 
     Parameters
     ----------

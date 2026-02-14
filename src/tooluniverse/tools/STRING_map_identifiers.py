@@ -1,7 +1,7 @@
 """
 STRING_map_identifiers
 
-Map protein identifiers (UniProt, Ensembl, gene names, etc.) to STRING database IDs. Essential fo...
+Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) datab...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def STRING_map_identifiers(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Map protein identifiers (UniProt, Ensembl, gene names, etc.) to STRING database IDs. Essential fo...
+    Map protein identifiers to STRING (Search Tool for Retrieval of Interacting Genes/Proteins) datab...
 
     Parameters
     ----------

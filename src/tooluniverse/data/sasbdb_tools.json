@@ -2,7 +2,7 @@
   {
     "type": "SASBDBRESTTool",
     "name": "SASBDB_search_entries",
-    "description": "Search the Small Angle Scattering Biological Data Bank (SASBDB) for SAXS/SANS experimental entries. Search by protein name, organism, UniProt accession, or experimental method. Returns entry IDs, titles, organisms, methods (SAXS/SANS), quality metrics (Rg radius of gyration, Dmax maximum dimension), and experimental conditions. Use this to discover solution structure data for flexible proteins, intrinsically disordered proteins (IDPs), multidomain proteins, or conformational ensembles that complement static crystal/cryo-EM structures. Essential for studying protein dynamics and conformational changes.",
+    "description": "Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB contains 2,000+ structural biology experiments using SAXS (Small Angle X-ray Scattering) and SANS (Small Angle Neutron Scattering) - techniques that measure protein shape, size, and complex formation in solution (not crystal structures). No API key required. SAXS/SANS data reveals: protein size and shape, protein-protein complex formation, conformational changes, flexibility, oligomeric state (monomer, dimer, etc.). Complementary to X-ray crystallography and Cryo-EM - provides solution-state structural information for proteins difficult to crystallize or where flexibility is important. Use for: finding structural data for protein complexes, analyzing protein conformations in solution, discovering oligomeric states, validating protein-protein interaction by structure, accessing raw scattering data for reanalysis, studying intrinsically disordered proteins (IDPs), flexible multidomain proteins.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -103,7 +103,7 @@
   {
     "type": "SASBDBRESTTool",
     "name": "SASBDB_get_entry_data",
-    "description": "Retrieve comprehensive metadata and experimental conditions for a specific SASBDB entry. Returns protein details, organism, molecular weight, experimental method (SAXS/SANS), buffer composition, temperature, pH, concentration, quality metrics (Rg, Dmax, I0, chi-squared), data collection parameters, and cross-references to PDB/UniProt. Essential for understanding experimental context, assessing data quality, and comparing solution structures with crystal structures. Use entry IDs from SASBDB_search_entries.",
+    "description": "Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) entry. Returns experimental conditions (buffer, temperature, pH, concentration), sample information (protein name, organism, molecular weight), derived structural parameters (Rg radius of gyration, Dmax maximum dimension), quality metrics (I0, chi-squared), and links to raw data files and cross-references (PDB/UniProt). No API key required. Use after searching with SASBDB_search_entries to get complete information about an entry. Essential for: understanding experimental context, assessing data quality, comparing solution structures with crystal structures, validating SAXS/SANS experimental setup, accessing downloadable scattering curves and structural models.",
     "parameter": {
       "type": "object",
       "properties": {

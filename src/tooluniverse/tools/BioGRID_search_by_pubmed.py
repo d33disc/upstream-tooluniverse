@@ -1,7 +1,7 @@
 """
 BioGRID_search_by_pubmed
 
-Get all interactions curated from specific publications in BioGRID using PubMed IDs. Returns prot...
+Retrieve all protein interactions curated from specific published studies using PubMed ID. Return...
 """
 
 from typing import Any, Optional, Callable
@@ -20,7 +20,7 @@ def BioGRID_search_by_pubmed(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get all interactions curated from specific publications in BioGRID using PubMed IDs. Returns prot...
+    Retrieve all protein interactions curated from specific published studies using PubMed ID. Return...
 
     Parameters
     ----------

@@ -2,7 +2,7 @@
   {
     "type": "BioGRIDRESTTool",
     "name": "BioGRID_get_interactions",
-    "description": "Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive database of physical and genetic interactions with detailed experimental evidence. Retrieves both protein-protein interactions and genetic interactions (epistasis, synthetic lethality) with evidence codes and publication data. Requires free BioGRID API key (register at https://webservice.thebiogrid.org/). Set BIOGRID_ACCESS_KEY environment variable.",
+    "description": "Query experimentally validated protein and genetic interactions from BioGRID (Biological General Repository for Interaction Datasets). Returns curated interactions from published studies with evidence methods, PubMed citations, and throughput information. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (free academic API key at https://webservice.thebiogrid.org/). BioGRID contains 2.3M+ interactions from 80+ organisms, all experimentally validated (no predictions). Use for: finding experimentally proven interactions, getting literature evidence for interactions, validating predicted interactions, finding interaction methods used, accessing high-confidence curated data.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -80,7 +80,7 @@
   {
     "type": "BioGRIDRESTTool",
     "name": "BioGRID_get_chemical_interactions",
-    "description": "Get chemical-protein interactions from BioGRID database. Returns interactions between chemical compounds/drugs and proteins, including binding data, drug targets, and compound effects (31,540+ chemical interactions). Supports filtering by chemical name, gene target, organism, and action type (inhibition, activation). Useful for drug-target analysis and compound mechanism studies. Requires BIOGRID_ACCESS_KEY environment variable.",
+    "description": "Find proteins that interact with chemical compounds (drugs, metabolites, small molecules) from BioGRID (Biological General Repository for Interaction Datasets). Returns protein targets of chemicals with interaction types (binding, modification, inhibition), evidence methods, and literature citations. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (free academic API key at https://webservice.thebiogrid.org/). Contains 31,540+ chemical-protein interactions. Chemicals include: FDA-approved drugs, experimental compounds, metabolites, small molecule inhibitors, natural products. Use for: finding drug targets, discovering protein targets of compounds, understanding drug mechanisms, identifying off-target effects, drug repurposing studies, metabolite-protein interactions.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -154,7 +154,7 @@
   {
     "type": "BioGRIDRESTTool",
     "name": "BioGRID_search_by_pubmed",
-    "description": "Get all interactions curated from specific publications in BioGRID using PubMed IDs. Returns protein-protein and genetic interactions from specified research papers with experimental evidence. Useful for validating specific experimental studies, checking curation status, or extracting all interactions from key papers. Supports multiple PubMed IDs and organism filtering. Requires BIOGRID_ACCESS_KEY environment variable.",
+    "description": "Retrieve all protein interactions curated from specific published studies using PubMed ID. Returns all interactions reported in that paper from BioGRID (Biological General Repository for Interaction Datasets) with experimental methods and evidence codes. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (free academic API key at https://webservice.thebiogrid.org/). Each BioGRID interaction is linked to original publication - this tool retrieves all interactions from specific papers. Use for: extracting interactions from specific papers, reproducing published networks, validating your results against literature, analyzing curation quality, finding experimental methods used in study, verifying literature findings.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -224,7 +224,7 @@
   {
     "type": "BioGRIDRESTTool",
     "name": "BioGRID_get_ptms",
-    "description": "Get post-translational modification (PTM) data from BioGRID. Returns PTMs including phosphorylation, ubiquitination, acetylation, methylation, sumoylation with specific residue positions and evidence (1.1M+ PTM records). Includes enzyme-substrate relationships, modification sites, and supporting publications. Supports filtering by gene name, PTM type, organism, and residue. Useful for signaling studies, regulatory pathway analysis, and drug target validation. Requires BIOGRID_ACCESS_KEY environment variable.",
+    "description": "Retrieve post-translational modifications (PTM = Protein modifications after translation) for proteins from BioGRID (Biological General Repository for Interaction Datasets). Returns phosphorylation, ubiquitination, acetylation, methylation, and other covalent protein modifications with site positions, modifying enzymes, and literature evidence. **Prerequisites**: Requires BIOGRID_API_KEY environment variable (free academic API key at https://webservice.thebiogrid.org/). BioGRID curates 1.1M+ PTM records from literature with experimental evidence. Use for: finding regulatory modifications of proteins, identifying kinases/enzymes that modify proteins, discovering regulation mechanisms, analyzing signaling cascades, drug target identification (kinases).",
     "parameter": {
       "type": "object",
       "properties": {

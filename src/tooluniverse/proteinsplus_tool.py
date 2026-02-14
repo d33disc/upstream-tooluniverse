@@ -3,7 +3,7 @@
 Converted to use AsyncPollingTool for cleaner code and automatic polling management.
 Maintains all original functionality while reducing boilerplate.
 """
-import asyncio
+
 import requests
 from typing import Any, Dict, Optional, TYPE_CHECKING
 from .async_base import AsyncPollingTool
@@ -13,6 +13,17 @@ if TYPE_CHECKING:
     from .task_progress import TaskProgress
 
 PROTEINSPLUS_BASE_URL = "https://proteins.plus/api"
+
+_JSON_HEADERS = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "User-Agent": "ToolUniverse/ProteinsPlus",
+}
+
+_STATUS_HEADERS = {
+    "Accept": "application/json",
+    "User-Agent": "ToolUniverse/ProteinsPlus",
+}
 
 
 @register_tool("ProteinsPlusRESTTool")
@@ -80,7 +91,9 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
                 "dogsite3": {
                     "pdbCode": arguments.get("pdb_id", ""),
                     "analysisDetail": arguments.get("analysis_detail", "1"),
-                    "bindingSitePredictionGranularity": arguments.get("druggability", "1"),
+                    "bindingSitePredictionGranularity": arguments.get(
+                        "druggability", "1"
+                    ),
                     "ligand": arguments.get("ligand", ""),
                     "chain": arguments.get("chain", ""),
                     "ligandBias": "1" if arguments.get("ligand_bias", False) else "0",
@@ -118,6 +131,25 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
         return {k: v for k, v in arguments.items() if v is not None}
 
     # ========================================================================
+    # Shared helpers
+    # ========================================================================
+
+    def _build_api_url(self, arguments: Dict[str, Any]) -> str:
+        """Build API URL by substituting argument placeholders in the endpoint."""
+        url = PROTEINSPLUS_BASE_URL + self.endpoint
+        for key, value in arguments.items():
+            placeholder = f"{{{key}}}"
+            if placeholder in url:
+                url = url.replace(placeholder, str(value))
+        return url
+
+    def _validate_required(self, arguments: Dict[str, Any]) -> None:
+        """Raise ValueError if any required parameters are missing."""
+        missing = [k for k in self.required if k not in arguments]
+        if missing:
+            raise ValueError(f"Missing required parameter(s): {', '.join(missing)}")
+
+    # ========================================================================
     # AsyncPollingTool Required Methods
     # ========================================================================
 
@@ -127,30 +159,14 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
         This method handles job submission for async tools. For sync tools,
         it's not called (handled by run() override).
         """
-        # Validate required parameters
-        missing = [k for k in self.required if k not in arguments]
-        if missing:
-            raise ValueError(f"Missing required parameter(s): {', '.join(missing)}")
-
-        # Build URL
-        url = PROTEINSPLUS_BASE_URL + self.endpoint
-        for key, value in arguments.items():
-            placeholder = f"{{{key}}}"
-            if placeholder in url:
-                url = url.replace(placeholder, str(value))
-
-        # Transform parameters
+        self._validate_required(arguments)
+        url = self._build_api_url(arguments)
         request_data = self._transform_params(arguments)
 
-        # Submit job (synchronous HTTP call)
         response = requests.post(
             url,
             json=request_data,
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "User-Agent": "ToolUniverse/ProteinsPlus",
-            },
+            headers=_JSON_HEADERS,
             timeout=60.0,
         )
 
@@ -206,10 +222,7 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
         try:
             response = requests.get(
                 job_id,
-                headers={
-                    "Accept": "application/json",
-                    "User-Agent": "ToolUniverse/ProteinsPlus",
-                },
+                headers=_STATUS_HEADERS,
                 timeout=30.0,
             )
         except Exception as e:
@@ -285,7 +298,6 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
         if progress:
             await progress.set_message("Executing synchronous request")
 
-        # Validate parameters
         missing = [k for k in self.required if k not in arguments]
         if missing:
             return {
@@ -293,44 +305,37 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
                 "query": arguments,
             }
 
-        # Build URL
-        url = PROTEINSPLUS_BASE_URL + self.endpoint
-        for key, value in arguments.items():
-            placeholder = f"{{{key}}}"
-            if placeholder in url:
-                url = url.replace(placeholder, str(value))
-
-        # Transform parameters
+        url = self._build_api_url(arguments)
         request_data = self._transform_params(arguments)
 
-        # Execute request (sync)
         try:
             if self.method == "POST":
                 response = requests.post(
                     url,
                     json=request_data,
-                    headers={
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
-                        "User-Agent": "ToolUniverse/ProteinsPlus",
-                    },
+                    headers=_JSON_HEADERS,
                     timeout=60.0,
                 )
             else:
                 response = requests.get(
                     url,
                     params=request_data,
-                    headers={
-                        "Accept": "application/json",
-                        "User-Agent": "ToolUniverse/ProteinsPlus",
-                    },
+                    headers=_STATUS_HEADERS,
                     timeout=60.0,
                 )
 
             if response.status_code == 404:
-                return {"error": "Endpoint not found", "detail": response.text, "query": arguments}
+                return {
+                    "error": "Endpoint not found",
+                    "detail": response.text,
+                    "query": arguments,
+                }
             if response.status_code == 400:
-                return {"error": "Bad request", "detail": response.text, "query": arguments}
+                return {
+                    "error": "Bad request",
+                    "detail": response.text,
+                    "query": arguments,
+                }
             if response.status_code not in (200, 201):
                 return {
                     "error": f"API returned {response.status_code}",
@@ -350,6 +355,9 @@ class ProteinsPlusRESTTool(AsyncPollingTool):
             }
 
         except requests.Timeout:
-            return {"error": "Request timeout", "detail": "Request timed out after 60 seconds"}
+            return {
+                "error": "Request timeout",
+                "detail": "Request timed out after 60 seconds",
+            }
         except Exception as e:
             return {"error": "Request failed", "detail": str(e)}

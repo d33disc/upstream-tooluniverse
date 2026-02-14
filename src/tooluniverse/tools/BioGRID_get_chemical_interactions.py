@@ -1,7 +1,7 @@
 """
 BioGRID_get_chemical_interactions
 
-Get chemical-protein interactions from BioGRID database. Returns interactions between chemical co...
+Find proteins that interact with chemical compounds (drugs, metabolites, small molecules) from Bi...
 """
 
 from typing import Any, Optional, Callable
@@ -21,7 +21,7 @@ def BioGRID_get_chemical_interactions(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get chemical-protein interactions from BioGRID database. Returns interactions between chemical co...
+    Find proteins that interact with chemical compounds (drugs, metabolites, small molecules) from Bi...
 
     Parameters
     ----------

@@ -21,6 +21,14 @@ class NCBISRATool(NCBIEUtilsTool):
         super().__init__(tool_config)
         self.db = "sra"
 
+    @staticmethod
+    def _normalize_accessions(arguments: Dict[str, Any]) -> list:
+        """Extract and normalize accessions from arguments, always returning a list."""
+        accessions = arguments.get("accessions", [])
+        if isinstance(accessions, str):
+            return [accessions]
+        return accessions
+
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the SRA tool with given arguments."""
         operation = arguments.get("operation")
@@ -115,10 +123,7 @@ class NCBISRATool(NCBIEUtilsTool):
     def _get_run_info(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get metadata for SRA run accessions via efetch XML."""
         try:
-            accessions = arguments.get("accessions", [])
-
-            if isinstance(accessions, str):
-                accessions = [accessions]
+            accessions = self._normalize_accessions(arguments)
 
             if not accessions:
                 return {
@@ -215,7 +220,9 @@ class NCBISRATool(NCBIEUtilsTool):
                             run_info["library_selection"] = lib_selection.text
                         if lib_layout is not None:
                             run_info["library_layout"] = (
-                                "PAIRED" if lib_layout.find("PAIRED") is not None else "SINGLE"
+                                "PAIRED"
+                                if lib_layout.find("PAIRED") is not None
+                                else "SINGLE"
                             )
 
                 # Get STUDY information
@@ -244,10 +251,7 @@ class NCBISRATool(NCBIEUtilsTool):
     def _get_download_urls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get FTP, S3, and NCBI download URLs for SRA run accessions."""
         try:
-            accessions = arguments.get("accessions", [])
-
-            if isinstance(accessions, str):
-                accessions = [accessions]
+            accessions = self._normalize_accessions(arguments)
 
             if not accessions:
                 return {
@@ -258,27 +262,33 @@ class NCBISRATool(NCBIEUtilsTool):
             download_urls = []
 
             _VALID_PREFIXES = ("SRR", "ERR", "DRR")
-            _FTP_BASE = "ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra"
+            _FTP_BASE = (
+                "ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra"
+            )
 
             for accession in accessions:
                 if not any(accession.startswith(p) for p in _VALID_PREFIXES):
-                    download_urls.append({
-                        "accession": accession,
-                        "error": "Invalid accession format. Must start with SRR, ERR, or DRR",
-                    })
+                    download_urls.append(
+                        {
+                            "accession": accession,
+                            "error": "Invalid accession format. Must start with SRR, ERR, or DRR",
+                        }
+                    )
                     continue
 
                 prefix = accession[:3]
                 acc_num = accession[3:]
                 subdir = acc_num[:6] if len(acc_num) >= 6 else acc_num.zfill(6)
 
-                download_urls.append({
-                    "accession": accession,
-                    "ftp_url": f"{_FTP_BASE}/{prefix}/{prefix}{subdir}/{accession}/{accession}.sra",
-                    "s3_url": f"s3://sra-pub-run-odp/sra/{accession}/{accession}",
-                    "ncbi_url": f"https://trace.ncbi.nlm.nih.gov/Traces/sra/?run={accession}",
-                    "note": "Use SRA Toolkit (fastq-dump or fasterq-dump) to convert SRA to FASTQ format",
-                })
+                download_urls.append(
+                    {
+                        "accession": accession,
+                        "ftp_url": f"{_FTP_BASE}/{prefix}/{prefix}{subdir}/{accession}/{accession}.sra",
+                        "s3_url": f"s3://sra-pub-run-odp/sra/{accession}/{accession}",
+                        "ncbi_url": f"https://trace.ncbi.nlm.nih.gov/Traces/sra/?run={accession}",
+                        "note": "Use SRA Toolkit (fastq-dump or fasterq-dump) to convert SRA to FASTQ format",
+                    }
+                )
 
             return {
                 "status": "success",
@@ -292,10 +302,7 @@ class NCBISRATool(NCBIEUtilsTool):
     def _link_to_biosample(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Link SRA runs to BioSample records via elink."""
         try:
-            accessions = arguments.get("accessions", [])
-
-            if isinstance(accessions, str):
-                accessions = [accessions]
+            accessions = self._normalize_accessions(arguments)
 
             if not accessions:
                 return {
@@ -332,11 +339,13 @@ class NCBISRATool(NCBIEUtilsTool):
                         if linksetdb.get("dbto") == "biosample":
                             biosample_ids.extend(linksetdb.get("links", []))
 
-                    links.append({
-                        "sra_uid": sra_id,
-                        "biosample_uids": biosample_ids,
-                        "biosample_count": len(biosample_ids),
-                    })
+                    links.append(
+                        {
+                            "sra_uid": sra_id,
+                            "biosample_uids": biosample_ids,
+                            "biosample_count": len(biosample_ids),
+                        }
+                    )
 
                 return {
                     "status": "success",

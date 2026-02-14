@@ -1,7 +1,7 @@
 """
 SASBDB_search_entries
 
-Search the Small Angle Scattering Biological Data Bank (SASBDB) for SAXS/SANS experimental entrie...
+Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def SASBDB_search_entries(
     validate: bool = True,
 ) -> Optional[dict[str, Any]]:
     """
-    Search the Small Angle Scattering Biological Data Bank (SASBDB) for SAXS/SANS experimental entrie...
+    Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB...
 
     Parameters
     ----------

@@ -31,35 +31,39 @@ class LOINCTool(BaseTool):
         except requests.exceptions.RequestException as e:
             return {"error": f"Failed to query LOINC API: {e}", "endpoint": endpoint}
         except Exception as e:
-            return {"error": f"Unexpected error while querying LOINC: {e}", "endpoint": endpoint}
+            return {
+                "error": f"Unexpected error while querying LOINC: {e}",
+                "endpoint": endpoint,
+            }
 
-    def _parse_search_results(self, api_response: Any, fields: List[str]) -> Dict[str, Any]:
+    @staticmethod
+    def _is_api_error(api_response: Any) -> bool:
+        """Check if an API response is an error dict."""
+        return isinstance(api_response, dict) and "error" in api_response
+
+    def _parse_search_results(
+        self, api_response: Any, fields: List[str]
+    ) -> Dict[str, Any]:
         """Parse the Clinical Tables response: [total_count, codes, extra_info, data]."""
         if not isinstance(api_response, list) or len(api_response) < 4:
-            return {"error": "Invalid API response format", "raw_response": api_response}
+            return {
+                "error": "Invalid API response format",
+                "raw_response": api_response,
+            }
 
         total_count = api_response[0]
         codes = api_response[1] if len(api_response) > 1 else []
-        # api_response[2] contains code system info
         data_arrays = api_response[3] if len(api_response) > 3 else []
 
         results = []
         for i, code in enumerate(codes):
             result_item = {"code": code}
-
-            # Map field data to field names
             if i < len(data_arrays) and data_arrays[i]:
-                for j, field_name in enumerate(fields):
-                    if j < len(data_arrays[i]):
-                        result_item[field_name] = data_arrays[i][j]
-
+                for field_name, value in zip(fields, data_arrays[i]):
+                    result_item[field_name] = value
             results.append(result_item)
 
-        return {
-            "total_count": total_count,
-            "count": len(results),
-            "results": results
-        }
+        return {"total_count": total_count, "count": len(results), "results": results}
 
     def _search_loinc_items(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Search LOINC lab tests and observations by name or keywords."""
@@ -71,8 +75,15 @@ class LOINCTool(BaseTool):
         exclude_copyrighted = arguments.get("exclude_copyrighted", True)
 
         # Define fields to retrieve
-        fields = ["LOINC_NUM", "LONG_COMMON_NAME", "COMPONENT", "SYSTEM",
-                  "SCALE_TYP", "METHOD_TYP", "CLASS"]
+        fields = [
+            "LOINC_NUM",
+            "LONG_COMMON_NAME",
+            "COMPONENT",
+            "SYSTEM",
+            "SCALE_TYP",
+            "METHOD_TYP",
+            "CLASS",
+        ]
 
         params = {
             "terms": terms,
@@ -85,7 +96,7 @@ class LOINCTool(BaseTool):
 
         api_response = self._make_request("loinc_items/v3/search", params)
 
-        if isinstance(api_response, dict) and "error" in api_response:
+        if self._is_api_error(api_response):
             return api_response
 
         parsed = self._parse_search_results(api_response, fields)
@@ -100,9 +111,20 @@ class LOINCTool(BaseTool):
             return {"error": "loinc_code parameter is required"}
 
         # Get comprehensive fields for details
-        fields = ["LOINC_NUM", "LONG_COMMON_NAME", "SHORT_NAME", "COMPONENT",
-                  "PROPERTY", "TIME_ASPCT", "SYSTEM", "SCALE_TYP", "METHOD_TYP",
-                  "CLASS", "STATUS", "COMMON_TEST_RANK"]
+        fields = [
+            "LOINC_NUM",
+            "LONG_COMMON_NAME",
+            "SHORT_NAME",
+            "COMPONENT",
+            "PROPERTY",
+            "TIME_ASPCT",
+            "SYSTEM",
+            "SCALE_TYP",
+            "METHOD_TYP",
+            "CLASS",
+            "STATUS",
+            "COMMON_TEST_RANK",
+        ]
 
         params = {
             "terms": loinc_code,
@@ -112,7 +134,7 @@ class LOINCTool(BaseTool):
 
         api_response = self._make_request("loinc_items/v3/search", params)
 
-        if isinstance(api_response, dict) and "error" in api_response:
+        if self._is_api_error(api_response):
             return api_response
 
         parsed = self._parse_search_results(api_response, fields)
@@ -139,7 +161,7 @@ class LOINCTool(BaseTool):
 
         api_response = self._make_request("loinc_answers", params)
 
-        if isinstance(api_response, dict) and "error" in api_response:
+        if self._is_api_error(api_response):
             return api_response
 
         # Parse answer list response
@@ -147,14 +169,14 @@ class LOINCTool(BaseTool):
         if not isinstance(api_response, list) or len(api_response) < 4:
             return {
                 "error": f"No answer list found for LOINC code: {loinc_code}",
-                "loinc_code": loinc_code
+                "loinc_code": loinc_code,
             }
 
         count = api_response[0]
         if count == 0:
             return {
                 "error": f"No answer list available for LOINC code: {loinc_code}",
-                "loinc_code": loinc_code
+                "loinc_code": loinc_code,
             }
 
         answer_codes = api_response[1] if len(api_response) > 1 else []
@@ -169,11 +191,7 @@ class LOINCTool(BaseTool):
                     answer["display"] = answer_data[i][0]
             answers.append(answer)
 
-        return {
-            "loinc_code": loinc_code,
-            "answer_count": count,
-            "answers": answers
-        }
+        return {"loinc_code": loinc_code, "answer_count": count, "answers": answers}
 
     def _search_forms(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Search LOINC forms and survey instruments (e.g., PHQ-9, GAD-7)."""
@@ -195,7 +213,7 @@ class LOINCTool(BaseTool):
 
         api_response = self._make_request("loinc_items/v3/search", params)
 
-        if isinstance(api_response, dict) and "error" in api_response:
+        if self._is_api_error(api_response):
             return api_response
 
         parsed = self._parse_search_results(api_response, fields)
@@ -205,7 +223,11 @@ class LOINCTool(BaseTool):
             forms = []
             for item in parsed["results"]:
                 class_field = item.get("CLASS", "").lower()
-                if "survey" in class_field or "panel" in class_field or "form" in class_field:
+                if (
+                    "survey" in class_field
+                    or "panel" in class_field
+                    or "form" in class_field
+                ):
                     forms.append(item)
 
             parsed["results"] = forms

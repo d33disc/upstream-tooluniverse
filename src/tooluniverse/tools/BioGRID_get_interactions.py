@@ -1,7 +1,7 @@
 """
 BioGRID_get_interactions
 
-Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive data...
+Query experimentally validated protein and genetic interactions from BioGRID (Biological General ...
 """
 
 from typing import Any, Optional, Callable
@@ -21,7 +21,7 @@ def BioGRID_get_interactions(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Query protein and genetic interactions from the BioGRID database. BioGRID is a comprehensive data...
+    Query experimentally validated protein and genetic interactions from BioGRID (Biological General ...
 
     Parameters
     ----------

@@ -1,27 +1,30 @@
 """
-SASBDB_get_entry_data
+NeuroMorpho_get_morphometry
 
-Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+Get morphometric measurements for a neuron from NeuroMorpho.Org. Returns quantitative properties ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_get_entry_data(
-    sasbdb_id: str,
+def NeuroMorpho_get_morphometry(
+    neuron_id: Optional[int] = None,
+    neuron_name: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> Any:
     """
-    Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+    Get morphometric measurements for a neuron from NeuroMorpho.Org. Returns quantitative properties ...
 
     Parameters
     ----------
-    sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5', 'SASDP92'). Find IDs via...
+    neuron_id : int
+        Numeric neuron ID. Example: 1.
+    neuron_name : str
+        Neuron name (alternative to neuron_id). Example: 'cnic_001'.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +34,19 @@ def SASBDB_get_entry_data(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "SASBDB_get_entry_data", "arguments": {"sasbdb_id": sasbdb_id}},
+        {
+            "name": "NeuroMorpho_get_morphometry",
+            "arguments": {"neuron_id": neuron_id, "neuron_name": neuron_name},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["SASBDB_get_entry_data"]
+__all__ = ["NeuroMorpho_get_morphometry"]

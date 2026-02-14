@@ -1,7 +1,7 @@
 """
 BioGRID_get_ptms
 
-Get post-translational modification (PTM) data from BioGRID. Returns PTMs including phosphorylati...
+Retrieve post-translational modifications (PTM = Protein modifications after translation) for pro...
 """
 
 from typing import Any, Optional, Callable
@@ -22,7 +22,7 @@ def BioGRID_get_ptms(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get post-translational modification (PTM) data from BioGRID. Returns PTMs including phosphorylati...
+    Retrieve post-translational modifications (PTM = Protein modifications after translation) for pro...
 
     Parameters
     ----------

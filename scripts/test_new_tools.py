@@ -19,6 +19,7 @@ Examples:
 """
 import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -153,7 +154,6 @@ def run_tests(tu: ToolUniverse, configs: List[Tuple[Path, List[Dict]]], args) ->
             # Check if tool requires API keys that are not available
             required_keys = tool.get("required_api_keys", [])
             if required_keys:
-                import os
                 missing_keys = [key for key in required_keys if not os.getenv(key)]
                 if missing_keys:
                     if args.verbose:

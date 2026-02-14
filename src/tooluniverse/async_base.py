@@ -12,6 +12,54 @@ from .task_progress import TaskProgress
 from .exceptions import ToolError
 
 
+def _generate_async_return_schema() -> dict:
+    """Generate a standard ToolUniverse return schema with oneOf success/error."""
+    return {
+        "oneOf": [
+            {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "description": "Successful result data",
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Optional metadata",
+                    },
+                },
+                "required": ["data"],
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "message": {"type": "string"},
+                            "error_type": {"type": "string"},
+                            "details": {"type": "object"},
+                        },
+                        "required": ["message", "error_type"],
+                    }
+                },
+                "required": ["error"],
+            },
+        ]
+    }
+
+
+def _format_async_error(name: str, exception: Exception) -> dict:
+    """Convert an exception into the standard ToolUniverse error dict."""
+    return {
+        "error": {
+            "message": str(exception),
+            "error_type": type(exception).__name__,
+            "details": {"tool": name},
+        }
+    }
+
+
 class AsyncPollingTool(ABC):
     """
     Base class for async tools that submit jobs and poll for completion.
@@ -64,8 +112,7 @@ class AsyncPollingTool(ABC):
 
     def __init__(self):
         """Initialize tool with auto-generated return schema."""
-        # Auto-generate return_schema following ToolUniverse conventions
-        self.return_schema = self._generate_return_schema()
+        self.return_schema = _generate_async_return_schema()
 
     @abstractmethod
     def submit_job(self, arguments: Dict[str, Any]) -> str:
@@ -242,46 +289,6 @@ class AsyncPollingTool(ABC):
             f"({max_attempts} attempts)"
         )
 
-    def _generate_return_schema(self) -> dict:
-        """
-        Auto-generate return schema following ToolUniverse conventions.
-
-        This is automatically implemented - you don't write this code!
-        """
-        return {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "description": "Successful result data",
-                        },
-                        "metadata": {
-                            "type": "object",
-                            "description": "Optional metadata",
-                        },
-                    },
-                    "required": ["data"],
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "object",
-                            "properties": {
-                                "message": {"type": "string"},
-                                "error_type": {"type": "string"},
-                                "details": {"type": "object"},
-                            },
-                            "required": ["message", "error_type"],
-                        }
-                    },
-                    "required": ["error"],
-                },
-            ]
-        }
-
     def get_batch_concurrency_limit(self) -> int:
         """
         Get maximum number of parallel executions for this tool.
@@ -306,13 +313,7 @@ class AsyncPollingTool(ABC):
         Returns:
             Error dict with {"error": {...}}
         """
-        return {
-            "error": {
-                "message": str(exception),
-                "error_type": type(exception).__name__,
-                "details": {"tool": self.name},
-            }
-        }
+        return _format_async_error(self.name, exception)
 
 
 class AsyncStreamingTool(ABC):
@@ -357,7 +358,7 @@ class AsyncStreamingTool(ABC):
 
     def __init__(self):
         """Initialize tool with auto-generated return schema."""
-        self.return_schema = self._generate_return_schema()
+        self.return_schema = _generate_async_return_schema()
 
     @abstractmethod
     def start_stream(self, arguments: Dict[str, Any]) -> str:
@@ -434,36 +435,10 @@ class AsyncStreamingTool(ABC):
         except Exception as e:
             return self.handle_error(e)
 
-    def _generate_return_schema(self) -> dict:
-        """Auto-generate return schema."""
-        return {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {"type": "object"},
-                        "metadata": {"type": "object"},
-                    },
-                    "required": ["data"],
-                },
-                {
-                    "type": "object",
-                    "properties": {"error": {"type": "object"}},
-                    "required": ["error"],
-                },
-            ]
-        }
-
     def get_batch_concurrency_limit(self) -> int:
         """Default concurrency limit for streaming tools."""
         return 5
 
     def handle_error(self, exception: Exception) -> dict:
         """Handle errors."""
-        return {
-            "error": {
-                "message": str(exception),
-                "error_type": type(exception).__name__,
-                "details": {"tool": self.name},
-            }
-        }
+        return _format_async_error(self.name, exception)

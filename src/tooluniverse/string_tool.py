@@ -88,19 +88,10 @@ class STRINGRESTTool(BaseTool):
         if len(lines) < 2:
             return {"data": [], "error": "No data returned"}
 
-        # Parse header
         header = lines[0].split("\t")
-
-        # Parse data rows
-        data = []
-        for line in lines[1:]:
-            if line.strip():
-                values = line.split("\t")
-                row = {}
-                for i, value in enumerate(values):
-                    if i < len(header):
-                        row[header[i]] = value
-                data.append(row)
+        data = [
+            dict(zip(header, line.split("\t"))) for line in lines[1:] if line.strip()
+        ]
 
         return {"data": data, "header": header}
 
@@ -109,13 +100,21 @@ class STRINGRESTTool(BaseTool):
         for param in self.required:
             if param not in arguments:
                 error_msg = f"Missing required parameter: {param}"
-                return {"status": "error", "data": {"error": error_msg}, "error": error_msg}
+                return {
+                    "status": "error",
+                    "data": {"error": error_msg},
+                    "error": error_msg,
+                }
 
         url = self._build_url()
         params = self._build_params(arguments)
         api_response = self._make_request(url, params)
 
         if "error" in api_response:
-            return {"status": "error", "data": api_response, "error": api_response.get("error")}
+            return {
+                "status": "error",
+                "data": api_response,
+                "error": api_response.get("error"),
+            }
 
         return {"status": "success", "data": api_response}

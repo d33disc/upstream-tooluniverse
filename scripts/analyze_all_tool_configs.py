@@ -56,21 +56,13 @@ def analyze_tool_config(filepath: str) -> Dict[str, Any]:
             if tool_info['endpoint']:
                 analysis['endpoints'].add(tool_info['endpoint'])
             
-            # Check for missing fields
-            if not tool_info['has_description']:
-                analysis['missing_fields'].append(f"{tool_info['name']}: missing description")
-            if not tool_info['has_return_schema']:
-                analysis['missing_fields'].append(f"{tool_info['name']}: missing return_schema")
-            if not tool_info['has_test_examples']:
-                analysis['missing_fields'].append(f"{tool_info['name']}: missing test_examples")
-            
-            # Count fields
-            if tool_info['has_description']:
-                analysis['has_description'] += 1
-            if tool_info['has_return_schema']:
-                analysis['has_return_schema'] += 1
-            if tool_info['has_test_examples']:
-                analysis['has_test_examples'] += 1
+            # Check for missing fields and count present ones
+            for field in ('description', 'return_schema', 'test_examples'):
+                has_key = f'has_{field}'
+                if tool_info[has_key]:
+                    analysis[has_key] += 1
+                else:
+                    analysis['missing_fields'].append(f"{tool_info['name']}: missing {field}")
             
             analysis['tools'].append(tool_info)
         
@@ -156,26 +148,19 @@ def analyze_all_configs(data_dir: str = 'src/tooluniverse/data') -> Dict[str, An
             })
         
         # Check for missing fields
-        if analysis['has_return_schema'] < analysis['tool_count']:
-            results['summary']['files_without_return_schema'].append({
-                'file': analysis['file'],
-                'missing': analysis['tool_count'] - analysis['has_return_schema'],
-                'total': analysis['tool_count']
-            })
-        
-        if analysis['has_test_examples'] < analysis['tool_count']:
-            results['summary']['files_without_test_examples'].append({
-                'file': analysis['file'],
-                'missing': analysis['tool_count'] - analysis['has_test_examples'],
-                'total': analysis['tool_count']
-            })
-        
-        if analysis['has_description'] < analysis['tool_count']:
-            results['summary']['files_without_descriptions'].append({
-                'file': analysis['file'],
-                'missing': analysis['tool_count'] - analysis['has_description'],
-                'total': analysis['tool_count']
-            })
+        _field_to_summary = {
+            'has_return_schema': 'files_without_return_schema',
+            'has_test_examples': 'files_without_test_examples',
+            'has_description': 'files_without_descriptions',
+        }
+        for field_key, summary_key in _field_to_summary.items():
+            missing = analysis['tool_count'] - analysis[field_key]
+            if missing > 0:
+                results['summary'][summary_key].append({
+                    'file': analysis['file'],
+                    'missing': missing,
+                    'total': analysis['tool_count'],
+                })
         
         # Categorize by tool type
         tool_types = set(t['type'] for t in analysis['tools'])
@@ -211,54 +196,32 @@ def generate_report(results: Dict[str, Any], output_file: str = 'COMPREHENSIVE_T
         "",
         "---",
         "",
-        "## 1. Files Missing Return Schema",
-        "",
-        "These files have tools without return_schema definitions:",
-        "",
-        "| File | Missing | Total Tools |",
-        "|------|---------|-------------|",
     ]
-    
-    for item in sorted(results['summary']['files_without_return_schema'], 
-                      key=lambda x: x['missing'], reverse=True)[:50]:
-        report_lines.append(f"| {item['file']} | {item['missing']} | {item['total']} |")
-    
+
+    # Sections 1-3: missing field tables (identical structure, different data)
+    _missing_sections = [
+        ("1", "Return Schema", "return_schema definitions", "files_without_return_schema"),
+        ("2", "Test Examples", "test_examples", "files_without_test_examples"),
+        ("3", "Descriptions", "descriptions", "files_without_descriptions"),
+    ]
+    for num, label, desc_suffix, summary_key in _missing_sections:
+        items = sorted(
+            results['summary'][summary_key],
+            key=lambda x: x['missing'], reverse=True,
+        )[:50]
+        report_lines.extend([
+            f"## {num}. Files Missing {label}",
+            "",
+            f"These files have tools without {desc_suffix}:",
+            "",
+            "| File | Missing | Total Tools |",
+            "|------|---------|-------------|",
+        ])
+        for item in items:
+            report_lines.append(f"| {item['file']} | {item['missing']} | {item['total']} |")
+        report_lines.extend(["", "---", ""])
+
     report_lines.extend([
-        "",
-        "---",
-        "",
-        "## 2. Files Missing Test Examples",
-        "",
-        "These files have tools without test_examples:",
-        "",
-        "| File | Missing | Total Tools |",
-        "|------|---------|-------------|",
-    ])
-    
-    for item in sorted(results['summary']['files_without_test_examples'],
-                      key=lambda x: x['missing'], reverse=True)[:50]:
-        report_lines.append(f"| {item['file']} | {item['missing']} | {item['total']} |")
-    
-    report_lines.extend([
-        "",
-        "---",
-        "",
-        "## 3. Files Missing Descriptions",
-        "",
-        "These files have tools without descriptions:",
-        "",
-        "| File | Missing | Total Tools |",
-        "|------|---------|-------------|",
-    ])
-    
-    for item in sorted(results['summary']['files_without_descriptions'],
-                      key=lambda x: x['missing'], reverse=True)[:50]:
-        report_lines.append(f"| {item['file']} | {item['missing']} | {item['total']} |")
-    
-    report_lines.extend([
-        "",
-        "---",
-        "",
         "## 4. Files with Many Tools (20+)",
         "",
         "These files contain many tools and may need endpoint coverage verification:",
@@ -306,12 +269,14 @@ def generate_report(results: Dict[str, Any], output_file: str = 'COMPREHENSIVE_T
             continue
         
         issues = []
-        if analysis['has_return_schema'] < analysis['tool_count']:
-            issues.append(f"Missing {analysis['tool_count'] - analysis['has_return_schema']} return_schema(s)")
-        if analysis['has_test_examples'] < analysis['tool_count']:
-            issues.append(f"Missing {analysis['tool_count'] - analysis['has_test_examples']} test_example(s)")
-        if analysis['has_description'] < analysis['tool_count']:
-            issues.append(f"Missing {analysis['tool_count'] - analysis['has_description']} description(s)")
+        for field_key, label in [
+            ('has_return_schema', 'return_schema'),
+            ('has_test_examples', 'test_example'),
+            ('has_description', 'description'),
+        ]:
+            missing = analysis['tool_count'] - analysis[field_key]
+            if missing > 0:
+                issues.append(f"Missing {missing} {label}(s)")
         
         if issues:
             files_with_issues.append({

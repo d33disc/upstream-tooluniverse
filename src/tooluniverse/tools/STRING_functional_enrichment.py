@@ -1,7 +1,7 @@
 """
 STRING_functional_enrichment
 
-Perform functional enrichment analysis on a set of proteins using STRING. Returns enriched GO ter...
+Identify enriched biological functions, pathways, and processes for a protein set using STRING (S...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def STRING_functional_enrichment(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Perform functional enrichment analysis on a set of proteins using STRING. Returns enriched GO ter...
+    Identify enriched biological functions, pathways, and processes for a protein set using STRING (S...
 
     Parameters
     ----------

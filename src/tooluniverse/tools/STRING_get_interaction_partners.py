@@ -1,7 +1,7 @@
 """
 STRING_get_interaction_partners
 
-Get direct interaction partners for a protein with confidence scores from STRING database. Return...
+Find direct interaction partners for a single protein from STRING (Search Tool for Retrieval of I...
 """
 
 from typing import Any, Optional, Callable
@@ -19,7 +19,7 @@ def STRING_get_interaction_partners(
     validate: bool = True,
 ) -> list[Any]:
     """
-    Get direct interaction partners for a protein with confidence scores from STRING database. Return...
+    Find direct interaction partners for a single protein from STRING (Search Tool for Retrieval of I...
 
     Parameters
     ----------
