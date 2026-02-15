@@ -1854,6 +1854,19 @@ from .web_api_documentation_search import web_api_documentation_search
 from .web_search import web_search
 from .who_gho_get_data import who_gho_get_data
 from .who_gho_query_health_data import who_gho_query_health_data
+from .OpenTree_match_names import OpenTree_match_names
+from .OpenTree_get_taxon import OpenTree_get_taxon
+from .OpenTree_get_mrca import OpenTree_get_mrca
+from .OpenTree_get_induced_subtree import OpenTree_get_induced_subtree
+from .iNaturalist_search_taxa import iNaturalist_search_taxa
+from .iNaturalist_get_taxon import iNaturalist_get_taxon
+from .iNaturalist_search_observations import iNaturalist_search_observations
+from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
+from .NCIThesaurus_search import NCIThesaurus_search
+from .NCIThesaurus_get_concept import NCIThesaurus_get_concept
+from .NCIThesaurus_get_children import NCIThesaurus_get_children
+from .ClinGenAR_lookup_allele import ClinGenAR_lookup_allele
+from .ClinGenAR_get_external_records import ClinGenAR_get_external_records
 
 __all__ = [
     "get_shared_client",
@@ -3219,4 +3232,17 @@ __all__ = [
     "web_search",
     "who_gho_get_data",
     "who_gho_query_health_data",
+    "OpenTree_match_names",
+    "OpenTree_get_taxon",
+    "OpenTree_get_mrca",
+    "OpenTree_get_induced_subtree",
+    "iNaturalist_search_taxa",
+    "iNaturalist_get_taxon",
+    "iNaturalist_search_observations",
+    "iNaturalist_get_species_counts",
+    "NCIThesaurus_search",
+    "NCIThesaurus_get_concept",
+    "NCIThesaurus_get_children",
+    "ClinGenAR_lookup_allele",
+    "ClinGenAR_get_external_records",
 ]

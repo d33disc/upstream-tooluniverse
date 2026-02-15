@@ -322,4 +322,8 @@ STATIC_LAZY_REGISTRY = {
     "ProteomeXchangeTool": "proteomexchange_tool",
     "PDBeSearchTool": "pdbe_search_tool",
     "NextstrainTool": "nextstrain_tool",
+    "OpenTreeTool": "opentree_tool",
+    "INaturalistTool": "inaturalist_tool",
+    "NCIThesaurusTool": "nci_thesaurus_tool",
+    "ClinGenARTool": "clingen_ar_tool",
 }

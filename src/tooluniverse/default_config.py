@@ -459,6 +459,14 @@ default_tool_files = {
     "uniprot_idmapping": os.path.join(
         current_dir, "data", "uniprot_idmapping_tools.json"
     ),
+    # Open Tree of Life - Phylogenetic tree of life (name resolution, taxonomy, MRCA, subtrees)
+    "opentree": os.path.join(current_dir, "data", "opentree_tools.json"),
+    # iNaturalist - Citizen science biodiversity observations (taxa, observations, species counts)
+    "inaturalist": os.path.join(current_dir, "data", "inaturalist_tools.json"),
+    # NCI Thesaurus - National Cancer Institute terminology (cancer diseases, drugs, genes)
+    "nci_thesaurus": os.path.join(current_dir, "data", "nci_thesaurus_tools.json"),
+    # ClinGen Allele Registry - Standardized allele IDs (HGVS normalization, cross-references)
+    "clingen_ar": os.path.join(current_dir, "data", "clingen_ar_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
