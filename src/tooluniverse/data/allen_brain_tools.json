@@ -6,11 +6,11 @@
             "type": "object",
             "properties": {
                 "gene_acronym": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Gene symbol/acronym for exact match. Examples: 'Gad1', 'Pvalb', 'Sst', 'Bdnf', 'Th'."
                 },
                 "gene_name": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Gene name for partial match search (alternative to gene_acronym). Example: 'glutamate decarboxylase'."
                 },
                 "num_rows": {
@@ -82,11 +82,11 @@
             "type": "object",
             "properties": {
                 "acronym": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Structure acronym for exact match. Examples: 'CA1', 'VISp', 'TH', 'HIP', 'CTX'."
                 },
                 "name": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Structure name for partial match (alternative to acronym). Example: 'hippocampus', 'cerebellum'."
                 },
                 "num_rows": {

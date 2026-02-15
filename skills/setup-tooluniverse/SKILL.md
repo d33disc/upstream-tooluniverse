@@ -237,6 +237,8 @@ Read [API_KEYS_REFERENCE.md](API_KEYS_REFERENCE.md) for detailed per-key info (w
 | `SEMANTIC_SCHOLAR_API_KEY` | Semantic Scholar | Literature search (raises rate limit 1->100 req/s) | Yes | https://www.semanticscholar.org/product/api |
 | `FDA_API_KEY` | openFDA | Drug/food/device adverse event queries (raises limit 240->1000 req/min) | Yes | https://open.fda.gov/apis/authentication/ |
 | `BRENDA_EMAIL` + `BRENDA_PASSWORD` | BRENDA | 3 enzyme database tools (both email and password required) | Yes | https://brenda-enzymes.org/register.php |
+| `MOUSER_API_KEY` | Mouser Electronics | 4 electronic component search tools (ICs, resistors, capacitors, etc.) | Yes | https://www.mouser.com/api-search/ |
+| `DIGIKEY_CLIENT_ID` + `DIGIKEY_CLIENT_SECRET` | Digi-Key Electronics | 4 component search tools with parametric search (both ID and secret required) | Yes | https://developer.digikey.com/ |
 
 #### Tier 3: LLM Provider Keys (For agentic tool features)
 
@@ -273,6 +275,8 @@ Test each configured key with a real tool call:
 - `NCBI_API_KEY` -> `execute_tool("PubMed_search_articles", {"query": "CRISPR", "max_results": 1})`
 - `NVIDIA_API_KEY` -> `execute_tool("NvidiaNIM_alphafold2_predict", {"sequence": "MKTVRQERLKS"})`
 - `BIOGRID_API_KEY` -> `execute_tool("BioGRID_get_interactions", {"geneList": "TP53", "taxId": 9606})`
+- `MOUSER_API_KEY` -> `execute_tool("Mouser_search_by_part_number", {"part_number": "STM32F103C8T6"})`
+- `DIGIKEY_CLIENT_ID` + `DIGIKEY_CLIENT_SECRET` -> `execute_tool("DigiKey_search_by_keyword", {"keywords": "STM32"})`
 
 ### Step 5: Test it together
 

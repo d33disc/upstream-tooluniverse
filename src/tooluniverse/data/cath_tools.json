@@ -1,0 +1,119 @@
+[
+    {
+        "name": "CATH_get_superfamily",
+        "description": "Get CATH protein structure superfamily information by CATH ID. CATH classifies protein domain structures into a four-level hierarchy: Class, Architecture, Topology, Homologous superfamily. Superfamilies group evolutionarily related domains. Returns classification name, number of families, and domain counts. Example: 2.40.50.140 returns 'Nucleic acid-binding proteins' with 227 S35 families and 2,879 total domains.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "superfamily_id": {
+                    "type": "string",
+                    "description": "CATH superfamily ID in C.A.T.H format. Examples: '2.40.50.140' (Nucleic acid-binding proteins), '3.40.50.300' (P-loop NTPases), '1.10.510.10' (Globin-like), '2.60.40.10' (Immunoglobulin-like)."
+                }
+            },
+            "required": ["superfamily_id"]
+        },
+        "fields": {
+            "endpoint": "superfamily"
+        },
+        "type": "CATHTool",
+        "test_examples": [
+            {"superfamily_id": "2.40.50.140"},
+            {"superfamily_id": "3.40.50.300"}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "cath_id": {"type": ["string", "null"], "description": "CATH ID"},
+                                "superfamily_id": {"type": ["string", "null"], "description": "Superfamily ID"},
+                                "classification_name": {"type": ["string", "null"], "description": "Name of the CATH node"},
+                                "classification_description": {"type": ["string", "null"], "description": "Description"},
+                                "example_domain_id": {"type": ["string", "null"], "description": "Example PDB domain ID"},
+                                "num_s35_families": {"type": ["string", "null"], "description": "Number of S35 sequence families"},
+                                "num_s60_families": {"type": ["string", "null"], "description": "Number of S60 sequence families"},
+                                "num_s95_families": {"type": ["string", "null"], "description": "Number of S95 sequence families"},
+                                "num_s100_domains": {"type": ["string", "null"], "description": "Number of S100 (near-identical) domains"},
+                                "total_domain_count": {"type": ["string", "null"], "description": "Total number of classified domains"}
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "query": {"type": "string"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "CATH_get_domain_summary",
+        "description": "Get CATH structural classification for a specific protein domain from PDB. Domains are identified by PDB code + chain + domain number (e.g., 1cukA01). Returns the full CATH hierarchy (Class, Architecture, Topology, Homologous superfamily) and residue count. Example: '1cukA01' returns CATH ID 2.40.50.140.116.1.1.1.1 (Mainly Beta class, Nucleic acid-binding proteins superfamily) with 212 residues.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "domain_id": {
+                    "type": "string",
+                    "description": "CATH domain ID: PDB code (4 chars) + chain (1 char) + domain number (2 digits). Examples: '1cukA01' (ubiquitin conjugating enzyme), '1x54A01' (DNA-binding domain), '4hhbA00' (hemoglobin alpha). Use lowercase PDB code."
+                }
+            },
+            "required": ["domain_id"]
+        },
+        "fields": {
+            "endpoint": "domain_summary"
+        },
+        "type": "CATHTool",
+        "test_examples": [
+            {"domain_id": "1cukA01"},
+            {"domain_id": "1x54A01"}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "domain_id": {"type": ["string", "null"], "description": "Query domain ID"},
+                                "cath_id": {"type": ["string", "null"], "description": "Full CATH classification ID"},
+                                "superfamily_id": {"type": ["string", "null"], "description": "CATH superfamily ID (C.A.T.H)"},
+                                "class": {"type": ["string", "null"], "description": "CATH Class number (1=Alpha, 2=Beta, 3=Alpha-Beta, 4=Few SS)"},
+                                "architecture": {"type": ["string", "null"], "description": "CATH Architecture (C.A)"},
+                                "topology": {"type": ["string", "null"], "description": "CATH Topology (C.A.T)"},
+                                "homologous_superfamily": {"type": ["string", "null"], "description": "CATH Superfamily (C.A.T.H)"},
+                                "class_name": {"type": ["string", "null"], "description": "Human-readable class name"},
+                                "residue_count": {"type": ["integer", "null"], "description": "Number of residues in domain"}
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "query": {"type": "string"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    }
+]
