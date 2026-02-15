@@ -1,7 +1,7 @@
 """
 OpenTree_get_induced_subtree
 
-Get phylogenetic subtree for OTT IDs...
+Get a phylogenetic subtree (in Newick format) from the Open Tree of Life synthetic tree for a spe...
 """
 
 from typing import Any, Optional, Callable
@@ -16,13 +16,27 @@ def OpenTree_get_induced_subtree(
     validate: bool = True,
 ) -> Any:
     """
-    Get phylogenetic subtree for OTT IDs...
+    Get a phylogenetic subtree (in Newick format) from the Open Tree of Life synthetic tree for a spe...
+
+    Parameters
+    ----------
+    ott_ids : str
+        Comma-separated OTT IDs (at least 2). Examples: '770315,417950,158484' (human...
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
-        {
-            "name": "OpenTree_get_induced_subtree",
-            "arguments": {"ott_ids": ott_ids},
-        },
+        {"name": "OpenTree_get_induced_subtree", "arguments": {"ott_ids": ott_ids}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

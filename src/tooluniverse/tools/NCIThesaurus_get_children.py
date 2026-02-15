@@ -1,7 +1,7 @@
 """
 NCIThesaurus_get_children
 
-Get child concepts from NCI hierarchy...
+Get the direct child concepts of an NCI Thesaurus concept code. Returns the immediate subcategori...
 """
 
 from typing import Any, Optional, Callable
@@ -16,13 +16,27 @@ def NCIThesaurus_get_children(
     validate: bool = True,
 ) -> Any:
     """
-    Get child concepts from NCI hierarchy...
+    Get the direct child concepts of an NCI Thesaurus concept code. Returns the immediate subcategori...
+
+    Parameters
+    ----------
+    code : str
+        NCI Thesaurus concept code to get children for. Examples: 'C3262' (Neoplasm),...
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
-        {
-            "name": "NCIThesaurus_get_children",
-            "arguments": {"code": code},
-        },
+        {"name": "NCIThesaurus_get_children", "arguments": {"code": code}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

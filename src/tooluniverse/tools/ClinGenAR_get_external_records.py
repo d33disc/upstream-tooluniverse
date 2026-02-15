@@ -1,7 +1,7 @@
 """
 ClinGenAR_get_external_records
 
-Get external DB records for allele...
+Get detailed cross-references and external database records for a ClinGen canonical allele. Takes...
 """
 
 from typing import Any, Optional, Callable
@@ -16,8 +16,25 @@ def ClinGenAR_get_external_records(
     validate: bool = True,
 ) -> Any:
     """
-    Get external DB records for allele...
+    Get detailed cross-references and external database records for a ClinGen canonical allele. Takes...
+
+    Parameters
+    ----------
+    allele_id : str
+        ClinGen canonical allele ID. Examples: 'CA000387' (TP53 R248Q), 'CA006116' (B...
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
         {
             "name": "ClinGenAR_get_external_records",

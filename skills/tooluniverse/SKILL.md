@@ -1,6 +1,6 @@
 ---
 name: tooluniverse
-description: Router skill for ToolUniverse tasks. First checks if specialized tooluniverse skills can solve the problem, then falls back to general strategies for using 10000+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, or explore drug/target/disease relationships.
+description: Router skill for ToolUniverse tasks. First checks if specialized tooluniverse skills (34+ skills covering disease/drug/target research, clinical decision support, genomics, epigenomics, chemical safety, systems biology, and more) can solve the problem, then falls back to general strategies for using 1400+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, or explore drug/target/disease relationships.
 ---
 
 # ToolUniverse Router & General Strategies
@@ -75,6 +75,7 @@ If no specialized skill matches, **EXECUTE** the general strategies (not just de
 | User Question Keywords | ACTION: Invoke This Skill |
 |------------------------|---------------------------|
 | "**drug safety**", "adverse events", "side effects", "pharmacovigilance", "FAERS", "black box warning", "drug toxicity" | **DO NOW**: `Skill(skill="tooluniverse-pharmacovigilance", args="[drug name]")` |
+| "**chemical safety**", "toxicity prediction", "ADMET", "chemical toxicity", "environmental toxicity", "safety assessment", "toxic effects", "chemical risk" | **DO NOW**: `Skill(skill="tooluniverse-chemical-safety", args="[chemical name or SMILES]")` |
 | "**cancer treatment**", "precision oncology", "tumor mutation", "targeted therapy", "EGFR", "KRAS", "BRAF", "therapy for [mutation]" | **DO NOW**: `Skill(skill="tooluniverse-precision-oncology", args="[mutation or cancer type]")` |
 | "**rare disease diagnosis**", "differential diagnosis", "phenotype matching", "HPO", "genetic diagnosis", "patient with [symptoms]" | **DO NOW**: `Skill(skill="tooluniverse-rare-disease-diagnosis", args="[symptoms or phenotypes]")` |
 | "**variant interpretation**", "VUS", "pathogenicity", "clinical significance", "genetic variant", "is [variant] pathogenic" | **DO NOW**: `Skill(skill="tooluniverse-variant-interpretation", args="[variant ID]")` |
@@ -112,6 +113,7 @@ If no specialized skill matches, **EXECUTE** the general strategies (not just de
 | "**protein interactions**", "PPI", "interactome", "binding partners", "protein complexes", "interactions of [protein]" | **DO NOW**: `Skill(skill="tooluniverse-protein-interactions", args="[protein name]")` |
 | "**systems biology**", "pathway analysis", "network analysis", "gene set enrichment", "multi-omics integration" | **DO NOW**: `Skill(skill="tooluniverse-systems-biology", args="[gene list or pathway]")` |
 | "**metabolomics**", "metabolite identification", "metabolic pathway", "small molecule metabolism" | **DO NOW**: `Skill(skill="tooluniverse-metabolomics", args="[metabolite or pathway]")` |
+| "**epigenomics**", "gene regulation", "transcription factor", "TF binding", "enhancers", "chromatin", "histone modification", "ATAC-seq", "ChIP-seq", "regulatory elements" | **DO NOW**: `Skill(skill="tooluniverse-epigenomics", args="[gene or region]")` |
 
 #### 7. Screening & Functional Genomics Tasks
 
@@ -646,7 +648,7 @@ If you're using these general strategies and realize the task matches a speciali
 ### Complete List of Specialized Skills
 
 See **Step 0: Route to Specialized Skills First** at the top of this document for:
-- 30+ specialized tooluniverse skills
+- 34+ specialized tooluniverse skills
 - Routing decision tree by task type
 - Keyword-based routing table
 - When to use vs. when to fallback

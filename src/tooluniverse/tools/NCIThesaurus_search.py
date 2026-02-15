@@ -1,7 +1,7 @@
 """
 NCIThesaurus_search
 
-Search NCI Thesaurus for cancer concepts...
+Search the NCI Thesaurus (NCIt) for biomedical concepts by term. NCIt is the National Cancer Inst...
 """
 
 from typing import Any, Optional, Callable
@@ -10,15 +10,34 @@ from ._shared_client import get_shared_client
 
 def NCIThesaurus_search(
     term: str,
-    page_size: int = None,
+    page_size: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search NCI Thesaurus for cancer concepts...
+    Search the NCI Thesaurus (NCIt) for biomedical concepts by term. NCIt is the National Cancer Inst...
+
+    Parameters
+    ----------
+    term : str
+        Search term for NCI concepts. Examples: 'melanoma', 'breast cancer', 'imatini...
+    page_size : int | Any
+        Number of results to return (default 10, max 100).
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
         {
             "name": "NCIThesaurus_search",

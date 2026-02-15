@@ -1,30 +1,30 @@
 """
-iNaturalist_search_taxa
+EnsemblReg_get_motif_features
 
-Search for species and taxa in the iNaturalist taxonomy. Returns matching organisms with their sc...
+Get transcription factor (TF) binding motif features in a genomic region from the Ensembl REST AP...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def iNaturalist_search_taxa(
-    query: str,
-    per_page: Optional[int | Any] = None,
+def EnsemblReg_get_motif_features(
+    region: str,
+    species: Optional[str] = "homo_sapiens",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for species and taxa in the iNaturalist taxonomy. Returns matching organisms with their sc...
+    Get transcription factor (TF) binding motif features in a genomic region from the Ensembl REST AP...
 
     Parameters
     ----------
-    query : str
-        Search query for taxon name (scientific or common). Examples: 'Panthera tigri...
-    per_page : int | Any
-        Number of results to return (1-200, default 10).
+    species : str
+        Species name. Use 'homo_sapiens' for human, 'mus_musculus' for mouse. Default...
+    region : str
+        Genomic region in format 'chromosome:start-end'. Example: '7:140424943-140524...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +40,8 @@ def iNaturalist_search_taxa(
 
     return get_shared_client().run_one_function(
         {
-            "name": "iNaturalist_search_taxa",
-            "arguments": {"query": query, "per_page": per_page},
+            "name": "EnsemblReg_get_motif_features",
+            "arguments": {"species": species, "region": region},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def iNaturalist_search_taxa(
     )
 
 
-__all__ = ["iNaturalist_search_taxa"]
+__all__ = ["EnsemblReg_get_motif_features"]

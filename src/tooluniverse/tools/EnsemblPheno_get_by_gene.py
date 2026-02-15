@@ -1,27 +1,30 @@
 """
-OpenTree_match_names
+EnsemblPheno_get_by_gene
 
-Resolve species names to standardized Open Tree of Life taxonomy IDs (OTT IDs) using the TNRS (Ta...
+Get phenotype associations for a gene from the Ensembl REST API. Returns diseases, traits, and cl...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def OpenTree_match_names(
-    names: str,
+def EnsemblPheno_get_by_gene(
+    gene: str,
+    species: Optional[str] = "homo_sapiens",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Resolve species names to standardized Open Tree of Life taxonomy IDs (OTT IDs) using the TNRS (Ta...
+    Get phenotype associations for a gene from the Ensembl REST API. Returns diseases, traits, and cl...
 
     Parameters
     ----------
-    names : str
-        Comma-separated list of species or taxon names to resolve. Examples: 'Homo sa...
+    species : str
+        Species name. Use 'homo_sapiens' for human. Default: 'homo_sapiens'.
+    gene : str
+        Gene symbol. Examples: 'BRCA1', 'TP53', 'EGFR', 'KRAS', 'BRAF'.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -36,11 +39,14 @@ def OpenTree_match_names(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "OpenTree_match_names", "arguments": {"names": names}},
+        {
+            "name": "EnsemblPheno_get_by_gene",
+            "arguments": {"species": species, "gene": gene},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["OpenTree_match_names"]
+__all__ = ["EnsemblPheno_get_by_gene"]

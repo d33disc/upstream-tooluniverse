@@ -1,0 +1,268 @@
+[
+    {
+        "name": "EBIProteins_get_mutagenesis",
+        "description": "Get mutagenesis experiment data for a protein from the EBI Proteins API. Returns experimentally characterized mutations with their functional effects, including gain/loss of function, binding changes, and structural impacts. Data is curated from UniProtKB with literature evidence. Essential for understanding structure-function relationships. Example: P04637 (TP53) returns 651 mutagenesis annotations showing effects of each mutation on p53 function.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "accession": {
+                    "type": "string",
+                    "description": "UniProt accession. Examples: 'P04637' (TP53/p53), 'P38398' (BRCA1), 'P00533' (EGFR), 'P01308' (Insulin)."
+                }
+            },
+            "required": [
+                "accession"
+            ]
+        },
+        "fields": {
+            "endpoint": "mutagenesis"
+        },
+        "type": "EBIProteinsExtTool",
+        "test_examples": [
+            {
+                "accession": "P04637"
+            },
+            {
+                "accession": "P00533"
+            }
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "accession": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "UniProt accession"
+                                },
+                                "entry_name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "UniProt entry name"
+                                },
+                                "gene_name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Gene name"
+                                },
+                                "features": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Feature type (MUTAGEN)"
+                                            },
+                                            "position_start": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Start position"
+                                            },
+                                            "position_end": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "End position"
+                                            },
+                                            "original_sequence": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Mutant sequence"
+                                            },
+                                            "description": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Functional effect of mutation"
+                                            },
+                                            "evidences": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object"
+                                                },
+                                                "description": "Literature evidence (PMID, etc.)"
+                                            }
+                                        }
+                                    },
+                                    "description": "Mutagenesis features (max 100)"
+                                },
+                                "total_features": {
+                                    "type": "integer",
+                                    "description": "Total number of mutagenesis features"
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "accession": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "error"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "name": "EBIProteins_get_proteomics_ptm",
+        "description": "Get post-translational modification (PTM) evidence from mass spectrometry proteomics for a protein from the EBI Proteins API. Returns experimentally detected PTMs (phosphorylation, acetylation, ubiquitination, etc.) with evidence from PeptideAtlas, ProteomicsDB, MaxQB, and EPD proteomics repositories. Shows modification positions, types, and detection confidence. Example: P04637 (TP53) returns 101 PTM features including phosphorylation sites critical for p53 regulation.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "accession": {
+                    "type": "string",
+                    "description": "UniProt accession. Examples: 'P04637' (TP53/p53), 'P38398' (BRCA1), 'P00533' (EGFR), 'P31749' (AKT1)."
+                }
+            },
+            "required": [
+                "accession"
+            ]
+        },
+        "fields": {
+            "endpoint": "proteomics_ptm"
+        },
+        "type": "EBIProteinsExtTool",
+        "test_examples": [
+            {
+                "accession": "P04637"
+            },
+            {
+                "accession": "P31749"
+            }
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "accession": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "UniProt accession"
+                                },
+                                "entry_name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "UniProt entry name"
+                                },
+                                "features": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Feature type (PROTEOMICS_PTM)"
+                                            },
+                                            "position_start": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Start position"
+                                            },
+                                            "position_end": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "End position"
+                                            },
+                                            "description": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "PTM description"
+                                            },
+                                            "evidences": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object"
+                                                },
+                                                "description": "Evidence from proteomics databases"
+                                            }
+                                        }
+                                    },
+                                    "description": "PTM features (max 100)"
+                                },
+                                "total_features": {
+                                    "type": "integer",
+                                    "description": "Total number of PTM features"
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "accession": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "error"
+                    ]
+                }
+            ]
+        }
+    }
+]

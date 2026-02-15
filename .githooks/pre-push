@@ -1,0 +1,52 @@
+#!/bin/bash
+# Pre-push hook for ToolUniverse
+# Prevents pushing temp files and ensures code quality
+
+set -e
+
+echo "Running pre-push checks..."
+
+# 1. Check for session markdown files in root that shouldn't be committed
+BAD_MD=$(git diff --cached --name-only HEAD 2>/dev/null | grep -E '^[A-Z_]+\.md$' | grep -v '^README\.md$' | grep -v '^CHANGELOG\.md$' | grep -v '^LICENSE\.md$' || true)
+if [ -n "$BAD_MD" ]; then
+    echo "ERROR: Session documentation files are staged for push:"
+    echo "$BAD_MD"
+    echo ""
+    echo "Move them to temp_docs_and_tests/ first:"
+    echo "  mv <file> temp_docs_and_tests/"
+    echo "  git rm --cached <file>"
+    exit 1
+fi
+
+# 2. Check for root-level test scripts in commits being pushed
+BAD_TESTS=$(git diff --name-only origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^test_.*\.py$' || true)
+if [ -n "$BAD_TESTS" ]; then
+    echo "ERROR: Root-level test scripts found in commits being pushed:"
+    echo "$BAD_TESTS"
+    echo ""
+    echo "These are ad-hoc scripts. Move to temp_docs_and_tests/:"
+    echo "  mv <file> temp_docs_and_tests/"
+    exit 1
+fi
+
+# 3. Check for .env files
+BAD_ENV=$(git diff --name-only origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^\.env$' || true)
+if [ -n "$BAD_ENV" ]; then
+    echo "ERROR: .env file found in commits being pushed!"
+    echo "This file may contain secrets. Remove it:"
+    echo "  git rm --cached .env"
+    exit 1
+fi
+
+# 4. Check for temp_docs_and_tests/ in commits
+BAD_TEMP=$(git diff --name-only origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^temp_docs_and_tests/' || true)
+if [ -n "$BAD_TEMP" ]; then
+    echo "ERROR: temp_docs_and_tests/ files found in commits:"
+    echo "$BAD_TEMP"
+    echo ""
+    echo "Remove from tracking:"
+    echo "  git rm -r --cached temp_docs_and_tests/"
+    exit 1
+fi
+
+echo "Pre-push checks passed!"

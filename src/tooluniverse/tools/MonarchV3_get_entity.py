@@ -1,27 +1,27 @@
 """
-OpenTree_match_names
+MonarchV3_get_entity
 
-Resolve species names to standardized Open Tree of Life taxonomy IDs (OTT IDs) using the TNRS (Ta...
+Look up detailed information about any biomedical entity in the Monarch Initiative knowledge grap...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def OpenTree_match_names(
-    names: str,
+def MonarchV3_get_entity(
+    entity_id: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Resolve species names to standardized Open Tree of Life taxonomy IDs (OTT IDs) using the TNRS (Ta...
+    Look up detailed information about any biomedical entity in the Monarch Initiative knowledge grap...
 
     Parameters
     ----------
-    names : str
-        Comma-separated list of species or taxon names to resolve. Examples: 'Homo sa...
+    entity_id : str
+        Entity CURIE identifier. Examples: 'HGNC:11998' (TP53), 'HGNC:1100' (BRCA1), ...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -36,11 +36,11 @@ def OpenTree_match_names(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "OpenTree_match_names", "arguments": {"names": names}},
+        {"name": "MonarchV3_get_entity", "arguments": {"entity_id": entity_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["OpenTree_match_names"]
+__all__ = ["MonarchV3_get_entity"]

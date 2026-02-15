@@ -467,6 +467,18 @@ default_tool_files = {
     "nci_thesaurus": os.path.join(current_dir, "data", "nci_thesaurus_tools.json"),
     # ClinGen Allele Registry - Standardized allele IDs (HGVS normalization, cross-references)
     "clingen_ar": os.path.join(current_dir, "data", "clingen_ar_tools.json"),
+    # NDEx - Network Data Exchange (biological network repository, PPI, signaling, regulatory networks)
+    "ndex": os.path.join(current_dir, "data", "ndex_tools.json"),
+    # Gene Ontology API - GO term details, gene functional annotations, gene-function associations
+    "go_api": os.path.join(current_dir, "data", "go_api_tools.json"),
+    # Ensembl Compara - Comparative genomics (orthologues, paralogues, gene trees)
+    "ensembl_compara": os.path.join(current_dir, "data", "ensembl_compara_tools.json"),
+    # Monarch Initiative V3 - Cross-species gene-disease-phenotype associations
+    "monarch_v3": os.path.join(current_dir, "data", "monarch_v3_tools.json"),
+    # EBI Proteins API Extended - Mutagenesis experiments and PTM proteomics evidence
+    "ebi_proteins_ext": os.path.join(
+        current_dir, "data", "ebi_proteins_ext_tools.json"
+    ),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

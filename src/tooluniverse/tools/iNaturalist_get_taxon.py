@@ -1,7 +1,7 @@
 """
 iNaturalist_get_taxon
 
-Get taxon details by iNaturalist ID...
+Get detailed taxonomy information for a species by its iNaturalist taxon ID. Returns scientific n...
 """
 
 from typing import Any, Optional, Callable
@@ -16,13 +16,27 @@ def iNaturalist_get_taxon(
     validate: bool = True,
 ) -> Any:
     """
-    Get taxon details by iNaturalist ID...
+    Get detailed taxonomy information for a species by its iNaturalist taxon ID. Returns scientific n...
+
+    Parameters
+    ----------
+    taxon_id : int
+        iNaturalist taxon ID. Examples: 41482 (bottlenose dolphin), 43584 (Homo sapie...
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
-        {
-            "name": "iNaturalist_get_taxon",
-            "arguments": {"taxon_id": taxon_id},
-        },
+        {"name": "iNaturalist_get_taxon", "arguments": {"taxon_id": taxon_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

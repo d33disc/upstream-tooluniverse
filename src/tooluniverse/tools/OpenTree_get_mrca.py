@@ -1,7 +1,7 @@
 """
 OpenTree_get_mrca
 
-Find MRCA of taxa by OTT IDs...
+Find the Most Recent Common Ancestor (MRCA) of a set of taxa in the Open Tree of Life synthetic p...
 """
 
 from typing import Any, Optional, Callable
@@ -16,13 +16,27 @@ def OpenTree_get_mrca(
     validate: bool = True,
 ) -> Any:
     """
-    Find MRCA of taxa by OTT IDs...
+    Find the Most Recent Common Ancestor (MRCA) of a set of taxa in the Open Tree of Life synthetic p...
+
+    Parameters
+    ----------
+    ott_ids : str
+        Comma-separated OTT IDs (at least 2). Use OpenTree_match_names to get IDs. Ex...
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
     """
+    # Handle mutable defaults to avoid B006 linting error
+
     return get_shared_client().run_one_function(
-        {
-            "name": "OpenTree_get_mrca",
-            "arguments": {"ott_ids": ott_ids},
-        },
+        {"name": "OpenTree_get_mrca", "arguments": {"ott_ids": ott_ids}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1361 scientific tools.
+Type-safe Python interface to 1402 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -150,6 +150,8 @@ from .ChIPAtlas_enrichment_analysis import ChIPAtlas_enrichment_analysis
 from .ChIPAtlas_get_experiments import ChIPAtlas_get_experiments
 from .ChIPAtlas_get_peak_data import ChIPAtlas_get_peak_data
 from .ChIPAtlas_search_datasets import ChIPAtlas_search_datasets
+from .ClinGenAR_get_external_records import ClinGenAR_get_external_records
+from .ClinGenAR_lookup_allele import ClinGenAR_lookup_allele
 from .ClinGen_get_actionability_adult import ClinGen_get_actionability_adult
 from .ClinGen_get_actionability_pediatric import ClinGen_get_actionability_pediatric
 from .ClinGen_get_dosage_sensitivity import ClinGen_get_dosage_sensitivity
@@ -192,6 +194,8 @@ from .DigiKey_get_manufacturers import DigiKey_get_manufacturers
 from .DigiKey_get_product_details import DigiKey_get_product_details
 from .DigiKey_search_by_keyword import DigiKey_search_by_keyword
 from .DrugSafetyAnalyzer import DrugSafetyAnalyzer
+from .EBIProteins_get_mutagenesis import EBIProteins_get_mutagenesis
+from .EBIProteins_get_proteomics_ptm import EBIProteins_get_proteomics_ptm
 from .EBITaxonomy_get_by_id import EBITaxonomy_get_by_id
 from .EBITaxonomy_get_by_scientific_name import EBITaxonomy_get_by_scientific_name
 from .EBITaxonomy_search_by_name import EBITaxonomy_search_by_name
@@ -218,11 +222,25 @@ from .Enamine_get_compound import Enamine_get_compound
 from .Enamine_get_libraries import Enamine_get_libraries
 from .Enamine_search_catalog import Enamine_search_catalog
 from .Enamine_search_smiles import Enamine_search_smiles
+from .EnsemblCompara_get_gene_tree import EnsemblCompara_get_gene_tree
+from .EnsemblCompara_get_orthologues import EnsemblCompara_get_orthologues
+from .EnsemblCompara_get_paralogues import EnsemblCompara_get_paralogues
 from .EnsemblLD_get_ld_pairwise import EnsemblLD_get_ld_pairwise
 from .EnsemblLD_get_ld_variants import EnsemblLD_get_ld_variants
+from .EnsemblPheno_get_by_gene import EnsemblPheno_get_by_gene
+from .EnsemblPheno_get_by_region import EnsemblPheno_get_by_region
+from .EnsemblPheno_get_by_variant import EnsemblPheno_get_by_variant
+from .EnsemblReg_get_binding_matrix import EnsemblReg_get_binding_matrix
+from .EnsemblReg_get_constrained_elements import EnsemblReg_get_constrained_elements
+from .EnsemblReg_get_motif_features import EnsemblReg_get_motif_features
 from .EnsemblVEP_annotate_hgvs import EnsemblVEP_annotate_hgvs
 from .EnsemblVEP_annotate_rsid import EnsemblVEP_annotate_rsid
 from .EnsemblVEP_variant_recoder import EnsemblVEP_variant_recoder
+from .EuroPMCAnnot_get_annotations_by_type import EuroPMCAnnot_get_annotations_by_type
+from .EuroPMCAnnot_get_article_annotations import EuroPMCAnnot_get_article_annotations
+from .EuroPMCAnnot_get_chemicals_from_article import (
+    EuroPMCAnnot_get_chemicals_from_article,
+)
 from .EuropePMC_Guidelines_Search import EuropePMC_Guidelines_Search
 from .EuropePMC_get_citations import EuropePMC_get_citations
 from .EuropePMC_get_fulltext import EuropePMC_get_fulltext
@@ -656,6 +674,9 @@ from .GDC_search_cases import GDC_search_cases
 from .GIN_Guidelines_Search import GIN_Guidelines_Search
 from .GNPS_compare_spectra import GNPS_compare_spectra
 from .GNPS_get_spectrum import GNPS_get_spectrum
+from .GOAPI_get_gene_functions import GOAPI_get_gene_functions
+from .GOAPI_get_genes_by_function import GOAPI_get_genes_by_function
+from .GOAPI_get_term import GOAPI_get_term
 from .GO_get_annotations_for_gene import GO_get_annotations_for_gene
 from .GO_get_genes_for_term import GO_get_genes_for_term
 from .GO_get_term_by_id import GO_get_term_by_id
@@ -800,6 +821,9 @@ from .MetabolomicsWorkbench_search_by_mz import MetabolomicsWorkbench_search_by_
 from .MetabolomicsWorkbench_search_compound_by_name import (
     MetabolomicsWorkbench_search_compound_by_name,
 )
+from .MonarchV3_get_associations import MonarchV3_get_associations
+from .MonarchV3_get_entity import MonarchV3_get_entity
+from .MonarchV3_search import MonarchV3_search
 from .Monarch_get_gene_diseases import Monarch_get_gene_diseases
 from .Monarch_get_gene_phenotypes import Monarch_get_gene_phenotypes
 from .Monarch_search_gene import Monarch_search_gene
@@ -831,6 +855,12 @@ from .NCBI_SRA_search_runs import NCBI_SRA_search_runs
 from .NCBI_fetch_accessions import NCBI_fetch_accessions
 from .NCBI_get_sequence import NCBI_get_sequence
 from .NCBI_search_nucleotide import NCBI_search_nucleotide
+from .NCIThesaurus_get_children import NCIThesaurus_get_children
+from .NCIThesaurus_get_concept import NCIThesaurus_get_concept
+from .NCIThesaurus_search import NCIThesaurus_search
+from .NDEx_get_network import NDEx_get_network
+from .NDEx_get_network_summary import NDEx_get_network_summary
+from .NDEx_search_networks import NDEx_search_networks
 from .NICE_Clinical_Guidelines_Search import NICE_Clinical_Guidelines_Search
 from .NICE_Guideline_Full_Text import NICE_Guideline_Full_Text
 from .NeuroMorpho_get_field_values import NeuroMorpho_get_field_values
@@ -1030,6 +1060,10 @@ from .OpenTargets_search_gwas_studies_by_disease import (
     OpenTargets_search_gwas_studies_by_disease,
 )
 from .OpenTargets_target_disease_evidence import OpenTargets_target_disease_evidence
+from .OpenTree_get_induced_subtree import OpenTree_get_induced_subtree
+from .OpenTree_get_mrca import OpenTree_get_mrca
+from .OpenTree_get_taxon import OpenTree_get_taxon
+from .OpenTree_match_names import OpenTree_match_names
 from .Orphanet_get_classification import Orphanet_get_classification
 from .Orphanet_get_disease import Orphanet_get_disease
 from .Orphanet_get_genes import Orphanet_get_genes
@@ -1219,6 +1253,10 @@ from .UCSC_get_track import UCSC_get_track
 from .UCSC_search import UCSC_search
 from .UniChem_list_sources import UniChem_list_sources
 from .UniChem_search_compound import UniChem_search_compound
+from .UniProtIDMap_convert_ids import UniProtIDMap_convert_ids
+from .UniProtIDMap_gene_to_uniprot import UniProtIDMap_gene_to_uniprot
+from .UniProtIDMap_list_databases import UniProtIDMap_list_databases
+from .UniProtIDMap_to_pdb import UniProtIDMap_to_pdb
 from .UniProt_get_alternative_names_by_accession import (
     UniProt_get_alternative_names_by_accession,
 )
@@ -1714,6 +1752,7 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
+from .ghost_tool import ghost_tool
 from .gnomad_get_gene import gnomad_get_gene
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .gnomad_get_region import gnomad_get_region
@@ -1741,6 +1780,10 @@ from .health_disparities_get_county_rankings_info import (
 )
 from .health_disparities_get_svi_info import health_disparities_get_svi_info
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
+from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
+from .iNaturalist_get_taxon import iNaturalist_get_taxon
+from .iNaturalist_search_observations import iNaturalist_search_observations
+from .iNaturalist_search_taxa import iNaturalist_search_taxa
 from .icd_search_codes import icd_search_codes
 from .iedb_get_epitope_antigens import iedb_get_epitope_antigens
 from .iedb_get_epitope_mhc import iedb_get_epitope_mhc
@@ -1854,19 +1897,6 @@ from .web_api_documentation_search import web_api_documentation_search
 from .web_search import web_search
 from .who_gho_get_data import who_gho_get_data
 from .who_gho_query_health_data import who_gho_query_health_data
-from .OpenTree_match_names import OpenTree_match_names
-from .OpenTree_get_taxon import OpenTree_get_taxon
-from .OpenTree_get_mrca import OpenTree_get_mrca
-from .OpenTree_get_induced_subtree import OpenTree_get_induced_subtree
-from .iNaturalist_search_taxa import iNaturalist_search_taxa
-from .iNaturalist_get_taxon import iNaturalist_get_taxon
-from .iNaturalist_search_observations import iNaturalist_search_observations
-from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
-from .NCIThesaurus_search import NCIThesaurus_search
-from .NCIThesaurus_get_concept import NCIThesaurus_get_concept
-from .NCIThesaurus_get_children import NCIThesaurus_get_children
-from .ClinGenAR_lookup_allele import ClinGenAR_lookup_allele
-from .ClinGenAR_get_external_records import ClinGenAR_get_external_records
 
 __all__ = [
     "get_shared_client",
@@ -1986,6 +2016,8 @@ __all__ = [
     "ChIPAtlas_get_experiments",
     "ChIPAtlas_get_peak_data",
     "ChIPAtlas_search_datasets",
+    "ClinGenAR_get_external_records",
+    "ClinGenAR_lookup_allele",
     "ClinGen_get_actionability_adult",
     "ClinGen_get_actionability_pediatric",
     "ClinGen_get_dosage_sensitivity",
@@ -2028,6 +2060,8 @@ __all__ = [
     "DigiKey_get_product_details",
     "DigiKey_search_by_keyword",
     "DrugSafetyAnalyzer",
+    "EBIProteins_get_mutagenesis",
+    "EBIProteins_get_proteomics_ptm",
     "EBITaxonomy_get_by_id",
     "EBITaxonomy_get_by_scientific_name",
     "EBITaxonomy_search_by_name",
@@ -2054,11 +2088,23 @@ __all__ = [
     "Enamine_get_libraries",
     "Enamine_search_catalog",
     "Enamine_search_smiles",
+    "EnsemblCompara_get_gene_tree",
+    "EnsemblCompara_get_orthologues",
+    "EnsemblCompara_get_paralogues",
     "EnsemblLD_get_ld_pairwise",
     "EnsemblLD_get_ld_variants",
+    "EnsemblPheno_get_by_gene",
+    "EnsemblPheno_get_by_region",
+    "EnsemblPheno_get_by_variant",
+    "EnsemblReg_get_binding_matrix",
+    "EnsemblReg_get_constrained_elements",
+    "EnsemblReg_get_motif_features",
     "EnsemblVEP_annotate_hgvs",
     "EnsemblVEP_annotate_rsid",
     "EnsemblVEP_variant_recoder",
+    "EuroPMCAnnot_get_annotations_by_type",
+    "EuroPMCAnnot_get_article_annotations",
+    "EuroPMCAnnot_get_chemicals_from_article",
     "EuropePMC_Guidelines_Search",
     "EuropePMC_get_citations",
     "EuropePMC_get_fulltext",
@@ -2278,6 +2324,9 @@ __all__ = [
     "GIN_Guidelines_Search",
     "GNPS_compare_spectra",
     "GNPS_get_spectrum",
+    "GOAPI_get_gene_functions",
+    "GOAPI_get_genes_by_function",
+    "GOAPI_get_term",
     "GO_get_annotations_for_gene",
     "GO_get_genes_for_term",
     "GO_get_term_by_id",
@@ -2404,6 +2453,9 @@ __all__ = [
     "MetabolomicsWorkbench_search_by_exact_mass",
     "MetabolomicsWorkbench_search_by_mz",
     "MetabolomicsWorkbench_search_compound_by_name",
+    "MonarchV3_get_associations",
+    "MonarchV3_get_entity",
+    "MonarchV3_search",
     "Monarch_get_gene_diseases",
     "Monarch_get_gene_phenotypes",
     "Monarch_search_gene",
@@ -2431,6 +2483,12 @@ __all__ = [
     "NCBI_fetch_accessions",
     "NCBI_get_sequence",
     "NCBI_search_nucleotide",
+    "NCIThesaurus_get_children",
+    "NCIThesaurus_get_concept",
+    "NCIThesaurus_search",
+    "NDEx_get_network",
+    "NDEx_get_network_summary",
+    "NDEx_search_networks",
     "NICE_Clinical_Guidelines_Search",
     "NICE_Guideline_Full_Text",
     "NeuroMorpho_get_field_values",
@@ -2518,6 +2576,10 @@ __all__ = [
     "OpenTargets_search_category_counts_by_query_string",
     "OpenTargets_search_gwas_studies_by_disease",
     "OpenTargets_target_disease_evidence",
+    "OpenTree_get_induced_subtree",
+    "OpenTree_get_mrca",
+    "OpenTree_get_taxon",
+    "OpenTree_match_names",
     "Orphanet_get_classification",
     "Orphanet_get_disease",
     "Orphanet_get_genes",
@@ -2687,6 +2749,10 @@ __all__ = [
     "UCSC_search",
     "UniChem_list_sources",
     "UniChem_search_compound",
+    "UniProtIDMap_convert_ids",
+    "UniProtIDMap_gene_to_uniprot",
+    "UniProtIDMap_list_databases",
+    "UniProtIDMap_to_pdb",
     "UniProt_get_alternative_names_by_accession",
     "UniProt_get_disease_variants_by_accession",
     "UniProt_get_entry_by_accession",
@@ -3100,6 +3166,7 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
+    "ghost_tool",
     "gnomad_get_gene",
     "gnomad_get_gene_constraints",
     "gnomad_get_region",
@@ -3125,6 +3192,10 @@ __all__ = [
     "health_disparities_get_county_rankings_info",
     "health_disparities_get_svi_info",
     "humanbase_ppi_analysis",
+    "iNaturalist_get_species_counts",
+    "iNaturalist_get_taxon",
+    "iNaturalist_search_observations",
+    "iNaturalist_search_taxa",
     "icd_search_codes",
     "iedb_get_epitope_antigens",
     "iedb_get_epitope_mhc",
@@ -3232,17 +3303,4 @@ __all__ = [
     "web_search",
     "who_gho_get_data",
     "who_gho_query_health_data",
-    "OpenTree_match_names",
-    "OpenTree_get_taxon",
-    "OpenTree_get_mrca",
-    "OpenTree_get_induced_subtree",
-    "iNaturalist_search_taxa",
-    "iNaturalist_get_taxon",
-    "iNaturalist_search_observations",
-    "iNaturalist_get_species_counts",
-    "NCIThesaurus_search",
-    "NCIThesaurus_get_concept",
-    "NCIThesaurus_get_children",
-    "ClinGenAR_lookup_allele",
-    "ClinGenAR_get_external_records",
 ]

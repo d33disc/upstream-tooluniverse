@@ -1,30 +1,33 @@
 """
-iNaturalist_search_taxa
+MonarchV3_search
 
-Search for species and taxa in the iNaturalist taxonomy. Returns matching organisms with their sc...
+Search the Monarch Initiative knowledge graph for biomedical entities by name or keyword. Returns...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def iNaturalist_search_taxa(
+def MonarchV3_search(
     query: str,
-    per_page: Optional[int | Any] = None,
+    limit: Optional[int] = None,
+    category: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for species and taxa in the iNaturalist taxonomy. Returns matching organisms with their sc...
+    Search the Monarch Initiative knowledge graph for biomedical entities by name or keyword. Returns...
 
     Parameters
     ----------
     query : str
-        Search query for taxon name (scientific or common). Examples: 'Panthera tigri...
-    per_page : int | Any
-        Number of results to return (1-200, default 10).
+        Search query. Can be gene names, disease names, phenotype terms, etc. Example...
+    limit : int
+        Maximum results to return (default: 10, max: 50).
+    category : str
+        Filter by entity category. Options: 'biolink:Gene', 'biolink:Disease', 'bioli...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +43,8 @@ def iNaturalist_search_taxa(
 
     return get_shared_client().run_one_function(
         {
-            "name": "iNaturalist_search_taxa",
-            "arguments": {"query": query, "per_page": per_page},
+            "name": "MonarchV3_search",
+            "arguments": {"query": query, "limit": limit, "category": category},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +52,4 @@ def iNaturalist_search_taxa(
     )
 
 
-__all__ = ["iNaturalist_search_taxa"]
+__all__ = ["MonarchV3_search"]
