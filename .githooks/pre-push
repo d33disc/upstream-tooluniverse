@@ -20,7 +20,8 @@ if [ -n "$BAD_MD" ]; then
 fi
 
 # 2. Check for root-level test scripts ADDED in commits being pushed (ignore deletions)
-BAD_TESTS=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM].*test_.*\.py$' | cut -f2 || true)
+# Only match test_*.py in project ROOT, not in subdirectories like tests/
+BAD_TESTS=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM]\s+test_.*\.py$' | cut -f2 || true)
 if [ -n "$BAD_TESTS" ]; then
     echo "ERROR: Root-level test scripts found in commits being pushed:"
     echo "$BAD_TESTS"
