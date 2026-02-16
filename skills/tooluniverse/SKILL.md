@@ -1,28 +1,257 @@
 ---
 name: tooluniverse
-description: General strategies for using ToolUniverse effectively with 10000+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, explore drug/target/disease relationships, or need guidance on how to use ToolUniverse tools wisely.
+description: Router skill for ToolUniverse tasks. First checks if specialized tooluniverse skills (34+ skills covering disease/drug/target research, clinical decision support, genomics, epigenomics, chemical safety, systems biology, and more) can solve the problem, then falls back to general strategies for using 1400+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, or explore drug/target/disease relationships.
 ---
 
-# ToolUniverse General Usage Strategies
+# ToolUniverse Router & General Strategies
+
+## YOUR TASK: Route User Questions to the Right Solution
+
+When a user asks a question, **DO NOT just show this documentation**. Instead, follow these steps:
+
+### STEP 1: Parse the User's Question
+
+Read the user's question and extract:
+1. **Main subject**: What entity? (disease, drug, protein, gene, variant, etc.)
+2. **Action**: What do they want? (research, retrieve, find, compare, analyze, etc.)
+3. **Scope**: Comprehensive report or specific data?
+4. **Keywords**: Key terms that indicate which skill to use
+
+### STEP 2: Check for Routing Match
+
+**IMMEDIATELY** check the routing table below. If the user's keywords match a specialized skill:
+- **USE THE Skill TOOL** to invoke that specialized skill right now
+- Pass the user's question to the specialized skill
+- Let that skill handle the entire workflow
+- **DO NOT** continue with general strategies
+
+If multiple skills match:
+- **ASK THE USER** which approach they prefer using AskUserQuestion
+- **DO NOT** guess which skill to use
+
+If no specialized skill matches:
+- **PROCEED TO STEP 3** to use general strategies
+
+### STEP 3: Use General Strategies (Only if No Skill Matches)
+
+If no specialized skill matches, **EXECUTE** the general strategies (not just describe them):
+- **Actually run** Tool_Finder queries to discover tools
+- **Actually invoke** multiple tools to gather data
+- **Actually generate** comprehensive reports
+- **DO NOT** just show the strategy documentation
+
+---
+
+## Routing Table (Check This First!)
+
+**ACTION REQUIRED**: Match the user's keywords against this table. When you find a match, **INVOKE THE SKILL** using the Skill tool.
+
+#### 1. Data Retrieval Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "get", "retrieve", "fetch", "**chemical compound**", "PubChem", "ChEMBL", "drug molecule", "compound info", "SMILES", "InChI" | **DO NOW**: `Skill(skill="tooluniverse-chemical-compound-retrieval", args="[user question]")` |
+| "get", "retrieve", "**expression data**", "gene expression", "omics dataset", "ArrayExpress", "BioStudies", "RNA-seq", "microarray" | **DO NOW**: `Skill(skill="tooluniverse-expression-data-retrieval", args="[user question]")` |
+| "get", "retrieve", "**protein structure**", "PDB", "AlphaFold", "crystal structure", "3D model", "coordinates" | **DO NOW**: `Skill(skill="tooluniverse-protein-structure-retrieval", args="[user question]")` |
+| "get", "retrieve", "**sequence**", "DNA sequence", "RNA sequence", "protein sequence", "NCBI", "ENA", "FASTA" | **DO NOW**: `Skill(skill="tooluniverse-sequence-retrieval", args="[user question]")` |
+
+#### 2. Research & Profiling Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "research", "profile", "tell me about", "**disease**", "syndrome", "disorder", "illness", "comprehensive report on [disease]" | **DO NOW**: `Skill(skill="tooluniverse-disease-research", args="[disease name]")` |
+| "research", "profile", "**drug**", "medication", "therapeutic agent", "medicine", "tell me about [drug]" | **DO NOW**: `Skill(skill="tooluniverse-drug-research", args="[drug name]")` |
+| "**literature review**", "papers about", "publications on", "research articles", "synthesize literature", "recent studies" | **DO NOW**: `Skill(skill="tooluniverse-literature-deep-research", args="[topic]")` |
+| "research", "profile", "**target**", "protein target", "gene target", "target validation", "tell me about [protein/gene]" | **DO NOW**: `Skill(skill="tooluniverse-target-research", args="[target name]")` |
+
+#### 3. Clinical Decision Support Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**drug safety**", "adverse events", "side effects", "pharmacovigilance", "FAERS", "black box warning", "drug toxicity" | **DO NOW**: `Skill(skill="tooluniverse-pharmacovigilance", args="[drug name]")` |
+| "**chemical safety**", "toxicity prediction", "ADMET", "chemical toxicity", "environmental toxicity", "safety assessment", "toxic effects", "chemical risk" | **DO NOW**: `Skill(skill="tooluniverse-chemical-safety", args="[chemical name or SMILES]")` |
+| "**cancer treatment**", "precision oncology", "tumor mutation", "targeted therapy", "EGFR", "KRAS", "BRAF", "therapy for [mutation]" | **DO NOW**: `Skill(skill="tooluniverse-precision-oncology", args="[mutation or cancer type]")` |
+| "**rare disease diagnosis**", "differential diagnosis", "phenotype matching", "HPO", "genetic diagnosis", "patient with [symptoms]" | **DO NOW**: `Skill(skill="tooluniverse-rare-disease-diagnosis", args="[symptoms or phenotypes]")` |
+| "**variant interpretation**", "VUS", "pathogenicity", "clinical significance", "genetic variant", "is [variant] pathogenic" | **DO NOW**: `Skill(skill="tooluniverse-variant-interpretation", args="[variant ID]")` |
+
+#### 4. Discovery & Design Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**find binders**", "small molecule discovery", "virtual screening", "hit identification", "compounds for [target]" | **DO NOW**: `Skill(skill="tooluniverse-binder-discovery", args="[target name]")` |
+| "**drug repurposing**", "new indication", "existing drugs for [disease]", "off-label use", "repurpose [drug]" | **DO NOW**: `Skill(skill="tooluniverse-drug-repurposing", args="[drug or disease]")` |
+| "**design protein**", "protein binder", "de novo protein", "RFdiffusion", "ProteinMPNN", "therapeutic protein" | **DO NOW**: `Skill(skill="tooluniverse-protein-therapeutic-design", args="[design specifications]")` |
+| "**antibody engineering**", "antibody design", "humanization", "affinity maturation", "design antibody for [target]" | **DO NOW**: `Skill(skill="tooluniverse-antibody-engineering", args="[target]")` |
+
+#### 5. Genomics & Variant Analysis Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**GWAS study**", "genome-wide association", "GWAS catalog", "genetic associations", "GWAS for [trait]" | **DO NOW**: `Skill(skill="tooluniverse-gwas-study-explorer", args="[trait]")` |
+| "**GWAS trait to gene**", "trait-associated genes", "GWAS genes", "causal genes", "genes for [trait]" | **DO NOW**: `Skill(skill="tooluniverse-gwas-trait-to-gene", args="[trait]")` |
+| "**fine-mapping**", "finemapping", "credible sets", "causal variants", "statistical refinement" | **DO NOW**: `Skill(skill="tooluniverse-gwas-finemapping", args="[region or study]")` |
+| "**SNP interpretation**", "SNP function", "rsID", "rs[number]", "variant annotation" | **DO NOW**: `Skill(skill="tooluniverse-gwas-snp-interpretation", args="[rsID]")` |
+| "**polygenic risk**", "PRS", "genetic risk", "risk prediction", "risk score for [disease]" | **DO NOW**: `Skill(skill="tooluniverse-polygenic-risk-score", args="[disease]")` |
+| "**structural variant**", "SV", "CNV", "deletion", "duplication", "chromosomal rearrangement" | **DO NOW**: `Skill(skill="tooluniverse-structural-variant-analysis", args="[SV coordinates]")` |
+
+#### 6. Systems & Network Analysis Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**protein interactions**", "PPI", "interactome", "binding partners", "protein complexes", "interactions of [protein]" | **DO NOW**: `Skill(skill="tooluniverse-protein-interactions", args="[protein name]")` |
+| "**systems biology**", "pathway analysis", "network analysis", "gene set enrichment", "multi-omics integration" | **DO NOW**: `Skill(skill="tooluniverse-systems-biology", args="[gene list or pathway]")` |
+| "**metabolomics**", "metabolite identification", "metabolic pathway", "small molecule metabolism" | **DO NOW**: `Skill(skill="tooluniverse-metabolomics", args="[metabolite or pathway]")` |
+| "**epigenomics**", "gene regulation", "transcription factor", "TF binding", "enhancers", "chromatin", "histone modification", "ATAC-seq", "ChIP-seq", "regulatory elements" | **DO NOW**: `Skill(skill="tooluniverse-epigenomics", args="[gene or region]")` |
+
+#### 7. Screening & Functional Genomics Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**CRISPR screen**", "genetic screen", "screen hits", "essential genes", "analyze screen data" | **DO NOW**: `Skill(skill="tooluniverse-crispr-screen-analysis", args="[screen data]")` |
+| "**drug-drug interaction**", "DDI", "drug combination", "polypharmacy", "interactions between [drug1] and [drug2]" | **DO NOW**: `Skill(skill="tooluniverse-drug-drug-interaction", args="[drug1, drug2]")` |
+
+#### 8. Clinical Trial & Study Design Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**clinical trial design**", "trial protocol", "study design", "endpoint selection", "design trial for [drug/disease]" | **DO NOW**: `Skill(skill="tooluniverse-clinical-trial-design", args="[drug or disease]")` |
+| "**GWAS drug discovery**", "genetic target validation", "GWAS to drug", "genetic evidence for drug" | **DO NOW**: `Skill(skill="tooluniverse-gwas-drug-discovery", args="[trait or gene]")` |
+
+#### 9. Outbreak Response Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**pathogen**", "infectious disease", "outbreak", "emerging infection", "novel virus", "novel bacteria" | **DO NOW**: `Skill(skill="tooluniverse-infectious-disease", args="[pathogen name]")` |
+
+#### 10. Infrastructure & Development Tasks
+
+**IF** user keywords match → **THEN** invoke skill immediately:
+
+| User Question Keywords | ACTION: Invoke This Skill |
+|------------------------|---------------------------|
+| "**setup**", "install ToolUniverse", "configure MCP", "API keys", "upgrade", "how to install" | **DO NOW**: `Skill(skill="setup-tooluniverse")` |
+| "**SDK**", "Python SDK", "build AI scientist", "programmatic access", "use ToolUniverse in Python" | **DO NOW**: `Skill(skill="tooluniverse-sdk", args="[use case]")` |
+
+### Routing Workflow (What You Must Do)
+
+**STEP-BY-STEP ACTIONS**:
+
+1. **Extract keywords** from user's question
+2. **Scan routing table** above for keyword matches
+3. **Take action based on match**:
+   - **If 1 clear match** → **INVOKE THAT SKILL NOW** using the Skill tool
+   - **If multiple matches** → **ASK USER** using AskUserQuestion which they prefer
+   - **If no match** → **PROCEED to general strategies** (Strategy 1-10 below)
+4. **If ambiguous** (e.g., "Tell me about aspirin") → **ASK USER** to clarify intent first
+
+### Tie-Breaking Rules (When Multiple Skills Match)
+
+If multiple skills could handle the query:
+
+1. **Specificity Rule**: Choose more specific over general
+   - Example: "cancer treatment" → precision-oncology (specific) NOT disease-research (general)
+2. **Data Type Rule**: For "get/retrieve/fetch" queries, choose retrieval skills
+   - Example: "get compound structure" → chemical-compound-retrieval NOT drug-research
+3. **If still ambiguous**: **ASK USER** using AskUserQuestion with 2-3 options
+
+### When to Use General Strategies
+
+**ONLY** use general strategies when:
+- ✅ **No specialized skill** in routing table matches the query
+- ✅ User asks "**how do I...**" or "**what's the best way to...**" (meta-questions about ToolUniverse)
+- ✅ User wants to **build custom workflow** combining multiple skills
+- ✅ User explicitly says "**don't use specialized skills**"
+
+**CRITICAL**: If ANY specialized skill matches, **INVOKE IT**. Don't use general strategies.
+
+---
+
+## Routing Examples (Learn From These)
+
+### Example 1: Clear Match → Invoke Skill
+
+**User**: "I need a comprehensive research report on breast cancer"
+**Your Action**:
+```
+1. Keywords: "comprehensive research report", "breast cancer" (disease)
+2. Match: Category 2 - "research", "disease" matches disease-research
+3. DO: Skill(skill="tooluniverse-disease-research", args="breast cancer")
+```
+
+### Example 2: Ambiguous → Ask User
+
+**User**: "Tell me about aspirin"
+**Your Action**:
+```
+1. Keywords: "tell me about", "aspirin" (drug)
+2. Matches: drug-research, pharmacovigilance, chemical-compound-retrieval, drug-repurposing
+3. DO: AskUserQuestion - "Would you like: (A) Comprehensive drug profile, (B) Safety/adverse events, (C) Chemical structure data, or (D) Repurposing opportunities?"
+```
+
+### Example 3: No Match → General Strategies
+
+**User**: "How can I find all tools related to proteomics?"
+**Your Action**:
+```
+1. Keywords: "how can I find", "tools", "proteomics"
+2. Match: None (this is a meta-question about using ToolUniverse)
+3. DO: Proceed to Strategy 1 (Tool Discovery) - Actually run Tool_Finder queries
+```
+
+### Example 4: Multiple Entity Query → Invoke Appropriate Skill
+
+**User**: "Find protein interaction data for TP53 from multiple databases"
+**Your Action**:
+```
+1. Keywords: "protein interaction", "TP53", "multiple databases"
+2. Match: Category 6 - "protein interactions" matches protein-interactions skill
+3. DO: Skill(skill="tooluniverse-protein-interactions", args="TP53")
+```
+
+---
+
+## General Usage Strategies (Fallback Mode)
+
+**USE THESE ONLY IF**: No specialized skill matches (see "When to Use General Strategies" above)
+
+**Use the strategies below when no specialized skill matches the user's question.**
 
 Master strategies for using ToolUniverse's 10000+ scientific tools effectively. These principles apply regardless of how you access ToolUniverse (MCP server, SDK, or direct tool calls).
 
-## Core Philosophy
+## Core Philosophy (Your Operating Principles)
 
-**ToolUniverse has MANY tools** - the challenge is discovering and using them effectively:
+When using general strategies, follow these principles:
 
-1. **Search widely** - Don't assume you know all relevant tools; always search for more
-2. **Query multiple databases** - Cross-reference data across sources
-3. **Multi-hop persistence** - Many answers require 3-5 tool calls in sequence
-4. **Never give up easily** - If one tool fails, try alternatives
-5. **Comprehensive reports** - Use all available data; detail is valuable
-6. **English-first queries** - Always use English terms in tool calls, even if the user writes in another language
+1. **Search widely** - Run multiple tool discovery queries; don't assume you know all tools
+2. **Query multiple databases** - Cross-reference data across sources for completeness
+3. **Multi-hop persistence** - Chain 5-10 tool calls if needed; one call is rarely enough
+4. **Never give up** - If a tool fails, try alternatives; always have a fallback
+5. **Comprehensive reports** - Generate detailed reports with sources; detail adds value
+6. **English-first queries** - Always translate to English for tool calls, respond in user's language
 
 ---
 
-## Step 0: Clarify the Request Before Researching
+## Strategy 0: Clarify Before Acting
 
-**CRITICAL**: Before starting any research, ensure you understand what the user actually needs. Wasted tool calls on the wrong entity or scope are expensive.
+**BEFORE** you start any research, check if clarification is needed:
 
 ### When to Ask Clarifying Questions
 
@@ -55,43 +284,49 @@ If any of these are unclear, ask the user **one concise question** covering all 
 
 ## Strategy 1: Exhaustive Tool Discovery
 
-**CRITICAL**: ToolUniverse has 10000+ tools. Before any research task, search for ALL relevant tools.
+**WHEN TO USE**: User asks "how to find tools" or you need tools for a novel task
 
-### Tool Discovery Methods
+### ACTION: Run These Tool Discovery Queries
 
-Use the tool finder tools to discover what's available:
+**STEP 1**: Extract main topic and synonyms from user's question
 
-| Method | Tool | Best For |
-|--------|------|----------|
-| **Keyword** | `Tool_Finder_Keyword` | Fast search by terms |
-| **LLM-based** | `Tool_Finder_LLM` | Intelligent matching by description |
-| **Embedding** | `Tool_Finder` | Semantic similarity search |
+**STEP 2**: Run multiple tool finder queries IN PARALLEL:
 
-### Discovery Best Practices
+```python
+# Example: User asks "find tools for metabolomics and mass spectrometry"
 
-| Practice | Why | Example |
-|----------|-----|---------|
-| **Search with multiple terms** | Same data from different angles | "protein expression", "gene expression", "tissue expression" |
-| **Search by database name** | Find all tools for a source | "UniProt", "ChEMBL", "OpenTargets" |
-| **Search by data type** | Comprehensive coverage | "variant", "mutation", "SNP", "polymorphism" |
-| **Search by use case** | Task-oriented discovery | "druggability", "target validation" |
+# DO THIS NOW:
+Tool_Finder_Keyword(query="metabolomics")
+Tool_Finder_Keyword(query="mass spectrometry")
+Tool_Finder_Keyword(query="metabolite identification")
+Tool_Finder_LLM(query="metabolomics analysis tools")
+Tool_Finder(query="metabolomics mass spectrometry")
+```
 
-### Minimum Discovery Queries
+**STEP 3**: Also search by related terms and database names:
 
-Before any research task, run at least these searches:
+```python
+# Expand search:
+Tool_Finder_Keyword(query="metabolic pathway")
+Tool_Finder_Keyword(query="small molecule metabolism")
+Tool_Finder_Keyword(query="HMDB")  # Known metabolomics database
+Tool_Finder_Keyword(query="MetaboLights")
+```
 
-1. **Main topic query**: `[your topic]`
-2. **Related terms**: `[synonym1]`, `[synonym2]`  
-3. **Database-specific**: `[relevant database names]`
-4. **Data type specific**: `[required data types]`
+**STEP 4**: Aggregate results, remove duplicates, present organized list to user
 
-**Example for target research**:
-- "protein information"
-- "gene expression" 
-- "drug target"
-- "UniProt", "OpenTargets"
-- "protein interaction"
-- "variant mutation"
+### Minimum Discovery Queries Template
+
+For ANY research task, run at least these:
+
+1. **Main topic**: `Tool_Finder_Keyword(query="[main topic]")`
+2. **Synonym 1**: `Tool_Finder_Keyword(query="[synonym]")`
+3. **Synonym 2**: `Tool_Finder_Keyword(query="[another synonym]")`
+4. **Database**: `Tool_Finder_Keyword(query="[known database name]")`
+5. **Data type**: `Tool_Finder_Keyword(query="[data type]")`
+6. **Use case**: `Tool_Finder_LLM(query="[full use case description]")`
+
+**CRITICAL**: Actually RUN these queries, don't just describe them!
 
 ---
 
@@ -389,47 +624,34 @@ No pathogen interactions identified in literature or databases.
 
 ---
 
-## Strategy 7: Use Specialized Skills for Specific Tasks
+## Strategy 7: Defer to Specialized Skills
 
-**CRITICAL**: For specific research tasks, use specialized skills (not this general skill).
+**CRITICAL**: This general skill should only be used when no specialized skill matches (see routing table in Step 0).
 
-### Task-Specific Skill Selection
+### Quick Reference: When to Stop and Route
 
-| Task | Recommended Skill |
-|------|-------------------|
-| **Data Retrieval** | |
-| Chemical compounds | `tooluniverse-chemical-compound-retrieval` |
-| Expression data | `tooluniverse-expression-data-retrieval` |
-| Protein structure | `tooluniverse-protein-structure-retrieval` |
-| Sequence retrieval | `tooluniverse-sequence-retrieval` |
-| **Research & Profiling** | |
-| Disease research | `tooluniverse-disease-research` |
-| Drug profiling | `tooluniverse-drug-research` |
-| Literature review | `tooluniverse-literature-deep-research` |
-| Target analysis | `tooluniverse-target-research` |
-| **Clinical Decision Support** | |
-| Drug safety analysis | `tooluniverse-pharmacovigilance` |
-| Precision oncology treatment | `tooluniverse-precision-oncology` |
-| Rare disease diagnosis | `tooluniverse-rare-disease-diagnosis` |
-| Variant interpretation | `tooluniverse-variant-interpretation` |
-| **Discovery & Design** | |
-| Small molecule binder discovery | `tooluniverse-binder-discovery` |
-| Drug repurposing | `drug-repurposing` |
-| Protein therapeutic design | `tooluniverse-protein-therapeutic-design` |
-| **Outbreak Response** | |
-| Infectious disease analysis | `tooluniverse-infectious-disease` |
-| **Infrastructure & Development** | |
-| ToolUniverse installation/setup | `setup-tooluniverse` |
-| Python SDK for AI scientist systems | `tooluniverse-sdk` |
+If you're using these general strategies and realize the task matches a specialized skill:
+1. **STOP** using general strategies
+2. **ROUTE** to the appropriate specialized skill (see Step 0 routing table)
+3. Let the specialized skill handle the entire workflow
 
-### When to Use This General Skill
+### Why Specialized Skills Are Better
 
-Use this skill when:
-- Need general guidance on ToolUniverse usage
-- Task doesn't fit a specialized skill
-- Need to combine multiple specialized workflows
-- Exploring what's possible with ToolUniverse
-- Learning ToolUniverse best practices
+| General Strategies | Specialized Skills |
+|--------------------|-------------------|
+| Flexible but unstructured | Pre-defined optimal workflows |
+| No validated output format | Standardized report structure |
+| Manual completeness checking | Automated completeness checklists |
+| Ad-hoc tool selection | Curated tool combinations |
+| Generic guidance | Domain-specific best practices |
+
+### Complete List of Specialized Skills
+
+See **Step 0: Route to Specialized Skills First** at the top of this document for:
+- 34+ specialized tooluniverse skills
+- Routing decision tree by task type
+- Keyword-based routing table
+- When to use vs. when to fallback
 
 ---
 
@@ -623,20 +845,65 @@ User (Korean): "알츠하이머병 관련 유전자"
 
 ---
 
-## Summary: The ToolUniverse Mindset
+## Summary: What You Must Do
 
-| Principle | Action |
-|-----------|--------|
-| **Clarify first** | Confirm entity, scope, species, and output before researching |
-| **Search widely** | 10000+ tools; always discover more |
-| **Multi-hop persistence** | 5-10 tool calls per question is normal |
-| **Cross-reference** | Query multiple databases for same data |
-| **Disambiguate first** | Resolve IDs before research |
-| **Never give up** | Fallbacks for every failure |
-| **Report comprehensively** | Detail with sources and evidence grades |
-| **Use specialized skills** | Apply domain-specific skills for focused tasks |
-| **Execute in parallel** | Speed through concurrent execution |
-| **Check completeness** | Ask "what's missing?" and fill gaps iteratively |
-| **English-first queries** | Translate to English for tool calls; respond in user's language |
+| Situation | Your Action (DO THIS) |
+|-----------|------------------------|
+| **User question arrives** | Immediately check routing table for keyword matches |
+| **1 clear skill match** | **INVOKE THE SKILL** using Skill tool - do NOT describe it |
+| **Multiple skill matches** | **ASK USER** which they prefer using AskUserQuestion |
+| **No skill matches** | **EXECUTE** general strategies (run actual tool queries) |
+| **Ambiguous query** | **ASK FOR CLARIFICATION** before proceeding |
+| **Tool call needed** | **ACTUALLY RUN IT** - don't just explain what it does |
+| **Report needed** | **GENERATE AND FILL IT** - don't just describe the structure |
+| **Tool fails** | **TRY ALTERNATIVES** - have fallback options |
+| **Multiple databases** | **QUERY ALL** - run queries in parallel |
+| **Complex workflow** | **CHAIN TOOL CALLS** - 5-10 calls is normal |
+| **Non-English query** | **TRANSLATE TO ENGLISH** for tools, respond in user's language |
 
-**The goal: Transform 10000+ tools into comprehensive, reliable scientific intelligence.**
+**CRITICAL REMINDER**: Your job is to **ACT**, not to **DESCRIBE**. When you see a match in the routing table, **USE THE Skill TOOL IMMEDIATELY**.
+
+---
+
+## Anti-Patterns (What NOT to Do)
+
+❌ **Don't**: Show the routing table to the user and ask them to choose
+✅ **Do**: Match keywords yourself and invoke the appropriate skill
+
+❌ **Don't**: Explain what Strategy 1 is and how it works
+✅ **Do**: Execute Strategy 1 by running Tool_Finder queries
+
+❌ **Don't**: Say "You should use /tooluniverse-disease-research for this"
+✅ **Do**: Actually invoke the skill: `Skill(skill="tooluniverse-disease-research", args="[disease]")`
+
+❌ **Don't**: Describe the report structure you would generate
+✅ **Do**: Create the report file and fill it with actual data
+
+❌ **Don't**: Tell user they need to clarify something without asking a specific question
+✅ **Do**: Use AskUserQuestion with specific options
+
+---
+
+## Quick Decision Tree
+
+```
+User asks question
+      ↓
+Extract keywords
+      ↓
+Check routing table
+      ↓
+    Match?
+   /      \
+ YES       NO
+  ↓         ↓
+1 match?   Meta-question
+  ↓  \     about usage?
+YES  NO     ↓  \
+ ↓    ↓   YES  NO
+INVOKE ASK  USE  EXECUTE
+SKILL USER STRAT1 WORKFLOW
+NOW!  WHICH?  NOW!  NOW!
+```
+
+**THE KEY**: Whatever the outcome, **TAKE ACTION**. Don't just show documentation.

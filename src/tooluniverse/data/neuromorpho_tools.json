@@ -6,11 +6,11 @@
             "type": "object",
             "properties": {
                 "neuron_id": {
-                    "type": "integer",
+                    "type": ["integer", "null"],
                     "description": "Numeric neuron ID in NeuroMorpho.Org database. Examples: 1, 102399, 50000."
                 },
                 "neuron_name": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Neuron name string (alternative to neuron_id). Example: 'cnic_001'."
                 }
             }
@@ -129,11 +129,11 @@
                     "description": "Value to search for. Examples: 'human', 'rat', 'mouse', 'hippocampus', 'pyramidal', 'interneuron'. Comma-separated for multiple values."
                 },
                 "filter_field": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Optional additional filter field. Example: 'cell_type'."
                 },
                 "filter_value": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Value for the filter field. Example: 'pyramidal'."
                 },
                 "page": {
@@ -221,11 +221,11 @@
             "type": "object",
             "properties": {
                 "neuron_id": {
-                    "type": "integer",
+                    "type": ["integer", "null"],
                     "description": "Numeric neuron ID. Example: 1."
                 },
                 "neuron_name": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Neuron name (alternative to neuron_id). Example: 'cnic_001'."
                 }
             }

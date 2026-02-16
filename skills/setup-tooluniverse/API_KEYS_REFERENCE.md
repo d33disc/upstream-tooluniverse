@@ -163,6 +163,37 @@ Detailed guide for every API key used by ToolUniverse. Use this when walking use
 - **Env variables**: `BRENDA_EMAIL` and `BRENDA_PASSWORD`
 - **Note**: This uses your login credentials, not a separate API key
 
+### MOUSER_API_KEY
+
+- **Service**: Mouser Electronics
+- **Required**: Yes (tools will not work without it)
+- **Tools that use it**: 4 Mouser tools for electronic component search by keyword, part number, and manufacturer
+- **What it does**: Provides access to Mouser's comprehensive catalog of electronic components, including ICs, resistors, capacitors, microcontrollers, and more. Includes pricing, availability, datasheets, and specifications.
+- **How to get it**:
+  1. Go to https://www.mouser.com/api-search/
+  2. Click "Sign Up For Search API"
+  3. Fill out the registration form (requires business/academic email)
+  4. API key is typically provided instantly after email verification
+- **Env variable**: `MOUSER_API_KEY`
+- **Free tier**: Yes, 1,000 requests/day, 30 requests/minute
+
+### DIGIKEY_CLIENT_ID + DIGIKEY_CLIENT_SECRET
+
+- **Service**: Digi-Key Electronics
+- **Required**: Yes (tools will not work without both)
+- **Tools that use it**: 4 Digi-Key tools for product search, detailed product info, category browsing, and manufacturer listings
+- **What it does**: Provides access to Digi-Key's extensive catalog of electronic components with detailed specifications, pricing, inventory, parametric search, and technical documentation.
+- **How to get it**:
+  1. Go to https://developer.digikey.com/
+  2. Click "Register" to create a free developer account
+  3. After login, go to "Organization" → "Production Apps"
+  4. Click "Create Production App"
+  5. Fill in app details (name, description, OAuth callback URL: `https://localhost/callback`)
+  6. After creation, copy the **Client ID** and **Client Secret**
+- **Env variables**: `DIGIKEY_CLIENT_ID` and `DIGIKEY_CLIENT_SECRET`
+- **Free tier**: Yes, 1,000 requests/day, 120 requests/minute
+- **Note**: Uses OAuth2 authentication with automatic token refresh. The tool handles token management automatically.
+
 ---
 
 ## Tier 3: LLM Provider Keys
@@ -263,5 +294,6 @@ The system checks providers in this order: **Azure OpenAI -> OpenRouter -> Gemin
 | **Enzymology** | `BRENDA_EMAIL` + `BRENDA_PASSWORD` |
 | **Drug safety** | `FDA_API_KEY`, `UMLS_API_KEY` |
 | **Patents** | `USPTO_API_KEY` |
+| **Electronic components/IC design** | `MOUSER_API_KEY`, `DIGIKEY_CLIENT_ID` + `DIGIKEY_CLIENT_SECRET` |
 | **AI-powered analysis** | Any one of: `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `OPENAI_API_KEY` |
 | **Full setup (all features)** | All Tier 1 + relevant Tier 2 + one Tier 3 key |

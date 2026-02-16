@@ -23,14 +23,17 @@ Create new scientific tools for the ToolUniverse framework following established
 
 ## Critical Knowledge
 
-### Top 6 Mistakes (90% of Failures)
+### Top 7 Mistakes (90% of Failures)
 
 1. **Missing `default_config.py` Entry** - Tools silently won't load
-2. **Fake test_examples** - Tests fail, agents get bad examples
-3. **Single-level Testing** - Misses registration bugs
-4. **Skipping `test_new_tools.py`** - Misses schema/API issues
-5. **Tool Names > 55 chars** - Breaks MCP compatibility
-6. **Raising Exceptions** - Should return error dicts instead
+2. **Non-nullable Mutually Exclusive Parameters** - Validation errors (NEW #1 issue in 2026)
+3. **Fake test_examples** - Tests fail, agents get bad examples
+4. **Single-level Testing** - Misses registration bugs
+5. **Skipping `test_new_tools.py`** - Misses schema/API issues
+6. **Tool Names > 55 chars** - Breaks MCP compatibility
+7. **Raising Exceptions** - Should return error dicts instead
+
+**Most Common (2026)**: Mistake #2 affects 60% of new tools. Always make mutually exclusive parameters nullable: `{"type": ["string", "null"]}`
 
 ### Tool Creator vs SDK User
 
@@ -521,6 +524,84 @@ def test_real_api():
 
 ---
 
+### Systematic Testing for Multiple New Tools
+
+When creating multiple tools at once (e.g., 5-15 tools for an API), use this systematic approach:
+
+**Step 1: Sample Testing (Quick validation)**
+```python
+# Test 1-2 tools per API to catch common issues
+python scripts/test_new_tools.py MyAPI_get_item -v
+python scripts/test_new_tools.py MyAPI_search -v
+```
+
+**Step 2: Identify Patterns**
+
+Group errors by type:
+- **Parameter validation errors**: "None is not of type 'integer'" → Make parameters nullable
+- **API errors**: 404, 400 → Fix test_examples with real IDs
+- **Schema errors**: "Data: None" → Check return format
+- **Wrong parameter names**: "unexpected keyword" → Verify against config
+
+**Step 3: Fix Systematically**
+
+Fix all tools with same issue together:
+```python
+# Fix all nullable parameter issues in JSON
+# Then regenerate once:
+python -m tooluniverse.generate_tools
+```
+
+**Step 4: Verify All**
+
+Test all tools comprehensively:
+```python
+# Test entire tool set
+python scripts/test_new_tools.py MyAPI -v
+
+# Verify count
+python3 << 'EOF'
+from tooluniverse import ToolUniverse
+tu = ToolUniverse()
+tu.load_tools()
+my_tools = [t for t in dir(tu.tools) if t.startswith('MyAPI_')]
+print(f"✅ {len(my_tools)} MyAPI tools loaded")
+EOF
+```
+
+**Step 5: Verify Parameter Names**
+
+Before testing, verify parameter names match the config:
+```python
+import json
+with open('src/tooluniverse/data/myapi_tools.json') as f:
+    tools = json.load(f)
+    for tool in tools:
+        print(f"{tool['name']}: {list(tool['parameter']['properties'].keys())}")
+```
+
+Don't assume parameter names like `query`, `id`, `taxon` - always verify!
+
+**Step 6: Data Structure Verification**
+
+Test understanding of return data structure:
+```python
+result = tu.tools.MyAPI_get_item(id="123")
+
+# For object data
+if isinstance(result.get('data'), dict):
+    print("✅ Returns single object")
+    value = result['data'].get('field')
+
+# For array data
+elif isinstance(result.get('data'), list):
+    print("✅ Returns array of items")
+    count = len(result['data'])
+    first = result['data'][0] if result['data'] else {}
+```
+
+---
+
 ## Common Patterns
 
 ### Error Handling Checklist
@@ -531,6 +612,169 @@ def test_real_api():
 ✅ Include helpful context in error messages
 ✅ Handle JSON parsing errors
 ✅ Validate required parameters
+
+### Parameter Design Best Practices
+
+#### Mutually Exclusive Parameters (CRITICAL)
+
+When creating tools that accept EITHER parameterA OR parameterB, **both parameters MUST be nullable**.
+
+**❌ WRONG - Will cause validation errors**:
+```json
+{
+  "parameter": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "description": "Numeric ID"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name string (alternative to id)"
+      }
+    }
+  }
+}
+```
+
+**Problem**: When user provides only `name`, validation fails because `id` is `None` and not of type `integer`.
+
+**✅ CORRECT - Make mutually exclusive parameters nullable**:
+```json
+{
+  "parameter": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": ["integer", "null"],
+        "description": "Numeric ID"
+      },
+      "name": {
+        "type": ["string", "null"],
+        "description": "Name string (alternative to id)"
+      }
+    }
+  }
+}
+```
+
+**Common patterns requiring nullable parameters**:
+- `id` OR `name` (get by ID or by name)
+- `acronym` OR `name` (search by symbol or full name)
+- `gene_id` OR `gene_symbol`
+- `neuron_id` OR `neuron_name`
+- Optional filter parameters (`filter_field`, `filter_value`)
+
+#### Optional Parameters
+
+**All optional parameters should be nullable**:
+```json
+{
+  "filter_field": {
+    "type": ["string", "null"],
+    "description": "Optional filter field"
+  },
+  "limit": {
+    "type": ["integer", "null"],
+    "description": "Optional result limit",
+    "default": 10
+  }
+}
+```
+
+#### Parameter Naming Consistency
+
+**Use consistent, descriptive parameter names**:
+- ✅ `gene_id`, `gene_symbol`, `tax_id` - Clear and specific
+- ❌ `id`, `query`, `q` - Too generic, causes confusion
+
+**Check API documentation for parameter names**:
+- Match official API parameter names when possible
+- Use snake_case for Python/JSON consistency
+- Document the mapping if API uses different names
+
+#### Test Examples
+
+**Use REAL IDs in test_examples, never placeholders**:
+```json
+{
+  "test_examples": [
+    {
+      "gene_id": "7157"  // ✅ Real TP53 gene ID
+    },
+    {
+      "gene_symbol": "BRCA1",  // ✅ Real gene symbol
+      "taxon": "9606"  // ✅ Real human tax ID
+    }
+  ]
+}
+```
+
+**❌ AVOID**:
+```json
+{
+  "test_examples": [
+    {
+      "gene_id": "TEST123"  // ❌ Fake ID
+    },
+    {
+      "gene_id": "example_id"  // ❌ Placeholder
+    }
+  ]
+}
+```
+
+#### Return Schema and Data Structure
+
+**Document whether `data` is object, array, or string**:
+```json
+{
+  "name": "MyAPI_get_item",
+  "description": "Get single item by ID. Returns object with item details.",
+  "return_schema": {
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",  // ← Specify: single object
+            "properties": {
+              "id": {"type": "string"},
+              "name": {"type": "string"}
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+```json
+{
+  "name": "MyAPI_search",
+  "description": "Search items. Returns array of matching items.",
+  "return_schema": {
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",  // ← Specify: array of results
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 ### Dependency Management
 

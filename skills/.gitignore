@@ -3,3 +3,7 @@
 tooluniverse*/
 setup-*/
 tooluniverse-drug-repurposing/
+
+# Exceptions: Track these newly created skills
+!tooluniverse-chemical-safety/
+!tooluniverse-epigenomics/

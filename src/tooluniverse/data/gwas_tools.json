@@ -545,10 +545,8 @@
     },
     "test_examples": [
       {
-        "rs_id": "rs12345",
         "mapped_gene": "BRCA1",
-        "size": 10,
-        "page": 1
+        "size": 5
       }
     ]
   },
@@ -677,7 +675,7 @@
     },
     "test_examples": [
       {
-        "association_id": "GCST000001"
+        "association_id": "216200848"
       }
     ]
   },
@@ -814,7 +812,7 @@
     },
     "test_examples": [
       {
-        "study_id": "GCST000001"
+        "study_id": "GCST000392"
       }
     ]
   },
@@ -911,7 +909,7 @@
     },
     "test_examples": [
       {
-        "rs_id": "rs1234"
+        "rs_id": "rs429358"
       }
     ]
   },
@@ -1438,11 +1436,10 @@
     },
     "test_examples": [
       {
-        "rs_id": "rs12345",
+        "rs_id": "rs7903146",
         "sort": "p_value",
         "direction": "asc",
-        "size": 20,
-        "page": 1
+        "size": 5
       }
     ]
   },
@@ -1970,9 +1967,8 @@
     },
     "test_examples": [
       {
-        "accession_id": "GCST000001",
-        "size": 20,
-        "page": 1
+        "accession_id": "GCST000392",
+        "size": 10
       }
     ]
   },

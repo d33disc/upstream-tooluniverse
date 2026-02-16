@@ -85,7 +85,36 @@ ls tests/unit/test_<tool-name>_tool.py
 
 **Fix**: Allow nullable types in JSON config using `{"type": ["<base_type>", "null"]}`. Use for optional fields, not required identifiers.
 
-### 4. Mixed Type Field Errors
+### 4. Mutually Exclusive Parameter Errors
+
+**Symptom**: `Parameter validation failed for 'param_name': None is not of type 'integer'` when passing a different parameter
+
+**Cause**: Tool accepts EITHER paramA OR paramB (mutually exclusive), but both are defined with fixed types. When only one is provided, validation fails because the other is `None`.
+
+**Example**:
+```json
+{
+  "neuron_id": {"type": "integer"},      // ❌ Fails when neuron_name is used
+  "neuron_name": {"type": "string"}      // ❌ Fails when neuron_id is used
+}
+```
+
+**Fix**: Make mutually exclusive parameters nullable:
+```json
+{
+  "neuron_id": {"type": ["integer", "null"]},      // ✅ Allows None
+  "neuron_name": {"type": ["string", "null"]}      // ✅ Allows None
+}
+```
+
+**Common patterns**:
+- `id` OR `name` parameters (get by ID or by name)
+- `acronym` OR `name` parameters (search by symbol or full name)
+- Optional filter parameters that may not be provided
+
+**Important**: Also make truly optional parameters (like `filter_field`, `filter_value`) nullable even if not mutually exclusive.
+
+### 5. Mixed Type Field Errors
 
 **Symptom**: `Schema Mismatch: At N->field: {object} is not of type 'string', 'null'`
 
@@ -93,7 +122,7 @@ ls tests/unit/test_<tool-name>_tool.py
 
 **Fix**: Use `oneOf` in JSON config for fields with multiple distinct schemas. Different from nullable (`{"type": ["string", "null"]}`) which is same base type + null.
 
-### 5. Invalid Test Examples
+### 6. Invalid Test Examples
 
 **Symptom**: `404 ERROR - Not found` or `400 Bad Request`
 
@@ -101,13 +130,13 @@ ls tests/unit/test_<tool-name>_tool.py
 
 **Fix**: Discover valid examples using the List → Get or Search → Details patterns below.
 
-### 6. API Parameter Errors
+### 7. API Parameter Errors
 
 **Symptom**: `400 Bad Request` or parameter validation errors
 
 **Fix**: Update parameter schema in JSON config with correct types, required fields, and enums.
 
-### 7. API Key Configuration Errors
+### 8. API Key Configuration Errors
 
 **Symptom**: Tool not loading when API key is optional, or `api_key` parameter causing confusion
 
@@ -119,13 +148,13 @@ ls tests/unit/test_<tool-name>_tool.py
 
 **Fix**: Use `optional_api_keys` in JSON config for APIs that work anonymously but have better rate limits with keys. Read API key from environment only (`os.environ.get()`), never as a tool parameter.
 
-### 8. API Endpoint Pattern Errors
+### 9. API Endpoint Pattern Errors
 
 **Symptom**: `404` for valid resources, or unexpected results
 
 **Fix**: Verify official API docs - check if values belong in URL path vs query parameters.
 
-### 9. Transient API Failures
+### 10. Transient API Failures
 
 **Symptom**: Tests fail intermittently with timeout/connection/5xx errors
 
@@ -239,6 +268,61 @@ After fixing, provide this summary:
 - Before: X tests, Y passed, Z failed
 - After: X tests, X passed, 0 failed
 
+## Testing Best Practices
+
+### Verify Parameter Names Before Testing
+
+**CRITICAL**: Always read the tool's JSON config or generated wrapper to get the correct parameter names. Don't assume parameter names.
+
+**Example of incorrect testing**:
+```python
+# ❌ WRONG - assumed parameter name
+AllenBrain_search_genes(query='Gad1')  # Fails: unexpected keyword 'query'
+```
+
+**Correct approach**:
+```python
+# ✅ RIGHT - checked config first
+# Config shows parameters: gene_acronym, gene_name
+AllenBrain_search_genes(gene_acronym='Gad1')  # Works!
+```
+
+**How to find correct parameter names**:
+1. Read the JSON config: `src/tooluniverse/data/*_tools.json`
+2. Check the generated wrapper: `src/tooluniverse/tools/<ToolName>.py`
+3. Look at test_examples in the JSON config
+
+### Systematic Testing Approach
+
+When testing multiple tools:
+
+1. **Sample first**: Test 1-2 tools per API to identify patterns
+2. **Categorize errors**: Group by error type (param validation, API errors, data structure)
+3. **Fix systematically**: Fix all tools with same issue type together
+4. **Regenerate once**: Run `python -m tooluniverse.generate_tools` after all JSON changes
+5. **Verify all**: Test all fixed tools comprehensively
+
+### Understanding Data Structure
+
+Tools can return different data structures:
+- **Object**: `{"data": {"id": 1, "name": "..."}}` - single result
+- **Array**: `{"data": [{"id": 1}, {"id": 2}]}` - multiple results
+- **String**: `{"data": "description text"}` - text response
+
+**Test accordingly**:
+```python
+# For object data
+result = tool()
+data = result.get('data', {})
+value = data.get('field_name')  # ✅
+
+# For array data
+result = tool()
+items = result.get('data', [])
+count = len(items)  # ✅
+first = items[0] if items else {}  # ✅
+```
+
 ## Common Pitfalls
 
 1. **Schema validates `data` field**, not full response
@@ -247,6 +331,9 @@ After fixing, provide this summary:
 4. **Use `optional_api_keys`** for APIs that work without keys
 5. **Check official API docs** for correct endpoint patterns
 6. **Unit tests should skip** on transient API failures, not fail
+7. **Mutually exclusive parameters MUST be nullable** - most common new tool issue
+8. **Verify parameter names from configs** - don't assume or guess
+9. **Test with correct data structure expectations** - list vs dict vs string
 
 ## Debugging
 
