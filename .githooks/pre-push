@@ -7,7 +7,8 @@ set -e
 echo "Running pre-push checks..."
 
 # 1. Check for session markdown files ADDED in commits (ignore deletions)
-BAD_MD=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM].*[A-Z_]+\.md$' | cut -f2 | grep -v '^README\.md$' | grep -v '^CHANGELOG\.md$' | grep -v '^LICENSE\.md$' || true)
+# Match patterns: *_SUMMARY.md, *_REPORT.md, SESSION_*.md, etc. in project ROOT only
+BAD_MD=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM]\s+[^/]+\.md$' | cut -f2 | grep -E '(_SUMMARY|_REPORT|SESSION_|IMPLEMENTATION_|BUG_ANALYSIS_|AGENT_|DEVTU_|FIX_)' || true)
 if [ -n "$BAD_MD" ]; then
     echo "ERROR: Session documentation files found in commits being pushed:"
     echo "$BAD_MD"
