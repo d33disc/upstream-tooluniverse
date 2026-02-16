@@ -6,10 +6,10 @@ set -e
 
 echo "Running pre-push checks..."
 
-# 1. Check for session markdown files in root that shouldn't be committed
-BAD_MD=$(git diff --cached --name-only HEAD 2>/dev/null | grep -E '^[A-Z_]+\.md$' | grep -v '^README\.md$' | grep -v '^CHANGELOG\.md$' | grep -v '^LICENSE\.md$' || true)
+# 1. Check for session markdown files ADDED in commits (ignore deletions)
+BAD_MD=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM].*[A-Z_]+\.md$' | cut -f2 | grep -v '^README\.md$' | grep -v '^CHANGELOG\.md$' | grep -v '^LICENSE\.md$' || true)
 if [ -n "$BAD_MD" ]; then
-    echo "ERROR: Session documentation files are staged for push:"
+    echo "ERROR: Session documentation files found in commits being pushed:"
     echo "$BAD_MD"
     echo ""
     echo "Move them to temp_docs_and_tests/ first:"
@@ -18,8 +18,8 @@ if [ -n "$BAD_MD" ]; then
     exit 1
 fi
 
-# 2. Check for root-level test scripts in commits being pushed
-BAD_TESTS=$(git diff --name-only origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^test_.*\.py$' || true)
+# 2. Check for root-level test scripts ADDED in commits being pushed (ignore deletions)
+BAD_TESTS=$(git diff --name-status origin/$(git branch --show-current)..HEAD 2>/dev/null | grep -E '^[AM].*test_.*\.py$' | cut -f2 || true)
 if [ -n "$BAD_TESTS" ]; then
     echo "ERROR: Root-level test scripts found in commits being pushed:"
     echo "$BAD_TESTS"
