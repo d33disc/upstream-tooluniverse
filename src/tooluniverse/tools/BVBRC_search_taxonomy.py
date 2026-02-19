@@ -1,27 +1,30 @@
 """
-ClinGen_get_gene_validity
+BVBRC_search_taxonomy
 
-Get all ClinGen gene-disease validity curations. Returns comprehensive list of gene-disease relat...
+Search for pathogen taxonomy entries in BV-BRC by keyword. Returns matching taxa with names, rank...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ClinGen_get_gene_validity(
-    gene: Optional[str] = None,
+def BVBRC_search_taxonomy(
+    keyword: str,
+    limit: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Get all ClinGen gene-disease validity curations. Returns comprehensive list of gene-disease relat...
+    Search for pathogen taxonomy entries in BV-BRC by keyword. Returns matching taxa with names, rank...
 
     Parameters
     ----------
-    gene : str
-        Optional: Filter by gene symbol
+    keyword : str
+        Taxonomy search keyword. Examples: 'Mycobacterium', 'coronavirus', 'Salmonell...
+    limit : int | Any
+        Maximum number of results. Default: 10. Max: 100.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +34,19 @@ def ClinGen_get_gene_validity(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "ClinGen_get_gene_validity", "arguments": {"gene": gene}},
+        {
+            "name": "BVBRC_search_taxonomy",
+            "arguments": {"keyword": keyword, "limit": limit},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ClinGen_get_gene_validity"]
+__all__ = ["BVBRC_search_taxonomy"]

@@ -1,27 +1,27 @@
 """
-ClinGen_get_gene_validity
+EOL_get_hierarchy_entry
 
-Get all ClinGen gene-disease validity curations. Returns comprehensive list of gene-disease relat...
+Get taxonomy hierarchy (classification tree) for a species from a specific classification system ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def ClinGen_get_gene_validity(
-    gene: Optional[str] = None,
+def EOL_get_hierarchy_entry(
+    hierarchy_entry_id: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Get all ClinGen gene-disease validity curations. Returns comprehensive list of gene-disease relat...
+    Get taxonomy hierarchy (classification tree) for a species from a specific classification system ...
 
     Parameters
     ----------
-    gene : str
-        Optional: Filter by gene symbol
+    hierarchy_entry_id : int
+        EOL hierarchy entry ID from a specific classification system. Get this from E...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,19 @@ def ClinGen_get_gene_validity(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "ClinGen_get_gene_validity", "arguments": {"gene": gene}},
+        {
+            "name": "EOL_get_hierarchy_entry",
+            "arguments": {"hierarchy_entry_id": hierarchy_entry_id},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["ClinGen_get_gene_validity"]
+__all__ = ["EOL_get_hierarchy_entry"]

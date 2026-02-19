@@ -1,27 +1,30 @@
 """
-SASBDB_search_entries
+Pfam_get_family_proteomes
 
-Search SASBDB for small-angle scattering entries by molecular type (protein, rna, dna, heterocomp...
+Get the proteome (organism) distribution for a Pfam protein family. Returns the list of reference...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_search_entries(
-    molecular_type: Optional[str | Any] = None,
+def Pfam_get_family_proteomes(
+    pfam_accession: str,
+    max_results: Optional[int] = 20,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Search SASBDB for small-angle scattering entries by molecular type (protein, rna, dna, heterocomp...
+    Get the proteome (organism) distribution for a Pfam protein family. Returns the list of reference...
 
     Parameters
     ----------
-    molecular_type : str | Any
-        Filter by molecule type: 'protein', 'rna', 'dna', 'heterocomplex', 'other'. L...
+    pfam_accession : str
+        Pfam family accession. Examples: 'PF00001' (7tm_1, found in 1890 proteomes), ...
+    max_results : int
+        Maximum number of proteomes to return (default 20, max 100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,14 +34,14 @@ def SASBDB_search_entries(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "SASBDB_search_entries",
-            "arguments": {"molecular_type": molecular_type},
+            "name": "Pfam_get_family_proteomes",
+            "arguments": {"pfam_accession": pfam_accession, "max_results": max_results},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -46,4 +49,4 @@ def SASBDB_search_entries(
     )
 
 
-__all__ = ["SASBDB_search_entries"]
+__all__ = ["Pfam_get_family_proteomes"]

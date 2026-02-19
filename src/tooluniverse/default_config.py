@@ -627,6 +627,20 @@ default_tool_files = {
     "pfam": os.path.join(current_dir, "data", "pfam_tools.json"),
     # PubChem Toxicity - Chemical toxicity, GHS hazard, carcinogen classification, LD50 data
     "pubchem_tox": os.path.join(current_dir, "data", "pubchem_tox_tools.json"),
+    # ClinicalTrials.gov - World's largest clinical trial registry (572,000+ trials)
+    "clinicaltrials": os.path.join(current_dir, "data", "clinicaltrials_tools.json"),
+    # EpiGraphDB - Mendelian Randomization, genetic correlations, drug repurposing via GWAS
+    "epigraphdb": os.path.join(current_dir, "data", "epigraphdb_tools.json"),
+    # Bio.tools - ELIXIR bioinformatics tool/software registry (30,000+ entries)
+    "biotools_registry": os.path.join(
+        current_dir, "data", "biotools_registry_tools.json"
+    ),
+    # Identifiers.org - ELIXIR biological identifier resolution service (800+ namespaces)
+    "identifiers_org": os.path.join(current_dir, "data", "identifiers_org_tools.json"),
+    # Europe PMC Citations - Citation network traversal (who cites / is cited by)
+    "europepmc_citations": os.path.join(
+        current_dir, "data", "europepmc_citations_tools.json"
+    ),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

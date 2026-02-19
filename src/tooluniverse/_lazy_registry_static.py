@@ -450,4 +450,7 @@ STATIC_LAZY_REGISTRY = {
     "ZINCTool": "zinc_tool",
     "PfamTool": "pfam_tool",
     "PubChemToxTool": "pubchem_tox_tool",
+    "CTGovAPITool": "clinicaltrials_tool",
+    "EpiGraphDBTool": "epigraphdb_tool",
+    "IdentifiersOrgTool": "identifiers_org_tool",
 }

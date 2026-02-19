@@ -1,27 +1,30 @@
 """
-SASBDB_search_entries
+LNCipedia_get_lncrna
 
-Search SASBDB for small-angle scattering entries by molecular type (protein, rna, dna, heterocomp...
+Get detailed lncRNA information from RNAcentral including full RNA sequence, species, gene associ...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_search_entries(
-    molecular_type: Optional[str | Any] = None,
+def LNCipedia_get_lncrna(
+    rnacentral_id: str,
+    taxid: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Search SASBDB for small-angle scattering entries by molecular type (protein, rna, dna, heterocomp...
+    Get detailed lncRNA information from RNAcentral including full RNA sequence, species, gene associ...
 
     Parameters
     ----------
-    molecular_type : str | Any
-        Filter by molecule type: 'protein', 'rna', 'dna', 'heterocomplex', 'other'. L...
+    rnacentral_id : str
+        RNAcentral URS identifier. Use species-specific format 'URS_TAXID' (e.g., 'UR...
+    taxid : int
+        NCBI Taxonomy ID for species-specific lookup (e.g., 9606 for human). Optional...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,14 +34,14 @@ def SASBDB_search_entries(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
         {
-            "name": "SASBDB_search_entries",
-            "arguments": {"molecular_type": molecular_type},
+            "name": "LNCipedia_get_lncrna",
+            "arguments": {"rnacentral_id": rnacentral_id, "taxid": taxid},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -46,4 +49,4 @@ def SASBDB_search_entries(
     )
 
 
-__all__ = ["SASBDB_search_entries"]
+__all__ = ["LNCipedia_get_lncrna"]
