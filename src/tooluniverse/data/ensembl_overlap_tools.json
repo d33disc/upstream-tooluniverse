@@ -52,7 +52,7 @@
                                         "type": "object",
                                         "properties": {
                                             "feature_type": {"type": "string"},
-                                            "id": {"type": "string"},
+                                            "id": {"type": ["string", "null"]},
                                             "start": {"type": "integer"},
                                             "end": {"type": "integer"},
                                             "strand": {"type": "integer"},
@@ -134,7 +134,7 @@
                                         "type": "object",
                                         "properties": {
                                             "feature_type": {"type": "string"},
-                                            "id": {"type": "string"},
+                                            "id": {"type": ["string", "null"]},
                                             "start": {"type": "integer"},
                                             "end": {"type": "integer"},
                                             "biotype": {"type": ["string", "null"]},

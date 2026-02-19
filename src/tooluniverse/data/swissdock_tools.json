@@ -84,7 +84,7 @@
           "type": "object",
           "properties": {
             "error": {
-              "type": "string"
+              "type": ["string", "object"]
             }
           },
           "required": ["error"]
@@ -169,7 +169,7 @@
           "type": "object",
           "properties": {
             "error": {
-              "type": "string"
+              "type": ["string", "object"]
             }
           },
           "required": ["error"]
@@ -246,7 +246,7 @@
           "type": "object",
           "properties": {
             "error": {
-              "type": "string"
+              "type": ["string", "object"]
             }
           },
           "required": ["error"]

@@ -1,518 +1,270 @@
 [
   {
-    "type": "SASBDBRESTTool",
     "name": "SASBDB_search_entries",
-    "description": "Search SASBDB (Small Angle Scattering Biological Data Bank) for protein structure entries. SASBDB contains 2,000+ structural biology experiments using SAXS (Small Angle X-ray Scattering) and SANS (Small Angle Neutron Scattering) - techniques that measure protein shape, size, and complex formation in solution (not crystal structures). No API key required. SAXS/SANS data reveals: protein size and shape, protein-protein complex formation, conformational changes, flexibility, oligomeric state (monomer, dimer, etc.). Complementary to X-ray crystallography and Cryo-EM - provides solution-state structural information for proteins difficult to crystallize or where flexibility is important. Use for: finding structural data for protein complexes, analyzing protein conformations in solution, discovering oligomeric states, validating protein-protein interaction by structure, accessing raw scattering data for reanalysis, studying intrinsically disordered proteins (IDPs), flexible multidomain proteins.",
+    "description": "Search SASBDB for small-angle scattering entries by molecular type (protein, rna, dna, heterocomplex, other) or list all entries. Returns entry codes and publication status.",
     "parameter": {
       "type": "object",
       "properties": {
-        "query": {
-          "type": "string",
-          "description": "Search query for SASBDB entries. Examples: 'immunoglobulin', 'BSA', 'lysozyme', 'P12345' (UniProt ID), 'amyloid', 'disordered protein'. Searches protein names, titles, organisms, and cross-references."
-        },
-        "method": {
-          "type": "string",
-          "enum": ["SAXS", "SANS", "all"],
-          "default": "all",
-          "description": "Filter by experimental method: 'SAXS' (X-ray), 'SANS' (neutron), or 'all' (default)."
-        },
-        "limit": {
-          "type": "integer",
-          "default": 20,
-          "description": "Maximum number of entries to return (default: 20, max: 100)."
+        "molecular_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Filter by molecule type: 'protein', 'rna', 'dna', 'heterocomplex', 'other'. Leave null to list all entries.",
+          "enum": [
+            "protein",
+            "rna",
+            "dna",
+            "heterocomplex",
+            "other",
+            null
+          ]
         }
       },
-      "required": ["query"]
+      "required": []
     },
     "fields": {
-      "endpoint": "https://www.sasbdb.org/rest-api/search",
-      "return_format": "JSON"
+      "endpoint": "https://www.sasbdb.org/rest-api/entry/codes/{molecular_type}/",
+      "method": "GET"
     },
     "return_schema": {
-      "type": ["object", "null"],
-      "description": "Search results with SASBDB entries and metadata.",
-      "additionalProperties": true,
-      "properties": {
-        "count": {
-          "type": "integer",
-          "description": "Total number of matching entries"
-        },
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "sasbdb_id": {
-                "type": "string",
-                "description": "SASBDB entry identifier (e.g., 'SASBDB-XXXX')"
-              },
-              "title": {
-                "type": "string",
-                "description": "Entry title with protein name"
-              },
-              "organism": {
-                "type": "string",
-                "description": "Source organism"
-              },
-              "method": {
-                "type": "string",
-                "description": "Experimental method (SAXS or SANS)"
-              },
-              "rg": {
-                "type": "number",
-                "description": "Radius of gyration (Rg) in Ångströms"
-              },
-              "dmax": {
-                "type": "number",
-                "description": "Maximum dimension (Dmax) in Ångströms"
-              },
-              "molecular_weight": {
-                "type": "number",
-                "description": "Molecular weight in kDa"
-              },
-              "uniprot_id": {
-                "type": "string",
-                "description": "UniProt accession if available"
-              },
-              "pdb_id": {
-                "type": "string",
-                "description": "Related PDB entry if available"
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
           }
         }
       }
     },
+    "type": "SASBDBSearchTool",
     "test_examples": [
       {
-        "query": "lysozyme",
-        "method": "SAXS",
-        "limit": 10
+        "molecular_type": "protein"
       },
       {
-        "query": "immunoglobulin",
-        "method": "all",
-        "limit": 5
-      },
-      {
-        "query": "P02768",
-        "limit": 10
+        "molecular_type": "rna"
       }
     ]
   },
   {
-    "type": "SASBDBRESTTool",
-    "name": "SASBDB_get_entry_data",
-    "description": "Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) entry. Returns experimental conditions (buffer, temperature, pH, concentration), sample information (protein name, organism, molecular weight), derived structural parameters (Rg radius of gyration, Dmax maximum dimension), quality metrics (I0, chi-squared), and links to raw data files and cross-references (PDB/UniProt). No API key required. Use after searching with SASBDB_search_entries to get complete information about an entry. Essential for: understanding experimental context, assessing data quality, comparing solution structures with crystal structures, validating SAXS/SANS experimental setup, accessing downloadable scattering curves and structural models.",
+    "name": "SASBDB_get_entry",
+    "description": "Get detailed metadata for a SASBDB small-angle scattering entry by its accession code. Returns experimental conditions, publication info, data file URLs, and analysis results.",
     "parameter": {
       "type": "object",
       "properties": {
         "sasbdb_id": {
           "type": "string",
-          "description": "SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5', 'SASDP92'). Find IDs via SASBDB_search_entries or from publications. Format varies but typically starts with 'SASD'."
+          "description": "SASBDB accession code (e.g. SASDCZ9, SASDFZ9)"
         }
       },
-      "required": ["sasbdb_id"]
+      "required": [
+        "sasbdb_id"
+      ]
     },
     "fields": {
-      "endpoint": "https://www.sasbdb.org/rest-api/entry/{sasbdb_id}",
-      "return_format": "JSON"
+      "endpoint": "https://www.sasbdb.org/rest-api/entry/summary/{sasbdb_id}/",
+      "method": "GET"
     },
     "return_schema": {
-      "type": ["object", "null"],
-      "description": "Complete SASBDB entry metadata and experimental details.",
-      "additionalProperties": true,
+      "type": "object",
       "properties": {
-        "sasbdb_id": {
+        "code": {
           "type": "string"
         },
-        "title": {
+        "status": {
           "type": "string"
         },
-        "protein_name": {
-          "type": "string"
+        "type_of_curve": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "organism": {
-          "type": "string"
+        "angular_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "expression_system": {
-          "type": "string"
+        "project": {
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "method": {
-          "type": "string",
-          "description": "SAXS or SANS"
+        "experiment": {
+          "type": [
+            "object",
+            "null"
+          ]
         },
-        "molecular_weight": {
-          "type": "number",
-          "description": "Molecular weight in kDa"
+        "intensities_data": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "rg": {
-          "type": "number",
-          "description": "Radius of gyration (Å)"
-        },
-        "dmax": {
-          "type": "number",
-          "description": "Maximum dimension (Å)"
-        },
-        "i0": {
-          "type": "number",
-          "description": "Forward scattering intensity"
-        },
-        "quality": {
-          "type": "number",
-          "description": "Chi-squared or quality metric"
-        },
-        "buffer": {
-          "type": "string"
-        },
-        "ph": {
-          "type": "number"
-        },
-        "temperature": {
-          "type": "number",
-          "description": "Temperature in Kelvin"
-        },
-        "concentration": {
-          "type": "number",
-          "description": "Protein concentration (mg/ml)"
-        },
+        "pddf_data": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "type": "SASBDBRESTTool",
+    "test_examples": [
+      {
+        "sasbdb_id": "SASDCZ9"
+      },
+      {
+        "sasbdb_id": "SASDFZ9"
+      }
+    ]
+  },
+  {
+    "name": "SASBDB_get_entries_by_uniprot",
+    "description": "Find SASBDB small-angle scattering entries associated with a UniProt protein accession. Returns list of matching SASBDB entry codes.",
+    "parameter": {
+      "type": "object",
+      "properties": {
         "uniprot_id": {
-          "type": "string"
-        },
-        "pdb_id": {
-          "type": "string"
-        },
-        "pubmed_id": {
-          "type": "string"
-        },
-        "authors": {
-          "type": "array"
-        },
-        "deposition_date": {
-          "type": "string"
-        },
-        "release_date": {
-          "type": "string"
+          "type": "string",
+          "description": "UniProt accession (e.g. P00698 for lysozyme, P68871 for hemoglobin)"
+        }
+      },
+      "required": [
+        "uniprot_id"
+      ]
+    },
+    "fields": {
+      "endpoint": "https://www.sasbdb.org/rest-api/entry/codes/uniprot/{uniprot_id}/",
+      "method": "GET"
+    },
+    "return_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
         }
       }
     },
+    "type": "SASBDBRESTTool",
     "test_examples": [
       {
-        "sasbdb_id": "SASDBA2"
+        "uniprot_id": "P00698"
       },
       {
-        "sasbdb_id": "SASDBW5"
-      },
-      {
-        "sasbdb_id": "SASDP92"
+        "uniprot_id": "P68871"
       }
     ]
   },
   {
-    "type": "SASBDBRESTTool",
-    "name": "SASBDB_get_scattering_profile",
-    "description": "Retrieve the experimental small-angle scattering curve I(q) vs q for a SASBDB entry. Returns momentum transfer (q) values and corresponding scattering intensities I(q) with error bars, along with fitted curves and background subtraction info. The scattering profile reveals protein shape, size distribution, and conformational flexibility in solution. Essential for validating structural models, detecting aggregation or flexibility, comparing with simulated curves from atomistic models, or identifying conformational changes. Use with structural modeling tools.",
+    "name": "SASBDB_list_instruments",
+    "description": "List all beamlines and instruments in the SASBDB database used for small-angle scattering experiments.",
     "parameter": {
       "type": "object",
-      "properties": {
-        "sasbdb_id": {
-          "type": "string",
-          "description": "SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5'). Get from SASBDB_search_entries or SASBDB_get_entry_data."
-        },
-        "format": {
-          "type": "string",
-          "enum": ["json", "dat"],
-          "default": "json",
-          "description": "Output format: 'json' (structured data) or 'dat' (column format for ATSAS tools)."
-        }
-      },
-      "required": ["sasbdb_id"]
+      "properties": {},
+      "required": []
     },
     "fields": {
-      "endpoint": "https://www.sasbdb.org/rest-api/entry/{sasbdb_id}/scattering",
-      "return_format": "JSON"
+      "endpoint": "https://www.sasbdb.org/rest-api/instrument/all/",
+      "method": "GET"
     },
     "return_schema": {
-      "type": ["object", "array", "null"],
-      "description": "Scattering curve data with I(q) vs q.",
-      "additionalProperties": true,
-      "properties": {
-        "sasbdb_id": {
-          "type": "string"
-        },
-        "scattering_data": {
-          "type": "array",
-          "description": "Array of [q, I(q), error] data points",
-          "items": {
-            "type": "object",
-            "properties": {
-              "q": {
-                "type": "number",
-                "description": "Momentum transfer (Å⁻¹)"
-              },
-              "intensity": {
-                "type": "number",
-                "description": "Scattering intensity I(q)"
-              },
-              "error": {
-                "type": "number",
-                "description": "Standard error"
-              }
-            }
-          }
-        },
-        "q_range": {
-          "type": "object",
-          "properties": {
-            "min": {
-              "type": "number"
-            },
-            "max": {
-              "type": "number"
-            }
-          }
-        },
-        "fitted_curve": {
-          "type": "array",
-          "description": "Fitted theoretical curve"
-        },
-        "guinier_fit": {
-          "type": "object",
-          "properties": {
-            "rg": {
-              "type": "number"
-            },
-            "i0": {
-              "type": "number"
-            },
-            "quality": {
-              "type": "number"
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "beamline_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type_of_source": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       }
     },
+    "type": "SASBDBRESTTool",
     "test_examples": [
-      {
-        "sasbdb_id": "SASDBA2",
-        "format": "json"
-      },
-      {
-        "sasbdb_id": "SASDBW5",
-        "format": "json"
-      }
+      {}
     ]
   },
   {
-    "type": "SASBDBRESTTool",
-    "name": "SASBDB_get_models",
-    "description": "Retrieve derived structural models for a SASBDB entry including ab initio bead models, atomistic model fits, and ensemble representations. Returns model files (PDB format), fit quality metrics (chi-squared), model types (DAMMIF, GASBOR, ensemble refinement), and agreement with experimental data. Essential for visualizing solution structures, comparing with crystal structures, identifying conformational states, and understanding protein flexibility. Models can be downloaded for visualization in PyMOL, ChimeraX, or further analysis.",
+    "name": "SASBDB_get_entries_by_tag",
+    "description": "Find SASBDB small-angle scattering entries associated with a specific tag shortcode. See https://www.sasbdb.org/tags/ for valid tags.",
     "parameter": {
       "type": "object",
       "properties": {
-        "sasbdb_id": {
+        "tag": {
           "type": "string",
-          "description": "SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5'). Obtain from SASBDB_search_entries."
-        },
-        "model_type": {
-          "type": "string",
-          "enum": ["ab_initio", "atomistic", "ensemble", "all"],
-          "default": "all",
-          "description": "Type of model: 'ab_initio' (bead models from DAMMIF/GASBOR), 'atomistic' (PDB coordinate fits), 'ensemble' (multiple conformers), or 'all'."
+          "description": "Tag shortcode to search for (e.g. 'idp' for intrinsically disordered proteins, 'sans', 'waxs', 'benchmark', 'softmatter')"
         }
       },
-      "required": ["sasbdb_id"]
+      "required": [
+        "tag"
+      ]
     },
     "fields": {
-      "endpoint": "https://www.sasbdb.org/rest-api/entry/{sasbdb_id}/models",
-      "return_format": "JSON"
+      "endpoint": "https://www.sasbdb.org/rest-api/entry/codes/tags/{tag}/",
+      "method": "GET"
     },
     "return_schema": {
-      "type": ["object", "null"],
-      "description": "Structural models derived from SAXS/SANS data.",
-      "additionalProperties": true,
-      "properties": {
-        "sasbdb_id": {
-          "type": "string"
-        },
-        "models": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "model_id": {
-                "type": "string"
-              },
-              "model_type": {
-                "type": "string",
-                "description": "ab_initio, atomistic, or ensemble"
-              },
-              "method": {
-                "type": "string",
-                "description": "Modeling software (DAMMIF, GASBOR, EOM, FoXS)"
-              },
-              "chi_squared": {
-                "type": "number",
-                "description": "Fit quality (lower is better)"
-              },
-              "rg": {
-                "type": "number",
-                "description": "Radius of gyration from model"
-              },
-              "dmax": {
-                "type": "number",
-                "description": "Maximum dimension from model"
-              },
-              "pdb_file_url": {
-                "type": "string",
-                "description": "Download URL for PDB model file"
-              },
-              "pdb_id": {
-                "type": "string",
-                "description": "Reference PDB if atomistic fit"
-              },
-              "description": {
-                "type": "string"
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
           }
-        },
-        "best_model": {
-          "type": "object",
-          "description": "Model with best chi-squared fit"
         }
       }
     },
-    "test_examples": [
-      {
-        "sasbdb_id": "SASDBA2",
-        "model_type": "all"
-      },
-      {
-        "sasbdb_id": "SASDBW5",
-        "model_type": "ab_initio"
-      },
-      {
-        "sasbdb_id": "SASDP92",
-        "model_type": "atomistic"
-      }
-    ]
-  },
-  {
     "type": "SASBDBRESTTool",
-    "name": "SASBDB_download_data",
-    "description": "Get download URLs and metadata for raw experimental data files, processed scattering curves, distance distribution P(r) functions, and structural models from a SASBDB entry. Returns direct download links for DAT files (scattering data), OUT files (distance distributions), PDB model files, and metadata files in various formats (CIF, XML, JSON). Essential for computational analysis with ATSAS tools, reproducing published results, performing custom data processing, or integrating SAXS constraints into molecular dynamics simulations. Includes data processing parameters and quality assessment.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "sasbdb_id": {
-          "type": "string",
-          "description": "SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5'). Get from SASBDB_search_entries."
-        },
-        "file_type": {
-          "type": "string",
-          "enum": ["scattering", "distance_distribution", "models", "metadata", "all"],
-          "default": "all",
-          "description": "Type of files to retrieve: 'scattering' (DAT), 'distance_distribution' (P(r) OUT), 'models' (PDB), 'metadata' (CIF/XML), or 'all'."
-        }
-      },
-      "required": ["sasbdb_id"]
-    },
-    "fields": {
-      "endpoint": "https://www.sasbdb.org/rest-api/entry/{sasbdb_id}/files",
-      "return_format": "JSON"
-    },
-    "return_schema": {
-      "type": ["object", "null"],
-      "description": "Download URLs and file information.",
-      "additionalProperties": true,
-      "properties": {
-        "sasbdb_id": {
-          "type": "string"
-        },
-        "files": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "file_name": {
-                "type": "string"
-              },
-              "file_type": {
-                "type": "string",
-                "description": "DAT, OUT, PDB, CIF, XML, etc."
-              },
-              "description": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string",
-                "description": "Direct download URL"
-              },
-              "size": {
-                "type": "integer",
-                "description": "File size in bytes"
-              },
-              "format": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "scattering_data": {
-          "type": "object",
-          "properties": {
-            "dat_file": {
-              "type": "string",
-              "description": "URL to experimental scattering curve"
-            },
-            "fitted_file": {
-              "type": "string",
-              "description": "URL to fitted curve"
-            }
-          }
-        },
-        "distance_distribution": {
-          "type": "object",
-          "properties": {
-            "pr_file": {
-              "type": "string",
-              "description": "URL to P(r) function file"
-            }
-          }
-        },
-        "models": {
-          "type": "array",
-          "description": "URLs to PDB model files"
-        },
-        "metadata": {
-          "type": "object",
-          "properties": {
-            "cif_file": {
-              "type": "string"
-            },
-            "xml_file": {
-              "type": "string"
-            },
-            "json_file": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
     "test_examples": [
       {
-        "sasbdb_id": "SASDBA2",
-        "file_type": "all"
+        "tag": "idp"
       },
       {
-        "sasbdb_id": "SASDBW5",
-        "file_type": "scattering"
-      },
-      {
-        "sasbdb_id": "SASDP92",
-        "file_type": "models"
+        "tag": "benchmark"
       }
     ]
   }

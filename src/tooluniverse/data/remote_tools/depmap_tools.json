@@ -21,8 +21,7 @@
       },
       "required": [
         "gene_a",
-        "gene_b",
-        "data_dir"
+        "gene_b"
       ]
     },
     "return_schema": {
@@ -95,9 +94,8 @@
     },
     "test_examples": [
       {
-        "gene_a": "TP53",
-        "gene_b": "TP53",
-        "data_dir": "example_string"
+        "gene_a": "BRAF",
+        "gene_b": "MAPK1"
       }
     ]
   }

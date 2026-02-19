@@ -84,7 +84,7 @@
         "type": "ComplexPortalTool",
         "test_examples": [
             {"complex_id": "CPX-1"},
-            {"complex_id": "CPX-6512"}
+            {"complex_id": "CPX-100"}
         ],
         "return_schema": {
             "type": "object",

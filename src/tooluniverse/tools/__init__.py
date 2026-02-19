@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1602 scientific tools.
+Type-safe Python interface to 1603 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1484,6 +1484,7 @@ from .UniRef_get_cluster import UniRef_get_cluster
 from .UniRef_search_clusters import UniRef_search_clusters
 from .UnifiedToolGenerator import UnifiedToolGenerator
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
+from .WFGY_triage_llm_rag_failure import WFGY_triage_llm_rag_failure
 from .WHO_Guideline_Full_Text import WHO_Guideline_Full_Text
 from .WHO_Guidelines_Search import WHO_Guidelines_Search
 from .WikiPathways_find_pathways_by_gene import WikiPathways_find_pathways_by_gene
@@ -3170,6 +3171,7 @@ __all__ = [
     "UniRef_search_clusters",
     "UnifiedToolGenerator",
     "Unpaywall_check_oa_status",
+    "WFGY_triage_llm_rag_failure",
     "WHO_Guideline_Full_Text",
     "WHO_Guidelines_Search",
     "WikiPathways_find_pathways_by_gene",

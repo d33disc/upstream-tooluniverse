@@ -18,26 +18,21 @@
       "timeout": 60
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "Gene Symbol": {"type": "string"},
-              "Gene ID (HGNC)": {"type": "string"},
-              "Disease Label": {"type": "string"},
-              "Disease ID (MONDO)": {"type": "string"},
-              "Classification": {"type": "string"},
-              "Inheritance": {"type": "string"},
-              "Expert Panel": {"type": "string"}
-            }
-          }
-        },
-        "total": {"type": "integer"},
-        "gene_searched": {"type": "string"},
-        "source": {"type": "string"}
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "GENE SYMBOL": {"type": ["string", "null"]},
+          "GENE ID (HGNC)": {"type": ["string", "null"]},
+          "DISEASE LABEL": {"type": ["string", "null"]},
+          "DISEASE ID (MONDO)": {"type": ["string", "null"]},
+          "CLASSIFICATION": {"type": ["string", "null"]},
+          "MOI": {"type": ["string", "null"]},
+          "SOP": {"type": ["string", "null"]},
+          "GCEP": {"type": ["string", "null"]},
+          "ONLINE REPORT": {"type": ["string", "null"]},
+          "CLASSIFICATION DATE": {"type": ["string", "null"]}
+        }
       }
     },
     "test_examples": [
@@ -64,17 +59,8 @@
       "timeout": 120
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "total": {"type": "integer"},
-        "source": {"type": "string"}
-      }
+      "type": "array",
+      "items": {"type": "object"}
     },
     "test_examples": [
       {},
@@ -100,24 +86,17 @@
       "timeout": 60
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "Gene Symbol": {"type": "string"},
-              "HGNC ID": {"type": "string"},
-              "Haploinsufficiency Score": {"type": "string"},
-              "Triplosensitivity Score": {"type": "string"},
-              "Disease": {"type": "string"}
-            }
-          }
-        },
-        "total": {"type": "integer"},
-        "gene_searched": {"type": "string"},
-        "source": {"type": "string"}
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "GENE SYMBOL": {"type": ["string", "null"]},
+          "HGNC ID": {"type": ["string", "null"]},
+          "HAPLOINSUFFICIENCY": {"type": ["string", "null"]},
+          "TRIPLOSENSITIVITY": {"type": ["string", "null"]},
+          "ONLINE REPORT": {"type": ["string", "null"]},
+          "DATE": {"type": ["string", "null"]}
+        }
       }
     },
     "test_examples": [
@@ -149,18 +128,8 @@
       "timeout": 120
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "total": {"type": "integer"},
-        "include_regions": {"type": "boolean"},
-        "source": {"type": "string"}
-      }
+      "type": "array",
+      "items": {"type": "object"}
     },
     "test_examples": [
       {},
@@ -297,18 +266,23 @@
       "timeout": 120
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": ["array", "object"]
-        },
-        "total": {"type": "integer"},
-        "source": {"type": "string"}
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Variation": {"type": ["string", "null"]},
+          "ClinVar Variation Id": {"type": ["string", "null"]},
+          "HGNC Gene Symbol": {"type": ["string", "null"]},
+          "Disease": {"type": ["string", "null"]},
+          "Mondo Id": {"type": ["string", "null"]},
+          "Assertion": {"type": ["string", "null"]},
+          "Expert Panel": {"type": ["string", "null"]}
+        }
       }
     },
     "test_examples": [
-      {},
-      {"gene": "BRCA1"}
+      {"gene": "BRCA1"},
+      {"gene": "PAH"}
     ]
   }
 ]

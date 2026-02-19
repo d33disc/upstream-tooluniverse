@@ -34,93 +34,60 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "lm_id": {
-                  "type": "string",
-                  "description": "LIPID MAPS identifier"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Common lipid name"
-                },
-                "sys_name": {
-                  "type": "string",
-                  "description": "Systematic name"
-                },
-                "formula": {
-                  "type": "string",
-                  "description": "Molecular formula"
-                },
-                "exactmass": {
-                  "type": "string",
-                  "description": "Exact molecular mass"
-                },
-                "smiles": {
-                  "type": "string",
-                  "description": "SMILES notation"
-                },
-                "inchi_key": {
-                  "type": "string",
-                  "description": "InChI key"
-                },
-                "core": {
-                  "type": "string",
-                  "description": "Core category (e.g., 'Fatty Acyls [FA]')"
-                },
-                "main_class": {
-                  "type": "string",
-                  "description": "Main lipid class"
-                },
-                "sub_class": {
-                  "type": "string",
-                  "description": "Lipid sub-class"
-                },
-                "kegg_id": {
-                  "type": "string",
-                  "description": "KEGG compound ID"
-                },
-                "hmdb_id": {
-                  "type": "string",
-                  "description": "HMDB identifier"
-                },
-                "chebi_id": {
-                  "type": "string",
-                  "description": "ChEBI identifier"
-                },
-                "pubchem_cid": {
-                  "type": "string",
-                  "description": "PubChem compound ID"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
+      "type": "object",
+      "properties": {
+        "lm_id": {
+          "type": ["string", "null"]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+        "name": {
+          "type": ["string", "null"]
+        },
+        "sys_name": {
+          "type": ["string", "null"]
+        },
+        "formula": {
+          "type": ["string", "null"]
+        },
+        "exactmass": {
+          "type": ["string", "null"]
+        },
+        "smiles": {
+          "type": ["string", "null"]
+        },
+        "inchi_key": {
+          "type": ["string", "null"]
+        },
+        "core": {
+          "type": ["string", "null"]
+        },
+        "main_class": {
+          "type": ["string", "null"]
+        },
+        "sub_class": {
+          "type": ["string", "null"]
+        },
+        "kegg_id": {
+          "type": ["string", "null"]
+        },
+        "hmdb_id": {
+          "type": ["string", "null"]
+        },
+        "chebi_id": {
+          "type": ["string", "null"]
+        },
+        "pubchem_cid": {
+          "type": ["string", "null"]
+        },
+        "input": {
+          "type": ["string", "null"]
+        },
+        "regno": {
+          "type": ["string", "null"]
+        },
+        "abbrev": {
+          "type": ["string", "null"]
         }
-      ]
+      }
     }
   },
   {
@@ -162,33 +129,26 @@
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": [
-                "object",
-                "array"
-              ],
-              "description": "Single lipid record or list of matching lipid records"
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "total_results": {
-                  "type": "integer"
-                }
-              }
-            }
+            "lm_id": {"type": ["string", "null"]},
+            "name": {"type": ["string", "null"]},
+            "formula": {"type": ["string", "null"]},
+            "exactmass": {"type": ["string", "null"]},
+            "smiles": {"type": ["string", "null"]},
+            "core": {"type": ["string", "null"]},
+            "abbrev": {"type": ["string", "null"]}
           }
         },
         {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "lm_id": {"type": ["string", "null"]},
+              "name": {"type": ["string", "null"]},
+              "formula": {"type": ["string", "null"]},
+              "abbrev": {"type": ["string", "null"]}
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
       ]
     }

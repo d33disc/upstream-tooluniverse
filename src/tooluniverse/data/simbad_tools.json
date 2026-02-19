@@ -173,7 +173,7 @@
     },
     "test_examples": [
       {
-        "adql_query": "SELECT TOP 5 main_id, ra, dec, otype FROM basic WHERE otype='Star*' AND ra BETWEEN 0 AND 10",
+        "adql_query": "SELECT TOP 5 main_id, ra, dec, otype FROM basic WHERE otype='Star' AND ra BETWEEN 0 AND 10",
         "max_results": 5,
         "format": "json"
       },

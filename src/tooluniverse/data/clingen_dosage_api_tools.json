@@ -18,43 +18,33 @@
       "timeout": 30
     },
     "return_schema": {
-      "type": "object",
-      "description": "ClinGen dosage sensitivity data for a gene.",
-      "properties": {
-        "data": {
-          "type": ["array", "null"],
-          "items": {
-            "type": "object",
-            "properties": {
-              "symbol": { "type": "string", "description": "Gene symbol" },
-              "hgnc_id": { "type": "string", "description": "HGNC ID (e.g., HGNC:1100)" },
-              "location": { "type": ["string", "null"], "description": "Cytogenetic band (e.g., 17q21.31)" },
-              "grch37": { "type": ["string", "null"], "description": "GRCh37 coordinates (e.g., chr17:41196312-41277500)" },
-              "grch38": { "type": ["string", "null"], "description": "GRCh38 coordinates (e.g., chr17:43044295-43125370)" },
-              "haplo_assertion": { "type": ["integer", "null"], "description": "Haploinsufficiency score: 0=None, 1=Little, 2=Emerging, 3=Sufficient, 30=AR, 40=Unlikely" },
-              "triplo_assertion": { "type": ["integer", "null"], "description": "Triplosensitivity score: 0=None, 1=Little, 2=Emerging, 3=Sufficient, 40=Unlikely" },
-              "pli": { "type": ["number", "null"], "description": "gnomAD pLI score (probability of LoF intolerance)" },
-              "hi": { "type": ["number", "null"], "description": "Haploinsufficiency prediction score (%)" },
-              "plof": { "type": ["number", "null"], "description": "pLoF (observed/expected ratio for loss-of-function variants)" },
-              "haplo_disease": { "type": ["string", "null"], "description": "Disease associated with haploinsufficiency" },
-              "haplo_disease_id": { "type": ["string", "null"], "description": "MONDO ID for haplo disease" },
-              "triplo_disease": { "type": ["string", "null"], "description": "Disease associated with triplosensitivity" },
-              "triplo_disease_id": { "type": ["string", "null"], "description": "MONDO ID for triplo disease" },
-              "omim": { "type": ["string", "null"], "description": "Whether gene has OMIM entry (Yes/No)" },
-              "omimlink": { "type": ["string", "null"], "description": "OMIM gene ID" },
-              "morbid": { "type": ["string", "null"], "description": "Whether gene is in OMIM morbid map" },
-              "acmgsf": { "type": ["integer", "null"], "description": "ACMG secondary findings gene (1=yes, 0=no)" },
-              "locus": { "type": ["string", "null"], "description": "Locus type (e.g., protein-coding gene)" },
-              "date": { "type": ["string", "null"], "description": "Last curation date" }
-            },
-            "additionalProperties": true
-          }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": { "type": ["string", "null"], "description": "Gene symbol" },
+          "hgnc_id": { "type": ["string", "null"], "description": "HGNC ID (e.g., HGNC:1100)" },
+          "location": { "type": ["string", "null"], "description": "Cytogenetic band (e.g., 17q21.31)" },
+          "grch37": { "type": ["string", "null"], "description": "GRCh37 coordinates" },
+          "grch38": { "type": ["string", "null"], "description": "GRCh38 coordinates" },
+          "haplo_assertion": { "type": ["integer", "string", "null"], "description": "Haploinsufficiency score: 0=None, 1=Little, 2=Emerging, 3=Sufficient, 30=AR, 40=Unlikely" },
+          "triplo_assertion": { "type": ["integer", "string", "null"], "description": "Triplosensitivity score: 0=None, 1=Little, 2=Emerging, 3=Sufficient, 40=Unlikely" },
+          "pli": { "type": ["number", "null"], "description": "gnomAD pLI score" },
+          "hi": { "type": ["number", "null"], "description": "Haploinsufficiency prediction score (%)" },
+          "plof": { "type": ["number", "null"], "description": "pLoF score" },
+          "haplo_disease": { "type": ["string", "null"], "description": "Disease associated with haploinsufficiency" },
+          "haplo_disease_id": { "type": ["string", "null"], "description": "MONDO ID for haplo disease" },
+          "triplo_disease": { "type": ["string", "null"], "description": "Disease associated with triplosensitivity" },
+          "triplo_disease_id": { "type": ["string", "null"], "description": "MONDO ID for triplo disease" },
+          "omim": { "type": ["string", "null"], "description": "Whether gene has OMIM entry (Yes/No)" },
+          "omimlink": { "type": ["string", "null"], "description": "OMIM gene ID" },
+          "morbid": { "type": ["string", "null"], "description": "Whether gene is in OMIM morbid map" },
+          "acmgsf": { "type": ["integer", "null"], "description": "ACMG secondary findings gene (1=yes, 0=no)" },
+          "locus": { "type": ["string", "null"], "description": "Locus type (e.g., protein-coding gene)" },
+          "date": { "type": ["string", "null"], "description": "Last curation date" }
         },
-        "total": { "type": "integer", "description": "Number of matching genes" },
-        "gene_searched": { "type": "string" },
-        "source": { "type": "string" }
-      },
-      "additionalProperties": true
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       { "gene": "BRCA1" },
@@ -99,36 +89,25 @@
       "timeout": 30
     },
     "return_schema": {
-      "type": "object",
-      "description": "ClinGen dosage curations overlapping a genomic region.",
-      "properties": {
-        "data": {
-          "type": ["array", "null"],
-          "items": {
-            "type": "object",
-            "properties": {
-              "symbol": { "type": "string" },
-              "hgnc_id": { "type": "string" },
-              "type": { "type": ["integer", "null"], "description": "0=gene, 1=region" },
-              "location": { "type": ["string", "null"] },
-              "grch37": { "type": ["string", "null"] },
-              "grch38": { "type": ["string", "null"] },
-              "haplo_assertion": { "type": ["integer", "null"] },
-              "triplo_assertion": { "type": ["integer", "null"] },
-              "pli": { "type": ["number", "null"] },
-              "hi": { "type": ["number", "null"] },
-              "haplo_disease": { "type": ["string", "null"] },
-              "triplo_disease": { "type": ["string", "null"] }
-            },
-            "additionalProperties": true
-          }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": { "type": ["string", "null"] },
+          "hgnc_id": { "type": ["string", "null"] },
+          "type": { "type": ["integer", "null"], "description": "0=gene, 1=region" },
+          "location": { "type": ["string", "null"] },
+          "grch37": { "type": ["string", "null"] },
+          "grch38": { "type": ["string", "null"] },
+          "haplo_assertion": { "type": ["integer", "string", "null"] },
+          "triplo_assertion": { "type": ["integer", "string", "null"] },
+          "pli": { "type": ["number", "null"] },
+          "hi": { "type": ["number", "null"] },
+          "haplo_disease": { "type": ["string", "null"] },
+          "triplo_disease": { "type": ["string", "null"] }
         },
-        "total": { "type": "integer" },
-        "region_queried": { "type": "string" },
-        "assembly": { "type": "string" },
-        "source": { "type": "string" }
-      },
-      "additionalProperties": true
+        "additionalProperties": true
+      }
     },
     "test_examples": [
       {

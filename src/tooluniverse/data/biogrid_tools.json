@@ -128,7 +128,7 @@
       "description": "Chemical-protein interaction data including compound information, target proteins, action types, and supporting evidence"
     },
     "fields": {
-      "endpoint": "/chemicals/",
+      "endpoint": "/interactions/",
       "return_format": "JSON"
     },
     "implementation": {
@@ -193,8 +193,10 @@
     },
     "required_api_keys": ["BIOGRID_ACCESS_KEY"],
     "return_schema": {
-      "type": "object",
-      "description": "Interaction data from specified publications including genes, interaction types, experimental methods, and evidence details"
+      "oneOf": [
+        {"type": "object", "description": "Interaction data from specified publications including genes, interaction types, experimental methods, and evidence details"},
+        {"type": "array", "description": "Empty array when no interactions found for the given PubMed IDs"}
+      ]
     },
     "fields": {
       "endpoint": "/interactions/",
@@ -278,7 +280,7 @@
       "description": "PTM data including modification types, residue positions, modifying enzymes, substrates, and experimental evidence"
     },
     "fields": {
-      "endpoint": "/ptms/",
+      "endpoint": "/interactions/",
       "return_format": "JSON"
     },
     "implementation": {
