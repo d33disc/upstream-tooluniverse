@@ -55,6 +55,8 @@ uv pip install tooluniverse
 * **[Python Developer Guide](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/python_guide.html)**: Build AI scientists with the Python SDK
 * **[AI Agent Platforms](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/building_ai_scientists/index.html)**: Set up ToolUniverse with Cursor, Claude, Windsurf, Gemini, and more
 
+**[Shanghua Gao](shanghuagao@gmail.com), the lead and creator of this project, is currently on the job market.**
+
 ## 🤖 Building AI Scientists with ToolUniverse in 5 minutes
 
 <p align="center">
@@ -125,7 +127,7 @@ ToolUniverse addresses this challenge by providing a standardized ecosystem that
 
 ## 🤝 Contribution and Community
 
-We are currently looking for partners. If you’re interested, please reach out to [Shanghua Gao](shanghuagao@gmail.com).
+If you have any suggestions or are interested in any type of collaboration or professional engagement, please don’t hesitate to reach out to [Shanghua Gao](shanghuagao@gmail.com).
 
 **We are actively looking for core contributors for ToolUniverse!**
 Please join our [Slack Channel](https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ) or reach out to [Shanghua Gao](mailto:shanghuagao@gmail.com)/[Marinka Zitnik](mailto:marinka@hms.harvard.edu).

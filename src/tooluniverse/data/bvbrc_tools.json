@@ -1,0 +1,285 @@
+[
+    {
+        "name": "BVBRC_get_genome",
+        "description": "Get detailed genome information from BV-BRC (Bacterial and Viral Bioinformatics Resource Center, formerly PATRIC). Returns genome metadata including organism name, taxonomy, genome size, GC content, assembly status, host, disease, and isolation information. BV-BRC is the primary NIAID-funded resource for bacterial and viral pathogen genomics. Example: '83332.12' returns Mycobacterium tuberculosis H37Rv.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "genome_id": {
+                    "type": "string",
+                    "description": "BV-BRC genome identifier (taxon_id.version format). Examples: '83332.12' (M. tuberculosis H37Rv), '511145.12' (E. coli K-12 MG1655), '93061.5' (S. aureus NCTC 8325)."
+                }
+            },
+            "required": ["genome_id"]
+        },
+        "fields": {
+            "data_type": "genome",
+            "action": "get"
+        },
+        "type": "BVBRCTool",
+        "test_examples": [
+            {"genome_id": "83332.12"},
+            {"genome_id": "511145.12"}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "genome_id": {"type": "string"},
+                                "genome_name": {"type": "string"},
+                                "organism_name": {"type": "string"},
+                                "taxon_id": {"type": "integer"},
+                                "genome_length": {"type": ["integer", "null"]},
+                                "gc_content": {"type": ["number", "null"]},
+                                "contigs": {"type": ["integer", "null"]},
+                                "genome_status": {"type": ["string", "null"]},
+                                "isolation_country": {"type": ["string", "null"]},
+                                "host_name": {"type": ["string", "null"]},
+                                "disease": {"type": ["array", "null"]},
+                                "collection_date": {"type": ["string", "null"]},
+                                "completion_date": {"type": ["string", "null"]}
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "query_genome_id": {"type": "string"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "BVBRC_search_genomes",
+        "description": "Search for pathogen genomes in BV-BRC by organism name or keyword. Returns a list of matching genomes with metadata. Useful for finding bacterial or viral genome assemblies. Example: 'Staphylococcus aureus' returns all S. aureus genome assemblies.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "keyword": {
+                    "type": "string",
+                    "description": "Search keyword - organism name, strain, or pathogen. Examples: 'Staphylococcus aureus', 'Escherichia coli', 'Salmonella enterica', 'SARS-CoV-2'."
+                },
+                "limit": {
+                    "type": ["integer", "null"],
+                    "description": "Maximum number of results to return. Default: 10. Max: 100."
+                }
+            },
+            "required": ["keyword"]
+        },
+        "fields": {
+            "data_type": "genome",
+            "action": "search"
+        },
+        "type": "BVBRCTool",
+        "test_examples": [
+            {"keyword": "Mycobacterium tuberculosis", "limit": 5},
+            {"keyword": "Staphylococcus aureus", "limit": 3}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "genome_id": {"type": "string"},
+                                    "genome_name": {"type": "string"},
+                                    "organism_name": {"type": "string"},
+                                    "taxon_id": {"type": "integer"},
+                                    "genome_length": {"type": ["integer", "null"]},
+                                    "genome_status": {"type": ["string", "null"]},
+                                    "host_name": {"type": ["string", "null"]},
+                                    "disease": {"type": ["array", "null"]}
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "total_results": {"type": "integer"},
+                                "query": {"type": "string"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "BVBRC_search_amr",
+        "description": "Search for antimicrobial resistance (AMR) phenotype data in BV-BRC. Returns resistance/susceptibility data for pathogens against specific antibiotics, including MIC values, testing methods, and evidence. Essential for AMR surveillance research. Example: search for methicillin resistance in Staphylococcus aureus.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "antibiotic": {
+                    "type": ["string", "null"],
+                    "description": "Antibiotic name to search for. Examples: 'methicillin', 'vancomycin', 'ciprofloxacin', 'amikacin', 'isoniazid'."
+                },
+                "genome_id": {
+                    "type": ["string", "null"],
+                    "description": "BV-BRC genome ID to get AMR data for a specific genome. Example: '83332.12'."
+                },
+                "resistant_phenotype": {
+                    "type": ["string", "null"],
+                    "description": "Filter by resistance phenotype. Options: 'Resistant', 'Susceptible', 'Intermediate'."
+                },
+                "limit": {
+                    "type": ["integer", "null"],
+                    "description": "Maximum number of results. Default: 25. Max: 100."
+                }
+            },
+            "required": []
+        },
+        "fields": {
+            "data_type": "genome_amr",
+            "action": "search"
+        },
+        "type": "BVBRCTool",
+        "test_examples": [
+            {"antibiotic": "methicillin", "resistant_phenotype": "Resistant", "limit": 5},
+            {"genome_id": "83332.12", "limit": 10}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "genome_id": {"type": "string"},
+                                    "genome_name": {"type": "string"},
+                                    "antibiotic": {"type": ["string", "null"]},
+                                    "resistant_phenotype": {"type": ["string", "null"]},
+                                    "measurement": {"type": ["string", "null"]},
+                                    "measurement_value": {"type": ["string", "number", "null"]},
+                                    "measurement_unit": {"type": ["string", "null"]},
+                                    "laboratory_typing_method": {"type": ["string", "null"]},
+                                    "computational_method": {"type": ["string", "null"]},
+                                    "evidence": {"type": ["string", "null"]}
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "total_results": {"type": "integer"},
+                                "query_antibiotic": {"type": ["string", "null"]},
+                                "query_genome_id": {"type": ["string", "null"]}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "BVBRC_search_genome_features",
+        "description": "Search for genome features (genes, proteins, CDS) in BV-BRC pathogen genomes. Find specific genes like antimicrobial resistance genes (mecA, blaTEM), virulence factors, or any annotated feature across thousands of pathogen genomes. Example: search for 'mecA' gene (methicillin resistance) across all genomes.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "gene": {
+                    "type": ["string", "null"],
+                    "description": "Gene name to search for. Examples: 'mecA' (methicillin resistance), 'blaTEM' (beta-lactamase), 'katG' (isoniazid resistance)."
+                },
+                "product": {
+                    "type": ["string", "null"],
+                    "description": "Gene product keyword to search. Examples: 'beta-lactamase', 'penicillin-binding protein', 'DNA gyrase'."
+                },
+                "genome_id": {
+                    "type": ["string", "null"],
+                    "description": "Restrict search to a specific genome. Example: '83332.12'."
+                },
+                "limit": {
+                    "type": ["integer", "null"],
+                    "description": "Maximum number of results. Default: 10. Max: 100."
+                }
+            },
+            "required": []
+        },
+        "fields": {
+            "data_type": "genome_feature",
+            "action": "search"
+        },
+        "type": "BVBRCTool",
+        "test_examples": [
+            {"gene": "mecA", "limit": 5},
+            {"genome_id": "83332.12", "gene": "katG", "limit": 5}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "patric_id": {"type": "string"},
+                                    "genome_name": {"type": ["string", "null"]},
+                                    "gene": {"type": ["string", "null"]},
+                                    "product": {"type": ["string", "null"]},
+                                    "feature_type": {"type": ["string", "null"]},
+                                    "aa_length": {"type": ["integer", "null"]},
+                                    "accession": {"type": ["string", "null"]},
+                                    "start": {"type": ["integer", "null"]},
+                                    "end": {"type": ["integer", "null"]},
+                                    "strand": {"type": ["string", "null"]}
+                                }
+                            }
+                        },
+                        "metadata": {
+                            "type": "object",
+                            "properties": {
+                                "source": {"type": "string"},
+                                "total_results": {"type": "integer"},
+                                "query_gene": {"type": ["string", "null"]},
+                                "query_product": {"type": ["string", "null"]}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    }
+                }
+            ]
+        }
+    }
+]
