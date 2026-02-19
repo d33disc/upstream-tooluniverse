@@ -183,13 +183,13 @@
   {
     "type": "LOINCTool",
     "name": "LOINC_get_answer_list",
-    "description": "Get standardized answer list (permissible values) for a LOINC code. Many LOINC codes have predefined answer lists for coded results, such as blood type values (A, B, AB, O), presence/absence findings, or severity scales. Returns the allowed answer codes and their display text.",
+    "description": "Search LOINC answer-type codes matching a LOINC code or search term. Returns LOINC codes classified as answer-type items (categorical/coded result values used in clinical assessments). Use to find standardized answer codes for clinical observations.",
     "parameter": {
       "type": "object",
       "properties": {
         "loinc_code": {
           "type": "string",
-          "description": "LOINC code identifier for which to retrieve answer list (e.g., '883-9' for ABO blood group, '11502-2' for laboratory report status). Not all LOINC codes have answer lists - primarily applies to coded/categorical results."
+          "description": "LOINC code or search term to find answer-type codes (e.g., '883-9' for ABO blood group answers, '11502-2' for laboratory report codes, 'ABO' or 'blood type' for broader search)."
         }
       },
       "required": [
@@ -217,13 +217,16 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "loinc_code": {
-          "type": "string"
-        },
-        "answer_count": {
+        "total_count": {
           "type": "integer"
         },
-        "answers": {
+        "count": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "results": {
           "type": "array",
           "items": {
             "type": "object",
@@ -231,7 +234,16 @@
               "code": {
                 "type": "string"
               },
-              "display": {
+              "LOINC_NUM": {
+                "type": "string"
+              },
+              "LONG_COMMON_NAME": {
+                "type": "string"
+              },
+              "COMPONENT": {
+                "type": "string"
+              },
+              "SCALE_TYP": {
                 "type": "string"
               }
             }

@@ -2858,13 +2858,19 @@ class ToolUniverse:
                 kwargs["validate"] = validate
 
             # Call with all supported parameters
-            return tool_instance.run(tool_arguments, **kwargs), tool_arguments
+            result = tool_instance.run(tool_arguments, **kwargs)
+            if inspect.iscoroutine(result):
+                result = asyncio.run(result)
+            return result, tool_arguments
 
         except (ValueError, TypeError) as e:
             # If inspection fails or tool doesn't accept extra params,
             # fall back to simple execution with just arguments
             self.logger.debug(f"Falling back to simple run() call: {e}")
-            return tool_instance.run(tool_arguments), tool_arguments
+            result = tool_instance.run(tool_arguments)
+            if inspect.iscoroutine(result):
+                result = asyncio.run(result)
+            return result, tool_arguments
 
     async def _invoke_tool_async(self, tool_instance, tool_arguments, **kwargs):
         """Invoke tool.run, using await for async tools or a thread pool for sync tools."""

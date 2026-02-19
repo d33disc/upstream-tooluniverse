@@ -1,416 +1,425 @@
 [
-    {
-        "name": "MonarchV3_get_entity",
-        "description": "Look up detailed information about any biomedical entity in the Monarch Initiative knowledge graph by its CURIE identifier. Supports genes (HGNC), diseases (MONDO, OMIM), phenotypes (HP), variants, and more. Returns the entity name, category, description, synonyms, cross-references, and species. Example: HGNC:11998 returns TP53 gene with cross-refs to ENSEMBL, OMIM; MONDO:0005148 returns type 2 diabetes mellitus with detailed description.",
-        "parameter": {
-            "type": "object",
-            "properties": {
-                "entity_id": {
-                    "type": "string",
-                    "description": "Entity CURIE identifier. Examples: 'HGNC:11998' (TP53), 'HGNC:1100' (BRCA1), 'MONDO:0005148' (type 2 diabetes), 'HP:0001250' (seizure), 'OMIM:191170' (Li-Fraumeni syndrome)."
-                }
-            },
-            "required": [
-                "entity_id"
-            ]
-        },
-        "fields": {
-            "endpoint": "entity"
-        },
-        "type": "MonarchV3Tool",
-        "test_examples": [
-            {
-                "entity_id": "HGNC:11998"
-            },
-            {
-                "entity_id": "MONDO:0005148"
-            }
-        ],
-        "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Entity CURIE"
-                                },
-                                "name": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Entity name"
-                                },
-                                "full_name": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Full descriptive name"
-                                },
-                                "category": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Biolink category (biolink:Gene, biolink:Disease, etc.)"
-                                },
-                                "description": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Description"
-                                },
-                                "symbol": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Gene symbol (for genes)"
-                                },
-                                "synonyms": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "Known synonyms"
-                                },
-                                "xrefs": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "Cross-references (ENSEMBL, OMIM, NCIT, etc.)"
-                                },
-                                "taxon": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Taxon ID (for genes)"
-                                },
-                                "taxon_label": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Species name"
-                                },
-                                "provided_by": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Data source"
-                                }
-                            }
-                        },
-                        "metadata": {
-                            "type": "object",
-                            "properties": {
-                                "source": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "error"
-                    ]
-                }
-            ]
+  {
+    "name": "MonarchV3_get_entity",
+    "description": "Look up detailed information about any biomedical entity in the Monarch Initiative knowledge graph by its CURIE identifier. Supports genes (HGNC), diseases (MONDO, OMIM), phenotypes (HP), variants, and more. Returns the entity name, category, description, synonyms, cross-references, and species. Example: HGNC:11998 returns TP53 gene with cross-refs to ENSEMBL, OMIM; MONDO:0005148 returns type 2 diabetes mellitus with detailed description.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "entity_id": {
+          "type": "string",
+          "description": "Entity CURIE identifier. Examples: 'HGNC:11998' (TP53), 'HGNC:1100' (BRCA1), 'MONDO:0005148' (type 2 diabetes), 'HP:0001250' (seizure), 'OMIM:191170' (Li-Fraumeni syndrome)."
         }
+      },
+      "required": [
+        "entity_id"
+      ]
     },
-    {
-        "name": "MonarchV3_get_associations",
-        "description": "Query cross-species associations between biomedical entities in the Monarch Initiative knowledge graph. Find gene-phenotype, disease-phenotype, gene-disease, or gene-pathway associations. Uses Biolink model categories to specify association type. Integrates data from OMIM, ClinVar, HPO, MGI, ZFIN, FlyBase, WormBase. Example: HGNC:11998 (TP53) with category GeneToPhenotypicFeatureAssociation returns phenotypes like hepatocellular carcinoma and reticular hyperpigmentation.",
-        "parameter": {
-            "type": "object",
-            "properties": {
-                "subject": {
-                    "type": "string",
-                    "description": "Subject entity CURIE. Examples: 'HGNC:11998' (TP53), 'MONDO:0005148' (type 2 diabetes), 'HP:0001250' (seizure)."
+    "fields": {
+      "endpoint": "entity"
+    },
+    "type": "MonarchV3Tool",
+    "test_examples": [
+      {
+        "entity_id": "HGNC:11998"
+      },
+      {
+        "entity_id": "MONDO:0005148"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Entity CURIE"
+                },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Entity name"
+                },
+                "full_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Full descriptive name"
                 },
                 "category": {
-                    "type": "string",
-                    "description": "Biolink association category. Options: 'biolink:GeneToPhenotypicFeatureAssociation' (gene->phenotypes), 'biolink:DiseaseToPhenotypicFeatureAssociation' (disease->phenotypes), 'biolink:CorrelatedGeneToDiseaseAssociation' (gene->diseases, correlated), 'biolink:CausalGeneToDiseaseAssociation' (gene->diseases, causal), 'biolink:GeneToPathwayAssociation' (gene->pathways), 'biolink:VariantToDiseaseAssociation' (variant->diseases)."
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Biolink category (biolink:Gene, biolink:Disease, etc.)"
                 },
-                "limit": {
-                    "type": "integer",
-                    "description": "Maximum number of associations to return (default: 20, max: 200)."
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Description"
+                },
+                "symbol": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Gene symbol (for genes)"
+                },
+                "synonyms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Known synonyms"
+                },
+                "xrefs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Cross-references (ENSEMBL, OMIM, NCIT, etc.)"
+                },
+                "taxon": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Taxon ID (for genes)"
+                },
+                "taxon_label": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Species name"
+                },
+                "provided_by": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Data source"
                 }
+              }
             },
-            "required": [
-                "subject",
-                "category"
-            ]
-        },
-        "fields": {
-            "endpoint": "associations"
-        },
-        "type": "MonarchV3Tool",
-        "test_examples": [
-            {
-                "subject": "HGNC:11998",
-                "category": "biolink:GeneToPhenotypicFeatureAssociation"
-            },
-            {
-                "subject": "MONDO:0005148",
-                "category": "biolink:DiseaseToPhenotypicFeatureAssociation"
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                }
+              }
             }
-        ],
-        "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "subject": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Subject entity CURIE"
-                                    },
-                                    "subject_label": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Subject name"
-                                    },
-                                    "object": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Object entity CURIE"
-                                    },
-                                    "object_label": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Object name"
-                                    },
-                                    "category": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Association category"
-                                    },
-                                    "predicate": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Relationship predicate"
-                                    },
-                                    "negated": {
-                                        "type": [
-                                            "boolean",
-                                            "null"
-                                        ],
-                                        "description": "Whether association is negated"
-                                    },
-                                    "provided_by": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Data source"
-                                    },
-                                    "primary_knowledge_source": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Primary knowledge source"
-                                    }
-                                }
-                            }
-                        },
-                        "metadata": {
-                            "type": "object",
-                            "properties": {
-                                "source": {
-                                    "type": "string"
-                                },
-                                "subject": {
-                                    "type": "string"
-                                },
-                                "category": {
-                                    "type": "string"
-                                },
-                                "total_results": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "error"
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        "name": "MonarchV3_search",
-        "description": "Search the Monarch Initiative knowledge graph for biomedical entities by name or keyword. Returns genes, diseases, phenotypes, and other entities matching the query, with their CURIE identifiers and categories. Useful for finding entity IDs to use with MonarchV3_get_entity and MonarchV3_get_associations. Example: searching 'BRCA1' returns HGNC:1100 (gene), 'Alzheimer' returns MONDO disease entries.",
-        "parameter": {
-            "type": "object",
-            "properties": {
-                "query": {
-                    "type": "string",
-                    "description": "Search query. Can be gene names, disease names, phenotype terms, etc. Examples: 'BRCA1', 'breast cancer', 'seizure', 'insulin resistance'."
-                },
-                "limit": {
-                    "type": "integer",
-                    "description": "Maximum results to return (default: 10, max: 50)."
-                },
-                "category": {
-                    "type": "string",
-                    "description": "Filter by entity category. Options: 'biolink:Gene', 'biolink:Disease', 'biolink:PhenotypicFeature', 'biolink:NamedThing'. Default: all categories."
-                }
-            },
-            "required": [
-                "query"
-            ]
+          },
+          "required": [
+            "data"
+          ]
         },
-        "fields": {
-            "endpoint": "search"
-        },
-        "type": "MonarchV3Tool",
-        "test_examples": [
-            {
-                "query": "BRCA1"
-            },
-            {
-                "query": "type 2 diabetes",
-                "category": "biolink:Disease",
-                "limit": 5
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
             }
-        ],
-        "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Entity CURIE identifier"
-                                    },
-                                    "name": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Entity name"
-                                    },
-                                    "category": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Biolink category"
-                                    },
-                                    "symbol": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Gene symbol (for genes)"
-                                    },
-                                    "description": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Entity description"
-                                    },
-                                    "taxon": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Taxon ID"
-                                    },
-                                    "taxon_label": {
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "Species name"
-                                    }
-                                }
-                            }
-                        },
-                        "metadata": {
-                            "type": "object",
-                            "properties": {
-                                "source": {
-                                    "type": "string"
-                                },
-                                "query": {
-                                    "type": "string"
-                                },
-                                "total_results": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "error"
-                    ]
-                }
-            ]
+          },
+          "required": [
+            "error"
+          ]
         }
+      ]
     }
+  },
+  {
+    "name": "MonarchV3_get_associations",
+    "description": "Query cross-species associations between biomedical entities in the Monarch Initiative knowledge graph. Find gene-phenotype, disease-phenotype, gene-disease, or gene-pathway associations. Uses Biolink model categories to specify association type. Integrates data from OMIM, ClinVar, HPO, MGI, ZFIN, FlyBase, WormBase. Example: HGNC:11998 (TP53) with category GeneToPhenotypicFeatureAssociation returns phenotypes like hepatocellular carcinoma and reticular hyperpigmentation.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Subject entity CURIE. Examples: 'HGNC:11998' (TP53), 'MONDO:0005148' (type 2 diabetes), 'HP:0001250' (seizure)."
+        },
+        "category": {
+          "type": "string",
+          "description": "Biolink association category. Options: 'biolink:GeneToPhenotypicFeatureAssociation' (gene->phenotypes), 'biolink:DiseaseToPhenotypicFeatureAssociation' (disease->phenotypes), 'biolink:CorrelatedGeneToDiseaseAssociation' (gene->diseases, correlated), 'biolink:CausalGeneToDiseaseAssociation' (gene->diseases, causal), 'biolink:GeneToPathwayAssociation' (gene->pathways), 'biolink:VariantToDiseaseAssociation' (variant->diseases)."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of associations to return (default: 20, max: 200)."
+        }
+      },
+      "required": [
+        "subject",
+        "category"
+      ]
+    },
+    "fields": {
+      "endpoint": "associations"
+    },
+    "type": "MonarchV3Tool",
+    "test_examples": [
+      {
+        "subject": "HGNC:11998",
+        "category": "biolink:GeneToPhenotypicFeatureAssociation"
+      },
+      {
+        "subject": "MONDO:0005148",
+        "category": "biolink:DiseaseToPhenotypicFeatureAssociation"
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "subject": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Subject entity CURIE"
+                  },
+                  "subject_label": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Subject name"
+                  },
+                  "object": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Object entity CURIE"
+                  },
+                  "object_label": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Object name"
+                  },
+                  "category": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Association category"
+                  },
+                  "predicate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Relationship predicate"
+                  },
+                  "negated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "Whether association is negated"
+                  },
+                  "provided_by": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Data source"
+                  },
+                  "primary_knowledge_source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Primary knowledge source"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "subject": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "total_results": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "MonarchV3_search",
+    "description": "Search the Monarch Initiative knowledge graph for biomedical entities by name or keyword. Returns genes, diseases, phenotypes, and other entities matching the query, with their CURIE identifiers and categories. Useful for finding entity IDs to use with MonarchV3_get_entity and MonarchV3_get_associations. Example: searching 'BRCA1' returns HGNC:1100 (gene), 'Alzheimer' returns MONDO disease entries.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query. Can be gene names, disease names, phenotype terms, etc. Examples: 'BRCA1', 'breast cancer', 'seizure', 'insulin resistance'."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum results to return (default: 10, max: 50)."
+        },
+        "category": {
+          "type": "string",
+          "description": "Filter by entity category. Options: 'biolink:Gene', 'biolink:Disease', 'biolink:PhenotypicFeature', 'biolink:NamedThing'. Default: all categories."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "fields": {
+      "endpoint": "search"
+    },
+    "type": "MonarchV3Tool",
+    "test_examples": [
+      {
+        "query": "BRCA1"
+      },
+      {
+        "query": "type 2 diabetes",
+        "category": "biolink:Disease",
+        "limit": 5
+      }
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Entity CURIE identifier"
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Entity name"
+                  },
+                  "category": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Biolink category"
+                  },
+                  "symbol": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Gene symbol (for genes)"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Entity description"
+                  },
+                  "taxon": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Taxon ID"
+                  },
+                  "taxon_label": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Species name"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                },
+                "total_results": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
+        }
+      ]
+    }
+  }
 ]

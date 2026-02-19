@@ -434,6 +434,7 @@ STATIC_LAZY_REGISTRY = {
     "RCSBDataTool": "rcsb_data_tool",
     "ReactomeContentTool": "reactome_content_tool",
     "SASBDBRESTTool": "sasbdb_tool",
+    "SASBDBSearchTool": "sasbdb_tool",
     "SAbDabTool": "sabdab_tool",
     "STRINGExtTool": "string_ext_tool",
     "SemanticScholarPDFSnippetsTool": "semantic_scholar_tool",

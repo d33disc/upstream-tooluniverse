@@ -49,56 +49,31 @@
       }
     ],
     "return_schema": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "fdcId": {
-            "type": "integer",
-            "description": "FoodData Central food ID"
-          },
-          "description": {
-            "type": "string",
-            "description": "Food description"
-          },
-          "dataType": {
-            "type": "string",
-            "description": "Data source type"
-          },
-          "brandOwner": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Brand owner (Branded only)"
-          },
-          "ingredients": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Ingredients list"
-          },
-          "servingSize": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "description": "Serving size"
-          },
-          "servingSizeUnit": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Serving size unit"
-          },
-          "topNutrients": {
-            "type": "array",
-            "description": "Top nutrient values"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fdcId": {"type": "integer"},
+              "description": {"type": "string"},
+              "dataType": {"type": "string"},
+              "brandOwner": {"type": ["string", "null"]},
+              "ingredients": {"type": ["string", "null"]},
+              "servingSize": {"type": ["number", "null"]},
+              "servingSizeUnit": {"type": ["string", "null"]},
+              "topNutrients": {"type": "array"}
+            }
           }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
         }
-      }
+      ]
     }
   },
   {
@@ -135,87 +110,29 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "fdcId": {
-                  "type": "integer"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "dataType": {
-                  "type": "string"
-                },
-                "publicationDate": {
-                  "type": "string"
-                },
-                "brandOwner": {
-                  "type": "string"
-                },
-                "ingredients": {
-                  "type": "string"
-                },
-                "servingSize": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "nutrients": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "number": {
-                        "type": "string"
-                      },
-                      "amount": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
-                      },
-                      "unit": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "nutrient_count": {
-                  "type": "integer"
-                },
-                "source": {
-                  "type": "string"
-                }
-              }
+      "type": "object",
+      "properties": {
+        "fdcId": {"type": ["integer", "null"]},
+        "description": {"type": ["string", "null"]},
+        "dataType": {"type": ["string", "null"]},
+        "publicationDate": {"type": ["string", "null"]},
+        "brandOwner": {"type": ["string", "null"]},
+        "ingredients": {"type": ["string", "null"]},
+        "servingSize": {"type": ["number", "null"]},
+        "servingSizeUnit": {"type": ["string", "null"]},
+        "nutrients": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": ["string", "null"]},
+              "number": {"type": ["string", "null"]},
+              "amount": {"type": ["number", "null"]},
+              "unit": {"type": ["string", "null"]}
             }
           }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
         }
-      ]
+      }
     }
   }
 ]

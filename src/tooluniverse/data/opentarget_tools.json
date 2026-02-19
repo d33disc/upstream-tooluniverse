@@ -288,10 +288,10 @@
         "size": 10
       },
       {
-        "efoId": "EFO_0000311",
+        "efoId": "EFO_0000389",
         "ensemblId": "ENSG00000157764",
-        "datasourceIds": ["chembl", "intogen"],
-        "size": 20
+        "datasourceIds": ["chembl"],
+        "size": 5
       }
     ],
     "return_schema": {
