@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1650 scientific tools.
+Type-safe Python interface to 1603 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -70,18 +70,9 @@ from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
 from .BRENDA_get_inhibitors import BRENDA_get_inhibitors
 from .BVBRC_get_genome import BVBRC_get_genome
-from .BVBRC_get_protein_structure import BVBRC_get_protein_structure
-from .BVBRC_get_taxonomy import BVBRC_get_taxonomy
 from .BVBRC_search_amr import BVBRC_search_amr
-from .BVBRC_search_epitopes import BVBRC_search_epitopes
 from .BVBRC_search_genome_features import BVBRC_search_genome_features
 from .BVBRC_search_genomes import BVBRC_search_genomes
-from .BVBRC_search_pathways import BVBRC_search_pathways
-from .BVBRC_search_protein_structures import BVBRC_search_protein_structures
-from .BVBRC_search_specialty_genes import BVBRC_search_specialty_genes
-from .BVBRC_search_subsystems import BVBRC_search_subsystems
-from .BVBRC_search_surveillance import BVBRC_search_surveillance
-from .BVBRC_search_taxonomy import BVBRC_search_taxonomy
 from .Bgee_get_gene_expression import Bgee_get_gene_expression
 from .Bgee_list_species import Bgee_list_species
 from .Bgee_search_genes import Bgee_search_genes
@@ -282,10 +273,6 @@ from .ENCODE_search_chromatin_accessibility import ENCODE_search_chromatin_acces
 from .ENCODE_search_experiments import ENCODE_search_experiments
 from .ENCODE_search_histone_experiments import ENCODE_search_histone_experiments
 from .ENCODE_search_methylation_experiments import ENCODE_search_methylation_experiments
-from .EOL_get_collection import EOL_get_collection
-from .EOL_get_hierarchy_entry import EOL_get_hierarchy_entry
-from .EOL_get_page import EOL_get_page
-from .EOL_search_species import EOL_search_species
 from .EVE_get_gene_info import EVE_get_gene_info
 from .EVE_get_variant_score import EVE_get_variant_score
 from .Enamine_get_compound import Enamine_get_compound
@@ -743,12 +730,6 @@ from .FDA_retrieve_patient_medication_info_by_drug_name import (
 )
 from .Fatcat_search_scholar import Fatcat_search_scholar
 from .Finish import Finish
-from .FlyBase_get_gene import FlyBase_get_gene
-from .FlyBase_get_gene_alleles import FlyBase_get_gene_alleles
-from .FlyBase_get_gene_disease_models import FlyBase_get_gene_disease_models
-from .FlyBase_get_gene_expression import FlyBase_get_gene_expression
-from .FlyBase_get_gene_interactions import FlyBase_get_gene_interactions
-from .FlyBase_get_gene_orthologs import FlyBase_get_gene_orthologs
 from .FoodDataCentral_get_food import FoodDataCentral_get_food
 from .FoodDataCentral_search_foods import FoodDataCentral_search_foods
 from .FourDN_get_download_url import FourDN_get_download_url
@@ -898,11 +879,6 @@ from .KEGG_get_compound import KEGG_get_compound
 from .KEGG_get_gene_pathways import KEGG_get_gene_pathways
 from .KEGG_get_pathway_genes import KEGG_get_pathway_genes
 from .KeywordExtractorAgent import KeywordExtractorAgent
-from .LNCipedia_get_lncrna import LNCipedia_get_lncrna
-from .LNCipedia_get_lncrna_publications import LNCipedia_get_lncrna_publications
-from .LNCipedia_get_lncrna_xrefs import LNCipedia_get_lncrna_xrefs
-from .LNCipedia_search_lncrna import LNCipedia_search_lncrna
-from .LNCipedia_search_ncrna_by_type import LNCipedia_search_ncrna_by_type
 from .LOINC_get_answer_list import LOINC_get_answer_list
 from .LOINC_get_code_details import LOINC_get_code_details
 from .LOINC_search_forms import LOINC_search_forms
@@ -1247,12 +1223,6 @@ from .PRIDE_get_project_files import PRIDE_get_project_files
 from .PRIDE_search_proteomics import PRIDE_search_proteomics
 from .PackageAnalyzer import PackageAnalyzer
 from .Paleobiology_get_fossils import Paleobiology_get_fossils
-from .Pfam_get_family_detail import Pfam_get_family_detail
-from .Pfam_get_family_proteins import Pfam_get_family_proteins
-from .Pfam_get_family_proteomes import Pfam_get_family_proteomes
-from .Pfam_get_protein_annotations import Pfam_get_protein_annotations
-from .Pfam_search_clans import Pfam_search_clans
-from .Pfam_search_families import Pfam_search_families
 from .PharmGKB_get_clinical_annotations import PharmGKB_get_clinical_annotations
 from .PharmGKB_get_dosing_guidelines import PharmGKB_get_dosing_guidelines
 from .PharmGKB_get_drug_details import PharmGKB_get_drug_details
@@ -1287,14 +1257,6 @@ from .ProtocolOptimizer import ProtocolOptimizer
 from .PubChemBioAssay_get_assay import PubChemBioAssay_get_assay
 from .PubChemBioAssay_get_assay_summary import PubChemBioAssay_get_assay_summary
 from .PubChemBioAssay_search_by_gene import PubChemBioAssay_search_by_gene
-from .PubChemTox_get_acute_effects import PubChemTox_get_acute_effects
-from .PubChemTox_get_carcinogen_classification import (
-    PubChemTox_get_carcinogen_classification,
-)
-from .PubChemTox_get_ghs_classification import PubChemTox_get_ghs_classification
-from .PubChemTox_get_target_organs import PubChemTox_get_target_organs
-from .PubChemTox_get_toxicity_summary import PubChemTox_get_toxicity_summary
-from .PubChemTox_get_toxicity_values import PubChemTox_get_toxicity_values
 from .PubChem_get_CID_by_SMILES import PubChem_get_CID_by_SMILES
 from .PubChem_get_CID_by_compound_name import PubChem_get_CID_by_compound_name
 from .PubChem_get_assay_active_compounds import PubChem_get_assay_active_compounds
@@ -1539,12 +1501,6 @@ from .WormBase_get_gene import WormBase_get_gene
 from .WormBase_get_phenotypes import WormBase_get_phenotypes
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .XMLToolOptimizer import XMLToolOptimizer
-from .ZFIN_get_allele import ZFIN_get_allele
-from .ZFIN_get_gene import ZFIN_get_gene
-from .ZFIN_get_gene_alleles import ZFIN_get_gene_alleles
-from .ZFIN_get_gene_expression import ZFIN_get_gene_expression
-from .ZFIN_get_gene_orthologs import ZFIN_get_gene_orthologs
-from .ZFIN_get_gene_phenotypes import ZFIN_get_gene_phenotypes
 from .ZINC_get_catalogs import ZINC_get_catalogs
 from .ZINC_get_substance import ZINC_get_substance
 from .ZINC_search_by_name import ZINC_search_by_name
@@ -2009,7 +1965,6 @@ from .get_xarray_info import get_xarray_info
 from .get_xesmf_info import get_xesmf_info
 from .get_xgboost_info import get_xgboost_info
 from .get_zarr_info import get_zarr_info
-from .ghost_tool import ghost_tool
 from .gnomad_get_gene import gnomad_get_gene
 from .gnomad_get_gene_constraints import gnomad_get_gene_constraints
 from .gnomad_get_region import gnomad_get_region
@@ -2092,10 +2047,6 @@ from .metabolights_get_study_protocols import metabolights_get_study_protocols
 from .metabolights_get_study_samples import metabolights_get_study_samples
 from .metabolights_list_studies import metabolights_list_studies
 from .metabolights_search_studies import metabolights_search_studies
-from .miRBase_get_mirna import miRBase_get_mirna
-from .miRBase_get_mirna_publications import miRBase_get_mirna_publications
-from .miRBase_get_mirna_xrefs import miRBase_get_mirna_xrefs
-from .miRBase_search_mirna import miRBase_search_mirna
 from .nhanes_get_dataset_info import nhanes_get_dataset_info
 from .nhanes_search_datasets import nhanes_search_datasets
 from .odphp_itemlist import odphp_itemlist
@@ -2198,18 +2149,9 @@ __all__ = [
     "BLAST_protein_search",
     "BRENDA_get_inhibitors",
     "BVBRC_get_genome",
-    "BVBRC_get_protein_structure",
-    "BVBRC_get_taxonomy",
     "BVBRC_search_amr",
-    "BVBRC_search_epitopes",
     "BVBRC_search_genome_features",
     "BVBRC_search_genomes",
-    "BVBRC_search_pathways",
-    "BVBRC_search_protein_structures",
-    "BVBRC_search_specialty_genes",
-    "BVBRC_search_subsystems",
-    "BVBRC_search_surveillance",
-    "BVBRC_search_taxonomy",
     "Bgee_get_gene_expression",
     "Bgee_list_species",
     "Bgee_search_genes",
@@ -2408,10 +2350,6 @@ __all__ = [
     "ENCODE_search_experiments",
     "ENCODE_search_histone_experiments",
     "ENCODE_search_methylation_experiments",
-    "EOL_get_collection",
-    "EOL_get_hierarchy_entry",
-    "EOL_get_page",
-    "EOL_search_species",
     "EVE_get_gene_info",
     "EVE_get_variant_score",
     "Enamine_get_compound",
@@ -2653,12 +2591,6 @@ __all__ = [
     "FDA_retrieve_patient_medication_info_by_drug_name",
     "Fatcat_search_scholar",
     "Finish",
-    "FlyBase_get_gene",
-    "FlyBase_get_gene_alleles",
-    "FlyBase_get_gene_disease_models",
-    "FlyBase_get_gene_expression",
-    "FlyBase_get_gene_interactions",
-    "FlyBase_get_gene_orthologs",
     "FoodDataCentral_get_food",
     "FoodDataCentral_search_foods",
     "FourDN_get_download_url",
@@ -2796,11 +2728,6 @@ __all__ = [
     "KEGG_get_gene_pathways",
     "KEGG_get_pathway_genes",
     "KeywordExtractorAgent",
-    "LNCipedia_get_lncrna",
-    "LNCipedia_get_lncrna_publications",
-    "LNCipedia_get_lncrna_xrefs",
-    "LNCipedia_search_lncrna",
-    "LNCipedia_search_ncrna_by_type",
     "LOINC_get_answer_list",
     "LOINC_get_code_details",
     "LOINC_search_forms",
@@ -3017,12 +2944,6 @@ __all__ = [
     "PRIDE_search_proteomics",
     "PackageAnalyzer",
     "Paleobiology_get_fossils",
-    "Pfam_get_family_detail",
-    "Pfam_get_family_proteins",
-    "Pfam_get_family_proteomes",
-    "Pfam_get_protein_annotations",
-    "Pfam_search_clans",
-    "Pfam_search_families",
     "PharmGKB_get_clinical_annotations",
     "PharmGKB_get_dosing_guidelines",
     "PharmGKB_get_drug_details",
@@ -3051,12 +2972,6 @@ __all__ = [
     "PubChemBioAssay_get_assay",
     "PubChemBioAssay_get_assay_summary",
     "PubChemBioAssay_search_by_gene",
-    "PubChemTox_get_acute_effects",
-    "PubChemTox_get_carcinogen_classification",
-    "PubChemTox_get_ghs_classification",
-    "PubChemTox_get_target_organs",
-    "PubChemTox_get_toxicity_summary",
-    "PubChemTox_get_toxicity_values",
     "PubChem_get_CID_by_SMILES",
     "PubChem_get_CID_by_compound_name",
     "PubChem_get_assay_active_compounds",
@@ -3273,12 +3188,6 @@ __all__ = [
     "WormBase_get_phenotypes",
     "WritingPresentationReviewer",
     "XMLToolOptimizer",
-    "ZFIN_get_allele",
-    "ZFIN_get_gene",
-    "ZFIN_get_gene_alleles",
-    "ZFIN_get_gene_expression",
-    "ZFIN_get_gene_orthologs",
-    "ZFIN_get_gene_phenotypes",
     "ZINC_get_catalogs",
     "ZINC_get_substance",
     "ZINC_search_by_name",
@@ -3671,7 +3580,6 @@ __all__ = [
     "get_xesmf_info",
     "get_xgboost_info",
     "get_zarr_info",
-    "ghost_tool",
     "gnomad_get_gene",
     "gnomad_get_gene_constraints",
     "gnomad_get_region",
@@ -3748,10 +3656,6 @@ __all__ = [
     "metabolights_get_study_samples",
     "metabolights_list_studies",
     "metabolights_search_studies",
-    "miRBase_get_mirna",
-    "miRBase_get_mirna_publications",
-    "miRBase_get_mirna_xrefs",
-    "miRBase_search_mirna",
     "nhanes_get_dataset_info",
     "nhanes_search_datasets",
     "odphp_itemlist",
