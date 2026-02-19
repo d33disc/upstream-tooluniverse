@@ -80,6 +80,28 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: true
 
+      - name: Sync server.json version from pyproject.toml
+        run: |
+          VERSION="${{ needs.check-version-change.outputs.new_version }}"
+          python3 -c "
+          import json
+          version = '$VERSION'
+          with open('server.json') as f:
+              data = json.load(f)
+          data['version'] = version
+          for pkg in data.get('packages', []):
+              pkg['version'] = version
+          with open('server.json', 'w') as f:
+              json.dump(data, f, indent=2)
+              f.write('\n')
+          print(f'Updated server.json to version {version}')
+          "
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add server.json
+          git diff --cached --quiet || git commit -m "chore: sync server.json version to $VERSION [skip ci]"
+          git push origin HEAD:main
+
       - name: Create version branch
         run: |
           VERSION="${{ needs.check-version-change.outputs.new_version }}"
