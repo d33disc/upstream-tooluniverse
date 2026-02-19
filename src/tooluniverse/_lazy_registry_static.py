@@ -57,6 +57,7 @@ STATIC_LAZY_REGISTRY = {
     "DynamicPackageDiscovery": "package_discovery_tool",
     "EBISearchRESTTool": "ebi_search_tool",
     "EFOTool": "efo_tool",
+    "EOLTool": "eol_tool",
     "EMDBRESTTool": "emdb_tool",
     "ENABrowserRESTTool": "ena_browser_tool",
     "ENCODERESTTool": "encode_tool",
@@ -235,6 +236,8 @@ STATIC_LAZY_REGISTRY = {
     "RESTfulTool": "restful_tool",
     "RNAcentralGetTool": "rnacentral_tool",
     "RNAcentralSearchTool": "rnacentral_tool",
+    "miRNAGetTool": "mirna_tool",
+    "miRNASearchTool": "mirna_tool",
     "ReMapRESTTool": "remap_tool",
     "ReactomeRESTTool": "reactome_tool",
     "RegulomeDBRESTTool": "regulomedb_tool",
@@ -444,4 +447,6 @@ STATIC_LAZY_REGISTRY = {
     "UniProtIDMappingTool": "uniprot_idmapping_tool",
     "UniProtRefTool": "uniprot_ref_tool",
     "ZINCTool": "zinc_tool",
+    "PfamTool": "pfam_tool",
+    "PubChemToxTool": "pubchem_tox_tool",
 }

@@ -225,6 +225,8 @@ default_tool_files = {
     "obis": os.path.join(current_dir, "data", "obis_tools.json"),
     "wikipathways": os.path.join(current_dir, "data", "wikipathways_tools.json"),
     "rnacentral": os.path.join(current_dir, "data", "rnacentral_tools.json"),
+    "mirna": os.path.join(current_dir, "data", "mirna_tools.json"),
+    "lncrna": os.path.join(current_dir, "data", "lncrna_tools.json"),
     "encode": os.path.join(current_dir, "data", "encode_tools.json"),
     "gtex": os.path.join(current_dir, "data", "gtex_tools.json"),
     "mgnify": os.path.join(current_dir, "data", "mgnify_tools.json"),
@@ -539,6 +541,8 @@ default_tool_files = {
     "ensembl_archive": os.path.join(current_dir, "data", "ensembl_archive_tools.json"),
     # KEGG Extended - Gene-pathway links, pathway gene lists, compound details
     "kegg_ext": os.path.join(current_dir, "data", "kegg_ext_tools.json"),
+    # EOL - Encyclopedia of Life (biodiversity knowledge aggregator: species, taxonomy, media)
+    "eol": os.path.join(current_dir, "data", "eol_tools.json"),
     # Ensembl Map - Coordinate system conversion and assembly mapping
     "ensembl_map": os.path.join(current_dir, "data", "ensembl_map_tools.json"),
     # Ensembl Overlap - Features overlapping a genomic region (genes, variants, regulatory)
@@ -615,6 +619,14 @@ default_tool_files = {
     "synbiohub": os.path.join(current_dir, "data", "synbiohub_tools.json"),
     # BioPortal - NCBO ontology browser and annotation service
     "bioportal": os.path.join(current_dir, "data", "bioportal_tools.json"),
+    # FlyBase - Drosophila melanogaster genetics (via Alliance of Genome Resources)
+    "flybase": os.path.join(current_dir, "data", "flybase_tools.json"),
+    # ZFIN - Zebrafish Information Network (via Alliance of Genome Resources)
+    "zfin": os.path.join(current_dir, "data", "zfin_tools.json"),
+    # Pfam - Protein families database (via InterPro API)
+    "pfam": os.path.join(current_dir, "data", "pfam_tools.json"),
+    # PubChem Toxicity - Chemical toxicity, GHS hazard, carcinogen classification, LD50 data
+    "pubchem_tox": os.path.join(current_dir, "data", "pubchem_tox_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
