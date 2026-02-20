@@ -1,0 +1,120 @@
+[
+  {
+    "name": "AviationWeather_get_metar",
+    "description": "Get real-time METAR weather observations for airports from the Aviation Weather Center (AWC). METAR is the standard aviation meteorological report format, providing current conditions: temperature, dew point, wind speed/direction, visibility, cloud cover, altimeter setting, and weather phenomena. No authentication required. ICAO airport codes: KLAX (Los Angeles), KJFK (New York), EGLL (London Heathrow), RJTT (Tokyo Haneda). Useful for flight planning, weather research, and aviation safety analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "string",
+          "description": "ICAO airport code(s), comma-separated. Examples: 'KLAX' (Los Angeles), 'KJFK' (New York JFK), 'KORD' (Chicago O'Hare), 'EGLL' (London Heathrow), 'LFPG' (Paris CDG), 'RJTT' (Tokyo Haneda), 'YSSY' (Sydney)"
+        },
+        "hoursBeforeNow": {
+          "type": ["integer", "null"],
+          "description": "Hours of data to retrieve (1-24). Default: 1 (most recent METAR only)"
+        }
+      },
+      "required": ["ids"]
+    },
+    "fields": {
+      "endpoint": "https://aviationweather.gov/api/data/metar",
+      "params": {"format": "json", "taf": "false"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"ids": "KLAX"},
+      {"ids": "KJFK,KORD"},
+      {"ids": "EGLL", "hoursBeforeNow": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of METAR observations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "icaoId": {"type": "string", "description": "ICAO airport code"},
+                  "reportTime": {"type": "string", "description": "Observation time (ISO format)"},
+                  "temp": {"type": ["number", "null"], "description": "Temperature in Celsius"},
+                  "dewp": {"type": ["number", "null"], "description": "Dew point in Celsius"},
+                  "wdir": {"type": ["integer", "null"], "description": "Wind direction in degrees (0-360)"},
+                  "wspd": {"type": ["integer", "null"], "description": "Wind speed in knots"},
+                  "wgst": {"type": ["integer", "null"], "description": "Wind gust in knots"},
+                  "visib": {"type": ["string", "null"], "description": "Visibility in statute miles"},
+                  "alt": {"type": ["number", "null"], "description": "Altimeter setting in inches of mercury"},
+                  "clouds": {"type": "array", "description": "Cloud layers", "items": {"type": "object", "properties": {"cover": {"type": "string"}, "base": {"type": ["integer", "null"]}}}},
+                  "wxString": {"type": ["string", "null"], "description": "Present weather codes"},
+                  "rawOb": {"type": "string", "description": "Raw METAR observation string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "AviationWeather_get_taf",
+    "description": "Get Terminal Aerodrome Forecasts (TAF) for airports from the Aviation Weather Center. TAF provides 24-30 hour weather forecasts for aviation including wind, visibility, cloud cover, and expected weather changes. No authentication required. Essential for flight planning and understanding forecast conditions at airports.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "string",
+          "description": "ICAO airport code(s), comma-separated. Examples: 'KLAX', 'KJFK,KORD', 'EGLL', 'LFPG'"
+        }
+      },
+      "required": ["ids"]
+    },
+    "fields": {
+      "endpoint": "https://aviationweather.gov/api/data/taf",
+      "params": {"format": "json"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"ids": "KLAX"},
+      {"ids": "KJFK"},
+      {"ids": "EGLL"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of TAF forecasts",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "icaoId": {"type": "string"},
+                  "issueTime": {"type": "string"},
+                  "validTime": {"type": "string", "description": "Valid time range (e.g., '2024/0600 2024/0712')"},
+                  "rawTAF": {"type": "string", "description": "Raw TAF text string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

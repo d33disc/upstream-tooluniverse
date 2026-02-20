@@ -1109,6 +1109,8 @@ default_tool_files = {
     "sec_edgar": os.path.join(current_dir, "data", "sec_edgar_tools.json"),
     # InspireHEP - high energy physics literature database
     "inspirehep": os.path.join(current_dir, "data", "inspirehep_tools.json"),
+    # AviationWeather - METAR and TAF weather reports from FAA Aviation Weather Center
+    "aviationweather": os.path.join(current_dir, "data", "aviationweather_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
