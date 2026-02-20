@@ -923,6 +923,8 @@ default_tool_files = {
     "dog_ceo": os.path.join(current_dir, "data", "dog_ceo_tools.json"),
     # CatFact - random cat facts and breed info
     "catfact": os.path.join(current_dir, "data", "catfact_tools.json"),
+    # Open Brewery DB - 8000+ craft breweries (US and international)
+    "openbrewery": os.path.join(current_dir, "data", "openbrewery_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

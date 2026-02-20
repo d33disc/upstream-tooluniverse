@@ -1,0 +1,171 @@
+[
+  {
+    "name": "OpenBrewery_search_breweries",
+    "description": "Search the Open Brewery DB for craft breweries worldwide. Returns brewery names, types (micro, brewpub, taproom, regional, large), addresses, cities, states, countries, websites, and phone numbers. Contains 8000+ US breweries and international entries. No authentication required. Useful for food & beverage research, tourism planning, and geographic analysis of craft beer industry.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": ["string", "null"],
+          "description": "Text search across brewery names. Examples: 'dogfish head', 'stone brewing', 'sierra nevada', 'sam adams'"
+        },
+        "by_city": {
+          "type": ["string", "null"],
+          "description": "Filter by city. Examples: 'San Diego', 'Portland', 'Denver', 'Chicago'"
+        },
+        "by_state": {
+          "type": ["string", "null"],
+          "description": "Filter by US state (lowercase, underscores). Examples: 'california', 'new_york', 'colorado', 'oregon'"
+        },
+        "by_country": {
+          "type": ["string", "null"],
+          "description": "Filter by country (lowercase, underscores). Examples: 'united_states', 'united_kingdom', 'canada', 'germany'"
+        },
+        "by_type": {
+          "type": ["string", "null"],
+          "description": "Filter by brewery type. Values: 'micro', 'nano', 'regional', 'brewpub', 'large', 'planning', 'bar', 'contract', 'proprietor', 'closed'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (default 20, max 200)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.openbrewerydb.org/v1/breweries/search",
+      "params": {
+        "per_page": "20"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "sierra nevada"},
+      {"by_state": "colorado", "by_type": "micro", "per_page": 10},
+      {"by_city": "Portland", "by_state": "oregon"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of breweries",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string", "description": "Brewery UUID"},
+                  "name": {"type": "string", "description": "Brewery name"},
+                  "brewery_type": {"type": "string", "description": "Type (micro, brewpub, large, etc.)"},
+                  "address_1": {"type": ["string", "null"], "description": "Street address"},
+                  "city": {"type": ["string", "null"], "description": "City"},
+                  "state_province": {"type": ["string", "null"], "description": "State or province"},
+                  "postal_code": {"type": ["string", "null"]},
+                  "country": {"type": ["string", "null"], "description": "Country"},
+                  "phone": {"type": ["string", "null"], "description": "Phone number"},
+                  "website_url": {"type": ["string", "null"], "description": "Website URL"},
+                  "latitude": {"type": ["string", "null"]},
+                  "longitude": {"type": ["string", "null"]}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenBrewery_list_breweries",
+    "description": "List craft breweries from the Open Brewery DB with filtering options. Returns brewery details including type, location, and contact info. Use for browsing breweries by location or type without a text search query. Contains 8000+ US breweries and international entries. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "by_city": {
+          "type": ["string", "null"],
+          "description": "Filter by city. Examples: 'San Diego', 'Portland', 'Denver'"
+        },
+        "by_state": {
+          "type": ["string", "null"],
+          "description": "Filter by US state (lowercase, underscores). Examples: 'california', 'new_york', 'colorado'"
+        },
+        "by_country": {
+          "type": ["string", "null"],
+          "description": "Filter by country. Examples: 'united_states', 'united_kingdom', 'canada'"
+        },
+        "by_type": {
+          "type": ["string", "null"],
+          "description": "Filter by type. Values: 'micro', 'nano', 'regional', 'brewpub', 'large', 'planning', 'bar', 'contract', 'closed'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Results per page (default 20, max 200)"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field and direction. Examples: 'name:asc', 'city:desc', 'type:asc'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.openbrewerydb.org/v1/breweries",
+      "params": {
+        "per_page": "20"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"by_state": "california", "by_type": "brewpub", "per_page": 10},
+      {"by_country": "united_kingdom", "per_page": 10},
+      {"by_city": "Denver", "by_state": "colorado"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of breweries",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "name": {"type": "string"},
+                  "brewery_type": {"type": "string"},
+                  "address_1": {"type": ["string", "null"]},
+                  "city": {"type": ["string", "null"]},
+                  "state_province": {"type": ["string", "null"]},
+                  "country": {"type": ["string", "null"]},
+                  "phone": {"type": ["string", "null"]},
+                  "website_url": {"type": ["string", "null"]},
+                  "latitude": {"type": ["string", "null"]},
+                  "longitude": {"type": ["string", "null"]}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
