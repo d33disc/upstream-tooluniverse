@@ -851,14 +851,10 @@ default_tool_files = {
     "neurovault": os.path.join(current_dir, "data", "neurovault_tools.json"),
     # Disease.sh - COVID-19 and public health statistics (231 countries, historical data)
     "diseasesh": os.path.join(current_dir, "data", "diseasesh_tools.json"),
-    # CoinGecko - Cryptocurrency market data (10K+ coins, prices, charts, market cap)
-    "coingecko": os.path.join(current_dir, "data", "coingecko_tools.json"),
     # OpenCitations COCI - Open scholarly citation index (references, citations, counts)
     "opencitations": os.path.join(current_dir, "data", "opencitations_tools.json"),
     # Wikidata Entity API - search and retrieve Wikidata items/entities by ID
     "wikidata_entity": os.path.join(current_dir, "data", "wikidata_entity_tools.json"),
-    # TheSportsDB - free sports database (teams, players, events across 20+ sports)
-    "sportsdb": os.path.join(current_dir, "data", "sportsdb_tools.json"),
     # iDigBio - Integrated Digitized Biocollections (130M+ natural history specimens)
     "idigbio": os.path.join(current_dir, "data", "idigbio_tools.json"),
     # ELIXIR TeSS - Bioinformatics training materials and events aggregator
@@ -867,12 +863,6 @@ default_tool_files = {
     "wikimedia_stats": os.path.join(current_dir, "data", "wikimedia_stats_tools.json"),
     # DBnomics - macroeconomic time series database (90+ providers: IMF, World Bank, ECB, Eurostat, OECD)
     "dbnomics": os.path.join(current_dir, "data", "dbnomics_tools.json"),
-    # OpenLigaDB - free football/soccer data (German Bundesliga, international tournaments)
-    "openligadb": os.path.join(current_dir, "data", "openligadb_tools.json"),
-    # Free Dictionary API - English word definitions, phonetics, and usage
-    "dictionary": os.path.join(current_dir, "data", "dictionary_tools.json"),
-    # Open Trivia Database - free trivia questions across 24 categories
-    "opentriviadb": os.path.join(current_dir, "data", "opentriviadb_tools.json"),
     # Art Institute of Chicago - 130K+ artworks open access collection
     "aic": os.path.join(current_dir, "data", "aic_tools.json"),
     # Cleveland Museum of Art - 61K+ open access artworks
@@ -883,24 +873,8 @@ default_tool_files = {
     "ceda": os.path.join(current_dir, "data", "ceda_tools.json"),
     # Sunrise-Sunset API - solar event times for any location
     "sunrise_sunset": os.path.join(current_dir, "data", "sunrise_sunset_tools.json"),
-    # Discogs - comprehensive music releases, artists, labels database (15M+ releases)
-    "discogs": os.path.join(current_dir, "data", "discogs_tools.json"),
-    # CityBikes - real-time bike-sharing station data for 800+ networks worldwide
-    "citybikes": os.path.join(current_dir, "data", "citybikes_tools.json"),
-    # PokeAPI - Pokemon species data (1000+ species, stats, abilities, habitats)
-    "pokeapi": os.path.join(current_dir, "data", "pokeapi_tools.json"),
-    # TVmaze - TV show database (45K+ shows, ratings, genres, episodes)
-    "tvmaze": os.path.join(current_dir, "data", "tvmaze_tools.json"),
     # Have I Been Pwned - public data breach database (900+ breaches)
     "hibp": os.path.join(current_dir, "data", "hibp_tools.json"),
-    # The Guardian - news article archive (2M+ articles since 1999)
-    "guardian": os.path.join(current_dir, "data", "guardian_tools.json"),
-    # JokeAPI - random jokes in multiple categories (Programming, Pun, Dark, Misc)
-    "jokeapi": os.path.join(current_dir, "data", "jokeapi_tools.json"),
-    # TheMealDB - international recipe database (300+ meals with ingredients/instructions)
-    "themealdb": os.path.join(current_dir, "data", "themealdb_tools.json"),
-    # TheCocktailDB - cocktail recipe database (search by drink, ingredient, category)
-    "cocktaildb": os.path.join(current_dir, "data", "cocktaildb_tools.json"),
     # CountriesNow - country and city geographic data (227 countries with ISO codes)
     "countriesnow": os.path.join(current_dir, "data", "countriesnow_tools.json"),
     # Openverse - Creative Commons licensed images (700M+ from Flickr, Wikimedia, museums)
@@ -927,48 +901,22 @@ default_tool_files = {
     "gbif_ext": os.path.join(current_dir, "data", "gbif_ext_tools.json"),
     # Frankfurter - real-time and historical currency exchange rates (ECB data)
     "frankfurter": os.path.join(current_dir, "data", "frankfurter_tools.json"),
-    # IP-API - IP address geolocation (country, city, ISP, timezone)
-    "ipapi": os.path.join(current_dir, "data", "ipapi_tools.json"),
-    # Zippopotam - postal/ZIP code geographic lookup (60+ countries)
-    "zippopotam": os.path.join(current_dir, "data", "zippopotam_tools.json"),
-    # Dog CEO - 120+ dog breeds with random images
-    "dog_ceo": os.path.join(current_dir, "data", "dog_ceo_tools.json"),
-    # CatFact - random cat facts and breed info
-    "catfact": os.path.join(current_dir, "data", "catfact_tools.json"),
-    # Open Brewery DB - 8000+ craft breweries (US and international)
-    "openbrewery": os.path.join(current_dir, "data", "openbrewery_tools.json"),
-    # PoetryDB - classic English poetry (129 poets: Shakespeare, Dickinson, Poe, etc.)
-    "poetrydb": os.path.join(current_dir, "data", "poetrydb_tools.json"),
     # Datamuse - word-finding API (synonyms, antonyms, rhymes, semantic similarity)
     "datamuse": os.path.join(current_dir, "data", "datamuse_tools.json"),
-    # XKCD - webcomic metadata (latest + by number)
-    "xkcd": os.path.join(current_dir, "data", "xkcd_tools.json"),
     # National Weather Service (NWS) - US weather forecasts, alerts, and point metadata
     "nws": os.path.join(current_dir, "data", "nws_tools.json"),
     # SpaceX - rocket launches, rockets, launchpads, and crew data
     "spacex": os.path.join(current_dir, "data", "spacex_tools.json"),
     # StackExchange - Q&A search, questions, and answers (StackOverflow etc.)
     "stackexchange": os.path.join(current_dir, "data", "stackexchange_tools.json"),
-    # Jikan (MyAnimeList) - anime and manga search, details, and metadata
-    "jikan": os.path.join(current_dir, "data", "jikan_tools.json"),
-    # Rick and Morty - characters, episodes, and locations from the TV show
-    "rickandmorty": os.path.join(current_dir, "data", "rickandmorty_tools.json"),
     # Carbon Intensity - UK electricity grid carbon intensity and generation mix
     "carbon_intensity": os.path.join(
         current_dir, "data", "carbon_intensity_tools.json"
     ),
     # University Domains - worldwide university search by name and country
     "university": os.path.join(current_dir, "data", "university_tools.json"),
-    # IP Geolocation - IP address to geographic location lookup
-    "ip_geolocation": os.path.join(current_dir, "data", "ip_geolocation_tools.json"),
     # USGS Water Services - real-time streamflow, water level, and temperature data
     "usgs_water": os.path.join(current_dir, "data", "usgs_water_tools.json"),
-    # SWAPI (Star Wars API) - characters, planets, starships from Star Wars universe
-    "swapi": os.path.join(current_dir, "data", "swapi_tools.json"),
-    # Agify/Genderize/Nationalize - name-based age, gender, nationality prediction
-    "nameapis": os.path.join(current_dir, "data", "nameapis_tools.json"),
-    # Coinbase - cryptocurrency spot prices and exchange rates (no auth required)
-    "coinbase": os.path.join(current_dir, "data", "coinbase_tools.json"),
     # Spaceflight News API - 30K+ space news articles from major sites
     "spaceflight_news": os.path.join(
         current_dir, "data", "spaceflight_news_tools.json"
@@ -977,8 +925,6 @@ default_tool_files = {
     "launchlibrary": os.path.join(current_dir, "data", "launchlibrary_tools.json"),
     # US Census Bureau - population and demographic data (no key required)
     "uscensus": os.path.join(current_dir, "data", "uscensus_tools.json"),
-    # Scryfall - Magic: The Gathering card search and database (250K+ printings)
-    "scryfall": os.path.join(current_dir, "data", "scryfall_tools.json"),
     # Nager.Date - public holidays for 120 countries (official holiday calendars)
     "nager_holidays": os.path.join(current_dir, "data", "nager_holidays_tools.json"),
     # Open-Meteo Marine - ocean wave/swell forecasts for any coastal location
@@ -991,38 +937,10 @@ default_tool_files = {
     ),
     # NASA DONKI - space weather events (CME, flares, storms, particles, shocks)
     "nasa_donki": os.path.join(current_dir, "data", "nasa_donki_tools.json"),
-    # Chuck Norris API - Chuck Norris jokes (random, search, by category)
-    "chucknorris": os.path.join(current_dir, "data", "chucknorris_tools.json"),
-    # Advice Slip - random life advice and search (200+ unique tips)
-    "adviceslip": os.path.join(current_dir, "data", "adviceslip_tools.json"),
-    # CATAAS - Cat as a Service (random cat images, browse, tags)
-    "cataas": os.path.join(current_dir, "data", "cataas_tools.json"),
-    # Kanye REST - random Kanye West quotes
-    "kanye_rest": os.path.join(current_dir, "data", "kanye_rest_tools.json"),
     # OpenTopoData - terrain elevation data for any global location (SRTM/ASTER/NED)
     "opentopodata": os.path.join(current_dir, "data", "opentopodata_tools.json"),
     # Disease.sh - COVID-19 global and country-level statistics
     "disease_sh": os.path.join(current_dir, "data", "disease_sh_tools.json"),
-    # Official Joke API - setup/punchline jokes (general, programming, knock-knock)
-    "official_joke": os.path.join(current_dir, "data", "official_joke_tools.json"),
-    # icanhazdadjoke - dad jokes (random, search by keyword, get by ID)
-    "icanhazdadjoke": os.path.join(current_dir, "data", "icanhazdadjoke_tools.json"),
-    # Useless Facts - random and daily useless/trivia facts
-    "uselessfacts": os.path.join(current_dir, "data", "uselessfacts_tools.json"),
-    # Bored API - random activity suggestions with type/participant filtering
-    "boredapi": os.path.join(current_dir, "data", "boredapi_tools.json"),
-    # HTTPBin - HTTP testing utilities (UUID generator, IP, headers, user-agent)
-    "httpbin": os.path.join(current_dir, "data", "httpbin_tools.json"),
-    # JSONPlaceholder - fake REST API for testing (posts, comments, users, todos, photos)
-    "jsonplaceholder": os.path.join(current_dir, "data", "jsonplaceholder_tools.json"),
-    # TheCatAPI - cat breeds, temperament traits, and cat images (no auth for basic access)
-    "thecatapi": os.path.join(current_dir, "data", "thecatapi_tools.json"),
-    # ZenQuotes - inspirational quotes (random, today, bulk) (no auth required)
-    "zenquotes": os.path.join(current_dir, "data", "zenquotes_tools.json"),
-    # Blockchain.info - Bitcoin blockchain statistics
-    "blockchain": os.path.join(current_dir, "data", "blockchain_tools.json"),
-    # GeoJS - IP geolocation with country, region, city, timezone
-    "geojs": os.path.join(current_dir, "data", "geojs_tools.json"),
     # MathJS - evaluate mathematical expressions via API
     "mathjs": os.path.join(current_dir, "data", "mathjs_tools.json"),
     # NASA NeoWs - Near Earth Object data (asteroids, close approaches)
@@ -1045,70 +963,24 @@ default_tool_files = {
     "exchangerate": os.path.join(current_dir, "data", "exchangerate_tools.json"),
     # BigDataCloud - reverse geocode lat/lng to country, city, region (no auth)
     "bigdatacloud": os.path.join(current_dir, "data", "bigdatacloud_tools.json"),
-    # Animal Facts + RandomFox - animal images and educational facts
-    "animal_facts": os.path.join(current_dir, "data", "animal_facts_tools.json"),
-    # Hacker News Algolia - search tech stories/comments on HN
-    "hackernews": os.path.join(current_dir, "data", "hackernews_tools.json"),
-    # Meme API - random memes from Reddit subreddits
-    "meme_api": os.path.join(current_dir, "data", "meme_api_tools.json"),
-    # Chess.com Public API - player profiles, stats, titled players
-    "chesscom": os.path.join(current_dir, "data", "chesscom_tools.json"),
-    # Lyrics.ovh - song lyrics and artist search
-    "lyrics_ovh": os.path.join(current_dir, "data", "lyrics_ovh_tools.json"),
-    # The Trivia API - trivia questions across 10 categories with difficulty levels
-    "trivia_api": os.path.join(current_dir, "data", "trivia_api_tools.json"),
-    # Bible API - Bible verse lookup by reference with multiple translations
-    "bible_api": os.path.join(current_dir, "data", "bible_api_tools.json"),
     # Open-Meteo Climate - historical climate data from 1950 via ERA5/CMIP6 models
     "open_meteo_climate": os.path.join(
         current_dir, "data", "open_meteo_climate_tools.json"
     ),
     # On This Day - historical events, births, deaths by date (via Wikipedia)
     "on_this_day": os.path.join(current_dir, "data", "on_this_day_tools.json"),
-    # Lichess - open-source chess platform player profiles and top player leaderboards
-    "lichess": os.path.join(current_dir, "data", "lichess_tools.json"),
-    # OpenF1 - Formula 1 session, driver, and race meeting data (2023+)
-    "openf1": os.path.join(current_dir, "data", "openf1_tools.json"),
     # Open-Meteo Air Quality - hourly PM2.5/PM10/ozone forecast and history
     "open_meteo_airquality": os.path.join(
         current_dir, "data", "open_meteo_airquality_tools.json"
     ),
     # Open Elevation - terrain elevation data from lat/lon coordinates
     "open_elevation": os.path.join(current_dir, "data", "open_elevation_tools.json"),
-    # Deezer - music search (tracks, artists, top songs)
-    "deezer": os.path.join(current_dir, "data", "deezer_tools.json"),
-    # DictionaryAPI - English word definitions, phonetics, synonyms
-    "dictionary_api": os.path.join(current_dir, "data", "dictionary_api_tools.json"),
-    # DuckDuckGo Instant Answer API - search summaries for topics
-    "duckduckgo": os.path.join(current_dir, "data", "duckduckgo_tools.json"),
-    # Quotable - random and searchable inspirational quotes
-    "quotable": os.path.join(current_dir, "data", "quotable_tools.json"),
-    # Dog CEO API - random dog images by breed
-    "dog_api": os.path.join(current_dir, "data", "dog_api_tools.json"),
-    # IPify - simple public IP address lookup
-    "ipify": os.path.join(current_dir, "data", "ipify_tools.json"),
-    # Deck of Cards API - playing card game utility
-    "deck_of_cards": os.path.join(current_dir, "data", "deck_of_cards_tools.json"),
     # Disease.sh extended - COVID historical and vaccine coverage data
     "disease_sh_ext": os.path.join(current_dir, "data", "disease_sh_ext_tools.json"),
-    # Scryfall extended - advanced Magic: The Gathering card search
-    "scryfall_ext": os.path.join(current_dir, "data", "scryfall_ext_tools.json"),
-    # TVmaze extended - show episodes and TV schedule
-    "tvmaze_ext": os.path.join(current_dir, "data", "tvmaze_ext_tools.json"),
     # Where the ISS At - real-time ISS position and velocity
     "wheretheissat": os.path.join(current_dir, "data", "wheretheissat_tools.json"),
-    # Corporate BS Generator - random corporate buzzword phrase generation
-    "corporate_bs": os.path.join(current_dir, "data", "corporate_bs_tools.json"),
     # Wikipedia extended - featured daily content and on-this-day events
     "wikipedia_ext": os.path.join(current_dir, "data", "wikipedia_ext_tools.json"),
-    # CheapShark - video game deals and discounts from multiple stores
-    "cheapshark": os.path.join(current_dir, "data", "cheapshark_tools.json"),
-    # FreeToGame - free-to-play PC and browser games database
-    "freetogame": os.path.join(current_dir, "data", "freetogame_tools.json"),
-    # The Color API - color identification and scheme generation
-    "colorapi": os.path.join(current_dir, "data", "colorapi_tools.json"),
-    # MangaDex - manga series search and metadata
-    "mangadex": os.path.join(current_dir, "data", "mangadex_tools.json"),
     # Data.gov - U.S. government open data catalog search
     "datagov": os.path.join(current_dir, "data", "datagov_tools.json"),
     # WAQI - World Air Quality Index real-time AQI data
@@ -1123,24 +995,12 @@ default_tool_files = {
     "aviationweather": os.path.join(current_dir, "data", "aviationweather_tools.json"),
     # IEA - International Energy Agency EV and energy statistics
     "iea": os.path.join(current_dir, "data", "iea_tools.json"),
-    # iTunes Search API - Apple media catalog (music, movies, podcasts, apps)
-    "itunes": os.path.join(current_dir, "data", "itunes_tools.json"),
     # Federal Register - US government regulations, rules, notices, presidential documents
     "federal_register": os.path.join(
         current_dir, "data", "federal_register_tools.json"
     ),
     # NASA TechPort - NASA technology development projects and investments
     "nasa_techport": os.path.join(current_dir, "data", "nasa_techport_tools.json"),
-    # Makeup API - cosmetics and beauty product search by brand, type, tags
-    "makeup": os.path.join(current_dir, "data", "makeup_tools.json"),
-    # Fake Store API - mock e-commerce product data for prototyping/testing
-    "fakestore": os.path.join(current_dir, "data", "fakestore_tools.json"),
-    # Urban Dictionary - slang, internet jargon, and informal language definitions
-    "urban_dictionary": os.path.join(
-        current_dir, "data", "urban_dictionary_tools.json"
-    ),
-    # Lemmy - open-source Reddit alternative (federated social links/discussions)
-    "lemmy": os.path.join(current_dir, "data", "lemmy_tools.json"),
     # Crates.io - Rust package registry (search crates, version history, downloads)
     "cratesio": os.path.join(current_dir, "data", "cratesio_tools.json"),
     # MyMemory Translation - free machine translation for 200+ language pairs
@@ -1149,18 +1009,8 @@ default_tool_files = {
     "ietf_datatracker": os.path.join(
         current_dir, "data", "ietf_datatracker_tools.json"
     ),
-    # Ergast F1 - Formula 1 race results, standings, schedules
-    "ergast_f1": os.path.join(current_dir, "data", "ergast_f1_tools.json"),
     # Gutendex - Project Gutenberg ebooks catalog search
     "gutendex": os.path.join(current_dir, "data", "gutendex_tools.json"),
-    # Name analysis - age/nationality/gender prediction from first names
-    "name_analysis": os.path.join(current_dir, "data", "name_analysis_tools.json"),
-    # Pokemon TCG - Pokemon trading card game cards and sets
-    "pokemon_tcg": os.path.join(current_dir, "data", "pokemon_tcg_tools.json"),
-    # Reddit - public Reddit posts and subreddit search
-    "reddit": os.path.join(current_dir, "data", "reddit_tools.json"),
-    # Yu-Gi-Oh - trading card game cards, sets, and archetypes
-    "yugioh": os.path.join(current_dir, "data", "yugioh_tools.json"),
     # Bioconductor - R/Bioconductor bioinformatics package search and metadata (via R-universe)
     "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
 }

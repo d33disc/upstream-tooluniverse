@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2187 scientific tools.
+Type-safe Python interface to 2023 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -51,9 +51,6 @@ from .AdverseEventPredictionQuestionGenerator import (
 from .AdverseEventPredictionQuestionGeneratorWithContext import (
     AdverseEventPredictionQuestionGeneratorWithContext,
 )
-from .AdviceSlip_get_random_advice import AdviceSlip_get_random_advice
-from .AdviceSlip_search_advice import AdviceSlip_search_advice
-from .Agify_predict_age import Agify_predict_age
 from .AllenBrain_get_expression_datasets import AllenBrain_get_expression_datasets
 from .AllenBrain_get_structure import AllenBrain_get_structure
 from .AllenBrain_search_genes import AllenBrain_search_genes
@@ -108,7 +105,6 @@ from .BiGG_get_model_reactions import BiGG_get_model_reactions
 from .BiGG_get_reaction import BiGG_get_reaction
 from .BiGG_list_models import BiGG_list_models
 from .BiGG_search import BiGG_search
-from .BibleAPI_get_verse import BibleAPI_get_verse
 from .BigDataCloud_reverse_geocode import BigDataCloud_reverse_geocode
 from .BindingDB_get_ligands_by_pdb import BindingDB_get_ligands_by_pdb
 from .BindingDB_get_ligands_by_uniprot import BindingDB_get_ligands_by_uniprot
@@ -142,13 +138,6 @@ from .BioTools_search_by_type import BioTools_search_by_type
 from .Bioconductor_get_package import Bioconductor_get_package
 from .Bioconductor_search_packages import Bioconductor_search_packages
 from .BiomarkerDiscoveryWorkflow import BiomarkerDiscoveryWorkflow
-from .Blockchain_get_address import Blockchain_get_address
-from .Blockchain_get_rawblock import Blockchain_get_rawblock
-from .Blockchain_get_rawtx import Blockchain_get_rawtx
-from .Blockchain_get_ticker import Blockchain_get_ticker
-from .BoredAPI_filter_activities import BoredAPI_filter_activities
-from .BoredAPI_get_activity_by_key import BoredAPI_get_activity_by_key
-from .BoredAPI_get_random_activity import BoredAPI_get_random_activity
 from .CADD_get_position_scores import CADD_get_position_scores
 from .CADD_get_range_scores import CADD_get_range_scores
 from .CADD_get_variant_score import CADD_get_variant_score
@@ -186,11 +175,6 @@ from .CallAgent import CallAgent
 from .CarbonIntensity_get_by_date import CarbonIntensity_get_by_date
 from .CarbonIntensity_get_current import CarbonIntensity_get_current
 from .CarbonIntensity_get_generation_mix import CarbonIntensity_get_generation_mix
-from .CatFact_get_breeds import CatFact_get_breeds
-from .CatFact_get_facts import CatFact_get_facts
-from .Cataas_browse_cats import Cataas_browse_cats
-from .Cataas_get_random_cat import Cataas_get_random_cat
-from .Cataas_get_tags import Cataas_get_tags
 from .ChEBI_get_compound import ChEBI_get_compound
 from .ChEBI_get_ontology_children import ChEBI_get_ontology_children
 from .ChEBI_search import ChEBI_search
@@ -231,16 +215,7 @@ from .ChIPAtlas_get_peak_data import ChIPAtlas_get_peak_data
 from .ChIPAtlas_search_datasets import ChIPAtlas_search_datasets
 from .ChannelsDB_get_channels_cofactor import ChannelsDB_get_channels_cofactor
 from .ChannelsDB_get_channels_pdb import ChannelsDB_get_channels_pdb
-from .CheapShark_search_game_deals import CheapShark_search_game_deals
-from .ChessCom_get_player_profile import ChessCom_get_player_profile
-from .ChessCom_get_player_stats import ChessCom_get_player_stats
-from .ChessCom_get_titled_players import ChessCom_get_titled_players
 from .ChroniclingAmerica_search_newspapers import ChroniclingAmerica_search_newspapers
-from .ChuckNorris_get_categories import ChuckNorris_get_categories
-from .ChuckNorris_get_random_joke import ChuckNorris_get_random_joke
-from .ChuckNorris_search_jokes import ChuckNorris_search_jokes
-from .CityBikes_get_network_stations import CityBikes_get_network_stations
-from .CityBikes_list_networks import CityBikes_list_networks
 from .ClevelandArt_search_artworks import ClevelandArt_search_artworks
 from .ClinGenAR_get_external_records import ClinGenAR_get_external_records
 from .ClinGenAR_lookup_allele import ClinGenAR_lookup_allele
@@ -260,18 +235,11 @@ from .CoL_get_children import CoL_get_children
 from .CoL_get_taxon import CoL_get_taxon
 from .CoL_search_species import CoL_search_species
 from .CodeQualityAnalyzer import CodeQualityAnalyzer
-from .CoinGecko_get_coin_info import CoinGecko_get_coin_info
-from .CoinGecko_get_coin_price import CoinGecko_get_coin_price
-from .Coinbase_get_exchange_rates import Coinbase_get_exchange_rates
-from .Coinbase_get_spot_price import Coinbase_get_spot_price
 from .CollegeScorecard_search_schools import CollegeScorecard_search_schools
-from .ColorAPI_generate_scheme import ColorAPI_generate_scheme
-from .ColorAPI_identify_color import ColorAPI_identify_color
 from .ComplexPortal_get_complex import ComplexPortal_get_complex
 from .ComplexPortal_search_complexes import ComplexPortal_search_complexes
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
 from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeline
-from .CorporateBS_generate_phrase import CorporateBS_generate_phrase
 from .CountriesNow_get_countries_cities import CountriesNow_get_countries_cities
 from .CountriesNow_get_country_info import CountriesNow_get_country_info
 from .CratesIO_get_crate import CratesIO_get_crate
@@ -314,12 +282,7 @@ from .Datamuse_find_related_words import Datamuse_find_related_words
 from .Datamuse_find_words_with_context import Datamuse_find_words_with_context
 from .Dataverse_get_dataset import Dataverse_get_dataset
 from .Dataverse_search_datasets import Dataverse_search_datasets
-from .DeckOfCards_draw_cards import DeckOfCards_draw_cards
-from .DeckOfCards_new_deck import DeckOfCards_new_deck
 from .DeepGO_predict_function import DeepGO_predict_function
-from .Deezer_get_artist_top_tracks import Deezer_get_artist_top_tracks
-from .Deezer_search_artists import Deezer_search_artists
-from .Deezer_search_tracks import Deezer_search_tracks
 from .DepMap_get_cell_line import DepMap_get_cell_line
 from .DepMap_get_cell_lines import DepMap_get_cell_lines
 from .DepMap_get_gene_dependencies import DepMap_get_gene_dependencies
@@ -330,16 +293,12 @@ from .DescriptionQualityEvaluator import DescriptionQualityEvaluator
 from .Dfam_get_annotations import Dfam_get_annotations
 from .Dfam_get_family import Dfam_get_family
 from .Dfam_search_families import Dfam_search_families
-from .DictionaryAPI_lookup_word import DictionaryAPI_lookup_word
-from .Dictionary_lookup_word import Dictionary_lookup_word
 from .DigiKey_get_categories import DigiKey_get_categories
 from .DigiKey_get_manufacturers import DigiKey_get_manufacturers
 from .DigiKey_get_product_details import DigiKey_get_product_details
 from .DigiKey_search_by_keyword import DigiKey_search_by_keyword
 from .DisProt_get_entry import DisProt_get_entry
 from .DisProt_search import DisProt_search
-from .Discogs_get_artist import Discogs_get_artist
-from .Discogs_search_music import Discogs_search_music
 from .DiseaseAnalyzerAgent import DiseaseAnalyzerAgent
 from .DiseaseOntology_get_parents import DiseaseOntology_get_parents
 from .DiseaseOntology_get_term import DiseaseOntology_get_term
@@ -352,10 +311,6 @@ from .DiseaseSh_get_global_stats import DiseaseSh_get_global_stats
 from .DiseaseSh_get_historical import DiseaseSh_get_historical
 from .DockerHub_get_tags import DockerHub_get_tags
 from .DockerHub_search_repositories import DockerHub_search_repositories
-from .DogCEO_get_breed_images import DogCEO_get_breed_images
-from .DogCEO_get_random_dog_image import DogCEO_get_random_dog_image
-from .DogCEO_get_sub_breeds import DogCEO_get_sub_breeds
-from .DogCEO_list_breeds import DogCEO_list_breeds
 from .DomainExpertValidator import DomainExpertValidator
 from .DrugInteractionAnalyzerAgent import DrugInteractionAnalyzerAgent
 from .DrugOptimizationAgent import DrugOptimizationAgent
@@ -363,7 +318,6 @@ from .DrugSafetyAnalyzer import DrugSafetyAnalyzer
 from .Dryad_get_dataset import Dryad_get_dataset
 from .Dryad_get_dataset_files import Dryad_get_dataset_files
 from .Dryad_search_datasets import Dryad_search_datasets
-from .DuckDuckGo_instant_answer import DuckDuckGo_instant_answer
 from .EBIProteins_get_antigen import EBIProteins_get_antigen
 from .EBIProteins_get_coordinate_mapping import EBIProteins_get_coordinate_mapping
 from .EBIProteins_get_coordinates import EBIProteins_get_coordinates
@@ -460,12 +414,6 @@ from .EpiGraphDB_get_mendelian_randomization import (
 from .EpiGraphDB_map_gwas_to_efo import EpiGraphDB_map_gwas_to_efo
 from .EpiGraphDB_search_gene import EpiGraphDB_search_gene
 from .EpiGraphDB_search_opengwas import EpiGraphDB_search_opengwas
-from .ErgastF1_get_constructor_standings import ErgastF1_get_constructor_standings
-from .ErgastF1_get_driver_standings import ErgastF1_get_driver_standings
-from .ErgastF1_get_drivers import ErgastF1_get_drivers
-from .ErgastF1_get_qualifying_results import ErgastF1_get_qualifying_results
-from .ErgastF1_get_race_results import ErgastF1_get_race_results
-from .ErgastF1_get_season_schedule import ErgastF1_get_season_schedule
 from .EthicalComplianceReviewer import EthicalComplianceReviewer
 from .EuroPMCAnnot_get_annotations_by_type import EuroPMCAnnot_get_annotations_by_type
 from .EuroPMCAnnot_get_article_annotations import EuroPMCAnnot_get_article_annotations
@@ -893,9 +841,6 @@ from .FDA_retrieve_patient_medication_info_by_drug_name import (
 from .FEC_search_candidates import FEC_search_candidates
 from .FPbase_get_protein import FPbase_get_protein
 from .FPbase_search_by_spectrum import FPbase_search_by_spectrum
-from .FakeStore_get_categories import FakeStore_get_categories
-from .FakeStore_get_product_by_id import FakeStore_get_product_by_id
-from .FakeStore_get_products import FakeStore_get_products
 from .Fatcat_search_scholar import Fatcat_search_scholar
 from .FederalRegister_get_document import FederalRegister_get_document
 from .FederalRegister_search_documents import FederalRegister_search_documents
@@ -917,7 +862,6 @@ from .FourDN_get_experiment_metadata import FourDN_get_experiment_metadata
 from .FourDN_get_file_metadata import FourDN_get_file_metadata
 from .FourDN_search_data import FourDN_search_data
 from .Frankfurter_get_exchange_rates import Frankfurter_get_exchange_rates
-from .FreeToGame_get_games import FreeToGame_get_games
 from .G2P_get_gene import G2P_get_gene
 from .G2P_get_panel import G2P_get_panel
 from .G2P_get_record import G2P_get_record
@@ -965,7 +909,6 @@ from .GTEx_get_tissue_sites import GTEx_get_tissue_sites
 from .GTEx_get_top_expressed_genes import GTEx_get_top_expressed_genes
 from .GTEx_query_eqtl import GTEx_query_eqtl
 from .GWAS_search_associations_by_gene import GWAS_search_associations_by_gene
-from .Genderize_predict_gender import Genderize_predict_gender
 from .GeneNetwork_get_dataset_info import GeneNetwork_get_dataset_info
 from .GeneNetwork_get_sample_data import GeneNetwork_get_sample_data
 from .GeneNetwork_get_trait_info import GeneNetwork_get_trait_info
@@ -976,7 +919,6 @@ from .GenomeNexus_annotate_mutation import GenomeNexus_annotate_mutation
 from .GenomeNexus_annotate_variant import GenomeNexus_annotate_variant
 from .GenomeNexus_get_cancer_hotspots import GenomeNexus_get_cancer_hotspots
 from .GenomeNexus_get_canonical_transcript import GenomeNexus_get_canonical_transcript
-from .GeoJS_get_geo import GeoJS_get_geo
 from .GitHub_get_repository import GitHub_get_repository
 from .GitHub_get_user_profile import GitHub_get_user_profile
 from .GitHub_search_repositories import GitHub_search_repositories
@@ -988,7 +930,6 @@ from .GlyGen_search_glycoproteins import GlyGen_search_glycoproteins
 from .GtoPdb_get_interactions import GtoPdb_get_interactions
 from .GtoPdb_search_ligands import GtoPdb_search_ligands
 from .GtoPdb_search_targets import GtoPdb_search_targets
-from .Guardian_search_news import Guardian_search_news
 from .Gutendex_get_book import Gutendex_get_book
 from .Gutendex_search_books import Gutendex_search_books
 from .GxA_get_experiment_expression import GxA_get_experiment_expression
@@ -1031,13 +972,7 @@ from .HPA_search_genes_by_query import HPA_search_genes_by_query
 from .HPO_get_term import HPO_get_term
 from .HPO_get_term_hierarchy import HPO_get_term_hierarchy
 from .HPO_search_terms import HPO_search_terms
-from .HTTPBin_generate_uuid import HTTPBin_generate_uuid
-from .HTTPBin_get_headers import HTTPBin_get_headers
-from .HTTPBin_get_ip import HTTPBin_get_ip
-from .HTTPBin_get_user_agent import HTTPBin_get_user_agent
 from .HackerNewsSearch_search_stories import HackerNewsSearch_search_stories
-from .HackerNews_get_item import HackerNews_get_item
-from .HackerNews_get_top_stories import HackerNews_get_top_stories
 from .Harmonizome_get_gene import Harmonizome_get_gene
 from .Harmonizome_list_datasets import Harmonizome_list_datasets
 from .HuggingFace_get_model import HuggingFace_get_model
@@ -1069,9 +1004,6 @@ from .IMPC_get_gene_phenotype_hits import IMPC_get_gene_phenotype_hits
 from .IMPC_get_gene_summary import IMPC_get_gene_summary
 from .IMPC_get_phenotypes_by_gene import IMPC_get_phenotypes_by_gene
 from .IMPC_search_genes import IMPC_search_genes
-from .IPAPI_geolocate_ip import IPAPI_geolocate_ip
-from .IPGeolocation_lookup import IPGeolocation_lookup
-from .IPify_get_public_ip import IPify_get_public_ip
 from .ISS_get_astronauts import ISS_get_astronauts
 from .ISS_get_position import ISS_get_position
 from .ITIS_get_full_record import ITIS_get_full_record
@@ -1112,17 +1044,6 @@ from .JLCSearch_search_resistors import JLCSearch_search_resistors
 from .JLCSearch_search_voltage_regulators import JLCSearch_search_voltage_regulators
 from .JPLHorizons_get_body_data import JPLHorizons_get_body_data
 from .JPLHorizons_lookup_object import JPLHorizons_lookup_object
-from .JSONPlaceholder_get_post import JSONPlaceholder_get_post
-from .JSONPlaceholder_get_post_comments import JSONPlaceholder_get_post_comments
-from .JSONPlaceholder_get_user import JSONPlaceholder_get_user
-from .JSONPlaceholder_list_photos import JSONPlaceholder_list_photos
-from .JSONPlaceholder_list_posts import JSONPlaceholder_list_posts
-from .JSONPlaceholder_list_todos import JSONPlaceholder_list_todos
-from .JSONPlaceholder_list_users import JSONPlaceholder_list_users
-from .Jikan_get_anime import Jikan_get_anime
-from .Jikan_search_anime import Jikan_search_anime
-from .Jikan_search_manga import Jikan_search_manga
-from .JokeAPI_get_jokes import JokeAPI_get_jokes
 from .KEGG_get_brite_hierarchy import KEGG_get_brite_hierarchy
 from .KEGG_get_compound import KEGG_get_compound
 from .KEGG_get_gene_pathways import KEGG_get_gene_pathways
@@ -1133,7 +1054,6 @@ from .KLIFS_get_ligands import KLIFS_get_ligands
 from .KLIFS_get_structures import KLIFS_get_structures
 from .KLIFS_get_structures_by_pdb import KLIFS_get_structures_by_pdb
 from .KLIFS_list_kinases import KLIFS_list_kinases
-from .KanyeRest_get_random_quote import KanyeRest_get_random_quote
 from .KeywordExtractorAgent import KeywordExtractorAgent
 from .LNCipedia_get_lncrna import LNCipedia_get_lncrna
 from .LNCipedia_get_lncrna_publications import LNCipedia_get_lncrna_publications
@@ -1149,12 +1069,7 @@ from .LOTUS_search_by_inchikey import LOTUS_search_by_inchikey
 from .LOTUS_search_natural_products import LOTUS_search_natural_products
 from .LabelGenerator import LabelGenerator
 from .LaunchLibrary_get_upcoming_launches import LaunchLibrary_get_upcoming_launches
-from .Lemmy_get_community_posts import Lemmy_get_community_posts
-from .Lemmy_list_communities import Lemmy_list_communities
-from .Lemmy_search_posts import Lemmy_search_posts
 from .LibraryOfCongress_search import LibraryOfCongress_search
-from .Lichess_get_player_profile import Lichess_get_player_profile
-from .Lichess_get_top_players import Lichess_get_top_players
 from .LipidMaps_get_compound_by_id import LipidMaps_get_compound_by_id
 from .LipidMaps_search_by_formula import LipidMaps_search_by_formula
 from .LipidMaps_search_by_name import LipidMaps_search_by_name
@@ -1164,8 +1079,6 @@ from .LiteratureContextReviewer import LiteratureContextReviewer
 from .LiteratureSearchTool import LiteratureSearchTool
 from .LiteratureSynthesisAgent import LiteratureSynthesisAgent
 from .Lobsters_get_stories import Lobsters_get_stories
-from .LyricsOVH_get_lyrics import LyricsOVH_get_lyrics
-from .LyricsOVH_suggest_songs import LyricsOVH_suggest_songs
 from .MGnify_get_genome import MGnify_get_genome
 from .MGnify_get_study_detail import MGnify_get_study_detail
 from .MGnify_list_analyses import MGnify_list_analyses
@@ -1177,8 +1090,6 @@ from .MIBiG_list_clusters import MIBiG_list_clusters
 from .MPD_get_phenotype_data import MPD_get_phenotype_data
 from .MSigDB_get_geneset import MSigDB_get_geneset
 from .MSigDB_get_hallmark_geneset import MSigDB_get_hallmark_geneset
-from .MakeupAPI_search_products import MakeupAPI_search_products
-from .MangaDex_search_manga import MangaDex_search_manga
 from .MarineRegions_get_record import MarineRegions_get_record
 from .MarineRegions_search_by_name import MarineRegions_search_by_name
 from .MassBank_search_by_compound import MassBank_search_by_compound
@@ -1199,8 +1110,6 @@ from .MedlinePlus_get_genetics_condition_by_name import (
 from .MedlinePlus_get_genetics_gene_by_name import MedlinePlus_get_genetics_gene_by_name
 from .MedlinePlus_get_genetics_index import MedlinePlus_get_genetics_index
 from .MedlinePlus_search_topics_by_keyword import MedlinePlus_search_topics_by_keyword
-from .MemeAPI_get_multiple_memes import MemeAPI_get_multiple_memes
-from .MemeAPI_get_random_meme import MemeAPI_get_random_meme
 from .MetMuseum_get_object import MetMuseum_get_object
 from .MetMuseum_search_objects import MetMuseum_search_objects
 from .MetNorway_get_forecast import MetNorway_get_forecast
@@ -1313,7 +1222,6 @@ from .NOAASpaceWeather_get_solar_xrays import NOAASpaceWeather_get_solar_xrays
 from .NWS_get_active_alerts import NWS_get_active_alerts
 from .NWS_get_forecast import NWS_get_forecast
 from .NWS_get_point_metadata import NWS_get_point_metadata
-from .Nationalize_predict_nationality import Nationalize_predict_nationality
 from .NeuroMorpho_get_field_values import NeuroMorpho_get_field_values
 from .NeuroMorpho_get_morphometry import NeuroMorpho_get_morphometry
 from .NeuroMorpho_get_neuron import NeuroMorpho_get_neuron
@@ -1343,7 +1251,6 @@ from .OSDR_get_study import OSDR_get_study
 from .OSDR_search_studies import OSDR_search_studies
 from .OSF_search_preprints import OSF_search_preprints
 from .OSL_get_efo_id_by_disease_name import OSL_get_efo_id_by_disease_name
-from .OfficialJoke_get_random_joke import OfficialJoke_get_random_joke
 from .OmicsDI_get_dataset import OmicsDI_get_dataset
 from .OmicsDI_get_statistics import OmicsDI_get_statistics
 from .OmicsDI_search_datasets import OmicsDI_search_datasets
@@ -1365,17 +1272,12 @@ from .OncoKB_get_gene_info import OncoKB_get_gene_info
 from .OncoKB_get_levels import OncoKB_get_levels
 from .OpenAIRE_search_publications import OpenAIRE_search_publications
 from .OpenAlex_Guidelines_Search import OpenAlex_Guidelines_Search
-from .OpenBreweryDB_get_random_brewery import OpenBreweryDB_get_random_brewery
-from .OpenBreweryDB_search_breweries import OpenBreweryDB_search_breweries
 from .OpenBrewery_search import OpenBrewery_search
 from .OpenBrewery_text_search import OpenBrewery_text_search
 from .OpenCitations_get_citation_count import OpenCitations_get_citation_count
 from .OpenCitations_get_citations import OpenCitations_get_citations
 from .OpenCitations_get_references import OpenCitations_get_references
 from .OpenElevation_get_elevation import OpenElevation_get_elevation
-from .OpenF1_get_drivers import OpenF1_get_drivers
-from .OpenF1_get_meeting_info import OpenF1_get_meeting_info
-from .OpenF1_get_sessions import OpenF1_get_sessions
 from .OpenFDA_search_device_510k import OpenFDA_search_device_510k
 from .OpenFDA_search_device_enforcement import OpenFDA_search_device_enforcement
 from .OpenFDA_search_drug_enforcement import OpenFDA_search_drug_enforcement
@@ -1390,9 +1292,6 @@ from .OpenLibrary_get_author import OpenLibrary_get_author
 from .OpenLibrary_get_book import OpenLibrary_get_book
 from .OpenLibrary_get_work import OpenLibrary_get_work
 from .OpenLibrary_search_books import OpenLibrary_search_books
-from .OpenLigaDB_get_available_leagues import OpenLigaDB_get_available_leagues
-from .OpenLigaDB_get_matches import OpenLigaDB_get_matches
-from .OpenLigaDB_get_table import OpenLigaDB_get_table
 from .OpenML_get_dataset import OpenML_get_dataset
 from .OpenML_search_datasets import OpenML_search_datasets
 from .OpenMeteo_geocode_location import OpenMeteo_geocode_location
@@ -1589,7 +1488,6 @@ from .OpenTree_get_induced_subtree import OpenTree_get_induced_subtree
 from .OpenTree_get_mrca import OpenTree_get_mrca
 from .OpenTree_get_taxon import OpenTree_get_taxon
 from .OpenTree_match_names import OpenTree_match_names
-from .OpenTriviaDB_get_questions import OpenTriviaDB_get_questions
 from .OpenVerse_search_images import OpenVerse_search_images
 from .Orphanet_get_classification import Orphanet_get_classification
 from .Orphanet_get_disease import Orphanet_get_disease
@@ -1662,14 +1560,6 @@ from .Pharos_search_targets import Pharos_search_targets
 from .PlantReactome_get_pathway import PlantReactome_get_pathway
 from .PlantReactome_list_species import PlantReactome_list_species
 from .PlantReactome_search_pathways import PlantReactome_search_pathways
-from .PoetryDB_search_by_author import PoetryDB_search_by_author
-from .PoetryDB_search_by_lines import PoetryDB_search_by_lines
-from .PoetryDB_search_by_title import PoetryDB_search_by_title
-from .PokeAPI_get_pokemon import PokeAPI_get_pokemon
-from .PokeAPI_get_pokemon_species import PokeAPI_get_pokemon_species
-from .PokemonTCG_get_card import PokemonTCG_get_card
-from .PokemonTCG_list_sets import PokemonTCG_list_sets
-from .PokemonTCG_search_cards import PokemonTCG_search_cards
 from .PomBase_get_gene import PomBase_get_gene
 from .PomBase_get_gene_phenotypes import PomBase_get_gene_phenotypes
 from .PomBase_search_genes import PomBase_search_genes
@@ -1742,8 +1632,6 @@ from .QuickGO_annotations_by_gene import QuickGO_annotations_by_gene
 from .QuickGO_annotations_by_goterm import QuickGO_annotations_by_goterm
 from .QuickGO_get_term_children import QuickGO_get_term_children
 from .QuickGO_get_term_detail import QuickGO_get_term_detail
-from .Quotable_get_random_quotes import Quotable_get_random_quotes
-from .Quotable_search_quotes import Quotable_search_quotes
 from .RCSBAdvSearch_search_by_motif import RCSBAdvSearch_search_by_motif
 from .RCSBAdvSearch_search_structures import RCSBAdvSearch_search_structures
 from .RCSBData_get_assembly import RCSBData_get_assembly
@@ -1763,7 +1651,6 @@ from .RNAcentral_get_by_accession import RNAcentral_get_by_accession
 from .RNAcentral_search import RNAcentral_search
 from .ROR_get_organization import ROR_get_organization
 from .ROR_search_organizations import ROR_search_organizations
-from .RandomFox_get_fox_image import RandomFox_get_fox_image
 from .ReMap_get_transcription_factor_binding import (
     ReMap_get_transcription_factor_binding,
 )
@@ -1802,9 +1689,6 @@ from .Reactome_list_top_pathways import Reactome_list_top_pathways
 from .Reactome_map_uniprot_to_pathways import Reactome_map_uniprot_to_pathways
 from .Reactome_map_uniprot_to_reactions import Reactome_map_uniprot_to_reactions
 from .Reactome_query_by_ids import Reactome_query_by_ids
-from .Reddit_get_subreddit_posts import Reddit_get_subreddit_posts
-from .Reddit_search_posts import Reddit_search_posts
-from .Reddit_search_subreddits import Reddit_search_subreddits
 from .ReferenceInfoAnalyzer import ReferenceInfoAnalyzer
 from .RegulomeDB_query_variant import RegulomeDB_query_variant
 from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyReviewer
@@ -1822,8 +1706,6 @@ from .Rfam_search_sequence import Rfam_search_sequence
 from .Rhea_search_by_chebi import Rhea_search_by_chebi
 from .Rhea_search_by_ec import Rhea_search_by_ec
 from .Rhea_search_reactions import Rhea_search_reactions
-from .RickAndMorty_get_characters import RickAndMorty_get_characters
-from .RickAndMorty_get_episodes import RickAndMorty_get_episodes
 from .RxNorm_get_drug_names import RxNorm_get_drug_names
 from .SASBDB_get_entries_by_tag import SASBDB_get_entries_by_tag
 from .SASBDB_get_entries_by_uniprot import SASBDB_get_entries_by_uniprot
@@ -1857,14 +1739,8 @@ from .STRING_get_network import STRING_get_network
 from .STRING_get_protein_interactions import STRING_get_protein_interactions
 from .STRING_map_identifiers import STRING_map_identifiers
 from .STRING_ppi_enrichment import STRING_ppi_enrichment
-from .SWAPI_get_films import SWAPI_get_films
-from .SWAPI_get_people import SWAPI_get_people
 from .ScanProsite_scan_protein import ScanProsite_scan_protein
 from .ScientificTextSummarizer import ScientificTextSummarizer
-from .Scryfall_get_card_by_name import Scryfall_get_card_by_name
-from .Scryfall_get_random_card import Scryfall_get_random_card
-from .Scryfall_search_cards import Scryfall_search_cards
-from .Scryfall_search_cards_advanced import Scryfall_search_cards_advanced
 from .SemanticScholar_get_author import SemanticScholar_get_author
 from .SemanticScholar_get_paper import SemanticScholar_get_paper
 from .SemanticScholar_get_pdf_snippets import SemanticScholar_get_pdf_snippets
@@ -1873,7 +1749,6 @@ from .SemanticScholar_search_authors import SemanticScholar_search_authors
 from .SemanticScholar_search_papers import SemanticScholar_search_papers
 from .Smithsonian_search_collection import Smithsonian_search_collection
 from .SoilGrids_get_properties import SoilGrids_get_properties
-from .SomeRandomAPI_get_animal_fact import SomeRandomAPI_get_animal_fact
 from .SpaceX_get_latest_launch import SpaceX_get_latest_launch
 from .SpaceX_get_launch import SpaceX_get_launch
 from .SpaceX_get_rocket import SpaceX_get_rocket
@@ -1903,31 +1778,10 @@ from .TCIA_get_series_metadata import TCIA_get_series_metadata
 from .TCIA_get_series_size import TCIA_get_series_size
 from .TCIA_list_collections import TCIA_list_collections
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
-from .TVmaze_get_schedule import TVmaze_get_schedule
-from .TVmaze_get_show import TVmaze_get_show
-from .TVmaze_get_show_episodes import TVmaze_get_show_episodes
-from .TVmaze_search_shows import TVmaze_search_shows
 from .TargetMine_search import TargetMine_search
 from .TargetMine_search_genes import TargetMine_search_genes
 from .TestCaseGenerator import TestCaseGenerator
 from .TestResultsAnalyzer import TestResultsAnalyzer
-from .TheCatAPI_get_breed import TheCatAPI_get_breed
-from .TheCatAPI_list_breeds import TheCatAPI_list_breeds
-from .TheCatAPI_search_breeds import TheCatAPI_search_breeds
-from .TheCatAPI_search_images import TheCatAPI_search_images
-from .TheCocktailDB_filter_cocktails import TheCocktailDB_filter_cocktails
-from .TheCocktailDB_lookup_cocktail import TheCocktailDB_lookup_cocktail
-from .TheCocktailDB_random_cocktail import TheCocktailDB_random_cocktail
-from .TheCocktailDB_search_cocktails import TheCocktailDB_search_cocktails
-from .TheCocktailDB_search_ingredient import TheCocktailDB_search_ingredient
-from .TheMealDB_filter_meals import TheMealDB_filter_meals
-from .TheMealDB_get_categories import TheMealDB_get_categories
-from .TheMealDB_lookup_meal import TheMealDB_lookup_meal
-from .TheMealDB_random_meal import TheMealDB_random_meal
-from .TheMealDB_search_meals import TheMealDB_search_meals
-from .TheSportsDB_get_league_events import TheSportsDB_get_league_events
-from .TheSportsDB_search_players import TheSportsDB_search_players
-from .TheSportsDB_search_teams import TheSportsDB_search_teams
 from .TheraSAbDab_get_all_therapeutics import TheraSAbDab_get_all_therapeutics
 from .TheraSAbDab_search_by_target import TheraSAbDab_search_by_target
 from .TheraSAbDab_search_therapeutics import TheraSAbDab_search_therapeutics
@@ -1957,7 +1811,6 @@ from .TreasuryFiscal_get_debt_breakdown import TreasuryFiscal_get_debt_breakdown
 from .TreasuryFiscal_get_exchange_rates import TreasuryFiscal_get_exchange_rates
 from .TreasuryFiscal_get_interest_rates import TreasuryFiscal_get_interest_rates
 from .TreasuryFiscal_get_national_debt import TreasuryFiscal_get_national_debt
-from .TriviaAPI_get_questions import TriviaAPI_get_questions
 from .UCSC_get_cpg_islands import UCSC_get_cpg_islands
 from .UCSC_get_encode_cCREs import UCSC_get_encode_cCREs
 from .UCSC_get_sequence import UCSC_get_sequence
@@ -2021,10 +1874,6 @@ from .UniRef_search_clusters import UniRef_search_clusters
 from .UnifiedToolGenerator import UnifiedToolGenerator
 from .University_search import University_search
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
-from .UrbanDictionary_define import UrbanDictionary_define
-from .UrbanDictionary_random import UrbanDictionary_random
-from .UselessFact_get_random import UselessFact_get_random
-from .UselessFact_get_today import UselessFact_get_today
 from .VAM_get_object import VAM_get_object
 from .VAM_search_objects import VAM_search_objects
 from .VEuPathDB_list_gene_searches import VEuPathDB_list_gene_searches
@@ -2060,12 +1909,7 @@ from .WormBase_get_gene import WormBase_get_gene
 from .WormBase_get_phenotypes import WormBase_get_phenotypes
 from .WritingPresentationReviewer import WritingPresentationReviewer
 from .Wttr_get_weather import Wttr_get_weather
-from .XKCD_get_comic_by_number import XKCD_get_comic_by_number
-from .XKCD_get_latest_comic import XKCD_get_latest_comic
 from .XMLToolOptimizer import XMLToolOptimizer
-from .YuGiOh_get_archetypes import YuGiOh_get_archetypes
-from .YuGiOh_get_card_sets import YuGiOh_get_card_sets
-from .YuGiOh_search_cards import YuGiOh_search_cards
 from .ZFIN_get_allele import ZFIN_get_allele
 from .ZFIN_get_gene import ZFIN_get_gene
 from .ZFIN_get_gene_alleles import ZFIN_get_gene_alleles
@@ -2076,15 +1920,11 @@ from .ZINC_get_catalogs import ZINC_get_catalogs
 from .ZINC_get_substance import ZINC_get_substance
 from .ZINC_search_by_name import ZINC_search_by_name
 from .ZINC_search_by_smiles import ZINC_search_by_smiles
-from .ZenQuotes_get_quotes import ZenQuotes_get_quotes
-from .ZenQuotes_get_random import ZenQuotes_get_random
-from .ZenQuotes_get_today import ZenQuotes_get_today
 from .Zenodo_get_license import Zenodo_get_license
 from .Zenodo_get_record import Zenodo_get_record
 from .Zenodo_get_record_files import Zenodo_get_record_files
 from .Zenodo_list_licenses import Zenodo_list_licenses
 from .Zenodo_search_records import Zenodo_search_records
-from .Zippopotam_lookup_zipcode import Zippopotam_lookup_zipcode
 from .advanced_literature_search_agent import advanced_literature_search_agent
 from .alphafold_get_annotations import alphafold_get_annotations
 from .alphafold_get_prediction import alphafold_get_prediction
@@ -2574,8 +2414,6 @@ from .health_disparities_get_county_rankings_info import (
 )
 from .health_disparities_get_svi_info import health_disparities_get_svi_info
 from .humanbase_ppi_analysis import humanbase_ppi_analysis
-from .iCanHazDadJoke_get_random_joke import iCanHazDadJoke_get_random_joke
-from .iCanHazDadJoke_search_jokes import iCanHazDadJoke_search_jokes
 from .iCite_get_publications import iCite_get_publications
 from .iCite_search_publications import iCite_search_publications
 from .iDigBio_search_records import iDigBio_search_records
@@ -2584,8 +2422,6 @@ from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
 from .iNaturalist_get_taxon import iNaturalist_get_taxon
 from .iNaturalist_search_observations import iNaturalist_search_observations
 from .iNaturalist_search_taxa import iNaturalist_search_taxa
-from .iTunes_lookup import iTunes_lookup
-from .iTunes_search_media import iTunes_search_media
 from .icd_search_codes import icd_search_codes
 from .iedb_get_epitope_antigens import iedb_get_epitope_antigens
 from .iedb_get_epitope_mhc import iedb_get_epitope_mhc
@@ -2722,9 +2558,6 @@ __all__ = [
     "AdverseEventICDMapper",
     "AdverseEventPredictionQuestionGenerator",
     "AdverseEventPredictionQuestionGeneratorWithContext",
-    "AdviceSlip_get_random_advice",
-    "AdviceSlip_search_advice",
-    "Agify_predict_age",
     "AllenBrain_get_expression_datasets",
     "AllenBrain_get_structure",
     "AllenBrain_search_genes",
@@ -2779,7 +2612,6 @@ __all__ = [
     "BiGG_get_reaction",
     "BiGG_list_models",
     "BiGG_search",
-    "BibleAPI_get_verse",
     "BigDataCloud_reverse_geocode",
     "BindingDB_get_ligands_by_pdb",
     "BindingDB_get_ligands_by_uniprot",
@@ -2813,13 +2645,6 @@ __all__ = [
     "Bioconductor_get_package",
     "Bioconductor_search_packages",
     "BiomarkerDiscoveryWorkflow",
-    "Blockchain_get_address",
-    "Blockchain_get_rawblock",
-    "Blockchain_get_rawtx",
-    "Blockchain_get_ticker",
-    "BoredAPI_filter_activities",
-    "BoredAPI_get_activity_by_key",
-    "BoredAPI_get_random_activity",
     "CADD_get_position_scores",
     "CADD_get_range_scores",
     "CADD_get_variant_score",
@@ -2857,11 +2682,6 @@ __all__ = [
     "CarbonIntensity_get_by_date",
     "CarbonIntensity_get_current",
     "CarbonIntensity_get_generation_mix",
-    "CatFact_get_breeds",
-    "CatFact_get_facts",
-    "Cataas_browse_cats",
-    "Cataas_get_random_cat",
-    "Cataas_get_tags",
     "ChEBI_get_compound",
     "ChEBI_get_ontology_children",
     "ChEBI_search",
@@ -2900,16 +2720,7 @@ __all__ = [
     "ChIPAtlas_search_datasets",
     "ChannelsDB_get_channels_cofactor",
     "ChannelsDB_get_channels_pdb",
-    "CheapShark_search_game_deals",
-    "ChessCom_get_player_profile",
-    "ChessCom_get_player_stats",
-    "ChessCom_get_titled_players",
     "ChroniclingAmerica_search_newspapers",
-    "ChuckNorris_get_categories",
-    "ChuckNorris_get_random_joke",
-    "ChuckNorris_search_jokes",
-    "CityBikes_get_network_stations",
-    "CityBikes_list_networks",
     "ClevelandArt_search_artworks",
     "ClinGenAR_get_external_records",
     "ClinGenAR_lookup_allele",
@@ -2929,18 +2740,11 @@ __all__ = [
     "CoL_get_taxon",
     "CoL_search_species",
     "CodeQualityAnalyzer",
-    "CoinGecko_get_coin_info",
-    "CoinGecko_get_coin_price",
-    "Coinbase_get_exchange_rates",
-    "Coinbase_get_spot_price",
     "CollegeScorecard_search_schools",
-    "ColorAPI_generate_scheme",
-    "ColorAPI_identify_color",
     "ComplexPortal_get_complex",
     "ComplexPortal_search_complexes",
     "CompoundDiscoveryAgent",
     "ComprehensiveDrugDiscoveryPipeline",
-    "CorporateBS_generate_phrase",
     "CountriesNow_get_countries_cities",
     "CountriesNow_get_country_info",
     "CratesIO_get_crate",
@@ -2983,12 +2787,7 @@ __all__ = [
     "Datamuse_find_words_with_context",
     "Dataverse_get_dataset",
     "Dataverse_search_datasets",
-    "DeckOfCards_draw_cards",
-    "DeckOfCards_new_deck",
     "DeepGO_predict_function",
-    "Deezer_get_artist_top_tracks",
-    "Deezer_search_artists",
-    "Deezer_search_tracks",
     "DepMap_get_cell_line",
     "DepMap_get_cell_lines",
     "DepMap_get_gene_dependencies",
@@ -2999,16 +2798,12 @@ __all__ = [
     "Dfam_get_annotations",
     "Dfam_get_family",
     "Dfam_search_families",
-    "DictionaryAPI_lookup_word",
-    "Dictionary_lookup_word",
     "DigiKey_get_categories",
     "DigiKey_get_manufacturers",
     "DigiKey_get_product_details",
     "DigiKey_search_by_keyword",
     "DisProt_get_entry",
     "DisProt_search",
-    "Discogs_get_artist",
-    "Discogs_search_music",
     "DiseaseAnalyzerAgent",
     "DiseaseOntology_get_parents",
     "DiseaseOntology_get_term",
@@ -3021,10 +2816,6 @@ __all__ = [
     "DiseaseSh_get_historical",
     "DockerHub_get_tags",
     "DockerHub_search_repositories",
-    "DogCEO_get_breed_images",
-    "DogCEO_get_random_dog_image",
-    "DogCEO_get_sub_breeds",
-    "DogCEO_list_breeds",
     "DomainExpertValidator",
     "DrugInteractionAnalyzerAgent",
     "DrugOptimizationAgent",
@@ -3032,7 +2823,6 @@ __all__ = [
     "Dryad_get_dataset",
     "Dryad_get_dataset_files",
     "Dryad_search_datasets",
-    "DuckDuckGo_instant_answer",
     "EBIProteins_get_antigen",
     "EBIProteins_get_coordinate_mapping",
     "EBIProteins_get_coordinates",
@@ -3127,12 +2917,6 @@ __all__ = [
     "EpiGraphDB_map_gwas_to_efo",
     "EpiGraphDB_search_gene",
     "EpiGraphDB_search_opengwas",
-    "ErgastF1_get_constructor_standings",
-    "ErgastF1_get_driver_standings",
-    "ErgastF1_get_drivers",
-    "ErgastF1_get_qualifying_results",
-    "ErgastF1_get_race_results",
-    "ErgastF1_get_season_schedule",
     "EthicalComplianceReviewer",
     "EuroPMCAnnot_get_annotations_by_type",
     "EuroPMCAnnot_get_article_annotations",
@@ -3344,9 +3128,6 @@ __all__ = [
     "FEC_search_candidates",
     "FPbase_get_protein",
     "FPbase_search_by_spectrum",
-    "FakeStore_get_categories",
-    "FakeStore_get_product_by_id",
-    "FakeStore_get_products",
     "Fatcat_search_scholar",
     "FederalRegister_get_document",
     "FederalRegister_search_documents",
@@ -3368,7 +3149,6 @@ __all__ = [
     "FourDN_get_file_metadata",
     "FourDN_search_data",
     "Frankfurter_get_exchange_rates",
-    "FreeToGame_get_games",
     "G2P_get_gene",
     "G2P_get_panel",
     "G2P_get_record",
@@ -3416,7 +3196,6 @@ __all__ = [
     "GTEx_get_top_expressed_genes",
     "GTEx_query_eqtl",
     "GWAS_search_associations_by_gene",
-    "Genderize_predict_gender",
     "GeneNetwork_get_dataset_info",
     "GeneNetwork_get_sample_data",
     "GeneNetwork_get_trait_info",
@@ -3427,7 +3206,6 @@ __all__ = [
     "GenomeNexus_annotate_variant",
     "GenomeNexus_get_cancer_hotspots",
     "GenomeNexus_get_canonical_transcript",
-    "GeoJS_get_geo",
     "GitHub_get_repository",
     "GitHub_get_user_profile",
     "GitHub_search_repositories",
@@ -3439,7 +3217,6 @@ __all__ = [
     "GtoPdb_get_interactions",
     "GtoPdb_search_ligands",
     "GtoPdb_search_targets",
-    "Guardian_search_news",
     "Gutendex_get_book",
     "Gutendex_search_books",
     "GxA_get_experiment_expression",
@@ -3472,13 +3249,7 @@ __all__ = [
     "HPO_get_term",
     "HPO_get_term_hierarchy",
     "HPO_search_terms",
-    "HTTPBin_generate_uuid",
-    "HTTPBin_get_headers",
-    "HTTPBin_get_ip",
-    "HTTPBin_get_user_agent",
     "HackerNewsSearch_search_stories",
-    "HackerNews_get_item",
-    "HackerNews_get_top_stories",
     "Harmonizome_get_gene",
     "Harmonizome_list_datasets",
     "HuggingFace_get_model",
@@ -3510,9 +3281,6 @@ __all__ = [
     "IMPC_get_gene_summary",
     "IMPC_get_phenotypes_by_gene",
     "IMPC_search_genes",
-    "IPAPI_geolocate_ip",
-    "IPGeolocation_lookup",
-    "IPify_get_public_ip",
     "ISS_get_astronauts",
     "ISS_get_position",
     "ITIS_get_full_record",
@@ -3551,17 +3319,6 @@ __all__ = [
     "JLCSearch_search_voltage_regulators",
     "JPLHorizons_get_body_data",
     "JPLHorizons_lookup_object",
-    "JSONPlaceholder_get_post",
-    "JSONPlaceholder_get_post_comments",
-    "JSONPlaceholder_get_user",
-    "JSONPlaceholder_list_photos",
-    "JSONPlaceholder_list_posts",
-    "JSONPlaceholder_list_todos",
-    "JSONPlaceholder_list_users",
-    "Jikan_get_anime",
-    "Jikan_search_anime",
-    "Jikan_search_manga",
-    "JokeAPI_get_jokes",
     "KEGG_get_brite_hierarchy",
     "KEGG_get_compound",
     "KEGG_get_gene_pathways",
@@ -3572,7 +3329,6 @@ __all__ = [
     "KLIFS_get_structures",
     "KLIFS_get_structures_by_pdb",
     "KLIFS_list_kinases",
-    "KanyeRest_get_random_quote",
     "KeywordExtractorAgent",
     "LNCipedia_get_lncrna",
     "LNCipedia_get_lncrna_publications",
@@ -3588,12 +3344,7 @@ __all__ = [
     "LOTUS_search_natural_products",
     "LabelGenerator",
     "LaunchLibrary_get_upcoming_launches",
-    "Lemmy_get_community_posts",
-    "Lemmy_list_communities",
-    "Lemmy_search_posts",
     "LibraryOfCongress_search",
-    "Lichess_get_player_profile",
-    "Lichess_get_top_players",
     "LipidMaps_get_compound_by_id",
     "LipidMaps_search_by_formula",
     "LipidMaps_search_by_name",
@@ -3603,8 +3354,6 @@ __all__ = [
     "LiteratureSearchTool",
     "LiteratureSynthesisAgent",
     "Lobsters_get_stories",
-    "LyricsOVH_get_lyrics",
-    "LyricsOVH_suggest_songs",
     "MGnify_get_genome",
     "MGnify_get_study_detail",
     "MGnify_list_analyses",
@@ -3616,8 +3365,6 @@ __all__ = [
     "MPD_get_phenotype_data",
     "MSigDB_get_geneset",
     "MSigDB_get_hallmark_geneset",
-    "MakeupAPI_search_products",
-    "MangaDex_search_manga",
     "MarineRegions_get_record",
     "MarineRegions_search_by_name",
     "MassBank_search_by_compound",
@@ -3636,8 +3383,6 @@ __all__ = [
     "MedlinePlus_get_genetics_gene_by_name",
     "MedlinePlus_get_genetics_index",
     "MedlinePlus_search_topics_by_keyword",
-    "MemeAPI_get_multiple_memes",
-    "MemeAPI_get_random_meme",
     "MetMuseum_get_object",
     "MetMuseum_search_objects",
     "MetNorway_get_forecast",
@@ -3738,7 +3483,6 @@ __all__ = [
     "NWS_get_active_alerts",
     "NWS_get_forecast",
     "NWS_get_point_metadata",
-    "Nationalize_predict_nationality",
     "NeuroMorpho_get_field_values",
     "NeuroMorpho_get_morphometry",
     "NeuroMorpho_get_neuron",
@@ -3768,7 +3512,6 @@ __all__ = [
     "OSDR_search_studies",
     "OSF_search_preprints",
     "OSL_get_efo_id_by_disease_name",
-    "OfficialJoke_get_random_joke",
     "OmicsDI_get_dataset",
     "OmicsDI_get_statistics",
     "OmicsDI_search_datasets",
@@ -3786,17 +3529,12 @@ __all__ = [
     "OncoKB_get_levels",
     "OpenAIRE_search_publications",
     "OpenAlex_Guidelines_Search",
-    "OpenBreweryDB_get_random_brewery",
-    "OpenBreweryDB_search_breweries",
     "OpenBrewery_search",
     "OpenBrewery_text_search",
     "OpenCitations_get_citation_count",
     "OpenCitations_get_citations",
     "OpenCitations_get_references",
     "OpenElevation_get_elevation",
-    "OpenF1_get_drivers",
-    "OpenF1_get_meeting_info",
-    "OpenF1_get_sessions",
     "OpenFDA_search_device_510k",
     "OpenFDA_search_device_enforcement",
     "OpenFDA_search_drug_enforcement",
@@ -3811,9 +3549,6 @@ __all__ = [
     "OpenLibrary_get_book",
     "OpenLibrary_get_work",
     "OpenLibrary_search_books",
-    "OpenLigaDB_get_available_leagues",
-    "OpenLigaDB_get_matches",
-    "OpenLigaDB_get_table",
     "OpenML_get_dataset",
     "OpenML_search_datasets",
     "OpenMeteo_geocode_location",
@@ -3898,7 +3633,6 @@ __all__ = [
     "OpenTree_get_mrca",
     "OpenTree_get_taxon",
     "OpenTree_match_names",
-    "OpenTriviaDB_get_questions",
     "OpenVerse_search_images",
     "Orphanet_get_classification",
     "Orphanet_get_disease",
@@ -3971,14 +3705,6 @@ __all__ = [
     "PlantReactome_get_pathway",
     "PlantReactome_list_species",
     "PlantReactome_search_pathways",
-    "PoetryDB_search_by_author",
-    "PoetryDB_search_by_lines",
-    "PoetryDB_search_by_title",
-    "PokeAPI_get_pokemon",
-    "PokeAPI_get_pokemon_species",
-    "PokemonTCG_get_card",
-    "PokemonTCG_list_sets",
-    "PokemonTCG_search_cards",
     "PomBase_get_gene",
     "PomBase_get_gene_phenotypes",
     "PomBase_search_genes",
@@ -4035,8 +3761,6 @@ __all__ = [
     "QuickGO_annotations_by_goterm",
     "QuickGO_get_term_children",
     "QuickGO_get_term_detail",
-    "Quotable_get_random_quotes",
-    "Quotable_search_quotes",
     "RCSBAdvSearch_search_by_motif",
     "RCSBAdvSearch_search_structures",
     "RCSBData_get_assembly",
@@ -4056,7 +3780,6 @@ __all__ = [
     "RNAcentral_search",
     "ROR_get_organization",
     "ROR_search_organizations",
-    "RandomFox_get_fox_image",
     "ReMap_get_transcription_factor_binding",
     "ReactomeAnalysis_pathway_enrichment",
     "ReactomeAnalysis_species_comparison",
@@ -4087,9 +3810,6 @@ __all__ = [
     "Reactome_map_uniprot_to_pathways",
     "Reactome_map_uniprot_to_reactions",
     "Reactome_query_by_ids",
-    "Reddit_get_subreddit_posts",
-    "Reddit_search_posts",
-    "Reddit_search_subreddits",
     "ReferenceInfoAnalyzer",
     "RegulomeDB_query_variant",
     "ReproducibilityTransparencyReviewer",
@@ -4107,8 +3827,6 @@ __all__ = [
     "Rhea_search_by_chebi",
     "Rhea_search_by_ec",
     "Rhea_search_reactions",
-    "RickAndMorty_get_characters",
-    "RickAndMorty_get_episodes",
     "RxNorm_get_drug_names",
     "SASBDB_get_entries_by_tag",
     "SASBDB_get_entries_by_uniprot",
@@ -4140,14 +3858,8 @@ __all__ = [
     "STRING_get_protein_interactions",
     "STRING_map_identifiers",
     "STRING_ppi_enrichment",
-    "SWAPI_get_films",
-    "SWAPI_get_people",
     "ScanProsite_scan_protein",
     "ScientificTextSummarizer",
-    "Scryfall_get_card_by_name",
-    "Scryfall_get_random_card",
-    "Scryfall_search_cards",
-    "Scryfall_search_cards_advanced",
     "SemanticScholar_get_author",
     "SemanticScholar_get_paper",
     "SemanticScholar_get_pdf_snippets",
@@ -4156,7 +3868,6 @@ __all__ = [
     "SemanticScholar_search_papers",
     "Smithsonian_search_collection",
     "SoilGrids_get_properties",
-    "SomeRandomAPI_get_animal_fact",
     "SpaceX_get_latest_launch",
     "SpaceX_get_launch",
     "SpaceX_get_rocket",
@@ -4186,31 +3897,10 @@ __all__ = [
     "TCIA_get_series_size",
     "TCIA_list_collections",
     "TRIP_Database_Guidelines_Search",
-    "TVmaze_get_schedule",
-    "TVmaze_get_show",
-    "TVmaze_get_show_episodes",
-    "TVmaze_search_shows",
     "TargetMine_search",
     "TargetMine_search_genes",
     "TestCaseGenerator",
     "TestResultsAnalyzer",
-    "TheCatAPI_get_breed",
-    "TheCatAPI_list_breeds",
-    "TheCatAPI_search_breeds",
-    "TheCatAPI_search_images",
-    "TheCocktailDB_filter_cocktails",
-    "TheCocktailDB_lookup_cocktail",
-    "TheCocktailDB_random_cocktail",
-    "TheCocktailDB_search_cocktails",
-    "TheCocktailDB_search_ingredient",
-    "TheMealDB_filter_meals",
-    "TheMealDB_get_categories",
-    "TheMealDB_lookup_meal",
-    "TheMealDB_random_meal",
-    "TheMealDB_search_meals",
-    "TheSportsDB_get_league_events",
-    "TheSportsDB_search_players",
-    "TheSportsDB_search_teams",
     "TheraSAbDab_get_all_therapeutics",
     "TheraSAbDab_search_by_target",
     "TheraSAbDab_search_therapeutics",
@@ -4238,7 +3928,6 @@ __all__ = [
     "TreasuryFiscal_get_exchange_rates",
     "TreasuryFiscal_get_interest_rates",
     "TreasuryFiscal_get_national_debt",
-    "TriviaAPI_get_questions",
     "UCSC_get_cpg_islands",
     "UCSC_get_encode_cCREs",
     "UCSC_get_sequence",
@@ -4292,10 +3981,6 @@ __all__ = [
     "UnifiedToolGenerator",
     "University_search",
     "Unpaywall_check_oa_status",
-    "UrbanDictionary_define",
-    "UrbanDictionary_random",
-    "UselessFact_get_random",
-    "UselessFact_get_today",
     "VAM_get_object",
     "VAM_search_objects",
     "VEuPathDB_list_gene_searches",
@@ -4331,12 +4016,7 @@ __all__ = [
     "WormBase_get_phenotypes",
     "WritingPresentationReviewer",
     "Wttr_get_weather",
-    "XKCD_get_comic_by_number",
-    "XKCD_get_latest_comic",
     "XMLToolOptimizer",
-    "YuGiOh_get_archetypes",
-    "YuGiOh_get_card_sets",
-    "YuGiOh_search_cards",
     "ZFIN_get_allele",
     "ZFIN_get_gene",
     "ZFIN_get_gene_alleles",
@@ -4347,15 +4027,11 @@ __all__ = [
     "ZINC_get_substance",
     "ZINC_search_by_name",
     "ZINC_search_by_smiles",
-    "ZenQuotes_get_quotes",
-    "ZenQuotes_get_random",
-    "ZenQuotes_get_today",
     "Zenodo_get_license",
     "Zenodo_get_record",
     "Zenodo_get_record_files",
     "Zenodo_list_licenses",
     "Zenodo_search_records",
-    "Zippopotam_lookup_zipcode",
     "advanced_literature_search_agent",
     "alphafold_get_annotations",
     "alphafold_get_prediction",
@@ -4771,8 +4447,6 @@ __all__ = [
     "health_disparities_get_county_rankings_info",
     "health_disparities_get_svi_info",
     "humanbase_ppi_analysis",
-    "iCanHazDadJoke_get_random_joke",
-    "iCanHazDadJoke_search_jokes",
     "iCite_get_publications",
     "iCite_search_publications",
     "iDigBio_search_records",
@@ -4781,8 +4455,6 @@ __all__ = [
     "iNaturalist_get_taxon",
     "iNaturalist_search_observations",
     "iNaturalist_search_taxa",
-    "iTunes_lookup",
-    "iTunes_search_media",
     "icd_search_codes",
     "iedb_get_epitope_antigens",
     "iedb_get_epitope_mhc",
