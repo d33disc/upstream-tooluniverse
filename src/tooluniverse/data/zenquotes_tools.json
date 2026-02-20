@@ -94,7 +94,7 @@
   },
   {
     "name": "ZenQuotes_get_quotes",
-    "description": "Get a batch of 50 inspirational quotes from ZenQuotes.io. Returns multiple quotes with authors for bulk processing. No API key required. Useful for populating quote databases, building quote collections, batch analysis of quotes, or seeding content with inspirational messages.",
+    "description": "Get a batch of 50 inspirational quotes from ZenQuotes.io. Returns multiple quotes with authors for bulk processing. No API key required but rate-limited (about 5 requests per 30 seconds for this endpoint). Useful for populating quote databases, building quote collections, batch analysis of quotes, or seeding content with inspirational messages.",
     "parameter": {
       "type": "object",
       "properties": {},
