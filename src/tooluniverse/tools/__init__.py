@@ -225,6 +225,7 @@ from .ChIPAtlas_get_peak_data import ChIPAtlas_get_peak_data
 from .ChIPAtlas_search_datasets import ChIPAtlas_search_datasets
 from .ChannelsDB_get_channels_cofactor import ChannelsDB_get_channels_cofactor
 from .ChannelsDB_get_channels_pdb import ChannelsDB_get_channels_pdb
+from .CheapShark_search_game_deals import CheapShark_search_game_deals
 from .ChessCom_get_player_profile import ChessCom_get_player_profile
 from .ChessCom_get_player_stats import ChessCom_get_player_stats
 from .ChessCom_get_titled_players import ChessCom_get_titled_players
@@ -253,15 +254,13 @@ from .CoL_get_children import CoL_get_children
 from .CoL_get_taxon import CoL_get_taxon
 from .CoL_search_species import CoL_search_species
 from .CodeQualityAnalyzer import CodeQualityAnalyzer
-from .CoinGecko_get_coin_detail import CoinGecko_get_coin_detail
-from .CoinGecko_get_coin_markets import CoinGecko_get_coin_markets
-from .CoinGecko_get_market_chart import CoinGecko_get_market_chart
-from .CoinGecko_get_price import CoinGecko_get_price
-from .CoinGecko_get_trending import CoinGecko_get_trending
-from .CoinGecko_search import CoinGecko_search
+from .CoinGecko_get_coin_info import CoinGecko_get_coin_info
+from .CoinGecko_get_coin_price import CoinGecko_get_coin_price
 from .Coinbase_get_exchange_rates import Coinbase_get_exchange_rates
 from .Coinbase_get_spot_price import Coinbase_get_spot_price
 from .CollegeScorecard_search_schools import CollegeScorecard_search_schools
+from .ColorAPI_generate_scheme import ColorAPI_generate_scheme
+from .ColorAPI_identify_color import ColorAPI_identify_color
 from .ComplexPortal_get_complex import ComplexPortal_get_complex
 from .ComplexPortal_search_complexes import ComplexPortal_search_complexes
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
@@ -895,6 +894,7 @@ from .FourDN_get_experiment_metadata import FourDN_get_experiment_metadata
 from .FourDN_get_file_metadata import FourDN_get_file_metadata
 from .FourDN_search_data import FourDN_search_data
 from .Frankfurter_get_exchange_rates import Frankfurter_get_exchange_rates
+from .FreeToGame_get_games import FreeToGame_get_games
 from .G2P_get_gene import G2P_get_gene
 from .G2P_get_panel import G2P_get_panel
 from .G2P_get_record import G2P_get_record
@@ -1010,8 +1010,8 @@ from .HTTPBin_generate_uuid import HTTPBin_generate_uuid
 from .HTTPBin_get_headers import HTTPBin_get_headers
 from .HTTPBin_get_ip import HTTPBin_get_ip
 from .HTTPBin_get_user_agent import HTTPBin_get_user_agent
-from .HackerNews_get_recent_stories import HackerNews_get_recent_stories
-from .HackerNews_search_stories import HackerNews_search_stories
+from .HackerNews_get_item import HackerNews_get_item
+from .HackerNews_get_top_stories import HackerNews_get_top_stories
 from .Harmonizome_get_gene import Harmonizome_get_gene
 from .Harmonizome_list_datasets import Harmonizome_list_datasets
 from .HuggingFace_get_model import HuggingFace_get_model
@@ -1143,6 +1143,7 @@ from .MIBiG_list_clusters import MIBiG_list_clusters
 from .MPD_get_phenotype_data import MPD_get_phenotype_data
 from .MSigDB_get_geneset import MSigDB_get_geneset
 from .MSigDB_get_hallmark_geneset import MSigDB_get_hallmark_geneset
+from .MangaDex_search_manga import MangaDex_search_manga
 from .MassBank_search_by_compound import MassBank_search_by_compound
 from .MassBank_search_by_formula import MassBank_search_by_formula
 from .MathJS_evaluate import MathJS_evaluate
@@ -1207,9 +1208,8 @@ from .Mouser_search_by_part_and_manufacturer import (
 )
 from .Mouser_search_by_part_number import Mouser_search_by_part_number
 from .MultiAgentLiteratureSearch import MultiAgentLiteratureSearch
-from .MusicBrainz_get_artist import MusicBrainz_get_artist
 from .MusicBrainz_search_artists import MusicBrainz_search_artists
-from .MusicBrainz_search_releases import MusicBrainz_search_releases
+from .MusicBrainz_search_recordings import MusicBrainz_search_recordings
 from .MyChem_get_chemical_annotation import MyChem_get_chemical_annotation
 from .MyChem_query_chemicals import MyChem_query_chemicals
 from .MyDisease_get_disease import MyDisease_get_disease
@@ -1272,8 +1272,6 @@ from .NOAASpaceWeather_get_solar_xrays import NOAASpaceWeather_get_solar_xrays
 from .NWS_get_active_alerts import NWS_get_active_alerts
 from .NWS_get_forecast import NWS_get_forecast
 from .NWS_get_point_metadata import NWS_get_point_metadata
-from .NagerDate_check_is_workday import NagerDate_check_is_workday
-from .NagerDate_get_public_holidays import NagerDate_get_public_holidays
 from .Nationalize_predict_nationality import Nationalize_predict_nationality
 from .NeuroMorpho_get_field_values import NeuroMorpho_get_field_values
 from .NeuroMorpho_get_morphometry import NeuroMorpho_get_morphometry
@@ -1627,7 +1625,7 @@ from .PoetryDB_search_by_author import PoetryDB_search_by_author
 from .PoetryDB_search_by_lines import PoetryDB_search_by_lines
 from .PoetryDB_search_by_title import PoetryDB_search_by_title
 from .PokeAPI_get_pokemon import PokeAPI_get_pokemon
-from .PokeAPI_get_species import PokeAPI_get_species
+from .PokeAPI_get_pokemon_species import PokeAPI_get_pokemon_species
 from .PomBase_get_gene import PomBase_get_gene
 from .PomBase_get_gene_phenotypes import PomBase_get_gene_phenotypes
 from .PomBase_search_genes import PomBase_search_genes
@@ -1691,6 +1689,8 @@ from .PubMed_search_articles import PubMed_search_articles
 from .PubTator3_EntityAutocomplete import PubTator3_EntityAutocomplete
 from .PubTator3_LiteratureSearch import PubTator3_LiteratureSearch
 from .PubTator3_get_annotations import PubTator3_get_annotations
+from .PublicHolidays_check_is_holiday import PublicHolidays_check_is_holiday
+from .PublicHolidays_get_by_country import PublicHolidays_get_by_country
 from .PyPIPackageInspector import PyPIPackageInspector
 from .QualityCheckerAgent import QualityCheckerAgent
 from .QuestionRephraser import QuestionRephraser
@@ -2837,6 +2837,7 @@ __all__ = [
     "ChIPAtlas_search_datasets",
     "ChannelsDB_get_channels_cofactor",
     "ChannelsDB_get_channels_pdb",
+    "CheapShark_search_game_deals",
     "ChessCom_get_player_profile",
     "ChessCom_get_player_stats",
     "ChessCom_get_titled_players",
@@ -2865,15 +2866,13 @@ __all__ = [
     "CoL_get_taxon",
     "CoL_search_species",
     "CodeQualityAnalyzer",
-    "CoinGecko_get_coin_detail",
-    "CoinGecko_get_coin_markets",
-    "CoinGecko_get_market_chart",
-    "CoinGecko_get_price",
-    "CoinGecko_get_trending",
-    "CoinGecko_search",
+    "CoinGecko_get_coin_info",
+    "CoinGecko_get_coin_price",
     "Coinbase_get_exchange_rates",
     "Coinbase_get_spot_price",
     "CollegeScorecard_search_schools",
+    "ColorAPI_generate_scheme",
+    "ColorAPI_identify_color",
     "ComplexPortal_get_complex",
     "ComplexPortal_search_complexes",
     "CompoundDiscoveryAgent",
@@ -3289,6 +3288,7 @@ __all__ = [
     "FourDN_get_file_metadata",
     "FourDN_search_data",
     "Frankfurter_get_exchange_rates",
+    "FreeToGame_get_games",
     "G2P_get_gene",
     "G2P_get_panel",
     "G2P_get_record",
@@ -3394,8 +3394,8 @@ __all__ = [
     "HTTPBin_get_headers",
     "HTTPBin_get_ip",
     "HTTPBin_get_user_agent",
-    "HackerNews_get_recent_stories",
-    "HackerNews_search_stories",
+    "HackerNews_get_item",
+    "HackerNews_get_top_stories",
     "Harmonizome_get_gene",
     "Harmonizome_list_datasets",
     "HuggingFace_get_model",
@@ -3525,6 +3525,7 @@ __all__ = [
     "MPD_get_phenotype_data",
     "MSigDB_get_geneset",
     "MSigDB_get_hallmark_geneset",
+    "MangaDex_search_manga",
     "MassBank_search_by_compound",
     "MassBank_search_by_formula",
     "MathJS_evaluate",
@@ -3577,9 +3578,8 @@ __all__ = [
     "Mouser_search_by_part_and_manufacturer",
     "Mouser_search_by_part_number",
     "MultiAgentLiteratureSearch",
-    "MusicBrainz_get_artist",
     "MusicBrainz_search_artists",
-    "MusicBrainz_search_releases",
+    "MusicBrainz_search_recordings",
     "MyChem_get_chemical_annotation",
     "MyChem_query_chemicals",
     "MyDisease_get_disease",
@@ -3640,8 +3640,6 @@ __all__ = [
     "NWS_get_active_alerts",
     "NWS_get_forecast",
     "NWS_get_point_metadata",
-    "NagerDate_check_is_workday",
-    "NagerDate_get_public_holidays",
     "Nationalize_predict_nationality",
     "NeuroMorpho_get_field_values",
     "NeuroMorpho_get_morphometry",
@@ -3879,7 +3877,7 @@ __all__ = [
     "PoetryDB_search_by_lines",
     "PoetryDB_search_by_title",
     "PokeAPI_get_pokemon",
-    "PokeAPI_get_species",
+    "PokeAPI_get_pokemon_species",
     "PomBase_get_gene",
     "PomBase_get_gene_phenotypes",
     "PomBase_search_genes",
@@ -3927,6 +3925,8 @@ __all__ = [
     "PubTator3_EntityAutocomplete",
     "PubTator3_LiteratureSearch",
     "PubTator3_get_annotations",
+    "PublicHolidays_check_is_holiday",
+    "PublicHolidays_get_by_country",
     "PyPIPackageInspector",
     "QualityCheckerAgent",
     "QuestionRephraser",
