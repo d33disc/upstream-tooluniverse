@@ -1091,6 +1091,14 @@ default_tool_files = {
     "wikipedia_ext": os.path.join(current_dir, "data", "wikipedia_ext_tools.json"),
     # CheapShark - video game deals and discounts from multiple stores
     "cheapshark": os.path.join(current_dir, "data", "cheapshark_tools.json"),
+    # FreeToGame - free-to-play PC and browser games database
+    "freetogame": os.path.join(current_dir, "data", "freetogame_tools.json"),
+    # The Color API - color identification and scheme generation
+    "colorapi": os.path.join(current_dir, "data", "colorapi_tools.json"),
+    # Art Institute of Chicago - search and get artwork metadata
+    "artic": os.path.join(current_dir, "data", "artic_tools.json"),
+    # MangaDex - manga series search and metadata
+    "mangadex": os.path.join(current_dir, "data", "mangadex_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

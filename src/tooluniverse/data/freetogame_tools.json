@@ -1,0 +1,70 @@
+[
+  {
+    "name": "FreeToGame_get_games",
+    "description": "Get a list of free-to-play PC and browser games from the FreeToGame API. Returns game titles, descriptions, genres, platforms, developer, publisher, release dates, and thumbnail URLs. No authentication required. Useful for gaming research, understanding free-to-play market trends, and finding games by genre or platform.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": ["string", "null"],
+          "description": "Platform filter. Values: 'pc' (Windows games), 'browser' (browser games), 'all' (default). Examples: 'pc', 'browser'"
+        },
+        "category": {
+          "type": ["string", "null"],
+          "description": "Genre/category filter. Values: 'mmorpg', 'shooter', 'strategy', 'moba', 'racing', 'sports', 'social', 'sandbox', 'open-world', 'survival', 'pvp', 'pve', 'pixel', 'voxel', 'zombie', 'turn-based', 'first-person', 'third-Person', 'top-down', 'tank', 'space', 'sailing', 'side-scroller', 'superhero', 'permadeath', 'card', 'battle-royale', 'mmo', 'mmofps', 'mmotps', '3d', '2d', 'anime', 'fantasy', 'sci-fi', 'fighting', 'action-rpg', 'action', 'military', 'martial-arts', 'flight', 'low-spec', 'tower-defense', 'horror', 'mmorts'"
+        },
+        "sort-by": {
+          "type": ["string", "null"],
+          "description": "Sort order. Values: 'release-date', 'popularity' (default), 'alphabetical', 'relevance'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.freetogame.com/api/games",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"platform": "pc", "category": "shooter"},
+      {"platform": "browser", "sort-by": "popularity"},
+      {"category": "mmorpg", "sort-by": "release-date"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of free-to-play games",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer", "description": "Game ID"},
+                  "title": {"type": "string", "description": "Game title"},
+                  "thumbnail": {"type": "string", "description": "URL to game thumbnail image"},
+                  "short_description": {"type": "string", "description": "Brief game description"},
+                  "game_url": {"type": "string", "description": "URL to game page"},
+                  "genre": {"type": "string", "description": "Primary genre"},
+                  "platform": {"type": "string", "description": "PC, Web Browser"},
+                  "publisher": {"type": "string"},
+                  "developer": {"type": "string"},
+                  "release_date": {"type": "string", "description": "Release date (YYYY-MM-DD)"},
+                  "freetogame_profile_url": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
