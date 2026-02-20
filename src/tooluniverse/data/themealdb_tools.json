@@ -1,0 +1,131 @@
+[
+  {
+    "name": "TheMealDB_search_meals",
+    "description": "Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes. Returns meals with full ingredients list, cooking instructions, category (Beef, Chicken, Seafood, Dessert, etc.), cuisine area (Italian, Indian, Japanese, Mexican, etc.), and YouTube tutorial links. Useful for food science research, culinary AI applications, and cultural food studies.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "s": {
+          "type": ["string", "null"],
+          "description": "Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'chocolate cake'"
+        },
+        "c": {
+          "type": ["string", "null"],
+          "description": "Filter by category. Values: 'Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter', 'Vegan', 'Vegetarian', 'Breakfast', 'Goat'"
+        },
+        "a": {
+          "type": ["string", "null"],
+          "description": "Filter by cuisine area. Examples: 'Italian', 'Japanese', 'Mexican', 'Indian', 'French', 'Chinese', 'American', 'British', 'Greek', 'Spanish', 'Thai', 'Turkish'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.themealdb.com/api/json/v1/1/search.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"s": "chicken"},
+      {"s": "pasta"},
+      {"s": "sushi"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Meal recipe search results",
+              "properties": {
+                "meals": {
+                  "type": ["array", "null"],
+                  "description": "List of matching meals (null if no results)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idMeal": {"type": "string", "description": "Meal ID"},
+                      "strMeal": {"type": "string", "description": "Meal name"},
+                      "strCategory": {"type": ["string", "null"], "description": "Food category"},
+                      "strArea": {"type": ["string", "null"], "description": "Cuisine origin area"},
+                      "strInstructions": {"type": ["string", "null"], "description": "Full cooking instructions"},
+                      "strMealThumb": {"type": ["string", "null"], "description": "Meal photo URL"},
+                      "strTags": {"type": ["string", "null"], "description": "Comma-separated tags"},
+                      "strYoutube": {"type": ["string", "null"], "description": "YouTube recipe video URL"},
+                      "strIngredient1": {"type": ["string", "null"], "description": "First ingredient"},
+                      "strMeasure1": {"type": ["string", "null"], "description": "First ingredient measure"},
+                      "strIngredient2": {"type": ["string", "null"]},
+                      "strIngredient3": {"type": ["string", "null"]},
+                      "strIngredient4": {"type": ["string", "null"]},
+                      "strIngredient5": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TheMealDB_get_categories",
+    "description": "Get all meal categories from TheMealDB with descriptions and thumbnail images. Categories include Beef, Chicken, Seafood, Vegetarian, Dessert, Pasta, and more. Use this to discover available categories before filtering recipes with TheMealDB_search_meals.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.themealdb.com/api/json/v1/1/categories.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Meal categories",
+              "properties": {
+                "categories": {
+                  "type": "array",
+                  "description": "List of meal categories",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idCategory": {"type": "string"},
+                      "strCategory": {"type": "string", "description": "Category name"},
+                      "strCategoryThumb": {"type": ["string", "null"], "description": "Category thumbnail URL"},
+                      "strCategoryDescription": {"type": ["string", "null"], "description": "Category description"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

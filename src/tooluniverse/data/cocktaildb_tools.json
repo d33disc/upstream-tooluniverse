@@ -1,0 +1,86 @@
+[
+  {
+    "name": "TheCocktailDB_search_cocktails",
+    "description": "Search for cocktail recipes in TheCocktailDB, a comprehensive free cocktail database. Returns cocktails with full ingredients, measurements, instructions, glass type, category (Ordinary Drink, Cocktail, Shot, etc.), and whether they are alcoholic. Useful for food science, mixology research, chemistry of flavor compounds, and culinary AI applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "s": {
+          "type": ["string", "null"],
+          "description": "Search by cocktail name. Examples: 'margarita', 'mojito', 'martini', 'negroni', 'old fashioned'"
+        },
+        "i": {
+          "type": ["string", "null"],
+          "description": "Filter by main ingredient. Examples: 'gin', 'vodka', 'rum', 'whiskey', 'tequila', 'lemon juice'"
+        },
+        "c": {
+          "type": ["string", "null"],
+          "description": "Filter by category. Values: 'Ordinary Drink', 'Cocktail', 'Milk / Float / Shake', 'Other/Unknown', 'Cocoa', 'Shot', 'Coffee / Tea', 'Homemade Liqueur', 'Punch / Party Drink', 'Beer', 'Soft Drink'"
+        },
+        "a": {
+          "type": ["string", "null"],
+          "description": "Filter by alcoholic status. Values: 'Alcoholic', 'Non alcoholic', 'Optional alcohol'"
+        },
+        "g": {
+          "type": ["string", "null"],
+          "description": "Filter by glass type. Examples: 'Cocktail glass', 'Highball glass', 'Old-fashioned glass', 'Shot glass', 'Champagne flute'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.thecocktaildb.com/api/json/v1/1/search.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"s": "margarita"},
+      {"s": "mojito"},
+      {"i": "gin"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Cocktail search results",
+              "properties": {
+                "drinks": {
+                  "type": ["array", "null"],
+                  "description": "List of matching cocktails (null if no results)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idDrink": {"type": "string", "description": "Cocktail ID"},
+                      "strDrink": {"type": "string", "description": "Cocktail name"},
+                      "strCategory": {"type": ["string", "null"], "description": "Cocktail category"},
+                      "strAlcoholic": {"type": ["string", "null"], "description": "Alcoholic/Non alcoholic"},
+                      "strGlass": {"type": ["string", "null"], "description": "Glass type"},
+                      "strInstructions": {"type": ["string", "null"], "description": "Preparation instructions"},
+                      "strDrinkThumb": {"type": ["string", "null"], "description": "Cocktail image URL"},
+                      "strIBA": {"type": ["string", "null"], "description": "IBA (International Bartenders Association) category"},
+                      "strIngredient1": {"type": ["string", "null"], "description": "First ingredient"},
+                      "strMeasure1": {"type": ["string", "null"], "description": "First ingredient measure"},
+                      "strIngredient2": {"type": ["string", "null"]},
+                      "strIngredient3": {"type": ["string", "null"]},
+                      "strIngredient4": {"type": ["string", "null"]},
+                      "strIngredient5": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -883,6 +883,14 @@ default_tool_files = {
     "hibp": os.path.join(current_dir, "data", "hibp_tools.json"),
     # The Guardian - news article archive (2M+ articles since 1999)
     "guardian": os.path.join(current_dir, "data", "guardian_tools.json"),
+    # JokeAPI - random jokes in multiple categories (Programming, Pun, Dark, Misc)
+    "jokeapi": os.path.join(current_dir, "data", "jokeapi_tools.json"),
+    # TheMealDB - international recipe database (300+ meals with ingredients/instructions)
+    "themealdb": os.path.join(current_dir, "data", "themealdb_tools.json"),
+    # TheCocktailDB - cocktail recipe database (search by drink, ingredient, category)
+    "cocktaildb": os.path.join(current_dir, "data", "cocktaildb_tools.json"),
+    # CountriesNow - country and city geographic data (227 countries with ISO codes)
+    "countriesnow": os.path.join(current_dir, "data", "countriesnow_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
