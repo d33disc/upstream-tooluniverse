@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1929 scientific tools.
+Type-safe Python interface to 1923 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -224,7 +224,6 @@ from .ClinGen_search_actionability import ClinGen_search_actionability
 from .ClinGen_search_dosage_sensitivity import ClinGen_search_dosage_sensitivity
 from .ClinGen_search_gene_validity import ClinGen_search_gene_validity
 from .ClinicalTrialDesignAgent import ClinicalTrialDesignAgent
-from .ClinicalTrials_search_studies import ClinicalTrials_search_studies
 from .CoL_get_children import CoL_get_children
 from .CoL_get_taxon import CoL_get_taxon
 from .CoL_search_species import CoL_search_species
@@ -285,9 +284,7 @@ from .DisProt_search import DisProt_search
 from .DiseaseAnalyzerAgent import DiseaseAnalyzerAgent
 from .DiseaseOntology_get_parents import DiseaseOntology_get_parents
 from .DiseaseOntology_get_term import DiseaseOntology_get_term
-from .DiseaseSH_get_country_covid import DiseaseSH_get_country_covid
 from .DiseaseSH_get_covid_historical import DiseaseSH_get_covid_historical
-from .DiseaseSH_get_global_covid import DiseaseSH_get_global_covid
 from .DiseaseSH_get_vaccine_coverage import DiseaseSH_get_vaccine_coverage
 from .DiseaseSh_get_country_stats import DiseaseSh_get_country_stats
 from .DiseaseSh_get_global_stats import DiseaseSh_get_global_stats
@@ -950,8 +947,6 @@ from .HuggingFace_search_models import HuggingFace_search_models
 from .HumanMine_search import HumanMine_search
 from .HumanMine_search_genes import HumanMine_search_genes
 from .HumanMine_search_pathways import HumanMine_search_pathways
-from .HumanProteinAtlas_get_protein import HumanProteinAtlas_get_protein
-from .HumanProteinAtlas_search_genes import HumanProteinAtlas_search_genes
 from .HypothesisGenerator import HypothesisGenerator
 from .ICD10_get_code_info import ICD10_get_code_info
 from .ICD10_search_codes import ICD10_search_codes
@@ -1222,7 +1217,6 @@ from .OpenAlex_Guidelines_Search import OpenAlex_Guidelines_Search
 from .OpenCitations_get_citation_count import OpenCitations_get_citation_count
 from .OpenCitations_get_citations import OpenCitations_get_citations
 from .OpenCitations_get_references import OpenCitations_get_references
-from .OpenElevation_get_elevation import OpenElevation_get_elevation
 from .OpenFDA_search_device_510k import OpenFDA_search_device_510k
 from .OpenFDA_search_device_enforcement import OpenFDA_search_device_enforcement
 from .OpenFDA_search_drug_enforcement import OpenFDA_search_drug_enforcement
@@ -2633,7 +2627,6 @@ __all__ = [
     "ClinGen_search_dosage_sensitivity",
     "ClinGen_search_gene_validity",
     "ClinicalTrialDesignAgent",
-    "ClinicalTrials_search_studies",
     "CoL_get_children",
     "CoL_get_taxon",
     "CoL_search_species",
@@ -2694,9 +2687,7 @@ __all__ = [
     "DiseaseAnalyzerAgent",
     "DiseaseOntology_get_parents",
     "DiseaseOntology_get_term",
-    "DiseaseSH_get_country_covid",
     "DiseaseSH_get_covid_historical",
-    "DiseaseSH_get_global_covid",
     "DiseaseSH_get_vaccine_coverage",
     "DiseaseSh_get_country_stats",
     "DiseaseSh_get_global_stats",
@@ -3131,8 +3122,6 @@ __all__ = [
     "HumanMine_search",
     "HumanMine_search_genes",
     "HumanMine_search_pathways",
-    "HumanProteinAtlas_get_protein",
-    "HumanProteinAtlas_search_genes",
     "HypothesisGenerator",
     "ICD10_get_code_info",
     "ICD10_search_codes",
@@ -3383,7 +3372,6 @@ __all__ = [
     "OpenCitations_get_citation_count",
     "OpenCitations_get_citations",
     "OpenCitations_get_references",
-    "OpenElevation_get_elevation",
     "OpenFDA_search_device_510k",
     "OpenFDA_search_device_enforcement",
     "OpenFDA_search_drug_enforcement",

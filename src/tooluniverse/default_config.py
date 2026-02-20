@@ -634,7 +634,6 @@ default_tool_files = {
     # PubChem Toxicity - Chemical toxicity, GHS hazard, carcinogen classification, LD50 data
     "pubchem_tox": os.path.join(current_dir, "data", "pubchem_tox_tools.json"),
     # ClinicalTrials.gov - World's largest clinical trial registry (572,000+ trials)
-    "clinicaltrials": os.path.join(current_dir, "data", "clinicaltrials_tools.json"),
     # EpiGraphDB - Mendelian Randomization, genetic correlations, drug repurposing via GWAS
     "epigraphdb": os.path.join(current_dir, "data", "epigraphdb_tools.json"),
     # Bio.tools - ELIXIR bioinformatics tool/software registry (30,000+ entries)
@@ -718,9 +717,6 @@ default_tool_files = {
     # Figshare - open-access research repository for datasets, figures, code, posters
     "figshare": os.path.join(current_dir, "data", "figshare_tools.json"),
     # Human Protein Atlas - protein expression across tissues, subcellular location, disease, cancer
-    "human_protein_atlas": os.path.join(
-        current_dir, "data", "human_protein_atlas_tools.json"
-    ),
     # FPbase - fluorescent protein database with spectral properties, sequences, structures
     "fpbase": os.path.join(current_dir, "data", "fpbase_tools.json"),
     # ROR - Research Organization Registry for institution identifiers and metadata
@@ -881,7 +877,6 @@ default_tool_files = {
     # OpenTopoData - terrain elevation data for any global location (SRTM/ASTER/NED)
     "opentopodata": os.path.join(current_dir, "data", "opentopodata_tools.json"),
     # Disease.sh - COVID-19 global and country-level statistics
-    "disease_sh": os.path.join(current_dir, "data", "disease_sh_tools.json"),
     # MathJS - evaluate mathematical expressions via API
     "mathjs": os.path.join(current_dir, "data", "mathjs_tools.json"),
     # NASA NeoWs - Near Earth Object data (asteroids, close approaches)
@@ -906,7 +901,6 @@ default_tool_files = {
         current_dir, "data", "open_meteo_airquality_tools.json"
     ),
     # Open Elevation - terrain elevation data from lat/lon coordinates
-    "open_elevation": os.path.join(current_dir, "data", "open_elevation_tools.json"),
     # Disease.sh extended - COVID historical and vaccine coverage data
     "disease_sh_ext": os.path.join(current_dir, "data", "disease_sh_ext_tools.json"),
     # Where the ISS At - real-time ISS position and velocity
