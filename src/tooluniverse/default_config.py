@@ -1007,8 +1007,6 @@ default_tool_files = {
     "thecatapi": os.path.join(current_dir, "data", "thecatapi_tools.json"),
     # ZenQuotes - inspirational quotes (random, today, bulk) (no auth required)
     "zenquotes": os.path.join(current_dir, "data", "zenquotes_tools.json"),
-    # Agify - predict age from first name
-    "agify": os.path.join(current_dir, "data", "agify_tools.json"),
     # Blockchain.info - Bitcoin blockchain statistics
     "blockchain": os.path.join(current_dir, "data", "blockchain_tools.json"),
     # GeoJS - IP geolocation with country, region, city, timezone
