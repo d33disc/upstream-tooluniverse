@@ -1,30 +1,25 @@
 """
-TheMealDB_search_meals
+CorporateBS_generate_phrase
 
-Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+Generate a random corporate buzzword phrase using the Corporate BS Generator API. Returns a singl...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def TheMealDB_search_meals(
-    s: Optional[str | Any] = None,
-    f: Optional[str | Any] = None,
+def CorporateBS_generate_phrase(
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+    Generate a random corporate buzzword phrase using the Corporate BS Generator API. Returns a singl...
 
     Parameters
     ----------
-    s : str | Any
-        Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'cho...
-    f : str | Any
-        Search by first letter of meal name. Single character: 'a', 'b', 'c', etc.
+    No parameters
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +34,11 @@ def TheMealDB_search_meals(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "TheMealDB_search_meals", "arguments": {"s": s, "f": f}},
+        {"name": "CorporateBS_generate_phrase", "arguments": {}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["TheMealDB_search_meals"]
+__all__ = ["CorporateBS_generate_phrase"]

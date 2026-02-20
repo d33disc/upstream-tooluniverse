@@ -1,30 +1,30 @@
 """
-TheMealDB_search_meals
+TVmaze_get_show_episodes
 
-Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+Get all episodes of a TV show by TVmaze show ID using the TVmaze API. Returns episode list with n...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def TheMealDB_search_meals(
-    s: Optional[str | Any] = None,
-    f: Optional[str | Any] = None,
+def TVmaze_get_show_episodes(
+    show_id: int,
+    specials: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+    Get all episodes of a TV show by TVmaze show ID using the TVmaze API. Returns episode list with n...
 
     Parameters
     ----------
-    s : str | Any
-        Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'cho...
-    f : str | Any
-        Search by first letter of meal name. Single character: 'a', 'b', 'c', etc.
+    show_id : int
+        TVmaze show ID. Examples: 169 (Game of Thrones), 82 (Game of Thrones alt), 66...
+    specials : int | Any
+        Include special episodes (1=yes, 0=no). Default: 0
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +39,14 @@ def TheMealDB_search_meals(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "TheMealDB_search_meals", "arguments": {"s": s, "f": f}},
+        {
+            "name": "TVmaze_get_show_episodes",
+            "arguments": {"show_id": show_id, "specials": specials},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["TheMealDB_search_meals"]
+__all__ = ["TVmaze_get_show_episodes"]

@@ -1,30 +1,30 @@
 """
-TheMealDB_search_meals
+DeckOfCards_draw_cards
 
-Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+Draw one or more cards from an existing deck using the Deck of Cards API. Requires a deck_id from...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def TheMealDB_search_meals(
-    s: Optional[str | Any] = None,
-    f: Optional[str | Any] = None,
+def DeckOfCards_draw_cards(
+    deck_id: str,
+    count: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+    Draw one or more cards from an existing deck using the Deck of Cards API. Requires a deck_id from...
 
     Parameters
     ----------
-    s : str | Any
-        Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'cho...
-    f : str | Any
-        Search by first letter of meal name. Single character: 'a', 'b', 'c', etc.
+    deck_id : str
+        The deck identifier from DeckOfCards_new_deck. Example: '3p40paa87x90'
+    count : int | Any
+        Number of cards to draw (default 1). Cannot exceed remaining cards in the deck.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +39,14 @@ def TheMealDB_search_meals(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "TheMealDB_search_meals", "arguments": {"s": s, "f": f}},
+        {
+            "name": "DeckOfCards_draw_cards",
+            "arguments": {"deck_id": deck_id, "count": count},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["TheMealDB_search_meals"]
+__all__ = ["DeckOfCards_draw_cards"]

@@ -1,7 +1,7 @@
 """
 StackExchange_search_questions
 
-Search for questions on StackOverflow or other StackExchange sites. Returns questions matching a ...
+Search for questions on Stack Exchange sites (Stack Overflow, Super User, Server Fault, etc.) usi...
 """
 
 from typing import Any, Optional, Callable
@@ -9,37 +9,34 @@ from ._shared_client import get_shared_client
 
 
 def StackExchange_search_questions(
-    q: str,
+    intitle: Optional[str | Any] = None,
+    tagged: Optional[str | Any] = None,
     site: Optional[str | Any] = None,
     sort: Optional[str | Any] = None,
     order: Optional[str | Any] = None,
-    tagged: Optional[str | Any] = None,
     pagesize: Optional[int | Any] = None,
-    page: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for questions on StackOverflow or other StackExchange sites. Returns questions matching a ...
+    Search for questions on Stack Exchange sites (Stack Overflow, Super User, Server Fault, etc.) usi...
 
     Parameters
     ----------
-    q : str
-        Search query string (e.g., 'python pandas dataframe merge')
-    site : str | Any
-        StackExchange site to search (default: 'stackoverflow'). Other options: 'serv...
-    sort : str | Any
-        Sort order: 'relevance', 'votes', 'creation', 'activity' (default: 'relevance')
-    order : str | Any
-        Sort direction: 'desc' or 'asc' (default: 'desc')
+    intitle : str | Any
+        Search query to find in question titles. Examples: 'python list comprehension...
     tagged : str | Any
-        Semicolon-separated tags to filter by (e.g., 'python;pandas')
+        Semicolon-separated tags to filter by. Examples: 'python', 'javascript;react'...
+    site : str | Any
+        Stack Exchange site. Default: stackoverflow. Examples: 'stackoverflow', 'supe...
+    sort : str | Any
+        Sort order. Values: 'activity', 'votes', 'creation', 'relevance'. Default: 'a...
+    order : str | Any
+        Order direction. Values: 'desc', 'asc'. Default: 'desc'
     pagesize : int | Any
-        Number of results per page (1-100, default: 10)
-    page : int | Any
-        Page number for pagination (default: 1)
+        Number of results per page (1-100). Default: 10
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -57,13 +54,12 @@ def StackExchange_search_questions(
         {
             "name": "StackExchange_search_questions",
             "arguments": {
-                "q": q,
+                "intitle": intitle,
+                "tagged": tagged,
                 "site": site,
                 "sort": sort,
                 "order": order,
-                "tagged": tagged,
                 "pagesize": pagesize,
-                "page": page,
             },
         },
         stream_callback=stream_callback,

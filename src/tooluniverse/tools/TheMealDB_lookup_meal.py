@@ -1,30 +1,27 @@
 """
-TheMealDB_search_meals
+TheMealDB_lookup_meal
 
-Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+Look up the full details of a specific meal by its ID from TheMealDB. Returns the complete recipe...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def TheMealDB_search_meals(
-    s: Optional[str | Any] = None,
-    f: Optional[str | Any] = None,
+def TheMealDB_lookup_meal(
+    i: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+    Look up the full details of a specific meal by its ID from TheMealDB. Returns the complete recipe...
 
     Parameters
     ----------
-    s : str | Any
-        Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'cho...
-    f : str | Any
-        Search by first letter of meal name. Single character: 'a', 'b', 'c', etc.
+    i : str
+        Meal ID to look up. Examples: '52772' (Teriyaki Chicken Casserole), '52940' (...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +36,11 @@ def TheMealDB_search_meals(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "TheMealDB_search_meals", "arguments": {"s": s, "f": f}},
+        {"name": "TheMealDB_lookup_meal", "arguments": {"i": i}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["TheMealDB_search_meals"]
+__all__ = ["TheMealDB_lookup_meal"]

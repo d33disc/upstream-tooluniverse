@@ -1,30 +1,33 @@
 """
-TheMealDB_search_meals
+Wikipedia_get_featured_content
 
-Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+Get Wikipedia's featured content for a specific date including the featured article of the day, m...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def TheMealDB_search_meals(
-    s: Optional[str | Any] = None,
-    f: Optional[str | Any] = None,
+def Wikipedia_get_featured_content(
+    year: int,
+    month: int,
+    day: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search for meal recipes in TheMealDB, a free food recipe database with 300+ international recipes...
+    Get Wikipedia's featured content for a specific date including the featured article of the day, m...
 
     Parameters
     ----------
-    s : str | Any
-        Search by meal name. Examples: 'chicken', 'pasta', 'sushi', 'beef stew', 'cho...
-    f : str | Any
-        Search by first letter of meal name. Single character: 'a', 'b', 'c', etc.
+    year : int
+        Year. Examples: 2023, 2024
+    month : int
+        Month number (1-12). Examples: 1, 6, 12
+    day : int
+        Day of month (1-31). Examples: 1, 15, 25
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +42,14 @@ def TheMealDB_search_meals(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "TheMealDB_search_meals", "arguments": {"s": s, "f": f}},
+        {
+            "name": "Wikipedia_get_featured_content",
+            "arguments": {"year": year, "month": month, "day": day},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["TheMealDB_search_meals"]
+__all__ = ["Wikipedia_get_featured_content"]

@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2116 scientific tools.
+Type-safe Python interface to 2130 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -266,6 +266,7 @@ from .ComplexPortal_get_complex import ComplexPortal_get_complex
 from .ComplexPortal_search_complexes import ComplexPortal_search_complexes
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
 from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeline
+from .CorporateBS_generate_phrase import CorporateBS_generate_phrase
 from .CountriesNow_get_countries_cities import CountriesNow_get_countries_cities
 from .CountriesNow_get_country_info import CountriesNow_get_country_info
 from .Crates_get_package import Crates_get_package
@@ -304,6 +305,8 @@ from .Datamuse_find_related_words import Datamuse_find_related_words
 from .Datamuse_find_words_with_context import Datamuse_find_words_with_context
 from .Dataverse_get_dataset import Dataverse_get_dataset
 from .Dataverse_search_datasets import Dataverse_search_datasets
+from .DeckOfCards_draw_cards import DeckOfCards_draw_cards
+from .DeckOfCards_new_deck import DeckOfCards_new_deck
 from .DeepGO_predict_function import DeepGO_predict_function
 from .Deezer_get_artist_top_tracks import Deezer_get_artist_top_tracks
 from .Deezer_search_artists import Deezer_search_artists
@@ -332,7 +335,9 @@ from .DiseaseAnalyzerAgent import DiseaseAnalyzerAgent
 from .DiseaseOntology_get_parents import DiseaseOntology_get_parents
 from .DiseaseOntology_get_term import DiseaseOntology_get_term
 from .DiseaseSH_get_country_covid import DiseaseSH_get_country_covid
+from .DiseaseSH_get_covid_historical import DiseaseSH_get_covid_historical
 from .DiseaseSH_get_global_covid import DiseaseSH_get_global_covid
+from .DiseaseSH_get_vaccine_coverage import DiseaseSH_get_vaccine_coverage
 from .DiseaseSh_get_country_stats import DiseaseSh_get_country_stats
 from .DiseaseSh_get_global_stats import DiseaseSh_get_global_stats
 from .DiseaseSh_get_historical import DiseaseSh_get_historical
@@ -1037,6 +1042,7 @@ from .IMPC_get_phenotypes_by_gene import IMPC_get_phenotypes_by_gene
 from .IMPC_search_genes import IMPC_search_genes
 from .IPAPI_geolocate_ip import IPAPI_geolocate_ip
 from .IPGeolocation_lookup import IPGeolocation_lookup
+from .IPify_get_public_ip import IPify_get_public_ip
 from .ISS_get_astronauts import ISS_get_astronauts
 from .ISS_get_position import ISS_get_position
 from .ITIS_get_full_record import ITIS_get_full_record
@@ -1806,8 +1812,10 @@ from .SWAPI_get_films import SWAPI_get_films
 from .SWAPI_get_people import SWAPI_get_people
 from .ScanProsite_scan_protein import ScanProsite_scan_protein
 from .ScientificTextSummarizer import ScientificTextSummarizer
+from .Scryfall_get_card_by_name import Scryfall_get_card_by_name
 from .Scryfall_get_random_card import Scryfall_get_random_card
 from .Scryfall_search_cards import Scryfall_search_cards
+from .Scryfall_search_cards_advanced import Scryfall_search_cards_advanced
 from .SemanticScholar_get_author import SemanticScholar_get_author
 from .SemanticScholar_get_paper import SemanticScholar_get_paper
 from .SemanticScholar_get_pdf_snippets import SemanticScholar_get_pdf_snippets
@@ -1827,8 +1835,7 @@ from .SpaceflightNews_search_articles import SpaceflightNews_search_articles
 from .SpliceAI_get_max_delta import SpliceAI_get_max_delta
 from .SpliceAI_predict_pangolin import SpliceAI_predict_pangolin
 from .SpliceAI_predict_splice import SpliceAI_predict_splice
-from .StackExchange_get_answers import StackExchange_get_answers
-from .StackExchange_get_question import StackExchange_get_question
+from .StackExchange_get_top_questions import StackExchange_get_top_questions
 from .StackExchange_search_questions import StackExchange_search_questions
 from .SunriseSunset_get_times import SunriseSunset_get_times
 from .SwissDock_check_job_status import SwissDock_check_job_status
@@ -1847,7 +1854,9 @@ from .TCIA_get_series_metadata import TCIA_get_series_metadata
 from .TCIA_get_series_size import TCIA_get_series_size
 from .TCIA_list_collections import TCIA_list_collections
 from .TRIP_Database_Guidelines_Search import TRIP_Database_Guidelines_Search
+from .TVmaze_get_schedule import TVmaze_get_schedule
 from .TVmaze_get_show import TVmaze_get_show
+from .TVmaze_get_show_episodes import TVmaze_get_show_episodes
 from .TVmaze_search_shows import TVmaze_search_shows
 from .TargetMine_search import TargetMine_search
 from .TargetMine_search_genes import TargetMine_search_genes
@@ -1862,7 +1871,10 @@ from .TheCocktailDB_lookup_cocktail import TheCocktailDB_lookup_cocktail
 from .TheCocktailDB_random_cocktail import TheCocktailDB_random_cocktail
 from .TheCocktailDB_search_cocktails import TheCocktailDB_search_cocktails
 from .TheCocktailDB_search_ingredient import TheCocktailDB_search_ingredient
+from .TheMealDB_filter_meals import TheMealDB_filter_meals
 from .TheMealDB_get_categories import TheMealDB_get_categories
+from .TheMealDB_lookup_meal import TheMealDB_lookup_meal
+from .TheMealDB_random_meal import TheMealDB_random_meal
 from .TheMealDB_search_meals import TheMealDB_search_meals
 from .TheSportsDB_get_league_events import TheSportsDB_get_league_events
 from .TheSportsDB_search_players import TheSportsDB_search_players
@@ -1971,6 +1983,7 @@ from .VariantValidator_validate_variant import VariantValidator_validate_variant
 from .WFGY_triage_llm_rag_failure import WFGY_triage_llm_rag_failure
 from .WHO_Guideline_Full_Text import WHO_Guideline_Full_Text
 from .WHO_Guidelines_Search import WHO_Guidelines_Search
+from .WhereTheISSAt_get_position import WhereTheISSAt_get_position
 from .WikiPathways_find_pathways_by_gene import WikiPathways_find_pathways_by_gene
 from .WikiPathways_get_pathway import WikiPathways_get_pathway
 from .WikiPathways_get_pathway_genes import WikiPathways_get_pathway_genes
@@ -1979,6 +1992,7 @@ from .Wikidata_SPARQL_query import Wikidata_SPARQL_query
 from .Wikidata_get_entity import Wikidata_get_entity
 from .Wikidata_search_entities import Wikidata_search_entities
 from .Wikipedia_get_content import Wikipedia_get_content
+from .Wikipedia_get_featured_content import Wikipedia_get_featured_content
 from .Wikipedia_get_pageviews import Wikipedia_get_pageviews
 from .Wikipedia_get_summary import Wikipedia_get_summary
 from .Wikipedia_get_top_pages import Wikipedia_get_top_pages
@@ -2864,6 +2878,7 @@ __all__ = [
     "ComplexPortal_search_complexes",
     "CompoundDiscoveryAgent",
     "ComprehensiveDrugDiscoveryPipeline",
+    "CorporateBS_generate_phrase",
     "CountriesNow_get_countries_cities",
     "CountriesNow_get_country_info",
     "Crates_get_package",
@@ -2902,6 +2917,8 @@ __all__ = [
     "Datamuse_find_words_with_context",
     "Dataverse_get_dataset",
     "Dataverse_search_datasets",
+    "DeckOfCards_draw_cards",
+    "DeckOfCards_new_deck",
     "DeepGO_predict_function",
     "Deezer_get_artist_top_tracks",
     "Deezer_search_artists",
@@ -2930,7 +2947,9 @@ __all__ = [
     "DiseaseOntology_get_parents",
     "DiseaseOntology_get_term",
     "DiseaseSH_get_country_covid",
+    "DiseaseSH_get_covid_historical",
     "DiseaseSH_get_global_covid",
+    "DiseaseSH_get_vaccine_coverage",
     "DiseaseSh_get_country_stats",
     "DiseaseSh_get_global_stats",
     "DiseaseSh_get_historical",
@@ -3407,6 +3426,7 @@ __all__ = [
     "IMPC_search_genes",
     "IPAPI_geolocate_ip",
     "IPGeolocation_lookup",
+    "IPify_get_public_ip",
     "ISS_get_astronauts",
     "ISS_get_position",
     "ITIS_get_full_record",
@@ -4018,8 +4038,10 @@ __all__ = [
     "SWAPI_get_people",
     "ScanProsite_scan_protein",
     "ScientificTextSummarizer",
+    "Scryfall_get_card_by_name",
     "Scryfall_get_random_card",
     "Scryfall_search_cards",
+    "Scryfall_search_cards_advanced",
     "SemanticScholar_get_author",
     "SemanticScholar_get_paper",
     "SemanticScholar_get_pdf_snippets",
@@ -4039,8 +4061,7 @@ __all__ = [
     "SpliceAI_get_max_delta",
     "SpliceAI_predict_pangolin",
     "SpliceAI_predict_splice",
-    "StackExchange_get_answers",
-    "StackExchange_get_question",
+    "StackExchange_get_top_questions",
     "StackExchange_search_questions",
     "SunriseSunset_get_times",
     "SwissDock_check_job_status",
@@ -4059,7 +4080,9 @@ __all__ = [
     "TCIA_get_series_size",
     "TCIA_list_collections",
     "TRIP_Database_Guidelines_Search",
+    "TVmaze_get_schedule",
     "TVmaze_get_show",
+    "TVmaze_get_show_episodes",
     "TVmaze_search_shows",
     "TargetMine_search",
     "TargetMine_search_genes",
@@ -4074,7 +4097,10 @@ __all__ = [
     "TheCocktailDB_random_cocktail",
     "TheCocktailDB_search_cocktails",
     "TheCocktailDB_search_ingredient",
+    "TheMealDB_filter_meals",
     "TheMealDB_get_categories",
+    "TheMealDB_lookup_meal",
+    "TheMealDB_random_meal",
     "TheMealDB_search_meals",
     "TheSportsDB_get_league_events",
     "TheSportsDB_search_players",
@@ -4171,6 +4197,7 @@ __all__ = [
     "WFGY_triage_llm_rag_failure",
     "WHO_Guideline_Full_Text",
     "WHO_Guidelines_Search",
+    "WhereTheISSAt_get_position",
     "WikiPathways_find_pathways_by_gene",
     "WikiPathways_get_pathway",
     "WikiPathways_get_pathway_genes",
@@ -4179,6 +4206,7 @@ __all__ = [
     "Wikidata_get_entity",
     "Wikidata_search_entities",
     "Wikipedia_get_content",
+    "Wikipedia_get_featured_content",
     "Wikipedia_get_pageviews",
     "Wikipedia_get_summary",
     "Wikipedia_get_top_pages",

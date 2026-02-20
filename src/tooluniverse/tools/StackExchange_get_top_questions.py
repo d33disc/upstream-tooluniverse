@@ -1,17 +1,16 @@
 """
-StackExchange_get_answers
+StackExchange_get_top_questions
 
-Get answers for a specific StackOverflow question, sorted by votes. Returns the answer body, vote...
+Get top-voted questions on Stack Exchange sites by tag or general site using the Stack Exchange A...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def StackExchange_get_answers(
-    question_id: int,
+def StackExchange_get_top_questions(
+    tagged: Optional[str | Any] = None,
     site: Optional[str | Any] = None,
-    sort: Optional[str | Any] = None,
     pagesize: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -19,18 +18,16 @@ def StackExchange_get_answers(
     validate: bool = True,
 ) -> Any:
     """
-    Get answers for a specific StackOverflow question, sorted by votes. Returns the answer body, vote...
+    Get top-voted questions on Stack Exchange sites by tag or general site using the Stack Exchange A...
 
     Parameters
     ----------
-    question_id : int
-        The StackOverflow question ID
+    tagged : str | Any
+        Semicolon-separated tags to filter. Examples: 'python', 'javascript', 'sql', ...
     site : str | Any
-        StackExchange site (default: 'stackoverflow')
-    sort : str | Any
-        Sort order: 'votes', 'activity', 'creation' (default: 'votes')
+        Stack Exchange site. Default: stackoverflow. Values: 'stackoverflow', 'superu...
     pagesize : int | Any
-        Number of answers to return (default: 5)
+        Number of results (1-100). Default: 10
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -46,13 +43,8 @@ def StackExchange_get_answers(
 
     return get_shared_client().run_one_function(
         {
-            "name": "StackExchange_get_answers",
-            "arguments": {
-                "question_id": question_id,
-                "site": site,
-                "sort": sort,
-                "pagesize": pagesize,
-            },
+            "name": "StackExchange_get_top_questions",
+            "arguments": {"tagged": tagged, "site": site, "pagesize": pagesize},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -60,4 +52,4 @@ def StackExchange_get_answers(
     )
 
 
-__all__ = ["StackExchange_get_answers"]
+__all__ = ["StackExchange_get_top_questions"]
