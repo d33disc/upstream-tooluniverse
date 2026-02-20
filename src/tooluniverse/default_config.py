@@ -1161,6 +1161,8 @@ default_tool_files = {
     "reddit": os.path.join(current_dir, "data", "reddit_tools.json"),
     # Yu-Gi-Oh - trading card game cards, sets, and archetypes
     "yugioh": os.path.join(current_dir, "data", "yugioh_tools.json"),
+    # Bioconductor - R/Bioconductor bioinformatics package search and metadata (via R-universe)
+    "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

@@ -9,6 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def COD_search_structures(
+    text: Optional[str | Any] = None,
     formula: Optional[str | Any] = None,
     el1: Optional[str | Any] = None,
     el2: Optional[str | Any] = None,
@@ -18,7 +19,7 @@ def COD_search_structures(
     mineral: Optional[str | Any] = None,
     sg: Optional[str | Any] = None,
     sgNumber: Optional[str | Any] = None,
-    limit: Optional[int | Any] = None,
+    results: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -29,8 +30,10 @@ def COD_search_structures(
 
     Parameters
     ----------
+    text : str | Any
+        Free text search across titles, keywords, and compound names. Examples: 'aspi...
     formula : str | Any
-        Chemical formula to search. Examples: 'SiO2', 'NaCl', 'CaCO3', 'Al2O3'. Exact...
+        Chemical formula to search (use spaces between elements). Examples: 'Fe2 O3',...
     el1 : str | Any
         First required element (chemical symbol). Examples: 'Cu', 'Fe', 'Si', 'C', 'N'
     el2 : str | Any
@@ -47,8 +50,8 @@ def COD_search_structures(
         Space group symbol (Hermann-Mauguin notation). Examples: 'P 21/c', 'Fm -3 m',...
     sgNumber : str | Any
         Space group number (1-230). Examples: '225' (Fm-3m, FCC metals), '62' (Pnma, ...
-    limit : int | Any
-        Maximum number of results (default 100, use smaller values for speed)
+    results : int | Any
+        Maximum number of results to return (default 100, use smaller values for spee...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -66,6 +69,7 @@ def COD_search_structures(
         {
             "name": "COD_search_structures",
             "arguments": {
+                "text": text,
                 "formula": formula,
                 "el1": el1,
                 "el2": el2,
@@ -75,7 +79,7 @@ def COD_search_structures(
                 "mineral": mineral,
                 "sg": sg,
                 "sgNumber": sgNumber,
-                "limit": limit,
+                "results": results,
             },
         },
         stream_callback=stream_callback,

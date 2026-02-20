@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2184 scientific tools.
+Type-safe Python interface to 2187 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -139,6 +139,8 @@ from .BioTools_search import BioTools_search
 from .BioTools_search_by_operation import BioTools_search_by_operation
 from .BioTools_search_by_topic import BioTools_search_by_topic
 from .BioTools_search_by_type import BioTools_search_by_type
+from .Bioconductor_get_package import Bioconductor_get_package
+from .Bioconductor_search_packages import Bioconductor_search_packages
 from .BiomarkerDiscoveryWorkflow import BiomarkerDiscoveryWorkflow
 from .Blockchain_get_address import Blockchain_get_address
 from .Blockchain_get_rawblock import Blockchain_get_rawblock
@@ -161,6 +163,7 @@ from .CELLxGENE_get_expression_data import CELLxGENE_get_expression_data
 from .CELLxGENE_get_gene_metadata import CELLxGENE_get_gene_metadata
 from .CELLxGENE_get_presence_matrix import CELLxGENE_get_presence_matrix
 from .CMA_Guidelines_Search import CMA_Guidelines_Search
+from .COD_get_structure import COD_get_structure
 from .COD_search_structures import COD_search_structures
 from .CORE_get_fulltext_snippets import CORE_get_fulltext_snippets
 from .CORE_search_papers import CORE_search_papers
@@ -2807,6 +2810,8 @@ __all__ = [
     "BioTools_search_by_operation",
     "BioTools_search_by_topic",
     "BioTools_search_by_type",
+    "Bioconductor_get_package",
+    "Bioconductor_search_packages",
     "BiomarkerDiscoveryWorkflow",
     "Blockchain_get_address",
     "Blockchain_get_rawblock",
@@ -2829,6 +2834,7 @@ __all__ = [
     "CELLxGENE_get_gene_metadata",
     "CELLxGENE_get_presence_matrix",
     "CMA_Guidelines_Search",
+    "COD_get_structure",
     "COD_search_structures",
     "CORE_get_fulltext_snippets",
     "CORE_search_papers",
