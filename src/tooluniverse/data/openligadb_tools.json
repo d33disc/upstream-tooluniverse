@@ -1,0 +1,231 @@
+[
+  {
+    "name": "OpenLigaDB_get_matches",
+    "description": "Get match results for a specific matchday (Spieltag) of a football/soccer league season from OpenLigaDB. Returns detailed match data including teams, scores, goals, and match status. Primarily covers German Bundesliga (bl1, bl2, bl3) and major international tournaments. Use OpenLigaDB_get_leagues to discover available leagues and seasons.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "league": {
+          "type": "string",
+          "description": "League shortcut code. Examples: 'bl1' (1. Bundesliga), 'bl2' (2. Bundesliga), 'bl3' (3. Liga), 'dfb' (DFB-Pokal)"
+        },
+        "season": {
+          "type": "integer",
+          "description": "Season year (start year). Examples: 2023 for 2023/2024 season, 2024 for 2024/2025 season"
+        },
+        "matchday": {
+          "type": "integer",
+          "description": "Matchday number (Spieltag). Typically 1-34 for Bundesliga regular season."
+        }
+      },
+      "required": ["league", "season", "matchday"]
+    },
+    "fields": {
+      "endpoint": "https://api.openligadb.de/getmatchdata/{league}/{season}/{matchday}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"league": "bl1", "season": 2023, "matchday": 1},
+      {"league": "bl1", "season": 2023, "matchday": 34},
+      {"league": "bl2", "season": 2023, "matchday": 1}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matches for the specified matchday",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "matchID": {"type": "integer", "description": "Unique match identifier"},
+                  "matchDateTime": {"type": "string", "description": "Match date and time (local timezone)"},
+                  "matchDateTimeUTC": {"type": "string", "description": "Match date and time in UTC"},
+                  "matchIsFinished": {"type": "boolean", "description": "Whether the match has been completed"},
+                  "leagueName": {"type": "string", "description": "Full league name with season"},
+                  "team1": {
+                    "type": "object",
+                    "properties": {
+                      "teamId": {"type": "integer"},
+                      "teamName": {"type": "string", "description": "Full team name"},
+                      "shortName": {"type": "string", "description": "Short team name"},
+                      "teamIconUrl": {"type": "string"}
+                    }
+                  },
+                  "team2": {
+                    "type": "object",
+                    "properties": {
+                      "teamId": {"type": "integer"},
+                      "teamName": {"type": "string"},
+                      "shortName": {"type": "string"},
+                      "teamIconUrl": {"type": "string"}
+                    }
+                  },
+                  "matchResults": {
+                    "type": "array",
+                    "description": "Match results (halftime and final)",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "resultName": {"type": "string", "description": "Result type (e.g., 'Halbzeitergebnis', 'Endergebnis')"},
+                        "pointsTeam1": {"type": "integer"},
+                        "pointsTeam2": {"type": "integer"}
+                      }
+                    }
+                  },
+                  "goals": {
+                    "type": "array",
+                    "description": "Individual goals scored",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "goalGetterName": {"type": "string"},
+                        "matchMinute": {"type": "integer"},
+                        "scoreTeam1": {"type": "integer"},
+                        "scoreTeam2": {"type": "integer"},
+                        "isPenalty": {"type": "boolean"},
+                        "isOwnGoal": {"type": "boolean"}
+                      }
+                    }
+                  },
+                  "group": {
+                    "type": "object",
+                    "properties": {
+                      "groupName": {"type": "string", "description": "Matchday name (e.g., '1. Spieltag')"},
+                      "groupOrderID": {"type": "integer"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenLigaDB_get_table",
+    "description": "Get the league standings table for a specific football/soccer season from OpenLigaDB. Returns the final or current standings with points, wins, losses, draws, goals scored/conceded, and goal difference for each team. Primarily covers German Bundesliga leagues.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "league": {
+          "type": "string",
+          "description": "League shortcut code. Examples: 'bl1' (1. Bundesliga), 'bl2' (2. Bundesliga), 'bl3' (3. Liga)"
+        },
+        "season": {
+          "type": "integer",
+          "description": "Season year (start year). Examples: 2023 for 2023/2024 season"
+        }
+      },
+      "required": ["league", "season"]
+    },
+    "fields": {
+      "endpoint": "https://api.openligadb.de/getbltable/{league}/{season}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"league": "bl1", "season": 2023},
+      {"league": "bl1", "season": 2022},
+      {"league": "bl2", "season": 2023}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "League standings sorted by position (most points first)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "teamInfoId": {"type": "integer", "description": "Team ID"},
+                  "teamName": {"type": "string", "description": "Full team name"},
+                  "shortName": {"type": "string", "description": "Short team name"},
+                  "teamIconUrl": {"type": "string"},
+                  "points": {"type": "integer", "description": "Total points"},
+                  "matches": {"type": "integer", "description": "Games played"},
+                  "won": {"type": "integer", "description": "Games won"},
+                  "draw": {"type": "integer", "description": "Games drawn"},
+                  "lost": {"type": "integer", "description": "Games lost"},
+                  "goals": {"type": "integer", "description": "Goals scored"},
+                  "opponentGoals": {"type": "integer", "description": "Goals conceded"},
+                  "goalDiff": {"type": "integer", "description": "Goal difference (goals - opponentGoals)"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenLigaDB_get_available_leagues",
+    "description": "Get a list of all available leagues and seasons in OpenLigaDB. Returns league names, shortcut codes, seasons, and sport types. Use this to discover available league codes (e.g., 'bl1' for Bundesliga) and seasons before querying match data or standings. Covers primarily German football leagues and international tournaments.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.openligadb.de/getavailableleagues"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of all available leagues and seasons",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "leagueId": {"type": "integer", "description": "Unique league ID"},
+                  "leagueName": {"type": "string", "description": "Full league name with season (e.g., '1. Fussball-Bundesliga 2023/2024')"},
+                  "leagueShortcut": {"type": "string", "description": "League shortcut code for use in other endpoints (e.g., 'bl1', 'bl2', 'bl3', 'dfb')"},
+                  "leagueSeason": {"type": "string", "description": "Season year (start year as string)"},
+                  "sport": {
+                    "type": "object",
+                    "properties": {
+                      "sportId": {"type": "integer"},
+                      "sportName": {"type": "string", "description": "Sport name (e.g., 'Fussball')"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

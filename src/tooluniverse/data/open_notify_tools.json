@@ -1,0 +1,105 @@
+[
+  {
+    "name": "OpenNotify_get_iss_position",
+    "description": "Get the current real-time position of the International Space Station (ISS) in latitude and longitude using the Open Notify API. Returns the geographic coordinates of the ISS at the moment of the request. The ISS orbits at approximately 400km altitude, circling Earth every 90 minutes. Useful for tracking, astronomy education, and space science applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "http://api.open-notify.org/iss-now.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Current ISS position",
+              "properties": {
+                "message": {"type": "string", "description": "Response status ('success')"},
+                "timestamp": {"type": "integer", "description": "Unix timestamp of position reading"},
+                "iss_position": {
+                  "type": "object",
+                  "description": "Current ISS geographic coordinates",
+                  "properties": {
+                    "latitude": {"type": "string", "description": "Latitude (-90 to 90 degrees)"},
+                    "longitude": {"type": "string", "description": "Longitude (-180 to 180 degrees)"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenNotify_get_astronauts",
+    "description": "Get the names and spacecraft of all people currently in space using the Open Notify API. Returns a list of astronauts (and cosmonauts) currently aboard the ISS or other spacecraft, with the spacecraft they are on. Updated in real-time as crew rotations occur. Useful for space science education, current events, and tracking human spaceflight missions.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "http://api.open-notify.org/astros.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "People currently in space",
+              "properties": {
+                "message": {"type": "string", "description": "Response status"},
+                "number": {"type": "integer", "description": "Total number of people currently in space"},
+                "people": {
+                  "type": "array",
+                  "description": "List of people in space",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string", "description": "Astronaut/cosmonaut name"},
+                      "craft": {"type": "string", "description": "Spacecraft (e.g. 'ISS', 'Shenzhou')"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

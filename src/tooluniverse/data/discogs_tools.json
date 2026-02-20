@@ -1,0 +1,166 @@
+[
+  {
+    "name": "Discogs_search_music",
+    "description": "Search the Discogs music database for releases (albums, singles, EPs), artists, labels, and masters. Discogs is the largest online music database with 15M+ releases. Returns music releases with artist, title, year, genre, style, format (vinyl/CD), and label information. Useful for music research, discography lookup, and music history studies.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query. Examples: 'Dark Side of the Moon', 'Led Zeppelin', 'Jazz 1960', 'Beatles Abbey Road'"
+        },
+        "type": {
+          "type": ["string", "null"],
+          "description": "Result type filter. Values: 'release', 'artist', 'label', 'master'. Default: all types"
+        },
+        "artist": {
+          "type": ["string", "null"],
+          "description": "Filter by artist name. Example: 'Pink Floyd'"
+        },
+        "year": {
+          "type": ["string", "null"],
+          "description": "Filter by release year. Example: '1973'"
+        },
+        "genre": {
+          "type": ["string", "null"],
+          "description": "Filter by genre. Examples: 'Rock', 'Jazz', 'Classical', 'Electronic', 'Hip Hop'"
+        },
+        "style": {
+          "type": ["string", "null"],
+          "description": "Filter by style. Examples: 'Prog Rock', 'Bebop', 'Baroque', 'Techno'"
+        },
+        "country": {
+          "type": ["string", "null"],
+          "description": "Filter by country of release. Examples: 'US', 'UK', 'Germany'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Results per page (default 10, max 100)"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.discogs.com/database/search",
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 +https://github.com/ToolUniverse"
+      },
+      "params": {
+        "per_page": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "Dark Side of the Moon", "type": "master", "per_page": 5},
+      {"q": "Miles Davis Kind of Blue", "type": "release", "per_page": 5},
+      {"q": "Bach Brandenburg Concertos", "genre": "Classical", "per_page": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Music search results from Discogs",
+              "properties": {
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "items": {"type": "integer", "description": "Total number of matching results"},
+                    "page": {"type": "integer"},
+                    "pages": {"type": "integer"}
+                  }
+                },
+                "results": {
+                  "type": "array",
+                  "description": "List of music items",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer", "description": "Discogs ID"},
+                      "type": {"type": "string", "description": "Type: release, artist, label, or master"},
+                      "title": {"type": "string", "description": "Artist - Album title"},
+                      "year": {"type": ["string", "null"], "description": "Release year"},
+                      "country": {"type": ["string", "null"], "description": "Country of release"},
+                      "genre": {"type": "array", "items": {"type": "string"}, "description": "Music genres"},
+                      "style": {"type": "array", "items": {"type": "string"}, "description": "Music styles"},
+                      "format": {"type": "array", "items": {"type": "string"}, "description": "Physical formats"},
+                      "label": {"type": "array", "items": {"type": "string"}, "description": "Record labels"},
+                      "uri": {"type": "string", "description": "Discogs URL"},
+                      "master_id": {"type": ["integer", "null"], "description": "Master release ID"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Discogs_get_artist",
+    "description": "Get detailed information about a music artist from Discogs using their artist ID. Returns biography, name variations, members (for bands), and links. Use Discogs_search_music with type='artist' to find artist IDs.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "artist_id": {
+          "type": "integer",
+          "description": "Discogs artist ID. Common IDs: 45 (Aphex Twin), 459770 (Pink Floyd), 17703 (Led Zeppelin), 300211 (Miles Davis)"
+        }
+      },
+      "required": ["artist_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.discogs.com/artists/{artist_id}",
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 +https://github.com/ToolUniverse"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"artist_id": 45},
+      {"artist_id": 459770},
+      {"artist_id": 17703}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Artist details",
+              "properties": {
+                "id": {"type": "integer"},
+                "name": {"type": "string"},
+                "realname": {"type": ["string", "null"]},
+                "profile": {"type": ["string", "null"], "description": "Artist biography"},
+                "namevariations": {"type": "array", "items": {"type": "string"}},
+                "members": {"type": "array", "description": "Band members"},
+                "urls": {"type": "array", "items": {"type": "string"}},
+                "uri": {"type": "string", "description": "Discogs URL"},
+                "releases_url": {"type": "string"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

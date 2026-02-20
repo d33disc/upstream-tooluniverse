@@ -1,0 +1,75 @@
+[
+  {
+    "name": "OpenTriviaDB_get_questions",
+    "description": "Get trivia questions from the Open Trivia Database, a free user-contributed trivia question database. Returns questions with correct and incorrect answers across 24 categories including Science, History, Geography, Art, Sports, Entertainment, and more. Supports multiple-choice and true/false formats with easy, medium, and hard difficulty levels. Useful for quiz games, educational applications, and knowledge testing.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": ["integer", "null"],
+          "description": "Number of questions to retrieve (1-50, default: 10)"
+        },
+        "category": {
+          "type": ["integer", "null"],
+          "description": "Category ID. Options: 9=General Knowledge, 10=Books, 11=Film, 12=Music, 13=Musicals/Theatre, 14=Television, 15=Video Games, 17=Science/Nature, 18=Computers, 19=Math, 20=Mythology, 21=Sports, 22=Geography, 23=History, 24=Politics, 25=Art, 26=Celebrities, 27=Animals, 28=Vehicles, 29=Comics, 30=Gadgets, 31=Anime/Manga, 32=Cartoons"
+        },
+        "difficulty": {
+          "type": ["string", "null"],
+          "description": "Question difficulty: 'easy', 'medium', or 'hard'"
+        },
+        "type": {
+          "type": ["string", "null"],
+          "description": "Question type: 'multiple' (multiple choice) or 'boolean' (true/false)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://opentdb.com/api.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"amount": 3, "category": 17, "difficulty": "easy"},
+      {"amount": 5, "category": 23, "type": "multiple"},
+      {"amount": 1, "difficulty": "hard"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Trivia question results",
+              "properties": {
+                "response_code": {"type": "integer", "description": "Response status: 0=Success, 1=No results (not enough questions for query), 2=Invalid parameter, 3=Token not found, 4=Token exhausted"},
+                "results": {
+                  "type": "array",
+                  "description": "Trivia questions",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "category": {"type": "string", "description": "Question category (e.g., 'Science & Nature', 'History')"},
+                      "type": {"type": "string", "description": "'multiple' or 'boolean'"},
+                      "difficulty": {"type": "string", "description": "'easy', 'medium', or 'hard'"},
+                      "question": {"type": "string", "description": "Question text (may contain HTML entities)"},
+                      "correct_answer": {"type": "string", "description": "The correct answer"},
+                      "incorrect_answers": {"type": "array", "items": {"type": "string"}, "description": "List of incorrect answer options"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

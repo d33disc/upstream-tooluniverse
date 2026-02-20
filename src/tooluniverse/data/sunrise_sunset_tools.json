@@ -1,0 +1,77 @@
+[
+  {
+    "name": "SunriseSunset_get_times",
+    "description": "Get accurate sunrise, sunset, solar noon, and twilight times for any location on Earth using the Sunrise-Sunset API. Returns times in UTC for a given latitude, longitude, and date. Includes civil, nautical, and astronomical twilight times. Useful for field research planning, ecology studies, circadian rhythm research, and astronomical observations.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "description": "Latitude in decimal degrees (-90 to 90). Examples: 51.5074 (London), 48.8566 (Paris), 40.7128 (New York), 35.6762 (Tokyo)"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Longitude in decimal degrees (-180 to 180). Examples: -0.1278 (London), 2.3522 (Paris), -74.0060 (New York), 139.6503 (Tokyo)"
+        },
+        "date": {
+          "type": ["string", "null"],
+          "description": "Date in YYYY-MM-DD format. Default: today. Example: '2024-06-21' for summer solstice"
+        },
+        "formatted": {
+          "type": ["integer", "null"],
+          "description": "If 0, returns times as Unix timestamps and day length in seconds. Default: 1 (returns formatted times)"
+        }
+      },
+      "required": ["lat", "lng"]
+    },
+    "fields": {
+      "endpoint": "https://api.sunrise-sunset.org/json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"lat": 51.5074, "lng": -0.1278, "date": "2024-06-21"},
+      {"lat": 48.8566, "lng": 2.3522, "date": "2024-12-21"},
+      {"lat": -33.8688, "lng": 151.2093, "date": "2024-01-01"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Sunrise and sunset times",
+              "properties": {
+                "status": {"type": "string", "description": "Response status ('OK')"},
+                "tzid": {"type": "string", "description": "Timezone ID for the location"},
+                "results": {
+                  "type": "object",
+                  "description": "Solar event times (UTC unless formatted=0)",
+                  "properties": {
+                    "sunrise": {"type": "string", "description": "Sunrise time"},
+                    "sunset": {"type": "string", "description": "Sunset time"},
+                    "solar_noon": {"type": "string", "description": "Solar noon time"},
+                    "day_length": {"type": ["string", "integer"], "description": "Day length (HH:MM:SS or seconds)"},
+                    "civil_twilight_begin": {"type": "string", "description": "Civil twilight start (sun 6° below horizon)"},
+                    "civil_twilight_end": {"type": "string", "description": "Civil twilight end"},
+                    "nautical_twilight_begin": {"type": "string", "description": "Nautical twilight start (sun 12° below)"},
+                    "nautical_twilight_end": {"type": "string", "description": "Nautical twilight end"},
+                    "astronomical_twilight_begin": {"type": "string", "description": "Astronomical twilight start (18° below)"},
+                    "astronomical_twilight_end": {"type": "string", "description": "Astronomical twilight end"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

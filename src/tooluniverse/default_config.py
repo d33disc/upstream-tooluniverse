@@ -853,6 +853,28 @@ default_tool_files = {
     "elixir_tess": os.path.join(current_dir, "data", "elixir_tess_tools.json"),
     # Wikimedia Stats - Wikipedia page views and top articles analytics
     "wikimedia_stats": os.path.join(current_dir, "data", "wikimedia_stats_tools.json"),
+    # DBnomics - macroeconomic time series database (90+ providers: IMF, World Bank, ECB, Eurostat, OECD)
+    "dbnomics": os.path.join(current_dir, "data", "dbnomics_tools.json"),
+    # OpenLigaDB - free football/soccer data (German Bundesliga, international tournaments)
+    "openligadb": os.path.join(current_dir, "data", "openligadb_tools.json"),
+    # Free Dictionary API - English word definitions, phonetics, and usage
+    "dictionary": os.path.join(current_dir, "data", "dictionary_tools.json"),
+    # Open Trivia Database - free trivia questions across 24 categories
+    "opentriviadb": os.path.join(current_dir, "data", "opentriviadb_tools.json"),
+    # Art Institute of Chicago - 130K+ artworks open access collection
+    "aic": os.path.join(current_dir, "data", "aic_tools.json"),
+    # Cleveland Museum of Art - 61K+ open access artworks
+    "cleveland_art": os.path.join(current_dir, "data", "cleveland_art_tools.json"),
+    # Open Notify - ISS real-time position and astronauts in space
+    "open_notify": os.path.join(current_dir, "data", "open_notify_tools.json"),
+    # CEDA - UK Centre for Environmental Data Analysis climate datasets
+    "ceda": os.path.join(current_dir, "data", "ceda_tools.json"),
+    # Sunrise-Sunset API - solar event times for any location
+    "sunrise_sunset": os.path.join(current_dir, "data", "sunrise_sunset_tools.json"),
+    # Discogs - comprehensive music releases, artists, labels database (15M+ releases)
+    "discogs": os.path.join(current_dir, "data", "discogs_tools.json"),
+    # CityBikes - real-time bike-sharing station data for 800+ networks worldwide
+    "citybikes": os.path.join(current_dir, "data", "citybikes_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
