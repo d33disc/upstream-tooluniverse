@@ -905,6 +905,24 @@ default_tool_files = {
     "loc": os.path.join(current_dir, "data", "loc_tools.json"),
     # SoilGrids - global soil property predictions at any location (ISRIC)
     "soilgrids": os.path.join(current_dir, "data", "soilgrids_tools.json"),
+    # US Treasury Fiscal Data - national debt, exchange rates, interest rates, debt breakdown
+    "treasury_fiscal": os.path.join(current_dir, "data", "treasury_fiscal_tools.json"),
+    # Chronicling America - historic US newspaper search (LOC, 1777-1963)
+    "chronicling_america": os.path.join(
+        current_dir, "data", "chronicling_america_tools.json"
+    ),
+    # GBIF Extended - species detail by key and species name autocomplete
+    "gbif_ext": os.path.join(current_dir, "data", "gbif_ext_tools.json"),
+    # Frankfurter - real-time and historical currency exchange rates (ECB data)
+    "frankfurter": os.path.join(current_dir, "data", "frankfurter_tools.json"),
+    # IP-API - IP address geolocation (country, city, ISP, timezone)
+    "ipapi": os.path.join(current_dir, "data", "ipapi_tools.json"),
+    # Zippopotam - postal/ZIP code geographic lookup (60+ countries)
+    "zippopotam": os.path.join(current_dir, "data", "zippopotam_tools.json"),
+    # Dog CEO - 120+ dog breeds with random images
+    "dog_ceo": os.path.join(current_dir, "data", "dog_ceo_tools.json"),
+    # CatFact - random cat facts and breed info
+    "catfact": os.path.join(current_dir, "data", "catfact_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

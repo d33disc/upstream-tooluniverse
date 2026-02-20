@@ -1,13 +1,13 @@
 [
   {
     "name": "Nominatim_geocode",
-    "description": "Geocode a location name or address into geographic coordinates using OpenStreetMap Nominatim. Returns latitude, longitude, bounding box, place type, and display name for matching locations. Supports free-text search for cities, addresses, landmarks, and regions worldwide. Results include OSM type, place ID, and importance score.",
+    "description": "Geocode addresses and place names to geographic coordinates using the OpenStreetMap Nominatim service. Converts human-readable addresses, landmarks, or place names into latitude/longitude coordinates. Returns structured address components, bounding box, and place type. No authentication required. Useful for geospatial analysis, mapping, and location-based research.",
     "parameter": {
       "type": "object",
       "properties": {
         "q": {
           "type": "string",
-          "description": "Free-form location query. Examples: 'London', 'Eiffel Tower, Paris', '10 Downing Street, London', 'Central Park, New York'"
+          "description": "Free-form address or place name query. Examples: 'Eiffel Tower Paris', '1600 Pennsylvania Ave Washington DC', 'Big Ben London', 'Mount Everest'"
         },
         "limit": {
           "type": ["integer", "null"],
@@ -15,11 +15,7 @@
         },
         "countrycodes": {
           "type": ["string", "null"],
-          "description": "Limit results to specific countries using ISO 3166-1alpha2 codes (comma-separated, e.g., 'us,gb,de')"
-        },
-        "language": {
-          "type": ["string", "null"],
-          "description": "Preferred language for result display names (e.g., 'en', 'fr', 'de')"
+          "description": "Restrict to specific countries (comma-separated ISO 3166-1 alpha-2 codes). Examples: 'us', 'de,fr', 'gb'"
         }
       },
       "required": ["q"]
@@ -28,17 +24,18 @@
       "endpoint": "https://nominatim.openstreetmap.org/search",
       "params": {
         "format": "json",
-        "addressdetails": "1"
+        "addressdetails": "1",
+        "limit": "5"
       },
       "headers": {
-        "User-Agent": "ToolUniverse/1.0 (scientific research tool)"
+        "User-Agent": "ToolUniverse/1.0 +https://github.com/ToolUniverse"
       }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "London"},
-      {"q": "Eiffel Tower, Paris", "limit": 3},
-      {"q": "Tokyo, Japan", "limit": 2, "language": "en"}
+      {"q": "Eiffel Tower Paris"},
+      {"q": "Big Ben London", "limit": 3},
+      {"q": "Central Park New York City"}
     ],
     "return_schema": {
       "oneOf": [
@@ -47,34 +44,32 @@
           "properties": {
             "data": {
               "type": "array",
-              "description": "List of geocoding results matching the query",
+              "description": "List of geocoding results",
               "items": {
                 "type": "object",
                 "properties": {
-                  "place_id": {"type": "integer", "description": "Unique OSM place identifier"},
-                  "osm_type": {"type": "string", "description": "OSM object type: 'node', 'way', or 'relation'"},
-                  "osm_id": {"type": "integer"},
-                  "lat": {"type": "string", "description": "Latitude as string (e.g., '51.5074')"},
-                  "lon": {"type": "string", "description": "Longitude as string (e.g., '-0.1278')"},
+                  "place_id": {"type": "integer"},
+                  "lat": {"type": "string", "description": "Latitude"},
+                  "lon": {"type": "string", "description": "Longitude"},
                   "display_name": {"type": "string", "description": "Full human-readable address"},
-                  "class": {"type": "string", "description": "OSM object class (e.g., 'place', 'boundary')"},
-                  "type": {"type": "string", "description": "OSM object type (e.g., 'city', 'administrative')"},
-                  "importance": {"type": "number", "description": "Result relevance score (0-1)"},
-                  "boundingbox": {
-                    "type": "array",
-                    "description": "Bounding box [min_lat, max_lat, min_lon, max_lon]",
-                    "items": {"type": "string"}
-                  },
+                  "type": {"type": "string", "description": "Place type"},
+                  "importance": {"type": "number", "description": "Relevance score 0-1"},
                   "address": {
                     "type": "object",
                     "description": "Structured address components",
                     "properties": {
-                      "city": {"type": ["string", "null"]},
-                      "country": {"type": ["string", "null"]},
-                      "country_code": {"type": ["string", "null"]},
-                      "state": {"type": ["string", "null"]},
-                      "postcode": {"type": ["string", "null"]}
+                      "road": {"type": "string"},
+                      "city": {"type": "string"},
+                      "state": {"type": "string"},
+                      "country": {"type": "string"},
+                      "country_code": {"type": "string"},
+                      "postcode": {"type": "string"}
                     }
+                  },
+                  "boundingbox": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Bounding box [south, north, west, east]"
                   }
                 }
               }
@@ -93,21 +88,17 @@
   },
   {
     "name": "Nominatim_reverse_geocode",
-    "description": "Reverse geocode geographic coordinates (latitude/longitude) into a human-readable address using OpenStreetMap Nominatim. Returns the full address, place name, OSM type, and structured address components for a given point on the map. Useful for converting GPS coordinates to location names.",
+    "description": "Reverse geocode latitude/longitude coordinates to a human-readable address using OpenStreetMap Nominatim. Converts geographic coordinates into structured address information including street, city, country. No authentication required.",
     "parameter": {
       "type": "object",
       "properties": {
         "lat": {
           "type": "number",
-          "description": "Latitude in decimal degrees (e.g., 51.5074 for London, 48.8584 for Paris)"
+          "description": "Latitude in decimal degrees. Examples: 48.8582 (Paris), 51.5007 (London), 40.7484 (New York)"
         },
         "lon": {
           "type": "number",
-          "description": "Longitude in decimal degrees (e.g., -0.1278 for London, 2.2945 for Paris)"
-        },
-        "zoom": {
-          "type": ["integer", "null"],
-          "description": "Level of detail for result: 3=country, 8=state, 10=city, 14=suburb, 16=street, 18=building (default 18)"
+          "description": "Longitude in decimal degrees. Examples: 2.2945 (Paris), -0.1246 (London), -73.9967 (New York)"
         }
       },
       "required": ["lat", "lon"]
@@ -115,18 +106,17 @@
     "fields": {
       "endpoint": "https://nominatim.openstreetmap.org/reverse",
       "params": {
-        "format": "json",
-        "addressdetails": "1"
+        "format": "json"
       },
       "headers": {
-        "User-Agent": "ToolUniverse/1.0 (scientific research tool)"
+        "User-Agent": "ToolUniverse/1.0 +https://github.com/ToolUniverse"
       }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"lat": 51.5074, "lon": -0.1278},
-      {"lat": 48.8584, "lon": 2.2945, "zoom": 14},
-      {"lat": 40.7484, "lon": -73.9967, "zoom": 16}
+      {"lat": 48.8582, "lon": 2.2945},
+      {"lat": 51.5007, "lon": -0.1246},
+      {"lat": 35.6895, "lon": 139.6917}
     ],
     "return_schema": {
       "oneOf": [
@@ -135,118 +125,23 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Reverse geocoding result for the given coordinates",
+              "description": "Reverse geocoding result",
               "properties": {
                 "place_id": {"type": "integer"},
-                "osm_type": {"type": "string"},
-                "osm_id": {"type": "integer"},
                 "lat": {"type": "string"},
                 "lon": {"type": "string"},
-                "display_name": {"type": "string", "description": "Full human-readable address string"},
+                "display_name": {"type": "string", "description": "Full address"},
                 "address": {
                   "type": "object",
                   "description": "Structured address components",
                   "properties": {
-                    "road": {"type": ["string", "null"]},
-                    "suburb": {"type": ["string", "null"]},
-                    "city": {"type": ["string", "null"]},
-                    "state": {"type": ["string", "null"]},
-                    "country": {"type": ["string", "null"]},
-                    "country_code": {"type": ["string", "null"]},
-                    "postcode": {"type": ["string", "null"]}
+                    "road": {"type": "string"},
+                    "city": {"type": "string"},
+                    "state": {"type": "string"},
+                    "postcode": {"type": "string"},
+                    "country": {"type": "string"},
+                    "country_code": {"type": "string"}
                   }
-                },
-                "boundingbox": {"type": "array", "items": {"type": "string"}}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Nominatim_get_details",
-    "description": "Get detailed information about a specific OpenStreetMap place by its OSM type and ID. Returns comprehensive data including local and international name translations, address hierarchy, linked places, and administrative details. The OSM type (N=node, W=way, R=relation) and OSM ID can be obtained from geocoding results or directly from OpenStreetMap. Provides much richer data than geocoding, including all name translations, parent administrative units, and Wikipedia/Wikidata links.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "osmtype": {
-          "type": "string",
-          "description": "OSM object type: 'N' (node), 'W' (way), or 'R' (relation)"
-        },
-        "osmid": {
-          "type": "integer",
-          "description": "OSM object ID (e.g., 240109189 for Berlin, 65606 for London relation)"
-        },
-        "addressdetails": {
-          "type": ["integer", "null"],
-          "description": "Include address hierarchy: 1=yes, 0=no (default 0)"
-        },
-        "linkedplaces": {
-          "type": ["integer", "null"],
-          "description": "Include linked places: 1=yes, 0=no (default 1)"
-        },
-        "accept-language": {
-          "type": ["string", "null"],
-          "description": "Preferred language for response names (e.g., 'en', 'de', 'fr')"
-        }
-      },
-      "required": ["osmtype", "osmid"]
-    },
-    "fields": {
-      "endpoint": "https://nominatim.openstreetmap.org/details",
-      "params": {
-        "format": "json"
-      },
-      "headers": {
-        "User-Agent": "ToolUniverse/1.0 (scientific research tool)"
-      }
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"osmtype": "N", "osmid": 240109189},
-      {"osmtype": "R", "osmid": 65606, "addressdetails": 1},
-      {"osmtype": "R", "osmid": 62422, "addressdetails": 1}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed information about the OSM place",
-              "properties": {
-                "place_id": {"type": "integer", "description": "Nominatim internal place ID"},
-                "osm_type": {"type": "string", "description": "OSM type (N/W/R)"},
-                "osm_id": {"type": "integer", "description": "OSM object ID"},
-                "category": {"type": "string", "description": "OSM feature category (place, boundary, amenity)"},
-                "type": {"type": "string", "description": "OSM feature type (city, administrative, restaurant)"},
-                "admin_level": {"type": ["integer", "null"], "description": "Administrative level (2=country, 4=state, 6=county, 8=city)"},
-                "localname": {"type": ["string", "null"], "description": "Primary local name of the place"},
-                "names": {
-                  "type": "object",
-                  "description": "All name translations (name:en, name:de, name:fr, etc.)"
-                },
-                "addresstags": {
-                  "type": "object",
-                  "description": "Address-related tags (city, postcode, street, etc.)"
-                },
-                "extratags": {
-                  "type": "object",
-                  "description": "Extra tags including wikipedia, wikidata, population, website"
-                },
-                "calculated_importance": {"type": ["number", "null"], "description": "Calculated importance score"},
-                "geometry": {
-                  "type": "object",
-                  "description": "GeoJSON geometry of the place"
                 }
               }
             },

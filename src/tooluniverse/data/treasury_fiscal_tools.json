@@ -1,0 +1,316 @@
+[
+  {
+    "name": "TreasuryFiscal_get_national_debt",
+    "description": "Get the US total public debt outstanding (debt to the penny) from the US Treasury Fiscal Data API. Returns daily figures for debt held by the public, intragovernmental holdings, and total public debt outstanding in exact dollar amounts. Data updated each business day. Useful for tracking US national debt trends, fiscal policy analysis, and economic research. Returns the 10 most recent records by default, sorted newest first. Example: the latest record shows total public debt around $38.7 trillion.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": ["string", "null"],
+          "description": "Filter expression in format 'field:operator:value'. Examples: 'record_date:gte:2024-01-01' (from Jan 2024), 'record_date:eq:2026-01-31' (specific date). Operators: eq, lt, lte, gt, gte. Multiple filters separated by commas."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field, prefix with '-' for descending. Default: '-record_date' (newest first). Examples: '-record_date', 'record_date'."
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated list of fields to return. Available: record_date, debt_held_public_amt, intragov_hold_amt, tot_pub_debt_out_amt, src_line_nbr, record_fiscal_year, record_fiscal_quarter, record_calendar_year, record_calendar_quarter, record_calendar_month, record_calendar_day. Default: all fields."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny",
+      "params": {
+        "sort": "-record_date",
+        "page[size]": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"filter": "record_date:gte:2026-01-01"},
+      {"fields": "record_date,tot_pub_debt_out_amt"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Treasury debt to penny response",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "record_date": {"type": "string", "description": "Record date (YYYY-MM-DD)"},
+                      "debt_held_public_amt": {"type": "string", "description": "Debt held by the public in dollars"},
+                      "intragov_hold_amt": {"type": "string", "description": "Intragovernmental holdings in dollars"},
+                      "tot_pub_debt_out_amt": {"type": "string", "description": "Total public debt outstanding in dollars"},
+                      "record_fiscal_year": {"type": "string", "description": "Fiscal year"},
+                      "record_calendar_year": {"type": "string", "description": "Calendar year"}
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer", "description": "Number of records returned"},
+                    "total-count": {"type": "integer", "description": "Total matching records"},
+                    "total-pages": {"type": "integer", "description": "Total pages available"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TreasuryFiscal_get_exchange_rates",
+    "description": "Get US Treasury quarterly exchange rates for foreign currencies against the US dollar. The Treasury Department publishes official exchange rates used by federal agencies for currency conversion. Covers 150+ countries with quarterly updates. Useful for international trade analysis, currency research, and cross-border financial calculations. Returns the 10 most recent records by default. Example: Canada exchange rate is about 1.37 CAD per USD.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": ["string", "null"],
+          "description": "Filter expression. Examples: 'country:eq:Canada', 'country:eq:Japan,record_date:gte:2024-01-01'. Multiple filters separated by commas. Operators: eq, lt, lte, gt, gte, in."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field with optional '-' prefix for descending. Default: '-record_date'. Examples: '-record_date', 'country', 'exchange_rate'."
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields to return. Available: record_date, country, currency, country_currency_desc, exchange_rate, effective_date, src_line_nbr, record_fiscal_year, record_fiscal_quarter, record_calendar_year, record_calendar_quarter, record_calendar_month, record_calendar_day."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange",
+      "params": {
+        "sort": "-record_date",
+        "page[size]": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"filter": "country:eq:Canada"},
+      {"filter": "country:eq:Japan"},
+      {"filter": "country:eq:Euro Zone,record_date:gte:2024-01-01", "fields": "record_date,country,exchange_rate"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Treasury exchange rates response",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "record_date": {"type": "string", "description": "Record date (YYYY-MM-DD)"},
+                      "country": {"type": "string", "description": "Country name"},
+                      "currency": {"type": ["string", "null"], "description": "Currency name"},
+                      "country_currency_desc": {"type": ["string", "null"], "description": "Country-Currency description"},
+                      "exchange_rate": {"type": "string", "description": "Exchange rate (foreign currency per USD)"},
+                      "effective_date": {"type": ["string", "null"], "description": "Effective date"}
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "total-count": {"type": "integer"},
+                    "total-pages": {"type": "integer"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TreasuryFiscal_get_interest_rates",
+    "description": "Get average interest rates on US Treasury securities (Bills, Notes, Bonds, TIPS, FRNs). Published monthly by the US Treasury, showing the weighted average interest rate for each class of government debt. Useful for yield analysis, fiscal cost estimation, and understanding government borrowing costs. Returns the 10 most recent records by default. Example: Treasury Notes average about 3.2% and Bonds about 3.4% as of January 2026.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": ["string", "null"],
+          "description": "Filter expression. Examples: 'security_desc:eq:Treasury Notes', 'record_date:gte:2024-01-01'. Security types include: Treasury Bills, Treasury Notes, Treasury Bonds, Treasury Inflation-Protected Securities (TIPS), Treasury Floating Rate Notes (FRN), Federal Financing Bank, Total Marketable, Total Non-marketable, Total Interest-bearing Debt."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field with optional '-' prefix for descending. Default: '-record_date'."
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields. Available: record_date, security_type_desc, security_desc, avg_interest_rate_amt, src_line_nbr, record_fiscal_year, record_fiscal_quarter, record_calendar_year, record_calendar_quarter, record_calendar_month, record_calendar_day."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates",
+      "params": {
+        "sort": "-record_date",
+        "page[size]": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"filter": "security_desc:eq:Treasury Notes"},
+      {"filter": "record_date:gte:2025-01-01", "fields": "record_date,security_desc,avg_interest_rate_amt"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Treasury average interest rates response",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "record_date": {"type": "string", "description": "Record date (YYYY-MM-DD)"},
+                      "security_type_desc": {"type": "string", "description": "Security type (Marketable, Non-marketable)"},
+                      "security_desc": {"type": "string", "description": "Security description (e.g., Treasury Notes)"},
+                      "avg_interest_rate_amt": {"type": "string", "description": "Average interest rate as percentage"}
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "total-count": {"type": "integer"},
+                    "total-pages": {"type": "integer"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TreasuryFiscal_get_debt_breakdown",
+    "description": "Get the monthly statement of the public debt (MSPD) showing a detailed breakdown of US debt by security type and class. Includes Marketable (Bills, Notes, Bonds, TIPS, FRN) and Non-marketable (Savings Bonds, Government Account Series) securities with amounts held by the public and intragovernmental holdings in millions of dollars. Published monthly. Useful for analyzing the composition of US national debt. Returns 10 records by default.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": ["string", "null"],
+          "description": "Filter expression. Examples: 'security_type_desc:eq:Marketable', 'security_class_desc:eq:Bills', 'record_date:gte:2025-01-01'. Security types: Marketable, Non-marketable, Total Public Debt Outstanding. Security classes: Bills, Notes, Bonds, TIPS, FRN, Savings Bonds, Government Account Series."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field with '-' prefix for descending. Default: '-record_date'."
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields. Available: record_date, security_type_desc, security_class_desc, debt_held_public_mil_amt, intragov_hold_mil_amt, total_mil_amt, src_line_nbr, record_fiscal_year, record_fiscal_quarter, record_calendar_year."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/debt/mspd/mspd_table_1",
+      "params": {
+        "sort": "-record_date",
+        "page[size]": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"filter": "security_type_desc:eq:Marketable"},
+      {"filter": "security_class_desc:eq:Notes,record_date:gte:2025-01-01", "fields": "record_date,security_class_desc,total_mil_amt"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Monthly statement of public debt response",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "record_date": {"type": "string", "description": "Record date (YYYY-MM-DD)"},
+                      "security_type_desc": {"type": "string", "description": "Security type (Marketable, Non-marketable)"},
+                      "security_class_desc": {"type": "string", "description": "Security class (Bills, Notes, Bonds, etc.)"},
+                      "debt_held_public_mil_amt": {"type": "string", "description": "Debt held by the public in millions of dollars"},
+                      "intragov_hold_mil_amt": {"type": "string", "description": "Intragovernmental holdings in millions"},
+                      "total_mil_amt": {"type": "string", "description": "Total in millions of dollars"}
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "total-count": {"type": "integer"},
+                    "total-pages": {"type": "integer"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

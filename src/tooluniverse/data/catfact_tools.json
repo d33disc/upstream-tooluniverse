@@ -1,0 +1,133 @@
+[
+  {
+    "name": "CatFact_get_facts",
+    "description": "Get random cat facts from the CatFact Ninja API. Returns interesting and fun facts about cats. No authentication required. Useful for trivia applications, educational content, chatbot responses, or entertainment features.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of facts to return per page (1-1000). Default: 10. Example: 5"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://catfact.ninja/facts",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"limit": 5},
+      {"limit": 3, "page": 1},
+      {"limit": 10}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Cat facts response data",
+              "properties": {
+                "current_page": {"type": "integer", "description": "Current page number"},
+                "data": {
+                  "type": "array",
+                  "description": "Array of cat fact objects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "fact": {"type": "string", "description": "The cat fact text"},
+                      "length": {"type": "integer", "description": "Character length of the fact"}
+                    }
+                  }
+                },
+                "last_page": {"type": "integer", "description": "Last page number"},
+                "total": {"type": "integer", "description": "Total number of facts available"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "CatFact_get_breeds",
+    "description": "List cat breeds from the CatFact Ninja API. Returns breed names, countries of origin, coats, and patterns. No authentication required. Useful for building pet-related applications or educational content about cat breeds.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of breeds to return per page (1-100). Default: 25"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://catfact.ninja/breeds",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"limit": 10},
+      {"limit": 5, "page": 2},
+      {"limit": 20}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Cat breeds response data",
+              "properties": {
+                "current_page": {"type": "integer", "description": "Current page number"},
+                "data": {
+                  "type": "array",
+                  "description": "Array of cat breed objects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "breed": {"type": "string", "description": "Breed name"},
+                      "country": {"type": "string", "description": "Country of origin"},
+                      "origin": {"type": "string", "description": "Origin description"},
+                      "coat": {"type": "string", "description": "Coat type (e.g., 'Short', 'Long', 'Semi-long')"},
+                      "pattern": {"type": "string", "description": "Coat pattern (e.g., 'Solid', 'Tabby', 'Colorpoint')"}
+                    }
+                  }
+                },
+                "last_page": {"type": "integer", "description": "Last page number"},
+                "total": {"type": "integer", "description": "Total number of breeds"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
