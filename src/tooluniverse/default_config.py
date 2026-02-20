@@ -689,6 +689,10 @@ default_tool_files = {
     "mousemine": os.path.join(current_dir, "data", "mousemine_tools.json"),
     # TargetMine - InterMine data warehouse for drug target discovery
     "targetmine": os.path.join(current_dir, "data", "targetmine_tools.json"),
+    # iCite - NIH citation metrics, RCR, APT scores for PubMed publications
+    "icite": os.path.join(current_dir, "data", "icite_tools.json"),
+    # scite - smart citation tallies (supporting/contradicting/mentioning)
+    "scite": os.path.join(current_dir, "data", "scite_tools.json"),
     # VEuPathDB - eukaryotic pathogen, vector and host genomics
     "veupathdb": os.path.join(current_dir, "data", "veupathdb_tools.json"),
     # GeneNetwork Extended - trait and dataset detail info
