@@ -1,0 +1,123 @@
+[
+  {
+    "name": "MemeAPI_get_random_meme",
+    "description": "Get a random internet meme from Reddit using the Meme API (meme-api.com). Returns meme title, image URL, subreddit source, author, upvotes, and NSFW/spoiler flags. Optionally filter by subreddit. No authentication required. Useful for entertainment applications, social media bots, and humor generation.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "subreddit": {
+          "type": ["string", "null"],
+          "description": "Optional Reddit subreddit to get meme from. Examples: 'memes', 'dankmemes', 'me_irl', 'wholesomememes', 'programmerhumor', 'science', 'history'. Default: random from top meme subreddits"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://meme-api.com/gimme",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"subreddit": "programmerhumor"},
+      {"subreddit": "wholesomememes"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random meme data",
+              "properties": {
+                "postLink": {"type": "string", "description": "URL to the Reddit post"},
+                "subreddit": {"type": "string", "description": "Source subreddit"},
+                "title": {"type": "string", "description": "Meme title from Reddit post"},
+                "url": {"type": "string", "description": "Direct URL to the meme image"},
+                "nsfw": {"type": "boolean", "description": "Whether the meme is NSFW"},
+                "spoiler": {"type": "boolean"},
+                "author": {"type": "string", "description": "Reddit username of poster"},
+                "ups": {"type": "integer", "description": "Number of Reddit upvotes"},
+                "preview": {"type": "array", "description": "Array of preview image URLs in different sizes"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "MemeAPI_get_multiple_memes",
+    "description": "Get multiple random memes at once from Reddit using the Meme API (meme-api.com). Returns up to 50 memes in a single request, optionally filtered by subreddit. Each meme includes title, image URL, subreddit, author, and upvote count. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Number of memes to return (1-50). Default: 5"
+        },
+        "subreddit": {
+          "type": ["string", "null"],
+          "description": "Optional Reddit subreddit to get memes from. Examples: 'memes', 'programmerhumor', 'wholesomememes', 'science'"
+        }
+      },
+      "required": ["count"]
+    },
+    "fields": {
+      "endpoint": "https://meme-api.com/gimme/{count}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"count": 3},
+      {"count": 5, "subreddit": "programmerhumor"},
+      {"count": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Multiple random memes",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of memes returned"},
+                "memes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "postLink": {"type": "string"},
+                      "subreddit": {"type": "string"},
+                      "title": {"type": "string"},
+                      "url": {"type": "string"},
+                      "nsfw": {"type": "boolean"},
+                      "author": {"type": "string"},
+                      "ups": {"type": "integer"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -1037,6 +1037,12 @@ default_tool_files = {
     "bigdatacloud": os.path.join(current_dir, "data", "bigdatacloud_tools.json"),
     # Animal Facts + RandomFox - animal images and educational facts
     "animal_facts": os.path.join(current_dir, "data", "animal_facts_tools.json"),
+    # Hacker News Algolia - search tech stories/comments on HN
+    "hackernews": os.path.join(current_dir, "data", "hackernews_tools.json"),
+    # Meme API - random memes from Reddit subreddits
+    "meme_api": os.path.join(current_dir, "data", "meme_api_tools.json"),
+    # Chess.com Public API - player profiles, stats, titled players
+    "chesscom": os.path.join(current_dir, "data", "chesscom_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

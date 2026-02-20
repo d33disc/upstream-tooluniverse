@@ -1,0 +1,148 @@
+[
+  {
+    "name": "HackerNews_search_stories",
+    "description": "Search Hacker News stories, comments, and jobs using the Algolia HN Search API. Access 500K+ stories from the tech/startup community. Returns story title, author, score, URL, comment count, and creation date. Supports filtering by type (story, comment, job, poll). No authentication required. Useful for tech news research, trend analysis, and finding developer discussions.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query. Examples: 'python programming', 'machine learning', 'startup', 'open source', 'AI tools', 'React'"
+        },
+        "tags": {
+          "type": ["string", "null"],
+          "description": "Filter by content type. Values: 'story' (top-level posts), 'comment', 'ask_hn', 'show_hn', 'job', 'poll'. Default: story. Combine with comma: 'story,ask_hn'"
+        },
+        "hitsPerPage": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (1-20). Default: 10"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://hn.algolia.com/api/v1/search",
+      "params": {"tags": "story", "hitsPerPage": 10}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "python programming"},
+      {"query": "machine learning"},
+      {"query": "startup funding", "hitsPerPage": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Hacker News search results",
+              "properties": {
+                "hits": {
+                  "type": "array",
+                  "description": "List of matching stories",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "objectID": {"type": "string", "description": "HN story ID"},
+                      "title": {"type": "string", "description": "Story title"},
+                      "url": {"type": ["string", "null"], "description": "External URL"},
+                      "author": {"type": "string"},
+                      "points": {"type": ["integer", "null"], "description": "Upvotes/score"},
+                      "num_comments": {"type": ["integer", "null"]},
+                      "created_at": {"type": "string", "description": "ISO 8601 timestamp"}
+                    }
+                  }
+                },
+                "nbHits": {"type": "integer", "description": "Total matching results"},
+                "page": {"type": "integer"},
+                "nbPages": {"type": "integer"},
+                "hitsPerPage": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "HackerNews_get_recent_stories",
+    "description": "Get the most recent Hacker News stories using the Algolia HN Search API, sorted by recency. Returns stories with full metadata. No authentication required. Useful for monitoring the latest discussions on Hacker News.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": ["string", "null"],
+          "description": "Optional search query to filter recent stories. Leave empty to get latest stories"
+        },
+        "tags": {
+          "type": ["string", "null"],
+          "description": "Filter by content type: 'story', 'ask_hn', 'show_hn', 'job'. Default: story"
+        },
+        "hitsPerPage": {
+          "type": ["integer", "null"],
+          "description": "Number of results (1-20). Default: 10"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://hn.algolia.com/api/v1/search_by_date",
+      "params": {"tags": "story", "hitsPerPage": 10}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"query": "rust programming"},
+      {"tags": "ask_hn", "hitsPerPage": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Recent Hacker News stories",
+              "properties": {
+                "hits": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "objectID": {"type": "string"},
+                      "title": {"type": "string"},
+                      "url": {"type": ["string", "null"]},
+                      "author": {"type": "string"},
+                      "points": {"type": ["integer", "null"]},
+                      "num_comments": {"type": ["integer", "null"]},
+                      "created_at": {"type": "string"}
+                    }
+                  }
+                },
+                "nbHits": {"type": "integer"},
+                "page": {"type": "integer"},
+                "hitsPerPage": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
