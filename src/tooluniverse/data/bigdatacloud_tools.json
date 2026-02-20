@@ -1,0 +1,68 @@
+[
+  {
+    "name": "BigDataCloud_reverse_geocode",
+    "description": "Reverse geocode latitude/longitude coordinates to a human-readable location using BigDataCloud API. Returns country, city, region, postcode, continent, and plus code. No authentication required. Supports 15 locality languages. Faster and more detailed than many alternatives for converting GPS coordinates to addresses.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude in decimal degrees (-90 to 90). Examples: 48.8566 (Paris), 40.7128 (New York), 51.5074 (London), 35.6762 (Tokyo), -33.8688 (Sydney)"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude in decimal degrees (-180 to 180). Examples: 2.3522 (Paris), -74.0060 (New York), -0.1278 (London), 139.6503 (Tokyo), 151.2093 (Sydney)"
+        },
+        "localityLanguage": {
+          "type": ["string", "null"],
+          "description": "Language code for locality names. Default: 'en'. Examples: 'en', 'fr', 'de', 'ja', 'zh', 'es', 'ar'"
+        }
+      },
+      "required": ["latitude", "longitude"]
+    },
+    "fields": {
+      "endpoint": "https://api.bigdatacloud.net/data/reverse-geocode-client",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"latitude": 48.8566, "longitude": 2.3522},
+      {"latitude": 40.7128, "longitude": -74.0060},
+      {"latitude": 35.6762, "longitude": 139.6503}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Reverse geocoded location data",
+              "properties": {
+                "latitude": {"type": "number"},
+                "longitude": {"type": "number"},
+                "continent": {"type": "string", "description": "Continent name"},
+                "continentCode": {"type": "string"},
+                "countryName": {"type": "string", "description": "Full country name"},
+                "countryCode": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+                "principalSubdivision": {"type": "string", "description": "State, province, or region"},
+                "principalSubdivisionCode": {"type": "string"},
+                "city": {"type": "string", "description": "City name"},
+                "locality": {"type": "string", "description": "Locality or neighborhood"},
+                "postcode": {"type": "string", "description": "Postal code"},
+                "plusCode": {"type": "string", "description": "Google Plus Code for the location"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

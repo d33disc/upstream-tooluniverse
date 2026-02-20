@@ -1033,6 +1033,10 @@ default_tool_files = {
     "timeapi": os.path.join(current_dir, "data", "timeapi_tools.json"),
     # ExchangeRate-API - current foreign exchange rates for 166 currencies
     "exchangerate": os.path.join(current_dir, "data", "exchangerate_tools.json"),
+    # BigDataCloud - reverse geocode lat/lng to country, city, region (no auth)
+    "bigdatacloud": os.path.join(current_dir, "data", "bigdatacloud_tools.json"),
+    # Animal Facts + RandomFox - animal images and educational facts
+    "animal_facts": os.path.join(current_dir, "data", "animal_facts_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

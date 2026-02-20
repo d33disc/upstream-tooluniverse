@@ -1,0 +1,93 @@
+[
+  {
+    "name": "SomeRandomAPI_get_animal_fact",
+    "description": "Get a random animal image URL and interesting fact for various animals using the Some Random API. Returns a cute animal image and an educational fact. Supports dogs, cats, pandas, foxes, birds, kangaroos, koalas, and more. No authentication required. Useful for educational applications, fun bots, and animal trivia.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "animal": {
+          "type": "string",
+          "description": "Animal type. Values: 'dog', 'cat', 'panda', 'fox', 'bird', 'kangaroo', 'koala', 'redpanda', 'raccoon'"
+        }
+      },
+      "required": ["animal"]
+    },
+    "fields": {
+      "endpoint": "https://some-random-api.com/animal/{animal}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"animal": "dog"},
+      {"animal": "cat"},
+      {"animal": "panda"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random animal image and fact",
+              "properties": {
+                "image": {"type": "string", "description": "URL to a random animal image"},
+                "fact": {"type": "string", "description": "Interesting educational fact about the animal"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RandomFox_get_fox_image",
+    "description": "Get a random fox image URL using the RandomFox API (randomfox.ca). Returns a unique fox image URL and a direct link. Over 100 unique fox images in the database. No authentication required. Useful for entertainment, testing image loading, or nature applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://randomfox.ca/floof/",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random fox image data",
+              "properties": {
+                "image": {"type": "string", "description": "Direct URL to fox image"},
+                "link": {"type": "string", "description": "Link to the RandomFox page for this image"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
