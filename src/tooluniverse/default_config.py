@@ -711,6 +711,10 @@ default_tool_files = {
     "datacite": os.path.join(current_dir, "data", "datacite_tools.json"),
     # Figshare - open-access research repository for datasets, figures, code, posters
     "figshare": os.path.join(current_dir, "data", "figshare_tools.json"),
+    # Human Protein Atlas - protein expression across tissues, subcellular location, disease, cancer
+    "human_protein_atlas": os.path.join(
+        current_dir, "data", "human_protein_atlas_tools.json"
+    ),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
