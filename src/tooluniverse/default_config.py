@@ -655,6 +655,24 @@ default_tool_files = {
     "cpic": os.path.join(current_dir, "data", "cpic_tools.json"),
     # PDB-REDO - Re-refined PDB structures with improved quality metrics
     "pdb_redo": os.path.join(current_dir, "data", "pdb_redo_tools.json"),
+    # BMRB - Biological Magnetic Resonance Data Bank (NMR data for proteins and metabolites)
+    "bmrb": os.path.join(current_dir, "data", "bmrb_tools.json"),
+    # PharmVar - Pharmacogene Variation Consortium (star allele definitions)
+    "pharmvar": os.path.join(current_dir, "data", "pharmvar_tools.json"),
+    # Catalogue of Life - Global species index (2M+ species from 165+ databases)
+    "col": os.path.join(current_dir, "data", "col_tools.json"),
+    # MassBank Europe - Open-access MS spectral library for metabolomics and environmental chemistry
+    "massbank": os.path.join(current_dir, "data", "massbank_tools.json"),
+    # LOTUS - Natural products database (750K+ structure-organism pairs)
+    "lotus": os.path.join(current_dir, "data", "lotus_tools.json"),
+    # MSigDB - Molecular Signatures Database (33K+ gene sets for GSEA)
+    "msigdb": os.path.join(current_dir, "data", "msigdb_tools.json"),
+    # HumanMine - InterMine data warehouse for human/mouse/rat genomics
+    "humanmine": os.path.join(current_dir, "data", "humanmine_tools.json"),
+    # VariantValidator - HGVS variant validation and nomenclature conversion
+    "variant_validator": os.path.join(
+        current_dir, "data", "variant_validator_tools.json"
+    ),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
