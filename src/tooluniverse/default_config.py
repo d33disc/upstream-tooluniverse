@@ -1085,6 +1085,10 @@ default_tool_files = {
     "tvmaze_ext": os.path.join(current_dir, "data", "tvmaze_ext_tools.json"),
     # Where the ISS At - real-time ISS position and velocity
     "wheretheissat": os.path.join(current_dir, "data", "wheretheissat_tools.json"),
+    # Corporate BS Generator - random corporate buzzword phrase generation
+    "corporate_bs": os.path.join(current_dir, "data", "corporate_bs_tools.json"),
+    # Wikipedia extended - featured daily content and on-this-day events
+    "wikipedia_ext": os.path.join(current_dir, "data", "wikipedia_ext_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
