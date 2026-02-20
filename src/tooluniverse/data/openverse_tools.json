@@ -1,0 +1,113 @@
+[
+  {
+    "name": "OpenVerse_search_images",
+    "description": "Search Creative Commons licensed images from the Openverse API (formerly Creative Commons Search). Openverse indexes 700M+ openly licensed images from Flickr, Wikimedia, museums, and other sources. Returns image metadata including URL, license type (CC BY, CC BY-SA, CC0, etc.), creator, source, and tags. Useful for finding freely reusable scientific illustrations, nature photos, and educational images.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query. Examples: 'DNA structure', 'coral reef', 'microscopy cells', 'CRISPR', 'protein structure', 'galaxy nebula'"
+        },
+        "license": {
+          "type": ["string", "null"],
+          "description": "License type filter. Values: 'cc0' (public domain), 'by' (CC BY), 'by-sa' (CC BY-SA), 'by-nc' (CC BY-NC), 'by-nd' (CC BY-ND), 'pdm' (Public Domain Mark). Comma-separate for multiple."
+        },
+        "license_type": {
+          "type": ["string", "null"],
+          "description": "License type category. Values: 'commercial' (can be used commercially), 'modification' (can be modified)"
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Filter by image source. Examples: 'flickr', 'wikimedia', 'met', 'europeana', 'smithsonian'"
+        },
+        "extension": {
+          "type": ["string", "null"],
+          "description": "File format filter. Values: 'jpg', 'png', 'gif', 'svg'"
+        },
+        "page_size": {
+          "type": ["integer", "null"],
+          "description": "Number of results (default 20, max 500)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.openverse.org/v1/images/",
+      "params": {
+        "page_size": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "DNA double helix", "license": "cc0", "page_size": 5},
+      {"q": "coral reef underwater", "license_type": "commercial", "page_size": 5},
+      {"q": "galaxy nebula astronomy", "source": "wikimedia", "page_size": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Creative Commons image search results",
+              "properties": {
+                "result_count": {"type": "integer", "description": "Total matching images"},
+                "page_count": {"type": "integer", "description": "Total pages"},
+                "page_size": {"type": "integer"},
+                "page": {"type": "integer"},
+                "results": {
+                  "type": "array",
+                  "description": "List of images",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "Image ID"},
+                      "title": {"type": ["string", "null"], "description": "Image title"},
+                      "url": {"type": "string", "description": "Direct image URL"},
+                      "thumbnail": {"type": ["string", "null"], "description": "Thumbnail URL"},
+                      "creator": {"type": ["string", "null"], "description": "Creator/photographer name"},
+                      "creator_url": {"type": ["string", "null"], "description": "Creator profile URL"},
+                      "license": {"type": "string", "description": "License type (cc0, by, by-sa, etc.)"},
+                      "license_url": {"type": ["string", "null"], "description": "License full URL"},
+                      "provider": {"type": "string", "description": "Data provider (flickr, wikimedia, etc.)"},
+                      "source": {"type": "string", "description": "Source website"},
+                      "tags": {
+                        "type": ["array", "null"],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {"type": "string"},
+                            "accuracy": {"type": ["number", "null"]}
+                          }
+                        },
+                        "description": "Image tags"
+                      },
+                      "foreign_landing_url": {"type": "string", "description": "Source page URL"},
+                      "attribution": {"type": "string", "description": "Attribution text for use"},
+                      "width": {"type": ["integer", "null"]},
+                      "height": {"type": ["integer", "null"]},
+                      "filetype": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

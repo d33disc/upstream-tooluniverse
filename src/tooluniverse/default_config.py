@@ -891,6 +891,14 @@ default_tool_files = {
     "cocktaildb": os.path.join(current_dir, "data", "cocktaildb_tools.json"),
     # CountriesNow - country and city geographic data (227 countries with ISO codes)
     "countriesnow": os.path.join(current_dir, "data", "countriesnow_tools.json"),
+    # Openverse - Creative Commons licensed images (700M+ from Flickr, Wikimedia, museums)
+    "openverse": os.path.join(current_dir, "data", "openverse_tools.json"),
+    # US College Scorecard - higher education data (6000+ schools, admission rates, costs)
+    "college_scorecard": os.path.join(
+        current_dir, "data", "college_scorecard_tools.json"
+    ),
+    # FEC - US Federal Election Commission candidate and financial data
+    "fec": os.path.join(current_dir, "data", "fec_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

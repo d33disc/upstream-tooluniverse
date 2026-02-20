@@ -1,0 +1,103 @@
+[
+  {
+    "name": "FEC_search_candidates",
+    "description": "Search for US federal election candidates in the Federal Election Commission (FEC) database. Returns candidates for President, Senate, and House elections with party affiliation, election cycle, district, and campaign finance status. Uses DEMO_KEY for basic access. Useful for political science research, election studies, and democracy analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": ["string", "null"],
+          "description": "Candidate name search. Examples: 'Biden', 'Trump', 'Sanders', 'Warren'"
+        },
+        "party": {
+          "type": ["string", "null"],
+          "description": "Party affiliation code. Examples: 'DEM' (Democrat), 'REP' (Republican), 'IND' (Independent), 'LIB' (Libertarian), 'GRE' (Green)"
+        },
+        "office": {
+          "type": ["string", "null"],
+          "description": "Office sought. Values: 'P' (President), 'S' (Senate), 'H' (House)"
+        },
+        "state": {
+          "type": ["string", "null"],
+          "description": "State code for Senate/House candidates. Examples: 'CA', 'NY', 'TX'"
+        },
+        "election_year": {
+          "type": ["integer", "null"],
+          "description": "Election year. Examples: 2024, 2022, 2020"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Results per page (default 20, max 100)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.open.fec.gov/v1/candidates/",
+      "params": {
+        "api_key": "DEMO_KEY",
+        "per_page": "10",
+        "sort": "-election_years"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"party": "DEM", "office": "P", "election_year": 2024, "per_page": 5},
+      {"party": "REP", "office": "S", "state": "CA", "per_page": 5},
+      {"name": "Biden", "per_page": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "FEC candidate search results",
+              "properties": {
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer", "description": "Total matching candidates"},
+                    "page": {"type": "integer"},
+                    "per_page": {"type": "integer"},
+                    "pages": {"type": "integer"}
+                  }
+                },
+                "results": {
+                  "type": "array",
+                  "description": "List of candidates",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "candidate_id": {"type": "string", "description": "FEC candidate ID"},
+                      "name": {"type": "string", "description": "Candidate name"},
+                      "party": {"type": ["string", "null"], "description": "Party affiliation code"},
+                      "party_full": {"type": ["string", "null"], "description": "Full party name"},
+                      "office": {"type": ["string", "null"], "description": "Office (P/S/H)"},
+                      "office_full": {"type": ["string", "null"], "description": "Full office name"},
+                      "state": {"type": ["string", "null"], "description": "State"},
+                      "district": {"type": ["string", "null"], "description": "Congressional district"},
+                      "election_districts": {"type": "array", "items": {"type": "string"}},
+                      "election_years": {"type": "array", "items": {"type": "integer"}, "description": "Election years active"},
+                      "cycles": {"type": "array", "items": {"type": "integer"}},
+                      "candidate_status": {"type": ["string", "null"], "description": "C=candidate, F=future, N=not yet registered, P=prior, A=abandoned"},
+                      "incumbent_challenge": {"type": ["string", "null"], "description": "I=incumbent, C=challenger, O=open"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
