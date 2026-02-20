@@ -1,0 +1,243 @@
+[
+  {
+    "name": "RESTCountries_get_by_code",
+    "description": "Get detailed country information by ISO 3166-1 alpha-2 or alpha-3 code using the REST Countries API. Returns capital, population, area, currencies, languages, flag, borders, and geographic data. Useful when you have a country code (e.g., from another API) and need full country details. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 (e.g., 'US', 'DE', 'JP') or alpha-3 (e.g., 'USA', 'DEU', 'JPN') country code"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated list of fields to return. Examples: 'name,capital,population', 'name,currencies,languages,area'. Default: all fields"
+        }
+      },
+      "required": ["code"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/alpha/{code}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"code": "US", "fields": "name,capital,population,currencies"},
+      {"code": "DEU", "fields": "name,capital,region,languages"},
+      {"code": "JP", "fields": "name,population,area,borders"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Country data array (single item for exact code match)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "object", "properties": {"common": {"type": "string"}, "official": {"type": "string"}}},
+                  "capital": {"type": "array", "items": {"type": "string"}},
+                  "region": {"type": "string"},
+                  "subregion": {"type": ["string", "null"]},
+                  "population": {"type": "integer"},
+                  "area": {"type": "number"},
+                  "languages": {"type": "object"},
+                  "currencies": {"type": "object"},
+                  "borders": {"type": "array", "items": {"type": "string"}},
+                  "cca2": {"type": "string"},
+                  "cca3": {"type": "string"},
+                  "flag": {"type": "string"},
+                  "flags": {"type": "object"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RESTCountries_get_by_currency",
+    "description": "Find all countries that use a specific currency using the REST Countries API. Returns full country data for all nations using the given currency code or name. Useful for economic analysis, currency research, and international trade studies. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Currency code (e.g., 'EUR', 'USD', 'GBP') or currency name (e.g., 'euro', 'dollar', 'pound')"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields to return. Examples: 'name,capital,currencies', 'name,population,region'"
+        }
+      },
+      "required": ["currency"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/currency/{currency}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"currency": "EUR", "fields": "name,capital,currencies"},
+      {"currency": "USD", "fields": "name,capital,population"},
+      {"currency": "GBP", "fields": "name,region,currencies"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of countries using the specified currency",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "object", "properties": {"common": {"type": "string"}, "official": {"type": "string"}}},
+                  "capital": {"type": "array", "items": {"type": "string"}},
+                  "region": {"type": "string"},
+                  "population": {"type": "integer"},
+                  "currencies": {"type": "object"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RESTCountries_get_by_language",
+    "description": "Find all countries where a specific language is spoken using the REST Countries API. Returns country data for all nations with the given language. Useful for linguistic research, translation planning, and cultural studies. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Language name (e.g., 'french', 'spanish', 'arabic', 'chinese') or ISO 639-1/639-2 code"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields to return. Examples: 'name,languages,population', 'name,capital,region'"
+        }
+      },
+      "required": ["language"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/lang/{language}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"language": "french", "fields": "name,capital,languages,region"},
+      {"language": "spanish", "fields": "name,population,languages"},
+      {"language": "arabic", "fields": "name,capital,region"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of countries where the specified language is spoken",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "object", "properties": {"common": {"type": "string"}, "official": {"type": "string"}}},
+                  "capital": {"type": "array", "items": {"type": "string"}},
+                  "region": {"type": "string"},
+                  "population": {"type": "integer"},
+                  "languages": {"type": "object"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RESTCountries_get_by_subregion",
+    "description": "Get all countries in a geographic subregion using the REST Countries API. Returns country data for all nations in a subregion such as 'Northern Europe', 'Southeast Asia', 'Western Africa', etc. More specific than region-level queries. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "subregion": {
+          "type": "string",
+          "description": "Geographic subregion. Examples: 'Northern Europe', 'Southeast Asia', 'Western Africa', 'South America', 'Central America', 'Eastern Europe', 'Western Europe', 'Middle Africa', 'Caribbean'"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated fields to return. Examples: 'name,capital,population', 'name,cca2,area'"
+        }
+      },
+      "required": ["subregion"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/subregion/{subregion}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"subregion": "Northern Europe", "fields": "name,capital,population"},
+      {"subregion": "Southeast Asia", "fields": "name,capital,languages"},
+      {"subregion": "South America", "fields": "name,population,area"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of all countries in the specified subregion",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "object", "properties": {"common": {"type": "string"}, "official": {"type": "string"}}},
+                  "capital": {"type": "array", "items": {"type": "string"}},
+                  "population": {"type": "integer"},
+                  "area": {"type": "number"},
+                  "languages": {"type": "object"},
+                  "cca2": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

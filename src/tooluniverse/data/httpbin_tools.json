@@ -1,0 +1,173 @@
+[
+  {
+    "name": "HTTPBin_generate_uuid",
+    "description": "Generate a random UUID (v4) using the httpbin.org service. Returns a universally unique identifier. No authentication required. Useful for generating unique IDs for testing, prototyping, or any application needing random identifiers.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://httpbin.org/uuid",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "UUID response",
+              "properties": {
+                "uuid": {"type": "string", "description": "A randomly generated UUID v4 string (e.g., '9a088122-3320-4392-93ef-fe91a24afa41')"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "HTTPBin_get_ip",
+    "description": "Get the origin (public) IP address of the requesting client using httpbin.org. No authentication required. Useful for testing network configurations, checking proxy behavior, or determining the external IP address.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://httpbin.org/ip",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "IP address response",
+              "properties": {
+                "origin": {"type": "string", "description": "The origin IP address of the request"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "HTTPBin_get_user_agent",
+    "description": "Get the User-Agent header of the requesting client using httpbin.org. No authentication required. Useful for testing HTTP clients, debugging request headers, or checking what user agent string is being sent.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://httpbin.org/user-agent",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "User-Agent response",
+              "properties": {
+                "user-agent": {"type": "string", "description": "The User-Agent header string from the request"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "HTTPBin_get_headers",
+    "description": "Get the request headers as seen by the server using httpbin.org. Returns all HTTP headers sent in the request. No authentication required. Useful for debugging HTTP requests, inspecting headers, or testing proxy and middleware header modifications.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://httpbin.org/headers",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Headers response",
+              "properties": {
+                "headers": {
+                  "type": "object",
+                  "description": "Dictionary of all request headers and their values"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

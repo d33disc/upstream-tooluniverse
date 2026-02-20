@@ -1,0 +1,161 @@
+[
+  {
+    "name": "TimeAPI_get_current_time_by_timezone",
+    "description": "Get the current date and time for any timezone using the TimeAPI.io service. Returns year, month, day, hour, minute, seconds, full datetime string, timezone name, day of week, and DST status. Supports 597 timezones. No authentication required. Useful for scheduling, time zone conversions, and international applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "IANA timezone name. Examples: 'America/New_York', 'Europe/London', 'Asia/Tokyo', 'Australia/Sydney', 'UTC', 'America/Los_Angeles', 'Europe/Berlin'"
+        }
+      },
+      "required": ["timeZone"]
+    },
+    "fields": {
+      "endpoint": "https://timeapi.io/api/time/current/zone",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"timeZone": "America/New_York"},
+      {"timeZone": "Europe/London"},
+      {"timeZone": "Asia/Tokyo"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Current time information for the timezone",
+              "properties": {
+                "year": {"type": "integer"},
+                "month": {"type": "integer"},
+                "day": {"type": "integer"},
+                "hour": {"type": "integer"},
+                "minute": {"type": "integer"},
+                "seconds": {"type": "integer"},
+                "milliSeconds": {"type": "integer"},
+                "dateTime": {"type": "string", "description": "ISO 8601 datetime string"},
+                "date": {"type": "string", "description": "Date in MM/DD/YYYY format"},
+                "time": {"type": "string", "description": "Time in HH:MM format"},
+                "timeZone": {"type": "string", "description": "IANA timezone name"},
+                "dayOfWeek": {"type": "string", "description": "Day name (Monday, Tuesday, etc.)"},
+                "dstActive": {"type": "boolean", "description": "Whether Daylight Saving Time is active"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TimeAPI_get_current_time_by_coordinates",
+    "description": "Get the current date and time for a geographic location (latitude/longitude) using the TimeAPI.io service. Automatically detects the timezone for the coordinates. Returns full datetime, timezone name, and DST status. No authentication required. Useful when you have a location but not the timezone name.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude in decimal degrees (-90 to 90). Examples: 40.7128 (New York), 51.5074 (London), 35.6762 (Tokyo), 48.8566 (Paris)"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude in decimal degrees (-180 to 180). Examples: -74.0060 (New York), -0.1278 (London), 139.6503 (Tokyo), 2.3522 (Paris)"
+        }
+      },
+      "required": ["latitude", "longitude"]
+    },
+    "fields": {
+      "endpoint": "https://timeapi.io/api/time/current/coordinate",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"latitude": 40.7128, "longitude": -74.0060},
+      {"latitude": 51.5074, "longitude": -0.1278},
+      {"latitude": 35.6762, "longitude": 139.6503}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Current time for the geographic location",
+              "properties": {
+                "year": {"type": "integer"},
+                "month": {"type": "integer"},
+                "day": {"type": "integer"},
+                "hour": {"type": "integer"},
+                "minute": {"type": "integer"},
+                "seconds": {"type": "integer"},
+                "dateTime": {"type": "string", "description": "ISO 8601 datetime string"},
+                "date": {"type": "string"},
+                "time": {"type": "string"},
+                "timeZone": {"type": "string", "description": "Detected IANA timezone name"},
+                "dayOfWeek": {"type": "string"},
+                "dstActive": {"type": "boolean"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TimeAPI_list_timezones",
+    "description": "Get a complete list of all available IANA timezone identifiers from TimeAPI.io. Returns 500+ timezone names organized by region (Africa/, America/, Asia/, Europe/, Pacific/, etc.). Useful for building timezone selection interfaces, validating timezone inputs, and discovering available timezone options. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://timeapi.io/api/timezone/availabletimezones",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of all available IANA timezone identifiers",
+              "items": {"type": "string"}
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

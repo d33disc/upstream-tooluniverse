@@ -1,0 +1,225 @@
+[
+  {
+    "name": "Blockchain_get_ticker",
+    "description": "Get current Bitcoin exchange rates in 20+ fiat currencies from Blockchain.info. Returns 15-minute delayed price, last traded price, and buy/sell prices for each currency. Useful for Bitcoin price monitoring, currency conversion, and financial analysis. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://blockchain.info/ticker",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Bitcoin prices keyed by currency code (USD, EUR, GBP, etc.)",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "15m": {"type": "number", "description": "15-minute delayed price"},
+                  "last": {"type": "number", "description": "Last traded price"},
+                  "buy": {"type": "number", "description": "Current buy price"},
+                  "sell": {"type": "number", "description": "Current sell price"},
+                  "symbol": {"type": "string", "description": "Currency symbol"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Blockchain_get_rawblock",
+    "description": "Get detailed Bitcoin block data by block hash from the Blockchain.info API. Returns block header fields (version, previous hash, merkle root, timestamp, difficulty, nonce) and all transactions in the block. Useful for blockchain analysis, transaction verification, and Bitcoin research. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "block_hash": {
+          "type": "string",
+          "description": "Bitcoin block hash (64-character hex string). Example: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f' (genesis block)"
+        }
+      },
+      "required": ["block_hash"]
+    },
+    "fields": {
+      "endpoint": "https://blockchain.info/rawblock/{block_hash}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"block_hash": "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"},
+      {"block_hash": "00000000000000000007878ec04bb2b2e12317804571f7d0a3a6e6064e4cf1de"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Block data",
+              "properties": {
+                "hash": {"type": "string", "description": "Block hash"},
+                "ver": {"type": "integer", "description": "Block version"},
+                "prev_block": {"type": "string", "description": "Previous block hash"},
+                "mrkl_root": {"type": "string", "description": "Merkle root"},
+                "time": {"type": "integer", "description": "Block timestamp (Unix)"},
+                "bits": {"type": "integer", "description": "Difficulty target bits"},
+                "nonce": {"type": "integer", "description": "Nonce"},
+                "n_tx": {"type": "integer", "description": "Number of transactions"},
+                "size": {"type": "integer", "description": "Block size in bytes"},
+                "block_index": {"type": "integer"},
+                "height": {"type": "integer", "description": "Block height"},
+                "tx": {"type": "array", "description": "List of transactions in the block"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Blockchain_get_rawtx",
+    "description": "Get detailed Bitcoin transaction data by transaction hash from the Blockchain.info API. Returns inputs, outputs, amounts, addresses, fees, block height, and confirmation status. Useful for transaction verification, payment tracking, and blockchain forensics. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "tx_hash": {
+          "type": "string",
+          "description": "Bitcoin transaction hash (64-character hex string, also known as txid)"
+        }
+      },
+      "required": ["tx_hash"]
+    },
+    "fields": {
+      "endpoint": "https://blockchain.info/rawtx/{tx_hash}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"tx_hash": "b6f6991d03df0e2e04dafffcd6bc418aac66049e2cd74b80f14ac86db1e3f0da"},
+      {"tx_hash": "a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Transaction data",
+              "properties": {
+                "hash": {"type": "string", "description": "Transaction hash"},
+                "ver": {"type": "integer", "description": "Transaction version"},
+                "vin_sz": {"type": "integer", "description": "Number of inputs"},
+                "vout_sz": {"type": "integer", "description": "Number of outputs"},
+                "size": {"type": "integer", "description": "Transaction size in bytes"},
+                "weight": {"type": "integer", "description": "Transaction weight"},
+                "fee": {"type": "integer", "description": "Transaction fee in satoshis"},
+                "time": {"type": "integer", "description": "Transaction timestamp (Unix)"},
+                "block_index": {"type": ["integer", "null"], "description": "Block index (null if unconfirmed)"},
+                "block_height": {"type": ["integer", "null"], "description": "Block height (null if unconfirmed)"},
+                "double_spend": {"type": "boolean"},
+                "inputs": {"type": "array", "description": "Transaction inputs"},
+                "out": {"type": "array", "description": "Transaction outputs with addresses and values"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Blockchain_get_address",
+    "description": "Get Bitcoin address balance and recent transactions from the Blockchain.info API. Returns total received, total sent, final balance, number of transactions, and recent transaction details. Useful for wallet monitoring, payment verification, and address analysis. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Bitcoin address (legacy, SegWit, or Bech32 format). Example: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' (Satoshi's address)"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of transactions to return (default 50, max 100)"
+        },
+        "offset": {
+          "type": ["integer", "null"],
+          "description": "Transaction offset for pagination"
+        }
+      },
+      "required": ["address"]
+    },
+    "fields": {
+      "endpoint": "https://blockchain.info/rawaddr/{address}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", "limit": 3},
+      {"address": "3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy", "limit": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Address data",
+              "properties": {
+                "hash160": {"type": "string", "description": "Hash160 of the address"},
+                "address": {"type": "string", "description": "Bitcoin address"},
+                "n_tx": {"type": "integer", "description": "Total number of transactions"},
+                "n_unredeemed": {"type": "integer", "description": "Number of unspent outputs"},
+                "total_received": {"type": "integer", "description": "Total received in satoshis"},
+                "total_sent": {"type": "integer", "description": "Total sent in satoshis"},
+                "final_balance": {"type": "integer", "description": "Current balance in satoshis"},
+                "txs": {"type": "array", "description": "Recent transactions"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

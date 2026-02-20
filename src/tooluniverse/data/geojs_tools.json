@@ -1,0 +1,62 @@
+[
+  {
+    "name": "GeoJS_get_geo",
+    "description": "Get IP geolocation data from GeoJS. Returns geographic information for a given IP address including country, city, region, latitude/longitude, timezone, ASN, and organization. If no IP is specified, returns data for the requester's IP. Useful for IP-based location lookups, network analysis, and geographic targeting. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "IP address to geolocate. Examples: '8.8.8.8' (Google DNS), '1.1.1.1' (Cloudflare). Supports IPv4 and IPv6."
+        }
+      },
+      "required": ["ip"]
+    },
+    "fields": {
+      "endpoint": "https://get.geojs.io/v1/ip/geo/{ip}.json",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"ip": "8.8.8.8"},
+      {"ip": "1.1.1.1"},
+      {"ip": "208.67.222.222"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Geolocation data for the IP address",
+              "properties": {
+                "ip": {"type": "string", "description": "The IP address queried"},
+                "country": {"type": "string", "description": "Country name"},
+                "country_code": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+                "country_code3": {"type": "string", "description": "ISO 3166-1 alpha-3 country code"},
+                "continent_code": {"type": "string", "description": "Continent code (NA, EU, AS, AF, SA, OC, AN)"},
+                "city": {"type": ["string", "null"], "description": "City name (may be empty for some IPs)"},
+                "region": {"type": ["string", "null"], "description": "State/province/region name"},
+                "latitude": {"type": "string", "description": "Latitude coordinate"},
+                "longitude": {"type": "string", "description": "Longitude coordinate"},
+                "timezone": {"type": "string", "description": "IANA timezone (e.g., 'America/Chicago')"},
+                "asn": {"type": "integer", "description": "Autonomous System Number"},
+                "organization": {"type": "string", "description": "AS organization string"},
+                "organization_name": {"type": "string", "description": "Organization name"},
+                "accuracy": {"type": "integer", "description": "Accuracy radius in km"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

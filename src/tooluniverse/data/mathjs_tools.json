@@ -1,0 +1,46 @@
+[
+  {
+    "name": "MathJS_evaluate",
+    "description": "Evaluate mathematical expressions using the MathJS API. Supports arithmetic, algebra, trigonometry, logarithms, constants (pi, e), unit conversions, and more. Returns the computed result as a string. Useful for scientific calculations, unit conversions, and mathematical computations that need server-side evaluation. No authentication required. Examples: '2*(7-3)', 'sqrt(16)+sin(pi/2)', '5 inches to cm', 'det([1,2;3,4])'.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "expr": {
+          "type": "string",
+          "description": "Mathematical expression to evaluate. Supports: arithmetic (+,-,*,/,^), functions (sqrt, sin, cos, tan, log, exp, abs, round, ceil, floor), constants (pi, e, i), matrices ([1,2;3,4]), units (5 inches to cm), complex numbers. URL-encode special characters if needed."
+        }
+      },
+      "required": ["expr"]
+    },
+    "fields": {
+      "endpoint": "https://api.mathjs.org/v4/",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"expr": "2*(7-3)"},
+      {"expr": "sqrt(16)+sin(pi/2)"},
+      {"expr": "5 inches to cm"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "string",
+              "description": "The computed result of the mathematical expression as a string"
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

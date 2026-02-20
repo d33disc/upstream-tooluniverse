@@ -1,0 +1,172 @@
+[
+  {
+    "name": "BoredAPI_get_random_activity",
+    "description": "Get a random activity suggestion from the Bored API. Returns an activity with metadata including type, participants needed, price estimate, accessibility, duration, and kid-friendliness. No authentication required. Useful for overcoming boredom, team-building ideas, or generating activity recommendations.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://bored-api.appbrewery.com/random",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random activity suggestion",
+              "properties": {
+                "activity": {"type": "string", "description": "The suggested activity"},
+                "availability": {"type": "number", "description": "Availability factor (0.0 to 1.0)"},
+                "type": {"type": "string", "description": "Activity type: education, recreational, social, diy, charity, cooking, relaxation, music, busywork"},
+                "participants": {"type": "integer", "description": "Number of participants needed"},
+                "price": {"type": "number", "description": "Cost factor (0.0 = free, 1.0 = expensive)"},
+                "accessibility": {"type": "string", "description": "Accessibility level: 'Few to no challenges', 'Minor challenges', 'Major challenges'"},
+                "duration": {"type": "string", "description": "Estimated duration: minutes, hours, days, weeks"},
+                "kidFriendly": {"type": "boolean", "description": "Whether the activity is suitable for kids"},
+                "link": {"type": "string", "description": "URL with more info about the activity (may be empty)"},
+                "key": {"type": "string", "description": "Unique activity key/ID"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "BoredAPI_filter_activities",
+    "description": "Filter activities from the Bored API by type and number of participants. Returns a list of matching activities. Activity types include: education, recreational, social, diy, charity, cooking, relaxation, music, busywork. Useful for finding group activities, solo activities, or activities of a specific category.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": ["string", "null"],
+          "description": "Activity type to filter by. Options: education, recreational, social, diy, charity, cooking, relaxation, music, busywork"
+        },
+        "participants": {
+          "type": ["integer", "null"],
+          "description": "Filter by exact number of participants (1-8)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://bored-api.appbrewery.com/filter",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"type": "education", "participants": 1},
+      {"type": "social"},
+      {"type": "cooking", "participants": 2}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matching activities",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "activity": {"type": "string", "description": "The suggested activity"},
+                  "availability": {"type": "number", "description": "Availability factor (0.0 to 1.0)"},
+                  "type": {"type": "string", "description": "Activity type"},
+                  "participants": {"type": "integer", "description": "Number of participants needed"},
+                  "price": {"type": "number", "description": "Cost factor (0.0 = free, 1.0 = expensive)"},
+                  "accessibility": {"type": "string", "description": "Accessibility level"},
+                  "duration": {"type": "string", "description": "Estimated duration"},
+                  "kidFriendly": {"type": "boolean", "description": "Whether suitable for kids"},
+                  "link": {"type": "string", "description": "URL with more info"},
+                  "key": {"type": "string", "description": "Unique activity key"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "BoredAPI_get_activity_by_key",
+    "description": "Get a specific activity by its unique key from the Bored API. Useful for retrieving a previously seen activity suggestion or for bookmarking and sharing specific activities.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The unique activity key. Example: '2715253'"
+        }
+      },
+      "required": ["key"]
+    },
+    "fields": {
+      "endpoint": "https://bored-api.appbrewery.com/activity/{key}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"key": "2715253"},
+      {"key": "3943506"},
+      {"key": "4704256"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Activity details",
+              "properties": {
+                "activity": {"type": "string", "description": "The suggested activity"},
+                "availability": {"type": "number", "description": "Availability factor (0.0 to 1.0)"},
+                "type": {"type": "string", "description": "Activity type"},
+                "participants": {"type": "integer", "description": "Number of participants needed"},
+                "price": {"type": "number", "description": "Cost factor (0.0 = free, 1.0 = expensive)"},
+                "accessibility": {"type": "string", "description": "Accessibility level"},
+                "duration": {"type": "string", "description": "Estimated duration"},
+                "kidFriendly": {"type": "boolean", "description": "Whether suitable for kids"},
+                "link": {"type": "string", "description": "URL with more info"},
+                "key": {"type": "string", "description": "Unique activity key"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

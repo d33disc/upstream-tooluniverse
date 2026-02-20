@@ -1,0 +1,57 @@
+[
+  {
+    "name": "ExchangeRate_get_latest_rates",
+    "description": "Get current foreign exchange rates for 166 currencies using the ExchangeRate-API free endpoint. Returns all exchange rates relative to a base currency. Data updated daily from IMF, ECB, and other sources. No authentication required. Useful for currency conversion, financial analysis, and international pricing.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "string",
+          "description": "Base currency ISO 4217 code to get rates relative to. Examples: 'USD' (US Dollar), 'EUR' (Euro), 'GBP' (British Pound), 'JPY' (Japanese Yen), 'CNY' (Chinese Yuan), 'AUD', 'CAD', 'CHF', 'INR'"
+        }
+      },
+      "required": ["base"]
+    },
+    "fields": {
+      "endpoint": "https://api.exchangerate-api.com/v4/latest/{base}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"base": "USD"},
+      {"base": "EUR"},
+      {"base": "GBP"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Exchange rates relative to the base currency",
+              "properties": {
+                "provider": {"type": "string"},
+                "base": {"type": "string", "description": "Base currency code"},
+                "date": {"type": "string", "description": "Date of rates (YYYY-MM-DD)"},
+                "time_last_updated": {"type": "integer", "description": "Unix timestamp of last update"},
+                "rates": {
+                  "type": "object",
+                  "description": "Map of currency code to exchange rate",
+                  "additionalProperties": {"type": "number"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,380 @@
+[
+  {
+    "name": "JSONPlaceholder_get_post",
+    "description": "Get a specific post by ID from JSONPlaceholder, a free fake REST API for testing and prototyping. Returns the post with userId, id, title, and body. Contains 100 posts total. No authentication required. Useful for testing API integrations, building prototypes, or learning REST API concepts.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "post_id": {
+          "type": "integer",
+          "description": "Post ID to retrieve (1-100). Example: 1"
+        }
+      },
+      "required": ["post_id"]
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/posts/{post_id}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"post_id": 1},
+      {"post_id": 42},
+      {"post_id": 100}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Post data",
+              "properties": {
+                "userId": {"type": "integer", "description": "ID of the user who authored the post"},
+                "id": {"type": "integer", "description": "Unique post ID"},
+                "title": {"type": "string", "description": "Post title"},
+                "body": {"type": "string", "description": "Post body text"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_list_posts",
+    "description": "List posts from JSONPlaceholder fake REST API, optionally filtered by user ID. Returns an array of posts with userId, id, title, and body. Contains 100 posts across 10 users. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": ["integer", "null"],
+          "description": "Filter posts by user ID (1-10). If omitted, returns all 100 posts."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/posts",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"userId": 1},
+      {"userId": 5},
+      {"userId": 10}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of post objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "userId": {"type": "integer", "description": "ID of the user who authored the post"},
+                  "id": {"type": "integer", "description": "Unique post ID"},
+                  "title": {"type": "string", "description": "Post title"},
+                  "body": {"type": "string", "description": "Post body text"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_get_post_comments",
+    "description": "Get comments for a specific post from JSONPlaceholder fake REST API. Returns comments with commenter name, email, and body text. Each post has 5 comments. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "post_id": {
+          "type": "integer",
+          "description": "Post ID (1-100) to get comments for"
+        }
+      },
+      "required": ["post_id"]
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/posts/{post_id}/comments",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"post_id": 1},
+      {"post_id": 5},
+      {"post_id": 42}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of comment objects for the post",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "postId": {"type": "integer", "description": "ID of the post this comment belongs to"},
+                  "id": {"type": "integer", "description": "Unique comment ID"},
+                  "name": {"type": "string", "description": "Comment subject/name"},
+                  "email": {"type": "string", "description": "Commenter's email address"},
+                  "body": {"type": "string", "description": "Comment body text"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_get_user",
+    "description": "Get a specific user profile by ID from JSONPlaceholder fake REST API. Returns detailed user data including name, username, email, address with geo coordinates, phone, website, and company information. Contains 10 users. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "User ID to retrieve (1-10)"
+        }
+      },
+      "required": ["user_id"]
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/users/{user_id}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"user_id": 1},
+      {"user_id": 5},
+      {"user_id": 10}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "User profile data",
+              "properties": {
+                "id": {"type": "integer", "description": "Unique user ID"},
+                "name": {"type": "string", "description": "Full name"},
+                "username": {"type": "string", "description": "Username"},
+                "email": {"type": "string", "description": "Email address"},
+                "address": {
+                  "type": "object",
+                  "description": "Address with street, suite, city, zipcode, and geo (lat/lng)"
+                },
+                "phone": {"type": "string", "description": "Phone number"},
+                "website": {"type": "string", "description": "Website URL"},
+                "company": {
+                  "type": "object",
+                  "description": "Company info with name, catchPhrase, and bs"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_list_users",
+    "description": "List all users from JSONPlaceholder fake REST API. Returns an array of 10 user profiles with name, username, email, address, phone, website, and company information. No authentication required. Useful for prototyping user lists or testing user management interfaces.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/users",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of user profile objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer", "description": "Unique user ID"},
+                  "name": {"type": "string", "description": "Full name"},
+                  "username": {"type": "string", "description": "Username"},
+                  "email": {"type": "string", "description": "Email address"},
+                  "phone": {"type": "string", "description": "Phone number"},
+                  "website": {"type": "string", "description": "Website URL"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_list_todos",
+    "description": "List todos from JSONPlaceholder fake REST API, optionally filtered by user ID or completion status. Contains 200 todos across 10 users. No authentication required. Useful for prototyping task management features or testing todo list interfaces.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": ["integer", "null"],
+          "description": "Filter todos by user ID (1-10)"
+        },
+        "completed": {
+          "type": ["boolean", "null"],
+          "description": "Filter by completion status (true or false)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/todos",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"userId": 1},
+      {"userId": 2, "completed": true},
+      {"userId": 5, "completed": false}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of todo items",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "userId": {"type": "integer", "description": "ID of the user who owns this todo"},
+                  "id": {"type": "integer", "description": "Unique todo ID"},
+                  "title": {"type": "string", "description": "Todo title/description"},
+                  "completed": {"type": "boolean", "description": "Whether the todo is completed"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONPlaceholder_list_photos",
+    "description": "List photos from JSONPlaceholder fake REST API, filtered by album ID. Returns photo data including title, URL, and thumbnail URL. Contains 5000 photos across 100 albums (50 photos per album). Always specify an albumId to avoid returning all 5000 photos. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "albumId": {
+          "type": "integer",
+          "description": "Album ID (1-100) to get photos from. Required to avoid massive response."
+        }
+      },
+      "required": ["albumId"]
+    },
+    "fields": {
+      "endpoint": "https://jsonplaceholder.typicode.com/photos",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"albumId": 1},
+      {"albumId": 5},
+      {"albumId": 10}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of photo objects (50 per album)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "albumId": {"type": "integer", "description": "ID of the album this photo belongs to"},
+                  "id": {"type": "integer", "description": "Unique photo ID"},
+                  "title": {"type": "string", "description": "Photo title"},
+                  "url": {"type": "string", "description": "Full-size photo URL (600x600)"},
+                  "thumbnailUrl": {"type": "string", "description": "Thumbnail photo URL (150x150)"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

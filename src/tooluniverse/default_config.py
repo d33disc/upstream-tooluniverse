@@ -993,6 +993,46 @@ default_tool_files = {
     "disease_sh": os.path.join(current_dir, "data", "disease_sh_tools.json"),
     # Official Joke API - setup/punchline jokes (general, programming, knock-knock)
     "official_joke": os.path.join(current_dir, "data", "official_joke_tools.json"),
+    # icanhazdadjoke - dad jokes (random, search by keyword, get by ID)
+    "icanhazdadjoke": os.path.join(current_dir, "data", "icanhazdadjoke_tools.json"),
+    # Useless Facts - random and daily useless/trivia facts
+    "uselessfacts": os.path.join(current_dir, "data", "uselessfacts_tools.json"),
+    # Bored API - random activity suggestions with type/participant filtering
+    "boredapi": os.path.join(current_dir, "data", "boredapi_tools.json"),
+    # HTTPBin - HTTP testing utilities (UUID generator, IP, headers, user-agent)
+    "httpbin": os.path.join(current_dir, "data", "httpbin_tools.json"),
+    # JSONPlaceholder - fake REST API for testing (posts, comments, users, todos, photos)
+    "jsonplaceholder": os.path.join(current_dir, "data", "jsonplaceholder_tools.json"),
+    # TheCatAPI - cat breeds, temperament traits, and cat images (no auth for basic access)
+    "thecatapi": os.path.join(current_dir, "data", "thecatapi_tools.json"),
+    # ZenQuotes - inspirational quotes (random, today, bulk) (no auth required)
+    "zenquotes": os.path.join(current_dir, "data", "zenquotes_tools.json"),
+    # Agify - predict age from first name
+    "agify": os.path.join(current_dir, "data", "agify_tools.json"),
+    # Blockchain.info - Bitcoin blockchain statistics
+    "blockchain": os.path.join(current_dir, "data", "blockchain_tools.json"),
+    # GeoJS - IP geolocation with country, region, city, timezone
+    "geojs": os.path.join(current_dir, "data", "geojs_tools.json"),
+    # MathJS - evaluate mathematical expressions via API
+    "mathjs": os.path.join(current_dir, "data", "mathjs_tools.json"),
+    # NASA NeoWs - Near Earth Object data (asteroids, close approaches)
+    "nasa_neows": os.path.join(current_dir, "data", "nasa_neows_tools.json"),
+    # REST Countries Extended - country details by name, region, language
+    "restcountries_ext": os.path.join(
+        current_dir, "data", "restcountries_ext_tools.json"
+    ),
+    # STRING Network - protein-protein interaction networks
+    "string_network": os.path.join(current_dir, "data", "string_network_tools.json"),
+    # UniProt Proteomes - proteome reference data
+    "uniprot_proteomes": os.path.join(
+        current_dir, "data", "uniprot_proteomes_tools.json"
+    ),
+    # wttr.in - current weather in JSON format for any city or coordinates
+    "wttr": os.path.join(current_dir, "data", "wttr_tools.json"),
+    # TimeAPI.io - current time by timezone or geographic coordinates
+    "timeapi": os.path.join(current_dir, "data", "timeapi_tools.json"),
+    # ExchangeRate-API - current foreign exchange rates for 166 currencies
+    "exchangerate": os.path.join(current_dir, "data", "exchangerate_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
