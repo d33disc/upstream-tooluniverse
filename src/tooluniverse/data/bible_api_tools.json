@@ -1,0 +1,71 @@
+[
+  {
+    "name": "BibleAPI_get_verse",
+    "description": "Get Bible verse text by reference using the Bible-API.com service. Returns the verse text, reference, translation name, and verse list. Supports common Bible translations including WEB (World English Bible), KJV, ASV, YLT, DARBY, NASB, NIV (some). No authentication required. Useful for religious research, text analysis, digital humanities, and building devotional applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string",
+          "description": "Bible verse reference. Examples: 'john 3:16', 'genesis 1:1', 'psalms 23', 'matthew 5:1-12', 'romans 8:28', '1+corinthians+13:4-7'. Use + for spaces in multi-word books."
+        },
+        "translation": {
+          "type": ["string", "null"],
+          "description": "Bible translation. Values: 'web' (World English Bible, default), 'kjv', 'asv', 'ylt', 'darby', 'nasb'"
+        }
+      },
+      "required": ["reference"]
+    },
+    "fields": {
+      "endpoint": "https://bible-api.com/{reference}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"reference": "john+3:16"},
+      {"reference": "genesis+1:1"},
+      {"reference": "psalms+23"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Bible verse data",
+              "properties": {
+                "reference": {"type": "string", "description": "Bible reference (e.g., 'John 3:16')"},
+                "verses": {
+                  "type": "array",
+                  "description": "List of verses",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "book_id": {"type": "string"},
+                      "book_name": {"type": "string"},
+                      "chapter": {"type": "integer"},
+                      "verse": {"type": "integer"},
+                      "text": {"type": "string", "description": "Verse text"}
+                    }
+                  }
+                },
+                "text": {"type": "string", "description": "Full passage text"},
+                "translation_id": {"type": "string"},
+                "translation_name": {"type": "string"},
+                "translation_note": {"type": "string"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

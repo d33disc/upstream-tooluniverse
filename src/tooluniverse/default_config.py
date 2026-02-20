@@ -1045,6 +1045,8 @@ default_tool_files = {
     "lyrics_ovh": os.path.join(current_dir, "data", "lyrics_ovh_tools.json"),
     # The Trivia API - trivia questions across 10 categories with difficulty levels
     "trivia_api": os.path.join(current_dir, "data", "trivia_api_tools.json"),
+    # Bible API - Bible verse lookup by reference with multiple translations
+    "bible_api": os.path.join(current_dir, "data", "bible_api_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
