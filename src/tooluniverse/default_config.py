@@ -1111,6 +1111,8 @@ default_tool_files = {
     "inspirehep": os.path.join(current_dir, "data", "inspirehep_tools.json"),
     # AviationWeather - METAR and TAF weather reports from FAA Aviation Weather Center
     "aviationweather": os.path.join(current_dir, "data", "aviationweather_tools.json"),
+    # IEA - International Energy Agency EV and energy statistics
+    "iea": os.path.join(current_dir, "data", "iea_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
