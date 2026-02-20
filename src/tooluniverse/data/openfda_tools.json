@@ -367,6 +367,142 @@
     }
   },
   {
+    "name": "OpenFDA_search_device_enforcement",
+    "description": "Search the FDA medical device enforcement (recall) database via openFDA. Contains medical device recalls, corrections, and removals. Use Lucene query syntax: 'classification:\"Class I\"' (most serious), 'status:Ongoing', 'recalling_firm:\"Medtronic\"'. Returns recall details including product description, reason for recall, and distribution pattern. Medical devices include implants, diagnostic equipment, surgical tools, and consumer medical devices.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": ["string", "null"],
+          "description": "Lucene query for device recalls (e.g., 'classification:\"Class I\"', 'status:Ongoing', 'product_description:pacemaker', 'recalling_firm:medtronic'). Leave null to get recent recalls."
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of results (default 5, max 100)"
+        },
+        "count": {
+          "type": ["string", "null"],
+          "description": "Field to count by (e.g., 'classification', 'status', 'recalling_firm.exact')"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fda.gov/device/enforcement.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "classification:\"Class I\"", "limit": 3},
+      {"search": "product_description:catheter", "limit": 3},
+      {"count": "classification"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "FDA medical device recall/enforcement search results",
+              "properties": {
+                "meta": {"type": "object"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "recall_number": {"type": "string"},
+                      "status": {"type": "string", "description": "Ongoing, Terminated, Completed"},
+                      "classification": {"type": "string", "description": "Class I (most serious), Class II, Class III"},
+                      "product_description": {"type": "string"},
+                      "reason_for_recall": {"type": "string"},
+                      "recalling_firm": {"type": "string"},
+                      "distribution_pattern": {"type": "string"},
+                      "recall_initiation_date": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenFDA_search_device_510k",
+    "description": "Search the FDA 510(k) premarket notification database via openFDA. Contains clearances for medical devices through the 510(k) pathway (substantial equivalence). Returns device names, applicant companies, decision dates, advisory committee classifications, and FDA decision types. Useful for medical device research, competitive landscape analysis, and understanding regulatory pathways for specific device categories.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "Lucene query for 510(k) devices (e.g., 'device_name:stethoscope', 'applicant:siemens', 'decision_date_year:2023', 'advisory_committee_description:radiology')"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of results (default 5, max 100)"
+        }
+      },
+      "required": ["search"]
+    },
+    "fields": {
+      "endpoint": "https://api.fda.gov/device/510k.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "device_name:stethoscope", "limit": 3},
+      {"search": "device_name:\"glucose monitor\"", "limit": 3},
+      {"search": "applicant:siemens AND advisory_committee_description:radiology", "limit": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "FDA 510(k) premarket notification records",
+              "properties": {
+                "meta": {"type": "object"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "k_number": {"type": "string", "description": "510(k) accession number (e.g., 'K234567')"},
+                      "device_name": {"type": "string", "description": "Device trade name"},
+                      "applicant": {"type": "string", "description": "Applicant/company name"},
+                      "decision_date": {"type": "string", "description": "FDA decision date (YYYYMMDD)"},
+                      "decision_description": {"type": "string", "description": "FDA decision (e.g., 'SUBSTANTIALLY EQUIVALENT (SESE)')"},
+                      "advisory_committee_description": {"type": "string", "description": "Device panel (e.g., 'Radiology', 'Cardiovascular')"},
+                      "product_code": {"type": "string", "description": "FDA product code"},
+                      "statement_or_summary": {"type": "string", "description": "SE statement or summary flag"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
     "name": "OpenFDA_search_food_enforcement",
     "description": "Search the FDA food enforcement (recall) database via openFDA. Contains food recalls, market withdrawals, and safety alerts. Use Lucene query syntax: 'classification:\"Class I\"' (most serious), 'status:Ongoing', 'recalling_firm:\"Company Name\"'. Returns recall details including product description, reason for recall, distribution pattern, and classification. Useful for food safety research, supply chain analysis, and identifying contamination patterns.",
     "parameter": {
