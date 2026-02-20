@@ -10,68 +10,77 @@
           "description": "Maximum number of datasets to return (default 20, max 10000). Controls pagination page size."
         }
       },
-      "required": ["limit"]
+      "required": [
+        "limit"
+      ]
     },
     "fields": {
       "endpoint": "https://www.openml.org/api/v1/json/data/list/limit/{limit}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"limit": 5},
-      {"limit": 10},
-      {"limit": 3}
+      {
+        "limit": 5
+      },
+      {
+        "limit": 10
+      },
+      {
+        "limit": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "OpenML dataset list response",
           "properties": {
             "data": {
               "type": "object",
-              "description": "OpenML dataset list response",
               "properties": {
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "dataset": {
-                      "type": "array",
-                      "description": "Array of dataset summary objects",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "did": {
-                            "type": "integer",
-                            "description": "OpenML dataset ID (use with OpenML_get_dataset)"
-                          },
-                          "name": {
-                            "type": "string",
-                            "description": "Dataset name (e.g., 'iris', 'mnist_784', 'credit-g')"
-                          },
-                          "version": {
-                            "type": "integer",
-                            "description": "Dataset version number"
-                          },
-                          "status": {
-                            "type": "string",
-                            "description": "Dataset status (active, deactivated, in_preparation)"
-                          },
-                          "format": {
-                            "type": "string",
-                            "description": "Data file format (ARFF, CSV, Sparse_ARFF)"
-                          },
-                          "file_id": {
-                            "type": "integer",
-                            "description": "Internal file ID for downloading"
-                          },
-                          "quality": {
-                            "type": "array",
-                            "description": "Dataset quality metrics (NumberOfInstances, NumberOfFeatures, NumberOfClasses, etc.)",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {"type": "string", "description": "Quality metric name"},
-                                "value": {"type": "string", "description": "Quality metric value (as string)"}
-                              }
+                "dataset": {
+                  "type": "array",
+                  "description": "Array of dataset summary objects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "did": {
+                        "type": "integer",
+                        "description": "OpenML dataset ID (use with OpenML_get_dataset)"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Dataset name (e.g., 'iris', 'mnist_784', 'credit-g')"
+                      },
+                      "version": {
+                        "type": "integer",
+                        "description": "Dataset version number"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Dataset status (active, deactivated, in_preparation)"
+                      },
+                      "format": {
+                        "type": "string",
+                        "description": "Data file format (ARFF, CSV, Sparse_ARFF)"
+                      },
+                      "file_id": {
+                        "type": "integer",
+                        "description": "Internal file ID for downloading"
+                      },
+                      "quality": {
+                        "type": "array",
+                        "description": "Dataset quality metrics (NumberOfInstances, NumberOfFeatures, NumberOfClasses, etc.)",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Quality metric name"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Quality metric value (as string)"
                             }
                           }
                         }
@@ -80,12 +89,8 @@
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -95,7 +100,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -111,120 +118,151 @@
           "description": "OpenML dataset ID number (e.g., 61 for iris, 554 for MNIST, 31 for credit-g). Obtain from OpenML_search_datasets."
         }
       },
-      "required": ["data_id"]
+      "required": [
+        "data_id"
+      ]
     },
     "fields": {
       "endpoint": "https://www.openml.org/api/v1/json/data/{data_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"data_id": 61},
-      {"data_id": 31},
-      {"data_id": 554}
+      {
+        "data_id": 61
+      },
+      {
+        "data_id": 31
+      },
+      {
+        "data_id": 554
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "OpenML dataset detail response",
           "properties": {
-            "data": {
+            "data_set_description": {
               "type": "object",
-              "description": "OpenML dataset detail response",
+              "description": "Full dataset metadata",
               "properties": {
-                "data_set_description": {
-                  "type": "object",
-                  "description": "Full dataset metadata",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Dataset ID (as string)"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Dataset name"
-                    },
-                    "version": {
-                      "type": "string",
-                      "description": "Dataset version"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Full dataset description with author info, attribute details, and usage notes"
-                    },
-                    "format": {
-                      "type": "string",
-                      "description": "Data file format (ARFF, CSV)"
-                    },
-                    "creator": {
-                      "type": ["string", "null"],
-                      "description": "Original dataset creator/author"
-                    },
-                    "collection_date": {
-                      "type": ["string", "null"],
-                      "description": "Date the data was collected"
-                    },
-                    "upload_date": {
-                      "type": "string",
-                      "description": "Date uploaded to OpenML"
-                    },
-                    "language": {
-                      "type": ["string", "null"],
-                      "description": "Language of the dataset"
-                    },
-                    "licence": {
-                      "type": ["string", "null"],
-                      "description": "Data license"
-                    },
-                    "url": {
-                      "type": "string",
-                      "description": "Direct download URL for the ARFF file"
-                    },
-                    "parquet_url": {
-                      "type": ["string", "null"],
-                      "description": "Direct download URL for the Parquet file"
-                    },
-                    "default_target_attribute": {
-                      "type": ["string", "null"],
-                      "description": "Default target/label column for classification/regression"
-                    },
-                    "citation": {
-                      "type": ["string", "null"],
-                      "description": "Citation information or URL"
-                    },
-                    "tag": {
-                      "type": "array",
-                      "description": "Tags like domain, source, associated studies",
-                      "items": {"type": "string"}
-                    },
-                    "visibility": {
-                      "type": "string",
-                      "description": "Visibility status (public, private)"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Dataset status (active, deactivated)"
-                    },
-                    "original_data_url": {
-                      "type": ["string", "null"],
-                      "description": "URL of the original data source"
-                    },
-                    "paper_url": {
-                      "type": ["string", "null"],
-                      "description": "URL of the associated paper"
-                    },
-                    "md5_checksum": {
-                      "type": ["string", "null"],
-                      "description": "MD5 checksum of the data file"
-                    }
+                "id": {
+                  "type": "string",
+                  "description": "Dataset ID (as string)"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Dataset name"
+                },
+                "version": {
+                  "type": "string",
+                  "description": "Dataset version"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Full dataset description with author info, attribute details, and usage notes"
+                },
+                "format": {
+                  "type": "string",
+                  "description": "Data file format (ARFF, CSV)"
+                },
+                "creator": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Original dataset creator/author"
+                },
+                "collection_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Date the data was collected"
+                },
+                "upload_date": {
+                  "type": "string",
+                  "description": "Date uploaded to OpenML"
+                },
+                "language": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Language of the dataset"
+                },
+                "licence": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Data license"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Direct download URL for the ARFF file"
+                },
+                "parquet_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Direct download URL for the Parquet file"
+                },
+                "default_target_attribute": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Default target/label column for classification/regression"
+                },
+                "citation": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Citation information or URL"
+                },
+                "tag": {
+                  "type": "array",
+                  "description": "Tags like domain, source, associated studies",
+                  "items": {
+                    "type": "string"
                   }
+                },
+                "visibility": {
+                  "type": "string",
+                  "description": "Visibility status (public, private)"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Dataset status (active, deactivated)"
+                },
+                "original_data_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "URL of the original data source"
+                },
+                "paper_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "URL of the associated paper"
+                },
+                "md5_checksum": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "MD5 checksum of the data file"
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -234,7 +272,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

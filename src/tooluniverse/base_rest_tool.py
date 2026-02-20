@@ -112,7 +112,11 @@ class BaseRESTTool(BaseTool):
         Returns:
             Processed response dictionary
         """
-        data = response.json()
+        try:
+            data = response.json()
+        except Exception:
+            # Non-JSON response (e.g., BibTeX, plain text) - return as string
+            data = response.text
 
         # Handle extract_path for nested data
         extract_path = self.tool_config.get("fields", {}).get("extract_path")

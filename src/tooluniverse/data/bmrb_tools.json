@@ -10,42 +10,48 @@
           "description": "BMRB entry ID (e.g., '15000', '4020', '11086')"
         }
       },
-      "required": ["entry_id"]
+      "required": [
+        "entry_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.bmrb.io/v2/entry/{entry_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"entry_id": "15000"},
-      {"entry_id": "4020"}
+      {
+        "entry_id": "15000"
+      },
+      {
+        "entry_id": "4020"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "BMRB entry NMR-STAR data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "BMRB entry NMR-STAR data",
-              "properties": {
-                "entry_id": {"type": "string", "description": "BMRB entry identifier"},
-                "saveframes": {
-                  "type": "object",
-                  "description": "NMR-STAR saveframes containing experimental data by category"
-                }
-              }
+            "entry_id": {
+              "type": "string",
+              "description": "BMRB entry identifier"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "saveframes": {
+              "type": "object",
+              "description": "NMR-STAR saveframes containing experimental data by category"
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -61,35 +67,38 @@
           "description": "BMRB entry ID (e.g., '15000', '4020')"
         }
       },
-      "required": ["entry_id"]
+      "required": [
+        "entry_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.bmrb.io/v2/entry/{entry_id}/citation"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"entry_id": "15000"},
-      {"entry_id": "11086"}
+      {
+        "entry_id": "15000"
+      },
+      {
+        "entry_id": "11086"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "string",
-              "description": "BibTeX citation string for the BMRB entry"
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "string",
+          "description": "BibTeX citation string for the BMRB entry"
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -105,52 +114,77 @@
           "description": "Search term (protein name, molecule name, or keyword). Examples: 'ubiquitin', 'calmodulin', 'insulin'"
         },
         "database": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Database to search: 'macromolecules' (proteins/nucleic acids) or 'metabolomics' (small molecules). Default searches both."
         }
       },
-      "required": ["term"]
+      "required": [
+        "term"
+      ]
     },
     "fields": {
       "endpoint": "https://api.bmrb.io/v2/search/instant"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"term": "ubiquitin", "database": "macromolecules"},
-      {"term": "caffeine", "database": "metabolomics"}
+      {
+        "term": "ubiquitin",
+        "database": "macromolecules"
+      },
+      {
+        "term": "caffeine",
+        "database": "metabolomics"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching BMRB entries",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "bmrb_id": {"type": "string", "description": "BMRB entry identifier"},
-                  "title": {"type": "string"},
-                  "authors": {"type": "array"},
-                  "link": {"type": "string"},
-                  "sub_date": {"type": "string"},
-                  "pdb_ids": {"type": "array"},
-                  "formula": {"type": "string"},
-                  "smiles": {"type": "string"}
-                }
+          "type": "array",
+          "description": "List of matching BMRB entries",
+          "items": {
+            "type": "object",
+            "properties": {
+              "bmrb_id": {
+                "type": "string",
+                "description": "BMRB entry identifier"
+              },
+              "title": {
+                "type": "string"
+              },
+              "authors": {
+                "type": "array"
+              },
+              "link": {
+                "type": "string"
+              },
+              "sub_date": {
+                "type": "string"
+              },
+              "pdb_ids": {
+                "type": "array"
+              },
+              "formula": {
+                "type": "string"
+              },
+              "smiles": {
+                "type": "string"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -166,46 +200,53 @@
           "description": "PDB entry ID (e.g., '1ubq', '1d3z', '2k39')"
         }
       },
-      "required": ["pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.bmrb.io/v2/search/get_bmrb_ids_from_pdb_id/{pdb_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"pdb_id": "1ubq"},
-      {"pdb_id": "1d3z"}
+      {
+        "pdb_id": "1ubq"
+      },
+      {
+        "pdb_id": "1d3z"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of BMRB entries linked to the PDB ID",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "bmrb_id": {"type": "string"},
-                  "match_types": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "How the link was established: 'BLAST Match' or 'Author Provided'"
-                  }
-                }
+          "type": "array",
+          "description": "List of BMRB entries linked to the PDB ID",
+          "items": {
+            "type": "object",
+            "properties": {
+              "bmrb_id": {
+                "type": "string"
+              },
+              "match_types": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "How the link was established: 'BLAST Match' or 'Author Provided'"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -221,43 +262,52 @@
           "description": "UniProt accession (e.g., 'P62988' for ubiquitin, 'P0DTD1' for SARS-CoV-2 polyprotein)"
         }
       },
-      "required": ["uniprot_id"]
+      "required": [
+        "uniprot_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.bmrb.io/v2/protein/uniprot/{uniprot_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"uniprot_id": "P62988"},
-      {"uniprot_id": "P0CG48"}
+      {
+        "uniprot_id": "P62988"
+      },
+      {
+        "uniprot_id": "P0CG48"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of BMRB entries for the UniProt protein",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "bmrb_id": {"type": "string"},
-                  "pdb_id": {"type": "string"},
-                  "link": {"type": "string"}
-                }
+          "type": "array",
+          "description": "List of BMRB entries for the UniProt protein",
+          "items": {
+            "type": "object",
+            "properties": {
+              "bmrb_id": {
+                "type": "string"
+              },
+              "pdb_id": {
+                "type": "string"
+              },
+              "link": {
+                "type": "string"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

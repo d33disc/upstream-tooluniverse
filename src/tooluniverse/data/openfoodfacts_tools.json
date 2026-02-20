@@ -10,15 +10,23 @@
           "description": "Food product name or brand to search for. Examples: 'nutella', 'coca cola', 'oreo', 'kelloggs cornflakes', 'olive oil'"
         },
         "page_size": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results per page (1-100). Default: 10"
         },
         "page": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Page number for pagination. Default: 1"
         }
       },
-      "required": ["search_terms"]
+      "required": [
+        "search_terms"
+      ]
     },
     "fields": {
       "endpoint": "https://world.openfoodfacts.org/cgi/search.pl",
@@ -31,58 +39,137 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"search_terms": "nutella", "page_size": 5},
-      {"search_terms": "coca cola", "page_size": 5},
-      {"search_terms": "olive oil", "page_size": 5}
+      {
+        "search_terms": "nutella",
+        "page_size": 5
+      },
+      {
+        "search_terms": "coca cola",
+        "page_size": 5
+      },
+      {
+        "search_terms": "olive oil",
+        "page_size": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Food product search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Food product search results",
-              "properties": {
-                "count": {"type": "integer", "description": "Total number of matching products"},
-                "page": {"type": "integer"},
-                "page_size": {"type": "integer"},
-                "products": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
+            "count": {
+              "type": "integer",
+              "description": "Total number of matching products"
+            },
+            "page": {
+              "type": "integer"
+            },
+            "page_size": {
+              "type": "integer"
+            },
+            "products": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "product_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "brands": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "nutrition_grades": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Nutri-Score: a (best) to e (worst)"
+                  },
+                  "categories": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "ingredients_text": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "nutriments": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "description": "Nutritional values per 100g",
                     "properties": {
-                      "product_name": {"type": ["string", "null"]},
-                      "brands": {"type": ["string", "null"]},
-                      "nutrition_grades": {"type": ["string", "null"], "description": "Nutri-Score: a (best) to e (worst)"},
-                      "categories": {"type": ["string", "null"]},
-                      "ingredients_text": {"type": ["string", "null"]},
-                      "nutriments": {
-                        "type": ["object", "null"],
-                        "description": "Nutritional values per 100g",
-                        "properties": {
-                          "energy-kcal_100g": {"type": ["number", "null"]},
-                          "fat_100g": {"type": ["number", "null"]},
-                          "sugars_100g": {"type": ["number", "null"]},
-                          "proteins_100g": {"type": ["number", "null"]},
-                          "salt_100g": {"type": ["number", "null"]}
-                        }
+                      "energy-kcal_100g": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
                       },
-                      "image_url": {"type": ["string", "null"]},
-                      "countries_tags": {"type": "array", "items": {"type": "string"}}
+                      "fat_100g": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "sugars_100g": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "proteins_100g": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "salt_100g": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "image_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "countries_tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -98,7 +185,9 @@
           "description": "Product barcode (EAN-13 or UPC). Examples: '3017620422003' (Nutella 400g), '0737628064502' (Annie Chun's), '8001505005592'"
         }
       },
-      "required": ["barcode"]
+      "required": [
+        "barcode"
+      ]
     },
     "fields": {
       "endpoint": "https://world.openfoodfacts.org/api/v0/product/{barcode}.json",
@@ -106,44 +195,70 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"barcode": "3017620422003"},
-      {"barcode": "0737628064502"},
-      {"barcode": "8001505005592"}
+      {
+        "barcode": "3017620422003"
+      },
+      {
+        "barcode": "0737628064502"
+      },
+      {
+        "barcode": "8001505005592"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Food product data by barcode",
           "properties": {
-            "data": {
+            "status": {
+              "type": "integer",
+              "description": "1 = product found, 0 = not found"
+            },
+            "status_verbose": {
+              "type": "string"
+            },
+            "product": {
               "type": "object",
-              "description": "Food product data by barcode",
               "properties": {
-                "status": {"type": "integer", "description": "1 = product found, 0 = not found"},
-                "status_verbose": {"type": "string"},
-                "product": {
-                  "type": "object",
-                  "properties": {
-                    "product_name": {"type": "string"},
-                    "brands": {"type": "string"},
-                    "nutrition_grades": {"type": "string"},
-                    "ingredients_text": {"type": "string"},
-                    "allergens": {"type": "string"},
-                    "nutriments": {"type": "object"},
-                    "image_url": {"type": "string"},
-                    "url": {"type": "string"}
-                  }
+                "product_name": {
+                  "type": "string"
+                },
+                "brands": {
+                  "type": "string"
+                },
+                "nutrition_grades": {
+                  "type": "string"
+                },
+                "ingredients_text": {
+                  "type": "string"
+                },
+                "allergens": {
+                  "type": "string"
+                },
+                "nutriments": {
+                  "type": "object"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

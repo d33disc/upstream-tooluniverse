@@ -10,7 +10,9 @@
           "description": "Search query for organization name, acronym, or keyword (e.g., 'MIT', 'Harvard University', 'Max Planck', 'CERN')"
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "https://api.ror.org/v2/organizations",
@@ -18,99 +20,126 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "MIT"},
-      {"query": "Harvard University"},
-      {"query": "Max Planck"}
+      {
+        "query": "MIT"
+      },
+      {
+        "query": "Harvard University"
+      },
+      {
+        "query": "Max Planck"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "ROR search results containing matching organizations",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "ROR search results containing matching organizations",
-              "properties": {
-                "number_of_results": {
-                  "type": "integer",
-                  "description": "Total number of matching organizations"
-                },
-                "items": {
-                  "type": "array",
-                  "description": "Array of matching organization objects",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Full ROR URL identifier (e.g., https://ror.org/042nb2s44)"
-                      },
-                      "names": {
-                        "type": "array",
-                        "description": "Organization names including display name, aliases, acronyms, and translations",
-                        "items": {
+            "number_of_results": {
+              "type": "integer",
+              "description": "Total number of matching organizations"
+            },
+            "items": {
+              "type": "array",
+              "description": "Array of matching organization objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Full ROR URL identifier (e.g., https://ror.org/042nb2s44)"
+                  },
+                  "names": {
+                    "type": "array",
+                    "description": "Organization names including display name, aliases, acronyms, and translations",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "string"
+                        },
+                        "types": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "lang": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "types": {
+                    "type": "array",
+                    "description": "Organization types (e.g., education, funder, company, healthcare, nonprofit, government, facility, archive)",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Organization status (active, withdrawn, inactive)"
+                  },
+                  "established": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "Year the organization was established"
+                  },
+                  "locations": {
+                    "type": "array",
+                    "description": "Geographic locations with GeoNames details",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "geonames_details": {
                           "type": "object",
                           "properties": {
-                            "value": {"type": "string"},
-                            "types": {
-                              "type": "array",
-                              "items": {"type": "string"}
+                            "country_name": {
+                              "type": "string"
                             },
-                            "lang": {"type": ["string", "null"]}
-                          }
-                        }
-                      },
-                      "types": {
-                        "type": "array",
-                        "description": "Organization types (e.g., education, funder, company, healthcare, nonprofit, government, facility, archive)",
-                        "items": {"type": "string"}
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "Organization status (active, withdrawn, inactive)"
-                      },
-                      "established": {
-                        "type": ["integer", "null"],
-                        "description": "Year the organization was established"
-                      },
-                      "locations": {
-                        "type": "array",
-                        "description": "Geographic locations with GeoNames details",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "geonames_details": {
-                              "type": "object",
-                              "properties": {
-                                "country_name": {"type": "string"},
-                                "name": {"type": "string"}
-                              }
+                            "name": {
+                              "type": "string"
                             }
                           }
                         }
-                      },
-                      "links": {
-                        "type": "array",
-                        "description": "Website and Wikipedia links",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "type": {"type": "string"},
-                            "value": {"type": "string"}
-                          }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "description": "Website and Wikipedia links",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
                         }
-                      },
-                      "external_ids": {
-                        "type": "array",
-                        "description": "External identifiers (GRID, ISNI, Wikidata, FundRef)",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "type": {"type": "string"},
-                            "all": {
-                              "type": "array",
-                              "items": {"type": "string"}
-                            }
+                      }
+                    }
+                  },
+                  "external_ids": {
+                    "type": "array",
+                    "description": "External identifiers (GRID, ISNI, Wikidata, FundRef)",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "all": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
                           }
                         }
                       }
@@ -118,12 +147,8 @@
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -133,7 +158,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -149,83 +176,95 @@
           "description": "ROR identifier. Can be the short ID (e.g., '042nb2s44') or full URL (e.g., 'https://ror.org/042nb2s44'). Find IDs using ROR_search_organizations."
         }
       },
-      "required": ["ror_id"]
+      "required": [
+        "ror_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.ror.org/v2/organizations/{ror_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"ror_id": "042nb2s44"},
-      {"ror_id": "03vek6s52"},
-      {"ror_id": "https://ror.org/042nb2s44"}
+      {
+        "ror_id": "042nb2s44"
+      },
+      {
+        "ror_id": "03vek6s52"
+      },
+      {
+        "ror_id": "https://ror.org/042nb2s44"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Detailed organization metadata from ROR",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed organization metadata from ROR",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Full ROR URL identifier"
-                },
-                "names": {
-                  "type": "array",
-                  "description": "All name variants including display name, aliases, acronyms, and translations"
-                },
-                "types": {
-                  "type": "array",
-                  "description": "Organization types (education, funder, company, etc.)",
-                  "items": {"type": "string"}
-                },
-                "status": {
-                  "type": "string",
-                  "description": "Organization status (active, withdrawn, inactive)"
-                },
-                "established": {
-                  "type": ["integer", "null"],
-                  "description": "Year established"
-                },
-                "locations": {
-                  "type": "array",
-                  "description": "Geographic locations with GeoNames details (country, city, coordinates)"
-                },
-                "links": {
-                  "type": "array",
-                  "description": "Website and Wikipedia links"
-                },
-                "external_ids": {
-                  "type": "array",
-                  "description": "Cross-references to GRID, ISNI, Wikidata, FundRef"
-                },
-                "relationships": {
-                  "type": "array",
-                  "description": "Parent, child, and related organizations",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": {"type": "string"},
-                      "label": {"type": "string"},
-                      "id": {"type": "string"}
-                    }
+            "id": {
+              "type": "string",
+              "description": "Full ROR URL identifier"
+            },
+            "names": {
+              "type": "array",
+              "description": "All name variants including display name, aliases, acronyms, and translations"
+            },
+            "types": {
+              "type": "array",
+              "description": "Organization types (education, funder, company, etc.)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "status": {
+              "type": "string",
+              "description": "Organization status (active, withdrawn, inactive)"
+            },
+            "established": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Year established"
+            },
+            "locations": {
+              "type": "array",
+              "description": "Geographic locations with GeoNames details (country, city, coordinates)"
+            },
+            "links": {
+              "type": "array",
+              "description": "Website and Wikipedia links"
+            },
+            "external_ids": {
+              "type": "array",
+              "description": "Cross-references to GRID, ISNI, Wikidata, FundRef"
+            },
+            "relationships": {
+              "type": "array",
+              "description": "Parent, child, and related organizations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
                   }
-                },
-                "domains": {
-                  "type": "array",
-                  "description": "Web domains associated with the organization",
-                  "items": {"type": "string"}
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "domains": {
+              "type": "array",
+              "description": "Web domains associated with the organization",
+              "items": {
+                "type": "string"
+              }
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -235,7 +274,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

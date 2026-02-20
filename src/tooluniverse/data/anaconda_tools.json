@@ -10,63 +10,131 @@
           "description": "Package name to search for (e.g., 'numpy', 'samtools', 'biopython', 'r-ggplot2')"
         },
         "type": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Package type filter: 'conda' (default), 'pypi', or 'standard_python'"
         }
       },
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "fields": {
       "endpoint": "https://api.anaconda.org/search"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name": "numpy"},
-      {"name": "samtools", "type": "conda"},
-      {"name": "biopython"}
+      {
+        "name": "numpy"
+      },
+      {
+        "name": "samtools",
+        "type": "conda"
+      },
+      {
+        "name": "biopython"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching conda packages from all channels",
-              "items": {
+          "type": "array",
+          "description": "List of matching conda packages from all channels",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Package name"
+              },
+              "full_name": {
+                "type": "string",
+                "description": "Full name with owner/channel (e.g., 'conda-forge/numpy')"
+              },
+              "owner": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Package owner or channel name"
+              },
+              "summary": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Brief package description"
+              },
+              "public": {
+                "type": "boolean"
+              },
+              "access": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "latest_version": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Latest available version"
+              },
+              "versions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of available version strings"
+              },
+              "platforms": {
                 "type": "object",
-                "properties": {
-                  "name": {"type": "string", "description": "Package name"},
-                  "full_name": {"type": "string", "description": "Full name with owner/channel (e.g., 'conda-forge/numpy')"},
-                  "owner": {"type": ["string", "null"], "description": "Package owner or channel name"},
-                  "summary": {"type": ["string", "null"], "description": "Brief package description"},
-                  "public": {"type": "boolean"},
-                  "access": {"type": ["string", "null"]},
-                  "latest_version": {"type": ["string", "null"], "description": "Latest available version"},
-                  "versions": {"type": "array", "items": {"type": "string"}, "description": "List of available version strings"},
-                  "platforms": {
-                    "type": "object",
-                    "description": "Platform availability map (e.g., {'linux-64': '1.26', 'osx-64': '1.26'})"
-                  },
-                  "package_types": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "Package types ('conda', 'pypi')"
-                  },
-                  "ndownloads": {"type": ["integer", "null"], "description": "Total download count"},
-                  "url": {"type": ["string", "null"], "description": "API URL for package details"},
-                  "html_url": {"type": ["string", "null"], "description": "Web URL on anaconda.org"}
-                }
+                "description": "Platform availability map (e.g., {'linux-64': '1.26', 'osx-64': '1.26'})"
+              },
+              "package_types": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Package types ('conda', 'pypi')"
+              },
+              "ndownloads": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Total download count"
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "API URL for package details"
+              },
+              "html_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Web URL on anaconda.org"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -86,64 +154,135 @@
           "description": "Exact package name (e.g., 'numpy', 'samtools', 'biopython', 'r-ggplot2')"
         }
       },
-      "required": ["channel", "package_name"]
+      "required": [
+        "channel",
+        "package_name"
+      ]
     },
     "fields": {
       "endpoint": "https://api.anaconda.org/package/{channel}/{package_name}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"channel": "conda-forge", "package_name": "numpy"},
-      {"channel": "bioconda", "package_name": "samtools"},
-      {"channel": "conda-forge", "package_name": "scipy"}
+      {
+        "channel": "conda-forge",
+        "package_name": "numpy"
+      },
+      {
+        "channel": "bioconda",
+        "package_name": "samtools"
+      },
+      {
+        "channel": "conda-forge",
+        "package_name": "scipy"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Full package details from Anaconda.org",
           "properties": {
-            "data": {
+            "name": {
+              "type": "string"
+            },
+            "full_name": {
+              "type": "string",
+              "description": "Channel/package name"
+            },
+            "summary": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Brief package summary"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Extended description"
+            },
+            "home": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Project homepage URL"
+            },
+            "public": {
+              "type": "boolean"
+            },
+            "owner": {
               "type": "object",
-              "description": "Full package details from Anaconda.org",
+              "description": "Channel/owner details",
               "properties": {
-                "name": {"type": "string"},
-                "full_name": {"type": "string", "description": "Channel/package name"},
-                "summary": {"type": ["string", "null"], "description": "Brief package summary"},
-                "description": {"type": ["string", "null"], "description": "Extended description"},
-                "home": {"type": ["string", "null"], "description": "Project homepage URL"},
-                "public": {"type": "boolean"},
-                "owner": {
-                  "type": "object",
-                  "description": "Channel/owner details",
-                  "properties": {
-                    "login": {"type": "string"},
-                    "name": {"type": ["string", "null"]},
-                    "description": {"type": ["string", "null"]},
-                    "user_type": {"type": ["string", "null"]}
-                  }
+                "login": {
+                  "type": "string"
                 },
-                "versions": {
-                  "type": "array",
-                  "items": {"type": "string"},
-                  "description": "All available version strings"
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "latest_version": {"type": ["string", "null"]},
-                "platforms": {
-                  "type": "object",
-                  "description": "Platform -> latest version mapping"
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
-                "package_types": {"type": "array", "items": {"type": "string"}},
-                "ndownloads": {"type": ["integer", "null"], "description": "Total download count"}
+                "user_type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "versions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "All available version strings"
+            },
+            "latest_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "platforms": {
+              "type": "object",
+              "description": "Platform -> latest version mapping"
+            },
+            "package_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ndownloads": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Total download count"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

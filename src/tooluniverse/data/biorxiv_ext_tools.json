@@ -17,7 +17,10 @@
           "type": "string",
           "description": "Server: 'biorxiv' for biology preprints, 'medrxiv' for health sciences preprints",
           "default": "biorxiv",
-          "enum": ["biorxiv", "medrxiv"]
+          "enum": [
+            "biorxiv",
+            "medrxiv"
+          ]
         },
         "cursor": {
           "type": "integer",
@@ -25,67 +28,124 @@
           "default": 0
         }
       },
-      "required": ["start_date", "end_date"]
+      "required": [
+        "start_date",
+        "end_date"
+      ]
     },
     "fields": {
       "endpoint": "https://api.biorxiv.org/details/{server}/{start_date}/{end_date}/{cursor}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"start_date": "2024-01-01", "end_date": "2024-01-03", "server": "biorxiv", "cursor": 0},
-      {"start_date": "2024-06-01", "end_date": "2024-06-03", "server": "medrxiv", "cursor": 0}
+      {
+        "start_date": "2024-01-01",
+        "end_date": "2024-01-03",
+        "server": "biorxiv",
+        "cursor": 0
+      },
+      {
+        "start_date": "2024-06-01",
+        "end_date": "2024-06-03",
+        "server": "medrxiv",
+        "cursor": 0
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "bioRxiv/medRxiv recent preprints response",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "bioRxiv/medRxiv recent preprints response",
-              "properties": {
-                "messages": {
-                  "type": "array",
-                  "description": "Status messages with pagination info",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "status": {"type": "string"},
-                      "interval": {"type": "string", "description": "Date range queried"},
-                      "cursor": {"type": "integer", "description": "Current cursor position"},
-                      "count": {"type": "integer", "description": "Number of results in this batch (max 100)"},
-                      "count_new_papers": {"type": "string", "description": "Total unique new papers in date range"},
-                      "total": {"type": "string", "description": "Total records including revisions"}
-                    }
-                  }
-                },
-                "collection": {
-                  "type": "array",
-                  "description": "Array of preprint metadata",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "doi": {"type": "string", "description": "bioRxiv/medRxiv DOI"},
-                      "title": {"type": "string", "description": "Preprint title"},
-                      "authors": {"type": "string", "description": "Author list as semicolon-separated string"},
-                      "author_corresponding": {"type": "string", "description": "Corresponding author name"},
-                      "author_corresponding_institution": {"type": "string", "description": "Corresponding author institution"},
-                      "date": {"type": "string", "description": "Publication date"},
-                      "version": {"type": "string", "description": "Version number"},
-                      "category": {"type": "string", "description": "Subject category (e.g., neuroscience, bioinformatics, genomics)"},
-                      "abstract": {"type": "string", "description": "Full abstract text"},
-                      "published": {"type": ["string", "null"], "description": "Published journal DOI if accepted"},
-                      "license": {"type": "string", "description": "License type"}
-                    }
+            "messages": {
+              "type": "array",
+              "description": "Status messages with pagination info",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  },
+                  "interval": {
+                    "type": "string",
+                    "description": "Date range queried"
+                  },
+                  "cursor": {
+                    "type": "integer",
+                    "description": "Current cursor position"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "Number of results in this batch (max 100)"
+                  },
+                  "count_new_papers": {
+                    "type": "string",
+                    "description": "Total unique new papers in date range"
+                  },
+                  "total": {
+                    "type": "string",
+                    "description": "Total records including revisions"
                   }
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "collection": {
+              "type": "array",
+              "description": "Array of preprint metadata",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "doi": {
+                    "type": "string",
+                    "description": "bioRxiv/medRxiv DOI"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Preprint title"
+                  },
+                  "authors": {
+                    "type": "string",
+                    "description": "Author list as semicolon-separated string"
+                  },
+                  "author_corresponding": {
+                    "type": "string",
+                    "description": "Corresponding author name"
+                  },
+                  "author_corresponding_institution": {
+                    "type": "string",
+                    "description": "Corresponding author institution"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "Publication date"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Version number"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Subject category (e.g., neuroscience, bioinformatics, genomics)"
+                  },
+                  "abstract": {
+                    "type": "string",
+                    "description": "Full abstract text"
+                  },
+                  "published": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Published journal DOI if accepted"
+                  },
+                  "license": {
+                    "type": "string",
+                    "description": "License type"
+                  }
+                }
+              }
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -95,7 +155,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

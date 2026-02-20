@@ -35,39 +35,32 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Art search results",
           "properties": {
-            "data": {
+            "pagination": {
               "type": "object",
-              "description": "Art search results",
               "properties": {
-                "pagination": {
-                  "type": "object",
-                  "properties": {
-                    "total": {"type": "integer", "description": "Total matching artworks"},
-                    "limit": {"type": "integer"},
-                    "offset": {"type": "integer"}
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "List of artwork records",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer", "description": "Artwork ID for use with ArtIC_get_artwork"},
-                      "title": {"type": "string"},
-                      "artist_display": {"type": ["string", "null"], "description": "Artist name with nationality and dates"},
-                      "date_display": {"type": ["string", "null"], "description": "Date or date range of creation"},
-                      "medium_display": {"type": ["string", "null"], "description": "Medium (e.g., Oil on canvas, Woodblock print)"},
-                      "image_id": {"type": ["string", "null"], "description": "Image identifier for IIIF image URL"}
-                    }
-                  }
-                }
+                "total": {"type": "integer", "description": "Total matching artworks"},
+                "limit": {"type": "integer"},
+                "offset": {"type": "integer"}
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "data": {
+              "type": "array",
+              "description": "List of artwork records",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer", "description": "Artwork ID for use with ArtIC_get_artwork"},
+                  "title": {"type": "string"},
+                  "artist_display": {"type": ["string", "null"], "description": "Artist name with nationality and dates"},
+                  "date_display": {"type": ["string", "null"], "description": "Date or date range of creation"},
+                  "medium_display": {"type": ["string", "null"], "description": "Medium (e.g., Oil on canvas, Woodblock print)"},
+                  "image_id": {"type": ["string", "null"], "description": "Image identifier for IIIF image URL"}
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",

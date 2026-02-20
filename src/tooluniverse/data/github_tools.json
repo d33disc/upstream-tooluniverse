@@ -10,19 +10,30 @@
           "description": "Search query with optional qualifiers. Examples: 'bioinformatics language:python stars:>100', 'protein structure prediction', 'topic:machine-learning language:python', 'alphafold protein', 'single cell RNA sequencing', 'user:deepmind'"
         },
         "sort": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Sort by: 'stars', 'forks', 'help-wanted-issues', 'updated'. Default: best match."
         },
         "order": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Sort direction: 'desc' (default) or 'asc'"
         },
         "per_page": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Results per page (default 30, max 100)"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://api.github.com/search/repositories",
@@ -32,56 +43,119 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "bioinformatics language:python stars:>500", "sort": "stars", "per_page": 5},
-      {"q": "protein structure prediction deep learning", "sort": "stars", "per_page": 5},
-      {"q": "single cell RNA sequencing topic:bioinformatics", "per_page": 5}
+      {
+        "q": "bioinformatics language:python stars:>500",
+        "sort": "stars",
+        "per_page": 5
+      },
+      {
+        "q": "protein structure prediction deep learning",
+        "sort": "stars",
+        "per_page": 5
+      },
+      {
+        "q": "single cell RNA sequencing topic:bioinformatics",
+        "per_page": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "GitHub repository search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "GitHub repository search results",
-              "properties": {
-                "total_count": {"type": "integer", "description": "Total matching repositories"},
-                "incomplete_results": {"type": "boolean"},
-                "items": {
-                  "type": "array",
-                  "description": "List of matching repositories",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "name": {"type": "string", "description": "Repository name"},
-                      "full_name": {"type": "string", "description": "owner/repo format"},
-                      "html_url": {"type": "string", "description": "Repository URL"},
-                      "description": {"type": ["string", "null"]},
-                      "stargazers_count": {"type": "integer", "description": "GitHub stars"},
-                      "forks_count": {"type": "integer"},
-                      "language": {"type": ["string", "null"]},
-                      "topics": {"type": "array", "items": {"type": "string"}},
-                      "license": {"type": ["object", "null"]},
-                      "created_at": {"type": "string"},
-                      "updated_at": {"type": "string"},
-                      "pushed_at": {"type": "string"},
-                      "size": {"type": "integer"},
-                      "open_issues_count": {"type": "integer"},
-                      "default_branch": {"type": "string"}
+            "total_count": {
+              "type": "integer",
+              "description": "Total matching repositories"
+            },
+            "incomplete_results": {
+              "type": "boolean"
+            },
+            "items": {
+              "type": "array",
+              "description": "List of matching repositories",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Repository name"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "description": "owner/repo format"
+                  },
+                  "html_url": {
+                    "type": "string",
+                    "description": "Repository URL"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "stargazers_count": {
+                    "type": "integer",
+                    "description": "GitHub stars"
+                  },
+                  "forks_count": {
+                    "type": "integer"
+                  },
+                  "language": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "topics": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
+                  },
+                  "license": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "created_at": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "type": "string"
+                  },
+                  "pushed_at": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "open_issues_count": {
+                    "type": "integer"
+                  },
+                  "default_branch": {
+                    "type": "string"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -101,7 +175,10 @@
           "description": "Repository name. Examples: 'alphafold', 'pytorch', 'pandas', 'scikit-learn', 'biopython'"
         }
       },
-      "required": ["owner", "repo"]
+      "required": [
+        "owner",
+        "repo"
+      ]
     },
     "fields": {
       "endpoint": "https://api.github.com/repos/{owner}/{repo}",
@@ -111,51 +188,118 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"owner": "deepmind", "repo": "alphafold"},
-      {"owner": "scikit-learn", "repo": "scikit-learn"},
-      {"owner": "biopython", "repo": "biopython"}
+      {
+        "owner": "deepmind",
+        "repo": "alphafold"
+      },
+      {
+        "owner": "scikit-learn",
+        "repo": "scikit-learn"
+      },
+      {
+        "owner": "biopython",
+        "repo": "biopython"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "GitHub repository details",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "GitHub repository details",
-              "properties": {
-                "id": {"type": "integer"},
-                "name": {"type": "string"},
-                "full_name": {"type": "string"},
-                "html_url": {"type": "string"},
-                "description": {"type": ["string", "null"]},
-                "stargazers_count": {"type": "integer"},
-                "forks_count": {"type": "integer"},
-                "watchers_count": {"type": "integer"},
-                "open_issues_count": {"type": "integer"},
-                "language": {"type": ["string", "null"]},
-                "topics": {"type": "array", "items": {"type": "string"}},
-                "license": {"type": ["object", "null"]},
-                "created_at": {"type": "string"},
-                "updated_at": {"type": "string"},
-                "pushed_at": {"type": "string"},
-                "default_branch": {"type": "string"},
-                "size": {"type": "integer"},
-                "homepage": {"type": ["string", "null"]},
-                "has_wiki": {"type": "boolean"},
-                "has_pages": {"type": "boolean"},
-                "archived": {"type": "boolean"},
-                "fork": {"type": "boolean"}
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "html_url": {
+              "type": "string"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "stargazers_count": {
+              "type": "integer"
+            },
+            "forks_count": {
+              "type": "integer"
+            },
+            "watchers_count": {
+              "type": "integer"
+            },
+            "open_issues_count": {
+              "type": "integer"
+            },
+            "language": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "topics": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "license": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            },
+            "pushed_at": {
+              "type": "string"
+            },
+            "default_branch": {
+              "type": "string"
+            },
+            "size": {
+              "type": "integer"
+            },
+            "homepage": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "has_wiki": {
+              "type": "boolean"
+            },
+            "has_pages": {
+              "type": "boolean"
+            },
+            "archived": {
+              "type": "boolean"
+            },
+            "fork": {
+              "type": "boolean"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -171,7 +315,9 @@
           "description": "GitHub username. Examples: 'torvalds' (Linus Torvalds), 'gvanrossum' (Guido van Rossum), 'hadley' (Hadley Wickham), 'jlord' (Jessica Lord)"
         }
       },
-      "required": ["username"]
+      "required": [
+        "username"
+      ]
     },
     "fields": {
       "endpoint": "https://api.github.com/users/{username}",
@@ -181,47 +327,127 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"username": "torvalds"},
-      {"username": "gvanrossum"},
-      {"username": "hadley"}
+      {
+        "username": "torvalds"
+      },
+      {
+        "username": "gvanrossum"
+      },
+      {
+        "username": "hadley"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "GitHub user profile information",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "GitHub user profile information",
-              "properties": {
-                "login": {"type": "string", "description": "GitHub username"},
-                "id": {"type": "integer", "description": "GitHub user ID"},
-                "avatar_url": {"type": "string", "description": "URL to user's avatar image"},
-                "html_url": {"type": "string", "description": "URL to user's GitHub profile page"},
-                "type": {"type": "string", "description": "'User' or 'Organization'"},
-                "name": {"type": ["string", "null"], "description": "Display name"},
-                "company": {"type": ["string", "null"], "description": "Company/organization affiliation"},
-                "blog": {"type": ["string", "null"], "description": "Website or blog URL"},
-                "location": {"type": ["string", "null"], "description": "User's location"},
-                "email": {"type": ["string", "null"], "description": "Public email address"},
-                "bio": {"type": ["string", "null"], "description": "User's bio/description"},
-                "twitter_username": {"type": ["string", "null"], "description": "Twitter/X username"},
-                "public_repos": {"type": "integer", "description": "Number of public repositories"},
-                "public_gists": {"type": "integer", "description": "Number of public gists"},
-                "followers": {"type": "integer", "description": "Number of followers"},
-                "following": {"type": "integer", "description": "Number of users being followed"},
-                "created_at": {"type": "string", "description": "Account creation date (ISO 8601)"},
-                "updated_at": {"type": "string", "description": "Last profile update date (ISO 8601)"}
-              }
+            "login": {
+              "type": "string",
+              "description": "GitHub username"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "id": {
+              "type": "integer",
+              "description": "GitHub user ID"
+            },
+            "avatar_url": {
+              "type": "string",
+              "description": "URL to user's avatar image"
+            },
+            "html_url": {
+              "type": "string",
+              "description": "URL to user's GitHub profile page"
+            },
+            "type": {
+              "type": "string",
+              "description": "'User' or 'Organization'"
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Display name"
+            },
+            "company": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Company/organization affiliation"
+            },
+            "blog": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Website or blog URL"
+            },
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "User's location"
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Public email address"
+            },
+            "bio": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "User's bio/description"
+            },
+            "twitter_username": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Twitter/X username"
+            },
+            "public_repos": {
+              "type": "integer",
+              "description": "Number of public repositories"
+            },
+            "public_gists": {
+              "type": "integer",
+              "description": "Number of public gists"
+            },
+            "followers": {
+              "type": "integer",
+              "description": "Number of followers"
+            },
+            "following": {
+              "type": "integer",
+              "description": "Number of users being followed"
+            },
+            "created_at": {
+              "type": "string",
+              "description": "Account creation date (ISO 8601)"
+            },
+            "updated_at": {
+              "type": "string",
+              "description": "Last profile update date (ISO 8601)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

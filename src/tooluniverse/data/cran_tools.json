@@ -10,55 +10,137 @@
           "description": "R package name (case-sensitive). Examples: 'ggplot2', 'dplyr', 'Seurat', 'DESeq2', 'tidyr', 'data.table', 'BiocManager', 'limma'"
         }
       },
-      "required": ["package"]
+      "required": [
+        "package"
+      ]
     },
     "fields": {
       "endpoint": "https://crandb.r-pkg.org/{package}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"package": "ggplot2"},
-      {"package": "dplyr"},
-      {"package": "Seurat"}
+      {
+        "package": "ggplot2"
+      },
+      {
+        "package": "dplyr"
+      },
+      {
+        "package": "Seurat"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "R package metadata from CRAN",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "R package metadata from CRAN",
-              "properties": {
-                "Package": {"type": "string", "description": "Package name"},
-                "Title": {"type": "string", "description": "Short title"},
-                "Version": {"type": "string", "description": "Current CRAN version"},
-                "Description": {"type": "string", "description": "Full package description"},
-                "License": {"type": "string", "description": "License (e.g., 'MIT + file LICENSE', 'GPL-3')"},
-                "Authors@R": {"type": ["string", "null"]},
-                "Author": {"type": ["string", "null"]},
-                "Maintainer": {"type": ["string", "null"]},
-                "URL": {"type": ["string", "null"]},
-                "Imports": {"type": ["string", "null"], "description": "Comma-separated list of required packages"},
-                "Depends": {"type": ["string", "null"], "description": "Version dependencies"},
-                "Suggests": {"type": ["string", "null"], "description": "Optional packages"},
-                "Date/Publication": {"type": ["string", "null"], "description": "Publication date on CRAN"},
-                "crandb_file_date": {"type": ["string", "null"]},
-                "date": {"type": ["string", "null"]},
-                "releases": {
-                  "type": "object",
-                  "description": "All released versions with dates"
-                }
-              }
+            "Package": {
+              "type": "string",
+              "description": "Package name"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "Title": {
+              "type": "string",
+              "description": "Short title"
+            },
+            "Version": {
+              "type": "string",
+              "description": "Current CRAN version"
+            },
+            "Description": {
+              "type": "string",
+              "description": "Full package description"
+            },
+            "License": {
+              "type": "string",
+              "description": "License (e.g., 'MIT + file LICENSE', 'GPL-3')"
+            },
+            "Authors@R": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "Author": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "Maintainer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "URL": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "Imports": {
+              "type": [
+                "object",
+                "string",
+                "null"
+              ],
+              "description": "Comma-separated list of required packages"
+            },
+            "Depends": {
+              "type": [
+                "object",
+                "string",
+                "null"
+              ],
+              "description": "Version dependencies"
+            },
+            "Suggests": {
+              "type": [
+                "object",
+                "string",
+                "null"
+              ],
+              "description": "Optional packages"
+            },
+            "Date/Publication": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Publication date on CRAN"
+            },
+            "crandb_file_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "releases": {
+              "type": [
+                "object",
+                "array"
+              ],
+              "description": "All released versions with dates"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -74,45 +156,55 @@
           "description": "R package name (case-sensitive). Examples: 'ggplot2', 'dplyr', 'Seurat', 'tidyverse', 'BiocManager'"
         }
       },
-      "required": ["package"]
+      "required": [
+        "package"
+      ]
     },
     "fields": {
       "endpoint": "https://crandb.r-pkg.org/{package}/all"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"package": "ggplot2"},
-      {"package": "dplyr"},
-      {"package": "data.table"}
+      {
+        "package": "ggplot2"
+      },
+      {
+        "package": "dplyr"
+      },
+      {
+        "package": "data.table"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "All package versions and timeline",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "All package versions and timeline",
-              "properties": {
-                "name": {"type": "string", "description": "Package name"},
-                "versions": {
-                  "type": "object",
-                  "description": "Map of version string to version metadata (title, description, imports, etc.)"
-                },
-                "timeline": {
-                  "type": "object",
-                  "description": "Map of version string to release date (ISO 8601)"
-                }
-              }
+            "name": {
+              "type": "string",
+              "description": "Package name"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "versions": {
+              "type": "object",
+              "description": "Map of version string to version metadata (title, description, imports, etc.)"
+            },
+            "timeline": {
+              "type": "object",
+              "description": "Map of version string to release date (ISO 8601)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

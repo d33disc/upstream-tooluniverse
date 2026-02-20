@@ -10,15 +10,23 @@
           "description": "One or more lat,lng coordinate pairs separated by | (pipe). Examples: '36.455556,-116.866667' (Death Valley), '48.8566,2.3522|51.5074,-0.1278' (Paris and London), '27.9881,86.9250' (Everest)"
         },
         "dataset": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Elevation dataset to use. Values: 'srtm30m' (global 30m), 'srtm90m' (global 90m), 'aster' (global 30m), 'ned10m' (US 10m), 'eudem' (Europe 25m), 'mapzen' (global). Default: srtm30m"
         },
         "interpolation": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Interpolation method. Values: 'nearest', 'bilinear', 'cubic'. Default: bilinear"
         }
       },
-      "required": ["locations"]
+      "required": [
+        "locations"
+      ]
     },
     "fields": {
       "endpoint": "https://api.opentopodata.org/v1/srtm30m",
@@ -26,48 +34,70 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"locations": "27.9881,86.9250"},
-      {"locations": "48.8566,2.3522|51.5074,-0.1278|40.7128,-74.0060"},
-      {"locations": "36.455556,-116.866667", "dataset": "srtm90m"}
+      {
+        "locations": "27.9881,86.9250"
+      },
+      {
+        "locations": "48.8566,2.3522|51.5074,-0.1278|40.7128,-74.0060"
+      },
+      {
+        "locations": "36.455556,-116.866667",
+        "dataset": "srtm90m"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Elevation data results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Elevation data results",
-              "properties": {
-                "results": {
-                  "type": "array",
-                  "description": "Elevation for each queried location",
-                  "items": {
+            "results": {
+              "type": "array",
+              "description": "Elevation for each queried location",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataset": {
+                    "type": "string",
+                    "description": "DEM dataset used"
+                  },
+                  "elevation": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Elevation in meters above sea level (null if no data)"
+                  },
+                  "location": {
                     "type": "object",
                     "properties": {
-                      "dataset": {"type": "string", "description": "DEM dataset used"},
-                      "elevation": {"type": ["number", "null"], "description": "Elevation in meters above sea level (null if no data)"},
-                      "location": {
-                        "type": "object",
-                        "properties": {
-                          "lat": {"type": "number"},
-                          "lng": {"type": "number"}
-                        }
+                      "lat": {
+                        "type": "number"
+                      },
+                      "lng": {
+                        "type": "number"
                       }
                     }
                   }
-                },
-                "status": {"type": "string", "description": "OK or error message"}
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "status": {
+              "type": "string",
+              "description": "OK or error message"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

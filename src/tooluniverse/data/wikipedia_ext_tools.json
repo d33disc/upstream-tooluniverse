@@ -18,74 +18,114 @@
           "description": "Day of month (1-31). Examples: 1, 15, 25"
         }
       },
-      "required": ["year", "month", "day"]
+      "required": [
+        "year",
+        "month",
+        "day"
+      ]
     },
     "fields": {
       "endpoint": "https://en.wikipedia.org/api/rest_v1/feed/featured/{year}/{month}/{day}",
-      "params": {}
+      "params": {},
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (scientific research; https://github.com/tooluniverse/ToolUniverse)"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"year": 2024, "month": 1, "day": 15},
-      {"year": 2024, "month": 7, "day": 4},
-      {"year": 2023, "month": 12, "day": 25}
+      {
+        "year": 2024,
+        "month": 10,
+        "day": 15
+      },
+      {
+        "year": 2024,
+        "month": 11,
+        "day": 20
+      },
+      {
+        "year": 2023,
+        "month": 12,
+        "day": 25
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Wikipedia featured content for the specified date",
           "properties": {
-            "data": {
+            "tfa": {
               "type": "object",
-              "description": "Wikipedia featured content for the specified date",
+              "description": "Today's featured article",
               "properties": {
-                "tfa": {
-                  "type": "object",
-                  "description": "Today's featured article",
-                  "properties": {
-                    "title": {"type": "string"},
-                    "extract": {"type": "string"},
-                    "description": {"type": ["string", "null"]}
-                  }
+                "title": {
+                  "type": "string"
                 },
-                "mostread": {
-                  "type": "object",
-                  "description": "Most-read articles of the day",
-                  "properties": {
-                    "articles": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {"type": "string"},
-                          "views": {"type": "integer"},
-                          "description": {"type": ["string", "null"]}
-                        }
-                      }
-                    }
-                  }
+                "extract": {
+                  "type": "string"
                 },
-                "onthisday": {
+                "description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "mostread": {
+              "type": "object",
+              "description": "Most-read articles of the day",
+              "properties": {
+                "articles": {
                   "type": "array",
-                  "description": "On-this-day historical events",
                   "items": {
                     "type": "object",
                     "properties": {
-                      "year": {"type": "integer"},
-                      "text": {"type": "string"}
+                      "title": {
+                        "type": "string"
+                      },
+                      "views": {
+                        "type": "integer"
+                      },
+                      "description": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
                     }
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "onthisday": {
+              "type": "array",
+              "description": "On-this-day historical events",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "type": "integer"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

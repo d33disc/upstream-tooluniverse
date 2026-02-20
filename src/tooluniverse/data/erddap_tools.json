@@ -10,59 +10,80 @@
           "description": "Search keyword(s) for dataset discovery. Examples: 'sea surface temperature', 'chlorophyll', 'wave height', 'salinity', 'currents', 'wind', 'MODIS', 'SST', 'bathymetry'"
         },
         "itemsPerPage": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results to return (1-100). Default: 10"
         },
         "page": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Page number for pagination. Default: 1"
         }
       },
-      "required": ["searchFor"]
+      "required": [
+        "searchFor"
+      ]
     },
     "fields": {
       "endpoint": "https://coastwatch.pfeg.noaa.gov/erddap/search/index.json",
-      "params": {"page": 1, "itemsPerPage": 10}
+      "params": {
+        "page": 1,
+        "itemsPerPage": 10
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"searchFor": "sea surface temperature", "itemsPerPage": 5},
-      {"searchFor": "chlorophyll satellite", "itemsPerPage": 5},
-      {"searchFor": "ocean salinity", "itemsPerPage": 5}
+      {
+        "searchFor": "sea surface temperature",
+        "itemsPerPage": 5
+      },
+      {
+        "searchFor": "chlorophyll satellite",
+        "itemsPerPage": 5
+      },
+      {
+        "searchFor": "ocean salinity",
+        "itemsPerPage": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "ERDDAP dataset search results",
           "properties": {
-            "data": {
+            "table": {
               "type": "object",
-              "description": "ERDDAP dataset search results",
               "properties": {
-                "table": {
-                  "type": "object",
-                  "properties": {
-                    "columnNames": {
-                      "type": "array",
-                      "description": "Column names: griddap, Subset, tabledap, ..., Title, Summary, ..., Dataset ID"
-                    },
-                    "rows": {
-                      "type": "array",
-                      "description": "List of datasets (each row matches columnNames order). Key columns: Title (index 7), Summary (index 8), Dataset ID (index 16)",
-                      "items": {"type": "array"}
-                    }
+                "columnNames": {
+                  "type": "array",
+                  "description": "Column names: griddap, Subset, tabledap, ..., Title, Summary, ..., Dataset ID"
+                },
+                "rows": {
+                  "type": "array",
+                  "description": "List of datasets (each row matches columnNames order). Key columns: Title (index 7), Summary (index 8), Dataset ID (index 16)",
+                  "items": {
+                    "type": "array"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -78,7 +99,9 @@
           "description": "ERDDAP dataset identifier. Examples: 'erdATssta8day' (AVHRR SST 8-day), 'goes_west' (GOES-18 SST), 'erdMHchla8day' (MODIS chlorophyll), 'cwwcNDBCMet' (NDBC buoy meteorological data)"
         }
       },
-      "required": ["datasetID"]
+      "required": [
+        "datasetID"
+      ]
     },
     "fields": {
       "endpoint": "https://coastwatch.pfeg.noaa.gov/erddap/info/{datasetID}/index.json",
@@ -86,40 +109,50 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"datasetID": "erdATssta8day"},
-      {"datasetID": "erdMHchla8day"},
-      {"datasetID": "cwwcNDBCMet"}
+      {
+        "datasetID": "erdATssta8day"
+      },
+      {
+        "datasetID": "osu2ChlaAnom"
+      },
+      {
+        "datasetID": "cwwcNDBCMet"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Dataset metadata and variable information",
           "properties": {
-            "data": {
+            "table": {
               "type": "object",
-              "description": "Dataset metadata and variable information",
               "properties": {
-                "table": {
-                  "type": "object",
-                  "properties": {
-                    "columnNames": {"type": "array", "description": "Column headers: Row Type, Variable Name, Attribute Name, Data Type, Value"},
-                    "rows": {
-                      "type": "array",
-                      "description": "Metadata rows. Row Type='attribute' for metadata, 'variable' for data variables",
-                      "items": {"type": "array"}
-                    }
+                "columnNames": {
+                  "type": "array",
+                  "description": "Column headers: Row Type, Variable Name, Attribute Name, Data Type, Value"
+                },
+                "rows": {
+                  "type": "array",
+                  "description": "Metadata rows. Row Type='attribute' for metadata, 'variable' for data variables",
+                  "items": {
+                    "type": "array"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

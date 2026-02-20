@@ -6,11 +6,17 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-01-31'). Defaults to today."
         }
       },
@@ -21,54 +27,121 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-01-10"},
-      {"startDate": "2024-05-01", "endDate": "2024-05-15"},
-      {"startDate": "2024-10-01", "endDate": "2024-10-07"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-01-10"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-05-15"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-10-07"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of CME events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "activityID": {"type": "string", "description": "Unique event ID (e.g., 2024-01-01T17:00:00-CME-001)"},
-                  "startTime": {"type": "string", "description": "CME start time in ISO format"},
-                  "sourceLocation": {"type": ["string", "null"], "description": "Solar source location (e.g., S14W23)"},
-                  "activeRegionNum": {"type": ["integer", "null"], "description": "NOAA active region number"},
-                  "note": {"type": "string"},
-                  "instruments": {"type": "array", "description": "Observing instruments (SOHO LASCO, STEREO)"},
-                  "cmeAnalyses": {
-                    "type": "array",
-                    "description": "CME measurements including speed, direction, half-angle",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "speed": {"type": ["number", "null"], "description": "CME speed in km/s"},
-                        "latitude": {"type": ["number", "null"]},
-                        "longitude": {"type": ["number", "null"]},
-                        "halfAngle": {"type": ["number", "null"], "description": "Half-angle in degrees"},
-                        "type": {"type": ["string", "null"], "description": "CME type (S=Slow, C=Common, O=Occasional, R=Rare, ER=Extremely Rare)"},
-                        "isMostAccurate": {"type": "boolean"}
-                      }
+          "type": "array",
+          "description": "List of CME events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "activityID": {
+                "type": "string",
+                "description": "Unique event ID (e.g., 2024-01-01T17:00:00-CME-001)"
+              },
+              "startTime": {
+                "type": "string",
+                "description": "CME start time in ISO format"
+              },
+              "sourceLocation": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Solar source location (e.g., S14W23)"
+              },
+              "activeRegionNum": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "NOAA active region number"
+              },
+              "note": {
+                "type": "string"
+              },
+              "instruments": {
+                "type": "array",
+                "description": "Observing instruments (SOHO LASCO, STEREO)"
+              },
+              "cmeAnalyses": {
+                "type": "array",
+                "description": "CME measurements including speed, direction, half-angle",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "speed": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "description": "CME speed in km/s"
+                    },
+                    "latitude": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "longitude": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "halfAngle": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "description": "Half-angle in degrees"
+                    },
+                    "type": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "CME type (S=Slow, C=Common, O=Occasional, R=Rare, ER=Extremely Rare)"
+                    },
+                    "isMostAccurate": {
+                      "type": "boolean"
                     }
-                  },
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related flares, shocks, storms"}
+                  }
                 }
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related flares, shocks, storms"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -80,11 +153,17 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-01-31'). Defaults to today."
         }
       },
@@ -95,41 +174,88 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-01-10"},
-      {"startDate": "2024-05-01", "endDate": "2024-05-15"},
-      {"startDate": "2024-10-01", "endDate": "2024-10-07"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-01-10"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-05-15"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-10-07"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of solar flare events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "flrID": {"type": "string", "description": "Unique flare ID"},
-                  "beginTime": {"type": "string", "description": "Flare start time"},
-                  "peakTime": {"type": "string", "description": "Flare peak time"},
-                  "endTime": {"type": ["string", "null"], "description": "Flare end time"},
-                  "classType": {"type": "string", "description": "Flare class (e.g., M2.3, X1.0, C5.4)"},
-                  "sourceLocation": {"type": ["string", "null"], "description": "Solar source location (e.g., N03E70)"},
-                  "activeRegionNum": {"type": ["integer", "null"], "description": "NOAA active region number"},
-                  "instruments": {"type": "array", "description": "Observing instruments"},
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related CMEs, storms, etc."}
-                }
+          "type": "array",
+          "description": "List of solar flare events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "flrID": {
+                "type": "string",
+                "description": "Unique flare ID"
+              },
+              "beginTime": {
+                "type": "string",
+                "description": "Flare start time"
+              },
+              "peakTime": {
+                "type": "string",
+                "description": "Flare peak time"
+              },
+              "endTime": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Flare end time"
+              },
+              "classType": {
+                "type": "string",
+                "description": "Flare class (e.g., M2.3, X1.0, C5.4)"
+              },
+              "sourceLocation": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Solar source location (e.g., N03E70)"
+              },
+              "activeRegionNum": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "NOAA active region number"
+              },
+              "instruments": {
+                "type": "array",
+                "description": "Observing instruments"
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related CMEs, storms, etc."
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -141,11 +267,17 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-06-30'). Defaults to today."
         }
       },
@@ -156,47 +288,74 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-03-31"},
-      {"startDate": "2024-05-01", "endDate": "2024-05-31"},
-      {"startDate": "2024-10-01", "endDate": "2024-12-31"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-03-31"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-05-31"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-12-31"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of geomagnetic storm events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "gstID": {"type": "string", "description": "Unique storm ID"},
-                  "startTime": {"type": "string", "description": "Storm start time"},
-                  "allKpIndex": {
-                    "type": "array",
-                    "description": "Kp index observations over time",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "observedTime": {"type": "string"},
-                        "kpIndex": {"type": "number", "description": "Kp index (5-9 scale)"},
-                        "source": {"type": "string"}
-                      }
+          "type": "array",
+          "description": "List of geomagnetic storm events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gstID": {
+                "type": "string",
+                "description": "Unique storm ID"
+              },
+              "startTime": {
+                "type": "string",
+                "description": "Storm start time"
+              },
+              "allKpIndex": {
+                "type": "array",
+                "description": "Kp index observations over time",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "observedTime": {
+                      "type": "string"
+                    },
+                    "kpIndex": {
+                      "type": "number",
+                      "description": "Kp index (5-9 scale)"
+                    },
+                    "source": {
+                      "type": "string"
                     }
-                  },
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related CMEs and shocks"}
+                  }
                 }
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related CMEs and shocks"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -208,11 +367,17 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-06-30'). Defaults to today."
         }
       },
@@ -223,36 +388,59 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-06-30"},
-      {"startDate": "2024-05-01", "endDate": "2024-05-31"},
-      {"startDate": "2024-10-01", "endDate": "2024-12-31"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-06-30"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-05-31"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-12-31"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of solar energetic particle events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "sepID": {"type": "string", "description": "Unique SEP event ID"},
-                  "eventTime": {"type": "string", "description": "Event time in ISO format"},
-                  "instruments": {"type": "array", "description": "Detecting instruments (SOHO COSTEP, GOES, etc.)"},
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related flares and CMEs"}
-                }
+          "type": "array",
+          "description": "List of solar energetic particle events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sepID": {
+                "type": "string",
+                "description": "Unique SEP event ID"
+              },
+              "eventTime": {
+                "type": "string",
+                "description": "Event time in ISO format"
+              },
+              "instruments": {
+                "type": "array",
+                "description": "Detecting instruments (SOHO COSTEP, GOES, etc.)"
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related flares and CMEs"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -264,15 +452,24 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-03-31'). Defaults to today."
         },
         "location": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Shock detection location. Options: 'Earth', 'STEREO A', 'STEREO B', 'MESSENGER', 'Mars'. Default: all locations."
         }
       },
@@ -283,38 +480,67 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-03-31"},
-      {"startDate": "2024-05-01", "endDate": "2024-05-31", "location": "Earth"},
-      {"startDate": "2024-10-01", "endDate": "2024-12-31"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-03-31"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-05-31",
+        "location": "Earth"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-12-31"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of interplanetary shock events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "activityID": {"type": "string", "description": "Unique shock event ID"},
-                  "catalog": {"type": "string"},
-                  "location": {"type": "string", "description": "Detection location (Earth, STEREO A, etc.)"},
-                  "eventTime": {"type": "string", "description": "Shock arrival time"},
-                  "instruments": {"type": "array", "description": "Detecting instruments (DSCOVR PLASMAG, ACE, etc.)"},
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related CMEs and storms"}
-                }
+          "type": "array",
+          "description": "List of interplanetary shock events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "activityID": {
+                "type": "string",
+                "description": "Unique shock event ID"
+              },
+              "catalog": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string",
+                "description": "Detection location (Earth, STEREO A, etc.)"
+              },
+              "eventTime": {
+                "type": "string",
+                "description": "Shock arrival time"
+              },
+              "instruments": {
+                "type": "array",
+                "description": "Detecting instruments (DSCOVR PLASMAG, ACE, etc.)"
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related CMEs and storms"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -326,11 +552,17 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Defaults to 30 days before endDate."
         },
         "endDate": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2024-06-30'). Defaults to today."
         }
       },
@@ -341,36 +573,59 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"startDate": "2024-01-01", "endDate": "2024-03-31"},
-      {"startDate": "2024-05-01", "endDate": "2024-06-30"},
-      {"startDate": "2024-10-01", "endDate": "2024-12-31"}
+      {
+        "startDate": "2024-01-01",
+        "endDate": "2024-03-31"
+      },
+      {
+        "startDate": "2024-05-01",
+        "endDate": "2024-06-30"
+      },
+      {
+        "startDate": "2024-10-01",
+        "endDate": "2024-12-31"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of high speed stream events",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "hssID": {"type": "string", "description": "Unique HSS event ID"},
-                  "eventTime": {"type": "string", "description": "HSS arrival time at detection point"},
-                  "instruments": {"type": "array", "description": "Detecting instruments (DSCOVR, ACE, etc.)"},
-                  "linkedEvents": {"type": ["array", "null"], "description": "Related events"}
-                }
+          "type": "array",
+          "description": "List of high speed stream events",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hssID": {
+                "type": "string",
+                "description": "Unique HSS event ID"
+              },
+              "eventTime": {
+                "type": "string",
+                "description": "HSS arrival time at detection point"
+              },
+              "instruments": {
+                "type": "array",
+                "description": "Detecting instruments (DSCOVR, ACE, etc.)"
+              },
+              "linkedEvents": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "description": "Related events"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

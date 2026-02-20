@@ -6,11 +6,17 @@
       "type": "object",
       "properties": {
         "country": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Country name or ISO code. Use 'all' for global data. Examples: 'usa', 'china', 'india', 'uk', 'germany', 'all'"
         },
         "lastdays": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of past days to include. Use 'all' for full history. Default: 30. Examples: 7, 30, 90, 365"
         }
       },
@@ -22,39 +28,75 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "usa", "lastdays": 30},
-      {"country": "all", "lastdays": 14},
-      {"country": "germany", "lastdays": 90}
+      {
+        "country": "usa",
+        "lastdays": 30
+      },
+      {
+        "country": "all",
+        "lastdays": 14
+      },
+      {
+        "country": "germany",
+        "lastdays": 90
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Historical COVID-19 timeline data",
           "properties": {
-            "data": {
+            "country": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "provinces": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "timeline": {
               "type": "object",
-              "description": "Historical COVID-19 timeline data",
               "properties": {
-                "country": {"type": ["string", "null"]},
-                "provinces": {"type": ["array", "null"]},
-                "timeline": {
+                "cases": {
                   "type": "object",
-                  "properties": {
-                    "cases": {"type": "object", "description": "Cases by date (date: count)", "additionalProperties": {"type": "integer"}},
-                    "deaths": {"type": "object", "description": "Deaths by date", "additionalProperties": {"type": "integer"}},
-                    "recovered": {"type": "object", "description": "Recoveries by date", "additionalProperties": {"type": "integer"}}
+                  "description": "Cases by date (date: count)",
+                  "additionalProperties": {
+                    "type": "integer"
+                  }
+                },
+                "deaths": {
+                  "type": "object",
+                  "description": "Deaths by date",
+                  "additionalProperties": {
+                    "type": "integer"
+                  }
+                },
+                "recovered": {
+                  "type": "object",
+                  "description": "Recoveries by date",
+                  "additionalProperties": {
+                    "type": "integer"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -66,11 +108,17 @@
       "type": "object",
       "properties": {
         "country": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Country name or 'all' for global. Examples: 'usa', 'uk', 'germany', 'india', 'all'"
         },
         "lastdays": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of past days to include. Default: 30. Examples: 7, 30, 90"
         }
       },
@@ -82,31 +130,47 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "usa", "lastdays": 30},
-      {"country": "germany", "lastdays": 30},
-      {"country": "india", "lastdays": 14}
+      {
+        "country": "usa",
+        "lastdays": 30
+      },
+      {
+        "country": "germany",
+        "lastdays": 30
+      },
+      {
+        "country": "india",
+        "lastdays": 14
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Vaccine coverage timeline data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Vaccine coverage timeline data",
-              "properties": {
-                "country": {"type": "string"},
-                "timeline": {"type": "object", "description": "Date-keyed vaccination counts", "additionalProperties": {"type": "integer"}}
-              }
+            "country": {
+              "type": "string"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "timeline": {
+              "type": "object",
+              "description": "Date-keyed vaccination counts",
+              "additionalProperties": {
+                "type": "integer"
+              }
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

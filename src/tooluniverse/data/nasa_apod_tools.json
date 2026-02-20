@@ -6,19 +6,31 @@
       "type": "object",
       "properties": {
         "date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Date of the APOD image in YYYY-MM-DD format (e.g., '2024-01-01'). Dates range from 1995-06-16 to today. Cannot be used with count or start_date/end_date."
         },
         "count": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of random APOD entries to return (1-100). Cannot be used with date or start_date/end_date."
         },
         "start_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Start date for a date range query in YYYY-MM-DD format. Must be used with end_date. Cannot be used with date or count."
         },
         "end_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date for a date range query in YYYY-MM-DD format. Must be used with start_date. Cannot be used with date or count."
         }
       },
@@ -26,62 +38,67 @@
     },
     "fields": {
       "endpoint": "https://api.nasa.gov/planetary/apod",
-      "params": {"api_key": "DEMO_KEY"}
+      "params": {
+        "api_key": "DEMO_KEY"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"date": "2024-01-01"},
-      {"count": 3},
-      {"date": "2023-07-04"}
+      {
+        "date": "2024-01-01"
+      },
+      {
+        "count": 3
+      },
+      {
+        "date": "2023-07-04"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "APOD entry or array of entries (when using count or date range)",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "APOD entry or array of entries (when using count or date range)",
-              "properties": {
-                "date": {
-                  "type": "string",
-                  "description": "Date of the APOD entry in YYYY-MM-DD format"
-                },
-                "title": {
-                  "type": "string",
-                  "description": "Title of the astronomy picture or video"
-                },
-                "explanation": {
-                  "type": "string",
-                  "description": "Expert astronomical explanation of the image"
-                },
-                "url": {
-                  "type": "string",
-                  "description": "URL of the image or video (standard resolution)"
-                },
-                "hdurl": {
-                  "type": ["string", "null"],
-                  "description": "URL of the high-definition image (not available for videos)"
-                },
-                "media_type": {
-                  "type": "string",
-                  "description": "Type of media: 'image' or 'video'"
-                },
-                "service_version": {
-                  "type": "string",
-                  "description": "API service version (e.g., 'v1')"
-                },
-                "copyright": {
-                  "type": ["string", "null"],
-                  "description": "Copyright holder of the image (null if public domain/NASA)"
-                }
-              }
+            "date": {
+              "type": "string",
+              "description": "Date of the APOD entry in YYYY-MM-DD format"
             },
-            "metadata": {
-              "type": "object"
+            "title": {
+              "type": "string",
+              "description": "Title of the astronomy picture or video"
+            },
+            "explanation": {
+              "type": "string",
+              "description": "Expert astronomical explanation of the image"
+            },
+            "url": {
+              "type": "string",
+              "description": "URL of the image or video (standard resolution)"
+            },
+            "hdurl": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "URL of the high-definition image (not available for videos)"
+            },
+            "media_type": {
+              "type": "string",
+              "description": "Type of media: 'image' or 'video'"
+            },
+            "service_version": {
+              "type": "string",
+              "description": "API service version (e.g., 'v1')"
+            },
+            "copyright": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Copyright holder of the image (null if public domain/NASA)"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -91,7 +108,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -111,69 +130,80 @@
           "description": "End date in YYYY-MM-DD format (e.g., '2024-01-07'). Must be no later than today."
         }
       },
-      "required": ["start_date", "end_date"]
+      "required": [
+        "start_date",
+        "end_date"
+      ]
     },
     "fields": {
       "endpoint": "https://api.nasa.gov/planetary/apod",
-      "params": {"api_key": "DEMO_KEY"}
+      "params": {
+        "api_key": "DEMO_KEY"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"start_date": "2024-01-01", "end_date": "2024-01-03"},
-      {"start_date": "2023-12-25", "end_date": "2023-12-31"},
-      {"start_date": "2024-07-04", "end_date": "2024-07-06"}
+      {
+        "start_date": "2024-01-01",
+        "end_date": "2024-01-03"
+      },
+      {
+        "start_date": "2023-12-25",
+        "end_date": "2023-12-31"
+      },
+      {
+        "start_date": "2024-07-04",
+        "end_date": "2024-07-06"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Array of APOD entries for the specified date range",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "date": {
-                    "type": "string",
-                    "description": "Date of the APOD entry in YYYY-MM-DD format"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "Title of the astronomy picture or video"
-                  },
-                  "explanation": {
-                    "type": "string",
-                    "description": "Expert astronomical explanation of the image"
-                  },
-                  "url": {
-                    "type": "string",
-                    "description": "URL of the image or video (standard resolution)"
-                  },
-                  "hdurl": {
-                    "type": ["string", "null"],
-                    "description": "URL of the high-definition image (not available for videos)"
-                  },
-                  "media_type": {
-                    "type": "string",
-                    "description": "Type of media: 'image' or 'video'"
-                  },
-                  "service_version": {
-                    "type": "string",
-                    "description": "API service version"
-                  },
-                  "copyright": {
-                    "type": ["string", "null"],
-                    "description": "Copyright holder (null if public domain/NASA)"
-                  }
-                }
+          "type": "array",
+          "description": "Array of APOD entries for the specified date range",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "Date of the APOD entry in YYYY-MM-DD format"
+              },
+              "title": {
+                "type": "string",
+                "description": "Title of the astronomy picture or video"
+              },
+              "explanation": {
+                "type": "string",
+                "description": "Expert astronomical explanation of the image"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL of the image or video (standard resolution)"
+              },
+              "hdurl": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "URL of the high-definition image (not available for videos)"
+              },
+              "media_type": {
+                "type": "string",
+                "description": "Type of media: 'image' or 'video'"
+              },
+              "service_version": {
+                "type": "string",
+                "description": "API service version"
+              },
+              "copyright": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Copyright holder (null if public domain/NASA)"
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -183,7 +213,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

@@ -10,60 +10,113 @@
           "description": "Search query: compound name (e.g., 'caffeine', 'quercetin'), SMILES string, or InChIKey"
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "https://lotus.naturalproducts.net/api/search/simple?query={query}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "caffeine"},
-      {"query": "quercetin"},
-      {"query": "RYYVLZVUVIJVGH-UHFFFAOYSA-N"}
+      {
+        "query": "caffeine"
+      },
+      {
+        "query": "quercetin"
+      },
+      {
+        "query": "RYYVLZVUVIJVGH-UHFFFAOYSA-N"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "LOTUS search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "LOTUS search results",
-              "properties": {
-                "originalQuery": {"type": "string", "description": "The query that was searched"},
-                "determinedInputType": {"type": "string", "description": "Detected input type: name, SMILES, or InChi Key"},
-                "naturalProducts": {
-                  "type": "array",
-                  "description": "List of matching natural products",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string", "description": "Internal MongoDB ID"},
-                      "lotus_id": {"type": "string", "description": "LOTUS identifier (e.g., LTS0075508)"},
-                      "wikidata_id": {"type": "string", "description": "Wikidata entity URI"},
-                      "traditional_name": {"type": ["string", "null"], "description": "Common name of the compound"},
-                      "smiles": {"type": "string", "description": "SMILES structure representation"},
-                      "inchi": {"type": "string", "description": "InChI identifier"},
-                      "inchikey": {"type": "string", "description": "InChIKey hash"},
-                      "molecular_formula": {"type": ["string", "null"], "description": "Molecular formula"},
-                      "molecular_weight": {"type": ["number", "null"], "description": "Molecular weight in g/mol"},
-                      "contains_sugar": {"type": "integer", "description": "Whether compound contains sugar moieties (0 or 1)"},
-                      "heavy_atom_number": {"type": "integer", "description": "Number of heavy (non-hydrogen) atoms"}
-                    }
+            "originalQuery": {
+              "type": "string",
+              "description": "The query that was searched"
+            },
+            "determinedInputType": {
+              "type": "string",
+              "description": "Detected input type: name, SMILES, or InChi Key"
+            },
+            "naturalProducts": {
+              "type": "array",
+              "description": "List of matching natural products",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Internal MongoDB ID"
+                  },
+                  "lotus_id": {
+                    "type": "string",
+                    "description": "LOTUS identifier (e.g., LTS0075508)"
+                  },
+                  "wikidata_id": {
+                    "type": "string",
+                    "description": "Wikidata entity URI"
+                  },
+                  "traditional_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Common name of the compound"
+                  },
+                  "smiles": {
+                    "type": "string",
+                    "description": "SMILES structure representation"
+                  },
+                  "inchi": {
+                    "type": "string",
+                    "description": "InChI identifier"
+                  },
+                  "inchikey": {
+                    "type": "string",
+                    "description": "InChIKey hash"
+                  },
+                  "molecular_formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Molecular formula"
+                  },
+                  "molecular_weight": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Molecular weight in g/mol"
+                  },
+                  "contains_sugar": {
+                    "type": "integer",
+                    "description": "Whether compound contains sugar moieties (0 or 1)"
+                  },
+                  "heavy_atom_number": {
+                    "type": "integer",
+                    "description": "Number of heavy (non-hydrogen) atoms"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -79,63 +132,201 @@
           "description": "LOTUS internal compound ID (MongoDB ObjectId, e.g., '604b8da112e4996162764b83' for caffeine). Obtain from LOTUS_search_natural_products."
         }
       },
-      "required": ["compound_id"]
+      "required": [
+        "compound_id"
+      ]
     },
     "fields": {
       "endpoint": "https://lotus.naturalproducts.net/api/compound/{compound_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"compound_id": "604b8da112e4996162764b83"},
-      {"compound_id": "604b86f112e499616275424f"}
+      {
+        "compound_id": "604b8da112e4996162764b83"
+      },
+      {
+        "compound_id": "604b86f112e499616275424f"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Detailed compound information",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed compound information",
-              "properties": {
-                "lotus_id": {"type": "string", "description": "LOTUS identifier"},
-                "wikidata_id": {"type": "string", "description": "Wikidata entity URI"},
-                "traditional_name": {"type": ["string", "null"], "description": "Common name"},
-                "iupac_name": {"type": ["string", "null"], "description": "IUPAC systematic name"},
-                "cas": {"type": ["string", "null"], "description": "CAS registry number"},
-                "smiles": {"type": "string", "description": "SMILES structure"},
-                "inchi": {"type": "string", "description": "InChI identifier"},
-                "inchikey": {"type": "string", "description": "InChIKey hash"},
-                "molecular_formula": {"type": ["string", "null"], "description": "Molecular formula"},
-                "molecular_weight": {"type": ["number", "null"], "description": "Molecular weight (g/mol)"},
-                "xlogp": {"type": ["number", "null"], "description": "Predicted XLogP (lipophilicity)"},
-                "alogp": {"type": ["number", "null"], "description": "Predicted ALogP"},
-                "topoPSA": {"type": ["number", "null"], "description": "Topological polar surface area"},
-                "hBondAcceptorCount": {"type": ["integer", "null"], "description": "Number of H-bond acceptors"},
-                "hBondDonorCount": {"type": ["integer", "null"], "description": "Number of H-bond donors"},
-                "lipinskiRuleOf5Failures": {"type": ["integer", "null"], "description": "Number of Lipinski Rule of 5 violations"},
-                "number_of_rings": {"type": ["integer", "null"], "description": "Number of rings"},
-                "heavy_atom_number": {"type": "integer", "description": "Number of heavy atoms"},
-                "contains_sugar": {"type": "integer", "description": "Contains sugar moiety (0 or 1)"},
-                "chemicalTaxonomyNPclassifierClass": {"type": ["string", "null"], "description": "NPClassifier chemical class"},
-                "chemicalTaxonomyNPclassifierPathway": {"type": ["string", "null"], "description": "NPClassifier biosynthetic pathway"},
-                "chemicalTaxonomyNPclassifierSuperclass": {"type": ["string", "null"], "description": "NPClassifier superclass"},
-                "chemicalTaxonomyClassyfireKingdom": {"type": ["string", "null"], "description": "ClassyFire kingdom"},
-                "chemicalTaxonomyClassyfireClass": {"type": ["string", "null"], "description": "ClassyFire class"},
-                "chemicalTaxonomyClassyfireDirectParent": {"type": ["string", "null"], "description": "ClassyFire direct parent classification"},
-                "allTaxa": {"type": ["array", "null"], "description": "Source organisms from which this natural product has been isolated"}
-              }
+            "lotus_id": {
+              "type": "string",
+              "description": "LOTUS identifier"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "wikidata_id": {
+              "type": "string",
+              "description": "Wikidata entity URI"
+            },
+            "traditional_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Common name"
+            },
+            "iupac_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "IUPAC systematic name"
+            },
+            "cas": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "CAS registry number"
+            },
+            "smiles": {
+              "type": "string",
+              "description": "SMILES structure"
+            },
+            "inchi": {
+              "type": "string",
+              "description": "InChI identifier"
+            },
+            "inchikey": {
+              "type": "string",
+              "description": "InChIKey hash"
+            },
+            "molecular_formula": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Molecular formula"
+            },
+            "molecular_weight": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Molecular weight (g/mol)"
+            },
+            "xlogp": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Predicted XLogP (lipophilicity)"
+            },
+            "alogp": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Predicted ALogP"
+            },
+            "topoPSA": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Topological polar surface area"
+            },
+            "hBondAcceptorCount": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of H-bond acceptors"
+            },
+            "hBondDonorCount": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of H-bond donors"
+            },
+            "lipinskiRuleOf5Failures": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of Lipinski Rule of 5 violations"
+            },
+            "number_of_rings": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of rings"
+            },
+            "heavy_atom_number": {
+              "type": "integer",
+              "description": "Number of heavy atoms"
+            },
+            "contains_sugar": {
+              "type": "integer",
+              "description": "Contains sugar moiety (0 or 1)"
+            },
+            "chemicalTaxonomyNPclassifierClass": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "NPClassifier chemical class"
+            },
+            "chemicalTaxonomyNPclassifierPathway": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "NPClassifier biosynthetic pathway"
+            },
+            "chemicalTaxonomyNPclassifierSuperclass": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "NPClassifier superclass"
+            },
+            "chemicalTaxonomyClassyfireKingdom": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "ClassyFire kingdom"
+            },
+            "chemicalTaxonomyClassyfireClass": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "ClassyFire class"
+            },
+            "chemicalTaxonomyClassyfireDirectParent": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "ClassyFire direct parent classification"
+            },
+            "allTaxa": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "Source organisms from which this natural product has been isolated"
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -151,54 +342,85 @@
           "description": "InChIKey to search for (e.g., 'RYYVLZVUVIJVGH-UHFFFAOYSA-N' for caffeine, 'IQBMWEYFKNVACH-MEBVLIOMSA-N' for quercetin)"
         }
       },
-      "required": ["inchikey"]
+      "required": [
+        "inchikey"
+      ]
     },
     "fields": {
       "endpoint": "https://lotus.naturalproducts.net/api/search/simple?query={inchikey}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"inchikey": "RYYVLZVUVIJVGH-UHFFFAOYSA-N"},
-      {"inchikey": "IQBMWEYFKNVACH-MEBVLIOMSA-N"}
+      {
+        "inchikey": "RYYVLZVUVIJVGH-UHFFFAOYSA-N"
+      },
+      {
+        "inchikey": "IQBMWEYFKNVACH-MEBVLIOMSA-N"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "LOTUS InChIKey search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "LOTUS InChIKey search results",
-              "properties": {
-                "originalQuery": {"type": "string"},
-                "determinedInputType": {"type": "string", "description": "Should be 'InChi Key'"},
-                "naturalProducts": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string"},
-                      "lotus_id": {"type": "string"},
-                      "traditional_name": {"type": ["string", "null"]},
-                      "smiles": {"type": "string"},
-                      "inchikey": {"type": "string"},
-                      "molecular_formula": {"type": ["string", "null"]},
-                      "molecular_weight": {"type": ["number", "null"]}
-                    }
+            "originalQuery": {
+              "type": "string"
+            },
+            "determinedInputType": {
+              "type": "string",
+              "description": "Should be 'InChi Key'"
+            },
+            "naturalProducts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "lotus_id": {
+                    "type": "string"
+                  },
+                  "traditional_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "smiles": {
+                    "type": "string"
+                  },
+                  "inchikey": {
+                    "type": "string"
+                  },
+                  "molecular_formula": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "molecular_weight": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

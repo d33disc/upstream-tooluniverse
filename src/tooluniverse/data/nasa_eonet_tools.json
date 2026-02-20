@@ -6,35 +6,59 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Event status: 'open' (ongoing events) or 'closed' (past events). Default: both"
         },
         "category": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by event category. Values: 'wildfires', 'severeStorms', 'volcanoes', 'seaLakeIce', 'earthquakes', 'floods', 'landslides', 'manmade', 'snow'. Use the exact slug."
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of events to return (default 10, max 1000)"
         },
         "days": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Return events in the last N days. Example: 7 for last week. Ignored if start/end are set."
         },
         "start": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter events starting from this date (YYYY-MM-DD). Example: '2024-01-01'"
         },
         "end": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter events up to this date (YYYY-MM-DD). Example: '2024-12-31'"
         },
         "bbox": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Bounding box filter: 'minLon,minLat,maxLon,maxLat'. Example: '-120,30,-100,50' for western US"
         },
         "source": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by data source. Examples: 'GDACS', 'InciWeb', 'IRWIN'"
         }
       },
@@ -45,83 +69,149 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"status": "open", "category": "wildfires", "limit": 5},
-      {"status": "open", "category": "severeStorms", "limit": 5},
-      {"days": 30, "category": "volcanoes", "limit": 10}
+      {
+        "status": "open",
+        "category": "wildfires",
+        "limit": 5
+      },
+      {
+        "status": "open",
+        "category": "severeStorms",
+        "limit": 5
+      },
+      {
+        "days": 30,
+        "category": "volcanoes",
+        "limit": 10
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "EONET natural event data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "EONET natural event data",
-              "properties": {
-                "title": {"type": "string", "description": "Response title ('EONET Events')"},
-                "description": {"type": "string"},
-                "link": {"type": "string"},
-                "events": {
-                  "type": "array",
-                  "description": "List of natural events",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string", "description": "Unique event ID (e.g. 'EONET_6305')"},
-                      "title": {"type": "string", "description": "Event name (e.g. 'Camp Fire, California')"},
-                      "description": {"type": ["string", "null"]},
-                      "link": {"type": "string", "description": "URL for detailed event info"},
-                      "closed": {"type": ["string", "null"], "description": "Date event was marked closed (null if ongoing)"},
-                      "categories": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {"type": "string"},
-                            "title": {"type": "string", "description": "Category name (e.g. 'Wildfires')"}
-                          }
+            "title": {
+              "type": "string",
+              "description": "Response title ('EONET Events')"
+            },
+            "description": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "events": {
+              "type": "array",
+              "description": "List of natural events",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Unique event ID (e.g. 'EONET_6305')"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Event name (e.g. 'Camp Fire, California')"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "link": {
+                    "type": "string",
+                    "description": "URL for detailed event info"
+                  },
+                  "closed": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Date event was marked closed (null if ongoing)"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Category name (e.g. 'Wildfires')"
                         }
-                      },
-                      "sources": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {"type": "string", "description": "Source system ID"},
-                            "url": {"type": "string", "description": "Link to source data"}
-                          }
+                      }
+                    }
+                  },
+                  "sources": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Source system ID"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "Link to source data"
                         }
-                      },
-                      "geometry": {
-                        "type": "array",
-                        "description": "Time-series geographic positions of the event",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "magnitudeValue": {"type": ["number", "null"], "description": "Magnitude value (e.g. area in acres)"},
-                            "magnitudeUnit": {"type": ["string", "null"]},
-                            "date": {"type": "string", "description": "Timestamp of this observation"},
-                            "type": {"type": "string", "description": "Geometry type (Point, Polygon)"},
-                            "coordinates": {
-                              "type": "array",
-                              "description": "Coordinates [longitude, latitude] or polygon rings"
-                            }
-                          }
+                      }
+                    }
+                  },
+                  "geometry": {
+                    "type": "array",
+                    "description": "Time-series geographic positions of the event",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "magnitudeValue": {
+                          "type": [
+                            "number",
+                            "null"
+                          ],
+                          "description": "Magnitude value (e.g. area in acres)"
+                        },
+                        "magnitudeUnit": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "date": {
+                          "type": "string",
+                          "description": "Timestamp of this observation"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Geometry type (Point, Polygon)"
+                        },
+                        "coordinates": {
+                          "type": "array",
+                          "description": "Coordinates [longitude, latitude] or polygon rings"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -147,37 +237,55 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "EONET event categories",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "EONET event categories",
-              "properties": {
-                "title": {"type": "string"},
-                "description": {"type": "string"},
-                "link": {"type": "string"},
-                "categories": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string", "description": "Category slug (use with NASAEONET_get_events)"},
-                      "title": {"type": "string", "description": "Human-readable name"},
-                      "link": {"type": "string"},
-                      "description": {"type": "string"},
-                      "layers": {"type": "string", "description": "URL to layer information"}
-                    }
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Category slug (use with NASAEONET_get_events)"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Human-readable name"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "layers": {
+                    "type": "string",
+                    "description": "URL to layer information"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

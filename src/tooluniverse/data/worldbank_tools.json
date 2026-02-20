@@ -14,15 +14,24 @@
           "description": "World Bank indicator code (e.g., 'NY.GDP.MKTP.CD' for GDP, 'SP.POP.TOTL' for population, 'SH.DYN.MORT' for child mortality, 'SE.ADT.LITR.ZS' for literacy)"
         },
         "mrv": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Most recent values - number of most recent years to return (e.g., 5 for last 5 years). Default returns all available years."
         },
         "date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Year or year range to filter data (e.g., '2020', '2015:2023' for a range)"
         }
       },
-      "required": ["country", "indicator"]
+      "required": [
+        "country",
+        "indicator"
+      ]
     },
     "fields": {
       "endpoint": "https://api.worldbank.org/v2/country/{country}/indicator/{indicator}",
@@ -33,38 +42,84 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "USA", "indicator": "NY.GDP.MKTP.CD", "mrv": 5},
-      {"country": "USA;GBR;DEU", "indicator": "SP.POP.TOTL", "mrv": 3},
-      {"country": "CHN", "indicator": "SH.DYN.MORT", "date": "2015:2023"}
+      {
+        "country": "USA",
+        "indicator": "NY.GDP.MKTP.CD",
+        "mrv": 5
+      },
+      {
+        "country": "USA;GBR;DEU",
+        "indicator": "SP.POP.TOTL",
+        "mrv": 3
+      },
+      {
+        "country": "CHN",
+        "indicator": "SH.DYN.MORT",
+        "date": "2015:2023"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of data points, each with country, year, indicator, and value",
-              "items": {
+          "type": "array",
+          "description": "Two-element list: [0] pagination metadata (page, pages, per_page, total), [1] array of data points with country, year, indicator, and value",
+          "items": {
+            "type": ["object", "array"],
+            "properties": {
+              "indicator": {
                 "type": "object",
                 "properties": {
-                  "indicator": {"type": "object", "properties": {"id": {"type": "string"}, "value": {"type": "string", "description": "Indicator name"}}},
-                  "country": {"type": "object", "properties": {"id": {"type": "string"}, "value": {"type": "string"}}},
-                  "countryiso3code": {"type": "string", "description": "ISO 3166-1 alpha-3 country code"},
-                  "date": {"type": "string", "description": "Year of the observation"},
-                  "value": {"type": ["number", "null"], "description": "Indicator value"},
-                  "decimal": {"type": "integer"}
+                  "id": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Indicator name"
+                  }
                 }
+              },
+              "country": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "countryiso3code": {
+                "type": "string",
+                "description": "ISO 3166-1 alpha-3 country code"
+              },
+              "date": {
+                "type": "string",
+                "description": "Year of the observation"
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Indicator value"
+              },
+              "decimal": {
+                "type": "integer"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -80,48 +135,86 @@
           "description": "ISO 3166-1 alpha-2 or alpha-3 country code (e.g., 'US' or 'USA' for United States, 'GB' or 'GBR' for UK, 'DE' or 'DEU' for Germany)"
         }
       },
-      "required": ["country"]
+      "required": [
+        "country"
+      ]
     },
     "fields": {
       "endpoint": "https://api.worldbank.org/v2/country/{country}",
-      "params": {"format": "json"}
+      "params": {
+        "format": "json"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "USA"},
-      {"country": "GBR"},
-      {"country": "CHN"}
+      {
+        "country": "USA"
+      },
+      {
+        "country": "GBR"
+      },
+      {
+        "country": "CHN"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of country metadata objects",
-              "items": {
+          "type": "array",
+          "description": "Two-element list: [0] pagination metadata, [1] array of country metadata objects",
+          "items": {
+            "type": ["object", "array"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ISO 3166-1 alpha-3 code"
+              },
+              "iso2Code": {
+                "type": "string",
+                "description": "ISO 3166-1 alpha-2 code"
+              },
+              "name": {
+                "type": "string",
+                "description": "Country name"
+              },
+              "region": {
                 "type": "object",
                 "properties": {
-                  "id": {"type": "string", "description": "ISO 3166-1 alpha-3 code"},
-                  "iso2Code": {"type": "string", "description": "ISO 3166-1 alpha-2 code"},
-                  "name": {"type": "string", "description": "Country name"},
-                  "region": {"type": "object", "properties": {"value": {"type": "string"}}},
-                  "incomeLevel": {"type": "object", "properties": {"value": {"type": "string"}}},
-                  "capitalCity": {"type": "string"},
-                  "longitude": {"type": "string"},
-                  "latitude": {"type": "string"}
+                  "value": {
+                    "type": "string"
+                  }
                 }
+              },
+              "incomeLevel": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "capitalCity": {
+                "type": "string"
+              },
+              "longitude": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "string"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -137,11 +230,16 @@
           "description": "Search keyword for indicators (e.g., 'GDP', 'mortality', 'literacy', 'CO2', 'poverty', 'vaccination', 'life expectancy')"
         },
         "per_page": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results to return (default 10, max 1000)"
         }
       },
-      "required": ["query"]
+      "required": [
+        "query"
+      ]
     },
     "fields": {
       "endpoint": "https://api.worldbank.org/v2/indicator",
@@ -151,38 +249,68 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "mortality"},
-      {"query": "GDP", "per_page": 5},
-      {"query": "vaccination"}
+      {
+        "query": "mortality"
+      },
+      {
+        "query": "GDP",
+        "per_page": 5
+      },
+      {
+        "query": "vaccination"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching indicators",
-              "items": {
+          "type": "array",
+          "description": "Two-element list: [0] pagination metadata, [1] array of matching indicators",
+          "items": {
+            "type": ["object", "array"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Indicator code (use in WorldBank_get_indicator)"
+              },
+              "name": {
+                "type": "string",
+                "description": "Indicator name"
+              },
+              "unit": {
+                "type": "string",
+                "description": "Unit of measurement"
+              },
+              "source": {
                 "type": "object",
                 "properties": {
-                  "id": {"type": "string", "description": "Indicator code (use in WorldBank_get_indicator)"},
-                  "name": {"type": "string", "description": "Indicator name"},
-                  "unit": {"type": "string", "description": "Unit of measurement"},
-                  "source": {"type": "object", "properties": {"value": {"type": "string"}}},
-                  "sourceNote": {"type": "string", "description": "Detailed description"},
-                  "topics": {"type": "array", "items": {"type": "object"}}
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "sourceNote": {
+                "type": "string",
+                "description": "Detailed description"
+              },
+              "topics": {
+                "type": "array",
+                "items": {
+                  "type": "object"
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

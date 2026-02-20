@@ -46,30 +46,23 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Historical climate data",
           "properties": {
-            "data": {
+            "latitude": {"type": "number"},
+            "longitude": {"type": "number"},
+            "elevation": {"type": "number"},
+            "timezone": {"type": "string"},
+            "daily_units": {"type": "object", "description": "Units for each daily variable"},
+            "daily": {
               "type": "object",
-              "description": "Historical climate data",
+              "description": "Daily climate data arrays",
               "properties": {
-                "latitude": {"type": "number"},
-                "longitude": {"type": "number"},
-                "elevation": {"type": "number"},
-                "timezone": {"type": "string"},
-                "daily_units": {"type": "object", "description": "Units for each daily variable"},
-                "daily": {
-                  "type": "object",
-                  "description": "Daily climate data arrays",
-                  "properties": {
-                    "time": {"type": "array", "items": {"type": "string"}},
-                    "temperature_2m_mean": {"type": "array", "items": {"type": ["number", "null"]}},
-                    "precipitation_sum": {"type": "array", "items": {"type": ["number", "null"]}}
-                  }
-                }
+                "time": {"type": "array", "items": {"type": "string"}},
+                "temperature_2m_mean": {"type": "array", "items": {"type": ["number", "null"]}},
+                "precipitation_sum": {"type": "array", "items": {"type": ["number", "null"]}}
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",

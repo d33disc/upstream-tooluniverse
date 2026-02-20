@@ -20,76 +20,115 @@
           "description": "Maximum number of interaction partners to include (per protein). 0 = only interactions among input proteins."
         },
         "required_score": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Minimum combined STRING score (0-1000). 400=medium, 700=high, 900=highest confidence. Default: 400."
         }
       },
-      "required": ["identifiers"]
+      "required": [
+        "identifiers"
+      ]
     },
     "fields": {
       "endpoint": "https://string-db.org/api/json/network"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"identifiers": "TP53", "species": 9606, "limit": 5},
-      {"identifiers": "BRCA1%0dBRCA2%0dTP53", "species": 9606, "limit": 0},
-      {"identifiers": "EGFR", "species": 9606, "limit": 5, "required_score": 900}
+      {
+        "protein_ids": ["TP53"],
+        "species": 9606,
+        "add_nodes": 5
+      },
+      {
+        "protein_ids": ["BRCA1", "BRCA2", "TP53"],
+        "species": 9606,
+        "add_nodes": 0
+      },
+      {
+        "protein_ids": ["EGFR"],
+        "species": 9606,
+        "add_nodes": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Array of interaction objects (edges in the network)",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stringId_A": {
-                    "type": "string",
-                    "description": "STRING ID of protein A (e.g., '9606.ENSP00000269305')"
-                  },
-                  "stringId_B": {
-                    "type": "string",
-                    "description": "STRING ID of protein B"
-                  },
-                  "preferredName_A": {
-                    "type": "string",
-                    "description": "Gene symbol of protein A (e.g., 'TP53')"
-                  },
-                  "preferredName_B": {
-                    "type": "string",
-                    "description": "Gene symbol of protein B"
-                  },
-                  "ncbiTaxonId": {
-                    "type": "string",
-                    "description": "NCBI taxonomy ID"
-                  },
-                  "score": {
-                    "type": "number",
-                    "description": "Combined confidence score (0-1)"
-                  },
-                  "nscore": {"type": "number", "description": "Neighborhood score"},
-                  "fscore": {"type": "number", "description": "Gene fusion score"},
-                  "pscore": {"type": "number", "description": "Phylogenetic profile score"},
-                  "ascore": {"type": "number", "description": "Co-expression score"},
-                  "escore": {"type": "number", "description": "Experimental evidence score"},
-                  "dscore": {"type": "number", "description": "Database evidence score"},
-                  "tscore": {"type": "number", "description": "Text-mining score"}
-                }
+          "type": "array",
+          "description": "Array of interaction objects (edges in the network)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stringId_A": {
+                "type": "string",
+                "description": "STRING ID of protein A (e.g., '9606.ENSP00000269305')"
+              },
+              "stringId_B": {
+                "type": "string",
+                "description": "STRING ID of protein B"
+              },
+              "preferredName_A": {
+                "type": "string",
+                "description": "Gene symbol of protein A (e.g., 'TP53')"
+              },
+              "preferredName_B": {
+                "type": "string",
+                "description": "Gene symbol of protein B"
+              },
+              "ncbiTaxonId": {
+                "type": [
+                  "string",
+                  "integer",
+                  "null"
+                ],
+                "description": "NCBI taxonomy ID"
+              },
+              "score": {
+                "type": "number",
+                "description": "Combined confidence score (0-1)"
+              },
+              "nscore": {
+                "type": "number",
+                "description": "Neighborhood score"
+              },
+              "fscore": {
+                "type": "number",
+                "description": "Gene fusion score"
+              },
+              "pscore": {
+                "type": "number",
+                "description": "Phylogenetic profile score"
+              },
+              "ascore": {
+                "type": "number",
+                "description": "Co-expression score"
+              },
+              "escore": {
+                "type": "number",
+                "description": "Experimental evidence score"
+              },
+              "dscore": {
+                "type": "number",
+                "description": "Database evidence score"
+              },
+              "tscore": {
+                "type": "number",
+                "description": "Text-mining score"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -115,58 +154,104 @@
           "description": "Maximum number of interaction partners to return"
         },
         "required_score": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Minimum combined STRING score (0-1000). 400=medium, 700=high, 900=highest confidence."
         }
       },
-      "required": ["identifiers"]
+      "required": [
+        "identifiers"
+      ]
     },
     "fields": {
       "endpoint": "https://string-db.org/api/json/interaction_partners"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"identifiers": "TP53", "species": 9606, "limit": 10},
-      {"identifiers": "BRCA1", "species": 9606, "limit": 5, "required_score": 900},
-      {"identifiers": "EGFR", "species": 9606, "limit": 5}
+      {
+        "protein_ids": ["TP53"],
+        "species": 9606,
+        "add_nodes": 10
+      },
+      {
+        "protein_ids": ["BRCA1"],
+        "species": 9606,
+        "add_nodes": 5
+      },
+      {
+        "protein_ids": ["EGFR"],
+        "species": 9606,
+        "add_nodes": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Array of interaction partner objects",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "stringId_A": {"type": "string"},
-                  "stringId_B": {"type": "string"},
-                  "preferredName_A": {"type": "string", "description": "Gene symbol of query protein"},
-                  "preferredName_B": {"type": "string", "description": "Gene symbol of interaction partner"},
-                  "ncbiTaxonId": {"type": "string"},
-                  "score": {"type": "number", "description": "Combined confidence score (0-1)"},
-                  "nscore": {"type": "number"},
-                  "fscore": {"type": "number"},
-                  "pscore": {"type": "number"},
-                  "ascore": {"type": "number"},
-                  "escore": {"type": "number", "description": "Experimental evidence score"},
-                  "dscore": {"type": "number", "description": "Database evidence score"},
-                  "tscore": {"type": "number", "description": "Text-mining score"}
-                }
+          "type": "array",
+          "description": "Array of interaction partner objects",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stringId_A": {
+                "type": "string"
+              },
+              "stringId_B": {
+                "type": "string"
+              },
+              "preferredName_A": {
+                "type": "string",
+                "description": "Gene symbol of query protein"
+              },
+              "preferredName_B": {
+                "type": "string",
+                "description": "Gene symbol of interaction partner"
+              },
+              "ncbiTaxonId": {
+                "type": ["string", "integer", "null"]
+              },
+              "score": {
+                "type": "number",
+                "description": "Combined confidence score (0-1)"
+              },
+              "nscore": {
+                "type": "number"
+              },
+              "fscore": {
+                "type": "number"
+              },
+              "pscore": {
+                "type": "number"
+              },
+              "ascore": {
+                "type": "number"
+              },
+              "escore": {
+                "type": "number",
+                "description": "Experimental evidence score"
+              },
+              "dscore": {
+                "type": "number",
+                "description": "Database evidence score"
+              },
+              "tscore": {
+                "type": "number",
+                "description": "Text-mining score"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

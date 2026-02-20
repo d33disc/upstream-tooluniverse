@@ -15,7 +15,9 @@
           "default": 10
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://pub.orcid.org/v3.0/search/",
@@ -25,57 +27,55 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "family-name:doudna AND given-names:jennifer"},
-      {"q": "family-name:lander AND given-names:eric", "rows": 5},
-      {"q": "affiliation-org-name:MIT AND keyword:genomics"}
+      {
+        "q": "family-name:doudna AND given-names:jennifer"
+      },
+      {
+        "q": "family-name:lander AND given-names:eric",
+        "rows": 5
+      },
+      {
+        "q": "affiliation-org-name:MIT AND keyword:genomics"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "ORCID search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "ORCID search results",
-              "properties": {
-                "num-found": {
-                  "type": "integer",
-                  "description": "Total number of matching ORCID records"
-                },
-                "result": {
-                  "type": "array",
-                  "description": "Array of matching ORCID records",
-                  "items": {
+            "num-found": {
+              "type": "integer",
+              "description": "Total number of matching ORCID records"
+            },
+            "result": {
+              "type": "array",
+              "description": "Array of matching ORCID records",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "orcid-identifier": {
                     "type": "object",
+                    "description": "ORCID identifier details",
                     "properties": {
-                      "orcid-identifier": {
-                        "type": "object",
-                        "description": "ORCID identifier details",
-                        "properties": {
-                          "uri": {
-                            "type": "string",
-                            "description": "Full ORCID URI (e.g., https://orcid.org/0000-0001-9161-999X)"
-                          },
-                          "path": {
-                            "type": "string",
-                            "description": "ORCID iD (e.g., 0000-0001-9161-999X). Use this with ORCID_get_person and ORCID_get_works."
-                          },
-                          "host": {
-                            "type": "string",
-                            "description": "ORCID host (orcid.org)"
-                          }
-                        }
+                      "uri": {
+                        "type": "string",
+                        "description": "Full ORCID URI (e.g., https://orcid.org/0000-0001-9161-999X)"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "ORCID iD (e.g., 0000-0001-9161-999X). Use this with ORCID_get_person and ORCID_get_works."
+                      },
+                      "host": {
+                        "type": "string",
+                        "description": "ORCID host (orcid.org)"
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -85,7 +85,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -101,7 +103,9 @@
           "description": "ORCID iD in format XXXX-XXXX-XXXX-XXXX (e.g., '0000-0001-9161-999X' for Jennifer Doudna). Find using ORCID_search_researchers."
         }
       },
-      "required": ["orcid_id"]
+      "required": [
+        "orcid_id"
+      ]
     },
     "fields": {
       "endpoint": "https://pub.orcid.org/v3.0/{orcid_id}/person",
@@ -111,98 +115,117 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"orcid_id": "0000-0001-9161-999X"},
-      {"orcid_id": "0000-0002-8843-5302"}
+      {
+        "orcid_id": "0000-0001-9161-999X"
+      },
+      {
+        "orcid_id": "0000-0002-8843-5302"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Researcher biographical information from ORCID",
           "properties": {
-            "data": {
+            "name": {
               "type": "object",
-              "description": "Researcher biographical information from ORCID",
+              "description": "Researcher's name",
               "properties": {
-                "name": {
+                "given-names": {
                   "type": "object",
-                  "description": "Researcher's name",
                   "properties": {
-                    "given-names": {
-                      "type": "object",
-                      "properties": {
-                        "value": {"type": "string"}
-                      }
-                    },
-                    "family-name": {
-                      "type": "object",
-                      "properties": {
-                        "value": {"type": "string"}
-                      }
-                    },
-                    "credit-name": {
-                      "type": ["object", "null"],
-                      "description": "Published/credit name if different from given/family name"
+                    "value": {
+                      "type": "string"
                     }
                   }
                 },
-                "biography": {
-                  "type": ["object", "null"],
-                  "description": "Researcher biography text",
-                  "properties": {
-                    "content": {"type": ["string", "null"]}
-                  }
-                },
-                "keywords": {
+                "family-name": {
                   "type": "object",
-                  "description": "Research keywords",
                   "properties": {
-                    "keyword": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "content": {"type": "string"}
-                        }
-                      }
+                    "value": {
+                      "type": "string"
                     }
                   }
                 },
-                "researcher-urls": {
-                  "type": "object",
-                  "description": "Researcher's websites and profiles",
-                  "properties": {
-                    "researcher-url": {
-                      "type": "array",
-                      "items": {
+                "credit-name": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "description": "Published/credit name if different from given/family name"
+                }
+              }
+            },
+            "biography": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Researcher biography text",
+              "properties": {
+                "content": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "keywords": {
+              "type": "object",
+              "description": "Research keywords",
+              "properties": {
+                "keyword": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "researcher-urls": {
+              "type": "object",
+              "description": "Researcher's websites and profiles",
+              "properties": {
+                "researcher-url": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url-name": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "url": {
                         "type": "object",
                         "properties": {
-                          "url-name": {"type": ["string", "null"]},
-                          "url": {
-                            "type": "object",
-                            "properties": {
-                              "value": {"type": "string"}
-                            }
+                          "value": {
+                            "type": "string"
                           }
                         }
                       }
                     }
                   }
-                },
-                "external-identifiers": {
-                  "type": "object",
-                  "description": "External identifiers (Scopus Author ID, ResearcherID, etc.)"
-                },
-                "addresses": {
-                  "type": "object",
-                  "description": "Country/location information"
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "external-identifiers": {
+              "type": "object",
+              "description": "External identifiers (Scopus Author ID, ResearcherID, etc.)"
+            },
+            "addresses": {
+              "type": "object",
+              "description": "Country/location information"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -212,7 +235,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -228,7 +253,9 @@
           "description": "ORCID iD in format XXXX-XXXX-XXXX-XXXX (e.g., '0000-0001-9161-999X' for Jennifer Doudna)"
         }
       },
-      "required": ["orcid_id"]
+      "required": [
+        "orcid_id"
+      ]
     },
     "fields": {
       "endpoint": "https://pub.orcid.org/v3.0/{orcid_id}/works",
@@ -238,110 +265,136 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"orcid_id": "0000-0001-9161-999X"},
-      {"orcid_id": "0000-0002-8843-5302"}
+      {
+        "orcid_id": "0000-0001-9161-999X"
+      },
+      {
+        "orcid_id": "0000-0002-8843-5302"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "ORCID works (publications) response",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "ORCID works (publications) response",
-              "properties": {
-                "group": {
-                  "type": "array",
-                  "description": "Groups of works (deduplicated). Each group contains one or more work-summary entries for the same work.",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "work-summary": {
-                        "type": "array",
-                        "description": "Work summaries within the group",
-                        "items": {
+            "group": {
+              "type": "array",
+              "description": "Groups of works (deduplicated). Each group contains one or more work-summary entries for the same work.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "work-summary": {
+                    "type": "array",
+                    "description": "Work summaries within the group",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
                           "type": "object",
                           "properties": {
                             "title": {
                               "type": "object",
                               "properties": {
-                                "title": {
-                                  "type": "object",
-                                  "properties": {
-                                    "value": {"type": "string", "description": "Publication title"}
-                                  }
+                                "value": {
+                                  "type": "string",
+                                  "description": "Publication title"
                                 }
-                              }
-                            },
-                            "publication-date": {
-                              "type": ["object", "null"],
-                              "description": "Publication date with year/month/day components",
-                              "properties": {
-                                "year": {
-                                  "type": "object",
-                                  "properties": {"value": {"type": "string"}}
-                                },
-                                "month": {
-                                  "type": ["object", "null"],
-                                  "properties": {"value": {"type": "string"}}
-                                }
-                              }
-                            },
-                            "journal-title": {
-                              "type": ["object", "null"],
-                              "description": "Journal or venue name",
-                              "properties": {
-                                "value": {"type": "string"}
-                              }
-                            },
-                            "type": {
-                              "type": "string",
-                              "description": "Work type (e.g., journal-article, conference-paper, book-chapter)"
-                            },
-                            "external-ids": {
-                              "type": "object",
-                              "description": "External identifiers (DOI, PubMed ID, etc.)",
-                              "properties": {
-                                "external-id": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "external-id-type": {"type": "string"},
-                                      "external-id-value": {"type": "string"}
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "url": {
-                              "type": ["object", "null"],
-                              "description": "URL to the work",
-                              "properties": {
-                                "value": {"type": "string"}
                               }
                             }
                           }
+                        },
+                        "publication-date": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "description": "Publication date with year/month/day components",
+                          "properties": {
+                            "year": {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "month": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "journal-title": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "description": "Journal or venue name",
+                          "properties": {
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Work type (e.g., journal-article, conference-paper, book-chapter)"
+                        },
+                        "external-ids": {
+                          "type": "object",
+                          "description": "External identifiers (DOI, PubMed ID, etc.)",
+                          "properties": {
+                            "external-id": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "external-id-type": {
+                                    "type": "string"
+                                  },
+                                  "external-id-value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "url": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "description": "URL to the work",
+                          "properties": {
+                            "value": {
+                              "type": "string"
+                            }
+                          }
                         }
-                      },
-                      "external-ids": {
-                        "type": "object",
-                        "description": "Group-level external identifiers"
                       }
                     }
+                  },
+                  "external-ids": {
+                    "type": "object",
+                    "description": "Group-level external identifiers"
                   }
-                },
-                "last-modified-date": {
-                  "type": "object",
-                  "description": "Last modification timestamp"
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "last-modified-date": {
+              "type": "object",
+              "description": "Last modification timestamp"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -351,7 +404,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

@@ -10,7 +10,9 @@
           "description": "Object name in NED format. Examples: 'NGC 1300', 'M31', 'Andromeda Galaxy', 'Coma Cluster', '3C 273', 'Markarian 421', 'Arp 299', 'NGC 4889'"
         }
       },
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "fields": {
       "endpoint": "https://ned.ipac.caltech.edu/srs/ObjectLookup",
@@ -30,66 +32,125 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name": "NGC 1300"},
-      {"name": "M31"},
-      {"name": "3C 273"}
+      {
+        "name": "NGC 1300"
+      },
+      {
+        "name": "M31"
+      },
+      {
+        "name": "3C 273"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "NED object lookup result",
           "properties": {
-            "data": {
+            "QueryTime": {
+              "type": "string"
+            },
+            "Supplied": {
+              "type": "string",
+              "description": "Input object name as supplied"
+            },
+            "NameResolver": {
+              "type": "string"
+            },
+            "Interpreted": {
               "type": "object",
-              "description": "NED object lookup result",
               "properties": {
-                "QueryTime": {"type": "string"},
-                "Supplied": {"type": "string", "description": "Input object name as supplied"},
-                "NameResolver": {"type": "string"},
-                "Interpreted": {
-                  "type": "object",
-                  "properties": {"Name": {"type": "string"}}
+                "Name": {
+                  "type": "string"
+                }
+              }
+            },
+            "Preferred": {
+              "type": "object",
+              "description": "Preferred NED name and properties",
+              "properties": {
+                "Name": {
+                  "type": "string",
+                  "description": "NED preferred name"
                 },
-                "Preferred": {
+                "Position": {
                   "type": "object",
-                  "description": "Preferred NED name and properties",
                   "properties": {
-                    "Name": {"type": "string", "description": "NED preferred name"},
-                    "Position": {
-                      "type": "object",
-                      "properties": {
-                        "RA": {"type": "number", "description": "Right Ascension (degrees, J2000)"},
-                        "Dec": {"type": "number", "description": "Declination (degrees, J2000)"},
-                        "UncSemiMajor": {"type": ["number", "null"]},
-                        "UncSemiMinor": {"type": ["number", "null"]}
-                      }
+                    "RA": {
+                      "type": "number",
+                      "description": "Right Ascension (degrees, J2000)"
                     },
-                    "ObjType": {
-                      "type": "object",
-                      "properties": {"Value": {"type": "string", "description": "Object type code (G=galaxy, QSO, AGN, GClstr, etc.)"}}
+                    "Dec": {
+                      "type": "number",
+                      "description": "Declination (degrees, J2000)"
                     },
-                    "Redshift": {
-                      "type": ["object", "null"],
-                      "properties": {
-                        "Value": {"type": "number"},
-                        "Unc": {"type": ["number", "null"]},
-                        "Quality": {"type": ["string", "null"]}
-                      }
+                    "UncSemiMajor": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "UncSemiMinor": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
                     }
                   }
                 },
-                "StatusCode": {"type": "integer"},
-                "ResultCode": {"type": "integer"}
+                "ObjType": {
+                  "type": "object",
+                  "properties": {
+                    "Value": {
+                      "type": "string",
+                      "description": "Object type code (G=galaxy, QSO, AGN, GClstr, etc.)"
+                    }
+                  }
+                },
+                "Redshift": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "Value": {
+                      "type": "number"
+                    },
+                    "Unc": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "Quality": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "StatusCode": {
+              "type": "integer"
+            },
+            "ResultCode": {
+              "type": "integer"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

@@ -15,24 +15,23 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of available record types in VEuPathDB",
-              "items": {
-                "type": "string",
-                "description": "Record type name (e.g., 'gene', 'transcript', 'organism', 'genomic-sequence', 'dataset')"
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "List of available record types in VEuPathDB",
+          "items": {
+            "type": "string",
+            "description": "Record type name (e.g., 'gene', 'transcript', 'organism', 'genomic-sequence', 'dataset')"
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -56,33 +55,61 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Available gene search strategies",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "urlSegment": {"type": "string", "description": "URL path segment for this search"},
-                  "displayName": {"type": "string", "description": "Human-readable name"},
-                  "shortDisplayName": {"type": "string", "description": "Short display name"},
-                  "description": {"type": ["string", "null"], "description": "Search description"},
-                  "fullName": {"type": "string", "description": "Fully qualified search name"},
-                  "paramNames": {"type": "array", "items": {"type": "string"}, "description": "Required parameter names"},
-                  "outputRecordClassName": {"type": "string", "description": "Output record class"},
-                  "isAnalyzable": {"type": "boolean"}
-                }
+          "type": "array",
+          "description": "Available gene search strategies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "urlSegment": {
+                "type": "string",
+                "description": "URL path segment for this search"
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Human-readable name"
+              },
+              "shortDisplayName": {
+                "type": "string",
+                "description": "Short display name"
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Search description"
+              },
+              "fullName": {
+                "type": "string",
+                "description": "Fully qualified search name"
+              },
+              "paramNames": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required parameter names"
+              },
+              "outputRecordClassName": {
+                "type": "string",
+                "description": "Output record class"
+              },
+              "isAnalyzable": {
+                "type": "boolean"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
@@ -106,29 +133,46 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Available organism search strategies",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "urlSegment": {"type": "string", "description": "URL path segment for this search"},
-                  "displayName": {"type": "string", "description": "Human-readable name"},
-                  "description": {"type": ["string", "null"], "description": "Search description"},
-                  "paramNames": {"type": "array", "items": {"type": "string"}, "description": "Required parameter names"}
-                }
+          "type": "array",
+          "description": "Available organism search strategies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "urlSegment": {
+                "type": "string",
+                "description": "URL path segment for this search"
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Human-readable name"
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Search description"
+              },
+              "paramNames": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Required parameter names"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },

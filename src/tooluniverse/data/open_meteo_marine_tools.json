@@ -45,24 +45,17 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Marine forecast data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Marine forecast data",
-              "properties": {
-                "latitude": {"type": "number"},
-                "longitude": {"type": "number"},
-                "timezone": {"type": "string"},
-                "elevation": {"type": "number", "description": "Always 0.0 for marine data"},
-                "hourly": {"type": "object", "description": "Hourly marine forecast with time array and variable arrays"},
-                "hourly_units": {"type": "object", "description": "Units for hourly variables (m, degrees, s)"},
-                "daily": {"type": "object", "description": "Daily marine forecast summaries"},
-                "daily_units": {"type": "object"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "latitude": {"type": "number"},
+            "longitude": {"type": "number"},
+            "timezone": {"type": "string"},
+            "elevation": {"type": "number", "description": "Always 0.0 for marine data"},
+            "hourly": {"type": "object", "description": "Hourly marine forecast with time array and variable arrays"},
+            "hourly_units": {"type": "object", "description": "Units for hourly variables (m, degrees, s)"},
+            "daily": {"type": "object", "description": "Daily marine forecast summaries"},
+            "daily_units": {"type": "object"}
+          }
         },
         {
           "type": "object",

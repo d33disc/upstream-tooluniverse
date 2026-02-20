@@ -20,75 +20,97 @@
           "description": "Maximum number of variants to return (default 20, max ~1000)"
         }
       },
-      "required": ["gene"]
+      "required": [
+        "gene"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/genes/{gene}/variants"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"gene": "BRCA2", "species": "hsapiens_grch38", "limit": 5},
-      {"gene": "TP53", "species": "hsapiens_grch38", "limit": 5},
-      {"gene": "EGFR", "species": "hsapiens_grch38", "limit": 3}
+      {
+        "gene": "BRCA2",
+        "species": "hsapiens_grch38",
+        "limit": 5
+      },
+      {
+        "gene": "TP53",
+        "species": "hsapiens_grch38",
+        "limit": 5
+      },
+      {
+        "gene": "EGFR",
+        "species": "hsapiens_grch38",
+        "limit": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "EVA response containing variant data for the gene",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "EVA response containing variant data for the gene",
-              "properties": {
-                "time": {
-                  "type": "integer",
-                  "description": "Query execution time in milliseconds"
-                },
-                "apiVersion": {
-                  "type": "string",
-                  "description": "API version (e.g., 'v1')"
-                },
-                "response": {
-                  "type": "array",
-                  "description": "Array of response objects containing variant results",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "numResults": {
-                        "type": "integer",
-                        "description": "Number of results in this response"
-                      },
-                      "numTotalResults": {
-                        "type": "integer",
-                        "description": "Total number of variants available for the gene"
-                      },
-                      "result": {
-                        "type": "array",
-                        "description": "Array of variant objects",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "chromosome": {"type": "string"},
-                            "start": {"type": "integer"},
-                            "end": {"type": "integer"},
-                            "reference": {"type": "string"},
-                            "alternate": {"type": "string"},
-                            "type": {"type": "string", "description": "Variant type (SNV, INDEL, etc.)"},
-                            "hgvs": {"type": "object"},
-                            "sourceEntries": {"type": "object"}
-                          }
+            "time": {
+              "type": "integer",
+              "description": "Query execution time in milliseconds"
+            },
+            "apiVersion": {
+              "type": "string",
+              "description": "API version (e.g., 'v1')"
+            },
+            "response": {
+              "type": "array",
+              "description": "Array of response objects containing variant results",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "numResults": {
+                    "type": "integer",
+                    "description": "Number of results in this response"
+                  },
+                  "numTotalResults": {
+                    "type": "integer",
+                    "description": "Total number of variants available for the gene"
+                  },
+                  "result": {
+                    "type": "array",
+                    "description": "Array of variant objects",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "chromosome": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "integer"
+                        },
+                        "end": {
+                          "type": "integer"
+                        },
+                        "reference": {
+                          "type": "string"
+                        },
+                        "alternate": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Variant type (SNV, INDEL, etc.)"
+                        },
+                        "hgvs": {
+                          "type": "object"
+                        },
+                        "sourceEntries": {
+                          "type": "object"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -98,7 +120,9 @@
               "description": "Error message"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -124,67 +148,104 @@
           "description": "Maximum number of variants to return"
         }
       },
-      "required": ["region"]
+      "required": [
+        "region"
+      ]
     },
     "fields": {
       "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/segments/{region}/variants"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"region": "17:41200000-41210000", "species": "hsapiens_grch38", "limit": 5},
-      {"region": "7:140753300-140753400", "species": "hsapiens_grch38", "limit": 5},
-      {"region": "19:44905700-44910000", "species": "hsapiens_grch38", "limit": 3}
+      {
+        "region": "17:41200000-41210000",
+        "species": "hsapiens_grch38",
+        "limit": 5
+      },
+      {
+        "region": "7:140753300-140753400",
+        "species": "hsapiens_grch38",
+        "limit": 5
+      },
+      {
+        "region": "19:44905700-44910000",
+        "species": "hsapiens_grch38",
+        "limit": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "EVA response containing variants in the specified genomic region",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "EVA response containing variants in the specified genomic region",
-              "properties": {
-                "time": {"type": "integer"},
-                "apiVersion": {"type": "string"},
-                "response": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "numResults": {"type": "integer"},
-                      "numTotalResults": {"type": "integer"},
-                      "result": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "chromosome": {"type": "string"},
-                            "start": {"type": "integer"},
-                            "end": {"type": "integer"},
-                            "reference": {"type": "string"},
-                            "alternate": {"type": "string"},
-                            "type": {"type": "string"},
-                            "length": {"type": "integer"},
-                            "hgvs": {"type": "object"},
-                            "sourceEntries": {"type": "object"}
-                          }
+            "time": {
+              "type": "integer"
+            },
+            "apiVersion": {
+              "type": "string"
+            },
+            "response": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "numResults": {
+                    "type": "integer"
+                  },
+                  "numTotalResults": {
+                    "type": "integer"
+                  },
+                  "result": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "chromosome": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "integer"
+                        },
+                        "end": {
+                          "type": "integer"
+                        },
+                        "reference": {
+                          "type": "string"
+                        },
+                        "alternate": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "length": {
+                          "type": "integer"
+                        },
+                        "hgvs": {
+                          "type": "object"
+                        },
+                        "sourceEntries": {
+                          "type": "object"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -208,46 +269,55 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"species": "hsapiens_grch38"},
-      {"species": "mmusculus_grcm38"}
+      {
+        "species": "hsapiens_grch38"
+      },
+      {
+        "species": "mmusculus_grcm38"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "List of available EVA studies",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "List of available EVA studies",
-              "properties": {
-                "time": {"type": "integer"},
-                "apiVersion": {"type": "string"},
-                "response": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "numResults": {"type": "integer"},
-                      "numTotalResults": {"type": "integer"},
-                      "result": {
-                        "type": "array",
-                        "description": "Array of study accession strings"
-                      }
-                    }
+            "time": {
+              "type": "integer"
+            },
+            "apiVersion": {
+              "type": "string"
+            },
+            "response": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "numResults": {
+                    "type": "integer"
+                  },
+                  "numTotalResults": {
+                    "type": "integer"
+                  },
+                  "result": {
+                    "type": "array",
+                    "description": "Array of study accession strings"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

@@ -36,37 +36,30 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Search results containing a list of matching bioinformatics tools",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Search results containing a list of matching bioinformatics tools",
-              "properties": {
-                "count": {"type": "integer", "description": "Total number of matching tools"},
-                "next": {"type": ["string", "null"], "description": "URL for next page of results"},
-                "previous": {"type": ["string", "null"], "description": "URL for previous page"},
-                "list": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string"},
-                      "biotoolsID": {"type": "string"},
-                      "description": {"type": "string"},
-                      "homepage": {"type": "string"},
-                      "toolType": {"type": "array", "items": {"type": "string"}},
-                      "topic": {"type": "array"},
-                      "function": {"type": "array"},
-                      "language": {"type": "array"},
-                      "operatingSystem": {"type": "array"},
-                      "license": {"type": ["string", "null"]}
-                    }
-                  }
+            "count": {"type": "integer", "description": "Total number of matching tools"},
+            "next": {"type": ["string", "null"], "description": "URL for next page of results"},
+            "previous": {"type": ["string", "null"], "description": "URL for previous page"},
+            "list": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "biotoolsID": {"type": "string"},
+                  "description": {"type": "string"},
+                  "homepage": {"type": "string"},
+                  "toolType": {"type": "array", "items": {"type": "string"}},
+                  "topic": {"type": "array"},
+                  "function": {"type": "array"},
+                  "language": {"type": "array"},
+                  "operatingSystem": {"type": "array"},
+                  "license": {"type": ["string", "null"]}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
@@ -107,34 +100,27 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Detailed tool information from Bio.tools registry",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed tool information from Bio.tools registry",
-              "properties": {
-                "name": {"type": "string"},
-                "biotoolsID": {"type": "string"},
-                "biotoolsCURIE": {"type": "string"},
-                "description": {"type": "string"},
-                "homepage": {"type": "string"},
-                "version": {"type": "array"},
-                "toolType": {"type": "array", "items": {"type": "string"}},
-                "topic": {"type": "array"},
-                "function": {"type": "array"},
-                "language": {"type": "array", "items": {"type": "string"}},
-                "operatingSystem": {"type": "array", "items": {"type": "string"}},
-                "license": {"type": ["string", "null"]},
-                "maturity": {"type": ["string", "null"]},
-                "link": {"type": "array"},
-                "download": {"type": "array"},
-                "documentation": {"type": "array"},
-                "credit": {"type": "array"},
-                "collectionID": {"type": "array"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "name": {"type": "string"},
+            "biotoolsID": {"type": "string"},
+            "biotoolsCURIE": {"type": "string"},
+            "description": {"type": "string"},
+            "homepage": {"type": "string"},
+            "version": {"type": "array"},
+            "toolType": {"type": "array", "items": {"type": "string"}},
+            "topic": {"type": "array"},
+            "function": {"type": "array"},
+            "language": {"type": "array", "items": {"type": "string"}},
+            "operatingSystem": {"type": "array", "items": {"type": "string"}},
+            "license": {"type": ["string", "null"]},
+            "maturity": {"type": ["string", "null"]},
+            "link": {"type": "array"},
+            "download": {"type": "array"},
+            "documentation": {"type": "array"},
+            "credit": {"type": "array"},
+            "collectionID": {"type": "array"}
+          }
         },
         {
           "type": "object",
@@ -185,33 +171,26 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Tools matching the specified scientific topic",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Tools matching the specified scientific topic",
-              "properties": {
-                "count": {"type": "integer"},
-                "next": {"type": ["string", "null"]},
-                "previous": {"type": ["string", "null"]},
-                "list": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string"},
-                      "biotoolsID": {"type": "string"},
-                      "description": {"type": "string"},
-                      "homepage": {"type": "string"},
-                      "toolType": {"type": "array"},
-                      "topic": {"type": "array"}
-                    }
-                  }
+            "count": {"type": "integer"},
+            "next": {"type": ["string", "null"]},
+            "previous": {"type": ["string", "null"]},
+            "list": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "biotoolsID": {"type": "string"},
+                  "description": {"type": "string"},
+                  "homepage": {"type": "string"},
+                  "toolType": {"type": "array"},
+                  "topic": {"type": "array"}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
@@ -262,33 +241,26 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Tools matching the specified computational operation",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Tools matching the specified computational operation",
-              "properties": {
-                "count": {"type": "integer"},
-                "next": {"type": ["string", "null"]},
-                "previous": {"type": ["string", "null"]},
-                "list": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string"},
-                      "biotoolsID": {"type": "string"},
-                      "description": {"type": "string"},
-                      "homepage": {"type": "string"},
-                      "toolType": {"type": "array"},
-                      "function": {"type": "array"}
-                    }
-                  }
+            "count": {"type": "integer"},
+            "next": {"type": ["string", "null"]},
+            "previous": {"type": ["string", "null"]},
+            "list": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "biotoolsID": {"type": "string"},
+                  "description": {"type": "string"},
+                  "homepage": {"type": "string"},
+                  "toolType": {"type": "array"},
+                  "function": {"type": "array"}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
@@ -343,32 +315,25 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Tools matching the specified resource type",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Tools matching the specified resource type",
-              "properties": {
-                "count": {"type": "integer"},
-                "next": {"type": ["string", "null"]},
-                "previous": {"type": ["string", "null"]},
-                "list": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string"},
-                      "biotoolsID": {"type": "string"},
-                      "description": {"type": "string"},
-                      "homepage": {"type": "string"},
-                      "toolType": {"type": "array"}
-                    }
-                  }
+            "count": {"type": "integer"},
+            "next": {"type": ["string", "null"]},
+            "previous": {"type": ["string", "null"]},
+            "list": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "biotoolsID": {"type": "string"},
+                  "description": {"type": "string"},
+                  "homepage": {"type": "string"},
+                  "toolType": {"type": "array"}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",

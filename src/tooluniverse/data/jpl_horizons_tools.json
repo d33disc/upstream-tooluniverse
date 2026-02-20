@@ -10,7 +10,9 @@
           "description": "Object name or partial name to search. Examples: 'Mars', 'Jupiter', 'Ceres', 'Halley', '1P' (Halley's Comet designation), 'Apophis', 'Voyager', 'Cassini'"
         }
       },
-      "required": ["sstr"]
+      "required": [
+        "sstr"
+      ]
     },
     "fields": {
       "endpoint": "https://ssd.jpl.nasa.gov/api/horizons_lookup.api",
@@ -20,43 +22,72 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"sstr": "Mars"},
-      {"sstr": "Ceres"},
-      {"sstr": "Apophis"}
+      {
+        "sstr": "Mars"
+      },
+      {
+        "sstr": "Ceres"
+      },
+      {
+        "sstr": "Apophis"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "JPL Horizons object lookup results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "JPL Horizons object lookup results",
-              "properties": {
-                "result": {
-                  "type": "array",
-                  "description": "List of matching solar system objects",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "spkid": {"type": ["string", "null"], "description": "SPK ID for use in ephemeris queries (e.g., '499' for Mars, '1' for Ceres, '-77' for Cassini)"},
-                      "name": {"type": "string", "description": "Object name"},
-                      "type": {"type": "string", "description": "Object type: planet, barycenter, asteroid, comet, spacecraft, satellite, dso"},
-                      "pdes": {"type": ["string", "null"], "description": "Primary designation (e.g., '1997 XF11')"},
-                      "alias": {"type": "array", "items": {"type": "string"}, "description": "Alternative names and designations"}
-                    }
+            "result": {
+              "type": "array",
+              "description": "List of matching solar system objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "spkid": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "SPK ID for use in ephemeris queries (e.g., '499' for Mars, '1' for Ceres, '-77' for Cassini)"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Object name"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Object type: planet, barycenter, asteroid, comet, spacecraft, satellite, dso"
+                  },
+                  "pdes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Primary designation (e.g., '1997 XF11')"
+                  },
+                  "alias": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Alternative names and designations"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -72,7 +103,9 @@
           "description": "JPL Horizons body ID. Planets: '199' (Mercury), '299' (Venus), '399' (Earth), '499' (Mars), '599' (Jupiter), '699' (Saturn), '799' (Uranus), '899' (Neptune). Moon: '301'. Pluto: '999'. Ceres: '1'. Asteroids by number. Use JPLHorizons_lookup_object to find IDs."
         }
       },
-      "required": ["COMMAND"]
+      "required": [
+        "COMMAND"
+      ]
     },
     "fields": {
       "endpoint": "https://ssd.jpl.nasa.gov/api/horizons.api",
@@ -84,40 +117,49 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"COMMAND": "499"},
-      {"COMMAND": "699"},
-      {"COMMAND": "1"}
+      {
+        "COMMAND": "499"
+      },
+      {
+        "COMMAND": "699"
+      },
+      {
+        "COMMAND": "1"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "JPL Horizons response with body physical data",
           "properties": {
-            "data": {
+            "result": {
+              "type": "string",
+              "description": "Plain text output from Horizons containing physical data, orbital elements, and body characteristics. Parse the text for specific values."
+            },
+            "signature": {
               "type": "object",
-              "description": "JPL Horizons response with body physical data",
               "properties": {
-                "result": {
-                  "type": "string",
-                  "description": "Plain text output from Horizons containing physical data, orbital elements, and body characteristics. Parse the text for specific values."
+                "version": {
+                  "type": "string"
                 },
-                "signature": {
-                  "type": "object",
-                  "properties": {
-                    "version": {"type": "string"},
-                    "source": {"type": "string"}
-                  }
+                "source": {
+                  "type": "string"
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

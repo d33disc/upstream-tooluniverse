@@ -10,11 +10,16 @@
           "description": "Start date in YYYY-MM-DD format (e.g., '2025-01-15'). Feed covers up to 7 days from this date."
         },
         "end_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "End date in YYYY-MM-DD format (e.g., '2025-01-16'). Must be within 7 days of start_date. Defaults to start_date + 7 days if omitted."
         }
       },
-      "required": ["start_date"]
+      "required": [
+        "start_date"
+      ]
     },
     "fields": {
       "endpoint": "https://api.nasa.gov/neo/rest/v1/feed",
@@ -24,38 +29,49 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"start_date": "2025-01-15", "end_date": "2025-01-16"},
-      {"start_date": "2025-06-21", "end_date": "2025-06-22"},
-      {"start_date": "2025-03-01", "end_date": "2025-03-02"}
+      {
+        "start_date": "2025-01-15",
+        "end_date": "2025-01-16"
+      },
+      {
+        "start_date": "2025-06-21",
+        "end_date": "2025-06-22"
+      },
+      {
+        "start_date": "2025-03-01",
+        "end_date": "2025-03-02"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Near-Earth object feed data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Near-Earth object feed data",
-              "properties": {
-                "element_count": {"type": "integer", "description": "Total number of NEOs in the date range"},
-                "near_earth_objects": {
-                  "type": "object",
-                  "description": "NEOs grouped by date (key is YYYY-MM-DD). Each date maps to an array of asteroid objects with name, estimated_diameter, is_potentially_hazardous_asteroid, and close_approach_data."
-                },
-                "links": {
-                  "type": "object",
-                  "description": "Pagination links (next, previous, self)"
-                }
-              }
+            "element_count": {
+              "type": "integer",
+              "description": "Total number of NEOs in the date range"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "near_earth_objects": {
+              "type": "object",
+              "description": "NEOs grouped by date (key is YYYY-MM-DD). Each date maps to an array of asteroid objects with name, estimated_diameter, is_potentially_hazardous_asteroid, and close_approach_data."
+            },
+            "links": {
+              "type": "object",
+              "description": "Pagination links (next, previous, self)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -71,7 +87,9 @@
           "description": "NASA SPK-ID of the asteroid. Examples: '3542519' (2010 PK9), '2021277' (21277 1996 TO5), '2000433' (433 Eros), '2099942' (99942 Apophis)"
         }
       },
-      "required": ["asteroid_id"]
+      "required": [
+        "asteroid_id"
+      ]
     },
     "fields": {
       "endpoint": "https://api.nasa.gov/neo/rest/v1/neo/{asteroid_id}",
@@ -81,48 +99,74 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"asteroid_id": "3542519"},
-      {"asteroid_id": "2021277"},
-      {"asteroid_id": "2099942"}
+      {
+        "asteroid_id": "3542519"
+      },
+      {
+        "asteroid_id": "2021277"
+      },
+      {
+        "asteroid_id": "2099942"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Detailed asteroid data",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed asteroid data",
-              "properties": {
-                "id": {"type": "string", "description": "NEO reference ID"},
-                "neo_reference_id": {"type": "string", "description": "NEO reference ID"},
-                "name": {"type": "string", "description": "Asteroid name/designation"},
-                "nasa_jpl_url": {"type": "string", "description": "URL to NASA JPL page for this asteroid"},
-                "absolute_magnitude_h": {"type": "number", "description": "Absolute magnitude (H) - brightness measure"},
-                "is_potentially_hazardous_asteroid": {"type": "boolean", "description": "Whether this asteroid is classified as potentially hazardous"},
-                "estimated_diameter": {
-                  "type": "object",
-                  "description": "Estimated diameter in various units (kilometers, meters, miles, feet) with min/max ranges"
-                },
-                "close_approach_data": {
-                  "type": "array",
-                  "description": "List of close approaches with date, relative velocity, and miss distance"
-                },
-                "orbital_data": {
-                  "type": "object",
-                  "description": "Orbital parameters including eccentricity, semi-major axis, inclination, orbital period"
-                },
-                "is_sentry_object": {"type": "boolean", "description": "Whether monitored by NASA Sentry impact monitoring system"}
-              }
+            "id": {
+              "type": "string",
+              "description": "NEO reference ID"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "neo_reference_id": {
+              "type": "string",
+              "description": "NEO reference ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Asteroid name/designation"
+            },
+            "nasa_jpl_url": {
+              "type": "string",
+              "description": "URL to NASA JPL page for this asteroid"
+            },
+            "absolute_magnitude_h": {
+              "type": "number",
+              "description": "Absolute magnitude (H) - brightness measure"
+            },
+            "is_potentially_hazardous_asteroid": {
+              "type": "boolean",
+              "description": "Whether this asteroid is classified as potentially hazardous"
+            },
+            "estimated_diameter": {
+              "type": "object",
+              "description": "Estimated diameter in various units (kilometers, meters, miles, feet) with min/max ranges"
+            },
+            "close_approach_data": {
+              "type": "array",
+              "description": "List of close approaches with date, relative velocity, and miss distance"
+            },
+            "orbital_data": {
+              "type": "object",
+              "description": "Orbital parameters including eccentricity, semi-major axis, inclination, orbital period"
+            },
+            "is_sentry_object": {
+              "type": "boolean",
+              "description": "Whether monitored by NASA Sentry impact monitoring system"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -134,11 +178,17 @@
       "type": "object",
       "properties": {
         "page": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Page number (0-indexed). Default: 0. Each page returns 20 asteroids."
         },
         "size": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results per page (default 20, max 20)"
         }
       },
@@ -153,40 +203,45 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {},
-      {"page": 0, "size": 5},
-      {"page": 1, "size": 10}
+      {
+        "page": 0,
+        "size": 5
+      },
+      {
+        "page": 1,
+        "size": 10
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Paginated asteroid browse results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Paginated asteroid browse results",
-              "properties": {
-                "near_earth_objects": {
-                  "type": "array",
-                  "description": "Array of asteroid objects with id, name, estimated_diameter, is_potentially_hazardous_asteroid, close_approach_data, orbital_data"
-                },
-                "page": {
-                  "type": "object",
-                  "description": "Pagination info with size, total_elements, total_pages, number"
-                },
-                "links": {
-                  "type": "object",
-                  "description": "Navigation links (self, next, previous)"
-                }
-              }
+            "near_earth_objects": {
+              "type": "array",
+              "description": "Array of asteroid objects with id, name, estimated_diameter, is_potentially_hazardous_asteroid, close_approach_data, orbital_data"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "page": {
+              "type": "object",
+              "description": "Pagination info with size, total_elements, total_pages, number"
+            },
+            "links": {
+              "type": "object",
+              "description": "Navigation links (self, next, previous)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

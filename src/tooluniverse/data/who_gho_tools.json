@@ -30,27 +30,20 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "WHO GHO indicator search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "WHO GHO indicator search results",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "List of matching indicators",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "IndicatorCode": {"type": "string", "description": "Unique indicator code (use in WHOGHO_get_indicator_data)"},
-                      "IndicatorName": {"type": "string", "description": "Full indicator name/description"}
-                    }
-                  }
+            "value": {
+              "type": "array",
+              "description": "List of matching indicators",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "IndicatorCode": {"type": "string", "description": "Unique indicator code (use in WHOGHO_get_indicator_data)"},
+                  "IndicatorName": {"type": "string", "description": "Full indicator name/description"}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
@@ -95,33 +88,26 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "WHO GHO indicator data values",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "WHO GHO indicator data values",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "Data records",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "IndicatorCode": {"type": "string"},
-                      "SpatialDim": {"type": ["string", "null"], "description": "Country/region ISO code"},
-                      "TimeDim": {"type": ["integer", "null"], "description": "Year"},
-                      "Dim1": {"type": ["string", "null"], "description": "Dimension 1 (e.g., SEX_BTSX, SEX_MLE, SEX_FMLE)"},
-                      "NumericValue": {"type": ["number", "null"], "description": "Numeric data value"},
-                      "Value": {"type": ["string", "null"], "description": "Formatted value with confidence intervals"},
-                      "Low": {"type": ["number", "null"], "description": "Lower confidence interval"},
-                      "High": {"type": ["number", "null"], "description": "Upper confidence interval"}
-                    }
-                  }
+            "value": {
+              "type": "array",
+              "description": "Data records",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "IndicatorCode": {"type": ["string", "null"]},
+                  "SpatialDim": {"type": ["string", "null"], "description": "Country/region ISO code"},
+                  "TimeDim": {"type": ["integer", "null"], "description": "Year"},
+                  "Dim1": {"type": ["string", "null"], "description": "Dimension 1 (e.g., SEX_BTSX, SEX_MLE, SEX_FMLE)"},
+                  "NumericValue": {"type": ["number", "null"], "description": "Numeric data value"},
+                  "Value": {"type": ["string", "null"], "description": "Formatted value with confidence intervals"},
+                  "Low": {"type": ["number", "null"], "description": "Lower confidence interval"},
+                  "High": {"type": ["number", "null"], "description": "Upper confidence interval"}
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",

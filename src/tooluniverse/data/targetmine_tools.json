@@ -25,7 +25,9 @@
           "description": "Filter by entity category. Options: 'Gene', 'Protein', 'Pathway', 'DiseaseTerm', 'DiseaseConcept', 'IPFBiomarker', 'IPFTrial', 'WHOTrial', 'IPF', 'UMLSTerm', 'MeshTerm', 'EFOTerm', 'DOTerm', 'GOTerm', 'Transcript', 'Exon', 'MRNA', 'IntegratedPathwayCluster', 'TbcAnnotation'."
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://targetmine.mizuguchilab.org/targetmine/service/search",
@@ -38,51 +40,79 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "TargetMine search results",
           "properties": {
-            "data": {
+            "totalHits": {
+              "type": "integer",
+              "description": "Total matching records"
+            },
+            "facets": {
               "type": "object",
-              "description": "TargetMine search results",
-              "properties": {
-                "totalHits": {"type": "integer", "description": "Total matching records"},
-                "facets": {
-                  "type": "object",
-                  "description": "Facet counts by category, organism, and pathway"
-                },
-                "results": {
-                  "type": "array",
-                  "items": {
+              "description": "Facet counts by category, organism, and pathway"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Entity type"
+                  },
+                  "relevance": {
+                    "type": "number"
+                  },
+                  "fields": {
                     "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "type": {"type": "string", "description": "Entity type"},
-                      "relevance": {"type": "number"},
-                      "fields": {
-                        "type": "object",
-                        "description": "Entity-specific fields. For genes: symbol, organism.name, primaryIdentifier. For proteins: primaryAccession, organism.name. For pathways: name, identifier."
-                      }
-                    }
+                    "description": "Entity-specific fields. For genes: symbol, organism.name, primaryIdentifier. For proteins: primaryAccession, organism.name. For pathways: name, identifier."
                   }
-                },
-                "executionTime": {"type": "string"},
-                "wasSuccessful": {"type": "boolean"},
-                "statusCode": {"type": "integer"}
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "executionTime": {
+              "type": "string"
+            },
+            "wasSuccessful": {
+              "type": "boolean"
+            },
+            "statusCode": {
+              "type": "integer"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"q": "TP53", "size": 5, "format": "json"},
-      {"q": "EGFR", "size": 5, "format": "json", "facet_Category": "Gene"},
-      {"q": "kinase inhibitor", "size": 5, "format": "json"}
+      {
+        "q": "TP53",
+        "size": 5,
+        "format": "json"
+      },
+      {
+        "q": "EGFR",
+        "size": 5,
+        "format": "json",
+        "facet_Category": "Gene"
+      },
+      {
+        "q": "kinase inhibitor",
+        "size": 5,
+        "format": "json"
+      }
     ]
   },
   {
@@ -102,7 +132,9 @@
           "description": "Number of results to return (default: 10)."
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://targetmine.mizuguchilab.org/targetmine/service/search",
@@ -116,49 +148,80 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "TargetMine gene search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "TargetMine gene search results",
-              "properties": {
-                "totalHits": {"type": "integer"},
-                "results": {
-                  "type": "array",
-                  "items": {
+            "totalHits": {
+              "type": "integer"
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "relevance": {
+                    "type": "number"
+                  },
+                  "fields": {
                     "type": "object",
                     "properties": {
-                      "id": {"type": "integer"},
-                      "type": {"type": "string"},
-                      "relevance": {"type": "number"},
-                      "fields": {
-                        "type": "object",
-                        "properties": {
-                          "symbol": {"type": "string", "description": "Gene symbol"},
-                          "name": {"type": ["string", "null"], "description": "Full gene name"},
-                          "primaryIdentifier": {"type": "string", "description": "NCBI Entrez Gene ID"},
-                          "organism.name": {"type": "string", "description": "Organism name"}
-                        }
+                      "symbol": {
+                        "type": "string",
+                        "description": "Gene symbol"
+                      },
+                      "name": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "description": "Full gene name"
+                      },
+                      "primaryIdentifier": {
+                        "type": "string",
+                        "description": "NCBI Entrez Gene ID"
+                      },
+                      "organism.name": {
+                        "type": "string",
+                        "description": "Organism name"
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"q": "TP53", "size": 5},
-      {"q": "BRCA1", "size": 5},
-      {"q": "VEGFR", "size": 10}
+      {
+        "q": "TP53",
+        "size": 5
+      },
+      {
+        "q": "BRCA1",
+        "size": 5
+      },
+      {
+        "q": "VEGFR",
+        "size": 10
+      }
     ]
   }
 ]

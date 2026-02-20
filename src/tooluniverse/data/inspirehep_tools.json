@@ -10,63 +10,142 @@
           "description": "INSPIRE search query. Examples: 'higgs boson discovery', 'author:einstein', 'a:witten AND string theory', 'dark matter direct detection', 'cn:atlas AND higgs', 't:gravitational waves'. Use field prefixes: a: or author:, t: or title:, j: journal, cn: collaboration"
         },
         "sort": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Sort order. Values: 'mostrecent' (default), 'mostcited'. Examples: 'mostcited' to get highest-cited papers first"
         },
         "size": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results (1-25). Default: 10"
         },
         "fields": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Comma-separated fields to return. Default includes titles, authors, abstract, citations. Example: 'titles,authors,abstract,citation_count,arxiv_eprints,dois'"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://inspirehep.net/api/literature",
-      "params": {"sort": "mostrecent"}
+      "params": {
+        "sort": "mostrecent"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "higgs boson LHC discovery", "sort": "mostcited", "size": 5},
-      {"q": "author:witten string theory", "size": 5},
-      {"q": "gravitational waves LIGO detection", "sort": "mostrecent", "size": 5}
+      {
+        "q": "higgs boson LHC discovery",
+        "sort": "mostcited",
+        "size": 5
+      },
+      {
+        "q": "author:witten string theory",
+        "size": 5
+      },
+      {
+        "q": "gravitational waves LIGO detection",
+        "sort": "mostrecent",
+        "size": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "INSPIRE-HEP literature search results",
           "properties": {
-            "data": {
+            "hits": {
               "type": "object",
-              "description": "INSPIRE-HEP literature search results",
               "properties": {
+                "total": {
+                  "type": "integer",
+                  "description": "Total matching papers"
+                },
                 "hits": {
-                  "type": "object",
-                  "properties": {
-                    "total": {"type": "integer", "description": "Total matching papers"},
-                    "hits": {
-                      "type": "array",
-                      "description": "List of paper records",
-                      "items": {
+                  "type": "array",
+                  "description": "List of paper records",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "INSPIRE record ID"
+                      },
+                      "metadata": {
                         "type": "object",
                         "properties": {
-                          "id": {"type": "string", "description": "INSPIRE record ID"},
-                          "metadata": {
-                            "type": "object",
-                            "properties": {
-                              "titles": {"type": "array", "items": {"type": "object", "properties": {"title": {"type": "string"}}}},
-                              "authors": {"type": "array", "items": {"type": "object"}},
-                              "abstract": {"type": ["object", "null"]},
-                              "citation_count": {"type": ["integer", "null"]},
-                              "citation_count_without_self_citations": {"type": ["integer", "null"]},
-                              "arxiv_eprints": {"type": "array", "items": {"type": "object", "properties": {"value": {"type": "string"}}}},
-                              "dois": {"type": "array", "items": {"type": "object", "properties": {"value": {"type": "string"}}}},
-                              "collaborations": {"type": "array"},
-                              "publication_info": {"type": "array"}
+                          "titles": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "string"
+                                }
+                              }
                             }
+                          },
+                          "authors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "abstract": {
+                            "type": [
+                              "object",
+                              "null"
+                            ]
+                          },
+                          "citation_count": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "citation_count_without_self_citations": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "arxiv_eprints": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "dois": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "collaborations": {
+                            "type": "array"
+                          },
+                          "publication_info": {
+                            "type": "array"
                           }
                         }
                       }
@@ -74,15 +153,19 @@
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

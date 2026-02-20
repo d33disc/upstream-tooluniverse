@@ -29,20 +29,13 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Age prediction result",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Age prediction result",
-              "properties": {
-                "count": {"type": "integer", "description": "Number of data points used for prediction"},
-                "name": {"type": "string", "description": "The queried name"},
-                "age": {"type": ["integer", "null"], "description": "Predicted age (null if insufficient data)"},
-                "country_id": {"type": ["string", "null"], "description": "Country code used for filtering (if provided)"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "count": {"type": "integer", "description": "Number of data points used for prediction"},
+            "name": {"type": "string", "description": "The queried name"},
+            "age": {"type": ["integer", "null"], "description": "Predicted age (null if insufficient data)"},
+            "country_id": {"type": ["string", "null"], "description": "Country code used for filtering (if provided)"}
+          }
         },
         {
           "type": "object",

@@ -6,11 +6,17 @@
       "type": "object",
       "properties": {
         "first": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of datasets to return (default 10, max 25)"
         },
         "after": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Cursor for pagination - use endCursor from previous response"
         }
       }
@@ -19,53 +25,60 @@
     "fields": {},
     "type": "OpenNeuroTool",
     "test_examples": [
-      {"first": 5}
+      {
+        "first": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
+          "type": "object",
+          "description": "GraphQL response with datasets list and pagination info",
           "properties": {
-            "data": {
+            "datasets": {
               "type": "object",
-              "description": "GraphQL response with datasets list and pagination info",
               "properties": {
-                "datasets": {
-                  "type": "object",
-                  "properties": {
-                    "edges": {
-                      "type": "array",
-                      "items": {
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "node": {
                         "type": "object",
                         "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {"type": "string"},
-                              "name": {"type": "string"},
-                              "public": {"type": "boolean"},
-                              "analytics": {"type": "object"},
-                              "latestSnapshot": {"type": "object"}
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "public": {
+                            "type": "boolean"
+                          },
+                          "analytics": {
+                            "type": "object"
+                          },
+                          "latestSnapshot": {
+                            "type": "object"
                           }
                         }
                       }
-                    },
-                    "pageInfo": {"type": "object"}
+                    }
                   }
+                },
+                "pageInfo": {
+                  "type": "object"
                 }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
               }
             }
           }
         },
         {
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
           }
         }
       ]
@@ -82,53 +95,66 @@
           "description": "OpenNeuro dataset ID (e.g., 'ds000114', 'ds000224', 'ds003097')"
         }
       },
-      "required": ["datasetId"]
+      "required": [
+        "datasetId"
+      ]
     },
     "query_schema": "query GetDataset($datasetId: ID!) {\n  dataset(id: $datasetId) {\n    id\n    created\n    name\n    public\n    publishDate\n    analytics { downloads views }\n    latestSnapshot {\n      id\n      tag\n      created\n      size\n      summary { modalities subjects tasks totalFiles size primaryModality sessions }\n      description { Name BIDSVersion License Authors Funding ReferencesAndLinks DatasetDOI EthicsApprovals }\n      readme\n    }\n    stars { userId }\n  }\n}",
     "fields": {},
     "type": "OpenNeuroTool",
     "test_examples": [
-      {"datasetId": "ds000114"}
+      {
+        "datasetId": "ds000114"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
+          "type": "object",
+          "description": "GraphQL response with dataset details",
           "properties": {
-            "data": {
+            "dataset": {
               "type": "object",
-              "description": "GraphQL response with dataset details",
               "properties": {
-                "dataset": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "public": {
+                  "type": "boolean"
+                },
+                "publishDate": {
+                  "type": "string"
+                },
+                "analytics": {
+                  "type": "object"
+                },
+                "latestSnapshot": {
                   "type": "object",
                   "properties": {
-                    "id": {"type": "string"},
-                    "name": {"type": "string"},
-                    "public": {"type": "boolean"},
-                    "publishDate": {"type": "string"},
-                    "analytics": {"type": "object"},
-                    "latestSnapshot": {
-                      "type": "object",
-                      "properties": {
-                        "summary": {"type": "object"},
-                        "description": {"type": "object"},
-                        "readme": {"type": "string"}
-                      }
+                    "summary": {
+                      "type": "object"
+                    },
+                    "description": {
+                      "type": "object"
+                    },
+                    "readme": {
+                      "type": "string"
                     }
                   }
                 }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
               }
             }
           }
         },
         {
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
           }
         }
       ]
@@ -145,54 +171,63 @@
           "description": "OpenNeuro dataset ID (e.g., 'ds000114')"
         }
       },
-      "required": ["datasetId"]
+      "required": [
+        "datasetId"
+      ]
     },
     "query_schema": "query GetSnapshots($datasetId: ID!) {\n  dataset(id: $datasetId) {\n    id\n    name\n    snapshots {\n      id\n      tag\n      created\n      size\n      summary { modalities subjects totalFiles size }\n      description { Name BIDSVersion Authors }\n    }\n  }\n}",
     "fields": {},
     "type": "OpenNeuroTool",
     "test_examples": [
-      {"datasetId": "ds000114"}
+      {
+        "datasetId": "ds000114"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
+          "type": "object",
+          "description": "GraphQL response with dataset snapshots",
           "properties": {
-            "data": {
+            "dataset": {
               "type": "object",
-              "description": "GraphQL response with dataset snapshots",
               "properties": {
-                "dataset": {
-                  "type": "object",
-                  "properties": {
-                    "id": {"type": "string"},
-                    "name": {"type": "string"},
-                    "snapshots": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {"type": "string"},
-                          "tag": {"type": "string"},
-                          "created": {"type": "string"},
-                          "summary": {"type": "object"}
-                        }
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "snapshots": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "tag": {
+                        "type": "string"
+                      },
+                      "created": {
+                        "type": "string"
+                      },
+                      "summary": {
+                        "type": "object"
                       }
                     }
                   }
                 }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
               }
             }
           }
         },
         {
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
           }
         }
       ]
@@ -209,68 +244,83 @@
           "description": "Imaging modality to filter by. Options: 'MRI', 'EEG', 'iEEG', 'MEG', 'PET'."
         },
         "first": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of datasets to return (default 10, max 25)"
         }
       },
-      "required": ["modality"]
+      "required": [
+        "modality"
+      ]
     },
     "query_schema": "query SearchByModality($first: Int, $modality: String) {\n  datasets(first: $first, modality: $modality, orderBy: {created: descending}) {\n    edges {\n      node {\n        id\n        created\n        name\n        public\n      }\n    }\n    pageInfo { count }\n  }\n}",
     "fields": {},
     "type": "OpenNeuroTool",
     "test_examples": [
-      {"modality": "EEG", "first": 5},
-      {"modality": "MRI", "first": 5}
+      {
+        "modality": "EEG",
+        "first": 5
+      },
+      {
+        "modality": "MRI",
+        "first": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
+          "type": "object",
+          "description": "GraphQL response with filtered datasets",
           "properties": {
-            "data": {
+            "datasets": {
               "type": "object",
-              "description": "GraphQL response with filtered datasets",
               "properties": {
-                "datasets": {
-                  "type": "object",
-                  "properties": {
-                    "edges": {
-                      "type": "array",
-                      "items": {
+                "edges": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "node": {
                         "type": "object",
                         "properties": {
-                          "node": {
-                            "type": "object",
-                            "properties": {
-                              "id": {"type": "string"},
-                              "name": {"type": "string"},
-                              "created": {"type": "string"},
-                              "public": {"type": "boolean"}
-                            }
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "created": {
+                            "type": "string"
+                          },
+                          "public": {
+                            "type": "boolean"
                           }
                         }
                       }
-                    },
-                    "pageInfo": {
-                      "type": "object",
-                      "properties": {
-                        "count": {"type": "integer", "description": "Total matching datasets"}
-                      }
+                    }
+                  }
+                },
+                "pageInfo": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Total matching datasets"
                     }
                   }
                 }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
               }
             }
           }
         },
         {
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
           }
         }
       ]

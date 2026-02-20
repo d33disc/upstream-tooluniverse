@@ -10,7 +10,9 @@
           "description": "Mathematical expression to evaluate. Supports: arithmetic (+,-,*,/,^), functions (sqrt, sin, cos, tan, log, exp, abs, round, ceil, floor), constants (pi, e, i), matrices ([1,2;3,4]), units (5 inches to cm), complex numbers. URL-encode special characters if needed."
         }
       },
-      "required": ["expr"]
+      "required": [
+        "expr"
+      ]
     },
     "fields": {
       "endpoint": "https://api.mathjs.org/v4/",
@@ -18,27 +20,32 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"expr": "2*(7-3)"},
-      {"expr": "sqrt(16)+sin(pi/2)"},
-      {"expr": "5 inches to cm"}
+      {
+        "expr": "2*(7-3)"
+      },
+      {
+        "expr": "sqrt(16)+sin(pi/2)"
+      },
+      {
+        "expr": "5 inches to cm"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "string",
-              "description": "The computed result of the mathematical expression as a string"
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": ["number", "string"],
+          "description": "The computed result of the mathematical expression (number or string)"
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

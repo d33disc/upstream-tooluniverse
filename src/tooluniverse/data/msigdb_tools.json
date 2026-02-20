@@ -10,54 +10,86 @@
           "description": "Exact MSigDB gene set name (case-sensitive). Examples: 'HALLMARK_APOPTOSIS', 'KEGG_P53_SIGNALING_PATHWAY', 'GOBP_APOPTOTIC_PROCESS', 'HALLMARK_HYPOXIA', 'KRAS.LUNG_UP.V1_UP'. Find names at https://www.gsea-msigdb.org/gsea/msigdb/"
         }
       },
-      "required": ["geneSetName"]
+      "required": [
+        "geneSetName"
+      ]
     },
     "fields": {
       "endpoint": "https://www.gsea-msigdb.org/gsea/msigdb/human/download_geneset.jsp?geneSetName={geneSetName}&fileType=json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"geneSetName": "HALLMARK_APOPTOSIS"},
-      {"geneSetName": "KEGG_P53_SIGNALING_PATHWAY"},
-      {"geneSetName": "HALLMARK_HYPOXIA"}
+      {
+        "geneSetName": "HALLMARK_APOPTOSIS"
+      },
+      {
+        "geneSetName": "KEGG_P53_SIGNALING_PATHWAY"
+      },
+      {
+        "geneSetName": "HALLMARK_HYPOXIA"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Gene set data keyed by gene set name. The key is the gene set name and the value contains gene list and metadata.",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "systematicName": {"type": "string", "description": "MSigDB systematic identifier (e.g., M5902)"},
-                  "pmid": {"type": "string", "description": "PubMed ID of the source publication"},
-                  "exactSource": {"type": "string", "description": "Exact source identifier"},
-                  "geneSymbols": {
-                    "type": "array",
-                    "description": "List of HGNC gene symbols in this gene set",
-                    "items": {"type": "string"}
-                  },
-                  "msigdbURL": {"type": "string", "description": "URL to the gene set page on MSigDB website"},
-                  "externalDetailsURL": {"type": ["array", "string"], "description": "External reference URL(s)"},
-                  "collection": {"type": "string", "description": "MSigDB collection code: H, C1-C8"},
-                  "filteredBySimilarity": {"type": "boolean"},
-                  "externalNamesForSimilarTerms": {"type": "array"}
+          "description": "Gene set data keyed by gene set name. The key is the gene set name and the value contains gene list and metadata.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "systematicName": {
+                "type": "string",
+                "description": "MSigDB systematic identifier (e.g., M5902)"
+              },
+              "pmid": {
+                "type": "string",
+                "description": "PubMed ID of the source publication"
+              },
+              "exactSource": {
+                "type": "string",
+                "description": "Exact source identifier"
+              },
+              "geneSymbols": {
+                "type": "array",
+                "description": "List of HGNC gene symbols in this gene set",
+                "items": {
+                  "type": "string"
                 }
+              },
+              "msigdbURL": {
+                "type": "string",
+                "description": "URL to the gene set page on MSigDB website"
+              },
+              "externalDetailsURL": {
+                "type": [
+                  "array",
+                  "string"
+                ],
+                "description": "External reference URL(s)"
+              },
+              "collection": {
+                "type": "string",
+                "description": "MSigDB collection code: H, C1-C8"
+              },
+              "filteredBySimilarity": {
+                "type": ["boolean", "array", "null"]
+              },
+              "externalNamesForSimilarTerms": {
+                "type": "array"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -73,50 +105,68 @@
           "description": "Hallmark pathway name without the 'HALLMARK_' prefix (will be auto-prepended). Examples: 'APOPTOSIS', 'P53_PATHWAY', 'HYPOXIA', 'DNA_REPAIR', 'INFLAMMATORY_RESPONSE', 'EPITHELIAL_MESENCHYMAL_TRANSITION', 'TNFA_SIGNALING_VIA_NFKB', 'KRAS_SIGNALING_UP', 'OXIDATIVE_PHOSPHORYLATION', 'GLYCOLYSIS', 'MYC_TARGETS_V1'"
         }
       },
-      "required": ["pathway_name"]
+      "required": [
+        "pathway_name"
+      ]
     },
     "fields": {
       "endpoint": "https://www.gsea-msigdb.org/gsea/msigdb/human/download_geneset.jsp?geneSetName=HALLMARK_{pathway_name}&fileType=json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"pathway_name": "APOPTOSIS"},
-      {"pathway_name": "P53_PATHWAY"},
-      {"pathway_name": "HYPOXIA"}
+      {
+        "pathway_name": "APOPTOSIS"
+      },
+      {
+        "pathway_name": "P53_PATHWAY"
+      },
+      {
+        "pathway_name": "HYPOXIA"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Hallmark gene set data",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "systematicName": {"type": "string", "description": "MSigDB systematic ID"},
-                  "pmid": {"type": "string", "description": "PubMed ID (26771021 for Hallmark paper)"},
-                  "geneSymbols": {
-                    "type": "array",
-                    "description": "List of gene symbols in the hallmark set",
-                    "items": {"type": "string"}
-                  },
-                  "msigdbURL": {"type": "string"},
-                  "collection": {"type": "string", "description": "Always 'H' for Hallmark gene sets"}
+          "description": "Hallmark gene set data",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "systematicName": {
+                "type": "string",
+                "description": "MSigDB systematic ID"
+              },
+              "pmid": {
+                "type": "string",
+                "description": "PubMed ID (26771021 for Hallmark paper)"
+              },
+              "geneSymbols": {
+                "type": "array",
+                "description": "List of gene symbols in the hallmark set",
+                "items": {
+                  "type": "string"
                 }
+              },
+              "msigdbURL": {
+                "type": "string"
+              },
+              "collection": {
+                "type": "string",
+                "description": "Always 'H' for Hallmark gene sets"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

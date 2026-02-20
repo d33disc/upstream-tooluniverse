@@ -15,30 +15,30 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "List of all KEGG BRITE hierarchies",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "List of all KEGG BRITE hierarchies",
-              "properties": {
-                "hierarchy_count": {"type": "integer", "description": "Total number of hierarchies available"},
-                "hierarchies": {
-                  "type": "array",
-                  "description": "Array of hierarchy objects",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "hierarchy_id": {"type": "string", "description": "Hierarchy ID (e.g., 'ko01000', 'br08901')"},
-                      "name": {"type": "string", "description": "Hierarchy name (e.g., 'Enzymes', 'KEGG pathway maps')"}
-                    }
+            "hierarchy_count": {
+              "type": "integer",
+              "description": "Total number of hierarchies available"
+            },
+            "hierarchies": {
+              "type": "array",
+              "description": "Array of hierarchy objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hierarchy_id": {
+                    "type": "string",
+                    "description": "Hierarchy ID (e.g., 'ko01000', 'br08901')"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Hierarchy name (e.g., 'Enzymes', 'KEGG pathway maps')"
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -47,11 +47,15 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
-    "test_examples": [{}]
+    "test_examples": [
+      {}
+    ]
   },
   {
     "name": "KEGG_get_brite_hierarchy",
@@ -65,7 +69,9 @@
           "description": "KEGG BRITE hierarchy ID. Examples: 'ko01000' (Enzymes), 'ko01001' (Protein kinases), 'ko02000' (Transporters), 'ko03000' (Transcription factors), 'ko04030' (GPCRs), 'ko04040' (Ion channels). Use KEGG_list_brite_hierarchies to see all available IDs."
         }
       },
-      "required": ["hierarchy_id"]
+      "required": [
+        "hierarchy_id"
+      ]
     },
     "fields": {
       "endpoint": "get_brite_hierarchy"
@@ -74,30 +80,30 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Hierarchical tree structure with nested children",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Hierarchical tree structure with nested children",
-              "properties": {
-                "name": {"type": "string", "description": "Hierarchy ID (e.g., 'ko01000')"},
-                "children": {
-                  "type": "array",
-                  "description": "Top-level classification categories, each with nested children",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string", "description": "Category name"},
-                      "children": {"type": "array", "description": "Sub-categories"}
-                    }
+            "name": {
+              "type": "string",
+              "description": "Hierarchy ID (e.g., 'ko01000')"
+            },
+            "children": {
+              "type": "array",
+              "description": "Top-level classification categories, each with nested children",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Category name"
+                  },
+                  "children": {
+                    "type": "array",
+                    "description": "Sub-categories"
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -106,13 +112,19 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"hierarchy_id": "ko01000"},
-      {"hierarchy_id": "ko01001"}
+      {
+        "hierarchy_id": "ko01000"
+      },
+      {
+        "hierarchy_id": "ko01001"
+      }
     ]
   }
 ]

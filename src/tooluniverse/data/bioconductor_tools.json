@@ -10,61 +10,141 @@
           "description": "Search query for Bioconductor packages. Can be a keyword, analysis type, or topic. Examples: 'differential expression', 'single cell RNA', 'proteomics', 'ChIP-seq', 'methylation', 'variant calling', 'gene set enrichment', 'phylogenetics', 'metabolomics', 'flow cytometry'"
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of results to return (default: 10, max: 100)"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://bioc.r-universe.dev/api/search"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "differential expression", "limit": 5},
-      {"q": "single cell RNA", "limit": 5},
-      {"q": "proteomics mass spectrometry", "limit": 3}
+      {
+        "q": "differential expression",
+        "limit": 5
+      },
+      {
+        "q": "single cell RNA",
+        "limit": 5
+      },
+      {
+        "q": "proteomics mass spectrometry",
+        "limit": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Search results from Bioconductor R-universe",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Search results from Bioconductor R-universe",
-              "properties": {
-                "results": {
-                  "type": "array",
-                  "description": "Matching Bioconductor packages",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "Package": {"type": "string", "description": "Package name (use with Bioconductor_get_package for details)"},
-                      "Title": {"type": ["string", "null"], "description": "Short package title"},
-                      "Description": {"type": ["string", "null"], "description": "Package description"},
-                      "_usedby": {"type": ["integer", "null"], "description": "Number of other packages that depend on this one (popularity indicator)"},
-                      "_score": {"type": ["number", "null"], "description": "Search relevance score"},
-                      "maintainer": {"type": ["string", "null"], "description": "Package maintainer name"},
-                      "updated": {"type": ["string", "null"], "description": "Last update timestamp"},
-                      "topics": {"type": ["array", "null"], "description": "Package topics/tags"}
-                    }
+            "results": {
+              "type": "array",
+              "description": "Matching Bioconductor packages",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Package": {
+                    "type": "string",
+                    "description": "Package name (use with Bioconductor_get_package for details)"
+                  },
+                  "Title": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Short package title"
+                  },
+                  "Description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Package description"
+                  },
+                  "_usedby": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "Number of other packages that depend on this one (popularity indicator)"
+                  },
+                  "_score": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Search relevance score"
+                  },
+                  "maintainer": {
+                    "type": [
+                      "object",
+                      "string",
+                      "null"
+                    ],
+                    "description": "Package maintainer name or object"
+                  },
+                  "updated": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Last update timestamp"
+                  },
+                  "topics": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "description": "Package topics/tags"
                   }
-                },
-                "total": {"type": "integer", "description": "Total number of matching packages"},
-                "query": {"type": ["string", "null"], "description": "Search query used"},
-                "limit": {"type": ["integer", "null"], "description": "Results limit applied"},
-                "skip": {"type": ["integer", "null"], "description": "Results offset"}
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "total": {
+              "type": "integer",
+              "description": "Total number of matching packages"
+            },
+            "query": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Search query used"
+            },
+            "limit": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Results limit applied"
+            },
+            "skip": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Results offset"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -80,55 +160,173 @@
           "description": "Exact Bioconductor package name (case-sensitive). Examples: 'DESeq2', 'edgeR', 'limma', 'Seurat', 'SingleCellExperiment', 'GenomicRanges', 'BiocGenerics', 'clusterProfiler', 'Rsamtools'"
         }
       },
-      "required": ["package_name"]
+      "required": [
+        "package_name"
+      ]
     },
     "fields": {
       "endpoint": "https://bioc.r-universe.dev/api/packages/{package_name}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"package_name": "DESeq2"},
-      {"package_name": "edgeR"},
-      {"package_name": "limma"}
+      {
+        "package_name": "DESeq2"
+      },
+      {
+        "package_name": "edgeR"
+      },
+      {
+        "package_name": "limma"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Bioconductor package metadata",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Bioconductor package metadata",
-              "properties": {
-                "Package": {"type": "string", "description": "Package name"},
-                "Title": {"type": ["string", "null"], "description": "Short package title"},
-                "Version": {"type": ["string", "null"], "description": "Current version"},
-                "Description": {"type": ["string", "null"], "description": "Detailed package description"},
-                "License": {"type": ["string", "null"], "description": "Software license"},
-                "Author": {"type": ["string", "null"], "description": "Package authors"},
-                "Maintainer": {"type": ["string", "null"], "description": "Current maintainer with email"},
-                "URL": {"type": ["string", "null"], "description": "Package homepage/repository URL"},
-                "biocViews": {"type": ["string", "null"], "description": "Bioconductor category tags (e.g., 'RNASeq, DifferentialExpression, Normalization')"},
-                "Depends": {"type": ["string", "null"], "description": "Package dependencies"},
-                "Imports": {"type": ["string", "null"], "description": "Imported packages"},
-                "Suggests": {"type": ["string", "null"], "description": "Suggested packages"},
-                "_stars": {"type": ["integer", "null"], "description": "GitHub stars count"},
-                "_downloads": {"type": ["object", "null"], "description": "Download statistics with count and source URL"},
-                "_usedby": {"type": ["integer", "null"], "description": "Number of reverse dependencies (packages using this one)"},
-                "_score": {"type": ["number", "null"], "description": "Package relevance/popularity score"},
-                "_dependencies": {"type": ["array", "null"], "description": "List of dependency objects with package name, version, and role (Depends/Imports/Suggests)"},
-                "RemoteUrl": {"type": ["string", "null"], "description": "Source code repository URL"},
-                "NeedsCompilation": {"type": ["string", "null"], "description": "Whether package needs compilation (yes/no)"}
-              }
+            "Package": {
+              "type": "string",
+              "description": "Package name"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "Title": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Short package title"
+            },
+            "Version": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Current version"
+            },
+            "Description": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Detailed package description"
+            },
+            "License": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Software license"
+            },
+            "Author": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Package authors"
+            },
+            "Maintainer": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Current maintainer with email"
+            },
+            "URL": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Package homepage/repository URL"
+            },
+            "biocViews": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Bioconductor category tags (e.g., 'RNASeq, DifferentialExpression, Normalization')"
+            },
+            "Depends": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Package dependencies"
+            },
+            "Imports": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Imported packages"
+            },
+            "Suggests": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Suggested packages"
+            },
+            "_stars": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "GitHub stars count"
+            },
+            "_downloads": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Download statistics with count and source URL"
+            },
+            "_usedby": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Number of reverse dependencies (packages using this one)"
+            },
+            "_score": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Package relevance/popularity score"
+            },
+            "_dependencies": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "List of dependency objects with package name, version, and role (Depends/Imports/Suggests)"
+            },
+            "RemoteUrl": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Source code repository URL"
+            },
+            "NeedsCompilation": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Whether package needs compilation (yes/no)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

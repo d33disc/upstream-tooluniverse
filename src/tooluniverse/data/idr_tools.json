@@ -6,11 +6,17 @@
       "type": "object",
       "properties": {
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of studies to return (default 25, max 1000)"
         },
         "offset": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Offset for pagination"
         }
       },
@@ -21,52 +27,76 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"limit": 10},
-      {"limit": 5, "offset": 10}
+      {
+        "limit": 10
+      },
+      {
+        "limit": 5,
+        "offset": 10
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "IDR studies list",
           "properties": {
             "data": {
-              "type": "object",
-              "description": "IDR studies list",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "description": "List of imaging studies",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {"type": "integer", "description": "Study/project ID"},
-                      "Name": {"type": "string", "description": "Study name (e.g., 'idr0018-neff-histopathology/experimentA')"},
-                      "Description": {"type": "string", "description": "Study description including organism, assay type, and biological question"},
-                      "url:datasets": {"type": "string", "description": "URL to list datasets within this study"},
-                      "url:project": {"type": "string", "description": "URL to this study's details"}
-                    }
-                  }
-                },
-                "meta": {
-                  "type": "object",
-                  "properties": {
-                    "totalCount": {"type": "integer", "description": "Total number of studies in IDR"},
-                    "offset": {"type": "integer"},
-                    "limit": {"type": "integer"}
+              "type": "array",
+              "description": "List of imaging studies",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "integer",
+                    "description": "Study/project ID"
+                  },
+                  "Name": {
+                    "type": "string",
+                    "description": "Study name (e.g., 'idr0018-neff-histopathology/experimentA')"
+                  },
+                  "Description": {
+                    "type": "string",
+                    "description": "Study description including organism, assay type, and biological question"
+                  },
+                  "url:datasets": {
+                    "type": "string",
+                    "description": "URL to list datasets within this study"
+                  },
+                  "url:project": {
+                    "type": "string",
+                    "description": "URL to this study's details"
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "meta": {
+              "type": "object",
+              "properties": {
+                "totalCount": {
+                  "type": "integer",
+                  "description": "Total number of studies in IDR"
+                },
+                "offset": {
+                  "type": "integer"
+                },
+                "limit": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -82,48 +112,66 @@
           "description": "IDR project/study ID (e.g., 101 for idr0018-neff-histopathology). Obtain from IDR_list_studies."
         }
       },
-      "required": ["project_id"]
+      "required": [
+        "project_id"
+      ]
     },
     "fields": {
       "endpoint": "https://idr.openmicroscopy.org/api/v0/m/projects/{project_id}/"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"project_id": 101},
-      {"project_id": 1}
+      {
+        "project_id": 101
+      },
+      {
+        "project_id": 51
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Study details",
           "properties": {
             "data": {
               "type": "object",
-              "description": "Study details",
+              "description": "Study/project data",
               "properties": {
-                "data": {
-                  "type": "object",
-                  "description": "Study/project data",
-                  "properties": {
-                    "@id": {"type": "integer", "description": "Project ID"},
-                    "Name": {"type": "string", "description": "Study name"},
-                    "Description": {"type": "string", "description": "Study description"},
-                    "url:datasets": {"type": "string", "description": "URL to list datasets"},
-                    "url:project": {"type": "string", "description": "URL to this project"}
-                  }
+                "@id": {
+                  "type": "integer",
+                  "description": "Project ID"
+                },
+                "Name": {
+                  "type": "string",
+                  "description": "Study name"
+                },
+                "Description": {
+                  "type": "string",
+                  "description": "Study description"
+                },
+                "url:datasets": {
+                  "type": "string",
+                  "description": "URL to list datasets"
+                },
+                "url:project": {
+                  "type": "string",
+                  "description": "URL to this project"
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -139,65 +187,94 @@
           "description": "IDR project/study ID (e.g., 101). Obtain from IDR_list_studies."
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of datasets to return (default 25, max 1000)"
         },
         "offset": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Offset for pagination"
         }
       },
-      "required": ["project_id"]
+      "required": [
+        "project_id"
+      ]
     },
     "fields": {
       "endpoint": "https://idr.openmicroscopy.org/api/v0/m/projects/{project_id}/datasets/"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"project_id": 101, "limit": 10},
-      {"project_id": 1, "limit": 5}
+      {
+        "project_id": 101,
+        "limit": 10
+      },
+      {
+        "project_id": 51,
+        "limit": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Datasets within the study",
           "properties": {
             "data": {
-              "type": "object",
-              "description": "Datasets within the study",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "description": "List of datasets",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {"type": "integer", "description": "Dataset ID"},
-                      "Name": {"type": "string", "description": "Dataset name"},
-                      "url:images": {"type": "string", "description": "URL to list images in this dataset"},
-                      "url:dataset": {"type": "string", "description": "URL to this dataset's details"},
-                      "url:projects": {"type": "string", "description": "URL to parent projects"}
-                    }
-                  }
-                },
-                "meta": {
-                  "type": "object",
-                  "properties": {
-                    "totalCount": {"type": "integer", "description": "Total number of datasets in this study"}
+              "type": "array",
+              "description": "List of datasets",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "integer",
+                    "description": "Dataset ID"
+                  },
+                  "Name": {
+                    "type": "string",
+                    "description": "Dataset name"
+                  },
+                  "url:images": {
+                    "type": "string",
+                    "description": "URL to list images in this dataset"
+                  },
+                  "url:dataset": {
+                    "type": "string",
+                    "description": "URL to this dataset's details"
+                  },
+                  "url:projects": {
+                    "type": "string",
+                    "description": "URL to parent projects"
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "meta": {
+              "type": "object",
+              "properties": {
+                "totalCount": {
+                  "type": "integer",
+                  "description": "Total number of datasets in this study"
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

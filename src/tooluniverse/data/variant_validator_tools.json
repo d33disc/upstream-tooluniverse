@@ -32,60 +32,53 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Validated variant information. Contains 'flag' field, 'metadata' field, and dynamic keys for each validated variant.",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Validated variant information",
+            "flag": {"type": ["string", "null"], "description": "Validation status: 'gene_variant', 'warning', 'error'"},
+            "metadata": {
+              "type": ["object", "null"],
+              "description": "VariantValidator version information",
               "properties": {
-                "flag": {"type": "string", "description": "Validation status: 'gene_variant', 'warning', 'error'"},
-                "metadata": {
-                  "type": "object",
-                  "description": "VariantValidator version information",
-                  "properties": {
-                    "variantvalidator_version": {"type": "string"},
-                    "variantvalidator_hgvs_version": {"type": "string"},
-                    "vvdb_version": {"type": "string"}
-                  }
+                "variantvalidator_version": {"type": "string"},
+                "variantvalidator_hgvs_version": {"type": "string"},
+                "vvdb_version": {"type": "string"}
+              }
+            }
+          },
+          "additionalProperties": {
+            "type": "object",
+            "description": "HGVS variant key with validated transcript/genomic coordinates, protein consequence, and warnings",
+            "properties": {
+              "hgvs_transcript_variant": {"type": ["string", "null"], "description": "Validated HGVS transcript notation"},
+              "hgvs_refseqgene_variant": {"type": ["string", "null"], "description": "HGVS RefSeqGene notation"},
+              "hgvs_predicted_protein_consequence": {
+                "type": ["object", "null"],
+                "properties": {
+                  "tlr": {"type": ["string", "null"], "description": "Three-letter amino acid code"},
+                  "slr": {"type": ["string", "null"], "description": "Single-letter amino acid code"}
                 }
               },
-              "additionalProperties": {
-                "type": "object",
-                "description": "HGVS variant key with validated transcript/genomic coordinates, protein consequence, and warnings",
+              "primary_assembly_loci": {
+                "type": ["object", "null"],
+                "description": "Genomic coordinates in GRCh37/GRCh38",
                 "properties": {
-                  "hgvs_transcript_variant": {"type": "string", "description": "Validated HGVS transcript notation"},
-                  "hgvs_refseqgene_variant": {"type": "string", "description": "HGVS RefSeqGene notation"},
-                  "hgvs_predicted_protein_consequence": {
-                    "type": "object",
-                    "properties": {
-                      "tlr": {"type": "string", "description": "Three-letter amino acid code"},
-                      "slr": {"type": "string", "description": "Single-letter amino acid code"}
-                    }
-                  },
-                  "primary_assembly_loci": {
-                    "type": "object",
-                    "description": "Genomic coordinates in GRCh37/GRCh38",
-                    "properties": {
-                      "grch38": {"type": "object"},
-                      "grch37": {"type": "object"}
-                    }
-                  },
-                  "gene_ids": {
-                    "type": "object",
-                    "properties": {
-                      "hgnc_id": {"type": "string"},
-                      "entrez_gene_id": {"type": "string"},
-                      "ncbi_id": {"type": "string"},
-                      "ensembl_gene_id": {"type": "string"}
-                    }
-                  },
-                  "gene_symbol": {"type": "string"},
-                  "validation_warnings": {"type": "array"}
+                  "grch38": {"type": ["object", "null"]},
+                  "grch37": {"type": ["object", "null"]}
                 }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+              },
+              "gene_ids": {
+                "type": ["object", "null"],
+                "properties": {
+                  "hgnc_id": {"type": ["string", "null"]},
+                  "entrez_gene_id": {"type": ["string", "null"]},
+                  "ncbi_id": {"type": ["string", "null"]},
+                  "ensembl_gene_id": {"type": ["string", "null"]}
+                }
+              },
+              "gene_symbol": {"type": ["string", "null"]},
+              "validation_warnings": {"type": ["array", "null"]}
+            }
+          }
         },
         {
           "type": "object",

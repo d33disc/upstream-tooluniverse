@@ -20,24 +20,19 @@
           "type": "object",
           "properties": {
             "data": {
-              "type": "object",
+              "type": "array",
               "description": "Current carbon intensity data",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "items": {
+              "items": {
+                "type": "object",
+                "properties": {
+                  "from": {"type": "string", "description": "ISO datetime start of period"},
+                  "to": {"type": "string", "description": "ISO datetime end of period"},
+                  "intensity": {
                     "type": "object",
                     "properties": {
-                      "from": {"type": "string", "description": "ISO datetime start of period"},
-                      "to": {"type": "string", "description": "ISO datetime end of period"},
-                      "intensity": {
-                        "type": "object",
-                        "properties": {
-                          "forecast": {"type": "integer", "description": "Forecast intensity in gCO2/kWh"},
-                          "actual": {"type": ["integer", "null"], "description": "Actual intensity in gCO2/kWh"},
-                          "index": {"type": "string", "description": "Index: very low, low, moderate, high, very high"}
-                        }
-                      }
+                      "forecast": {"type": "integer", "description": "Forecast intensity in gCO2/kWh"},
+                      "actual": {"type": ["integer", "null"], "description": "Actual intensity in gCO2/kWh"},
+                      "index": {"type": "string", "description": "Index: very low, low, moderate, high, very high"}
                     }
                   }
                 }
@@ -85,25 +80,19 @@
           "type": "object",
           "properties": {
             "data": {
-              "type": "object",
-              "description": "Carbon intensity data for the date",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "description": "Half-hourly carbon intensity readings (48 per day)",
-                  "items": {
+              "type": "array",
+              "description": "Half-hourly carbon intensity readings (48 per day)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "from": {"type": "string"},
+                  "to": {"type": "string"},
+                  "intensity": {
                     "type": "object",
                     "properties": {
-                      "from": {"type": "string"},
-                      "to": {"type": "string"},
-                      "intensity": {
-                        "type": "object",
-                        "properties": {
-                          "forecast": {"type": "integer"},
-                          "actual": {"type": ["integer", "null"]},
-                          "index": {"type": "string"}
-                        }
-                      }
+                      "forecast": {"type": "integer"},
+                      "actual": {"type": ["integer", "null"]},
+                      "index": {"type": "string"}
                     }
                   }
                 }

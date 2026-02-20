@@ -20,20 +20,11 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Array of model IDs (integers). Use ModelDB_get_model to get full details for any ID.",
-              "items": {
-                "type": "integer"
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "Array of model IDs (integers). Use ModelDB_get_model to get full details for any ID.",
+          "items": {
+            "type": "integer"
+          }
         },
         {
           "type": "object",
@@ -42,13 +33,19 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"modeling_application": "NEURON"},
-      {"modeling_application": "Python"}
+      {
+        "modeling_application": "NEURON"
+      },
+      {
+        "modeling_application": "Python"
+      }
     ]
   },
   {
@@ -63,7 +60,9 @@
           "description": "Numeric model ID from ModelDB. Examples: 3263 (CA3 pyramidal neuron), 2487 (Purkinje cell), 279 (squid axon), 87284 (cerebellar granule cell). Find IDs using ModelDB_list_models."
         }
       },
-      "required": ["model_id"]
+      "required": [
+        "model_id"
+      ]
     },
     "fields": {
       "endpoint": "https://modeldb.science/api/v1/models/{model_id}",
@@ -73,65 +72,74 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Full model details",
           "properties": {
-            "data": {
+            "id": {
+              "type": "integer",
+              "description": "Model ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Model name"
+            },
+            "created": {
+              "type": "string",
+              "description": "Creation date"
+            },
+            "ver_date": {
+              "type": "string",
+              "description": "Last modification date"
+            },
+            "notes": {
               "type": "object",
-              "description": "Full model details",
+              "description": "Model description/notes",
               "properties": {
-                "id": {"type": "integer", "description": "Model ID"},
-                "name": {"type": "string", "description": "Model name"},
-                "created": {"type": "string", "description": "Creation date"},
-                "ver_date": {"type": "string", "description": "Last modification date"},
-                "notes": {
-                  "type": "object",
-                  "description": "Model description/notes",
-                  "properties": {
-                    "value": {"type": "string"}
-                  }
-                },
-                "neurons": {
-                  "type": "object",
-                  "description": "Neuron types modeled",
-                  "properties": {
-                    "value": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "object_id": {"type": "integer"},
-                          "object_name": {"type": "string"}
-                        }
-                      }
-                    }
-                  }
-                },
-                "currents": {
-                  "type": "object",
-                  "description": "Ion currents in the model"
-                },
-                "model_type": {
-                  "type": "object",
-                  "description": "Type of model (e.g., Neuron or other electrically excitable cell)"
-                },
-                "model_concept": {
-                  "type": "object",
-                  "description": "Model concepts (e.g., Bursting, Detailed Neuronal Models)"
-                },
-                "modeling_application": {
-                  "type": "object",
-                  "description": "Simulation environment (e.g., NEURON, GENESIS)"
-                },
-                "model_paper": {
-                  "type": "object",
-                  "description": "Associated publication(s)"
+                "value": {
+                  "type": "string"
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "neurons": {
+              "type": "object",
+              "description": "Neuron types modeled",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "object_id": {
+                        "type": "integer"
+                      },
+                      "object_name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "currents": {
+              "type": "object",
+              "description": "Ion currents in the model"
+            },
+            "model_type": {
+              "type": "object",
+              "description": "Type of model (e.g., Neuron or other electrically excitable cell)"
+            },
+            "model_concept": {
+              "type": "object",
+              "description": "Model concepts (e.g., Bursting, Detailed Neuronal Models)"
+            },
+            "modeling_application": {
+              "type": "object",
+              "description": "Simulation environment (e.g., NEURON, GENESIS)"
+            },
+            "model_paper": {
+              "type": "object",
+              "description": "Associated publication(s)"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -140,13 +148,19 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"model_id": 3263},
-      {"model_id": 2487}
+      {
+        "model_id": 3263
+      },
+      {
+        "model_id": 2487
+      }
     ]
   },
   {
@@ -161,7 +175,9 @@
           "description": "Numeric paper ID from ModelDB. Examples: 4307 (Migliore et al 1995), 3860 (Hodgkin-Huxley classic). Find IDs from model_paper field in ModelDB_get_model results."
         }
       },
-      "required": ["paper_id"]
+      "required": [
+        "paper_id"
+      ]
     },
     "fields": {
       "endpoint": "https://modeldb.science/api/v1/papers/{paper_id}",
@@ -171,32 +187,34 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Paper details",
           "properties": {
-            "data": {
+            "id": {
+              "type": "integer",
+              "description": "Paper ID"
+            },
+            "name": {
+              "type": "string",
+              "description": "Short citation (e.g., 'Author et al (Year)')"
+            },
+            "created": {
+              "type": "string",
+              "description": "Record creation date"
+            },
+            "title": {
               "type": "object",
-              "description": "Paper details",
+              "description": "Full paper title",
               "properties": {
-                "id": {"type": "integer", "description": "Paper ID"},
-                "name": {"type": "string", "description": "Short citation (e.g., 'Author et al (Year)')"},
-                "created": {"type": "string", "description": "Record creation date"},
-                "title": {
-                  "type": "object",
-                  "description": "Full paper title",
-                  "properties": {
-                    "value": {"type": "string"}
-                  }
-                },
-                "references": {
-                  "type": "object",
-                  "description": "References cited by this paper"
+                "value": {
+                  "type": "string"
                 }
               }
             },
-            "metadata": {
-              "type": "object"
+            "references": {
+              "type": "object",
+              "description": "References cited by this paper"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -205,13 +223,19 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"paper_id": 4307},
-      {"paper_id": 3860}
+      {
+        "paper_id": 4307
+      },
+      {
+        "paper_id": 3860
+      }
     ]
   },
   {
@@ -230,20 +254,11 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Array of cell type IDs (strings). Use ModelDB_get_celltype for details.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "Array of cell type IDs (strings). Use ModelDB_get_celltype for details.",
+          "items": {
+            "type": "string"
+          }
         },
         {
           "type": "object",
@@ -252,11 +267,15 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
-    "test_examples": [{}]
+    "test_examples": [
+      {}
+    ]
   },
   {
     "name": "ModelDB_get_celltype",
@@ -270,7 +289,9 @@
           "description": "Cell type ID from ModelDB. Examples: '259' (Hippocampus CA3 pyramidal GLU cell), '258' (Hippocampus CA1 pyramidal GLU cell), '263' (Cerebellum Purkinje GABA cell). Find IDs using ModelDB_list_celltypes."
         }
       },
-      "required": ["celltype_id"]
+      "required": [
+        "celltype_id"
+      ]
     },
     "fields": {
       "endpoint": "https://modeldb.science/api/v1/celltypes/{celltype_id}",
@@ -280,23 +301,29 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Cell type details",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Cell type details",
-              "properties": {
-                "id": {"type": "integer", "description": "Cell type ID"},
-                "name": {"type": "string", "description": "Full cell type name"},
-                "created": {"type": "string", "description": "Record creation date"},
-                "ver_date": {"type": "string", "description": "Last modification date"},
-                "class_id": {"type": "integer", "description": "Classification ID"}
-              }
+            "id": {
+              "type": "integer",
+              "description": "Cell type ID"
             },
-            "metadata": {
-              "type": "object"
+            "name": {
+              "type": "string",
+              "description": "Full cell type name"
+            },
+            "created": {
+              "type": "string",
+              "description": "Record creation date"
+            },
+            "ver_date": {
+              "type": "string",
+              "description": "Last modification date"
+            },
+            "class_id": {
+              "type": "integer",
+              "description": "Classification ID"
             }
-          },
-          "required": ["data"]
+          }
         },
         {
           "type": "object",
@@ -305,13 +332,19 @@
               "type": "string"
             }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"celltype_id": "259"},
-      {"celltype_id": "263"}
+      {
+        "celltype_id": "259"
+      },
+      {
+        "celltype_id": "263"
+      }
     ]
   }
 ]

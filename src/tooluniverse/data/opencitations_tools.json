@@ -10,46 +10,74 @@
           "description": "DOI of the paper to get references for. Do not include 'https://doi.org/' prefix. Examples: '10.1002/jcc.21224', '10.1038/nature12373'"
         }
       },
-      "required": ["doi"]
+      "required": [
+        "doi"
+      ]
     },
     "fields": {
       "endpoint": "https://api.opencitations.net/index/v1/references/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"doi": "10.1002/jcc.21224"},
-      {"doi": "10.1038/s41586-021-03819-2"},
-      {"doi": "10.1126/science.aad9032"}
+      {
+        "doi": "10.1002/jcc.21224"
+      },
+      {
+        "doi": "10.1038/s41586-021-03819-2"
+      },
+      {
+        "doi": "10.1126/science.aad9032"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of references (papers cited by the input paper)",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "oci": {"type": "string", "description": "OpenCitations identifier for this citation link"},
-                  "citing": {"type": "string", "description": "DOI of the citing paper (input DOI)"},
-                  "cited": {"type": "string", "description": "DOI of the cited paper (a reference)"},
-                  "creation": {"type": "string", "description": "Publication date of citing paper (YYYY-MM format)"},
-                  "timespan": {"type": "string", "description": "Time between cited and citing publication (ISO 8601 duration, e.g. 'P6Y5M' = 6 years 5 months)"},
-                  "journal_sc": {"type": "string", "description": "Whether it's a self-citation at journal level (yes/no)"},
-                  "author_sc": {"type": "string", "description": "Whether it's a self-citation at author level (yes/no)"}
-                }
+          "type": "array",
+          "description": "List of references (papers cited by the input paper)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "oci": {
+                "type": "string",
+                "description": "OpenCitations identifier for this citation link"
+              },
+              "citing": {
+                "type": "string",
+                "description": "DOI of the citing paper (input DOI)"
+              },
+              "cited": {
+                "type": "string",
+                "description": "DOI of the cited paper (a reference)"
+              },
+              "creation": {
+                "type": "string",
+                "description": "Publication date of citing paper (YYYY-MM format)"
+              },
+              "timespan": {
+                "type": "string",
+                "description": "Time between cited and citing publication (ISO 8601 duration, e.g. 'P6Y5M' = 6 years 5 months)"
+              },
+              "journal_sc": {
+                "type": "string",
+                "description": "Whether it's a self-citation at journal level (yes/no)"
+              },
+              "author_sc": {
+                "type": "string",
+                "description": "Whether it's a self-citation at author level (yes/no)"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -65,46 +93,74 @@
           "description": "DOI of the paper to find citations for. Do not include 'https://doi.org/' prefix. Examples: '10.1038/nature12373', '10.1002/jcc.21224'"
         }
       },
-      "required": ["doi"]
+      "required": [
+        "doi"
+      ]
     },
     "fields": {
       "endpoint": "https://api.opencitations.net/index/v1/citations/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"doi": "10.1002/jcc.21224"},
-      {"doi": "10.1038/nature12373"},
-      {"doi": "10.1038/s41586-021-03819-2"}
+      {
+        "doi": "10.1002/jcc.21224"
+      },
+      {
+        "doi": "10.1038/nature12373"
+      },
+      {
+        "doi": "10.1371/journal.pone.0244463"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of papers that cite the input paper",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "oci": {"type": "string", "description": "OpenCitations identifier for this citation link"},
-                  "citing": {"type": "string", "description": "DOI of the paper that cites the input paper"},
-                  "cited": {"type": "string", "description": "DOI of the cited paper (input DOI)"},
-                  "creation": {"type": "string", "description": "Publication date of citing paper (YYYY-MM format)"},
-                  "timespan": {"type": "string", "description": "Time between cited and citing publication (ISO 8601 duration)"},
-                  "journal_sc": {"type": "string", "description": "Journal-level self-citation (yes/no)"},
-                  "author_sc": {"type": "string", "description": "Author-level self-citation (yes/no)"}
-                }
+          "type": "array",
+          "description": "List of papers that cite the input paper",
+          "items": {
+            "type": "object",
+            "properties": {
+              "oci": {
+                "type": "string",
+                "description": "OpenCitations identifier for this citation link"
+              },
+              "citing": {
+                "type": "string",
+                "description": "DOI of the paper that cites the input paper"
+              },
+              "cited": {
+                "type": "string",
+                "description": "DOI of the cited paper (input DOI)"
+              },
+              "creation": {
+                "type": "string",
+                "description": "Publication date of citing paper (YYYY-MM format)"
+              },
+              "timespan": {
+                "type": "string",
+                "description": "Time between cited and citing publication (ISO 8601 duration)"
+              },
+              "journal_sc": {
+                "type": "string",
+                "description": "Journal-level self-citation (yes/no)"
+              },
+              "author_sc": {
+                "type": "string",
+                "description": "Author-level self-citation (yes/no)"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -120,41 +176,54 @@
           "description": "DOI of the paper to count citations for. Do not include 'https://doi.org/' prefix. Example: '10.1002/jcc.21224'"
         }
       },
-      "required": ["doi"]
+      "required": [
+        "doi"
+      ]
     },
     "fields": {
       "endpoint": "https://api.opencitations.net/index/v1/citation-count/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"doi": "10.1002/jcc.21224"},
-      {"doi": "10.1038/nature12373"},
-      {"doi": "10.1002/jcc.20291"}
+      {
+        "doi": "10.1002/jcc.21224"
+      },
+      {
+        "doi": "10.1038/nature12373"
+      },
+      {
+        "doi": "10.1002/jcc.20291"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Citation count result",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "oci": {"type": "string", "description": "DOI of the queried paper"},
-                  "count": {"type": "string", "description": "Number of citations in OpenCitations COCI database"}
-                }
+          "type": "array",
+          "description": "Citation count result",
+          "items": {
+            "type": "object",
+            "properties": {
+              "oci": {
+                "type": "string",
+                "description": "DOI of the queried paper"
+              },
+              "count": {
+                "type": "string",
+                "description": "Number of citations in OpenCitations COCI database"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

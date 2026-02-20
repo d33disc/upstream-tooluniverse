@@ -22,34 +22,27 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name": "dopamine receptor"},
+      {"name": "dopamine"},
       {"name": "serotonin", "type": "GPCR"},
       {"name": "EGFR"}
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of pharmacological targets",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "targetId": {"type": "integer", "description": "GtoPdb target ID"},
-                  "name": {"type": "string", "description": "Full target name"},
-                  "abbreviation": {"type": ["string", "null"], "description": "Common abbreviation"},
-                  "type": {"type": "string", "description": "Target type (GPCR, Ion channel, etc.)"},
-                  "familyIds": {"type": "array", "items": {"type": "integer"}, "description": "Family IDs"},
-                  "subunitIds": {"type": "array", "items": {"type": "integer"}},
-                  "complexIds": {"type": "array", "items": {"type": "integer"}}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "List of pharmacological targets",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetId": {"type": "integer", "description": "GtoPdb target ID"},
+              "name": {"type": "string", "description": "Full target name"},
+              "abbreviation": {"type": ["string", "null"], "description": "Common abbreviation"},
+              "type": {"type": "string", "description": "Target type (GPCR, Ion channel, etc.)"},
+              "familyIds": {"type": "array", "items": {"type": "integer"}, "description": "Family IDs"},
+              "subunitIds": {"type": "array", "items": {"type": "integer"}},
+              "complexIds": {"type": "array", "items": {"type": "integer"}}
+            }
+          }
         },
         {
           "type": "object",
@@ -93,28 +86,21 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of pharmacological ligands",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "ligandId": {"type": "integer", "description": "GtoPdb ligand ID"},
-                  "name": {"type": "string", "description": "Ligand name"},
-                  "type": {"type": "string", "description": "Ligand type"},
-                  "abbreviation": {"type": ["string", "null"]},
-                  "inn": {"type": ["string", "null"], "description": "International Non-proprietary Name"},
-                  "approvalSource": {"type": ["string", "null"], "description": "FDA/EMA approval source"},
-                  "approved": {"type": "boolean", "description": "Is an approved drug"},
-                  "whoEssential": {"type": "boolean", "description": "On WHO Essential Medicines List"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "List of pharmacological ligands",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ligandId": {"type": "integer", "description": "GtoPdb ligand ID"},
+              "name": {"type": "string", "description": "Ligand name"},
+              "type": {"type": "string", "description": "Ligand type"},
+              "abbreviation": {"type": ["string", "null"]},
+              "inn": {"type": ["string", "null"], "description": "International Non-proprietary Name"},
+              "approvalSource": {"type": ["string", "null"], "description": "FDA/EMA approval source"},
+              "approved": {"type": "boolean", "description": "Is an approved drug"},
+              "whoEssential": {"type": "boolean", "description": "On WHO Essential Medicines List"}
+            }
+          }
         },
         {
           "type": "object",
@@ -158,30 +144,23 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of target-ligand interactions",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "targetId": {"type": "integer"},
-                  "targetName": {"type": "string", "description": "Target name"},
-                  "ligandId": {"type": ["integer", "null"]},
-                  "ligandName": {"type": "string", "description": "Ligand name"},
-                  "type": {"type": "string", "description": "Interaction type (Agonist, Antagonist, Inhibitor, etc.)"},
-                  "targetSpecies": {"type": "string", "description": "Species (Human, Mouse, Rat)"},
-                  "primaryTarget": {"type": "boolean", "description": "Is primary target"},
-                  "endogenous": {"type": "boolean", "description": "Is endogenous ligand"},
-                  "affinityUnits": {"type": ["string", "null"], "description": "Affinity units (pKi, pIC50, etc.)"},
-                  "affinityMedian": {"type": ["number", "null"], "description": "Median affinity value"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "List of target-ligand interactions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetId": {"type": "integer"},
+              "targetName": {"type": "string", "description": "Target name"},
+              "ligandId": {"type": ["integer", "null"]},
+              "ligandName": {"type": "string", "description": "Ligand name"},
+              "type": {"type": "string", "description": "Interaction type (Agonist, Antagonist, Inhibitor, etc.)"},
+              "targetSpecies": {"type": "string", "description": "Species (Human, Mouse, Rat)"},
+              "primaryTarget": {"type": "boolean", "description": "Is primary target"},
+              "endogenous": {"type": "boolean", "description": "Is endogenous ligand"},
+              "affinityUnits": {"type": ["string", "null"], "description": "Affinity units (pKi, pIC50, etc.)"},
+              "affinityMedian": {"type": ["number", "null"], "description": "Median affinity value"}
+            }
+          }
         },
         {
           "type": "object",

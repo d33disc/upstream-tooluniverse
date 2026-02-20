@@ -41,29 +41,22 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Flood/river discharge forecast data",
           "properties": {
-            "data": {
+            "latitude": {"type": "number"},
+            "longitude": {"type": "number"},
+            "timezone": {"type": "string"},
+            "elevation": {"type": "number"},
+            "daily": {
               "type": "object",
-              "description": "Flood/river discharge forecast data",
+              "description": "Daily river discharge data with time array and variable arrays",
               "properties": {
-                "latitude": {"type": "number"},
-                "longitude": {"type": "number"},
-                "timezone": {"type": "string"},
-                "elevation": {"type": "number"},
-                "daily": {
-                  "type": "object",
-                  "description": "Daily river discharge data with time array and variable arrays",
-                  "properties": {
-                    "time": {"type": "array", "items": {"type": "string"}},
-                    "river_discharge": {"type": "array", "items": {"type": ["number", "null"]}}
-                  }
-                },
-                "daily_units": {"type": "object", "description": "Units (m3/s for river discharge)"}
+                "time": {"type": "array", "items": {"type": "string"}},
+                "river_discharge": {"type": "array", "items": {"type": ["number", "null"]}}
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "daily_units": {"type": "object", "description": "Units (m3/s for river discharge)"}
+          }
         },
         {
           "type": "object",

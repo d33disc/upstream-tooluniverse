@@ -17,31 +17,40 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of species in GeneNetwork",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "Id": {"type": "integer", "description": "GeneNetwork species ID"},
-                  "Name": {"type": "string", "description": "Short species name (e.g., 'mouse', 'rat', 'human')"},
-                  "FullName": {"type": "string", "description": "Scientific name (e.g., 'Mus musculus')"},
-                  "TaxonomyId": {"type": "integer", "description": "NCBI Taxonomy ID"}
-                }
+          "type": "array",
+          "description": "List of species in GeneNetwork",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "integer",
+                "description": "GeneNetwork species ID"
+              },
+              "Name": {
+                "type": "string",
+                "description": "Short species name (e.g., 'mouse', 'rat', 'human')"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "Scientific name (e.g., 'Mus musculus')"
+              },
+              "TaxonomyId": {
+                "type": "integer",
+                "description": "NCBI Taxonomy ID"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -57,47 +66,69 @@
           "description": "Species short name (e.g., 'mouse', 'rat', 'human', 'arabidopsis'). Get from GeneNetwork_list_species."
         }
       },
-      "required": ["species"]
+      "required": [
+        "species"
+      ]
     },
     "fields": {
       "endpoint": "https://genenetwork.org/api/v_pre1/groups/{species}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"species": "mouse"},
-      {"species": "rat"}
+      {
+        "species": "mouse"
+      },
+      {
+        "species": "rat"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of genetic cross populations for this species",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "Id": {"type": "integer", "description": "GeneNetwork group ID"},
-                  "Name": {"type": "string", "description": "Short group name (e.g., 'BXD', 'HXB')"},
-                  "FullName": {"type": "string", "description": "Full group name (e.g., 'BXD Family')"},
-                  "DisplayName": {"type": "string"},
-                  "GeneticType": {"type": "string", "description": "Type of cross: 'riset' (recombinant inbred), 'intercross', 'inbred', 'diversity'"},
-                  "SpeciesId": {"type": "integer"},
-                  "public": {"type": "integer", "description": "Public accessibility: 2 = public"}
-                }
+          "type": "array",
+          "description": "List of genetic cross populations for this species",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "integer",
+                "description": "GeneNetwork group ID"
+              },
+              "Name": {
+                "type": "string",
+                "description": "Short group name (e.g., 'BXD', 'HXB')"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "Full group name (e.g., 'BXD Family')"
+              },
+              "DisplayName": {
+                "type": "string"
+              },
+              "GeneticType": {
+                "type": "string",
+                "description": "Type of cross: 'riset' (recombinant inbred), 'intercross', 'inbred', 'diversity'"
+              },
+              "SpeciesId": {
+                "type": "integer"
+              },
+              "public": {
+                "type": "integer",
+                "description": "Public accessibility: 2 = public"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -113,49 +144,76 @@
           "description": "Genetic cross group name in lowercase (e.g., 'bxd', 'bxh', 'hxb', 'bnlx-srjr-f2'). Obtain from GeneNetwork_list_groups."
         }
       },
-      "required": ["group"]
+      "required": [
+        "group"
+      ]
     },
     "fields": {
       "endpoint": "https://genenetwork.org/api/v_pre1/datasets/{group}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"group": "bxd"},
-      {"group": "hxb"}
+      {
+        "group": "bxd"
+      },
+      {
+        "group": "bxh"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of datasets in this genetic cross population",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "Id": {"type": "integer", "description": "Dataset ID"},
-                  "FullName": {"type": "string", "description": "Full dataset name (e.g., 'Brain U74Av2 08/03 MAS5')"},
-                  "ShortName": {"type": "string"},
-                  "Short_Abbreviation": {"type": "string", "description": "Short abbreviation for the dataset"},
-                  "Long_Abbreviation": {"type": "string", "description": "Long abbreviation used in API calls"},
-                  "DataScale": {"type": "string", "description": "Data scale: 'log2', 'linear', etc."},
-                  "CreateTime": {"type": "string", "description": "Dataset creation date"},
-                  "ProbeFreezeId": {"type": "integer"},
-                  "public": {"type": "integer"}
-                }
+          "type": "array",
+          "description": "List of datasets in this genetic cross population",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Id": {
+                "type": "integer",
+                "description": "Dataset ID"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "Full dataset name (e.g., 'Brain U74Av2 08/03 MAS5')"
+              },
+              "ShortName": {
+                "type": "string"
+              },
+              "Short_Abbreviation": {
+                "type": "string",
+                "description": "Short abbreviation for the dataset"
+              },
+              "Long_Abbreviation": {
+                "type": "string",
+                "description": "Long abbreviation used in API calls"
+              },
+              "DataScale": {
+                "type": "string",
+                "description": "Data scale: 'log2', 'linear', etc."
+              },
+              "CreateTime": {
+                "type": "string",
+                "description": "Dataset creation date"
+              },
+              "ProbeFreezeId": {
+                "type": "integer"
+              },
+              "public": {
+                "type": "integer"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -175,45 +233,68 @@
           "description": "Probe/trait identifier within the dataset (e.g., '1436869_at' for a microarray probe, '10001' for a BXD phenotype trait). Must exist in the specified dataset."
         }
       },
-      "required": ["dataset_name", "trait_name"]
+      "required": [
+        "dataset_name",
+        "trait_name"
+      ]
     },
     "fields": {
       "endpoint": "https://genenetwork.org/api/v_pre1/sample_data/{dataset_name}/{trait_name}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"dataset_name": "HC_M2_0606_P", "trait_name": "1436869_at"},
-      {"dataset_name": "HC_M2_0606_P", "trait_name": "1415670_at"}
+      {
+        "dataset_name": "HC_M2_0606_P",
+        "trait_name": "1436869_at"
+      },
+      {
+        "dataset_name": "HC_M2_0606_P",
+        "trait_name": "1415670_at"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Sample measurements across all strains/individuals in the dataset",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "data_id": {"type": "integer", "description": "Data record ID"},
-                  "sample_name": {"type": "string", "description": "Strain or sample name (e.g., 'C57BL/6J', 'DBA/2J', 'BXD1')"},
-                  "sample_name_2": {"type": "string"},
-                  "value": {"type": "number", "description": "Measured expression or phenotype value"},
-                  "se": {"type": ["number", "null"], "description": "Standard error of the measurement"}
-                }
+          "type": "array",
+          "description": "Sample measurements across all strains/individuals in the dataset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "data_id": {
+                "type": "integer",
+                "description": "Data record ID"
+              },
+              "sample_name": {
+                "type": "string",
+                "description": "Strain or sample name (e.g., 'C57BL/6J', 'DBA/2J', 'BXD1')"
+              },
+              "sample_name_2": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number",
+                "description": "Measured expression or phenotype value"
+              },
+              "se": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Standard error of the measurement"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

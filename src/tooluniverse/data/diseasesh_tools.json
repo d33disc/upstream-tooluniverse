@@ -18,39 +18,86 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Global COVID-19 statistics",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Global COVID-19 statistics",
-              "properties": {
-                "updated": {"type": "integer", "description": "Timestamp of last data update (Unix ms)"},
-                "cases": {"type": "integer", "description": "Total confirmed cases worldwide"},
-                "todayCases": {"type": "integer", "description": "New cases reported today"},
-                "deaths": {"type": "integer", "description": "Total deaths worldwide"},
-                "todayDeaths": {"type": "integer", "description": "New deaths reported today"},
-                "recovered": {"type": "integer", "description": "Total recovered worldwide"},
-                "todayRecovered": {"type": "integer"},
-                "active": {"type": "integer", "description": "Currently active cases"},
-                "critical": {"type": "integer", "description": "Currently in critical condition"},
-                "casesPerOneMillion": {"type": "number", "description": "Cases per million people globally"},
-                "deathsPerOneMillion": {"type": "number"},
-                "tests": {"type": "integer", "description": "Total tests performed globally"},
-                "testsPerOneMillion": {"type": "number"},
-                "population": {"type": "integer", "description": "Estimated world population"},
-                "activePerOneMillion": {"type": "number"},
-                "recoveredPerOneMillion": {"type": "number"},
-                "criticalPerOneMillion": {"type": "number"},
-                "affectedCountries": {"type": "integer", "description": "Number of countries with reported cases"}
-              }
+            "updated": {
+              "type": "integer",
+              "description": "Timestamp of last data update (Unix ms)"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "cases": {
+              "type": "integer",
+              "description": "Total confirmed cases worldwide"
+            },
+            "todayCases": {
+              "type": "integer",
+              "description": "New cases reported today"
+            },
+            "deaths": {
+              "type": "integer",
+              "description": "Total deaths worldwide"
+            },
+            "todayDeaths": {
+              "type": "integer",
+              "description": "New deaths reported today"
+            },
+            "recovered": {
+              "type": "integer",
+              "description": "Total recovered worldwide"
+            },
+            "todayRecovered": {
+              "type": "integer"
+            },
+            "active": {
+              "type": "integer",
+              "description": "Currently active cases"
+            },
+            "critical": {
+              "type": "integer",
+              "description": "Currently in critical condition"
+            },
+            "casesPerOneMillion": {
+              "type": "number",
+              "description": "Cases per million people globally"
+            },
+            "deathsPerOneMillion": {
+              "type": "number"
+            },
+            "tests": {
+              "type": "integer",
+              "description": "Total tests performed globally"
+            },
+            "testsPerOneMillion": {
+              "type": "number"
+            },
+            "population": {
+              "type": "integer",
+              "description": "Estimated world population"
+            },
+            "activePerOneMillion": {
+              "type": "number"
+            },
+            "recoveredPerOneMillion": {
+              "type": "number"
+            },
+            "criticalPerOneMillion": {
+              "type": "number"
+            },
+            "affectedCountries": {
+              "type": "integer",
+              "description": "Number of countries with reported cases"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -66,67 +113,144 @@
           "description": "Country name (e.g., 'USA', 'India', 'Brazil'), ISO2 code (e.g., 'US', 'IN'), or ISO3 code (e.g., 'USA', 'IND')"
         }
       },
-      "required": ["country"]
+      "required": [
+        "country"
+      ]
     },
     "fields": {
       "endpoint": "https://disease.sh/v3/covid-19/countries/{country}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "USA"},
-      {"country": "India"},
-      {"country": "Brazil"}
+      {
+        "country": "USA"
+      },
+      {
+        "country": "India"
+      },
+      {
+        "country": "Brazil"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Country-specific COVID-19 statistics",
           "properties": {
-            "data": {
+            "updated": {
+              "type": "integer",
+              "description": "Timestamp of last update (Unix ms)"
+            },
+            "country": {
+              "type": "string",
+              "description": "Country name"
+            },
+            "countryInfo": {
               "type": "object",
-              "description": "Country-specific COVID-19 statistics",
+              "description": "Country metadata",
               "properties": {
-                "updated": {"type": "integer", "description": "Timestamp of last update (Unix ms)"},
-                "country": {"type": "string", "description": "Country name"},
-                "countryInfo": {
-                  "type": "object",
-                  "description": "Country metadata",
-                  "properties": {
-                    "_id": {"type": ["integer", "null"]},
-                    "iso2": {"type": ["string", "null"], "description": "ISO2 country code"},
-                    "iso3": {"type": ["string", "null"], "description": "ISO3 country code"},
-                    "lat": {"type": "number", "description": "Latitude"},
-                    "long": {"type": "number", "description": "Longitude"},
-                    "flag": {"type": "string", "description": "URL to country flag image"}
-                  }
+                "_id": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
-                "cases": {"type": "integer", "description": "Total confirmed cases"},
-                "todayCases": {"type": "integer"},
-                "deaths": {"type": "integer", "description": "Total deaths"},
-                "todayDeaths": {"type": "integer"},
-                "recovered": {"type": "integer"},
-                "todayRecovered": {"type": "integer"},
-                "active": {"type": "integer", "description": "Currently active cases"},
-                "critical": {"type": "integer"},
-                "casesPerOneMillion": {"type": "number"},
-                "deathsPerOneMillion": {"type": "number"},
-                "tests": {"type": "integer"},
-                "testsPerOneMillion": {"type": "number"},
-                "population": {"type": "integer"},
-                "continent": {"type": "string", "description": "Continent name"},
-                "oneCasePerPeople": {"type": "integer"},
-                "oneDeathPerPeople": {"type": "integer"},
-                "oneTestPerPeople": {"type": "integer"}
+                "iso2": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO2 country code"
+                },
+                "iso3": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO3 country code"
+                },
+                "lat": {
+                  "type": "number",
+                  "description": "Latitude"
+                },
+                "long": {
+                  "type": "number",
+                  "description": "Longitude"
+                },
+                "flag": {
+                  "type": "string",
+                  "description": "URL to country flag image"
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "cases": {
+              "type": "integer",
+              "description": "Total confirmed cases"
+            },
+            "todayCases": {
+              "type": "integer"
+            },
+            "deaths": {
+              "type": "integer",
+              "description": "Total deaths"
+            },
+            "todayDeaths": {
+              "type": "integer"
+            },
+            "recovered": {
+              "type": "integer"
+            },
+            "todayRecovered": {
+              "type": "integer"
+            },
+            "active": {
+              "type": "integer",
+              "description": "Currently active cases"
+            },
+            "critical": {
+              "type": "integer"
+            },
+            "casesPerOneMillion": {
+              "type": "number"
+            },
+            "deathsPerOneMillion": {
+              "type": "number"
+            },
+            "tests": {
+              "type": "integer"
+            },
+            "testsPerOneMillion": {
+              "type": "number"
+            },
+            "population": {
+              "type": "integer"
+            },
+            "continent": {
+              "type": "string",
+              "description": "Continent name"
+            },
+            "oneCasePerPeople": {
+              "type": "integer"
+            },
+            "oneDeathPerPeople": {
+              "type": "integer"
+            },
+            "oneTestPerPeople": {
+              "type": "integer"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -138,11 +262,17 @@
       "type": "object",
       "properties": {
         "country": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Country name or 'all' for global data. Examples: 'USA', 'India', 'all'. If omitted, returns global data."
         },
         "lastdays": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Number of days of historical data to return. Use a number (e.g., '30') or 'all' for all available data. Default: '30'"
         }
       },
@@ -153,43 +283,78 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"country": "USA", "lastdays": "7"},
-      {"country": "all", "lastdays": "7"},
-      {"country": "India", "lastdays": "30"}
+      {
+        "country": "USA",
+        "lastdays": "7"
+      },
+      {
+        "country": "all",
+        "lastdays": "7"
+      },
+      {
+        "country": "India",
+        "lastdays": "30"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Historical COVID-19 time series data. For a specific country: {country, province, timeline: {cases, deaths, recovered}}. For 'all': {cases, deaths, recovered} directly.",
           "properties": {
-            "data": {
+            "country": {
+              "type": "string",
+              "description": "Country name (absent when country='all')"
+            },
+            "province": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "description": "List of provinces included"
+            },
+            "timeline": {
               "type": "object",
-              "description": "Historical COVID-19 time series data. For a specific country: {country, province, timeline: {cases, deaths, recovered}}. For 'all': {cases, deaths, recovered} directly.",
+              "description": "Time series data (for specific country)",
               "properties": {
-                "country": {"type": "string", "description": "Country name (absent when country='all')"},
-                "province": {"type": ["array", "null"], "description": "List of provinces included"},
-                "timeline": {
+                "cases": {
                   "type": "object",
-                  "description": "Time series data (for specific country)",
-                  "properties": {
-                    "cases": {"type": "object", "description": "Date-keyed cumulative case counts (e.g., '3/1/23': 103648690)"},
-                    "deaths": {"type": "object", "description": "Date-keyed cumulative death counts"},
-                    "recovered": {"type": "object", "description": "Date-keyed cumulative recovery counts"}
-                  }
+                  "description": "Date-keyed cumulative case counts (e.g., '3/1/23': 103648690)"
                 },
-                "cases": {"type": "object", "description": "Date-keyed cumulative case counts (when country='all')"},
-                "deaths": {"type": "object", "description": "Date-keyed cumulative death counts (when country='all')"},
-                "recovered": {"type": "object", "description": "Date-keyed cumulative recovery counts (when country='all')"}
+                "deaths": {
+                  "type": "object",
+                  "description": "Date-keyed cumulative death counts"
+                },
+                "recovered": {
+                  "type": "object",
+                  "description": "Date-keyed cumulative recovery counts"
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "cases": {
+              "type": "object",
+              "description": "Date-keyed cumulative case counts (when country='all')"
+            },
+            "deaths": {
+              "type": "object",
+              "description": "Date-keyed cumulative death counts (when country='all')"
+            },
+            "recovered": {
+              "type": "object",
+              "description": "Date-keyed cumulative recovery counts (when country='all')"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

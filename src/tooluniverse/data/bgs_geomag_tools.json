@@ -18,19 +18,32 @@
           "description": "Date for field computation in YYYY-MM-DD format (IGRF valid 1900-2025). Examples: '2024-01-01', '2023-06-15'"
         },
         "altitude": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "description": "Altitude above sea level in km (default 0). Examples: 0 (sea level), 10 (aircraft cruise altitude), 400 (low Earth orbit)"
         },
         "model": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Geomagnetic model to use: 'igrf' (IGRF-13, 1900-2025, default) or 'wmm' (World Magnetic Model 2020, 2020-2025)"
         },
         "model_revision": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Model revision: '13' for IGRF-13 (default), '2020' for WMM-2020"
         }
       },
-      "required": ["latitude", "longitude", "date"]
+      "required": [
+        "latitude",
+        "longitude",
+        "date"
+      ]
     },
     "fields": {
       "endpoint": "https://geomag.bgs.ac.uk/web_service/GMModels/{model}/{model_revision}/",
@@ -40,80 +53,167 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"latitude": 51.5, "longitude": -0.1, "date": "2024-01-01", "model": "igrf", "model_revision": "13"},
-      {"latitude": 40.7128, "longitude": -74.0059, "date": "2024-06-15", "model": "igrf", "model_revision": "13"},
-      {"latitude": -33.8688, "longitude": 151.2093, "date": "2023-01-01", "model": "igrf", "model_revision": "13"}
+      {
+        "latitude": 51.5,
+        "longitude": -0.1,
+        "date": "2024-01-01",
+        "model": "igrf",
+        "model_revision": "13"
+      },
+      {
+        "latitude": 40.7128,
+        "longitude": -74.0059,
+        "date": "2024-06-15",
+        "model": "igrf",
+        "model_revision": "13"
+      },
+      {
+        "latitude": -33.8688,
+        "longitude": 151.2093,
+        "date": "2023-01-01",
+        "model": "igrf",
+        "model_revision": "13"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Geomagnetic field computation result",
           "properties": {
-            "data": {
+            "geomagnetic-field-model-result": {
               "type": "object",
-              "description": "Geomagnetic field computation result",
               "properties": {
-                "geomagnetic-field-model-result": {
+                "model": {
+                  "type": "string"
+                },
+                "model_revision": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "object"
+                },
+                "coordinates": {
                   "type": "object",
                   "properties": {
-                    "model": {"type": "string"},
-                    "model_revision": {"type": "string"},
-                    "date": {"type": "object"},
-                    "coordinates": {
-                      "type": "object",
-                      "properties": {
-                        "latitude": {"type": "object"},
-                        "longitude": {"type": "object"},
-                        "altitude": {"type": "object"}
-                      }
+                    "latitude": {
+                      "type": "object"
                     },
-                    "field-value": {
-                      "type": "object",
-                      "description": "Geomagnetic field components at the specified location and date",
-                      "properties": {
-                        "total-intensity": {
-                          "type": "object",
-                          "properties": {
-                            "value": {"type": "number", "description": "Total field intensity in nanoTesla (nT)"},
-                            "units": {"type": "string"}
-                          }
-                        },
-                        "declination": {
-                          "type": "object",
-                          "properties": {
-                            "value": {"type": "number", "description": "Magnetic declination in degrees (positive = east of true north)"},
-                            "units": {"type": "string"}
-                          }
-                        },
-                        "inclination": {
-                          "type": "object",
-                          "properties": {
-                            "value": {"type": "number", "description": "Magnetic inclination (dip angle) in degrees (positive = downward)"},
-                            "units": {"type": "string"}
-                          }
-                        },
-                        "north-intensity": {"type": "object", "properties": {"value": {"type": "number"}, "units": {"type": "string"}}},
-                        "east-intensity": {"type": "object", "properties": {"value": {"type": "number"}, "units": {"type": "string"}}},
-                        "vertical-intensity": {"type": "object", "properties": {"value": {"type": "number"}, "units": {"type": "string"}}},
-                        "horizontal-intensity": {"type": "object", "properties": {"value": {"type": "number"}, "units": {"type": "string"}}}
-                      }
+                    "longitude": {
+                      "type": "object"
                     },
-                    "secular-variation": {
-                      "type": ["object", "null"],
-                      "description": "Annual rate of change of field components"
+                    "altitude": {
+                      "type": "object"
                     }
                   }
+                },
+                "field-value": {
+                  "type": "object",
+                  "description": "Geomagnetic field components at the specified location and date",
+                  "properties": {
+                    "total-intensity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "Total field intensity in nanoTesla (nT)"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "declination": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "Magnetic declination in degrees (positive = east of true north)"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "inclination": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "Magnetic inclination (dip angle) in degrees (positive = downward)"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "north-intensity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "east-intensity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "vertical-intensity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "horizontal-intensity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number"
+                        },
+                        "units": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "secular-variation": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "description": "Annual rate of change of field components"
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

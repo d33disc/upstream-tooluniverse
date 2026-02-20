@@ -10,70 +10,132 @@
           "description": "Search query for title or general search (e.g., 'The Double Helix', 'CRISPR revolution', 'protein folding')"
         },
         "author": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by author name (e.g., 'Richard Dawkins', 'Francis Crick')"
         },
         "subject": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Filter by subject/topic (e.g., 'genetics', 'climate change', 'quantum physics')"
         },
         "isbn": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Search by ISBN-10 or ISBN-13 (e.g., '9780141975108')"
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results to return (default 10, max 1000)"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://openlibrary.org/search.json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "The Double Helix", "limit": 3},
-      {"q": "CRISPR", "subject": "genetics", "limit": 3},
-      {"q": "protein folding", "author": "Anfinsen", "limit": 3}
+      {
+        "q": "The Double Helix",
+        "limit": 3
+      },
+      {
+        "q": "CRISPR",
+        "subject": "genetics",
+        "limit": 3
+      },
+      {
+        "q": "protein folding",
+        "author": "Anfinsen",
+        "limit": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Open Library book search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Open Library book search results",
-              "properties": {
-                "numFound": {"type": "integer", "description": "Total matching books"},
-                "docs": {
-                  "type": "array",
-                  "description": "List of matching books",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "key": {"type": "string", "description": "Open Library work key (e.g., '/works/OL1234W')"},
-                      "title": {"type": "string"},
-                      "author_name": {"type": "array", "items": {"type": "string"}},
-                      "first_publish_year": {"type": ["integer", "null"]},
-                      "isbn": {"type": "array", "items": {"type": "string"}},
-                      "publisher": {"type": "array", "items": {"type": "string"}},
-                      "subject": {"type": "array", "items": {"type": "string"}},
-                      "number_of_pages_median": {"type": ["integer", "null"]}
+            "numFound": {
+              "type": "integer",
+              "description": "Total matching books"
+            },
+            "docs": {
+              "type": "array",
+              "description": "List of matching books",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "Open Library work key (e.g., '/works/OL1234W')"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "author_name": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
+                  },
+                  "first_publish_year": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "isbn": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "publisher": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "subject": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "number_of_pages_median": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -89,7 +151,9 @@
           "description": "Book identifier(s). Use 'ISBN:' prefix for ISBN-10 or ISBN-13 (e.g., 'ISBN:9780141975108'), 'OLID:' for Open Library ID (e.g., 'OLID:OL7353617M'), or 'LCCN:' for Library of Congress. Multiple: 'ISBN:9780306406997,ISBN:9780679745020'"
         }
       },
-      "required": ["bibkeys"]
+      "required": [
+        "bibkeys"
+      ]
     },
     "fields": {
       "endpoint": "https://openlibrary.org/api/books",
@@ -100,28 +164,33 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"bibkeys": "ISBN:9780306406997"},
-      {"bibkeys": "ISBN:9781250301697"},
-      {"bibkeys": "ISBN:9780141975108"}
+      {
+        "bibkeys": "ISBN:9780306406997"
+      },
+      {
+        "bibkeys": "ISBN:9781250301697"
+      },
+      {
+        "bibkeys": "ISBN:9780141975108"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Open Library book details keyed by bibkey",
-              "properties": {}
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "description": "Open Library book details keyed by bibkey",
+          "properties": {}
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -137,56 +206,117 @@
           "description": "Open Library work ID (e.g., 'OL27448W' for The Lord of the Rings, 'OL45804W' for Fantastic Mr. Fox, 'OL362427W' for The Selfish Gene). Found in search results as '/works/OL27448W'."
         }
       },
-      "required": ["work_id"]
+      "required": [
+        "work_id"
+      ]
     },
     "fields": {
       "endpoint": "https://openlibrary.org/works/{work_id}.json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"work_id": "OL27448W"},
-      {"work_id": "OL45804W"},
-      {"work_id": "OL362427W"}
+      {
+        "work_id": "OL27448W"
+      },
+      {
+        "work_id": "OL45804W"
+      },
+      {
+        "work_id": "OL362427W"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Work details",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Work details",
-              "properties": {
-                "title": {"type": "string", "description": "Title of the work"},
-                "key": {"type": "string", "description": "Work key (e.g., '/works/OL27448W')"},
-                "description": {"type": ["string", "object", "null"], "description": "Work description (string or {type, value} object)"},
-                "subjects": {"type": "array", "items": {"type": "string"}, "description": "Subject tags"},
-                "subject_places": {"type": "array", "items": {"type": "string"}, "description": "Geographic subjects"},
-                "subject_people": {"type": "array", "items": {"type": "string"}, "description": "People/characters mentioned"},
-                "subject_times": {"type": "array", "items": {"type": "string"}, "description": "Time periods"},
-                "first_publish_date": {"type": ["string", "null"], "description": "First publication date"},
-                "authors": {
-                  "type": "array",
-                  "description": "Author references",
-                  "items": {
+            "title": {
+              "type": "string",
+              "description": "Title of the work"
+            },
+            "key": {
+              "type": "string",
+              "description": "Work key (e.g., '/works/OL27448W')"
+            },
+            "description": {
+              "type": [
+                "string",
+                "object",
+                "null"
+              ],
+              "description": "Work description (string or {type, value} object)"
+            },
+            "subjects": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Subject tags"
+            },
+            "subject_places": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Geographic subjects"
+            },
+            "subject_people": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "People/characters mentioned"
+            },
+            "subject_times": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Time periods"
+            },
+            "first_publish_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "First publication date"
+            },
+            "authors": {
+              "type": "array",
+              "description": "Author references",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "author": {
                     "type": "object",
-                    "properties": {
-                      "author": {"type": "object", "description": "Author key reference"},
-                      "type": {"type": "object"}
-                    }
+                    "description": "Author key reference"
+                  },
+                  "type": {
+                    "type": "object"
                   }
-                },
-                "covers": {"type": "array", "items": {"type": "integer"}, "description": "Cover image IDs (use covers.openlibrary.org/b/id/{id}-L.jpg)"}
+                }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "covers": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "Cover image IDs (use covers.openlibrary.org/b/id/{id}-L.jpg)"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -202,46 +332,105 @@
           "description": "Open Library author ID (e.g., 'OL26320A' for J.R.R. Tolkien, 'OL34184A' for Roald Dahl, 'OL23919A' for J.K. Rowling). Found in search results or work data."
         }
       },
-      "required": ["author_id"]
+      "required": [
+        "author_id"
+      ]
     },
     "fields": {
       "endpoint": "https://openlibrary.org/authors/{author_id}.json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"author_id": "OL26320A"},
-      {"author_id": "OL34184A"},
-      {"author_id": "OL23919A"}
+      {
+        "author_id": "OL26320A"
+      },
+      {
+        "author_id": "OL34184A"
+      },
+      {
+        "author_id": "OL23919A"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Author details",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Author details",
-              "properties": {
-                "name": {"type": "string", "description": "Author's full name"},
-                "key": {"type": "string", "description": "Author key (e.g., '/authors/OL26320A')"},
-                "birth_date": {"type": ["string", "null"], "description": "Birth date"},
-                "death_date": {"type": ["string", "null"], "description": "Death date (null if living)"},
-                "bio": {"type": ["string", "object", "null"], "description": "Author biography (string or {type, value} object)"},
-                "alternate_names": {"type": "array", "items": {"type": "string"}, "description": "Known alternate names or pen names"},
-                "personal_name": {"type": ["string", "null"], "description": "Personal/legal name"},
-                "photos": {"type": "array", "items": {"type": "integer"}, "description": "Photo IDs (use covers.openlibrary.org/a/id/{id}-L.jpg)"},
-                "links": {"type": "array", "description": "External links (Wikipedia, etc.)"},
-                "wikipedia": {"type": ["string", "null"], "description": "Wikipedia URL"}
-              }
+            "name": {
+              "type": "string",
+              "description": "Author's full name"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "key": {
+              "type": "string",
+              "description": "Author key (e.g., '/authors/OL26320A')"
+            },
+            "birth_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Birth date"
+            },
+            "death_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Death date (null if living)"
+            },
+            "bio": {
+              "type": [
+                "string",
+                "object",
+                "null"
+              ],
+              "description": "Author biography (string or {type, value} object)"
+            },
+            "alternate_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Known alternate names or pen names"
+            },
+            "personal_name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Personal/legal name"
+            },
+            "photos": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "Photo IDs (use covers.openlibrary.org/a/id/{id}-L.jpg)"
+            },
+            "links": {
+              "type": "array",
+              "description": "External links (Wikipedia, etc.)"
+            },
+            "wikipedia": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Wikipedia URL"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -257,73 +446,130 @@
           "description": "Subject to browse. Use lowercase with underscores for multi-word subjects. Examples: 'fantasy', 'science_fiction', 'molecular_biology', 'machine_learning', 'climate_change', 'ancient_history'"
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of works to return (default 12, max varies)"
         },
         "offset": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Offset for pagination (default 0)"
         }
       },
-      "required": ["subject"]
+      "required": [
+        "subject"
+      ]
     },
     "fields": {
       "endpoint": "https://openlibrary.org/subjects/{subject}.json"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"subject": "fantasy", "limit": 5},
-      {"subject": "molecular_biology", "limit": 5},
-      {"subject": "science_fiction", "limit": 5}
+      {
+        "subject": "fantasy",
+        "limit": 5
+      },
+      {
+        "subject": "molecular_biology",
+        "limit": 5
+      },
+      {
+        "subject": "science_fiction",
+        "limit": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "Subject browse results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Subject browse results",
-              "properties": {
-                "name": {"type": "string", "description": "Subject name"},
-                "subject_type": {"type": "string", "description": "Type of subject classification"},
-                "work_count": {"type": "integer", "description": "Total number of works in this subject"},
-                "works": {
-                  "type": "array",
-                  "description": "List of works in this subject",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "key": {"type": "string", "description": "Work key"},
-                      "title": {"type": "string", "description": "Work title"},
-                      "edition_count": {"type": "integer", "description": "Number of editions"},
-                      "first_publish_year": {"type": ["integer", "null"]},
-                      "has_fulltext": {"type": "boolean", "description": "Whether full text is available on Internet Archive"},
-                      "authors": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "key": {"type": "string"},
-                            "name": {"type": "string"}
-                          }
+            "name": {
+              "type": "string",
+              "description": "Subject name"
+            },
+            "subject_type": {
+              "type": "string",
+              "description": "Type of subject classification"
+            },
+            "work_count": {
+              "type": "integer",
+              "description": "Total number of works in this subject"
+            },
+            "works": {
+              "type": "array",
+              "description": "List of works in this subject",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "Work key"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Work title"
+                  },
+                  "edition_count": {
+                    "type": "integer",
+                    "description": "Number of editions"
+                  },
+                  "first_publish_year": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "has_fulltext": {
+                    "type": "boolean",
+                    "description": "Whether full text is available on Internet Archive"
+                  },
+                  "authors": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
                         }
-                      },
-                      "cover_id": {"type": ["integer", "null"], "description": "Cover image ID"},
-                      "cover_edition_key": {"type": ["string", "null"]}
+                      }
                     }
+                  },
+                  "cover_id": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "description": "Cover image ID"
+                  },
+                  "cover_edition_key": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

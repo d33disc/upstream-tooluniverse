@@ -10,48 +10,65 @@
           "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'SLCO1B1', 'TPMT', 'DPYD')"
         }
       },
-      "required": ["symbol"]
+      "required": [
+        "symbol"
+      ]
     },
     "fields": {
       "endpoint": "https://api.cpicpgx.org/v1/gene?symbol=eq.{symbol}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"symbol": "CYP2D6"},
-      {"symbol": "CYP2C19"}
+      {
+        "symbol": "CYP2D6"
+      },
+      {
+        "symbol": "CYP2C19"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Gene pharmacogenomics information",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "symbol": {"type": "string"},
-                  "chr": {"type": "string"},
-                  "genesequenceid": {"type": "string"},
-                  "hgncid": {"type": "string"},
-                  "ncbiid": {"type": "string"},
-                  "ensemblid": {"type": "string"},
-                  "pharmgkbid": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "Gene pharmacogenomics information",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string"
+              },
+              "chr": {
+                "type": ["string", "null"]
+              },
+              "genesequenceid": {
+                "type": "string"
+              },
+              "hgncid": {
+                "type": "string"
+              },
+              "ncbiid": {
+                "type": "string"
+              },
+              "ensemblid": {
+                "type": "string"
+              },
+              "pharmgkbid": {
+                "type": "string"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -73,32 +90,37 @@
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of pharmacogenomics genes",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "symbol": {"type": "string"},
-                  "chr": {"type": "string"},
-                  "hgncid": {"type": "string"},
-                  "pharmgkbid": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "List of pharmacogenomics genes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string"
+              },
+              "chr": {
+                "type": ["string", "null"]
+              },
+              "hgncid": {
+                "type": "string"
+              },
+              "pharmgkbid": {
+                "type": "string"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -114,47 +136,62 @@
           "description": "Drug name in lowercase (e.g., 'warfarin', 'codeine', 'clopidogrel', 'simvastatin')"
         }
       },
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "fields": {
       "endpoint": "https://api.cpicpgx.org/v1/drug?name=eq.{name}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name": "warfarin"},
-      {"name": "codeine"}
+      {
+        "name": "warfarin"
+      },
+      {
+        "name": "codeine"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Drug pharmacogenomics information",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "drugid": {"type": "string"},
-                  "name": {"type": "string"},
-                  "pharmgkbid": {"type": "string"},
-                  "rxnormid": {"type": "string"},
-                  "drugbankid": {"type": "string"},
-                  "atcid": {"type": "array"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "Drug pharmacogenomics information",
+          "items": {
+            "type": "object",
+            "properties": {
+              "drugid": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "pharmgkbid": {
+                "type": "string"
+              },
+              "rxnormid": {
+                "type": "string"
+              },
+              "drugbankid": {
+                "type": "string"
+              },
+              "atcid": {
+                "type": "array"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -170,49 +207,71 @@
           "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'SLCO1B1', 'TPMT', 'DPYD', 'VKORC1')"
         }
       },
-      "required": ["genesymbol"]
+      "required": [
+        "genesymbol"
+      ]
     },
     "fields": {
       "endpoint": "https://api.cpicpgx.org/v1/pair?genesymbol=eq.{genesymbol}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"genesymbol": "CYP2D6"},
-      {"genesymbol": "DPYD"}
+      {
+        "genesymbol": "CYP2D6"
+      },
+      {
+        "genesymbol": "DPYD"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Gene-drug pairs with evidence levels",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "pairid": {"type": "integer"},
-                  "genesymbol": {"type": "string"},
-                  "drugid": {"type": "string"},
-                  "guidelineid": {"type": "integer"},
-                  "usedforrecommendation": {"type": "boolean"},
-                  "cpiclevel": {"type": "string", "description": "CPIC evidence level (A, B, B/C, C, D)"},
-                  "pgkbcalevel": {"type": "string", "description": "PharmGKB clinical annotation level"},
-                  "pgxtesting": {"type": "string", "description": "PGx testing recommendation"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "Gene-drug pairs with evidence levels",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pairid": {
+                "type": "integer"
+              },
+              "genesymbol": {
+                "type": "string"
+              },
+              "drugid": {
+                "type": "string"
+              },
+              "guidelineid": {
+                "type": ["integer", "null"]
+              },
+              "usedforrecommendation": {
+                "type": "boolean"
+              },
+              "cpiclevel": {
+                "type": "string",
+                "description": "CPIC evidence level (A, B, B/C, C, D)"
+              },
+              "pgkbcalevel": {
+                "type": ["string", "null"],
+                "description": "PharmGKB clinical annotation level"
+              },
+              "pgxtesting": {
+                "type": ["string", "null"],
+                "description": "PGx testing recommendation"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -234,33 +293,40 @@
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of CPIC guidelines",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {"type": "integer"},
-                  "name": {"type": "string"},
-                  "url": {"type": "string"},
-                  "pharmgkbid": {"type": "string"},
-                  "version": {"type": "integer"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "List of CPIC guidelines",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "pharmgkbid": {
+                "type": ["array", "string", "null"]
+              },
+              "version": {
+                "type": "integer"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -276,50 +342,67 @@
           "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'TPMT', 'DPYD')"
         },
         "limit": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of alleles to return (default 50)"
         }
       },
-      "required": ["genesymbol"]
+      "required": [
+        "genesymbol"
+      ]
     },
     "fields": {
-      "endpoint": "https://api.cpicpgx.org/v1/allele?genesymbol=eq.{genesymbol}&select=name,functionalstatus,activityvalue,clinicalfunctionalstatus,allelestatus&limit={limit}"
+      "endpoint": "https://api.cpicpgx.org/v1/allele?genesymbol=eq.{genesymbol}&select=name,functionalstatus,activityvalue,clinicalfunctionalstatus&limit={limit}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"genesymbol": "CYP2D6", "limit": 20},
-      {"genesymbol": "DPYD", "limit": 20}
+      {
+        "genesymbol": "CYP2D6",
+        "limit": 20
+      },
+      {
+        "genesymbol": "DPYD",
+        "limit": 20
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Gene alleles with functional status",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {"type": "string", "description": "Allele name (e.g., '*1', '*4', 'c.1905+1G>A')"},
-                  "functionalstatus": {"type": "string", "description": "Functional status: normal function, decreased function, no function, increased function, uncertain function, unknown function"},
-                  "activityvalue": {"type": "string"},
-                  "clinicalfunctionalstatus": {"type": "string"},
-                  "allelestatus": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {"type": "string"}
+          "type": "array",
+          "description": "Gene alleles with functional status",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Allele name (e.g., '*1', '*4', 'c.1905+1G>A')"
+              },
+              "functionalstatus": {
+                "type": ["string", "null"],
+                "description": "Functional status: normal function, decreased function, no function, increased function, uncertain function, unknown function"
+              },
+              "activityvalue": {
+                "type": "string"
+              },
+              "clinicalfunctionalstatus": {
+                "type": "string"
               }
             }
           }
         },
         {
+          "type": "object",
           "properties": {
-            "error": {"type": "string", "description": "Error message if the request failed"}
-          }
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

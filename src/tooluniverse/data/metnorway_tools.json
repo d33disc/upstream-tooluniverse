@@ -14,11 +14,17 @@
           "description": "Longitude in decimal degrees (-180 to 180). Examples: 10.7522 (Oslo), -0.1278 (London), -74.0060 (New York), 2.3522 (Paris), 139.6503 (Tokyo)"
         },
         "altitude": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Station altitude in meters above sea level. Optional. Improves forecast accuracy for mountain locations."
         }
       },
-      "required": ["lat", "lon"]
+      "required": [
+        "lat",
+        "lon"
+      ]
     },
     "fields": {
       "endpoint": "https://api.met.no/weatherapi/locationforecast/2.0/compact",
@@ -26,67 +32,115 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"lat": 59.9139, "lon": 10.7522},
-      {"lat": 51.5074, "lon": -0.1278},
-      {"lat": 40.7128, "lon": -74.0060}
+      {
+        "lat": 59.9139,
+        "lon": 10.7522
+      },
+      {
+        "lat": 51.5074,
+        "lon": -0.1278
+      },
+      {
+        "lat": 40.7128,
+        "lon": -74.006
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "MET Norway weather forecast response",
           "properties": {
-            "data": {
+            "type": {
+              "type": "string",
+              "description": "GeoJSON type: 'Feature'"
+            },
+            "geometry": {
               "type": "object",
-              "description": "MET Norway weather forecast response",
               "properties": {
-                "type": {"type": "string", "description": "GeoJSON type: 'Feature'"},
-                "geometry": {
+                "coordinates": {
+                  "type": "array",
+                  "description": "[longitude, latitude, altitude]"
+                }
+              }
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "meta": {
                   "type": "object",
                   "properties": {
-                    "coordinates": {"type": "array", "description": "[longitude, latitude, altitude]"}
+                    "updated_at": {
+                      "type": "string",
+                      "description": "Last update timestamp"
+                    },
+                    "units": {
+                      "type": "object",
+                      "description": "Units for each variable"
+                    }
                   }
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "updated_at": {"type": "string", "description": "Last update timestamp"},
-                        "units": {"type": "object", "description": "Units for each variable"}
-                      }
-                    },
-                    "timeseries": {
-                      "type": "array",
-                      "description": "Hourly and 6-hourly forecast data points",
-                      "items": {
+                "timeseries": {
+                  "type": "array",
+                  "description": "Hourly and 6-hourly forecast data points",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "time": {
+                        "type": "string",
+                        "description": "Forecast time (ISO 8601)"
+                      },
+                      "data": {
                         "type": "object",
                         "properties": {
-                          "time": {"type": "string", "description": "Forecast time (ISO 8601)"},
-                          "data": {
+                          "instant": {
                             "type": "object",
                             "properties": {
-                              "instant": {
+                              "details": {
                                 "type": "object",
                                 "properties": {
-                                  "details": {
-                                    "type": "object",
-                                    "properties": {
-                                      "air_temperature": {"type": "number", "description": "Temperature in Celsius"},
-                                      "wind_speed": {"type": "number", "description": "Wind speed in m/s"},
-                                      "wind_from_direction": {"type": "number", "description": "Wind direction in degrees"},
-                                      "relative_humidity": {"type": "number", "description": "Relative humidity in %"},
-                                      "cloud_area_fraction": {"type": "number", "description": "Cloud cover in %"}
-                                    }
+                                  "air_temperature": {
+                                    "type": "number",
+                                    "description": "Temperature in Celsius"
+                                  },
+                                  "wind_speed": {
+                                    "type": "number",
+                                    "description": "Wind speed in m/s"
+                                  },
+                                  "wind_from_direction": {
+                                    "type": "number",
+                                    "description": "Wind direction in degrees"
+                                  },
+                                  "relative_humidity": {
+                                    "type": "number",
+                                    "description": "Relative humidity in %"
+                                  },
+                                  "cloud_area_fraction": {
+                                    "type": "number",
+                                    "description": "Cloud cover in %"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "next_1_hours": {
+                            "type": "object",
+                            "description": "1-hour aggregate (precipitation, weather symbol)",
+                            "properties": {
+                              "summary": {
+                                "type": "object",
+                                "properties": {
+                                  "symbol_code": {
+                                    "type": "string"
                                   }
                                 }
                               },
-                              "next_1_hours": {
+                              "details": {
                                 "type": "object",
-                                "description": "1-hour aggregate (precipitation, weather symbol)",
                                 "properties": {
-                                  "summary": {"type": "object", "properties": {"symbol_code": {"type": "string"}}},
-                                  "details": {"type": "object", "properties": {"precipitation_amount": {"type": "number"}}}
+                                  "precipitation_amount": {
+                                    "type": "number"
+                                  }
                                 }
                               }
                             }
@@ -97,15 +151,19 @@
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

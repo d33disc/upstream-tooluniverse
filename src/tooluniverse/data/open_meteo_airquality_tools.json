@@ -42,31 +42,24 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Air quality forecast data",
           "properties": {
-            "data": {
+            "latitude": {"type": "number"},
+            "longitude": {"type": "number"},
+            "elevation": {"type": "number"},
+            "timezone": {"type": "string"},
+            "hourly_units": {"type": "object", "description": "Units for each variable (e.g. μg/m³)"},
+            "hourly": {
               "type": "object",
-              "description": "Air quality forecast data",
+              "description": "Hourly air quality data arrays",
               "properties": {
-                "latitude": {"type": "number"},
-                "longitude": {"type": "number"},
-                "elevation": {"type": "number"},
-                "timezone": {"type": "string"},
-                "hourly_units": {"type": "object", "description": "Units for each variable (e.g. μg/m³)"},
-                "hourly": {
-                  "type": "object",
-                  "description": "Hourly air quality data arrays",
-                  "properties": {
-                    "time": {"type": "array", "items": {"type": "string"}},
-                    "pm10": {"type": "array", "items": {"type": ["number", "null"]}},
-                    "pm2_5": {"type": "array", "items": {"type": ["number", "null"]}},
-                    "european_aqi": {"type": "array", "items": {"type": ["number", "null"]}}
-                  }
-                }
+                "time": {"type": "array", "items": {"type": "string"}},
+                "pm10": {"type": "array", "items": {"type": ["number", "null"]}},
+                "pm2_5": {"type": "array", "items": {"type": ["number", "null"]}},
+                "european_aqi": {"type": "array", "items": {"type": ["number", "null"]}}
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",

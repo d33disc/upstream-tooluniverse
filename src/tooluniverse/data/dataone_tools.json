@@ -10,23 +10,37 @@
           "description": "Search query using Solr query syntax. Examples: 'climate change', 'author:Smith', 'keywords:marine ecology', 'title:biodiversity', 'formatId:text/csv', '*:*' (all)"
         },
         "fl": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Comma-separated list of fields to return. Default: 'id,title,author,dateUploaded,keywords'. Available: id,title,author,dateUploaded,dateModified,keywords,formatId,size,origin,abstract,geohash_1"
         },
         "rows": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Number of results to return (default 10, max 1000)"
         },
         "start": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Offset for pagination (default 0)"
         },
         "sort": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Sort order. Examples: 'dateUploaded desc', 'score desc', 'title asc'"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://cn.dataone.org/cn/v2/query/solr/",
@@ -36,62 +50,133 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "coral reef ecology", "fl": "id,title,author,dateUploaded,keywords", "rows": 10},
-      {"q": "climate change biodiversity", "rows": 5, "sort": "dateUploaded desc"},
-      {"q": "keywords:marine AND formatId:text/csv", "rows": 5}
+      {
+        "q": "coral reef ecology",
+        "fl": "id,title,author,dateUploaded,keywords",
+        "rows": 10
+      },
+      {
+        "q": "climate change biodiversity",
+        "rows": 5,
+        "sort": "dateUploaded desc"
+      },
+      {
+        "q": "keywords:marine AND formatId:text/csv",
+        "rows": 5
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "DataONE search results",
           "properties": {
-            "data": {
+            "responseHeader": {
               "type": "object",
-              "description": "DataONE search results",
               "properties": {
-                "responseHeader": {
-                  "type": "object",
-                  "properties": {
-                    "status": {"type": "integer"},
-                    "QTime": {"type": "integer"},
-                    "params": {"type": "object"}
-                  }
+                "status": {
+                  "type": "integer"
                 },
-                "response": {
-                  "type": "object",
-                  "properties": {
-                    "numFound": {"type": "integer", "description": "Total number of matching datasets"},
-                    "start": {"type": "integer"},
-                    "maxScore": {"type": ["number", "null"]},
-                    "docs": {
-                      "type": "array",
-                      "description": "List of matching dataset records",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {"type": "string", "description": "DataONE persistent identifier (PID)"},
-                          "title": {"type": ["string", "array", "null"]},
-                          "author": {"type": ["string", "null"]},
-                          "dateUploaded": {"type": ["string", "null"]},
-                          "keywords": {"type": ["array", "null"], "items": {"type": "string"}},
-                          "formatId": {"type": ["string", "null"]},
-                          "size": {"type": ["integer", "null"]},
-                          "origin": {"type": ["array", "null"], "items": {"type": "string"}}
+                "QTime": {
+                  "type": "integer"
+                },
+                "params": {
+                  "type": "object"
+                }
+              }
+            },
+            "response": {
+              "type": "object",
+              "properties": {
+                "numFound": {
+                  "type": "integer",
+                  "description": "Total number of matching datasets"
+                },
+                "start": {
+                  "type": "integer"
+                },
+                "maxScore": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "docs": {
+                  "type": "array",
+                  "description": "List of matching dataset records",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "DataONE persistent identifier (PID)"
+                      },
+                      "title": {
+                        "type": [
+                          "string",
+                          "array",
+                          "null"
+                        ]
+                      },
+                      "author": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "dateUploaded": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "keywords": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "formatId": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "origin": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

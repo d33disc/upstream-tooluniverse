@@ -10,15 +10,23 @@
           "description": "Search query. Can be: comma-separated sequence values (e.g. '1,1,2,3,5,8'), keywords (e.g. 'fibonacci'), or description terms (e.g. 'prime numbers'). For sequence search use comma-separated integers."
         },
         "n": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Maximum number of results to return (default 10, max 20)"
         },
         "start": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Start offset for pagination (default 0)"
         }
       },
-      "required": ["q"]
+      "required": [
+        "q"
+      ]
     },
     "fields": {
       "endpoint": "https://oeis.org/search",
@@ -28,45 +36,104 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"q": "1,1,2,3,5,8,13,21", "n": 5},
-      {"q": "prime numbers", "n": 5},
-      {"q": "1,2,4,8,16,32,64", "n": 3}
+      {
+        "q": "1,1,2,3,5,8,13,21",
+        "n": 5
+      },
+      {
+        "q": "1,4,9,16,25,36",
+        "n": 5
+      },
+      {
+        "q": "1,2,4,8,16,32,64",
+        "n": 3
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of matching OEIS sequences",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "number": {"type": "integer", "description": "A-number (e.g. 45 = A000045 = Fibonacci)"},
-                  "id": {"type": "string", "description": "Legacy identifier (e.g. 'M0692 N0256')"},
-                  "data": {"type": "string", "description": "Comma-separated sequence values"},
-                  "name": {"type": "string", "description": "Name/description of the sequence"},
-                  "comment": {"type": "array", "items": {"type": "string"}, "description": "Mathematical comments"},
-                  "reference": {"type": "array", "items": {"type": "string"}, "description": "Literature references"},
-                  "link": {"type": "array", "items": {"type": "string"}, "description": "External links"},
-                  "formula": {"type": "array", "items": {"type": "string"}, "description": "Mathematical formulas"},
-                  "example": {"type": "array", "items": {"type": "string"}},
-                  "keyword": {"type": "string", "description": "Keywords describing the sequence (e.g. 'nonn,easy,core')"},
-                  "offset": {"type": "string", "description": "Index of first term"},
-                  "author": {"type": "string"},
-                  "created": {"type": "string"}
+          "type": "array",
+          "description": "List of matching OEIS sequences",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "description": "A-number (e.g. 45 = A000045 = Fibonacci)"
+              },
+              "id": {
+                "type": "string",
+                "description": "Legacy identifier (e.g. 'M0692 N0256')"
+              },
+              "data": {
+                "type": "string",
+                "description": "Comma-separated sequence values"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name/description of the sequence"
+              },
+              "comment": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Mathematical comments"
+              },
+              "reference": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Literature references"
+              },
+              "link": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "External links"
+              },
+              "formula": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Mathematical formulas"
+              },
+              "example": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 }
+              },
+              "keyword": {
+                "type": "string",
+                "description": "Keywords describing the sequence (e.g. 'nonn,easy,core')"
+              },
+              "offset": {
+                "type": "string",
+                "description": "Index of first term"
+              },
+              "author": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string"
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }

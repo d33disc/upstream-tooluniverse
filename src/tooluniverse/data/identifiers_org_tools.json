@@ -15,7 +15,10 @@
           "description": "The local identifier within the namespace. Examples: 'P04637' (for uniprot), '4HHB' (for pdb), '7157' (for ncbigene), '0006915' (for go), '9606' (for taxonomy), 'R-HSA-73857' (for reactome), 'ENSG00000141510' (for ensembl)."
         }
       },
-      "required": ["namespace", "local_id"]
+      "required": [
+        "namespace",
+        "local_id"
+      ]
     },
     "fields": {
       "endpoint": "https://resolver.api.identifiers.org/{namespace}:{local_id}",
@@ -25,40 +28,65 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Resolution results containing resolved resource URLs",
           "properties": {
-            "data": {
+            "apiVersion": {
+              "type": "string"
+            },
+            "errorMessage": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "payload": {
               "type": "object",
-              "description": "Resolution results containing resolved resource URLs",
               "properties": {
-                "apiVersion": {"type": "string"},
-                "errorMessage": {"type": ["string", "null"]},
-                "payload": {
+                "parsedCompactIdentifier": {
                   "type": "object",
                   "properties": {
-                    "parsedCompactIdentifier": {
-                      "type": "object",
-                      "properties": {
-                        "namespace": {"type": "string"},
-                        "localId": {"type": "string"},
-                        "providerCode": {"type": ["string", "null"]}
-                      }
+                    "namespace": {
+                      "type": "string"
                     },
-                    "resolvedResources": {
-                      "type": "array",
-                      "items": {
+                    "localId": {
+                      "type": "string"
+                    },
+                    "providerCode": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                },
+                "resolvedResources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "providerCode": {
+                        "type": "string"
+                      },
+                      "compactIdentifierResolvedUrl": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "official": {
+                        "type": "boolean"
+                      },
+                      "resourceHomeUrl": {
+                        "type": "string"
+                      },
+                      "institution": {
                         "type": "object",
                         "properties": {
-                          "providerCode": {"type": "string"},
-                          "compactIdentifierResolvedUrl": {"type": "string"},
-                          "description": {"type": "string"},
-                          "official": {"type": "boolean"},
-                          "resourceHomeUrl": {"type": "string"},
-                          "institution": {
-                            "type": "object",
-                            "properties": {
-                              "name": {"type": "string"},
-                              "homeUrl": {"type": "string"}
-                            }
+                          "name": {
+                            "type": "string"
+                          },
+                          "homeUrl": {
+                            "type": "string"
                           }
                         }
                       }
@@ -66,21 +94,31 @@
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"namespace": "uniprot", "local_id": "P04637"},
-      {"namespace": "pdb", "local_id": "4HHB"}
+      {
+        "namespace": "uniprot",
+        "local_id": "P04637"
+      },
+      {
+        "namespace": "pdb",
+        "local_id": "4HHB"
+      }
     ]
   },
   {
@@ -95,7 +133,9 @@
           "description": "The namespace prefix to look up. Examples: 'uniprot', 'pdb', 'ensembl', 'go', 'chebi', 'ncbigene', 'taxonomy', 'reactome', 'kegg.compound', 'interpro', 'pfam', 'doi'."
         }
       },
-      "required": ["prefix"]
+      "required": [
+        "prefix"
+      ]
     },
     "fields": {
       "endpoint": "https://registry.api.identifiers.org/restApi/namespaces/search/findByPrefix",
@@ -105,35 +145,55 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Namespace details including ID pattern and description",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Namespace details including ID pattern and description",
-              "properties": {
-                "prefix": {"type": "string"},
-                "mirId": {"type": "string"},
-                "name": {"type": "string"},
-                "pattern": {"type": "string", "description": "Regex pattern for valid local IDs"},
-                "description": {"type": "string"},
-                "sampleId": {"type": "string"},
-                "namespaceEmbeddedInLui": {"type": "boolean"},
-                "deprecated": {"type": "boolean"}
-              }
+            "prefix": {
+              "type": "string"
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "mirId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "string",
+              "description": "Regex pattern for valid local IDs"
+            },
+            "description": {
+              "type": "string"
+            },
+            "sampleId": {
+              "type": "string"
+            },
+            "namespaceEmbeddedInLui": {
+              "type": "boolean"
+            },
+            "deprecated": {
+              "type": "boolean"
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"prefix": "uniprot"},
-      {"prefix": "pdb"}
+      {
+        "prefix": "uniprot"
+      },
+      {
+        "prefix": "pdb"
+      }
     ]
   },
   {
@@ -158,7 +218,9 @@
           "description": "Results per page. Default: 10."
         }
       },
-      "required": ["content"]
+      "required": [
+        "content"
+      ]
     },
     "fields": {
       "endpoint": "https://registry.api.identifiers.org/restApi/namespaces/search/findByPrefixContaining",
@@ -168,54 +230,79 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Search results containing matching namespaces",
           "properties": {
-            "data": {
+            "_embedded": {
               "type": "object",
-              "description": "Search results containing matching namespaces",
               "properties": {
-                "_embedded": {
-                  "type": "object",
-                  "properties": {
-                    "namespaces": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "prefix": {"type": "string"},
-                          "name": {"type": "string"},
-                          "pattern": {"type": "string"},
-                          "description": {"type": "string"},
-                          "sampleId": {"type": "string"}
-                        }
+                "namespaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "prefix": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "pattern": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "sampleId": {
+                        "type": "string"
                       }
                     }
-                  }
-                },
-                "page": {
-                  "type": "object",
-                  "properties": {
-                    "size": {"type": "integer"},
-                    "totalElements": {"type": "integer"},
-                    "totalPages": {"type": "integer"},
-                    "number": {"type": "integer"}
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "page": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "integer"
+                },
+                "totalElements": {
+                  "type": "integer"
+                },
+                "totalPages": {
+                  "type": "integer"
+                },
+                "number": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"content": "pdb", "page": 0, "size": 10},
-      {"content": "gene", "page": 0, "size": 10}
+      {
+        "content": "pdb",
+        "page": 0,
+        "size": 10
+      },
+      {
+        "content": "gene",
+        "page": 0,
+        "size": 10
+      }
     ]
   },
   {
@@ -245,54 +332,76 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Paginated list of all registered namespaces",
           "properties": {
-            "data": {
+            "_embedded": {
               "type": "object",
-              "description": "Paginated list of all registered namespaces",
               "properties": {
-                "_embedded": {
-                  "type": "object",
-                  "properties": {
-                    "namespaces": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "prefix": {"type": "string"},
-                          "name": {"type": "string"},
-                          "pattern": {"type": "string"},
-                          "description": {"type": "string"},
-                          "sampleId": {"type": "string"},
-                          "deprecated": {"type": "boolean"}
-                        }
+                "namespaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "prefix": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "pattern": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "sampleId": {
+                        "type": "string"
+                      },
+                      "deprecated": {
+                        "type": "boolean"
                       }
                     }
-                  }
-                },
-                "page": {
-                  "type": "object",
-                  "properties": {
-                    "size": {"type": "integer"},
-                    "totalElements": {"type": "integer"},
-                    "totalPages": {"type": "integer"},
-                    "number": {"type": "integer"}
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "page": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "integer"
+                },
+                "totalElements": {
+                  "type": "integer"
+                },
+                "totalPages": {
+                  "type": "integer"
+                },
+                "number": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     },
     "test_examples": [
-      {"page": 0, "size": 10}
+      {
+        "page": 0,
+        "size": 10
+      }
     ]
   }
 ]

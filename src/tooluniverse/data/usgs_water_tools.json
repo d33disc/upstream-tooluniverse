@@ -10,11 +10,16 @@
           "description": "USGS site number(s), comma-separated (e.g., '01646500' for Potomac River near Washington DC, '09380000' for Colorado River at Lees Ferry)"
         },
         "period": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Time period for data in ISO 8601 duration format (e.g., 'PT2H' for 2 hours, 'P1D' for 1 day, 'P7D' for 7 days). Default: 'P1D'"
         }
       },
-      "required": ["sites"]
+      "required": [
+        "sites"
+      ]
     },
     "fields": {
       "endpoint": "https://waterservices.usgs.gov/nwis/iv/",
@@ -25,58 +30,82 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"sites": "01646500", "period": "PT2H"},
-      {"sites": "09380000", "period": "P1D"},
-      {"sites": "12340000", "period": "PT6H"}
+      {
+        "sites": "01646500",
+        "period": "PT2H"
+      },
+      {
+        "sites": "09380000",
+        "period": "P1D"
+      },
+      {
+        "sites": "12340000",
+        "period": "PT6H"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "USGS water data response",
           "properties": {
-            "data": {
+            "name": {
+              "type": "string"
+            },
+            "declaredType": {
+              "type": "string"
+            },
+            "value": {
               "type": "object",
-              "description": "USGS water data response",
               "properties": {
-                "name": {"type": "string"},
-                "declaredType": {"type": "string"},
-                "value": {
-                  "type": "object",
-                  "properties": {
-                    "queryInfo": {"type": "object"},
-                    "timeSeries": {
-                      "type": "array",
-                      "items": {
+                "queryInfo": {
+                  "type": "object"
+                },
+                "timeSeries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sourceInfo": {
                         "type": "object",
                         "properties": {
-                          "sourceInfo": {
-                            "type": "object",
-                            "properties": {
-                              "siteName": {"type": "string"},
-                              "siteCode": {"type": "array"},
-                              "geoLocation": {"type": "object"}
-                            }
+                          "siteName": {
+                            "type": "string"
                           },
-                          "variable": {
-                            "type": "object",
-                            "properties": {
-                              "variableName": {"type": "string"},
-                              "unit": {"type": "object"}
-                            }
+                          "siteCode": {
+                            "type": "array"
                           },
-                          "values": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "value": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "value": {"type": "string"},
-                                      "dateTime": {"type": "string"}
-                                    }
+                          "geoLocation": {
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "variable": {
+                        "type": "object",
+                        "properties": {
+                          "variableName": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "values": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "value": {
+                                    "type": "string"
+                                  },
+                                  "dateTime": {
+                                    "type": "string"
                                   }
                                 }
                               }
@@ -88,17 +117,19 @@
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -114,11 +145,16 @@
           "description": "USGS site number(s), comma-separated (e.g., '01646500' for Potomac River)"
         },
         "period": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Time period in ISO 8601 format (e.g., 'PT2H', 'P1D', 'P7D'). Default: 'P1D'"
         }
       },
-      "required": ["sites"]
+      "required": [
+        "sites"
+      ]
     },
     "fields": {
       "endpoint": "https://waterservices.usgs.gov/nwis/iv/",
@@ -129,47 +165,59 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"sites": "01646500", "period": "PT2H"},
-      {"sites": "09380000", "period": "P1D"},
-      {"sites": "02037500", "period": "PT6H"}
+      {
+        "sites": "01646500",
+        "period": "PT2H"
+      },
+      {
+        "sites": "09380000",
+        "period": "P1D"
+      },
+      {
+        "sites": "02037500",
+        "period": "PT6H"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "USGS water level data",
           "properties": {
-            "data": {
+            "value": {
               "type": "object",
-              "description": "USGS water level data",
               "properties": {
-                "value": {
-                  "type": "object",
-                  "properties": {
-                    "timeSeries": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "sourceInfo": {"type": "object"},
-                          "variable": {"type": "object"},
-                          "values": {"type": "array"}
-                        }
+                "timeSeries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sourceInfo": {
+                        "type": "object"
+                      },
+                      "variable": {
+                        "type": "object"
+                      },
+                      "values": {
+                        "type": "array"
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -185,11 +233,16 @@
           "description": "USGS site number(s), comma-separated"
         },
         "period": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Time period in ISO 8601 format (e.g., 'PT2H', 'P1D', 'P7D'). Default: 'P1D'"
         }
       },
-      "required": ["sites"]
+      "required": [
+        "sites"
+      ]
     },
     "fields": {
       "endpoint": "https://waterservices.usgs.gov/nwis/iv/",
@@ -200,47 +253,59 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"sites": "01646500", "period": "PT2H"},
-      {"sites": "09380000", "period": "P1D"},
-      {"sites": "01578310", "period": "PT6H"}
+      {
+        "sites": "01646500",
+        "period": "PT2H"
+      },
+      {
+        "sites": "09380000",
+        "period": "P1D"
+      },
+      {
+        "sites": "01578310",
+        "period": "PT6H"
+      }
     ],
     "return_schema": {
       "oneOf": [
         {
           "type": "object",
+          "description": "USGS water temperature data",
           "properties": {
-            "data": {
+            "value": {
               "type": "object",
-              "description": "USGS water temperature data",
               "properties": {
-                "value": {
-                  "type": "object",
-                  "properties": {
-                    "timeSeries": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "sourceInfo": {"type": "object"},
-                          "variable": {"type": "object"},
-                          "values": {"type": "array"}
-                        }
+                "timeSeries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sourceInfo": {
+                        "type": "object"
+                      },
+                      "variable": {
+                        "type": "object"
+                      },
+                      "values": {
+                        "type": "array"
                       }
                     }
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
           "properties": {
-            "error": {"type": "string"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }

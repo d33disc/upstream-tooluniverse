@@ -153,7 +153,7 @@
             "type": "string"
           },
           "ncbiTaxonId": {
-            "type": "integer"
+            "type": ["integer", "string", "null"]
           },
           "score": {
             "type": "number"
@@ -259,10 +259,10 @@
             "type": "integer"
           },
           "inputGenes": {
-            "type": "string"
+            "type": ["string", "array", "null"]
           },
           "preferredNames": {
-            "type": "string"
+            "type": ["string", "array", "null"]
           },
           "p_value": {
             "type": "number"
@@ -448,7 +448,7 @@
             "type": "string"
           },
           "ncbiTaxonId": {
-            "type": "integer"
+            "type": ["integer", "string", "null"]
           },
           "score": {
             "type": "number",
@@ -535,27 +535,33 @@
       "return_format": "JSON"
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "number_of_nodes": {
-          "type": "integer"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_of_nodes": {"type": "integer"},
+            "number_of_edges": {"type": "integer"},
+            "expected_number_of_edges": {"type": "number"},
+            "p_value": {"type": "number"},
+            "avg_node_degree": {"type": "number"},
+            "local_clustering_coefficient": {"type": "number"}
+          }
         },
-        "number_of_edges": {
-          "type": "integer"
-        },
-        "expected_number_of_edges": {
-          "type": "number"
-        },
-        "p_value": {
-          "type": "number"
-        },
-        "avg_node_degree": {
-          "type": "number"
-        },
-        "local_clustering_coefficient": {
-          "type": "number"
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number_of_nodes": {"type": "integer"},
+              "number_of_edges": {"type": "integer"},
+              "expected_number_of_edges": {"type": "number"},
+              "p_value": {"type": "number"},
+              "avg_node_degree": {"type": "number"},
+              "local_clustering_coefficient": {"type": "number"}
+            }
+          }
         }
-      }
+      ]
     },
     "test_examples": [
       {

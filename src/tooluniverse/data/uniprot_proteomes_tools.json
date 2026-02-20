@@ -33,63 +33,56 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "UniProt proteome search results",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "UniProt proteome search results",
-              "properties": {
-                "results": {
-                  "type": "array",
-                  "description": "Array of proteome objects",
-                  "items": {
-                    "type": "object",
+            "results": {
+              "type": "array",
+              "description": "Array of proteome objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "UniProt proteome ID (e.g., 'UP000005640')"
+                  },
+                  "description": {
+                    "type": ["string", "null"],
+                    "description": "Description of the organism"
+                  },
+                  "taxonomy": {
+                    "type": ["object", "null"],
+                    "description": "Taxonomy information",
                     "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "UniProt proteome ID (e.g., 'UP000005640')"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Description of the organism"
-                      },
-                      "taxonomy": {
-                        "type": "object",
-                        "description": "Taxonomy information",
-                        "properties": {
-                          "taxonId": {"type": "integer"},
-                          "scientificName": {"type": "string"},
-                          "commonName": {"type": ["string", "null"]},
-                          "mnemonic": {"type": "string"}
-                        }
-                      },
-                      "proteomeType": {
-                        "type": "string",
-                        "description": "Type: 'Reference and representative proteome', 'Representative proteome', 'Other proteome', 'Redundant proteome', 'Excluded'"
-                      },
-                      "geneCount": {
-                        "type": "integer",
-                        "description": "Number of genes in the proteome"
-                      },
-                      "superkingdom": {
-                        "type": "string",
-                        "description": "Taxonomic superkingdom (Eukaryota, Bacteria, Archaea, Viruses)"
-                      },
-                      "proteomeCompletenessReport": {
-                        "type": ["object", "null"],
-                        "description": "BUSCO completeness assessment"
-                      },
-                      "genomeAssembly": {
-                        "type": ["object", "null"],
-                        "description": "Genome assembly details"
-                      }
+                      "taxonId": {"type": "integer"},
+                      "scientificName": {"type": "string"},
+                      "commonName": {"type": ["string", "null"]},
+                      "mnemonic": {"type": ["string", "null"]}
                     }
+                  },
+                  "proteomeType": {
+                    "type": ["string", "null"],
+                    "description": "Type: 'Reference and representative proteome', 'Representative proteome', 'Other proteome', 'Redundant proteome', 'Excluded'"
+                  },
+                  "geneCount": {
+                    "type": ["integer", "null"],
+                    "description": "Number of genes in the proteome"
+                  },
+                  "superkingdom": {
+                    "type": ["string", "null"],
+                    "description": "Taxonomic superkingdom (Eukaryota, Bacteria, Archaea, Viruses)"
+                  },
+                  "proteomeCompletenessReport": {
+                    "type": ["object", "null"],
+                    "description": "BUSCO completeness assessment"
+                  },
+                  "genomeAssembly": {
+                    "type": ["object", "null"],
+                    "description": "Genome assembly details"
                   }
                 }
               }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            }
+          }
         },
         {
           "type": "object",
@@ -130,58 +123,51 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Detailed proteome metadata",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Detailed proteome metadata",
+            "id": {
+              "type": "string",
+              "description": "UniProt proteome ID"
+            },
+            "description": {
+              "type": ["string", "null"],
+              "description": "Organism description"
+            },
+            "taxonomy": {
+              "type": ["object", "null"],
               "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "UniProt proteome ID"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Organism description"
-                },
-                "taxonomy": {
-                  "type": "object",
-                  "properties": {
-                    "taxonId": {"type": "integer"},
-                    "scientificName": {"type": "string"},
-                    "commonName": {"type": ["string", "null"]},
-                    "lineage": {"type": "array", "items": {"type": "string"}}
-                  }
-                },
-                "proteomeType": {"type": "string"},
-                "geneCount": {"type": "integer"},
-                "superkingdom": {"type": "string"},
-                "proteomeCompletenessReport": {
-                  "type": ["object", "null"],
-                  "description": "BUSCO completeness (complete, duplicated, fragmented, missing percentages)"
-                },
-                "genomeAssembly": {
-                  "type": ["object", "null"],
-                  "description": "Genome assembly details (GCA/GCF accession, level, source)"
-                },
-                "components": {
-                  "type": "array",
-                  "description": "Proteome components (chromosomes, scaffolds, etc.)",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {"type": "string"},
-                      "proteinCount": {"type": "integer"},
-                      "genomeAnnotation": {"type": ["object", "null"]}
-                    }
-                  }
-                },
-                "annotationScore": {"type": "integer"},
-                "panproteome": {"type": ["object", "null"]}
+                "taxonId": {"type": "integer"},
+                "scientificName": {"type": "string"},
+                "commonName": {"type": ["string", "null"]},
+                "lineage": {"type": ["array", "null"], "items": {"type": "string"}}
               }
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+            "proteomeType": {"type": ["string", "null"]},
+            "geneCount": {"type": ["integer", "null"]},
+            "superkingdom": {"type": ["string", "null"]},
+            "proteomeCompletenessReport": {
+              "type": ["object", "null"],
+              "description": "BUSCO completeness (complete, duplicated, fragmented, missing percentages)"
+            },
+            "genomeAssembly": {
+              "type": ["object", "null"],
+              "description": "Genome assembly details (GCA/GCF accession, level, source)"
+            },
+            "components": {
+              "type": ["array", "null"],
+              "description": "Proteome components (chromosomes, scaffolds, etc.)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "proteinCount": {"type": ["integer", "null"]},
+                  "genomeAnnotation": {"type": ["object", "null"]}
+                }
+              }
+            },
+            "annotationScore": {"type": ["number", "null"]},
+            "panproteome": {"type": ["object", "string", "null"]}
+          }
         },
         {
           "type": "object",
