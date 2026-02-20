@@ -1047,6 +1047,10 @@ default_tool_files = {
     "trivia_api": os.path.join(current_dir, "data", "trivia_api_tools.json"),
     # Bible API - Bible verse lookup by reference with multiple translations
     "bible_api": os.path.join(current_dir, "data", "bible_api_tools.json"),
+    # Open-Meteo Climate - historical climate data from 1950 via ERA5/CMIP6 models
+    "open_meteo_climate": os.path.join(
+        current_dir, "data", "open_meteo_climate_tools.json"
+    ),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
