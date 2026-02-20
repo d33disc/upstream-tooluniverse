@@ -845,6 +845,14 @@ default_tool_files = {
     "opencitations": os.path.join(current_dir, "data", "opencitations_tools.json"),
     # Wikidata Entity API - search and retrieve Wikidata items/entities by ID
     "wikidata_entity": os.path.join(current_dir, "data", "wikidata_entity_tools.json"),
+    # TheSportsDB - free sports database (teams, players, events across 20+ sports)
+    "sportsdb": os.path.join(current_dir, "data", "sportsdb_tools.json"),
+    # iDigBio - Integrated Digitized Biocollections (130M+ natural history specimens)
+    "idigbio": os.path.join(current_dir, "data", "idigbio_tools.json"),
+    # ELIXIR TeSS - Bioinformatics training materials and events aggregator
+    "elixir_tess": os.path.join(current_dir, "data", "elixir_tess_tools.json"),
+    # Wikimedia Stats - Wikipedia page views and top articles analytics
+    "wikimedia_stats": os.path.join(current_dir, "data", "wikimedia_stats_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

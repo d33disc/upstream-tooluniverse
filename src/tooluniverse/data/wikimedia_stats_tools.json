@@ -1,0 +1,174 @@
+[
+  {
+    "name": "Wikipedia_get_pageviews",
+    "description": "Get Wikipedia page view statistics for a specific article using the Wikimedia REST API. Returns daily, monthly, or yearly view counts for any Wikipedia article across different access types (desktop, mobile) and agent types (humans, bots). Useful for measuring article popularity, tracking interest in topics over time, and research on information seeking behavior.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "article": {
+          "type": "string",
+          "description": "Wikipedia article title (use underscores for spaces). Examples: 'CRISPR', 'Albert_Einstein', 'COVID-19', 'Climate_change'"
+        },
+        "project": {
+          "type": ["string", "null"],
+          "description": "Wikipedia language project. Default: 'en.wikipedia'. Examples: 'en.wikipedia', 'de.wikipedia', 'fr.wikipedia', 'ja.wikipedia'"
+        },
+        "access": {
+          "type": ["string", "null"],
+          "description": "Access type filter. Values: 'all-access' (default), 'desktop', 'mobile-app', 'mobile-web'"
+        },
+        "agent": {
+          "type": ["string", "null"],
+          "description": "Agent type filter. Values: 'all-agents' (default), 'user', 'bot', 'spider'"
+        },
+        "granularity": {
+          "type": ["string", "null"],
+          "description": "Time granularity: 'daily' or 'monthly'. Default: 'monthly'"
+        },
+        "start": {
+          "type": "string",
+          "description": "Start date (YYYYMMDD or YYYYMM format). Example: '20240101' for Jan 1 2024, '202401' for January 2024"
+        },
+        "end": {
+          "type": "string",
+          "description": "End date (YYYYMMDD or YYYYMM format). Example: '20240201' for Feb 1 2024, '202401' for January 2024"
+        }
+      },
+      "required": ["article", "start", "end"]
+    },
+    "fields": {
+      "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"article": "CRISPR", "project": "en.wikipedia", "access": "all-access", "agent": "all-agents", "granularity": "monthly", "start": "20240101", "end": "20240201"},
+      {"article": "Albert_Einstein", "project": "en.wikipedia", "access": "all-access", "agent": "user", "granularity": "monthly", "start": "20240101", "end": "20240301"},
+      {"article": "COVID-19", "project": "en.wikipedia", "access": "desktop", "agent": "all-agents", "granularity": "monthly", "start": "20240101", "end": "20240601"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Wikipedia page view statistics",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "Page view data points (one per time period)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "project": {"type": "string", "description": "Wikipedia project (e.g. 'en.wikipedia')"},
+                      "article": {"type": "string", "description": "Article title"},
+                      "granularity": {"type": "string", "description": "Time granularity (daily/monthly)"},
+                      "timestamp": {"type": "string", "description": "Time period (format: YYYYMMDDHH)"},
+                      "access": {"type": "string"},
+                      "agent": {"type": "string"},
+                      "views": {"type": "integer", "description": "Number of page views in this time period"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Wikipedia_get_top_pages",
+    "description": "Get the most viewed Wikipedia articles for a specific date using the Wikimedia REST API. Returns up to 1000 top articles ranked by page views. Useful for understanding what topics are trending, measuring cultural phenomena, and studying information consumption patterns.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": ["string", "null"],
+          "description": "Wikipedia language project. Default: 'en.wikipedia'. Examples: 'en.wikipedia', 'de.wikipedia', 'fr.wikipedia'"
+        },
+        "access": {
+          "type": ["string", "null"],
+          "description": "Access type. Values: 'all-access' (default), 'desktop', 'mobile-app', 'mobile-web'"
+        },
+        "year": {
+          "type": "string",
+          "description": "Year (4 digits). Example: '2024'"
+        },
+        "month": {
+          "type": "string",
+          "description": "Month (2 digits, zero-padded). Example: '01' for January"
+        },
+        "day": {
+          "type": "string",
+          "description": "Day (2 digits, zero-padded). Example: '15'. Use 'all-days' for monthly totals."
+        }
+      },
+      "required": ["year", "month", "day"]
+    },
+    "fields": {
+      "endpoint": "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/{project}/{access}/{year}/{month}/{day}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"project": "en.wikipedia", "access": "all-access", "year": "2024", "month": "01", "day": "01"},
+      {"project": "en.wikipedia", "access": "desktop", "year": "2024", "month": "06", "day": "15"},
+      {"project": "de.wikipedia", "access": "all-access", "year": "2024", "month": "01", "day": "01"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Top Wikipedia articles data",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "One item per access/project combination",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "project": {"type": "string"},
+                      "access": {"type": "string"},
+                      "year": {"type": "string"},
+                      "month": {"type": "string"},
+                      "day": {"type": "string"},
+                      "articles": {
+                        "type": "array",
+                        "description": "Top articles ranked by views",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "article": {"type": "string", "description": "Article title"},
+                            "views": {"type": "integer", "description": "Total page views"},
+                            "rank": {"type": "integer", "description": "Rank (1 = most viewed)"}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
