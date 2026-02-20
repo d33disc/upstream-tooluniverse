@@ -1,30 +1,27 @@
 """
-MusicBrainz_get_artist
+SECEDGAR_get_company_facts
 
-Get detailed information about a specific artist from MusicBrainz by their MBID. Returns artist b...
+Get structured financial data (XBRL facts) for a public company from SEC EDGAR using its CIK numb...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def MusicBrainz_get_artist(
-    mbid: str,
-    inc: Optional[str | Any] = None,
+def SECEDGAR_get_company_facts(
+    cik: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Get detailed information about a specific artist from MusicBrainz by their MBID. Returns artist b...
+    Get structured financial data (XBRL facts) for a public company from SEC EDGAR using its CIK numb...
 
     Parameters
     ----------
-    mbid : str
-        MusicBrainz artist ID (MBID, UUID format, e.g., 'b10bbbfc-cf9e-42e0-be17-e2c3...
-    inc : str | Any
-        Additional data to include: 'release-groups' for albums, 'tags' for genre tag...
+    cik : str
+        Company CIK (Central Index Key) number. Must be 10 digits (pad with zeros). E...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,11 +36,11 @@ def MusicBrainz_get_artist(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "MusicBrainz_get_artist", "arguments": {"mbid": mbid, "inc": inc}},
+        {"name": "SECEDGAR_get_company_facts", "arguments": {"cik": cik}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["MusicBrainz_get_artist"]
+__all__ = ["SECEDGAR_get_company_facts"]

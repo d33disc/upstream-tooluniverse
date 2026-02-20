@@ -1,7 +1,7 @@
 """
 MusicBrainz_search_artists
 
-Search MusicBrainz for musical artists, bands, and composers. MusicBrainz is the world's largest ...
+Search for music artists in the MusicBrainz open music encyclopedia. Returns artist name, disambi...
 """
 
 from typing import Any, Optional, Callable
@@ -17,14 +17,14 @@ def MusicBrainz_search_artists(
     validate: bool = True,
 ) -> Any:
     """
-    Search MusicBrainz for musical artists, bands, and composers. MusicBrainz is the world's largest ...
+    Search for music artists in the MusicBrainz open music encyclopedia. Returns artist name, disambi...
 
     Parameters
     ----------
     query : str
-        Artist name or search query. Supports Lucene syntax: 'artist:Beatles', 'count...
+        Artist search query. Examples: 'beatles', 'david bowie', 'radiohead', 'mozart...
     limit : int | Any
-        Maximum results to return (1-100, default 25)
+        Number of results (1-100). Default: 10
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False

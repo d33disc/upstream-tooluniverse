@@ -1,30 +1,30 @@
 """
-MusicBrainz_search_releases
+AviationWeather_get_metar
 
-Search MusicBrainz for albums, singles, EPs, and other music releases. Returns release title, art...
+Get real-time METAR weather observations for airports from the Aviation Weather Center (AWC). MET...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def MusicBrainz_search_releases(
-    query: str,
-    limit: Optional[int | Any] = None,
+def AviationWeather_get_metar(
+    ids: str,
+    hoursBeforeNow: Optional[int | Any] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Search MusicBrainz for albums, singles, EPs, and other music releases. Returns release title, art...
+    Get real-time METAR weather observations for airports from the Aviation Weather Center (AWC). MET...
 
     Parameters
     ----------
-    query : str
-        Release search query (e.g., 'Abbey Road', 'artist:Beatles', 'artist:Bach AND ...
-    limit : int | Any
-        Maximum results to return (1-100, default 25)
+    ids : str
+        ICAO airport code(s), comma-separated. Examples: 'KLAX' (Los Angeles), 'KJFK'...
+    hoursBeforeNow : int | Any
+        Hours of data to retrieve (1-24). Default: 1 (most recent METAR only)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +40,8 @@ def MusicBrainz_search_releases(
 
     return get_shared_client().run_one_function(
         {
-            "name": "MusicBrainz_search_releases",
-            "arguments": {"query": query, "limit": limit},
+            "name": "AviationWeather_get_metar",
+            "arguments": {"ids": ids, "hoursBeforeNow": hoursBeforeNow},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def MusicBrainz_search_releases(
     )
 
 
-__all__ = ["MusicBrainz_search_releases"]
+__all__ = ["AviationWeather_get_metar"]

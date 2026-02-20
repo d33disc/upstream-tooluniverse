@@ -1,30 +1,27 @@
 """
-NagerDate_check_is_workday
+AviationWeather_get_taf
 
-Check if a specific date is a public holiday or workday for a given country using the Nager.Date ...
+Get Terminal Aerodrome Forecasts (TAF) for airports from the Aviation Weather Center. TAF provide...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def NagerDate_check_is_workday(
-    countryCode: str,
-    date: str,
+def AviationWeather_get_taf(
+    ids: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Check if a specific date is a public holiday or workday for a given country using the Nager.Date ...
+    Get Terminal Aerodrome Forecasts (TAF) for airports from the Aviation Weather Center. TAF provide...
 
     Parameters
     ----------
-    countryCode : str
-        ISO 3166-1 alpha-2 country code. Examples: 'US', 'GB', 'DE', 'FR', 'JP'
-    date : str
-        Date to check (YYYY-MM-DD format). Examples: '2025-12-25', '2025-07-04', '202...
+    ids : str
+        ICAO airport code(s), comma-separated. Examples: 'KLAX', 'KJFK,KORD', 'EGLL',...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,14 +36,11 @@ def NagerDate_check_is_workday(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "NagerDate_check_is_workday",
-            "arguments": {"countryCode": countryCode, "date": date},
-        },
+        {"name": "AviationWeather_get_taf", "arguments": {"ids": ids}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["NagerDate_check_is_workday"]
+__all__ = ["AviationWeather_get_taf"]
