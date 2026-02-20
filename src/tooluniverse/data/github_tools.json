@@ -1,0 +1,163 @@
+[
+  {
+    "name": "GitHub_search_repositories",
+    "description": "Search GitHub public repositories using GitHub's search API. Returns repository metadata including name, description, language, star count, fork count, topics, license, and creation/update dates. Supports filtering by language, topic, stars, forks, and creation date. Useful for finding open-source bioinformatics tools, scientific computing packages, and research codebases. Rate limit: 10 requests/minute unauthenticated.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query with optional qualifiers. Examples: 'bioinformatics language:python stars:>100', 'protein structure prediction', 'topic:machine-learning language:python', 'alphafold protein', 'single cell RNA sequencing', 'user:deepmind'"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort by: 'stars', 'forks', 'help-wanted-issues', 'updated'. Default: best match."
+        },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Sort direction: 'desc' (default) or 'asc'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Results per page (default 30, max 100)"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.github.com/search/repositories",
+      "headers": {
+        "Accept": "application/vnd.github.v3+json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "bioinformatics language:python stars:>500", "sort": "stars", "per_page": 5},
+      {"q": "protein structure prediction deep learning", "sort": "stars", "per_page": 5},
+      {"q": "single cell RNA sequencing topic:bioinformatics", "per_page": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "GitHub repository search results",
+              "properties": {
+                "total_count": {"type": "integer", "description": "Total matching repositories"},
+                "incomplete_results": {"type": "boolean"},
+                "items": {
+                  "type": "array",
+                  "description": "List of matching repositories",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "name": {"type": "string", "description": "Repository name"},
+                      "full_name": {"type": "string", "description": "owner/repo format"},
+                      "html_url": {"type": "string", "description": "Repository URL"},
+                      "description": {"type": ["string", "null"]},
+                      "stargazers_count": {"type": "integer", "description": "GitHub stars"},
+                      "forks_count": {"type": "integer"},
+                      "language": {"type": ["string", "null"]},
+                      "topics": {"type": "array", "items": {"type": "string"}},
+                      "license": {"type": ["object", "null"]},
+                      "created_at": {"type": "string"},
+                      "updated_at": {"type": "string"},
+                      "pushed_at": {"type": "string"},
+                      "size": {"type": "integer"},
+                      "open_issues_count": {"type": "integer"},
+                      "default_branch": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "GitHub_get_repository",
+    "description": "Get detailed metadata for a specific GitHub public repository. Returns full repository information including description, statistics (stars, forks, watchers, open issues), programming language, topics, license, README existence, and recent activity. Use full_name in owner/repo format (e.g., 'deepmind/alphafold'). Useful for getting repository details for scientific software tools.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "description": "Repository owner (username or organization). Examples: 'deepmind', 'bioconductor', 'pytorch', 'tensorflow', 'pandas-dev'"
+        },
+        "repo": {
+          "type": "string",
+          "description": "Repository name. Examples: 'alphafold', 'pytorch', 'pandas', 'scikit-learn', 'biopython'"
+        }
+      },
+      "required": ["owner", "repo"]
+    },
+    "fields": {
+      "endpoint": "https://api.github.com/repos/{owner}/{repo}",
+      "headers": {
+        "Accept": "application/vnd.github.v3+json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"owner": "deepmind", "repo": "alphafold"},
+      {"owner": "scikit-learn", "repo": "scikit-learn"},
+      {"owner": "biopython", "repo": "biopython"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "GitHub repository details",
+              "properties": {
+                "id": {"type": "integer"},
+                "name": {"type": "string"},
+                "full_name": {"type": "string"},
+                "html_url": {"type": "string"},
+                "description": {"type": ["string", "null"]},
+                "stargazers_count": {"type": "integer"},
+                "forks_count": {"type": "integer"},
+                "watchers_count": {"type": "integer"},
+                "open_issues_count": {"type": "integer"},
+                "language": {"type": ["string", "null"]},
+                "topics": {"type": "array", "items": {"type": "string"}},
+                "license": {"type": ["object", "null"]},
+                "created_at": {"type": "string"},
+                "updated_at": {"type": "string"},
+                "pushed_at": {"type": "string"},
+                "default_branch": {"type": "string"},
+                "size": {"type": "integer"},
+                "homepage": {"type": ["string", "null"]},
+                "has_wiki": {"type": "boolean"},
+                "has_pages": {"type": "boolean"},
+                "archived": {"type": "boolean"},
+                "fork": {"type": "boolean"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

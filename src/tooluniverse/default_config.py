@@ -741,18 +741,58 @@ default_tool_files = {
     "eqtl": os.path.join(current_dir, "data", "eqtl_tools.json"),
     # OSDR - NASA Open Science Data Repository (space biology studies)
     "osdr": os.path.join(current_dir, "data", "osdr_tools.json"),
-    # STRING network - Protein interaction networks and partners
-    "string_network": os.path.join(current_dir, "data", "string_network_tools.json"),
-    # UniProt Proteomes - Complete protein sets from sequenced genomes
-    "uniprot_proteomes": os.path.join(
-        current_dir, "data", "uniprot_proteomes_tools.json"
-    ),
+    # Gene2Phenotype - EBI curated gene-disease associations for clinical genetics
+    "gene2phenotype": os.path.join(current_dir, "data", "gene2phenotype_tools.json"),
     # MusicBrainz - Open music encyclopedia (artists, releases, recordings, MBID lookups)
     "musicbrainz": os.path.join(current_dir, "data", "musicbrainz_tools.json"),
     # Open Library - Open book catalog with 20M+ editions linked to Internet Archive
     "openlibrary": os.path.join(current_dir, "data", "openlibrary_tools.json"),
     # NASA Exoplanet Archive - ADQL queries for 5500+ confirmed exoplanets and stellar hosts
     "nasa_exoplanet": os.path.join(current_dir, "data", "nasa_exoplanet_tools.json"),
+    # OpenStreetMap Nominatim - Free geocoding and reverse geocoding worldwide
+    "nominatim": os.path.join(current_dir, "data", "nominatim_tools.json"),
+    # REST Countries - Comprehensive country metadata (population, languages, currencies, borders)
+    "restcountries": os.path.join(current_dir, "data", "restcountries_tools.json"),
+    # NASA APOD - Astronomy Picture of the Day with images and explanations
+    "nasa_apod": os.path.join(current_dir, "data", "nasa_apod_tools.json"),
+    # eBird - Cornell Lab bird taxonomy and regional species lists (no API key)
+    "ebird_taxonomy": os.path.join(current_dir, "data", "ebird_taxonomy_tools.json"),
+    # CRAN R Package Database - Metadata for 20,000+ R packages including versions and dependencies
+    "cran": os.path.join(current_dir, "data", "cran_tools.json"),
+    # NASA CMR - Common Metadata Repository for 40,000+ Earth observation datasets
+    "nasa_cmr": os.path.join(current_dir, "data", "nasa_cmr_tools.json"),
+    # DataONE - Federation of 43+ environmental data repositories (3.2M+ datasets)
+    "dataone": os.path.join(current_dir, "data", "dataone_tools.json"),
+    # Dryad - Open research data repository for life sciences and other disciplines
+    "dryad": os.path.join(current_dir, "data", "dryad_tools.json"),
+    # Dataverse (Harvard) - Open-source research data repository platform
+    "dataverse": os.path.join(current_dir, "data", "dataverse_tools.json"),
+    # SDSS - Sloan Digital Sky Survey DR18, SQL queries for 500M+ astronomical objects
+    "sdss": os.path.join(current_dir, "data", "sdss_tools.json"),
+    # NASA NED - NASA/IPAC Extragalactic Database for galaxies, quasars, and AGN
+    "nasa_ned": os.path.join(current_dir, "data", "nasa_ned_tools.json"),
+    # npm - Node package registry search and package metadata (2M+ packages)
+    "npm": os.path.join(current_dir, "data", "npm_tools.json"),
+    # GitHub - Public repository search and metadata via GitHub API
+    "github": os.path.join(current_dir, "data", "github_tools.json"),
+    # LitVar2 - NCBI variant-literature linking (search variants, get publications)
+    "litvar": os.path.join(current_dir, "data", "litvar_tools.json"),
+    # PubTator3 Extended - entity annotation extraction from PubMed articles
+    "pubtator3_ext": os.path.join(current_dir, "data", "pubtator3_ext_tools.json"),
+    # RCSB Chemical Components - PDB ligand/small molecule chemical info
+    "rcsb_chemcomp": os.path.join(current_dir, "data", "rcsb_chemcomp_tools.json"),
+    # NCI Drug Dictionary - cancer drug definitions, aliases, and NCI concept IDs
+    "nci_drugdict": os.path.join(current_dir, "data", "nci_drugdict_tools.json"),
+    # Eurostat - EU statistical office data (GDP, population, health, environment)
+    "eurostat": os.path.join(current_dir, "data", "eurostat_tools.json"),
+    # USGS Earthquake - Real-time and historical earthquake data from USGS FDSN
+    "usgs_earthquake": os.path.join(current_dir, "data", "usgs_earthquake_tools.json"),
+    # BGS Geomagnetic Field - IGRF model for magnetic declination and field strength worldwide
+    "bgs_geomag": os.path.join(current_dir, "data", "bgs_geomag_tools.json"),
+    # JPL Horizons - Solar system body lookup and physical data from NASA JPL
+    "jpl_horizons": os.path.join(current_dir, "data", "jpl_horizons_tools.json"),
+    # NASA SBDB - Small Body Database for asteroids and comets (1.3M+ objects)
+    "nasa_sbdb": os.path.join(current_dir, "data", "nasa_sbdb_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

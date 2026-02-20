@@ -23,11 +23,7 @@
       "required": ["gene"]
     },
     "fields": {
-      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/genes/{gene}/variants",
-      "params": {
-        "species": "{species}",
-        "limit": "{limit}"
-      }
+      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/genes/{gene}/variants"
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -109,21 +105,13 @@
   },
   {
     "name": "EVA_get_variants_by_region",
-    "description": "Get genetic variants from the European Variation Archive (EVA) within a specific genomic region. Returns all known variants in the specified chromosomal coordinate range, including SNVs, indels, and structural variants with allele frequencies from multiple studies. Useful for scanning variant hotspots or checking variants in regulatory regions.",
+    "description": "Get genetic variants from the European Variation Archive (EVA) within a specific genomic region. Returns all known variants in the specified chromosomal coordinate range, including SNVs, indels, and structural variants with allele frequencies from multiple studies. Useful for scanning variant hotspots or checking variants in regulatory regions. The endpoint URL uses 'chromosome:start-end' format.",
     "parameter": {
       "type": "object",
       "properties": {
-        "chromosome": {
+        "region": {
           "type": "string",
-          "description": "Chromosome name (e.g., '17', '1', 'X', 'CM000679.2'). Use numbers for standard chromosomes."
-        },
-        "start": {
-          "type": "integer",
-          "description": "Start position (1-based, inclusive). E.g., 41200000"
-        },
-        "end": {
-          "type": "integer",
-          "description": "End position (1-based, inclusive). E.g., 41210000. Max range: ~100kb recommended."
+          "description": "Genomic region in 'chr:start-end' format (e.g., '17:41200000-41210000', '7:140753300-140753400', '19:44905700-44910000')"
         },
         "species": {
           "type": "string",
@@ -136,20 +124,16 @@
           "description": "Maximum number of variants to return"
         }
       },
-      "required": ["chromosome", "start", "end"]
+      "required": ["region"]
     },
     "fields": {
-      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/segments/{chromosome}:{start}-{end}/variants",
-      "params": {
-        "species": "{species}",
-        "limit": "{limit}"
-      }
+      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/segments/{region}/variants"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"chromosome": "17", "start": 41200000, "end": 41210000, "species": "hsapiens_grch38", "limit": 5},
-      {"chromosome": "7", "start": 140753300, "end": 140753400, "species": "hsapiens_grch38", "limit": 5},
-      {"chromosome": "19", "start": 44905700, "end": 44910000, "species": "hsapiens_grch38", "limit": 3}
+      {"region": "17:41200000-41210000", "species": "hsapiens_grch38", "limit": 5},
+      {"region": "7:140753300-140753400", "species": "hsapiens_grch38", "limit": 5},
+      {"region": "19:44905700-44910000", "species": "hsapiens_grch38", "limit": 3}
     ],
     "return_schema": {
       "oneOf": [
@@ -220,10 +204,7 @@
       "required": []
     },
     "fields": {
-      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/meta/studies/list",
-      "params": {
-        "species": "{species}"
-      }
+      "endpoint": "https://www.ebi.ac.uk/eva/webservices/rest/v1/meta/studies/list"
     },
     "type": "BaseRESTTool",
     "test_examples": [

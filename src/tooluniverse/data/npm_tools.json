@@ -1,0 +1,163 @@
+[
+  {
+    "name": "npm_search_packages",
+    "description": "Search the npm (Node Package Manager) registry for JavaScript/TypeScript packages. Returns package name, version, description, keywords, author, publication date, download stats, and score. npm hosts 2M+ packages covering web frameworks, data science tools, bioinformatics (BioJS), machine learning (TensorFlow.js), visualization (D3.js), and utilities. Useful for finding Node.js libraries, checking package popularity, and discovering JavaScript ecosystem tools.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Search query. Can include qualifiers: 'author:USERNAME', 'keywords:KEYWORD'. Examples: 'bioinformatics', 'd3 visualization', 'machine learning tensorflow', 'react hooks', 'author:sindresorhus'"
+        },
+        "size": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (default 20, max 250)"
+        }
+      },
+      "required": ["text"]
+    },
+    "fields": {
+      "endpoint": "https://registry.npmjs.org/-/v1/search"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"text": "bioinformatics sequence", "size": 5},
+      {"text": "data visualization d3", "size": 5},
+      {"text": "machine learning tensorflow", "size": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "npm package search results",
+              "properties": {
+                "objects": {
+                  "type": "array",
+                  "description": "List of matching npm packages",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "package": {
+                        "type": "object",
+                        "description": "Package metadata",
+                        "properties": {
+                          "name": {"type": "string"},
+                          "version": {"type": "string"},
+                          "description": {"type": ["string", "null"]},
+                          "keywords": {"type": ["array", "null"], "items": {"type": "string"}},
+                          "date": {"type": "string"},
+                          "links": {
+                            "type": "object",
+                            "properties": {
+                              "npm": {"type": "string"},
+                              "homepage": {"type": ["string", "null"]},
+                              "repository": {"type": ["string", "null"]},
+                              "bugs": {"type": ["string", "null"]}
+                            }
+                          },
+                          "publisher": {"type": "object"},
+                          "maintainers": {"type": "array"}
+                        }
+                      },
+                      "score": {
+                        "type": "object",
+                        "properties": {
+                          "final": {"type": "number", "description": "Overall score 0-1"},
+                          "detail": {"type": "object"}
+                        }
+                      },
+                      "searchScore": {"type": "number"},
+                      "downloads": {"type": ["object", "null"]}
+                    }
+                  }
+                },
+                "total": {"type": "integer", "description": "Total matching packages"},
+                "time": {"type": "string"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "npm_get_package",
+    "description": "Get detailed metadata for a specific npm package including all versions, dependencies, repository URL, license, maintainers, and release history. Use for checking package details, finding the latest version, understanding dependencies, and getting repository links. Covers all 2M+ packages in the npm registry.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "string",
+          "description": "npm package name (case-sensitive for scoped packages). Examples: 'react', 'd3', 'lodash', 'express', '@tensorflow/tfjs', '@types/node', 'chalk', 'axios'"
+        },
+        "version": {
+          "type": ["string", "null"],
+          "description": "Specific version to get. If null, returns the 'latest' tagged version. Examples: 'latest', '18.0.0', '3.2.1'"
+        }
+      },
+      "required": ["package"]
+    },
+    "fields": {
+      "endpoint": "https://registry.npmjs.org/{package}/{version}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"package": "react", "version": "latest"},
+      {"package": "d3", "version": "latest"},
+      {"package": "lodash", "version": "latest"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "npm package version metadata",
+              "properties": {
+                "name": {"type": "string"},
+                "version": {"type": "string"},
+                "description": {"type": ["string", "null"]},
+                "keywords": {"type": ["array", "null"], "items": {"type": "string"}},
+                "homepage": {"type": ["string", "null"]},
+                "bugs": {"type": ["object", "null"]},
+                "license": {"type": ["string", "null"]},
+                "main": {"type": ["string", "null"]},
+                "dependencies": {"type": ["object", "null"], "description": "Required dependencies as {packageName: versionSpec}"},
+                "devDependencies": {"type": ["object", "null"]},
+                "peerDependencies": {"type": ["object", "null"]},
+                "dist": {
+                  "type": "object",
+                  "properties": {
+                    "tarball": {"type": "string"},
+                    "shasum": {"type": "string"}
+                  }
+                },
+                "maintainers": {"type": "array"},
+                "_id": {"type": "string"},
+                "_npmUser": {"type": ["object", "null"]}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,191 @@
+[
+  {
+    "name": "NASAapod_get_picture",
+    "description": "Get NASA's Astronomy Picture of the Day (APOD) for a specific date or random entries. APOD has featured a different astronomy/space image or video each day since June 16, 1995, with an expert astronomical explanation. Returns the image/video URL, HD URL, title, explanation, media type, and date. Provide a specific date to get that day's picture, or use count to get random entries. If no parameters are given, returns today's APOD. Uses the free DEMO_KEY (30 requests/hour limit).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": ["string", "null"],
+          "description": "Date of the APOD image in YYYY-MM-DD format (e.g., '2024-01-01'). Dates range from 1995-06-16 to today. Cannot be used with count or start_date/end_date."
+        },
+        "count": {
+          "type": ["integer", "null"],
+          "description": "Number of random APOD entries to return (1-100). Cannot be used with date or start_date/end_date."
+        },
+        "start_date": {
+          "type": ["string", "null"],
+          "description": "Start date for a date range query in YYYY-MM-DD format. Must be used with end_date. Cannot be used with date or count."
+        },
+        "end_date": {
+          "type": ["string", "null"],
+          "description": "End date for a date range query in YYYY-MM-DD format. Must be used with start_date. Cannot be used with date or count."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.nasa.gov/planetary/apod",
+      "params": {"api_key": "DEMO_KEY"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"date": "2024-01-01"},
+      {"count": 3},
+      {"date": "2023-07-04"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "APOD entry or array of entries (when using count or date range)",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Date of the APOD entry in YYYY-MM-DD format"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the astronomy picture or video"
+                },
+                "explanation": {
+                  "type": "string",
+                  "description": "Expert astronomical explanation of the image"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "URL of the image or video (standard resolution)"
+                },
+                "hdurl": {
+                  "type": ["string", "null"],
+                  "description": "URL of the high-definition image (not available for videos)"
+                },
+                "media_type": {
+                  "type": "string",
+                  "description": "Type of media: 'image' or 'video'"
+                },
+                "service_version": {
+                  "type": "string",
+                  "description": "API service version (e.g., 'v1')"
+                },
+                "copyright": {
+                  "type": ["string", "null"],
+                  "description": "Copyright holder of the image (null if public domain/NASA)"
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "NASAapod_search_pictures",
+    "description": "Get NASA Astronomy Picture of the Day (APOD) entries for a date range. Returns an array of APOD entries between start_date and end_date (inclusive), each with image/video URL, HD URL, title, expert explanation, and media type. Useful for browsing APOD archives or finding pictures from a specific time period. Uses the free DEMO_KEY (30 requests/hour limit). Maximum recommended range is about 30 days to avoid timeout.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "description": "Start date in YYYY-MM-DD format (e.g., '2024-01-01'). Must be 1995-06-16 or later."
+        },
+        "end_date": {
+          "type": "string",
+          "description": "End date in YYYY-MM-DD format (e.g., '2024-01-07'). Must be no later than today."
+        }
+      },
+      "required": ["start_date", "end_date"]
+    },
+    "fields": {
+      "endpoint": "https://api.nasa.gov/planetary/apod",
+      "params": {"api_key": "DEMO_KEY"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"start_date": "2024-01-01", "end_date": "2024-01-03"},
+      {"start_date": "2023-12-25", "end_date": "2023-12-31"},
+      {"start_date": "2024-07-04", "end_date": "2024-07-06"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Array of APOD entries for the specified date range",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "description": "Date of the APOD entry in YYYY-MM-DD format"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the astronomy picture or video"
+                  },
+                  "explanation": {
+                    "type": "string",
+                    "description": "Expert astronomical explanation of the image"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "URL of the image or video (standard resolution)"
+                  },
+                  "hdurl": {
+                    "type": ["string", "null"],
+                    "description": "URL of the high-definition image (not available for videos)"
+                  },
+                  "media_type": {
+                    "type": "string",
+                    "description": "Type of media: 'image' or 'video'"
+                  },
+                  "service_version": {
+                    "type": "string",
+                    "description": "API service version"
+                  },
+                  "copyright": {
+                    "type": ["string", "null"],
+                    "description": "Copyright holder (null if public domain/NASA)"
+                  }
+                }
+              }
+            },
+            "metadata": {
+              "type": "object"
+            }
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,231 @@
+[
+  {
+    "name": "RESTCountries_get_by_name",
+    "description": "Get detailed information about countries by name using the REST Countries API. Returns comprehensive country metadata including official/common names, capital cities, population, area, region, subregion, languages, currencies, flag emojis, borders, time zones, calling codes, and ISO codes. Supports partial name matching (e.g., 'german' matches Germany).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Country name to search (full or partial). Examples: 'germany', 'united states', 'france', 'japan', 'brazil'"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated list of fields to return (e.g., 'name,capital,population,region'). Returns all fields if omitted."
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/name/{name}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "germany"},
+      {"name": "japan", "fields": "name,capital,population,region,languages"},
+      {"name": "brazil"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matching country objects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "object",
+                    "description": "Country names",
+                    "properties": {
+                      "common": {"type": "string", "description": "Common name (e.g., 'Germany')"},
+                      "official": {"type": "string", "description": "Official name (e.g., 'Federal Republic of Germany')"}
+                    }
+                  },
+                  "capital": {
+                    "type": "array",
+                    "description": "Capital city names",
+                    "items": {"type": "string"}
+                  },
+                  "population": {"type": "integer", "description": "Country population"},
+                  "area": {"type": "number", "description": "Total area in km\u00b2"},
+                  "region": {"type": "string", "description": "Geographic region (e.g., 'Europe', 'Asia', 'Americas')"},
+                  "subregion": {"type": ["string", "null"], "description": "Geographic subregion"},
+                  "cca2": {"type": "string", "description": "ISO 3166-1 alpha-2 code (e.g., 'DE')"},
+                  "cca3": {"type": "string", "description": "ISO 3166-1 alpha-3 code (e.g., 'DEU')"},
+                  "languages": {
+                    "type": ["object", "null"],
+                    "description": "Official languages (key: ISO code, value: language name)"
+                  },
+                  "currencies": {
+                    "type": ["object", "null"],
+                    "description": "Currencies (key: ISO code, value: {name, symbol})"
+                  },
+                  "borders": {
+                    "type": "array",
+                    "description": "List of bordering country cca3 codes",
+                    "items": {"type": "string"}
+                  },
+                  "timezones": {
+                    "type": "array",
+                    "description": "Time zones (e.g., ['UTC+01:00'])",
+                    "items": {"type": "string"}
+                  },
+                  "flag": {"type": ["string", "null"], "description": "Unicode flag emoji"},
+                  "continents": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RESTCountries_get_by_code",
+    "description": "Get detailed country information by ISO 3166-1 alpha-2 or alpha-3 country code using the REST Countries API. Returns official/common names, capital, population, area, region, languages, currencies, borders, time zones, and more. Use two-letter codes (e.g., 'DE', 'US', 'JP') or three-letter codes (e.g., 'DEU', 'USA', 'JPN').",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 (2-letter) or alpha-3 (3-letter) country code. Examples: 'DE' or 'DEU' (Germany), 'US' or 'USA', 'JP' or 'JPN', 'FR' or 'FRA', 'CN' or 'CHN'"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated list of specific fields to return. Examples: 'name,capital,population', 'name,borders,languages,currencies'"
+        }
+      },
+      "required": ["code"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/alpha/{code}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"code": "DE"},
+      {"code": "USA", "fields": "name,capital,population,borders"},
+      {"code": "JP"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Country data object for the requested country code",
+              "properties": {
+                "name": {
+                  "type": "object",
+                  "properties": {
+                    "common": {"type": "string"},
+                    "official": {"type": "string"}
+                  }
+                },
+                "capital": {"type": "array", "items": {"type": "string"}},
+                "population": {"type": "integer"},
+                "area": {"type": "number"},
+                "region": {"type": "string"},
+                "subregion": {"type": ["string", "null"]},
+                "cca2": {"type": "string"},
+                "cca3": {"type": "string"},
+                "languages": {"type": ["object", "null"]},
+                "currencies": {"type": ["object", "null"]},
+                "borders": {"type": "array", "items": {"type": "string"}},
+                "timezones": {"type": "array", "items": {"type": "string"}},
+                "flag": {"type": ["string", "null"]},
+                "continents": {"type": "array", "items": {"type": "string"}}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RESTCountries_get_by_region",
+    "description": "Get all countries in a specific geographic region using the REST Countries API. Supported regions: Africa, Americas, Asia, Europe, Oceania, Antarctic. Returns comprehensive data for all countries in the region including names, capitals, population, area, languages, currencies, and more. Useful for regional analysis, comparisons, and geographic queries.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Geographic region name. Valid values: 'africa', 'americas', 'asia', 'europe', 'oceania', 'antarctic'"
+        },
+        "fields": {
+          "type": ["string", "null"],
+          "description": "Comma-separated list of fields to return (e.g., 'name,capital,population'). Returns all fields if omitted."
+        }
+      },
+      "required": ["region"]
+    },
+    "fields": {
+      "endpoint": "https://restcountries.com/v3.1/region/{region}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"region": "europe", "fields": "name,capital,population,cca2"},
+      {"region": "asia", "fields": "name,population,area"},
+      {"region": "africa", "fields": "name,capital,region,subregion"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of all countries in the specified region",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "object",
+                    "properties": {
+                      "common": {"type": "string"},
+                      "official": {"type": "string"}
+                    }
+                  },
+                  "capital": {"type": "array", "items": {"type": "string"}},
+                  "population": {"type": "integer"},
+                  "area": {"type": ["number", "null"]},
+                  "region": {"type": "string"},
+                  "subregion": {"type": ["string", "null"]},
+                  "cca2": {"type": "string"},
+                  "cca3": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

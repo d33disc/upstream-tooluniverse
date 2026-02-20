@@ -5,7 +5,7 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "query": {
+        "qs": {
           "type": "string",
           "description": "Search query (e.g., 'microgravity', 'radiation', 'bone loss', 'muscle atrophy', 'ISS', 'rodent', 'arabidopsis')"
         },
@@ -25,22 +25,16 @@
           "description": "Offset for pagination (default 0)"
         }
       },
-      "required": ["query"]
+      "required": ["qs"]
     },
     "fields": {
-      "endpoint": "https://osdr.nasa.gov/osdr/data/search",
-      "params": {
-        "qs": "{query}",
-        "type": "{type}",
-        "size": "{size}",
-        "from": "{from}"
-      }
+      "endpoint": "https://osdr.nasa.gov/osdr/data/search"
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "microgravity", "size": 5},
-      {"query": "bone loss spaceflight", "size": 3},
-      {"query": "radiation mouse", "size": 3, "type": "cgene"}
+      {"qs": "microgravity", "size": 5},
+      {"qs": "bone loss spaceflight", "size": 3},
+      {"qs": "radiation mouse", "size": 3, "type": "cgene"}
     ],
     "return_schema": {
       "oneOf": [
