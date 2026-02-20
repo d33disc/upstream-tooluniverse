@@ -1107,6 +1107,8 @@ default_tool_files = {
     "bls": os.path.join(current_dir, "data", "bls_tools.json"),
     # SEC EDGAR - SEC filing search and company financial facts (XBRL)
     "sec_edgar": os.path.join(current_dir, "data", "sec_edgar_tools.json"),
+    # InspireHEP - high energy physics literature database
+    "inspirehep": os.path.join(current_dir, "data", "inspirehep_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
