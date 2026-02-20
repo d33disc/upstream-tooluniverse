@@ -1,0 +1,180 @@
+[
+  {
+    "name": "SECEDGAR_search_filings",
+    "description": "Search SEC EDGAR full-text for regulatory filings (10-K, 10-Q, 8-K, DEF 14A, etc.) from publicly traded companies using the SEC EDGAR Full-Text Search API. Returns filing details including company name, CIK, form type, filing date, and document descriptions. No authentication required. Useful for financial research, ESG analysis, regulatory compliance research, and identifying corporate disclosures.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Full-text search query. Examples: 'climate change risk', 'artificial intelligence', 'apple inc', 'supply chain disruption', 'cybersecurity breach'"
+        },
+        "forms": {
+          "type": ["string", "null"],
+          "description": "Filter by form type(s), comma-separated. Examples: '10-K' (annual report), '10-Q' (quarterly), '8-K' (current events), 'DEF 14A' (proxy), '20-F' (foreign annual). Default: all forms."
+        },
+        "dateRange": {
+          "type": ["string", "null"],
+          "description": "Date range filter. Values: 'custom' (use with startdt/enddt). Examples: 'custom'"
+        },
+        "startdt": {
+          "type": ["string", "null"],
+          "description": "Start date filter (YYYY-MM-DD). Example: '2024-01-01'"
+        },
+        "enddt": {
+          "type": ["string", "null"],
+          "description": "End date filter (YYYY-MM-DD). Example: '2024-12-31'"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://efts.sec.gov/LATEST/search-index",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "artificial intelligence risk", "forms": "10-K", "startdt": "2024-01-01", "enddt": "2024-12-31"},
+      {"q": "apple inc", "forms": "10-K,10-Q", "startdt": "2024-01-01"},
+      {"q": "climate change disclosure", "forms": "10-K", "startdt": "2023-01-01", "enddt": "2023-12-31"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "SEC EDGAR filing search results",
+              "properties": {
+                "hits": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "object",
+                      "properties": {
+                        "value": {"type": "integer", "description": "Total matching filings"},
+                        "relation": {"type": "string"}
+                      }
+                    },
+                    "hits": {
+                      "type": "array",
+                      "description": "List of matching filings",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_source": {
+                            "type": "object",
+                            "properties": {
+                              "period_of_report": {"type": "string", "description": "Reporting period"},
+                              "file_date": {"type": "string", "description": "Filing date (YYYY-MM-DD)"},
+                              "form_type": {"type": "string", "description": "Form type: 10-K, 10-Q, 8-K, etc."},
+                              "display_names": {"type": "array", "items": {"type": "string"}, "description": "Company names with CIK and ticker"},
+                              "entity_id": {"type": "string", "description": "CIK number"},
+                              "file_num": {"type": "string"},
+                              "period_of_report": {"type": "string"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SECEDGAR_get_company_facts",
+    "description": "Get structured financial data (XBRL facts) for a public company from SEC EDGAR using its CIK number. Returns all reported financial metrics from US GAAP and IFRS taxonomies, including revenue, net income, assets, liabilities, EPS, and hundreds more. No authentication required. CIK lookup: Apple=0000320193, Microsoft=0000789019, Amazon=0001018724, Tesla=0001318605, Google=0001652044.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "cik": {
+          "type": "string",
+          "description": "Company CIK (Central Index Key) number. Must be 10 digits (pad with zeros). Examples: '0000320193' (Apple), '0000789019' (Microsoft), '0001018724' (Amazon), '0001318605' (Tesla), '0001652044' (Alphabet/Google)"
+        }
+      },
+      "required": ["cik"]
+    },
+    "fields": {
+      "endpoint": "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"cik": "0000320193"},
+      {"cik": "0000789019"},
+      {"cik": "0001318605"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Company financial facts from XBRL",
+              "properties": {
+                "cik": {"type": "integer"},
+                "entityName": {"type": "string", "description": "Company legal name"},
+                "facts": {
+                  "type": "object",
+                  "description": "Financial facts organized by taxonomy",
+                  "properties": {
+                    "us-gaap": {
+                      "type": "object",
+                      "description": "US GAAP financial concepts (NetIncomeLoss, Revenues, Assets, etc.)",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "label": {"type": "string"},
+                          "description": {"type": "string"},
+                          "units": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "end": {"type": "string", "description": "Period end date"},
+                                  "val": {"type": "number", "description": "Value"},
+                                  "accn": {"type": "string", "description": "Accession number"},
+                                  "fy": {"type": ["integer", "null"]},
+                                  "fp": {"type": ["string", "null"]},
+                                  "form": {"type": "string"},
+                                  "filed": {"type": "string"}
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
