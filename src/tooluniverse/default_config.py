@@ -1051,6 +1051,8 @@ default_tool_files = {
     "open_meteo_climate": os.path.join(
         current_dir, "data", "open_meteo_climate_tools.json"
     ),
+    # On This Day - historical events, births, deaths by date (via Wikipedia)
+    "on_this_day": os.path.join(current_dir, "data", "on_this_day_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
