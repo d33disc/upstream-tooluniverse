@@ -1,0 +1,152 @@
+[
+  {
+    "name": "Scryfall_search_cards_advanced",
+    "description": "Search Magic: The Gathering cards with advanced Scryfall syntax using the Scryfall API. Supports complex queries like 'type:legendary cmc>=5', 'oracle:flying+oracle:trample', 'format:standard', 'set:mh3'. Returns card details including name, mana cost, type, oracle text, colors, and prices. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Scryfall search query. Examples: 'type:legendary+creature', 'oracle:\"draw a card\"', 'colors:wu+format:standard', 'set:mh3+type:instant', 'cmc>=7+type:creature', 'rarity:mythic+set:m21'"
+        },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Sort order. Values: 'name', 'set', 'released', 'rarity', 'color', 'usd', 'tix', 'eur', 'cmc', 'power', 'toughness', 'edhrec', 'penny'. Default: 'name'"
+        },
+        "unique": {
+          "type": ["string", "null"],
+          "description": "Uniqueness strategy. Values: 'cards' (one per name), 'art' (one per artwork), 'prints' (all printings). Default: 'cards'"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number (175 cards per page). Default: 1"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.scryfall.com/cards/search",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "type:legendary+creature+colors:r", "order": "edhrec", "unique": "cards"},
+      {"q": "oracle:\"draw a card\"+type:instant", "order": "name"},
+      {"q": "set:mh3+rarity:mythic"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Magic card search results",
+              "properties": {
+                "object": {"type": "string"},
+                "total_cards": {"type": "integer", "description": "Total number of matching cards"},
+                "has_more": {"type": "boolean"},
+                "next_page": {"type": ["string", "null"]},
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string"},
+                      "name": {"type": "string"},
+                      "mana_cost": {"type": ["string", "null"]},
+                      "cmc": {"type": "number"},
+                      "type_line": {"type": "string"},
+                      "oracle_text": {"type": ["string", "null"]},
+                      "colors": {"type": "array", "items": {"type": "string"}},
+                      "rarity": {"type": "string"},
+                      "set": {"type": "string"},
+                      "prices": {"type": "object"},
+                      "edhrec_rank": {"type": ["integer", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Scryfall_get_card_by_name",
+    "description": "Get a specific Magic: The Gathering card by exact or fuzzy name match using the Scryfall API. Returns full card details including oracle text, legalities, prices, and image URIs. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "exact": {
+          "type": ["string", "null"],
+          "description": "Exact card name (case-insensitive). Examples: 'Black Lotus', 'Lightning Bolt', 'Counterspell', 'Sol Ring'"
+        },
+        "fuzzy": {
+          "type": ["string", "null"],
+          "description": "Fuzzy card name (best match). Examples: 'bolt', 'counter spell', 'black lotus'"
+        },
+        "set": {
+          "type": ["string", "null"],
+          "description": "Set code to narrow the search. Examples: 'lea', 'm21', 'mh3'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.scryfall.com/cards/named",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"exact": "Lightning Bolt"},
+      {"exact": "Sol Ring"},
+      {"fuzzy": "counterspell"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Magic: The Gathering card data",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "mana_cost": {"type": ["string", "null"]},
+                "cmc": {"type": "number"},
+                "type_line": {"type": "string"},
+                "oracle_text": {"type": ["string", "null"]},
+                "colors": {"type": "array"},
+                "color_identity": {"type": "array"},
+                "rarity": {"type": "string"},
+                "set": {"type": "string"},
+                "set_name": {"type": "string"},
+                "legalities": {"type": "object", "description": "Format legalities (standard, pioneer, modern, legacy, etc.)"},
+                "prices": {"type": "object", "properties": {"usd": {"type": ["string", "null"]}, "usd_foil": {"type": ["string", "null"]}}},
+                "image_uris": {"type": ["object", "null"]},
+                "edhrec_rank": {"type": ["integer", "null"]}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

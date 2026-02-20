@@ -1075,6 +1075,16 @@ default_tool_files = {
     "dog_api": os.path.join(current_dir, "data", "dog_api_tools.json"),
     # IPify - simple public IP address lookup
     "ipify": os.path.join(current_dir, "data", "ipify_tools.json"),
+    # Deck of Cards API - playing card game utility
+    "deck_of_cards": os.path.join(current_dir, "data", "deck_of_cards_tools.json"),
+    # Disease.sh extended - COVID historical and vaccine coverage data
+    "disease_sh_ext": os.path.join(current_dir, "data", "disease_sh_ext_tools.json"),
+    # Scryfall extended - advanced Magic: The Gathering card search
+    "scryfall_ext": os.path.join(current_dir, "data", "scryfall_ext_tools.json"),
+    # TVmaze extended - show episodes and TV schedule
+    "tvmaze_ext": os.path.join(current_dir, "data", "tvmaze_ext_tools.json"),
+    # Where the ISS At - real-time ISS position and velocity
+    "wheretheissat": os.path.join(current_dir, "data", "wheretheissat_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

@@ -1,0 +1,124 @@
+[
+  {
+    "name": "DeckOfCards_new_deck",
+    "description": "Create and shuffle a new deck of playing cards using the Deck of Cards API. Returns a deck_id that can be used with DeckOfCards_draw_cards to draw cards. Supports creating multiple decks (up to 20) shuffled together. Useful for card game simulations, probability exercises, randomization, and educational tools.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "deck_count": {
+          "type": ["integer", "null"],
+          "description": "Number of decks to shuffle together (default 1, max 20). Use multiple decks for games like Blackjack."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://deckofcardsapi.com/api/deck/new/shuffle/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"deck_count": 1},
+      {"deck_count": 2},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "New shuffled deck information",
+              "properties": {
+                "success": {"type": "boolean", "description": "Whether the request succeeded"},
+                "deck_id": {"type": "string", "description": "Unique deck identifier to use with DeckOfCards_draw_cards (e.g., '3p40paa87x90')"},
+                "remaining": {"type": "integer", "description": "Number of cards remaining in the deck (52 per deck)"},
+                "shuffled": {"type": "boolean", "description": "Whether the deck has been shuffled"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "DeckOfCards_draw_cards",
+    "description": "Draw one or more cards from an existing deck using the Deck of Cards API. Requires a deck_id from DeckOfCards_new_deck. Returns drawn cards with their value, suit, code, and image URLs (PNG and SVG). Useful for card game simulations, probability demonstrations, and building card-based applications.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "deck_id": {
+          "type": "string",
+          "description": "The deck identifier from DeckOfCards_new_deck. Example: '3p40paa87x90'"
+        },
+        "count": {
+          "type": ["integer", "null"],
+          "description": "Number of cards to draw (default 1). Cannot exceed remaining cards in the deck."
+        }
+      },
+      "required": ["deck_id"]
+    },
+    "fields": {
+      "endpoint": "https://deckofcardsapi.com/api/deck/{deck_id}/draw/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"deck_id": "new", "count": 2},
+      {"deck_id": "new", "count": 5},
+      {"deck_id": "new", "count": 1}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Draw result with cards and deck status",
+              "properties": {
+                "success": {"type": "boolean", "description": "Whether the draw succeeded"},
+                "deck_id": {"type": "string", "description": "The deck identifier"},
+                "remaining": {"type": "integer", "description": "Number of cards remaining in the deck after this draw"},
+                "cards": {
+                  "type": "array",
+                  "description": "List of drawn cards",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {"type": "string", "description": "Card code (e.g., 'AS' for Ace of Spades, 'KH' for King of Hearts)"},
+                      "image": {"type": "string", "description": "URL to card image (PNG)"},
+                      "images": {
+                        "type": "object",
+                        "description": "Card image URLs in different formats",
+                        "properties": {
+                          "svg": {"type": "string", "description": "SVG image URL"},
+                          "png": {"type": "string", "description": "PNG image URL"}
+                        }
+                      },
+                      "value": {"type": "string", "description": "Card value: 'ACE', '2'-'10', 'JACK', 'QUEEN', 'KING'"},
+                      "suit": {"type": "string", "description": "Card suit: 'SPADES', 'HEARTS', 'DIAMONDS', 'CLUBS'"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
