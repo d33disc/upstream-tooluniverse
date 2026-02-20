@@ -1,0 +1,165 @@
+[
+  {
+    "name": "PoetryDB_search_by_author",
+    "description": "Search and retrieve poems by author from PoetryDB - a free poetry database with works from 129 classic poets. Returns poem titles, full text, line count, and author information. Authors include Shakespeare, Keats, Dickinson, Whitman, Blake, Yeats, and many more classic English-language poets. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Author name (full or partial). Examples: 'William Shakespeare', 'Emily Dickinson', 'Edgar Allan Poe', 'Walt Whitman', 'John Keats', 'William Blake'"
+        },
+        "output_fields": {
+          "type": ["string", "null"],
+          "description": "Fields to return, comma-separated. Values: 'title', 'author', 'lines', 'linecount'. Default: all fields. Example: 'title,linecount' for just titles and counts"
+        }
+      },
+      "required": ["author"]
+    },
+    "fields": {
+      "endpoint": "https://poetrydb.org/author/{author}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"author": "Edgar Allan Poe"},
+      {"author": "Emily Dickinson", "output_fields": "title,linecount"},
+      {"author": "William Shakespeare"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of poems by the author",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string", "description": "Poem title"},
+                  "author": {"type": "string", "description": "Author name"},
+                  "lines": {"type": "array", "items": {"type": "string"}, "description": "Lines of the poem"},
+                  "linecount": {"type": "string", "description": "Number of lines"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "PoetryDB_search_by_title",
+    "description": "Search for poems by title in PoetryDB. Returns matching poems with full text and metadata. Supports partial title matching. PoetryDB contains classic English-language poetry from 129 poets. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Poem title (full or partial). Examples: 'The Raven', 'Sonnet 18', 'Ode to a Nightingale', 'I Heard a Fly Buzz', 'O Captain My Captain'"
+        }
+      },
+      "required": ["title"]
+    },
+    "fields": {
+      "endpoint": "https://poetrydb.org/title/{title}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"title": "The Raven"},
+      {"title": "Sonnet 18"},
+      {"title": "O Captain My Captain"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matching poems",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "author": {"type": "string"},
+                  "lines": {"type": "array", "items": {"type": "string"}, "description": "Full poem text"},
+                  "linecount": {"type": "string", "description": "Number of lines"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "PoetryDB_search_by_lines",
+    "description": "Search for poems containing specific text lines in PoetryDB. Returns poems where the specified text appears in the poem body. Useful for finding poems by memorable phrases or lines. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "type": "string",
+          "description": "Text to search for in poem lines. Examples: 'shall I compare', 'two roads diverged', 'hope is the thing with feathers', 'nevermore'"
+        }
+      },
+      "required": ["lines"]
+    },
+    "fields": {
+      "endpoint": "https://poetrydb.org/lines/{lines}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"lines": "shall I compare"},
+      {"lines": "hope is the thing with feathers"},
+      {"lines": "nevermore"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of poems containing the search text",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "author": {"type": "string"},
+                  "lines": {"type": "array", "items": {"type": "string"}},
+                  "linecount": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

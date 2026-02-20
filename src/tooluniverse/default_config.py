@@ -925,6 +925,10 @@ default_tool_files = {
     "catfact": os.path.join(current_dir, "data", "catfact_tools.json"),
     # Open Brewery DB - 8000+ craft breweries (US and international)
     "openbrewery": os.path.join(current_dir, "data", "openbrewery_tools.json"),
+    # PoetryDB - classic English poetry (129 poets: Shakespeare, Dickinson, Poe, etc.)
+    "poetrydb": os.path.join(current_dir, "data", "poetrydb_tools.json"),
+    # Datamuse - word-finding API (synonyms, antonyms, rhymes, semantic similarity)
+    "datamuse": os.path.join(current_dir, "data", "datamuse_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
