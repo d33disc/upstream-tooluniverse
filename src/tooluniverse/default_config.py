@@ -679,6 +679,16 @@ default_tool_files = {
     "openfda": os.path.join(current_dir, "data", "openfda_tools.json"),
     # KLIFS - Kinase-Ligand Interaction Fingerprints and Structures
     "klifs": os.path.join(current_dir, "data", "klifs_tools.json"),
+    # GeneNetwork - systems genetics QTL and gene expression for genetic crosses
+    "genenetwork": os.path.join(current_dir, "data", "genenetwork_tools.json"),
+    # ChannelsDB - protein channel, tunnel, and pore data for PDB structures
+    "channelsdb": os.path.join(current_dir, "data", "channelsdb_tools.json"),
+    # FlyMine - InterMine data warehouse for Drosophila melanogaster genomics
+    "flymine": os.path.join(current_dir, "data", "flymine_tools.json"),
+    # MouseMine - InterMine data warehouse for mouse genomics from MGI
+    "mousemine": os.path.join(current_dir, "data", "mousemine_tools.json"),
+    # TargetMine - InterMine data warehouse for drug target discovery
+    "targetmine": os.path.join(current_dir, "data", "targetmine_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
