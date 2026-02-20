@@ -969,6 +969,26 @@ default_tool_files = {
     "scryfall": os.path.join(current_dir, "data", "scryfall_tools.json"),
     # Nager.Date - public holidays for 120 countries (official holiday calendars)
     "nager_holidays": os.path.join(current_dir, "data", "nager_holidays_tools.json"),
+    # Open-Meteo Marine - ocean wave/swell forecasts for any coastal location
+    "open_meteo_marine": os.path.join(
+        current_dir, "data", "open_meteo_marine_tools.json"
+    ),
+    # Open-Meteo Flood - river discharge and flood forecasts (GloFAS/Copernicus)
+    "open_meteo_flood": os.path.join(
+        current_dir, "data", "open_meteo_flood_tools.json"
+    ),
+    # NASA DONKI - space weather events (CME, flares, storms, particles, shocks)
+    "nasa_donki": os.path.join(current_dir, "data", "nasa_donki_tools.json"),
+    # Chuck Norris API - Chuck Norris jokes (random, search, by category)
+    "chucknorris": os.path.join(current_dir, "data", "chucknorris_tools.json"),
+    # Advice Slip - random life advice and search (200+ unique tips)
+    "adviceslip": os.path.join(current_dir, "data", "adviceslip_tools.json"),
+    # CATAAS - Cat as a Service (random cat images, browse, tags)
+    "cataas": os.path.join(current_dir, "data", "cataas_tools.json"),
+    # Kanye REST - random Kanye West quotes
+    "kanye_rest": os.path.join(current_dir, "data", "kanye_rest_tools.json"),
+    # OpenTopoData - terrain elevation data for any global location (SRTM/ASTER/NED)
+    "opentopodata": os.path.join(current_dir, "data", "opentopodata_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
