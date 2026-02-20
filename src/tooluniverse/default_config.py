@@ -1073,6 +1073,8 @@ default_tool_files = {
     "quotable": os.path.join(current_dir, "data", "quotable_tools.json"),
     # Dog CEO API - random dog images by breed
     "dog_api": os.path.join(current_dir, "data", "dog_api_tools.json"),
+    # IPify - simple public IP address lookup
+    "ipify": os.path.join(current_dir, "data", "ipify_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
