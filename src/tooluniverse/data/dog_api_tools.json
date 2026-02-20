@@ -1,0 +1,99 @@
+[
+  {
+    "name": "DogCEO_get_random_dog_image",
+    "description": "Get a random dog image URL using the Dog CEO API. Can filter by breed or sub-breed. Returns URL to a random dog photo. No authentication required. Over 20,000 dog images across 120+ breeds.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "breed": {
+          "type": ["string", "null"],
+          "description": "Dog breed name (lowercase). Examples: 'labrador', 'poodle', 'husky', 'beagle', 'golden', 'german_shepherd', 'bulldog', 'shiba', 'akita'. Leave null for any breed."
+        },
+        "sub_breed": {
+          "type": ["string", "null"],
+          "description": "Sub-breed if applicable. Examples: for breed='retriever': 'golden', 'labrador'; for breed='poodle': 'miniature', 'standard'. Only valid with breed."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://dog.ceo/api/breeds/image/random",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"breed": "husky"},
+      {"breed": "retriever", "sub_breed": "golden"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random dog image response",
+              "properties": {
+                "message": {"type": "string", "description": "URL to random dog image"},
+                "status": {"type": "string", "description": "success"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "DogCEO_list_breeds",
+    "description": "List all available dog breeds and sub-breeds from the Dog CEO API database. Returns complete taxonomy of 120+ dog breeds. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://dog.ceo/api/breeds/list/all",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Complete list of dog breeds and sub-breeds",
+              "properties": {
+                "message": {
+                  "type": "object",
+                  "description": "Object mapping breed names to arrays of sub-breeds",
+                  "additionalProperties": {"type": "array", "items": {"type": "string"}}
+                },
+                "status": {"type": "string"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

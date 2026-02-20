@@ -1,0 +1,143 @@
+[
+  {
+    "name": "Quotable_get_random_quotes",
+    "description": "Get random inspirational quotes using the Quotable API. Can filter by author, tags (philosophy, science, inspirational, etc.), or quote length. Returns quote text, author, and tags. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of random quotes to return (1-150). Default: 1"
+        },
+        "tags": {
+          "type": ["string", "null"],
+          "description": "Filter by tags (pipe-separated for OR, comma-separated for AND). Examples: 'science', 'philosophy', 'inspirational|motivational', 'technology,future'"
+        },
+        "author": {
+          "type": ["string", "null"],
+          "description": "Filter by author slug. Examples: 'albert-einstein', 'mark-twain', 'winston-churchill', 'aristotle'"
+        },
+        "minLength": {
+          "type": ["integer", "null"],
+          "description": "Minimum quote character length"
+        },
+        "maxLength": {
+          "type": ["integer", "null"],
+          "description": "Maximum quote character length. Use 100 for short quotes"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.quotable.io/quotes/random",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"limit": 3},
+      {"author": "albert-einstein", "limit": 2},
+      {"tags": "science", "limit": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of random quotes",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {"type": "string"},
+                  "content": {"type": "string", "description": "The quote text"},
+                  "author": {"type": "string", "description": "Author name"},
+                  "authorSlug": {"type": "string"},
+                  "length": {"type": "integer", "description": "Character length of quote"},
+                  "tags": {"type": "array", "items": {"type": "string"}, "description": "Quote category tags"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Quotable_search_quotes",
+    "description": "Search for quotes by keyword using the Quotable API. Returns paginated list of matching quotes with author and tags. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query keyword(s) to find in quote text. Examples: 'imagination', 'courage', 'knowledge', 'love'"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (1-150). Default: 20"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://api.quotable.io/quotes",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "imagination", "limit": 5},
+      {"query": "courage", "limit": 5},
+      {"query": "knowledge is power", "limit": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Paginated quote search results",
+              "properties": {
+                "count": {"type": "integer"},
+                "totalCount": {"type": "integer"},
+                "page": {"type": "integer"},
+                "totalPages": {"type": "integer"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {"type": "string"},
+                      "content": {"type": "string"},
+                      "author": {"type": "string"},
+                      "tags": {"type": "array", "items": {"type": "string"}}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

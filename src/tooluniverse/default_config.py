@@ -1069,6 +1069,10 @@ default_tool_files = {
     "dictionary_api": os.path.join(current_dir, "data", "dictionary_api_tools.json"),
     # DuckDuckGo Instant Answer API - search summaries for topics
     "duckduckgo": os.path.join(current_dir, "data", "duckduckgo_tools.json"),
+    # Quotable - random and searchable inspirational quotes
+    "quotable": os.path.join(current_dir, "data", "quotable_tools.json"),
+    # Dog CEO API - random dog images by breed
+    "dog_api": os.path.join(current_dir, "data", "dog_api_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
