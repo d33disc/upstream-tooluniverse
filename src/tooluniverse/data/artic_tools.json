@@ -22,7 +22,8 @@
     },
     "fields": {
       "endpoint": "https://api.artic.edu/api/v1/artworks/search",
-      "params": {"fields": "id,title,artist_display,date_display,medium_display,image_id"}
+      "params": {}
+
     },
     "type": "BaseRESTTool",
     "test_examples": [

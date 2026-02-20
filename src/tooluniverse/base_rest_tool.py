@@ -179,8 +179,8 @@ class BaseRESTTool(BaseTool):
                 max_attempts=3,
             )
 
-            # Check for errors
-            if response.status_code != 200:
+            # Check for errors (accept any 2xx success status)
+            if not (200 <= response.status_code < 300):
                 return {
                     "status": "error",
                     "error": f"{self.api_name} API error",
