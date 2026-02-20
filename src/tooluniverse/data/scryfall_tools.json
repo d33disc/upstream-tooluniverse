@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Scryfall_search_cards",
+    "description": "Search Magic: The Gathering cards using the Scryfall API with powerful query syntax. Returns cards with names, mana costs, types, oracle text, power/toughness, sets, legality, and prices. Scryfall indexes 250,000+ MTG card printings. No authentication required. Useful for MTG deck building, rules research, and card game analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Scryfall search query. Examples: 'oracle:fly type:creature' (flying creatures), 'cmc=0' (zero-cost cards), 'color:wu type:instant' (white-blue instants), 'set:lea' (Alpha), 'power>=5 toughness>=5' (big creatures), 'format:standard rarity:r' (standard rare)"
+        },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Sort order. Values: 'name', 'set', 'released', 'rarity', 'color', 'usd', 'eur', 'cmc', 'power', 'toughness', 'edhrec', 'artist'"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number (175 cards per page)"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.scryfall.com/cards/search",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "oracle:fly type:creature cmc<=3", "order": "name"},
+      {"q": "set:alpha", "order": "name"},
+      {"q": "color:wu type:instant format:standard"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Card search results",
+              "properties": {
+                "object": {"type": "string"},
+                "total_cards": {"type": "integer", "description": "Total matching cards"},
+                "has_more": {"type": "boolean", "description": "More pages available"},
+                "next_page": {"type": ["string", "null"], "description": "URL for next page"},
+                "data": {
+                  "type": "array",
+                  "description": "List of MTG cards",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "Scryfall UUID"},
+                      "name": {"type": "string", "description": "Card name"},
+                      "lang": {"type": "string"},
+                      "released_at": {"type": "string", "description": "Set release date"},
+                      "mana_cost": {"type": ["string", "null"], "description": "Mana cost (e.g., {2}{W}{U})"},
+                      "cmc": {"type": "number", "description": "Converted mana cost"},
+                      "type_line": {"type": "string", "description": "Full type line"},
+                      "oracle_text": {"type": ["string", "null"], "description": "Card oracle text"},
+                      "power": {"type": ["string", "null"]},
+                      "toughness": {"type": ["string", "null"]},
+                      "colors": {"type": "array", "items": {"type": "string"}},
+                      "color_identity": {"type": "array", "items": {"type": "string"}},
+                      "set": {"type": "string", "description": "Set code"},
+                      "set_name": {"type": "string"},
+                      "rarity": {"type": "string", "description": "common/uncommon/rare/mythic"},
+                      "artist": {"type": "string"},
+                      "prices": {"type": "object", "description": "USD/EUR prices"},
+                      "legalities": {"type": "object", "description": "Format legalities"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Scryfall_get_random_card",
+    "description": "Get a random Magic: The Gathering card from Scryfall. Optionally filter with a query to get a random card matching specific criteria. Returns full card data including name, type, oracle text, art, and prices. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": ["string", "null"],
+          "description": "Optional filter query for the random card. Examples: 'type:dragon', 'color:r cmc<=4', 'format:commander rarity:mythic'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.scryfall.com/cards/random",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"q": "type:dragon"},
+      {"q": "color:r cmc<=3 type:instant"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "A random MTG card",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "mana_cost": {"type": ["string", "null"]},
+                "cmc": {"type": "number"},
+                "type_line": {"type": "string"},
+                "oracle_text": {"type": ["string", "null"]},
+                "power": {"type": ["string", "null"]},
+                "toughness": {"type": ["string", "null"]},
+                "colors": {"type": "array", "items": {"type": "string"}},
+                "set": {"type": "string"},
+                "set_name": {"type": "string"},
+                "rarity": {"type": "string"},
+                "artist": {"type": "string"},
+                "image_uris": {"type": "object", "description": "Card image URLs"},
+                "prices": {"type": "object"},
+                "legalities": {"type": "object"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
