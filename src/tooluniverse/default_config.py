@@ -697,6 +697,14 @@ default_tool_files = {
     "veupathdb": os.path.join(current_dir, "data", "veupathdb_tools.json"),
     # GeneNetwork Extended - trait and dataset detail info
     "genenetwork_ext": os.path.join(current_dir, "data", "genenetwork_ext_tools.json"),
+    # Open Food Facts - commercial food products with barcodes, Nutri-Score, NOVA, ingredients
+    "openfoodfacts": os.path.join(current_dir, "data", "openfoodfacts_tools.json"),
+    # MIBiG - Minimum Information about a Biosynthetic Gene Cluster (natural product BGCs)
+    "mibig": os.path.join(current_dir, "data", "mibig_tools.json"),
+    # ScanProsite - Protein motif scanning against PROSITE patterns (ExPASy/SIB)
+    "scanprosite": os.path.join(current_dir, "data", "scanprosite_tools.json"),
+    # PDBe Graph API - Bound molecules, UniProt mappings, compound details, FunPDBe
+    "pdbe_graph": os.path.join(current_dir, "data", "pdbe_graph_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

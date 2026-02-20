@@ -1,0 +1,156 @@
+[
+  {
+    "name": "OpenFoodFacts_get_product",
+    "description": "Get detailed nutritional and product information for a food product by its barcode (EAN/UPC) from Open Food Facts. Returns product name, ingredients, nutritional values per 100g (energy, fat, carbohydrates, protein, fiber, salt), Nutri-Score grade (A-E), NOVA food processing group (1-4, where 4 is ultra-processed), Eco-Score (environmental impact), allergens, and labels. Open Food Facts is the world's largest open food product database with over 3 million products from 200 countries. Example: barcode 737628064502 returns Thai peanut noodle kit with nutriscore 'd' (poor), NOVA group 4 (ultra-processed), 385 kcal/100g.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Product barcode (EAN-13, UPC-A, or other standard barcode). Examples: '737628064502' (US Thai noodles), '3017620422003' (Nutella), '7622210449283' (Oreo cookies)"
+        }
+      },
+      "required": ["barcode"]
+    },
+    "fields": {
+      "endpoint": "https://world.openfoodfacts.org/api/v0/product/{barcode}.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"barcode": "737628064502"},
+      {"barcode": "3017620422003"},
+      {"barcode": "7622210449283"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Open Food Facts product data",
+              "properties": {
+                "status": {"type": "integer", "description": "1 if product found, 0 if not found"},
+                "status_verbose": {"type": "string", "description": "Human-readable status"},
+                "product": {
+                  "type": "object",
+                  "description": "Product details",
+                  "properties": {
+                    "product_name": {"type": ["string", "null"], "description": "Product name"},
+                    "brands": {"type": ["string", "null"], "description": "Brand name(s)"},
+                    "categories": {"type": ["string", "null"], "description": "Product categories"},
+                    "ingredients_text": {"type": ["string", "null"], "description": "List of ingredients"},
+                    "allergens": {"type": ["string", "null"], "description": "Allergens present"},
+                    "nutriscore_grade": {"type": ["string", "null"], "description": "Nutri-Score grade (a=best to e=worst)"},
+                    "nova_group": {"type": ["integer", "null"], "description": "NOVA food processing group (1=unprocessed to 4=ultra-processed)"},
+                    "ecoscore_grade": {"type": ["string", "null"], "description": "Environmental impact score (a=best to e=worst)"},
+                    "nutriments": {
+                      "type": "object",
+                      "description": "Nutritional values per 100g",
+                      "properties": {
+                        "energy-kcal_100g": {"type": ["number", "null"], "description": "Energy in kcal per 100g"},
+                        "fat_100g": {"type": ["number", "null"], "description": "Total fat in grams per 100g"},
+                        "saturated-fat_100g": {"type": ["number", "null"], "description": "Saturated fat in grams per 100g"},
+                        "carbohydrates_100g": {"type": ["number", "null"], "description": "Carbohydrates in grams per 100g"},
+                        "sugars_100g": {"type": ["number", "null"], "description": "Sugars in grams per 100g"},
+                        "fiber_100g": {"type": ["number", "null"], "description": "Dietary fiber in grams per 100g"},
+                        "proteins_100g": {"type": ["number", "null"], "description": "Protein in grams per 100g"},
+                        "salt_100g": {"type": ["number", "null"], "description": "Salt in grams per 100g"}
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenFoodFacts_search_products",
+    "description": "Search Open Food Facts food product database with filters for categories, nutritional criteria, and product attributes. Supports filtering by food category (e.g., 'cereals', 'beverages', 'cheeses'), Nutri-Score grade, NOVA processing group, and nutrient thresholds. Returns product names, brands, Nutri-Score, NOVA group, and nutritional highlights. Useful for finding healthier options in a category, analyzing ultra-processed foods, comparing nutritional profiles, and food science research. Over 3 million products available globally.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "categories_tags": {
+          "type": ["string", "null"],
+          "description": "Food category filter in English (e.g., 'cereals-and-their-products', 'beverages', 'cheeses', 'chips-and-fries', 'biscuits-and-cakes', 'chocolates')"
+        },
+        "nutriscore_grade": {
+          "type": ["string", "null"],
+          "description": "Filter by Nutri-Score grade: 'a' (best), 'b', 'c', 'd', 'e' (worst)"
+        },
+        "nova_group": {
+          "type": ["integer", "null"],
+          "description": "Filter by NOVA processing group: 1 (unprocessed), 2 (culinary ingredients), 3 (processed), 4 (ultra-processed)"
+        },
+        "page_size": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (default 10, max 100)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination (default 1)"
+        }
+      }
+    },
+    "fields": {
+      "endpoint": "https://world.openfoodfacts.org/api/v2/search"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"categories_tags": "chocolates", "page_size": 5},
+      {"categories_tags": "cereals-and-their-products", "nutriscore_grade": "a", "page_size": 5},
+      {"nova_group": 1, "page_size": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Open Food Facts search results",
+              "properties": {
+                "count": {"type": "integer", "description": "Total number of matching products"},
+                "page": {"type": "integer", "description": "Current page number"},
+                "page_count": {"type": "integer", "description": "Total number of pages"},
+                "page_size": {"type": "integer", "description": "Results per page"},
+                "products": {
+                  "type": "array",
+                  "description": "List of matching food products",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_name": {"type": ["string", "null"], "description": "Product name"},
+                      "brands": {"type": ["string", "null"], "description": "Brand name"},
+                      "categories": {"type": ["string", "null"], "description": "Product categories"},
+                      "nutriscore_grade": {"type": ["string", "null"], "description": "Nutri-Score (a-e)"},
+                      "nova_group": {"type": ["integer", "null"], "description": "NOVA processing group (1-4)"},
+                      "ecoscore_grade": {"type": ["string", "null"], "description": "Environmental score (a-e)"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
