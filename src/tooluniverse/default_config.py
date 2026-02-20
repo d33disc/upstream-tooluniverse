@@ -738,7 +738,6 @@ default_tool_files = {
     # World Bank - World Development Indicators (GDP, population, health, education, 200+ countries)
     "worldbank": os.path.join(current_dir, "data", "worldbank_tools.json"),
     # IMF - World Economic Outlook macroeconomic data (GDP growth, inflation, unemployment, debt)
-    "imf": os.path.join(current_dir, "data", "imf_tools.json"),
     # Open-Meteo - Free weather forecast, historical climate, air quality, and geocoding
     "open_meteo": os.path.join(current_dir, "data", "open_meteo_tools.json"),
     # EVA - European Variation Archive (EBI) for population variant data
@@ -756,7 +755,6 @@ default_tool_files = {
     # OpenStreetMap Nominatim - Free geocoding and reverse geocoding worldwide
     "nominatim": os.path.join(current_dir, "data", "nominatim_tools.json"),
     # REST Countries - Comprehensive country metadata (population, languages, currencies, borders)
-    "restcountries": os.path.join(current_dir, "data", "restcountries_tools.json"),
     # NASA APOD - Astronomy Picture of the Day with images and explanations
     "nasa_apod": os.path.join(current_dir, "data", "nasa_apod_tools.json"),
     # eBird - Cornell Lab bird taxonomy and regional species lists (no API key)
@@ -796,7 +794,6 @@ default_tool_files = {
     # NASA SBDB - Small Body Database for asteroids and comets (1.3M+ objects)
     "nasa_sbdb": os.path.join(current_dir, "data", "nasa_sbdb_tools.json"),
     # Space - ISS position/crew tracker and sunrise/sunset times (Open Notify API)
-    "space": os.path.join(current_dir, "data", "space_tools.json"),
     # COD - Crystallography Open Database for 500K+ crystal structures
     "cod_crystal": os.path.join(current_dir, "data", "cod_crystal_tools.json"),
     # HuggingFace Hub - ML model/dataset search and metadata (500K+ models)
@@ -808,23 +805,15 @@ default_tool_files = {
         current_dir, "data", "noaa_spaceweather_tools.json"
     ),
     # Metropolitan Museum of Art - 400K+ open-access artworks (search and object detail)
-    "metmuseum": os.path.join(current_dir, "data", "metmuseum_tools.json"),
     # Victoria and Albert Museum - 5000 years of art and design (search and object detail)
-    "vam": os.path.join(current_dir, "data", "vam_tools.json"),
     # OEIS - Online Encyclopedia of Integer Sequences (370K+ sequences)
     "oeis": os.path.join(current_dir, "data", "oeis_tools.json"),
     # Europeana - 50M+ European cultural heritage items (museums, libraries, archives)
-    "europeana": os.path.join(current_dir, "data", "europeana_tools.json"),
     # Nobel Prize - all Nobel Prize winners and prizes since 1901 (official API)
     "nobel_prize": os.path.join(current_dir, "data", "nobel_prize_tools.json"),
     # Exchange Rate - live currency exchange rates for 150+ currencies (no auth)
-    "exchange_rate": os.path.join(current_dir, "data", "exchange_rate_tools.json"),
     # Crates.io - Rust package registry (150K+ crates with search and details)
-    "crates": os.path.join(current_dir, "data", "crates_tools.json"),
     # Internet Archive - Digital library of 40M+ items (books, audio, video, web, software)
-    "internet_archive": os.path.join(
-        current_dir, "data", "internet_archive_tools.json"
-    ),
     # Anaconda.org - Conda package registry (conda-forge, bioconda, 200K+ packages)
     "anaconda": os.path.join(current_dir, "data", "anaconda_tools.json"),
     # NASA EONET - Natural event tracker (wildfires, storms, volcanoes, floods)
@@ -844,49 +833,31 @@ default_tool_files = {
     # ELIXIR TeSS - Bioinformatics training materials and events aggregator
     "elixir_tess": os.path.join(current_dir, "data", "elixir_tess_tools.json"),
     # Wikimedia Stats - Wikipedia page views and top articles analytics
-    "wikimedia_stats": os.path.join(current_dir, "data", "wikimedia_stats_tools.json"),
     # DBnomics - macroeconomic time series database (90+ providers: IMF, World Bank, ECB, Eurostat, OECD)
     "dbnomics": os.path.join(current_dir, "data", "dbnomics_tools.json"),
     # Art Institute of Chicago - 130K+ artworks open access collection
-    "aic": os.path.join(current_dir, "data", "aic_tools.json"),
     # Cleveland Museum of Art - 61K+ open access artworks
-    "cleveland_art": os.path.join(current_dir, "data", "cleveland_art_tools.json"),
     # Open Notify - ISS real-time position and astronauts in space
-    "open_notify": os.path.join(current_dir, "data", "open_notify_tools.json"),
     # CEDA - UK Centre for Environmental Data Analysis climate datasets
     "ceda": os.path.join(current_dir, "data", "ceda_tools.json"),
     # Sunrise-Sunset API - solar event times for any location
     "sunrise_sunset": os.path.join(current_dir, "data", "sunrise_sunset_tools.json"),
     # Openverse - Creative Commons licensed images (700M+ from Flickr, Wikimedia, museums)
-    "openverse": os.path.join(current_dir, "data", "openverse_tools.json"),
     # US College Scorecard - higher education data (6000+ schools, admission rates, costs)
-    "college_scorecard": os.path.join(
-        current_dir, "data", "college_scorecard_tools.json"
-    ),
     # FEC - US Federal Election Commission candidate and financial data
-    "fec": os.path.join(current_dir, "data", "fec_tools.json"),
     # Smithsonian Open Access - 5M+ digitized museum objects from 19 Smithsonian institutions
-    "smithsonian": os.path.join(current_dir, "data", "smithsonian_tools.json"),
     # Library of Congress - 21M+ digitized historical items (photos, maps, manuscripts)
-    "loc": os.path.join(current_dir, "data", "loc_tools.json"),
     # SoilGrids - global soil property predictions at any location (ISRIC)
     "soilgrids": os.path.join(current_dir, "data", "soilgrids_tools.json"),
     # US Treasury Fiscal Data - national debt, exchange rates, interest rates, debt breakdown
-    "treasury_fiscal": os.path.join(current_dir, "data", "treasury_fiscal_tools.json"),
     # Chronicling America - historic US newspaper search (LOC, 1777-1963)
-    "chronicling_america": os.path.join(
-        current_dir, "data", "chronicling_america_tools.json"
-    ),
     # GBIF Extended - species detail by key and species name autocomplete
     "gbif_ext": os.path.join(current_dir, "data", "gbif_ext_tools.json"),
     # Frankfurter - real-time and historical currency exchange rates (ECB data)
-    "frankfurter": os.path.join(current_dir, "data", "frankfurter_tools.json"),
     # Datamuse - word-finding API (synonyms, antonyms, rhymes, semantic similarity)
-    "datamuse": os.path.join(current_dir, "data", "datamuse_tools.json"),
     # National Weather Service (NWS) - US weather forecasts, alerts, and point metadata
     "nws": os.path.join(current_dir, "data", "nws_tools.json"),
     # SpaceX - rocket launches, rockets, launchpads, and crew data
-    "spacex": os.path.join(current_dir, "data", "spacex_tools.json"),
     # Carbon Intensity - UK electricity grid carbon intensity and generation mix
     "carbon_intensity": os.path.join(
         current_dir, "data", "carbon_intensity_tools.json"
@@ -894,11 +865,7 @@ default_tool_files = {
     # USGS Water Services - real-time streamflow, water level, and temperature data
     "usgs_water": os.path.join(current_dir, "data", "usgs_water_tools.json"),
     # Spaceflight News API - 30K+ space news articles from major sites
-    "spaceflight_news": os.path.join(
-        current_dir, "data", "spaceflight_news_tools.json"
-    ),
     # Launch Library 2 - upcoming rocket launches worldwide (all providers)
-    "launchlibrary": os.path.join(current_dir, "data", "launchlibrary_tools.json"),
     # US Census Bureau - population and demographic data (no key required)
     "uscensus": os.path.join(current_dir, "data", "uscensus_tools.json"),
     # Open-Meteo Marine - ocean wave/swell forecasts for any coastal location
@@ -920,9 +887,6 @@ default_tool_files = {
     # NASA NeoWs - Near Earth Object data (asteroids, close approaches)
     "nasa_neows": os.path.join(current_dir, "data", "nasa_neows_tools.json"),
     # REST Countries Extended - country details by name, region, language
-    "restcountries_ext": os.path.join(
-        current_dir, "data", "restcountries_ext_tools.json"
-    ),
     # STRING Network - protein-protein interaction networks
     "string_network": os.path.join(current_dir, "data", "string_network_tools.json"),
     # UniProt Proteomes - proteome reference data
@@ -930,13 +894,9 @@ default_tool_files = {
         current_dir, "data", "uniprot_proteomes_tools.json"
     ),
     # wttr.in - current weather in JSON format for any city or coordinates
-    "wttr": os.path.join(current_dir, "data", "wttr_tools.json"),
     # TimeAPI.io - current time by timezone or geographic coordinates
-    "timeapi": os.path.join(current_dir, "data", "timeapi_tools.json"),
     # ExchangeRate-API - current foreign exchange rates for 166 currencies
-    "exchangerate": os.path.join(current_dir, "data", "exchangerate_tools.json"),
     # BigDataCloud - reverse geocode lat/lng to country, city, region (no auth)
-    "bigdatacloud": os.path.join(current_dir, "data", "bigdatacloud_tools.json"),
     # Open-Meteo Climate - historical climate data from 1950 via ERA5/CMIP6 models
     "open_meteo_climate": os.path.join(
         current_dir, "data", "open_meteo_climate_tools.json"
@@ -950,17 +910,13 @@ default_tool_files = {
     # Disease.sh extended - COVID historical and vaccine coverage data
     "disease_sh_ext": os.path.join(current_dir, "data", "disease_sh_ext_tools.json"),
     # Where the ISS At - real-time ISS position and velocity
-    "wheretheissat": os.path.join(current_dir, "data", "wheretheissat_tools.json"),
     # Wikipedia extended - featured daily content and on-this-day events
     "wikipedia_ext": os.path.join(current_dir, "data", "wikipedia_ext_tools.json"),
     # Data.gov - U.S. government open data catalog search
-    "datagov": os.path.join(current_dir, "data", "datagov_tools.json"),
     # WAQI - World Air Quality Index real-time AQI data
     "waqi": os.path.join(current_dir, "data", "waqi_tools.json"),
     # BLS - Bureau of Labor Statistics economic time series (CPI, unemployment, etc.)
-    "bls": os.path.join(current_dir, "data", "bls_tools.json"),
     # SEC EDGAR - SEC filing search and company financial facts (XBRL)
-    "sec_edgar": os.path.join(current_dir, "data", "sec_edgar_tools.json"),
     # InspireHEP - high energy physics literature database
     "inspirehep": os.path.join(current_dir, "data", "inspirehep_tools.json"),
     # AviationWeather - METAR and TAF weather reports from FAA Aviation Weather Center
@@ -968,21 +924,11 @@ default_tool_files = {
     # IEA - International Energy Agency EV and energy statistics
     "iea": os.path.join(current_dir, "data", "iea_tools.json"),
     # Federal Register - US government regulations, rules, notices, presidential documents
-    "federal_register": os.path.join(
-        current_dir, "data", "federal_register_tools.json"
-    ),
     # NASA TechPort - NASA technology development projects and investments
-    "nasa_techport": os.path.join(current_dir, "data", "nasa_techport_tools.json"),
     # Crates.io - Rust package registry (search crates, version history, downloads)
-    "cratesio": os.path.join(current_dir, "data", "cratesio_tools.json"),
     # MyMemory Translation - free machine translation for 200+ language pairs
-    "mymemory": os.path.join(current_dir, "data", "mymemory_tools.json"),
     # IETF Datatracker - Internet standards (RFCs, Internet-Drafts, protocol specs)
-    "ietf_datatracker": os.path.join(
-        current_dir, "data", "ietf_datatracker_tools.json"
-    ),
     # Gutendex - Project Gutenberg ebooks catalog search
-    "gutendex": os.path.join(current_dir, "data", "gutendex_tools.json"),
     # Bioconductor - R/Bioconductor bioinformatics package search and metadata (via R-universe)
     "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
 }
