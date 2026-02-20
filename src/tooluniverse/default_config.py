@@ -967,6 +967,8 @@ default_tool_files = {
     "uscensus": os.path.join(current_dir, "data", "uscensus_tools.json"),
     # Scryfall - Magic: The Gathering card search and database (250K+ printings)
     "scryfall": os.path.join(current_dir, "data", "scryfall_tools.json"),
+    # Nager.Date - public holidays for 120 countries (official holiday calendars)
+    "nager_holidays": os.path.join(current_dir, "data", "nager_holidays_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
