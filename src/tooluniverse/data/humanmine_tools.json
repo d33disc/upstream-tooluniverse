@@ -21,7 +21,8 @@
       "required": ["q"]
     },
     "fields": {
-      "endpoint": "https://www.humanmine.org/humanmine/service/search?q={q}&format=json&size={size}&facet_Category={facet_Category}"
+      "endpoint": "https://www.humanmine.org/humanmine/service/search",
+      "params": {"format": "json"}
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -104,7 +105,8 @@
       "required": ["q"]
     },
     "fields": {
-      "endpoint": "https://www.humanmine.org/humanmine/service/search?q={q}&format=json&size={size}&facet_Category=Gene"
+      "endpoint": "https://www.humanmine.org/humanmine/service/search",
+      "params": {"format": "json", "facet_Category": "Gene"}
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -182,7 +184,8 @@
       "required": ["q"]
     },
     "fields": {
-      "endpoint": "https://www.humanmine.org/humanmine/service/search?q={q}&format=json&size={size}&facet_Category=Pathway"
+      "endpoint": "https://www.humanmine.org/humanmine/service/search",
+      "params": {"format": "json", "facet_Category": "Pathway"}
     },
     "type": "BaseRESTTool",
     "test_examples": [

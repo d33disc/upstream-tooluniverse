@@ -673,6 +673,12 @@ default_tool_files = {
     "variant_validator": os.path.join(
         current_dir, "data", "variant_validator_tools.json"
     ),
+    # IDR - Image Data Resource, public imaging datasets from published studies
+    "idr": os.path.join(current_dir, "data", "idr_tools.json"),
+    # OpenFDA - FDA drug labels, adverse events, and NDC directory
+    "openfda": os.path.join(current_dir, "data", "openfda_tools.json"),
+    # KLIFS - Kinase-Ligand Interaction Fingerprints and Structures
+    "klifs": os.path.join(current_dir, "data", "klifs_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
