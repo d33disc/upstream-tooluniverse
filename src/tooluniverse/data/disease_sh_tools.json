@@ -1,0 +1,138 @@
+[
+  {
+    "name": "DiseaseSH_get_global_covid",
+    "description": "Get global COVID-19 statistics using the Disease.sh API. Returns total worldwide cases, deaths, recoveries, active cases, tests, and population. Data sourced from WHO, Johns Hopkins, and health ministries. No authentication required. Useful for epidemiology research and public health analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "yesterday": {
+          "type": ["boolean", "null"],
+          "description": "If true, returns yesterday's data instead of today's. Default: false"
+        },
+        "allowNull": {
+          "type": ["boolean", "null"],
+          "description": "If true, allows null values in response. Default: false"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://disease.sh/v3/covid-19/all",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"yesterday": false},
+      {"yesterday": true}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Global COVID-19 statistics",
+              "properties": {
+                "updated": {"type": "integer", "description": "Last update timestamp (ms)"},
+                "cases": {"type": "integer", "description": "Total cases worldwide"},
+                "todayCases": {"type": "integer", "description": "New cases today"},
+                "deaths": {"type": "integer", "description": "Total deaths"},
+                "todayDeaths": {"type": "integer", "description": "New deaths today"},
+                "recovered": {"type": "integer", "description": "Total recovered"},
+                "todayRecovered": {"type": "integer"},
+                "active": {"type": "integer", "description": "Currently active cases"},
+                "critical": {"type": "integer", "description": "Critical condition cases"},
+                "casesPerOneMillion": {"type": "number"},
+                "deathsPerOneMillion": {"type": "number"},
+                "tests": {"type": "integer", "description": "Total tests conducted"},
+                "testsPerOneMillion": {"type": "number"},
+                "population": {"type": "integer", "description": "World population"},
+                "oneCasePerPeople": {"type": "number"},
+                "oneDeathPerPeople": {"type": "number"},
+                "oneTestPerPeople": {"type": "number"},
+                "activePerOneMillion": {"type": "number"},
+                "recoveredPerOneMillion": {"type": "number"},
+                "criticalPerOneMillion": {"type": "number"},
+                "affectedCountries": {"type": "integer", "description": "Number of affected countries"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "DiseaseSH_get_country_covid",
+    "description": "Get COVID-19 statistics for a specific country using the Disease.sh API. Returns country-level case counts, deaths, recoveries, tests, and per-capita statistics. Covers 230+ countries and territories. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Country name or ISO 3166-1 alpha-2/alpha-3 code. Examples: 'USA', 'India', 'Brazil', 'UK', 'Germany', 'France', 'China'"
+        },
+        "yesterday": {
+          "type": ["boolean", "null"],
+          "description": "If true, returns yesterday's data. Default: false"
+        }
+      },
+      "required": ["country"]
+    },
+    "fields": {
+      "endpoint": "https://disease.sh/v3/covid-19/countries/{country}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"country": "USA"},
+      {"country": "India"},
+      {"country": "Brazil"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Country COVID-19 statistics",
+              "properties": {
+                "country": {"type": "string"},
+                "countryInfo": {"type": "object", "properties": {"iso2": {"type": "string"}, "iso3": {"type": "string"}}},
+                "cases": {"type": "integer"},
+                "todayCases": {"type": "integer"},
+                "deaths": {"type": "integer"},
+                "todayDeaths": {"type": "integer"},
+                "recovered": {"type": "integer"},
+                "active": {"type": "integer"},
+                "critical": {"type": "integer"},
+                "casesPerOneMillion": {"type": "number"},
+                "deathsPerOneMillion": {"type": "number"},
+                "tests": {"type": "integer"},
+                "testsPerOneMillion": {"type": "number"},
+                "population": {"type": "integer"},
+                "continent": {"type": "string"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

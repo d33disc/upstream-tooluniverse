@@ -989,6 +989,10 @@ default_tool_files = {
     "kanye_rest": os.path.join(current_dir, "data", "kanye_rest_tools.json"),
     # OpenTopoData - terrain elevation data for any global location (SRTM/ASTER/NED)
     "opentopodata": os.path.join(current_dir, "data", "opentopodata_tools.json"),
+    # Disease.sh - COVID-19 global and country-level statistics
+    "disease_sh": os.path.join(current_dir, "data", "disease_sh_tools.json"),
+    # Official Joke API - setup/punchline jokes (general, programming, knock-knock)
+    "official_joke": os.path.join(current_dir, "data", "official_joke_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

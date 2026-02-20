@@ -1,0 +1,56 @@
+[
+  {
+    "name": "OfficialJoke_get_random_joke",
+    "description": "Get random jokes from the Official Joke API. Returns setup and punchline for general, programming, knock-knock, and dad jokes. Contains 300+ curated jokes. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": ["string", "null"],
+          "description": "Joke category. Values: 'general', 'programming', 'knock-knock', 'dad'. Omit for any type."
+        },
+        "count": {
+          "type": ["integer", "null"],
+          "description": "Number of jokes to return (1-10). Default: 1"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://official-joke-api.appspot.com/jokes/random",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"type": "programming"},
+      {"type": "general", "count": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "A random joke",
+              "properties": {
+                "id": {"type": "integer"},
+                "type": {"type": "string", "description": "Joke category"},
+                "setup": {"type": "string", "description": "Joke setup/question"},
+                "punchline": {"type": "string", "description": "Joke punchline/answer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
