@@ -281,5 +281,171 @@
         }
       ]
     }
+  },
+  {
+    "name": "OpenFDA_search_drug_enforcement",
+    "description": "Search the FDA drug enforcement (recall) database via openFDA. Contains drug recalls, withdrawals, and field corrections submitted to the FDA. Use Lucene query syntax: 'classification:\"Class I\"' (most serious, may cause death), 'recalling_firm:pfizer', 'status:Ongoing'. Returns recall details including reason, product description, distribution pattern, classification, firm, and dates. Use count parameter for frequency analysis (e.g., count='classification' to see recall counts by class).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": ["string", "null"],
+          "description": "Lucene query for drug recalls (e.g., 'classification:\"Class I\"', 'status:Ongoing', 'recalling_firm:pfizer', 'reason_for_recall:contamination'). Leave null to get recent recalls."
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of results (default 5, max 100)"
+        },
+        "count": {
+          "type": ["string", "null"],
+          "description": "Field to count by for frequency analysis (e.g., 'classification', 'recalling_firm.exact', 'voluntary_mandated.exact')"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fda.gov/drug/enforcement.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "classification:\"Class I\"", "limit": 3},
+      {"search": "status:Ongoing", "limit": 3},
+      {"count": "classification"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "FDA drug recall/enforcement search results",
+              "properties": {
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "object",
+                      "properties": {
+                        "total": {"type": "integer", "description": "Total matching recalls"}
+                      }
+                    }
+                  }
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "recall_number": {"type": "string", "description": "FDA recall number (e.g., 'D-1178-2018')"},
+                      "status": {"type": "string", "description": "Recall status: Ongoing, Terminated, Completed"},
+                      "classification": {"type": "string", "description": "Hazard class: Class I (most serious), Class II, Class III"},
+                      "product_description": {"type": "string", "description": "Description of the recalled product"},
+                      "reason_for_recall": {"type": "string", "description": "Reason for the recall"},
+                      "recalling_firm": {"type": "string", "description": "Name of the recalling company"},
+                      "distribution_pattern": {"type": "string", "description": "Geographic distribution of recalled product"},
+                      "recall_initiation_date": {"type": "string", "description": "Date recall was initiated (YYYYMMDD)"},
+                      "voluntary_mandated": {"type": "string", "description": "Voluntary vs. FDA-mandated recall"},
+                      "product_type": {"type": "string", "description": "Product type (Drugs, Devices, Food)"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenFDA_search_food_enforcement",
+    "description": "Search the FDA food enforcement (recall) database via openFDA. Contains food recalls, market withdrawals, and safety alerts. Use Lucene query syntax: 'classification:\"Class I\"' (most serious), 'status:Ongoing', 'recalling_firm:\"Company Name\"'. Returns recall details including product description, reason for recall, distribution pattern, and classification. Useful for food safety research, supply chain analysis, and identifying contamination patterns.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": ["string", "null"],
+          "description": "Lucene query for food recalls (e.g., 'classification:\"Class I\"', 'reason_for_recall:salmonella', 'status:Ongoing', 'product_description:peanut'). Leave null to get recent recalls."
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of results (default 5, max 100)"
+        },
+        "count": {
+          "type": ["string", "null"],
+          "description": "Field to count by (e.g., 'classification', 'state', 'recalling_firm.exact')"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.fda.gov/food/enforcement.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "reason_for_recall:salmonella", "limit": 3},
+      {"search": "classification:\"Class I\"", "limit": 3},
+      {"count": "classification"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "FDA food recall/enforcement search results",
+              "properties": {
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "object",
+                      "properties": {
+                        "total": {"type": "integer", "description": "Total matching food recalls"}
+                      }
+                    }
+                  }
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "recall_number": {"type": "string"},
+                      "status": {"type": "string", "description": "Ongoing, Terminated, Completed"},
+                      "classification": {"type": "string", "description": "Class I (serious), Class II, Class III"},
+                      "product_description": {"type": "string"},
+                      "reason_for_recall": {"type": "string"},
+                      "recalling_firm": {"type": "string"},
+                      "distribution_pattern": {"type": "string"},
+                      "recall_initiation_date": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
   }
 ]
