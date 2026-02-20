@@ -1,0 +1,102 @@
+[
+  {
+    "name": "IMF_get_indicators",
+    "description": "List all available economic indicators from the IMF World Economic Outlook (WEO) database. Returns indicator codes, labels, descriptions, units, and source datasets. The IMF WEO provides macroeconomic projections and historical data for 190+ countries. Key indicators: NGDP_RPCH (real GDP growth %), NGDPD (GDP current USD billions), NGDPDPC (GDP per capita), PCPIPCH (inflation %, average), LUR (unemployment rate %), BCA (current account balance), GGR_NGDP (government revenue % GDP), GGXWDG_NGDP (gross government debt % GDP).",
+    "parameter": {
+      "type": "object",
+      "properties": {}
+    },
+    "fields": {
+      "endpoint": "https://www.imf.org/external/datamapper/api/v1/indicators"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Dictionary of IMF indicators keyed by indicator code",
+              "properties": {
+                "indicators": {
+                  "type": "object",
+                  "description": "Indicator metadata keyed by code (e.g., NGDP_RPCH, PCPIPCH, LUR)"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMF_get_country_data",
+    "description": "Get IMF World Economic Outlook (WEO) data for specific countries and economic indicators. Returns historical values and projections for macroeconomic metrics. Use IMF_get_indicators to find indicator codes. Example indicators: NGDP_RPCH (real GDP growth), NGDPD (GDP in billion USD), NGDPDPC (GDP per capita), PCPIPCH (inflation rate), LUR (unemployment), BCA (current account balance), GGXWDG_NGDP (government debt % GDP). Country codes follow ISO 3166-1 alpha-3.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "indicator": {
+          "type": "string",
+          "description": "IMF indicator code (e.g., 'NGDP_RPCH' for real GDP growth, 'PCPIPCH' for inflation, 'LUR' for unemployment, 'NGDPD' for GDP in USD billions)"
+        },
+        "countries": {
+          "type": "string",
+          "description": "Comma-separated ISO 3166-1 alpha-3 country codes (e.g., 'USA,GBR,DEU' or 'CHN,JPN,IND')"
+        },
+        "periods": {
+          "type": ["string", "null"],
+          "description": "Comma-separated years to retrieve (e.g., '2020,2021,2022,2023' or '2023'). If omitted, returns all available years."
+        }
+      },
+      "required": ["indicator", "countries"]
+    },
+    "fields": {
+      "endpoint": "https://www.imf.org/external/datamapper/api/v1/{indicator}/{countries}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"indicator": "NGDP_RPCH", "countries": "USA,GBR,DEU", "periods": "2020,2021,2022,2023"},
+      {"indicator": "PCPIPCH", "countries": "USA,CHN,JPN", "periods": "2021,2022,2023"},
+      {"indicator": "LUR", "countries": "USA,DEU,FRA", "periods": "2022,2023"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "IMF economic data",
+              "properties": {
+                "values": {
+                  "type": "object",
+                  "description": "Nested dictionary: {indicator: {country: {year: value}}}"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

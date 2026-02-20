@@ -729,6 +729,30 @@ default_tool_files = {
     ),
     # bioRxiv Extended - list recent preprints by date range
     "biorxiv_ext": os.path.join(current_dir, "data", "biorxiv_ext_tools.json"),
+    # World Bank - World Development Indicators (GDP, population, health, education, 200+ countries)
+    "worldbank": os.path.join(current_dir, "data", "worldbank_tools.json"),
+    # IMF - World Economic Outlook macroeconomic data (GDP growth, inflation, unemployment, debt)
+    "imf": os.path.join(current_dir, "data", "imf_tools.json"),
+    # Open-Meteo - Free weather forecast, historical climate, air quality, and geocoding
+    "open_meteo": os.path.join(current_dir, "data", "open_meteo_tools.json"),
+    # EVA - European Variation Archive (EBI) for population variant data
+    "eva": os.path.join(current_dir, "data", "eva_tools.json"),
+    # eQTL Catalogue - Expression quantitative trait loci associations
+    "eqtl": os.path.join(current_dir, "data", "eqtl_tools.json"),
+    # OSDR - NASA Open Science Data Repository (space biology studies)
+    "osdr": os.path.join(current_dir, "data", "osdr_tools.json"),
+    # STRING network - Protein interaction networks and partners
+    "string_network": os.path.join(current_dir, "data", "string_network_tools.json"),
+    # UniProt Proteomes - Complete protein sets from sequenced genomes
+    "uniprot_proteomes": os.path.join(
+        current_dir, "data", "uniprot_proteomes_tools.json"
+    ),
+    # MusicBrainz - Open music encyclopedia (artists, releases, recordings, MBID lookups)
+    "musicbrainz": os.path.join(current_dir, "data", "musicbrainz_tools.json"),
+    # Open Library - Open book catalog with 20M+ editions linked to Internet Archive
+    "openlibrary": os.path.join(current_dir, "data", "openlibrary_tools.json"),
+    # NASA Exoplanet Archive - ADQL queries for 5500+ confirmed exoplanets and stellar hosts
+    "nasa_exoplanet": os.path.join(current_dir, "data", "nasa_exoplanet_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
