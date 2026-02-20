@@ -1,7 +1,7 @@
 [
   {
     "name": "TheCocktailDB_search_cocktails",
-    "description": "Search for cocktail recipes in TheCocktailDB, a comprehensive free cocktail database. Returns cocktails with full ingredients, measurements, instructions, glass type, category (Ordinary Drink, Cocktail, Shot, etc.), and whether they are alcoholic. Useful for food science, mixology research, chemistry of flavor compounds, and culinary AI applications.",
+    "description": "Search for cocktail recipes by name in TheCocktailDB, a comprehensive free cocktail database. Returns cocktails with full ingredients, measurements, instructions, glass type, category (Ordinary Drink, Cocktail, Shot, etc.), and whether they are alcoholic. Useful for food science, mixology research, chemistry of flavor compounds, and culinary AI applications.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -9,21 +9,9 @@
           "type": ["string", "null"],
           "description": "Search by cocktail name. Examples: 'margarita', 'mojito', 'martini', 'negroni', 'old fashioned'"
         },
-        "i": {
+        "f": {
           "type": ["string", "null"],
-          "description": "Filter by main ingredient. Examples: 'gin', 'vodka', 'rum', 'whiskey', 'tequila', 'lemon juice'"
-        },
-        "c": {
-          "type": ["string", "null"],
-          "description": "Filter by category. Values: 'Ordinary Drink', 'Cocktail', 'Milk / Float / Shake', 'Other/Unknown', 'Cocoa', 'Shot', 'Coffee / Tea', 'Homemade Liqueur', 'Punch / Party Drink', 'Beer', 'Soft Drink'"
-        },
-        "a": {
-          "type": ["string", "null"],
-          "description": "Filter by alcoholic status. Values: 'Alcoholic', 'Non alcoholic', 'Optional alcohol'"
-        },
-        "g": {
-          "type": ["string", "null"],
-          "description": "Filter by glass type. Examples: 'Cocktail glass', 'Highball glass', 'Old-fashioned glass', 'Shot glass', 'Champagne flute'"
+          "description": "Search by first letter of cocktail name. Single character: 'a', 'b', 'm', etc."
         }
       },
       "required": []
@@ -35,7 +23,7 @@
     "test_examples": [
       {"s": "margarita"},
       {"s": "mojito"},
-      {"i": "gin"}
+      {"f": "a"}
     ],
     "return_schema": {
       "oneOf": [
@@ -59,6 +47,7 @@
                       "strGlass": {"type": ["string", "null"], "description": "Glass type"},
                       "strInstructions": {"type": ["string", "null"], "description": "Preparation instructions"},
                       "strDrinkThumb": {"type": ["string", "null"], "description": "Cocktail image URL"},
+                      "strTags": {"type": ["string", "null"], "description": "Comma-separated tags (e.g., 'IBA,ContemporaryClassic')"},
                       "strIBA": {"type": ["string", "null"], "description": "IBA (International Bartenders Association) category"},
                       "strIngredient1": {"type": ["string", "null"], "description": "First ingredient"},
                       "strMeasure1": {"type": ["string", "null"], "description": "First ingredient measure"},
@@ -66,6 +55,264 @@
                       "strIngredient3": {"type": ["string", "null"]},
                       "strIngredient4": {"type": ["string", "null"]},
                       "strIngredient5": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TheCocktailDB_lookup_cocktail",
+    "description": "Look up full details of a specific cocktail by its ID in TheCocktailDB. Returns complete recipe including all ingredients (up to 15), measurements, preparation instructions in multiple languages, glass type, category, IBA classification, and image. Use this after finding cocktail IDs from search or filter results.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "i": {
+          "type": "string",
+          "description": "Cocktail ID. Examples: '11007' (Margarita), '11000' (Mojito), '11001' (Old Fashioned), '11003' (Negroni), '17216' (Tommy's Margarita)"
+        }
+      },
+      "required": ["i"]
+    },
+    "fields": {
+      "endpoint": "https://www.thecocktaildb.com/api/json/v1/1/lookup.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"i": "11007"},
+      {"i": "11000"},
+      {"i": "11003"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Cocktail lookup result",
+              "properties": {
+                "drinks": {
+                  "type": ["array", "null"],
+                  "description": "Array with single cocktail object (null if ID not found)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idDrink": {"type": "string"},
+                      "strDrink": {"type": "string", "description": "Cocktail name"},
+                      "strCategory": {"type": ["string", "null"]},
+                      "strAlcoholic": {"type": ["string", "null"]},
+                      "strGlass": {"type": ["string", "null"]},
+                      "strInstructions": {"type": ["string", "null"], "description": "English instructions"},
+                      "strInstructionsES": {"type": ["string", "null"], "description": "Spanish instructions"},
+                      "strInstructionsDE": {"type": ["string", "null"], "description": "German instructions"},
+                      "strInstructionsFR": {"type": ["string", "null"], "description": "French instructions"},
+                      "strInstructionsIT": {"type": ["string", "null"], "description": "Italian instructions"},
+                      "strDrinkThumb": {"type": ["string", "null"]},
+                      "strIngredient1": {"type": ["string", "null"]},
+                      "strMeasure1": {"type": ["string", "null"]},
+                      "strIngredient2": {"type": ["string", "null"]},
+                      "strMeasure2": {"type": ["string", "null"]},
+                      "strIngredient3": {"type": ["string", "null"]},
+                      "strMeasure3": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TheCocktailDB_filter_cocktails",
+    "description": "Filter cocktails by ingredient, category, glass type, or alcoholic content in TheCocktailDB. Returns a list of matching cocktail names, thumbnails, and IDs (not full recipes -- use lookup for full details). Useful for discovering cocktails that use a specific ingredient or finding all drinks in a category.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "i": {
+          "type": ["string", "null"],
+          "description": "Filter by ingredient name. Examples: 'Vodka', 'Gin', 'Rum', 'Tequila', 'Whiskey', 'Lime juice', 'Triple sec'"
+        },
+        "c": {
+          "type": ["string", "null"],
+          "description": "Filter by category. Values: 'Ordinary Drink', 'Cocktail', 'Milk / Float / Shake', 'Other / Unknown', 'Cocoa', 'Shot', 'Coffee / Tea', 'Homemade Liqueur', 'Punch / Party Drink', 'Beer', 'Soft Drink'"
+        },
+        "g": {
+          "type": ["string", "null"],
+          "description": "Filter by glass type. Examples: 'Cocktail glass', 'Highball glass', 'Old-fashioned glass', 'Shot glass', 'Champagne flute', 'Collins glass'"
+        },
+        "a": {
+          "type": ["string", "null"],
+          "description": "Filter by alcoholic content. Values: 'Alcoholic', 'Non_Alcoholic', 'Optional_Alcohol'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.thecocktaildb.com/api/json/v1/1/filter.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"i": "Vodka"},
+      {"c": "Cocktail"},
+      {"a": "Non_Alcoholic"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Filtered cocktail list",
+              "properties": {
+                "drinks": {
+                  "type": ["array", "null"],
+                  "description": "List of matching cocktails (abbreviated -- name, thumb, and ID only)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "strDrink": {"type": "string", "description": "Cocktail name"},
+                      "strDrinkThumb": {"type": "string", "description": "Cocktail thumbnail image URL"},
+                      "idDrink": {"type": "string", "description": "Cocktail ID (use with lookup endpoint for full details)"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TheCocktailDB_random_cocktail",
+    "description": "Get a random cocktail recipe from TheCocktailDB. Returns a complete cocktail with all ingredients, measurements, instructions, glass type, and category. Useful for cocktail discovery, random recipe generators, daily cocktail features, and exploring new drinks. No parameters needed -- returns a different random cocktail each time.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {},
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Random cocktail result",
+              "properties": {
+                "drinks": {
+                  "type": "array",
+                  "description": "Array with one random cocktail (full details)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idDrink": {"type": "string"},
+                      "strDrink": {"type": "string", "description": "Cocktail name"},
+                      "strCategory": {"type": ["string", "null"]},
+                      "strAlcoholic": {"type": ["string", "null"]},
+                      "strGlass": {"type": ["string", "null"]},
+                      "strInstructions": {"type": ["string", "null"]},
+                      "strDrinkThumb": {"type": ["string", "null"]},
+                      "strIngredient1": {"type": ["string", "null"]},
+                      "strMeasure1": {"type": ["string", "null"]}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "TheCocktailDB_search_ingredient",
+    "description": "Search for ingredient details in TheCocktailDB by name. Returns the ingredient's description, type (e.g., Spirit, Liqueur, Juice), whether it contains alcohol, and its alcohol by volume (ABV). Useful for understanding cocktail ingredients, learning about spirits and liqueurs, and building ingredient databases for recipe analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "i": {
+          "type": "string",
+          "description": "Ingredient name to look up. Examples: 'vodka', 'gin', 'rum', 'tequila', 'triple sec', 'kahlua', 'lime juice', 'angostura bitters'"
+        }
+      },
+      "required": ["i"]
+    },
+    "fields": {
+      "endpoint": "https://www.thecocktaildb.com/api/json/v1/1/search.php"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"i": "vodka"},
+      {"i": "gin"},
+      {"i": "lime juice"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ingredient search results",
+              "properties": {
+                "ingredients": {
+                  "type": ["array", "null"],
+                  "description": "List of matching ingredients (null if not found)",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idIngredient": {"type": "string", "description": "Ingredient ID"},
+                      "strIngredient": {"type": "string", "description": "Ingredient name"},
+                      "strDescription": {"type": ["string", "null"], "description": "Detailed description of the ingredient, its history, and production"},
+                      "strType": {"type": ["string", "null"], "description": "Type/category (e.g., 'Vodka', 'Spirit', 'Liqueur', 'Juice')"},
+                      "strAlcohol": {"type": ["string", "null"], "description": "Whether it contains alcohol ('Yes' or 'No')"},
+                      "strABV": {"type": ["string", "null"], "description": "Alcohol by volume percentage (e.g., '40')"}
                     }
                   }
                 }

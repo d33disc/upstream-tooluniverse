@@ -301,5 +301,149 @@
         }
       ]
     }
+  },
+  {
+    "name": "CoinGecko_get_coin_markets",
+    "description": "Get ranked cryptocurrency market data from CoinGecko. Returns a list of coins sorted by market cap (or other criteria) with current price, market cap, volume, 24h change, supply data, and all-time high/low. Useful for market overview dashboards, comparing top coins, and screening crypto assets. Supports pagination for full market scanning. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "vs_currency": {
+          "type": "string",
+          "description": "Target currency for prices. Examples: 'usd', 'eur', 'btc', 'eth'"
+        },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Sort order. Options: 'market_cap_desc' (default), 'market_cap_asc', 'volume_desc', 'volume_asc', 'id_asc', 'id_desc'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (1-250). Default: 100"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1"
+        }
+      },
+      "required": ["vs_currency"]
+    },
+    "fields": {
+      "endpoint": "https://api.coingecko.com/api/v3/coins/markets",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"vs_currency": "usd", "order": "market_cap_desc", "per_page": 10, "page": 1},
+      {"vs_currency": "eur", "per_page": 5},
+      {"vs_currency": "usd", "order": "volume_desc", "per_page": 10}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of coins with comprehensive market data",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string", "description": "CoinGecko coin ID"},
+                  "symbol": {"type": "string", "description": "Coin ticker symbol"},
+                  "name": {"type": "string", "description": "Full coin name"},
+                  "current_price": {"type": "number", "description": "Current price in vs_currency"},
+                  "market_cap": {"type": "number", "description": "Market capitalization"},
+                  "market_cap_rank": {"type": ["integer", "null"], "description": "Market cap ranking"},
+                  "total_volume": {"type": "number", "description": "24h trading volume"},
+                  "high_24h": {"type": ["number", "null"], "description": "24h high price"},
+                  "low_24h": {"type": ["number", "null"], "description": "24h low price"},
+                  "price_change_24h": {"type": ["number", "null"], "description": "24h absolute price change"},
+                  "price_change_percentage_24h": {"type": ["number", "null"], "description": "24h price change percentage"},
+                  "circulating_supply": {"type": ["number", "null"]},
+                  "total_supply": {"type": ["number", "null"]},
+                  "max_supply": {"type": ["number", "null"]},
+                  "ath": {"type": ["number", "null"], "description": "All-time high price"},
+                  "ath_date": {"type": ["string", "null"], "description": "All-time high date"},
+                  "atl": {"type": ["number", "null"], "description": "All-time low price"},
+                  "last_updated": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "CoinGecko_get_trending",
+    "description": "Get trending cryptocurrencies on CoinGecko based on search popularity in the last 24 hours. Returns the top 15 trending coins with their CoinGecko IDs, symbols, market cap rankings, and price data. Useful for discovering hot and emerging crypto assets, monitoring market sentiment, and identifying potential movers. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.coingecko.com/api/v3/search/trending",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Trending data with coins and categories",
+              "properties": {
+                "coins": {
+                  "type": "array",
+                  "description": "List of trending coins ranked by search popularity",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "item": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "string", "description": "CoinGecko coin ID"},
+                          "name": {"type": "string"},
+                          "symbol": {"type": "string"},
+                          "market_cap_rank": {"type": ["integer", "null"]},
+                          "score": {"type": "integer", "description": "Trending score (0 = most trending)"},
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "price": {"type": "number"},
+                              "price_btc": {"type": "string"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
   }
 ]
