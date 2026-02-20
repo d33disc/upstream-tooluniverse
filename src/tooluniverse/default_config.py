@@ -207,6 +207,18 @@ default_tool_files = {
     ),
     "odphp": os.path.join(current_dir, "data", "odphp_tools.json"),
     "who_gho": os.path.join(current_dir, "data", "who_gho_tools.json"),
+    # Marine Regions - VLIZ geographic authority file for oceans, seas, and marine regions worldwide
+    "marine_regions": os.path.join(current_dir, "data", "marine_regions_tools.json"),
+    # ERDDAP - NOAA CoastWatch ocean/atmospheric dataset search and metadata (SST, chlorophyll, currents)
+    "erddap": os.path.join(current_dir, "data", "erddap_tools.json"),
+    # Hacker News Algolia Search - full-text search of 30M+ HN stories and comments
+    "hn_algolia": os.path.join(current_dir, "data", "hn_algolia_tools.json"),
+    # DEV.to - developer community articles and programming tutorials
+    "devto": os.path.join(current_dir, "data", "devto_tools.json"),
+    # MET Norway - Norwegian Meteorological Institute weather forecasts (global, no auth)
+    "metnorway": os.path.join(current_dir, "data", "metnorway_tools.json"),
+    # Lobste.rs - curated technology link aggregation (programming, Linux, security, CS)
+    "lobsters": os.path.join(current_dir, "data", "lobsters_tools.json"),
     "umls": os.path.join(current_dir, "data", "umls_tools.json"),
     "icd": os.path.join(current_dir, "data", "icd_tools.json"),
     "euhealth": os.path.join(current_dir, "data", "euhealth_tools.json"),
@@ -1113,6 +1125,44 @@ default_tool_files = {
     "aviationweather": os.path.join(current_dir, "data", "aviationweather_tools.json"),
     # IEA - International Energy Agency EV and energy statistics
     "iea": os.path.join(current_dir, "data", "iea_tools.json"),
+    # iTunes Search API - Apple media catalog (music, movies, podcasts, apps)
+    "itunes": os.path.join(current_dir, "data", "itunes_tools.json"),
+    # Federal Register - US government regulations, rules, notices, presidential documents
+    "federal_register": os.path.join(
+        current_dir, "data", "federal_register_tools.json"
+    ),
+    # NASA TechPort - NASA technology development projects and investments
+    "nasa_techport": os.path.join(current_dir, "data", "nasa_techport_tools.json"),
+    # Makeup API - cosmetics and beauty product search by brand, type, tags
+    "makeup": os.path.join(current_dir, "data", "makeup_tools.json"),
+    # Fake Store API - mock e-commerce product data for prototyping/testing
+    "fakestore": os.path.join(current_dir, "data", "fakestore_tools.json"),
+    # Urban Dictionary - slang, internet jargon, and informal language definitions
+    "urban_dictionary": os.path.join(
+        current_dir, "data", "urban_dictionary_tools.json"
+    ),
+    # Lemmy - open-source Reddit alternative (federated social links/discussions)
+    "lemmy": os.path.join(current_dir, "data", "lemmy_tools.json"),
+    # Crates.io - Rust package registry (search crates, version history, downloads)
+    "cratesio": os.path.join(current_dir, "data", "cratesio_tools.json"),
+    # MyMemory Translation - free machine translation for 200+ language pairs
+    "mymemory": os.path.join(current_dir, "data", "mymemory_tools.json"),
+    # IETF Datatracker - Internet standards (RFCs, Internet-Drafts, protocol specs)
+    "ietf_datatracker": os.path.join(
+        current_dir, "data", "ietf_datatracker_tools.json"
+    ),
+    # Ergast F1 - Formula 1 race results, standings, schedules
+    "ergast_f1": os.path.join(current_dir, "data", "ergast_f1_tools.json"),
+    # Gutendex - Project Gutenberg ebooks catalog search
+    "gutendex": os.path.join(current_dir, "data", "gutendex_tools.json"),
+    # Name analysis - age/nationality/gender prediction from first names
+    "name_analysis": os.path.join(current_dir, "data", "name_analysis_tools.json"),
+    # Pokemon TCG - Pokemon trading card game cards and sets
+    "pokemon_tcg": os.path.join(current_dir, "data", "pokemon_tcg_tools.json"),
+    # Reddit - public Reddit posts and subreddit search
+    "reddit": os.path.join(current_dir, "data", "reddit_tools.json"),
+    # Yu-Gi-Oh - trading card game cards, sets, and archetypes
+    "yugioh": os.path.join(current_dir, "data", "yugioh_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

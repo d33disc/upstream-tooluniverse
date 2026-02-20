@@ -1,0 +1,175 @@
+[
+  {
+    "name": "Gutendex_search_books",
+    "description": "Search Project Gutenberg's catalog of over 70,000 free ebooks using the Gutendex API. Supports text search by title/author, filtering by topic, language, author birth/death year, and copyright status. Returns book metadata including title, authors, subjects, bookshelves, languages, download formats, and download counts. All books in Project Gutenberg are free to read and download.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": ["string", "null"],
+          "description": "Search terms for book titles and authors (e.g., 'shakespeare', 'pride prejudice', 'mark twain')"
+        },
+        "topic": {
+          "type": ["string", "null"],
+          "description": "Filter by subject or bookshelf topic (e.g., 'science fiction', 'children', 'philosophy', 'detective')"
+        },
+        "languages": {
+          "type": ["string", "null"],
+          "description": "Comma-separated language codes to filter by (e.g., 'en', 'fr', 'de', 'en,fr')"
+        },
+        "author_year_start": {
+          "type": ["integer", "null"],
+          "description": "Filter by author birth year range start (e.g., 1800)"
+        },
+        "author_year_end": {
+          "type": ["integer", "null"],
+          "description": "Filter by author birth year range end (e.g., 1900)"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort by: 'popular' (most downloaded first, default), 'ascending' (oldest first), 'descending' (newest first)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination (default: 1, 32 results per page)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://gutendex.com/books/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "sherlock holmes", "languages": "en"},
+      {"topic": "science fiction", "languages": "en", "sort": "popular"},
+      {"search": "darwin", "languages": "en"},
+      {"author_year_start": 1564, "author_year_end": 1616, "languages": "en"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Gutendex search results",
+              "properties": {
+                "count": {"type": "integer", "description": "Total number of matching books"},
+                "next": {"type": ["string", "null"], "description": "URL for next page of results"},
+                "previous": {"type": ["string", "null"], "description": "URL for previous page"},
+                "results": {
+                  "type": "array",
+                  "description": "Array of book objects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer", "description": "Project Gutenberg book ID"},
+                      "title": {"type": "string"},
+                      "authors": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {"type": "string"},
+                            "birth_year": {"type": ["integer", "null"]},
+                            "death_year": {"type": ["integer", "null"]}
+                          }
+                        }
+                      },
+                      "subjects": {"type": "array", "items": {"type": "string"}},
+                      "bookshelves": {"type": "array", "items": {"type": "string"}},
+                      "languages": {"type": "array", "items": {"type": "string"}},
+                      "copyright": {"type": "boolean"},
+                      "media_type": {"type": "string"},
+                      "formats": {"type": "object", "description": "Download URLs keyed by MIME type"},
+                      "download_count": {"type": "integer"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Gutendex_get_book",
+    "description": "Get detailed information about a specific Project Gutenberg book by its ID using the Gutendex API. Returns full metadata including title, authors with birth/death years, subjects, bookshelves, languages, copyright status, available download formats (HTML, EPUB, Kindle, plain text), and download count.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "book_id": {
+          "type": "integer",
+          "description": "Project Gutenberg book ID (e.g., 1 for Declaration of Independence, 84 for Frankenstein, 1342 for Pride and Prejudice, 11 for Alice's Adventures in Wonderland)"
+        }
+      },
+      "required": ["book_id"]
+    },
+    "fields": {
+      "endpoint": "https://gutendex.com/books/{book_id}/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"book_id": 84},
+      {"book_id": 1342},
+      {"book_id": 11}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Book details from Project Gutenberg",
+              "properties": {
+                "id": {"type": "integer"},
+                "title": {"type": "string"},
+                "authors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"},
+                      "birth_year": {"type": ["integer", "null"]},
+                      "death_year": {"type": ["integer", "null"]}
+                    }
+                  }
+                },
+                "summaries": {"type": "array", "items": {"type": "string"}},
+                "translators": {"type": "array"},
+                "subjects": {"type": "array", "items": {"type": "string"}},
+                "bookshelves": {"type": "array", "items": {"type": "string"}},
+                "languages": {"type": "array", "items": {"type": "string"}},
+                "copyright": {"type": "boolean"},
+                "media_type": {"type": "string"},
+                "formats": {"type": "object", "description": "Download URLs keyed by MIME type (text/html, application/epub+zip, etc.)"},
+                "download_count": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

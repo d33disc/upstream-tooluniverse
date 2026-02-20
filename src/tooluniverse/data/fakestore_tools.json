@@ -1,0 +1,161 @@
+[
+  {
+    "name": "FakeStore_get_products",
+    "description": "Get products from the Fake Store API, a free online REST API for e-commerce prototyping and testing. Returns realistic product data including titles, prices, descriptions, images, categories, and ratings. Contains 20 products across electronics, jewelry, men's/women's clothing categories. No authentication required. Useful for UI prototyping, testing e-commerce applications, and demo data.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Limit number of products returned (1-20). Omit for all products."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort order: 'asc' (ascending) or 'desc' (descending). Default: ascending."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://fakestoreapi.com/products"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"limit": 3},
+      {"limit": 5, "sort": "desc"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of products",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer", "description": "Product ID (1-20)"},
+                  "title": {"type": "string", "description": "Product name"},
+                  "price": {"type": "number", "description": "Price in USD"},
+                  "description": {"type": "string", "description": "Product description"},
+                  "category": {"type": "string", "description": "Category: 'electronics', 'jewelery', 'men's clothing', 'women's clothing'"},
+                  "image": {"type": "string", "description": "Product image URL"},
+                  "rating": {
+                    "type": "object",
+                    "properties": {
+                      "rate": {"type": "number", "description": "Average rating (0-5)"},
+                      "count": {"type": "integer", "description": "Number of ratings"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "FakeStore_get_product_by_id",
+    "description": "Get a single product by its ID from the Fake Store API. Returns complete product details including title, price, description, category, image URL, and user ratings. Product IDs range from 1 to 20. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "description": "Product ID (1-20). Examples: 1 (backpack), 2 (t-shirt), 9 (hard drive), 14 (bracelet)"
+        }
+      },
+      "required": ["product_id"]
+    },
+    "fields": {
+      "endpoint": "https://fakestoreapi.com/products/{product_id}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"product_id": 1},
+      {"product_id": 9},
+      {"product_id": 14}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Product details",
+              "properties": {
+                "id": {"type": "integer"},
+                "title": {"type": "string"},
+                "price": {"type": "number"},
+                "description": {"type": "string"},
+                "category": {"type": "string"},
+                "image": {"type": "string"},
+                "rating": {
+                  "type": "object",
+                  "properties": {
+                    "rate": {"type": "number"},
+                    "count": {"type": "integer"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "FakeStore_get_categories",
+    "description": "Get all product categories from the Fake Store API. Returns the list of available categories: electronics, jewelery, men's clothing, and women's clothing. No authentication required. Useful for building category navigation in e-commerce prototypes.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://fakestoreapi.com/products/categories"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of product category names",
+              "items": {"type": "string"}
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

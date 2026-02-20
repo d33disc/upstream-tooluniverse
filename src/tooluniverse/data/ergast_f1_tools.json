@@ -1,0 +1,508 @@
+[
+  {
+    "name": "ErgastF1_get_race_results",
+    "description": "Get Formula 1 race results for a specific season and round from the Ergast API (via Jolpi mirror). Returns finishing positions, drivers, constructors, times, grid positions, and status for each race. Covers all F1 seasons from 1950 to present.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2024', '2023', '1950'). Use 'current' for the current season."
+        },
+        "round": {
+          "type": "string",
+          "description": "Race round number within the season (e.g., '1' for first race, '5' for fifth)"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of result entries to return (default: 30)"
+        }
+      },
+      "required": ["season", "round"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}/{round}/results.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2024", "round": "1", "limit": 10},
+      {"season": "2023", "round": "5"},
+      {"season": "current", "round": "1"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response wrapped in MRData",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "xmlns": {"type": "string"},
+                    "series": {"type": "string"},
+                    "url": {"type": "string"},
+                    "limit": {"type": "string"},
+                    "offset": {"type": "string"},
+                    "total": {"type": "string"},
+                    "RaceTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "round": {"type": "string"},
+                        "Races": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "season": {"type": "string"},
+                              "round": {"type": "string"},
+                              "raceName": {"type": "string"},
+                              "date": {"type": "string"},
+                              "Circuit": {"type": "object"},
+                              "Results": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "number": {"type": "string"},
+                                    "position": {"type": "string"},
+                                    "positionText": {"type": "string"},
+                                    "points": {"type": "string"},
+                                    "Driver": {"type": "object"},
+                                    "Constructor": {"type": "object"},
+                                    "grid": {"type": "string"},
+                                    "laps": {"type": "string"},
+                                    "status": {"type": "string"},
+                                    "Time": {"type": "object"}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ErgastF1_get_driver_standings",
+    "description": "Get Formula 1 World Drivers' Championship standings for a specific season from the Ergast API (via Jolpi mirror). Returns driver positions, points, wins, and team information. Covers all F1 seasons from 1950 to present.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2024', '2023'). Use 'current' for the current season."
+        }
+      },
+      "required": ["season"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}/driverStandings.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2024"},
+      {"season": "2023"},
+      {"season": "current"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response with driver standings",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "StandingsTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "StandingsLists": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "season": {"type": "string"},
+                              "round": {"type": "string"},
+                              "DriverStandings": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "position": {"type": "string"},
+                                    "positionText": {"type": "string"},
+                                    "points": {"type": "string"},
+                                    "wins": {"type": "string"},
+                                    "Driver": {"type": "object"},
+                                    "Constructors": {"type": "array"}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ErgastF1_get_constructor_standings",
+    "description": "Get Formula 1 World Constructors' Championship standings for a specific season from the Ergast API (via Jolpi mirror). Returns team positions, points, and wins. The Constructors' Championship has been awarded since 1958.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2024', '2023'). Use 'current' for the current season. Constructor standings available from 1958 onwards."
+        }
+      },
+      "required": ["season"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}/constructorStandings.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2024"},
+      {"season": "2023"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response with constructor standings",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "StandingsTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "StandingsLists": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "season": {"type": "string"},
+                              "round": {"type": "string"},
+                              "ConstructorStandings": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "position": {"type": "string"},
+                                    "points": {"type": "string"},
+                                    "wins": {"type": "string"},
+                                    "Constructor": {"type": "object"}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ErgastF1_get_season_schedule",
+    "description": "Get the Formula 1 race schedule/calendar for a specific season from the Ergast API (via Jolpi mirror). Returns all races with dates, circuit info, and locations. Covers all F1 seasons from 1950 to present, including future scheduled races.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2025', '2024'). Use 'current' for the current season."
+        }
+      },
+      "required": ["season"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2025"},
+      {"season": "2024"},
+      {"season": "current"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response with season schedule",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "RaceTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "Races": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "season": {"type": "string"},
+                              "round": {"type": "string"},
+                              "raceName": {"type": "string"},
+                              "date": {"type": "string"},
+                              "time": {"type": "string"},
+                              "url": {"type": "string"},
+                              "Circuit": {
+                                "type": "object",
+                                "properties": {
+                                  "circuitId": {"type": "string"},
+                                  "circuitName": {"type": "string"},
+                                  "url": {"type": "string"},
+                                  "Location": {"type": "object"}
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ErgastF1_get_drivers",
+    "description": "Get the list of Formula 1 drivers for a specific season from the Ergast API (via Jolpi mirror). Returns driver details including name, nationality, date of birth, permanent number, and Wikipedia URL. Covers all F1 seasons from 1950 to present.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2024', '2023'). Use 'current' for the current season."
+        }
+      },
+      "required": ["season"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}/drivers.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2024"},
+      {"season": "current"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response with driver list",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "DriverTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "Drivers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "driverId": {"type": "string"},
+                              "permanentNumber": {"type": "string"},
+                              "code": {"type": "string"},
+                              "url": {"type": "string"},
+                              "givenName": {"type": "string"},
+                              "familyName": {"type": "string"},
+                              "dateOfBirth": {"type": "string"},
+                              "nationality": {"type": "string"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "ErgastF1_get_qualifying_results",
+    "description": "Get Formula 1 qualifying session results for a specific season and round from the Ergast API (via Jolpi mirror). Returns qualifying positions, Q1/Q2/Q3 times for each driver. Qualifying data is available from 2003 onwards.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "F1 season year (e.g., '2024', '2023'). Qualifying data available from 2003 onwards."
+        },
+        "round": {
+          "type": "string",
+          "description": "Race round number within the season (e.g., '1' for first race)"
+        }
+      },
+      "required": ["season", "round"]
+    },
+    "fields": {
+      "endpoint": "https://api.jolpi.ca/ergast/f1/{season}/{round}/qualifying.json"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"season": "2024", "round": "1"},
+      {"season": "2023", "round": "10"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Ergast API response with qualifying results",
+              "properties": {
+                "MRData": {
+                  "type": "object",
+                  "properties": {
+                    "RaceTable": {
+                      "type": "object",
+                      "properties": {
+                        "season": {"type": "string"},
+                        "round": {"type": "string"},
+                        "Races": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "raceName": {"type": "string"},
+                              "date": {"type": "string"},
+                              "QualifyingResults": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "number": {"type": "string"},
+                                    "position": {"type": "string"},
+                                    "Driver": {"type": "object"},
+                                    "Constructor": {"type": "object"},
+                                    "Q1": {"type": "string"},
+                                    "Q2": {"type": "string"},
+                                    "Q3": {"type": "string"}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

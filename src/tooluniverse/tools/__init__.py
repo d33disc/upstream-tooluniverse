@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2139 scientific tools.
+Type-safe Python interface to 2184 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -271,6 +271,8 @@ from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeli
 from .CorporateBS_generate_phrase import CorporateBS_generate_phrase
 from .CountriesNow_get_countries_cities import CountriesNow_get_countries_cities
 from .CountriesNow_get_country_info import CountriesNow_get_country_info
+from .CratesIO_get_crate import CratesIO_get_crate
+from .CratesIO_search_crates import CratesIO_search_crates
 from .Crates_get_package import Crates_get_package
 from .Crates_search_packages import Crates_search_packages
 from .Crossref_get_funder import Crossref_get_funder
@@ -287,6 +289,7 @@ from .DBnomics_get_dataset import DBnomics_get_dataset
 from .DBnomics_get_series import DBnomics_get_series
 from .DBnomics_search_datasets import DBnomics_search_datasets
 from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
+from .DEVto_search_articles import DEVto_search_articles
 from .DGIdb_get_drug_gene_interactions import DGIdb_get_drug_gene_interactions
 from .DGIdb_get_drug_info import DGIdb_get_drug_info
 from .DGIdb_get_gene_druggability import DGIdb_get_gene_druggability
@@ -405,6 +408,8 @@ from .EOL_get_page import EOL_get_page
 from .EOL_search_species import EOL_search_species
 from .EPMC_get_citations import EPMC_get_citations
 from .EPMC_get_references import EPMC_get_references
+from .ERDDAP_get_dataset_info import ERDDAP_get_dataset_info
+from .ERDDAP_search_datasets import ERDDAP_search_datasets
 from .EVA_get_variants_by_gene import EVA_get_variants_by_gene
 from .EVA_get_variants_by_region import EVA_get_variants_by_region
 from .EVA_list_studies import EVA_list_studies
@@ -452,6 +457,12 @@ from .EpiGraphDB_get_mendelian_randomization import (
 from .EpiGraphDB_map_gwas_to_efo import EpiGraphDB_map_gwas_to_efo
 from .EpiGraphDB_search_gene import EpiGraphDB_search_gene
 from .EpiGraphDB_search_opengwas import EpiGraphDB_search_opengwas
+from .ErgastF1_get_constructor_standings import ErgastF1_get_constructor_standings
+from .ErgastF1_get_driver_standings import ErgastF1_get_driver_standings
+from .ErgastF1_get_drivers import ErgastF1_get_drivers
+from .ErgastF1_get_qualifying_results import ErgastF1_get_qualifying_results
+from .ErgastF1_get_race_results import ErgastF1_get_race_results
+from .ErgastF1_get_season_schedule import ErgastF1_get_season_schedule
 from .EthicalComplianceReviewer import EthicalComplianceReviewer
 from .EuroPMCAnnot_get_annotations_by_type import EuroPMCAnnot_get_annotations_by_type
 from .EuroPMCAnnot_get_article_annotations import EuroPMCAnnot_get_article_annotations
@@ -879,7 +890,12 @@ from .FDA_retrieve_patient_medication_info_by_drug_name import (
 from .FEC_search_candidates import FEC_search_candidates
 from .FPbase_get_protein import FPbase_get_protein
 from .FPbase_search_by_spectrum import FPbase_search_by_spectrum
+from .FakeStore_get_categories import FakeStore_get_categories
+from .FakeStore_get_product_by_id import FakeStore_get_product_by_id
+from .FakeStore_get_products import FakeStore_get_products
 from .Fatcat_search_scholar import Fatcat_search_scholar
+from .FederalRegister_get_document import FederalRegister_get_document
+from .FederalRegister_search_documents import FederalRegister_search_documents
 from .Figshare_get_article import Figshare_get_article
 from .Figshare_search_articles import Figshare_search_articles
 from .Finish import Finish
@@ -970,6 +986,8 @@ from .GtoPdb_get_interactions import GtoPdb_get_interactions
 from .GtoPdb_search_ligands import GtoPdb_search_ligands
 from .GtoPdb_search_targets import GtoPdb_search_targets
 from .Guardian_search_news import Guardian_search_news
+from .Gutendex_get_book import Gutendex_get_book
+from .Gutendex_search_books import Gutendex_search_books
 from .GxA_get_experiment_expression import GxA_get_experiment_expression
 from .GxA_get_experiment_info import GxA_get_experiment_info
 from .GxA_list_experiments import GxA_list_experiments
@@ -1014,6 +1032,7 @@ from .HTTPBin_generate_uuid import HTTPBin_generate_uuid
 from .HTTPBin_get_headers import HTTPBin_get_headers
 from .HTTPBin_get_ip import HTTPBin_get_ip
 from .HTTPBin_get_user_agent import HTTPBin_get_user_agent
+from .HackerNewsSearch_search_stories import HackerNewsSearch_search_stories
 from .HackerNews_get_item import HackerNews_get_item
 from .HackerNews_get_top_stories import HackerNews_get_top_stories
 from .Harmonizome_get_gene import Harmonizome_get_gene
@@ -1036,6 +1055,8 @@ from .IDR_get_study import IDR_get_study
 from .IDR_get_study_datasets import IDR_get_study_datasets
 from .IDR_list_studies import IDR_list_studies
 from .IEA_get_ev_data import IEA_get_ev_data
+from .IETF_get_rfc import IETF_get_rfc
+from .IETF_search_documents import IETF_search_documents
 from .IMF_get_country_data import IMF_get_country_data
 from .IMF_get_indicators import IMF_get_indicators
 from .IMGT_get_gene_info import IMGT_get_gene_info
@@ -1125,6 +1146,9 @@ from .LOTUS_search_by_inchikey import LOTUS_search_by_inchikey
 from .LOTUS_search_natural_products import LOTUS_search_natural_products
 from .LabelGenerator import LabelGenerator
 from .LaunchLibrary_get_upcoming_launches import LaunchLibrary_get_upcoming_launches
+from .Lemmy_get_community_posts import Lemmy_get_community_posts
+from .Lemmy_list_communities import Lemmy_list_communities
+from .Lemmy_search_posts import Lemmy_search_posts
 from .LibraryOfCongress_search import LibraryOfCongress_search
 from .Lichess_get_player_profile import Lichess_get_player_profile
 from .Lichess_get_top_players import Lichess_get_top_players
@@ -1136,6 +1160,7 @@ from .LitVar_search_variants import LitVar_search_variants
 from .LiteratureContextReviewer import LiteratureContextReviewer
 from .LiteratureSearchTool import LiteratureSearchTool
 from .LiteratureSynthesisAgent import LiteratureSynthesisAgent
+from .Lobsters_get_stories import Lobsters_get_stories
 from .LyricsOVH_get_lyrics import LyricsOVH_get_lyrics
 from .LyricsOVH_suggest_songs import LyricsOVH_suggest_songs
 from .MGnify_get_genome import MGnify_get_genome
@@ -1149,7 +1174,10 @@ from .MIBiG_list_clusters import MIBiG_list_clusters
 from .MPD_get_phenotype_data import MPD_get_phenotype_data
 from .MSigDB_get_geneset import MSigDB_get_geneset
 from .MSigDB_get_hallmark_geneset import MSigDB_get_hallmark_geneset
+from .MakeupAPI_search_products import MakeupAPI_search_products
 from .MangaDex_search_manga import MangaDex_search_manga
+from .MarineRegions_get_record import MarineRegions_get_record
+from .MarineRegions_search_by_name import MarineRegions_search_by_name
 from .MassBank_search_by_compound import MassBank_search_by_compound
 from .MassBank_search_by_formula import MassBank_search_by_formula
 from .MathJS_evaluate import MathJS_evaluate
@@ -1172,6 +1200,7 @@ from .MemeAPI_get_multiple_memes import MemeAPI_get_multiple_memes
 from .MemeAPI_get_random_meme import MemeAPI_get_random_meme
 from .MetMuseum_get_object import MetMuseum_get_object
 from .MetMuseum_search_objects import MetMuseum_search_objects
+from .MetNorway_get_forecast import MetNorway_get_forecast
 from .MetaCyc_get_compound import MetaCyc_get_compound
 from .MetaCyc_get_pathway import MetaCyc_get_pathway
 from .MetaCyc_get_reaction import MetaCyc_get_reaction
@@ -1223,6 +1252,7 @@ from .MyDisease_search_diseases import MyDisease_search_diseases
 from .MyGene_batch_query import MyGene_batch_query
 from .MyGene_get_gene_annotation import MyGene_get_gene_annotation
 from .MyGene_query_genes import MyGene_query_genes
+from .MyMemory_translate import MyMemory_translate
 from .MyVariant_get_variant_annotation import MyVariant_get_variant_annotation
 from .MyVariant_query_variants import MyVariant_query_variants
 from .NASACMR_search_collections import NASACMR_search_collections
@@ -1237,6 +1267,8 @@ from .NASANeoWs_get_asteroid import NASANeoWs_get_asteroid
 from .NASANeoWs_get_feed import NASANeoWs_get_feed
 from .NASASBDB_close_approaches import NASASBDB_close_approaches
 from .NASASBDB_get_body import NASASBDB_get_body
+from .NASATechPort_get_project import NASATechPort_get_project
+from .NASATechPort_search_projects import NASATechPort_search_projects
 from .NASA_DONKI_get_coronal_mass_ejections import NASA_DONKI_get_coronal_mass_ejections
 from .NASA_DONKI_get_geomagnetic_storms import NASA_DONKI_get_geomagnetic_storms
 from .NASA_DONKI_get_high_speed_streams import NASA_DONKI_get_high_speed_streams
@@ -1632,6 +1664,9 @@ from .PoetryDB_search_by_lines import PoetryDB_search_by_lines
 from .PoetryDB_search_by_title import PoetryDB_search_by_title
 from .PokeAPI_get_pokemon import PokeAPI_get_pokemon
 from .PokeAPI_get_pokemon_species import PokeAPI_get_pokemon_species
+from .PokemonTCG_get_card import PokemonTCG_get_card
+from .PokemonTCG_list_sets import PokemonTCG_list_sets
+from .PokemonTCG_search_cards import PokemonTCG_search_cards
 from .PomBase_get_gene import PomBase_get_gene
 from .PomBase_get_gene_phenotypes import PomBase_get_gene_phenotypes
 from .PomBase_search_genes import PomBase_search_genes
@@ -1764,6 +1799,9 @@ from .Reactome_list_top_pathways import Reactome_list_top_pathways
 from .Reactome_map_uniprot_to_pathways import Reactome_map_uniprot_to_pathways
 from .Reactome_map_uniprot_to_reactions import Reactome_map_uniprot_to_reactions
 from .Reactome_query_by_ids import Reactome_query_by_ids
+from .Reddit_get_subreddit_posts import Reddit_get_subreddit_posts
+from .Reddit_search_posts import Reddit_search_posts
+from .Reddit_search_subreddits import Reddit_search_subreddits
 from .ReferenceInfoAnalyzer import ReferenceInfoAnalyzer
 from .RegulomeDB_query_variant import RegulomeDB_query_variant
 from .ReproducibilityTransparencyReviewer import ReproducibilityTransparencyReviewer
@@ -1980,6 +2018,8 @@ from .UniRef_search_clusters import UniRef_search_clusters
 from .UnifiedToolGenerator import UnifiedToolGenerator
 from .University_search import University_search
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
+from .UrbanDictionary_define import UrbanDictionary_define
+from .UrbanDictionary_random import UrbanDictionary_random
 from .UselessFact_get_random import UselessFact_get_random
 from .UselessFact_get_today import UselessFact_get_today
 from .VAM_get_object import VAM_get_object
@@ -2020,6 +2060,9 @@ from .Wttr_get_weather import Wttr_get_weather
 from .XKCD_get_comic_by_number import XKCD_get_comic_by_number
 from .XKCD_get_latest_comic import XKCD_get_latest_comic
 from .XMLToolOptimizer import XMLToolOptimizer
+from .YuGiOh_get_archetypes import YuGiOh_get_archetypes
+from .YuGiOh_get_card_sets import YuGiOh_get_card_sets
+from .YuGiOh_search_cards import YuGiOh_search_cards
 from .ZFIN_get_allele import ZFIN_get_allele
 from .ZFIN_get_gene import ZFIN_get_gene
 from .ZFIN_get_gene_alleles import ZFIN_get_gene_alleles
@@ -2538,6 +2581,8 @@ from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
 from .iNaturalist_get_taxon import iNaturalist_get_taxon
 from .iNaturalist_search_observations import iNaturalist_search_observations
 from .iNaturalist_search_taxa import iNaturalist_search_taxa
+from .iTunes_lookup import iTunes_lookup
+from .iTunes_search_media import iTunes_search_media
 from .icd_search_codes import icd_search_codes
 from .iedb_get_epitope_antigens import iedb_get_epitope_antigens
 from .iedb_get_epitope_mhc import iedb_get_epitope_mhc
@@ -2892,6 +2937,8 @@ __all__ = [
     "CorporateBS_generate_phrase",
     "CountriesNow_get_countries_cities",
     "CountriesNow_get_country_info",
+    "CratesIO_get_crate",
+    "CratesIO_search_crates",
     "Crates_get_package",
     "Crates_search_packages",
     "Crossref_get_funder",
@@ -2908,6 +2955,7 @@ __all__ = [
     "DBnomics_get_series",
     "DBnomics_search_datasets",
     "DBpedia_SPARQL_query",
+    "DEVto_search_articles",
     "DGIdb_get_drug_gene_interactions",
     "DGIdb_get_drug_info",
     "DGIdb_get_gene_druggability",
@@ -3026,6 +3074,8 @@ __all__ = [
     "EOL_search_species",
     "EPMC_get_citations",
     "EPMC_get_references",
+    "ERDDAP_get_dataset_info",
+    "ERDDAP_search_datasets",
     "EVA_get_variants_by_gene",
     "EVA_get_variants_by_region",
     "EVA_list_studies",
@@ -3071,6 +3121,12 @@ __all__ = [
     "EpiGraphDB_map_gwas_to_efo",
     "EpiGraphDB_search_gene",
     "EpiGraphDB_search_opengwas",
+    "ErgastF1_get_constructor_standings",
+    "ErgastF1_get_driver_standings",
+    "ErgastF1_get_drivers",
+    "ErgastF1_get_qualifying_results",
+    "ErgastF1_get_race_results",
+    "ErgastF1_get_season_schedule",
     "EthicalComplianceReviewer",
     "EuroPMCAnnot_get_annotations_by_type",
     "EuroPMCAnnot_get_article_annotations",
@@ -3282,7 +3338,12 @@ __all__ = [
     "FEC_search_candidates",
     "FPbase_get_protein",
     "FPbase_search_by_spectrum",
+    "FakeStore_get_categories",
+    "FakeStore_get_product_by_id",
+    "FakeStore_get_products",
     "Fatcat_search_scholar",
+    "FederalRegister_get_document",
+    "FederalRegister_search_documents",
     "Figshare_get_article",
     "Figshare_search_articles",
     "Finish",
@@ -3373,6 +3434,8 @@ __all__ = [
     "GtoPdb_search_ligands",
     "GtoPdb_search_targets",
     "Guardian_search_news",
+    "Gutendex_get_book",
+    "Gutendex_search_books",
     "GxA_get_experiment_expression",
     "GxA_get_experiment_info",
     "GxA_list_experiments",
@@ -3407,6 +3470,7 @@ __all__ = [
     "HTTPBin_get_headers",
     "HTTPBin_get_ip",
     "HTTPBin_get_user_agent",
+    "HackerNewsSearch_search_stories",
     "HackerNews_get_item",
     "HackerNews_get_top_stories",
     "Harmonizome_get_gene",
@@ -3429,6 +3493,8 @@ __all__ = [
     "IDR_get_study_datasets",
     "IDR_list_studies",
     "IEA_get_ev_data",
+    "IETF_get_rfc",
+    "IETF_search_documents",
     "IMF_get_country_data",
     "IMF_get_indicators",
     "IMGT_get_gene_info",
@@ -3516,6 +3582,9 @@ __all__ = [
     "LOTUS_search_natural_products",
     "LabelGenerator",
     "LaunchLibrary_get_upcoming_launches",
+    "Lemmy_get_community_posts",
+    "Lemmy_list_communities",
+    "Lemmy_search_posts",
     "LibraryOfCongress_search",
     "Lichess_get_player_profile",
     "Lichess_get_top_players",
@@ -3527,6 +3596,7 @@ __all__ = [
     "LiteratureContextReviewer",
     "LiteratureSearchTool",
     "LiteratureSynthesisAgent",
+    "Lobsters_get_stories",
     "LyricsOVH_get_lyrics",
     "LyricsOVH_suggest_songs",
     "MGnify_get_genome",
@@ -3540,7 +3610,10 @@ __all__ = [
     "MPD_get_phenotype_data",
     "MSigDB_get_geneset",
     "MSigDB_get_hallmark_geneset",
+    "MakeupAPI_search_products",
     "MangaDex_search_manga",
+    "MarineRegions_get_record",
+    "MarineRegions_search_by_name",
     "MassBank_search_by_compound",
     "MassBank_search_by_formula",
     "MathJS_evaluate",
@@ -3561,6 +3634,7 @@ __all__ = [
     "MemeAPI_get_random_meme",
     "MetMuseum_get_object",
     "MetMuseum_search_objects",
+    "MetNorway_get_forecast",
     "MetaCyc_get_compound",
     "MetaCyc_get_pathway",
     "MetaCyc_get_reaction",
@@ -3602,6 +3676,7 @@ __all__ = [
     "MyGene_batch_query",
     "MyGene_get_gene_annotation",
     "MyGene_query_genes",
+    "MyMemory_translate",
     "MyVariant_get_variant_annotation",
     "MyVariant_query_variants",
     "NASACMR_search_collections",
@@ -3616,6 +3691,8 @@ __all__ = [
     "NASANeoWs_get_feed",
     "NASASBDB_close_approaches",
     "NASASBDB_get_body",
+    "NASATechPort_get_project",
+    "NASATechPort_search_projects",
     "NASA_DONKI_get_coronal_mass_ejections",
     "NASA_DONKI_get_geomagnetic_storms",
     "NASA_DONKI_get_high_speed_streams",
@@ -3893,6 +3970,9 @@ __all__ = [
     "PoetryDB_search_by_title",
     "PokeAPI_get_pokemon",
     "PokeAPI_get_pokemon_species",
+    "PokemonTCG_get_card",
+    "PokemonTCG_list_sets",
+    "PokemonTCG_search_cards",
     "PomBase_get_gene",
     "PomBase_get_gene_phenotypes",
     "PomBase_search_genes",
@@ -4001,6 +4081,9 @@ __all__ = [
     "Reactome_map_uniprot_to_pathways",
     "Reactome_map_uniprot_to_reactions",
     "Reactome_query_by_ids",
+    "Reddit_get_subreddit_posts",
+    "Reddit_search_posts",
+    "Reddit_search_subreddits",
     "ReferenceInfoAnalyzer",
     "RegulomeDB_query_variant",
     "ReproducibilityTransparencyReviewer",
@@ -4203,6 +4286,8 @@ __all__ = [
     "UnifiedToolGenerator",
     "University_search",
     "Unpaywall_check_oa_status",
+    "UrbanDictionary_define",
+    "UrbanDictionary_random",
     "UselessFact_get_random",
     "UselessFact_get_today",
     "VAM_get_object",
@@ -4243,6 +4328,9 @@ __all__ = [
     "XKCD_get_comic_by_number",
     "XKCD_get_latest_comic",
     "XMLToolOptimizer",
+    "YuGiOh_get_archetypes",
+    "YuGiOh_get_card_sets",
+    "YuGiOh_search_cards",
     "ZFIN_get_allele",
     "ZFIN_get_gene",
     "ZFIN_get_gene_alleles",
@@ -4687,6 +4775,8 @@ __all__ = [
     "iNaturalist_get_taxon",
     "iNaturalist_search_observations",
     "iNaturalist_search_taxa",
+    "iTunes_lookup",
+    "iTunes_search_media",
     "icd_search_codes",
     "iedb_get_epitope_antigens",
     "iedb_get_epitope_mhc",

@@ -1,0 +1,157 @@
+[
+  {
+    "name": "FederalRegister_search_documents",
+    "description": "Search the U.S. Federal Register for government documents including rules, proposed rules, notices, and presidential documents. The Federal Register is the daily journal of the U.S. Government containing regulations, executive orders, and agency notices. Returns document title, type, abstract, publication date, agency, and URLs to full text. No authentication required. Useful for regulatory research, policy tracking, and government transparency.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string",
+          "description": "Search term (e.g., 'artificial intelligence', 'climate change', 'drug safety', 'immigration')"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Results per page (1-1000). Default: 20"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1"
+        },
+        "document_type": {
+          "type": ["string", "null"],
+          "description": "Document type filter. Options: 'RULE' (final rules), 'PRORULE' (proposed rules), 'NOTICE', 'PRESDOCU' (presidential documents). Omit for all types."
+        },
+        "agency": {
+          "type": ["string", "null"],
+          "description": "Filter by agency slug (e.g., 'environmental-protection-agency', 'food-and-drug-administration', 'energy-department')."
+        }
+      },
+      "required": ["term"]
+    },
+    "fields": {
+      "endpoint": "https://www.federalregister.gov/api/v1/documents",
+      "params": {
+        "format": "json"
+      }
+    },
+    "type": "FederalRegisterTool",
+    "test_examples": [
+      {"term": "artificial intelligence", "per_page": 3},
+      {"term": "drug safety", "document_type": "RULE", "per_page": 3},
+      {"term": "climate change", "agency": "environmental-protection-agency", "per_page": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Federal Register document search results",
+              "properties": {
+                "count": {"type": "integer", "description": "Total matching documents"},
+                "total_pages": {"type": "integer"},
+                "next_page_url": {"type": ["string", "null"]},
+                "results": {
+                  "type": "array",
+                  "description": "Matching documents",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {"type": "string", "description": "Document title"},
+                      "type": {"type": "string", "description": "Document type (Rule, Proposed Rule, Notice, Presidential Document)"},
+                      "abstract": {"type": ["string", "null"], "description": "Brief summary"},
+                      "document_number": {"type": "string", "description": "Federal Register document number"},
+                      "html_url": {"type": "string", "description": "URL to full text on federalregister.gov"},
+                      "pdf_url": {"type": "string", "description": "URL to PDF version"},
+                      "publication_date": {"type": "string", "description": "Date published (YYYY-MM-DD)"},
+                      "agencies": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {"type": "string"},
+                            "slug": {"type": "string"},
+                            "id": {"type": "integer"}
+                          }
+                        }
+                      },
+                      "citation": {"type": ["string", "null"], "description": "Federal Register citation (e.g., '88 FR 12345')"},
+                      "excerpts": {"type": ["string", "null"], "description": "Text excerpt with search term highlighted"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "FederalRegister_get_document",
+    "description": "Get detailed information about a specific Federal Register document by its document number. Returns full metadata including title, abstract, full text URL, CFR references, effective dates, RIN numbers, and agency details. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "document_number": {
+          "type": "string",
+          "description": "Federal Register document number (e.g., '2025-06701', '2024-12345'). Found in search results or Federal Register citations."
+        }
+      },
+      "required": ["document_number"]
+    },
+    "fields": {
+      "endpoint": "https://www.federalregister.gov/api/v1/documents/{document_number}.json"
+    },
+    "type": "FederalRegisterTool",
+    "test_examples": [
+      {"document_number": "2025-06701"},
+      {"document_number": "2025-22127"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Full document details",
+              "properties": {
+                "title": {"type": "string"},
+                "type": {"type": "string"},
+                "abstract": {"type": ["string", "null"]},
+                "document_number": {"type": "string"},
+                "publication_date": {"type": "string"},
+                "html_url": {"type": "string"},
+                "pdf_url": {"type": "string"},
+                "citation": {"type": ["string", "null"]},
+                "action": {"type": ["string", "null"], "description": "Regulatory action type"},
+                "dates": {"type": ["string", "null"], "description": "Effective dates"},
+                "agencies": {"type": "array"},
+                "cfr_references": {"type": "array", "description": "Code of Federal Regulations references"},
+                "regulation_id_number_info": {"type": "object", "description": "RIN details"},
+                "body_html_url": {"type": ["string", "null"], "description": "URL to full HTML body text"},
+                "comments_close_on": {"type": ["string", "null"], "description": "Comment period deadline"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

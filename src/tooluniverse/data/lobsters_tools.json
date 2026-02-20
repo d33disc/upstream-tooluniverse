@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Lobsters_get_stories",
+    "description": "Get technology news stories from Lobste.rs, a curated technology-focused link aggregation site popular with software engineers, computer scientists, and open-source contributors. Returns stories with titles, URLs, scores, tags, and submission times. No authentication required. Tags focus on programming, Linux, security, hardware, web, and academic CS. Useful for finding high-quality technology discussions.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "feed": {
+          "type": ["string", "null"],
+          "description": "Feed type. Values: 'hottest' (default, by votes + age), 'newest' (most recent first), 'saved' (top of all time)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination. Default: 1. Each page has ~25 stories."
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://lobste.rs/{feed}.json",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"feed": "hottest"},
+      {"feed": "newest"},
+      {"feed": "hottest", "page": 2}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of Lobste.rs stories",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "short_id": {"type": "string", "description": "Short story ID"},
+                  "short_id_url": {"type": "string", "description": "Full URL to story on lobste.rs"},
+                  "created_at": {"type": "string", "description": "Submission timestamp (ISO 8601)"},
+                  "title": {"type": "string", "description": "Story title"},
+                  "url": {"type": ["string", "null"], "description": "External URL (null for text posts)"},
+                  "score": {"type": "integer", "description": "Upvote score"},
+                  "comment_count": {"type": "integer", "description": "Number of comments"},
+                  "description": {"type": ["string", "null"], "description": "Optional description (for text posts)"},
+                  "tags": {"type": "array", "description": "Topic tags (e.g., 'programming', 'linux', 'security')", "items": {"type": "string"}},
+                  "submitter_user": {"type": "object", "properties": {"username": {"type": "string"}}}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

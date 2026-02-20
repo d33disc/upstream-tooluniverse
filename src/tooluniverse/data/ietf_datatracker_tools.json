@@ -1,0 +1,155 @@
+[
+  {
+    "name": "IETF_search_documents",
+    "description": "Search for Internet standards documents (RFCs, Internet-Drafts) in the IETF Datatracker, the official repository of Internet Engineering Task Force publications. Search by name, title keyword, or working group. Returns document metadata including title, abstract, page count, and document type. No authentication required. Useful for finding Internet protocol specifications, researching web standards, and referencing network protocol documentation.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name__contains": {
+          "type": ["string", "null"],
+          "description": "Search by document name/number. Examples: 'rfc9110' (HTTP Semantics), 'rfc7231', 'rfc8446' (TLS 1.3), 'rfc793' (TCP)"
+        },
+        "title__contains": {
+          "type": ["string", "null"],
+          "description": "Search by title keyword. Examples: 'HTTP', 'TLS', 'JSON', 'DNS', 'OAuth', 'WebSocket'"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results (1-100). Default: 20"
+        },
+        "offset": {
+          "type": ["integer", "null"],
+          "description": "Offset for pagination. Default: 0"
+        },
+        "name__startswith": {
+          "type": ["string", "null"],
+          "description": "Filter documents whose name starts with this prefix. Use 'rfc' to only get RFCs. Examples: 'rfc' (only RFCs), 'draft-ietf-' (only IETF working group drafts)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://datatracker.ietf.org/api/v1/doc/document/",
+      "params": {
+        "format": "json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name__contains": "rfc9110", "limit": 5},
+      {"title__contains": "HTTP", "limit": 5},
+      {"title__contains": "TLS", "limit": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "IETF document search results",
+              "properties": {
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "limit": {"type": "integer"},
+                    "offset": {"type": "integer"},
+                    "total_count": {"type": "integer", "description": "Total matching documents"}
+                  }
+                },
+                "objects": {
+                  "type": "array",
+                  "description": "List of matching RFC/Internet-Draft documents",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string", "description": "Document name (e.g., 'rfc9110', 'draft-ietf-httpbis-...')"},
+                      "title": {"type": "string", "description": "Document title"},
+                      "abstract": {"type": ["string", "null"], "description": "Document abstract"},
+                      "pages": {"type": ["integer", "null"], "description": "Number of pages"},
+                      "rfc_number": {"type": ["integer", "null"], "description": "RFC number if published as RFC"},
+                      "type": {"type": "string", "description": "Document type URI"},
+                      "rev": {"type": "string", "description": "Revision number"},
+                      "resource_uri": {"type": "string", "description": "API resource URI for this document"},
+                      "intended_std_level": {"type": ["string", "null"], "description": "Intended standards level"},
+                      "group": {"type": ["string", "null"], "description": "Working group URI"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "IETF_get_rfc",
+    "description": "Get detailed information about a specific RFC (Request for Comments) document from the IETF Datatracker. Returns the full abstract, page count, working group, standards level, and related metadata for the given RFC. No authentication required. Useful for looking up specific Internet standards, protocol specifications, and best current practices.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "rfc_name": {
+          "type": "string",
+          "description": "RFC document name in format 'rfcNNNN'. Examples: 'rfc9110' (HTTP Semantics), 'rfc8446' (TLS 1.3), 'rfc7231' (HTTP/1.1 Semantics), 'rfc793' (TCP), 'rfc2616' (HTTP/1.1), 'rfc6749' (OAuth 2.0), 'rfc8259' (JSON)"
+        }
+      },
+      "required": ["rfc_name"]
+    },
+    "fields": {
+      "endpoint": "https://datatracker.ietf.org/api/v1/doc/document/{rfc_name}/",
+      "params": {
+        "format": "json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"rfc_name": "rfc9110"},
+      {"rfc_name": "rfc8446"},
+      {"rfc_name": "rfc6749"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "RFC document details",
+              "properties": {
+                "name": {"type": "string", "description": "Document name (e.g., 'rfc9110')"},
+                "title": {"type": "string", "description": "Document title"},
+                "abstract": {"type": ["string", "null"], "description": "Full abstract of the RFC"},
+                "pages": {"type": ["integer", "null"], "description": "Number of pages"},
+                "rfc_number": {"type": ["integer", "null"], "description": "RFC number"},
+                "type": {"type": "string", "description": "Document type"},
+                "rev": {"type": "string", "description": "Revision"},
+                "resource_uri": {"type": "string"},
+                "intended_std_level": {"type": ["string", "null"], "description": "Standards level (Proposed Standard, Informational, etc.)"},
+                "group": {"type": ["string", "null"], "description": "Working group"},
+                "ad": {"type": ["string", "null"], "description": "Area Director"},
+                "note": {"type": ["string", "null"], "description": "Editor's note"},
+                "external_url": {"type": ["string", "null"], "description": "External URL"},
+                "expires": {"type": ["string", "null"]}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

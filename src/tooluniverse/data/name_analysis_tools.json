@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Agify_predict_age",
+    "description": "Predict the age of a person based on their first name using the Agify.io API. Uses statistical data from hundreds of millions of data points across 228 countries. Returns the predicted age, sample count (number of data points), and optionally filters by country. Useful for demographic analysis, marketing research, and name-based age estimation.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to predict age for (e.g., 'michael', 'maria', 'yuki', 'fatima')"
+        },
+        "country_id": {
+          "type": ["string", "null"],
+          "description": "ISO 3166-1 alpha-2 country code to localize prediction (e.g., 'US', 'GB', 'JP', 'DE', 'BR'). If omitted, uses global data."
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.agify.io"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "michael"},
+      {"name": "michael", "country_id": "US"},
+      {"name": "yuki", "country_id": "JP"},
+      {"name": "fatima", "country_id": "BR"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Age prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of data points used for the prediction"},
+                "name": {"type": "string", "description": "The input name"},
+                "age": {"type": ["integer", "null"], "description": "Predicted age (null if insufficient data)"},
+                "country_id": {"type": ["string", "null"], "description": "Country code if specified"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nationalize_predict_nationality",
+    "description": "Predict the nationality/country of origin of a person based on their first name using the Nationalize.io API. Returns up to 5 most probable countries with probability scores. Uses statistical data from hundreds of millions of records. Useful for demographic analysis, localization research, and understanding name origins across cultures.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to predict nationality for (e.g., 'tanaka', 'muller', 'garcia', 'wang', 'smith')"
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.nationalize.io"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "tanaka"},
+      {"name": "muller"},
+      {"name": "garcia"},
+      {"name": "wang"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Nationality prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of data points used"},
+                "name": {"type": "string", "description": "The input name"},
+                "country": {
+                  "type": "array",
+                  "description": "Array of predicted countries sorted by probability",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "country_id": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+                      "probability": {"type": "number", "description": "Probability score (0 to 1)"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Genderize_predict_gender",
+    "description": "Predict the gender associated with a first name using the Genderize.io API. Returns the predicted gender (male/female) with a probability score and sample count. Uses statistical data from hundreds of millions of records across 228 countries. Can be localized by country. Useful for demographic analysis, form pre-filling, and name-based gender research.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to predict gender for (e.g., 'maria', 'james', 'alex', 'yuki')"
+        },
+        "country_id": {
+          "type": ["string", "null"],
+          "description": "ISO 3166-1 alpha-2 country code to localize prediction (e.g., 'US', 'GB', 'JP'). Some names are gendered differently in different countries."
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.genderize.io"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "maria"},
+      {"name": "james"},
+      {"name": "alex", "country_id": "US"},
+      {"name": "yuki", "country_id": "JP"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Gender prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of data points used"},
+                "name": {"type": "string", "description": "The input name"},
+                "gender": {"type": ["string", "null"], "description": "Predicted gender: 'male' or 'female' (null if insufficient data)"},
+                "probability": {"type": ["number", "null"], "description": "Confidence probability (0 to 1)"},
+                "country_id": {"type": ["string", "null"], "description": "Country code if specified"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

@@ -94,6 +94,7 @@ STATIC_LAZY_REGISTRY = {
     "FDAPharmacogenomicBiomarkersTool": "fda_pharmacogenomic_biomarkers_tool",
     "FDATool": "openfda_tool",
     "FatcatScholarTool": "fatcat_tool",
+    "FederalRegisterTool": "federal_register_tool",
     "FileDownloadTool": "file_download_tool",
     "FourDNTool": "fourdn_tool",
     "GBIFOccurrenceTool": "gbif_tool",

@@ -1,0 +1,148 @@
+[
+  {
+    "name": "NASATechPort_search_projects",
+    "description": "Search NASA's TechPort database for technology development projects. TechPort catalogs NASA's technology investments including research projects, SBIR/STTR awards, and mission technology developments. Returns project IDs, titles, status, programs, and responsible organizations. Requires DEMO_KEY (free, no registration). Useful for finding NASA research projects, technology readiness assessments, and space technology developments.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "searchQuery": {
+          "type": "string",
+          "description": "Search query for NASA technology projects (e.g., 'mars rover', 'solar sail', 'quantum computing', 'life support')"
+        }
+      },
+      "required": ["searchQuery"]
+    },
+    "fields": {
+      "endpoint": "https://techport.nasa.gov/api/projects/search",
+      "params": {
+        "api_key": "DEMO_KEY"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"searchQuery": "mars"},
+      {"searchQuery": "solar sail"},
+      {"searchQuery": "quantum computing"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "TechPort project search results",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "description": "Matching NASA technology projects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "projectId": {"type": "integer", "description": "TechPort project ID"},
+                      "title": {"type": ["string", "null"]},
+                      "status": {"type": ["string", "null"], "description": "Project status (Active, Completed, etc.)"},
+                      "startDate": {"type": ["string", "null"]},
+                      "endDate": {"type": ["string", "null"]},
+                      "program": {
+                        "type": ["object", "null"],
+                        "properties": {
+                          "title": {"type": "string"},
+                          "acronym": {"type": ["string", "null"]}
+                        }
+                      },
+                      "responsibleMd": {
+                        "type": ["object", "null"],
+                        "properties": {
+                          "acronym": {"type": "string"},
+                          "organization_name": {"type": ["string", "null"]}
+                        }
+                      },
+                      "trlBegin": {"type": ["integer", "null"], "description": "Technology Readiness Level at start"},
+                      "trlEnd": {"type": ["integer", "null"], "description": "Technology Readiness Level at end"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "NASATechPort_get_project",
+    "description": "Get detailed information about a specific NASA TechPort technology project by its project ID. Returns comprehensive details including title, description, technology readiness levels, responsible organization, principal investigators, benefits, and closeout documentation. Requires DEMO_KEY (free). Useful for in-depth research on specific NASA technology investments.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "integer",
+          "description": "TechPort project ID (e.g., 17792, 93217, 95645). Found via search results."
+        }
+      },
+      "required": ["project_id"]
+    },
+    "fields": {
+      "endpoint": "https://techport.nasa.gov/api/projects/{project_id}",
+      "params": {
+        "api_key": "DEMO_KEY"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"project_id": 17792},
+      {"project_id": 93217}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Full project details",
+              "properties": {
+                "projectId": {"type": "integer"},
+                "project": {
+                  "type": "object",
+                  "properties": {
+                    "projectId": {"type": "integer"},
+                    "title": {"type": "string"},
+                    "description": {"type": ["string", "null"]},
+                    "startDate": {"type": ["string", "null"]},
+                    "endDate": {"type": ["string", "null"]},
+                    "startYear": {"type": ["integer", "null"]},
+                    "endYear": {"type": ["integer", "null"]},
+                    "status": {"type": ["string", "null"]},
+                    "benefits": {"type": ["string", "null"], "description": "Described benefits of the technology"},
+                    "program": {"type": ["object", "null"]},
+                    "responsibleMd": {"type": ["object", "null"], "description": "Responsible Mission Directorate"},
+                    "primaryTx": {"type": ["object", "null"], "description": "Primary technology taxonomy"},
+                    "trlBegin": {"type": ["integer", "null"]},
+                    "trlEnd": {"type": ["integer", "null"]},
+                    "closeoutDocumentation": {"type": "array", "description": "Related documents and reports"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
