@@ -1043,6 +1043,10 @@ default_tool_files = {
     "meme_api": os.path.join(current_dir, "data", "meme_api_tools.json"),
     # Chess.com Public API - player profiles, stats, titled players
     "chesscom": os.path.join(current_dir, "data", "chesscom_tools.json"),
+    # Lyrics.ovh - song lyrics and artist search
+    "lyrics_ovh": os.path.join(current_dir, "data", "lyrics_ovh_tools.json"),
+    # The Trivia API - trivia questions across 10 categories with difficulty levels
+    "trivia_api": os.path.join(current_dir, "data", "trivia_api_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
