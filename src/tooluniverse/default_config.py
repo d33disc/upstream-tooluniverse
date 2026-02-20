@@ -705,6 +705,12 @@ default_tool_files = {
     "scanprosite": os.path.join(current_dir, "data", "scanprosite_tools.json"),
     # PDBe Graph API - Bound molecules, UniProt mappings, compound details, FunPDBe
     "pdbe_graph": os.path.join(current_dir, "data", "pdbe_graph_tools.json"),
+    # NCBI Gene - E-utilities gene search and summary (Entrez Gene)
+    "ncbi_gene": os.path.join(current_dir, "data", "ncbi_gene_tools.json"),
+    # DataCite - research data DOIs for datasets, software, samples across repositories
+    "datacite": os.path.join(current_dir, "data", "datacite_tools.json"),
+    # Figshare - open-access research repository for datasets, figures, code, posters
+    "figshare": os.path.join(current_dir, "data", "figshare_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
