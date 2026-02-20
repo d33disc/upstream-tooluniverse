@@ -1,0 +1,327 @@
+[
+  {
+    "name": "CPIC_get_gene_info",
+    "description": "Get pharmacogenomics information for a gene from the Clinical Pharmacogenomics Implementation Consortium (CPIC) database. Returns gene coordinates, sequence IDs, and cross-references to PharmGKB, HGNC, NCBI, and Ensembl. Use this to find which genes are pharmacogenomically relevant. Example genes: CYP2D6, CYP2C19, CYP2C9, SLCO1B1, TPMT, DPYD, UGT1A1, VKORC1, G6PD.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'SLCO1B1', 'TPMT', 'DPYD')"
+        }
+      },
+      "required": ["symbol"]
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/gene?symbol=eq.{symbol}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"symbol": "CYP2D6"},
+      {"symbol": "CYP2C19"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Gene pharmacogenomics information",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "symbol": {"type": "string"},
+                  "chr": {"type": "string"},
+                  "genesequenceid": {"type": "string"},
+                  "hgncid": {"type": "string"},
+                  "ncbiid": {"type": "string"},
+                  "ensemblid": {"type": "string"},
+                  "pharmgkbid": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CPIC_list_pgx_genes",
+    "description": "List all pharmacogenomics genes curated by the Clinical Pharmacogenomics Implementation Consortium (CPIC). Returns 130+ genes with known drug interactions including CYP enzymes, transporters, and other pharmacogenes. Includes gene coordinates, sequence IDs, and database cross-references.",
+    "parameter": {
+      "type": "object",
+      "properties": {}
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/gene"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of pharmacogenomics genes",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "symbol": {"type": "string"},
+                  "chr": {"type": "string"},
+                  "hgncid": {"type": "string"},
+                  "pharmgkbid": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CPIC_get_drug_info",
+    "description": "Get pharmacogenomics information for a drug from the CPIC database. Returns drug identifiers including PharmGKB ID, RxNorm, DrugBank, and ATC codes. Use to find pharmacogenomics guidelines for a specific drug. Example drugs: warfarin, codeine, clopidogrel, simvastatin, tamoxifen, fluorouracil, mercaptopurine.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Drug name in lowercase (e.g., 'warfarin', 'codeine', 'clopidogrel', 'simvastatin')"
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/drug?name=eq.{name}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "warfarin"},
+      {"name": "codeine"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Drug pharmacogenomics information",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "drugid": {"type": "string"},
+                  "name": {"type": "string"},
+                  "pharmgkbid": {"type": "string"},
+                  "rxnormid": {"type": "string"},
+                  "drugbankid": {"type": "string"},
+                  "atcid": {"type": "array"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CPIC_get_gene_drug_pairs",
+    "description": "Get all gene-drug pairs for a pharmacogene from CPIC. Shows which drugs are affected by variants in a specific gene, with CPIC evidence level and PharmGKB clinical annotation level. Evidence levels: A (strongest) to D (weakest). Useful for understanding the clinical significance of a pharmacogene.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "genesymbol": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'SLCO1B1', 'TPMT', 'DPYD', 'VKORC1')"
+        }
+      },
+      "required": ["genesymbol"]
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/pair?genesymbol=eq.{genesymbol}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"genesymbol": "CYP2D6"},
+      {"genesymbol": "DPYD"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Gene-drug pairs with evidence levels",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pairid": {"type": "integer"},
+                  "genesymbol": {"type": "string"},
+                  "drugid": {"type": "string"},
+                  "guidelineid": {"type": "integer"},
+                  "usedforrecommendation": {"type": "boolean"},
+                  "cpiclevel": {"type": "string", "description": "CPIC evidence level (A, B, B/C, C, D)"},
+                  "pgkbcalevel": {"type": "string", "description": "PharmGKB clinical annotation level"},
+                  "pgxtesting": {"type": "string", "description": "PGx testing recommendation"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CPIC_list_guidelines",
+    "description": "List all CPIC pharmacogenomics guidelines. Returns 30+ evidence-based guidelines for using pharmacogenomic test results to optimize drug therapy. Each guideline covers one or more gene-drug pairs with specific dosing recommendations based on genotype/phenotype.",
+    "parameter": {
+      "type": "object",
+      "properties": {}
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/guideline"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of CPIC guidelines",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "name": {"type": "string"},
+                  "url": {"type": "string"},
+                  "pharmgkbid": {"type": "string"},
+                  "version": {"type": "integer"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CPIC_get_alleles",
+    "description": "Get pharmacogenomics alleles and their functional status for a gene from CPIC. Returns allele names, functional status (normal, decreased, no function, increased, uncertain, unknown), and activity values. Critical for translating genotype to phenotype (e.g., CYP2D6 *4 = no function, CYP2D6 *1 = normal function).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "genesymbol": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'CYP2D6', 'CYP2C19', 'TPMT', 'DPYD')"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of alleles to return (default 50)"
+        }
+      },
+      "required": ["genesymbol"]
+    },
+    "fields": {
+      "endpoint": "https://api.cpicpgx.org/v1/allele?genesymbol=eq.{genesymbol}&select=name,functionalstatus,activityvalue,clinicalfunctionalstatus,allelestatus&limit={limit}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"genesymbol": "CYP2D6", "limit": 20},
+      {"genesymbol": "DPYD", "limit": 20}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Gene alleles with functional status",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string", "description": "Allele name (e.g., '*1', '*4', 'c.1905+1G>A')"},
+                  "functionalstatus": {"type": "string", "description": "Functional status: normal function, decreased function, no function, increased function, uncertain function, unknown function"},
+                  "activityvalue": {"type": "string"},
+                  "clinicalfunctionalstatus": {"type": "string"},
+                  "allelestatus": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"}
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "error": {"type": "string", "description": "Error message if the request failed"}
+          }
+        }
+      ]
+    }
+  }
+]

@@ -453,4 +453,5 @@ STATIC_LAZY_REGISTRY = {
     "CTGovAPITool": "clinicaltrials_tool",
     "EpiGraphDBTool": "epigraphdb_tool",
     "IdentifiersOrgTool": "identifiers_org_tool",
+    "OpenNeuroTool": "openneuro_tool",
 }

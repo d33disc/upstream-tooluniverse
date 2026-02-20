@@ -641,6 +641,20 @@ default_tool_files = {
     "europepmc_citations": os.path.join(
         current_dir, "data", "europepmc_citations_tools.json"
     ),
+    # TCIA - The Cancer Imaging Archive (medical imaging datasets)
+    "tcia": os.path.join(current_dir, "data", "tcia_tools.json"),
+    # OpenNeuro - Neuroimaging data repository (BIDS datasets)
+    "openneuro": os.path.join(current_dir, "data", "openneuro_tools.json"),
+    # ModelDB - Computational neuroscience model repository (Yale/SenseLab)
+    "modeldb": os.path.join(current_dir, "data", "modeldb_tools.json"),
+    # KEGG BRITE - Hierarchical functional classification (enzymes, kinases, transporters, GPCRs)
+    "kegg_brite": os.path.join(current_dir, "data", "kegg_brite_tools.json"),
+    # OmicsDI - Omics Discovery Index (integrated multi-omics repository search)
+    "omicsdi": os.path.join(current_dir, "data", "omicsdi_tools.json"),
+    # CPIC - Clinical Pharmacogenomics Implementation Consortium
+    "cpic": os.path.join(current_dir, "data", "cpic_tools.json"),
+    # PDB-REDO - Re-refined PDB structures with improved quality metrics
+    "pdb_redo": os.path.join(current_dir, "data", "pdb_redo_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
