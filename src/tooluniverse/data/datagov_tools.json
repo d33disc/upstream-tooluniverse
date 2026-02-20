@@ -1,0 +1,97 @@
+[
+  {
+    "name": "DataGov_search_datasets",
+    "description": "Search the U.S. Government Open Data catalog (data.gov) for publicly available federal datasets across science, health, energy, agriculture, economics, and more. Returns dataset titles, descriptions, organization names, formats available, and metadata. No authentication required. Useful for finding government data sources for research and analysis.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query for dataset discovery. Examples: 'climate change', 'covid-19', 'unemployment rate', 'air quality', 'crop yields', 'census population'"
+        },
+        "rows": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (default 10, max 100)"
+        },
+        "fq": {
+          "type": ["string", "null"],
+          "description": "Filter query. Examples: 'organization:usgs', 'res_format:CSV', 'res_format:JSON'. Multiple filters: 'res_format:CSV+organization:noaa'"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort order. Examples: 'score desc', 'metadata_modified desc', 'name asc'"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://catalog.data.gov/api/3/action/package_search",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "climate change", "rows": 5, "fq": "res_format:CSV"},
+      {"q": "unemployment rate", "rows": 5},
+      {"q": "air quality", "rows": 5, "fq": "organization:epa"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Data.gov search results",
+              "properties": {
+                "success": {"type": "boolean"},
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer", "description": "Total matching datasets"},
+                    "results": {
+                      "type": "array",
+                      "description": "List of dataset records",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "string"},
+                          "name": {"type": "string", "description": "URL-safe dataset name"},
+                          "title": {"type": "string", "description": "Dataset title"},
+                          "notes": {"type": ["string", "null"], "description": "Dataset description"},
+                          "organization": {
+                            "type": ["object", "null"],
+                            "properties": {"title": {"type": "string"}, "name": {"type": "string"}}
+                          },
+                          "resources": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "format": {"type": "string", "description": "File format: CSV, JSON, XML, etc."},
+                                "url": {"type": "string"},
+                                "name": {"type": "string"}
+                              }
+                            }
+                          },
+                          "metadata_modified": {"type": "string"},
+                          "tags": {"type": "array", "items": {"type": "object"}}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

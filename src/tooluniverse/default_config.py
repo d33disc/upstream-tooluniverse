@@ -1099,6 +1099,10 @@ default_tool_files = {
     "artic": os.path.join(current_dir, "data", "artic_tools.json"),
     # MangaDex - manga series search and metadata
     "mangadex": os.path.join(current_dir, "data", "mangadex_tools.json"),
+    # Data.gov - U.S. government open data catalog search
+    "datagov": os.path.join(current_dir, "data", "datagov_tools.json"),
+    # WAQI - World Air Quality Index real-time AQI data
+    "waqi": os.path.join(current_dir, "data", "waqi_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
