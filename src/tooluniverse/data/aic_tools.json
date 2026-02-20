@@ -6,7 +6,7 @@
       "type": "object",
       "properties": {
         "q": {
-          "type": ["string", "null"],
+          "type": "string",
           "description": "Search query. Examples: 'monet', 'impressionism', 'ancient egypt', 'self portrait'"
         },
         "limit": {
@@ -26,13 +26,12 @@
           "description": "Comma-separated fields to return. Default includes: id,title,artist_display,date_display,medium_display,dimensions,image_id,is_public_domain,department_title,artwork_type_title"
         }
       },
-      "required": []
+      "required": ["q"]
     },
     "fields": {
-      "endpoint": "https://api.artic.edu/api/v1/artworks",
+      "endpoint": "https://api.artic.edu/api/v1/artworks/search",
       "params": {
-        "fields": "id,title,artist_display,date_display,medium_display,dimensions,image_id,is_public_domain,department_title,artwork_type_title,style_title,classification_title,subject_titles",
-        "limit": "10"
+        "fields": "id,title,artist_display,date_display,medium_display,dimensions,image_id,is_public_domain,department_title,artwork_type_title,style_title,classification_title,subject_titles"
       }
     },
     "type": "BaseRESTTool",
