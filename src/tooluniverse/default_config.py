@@ -211,14 +211,8 @@ default_tool_files = {
     "marine_regions": os.path.join(current_dir, "data", "marine_regions_tools.json"),
     # ERDDAP - NOAA CoastWatch ocean/atmospheric dataset search and metadata (SST, chlorophyll, currents)
     "erddap": os.path.join(current_dir, "data", "erddap_tools.json"),
-    # Hacker News Algolia Search - full-text search of 30M+ HN stories and comments
-    "hn_algolia": os.path.join(current_dir, "data", "hn_algolia_tools.json"),
-    # DEV.to - developer community articles and programming tutorials
-    "devto": os.path.join(current_dir, "data", "devto_tools.json"),
     # MET Norway - Norwegian Meteorological Institute weather forecasts (global, no auth)
     "metnorway": os.path.join(current_dir, "data", "metnorway_tools.json"),
-    # Lobste.rs - curated technology link aggregation (programming, Linux, security, CS)
-    "lobsters": os.path.join(current_dir, "data", "lobsters_tools.json"),
     "umls": os.path.join(current_dir, "data", "umls_tools.json"),
     "icd": os.path.join(current_dir, "data", "icd_tools.json"),
     "euhealth": os.path.join(current_dir, "data", "euhealth_tools.json"),
@@ -755,8 +749,6 @@ default_tool_files = {
     "osdr": os.path.join(current_dir, "data", "osdr_tools.json"),
     # Gene2Phenotype - EBI curated gene-disease associations for clinical genetics
     "gene2phenotype": os.path.join(current_dir, "data", "gene2phenotype_tools.json"),
-    # MusicBrainz - Open music encyclopedia (artists, releases, recordings, MBID lookups)
-    "musicbrainz": os.path.join(current_dir, "data", "musicbrainz_tools.json"),
     # Open Library - Open book catalog with 20M+ editions linked to Internet Archive
     "openlibrary": os.path.join(current_dir, "data", "openlibrary_tools.json"),
     # NASA Exoplanet Archive - ADQL queries for 5500+ confirmed exoplanets and stellar hosts
@@ -783,8 +775,6 @@ default_tool_files = {
     "sdss": os.path.join(current_dir, "data", "sdss_tools.json"),
     # NASA NED - NASA/IPAC Extragalactic Database for galaxies, quasars, and AGN
     "nasa_ned": os.path.join(current_dir, "data", "nasa_ned_tools.json"),
-    # npm - Node package registry search and package metadata (2M+ packages)
-    "npm": os.path.join(current_dir, "data", "npm_tools.json"),
     # GitHub - Public repository search and metadata via GitHub API
     "github": os.path.join(current_dir, "data", "github_tools.json"),
     # LitVar2 - NCBI variant-literature linking (search variants, get publications)
@@ -827,20 +817,14 @@ default_tool_files = {
     "europeana": os.path.join(current_dir, "data", "europeana_tools.json"),
     # Nobel Prize - all Nobel Prize winners and prizes since 1901 (official API)
     "nobel_prize": os.path.join(current_dir, "data", "nobel_prize_tools.json"),
-    # Open Brewery DB - 8K+ breweries, cideries, taprooms worldwide
-    "open_brewery": os.path.join(current_dir, "data", "open_brewery_tools.json"),
     # Exchange Rate - live currency exchange rates for 150+ currencies (no auth)
     "exchange_rate": os.path.join(current_dir, "data", "exchange_rate_tools.json"),
     # Crates.io - Rust package registry (150K+ crates with search and details)
     "crates": os.path.join(current_dir, "data", "crates_tools.json"),
-    # Maven Central - Java/JVM package registry (500K+ artifacts, Solr search)
-    "maven_central": os.path.join(current_dir, "data", "maven_central_tools.json"),
     # Internet Archive - Digital library of 40M+ items (books, audio, video, web, software)
     "internet_archive": os.path.join(
         current_dir, "data", "internet_archive_tools.json"
     ),
-    # Docker Hub - Container image registry (search repos, list tags, multi-arch images)
-    "dockerhub": os.path.join(current_dir, "data", "dockerhub_tools.json"),
     # Anaconda.org - Conda package registry (conda-forge, bioconda, 200K+ packages)
     "anaconda": os.path.join(current_dir, "data", "anaconda_tools.json"),
     # NASA EONET - Natural event tracker (wildfires, storms, volcanoes, floods)
@@ -873,10 +857,6 @@ default_tool_files = {
     "ceda": os.path.join(current_dir, "data", "ceda_tools.json"),
     # Sunrise-Sunset API - solar event times for any location
     "sunrise_sunset": os.path.join(current_dir, "data", "sunrise_sunset_tools.json"),
-    # Have I Been Pwned - public data breach database (900+ breaches)
-    "hibp": os.path.join(current_dir, "data", "hibp_tools.json"),
-    # CountriesNow - country and city geographic data (227 countries with ISO codes)
-    "countriesnow": os.path.join(current_dir, "data", "countriesnow_tools.json"),
     # Openverse - Creative Commons licensed images (700M+ from Flickr, Wikimedia, museums)
     "openverse": os.path.join(current_dir, "data", "openverse_tools.json"),
     # US College Scorecard - higher education data (6000+ schools, admission rates, costs)
@@ -907,14 +887,10 @@ default_tool_files = {
     "nws": os.path.join(current_dir, "data", "nws_tools.json"),
     # SpaceX - rocket launches, rockets, launchpads, and crew data
     "spacex": os.path.join(current_dir, "data", "spacex_tools.json"),
-    # StackExchange - Q&A search, questions, and answers (StackOverflow etc.)
-    "stackexchange": os.path.join(current_dir, "data", "stackexchange_tools.json"),
     # Carbon Intensity - UK electricity grid carbon intensity and generation mix
     "carbon_intensity": os.path.join(
         current_dir, "data", "carbon_intensity_tools.json"
     ),
-    # University Domains - worldwide university search by name and country
-    "university": os.path.join(current_dir, "data", "university_tools.json"),
     # USGS Water Services - real-time streamflow, water level, and temperature data
     "usgs_water": os.path.join(current_dir, "data", "usgs_water_tools.json"),
     # Spaceflight News API - 30K+ space news articles from major sites
@@ -925,8 +901,6 @@ default_tool_files = {
     "launchlibrary": os.path.join(current_dir, "data", "launchlibrary_tools.json"),
     # US Census Bureau - population and demographic data (no key required)
     "uscensus": os.path.join(current_dir, "data", "uscensus_tools.json"),
-    # Nager.Date - public holidays for 120 countries (official holiday calendars)
-    "nager_holidays": os.path.join(current_dir, "data", "nager_holidays_tools.json"),
     # Open-Meteo Marine - ocean wave/swell forecasts for any coastal location
     "open_meteo_marine": os.path.join(
         current_dir, "data", "open_meteo_marine_tools.json"
@@ -967,8 +941,6 @@ default_tool_files = {
     "open_meteo_climate": os.path.join(
         current_dir, "data", "open_meteo_climate_tools.json"
     ),
-    # On This Day - historical events, births, deaths by date (via Wikipedia)
-    "on_this_day": os.path.join(current_dir, "data", "on_this_day_tools.json"),
     # Open-Meteo Air Quality - hourly PM2.5/PM10/ozone forecast and history
     "open_meteo_airquality": os.path.join(
         current_dir, "data", "open_meteo_airquality_tools.json"

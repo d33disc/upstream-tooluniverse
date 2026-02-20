@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2023 scientific tools.
+Type-safe Python interface to 2000 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -240,8 +240,6 @@ from .ComplexPortal_get_complex import ComplexPortal_get_complex
 from .ComplexPortal_search_complexes import ComplexPortal_search_complexes
 from .CompoundDiscoveryAgent import CompoundDiscoveryAgent
 from .ComprehensiveDrugDiscoveryPipeline import ComprehensiveDrugDiscoveryPipeline
-from .CountriesNow_get_countries_cities import CountriesNow_get_countries_cities
-from .CountriesNow_get_country_info import CountriesNow_get_country_info
 from .CratesIO_get_crate import CratesIO_get_crate
 from .CratesIO_search_crates import CratesIO_search_crates
 from .Crates_get_package import Crates_get_package
@@ -260,7 +258,6 @@ from .DBnomics_get_dataset import DBnomics_get_dataset
 from .DBnomics_get_series import DBnomics_get_series
 from .DBnomics_search_datasets import DBnomics_search_datasets
 from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
-from .DEVto_search_articles import DEVto_search_articles
 from .DGIdb_get_drug_gene_interactions import DGIdb_get_drug_gene_interactions
 from .DGIdb_get_drug_info import DGIdb_get_drug_info
 from .DGIdb_get_gene_druggability import DGIdb_get_gene_druggability
@@ -309,8 +306,6 @@ from .DiseaseSH_get_vaccine_coverage import DiseaseSH_get_vaccine_coverage
 from .DiseaseSh_get_country_stats import DiseaseSh_get_country_stats
 from .DiseaseSh_get_global_stats import DiseaseSh_get_global_stats
 from .DiseaseSh_get_historical import DiseaseSh_get_historical
-from .DockerHub_get_tags import DockerHub_get_tags
-from .DockerHub_search_repositories import DockerHub_search_repositories
 from .DomainExpertValidator import DomainExpertValidator
 from .DrugInteractionAnalyzerAgent import DrugInteractionAnalyzerAgent
 from .DrugOptimizationAgent import DrugOptimizationAgent
@@ -940,8 +935,6 @@ from .HGNC_fetch_gene_by_id import HGNC_fetch_gene_by_id
 from .HGNC_fetch_gene_by_symbol import HGNC_fetch_gene_by_symbol
 from .HGNC_search_by_location import HGNC_search_by_location
 from .HGNC_search_genes import HGNC_search_genes
-from .HIBP_get_breach import HIBP_get_breach
-from .HIBP_list_breaches import HIBP_list_breaches
 from .HMDB_get_diseases import HMDB_get_diseases
 from .HMDB_get_metabolite import HMDB_get_metabolite
 from .HMDB_search import HMDB_search
@@ -972,7 +965,6 @@ from .HPA_search_genes_by_query import HPA_search_genes_by_query
 from .HPO_get_term import HPO_get_term
 from .HPO_get_term_hierarchy import HPO_get_term_hierarchy
 from .HPO_search_terms import HPO_search_terms
-from .HackerNewsSearch_search_stories import HackerNewsSearch_search_stories
 from .Harmonizome_get_gene import Harmonizome_get_gene
 from .Harmonizome_list_datasets import Harmonizome_list_datasets
 from .HuggingFace_get_model import HuggingFace_get_model
@@ -1078,7 +1070,6 @@ from .LitVar_search_variants import LitVar_search_variants
 from .LiteratureContextReviewer import LiteratureContextReviewer
 from .LiteratureSearchTool import LiteratureSearchTool
 from .LiteratureSynthesisAgent import LiteratureSynthesisAgent
-from .Lobsters_get_stories import Lobsters_get_stories
 from .MGnify_get_genome import MGnify_get_genome
 from .MGnify_get_study_detail import MGnify_get_study_detail
 from .MGnify_list_analyses import MGnify_list_analyses
@@ -1095,8 +1086,6 @@ from .MarineRegions_search_by_name import MarineRegions_search_by_name
 from .MassBank_search_by_compound import MassBank_search_by_compound
 from .MassBank_search_by_formula import MassBank_search_by_formula
 from .MathJS_evaluate import MathJS_evaluate
-from .MavenCentral_get_package_versions import MavenCentral_get_package_versions
-from .MavenCentral_search_packages import MavenCentral_search_packages
 from .MeSH_get_descriptor import MeSH_get_descriptor
 from .MeSH_search_descriptors import MeSH_search_descriptors
 from .MeSH_search_terms import MeSH_search_terms
@@ -1155,8 +1144,6 @@ from .Mouser_search_by_part_and_manufacturer import (
 )
 from .Mouser_search_by_part_number import Mouser_search_by_part_number
 from .MultiAgentLiteratureSearch import MultiAgentLiteratureSearch
-from .MusicBrainz_search_artists import MusicBrainz_search_artists
-from .MusicBrainz_search_recordings import MusicBrainz_search_recordings
 from .MyChem_get_chemical_annotation import MyChem_get_chemical_annotation
 from .MyChem_query_chemicals import MyChem_query_chemicals
 from .MyDisease_get_disease import MyDisease_get_disease
@@ -1264,7 +1251,6 @@ from .OmniPath_get_ligand_receptor_interactions import (
     OmniPath_get_ligand_receptor_interactions,
 )
 from .OmniPath_get_signaling_interactions import OmniPath_get_signaling_interactions
-from .OnThisDay_get_events import OnThisDay_get_events
 from .OncoKB_annotate_copy_number import OncoKB_annotate_copy_number
 from .OncoKB_annotate_variant import OncoKB_annotate_variant
 from .OncoKB_get_cancer_genes import OncoKB_get_cancer_genes
@@ -1272,8 +1258,6 @@ from .OncoKB_get_gene_info import OncoKB_get_gene_info
 from .OncoKB_get_levels import OncoKB_get_levels
 from .OpenAIRE_search_publications import OpenAIRE_search_publications
 from .OpenAlex_Guidelines_Search import OpenAlex_Guidelines_Search
-from .OpenBrewery_search import OpenBrewery_search
-from .OpenBrewery_text_search import OpenBrewery_text_search
 from .OpenCitations_get_citation_count import OpenCitations_get_citation_count
 from .OpenCitations_get_citations import OpenCitations_get_citations
 from .OpenCitations_get_references import OpenCitations_get_references
@@ -1623,8 +1607,6 @@ from .PubMed_search_articles import PubMed_search_articles
 from .PubTator3_EntityAutocomplete import PubTator3_EntityAutocomplete
 from .PubTator3_LiteratureSearch import PubTator3_LiteratureSearch
 from .PubTator3_get_annotations import PubTator3_get_annotations
-from .PublicHolidays_check_is_holiday import PublicHolidays_check_is_holiday
-from .PublicHolidays_get_by_country import PublicHolidays_get_by_country
 from .PyPIPackageInspector import PyPIPackageInspector
 from .QualityCheckerAgent import QualityCheckerAgent
 from .QuestionRephraser import QuestionRephraser
@@ -1759,8 +1741,6 @@ from .SpaceflightNews_search_articles import SpaceflightNews_search_articles
 from .SpliceAI_get_max_delta import SpliceAI_get_max_delta
 from .SpliceAI_predict_pangolin import SpliceAI_predict_pangolin
 from .SpliceAI_predict_splice import SpliceAI_predict_splice
-from .StackExchange_get_top_questions import StackExchange_get_top_questions
-from .StackExchange_search_questions import StackExchange_search_questions
 from .SunriseSunset_get_times import SunriseSunset_get_times
 from .SwissDock_check_job_status import SwissDock_check_job_status
 from .SwissDock_dock_ligand import SwissDock_dock_ligand
@@ -1872,7 +1852,6 @@ from .UniProt_search_uniref import UniProt_search_uniref
 from .UniRef_get_cluster import UniRef_get_cluster
 from .UniRef_search_clusters import UniRef_search_clusters
 from .UnifiedToolGenerator import UnifiedToolGenerator
-from .University_search import University_search
 from .Unpaywall_check_oa_status import Unpaywall_check_oa_status
 from .VAM_get_object import VAM_get_object
 from .VAM_search_objects import VAM_search_objects
@@ -2476,8 +2455,6 @@ from .miRBase_get_mirna_xrefs import miRBase_get_mirna_xrefs
 from .miRBase_search_mirna import miRBase_search_mirna
 from .nhanes_get_dataset_info import nhanes_get_dataset_info
 from .nhanes_search_datasets import nhanes_search_datasets
-from .npm_get_package import npm_get_package
-from .npm_search_packages import npm_search_packages
 from .odphp_itemlist import odphp_itemlist
 from .odphp_myhealthfinder import odphp_myhealthfinder
 from .odphp_outlink_fetch import odphp_outlink_fetch
@@ -2745,8 +2722,6 @@ __all__ = [
     "ComplexPortal_search_complexes",
     "CompoundDiscoveryAgent",
     "ComprehensiveDrugDiscoveryPipeline",
-    "CountriesNow_get_countries_cities",
-    "CountriesNow_get_country_info",
     "CratesIO_get_crate",
     "CratesIO_search_crates",
     "Crates_get_package",
@@ -2765,7 +2740,6 @@ __all__ = [
     "DBnomics_get_series",
     "DBnomics_search_datasets",
     "DBpedia_SPARQL_query",
-    "DEVto_search_articles",
     "DGIdb_get_drug_gene_interactions",
     "DGIdb_get_drug_info",
     "DGIdb_get_gene_druggability",
@@ -2814,8 +2788,6 @@ __all__ = [
     "DiseaseSh_get_country_stats",
     "DiseaseSh_get_global_stats",
     "DiseaseSh_get_historical",
-    "DockerHub_get_tags",
-    "DockerHub_search_repositories",
     "DomainExpertValidator",
     "DrugInteractionAnalyzerAgent",
     "DrugOptimizationAgent",
@@ -3227,8 +3199,6 @@ __all__ = [
     "HGNC_fetch_gene_by_symbol",
     "HGNC_search_by_location",
     "HGNC_search_genes",
-    "HIBP_get_breach",
-    "HIBP_list_breaches",
     "HMDB_get_diseases",
     "HMDB_get_metabolite",
     "HMDB_search",
@@ -3249,7 +3219,6 @@ __all__ = [
     "HPO_get_term",
     "HPO_get_term_hierarchy",
     "HPO_search_terms",
-    "HackerNewsSearch_search_stories",
     "Harmonizome_get_gene",
     "Harmonizome_list_datasets",
     "HuggingFace_get_model",
@@ -3353,7 +3322,6 @@ __all__ = [
     "LiteratureContextReviewer",
     "LiteratureSearchTool",
     "LiteratureSynthesisAgent",
-    "Lobsters_get_stories",
     "MGnify_get_genome",
     "MGnify_get_study_detail",
     "MGnify_list_analyses",
@@ -3370,8 +3338,6 @@ __all__ = [
     "MassBank_search_by_compound",
     "MassBank_search_by_formula",
     "MathJS_evaluate",
-    "MavenCentral_get_package_versions",
-    "MavenCentral_search_packages",
     "MeSH_get_descriptor",
     "MeSH_search_descriptors",
     "MeSH_search_terms",
@@ -3418,8 +3384,6 @@ __all__ = [
     "Mouser_search_by_part_and_manufacturer",
     "Mouser_search_by_part_number",
     "MultiAgentLiteratureSearch",
-    "MusicBrainz_search_artists",
-    "MusicBrainz_search_recordings",
     "MyChem_get_chemical_annotation",
     "MyChem_query_chemicals",
     "MyDisease_get_disease",
@@ -3521,7 +3485,6 @@ __all__ = [
     "OmniPath_get_intercell_roles",
     "OmniPath_get_ligand_receptor_interactions",
     "OmniPath_get_signaling_interactions",
-    "OnThisDay_get_events",
     "OncoKB_annotate_copy_number",
     "OncoKB_annotate_variant",
     "OncoKB_get_cancer_genes",
@@ -3529,8 +3492,6 @@ __all__ = [
     "OncoKB_get_levels",
     "OpenAIRE_search_publications",
     "OpenAlex_Guidelines_Search",
-    "OpenBrewery_search",
-    "OpenBrewery_text_search",
     "OpenCitations_get_citation_count",
     "OpenCitations_get_citations",
     "OpenCitations_get_references",
@@ -3752,8 +3713,6 @@ __all__ = [
     "PubTator3_EntityAutocomplete",
     "PubTator3_LiteratureSearch",
     "PubTator3_get_annotations",
-    "PublicHolidays_check_is_holiday",
-    "PublicHolidays_get_by_country",
     "PyPIPackageInspector",
     "QualityCheckerAgent",
     "QuestionRephraser",
@@ -3878,8 +3837,6 @@ __all__ = [
     "SpliceAI_get_max_delta",
     "SpliceAI_predict_pangolin",
     "SpliceAI_predict_splice",
-    "StackExchange_get_top_questions",
-    "StackExchange_search_questions",
     "SunriseSunset_get_times",
     "SwissDock_check_job_status",
     "SwissDock_dock_ligand",
@@ -3979,7 +3936,6 @@ __all__ = [
     "UniRef_get_cluster",
     "UniRef_search_clusters",
     "UnifiedToolGenerator",
-    "University_search",
     "Unpaywall_check_oa_status",
     "VAM_get_object",
     "VAM_search_objects",
@@ -4505,8 +4461,6 @@ __all__ = [
     "miRBase_search_mirna",
     "nhanes_get_dataset_info",
     "nhanes_search_datasets",
-    "npm_get_package",
-    "npm_search_packages",
     "odphp_itemlist",
     "odphp_myhealthfinder",
     "odphp_outlink_fetch",
