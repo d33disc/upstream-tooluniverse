@@ -1,0 +1,86 @@
+[
+  {
+    "name": "DictionaryAPI_lookup_word",
+    "description": "Look up English word definitions, phonetics, synonyms, antonyms, and examples using the free Dictionary API (dictionaryapi.dev). Returns detailed lexical data including parts of speech, meanings, pronunciation audio URLs. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "English word to look up. Examples: 'hello', 'serendipity', 'ephemeral', 'ubiquitous', 'algorithm'"
+        }
+      },
+      "required": ["word"]
+    },
+    "fields": {
+      "endpoint": "https://api.dictionaryapi.dev/api/v2/entries/en/{word}",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"word": "serendipity"},
+      {"word": "ephemeral"},
+      {"word": "algorithm"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Dictionary entries for the word",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "word": {"type": "string"},
+                  "phonetic": {"type": ["string", "null"], "description": "IPA phonetic transcription"},
+                  "phonetics": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "text": {"type": "string"},
+                        "audio": {"type": "string", "description": "URL to pronunciation audio"}
+                      }
+                    }
+                  },
+                  "meanings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "partOfSpeech": {"type": "string", "description": "noun, verb, adjective, etc."},
+                        "definitions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "definition": {"type": "string"},
+                              "example": {"type": ["string", "null"]},
+                              "synonyms": {"type": "array", "items": {"type": "string"}},
+                              "antonyms": {"type": "array", "items": {"type": "string"}}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "license": {"type": "object"},
+                  "sourceUrls": {"type": "array", "items": {"type": "string"}}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

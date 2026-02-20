@@ -1057,6 +1057,18 @@ default_tool_files = {
     "lichess": os.path.join(current_dir, "data", "lichess_tools.json"),
     # OpenF1 - Formula 1 session, driver, and race meeting data (2023+)
     "openf1": os.path.join(current_dir, "data", "openf1_tools.json"),
+    # Open-Meteo Air Quality - hourly PM2.5/PM10/ozone forecast and history
+    "open_meteo_airquality": os.path.join(
+        current_dir, "data", "open_meteo_airquality_tools.json"
+    ),
+    # Open Elevation - terrain elevation data from lat/lon coordinates
+    "open_elevation": os.path.join(current_dir, "data", "open_elevation_tools.json"),
+    # Deezer - music search (tracks, artists, top songs)
+    "deezer": os.path.join(current_dir, "data", "deezer_tools.json"),
+    # DictionaryAPI - English word definitions, phonetics, synonyms
+    "dictionary_api": os.path.join(current_dir, "data", "dictionary_api_tools.json"),
+    # DuckDuckGo Instant Answer API - search summaries for topics
+    "duckduckgo": os.path.join(current_dir, "data", "duckduckgo_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

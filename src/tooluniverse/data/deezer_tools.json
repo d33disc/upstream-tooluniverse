@@ -1,0 +1,213 @@
+[
+  {
+    "name": "Deezer_search_tracks",
+    "description": "Search for music tracks on Deezer by artist name, song title, or free-text query. Returns track details including title, duration, artist, album, and 30-second preview URL. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query for tracks. Can include artist and title. Examples: 'daft punk', 'get lucky daft punk', 'bohemian rhapsody queen', 'taylor swift shake it off'"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (1-100). Default: 25"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.deezer.com/search/track",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "daft punk get lucky", "limit": 5},
+      {"q": "bohemian rhapsody queen", "limit": 3},
+      {"q": "taylor swift", "limit": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Deezer track search results",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "List of matching tracks",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "title": {"type": "string"},
+                      "duration": {"type": "integer", "description": "Duration in seconds"},
+                      "rank": {"type": "integer", "description": "Popularity rank"},
+                      "preview": {"type": "string", "description": "URL to 30-second MP3 preview"},
+                      "artist": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "name": {"type": "string"},
+                          "link": {"type": "string"}
+                        }
+                      },
+                      "album": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "title": {"type": "string"},
+                          "cover": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                },
+                "total": {"type": "integer"},
+                "next": {"type": ["string", "null"]}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Deezer_search_artists",
+    "description": "Search for music artists on Deezer by name. Returns artist details including name, fan count, and picture URLs. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Artist name to search for. Examples: 'daft punk', 'queen', 'eminem', 'taylor swift', 'radiohead'"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results (1-100). Default: 25"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.deezer.com/search/artist",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "daft punk", "limit": 3},
+      {"q": "radiohead", "limit": 3},
+      {"q": "eminem", "limit": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Deezer artist search results",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "name": {"type": "string"},
+                      "nb_fan": {"type": "integer", "description": "Number of fans"},
+                      "picture": {"type": "string", "description": "Artist picture URL"},
+                      "link": {"type": "string", "description": "Deezer artist page URL"}
+                    }
+                  }
+                },
+                "total": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Deezer_get_artist_top_tracks",
+    "description": "Get the top tracks for a specific Deezer artist by their artist ID. Returns the most popular songs with duration, rank, and preview URLs. No authentication required. Use Deezer_search_artists to find artist IDs first.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "artist_id": {
+          "type": "integer",
+          "description": "Deezer artist ID. Examples: 27 (Daft Punk), 13 (Eminem), 75798 (Taylor Swift), 3490 (Queen), 1109 (Radiohead)"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of top tracks to return (1-50). Default: 10"
+        }
+      },
+      "required": ["artist_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.deezer.com/artist/{artist_id}/top",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"artist_id": 27, "limit": 5},
+      {"artist_id": 3490, "limit": 5},
+      {"artist_id": 13, "limit": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Top tracks for the artist",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "title": {"type": "string"},
+                      "duration": {"type": "integer"},
+                      "rank": {"type": "integer"},
+                      "preview": {"type": "string"},
+                      "album": {"type": "object", "properties": {"title": {"type": "string"}}}
+                    }
+                  }
+                },
+                "total": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
