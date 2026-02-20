@@ -25,25 +25,47 @@
               "type": "object",
               "description": "Current ISS position",
               "properties": {
-                "message": {"type": "string", "description": "Status: 'success'"},
-                "timestamp": {"type": "integer", "description": "Unix timestamp of position measurement"},
+                "message": {
+                  "type": "string",
+                  "description": "Status: 'success'"
+                },
+                "timestamp": {
+                  "type": "integer",
+                  "description": "Unix timestamp of position measurement"
+                },
                 "iss_position": {
                   "type": "object",
                   "properties": {
-                    "latitude": {"type": "string", "description": "Current ISS latitude (-90 to 90)"},
-                    "longitude": {"type": "string", "description": "Current ISS longitude (-180 to 180)"}
+                    "latitude": {
+                      "type": "string",
+                      "description": "Current ISS latitude (-90 to 90)"
+                    },
+                    "longitude": {
+                      "type": "string",
+                      "description": "Current ISS longitude (-180 to 180)"
+                    }
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
+            "metadata": {
+              "type": "object"
+            }
           },
-          "required": ["data"]
+          "required": [
+            "data"
+          ]
         },
         {
           "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "error"
+          ]
         }
       ]
     }
@@ -74,103 +96,50 @@
               "type": "object",
               "description": "Current humans in space",
               "properties": {
-                "message": {"type": "string"},
-                "number": {"type": "integer", "description": "Total number of humans currently in space"},
+                "message": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "integer",
+                  "description": "Total number of humans currently in space"
+                },
                 "people": {
                   "type": "array",
                   "description": "List of people currently in space",
                   "items": {
                     "type": "object",
                     "properties": {
-                      "name": {"type": "string", "description": "Astronaut name"},
-                      "craft": {"type": "string", "description": "Spacecraft name (e.g., 'ISS', 'Shenzhou')"}
+                      "name": {
+                        "type": "string",
+                        "description": "Astronaut name"
+                      },
+                      "craft": {
+                        "type": "string",
+                        "description": "Spacecraft name (e.g., 'ISS', 'Shenzhou')"
+                      }
                     }
                   }
                 }
               }
             },
-            "metadata": {"type": "object"}
+            "metadata": {
+              "type": "object"
+            }
           },
-          "required": ["data"]
+          "required": [
+            "data"
+          ]
         },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "SunriseSunset_get_times",
-    "description": "Get sunrise, sunset, solar noon, day length, and twilight times for any location and date worldwide using the Sunrise-Sunset API. Returns civil, nautical, and astronomical twilight times. Times are in UTC. Useful for scheduling field observations, phenology studies, ecological research, astronomical planning, and solar energy calculations.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "lat": {
-          "type": "number",
-          "description": "Latitude in decimal degrees (positive = north, -90 to 90). Examples: 51.5 (London), 40.71 (New York), -33.87 (Sydney), 35.68 (Tokyo)"
-        },
-        "lng": {
-          "type": "number",
-          "description": "Longitude in decimal degrees (positive = east, -180 to 180). Examples: -0.12 (London), -74.0 (New York), 151.21 (Sydney), 139.69 (Tokyo)"
-        },
-        "date": {
-          "type": ["string", "null"],
-          "description": "Date in YYYY-MM-DD format (default: today). Examples: '2024-06-21' (summer solstice), '2024-12-21' (winter solstice), '2024-03-20' (vernal equinox)"
-        },
-        "formatted": {
-          "type": ["integer", "null"],
-          "description": "Time format: 1 (default, 12-hour with AM/PM) or 0 (24-hour UTC timestamp)"
-        }
-      },
-      "required": ["lat", "lng"]
-    },
-    "fields": {
-      "endpoint": "https://api.sunrise-sunset.org/json"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"lat": 51.5, "lng": -0.12, "date": "2024-06-21"},
-      {"lat": 40.7128, "lng": -74.0059, "date": "2024-12-21"},
-      {"lat": -33.8688, "lng": 151.2093, "date": "2024-03-20"}
-    ],
-    "return_schema": {
-      "oneOf": [
         {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Sunrise and sunset time data",
-              "properties": {
-                "results": {
-                  "type": "object",
-                  "description": "Solar time data for the location and date",
-                  "properties": {
-                    "sunrise": {"type": "string", "description": "Sunrise time (UTC)"},
-                    "sunset": {"type": "string", "description": "Sunset time (UTC)"},
-                    "solar_noon": {"type": "string", "description": "Solar noon time (UTC)"},
-                    "day_length": {"type": "string", "description": "Total daylight duration (HH:MM:SS)"},
-                    "civil_twilight_begin": {"type": "string", "description": "Civil dawn (sun 6° below horizon)"},
-                    "civil_twilight_end": {"type": "string", "description": "Civil dusk"},
-                    "nautical_twilight_begin": {"type": "string", "description": "Nautical dawn (sun 12° below horizon)"},
-                    "nautical_twilight_end": {"type": "string"},
-                    "astronomical_twilight_begin": {"type": "string", "description": "Astronomical dawn (sun 18° below horizon, sky dark enough for observation)"},
-                    "astronomical_twilight_end": {"type": "string"}
-                  }
-                },
-                "status": {"type": "string", "description": "Response status: 'OK'"}
-              }
-            },
-            "metadata": {"type": "object"}
+            "error": {
+              "type": "string"
+            }
           },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
+          "required": [
+            "error"
+          ]
         }
       ]
     }
