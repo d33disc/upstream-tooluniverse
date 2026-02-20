@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def ArtIC_search_artworks(
-    q: Optional[str | Any] = None,
+    q: str,
     limit: Optional[int | Any] = None,
     page: Optional[int | Any] = None,
     is_public_domain: Optional[bool | Any] = None,
@@ -24,7 +24,7 @@ def ArtIC_search_artworks(
 
     Parameters
     ----------
-    q : str | Any
+    q : str
         Search query. Examples: 'monet', 'impressionism', 'ancient egypt', 'self port...
     limit : int | Any
         Number of results to return (default 10, max 100)
