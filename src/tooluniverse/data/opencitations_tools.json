@@ -13,7 +13,7 @@
       "required": ["doi"]
     },
     "fields": {
-      "endpoint": "https://opencitations.net/index/coci/api/v1/references/{doi}"
+      "endpoint": "https://api.opencitations.net/index/v1/references/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -68,7 +68,7 @@
       "required": ["doi"]
     },
     "fields": {
-      "endpoint": "https://opencitations.net/index/coci/api/v1/citations/{doi}"
+      "endpoint": "https://api.opencitations.net/index/v1/citations/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -123,7 +123,7 @@
       "required": ["doi"]
     },
     "fields": {
-      "endpoint": "https://opencitations.net/index/coci/api/v1/citation-count/{doi}"
+      "endpoint": "https://api.opencitations.net/index/v1/citation-count/{doi}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
