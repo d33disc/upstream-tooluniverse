@@ -689,6 +689,10 @@ default_tool_files = {
     "mousemine": os.path.join(current_dir, "data", "mousemine_tools.json"),
     # TargetMine - InterMine data warehouse for drug target discovery
     "targetmine": os.path.join(current_dir, "data", "targetmine_tools.json"),
+    # VEuPathDB - eukaryotic pathogen, vector and host genomics
+    "veupathdb": os.path.join(current_dir, "data", "veupathdb_tools.json"),
+    # GeneNetwork Extended - trait and dataset detail info
+    "genenetwork_ext": os.path.join(current_dir, "data", "genenetwork_ext_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
