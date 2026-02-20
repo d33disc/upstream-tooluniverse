@@ -957,6 +957,12 @@ default_tool_files = {
     "nameapis": os.path.join(current_dir, "data", "nameapis_tools.json"),
     # Coinbase - cryptocurrency spot prices and exchange rates (no auth required)
     "coinbase": os.path.join(current_dir, "data", "coinbase_tools.json"),
+    # Spaceflight News API - 30K+ space news articles from major sites
+    "spaceflight_news": os.path.join(
+        current_dir, "data", "spaceflight_news_tools.json"
+    ),
+    # Launch Library 2 - upcoming rocket launches worldwide (all providers)
+    "launchlibrary": os.path.join(current_dir, "data", "launchlibrary_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
