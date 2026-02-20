@@ -1,0 +1,256 @@
+[
+  {
+    "name": "StackExchange_search_questions",
+    "description": "Search for questions on StackOverflow or other StackExchange sites. Returns questions matching a search query, sorted by relevance, votes, or activity. Useful for finding programming solutions, answers to technical questions, and community knowledge.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query string (e.g., 'python pandas dataframe merge')"
+        },
+        "site": {
+          "type": ["string", "null"],
+          "description": "StackExchange site to search (default: 'stackoverflow'). Other options: 'serverfault', 'superuser', 'askubuntu', 'math', 'stats', 'physics', etc."
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort order: 'relevance', 'votes', 'creation', 'activity' (default: 'relevance')"
+        },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Sort direction: 'desc' or 'asc' (default: 'desc')"
+        },
+        "tagged": {
+          "type": ["string", "null"],
+          "description": "Semicolon-separated tags to filter by (e.g., 'python;pandas')"
+        },
+        "pagesize": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (1-100, default: 10)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination (default: 1)"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.stackexchange.com/2.3/search/advanced",
+      "params": {
+        "site": "stackoverflow"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "python pandas merge dataframes", "pagesize": 5},
+      {"q": "react hooks useEffect", "tagged": "reactjs", "pagesize": 3},
+      {"q": "docker compose networking", "sort": "votes", "pagesize": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Search results",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "description": "Array of matching questions",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "question_id": {"type": "integer"},
+                      "title": {"type": "string"},
+                      "link": {"type": "string"},
+                      "tags": {"type": "array", "items": {"type": "string"}},
+                      "score": {"type": "integer", "description": "Vote score"},
+                      "answer_count": {"type": "integer"},
+                      "view_count": {"type": "integer"},
+                      "is_answered": {"type": "boolean"},
+                      "accepted_answer_id": {"type": ["integer", "null"]},
+                      "creation_date": {"type": "integer", "description": "Unix timestamp"},
+                      "last_activity_date": {"type": "integer"},
+                      "owner": {"type": "object"}
+                    }
+                  }
+                },
+                "has_more": {"type": "boolean"},
+                "quota_max": {"type": "integer"},
+                "quota_remaining": {"type": "integer"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "StackExchange_get_question",
+    "description": "Get details of a specific StackOverflow question by its ID, including the question body, comments count, and vote score.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "integer",
+          "description": "The StackOverflow question ID (e.g., 16476924)"
+        },
+        "site": {
+          "type": ["string", "null"],
+          "description": "StackExchange site (default: 'stackoverflow')"
+        }
+      },
+      "required": ["question_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.stackexchange.com/2.3/questions/{question_id}",
+      "params": {
+        "site": "stackoverflow",
+        "filter": "withbody"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"question_id": 16476924},
+      {"question_id": 17071871},
+      {"question_id": 394809}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Question details",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "question_id": {"type": "integer"},
+                      "title": {"type": "string"},
+                      "body": {"type": "string", "description": "HTML body of the question"},
+                      "link": {"type": "string"},
+                      "tags": {"type": "array", "items": {"type": "string"}},
+                      "score": {"type": "integer"},
+                      "answer_count": {"type": "integer"},
+                      "view_count": {"type": "integer"},
+                      "is_answered": {"type": "boolean"},
+                      "creation_date": {"type": "integer"},
+                      "owner": {"type": "object"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "StackExchange_get_answers",
+    "description": "Get answers for a specific StackOverflow question, sorted by votes. Returns the answer body, vote score, and whether it was accepted. Useful for getting programming solutions and explanations.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "integer",
+          "description": "The StackOverflow question ID"
+        },
+        "site": {
+          "type": ["string", "null"],
+          "description": "StackExchange site (default: 'stackoverflow')"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort order: 'votes', 'activity', 'creation' (default: 'votes')"
+        },
+        "pagesize": {
+          "type": ["integer", "null"],
+          "description": "Number of answers to return (default: 5)"
+        }
+      },
+      "required": ["question_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.stackexchange.com/2.3/questions/{question_id}/answers",
+      "params": {
+        "site": "stackoverflow",
+        "sort": "votes",
+        "order": "desc",
+        "filter": "withbody"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"question_id": 16476924, "pagesize": 3},
+      {"question_id": 394809, "pagesize": 3},
+      {"question_id": 17071871, "pagesize": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Answers to the question",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "answer_id": {"type": "integer"},
+                      "question_id": {"type": "integer"},
+                      "body": {"type": "string", "description": "HTML body of the answer"},
+                      "score": {"type": "integer"},
+                      "is_accepted": {"type": "boolean"},
+                      "creation_date": {"type": "integer"},
+                      "last_activity_date": {"type": "integer"},
+                      "owner": {"type": "object"}
+                    }
+                  }
+                },
+                "has_more": {"type": "boolean"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

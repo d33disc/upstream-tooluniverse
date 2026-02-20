@@ -1,0 +1,335 @@
+[
+  {
+    "name": "SpaceX_get_latest_launch",
+    "description": "Get data about the latest SpaceX rocket launch, including mission name, date, success status, rocket used, crew members, and related links (webcast, article, Wikipedia).",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/launches/latest"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Latest SpaceX launch data",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string", "description": "Mission name"},
+                "flight_number": {"type": "integer"},
+                "date_utc": {"type": "string"},
+                "date_local": {"type": "string"},
+                "success": {"type": ["boolean", "null"]},
+                "details": {"type": ["string", "null"]},
+                "rocket": {"type": "string", "description": "Rocket ID"},
+                "crew": {"type": "array", "items": {"type": "string"}},
+                "launchpad": {"type": "string"},
+                "links": {"type": "object"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SpaceX_get_launch",
+    "description": "Get detailed data about a specific SpaceX launch by its ID. Returns mission name, date, success status, rocket, crew, payloads, core landing information, and media links.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "launch_id": {
+          "type": "string",
+          "description": "The SpaceX launch ID (24-character hex string)"
+        }
+      },
+      "required": ["launch_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/launches/{launch_id}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"launch_id": "5eb87cd9ffd86e000604b32a"},
+      {"launch_id": "5eb87d42ffd86e000604b384"},
+      {"launch_id": "62dd70d5202306255024d139"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "SpaceX launch details",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "flight_number": {"type": "integer"},
+                "date_utc": {"type": "string"},
+                "success": {"type": ["boolean", "null"]},
+                "details": {"type": ["string", "null"]},
+                "rocket": {"type": "string"},
+                "crew": {"type": "array"},
+                "cores": {"type": "array"},
+                "links": {"type": "object"},
+                "failures": {"type": "array"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SpaceX_list_rockets",
+    "description": "List all SpaceX rockets with specifications. Returns data about Falcon 1, Falcon 9, Falcon Heavy, and Starship including dimensions, mass, payload capacity, cost per launch, and engine details.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/rockets"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of SpaceX rockets",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "name": {"type": "string"},
+                  "type": {"type": "string"},
+                  "active": {"type": "boolean"},
+                  "stages": {"type": "integer"},
+                  "boosters": {"type": "integer"},
+                  "cost_per_launch": {"type": "integer"},
+                  "success_rate_pct": {"type": "integer"},
+                  "first_flight": {"type": "string"},
+                  "country": {"type": "string"},
+                  "company": {"type": "string"},
+                  "height": {"type": "object"},
+                  "diameter": {"type": "object"},
+                  "mass": {"type": "object"},
+                  "payload_weights": {"type": "array"},
+                  "description": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SpaceX_get_rocket",
+    "description": "Get detailed specifications for a specific SpaceX rocket by ID. Returns dimensions, mass, payload capacity to different orbits, engine specs, landing capabilities, cost per launch, and images.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "rocket_id": {
+          "type": "string",
+          "description": "SpaceX rocket ID (e.g., '5e9d0d95eda69973a809d1ec' for Falcon 9)"
+        }
+      },
+      "required": ["rocket_id"]
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/rockets/{rocket_id}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"rocket_id": "5e9d0d95eda69973a809d1ec"},
+      {"rocket_id": "5e9d0d95eda69974db09d1ed"},
+      {"rocket_id": "5e9d0d96eda699382d09d1ee"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Detailed rocket specifications",
+              "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "type": {"type": "string"},
+                "active": {"type": "boolean"},
+                "stages": {"type": "integer"},
+                "cost_per_launch": {"type": "integer"},
+                "success_rate_pct": {"type": "integer"},
+                "first_flight": {"type": "string"},
+                "description": {"type": "string"},
+                "engines": {"type": "object"},
+                "landing_legs": {"type": "object"},
+                "payload_weights": {"type": "array"},
+                "flickr_images": {"type": "array"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SpaceX_list_launchpads",
+    "description": "List all SpaceX launch pads with their location, status, and launch history. Returns data about Kennedy Space Center, Cape Canaveral, Vandenberg, Kwajalein Atoll, and SpaceX Starbase.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/launchpads"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of SpaceX launch pads",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "name": {"type": "string"},
+                  "full_name": {"type": "string"},
+                  "status": {"type": "string"},
+                  "locality": {"type": "string"},
+                  "region": {"type": "string"},
+                  "latitude": {"type": "number"},
+                  "longitude": {"type": "number"},
+                  "launch_attempts": {"type": "integer"},
+                  "launch_successes": {"type": "integer"},
+                  "launches": {"type": "array"},
+                  "details": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SpaceX_list_crew",
+    "description": "List all SpaceX crew members who have flown on Crew Dragon missions. Returns astronaut name, agency, image, Wikipedia link, and associated launches.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.spacexdata.com/v4/crew"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of SpaceX crew members",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "name": {"type": "string"},
+                  "agency": {"type": "string"},
+                  "image": {"type": "string"},
+                  "wikipedia": {"type": "string"},
+                  "launches": {"type": "array"},
+                  "status": {"type": "string"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

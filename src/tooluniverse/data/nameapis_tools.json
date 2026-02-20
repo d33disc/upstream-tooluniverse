@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Agify_predict_age",
+    "description": "Predict the likely age of a person based on their first name using the Agify.io API. Uses statistical analysis of 100M+ names across countries. Returns the most probable age for bearers of the given name. No authentication required. Useful for demographic analysis, marketing research, and data science.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to analyze. Examples: 'Michael', 'Emma', 'John', 'Maria', 'James'"
+        },
+        "country_id": {
+          "type": ["string", "null"],
+          "description": "ISO 3166-1 alpha-2 country code for country-specific prediction. Examples: 'US', 'GB', 'DE', 'FR', 'JP'"
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.agify.io/",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "Michael"},
+      {"name": "Emma", "country_id": "US"},
+      {"name": "Lucas", "country_id": "DE"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Age prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of data points used for prediction"},
+                "name": {"type": "string", "description": "The queried name"},
+                "age": {"type": ["integer", "null"], "description": "Predicted age (median)"},
+                "country_id": {"type": ["string", "null"], "description": "Country code if specified"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Genderize_predict_gender",
+    "description": "Predict the likely gender of a person based on their first name using the Genderize.io API. Returns gender (male/female) with probability score based on 300M+ name-gender associations across 90+ countries. No authentication required. Useful for demographic analysis and data science.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to analyze. Examples: 'James', 'Emma', 'Alex', 'Jordan', 'Taylor'"
+        },
+        "country_id": {
+          "type": ["string", "null"],
+          "description": "ISO 3166-1 alpha-2 country code for country-specific prediction. Examples: 'US', 'GB', 'DE', 'FR'"
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.genderize.io/",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "James"},
+      {"name": "Taylor", "country_id": "US"},
+      {"name": "Alex"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Gender prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Number of data points used"},
+                "name": {"type": "string"},
+                "gender": {"type": ["string", "null"], "description": "Predicted gender: 'male' or 'female'"},
+                "probability": {"type": ["number", "null"], "description": "Confidence probability (0-1)"},
+                "country_id": {"type": ["string", "null"]}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nationalize_predict_nationality",
+    "description": "Predict the likely nationality/country origin of a person based on their first name using the Nationalize.io API. Returns ranked list of countries with probability scores. Analyzes 5M+ name-nationality data points. No authentication required. Useful for demographic analysis, internationalization, and data science.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "First name to analyze for nationality. Examples: 'Kim', 'Mohammed', 'Maria', 'Hans', 'Yuki'"
+        }
+      },
+      "required": ["name"]
+    },
+    "fields": {
+      "endpoint": "https://api.nationalize.io/",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "Kim"},
+      {"name": "Mohammed"},
+      {"name": "Yuki"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Nationality prediction result",
+              "properties": {
+                "count": {"type": "integer", "description": "Data points used"},
+                "name": {"type": "string"},
+                "country": {
+                  "type": "array",
+                  "description": "Ranked list of countries by probability",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "country_id": {"type": "string", "description": "ISO 3166-1 alpha-2 country code"},
+                      "probability": {"type": "number", "description": "Probability (0-1)"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

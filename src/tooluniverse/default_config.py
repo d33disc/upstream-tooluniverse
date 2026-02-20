@@ -929,6 +929,34 @@ default_tool_files = {
     "poetrydb": os.path.join(current_dir, "data", "poetrydb_tools.json"),
     # Datamuse - word-finding API (synonyms, antonyms, rhymes, semantic similarity)
     "datamuse": os.path.join(current_dir, "data", "datamuse_tools.json"),
+    # XKCD - webcomic metadata (latest + by number)
+    "xkcd": os.path.join(current_dir, "data", "xkcd_tools.json"),
+    # National Weather Service (NWS) - US weather forecasts, alerts, and point metadata
+    "nws": os.path.join(current_dir, "data", "nws_tools.json"),
+    # SpaceX - rocket launches, rockets, launchpads, and crew data
+    "spacex": os.path.join(current_dir, "data", "spacex_tools.json"),
+    # StackExchange - Q&A search, questions, and answers (StackOverflow etc.)
+    "stackexchange": os.path.join(current_dir, "data", "stackexchange_tools.json"),
+    # Jikan (MyAnimeList) - anime and manga search, details, and metadata
+    "jikan": os.path.join(current_dir, "data", "jikan_tools.json"),
+    # Rick and Morty - characters, episodes, and locations from the TV show
+    "rickandmorty": os.path.join(current_dir, "data", "rickandmorty_tools.json"),
+    # Carbon Intensity - UK electricity grid carbon intensity and generation mix
+    "carbon_intensity": os.path.join(
+        current_dir, "data", "carbon_intensity_tools.json"
+    ),
+    # University Domains - worldwide university search by name and country
+    "university": os.path.join(current_dir, "data", "university_tools.json"),
+    # IP Geolocation - IP address to geographic location lookup
+    "ip_geolocation": os.path.join(current_dir, "data", "ip_geolocation_tools.json"),
+    # USGS Water Services - real-time streamflow, water level, and temperature data
+    "usgs_water": os.path.join(current_dir, "data", "usgs_water_tools.json"),
+    # SWAPI (Star Wars API) - characters, planets, starships from Star Wars universe
+    "swapi": os.path.join(current_dir, "data", "swapi_tools.json"),
+    # Agify/Genderize/Nationalize - name-based age, gender, nationality prediction
+    "nameapis": os.path.join(current_dir, "data", "nameapis_tools.json"),
+    # Coinbase - cryptocurrency spot prices and exchange rates (no auth required)
+    "coinbase": os.path.join(current_dir, "data", "coinbase_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

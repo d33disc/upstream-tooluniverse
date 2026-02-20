@@ -1,0 +1,63 @@
+[
+  {
+    "name": "IPGeolocation_lookup",
+    "description": "Look up geolocation information for an IP address. Returns country, region, city, ZIP code, latitude/longitude, timezone, ISP, and organization. Uses the free ip-api.com service (no API key required, limited to 45 requests per minute).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "IP address to look up (IPv4 or IPv6, e.g., '8.8.8.8', '1.1.1.1')"
+        }
+      },
+      "required": ["ip"]
+    },
+    "fields": {
+      "endpoint": "http://ip-api.com/json/{ip}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"ip": "8.8.8.8"},
+      {"ip": "1.1.1.1"},
+      {"ip": "208.67.222.222"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "IP geolocation data",
+              "properties": {
+                "status": {"type": "string", "description": "'success' or 'fail'"},
+                "country": {"type": "string"},
+                "countryCode": {"type": "string"},
+                "region": {"type": "string"},
+                "regionName": {"type": "string"},
+                "city": {"type": "string"},
+                "zip": {"type": "string"},
+                "lat": {"type": "number"},
+                "lon": {"type": "number"},
+                "timezone": {"type": "string"},
+                "isp": {"type": "string"},
+                "org": {"type": "string"},
+                "as": {"type": "string", "description": "AS number and organization"},
+                "query": {"type": "string", "description": "The queried IP address"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

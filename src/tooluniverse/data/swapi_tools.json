@@ -1,0 +1,269 @@
+[
+  {
+    "name": "SWAPI_search_people",
+    "description": "Search for Star Wars characters by name. Returns character details including height, mass, hair/eye/skin color, birth year, gender, homeworld, films, species, vehicles, and starships. Data from the Star Wars API (SWAPI).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "Character name to search for (e.g., 'luke', 'darth vader', 'leia')"
+        }
+      },
+      "required": ["search"]
+    },
+    "fields": {
+      "endpoint": "https://swapi.dev/api/people/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "luke"},
+      {"search": "darth"},
+      {"search": "leia"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Star Wars character search results",
+              "properties": {
+                "count": {"type": "integer"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"},
+                      "height": {"type": "string"},
+                      "mass": {"type": "string"},
+                      "hair_color": {"type": "string"},
+                      "skin_color": {"type": "string"},
+                      "eye_color": {"type": "string"},
+                      "birth_year": {"type": "string"},
+                      "gender": {"type": "string"},
+                      "homeworld": {"type": "string"},
+                      "films": {"type": "array", "items": {"type": "string"}},
+                      "species": {"type": "array"},
+                      "vehicles": {"type": "array"},
+                      "starships": {"type": "array"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SWAPI_get_person",
+    "description": "Get detailed information about a specific Star Wars character by their SWAPI ID. Returns height, mass, appearance details, birth year, gender, homeworld URL, and lists of films, species, vehicles, and starships.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "person_id": {
+          "type": "integer",
+          "description": "SWAPI person ID (e.g., 1 for Luke Skywalker, 4 for Darth Vader)"
+        }
+      },
+      "required": ["person_id"]
+    },
+    "fields": {
+      "endpoint": "https://swapi.dev/api/people/{person_id}/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"person_id": 1},
+      {"person_id": 4},
+      {"person_id": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Star Wars character details",
+              "properties": {
+                "name": {"type": "string"},
+                "height": {"type": "string"},
+                "mass": {"type": "string"},
+                "hair_color": {"type": "string"},
+                "skin_color": {"type": "string"},
+                "eye_color": {"type": "string"},
+                "birth_year": {"type": "string"},
+                "gender": {"type": "string"},
+                "homeworld": {"type": "string"},
+                "films": {"type": "array"},
+                "species": {"type": "array"},
+                "vehicles": {"type": "array"},
+                "starships": {"type": "array"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SWAPI_search_planets",
+    "description": "Search for Star Wars planets by name. Returns planet details including climate, terrain, population, orbital period, gravity, and notable residents.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "Planet name to search for (e.g., 'tatooine', 'coruscant', 'hoth')"
+        }
+      },
+      "required": ["search"]
+    },
+    "fields": {
+      "endpoint": "https://swapi.dev/api/planets/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "tatooine"},
+      {"search": "coruscant"},
+      {"search": "hoth"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Star Wars planet search results",
+              "properties": {
+                "count": {"type": "integer"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"},
+                      "rotation_period": {"type": "string"},
+                      "orbital_period": {"type": "string"},
+                      "diameter": {"type": "string"},
+                      "climate": {"type": "string"},
+                      "gravity": {"type": "string"},
+                      "terrain": {"type": "string"},
+                      "surface_water": {"type": "string"},
+                      "population": {"type": "string"},
+                      "residents": {"type": "array"},
+                      "films": {"type": "array"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "SWAPI_search_starships",
+    "description": "Search for Star Wars starships by name. Returns starship specifications including model, manufacturer, cost, length, crew, passengers, cargo capacity, hyperdrive rating, and maximum speed.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "Starship name to search for (e.g., 'millennium falcon', 'x-wing', 'star destroyer')"
+        }
+      },
+      "required": ["search"]
+    },
+    "fields": {
+      "endpoint": "https://swapi.dev/api/starships/"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"search": "millennium falcon"},
+      {"search": "x-wing"},
+      {"search": "star destroyer"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Star Wars starship search results",
+              "properties": {
+                "count": {"type": "integer"},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"},
+                      "model": {"type": "string"},
+                      "manufacturer": {"type": "string"},
+                      "cost_in_credits": {"type": "string"},
+                      "length": {"type": "string"},
+                      "max_atmosphering_speed": {"type": "string"},
+                      "crew": {"type": "string"},
+                      "passengers": {"type": "string"},
+                      "cargo_capacity": {"type": "string"},
+                      "consumables": {"type": "string"},
+                      "hyperdrive_rating": {"type": "string"},
+                      "MGLT": {"type": "string"},
+                      "starship_class": {"type": "string"},
+                      "pilots": {"type": "array"},
+                      "films": {"type": "array"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {"type": "string"}
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

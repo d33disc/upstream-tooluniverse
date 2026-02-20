@@ -1,0 +1,109 @@
+[
+  {
+    "name": "Coinbase_get_spot_price",
+    "description": "Get the current spot price of a cryptocurrency in any fiat currency using the Coinbase API. Returns the current market price for buying (spot) cryptocurrency. No authentication required. Supports 100+ cryptocurrencies (BTC, ETH, SOL, ADA, etc.) and 50+ fiat currencies. Useful for financial analysis, crypto research, and price monitoring.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "currency_pair": {
+          "type": "string",
+          "description": "Currency pair in format CRYPTO-FIAT. Examples: 'BTC-USD', 'ETH-EUR', 'SOL-GBP', 'ADA-USD', 'XRP-JPY', 'DOGE-USD'"
+        }
+      },
+      "required": ["currency_pair"]
+    },
+    "fields": {
+      "endpoint": "https://api.coinbase.com/v2/prices/{currency_pair}/spot",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"currency_pair": "BTC-USD"},
+      {"currency_pair": "ETH-EUR"},
+      {"currency_pair": "SOL-USD"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Spot price data",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {"type": "string", "description": "Current spot price as string"},
+                    "base": {"type": "string", "description": "Cryptocurrency code (e.g., BTC)"},
+                    "currency": {"type": "string", "description": "Fiat currency code (e.g., USD)"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Coinbase_get_exchange_rates",
+    "description": "Get exchange rates for a cryptocurrency against all supported fiat currencies and other cryptocurrencies using the Coinbase API. Returns 600+ exchange rate pairs. No authentication required. Useful for multi-currency crypto price analysis and portfolio valuation.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Base cryptocurrency or fiat code. Examples: 'BTC', 'ETH', 'USD', 'EUR', 'SOL', 'ADA'"
+        }
+      },
+      "required": ["currency"]
+    },
+    "fields": {
+      "endpoint": "https://api.coinbase.com/v2/exchange-rates",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"currency": "BTC"},
+      {"currency": "ETH"},
+      {"currency": "SOL"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Exchange rate data",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {"type": "string", "description": "Base currency"},
+                    "rates": {"type": "object", "description": "Exchange rates (code: rate_string) for 600+ currencies"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
