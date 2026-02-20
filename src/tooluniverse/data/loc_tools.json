@@ -1,0 +1,99 @@
+[
+  {
+    "name": "LibraryOfCongress_search",
+    "description": "Search the Library of Congress digital collections containing 21M+ historical items including photos, maps, newspapers, manuscripts, books, and audio recordings. Returns digitized historical materials from American history, science, culture, and world events. Useful for historical research, archival studies, and finding primary sources.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query. Examples: 'Wright brothers airplane', 'Abraham Lincoln', 'Civil War photography', 'moon landing', 'Thomas Edison'"
+        },
+        "fa": {
+          "type": ["string", "null"],
+          "description": "Facet filter. Format: 'field:value'. Examples: 'subject:science', 'date:1900/1950', 'location:Washington, D.C.', 'contributor:Adams, Ansel'"
+        },
+        "dates": {
+          "type": ["string", "null"],
+          "description": "Date range filter (YYYY/YYYY format). Example: '1900/1950' for 1900-1950"
+        },
+        "c": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (default 25, max 150)"
+        },
+        "sp": {
+          "type": ["integer", "null"],
+          "description": "Start page for pagination"
+        },
+        "fo": {
+          "type": ["string", "null"],
+          "description": "Format type filter. Examples: 'online', 'digitized'"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://www.loc.gov/search/",
+      "params": {
+        "fo": "json",
+        "c": "10"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "Wright brothers airplane 1903"},
+      {"q": "Civil War photography", "fa": "subject:photography"},
+      {"q": "Thomas Edison inventions"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Library of Congress search results",
+              "properties": {
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "total": {"type": "integer", "description": "Total matching items"},
+                    "from": {"type": "integer"},
+                    "to": {"type": "integer"},
+                    "results": {"type": "integer"}
+                  }
+                },
+                "results": {
+                  "type": "array",
+                  "description": "List of historical items",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "Item URL/ID"},
+                      "title": {"type": ["string", "null"], "description": "Item title"},
+                      "date": {"type": ["string", "null"], "description": "Date"},
+                      "contributor": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Contributor names"},
+                      "description": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Item description"},
+                      "subject": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Subject headings"},
+                      "original_format": {"type": "array", "items": {"type": "string"}, "description": "Format (photo, map, manuscript, etc.)"},
+                      "online_format": {"type": "array", "items": {"type": "string"}, "description": "Available online formats"},
+                      "digitized": {"type": ["boolean", "null"], "description": "Whether item is digitized"},
+                      "url": {"type": "string", "description": "Item URL on loc.gov"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

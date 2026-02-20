@@ -899,6 +899,12 @@ default_tool_files = {
     ),
     # FEC - US Federal Election Commission candidate and financial data
     "fec": os.path.join(current_dir, "data", "fec_tools.json"),
+    # Smithsonian Open Access - 5M+ digitized museum objects from 19 Smithsonian institutions
+    "smithsonian": os.path.join(current_dir, "data", "smithsonian_tools.json"),
+    # Library of Congress - 21M+ digitized historical items (photos, maps, manuscripts)
+    "loc": os.path.join(current_dir, "data", "loc_tools.json"),
+    # SoilGrids - global soil property predictions at any location (ISRIC)
+    "soilgrids": os.path.join(current_dir, "data", "soilgrids_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
