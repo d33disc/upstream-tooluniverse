@@ -1,0 +1,82 @@
+[
+  {
+    "name": "CheapShark_search_game_deals",
+    "description": "Search for video game deals and discounts from multiple online stores (Steam, Epic, GOG, Humble, etc.) using the CheapShark API. Returns sale prices, original prices, discount percentages, Metacritic scores, and store names. No authentication required. Useful for game price tracking, finding discounts, and budget gaming research.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": ["string", "null"],
+          "description": "Game title to search for. Examples: 'cyberpunk', 'witcher', 'doom eternal', 'hollow knight'"
+        },
+        "sortBy": {
+          "type": ["string", "null"],
+          "description": "Sort order. Values: 'DealRating' (default), 'Title', 'Savings', 'Price', 'Metacritic', 'Reviews', 'Release', 'Store', 'Recent'"
+        },
+        "pageSize": {
+          "type": ["integer", "null"],
+          "description": "Results per page (1-60). Default: 10"
+        },
+        "upperPrice": {
+          "type": ["number", "null"],
+          "description": "Maximum price filter in USD. Example: 15.00 for games under $15"
+        },
+        "metacritic": {
+          "type": ["integer", "null"],
+          "description": "Minimum Metacritic score filter (0-100). Example: 80 for highly-rated games"
+        },
+        "onSale": {
+          "type": ["integer", "null"],
+          "description": "Filter to only on-sale games. Values: 1 (only sales), 0 (all). Default: 0"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://www.cheapshark.com/api/1.0/deals",
+      "params": {"sortBy": "DealRating"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"title": "witcher", "sortBy": "Savings"},
+      {"sortBy": "Price", "upperPrice": 5.0, "pageSize": 5},
+      {"title": "hollow knight", "sortBy": "DealRating"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of game deals",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dealID": {"type": "string", "description": "Unique deal identifier"},
+                  "title": {"type": "string", "description": "Game title"},
+                  "storeID": {"type": "string", "description": "Store ID (1=Steam, 25=Epic, 7=GOG, etc.)"},
+                  "normalPrice": {"type": "string", "description": "Original price in USD"},
+                  "salePrice": {"type": "string", "description": "Current sale price in USD"},
+                  "savings": {"type": "string", "description": "Discount percentage"},
+                  "dealRating": {"type": "string", "description": "CheapShark deal quality rating (0-10)"},
+                  "metacriticScore": {"type": "string", "description": "Metacritic score"},
+                  "steamRatingText": {"type": ["string", "null"], "description": "Steam user rating text"},
+                  "steamRatingPercent": {"type": "string", "description": "Steam rating percentage"},
+                  "releaseDate": {"type": "integer", "description": "Unix timestamp of release"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

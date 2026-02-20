@@ -1,41 +1,38 @@
 [
   {
-    "name": "CoinGecko_get_price",
-    "description": "Get current cryptocurrency prices from CoinGecko. Returns real-time prices for one or more cryptocurrencies in specified fiat currencies. Supports over 10,000+ cryptocurrencies and 60+ fiat currencies. No API key required for basic usage. Optionally includes 24h price change, market cap, and trading volume. Use comma-separated IDs for multiple coins (e.g., 'bitcoin,ethereum,cardano'). Use CoinGecko_search to find coin IDs.",
+    "name": "CoinGecko_get_coin_price",
+    "description": "Get current price, market cap, and 24h change for one or more cryptocurrencies using the CoinGecko public API. No authentication required for basic queries. Coin IDs use lowercase with hyphens: 'bitcoin', 'ethereum', 'solana'. Use CoinGecko_list_coins to find coin IDs.",
     "parameter": {
       "type": "object",
       "properties": {
         "ids": {
           "type": "string",
-          "description": "Comma-separated cryptocurrency IDs (CoinGecko IDs, NOT ticker symbols). Examples: 'bitcoin', 'ethereum', 'bitcoin,ethereum,cardano'. Use CoinGecko_search to find IDs."
+          "description": "Comma-separated coin IDs. Examples: 'bitcoin', 'bitcoin,ethereum', 'bitcoin,ethereum,solana,cardano'. Use lowercase with hyphens."
         },
         "vs_currencies": {
           "type": ["string", "null"],
-          "description": "Comma-separated fiat currency codes for price conversion. Examples: 'usd', 'usd,eur,gbp', 'jpy'. Default: 'usd'"
-        },
-        "include_24hr_change": {
-          "type": ["string", "null"],
-          "description": "Include 24-hour price change percentage. Set to 'true' to include. Default: 'false'"
+          "description": "Target currency for prices, comma-separated. Default: 'usd'. Examples: 'usd', 'usd,eur,gbp', 'btc'"
         },
         "include_market_cap": {
           "type": ["string", "null"],
-          "description": "Include market capitalization. Set to 'true' to include. Default: 'false'"
+          "description": "Include market cap in response. Values: 'true', 'false'. Default: false"
         },
-        "include_24hr_vol": {
+        "include_24hr_change": {
           "type": ["string", "null"],
-          "description": "Include 24-hour trading volume. Set to 'true' to include. Default: 'false'"
+          "description": "Include 24h price change percentage. Values: 'true', 'false'. Default: false"
         }
       },
       "required": ["ids"]
     },
     "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/simple/price"
+      "endpoint": "https://api.coingecko.com/api/v3/simple/price",
+      "params": {"vs_currencies": "usd"}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"ids": "bitcoin", "vs_currencies": "usd"},
-      {"ids": "bitcoin,ethereum,cardano", "vs_currencies": "usd,eur", "include_24hr_change": "true"},
-      {"ids": "ethereum", "vs_currencies": "usd", "include_market_cap": "true", "include_24hr_vol": "true"}
+      {"ids": "bitcoin,ethereum", "vs_currencies": "usd"},
+      {"ids": "bitcoin", "vs_currencies": "usd,eur", "include_24hr_change": "true"},
+      {"ids": "solana,cardano,polkadot", "vs_currencies": "usd", "include_market_cap": "true"}
     ],
     "return_schema": {
       "oneOf": [
@@ -44,79 +41,15 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Price data keyed by cryptocurrency ID. Each coin key maps to an object with prices in requested currencies, plus optional 24h change, market cap, and volume fields.",
+              "description": "Price data keyed by coin ID. Each coin maps to currency->price pairs.",
               "additionalProperties": {
                 "type": "object",
-                "description": "Price data for a single cryptocurrency",
-                "additionalProperties": {"type": "number"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "CoinGecko_search",
-    "description": "Search CoinGecko for cryptocurrencies, exchanges, and categories by name or symbol. Returns matching coins with their CoinGecko IDs, names, symbols, market cap rank, and thumbnail images. Use this to find the correct CoinGecko ID for use with other CoinGecko tools. Example: searching 'ethereum' returns Ethereum (id: 'ethereum', symbol: 'ETH'), Ethereum Classic, and related tokens.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "Search query - cryptocurrency name or ticker symbol. Examples: 'bitcoin', 'ETH', 'solana', 'dogecoin'"
-        }
-      },
-      "required": ["query"]
-    },
-    "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/search"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"query": "bitcoin"},
-      {"query": "ethereum"},
-      {"query": "solana"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Search results from CoinGecko",
-              "properties": {
-                "coins": {
-                  "type": "array",
-                  "description": "Matching cryptocurrencies",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string", "description": "CoinGecko coin ID (use this in other CoinGecko tools)"},
-                      "name": {"type": "string", "description": "Full coin name"},
-                      "api_symbol": {"type": "string"},
-                      "symbol": {"type": "string", "description": "Ticker symbol (e.g., BTC, ETH)"},
-                      "market_cap_rank": {"type": ["integer", "null"], "description": "Market capitalization rank"},
-                      "thumb": {"type": "string", "description": "Thumbnail image URL"},
-                      "large": {"type": "string", "description": "Large image URL"}
-                    }
-                  }
-                },
-                "exchanges": {
-                  "type": "array",
-                  "description": "Matching exchanges"
-                },
-                "categories": {
-                  "type": "array",
-                  "description": "Matching categories"
+                "description": "Price data for a coin",
+                "properties": {
+                  "usd": {"type": "number", "description": "Price in USD"},
+                  "eur": {"type": "number", "description": "Price in EUR"},
+                  "usd_market_cap": {"type": "number", "description": "Market cap in USD (if requested)"},
+                  "usd_24h_change": {"type": "number", "description": "24h change % in USD (if requested)"}
                 }
               }
             },
@@ -133,33 +66,31 @@
     }
   },
   {
-    "name": "CoinGecko_get_coin_detail",
-    "description": "Get comprehensive details about a specific cryptocurrency from CoinGecko. Returns current market data (price, market cap, volume, supply, ATH/ATL), description, links (homepage, blockchain explorers, social media), genesis date, and market rankings. Use the CoinGecko coin ID (from CoinGecko_search). Example: 'bitcoin' returns Bitcoin's full profile with current price ~$67,000, market cap ~$1.3T, and complete project information.",
+    "name": "CoinGecko_get_coin_info",
+    "description": "Get comprehensive information about a specific cryptocurrency from CoinGecko, including description, market data, links, and metadata. No authentication required. Returns detailed coin profile with market cap rank, circulating supply, all-time high/low, and social links.",
     "parameter": {
       "type": "object",
       "properties": {
-        "coin_id": {
+        "id": {
           "type": "string",
-          "description": "CoinGecko cryptocurrency ID. Examples: 'bitcoin', 'ethereum', 'cardano', 'solana', 'dogecoin'. Use CoinGecko_search to find IDs."
+          "description": "CoinGecko coin ID. Examples: 'bitcoin', 'ethereum', 'solana', 'cardano', 'polkadot'. Use lowercase with hyphens."
+        },
+        "localization": {
+          "type": ["string", "null"],
+          "description": "Include localized names. Values: 'true', 'false'. Default: false (set to false for smaller response)"
         }
       },
-      "required": ["coin_id"]
+      "required": ["id"]
     },
     "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/coins/{coin_id}",
-      "params": {
-        "localization": "false",
-        "tickers": "false",
-        "community_data": "false",
-        "developer_data": "false",
-        "sparkline": "false"
-      }
+      "endpoint": "https://api.coingecko.com/api/v3/coins/{id}",
+      "params": {"localization": "false", "tickers": "false", "community_data": "false", "developer_data": "false"}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"coin_id": "bitcoin"},
-      {"coin_id": "ethereum"},
-      {"coin_id": "cardano"}
+      {"id": "bitcoin"},
+      {"id": "ethereum"},
+      {"id": "solana"}
     ],
     "return_schema": {
       "oneOf": [
@@ -168,268 +99,32 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Comprehensive cryptocurrency information",
+              "description": "Comprehensive coin information",
               "properties": {
-                "id": {"type": "string", "description": "CoinGecko coin ID"},
-                "symbol": {"type": "string", "description": "Ticker symbol"},
-                "name": {"type": "string", "description": "Full name"},
-                "web_slug": {"type": "string"},
-                "block_time_in_minutes": {"type": ["integer", "null"]},
-                "hashing_algorithm": {"type": ["string", "null"], "description": "Mining/consensus algorithm"},
-                "categories": {"type": "array", "items": {"type": "string"}, "description": "Categories (e.g., 'Layer 1', 'Smart Contract Platform')"},
-                "description": {"type": "object", "description": "Coin description in various languages", "properties": {"en": {"type": "string"}}},
-                "links": {
-                  "type": "object",
-                  "description": "Project links",
-                  "properties": {
-                    "homepage": {"type": "array", "items": {"type": "string"}},
-                    "blockchain_site": {"type": "array", "items": {"type": "string"}},
-                    "subreddit_url": {"type": ["string", "null"]},
-                    "repos_url": {"type": "object"}
-                  }
-                },
-                "image": {"type": "object", "properties": {"thumb": {"type": "string"}, "small": {"type": "string"}, "large": {"type": "string"}}},
-                "genesis_date": {"type": ["string", "null"], "description": "Blockchain genesis date"},
+                "id": {"type": "string"},
+                "symbol": {"type": "string", "description": "Ticker symbol (e.g., btc, eth)"},
+                "name": {"type": "string"},
+                "description": {"type": "object", "properties": {"en": {"type": "string"}}},
                 "market_cap_rank": {"type": ["integer", "null"]},
                 "market_data": {
                   "type": "object",
-                  "description": "Current market data",
                   "properties": {
-                    "current_price": {"type": "object", "description": "Current price in various currencies", "additionalProperties": {"type": "number"}},
-                    "market_cap": {"type": "object", "additionalProperties": {"type": "number"}},
-                    "total_volume": {"type": "object", "additionalProperties": {"type": "number"}},
-                    "circulating_supply": {"type": "number"},
-                    "total_supply": {"type": ["number", "null"]},
-                    "max_supply": {"type": ["number", "null"]},
-                    "ath": {"type": "object", "description": "All-time high prices", "additionalProperties": {"type": "number"}},
-                    "ath_date": {"type": "object", "additionalProperties": {"type": "string"}},
-                    "atl": {"type": "object", "description": "All-time low prices", "additionalProperties": {"type": "number"}},
+                    "current_price": {"type": "object", "properties": {"usd": {"type": "number"}}},
+                    "market_cap": {"type": "object", "properties": {"usd": {"type": "number"}}},
+                    "total_volume": {"type": "object", "properties": {"usd": {"type": "number"}}},
                     "price_change_percentage_24h": {"type": ["number", "null"]},
-                    "price_change_percentage_7d": {"type": ["number", "null"]},
-                    "price_change_percentage_30d": {"type": ["number", "null"]}
+                    "circulating_supply": {"type": ["number", "null"]},
+                    "total_supply": {"type": ["number", "null"]},
+                    "ath": {"type": "object", "properties": {"usd": {"type": "number"}}},
+                    "atl": {"type": "object", "properties": {"usd": {"type": "number"}}}
                   }
                 },
-                "last_updated": {"type": "string"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "CoinGecko_get_market_chart",
-    "description": "Get historical market data (price, market cap, volume) for a cryptocurrency over time from CoinGecko. Returns arrays of timestamped data points for charting price history. Granularity depends on the days parameter: 1 day = 5-minute intervals, 2-90 days = hourly, 91+ days = daily. Use this for price trend analysis, volatility calculation, or building historical charts. Example: 'bitcoin' with days=7 returns ~169 hourly price points for the past week.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "coin_id": {
-          "type": "string",
-          "description": "CoinGecko cryptocurrency ID. Examples: 'bitcoin', 'ethereum', 'solana'"
-        },
-        "vs_currency": {
-          "type": ["string", "null"],
-          "description": "Target fiat currency for price data. Examples: 'usd', 'eur', 'gbp'. Default: 'usd'"
-        },
-        "days": {
-          "type": ["string", "null"],
-          "description": "Number of days of historical data. Examples: '1' (24h), '7' (1 week), '30' (1 month), '365' (1 year), 'max' (all time). Default: '7'"
-        }
-      },
-      "required": ["coin_id"]
-    },
-    "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"coin_id": "bitcoin", "vs_currency": "usd", "days": "7"},
-      {"coin_id": "ethereum", "vs_currency": "usd", "days": "30"},
-      {"coin_id": "cardano", "vs_currency": "eur", "days": "1"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Historical market data with timestamped arrays",
-              "properties": {
-                "prices": {
-                  "type": "array",
-                  "description": "Array of [timestamp_ms, price] pairs",
-                  "items": {
-                    "type": "array",
-                    "items": {"type": "number"},
-                    "description": "[Unix timestamp in milliseconds, price in vs_currency]"
-                  }
-                },
-                "market_caps": {
-                  "type": "array",
-                  "description": "Array of [timestamp_ms, market_cap] pairs",
-                  "items": {
-                    "type": "array",
-                    "items": {"type": "number"}
-                  }
-                },
-                "total_volumes": {
-                  "type": "array",
-                  "description": "Array of [timestamp_ms, volume] pairs",
-                  "items": {
-                    "type": "array",
-                    "items": {"type": "number"}
-                  }
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "CoinGecko_get_coin_markets",
-    "description": "Get ranked cryptocurrency market data from CoinGecko. Returns a list of coins sorted by market cap (or other criteria) with current price, market cap, volume, 24h change, supply data, and all-time high/low. Useful for market overview dashboards, comparing top coins, and screening crypto assets. Supports pagination for full market scanning. No authentication required.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "vs_currency": {
-          "type": "string",
-          "description": "Target currency for prices. Examples: 'usd', 'eur', 'btc', 'eth'"
-        },
-        "order": {
-          "type": ["string", "null"],
-          "description": "Sort order. Options: 'market_cap_desc' (default), 'market_cap_asc', 'volume_desc', 'volume_asc', 'id_asc', 'id_desc'"
-        },
-        "per_page": {
-          "type": ["integer", "null"],
-          "description": "Number of results per page (1-250). Default: 100"
-        },
-        "page": {
-          "type": ["integer", "null"],
-          "description": "Page number for pagination. Default: 1"
-        }
-      },
-      "required": ["vs_currency"]
-    },
-    "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/coins/markets",
-      "params": {}
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"vs_currency": "usd", "order": "market_cap_desc", "per_page": 10, "page": 1},
-      {"vs_currency": "eur", "per_page": 5},
-      {"vs_currency": "usd", "order": "volume_desc", "per_page": 10}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "List of coins with comprehensive market data",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {"type": "string", "description": "CoinGecko coin ID"},
-                  "symbol": {"type": "string", "description": "Coin ticker symbol"},
-                  "name": {"type": "string", "description": "Full coin name"},
-                  "current_price": {"type": "number", "description": "Current price in vs_currency"},
-                  "market_cap": {"type": "number", "description": "Market capitalization"},
-                  "market_cap_rank": {"type": ["integer", "null"], "description": "Market cap ranking"},
-                  "total_volume": {"type": "number", "description": "24h trading volume"},
-                  "high_24h": {"type": ["number", "null"], "description": "24h high price"},
-                  "low_24h": {"type": ["number", "null"], "description": "24h low price"},
-                  "price_change_24h": {"type": ["number", "null"], "description": "24h absolute price change"},
-                  "price_change_percentage_24h": {"type": ["number", "null"], "description": "24h price change percentage"},
-                  "circulating_supply": {"type": ["number", "null"]},
-                  "total_supply": {"type": ["number", "null"]},
-                  "max_supply": {"type": ["number", "null"]},
-                  "ath": {"type": ["number", "null"], "description": "All-time high price"},
-                  "ath_date": {"type": ["string", "null"], "description": "All-time high date"},
-                  "atl": {"type": ["number", "null"], "description": "All-time low price"},
-                  "last_updated": {"type": "string"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "CoinGecko_get_trending",
-    "description": "Get trending cryptocurrencies on CoinGecko based on search popularity in the last 24 hours. Returns the top 15 trending coins with their CoinGecko IDs, symbols, market cap rankings, and price data. Useful for discovering hot and emerging crypto assets, monitoring market sentiment, and identifying potential movers. No authentication required.",
-    "parameter": {
-      "type": "object",
-      "properties": {},
-      "required": []
-    },
-    "fields": {
-      "endpoint": "https://api.coingecko.com/api/v3/search/trending",
-      "params": {}
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Trending data with coins and categories",
-              "properties": {
-                "coins": {
-                  "type": "array",
-                  "description": "List of trending coins ranked by search popularity",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "item": {
-                        "type": "object",
-                        "properties": {
-                          "id": {"type": "string", "description": "CoinGecko coin ID"},
-                          "name": {"type": "string"},
-                          "symbol": {"type": "string"},
-                          "market_cap_rank": {"type": ["integer", "null"]},
-                          "score": {"type": "integer", "description": "Trending score (0 = most trending)"},
-                          "data": {
-                            "type": "object",
-                            "properties": {
-                              "price": {"type": "number"},
-                              "price_btc": {"type": "string"}
-                            }
-                          }
-                        }
-                      }
-                    }
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "homepage": {"type": "array", "items": {"type": "string"}},
+                    "blockchain_site": {"type": "array", "items": {"type": "string"}},
+                    "repos_url": {"type": "object"}
                   }
                 }
               }

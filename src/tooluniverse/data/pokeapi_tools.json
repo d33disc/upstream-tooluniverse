@@ -1,25 +1,26 @@
 [
   {
     "name": "PokeAPI_get_pokemon",
-    "description": "Get detailed information about a Pokemon species from PokeAPI. Returns base stats (HP, Attack, Defense, Speed), types, abilities, height, weight, and experience values. The Pokemon database contains 1000+ species. Useful for educational purposes, gaming AI, and exploring creature databases. Search by English lowercase name or national Pokedex number.",
+    "description": "Get detailed information about a Pokemon by name or ID using the PokeAPI. Returns stats, types, abilities, moves, height, weight, and sprites. No authentication required. Useful for game data analysis, educational tools about species, and biodiversity-like analyses of fictional creatures.",
     "parameter": {
       "type": "object",
       "properties": {
-        "name_or_id": {
+        "pokemon": {
           "type": "string",
-          "description": "Pokemon name (lowercase, use hyphens for spaces) or Pokedex number. Examples: 'pikachu', 'charizard', 'mewtwo', 'bulbasaur', '25' (Pikachu), '150' (Mewtwo)"
+          "description": "Pokemon name (lowercase) or national Pokedex ID. Examples: 'pikachu', 'charizard', 'mewtwo', '25' (Pikachu), '150' (Mewtwo)"
         }
       },
-      "required": ["name_or_id"]
+      "required": ["pokemon"]
     },
     "fields": {
-      "endpoint": "https://pokeapi.co/api/v2/pokemon/{name_or_id}"
+      "endpoint": "https://pokeapi.co/api/v2/pokemon/{pokemon}",
+      "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name_or_id": "pikachu"},
-      {"name_or_id": "charizard"},
-      {"name_or_id": "mewtwo"}
+      {"pokemon": "pikachu"},
+      {"pokemon": "charizard"},
+      {"pokemon": "150"}
     ],
     "return_schema": {
       "oneOf": [
@@ -30,32 +31,33 @@
               "type": "object",
               "description": "Pokemon data",
               "properties": {
-                "id": {"type": "integer", "description": "National Pokedex number"},
-                "name": {"type": "string", "description": "Pokemon name"},
-                "base_experience": {"type": ["integer", "null"], "description": "Base experience yield"},
+                "id": {"type": "integer", "description": "National Pokedex ID"},
+                "name": {"type": "string"},
                 "height": {"type": "integer", "description": "Height in decimetres"},
                 "weight": {"type": "integer", "description": "Weight in hectograms"},
-                "is_default": {"type": "boolean"},
+                "base_experience": {"type": ["integer", "null"]},
                 "types": {
                   "type": "array",
-                  "description": "Pokemon types (e.g. electric, water, fire)",
                   "items": {
                     "type": "object",
                     "properties": {
                       "slot": {"type": "integer"},
-                      "type": {
-                        "type": "object",
-                        "properties": {
-                          "name": {"type": "string", "description": "Type name"},
-                          "url": {"type": "string"}
-                        }
-                      }
+                      "type": {"type": "object", "properties": {"name": {"type": "string"}}}
+                    }
+                  }
+                },
+                "stats": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "base_stat": {"type": "integer"},
+                      "stat": {"type": "object", "properties": {"name": {"type": "string"}}}
                     }
                   }
                 },
                 "abilities": {
                   "type": "array",
-                  "description": "Pokemon abilities",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -64,16 +66,10 @@
                     }
                   }
                 },
-                "stats": {
-                  "type": "array",
-                  "description": "Base stats (HP, Attack, Defense, Sp. Attack, Sp. Defense, Speed)",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "base_stat": {"type": "integer", "description": "Base stat value"},
-                      "effort": {"type": "integer"},
-                      "stat": {"type": "object", "properties": {"name": {"type": "string"}}}
-                    }
+                "sprites": {
+                  "type": "object",
+                  "properties": {
+                    "front_default": {"type": ["string", "null"], "description": "URL to front sprite image"}
                   }
                 }
               }
@@ -91,26 +87,27 @@
     }
   },
   {
-    "name": "PokeAPI_get_species",
-    "description": "Get species-level biological information about a Pokemon from PokeAPI. Returns habitat, color, shape, legendary/mythical status, egg groups, evolution chain, flavor text descriptions, and Pokedex entries in multiple languages. Useful for understanding Pokemon biology, classification, and game lore.",
+    "name": "PokeAPI_get_pokemon_species",
+    "description": "Get species-level information about a Pokemon from the PokeAPI, including flavor text (Pokedex entries), evolution chain ID, capture rate, base happiness, and whether it is legendary or mythical. No authentication required.",
     "parameter": {
       "type": "object",
       "properties": {
-        "name_or_id": {
+        "species": {
           "type": "string",
-          "description": "Pokemon species name (lowercase) or Pokedex number. Examples: 'pikachu', 'eevee', 'mew', 'snorlax', '133' (Eevee)"
+          "description": "Pokemon species name (lowercase) or ID. Examples: 'pikachu', 'eevee', 'mew', '133' (Eevee)"
         }
       },
-      "required": ["name_or_id"]
+      "required": ["species"]
     },
     "fields": {
-      "endpoint": "https://pokeapi.co/api/v2/pokemon-species/{name_or_id}"
+      "endpoint": "https://pokeapi.co/api/v2/pokemon-species/{species}",
+      "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name_or_id": "pikachu"},
-      {"name_or_id": "eevee"},
-      {"name_or_id": "mew"}
+      {"species": "pikachu"},
+      {"species": "eevee"},
+      {"species": "mewtwo"}
     ],
     "return_schema": {
       "oneOf": [
@@ -119,35 +116,33 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Pokemon species biological data",
+              "description": "Pokemon species data",
               "properties": {
                 "id": {"type": "integer"},
                 "name": {"type": "string"},
-                "base_happiness": {"type": "integer"},
-                "capture_rate": {"type": "integer", "description": "Capture rate (0-255, higher = easier)"},
-                "is_baby": {"type": "boolean"},
                 "is_legendary": {"type": "boolean"},
                 "is_mythical": {"type": "boolean"},
-                "habitat": {"type": ["object", "null"], "description": "Natural habitat"},
-                "color": {"type": "object", "description": "Body color category"},
-                "shape": {"type": ["object", "null"], "description": "Body shape category"},
-                "egg_groups": {"type": "array", "description": "Breeding egg groups"},
-                "generation": {"type": "object", "description": "Game generation introduced"},
-                "evolution_chain": {
-                  "type": "object",
-                  "description": "Link to evolution chain data",
-                  "properties": {"url": {"type": "string"}}
-                },
+                "capture_rate": {"type": "integer", "description": "Capture rate (0-255, higher = easier)"},
+                "base_happiness": {"type": ["integer", "null"]},
                 "flavor_text_entries": {
                   "type": "array",
-                  "description": "Pokedex entries (descriptions) in various languages",
+                  "description": "Pokedex entries in multiple languages",
                   "items": {
                     "type": "object",
                     "properties": {
-                      "flavor_text": {"type": "string", "description": "Pokedex entry text"},
-                      "language": {"type": "object", "properties": {"name": {"type": "string"}}}
+                      "flavor_text": {"type": "string"},
+                      "language": {"type": "object", "properties": {"name": {"type": "string"}}},
+                      "version": {"type": "object", "properties": {"name": {"type": "string"}}}
                     }
                   }
+                },
+                "evolution_chain": {
+                  "type": "object",
+                  "properties": {"url": {"type": "string", "description": "URL to evolution chain data"}}
+                },
+                "genera": {
+                  "type": "array",
+                  "description": "Species classification (e.g., 'Mouse Pokemon')"
                 }
               }
             },

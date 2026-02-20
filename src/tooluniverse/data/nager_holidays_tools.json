@@ -1,7 +1,7 @@
 [
   {
-    "name": "NagerDate_get_public_holidays",
-    "description": "Get official public holidays for any country and year using the Nager.Date API. Covers 120 countries with official public holiday dates, names, and types. Returns date, local name, English name, whether it's a nationwide holiday, and county-specific variations. No authentication required. Useful for scheduling, calendar applications, and international business research.",
+    "name": "PublicHolidays_get_by_country",
+    "description": "Get public holidays for a specific country and year using the Nager.Date API. Returns holiday dates, names, types (Public/Bank/Optional), and whether they are national or regional. No authentication required. Covers 100+ countries. Useful for business calendar planning, date calculations, and international scheduling.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -11,19 +11,19 @@
         },
         "countryCode": {
           "type": "string",
-          "description": "ISO 3166-1 alpha-2 country code. Examples: 'US', 'GB', 'DE', 'FR', 'JP', 'CA', 'AU', 'BR', 'CN', 'IN'"
+          "description": "ISO 3166-1 alpha-2 country code. Examples: 'US' (USA), 'GB' (UK), 'DE' (Germany), 'FR' (France), 'JP' (Japan), 'AU' (Australia), 'CA' (Canada)"
         }
       },
       "required": ["year", "countryCode"]
     },
     "fields": {
-      "endpoint": "https://date.nager.at/api/v3/publicholidays/{year}/{countryCode}",
+      "endpoint": "https://date.nager.at/api/v3/PublicHolidays/{year}/{countryCode}",
       "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"year": 2025, "countryCode": "US"},
-      {"year": 2025, "countryCode": "DE"},
+      {"year": 2024, "countryCode": "US"},
+      {"year": 2024, "countryCode": "DE"},
       {"year": 2025, "countryCode": "JP"}
     ],
     "return_schema": {
@@ -33,19 +33,19 @@
           "properties": {
             "data": {
               "type": "array",
-              "description": "List of public holidays",
+              "description": "List of public holidays for the country and year",
               "items": {
                 "type": "object",
                 "properties": {
-                  "date": {"type": "string", "description": "Holiday date (YYYY-MM-DD)"},
+                  "date": {"type": "string", "description": "Holiday date in ISO format (YYYY-MM-DD)"},
                   "localName": {"type": "string", "description": "Holiday name in local language"},
                   "name": {"type": "string", "description": "Holiday name in English"},
-                  "countryCode": {"type": "string", "description": "Country code"},
-                  "fixed": {"type": "boolean", "description": "True if same date every year"},
-                  "global": {"type": "boolean", "description": "True if nationwide (not just some regions)"},
-                  "counties": {"type": ["array", "null"], "items": {"type": "string"}, "description": "County/state codes if not nationwide"},
-                  "launchYear": {"type": ["integer", "null"], "description": "Year this holiday was established"},
-                  "types": {"type": "array", "items": {"type": "string"}, "description": "Holiday types (Public, Bank, School, etc.)"}
+                  "countryCode": {"type": "string"},
+                  "fixed": {"type": "boolean", "description": "Whether it is on the same date each year"},
+                  "global": {"type": "boolean", "description": "Whether it applies nationwide"},
+                  "counties": {"type": ["array", "null"], "items": {"type": "string"}, "description": "State/region codes if not nationwide"},
+                  "launchYear": {"type": ["integer", "null"]},
+                  "types": {"type": "array", "items": {"type": "string"}, "description": "Types: Public, Bank, School, Optional, Authorities, Observance"}
                 }
               }
             },
@@ -62,31 +62,31 @@
     }
   },
   {
-    "name": "NagerDate_check_is_workday",
-    "description": "Check if a specific date is a public holiday or workday for a given country using the Nager.Date API. Returns true if the date is a workday (not a public holiday or weekend). Useful for business scheduling and deadline calculations. No authentication required.",
+    "name": "PublicHolidays_check_is_holiday",
+    "description": "Check if a specific date is a public holiday in a given country using the Nager.Date API. Returns whether today or a specific date is a public holiday. No authentication required. Useful for business logic, date validation, and scheduling applications.",
     "parameter": {
       "type": "object",
       "properties": {
+        "date": {
+          "type": "string",
+          "description": "Date to check in ISO format (YYYY-MM-DD). Examples: '2024-12-25', '2024-07-04', '2025-01-01'"
+        },
         "countryCode": {
           "type": "string",
           "description": "ISO 3166-1 alpha-2 country code. Examples: 'US', 'GB', 'DE', 'FR', 'JP'"
-        },
-        "date": {
-          "type": "string",
-          "description": "Date to check (YYYY-MM-DD format). Examples: '2025-12-25', '2025-07-04', '2025-01-01'"
         }
       },
-      "required": ["countryCode", "date"]
+      "required": ["date", "countryCode"]
     },
     "fields": {
-      "endpoint": "https://date.nager.at/api/v3/IsPublicHoliday/{date}/{countryCode}",
+      "endpoint": "https://date.nager.at/api/v3/IsTodayPublicHoliday/{countryCode}",
       "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"countryCode": "US", "date": "2025-12-25"},
-      {"countryCode": "GB", "date": "2025-12-26"},
-      {"countryCode": "US", "date": "2025-07-04"}
+      {"date": "2024-12-25", "countryCode": "US"},
+      {"date": "2024-07-04", "countryCode": "US"},
+      {"date": "2024-12-25", "countryCode": "DE"}
     ],
     "return_schema": {
       "oneOf": [
@@ -95,7 +95,10 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Holiday check result (true=is public holiday, false=not a holiday)"
+              "description": "Holiday check result",
+              "properties": {
+                "is_holiday": {"type": "boolean", "description": "Whether the date is a public holiday (HTTP 200 = yes, 204 = no)"}
+              }
             },
             "metadata": {"type": "object"}
           },

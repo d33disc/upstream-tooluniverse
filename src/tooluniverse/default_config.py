@@ -1089,6 +1089,8 @@ default_tool_files = {
     "corporate_bs": os.path.join(current_dir, "data", "corporate_bs_tools.json"),
     # Wikipedia extended - featured daily content and on-this-day events
     "wikipedia_ext": os.path.join(current_dir, "data", "wikipedia_ext_tools.json"),
+    # CheapShark - video game deals and discounts from multiple stores
+    "cheapshark": os.path.join(current_dir, "data", "cheapshark_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

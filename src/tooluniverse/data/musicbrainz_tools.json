@@ -1,32 +1,114 @@
 [
   {
-    "name": "MusicBrainz_search_artists",
-    "description": "Search MusicBrainz for musical artists, bands, and composers. MusicBrainz is the world's largest open music encyclopedia with 1.8M+ artists. Returns artist names, disambiguation, type (person/group/orchestra), country, begin/end dates, and MusicBrainz IDs (MBIDs). Use MBIDs to get full artist details or discographies. Example artists: 'The Beatles' (MBID: b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d), 'Bob Dylan', 'Beethoven', 'Taylor Swift'.",
+    "name": "MusicBrainz_search_recordings",
+    "description": "Search for music recordings (songs) in the MusicBrainz open music encyclopedia. Returns title, artist, duration, release information, and unique MBIDs. Uses Lucene syntax: 'artist:beatles AND title:yesterday'. No authentication required. Useful for music metadata lookup, discography research, and audio fingerprinting.",
     "parameter": {
       "type": "object",
       "properties": {
         "query": {
           "type": "string",
-          "description": "Artist name or search query. Supports Lucene syntax: 'artist:Beatles', 'country:GB', 'type:group AND begin:[1960 TO 1970]'"
+          "description": "Lucene search query. Use field:value syntax. Fields: artist (artist name), title (song title), release (album), year. Examples: 'artist:beatles AND title:yesterday', 'artist:\"pink floyd\" AND release:\"dark side\"', 'title:bohemian rhapsody'"
         },
         "limit": {
           "type": ["integer", "null"],
-          "description": "Maximum results to return (1-100, default 25)"
+          "description": "Number of results (1-100). Default: 10"
         }
       },
       "required": ["query"]
     },
     "fields": {
-      "endpoint": "https://musicbrainz.org/ws/2/artist/",
-      "params": {
-        "fmt": "json"
-      }
+      "endpoint": "https://musicbrainz.org/ws/2/recording",
+      "params": {"fmt": "json"}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "Beatles", "limit": 3},
-      {"query": "Bob Dylan", "limit": 3},
-      {"query": "Taylor Swift", "limit": 2}
+      {"query": "artist:beatles AND title:yesterday", "limit": 3},
+      {"query": "artist:\"pink floyd\" AND release:\"dark side of the moon\"", "limit": 3},
+      {"query": "title:bohemian rhapsody AND artist:queen", "limit": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "MusicBrainz recording search results",
+              "properties": {
+                "count": {"type": "integer", "description": "Total matching recordings"},
+                "recordings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "MusicBrainz Recording ID (MBID)"},
+                      "title": {"type": "string"},
+                      "length": {"type": ["integer", "null"], "description": "Duration in milliseconds"},
+                      "score": {"type": "integer", "description": "Search relevance score"},
+                      "artist-credit": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {"type": ["string", "null"]},
+                            "artist": {"type": "object", "properties": {"name": {"type": "string"}, "id": {"type": "string"}}}
+                          }
+                        }
+                      },
+                      "releases": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "title": {"type": "string", "description": "Album/release title"},
+                            "date": {"type": ["string", "null"]},
+                            "id": {"type": "string", "description": "Release MBID"}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "MusicBrainz_search_artists",
+    "description": "Search for music artists in the MusicBrainz open music encyclopedia. Returns artist name, disambiguation, type (person/group), country, begin/end dates, and MBID. No authentication required. Useful for discography research, music metadata, and finding canonical artist identifiers.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Artist search query. Examples: 'beatles', 'david bowie', 'radiohead', 'mozart'. Use 'artist:\"exact name\"' for exact matching."
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results (1-100). Default: 10"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://musicbrainz.org/ws/2/artist",
+      "params": {"fmt": "json"}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "beatles", "limit": 3},
+      {"query": "david bowie", "limit": 3},
+      {"query": "radiohead", "limit": 3}
     ],
     "return_schema": {
       "oneOf": [
@@ -43,147 +125,24 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {"type": "string", "description": "MusicBrainz ID (MBID)"},
+                      "id": {"type": "string", "description": "MusicBrainz Artist ID (MBID)"},
                       "name": {"type": "string"},
                       "sort-name": {"type": "string"},
                       "type": {"type": ["string", "null"], "description": "Person, Group, Orchestra, etc."},
-                      "country": {"type": ["string", "null"]},
-                      "disambiguation": {"type": ["string", "null"]},
-                      "score": {"type": "integer"},
-                      "life-span": {"type": "object"}
+                      "country": {"type": ["string", "null"], "description": "2-letter country code"},
+                      "disambiguation": {"type": ["string", "null"], "description": "Disambiguation info"},
+                      "life-span": {
+                        "type": "object",
+                        "properties": {
+                          "begin": {"type": ["string", "null"]},
+                          "end": {"type": ["string", "null"]},
+                          "ended": {"type": "boolean"}
+                        }
+                      },
+                      "score": {"type": "integer"}
                     }
                   }
                 }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "MusicBrainz_search_releases",
-    "description": "Search MusicBrainz for albums, singles, EPs, and other music releases. Returns release title, artist, date, country, format, barcode, and MusicBrainz IDs. MusicBrainz has 2M+ releases. Use Lucene syntax for complex queries: 'artist:Beatles AND release:Abbey', 'date:1969', 'country:GB AND format:Vinyl'.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "Release search query (e.g., 'Abbey Road', 'artist:Beatles', 'artist:Bach AND type:album', 'barcode:5051011378520')"
-        },
-        "limit": {
-          "type": ["integer", "null"],
-          "description": "Maximum results to return (1-100, default 25)"
-        }
-      },
-      "required": ["query"]
-    },
-    "fields": {
-      "endpoint": "https://musicbrainz.org/ws/2/release/",
-      "params": {
-        "fmt": "json"
-      }
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"query": "artist:Beatles AND release:Abbey Road", "limit": 3},
-      {"query": "Dark Side of the Moon", "limit": 3},
-      {"query": "artist:Beethoven AND type:album", "limit": 3}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "MusicBrainz release search results",
-              "properties": {
-                "count": {"type": "integer"},
-                "releases": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "string", "description": "MusicBrainz release MBID"},
-                      "title": {"type": "string"},
-                      "date": {"type": ["string", "null"]},
-                      "country": {"type": ["string", "null"]},
-                      "status": {"type": ["string", "null"]},
-                      "score": {"type": "integer"},
-                      "artist-credit": {"type": "array"},
-                      "barcode": {"type": ["string", "null"]}
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "MusicBrainz_get_artist",
-    "description": "Get detailed information about a specific artist from MusicBrainz by their MBID. Returns artist biography data, tags, genres, relationships (member-of, instruments), and associated recordings. Use MusicBrainz_search_artists to find MBIDs. Can also include release groups (albums) with inc parameter.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "mbid": {
-          "type": "string",
-          "description": "MusicBrainz artist ID (MBID, UUID format, e.g., 'b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d' for The Beatles)"
-        },
-        "inc": {
-          "type": ["string", "null"],
-          "description": "Additional data to include: 'release-groups' for albums, 'tags' for genre tags, 'aliases' for alternative names, 'recordings' for songs. Multiple values: 'release-groups+tags'"
-        }
-      },
-      "required": ["mbid"]
-    },
-    "fields": {
-      "endpoint": "https://musicbrainz.org/ws/2/artist/{mbid}",
-      "params": {
-        "fmt": "json"
-      }
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d"},
-      {"mbid": "72c536dc-7137-4477-a521-567eeb840fa8", "inc": "release-groups"},
-      {"mbid": "8538e728-ca0b-4321-b7e5-cff6565dd4c0"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "MusicBrainz artist details",
-              "properties": {
-                "id": {"type": "string"},
-                "name": {"type": "string"},
-                "sort-name": {"type": "string"},
-                "type": {"type": ["string", "null"]},
-                "country": {"type": ["string", "null"]},
-                "disambiguation": {"type": ["string", "null"]},
-                "life-span": {"type": "object"},
-                "release-groups": {"type": "array", "description": "Albums when inc=release-groups"},
-                "tags": {"type": "array"}
               }
             },
             "metadata": {"type": "object"}
