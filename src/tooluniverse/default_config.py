@@ -1103,6 +1103,8 @@ default_tool_files = {
     "datagov": os.path.join(current_dir, "data", "datagov_tools.json"),
     # WAQI - World Air Quality Index real-time AQI data
     "waqi": os.path.join(current_dir, "data", "waqi_tools.json"),
+    # BLS - Bureau of Labor Statistics economic time series (CPI, unemployment, etc.)
+    "bls": os.path.join(current_dir, "data", "bls_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
