@@ -925,6 +925,10 @@ default_tool_files = {
     # Gutendex - Project Gutenberg ebooks catalog search
     # Bioconductor - R/Bioconductor bioinformatics package search and metadata (via R-universe)
     "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
+    # Agify - predict age from first name via statistical analysis
+    "agify": os.path.join(current_dir, "data", "agify_tools.json"),
+    # ArtIC - Art Institute of Chicago open-access artwork search and metadata
+    "artic": os.path.join(current_dir, "data", "artic_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

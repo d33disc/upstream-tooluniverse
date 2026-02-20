@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1923 scientific tools.
+Type-safe Python interface to 1925 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -51,6 +51,7 @@ from .AdverseEventPredictionQuestionGenerator import (
 from .AdverseEventPredictionQuestionGeneratorWithContext import (
     AdverseEventPredictionQuestionGeneratorWithContext,
 )
+from .Agify_predict_age import Agify_predict_age
 from .AllenBrain_get_expression_datasets import AllenBrain_get_expression_datasets
 from .AllenBrain_get_structure import AllenBrain_get_structure
 from .AllenBrain_search_genes import AllenBrain_search_genes
@@ -68,6 +69,8 @@ from .Anaconda_search_packages import Anaconda_search_packages
 from .ArXiv_get_pdf_snippets import ArXiv_get_pdf_snippets
 from .ArXiv_search_papers import ArXiv_search_papers
 from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
+from .ArtIC_get_artwork import ArtIC_get_artwork
+from .ArtIC_search_artworks import ArtIC_search_artworks
 from .AviationWeather_get_metar import AviationWeather_get_metar
 from .AviationWeather_get_taf import AviationWeather_get_taf
 from .BGS_get_geomagnetic_field import BGS_get_geomagnetic_field
@@ -2317,7 +2320,6 @@ from .humanbase_ppi_analysis import humanbase_ppi_analysis
 from .iCite_get_publications import iCite_get_publications
 from .iCite_search_publications import iCite_search_publications
 from .iDigBio_search_records import iDigBio_search_records
-from .iDigBio_search_taxa import iDigBio_search_taxa
 from .iNaturalist_get_species_counts import iNaturalist_get_species_counts
 from .iNaturalist_get_taxon import iNaturalist_get_taxon
 from .iNaturalist_search_observations import iNaturalist_search_observations
@@ -2456,6 +2458,7 @@ __all__ = [
     "AdverseEventICDMapper",
     "AdverseEventPredictionQuestionGenerator",
     "AdverseEventPredictionQuestionGeneratorWithContext",
+    "Agify_predict_age",
     "AllenBrain_get_expression_datasets",
     "AllenBrain_get_structure",
     "AllenBrain_search_genes",
@@ -2473,6 +2476,8 @@ __all__ = [
     "ArXiv_get_pdf_snippets",
     "ArXiv_search_papers",
     "ArgumentDescriptionOptimizer",
+    "ArtIC_get_artwork",
+    "ArtIC_search_artworks",
     "AviationWeather_get_metar",
     "AviationWeather_get_taf",
     "BGS_get_geomagnetic_field",
@@ -4250,7 +4255,6 @@ __all__ = [
     "iCite_get_publications",
     "iCite_search_publications",
     "iDigBio_search_records",
-    "iDigBio_search_taxa",
     "iNaturalist_get_species_counts",
     "iNaturalist_get_taxon",
     "iNaturalist_search_observations",
