@@ -159,5 +159,71 @@
         }
       ]
     }
+  },
+  {
+    "name": "GitHub_get_user_profile",
+    "description": "Get a public GitHub user profile by username. Returns user metadata including name, bio, company, location, public repository and gist counts, follower/following counts, and account creation date. No API key required (rate limited to 60 requests/hour unauthenticated). Useful for looking up developer profiles, finding researchers' GitHub activity, and exploring contributors to scientific software projects.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "GitHub username. Examples: 'torvalds' (Linus Torvalds), 'gvanrossum' (Guido van Rossum), 'hadley' (Hadley Wickham), 'jlord' (Jessica Lord)"
+        }
+      },
+      "required": ["username"]
+    },
+    "fields": {
+      "endpoint": "https://api.github.com/users/{username}",
+      "headers": {
+        "Accept": "application/vnd.github.v3+json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"username": "torvalds"},
+      {"username": "gvanrossum"},
+      {"username": "hadley"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "GitHub user profile information",
+              "properties": {
+                "login": {"type": "string", "description": "GitHub username"},
+                "id": {"type": "integer", "description": "GitHub user ID"},
+                "avatar_url": {"type": "string", "description": "URL to user's avatar image"},
+                "html_url": {"type": "string", "description": "URL to user's GitHub profile page"},
+                "type": {"type": "string", "description": "'User' or 'Organization'"},
+                "name": {"type": ["string", "null"], "description": "Display name"},
+                "company": {"type": ["string", "null"], "description": "Company/organization affiliation"},
+                "blog": {"type": ["string", "null"], "description": "Website or blog URL"},
+                "location": {"type": ["string", "null"], "description": "User's location"},
+                "email": {"type": ["string", "null"], "description": "Public email address"},
+                "bio": {"type": ["string", "null"], "description": "User's bio/description"},
+                "twitter_username": {"type": ["string", "null"], "description": "Twitter/X username"},
+                "public_repos": {"type": "integer", "description": "Number of public repositories"},
+                "public_gists": {"type": "integer", "description": "Number of public gists"},
+                "followers": {"type": "integer", "description": "Number of followers"},
+                "following": {"type": "integer", "description": "Number of users being followed"},
+                "created_at": {"type": "string", "description": "Account creation date (ISO 8601)"},
+                "updated_at": {"type": "string", "description": "Last profile update date (ISO 8601)"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
   }
 ]

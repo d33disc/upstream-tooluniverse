@@ -1,0 +1,47 @@
+[
+  {
+    "name": "IPify_get_public_ip",
+    "description": "Get the public IP address of the current machine using the ipify.org service. Returns the external IPv4 or IPv6 address as seen by the internet. Useful for network diagnostics, determining outbound IP, and checking internet connectivity. No authentication required. This is a simple utility that returns just the IP address.",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api64.ipify.org",
+      "params": {
+        "format": "json"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Public IP address information",
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "description": "Public IP address (IPv4 or IPv6) of the requesting machine"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

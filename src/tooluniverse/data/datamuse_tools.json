@@ -1,72 +1,58 @@
 [
   {
-    "name": "Datamuse_find_words",
-    "description": "Find words matching various linguistic constraints using the Datamuse API - a word-finding query engine for developers. Supports finding synonyms, antonyms, rhymes, words with similar meaning, words that follow/precede a given word, and spelling patterns. Returns words with relevance scores. No authentication required. Useful for natural language processing, creative writing, crossword solving, and linguistics research.",
+    "name": "Datamuse_find_related_words",
+    "description": "Find words related by meaning, sound, or spelling using the Datamuse word-finding API. Supports finding synonyms (ml), words that sound similar (sl), words that rhyme (rel_rhy), words related by trigger (rel_trg), and more. Returns words with relevance scores. No authentication required. Useful for NLP, creative writing, crossword solving.",
     "parameter": {
       "type": "object",
       "properties": {
         "ml": {
           "type": ["string", "null"],
-          "description": "Words with similar meaning (means like). Examples: 'happy', 'ocean', 'fast car'"
+          "description": "Words with similar meaning to this word/phrase. Examples: 'ringing in the ears', 'happy', 'fast'"
         },
         "sl": {
           "type": ["string", "null"],
-          "description": "Words that sound like (homophones/similar pronunciation). Examples: 'jirraf', 'elefint'"
+          "description": "Words that sound like this word. Examples: 'jirraf', 'elefant'"
         },
         "sp": {
           "type": ["string", "null"],
-          "description": "Words spelled like a pattern (* for any string, ? for one letter). Examples: 't??t', 'b*tion'"
-        },
-        "rel_syn": {
-          "type": ["string", "null"],
-          "description": "Synonyms of this word. Examples: 'fast', 'happy', 'large'"
-        },
-        "rel_ant": {
-          "type": ["string", "null"],
-          "description": "Antonyms (opposites) of this word. Examples: 'fast', 'happy', 'hot'"
+          "description": "Words spelled like this pattern (* for wildcard). Examples: 'b*k', 't*tion'"
         },
         "rel_rhy": {
           "type": ["string", "null"],
-          "description": "Perfect rhymes of this word. Examples: 'cat', 'moon', 'day'"
+          "description": "Words that rhyme with this word. Examples: 'spade', 'cat'"
         },
-        "rel_jja": {
+        "rel_syn": {
           "type": ["string", "null"],
-          "description": "Popular nouns that this adjective modifies. Examples: 'yellow' -> banana, car"
+          "description": "Synonyms of this word (WordNet). Examples: 'happy', 'fast'"
         },
-        "rel_jjb": {
+        "rel_ant": {
           "type": ["string", "null"],
-          "description": "Popular adjectives used to modify this noun. Examples: 'ocean' -> deep, vast, blue"
+          "description": "Antonyms of this word. Examples: 'hot', 'good'"
         },
-        "lc": {
+        "rel_trg": {
           "type": ["string", "null"],
-          "description": "Words that typically follow this word (left context). Examples: 'drink' -> coffee, tea"
+          "description": "Words commonly associated with or triggered by this word. Examples: 'cow', 'doctor'"
         },
-        "rc": {
+        "topics": {
           "type": ["string", "null"],
-          "description": "Words that typically precede this word (right context). Examples: 'tea' -> green, black"
+          "description": "Hint about the topic/domain. Examples: 'finance', 'biology'"
         },
         "max": {
           "type": ["integer", "null"],
-          "description": "Maximum number of results (default 100, max 1000)"
-        },
-        "md": {
-          "type": ["string", "null"],
-          "description": "Metadata to include. Values: 'd' (definitions), 'p' (parts of speech), 's' (syllable count), 'r' (pronunciation), 'f' (word frequency)"
+          "description": "Maximum number of results (1-1000). Default: 100"
         }
       },
       "required": []
     },
     "fields": {
       "endpoint": "https://api.datamuse.com/words",
-      "params": {
-        "max": "20"
-      }
+      "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"rel_syn": "happy", "max": 10},
-      {"rel_ant": "fast", "max": 10},
-      {"rel_rhy": "moon", "max": 10}
+      {"ml": "ringing in the ears", "max": 5},
+      {"rel_rhy": "spade", "max": 5},
+      {"rel_syn": "happy", "max": 5}
     ],
     "return_schema": {
       "oneOf": [
@@ -75,15 +61,82 @@
           "properties": {
             "data": {
               "type": "array",
-              "description": "List of matching words with scores",
+              "description": "Words matching the query with relevance scores",
               "items": {
                 "type": "object",
                 "properties": {
-                  "word": {"type": "string", "description": "The matching word or phrase"},
-                  "score": {"type": "integer", "description": "Relevance score (higher = more relevant)"},
-                  "tags": {"type": "array", "items": {"type": "string"}, "description": "Word tags (n=noun, v=verb, adj=adjective, adv=adverb, syn=synonym, etc.)"},
-                  "numSyllables": {"type": "integer", "description": "Number of syllables (when md=s requested)"},
-                  "defs": {"type": "array", "items": {"type": "string"}, "description": "Definitions (when md=d requested)"}
+                  "word": {"type": "string", "description": "The matched word"},
+                  "score": {"type": "integer", "description": "Relevance score (higher is more relevant)"},
+                  "tags": {"type": "array", "items": {"type": "string"}, "description": "Part of speech and other tags"},
+                  "defs": {"type": "array", "items": {"type": "string"}, "description": "Definitions if available"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Datamuse_find_words_with_context",
+    "description": "Find words that fit naturally after or before a given word (word adjacency) using the Datamuse API. Useful for autocomplete, text prediction, and finding collocations. Also supports finding words that frequently appear in the context of a given topic. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "lc": {
+          "type": ["string", "null"],
+          "description": "Words that typically follow this word (left context). Examples: 'drink', 'swimming'"
+        },
+        "rc": {
+          "type": ["string", "null"],
+          "description": "Words that typically precede this word (right context). Examples: 'pool', 'cream'"
+        },
+        "sp": {
+          "type": ["string", "null"],
+          "description": "Words spelled like this pattern. Use * for wildcard. Examples: 'b*k', 'tre*'"
+        },
+        "topics": {
+          "type": ["string", "null"],
+          "description": "Constrain to words related to this topic. Examples: 'medicine', 'music,jazz'"
+        },
+        "max": {
+          "type": ["integer", "null"],
+          "description": "Maximum number of results (1-1000). Default: 100"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.datamuse.com/words",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"lc": "drink", "max": 5},
+      {"rc": "cream", "max": 5},
+      {"sp": "tre*", "topics": "music", "max": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Words fitting the contextual query with scores",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "word": {"type": "string"},
+                  "score": {"type": "integer"},
+                  "tags": {"type": "array", "items": {"type": "string"}}
                 }
               }
             },

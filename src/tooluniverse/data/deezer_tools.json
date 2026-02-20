@@ -153,7 +153,7 @@
       "properties": {
         "artist_id": {
           "type": "integer",
-          "description": "Deezer artist ID. Examples: 27 (Daft Punk), 13 (Eminem), 75798 (Taylor Swift), 3490 (Queen), 1109 (Radiohead)"
+          "description": "Deezer artist ID. Examples: 27 (Daft Punk), 13 (Eminem), 12246 (Taylor Swift), 75798 (Adele), 3490 (Queen), 1109 (Radiohead)"
         },
         "limit": {
           "type": ["integer", "null"],

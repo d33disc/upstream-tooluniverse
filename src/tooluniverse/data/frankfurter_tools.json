@@ -1,21 +1,21 @@
 [
   {
     "name": "Frankfurter_get_exchange_rates",
-    "description": "Get current or historical currency exchange rates from the Frankfurter API (based on European Central Bank data). Returns exchange rates for 30+ currencies including EUR, USD, GBP, JPY, CHF, AUD, CAD. No authentication required. Useful for financial analysis, currency conversion, and economic research.",
+    "description": "Get current or historical currency exchange rates using the Frankfurter API (European Central Bank data). Supports 33 currencies. Returns exchange rates relative to a base currency. No authentication required. More reliable than other free FX APIs.",
     "parameter": {
       "type": "object",
       "properties": {
         "base": {
           "type": ["string", "null"],
-          "description": "Base currency code (ISO 4217). Examples: 'USD', 'EUR', 'GBP', 'JPY', 'CHF'. Default: EUR"
+          "description": "Base currency code. Default: EUR. Examples: 'USD', 'EUR', 'GBP', 'JPY', 'CHF', 'CAD', 'AUD'"
         },
         "to": {
           "type": ["string", "null"],
-          "description": "Target currency codes (comma-separated). Examples: 'USD,GBP', 'EUR,JPY,CHF'. Default: all currencies"
+          "description": "Target currencies (comma-separated). Default: all 33 currencies. Examples: 'USD,GBP,JPY', 'EUR,CHF'"
         },
         "date": {
           "type": ["string", "null"],
-          "description": "Historical date in YYYY-MM-DD format. Omit for latest rates. Example: '2024-01-15'"
+          "description": "Historical date in YYYY-MM-DD format. Omit for latest rates. Data available from 1999-01-04. Examples: '2020-01-01', '2023-06-15'"
         }
       },
       "required": []
@@ -26,9 +26,9 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"base": "USD"},
-      {"base": "EUR", "to": "USD,GBP,JPY"},
-      {"base": "GBP", "date": "2024-01-15"}
+      {"base": "USD", "to": "EUR,GBP,JPY"},
+      {"base": "EUR", "to": "USD,CHF,GBP"},
+      {"base": "USD", "date": "2023-01-01"}
     ],
     "return_schema": {
       "oneOf": [
@@ -39,77 +39,13 @@
               "type": "object",
               "description": "Currency exchange rate data",
               "properties": {
-                "amount": {"type": "number", "description": "Base amount (always 1.0)"},
+                "amount": {"type": "number", "description": "Amount of base currency (always 1)"},
                 "base": {"type": "string", "description": "Base currency code"},
-                "date": {"type": "string", "description": "Date of rates (YYYY-MM-DD)"},
+                "date": {"type": "string", "description": "Date of exchange rates"},
                 "rates": {
                   "type": "object",
-                  "description": "Exchange rates keyed by currency code (e.g., {'USD': 1.08, 'GBP': 0.85})"
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {"error": {"type": "string"}},
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Frankfurter_convert_currency",
-    "description": "Convert an amount from one currency to another using European Central Bank rates. Returns the converted amount with the exchange rate used. Supports 30+ major world currencies.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "description": "Amount to convert. Examples: 100, 1500.50, 0.5"
-        },
-        "from": {
-          "type": "string",
-          "description": "Source currency code (ISO 4217). Examples: 'USD', 'EUR', 'GBP', 'JPY'"
-        },
-        "to": {
-          "type": "string",
-          "description": "Target currency code (ISO 4217). Examples: 'EUR', 'USD', 'CHF'"
-        },
-        "date": {
-          "type": ["string", "null"],
-          "description": "Historical date in YYYY-MM-DD format. Omit for latest rates."
-        }
-      },
-      "required": ["amount", "from", "to"]
-    },
-    "fields": {
-      "endpoint": "https://api.frankfurter.app/latest",
-      "params": {}
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"amount": 100, "from": "USD", "to": "EUR"},
-      {"amount": 1000, "from": "GBP", "to": "JPY"},
-      {"amount": 500, "from": "EUR", "to": "CHF", "date": "2024-06-01"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Currency conversion result",
-              "properties": {
-                "amount": {"type": "number", "description": "Original amount"},
-                "base": {"type": "string", "description": "Source currency"},
-                "date": {"type": "string", "description": "Date of rates"},
-                "rates": {
-                  "type": "object",
-                  "description": "Converted amount in target currency"
+                  "description": "Exchange rates keyed by currency code",
+                  "additionalProperties": {"type": "number"}
                 }
               }
             },

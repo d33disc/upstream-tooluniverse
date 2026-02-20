@@ -1,0 +1,49 @@
+"""
+Deezer_search_tracks
+
+Search for music tracks on Deezer by artist name, song title, or free-text query. Returns track d...
+"""
+
+from typing import Any, Optional, Callable
+from ._shared_client import get_shared_client
+
+
+def Deezer_search_tracks(
+    q: str,
+    limit: Optional[int | Any] = None,
+    *,
+    stream_callback: Optional[Callable[[str], None]] = None,
+    use_cache: bool = False,
+    validate: bool = True,
+) -> Any:
+    """
+    Search for music tracks on Deezer by artist name, song title, or free-text query. Returns track d...
+
+    Parameters
+    ----------
+    q : str
+        Search query for tracks. Can include artist and title. Examples: 'daft punk',...
+    limit : int | Any
+        Number of results to return (1-100). Default: 25
+    stream_callback : Callable, optional
+        Callback for streaming output
+    use_cache : bool, default False
+        Enable caching
+    validate : bool, default True
+        Validate parameters
+
+    Returns
+    -------
+    Any
+    """
+    # Handle mutable defaults to avoid B006 linting error
+
+    return get_shared_client().run_one_function(
+        {"name": "Deezer_search_tracks", "arguments": {"q": q, "limit": limit}},
+        stream_callback=stream_callback,
+        use_cache=use_cache,
+        validate=validate,
+    )
+
+
+__all__ = ["Deezer_search_tracks"]

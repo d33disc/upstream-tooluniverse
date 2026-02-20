@@ -1,0 +1,81 @@
+[
+  {
+    "name": "DuckDuckGo_instant_answer",
+    "description": "Get an instant answer summary for a search query using the DuckDuckGo Instant Answer API. Returns structured information including an abstract (from Wikipedia or other sources), related topics, infobox data, and direct answers for well-known entities, topics, and concepts. No API key required. Useful for quick factual lookups, entity information retrieval, getting Wikipedia summaries, and building knowledge-enriched applications. Note: does not return web search results, only instant answers and abstracts.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search query string. Works best with specific entity names, topics, or well-defined concepts. Examples: 'Albert Einstein', 'Python programming language', 'DNA replication', 'International Space Station', 'CRISPR'"
+        }
+      },
+      "required": ["q"]
+    },
+    "fields": {
+      "endpoint": "https://api.duckduckgo.com/",
+      "params": {
+        "format": "json",
+        "no_redirect": "1",
+        "skip_disambig": "1"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "Python programming language"},
+      {"q": "Albert Einstein"},
+      {"q": "DNA replication"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "DuckDuckGo instant answer result",
+              "properties": {
+                "Heading": {"type": "string", "description": "Title/heading of the result"},
+                "Abstract": {"type": "string", "description": "Summary text (typically from Wikipedia)"},
+                "AbstractText": {"type": "string", "description": "Plain text version of the abstract"},
+                "AbstractSource": {"type": "string", "description": "Source of the abstract (e.g., 'Wikipedia')"},
+                "AbstractURL": {"type": "string", "description": "URL to the full source article"},
+                "Image": {"type": "string", "description": "URL path to a related image"},
+                "Entity": {"type": "string", "description": "Entity type (e.g., 'programming language', 'scientist')"},
+                "Answer": {"type": "string", "description": "Direct answer text, if available"},
+                "AnswerType": {"type": "string", "description": "Type of direct answer"},
+                "Definition": {"type": "string", "description": "Dictionary definition, if available"},
+                "DefinitionSource": {"type": "string", "description": "Source of definition"},
+                "DefinitionURL": {"type": "string", "description": "URL to definition source"},
+                "Infobox": {
+                  "type": ["object", "null"],
+                  "description": "Structured data box with key-value pairs (label/value/data_type) about the entity"
+                },
+                "RelatedTopics": {
+                  "type": "array",
+                  "description": "List of related topics with text summaries and URLs",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Text": {"type": "string", "description": "Related topic summary text"},
+                      "FirstURL": {"type": "string", "description": "URL for the related topic"},
+                      "Result": {"type": "string", "description": "HTML-formatted result snippet"}
+                    }
+                  }
+                },
+                "Type": {"type": "string", "description": "Response type: 'A' (article), 'D' (disambiguation), 'C' (category), 'N' (name), 'E' (exclusive), '' (nothing)"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

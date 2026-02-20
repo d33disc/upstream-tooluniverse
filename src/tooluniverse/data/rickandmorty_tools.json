@@ -1,40 +1,41 @@
 [
   {
-    "name": "RickAndMorty_search_characters",
-    "description": "Search for characters from the Rick and Morty TV show. Filter by name, status (alive/dead), species, type, or gender. Returns character details including origin, location, and episode appearances.",
+    "name": "RickAndMorty_get_characters",
+    "description": "Get Rick and Morty characters with optional filtering by name, status, species, type, or gender using the Rick and Morty public API. Returns character details including name, species, origin, location, and episode appearances. No authentication required.",
     "parameter": {
       "type": "object",
       "properties": {
         "name": {
           "type": ["string", "null"],
-          "description": "Filter by character name (e.g., 'rick', 'morty', 'jerry')"
+          "description": "Filter by character name. Examples: 'rick', 'morty', 'beth', 'jerry', 'summer'"
         },
         "status": {
           "type": ["string", "null"],
-          "description": "Filter by status: 'alive', 'dead', 'unknown'"
+          "description": "Filter by status. Values: 'alive', 'dead', 'unknown'"
         },
         "species": {
           "type": ["string", "null"],
-          "description": "Filter by species (e.g., 'Human', 'Alien', 'Robot')"
+          "description": "Filter by species. Examples: 'human', 'alien', 'robot', 'humanoid'"
         },
         "gender": {
           "type": ["string", "null"],
-          "description": "Filter by gender: 'female', 'male', 'genderless', 'unknown'"
+          "description": "Filter by gender. Values: 'female', 'male', 'genderless', 'unknown'"
         },
         "page": {
           "type": ["integer", "null"],
-          "description": "Page number for pagination (20 results per page)"
+          "description": "Page number for pagination (20 results per page). Default: 1"
         }
       },
       "required": []
     },
     "fields": {
-      "endpoint": "https://rickandmortyapi.com/api/character"
+      "endpoint": "https://rickandmortyapi.com/api/character",
+      "params": {}
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"name": "rick"},
-      {"species": "Alien", "status": "alive"},
+      {"name": "rick", "status": "alive"},
+      {"species": "alien", "page": 1},
       {"name": "morty", "gender": "male"}
     ],
     "return_schema": {
@@ -44,13 +45,13 @@
           "properties": {
             "data": {
               "type": "object",
-              "description": "Character search results",
+              "description": "Paginated list of Rick and Morty characters",
               "properties": {
                 "info": {
                   "type": "object",
                   "properties": {
-                    "count": {"type": "integer"},
-                    "pages": {"type": "integer"},
+                    "count": {"type": "integer", "description": "Total number of matching characters"},
+                    "pages": {"type": "integer", "description": "Total number of pages"},
                     "next": {"type": ["string", "null"]},
                     "prev": {"type": ["string", "null"]}
                   }
@@ -62,14 +63,82 @@
                     "properties": {
                       "id": {"type": "integer"},
                       "name": {"type": "string"},
-                      "status": {"type": "string"},
+                      "status": {"type": "string", "description": "alive, dead, or unknown"},
                       "species": {"type": "string"},
                       "type": {"type": "string"},
                       "gender": {"type": "string"},
-                      "origin": {"type": "object"},
-                      "location": {"type": "object"},
-                      "image": {"type": "string"},
-                      "episode": {"type": "array", "items": {"type": "string"}},
+                      "origin": {"type": "object", "properties": {"name": {"type": "string"}}},
+                      "location": {"type": "object", "properties": {"name": {"type": "string"}}},
+                      "image": {"type": "string", "description": "Character image URL"},
+                      "episode": {"type": "array", "items": {"type": "string"}}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "RickAndMorty_get_episodes",
+    "description": "Get Rick and Morty episodes with optional filtering by name or episode code (e.g. S01E01) using the Rick and Morty public API. Returns episode name, air date, episode code, and list of character URLs. No authentication required.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": ["string", "null"],
+          "description": "Filter by episode name. Examples: 'pilot', 'rick potion', 'pickle'"
+        },
+        "episode": {
+          "type": ["string", "null"],
+          "description": "Filter by episode code. Examples: 'S01E01', 'S02E05', 'S03E03'"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number (20 results per page). Default: 1"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://rickandmortyapi.com/api/episode",
+      "params": {}
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"name": "pilot"},
+      {"episode": "S01E01"},
+      {"name": "pickle"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Paginated list of episodes",
+              "properties": {
+                "info": {"type": "object", "properties": {"count": {"type": "integer"}, "pages": {"type": "integer"}}},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "name": {"type": "string"},
+                      "air_date": {"type": "string"},
+                      "episode": {"type": "string", "description": "Episode code like S01E01"},
+                      "characters": {"type": "array", "items": {"type": "string"}, "description": "Character URLs"},
                       "url": {"type": "string"}
                     }
                   }
@@ -82,220 +151,7 @@
         },
         {
           "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "RickAndMorty_get_character",
-    "description": "Get detailed information about a specific Rick and Morty character by their ID. Returns name, status (alive/dead/unknown), species, gender, origin, current location, image, and list of episode URLs.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "character_id": {
-          "type": "integer",
-          "description": "Character ID (e.g., 1 for Rick Sanchez, 2 for Morty Smith)"
-        }
-      },
-      "required": ["character_id"]
-    },
-    "fields": {
-      "endpoint": "https://rickandmortyapi.com/api/character/{character_id}"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"character_id": 1},
-      {"character_id": 2},
-      {"character_id": 5}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Character details",
-              "properties": {
-                "id": {"type": "integer"},
-                "name": {"type": "string"},
-                "status": {"type": "string"},
-                "species": {"type": "string"},
-                "type": {"type": "string"},
-                "gender": {"type": "string"},
-                "origin": {"type": "object"},
-                "location": {"type": "object"},
-                "image": {"type": "string"},
-                "episode": {"type": "array"},
-                "url": {"type": "string"},
-                "created": {"type": "string"}
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "RickAndMorty_search_episodes",
-    "description": "Search for Rick and Morty TV episodes. Filter by episode name or episode code. Returns episode details including air date, characters who appear, and episode code (e.g., S01E01).",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": ["string", "null"],
-          "description": "Filter by episode name (e.g., 'pilot', 'pickle rick')"
-        },
-        "episode": {
-          "type": ["string", "null"],
-          "description": "Filter by episode code (e.g., 'S01E01', 'S03')"
-        },
-        "page": {
-          "type": ["integer", "null"],
-          "description": "Page number for pagination"
-        }
-      },
-      "required": []
-    },
-    "fields": {
-      "endpoint": "https://rickandmortyapi.com/api/episode"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"name": "pilot"},
-      {"episode": "S01"},
-      {"name": "pickle"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Episode search results",
-              "properties": {
-                "info": {
-                  "type": "object",
-                  "properties": {
-                    "count": {"type": "integer"},
-                    "pages": {"type": "integer"}
-                  }
-                },
-                "results": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "name": {"type": "string"},
-                      "air_date": {"type": "string"},
-                      "episode": {"type": "string", "description": "Episode code (e.g., 'S01E01')"},
-                      "characters": {"type": "array", "items": {"type": "string"}},
-                      "url": {"type": "string"},
-                      "created": {"type": "string"}
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
-        }
-      ]
-    }
-  },
-  {
-    "name": "RickAndMorty_search_locations",
-    "description": "Search for locations in the Rick and Morty universe. Filter by name, type, or dimension. Returns location details including type, dimension, and residents.",
-    "parameter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": ["string", "null"],
-          "description": "Filter by location name (e.g., 'earth', 'citadel')"
-        },
-        "type": {
-          "type": ["string", "null"],
-          "description": "Filter by location type (e.g., 'Planet', 'Space station', 'Microverse')"
-        },
-        "dimension": {
-          "type": ["string", "null"],
-          "description": "Filter by dimension (e.g., 'Dimension C-137', 'unknown')"
-        },
-        "page": {
-          "type": ["integer", "null"],
-          "description": "Page number for pagination"
-        }
-      },
-      "required": []
-    },
-    "fields": {
-      "endpoint": "https://rickandmortyapi.com/api/location"
-    },
-    "type": "BaseRESTTool",
-    "test_examples": [
-      {"name": "earth"},
-      {"type": "Planet"},
-      {"dimension": "Dimension C-137"}
-    ],
-    "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Location search results",
-              "properties": {
-                "info": {"type": "object"},
-                "results": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {"type": "integer"},
-                      "name": {"type": "string"},
-                      "type": {"type": "string"},
-                      "dimension": {"type": "string"},
-                      "residents": {"type": "array", "items": {"type": "string"}},
-                      "url": {"type": "string"},
-                      "created": {"type": "string"}
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
+          "properties": {"error": {"type": "string"}},
           "required": ["error"]
         }
       ]
