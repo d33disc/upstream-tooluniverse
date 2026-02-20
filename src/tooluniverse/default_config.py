@@ -963,6 +963,8 @@ default_tool_files = {
     ),
     # Launch Library 2 - upcoming rocket launches worldwide (all providers)
     "launchlibrary": os.path.join(current_dir, "data", "launchlibrary_tools.json"),
+    # US Census Bureau - population and demographic data (no key required)
+    "uscensus": os.path.join(current_dir, "data", "uscensus_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
