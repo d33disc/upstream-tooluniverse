@@ -5,7 +5,7 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "query": {
+        "q": {
           "type": "string",
           "description": "Search query using Lucene syntax. Examples: 'family-name:doudna AND given-names:jennifer', 'affiliation-org-name:MIT', 'keyword:CRISPR', 'ringgold-org-id:1846'. Supports AND/OR/NOT operators."
         },
@@ -15,7 +15,7 @@
           "default": 10
         }
       },
-      "required": ["query"]
+      "required": ["q"]
     },
     "fields": {
       "endpoint": "https://pub.orcid.org/v3.0/search/",
@@ -25,9 +25,9 @@
     },
     "type": "BaseRESTTool",
     "test_examples": [
-      {"query": "family-name:doudna AND given-names:jennifer"},
-      {"query": "family-name:lander AND given-names:eric", "rows": 5},
-      {"query": "affiliation-org-name:MIT AND keyword:genomics"}
+      {"q": "family-name:doudna AND given-names:jennifer"},
+      {"q": "family-name:lander AND given-names:eric", "rows": 5},
+      {"q": "affiliation-org-name:MIT AND keyword:genomics"}
     ],
     "return_schema": {
       "oneOf": [

@@ -166,11 +166,15 @@ class BaseRESTTool(BaseTool):
             url = self._build_url(arguments)
             params = self._build_params(arguments)
 
+            # Get custom headers from config (e.g., Accept: application/json)
+            custom_headers = self.tool_config.get("fields", {}).get("headers")
+
             response = request_with_retry(
                 self.session,
                 "GET",
                 url,
                 params=params,
+                headers=custom_headers,
                 timeout=self.timeout,
                 max_attempts=3,
             )
