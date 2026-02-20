@@ -1055,6 +1055,8 @@ default_tool_files = {
     "on_this_day": os.path.join(current_dir, "data", "on_this_day_tools.json"),
     # Lichess - open-source chess platform player profiles and top player leaderboards
     "lichess": os.path.join(current_dir, "data", "lichess_tools.json"),
+    # OpenF1 - Formula 1 session, driver, and race meeting data (2023+)
+    "openf1": os.path.join(current_dir, "data", "openf1_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
