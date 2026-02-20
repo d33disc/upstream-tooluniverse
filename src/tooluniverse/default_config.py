@@ -715,6 +715,20 @@ default_tool_files = {
     "human_protein_atlas": os.path.join(
         current_dir, "data", "human_protein_atlas_tools.json"
     ),
+    # FPbase - fluorescent protein database with spectral properties, sequences, structures
+    "fpbase": os.path.join(current_dir, "data", "fpbase_tools.json"),
+    # ROR - Research Organization Registry for institution identifiers and metadata
+    "ror": os.path.join(current_dir, "data", "ror_tools.json"),
+    # ORCID - researcher identifiers, profiles, and publication lists
+    "orcid": os.path.join(current_dir, "data", "orcid_tools.json"),
+    # PanelApp - Genomics England gene panels for clinical genetic testing
+    "panelapp": os.path.join(current_dir, "data", "panelapp_tools.json"),
+    # Semantic Scholar Extended - paper details, author profiles, recommendations
+    "semantic_scholar_ext": os.path.join(
+        current_dir, "data", "semantic_scholar_ext_tools.json"
+    ),
+    # bioRxiv Extended - list recent preprints by date range
+    "biorxiv_ext": os.path.join(current_dir, "data", "biorxiv_ext_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

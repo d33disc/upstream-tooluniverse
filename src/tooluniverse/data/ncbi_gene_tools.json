@@ -174,5 +174,83 @@
                 }
             ]
         }
+    },
+    {
+        "name": "NCBIProtein_get_summary",
+        "description": "Get protein record summary from the NCBI Protein database by GI number or accession using the E-utilities ESummary API. Returns protein title, organism, accession version, sequence length, molecular type, source database, and creation/update dates. NCBI Protein aggregates sequences from GenBank, RefSeq, Swiss-Prot, PDB, and other sources. Use for resolving NCBI protein GI numbers to names, accessions, and species. Example: GI 119395750 returns 'keratin, type II cytoskeletal 1 [Homo sapiens]' with accession NP_006112.3 and length 644 aa.",
+        "parameter": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "NCBI Protein ID (GI number or accession). Can be a single ID or comma-separated list. Examples: '119395750' (keratin 1, NP_006112), '4507879' (TP53, NP_000537), '4503747' (EGFR, NP_005219). GI numbers can be obtained from NCBI Gene genomic info or from BLAST results."
+                }
+            },
+            "required": ["id"]
+        },
+        "fields": {
+            "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
+            "params": {
+                "db": "protein",
+                "retmode": "json"
+            }
+        },
+        "type": "BaseRESTTool",
+        "test_examples": [
+            {"id": "119395750"},
+            {"id": "4507879"},
+            {"id": "4503747"}
+        ],
+        "return_schema": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "object",
+                                    "properties": {
+                                        "uids": {
+                                            "type": "array",
+                                            "items": {"type": "string"},
+                                            "description": "List of returned protein IDs (GI numbers)"
+                                        }
+                                    },
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {
+                                            "uid": {"type": "string", "description": "GI number"},
+                                            "caption": {"type": "string", "description": "Accession number (e.g., NP_006112)"},
+                                            "title": {"type": "string", "description": "Protein name with organism"},
+                                            "extra": {"type": "string", "description": "Additional identifier info"},
+                                            "gi": {"type": "integer", "description": "GI number (integer form)"},
+                                            "taxid": {"type": "integer", "description": "NCBI Taxonomy ID"},
+                                            "slen": {"type": "integer", "description": "Sequence length in amino acids"},
+                                            "moltype": {"type": "string", "description": "Molecule type (aa for amino acid)"},
+                                            "sourcedb": {"type": "string", "description": "Source database (refseq, insd, etc.)"},
+                                            "organism": {"type": "string", "description": "Scientific name of the organism"},
+                                            "accessionversion": {"type": "string", "description": "Accession with version (e.g., NP_006112.3)"},
+                                            "createdate": {"type": "string", "description": "Record creation date"},
+                                            "updatedate": {"type": "string", "description": "Record last update date"}
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "metadata": {"type": "object"}
+                    },
+                    "required": ["data"]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "error": {"type": "string"}
+                    },
+                    "required": ["error"]
+                }
+            ]
+        }
     }
 ]
