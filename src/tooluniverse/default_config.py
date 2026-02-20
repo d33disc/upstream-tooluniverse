@@ -875,6 +875,14 @@ default_tool_files = {
     "discogs": os.path.join(current_dir, "data", "discogs_tools.json"),
     # CityBikes - real-time bike-sharing station data for 800+ networks worldwide
     "citybikes": os.path.join(current_dir, "data", "citybikes_tools.json"),
+    # PokeAPI - Pokemon species data (1000+ species, stats, abilities, habitats)
+    "pokeapi": os.path.join(current_dir, "data", "pokeapi_tools.json"),
+    # TVmaze - TV show database (45K+ shows, ratings, genres, episodes)
+    "tvmaze": os.path.join(current_dir, "data", "tvmaze_tools.json"),
+    # Have I Been Pwned - public data breach database (900+ breaches)
+    "hibp": os.path.join(current_dir, "data", "hibp_tools.json"),
+    # The Guardian - news article archive (2M+ articles since 1999)
+    "guardian": os.path.join(current_dir, "data", "guardian_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Guardian_search_news",
+    "description": "Search The Guardian newspaper's article archive using their Content API. The Guardian has published 2M+ articles since 1999 across science, politics, environment, technology, culture, and more. Returns article titles, publication dates, sections, and URLs. Useful for news research, media analysis, tracking coverage of scientific topics, and studying public discourse. Uses the demo API key (limited to 10 calls/minute).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": ["string", "null"],
+          "description": "Search query. Examples: 'climate change', 'CRISPR gene editing', 'machine learning', 'COVID-19 vaccines'"
+        },
+        "section": {
+          "type": ["string", "null"],
+          "description": "Filter by section. Examples: 'science', 'technology', 'environment', 'society', 'world', 'politics', 'business'"
+        },
+        "from_date": {
+          "type": ["string", "null"],
+          "description": "Start date filter (YYYY-MM-DD). Example: '2024-01-01'"
+        },
+        "to_date": {
+          "type": ["string", "null"],
+          "description": "End date filter (YYYY-MM-DD). Example: '2024-12-31'"
+        },
+        "page_size": {
+          "type": ["integer", "null"],
+          "description": "Number of results (default 10, max 200)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination"
+        },
+        "order_by": {
+          "type": ["string", "null"],
+          "description": "Sort order. Values: 'newest' (default), 'oldest', 'relevance'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://content.guardianapis.com/search",
+      "params": {
+        "api-key": "test",
+        "page-size": "10",
+        "order-by": "newest"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "CRISPR gene editing", "section": "science", "page_size": 5},
+      {"q": "climate change 2024", "section": "environment", "page_size": 5},
+      {"q": "artificial intelligence", "section": "technology", "page_size": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Guardian article search results",
+              "properties": {
+                "response": {
+                  "type": "object",
+                  "properties": {
+                    "status": {"type": "string"},
+                    "total": {"type": "integer", "description": "Total matching articles"},
+                    "startIndex": {"type": "integer"},
+                    "pageSize": {"type": "integer"},
+                    "currentPage": {"type": "integer"},
+                    "pages": {"type": "integer"},
+                    "results": {
+                      "type": "array",
+                      "description": "List of articles",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "string", "description": "Article path ID"},
+                          "type": {"type": "string"},
+                          "sectionId": {"type": "string", "description": "Section identifier"},
+                          "sectionName": {"type": "string", "description": "Section display name"},
+                          "webPublicationDate": {"type": "string", "description": "Publication date (ISO 8601)"},
+                          "webTitle": {"type": "string", "description": "Article headline"},
+                          "webUrl": {"type": "string", "description": "Article URL"},
+                          "apiUrl": {"type": "string", "description": "API URL for full content"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
