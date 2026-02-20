@@ -793,6 +793,58 @@ default_tool_files = {
     "jpl_horizons": os.path.join(current_dir, "data", "jpl_horizons_tools.json"),
     # NASA SBDB - Small Body Database for asteroids and comets (1.3M+ objects)
     "nasa_sbdb": os.path.join(current_dir, "data", "nasa_sbdb_tools.json"),
+    # Space - ISS position/crew tracker and sunrise/sunset times (Open Notify API)
+    "space": os.path.join(current_dir, "data", "space_tools.json"),
+    # COD - Crystallography Open Database for 500K+ crystal structures
+    "cod_crystal": os.path.join(current_dir, "data", "cod_crystal_tools.json"),
+    # HuggingFace Hub - ML model/dataset search and metadata (500K+ models)
+    "huggingface": os.path.join(current_dir, "data", "huggingface_tools.json"),
+    # OpenML - Open machine learning benchmark datasets and tasks
+    "openml": os.path.join(current_dir, "data", "openml_tools.json"),
+    # NOAA Space Weather - Kp index, solar cycle, X-ray flux from SWPC
+    "noaa_spaceweather": os.path.join(
+        current_dir, "data", "noaa_spaceweather_tools.json"
+    ),
+    # Metropolitan Museum of Art - 400K+ open-access artworks (search and object detail)
+    "metmuseum": os.path.join(current_dir, "data", "metmuseum_tools.json"),
+    # Victoria and Albert Museum - 5000 years of art and design (search and object detail)
+    "vam": os.path.join(current_dir, "data", "vam_tools.json"),
+    # OEIS - Online Encyclopedia of Integer Sequences (370K+ sequences)
+    "oeis": os.path.join(current_dir, "data", "oeis_tools.json"),
+    # Europeana - 50M+ European cultural heritage items (museums, libraries, archives)
+    "europeana": os.path.join(current_dir, "data", "europeana_tools.json"),
+    # Nobel Prize - all Nobel Prize winners and prizes since 1901 (official API)
+    "nobel_prize": os.path.join(current_dir, "data", "nobel_prize_tools.json"),
+    # Open Brewery DB - 8K+ breweries, cideries, taprooms worldwide
+    "open_brewery": os.path.join(current_dir, "data", "open_brewery_tools.json"),
+    # Exchange Rate - live currency exchange rates for 150+ currencies (no auth)
+    "exchange_rate": os.path.join(current_dir, "data", "exchange_rate_tools.json"),
+    # Crates.io - Rust package registry (150K+ crates with search and details)
+    "crates": os.path.join(current_dir, "data", "crates_tools.json"),
+    # Maven Central - Java/JVM package registry (500K+ artifacts, Solr search)
+    "maven_central": os.path.join(current_dir, "data", "maven_central_tools.json"),
+    # Internet Archive - Digital library of 40M+ items (books, audio, video, web, software)
+    "internet_archive": os.path.join(
+        current_dir, "data", "internet_archive_tools.json"
+    ),
+    # Docker Hub - Container image registry (search repos, list tags, multi-arch images)
+    "dockerhub": os.path.join(current_dir, "data", "dockerhub_tools.json"),
+    # Anaconda.org - Conda package registry (conda-forge, bioconda, 200K+ packages)
+    "anaconda": os.path.join(current_dir, "data", "anaconda_tools.json"),
+    # NASA EONET - Natural event tracker (wildfires, storms, volcanoes, floods)
+    "nasa_eonet": os.path.join(current_dir, "data", "nasa_eonet_tools.json"),
+    # POWO - Plants of the World Online by Kew Gardens (1.3M+ plant names)
+    "powo": os.path.join(current_dir, "data", "powo_tools.json"),
+    # NeuroVault - Neuroimaging statistical maps repository (16K+ collections, 650K+ images)
+    "neurovault": os.path.join(current_dir, "data", "neurovault_tools.json"),
+    # Disease.sh - COVID-19 and public health statistics (231 countries, historical data)
+    "diseasesh": os.path.join(current_dir, "data", "diseasesh_tools.json"),
+    # CoinGecko - Cryptocurrency market data (10K+ coins, prices, charts, market cap)
+    "coingecko": os.path.join(current_dir, "data", "coingecko_tools.json"),
+    # OpenCitations COCI - Open scholarly citation index (references, citations, counts)
+    "opencitations": os.path.join(current_dir, "data", "opencitations_tools.json"),
+    # Wikidata Entity API - search and retrieve Wikidata items/entities by ID
+    "wikidata_entity": os.path.join(current_dir, "data", "wikidata_entity_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/

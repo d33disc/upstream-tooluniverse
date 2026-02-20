@@ -1,0 +1,262 @@
+[
+  {
+    "name": "NobelPrize_get_prizes",
+    "description": "Search and retrieve Nobel Prize records from the official Nobel Prize API. Returns prize details including award year, category, prize amount, and laureate information. Covers all Nobel Prize categories: Physics, Chemistry, Physiology/Medicine, Literature, Peace, and Economic Sciences (since 1901). Useful for science history, bibliometrics, and educational research.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "yearFrom": {
+          "type": ["integer", "null"],
+          "description": "Filter prizes from this year (inclusive). Example: 2010"
+        },
+        "yearTo": {
+          "type": ["integer", "null"],
+          "description": "Filter prizes up to this year (inclusive). Example: 2023"
+        },
+        "nobelPrizeCategory": {
+          "type": ["string", "null"],
+          "description": "Filter by category. Values: 'che' (Chemistry), 'eco' (Economics), 'lit' (Literature), 'pea' (Peace), 'phy' (Physics), 'med' (Physiology/Medicine)"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort order: 'asc' or 'desc' by year (default: 'asc')"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of prizes to return (default 25, max 100)"
+        },
+        "offset": {
+          "type": ["integer", "null"],
+          "description": "Offset for pagination (default 0)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.nobelprize.org/2.1/nobelPrizes",
+      "params": {
+        "sort": "desc"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"yearFrom": 2023, "yearTo": 2023},
+      {"nobelPrizeCategory": "phy", "yearFrom": 2010, "yearTo": 2023},
+      {"nobelPrizeCategory": "med", "yearFrom": 2020, "yearTo": 2023}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Nobel Prize search results",
+              "properties": {
+                "nobelPrizes": {
+                  "type": "array",
+                  "description": "List of Nobel Prize records",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "awardYear": {"type": "string", "description": "Year the prize was awarded"},
+                      "category": {
+                        "type": "object",
+                        "properties": {
+                          "en": {"type": "string", "description": "Category name in English (e.g. 'Physics')"},
+                          "no": {"type": "string"},
+                          "se": {"type": "string"}
+                        }
+                      },
+                      "categoryFullName": {
+                        "type": "object",
+                        "properties": {
+                          "en": {"type": "string", "description": "Full category name"}
+                        }
+                      },
+                      "dateAwarded": {"type": "string", "description": "Date prize was awarded (YYYY-MM-DD)"},
+                      "prizeAmount": {"type": "integer", "description": "Prize amount in SEK"},
+                      "prizeAmountAdjusted": {"type": "integer"},
+                      "laureates": {
+                        "type": "array",
+                        "description": "Laureates who received this prize",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {"type": "string", "description": "Laureate ID"},
+                            "knownName": {
+                              "type": "object",
+                              "properties": {"en": {"type": "string"}}
+                            },
+                            "fullName": {
+                              "type": "object",
+                              "properties": {"en": {"type": "string"}}
+                            },
+                            "portion": {"type": "string", "description": "Fraction of prize shared"},
+                            "sortOrder": {"type": "string"},
+                            "motivation": {
+                              "type": "object",
+                              "properties": {
+                                "en": {"type": "string", "description": "Prize motivation/reason"}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "offset": {"type": "integer"},
+                    "limit": {"type": "integer"},
+                    "count": {"type": "integer"},
+                    "total": {"type": "integer"}
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "NobelPrize_get_laureates",
+    "description": "Search Nobel Prize laureates from the official Nobel Prize API. Returns detailed information about individuals and organizations who have received Nobel Prizes, including biographical data, prize motivations, and links to Wikipedia/Wikidata. Covers all 1,000+ laureates since 1901.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": ["string", "null"],
+          "description": "Search by laureate name (partial match). Examples: 'Einstein', 'Curie', 'CRISPR'"
+        },
+        "nobelPrizeYear": {
+          "type": ["integer", "null"],
+          "description": "Filter laureates who won in this year. Example: 2023"
+        },
+        "nobelPrizeCategory": {
+          "type": ["string", "null"],
+          "description": "Filter by prize category. Values: 'che', 'eco', 'lit', 'pea', 'phy', 'med'"
+        },
+        "gender": {
+          "type": ["string", "null"],
+          "description": "Filter by gender: 'male', 'female', 'org' (organization)"
+        },
+        "birthCountry": {
+          "type": ["string", "null"],
+          "description": "Filter by birth country name. Example: 'France', 'Germany', 'United States of America'"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort: 'asc' or 'desc'"
+        },
+        "limit": {
+          "type": ["integer", "null"],
+          "description": "Number of results (default 25)"
+        },
+        "offset": {
+          "type": ["integer", "null"],
+          "description": "Offset for pagination"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.nobelprize.org/2.1/laureates"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"nobelPrizeYear": 2023},
+      {"nobelPrizeCategory": "phy", "gender": "female"},
+      {"name": "Curie"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Nobel laureate search results",
+              "properties": {
+                "laureates": {
+                  "type": "array",
+                  "description": "List of Nobel laureates",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "Laureate ID"},
+                      "knownName": {
+                        "type": "object",
+                        "properties": {"en": {"type": "string", "description": "Well-known name"}}
+                      },
+                      "givenName": {"type": "object", "properties": {"en": {"type": "string"}}},
+                      "familyName": {"type": "object", "properties": {"en": {"type": "string"}}},
+                      "fullName": {"type": "object", "properties": {"en": {"type": "string"}}},
+                      "gender": {"type": "string", "description": "male, female, or org"},
+                      "birth": {
+                        "type": "object",
+                        "properties": {
+                          "date": {"type": "string", "description": "Birth date (YYYY-MM-DD)"},
+                          "place": {"type": "object", "description": "Birth place with city, country"}
+                        }
+                      },
+                      "death": {
+                        "type": "object",
+                        "properties": {
+                          "date": {"type": "string"},
+                          "place": {"type": "object"}
+                        }
+                      },
+                      "wikipedia": {
+                        "type": "object",
+                        "properties": {
+                          "slug": {"type": "string"},
+                          "english": {"type": "string", "description": "Wikipedia URL"}
+                        }
+                      },
+                      "wikidata": {
+                        "type": "object",
+                        "properties": {"id": {"type": "string"}}
+                      },
+                      "nobelPrizes": {
+                        "type": "array",
+                        "description": "Nobel prizes received by this laureate",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "awardYear": {"type": "string"},
+                            "category": {"type": "object"},
+                            "portion": {"type": "string"},
+                            "motivation": {"type": "object"}
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {"type": "object"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

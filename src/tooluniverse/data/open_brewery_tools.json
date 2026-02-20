@@ -1,0 +1,162 @@
+[
+  {
+    "name": "OpenBrewery_search",
+    "description": "Search breweries in the Open Brewery DB - a free database of 8,000+ breweries, cideries, bottleshops, and taprooms worldwide. Returns brewery details including name, type, address, GPS coordinates, phone, and website. Useful for location-based queries, travel planning, and food/beverage research.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "by_name": {
+          "type": ["string", "null"],
+          "description": "Filter by brewery name (partial match). Example: 'dogfish head'"
+        },
+        "by_city": {
+          "type": ["string", "null"],
+          "description": "Filter by city name. Example: 'san francisco', 'denver', 'portland'"
+        },
+        "by_state": {
+          "type": ["string", "null"],
+          "description": "Filter by state/province. Use full name (US). Example: 'california', 'new york', 'colorado'"
+        },
+        "by_country": {
+          "type": ["string", "null"],
+          "description": "Filter by country. Example: 'united states', 'united kingdom', 'germany'"
+        },
+        "by_type": {
+          "type": ["string", "null"],
+          "description": "Filter by brewery type. Values: 'micro' (small independent), 'nano' (very small), 'regional' (regional distribution), 'brewpub' (restaurant+brewery), 'taproom' (taproom only), 'contract' (contract brewer), 'proprietor' (in another brewery), 'closed'"
+        },
+        "by_postal": {
+          "type": ["string", "null"],
+          "description": "Filter by postal/zip code. Example: '94107', 'EC2A 4BX'"
+        },
+        "by_dist": {
+          "type": ["string", "null"],
+          "description": "Sort by distance from coordinates. Format: 'latitude,longitude'. Example: '37.7749,-122.4194' (San Francisco)"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (default 20, max 200)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number for pagination (default 1)"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field and direction. Format: 'field:asc' or 'field:desc'. Example: 'name:asc'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.openbrewerydb.org/v1/breweries"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"by_city": "portland", "by_state": "oregon", "per_page": 5},
+      {"by_type": "brewpub", "by_state": "colorado", "per_page": 5},
+      {"by_country": "germany", "per_page": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of breweries matching the search criteria",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string", "description": "Unique brewery ID"},
+                  "name": {"type": "string", "description": "Brewery name"},
+                  "brewery_type": {"type": "string", "description": "Type: micro, nano, regional, brewpub, taproom, contract, proprietor, closed"},
+                  "address_1": {"type": ["string", "null"], "description": "Street address"},
+                  "city": {"type": ["string", "null"], "description": "City"},
+                  "state_province": {"type": ["string", "null"], "description": "State or province"},
+                  "postal_code": {"type": ["string", "null"], "description": "Postal/zip code"},
+                  "country": {"type": "string", "description": "Country"},
+                  "longitude": {"type": ["string", "null"], "description": "Longitude coordinate"},
+                  "latitude": {"type": ["string", "null"], "description": "Latitude coordinate"},
+                  "phone": {"type": ["string", "null"], "description": "Phone number"},
+                  "website_url": {"type": ["string", "null"], "description": "Brewery website URL"},
+                  "state": {"type": ["string", "null"]}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "OpenBrewery_text_search",
+    "description": "Full-text search for breweries in the Open Brewery DB by keyword. Searches across brewery name, city, state, and type fields simultaneously. Returns up to 10 results per query. Useful for quick fuzzy searches when the exact city or brewery name is unknown.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search term to find breweries. Examples: 'stone brewing', 'lagunitas', 'new england ipa'"
+        },
+        "per_page": {
+          "type": ["integer", "null"],
+          "description": "Number of results (default 5, max 10)"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://api.openbrewerydb.org/v1/breweries/search",
+      "params": {
+        "per_page": "5"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "stone brewing"},
+      {"query": "sierra nevada"},
+      {"query": "lagunitas"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "List of matching breweries",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "name": {"type": "string", "description": "Brewery name"},
+                  "brewery_type": {"type": "string"},
+                  "city": {"type": ["string", "null"]},
+                  "state_province": {"type": ["string", "null"]},
+                  "country": {"type": "string"},
+                  "website_url": {"type": ["string", "null"]},
+                  "phone": {"type": ["string", "null"]}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

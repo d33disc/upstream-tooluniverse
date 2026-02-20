@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Europeana_search",
+    "description": "Search Europeana - Europe's digital platform for cultural heritage with 50+ million items from 3,500+ European museums, libraries, archives, and galleries. Items include paintings, photographs, manuscripts, maps, newspapers, music, and video. Search across collections from the Rijksmuseum, British Library, Louvre, and many other European cultural institutions. No registration required (uses public demo key).",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query. Supports field-specific search: 'what:painting', 'who:rembrandt', 'when:1850', 'where:amsterdam'. Examples: 'van gogh sunflowers', 'medieval manuscripts', 'baroque music'"
+        },
+        "rows": {
+          "type": ["integer", "null"],
+          "description": "Number of results to return (default 12, max 100)"
+        },
+        "start": {
+          "type": ["integer", "null"],
+          "description": "Start index for pagination (default 1)"
+        },
+        "qf": {
+          "type": ["string", "null"],
+          "description": "Query filter. Examples: 'TYPE:IMAGE', 'TYPE:TEXT', 'TYPE:VIDEO', 'TYPE:SOUND', 'TYPE:3D', 'COUNTRY:france', 'LANGUAGE:nl', 'RIGHTS:*open*'"
+        },
+        "sort": {
+          "type": ["string", "null"],
+          "description": "Sort field. Examples: 'europeana_id', 'timestamp_created', 'score'. Use with 'sort_order' to set direction."
+        },
+        "profile": {
+          "type": ["string", "null"],
+          "description": "Response profile: 'minimal' (basic fields), 'standard' (more fields), 'rich' (all fields). Default: 'standard'"
+        }
+      },
+      "required": ["query"]
+    },
+    "fields": {
+      "endpoint": "https://api.europeana.eu/record/v2/search.json",
+      "params": {
+        "wskey": "api2demo"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"query": "Rembrandt self-portrait", "rows": 5},
+      {"query": "medieval illuminated manuscript", "qf": "TYPE:IMAGE", "rows": 5},
+      {"query": "Mozart symphony", "qf": "TYPE:SOUND", "rows": 3}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Search results from Europeana",
+              "properties": {
+                "success": {"type": "boolean"},
+                "itemsCount": {"type": "integer", "description": "Number of items returned"},
+                "totalResults": {"type": "integer", "description": "Total matching items"},
+                "items": {
+                  "type": "array",
+                  "description": "Cultural heritage items",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string", "description": "Europeana record ID"},
+                      "title": {"type": "array", "items": {"type": "string"}, "description": "Item title(s)"},
+                      "dcCreator": {"type": "array", "items": {"type": "string"}, "description": "Creator names"},
+                      "type": {"type": "string", "description": "Media type: IMAGE, TEXT, VIDEO, SOUND, 3D"},
+                      "year": {"type": "array", "items": {"type": "string"}, "description": "Production year"},
+                      "country": {"type": "array", "items": {"type": "string"}, "description": "Country of origin"},
+                      "dataProvider": {"type": "array", "items": {"type": "string"}, "description": "Institution providing the item"},
+                      "edmPreview": {"type": "string", "description": "Thumbnail URL"},
+                      "edmIsShownAt": {"type": "string", "description": "URL to view item at institution"},
+                      "rights": {"type": "array", "items": {"type": "string"}, "description": "Rights/license information"},
+                      "language": {"type": "array", "items": {"type": "string"}},
+                      "guid": {"type": "string", "description": "URL to Europeana record page"}
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

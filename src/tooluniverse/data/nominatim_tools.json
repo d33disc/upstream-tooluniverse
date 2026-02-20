@@ -170,5 +170,96 @@
         }
       ]
     }
+  },
+  {
+    "name": "Nominatim_get_details",
+    "description": "Get detailed information about a specific OpenStreetMap place by its OSM type and ID. Returns comprehensive data including local and international name translations, address hierarchy, linked places, and administrative details. The OSM type (N=node, W=way, R=relation) and OSM ID can be obtained from geocoding results or directly from OpenStreetMap. Provides much richer data than geocoding, including all name translations, parent administrative units, and Wikipedia/Wikidata links.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "osmtype": {
+          "type": "string",
+          "description": "OSM object type: 'N' (node), 'W' (way), or 'R' (relation)"
+        },
+        "osmid": {
+          "type": "integer",
+          "description": "OSM object ID (e.g., 240109189 for Berlin, 65606 for London relation)"
+        },
+        "addressdetails": {
+          "type": ["integer", "null"],
+          "description": "Include address hierarchy: 1=yes, 0=no (default 0)"
+        },
+        "linkedplaces": {
+          "type": ["integer", "null"],
+          "description": "Include linked places: 1=yes, 0=no (default 1)"
+        },
+        "accept-language": {
+          "type": ["string", "null"],
+          "description": "Preferred language for response names (e.g., 'en', 'de', 'fr')"
+        }
+      },
+      "required": ["osmtype", "osmid"]
+    },
+    "fields": {
+      "endpoint": "https://nominatim.openstreetmap.org/details",
+      "params": {
+        "format": "json"
+      },
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (scientific research tool)"
+      }
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"osmtype": "N", "osmid": 240109189},
+      {"osmtype": "R", "osmid": 65606, "addressdetails": 1},
+      {"osmtype": "R", "osmid": 62422, "addressdetails": 1}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Detailed information about the OSM place",
+              "properties": {
+                "place_id": {"type": "integer", "description": "Nominatim internal place ID"},
+                "osm_type": {"type": "string", "description": "OSM type (N/W/R)"},
+                "osm_id": {"type": "integer", "description": "OSM object ID"},
+                "category": {"type": "string", "description": "OSM feature category (place, boundary, amenity)"},
+                "type": {"type": "string", "description": "OSM feature type (city, administrative, restaurant)"},
+                "admin_level": {"type": ["integer", "null"], "description": "Administrative level (2=country, 4=state, 6=county, 8=city)"},
+                "localname": {"type": ["string", "null"], "description": "Primary local name of the place"},
+                "names": {
+                  "type": "object",
+                  "description": "All name translations (name:en, name:de, name:fr, etc.)"
+                },
+                "addresstags": {
+                  "type": "object",
+                  "description": "Address-related tags (city, postcode, street, etc.)"
+                },
+                "extratags": {
+                  "type": "object",
+                  "description": "Extra tags including wikipedia, wikidata, population, website"
+                },
+                "calculated_importance": {"type": ["number", "null"], "description": "Calculated importance score"},
+                "geometry": {
+                  "type": "object",
+                  "description": "GeoJSON geometry of the place"
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
   }
 ]

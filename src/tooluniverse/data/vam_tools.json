@@ -1,0 +1,218 @@
+[
+  {
+    "name": "VAM_search_objects",
+    "description": "Search the Victoria and Albert Museum (V&A, London) collection - one of the world's greatest museums of art, design, and performance. The V&A collection spans 5,000 years and covers fashion, ceramics, furniture, jewelry, photography, sculpture, textiles, and more. Returns detailed records with images, artist info, dates, and materials.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": ["string", "null"],
+          "description": "Search query. Examples: 'silk dress', 'Chinese porcelain', 'William Morris', 'Art Deco'"
+        },
+        "q_object_type": {
+          "type": ["string", "null"],
+          "description": "Filter by object type. Examples: 'dress', 'vase', 'painting', 'sculpture', 'chair'"
+        },
+        "q_material_tech": {
+          "type": ["string", "null"],
+          "description": "Filter by material or technique. Examples: 'silk', 'ceramic', 'oil paint', 'watercolor'"
+        },
+        "q_place_name": {
+          "type": ["string", "null"],
+          "description": "Filter by place of origin. Examples: 'Japan', 'England', 'India', 'France'"
+        },
+        "q_actor_name": {
+          "type": ["string", "null"],
+          "description": "Filter by maker/artist name. Examples: 'Wedgwood', 'Chanel', 'William Morris'"
+        },
+        "year_made_from": {
+          "type": ["integer", "null"],
+          "description": "Filter objects made from this year (e.g. 1800)"
+        },
+        "year_made_to": {
+          "type": ["integer", "null"],
+          "description": "Filter objects made up to this year (e.g. 1900)"
+        },
+        "images_exist": {
+          "type": ["integer", "null"],
+          "description": "Filter to objects with images: 1 = has images, 0 = no images"
+        },
+        "on_display": {
+          "type": ["integer", "null"],
+          "description": "Filter to objects currently on display: 1 = on display"
+        },
+        "page_size": {
+          "type": ["integer", "null"],
+          "description": "Number of results per page (default 15, max 100)"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "description": "Page number (1-indexed)"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://api.vam.ac.uk/v2/objects/search"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"q": "Art Nouveau jewelry", "page_size": 5},
+      {"q_place_name": "Japan", "q_object_type": "kimono", "images_exist": 1},
+      {"q": "Victorian dress", "year_made_from": 1837, "year_made_to": 1901, "page_size": 5}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Search results including records and metadata",
+              "properties": {
+                "info": {
+                  "type": "object",
+                  "properties": {
+                    "record_count": {"type": "integer", "description": "Total matching records"},
+                    "page_size": {"type": "integer"},
+                    "pages": {"type": "integer"},
+                    "page": {"type": "integer"}
+                  }
+                },
+                "records": {
+                  "type": "array",
+                  "description": "List of matching objects",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "systemNumber": {"type": "string", "description": "V&A system number (use for get_object)"},
+                      "accessionNumber": {"type": "string"},
+                      "objectType": {"type": "string", "description": "Type of object"},
+                      "titles": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "title": {"type": "string"},
+                            "type": {"type": "string"}
+                          }
+                        }
+                      },
+                      "summaryDescription": {"type": ["string", "null"]},
+                      "artistMakerPerson": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {"type": "object"},
+                            "association": {"type": "object"}
+                          }
+                        }
+                      },
+                      "productionDates": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "object",
+                              "properties": {
+                                "text": {"type": "string"},
+                                "earliest": {"type": "integer"},
+                                "latest": {"type": "integer"}
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "images": {
+                        "type": "object",
+                        "properties": {
+                          "primary_thumbnail": {"type": "string", "description": "Thumbnail image URL"},
+                          "primary": {"type": "string", "description": "Primary image URL"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "VAM_get_object",
+    "description": "Get detailed information about a specific Victoria and Albert Museum object by its system number. Returns full metadata including titles, description, materials, techniques, maker/artist, production dates, dimensions, and high-resolution image URLs. Use VAM_search_objects to find system numbers first.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "V&A system number (e.g. 'O142600', 'O105780'). Obtained from VAM_search_objects results."
+        }
+      },
+      "required": ["objectId"]
+    },
+    "fields": {
+      "endpoint": "https://api.vam.ac.uk/v2/object/{objectId}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {"objectId": "O142600"},
+      {"objectId": "O105780"},
+      {"objectId": "O78413"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Full object record",
+              "properties": {
+                "record": {
+                  "type": "object",
+                  "properties": {
+                    "systemNumber": {"type": "string"},
+                    "accessionNumber": {"type": "string"},
+                    "objectType": {"type": "string"},
+                    "titles": {"type": "array", "items": {"type": "object"}},
+                    "summaryDescription": {"type": ["string", "null"]},
+                    "physicalDescription": {"type": ["string", "null"]},
+                    "artistMakerPerson": {"type": "array"},
+                    "materials": {"type": "array"},
+                    "techniques": {"type": "array"},
+                    "categories": {"type": "array"},
+                    "styles": {"type": "array"},
+                    "productionDates": {"type": "array"},
+                    "placesOfOrigin": {"type": "array"},
+                    "dimensions": {"type": "array"},
+                    "images": {"type": "object"}
+                  }
+                },
+                "meta": {"type": "object"}
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]

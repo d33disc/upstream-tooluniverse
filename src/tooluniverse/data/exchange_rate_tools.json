@@ -1,0 +1,62 @@
+[
+  {
+    "name": "ExchangeRate_get_latest",
+    "description": "Get the latest currency exchange rates relative to a base currency. Uses the Open Exchange Rates public API (no authentication required). Returns exchange rates for 150+ currencies updated regularly. Useful for financial calculations, currency conversions, travel budgeting, and economic research.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": ["string", "null"],
+          "description": "Base currency code (ISO 4217). All other rates are relative to this. Examples: 'USD', 'EUR', 'GBP', 'JPY', 'CNY'. Default: 'USD'"
+        }
+      },
+      "required": []
+    },
+    "fields": {
+      "endpoint": "https://open.er-api.com/v6/latest/{base}"
+    },
+    "type": "BaseRESTTool",
+    "test_examples": [
+      {},
+      {"base": "EUR"},
+      {"base": "GBP"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "description": "Exchange rate data",
+              "properties": {
+                "result": {"type": "string", "description": "Status: 'success' or 'error'"},
+                "provider": {"type": "string"},
+                "documentation": {"type": "string"},
+                "terms_of_use": {"type": "string"},
+                "time_last_update_unix": {"type": "integer"},
+                "time_last_update_utc": {"type": "string", "description": "Timestamp of last update"},
+                "time_next_update_unix": {"type": "integer"},
+                "time_next_update_utc": {"type": "string"},
+                "time_eol_unix": {"type": "integer"},
+                "base_code": {"type": "string", "description": "Base currency code (e.g. 'USD')"},
+                "rates": {
+                  "type": "object",
+                  "description": "Exchange rates for all currencies relative to base currency. Keys are ISO 4217 currency codes (e.g. 'EUR', 'GBP', 'JPY'), values are float exchange rates.",
+                  "additionalProperties": {"type": "number"}
+                }
+              }
+            },
+            "metadata": {"type": "object"}
+          },
+          "required": ["data"]
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  }
+]
