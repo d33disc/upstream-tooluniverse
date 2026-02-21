@@ -9,7 +9,7 @@
           "type": "string",
           "description": "Small body identifier: name, number, or designation. Examples: 'Ceres' (1 Ceres), '433' (433 Eros), 'Apophis' (99942 Apophis), 'Bennu' (101955 Bennu), 'Halley' (1P/Halley comet), '2020 SO', '67P' (Churyumov-Gerasimenko)"
         },
-        "phys_par": {
+        "phys-par": {
           "type": [
             "string",
             "null"
@@ -31,11 +31,11 @@
     "test_examples": [
       {
         "sstr": "Ceres",
-        "phys_par": "true"
+        "phys-par": "true"
       },
       {
         "sstr": "Apophis",
-        "phys_par": "true"
+        "phys-par": "true"
       },
       {
         "sstr": "433"
@@ -167,28 +167,28 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "dist_max": {
+        "dist-max": {
           "type": [
             "string",
             "null"
           ],
           "description": "Maximum approach distance in AU. Examples: '0.01' (1.5 million km), '0.05' (7.5 million km), '0.5' (75 million km). Default: 0.05"
         },
-        "date_min": {
+        "date-min": {
           "type": [
             "string",
             "null"
           ],
           "description": "Start date for search (YYYY-MM-DD format). Default: current date."
         },
-        "date_max": {
+        "date-max": {
           "type": [
             "string",
             "null"
           ],
           "description": "End date for search (YYYY-MM-DD format). Example: '2025-12-31'"
         },
-        "h_max": {
+        "h-max": {
           "type": [
             "number",
             "null"
@@ -218,16 +218,16 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {
-        "dist_max": "0.01",
-        "date_min": "2024-01-01",
-        "date_max": "2024-12-31",
+        "dist-max": "0.01",
+        "date-min": "2024-01-01",
+        "date-max": "2024-12-31",
         "limit": 10
       },
       {
-        "dist_max": "0.05",
-        "date_min": "2025-01-01",
-        "date_max": "2025-06-30",
-        "h_max": 22,
+        "dist-max": "0.05",
+        "date-min": "2025-01-01",
+        "date-max": "2025-06-30",
+        "h-max": 22,
         "limit": 10
       },
       {
@@ -245,11 +245,11 @@
               "type": "object"
             },
             "count": {
-              "type": "string",
+              "type": ["string", "integer"],
               "description": "Number of results returned"
             },
             "total": {
-              "type": "string",
+              "type": ["string", "integer", "null"],
               "description": "Total matching events"
             },
             "fields": {

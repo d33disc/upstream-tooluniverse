@@ -158,7 +158,7 @@
                           "null"
                         ],
                         "items": {
-                          "type": "object"
+                          "type": ["string", "object"]
                         }
                       },
                       "links": {
