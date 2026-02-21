@@ -37,19 +37,19 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {
-        "protein_ids": ["TP53"],
+        "identifiers": "TP53",
         "species": 9606,
-        "add_nodes": 5
+        "limit": 5
       },
       {
-        "protein_ids": ["BRCA1", "BRCA2", "TP53"],
+        "identifiers": "BRCA1\rBRCA2\rTP53",
         "species": 9606,
-        "add_nodes": 0
+        "limit": 0
       },
       {
-        "protein_ids": ["EGFR"],
+        "identifiers": "EGFR",
         "species": 9606,
-        "add_nodes": 5
+        "limit": 5
       }
     ],
     "return_schema": {
@@ -171,19 +171,19 @@
     "type": "BaseRESTTool",
     "test_examples": [
       {
-        "protein_ids": ["TP53"],
+        "identifiers": "TP53",
         "species": 9606,
-        "add_nodes": 10
+        "limit": 10
       },
       {
-        "protein_ids": ["BRCA1"],
+        "identifiers": "BRCA1",
         "species": 9606,
-        "add_nodes": 5
+        "limit": 5
       },
       {
-        "protein_ids": ["EGFR"],
+        "identifiers": "EGFR",
         "species": 9606,
-        "add_nodes": 5
+        "limit": 5
       }
     ],
     "return_schema": {
