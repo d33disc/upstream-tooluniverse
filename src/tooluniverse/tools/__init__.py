@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1925 scientific tools.
+Type-safe Python interface to 1888 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -51,7 +51,6 @@ from .AdverseEventPredictionQuestionGenerator import (
 from .AdverseEventPredictionQuestionGeneratorWithContext import (
     AdverseEventPredictionQuestionGeneratorWithContext,
 )
-from .Agify_predict_age import Agify_predict_age
 from .AllenBrain_get_expression_datasets import AllenBrain_get_expression_datasets
 from .AllenBrain_get_structure import AllenBrain_get_structure
 from .AllenBrain_search_genes import AllenBrain_search_genes
@@ -71,9 +70,6 @@ from .ArXiv_search_papers import ArXiv_search_papers
 from .ArgumentDescriptionOptimizer import ArgumentDescriptionOptimizer
 from .ArtIC_get_artwork import ArtIC_get_artwork
 from .ArtIC_search_artworks import ArtIC_search_artworks
-from .AviationWeather_get_metar import AviationWeather_get_metar
-from .AviationWeather_get_taf import AviationWeather_get_taf
-from .BGS_get_geomagnetic_field import BGS_get_geomagnetic_field
 from .BLAST_nucleotide_search import BLAST_nucleotide_search
 from .BLAST_protein_search import BLAST_protein_search
 from .BMRB_get_entries_by_pdb_id import BMRB_get_entries_by_pdb_id
@@ -171,9 +167,6 @@ from .CTD_get_disease_chemicals import CTD_get_disease_chemicals
 from .CTD_get_gene_chemicals import CTD_get_gene_chemicals
 from .CTD_get_gene_diseases import CTD_get_gene_diseases
 from .CallAgent import CallAgent
-from .CarbonIntensity_get_by_date import CarbonIntensity_get_by_date
-from .CarbonIntensity_get_current import CarbonIntensity_get_current
-from .CarbonIntensity_get_generation_mix import CarbonIntensity_get_generation_mix
 from .ChEBI_get_compound import ChEBI_get_compound
 from .ChEBI_get_ontology_children import ChEBI_get_ontology_children
 from .ChEBI_search import ChEBI_search
@@ -227,6 +220,12 @@ from .ClinGen_search_actionability import ClinGen_search_actionability
 from .ClinGen_search_dosage_sensitivity import ClinGen_search_dosage_sensitivity
 from .ClinGen_search_gene_validity import ClinGen_search_gene_validity
 from .ClinicalTrialDesignAgent import ClinicalTrialDesignAgent
+from .ClinicalTrials_get_database_stats import ClinicalTrials_get_database_stats
+from .ClinicalTrials_get_field_values import ClinicalTrials_get_field_values
+from .ClinicalTrials_get_study import ClinicalTrials_get_study
+from .ClinicalTrials_search_by_intervention import ClinicalTrials_search_by_intervention
+from .ClinicalTrials_search_by_sponsor import ClinicalTrials_search_by_sponsor
+from .ClinicalTrials_search_studies import ClinicalTrials_search_studies
 from .CoL_get_children import CoL_get_children
 from .CoL_get_taxon import CoL_get_taxon
 from .CoL_search_species import CoL_search_species
@@ -245,9 +244,6 @@ from .CxGDisc_get_collection import CxGDisc_get_collection
 from .CxGDisc_list_collections import CxGDisc_list_collections
 from .CxGDisc_search_datasets import CxGDisc_search_datasets
 from .DBLP_search_publications import DBLP_search_publications
-from .DBnomics_get_dataset import DBnomics_get_dataset
-from .DBnomics_get_series import DBnomics_get_series
-from .DBnomics_search_datasets import DBnomics_search_datasets
 from .DBpedia_SPARQL_query import DBpedia_SPARQL_query
 from .DGIdb_get_drug_gene_interactions import DGIdb_get_drug_gene_interactions
 from .DGIdb_get_drug_info import DGIdb_get_drug_info
@@ -278,10 +274,6 @@ from .DescriptionQualityEvaluator import DescriptionQualityEvaluator
 from .Dfam_get_annotations import Dfam_get_annotations
 from .Dfam_get_family import Dfam_get_family
 from .Dfam_search_families import Dfam_search_families
-from .DigiKey_get_categories import DigiKey_get_categories
-from .DigiKey_get_manufacturers import DigiKey_get_manufacturers
-from .DigiKey_get_product_details import DigiKey_get_product_details
-from .DigiKey_search_by_keyword import DigiKey_search_by_keyword
 from .DisProt_get_entry import DisProt_get_entry
 from .DisProt_search import DisProt_search
 from .DiseaseAnalyzerAgent import DiseaseAnalyzerAgent
@@ -959,7 +951,6 @@ from .ICD11_search_diseases import ICD11_search_diseases
 from .IDR_get_study import IDR_get_study
 from .IDR_get_study_datasets import IDR_get_study_datasets
 from .IDR_list_studies import IDR_list_studies
-from .IEA_get_ev_data import IEA_get_ev_data
 from .IMGT_get_gene_info import IMGT_get_gene_info
 from .IMGT_get_sequence import IMGT_get_sequence
 from .IMGT_search_genes import IMGT_search_genes
@@ -992,14 +983,6 @@ from .InterPro_get_structures_for_domain import InterPro_get_structures_for_doma
 from .InterPro_search_domains import InterPro_search_domains
 from .InterPro_search_entries import InterPro_search_entries
 from .JASPAR_get_transcription_factors import JASPAR_get_transcription_factors
-from .JLCSearch_list_categories import JLCSearch_list_categories
-from .JLCSearch_search_capacitors import JLCSearch_search_capacitors
-from .JLCSearch_search_components import JLCSearch_search_components
-from .JLCSearch_search_diodes import JLCSearch_search_diodes
-from .JLCSearch_search_leds import JLCSearch_search_leds
-from .JLCSearch_search_microcontrollers import JLCSearch_search_microcontrollers
-from .JLCSearch_search_resistors import JLCSearch_search_resistors
-from .JLCSearch_search_voltage_regulators import JLCSearch_search_voltage_regulators
 from .JPLHorizons_get_body_data import JPLHorizons_get_body_data
 from .JPLHorizons_lookup_object import JPLHorizons_lookup_object
 from .KEGG_get_brite_hierarchy import KEGG_get_brite_hierarchy
@@ -1049,7 +1032,6 @@ from .MarineRegions_get_record import MarineRegions_get_record
 from .MarineRegions_search_by_name import MarineRegions_search_by_name
 from .MassBank_search_by_compound import MassBank_search_by_compound
 from .MassBank_search_by_formula import MassBank_search_by_formula
-from .MathJS_evaluate import MathJS_evaluate
 from .MeSH_get_descriptor import MeSH_get_descriptor
 from .MeSH_search_descriptors import MeSH_search_descriptors
 from .MeSH_search_terms import MeSH_search_terms
@@ -1097,14 +1079,6 @@ from .Monarch_search_gene import Monarch_search_gene
 from .MouseMine_search import MouseMine_search
 from .MouseMine_search_alleles import MouseMine_search_alleles
 from .MouseMine_search_genes import MouseMine_search_genes
-from .Mouser_search_by_keyword import Mouser_search_by_keyword
-from .Mouser_search_by_keyword_and_manufacturer import (
-    Mouser_search_by_keyword_and_manufacturer,
-)
-from .Mouser_search_by_part_and_manufacturer import (
-    Mouser_search_by_part_and_manufacturer,
-)
-from .Mouser_search_by_part_number import Mouser_search_by_part_number
 from .MultiAgentLiteratureSearch import MultiAgentLiteratureSearch
 from .MyChem_get_chemical_annotation import MyChem_get_chemical_annotation
 from .MyChem_query_chemicals import MyChem_query_chemicals
@@ -1135,8 +1109,6 @@ from .NASA_DONKI_get_solar_energetic_particles import (
     NASA_DONKI_get_solar_energetic_particles,
 )
 from .NASA_DONKI_get_solar_flares import NASA_DONKI_get_solar_flares
-from .NASAapod_get_picture import NASAapod_get_picture
-from .NASAapod_search_pictures import NASAapod_search_pictures
 from .NCBIDatasets_get_gene import NCBIDatasets_get_gene
 from .NCBIDatasets_get_gene_by_symbol import NCBIDatasets_get_gene_by_symbol
 from .NCBIDatasets_get_orthologs import NCBIDatasets_get_orthologs
@@ -1162,9 +1134,6 @@ from .NDEx_get_network_summary import NDEx_get_network_summary
 from .NDEx_search_networks import NDEx_search_networks
 from .NICE_Clinical_Guidelines_Search import NICE_Clinical_Guidelines_Search
 from .NICE_Guideline_Full_Text import NICE_Guideline_Full_Text
-from .NOAASpaceWeather_get_kp_index import NOAASpaceWeather_get_kp_index
-from .NOAASpaceWeather_get_solar_cycle import NOAASpaceWeather_get_solar_cycle
-from .NOAASpaceWeather_get_solar_xrays import NOAASpaceWeather_get_solar_xrays
 from .NWS_get_active_alerts import NWS_get_active_alerts
 from .NWS_get_forecast import NWS_get_forecast
 from .NWS_get_point_metadata import NWS_get_point_metadata
@@ -1178,14 +1147,11 @@ from .NeuroVault_list_collection_images import NeuroVault_list_collection_images
 from .NeuroVault_list_collections import NeuroVault_list_collections
 from .Nextstrain_get_dataset import Nextstrain_get_dataset
 from .Nextstrain_list_datasets import Nextstrain_list_datasets
-from .NobelPrize_get_laureates import NobelPrize_get_laureates
-from .NobelPrize_get_prizes import NobelPrize_get_prizes
 from .Nominatim_geocode import Nominatim_geocode
 from .Nominatim_reverse_geocode import Nominatim_reverse_geocode
 from .NoveltySignificanceReviewer import NoveltySignificanceReviewer
 from .OBIS_search_occurrences import OBIS_search_occurrences
 from .OBIS_search_taxa import OBIS_search_taxa
-from .OEIS_search import OEIS_search
 from .OMA_get_group import OMA_get_group
 from .OMA_get_hog import OMA_get_hog
 from .OMA_get_orthologs import OMA_get_orthologs
@@ -1229,11 +1195,6 @@ from .OpenFDA_search_drug_ndc import OpenFDA_search_drug_ndc
 from .OpenFDA_search_food_enforcement import OpenFDA_search_food_enforcement
 from .OpenFoodFacts_get_product import OpenFoodFacts_get_product
 from .OpenFoodFacts_search_products import OpenFoodFacts_search_products
-from .OpenLibrary_browse_subjects import OpenLibrary_browse_subjects
-from .OpenLibrary_get_author import OpenLibrary_get_author
-from .OpenLibrary_get_book import OpenLibrary_get_book
-from .OpenLibrary_get_work import OpenLibrary_get_work
-from .OpenLibrary_search_books import OpenLibrary_search_books
 from .OpenML_get_dataset import OpenML_get_dataset
 from .OpenML_search_datasets import OpenML_search_datasets
 from .OpenMeteo_geocode_location import OpenMeteo_geocode_location
@@ -1879,8 +1840,6 @@ from .civic_search_genes import civic_search_genes
 from .civic_search_molecular_profiles import civic_search_molecular_profiles
 from .civic_search_therapies import civic_search_therapies
 from .civic_search_variants import civic_search_variants
-from .clinical_trials_get_details import clinical_trials_get_details
-from .clinical_trials_search import clinical_trials_search
 from .clinvar_get_clinical_significance import clinvar_get_clinical_significance
 from .clinvar_get_variant_details import clinvar_get_variant_details
 from .clinvar_search_variants import clinvar_search_variants
@@ -2458,7 +2417,6 @@ __all__ = [
     "AdverseEventICDMapper",
     "AdverseEventPredictionQuestionGenerator",
     "AdverseEventPredictionQuestionGeneratorWithContext",
-    "Agify_predict_age",
     "AllenBrain_get_expression_datasets",
     "AllenBrain_get_structure",
     "AllenBrain_search_genes",
@@ -2478,9 +2436,6 @@ __all__ = [
     "ArgumentDescriptionOptimizer",
     "ArtIC_get_artwork",
     "ArtIC_search_artworks",
-    "AviationWeather_get_metar",
-    "AviationWeather_get_taf",
-    "BGS_get_geomagnetic_field",
     "BLAST_nucleotide_search",
     "BLAST_protein_search",
     "BMRB_get_entries_by_pdb_id",
@@ -2578,9 +2533,6 @@ __all__ = [
     "CTD_get_gene_chemicals",
     "CTD_get_gene_diseases",
     "CallAgent",
-    "CarbonIntensity_get_by_date",
-    "CarbonIntensity_get_current",
-    "CarbonIntensity_get_generation_mix",
     "ChEBI_get_compound",
     "ChEBI_get_ontology_children",
     "ChEBI_search",
@@ -2632,6 +2584,12 @@ __all__ = [
     "ClinGen_search_dosage_sensitivity",
     "ClinGen_search_gene_validity",
     "ClinicalTrialDesignAgent",
+    "ClinicalTrials_get_database_stats",
+    "ClinicalTrials_get_field_values",
+    "ClinicalTrials_get_study",
+    "ClinicalTrials_search_by_intervention",
+    "ClinicalTrials_search_by_sponsor",
+    "ClinicalTrials_search_studies",
     "CoL_get_children",
     "CoL_get_taxon",
     "CoL_search_species",
@@ -2650,9 +2608,6 @@ __all__ = [
     "CxGDisc_list_collections",
     "CxGDisc_search_datasets",
     "DBLP_search_publications",
-    "DBnomics_get_dataset",
-    "DBnomics_get_series",
-    "DBnomics_search_datasets",
     "DBpedia_SPARQL_query",
     "DGIdb_get_drug_gene_interactions",
     "DGIdb_get_drug_info",
@@ -2683,10 +2638,6 @@ __all__ = [
     "Dfam_get_annotations",
     "Dfam_get_family",
     "Dfam_search_families",
-    "DigiKey_get_categories",
-    "DigiKey_get_manufacturers",
-    "DigiKey_get_product_details",
-    "DigiKey_search_by_keyword",
     "DisProt_get_entry",
     "DisProt_search",
     "DiseaseAnalyzerAgent",
@@ -3136,7 +3087,6 @@ __all__ = [
     "IDR_get_study",
     "IDR_get_study_datasets",
     "IDR_list_studies",
-    "IEA_get_ev_data",
     "IMGT_get_gene_info",
     "IMGT_get_sequence",
     "IMGT_search_genes",
@@ -3167,14 +3117,6 @@ __all__ = [
     "InterPro_search_domains",
     "InterPro_search_entries",
     "JASPAR_get_transcription_factors",
-    "JLCSearch_list_categories",
-    "JLCSearch_search_capacitors",
-    "JLCSearch_search_components",
-    "JLCSearch_search_diodes",
-    "JLCSearch_search_leds",
-    "JLCSearch_search_microcontrollers",
-    "JLCSearch_search_resistors",
-    "JLCSearch_search_voltage_regulators",
     "JPLHorizons_get_body_data",
     "JPLHorizons_lookup_object",
     "KEGG_get_brite_hierarchy",
@@ -3224,7 +3166,6 @@ __all__ = [
     "MarineRegions_search_by_name",
     "MassBank_search_by_compound",
     "MassBank_search_by_formula",
-    "MathJS_evaluate",
     "MeSH_get_descriptor",
     "MeSH_search_descriptors",
     "MeSH_search_terms",
@@ -3264,10 +3205,6 @@ __all__ = [
     "MouseMine_search",
     "MouseMine_search_alleles",
     "MouseMine_search_genes",
-    "Mouser_search_by_keyword",
-    "Mouser_search_by_keyword_and_manufacturer",
-    "Mouser_search_by_part_and_manufacturer",
-    "Mouser_search_by_part_number",
     "MultiAgentLiteratureSearch",
     "MyChem_get_chemical_annotation",
     "MyChem_query_chemicals",
@@ -3296,8 +3233,6 @@ __all__ = [
     "NASA_DONKI_get_interplanetary_shocks",
     "NASA_DONKI_get_solar_energetic_particles",
     "NASA_DONKI_get_solar_flares",
-    "NASAapod_get_picture",
-    "NASAapod_search_pictures",
     "NCBIDatasets_get_gene",
     "NCBIDatasets_get_gene_by_symbol",
     "NCBIDatasets_get_orthologs",
@@ -3323,9 +3258,6 @@ __all__ = [
     "NDEx_search_networks",
     "NICE_Clinical_Guidelines_Search",
     "NICE_Guideline_Full_Text",
-    "NOAASpaceWeather_get_kp_index",
-    "NOAASpaceWeather_get_solar_cycle",
-    "NOAASpaceWeather_get_solar_xrays",
     "NWS_get_active_alerts",
     "NWS_get_forecast",
     "NWS_get_point_metadata",
@@ -3339,14 +3271,11 @@ __all__ = [
     "NeuroVault_list_collections",
     "Nextstrain_get_dataset",
     "Nextstrain_list_datasets",
-    "NobelPrize_get_laureates",
-    "NobelPrize_get_prizes",
     "Nominatim_geocode",
     "Nominatim_reverse_geocode",
     "NoveltySignificanceReviewer",
     "OBIS_search_occurrences",
     "OBIS_search_taxa",
-    "OEIS_search",
     "OMA_get_group",
     "OMA_get_hog",
     "OMA_get_orthologs",
@@ -3386,11 +3315,6 @@ __all__ = [
     "OpenFDA_search_food_enforcement",
     "OpenFoodFacts_get_product",
     "OpenFoodFacts_search_products",
-    "OpenLibrary_browse_subjects",
-    "OpenLibrary_get_author",
-    "OpenLibrary_get_book",
-    "OpenLibrary_get_work",
-    "OpenLibrary_search_books",
     "OpenML_get_dataset",
     "OpenML_search_datasets",
     "OpenMeteo_geocode_location",
@@ -3884,8 +3808,6 @@ __all__ = [
     "civic_search_molecular_profiles",
     "civic_search_therapies",
     "civic_search_variants",
-    "clinical_trials_get_details",
-    "clinical_trials_search",
     "clinvar_get_clinical_significance",
     "clinvar_get_variant_details",
     "clinvar_search_variants",

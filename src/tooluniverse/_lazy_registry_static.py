@@ -38,7 +38,6 @@ STATIC_LAZY_REGISTRY = {
     "ClinVarRESTTool": "clinvar_tool",
     "ClinVarSearchVariants": "clinvar_tool",
     "ClinicalTrialsDetailsTool": "ctg_tool",
-    "ClinicalTrialsGovTool": "clinical_trials_tool",
     "ClinicalTrialsSearchTool": "ctg_tool",
     "ClinicalTrialsTool": "ctg_tool",
     "ComposeTool": "compose_tool",
