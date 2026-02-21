@@ -456,4 +456,7 @@ STATIC_LAZY_REGISTRY = {
     "EpiGraphDBTool": "epigraphdb_tool",
     "IdentifiersOrgTool": "identifiers_org_tool",
     "OpenNeuroTool": "openneuro_tool",
+    "ADAStandardsTool": "clinical_society_tools",
+    "AHAACCGuidelineTool": "clinical_society_tools",
+    "NCCNGuidelineTool": "clinical_society_tools",
 }

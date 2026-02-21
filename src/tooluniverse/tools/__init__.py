@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1906 scientific tools.
+Type-safe Python interface to 1915 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -25,6 +25,10 @@ from tooluniverse.exceptions import (
 from ._shared_client import get_shared_client, reset_shared_client
 
 # Import all tools
+from .ACC_list_guidelines import ACC_list_guidelines
+from .ADA_get_standards_section import ADA_get_standards_section
+from .ADA_list_standards_sections import ADA_list_standards_sections
+from .ADA_search_standards import ADA_search_standards
 from .ADMETAI_predict_BBB_penetrance import ADMETAI_predict_BBB_penetrance
 from .ADMETAI_predict_CYP_interactions import ADMETAI_predict_CYP_interactions
 from .ADMETAI_predict_bioavailability import ADMETAI_predict_bioavailability
@@ -43,6 +47,8 @@ from .ADMETAI_predict_solubility_lipophilicity_hydration import (
 from .ADMETAI_predict_stress_response import ADMETAI_predict_stress_response
 from .ADMETAI_predict_toxicity import ADMETAI_predict_toxicity
 from .ADMETAnalyzerAgent import ADMETAnalyzerAgent
+from .AHA_ACC_search_guidelines import AHA_ACC_search_guidelines
+from .AHA_list_guidelines import AHA_list_guidelines
 from .AdvancedCodeQualityAnalyzer import AdvancedCodeQualityAnalyzer
 from .AdverseEventICDMapper import AdverseEventICDMapper
 from .AdverseEventPredictionQuestionGenerator import (
@@ -1137,6 +1143,9 @@ from .NCBI_SRA_search_runs import NCBI_SRA_search_runs
 from .NCBI_fetch_accessions import NCBI_fetch_accessions
 from .NCBI_get_sequence import NCBI_get_sequence
 from .NCBI_search_nucleotide import NCBI_search_nucleotide
+from .NCCN_get_patient_guideline import NCCN_get_patient_guideline
+from .NCCN_list_patient_guidelines import NCCN_list_patient_guidelines
+from .NCCN_search_guidelines import NCCN_search_guidelines
 from .NCIDrugDict_get_drug import NCIDrugDict_get_drug
 from .NCIDrugDict_search import NCIDrugDict_search
 from .NCIThesaurus_get_children import NCIThesaurus_get_children
@@ -2421,6 +2430,10 @@ from .web_search import web_search
 __all__ = [
     "get_shared_client",
     "reset_shared_client",
+    "ACC_list_guidelines",
+    "ADA_get_standards_section",
+    "ADA_list_standards_sections",
+    "ADA_search_standards",
     "ADMETAI_predict_BBB_penetrance",
     "ADMETAI_predict_CYP_interactions",
     "ADMETAI_predict_bioavailability",
@@ -2431,6 +2444,8 @@ __all__ = [
     "ADMETAI_predict_stress_response",
     "ADMETAI_predict_toxicity",
     "ADMETAnalyzerAgent",
+    "AHA_ACC_search_guidelines",
+    "AHA_list_guidelines",
     "AdvancedCodeQualityAnalyzer",
     "AdverseEventICDMapper",
     "AdverseEventPredictionQuestionGenerator",
@@ -3279,6 +3294,9 @@ __all__ = [
     "NCBI_fetch_accessions",
     "NCBI_get_sequence",
     "NCBI_search_nucleotide",
+    "NCCN_get_patient_guideline",
+    "NCCN_list_patient_guidelines",
+    "NCCN_search_guidelines",
     "NCIDrugDict_get_drug",
     "NCIDrugDict_search",
     "NCIThesaurus_get_children",

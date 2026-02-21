@@ -898,6 +898,8 @@ default_tool_files = {
     "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
     # ArtIC - Art Institute of Chicago open-access artwork search and metadata
     "artic": os.path.join(current_dir, "data", "artic_tools.json"),
+    # ADA/AHA/ACC/NCCN - Clinical society guidelines (diabetes, cardiology, oncology)
+    "ada_aha_nccn": os.path.join(current_dir, "data", "ada_aha_nccn_tools.json"),
 }
 
 # Auto-load any user-provided tools from ~/.tooluniverse/user_tools/
