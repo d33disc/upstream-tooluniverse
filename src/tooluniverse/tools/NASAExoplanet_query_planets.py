@@ -22,7 +22,7 @@ def NASAExoplanet_query_planets(
     Parameters
     ----------
     query : str
-        ADQL/SQL query against the NASA Exoplanet Archive table 'ps'. Examples: "sele...
+        ADQL/SQL query against the NASA Exoplanet Archive table 'ps'. Note: LIMIT is ...
     format : str | Any
         Output format: 'json' (default), 'csv', 'tsv', 'votable'
     stream_callback : Callable, optional
