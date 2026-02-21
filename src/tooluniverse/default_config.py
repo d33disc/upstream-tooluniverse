@@ -244,9 +244,6 @@ default_tool_files = {
     "compact_mode": os.path.join(current_dir, "data", "compact_mode_tools.json"),
     # New Life Science Tools
     "hca_tools": os.path.join(current_dir, "data", "hca_tools.json"),
-    "clinical_trials_tools": os.path.join(
-        current_dir, "data", "clinical_trials_tools.json"
-    ),
     "iedb_tools": os.path.join(current_dir, "data", "iedb_tools.json"),
     "pathway_commons_tools": os.path.join(
         current_dir, "data", "pathway_commons_tools.json"
@@ -405,12 +402,6 @@ default_tool_files = {
     "cath": os.path.join(current_dir, "data", "cath_tools.json"),
     # MeSH - Medical Subject Headings (NLM controlled vocabulary for PubMed indexing)
     "mesh": os.path.join(current_dir, "data", "mesh_tools.json"),
-    # JLCSearch - Electronic components search (resistors, capacitors, MCUs, ICs, LEDs, diodes)
-    "jlcsearch": os.path.join(current_dir, "data", "jlcsearch_tools.json"),
-    # Mouser Electronics - Major distributor API (pricing, availability, specs, datasheets)
-    "mouser": os.path.join(current_dir, "data", "mouser_tools.json"),
-    # Digi-Key Electronics - Major distributor API (product search, details, categories)
-    "digikey": os.path.join(current_dir, "data", "digikey_tools.json"),
     # HPO - Human Phenotype Ontology (phenotype terms, hierarchy, clinical genetics)
     "hpo": os.path.join(current_dir, "data", "hpo_tools.json"),
     # Reactome Analysis Service - Pathway enrichment/overrepresentation analysis
@@ -744,15 +735,11 @@ default_tool_files = {
     "osdr": os.path.join(current_dir, "data", "osdr_tools.json"),
     # Gene2Phenotype - EBI curated gene-disease associations for clinical genetics
     "gene2phenotype": os.path.join(current_dir, "data", "gene2phenotype_tools.json"),
-    # Open Library - Open book catalog with 20M+ editions linked to Internet Archive
-    "openlibrary": os.path.join(current_dir, "data", "openlibrary_tools.json"),
     # NASA Exoplanet Archive - ADQL queries for 5500+ confirmed exoplanets and stellar hosts
     "nasa_exoplanet": os.path.join(current_dir, "data", "nasa_exoplanet_tools.json"),
     # OpenStreetMap Nominatim - Free geocoding and reverse geocoding worldwide
     "nominatim": os.path.join(current_dir, "data", "nominatim_tools.json"),
     # REST Countries - Comprehensive country metadata (population, languages, currencies, borders)
-    # NASA APOD - Astronomy Picture of the Day with images and explanations
-    "nasa_apod": os.path.join(current_dir, "data", "nasa_apod_tools.json"),
     # eBird - Cornell Lab bird taxonomy and regional species lists (no API key)
     "ebird_taxonomy": os.path.join(current_dir, "data", "ebird_taxonomy_tools.json"),
     # CRAN R Package Database - Metadata for 20,000+ R packages including versions and dependencies
@@ -783,8 +770,6 @@ default_tool_files = {
     "eurostat": os.path.join(current_dir, "data", "eurostat_tools.json"),
     # USGS Earthquake - Real-time and historical earthquake data from USGS FDSN
     "usgs_earthquake": os.path.join(current_dir, "data", "usgs_earthquake_tools.json"),
-    # BGS Geomagnetic Field - IGRF model for magnetic declination and field strength worldwide
-    "bgs_geomag": os.path.join(current_dir, "data", "bgs_geomag_tools.json"),
     # JPL Horizons - Solar system body lookup and physical data from NASA JPL
     "jpl_horizons": os.path.join(current_dir, "data", "jpl_horizons_tools.json"),
     # NASA SBDB - Small Body Database for asteroids and comets (1.3M+ objects)
@@ -796,17 +781,9 @@ default_tool_files = {
     "huggingface": os.path.join(current_dir, "data", "huggingface_tools.json"),
     # OpenML - Open machine learning benchmark datasets and tasks
     "openml": os.path.join(current_dir, "data", "openml_tools.json"),
-    # NOAA Space Weather - Kp index, solar cycle, X-ray flux from SWPC
-    "noaa_spaceweather": os.path.join(
-        current_dir, "data", "noaa_spaceweather_tools.json"
-    ),
     # Metropolitan Museum of Art - 400K+ open-access artworks (search and object detail)
     # Victoria and Albert Museum - 5000 years of art and design (search and object detail)
-    # OEIS - Online Encyclopedia of Integer Sequences (370K+ sequences)
-    "oeis": os.path.join(current_dir, "data", "oeis_tools.json"),
     # Europeana - 50M+ European cultural heritage items (museums, libraries, archives)
-    # Nobel Prize - all Nobel Prize winners and prizes since 1901 (official API)
-    "nobel_prize": os.path.join(current_dir, "data", "nobel_prize_tools.json"),
     # Exchange Rate - live currency exchange rates for 150+ currencies (no auth)
     # Crates.io - Rust package registry (150K+ crates with search and details)
     # Internet Archive - Digital library of 40M+ items (books, audio, video, web, software)
@@ -829,8 +806,6 @@ default_tool_files = {
     # ELIXIR TeSS - Bioinformatics training materials and events aggregator
     "elixir_tess": os.path.join(current_dir, "data", "elixir_tess_tools.json"),
     # Wikimedia Stats - Wikipedia page views and top articles analytics
-    # DBnomics - macroeconomic time series database (90+ providers: IMF, World Bank, ECB, Eurostat, OECD)
-    "dbnomics": os.path.join(current_dir, "data", "dbnomics_tools.json"),
     # Art Institute of Chicago - 130K+ artworks open access collection
     # Cleveland Museum of Art - 61K+ open access artworks
     # Open Notify - ISS real-time position and astronauts in space
@@ -854,10 +829,6 @@ default_tool_files = {
     # National Weather Service (NWS) - US weather forecasts, alerts, and point metadata
     "nws": os.path.join(current_dir, "data", "nws_tools.json"),
     # SpaceX - rocket launches, rockets, launchpads, and crew data
-    # Carbon Intensity - UK electricity grid carbon intensity and generation mix
-    "carbon_intensity": os.path.join(
-        current_dir, "data", "carbon_intensity_tools.json"
-    ),
     # USGS Water Services - real-time streamflow, water level, and temperature data
     "usgs_water": os.path.join(current_dir, "data", "usgs_water_tools.json"),
     # Spaceflight News API - 30K+ space news articles from major sites
@@ -877,8 +848,6 @@ default_tool_files = {
     # OpenTopoData - terrain elevation data for any global location (SRTM/ASTER/NED)
     "opentopodata": os.path.join(current_dir, "data", "opentopodata_tools.json"),
     # Disease.sh - COVID-19 global and country-level statistics
-    # MathJS - evaluate mathematical expressions via API
-    "mathjs": os.path.join(current_dir, "data", "mathjs_tools.json"),
     # NASA NeoWs - Near Earth Object data (asteroids, close approaches)
     "nasa_neows": os.path.join(current_dir, "data", "nasa_neows_tools.json"),
     # REST Countries Extended - country details by name, region, language
@@ -913,10 +882,6 @@ default_tool_files = {
     # SEC EDGAR - SEC filing search and company financial facts (XBRL)
     # InspireHEP - high energy physics literature database
     "inspirehep": os.path.join(current_dir, "data", "inspirehep_tools.json"),
-    # AviationWeather - METAR and TAF weather reports from FAA Aviation Weather Center
-    "aviationweather": os.path.join(current_dir, "data", "aviationweather_tools.json"),
-    # IEA - International Energy Agency EV and energy statistics
-    "iea": os.path.join(current_dir, "data", "iea_tools.json"),
     # Federal Register - US government regulations, rules, notices, presidential documents
     # NASA TechPort - NASA technology development projects and investments
     # Crates.io - Rust package registry (search crates, version history, downloads)
@@ -925,8 +890,6 @@ default_tool_files = {
     # Gutendex - Project Gutenberg ebooks catalog search
     # Bioconductor - R/Bioconductor bioinformatics package search and metadata (via R-universe)
     "bioconductor": os.path.join(current_dir, "data", "bioconductor_tools.json"),
-    # Agify - predict age from first name via statistical analysis
-    "agify": os.path.join(current_dir, "data", "agify_tools.json"),
     # ArtIC - Art Institute of Chicago open-access artwork search and metadata
     "artic": os.path.join(current_dir, "data", "artic_tools.json"),
 }
