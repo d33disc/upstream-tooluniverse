@@ -7,7 +7,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "ADQL/SQL query against the NASA Exoplanet Archive table 'ps'. Examples: \"select pl_name,hostname,pl_orbper,pl_rade from ps where hostname = 'TRAPPIST-1'\", \"select pl_name,pl_rade,pl_eqt from ps where pl_rade < 1.6 AND pl_eqt between 200 and 350 order by pl_eqt limit 10\", \"select discoverymethod,count(*) as n from ps group by discoverymethod order by n desc\""
+          "description": "ADQL/SQL query against the NASA Exoplanet Archive table 'ps'. Note: LIMIT is not supported; use WHERE conditions to restrict results. Examples: \"select pl_name,hostname,pl_orbper,pl_rade from ps where hostname = 'TRAPPIST-1'\", \"select pl_name,pl_rade,pl_eqt from ps where pl_rade < 1.6 AND pl_eqt between 200 and 350 order by pl_eqt\", \"select discoverymethod,count(*) as n from ps group by discoverymethod order by n desc\""
         },
         "format": {
           "type": [
@@ -33,7 +33,7 @@
         "query": "select pl_name,hostname,pl_orbper,pl_rade from ps where hostname = 'TRAPPIST-1'"
       },
       {
-        "query": "select pl_name,pl_rade,pl_eqt,discoverymethod from ps where pl_rade < 1.6 AND pl_eqt between 200 and 350 order by pl_eqt limit 10"
+        "query": "select pl_name,pl_rade,pl_eqt,discoverymethod from ps where pl_rade < 1.6 AND pl_eqt between 200 and 350 order by pl_eqt"
       },
       {
         "query": "select discoverymethod,count(*) as n from ps group by discoverymethod order by n desc"
@@ -128,7 +128,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "ADQL/SQL query against NASA Exoplanet Archive. Use 'stellarhosts' table for stellar data. Examples: \"select hostname,st_spectype,st_teff,st_mass,st_rad,sy_pnum from stellarhosts where hostname = 'TRAPPIST-1'\", \"select hostname,st_teff,sy_pnum from stellarhosts where sy_pnum >= 5 order by sy_pnum desc limit 10\""
+          "description": "ADQL/SQL query against NASA Exoplanet Archive. Use 'stellarhosts' table for stellar data. Note: LIMIT is not supported; use WHERE conditions to restrict results. Examples: \"select hostname,st_spectype,st_teff,st_mass,st_rad,sy_pnum from stellarhosts where hostname = 'TRAPPIST-1'\", \"select hostname,st_teff,sy_pnum from stellarhosts where sy_pnum >= 5 order by sy_pnum desc\""
         }
       },
       "required": [
@@ -147,7 +147,7 @@
         "query": "select hostname,st_spectype,st_teff,st_mass,st_rad,sy_pnum from stellarhosts where hostname = 'TRAPPIST-1'"
       },
       {
-        "query": "select hostname,st_teff,sy_pnum,sy_dist from stellarhosts where sy_pnum >= 5 order by sy_pnum desc limit 10"
+        "query": "select hostname,st_teff,sy_pnum,sy_dist from stellarhosts where sy_pnum >= 5 order by sy_pnum desc"
       },
       {
         "query": "select hostname,st_spectype,st_teff from stellarhosts where hostname = 'Kepler-90'"

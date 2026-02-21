@@ -114,11 +114,12 @@
               "description": "Total number of matching packages"
             },
             "query": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "description": "Search query used"
+              "description": "Search query used",
+              "oneOf": [
+                {"type": "string"},
+                {"type": "object"},
+                {"type": "null"}
+              ]
             },
             "limit": {
               "type": [
