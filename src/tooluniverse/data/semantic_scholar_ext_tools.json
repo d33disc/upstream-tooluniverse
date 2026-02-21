@@ -276,22 +276,15 @@
               "description": "Author's homepage URL"
             },
             "papers": {
-              "type": "object",
-              "description": "Author's papers (paginated response with offset, next, data fields)",
-              "properties": {
-                "offset": {"type": ["integer", "null"]},
-                "next": {"type": ["integer", "null"]},
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "paperId": {"type": ["string", "null"]},
-                      "title": {"type": ["string", "null"]},
-                      "year": {"type": ["integer", "null"]},
-                      "citationCount": {"type": ["integer", "null"]}
-                    }
-                  }
+              "type": ["array", "null"],
+              "description": "Author's papers",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "paperId": {"type": ["string", "null"]},
+                  "title": {"type": ["string", "null"]},
+                  "year": {"type": ["integer", "null"]},
+                  "citationCount": {"type": ["integer", "null"]}
                 }
               }
             }
@@ -346,6 +339,7 @@
         {
           "type": "object",
           "description": "Paper recommendations from Semantic Scholar",
+          "required": ["recommendedPapers"],
           "properties": {
             "recommendedPapers": {
               "type": "array",
