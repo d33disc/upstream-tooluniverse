@@ -7,11 +7,13 @@ American College of Cardiology (ACC), and National Comprehensive Cancer
 Network (NCCN).  Also provides web scraping for NCCN patient guidelines.
 """
 
+import io
 import os
 import re
 import time
 import xml.etree.ElementTree as ET
 
+import pdfplumber
 import requests
 from bs4 import BeautifulSoup
 
@@ -373,6 +375,8 @@ class AHAACCGuidelineTool(BaseTool):
                 return self._list_org(arguments, "American Heart Association")
             elif op == "list_acc":
                 return self._list_org(arguments, "American College of Cardiology")
+            elif op == "get_guideline":
+                return self._get_guideline(arguments)
             return {"error": f"Unknown operation: {op}"}
         except requests.exceptions.RequestException as e:
             return {"error": f"Request failed: {e}"}
@@ -401,6 +405,65 @@ class AHAACCGuidelineTool(BaseTool):
             f"AND ({query_text}){date_filter}"
         )
         return _search_and_fetch(pubmed_query, limit=limit)
+
+    def _get_guideline(self, arguments):
+        """Fetch full text of an AHA/ACC guideline from PMC by PMID."""
+        pmid = str(arguments.get("pmid", ""))
+        if not pmid:
+            return {"error": "pmid parameter is required"}
+
+        summaries = _pubmed_summaries([pmid])
+        if pmid not in summaries:
+            return {"error": f"PMID {pmid} not found in PubMed"}
+
+        summary = summaries[pmid]
+        articleids = summary.get("articleids", [])
+        pmc_ids = [a["value"] for a in articleids if a.get("idtype") == "pmc"]
+
+        _rate_limit()
+        abstracts = _pubmed_abstracts([pmid])
+
+        result = {
+            "title": summary.get("title", ""),
+            "pmid": pmid,
+            "abstract": abstracts.get(pmid, ""),
+            "journal": summary.get("source", ""),
+            "publication_date": summary.get("pubdate", ""),
+            "pmc_url": None,
+            "full_text_snippet": None,
+            "is_open_access": bool(pmc_ids),
+        }
+
+        if pmc_ids:
+            pmc_id = pmc_ids[0]
+            result["pmc_url"] = f"https://www.ncbi.nlm.nih.gov/pmc/articles/{pmc_id}/"
+            _rate_limit()
+            try:
+                ft_url = (
+                    f"https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/"
+                    f"pmcoa.cgi/BioC_json/{pmc_id}/unicode"
+                )
+                ft_resp = requests.get(ft_url, timeout=30)
+                if ft_resp.status_code == 200:
+                    ft_data = ft_resp.json()
+                    passages = []
+                    for doc in ft_data.get("documents", []):
+                        for passage in doc.get("passages", []):
+                            text = passage.get("text", "")
+                            section = passage.get("infons", {}).get("section_type", "")
+                            ptype = passage.get("infons", {}).get("type", "")
+                            if (
+                                text
+                                and ptype != "ref"
+                                and section not in ("REF", "COMP_INT")
+                            ):
+                                passages.append(text)
+                    if passages:
+                        result["full_text_snippet"] = "\n\n".join(passages)[:6000]
+            except Exception:
+                pass
+
+        return result
 
     def _list_org(self, arguments, org_name):
         """List recent guidelines from a specific organization."""
@@ -542,61 +605,83 @@ class NCCNGuidelineTool(BaseTool):
         return _search_and_fetch(pubmed_query, limit=limit)
 
     def _get_patient_guideline(self, arguments):
-        """Get content from a specific NCCN patient guideline page."""
+        """Get content from a specific NCCN patient guideline — scrapes detail page
+        and extracts text directly from the PDF using pdfplumber."""
         url = arguments.get("url", "")
         if not url:
             return {"error": "url parameter is required"}
         if "nccn.org" not in url:
             return {"error": "URL must be an nccn.org URL"}
 
-        time.sleep(1)  # Respectful delay
+        # Rewrite old-style content/english URLs to the current patientresources path
+        if "patientGuidelineId" not in url and "patientresources" not in url:
+            return {"error": "URL should come from NCCN_list_patient_guidelines"}
+
+        time.sleep(1)
         resp = self.session.get(url, timeout=30)
         resp.raise_for_status()
         soup = BeautifulSoup(resp.content, "html.parser")
 
-        # Extract cancer type from h2 (NCCN detail pages use h2 for the cancer name)
+        # Extract title from h2
         cancer_type = ""
-        detail_div = soup.find("div", class_="guideline-detail")
-        if detail_div:
-            h2 = detail_div.find("h2")
-            if h2:
-                cancer_type = h2.get_text(strip=True)
+        for h2 in soup.find_all("h2"):
+            text = h2.get_text(strip=True)
+            if text and len(text) > 2:
+                cancer_type = text
+                break
 
-        if not cancer_type:
-            h2_all = soup.find_all("h2")
-            for h2 in h2_all:
-                text = h2.get_text(strip=True)
-                if text and "404" not in text and len(text) > 2:
-                    cancer_type = text
-                    break
-
-        # Collect all PDF links with version info
+        # Collect PDF links
         pdf_links = []
+        seen_pdfs = set()
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            if ".pdf" in href.lower():
-                link_text = a.get_text(strip=True)
-                full_url = _NCCN_BASE + href if href.startswith("/") else href
-                pdf_links.append(
-                    {
-                        "label": link_text if link_text else cancer_type,
-                        "url": full_url,
-                    }
-                )
+            if ".pdf" not in href.lower():
+                continue
+            full_pdf_url = _NCCN_BASE + href if href.startswith("/") else href
+            if full_pdf_url in seen_pdfs:
+                continue
+            seen_pdfs.add(full_pdf_url)
+            label = a.get_text(strip=True) or cancer_type
+            pdf_links.append({"label": label, "url": full_pdf_url})
 
         # Extract version info
         version = ""
-        for elem in soup.find_all(string=re.compile(r"Version\s+\d{4}")):
-            version = elem.strip()
-            break
+        for elem in soup.find_all(string=re.compile(r"\b20\d{2}\b")):
+            candidate = elem.strip()
+            if re.search(r"\b20\d{2}\b", candidate) and len(candidate) < 60:
+                version = candidate
+                break
 
-        return {
+        result = {
             "title": cancer_type or "NCCN Guidelines for Patients",
             "url": url,
             "cancer_type": cancer_type,
             "version": version,
-            "pdf_downloads": pdf_links,
             "pdf_url": pdf_links[0]["url"] if pdf_links else None,
+            "pdf_downloads": pdf_links,
             "source": "NCCN Guidelines for Patients",
-            "note": "Full guideline content is in the PDF. Use the pdf_url to download.",
+            "content": None,
         }
+
+        # Download the primary PDF and extract text from first 8 pages
+        primary_pdf = pdf_links[0]["url"] if pdf_links else None
+        if primary_pdf:
+            try:
+                time.sleep(0.5)
+                pdf_resp = self.session.get(primary_pdf, timeout=30)
+                if (
+                    pdf_resp.status_code == 200
+                    and "pdf" in pdf_resp.headers.get("Content-Type", "").lower()
+                ):
+                    with pdfplumber.open(io.BytesIO(pdf_resp.content)) as pdf:
+                        pages_text = []
+                        for page in pdf.pages[:8]:
+                            text = page.extract_text()
+                            if text and len(text.strip()) > 50:
+                                pages_text.append(text.strip())
+                    if pages_text:
+                        result["content"] = "\n\n---\n\n".join(pages_text)[:6000]
+            except Exception:
+                pass  # content remains None; pdf_url still returned
+
+        return result

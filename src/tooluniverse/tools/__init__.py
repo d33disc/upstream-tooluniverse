@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1915 scientific tools.
+Type-safe Python interface to 1916 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -47,6 +47,7 @@ from .ADMETAI_predict_solubility_lipophilicity_hydration import (
 from .ADMETAI_predict_stress_response import ADMETAI_predict_stress_response
 from .ADMETAI_predict_toxicity import ADMETAI_predict_toxicity
 from .ADMETAnalyzerAgent import ADMETAnalyzerAgent
+from .AHA_ACC_get_guideline import AHA_ACC_get_guideline
 from .AHA_ACC_search_guidelines import AHA_ACC_search_guidelines
 from .AHA_list_guidelines import AHA_list_guidelines
 from .AdvancedCodeQualityAnalyzer import AdvancedCodeQualityAnalyzer
@@ -2444,6 +2445,7 @@ __all__ = [
     "ADMETAI_predict_stress_response",
     "ADMETAI_predict_toxicity",
     "ADMETAnalyzerAgent",
+    "AHA_ACC_get_guideline",
     "AHA_ACC_search_guidelines",
     "AHA_list_guidelines",
     "AdvancedCodeQualityAnalyzer",

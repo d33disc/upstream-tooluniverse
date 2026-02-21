@@ -1580,7 +1580,6 @@ class NICEGuidelineFullTextTool(BaseTool):
                 "recommendations_count": len(recommendations) if recommendations else 0,
                 "source": "NICE",
                 "content_type": "full_guideline",
-                "success": len(full_text) > 500,
             }
 
         except requests.exceptions.RequestException as e:
@@ -1726,7 +1725,6 @@ class WHOGuidelineFullTextTool(BaseTool):
                 "has_pdf": pdf_link is not None,
                 "source": "WHO",
                 "content_type": "guideline_page",
-                "success": len(overview) > 100 or pdf_link is not None,
                 "note": (
                     "Full text available as PDF download"
                     if pdf_link

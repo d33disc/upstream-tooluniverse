@@ -444,7 +444,52 @@
             },
             "pdf_url": {"type": ["string", "null"]},
             "source": {"type": "string"},
-            "note": {"type": "string"}
+            "content": {"type": ["string", "null"]}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {"error": {"type": "string"}},
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  {
+    "name": "AHA_ACC_get_guideline",
+    "description": "Fetch the full text (or a detailed snippet) of a specific AHA (American Heart Association) or ACC (American College of Cardiology) guideline from PubMed Central using its PMID. Returns the abstract and, when the article is open-access in PMC, the full guideline text up to 6000 characters covering recommendations, evidence tables, and rationale. Use AHA_list_guidelines or ACC_list_guidelines first to obtain PMIDs. Many recent AHA/ACC guidelines are open-access in PMC.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "pmid": {
+          "type": "string",
+          "description": "PubMed ID (PMID) of the AHA/ACC guideline to retrieve (e.g., '37952199' for 2023 ACC/AHA Atrial Fibrillation Guideline)"
+        }
+      },
+      "required": ["pmid"]
+    },
+    "fields": {
+      "operation": "get_guideline"
+    },
+    "type": "AHAACCGuidelineTool",
+    "test_examples": [
+      {"pmid": "37952199"},
+      {"pmid": "36636024"}
+    ],
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "AHA/ACC guideline with abstract and optional PMC full text",
+          "properties": {
+            "title": {"type": "string"},
+            "pmid": {"type": "string"},
+            "abstract": {"type": "string"},
+            "journal": {"type": "string"},
+            "publication_date": {"type": "string"},
+            "pmc_url": {"type": ["string", "null"]},
+            "full_text_snippet": {"type": ["string", "null"]},
+            "is_open_access": {"type": "boolean"}
           }
         },
         {
