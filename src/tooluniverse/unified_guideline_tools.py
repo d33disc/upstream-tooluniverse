@@ -425,8 +425,8 @@ class EuropePMCGuidelinesTool(BaseTool):
     def _search_europepmc_guidelines(self, query, limit):
         """Search Europe PMC for guideline publications."""
         try:
-            # More specific guideline search query
-            guideline_query = f'"{query}" AND (guideline OR "practice guideline" OR "clinical guideline" OR recommendation OR "consensus statement")'
+            # Search with unquoted query so individual terms match (not exact phrase)
+            guideline_query = f'{query} AND (guideline OR "practice guideline" OR "clinical guideline" OR recommendation OR "consensus statement")'
 
             params = {
                 "query": guideline_query,
@@ -481,65 +481,8 @@ class EuropePMCGuidelinesTool(BaseTool):
                     for keyword in guideline_keywords
                 )
 
-                # Exclude research papers and studies
-                exclude_keywords = [
-                    "study",
-                    "trial",
-                    "analysis",
-                    "evaluation",
-                    "assessment",
-                    "effectiveness",
-                    "efficacy",
-                    "outcome",
-                    "result",
-                    "finding",
-                ]
-
-                is_research = any(
-                    keyword in title_lower for keyword in exclude_keywords
-                )
-
-                # Publication type must confirm guideline nature
-                pub_type_tokens = []
-                if isinstance(pub_type, str):
-                    pub_type_tokens.append(pub_type.lower())
-
-                pub_type_list = result.get("pubTypeList", {}).get("pubType", [])
-                if isinstance(pub_type_list, str):
-                    pub_type_list = [pub_type_list]
-
-                if isinstance(pub_type_list, list):
-                    for entry in pub_type_list:
-                        if isinstance(entry, str):
-                            pub_type_tokens.append(entry.lower())
-                        elif isinstance(entry, dict):
-                            label = (
-                                entry.get("text")
-                                or entry.get("name")
-                                or entry.get("value")
-                            )
-                            if label:
-                                pub_type_tokens.append(str(label).lower())
-
-                pub_type_combined = " ".join(pub_type_tokens)
-
-                pub_type_has_guideline = any(
-                    term in pub_type_combined
-                    for term in [
-                        "guideline",
-                        "practice guideline",
-                        "consensus",
-                        "recommendation",
-                    ]
-                )
-
-                # Determine if it's a guideline
-                is_guideline = (
-                    has_guideline_keywords
-                    and pub_type_has_guideline
-                    and not is_research
-                    and len(title) > 20
-                )
+                # Determine if it's a guideline — keyword match is sufficient
+                is_guideline = has_guideline_keywords and len(title) > 20
 
                 # Build URL
                 pmid = result.get("pmid", "")
@@ -1328,7 +1271,7 @@ class OpenAlexGuidelinesTool(BaseTool):
         try:
             # Build search query to focus on guidelines
             search_query = (
-                f'"{query}" AND (guideline OR "clinical practice" OR recommendation)'
+                f'{query} AND (guideline OR "clinical practice" OR recommendation)'
             )
 
             # Build parameters
@@ -1440,26 +1383,10 @@ class OpenAlexGuidelinesTool(BaseTool):
                 ):
                     has_guideline_concept = True
 
-                # Exclude research papers and studies (but be less strict)
-                exclude_keywords = [
-                    "statistics",
-                    "data",
-                    "survey",
-                    "meta-analysis",
-                    "systematic review",
-                ]
-
-                is_research = any(
-                    keyword in title_lower for keyword in exclude_keywords
-                )
-
-                # Determine if it's a guideline
+                # Determine if it's a guideline — either keyword or concept match
                 is_guideline = (
-                    has_guideline_keywords
-                    and has_guideline_concept
-                    and not is_research
-                    and len(title) > 20
-                )
+                    has_guideline_keywords or has_guideline_concept
+                ) and len(title) > 20
 
                 # Build URL
                 url = (
@@ -1752,7 +1679,7 @@ class WHOGuidelineFullTextTool(BaseTool):
                 metadata["published_date"] = date_elem.get_text().strip()
 
             # ISBN
-            isbn_elem = soup.find(text=re.compile(r"ISBN"))
+            isbn_elem = soup.find(string=re.compile(r"ISBN"))
             if isbn_elem:
                 isbn_match = re.search(r"ISBN[:\s]*([\d\-]+)", isbn_elem)
                 if isbn_match:
@@ -1859,17 +1786,14 @@ class GINGuidelinesTool(BaseTool):
 
     def __init__(self, tool_config):
         super().__init__(tool_config)
-        self.base_url = "https://www.g-i-n.net"
-        self.search_url = f"{self.base_url}/library/international-guidelines-library"
+        self.base_url = "https://guidelines.ebmportal.com"
+        self.search_url = f"{self.base_url}/guidelines-international-network"
         self.session = requests.Session()
         self.session.headers.update(
             {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                 "Accept-Language": "en-US,en;q=0.5",
-                "Accept-Encoding": "gzip, deflate",
-                "Connection": "keep-alive",
-                "Upgrade-Insecure-Requests": "1",
             }
         )
 
@@ -1883,233 +1807,82 @@ class GINGuidelinesTool(BaseTool):
         return self._search_gin_guidelines(query, limit)
 
     def _search_gin_guidelines(self, query, limit):
-        """Search GIN guidelines using web scraping."""
+        """Search GIN guidelines via the EBM Portal."""
         try:
-            time.sleep(1)  # Be respectful
+            time.sleep(1)
 
-            # Try to search GIN guidelines
-            try:
-                # GIN search typically uses form parameters
-                search_params = {"search": query, "type": "guideline", "limit": limit}
+            response = self.session.get(
+                self.search_url, params={"q": query}, timeout=30
+            )
+            response.raise_for_status()
 
-                response = self.session.get(
-                    self.search_url, params=search_params, timeout=30
-                )
-                response.raise_for_status()
+            soup = BeautifulSoup(response.content, "html.parser")
+            articles = soup.find_all("article")
 
-                soup = BeautifulSoup(response.content, "html.parser")
-
-                # Find guideline results - common selectors for guideline databases
-                guidelines = []
-
-                # Try different selectors for guideline results
-                result_selectors = [
-                    "div.guideline-item",
-                    "div.search-result",
-                    "div.result-item",
-                    "article.guideline",
-                    "div.item",
-                    "li.guideline",
-                ]
-
-                results = []
-                for selector in result_selectors:
-                    results = soup.select(selector)
-                    if results:
-                        break
-
-                if not results:
-                    # Fallback: look for any div with guideline-related content
-                    results = soup.find_all(
-                        "div",
-                        class_=lambda x: x
-                        and any(
-                            keyword in x.lower()
-                            for keyword in ["guideline", "result", "item", "card"]
-                        ),
-                    )
-
-                for result in results[:limit]:
-                    try:
-                        # Extract title
-                        title_elem = (
-                            result.find("h3")
-                            or result.find("h2")
-                            or result.find("a", class_="title")
-                            or result.find("a")
-                        )
-                        if not title_elem:
-                            continue
-
-                        title = title_elem.get_text().strip()
-                        if not title or len(title) < 10:
-                            continue
-
-                        # Extract URL
-                        link_elem = result.find("a", href=True)
-                        if not link_elem:
-                            continue
-
-                        url = link_elem.get("href", "")
-                        if url.startswith("/"):
-                            url = self.base_url + url
-                        elif not url.startswith("http"):
-                            continue
-
-                        # Extract description/summary
-                        desc_elem = (
-                            result.find("p")
-                            or result.find("div", class_="description")
-                            or result.find("div", class_="summary")
-                        )
-                        description = desc_elem.get_text().strip() if desc_elem else ""
-
-                        # Extract organization
-                        org_elem = (
-                            result.find("span", class_="organization")
-                            or result.find("div", class_="org")
-                            or result.find("cite")
-                        )
-                        organization = (
-                            org_elem.get_text().strip()
-                            if org_elem
-                            else "GIN Member Organization"
-                        )
-
-                        # Extract date
-                        date_elem = (
-                            result.find("time")
-                            or result.find("span", class_="date")
-                            or result.find("div", class_="date")
-                        )
-                        date = date_elem.get_text().strip() if date_elem else ""
-
-                        # Extract content from the guideline page
-                        content = self._extract_guideline_content(url)
-
-                        guidelines.append(
-                            {
-                                "title": title,
-                                "url": url,
-                                "description": description,
-                                "content": content,
-                                "date": date,
-                                "source": "GIN",
-                                "organization": organization,
-                                "is_guideline": True,
-                                "official": True,
-                            }
-                        )
-
-                    except Exception:
+            guidelines = []
+            for article in articles[:limit]:
+                try:
+                    title_elem = article.find(["h1", "h2", "h3", "h4"])
+                    if not title_elem:
+                        continue
+                    title = title_elem.get_text().strip()
+                    if not title or len(title) < 5:
                         continue
 
-                if guidelines:
-                    return guidelines
+                    link_elem = article.find("a", href=True)
+                    if not link_elem:
+                        continue
+                    href = link_elem["href"]
+                    url = href if href.startswith("http") else self.base_url + href
 
-            except requests.exceptions.RequestException as e:
-                print(f"GIN website access failed: {e}, trying fallback search...")
+                    guidelines.append(
+                        {
+                            "title": title,
+                            "url": url,
+                            "description": "",
+                            "source": "GIN",
+                            "organization": "Guidelines International Network",
+                            "is_guideline": True,
+                            "official": True,
+                        }
+                    )
+                except Exception:
+                    continue
 
-            # Fallback: Return sample guidelines based on query
-            return self._get_fallback_gin_guidelines(query, limit)
+            return (
+                guidelines
+                if guidelines
+                else {
+                    "error": "No guidelines found for query",
+                    "source": "GIN",
+                    "search_url": f"{self.search_url}?q={query}",
+                }
+            )
 
+        except requests.exceptions.RequestException as e:
+            return {"error": f"GIN search failed: {str(e)}", "source": "GIN"}
         except Exception as e:
             return {
                 "error": f"Error processing GIN guidelines: {str(e)}",
                 "source": "GIN",
             }
 
-    def _get_fallback_gin_guidelines(self, query, limit):
-        """Provide fallback guidelines when direct access fails."""
-        # This would contain sample guidelines based on common queries
-        # For now, return a message indicating the issue
-        return [
-            {
-                "title": f"GIN Guidelines Search for '{query}'",
-                "url": self.search_url,
-                "description": "GIN guidelines database access temporarily unavailable. Please try again later or visit the GIN website directly.",
-                "content": "The Guidelines International Network (GIN) maintains the world's largest database of clinical guidelines with over 6400 guidelines from various organizations worldwide.",
-                "date": "",
-                "source": "GIN",
-                "organization": "Guidelines International Network",
-                "is_guideline": False,
-                "official": True,
-                "is_placeholder": True,
-                "note": "Direct access to GIN database failed. Please visit g-i-n.net for full access.",
-            }
-        ]
-
-    def _extract_guideline_content(self, url):
-        """Extract actual content from a guideline URL."""
-        try:
-            time.sleep(0.5)  # Be respectful
-            response = self.session.get(url, timeout=15)
-            response.raise_for_status()
-
-            soup = BeautifulSoup(response.content, "html.parser")
-
-            # Extract main content
-            content_selectors = [
-                "main",
-                ".content",
-                ".article-content",
-                ".guideline-content",
-                "article",
-                ".main-content",
-            ]
-
-            content_text = ""
-            for selector in content_selectors:
-                content_elem = soup.select_one(selector)
-                if content_elem:
-                    # Get all text content
-                    paragraphs = content_elem.find_all("p")
-                    content_parts = []
-                    for p in paragraphs:
-                        text = p.get_text().strip()
-                        if len(text) > 20:  # Skip very short paragraphs
-                            content_parts.append(text)
-
-                    if content_parts:
-                        content_text = "\n\n".join(
-                            content_parts[:10]
-                        )  # Limit to first 10 paragraphs
-                        break
-
-            # If no main content found, try to get any meaningful text
-            if not content_text:
-                all_text = soup.get_text()
-                # Clean up the text
-                lines = [line.strip() for line in all_text.split("\n") if line.strip()]
-                content_text = "\n".join(lines[:20])  # First 20 meaningful lines
-
-            return content_text[:2000]  # Limit content length
-
-        except Exception as e:
-            return f"Error extracting content: {str(e)}"
-
 
 @register_tool()
 class CMAGuidelinesTool(BaseTool):
     """
-    Canadian Medical Association (CMA) Infobase Guidelines Search Tool.
-    Searches the CMA Infobase with 1200+ Canadian clinical practice guidelines.
+    Canadian clinical practice guidelines search tool.
+    Searches PubMed for Canadian clinical practice guidelines published by Canadian
+    healthcare organizations including CMA, Canadian Task Force, and others.
     """
 
     def __init__(self, tool_config):
         super().__init__(tool_config)
-        self.base_url = "https://joulecma.ca"
-        self.search_url = f"{self.base_url}/infobase"
-        self.session = requests.Session()
-        self.session.headers.update(
-            {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                "Accept-Language": "en-US,en;q=0.5",
-                "Accept-Encoding": "gzip, deflate",
-                "Connection": "keep-alive",
-                "Upgrade-Insecure-Requests": "1",
-            }
+        self.pubmed_search_url = (
+            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+        )
+        self.pubmed_fetch_url = (
+            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
         )
 
     def run(self, arguments):
@@ -2122,167 +1895,92 @@ class CMAGuidelinesTool(BaseTool):
         return self._search_cma_guidelines(query, limit)
 
     def _search_cma_guidelines(self, query, limit):
-        """Search CMA Infobase guidelines using web scraping."""
+        """Search Canadian clinical guidelines via PubMed."""
         try:
-            time.sleep(1)  # Be respectful
+            search_query = (
+                f'({query}) AND ("practice guideline"[Publication Type]) AND '
+                f"(Canada[Affiliation] OR Canadian[Title/Abstract] OR "
+                f'"Canadian Medical Association"[Corporate Author] OR '
+                f'"Health Canada"[Corporate Author])'
+            )
 
-            # Try to search CMA Infobase
-            try:
-                # CMA search typically uses form parameters
-                search_params = {"search": query, "type": "guideline", "limit": limit}
+            search_params = {
+                "db": "pubmed",
+                "term": search_query,
+                "retmax": limit,
+                "sort": "relevance",
+                "retmode": "json",
+            }
+            search_resp = requests.get(
+                self.pubmed_search_url, params=search_params, timeout=15
+            )
+            search_resp.raise_for_status()
+            pmids = search_resp.json().get("esearchresult", {}).get("idlist", [])
 
-                response = self.session.get(
-                    self.search_url, params=search_params, timeout=30
-                )
-                response.raise_for_status()
+            if not pmids:
+                return []
 
-                soup = BeautifulSoup(response.content, "html.parser")
+            time.sleep(0.4)  # Respect PubMed rate limit (3 req/s without API key)
 
-                # Find guideline results
-                guidelines = []
+            from xml.etree import ElementTree as ET
 
-                # Try different selectors for guideline results
-                result_selectors = [
-                    "div.guideline-item",
-                    "div.search-result",
-                    "div.result-item",
-                    "article.guideline",
-                    "div.item",
-                    "li.guideline",
-                ]
+            fetch_params = {
+                "db": "pubmed",
+                "id": ",".join(pmids),
+                "retmode": "xml",
+                "rettype": "abstract",
+            }
+            fetch_resp = requests.get(
+                self.pubmed_fetch_url, params=fetch_params, timeout=15
+            )
+            fetch_resp.raise_for_status()
+            root = ET.fromstring(fetch_resp.content)
 
-                results = []
-                for selector in result_selectors:
-                    results = soup.select(selector)
-                    if results:
-                        break
+            guidelines = []
+            for pub_article in root.findall(".//PubmedArticle"):
+                try:
+                    pmid = pub_article.findtext(".//PMID", "")
+                    title = pub_article.findtext(".//ArticleTitle", "")
+                    abstract = pub_article.findtext(".//AbstractText", "")
+                    year = pub_article.findtext(".//PubDate/Year", "")
+                    journal = pub_article.findtext(".//Journal/Title", "")
+                    affils = [
+                        a.text for a in pub_article.findall(".//Affiliation") if a.text
+                    ]
+                    org = affils[0][:100] if affils else journal
 
-                if not results:
-                    # Fallback: look for any div with guideline-related content
-                    results = soup.find_all(
-                        "div",
-                        class_=lambda x: x
-                        and any(
-                            keyword in x.lower()
-                            for keyword in ["guideline", "result", "item", "card"]
-                        ),
+                    guidelines.append(
+                        {
+                            "title": title,
+                            "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+                            "description": abstract[:300] if abstract else "",
+                            "content": abstract[:1000] if abstract else "",
+                            "date": year,
+                            "source": "CMA/PubMed",
+                            "organization": org,
+                            "is_guideline": True,
+                            "official": True,
+                            "pmid": pmid,
+                        }
                     )
+                except Exception:
+                    continue
 
-                for result in results[:limit]:
-                    try:
-                        # Extract title
-                        title_elem = (
-                            result.find("h3")
-                            or result.find("h2")
-                            or result.find("a", class_="title")
-                            or result.find("a")
-                        )
-                        if not title_elem:
-                            continue
+            return guidelines
 
-                        title = title_elem.get_text().strip()
-                        if not title or len(title) < 10:
-                            continue
-
-                        # Extract URL
-                        link_elem = result.find("a", href=True)
-                        if not link_elem:
-                            continue
-
-                        url = link_elem.get("href", "")
-                        if url.startswith("/"):
-                            url = self.base_url + url
-                        elif not url.startswith("http"):
-                            continue
-
-                        # Extract description/summary
-                        desc_elem = (
-                            result.find("p")
-                            or result.find("div", class_="description")
-                            or result.find("div", class_="summary")
-                        )
-                        description = desc_elem.get_text().strip() if desc_elem else ""
-
-                        # Extract organization
-                        org_elem = (
-                            result.find("span", class_="organization")
-                            or result.find("div", class_="org")
-                            or result.find("cite")
-                        )
-                        organization = (
-                            org_elem.get_text().strip()
-                            if org_elem
-                            else "Canadian Medical Association"
-                        )
-
-                        # Extract date
-                        date_elem = (
-                            result.find("time")
-                            or result.find("span", class_="date")
-                            or result.find("div", class_="date")
-                        )
-                        date = date_elem.get_text().strip() if date_elem else ""
-
-                        # Extract content from the guideline page
-                        content = self._extract_guideline_content(url)
-
-                        guidelines.append(
-                            {
-                                "title": title,
-                                "url": url,
-                                "description": description,
-                                "content": content,
-                                "date": date,
-                                "source": "CMA",
-                                "organization": organization,
-                                "is_guideline": True,
-                                "official": True,
-                            }
-                        )
-
-                    except Exception:
-                        continue
-
-                if guidelines:
-                    return guidelines
-
-            except requests.exceptions.RequestException as e:
-                print(f"CMA Infobase access failed: {e}, trying fallback search...")
-
-            # Fallback: Return sample guidelines based on query
-            return self._get_fallback_cma_guidelines(query, limit)
-
+        except requests.exceptions.RequestException as e:
+            return {"error": f"PubMed search failed: {str(e)}", "source": "CMA"}
         except Exception as e:
             return {
-                "error": f"Error processing CMA guidelines: {str(e)}",
+                "error": f"Error searching Canadian guidelines: {str(e)}",
                 "source": "CMA",
             }
-
-    def _get_fallback_cma_guidelines(self, query, limit):
-        """Provide fallback guidelines when direct access fails."""
-        # This would contain sample guidelines based on common queries
-        # For now, return a message indicating the issue
-        return [
-            {
-                "title": f"CMA Infobase Guidelines Search for '{query}'",
-                "url": self.search_url,
-                "description": "CMA Infobase access temporarily unavailable. Please try again later or visit the CMA website directly.",
-                "content": "The Canadian Medical Association Infobase contains over 1200 evidence-based clinical practice guidelines developed or endorsed by Canadian healthcare organizations.",
-                "date": "",
-                "source": "CMA",
-                "organization": "Canadian Medical Association",
-                "is_guideline": False,
-                "official": True,
-                "is_placeholder": True,
-                "note": "Direct access to CMA Infobase failed. Please visit joulecma.ca/infobase for full access.",
-            }
-        ]
 
     def _extract_guideline_content(self, url):
         """Extract actual content from a guideline URL."""
         try:
             time.sleep(0.5)  # Be respectful
-            response = self.session.get(url, timeout=15)
+            response = requests.get(url, timeout=15)
             response.raise_for_status()
 
             soup = BeautifulSoup(response.content, "html.parser")

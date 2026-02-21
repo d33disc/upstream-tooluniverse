@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1888 scientific tools.
+Type-safe Python interface to 1896 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -256,6 +256,7 @@ from .DailyMed_parse_clinical_pharmacology import DailyMed_parse_clinical_pharma
 from .DailyMed_parse_contraindications import DailyMed_parse_contraindications
 from .DailyMed_parse_dosing import DailyMed_parse_dosing
 from .DailyMed_parse_drug_interactions import DailyMed_parse_drug_interactions
+from .DailyMed_search_drug_classes import DailyMed_search_drug_classes
 from .DailyMed_search_spls import DailyMed_search_spls
 from .DataAnalysisValidityReviewer import DataAnalysisValidityReviewer
 from .DataCite_get_doi import DataCite_get_doi
@@ -1017,6 +1018,10 @@ from .LitVar_search_variants import LitVar_search_variants
 from .LiteratureContextReviewer import LiteratureContextReviewer
 from .LiteratureSearchTool import LiteratureSearchTool
 from .LiteratureSynthesisAgent import LiteratureSynthesisAgent
+from .MAGICapp_get_guideline import MAGICapp_get_guideline
+from .MAGICapp_get_recommendations import MAGICapp_get_recommendations
+from .MAGICapp_get_sections import MAGICapp_get_sections
+from .MAGICapp_list_guidelines import MAGICapp_list_guidelines
 from .MGnify_get_genome import MGnify_get_genome
 from .MGnify_get_study_detail import MGnify_get_study_detail
 from .MGnify_list_analyses import MGnify_list_analyses
@@ -1129,6 +1134,9 @@ from .NCIDrugDict_search import NCIDrugDict_search
 from .NCIThesaurus_get_children import NCIThesaurus_get_children
 from .NCIThesaurus_get_concept import NCIThesaurus_get_concept
 from .NCIThesaurus_search import NCIThesaurus_search
+from .NCI_expand_drugs_by_letter import NCI_expand_drugs_by_letter
+from .NCI_get_drug_by_name import NCI_get_drug_by_name
+from .NCI_search_cancer_resources import NCI_search_cancer_resources
 from .NDEx_get_network import NDEx_get_network
 from .NDEx_get_network_summary import NDEx_get_network_summary
 from .NDEx_search_networks import NDEx_search_networks
@@ -2620,6 +2628,7 @@ __all__ = [
     "DailyMed_parse_contraindications",
     "DailyMed_parse_dosing",
     "DailyMed_parse_drug_interactions",
+    "DailyMed_search_drug_classes",
     "DailyMed_search_spls",
     "DataAnalysisValidityReviewer",
     "DataCite_get_doi",
@@ -3151,6 +3160,10 @@ __all__ = [
     "LiteratureContextReviewer",
     "LiteratureSearchTool",
     "LiteratureSynthesisAgent",
+    "MAGICapp_get_guideline",
+    "MAGICapp_get_recommendations",
+    "MAGICapp_get_sections",
+    "MAGICapp_list_guidelines",
     "MGnify_get_genome",
     "MGnify_get_study_detail",
     "MGnify_list_analyses",
@@ -3253,6 +3266,9 @@ __all__ = [
     "NCIThesaurus_get_children",
     "NCIThesaurus_get_concept",
     "NCIThesaurus_search",
+    "NCI_expand_drugs_by_letter",
+    "NCI_get_drug_by_name",
+    "NCI_search_cancer_resources",
     "NDEx_get_network",
     "NDEx_get_network_summary",
     "NDEx_search_networks",

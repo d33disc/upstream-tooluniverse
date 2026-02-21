@@ -219,6 +219,10 @@ default_tool_files = {
     "markitdown": os.path.join(current_dir, "data", "markitdown_tools.json"),
     # Guideline and health policy tools
     "guidelines": os.path.join(current_dir, "data", "unified_guideline_tools.json"),
+    # Clinical guidelines - MAGICapp, NCI R4R, NCI Drug Dict extended, DailyMed drug classes
+    "clinical_guidelines": os.path.join(
+        current_dir, "data", "clinical_guidelines_tools.json"
+    ),
     # Database tools
     "kegg": os.path.join(current_dir, "data", "kegg_tools.json"),
     "ensembl": os.path.join(current_dir, "data", "ensembl_tools.json"),

@@ -715,7 +715,7 @@
     },
     "test_examples": [
       {
-        "url": "https://www.wikipedia.org"
+        "url": "https://www.nice.org.uk/guidance/ng28"
       }
     ]
   },
@@ -808,7 +808,7 @@
     },
     "test_examples": [
       {
-        "url": "https://www.wikipedia.org"
+        "url": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis"
       }
     ]
   },
