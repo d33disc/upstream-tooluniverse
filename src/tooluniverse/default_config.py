@@ -223,6 +223,8 @@ default_tool_files = {
     "clinical_guidelines": os.path.join(
         current_dir, "data", "clinical_guidelines_tools.json"
     ),
+    # FDA drug labels - official prescribing information with clinical recommendations
+    "openfda_labels": os.path.join(current_dir, "data", "openfda_label_tools.json"),
     # Database tools
     "kegg": os.path.join(current_dir, "data", "kegg_tools.json"),
     "ensembl": os.path.join(current_dir, "data", "ensembl_tools.json"),

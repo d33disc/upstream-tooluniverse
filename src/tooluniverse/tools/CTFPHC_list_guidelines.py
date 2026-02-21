@@ -1,25 +1,27 @@
 """
-CPIC_list_guidelines
+CTFPHC_list_guidelines
 
-List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+List all published guidelines from the Canadian Task Force on Preventive Health Care (CTFPHC). Fe...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def CPIC_list_guidelines(
+def CTFPHC_list_guidelines(
+    limit: Optional[int] = 30,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+    List all published guidelines from the Canadian Task Force on Preventive Health Care (CTFPHC). Fe...
 
     Parameters
     ----------
-    No parameters
+    limit : int
+        Maximum number of guidelines to return (default: 30)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,11 +36,11 @@ def CPIC_list_guidelines(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "CPIC_list_guidelines", "arguments": {}},
+        {"name": "CTFPHC_list_guidelines", "arguments": {"limit": limit}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["CPIC_list_guidelines"]
+__all__ = ["CTFPHC_list_guidelines"]

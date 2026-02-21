@@ -507,8 +507,8 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1
+        "query": "tuberculosis",
+        "limit": 3
       }
     ]
   },
@@ -627,10 +627,10 @@
     },
     "test_examples": [
       {
-        "query": "machine learning optimization",
-        "limit": 1,
-        "year_from": 2023,
-        "year_to": 2023
+        "query": "antibiotic guidelines",
+        "limit": 3,
+        "year_from": 2020,
+        "year_to": 2024
       }
     ]
   },
@@ -965,6 +965,265 @@
       {
         "query": "machine learning optimization",
         "limit": 1
+      }
+    ]
+  },
+  {
+    "type": "SIGNSearchGuidelinesTool",
+    "name": "SIGN_search_guidelines",
+    "description": "Search SIGN (Scottish Intercollegiate Guidelines Network) clinical guidelines by keyword. Fetches the complete SIGN guidelines table (84 evidence-based guidelines) and filters by keyword match in title or clinical topic. Returns guideline number, title, topic, publication year, and URL.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keyword to search in guideline title or clinical topic (e.g., 'cardiac', 'diabetes', 'cancer', 'mental health')"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of guidelines to return (default: 10)",
+          "default": 10
+        }
+      },
+      "required": ["query"]
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of matching SIGN guidelines",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "description": "Official SIGN guideline number (e.g., 148)"
+              },
+              "title": {
+                "type": "string",
+                "description": "Full title of the SIGN guideline"
+              },
+              "topic": {
+                "type": "string",
+                "description": "Clinical topic or specialty (e.g., 'Cardiovascular', 'Infectious disease')"
+              },
+              "published": {
+                "type": "string",
+                "description": "Year the guideline was published"
+              },
+              "url": {
+                "type": "string",
+                "description": "Full URL to the guideline on sign.ac.uk"
+              }
+            },
+            "required": ["number", "title", "topic", "published", "url"]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "query": "cardiac",
+        "limit": 5
+      }
+    ]
+  },
+  {
+    "type": "SIGNListGuidelinesTool",
+    "name": "SIGN_list_guidelines",
+    "description": "List all SIGN (Scottish Intercollegiate Guidelines Network) clinical guidelines, optionally filtered by clinical topic/specialty. Returns up to `limit` guidelines from the full SIGN table covering cardiovascular, oncology, mental health, and other specialties.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Optional clinical topic/specialty to filter by (e.g., 'Cardiovascular', 'Cancer', 'Mental health'). Leave empty to return all guidelines."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of guidelines to return (default: 20)",
+          "default": 20
+        }
+      },
+      "required": []
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of SIGN guidelines (optionally filtered by topic)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "description": "Official SIGN guideline number"
+              },
+              "title": {
+                "type": "string",
+                "description": "Full title of the SIGN guideline"
+              },
+              "topic": {
+                "type": "string",
+                "description": "Clinical topic or specialty"
+              },
+              "published": {
+                "type": "string",
+                "description": "Year the guideline was published"
+              },
+              "url": {
+                "type": "string",
+                "description": "Full URL to the guideline on sign.ac.uk"
+              }
+            },
+            "required": ["number", "title", "topic", "published", "url"]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "topic": "Cardiovascular",
+        "limit": 5
+      }
+    ]
+  },
+  {
+    "type": "CTFPHCListGuidelinesTool",
+    "name": "CTFPHC_list_guidelines",
+    "description": "List all published guidelines from the Canadian Task Force on Preventive Health Care (CTFPHC). Fetches the official index of 27 published preventive health guidelines covering cancer screening, cardiovascular risk, diabetes, mental health, and other primary care topics.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of guidelines to return (default: 30)",
+          "default": 30
+        }
+      },
+      "required": []
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of CTFPHC published guidelines",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Full title of the guideline including year in parentheses (e.g., 'Breast Cancer (2018)')"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL to the guideline page on canadiantaskforce.ca"
+              },
+              "year": {
+                "type": ["string", "null"],
+                "description": "Publication year extracted from the title (e.g., '2024'), or null if not present"
+              }
+            },
+            "required": ["title", "url", "year"]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "limit": 10
+      }
+    ]
+  },
+  {
+    "type": "CTFPHCSearchGuidelinesTool",
+    "name": "CTFPHC_search_guidelines",
+    "description": "Search published guidelines from the Canadian Task Force on Preventive Health Care (CTFPHC) by keyword. Covers preventive health topics including breast cancer, colorectal cancer, diabetes, depression, cognitive impairment, thyroid dysfunction, and more.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keyword to search in guideline titles (e.g., 'cancer', 'diabetes', 'depression', 'thyroid')"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of guidelines to return (default: 10)",
+          "default": 10
+        }
+      },
+      "required": ["query"]
+    },
+    "return_schema": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of matching CTFPHC guidelines",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Full title of the guideline including year in parentheses"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL to the guideline page on canadiantaskforce.ca"
+              },
+              "year": {
+                "type": ["string", "null"],
+                "description": "Publication year extracted from the title, or null if not present"
+              }
+            },
+            "required": ["title", "url", "year"]
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message if the request failed"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    },
+    "test_examples": [
+      {
+        "query": "cancer",
+        "limit": 5
       }
     ]
   }

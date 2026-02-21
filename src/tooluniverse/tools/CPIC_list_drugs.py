@@ -1,21 +1,21 @@
 """
-CPIC_list_guidelines
+CPIC_list_drugs
 
-List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+List all drugs in the CPIC database that have pharmacogenomic annotations. Returns drug names and...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def CPIC_list_guidelines(
+def CPIC_list_drugs(
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+    List all drugs in the CPIC database that have pharmacogenomic annotations. Returns drug names and...
 
     Parameters
     ----------
@@ -34,11 +34,11 @@ def CPIC_list_guidelines(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "CPIC_list_guidelines", "arguments": {}},
+        {"name": "CPIC_list_drugs", "arguments": {}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["CPIC_list_guidelines"]
+__all__ = ["CPIC_list_drugs"]

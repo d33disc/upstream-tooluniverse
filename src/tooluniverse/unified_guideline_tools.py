@@ -1060,7 +1060,8 @@ class WHOGuidelinesTool(BaseTool):
         self.session = requests.Session()
         self.session.headers.update(
             {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml",
             }
         )
 
@@ -1073,126 +1074,99 @@ class WHOGuidelinesTool(BaseTool):
 
         return self._search_who_guidelines(query, limit)
 
-    def _fetch_guideline_description(self, url):
-        """Fetch description from a WHO guideline detail page."""
+    def _topic_slug(self, query):
+        """Convert search query to WHO health-topics URL slug candidates."""
+        import re
+
+        slug_full = re.sub(r"[^a-z0-9]+", "-", query.lower()).strip("-")
+        # Also try just the first significant term
+        words = [
+            w
+            for w in query.lower().split()
+            if len(w) > 3
+            and w
+            not in {
+                "what",
+                "when",
+                "which",
+                "with",
+                "from",
+                "that",
+                "this",
+                "treatment",
+                "management",
+                "therapy",
+                "disorder",
+                "disease",
+                "syndrome",
+            }
+        ]
+        slug_first = words[0] if words else slug_full
+        # Return unique candidates to try
+        slugs = []
+        for s in [slug_full, slug_first]:
+            if s and s not in slugs:
+                slugs.append(s)
+        return slugs
+
+    def _scrape_topic_publications(self, topic_slug):
+        """Fetch WHO health topic page and extract publication links."""
+        url = f"{self.base_url}/health-topics/{topic_slug}"
         try:
-            time.sleep(0.5)  # Be respectful
-            response = self.session.get(url, timeout=15)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.content, "html.parser")
-
-            # Try to find overview or description
-            overview = soup.find("div", {"class": "overview"}) or soup.find(
-                "div", {"class": "description"}
-            )
-            if overview:
-                paragraphs = overview.find_all("p")
-                if paragraphs:
-                    return " ".join([p.get_text().strip() for p in paragraphs[:2]])
-
-            # Try meta description
-            meta_desc = soup.find("meta", {"name": "description"}) or soup.find(
-                "meta", {"property": "og:description"}
-            )
-            if meta_desc and meta_desc.get("content"):
-                return meta_desc.get("content")
-
-            # Try first few paragraphs in main content
-            main_content = (
-                soup.find("div", {"class": "content"})
-                or soup.find("main")
-                or soup.find("article")
-            )
-            if main_content:
-                paragraphs = main_content.find_all("p", recursive=True)
-                if paragraphs:
-                    text_parts = []
-                    for p in paragraphs[:3]:
-                        text = p.get_text().strip()
-                        if len(text) > 30:  # Skip very short paragraphs
-                            text_parts.append(text)
-                        if len(" ".join(text_parts)) > 300:  # Limit total length
-                            break
-                    if text_parts:
-                        return " ".join(text_parts)
-
-            return ""
-        except Exception:
-            return ""
-
-    def _search_who_guidelines(self, query, limit):
-        """Search WHO guidelines by scraping their official website."""
-        try:
-            # Add delay to be respectful
-            time.sleep(1)
-
-            # First, get the guidelines page
-            response = self.session.get(self.guidelines_url, timeout=30)
-            response.raise_for_status()
-
-            soup = BeautifulSoup(response.content, "html.parser")
-
-            # Find all publication links
-            all_links = soup.find_all("a", href=True)
-            guidelines = []
-
-            query_lower = query.lower()
-            query_terms = _extract_meaningful_terms(query)
-
-            for link in all_links:
-                href = link["href"]
-                text = link.get_text().strip()
-
-                # Filter for actual guideline publications
+            resp = self.session.get(url, timeout=20)
+            if resp.status_code != 200:
+                return []
+            soup = BeautifulSoup(resp.content, "html.parser")
+            results = []
+            seen = set()
+            for a in soup.find_all("a", href=True):
+                href = a["href"]
+                text = a.get_text().strip()
                 if (
                     ("/publications/i/item/" in href or "/publications/m/item/" in href)
                     and text
-                    and len(text) > 10
+                    and len(text) > 15
+                    and href not in seen
                 ):
-                    # Check if query matches the title
-                    if query_lower in text.lower():
-                        full_url = (
-                            href if href.startswith("http") else self.base_url + href
-                        )
+                    seen.add(href)
+                    full_url = href if href.startswith("http") else self.base_url + href
+                    results.append(
+                        {
+                            "title": text,
+                            "url": full_url,
+                            "description": None,
+                            "content": None,
+                            "source": "WHO",
+                            "organization": "World Health Organization",
+                            "is_guideline": True,
+                            "official": True,
+                        }
+                    )
+            return results
+        except Exception:
+            return []
 
-                        # Avoid duplicates
-                        if not any(g["url"] == full_url for g in guidelines):
-                            # Fetch description from detail page
-                            description = self._fetch_guideline_description(full_url)
+    def _search_who_guidelines(self, query, limit):
+        """Search WHO guidelines via WHO health-topics pages then general guidelines page."""
+        try:
+            time.sleep(0.5)
 
-                            searchable_text = (text + " " + (description or "")).lower()
-                            if query_terms and not any(
-                                term in searchable_text for term in query_terms
-                            ):
-                                continue
+            # Try WHO health-topics pages for this query (returns topic-specific publications)
+            guidelines = []
+            for slug in self._topic_slug(query):
+                guidelines = self._scrape_topic_publications(slug)
+                if guidelines:
+                    break
 
-                            guidelines.append(
-                                {
-                                    "title": text,
-                                    "url": full_url,
-                                    "description": description,
-                                    "content": description,  # Copy description to content field
-                                    "source": "WHO",
-                                    "organization": "World Health Organization",
-                                    "is_guideline": True,
-                                    "official": True,
-                                }
-                            )
-
-                            if len(guidelines) >= limit:
-                                break
-
-            # If no results with strict matching, get all WHO guidelines from page
-            if len(guidelines) == 0:
-                print(
-                    f"No exact matches for '{query}', retrieving latest WHO guidelines..."
-                )
-
-                all_guidelines = []
-                for link in all_links:
-                    href = link["href"]
-                    text = link.get_text().strip()
-
+            # Fall back: scrape the general WHO guidelines page (recent guidelines)
+            if not guidelines:
+                response = self.session.get(self.guidelines_url, timeout=30)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.content, "html.parser")
+                seen = set()
+                for a in soup.find_all("a", href=True):
+                    href = a["href"]
+                    text = a.get_text().strip()
                     if (
                         (
                             "/publications/i/item/" in href
@@ -1200,37 +1174,26 @@ class WHOGuidelinesTool(BaseTool):
                         )
                         and text
                         and len(text) > 10
+                        and href not in seen
                     ):
+                        seen.add(href)
                         full_url = (
                             href if href.startswith("http") else self.base_url + href
                         )
+                        guidelines.append(
+                            {
+                                "title": text,
+                                "url": full_url,
+                                "description": None,
+                                "content": None,
+                                "source": "WHO",
+                                "organization": "World Health Organization",
+                                "is_guideline": True,
+                                "official": True,
+                            }
+                        )
 
-                        if not any(g["url"] == full_url for g in all_guidelines):
-                            # Fetch description from detail page
-                            description = self._fetch_guideline_description(full_url)
-
-                            searchable_text = (text + " " + (description or "")).lower()
-                            if query_terms and not any(
-                                term in searchable_text for term in query_terms
-                            ):
-                                continue
-
-                            all_guidelines.append(
-                                {
-                                    "title": text,
-                                    "url": full_url,
-                                    "description": description,
-                                    "content": description,  # Copy description to content field
-                                    "source": "WHO",
-                                    "organization": "World Health Organization",
-                                    "is_guideline": True,
-                                    "official": True,
-                                }
-                            )
-
-                guidelines = all_guidelines[:limit]
-
-            return guidelines
+            return guidelines[:limit]
 
         except requests.exceptions.RequestException as e:
             return {
@@ -1278,7 +1241,7 @@ class OpenAlexGuidelinesTool(BaseTool):
             params = {
                 "search": search_query,
                 "per_page": min(limit, 50),
-                "sort": "cited_by_count:desc",  # Sort by citations
+                "sort": "relevance_score:desc",  # Sort by relevance to query
             }
 
             # Add year filters
@@ -2024,3 +1987,217 @@ class CMAGuidelinesTool(BaseTool):
 
         except Exception as e:
             return f"Error extracting content: {str(e)}"
+
+
+# ---------------------------------------------------------------------------
+# SIGN (Scottish Intercollegiate Guidelines Network) Tools
+# ---------------------------------------------------------------------------
+
+_SIGN_URL = "https://www.sign.ac.uk/our-guidelines/"
+_SIGN_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
+
+
+def _fetch_sign_table():
+    """Fetch the SIGN guidelines page and parse the HTML table rows.
+
+    Returns a list of dicts with keys: number, title, topic, published, url.
+    Raises requests.RequestException or ValueError on failure.
+    """
+    resp = requests.get(_SIGN_URL, headers=_SIGN_HEADERS, timeout=30)
+    resp.raise_for_status()
+    soup = BeautifulSoup(resp.content, "html.parser")
+
+    rows = []
+    for tr in soup.find_all("tr"):
+        cells = tr.find_all(["td", "th"])
+        if len(cells) < 4:
+            continue
+        # Skip header rows that have no link
+        link_elem = cells[1].find("a", href=True)
+        if not link_elem:
+            continue
+        number_text = cells[0].get_text(strip=True)
+        # Only keep rows where the first cell is a guideline number (integer)
+        if not number_text.isdigit():
+            continue
+        title = link_elem.get_text(strip=True)
+        href = link_elem["href"]
+        # Build absolute URL
+        if href.startswith("http"):
+            url = href
+        else:
+            url = "https://www.sign.ac.uk" + href
+        topic = cells[2].get_text(strip=True)
+        published = cells[3].get_text(strip=True)
+        rows.append(
+            {
+                "number": int(number_text),
+                "title": title,
+                "topic": topic,
+                "published": published,
+                "url": url,
+            }
+        )
+    return rows
+
+
+@register_tool()
+class SIGNSearchGuidelinesTool(BaseTool):
+    """
+    Search SIGN (Scottish Intercollegiate Guidelines Network) clinical guidelines
+    by keyword.  Fetches the full SIGN guidelines table (84 guidelines as of 2024)
+    and filters results client-side.
+    """
+
+    def run(self, arguments):
+        query = arguments.get("query", "")
+        limit = int(arguments.get("limit", 10))
+
+        if not query:
+            return {"error": "query parameter is required"}
+
+        try:
+            rows = _fetch_sign_table()
+        except requests.RequestException as exc:
+            return {"error": f"Failed to fetch SIGN guidelines: {exc}"}
+        except Exception as exc:
+            return {"error": f"Error parsing SIGN guidelines page: {exc}"}
+
+        query_lower = query.lower()
+        results = [
+            row
+            for row in rows
+            if query_lower in row["title"].lower()
+            or query_lower in row["topic"].lower()
+        ]
+        return results[:limit]
+
+
+@register_tool()
+class SIGNListGuidelinesTool(BaseTool):
+    """
+    List SIGN (Scottish Intercollegiate Guidelines Network) clinical guidelines,
+    optionally filtered by clinical topic/specialty.  Returns up to `limit`
+    guidelines from the full SIGN guidelines table.
+    """
+
+    def run(self, arguments):
+        topic = arguments.get("topic", None)
+        limit = int(arguments.get("limit", 20))
+
+        try:
+            rows = _fetch_sign_table()
+        except requests.RequestException as exc:
+            return {"error": f"Failed to fetch SIGN guidelines: {exc}"}
+        except Exception as exc:
+            return {"error": f"Error parsing SIGN guidelines page: {exc}"}
+
+        if topic:
+            topic_lower = topic.lower()
+            rows = [r for r in rows if topic_lower in r["topic"].lower()]
+
+        return rows[:limit]
+
+
+# ---------------------------------------------------------------------------
+# CTFPHC (Canadian Task Force on Preventive Health Care) Tools
+# ---------------------------------------------------------------------------
+
+_CTFPHC_URL = "https://canadiantaskforce.ca/guidelines/published-guidelines/"
+_CTFPHC_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
+
+
+def _fetch_ctfphc_links():
+    """Fetch CTFPHC published-guidelines index and return list of guideline dicts.
+
+    Each dict has: title, url, year (str or None).
+    """
+    resp = requests.get(_CTFPHC_URL, headers=_CTFPHC_HEADERS, timeout=30)
+    resp.raise_for_status()
+    soup = BeautifulSoup(resp.content, "html.parser")
+
+    guidelines = []
+    seen_urls = set()
+
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        # Must be a specific published-guidelines slug (not the index page itself)
+        if not re.search(r"/published-guidelines/[^/]+/?$", href):
+            continue
+        # Exclude the index page itself
+        if href.rstrip("/").endswith("/published-guidelines"):
+            continue
+
+        # Build absolute URL
+        if href.startswith("http"):
+            url = href
+        else:
+            url = "https://canadiantaskforce.ca" + href
+
+        if url in seen_urls:
+            continue
+        seen_urls.add(url)
+
+        title_raw = a.get_text(strip=True)
+        if not title_raw or len(title_raw) < 3:
+            continue
+
+        # Extract year from title like "Cognitive Impairment (2024)"
+        year_match = re.search(r"\((\d{4})\)", title_raw)
+        year = year_match.group(1) if year_match else None
+
+        guidelines.append({"title": title_raw, "url": url, "year": year})
+
+    return guidelines
+
+
+@register_tool()
+class CTFPHCListGuidelinesTool(BaseTool):
+    """
+    List all published guidelines from the Canadian Task Force on Preventive
+    Health Care (CTFPHC).  Fetches the official published-guidelines index page
+    and returns title, URL, and year for each guideline.
+    """
+
+    def run(self, arguments):
+        limit = int(arguments.get("limit", 30))
+
+        try:
+            guidelines = _fetch_ctfphc_links()
+        except requests.RequestException as exc:
+            return {"error": f"Failed to fetch CTFPHC guidelines: {exc}"}
+        except Exception as exc:
+            return {"error": f"Error parsing CTFPHC guidelines page: {exc}"}
+
+        return guidelines[:limit]
+
+
+@register_tool()
+class CTFPHCSearchGuidelinesTool(BaseTool):
+    """
+    Search published guidelines from the Canadian Task Force on Preventive
+    Health Care (CTFPHC) by keyword.  Fetches the official index and filters
+    client-side by title match.
+    """
+
+    def run(self, arguments):
+        query = arguments.get("query", "")
+        limit = int(arguments.get("limit", 10))
+
+        if not query:
+            return {"error": "query parameter is required"}
+
+        try:
+            guidelines = _fetch_ctfphc_links()
+        except requests.RequestException as exc:
+            return {"error": f"Failed to fetch CTFPHC guidelines: {exc}"}
+        except Exception as exc:
+            return {"error": f"Error parsing CTFPHC guidelines page: {exc}"}
+
+        query_lower = query.lower()
+        results = [g for g in guidelines if query_lower in g["title"].lower()]
+        return results[:limit]

@@ -1,25 +1,27 @@
 """
-CPIC_list_guidelines
+FDA_list_drug_classes
 
-List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+List FDA pharmacological drug classes (Established Pharmacologic Class, EPC) and the number of dr...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def CPIC_list_guidelines(
+def FDA_list_drug_classes(
+    limit: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
+    List FDA pharmacological drug classes (Established Pharmacologic Class, EPC) and the number of dr...
 
     Parameters
     ----------
-    No parameters
+    limit : int
+        Maximum number of drug classes to return (default: 20, max: 100)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,11 +36,11 @@ def CPIC_list_guidelines(
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "CPIC_list_guidelines", "arguments": {}},
+        {"name": "FDA_list_drug_classes", "arguments": {"limit": limit}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["CPIC_list_guidelines"]
+__all__ = ["FDA_list_drug_classes"]

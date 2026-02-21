@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1896 scientific tools.
+Type-safe Python interface to 1906 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -157,8 +157,11 @@ from .CPIC_get_alleles import CPIC_get_alleles
 from .CPIC_get_drug_info import CPIC_get_drug_info
 from .CPIC_get_gene_drug_pairs import CPIC_get_gene_drug_pairs
 from .CPIC_get_gene_info import CPIC_get_gene_info
+from .CPIC_get_recommendations import CPIC_get_recommendations
+from .CPIC_list_drugs import CPIC_list_drugs
 from .CPIC_list_guidelines import CPIC_list_guidelines
 from .CPIC_list_pgx_genes import CPIC_list_pgx_genes
+from .CPIC_search_gene_drug_pairs import CPIC_search_gene_drug_pairs
 from .CRAN_get_package import CRAN_get_package
 from .CRAN_get_package_versions import CRAN_get_package_versions
 from .CTD_get_chemical_diseases import CTD_get_chemical_diseases
@@ -166,6 +169,8 @@ from .CTD_get_chemical_gene_interactions import CTD_get_chemical_gene_interactio
 from .CTD_get_disease_chemicals import CTD_get_disease_chemicals
 from .CTD_get_gene_chemicals import CTD_get_gene_chemicals
 from .CTD_get_gene_diseases import CTD_get_gene_diseases
+from .CTFPHC_list_guidelines import CTFPHC_list_guidelines
+from .CTFPHC_search_guidelines import CTFPHC_search_guidelines
 from .CallAgent import CallAgent
 from .ChEBI_get_compound import ChEBI_get_compound
 from .ChEBI_get_ontology_children import ChEBI_get_ontology_children
@@ -527,6 +532,7 @@ from .FDA_get_drug_generic_name import FDA_get_drug_generic_name
 from .FDA_get_drug_interactions_by_drug_name import (
     FDA_get_drug_interactions_by_drug_name,
 )
+from .FDA_get_drug_label import FDA_get_drug_label
 from .FDA_get_drug_label_info_by_field_value import (
     FDA_get_drug_label_info_by_field_value,
 )
@@ -801,6 +807,7 @@ from .FDA_get_warnings_and_cautions_by_drug_name import (
 )
 from .FDA_get_warnings_by_drug_name import FDA_get_warnings_by_drug_name
 from .FDA_get_when_using_info import FDA_get_when_using_info
+from .FDA_list_drug_classes import FDA_list_drug_classes
 from .FDA_retrieve_device_use_by_drug_name import FDA_retrieve_device_use_by_drug_name
 from .FDA_retrieve_drug_name_by_device_use import FDA_retrieve_drug_name_by_device_use
 from .FDA_retrieve_drug_names_by_patient_medication_info import (
@@ -809,6 +816,7 @@ from .FDA_retrieve_drug_names_by_patient_medication_info import (
 from .FDA_retrieve_patient_medication_info_by_drug_name import (
     FDA_retrieve_patient_medication_info_by_drug_name,
 )
+from .FDA_search_drug_labels import FDA_search_drug_labels
 from .FPbase_get_protein import FPbase_get_protein
 from .FPbase_search_by_spectrum import FPbase_search_by_spectrum
 from .Fatcat_search_scholar import Fatcat_search_scholar
@@ -1622,6 +1630,8 @@ from .SGD_get_go_annotations import SGD_get_go_annotations
 from .SGD_get_interactions import SGD_get_interactions
 from .SGD_get_phenotypes import SGD_get_phenotypes
 from .SGD_search import SGD_search
+from .SIGN_list_guidelines import SIGN_list_guidelines
+from .SIGN_search_guidelines import SIGN_search_guidelines
 from .SIMBAD_advanced_query import SIMBAD_advanced_query
 from .SIMBAD_query_object import SIMBAD_query_object
 from .STITCH_get_chemical_protein_interactions import (
@@ -2531,8 +2541,11 @@ __all__ = [
     "CPIC_get_drug_info",
     "CPIC_get_gene_drug_pairs",
     "CPIC_get_gene_info",
+    "CPIC_get_recommendations",
+    "CPIC_list_drugs",
     "CPIC_list_guidelines",
     "CPIC_list_pgx_genes",
+    "CPIC_search_gene_drug_pairs",
     "CRAN_get_package",
     "CRAN_get_package_versions",
     "CTD_get_chemical_diseases",
@@ -2540,6 +2553,8 @@ __all__ = [
     "CTD_get_disease_chemicals",
     "CTD_get_gene_chemicals",
     "CTD_get_gene_diseases",
+    "CTFPHC_list_guidelines",
+    "CTFPHC_search_guidelines",
     "CallAgent",
     "ChEBI_get_compound",
     "ChEBI_get_ontology_children",
@@ -2835,6 +2850,7 @@ __all__ = [
     "FDA_get_dosage_forms_and_strengths_by_drug_name",
     "FDA_get_drug_generic_name",
     "FDA_get_drug_interactions_by_drug_name",
+    "FDA_get_drug_label",
     "FDA_get_drug_label_info_by_field_value",
     "FDA_get_drug_name_by_SPL_ID",
     "FDA_get_drug_name_by_adverse_reaction",
@@ -2959,10 +2975,12 @@ __all__ = [
     "FDA_get_warnings_and_cautions_by_drug_name",
     "FDA_get_warnings_by_drug_name",
     "FDA_get_when_using_info",
+    "FDA_list_drug_classes",
     "FDA_retrieve_device_use_by_drug_name",
     "FDA_retrieve_drug_name_by_device_use",
     "FDA_retrieve_drug_names_by_patient_medication_info",
     "FDA_retrieve_patient_medication_info_by_drug_name",
+    "FDA_search_drug_labels",
     "FPbase_get_protein",
     "FPbase_search_by_spectrum",
     "Fatcat_search_scholar",
@@ -3614,6 +3632,8 @@ __all__ = [
     "SGD_get_interactions",
     "SGD_get_phenotypes",
     "SGD_search",
+    "SIGN_list_guidelines",
+    "SIGN_search_guidelines",
     "SIMBAD_advanced_query",
     "SIMBAD_query_object",
     "STITCH_get_chemical_protein_interactions",
