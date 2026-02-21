@@ -25,7 +25,7 @@ def NCIDrugDict_search(
     query : str
         Drug name to search for (e.g., 'imatinib', 'pembrolizumab', 'tamoxifen', 'cis...
     matchType : str
-        Match type: 'Begins' (starts with), 'Contains', or 'Exact' (default: Begins)
+        Match type: 'Begins' (starts with) or 'Contains' (default: Begins)
     size : int
         Number of results to return (default 10)
     stream_callback : Callable, optional

@@ -41,7 +41,7 @@ def NASASBDB_get_body(
     return get_shared_client().run_one_function(
         {
             "name": "NASASBDB_get_body",
-            "arguments": {"sstr": sstr, "phys_par": phys_par},
+            "arguments": {"sstr": sstr, "phys-par": phys_par},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

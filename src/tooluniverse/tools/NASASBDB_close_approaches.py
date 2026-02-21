@@ -54,10 +54,10 @@ def NASASBDB_close_approaches(
         {
             "name": "NASASBDB_close_approaches",
             "arguments": {
-                "dist_max": dist_max,
-                "date_min": date_min,
-                "date_max": date_max,
-                "h_max": h_max,
+                "dist-max": dist_max,
+                "date-min": date_min,
+                "date-max": date_max,
+                "h-max": h_max,
                 "des": des,
                 "limit": limit,
             },
