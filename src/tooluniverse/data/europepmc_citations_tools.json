@@ -32,94 +32,40 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Citation data showing articles that cite the queried paper",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Citation data showing articles that cite the queried paper",
+            "version": {
+              "type": ["string", "null"]
+            },
+            "hitCount": {
+              "type": "integer",
+              "description": "Total number of citing articles"
+            },
+            "request": {
+              "type": ["object", "null"]
+            },
+            "citationList": {
+              "type": ["object", "null"],
               "properties": {
-                "version": {
-                  "type": "string"
-                },
-                "hitCount": {
-                  "type": "integer",
-                  "description": "Total number of citing articles"
-                },
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "source": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "citationList": {
-                  "type": "object",
-                  "properties": {
-                    "citation": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "description": "PMID of the citing article"
-                          },
-                          "source": {
-                            "type": "string"
-                          },
-                          "citationType": {
-                            "type": "string"
-                          },
-                          "title": {
-                            "type": "string"
-                          },
-                          "authorString": {
-                            "type": "string"
-                          },
-                          "journalAbbreviation": {
-                            "type": "string"
-                          },
-                          "pubYear": {
-                            "type": "integer"
-                          },
-                          "volume": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "issue": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "pageInfo": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "citedByCount": {
-                            "type": "integer"
-                          }
-                        }
-                      }
+                "citation": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": ["string", "null"]},
+                      "source": {"type": ["string", "null"]},
+                      "title": {"type": ["string", "null"]},
+                      "authorString": {"type": ["string", "null"]},
+                      "journalAbbreviation": {"type": ["string", "null"]},
+                      "pubYear": {"type": ["integer", "null"]},
+                      "citedByCount": {"type": ["integer", "null"]}
                     }
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
           },
-          "required": [
-            "data"
-          ]
+          "required": ["hitCount"]
         },
         {
           "type": "object",
@@ -180,94 +126,40 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Reference list (bibliography) of the queried paper",
           "properties": {
-            "data": {
-              "type": "object",
-              "description": "Reference list (bibliography) of the queried paper",
+            "version": {
+              "type": ["string", "null"]
+            },
+            "hitCount": {
+              "type": "integer",
+              "description": "Total number of references in the paper"
+            },
+            "request": {
+              "type": ["object", "null"]
+            },
+            "referenceList": {
+              "type": ["object", "null"],
               "properties": {
-                "version": {
-                  "type": "string"
-                },
-                "hitCount": {
-                  "type": "integer",
-                  "description": "Total number of references in the paper"
-                },
-                "request": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "source": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "referenceList": {
-                  "type": "object",
-                  "properties": {
-                    "reference": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "description": "PMID of the referenced article"
-                          },
-                          "source": {
-                            "type": "string"
-                          },
-                          "citationType": {
-                            "type": "string"
-                          },
-                          "title": {
-                            "type": "string"
-                          },
-                          "authorString": {
-                            "type": "string"
-                          },
-                          "journalAbbreviation": {
-                            "type": "string"
-                          },
-                          "pubYear": {
-                            "type": "integer"
-                          },
-                          "volume": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "issue": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "pageInfo": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
-                          "citedByCount": {
-                            "type": "integer"
-                          }
-                        }
-                      }
+                "reference": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": ["string", "null"]},
+                      "source": {"type": ["string", "null"]},
+                      "title": {"type": ["string", "null"]},
+                      "authorString": {"type": ["string", "null"]},
+                      "journalAbbreviation": {"type": ["string", "null"]},
+                      "pubYear": {"type": ["integer", "null"]},
+                      "citedByCount": {"type": ["integer", "null"]}
                     }
                   }
                 }
               }
-            },
-            "metadata": {
-              "type": "object"
             }
           },
-          "required": [
-            "data"
-          ]
+          "required": ["hitCount"]
         },
         {
           "type": "object",

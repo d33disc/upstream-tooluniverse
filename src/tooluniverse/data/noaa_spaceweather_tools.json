@@ -19,28 +19,20 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Monthly solar cycle predictions",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "time-tag": {"type": "string", "description": "Year-month (e.g., '2024-06')"},
-                  "predicted_ssn": {"type": "number", "description": "Predicted smoothed sunspot number"},
-                  "high25_ssn": {"type": ["number", "null"]},
-                  "high_ssn": {"type": ["number", "null"], "description": "High scenario sunspot number"},
-                  "low_ssn": {"type": ["number", "null"], "description": "Low scenario sunspot number"},
-                  "predicted_f10.7": {"type": "number", "description": "Predicted F10.7 solar radio flux (10.7 cm, sfu)"},
-                  "high_f10.7": {"type": ["number", "null"]},
-                  "low_f10.7": {"type": ["number", "null"]}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "Monthly solar cycle predictions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "time-tag": {"type": ["string", "null"], "description": "Year-month (e.g., '2024-06')"},
+              "predicted_ssn": {"type": ["number", "null"], "description": "Predicted smoothed sunspot number"},
+              "high_ssn": {"type": ["number", "null"], "description": "High scenario sunspot number"},
+              "low_ssn": {"type": ["number", "null"], "description": "Low scenario sunspot number"},
+              "predicted_f10.7": {"type": ["number", "null"], "description": "Predicted F10.7 solar radio flux"},
+              "high_f10.7": {"type": ["number", "null"]},
+              "low_f10.7": {"type": ["number", "null"]}
+            }
+          }
         },
         {
           "type": "object",
@@ -70,24 +62,17 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Kp index records (1-minute cadence, last few days)",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "time_tag": {"type": "string", "description": "UTC timestamp (YYYY-MM-DDTHH:mm:00.000Z)"},
-                  "kp_index": {"type": ["number", "null"], "description": "Official NOAA Kp index (0-9 scale, 3-hour estimate)"},
-                  "estimated_kp": {"type": "number", "description": "Real-time estimated Kp (1-minute resolution)"},
-                  "kp": {"type": ["string", "null"]}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "Kp index records (1-minute cadence, last few days)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "time_tag": {"type": ["string", "null"], "description": "UTC timestamp"},
+              "kp_index": {"type": ["number", "null"], "description": "Official NOAA Kp index (0-9 scale)"},
+              "estimated_kp": {"type": ["number", "null"], "description": "Real-time estimated Kp"},
+              "kp": {"type": ["string", "null"]}
+            }
+          }
         },
         {
           "type": "object",
@@ -117,25 +102,20 @@
     "return_schema": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "description": "Solar X-ray flux records (1-minute cadence, 7-day history)",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "time_tag": {"type": "string", "description": "UTC timestamp"},
-                  "satellite": {"type": "integer", "description": "GOES satellite number"},
-                  "flux": {"type": ["number", "null"], "description": "X-ray flux W/m^2 (short wavelength 0.1-0.8 nm)"},
-                  "observed_flux": {"type": ["number", "null"]},
-                  "energy": {"type": "string", "description": "Energy band: '0.05-0.4nm' (hard) or '0.1-0.8nm' (soft)"}
-                }
-              }
-            },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
+          "type": "array",
+          "description": "Solar X-ray flux records (1-minute cadence, 7-day history)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "time_tag": {"type": ["string", "null"], "description": "UTC timestamp"},
+              "satellite": {"type": ["integer", "null"], "description": "GOES satellite number"},
+              "flux": {"type": ["number", "null"], "description": "X-ray flux W/m^2"},
+              "observed_flux": {"type": ["number", "null"]},
+              "electron_correction": {"type": ["number", "null"]},
+              "electron_contaminaton": {"type": ["boolean", "null"]},
+              "energy": {"type": ["string", "null"], "description": "Energy band: '0.05-0.4nm' or '0.1-0.8nm'"}
+            }
+          }
         },
         {
           "type": "object",

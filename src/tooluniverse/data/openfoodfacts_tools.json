@@ -63,7 +63,7 @@
               "description": "Total number of matching products"
             },
             "page": {
-              "type": "integer"
+              "type": ["integer", "string", "null"]
             },
             "page_size": {
               "type": "integer"

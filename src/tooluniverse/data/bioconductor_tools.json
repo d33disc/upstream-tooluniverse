@@ -94,9 +94,10 @@
                   "updated": {
                     "type": [
                       "string",
+                      "integer",
                       "null"
                     ],
-                    "description": "Last update timestamp"
+                    "description": "Last update timestamp (string or Unix epoch integer)"
                   },
                   "topics": {
                     "type": [

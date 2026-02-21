@@ -170,6 +170,7 @@
                 "creator": {
                   "type": [
                     "string",
+                    "array",
                     "null"
                   ],
                   "description": "Original dataset creator/author"

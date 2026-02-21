@@ -109,7 +109,7 @@
                     "type": "string"
                   },
                   "organisms": {
-                    "type": "array"
+                    "type": ["array", "null"]
                   },
                   "publicationDate": {
                     "type": "string"
@@ -201,16 +201,16 @@
               "type": "string"
             },
             "keywords": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "organisms": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "tissues": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "diseases": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "omics_type": {
               "type": "array"
@@ -219,16 +219,16 @@
               "type": "string"
             },
             "publicationIds": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "protocols": {
-              "type": "array"
+              "type": ["array", "null"]
             },
             "instruments": {
               "type": "array"
             },
             "full_dataset_link": {
-              "type": "string"
+              "type": ["string", "null"]
             },
             "citationsCount": {
               "type": "integer"

@@ -54,6 +54,9 @@
       "endpoint": "https://api.nobelprize.org/2.1/nobelPrizes",
       "params": {
         "sort": "desc"
+      },
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (scientific research)"
       }
     },
     "type": "BaseRESTTool",
@@ -271,7 +274,10 @@
       "required": []
     },
     "fields": {
-      "endpoint": "https://api.nobelprize.org/2.1/laureates"
+      "endpoint": "https://api.nobelprize.org/2.1/laureates",
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (scientific research)"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [

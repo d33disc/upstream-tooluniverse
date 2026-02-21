@@ -391,7 +391,7 @@
               }
             },
             "last-modified-date": {
-              "type": "object",
+              "type": ["object", "null"],
               "description": "Last modification timestamp"
             }
           }
