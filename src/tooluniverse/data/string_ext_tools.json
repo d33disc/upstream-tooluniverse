@@ -155,8 +155,8 @@
                       "number_of_genes_in_background": {"type": "integer", "description": "Total genes with this annotation in background"},
                       "p_value": {"type": "number", "description": "Raw p-value"},
                       "fdr": {"type": "number", "description": "FDR-corrected q-value"},
-                      "inputGenes": {"type": "string", "description": "Comma-separated input genes matching this term"},
-                      "preferredNames": {"type": "string"}
+                      "inputGenes": {"type": "array", "description": "Input genes matching this term", "items": {"type": "string"}},
+                      "preferredNames": {"type": "array", "items": {"type": "string"}}
                     }
                   }
                 }
