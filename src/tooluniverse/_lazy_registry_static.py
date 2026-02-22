@@ -449,7 +449,6 @@ STATIC_LAZY_REGISTRY = {
     "UniChemTool": "unichem_tool",
     "UniProtIDMappingTool": "uniprot_idmapping_tool",
     "UniProtRefTool": "uniprot_ref_tool",
-    "ZINCTool": "zinc_tool",
     "PfamTool": "pfam_tool",
     "PubChemToxTool": "pubchem_tox_tool",
     "CTGovAPITool": "clinicaltrials_tool",
