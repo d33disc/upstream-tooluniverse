@@ -14,6 +14,7 @@ logger = logging.getLogger("ToolRegistry")
 # Global registries
 _tool_registry = {}
 _config_registry = {}
+_list_config_registry: list = []  # Flat list of configs from sub-packages
 _lazy_registry: Dict[str, str] = {}  # Maps tool names to module names
 _discovery_completed = False
 _lazy_cache = {}
@@ -108,6 +109,32 @@ def get_tool_registry():
 def get_config_registry():
     """Get a copy of the current config registry."""
     return _config_registry.copy()
+
+
+def register_tool_configs(configs: list):
+    """
+    Register a list of tool configs from a sub-package (e.g. tooluniverse-circuit).
+
+    Sub-package ``__init__.py`` files call this to make their JSON configs
+    discoverable by ``ToolUniverse.load_tools()`` without requiring any
+    entries in ``default_config.py``.
+
+    Args:
+        configs: List of tool config dicts, each containing at least a ``name`` key.
+    """
+    from .tool_defaults import add_annotations_to_tool_config
+
+    for config in configs:
+        if not isinstance(config, dict) or "name" not in config:
+            continue
+        add_annotations_to_tool_config(config)
+        _list_config_registry.append(config)
+    logger.info(f"Registered {len(configs)} sub-package tool configs")
+
+
+def get_list_config_registry() -> list:
+    """Return the flat list of configs registered by sub-packages."""
+    return _list_config_registry.copy()
 
 
 def lazy_import_tool(tool_name):
@@ -327,6 +354,9 @@ def build_lazy_registry(package_name=None):
             f"Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} classes."
         )
         _lazy_registry.update(STATIC_LAZY_REGISTRY)
+        # Still auto-import sub-packages so their __init__.py files can register
+        # configs even when the static registry is used (e.g. tooluniverse[circuit]).
+        _auto_import_subpackages(package_name)
         return _lazy_registry.copy()
     except ImportError:
         logger.debug("No static lazy registry found. Proceeding with AST discovery.")
@@ -339,10 +369,58 @@ def build_lazy_registry(package_name=None):
     for tool_name, module_name in ast_mappings.items():
         _lazy_registry[tool_name] = module_name
 
+    # 3. Auto-import installed tooluniverse sub-packages so their __init__.py
+    #    files can call register_tool_configs() and populate _list_config_registry.
+    #    We import them here (after AST scan) to avoid circular imports during scan.
+    _auto_import_subpackages(package_name)
+
     logger.info(
         f"Built lazy registry: {len(_lazy_registry)} classes discovered via AST (no modules imported)"
     )
     return _lazy_registry.copy()
+
+
+def _auto_import_subpackages(package_name: str = "tooluniverse"):
+    """
+    Import all installed sub-packages of ``package_name`` so their
+    ``__init__.py`` files run and can self-register configs/tools.
+
+    Only packages that have their own ``__init__.py`` are imported; plain
+    directories (like ``data/``, ``cache/``) are skipped automatically.
+    Errors are logged but never propagated — a broken sub-package must not
+    prevent the main package from starting.
+    """
+    import importlib
+    from pathlib import Path
+
+    try:
+        pkg = importlib.import_module(package_name)
+    except ImportError:
+        return
+
+    for pkg_dir in pkg.__path__:
+        try:
+            base = Path(pkg_dir)
+        except Exception:
+            continue
+        for subpkg in sorted(base.iterdir()):
+            if not subpkg.is_dir():
+                continue
+            if not (subpkg / "__init__.py").exists():
+                continue
+            # Skip the built-in sub-packages that are part of the main repo
+            # (they register themselves via the standard decorator path).
+            # We only want EXTERNALLY installed sub-packages.
+            # Heuristic: skip directories that are inside the main package dir
+            # that lives in the editable-install source tree.
+            full_mod = f"{package_name}.{subpkg.name}"
+            if full_mod in sys.modules:
+                continue
+            try:
+                importlib.import_module(full_mod)
+                logger.debug(f"Auto-imported sub-package: {full_mod}")
+            except Exception as exc:
+                logger.debug(f"Could not auto-import sub-package {full_mod}: {exc}")
 
 
 def auto_discover_tools(package_name=None, lazy=True):
