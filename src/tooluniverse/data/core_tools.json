@@ -212,7 +212,7 @@
       ]
     },
     "return_schema": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "status": { "type": "string", "enum": ["success", "error"] },
         "pdf_url": { "type": "string" },
@@ -253,8 +253,8 @@
     },
     "test_examples": [
       {
-        "url": "https://core.ac.uk/download/pdf/153370038.pdf",
-        "terms": ["rs738409", "rs58542926"],
+        "url": "https://www.biorxiv.org/content/10.1101/2023.12.01.569554.full.pdf",
+        "terms": ["single cell", "RNA"],
         "window_chars": 200
       }
     ]
