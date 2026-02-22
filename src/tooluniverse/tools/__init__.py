@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1916 scientific tools.
+Type-safe Python interface to 1907 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1116,9 +1116,6 @@ from .NASAEONET_get_events import NASAEONET_get_events
 from .NASAExoplanet_query_planets import NASAExoplanet_query_planets
 from .NASAExoplanet_query_stars import NASAExoplanet_query_stars
 from .NASANED_lookup_object import NASANED_lookup_object
-from .NASANeoWs_browse_asteroids import NASANeoWs_browse_asteroids
-from .NASANeoWs_get_asteroid import NASANeoWs_get_asteroid
-from .NASANeoWs_get_feed import NASANeoWs_get_feed
 from .NASASBDB_close_approaches import NASASBDB_close_approaches
 from .NASASBDB_get_body import NASASBDB_get_body
 from .NASA_DONKI_get_coronal_mass_ejections import NASA_DONKI_get_coronal_mass_ejections
@@ -1185,8 +1182,6 @@ from .OMA_get_protein import OMA_get_protein
 from .ORCID_get_person import ORCID_get_person
 from .ORCID_get_works import ORCID_get_works
 from .ORCID_search_researchers import ORCID_search_researchers
-from .OSDR_get_study import OSDR_get_study
-from .OSDR_search_studies import OSDR_search_studies
 from .OSF_search_preprints import OSF_search_preprints
 from .OSL_get_efo_id_by_disease_name import OSL_get_efo_id_by_disease_name
 from .OmicsDI_get_dataset import OmicsDI_get_dataset
@@ -1808,10 +1803,6 @@ from .ZFIN_get_gene_alleles import ZFIN_get_gene_alleles
 from .ZFIN_get_gene_expression import ZFIN_get_gene_expression
 from .ZFIN_get_gene_orthologs import ZFIN_get_gene_orthologs
 from .ZFIN_get_gene_phenotypes import ZFIN_get_gene_phenotypes
-from .ZINC_get_catalogs import ZINC_get_catalogs
-from .ZINC_get_substance import ZINC_get_substance
-from .ZINC_search_by_name import ZINC_search_by_name
-from .ZINC_search_by_smiles import ZINC_search_by_smiles
 from .Zenodo_get_license import Zenodo_get_license
 from .Zenodo_get_record import Zenodo_get_record
 from .Zenodo_get_record_files import Zenodo_get_record_files
@@ -3270,9 +3261,6 @@ __all__ = [
     "NASAExoplanet_query_planets",
     "NASAExoplanet_query_stars",
     "NASANED_lookup_object",
-    "NASANeoWs_browse_asteroids",
-    "NASANeoWs_get_asteroid",
-    "NASANeoWs_get_feed",
     "NASASBDB_close_approaches",
     "NASASBDB_get_body",
     "NASA_DONKI_get_coronal_mass_ejections",
@@ -3337,8 +3325,6 @@ __all__ = [
     "ORCID_get_person",
     "ORCID_get_works",
     "ORCID_search_researchers",
-    "OSDR_get_study",
-    "OSDR_search_studies",
     "OSF_search_preprints",
     "OSL_get_efo_id_by_disease_name",
     "OmicsDI_get_dataset",
@@ -3808,10 +3794,6 @@ __all__ = [
     "ZFIN_get_gene_expression",
     "ZFIN_get_gene_orthologs",
     "ZFIN_get_gene_phenotypes",
-    "ZINC_get_catalogs",
-    "ZINC_get_substance",
-    "ZINC_search_by_name",
-    "ZINC_search_by_smiles",
     "Zenodo_get_license",
     "Zenodo_get_record",
     "Zenodo_get_record_files",
