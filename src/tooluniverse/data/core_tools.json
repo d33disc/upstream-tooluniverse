@@ -253,8 +253,8 @@
     },
     "test_examples": [
       {
-        "url": "https://www.biorxiv.org/content/10.1101/2023.12.01.569554.full.pdf",
-        "terms": ["single cell", "RNA"],
+        "url": "https://arxiv.org/pdf/1706.03762.pdf",
+        "terms": ["transformer", "attention"],
         "window_chars": 200
       }
     ]
