@@ -75,7 +75,7 @@ Setup Steps
       })
 
       # Get tool specifications
-      tool_specs = [tu.tool_specification(t['name']) for t in tools]
+      tool_specs = [tu.tool_specification(t['name'], format="openai") for t in tools]
 
       # Convert to OpenAI function format
       functions = [
@@ -161,7 +161,7 @@ Complete Example
        # Get tool specs and convert to functions
        functions = []
        for tool in tools:
-           spec = tu.tool_specification(tool['name'])
+           spec = tu.tool_specification(tool['name'], format="openai")
            functions.append({
                "name": spec['name'],
                "description": spec['description'],
@@ -230,7 +230,7 @@ Advanced Patterns
               "name": "Tool_Finder_LLM",
               "arguments": {"description": query, "limit": 10}
           })
-          return [tu.tool_specification(t['name']) for t in tools]
+          return [tu.tool_specification(t['name'], format="openai") for t in tools]
 
 .. dropdown:: 📊 Batch Processing
    :animate: fade-in-slide-down

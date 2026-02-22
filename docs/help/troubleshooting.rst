@@ -131,7 +131,7 @@ Tool not found errors
 
    # List available tools
    print("Available tools:")
-   for tool_name in tu.list_tools():
+   for tool_name in tu.list_built_in_tools(mode='list_name'):
        print(f"  - {tool_name}")
 
 **Solutions:**
@@ -151,7 +151,7 @@ Tool not found errors
 
    .. code-block:: python
 
-      if "OpenTargets_tool" not in tu.list_tools():
+      if "OpenTargets_tool" not in tu.all_tool_dict:
           print("OpenTargets tool not loaded")
           # Check for missing dependencies
 
@@ -564,7 +564,7 @@ Claude/AI assistant not finding tools
    .. code-block:: python
 
       # In MCP server
-      tools = tu.list_tools()
+      tools = tu.return_all_loaded_tools()
       print(f"Registered {len(tools)} tools")
 
 Advanced Debugging

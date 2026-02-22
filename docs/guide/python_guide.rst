@@ -303,7 +303,7 @@ Inspect tool details before execution:
 .. code-block:: python
 
    # Get single tool specification
-   spec = tu.tool_specification("UniProt_get_function_by_accession")
+   spec = tu.tool_specification("UniProt_get_function_by_accession", format="openai")
    
    print(f"Name: {spec['name']}")
    print(f"Description: {spec['description']}")
