@@ -99,9 +99,14 @@ After they paste that into their client, your job here is done.
 
 **Quick Start mode (offer this before Question 2):**
 
-Ask: "Would you like a **quick start** (I'll use defaults and get you running in 2 minutes) or a **full setup** (where I walk you through API keys and options)?"
+Ask: "Would you like a **quick start** (running in ~2 minutes, no questions) or a **full setup** (I walk you through API keys and options)?"
 
-- **Quick start**: Skip API key questions (Step 4). Just do Steps 1–3, then Step 5 (test). Tell the user they can always run "setup tooluniverse" again later to add API keys.
+- **Quick start**: Don't present multiple options — just pick the fastest single path and execute it:
+  - macOS: `brew install uv` (if Homebrew available) or the curl installer
+  - Write the config with the python3 one-liner
+  - Restart the app, confirm the hammer icon / run `timeout 10 uvx tooluniverse --help`
+  - Skip API keys (Step 4) entirely — tell the user they can add them later
+  - No A/B/C choices, no "which client" if auto-detected, no caveats
 - **Full setup**: Continue with all steps including API keys.
 
 ---
@@ -136,6 +141,17 @@ which brew && echo "Homebrew found" || echo "No Homebrew"
   ```bash
   brew install uv
   ```
+  After install, verify using the Homebrew path **directly** — don't rely on `which uvx` since the shell may still resolve the old `~/.local/bin/uvx` first:
+  ```bash
+  /opt/homebrew/bin/uvx --version     # Apple Silicon Mac
+  /usr/local/bin/uvx --version        # Intel Mac
+  ```
+  If you already had uv installed via the installer script and `which uvx` still points to `~/.local/bin/uvx`, run:
+  ```bash
+  brew link uv --overwrite   # makes Homebrew's uvx the default in the shell too
+  ```
+  Either way, Claude Desktop will use `/opt/homebrew/bin/uvx` directly — `which uvx` doesn't matter for GUI apps.
+
 - **No Homebrew → use the installer script**:
   ```bash
   curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -190,8 +206,14 @@ Claude Desktop is a GUI app — it does **not** inherit your shell's PATH. If `u
 **Option A — Homebrew (macOS, recommended — permanent fix):**
 ```bash
 brew install uv
+# If uv was already installed via the shell installer, also run:
+brew link uv --overwrite
 ```
-Homebrew places `uvx` at `/opt/homebrew/bin/uvx` (Apple Silicon) or `/usr/local/bin/uvx` (Intel), which Claude Desktop can always find. After this, `"command": "uvx"` works everywhere with no absolute path.
+Homebrew places `uvx` at `/opt/homebrew/bin/uvx` (Apple Silicon) or `/usr/local/bin/uvx` (Intel), which Claude Desktop reads directly. `which uvx` in your shell may still show `~/.local/bin/uvx` — that's fine, Claude Desktop doesn't use the shell PATH. Verify the Homebrew binary exists:
+```bash
+/opt/homebrew/bin/uvx --version   # Apple Silicon
+/usr/local/bin/uvx --version      # Intel Mac
+```
 
 **Option B — Symlink (macOS/Linux — permanent fix):**
 ```bash
@@ -228,7 +250,33 @@ Common paths: macOS Homebrew (Apple Silicon) `/opt/homebrew/bin/uvx` · Intel Ma
 }
 ```
 
-`uvx tooluniverse` automatically installs and runs ToolUniverse with compact mode enabled by default (the `tooluniverse` entry point enables `--compact-mode` automatically). No separate `pip install` step required.
+`uvx tooluniverse` automatically installs and runs ToolUniverse with compact mode enabled by default. No separate `pip install` step required.
+
+**Easier than editing JSON manually — use this one-liner to write or merge the config:**
+
+```bash
+# Replace CONFIG_PATH with the actual path for the user's client
+python3 -c "
+import json, os
+p = os.path.expanduser('CONFIG_PATH')
+os.makedirs(os.path.dirname(p), exist_ok=True)
+cfg = json.load(open(p)) if os.path.exists(p) else {}
+cfg.setdefault('mcpServers', {})['tooluniverse'] = {
+    'command': 'uvx', 'args': ['tooluniverse'],
+    'env': {'PYTHONIOENCODING': 'utf-8'}
+}
+json.dump(cfg, open(p, 'w'), indent=2)
+print('Done — tooluniverse added to', p)
+"
+```
+
+This safely merges the entry into an existing config without overwriting other servers or API keys already there. For `jq` users:
+```bash
+# Merge into existing config with jq (macOS: brew install jq)
+CONFIG=~/.cursor/mcp.json   # replace with your client's path
+jq '.mcpServers.tooluniverse = {"command":"uvx","args":["tooluniverse"],"env":{"PYTHONIOENCODING":"utf-8"}}' \
+  "$CONFIG" > /tmp/mcp_tmp.json && mv /tmp/mcp_tmp.json "$CONFIG"
+```
 
 **Alternative: Using a pre-installed command** (if user already has ToolUniverse installed via pip)
 ```json
@@ -425,17 +473,49 @@ Test each configured key with a real tool call:
 
 ### Step 5: Test & Status Check
 
-Ask the user to **completely quit and reopen their app** (not just close the window — use Quit from the menu). Then run through this checklist together:
+**Before asking the user to restart**, run this pre-flight check in terminal to confirm the server starts cleanly on its own (catches issues before they become confusing GUI failures):
+
+```bash
+timeout 10 uvx tooluniverse --help
+```
+
+- **Prints usage text** → the server is healthy. Proceed to restart.
+- **Times out or errors** → fix first (see Issue 5 below). Don't restart the app yet — the problem is with the installation, not the app.
+
+---
+
+Now ask the user to **completely quit and reopen their app**:
+- Mac: **⌘Q** or right-click the Dock icon → **Quit** (closing the window is not enough)
+- Windows/Linux: File menu → **Quit**, or use the system tray icon
+
+⏱️ **First launch can take 60–90 seconds.** The app downloads and installs ToolUniverse in the background. The tools won't appear until this is done. Tell the user to wait and watch the logs:
+
+```bash
+# Claude Desktop (macOS) — run this in terminal while the app is loading:
+tail -f ~/Library/Logs/Claude/mcp*.log
+
+# Claude Desktop (Linux)
+tail -f ~/.config/Claude/logs/mcp*.log
+
+# Claude Desktop (Windows — PowerShell)
+# Get-Content "$env:APPDATA\Claude\logs\mcp*.log" -Wait
+```
+
+Look for a line like `"tooluniverse" connected` or tool schema output in the log. That means it worked.
+
+---
+
+**Then run the status checklist:**
 
 ```bash
 # 1. Is uv installed?
 uvx --version && echo "✅ uv/uvx installed" || echo "❌ uv not found"
 
 # 2. Does ToolUniverse start cleanly?
-timeout 5 uvx tooluniverse --help > /dev/null 2>&1 && echo "✅ ToolUniverse starts OK" || echo "❌ ToolUniverse failed to start"
+timeout 10 uvx tooluniverse --help > /dev/null 2>&1 && echo "✅ ToolUniverse starts OK" || echo "❌ ToolUniverse failed to start"
 ```
 
-Replace `<CONFIG_PATH>` below with the path for the detected client (see config table in Step 2):
+Replace `<CONFIG_PATH>` with the path for the detected client (see table in Step 2):
 ```bash
 # 3. Does the config file exist?
 [ -f <CONFIG_PATH> ] && echo "✅ MCP config exists" || echo "❌ Config file not found"
@@ -444,35 +524,23 @@ Replace `<CONFIG_PATH>` below with the path for the detected client (see config 
 grep -q "tooluniverse" <CONFIG_PATH> 2>/dev/null && echo "✅ tooluniverse in config" || echo "❌ tooluniverse missing from config"
 ```
 
-Quick reference for common clients:
+Common config paths:
 - Cursor: `~/.cursor/mcp.json`
 - Claude Desktop (macOS): `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Claude Desktop (Linux): `~/.config/Claude/claude_desktop_config.json`
 - Windsurf: `~/.codeium/windsurf/mcp_config.json`
 - Claude Code: `~/.claude.json`
 
-**Tell the user what to look for in the app UI:**
+---
 
-- **Claude Desktop / Cursor / Windsurf**: Look for a 🔨 **hammer icon** in the bottom of the chat input box. Click it — you should see `tooluniverse` listed with its tools. If the hammer is missing, the server didn't connect.
-- **Claude Code / Gemini CLI / Codex CLI**: Run `/mcp` or `mcp list` to list connected servers.
-- **All clients**: If nothing appears, **check the logs immediately** (fastest way to find "spawn ENOENT" and similar errors):
+**What to look for in the app UI:**
 
-```bash
-# Claude Desktop (macOS)
-tail -20 ~/Library/Logs/Claude/mcp*.log
+- **Claude Desktop**: Look for a 🔨 **hammer icon** at the bottom of the chat input box. Click it — you should see `tooluniverse` and its tools listed.
+  - If you don't see a hammer icon, check **Settings → Developer → MCP Servers** — it shows each server's status and any error messages. Claude Desktop UI varies by version; some versions show a "Connectors" or integrations panel instead.
+- **Cursor / Windsurf**: Same hammer icon in the chat input area.
+- **Claude Code / Gemini CLI / Codex CLI**: Run `/mcp` or `mcp list` in the terminal.
 
-# Claude Desktop (Linux)
-tail -20 ~/.config/Claude/logs/mcp*.log
-
-# Claude Desktop (Windows — run in PowerShell)
-# type "$env:APPDATA\Claude\logs\mcp*.log"
-
-# Cursor (macOS)
-tail -20 ~/Library/Application\ Support/Cursor/logs/main.log
-
-# Windsurf (macOS)
-tail -20 ~/.codeium/windsurf/logs/*.log 2>/dev/null
-```
+---
 
 After the restart, **show the user this status summary** and fill in each line:
 
@@ -482,13 +550,13 @@ Setup Status
 ✅/❌  uv installed         (version: ___)
 ✅/❌  ToolUniverse starts  (uvx tooluniverse --help)
 ✅/❌  MCP config created   (config file found)
-✅/❌  Server visible       (🔨 hammer icon / mcp list)
+✅/❌  Server visible       (🔨 hammer / Settings → Developer → MCP Servers)
 ✅/❌  Test tool call works
 ⬜     API keys (optional — add anytime)
 ─────────────────────────────────────
 ```
 
-**Run a live test call** to confirm the server is responding (suggest based on their research interests):
+**Run a live test call** to confirm the server is responding:
 - General: `list_tools` or `grep_tools` with keyword "protein"
 - Literature: `execute_tool("PubMed_search_articles", {"query": "CRISPR", "max_results": 1})`
 - Drug discovery: `execute_tool("ChEMBL_search_compound", {"query": "aspirin"})`
