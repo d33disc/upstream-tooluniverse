@@ -5,6 +5,16 @@ Codex CLI Setup
 
 Codex CLI is OpenAI's locally-running AI coding agent with native MCP support via stdio.
 
+.. tip:: 🚀 **Fastest setup — no installation needed**
+
+   Open Codex CLI and paste this single message:
+
+   .. code-block:: text
+
+      Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.
+
+   Codex CLI will fetch the setup guide from GitHub and walk you through everything interactively.
+
 Prerequisites
 -------------
 

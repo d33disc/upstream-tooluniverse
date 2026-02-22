@@ -555,8 +555,8 @@ Test with real API (when available):
        tu = ToolUniverse()
        tu.load_tools()
 
-       # Run async tool (will use TaskManager if available)
-       result = await tu.run_async(
+       # Run async tool — tu.run() is context-aware; in async context it returns a coroutine
+       result = await tu.run(
            '{"name": "MyTool_analyze_data", "arguments": {"dataset_id": "test123"}}'
        )
 

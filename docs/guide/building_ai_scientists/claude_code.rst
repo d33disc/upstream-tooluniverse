@@ -5,6 +5,16 @@ Claude Code Setup
 
 Claude Code integration combines Anthropic's reasoning model with ToolUniverse's 1000+ scientific tools in a development-focused environment.
 
+.. tip:: 🚀 **Fastest setup — no installation needed**
+
+   Open Claude Code and paste this single message:
+
+   .. code-block:: text
+
+      Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.
+
+   Claude Code will fetch the setup guide from GitHub and walk you through everything interactively.
+
 Prerequisites
 -------------
 

@@ -5,6 +5,16 @@ Gemini CLI Setup
 
 Gemini CLI is Google's open-source AI agent for the terminal with native MCP support.
 
+.. tip:: 🚀 **Fastest setup — no installation needed**
+
+   Open Gemini CLI and paste this single message:
+
+   .. code-block:: text
+
+      Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.
+
+   Gemini CLI will fetch the setup guide from GitHub and walk you through everything interactively.
+
 Prerequisites
 -------------
 

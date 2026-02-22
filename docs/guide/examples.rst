@@ -768,8 +768,7 @@ Robust error handling for production use:
 
        for attempt in range(max_retries):
            try:
-               # Set timeout for this attempt
-               tu_local = ToolUniverse(timeout=timeout)
+               tu_local = ToolUniverse()
                tu_local.load_tools()
 
                result = tu_local.run(query)

@@ -79,12 +79,12 @@ Configure an AgenticTool to use OpenRouter:
     
     # Initialize ToolUniverse and register the tool
     tu = ToolUniverse()
-    tu.register_tool_from_config(tool_config)
+    tu.register_custom_tool(tool_config=tool_config)
     
     # Use the tool
-    result = tu.execute_tool("OpenRouter_Summarizer", {
+    result = tu.run({"name": "OpenRouter_Summarizer", "arguments": {
         "text": "Your long text here..."
-    })
+    }})
 
 
 Using OpenRouter with ToolFinderLLM
@@ -115,11 +115,11 @@ Configure ToolFinderLLM to use OpenRouter models:
     }
     
     # Register and use
-    tu.register_tool_from_config(tool_finder_config)
-    result = tu.execute_tool("Tool_Finder_OpenRouter", {
+    tu.register_custom_tool(tool_config=tool_finder_config)
+    result = tu.run({"name": "Tool_Finder_OpenRouter", "arguments": {
         "description": "tools for protein analysis",
         "limit": 5
-    })
+    }})
 
 Fallback Configuration
 ----------------------

@@ -40,8 +40,8 @@ Quick Start
     }
     
     tu = ToolUniverse()
-    tu.register_tool_from_config(tool_config)
-    result = tu.execute_tool("Summarizer", {"text": "Your text here"})
+    tu.register_custom_tool(tool_config=tool_config)
+    result = tu.run({"name": "Summarizer", "arguments": {"text": "Your text here"}})
 
 Configuration
 -------------

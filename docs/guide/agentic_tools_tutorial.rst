@@ -396,7 +396,7 @@ If the tool returns unexpected results:
    logging.getLogger('tooluniverse.agentic_tool').setLevel(logging.DEBUG)
 
    # Check the actual prompt sent to AI
-   tool = tu.get_tool("ScientificTextSummarizer")
+   tool = tu.get_tool_by_name("ScientificTextSummarizer")
    prompt_preview = tool.get_prompt_preview(arguments)
    print("🔍 Prompt sent to AI:", prompt_preview)
 
