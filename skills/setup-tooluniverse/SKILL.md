@@ -291,11 +291,14 @@ Time to see it in action! Ask the user to restart their app, then try a real too
 
 If it works, celebrate and move to Step 6. If something goes wrong, check the Common Issues section below.
 
-### Step 6: Install ToolUniverse Skills (Highly Recommended)
+### Step 6: Install ToolUniverse Skills (Auto-Detected & Highly Recommended)
 
-**Strongly recommend this step.** Skills are pre-built research workflows that teach the AI how to conduct comprehensive scientific research -- they turn basic tool calls into expert-level investigations.
+Invoke the `tooluniverse-install-skills` skill — it handles detection and installation automatically.
 
-Explain to the user: "ToolUniverse comes with 19 research skills that act like expert guides. For example, the drug-research skill knows exactly which tools to call, in what order, to build a complete drug profile. Without skills, you'd need to figure out which of the 1200+ tools to use yourself."
+- **If skills are already installed**: it will say so; skip to What's Next.
+- **If NOT installed**: it will install them from GitHub and confirm.
+
+Skills are pre-built research workflows that turn basic tool calls into expert-level investigations. Explain to the user: "ToolUniverse comes with 50+ research skills that act like expert guides — each one knows exactly which of the 1200+ tools to call, in what order, to build a complete research report."
 
 #### Available Skills
 
