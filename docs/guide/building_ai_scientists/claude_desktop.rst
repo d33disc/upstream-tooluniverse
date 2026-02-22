@@ -13,25 +13,22 @@ Setup Steps
 .. card:: Step 1: Install uv
    :class-card: step-card current
 
-   ``uv`` is the package manager that runs ToolUniverse. Install it with one command:
+   ``uv`` is the package manager that runs ToolUniverse.
 
    .. tab-set::
 
-      .. tab-item:: macOS (recommended)
+      .. tab-item:: macOS
 
          .. code-block:: bash
 
             brew install uv
 
-         If you don't have Homebrew: `brew.sh <https://brew.sh>`_ — or use the installer below.
+         .. important::
 
-      .. tab-item:: macOS / Linux (installer)
-
-         .. code-block:: bash
-
-            curl -LsSf https://astral.sh/uv/install.sh | sh
-
-         Then close and reopen your terminal.
+            On macOS, **Homebrew is the only recommended method** for Claude Desktop.
+            The curl installer puts ``uvx`` in ``~/.local/bin/``, which Claude Desktop
+            (a GUI app) cannot find, causing a "Failed to spawn" error on first launch.
+            If you don't have Homebrew, get it from `brew.sh <https://brew.sh>`_ first.
 
       .. tab-item:: Windows
 
@@ -39,9 +36,29 @@ Setup Steps
 
             powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-         Then close and reopen PowerShell.
+         Then close and reopen PowerShell. Verify: ``uvx --version``
 
-   Verify it works: run ``uvx --version`` in your terminal. You should see a version number.
+      .. tab-item:: Linux
+
+         .. code-block:: bash
+
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            source "$HOME/.local/bin/env"
+
+         Then verify: ``uvx --version``
+
+   After installing on macOS, verify:
+
+   .. code-block:: bash
+
+      /opt/homebrew/bin/uvx --version    # Apple Silicon
+      /usr/local/bin/uvx --version       # Intel Mac
+
+   .. note::
+
+      ``which uvx`` may show ``~/.local/bin/uvx`` if you had a previous uv installation —
+      that is fine. Claude Desktop uses the Homebrew path directly, not your shell PATH.
+      If needed, run ``brew link uv --overwrite`` to make Homebrew's version the default.
 
 .. card:: Step 2: Add ToolUniverse to Claude Desktop
    :class-card: step-card
@@ -72,11 +89,33 @@ Setup Steps
 .. card:: Step 3: Restart & Verify
    :class-card: step-card pending
 
-   1. **Fully quit** Claude Desktop — use **Quit** from the menu bar (⌘Q on Mac), not just close the window.
+   **Before restarting**, confirm the server starts cleanly in your terminal:
+
+   .. code-block:: bash
+
+      timeout 10 uvx tooluniverse --help
+
+   If that prints usage text, you're good. If it errors, fix it before restarting the app.
+
+   1. **Fully quit** Claude Desktop — **⌘Q** on Mac (closing the window is not enough).
    2. Reopen Claude Desktop.
-   3. Look for a 🔨 **hammer icon** at the bottom of the chat input box.
-      Click it — you should see ``tooluniverse`` listed.
-   4. Try asking: *"What scientific tools are available?"*
+   3. ⏱️ **Wait up to 60–90 seconds** on first launch — ToolUniverse downloads in the background.
+      You can watch the progress: open a terminal and run:
+
+      .. code-block:: bash
+
+         tail -f ~/Library/Logs/Claude/mcp*.log
+
+   4. Look for a 🔨 **hammer icon** at the bottom of the chat input box and click it —
+      you should see ``tooluniverse`` listed.
+
+      .. note::
+
+         Don't see a hammer? Check **Settings → Developer → MCP Servers** — this panel
+         shows each server's connection status and any error messages. Some versions of
+         Claude Desktop show a "Connectors" or integrations panel instead.
+
+   5. Try asking: *"What scientific tools are available?"*
 
    .. success:: ✅ If ToolUniverse tools appear, you're all set!
 
