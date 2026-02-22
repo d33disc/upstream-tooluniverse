@@ -44,8 +44,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 2048,
       "return_json": false,
       "return_metadata": false
     },

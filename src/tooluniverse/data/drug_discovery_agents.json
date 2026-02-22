@@ -26,8 +26,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 3000,
       "return_json": true
     },
     "test_examples": [
@@ -75,8 +73,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 4000,
       "return_json": true
     },
     "test_examples": [
@@ -125,8 +121,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 5000,
       "return_json": true
     },
     "test_examples": [
@@ -169,8 +163,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 3000,
       "return_json": true
     },
     "test_examples": [
@@ -218,8 +210,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 4000,
       "return_json": true
     },
     "test_examples": [
@@ -274,8 +264,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 4000,
       "return_json": true
     },
     "test_examples": [
@@ -331,8 +319,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "max_new_tokens": 5000,
       "return_json": true
     },
     "test_examples": [

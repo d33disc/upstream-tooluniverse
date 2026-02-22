@@ -32,7 +32,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -99,7 +98,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -157,7 +155,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -201,7 +198,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -237,7 +233,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -287,7 +282,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -329,7 +323,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -365,7 +358,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -399,7 +391,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -438,7 +429,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -473,7 +463,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -507,7 +496,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -541,7 +529,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -581,7 +568,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -616,7 +602,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -673,7 +658,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -739,7 +723,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -889,7 +872,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -954,7 +936,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -992,7 +973,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": false
     },
     "test_examples": [
@@ -1032,7 +1012,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true,
       "return_metadata": false
     },
@@ -1126,7 +1105,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
@@ -1175,7 +1153,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
       "return_json": true
     },
     "test_examples": [
