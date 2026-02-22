@@ -235,13 +235,20 @@ Common paths: macOS Homebrew (Apple Silicon) `/opt/homebrew/bin/uvx` · Intel Ma
 
 #### MCP Server Configuration (same for all clients)
 
-**Default method: Using uvx (Recommended)**
+**Before writing the config, ask the user:**
+
+> "Would you like ToolUniverse to **auto-update** whenever your app starts? It adds ~1–2 seconds to startup time but keeps you on the latest version automatically. (Recommended: yes)"
+
+- **Yes (recommended)** → use `["--refresh", "tooluniverse"]` in args
+- **No** → use `["tooluniverse"]` in args; they can run `uv cache clean tooluniverse` to upgrade manually
+
+**Config (with auto-update — recommended):**
 ```json
 {
   "mcpServers": {
     "tooluniverse": {
       "command": "uvx",
-      "args": ["tooluniverse"],
+      "args": ["--refresh", "tooluniverse"],
       "env": {
         "PYTHONIOENCODING": "utf-8"
       }
@@ -805,13 +812,17 @@ echo $NCBI_API_KEY    # replace with the failing key name
 
 **Symptom**: User wants a newer version, or tools are missing / behavior is outdated
 
-**Fix** (copy-paste):
-```bash
-uv cache clean tooluniverse   # clears uvx cache
-# then restart the MCP client — uvx will download the latest version
+The recommended config uses `"--refresh"` which auto-updates on every launch. If the user's config doesn't have it, add it:
+```json
+"args": ["--refresh", "tooluniverse"]
 ```
 
-To pin a specific version in the config:
+To upgrade immediately without waiting for next launch:
+```bash
+uv cache clean tooluniverse   # clears uvx cache, then restart the MCP client
+```
+
+To pin a specific version instead:
 ```json
 "args": ["tooluniverse==1.0.19"]
 ```
@@ -840,7 +851,8 @@ Point them to the **`tooluniverse` general skill** for tips on getting the most 
 
 - **Instant setup (bootstrap)**: Open your agent and say: `Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.`
 - **Default setup**: `uvx tooluniverse` -- auto-installs, auto-enables compact mode
-- **Upgrade**: `uv cache clean tooluniverse` then restart the app
+- **Auto-update (recommended)**: use `["--refresh", "tooluniverse"]` in config args
+- **Manual upgrade**: `uv cache clean tooluniverse` then restart the app
 - **First load**: May take 30-60 seconds (downloads + installs); subsequent loads are fast
 - **All scientific API keys are free** to obtain
 - **Agentic features** need at least one LLM key (Gemini has a good free tier)
