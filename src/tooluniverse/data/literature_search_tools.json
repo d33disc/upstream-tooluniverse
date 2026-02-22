@@ -26,10 +26,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4.1",
-      "temperature": 0.7,
-      "max_new_tokens": 2048,
       "return_json": false
     },
     "test_examples": [
@@ -39,7 +35,10 @@
       }
     ],
     "return_schema": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "LLM-generated response containing intent analysis and search plans"
     }
   },
@@ -82,10 +81,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4.1",
-      "temperature": 0.5,
-      "max_new_tokens": 1024,
       "return_json": false
     },
     "test_examples": [
@@ -97,7 +92,10 @@
       }
     ],
     "return_schema": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "LLM-generated response containing refined search keywords"
     }
   },
@@ -146,10 +144,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4.1",
-      "temperature": 0.3,
-      "max_new_tokens": 1024,
       "return_json": false
     },
     "test_examples": [
@@ -162,7 +156,10 @@
       }
     ],
     "return_schema": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "LLM-generated response containing comprehensive summary of search results"
     }
   },
@@ -193,10 +190,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4.1",
-      "temperature": 0.5,
-      "max_new_tokens": 1536,
       "return_json": false
     },
     "test_examples": [
@@ -206,7 +199,10 @@
       }
     ],
     "return_schema": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "LLM-generated response containing quality assessment and improvement suggestions"
     }
   },
@@ -267,10 +263,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4.1",
-      "temperature": 0.3,
-      "max_new_tokens": 2048,
       "return_json": false
     },
     "test_examples": [
@@ -285,7 +277,10 @@
       }
     ],
     "return_schema": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "LLM-generated comprehensive summary of all literature search results in markdown format"
     }
   },
@@ -350,7 +345,10 @@
       }
     ],
     "return_schema": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Multi-agent search results with session_id and results summary"
     }
   }

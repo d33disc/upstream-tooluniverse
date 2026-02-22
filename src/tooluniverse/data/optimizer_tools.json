@@ -116,10 +116,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini-0416",
-      "temperature": 1.0,
-      "max_new_tokens": 4096,
       "return_json": true,
       "response_format": {
         "type": "json_object"
@@ -203,10 +199,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini-0416",
-      "temperature": 1.0,
-      "max_new_tokens": 1536,
       "return_json": true
     },
     "return_schema": {
@@ -261,10 +253,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini-0416",
-      "temperature": 0.4,
-      "max_new_tokens": 1024,
       "return_json": true
     },
     "test_examples": [
@@ -312,10 +300,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini-0416",
-      "temperature": 1.0,
-      "max_new_tokens": 1024,
       "return_json": true
     },
     "test_examples": [
