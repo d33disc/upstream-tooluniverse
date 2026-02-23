@@ -609,6 +609,10 @@ def auto_discover_tools(package_name=None, lazy=True):
             except ImportError as e:
                 logger.warning(f"Could not import {modname}: {e}")
 
+    # Discover entry-point plugins (not in tooluniverse.* namespace, so pkgutil
+    # won't find them above — must be discovered explicitly).
+    _discover_entry_point_plugins()
+
     _discovery_completed = True
     logger.info(
         f"Full discovery complete. Imported {imported_count} modules, registered {len(_tool_registry)} tools"
