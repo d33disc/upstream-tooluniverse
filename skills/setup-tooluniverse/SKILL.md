@@ -7,17 +7,28 @@ description: Install and configure ToolUniverse with MCP integration for any AI 
 
 Guide the user step-by-step through setting up ToolUniverse with MCP (Model Context Protocol) integration.
 
-## Agent Behavior
+## Agent Behavior — READ THIS FIRST AND ENFORCE IT THROUGHOUT
 
-**Be friendly, conversational, and interactive.** This is a setup wizard, not a reference manual.
+**This is a setup wizard, not a reference manual. You must stay interactive at every step.**
 
-- **Detect the user's language** from their first message and respond in that language throughout. Keep commands, code blocks, URLs, and env variable names in English.
-- Go **one step at a time**. Don't dump all steps at once.
-- **Ask before proceeding** to the next step. Confirm the previous step worked.
-- Use the **AskQuestion tool** for structured choices when available (client selection, research areas, etc.).
-- **Explain briefly** what each step does and why, in plain language.
-- When something goes wrong, be reassuring and help troubleshoot before moving on.
+### The one rule that overrides everything else
+**After every single step: STOP. Ask if it worked. Wait for the user's reply before continuing.**
+Never run ahead. Never explain Step 3 while the user is still on Step 1. Never output a wall of instructions. One step, then pause.
+
+### How to behave at each step
+- **Show one thing at a time.** Give one command or one question. Wait for the result.
+- **Confirm before moving on.** "Did that work? What did you see?" — then react to the answer.
+- **Explain briefly** what each step does and why, in plain language. One sentence is enough.
+- **Use the AskQuestion tool** for structured choices when available (client selection, research areas, etc.).
+- **Detect the user's language** from their first message. If they write in Chinese, Japanese, Spanish, etc., respond in that language throughout the entire setup. All explanations, questions, and celebrations should be in their language. Only keep commands, code blocks, URLs, and env variable names in English (those are technical and must stay as-is).
 - **Celebrate small wins** — when uv installs successfully, when the MCP server appears, when the first tool call works.
+- **When something goes wrong**, be reassuring and help troubleshoot before moving on.
+
+### What NOT to do
+- ❌ Do not paste multiple steps at once
+- ❌ Do not pre-explain upcoming steps "just in case"
+- ❌ Do not move to the next step without hearing that the current one succeeded
+- ❌ Do not reproduce large blocks from the reference files — summarize and act
 
 ## Internal Notes (do not show to user)
 
@@ -98,6 +109,8 @@ Ask: "Would you like a **quick start** (running in ~2 minutes, no questions) or 
 - **MCP server** (use scientific tools through chat) — default for most users
 - **Python coding** (write scripts that `import tooluniverse`) — also needs pip install
 
+> ⏸️ **After Step 0**: Ask which client / quick-start or full setup. Wait for the answer before doing anything else.
+
 ## Step 1: Make sure uv is installed
 
 Check first — **skip install entirely if uv is already present**:
@@ -135,6 +148,8 @@ which brew && echo "Homebrew found" || echo "No Homebrew"
 **Windows (PowerShell):** `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` then reopen PowerShell.
 
 Verify: `uvx --version`
+
+> ⏸️ **After Step 1**: Ask "Did `uvx --version` print a version number?" Wait for confirmation before continuing.
 
 ## Step 2: Add ToolUniverse to your MCP config
 
@@ -222,6 +237,8 @@ Replace `CONFIG_PATH` with the path for the user's client:
 
 For VS Code, Codex, and OpenCode special formats, read [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md).
 
+> ⏸️ **After Step 2**: Ask "Did the config file get written? Anything look wrong?" Wait before continuing.
+
 ## Step 3 (coding use only): Install Python package
 
 Skip if user only needs MCP. For scripting use:
@@ -234,6 +251,8 @@ from tooluniverse import ToolUniverse
 tu = ToolUniverse()
 print(f"ToolUniverse version: {tu.__version__}")
 ```
+
+> ⏸️ **After Step 3 (if applicable)**: Ask "Did the import work?" Wait for the answer.
 
 ## Step 4: Set up API Keys
 
@@ -268,6 +287,8 @@ Add keys to the `env` block in your MCP config:
   "NVIDIA_API_KEY": "your_key_here"
 }
 ```
+
+> ⏸️ **After Step 4**: Walk through **one key at a time**. After each key: "Got it? Want to add another, or skip for now?" Don't list all keys at once.
 
 ## Step 5: Test & Status Check
 
@@ -315,6 +336,8 @@ execute_tool("PubMed_search_articles", {"query": "CRISPR", "max_results": 1})
 ```
 
 If all ✅, celebrate! 🎉 If any ❌, jump to the matching issue in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
+
+> ⏸️ **After Step 5**: Ask "Do you see ToolUniverse in the tools list? Did the test call return anything?" Wait — don't move to Step 6 until the server is confirmed working.
 
 ## Step 6: Install ToolUniverse Skills
 
