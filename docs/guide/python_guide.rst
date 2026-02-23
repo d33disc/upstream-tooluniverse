@@ -488,6 +488,14 @@ Advanced Features
 
  Deploy ToolUniverse as a remote service
 
+ .. grid-item-card:: ChatGPT API
+ :link: chatgpt_api
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
+
+ Use ToolUniverse tools as OpenAI function calls
+
 .. button-ref:: tooluniverse_case_study
  :color: primary
  :shadow:
@@ -517,6 +525,7 @@ Advanced Features
    examples
    tooluniverse_case_study
    http_api
+   chatgpt_api
 
 Need Help?
 ----------

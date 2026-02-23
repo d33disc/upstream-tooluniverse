@@ -126,16 +126,6 @@ Choose your platform
       ^^^
       Terminal-based interface with OpenAI Codex
 
-   .. grid-item-card::
-      :link: chatgpt_api
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-
-      **ChatGPT API**
-      ^^^
-      API for programmatic research automation
-
 MCP configuration
 -----------------
 
@@ -182,7 +172,6 @@ Then ask your agent: *"research the drug metformin"*, *"find targets for Alzheim
    gemini_cli
    qwen_code
    codex_cli
-   chatgpt_api
 
 .. toctree::
    :maxdepth: 1
