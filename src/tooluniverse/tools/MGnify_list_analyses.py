@@ -1,7 +1,7 @@
 """
 MGnify_list_analyses
 
-List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
+List MGnify analyses via /analyses for a given study_accession
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def MGnify_list_analyses(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    List analyses associated with a study accession (taxonomic/functional outputs). Use to enumerate ...
+    List MGnify analyses via /analyses for a given study_accession
 
     Parameters
     ----------
     study_accession : str
-        MGnify study accession (e.g., 'MGYS00000001').
+        MGnify study accession, e.g., 'MGYS00000001'
     size : int
-        Number of records per page (1–100).
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def MGnify_list_analyses(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

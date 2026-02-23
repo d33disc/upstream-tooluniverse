@@ -1,30 +1,30 @@
 """
-SASBDB_get_scattering_profile
+miRBase_get_mirna_xrefs
 
-Retrieve the experimental small-angle scattering curve I(q) vs q for a SASBDB entry. Returns mome...
+Get cross-references (xrefs) for a microRNA from RNAcentral. Returns database links from miRBase,...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_get_scattering_profile(
-    sasbdb_id: str,
-    format: Optional[str] = "json",
+def miRBase_get_mirna_xrefs(
+    rnacentral_id: str,
+    page_size: Optional[int] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> Any:
     """
-    Retrieve the experimental small-angle scattering curve I(q) vs q for a SASBDB entry. Returns mome...
+    Get cross-references (xrefs) for a microRNA from RNAcentral. Returns database links from miRBase,...
 
     Parameters
     ----------
-    sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5'). Get from SASBDB_search_...
-    format : str
-        Output format: 'json' (structured data) or 'dat' (column format for ATSAS too...
+    rnacentral_id : str
+        RNAcentral URS identifier (e.g., 'URS000039ED8D' for hsa-miR-21-5p). Use base...
+    page_size : int
+        Number of cross-references to return (1-50). Default: 10.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,8 +40,8 @@ def SASBDB_get_scattering_profile(
 
     return get_shared_client().run_one_function(
         {
-            "name": "SASBDB_get_scattering_profile",
-            "arguments": {"sasbdb_id": sasbdb_id, "format": format},
+            "name": "miRBase_get_mirna_xrefs",
+            "arguments": {"rnacentral_id": rnacentral_id, "page_size": page_size},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,
@@ -49,4 +49,4 @@ def SASBDB_get_scattering_profile(
     )
 
 
-__all__ = ["SASBDB_get_scattering_profile"]
+__all__ = ["miRBase_get_mirna_xrefs"]

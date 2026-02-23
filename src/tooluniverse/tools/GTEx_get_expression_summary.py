@@ -1,7 +1,7 @@
 """
 GTEx_get_expression_summary
 
-Summarize tissue-specific expression (e.g., median TPM) for a gene across GTEx tissues. Use to pr...
+Get GTEx expression summary for a gene via /expression/geneExpression
 """
 
 from typing import Any, Optional, Callable
@@ -14,14 +14,14 @@ def GTEx_get_expression_summary(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Summarize tissue-specific expression (e.g., median TPM) for a gene across GTEx tissues. Use to pr...
+    Get GTEx expression summary for a gene via /expression/geneExpression
 
     Parameters
     ----------
     ensembl_gene_id : str
-        Ensembl gene identifier (e.g., 'ENSG00000141510' for TP53).
+        Ensembl gene ID, e.g., ENSG00000141510
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def GTEx_get_expression_summary(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -45,21 +45,22 @@ tools:
         Path(f.name).unlink()
     
     def test_load_invalid_yaml_file(self):
-        """Test loading an invalid YAML file."""
+        """Test loading a YAML file that fails schema validation (bad enum value)."""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             invalid_yaml = """
 name: Test Config
 version: 1.0.0
-invalid_field: value
+llm_config:
+  mode: not_a_valid_mode_value
 """
             f.write(invalid_yaml)
             f.flush()
-            
+
             loader = SpaceLoader()
-            
+
             with pytest.raises(ValueError, match="Configuration validation failed"):
                 loader.load(f.name)
-        
+
         # Clean up
         Path(f.name).unlink()
     
@@ -120,20 +121,91 @@ tools:
         assert 'tools' in config
     
     def test_load_with_validation_error(self):
-        """Test loading with validation error."""
+        """Test loading with validation error (bad enum value for llm_config.mode)."""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             invalid_config = """
 name: Test Config
-# Missing required version field
+version: 1.0.0
 description: Test description
+llm_config:
+  mode: not_a_valid_mode_value
 """
             f.write(invalid_config)
             f.flush()
-            
+
             loader = SpaceLoader()
-            
+
             with pytest.raises(ValueError, match="Configuration validation failed"):
                 loader.load(f.name)
-        
+
         # Clean up
         Path(f.name).unlink()
+
+    def test_extends_non_string_raises_clear_error(self):
+        """Test that a non-string extends value raises a clear ValueError before validation."""
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
+            # extends: [a, b] is not a string — should fail with a useful message
+            f.write("name: test\nversion: 1.0.0\nextends:\n  - base1\n  - base2\n")
+            f.flush()
+
+            loader = SpaceLoader()
+
+            with pytest.raises(ValueError, match="string URI"):
+                loader.load(f.name)
+
+        Path(f.name).unlink()
+
+    def test_extends_circular_raises_clear_error(self):
+        """Test that a self-referential extends raises a Circular error."""
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.yaml', delete=False
+        ) as f:
+            f.flush()
+            fname = f.name
+
+        # Write the file to reference itself
+        Path(fname).write_text(
+            f"name: self-ref\nversion: 1.0.0\nextends: {fname}\n"
+        )
+
+        loader = SpaceLoader()
+
+        with pytest.raises(ValueError, match="Circular"):
+            loader.load(fname)
+
+        Path(fname).unlink()
+
+    def test_extends_merges_base_and_child(self):
+        """Test that extends deep-merges the base config and the child takes precedence."""
+        loader = SpaceLoader()
+
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.yaml', delete=False
+        ) as base_f:
+            base_f.write(
+                "name: base\nversion: 1.0.0\ndescription: from base\n"
+                "tags:\n  - base-tag\n"
+            )
+            base_f.flush()
+            base_path = base_f.name
+
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.yaml', delete=False
+        ) as child_f:
+            child_f.write(
+                f"name: child\nversion: 2.0.0\nextends: {base_path}\n"
+                "tags:\n  - child-tag\n"
+            )
+            child_f.flush()
+            child_path = child_f.name
+
+        try:
+            config = loader.load(child_path)
+            assert config['name'] == 'child'          # child overrides base
+            assert config['version'] == '2.0.0'       # child overrides base
+            assert config['description'] == 'from base'  # inherited from base
+            assert config['tags'] == ['child-tag']    # child replaces, not appends
+            assert 'extends' not in config            # stripped after resolution
+        finally:
+            Path(base_path).unlink()
+            Path(child_path).unlink()

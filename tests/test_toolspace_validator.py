@@ -84,13 +84,14 @@ tools:
         assert 'tools' in config
     
     def test_invalid_yaml_structure(self):
-        """Test validation with invalid YAML structure."""
+        """Test validation with truly invalid field values (not just unknown fields)."""
         yaml_content = """
 name: Test Config
 version: 1.0.0
-invalid_field: value
+llm_config:
+  mode: not_a_valid_mode_value
 """
-        
+
         is_valid, errors, config = validate_with_schema(yaml_content, fill_defaults_flag=False)
         assert not is_valid
         assert len(errors) > 0
@@ -156,13 +157,14 @@ tools:
         assert len(errors) == 0
     
     def test_invalid_yaml_format(self):
-        """Test validating invalid YAML format."""
+        """Test validating invalid YAML format (bad enum value)."""
         yaml_content = """
 name: Test Config
 version: 1.0.0
-invalid_field: value
+llm_config:
+  mode: not_a_valid_mode_value
 """
-        
+
         is_valid, errors = validate_yaml_format_by_template(yaml_content)
         assert not is_valid
         assert len(errors) > 0

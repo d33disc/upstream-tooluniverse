@@ -1,7 +1,7 @@
 """
 GDC_list_files
 
-List GDC files filtered by data_type and other fields. Use to identify downloadable artifacts (e....
+List NCI GDC files via /files with optional data_type filter
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def GDC_list_files(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    List GDC files filtered by data_type and other fields. Use to identify downloadable artifacts (e....
+    List NCI GDC files via /files with optional data_type filter
 
     Parameters
     ----------
     data_type : str
-        Data type filter (e.g., 'Gene Expression Quantification').
+        Data type filter (e.g., 'Gene Expression Quantification')
     size : int
-        Number of results (1–100).
+        Number of results (1–100)
     offset : int
-        Offset for pagination (0-based).
+        Offset for pagination (0-based)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def GDC_list_files(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

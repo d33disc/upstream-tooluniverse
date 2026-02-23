@@ -1,27 +1,27 @@
 """
-SASBDB_get_entry_data
+Pfam_get_family_detail
 
-Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+Get detailed information about a specific Pfam protein family by accession. Returns the full fami...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_get_entry_data(
-    sasbdb_id: str,
+def Pfam_get_family_detail(
+    pfam_accession: str,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> Any:
     """
-    Retrieve detailed metadata for a specific SASBDB (Small Angle Scattering Biological Data Bank) en...
+    Get detailed information about a specific Pfam protein family by accession. Returns the full fami...
 
     Parameters
     ----------
-    sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5', 'SASDP92'). Find IDs via...
+    pfam_accession : str
+        Pfam family accession. Examples: 'PF00001' (7tm_1, GPCR rhodopsin family), 'P...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,16 +31,19 @@ def SASBDB_get_entry_data(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {"name": "SASBDB_get_entry_data", "arguments": {"sasbdb_id": sasbdb_id}},
+        {
+            "name": "Pfam_get_family_detail",
+            "arguments": {"pfam_accession": pfam_accession},
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["SASBDB_get_entry_data"]
+__all__ = ["Pfam_get_family_detail"]

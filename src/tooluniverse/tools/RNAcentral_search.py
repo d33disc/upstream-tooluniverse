@@ -1,7 +1,7 @@
 """
 RNAcentral_search
 
-Search aggregated ncRNA records (miRNA, rRNA, lncRNA, etc.) across sources via RNAcentral. Use to...
+Search RNA records via RNAcentral API
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def RNAcentral_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Search aggregated ncRNA records (miRNA, rRNA, lncRNA, etc.) across sources via RNAcentral. Use to...
+    Search RNA records via RNAcentral API
 
     Parameters
     ----------
     query : str
-        Keyword, accession, or sequence-based query (per RNAcentral API).
+        Keyword or accession
     page_size : int
-        Number of records per page (1–100).
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def RNAcentral_search(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
