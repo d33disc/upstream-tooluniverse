@@ -9,132 +9,132 @@ Platforms
 ---------
 
 .. grid:: 1 1 2 3
-   :gutter: 3
-   :class-container: platform-grid
+  :gutter: 3
+  :class-container: platform-grid
 
-   .. grid-item-card:: 
-      :link: building_ai_scientists/claude_desktop
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Claude Desktop**
-      ^^^
-      Desktop app with native MCP integration
+  .. grid-item-card:: 
+     :link: building_ai_scientists/claude_desktop
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/claude_code
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Claude Code**
-      ^^^
-      Code editor for AI scientist development
+     **Claude Desktop**
+     ^^^
+     Desktop app with native MCP integration
 
-   .. grid-item-card::
-      :link: building_ai_scientists/cursor
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Cursor**
-      ^^^
-      AI-first code editor with MCP support
+  .. grid-item-card::
+     :link: building_ai_scientists/claude_code
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/windsurf
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Windsurf**
-      ^^^
-      Agentic IDE with autonomous coding agents
+     **Claude Code**
+     ^^^
+     Code editor for AI scientist development
 
-   .. grid-item-card::
-      :link: building_ai_scientists/antigravity
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Antigravity**
-      ^^^
-      Google's free agentic IDE with parallel agents
+  .. grid-item-card::
+     :link: building_ai_scientists/cursor
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/cline
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Cline**
-      ^^^
-      VS Code extension with MCP integration
+     **Cursor**
+     ^^^
+     AI-first code editor with MCP support
 
-   .. grid-item-card::
-      :link: building_ai_scientists/trae
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Trae**
-      ^^^
-      AI coding assistant with MCP support
+  .. grid-item-card::
+     :link: building_ai_scientists/windsurf
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/opencode
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **OpenCode**
-      ^^^
-      Open-source AI coding platform
+     **Windsurf**
+     ^^^
+     Agentic IDE with autonomous coding agents
 
-   .. grid-item-card::
-      :link: building_ai_scientists/gemini_cli
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Gemini CLI**
-      ^^^
-      Command-line interface with Google Gemini
+  .. grid-item-card::
+     :link: building_ai_scientists/antigravity
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/qwen_code
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Qwen Code**
-      ^^^
-      Code editor for AI scientist workflows
+     **Antigravity**
+     ^^^
+     Google's free agentic IDE with parallel agents
 
-   .. grid-item-card::
-      :link: building_ai_scientists/codex_cli
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **Codex CLI**
-      ^^^
-      Terminal-based interface with OpenAI Codex
+  .. grid-item-card::
+     :link: building_ai_scientists/cline
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
 
-   .. grid-item-card::
-      :link: building_ai_scientists/chatgpt_api
-      :link-type: doc
-      :class-card: platform-card hover-lift
-      :shadow: md
-      
-      **ChatGPT API**
-      ^^^
-      API for programmatic research automation
+     **Cline**
+     ^^^
+     VS Code extension with MCP integration
 
-.. tip:: 🎯 **Guided Setup Available**
-   
-   Install skills first with ``npx skills add mims-harvard/ToolUniverse``, then ask your AI coding agent **"setup tooluniverse"**. The ``setup-tooluniverse`` skill will walk you through MCP configuration, API keys, and validation step by step.
+  .. grid-item-card::
+     :link: building_ai_scientists/trae
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **Trae**
+     ^^^
+     AI coding assistant with MCP support
+
+  .. grid-item-card::
+     :link: building_ai_scientists/opencode
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **OpenCode**
+     ^^^
+     Open-source AI coding platform
+
+  .. grid-item-card::
+     :link: building_ai_scientists/gemini_cli
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **Gemini CLI**
+     ^^^
+     Command-line interface with Google Gemini
+
+  .. grid-item-card::
+     :link: building_ai_scientists/qwen_code
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **Qwen Code**
+     ^^^
+     Code editor for AI scientist workflows
+
+  .. grid-item-card::
+     :link: building_ai_scientists/codex_cli
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **Codex CLI**
+     ^^^
+     Terminal-based interface with OpenAI Codex
+
+  .. grid-item-card::
+     :link: building_ai_scientists/chatgpt_api
+     :link-type: doc
+     :class-card: platform-card hover-lift
+     :shadow: md
+
+     **ChatGPT API**
+     ^^^
+     API for programmatic research automation
+
+.. tip::  **Guided Setup Available**
+
+  Install skills first with ``npx skills add mims-harvard/ToolUniverse``, then ask your AI coding agent **"setup tooluniverse"**. The ``setup-tooluniverse`` skill will walk you through MCP configuration, API keys, and validation step by step.
 
 Common Setup Steps
 ------------------
@@ -142,59 +142,58 @@ Common Setup Steps
 All platforms follow this general pattern:
 
 .. card:: Step 1: Add MCP Configuration
-   :class-card: step-card
+  :class-card: step-card
 
-   Add ToolUniverse to your MCP config file (location varies by platform):
+  Add ToolUniverse to your MCP config file (location varies by platform):
 
-   .. code-block:: json
+  .. code-block:: json
 
-      {
-        "mcpServers": {
-          "tooluniverse": {
-            "command": "uvx",
-            "args": ["tooluniverse"],
-            "env": {"PYTHONIOENCODING": "utf-8"}
-          }
-        }
-      }
+     {
+       "mcpServers": {
+         "tooluniverse": {
+           "command": "uvx",
+           "args": ["tooluniverse"],
+           "env": {"PYTHONIOENCODING": "utf-8"}
+         }
+       }
+     }
 
 .. card:: Step 2: Install Agent Skills
-   :class-card: step-card
+  :class-card: step-card
 
-   Install ToolUniverse skills for guided workflows:
+  Install ToolUniverse skills for guided workflows:
 
-   .. code-block:: bash
+  .. code-block:: bash
 
-      npx skills add mims-harvard/ToolUniverse
+     npx skills add mims-harvard/ToolUniverse
 
 .. card:: Step 3: Verify MCP Connection
-   :class-card: step-card
+  :class-card: step-card
 
-   Check if the MCP connector is working by asking your AI agent:
+  Check if the MCP connector is working by asking your AI agent:
 
-   .. code-block:: text
+  .. code-block:: text
 
-      "List available tools from ToolUniverse"
+     "List available tools from ToolUniverse"
 
-   Or use the setup skill for interactive verification:
+  Or use the setup skill for interactive verification:
 
-   .. code-block:: text
+  .. code-block:: text
 
-      "setup tooluniverse"
+     "setup tooluniverse"
 
-.. important:: 🔑 **Configure API Keys for Full Capabilities**
-   
-   Many tools require API keys to function. Set up your API keys to unlock the full power of ToolUniverse:
-   
-   .. button-ref:: ../api_keys
-      :color: primary
-      :shadow:
-   
-      🔐 **API Keys Setup Guide**: Configure access to scientific databases and services
+.. important::  **Configure API Keys for Full Capabilities**
+
+  Many tools require API keys to function. Set up your API keys to unlock the full power of ToolUniverse:
+
+  .. button-ref:: ../api_keys
+     :color: primary
+     :shadow:
+
+      **API Keys Setup Guide**: Configure access to scientific databases and services
 
 Getting Help
 ------------
-
 
 - **Setup issues?** Check the :doc:`../help/troubleshooting` guide
 - **Questions?** Join our `Slack community <https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ>`_
@@ -204,15 +203,15 @@ Quick Links
 -----------
 
 .. button-ref:: python_guide
-   :color: secondary
-   :shadow:
-   :expand:
+  :color: secondary
+  :shadow:
+  :expand:
 
-   🐍 **Coding Agent?** Use ToolUniverse directly with Python API
+   **Coding Agent?** Use ToolUniverse directly with Python API
 
 .. button-ref:: ../index
-   :color: info
-   :shadow:
-   :expand:
+  :color: info
+  :shadow:
+  :expand:
 
-   🏠 **Back to Home**: Return to main documentation
+   **Back to Home**: Return to main documentation

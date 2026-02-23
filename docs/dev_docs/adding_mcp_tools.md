@@ -38,43 +38,43 @@ ToolUniverse 支持三种主要的 MCP 工具类型：
 
 ```json
 {
-    "name": "my_mcp_client",
-    "description": "连接到我的 MCP 服务器的客户端",
-    "type": "MCPClientTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "timeout": 600,
-    "parameter": {
-        "type": "object",
-        "properties": {
-            "operation": {
-                "type": "string",
-                "enum": ["list_tools", "call_tool", "list_resources", "read_resource", "list_prompts", "get_prompt"],
-                "description": "要执行的 MCP 操作"
-            },
-            "tool_name": {
-                "type": "string",
-                "description": "要调用的工具名称（call_tool 操作必需）"
-            },
-            "tool_arguments": {
-                "type": "object",
-                "description": "传递给工具的参数（call_tool 操作使用）"
-            },
-            "uri": {
-                "type": "string",
-                "description": "资源 URI（read_resource 操作必需）"
-            },
-            "prompt_name": {
-                "type": "string",
-                "description": "提示名称（get_prompt 操作必需）"
-            },
-            "prompt_arguments": {
-                "type": "object",
-                "description": "传递给提示的参数（get_prompt 操作使用）"
-            }
-        },
-        "required": ["operation"]
-    }
+   "name": "my_mcp_client",
+   "description": "连接到我的 MCP 服务器的客户端",
+   "type": "MCPClientTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "timeout": 600,
+   "parameter": {
+       "type": "object",
+       "properties": {
+           "operation": {
+               "type": "string",
+               "enum": ["list_tools", "call_tool", "list_resources", "read_resource", "list_prompts", "get_prompt"],
+               "description": "要执行的 MCP 操作"
+           },
+           "tool_name": {
+               "type": "string",
+               "description": "要调用的工具名称（call_tool 操作必需）"
+           },
+           "tool_arguments": {
+               "type": "object",
+               "description": "传递给工具的参数（call_tool 操作使用）"
+           },
+           "uri": {
+               "type": "string",
+               "description": "资源 URI（read_resource 操作必需）"
+           },
+           "prompt_name": {
+               "type": "string",
+               "description": "提示名称（get_prompt 操作必需）"
+           },
+           "prompt_arguments": {
+               "type": "object",
+               "description": "传递给提示的参数（get_prompt 操作使用）"
+           }
+       },
+       "required": ["operation"]
+   }
 }
 ```
 
@@ -88,9 +88,9 @@ tu = ToolUniverse()
 
 # 调用 MCP 工具
 result = tu.tools.my_mcp_client(
-    operation="call_tool",
-    tool_name="calculator",
-    tool_arguments={"expression": "2 + 2"}
+   operation="call_tool",
+   tool_name="calculator",
+   tool_arguments={"expression": "2 + 2"}
 )
 
 # 列出可用工具
@@ -103,14 +103,14 @@ tools = tu.tools.my_mcp_client(operation="list_tools")
 
 ```json
 {
-    "name": "mcp_auto_loader",
-    "description": "自动加载 MCP 服务器工具",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "auto_register": true,
-    "tool_prefix": "mcp_",
-    "timeout": 30
+   "name": "mcp_auto_loader",
+   "description": "自动加载 MCP 服务器工具",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "auto_register": true,
+   "tool_prefix": "mcp_",
+   "timeout": 30
 }
 ```
 
@@ -118,15 +118,15 @@ tools = tu.tools.my_mcp_client(operation="list_tools")
 
 ```json
 {
-    "name": "expert_tool_loader",
-    "description": "加载专家咨询工具",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://localhost:7001/mcp",
-    "transport": "http",
-    "auto_register": true,
-    "tool_prefix": "expert_",
-    "selected_tools": ["consult_expert", "get_expert_response"],
-    "timeout": 60
+   "name": "expert_tool_loader",
+   "description": "加载专家咨询工具",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://localhost:7001/mcp",
+   "transport": "http",
+   "auto_register": true,
+   "tool_prefix": "expert_",
+   "selected_tools": ["consult_expert", "get_expert_response"],
+   "timeout": 60
 }
 ```
 
@@ -152,9 +152,9 @@ configs = tu.tools.mcp_auto_loader(operation="generate_configs")
 
 # 直接调用 MCP 工具
 result = tu.tools.mcp_auto_loader(
-    operation="call_tool",
-    tool_name="calculator",
-    tool_arguments={"expression": "10 * 5"}
+   operation="call_tool",
+   tool_name="calculator",
+   tool_arguments={"expression": "10 * 5"}
 )
 ```
 
@@ -164,22 +164,22 @@ result = tu.tools.mcp_auto_loader(
 
 ```json
 {
-    "name": "mcp_calculator",
-    "description": "MCP 服务器上的计算器工具",
-    "type": "MCPProxyTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "target_tool_name": "calculator",
-    "parameter": {
-        "type": "object",
-        "properties": {
-            "expression": {
-                "type": "string",
-                "description": "要计算的数学表达式"
-            }
-        },
-        "required": ["expression"]
-    }
+   "name": "mcp_calculator",
+   "description": "MCP 服务器上的计算器工具",
+   "type": "MCPProxyTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "target_tool_name": "calculator",
+   "parameter": {
+       "type": "object",
+       "properties": {
+           "expression": {
+               "type": "string",
+               "description": "要计算的数学表达式"
+           }
+       },
+       "required": ["expression"]
+   }
 }
 ```
 
@@ -192,16 +192,16 @@ from tooluniverse.mcp_client_tool import MCPServerDiscovery
 import asyncio
 
 async def create_proxy_tools():
-    # 发现服务器工具
-    tool_configs = await MCPServerDiscovery.discover_server_tools(
-        server_url="http://localhost:8000",
-        transport="http"
-    )
+   # 发现服务器工具
+   tool_configs = await MCPServerDiscovery.discover_server_tools(
+       server_url="http://localhost:8000",
+       transport="http"
+   )
 
-    # 保存配置到 JSON 文件
-    import json
-    with open("discovered_mcp_tools.json", "w") as f:
-        json.dump(tool_configs, f, indent=2)
+   # 保存配置到 JSON 文件
+   import json
+   with open("discovered_mcp_tools.json", "w") as f:
+       json.dump(tool_configs, f, indent=2)
 
 # 运行发现过程
 asyncio.run(create_proxy_tools())
@@ -214,16 +214,16 @@ asyncio.run(create_proxy_tools())
 #### HTTP 传输
 ```json
 {
-    "transport": "http",
-    "server_url": "http://localhost:8000"
+   "transport": "http",
+   "server_url": "http://localhost:8000"
 }
 ```
 
 #### WebSocket 传输
 ```json
 {
-    "transport": "websocket",
-    "server_url": "ws://localhost:8000"
+   "transport": "websocket",
+   "server_url": "ws://localhost:8000"
 }
 ```
 
@@ -233,8 +233,8 @@ asyncio.run(create_proxy_tools())
 
 ```json
 {
-    "server_url": "${MCP_SERVER_URL}",
-    "timeout": "${MCP_TIMEOUT:30}"
+   "server_url": "${MCP_SERVER_URL}",
+   "timeout": "${MCP_TIMEOUT:30}"
 }
 ```
 
@@ -242,12 +242,12 @@ asyncio.run(create_proxy_tools())
 
 ```json
 {
-    "name": "robust_mcp_client",
-    "type": "MCPClientTool",
-    "server_url": "http://localhost:8000",
-    "timeout": 120,
-    "retry_attempts": 3,
-    "retry_delay": 5
+   "name": "robust_mcp_client",
+   "type": "MCPClientTool",
+   "server_url": "http://localhost:8000",
+   "timeout": 120,
+   "retry_attempts": 3,
+   "retry_delay": 5
 }
 ```
 
@@ -268,41 +268,41 @@ src/tooluniverse/data/
 `expert_feedback_tools.json`:
 ```json
 [
-    {
-        "name": "mcp_auto_loader_expert",
-        "description": "自动发现和加载专家咨询工具",
-        "type": "MCPAutoLoaderTool",
-        "server_url": "http://localhost:7001/mcp",
-        "tool_prefix": "expert_"
-    },
-    {
-        "name": "consult_human_expert",
-        "description": "咨询人类医疗专家",
-        "type": "MCPClientTool",
-        "server_url": "http://localhost:7001",
-        "transport": "http",
-        "mcp_tool_name": "consult_human_expert",
-        "parameter": {
-            "type": "object",
-            "properties": {
-                "question": {
-                    "type": "string",
-                    "description": "需要专家咨询的医疗问题"
-                },
-                "specialty": {
-                    "type": "string",
-                    "description": "需要的专业领域",
-                    "default": "general"
-                },
-                "priority": {
-                    "type": "string",
-                    "enum": ["low", "normal", "high", "urgent"],
-                    "default": "normal"
-                }
-            },
-            "required": ["question"]
-        }
-    }
+   {
+       "name": "mcp_auto_loader_expert",
+       "description": "自动发现和加载专家咨询工具",
+       "type": "MCPAutoLoaderTool",
+       "server_url": "http://localhost:7001/mcp",
+       "tool_prefix": "expert_"
+   },
+   {
+       "name": "consult_human_expert",
+       "description": "咨询人类医疗专家",
+       "type": "MCPClientTool",
+       "server_url": "http://localhost:7001",
+       "transport": "http",
+       "mcp_tool_name": "consult_human_expert",
+       "parameter": {
+           "type": "object",
+           "properties": {
+               "question": {
+                   "type": "string",
+                   "description": "需要专家咨询的医疗问题"
+               },
+               "specialty": {
+                   "type": "string",
+                   "description": "需要的专业领域",
+                   "default": "general"
+               },
+               "priority": {
+                   "type": "string",
+                   "enum": ["low", "normal", "high", "urgent"],
+                   "default": "normal"
+               }
+           },
+           "required": ["question"]
+       }
+   }
 ]
 ```
 
@@ -313,21 +313,21 @@ src/tooluniverse/data/
 ```python
 # 配置专家咨询工具
 expert_config = {
-    "name": "medical_expert",
-    "type": "MCPClientTool",
-    "server_url": "https://expert-api.medical.com",
-    "mcp_tool_name": "consult_expert"
+   "name": "medical_expert",
+   "type": "MCPClientTool",
+   "server_url": "https://expert-api.medical.com",
+   "mcp_tool_name": "consult_expert"
 }
 
 # 使用专家工具
 consultation = tu.tools.medical_expert(
-    operation="call_tool",
-    tool_name="consult_expert",
-    tool_arguments={
-        "question": "患者出现胸痛和呼吸困难，如何诊断？",
-        "specialty": "cardiology",
-        "priority": "high"
-    }
+   operation="call_tool",
+   tool_name="consult_expert",
+   tool_arguments={
+       "question": "患者出现胸痛和呼吸困难，如何诊断？",
+       "specialty": "cardiology",
+       "priority": "high"
+   }
 })
 ```
 
@@ -336,21 +336,21 @@ consultation = tu.tools.medical_expert(
 ```python
 # 自动加载分析工具
 analysis_loader = {
-    "name": "analysis_tools_loader",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://analysis-server:8080",
-    "tool_prefix": "analysis_",
-    "selected_tools": [
-        "statistical_analysis",
-        "data_visualization",
-        "correlation_analysis"
-    ]
+   "name": "analysis_tools_loader",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://analysis-server:8080",
+   "tool_prefix": "analysis_",
+   "selected_tools": [
+       "statistical_analysis",
+       "data_visualization",
+       "correlation_analysis"
+   ]
 }
 
 # 运行统计分析
 stats_result = tu.tools.analysis_statistical_analysis(
-    data=[1, 2, 3, 4, 5],
-    test_type="t_test"
+   data=[1, 2, 3, 4, 5],
+   test_type="t_test"
 )
 ```
 
@@ -413,9 +413,9 @@ logging.basicConfig(level=logging.DEBUG)
 connection_test = tu.tools.my_mcp_client(operation="list_tools")
 
 if "error" in connection_test:
-    print("连接失败:", connection_test["error"])
+   print("连接失败:", connection_test["error"])
 else:
-    print("连接成功，可用工具:", len(connection_test["tools"]))
+   print("连接成功，可用工具:", len(connection_test["tools"]))
 ```
 
 #### 验证工具配置
@@ -453,12 +453,12 @@ print("工具列表:", discovery_result["tools"])
 
 通过本教程，你已经学会了：
 
-1. ✅ 理解三种 MCP 工具类型的用途和特点
-2. ✅ 配置和使用 MCPClientTool 进行通用 MCP 操作
-3. ✅ 使用 MCPAutoLoaderTool 自动发现和加载工具
-4. ✅ 创建 MCPProxyTool 进行直接工具智能体
-5. ✅ 处理常见问题和故障排除
-6. ✅ 应用最佳实践确保安全和性能
+1.  理解三种 MCP 工具类型的用途和特点
+2.  配置和使用 MCPClientTool 进行通用 MCP 操作
+3.  使用 MCPAutoLoaderTool 自动发现和加载工具
+4.  创建 MCPProxyTool 进行直接工具智能体
+5.  处理常见问题和故障排除
+6.  应用最佳实践确保安全和性能
 
 现在你可以将任何 MCP 服务器的工具集成到 ToolUniverse 中，扩展你的工具生态系统！
 

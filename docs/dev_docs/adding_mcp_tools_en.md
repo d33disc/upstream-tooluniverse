@@ -38,43 +38,43 @@ Create a general-purpose MCP client tool configuration:
 
 ```json
 {
-    "name": "my_mcp_client",
-    "description": "Client connecting to my MCP server",
-    "type": "MCPClientTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "timeout": 600,
-    "parameter": {
-        "type": "object",
-        "properties": {
-            "operation": {
-                "type": "string",
-                "enum": ["list_tools", "call_tool", "list_resources", "read_resource", "list_prompts", "get_prompt"],
-                "description": "MCP operation to execute"
-            },
-            "tool_name": {
-                "type": "string",
-                "description": "Name of tool to call (required for call_tool operation)"
-            },
-            "tool_arguments": {
-                "type": "object",
-                "description": "Arguments to pass to the tool (for call_tool operation)"
-            },
-            "uri": {
-                "type": "string",
-                "description": "Resource URI (required for read_resource operation)"
-            },
-            "prompt_name": {
-                "type": "string",
-                "description": "Prompt name (required for get_prompt operation)"
-            },
-            "prompt_arguments": {
-                "type": "object",
-                "description": "Arguments to pass to the prompt (for get_prompt operation)"
-            }
-        },
-        "required": ["operation"]
-    }
+   "name": "my_mcp_client",
+   "description": "Client connecting to my MCP server",
+   "type": "MCPClientTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "timeout": 600,
+   "parameter": {
+       "type": "object",
+       "properties": {
+           "operation": {
+               "type": "string",
+               "enum": ["list_tools", "call_tool", "list_resources", "read_resource", "list_prompts", "get_prompt"],
+               "description": "MCP operation to execute"
+           },
+           "tool_name": {
+               "type": "string",
+               "description": "Name of tool to call (required for call_tool operation)"
+           },
+           "tool_arguments": {
+               "type": "object",
+               "description": "Arguments to pass to the tool (for call_tool operation)"
+           },
+           "uri": {
+               "type": "string",
+               "description": "Resource URI (required for read_resource operation)"
+           },
+           "prompt_name": {
+               "type": "string",
+               "description": "Prompt name (required for get_prompt operation)"
+           },
+           "prompt_arguments": {
+               "type": "object",
+               "description": "Arguments to pass to the prompt (for get_prompt operation)"
+           }
+       },
+       "required": ["operation"]
+   }
 }
 ```
 
@@ -88,9 +88,9 @@ tu = ToolUniverse()
 
 # Call MCP tool
 result = tu.tools.my_mcp_client(
-    operation="call_tool",
-    tool_name="calculator",
-    tool_arguments={"expression": "2 + 2"}
+   operation="call_tool",
+   tool_name="calculator",
+   tool_arguments={"expression": "2 + 2"}
 )
 
 # List available tools
@@ -103,14 +103,14 @@ tools = tu.tools.my_mcp_client(operation="list_tools")
 
 ```json
 {
-    "name": "mcp_auto_loader",
-    "description": "Automatically load MCP server tools",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "auto_register": true,
-    "tool_prefix": "mcp_",
-    "timeout": 30
+   "name": "mcp_auto_loader",
+   "description": "Automatically load MCP server tools",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "auto_register": true,
+   "tool_prefix": "mcp_",
+   "timeout": 30
 }
 ```
 
@@ -118,15 +118,15 @@ tools = tu.tools.my_mcp_client(operation="list_tools")
 
 ```json
 {
-    "name": "expert_tool_loader",
-    "description": "Load expert consultation tools",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://localhost:7001/mcp",
-    "transport": "http",
-    "auto_register": true,
-    "tool_prefix": "expert_",
-    "selected_tools": ["consult_expert", "get_expert_response"],
-    "timeout": 60
+   "name": "expert_tool_loader",
+   "description": "Load expert consultation tools",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://localhost:7001/mcp",
+   "transport": "http",
+   "auto_register": true,
+   "tool_prefix": "expert_",
+   "selected_tools": ["consult_expert", "get_expert_response"],
+   "timeout": 60
 }
 ```
 
@@ -152,9 +152,9 @@ configs = tu.tools.mcp_auto_loader(operation="generate_configs")
 
 # Directly call MCP tool
 result = tu.tools.mcp_auto_loader(
-    operation="call_tool",
-    tool_name="calculator",
-    tool_arguments={"expression": "10 * 5"}
+   operation="call_tool",
+   tool_name="calculator",
+   tool_arguments={"expression": "10 * 5"}
 )
 ```
 
@@ -164,22 +164,22 @@ result = tu.tools.mcp_auto_loader(
 
 ```json
 {
-    "name": "mcp_calculator",
-    "description": "Calculator tool from MCP server",
-    "type": "MCPProxyTool",
-    "server_url": "http://localhost:8000",
-    "transport": "http",
-    "target_tool_name": "calculator",
-    "parameter": {
-        "type": "object",
-        "properties": {
-            "expression": {
-                "type": "string",
-                "description": "Mathematical expression to calculate"
-            }
-        },
-        "required": ["expression"]
-    }
+   "name": "mcp_calculator",
+   "description": "Calculator tool from MCP server",
+   "type": "MCPProxyTool",
+   "server_url": "http://localhost:8000",
+   "transport": "http",
+   "target_tool_name": "calculator",
+   "parameter": {
+       "type": "object",
+       "properties": {
+           "expression": {
+               "type": "string",
+               "description": "Mathematical expression to calculate"
+           }
+       },
+       "required": ["expression"]
+   }
 }
 ```
 
@@ -192,16 +192,16 @@ from tooluniverse.mcp_client_tool import MCPServerDiscovery
 import asyncio
 
 async def create_proxy_tools():
-    # Discover server tools
-    tool_configs = await MCPServerDiscovery.discover_server_tools(
-        server_url="http://localhost:8000",
-        transport="http"
-    )
+   # Discover server tools
+   tool_configs = await MCPServerDiscovery.discover_server_tools(
+       server_url="http://localhost:8000",
+       transport="http"
+   )
 
-    # Save configuration to JSON file
-    import json
-    with open("discovered_mcp_tools.json", "w") as f:
-        json.dump(tool_configs, f, indent=2)
+   # Save configuration to JSON file
+   import json
+   with open("discovered_mcp_tools.json", "w") as f:
+       json.dump(tool_configs, f, indent=2)
 
 # Run discovery process
 asyncio.run(create_proxy_tools())
@@ -214,16 +214,16 @@ asyncio.run(create_proxy_tools())
 #### HTTP Transport
 ```json
 {
-    "transport": "http",
-    "server_url": "http://localhost:8000"
+   "transport": "http",
+   "server_url": "http://localhost:8000"
 }
 ```
 
 #### WebSocket Transport
 ```json
 {
-    "transport": "websocket",
-    "server_url": "ws://localhost:8000"
+   "transport": "websocket",
+   "server_url": "ws://localhost:8000"
 }
 ```
 
@@ -233,8 +233,8 @@ You can use environment variables in configurations:
 
 ```json
 {
-    "server_url": "${MCP_SERVER_URL}",
-    "timeout": "${MCP_TIMEOUT:30}"
+   "server_url": "${MCP_SERVER_URL}",
+   "timeout": "${MCP_TIMEOUT:30}"
 }
 ```
 
@@ -242,12 +242,12 @@ You can use environment variables in configurations:
 
 ```json
 {
-    "name": "robust_mcp_client",
-    "type": "MCPClientTool",
-    "server_url": "http://localhost:8000",
-    "timeout": 120,
-    "retry_attempts": 3,
-    "retry_delay": 5
+   "name": "robust_mcp_client",
+   "type": "MCPClientTool",
+   "server_url": "http://localhost:8000",
+   "timeout": 120,
+   "retry_attempts": 3,
+   "retry_delay": 5
 }
 ```
 
@@ -268,41 +268,41 @@ src/tooluniverse/data/
 `expert_feedback_tools.json`:
 ```json
 [
-    {
-        "name": "mcp_auto_loader_expert",
-        "description": "Automatically discover and load expert consultation tools",
-        "type": "MCPAutoLoaderTool",
-        "server_url": "http://localhost:7001/mcp",
-        "tool_prefix": "expert_"
-    },
-    {
-        "name": "consult_human_expert",
-        "description": "Consult human medical expert",
-        "type": "MCPClientTool",
-        "server_url": "http://localhost:7001",
-        "transport": "http",
-        "mcp_tool_name": "consult_human_expert",
-        "parameter": {
-            "type": "object",
-            "properties": {
-                "question": {
-                    "type": "string",
-                    "description": "Medical question requiring expert consultation"
-                },
-                "specialty": {
-                    "type": "string",
-                    "description": "Required specialty field",
-                    "default": "general"
-                },
-                "priority": {
-                    "type": "string",
-                    "enum": ["low", "normal", "high", "urgent"],
-                    "default": "normal"
-                }
-            },
-            "required": ["question"]
-        }
-    }
+   {
+       "name": "mcp_auto_loader_expert",
+       "description": "Automatically discover and load expert consultation tools",
+       "type": "MCPAutoLoaderTool",
+       "server_url": "http://localhost:7001/mcp",
+       "tool_prefix": "expert_"
+   },
+   {
+       "name": "consult_human_expert",
+       "description": "Consult human medical expert",
+       "type": "MCPClientTool",
+       "server_url": "http://localhost:7001",
+       "transport": "http",
+       "mcp_tool_name": "consult_human_expert",
+       "parameter": {
+           "type": "object",
+           "properties": {
+               "question": {
+                   "type": "string",
+                   "description": "Medical question requiring expert consultation"
+               },
+               "specialty": {
+                   "type": "string",
+                   "description": "Required specialty field",
+                   "default": "general"
+               },
+               "priority": {
+                   "type": "string",
+                   "enum": ["low", "normal", "high", "urgent"],
+                   "default": "normal"
+               }
+           },
+           "required": ["question"]
+       }
+   }
 ]
 ```
 
@@ -313,21 +313,21 @@ src/tooluniverse/data/
 ```python
 # Configure expert consultation tool
 expert_config = {
-    "name": "medical_expert",
-    "type": "MCPClientTool",
-    "server_url": "https://expert-api.medical.com",
-    "mcp_tool_name": "consult_expert"
+   "name": "medical_expert",
+   "type": "MCPClientTool",
+   "server_url": "https://expert-api.medical.com",
+   "mcp_tool_name": "consult_expert"
 }
 
 # Use expert tool
 consultation = tu.tools.medical_expert(
-    operation="call_tool",
-    tool_name="consult_expert",
-    tool_arguments={
-        "question": "Patient presents with chest pain and shortness of breath, how to diagnose?",
-        "specialty": "cardiology",
-        "priority": "high"
-    }
+   operation="call_tool",
+   tool_name="consult_expert",
+   tool_arguments={
+       "question": "Patient presents with chest pain and shortness of breath, how to diagnose?",
+       "specialty": "cardiology",
+       "priority": "high"
+   }
 })
 ```
 
@@ -336,21 +336,21 @@ consultation = tu.tools.medical_expert(
 ```python
 # Auto-load analysis tools
 analysis_loader = {
-    "name": "analysis_tools_loader",
-    "type": "MCPAutoLoaderTool",
-    "server_url": "http://analysis-server:8080",
-    "tool_prefix": "analysis_",
-    "selected_tools": [
-        "statistical_analysis",
-        "data_visualization",
-        "correlation_analysis"
-    ]
+   "name": "analysis_tools_loader",
+   "type": "MCPAutoLoaderTool",
+   "server_url": "http://analysis-server:8080",
+   "tool_prefix": "analysis_",
+   "selected_tools": [
+       "statistical_analysis",
+       "data_visualization",
+       "correlation_analysis"
+   ]
 }
 
 # Run statistical analysis
 stats_result = tu.tools.analysis_statistical_analysis(
-    data=[1, 2, 3, 4, 5],
-    test_type="t_test"
+   data=[1, 2, 3, 4, 5],
+   test_type="t_test"
 )
 ```
 
@@ -413,9 +413,9 @@ logging.basicConfig(level=logging.DEBUG)
 connection_test = tu.tools.my_mcp_client(operation="list_tools")
 
 if "error" in connection_test:
-    print("Connection failed:", connection_test["error"])
+   print("Connection failed:", connection_test["error"])
 else:
-    print("Connection successful, available tools:", len(connection_test["tools"]))
+   print("Connection successful, available tools:", len(connection_test["tools"]))
 ```
 
 #### Validate Tool Configuration
@@ -453,12 +453,12 @@ print("Tool list:", discovery_result["tools"])
 
 Through this tutorial, you have learned:
 
-1. ✅ Understanding the purposes and characteristics of three MCP tool types
-2. ✅ Configuring and using MCPClientTool for general MCP operations
-3. ✅ Using MCPAutoLoaderTool to automatically discover and load tools
-4. ✅ Creating MCPProxyTool for direct tool proxying
-5. ✅ Handling common issues and troubleshooting
-6. ✅ Applying best practices for security and performance
+1.  Understanding the purposes and characteristics of three MCP tool types
+2.  Configuring and using MCPClientTool for general MCP operations
+3.  Using MCPAutoLoaderTool to automatically discover and load tools
+4.  Creating MCPProxyTool for direct tool proxying
+5.  Handling common issues and troubleshooting
+6.  Applying best practices for security and performance
 
 Now you can integrate tools from any MCP server into ToolUniverse, expanding your tool ecosystem!
 

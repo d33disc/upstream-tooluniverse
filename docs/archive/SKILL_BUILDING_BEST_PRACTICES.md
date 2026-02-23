@@ -5,7 +5,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Introduction](#introduction)
 2. [The Production-Ready Checklist](#production-ready-checklist)
@@ -20,7 +20,7 @@
 
 ---
 
-## 🎯 Introduction
+##  Introduction
 
 This guide captures **meta-learnings from building 9 production-ready precision medicine skills** (Feb 2026 session). These are lessons about the **process of building skills**, not the scientific content.
 
@@ -30,7 +30,7 @@ This guide captures **meta-learnings from building 9 production-ready precision 
 
 ---
 
-## ✅ Production-Ready Checklist
+##  Production-Ready Checklist
 
 Before marking any skill as "complete," verify ALL items:
 
@@ -76,7 +76,7 @@ Before marking any skill as "complete," verify ALL items:
 
 ---
 
-## 🧪 Test-Driven Skill Development
+##  Test-Driven Skill Development
 
 ### **The Golden Rule**: Testing Is Mandatory, Not Optional
 
@@ -90,10 +90,10 @@ Before marking any skill as "complete," verify ALL items:
 ```
 1. Write skill implementation (phases, tool calls)
 2. Write comprehensive test suite
-   ├── Phase-level tests (test each phase independently)
-   ├── Integration tests (test full workflows)
-   ├── Edge case tests (boundary conditions)
-   └── Cross-example tests (multiple diseases/drugs/genes)
+  ├── Phase-level tests (test each phase independently)
+  ├── Integration tests (test full workflows)
+  ├── Edge case tests (boundary conditions)
+  └── Cross-example tests (multiple diseases/drugs/genes)
 3. Run tests, achieve 100% pass rate
 4. Fix all failures
 5. ONLY THEN mark skill as complete
@@ -115,34 +115,34 @@ Structure:
 
 # Test naming convention: test_phase[N]_[description]
 def test_phase1_gene_resolution():
-    """Test Phase 1: Gene symbol resolution to Ensembl IDs"""
-    # Test with REAL gene
-    result = resolve_gene("BRCA1")  # NOT "TEST_GENE"
-    assert result['ensembl_id'] == "ENSG00000012048"
-    assert result['symbol'] == "BRCA1"
+   """Test Phase 1: Gene symbol resolution to Ensembl IDs"""
+   # Test with REAL gene
+   result = resolve_gene("BRCA1")  # NOT "TEST_GENE"
+   assert result['ensembl_id'] == "ENSG00000012048"
+   assert result['symbol'] == "BRCA1"
 
 def test_phase1_gene_resolution_edge_cases():
-    """Test Phase 1: Gene resolution edge cases"""
-    # Unknown gene
-    result = resolve_gene("FAKE_GENE_XYZ")
-    assert result is None or 'error' in result
+   """Test Phase 1: Gene resolution edge cases"""
+   # Unknown gene
+   result = resolve_gene("FAKE_GENE_XYZ")
+   assert result is None or 'error' in result
 
-    # Ambiguous gene (collision)
-    result = resolve_gene("HER2")  # Actually ERBB2
-    assert result['warnings'], "Should warn about ambiguity"
+   # Ambiguous gene (collision)
+   result = resolve_gene("HER2")  # Actually ERBB2
+   assert result['warnings'], "Should warn about ambiguity"
 
 def test_integration_cancer_variant_full_workflow():
-    """Test complete workflow: EGFR L858R in NSCLC"""
-    result = analyze_variant(
-        gene="EGFR",
-        variant="L858R",
-        cancer_type="lung adenocarcinoma"
-    )
-    # Verify all phases completed
-    assert result['clinical_evidence']
-    assert result['fda_therapies']
-    assert result['clinical_trials']
-    assert result['completeness_score'] >= 80
+   """Test complete workflow: EGFR L858R in NSCLC"""
+   result = analyze_variant(
+       gene="EGFR",
+       variant="L858R",
+       cancer_type="lung adenocarcinoma"
+   )
+   # Verify all phases completed
+   assert result['clinical_evidence']
+   assert result['fda_therapies']
+   assert result['clinical_trials']
+   assert result['completeness_score'] >= 80
 ```
 
 ### **What to Test**
@@ -215,7 +215,7 @@ Time: 152.3s
 
 ---
 
-## 🔌 API Integration Best Practices
+##  API Integration Best Practices
 
 ### **Critical Rule**: API Documentation Is Often Wrong
 
@@ -233,7 +233,7 @@ tool_info = tu.tools.get_tool_info("ReactomeAnalysis_pathway_enrichment")
 
 # STEP 2: Test with real data
 result = tu.tools.ReactomeAnalysis_pathway_enrichment(
-    identifiers="BRCA1 TP53 EGFR"
+   identifiers="BRCA1 TP53 EGFR"
 )
 
 # STEP 3: Inspect actual response structure
@@ -257,18 +257,18 @@ Every skill should have a TOOLS_REFERENCE.md documenting **verified** parameters
 
 ### enrichr_gene_enrichment_analysis
 - **Parameters** (ALL REQUIRED):
-  - `gene_list` (array of strings): Gene symbols, e.g., ['BRCA1', 'TP53']
-  - `libs` (array of strings): Libraries, e.g., ['KEGG_2021_Human', 'Reactome_2022']
+ - `gene_list` (array of strings): Gene symbols, e.g., ['BRCA1', 'TP53']
+ - `libs` (array of strings): Libraries, e.g., ['KEGG_2021_Human', 'Reactome_2022']
 - **Response**: `{status: 'success', data: '{json_string}'}`
-  - NOTE: `data` is a JSON STRING, needs JSON.parse()
-  - Contains connectivity graph (107MB), not enrichment results
+ - NOTE: `data` is a JSON STRING, needs JSON.parse()
+ - Contains connectivity graph (107MB), not enrichment results
 - **Gotcha**: Returns connectivity, use STRING_functional_enrichment instead
 
 ### STRING_functional_enrichment
 - **Parameters**:
-  - `protein_ids` (array): Gene symbols or Ensembl IDs
-  - `species` (int): 9606 for human
-  - `limit` (int, optional): Max results, default 10
+ - `protein_ids` (array): Gene symbols or Ensembl IDs
+ - `species` (int): 9606 for human
+ - `limit` (int, optional): Max results, default 10
 - **Response**: Array of {category, term, p_value, fdr, genes}
 - **Gotcha**: Requires 3+ genes, fails silently with <3
 ```
@@ -285,17 +285,17 @@ data = result['data']['disease']  # ❌ Breaks if structure varies
 # RIGHT: Handle multiple possible structures
 result = api_call()
 if 'data' in result and isinstance(result['data'], dict):
-    disease_data = result['data'].get('disease', result['data'])
+   disease_data = result['data'].get('disease', result['data'])
 elif isinstance(result, dict) and 'disease' in result:
-    disease_data = result['disease']
+   disease_data = result['disease']
 else:
-    disease_data = result
+   disease_data = result
 
 # Verify expected fields
 if 'name' in disease_data:
-    disease_name = disease_data['name']
+   disease_name = disease_data['name']
 else:
-    # Fallback or error
+   # Fallback or error
 ```
 
 ### **Common API Response Patterns**
@@ -303,43 +303,43 @@ else:
 ```python
 # Pattern 1: Wrapped in data object
 {
-  "data": {
-    "gene": {"symbol": "BRCA1", ...}
-  },
-  "metadata": {...}
+ "data": {
+   "gene": {"symbol": "BRCA1", ...}
+ },
+ "metadata": {...}
 }
 
 # Pattern 2: Direct response
 {
-  "gene": {"symbol": "BRCA1", ...}
+ "gene": {"symbol": "BRCA1", ...}
 }
 
 # Pattern 3: Array response
 [
-  {"symbol": "BRCA1", ...},
-  {"symbol": "TP53", ...}
+ {"symbol": "BRCA1", ...},
+ {"symbol": "TP53", ...}
 ]
 
 # Pattern 4: Error response
 {
-  "error": "Gene not found",
-  "status": "failed"
+ "error": "Gene not found",
+ "status": "failed"
 }
 
 # Handle all patterns:
 def parse_response(result):
-    if isinstance(result, list):
-        return result
-    if 'error' in result:
-        return None
-    if 'data' in result:
-        return result['data']
-    return result
+   if isinstance(result, list):
+       return result
+   if 'error' in result:
+       return None
+   if 'data' in result:
+       return result['data']
+   return result
 ```
 
 ---
 
-## 🛡️ Error Handling Patterns
+## ️ Error Handling Patterns
 
 ### **Distinguish Transient Errors from Real Bugs**
 
@@ -359,38 +359,38 @@ def parse_response(result):
 
 ```python
 def call_api_with_retry(tool_func, *args, max_retries=3, **kwargs):
-    """Call API with retry logic for transient errors"""
-    for attempt in range(max_retries):
-        try:
-            result = tool_func(*args, **kwargs)
-            return result
-        except TimeoutError:
-            if attempt < max_retries - 1:
-                time.sleep(2 ** attempt)  # Exponential backoff
-                continue
-            # Last attempt failed - treat as transient
-            return {'transient_error': True, 'message': 'API timeout'}
-        except Exception as e:
-            error_str = str(e).lower()
-            if any(x in error_str for x in ['timeout', 'overload', '429', '503']):
-                # Transient error
-                if attempt < max_retries - 1:
-                    time.sleep(2 ** attempt)
-                    continue
-                return {'transient_error': True, 'message': str(e)}
-            else:
-                # Real error - don't retry
-                raise
+   """Call API with retry logic for transient errors"""
+   for attempt in range(max_retries):
+       try:
+           result = tool_func(*args, **kwargs)
+           return result
+       except TimeoutError:
+           if attempt < max_retries - 1:
+               time.sleep(2 ** attempt)  # Exponential backoff
+               continue
+           # Last attempt failed - treat as transient
+           return {'transient_error': True, 'message': 'API timeout'}
+       except Exception as e:
+           error_str = str(e).lower()
+           if any(x in error_str for x in ['timeout', 'overload', '429', '503']):
+               # Transient error
+               if attempt < max_retries - 1:
+                   time.sleep(2 ** attempt)
+                   continue
+               return {'transient_error': True, 'message': str(e)}
+           else:
+               # Real error - don't retry
+               raise
 
 # In tests, treat transient errors as PASS with note:
 try:
-    result = call_api_with_retry(tu.tools.EnsemblVEP_annotate_rsid, 'rs123')
-    if result.get('transient_error'):
-        log_test("VEP annotation", PASS, "API timeout (transient, tool works)")
-    else:
-        log_test("VEP annotation", PASS)
+   result = call_api_with_retry(tu.tools.EnsemblVEP_annotate_rsid, 'rs123')
+   if result.get('transient_error'):
+       log_test("VEP annotation", PASS, "API timeout (transient, tool works)")
+   else:
+       log_test("VEP annotation", PASS)
 except Exception as e:
-    log_test("VEP annotation", FAIL, str(e))
+   log_test("VEP annotation", FAIL, str(e))
 ```
 
 ### **Fallback Chains Prevent Single Points of Failure**
@@ -398,39 +398,39 @@ except Exception as e:
 ```python
 # Define fallback strategy
 def get_disease_info(disease_name):
-    """Get disease info with fallback chain"""
+   """Get disease info with fallback chain"""
 
-    # Primary: OpenTargets (comprehensive)
-    try:
-        result = tu.tools.OpenTargets_get_disease_id_description_by_name(
-            diseaseName=disease_name
-        )
-        if result and result.get('data'):
-            return result
-    except Exception as e:
-        logger.warning(f"OpenTargets failed: {e}")
+   # Primary: OpenTargets (comprehensive)
+   try:
+       result = tu.tools.OpenTargets_get_disease_id_description_by_name(
+           diseaseName=disease_name
+       )
+       if result and result.get('data'):
+           return result
+   except Exception as e:
+       logger.warning(f"OpenTargets failed: {e}")
 
-    # Fallback 1: OLS Disease Ontology
-    try:
-        result = tu.tools.ols_search(
-            query=disease_name,
-            ontology="efo"
-        )
-        if result:
-            return result
-    except Exception as e:
-        logger.warning(f"OLS failed: {e}")
+   # Fallback 1: OLS Disease Ontology
+   try:
+       result = tu.tools.ols_search(
+           query=disease_name,
+           ontology="efo"
+       )
+       if result:
+           return result
+   except Exception as e:
+       logger.warning(f"OLS failed: {e}")
 
-    # Fallback 2: PubMed search (last resort)
-    try:
-        result = tu.tools.PubMed_search_articles(
-            query=disease_name,
-            max_results=1
-        )
-        return {'source': 'literature', 'data': result}
-    except Exception as e:
-        logger.error(f"All fallbacks failed for: {disease_name}")
-        return None
+   # Fallback 2: PubMed search (last resort)
+   try:
+       result = tu.tools.PubMed_search_articles(
+           query=disease_name,
+           max_results=1
+       )
+       return {'source': 'literature', 'data': result}
+   except Exception as e:
+       logger.error(f"All fallbacks failed for: {disease_name}")
+       return None
 ```
 
 ### **Actionable Error Messages**
@@ -441,35 +441,35 @@ raise ValueError("Invalid input")
 
 # GOOD: Actionable error
 raise ValueError(
-    f"Gene '{gene_name}' not found in MyGene database.\n"
-    f"Suggestions:\n"
-    f"  1. Check spelling (common genes: BRCA1, TP53, EGFR)\n"
-    f"  2. Try Ensembl ID (e.g., ENSG00000012048)\n"
-    f"  3. Search at https://mygene.info/\n"
-    f"  4. Check if gene symbol changed at https://www.genenames.org/"
+   f"Gene '{gene_name}' not found in MyGene database.\n"
+   f"Suggestions:\n"
+   f"  1. Check spelling (common genes: BRCA1, TP53, EGFR)\n"
+   f"  2. Try Ensembl ID (e.g., ENSG00000012048)\n"
+   f"  3. Search at https://mygene.info/\n"
+   f"  4. Check if gene symbol changed at https://www.genenames.org/"
 )
 
 # BETTER: Include suggestions based on input
 def resolve_gene_with_suggestions(gene_name):
-    result = resolve_gene(gene_name)
-    if not result:
-        # Try fuzzy matching
-        similar = find_similar_genes(gene_name)
-        if similar:
-            raise ValueError(
-                f"Gene '{gene_name}' not found. Did you mean: {', '.join(similar[:3])}?"
-            )
-        else:
-            raise ValueError(
-                f"Gene '{gene_name}' not found and no similar matches. "
-                f"Try using Ensembl ID (ENSG...) or check gene nomenclature."
-            )
-    return result
+   result = resolve_gene(gene_name)
+   if not result:
+       # Try fuzzy matching
+       similar = find_similar_genes(gene_name)
+       if similar:
+           raise ValueError(
+               f"Gene '{gene_name}' not found. Did you mean: {', '.join(similar[:3])}?"
+           )
+       else:
+           raise ValueError(
+               f"Gene '{gene_name}' not found and no similar matches. "
+               f"Try using Ensembl ID (ENSG...) or check gene nomenclature."
+           )
+   return result
 ```
 
 ---
 
-## 📚 Documentation Standards
+##  Documentation Standards
 
 ### **Every Skill Must Have**
 
@@ -529,18 +529,18 @@ def resolve_gene_with_suggestions(gene_name):
 ```python
 # In test suite:
 def test_documentation_examples():
-    """Verify all SKILL.md code examples work"""
-    # Example from SKILL.md Phase 1:
-    result = tu.tools.MyGene_query_genes(q='BRCA1', species='human')
-    assert len(result['hits']) > 0
-    assert result['hits'][0]['symbol'] == 'BRCA1'
+   """Verify all SKILL.md code examples work"""
+   # Example from SKILL.md Phase 1:
+   result = tu.tools.MyGene_query_genes(q='BRCA1', species='human')
+   assert len(result['hits']) > 0
+   assert result['hits'][0]['symbol'] == 'BRCA1'
 
-    # If this fails, documentation is lying to users!
+   # If this fails, documentation is lying to users!
 ```
 
 ---
 
-## ⚡ Performance Optimization
+##  Performance Optimization
 
 ### **Measure and Document Execution Times**
 
@@ -548,11 +548,11 @@ def test_documentation_examples():
 import time
 
 def benchmark_skill(skill_func, *args, **kwargs):
-    """Measure skill execution time"""
-    start = time.time()
-    result = skill_func(*args, **kwargs)
-    elapsed = time.time() - start
-    return result, elapsed
+   """Measure skill execution time"""
+   start = time.time()
+   result = skill_func(*args, **kwargs)
+   elapsed = time.time() - start
+   return result, elapsed
 
 # Document in DEPLOYMENT_REPORT.md:
 # - Cancer Variant Interpretation: ~30s average
@@ -566,14 +566,14 @@ def benchmark_skill(skill_func, *args, **kwargs):
 # SLOW: Sequential calls
 gene_info = []
 for gene in gene_list:
-    info = tu.tools.MyGene_query_genes(q=gene)
-    gene_info.append(info)
+   info = tu.tools.MyGene_query_genes(q=gene)
+   gene_info.append(info)
 # Time: N * 0.5s = 50s for 100 genes
 
 # FAST: Batch call
 gene_info = tu.tools.MyGene_query_genes(
-    q=",".join(gene_list),  # Comma-separated
-    species='human'
+   q=",".join(gene_list),  # Comma-separated
+   species='human'
 )
 # Time: 2s for 100 genes
 ```
@@ -584,28 +584,28 @@ gene_info = tu.tools.MyGene_query_genes(
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def analyze_genes_parallel(gene_list):
-    """Analyze multiple genes in parallel"""
-    results = {}
+   """Analyze multiple genes in parallel"""
+   results = {}
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        # Submit all jobs
-        futures = {
-            executor.submit(analyze_single_gene, gene): gene
-            for gene in gene_list
-        }
+   with ThreadPoolExecutor(max_workers=5) as executor:
+       # Submit all jobs
+       futures = {
+           executor.submit(analyze_single_gene, gene): gene
+           for gene in gene_list
+       }
 
-        # Collect results
-        for future in as_completed(futures):
-            gene = futures[future]
-            try:
-                result = future.result(timeout=30)  # Per-gene timeout
-                results[gene] = result
-            except TimeoutError:
-                results[gene] = {'error': 'timeout'}
-            except Exception as e:
-                results[gene] = {'error': str(e)}
+       # Collect results
+       for future in as_completed(futures):
+           gene = futures[future]
+           try:
+               result = future.result(timeout=30)  # Per-gene timeout
+               results[gene] = result
+           except TimeoutError:
+               results[gene] = {'error': 'timeout'}
+           except Exception as e:
+               results[gene] = {'error': str(e)}
 
-    return results
+   return results
 ```
 
 ### **Cache Expensive Operations**
@@ -615,8 +615,8 @@ from functools import lru_cache
 
 @lru_cache(maxsize=1000)
 def get_gene_info(gene_symbol):
-    """Cache gene lookups (frequently repeated)"""
-    return tu.tools.MyGene_query_genes(q=gene_symbol, species='human')
+   """Cache gene lookups (frequently repeated)"""
+   return tu.tools.MyGene_query_genes(q=gene_symbol, species='human')
 
 # First call: hits API
 info1 = get_gene_info("BRCA1")  # 0.5s
@@ -627,7 +627,7 @@ info2 = get_gene_info("BRCA1")  # 0.001s
 
 ---
 
-## 🚨 Common Pitfalls & Solutions
+##  Common Pitfalls & Solutions
 
 ### **Pitfall 1: Using Placeholder Data in Tests**
 
@@ -651,15 +651,15 @@ assert 'PARP inhibitor' in result['mechanism']
 ```python
 # ❌ BAD: Both parameters required but mutually exclusive
 {
-  "gene_id": {"type": "integer"},  # Required
-  "gene_name": {"type": "string"}  # Required
+ "gene_id": {"type": "integer"},  # Required
+ "gene_name": {"type": "string"}  # Required
 }
 # User provides gene_name, validation fails because gene_id is None
 
 # ✅ GOOD: Make mutually exclusive params nullable
 {
-  "gene_id": {"type": ["integer", "null"]},
-  "gene_name": {"type": ["string", "null"]}
+ "gene_id": {"type": ["integer", "null"]},
+ "gene_name": {"type": ["string", "null"]}
 }
 ```
 
@@ -684,10 +684,10 @@ pathway = result['data']['pathways'][0]  # KeyError if empty
 # ✅ GOOD: Check before accessing
 pathways = result.get('data', {}).get('pathways', [])
 if pathways:
-    pathway = pathways[0]
+   pathway = pathways[0]
 else:
-    # Handle empty case
-    pathway = None
+   # Handle empty case
+   pathway = None
 ```
 
 ### **Pitfall 5: Silent Failures**
@@ -695,24 +695,24 @@ else:
 ```python
 # ❌ BAD: Errors swallowed silently
 try:
-    result = api_call()
+   result = api_call()
 except:
-    result = {}  # User has no idea why it failed
+   result = {}  # User has no idea why it failed
 
 # ✅ GOOD: Log errors, provide context
 try:
-    result = api_call()
+   result = api_call()
 except Exception as e:
-    logger.error(f"API call failed: {e}")
-    result = {
-        'error': str(e),
-        'suggestion': 'Check parameter names and try again'
-    }
+   logger.error(f"API call failed: {e}")
+   result = {
+       'error': str(e),
+       'suggestion': 'Check parameter names and try again'
+   }
 ```
 
 ---
 
-## 🏗️ Skill Architecture Patterns
+## ️ Skill Architecture Patterns
 
 ### **Pattern 1: Phase-Based Workflow**
 
@@ -732,10 +732,10 @@ Use consistent T1-T4 grading across all skills:
 
 ```python
 EVIDENCE_GRADES = {
-    'T1': 'Experimental validation (RCTs, clinical trials, wet lab)',
-    'T2': 'Observational studies (cohort, case-control)',
-    'T3': 'Literature evidence (meta-analyses, reviews)',
-    'T4': 'Computational predictions (no experimental validation)'
+   'T1': 'Experimental validation (RCTs, clinical trials, wet lab)',
+   'T2': 'Observational studies (cohort, case-control)',
+   'T3': 'Literature evidence (meta-analyses, reviews)',
+   'T4': 'Computational predictions (no experimental validation)'
 }
 
 # In reports:
@@ -774,12 +774,12 @@ Provide objective scores (0-100) with transparent components:
 ```python
 # Example: ICI Response Score
 score = (
-    tmb_component(tmb_value)           # 0-30 pts
-    + msi_component(msi_status)        # 0-25 pts
-    + pdl1_component(pdl1_expression)  # 0-20 pts
-    + neoantigen_component(mutations)  # 0-15 pts
-    + resistance_penalty(mutations)    # -20 to 0 pts
-    + sensitivity_bonus(mutations)     # 0 to +10 pts
+   tmb_component(tmb_value)           # 0-30 pts
+   + msi_component(msi_status)        # 0-25 pts
+   + pdl1_component(pdl1_expression)  # 0-20 pts
+   + neoantigen_component(mutations)  # 0-15 pts
+   + resistance_penalty(mutations)    # -20 to 0 pts
+   + sensitivity_bonus(mutations)     # 0 to +10 pts
 )
 
 # Document scoring formula in SKILL.md
@@ -788,7 +788,7 @@ score = (
 
 ---
 
-## 🔍 Quality Assurance
+##  Quality Assurance
 
 ### **Pre-Release Checklist**
 

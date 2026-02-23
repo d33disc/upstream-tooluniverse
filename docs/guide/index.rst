@@ -40,13 +40,6 @@ AI Agent Platform Setup
 
 * **Platform Setup** → :doc:`building_ai_scientists/index` - Connect ToolUniverse to your AI agent
 
-  * **Claude Desktop** → :doc:`building_ai_scientists/claude_desktop`
-  * **Claude Code** → :doc:`building_ai_scientists/claude_code`
-  * **Gemini CLI** → :doc:`building_ai_scientists/gemini_cli`
-  * **Qwen Code** → :doc:`building_ai_scientists/qwen_code`
-  * **Codex CLI** → :doc:`building_ai_scientists/codex_cli`
-  * **ChatGPT API** → :doc:`building_ai_scientists/chatgpt_api`
-
 LLM Providers
 -------------
 
