@@ -100,9 +100,9 @@ After they paste that, your job here is done.
 
 **Quick Start mode** (offer before Question 2):
 
-Ask: "Would you like a **quick start** (running in ~2 minutes, no questions) or a **full setup** (I walk you through API keys and options)?"
+Ask: "Would you like a **quick start** (running in ~3 minutes, no questions) or a **full setup** (I walk you through API keys and options)?"
 
-- **Quick start**: Pick the fastest single path — `brew install uv` (or curl installer), write the config with the python3 one-liner, restart the app, confirm tools appear in the "Search and tools" / + button. Skip API keys entirely (user adds them later).
+- **Quick start**: Pick the fastest single path — `brew install uv` (or curl installer), write the config with the python3 one-liner, restart the app, confirm tools appear in the "Search and tools" / + button, then install skills with `npx skills add mims-harvard/ToolUniverse`. Skip API keys entirely (user adds them later). Skills are included even in quick start — they're what make ToolUniverse genuinely useful.
 - **Full setup**: Continue with all steps including API keys.
 
 **Question 2:** How will you use ToolUniverse?
@@ -322,6 +322,7 @@ Setup Status
 ✅/❌  MCP config created   (config file found)
 ✅/❌  Server visible       ("Search and tools" / 🔨 hammer / Settings → Developer → MCP Servers)
 ✅/❌  Test tool call works
+✅/❌  Skills installed     (Step 6 — required)
 ⬜     API keys (optional — add anytime)
 ─────────────────────────────────────
 ```
@@ -337,11 +338,20 @@ execute_tool("PubMed_search_articles", {"query": "CRISPR", "max_results": 1})
 
 If all ✅, celebrate! 🎉 If any ❌, jump to the matching issue in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
 
-> ⏸️ **After Step 5**: Ask "Do you see ToolUniverse in the tools list? Did the test call return anything?" Wait — don't move to Step 6 until the server is confirmed working.
+> ⏸️ **After Step 5**: Ask "Do you see ToolUniverse in the tools list? Did the test call return anything?" Wait for confirmation — then **immediately proceed to Step 6**. Do not skip it. Skills are what transform ToolUniverse from a raw API layer into an intelligent research assistant.
 
-## Step 6: Install ToolUniverse Skills
+## Step 6: Install ToolUniverse Skills ⭐ highly recommended
 
-Explain to the user: **Skills turn ToolUniverse from a toolbox into an expert research assistant.** Each skill is a pre-built workflow that knows exactly which of the 1200+ tools to call, in what order, to produce a complete research report — for drug profiling, literature reviews, cancer variant interpretation, and 60+ more domains. See the full catalog in [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md).
+**This is the most impactful step of the whole setup.** Without skills, the user has access to 1200+ tools but no guidance on how to use them together. With skills, they get 65+ expert research workflows — each one knows exactly which tools to call, in what order, to produce a complete research report on drugs, targets, diseases, cancer variants, genomics, and more.
+
+**Say this to the user** (adapt to their language and research interest from Step 4):
+
+> "Now for the best part — ToolUniverse comes with 65+ research skills that work like expert guides. Instead of calling tools manually, you just say 'Research the drug metformin' or 'What genes are associated with type 2 diabetes?' and the right skill takes over, calls the right tools in the right order, and gives you a full evidence-graded report. This takes about a minute to install."
+
+**Strongly encourage installation.** If the user hesitates or says "maybe later", remind them:
+- Skills work immediately — no extra configuration needed after install
+- They can always add more skills later, but having them from the start makes ToolUniverse far more accessible
+- The install is one command and takes under a minute
 
 **Option A — User runs in terminal (quickest):**
 ```bash
@@ -377,6 +387,8 @@ rm -rf /tmp/tu-skills
 **Suggest a skill to try** based on their research interests from Step 4:
 - "Try: **'Research the drug metformin'**" — triggers the drug-research skill
 - "Try: **'What does the literature say about CRISPR in cancer?'**" — triggers literature-deep-research
+
+> ⏸️ **After Step 6**: Confirm skills work by running a live demo right now — say "Let me try one for you" and call `execute_tool` or trigger a skill with "Research the drug aspirin" to show the user what they just unlocked. This is the payoff moment — make it feel exciting.
 
 ## Common Issues
 
