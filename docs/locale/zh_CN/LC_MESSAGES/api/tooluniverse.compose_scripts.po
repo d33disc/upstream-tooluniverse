@@ -705,7 +705,7 @@ msgstr "参数工具配置"
 #: fae9f426f50c4418a94a8d885715bf01 of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type tool_configs"
-msgstr ""
+msgstr "类型 tool_configs"
 
 #: db250e42b4ad4e11a95aea33eca36a15 of
 #: tooluniverse.compose_scripts.tool_graph_generation:16
@@ -720,7 +720,7 @@ msgstr "参数 max_tools"
 #: 092fadcd02d24ebf8ba0a7e2de933fcb of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type max_tools"
-msgstr ""
+msgstr "类型 max_tools"
 
 #: 9b40d318b79c437c8da6cd967c53f88b of
 #: tooluniverse.compose_scripts.tool_graph_generation:18
@@ -754,7 +754,7 @@ msgstr "参数 save_intermediate_every"
 #: f15eaaa13a924f0a94330a7f442f3d7e of
 #: tooluniverse.compose_scripts.tool_graph_generation
 msgid "type save_intermediate_every"
-msgstr ""
+msgstr "类型 save_intermediate_every"
 
 #: 07fd6b347c9b4a80b1dfe4b6f40b48f2 of
 #: tooluniverse.compose_scripts.tool_graph_generation:22
@@ -858,7 +858,7 @@ msgstr "列表：工具元数据字典列表（兼容JSON）"
 #~ msgstr "解析工具的结果，确保返回为字典格式"
 
 #~ msgid "格式化论文用于总结"
-#~ msgstr ""
+#~ msgstr "用于总结的格式化论文"
 
 #~ msgid "Format papers for summary generation"
 #~ msgstr "格式化文档以生成摘要"

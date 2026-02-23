@@ -247,7 +247,7 @@ def main():
     parser.add_argument("--file", "-f", help="Single .po file to translate")
     parser.add_argument("--status", "-s", action="store_true", help="Show translation status")
     parser.add_argument("--max-entries", "-m", type=int, help="Maximum entries to translate per file")
-    parser.add_argument("--model", default="gpt-4o-mini", help="OpenAI model to use")
+    parser.add_argument("--model", default="gpt-4.1-mini", help="OpenAI model to use")
     parser.add_argument("--temperature", type=float, default=0.3, help="Translation temperature")
     parser.add_argument("--context", default="Documentation", help="Translation context")
     

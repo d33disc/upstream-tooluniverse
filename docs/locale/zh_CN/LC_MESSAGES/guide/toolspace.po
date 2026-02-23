@@ -106,7 +106,7 @@ msgstr "加载配置"
 
 #: ../../guide/toolspace.rst:101 c896b61da2a346ea89063b794cf710e7
 msgid "HuggingFace Hub"
-msgstr ""
+msgstr "HuggingFace 资源库"
 
 #: ../../guide/toolspace.rst:103 45b1bac30e52408885ff9381d75df1c0
 msgid "Load configurations from HuggingFace Hub:"
