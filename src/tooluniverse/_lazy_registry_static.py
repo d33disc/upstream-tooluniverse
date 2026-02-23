@@ -52,7 +52,7 @@ STATIC_LAZY_REGISTRY = {
     "DatasetTool": "dataset_tool",
     "DbfetchRESTTool": "dbfetch_tool",
     "DetailedTermInfo": "ols_tool",
-    "DigiKeyTool": "tooluniverse.circuit.digikey_tool",
+    # DigiKeyTool is loaded via entry point (tooluniverse.plugins group)
     "DiseaseTargetScoreTool": "graphql_tool",
     "DynamicPackageDiscovery": "package_discovery_tool",
     "EBISearchRESTTool": "ebi_search_tool",
@@ -156,7 +156,7 @@ STATIC_LAZY_REGISTRY = {
     "IntActRESTTool": "intact_tool",
     "InterProRESTTool": "interpro_tool",
     "JASPARRESTTool": "jaspar_tool",
-    "JLCSearchTool": "tooluniverse.circuit.jlcsearch_tool",
+    # JLCSearchTool is loaded via entry point (tooluniverse.plugins group)
     "KEGGFindGenes": "kegg_tool",
     "KEGGGetGeneInfo": "kegg_tool",
     "KEGGGetPathwayInfo": "kegg_tool",

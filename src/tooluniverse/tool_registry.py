@@ -357,6 +357,8 @@ def build_lazy_registry(package_name=None):
         # Still auto-import sub-packages so their __init__.py files can register
         # configs even when the static registry is used (e.g. tooluniverse[circuit]).
         _auto_import_subpackages(package_name)
+        # Discover entry-point plugins (new-style external packages).
+        _discover_entry_point_plugins()
         return _lazy_registry.copy()
     except ImportError:
         logger.debug("No static lazy registry found. Proceeding with AST discovery.")
@@ -374,10 +376,120 @@ def build_lazy_registry(package_name=None):
     #    We import them here (after AST scan) to avoid circular imports during scan.
     _auto_import_subpackages(package_name)
 
+    # 4. Discover entry-point plugins (new-style flat packages).
+    _discover_entry_point_plugins()
+
     logger.info(
         f"Built lazy registry: {len(_lazy_registry)} classes discovered via AST (no modules imported)"
     )
     return _lazy_registry.copy()
+
+
+def _discover_entry_point_plugins():
+    """
+    Discover and eagerly load installed tooluniverse plugins registered via
+    the ``tooluniverse.plugins`` entry point group.
+
+    Plugin packages declare themselves in ``pyproject.toml``::
+
+        [project.entry-points."tooluniverse.plugins"]
+        my-tools = "my_tools_package"
+
+    The entry point value must be an importable Python package.  When
+    discovered, every ``.py`` file in the package directory (excluding
+    ``__init__.py``) is imported so that ``@register_tool`` decorators fire
+    and the tool classes land in ``_tool_registry``.  JSON config files
+    inside ``data/`` and the package root are loaded into
+    ``_list_config_registry``.
+
+    This allows external plugin packages to have exactly the same directory
+    layout as a local workspace (``data/``, tool ``.py`` files, optional
+    ``space.yaml``) — the only extra piece needed for a distributable
+    package is the ``pyproject.toml`` entry point declaration.
+    """
+    from pathlib import Path
+    import importlib
+    import json as _json
+
+    try:
+        from importlib.metadata import entry_points
+
+        eps = entry_points(group="tooluniverse.plugins")
+    except Exception as exc:
+        logger.debug(f"Could not read tooluniverse.plugins entry points: {exc}")
+        return
+
+    for ep in eps:
+        try:
+            plugin_module = ep.load()
+        except Exception as exc:
+            logger.debug(f"Plugin '{ep.name}': failed to load '{ep.value}': {exc}")
+            continue
+
+        if not hasattr(plugin_module, "__file__") or plugin_module.__file__ is None:
+            logger.debug(f"Plugin '{ep.name}': no __file__, skipping")
+            continue
+
+        plugin_dir = Path(plugin_module.__file__).parent
+        pkg_name = getattr(plugin_module, "__name__", None)
+        if not pkg_name:
+            continue
+
+        logger.debug(f"Plugin '{ep.name}' at {plugin_dir} (package={pkg_name})")
+
+        # Import .py tool files so @register_tool decorators fire
+        _SKIP = {"__init__.py", "setup.py", "conftest.py"}
+        imported = 0
+        for py_file in sorted(plugin_dir.glob("*.py")):
+            if py_file.name in _SKIP:
+                continue
+            mod_name = f"{pkg_name}.{py_file.stem}"
+            try:
+                importlib.import_module(mod_name)
+                imported += 1
+                logger.debug(f"  Plugin '{ep.name}': imported {mod_name}")
+            except Exception as exc:
+                mark_tool_unavailable(py_file.stem, exc, mod_name)
+                logger.debug(
+                    f"  Plugin '{ep.name}': could not import {mod_name}: {exc}"
+                )
+
+        # Load JSON configs from data/ sub-directory and flat package root
+        configs = []
+        for search_dir in [plugin_dir / "data", plugin_dir]:
+            if not search_dir.is_dir():
+                continue
+            for json_file in sorted(search_dir.glob("*.json")):
+                try:
+                    with open(json_file, "r", encoding="utf-8") as _f:
+                        data = _json.load(_f)
+                    if isinstance(data, list):
+                        configs.extend(data)
+                    elif isinstance(data, dict) and "name" in data:
+                        configs.append(data)
+                except Exception as exc:
+                    logger.debug(
+                        f"  Plugin '{ep.name}': could not load {json_file}: {exc}"
+                    )
+
+        if configs:
+            from .tool_defaults import add_annotations_to_tool_config
+
+            n = 0
+            for cfg in configs:
+                if isinstance(cfg, dict) and "name" in cfg:
+                    add_annotations_to_tool_config(cfg)
+                    _list_config_registry.append(cfg)
+                    n += 1
+            logger.info(
+                f"Plugin '{ep.name}': {n} tool configs loaded, "
+                f"{imported} modules imported from {plugin_dir}"
+            )
+        else:
+            if imported:
+                logger.debug(
+                    f"Plugin '{ep.name}': {imported} modules imported, no JSON configs"
+                )
 
 
 def _auto_import_subpackages(package_name: str = "tooluniverse"):
