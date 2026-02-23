@@ -22,6 +22,10 @@ _lazy_cache = {}
 # Global error tracking
 _TOOL_ERRORS = {}
 
+# Tracks which entry-point plugins have already been fully processed so that
+# _discover_entry_point_plugins() is idempotent even if called multiple times.
+_discovered_plugin_names: set = set()
+
 
 def _extract_missing_package(error_msg: str) -> Optional[str]:
     """Extract package name from ImportError."""
@@ -420,6 +424,11 @@ def _discover_entry_point_plugins():
         return
 
     for ep in eps:
+        # Skip plugins already processed in a previous call (idempotency guard)
+        if ep.name in _discovered_plugin_names:
+            logger.debug(f"Plugin '{ep.name}': already loaded, skipping")
+            continue
+
         try:
             plugin_module = ep.load()
         except Exception as exc:
@@ -490,6 +499,9 @@ def _discover_entry_point_plugins():
                 logger.debug(
                     f"Plugin '{ep.name}': {imported} modules imported, no JSON configs"
                 )
+
+        # Mark this plugin as fully processed so re-calls are no-ops
+        _discovered_plugin_names.add(ep.name)
 
 
 def _auto_import_subpackages(package_name: str = "tooluniverse"):
