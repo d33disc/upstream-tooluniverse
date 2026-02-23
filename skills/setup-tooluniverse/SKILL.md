@@ -77,39 +77,31 @@ echo "=== Detecting your AI client ===" && \
 Based on results:
 - **One client detected**: "I can see you're using [Client]. I'll set up ToolUniverse for that." Skip Question 1.
 - **Multiple detected**: Ask which one to configure.
-- **None detected**: Ask Question 1.
+- **None detected**: Ask Question 1 below.
 
-⚠️ **If Claude Desktop is detected or selected**: Step 2 for Claude Desktop is completely different from all other clients. Remind yourself of this before starting Step 2 — you must fetch and follow CLAUDE_DESKTOP.md instead of the standard config instructions.
+> ⏸️ **Now**: Report what was detected, then ask Question 1 if needed. Wait for the client answer before continuing.
 
 **Question 1 (only if not auto-detected):** Which app are you using?
 Cursor · Claude Desktop · VS Code / Copilot · Windsurf · Claude Code · Gemini CLI · Qwen Code · Codex (OpenAI) · Cline · Trae · Antigravity · OpenCode · Other
 
----
+⚠️ **If Claude Desktop is detected or selected**: Step 2 is completely different — you must fetch and follow CLAUDE_DESKTOP.md instead of the standard config. Hold this in mind.
 
-**Bootstrap check for terminal-based clients (OpenCode, Gemini CLI, Codex CLI, Claude Code):**
-
-If the user found this guide from README/docs rather than from a skill already running inside their client, give them this one-liner to paste into their client instead:
-
+**Bootstrap check (terminal-based clients only — OpenCode, Gemini CLI, Codex CLI, Claude Code):**
+If the user arrived here from README/docs (not from inside their client), give them this one-liner to paste into their client instead and stop:
 ```
 Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.
 ```
 
-After they paste that, your job here is done.
+> ⏸️ **Now**: Ask "Would you like a **quick start** (~3 min, no questions) or a **full setup** (API keys + options)?" — then wait for the answer.
 
----
-
-**Quick Start mode** (offer before Question 2):
-
-Ask: "Would you like a **quick start** (running in ~3 minutes, no questions) or a **full setup** (I walk you through API keys and options)?"
-
-- **Quick start**: Pick the fastest single path — `brew install uv` (or curl installer), write the config with the python3 one-liner, restart the app, confirm tools appear in the "Search and tools" / + button, then install skills with `npx skills add mims-harvard/ToolUniverse`. Skip API keys entirely (user adds them later). Skills are included even in quick start — they're what make ToolUniverse genuinely useful.
+- **Quick start**: `brew install uv` (or curl), write config with python3 one-liner, restart app, confirm tools appear, install skills with `npx skills add mims-harvard/ToolUniverse`. Skip API keys (add later). Skills are included — they're what make ToolUniverse genuinely useful.
 - **Full setup**: Continue with all steps including API keys.
 
-**Question 2:** How will you use ToolUniverse?
+**Question 2 (full setup only):** How will you use ToolUniverse?
 - **MCP server** (use scientific tools through chat) — default for most users
 - **Python coding** (write scripts that `import tooluniverse`) — also needs pip install
 
-> ⏸️ **After Step 0**: Ask which client / quick-start or full setup. Wait for the answer before doing anything else.
+> ⏸️ **Wait for Question 2 answer** before proceeding to Step 1.
 
 ## Step 1: Make sure uv is installed
 
@@ -265,26 +257,12 @@ Many tools work without keys, but some unlock powerful features. First, **ask th
 - AI-powered analysis (needs LLM key)
 - Not sure yet / skip for now
 
-Then walk through **2–4 recommended keys** one at a time: explain what each unlocks, give the registration link, wait for them to sign up, help add the key to the `env` block in their config.
+Fetch [API_KEYS_REFERENCE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/API_KEYS_REFERENCE.md) to see the full list with registration steps. Map the user's research interest to 2–4 recommended keys from that file, then walk through them **one at a time**: explain what each unlocks → give the registration link → wait for them to get the key → help add it to the `env` block in their MCP config:
 
-For the full list of keys, registration steps, and which tools each enables, read [API_KEYS_REFERENCE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/API_KEYS_REFERENCE.md).
-
-**Quick reference — Tier 1 (most users):**
-
-| Key | Service | What It Unlocks | Registration |
-|-----|---------|----------------|-------------|
-| `NCBI_API_KEY` | NCBI/PubMed | PubMed rate limit 3→10 req/s | https://account.ncbi.nlm.nih.gov/settings/ |
-| `NVIDIA_API_KEY` | NVIDIA NIM | 16 tools: AlphaFold2, docking, genomics | https://build.nvidia.com |
-| `BIOGRID_API_KEY` | BioGRID | Protein-protein interactions | https://webservice.thebiogrid.org/ |
-| `DISGENET_API_KEY` | DisGeNET | Gene-disease associations | https://disgenet.com/academic-apply |
-| `GEMINI_API_KEY` | Google Gemini | Agentic features (free tier) | https://aistudio.google.com/apikey |
-
-Add keys to the `env` block in your MCP config:
 ```json
 "env": {
   "PYTHONIOENCODING": "utf-8",
-  "NCBI_API_KEY": "your_key_here",
-  "NVIDIA_API_KEY": "your_key_here"
+  "NCBI_API_KEY": "your_key_here"
 }
 ```
 
@@ -301,10 +279,10 @@ timeout 10 uvx tooluniverse --help
 
 Ask user to **fully quit and reopen their app** (⌘Q on Mac — closing the window is not enough).
 
-⏱️ **First launch takes 60–90 seconds** while the app downloads and installs ToolUniverse. Watch logs:
+⏱️ **First launch takes 60–90 seconds** while the app downloads and installs ToolUniverse. **Claude Desktop only** — watch logs while it loads:
 ```bash
-tail -f ~/Library/Logs/Claude/mcp*.log          # Claude Desktop (macOS)
-tail -f ~/.config/Claude/logs/mcp*.log          # Claude Desktop (Linux)
+tail -f ~/Library/Logs/Claude/mcp*.log          # macOS
+tail -f ~/.config/Claude/logs/mcp*.log          # Linux
 ```
 Look for `"tooluniverse" connected` or tool schema output.
 
@@ -322,7 +300,7 @@ Setup Status
 ✅/❌  MCP config created   (config file found)
 ✅/❌  Server visible       ("Search and tools" / 🔨 hammer / Settings → Developer → MCP Servers)
 ✅/❌  Test tool call works
-✅/❌  Skills installed     (Step 6 — required)
+⬜     Skills installed     (do Step 6 next — required)
 ⬜     API keys (optional — add anytime)
 ─────────────────────────────────────
 ```
@@ -364,22 +342,9 @@ This auto-detects the client and installs into the correct directory. Ask the us
 git clone --depth 1 --filter=blob:none --sparse https://github.com/mims-harvard/ToolUniverse.git /tmp/tu-skills
 cd /tmp/tu-skills && git sparse-checkout set skills
 ```
-Then copy to the client's skills directory:
-
-| Client | Skills Directory |
-|--------|----------------|
-| Cursor | `.cursor/skills/` |
-| Windsurf | `.windsurf/skills/` |
-| Claude Code | `.claude/skills/` |
-| Gemini CLI | `.gemini/skills/` |
-| Qwen Code | `.qwen/skills/` |
-| Codex (OpenAI) | `.agents/skills/` |
-| OpenCode | `.opencode/skills/` |
-| Trae | `.trae/skills/` |
-| Cline / VS Code | `.skills/` |
-
+Find the right skills directory for the user's client in [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md), then copy:
 ```bash
-# Example for Cursor (run from the project root):
+# Example for Cursor:
 mkdir -p .cursor/skills && cp -r /tmp/tu-skills/skills/* .cursor/skills/
 rm -rf /tmp/tu-skills
 ```
@@ -407,22 +372,4 @@ Full diagnostics and GitHub issue helper in [TROUBLESHOOTING.md](https://raw.git
 
 ## What's Next?
 
-Suggest the user try one of these:
-- **"Research the drug metformin"** — full drug profile via drug-research skill
-- **"What are the known targets of imatinib?"** — target-research
-- **"What does the literature say about CRISPR in sickle cell disease?"** — literature-deep-research
-- **"Find protein structures for human EGFR"** — protein-structure-retrieval
-
-Point them to the `tooluniverse` general skill for tips on getting the most out of 1200+ tools.
-
-## Quick Reference
-
-- **Instant bootstrap**: `Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md and follow it to help me set up ToolUniverse.`
-- **Auto-update config**: `["--refresh", "tooluniverse"]`
-- **Manual upgrade**: `uv cache clean tooluniverse` then restart
-- **Claude Desktop PATH fix**: [CLAUDE_DESKTOP.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/CLAUDE_DESKTOP.md)
-- **Detailed API keys**: [API_KEYS_REFERENCE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/API_KEYS_REFERENCE.md)
-- **All client config formats**: [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md)
-- **Skills catalog**: [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md)
-- **Troubleshooting**: [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md)
-- **Help**: https://github.com/mims-harvard/ToolUniverse/issues
+Setup is complete. Point the user to the `tooluniverse` general skill for tips on getting the most out of 1200+ tools, and remind them they can add more API keys or skills anytime. If they hit any issues, open a GitHub issue at https://github.com/mims-harvard/ToolUniverse/issues.
