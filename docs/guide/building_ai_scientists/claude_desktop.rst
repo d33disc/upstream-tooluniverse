@@ -73,7 +73,7 @@ Setup Steps
         "mcpServers": {
           "tooluniverse": {
             "command": "uvx",
-            "args": ["tooluniverse"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {"PYTHONIOENCODING": "utf-8"}
           }
         }
@@ -83,8 +83,9 @@ Setup Steps
 
    .. note::
 
-      If you already have other MCP servers in the file, add the ``"tooluniverse": {...}`` block
-      inside your existing ``"mcpServers"`` object — don't replace the whole file.
+      ``"--refresh"`` auto-updates ToolUniverse on every launch. If you already have other
+      MCP servers in the file, add the ``"tooluniverse": {...}`` block inside your existing
+      ``"mcpServers"`` object — don't replace the whole file.
 
 .. card:: Step 3: Restart & Verify
    :class-card: step-card pending
@@ -199,7 +200,7 @@ Troubleshooting
         "mcpServers": {
           "tooluniverse": {
             "command": "/opt/homebrew/bin/uvx",
-            "args": ["tooluniverse"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {"PYTHONIOENCODING": "utf-8"}
           }
         }
@@ -229,11 +230,13 @@ Troubleshooting
    3. Run ``uvx tooluniverse --help`` in your terminal to confirm the package works.
    4. Check logs: ``tail -20 ~/Library/Logs/Claude/mcp*.log``
 
-.. dropdown:: ⚠️ "Too many tools" or context limit errors
-   :animate: fade-in-slide-down
-   :color: warning
 
-   Add ``"--compact-mode"`` to the args:
+.. dropdown:: 🔄 Keeping ToolUniverse up to date
+   :animate: fade-in-slide-down
+   :color: info
+
+   The recommended config uses ``"--refresh"`` so ToolUniverse automatically updates to
+   the latest version each time Claude Desktop starts (adds ~1–2 s to startup time):
 
    .. code-block:: json
 
@@ -241,11 +244,18 @@ Troubleshooting
         "mcpServers": {
           "tooluniverse": {
             "command": "uvx",
-            "args": ["tooluniverse", "--compact-mode"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {"PYTHONIOENCODING": "utf-8"}
           }
         }
       }
+
+   To update manually instead, remove ``"--refresh"`` from the args and run this in your
+   terminal whenever you want to upgrade, then restart Claude Desktop:
+
+   .. code-block:: bash
+
+      uv cache clean tooluniverse
 
 .. dropdown:: 🔑 Adding API keys for more tools
    :animate: fade-in-slide-down
@@ -259,7 +269,7 @@ Troubleshooting
         "mcpServers": {
           "tooluniverse": {
             "command": "uvx",
-            "args": ["tooluniverse"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {
               "PYTHONIOENCODING": "utf-8",
               "NCBI_API_KEY": "your_key_here",
