@@ -1,12 +1,10 @@
 API Keys and Authentication
 ===========================
 
-This guide explains which API keys are required or recommended for ToolUniverse functionality, how to obtain them, and how to configure them.
-
 .. note::
    **Looking for other environment variables?**
    
-   This page covers API keys only. For cache, logging, LLM, and other configuration options, see :doc:`reference/environment_variables`.
+   This page covers API keys only. For cache, logging, LLM, and other configuration options, see :doc:`../reference/environment_variables`.
 
 Overview
 --------
@@ -28,7 +26,6 @@ These API keys are required for specific tool categories to function:
 :How to Get: Visit https://build.nvidia.com and sign up for a free account. Navigate to your API keys section to generate a key.
 :Rate Limits: 40 requests per minute (free tier)
 :Tool Categories: ``nvidia_nim``
-
 
 Recommended API Keys (Enhanced Performance)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -575,7 +572,5 @@ If you encounter issues with API keys or authentication:
 See Also
 --------
 
-- :doc:`installation` - Installation instructions
-- :doc:`getting_started` - Getting started guide
-- :doc:`guide/building_ai_scientists/index` - AI agent platform setup
-- :doc:`guide/hooks/hook_configuration` - Advanced hook configuration
+- :doc:`building_ai_scientists/index` - AI agent platform setup
+- :doc:`hooks/hook_configuration` - Advanced hook configuration

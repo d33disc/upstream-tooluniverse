@@ -9,20 +9,20 @@ When writing tests for ToolUniverse tools, be aware that tool responses may have
 #### Nested Structure (New)
 ```python
 {
-    "status": "success",
-    "data": {
-        "num_results": 5,
-        "results": [...]
-    }
+   "status": "success",
+   "data": {
+       "num_results": 5,
+       "results": [...]
+   }
 }
 ```
 
 #### Flat Structure (Legacy)
 ```python
 {
-    "status": "success",
-    "num_results": 5,
-    "results": [...]
+   "status": "success",
+   "num_results": 5,
+   "results": [...]
 }
 ```
 
@@ -30,23 +30,23 @@ When writing tests for ToolUniverse tools, be aware that tool responses may have
 
 Always write tests that handle both formats:
 
-#### ❌ Bad (Only checks flat structure)
+####  Bad (Only checks flat structure)
 ```python
 def test_search(self, tu):
-    result = tu.tools.MyTool_search(**{"query": "test"})
-    assert result["status"] == "success"
-    assert "results" in result  # Will fail if nested!
+   result = tu.tools.MyTool_search(**{"query": "test"})
+   assert result["status"] == "success"
+   assert "results" in result  # Will fail if nested!
 ```
 
-#### ✅ Good (Handles both structures)
+####  Good (Handles both structures)
 ```python
 def test_search(self, tu):
-    result = tu.tools.MyTool_search(**{"query": "test"})
-    assert result["status"] == "success"
-    
-    # Check if data is nested or flat
-    data = result.get("data", result)
-    assert "results" in data
+   result = tu.tools.MyTool_search(**{"query": "test"})
+   assert result["status"] == "success"
+
+   # Check if data is nested or flat
+   data = result.get("data", result)
+   assert "results" in data
 ```
 
 ### Pattern Examples
@@ -54,34 +54,34 @@ def test_search(self, tu):
 #### Pattern 1: Simple Field Check
 ```python
 if result["status"] == "success":
-    data = result.get("data", result)
-    assert "field_name" in data
+   data = result.get("data", result)
+   assert "field_name" in data
 ```
 
 #### Pattern 2: Multiple Fields
 ```python
 if result["status"] == "success":
-    data = result.get("data", result)
-    expected_fields = ["field1", "field2", "field3"]
-    for field in expected_fields:
-        assert field in data, f"Missing field: {field}"
+   data = result.get("data", result)
+   expected_fields = ["field1", "field2", "field3"]
+   for field in expected_fields:
+       assert field in data, f"Missing field: {field}"
 ```
 
 #### Pattern 3: Checking Lists
 ```python
 if result["status"] == "success":
-    data = result.get("data", result)
-    assert "results" in data
-    assert isinstance(data["results"], list)
+   data = result.get("data", result)
+   assert "results" in data
+   assert isinstance(data["results"], list)
 ```
 
 #### Pattern 4: Backwards Compatible Access
 ```python
 if result["status"] == "success":
-    # Try nested first, fall back to flat
-    results = result.get("data", {}).get("results", result.get("results"))
-    assert results is not None
-    assert isinstance(results, list)
+   # Try nested first, fall back to flat
+   results = result.get("data", {}).get("results", result.get("results"))
+   assert results is not None
+   assert isinstance(results, list)
 ```
 
 ### Testing Error Responses
@@ -89,8 +89,8 @@ if result["status"] == "success":
 Error responses are always at the top level:
 ```python
 if result["status"] == "error":
-    assert "error" in result
-    assert isinstance(result["error"], str)
+   assert "error" in result
+   assert isinstance(result["error"], str)
 ```
 
 ### Status Checks
@@ -98,18 +98,18 @@ if result["status"] == "error":
 Always check status first:
 ```python
 def test_operation(self, tu):
-    result = tu.tools.MyTool_operation(**params)
-    
-    # Always check status exists
-    assert "status" in result
-    assert result["status"] in ["success", "error", "warning"]
-    
-    # Then handle accordingly
-    if result["status"] == "success":
-        data = result.get("data", result)
-        # ... check data fields
-    elif result["status"] == "error":
-        assert "error" in result
+   result = tu.tools.MyTool_operation(**params)
+
+   # Always check status exists
+   assert "status" in result
+   assert result["status"] in ["success", "error", "warning"]
+
+   # Then handle accordingly
+   if result["status"] == "success":
+       data = result.get("data", result)
+       # ... check data fields
+   elif result["status"] == "error":
+       assert "error" in result
 ```
 
 ### Real-World Examples
@@ -119,51 +119,51 @@ From fixed test files:
 #### Example 1: FourDN Search
 ```python
 def test_search_data_basic(self, tu):
-    result = tu.tools.FourDN_search_data(**{
-        "operation": "search",
-        "query": "*",
-        "limit": 5
-    })
-    
-    assert "status" in result
-    if result["status"] == "success":
-        assert "data" in result
-        assert "num_results" in result["data"] or "num_results" in result
-    else:
-        assert "error" in result
+   result = tu.tools.FourDN_search_data(**{
+       "operation": "search",
+       "query": "*",
+       "limit": 5
+   })
+
+   assert "status" in result
+   if result["status"] == "success":
+       assert "data" in result
+       assert "num_results" in result["data"] or "num_results" in result
+   else:
+       assert "error" in result
 ```
 
 #### Example 2: GTEx Dataset Info
 ```python
 def test_get_dataset_info(self, tu):
-    result = tu.tools.GTEx_get_dataset_info(**{
-        "operation": "get_dataset_info"
-    })
-    
-    assert result.get("status") == "success" or "error" in result
-    
-    if result.get("status") == "success":
-        # Check if data is nested or flat
-        datasets = result.get("data", result.get("datasets"))
-        assert datasets is not None
-        assert isinstance(datasets, list)
+   result = tu.tools.GTEx_get_dataset_info(**{
+       "operation": "get_dataset_info"
+   })
+
+   assert result.get("status") == "success" or "error" in result
+
+   if result.get("status") == "success":
+       # Check if data is nested or flat
+       datasets = result.get("data", result.get("datasets"))
+       assert datasets is not None
+       assert isinstance(datasets, list)
 ```
 
 #### Example 3: Rfam Alignment
 ```python
 def test_get_alignment(self, tu):
-    result = tu.tools.Rfam_get_alignment(**{
-        "operation": "get_alignment",
-        "family_id": "RF00360",
-        "format": "fasta"
-    })
-    
-    assert result.get("status") == "success" or "error" in result
-    
-    if result.get("status") == "success":
-        data = result.get("data", result)
-        assert "alignment" in data
-        assert "format" in data
+   result = tu.tools.Rfam_get_alignment(**{
+       "operation": "get_alignment",
+       "family_id": "RF00360",
+       "format": "fasta"
+   })
+
+   assert result.get("status") == "success" or "error" in result
+
+   if result.get("status") == "success":
+       data = result.get("data", result)
+       assert "alignment" in data
+       assert "format" in data
 ```
 
 ## Best Practices
@@ -187,27 +187,27 @@ def test_get_alignment(self, tu):
 
 ## Common Pitfalls
 
-### ❌ Assuming Flat Structure
+###  Assuming Flat Structure
 ```python
 assert "results" in result  # May fail!
 ```
 
-### ❌ Not Checking Status
+###  Not Checking Status
 ```python
 data = result["data"]  # KeyError if status is "error"!
 ```
 
-### ❌ Hard-coded Field Paths
+###  Hard-coded Field Paths
 ```python
 assert result["data"]["results"]  # Breaks if structure changes!
 ```
 
-### ✅ Correct Approach
+###  Correct Approach
 ```python
 assert "status" in result
 if result["status"] == "success":
-    data = result.get("data", result)
-    assert "results" in data
+   data = result.get("data", result)
+   assert "results" in data
 ```
 
 ## Migration Guide
@@ -221,7 +221,7 @@ If you have existing tests that fail with "field not in result" errors:
 
 Example migration:
 ```diff
-  if result["status"] == "success":
+ if result["status"] == "success":
 -     assert "results" in result
 -     assert isinstance(result["results"], list)
 +     data = result.get("data", result)

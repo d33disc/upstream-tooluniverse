@@ -1781,7 +1781,7 @@ msgstr "原始 ToolUniverse 工具调用：```python tu.run_one_function({"
 #: tooluniverse.smcp.SMCP._expose_tooluniverse_tools:77
 #, python-brace-format
 msgid "\"name\": \"UniProt_get_entry_by_accession\", \"arguments\": {\"accession\": \"P05067\"}"
-msgstr ""
+msgstr "\"name\": \"UniProt_通过登录号获取条目\", \"arguments\": {\"accession\": \"P05067\"}"
 
 #: 94906769002d4c518501a90837023adb of
 #: tooluniverse.smcp.SMCP._expose_tooluniverse_tools:82
@@ -3334,7 +3334,7 @@ msgstr "任何 FastMCP 服务器选项（调试、日志记录等）"
 
 #: 82cdc2edec4449019be1d4613f0fd1a3 of tooluniverse.smcp.create_smcp_server:47
 msgid "SMCP"
-msgstr ""
+msgstr "SMCP（船舶管理和控制协议）"
 
 #: eac27d8d88d74e228fb53b75807d8994 of tooluniverse.smcp.create_smcp_server:48
 msgid "Fully configured SMCP server instance ready to run."
@@ -3472,7 +3472,7 @@ msgid "Advanced deployment scenarios with specific requirements"
 msgstr "具有特定需求的高级部署场景"
 
 #~ msgid "**kwargs"
-#~ msgstr ""
+#~ msgstr "**kwargs（关键字参数）"
 
 #~ msgid "Preserves original FastMCP request handler for standard methods"
 #~ msgstr "保留原始的FastMCP请求处理程序以支持标准方法"

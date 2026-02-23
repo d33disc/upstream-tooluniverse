@@ -1768,7 +1768,7 @@ msgstr "要发现的MCP服务器URL列表"
 #: tooluniverse.mcp_integration.discover_mcp_tools:11
 #: tooluniverse.mcp_integration.load_mcp_tools:16
 msgid "**kwargs"
-msgstr ""
+msgstr "**kwargs（关键字参数）"
 
 #: ea95cd5a8f4b41d9a7a003ae23ddda37 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:12
@@ -1854,7 +1854,7 @@ msgstr ""
 #: tooluniverse.mcp_integration.discover_mcp_tools:36
 #, python-brace-format
 msgid "print(f\"  - {tool['name']}: {tool['description']}\")"
-msgstr ""
+msgstr "print(f\"  - {tool['name']}：{tool['description']}\")"
 
 #: 2ab0d215e879441abd55a6b59ad58eb7 of
 #: tooluniverse.mcp_integration.discover_mcp_tools:37
@@ -2041,6 +2041,8 @@ msgid ""
 "server_urls=[\"http://localhost:8001\"], tool_prefix=\"analysis\\_\", "
 "timeout=60, selected_tools=[\"protein_analysis\", \"drug_interaction\"]"
 msgstr ""
+"server_urls=[\"http://localhost:8001\"]，tool_prefix=\"analysis\\_\"，timeout=60，selected_tools=[\"protein_analysis\","
+" \"drug_interaction\"]"
 
 #: 1ccfc6b6e7fb443581b05b988e93c701 of
 #: tooluniverse.mcp_integration.load_mcp_tools:57

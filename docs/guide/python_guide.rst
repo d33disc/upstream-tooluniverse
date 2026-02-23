@@ -3,8 +3,6 @@ Python Guide
 
 **Complete guide for using ToolUniverse with Python**
 
-Welcome to the Python developer path! This guide covers everything you need to build scientific workflows with ToolUniverse's Python API.
-
 Installation
 ------------
 
@@ -41,9 +39,9 @@ Choose your preferred installation method:
          cd ToolUniverse
          uv sync  # or: pip install -e .[dev]
 
-.. tip:: 🎯 **Pro Tip**
-   
-   Use ``uv`` for faster installations and better dependency management. Install it with: ``curl -LsSf https://astral.sh/uv/install.sh | sh``
+.. tip:: **Pro Tip**
+ 
+ Use ``uv`` for faster installations and better dependency management. Install it with: ``curl -LsSf https://astral.sh/uv/install.sh | sh``
 
 Verify Installation
 ~~~~~~~~~~~~~~~~~~~
@@ -56,9 +54,9 @@ Check that ToolUniverse is installed correctly:
    print(f"ToolUniverse version: {tooluniverse.__version__}")
    print("✅ Installation successful!")
 
-.. success:: ✅ **Installation Complete**
-   
-   You're ready to start using ToolUniverse!
+.. success:: **Installation Complete**
+ 
+ You're ready to start using ToolUniverse!
 
 Quick Start
 -----------
@@ -66,9 +64,9 @@ Quick Start
 Get your first scientific query running in 5 minutes:
 
 .. card:: Step 1: Initialize ToolUniverse
-   :class-card: step-card completed
+ :class-card: step-card completed
 
-   Create a ToolUniverse instance:
+ Create a ToolUniverse instance:
 
    .. code-block:: python
 
@@ -78,9 +76,9 @@ Get your first scientific query running in 5 minutes:
       tu = ToolUniverse()
 
 .. card:: Step 2: Load Tools
-   :class-card: step-card completed
+ :class-card: step-card completed
 
-   Load the scientific tools ecosystem:
+ Load the scientific tools ecosystem:
 
    .. code-block:: python
 
@@ -101,9 +99,9 @@ Get your first scientific query running in 5 minutes:
          tu.load_tools(tool_type=['uniprot', 'ChEMBL', 'opentarget'])
 
 .. card:: Step 3: Execute Your First Tool
-   :class-card: step-card current
+ :class-card: step-card current
 
-   Query scientific databases:
+ Query scientific databases:
 
    .. code-block:: python
 
@@ -115,9 +113,9 @@ Get your first scientific query running in 5 minutes:
 
       print(result)
 
-.. important:: ⚡ **Success!**
-   
-   You now have access to 1000+ scientific tools for drug discovery, protein analysis, literature search, and more!
+.. important:: **Success!**
+ 
+ You now have access to 1000+ scientific tools for drug discovery, protein analysis, literature search, and more!
 
 Tool Execution
 ~~~~~~~~~~~~~~
@@ -173,15 +171,15 @@ Tool Finders
 ToolUniverse has **three ways** to find tools. Don't browse 1000+ tools manually—use Tool Finder!
 
 .. grid:: 1 1 2 2
-   :gutter: 3
+ :gutter: 3
 
-   .. grid-item-card:: 🔍 Keyword Search
-      :class-card: hover-lift
-      :shadow: md
+ .. grid-item-card:: Keyword Search
+ :class-card: hover-lift
+ :shadow: md
 
-      **Fast text matching**
-      
-      Best for: Exact terms you know
+ **Fast text matching**
+ 
+ Best for: Exact terms you know
 
       .. code-block:: python
 
@@ -248,7 +246,6 @@ ToolUniverse has **three ways** to find tools. Don't browse 1000+ tools manually
 .. seealso::
    For detailed guide on finding tools, see :doc:`finding_tools`
 
-
 Common Examples
 ~~~~~~~~~~~~~~~
 
@@ -303,7 +300,7 @@ Inspect tool details before execution:
 .. code-block:: python
 
    # Get single tool specification
-   spec = tu.tool_specification("UniProt_get_function_by_accession")
+   spec = tu.tool_specification("UniProt_get_function_by_accession", format="openai")
    
    print(f"Name: {spec['name']}")
    print(f"Description: {spec['description']}")
@@ -348,12 +345,14 @@ Multi-Step Pipeline
    })
 
    # Step 3: For each target, get protein info
-   for target in targets[:3]:  # First 3 targets
+   rows = targets['data']['disease']['associatedTargets']['rows']
+   for row in rows[:3]:  # First 3 targets
+       target = row['target']
        protein_info = tu.run({
            "name": "UniProt_get_entry_by_accession",
-           "arguments": {"accession": target.get("target_id")}
+           "arguments": {"accession": target.get("id")}
        })
-       print(f"Target: {target.get('target_name')}")
+       print(f"Target: {target.get('approvedSymbol')}")
        print(f"Protein: {protein_info}")
 
 Batch Execution
@@ -386,11 +385,11 @@ API Keys
 
 Some tools require API keys for enhanced performance:
 
-.. dropdown:: 🔑 Setting Up API Keys
-   :animate: fade-in-slide-down
-   :color: primary
+.. dropdown:: Setting Up API Keys
+ :animate: fade-in-slide-down
+ :color: primary
 
-   **Environment Variables** (Recommended)
+ **Environment Variables** (Recommended)
 
    .. code-block:: bash
 
@@ -426,8 +425,8 @@ Tool Loading Options
    # Load specific categories
    tu.load_tools(tool_type=['uniprot', 'ChEMBL', 'opentarget'])
 
-   # Load with custom cache
-   tu.load_tools(use_cache=True, cache_dir="./custom_cache")
+   # Load only specific tools by name
+   tu.load_tools(include_tools=['UniProt_get_function_by_accession', 'PubMed_search_articles'])
 
 Logging
 ~~~~~~~
@@ -452,53 +451,61 @@ Advanced Features
 -----------------
 
 .. grid:: 1 1 2 2
-   :gutter: 3
+ :gutter: 3
 
-   .. grid-item-card:: 🔗 Tool Composition
-      :link: tool_composition
-      :link-type: doc
-      :class-card: hover-lift
-      :shadow: md
+ .. grid-item-card:: Tool Composition
+ :link: tool_composition
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
 
-      Chain multiple tools into scientific workflows
+ Chain multiple tools into scientific workflows
 
-   .. grid-item-card:: 🎣 Hooks System
-      :link: hooks/index
-      :link-type: doc
-      :class-card: hover-lift
-      :shadow: md
+ .. grid-item-card:: Hooks System
+ :link: hooks/index
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
 
-      Intelligent output processing and summarization
+ Intelligent output processing and summarization
 
-   .. grid-item-card:: 💾 Cache System
-      :link: cache_system
-      :link-type: doc
-      :class-card: hover-lift
-      :shadow: md
+ .. grid-item-card:: Cache System
+ :link: cache_system
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
 
-      Optimize performance with smart caching
+ Optimize performance with smart caching
 
-   .. grid-item-card:: 🌐 HTTP API
-      :link: http_api
-      :link-type: doc
-      :class-card: hover-lift
-      :shadow: md
+ .. grid-item-card:: HTTP API
+ :link: http_api
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
 
-      Deploy ToolUniverse as a remote service
+ Deploy ToolUniverse as a remote service
+
+ .. grid-item-card:: ChatGPT API
+ :link: chatgpt_api
+ :link-type: doc
+ :class-card: hover-lift
+ :shadow: md
+
+ Use ToolUniverse tools as OpenAI function calls
 
 .. button-ref:: tooluniverse_case_study
-   :color: primary
-   :shadow:
-   :expand:
+ :color: primary
+ :shadow:
+ :expand:
 
-   📚 **Complete Case Study**: Drug discovery workflow with Gemini 2.5 Pro
+ **Complete Case Study**: Drug discovery workflow with Gemini 2.5 Pro
 
 .. button-ref:: ../api/modules
-   :color: secondary
-   :shadow:
-   :expand:
+ :color: secondary
+ :shadow:
+ :expand:
 
-   🔌 **API Reference**: Detailed Python API documentation
+ **API Reference**: Detailed Python API documentation
 
 .. toctree::
    :maxdepth: 2
@@ -515,13 +522,13 @@ Advanced Features
    examples
    tooluniverse_case_study
    http_api
+   chatgpt_api
 
 Need Help?
 ----------
 
-- 📖 **Documentation**: :doc:`../index`
-- 🐛 **Issues**: `GitHub Issues <https://github.com/mims-harvard/ToolUniverse/issues>`_
-- 💬 **Community**: `Slack Channel <https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ>`_
-- ❓ **FAQ**: :doc:`../help/faq`
-
+- **Documentation**: :doc:`../index`
+- **Issues**: `GitHub Issues <https://github.com/mims-harvard/ToolUniverse/issues>`_
+- **Community**: `Slack Channel <https://join.slack.com/t/tooluniversehq/shared_invite/zt-3dic3eoio-5xxoJch7TLNibNQn5_AREQ>`_
+- **FAQ**: :doc:`../help/faq`
 

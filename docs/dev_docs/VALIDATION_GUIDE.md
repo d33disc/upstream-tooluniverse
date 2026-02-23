@@ -57,8 +57,8 @@ My Title
 ```bash
 # The hook will show you the mismatch:
 ⚠️  Line 42: Title/underline length mismatch in docs/quickstart.rst
-   Title: 'My Title' (length: 8)
-   Underline: '=========' (length: 9)
+  Title: 'My Title' (length: 8)
+  Underline: '=========' (length: 9)
 
 # Fix by matching lengths exactly
 ```
@@ -141,8 +141,8 @@ making it much easier to read and maintain in version control.
 **Example warning:**
 ```
 ⚠️  Warning: You are modifying auto-generated files:
-  - docs/tools/uniprot_tools.rst
-  - docs/api/tooluniverse.core.rst
+ - docs/tools/uniprot_tools.rst
+ - docs/api/tooluniverse.core.rst
 ```
 
 **How to fix:**
@@ -173,9 +173,8 @@ sphinx-apidoc -f -o api ../src/tooluniverse
 # Search for tool count mentions
 grep -r "tools" docs/ --include="*.rst" | grep -E "[0-9]+"
 
-# Update to standard format
-sed -i 's/600+ tools/1000+ tools/g' docs/quickstart.rst
-sed -i 's/750 tools/1000+ tools/g' docs/index.rst
+# Update to standard format (replace any stale counts with 1000+)
+sed -i 's/[0-9]*+ tools/1000+ tools/g' docs/quickstart.rst
 ```
 
 ## Manual Validation Scripts
@@ -198,7 +197,7 @@ python validate_examples.py
 ```bash
 ✅ quickstart.rst: All 5 code blocks valid
 ❌ advanced.rst: Syntax error in block 3
-   Line 12: unexpected indent
+  Line 12: unexpected indent
 ```
 
 ### doc_sync_tool.py
@@ -218,8 +217,8 @@ python doc_sync_tool.py
 **Example output:**
 ```bash
 ⚠️  API change detected in tooluniverse.core
-   Method `load_tools()` signature changed
-   → Update docs/api/tooluniverse.core.rst
+  Method `load_tools()` signature changed
+  → Update docs/api/tooluniverse.core.rst
 ```
 
 ### doc_analytics.py
@@ -297,14 +296,14 @@ GitHub Actions automatically validates documentation on pull requests:
 ```yaml
 # .github/workflows/deploy-docs.yml
 - name: Validate documentation
-  run: |
-    ./.githooks/pre-commit-docs
+ run: |
+   ./.githooks/pre-commit-docs
 ```
 
 **What happens:**
-- ✅ Validation passes → PR can be merged
-- ❌ Validation fails → PR blocked until fixed
-- ⚠️  Warnings → PR can be merged but review recommended
+-  Validation passes → PR can be merged
+-  Validation fails → PR blocked until fixed
+- ️  Warnings → PR can be merged but review recommended
 
 ## Common Issues & Solutions
 

@@ -5832,7 +5832,7 @@ msgstr "按严重性分类筛选。"
 #: 78d1f9b91b424e45a148308938270fb1 of
 #: tooluniverse.tools.FAERS_count_additive_adverse_reactions.FAERS_count_additive_adverse_reactions:13
 msgid "Filter for fatal outcomes."
-msgstr ""
+msgstr "筛选致命结果。"
 
 #: 5b6c7266f0a74cf0b9d329bb6d0b310d of
 #: tooluniverse.tools.FAERS_count_additive_event_reports_by_country.FAERS_count_additive_event_reports_by_country:1

@@ -1,8 +1,6 @@
 Troubleshooting Tutorial
 =====================
 
-This Tutorial helps you diagnose and resolve common issues with ToolUniverse.
-
 Quick Diagnostic
 ----------------
 
@@ -131,7 +129,7 @@ Tool not found errors
 
    # List available tools
    print("Available tools:")
-   for tool_name in tu.list_tools():
+   for tool_name in tu.list_built_in_tools(mode='list_name'):
        print(f"  - {tool_name}")
 
 **Solutions:**
@@ -151,7 +149,7 @@ Tool not found errors
 
    .. code-block:: python
 
-      if "OpenTargets_tool" not in tu.list_tools():
+      if "OpenTargets_tool" not in tu.all_tool_dict:
           print("OpenTargets tool not loaded")
           # Check for missing dependencies
 
@@ -161,7 +159,7 @@ Tool not found errors
 
       from tooluniverse.opentargets_tool import OpenTargetsTool
       tool = OpenTargetsTool()
-      tu.register_tool(tool)
+      tu.register_custom_tool(tool_instance=tool)
 
 API Authentication errors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,7 +189,7 @@ When you encounter API errors, check this reference table:
      - Add API key for higher limits, enable caching with ``use_cache=True``, or add delays. See :doc:`../guide/cache_system`.
    * - **404 Not Found**
      - Invalid resource identifier
-     - Verify ID format (e.g., UniProt accession "P05067", ChEMBL ID "CHEMBL25"). Check :doc:`../glossary` for ID formats.
+     - Verify ID format (e.g., UniProt accession "P05067", ChEMBL ID "CHEMBL25"). Check :doc:`../reference/glossary` for ID formats.
    * - **502 Bad Gateway**
      - Service temporarily unavailable
      - Wait 30-60 seconds and retry. Check API provider's status page if error persists.
@@ -224,7 +222,7 @@ When you encounter API errors, check this reference table:
 
 1. **Identify which API key you need:**
 
-   See :doc:`../guide/api_keys` for a complete list of which tools require which API keys and how to obtain them.
+ See :doc:`../guide/api_keys` for a complete list of which tools require which API keys and how to obtain them.
 
 2. **Set API keys in environment:**
 
@@ -298,7 +296,7 @@ Many services limit how many requests you can make per second/minute. API keys t
 
 1. **Get an API key for higher limits:**
 
-   See :doc:`../guide/api_keys` for how to obtain API keys for each service.
+ See :doc:`../guide/api_keys` for how to obtain API keys for each service.
 
 2. **Add delays between requests:**
 
@@ -318,7 +316,7 @@ Many services limit how many requests you can make per second/minute. API keys t
       batch_size = 5
       for i in range(0, len(queries), batch_size):
            batch = queries[i:i+batch_size]
-           results = tu.run_batch(batch)
+           results = tu.run(batch, max_workers=4)
            time.sleep(2)  # Pause between batches
 
 4. **Enable caching to avoid redundant requests:**
@@ -356,7 +354,7 @@ Connection timeouts
 
    .. code-block:: python
 
-      tu = ToolUniverse(timeout=30)  # 30 second timeout
+      tu = ToolUniverse()  # timeout is configured per-tool at the HTTP request level
 
 2. **Check network connection:**
 
@@ -395,7 +393,7 @@ SSL Certificate errors
 
 3. **Corporate firewall:**
 
-   Contact your IT department for proper certificate configuration.
+ Contact your IT department for proper certificate configuration.
 
 Performance Issues
 ------------------
@@ -437,7 +435,7 @@ Slow query performance
       import asyncio
 
       async def run_queries():
-           tasks = [tu.run_async(query) for query in queries]
+           tasks = [tu.run(query) for query in queries]  # run() is context-aware
            results = await asyncio.gather(*tasks)
            return results
 
@@ -459,7 +457,7 @@ Slow query performance
            {"name": "UniProt_get_function_by_accession", "arguments": {"accession": accession}}
            for accession in accessions
       ]
-      results = tu.run_batch(queries)
+      results = tu.run(queries, max_workers=4)
 
 Memory usage issues
 ~~~~~~~~~~~~~~~~~~~
@@ -486,7 +484,7 @@ Memory usage issues
       def process_large_dataset(data, chunk_size=100):
            for i in range(0, len(data), chunk_size):
                chunk = data[i:i+chunk_size]
-               yield tu.run_batch(chunk)
+               yield tu.run(chunk, max_workers=4)
 
 2. **Clear cache periodically:**
 
@@ -553,7 +551,7 @@ Claude/AI assistant not finding tools
 
 2. **Check Claude configuration:**
 
-   Ensure MCP server is properly configured in Claude Desktop settings.
+ Ensure MCP server is properly configured in Claude Desktop settings.
 
 **Solutions:**
 
@@ -564,7 +562,7 @@ Claude/AI assistant not finding tools
    .. code-block:: python
 
       # In MCP server
-      tools = tu.list_tools()
+      tools = tu.return_all_loaded_tools()
       print(f"Registered {len(tools)} tools")
 
 Advanced Debugging
@@ -632,17 +630,17 @@ If none of these solutions work:
 2. **Search GitHub issues**: `Issues <https://github.com/mims-harvard/ToolUniverse/issues>`_
 3. **Create a bug report** with:
 
-   - ToolUniverse version: ``tooluniverse.__version__``
-   - Python version: ``python --version``
-   - Operating system
-   - Full error message and traceback
-   - Minimal code example that reproduces the issue
+ - ToolUniverse version: ``tooluniverse.__version__``
+ - Python version: ``python --version``
+ - Operating system
+ - Full error message and traceback
+ - Minimal code example that reproduces the issue
 
 4. **Join our community**: Discord server link
 
 .. note::
 =========
-   When reporting issues, please run the diagnostic script first:
+ When reporting issues, please run the diagnostic script first:
 
    .. code-block:: python
 

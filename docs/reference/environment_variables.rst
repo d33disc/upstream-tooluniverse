@@ -122,6 +122,12 @@ Optimize startup time and memory usage by controlling how tools are loaded.
    * - ``TOOLUNIVERSE_LIGHT_IMPORT``
      - ``false``
      - Minimal imports on package import. Reduces memory footprint for embedded use.
+   * - ``TOOLUNIVERSE_COERCE_TYPES``
+     - ``true``
+     - Auto-convert parameter types (e.g., string ``"42"`` → integer ``42``) when calling tools. Disable for strict type enforcement.
+   * - ``TOOLUNIVERSE_STRICT_VALIDATION``
+     - ``false``
+     - Raise errors on unknown or extra parameters instead of silently ignoring them.
 
 **Examples**::
 
@@ -474,7 +480,7 @@ See Also
 - :doc:`../guide/cache_system` - Caching system guide
 - :doc:`../guide/logging` - Logging configuration
 - :doc:`../help/troubleshooting` - Troubleshooting guide
-- :doc:`../installation` - Installation instructions
+- :doc:`../guide/python_guide` - Installation and Python API guide
 
 Complete Variable List
 ----------------------
@@ -525,6 +531,12 @@ Complete Variable List
      - true
      - Loading
    * - ``TOOLUNIVERSE_LIGHT_IMPORT``
+     - false
+     - Loading
+   * - ``TOOLUNIVERSE_COERCE_TYPES``
+     - true
+     - Loading
+   * - ``TOOLUNIVERSE_STRICT_VALIDATION``
      - false
      - Loading
    * - ``TOOLUNIVERSE_LLM_DEFAULT_PROVIDER``
