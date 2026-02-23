@@ -389,6 +389,52 @@ def build_lazy_registry(package_name=None):
     return _lazy_registry.copy()
 
 
+def _read_space_yaml(directory, context: str = "") -> dict:
+    """
+    Read ``space.yaml`` from *directory* if it exists.
+
+    Logs the pack name/description at INFO level so users can see which
+    tool packs were loaded.  Also logs a WARNING for any ``required_env``
+    variables that are missing from the environment — this is the earliest
+    point at which a user can be told "you need DIGIKEY_CLIENT_ID".
+
+    Returns the parsed config dict (empty dict if no file or parse error).
+    """
+    from pathlib import Path
+    import os
+
+    space_file = Path(directory) / "space.yaml"
+    if not space_file.exists():
+        return {}
+
+    try:
+        import yaml
+
+        with open(space_file, "r", encoding="utf-8") as _f:
+            config = yaml.safe_load(_f) or {}
+    except Exception as exc:
+        logger.debug(f"{context}: could not read space.yaml: {exc}")
+        return {}
+
+    name = config.get("name", "")
+    description = config.get("description", "").strip()
+    label = f"{name} — {description}" if description else name
+    if label:
+        logger.info(f"Tool pack loaded: {label} ({context})")
+
+    missing = [
+        var
+        for var in config.get("required_env", [])
+        if not os.environ.get(var)
+    ]
+    if missing:
+        logger.warning(
+            f"{context} requires env var(s) not set: {', '.join(missing)}"
+        )
+
+    return config
+
+
 def _discover_entry_point_plugins():
     """
     Discover and eagerly load installed tooluniverse plugins registered via
@@ -443,6 +489,9 @@ def _discover_entry_point_plugins():
         pkg_name = getattr(plugin_module, "__name__", None)
         if not pkg_name:
             continue
+
+        # Read space.yaml if present — log pack identity and check required_env
+        _read_space_yaml(plugin_dir, context=f"plugin '{ep.name}'")
 
         logger.debug(f"Plugin '{ep.name}' at {plugin_dir} (package={pkg_name})")
 
