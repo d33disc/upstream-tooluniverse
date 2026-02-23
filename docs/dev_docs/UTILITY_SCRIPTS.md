@@ -6,15 +6,15 @@ This document provides a comprehensive guide to all utility scripts in the `docs
 
 | Script | Purpose | When to Run | CI/CD |
 |--------|---------|-------------|-------|
-| `generate_config_index.py` | Generate tool catalog pages | After tool config changes | ✅ Yes |
-| `generate_tool_reference.py` | Generate tool reference docs | After tool config changes | ✅ Yes |
-| `generate_remote_tools_docs.py` | Generate remote tool docs | After remote tool README changes | ✅ Yes |
-| `quick_doc_build.sh` | Fast local documentation build | Before committing doc changes | ❌ No |
-| `quick_build_zh.sh` | Fast Chinese docs build | Chinese localization work | ❌ No |
-| `validate_examples.py` | Validate code examples | Before releases | ❌ Not yet |
-| `doc_analytics.py` | Analyze documentation metrics | Documentation reviews | ❌ No |
-| `doc_sync_tool.py` | Sync docstrings to docs | API doc updates | ❌ Not yet |
-| `validate_simple.py` | (Empty file - unused) | N/A | ❌ No |
+| `generate_config_index.py` | Generate tool catalog pages | After tool config changes |  Yes |
+| `generate_tool_reference.py` | Generate tool reference docs | After tool config changes |  Yes |
+| `generate_remote_tools_docs.py` | Generate remote tool docs | After remote tool README changes |  Yes |
+| `quick_doc_build.sh` | Fast local documentation build | Before committing doc changes |  No |
+| `quick_build_zh.sh` | Fast Chinese docs build | Chinese localization work |  No |
+| `validate_examples.py` | Validate code examples | Before releases |  Not yet |
+| `doc_analytics.py` | Analyze documentation metrics | Documentation reviews |  No |
+| `doc_sync_tool.py` | Sync docstrings to docs | API doc updates |  Not yet |
+| `validate_simple.py` | (Empty file - unused) | N/A |  No |
 
 ---
 
@@ -31,9 +31,9 @@ This document provides a comprehensive guide to all utility scripts in the `docs
 - Generates a master index (`tools_config_index.rst`)
 
 **When to run**:
-- ✅ After adding new tool configuration files
-- ✅ After modifying tool metadata (name, description, parameters)
-- ✅ Before committing tool changes
+-  After adding new tool configuration files
+-  After modifying tool metadata (name, description, parameters)
+-  Before committing tool changes
 
 **Usage**:
 ```bash
@@ -53,7 +53,7 @@ $ python generate_config_index.py
 ✅ Created docs/tools/pubmed_tools.rst (18 tools)
 ```
 
-**CI/CD Integration**: ✅ Runs automatically in `.github/workflows/deploy-docs.yml`
+**CI/CD Integration**:  Runs automatically in `.github/workflows/deploy-docs.yml`
 
 ---
 
@@ -68,9 +68,9 @@ $ python generate_config_index.py
 - Generates detailed reference pages
 
 **When to run**:
-- ✅ After adding new tools
-- ✅ After changing tool schemas
-- ✅ Before major releases
+-  After adding new tools
+-  After changing tool schemas
+-  Before major releases
 
 **Usage**:
 ```bash
@@ -82,7 +82,7 @@ python generate_tool_reference.py
 - `docs/tools/tool_reference.rst` - Comprehensive tool reference
 - Individual category pages (if configured)
 
-**CI/CD Integration**: ✅ Runs automatically in `.github/workflows/deploy-docs.yml`
+**CI/CD Integration**:  Runs automatically in `.github/workflows/deploy-docs.yml`
 
 ---
 
@@ -97,9 +97,9 @@ python generate_tool_reference.py
 - Creates navigation structure for remote tools
 
 **When to run**:
-- ✅ After adding new remote tools
-- ✅ After updating remote tool README files
-- ✅ Before deploying documentation
+-  After adding new remote tools
+-  After updating remote tool README files
+-  Before deploying documentation
 
 **Usage**:
 ```bash
@@ -119,7 +119,7 @@ $ python generate_remote_tools_docs.py
 ✅ Generated docs/tools/remote/custom_api.rst
 ```
 
-**CI/CD Integration**: ✅ Runs automatically in `.github/workflows/deploy-docs.yml`
+**CI/CD Integration**:  Runs automatically in `.github/workflows/deploy-docs.yml`
 
 ---
 
@@ -136,9 +136,9 @@ $ python generate_remote_tools_docs.py
 - Skips time-consuming full API generation
 
 **When to run**:
-- ✅ During documentation writing/editing
-- ✅ Before committing documentation changes
-- ✅ To preview changes locally
+-  During documentation writing/editing
+-  Before committing documentation changes
+-  To preview changes locally
 
 **Usage**:
 ```bash
@@ -177,8 +177,8 @@ $ ./quick_doc_build.sh
 - Skips API generation for speed
 
 **When to run**:
-- ✅ During Chinese translation work
-- ✅ To preview Chinese documentation
+-  During Chinese translation work
+-  To preview Chinese documentation
 
 **Usage**:
 ```bash
@@ -205,9 +205,9 @@ cd docs
 - Reports syntax errors and unavailable imports
 
 **When to run**:
-- ✅ Before releases
-- ✅ After updating code examples
-- ✅ As part of pre-commit hooks (future)
+-  Before releases
+-  After updating code examples
+-  As part of pre-commit hooks (future)
 
 **Usage**:
 ```bash
@@ -219,7 +219,7 @@ python validate_examples.py
 ```bash
 ✅ quickstart.rst: All 5 code blocks valid
 ❌ advanced.rst: Syntax error in block 3
-   Line 12: unexpected indent
+  Line 12: unexpected indent
 ✅ All examples validated
 ```
 
@@ -229,9 +229,9 @@ python validate_examples.py
 ```yaml
 # .github/workflows/deploy-docs.yml
 - name: Validate code examples
-  run: |
-    cd docs
-    python validate_examples.py
+ run: |
+   cd docs
+   python validate_examples.py
 ```
 
 ---
@@ -240,7 +240,7 @@ python validate_examples.py
 
 **Purpose**: Unknown (file is currently empty).
 
-**Status**: ❌ Not implemented / unused
+**Status**:  Not implemented / unused
 
 **Recommendation**: Remove this file or implement validation logic.
 
@@ -260,9 +260,9 @@ python validate_examples.py
 - Suggests improvements
 
 **When to run**:
-- ✅ During quarterly documentation reviews
-- ✅ To identify improvement opportunities
-- ✅ For documentation health checks
+-  During quarterly documentation reviews
+-  To identify improvement opportunities
+-  For documentation health checks
 
 **Usage**:
 ```bash
@@ -273,18 +273,18 @@ python doc_analytics.py
 **Example output**:
 ```json
 {
-  "pages": {
-    "quickstart.rst": {
-      "word_count": 1250,
-      "code_blocks": 8,
-      "external_links": 5,
-      "last_modified": "2024-02-01"
-    }
-  },
-  "recommendations": [
-    "installation.rst has no code examples",
-    "faq.rst has 50+ external links (consider caching)"
-  ]
+ "pages": {
+   "quickstart.rst": {
+     "word_count": 1250,
+     "code_blocks": 8,
+     "external_links": 5,
+     "last_modified": "2024-02-01"
+   }
+ },
+ "recommendations": [
+   "installation.rst has no code examples",
+   "faq.rst has 50+ external links (consider caching)"
+ ]
 }
 ```
 
@@ -305,9 +305,9 @@ python doc_analytics.py
 - Suggests documentation updates
 
 **When to run**:
-- ✅ After significant API changes
-- ✅ Before major releases
-- ✅ During API documentation reviews
+-  After significant API changes
+-  Before major releases
+-  During API documentation reviews
 
 **Usage**:
 ```bash
@@ -318,8 +318,8 @@ python doc_sync_tool.py
 **Example output**:
 ```bash
 ⚠️  API change detected in tooluniverse.core
-   Method `load_tools()` signature changed
-   → Update docs/api/tooluniverse.core.rst
+  Method `load_tools()` signature changed
+  → Update docs/api/tooluniverse.core.rst
 
 ✅ 42/45 modules in sync with docs
 ```
@@ -343,16 +343,16 @@ python doc_sync_tool.py
 - Build options
 
 **When to edit**:
-- ✅ Adding new Sphinx extensions
-- ✅ Changing theme or styling
-- ✅ Modifying build behavior
+-  Adding new Sphinx extensions
+-  Changing theme or styling
+-  Modifying build behavior
 
 **Key settings**:
 ```python
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',
-    'sphinx_rtd_theme',
+   'sphinx.ext.autodoc',
+   'sphinx.ext.napoleon',
+   'sphinx_rtd_theme',
 ]
 
 html_theme = 'sphinx_rtd_theme'
@@ -366,11 +366,11 @@ The following scripts are integrated into `.github/workflows/deploy-docs.yml`:
 
 ```yaml
 - name: Regenerate tool documentation
-  run: |
-    cd docs
-    python generate_config_index.py
-    python generate_remote_tools_docs.py
-    python generate_tool_reference.py
+ run: |
+   cd docs
+   python generate_config_index.py
+   python generate_remote_tools_docs.py
+   python generate_tool_reference.py
 ```
 
 **Why integrated**:
@@ -516,27 +516,25 @@ This script [detailed explanation of purpose and functionality].
 import sys
 from pathlib import Path
 
-
 def main():
-    """Main entry point."""
-    # Script logic here
-    pass
-
+   """Main entry point."""
+   # Script logic here
+   pass
 
 if __name__ == "__main__":
-    main()
+   main()
 ```
 
 **Add to this documentation**:
 
 1. Add entry to Quick Reference table
 2. Create detailed section with:
-   - Purpose
-   - What it does
-   - When to run
-   - Usage examples
-   - Output description
-   - CI/CD integration status
+  - Purpose
+  - What it does
+  - When to run
+  - Usage examples
+  - Output description
+  - CI/CD integration status
 
 **Consider CI/CD integration** if:
 - Script ensures content freshness
@@ -550,24 +548,24 @@ if __name__ == "__main__":
 ### Planned Enhancements
 
 1. **Integrate validation into CI/CD**:
-   - Add `validate_examples.py` to pre-commit hooks
-   - Add `doc_sync_tool.py` to API change detection
+  - Add `validate_examples.py` to pre-commit hooks
+  - Add `doc_sync_tool.py` to API change detection
 
 2. **Create comprehensive validation script**:
-   - Check for broken internal links
-   - Verify all code examples are tested
-   - Ensure consistent terminology
-   - Validate tool counts are up-to-date
+  - Check for broken internal links
+  - Verify all code examples are tested
+  - Ensure consistent terminology
+  - Validate tool counts are up-to-date
 
 3. **Automate analytics reporting**:
-   - Generate monthly documentation health reports
-   - Track documentation coverage metrics
-   - Identify pages needing updates
+  - Generate monthly documentation health reports
+  - Track documentation coverage metrics
+  - Identify pages needing updates
 
 4. **Improve error handling**:
-   - Better error messages in generation scripts
-   - Graceful fallbacks for missing files
-   - Detailed logs for troubleshooting
+  - Better error messages in generation scripts
+  - Graceful fallbacks for missing files
+  - Detailed logs for troubleshooting
 
 ---
 

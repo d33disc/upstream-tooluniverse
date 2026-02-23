@@ -12,7 +12,7 @@ This directory contains documentation for TxAgent and guides on integrating with
 - Troubleshooting and testing guides
 - Multiple registration methods
 
-### �📖 [MCP Server Tutorial](MCP_Server_Tutorial.md)
+### � [MCP Server Tutorial](MCP_Server_Tutorial.md)
 A comprehensive Tutorial that covers:
 - Converting your Python program into an MCP server
 - Creating ToolUniverse configuration files
@@ -66,9 +66,9 @@ In the parent directory, you'll find:
 │   Your Client   │ ◄─────────────► │   MCP Server     │
 │  (ToolUniverse) │                 │  (Your Program)  │
 └─────────────────┘                 └──────────────────┘
-        │                                    │
-        │                                    │
-        ▼                                    ▼
+       │                                    │
+       │                                    │
+       ▼                                    ▼
 ┌─────────────────┐                 ┌──────────────────┐
 │ Configuration   │                 │  Tool Functions  │
 │ JSON File       │                 │  (@server.tool)  │

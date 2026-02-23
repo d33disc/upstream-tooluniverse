@@ -1,455 +1,350 @@
 ---
 name: devtu-docs-quality
-description: Comprehensive documentation quality system combining automated validation with ToolUniverse-specific auditing. Detects outdated commands, circular navigation, inconsistent terminology, auto-generated file conflicts, broken links, and structural problems. Use when reviewing documentation, before releases, after refactoring, or when user asks to audit, optimize, or improve documentation quality.
+description: TOP PRIORITY skill — find and immediately fix or remove every piece of wrong, outdated, or redundant information in ToolUniverse docs. Wrong code, broken links, incorrect counts, and overlapping instructions must be fixed or removed — never left in place. Runs five phases: (D) static method scan, (C) live code execution, (A) automated validation, (B) ToolUniverse audit, (E) less-is-more simplification. Core philosophy: each concept appears exactly once; remove don't add; no emojis; single setup entry point. Use when reviewing docs, before releases, after API changes, or when asked to audit, fix, or simplify documentation.
 ---
 
 # Documentation Quality Assurance
 
-Systematic documentation quality system combining automated validation scripts with ToolUniverse-specific structural audits.
+## Two Equal Priorities
 
-## When to Use
+Both of the following must be satisfied before an audit is done. Neither overrides the other.
 
-- Pre-release documentation review
-- After major refactoring (commands, APIs, tool counts changed)
-- User reports confusing or outdated documentation
-- Circular navigation or structural problems suspected
-- Want to establish automated validation pipeline
+**1. Technical correctness** — wrong code is worse than no code; it actively breaks users' workflows.
 
-## Approach: Two-Phase Strategy
+**2. Less is more** — redundant content is worse than no content; it creates confusion, dilutes trust, and makes maintenance harder.
 
-**Phase A: Automated Validation** (15-20 min)
-- Create validation scripts for systematic detection
-- Test commands, links, terminology consistency
-- Priority-based fixes (blockers → polish)
+> When in doubt about technical accuracy: **verify against source** (`src/tooluniverse/execute_function.py`).
+> When in doubt about whether content is needed: **delete it**.
 
-**Phase B: ToolUniverse-Specific Audit** (20-25 min)
-- Circular navigation checks
-- MCP configuration duplication
-- Tool count consistency
-- Auto-generated file conflicts
+---
+
+## Less Is More — The Core Philosophy
+
+ToolUniverse is a serious research tool. Documentation should reflect that with restraint and precision, not volume.
+
+### What "less is more" means in practice
+
+**Remove, don't add.** Every edit should end with fewer words, fewer pages, fewer links. The field moves fast — outdated instructions are actively harmful. When two approaches both work, keep one.
+
+**Each concept appears exactly once.** If setup instructions appear in three places, a user reading one doesn't know the others exist, and maintainers must update all three on every change. Pick one canonical location and cross-link everywhere else.
+
+**No emojis.** Emojis in headings, nav items, card titles, and bullet points signal "AI-generated" and undermine trust in a serious scientific tool. Remove them unconditionally — no exceptions for "emphasis."
+
+**Shrink, don't summarize.** A page reduced from 1000 lines to 30 pointer lines is better than a 1000-line page summarized with a TL;DR box. Do the surgery.
+
+**Size budgets (hard limits):**
+
+| Page type | Max lines |
+|-----------|-----------|
+| Per-platform setup page (`claude_desktop.rst`, `cursor.rst`, etc.) | 15 |
+| Homepage grid sections | 4 cards max per grid |
+| "See Also" / "Related" link lists | 4 links max |
+| Tutorial pages that duplicate the Python guide | 0 — delete or make a pointer |
+
+### Less-is-more decision tree
+
+When reviewing any piece of content, ask:
+
+1. **Does this content exist elsewhere on the site?** → Remove it; add a cross-link to the canonical location.
+2. **Is this content outdated or hard to keep current?** → Remove it; link to the upstream source (e.g., `aiscientist.tools/setup.md`).
+3. **Can a user reach this information in 2 clicks from the homepage?** → If yes and the info is already there, remove this copy.
+4. **Is this an emoji, decorative header, or filler sentence?** → Remove it unconditionally.
+5. **Is this a "Explore More" card pointing somewhere already in the sidebar?** → Remove it.
+
+---
+
+## Apple-Style Simplification Rules
+
+Apply these rules to every file touched during an audit.
+
+**No emojis** in headings, bullet items, card titles, toctree captions, nav bar entries, or button text.
+
+**Single setup entry point.** The canonical installation path is:
+```
+Read https://aiscientist.tools/setup.md and set up ToolUniverse for me.
+```
+Per-platform pages must contain exactly three things: (1) official install link, (2) official MCP setup guide link, (3) the setup prompt above. Nothing else — no JSON snippets, no step-by-step instructions, no troubleshooting. Those belong in the setup skill at `aiscientist.tools/setup.md`.
+
+**Consistent tool count.** Always "1000+ tools". Never "600+", "750+", "1200+", "10000+", or any other number.
+
+**Clean navigation bar.** Must not contain "API", "API Keys", or "Contribution" items. Must include a link to `https://aiscientist.tools` as the first item.
+
+**Homepage "Explore More" grid.** Maximum 4 cards. Remove any card whose destination is already reachable from the sidebar or the "Get Started" section.
+
+**No broken `:doc:` references.** Every `:doc:`some/path`` must resolve to an `.rst` or `.md` file on disk. Broken links are never acceptable — remove or replace immediately.
+
+---
+
+## Five-Phase Strategy
+
+Run phases in order — **D first** (instant), then **E** (simplification scan), then C/A/B.
+
+| Phase | What it catches | Time |
+|-------|----------------|------|
+| **D** Static method scan | Wrong method names (`tu.run_batch`, `tu.call_tool`, etc.) | ~2 s |
+| **E** Simplification scan | Emojis, wrong counts, broken links, size violations | ~10 s |
+| **C** Live code execution | Runtime failures (wrong key, bad return type) | 3-5 min |
+| **A** Automated validation | Deprecated commands, term inconsistency | 15 min |
+| **B** ToolUniverse audit | Circular nav, duplicate MCP configs, tool counts | 20 min |
+
+---
+
+## Phase D: Static Method Scan
+
+```bash
+python3 - <<'EOF'
+import re, sys
+from pathlib import Path
+from collections import defaultdict
+DOCS = Path("docs")
+EXCLUDE = {"locale", "old", "_build", "__pycache__", "tools", "archive"}
+KNOWN_BAD = {
+    "list_tools", "run_batch", "run_async", "execute_tool", "call_tool",
+    "list_tools_by_category", "configure_api_keys", "get_tool", "get_exposed_name",
+    "list_available_methods", "register_tool_from_config", "register_tool",
+}
+STATIC = [
+    (r"\.load_tools\([^)]*(?:use_cache|cache_dir)\s*=", "load_tools() invalid kwargs"),
+    (r"ToolUniverse\([^)]*timeout\s*=", "ToolUniverse(timeout=) invalid"),
+    (r'"name":\s*"opentarget_', 'old lowercase "opentarget_*" tool name'),
+    (r"tu\.run_batch\(", "tu.run_batch() — use tu.run(list, max_workers=N)"),
+    (r'\btu\.[A-Z]\w+\s*\(', "tu.ToolName() shorthand — use tu.run({name:...})"),
+]
+M = re.compile(r'\b(?:tu|tooluni)\.([\w]+)\s*\(')
+issues = defaultdict(list)
+for f in sorted(list(DOCS.rglob("*.rst")) + list(DOCS.rglob("*.md"))):
+    if any(p in f.parts for p in EXCLUDE): continue
+    t = f.read_text(errors="replace")
+    code = "\n".join(
+        re.findall(r"\.\. code-block:: python\n((?:[ \t]+[^\n]*\n|[ \t]*\n)*)", t, re.MULTILINE) +
+        re.findall(r"```python\n(.*?)```", t, re.DOTALL))
+    if not code.strip(): continue
+    rel = str(f.relative_to(DOCS))
+    for m in M.finditer(code):
+        if not m.group(1).startswith("_") and m.group(1) in KNOWN_BAD:
+            issues[rel].append(f"tu.{m.group(1)}()")
+    for pat, label in STATIC:
+        if re.search(pat, code): issues[rel].append(label)
+if issues:
+    [print(f"  {f}: {i}") for f in sorted(issues) for i in sorted(set(issues[f]))]
+    sys.exit(1)
+else:
+    print("Phase D clean")
+EOF
+```
+
+**Fix-or-remove rule — no exceptions:**
+- Correct replacement exists → **fix immediately**
+- Feature is automatic/internal → **remove the call**, add prose comment if needed
+- Feature doesn't exist → **delete the code block or section entirely**
+
+**Most common fixes:**
+
+```python
+# wrong → correct
+tu.run_batch(list)              → tu.run(list, max_workers=4)
+tu.run_async(query)             → await tu.run(query)
+tu.call_tool('X', {...})        → tu.run({"name": "X", "arguments": {...}})
+tu.execute_tool('X', {...})     → tu.run({"name": "X", "arguments": {...}})
+tu.list_tools()                 → tu.list_built_in_tools(mode='list_name')
+tu.get_tool('X')                → tu.get_tool_by_name('X')
+tu.register_tool(instance)      → tu.register_custom_tool(tool_instance=instance)
+tu.register_tool_from_config(c) → tu.register_custom_tool(tool_config=c)
+tu.configure_api_keys({})       → REMOVE — use env vars
+tu.get_exposed_name(name)       → REMOVE — shortening is automatic
+ToolUniverse(timeout=30)        → ToolUniverse()  # no timeout kwarg
+load_tools(use_cache=True)      → load_tools()  # no use_cache kwarg
+tu.ToolName(key=val)            → tu.run({"name": "ToolName", "arguments": {"key": val}})
+opentarget_get_*                → OpenTargets_get_*  (capital O and T)
+```
+
+**Special case:** Change `.. code-block:: python` to `.. code-block:: text` when showing intentionally-wrong code as an error example.
+
+---
+
+## Phase E: Simplification Scan
+
+```bash
+python3 - <<'EOF'
+import re, sys
+from pathlib import Path
+
+DOCS = Path("docs")
+EXCLUDE = {"_build", "__pycache__", "locale"}
+issues = []
+
+EMOJI_RE = re.compile(
+    r'[\U0001F300-\U0001F9FF\U00002600-\U000027BF\U0001FA00-\U0001FA9F'
+    r'\U0001F004\U0001F0CF\U00002702-\U000027B0]'
+)
+
+def in_code_block(text, pos):
+    """Return True if pos is inside a code block."""
+    before = text[:pos]
+    # RST code blocks
+    rst_starts = [m.end() for m in re.finditer(r'\.\. code-block::[^\n]*\n', before)]
+    for start in reversed(rst_starts):
+        block = text[start:]
+        end_match = re.search(r'\n(?![ \t]|\n)', block)
+        block_end = start + (end_match.start() if end_match else len(block))
+        if start <= pos <= block_end:
+            return True
+    # Markdown fenced blocks
+    fences = list(re.finditer(r'```', before))
+    return len(fences) % 2 == 1
+
+for f in sorted(DOCS.rglob("*.rst")) + sorted(DOCS.rglob("*.md")):
+    if any(p in f.parts for p in EXCLUDE):
+        continue
+    text = f.read_text(errors="replace")
+    rel = str(f.relative_to(DOCS))
+
+    # Check emojis in prose
+    for m in EMOJI_RE.finditer(text):
+        if not in_code_block(text, m.start()):
+            line = text[:m.start()].count('\n') + 1
+            issues.append(f"EMOJI  {rel}:{line}  {repr(m.group())}")
+
+    # Check wrong tool counts
+    for bad in ["600+", "750+", "1200+", "10000+"]:
+        if bad in text and "tools" in text[text.find(bad):text.find(bad)+20]:
+            issues.append(f"COUNT  {rel}  contains '{bad} tools' (use '1000+')")
+
+    # Check broken :doc: references
+    for m in re.finditer(r':doc:`([^`]+)`', text):
+        ref = m.group(1).lstrip('/')
+        # Strip any display text (format: display <path>)
+        if ' <' in ref:
+            ref = re.search(r'<([^>]+)>', ref).group(1)
+        base = DOCS / Path(ref.replace('/', '/'))
+        candidates = [base.with_suffix('.rst'), base.with_suffix('.md'),
+                      base / 'index.rst', base / 'index.md']
+        if not any(c.exists() for c in candidates):
+            line = text[:m.start()].count('\n') + 1
+            issues.append(f"LINK   {rel}:{line}  broken :doc:`{ref}`")
+
+# Check navbar in conf.py
+conf = Path("docs/conf.py").read_text()
+for bad_nav in ['"API"', '"API Keys"', '"Contribution"']:
+    if bad_nav in conf:
+        issues.append(f"NAV    conf.py  navbar contains {bad_nav}")
+if "aiscientist.tools" not in conf:
+    issues.append("NAV    conf.py  navbar missing aiscientist.tools link")
+
+# Check per-platform page line counts
+platform_dir = DOCS / "guide" / "building_ai_scientists"
+for rst in platform_dir.glob("*.rst"):
+    if rst.name in ("index.rst", "mcp_support.rst", "compact_mode.rst",
+                    "mcpb_introduction.rst", "mcp_name_shortening.rst"):
+        continue
+    lines = rst.read_text().splitlines()
+    if len(lines) > 15:
+        issues.append(f"SIZE   guide/building_ai_scientists/{rst.name}  {len(lines)} lines (max 15)")
+
+if issues:
+    for i in sorted(issues):
+        print(i)
+    sys.exit(1)
+else:
+    print("Phase E clean")
+EOF
+```
+
+When Phase E reports issues, apply the less-is-more decision tree above. Fix all items before proceeding to Phase C.
+
+---
+
+## Phase C: Live Code Execution
+
+```bash
+python scripts/test_doc_code_blocks.py
+```
+
+The runner injects a real `ToolUniverse` instance as preamble, skips blocks needing API keys or async, and classifies `NameError` on out-of-scope variables as "context-dependent" (not a failure).
+
+**Common runtime failures:**
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `KeyError: 'parameters'` | `tool_specification()` without `format="openai"` | Add `format="openai"` |
+| `KeyError: slice(...)` on OpenTargets result | Slicing a dict | Use `result['data']['disease']['associatedTargets']['rows'][:N]` |
+| `TypeError: load_tools() got unexpected kwarg` | `use_cache` or `cache_dir` | Remove the kwarg |
+
+---
 
 ## Phase A: Automated Validation
 
-### A1. Build Validation Script
-
-Create `scripts/validate_documentation.py`:
+```bash
+python scripts/validate_documentation.py
+```
 
 ```python
-#!/usr/bin/env python3
-"""Documentation validator for ToolUniverse"""
-
-import re
-import glob
-from pathlib import Path
-
-DOCS_ROOT = Path("docs")
-
-# ToolUniverse-specific patterns
+# scripts/validate_documentation.py checks:
 DEPRECATED_PATTERNS = [
     (r"python -m tooluniverse\.server", "tooluniverse-server"),
     (r"600\+?\s+tools", "1000+ tools"),
     (r"750\+?\s+tools", "1000+ tools"),
 ]
-
-def is_false_positive(match, content):
-    """Smart context checking to avoid false positives"""
-    start = max(0, match.start() - 100)
-    end = min(len(content), match.end() + 100)
-    context = content[start:end].lower()
-    
-    # Skip if discussing deprecation itself
-    if any(kw in context for kw in ['deprecated', 'old version', 'migration']):
-        return True
-    
-    # Skip technical values (ports, dimensions, etc.)
-    if any(kw in context for kw in ['width', 'height', 'port', '":"']):
-        return True
-    
-    return False
-
-def validate_file(filepath):
-    """Check one file for issues"""
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    issues = []
-    
-    # Check deprecated patterns
-    for old_pattern, new_text in DEPRECATED_PATTERNS:
-        matches = re.finditer(old_pattern, content)
-        for match in matches:
-            if is_false_positive(match, content):
-                continue
-            
-            line_num = content[:match.start()].count('\n') + 1
-            issues.append({
-                'file': filepath,
-                'line': line_num,
-                'severity': 'HIGH',
-                'found': match.group(),
-                'suggestion': new_text
-            })
-    
-    return issues
-
-# Scan all docs
-all_issues = []
-for doc_file in glob.glob(str(DOCS_ROOT / "**/*.md"), recursive=True):
-    all_issues.extend(validate_file(doc_file))
-
-for doc_file in glob.glob(str(DOCS_ROOT / "**/*.rst"), recursive=True):
-    all_issues.extend(validate_file(doc_file))
-
-# Report
-if all_issues:
-    print(f"❌ Found {len(all_issues)} issues\n")
-    for issue in all_issues:
-        print(f"{issue['file']}:{issue['line']} [{issue['severity']}]")
-        print(f"  Found: {issue['found']}")
-        print(f"  Should be: {issue['suggestion']}\n")
-    exit(1)
-else:
-    print("✅ Documentation validation passed")
-    exit(0)
 ```
 
-### A2. Command Accuracy Check
-
-Test that commands in docs actually work:
-
-```bash
-# Extract and test commands
-grep -r "^\s*\$\s*" docs/ | while read line; do
-    cmd=$(echo "$line" | sed 's/.*\$ //' | cut -d' ' -f1)
-    if ! command -v "$cmd" &> /dev/null; then
-        echo "❌ Command not found: $cmd in $line"
-    fi
-done
-```
-
-### A3. Link Integrity Check
-
-For RST docs:
-
-```python
-def check_rst_links(docs_root):
-    """Validate :doc: references"""
-    pattern = r':doc:`([^`]+)`'
-    
-    for rst_file in glob.glob(f"{docs_root}/**/*.rst", recursive=True):
-        with open(rst_file) as f:
-            content = f.read()
-        
-        matches = re.finditer(pattern, content)
-        for match in matches:
-            ref = match.group(1)
-            
-            # Check if target exists
-            possible = [f"{ref}.rst", f"{ref}.md", f"{ref}/index.rst"]
-            if not any(Path(docs_root, p).exists() for p in possible):
-                print(f"❌ Broken link in {rst_file}: {ref}")
-```
-
-### A4. Terminology Consistency
-
-Track variations and standardize:
-
-```python
-# Define standard terms
-TERMINOLOGY = {
-    'api_endpoint': ['endpoint', 'url', 'route', 'path'],
-    'tool_count': ['tools', 'resources', 'integrations'],
-}
-
-def check_terminology(content):
-    """Find inconsistent terminology"""
-    for standard, variations in TERMINOLOGY.items():
-        counts = {v: content.lower().count(v) for v in variations}
-        if len([c for c in counts.values() if c > 0]) > 2:
-            return f"Inconsistent terminology: {counts}"
-    return None
-```
+---
 
 ## Phase B: ToolUniverse-Specific Audit
 
-### B1. Circular Navigation Check
+**Circular navigation** — trace `index.rst → quickstart → getting_started` manually; no loops allowed.
 
-**Issue**: Documentation pages that reference each other in loops.
+**Tool count** — "1000+ tools" consistently everywhere. Run: `rg "[0-9]+\+?\s+(tools|integrations)" docs/ --no-filename | sort -u`
 
-**Check manually**:
-```bash
-# Find cross-references
-grep -r ":doc:\`" docs/*.rst | grep -E "(quickstart|getting_started|installation)"
+**Auto-generated headers** — `docs/tools/*_tools.rst` and `docs/api/*.rst` must start with `.. AUTO-GENERATED`.
+
+**CLI docs** — every entry under `[project.scripts]` in `pyproject.toml` must appear in `docs/reference/cli_tools.rst`.
+
+**Env vars** — every `os.getenv("TOOLUNIVERSE_*")` in `src/` must appear in `docs/reference/environment_variables.rst`.
+
+---
+
+## RST Code Block Extractor (important)
+
+Always use `re.MULTILINE` (not `re.DOTALL`) for RST blocks to avoid merging adjacent blocks:
+
+```python
+# correct
+re.findall(r"\.\. code-block:: python\n((?:[ \t]+[^\n]*\n|[ \t]*\n)*)", text, re.MULTILINE)
+
+# wrong — merges adjacent blocks
+re.findall(r"\.\..*?code-block.*?python\n((?:[ \t]+.*\n|\n)*)", text, re.DOTALL)
 ```
 
-**Checklist**:
-- [ ] Is there a clear "Start Here" on `docs/index.rst`?
-- [ ] Does navigation follow linear path: index → quickstart → getting_started → guides?
-- [ ] No "you should have completed X first" statements that create dependency loops?
-
-**Common patterns to fix**:
-- `quickstart.rst` → "See getting_started"
-- `getting_started.rst` → "Complete quickstart first"
-
-### B2. Duplicate Content Check
-
-**Common duplicates in ToolUniverse**:
-1. Multiple FAQs: `docs/faq.rst` and `docs/help/faq.rst`
-2. Getting started: `docs/installation.rst`, `docs/quickstart.rst`, `docs/getting_started.rst`
-3. MCP configuration: All files in `docs/guide/building_ai_scientists/`
-
-**Detection**:
-```bash
-# Find MCP config duplication
-rg "MCP.*configuration" docs/ -l | wc -l
-rg "pip install tooluniverse" docs/ -l | wc -l
-```
-
-**Action**: Consolidate or clearly differentiate
-
-### B3. Tool Count Consistency
-
-**Standard**: Use "1000+ tools" consistently.
-
-**Detection**:
-```bash
-# Find all tool count mentions
-rg "[0-9]+\+?\s+(tools|resources|integrations)" docs/ --no-filename | sort -u
-```
-
-**Check**:
-- [ ] Are different numbers used (600, 750, 1195)?
-- [ ] Is "1000+ tools" used consistently?
-- [ ] Exact counts avoided in favor of "1000+"?
-
-### B4. Auto-Generated File Headers
-
-**Auto-generated directories**:
-- `docs/tools/*_tools.rst` (from `generate_config_index.py`)
-- `docs/api/*.rst` (from `sphinx-apidoc`)
-
-**Required header**:
-```rst
-.. AUTO-GENERATED - DO NOT EDIT MANUALLY
-.. Generated by: docs/generate_config_index.py
-.. Last updated: 2024-02-05
-.. 
-.. To modify, edit source files and regenerate.
-```
-
-**Check**:
-```bash
-head -5 docs/tools/*_tools.rst | grep "AUTO-GENERATED"
-```
-
-### B5. CLI Tools Documentation
-
-**Check pyproject.toml for all CLIs**:
-```bash
-grep -A 20 "\[project.scripts\]" pyproject.toml
-```
-
-**Common undocumented**:
-- `tooluniverse-expert-feedback`
-- `tooluniverse-expert-feedback-web`
-- `generate-mcp-tools`
-
-**Action**: Ensure all in `docs/reference/cli_tools.rst`
-
-### B6. Environment Variables
-
-**Discovery**:
-```bash
-# Find all env vars in code
-rg "os\.getenv|os\.environ" src/tooluniverse/ -o | sort -u
-rg "TOOLUNIVERSE_[A-Z_]+" src/tooluniverse/ -o | sort -u
-```
-
-**Categories to document**:
-- Cache: `TOOLUNIVERSE_CACHE_*`
-- Logging: `TOOLUNIVERSE_LOG_*`
-- LLM: `TOOLUNIVERSE_LLM_*`
-- API keys: `*_API_KEY`
-
-**Check**:
-- [ ] Does `docs/reference/environment_variables.rst` exist?
-- [ ] Are variables categorized?
-- [ ] Each has: default, description, example?
-- [ ] Is there `.env.template` at project root?
-
-### B7. ToolUniverse-Specific Jargon
-
-**Terms to define on first use**:
-- Tool Specification
-- EFO ID
-- MCP, SMCP
-- Compact Mode
-- Tool Finder
-- AI Scientist
-
-**Check**:
-- [ ] Is there `docs/glossary.rst`?
-- [ ] Terms defined inline with `:term:` references?
-- [ ] Glossary linked from main index?
-
-### B8. CI/CD Documentation Regeneration
-
-**Required in `.github/workflows/deploy-docs.yml`**:
-```yaml
-- name: Regenerate tool documentation
-  run: |
-    cd docs
-    python generate_config_index.py
-    python generate_remote_tools_docs.py
-    python generate_tool_reference.py
-```
-
-**Check**:
-- [ ] CI/CD regenerates docs before build?
-- [ ] Regeneration happens BEFORE Sphinx build?
-- [ ] `docs/api/` excluded from cache?
-
-## Priority Framework
-
-### Issue Severity
-
-| Severity | Definition | Examples | Timeline |
-|----------|------------|----------|----------|
-| **CRITICAL** | Blocks release | Broken builds, dangerous instructions | Immediate |
-| **HIGH** | Blocks users | Wrong commands, broken setup | Same day |
-| **MEDIUM** | Causes confusion | Inconsistent terminology, unclear examples | Same week |
-| **LOW** | Reduces quality | Long files, minor formatting | Future task |
-
-### Fix Order
-
-1. Run automated validation → Fix HIGH issues
-2. Check circular navigation → Fix CRITICAL loops
-3. Verify tool counts → Standardize to "1000+"
-4. Check auto-generated headers → Add missing
-5. Validate CLI docs → Document all from pyproject.toml
-6. Check env vars → Create reference page
-7. Review jargon → Create/update glossary
-8. Verify CI/CD → Add regeneration steps
+---
 
 ## Validation Checklist
 
-Before considering docs "done":
+All items must pass before the audit is done. A partial pass is not acceptable.
 
-### Accuracy
-- [ ] Automated validation passes
-- [ ] All commands tested
-- [ ] Version numbers current
-- [ ] Counts match reality
-
-### Structure (ToolUniverse-specific)
+**Technical correctness:**
+- [ ] Phase D scan exits 0 — no invalid method calls
+- [ ] `python scripts/test_doc_code_blocks.py` exits 0 — no runtime failures
+- [ ] No `spec['parameters']` without `format="openai"`
+- [ ] Automated validation passes (0 HIGH issues)
+- [ ] All CLIs from `pyproject.toml` documented
 - [ ] No circular navigation
-- [ ] Clear "Start Here" entry point
-- [ ] Linear learning path
-- [ ] Max 2-3 level hierarchy
 
-### Consistency
-- [ ] "1000+ tools" everywhere
-- [ ] Same terminology throughout
-- [ ] Auto-generated files have headers
-- [ ] All CLIs documented
+**Less is more (Apple-style):**
+- [ ] Phase E scan exits 0 — no emojis, no wrong counts, no broken links, no oversized pages
+- [ ] "1000+ tools" used consistently everywhere (not 600+, 750+, 10000+, etc.)
+- [ ] Each per-platform setup page: install link + MCP guide link + setup prompt only (≤15 lines)
+- [ ] No duplicate setup instructions anywhere on the site
+- [ ] Navbar: no "API", "API Keys", "Contribution"; has `aiscientist.tools` link
+- [ ] Homepage "Explore More" grid: ≤4 cards
+- [ ] No concept or section appears verbatim in more than one place
+- [ ] No "See Also" / "Related" section with more than 4 links
 
-### Completeness
-- [ ] All features documented
-- [ ] All CLIs in pyproject.toml covered
-- [ ] All env vars documented
-- [ ] Glossary includes all jargon
+If any item is failing: stop, fix it, re-run the relevant phase, confirm it passes. Do not proceed to the next item until the current one is clean.
 
-## Output: Audit Report
+---
 
-```markdown
-# Documentation Quality Report
+## Reference Files
 
-**Date**: [date]
-**Scope**: Automated validation + ToolUniverse audit
-
-## Executive Summary
-- Files scanned: X
-- Issues found: Y (Critical: A, High: B, Medium: C, Low: D)
-
-## Critical Issues
-1. **[Issue]** - Location: file:line
-   - Problem: [description]
-   - Fix: [action]
-   - Effort: [time]
-
-## Automated Validation Results
-- Deprecated commands: X instances
-- Inconsistent counts: Y instances
-- Broken links: Z instances
-
-## ToolUniverse-Specific Findings
-- Circular navigation: [yes/no]
-- Tool count variations: [list]
-- Missing CLI docs: [list]
-- Auto-generated headers: X missing
-
-## Recommendations
-1. Immediate (today): [list]
-2. This week: [list]
-3. Next sprint: [list]
-
-## Validation Command
-Run `python scripts/validate_documentation.py` to verify fixes
-```
-
-## CI/CD Integration
-
-Add to `.github/workflows/validate-docs.yml`:
-
-```yaml
-name: Validate Documentation
-on: [pull_request]
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run validation
-        run: python scripts/validate_documentation.py
-      - name: Check auto-generated headers
-        run: |
-          for f in docs/tools/*_tools.rst; do
-            if ! head -1 "$f" | grep -q "AUTO-GENERATED"; then
-              echo "Missing header: $f"
-              exit 1
-            fi
-          done
-```
-
-## Common Issues Quick Reference
-
-| Issue | Detection | Fix |
-|-------|-----------|-----|
-| Deprecated command | `rg "old-cmd" docs/` | Replace with `new-cmd` |
-| Wrong tool count | `rg "[0-9]+ tools" docs/` | Change to "1000+ tools" |
-| Circular nav | Manual trace | Remove back-references |
-| Missing header | `head -1 file.rst` | Add AUTO-GENERATED header |
-| Undocumented CLI | Check pyproject.toml | Add to cli_tools.rst |
-| Missing env var | `rg "os.getenv" src/` | Add to env vars reference |
-
-## Best Practices
-
-1. **Automate first** - Build validation before manual audit
-2. **Context matters** - Smart pattern matching avoids false positives
-3. **Fix systematically** - Batch similar issues together
-4. **Validate continuously** - Add to CI/CD pipeline
-5. **ToolUniverse-specific last** - Automated checks catch most issues
-
-## Success Criteria
-
-Documentation quality achieved when:
-- ✅ Automated validation reports 0 HIGH issues
-- ✅ No circular navigation
-- ✅ "1000+ tools" used consistently
-- ✅ All auto-generated files have headers
-- ✅ All CLIs from pyproject.toml documented
-- ✅ All env vars have reference page
-- ✅ Glossary covers all technical terms
-- ✅ CI/CD validates on every PR
+- [API_REFERENCE.md](API_REFERENCE.md) — valid method signatures, wrong-method table, correct patterns
+- [DOCS_STRUCTURE.md](DOCS_STRUCTURE.md) — per-file audit status for all doc files
+- `scripts/test_doc_code_blocks.py` — Phase C live runner

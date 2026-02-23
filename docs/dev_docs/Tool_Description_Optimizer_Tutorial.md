@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [🚀 Quick Start](#-quick-start)
+- [ Quick Start](#-quick-start)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Configuration Parameters](#configuration-parameters)
@@ -16,7 +16,7 @@
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Basic Usage (3 steps)
 
@@ -30,8 +30,8 @@ tu.load_tools()
 # 2. Get tool configuration and run optimizer
 tool_config = tu.get_tool_description("your_tool_name")
 result = tu.run({
-    "name": "ToolDescriptionOptimizer",
-    "arguments": {"tool_config": tool_config}
+   "name": "ToolDescriptionOptimizer",
+   "arguments": {"tool_config": tool_config}
 })
 
 # 3. Check results
@@ -64,12 +64,12 @@ The ToolDescriptionOptimizer is an AI-powered tool that automatically improves t
 
 ## Key Features
 
-### 🎯 **Intelligent Analysis**
+###  **Intelligent Analysis**
 - Tests tools with real inputs to verify description accuracy
 - Identifies and eliminates redundancy between tool and parameter descriptions
 - Removes filler language and meaningless corporate-speak
 
-### 📊 **Quality Evaluation System**
+###  **Quality Evaluation System**
 Multi-criteria scoring (0-10 scale):
 - **Clarity & Understandability**: How easy descriptions are to understand
 - **Accuracy**: How well descriptions match actual behavior
@@ -78,7 +78,7 @@ Multi-criteria scoring (0-10 scale):
 - **User Friendliness**: How helpful descriptions are for users
 - **Redundancy Avoidance**: Proper separation of concerns
 
-### 🔄 **Adaptive Optimization**
+###  **Adaptive Optimization**
 - Configurable iteration limits and quality thresholds
 - Feedback-driven test case generation in later rounds
 - Automatic convergence when quality targets are met
@@ -142,11 +142,11 @@ Multi-criteria scoring (0-10 scale):
 ```
 
 ### Key Improvements Achieved
-- ✅ More accurate representation of actual functionality
-- ✅ Eliminated redundancy with parameter descriptions
-- ✅ Clearer scope indication (multiple formulations and brands)
-- ✅ More precise action verb ("provides" vs "fetch")
-- ✅ Quality score improved from ~5.0 to 7.5/10
+-  More accurate representation of actual functionality
+-  Eliminated redundancy with parameter descriptions
+-  Clearer scope indication (multiple formulations and brands)
+-  More precise action verb ("provides" vs "fetch")
+-  Quality score improved from ~5.0 to 7.5/10
 
 ## Best Practices
 
@@ -207,25 +207,25 @@ Multi-criteria scoring (0-10 scale):
 ```python
 # Development phase - quick feedback
 def dev_optimize(tool_config):
-    return tu.run({
-        "name": "ToolDescriptionOptimizer",
-        "arguments": {
-            "tool_config": tool_config,
-            "max_iterations": 2,
-            "satisfaction_threshold": 7.0
-        }
-    })
+   return tu.run({
+       "name": "ToolDescriptionOptimizer",
+       "arguments": {
+           "tool_config": tool_config,
+           "max_iterations": 2,
+           "satisfaction_threshold": 7.0
+       }
+   })
 
 # Pre-production - thorough review
 def production_optimize(tool_config):
-    return tu.run({
-        "name": "ToolDescriptionOptimizer",
-        "arguments": {
-            "tool_config": tool_config,
-            "max_iterations": 4,
-            "satisfaction_threshold": 8.5
-        }
-    })
+   return tu.run({
+       "name": "ToolDescriptionOptimizer",
+       "arguments": {
+           "tool_config": tool_config,
+           "max_iterations": 4,
+           "satisfaction_threshold": 8.5
+       }
+   })
 ```
 
 ### Maintenance Strategy
@@ -246,28 +246,28 @@ from tooluniverse import ToolUniverse
 import os
 
 def optimize_single_tool(tool_name, quality_target=8.0):
-    """Optimize one tool with custom quality target."""
-    tu = ToolUniverse()
-    tu.load_tools()
+   """Optimize one tool with custom quality target."""
+   tu = ToolUniverse()
+   tu.load_tools()
 
-    tool_config = tu.get_tool_description(tool_name)
-    if not tool_config:
-        print(f"❌ Tool '{tool_name}' not found!")
-        return None
+   tool_config = tu.get_tool_description(tool_name)
+   if not tool_config:
+       print(f"❌ Tool '{tool_name}' not found!")
+       return None
 
-    print(f"🔧 Optimizing {tool_name}...")
-    result = tu.run({
-        "name": "ToolDescriptionOptimizer",
-        "arguments": {
-            "tool_config": tool_config,
-            "max_iterations": 3,
-            "satisfaction_threshold": quality_target,
-            "output_file": f"{tool_name}_optimization.txt"
-        }
-    })
+   print(f"🔧 Optimizing {tool_name}...")
+   result = tu.run({
+       "name": "ToolDescriptionOptimizer",
+       "arguments": {
+           "tool_config": tool_config,
+           "max_iterations": 3,
+           "satisfaction_threshold": quality_target,
+           "output_file": f"{tool_name}_optimization.txt"
+       }
+   })
 
-    print(f"✅ Completed: {result['total_iterations']} rounds, score: {result['final_quality_score']}/10")
-    return result
+   print(f"✅ Completed: {result['total_iterations']} rounds, score: {result['final_quality_score']}/10")
+   return result
 
 # Usage
 optimize_single_tool("FDA_get_active_ingredient_info_by_drug_name", 8.0)
@@ -284,61 +284,61 @@ import os
 from datetime import datetime
 
 def batch_optimize_tools(tool_names, output_dir="batch_optimizations"):
-    """Optimize multiple tools and save results."""
-    tu = ToolUniverse()
-    tu.load_tools()
-    os.makedirs(output_dir, exist_ok=True)
+   """Optimize multiple tools and save results."""
+   tu = ToolUniverse()
+   tu.load_tools()
+   os.makedirs(output_dir, exist_ok=True)
 
-    results = {}
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+   results = {}
+   timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    for tool_name in tool_names:
-        print(f"\n🔧 Processing {tool_name}...")
+   for tool_name in tool_names:
+       print(f"\n🔧 Processing {tool_name}...")
 
-        tool_config = tu.get_tool_description(tool_name)
-        if not tool_config:
-            print(f"❌ Tool '{tool_name}' not found!")
-            continue
+       tool_config = tu.get_tool_description(tool_name)
+       if not tool_config:
+           print(f"❌ Tool '{tool_name}' not found!")
+           continue
 
-        try:
-            result = tu.run({
-                "name": "ToolDescriptionOptimizer",
-                "arguments": {
-                    "tool_config": tool_config,
-                    "max_iterations": 3,
-                    "satisfaction_threshold": 8.0,
-                    "output_file": f"{output_dir}/{tool_name}_{timestamp}.txt"
-                }
-            })
+       try:
+           result = tu.run({
+               "name": "ToolDescriptionOptimizer",
+               "arguments": {
+                   "tool_config": tool_config,
+                   "max_iterations": 3,
+                   "satisfaction_threshold": 8.0,
+                   "output_file": f"{output_dir}/{tool_name}_{timestamp}.txt"
+               }
+           })
 
-            results[tool_name] = {
-                'success': True,
-                'iterations': result['total_iterations'],
-                'final_score': result['final_quality_score'],
-                'satisfied': result['achieved_satisfaction']
-            }
-            print(f"✅ {tool_name}: {result['final_quality_score']}/10 in {result['total_iterations']} rounds")
+           results[tool_name] = {
+               'success': True,
+               'iterations': result['total_iterations'],
+               'final_score': result['final_quality_score'],
+               'satisfied': result['achieved_satisfaction']
+           }
+           print(f"✅ {tool_name}: {result['final_quality_score']}/10 in {result['total_iterations']} rounds")
 
-        except Exception as e:
-            results[tool_name] = {'success': False, 'error': str(e)}
-            print(f"❌ {tool_name}: Failed - {e}")
+       except Exception as e:
+           results[tool_name] = {'success': False, 'error': str(e)}
+           print(f"❌ {tool_name}: Failed - {e}")
 
-    # Summary report
-    print(f"\n📊 Batch Optimization Summary:")
-    successful = [name for name, result in results.items() if result.get('success')]
-    print(f"✅ Successful: {len(successful)}/{len(tool_names)}")
+   # Summary report
+   print(f"\n📊 Batch Optimization Summary:")
+   successful = [name for name, result in results.items() if result.get('success')]
+   print(f"✅ Successful: {len(successful)}/{len(tool_names)}")
 
-    if successful:
-        avg_score = sum(results[name]['final_score'] for name in successful) / len(successful)
-        print(f"📈 Average quality score: {avg_score:.1f}/10")
+   if successful:
+       avg_score = sum(results[name]['final_score'] for name in successful) / len(successful)
+       print(f"📈 Average quality score: {avg_score:.1f}/10")
 
-    return results
+   return results
 
 # Usage
 tools_to_optimize = [
-    "FDA_get_active_ingredient_info_by_drug_name",
-    "ChEMBL_get_drug_by_chembl_id",
-    "EuropePMC_search_articles"
+   "FDA_get_active_ingredient_info_by_drug_name",
+   "ChEMBL_get_drug_by_chembl_id",
+   "EuropePMC_search_articles"
 ]
 batch_optimize_tools(tools_to_optimize)
 ```
@@ -355,53 +355,53 @@ import os
 from typing import Dict, List, Optional
 
 class ToolOptimizationManager:
-    """Advanced tool optimization management with reporting."""
+   """Advanced tool optimization management with reporting."""
 
-    def __init__(self, output_dir: str = "optimizations"):
-        self.tu = ToolUniverse()
-        self.tu.load_tools()
-        self.output_dir = output_dir
-        os.makedirs(output_dir, exist_ok=True)
+   def __init__(self, output_dir: str = "optimizations"):
+       self.tu = ToolUniverse()
+       self.tu.load_tools()
+       self.output_dir = output_dir
+       os.makedirs(output_dir, exist_ok=True)
 
-    def optimize_with_strategy(self, tool_name: str, strategy: str = "standard") -> Optional[Dict]:
-        """Optimize tool with predefined strategies."""
+   def optimize_with_strategy(self, tool_name: str, strategy: str = "standard") -> Optional[Dict]:
+       """Optimize tool with predefined strategies."""
 
-        strategies = {
-            "quick": {"max_iterations": 2, "satisfaction_threshold": 7.5},
-            "standard": {"max_iterations": 3, "satisfaction_threshold": 8.0},
-            "thorough": {"max_iterations": 5, "satisfaction_threshold": 8.5}
-        }
+       strategies = {
+           "quick": {"max_iterations": 2, "satisfaction_threshold": 7.5},
+           "standard": {"max_iterations": 3, "satisfaction_threshold": 8.0},
+           "thorough": {"max_iterations": 5, "satisfaction_threshold": 8.5}
+       }
 
-        if strategy not in strategies:
-            raise ValueError(f"Unknown strategy: {strategy}")
+       if strategy not in strategies:
+           raise ValueError(f"Unknown strategy: {strategy}")
 
-        config = strategies[strategy]
-        tool_config = self.tu.get_tool_description(tool_name)
+       config = strategies[strategy]
+       tool_config = self.tu.get_tool_description(tool_name)
 
-        if not tool_config:
-            print(f"Tool '{tool_name}' not found!")
-            return None
+       if not tool_config:
+           print(f"Tool '{tool_name}' not found!")
+           return None
 
-        result = self.tu.run({
-            "name": "ToolDescriptionOptimizer",
-            "arguments": {
-                "tool_config": tool_config,
-                "output_file": f"{self.output_dir}/{tool_name}_{strategy}.txt",
-                **config
-            }
-        })
+       result = self.tu.run({
+           "name": "ToolDescriptionOptimizer",
+           "arguments": {
+               "tool_config": tool_config,
+               "output_file": f"{self.output_dir}/{tool_name}_{strategy}.txt",
+               **config
+           }
+       })
 
-        return result
+       return result
 
-    def compare_strategies(self, tool_name: str) -> Dict:
-        """Compare different optimization strategies for a tool."""
-        results = {}
+   def compare_strategies(self, tool_name: str) -> Dict:
+       """Compare different optimization strategies for a tool."""
+       results = {}
 
-        for strategy in ["quick", "standard", "thorough"]:
-            print(f"Testing {strategy} strategy...")
-            results[strategy] = self.optimize_with_strategy(tool_name, strategy)
+       for strategy in ["quick", "standard", "thorough"]:
+           print(f"Testing {strategy} strategy...")
+           results[strategy] = self.optimize_with_strategy(tool_name, strategy)
 
-        return results
+       return results
 
 # Usage
 manager = ToolOptimizationManager()
@@ -419,11 +419,11 @@ comparison = manager.compare_strategies("ChEMBL_get_drug_by_chembl_id")
 
 The ToolDescriptionOptimizer provides automated, AI-powered enhancement of tool documentation with:
 
-- **🎯 Precision**: Matches descriptions to actual tool behavior through testing
-- **🔄 Iteration**: Multi-round improvement with feedback-driven enhancement
-- **📊 Measurement**: Objective quality scoring across 6 key criteria
-- **🛠️ Flexibility**: Configurable for different quality targets and use cases
-- **📝 Documentation**: Comprehensive reporting of optimization process
+- ** Precision**: Matches descriptions to actual tool behavior through testing
+- ** Iteration**: Multi-round improvement with feedback-driven enhancement
+- ** Measurement**: Objective quality scoring across 6 key criteria
+- **️ Flexibility**: Configurable for different quality targets and use cases
+- ** Documentation**: Comprehensive reporting of optimization process
 
 ### Quick Reference
 - **Development**: `max_iterations=2, satisfaction_threshold=7.5`

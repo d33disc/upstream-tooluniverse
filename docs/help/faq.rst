@@ -6,7 +6,7 @@ This page contains detailed answers to frequently asked questions about ToolUniv
 .. tip::
    **Need a quick answer?**
    
-   For brief answers to the most common questions, see :doc:`../faq`. This page provides comprehensive information with detailed explanations, troubleshooting tips, and advanced topics.
+   For brief answers to the most common questions, see :doc:`faq`. This page provides comprehensive information with detailed explanations, troubleshooting tips, and advanced topics.
 
 General Questions
 -----------------
@@ -254,7 +254,7 @@ How do I contribute?
 3. Add your changes with tests
 4. Submit a pull request
 
-See our :doc:`about/contributing` Tutorial for detailed instructions.
+See our :doc:`../about/contributing` Tutorial for detailed instructions.
 
 Performance
 -----------
@@ -282,7 +282,7 @@ How can I speed up queries?
              {"name": "tool1", "arguments": {"id": "1"}},
              {"name": "tool1", "arguments": {"id": "2"}},
          ]
-         results = tu.run_batch(queries)
+         results = tu.run(queries, max_workers=4)
 
    .. tab:: Async Operations
 
@@ -291,7 +291,7 @@ How can I speed up queries?
          import asyncio
 
          async def main():
-             results = await tu.run_async(query)
+             results = await tu.run(query)  # run() is context-aware
 
          asyncio.run(main())
 
@@ -359,7 +359,7 @@ Network connectivity issues?
 
    .. code-block:: python
 
-      tu = ToolUniverse(timeout=30)
+      tu = ToolUniverse()  # timeout is set per HTTP request, not at the ToolUniverse level
 
 Still Having Issues?
 --------------------

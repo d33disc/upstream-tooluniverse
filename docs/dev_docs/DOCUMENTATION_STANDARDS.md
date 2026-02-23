@@ -35,24 +35,24 @@ All auto-generated files **MUST** have this header:
 To modify auto-generated documentation:
 
 1. **Edit source data**:
-   - For API docs: Update Python docstrings in `src/tooluniverse/`
-   - For tool docs: Update JSON configs in `src/tooluniverse/data/`
+  - For API docs: Update Python docstrings in `src/tooluniverse/`
+  - For tool docs: Update JSON configs in `src/tooluniverse/data/`
 
 2. **Regenerate documentation**:
-   ```bash
-   cd docs
-   # For tool documentation
-   python generate_config_index.py
-   python generate_tool_reference.py
-   
-   # For API documentation
-   sphinx-apidoc -f -o api ../src/tooluniverse
-   ```
+  ```bash
+  cd docs
+  # For tool documentation
+  python generate_config_index.py
+  python generate_tool_reference.py
+
+  # For API documentation
+  sphinx-apidoc -f -o api ../src/tooluniverse
+  ```
 
 3. **Commit both**:
-   - Commit source changes (docstrings or JSON)
-   - Commit generated documentation
-   - CI/CD will verify consistency
+  - Commit source changes (docstrings or JSON)
+  - Commit generated documentation
+  - CI/CD will verify consistency
 
 ### Manual Documentation
 
@@ -70,7 +70,7 @@ All other `.rst` and `.md` files are manually maintained:
 
 **Standard**: Use `1000+ tools` consistently across documentation.
 
-- Actual count (as of latest): 1195 tools
+- Actual count (as of latest): 1962 tools
 - Use rounded public-facing number for simplicity
 - Update only when crossing major milestones (e.g., 1500+ tools)
 
@@ -84,14 +84,14 @@ All other `.rst` and `.md` files are manually maintained:
 
 **Standard**: Always use CLI commands, not module invocations.
 
-✅ **Correct**:
+**Correct**:
 ```bash
 tooluniverse-smcp
 tooluniverse-smcp-stdio
 tooluniverse-doctor
 ```
 
-❌ **Incorrect**:
+Incorrect:
 ```bash
 python -m tooluniverse.smcp_server
 python -m tooluniverse.doctor
@@ -121,13 +121,13 @@ python -m tooluniverse.doctor
 **STDIO (Desktop Apps)**:
 ```json
 {
-  "mcpServers": {
-    "tooluniverse": {
-      "command": "tooluniverse-smcp-stdio",
-      "args": ["--compact-mode"],
-      "timeout": 600
-    }
-  }
+ "mcpServers": {
+   "tooluniverse": {
+     "command": "tooluniverse-smcp-stdio",
+     "args": ["--compact-mode"],
+     "timeout": 600
+   }
+ }
 }
 ```
 
@@ -142,8 +142,8 @@ Use includes from `docs/_templates/mcp_config_snippets.rst` for consistency:
 
 ```rst
 .. include:: ../_templates/mcp_config_snippets.rst
-   :start-after: .. _mcp-basic-config:
-   :end-before: .. _mcp-custom-port:
+  :start-after: .. _mcp-basic-config:
+  :end-before: .. _mcp-custom-port:
 ```
 
 ## File Organization
@@ -175,7 +175,7 @@ docs/
 ├── api/                       # Auto-generated API docs
 ├── tools/                     # Auto-generated tool docs
 └── _templates/                # Reusable snippets
-    └── mcp_config_snippets.rst
+   └── mcp_config_snippets.rst
 ```
 
 ### Navigation Hierarchy
@@ -203,9 +203,9 @@ Major features **MUST** include "Why" section explaining:
 - **Use cases**: When to use vs when to skip?
 
 **Examples**:
-- ✅ `docs/guide/mcp_support.rst` - "Why Use MCP?"
-- ✅ `docs/guide/compact_mode.rst` - "Why Use Compact Mode?"
-- ✅ `docs/guide/cache_system.rst` - "Why Use Caching?"
+-  `docs/guide/mcp_support.rst` - "Why Use MCP?"
+-  `docs/guide/compact_mode.rst` - "Why Use Compact Mode?"
+-  `docs/guide/cache_system.rst` - "Why Use Caching?"
 
 ### Jargon Definitions
 
@@ -225,21 +225,21 @@ Add terms to `docs/glossary.rst` for reference.
 
 Use **real data** in examples:
 
-✅ **Good**:
+**Good**:
 ```python
 # Real UniProt accession for amyloid precursor protein
 result = tu.run({
-    "name": "UniProt_get_entry_by_accession",
-    "arguments": {"accession": "P05067"}
+   "name": "UniProt_get_entry_by_accession",
+   "arguments": {"accession": "P05067"}
 })
 ```
 
-❌ **Bad**:
+**Bad**:
 ```python
 # Placeholder - unhelpful
 result = tu.run({
-    "name": "SomeTool",
-    "arguments": {"id": "XXXXX"}
+   "name": "SomeTool",
+   "arguments": {"id": "XXXXX"}
 })
 ```
 
@@ -271,11 +271,11 @@ CI/CD **MUST** regenerate auto-generated docs:
 ```yaml
 # .github/workflows/deploy-docs.yml
 - name: Regenerate tool documentation
-  run: |
-    cd docs
-    python generate_config_index.py
-    python generate_remote_tools_docs.py
-    python generate_tool_reference.py
+ run: |
+   cd docs
+   python generate_config_index.py
+   python generate_remote_tools_docs.py
+   python generate_tool_reference.py
 ```
 
 ### Validation
@@ -340,32 +340,32 @@ Use appropriate admonition types:
 
 ```rst
 .. note::
-   Informational content
+  Informational content
 
 .. tip::
-   Helpful suggestions
+  Helpful suggestions
 
 .. warning::
-   Caution about potential issues
+  Caution about potential issues
 
 .. important::
-   Critical information
+  Critical information
 
 .. seealso::
-   Related content links
+  Related content links
 ```
 
 ### Cross-References
 
 Always use Sphinx cross-references, not hardcoded links:
 
-✅ **Good**:
+**Good**:
 ```rst
 See :doc:`installation` for setup instructions.
 See :ref:`mcp-basic-config` for configuration.
 ```
 
-❌ **Bad**:
+**Bad**:
 ```rst
 See [installation.html](installation.html) for setup.
 ```
@@ -376,12 +376,12 @@ See [installation.html](installation.html) for setup.
 
 Every 3 months:
 
-1. ✅ Run validation scripts
-2. ✅ Check for outdated content
-3. ✅ Update tool counts if needed
-4. ✅ Review navigation flow
-5. ✅ Test all code examples
-6. ✅ Update "What's New" section
+1.  Run validation scripts
+2.  Check for outdated content
+3.  Update tool counts if needed
+4.  Review navigation flow
+5.  Test all code examples
+6.  Update "What's New" section
 
 ### When to Update
 
@@ -399,10 +399,10 @@ Every 3 months:
 
 ### Version Control
 
-- ✅ Commit documentation with related code changes
-- ✅ Use descriptive commit messages: "docs: add CLI tools reference"
-- ✅ Include "Closes #123" for issue-related docs
-- ❌ Don't commit without testing locally first
+-  Commit documentation with related code changes
+-  Use descriptive commit messages: "docs: add CLI tools reference"
+-  Include "Closes #123" for issue-related docs
+-  Don't commit without testing locally first
 
 ## Contact & Questions
 

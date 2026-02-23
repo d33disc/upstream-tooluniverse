@@ -4,8 +4,8 @@ CLI Tools Reference
 ToolUniverse provides several command-line tools for server management, diagnostics, and data management.
 
 .. contents:: Table of Contents
-   :local:
-   :depth: 2
+ :local:
+ :depth: 2
 
 MCP Server Commands
 -------------------
@@ -91,6 +91,17 @@ Start SMCP server with STDIO transport for desktop AI applications (Claude Deskt
 
 **See also**: :doc:`../guide/building_ai_scientists/claude_desktop`
 
+tooluniverse-mcp
+~~~~~~~~~~~~~~~~
+
+Alias for ``tooluniverse-smcp`` - starts the MCP HTTP/SSE server.
+
+**Usage**::
+
+   tooluniverse-mcp [OPTIONS]
+
+This command is identical to ``tooluniverse-smcp`` and provided for compatibility with MCP-first workflows.
+
 tooluniverse-smcp-server
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -162,26 +173,26 @@ Health check tool that diagnoses ToolUniverse installation and tool availability
 
 **What it checks**:
 
-- ✅ ToolUniverse installation and imports
-- ✅ Tool loading status (available vs unavailable)
-- ✅ Missing dependencies for specific tools
-- ✅ API key configuration (with ``--check-keys``)
+- ToolUniverse installation and imports
+- Tool loading status (available vs unavailable)
+- Missing dependencies for specific tools
+- API key configuration (with ``--check-keys``)
 
 **Example Output**::
 
-   🔍 Checking ToolUniverse health...
+    Checking ToolUniverse health...
    
-   📊 Total tools: 1195
-   ✅ Available: 1150
-   ❌ Unavailable: 45
+    Total tools: 1195
+    Available: 1150
+    Unavailable: 45
    
-   ⚠️  Unavailable tools:
+   ️  Unavailable tools:
    
-     ❌ BioBERT_ner
+      BioBERT_ner
         Error: No module named 'transformers'
         Fix: pip install transformers
    
-   💡 Bulk fix command:
+    Bulk fix command:
       pip install transformers torch biopython
 
 **Use cases**:
@@ -477,7 +488,7 @@ Command not found
 See Also
 --------
 
-- :doc:`../installation` - Installation instructions
+- :doc:`../guide/python_guide` - Installation and Python API guide
 - :doc:`../guide/building_ai_scientists/mcp_support` - MCP integration guide
 - :doc:`../help/troubleshooting` - Troubleshooting guide
 - :doc:`environment_variables` - Environment variables reference

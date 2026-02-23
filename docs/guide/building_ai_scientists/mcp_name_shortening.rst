@@ -2,8 +2,8 @@
 MCP Tool Name Shortening
 ==========================================
 
-**Version:** 1.0  
-**Status:** Production Ready ✅
+**Version:** 1.0 
+**Status:** Production Ready 
 
 Overview
 ========
@@ -49,10 +49,10 @@ The algorithm intelligently truncates tool names by:
 1. **Splitting by underscores** to identify words
 2. **Preserving category prefix** (first word): ``FDA``, ``UniProt``, ``euhealthinfo``
 3. **Truncating subsequent words**:
-   
-   - Short words (≤3 chars) kept intact: ``by``, ``get``, ``on``, ``or``, ``for``
-   - Medium words (4-6 chars): first 4 chars: ``drug`` → ``drug``
-   - Long words (>6 chars): first 4 chars: ``consultation`` → ``cons``
+ 
+ - Short words (≤3 chars) kept intact: ``by``, ``get``, ``on``, ``or``, ``for``
+ - Medium words (4-6 chars): first 4 chars: ``drug`` → ``drug``
+ - Long words (>6 chars): first 4 chars: ``consultation`` → ``cons``
 
 4. **Handling collisions**: Appends numeric suffix if shortened names clash
 
@@ -83,7 +83,7 @@ Examples
 When to Use This Feature
 =========================
 
-✅ USE in These Scenarios
+ USE in These Scenarios
 --------------------------
 
 MCP Integration (Automatic)
@@ -130,10 +130,10 @@ Custom MCP Server Implementation
     tu = ToolUniverse(enable_name_shortening=True)
     tu.load_tools()
 
-    # Get shortened names for MCP exposure
+    # Names are automatically shortened during MCP exposure
+    # Access all tool names (already shortened if enable_name_shortening=True)
     for tool_name in tu.all_tool_dict.keys():
-        short_name = tu.get_exposed_name(tool_name, max_length=55)
-        # Register tool with MCP using short_name
+        print(tool_name)  # Names fit within MCP length limits automatically
 
 External API Integration with Length Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,7 +147,7 @@ External API Integration with Length Constraints
 When NOT to Use This Feature
 =============================
 
-❌ DO NOT USE in These Scenarios
+ DO NOT USE in These Scenarios
 ---------------------------------
 
 Direct Python API Usage (Default)
@@ -243,15 +243,12 @@ If you're using ToolUniverse directly in Python:
     tu = ToolUniverse(enable_name_shortening=True)
     tu.load_tools()
 
-    # Get shortened name for external use
+    # Name shortening is applied automatically during MCP server exposure
+    # When enable_name_shortening=True, tool names are shortened to fit MCP limits
     long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-    short_name = tu.get_exposed_name(long_name, max_length=55)
-    print(short_name)
-    # Output: "FDA_get_info_on_cond_for_doct_cons_by_drug_name"
 
-    # Execute tools with either name - both work transparently!
-    tu.run_one_function({"name": long_name, "arguments": {...}})    # Original works
-    tu.run_one_function({"name": short_name, "arguments": {...}})   # Shortened works
+    # Execute tools using their full original name — ToolUniverse handles resolution
+    tu.run_one_function({"name": long_name, "arguments": {}})
 
 API Reference
 =============
@@ -276,34 +273,6 @@ ToolUniverse Constructor
 
     tu = ToolUniverse(enable_name_shortening=True)
 
-get_exposed_name()
-------------------
-
-Get the name that should be exposed externally (e.g., to MCP clients).
-
-.. code-block:: python
-
-    tu.get_exposed_name(tool_name: str, max_length: int = 55) -> str
-
-**Parameters:**
-
-- ``tool_name`` (str): Original tool name
-- ``max_length`` (int): Maximum allowed length (default: 55 for ``mcp__tu__`` prefix)
-
-**Returns:**
-
-- str: Shortened name if ``enable_name_shortening=True``, otherwise original name
-
-**Example:**
-
-.. code-block:: python
-
-    tu = ToolUniverse(enable_name_shortening=True)
-    tu.load_tools()
-
-    long_name = "FDA_get_info_on_conditions_for_doctor_consultation_by_drug_name"
-    exposed = tu.get_exposed_name(long_name)
-    # Returns: "FDA_get_info_on_cond_for_doct_cons_by_drug_name"
 
 run_one_function()
 ------------------
@@ -371,34 +340,34 @@ Known Limitations
 -----------------
 
 1. **Maximum 999 Collisions per Base Name**
-   
-   - Collision handling uses numeric suffixes (``_2``, ``_3``, ..., ``_999``)
-   - Extremely unlikely in practice
+ 
+ - Collision handling uses numeric suffixes (``_2``, ``_3``, ..., ``_999``)
+ - Extremely unlikely in practice
 
 2. **Shortened Names May Be Ambiguous**
-   
-   - Different full names may shorten to similar results
-   - Collision handling adds suffixes to ensure uniqueness
+ 
+ - Different full names may shorten to similar results
+ - Collision handling adds suffixes to ensure uniqueness
 
 3. **No Shortening for Query Methods**
-   
-   - Methods like ``get_tool_info()`` still use original names
-   - No concrete use case for shortened names in queries yet
+ 
+ - Methods like ``get_tool_info()`` still use original names
+ - No concrete use case for shortened names in queries yet
 
 4. **Fixed Shortening Algorithm**
-   
-   - Algorithm is deterministic and not customizable per-tool
-   - Designed to preserve meaning while maximizing uniqueness
+ 
+ - Algorithm is deterministic and not customizable per-tool
+ - Designed to preserve meaning while maximizing uniqueness
 
 Edge Cases Handled
 ------------------
 
-✅ Collision handling - Numeric suffixes added  
-✅ Very short names - Returned unchanged  
-✅ Already at limit - Returned unchanged  
-✅ Non-ASCII characters - Handled correctly  
-✅ Empty strings - Handled gracefully  
-✅ Repeated calls - Cached for consistency  
+ Collision handling - Numeric suffixes added 
+ Very short names - Returned unchanged 
+ Already at limit - Returned unchanged 
+ Non-ASCII characters - Handled correctly 
+ Empty strings - Handled gracefully 
+ Repeated calls - Cached for consistency 
 
 Performance
 ===========
@@ -515,12 +484,10 @@ Validate MCP Compatibility
     tu = ToolUniverse(enable_name_shortening=True)
     tu.load_tools()
 
-    # Verify all tools fit
+    # Verify all tools fit within MCP prefix + name limits
     mcp_prefix = "mcp__tu__"
     for tool_name in tu.all_tool_dict.keys():
-        short_name = tu.get_exposed_name(tool_name, max_length=55)
-        full_mcp_name = mcp_prefix + short_name
-        
+        full_mcp_name = mcp_prefix + tool_name
         assert len(full_mcp_name) <= 64, f"Too long: {full_mcp_name}"
 
 Troubleshooting
@@ -556,7 +523,7 @@ Key Takeaways
 4. **Simple implementation** - 380 lines, well-tested
 5. **Production ready** - All tests passing, validated with real tools
 
-✅ When to Use
+ When to Use
 --------------
 
 - **MCP integration** (automatic)
@@ -564,7 +531,7 @@ Key Takeaways
 - **External systems with name length limits**
 - **Testing and validation**
 
-❌ When NOT to Use
+ When NOT to Use
 ------------------
 
 - **Direct Python API** (no constraints)
