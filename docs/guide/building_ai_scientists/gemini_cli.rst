@@ -46,7 +46,7 @@ Setup Steps
         "mcpServers": {
           "tooluniverse": {
             "command": "uvx",
-            "args": ["tooluniverse"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {
               "PYTHONIOENCODING": "utf-8"
             }
@@ -140,7 +140,7 @@ Advanced Configuration
         "mcpServers": {
           "tooluniverse": {
             "command": "uvx",
-            "args": ["tooluniverse"],
+            "args": ["--refresh", "tooluniverse"],
             "env": {
               "PYTHONIOENCODING": "utf-8",
               "NCBI_API_KEY": "your_key",

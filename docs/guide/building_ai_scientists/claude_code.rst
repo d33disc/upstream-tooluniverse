@@ -140,10 +140,6 @@ Troubleshooting
       uvx --version
       uvx tooluniverse --help
 
-.. dropdown:: ⚠️ Too many tools warning
-   :color: warning
-
-   Use ``--compact-mode`` flag (see Step 1 advanced config)
 
 Next Steps
 ----------
