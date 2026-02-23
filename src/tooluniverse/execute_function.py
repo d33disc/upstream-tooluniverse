@@ -307,6 +307,7 @@ class ToolUniverse:
         enable_name_shortening: bool = False,
         space: Optional[str] = None,
         workspace: Optional[str] = None,
+        use_global: bool = False,
     ):
         """
         Initialize the ToolUniverse with tool file configurations.
@@ -331,7 +332,10 @@ class ToolUniverse:
                                    When provided, ``load_space()`` is called after initialization.
             workspace (str, optional): Path to the local workspace directory for user-defined
                                        tools. Overrides the ``TOOLUNIVERSE_HOME`` environment
-                                       variable and the default ``~/.tooluniverse`` directory.
+                                       variable and the default ``./.tooluniverse`` directory.
+            use_global (bool, optional): When True, use the global ``~/.tooluniverse`` directory
+                                         as the default workspace instead of ``./.tooluniverse``.
+                                         Has no effect if ``workspace`` or ``TOOLUNIVERSE_HOME`` is set.
         """
         # Set log level if specified
         if log_level is not None:
@@ -440,28 +444,54 @@ class ToolUniverse:
         self.tools = ToolNamespace(self)
 
         # Phase 5 & 6 – resolve workspace directory
-        # Priority: workspace= param → TOOLUNIVERSE_HOME env → ~/.tooluniverse
-        self._workspace_dir: Optional[Path] = self._resolve_workspace(workspace)
+        # Priority: workspace= param → TOOLUNIVERSE_HOME env → ./.tooluniverse (local)
+        # Use ~/.tooluniverse when use_global=True and no explicit workspace is set.
+        self._workspace_dir: Path = self._resolve_workspace(workspace, use_global)
 
-        # Phase 5 – auto-load Space if specified
-        # Priority: space= param → TOOLUNIVERSE_SPACE env var
+        # Read workspace space.yaml (if present) as the base config for this workspace.
+        # This config is used as base when --load merges on top, or auto-applied when no
+        # explicit space is specified.
+        self._workspace_space_config: Optional[dict] = None
+        _ws_space_yaml = self._workspace_dir / "space.yaml"
+        if _ws_space_yaml.exists():
+            try:
+                import yaml as _yaml
+                with open(_ws_space_yaml, "r", encoding="utf-8") as _f:
+                    self._workspace_space_config = _yaml.safe_load(_f) or {}
+            except Exception as _exc:
+                self.logger.debug(f"Could not read workspace space.yaml: {_exc}")
+
+        # Phase 5 – auto-load Space
+        # Priority: space= param → TOOLUNIVERSE_SPACE env var → workspace space.yaml
         effective_space = space or os.getenv("TOOLUNIVERSE_SPACE")
         if effective_space:
             try:
+                # load_space() will merge workspace space.yaml as base if present
                 self.load_space(effective_space)
                 self.logger.info(f"Auto-loaded Space: {effective_space}")
             except Exception as e:
                 self.logger.warning(f"Failed to auto-load Space '{effective_space}': {e}")
+        elif self._workspace_space_config is not None:
+            try:
+                # No explicit space given — auto-apply workspace space.yaml directly
+                self.load_space(str(_ws_space_yaml), _merge_workspace=False)
+                self.logger.info(f"Auto-loaded workspace space.yaml: {_ws_space_yaml}")
+            except Exception as e:
+                self.logger.warning(f"Failed to auto-load workspace space.yaml: {e}")
 
     @staticmethod
-    def _resolve_workspace(workspace: Optional[str]) -> Optional[Path]:
+    def _resolve_workspace(workspace: Optional[str], use_global: bool = False) -> Path:
         """
-        Resolve the effective workspace directory from the given parameter or env vars.
+        Resolve the effective workspace directory.
 
         Priority order:
-        1. ``workspace`` parameter (if provided)
-        2. ``TOOLUNIVERSE_HOME`` environment variable
-        3. ``None`` (caller falls back to ~/.tooluniverse + ./.tooluniverse defaults)
+        1. ``workspace`` parameter (if provided) — directory is created if absent
+        2. ``TOOLUNIVERSE_HOME`` environment variable — directory is created if absent
+        3. ``~/.tooluniverse`` when ``use_global=True``
+        4. ``./.tooluniverse`` (current directory, default local mode)
+
+        The default directories (3 & 4) are NOT auto-created; if they do not exist
+        no workspace tools are loaded and workspace space.yaml is silently skipped.
         """
         if workspace:
             p = Path(workspace)
@@ -472,7 +502,12 @@ class ToolUniverse:
             p = Path(env_home)
             p.mkdir(parents=True, exist_ok=True)
             return p
-        return None
+        if use_global:
+            try:
+                return Path.home() / ".tooluniverse"
+            except RuntimeError:
+                pass  # fall through to local default
+        return Path.cwd() / ".tooluniverse"
 
     def register_custom_tool(
         self,
@@ -1172,13 +1207,11 @@ class ToolUniverse:
 
     def _get_user_tool_files(self):
         """
-        Return (python_files, json_files) from the configured workspace directories.
+        Return (python_files, json_files) from the configured workspace directory.
 
-        When ``self._workspace_dir`` is set (via ``workspace=`` param or
-        ``TOOLUNIVERSE_HOME`` env var) only that single directory is scanned.
-        Otherwise the default behaviour applies: both ``~/.tooluniverse`` and
-        ``./.tooluniverse`` are scanned (global first so local files win on
-        name collision during deduplication).
+        ``self._workspace_dir`` is always set (defaults to ``./.tooluniverse`` for
+        local mode, or ``~/.tooluniverse`` when ``use_global=True``).  If the
+        directory does not exist, an empty list pair is returned.
 
         Supports two layout conventions:
         - Flat: ``*.py`` / ``*.json`` directly in the workspace root
@@ -4111,7 +4144,7 @@ class ToolUniverse:
         self.load_tools(include_tools=tool_names)
         return len(self.all_tools) - original_count
 
-    def load_space(self, uri: str, **kwargs) -> Dict[str, Any]:
+    def load_space(self, uri: str, _merge_workspace: bool = True, **kwargs) -> Dict[str, Any]:
         """
         Load Space configuration and apply it to the ToolUniverse instance.
 
@@ -4119,13 +4152,20 @@ class ToolUniverse:
         sources (HuggingFace, local files, HTTP URLs) and applies the tool settings
         to the current instance.
 
+        When a workspace ``space.yaml`` exists and ``_merge_workspace=True`` (the
+        default), the workspace config is used as the base and the loaded config is
+        deep-merged on top — so any key in the loaded config overrides the workspace
+        default.
+
         Args:
             uri: Space URI (e.g., "hf:user/repo", "./config.yaml", "https://example.com/config.yaml")
+            _merge_workspace: Whether to merge the workspace space.yaml as a base config.
+                              Set to False when auto-applying the workspace yaml itself.
             **kwargs: Additional parameters to override Space configuration
                      (e.g., exclude_tools=["tool1"], include_tools=["tool2"])
 
         Returns:
-            dict: The loaded Space configuration
+            dict: The loaded (and possibly merged) Space configuration
 
         Examples:
             # Load from HuggingFace
@@ -4139,10 +4179,28 @@ class ToolUniverse:
         """
         # Lazy import to avoid circular import issues
         from .space import SpaceLoader
+        from .space.validator import validate_with_schema
+        import yaml as _yaml
 
-        # Load Space configuration
         loader = SpaceLoader()
-        config = loader.load(uri)
+
+        # If workspace has a space.yaml and merging is requested, use it as the base
+        # config and deep-merge the explicit URI on top (override wins for same keys).
+        if _merge_workspace and self._workspace_space_config:
+            raw_config = loader._load_raw(uri)
+            raw_config = loader._resolve_extends(raw_config)
+            merged_raw = SpaceLoader._deep_merge(self._workspace_space_config, raw_config)
+            yaml_content = _yaml.dump(merged_raw, default_flow_style=False, allow_unicode=True)
+            is_valid, errors, config = validate_with_schema(yaml_content, fill_defaults_flag=True)
+            if not is_valid:
+                error_msg = "Merged Space configuration validation failed:\n" + "\n".join(
+                    f"  - {e}" for e in errors
+                )
+                raise ValueError(error_msg)
+            self.logger.debug(f"Space '{uri}' merged with workspace space.yaml")
+        else:
+            # Load Space configuration normally
+            config = loader.load(uri)
 
         # Extract tool configuration
         tools_config = config.get("tools", {})

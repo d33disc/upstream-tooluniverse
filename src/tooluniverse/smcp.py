@@ -304,6 +304,8 @@ class SMCP(FastMCP):
         include_tool_types: Optional[List[str]] = None,
         exclude_tool_types: Optional[List[str]] = None,
         space: Optional[Union[str, List[str]]] = None,
+        workspace: Optional[str] = None,
+        use_global: bool = False,
         auto_expose_tools: bool = True,
         search_enabled: bool = True,
         max_workers: int = 5,
@@ -339,6 +341,8 @@ class SMCP(FastMCP):
                 hook_config=hook_config,
                 hook_type=hook_type,
                 enable_name_shortening=True,
+                workspace=workspace,
+                use_global=use_global,
             )
 
         # Configuration

@@ -67,6 +67,21 @@ Examples:
   --load "https://example.com/config.yaml"
         """,
     )
+    space_group.add_argument(
+        "--workspace",
+        "-w",
+        type=str,
+        metavar="DIR",
+        help="Local workspace directory to scan for tool files (*.py and *.json). "
+        "Overrides TOOLUNIVERSE_HOME environment variable.",
+    )
+    space_group.add_argument(
+        "--global",
+        dest="use_global",
+        action="store_true",
+        help="Use the global workspace (~/.tooluniverse) instead of the local default "
+        "(./.tooluniverse). Has no effect if --workspace or TOOLUNIVERSE_HOME is set.",
+    )
 
     # Hook configuration options
     hook_group = parser.add_argument_group("Hook Configuration")
@@ -146,6 +161,8 @@ Examples:
         server = SMCP(
             name=args.name,
             space=args.load,  # Pass Space URI directly to SMCP
+            workspace=args.workspace,
+            use_global=args.use_global,
             auto_expose_tools=True,
             search_enabled=True,
             max_workers=5,
@@ -266,6 +283,21 @@ Examples:
   --load "./my-config.yaml"
   --load "https://example.com/config.yaml"
         """,
+    )
+    space_group.add_argument(
+        "--workspace",
+        "-w",
+        type=str,
+        metavar="DIR",
+        help="Local workspace directory to scan for tool files (*.py and *.json). "
+        "Overrides TOOLUNIVERSE_HOME environment variable.",
+    )
+    space_group.add_argument(
+        "--global",
+        dest="use_global",
+        action="store_true",
+        help="Use the global workspace (~/.tooluniverse) instead of the local default "
+        "(./.tooluniverse). Has no effect if --workspace or TOOLUNIVERSE_HOME is set.",
     )
 
     # Tool selection options
@@ -590,6 +622,8 @@ Examples:
         server = SMCP(
             name=args.name,
             space=args.load,  # Pass Space URI directly to SMCP
+            workspace=args.workspace,
+            use_global=args.use_global,
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
@@ -700,6 +734,21 @@ Examples:
   --load "./my-config.yaml"
   --load "https://example.com/config.yaml"
         """,
+    )
+    space_group.add_argument(
+        "--workspace",
+        "-w",
+        type=str,
+        metavar="DIR",
+        help="Local workspace directory to scan for tool files (*.py and *.json). "
+        "Overrides TOOLUNIVERSE_HOME environment variable.",
+    )
+    space_group.add_argument(
+        "--global",
+        dest="use_global",
+        action="store_true",
+        help="Use the global workspace (~/.tooluniverse) instead of the local default "
+        "(./.tooluniverse). Has no effect if --workspace or TOOLUNIVERSE_HOME is set.",
     )
 
     # Tool selection options
@@ -995,6 +1044,8 @@ Examples:
         server = SMCP(
             name=args.name,
             space=args.load,  # Pass Space URI directly to SMCP
+            workspace=args.workspace,
+            use_global=args.use_global,
             tool_categories=tool_categories,
             exclude_tools=exclude_tools,
             exclude_categories=exclude_categories,
