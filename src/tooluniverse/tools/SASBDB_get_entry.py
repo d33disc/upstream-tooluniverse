@@ -1,30 +1,27 @@
 """
-SASBDB_download_data
+SASBDB_get_entry
 
-Get download URLs and metadata for raw experimental data files, processed scattering curves, dist...
+Get detailed metadata for a SASBDB small-angle scattering entry by its accession code. Returns ex...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def SASBDB_download_data(
+def SASBDB_get_entry(
     sasbdb_id: str,
-    file_type: Optional[str] = "all",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any]:
     """
-    Get download URLs and metadata for raw experimental data files, processed scattering curves, dist...
+    Get detailed metadata for a SASBDB small-angle scattering entry by its accession code. Returns ex...
 
     Parameters
     ----------
     sasbdb_id : str
-        SASBDB entry identifier (e.g., 'SASDBA2', 'SASDBW5'). Get from SASBDB_search_...
-    file_type : str
-        Type of files to retrieve: 'scattering' (DAT), 'distance_distribution' (P(r) ...
+        SASBDB accession code (e.g. SASDCZ9, SASDFZ9)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,19 +31,16 @@ def SASBDB_download_data(
 
     Returns
     -------
-    Optional[dict[str, Any]]
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
     return get_shared_client().run_one_function(
-        {
-            "name": "SASBDB_download_data",
-            "arguments": {"sasbdb_id": sasbdb_id, "file_type": file_type},
-        },
+        {"name": "SASBDB_get_entry", "arguments": {"sasbdb_id": sasbdb_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
     )
 
 
-__all__ = ["SASBDB_download_data"]
+__all__ = ["SASBDB_get_entry"]

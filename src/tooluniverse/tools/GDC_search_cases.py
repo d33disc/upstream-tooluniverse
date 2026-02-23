@@ -1,7 +1,7 @@
 """
 GDC_search_cases
 
-Search cancer cohort cases in NCI GDC by project and filters. Use to retrieve case-level metadata...
+Search NCI GDC cases via /cases
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def GDC_search_cases(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Search cancer cohort cases in NCI GDC by project and filters. Use to retrieve case-level metadata...
+    Search NCI GDC cases via /cases
 
     Parameters
     ----------
     project_id : str
-        GDC project identifier (e.g., 'TCGA-BRCA').
+        GDC project identifier (e.g., 'TCGA-BRCA')
     size : int
-        Number of results (1–100).
+        Number of results (1–100)
     offset : int
-        Offset for pagination (0-based).
+        Offset for pagination (0-based)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def GDC_search_cases(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

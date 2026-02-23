@@ -1,7 +1,7 @@
 """
 GDC_get_gene_expression
 
-Query RNA-Seq gene expression files from GDC/TCGA projects. Returns file metadata for expression ...
+Query gene expression data availability from GDC/TCGA
 """
 
 from typing import Any, Optional, Callable
@@ -16,16 +16,16 @@ def GDC_get_gene_expression(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Query RNA-Seq gene expression files from GDC/TCGA projects. Returns file metadata for expression ...
+    Query gene expression data availability from GDC/TCGA
 
     Parameters
     ----------
     project_id : str
-        GDC project (e.g., 'TCGA-BRCA', 'TCGA-LUAD', 'TCGA-GBM')
+        GDC project (e.g., 'TCGA-BRCA', 'TCGA-LUAD')
     gene_id : str
-        Optional: Ensembl gene ID (e.g., 'ENSG00000141510' for TP53)
+        Ensembl gene ID (e.g., 'ENSG00000141510' for TP53)
     size : int
         Number of results
     stream_callback : Callable, optional
@@ -37,7 +37,7 @@ def GDC_get_gene_expression(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 RNAcentral_get_by_accession
 
-Retrieve a single RNAcentral entry by accession for detailed annotations and source cross-referen...
+Get RNAcentral entry by accession
 """
 
 from typing import Any, Optional, Callable
@@ -14,14 +14,14 @@ def RNAcentral_get_by_accession(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Retrieve a single RNAcentral entry by accession for detailed annotations and source cross-referen...
+    Get RNAcentral entry by accession
 
     Parameters
     ----------
     accession : str
-        RNAcentral accession (e.g., 'URS000075C808').
+        RNAcentral accession
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def RNAcentral_get_by_accession(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

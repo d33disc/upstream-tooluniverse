@@ -399,12 +399,10 @@ default_tool_files = {
     "cath": os.path.join(current_dir, "data", "cath_tools.json"),
     # MeSH - Medical Subject Headings (NLM controlled vocabulary for PubMed indexing)
     "mesh": os.path.join(current_dir, "data", "mesh_tools.json"),
-    # JLCSearch - Electronic components search (resistors, capacitors, MCUs, ICs, LEDs, diodes)
-    "jlcsearch": os.path.join(current_dir, "data", "jlcsearch_tools.json"),
     # Mouser Electronics - Major distributor API (pricing, availability, specs, datasheets)
     "mouser": os.path.join(current_dir, "data", "mouser_tools.json"),
-    # Digi-Key Electronics - Major distributor API (product search, details, categories)
-    "digikey": os.path.join(current_dir, "data", "digikey_tools.json"),
+    # JLCSearch and DigiKey have moved to tooluniverse-circuit sub-package.
+    # Install with: pip install tooluniverse[circuit]
     # HPO - Human Phenotype Ontology (phenotype terms, hierarchy, clinical genetics)
     "hpo": os.path.join(current_dir, "data", "hpo_tools.json"),
     # Reactome Analysis Service - Pathway enrichment/overrepresentation analysis

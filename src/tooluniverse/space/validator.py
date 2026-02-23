@@ -54,6 +54,13 @@ SPACE_SCHEMA = {
             "type": "string",
             "description": "Space name - unique identifier for this configuration",
         },
+        "extends": {
+            "type": "string",
+            "description": "Base Space URI to inherit from before applying this config "
+            '(e.g., "hf:community/base-bio-tools", "./base.yaml"). '
+            "Tool selection and settings from the base are merged, with this "
+            "config taking precedence on any conflicts.",
+        },
         "version": {
             "type": "string",
             "default": "1.0.0",
@@ -106,7 +113,6 @@ SPACE_SCHEMA = {
                     "specific types from the selection",
                 },
             },
-            "additionalProperties": False,
             "description": "Tool configuration - defines which tools to load "
             "and how to filter them",
         },
@@ -142,7 +148,6 @@ SPACE_SCHEMA = {
                     "responses (0.0 = deterministic, 2.0 = very random)",
                 },
             },
-            "additionalProperties": False,
             "description": "LLM configuration - settings for AI-powered tools "
             "(AgenticTool) - only needed for complete workspaces",
         },
@@ -169,7 +174,6 @@ SPACE_SCHEMA = {
                     },
                 },
                 "required": ["type"],
-                "additionalProperties": False,
             },
             "description": "Hook configurations - post-processing functions for "
             "tool outputs (e.g., summarization, file saving)",
@@ -181,9 +185,33 @@ SPACE_SCHEMA = {
             "environment variables should be set (for documentation "
             "purposes only)",
         },
+        "workspace": {
+            "type": "string",
+            "description": "Path to the local workspace directory that contains "
+            "user-defined tools (Python files and JSON configs). Overrides "
+            "the default .tooluniverse/ directory and the TOOLUNIVERSE_HOME "
+            "environment variable. Relative paths are resolved from the "
+            "Space file location.",
+        },
+        "sources": {
+            "type": "array",
+            "items": {"type": "string"},
+            "default": [],
+            "description": "External tool sources to load in addition to built-in "
+            "tools and the workspace. Each entry is a URI that resolves to a "
+            "Space-compatible directory (local path, hf:user/repo, or "
+            "https://... URL). Tools from sources are loaded after workspace "
+            "tools; last-seen definition wins for duplicate tool names.",
+        },
+        "package": {
+            "type": "string",
+            "description": "Subdirectory within this Space that is the importable "
+            "Python package (used in sub-repos). Tells ToolUniverse where to "
+            "find the Python tools when this Space is loaded as a source. "
+            "Defaults to the repo root if omitted.",
+        },
     },
     "required": ["name", "version"],
-    "additionalProperties": False,
     "description": "Space Configuration Schema - defines the structure for "
     "Space YAML configuration files",
 }

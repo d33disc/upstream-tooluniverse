@@ -1,7 +1,7 @@
 """
 MGnify_search_studies
 
-Search MGnify metagenomics/microbiome studies by biome/keyword. Use to discover study accessions ...
+Search MGnify studies via /studies with optional biome/search filters
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def MGnify_search_studies(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Search MGnify metagenomics/microbiome studies by biome/keyword. Use to discover study accessions ...
+    Search MGnify studies via /studies with optional biome/search filters
 
     Parameters
     ----------
     biome : str
-        Biome identifier (e.g., 'root:Host-associated').
+        Biome identifier, e.g., 'root:Host-associated'
     search : str
-        Keyword to search in study titles/descriptions.
+        Keyword to search in study title/description
     size : int
-        Number of records per page (1–100).
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def MGnify_search_studies(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

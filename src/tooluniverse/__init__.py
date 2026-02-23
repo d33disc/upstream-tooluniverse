@@ -2,6 +2,12 @@ from importlib.metadata import version
 import os
 from typing import Any, Optional, List
 
+# Allow installed sub-packages (e.g. tooluniverse-circuit) to contribute
+# modules into the tooluniverse namespace even when the main package is
+# installed in editable mode (pip install -e).
+from pkgutil import extend_path
+__path__ = extend_path(__path__, __name__)
+
 from .execute_function import ToolUniverse
 from .base_tool import BaseTool
 from .default_config import default_tool_files

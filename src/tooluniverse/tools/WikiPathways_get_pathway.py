@@ -1,7 +1,7 @@
 """
 WikiPathways_get_pathway
 
-Fetch pathway content by WPID (JSON/GPML). Use to programmatically access pathway nodes/edges/met...
+Get pathway by WPID
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def WikiPathways_get_pathway(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
-    Fetch pathway content by WPID (JSON/GPML). Use to programmatically access pathway nodes/edges/met...
+    Get pathway by WPID
 
     Parameters
     ----------
     wpid : str
-        WikiPathways identifier (e.g., 'WP254').
+        Pathway ID, e.g., WP254
     format : str
-        Response format: 'json' for structured, 'gpml' for GPML XML.
+
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def WikiPathways_get_pathway(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

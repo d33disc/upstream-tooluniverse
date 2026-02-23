@@ -162,13 +162,13 @@ llm_config:
         assert config['name'] == 'Validation Test'
         assert config['tags'] == []  # Default value filled
         
-        # Test invalid configuration
+        # Test invalid configuration (missing required 'version')
         invalid_yaml = """
 name: Invalid Test
-version: 1.0.0
-invalid_field: value
+llm_config:
+  mode: not_a_valid_mode_value
 """
-        
+
         is_valid, errors, config = validate_with_schema(invalid_yaml, fill_defaults_flag=False)
         assert not is_valid
         assert len(errors) > 0
