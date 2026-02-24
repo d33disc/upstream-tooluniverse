@@ -22,7 +22,8 @@ Advanced configuration options for ToolUniverse MCP integration.
 
 ### Windsurf
 
-- `~/.codeium/windsurf/mcp_config.json`
+- **macOS/Linux**: `~/.codeium/windsurf/mcp_config.json`
+- **Windows**: `%USERPROFILE%\.codeium\windsurf\mcp_config.json`
 
 ### Claude Code
 
@@ -32,6 +33,24 @@ Advanced configuration options for ToolUniverse MCP integration.
 ### Gemini CLI
 
 - `~/.gemini/settings.json`
+
+### Antigravity
+
+- **macOS/Linux**: `~/.gemini/antigravity/mcp_config.json`
+- **Windows**: `%USERPROFILE%\.gemini\antigravity\mcp_config.json`
+
+Access via: Agent Panel → "..." → Manage MCP Servers → View raw config. Uses `"mcpServers"` key (same as Claude Desktop format).
+
+### Cline
+
+Full path to `cline_mcp_settings.json` varies by OS:
+
+- **macOS**: `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+- **Linux**: `~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+- **Windows**: `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\cline_mcp_settings.json`
+- **Cline CLI (standalone)**: `~/.cline/data/settings/cline_mcp_settings.json`
+
+Access via Cline's "MCP Servers" icon → Configure tab → "Configure MCP Servers". Uses `"mcpServers"` key (same as Claude Desktop format).
 
 ## Configuration Templates
 
