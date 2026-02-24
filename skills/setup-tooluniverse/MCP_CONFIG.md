@@ -52,6 +52,18 @@ Full path to `cline_mcp_settings.json` varies by OS:
 
 Access via Cline's "MCP Servers" icon → Configure tab → "Configure MCP Servers". Uses `"mcpServers"` key (same as Claude Desktop format).
 
+### Trae
+
+- **Windows**: `%APPDATA%\Trae\User\mcp.json`
+- **macOS**: `~/Library/Application Support/Trae/User/mcp.json`
+- **Linux**: `~/.config/Trae/User/mcp.json`
+
+Verify the exact path in Trae: Settings → MCP → Open config file.
+
+The AI agent can only access the **global** config. Project-level `.trae/mcp.json` is an experimental/beta feature and is not accessible to the agent — do not use it for MCP server registration.
+
+For full Trae setup instructions (including manual write fallback and verification), see [TRAE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md).
+
 ## Configuration Templates
 
 ### Basic Configuration (Recommended)
