@@ -435,8 +435,6 @@ class TestLoadSpaceSources:
             [{"name": "src_tool_x", "description": "From source"}],
         )
 
-        initial_count = len(ToolUniverse().all_tools)
-
         config_file = tmp_path / "space.yaml"
         _write_yaml(
             config_file,
@@ -592,7 +590,7 @@ class TestRegisterToolConfigs:
         from tooluniverse.tool_registry import get_list_config_registry
 
         r1 = get_list_config_registry()
-        r2 = get_list_config_registry()
+        get_list_config_registry()
         # Modifying one should not affect the registry
         r1.append({"name": "_sentinel_should_not_persist"})
         r3 = get_list_config_registry()
