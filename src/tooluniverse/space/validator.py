@@ -185,14 +185,6 @@ SPACE_SCHEMA = {
             "environment variables should be set (for documentation "
             "purposes only)",
         },
-        "workspace": {
-            "type": "string",
-            "description": "Path to the local workspace directory that contains "
-            "user-defined tools (Python files and JSON configs). Overrides "
-            "the default .tooluniverse/ directory and the TOOLUNIVERSE_HOME "
-            "environment variable. Relative paths are resolved from the "
-            "Space file location.",
-        },
         "sources": {
             "type": "array",
             "items": {"type": "string"},
@@ -203,15 +195,42 @@ SPACE_SCHEMA = {
             "https://... URL). Tools from sources are loaded after workspace "
             "tools; last-seen definition wins for duplicate tool names.",
         },
-        "package": {
+        "log_level": {
             "type": "string",
-            "description": "Subdirectory within this Space that is the importable "
-            "Python package (used in sub-repos). Tells ToolUniverse where to "
-            "find the Python tools when this Space is loaded as a source. "
-            "Defaults to the repo root if omitted.",
+            "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+            "description": "Log level for this ToolUniverse session. Overrides "
+            "the global log level setting.",
+        },
+        "cache": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable or disable result caching entirely.",
+                },
+                "ttl": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Default time-to-live for cached results in seconds. "
+                    "0 means cache forever.",
+                },
+                "memory_size": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of results to keep in the in-memory "
+                    "LRU cache.",
+                },
+                "persist": {
+                    "type": "boolean",
+                    "description": "Whether to persist the cache to disk (SQLite). "
+                    "Useful for sharing results across sessions.",
+                },
+            },
+            "description": "Cache configuration. Controls how tool results are cached "
+            "to avoid redundant API calls.",
         },
     },
-    "required": ["name", "version"],
+    "required": ["name"],
     "description": "Space Configuration Schema - defines the structure for "
     "Space YAML configuration files",
 }
@@ -334,12 +353,13 @@ def validate_with_schema(
         if not isinstance(config, dict):
             return False, ["YAML content must be a dictionary"], {}
 
-        # Fill default values if requested
+        # Validate required fields before filling defaults so that missing
+        # required keys (e.g. "name") are caught rather than silently injected.
+        validate(instance=config, schema=SPACE_SCHEMA)
+
+        # Fill default values if requested (after validation)
         if fill_defaults_flag:
             config = fill_defaults(config, SPACE_SCHEMA)
-
-        # Validate against schema
-        validate(instance=config, schema=SPACE_SCHEMA)
 
         return True, [], config
 

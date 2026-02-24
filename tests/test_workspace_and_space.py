@@ -598,3 +598,355 @@ class TestRegisterToolConfigs:
         r3 = get_list_config_registry()
         names = [c["name"] for c in r3]
         assert "_sentinel_should_not_persist" not in names
+
+
+# ---------------------------------------------------------------------------
+# space.yaml feature tests — cache, log_level, .env, workspace merge
+# ---------------------------------------------------------------------------
+
+
+class TestSpaceYamlCacheConfig:
+    """Tests for cache configuration via space.yaml."""
+
+    def test_cache_disabled_via_space_yaml(self, tmp_path):
+        """cache.enabled=false turns off caching."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("cache-test"), "cache": {"enabled": False}},
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.enabled is False
+
+    def test_cache_memory_size_via_space_yaml(self, tmp_path):
+        """cache.memory_size sets the LRU cache size."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("cache-mem"), "cache": {"memory_size": 42}},
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.memory.max_size == 42
+
+    def test_cache_ttl_via_space_yaml(self, tmp_path):
+        """cache.ttl sets the default TTL."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("cache-ttl"), "cache": {"ttl": 300}},
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.default_ttl == 300
+
+    def test_cache_persist_false_via_space_yaml(self, tmp_path):
+        """cache.persist=false disables persistent (SQLite) cache."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("cache-nopersist"), "cache": {"persist": False}},
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.persistent is None
+
+    def test_cache_multiple_fields_via_space_yaml(self, tmp_path):
+        """Multiple cache fields can be set at once."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {
+                **_minimal_space("cache-multi"),
+                "cache": {"enabled": True, "memory_size": 128, "ttl": 60, "persist": False},
+            },
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.enabled is True
+        assert tu.cache_manager.memory.max_size == 128
+        assert tu.cache_manager.default_ttl == 60
+        assert tu.cache_manager.persistent is None
+
+    def test_no_cache_field_leaves_defaults(self, tmp_path):
+        """Omitting cache from space.yaml leaves defaults unchanged."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(ws / "space.yaml", _minimal_space("cache-default"))
+        tu = ToolUniverse(workspace=str(ws))
+        # Default is enabled
+        assert tu.cache_manager.enabled is True
+
+
+class TestSpaceYamlLogLevel:
+    """Tests for log_level configuration via space.yaml."""
+
+    def test_log_level_warning_via_space_yaml(self, tmp_path):
+        """log_level sets the tooluniverse logger level."""
+        import logging
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("loglevel-test"), "log_level": "WARNING"},
+        )
+        ToolUniverse(workspace=str(ws))
+        assert logging.getLogger("tooluniverse").level == logging.WARNING
+
+    def test_log_level_debug_via_space_yaml(self, tmp_path):
+        """log_level DEBUG is applied correctly."""
+        import logging
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("loglevel-debug"), "log_level": "DEBUG"},
+        )
+        ToolUniverse(workspace=str(ws))
+        assert logging.getLogger("tooluniverse").level == logging.DEBUG
+
+    def test_invalid_log_level_rejected_by_schema(self, tmp_path):
+        """An invalid log_level value fails schema validation."""
+        from tooluniverse.space.validator import validate_with_schema
+        import yaml as _yaml
+
+        config = {**_minimal_space("bad-loglevel"), "log_level": "VERBOSE"}
+        is_valid, errors, _ = validate_with_schema(
+            _yaml.dump(config), fill_defaults_flag=False
+        )
+        assert not is_valid
+
+
+class TestWorkspaceDotEnv:
+    """Tests for .env auto-loading from workspace directory."""
+
+    def test_dotenv_loaded_from_workspace(self, tmp_path):
+        """A .env file in the workspace sets env vars on startup."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        (ws / ".env").write_text("_TU_TEST_DOTENV_KEY=from_dotenv\n")
+
+        os.environ.pop("_TU_TEST_DOTENV_KEY", None)
+        try:
+            ToolUniverse(workspace=str(ws))
+            assert os.getenv("_TU_TEST_DOTENV_KEY") == "from_dotenv"
+        finally:
+            os.environ.pop("_TU_TEST_DOTENV_KEY", None)
+
+    def test_shell_env_wins_over_dotenv(self, tmp_path):
+        """Existing shell env vars are never overwritten by .env."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        (ws / ".env").write_text("_TU_TEST_DOTENV_KEY=from_dotenv\n")
+
+        os.environ["_TU_TEST_DOTENV_KEY"] = "from_shell"
+        try:
+            ToolUniverse(workspace=str(ws))
+            assert os.getenv("_TU_TEST_DOTENV_KEY") == "from_shell"
+        finally:
+            os.environ.pop("_TU_TEST_DOTENV_KEY", None)
+
+    def test_missing_dotenv_file_is_silently_ignored(self, tmp_path):
+        """No .env file in workspace is fine — no error raised."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        # No .env file — should not raise
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu._workspace_dir == ws
+
+
+class TestSpaceYamlWorkspaceMerge:
+    """Tests for workspace space.yaml merging with --load."""
+
+    def test_loaded_space_overrides_workspace_name(self, tmp_path):
+        """Keys in loaded file win over workspace space.yaml."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(ws / "space.yaml", {**_minimal_space("ws-base"), "log_level": "ERROR"})
+
+        override = tmp_path / "override.yaml"
+        _write_yaml(override, {**_minimal_space("override-name")})
+
+        tu = ToolUniverse(workspace=str(ws), space=str(override))
+        meta = tu.get_space_metadata()
+        assert meta["name"] == "override-name"
+
+    def test_workspace_log_level_applied_when_no_load(self, tmp_path):
+        """Workspace space.yaml log_level is applied when no --load given."""
+        import logging
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("ws-log"), "log_level": "ERROR"},
+        )
+        ToolUniverse(workspace=str(ws))
+        assert logging.getLogger("tooluniverse").level == logging.ERROR
+
+    def test_workspace_cache_config_applied_when_no_load(self, tmp_path):
+        """Workspace space.yaml cache config is applied when no --load given."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("ws-cache"), "cache": {"memory_size": 77}},
+        )
+        tu = ToolUniverse(workspace=str(ws))
+        assert tu.cache_manager.memory.max_size == 77
+
+    def test_merge_preserves_workspace_cache_when_load_omits_it(self, tmp_path):
+        """Workspace cache config survives merge if loaded file doesn't touch it."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        _write_yaml(
+            ws / "space.yaml",
+            {**_minimal_space("ws-merge"), "cache": {"memory_size": 55}},
+        )
+
+        override = tmp_path / "override.yaml"
+        _write_yaml(override, {**_minimal_space("override"), "log_level": "DEBUG"})
+
+        tu = ToolUniverse(workspace=str(ws), space=str(override))
+        # Cache setting from workspace should survive the merge
+        assert tu.cache_manager.memory.max_size == 55
+
+
+class TestSpaceYamlSchemaValidation:
+    """Tests that the schema correctly validates all new fields."""
+
+    def test_valid_cache_config_passes_schema(self):
+        from tooluniverse.space.validator import validate_with_schema
+        import yaml as _yaml
+
+        config = {
+            **_minimal_space("schema-valid"),
+            "cache": {"enabled": True, "ttl": 120, "memory_size": 256, "persist": False},
+        }
+        is_valid, errors, _ = validate_with_schema(
+            _yaml.dump(config), fill_defaults_flag=False
+        )
+        assert is_valid, errors
+
+    def test_negative_ttl_fails_schema(self):
+        from tooluniverse.space.validator import validate_with_schema
+        import yaml as _yaml
+
+        config = {**_minimal_space("bad-ttl"), "cache": {"ttl": -1}}
+        is_valid, errors, _ = validate_with_schema(
+            _yaml.dump(config), fill_defaults_flag=False
+        )
+        assert not is_valid
+
+    def test_negative_memory_size_fails_schema(self):
+        from tooluniverse.space.validator import validate_with_schema
+        import yaml as _yaml
+
+        config = {**_minimal_space("bad-mem"), "cache": {"memory_size": 0}}
+        is_valid, errors, _ = validate_with_schema(
+            _yaml.dump(config), fill_defaults_flag=False
+        )
+        assert not is_valid
+
+    def test_valid_log_level_passes_schema(self):
+        from tooluniverse.space.validator import validate_with_schema
+        import yaml as _yaml
+
+        for level in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
+            config = {**_minimal_space(f"loglevel-{level}"), "log_level": level}
+            is_valid, errors, _ = validate_with_schema(
+                _yaml.dump(config), fill_defaults_flag=False
+            )
+            assert is_valid, f"{level} should be valid: {errors}"
+
+
+class TestDefaultSpaceYaml:
+    """Tests for default_space.yaml seeding and content."""
+
+    def test_default_space_yaml_ships_with_package(self):
+        """default_space.yaml exists in the package data directory."""
+        from pathlib import Path
+        import tooluniverse
+        data_dir = Path(tooluniverse.__file__).parent / "data"
+        assert (data_dir / "default_space.yaml").exists()
+
+    def test_default_space_yaml_is_valid(self):
+        """default_space.yaml passes schema validation."""
+        from pathlib import Path
+        import tooluniverse
+        from tooluniverse.space.validator import validate_yaml_file_with_schema
+        path = Path(tooluniverse.__file__).parent / "data" / "default_space.yaml"
+        is_valid, errors, _ = validate_yaml_file_with_schema(str(path))
+        assert is_valid, errors
+
+    def test_default_space_yaml_seeded_on_first_run(self, tmp_path):
+        """When workspace exists with no space.yaml, default is auto-seeded."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        assert not (ws / "space.yaml").exists()
+
+        ToolUniverse(workspace=str(ws))
+
+        assert (ws / "space.yaml").exists()
+
+    def test_existing_space_yaml_not_overwritten(self, tmp_path):
+        """An existing space.yaml is never overwritten by the default."""
+        from tooluniverse.execute_function import ToolUniverse
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        custom_content = "name: my-custom\nversion: \"9.9\"\ndescription: custom\n"
+        (ws / "space.yaml").write_text(custom_content)
+
+        ToolUniverse(workspace=str(ws))
+
+        assert (ws / "space.yaml").read_text() == custom_content
+
+    def test_seeded_space_yaml_has_expected_fields(self, tmp_path):
+        """The seeded default_space.yaml contains all key fields."""
+        from tooluniverse.execute_function import ToolUniverse
+        import yaml
+
+        ws = tmp_path / ".tooluniverse"
+        ws.mkdir()
+        ToolUniverse(workspace=str(ws))
+
+        content = yaml.safe_load((ws / "space.yaml").read_text())
+        assert content["name"] == "default"
+        assert "tools" in content
+        assert "cache" in content
+        assert content["cache"]["enabled"] is True
+        assert content["cache"]["memory_size"] == 256
+        assert content["cache"]["persist"] is True
