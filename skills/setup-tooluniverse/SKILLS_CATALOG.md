@@ -97,7 +97,7 @@
 ## How to Install
 
 ```bash
-npx skills add mims-harvard/ToolUniverse
+npx skills add mims-harvard/ToolUniverse --all
 ```
 
 Or manually clone and copy to your client's skills directory:
