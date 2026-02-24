@@ -882,6 +882,13 @@ class ToolUniverse:
                 categories = tool_type
         self.logger.debug(f"Number of tools before load tools: {len(self.all_tools)}")
 
+        # Full reload (no include_tools): clear existing tools so repeated calls
+        # don't accumulate duplicates before deduplication runs.
+        if include_tools is None and tools_file is None:
+            self.all_tools = []
+            self.all_tool_dict = {}
+            self.tool_category_dicts = {}
+
         # Handle tools_file parameter (alternative to include_tools)
         if tools_file:
             include_tools = self._load_tool_names_from_file(tools_file)
@@ -1394,6 +1401,9 @@ class ToolUniverse:
         """
         from .tool_registry import get_config_registry, get_list_config_registry
 
+        # Build a set of names already present so we never double-add
+        existing_names = {t.get("name") for t in self.all_tools if isinstance(t, dict)}
+
         # 1. Decorator-registered configs (one per tool type)
         discovered_configs = get_config_registry()
         if discovered_configs:
@@ -1401,8 +1411,9 @@ class ToolUniverse:
                 f"Loading {len(discovered_configs)} auto-discovered tool configs"
             )
             for _tool_type, config in discovered_configs.items():
-                if "name" in config:
+                if "name" in config and config["name"] not in existing_names:
                     self.all_tools.append(config)
+                    existing_names.add(config["name"])
                     self.logger.debug(f"Added auto-discovered config: {config['name']}")
 
         # 2. Sub-package list configs (multiple instances per tool type)
@@ -1412,8 +1423,9 @@ class ToolUniverse:
                 f"Loading {len(subpkg_configs)} sub-package tool configs"
             )
             for config in subpkg_configs:
-                if "name" in config:
+                if "name" in config and config["name"] not in existing_names:
                     self.all_tools.append(config)
+                    existing_names.add(config["name"])
                     self.logger.debug(
                         f"Added sub-package config: {config['name']}"
                     )
@@ -3689,12 +3701,19 @@ class ToolUniverse:
         }
 
     def refresh_tools(self):
-        """Refresh tool discovery (re-discover MCP/remote tools, reload configs)."""
-        # TODO: Implement MCP tool re-discovery
-        # For now, just reload tool configurations
-        self.logger.info("Refreshing tool configurations...")
-        # This could be extended to re-discover MCP tools, reload configs, etc.
-        self.logger.info("Tool refresh completed")
+        """Re-scan workspace and reload all tool configurations.
+
+        Picks up new JSON/Python tool files added to the workspace
+        ``.tooluniverse/tools/`` directory since startup. Clears the existing
+        tool registry first so the result is always a clean reload.
+
+        Note: built-in package tools and installed plugin packages still
+        require a process restart to reflect changes (Python module imports
+        are cached for the lifetime of the process).
+        """
+        self.logger.info("Refreshing tools: clearing registry and reloading...")
+        self.load_tools()
+        self.logger.info(f"Tool refresh completed: {len(self.all_tools)} tools loaded")
 
     def eager_load_tools(self, names: Optional[List[str]] = None):
         """Pre-instantiate tools to reduce first-call latency."""
