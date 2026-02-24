@@ -46,6 +46,8 @@ Never run ahead. Never explain Step 3 while the user is still on Step 1. Never o
 | `MCP_CONFIG.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md |
 | `SKILLS_CATALOG.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md |
 | `TROUBLESHOOTING.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md |
+| `GITHUB_ISSUE.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md |
+| `TRAE.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md |
 
 ## Step 0: Auto-Detect & Quick Start
 
@@ -121,7 +123,7 @@ Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/ski
 
 > ⏸️ **Now**: Ask "Would you like a **quick start** (~3 min, no questions) or a **full setup** (API keys + options)?" — then wait for the answer.
 
-- **Quick start**: `brew install uv` (or curl), write config with python3 one-liner, restart app, confirm tools appear, install skills with `npx skills add mims-harvard/ToolUniverse`. Skip API keys (add later). Skills are included — they're what make ToolUniverse genuinely useful.
+- **Quick start**: `brew install uv` (or curl), write config with python3 one-liner, restart app, confirm tools appear, install skills with `npx skills add mims-harvard/ToolUniverse --all`. Skip API keys (add later). Skills are included — they're what make ToolUniverse genuinely useful.
 - **Full setup**: Continue with all steps including API keys.
 
 **Question 2 (full setup only):** How will you use ToolUniverse?
@@ -382,7 +384,7 @@ If all ✅, celebrate! 🎉 If any ❌, jump to the matching issue in [TROUBLESH
 
 **Option A — User runs in terminal (quickest, cross-platform):**
 ```bash
-npx skills add mims-harvard/ToolUniverse
+npx skills add mims-harvard/ToolUniverse --all
 ```
 This auto-detects the client and installs into the correct directory. Ask the user to confirm it completed successfully.
 
@@ -430,9 +432,9 @@ The `tooluniverse` skill is a router — it picks the right sub-skill automatica
 | Python too new (3.14+) | `SyntaxError` / `requires-python` errors | `uvx --python 3.12 tooluniverse --help` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 8 |
 | Stale/broken package | Tool errors or missing tools | `uv cache clean tooluniverse` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 9 |
 | Windows: Python alias warning | "Python was not found; run without arguments to install from Microsoft Store" during `uvx` | Disable Python app execution aliases: Windows Settings → Apps → Advanced app settings → App execution aliases → turn off Python |
-| Still broken after all above | Persistent unexplained error | Run the issue-filing script in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) "Still Stuck?" — it collects system info and generates a pre-filled GitHub issue URL |
+| Still broken after all above | Persistent unexplained error | Fetch and follow [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md) — compose the issue from conversation context and walk the user through submitting it |
 
-Full diagnostics and GitHub issue helper in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
+Full diagnostics in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md). To file a GitHub issue: fetch [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md).
 
 ## What's Next?
 

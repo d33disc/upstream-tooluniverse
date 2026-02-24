@@ -1,31 +1,57 @@
 # Trae IDE Setup
 
-## Step 1: Find Your Global Config Path
+> **Use your system terminal — not Trae's built-in terminal.**
+> Trae may run in a sandboxed environment. All installation commands (`uv`, `npx`, `git`) must be run in your **OS terminal** (Windows: PowerShell or Command Prompt; macOS/Linux: Terminal app). Commands run inside Trae's terminal panel may appear to succeed but Trae won't find the tools after restart.
 
-Trae's **global** MCP config is the only config the AI agent can access. Ask the user to confirm the path on their system:
+---
 
-**Open Trae → Settings → MCP (or "..." menu → Open MCP config)** to find the exact file path.
+## Step 1: Install uvx
+
+Open your **system terminal** (not Trae's terminal) and check if uv is already installed:
+
+```bash
+uvx --version
+```
+
+If the command is not found, install uv:
+
+**macOS / Linux:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source ~/.zshrc 2>/dev/null || source ~/.bashrc 2>/dev/null
+```
+
+**Windows (PowerShell):**
+```powershell
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+Then close and reopen PowerShell so the new `uvx` command is available.
+
+**Verify ToolUniverse loads:**
+```bash
+uvx tooluniverse --help
+```
+
+This should print help text. If it fails, see [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
+
+> ⏸️ Ask: "Does `uvx tooluniverse --help` print help text in your system terminal?" Wait before continuing.
+
+---
+
+## Step 2: Set Up Global Config
+
+Trae's **global** MCP config is the only config the AI agent can access.
+
+**Find the config path:** Open Trae → Settings → MCP (or "..." menu → Open MCP config).
 
 Expected locations by OS:
 - **Windows**: `%APPDATA%\Trae\User\mcp.json` (e.g. `C:\Users\yourname\AppData\Roaming\Trae\User\mcp.json`)
 - **macOS**: `~/Library/Application Support/Trae/User/mcp.json`
 - **Linux**: `~/.config/Trae/User/mcp.json`
 
-> ⏸️ Ask the user: "Can you open Trae Settings → MCP and tell me the config file path it shows?" Confirm the path before proceeding.
+> ⏸️ Ask: "Can you open Trae Settings → MCP and confirm the config file path it shows?" Confirm before continuing.
 
----
-
-## ⚠️ Do Not Use Project-Level Config
-
-`.trae/mcp.json` is an **experimental/beta feature** in Trae. The AI agent **cannot access** project-level MCP servers — only the global config is visible to the agent.
-
-**If you see "Enable Project MCP" in the Trae UI — ignore it.** This beta feature does not expose tools to the agent and will cause confusion. Always use the global config path above.
-
----
-
-## Step 2: Write the Config
-
-The config format is the standard `"mcpServers"` object (same as Cursor and Claude Desktop):
+### Config JSON
 
 ```json
 {
@@ -41,9 +67,9 @@ The config format is the standard `"mcpServers"` object (same as Cursor and Clau
 }
 ```
 
-### Option A — Python one-liner (try this first)
+### Option A — Python one-liner (try first, run in system terminal)
 
-Replace `CONFIG_PATH` with the confirmed path from Step 1:
+Replace `CONFIG_PATH` with the confirmed path:
 
 ```bash
 python3 -c "
@@ -60,36 +86,86 @@ print('Done:', p)
 "
 ```
 
-### Option B — Manual paste (if Trae blocks the write)
+### Option B — Trae Settings UI (recommended if Option A fails)
 
-Trae may restrict programmatic modifications to its config file. If Option A fails or the file isn't updated:
+Trae has a built-in MCP configuration panel that bypasses file permission issues:
 
-1. Open the global config file directly in a text editor (the path confirmed in Step 1)
-2. If the file is empty or doesn't exist, paste the full JSON above
-3. If the file already has content, merge by adding the `"tooluniverse"` block inside the existing `"mcpServers"` object
+1. Press **Ctrl U** (or click the Agents icon) to open the Agents panel
+2. Click the **AI Management gear icon** → **MCP** → **Configure Manually**
+3. Paste the full JSON block above into the text field
+4. Click **Confirm**
+5. Restart Trae fully
+
+> ⏸️ Ask: "Did tooluniverse appear in the MCP panel after restarting?" Wait before continuing.
+
+### Option C — Direct file paste (last resort)
+
+If both Options A and B fail:
+
+1. Open the global config file in a text editor (Notepad, VS Code, etc.) at the path confirmed above
+2. If the file is empty or missing, paste the full JSON block above
+3. If the file already has content, add the `"tooluniverse"` block inside the existing `"mcpServers"` object
 4. Save the file
-5. Restart Trae
+5. Restart Trae fully
 
-> ⏸️ Ask: "Did the config get written, or did you need to paste manually?" Wait before continuing.
+> ⏸️ Ask: "Did the config get written? Do you see tooluniverse in Settings → MCP?" Wait before continuing.
 
----
+### ⚠️ Do Not Use Project-Level Config
 
-## Step 3: Restart Trae
-
-Fully quit Trae (not just close the window), then reopen it.
-
-⏱️ **First launch takes 60–90 seconds** while Trae downloads and installs ToolUniverse in the background.
+`.trae/mcp.json` is an **experimental/beta feature**. The agent **cannot access** project-level MCP servers. If Trae shows an "Enable Project MCP" option — ignore it. Always use the global config path.
 
 ---
 
-## Step 4: Verify
+## Step 3: Install Skills
 
-After restart, check that `tooluniverse` appears as a connected server:
+Skills are required for ToolUniverse to work as an intelligent research assistant. Run these in your **system terminal**.
 
-- Open Trae **Settings → MCP** (or the "..." menu in the AI panel)
-- `tooluniverse` should be listed with a green/connected status
+### Option A — npx (quickest)
 
-**Live test** — ask the agent to run:
+```bash
+npx skills add mims-harvard/ToolUniverse --all
+```
+
+If `npx` is not found, install Node.js from [nodejs.org](https://nodejs.org) (the LTS version includes npm and npx), then retry.
+
+### Option B — git clone (if npx fails: corporate network, cert issues, or proxy problems)
+
+If `git` is not found, install it from [git-scm.com](https://git-scm.com), then retry.
+
+**macOS / Linux:**
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/mims-harvard/ToolUniverse.git /tmp/tu-skills
+cd /tmp/tu-skills && git sparse-checkout set skills
+mkdir -p ~/.trae/skills && cp -r /tmp/tu-skills/skills/* ~/.trae/skills/
+rm -rf /tmp/tu-skills
+```
+
+**Windows (PowerShell — run each line separately):**
+```powershell
+# Run each line separately — PowerShell does not support && like bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/mims-harvard/ToolUniverse.git "$env:TEMP\tu-skills"
+Set-Location "$env:TEMP\tu-skills"
+git sparse-checkout set skills
+New-Item -ItemType Directory -Force "$env:APPDATA\Trae\skills" | Out-Null
+robocopy "$env:TEMP\tu-skills\skills" "$env:APPDATA\Trae\skills" /E
+Remove-Item -Recurse -Force "$env:TEMP\tu-skills"
+```
+
+> Note: The exact skills directory for Trae may vary. Check [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md) if skills don't activate after installation.
+
+> ⏸️ Ask: "Did the skills install complete without errors?" Wait before continuing.
+
+---
+
+## Step 4: Restart and Test
+
+1. **Fully quit Trae** (not just close the window), then reopen it
+2. **First launch takes 60–90 seconds** while Trae downloads ToolUniverse in the background
+
+**Check MCP connection:**
+Open Trae Settings → MCP. `tooluniverse` should appear with a green/connected status.
+
+**Live tool test** (verifies MCP is working):
 ```
 list_tools
 ```
@@ -98,9 +174,13 @@ or
 execute_tool("PubMed_search_articles", {"query": "CRISPR", "max_results": 1})
 ```
 
-If tools are returned, setup is working. If not, check that:
-1. The config file is at the correct global path (not `.trae/mcp.json`)
-2. `uvx tooluniverse --help` runs successfully in the terminal
-3. Trae was fully restarted (not just the window closed)
+**Skills smoke test** (verifies skills are installed):
+> Say: `"Use the tooluniverse skill to research the drug metformin"`
 
-> ⏸️ Ask: "Do you see `tooluniverse` in the MCP panel? Did the test call return results?" Confirm before proceeding to skills installation.
+The `tooluniverse` skill is a router — it picks the right sub-skill automatically. If the response is plain text with no tool calls, skills are not installed or not in the correct directory.
+
+**If something is still broken, check:**
+1. The config file is at the correct global path (not `.trae/mcp.json`)
+2. `uvx tooluniverse --help` works in your **system terminal** (not Trae's terminal)
+3. Trae was fully restarted
+4. Fetch [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) for more diagnostics, or [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md) to report the issue.
