@@ -64,6 +64,7 @@ echo "=== Detecting your AI client ===" && \
   ([ -f ~/.claude.json ] && echo "✅ Claude Code detected") || true && \
   ([ -f ~/.codeium/windsurf/mcp_config.json ] && echo "✅ Windsurf detected") || true && \
   ([ -f ~/.gemini/settings.json ] && echo "✅ Gemini CLI detected") || true && \
+  ([ -f ~/.gemini/antigravity/mcp_config.json ] && echo "✅ Antigravity detected") || true && \
   ([ -f ~/.codex/config.toml ] && echo "✅ Codex CLI detected") || true && \
   ([ -f ~/.qwen/settings.json ] && echo "✅ Qwen Code detected") || true && \
   ([ -f opencode.json ] && echo "✅ OpenCode detected") || true && \
@@ -78,6 +79,7 @@ echo "=== Detecting your AI client ===" && \
   "$env:APPDATA\Claude\claude_desktop_config.json",
   "$env:USERPROFILE\.codeium\windsurf\mcp_config.json",
   "$env:USERPROFILE\.gemini\settings.json",
+  "$env:USERPROFILE\.gemini\antigravity\mcp_config.json",
   "$env:USERPROFILE\.qwen\settings.json"
 ) | ForEach-Object { if (Test-Path $_) { "✅ Detected: $_" } }
 ```
@@ -119,6 +121,11 @@ Check first — **skip install entirely if uv is already present**:
 
 ```bash
 which uv && uv --version || echo "NOT_INSTALLED"
+```
+
+*Windows PowerShell equivalent:*
+```powershell
+if (Get-Command uv -ErrorAction SilentlyContinue) { uv --version } else { Write-Output 'NOT_INSTALLED' }
 ```
 
 - **Found**: "✅ uv is already installed — skipping." Go to Step 2.
@@ -227,15 +234,15 @@ Replace `CONFIG_PATH` with the path for the user's client:
 | **Cursor** | `~/.cursor/mcp.json` |
 | **Claude Desktop** | ← See CLAUDE_DESKTOP.md above |
 | **Claude Code** | `~/.claude.json` or `.mcp.json` |
-| **Windsurf** | `~/.codeium/windsurf/mcp_config.json` |
+| **Windsurf** | `~/.codeium/windsurf/mcp_config.json` (macOS/Linux) · `%USERPROFILE%\.codeium\windsurf\mcp_config.json` (Windows) |
 | **VS Code (Copilot)** | `.vscode/mcp.json` in the workspace root — uses `"servers"` key (not `"mcpServers"`) and requires `"type": "stdio"` — see config below |
 | **Codex (OpenAI)** | TOML format: `codex mcp add tooluniverse -- uvx tooluniverse` — see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **OpenCode** | `opencode.json` — uses `"mcp"` key — see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **Gemini CLI** | `~/.gemini/settings.json` |
 | **Qwen Code** | `~/.qwen/settings.json` |
 | **Trae** | `.trae/mcp.json` |
-| **Cline** | `cline_mcp_settings.json` (in VS Code extension globalStorage) |
-| **Antigravity** | `mcp_config.json` |
+| **Cline** | `cline_mcp_settings.json` in VS Code extension globalStorage — OS paths vary, see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
+| **Antigravity** | `~/.gemini/antigravity/mcp_config.json` (macOS/Linux) · `%USERPROFILE%\.gemini\antigravity\mcp_config.json` (Windows) |
 
 For Codex and OpenCode special formats, read [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md).
 
@@ -377,6 +384,7 @@ rm -rf /tmp/tu-skills
 
 *PowerShell (Windows):*
 ```powershell
+# Run each line separately — PowerShell does not support && like bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/mims-harvard/ToolUniverse.git "$env:TEMP\tu-skills"
 Set-Location "$env:TEMP\tu-skills"
 git sparse-checkout set skills
@@ -406,6 +414,7 @@ The `tooluniverse` skill is a router — it picks the right sub-skill automatica
 | Context overflow | Client very slow | Already in compact mode; narrow categories if needed |
 | Python too new (3.14+) | `SyntaxError` / `requires-python` errors | `uvx --python 3.12 tooluniverse --help` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 8 |
 | Stale/broken package | Tool errors or missing tools | `uv cache clean tooluniverse` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 9 |
+| Windows: Python alias warning | "Python was not found; run without arguments to install from Microsoft Store" during `uvx` | Disable Python app execution aliases: Windows Settings → Apps → Advanced app settings → App execution aliases → turn off Python |
 | Still broken after all above | Persistent unexplained error | Run the issue-filing script in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) "Still Stuck?" — it collects system info and generates a pre-filled GitHub issue URL |
 
 Full diagnostics and GitHub issue helper in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
