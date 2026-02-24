@@ -40,13 +40,13 @@ class TestValidateSpaceConfig:
     def test_missing_required_fields(self):
         """Test validation with missing required fields."""
         config = {
-            "name": "Test Config"
-            # Missing version
+            "version": "1.0.0"
+            # Missing name (the only required field)
         }
-        
+
         is_valid, errors = validate_space_config(config)
         assert not is_valid
-        assert "version" in str(errors)
+        assert "name" in str(errors)
     
     def test_invalid_llm_mode(self):
         """Test validation with invalid LLM mode."""
@@ -99,13 +99,13 @@ llm_config:
     def test_missing_required_fields(self):
         """Test validation with missing required fields."""
         yaml_content = """
-name: Test Config
-# Missing version
+version: "1.0.0"
+# Missing name (the only required field)
 """
-        
+
         is_valid, errors, config = validate_with_schema(yaml_content, fill_defaults_flag=False)
         assert not is_valid
-        assert "version" in str(errors)
+        assert "name" in str(errors)
 
 
 class TestValidateYamlFileWithSchema:
@@ -186,7 +186,7 @@ class TestSpaceSchema:
     def test_schema_required_fields(self):
         """Test that required fields are correctly defined."""
         assert 'name' in SPACE_SCHEMA['required']
-        assert 'version' in SPACE_SCHEMA['required']
+        assert 'version' not in SPACE_SCHEMA['required']  # version is optional, defaults to "1.0.0"
     
     def test_schema_default_values(self):
         """Test that default values are correctly defined."""
