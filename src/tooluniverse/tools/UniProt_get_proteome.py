@@ -1,7 +1,7 @@
 """
 UniProt_get_proteome
 
-Get detailed metadata for a specific UniProt proteome by its proteome ID (e.g., UP000005640 for h...
+Get proteome information by proteome ID. Returns comprehensive proteome data including taxonomy, ...
 """
 
 from typing import Any, Optional, Callable
@@ -14,14 +14,14 @@ def UniProt_get_proteome(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Get detailed metadata for a specific UniProt proteome by its proteome ID (e.g., UP000005640 for h...
+    Get proteome information by proteome ID. Returns comprehensive proteome data including taxonomy, ...
 
     Parameters
     ----------
     proteome_id : str
-        UniProt proteome ID (e.g., 'UP000005640' for human, 'UP000000589' for mouse, ...
+        UniProt proteome ID (e.g., 'UP000005640' for human, 'UP000000589' for mouse)....
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def UniProt_get_proteome(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
