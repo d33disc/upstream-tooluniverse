@@ -32,10 +32,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-5",
-      "temperature": 1.0,
-      "max_new_tokens": 16000,
       "return_json": false
     },
     "return_schema": {
@@ -54,7 +50,7 @@
     "type": "AgenticTool",
     "name": "XMLToolOptimizer",
     "description": "Optimizes tools defined in XML format based on test results and quality feedback",
-    "prompt": "You are an expert code and spec optimizer. Optimize the XML-defined tool based on comprehensive context.\n\n## CURRENT XML TOOL\n{xml_tool}\n\n## OPTIMIZATION CONTEXT\n{optimization_context}\n\n## CRITICAL: CHECK FOR INSTRUCTIONS\n\nIf optimization_context contains an \"instruction\" field, follow it as TOP PRIORITY:\n- User refused dependencies \u2192 Use standard library only\n- Installation failed \u2192 Use different packages\n- Reimplementation required \u2192 Generate completely new approach\n\n## OPTIMIZATION STRATEGY\n\n### Analyze Test Results First\nIf test_results.test_details exists:\n1. Examine ALL test outputs - each test has `output.result`\n2. Look for error patterns in test outputs\n3. Check if errors are from:\n   - Schema validation (spec issue - fix the <spec>)\n   - Code execution (code issue - fix the <code>)\n   - Both (fix both)\n4. Schema issues: Check \"required\" fields, parameter types, format\n5. Code issues: Check imports, logic, error handling\n\n### Fix Schema Issues (Common Problems)\nIf validation errors appear:\n- \"required\": true should be \"required\": [\"field1\", \"field2\"] (array format)\n- Check parameter types match tool expectations\n- Ensure return_schema matches actual returns\n- Verify all referenced fields exist\n\n### Fix Code Issues\nIf test outputs show errors:\n1. Analyze each error type from test outputs\n2. Identify root cause from error message\n3. Apply targeted fixes to the <code> section\n4. Ensure fixes don't break existing functionality\n\n### Improve Code Quality\n1. Simplify complex logic\n2. Remove unnecessary code\n3. Optimize algorithms and data structures\n4. Improve error handling\n5. Enhance input validation\n\n### Learn from History\n- Check improvement_history for past attempts\n- Avoid repeating failed approaches\n- If same error persists, completely change strategy\n\n## RESPONSE FORMAT\n\nReturn the optimized XML in the EXACT same format as xml_tool:\n\n<code><![CDATA[\n  [optimized Python code]\n]]></code>\n<spec><![CDATA[\n  [updated JSON spec if needed]\n]]></spec>\n\n## RULES\n1. Optimize BOTH <code> AND <spec> - spec issues are common causes of failures\n2. Keep the same XML structure with CDATA sections\n3. MUST wrap content in CDATA: <code><![CDATA[...]]></code>\n4. When fixing validation errors, update <spec> parameter.required field\n5. Maintain tool name and core functionality\n6. Ensure code is executable and syntactically correct\n7. Return ONLY the XML (no markdown blocks, no explanations)\n\nMake it work, make it simple, make it better!",
+    "prompt": "You are an expert code and spec optimizer. Optimize the XML-defined tool based on comprehensive context.\n\n## CURRENT XML TOOL\n{xml_tool}\n\n## OPTIMIZATION CONTEXT\n{optimization_context}\n\n## CRITICAL: CHECK FOR INSTRUCTIONS\n\nIf optimization_context contains an \"instruction\" field, follow it as TOP PRIORITY:\n- User refused dependencies → Use standard library only\n- Installation failed → Use different packages\n- Reimplementation required → Generate completely new approach\n\n## OPTIMIZATION STRATEGY\n\n### Analyze Test Results First\nIf test_results.test_details exists:\n1. Examine ALL test outputs - each test has `output.result`\n2. Look for error patterns in test outputs\n3. Check if errors are from:\n   - Schema validation (spec issue - fix the <spec>)\n   - Code execution (code issue - fix the <code>)\n   - Both (fix both)\n4. Schema issues: Check \"required\" fields, parameter types, format\n5. Code issues: Check imports, logic, error handling\n\n### Fix Schema Issues (Common Problems)\nIf validation errors appear:\n- \"required\": true should be \"required\": [\"field1\", \"field2\"] (array format)\n- Check parameter types match tool expectations\n- Ensure return_schema matches actual returns\n- Verify all referenced fields exist\n\n### Fix Code Issues\nIf test outputs show errors:\n1. Analyze each error type from test outputs\n2. Identify root cause from error message\n3. Apply targeted fixes to the <code> section\n4. Ensure fixes don't break existing functionality\n\n### Improve Code Quality\n1. Simplify complex logic\n2. Remove unnecessary code\n3. Optimize algorithms and data structures\n4. Improve error handling\n5. Enhance input validation\n\n### Learn from History\n- Check improvement_history for past attempts\n- Avoid repeating failed approaches\n- If same error persists, completely change strategy\n\n## RESPONSE FORMAT\n\nReturn the optimized XML in the EXACT same format as xml_tool:\n\n<code><![CDATA[\n  [optimized Python code]\n]]></code>\n<spec><![CDATA[\n  [updated JSON spec if needed]\n]]></spec>\n\n## RULES\n1. Optimize BOTH <code> AND <spec> - spec issues are common causes of failures\n2. Keep the same XML structure with CDATA sections\n3. MUST wrap content in CDATA: <code><![CDATA[...]]></code>\n4. When fixing validation errors, update <spec> parameter.required field\n5. Maintain tool name and core functionality\n6. Ensure code is executable and syntactically correct\n7. Return ONLY the XML (no markdown blocks, no explanations)\n\nMake it work, make it simple, make it better!",
     "input_arguments": [
       "xml_tool",
       "optimization_context"
@@ -77,10 +73,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini",
-      "temperature": 1.0,
-      "max_new_tokens": 12000,
       "return_json": false
     },
     "return_schema": {
@@ -121,10 +113,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-5",
-      "temperature": 1.0,
-      "max_new_tokens": 6000,
       "return_json": true
     },
     "return_schema": {
@@ -189,10 +177,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-5",
-      "temperature": 1.0,
-      "max_new_tokens": 4000,
       "return_json": true
     },
     "return_schema": {
@@ -263,10 +247,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-5",
-      "temperature": 1.0,
-      "max_new_tokens": 5000,
       "return_json": true
     },
     "return_schema": {
@@ -375,10 +355,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "o4-mini",
-      "temperature": 1.0,
-      "max_new_tokens": 8000,
       "return_json": true
     },
     "return_schema": {

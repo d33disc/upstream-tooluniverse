@@ -44,10 +44,6 @@
       ]
     },
     "configs": {
-      "api_type": "CHATGPT",
-      "model_id": "gpt-4o-1120",
-      "temperature": 0.3,
-      "max_new_tokens": 2048,
       "return_json": false,
       "return_metadata": false
     },
