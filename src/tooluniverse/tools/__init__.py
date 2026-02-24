@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 1907 scientific tools.
+Type-safe Python interface to 1920 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -287,6 +287,10 @@ from .DescriptionQualityEvaluator import DescriptionQualityEvaluator
 from .Dfam_get_annotations import Dfam_get_annotations
 from .Dfam_get_family import Dfam_get_family
 from .Dfam_search_families import Dfam_search_families
+from .DigiKey_get_categories import DigiKey_get_categories
+from .DigiKey_get_manufacturers import DigiKey_get_manufacturers
+from .DigiKey_get_product_details import DigiKey_get_product_details
+from .DigiKey_search_by_keyword import DigiKey_search_by_keyword
 from .DisProt_get_entry import DisProt_get_entry
 from .DisProt_search import DisProt_search
 from .DiseaseAnalyzerAgent import DiseaseAnalyzerAgent
@@ -999,6 +1003,14 @@ from .InterPro_get_structures_for_domain import InterPro_get_structures_for_doma
 from .InterPro_search_domains import InterPro_search_domains
 from .InterPro_search_entries import InterPro_search_entries
 from .JASPAR_get_transcription_factors import JASPAR_get_transcription_factors
+from .JLCSearch_list_categories import JLCSearch_list_categories
+from .JLCSearch_search_capacitors import JLCSearch_search_capacitors
+from .JLCSearch_search_components import JLCSearch_search_components
+from .JLCSearch_search_diodes import JLCSearch_search_diodes
+from .JLCSearch_search_leds import JLCSearch_search_leds
+from .JLCSearch_search_microcontrollers import JLCSearch_search_microcontrollers
+from .JLCSearch_search_resistors import JLCSearch_search_resistors
+from .JLCSearch_search_voltage_regulators import JLCSearch_search_voltage_regulators
 from .JPLHorizons_get_body_data import JPLHorizons_get_body_data
 from .JPLHorizons_lookup_object import JPLHorizons_lookup_object
 from .KEGG_get_brite_hierarchy import KEGG_get_brite_hierarchy
@@ -1803,10 +1815,6 @@ from .ZFIN_get_gene_alleles import ZFIN_get_gene_alleles
 from .ZFIN_get_gene_expression import ZFIN_get_gene_expression
 from .ZFIN_get_gene_orthologs import ZFIN_get_gene_orthologs
 from .ZFIN_get_gene_phenotypes import ZFIN_get_gene_phenotypes
-from .ZINC_get_catalogs import ZINC_get_catalogs
-from .ZINC_get_substance import ZINC_get_substance
-from .ZINC_search_by_name import ZINC_search_by_name
-from .ZINC_search_by_smiles import ZINC_search_by_smiles
 from .Zenodo_get_license import Zenodo_get_license
 from .Zenodo_get_record import Zenodo_get_record
 from .Zenodo_get_record_files import Zenodo_get_record_files
@@ -2675,6 +2683,10 @@ __all__ = [
     "Dfam_get_annotations",
     "Dfam_get_family",
     "Dfam_search_families",
+    "DigiKey_get_categories",
+    "DigiKey_get_manufacturers",
+    "DigiKey_get_product_details",
+    "DigiKey_search_by_keyword",
     "DisProt_get_entry",
     "DisProt_search",
     "DiseaseAnalyzerAgent",
@@ -3157,6 +3169,14 @@ __all__ = [
     "InterPro_search_domains",
     "InterPro_search_entries",
     "JASPAR_get_transcription_factors",
+    "JLCSearch_list_categories",
+    "JLCSearch_search_capacitors",
+    "JLCSearch_search_components",
+    "JLCSearch_search_diodes",
+    "JLCSearch_search_leds",
+    "JLCSearch_search_microcontrollers",
+    "JLCSearch_search_resistors",
+    "JLCSearch_search_voltage_regulators",
     "JPLHorizons_get_body_data",
     "JPLHorizons_lookup_object",
     "KEGG_get_brite_hierarchy",
@@ -3799,10 +3819,6 @@ __all__ = [
     "ZFIN_get_gene_expression",
     "ZFIN_get_gene_orthologs",
     "ZFIN_get_gene_phenotypes",
-    "ZINC_get_catalogs",
-    "ZINC_get_substance",
-    "ZINC_search_by_name",
-    "ZINC_search_by_smiles",
     "Zenodo_get_license",
     "Zenodo_get_record",
     "Zenodo_get_record_files",

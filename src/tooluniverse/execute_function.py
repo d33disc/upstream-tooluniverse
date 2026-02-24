@@ -448,6 +448,32 @@ class ToolUniverse:
         # Use ~/.tooluniverse when use_global=True and no explicit workspace is set.
         self._workspace_dir: Path = self._resolve_workspace(workspace, use_global)
 
+        # Auto-load .env from workspace directory (secrets stay out of space.yaml).
+        # Existing env vars are never overwritten (shell / system env always wins).
+        _ws_dotenv = self._workspace_dir / ".env"
+        if _ws_dotenv.exists():
+            try:
+                from dotenv import load_dotenv as _load_dotenv
+                _load_dotenv(_ws_dotenv, override=False)
+                self.logger.debug(f"Loaded workspace .env: {_ws_dotenv}")
+            except Exception as _exc:
+                self.logger.debug(f"Could not load workspace .env: {_exc}")
+
+        # Seed workspace with default_space.yaml on first use (if workspace dir exists
+        # but has no space.yaml). This gives the user a visible, editable starting point.
+        _ws_space_yaml = self._workspace_dir / "space.yaml"
+        if self._workspace_dir.exists() and not _ws_space_yaml.exists():
+            try:
+                import shutil as _shutil
+                _default = Path(__file__).parent / "data" / "default_space.yaml"
+                if _default.exists():
+                    _shutil.copy2(_default, _ws_space_yaml)
+                    self.logger.info(
+                        f"Created default space.yaml in workspace: {_ws_space_yaml}"
+                    )
+            except Exception as _exc:
+                self.logger.debug(f"Could not seed default space.yaml: {_exc}")
+
         # Read workspace space.yaml (if present) as the base config for this workspace.
         # This config is used as base when --load merges on top, or auto-applied when no
         # explicit space is specified.
@@ -495,11 +521,19 @@ class ToolUniverse:
         """
         if workspace:
             p = Path(workspace)
+            if p.exists() and not p.is_dir():
+                raise ValueError(
+                    f"Workspace path exists but is not a directory: {p}"
+                )
             p.mkdir(parents=True, exist_ok=True)
             return p
         env_home = os.getenv("TOOLUNIVERSE_HOME")
         if env_home:
             p = Path(env_home)
+            if p.exists() and not p.is_dir():
+                raise ValueError(
+                    f"TOOLUNIVERSE_HOME path exists but is not a directory: {p}"
+                )
             p.mkdir(parents=True, exist_ok=True)
             return p
         if use_global:
@@ -4333,6 +4367,16 @@ class ToolUniverse:
 
         # Apply additional configurations (LLM, hooks, etc.)
         try:
+            # Apply log level if present
+            log_level = config.get("log_level")
+            if log_level:
+                self._apply_log_level_config(log_level)
+
+            # Apply cache configuration if present
+            cache_config = config.get("cache")
+            if cache_config:
+                self._apply_cache_config(cache_config)
+
             # Apply LLM configuration if present
             llm_config = config.get("llm_config")
             if llm_config:
@@ -4351,6 +4395,53 @@ class ToolUniverse:
             print(f"⚠️  Failed to apply Space configurations: {e}")
 
         return config
+
+    def _apply_log_level_config(self, log_level: str):
+        """Apply log level from Space config."""
+        try:
+            import logging
+            logging.getLogger("tooluniverse").setLevel(getattr(logging, log_level, logging.INFO))
+            self.logger.debug(f"Space set log level: {log_level}")
+        except Exception as e:
+            self.logger.warning(f"Failed to apply log_level config: {e}")
+
+    def _apply_cache_config(self, cache_config: Dict[str, Any]):
+        """Reconfigure the cache manager from Space cache settings.
+
+        Only the keys present in cache_config are changed; omitted keys keep
+        their current values.
+        """
+        try:
+            current = self.cache_manager
+            enabled = cache_config.get("enabled", current.enabled)
+            memory_size = cache_config.get("memory_size", current.memory.max_size)
+            ttl = cache_config.get("ttl", current.default_ttl)
+            persist = cache_config.get("persist", current.persistent is not None)
+
+            # Determine persistent path — reuse existing path if persist stays on
+            if persist:
+                persistent_path = (
+                    current.persistent.path
+                    if current.persistent is not None
+                    else None
+                )
+            else:
+                persistent_path = None
+
+            self.cache_manager = ResultCacheManager(
+                memory_size=memory_size,
+                persistent_path=persistent_path,
+                enabled=enabled,
+                persistence_enabled=persist,
+                singleflight=current.singleflight is not None,
+                default_ttl=ttl if ttl != 0 else None,
+            )
+            self.logger.debug(
+                f"Cache reconfigured: enabled={enabled}, memory_size={memory_size}, "
+                f"ttl={ttl}, persist={persist}"
+            )
+        except Exception as e:
+            self.logger.warning(f"Failed to apply cache config: {e}")
 
     def _apply_llm_config(self, llm_config: Dict[str, Any]):
         """

@@ -1,237 +1,163 @@
-Space Configuration System
-==============================
+Space & Workspace
+=================
 
-Space is a powerful configuration system that allows you to easily load, share, and manage tool configurations for ToolUniverse. It supports both simple presets and complex workspaces with AI integration.
+**space.yaml** is how you configure ToolUniverse — which tools to load, how the cache behaves, LLM settings, and more. A **workspace** is a local folder (``.tooluniverse/``) where your space.yaml and API keys live, loaded automatically on every startup.
 
 Quick Start
 -----------
 
-Load a Space configuration in just one line:
+.. code-block:: bash
 
-.. code-block:: python
+   mkdir .tooluniverse
 
-   from tooluniverse import ToolUniverse
-   
-   tu = ToolUniverse()
-   
-   # Load from local file
-   config = tu.load_space("./my-config.yaml")
-   
-   # Or load from GitHub
-   config = tu.load_space(
-       "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/protein-research.yaml"
-   )
+   # API keys — never commit this file
+   echo "OPENAI_API_KEY=sk-..." > .tooluniverse/.env
 
-Command Line Usage
-------------------
+   # Tool config — safe to share
+   cat > .tooluniverse/space.yaml << 'EOF'
+   name: my-workspace
+   version: "1.0"
+   tools:
+     categories: [literature, drug]
+   EOF
 
-Use Space configurations with MCP servers:
+   tooluniverse-smcp-stdio   # both files load automatically
+
+Or load any space file on the fly:
 
 .. code-block:: bash
 
-   # Load local file
-   tooluniverse-smcp-stdio --load "./my-config.yaml"
-   
-   # Load from GitHub
-   tooluniverse-smcp-stdio --load "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/protein-research.yaml"
+   tooluniverse-smcp-stdio --load ./life-science.yaml
+   tooluniverse-smcp-stdio --load "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/life-science.yaml"
 
-What is Space?
-------------------
+---
 
-Space is a unified system for managing tool configurations that supports:
+space.yaml Reference
+---------------------
 
-- **Presets**: Simple tool collections for specific domains
-- **Workspaces**: Complete environments with tools, AI config, and workflows
-- **Sharing**: Easy sharing via HuggingFace Hub, HTTP URLs, or local files
+.. code-block:: yaml
 
-Available Space Configurations
--------------------------------
+   name: my-space     # required
+   version: "1.0"     # required
+   description: "..."
+   tags: [research, biology]
 
-ToolUniverse provides pre-configured Space configurations for various research domains. All Spaces are available on GitHub and can be loaded directly via HTTP URLs.
+   # ── Tools ────────────────────────────────────────────────────────
+   tools:
+     categories: [literature, drug, gwas]   # load whole categories
+     include_tools: [UniProt_search]         # add specific tools by name
+     exclude_tools: [slow_tool]              # remove specific tools by name
+     include_tool_types: [api]              # filter by type
+     exclude_tool_types: [agentic]
 
-Domain-Specific Spaces
-~~~~~~~~~~~~~~~~~~~~~~
+   # ── Cache ────────────────────────────────────────────────────────
+   cache:
+     enabled: true        # default: true
+     memory_size: 256     # LRU slots in memory, default: 256
+     persist: true        # write to disk (SQLite), default: true
+     ttl: 3600            # seconds before expiry; omit = cache forever
 
-**Protein Research** (`protein-research.yaml`)
- Comprehensive tools for protein structure, function, and interaction research.
- Includes: UniProt, RCSB PDB, AlphaFold, HPA, InterPro, protein visualization
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/protein-research.yaml>`_
+   # ── LLM (only needed for agentic tools) ─────────────────────────
+   llm_config:
+     default_provider: CHATGPT   # CHATGPT | GEMINI | OPENROUTER | VLLM
+     models:
+       default: gpt-4o
+     temperature: 0.2
 
-**Genomics** (`genomics.yaml`)
- Tools for genomics and genetics research.
- Includes: GWAS, Ensembl, ClinVar, dbSNP, gnomAD, GTEx, ENCODE, GDC
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/genomics.yaml>`_
+   # ── Hooks ────────────────────────────────────────────────────────
+   hooks:
+     - type: SummarizationHook
+       enabled: true
+       config:
+         max_length: 500
+     - type: FileSaveHook
+       enabled: true
+       config:
+         output_dir: ./outputs
 
-**Bioinformatics** (`bioinformatics.yaml`)
- Bioinformatics analysis and pathway research tools.
- Includes: BLAST, Gene Ontology, KEGG, Reactome, Enrichr, HumanBase, WikiPathways
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/bioinformatics.yaml>`_
+   # ── External sources ─────────────────────────────────────────────
+   sources:
+     - hf:community/genomics-tools
+     - ./my-local-tools/
 
-**Structural Biology** (`structural-biology.yaml`)
- Protein and molecular structure analysis tools.
- Includes: RCSB PDB, AlphaFold, EMDB, 3D visualization
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/structural-biology.yaml>`_
+   # ── Inherit from another space ───────────────────────────────────
+   extends: hf:community/base-bio-tools
 
-**Cheminformatics** (`cheminformatics.yaml`)
- Chemical compound research and ADMET prediction tools.
- Includes: PubChem, ChEMBL, ADMET AI, molecular visualization
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/cheminformatics.yaml>`_
+   # ── Logging ──────────────────────────────────────────────────────
+   log_level: WARNING   # DEBUG | INFO | WARNING | ERROR | CRITICAL
 
-**Disease Research** (`disease-research.yaml`)
- Disease research and target-disease association tools.
- Includes: OpenTargets, Monarch, disease target scoring, GWAS, HPA
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/disease-research.yaml>`_
+   # ── Document required keys (warns at startup if missing) ─────────
+   required_env:
+     - OPENAI_API_KEY
 
-**Drug Discovery** (`drug-discovery.yaml`)
- Essential tools for drug discovery research.
- Includes: ChEMBL, Clinical Trials, OpenTargets, FDA, PubChem, DrugBank, ADMET AI
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/drug-discovery.yaml>`_
+.. note::
+   Put API key *values* in ``.tooluniverse/.env``, not in space.yaml.
+   space.yaml is safe to commit; ``.env`` is not.
 
-**Literature Search** (`literature-search.yaml`)
- Scientific literature search and analysis tools.
- Includes: EuropePMC, Semantic Scholar, PubTator, arXiv, Crossref, PubMed
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/literature-search.yaml>`_
+---
 
-**Clinical Research** (`clinical-research.yaml`)
- Clinical research and regulatory affairs tools.
- Includes: Clinical Trials, FDA, Clinical Guidelines, Monarch, EFO, HPA
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/clinical-research.yaml>`_
+Workspace
+---------
 
-Comprehensive Workspace
-~~~~~~~~~~~~~~~~~~~~~~~
+The workspace is a folder ToolUniverse watches on every startup.
 
-**Full Workspace** (`full-workspace.yaml`)
- Complete research environment with all major domains (449 tools from 32 categories).
- Includes: LLM configuration, hooks, comprehensive tool coverage
- `GitHub <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/full-workspace.yaml>`_
+**Layout:**
 
-Loading Pre-configured Spaces
------------------------------
+.. code-block:: text
 
-All Space configurations can be loaded directly from GitHub or local files:
+   .tooluniverse/
+   ├── .env         ← API keys (add to .gitignore)
+   ├── space.yaml   ← auto-loaded on startup (seeded from defaults on first run)
+   └── tools/       ← custom tool configs (JSON or Python)
+
+**Local vs. global:**
+
+.. code-block:: bash
+
+   tooluniverse-smcp-stdio              # local:  ./.tooluniverse/
+   tooluniverse-smcp-stdio --global     # global: ~/.tooluniverse/
+   tooluniverse-smcp-stdio --workspace /path/to/ws   # explicit path
+
+Priority (first match wins): ``--workspace`` → ``TOOLUNIVERSE_HOME`` env → ``--global`` → ``./.tooluniverse/``
+
+**Merging:** when you ``--load`` a file, your workspace ``space.yaml`` is the base and the loaded file overrides only what it specifies.
+
+.. code-block:: text
+
+   .tooluniverse/space.yaml  (base defaults)
+            +
+   life-science.yaml         (overrides)
+            =
+   merged config that runs
+
+**Python API:**
 
 .. code-block:: python
 
    from tooluniverse import ToolUniverse
-   
-   tu = ToolUniverse()
-   
-   # Load from GitHub raw URL
-   config = tu.load_space(
-       "https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/examples/spaces/protein-research.yaml"
-   )
-   
-   # Or download and load from local file
-   config = tu.load_space("./examples/spaces/protein-research.yaml")
-   
-   # Use the loaded tools
-   print(f"Loaded {len(tu.all_tools)} tools from {config.get('name')}")
 
-For more details and configuration options, see `examples/spaces/README.md <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/README.md>`_.
+   tu = ToolUniverse()                         # local workspace (default)
+   tu = ToolUniverse(use_global=True)          # global workspace
+   tu = ToolUniverse(workspace="/path/to/ws")  # explicit path
+   tu = ToolUniverse(space="./life-science.yaml")  # load + merge over workspace
 
-Creating Your Own Space
-------------------------
+---
 
-You can create custom Space configurations by creating a YAML file:
+Ready-made Space
+----------------
 
-.. code-block:: yaml
+`examples/spaces/life-science.yaml <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/life-science.yaml>`_ — loads all life science and general-purpose tools organized by domain:
 
-   name: "My Research Toolkit"
-   version: "1.0.0"
-   description: "Tools for my research"
-   
-   tools:
-     include_tools:
-       - "UniProt_get_entry_by_accession"
-       - "gwas_search_associations"
-       - "PubChem_get_CID_by_compound_name"
-
-Then load it:
-
-.. code-block:: python
-
-   tu = ToolUniverse()
-   config = tu.load_space("./my-research-toolkit.yaml")
-
-For more examples and detailed configuration options, see `examples/spaces/README.md <https://github.com/mims-harvard/ToolUniverse/blob/main/examples/spaces/README.md>`_.
-
-Configuration File Structure
------------------------------
-
-Here's a complete example with all available fields explained:
-
-.. code-block:: yaml
-
-   # Required fields
-   name: "My Research Workspace"        # Space name (required)
-   version: "1.0.0"                     # Version number (required)
-   
-   # Optional metadata
-   description: "Complete research environment"  # Description of this Space
-   tags: ["research", "custom"]         # Keywords for categorization
-   
-   # Tool configuration - choose one or combine methods
-   tools:
-     # Method 1: Explicit tool list (recommended for clarity)
-     include_tools:
-       - "UniProt_get_entry_by_accession"
-       - "gwas_search_associations"
-       - "PubChem_get_CID_by_compound_name"
-     
-     # Method 2: Load by categories (convenience method)
-     # categories:
-     #   - "uniprot"
-     #   - "gwas"
-     #   - "pubchem"
-     
-     # Method 3: Include by tool type
-     # include_tool_types:
-     #   - "OpenTarget"
-     #   - "UniProtRESTTool"
-     
-     # Exclusions (works with any method above)
-     exclude_tools:                      # Exclude specific tools
-       - "old_tool_name"
-     # exclude_tool_types:               # Exclude by tool type
-     #   - "Unknown"
-   
-   # LLM configuration (optional, only needed for workspaces with AI agents)
-   llm_config:
-     mode: "default"                    # "default", "fallback", or "env_override"
-     default_provider: "CHATGPT"        # CHATGPT, GEMINI, OPENROUTER, or VLLM
-     models:
-       default: "gpt-4o"                # Model used by AgenticTools
-     temperature: 0.3                   # 0.0-2.0 range
-   
-   # For vLLM, also set: export VLLM_SERVER_URL="http://your-server:8000"
-   # See :doc:`vllm_support` for complete vLLM setup guide
-   
-   # Hooks for output processing (optional)
-   hooks:
-     - type: "SummarizationHook"        # Summarize long outputs
-       enabled: true
-       config:
-         max_length: 500
-         include_key_points: true
-     
-     - type: "FileSaveHook"             # Save outputs to files
-       enabled: true
-       config:
-         output_dir: "./outputs"
-         file_prefix: "analysis"
-   
-   # Environment variables documentation (optional, for reference only)
-   required_env:
-     - "AZURE_OPENAI_API_KEY"
-     - "AZURE_OPENAI_ENDPOINT"
-
-Creating Your Own Space
-------------------------
-
-1. Create a YAML file with the structure above
-2. Choose your tools using ``include_tools`` (recommended) or ``categories``
-3. Add LLM config and hooks if needed
-4. Validate: ``python -c "from tooluniverse.space import validate_yaml_file_with_schema; print(' Valid' if validate_yaml_file_with_schema('my-space.yaml')[0] else ' Invalid')"``
-5. Load: ``tu.load_space("./my-space.yaml")``
-
-See `examples/spaces/ <https://github.com/mims-harvard/ToolUniverse/tree/main/examples/spaces>`_ for more examples.
+- **Proteins & Structure** — UniProt, RCSB PDB, AlphaFold, PDBe, InterPro, SWISS-MODEL, CATH, GPCRdb, BRENDA, SAbDab, and more
+- **Genomics & Variants** — Ensembl, ClinVar, gnomAD, GWAS Catalog, ENCODE, GTEx, ClinGen, COSMIC, CIViC, UCSC, NCBI, and more
+- **Drug Discovery** — Open Targets, ChEMBL, PubChem, FDA, DrugBank, PharmGKB, BindingDB, ZINC, ADMET AI, and more
+- **Metabolomics** — HMDB, LIPID MAPS, MetaboLights, GNPS, MetaCyc, BiGG, Rhea, and more
+- **Pathways & Ontologies** — Reactome, KEGG, WikiPathways, GO, Enrichr, OmniPath, MSigDB, HPO, MeSH, and more
+- **Disease & Clinical** — OMIM, Orphanet, DisGeNET, Monarch, ClinicalTrials.gov, WHO, CDC, clinical guidelines, and more
+- **Expression & Single-Cell** — GEO, ArrayExpress, Expression Atlas, Human Cell Atlas, CellxGene, MGnify, and more
+- **Proteomics & Imaging** — PRIDE, IntAct, STRING, BioGRID, BioImage Archive, Cancer Imaging Archive, and more
+- **Neuroscience** — Allen Brain Atlas, NeuroMorpho, NeuroVault, OpenNeuro, ModelDB, and more
+- **Model Organisms** — SGD (yeast), WormBase, FlyBase, ZFIN, MouseMine, IMPC, Alliance Genome, and more
+- **Biodiversity & Ecology** — GBIF, OBIS, iDigBio, iNaturalist, WoRMS, ITIS, EOL, Plants of the World, and more
+- **Literature & Data** — PubMed, Europe PMC, arXiv, bioRxiv, Semantic Scholar, Zenodo, Dryad, and more
+- **Software & Tools** — Bioconductor, CRAN, Bioinformatics/Genomics/ML software registries, and more
