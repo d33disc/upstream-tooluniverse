@@ -49,7 +49,16 @@ Never run ahead. Never explain Step 3 while the user is still on Step 1. Never o
 
 ## Step 0: Auto-Detect & Quick Start
 
-Welcome the user, then immediately run these detection commands **before asking any questions**:
+**Self-declaration first — do this before any detection:**
+You already know what client you are. Open by stating your identity and asking:
+> "I'm setting this up in [Client Name, e.g. Cursor / Trae / Claude Desktop]. Are you installing ToolUniverse for me to use here, or for a different app?"
+
+- **"For you / this app"** (most common): Skip the detection commands below. You already know your own config path and OS. Go directly to the correct row in the config table in Step 2.
+- **"For a different app"** or **"Not sure"**: Run the detection commands below to identify the target client and OS.
+
+---
+
+**Detection commands** (only run if setting up for a different app or user is unsure):
 
 ```bash
 echo "=== Detecting OS ===" && \
@@ -65,6 +74,8 @@ echo "=== Detecting your AI client ===" && \
   ([ -f ~/.codeium/windsurf/mcp_config.json ] && echo "✅ Windsurf detected") || true && \
   ([ -f ~/.gemini/settings.json ] && echo "✅ Gemini CLI detected") || true && \
   ([ -f ~/.gemini/antigravity/mcp_config.json ] && echo "✅ Antigravity detected") || true && \
+  ([ -d ~/Library/Application\ Support/Trae ] && echo "✅ Trae detected (macOS)") || true && \
+  ([ -d ~/.config/Trae ] && echo "✅ Trae detected (Linux)") || true && \
   ([ -f ~/.codex/config.toml ] && echo "✅ Codex CLI detected") || true && \
   ([ -f ~/.qwen/settings.json ] && echo "✅ Qwen Code detected") || true && \
   ([ -f opencode.json ] && echo "✅ OpenCode detected") || true && \
@@ -80,7 +91,8 @@ echo "=== Detecting your AI client ===" && \
   "$env:USERPROFILE\.codeium\windsurf\mcp_config.json",
   "$env:USERPROFILE\.gemini\settings.json",
   "$env:USERPROFILE\.gemini\antigravity\mcp_config.json",
-  "$env:USERPROFILE\.qwen\settings.json"
+  "$env:USERPROFILE\.qwen\settings.json",
+  "$env:APPDATA\Trae"
 ) | ForEach-Object { if (Test-Path $_) { "✅ Detected: $_" } }
 ```
 
@@ -97,6 +109,9 @@ Based on results:
 Cursor · Claude Desktop · VS Code / Copilot · Windsurf · Claude Code · Gemini CLI · Qwen Code · Codex (OpenAI) · Cline · Trae · Antigravity · OpenCode · Other
 
 ⚠️ **If Claude Desktop is detected or selected**: Step 2 is completely different — you must fetch and follow CLAUDE_DESKTOP.md instead of the standard config. Hold this in mind.
+
+⚠️ **If Trae is detected or selected**: Step 2 is different — fetch and follow TRAE.md instead of the standard config.
+URL: `https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md`
 
 **Bootstrap check (terminal-based clients only — OpenCode, Gemini CLI, Codex CLI, Claude Code):**
 If the user arrived here from README/docs (not from inside their client), give them this one-liner to paste into their client instead and stop:
@@ -196,7 +211,7 @@ cat <CONFIG_PATH> 2>/dev/null || echo "CONFIG_NOT_FOUND"
 - **Yes** → use `["--refresh", "tooluniverse"]` in args
 - **No** → use `["tooluniverse"]`; upgrade manually with `uv cache clean tooluniverse`
 
-**Standard config (Cursor, Windsurf, Claude Code, Gemini CLI, Qwen Code, Trae, Cline):**
+**Standard config (Cursor, Windsurf, Claude Code, Gemini CLI, Qwen Code, Cline):**
 ```json
 {
   "mcpServers": {
@@ -240,7 +255,7 @@ Replace `CONFIG_PATH` with the path for the user's client:
 | **OpenCode** | `opencode.json` — uses `"mcp"` key — see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **Gemini CLI** | `~/.gemini/settings.json` |
 | **Qwen Code** | `~/.qwen/settings.json` |
-| **Trae** | `.trae/mcp.json` |
+| **Trae** | See [TRAE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md) — global config only (path varies by OS; verify in Trae Settings → MCP) |
 | **Cline** | `cline_mcp_settings.json` in VS Code extension globalStorage — OS paths vary, see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **Antigravity** | `~/.gemini/antigravity/mcp_config.json` (macOS/Linux) · `%USERPROFILE%\.gemini\antigravity\mcp_config.json` (Windows) |
 
