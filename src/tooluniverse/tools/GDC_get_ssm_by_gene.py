@@ -1,7 +1,7 @@
 """
 GDC_get_ssm_by_gene
 
-Get somatic mutations (SSMs) for a gene across TCGA/GDC projects
+Get somatic mutations (SSMs) for a gene across TCGA/GDC projects. Returns mutation type, genomic ...
 """
 
 from typing import Any, Optional, Callable
@@ -16,16 +16,16 @@ def GDC_get_ssm_by_gene(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Get somatic mutations (SSMs) for a gene across TCGA/GDC projects
+    Get somatic mutations (SSMs) for a gene across TCGA/GDC projects. Returns mutation type, genomic ...
 
     Parameters
     ----------
     gene_symbol : str
-        Gene symbol (e.g., 'TP53', 'EGFR', 'BRAF')
+        Gene symbol (e.g., 'TP53', 'EGFR', 'BRAF', 'KRAS')
     project_id : str
-        Optional: Filter by project (e.g., 'TCGA-BRCA')
+        Optional: Filter by project (e.g., 'TCGA-BRCA', 'TCGA-LUAD')
     size : int
         Number of results (1–100)
     stream_callback : Callable, optional
@@ -37,7 +37,7 @@ def GDC_get_ssm_by_gene(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

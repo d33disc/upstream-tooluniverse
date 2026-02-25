@@ -1,7 +1,7 @@
 """
 GDC_get_mutation_frequency
 
-Get mutation frequency statistics for a gene across TCGA projects
+Get mutation frequency statistics for a gene across all TCGA cancers. Returns SSM case count, CNV...
 """
 
 from typing import Any, Optional, Callable
@@ -14,14 +14,14 @@ def GDC_get_mutation_frequency(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Get mutation frequency statistics for a gene across TCGA projects
+    Get mutation frequency statistics for a gene across all TCGA cancers. Returns SSM case count, CNV...
 
     Parameters
     ----------
     gene_symbol : str
-        Gene symbol (e.g., 'TP53', 'KRAS')
+        Gene symbol (e.g., 'TP53', 'KRAS', 'EGFR')
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -31,7 +31,7 @@ def GDC_get_mutation_frequency(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 GDC_get_cnv_data
 
-Query copy number variation (CNV) data from GDC/TCGA
+Query copy number variation (CNV) files from GDC/TCGA projects. Returns CNV segment and gene-leve...
 """
 
 from typing import Any, Optional, Callable
@@ -16,16 +16,16 @@ def GDC_get_cnv_data(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Query copy number variation (CNV) data from GDC/TCGA
+    Query copy number variation (CNV) files from GDC/TCGA projects. Returns CNV segment and gene-leve...
 
     Parameters
     ----------
     project_id : str
         GDC project (e.g., 'TCGA-BRCA')
     gene_symbol : str
-        Optional: Gene symbol to filter CNVs
+        Optional: Gene symbol to focus analysis
     size : int
         Number of results
     stream_callback : Callable, optional
@@ -37,7 +37,7 @@ def GDC_get_cnv_data(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
