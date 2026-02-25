@@ -1483,7 +1483,6 @@ class ToolUniverse:
         info(f"Found {len(auto_loaders)} MCP Auto Loader tool(s), processing...")
 
         # Check if we're already in an event loop
-        import asyncio
         try:
             asyncio.get_running_loop()
             in_event_loop = True
