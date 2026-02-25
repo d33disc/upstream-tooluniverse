@@ -22,7 +22,8 @@ Advanced configuration options for ToolUniverse MCP integration.
 
 ### Windsurf
 
-- `~/.codeium/windsurf/mcp_config.json`
+- **macOS/Linux**: `~/.codeium/windsurf/mcp_config.json`
+- **Windows**: `%USERPROFILE%\.codeium\windsurf\mcp_config.json`
 
 ### Claude Code
 
@@ -32,6 +33,36 @@ Advanced configuration options for ToolUniverse MCP integration.
 ### Gemini CLI
 
 - `~/.gemini/settings.json`
+
+### Antigravity
+
+- **macOS/Linux**: `~/.gemini/antigravity/mcp_config.json`
+- **Windows**: `%USERPROFILE%\.gemini\antigravity\mcp_config.json`
+
+Access via: Agent Panel → "..." → Manage MCP Servers → View raw config. Uses `"mcpServers"` key (same as Claude Desktop format).
+
+### Cline
+
+Full path to `cline_mcp_settings.json` varies by OS:
+
+- **macOS**: `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+- **Linux**: `~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+- **Windows**: `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\cline_mcp_settings.json`
+- **Cline CLI (standalone)**: `~/.cline/data/settings/cline_mcp_settings.json`
+
+Access via Cline's "MCP Servers" icon → Configure tab → "Configure MCP Servers". Uses `"mcpServers"` key (same as Claude Desktop format).
+
+### Trae
+
+- **Windows**: `%APPDATA%\Trae\User\mcp.json`
+- **macOS**: `~/Library/Application Support/Trae/User/mcp.json`
+- **Linux**: `~/.config/Trae/User/mcp.json`
+
+Verify the exact path in Trae: Settings → MCP → Open config file.
+
+The AI agent can only access the **global** config. Project-level `.trae/mcp.json` is an experimental/beta feature and is not accessible to the agent — do not use it for MCP server registration.
+
+For full Trae setup instructions (including manual write fallback and verification), see [TRAE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md).
 
 ## Configuration Templates
 
@@ -116,7 +147,7 @@ Key differences from standard config: uses `"servers"` (not `"mcpServers"`) and 
 
 ### Compact Mode (Default with uvx)
 
-When using `uvx tooluniverse`, compact mode is **enabled by default** — no flag needed. It exposes only 5 core tools to prevent context overflow, while keeping all 1200+ tools accessible via `execute_tool`.
+When using `uvx tooluniverse`, compact mode is **enabled by default** — no flag needed. It exposes only 5 core tools to prevent context overflow, while keeping all 1000+ tools accessible via `execute_tool`.
 
 If using the pip-based `tooluniverse-smcp-stdio` command, pass `--compact-mode` explicitly:
 ```json
