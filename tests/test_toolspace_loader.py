@@ -1,5 +1,5 @@
 """
-Unit tests for Space loader.
+Unit tests for Profile loader.
 """
 
 import pytest
@@ -9,17 +9,17 @@ import json
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-from tooluniverse.space import SpaceLoader
+from tooluniverse.profile import ProfileLoader
 
 
-class TestSpaceLoader:
-    """Test SpaceLoader class."""
-    
-    def test_space_loader_initialization(self):
-        """Test SpaceLoader can be initialized."""
-        loader = SpaceLoader()
+class TestProfileLoader:
+    """Test ProfileLoader class."""
+
+    def test_profile_loader_initialization(self):
+        """Test ProfileLoader can be initialized."""
+        loader = ProfileLoader()
         assert loader is not None
-    
+
     def test_load_local_file(self):
         """Test loading a local YAML file."""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
@@ -32,18 +32,18 @@ tools:
 """
             f.write(yaml_content)
             f.flush()
-            
-            loader = SpaceLoader()
+
+            loader = ProfileLoader()
             config = loader.load(f.name)
-            
+
             assert config['name'] == 'Test Config'
             assert config['version'] == '1.0.0'
             assert config['description'] == 'Test description'
             assert 'tools' in config
-        
+
         # Clean up
         Path(f.name).unlink()
-    
+
     def test_load_invalid_yaml_file(self):
         """Test loading a YAML file that fails schema validation (bad enum value)."""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
@@ -56,27 +56,27 @@ llm_config:
             f.write(invalid_yaml)
             f.flush()
 
-            loader = SpaceLoader()
+            loader = ProfileLoader()
 
             with pytest.raises(ValueError, match="Configuration validation failed"):
                 loader.load(f.name)
 
         # Clean up
         Path(f.name).unlink()
-    
+
     def test_load_missing_file(self):
         """Test loading a missing file."""
-        loader = SpaceLoader()
-        
-        with pytest.raises(ValueError, match="Space file not found"):
+        loader = ProfileLoader()
+
+        with pytest.raises(ValueError, match="Profile file not found"):
             loader.load("nonexistent.yaml")
-    
-    @patch('tooluniverse.space.loader.hf_hub_download')
+
+    @patch('tooluniverse.profile.loader.hf_hub_download')
     def test_load_huggingface_repo(self, mock_hf_download):
         """Test loading from HuggingFace repository."""
         # Mock HuggingFace download
         mock_hf_download.return_value = str(Path(__file__).parent / "test_data" / "test_config.yaml")
-        
+
         # Create test file
         test_file = Path(__file__).parent / "test_data" / "test_config.yaml"
         test_file.parent.mkdir(exist_ok=True)
@@ -87,17 +87,17 @@ llm_config:
                 'description': 'Test from HuggingFace',
                 'tools': {'include_tools': ['tool1']}
             }, f)
-        
-        loader = SpaceLoader()
+
+        loader = ProfileLoader()
         config = loader.load("hf://test-user/test-repo")
-        
+
         assert config['name'] == 'HF Test Config'
         assert config['version'] == '1.0.0'
-        
+
         # Clean up
         test_file.unlink()
         test_file.parent.rmdir()
-    
+
     @patch('requests.get')
     def test_load_http_url(self, mock_get):
         """Test loading from HTTP URL."""
@@ -112,14 +112,14 @@ tools:
   include_tools: [tool1, tool2]
 """
         mock_get.return_value = mock_response
-        
-        loader = SpaceLoader()
+
+        loader = ProfileLoader()
         config = loader.load("https://example.com/config.yaml")
-        
+
         assert config['name'] == 'HTTP Test Config'
         assert config['version'] == '1.0.0'
         assert 'tools' in config
-    
+
     def test_load_with_validation_error(self):
         """Test loading with validation error (bad enum value for llm_config.mode)."""
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
@@ -133,7 +133,7 @@ llm_config:
             f.write(invalid_config)
             f.flush()
 
-            loader = SpaceLoader()
+            loader = ProfileLoader()
 
             with pytest.raises(ValueError, match="Configuration validation failed"):
                 loader.load(f.name)
@@ -148,7 +148,7 @@ llm_config:
             f.write("name: test\nversion: 1.0.0\nextends:\n  - base1\n  - base2\n")
             f.flush()
 
-            loader = SpaceLoader()
+            loader = ProfileLoader()
 
             with pytest.raises(ValueError, match="string URI"):
                 loader.load(f.name)
@@ -168,7 +168,7 @@ llm_config:
             f"name: self-ref\nversion: 1.0.0\nextends: {fname}\n"
         )
 
-        loader = SpaceLoader()
+        loader = ProfileLoader()
 
         with pytest.raises(ValueError, match="Circular"):
             loader.load(fname)
@@ -177,7 +177,7 @@ llm_config:
 
     def test_extends_merges_base_and_child(self):
         """Test that extends deep-merges the base config and the child takes precedence."""
-        loader = SpaceLoader()
+        loader = ProfileLoader()
 
         with tempfile.NamedTemporaryFile(
             mode='w', suffix='.yaml', delete=False

@@ -24,7 +24,6 @@ Constants:
     tool_type_mappings: Mapping of tool type strings to their implementation classes
 """
 
-import asyncio
 import copy
 import inspect
 import json
@@ -157,6 +156,7 @@ class ToolCallable:
         Returns:
             Tool execution result (sync) or coroutine (async)
         """
+        import asyncio
         function_call = {"name": self.tool_name, "arguments": kwargs}
 
         # Detect if we're in an async context
@@ -170,6 +170,7 @@ class ToolCallable:
 
     def _call_sync(self, function_call, stream_callback, use_cache, validate):
         """Synchronous execution - handles both sync and async tools."""
+        import asyncio
         # Check if tool is async
         function_name = function_call.get("name")
         tool_instance = (
@@ -305,7 +306,7 @@ class ToolUniverse:
         hook_config: dict = None,
         hook_type: str = None,
         enable_name_shortening: bool = False,
-        space: Optional[str] = None,
+        profile: Optional[str] = None,
         workspace: Optional[str] = None,
         use_global: bool = False,
     ):
@@ -326,10 +327,10 @@ class ToolUniverse:
                                              If both hook_config and hook_type are provided, hook_config takes precedence.
             enable_name_shortening (bool, optional): Whether to enable automatic tool name shortening
                                                    for MCP compatibility. Defaults to False.
-            space (str, optional): URI of a Space configuration to load automatically
-                                   (e.g. ``"./my-space.yaml"``, ``"hf:user/repo"``).
-                                   Overrides the ``TOOLUNIVERSE_SPACE`` environment variable.
-                                   When provided, ``load_space()`` is called after initialization.
+            profile (str, optional): URI of a Profile configuration to load automatically
+                                   (e.g. ``"./my-profile.yaml"``, ``"hf:user/repo"``).
+                                   Overrides the ``TOOLUNIVERSE_PROFILE`` environment variable.
+                                   When provided, ``load_profile()`` is called after initialization.
             workspace (str, optional): Path to the local workspace directory for user-defined
                                        tools. Overrides the ``TOOLUNIVERSE_HOME`` environment
                                        variable and the default ``./.tooluniverse`` directory.
@@ -448,7 +449,7 @@ class ToolUniverse:
         # Use ~/.tooluniverse when use_global=True and no explicit workspace is set.
         self._workspace_dir: Path = self._resolve_workspace(workspace, use_global)
 
-        # Auto-load .env from workspace directory (secrets stay out of space.yaml).
+        # Auto-load .env from workspace directory (secrets stay out of profile.yaml).
         # Existing env vars are never overwritten (shell / system env always wins).
         _ws_dotenv = self._workspace_dir / ".env"
         if _ws_dotenv.exists():
@@ -459,51 +460,51 @@ class ToolUniverse:
             except Exception as _exc:
                 self.logger.debug(f"Could not load workspace .env: {_exc}")
 
-        # Seed workspace with default_space.yaml on first use (if workspace dir exists
-        # but has no space.yaml). This gives the user a visible, editable starting point.
-        _ws_space_yaml = self._workspace_dir / "space.yaml"
-        if self._workspace_dir.exists() and not _ws_space_yaml.exists():
+        # Seed workspace with default_profile.yaml on first use (if workspace dir exists
+        # but has no profile.yaml). This gives the user a visible, editable starting point.
+        _ws_profile_yaml = self._workspace_dir / "profile.yaml"
+        if self._workspace_dir.exists() and not _ws_profile_yaml.exists():
             try:
                 import shutil as _shutil
-                _default = Path(__file__).parent / "data" / "default_space.yaml"
+                _default = Path(__file__).parent / "data" / "default_profile.yaml"
                 if _default.exists():
-                    _shutil.copy2(_default, _ws_space_yaml)
+                    _shutil.copy2(_default, _ws_profile_yaml)
                     self.logger.info(
-                        f"Created default space.yaml in workspace: {_ws_space_yaml}"
+                        f"Created default profile.yaml in workspace: {_ws_profile_yaml}"
                     )
             except Exception as _exc:
-                self.logger.debug(f"Could not seed default space.yaml: {_exc}")
+                self.logger.debug(f"Could not seed default profile.yaml: {_exc}")
 
-        # Read workspace space.yaml (if present) as the base config for this workspace.
+        # Read workspace profile.yaml (if present) as the base config for this workspace.
         # This config is used as base when --load merges on top, or auto-applied when no
-        # explicit space is specified.
-        self._workspace_space_config: Optional[dict] = None
-        _ws_space_yaml = self._workspace_dir / "space.yaml"
-        if _ws_space_yaml.exists():
+        # explicit profile is specified.
+        self._workspace_profile_config: Optional[dict] = None
+        _ws_profile_yaml = self._workspace_dir / "profile.yaml"
+        if _ws_profile_yaml.exists():
             try:
                 import yaml as _yaml
-                with open(_ws_space_yaml, "r", encoding="utf-8") as _f:
-                    self._workspace_space_config = _yaml.safe_load(_f) or {}
+                with open(_ws_profile_yaml, "r", encoding="utf-8") as _f:
+                    self._workspace_profile_config = _yaml.safe_load(_f) or {}
             except Exception as _exc:
-                self.logger.debug(f"Could not read workspace space.yaml: {_exc}")
+                self.logger.debug(f"Could not read workspace profile.yaml: {_exc}")
 
-        # Phase 5 – auto-load Space
-        # Priority: space= param → TOOLUNIVERSE_SPACE env var → workspace space.yaml
-        effective_space = space or os.getenv("TOOLUNIVERSE_SPACE")
-        if effective_space:
+        # Phase 5 – auto-load Profile
+        # Priority: profile= param → TOOLUNIVERSE_PROFILE env var → workspace profile.yaml
+        effective_profile = profile or os.getenv("TOOLUNIVERSE_PROFILE")
+        if effective_profile:
             try:
-                # load_space() will merge workspace space.yaml as base if present
-                self.load_space(effective_space)
-                self.logger.info(f"Auto-loaded Space: {effective_space}")
+                # load_profile() will merge workspace profile.yaml as base if present
+                self.load_profile(effective_profile)
+                self.logger.info(f"Auto-loaded Profile: {effective_profile}")
             except Exception as e:
-                self.logger.warning(f"Failed to auto-load Space '{effective_space}': {e}")
-        elif self._workspace_space_config is not None:
+                self.logger.warning(f"Failed to auto-load Profile '{effective_profile}': {e}")
+        elif self._workspace_profile_config is not None:
             try:
-                # No explicit space given — auto-apply workspace space.yaml directly
-                self.load_space(str(_ws_space_yaml), _merge_workspace=False)
-                self.logger.info(f"Auto-loaded workspace space.yaml: {_ws_space_yaml}")
+                # No explicit profile given — auto-apply workspace profile.yaml directly
+                self.load_profile(str(_ws_profile_yaml), _merge_workspace=False)
+                self.logger.info(f"Auto-loaded workspace profile.yaml: {_ws_profile_yaml}")
             except Exception as e:
-                self.logger.warning(f"Failed to auto-load workspace space.yaml: {e}")
+                self.logger.warning(f"Failed to auto-load workspace profile.yaml: {e}")
 
     @staticmethod
     def _resolve_workspace(workspace: Optional[str], use_global: bool = False) -> Path:
@@ -517,7 +518,7 @@ class ToolUniverse:
         4. ``./.tooluniverse`` (current directory, default local mode)
 
         The default directories (3 & 4) are NOT auto-created; if they do not exist
-        no workspace tools are loaded and workspace space.yaml is silently skipped.
+        no workspace tools are loaded and workspace profile.yaml is silently skipped.
         """
         if workspace:
             p = Path(workspace)
@@ -1258,7 +1259,7 @@ class ToolUniverse:
         - Flat: ``*.py`` / ``*.json`` directly in the workspace root
         - Organised: ``tools/*.py`` and ``data/`` or ``configs/*.json``
         """
-        from .space.loader import SpaceLoader
+        from .profile.loader import ProfileLoader
 
         python_files = []
         json_files = []
@@ -1280,10 +1281,10 @@ class ToolUniverse:
         for base in search_roots:
             if not base.exists():
                 continue
-            # Read space.yaml if present — log pack name, warn on missing env vars
-            from .tool_registry import _read_space_yaml
-            _read_space_yaml(base, context=f"workspace '{base}'")
-            py_files, js_files = SpaceLoader.get_tool_files_from_dir(base)
+            # Read profile.yaml if present — log pack name, warn on missing env vars
+            from .tool_registry import _read_profile_yaml
+            _read_profile_yaml(base, context=f"workspace '{base}'")
+            py_files, js_files = ProfileLoader.get_tool_files_from_dir(base)
             python_files.extend(py_files)
             json_files.extend(js_files)
 
@@ -1294,22 +1295,42 @@ class ToolUniverse:
         Import user Python tool files so their @register_tool decorators run.
 
         Uses spec_from_file_location so files do not need to live inside the
-        tooluniverse package.  Each file is registered in sys.modules under
-        ``_tooluniverse_user.<stem>`` so that repeated load_tools() calls do not
-        re-execute the decorators and accumulate duplicate registry entries.
+        tooluniverse package.  Each file is registered in sys.modules under a
+        name derived from its path hash.  On subsequent calls, the file's mtime
+        is compared to the cached value; if the file was edited, the module is
+        reloaded so the changes take effect without a process restart.
         """
         import importlib.util
+        import importlib
         import sys
         import hashlib
+
+        if not hasattr(self, "_user_tool_mtimes"):
+            self._user_tool_mtimes: dict = {}
 
         for py_file in python_files:
             # Include a short path hash so files with the same stem but different
             # directories (e.g. flat vs organised layout) get distinct module names.
             path_hash = hashlib.md5(str(py_file.resolve()).encode()).hexdigest()[:6]
             module_name = f"_tooluniverse_user.{py_file.stem}_{path_hash}"
+            current_mtime = py_file.stat().st_mtime
+
             if module_name in sys.modules:
-                self.logger.debug(f"User tool file already loaded, skipping: {py_file}")
+                cached_mtime = self._user_tool_mtimes.get(module_name)
+                if cached_mtime == current_mtime:
+                    self.logger.debug(f"User tool file unchanged, skipping: {py_file}")
+                    continue
+                # File was edited — reload so the changes take effect.
+                self.logger.info(f"User tool file changed, reloading: {py_file}")
+                try:
+                    importlib.reload(sys.modules[module_name])
+                    self._user_tool_mtimes[module_name] = current_mtime
+                except Exception as e:
+                    self.logger.warning(
+                        f"Failed to reload user tool file {py_file}: {e}"
+                    )
                 continue
+
             try:
                 spec = importlib.util.spec_from_file_location(module_name, py_file)
                 module = importlib.util.module_from_spec(spec)
@@ -1317,6 +1338,7 @@ class ToolUniverse:
                 # and so re-entrant calls don't reload it.
                 sys.modules[module_name] = module
                 spec.loader.exec_module(module)
+                self._user_tool_mtimes[module_name] = current_mtime
                 self.logger.info(f"Loaded user tool file: {py_file}")
             except Exception as e:
                 # Remove broken module so a later fix-and-retry can reload it
@@ -1328,12 +1350,12 @@ class ToolUniverse:
         Load JSON tool configs from user directories and append to all_tools.
 
         Each file may contain a single config dict or a list of config dicts.
-        Files named 'space.yaml' / 'space.json' are skipped (handled separately).
+        Files named 'profile.yaml' / 'profile.json' are skipped (handled separately).
         """
         from .tool_defaults import add_annotations_to_tool_config
 
         for json_file in json_files:
-            if json_file.stem in ("space",):
+            if json_file.stem in ("profile",):
                 continue
             try:
                 with open(json_file, "r", encoding="utf-8") as f:
@@ -1354,29 +1376,29 @@ class ToolUniverse:
 
     def _load_tools_from_sources(self, loader, sources: list):
         """
-        Phase 4: Load Python tool files and JSON configs from external Space sources.
+        Phase 4: Load Python tool files and JSON configs from external Profile sources.
 
         Each entry in ``sources`` is a URI (local path, hf:user/repo, GitHub URL,
         or https:// file URL).  The URI is resolved to a local directory by
-        ``SpaceLoader.resolve_to_local_dir()``, which handles downloading and
+        ``ProfileLoader.resolve_to_local_dir()``, which handles downloading and
         caching automatically.  The directory is then scanned for tool files
-        using ``SpaceLoader.get_tool_files_from_dir()``.
+        using ``ProfileLoader.get_tool_files_from_dir()``.
 
         Last-seen definition wins: sources are processed in order, so later
         entries override earlier ones for duplicate tool names.
 
         Args:
-            loader: ``SpaceLoader`` instance (already has a cache dir).
-            sources: List of URI strings from the Space config's ``sources`` field.
+            loader: ``ProfileLoader`` instance (already has a cache dir).
+            sources: List of URI strings from the Profile config's ``sources`` field.
         """
-        from .space.loader import SpaceLoader
+        from .profile.loader import ProfileLoader
 
         for source_uri in sources:
             if not isinstance(source_uri, str) or not source_uri.strip():
                 continue
             try:
                 local_dir = loader.resolve_to_local_dir(source_uri)
-                python_files, json_files = SpaceLoader.get_tool_files_from_dir(local_dir)
+                python_files, json_files = ProfileLoader.get_tool_files_from_dir(local_dir)
                 if python_files:
                     self._import_user_python_tools(python_files)
                 if json_files:
@@ -1386,7 +1408,7 @@ class ToolUniverse:
                     f"{len(python_files)} Python files, {len(json_files)} JSON configs"
                 )
             except Exception as e:
-                self.logger.warning(f"Failed to load Space source '{source_uri}': {e}")
+                self.logger.warning(f"Failed to load Profile source '{source_uri}': {e}")
 
     def _load_auto_discovered_configs(self):
         """
@@ -1461,6 +1483,7 @@ class ToolUniverse:
         info(f"Found {len(auto_loaders)} MCP Auto Loader tool(s), processing...")
 
         # Check if we're already in an event loop
+        import asyncio
         try:
             asyncio.get_running_loop()
             in_event_loop = True
@@ -2502,6 +2525,8 @@ class ToolUniverse:
 
         tool_semaphores: Dict[str, Optional[threading.Semaphore]] = {}
 
+        import asyncio
+
         def run_job(job: _BatchJob):
             semaphore = self._get_tool_semaphore(job, tool_semaphores)
             if semaphore:
@@ -2600,6 +2625,7 @@ class ToolUniverse:
             Result (sync) or coroutine (async) depending on context.
         """
         # Detect if we're in an async context
+        import asyncio
         try:
             asyncio.get_running_loop()
             # We're in an async context - return coroutine
@@ -2676,6 +2702,7 @@ class ToolUniverse:
 
         if tool_instance and inspect.iscoroutinefunction(tool_instance.run):
             self.logger.debug(f"Running async tool '{function_name}' in sync context")
+            import asyncio
             try:
                 asyncio.get_running_loop()
                 raise RuntimeError(
@@ -2775,6 +2802,7 @@ class ToolUniverse:
 
         Uses return_exceptions=True so one failure does not abort others.
         """
+        import asyncio
         tasks = [
             self.run_one_function_async(
                 call,
@@ -2916,6 +2944,12 @@ class ToolUniverse:
                 arguments = self._coerce_arguments_to_schema(function_name, arguments)
                 # Update the original dict so coerced arguments are used
                 function_call_json["arguments"] = arguments
+
+            # Strip None values from arguments: optional params default to None in
+            # Python wrappers, but schema validation rejects None for typed params.
+            # None means "not provided" — simply omit such keys.
+            arguments = {k: v for k, v in arguments.items() if v is not None}
+            function_call_json["arguments"] = arguments
 
             # Validate parameters if requested
             if validate:
@@ -3236,6 +3270,7 @@ class ToolUniverse:
             # Call with all supported parameters
             result = tool_instance.run(tool_arguments, **kwargs)
             if inspect.iscoroutine(result):
+                import asyncio
                 result = asyncio.run(result)
             return result, tool_arguments
 
@@ -3245,11 +3280,13 @@ class ToolUniverse:
             self.logger.debug(f"Falling back to simple run() call: {e}")
             result = tool_instance.run(tool_arguments)
             if inspect.iscoroutine(result):
+                import asyncio
                 result = asyncio.run(result)
             return result, tool_arguments
 
     async def _invoke_tool_async(self, tool_instance, tool_arguments, **kwargs):
         """Invoke tool.run, using await for async tools or a thread pool for sync tools."""
+        import asyncio
         tool_name = getattr(tool_instance, "name", "unknown")
         if inspect.iscoroutinefunction(tool_instance.run):
             self.logger.debug(f"Executing async tool: {tool_name}")
@@ -3704,14 +3741,15 @@ class ToolUniverse:
         """Re-scan workspace and reload all tool configurations.
 
         Picks up new JSON/Python tool files added to the workspace
-        ``.tooluniverse/tools/`` directory since startup. Clears the existing
-        tool registry first so the result is always a clean reload.
-
-        Note: built-in package tools and installed plugin packages still
-        require a process restart to reflect changes (Python module imports
-        are cached for the lifetime of the process).
+        ``.tooluniverse/tools/`` directory since startup, and re-discovers
+        entry-point plugins installed since the process started. Clears the
+        existing tool registry first so the result is always a clean reload.
         """
         self.logger.info("Refreshing tools: clearing registry and reloading...")
+        # Force re-scan of entry-point plugins so newly-installed packages
+        # (pip-installed after this process started) are picked up.
+        from .tool_registry import reset_plugin_discovery
+        reset_plugin_discovery()
         self.load_tools()
         self.logger.info(f"Tool refresh completed: {len(self.all_tools)} tools loaded")
 
@@ -4283,62 +4321,62 @@ class ToolUniverse:
         self.load_tools(include_tools=tool_names)
         return len(self.all_tools) - original_count
 
-    def load_space(self, uri: str, _merge_workspace: bool = True, **kwargs) -> Dict[str, Any]:
+    def load_profile(self, uri: str, _merge_workspace: bool = True, **kwargs) -> Dict[str, Any]:
         """
-        Load Space configuration and apply it to the ToolUniverse instance.
+        Load Profile configuration and apply it to the ToolUniverse instance.
 
-        This is a high-level method that loads a Space configuration from various
+        This is a high-level method that loads a Profile configuration from various
         sources (HuggingFace, local files, HTTP URLs) and applies the tool settings
         to the current instance.
 
-        When a workspace ``space.yaml`` exists and ``_merge_workspace=True`` (the
+        When a workspace ``profile.yaml`` exists and ``_merge_workspace=True`` (the
         default), the workspace config is used as the base and the loaded config is
         deep-merged on top — so any key in the loaded config overrides the workspace
         default.
 
         Args:
-            uri: Space URI (e.g., "hf:user/repo", "./config.yaml", "https://example.com/config.yaml")
-            _merge_workspace: Whether to merge the workspace space.yaml as a base config.
+            uri: Profile URI (e.g., "hf:user/repo", "./config.yaml", "https://example.com/config.yaml")
+            _merge_workspace: Whether to merge the workspace profile.yaml as a base config.
                               Set to False when auto-applying the workspace yaml itself.
-            **kwargs: Additional parameters to override Space configuration
+            **kwargs: Additional parameters to override Profile configuration
                      (e.g., exclude_tools=["tool1"], include_tools=["tool2"])
 
         Returns:
-            dict: The loaded (and possibly merged) Space configuration
+            dict: The loaded (and possibly merged) Profile configuration
 
         Examples:
             # Load from HuggingFace
-            config = tu.load_space("hf:community/proteomics-toolkit")
+            config = tu.load_profile("hf:community/proteomics-toolkit")
 
             # Load local file with overrides
-            config = tu.load_space("./my-config.yaml", exclude_tools=["slow_tool"])
+            config = tu.load_profile("./my-config.yaml", exclude_tools=["slow_tool"])
 
             # Load from HTTP URL
-            config = tu.load_space("https://example.com/config.yaml")
+            config = tu.load_profile("https://example.com/config.yaml")
         """
         # Lazy import to avoid circular import issues
-        from .space import SpaceLoader
-        from .space.validator import validate_with_schema
+        from .profile import ProfileLoader
+        from .profile.validator import validate_with_schema
         import yaml as _yaml
 
-        loader = SpaceLoader()
+        loader = ProfileLoader()
 
-        # If workspace has a space.yaml and merging is requested, use it as the base
+        # If workspace has a profile.yaml and merging is requested, use it as the base
         # config and deep-merge the explicit URI on top (override wins for same keys).
-        if _merge_workspace and self._workspace_space_config:
+        if _merge_workspace and self._workspace_profile_config:
             raw_config = loader._load_raw(uri)
             raw_config = loader._resolve_extends(raw_config)
-            merged_raw = SpaceLoader._deep_merge(self._workspace_space_config, raw_config)
+            merged_raw = ProfileLoader._deep_merge(self._workspace_profile_config, raw_config)
             yaml_content = _yaml.dump(merged_raw, default_flow_style=False, allow_unicode=True)
             is_valid, errors, config = validate_with_schema(yaml_content, fill_defaults_flag=True)
             if not is_valid:
-                error_msg = "Merged Space configuration validation failed:\n" + "\n".join(
+                error_msg = "Merged Profile configuration validation failed:\n" + "\n".join(
                     f"  - {e}" for e in errors
                 )
                 raise ValueError(error_msg)
-            self.logger.debug(f"Space '{uri}' merged with workspace space.yaml")
+            self.logger.debug(f"Profile '{uri}' merged with workspace profile.yaml")
         else:
-            # Load Space configuration normally
+            # Load Profile configuration normally
             config = loader.load(uri)
 
         # Extract tool configuration
@@ -4348,7 +4386,10 @@ class ToolUniverse:
         tools_file_param = kwargs.get("tools_file")
 
         # Merge with override parameters
-        tool_type = kwargs.get("tool_type") or tools_config.get("categories")
+        # Profile YAML convention: categories: [] means "all categories" (same as omitting
+        # the key).  Convert empty list to None so load_tools() loads everything.
+        _categories_raw = tools_config.get("categories")
+        tool_type = kwargs.get("tool_type") or (_categories_raw if _categories_raw else None)
         exclude_tools = kwargs.get("exclude_tools") or tools_config.get(
             "exclude_tools", []
         )
@@ -4365,7 +4406,7 @@ class ToolUniverse:
             "exclude_tool_types", []
         )
 
-        # Phase 4 – load tools from external sources declared in the Space
+        # Load tools from external sources declared in the Profile
         sources = config.get("sources", [])
         if sources:
             self._load_tools_from_sources(loader, sources)
@@ -4382,7 +4423,7 @@ class ToolUniverse:
         )
 
         # Store the configuration for reference
-        self._current_space_config = config
+        self._current_profile_config = config
 
         # Apply additional configurations (LLM, hooks, etc.)
         try:
@@ -4407,25 +4448,25 @@ class ToolUniverse:
                 self._apply_hooks_config(hooks_config)
 
             # Store metadata
-            self._store_space_metadata(config)
+            self._store_profile_metadata(config)
 
         except Exception as e:
             # Use print since logging might not be available
-            print(f"⚠️  Failed to apply Space configurations: {e}")
+            print(f"⚠️  Failed to apply Profile configurations: {e}")
 
         return config
 
     def _apply_log_level_config(self, log_level: str):
-        """Apply log level from Space config."""
+        """Apply log level from Profile config."""
         try:
             import logging
             logging.getLogger("tooluniverse").setLevel(getattr(logging, log_level, logging.INFO))
-            self.logger.debug(f"Space set log level: {log_level}")
+            self.logger.debug(f"Profile set log level: {log_level}")
         except Exception as e:
             self.logger.warning(f"Failed to apply log_level config: {e}")
 
     def _apply_cache_config(self, cache_config: Dict[str, Any]):
-        """Reconfigure the cache manager from Space cache settings.
+        """Reconfigure the cache manager from Profile cache settings.
 
         Only the keys present in cache_config are changed; omitted keys keep
         their current values.
@@ -4464,7 +4505,7 @@ class ToolUniverse:
 
     def _apply_llm_config(self, llm_config: Dict[str, Any]):
         """
-        Apply LLM configuration from Space.
+        Apply LLM configuration from Profile.
 
         Args:
             llm_config: LLM configuration dictionary
@@ -4473,7 +4514,7 @@ class ToolUniverse:
             import os
 
             # Store LLM configuration
-            self._space_llm_config = llm_config
+            self._profile_llm_config = llm_config
 
             # Set environment variables for LLM configuration
             # Set configuration mode
@@ -4508,13 +4549,13 @@ class ToolUniverse:
 
     def _apply_hooks_config(self, hooks_config: List[Dict[str, Any]]):
         """
-        Apply hooks configuration from Space.
+        Apply hooks configuration from Profile.
 
         Args:
             hooks_config: Hooks configuration list
         """
         try:
-            # Convert Space hooks format to ToolUniverse hook_config format
+            # Convert Profile hooks format to ToolUniverse hook_config format
             hook_config = {
                 "hooks": hooks_config,
                 "global_settings": {
@@ -4540,16 +4581,16 @@ class ToolUniverse:
         except Exception as e:
             print(f"⚠️  Failed to apply hooks configuration: {e}")
 
-    def _store_space_metadata(self, config: Dict[str, Any]):
+    def _store_profile_metadata(self, config: Dict[str, Any]):
         """
-        Store Space metadata for reference.
+        Store Profile metadata for reference.
 
         Args:
-            config: Space configuration dictionary
+            config: Profile configuration dictionary
         """
         try:
             # Store metadata
-            self._space_metadata = {
+            self._profile_metadata = {
                 "name": config.get("name"),
                 "version": config.get("version"),
                 "description": config.get("description"),
@@ -4559,8 +4600,6 @@ class ToolUniverse:
 
             # Check for missing environment variables
             if config.get("required_env"):
-                import os
-
                 missing_env = [
                     env for env in config["required_env"] if not os.getenv(env)
                 ]
@@ -4568,22 +4607,22 @@ class ToolUniverse:
                     print(f"⚠️  Missing environment variables: {', '.join(missing_env)}")
 
         except Exception as e:
-            print(f"⚠️  Failed to store Space metadata: {e}")
+            print(f"⚠️  Failed to store Profile metadata: {e}")
 
-    def get_space_llm_config(self) -> Optional[Dict[str, Any]]:
+    def get_profile_llm_config(self) -> Optional[Dict[str, Any]]:
         """
-        Get the current Space LLM configuration.
+        Get the current Profile LLM configuration.
 
         Returns:
             LLM configuration dictionary or None if not set
         """
-        return getattr(self, "_space_llm_config", None)
+        return getattr(self, "_profile_llm_config", None)
 
-    def get_space_metadata(self) -> Optional[Dict[str, Any]]:
+    def get_profile_metadata(self) -> Optional[Dict[str, Any]]:
         """
-        Get the current Space metadata.
+        Get the current Profile metadata.
 
         Returns:
-            Space metadata dictionary or None if not set
+            Profile metadata dictionary or None if not set
         """
-        return getattr(self, "_space_metadata", None)
+        return getattr(self, "_profile_metadata", None)

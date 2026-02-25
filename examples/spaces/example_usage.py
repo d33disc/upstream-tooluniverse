@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple example: Loading and using Space configurations
+Simple example: Loading and using Profile configurations
 
 Usage:
     python examples/spaces/example_usage.py
@@ -16,10 +16,10 @@ from tooluniverse import ToolUniverse  # noqa: E402
 
 
 def main():
-    """Simple example of loading and using a Space configuration"""
-    # Load Space configuration
+    """Simple example of loading and using a Profile configuration"""
+    # Load Profile configuration
     tu = ToolUniverse()
-    config = tu.load_space("./examples/spaces/protein-research.yaml")
+    config = tu.load_profile("./examples/spaces/protein-research.yaml")
 
     print(f"✅ Loaded: {config.get('name')}")
     print(f"   Tools available: {len(tu.all_tools)} tools")
