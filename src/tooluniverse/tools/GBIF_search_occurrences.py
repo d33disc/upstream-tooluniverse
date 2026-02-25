@@ -1,7 +1,7 @@
 """
 GBIF_search_occurrences
 
-Search occurrences via GBIF occurrence/search
+Retrieve species occurrence records from GBIF with optional filters (taxonKey, country, coordinat...
 """
 
 from typing import Any, Optional, Callable
@@ -18,22 +18,22 @@ def GBIF_search_occurrences(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Search occurrences via GBIF occurrence/search
+    Retrieve species occurrence records from GBIF with optional filters (taxonKey, country, coordinat...
 
     Parameters
     ----------
     taxonKey : int
-        GBIF taxonKey filter
+        GBIF taxon key to filter occurrences by a specific taxon (from species search).
     country : str
-        Country code, e.g., US
+        ISO 3166-1 alpha-2 country code filter (e.g., 'US', 'CN').
     hasCoordinate : bool
-
+        Only return records with valid latitude/longitude coordinates when true.
     limit : int
-
+        Maximum number of results to return (1–300).
     offset : int
-
+        Result offset for pagination (0-based).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -43,7 +43,7 @@ def GBIF_search_occurrences(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

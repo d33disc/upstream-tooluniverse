@@ -1,7 +1,7 @@
 """
 GTEx_query_eqtl
 
-Query GTEx single-tissue eQTL via /association/singleTissueEqtl
+Query GTEx single-tissue eQTL associations for a gene. Use to identify regulatory variants (varia...
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def GTEx_query_eqtl(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Query GTEx single-tissue eQTL via /association/singleTissueEqtl
+    Query GTEx single-tissue eQTL associations for a gene. Use to identify regulatory variants (varia...
 
     Parameters
     ----------
     ensembl_gene_id : str
-        Ensembl gene ID, e.g., ENSG00000141510
+        Ensembl gene identifier (e.g., 'ENSG00000141510').
     page : int
-        Page number (1-based)
+        Page number (1-based).
     size : int
-        Page size (1–100)
+        Number of records per page (1–100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def GTEx_query_eqtl(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

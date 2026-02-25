@@ -1,7 +1,7 @@
 """
 WikiPathways_search
 
-Search pathways by text via WikiPathways
+Text search across community-curated pathways (disease, metabolic, signaling). Use to discover re...
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def WikiPathways_search(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Search pathways by text via WikiPathways
+    Text search across community-curated pathways (disease, metabolic, signaling). Use to discover re...
 
     Parameters
     ----------
     query : str
-        Text to search, e.g., p53
+        Free-text query (keywords, gene symbols, processes), e.g., 'p53', 'glycolysis'.
     organism : str
-        Optional organism
+        Organism filter (scientific name), e.g., 'Homo sapiens'.
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def WikiPathways_search(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

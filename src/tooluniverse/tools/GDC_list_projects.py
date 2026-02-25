@@ -1,7 +1,7 @@
 """
 GDC_list_projects
 
-List GDC projects (TCGA, TARGET, etc.) with summary statistics
+List GDC projects (TCGA, TARGET, etc.) with case/file counts. Use to discover available cancer co...
 """
 
 from typing import Any, Optional, Callable
@@ -15,14 +15,14 @@ def GDC_list_projects(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    List GDC projects (TCGA, TARGET, etc.) with summary statistics
+    List GDC projects (TCGA, TARGET, etc.) with case/file counts. Use to discover available cancer co...
 
     Parameters
     ----------
     program : str
-        Filter by program (e.g., 'TCGA', 'TARGET')
+        Filter by program name (e.g., 'TCGA', 'TARGET')
     size : int
         Number of results (1–100)
     stream_callback : Callable, optional
@@ -34,7 +34,7 @@ def GDC_list_projects(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

@@ -1,7 +1,7 @@
 """
 GBIF_search_species
 
-Search species via GBIF species/search
+Find taxa by keyword (scientific/common names) in GBIF. Use to resolve organism names to stable t...
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def GBIF_search_species(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Search species via GBIF species/search
+    Find taxa by keyword (scientific/common names) in GBIF. Use to resolve organism names to stable t...
 
     Parameters
     ----------
     query : str
-        Query keyword, e.g., Homo
+        Search string for species/taxa (supports scientific/common names), e.g., 'Hom...
     limit : int
-
+        Maximum number of results to return (1–300).
     offset : int
-
+        Result offset for pagination (0-based).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def GBIF_search_species(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

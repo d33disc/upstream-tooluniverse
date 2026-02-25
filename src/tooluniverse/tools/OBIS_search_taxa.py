@@ -1,7 +1,7 @@
 """
 OBIS_search_taxa
 
-Resolve marine taxa by scientific name via OBIS /v3/taxon
+Resolve marine taxa in OBIS by scientific name to obtain standardized identifiers (AphiaID), rank...
 """
 
 from typing import Any, Optional, Callable
@@ -15,16 +15,16 @@ def OBIS_search_taxa(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Resolve marine taxa by scientific name via OBIS /v3/taxon
+    Resolve marine taxa in OBIS by scientific name to obtain standardized identifiers (AphiaID), rank...
 
     Parameters
     ----------
     scientificname : str
-        Scientific name to search, e.g., 'Gadus'
+        Scientific name query (e.g., 'Gadus').
     size : int
-
+        Number of records to return (1–100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -34,7 +34,7 @@ def OBIS_search_taxa(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 

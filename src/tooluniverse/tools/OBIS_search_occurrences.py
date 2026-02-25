@@ -1,7 +1,7 @@
 """
 OBIS_search_occurrences
 
-Search OBIS occurrences via /v3/occurrence
+Retrieve marine species occurrence records (with coordinates/time) from OBIS using flexible filte...
 """
 
 from typing import Any, Optional, Callable
@@ -16,18 +16,18 @@ def OBIS_search_occurrences(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
-    Search OBIS occurrences via /v3/occurrence
+    Retrieve marine species occurrence records (with coordinates/time) from OBIS using flexible filte...
 
     Parameters
     ----------
     scientificname : str
-        Scientific name filter (optional)
+        Scientific name filter to restrict occurrences.
     areaid : str
-        Area identifier filter (optional)
+        Area identifier filter (per OBIS API).
     size : int
-
+        Number of records to return (1–100).
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -37,7 +37,7 @@ def OBIS_search_occurrences(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
