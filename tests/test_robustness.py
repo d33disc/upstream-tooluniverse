@@ -15,7 +15,7 @@ import tempfile
 import textwrap
 from pathlib import Path
 
-from tooluniverse.space.validator import validate_with_schema
+from tooluniverse.profile.validator import validate_with_schema
 from tooluniverse.execute_function import ToolUniverse
 
 
@@ -278,48 +278,48 @@ class TestBrokenDotEnv:
         assert tu is not None
 
 
-class TestBrokenSpaceYaml:
-    """Broken space.yaml in workspace — load_space should surface a clear error."""
+class TestBrokenProfileYaml:
+    """Broken profile.yaml in workspace — load_profile should surface a clear error."""
 
-    def _ws_with_space(self, content):
+    def _ws_with_profile(self, content):
         d = tempfile.mkdtemp()
-        Path(d, "space.yaml").write_text(content)
+        Path(d, "profile.yaml").write_text(content)
         return d
 
-    def test_load_space_with_invalid_syntax(self):
-        ws = self._ws_with_space("name: test\n\ttabs: break: yaml")
+    def test_load_profile_with_invalid_syntax(self):
+        ws = self._ws_with_profile("name: test\n\ttabs: break: yaml")
         tu = ToolUniverse(workspace=ws)
         with pytest.raises(Exception):
-            tu.load_space(str(Path(ws, "space.yaml")))
+            tu.load_profile(str(Path(ws, "profile.yaml")))
 
-    def test_load_space_with_missing_name(self):
-        ws = self._ws_with_space("version: '1.0'\ntools:\n  categories: []\n")
+    def test_load_profile_with_missing_name(self):
+        ws = self._ws_with_profile("version: '1.0'\ntools:\n  categories: []\n")
         tu = ToolUniverse(workspace=ws)
         with pytest.raises(Exception):
-            tu.load_space(str(Path(ws, "space.yaml")))
+            tu.load_profile(str(Path(ws, "profile.yaml")))
 
-    def test_load_space_with_wrong_cache_type(self):
-        ws = self._ws_with_space(
+    def test_load_profile_with_wrong_cache_type(self):
+        ws = self._ws_with_profile(
             "name: x\nversion: '1.0'\ncache:\n  memory_size: 'not-a-number'\n"
         )
         tu = ToolUniverse(workspace=ws)
         with pytest.raises(Exception):
-            tu.load_space(str(Path(ws, "space.yaml")))
+            tu.load_profile(str(Path(ws, "profile.yaml")))
 
-    def test_load_space_nonexistent_file(self):
+    def test_load_profile_nonexistent_file(self):
         tu = ToolUniverse()
         with pytest.raises(Exception):
-            tu.load_space("/tmp/totally_missing_file_xyz.yaml")
+            tu.load_profile("/tmp/totally_missing_file_xyz.yaml")
 
-    def test_load_space_empty_path(self):
+    def test_load_profile_empty_path(self):
         tu = ToolUniverse()
         with pytest.raises(Exception):
-            tu.load_space("")
+            tu.load_profile("")
 
-    def test_load_space_directory_not_file(self):
+    def test_load_profile_directory_not_file(self):
         tu = ToolUniverse()
         with pytest.raises(Exception):
-            tu.load_space(tempfile.mkdtemp())
+            tu.load_profile(tempfile.mkdtemp())
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -413,7 +413,7 @@ class TestContradictoryConfig:
             f.write(yaml)
             f.flush()
             tu = ToolUniverse()
-            tu.load_space(f.name)  # should not raise
+            tu.load_profile(f.name)  # should not raise
 
     def test_same_type_in_include_and_exclude_tool_types(self):
         """Including and excluding the same tool type."""
@@ -426,7 +426,7 @@ class TestContradictoryConfig:
             f.write(yaml)
             f.flush()
             tu = ToolUniverse()
-            tu.load_space(f.name)  # should not raise
+            tu.load_profile(f.name)  # should not raise
 
     def test_nonexistent_category_silently_skipped(self):
         """Loading a non-existent category name should warn but not crash."""
@@ -437,7 +437,7 @@ class TestContradictoryConfig:
             f.write(yaml)
             f.flush()
             tu = ToolUniverse()
-            tu.load_space(f.name)  # should not raise
+            tu.load_profile(f.name)  # should not raise
 
     def test_extends_nonexistent_file(self):
         """extends pointing to a file that doesn't exist."""
@@ -450,7 +450,7 @@ class TestContradictoryConfig:
             tu = ToolUniverse()
             # Should raise a clear error, not a silent AttributeError or KeyError
             try:
-                tu.load_space(f.name)
+                tu.load_profile(f.name)
             except Exception as e:
                 assert not isinstance(e, (AttributeError, KeyError))
 

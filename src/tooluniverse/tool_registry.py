@@ -6,6 +6,7 @@ import pkgutil
 import os
 import logging
 import re
+from pathlib import Path
 from typing import Dict, Optional
 
 # Initialize logger for this module
@@ -139,6 +140,28 @@ def register_tool_configs(configs: list):
 def get_list_config_registry() -> list:
     """Return the flat list of configs registered by sub-packages."""
     return _list_config_registry.copy()
+
+
+def clear_lazy_cache():
+    """Clear the module-level lazy import cache.
+
+    Built-in tool modules (in ``src/tooluniverse/tools/``) are cached after
+    their first import.  Call this function in development environments when
+    you have edited a built-in tool module and want the changes to take effect
+    without restarting the process.  After calling this, the next access to the
+    tool will re-import its module from disk.
+
+    Note: this does NOT affect workspace user tool files; those are handled
+    separately via mtime tracking in ``_import_user_python_tools()``.
+
+    Example::
+
+        from tooluniverse.tool_registry import clear_lazy_cache
+        clear_lazy_cache()
+        tu.refresh_tools()
+    """
+    _lazy_cache.clear()
+    logger.debug("Lazy import cache cleared; built-in tool modules will be re-imported on next access.")
 
 
 def lazy_import_tool(tool_name):
@@ -288,46 +311,22 @@ def _discover_from_ast():
 
                                 has_registered_alias = False
 
-                                # Check for @register_tool("Alias") decorators
                                 for decorator in n.decorator_list:
-                                    # We look for calls to 'register_tool'
-                                    if isinstance(decorator, ast.Call):
-                                        func = decorator.func
-                                        # Handle @register_tool(...)
-                                        is_register_tool = False
-                                        if (
-                                            isinstance(func, ast.Name)
-                                            and func.id == "register_tool"
-                                        ):
-                                            is_register_tool = True
-                                        elif (
-                                            isinstance(func, ast.Attribute)
-                                            and func.attr == "register_tool"
-                                        ):
-                                            is_register_tool = True
+                                    if not isinstance(decorator, ast.Call):
+                                        continue
+                                    func = decorator.func
+                                    is_register_tool = (
+                                        (isinstance(func, ast.Name) and func.id == "register_tool")
+                                        or (isinstance(func, ast.Attribute) and func.attr == "register_tool")
+                                    )
+                                    if not is_register_tool:
+                                        continue
+                                    has_registered_alias = True
+                                    if decorator.args:
+                                        arg = decorator.args[0]
+                                        if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                                            mapping[arg.value] = module_name
 
-                                        if is_register_tool:
-                                            # It is decorated, so we definitely want to register it
-                                            has_registered_alias = True
-                                            if decorator.args:
-                                                # Extract the first argument as the alias
-                                                arg = decorator.args[0]
-                                                alias = None
-                                                if isinstance(
-                                                    arg, ast.Constant
-                                                ):  # Python 3.8+
-                                                    alias = arg.value
-                                                elif isinstance(
-                                                    arg, ast.Str
-                                                ):  # Older Python
-                                                    alias = arg.s
-
-                                                if alias and isinstance(alias, str):
-                                                    mapping[alias] = module_name
-
-                                # Registration Logic:
-                                # 1. If it has @register_tool, we register the class name.
-                                # 2. If it is in an explicit tool file (*_tool.py), we register the class name (legacy behavior).
                                 if has_registered_alias or is_explicit_tool_file:
                                     mapping[n.name] = module_name
 
@@ -358,6 +357,20 @@ def build_lazy_registry(package_name=None):
             f"Loaded static lazy registry with {len(STATIC_LAZY_REGISTRY)} classes."
         )
         _lazy_registry.update(STATIC_LAZY_REGISTRY)
+
+        # Supplement with AST discovery so newly-added tool files (not yet in the
+        # static registry) are automatically found without requiring a manual rebuild.
+        ast_mappings = _discover_from_ast()
+        new_from_ast = 0
+        for tool_name, module_name in ast_mappings.items():
+            if tool_name not in _lazy_registry:
+                _lazy_registry[tool_name] = module_name
+                new_from_ast += 1
+        if new_from_ast:
+            logger.debug(
+                f"AST discovery added {new_from_ast} tool(s) not in static registry."
+            )
+
         # Still auto-import sub-packages so their __init__.py files can register
         # configs even when the static registry is used (e.g. tooluniverse[circuit]).
         _auto_import_subpackages(package_name)
@@ -389,9 +402,9 @@ def build_lazy_registry(package_name=None):
     return _lazy_registry.copy()
 
 
-def _read_space_yaml(directory, context: str = "") -> dict:
+def _read_profile_yaml(directory, context: str = "") -> dict:
     """
-    Read ``space.yaml`` from *directory* if it exists.
+    Read ``profile.yaml`` from *directory* if it exists.
 
     Logs the pack name/description at INFO level so users can see which
     tool packs were loaded.  Also logs a WARNING for any ``required_env``
@@ -400,20 +413,17 @@ def _read_space_yaml(directory, context: str = "") -> dict:
 
     Returns the parsed config dict (empty dict if no file or parse error).
     """
-    from pathlib import Path
-    import os
-
-    space_file = Path(directory) / "space.yaml"
-    if not space_file.exists():
+    profile_file = Path(directory) / "profile.yaml"
+    if not profile_file.exists():
         return {}
 
     try:
         import yaml
 
-        with open(space_file, "r", encoding="utf-8") as _f:
+        with open(profile_file, "r", encoding="utf-8") as _f:
             config = yaml.safe_load(_f) or {}
     except Exception as exc:
-        logger.debug(f"{context}: could not read space.yaml: {exc}")
+        logger.debug(f"{context}: could not read profile.yaml: {exc}")
         return {}
 
     name = config.get("name", "")
@@ -435,7 +445,18 @@ def _read_space_yaml(directory, context: str = "") -> dict:
     return config
 
 
-def _discover_entry_point_plugins():
+def reset_plugin_discovery():
+    """Clear the set of already-discovered plugin names.
+
+    Call this before ``build_lazy_registry()`` (or ``refresh_tools()``) when a
+    new plugin package has been installed in the current process and you want
+    ``_discover_entry_point_plugins()`` to pick it up without restarting.
+    """
+    _discovered_plugin_names.clear()
+    logger.debug("Plugin discovery cache cleared; next scan will re-discover all plugins.")
+
+
+def _discover_entry_point_plugins(force: bool = False):
     """
     Discover and eagerly load installed tooluniverse plugins registered via
     the ``tooluniverse.plugins`` entry point group.
@@ -454,11 +475,9 @@ def _discover_entry_point_plugins():
 
     This allows external plugin packages to have exactly the same directory
     layout as a local workspace (``data/``, tool ``.py`` files, optional
-    ``space.yaml``) — the only extra piece needed for a distributable
+    ``profile.yaml``) — the only extra piece needed for a distributable
     package is the ``pyproject.toml`` entry point declaration.
     """
-    from pathlib import Path
-    import importlib
     import json as _json
 
     try:
@@ -470,10 +489,13 @@ def _discover_entry_point_plugins():
         return
 
     for ep in eps:
-        # Skip plugins already processed in a previous call (idempotency guard)
-        if ep.name in _discovered_plugin_names:
+        # Skip plugins already processed in a previous call (idempotency guard).
+        # The guard is bypassed when force=True (e.g. after a new pip install).
+        if not force and ep.name in _discovered_plugin_names:
             logger.debug(f"Plugin '{ep.name}': already loaded, skipping")
             continue
+        # Remove from processed set so the plugin is fully re-scanned below.
+        _discovered_plugin_names.discard(ep.name)
 
         try:
             plugin_module = ep.load()
@@ -490,8 +512,8 @@ def _discover_entry_point_plugins():
         if not pkg_name:
             continue
 
-        # Read space.yaml if present — log pack identity and check required_env
-        _read_space_yaml(plugin_dir, context=f"plugin '{ep.name}'")
+        # Read profile.yaml if present — log pack identity and check required_env
+        _read_profile_yaml(plugin_dir, context=f"plugin '{ep.name}'")
 
         logger.debug(f"Plugin '{ep.name}' at {plugin_dir} (package={pkg_name})")
 
@@ -563,9 +585,6 @@ def _auto_import_subpackages(package_name: str = "tooluniverse"):
     Errors are logged but never propagated — a broken sub-package must not
     prevent the main package from starting.
     """
-    import importlib
-    from pathlib import Path
-
     try:
         pkg = importlib.import_module(package_name)
     except ImportError:

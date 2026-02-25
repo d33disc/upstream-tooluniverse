@@ -1,9 +1,9 @@
 """
 Tests for Phase 1-8 new functionality:
 - workspace field resolution (ToolUniverse constructor + env vars)
-- sources loading in load_space()
-- TOOLUNIVERSE_HOME and TOOLUNIVERSE_SPACE env vars
-- SpaceLoader.resolve_to_local_dir() and get_tool_files_from_dir()
+- sources loading in load_profile()
+- TOOLUNIVERSE_HOME and TOOLUNIVERSE_PROFILE env vars
+- ProfileLoader.resolve_to_local_dir() and get_tool_files_from_dir()
 - MCP CLI --workspace flag
 - Sub-package config registration via register_tool_configs()
 """
@@ -18,7 +18,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 import yaml
 
-from tooluniverse.space import SpaceLoader
+from tooluniverse.profile import ProfileLoader
 
 
 # ---------------------------------------------------------------------------
@@ -36,25 +36,25 @@ def _write_json(path: Path, data) -> None:
         json.dump(data, f)
 
 
-def _minimal_space(name: str = "test") -> dict:
+def _minimal_profile(name: str = "test") -> dict:
     return {"name": name, "version": "1.0.0", "description": "desc"}
 
 
 # ---------------------------------------------------------------------------
-# SpaceLoader.get_tool_files_from_dir
+# ProfileLoader.get_tool_files_from_dir
 # ---------------------------------------------------------------------------
 
 
 class TestGetToolFilesFromDir:
-    """Tests for SpaceLoader.get_tool_files_from_dir()."""
+    """Tests for ProfileLoader.get_tool_files_from_dir()."""
 
     def test_empty_directory(self, tmp_path):
-        py, js = SpaceLoader.get_tool_files_from_dir(tmp_path)
+        py, js = ProfileLoader.get_tool_files_from_dir(tmp_path)
         assert py == []
         assert js == []
 
     def test_nonexistent_directory(self, tmp_path):
-        py, js = SpaceLoader.get_tool_files_from_dir(tmp_path / "no_such_dir")
+        py, js = ProfileLoader.get_tool_files_from_dir(tmp_path / "no_such_dir")
         assert py == []
         assert js == []
 
@@ -62,9 +62,9 @@ class TestGetToolFilesFromDir:
         (tmp_path / "tool_a.py").write_text("# tool a")
         (tmp_path / "tool_b.py").write_text("# tool b")
         (tmp_path / "config_a.json").write_text('{"name": "a"}')
-        (tmp_path / "space.json").write_text("{}")  # should be excluded
+        (tmp_path / "profile.json").write_text("{}")  # should be excluded
 
-        py, js = SpaceLoader.get_tool_files_from_dir(tmp_path)
+        py, js = ProfileLoader.get_tool_files_from_dir(tmp_path)
         assert sorted(p.name for p in py) == ["tool_a.py", "tool_b.py"]
         assert [p.name for p in js] == ["config_a.json"]
 
@@ -74,7 +74,7 @@ class TestGetToolFilesFromDir:
         (tmp_path / "conftest.py").write_text("")
         (tmp_path / "mytool.py").write_text("# real tool")
 
-        py, _ = SpaceLoader.get_tool_files_from_dir(tmp_path)
+        py, _ = ProfileLoader.get_tool_files_from_dir(tmp_path)
         assert [p.name for p in py] == ["mytool.py"]
 
     def test_organised_layout(self, tmp_path):
@@ -85,13 +85,13 @@ class TestGetToolFilesFromDir:
         data_dir = tmp_path / "data"
         data_dir.mkdir()
         (data_dir / "tools.json").write_text('[{"name": "tc"}]')
-        (data_dir / "space.json").write_text("{}")  # excluded
+        (data_dir / "profile.json").write_text("{}")  # excluded
 
         configs_dir = tmp_path / "configs"
         configs_dir.mkdir()
         (configs_dir / "extra.json").write_text('[{"name": "extra"}]')
 
-        py, js = SpaceLoader.get_tool_files_from_dir(tmp_path)
+        py, js = ProfileLoader.get_tool_files_from_dir(tmp_path)
         assert [p.name for p in py] == ["tool_c.py"]
         assert sorted(p.name for p in js) == ["extra.json", "tools.json"]
 
@@ -101,41 +101,41 @@ class TestGetToolFilesFromDir:
         tools_dir.mkdir()
         (tools_dir / "organised.py").write_text("# organised")
 
-        py, _ = SpaceLoader.get_tool_files_from_dir(tmp_path)
+        py, _ = ProfileLoader.get_tool_files_from_dir(tmp_path)
         names = [p.name for p in py]
         assert "flat.py" in names
         assert "organised.py" in names
 
 
 # ---------------------------------------------------------------------------
-# SpaceLoader.resolve_to_local_dir
+# ProfileLoader.resolve_to_local_dir
 # ---------------------------------------------------------------------------
 
 
 class TestResolveToLocalDir:
-    """Tests for SpaceLoader.resolve_to_local_dir()."""
+    """Tests for ProfileLoader.resolve_to_local_dir()."""
 
     def test_local_directory(self, tmp_path):
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         result = loader.resolve_to_local_dir(str(tmp_path))
         assert result == tmp_path
 
     def test_local_file_returns_parent(self, tmp_path):
-        f = tmp_path / "space.yaml"
+        f = tmp_path / "profile.yaml"
         f.write_text("name: t\nversion: 1.0.0\n")
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         result = loader.resolve_to_local_dir(str(f))
         assert result == tmp_path
 
     def test_local_missing_raises(self, tmp_path):
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
-        with pytest.raises(ValueError, match="Space path not found"):
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
+        with pytest.raises(ValueError, match="Profile path not found"):
             loader.resolve_to_local_dir(str(tmp_path / "no_such"))
 
     @patch("huggingface_hub.snapshot_download")
     def test_hf_uri_calls_snapshot_download(self, mock_snap, tmp_path):
         mock_snap.return_value = str(tmp_path)
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         result = loader.resolve_to_local_dir("hf:user/my-repo")
         mock_snap.assert_called_once()
         assert result == tmp_path
@@ -147,10 +147,10 @@ class TestResolveToLocalDir:
         mock_resp.raise_for_status = MagicMock()
         mock_get.return_value = mock_resp
 
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
-        result = loader.resolve_to_local_dir("https://example.com/space.yaml")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
+        result = loader.resolve_to_local_dir("https://example.com/profile.yaml")
         assert result.is_dir()
-        assert (result / "space.yaml").exists()
+        assert (result / "profile.yaml").exists()
 
     @patch("requests.get")
     def test_github_repo_url_downloads_zip(self, mock_get, tmp_path):
@@ -169,22 +169,22 @@ class TestResolveToLocalDir:
         mock_resp.raise_for_status = MagicMock()
         mock_get.return_value = mock_resp
 
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         result = loader.resolve_to_local_dir("https://github.com/user/myrepo")
         # The ZIP extracts to a subdir; result should be a directory
         assert result.is_dir()
 
 
 # ---------------------------------------------------------------------------
-# SPACE_SCHEMA new fields: sources, workspace, package
+# PROFILE_SCHEMA new fields: sources, workspace, package
 # ---------------------------------------------------------------------------
 
 
-class TestSpaceSchemaNewFields:
+class TestProfileSchemaNewFields:
     """Tests that sources, workspace, package fields pass validation."""
 
     def test_sources_field_accepted(self, tmp_path):
-        config_file = tmp_path / "space.yaml"
+        config_file = tmp_path / "profile.yaml"
         _write_yaml(
             config_file,
             {
@@ -194,12 +194,12 @@ class TestSpaceSchemaNewFields:
                 "sources": ["./extra", "hf:user/tools"],
             },
         )
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         config = loader.load(str(config_file))
         assert config["sources"] == ["./extra", "hf:user/tools"]
 
     def test_workspace_field_accepted(self, tmp_path):
-        config_file = tmp_path / "space.yaml"
+        config_file = tmp_path / "profile.yaml"
         _write_yaml(
             config_file,
             {
@@ -209,12 +209,12 @@ class TestSpaceSchemaNewFields:
                 "workspace": "/my/workspace",
             },
         )
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         config = loader.load(str(config_file))
         assert config["workspace"] == "/my/workspace"
 
     def test_package_field_accepted(self, tmp_path):
-        config_file = tmp_path / "space.yaml"
+        config_file = tmp_path / "profile.yaml"
         _write_yaml(
             config_file,
             {
@@ -224,25 +224,25 @@ class TestSpaceSchemaNewFields:
                 "package": "tooluniverse/mypkg",
             },
         )
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         config = loader.load(str(config_file))
         assert config["package"] == "tooluniverse/mypkg"
 
     def test_sources_defaults_to_empty_list(self, tmp_path):
-        config_file = tmp_path / "space.yaml"
-        _write_yaml(config_file, _minimal_space())
-        loader = SpaceLoader(cache_dir=tmp_path / "cache")
+        config_file = tmp_path / "profile.yaml"
+        _write_yaml(config_file, _minimal_profile())
+        loader = ProfileLoader(cache_dir=tmp_path / "cache")
         config = loader.load(str(config_file))
         assert config["sources"] == []
 
 
 # ---------------------------------------------------------------------------
-# ToolUniverse constructor: workspace and space params
+# ToolUniverse constructor: workspace and profile params
 # ---------------------------------------------------------------------------
 
 
 class TestToolUniverseConstructor:
-    """Tests for the workspace= and space= constructor parameters."""
+    """Tests for the workspace= and profile= constructor parameters."""
 
     def test_workspace_param_sets_workspace_dir(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
@@ -294,42 +294,42 @@ class TestToolUniverseConstructor:
             tu = ToolUniverse(workspace=str(workspace))
             assert tu._workspace_dir == workspace
 
-    def test_space_param_calls_load_space(self, tmp_path):
+    def test_profile_param_calls_load_profile(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
 
-        config_file = tmp_path / "space.yaml"
-        _write_yaml(config_file, _minimal_space("from-param"))
+        config_file = tmp_path / "profile.yaml"
+        _write_yaml(config_file, _minimal_profile("from-param"))
 
-        with patch.object(ToolUniverse, "load_space") as mock_load:
-            ToolUniverse(space=str(config_file))
+        with patch.object(ToolUniverse, "load_profile") as mock_load:
+            ToolUniverse(profile=str(config_file))
             mock_load.assert_called_once_with(str(config_file))
 
-    def test_tooluniverse_space_env_var(self, tmp_path):
+    def test_tooluniverse_profile_env_var(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
 
-        config_file = tmp_path / "space.yaml"
-        _write_yaml(config_file, _minimal_space("from-env"))
+        config_file = tmp_path / "profile.yaml"
+        _write_yaml(config_file, _minimal_profile("from-env"))
 
         with patch.dict(
-            os.environ, {"TOOLUNIVERSE_SPACE": str(config_file)}, clear=False
+            os.environ, {"TOOLUNIVERSE_PROFILE": str(config_file)}, clear=False
         ):
-            with patch.object(ToolUniverse, "load_space") as mock_load:
+            with patch.object(ToolUniverse, "load_profile") as mock_load:
                 ToolUniverse()
                 mock_load.assert_called_once_with(str(config_file))
 
-    def test_space_param_takes_priority_over_tooluniverse_space_env(self, tmp_path):
+    def test_profile_param_takes_priority_over_tooluniverse_profile_env(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
 
         param_file = tmp_path / "param.yaml"
         env_file = tmp_path / "env.yaml"
-        _write_yaml(param_file, _minimal_space("param"))
-        _write_yaml(env_file, _minimal_space("env"))
+        _write_yaml(param_file, _minimal_profile("param"))
+        _write_yaml(env_file, _minimal_profile("env"))
 
         with patch.dict(
-            os.environ, {"TOOLUNIVERSE_SPACE": str(env_file)}, clear=False
+            os.environ, {"TOOLUNIVERSE_PROFILE": str(env_file)}, clear=False
         ):
-            with patch.object(ToolUniverse, "load_space") as mock_load:
-                ToolUniverse(space=str(param_file))
+            with patch.object(ToolUniverse, "load_profile") as mock_load:
+                ToolUniverse(profile=str(param_file))
                 # Should be called with the param file, not env file
                 mock_load.assert_called_once_with(str(param_file))
 
@@ -375,12 +375,12 @@ class TestGetUserToolFilesWithWorkspace:
 
 
 # ---------------------------------------------------------------------------
-# sources loading in load_space()
+# sources loading in load_profile()
 # ---------------------------------------------------------------------------
 
 
-class TestLoadSpaceSources:
-    """Tests that load_space() processes the sources field."""
+class TestLoadProfileSources:
+    """Tests that load_profile() processes the sources field."""
 
     def test_sources_calls_load_tools_from_sources(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
@@ -393,12 +393,12 @@ class TestLoadSpaceSources:
             [{"name": "ext_tool_1", "description": "External tool 1"}],
         )
 
-        # Create a space.yaml that references the source dir
-        config_file = tmp_path / "space.yaml"
+        # Create a profile.yaml that references the source dir
+        config_file = tmp_path / "profile.yaml"
         _write_yaml(
             config_file,
             {
-                "name": "src-space",
+                "name": "src-profile",
                 "version": "1.0.0",
                 "description": "d",
                 "sources": [str(source_dir)],
@@ -407,7 +407,7 @@ class TestLoadSpaceSources:
 
         tu = ToolUniverse()
         with patch.object(tu, "_load_tools_from_sources") as mock_load_src:
-            tu.load_space(str(config_file))
+            tu.load_profile(str(config_file))
             mock_load_src.assert_called_once()
             # Verify the sources list was passed
             call_args = mock_load_src.call_args
@@ -417,12 +417,12 @@ class TestLoadSpaceSources:
     def test_empty_sources_does_not_call_load_tools_from_sources(self, tmp_path):
         from tooluniverse.execute_function import ToolUniverse
 
-        config_file = tmp_path / "space.yaml"
-        _write_yaml(config_file, _minimal_space())
+        config_file = tmp_path / "profile.yaml"
+        _write_yaml(config_file, _minimal_profile())
 
         tu = ToolUniverse()
         with patch.object(tu, "_load_tools_from_sources") as mock_load_src:
-            tu.load_space(str(config_file))
+            tu.load_profile(str(config_file))
             mock_load_src.assert_not_called()
 
     def test_load_tools_from_sources_loads_json_configs(self, tmp_path):
@@ -435,7 +435,7 @@ class TestLoadSpaceSources:
             [{"name": "src_tool_x", "description": "From source"}],
         )
 
-        config_file = tmp_path / "space.yaml"
+        config_file = tmp_path / "profile.yaml"
         _write_yaml(
             config_file,
             {
@@ -447,7 +447,7 @@ class TestLoadSpaceSources:
         )
 
         tu = ToolUniverse()
-        tu.load_space(str(config_file))
+        tu.load_profile(str(config_file))
 
         tool_names = [t.get("name") for t in tu.all_tools]
         assert "src_tool_x" in tool_names
@@ -482,7 +482,7 @@ class TestMCPCLIWorkspaceFlag:
         # We test indirectly: call parse_known_args with --workspace
         # on a fresh ArgumentParser with the same flags
         parser = argparse.ArgumentParser()
-        space_group = parser.add_argument_group("Space Configuration")
+        space_group = parser.add_argument_group("Profile Configuration")
         space_group.add_argument("--load", "-l", type=str)
         space_group.add_argument("--workspace", "-w", type=str)
 
@@ -490,15 +490,16 @@ class TestMCPCLIWorkspaceFlag:
         assert args.workspace == "/tmp/myws"
 
     def test_smcp_module_has_workspace_in_all_parsers(self):
-        """Verify --workspace appears in the smcp_server module source."""
+        """Verify --workspace is registered via _add_profile_args for all 3 parsers."""
         import inspect
         from tooluniverse import smcp_server
 
         source = inspect.getsource(smcp_server)
-        # There should be 3 occurrences of --workspace (one per server function)
-        occurrences = source.count('"--workspace"')
-        assert occurrences >= 3, (
-            f"Expected at least 3 '--workspace' args in smcp_server.py, found {occurrences}"
+        # --workspace is defined once in _add_profile_args; each parser calls the helper.
+        assert '"--workspace"' in source, "--workspace not found in smcp_server.py"
+        calls = source.count("_add_profile_args(parser)")
+        assert calls >= 3, (
+            f"Expected at least 3 '_add_profile_args(parser)' calls in smcp_server.py, found {calls}"
         )
 
     def test_smcp_module_passes_workspace_to_smcp(self):
@@ -599,75 +600,75 @@ class TestRegisterToolConfigs:
 
 
 # ---------------------------------------------------------------------------
-# space.yaml feature tests — cache, log_level, .env, workspace merge
+# profile.yaml feature tests — cache, log_level, .env, workspace merge
 # ---------------------------------------------------------------------------
 
 
-class TestSpaceYamlCacheConfig:
-    """Tests for cache configuration via space.yaml."""
+class TestProfileYamlCacheConfig:
+    """Tests for cache configuration via profile.yaml."""
 
-    def test_cache_disabled_via_space_yaml(self, tmp_path):
+    def test_cache_disabled_via_profile_yaml(self, tmp_path):
         """cache.enabled=false turns off caching."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("cache-test"), "cache": {"enabled": False}},
+            ws / "profile.yaml",
+            {**_minimal_profile("cache-test"), "cache": {"enabled": False}},
         )
         tu = ToolUniverse(workspace=str(ws))
         assert tu.cache_manager.enabled is False
 
-    def test_cache_memory_size_via_space_yaml(self, tmp_path):
+    def test_cache_memory_size_via_profile_yaml(self, tmp_path):
         """cache.memory_size sets the LRU cache size."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("cache-mem"), "cache": {"memory_size": 42}},
+            ws / "profile.yaml",
+            {**_minimal_profile("cache-mem"), "cache": {"memory_size": 42}},
         )
         tu = ToolUniverse(workspace=str(ws))
         assert tu.cache_manager.memory.max_size == 42
 
-    def test_cache_ttl_via_space_yaml(self, tmp_path):
+    def test_cache_ttl_via_profile_yaml(self, tmp_path):
         """cache.ttl sets the default TTL."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("cache-ttl"), "cache": {"ttl": 300}},
+            ws / "profile.yaml",
+            {**_minimal_profile("cache-ttl"), "cache": {"ttl": 300}},
         )
         tu = ToolUniverse(workspace=str(ws))
         assert tu.cache_manager.default_ttl == 300
 
-    def test_cache_persist_false_via_space_yaml(self, tmp_path):
+    def test_cache_persist_false_via_profile_yaml(self, tmp_path):
         """cache.persist=false disables persistent (SQLite) cache."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("cache-nopersist"), "cache": {"persist": False}},
+            ws / "profile.yaml",
+            {**_minimal_profile("cache-nopersist"), "cache": {"persist": False}},
         )
         tu = ToolUniverse(workspace=str(ws))
         assert tu.cache_manager.persistent is None
 
-    def test_cache_multiple_fields_via_space_yaml(self, tmp_path):
+    def test_cache_multiple_fields_via_profile_yaml(self, tmp_path):
         """Multiple cache fields can be set at once."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
+            ws / "profile.yaml",
             {
-                **_minimal_space("cache-multi"),
+                **_minimal_profile("cache-multi"),
                 "cache": {"enabled": True, "memory_size": 128, "ttl": 60, "persist": False},
             },
         )
@@ -678,21 +679,21 @@ class TestSpaceYamlCacheConfig:
         assert tu.cache_manager.persistent is None
 
     def test_no_cache_field_leaves_defaults(self, tmp_path):
-        """Omitting cache from space.yaml leaves defaults unchanged."""
+        """Omitting cache from profile.yaml leaves defaults unchanged."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
-        _write_yaml(ws / "space.yaml", _minimal_space("cache-default"))
+        _write_yaml(ws / "profile.yaml", _minimal_profile("cache-default"))
         tu = ToolUniverse(workspace=str(ws))
         # Default is enabled
         assert tu.cache_manager.enabled is True
 
 
-class TestSpaceYamlLogLevel:
-    """Tests for log_level configuration via space.yaml."""
+class TestProfileYamlLogLevel:
+    """Tests for log_level configuration via profile.yaml."""
 
-    def test_log_level_warning_via_space_yaml(self, tmp_path):
+    def test_log_level_warning_via_profile_yaml(self, tmp_path):
         """log_level sets the tooluniverse logger level."""
         import logging
         from tooluniverse.execute_function import ToolUniverse
@@ -700,13 +701,13 @@ class TestSpaceYamlLogLevel:
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("loglevel-test"), "log_level": "WARNING"},
+            ws / "profile.yaml",
+            {**_minimal_profile("loglevel-test"), "log_level": "WARNING"},
         )
         ToolUniverse(workspace=str(ws))
         assert logging.getLogger("tooluniverse").level == logging.WARNING
 
-    def test_log_level_debug_via_space_yaml(self, tmp_path):
+    def test_log_level_debug_via_profile_yaml(self, tmp_path):
         """log_level DEBUG is applied correctly."""
         import logging
         from tooluniverse.execute_function import ToolUniverse
@@ -714,18 +715,18 @@ class TestSpaceYamlLogLevel:
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("loglevel-debug"), "log_level": "DEBUG"},
+            ws / "profile.yaml",
+            {**_minimal_profile("loglevel-debug"), "log_level": "DEBUG"},
         )
         ToolUniverse(workspace=str(ws))
         assert logging.getLogger("tooluniverse").level == logging.DEBUG
 
     def test_invalid_log_level_rejected_by_schema(self, tmp_path):
         """An invalid log_level value fails schema validation."""
-        from tooluniverse.space.validator import validate_with_schema
+        from tooluniverse.profile.validator import validate_with_schema
         import yaml as _yaml
 
-        config = {**_minimal_space("bad-loglevel"), "log_level": "VERBOSE"}
+        config = {**_minimal_profile("bad-loglevel"), "log_level": "VERBOSE"}
         is_valid, errors, _ = validate_with_schema(
             _yaml.dump(config), fill_defaults_flag=False
         )
@@ -776,47 +777,47 @@ class TestWorkspaceDotEnv:
         assert tu._workspace_dir == ws
 
 
-class TestSpaceYamlWorkspaceMerge:
-    """Tests for workspace space.yaml merging with --load."""
+class TestProfileYamlWorkspaceMerge:
+    """Tests for workspace profile.yaml merging with --load."""
 
-    def test_loaded_space_overrides_workspace_name(self, tmp_path):
-        """Keys in loaded file win over workspace space.yaml."""
+    def test_loaded_profile_overrides_workspace_name(self, tmp_path):
+        """Keys in loaded file win over workspace profile.yaml."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
-        _write_yaml(ws / "space.yaml", {**_minimal_space("ws-base"), "log_level": "ERROR"})
+        _write_yaml(ws / "profile.yaml", {**_minimal_profile("ws-base"), "log_level": "ERROR"})
 
         override = tmp_path / "override.yaml"
-        _write_yaml(override, {**_minimal_space("override-name")})
+        _write_yaml(override, {**_minimal_profile("override-name")})
 
-        tu = ToolUniverse(workspace=str(ws), space=str(override))
-        meta = tu.get_space_metadata()
+        tu = ToolUniverse(workspace=str(ws), profile=str(override))
+        meta = tu.get_profile_metadata()
         assert meta["name"] == "override-name"
 
     def test_workspace_log_level_applied_when_no_load(self, tmp_path):
-        """Workspace space.yaml log_level is applied when no --load given."""
+        """Workspace profile.yaml log_level is applied when no --load given."""
         import logging
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("ws-log"), "log_level": "ERROR"},
+            ws / "profile.yaml",
+            {**_minimal_profile("ws-log"), "log_level": "ERROR"},
         )
         ToolUniverse(workspace=str(ws))
         assert logging.getLogger("tooluniverse").level == logging.ERROR
 
     def test_workspace_cache_config_applied_when_no_load(self, tmp_path):
-        """Workspace space.yaml cache config is applied when no --load given."""
+        """Workspace profile.yaml cache config is applied when no --load given."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("ws-cache"), "cache": {"memory_size": 77}},
+            ws / "profile.yaml",
+            {**_minimal_profile("ws-cache"), "cache": {"memory_size": 77}},
         )
         tu = ToolUniverse(workspace=str(ws))
         assert tu.cache_manager.memory.max_size == 77
@@ -828,27 +829,27 @@ class TestSpaceYamlWorkspaceMerge:
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         _write_yaml(
-            ws / "space.yaml",
-            {**_minimal_space("ws-merge"), "cache": {"memory_size": 55}},
+            ws / "profile.yaml",
+            {**_minimal_profile("ws-merge"), "cache": {"memory_size": 55}},
         )
 
         override = tmp_path / "override.yaml"
-        _write_yaml(override, {**_minimal_space("override"), "log_level": "DEBUG"})
+        _write_yaml(override, {**_minimal_profile("override"), "log_level": "DEBUG"})
 
-        tu = ToolUniverse(workspace=str(ws), space=str(override))
+        tu = ToolUniverse(workspace=str(ws), profile=str(override))
         # Cache setting from workspace should survive the merge
         assert tu.cache_manager.memory.max_size == 55
 
 
-class TestSpaceYamlSchemaValidation:
+class TestProfileYamlSchemaValidation:
     """Tests that the schema correctly validates all new fields."""
 
     def test_valid_cache_config_passes_schema(self):
-        from tooluniverse.space.validator import validate_with_schema
+        from tooluniverse.profile.validator import validate_with_schema
         import yaml as _yaml
 
         config = {
-            **_minimal_space("schema-valid"),
+            **_minimal_profile("schema-valid"),
             "cache": {"enabled": True, "ttl": 120, "memory_size": 256, "persist": False},
         }
         is_valid, errors, _ = validate_with_schema(
@@ -857,83 +858,83 @@ class TestSpaceYamlSchemaValidation:
         assert is_valid, errors
 
     def test_negative_ttl_fails_schema(self):
-        from tooluniverse.space.validator import validate_with_schema
+        from tooluniverse.profile.validator import validate_with_schema
         import yaml as _yaml
 
-        config = {**_minimal_space("bad-ttl"), "cache": {"ttl": -1}}
+        config = {**_minimal_profile("bad-ttl"), "cache": {"ttl": -1}}
         is_valid, errors, _ = validate_with_schema(
             _yaml.dump(config), fill_defaults_flag=False
         )
         assert not is_valid
 
     def test_negative_memory_size_fails_schema(self):
-        from tooluniverse.space.validator import validate_with_schema
+        from tooluniverse.profile.validator import validate_with_schema
         import yaml as _yaml
 
-        config = {**_minimal_space("bad-mem"), "cache": {"memory_size": 0}}
+        config = {**_minimal_profile("bad-mem"), "cache": {"memory_size": 0}}
         is_valid, errors, _ = validate_with_schema(
             _yaml.dump(config), fill_defaults_flag=False
         )
         assert not is_valid
 
     def test_valid_log_level_passes_schema(self):
-        from tooluniverse.space.validator import validate_with_schema
+        from tooluniverse.profile.validator import validate_with_schema
         import yaml as _yaml
 
         for level in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
-            config = {**_minimal_space(f"loglevel-{level}"), "log_level": level}
+            config = {**_minimal_profile(f"loglevel-{level}"), "log_level": level}
             is_valid, errors, _ = validate_with_schema(
                 _yaml.dump(config), fill_defaults_flag=False
             )
             assert is_valid, f"{level} should be valid: {errors}"
 
 
-class TestDefaultSpaceYaml:
-    """Tests for default_space.yaml seeding and content."""
+class TestDefaultProfileYaml:
+    """Tests for default_profile.yaml seeding and content."""
 
-    def test_default_space_yaml_ships_with_package(self):
-        """default_space.yaml exists in the package data directory."""
+    def test_default_profile_yaml_ships_with_package(self):
+        """default_profile.yaml exists in the package data directory."""
         from pathlib import Path
         import tooluniverse
         data_dir = Path(tooluniverse.__file__).parent / "data"
-        assert (data_dir / "default_space.yaml").exists()
+        assert (data_dir / "default_profile.yaml").exists()
 
-    def test_default_space_yaml_is_valid(self):
-        """default_space.yaml passes schema validation."""
+    def test_default_profile_yaml_is_valid(self):
+        """default_profile.yaml passes schema validation."""
         from pathlib import Path
         import tooluniverse
-        from tooluniverse.space.validator import validate_yaml_file_with_schema
-        path = Path(tooluniverse.__file__).parent / "data" / "default_space.yaml"
+        from tooluniverse.profile.validator import validate_yaml_file_with_schema
+        path = Path(tooluniverse.__file__).parent / "data" / "default_profile.yaml"
         is_valid, errors, _ = validate_yaml_file_with_schema(str(path))
         assert is_valid, errors
 
-    def test_default_space_yaml_seeded_on_first_run(self, tmp_path):
-        """When workspace exists with no space.yaml, default is auto-seeded."""
+    def test_default_profile_yaml_seeded_on_first_run(self, tmp_path):
+        """When workspace exists with no profile.yaml, default is auto-seeded."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
-        assert not (ws / "space.yaml").exists()
+        assert not (ws / "profile.yaml").exists()
 
         ToolUniverse(workspace=str(ws))
 
-        assert (ws / "space.yaml").exists()
+        assert (ws / "profile.yaml").exists()
 
-    def test_existing_space_yaml_not_overwritten(self, tmp_path):
-        """An existing space.yaml is never overwritten by the default."""
+    def test_existing_profile_yaml_not_overwritten(self, tmp_path):
+        """An existing profile.yaml is never overwritten by the default."""
         from tooluniverse.execute_function import ToolUniverse
 
         ws = tmp_path / ".tooluniverse"
         ws.mkdir()
         custom_content = "name: my-custom\nversion: \"9.9\"\ndescription: custom\n"
-        (ws / "space.yaml").write_text(custom_content)
+        (ws / "profile.yaml").write_text(custom_content)
 
         ToolUniverse(workspace=str(ws))
 
-        assert (ws / "space.yaml").read_text() == custom_content
+        assert (ws / "profile.yaml").read_text() == custom_content
 
-    def test_seeded_space_yaml_has_expected_fields(self, tmp_path):
-        """The seeded default_space.yaml contains all key fields."""
+    def test_seeded_profile_yaml_has_expected_fields(self, tmp_path):
+        """The seeded default_profile.yaml contains all key fields."""
         from tooluniverse.execute_function import ToolUniverse
         import yaml
 
@@ -941,7 +942,7 @@ class TestDefaultSpaceYaml:
         ws.mkdir()
         ToolUniverse(workspace=str(ws))
 
-        content = yaml.safe_load((ws / "space.yaml").read_text())
+        content = yaml.safe_load((ws / "profile.yaml").read_text())
         assert content["name"] == "default"
         assert "tools" in content
         assert "cache" in content
