@@ -1,12 +1,12 @@
 # ToolUniverse Skills Catalog
 
-65+ pre-built research workflows. Skills activate automatically when the AI detects a relevant request, or trigger them explicitly (e.g., "Research the drug aspirin").
+65+ pre-built research workflows. Skills activate automatically when the AI detects a relevant request, or trigger them explicitly (e.g., "Use the tooluniverse skill to research the drug aspirin").
 
 ## Research Skills
 
 | Skill | What It Does |
 |-------|-------------|
-| `tooluniverse` | General strategies for using 1200+ tools effectively |
+| `tooluniverse` | General strategies for using 1000+ tools effectively |
 | `tooluniverse-drug-research` | Comprehensive drug profiling (identity, pharmacology, safety, ADMET) |
 | `tooluniverse-target-research` | Drug target intelligence (structure, interactions, druggability) |
 | `tooluniverse-disease-research` | Systematic disease analysis across 10 research dimensions |
@@ -97,7 +97,7 @@
 ## How to Install
 
 ```bash
-npx skills add mims-harvard/ToolUniverse
+npx skills add mims-harvard/ToolUniverse --all
 ```
 
 Or manually clone and copy to your client's skills directory:

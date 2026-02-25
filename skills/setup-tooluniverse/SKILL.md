@@ -32,7 +32,7 @@ Never run ahead. Never explain Step 3 while the user is still on Step 1. Never o
 
 ## Internal Notes (do not show to user)
 
-⚠️ **ToolUniverse has 1200+ tools** which will cause context window overflow if all exposed directly. The default `tooluniverse` command enables compact mode automatically, exposing only 5 core tools (list_tools, grep_tools, get_tool_info, execute_tool, find_tools) while keeping all 1200+ accessible via execute_tool.
+⚠️ **ToolUniverse has 1000+ tools** which will cause context window overflow if all exposed directly. The default `tooluniverse` command enables compact mode automatically, exposing only 5 core tools (list_tools, grep_tools, get_tool_info, execute_tool, find_tools) while keeping all 1000+ accessible via execute_tool.
 
 **This skill's own URL** (for bootstrapping):
 `https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILL.md`
@@ -46,10 +46,21 @@ Never run ahead. Never explain Step 3 while the user is still on Step 1. Never o
 | `MCP_CONFIG.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md |
 | `SKILLS_CATALOG.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md |
 | `TROUBLESHOOTING.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md |
+| `GITHUB_ISSUE.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md |
+| `TRAE.md` | https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md |
 
 ## Step 0: Auto-Detect & Quick Start
 
-Welcome the user, then immediately run these detection commands **before asking any questions**:
+**Self-declaration first — do this before any detection:**
+You already know what client you are. Open by stating your identity and asking:
+> "I'm setting this up in [Client Name, e.g. Cursor / Trae / Claude Desktop]. Are you installing ToolUniverse for me to use here, or for a different app?"
+
+- **"For you / this app"** (most common): Skip the detection commands below. You already know your own config path and OS. Go directly to the correct row in the config table in Step 2.
+- **"For a different app"** or **"Not sure"**: Run the detection commands below to identify the target client and OS.
+
+---
+
+**Detection commands** (only run if setting up for a different app or user is unsure):
 
 ```bash
 echo "=== Detecting OS ===" && \
@@ -64,6 +75,9 @@ echo "=== Detecting your AI client ===" && \
   ([ -f ~/.claude.json ] && echo "✅ Claude Code detected") || true && \
   ([ -f ~/.codeium/windsurf/mcp_config.json ] && echo "✅ Windsurf detected") || true && \
   ([ -f ~/.gemini/settings.json ] && echo "✅ Gemini CLI detected") || true && \
+  ([ -f ~/.gemini/antigravity/mcp_config.json ] && echo "✅ Antigravity detected") || true && \
+  ([ -d ~/Library/Application\ Support/Trae ] && echo "✅ Trae detected (macOS)") || true && \
+  ([ -d ~/.config/Trae ] && echo "✅ Trae detected (Linux)") || true && \
   ([ -f ~/.codex/config.toml ] && echo "✅ Codex CLI detected") || true && \
   ([ -f ~/.qwen/settings.json ] && echo "✅ Qwen Code detected") || true && \
   ([ -f opencode.json ] && echo "✅ OpenCode detected") || true && \
@@ -78,7 +92,9 @@ echo "=== Detecting your AI client ===" && \
   "$env:APPDATA\Claude\claude_desktop_config.json",
   "$env:USERPROFILE\.codeium\windsurf\mcp_config.json",
   "$env:USERPROFILE\.gemini\settings.json",
-  "$env:USERPROFILE\.qwen\settings.json"
+  "$env:USERPROFILE\.gemini\antigravity\mcp_config.json",
+  "$env:USERPROFILE\.qwen\settings.json",
+  "$env:APPDATA\Trae"
 ) | ForEach-Object { if (Test-Path $_) { "✅ Detected: $_" } }
 ```
 
@@ -96,6 +112,9 @@ Cursor · Claude Desktop · VS Code / Copilot · Windsurf · Claude Code · Gemi
 
 ⚠️ **If Claude Desktop is detected or selected**: Step 2 is completely different — you must fetch and follow CLAUDE_DESKTOP.md instead of the standard config. Hold this in mind.
 
+⚠️ **If Trae is detected or selected**: Step 2 is different — fetch and follow TRAE.md instead of the standard config.
+URL: `https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md`
+
 **Bootstrap check (terminal-based clients only — OpenCode, Gemini CLI, Codex CLI, Claude Code):**
 If the user arrived here from README/docs (not from inside their client), give them this one-liner to paste into their client instead and stop:
 ```
@@ -104,7 +123,7 @@ Please read https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/ski
 
 > ⏸️ **Now**: Ask "Would you like a **quick start** (~3 min, no questions) or a **full setup** (API keys + options)?" — then wait for the answer.
 
-- **Quick start**: `brew install uv` (or curl), write config with python3 one-liner, restart app, confirm tools appear, install skills with `npx skills add mims-harvard/ToolUniverse`. Skip API keys (add later). Skills are included — they're what make ToolUniverse genuinely useful.
+- **Quick start**: `brew install uv` (or curl), write config with python3 one-liner, restart app, confirm tools appear, install skills with `npx skills add mims-harvard/ToolUniverse --all`. Skip API keys (add later). Skills are included — they're what make ToolUniverse genuinely useful.
 - **Full setup**: Continue with all steps including API keys.
 
 **Question 2 (full setup only):** How will you use ToolUniverse?
@@ -119,6 +138,11 @@ Check first — **skip install entirely if uv is already present**:
 
 ```bash
 which uv && uv --version || echo "NOT_INSTALLED"
+```
+
+*Windows PowerShell equivalent:*
+```powershell
+if (Get-Command uv -ErrorAction SilentlyContinue) { uv --version } else { Write-Output 'NOT_INSTALLED' }
 ```
 
 - **Found**: "✅ uv is already installed — skipping." Go to Step 2.
@@ -189,7 +213,7 @@ cat <CONFIG_PATH> 2>/dev/null || echo "CONFIG_NOT_FOUND"
 - **Yes** → use `["--refresh", "tooluniverse"]` in args
 - **No** → use `["tooluniverse"]`; upgrade manually with `uv cache clean tooluniverse`
 
-**Standard config (Cursor, Windsurf, Claude Code, Gemini CLI, Qwen Code, Trae, Cline):**
+**Standard config (Cursor, Windsurf, Claude Code, Gemini CLI, Qwen Code, Cline):**
 ```json
 {
   "mcpServers": {
@@ -227,15 +251,15 @@ Replace `CONFIG_PATH` with the path for the user's client:
 | **Cursor** | `~/.cursor/mcp.json` |
 | **Claude Desktop** | ← See CLAUDE_DESKTOP.md above |
 | **Claude Code** | `~/.claude.json` or `.mcp.json` |
-| **Windsurf** | `~/.codeium/windsurf/mcp_config.json` |
+| **Windsurf** | `~/.codeium/windsurf/mcp_config.json` (macOS/Linux) · `%USERPROFILE%\.codeium\windsurf\mcp_config.json` (Windows) |
 | **VS Code (Copilot)** | `.vscode/mcp.json` in the workspace root — uses `"servers"` key (not `"mcpServers"`) and requires `"type": "stdio"` — see config below |
 | **Codex (OpenAI)** | TOML format: `codex mcp add tooluniverse -- uvx tooluniverse` — see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **OpenCode** | `opencode.json` — uses `"mcp"` key — see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
 | **Gemini CLI** | `~/.gemini/settings.json` |
 | **Qwen Code** | `~/.qwen/settings.json` |
-| **Trae** | `.trae/mcp.json` |
-| **Cline** | `cline_mcp_settings.json` (in VS Code extension globalStorage) |
-| **Antigravity** | `mcp_config.json` |
+| **Trae** | See [TRAE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TRAE.md) — global config only (path varies by OS; verify in Trae Settings → MCP) |
+| **Cline** | `cline_mcp_settings.json` in VS Code extension globalStorage — OS paths vary, see [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md) |
+| **Antigravity** | `~/.gemini/antigravity/mcp_config.json` (macOS/Linux) · `%USERPROFILE%\.gemini\antigravity\mcp_config.json` (Windows) |
 
 For Codex and OpenCode special formats, read [MCP_CONFIG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/MCP_CONFIG.md).
 
@@ -352,15 +376,15 @@ If all ✅, celebrate! 🎉 If any ❌, jump to the matching issue in [TROUBLESH
 
 ## Step 6: Install ToolUniverse Skills (Required)
 
-**Do not skip this step.** Without skills, the user has 1200+ tools but no guidance on how to use them together. Skills are what transform ToolUniverse into an intelligent research assistant — each one knows exactly which tools to call, in what order, to produce a full evidence-graded report on drugs, targets, diseases, variants, genomics, and more.
+**Do not skip this step.** Without skills, the user has 1000+ tools but no guidance on how to use them together. Skills are what transform ToolUniverse into an intelligent research assistant — each one knows exactly which tools to call, in what order, to produce a full evidence-graded report on drugs, targets, diseases, variants, genomics, and more.
 
 **Say this to the user** (adapt to their language and research interest from Step 4):
 
-> "One more required step — installing ToolUniverse's 65+ research skills. Instead of calling tools manually, you just say 'Research the drug metformin' or 'What genes are associated with type 2 diabetes?' and the right skill runs automatically. This takes under a minute."
+> "One more required step — installing ToolUniverse's 65+ research skills. Instead of calling tools manually, you just say 'Use the tooluniverse skill to research the drug metformin' or 'Use the tooluniverse skill to find genes associated with type 2 diabetes' and the right skill runs automatically. This takes under a minute."
 
 **Option A — User runs in terminal (quickest, cross-platform):**
 ```bash
-npx skills add mims-harvard/ToolUniverse
+npx skills add mims-harvard/ToolUniverse --all
 ```
 This auto-detects the client and installs into the correct directory. Ask the user to confirm it completed successfully.
 
@@ -377,6 +401,7 @@ rm -rf /tmp/tu-skills
 
 *PowerShell (Windows):*
 ```powershell
+# Run each line separately — PowerShell does not support && like bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/mims-harvard/ToolUniverse.git "$env:TEMP\tu-skills"
 Set-Location "$env:TEMP\tu-skills"
 git sparse-checkout set skills
@@ -388,12 +413,28 @@ Remove-Item -Recurse -Force "$env:TEMP\tu-skills"
 
 Find the right skills directory for the user's client in [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md).
 
-**Verify skills are wired up** — ask the user to say:
+**Verify skills were installed** — run in terminal (replace `SKILLS_DIR` with the client's skills directory):
+
+*bash (macOS/Linux):*
+```bash
+ls SKILLS_DIR | grep tooluniverse
+```
+*PowerShell (Windows):*
+```powershell
+Get-ChildItem "SKILLS_DIR" | Where-Object { $_.Name -like "*tooluniverse*" }
+```
+
+✅ **Pass**: You see folders like `tooluniverse`, `tooluniverse-drug-research`, etc. → continue to smoke test.
+❌ **Fail**: Nothing listed → the skills directory is wrong. Check [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md) for the correct path for their client, then re-run the install.
+
+**Smoke test** — once directory check passes, ask the user to say:
 > `"Use the tooluniverse skill to research the drug metformin"`
 
-The `tooluniverse` skill is a router — it picks the right sub-skill automatically. Mentioning it explicitly ensures it activates on any client. If the response comes back as plain text without tool calls, the skills directory is likely wrong — check [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md) for the correct path for their client.
+If the response comes back as plain text without tool calls, the skills directory is likely still wrong — re-check [SKILLS_CATALOG.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/SKILLS_CATALOG.md).
 
 > ⏸️ **After Step 6**: Don't just confirm installation — **immediately ask the user what problem they want to solve**. Say something like: "Skills are ready! What would you like to research? Tell me your topic — a drug, disease, gene, or research question — and I'll use the right skill to give you a full report." Then activate the matching skill based on their answer. This is the whole point of the setup.
+>
+> Also say: "Whether setup went smoothly or you hit any bumps — your feedback helps improve ToolUniverse for everyone. You can share suggestions or report issues at https://github.com/mims-harvard/ToolUniverse/issues — even a quick note like 'Step 3 was confusing on Windows' is valuable."
 
 ## Common Issues
 
@@ -406,9 +447,10 @@ The `tooluniverse` skill is a router — it picks the right sub-skill automatica
 | Context overflow | Client very slow | Already in compact mode; narrow categories if needed |
 | Python too new (3.14+) | `SyntaxError` / `requires-python` errors | `uvx --python 3.12 tooluniverse --help` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 8 |
 | Stale/broken package | Tool errors or missing tools | `uv cache clean tooluniverse` → [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) Issue 9 |
-| Still broken after all above | Persistent unexplained error | Run the issue-filing script in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md) "Still Stuck?" — it collects system info and generates a pre-filled GitHub issue URL |
+| Windows: Python alias warning | "Python was not found; run without arguments to install from Microsoft Store" during `uvx` | Disable Python app execution aliases: Windows Settings → Apps → Advanced app settings → App execution aliases → turn off Python |
+| Still broken after all above | Persistent unexplained error | Fetch and follow [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md) — compose the issue from conversation context and walk the user through submitting it |
 
-Full diagnostics and GitHub issue helper in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md).
+Full diagnostics in [TROUBLESHOOTING.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/TROUBLESHOOTING.md). To file a GitHub issue: fetch [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md).
 
 ## What's Next?
 
@@ -420,11 +462,11 @@ Skills activate automatically — the user just writes a natural language reques
 
 | Say this… | What happens |
 |-----------|-------------|
-| `"Research the drug metformin"` | drug-research skill runs: identity, pharmacology, targets, safety, ADMET |
-| `"What is known about Alzheimer's disease?"` | disease-research skill runs: genetics, mechanisms, treatments, trials |
-| `"What are the known targets of imatinib?"` | target-research skill runs: structure, interactions, druggability |
-| `"What does the literature say about CRISPR in sickle cell?"` | literature-deep-research skill runs: PubMed search, evidence grading, synthesis |
-| `"Interpret the EGFR L858R mutation in lung cancer"` | cancer-variant-interpretation skill runs: clinical evidence, therapies, trials |
+| `"Use the tooluniverse skill to research the drug metformin"` | drug-research skill runs: identity, pharmacology, targets, safety, ADMET |
+| `"Use the tooluniverse skill to research Alzheimer's disease"` | disease-research skill runs: genetics, mechanisms, treatments, trials |
+| `"Use the tooluniverse skill to find known targets of imatinib"` | target-research skill runs: structure, interactions, druggability |
+| `"Use the tooluniverse skill to review literature on CRISPR in sickle cell"` | literature-deep-research skill runs: PubMed search, evidence grading, synthesis |
+| `"Use the tooluniverse skill to interpret EGFR L858R in lung cancer"` | cancer-variant-interpretation skill runs: clinical evidence, therapies, trials |
 
 The skill reads the question, calls the right tools in the right order, and produces a full evidence-graded report. The user doesn't need to know which skill to pick — just ask the question.
 
@@ -434,4 +476,9 @@ The skill reads the question, calls the right tools in the right order, and prod
 
 Take their answer and activate the `tooluniverse` skill — it is a router that automatically picks the right sub-skill and runs it. Don't end the conversation here — end it with the user getting real value.
 
-The user can add more API keys or skills anytime. Issues → https://github.com/mims-harvard/ToolUniverse/issues.
+The user can add more API keys or skills anytime.
+
+**Always encourage feedback** — whether setup worked perfectly or had rough edges. Say:
+> "We'd love to hear how setup went for you — smooth or bumpy. Share feedback or suggestions at **https://github.com/mims-harvard/ToolUniverse/issues**. You don't need to be a developer; a quick note about what was confusing or what worked well is genuinely helpful."
+
+For unresolved failures: fetch and follow [GITHUB_ISSUE.md](https://raw.githubusercontent.com/mims-harvard/ToolUniverse/main/skills/setup-tooluniverse/GITHUB_ISSUE.md) to compose and submit a detailed report.
