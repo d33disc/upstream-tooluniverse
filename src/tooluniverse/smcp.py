@@ -513,7 +513,7 @@ class SMCP(FastMCP):
             return
         for category in ("tool_finder", "compact_mode"):
             try:
-                self.tooluniverse.load_tools(tool_type=[category])
+                self._load_tools_with_filters(tool_type=[category])
             except Exception as e:
                 self.logger.debug(f"Could not load category {category}: {e}")
 
@@ -1133,7 +1133,7 @@ class SMCP(FastMCP):
                     "Attempting to load tool_finder category for search functionality"
                 )
                 try:
-                    self.tooluniverse.load_tools(tool_type=["tool_finder"])
+                    self._load_tools_with_filters(tool_type=["tool_finder"])
                 except Exception as e:
                     self.logger.debug(f"Could not load tool_finder category: {e}")
 
