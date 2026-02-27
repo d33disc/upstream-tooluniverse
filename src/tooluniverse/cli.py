@@ -10,6 +10,7 @@ Subcommands:
     info    Get tool details (mirrors get_tool_info)
     find    Find tools by natural-language query (mirrors find_tools)
     run     Execute a tool (mirrors execute_tool, same interface)
+    test    Test a tool with example inputs and report pass/fail
     status  Show current ToolUniverse status
     build   Regenerate the static lazy registry
     serve   Start the MCP stdio server (same as `tooluniverse`)
@@ -445,6 +446,139 @@ def cmd_status(args: argparse.Namespace) -> None:
     _print_result(status, args, _render_status)
 
 
+def cmd_test(args: argparse.Namespace) -> None:
+    """Test a tool against example inputs and report pass/fail."""
+    import time
+
+    use_color = sys.stderr.isatty() or sys.stdout.isatty()
+    green  = "\033[32m" if use_color else ""
+    red    = "\033[31m" if use_color else ""
+    yellow = "\033[33m" if use_color else ""
+    bold   = "\033[1m"  if use_color else ""
+    reset  = "\033[0m"  if use_color else ""
+
+    def _ok(msg):   return f"{green}✓{reset} {msg}"
+    def _fail(msg): return f"{red}✗{reset} {msg}"
+    def _warn(msg): return f"{yellow}!{reset} {msg}"
+
+    # ── resolve test list ─────────────────────────────────────────────────────
+    if args.config:
+        import json as _json
+        with open(args.config) as f:
+            cfg = _json.load(f)
+        tool_name = cfg["tool_name"]
+        tests = [
+            {
+                "name": t.get("name", ""),
+                "args": t["args"],
+                "expect_status": t.get("expect_status"),
+                "expect_keys": t.get("expect_keys", []),
+            }
+            for t in cfg.get("tests", [])
+        ]
+    else:
+        tool_name = args.tool_name
+        if args.args_json:
+            import json as _json
+            try:
+                parsed = _json.loads(args.args_json)
+            except _json.JSONDecodeError as exc:
+                print(f"Error: invalid JSON arguments — {exc}", file=sys.stderr)
+                sys.exit(1)
+            tests = [{"name": "", "args": parsed, "expect_status": None, "expect_keys": []}]
+        else:
+            tests = None  # resolve from test_examples after loading
+
+    # ── load ──────────────────────────────────────────────────────────────────
+    with _status_to_stderr():
+        tu = _get_tu()
+
+    if tool_name not in tu.all_tool_dict:
+        print(_fail(f"Tool '{tool_name}' not found. Run `tu list` to see available tools."))
+        sys.exit(1)
+
+    tool_def = tu.all_tool_dict[tool_name]
+
+    # ── resolve test_examples if no tests provided ────────────────────────────
+    if tests is None:
+        examples = tool_def.get("test_examples", []) if isinstance(tool_def, dict) else []
+        if not examples:
+            print(_warn(
+                f"No test_examples found for '{tool_name}' and no arguments given.\n"
+                f"  Pass explicit args:  tu test {tool_name} '{{\"q\": \"test\"}}'\n"
+                f"  Or add test_examples to the tool's JSON config."
+            ))
+            sys.exit(1)
+        tests = [
+            {"name": f"example {i+1}", "args": ex, "expect_status": None, "expect_keys": []}
+            for i, ex in enumerate(examples)
+        ]
+
+    # ── run tests ─────────────────────────────────────────────────────────────
+    import json as _json
+
+    print(f"\n{bold}Testing: {tool_name}{reset}  ({len(tests)} test{'s' if len(tests) != 1 else ''})\n")
+    passed = 0
+    for t in tests:
+        label = t["name"] or _json.dumps(t["args"])
+        t0 = time.time()
+        try:
+            result = tu.run_one_function({"name": tool_name, "arguments": t["args"]})
+        except Exception as exc:
+            elapsed = time.time() - t0
+            print(f"  {_fail(label)}  [{elapsed:.2f}s]")
+            print(f"    Exception: {exc}")
+            continue
+
+        elapsed = time.time() - t0
+        failures = []
+
+        if t["expect_status"] and isinstance(result, dict):
+            got = result.get("status")
+            if got != t["expect_status"]:
+                failures.append(f"status: expected '{t['expect_status']}', got '{got}'")
+
+        for key in t["expect_keys"]:
+            if isinstance(result, dict) and key not in result:
+                failures.append(f"missing key '{key}' in result")
+
+        if result is None:
+            failures.append("result is None")
+        elif isinstance(result, dict) and not result:
+            failures.append("result is an empty dict")
+
+        # return_schema validation (auto, from tool definition)
+        if not failures and isinstance(result, dict) and result.get("status") == "success":
+            return_schema = tool_def.get("return_schema") if isinstance(tool_def, dict) else None
+            if return_schema:
+                try:
+                    import jsonschema
+                    jsonschema.validate(result.get("data"), return_schema)
+                except ImportError:
+                    pass  # jsonschema not installed — skip silently
+                except jsonschema.ValidationError as exc:
+                    failures.append(f"return_schema mismatch: {exc.message} (at {list(exc.absolute_path)})")
+
+        if failures:
+            print(f"  {_fail(label)}  [{elapsed:.2f}s]")
+            for f in failures:
+                print(f"    {f}")
+            print(f"    result: {_json.dumps(result, default=str)[:300]}")
+        else:
+            preview = _json.dumps(result, default=str)[:120]
+            print(f"  {_ok(label)}  [{elapsed:.2f}s]  {preview}…")
+            passed += 1
+
+    # ── summary ───────────────────────────────────────────────────────────────
+    failed = len(tests) - passed
+    print(f"\n{'─' * 50}")
+    if failed == 0:
+        print(f"{green}{bold}All {len(tests)} test(s) passed.{reset}")
+    else:
+        print(f"{red}{bold}{failed}/{len(tests)} test(s) failed.{reset}")
+        sys.exit(1)
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     """Regenerate the static lazy registry and coding-API wrapper files."""
     from pathlib import Path
@@ -517,6 +651,8 @@ def main() -> None:
             "  tu info UniProt_get_entry_by_accession\n"
             "  tu run UniProt_get_entry_by_accession accession=P12345\n"
             '  tu run UniProt_get_entry_by_accession \'{"accession": "P12345"}\'\n'
+            "  tu test Dryad_search_datasets\n"
+            "  tu test MyAPI_search '{\"q\": \"test\"}'\n"
             "  tu status\n"
             "  tu build\n"
         ),
@@ -665,6 +801,30 @@ def main() -> None:
         help="Tool arguments: JSON string OR key=value pairs",
     )
     p.set_defaults(func=cmd_run)
+
+    # ── test ──────────────────────────────────────────────────────────────────
+    p = sub.add_parser(
+        "test",
+        help="Test a tool with example inputs and report pass/fail",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
+            "Examples:\n"
+            "  tu test Dryad_search_datasets              # uses test_examples from the tool's JSON config\n"
+            "  tu test MyAPI_search '{\"q\": \"test\"}'  # single ad-hoc call\n"
+            "  tu test --config my_tool_tests.json        # full config with assertions\n\n"
+            "Config file format (my_tool_tests.json):\n"
+            "  {\n"
+            '    "tool_name": "MyAPI_search",\n'
+            '    "tests": [\n'
+            '      {"name": "basic", "args": {"q": "test"}, "expect_status": "success", "expect_keys": ["data"]}\n'
+            "    ]\n"
+            "  }\n"
+        ),
+    )
+    p.add_argument("tool_name", nargs="?", help="Tool name to test")
+    p.add_argument("args_json", nargs="?", metavar="ARGS", help="JSON arguments for a single ad-hoc test")
+    p.add_argument("--config", "-c", metavar="FILE", help="Path to a JSON test config file")
+    p.set_defaults(func=cmd_test)
 
     # ── status ────────────────────────────────────────────────────────────────
     p = sub.add_parser(
