@@ -1,7 +1,7 @@
 """
 Chem_sa_score
 
-Compute the Ertl-Schuffenhauer synthetic accessibility (SA) score for a molecule supplied as a SM...
+Compute the synthetic accessibility (SA) score for a molecule supplied as a SMILES string, using ...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def Chem_sa_score(
     validate: bool = True,
 ) -> Any:
     """
-    Compute the Ertl-Schuffenhauer synthetic accessibility (SA) score for a molecule supplied as a SM...
+    Compute the synthetic accessibility (SA) score for a molecule supplied as a SMILES string, using ...
 
     Parameters
     ----------
@@ -38,10 +38,16 @@ def Chem_sa_score(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {
+        k: v
+        for k, v in {"operation": operation, "smiles": smiles}.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "Chem_sa_score",
-            "arguments": {"operation": operation, "smiles": smiles},
+            "arguments": _args,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

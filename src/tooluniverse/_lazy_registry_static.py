@@ -476,5 +476,5 @@ STATIC_LAZY_REGISTRY = {
     "gnomADGraphQLQueryTool": "gnomad_tool",
     "gnomADGraphQLTool": "gnomad_tool",
     "miRNAGetTool": "mirna_tool",
-    "miRNASearchTool": "mirna_tool",
+    "miRNASearchTool": "mirna_tool"
 }

@@ -2010,6 +2010,12 @@ class ToolUniverse:
         Returns:
             tuple: A tuple containing (tool_name_list, tool_desc_list) after filtering.
         """
+        # Rebuild all_tool_dict from scratch so it always mirrors all_tools exactly.
+        # Without this clear, stale entries from a previous load_tools() call persist
+        # when load_tools() is called with include_tools=[] (which skips the clear at
+        # the top of load_tools()), causing excluded tools to remain in all_tool_dict
+        # even after being correctly removed from all_tools.
+        self.all_tool_dict = {}
         tool_name_list = []
         tool_desc_list = []
         for tool in self.all_tools:
