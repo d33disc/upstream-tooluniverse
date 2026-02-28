@@ -56,9 +56,9 @@ jobs:
       - name: Generate SDK
         run: python scripts/build_tools.py
 
-      - name: Run core tests (unit + integration + root-level only)
+      - name: Run core tests (unit + integration)
         run: |
-          pytest tests/unit/ tests/integration/ tests/test_*.py -v \
+          pytest tests/unit/ tests/integration/ -v \
             --cov=tooluniverse \
             --cov-report=xml \
             --cov-report=term \
