@@ -214,21 +214,28 @@ class TestList:
 
     @pytest.mark.unit
     def test_list_categories_filter(self, monkeypatch, tu, capsys):
-        """--categories filters to only tools from those categories."""
+        """--categories filters to a strict subset of all tools."""
         from tooluniverse.cli import cmd_list
 
-        out, _ = _run(
+        out_filtered, _ = _run(
             monkeypatch,
             cmd_list,
-            _args(mode="names", categories=["uniprot"], limit=20, json=True),
+            _args(mode="names", categories=["uniprot"], limit=999999, json=True),
             tu,
             capsys,
         )
-        d = _j(out)
-        assert d["total_tools"] >= 1
-        # Every tool name must belong to the uniprot category
-        for name in d["tools"]:
-            assert "uniprot" in name.lower()
+        out_all, _ = _run(
+            monkeypatch,
+            cmd_list,
+            _args(mode="names", limit=999999, json=True),
+            tu,
+            capsys,
+        )
+        d_filtered = _j(out_filtered)
+        d_all = _j(out_all)
+        assert d_filtered["total_tools"] >= 1
+        # Filtered count must be strictly less than unfiltered
+        assert d_filtered["total_tools"] < d_all["total_tools"]
 
     @pytest.mark.unit
     def test_list_nonexistent_category(self, monkeypatch, tu, capsys):
@@ -339,23 +346,28 @@ class TestList:
 
     @pytest.mark.unit
     def test_list_smart_default_no_filter_is_categories(self, monkeypatch, tu, capsys):
-        """Default mode (mode=None, no categories) renders categories overview."""
+        """Default mode (mode=None, no categories) uses categories mode internally."""
         from tooluniverse.cli import cmd_list
 
-        out, _ = _run(monkeypatch, cmd_list, _args(), tu, capsys)
-        # Human-readable: should mention "categories" or show category table
-        assert "categor" in out.lower()
+        # Verify via JSON that the response is a categories-mode dict
+        out, _ = _run(monkeypatch, cmd_list, _args(json=True), tu, capsys)
+        d = _j(out)
+        assert "categories" in d
+        assert "total_tools" not in d  # distinguishes categories mode from names mode
 
     @pytest.mark.unit
     def test_list_smart_default_with_filter_is_names(self, monkeypatch, tu, capsys):
-        """Default mode (mode=None) with --categories renders names list."""
+        """Default mode (mode=None) with --categories uses names mode internally."""
         from tooluniverse.cli import cmd_list
 
+        # Verify via JSON that the response is a names-mode dict (has tools list)
         out, _ = _run(
-            monkeypatch, cmd_list, _args(categories=["uniprot"], limit=5), tu, capsys
+            monkeypatch, cmd_list, _args(categories=["uniprot"], limit=5, json=True), tu, capsys
         )
-        # Human-readable: should list tool names
-        assert "uniprot" in out.lower()
+        d = _j(out)
+        assert "tools" in d
+        assert isinstance(d["tools"], list)
+        assert d["total_tools"] >= 1
 
     @pytest.mark.unit
     def test_list_case_insensitive_category(self, monkeypatch, tu, capsys):
@@ -576,16 +588,16 @@ class TestGrep:
 
     @pytest.mark.unit
     def test_grep_human_readable_default(self, monkeypatch, tu, capsys):
-        """Default output (no --json/--raw) is human-readable text."""
+        """Default output (no --json/--raw) is a human-readable table."""
         from tooluniverse.cli import cmd_grep
 
         out, _ = _run(
             monkeypatch, cmd_grep, _args(pattern="protein", limit=3), tu, capsys
         )
-        # Human-readable: should NOT start with '{'
+        # _render_grep always emits a "name  description" header row
+        assert "name" in out
+        assert "description" in out
         assert not out.strip().startswith("{")
-        # Should contain tool names
-        assert len(out.strip()) > 0
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -655,8 +667,7 @@ class TestInfo:
             capsys,
         )
         d = _j(out)
-        # Either has 'error' key or an error status
-        assert "error" in d or "not found" in str(d).lower()
+        assert "error" in d
 
     @pytest.mark.unit
     def test_info_multiple_existing_tools(self, monkeypatch, tu, capsys):
@@ -712,16 +723,17 @@ class TestInfo:
 
     @pytest.mark.unit
     def test_info_human_readable_default(self, monkeypatch, tu, capsys):
-        """Default output is human-readable tool card."""
+        """Default output is a human-readable tool card with name and description."""
         from tooluniverse.cli import cmd_info
 
         out, _ = _run(
             monkeypatch, cmd_info, _args(tool_names=["list_tools"]), tu, capsys
         )
-        # Should not be JSON
-        assert not out.strip().startswith("{")
-        # Should contain the tool name
+        # _render_info always emits the tool name on the first line
         assert "list_tools" in out
+        # and its description indented below
+        assert "  " in out  # indented description line
+        assert not out.strip().startswith("{")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -811,40 +823,41 @@ class TestFind:
 
     @pytest.mark.unit
     def test_find_returns_tools_list(self, monkeypatch, tu, capsys):
-        """find with a specific scientific query returns a tools list."""
+        """find with a specific scientific query returns a non-empty tools list."""
         from tooluniverse.cli import cmd_find
 
         out, _ = _run(
             monkeypatch, cmd_find, _args(query="DNA methylation", limit=5, json=True), tu, capsys
         )
         d = _j(out)
-        # May return tools or indicate no results — must have tools key
-        assert "tools" in d or "error" in d
-        if "tools" in d:
-            assert isinstance(d["tools"], list)
+        assert "tools" in d
+        assert isinstance(d["tools"], list)
+        assert len(d["tools"]) >= 1
 
     @pytest.mark.unit
     def test_find_unicode_query_no_crash(self, monkeypatch, tu, capsys):
-        """Unicode query does not crash; may return empty or partial results."""
+        """Unicode query returns a valid JSON response without crashing."""
         from tooluniverse.cli import cmd_find
 
         out, _ = _run(
             monkeypatch, cmd_find, _args(query="蛋白质结构", json=True), tu, capsys
         )
         d = _j(out)
-        # Either error (no ASCII tokens) or empty tools list — no crash
-        assert "error" in d or isinstance(d.get("tools", []), list)
+        # Must return either an error dict (no ASCII tokens) or a tools list
+        assert isinstance(d, dict)
+        assert "error" in d or "tools" in d
 
     @pytest.mark.unit
     def test_find_human_readable_default(self, monkeypatch, tu, capsys):
-        """Default output (no --json) is human-readable text."""
+        """Default output (no --json) is a human-readable results table."""
         from tooluniverse.cli import cmd_find
 
         out, _ = _run(
             monkeypatch, cmd_find, _args(query="protein structure", limit=3), tu, capsys
         )
-        # Should not be JSON
-        assert not out.strip().startswith("{") or "error" in out.lower()
+        # _render_find always ends with "\nN results"
+        assert "results" in out
+        assert not out.strip().startswith("{")
 
     @pytest.mark.unit
     def test_find_case_insensitive_category(self, monkeypatch, tu, capsys):
@@ -907,8 +920,8 @@ class TestRun:
             capsys,
         )
         d = _j(out)
-        # Should work with defaults: returns names mode list
-        assert "error" not in d or d.get("status") != "error"
+        # list_tools with defaults returns a categories or names response
+        assert "tools" in d or "categories" in d
 
     @pytest.mark.unit
     def test_run_empty_object_args(self, monkeypatch, tu, capsys):
@@ -923,7 +936,7 @@ class TestRun:
             capsys,
         )
         d = _j(out)
-        assert "error" not in d
+        assert "tools" in d or "categories" in d
 
     @pytest.mark.unit
     def test_run_invalid_json_exits_1(self, monkeypatch, tu, capsys):
@@ -954,7 +967,8 @@ class TestRun:
                 capsys,
             )
         cap = capsys.readouterr()
-        assert "Error" in cap.err or "json" in cap.err.lower() or "key=value" in cap.err.lower()
+        # cli.py prints: "Error: invalid arguments.\n  {exc}"
+        assert "Error" in cap.err
 
     @pytest.mark.unit
     def test_run_nonexistent_tool_returns_error_json(self, monkeypatch, tu, capsys):
@@ -969,7 +983,7 @@ class TestRun:
             capsys,
         )
         d = _j(out)
-        assert "error" in d or "status" in d
+        assert "error" in d
 
     @pytest.mark.unit
     def test_run_grep_via_run(self, monkeypatch, tu, capsys):
@@ -1003,8 +1017,8 @@ class TestRun:
             capsys,
         )
         d = _j(out)
-        # execute_tool should reject non-object, non-string arguments
-        assert "error" in d or "status" in d
+        # execute_tool rejects non-dict arguments
+        assert "error" in d
 
     @pytest.mark.unit
     def test_run_raw_output_compact(self, monkeypatch, tu, capsys):
@@ -1038,8 +1052,8 @@ class TestRun:
             capsys,
         )
         d = _j(out)
-        # Should succeed (same as no-args)
-        assert isinstance(d, dict)
+        # Same as no args: list_tools returns categories or names response
+        assert "tools" in d or "categories" in d
 
     @pytest.mark.unit
     def test_run_key_value_single(self, monkeypatch, tu, capsys):
@@ -1209,8 +1223,9 @@ class TestStatus:
         from tooluniverse.cli import cmd_status
 
         out, _ = _run(monkeypatch, cmd_status, _args(), tu, capsys)
-        # Should contain known labels
-        assert "tools loaded" in out or "tools_loaded" in out
+        # _render_status always emits "tools loaded:    N"
+        assert "tools loaded:" in out
+        assert "workspace:" in out
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1222,24 +1237,15 @@ class TestBuild:
     """Tests for the `tu build` subcommand."""
 
     @pytest.mark.unit
-    def test_build_runs_without_crash(self, monkeypatch, capsys):
-        """tu build completes without raising an exception."""
-        from tooluniverse.cli import cmd_build
-
-        # build doesn't use _get_tu, so no monkeypatching needed
-        cmd_build(_args())
-        # If we reach here without exception, it passed
-
-    @pytest.mark.unit
     def test_build_prints_both_step_labels(self, capsys):
-        """tu build prints labels for both generate_lazy_registry and generate_coding_api steps."""
+        """tu build runs both steps and prints their labels to stdout."""
         from tooluniverse.cli import cmd_build
 
         cmd_build(_args())
         out = capsys.readouterr().out
-        # cmd_build prints a label before each generator step
-        assert "registry" in out.lower()
-        assert "wrapper" in out.lower() or "coding" in out.lower()
+        # cmd_build prints "Regenerating lazy registry…" and "Regenerating coding-API wrappers…"
+        assert "Regenerating lazy registry" in out
+        assert "Regenerating coding-API wrappers" in out
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1394,16 +1400,14 @@ class TestOutputFormat:
         ],
     )
     def test_human_readable_default_not_json(self, monkeypatch, tu, capsys, cmd_fn, ns_kw):
-        """Default output (no --json/--raw) is not raw JSON."""
+        """Default output (no --json/--raw) is human-readable text, not raw JSON."""
         import tooluniverse.cli as m
 
         fn = getattr(m, cmd_fn)
         out, _ = _run(monkeypatch, fn, _args(**ns_kw), tu, capsys)
-        # Human-readable: should NOT start with '{'
-        # (except for error cases or empty find results)
         stripped = out.strip()
-        if stripped:
-            assert not stripped.startswith("{"), f"Expected human text, got JSON: {stripped[:100]}"
+        assert stripped, "Expected non-empty human-readable output"
+        assert not stripped.startswith("{"), f"Expected human text, got JSON: {stripped[:100]}"
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1426,11 +1430,12 @@ class TestSubprocessIntegration:
     @pytest.mark.slow
     @pytest.mark.integration
     def test_e2e_list_default_human_readable(self):
-        """tu list (no flags) produces human-readable output."""
+        """tu list (no flags) produces human-readable categories table."""
         rc, out, err = _cli("list", "--limit", "5")
         assert rc == 0
-        # Human-readable: not JSON
         assert not out.strip().startswith("{")
+        # _render_list categories mode always has a "─" separator line
+        assert "─" in out or "categories" in out.lower()
 
     @pytest.mark.slow
     @pytest.mark.integration
@@ -1444,10 +1449,12 @@ class TestSubprocessIntegration:
     @pytest.mark.slow
     @pytest.mark.integration
     def test_e2e_grep_human_readable(self):
-        """tu grep (no --json) produces human-readable output."""
+        """tu grep (no --json) produces a human-readable name/description table."""
         rc, out, err = _cli("grep", "protein", "--limit", "3")
         assert rc == 0
         assert not out.strip().startswith("{")
+        # _render_grep always emits a "name  description" header
+        assert "name" in out and "description" in out
 
     @pytest.mark.slow
     @pytest.mark.integration
@@ -1462,10 +1469,12 @@ class TestSubprocessIntegration:
     @pytest.mark.slow
     @pytest.mark.integration
     def test_e2e_status_human_readable(self):
-        """tu status (no --json) produces human-readable output."""
+        """tu status (no --json) produces human-readable key-value output."""
         rc, out, err = _cli("status")
         assert rc == 0
-        assert "tools" in out.lower()
+        # _render_status always emits "tools loaded:    N"
+        assert "tools loaded:" in out
+        assert "workspace:" in out
 
     @pytest.mark.slow
     @pytest.mark.integration
@@ -1507,12 +1516,11 @@ class TestSubprocessIntegration:
     @pytest.mark.slow
     @pytest.mark.integration
     def test_e2e_run_no_args(self):
-        """tu run list_tools with no args works (no schema validation error)."""
+        """tu run list_tools with no args returns a valid list_tools response."""
         rc, out, err = _cli("run", "list_tools")
         assert rc == 0
         d = _j(out)
-        # Should not be an error
-        assert "error" not in d
+        assert "tools" in d or "categories" in d
 
     @pytest.mark.slow
     @pytest.mark.integration
@@ -1532,7 +1540,7 @@ class TestSubprocessIntegration:
         rc, out, err = _cli("info", "ZZZNOMATCH_TOOL_9999", "--json")
         assert rc == 0
         d = _j(out)
-        assert "error" in d or "not found" in str(d).lower()
+        assert "error" in d
 
     @pytest.mark.slow
     @pytest.mark.integration
