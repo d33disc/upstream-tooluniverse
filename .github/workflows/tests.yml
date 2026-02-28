@@ -57,6 +57,7 @@ jobs:
         run: python scripts/build_tools.py
 
       - name: Run core tests (unit + integration)
+        timeout-minutes: 15
         run: |
           pytest tests/unit/ tests/integration/ -v \
             --cov=tooluniverse \
