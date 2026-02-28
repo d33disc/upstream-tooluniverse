@@ -26,7 +26,10 @@ class TestUsageTipsTool(unittest.TestCase):
 
     def setUp(self):
         self.tu = ToolUniverse()
-        # Tool is loaded from special_tools.json at startup; no extra load needed.
+        # Explicitly load tools so all_tool_dict is populated regardless of
+        # whether workspace auto-load is available in the test environment.
+        if not self.tu.all_tool_dict:
+            self.tu.load_tools()
 
     def tearDown(self):
         if hasattr(self, "tu"):
