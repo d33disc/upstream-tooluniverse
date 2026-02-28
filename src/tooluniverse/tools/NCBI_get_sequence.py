@@ -16,7 +16,7 @@ def NCBI_get_sequence(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Retrieve DNA/RNA sequence data from NCBI by accession number. Returns sequences in specified form...
 
@@ -37,7 +37,7 @@ def NCBI_get_sequence(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 
