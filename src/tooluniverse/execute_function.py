@@ -2050,14 +2050,29 @@ class ToolUniverse:
 
         # Apply filtering if any filter argument is provided
         if any([include_names, exclude_names, include_categories, exclude_categories]):
-            tool_name_list, tool_desc_list = self.filter_tool_lists(
-                tool_name_list,
-                tool_desc_list,
-                include_names=include_names,
-                exclude_names=exclude_names,
-                include_categories=include_categories,
-                exclude_categories=exclude_categories,
-            )
+            candidate_names = set(tool_name_list)
+            if include_categories is not None:
+                include_cat_set = set(include_categories)
+                candidate_names = {
+                    n for n in candidate_names
+                    if self.all_tool_dict.get(n, {}).get("category") in include_cat_set
+                }
+            if exclude_categories is not None:
+                exclude_cat_set = set(exclude_categories)
+                candidate_names -= {
+                    n for n in candidate_names
+                    if self.all_tool_dict.get(n, {}).get("category") in exclude_cat_set
+                }
+            if include_names is not None:
+                candidate_names &= set(include_names)
+            if exclude_names is not None:
+                candidate_names -= set(exclude_names)
+            pairs = [
+                (n, d) for n, d in zip(tool_name_list, tool_desc_list)
+                if n in candidate_names
+            ]
+            tool_name_list = [n for n, _ in pairs]
+            tool_desc_list = [d for _, d in pairs]
 
         self.logger.debug(
             f"Number of tools after refresh and filter: {len(tool_name_list)}"
@@ -3760,7 +3775,7 @@ class ToolUniverse:
 
     def eager_load_tools(self, names: Optional[List[str]] = None):
         """Pre-instantiate tools to reduce first-call latency."""
-        tool_names = names or list(self.all_tool_dict.keys())
+        tool_names = names if names is not None else list(self.all_tool_dict.keys())
         self.logger.info(f"Eager loading {len(tool_names)} tools...")
 
         for tool_name in tool_names:
@@ -4140,7 +4155,7 @@ class ToolUniverse:
             DeprecationWarning,
             stacklevel=2,
         )
-        return self.get_one_tool_by_one_name(tool_name)
+        return self.tool_specification(tool_name)
 
     def remove_keys(self, tool_list, invalid_keys):
         """
@@ -4275,16 +4290,29 @@ class ToolUniverse:
             DeprecationWarning,
             stacklevel=2,
         )
-        # Build a set of allowed tool names using select_tools for category filtering
+        # Build a set of allowed tool names using filter_tools + category filtering
         allowed_names = set()
         if any([include_names, exclude_names, include_categories, exclude_categories]):
-            filtered_tools = self.select_tools(
-                include_names=include_names,
-                exclude_names=exclude_names,
-                include_categories=include_categories,
-                exclude_categories=exclude_categories,
+            # Start with all tools, then apply category and name filters
+            candidate_tools = list(self.all_tools)
+            if include_categories is not None:
+                include_cat_set = set(include_categories)
+                candidate_tools = [
+                    t for t in candidate_tools if t.get("category") in include_cat_set
+                ]
+            if exclude_categories is not None:
+                exclude_cat_set = set(exclude_categories)
+                candidate_tools = [
+                    t for t in candidate_tools if t.get("category") not in exclude_cat_set
+                ]
+            filtered_tools = self.filter_tools(
+                include_tools=set(include_names) if include_names else None,
+                exclude_tools=set(exclude_names) if exclude_names else None,
             )
-            allowed_names = set(tool["name"] for tool in filtered_tools)
+            # Intersect category-filtered and name-filtered results
+            name_filtered = {t["name"] for t in filtered_tools}
+            cat_filtered = {t["name"] for t in candidate_tools}
+            allowed_names = name_filtered & cat_filtered
         else:
             allowed_names = set(tool_name_list)
 
