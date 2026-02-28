@@ -1840,3 +1840,464 @@ class TestServe:
         """'tu serve --bogus' is rejected by argparse (exit 2)."""
         rc, _, _ = _cli("serve", "--bogus")
         assert rc == 2
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# L. _compact
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestCompact:
+    """Direct unit tests for _compact — strips None values from a dict."""
+
+    @pytest.mark.unit
+    def test_empty_dict(self):
+        from tooluniverse.cli import _compact
+        assert _compact({}) == {}
+
+    @pytest.mark.unit
+    def test_no_nones_unchanged(self):
+        from tooluniverse.cli import _compact
+        assert _compact({"a": 1, "b": "x"}) == {"a": 1, "b": "x"}
+
+    @pytest.mark.unit
+    def test_all_nones_returns_empty(self):
+        from tooluniverse.cli import _compact
+        assert _compact({"a": None, "b": None}) == {}
+
+    @pytest.mark.unit
+    def test_mixed_keeps_non_none(self):
+        from tooluniverse.cli import _compact
+        assert _compact({"a": 1, "b": None, "c": False, "d": None}) == {"a": 1, "c": False}
+
+    @pytest.mark.unit
+    def test_falsy_non_none_values_kept(self):
+        """0, False, and '' are falsy but not None — must be kept."""
+        from tooluniverse.cli import _compact
+        assert _compact({"a": 0, "b": "", "c": None}) == {"a": 0, "b": ""}
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# M. _status_to_stderr
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestStatusToStderr:
+    """Direct unit tests for _status_to_stderr context manager."""
+
+    @pytest.mark.unit
+    def test_print_inside_goes_to_stderr(self, capsys):
+        from tooluniverse.cli import _status_to_stderr
+        with _status_to_stderr():
+            print("routed to stderr")
+        cap = capsys.readouterr()
+        assert "routed to stderr" in cap.err
+        assert cap.out == ""
+
+    @pytest.mark.unit
+    def test_stdout_restored_after_context(self, capsys):
+        from tooluniverse.cli import _status_to_stderr
+        with _status_to_stderr():
+            pass
+        print("back on stdout")
+        cap = capsys.readouterr()
+        assert "back on stdout" in cap.out
+
+    @pytest.mark.unit
+    def test_stdout_restored_after_exception(self, capsys):
+        from tooluniverse.cli import _status_to_stderr
+        try:
+            with _status_to_stderr():
+                raise ValueError("boom")
+        except ValueError:
+            pass
+        print("restored after exception")
+        cap = capsys.readouterr()
+        assert "restored after exception" in cap.out
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# N. _infer_type — float path
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestInferTypeFloat:
+    """_infer_type float coercion path — not covered by existing TestRun tests."""
+
+    @pytest.mark.unit
+    def test_float_decimal(self):
+        from tooluniverse.cli import _infer_type
+        result = _infer_type("3.14")
+        assert result == 3.14
+        assert isinstance(result, float)
+
+    @pytest.mark.unit
+    def test_float_scientific_notation(self):
+        from tooluniverse.cli import _infer_type
+        assert _infer_type("1e5") == 100000.0
+
+    @pytest.mark.unit
+    def test_float_negative(self):
+        from tooluniverse.cli import _infer_type
+        assert _infer_type("-2.5") == -2.5
+
+    @pytest.mark.unit
+    def test_float_not_returned_for_int_string(self):
+        """Integers must stay int, not become float."""
+        from tooluniverse.cli import _infer_type
+        result = _infer_type("42")
+        assert result == 42
+        assert isinstance(result, int)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# O. _render_list edge cases
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestRenderListEdgeCases:
+    """_render_list paths not covered by existing TestRenderFunctions."""
+
+    @pytest.mark.unit
+    def test_empty_tools_list_shows_total(self):
+        from tooluniverse.cli import _render_list
+        result = _render_list({"tools": [], "total_tools": 7})
+        assert "no tools" in result
+        assert "7" in result
+
+    @pytest.mark.unit
+    def test_categories_mode_empty_dict(self):
+        from tooluniverse.cli import _render_list
+        result = _render_list({"categories": {}})
+        assert "no categories" in result
+
+    @pytest.mark.unit
+    def test_names_mode_has_more_hint(self):
+        from tooluniverse.cli import _render_list
+        d = {"tools": ["ToolA", "ToolB"], "total_tools": 100, "has_more": True}
+        result = _render_list(d)
+        assert "--offset" in result
+
+    @pytest.mark.unit
+    def test_names_mode_no_hint_when_no_more(self):
+        from tooluniverse.cli import _render_list
+        d = {"tools": ["ToolA"], "total_tools": 1, "has_more": False}
+        result = _render_list(d)
+        assert "--offset" not in result
+
+    @pytest.mark.unit
+    def test_basic_mode_tools_without_description_no_crash(self):
+        """Tool dicts without 'description' fall through to str() rendering."""
+        from tooluniverse.cli import _render_list
+        d = {"tools": [{"name": "ToolA", "type": "api"}, {"name": "ToolB", "type": "api"}], "total_tools": 2}
+        result = _render_list(d)
+        assert "ToolA" in result or "ToolB" in result
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# P. _render_info — parameter block & batch mode
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestRenderInfoParameters:
+    """_render_info parameter section and batch rendering."""
+
+    @pytest.mark.unit
+    def test_required_param_labeled(self):
+        from tooluniverse.cli import _render_info
+        d = {
+            "name": "MyTool",
+            "description": "does stuff",
+            "parameter": {
+                "properties": {"query": {"type": "string", "description": "search term"}},
+                "required": ["query"],
+            },
+        }
+        result = _render_info(d)
+        assert "query" in result
+        assert "required" in result
+        assert "string" in result
+
+    @pytest.mark.unit
+    def test_optional_param_not_labeled_required(self):
+        from tooluniverse.cli import _render_info
+        d = {
+            "name": "MyTool",
+            "description": "does stuff",
+            "parameter": {
+                "properties": {"limit": {"type": "integer", "description": "max results"}},
+                "required": [],
+            },
+        }
+        result = _render_info(d)
+        assert "limit" in result
+        assert "required" not in result
+
+    @pytest.mark.unit
+    def test_no_params_no_parameters_header(self):
+        from tooluniverse.cli import _render_info
+        d = {"name": "MyTool", "description": "simple", "parameter": {}}
+        result = _render_info(d)
+        assert "Parameters:" not in result
+
+    @pytest.mark.unit
+    def test_category_shown_in_brackets(self):
+        from tooluniverse.cli import _render_info
+        d = {"name": "MyTool", "description": "desc", "category": "Genomics"}
+        result = _render_info(d)
+        assert "[Genomics]" in result
+
+    @pytest.mark.unit
+    def test_batch_mode_renders_all_tools(self):
+        from tooluniverse.cli import _render_info
+        d = {
+            "tools": [
+                {"name": "ToolA", "description": "first"},
+                {"name": "ToolB", "description": "second"},
+            ]
+        }
+        result = _render_info(d)
+        assert "ToolA" in result
+        assert "ToolB" in result
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Q. _render_find — score formatting
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestRenderFindScore:
+    """_render_find score formatting branches."""
+
+    @pytest.mark.unit
+    def test_float_score_formatted_3dp(self):
+        from tooluniverse.cli import _render_find
+        d = {"tools": [{"name": "ToolA", "description": "desc", "score": 0.9876}]}
+        result = _render_find(d)
+        assert "0.988" in result
+
+    @pytest.mark.unit
+    def test_int_score_shown_as_string(self):
+        from tooluniverse.cli import _render_find
+        d = {"tools": [{"name": "ToolA", "description": "desc", "score": 42}]}
+        result = _render_find(d)
+        assert "42" in result
+
+    @pytest.mark.unit
+    def test_relevance_score_key_used_as_fallback(self):
+        from tooluniverse.cli import _render_find
+        d = {"tools": [{"name": "ToolA", "description": "desc", "relevance_score": 0.5}]}
+        result = _render_find(d)
+        assert "0.500" in result
+
+    @pytest.mark.unit
+    def test_string_score_shown_verbatim(self):
+        from tooluniverse.cli import _render_find
+        d = {"tools": [{"name": "ToolA", "description": "desc", "score": "high"}]}
+        result = _render_find(d)
+        assert "high" in result
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# R. cmd_test
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestCmdTest:
+    """Tests for `tu test` subcommand (cmd_test)."""
+
+    def _ns(self, **kw):
+        defaults = dict(tool_name=None, args_json=None, config=None)
+        defaults.update(kw)
+        return argparse.Namespace(**defaults)
+
+    _DEFAULT_RV = {"status": "success", "data": {"r": 1}}
+
+    def _make_tu(self, tool_def, return_value=_DEFAULT_RV):
+        from unittest.mock import MagicMock
+        tu = MagicMock()
+        tu.all_tool_dict = {tool_def["name"]: tool_def}
+        tu.run_one_function = MagicMock(return_value=return_value)
+        return tu
+
+    def _cfg_file(self, cfg: dict) -> str:
+        """Write cfg to a temp JSON file, return path."""
+        import json as _j
+        import tempfile
+        f = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False)
+        _j.dump(cfg, f)
+        f.close()
+        return f.name
+
+    # ── tool-not-found ────────────────────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_tool_not_found_exits_1(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        from unittest.mock import MagicMock
+        tu = MagicMock()
+        tu.all_tool_dict = {}
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="NoSuchTool_xyz"))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_tool_not_found_prints_message(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        from unittest.mock import MagicMock
+        tu = MagicMock()
+        tu.all_tool_dict = {}
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit):
+            m.cmd_test(self._ns(tool_name="NoSuchTool_xyz"))
+        assert "not found" in capsys.readouterr().out
+
+    # ── test_examples auto-discovery ─────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_no_examples_no_args_exits_1(self, monkeypatch, capsys):
+        """Tool with no test_examples and no args given → exit 1."""
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="FakeTool"))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_test_examples_auto_discovered_and_pass(self, monkeypatch, capsys):
+        """test_examples from tool def are used when no args given."""
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x", "test_examples": [{"q": "hi"}]}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        m.cmd_test(self._ns(tool_name="FakeTool"))
+        assert "passed" in capsys.readouterr().out.lower()
+
+    @pytest.mark.unit
+    def test_multiple_examples_all_pass(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x",
+                    "test_examples": [{"q": "a"}, {"q": "b"}, {"q": "c"}]}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        m.cmd_test(self._ns(tool_name="FakeTool"))
+        out = capsys.readouterr().out
+        assert "3" in out  # 3 test(s) passed
+
+    # ── ad-hoc args_json ──────────────────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_adhoc_args_json_happy_path(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        m.cmd_test(self._ns(tool_name="FakeTool", args_json='{"q": "test"}'))
+        out = capsys.readouterr().out
+        assert "passed" in out.lower()
+
+    @pytest.mark.unit
+    def test_adhoc_args_json_invalid_exits_1(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        from unittest.mock import MagicMock
+        monkeypatch.setattr(m, "_get_tu", MagicMock())
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="FakeTool", args_json="{not: valid}"))
+        assert exc.value.code == 1
+
+    # ── result validation ─────────────────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_none_result_counted_as_failure(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x", "test_examples": [{"q": "hi"}]}
+        tu = self._make_tu(tool_def, return_value=None)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="FakeTool"))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_empty_dict_result_counted_as_failure(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x", "test_examples": [{"q": "hi"}]}
+        tu = self._make_tu(tool_def, return_value={})
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="FakeTool"))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_exception_in_run_counted_as_failure(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        from unittest.mock import MagicMock
+        tool_def = {"name": "FakeTool", "description": "x", "test_examples": [{"q": "hi"}]}
+        tu = MagicMock()
+        tu.all_tool_dict = {"FakeTool": tool_def}
+        tu.run_one_function = MagicMock(side_effect=RuntimeError("connection failed"))
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(tool_name="FakeTool"))
+        assert exc.value.code == 1
+
+    # ── config file ───────────────────────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_config_file_happy_path(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        cfg = {"tool_name": "FakeTool", "tests": [
+            {"name": "basic", "args": {"q": "test"}, "expect_status": "success", "expect_keys": ["status"]}
+        ]}
+        m.cmd_test(self._ns(config=self._cfg_file(cfg)))
+        assert "passed" in capsys.readouterr().out.lower()
+
+    @pytest.mark.unit
+    def test_config_expect_status_mismatch_exits_1(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def, return_value={"status": "error", "data": {}})
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        cfg = {"tool_name": "FakeTool", "tests": [
+            {"name": "t1", "args": {}, "expect_status": "success", "expect_keys": []}
+        ]}
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(config=self._cfg_file(cfg)))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_config_expect_keys_missing_exits_1(self, monkeypatch, capsys):
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def, return_value={"status": "success"})
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        cfg = {"tool_name": "FakeTool", "tests": [
+            {"name": "t1", "args": {}, "expect_status": None, "expect_keys": ["missing_key"]}
+        ]}
+        with pytest.raises(SystemExit) as exc:
+            m.cmd_test(self._ns(config=self._cfg_file(cfg)))
+        assert exc.value.code == 1
+
+    @pytest.mark.unit
+    def test_config_empty_tests_list_exits_0(self, monkeypatch, capsys):
+        """Config file with empty tests list: 0 passed, 0 failed → exit 0."""
+        import tooluniverse.cli as m
+        tool_def = {"name": "FakeTool", "description": "x"}
+        tu = self._make_tu(tool_def)
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        cfg = {"tool_name": "FakeTool", "tests": []}
+        m.cmd_test(self._ns(config=self._cfg_file(cfg)))  # should not raise
+        assert "passed" in capsys.readouterr().out.lower()
+
+    # ── argparse registration ─────────────────────────────────────────────────
+
+    @pytest.mark.unit
+    def test_subcommand_help_exits_0(self):
+        rc, out, _ = _cli("test", "--help")
+        assert rc == 0
+        assert "test" in out.lower()
