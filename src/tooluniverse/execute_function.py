@@ -157,6 +157,7 @@ class ToolCallable:
             Tool execution result (sync) or coroutine (async)
         """
         import asyncio
+
         function_call = {"name": self.tool_name, "arguments": kwargs}
 
         # Detect if we're in an async context
@@ -171,6 +172,7 @@ class ToolCallable:
     def _call_sync(self, function_call, stream_callback, use_cache, validate):
         """Synchronous execution - handles both sync and async tools."""
         import asyncio
+
         # Check if tool is async
         function_name = function_call.get("name")
         tool_instance = (
@@ -455,6 +457,7 @@ class ToolUniverse:
         if _ws_dotenv.exists():
             try:
                 from dotenv import load_dotenv as _load_dotenv
+
                 _load_dotenv(_ws_dotenv, override=False)
                 self.logger.debug(f"Loaded workspace .env: {_ws_dotenv}")
             except Exception as _exc:
@@ -466,6 +469,7 @@ class ToolUniverse:
         if self._workspace_dir.exists() and not _ws_profile_yaml.exists():
             try:
                 import shutil as _shutil
+
                 _default = Path(__file__).parent / "data" / "default_profile.yaml"
                 if _default.exists():
                     _shutil.copy2(_default, _ws_profile_yaml)
@@ -483,6 +487,7 @@ class ToolUniverse:
         if _ws_profile_yaml.exists():
             try:
                 import yaml as _yaml
+
                 with open(_ws_profile_yaml, "r", encoding="utf-8") as _f:
                     self._workspace_profile_config = _yaml.safe_load(_f) or {}
             except Exception as _exc:
@@ -497,14 +502,24 @@ class ToolUniverse:
                 self.load_profile(effective_profile)
                 self.logger.info(f"Auto-loaded Profile: {effective_profile}")
             except Exception as e:
-                self.logger.warning(f"Failed to auto-load Profile '{effective_profile}': {e}")
+                self.logger.warning(
+                    f"Failed to auto-load Profile '{effective_profile}': {e}"
+                )
         elif self._workspace_profile_config is not None:
             try:
                 # No explicit profile given — auto-apply workspace profile.yaml directly
                 self.load_profile(str(_ws_profile_yaml), _merge_workspace=False)
-                self.logger.info(f"Auto-loaded workspace profile.yaml: {_ws_profile_yaml}")
+                self.logger.info(
+                    f"Auto-loaded workspace profile.yaml: {_ws_profile_yaml}"
+                )
             except Exception as e:
                 self.logger.warning(f"Failed to auto-load workspace profile.yaml: {e}")
+
+        # Auto-load relay servers if service credentials are present
+        _service_url = os.getenv("TOOLUNIVERSE_SERVICE_URL")
+        _service_key = os.getenv("TOOLUNIVERSE_SERVICE_KEY")
+        if _service_url and _service_key:
+            self._autoload_relay_servers(_service_url, _service_key)
 
     @staticmethod
     def _resolve_workspace(workspace: Optional[str], use_global: bool = False) -> Path:
@@ -523,9 +538,7 @@ class ToolUniverse:
         if workspace:
             p = Path(workspace)
             if p.exists() and not p.is_dir():
-                raise ValueError(
-                    f"Workspace path exists but is not a directory: {p}"
-                )
+                raise ValueError(f"Workspace path exists but is not a directory: {p}")
             p.mkdir(parents=True, exist_ok=True)
             return p
         env_home = os.getenv("TOOLUNIVERSE_HOME")
@@ -543,6 +556,54 @@ class ToolUniverse:
             except RuntimeError:
                 pass  # fall through to local default
         return Path.cwd() / ".tooluniverse"
+
+    def _autoload_relay_servers(self, service_url: str, api_key: str) -> None:
+        """Fetch online relay servers from the web service and load their tools.
+
+        Called automatically during __init__ when TOOLUNIVERSE_SERVICE_URL and
+        TOOLUNIVERSE_SERVICE_KEY environment variables are set.
+        Offline servers are silently skipped.
+        """
+        try:
+            import urllib.request
+
+            url = service_url.rstrip("/") + "/remote-servers"
+            req = urllib.request.Request(
+                url,
+                headers={"Authorization": f"Bearer {api_key}"},
+            )
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                data = json.loads(resp.read().decode())
+        except Exception as exc:
+            self.logger.warning(f"Could not fetch relay servers: {exc}")
+            return
+
+        relay_urls = []
+        for srv in data:
+            if srv.get("online") and srv.get("relay_url"):
+                full_url = service_url.rstrip("/") + srv["relay_url"]
+                relay_urls.append(full_url)
+                self.logger.info(
+                    f"Auto-loading relay server: {srv.get('name')} ({full_url})"
+                )
+
+        if relay_urls:
+            self._load_mcp_auto_loaders_from_urls(relay_urls, api_key)
+
+    def _load_mcp_auto_loaders_from_urls(self, relay_urls: list, api_key: str) -> None:
+        """Register MCPAutoLoaderTool configs for each relay URL and process them."""
+        for relay_url in relay_urls:
+            tool_config = {
+                "type": "MCPAutoLoaderTool",
+                "name": f"mcp_auto_loader_{relay_url.split('/')[-2][:8]}",
+                "server_url": relay_url,
+                "headers": {"Authorization": f"Bearer {api_key}"},
+            }
+            self.all_tools.append(tool_config)
+            self.all_tool_dict[tool_config["name"]] = tool_config
+
+        # Re-run MCP auto-loader processing for the newly added configs
+        self._process_mcp_auto_loaders()
 
     def register_custom_tool(
         self,
@@ -1283,6 +1344,7 @@ class ToolUniverse:
                 continue
             # Read profile.yaml if present — log pack name, warn on missing env vars
             from .tool_registry import _read_profile_yaml
+
             _read_profile_yaml(base, context=f"workspace '{base}'")
             py_files, js_files = ProfileLoader.get_tool_files_from_dir(base)
             python_files.extend(py_files)
@@ -1398,7 +1460,9 @@ class ToolUniverse:
                 continue
             try:
                 local_dir = loader.resolve_to_local_dir(source_uri)
-                python_files, json_files = ProfileLoader.get_tool_files_from_dir(local_dir)
+                python_files, json_files = ProfileLoader.get_tool_files_from_dir(
+                    local_dir
+                )
                 if python_files:
                     self._import_user_python_tools(python_files)
                 if json_files:
@@ -1408,7 +1472,9 @@ class ToolUniverse:
                     f"{len(python_files)} Python files, {len(json_files)} JSON configs"
                 )
             except Exception as e:
-                self.logger.warning(f"Failed to load Profile source '{source_uri}': {e}")
+                self.logger.warning(
+                    f"Failed to load Profile source '{source_uri}': {e}"
+                )
 
     def _load_auto_discovered_configs(self):
         """
@@ -1441,16 +1507,12 @@ class ToolUniverse:
         # 2. Sub-package list configs (multiple instances per tool type)
         subpkg_configs = get_list_config_registry()
         if subpkg_configs:
-            self.logger.debug(
-                f"Loading {len(subpkg_configs)} sub-package tool configs"
-            )
+            self.logger.debug(f"Loading {len(subpkg_configs)} sub-package tool configs")
             for config in subpkg_configs:
                 if "name" in config and config["name"] not in existing_names:
                     self.all_tools.append(config)
                     existing_names.add(config["name"])
-                    self.logger.debug(
-                        f"Added sub-package config: {config['name']}"
-                    )
+                    self.logger.debug(f"Added sub-package config: {config['name']}")
 
     def _process_mcp_auto_loaders(self):
         """
@@ -2631,6 +2693,7 @@ class ToolUniverse:
         """
         # Detect if we're in an async context
         import asyncio
+
         try:
             asyncio.get_running_loop()
             # We're in an async context - return coroutine
@@ -2708,6 +2771,7 @@ class ToolUniverse:
         if tool_instance and inspect.iscoroutinefunction(tool_instance.run):
             self.logger.debug(f"Running async tool '{function_name}' in sync context")
             import asyncio
+
             try:
                 asyncio.get_running_loop()
                 raise RuntimeError(
@@ -2808,6 +2872,7 @@ class ToolUniverse:
         Uses return_exceptions=True so one failure does not abort others.
         """
         import asyncio
+
         tasks = [
             self.run_one_function_async(
                 call,
@@ -3276,6 +3341,7 @@ class ToolUniverse:
             result = tool_instance.run(tool_arguments, **kwargs)
             if inspect.iscoroutine(result):
                 import asyncio
+
                 result = asyncio.run(result)
             return result, tool_arguments
 
@@ -3286,12 +3352,14 @@ class ToolUniverse:
             result = tool_instance.run(tool_arguments)
             if inspect.iscoroutine(result):
                 import asyncio
+
                 result = asyncio.run(result)
             return result, tool_arguments
 
     async def _invoke_tool_async(self, tool_instance, tool_arguments, **kwargs):
         """Invoke tool.run, using await for async tools or a thread pool for sync tools."""
         import asyncio
+
         tool_name = getattr(tool_instance, "name", "unknown")
         if inspect.iscoroutinefunction(tool_instance.run):
             self.logger.debug(f"Executing async tool: {tool_name}")
@@ -3754,6 +3822,7 @@ class ToolUniverse:
         # Force re-scan of entry-point plugins so newly-installed packages
         # (pip-installed after this process started) are picked up.
         from .tool_registry import reset_plugin_discovery
+
         reset_plugin_discovery()
         self.load_tools()
         self.logger.info(f"Tool refresh completed: {len(self.all_tools)} tools loaded")
@@ -4326,7 +4395,9 @@ class ToolUniverse:
         self.load_tools(include_tools=tool_names)
         return len(self.all_tools) - original_count
 
-    def load_profile(self, uri: str, _merge_workspace: bool = True, **kwargs) -> Dict[str, Any]:
+    def load_profile(
+        self, uri: str, _merge_workspace: bool = True, **kwargs
+    ) -> Dict[str, Any]:
         """
         Load Profile configuration and apply it to the ToolUniverse instance.
 
@@ -4371,12 +4442,19 @@ class ToolUniverse:
         if _merge_workspace and self._workspace_profile_config:
             raw_config = loader._load_raw(uri)
             raw_config = loader._resolve_extends(raw_config)
-            merged_raw = ProfileLoader._deep_merge(self._workspace_profile_config, raw_config)
-            yaml_content = _yaml.dump(merged_raw, default_flow_style=False, allow_unicode=True)
-            is_valid, errors, config = validate_with_schema(yaml_content, fill_defaults_flag=True)
+            merged_raw = ProfileLoader._deep_merge(
+                self._workspace_profile_config, raw_config
+            )
+            yaml_content = _yaml.dump(
+                merged_raw, default_flow_style=False, allow_unicode=True
+            )
+            is_valid, errors, config = validate_with_schema(
+                yaml_content, fill_defaults_flag=True
+            )
             if not is_valid:
-                error_msg = "Merged Profile configuration validation failed:\n" + "\n".join(
-                    f"  - {e}" for e in errors
+                error_msg = (
+                    "Merged Profile configuration validation failed:\n"
+                    + "\n".join(f"  - {e}" for e in errors)
                 )
                 raise ValueError(error_msg)
             self.logger.debug(f"Profile '{uri}' merged with workspace profile.yaml")
@@ -4394,7 +4472,9 @@ class ToolUniverse:
         # Profile YAML convention: categories: [] means "all categories" (same as omitting
         # the key).  Convert empty list to None so load_tools() loads everything.
         _categories_raw = tools_config.get("categories")
-        tool_type = kwargs.get("tool_type") or (_categories_raw if _categories_raw else None)
+        tool_type = kwargs.get("tool_type") or (
+            _categories_raw if _categories_raw else None
+        )
         exclude_tools = kwargs.get("exclude_tools") or tools_config.get(
             "exclude_tools", []
         )
@@ -4465,7 +4545,10 @@ class ToolUniverse:
         """Apply log level from Profile config."""
         try:
             import logging
-            logging.getLogger("tooluniverse").setLevel(getattr(logging, log_level, logging.INFO))
+
+            logging.getLogger("tooluniverse").setLevel(
+                getattr(logging, log_level, logging.INFO)
+            )
             self.logger.debug(f"Profile set log level: {log_level}")
         except Exception as e:
             self.logger.warning(f"Failed to apply log_level config: {e}")
@@ -4486,9 +4569,7 @@ class ToolUniverse:
             # Determine persistent path — reuse existing path if persist stays on
             if persist:
                 persistent_path = (
-                    current.persistent.path
-                    if current.persistent is not None
-                    else None
+                    current.persistent.path if current.persistent is not None else None
                 )
             else:
                 persistent_path = None

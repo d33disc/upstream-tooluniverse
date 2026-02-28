@@ -814,6 +814,27 @@ Examples:
         help="Enable compact mode: only expose core tools (4 tools) to prevent context window overflow. All tools are still loaded in background for execute_tool to work.",
     )
 
+    # Remote relay options
+    relay_group = parser.add_argument_group("Remote Relay")
+    relay_group.add_argument(
+        "--remote-relay",
+        metavar="URL",
+        default=None,
+        help="ToolUniverse service base URL to connect this server as a relay (e.g. https://tooluniverse.example.com)",
+    )
+    relay_group.add_argument(
+        "--api-key",
+        default=os.environ.get("TOOLUNIVERSE_SERVICE_KEY", ""),
+        metavar="KEY",
+        help="ToolUniverse API key for relay registration (or set TOOLUNIVERSE_SERVICE_KEY)",
+    )
+    relay_group.add_argument(
+        "--relay-name",
+        default=None,
+        metavar="NAME",
+        help="Display name for this server in the relay web UI (defaults to --name value)",
+    )
+
     args = parser.parse_args()
 
     # Handle --list-categories
@@ -997,6 +1018,23 @@ Examples:
             hook_type=args.hook_type,
             compact_mode=args.compact_mode,
         )
+
+        # Launch relay agent in background thread if requested
+        if args.remote_relay:
+            from .relay_agent import RelayAgent
+            import threading
+
+            relay_name = args.relay_name or args.name
+            mcp_local_url = f"http://{args.host}:{args.port}"
+            relay_agent = RelayAgent(
+                service_url=args.remote_relay,
+                api_key=args.api_key,
+                mcp_url=mcp_local_url,
+                name=relay_name,
+            )
+            print(f"\n🔗 Remote relay: {args.remote_relay}")
+            relay_thread = threading.Thread(target=relay_agent.run_forever, daemon=True)
+            relay_thread.start()
 
         # Run server
         server.run_simple(transport=args.transport, host=args.host, port=args.port)
