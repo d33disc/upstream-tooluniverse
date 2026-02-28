@@ -1718,3 +1718,125 @@ class TestRenderFunctions:
         result = _trunc(long, 20)
         assert len(result) == 20
         assert result.endswith("…")
+
+
+class TestResolveCategories:
+    """Tests for _resolve_categories — case-insensitive category name mapping."""
+
+    @pytest.mark.unit
+    def test_exact_match_returned_as_is(self):
+        """Exact category name is returned unchanged."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": [], "Proteomics": []}
+        assert _resolve_categories(tu, ["Genomics"]) == ["Genomics"]
+
+    @pytest.mark.unit
+    def test_case_insensitive_match(self):
+        """Lowercase input resolves to the stored mixed-case key."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": [], "Proteomics": []}
+        assert _resolve_categories(tu, ["genomics"]) == ["Genomics"]
+
+    @pytest.mark.unit
+    def test_uppercase_input_resolves(self):
+        """Uppercase input resolves to the stored key."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": []}
+        assert _resolve_categories(tu, ["GENOMICS"]) == ["Genomics"]
+
+    @pytest.mark.unit
+    def test_unknown_category_passed_through(self):
+        """Unknown category name is returned as-is (no KeyError)."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": []}
+        assert _resolve_categories(tu, ["NonExistent"]) == ["NonExistent"]
+
+    @pytest.mark.unit
+    def test_multiple_names_mixed(self):
+        """Multiple names resolved independently — mix of hits and misses."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": [], "Proteomics": []}
+        result = _resolve_categories(tu, ["genomics", "PROTEOMICS", "Unknown"])
+        assert result == ["Genomics", "Proteomics", "Unknown"]
+
+    @pytest.mark.unit
+    def test_empty_names_list(self):
+        """Empty input returns empty list."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = {"Genomics": []}
+        assert _resolve_categories(tu, []) == []
+
+    @pytest.mark.unit
+    def test_none_tool_category_dicts(self):
+        """None tool_category_dicts treated as empty — names passed through."""
+        from tooluniverse.cli import _resolve_categories
+        from unittest.mock import MagicMock
+
+        tu = MagicMock()
+        tu.tool_category_dicts = None
+        assert _resolve_categories(tu, ["Genomics"]) == ["Genomics"]
+
+
+class TestServe:
+    """Tests for `tu serve` subcommand."""
+
+    @pytest.mark.unit
+    def test_serve_subcommand_is_registered(self):
+        """'serve' is a recognised subcommand (argparse doesn't exit 2)."""
+        import argparse
+        from tooluniverse.cli import main
+
+        # Patch sys.argv and intercept before cmd_serve runs
+        import sys
+        from unittest.mock import patch, MagicMock
+
+        mock_serve = MagicMock()
+        with patch("tooluniverse.cli.cmd_serve", mock_serve), \
+             patch.object(sys, "argv", ["tu", "serve"]):
+            main()
+
+        mock_serve.assert_called_once()
+
+    @pytest.mark.unit
+    def test_serve_calls_run_default_stdio_server(self):
+        """cmd_serve delegates to run_default_stdio_server."""
+        import argparse
+        from unittest.mock import patch, MagicMock
+
+        mock_server = MagicMock()
+        with patch("tooluniverse.smcp_server.run_default_stdio_server", mock_server):
+            from tooluniverse.cli import cmd_serve
+            cmd_serve(argparse.Namespace())
+
+        mock_server.assert_called_once_with()
+
+    @pytest.mark.unit
+    def test_serve_help_exits_0(self):
+        """'tu serve --help' exits with code 0."""
+        rc, out, _ = _cli("serve", "--help")
+        assert rc == 0
+        assert "serve" in out.lower() or "mcp" in out.lower()
+
+    @pytest.mark.unit
+    def test_serve_no_extra_args_accepted(self):
+        """'tu serve --bogus' is rejected by argparse (exit 2)."""
+        rc, _, _ = _cli("serve", "--bogus")
+        assert rc == 2
