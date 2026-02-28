@@ -241,15 +241,17 @@ class TestToolUniverseCore:
         assert all(isinstance(spec, dict) for spec in specs)
 
     def test_select_tools(self):
-        """Test select_tools method."""
+        """Test filter_tools + category filter (replacement for deprecated select_tools)."""
         self.tu = ToolUniverse()
         self.tu.load_tools()
-        
-        # Test selecting tools by categories
-        selected_tools = self.tu.select_tools(
-            include_categories=['opentarget', 'chembl'],
-            exclude_names=['tool_to_exclude']
-        )
+
+        # Filter by categories using filter_tools + category field
+        include_cat_set = {"opentarget", "chembl"}
+        selected_tools = [
+            t
+            for t in self.tu.filter_tools(exclude_tools={"tool_to_exclude"})
+            if t.get("category") in include_cat_set
+        ]
         assert isinstance(selected_tools, list)
 
     def test_refresh_tool_name_desc(self):
