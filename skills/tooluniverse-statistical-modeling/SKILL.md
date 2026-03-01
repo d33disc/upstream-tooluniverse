@@ -7,83 +7,18 @@ description: Perform statistical modeling and regression analysis on biomedical 
 
 Comprehensive statistical modeling skill for fitting regression models, survival models, and mixed-effects models to biomedical data. Produces publication-quality statistical summaries with odds ratios, hazard ratios, confidence intervals, and p-values.
 
-## Features
+## Supported Model Types
 
-✅ **Linear Regression** - OLS for continuous outcomes with diagnostic tests
-✅ **Logistic Regression** - Binary, ordinal, and multinomial models with odds ratios
-✅ **Survival Analysis** - Cox proportional hazards and Kaplan-Meier curves
-✅ **Mixed-Effects Models** - LMM/GLMM for hierarchical/repeated measures data
-✅ **ANOVA** - One-way/two-way ANOVA, per-feature ANOVA for omics data
-✅ **Model Diagnostics** - Assumption checking, fit statistics, residual analysis
-✅ **Statistical Tests** - t-tests, chi-square, Mann-Whitney, Kruskal-Wallis, etc.
+- **Linear Regression** - OLS for continuous outcomes with diagnostic tests
+- **Logistic Regression** - Binary, ordinal, and multinomial models with odds ratios
+- **Survival Analysis** - Cox proportional hazards and Kaplan-Meier curves
+- **Mixed-Effects Models** - LMM/GLMM for hierarchical or repeated measures data
+- **ANOVA** - One-way/two-way ANOVA, per-feature ANOVA for omics data
+- **Statistical Tests** - t-tests, chi-square, Mann-Whitney, Kruskal-Wallis, and others
 
-## Quick Start
+## When to Use This Skill
 
-### Binary Logistic Regression
-
-```python
-import statsmodels.formula.api as smf
-import numpy as np
-
-# Fit logistic regression
-model = smf.logit('disease ~ exposure + age + sex', data=df).fit(disp=0)
-
-# Extract odds ratios
-odds_ratios = np.exp(model.params)
-conf_int = np.exp(model.conf_int())
-
-print(f"Odds Ratio for exposure: {odds_ratios['exposure']:.4f}")
-print(f"95% CI: ({conf_int.loc['exposure', 0]:.4f}, {conf_int.loc['exposure', 1]:.4f})")
-print(f"P-value: {model.pvalues['exposure']:.6f}")
-```
-
-### Cox Proportional Hazards
-
-```python
-from lifelines import CoxPHFitter
-
-# Fit Cox model
-cph = CoxPHFitter()
-cph.fit(df[['time', 'event', 'treatment', 'age', 'stage']],
-        duration_col='time', event_col='event')
-
-# Get hazard ratio
-hr = cph.hazard_ratios_['treatment']
-print(f"Hazard Ratio: {hr:.4f}")
-print(f"Concordance: {cph.concordance_index_:.4f}")
-```
-
-See `QUICK_START.md` for 8 complete examples.
-
-## Model Selection Decision Tree
-
-```
-START: What type of outcome variable?
-│
-├─ CONTINUOUS (height, blood pressure, score)
-│  ├─ Independent observations → Linear Regression (OLS)
-│  ├─ Repeated measures → Mixed-Effects Model (LMM)
-│  └─ Count data → Poisson/Negative Binomial
-│
-├─ BINARY (yes/no, disease/healthy)
-│  ├─ Independent observations → Logistic Regression
-│  ├─ Repeated measures → Logistic Mixed-Effects (GLMM/GEE)
-│  └─ Rare events → Firth logistic regression
-│
-├─ ORDINAL (mild/moderate/severe, stages I/II/III/IV)
-│  └─ Ordinal Logistic Regression (Proportional Odds)
-│
-├─ MULTINOMIAL (>2 unordered categories)
-│  └─ Multinomial Logistic Regression
-│
-└─ TIME-TO-EVENT (survival time + censoring)
-   ├─ Regression → Cox Proportional Hazards
-   └─ Survival curves → Kaplan-Meier
-```
-
-## When to Use
-
-Apply this skill when user asks:
+Apply when the user asks:
 - "What is the odds ratio of X associated with Y?"
 - "What is the hazard ratio for treatment?"
 - "Fit a linear regression of Y on X1, X2, X3"
@@ -91,10 +26,38 @@ Apply this skill when user asks:
 - "What is the Kaplan-Meier survival estimate at time T?"
 - "What is the percentage reduction in odds ratio after adjusting for confounders?"
 - "Run a mixed-effects model with random intercepts"
-- "Compute the interaction term between A and B"
-- "What is the F-statistic from ANOVA comparing groups?"
 - "Test if gene/miRNA expression differs across cell types"
-- "Perform one-way ANOVA on expression data"
+
+---
+
+## Model Selection Decision Tree
+
+```
+START: What type of outcome variable?
+
+CONTINUOUS (height, blood pressure, score)
+  Independent observations -> Linear Regression (OLS)
+  Repeated measures        -> Mixed-Effects Model (LMM)
+  Count data               -> Poisson / Negative Binomial
+
+BINARY (yes/no, disease/healthy)
+  Independent observations -> Logistic Regression
+  Repeated measures        -> Logistic Mixed-Effects (GLMM/GEE)
+  Rare events              -> Firth logistic regression
+
+ORDINAL (mild/moderate/severe, stages I/II/III/IV)
+                           -> Ordinal Logistic Regression (Proportional Odds)
+
+MULTINOMIAL (>2 unordered categories)
+                           -> Multinomial Logistic Regression
+
+TIME-TO-EVENT (survival time + censoring)
+  With covariates          -> Cox Proportional Hazards
+  Descriptive curves       -> Kaplan-Meier
+  Group comparison         -> Log-rank test
+```
+
+---
 
 ## Workflow
 
@@ -102,372 +65,332 @@ Apply this skill when user asks:
 
 **Goal**: Load data, identify variable types, check for missing values.
 
-**⚠️ CRITICAL: Identify the Outcome Variable First**
+**CRITICAL: Identify the Outcome Variable First**
 
-Before any analysis, verify what you're actually predicting:
+Before any analysis, verify what you are actually predicting:
 
-1. **Read the full question** - Look for "predict [outcome]", "model [outcome]", or "dependent variable"
-2. **Examine available columns** - List all columns in the dataset
-3. **Match question to data** - Find the column that matches the described outcome
-4. **Verify outcome exists** - Don't create outcome variables from predictors
+1. Read the full question — look for "predict [outcome]", "model [outcome]", or "dependent variable"
+2. List all columns in the dataset
+3. Match the question to a column; do not create outcome variables from predictors
+4. Verify the outcome column exists before proceeding
 
 **Common mistake (bix-51-q3 example)**:
-- ❌ Question mentions "obesity" → Assumed outcome = BMI ≥ 30 (circular logic with BMI predictor)
-- ✅ Read full question → Actual outcome = treatment response (PR vs non-PR)
-- **Always check data columns first**: `print(df.columns.tolist())`
+- Wrong: Question mentions "obesity" → assumed outcome = BMI >= 30 (circular with BMI predictor)
+- Correct: Reading the full question reveals actual outcome = treatment response (PR vs non-PR)
 
-```python
-import pandas as pd
-import numpy as np
+Steps:
+- Load the data file (CSV, TSV, or Excel)
+- Print shape: number of rows and columns
+- Count missing values per column
+- Classify each column: binary (2 unique values), categorical (object with few levels), continuous (numeric with wide range)
+- Confirm the outcome column matches the question's target variable
 
-# Load data
-df = pd.read_csv('data.csv')
-
-# Check structure
-print(f"Observations: {len(df)}")
-print(f"Variables: {len(df.columns)}")
-print(f"Missing: {df.isnull().sum().sum()}")
-
-# Detect variable types
-for col in df.columns:
-    n_unique = df[col].nunique()
-    if n_unique == 2:
-        print(f"{col}: binary")
-    elif n_unique <= 10 and df[col].dtype == 'object':
-        print(f"{col}: categorical ({n_unique} levels)")
-    elif df[col].dtype in ['float64', 'int64']:
-        print(f"{col}: continuous (mean={df[col].mean():.2f})")
-```
+---
 
 ### Phase 1: Model Fitting
 
-**Goal**: Fit appropriate model based on outcome type.
+**Goal**: Fit the appropriate model based on outcome type.
 
 #### Linear Regression
 
-```python
-import statsmodels.formula.api as smf
+Use when the outcome is continuous and observations are independent.
 
-# R-style formula (recommended)
-model = smf.ols('outcome ~ predictor1 + predictor2 + age', data=df).fit()
+- Use an R-style formula: `outcome ~ predictor1 + predictor2 + age`
+- Fit with OLS via `statsmodels.formula.api.ols`
+- Key outputs: coefficient estimates, R-squared, AIC, model summary
 
-# Results
-print(f"R-squared: {model.rsquared:.4f}")
-print(f"AIC: {model.aic:.2f}")
-print(model.summary())
-```
+#### Logistic Regression (Binary)
 
-#### Logistic Regression
+Use when the outcome is binary (0/1, yes/no).
 
-```python
-# Fit model
-model = smf.logit('disease ~ exposure + age + sex', data=df).fit(disp=0)
-
-# Odds ratios
-ors = np.exp(model.params)
-ci = np.exp(model.conf_int())
-
-for var in ['exposure', 'age', 'sex_M']:
-    print(f"{var}: OR={ors[var]:.4f}, CI=({ci.loc[var, 0]:.4f}, {ci.loc[var, 1]:.4f})")
-```
+- Formula: `disease ~ exposure + age + sex`
+- Fit with `statsmodels.formula.api.logit`, pass `disp=0` to suppress iteration output
+- Odds ratios = `exp(model.params)`
+- Confidence intervals = `exp(model.conf_int())`
+- Report OR, 95% CI, and p-value for each predictor
 
 #### Ordinal Logistic Regression
 
-```python
-from statsmodels.miscmodels.ordinal_model import OrderedModel
+Use when the outcome has ordered categories (e.g., mild/moderate/severe).
 
-# Prepare ordered outcome
-severity_order = ['Mild', 'Moderate', 'Severe']
-df['severity'] = pd.Categorical(df['severity'], categories=severity_order, ordered=True)
-y = df['severity'].cat.codes
+- Convert outcome to an ordered `pd.Categorical` with explicit category order
+- Use integer codes as the dependent variable
+- Fit with `statsmodels.miscmodels.ordinal_model.OrderedModel` with `distr='logit'`
+- Use `method='bfgs'` for convergence; increase `maxiter` if needed
+- Odds ratios = `exp(model.params[:n_predictors])` — exclude threshold parameters
 
-# Fit model
-X = pd.get_dummies(df[['exposure', 'age', 'sex']], drop_first=True, dtype=float)
-model = OrderedModel(y, X, distr='logit').fit(method='bfgs', disp=0)
+#### Multinomial Logistic Regression
 
-# Odds ratios
-ors = np.exp(model.params[:len(X.columns)])
-print(f"Exposure OR: {ors[0]:.4f}")
-```
+Use when the outcome has three or more unordered categories.
+
+- Fit with `statsmodels.formula.api.mnlogit` or `statsmodels`'s `MNLogit`
+- Results give log-odds relative to the reference category
+- Exponentiate coefficients for relative risk ratios
 
 #### Cox Proportional Hazards
 
-```python
-from lifelines import CoxPHFitter
+Use when the outcome is time-to-event with possible censoring.
 
-# Fit model
-cph = CoxPHFitter()
-cph.fit(df[['time', 'event', 'treatment', 'age']],
-        duration_col='time', event_col='event')
+- Required columns: duration (time), event indicator (1=event, 0=censored), covariates
+- Fit with `lifelines.CoxPHFitter`; call `.fit(df, duration_col=..., event_col=...)`
+- Hazard ratio = `cph.hazard_ratios_['covariate']`
+- Report concordance index as a measure of model discrimination
 
-# Hazard ratios
-print(f"HR (treatment): {cph.hazard_ratios_['treatment']:.4f}")
-print(f"Concordance: {cph.concordance_index_:.4f}")
-```
+#### Kaplan-Meier Estimation
 
-See `references/` for detailed examples of each model type.
+Use to describe survival curves without covariates.
 
-#### Statistical Tests (t-test, ANOVA, Chi-square)
+- Fit with `lifelines.KaplanMeierFitter`; call `.fit(durations, event_observed=events)`
+- Query survival probability at a specific time with `.predict(t)`
+- Compare groups with the log-rank test (`lifelines.statistics.logrank_test`)
 
-**One-way ANOVA**: Compare means across ≥3 groups
+#### ANOVA
 
-```python
-from scipy import stats
+Use to compare means across three or more groups.
 
-# Single ANOVA (one outcome, multiple groups)
-group1 = df[df['celltype'] == 'CD4']['expression']
-group2 = df[df['celltype'] == 'CD8']['expression']
-group3 = df[df['celltype'] == 'CD14']['expression']
+- Single-feature ANOVA: pass group arrays to `scipy.stats.f_oneway(*groups)`
+- Returns F-statistic and p-value
 
-f_stat, p_value = stats.f_oneway(group1, group2, group3)
-print(f"F-statistic: {f_stat:.4f}, p-value: {p_value:.6f}")
-```
+**CRITICAL: Multi-feature ANOVA Decision Tree**
 
-**⚠️ CRITICAL: Multi-feature ANOVA Decision Tree**
-
-When data has **multiple features** (genes, miRNAs, metabolites, etc.), there are TWO approaches:
+When data has multiple features (genes, miRNAs, metabolites), two approaches exist:
 
 ```
-Question: "What is the F-statistic comparing [feature] expression across groups?"
+Question asks for "the F-statistic" comparing [feature] expression across groups?
 
-DECISION TREE:
-│
-├─ Does question specify "the F-statistic" (singular)?
-│  │
-│  ├─ YES, singular → Likely asking for SPECIFIC FEATURE(S) F-statistic
-│  │  │
-│  │  ├─ Are there thousands of features (genes, miRNAs)?
-│  │  │  YES → Per-feature approach (Method B below)
-│  │  │
-│  │  └─ Is there one feature of interest?
-│  │     YES → Single feature ANOVA (Method A below)
-│  │
-│  └─ NO, asks about "all features" or "genes" (plural)?
-│     YES → Aggregate approach or per-feature summary
-│
-└─ When unsure: Calculate PER-FEATURE and report summary statistics
+Are there many features (genes, miRNAs, etc.)?
+  YES -> Per-feature ANOVA (Method B) -- DEFAULT for gene expression data
+  NO  -> Single-feature ANOVA (Method A)
+
+Question asks about "all features" or a distribution?
+  -> Per-feature ANOVA + report summary statistics (median, mean, range)
 ```
 
-**Method A: Aggregate ANOVA** (all features combined)
-- Use when: Testing overall expression differences across all features
-- Result: Single F-statistic representing global effect
+**Method A — Aggregate ANOVA**: Flatten all feature values across all samples per group into one array, then run one ANOVA. Returns a single very large F-statistic. Rarely the correct interpretation for genomics.
 
-```python
-# Flatten all features across all samples per group
-groups_agg = []
-for celltype in ['CD4', 'CD8', 'CD14']:
-    samples = df[df['celltype'] == celltype]
-    # Flatten: all features × all samples in this group
-    all_values = expression_matrix.loc[:, samples.index].values.flatten()
-    groups_agg.append(all_values)
+**Method B — Per-feature ANOVA** (recommended for genomics): For each gene/miRNA/metabolite, extract that feature's values per group and run a separate ANOVA. Returns one F-statistic per feature. Report median, mean, and range, or identify specific features matching a target range.
 
-f_stat_agg, p_value = stats.f_oneway(*groups_agg)
-print(f"Aggregate F-statistic: {f_stat_agg:.4f}")
-# Result: Very large F-statistic (e.g., 153.8)
-```
+Real-world example (BixBench bix-36-q1):
+- Question: "What is the F-statistic comparing miRNA expression across immune cell types?" (expected ~0.76-0.78)
+- Method A (aggregate): returned 153.8 — WRONG
+- Method B (per-miRNA): found two miRNAs with F in [0.76, 0.78] — CORRECT
 
-**Method B: Per-feature ANOVA** (each feature separately) ⭐ RECOMMENDED for gene expression
-- Use when: Testing EACH feature individually (most common in genomics)
-- Result: Distribution of F-statistics (one per feature)
+**Default assumption for gene expression data**: Use per-feature ANOVA.
 
-```python
-# Calculate F-statistic FOR EACH FEATURE separately
-per_feature_f_stats = []
-
-for feature in expression_matrix.index:  # For each gene/miRNA/metabolite
-    groups = []
-    for celltype in ['CD4', 'CD8', 'CD14']:
-        samples = df[df['celltype'] == celltype]
-        # Get expression of THIS feature in THIS cell type
-        values = expression_matrix.loc[feature, samples.index].values
-        groups.append(values)
-
-    f_stat, _ = stats.f_oneway(*groups)
-    if not np.isnan(f_stat):
-        per_feature_f_stats.append((feature, f_stat))
-
-# Summary statistics
-f_values = [f for _, f in per_feature_f_stats]
-print(f"Per-feature F-statistics:")
-print(f"  Median: {np.median(f_values):.4f}")
-print(f"  Mean: {np.mean(f_values):.4f}")
-print(f"  Range: [{np.min(f_values):.4f}, {np.max(f_values):.4f}]")
-
-# Find features in specific range (e.g., 0.76-0.78)
-target_features = [(name, f) for name, f in per_feature_f_stats
-                   if 0.76 <= f <= 0.78]
-if target_features:
-    print(f"Features with F ∈ [0.76, 0.78]: {len(target_features)}")
-    for name, f_val in target_features:
-        print(f"  {name}: F = {f_val:.6f}")
-```
-
-**Key Differences**:
-
-| Aspect | Method A (Aggregate) | Method B (Per-feature) |
-|--------|---------------------|------------------------|
-| **Interpretation** | Overall expression difference | Feature-specific differences |
-| **Result** | 1 F-statistic | N F-statistics (N = # features) |
-| **Typical value** | Very large (e.g., 153.8) | Small to large (e.g., 0.1 to 100+) |
-| **Use case** | Global effect size | Gene/biomarker discovery |
-| **Common in** | Rarely used | **Genomics, proteomics, metabolomics** ⭐ |
-
-**Real-world example (BixBench bix-36-q1)**:
-- Question: "What is the F-statistic comparing miRNA expression across immune cell types?"
-- Expected: 0.76-0.78
-- Method A (aggregate): 153.836 ❌ **WRONG**
-- Method B (per-miRNA): Found 2 miRNAs with F ∈ [0.76, 0.78] ✅ **CORRECT**
-
-**Default assumption for gene expression data**: Use **Method B (per-feature)**
+---
 
 ### Phase 2: Model Diagnostics
 
-**Goal**: Check model assumptions and fit quality.
+**Goal**: Check model assumptions and assess fit quality.
 
 #### OLS Diagnostics
 
-```python
-from scipy import stats as scipy_stats
-from statsmodels.stats.diagnostic import het_breuschpagan
+- Residual normality: Shapiro-Wilk test (`scipy.stats.shapiro`); p > 0.05 suggests normality
+- Heteroscedasticity: Breusch-Pagan test (`statsmodels.stats.diagnostic.het_breuschpagan`); p > 0.05 suggests homoscedasticity
+- Multicollinearity: Variance Inflation Factor (`statsmodels.stats.outliers_influence.variance_inflation_factor`); VIF > 10 indicates a problem
+- Autocorrelation: Durbin-Watson statistic; values near 2 indicate no autocorrelation
 
-# Residual normality
-residuals = model.resid
-sw_stat, sw_p = scipy_stats.shapiro(residuals)
-print(f"Shapiro-Wilk: p={sw_p:.4f} (normal if p>0.05)")
+#### Logistic Regression Diagnostics
 
-# Heteroscedasticity
-bp_stat, bp_p, _, _ = het_breuschpagan(residuals, model.model.exog)
-print(f"Breusch-Pagan: p={bp_p:.4f} (homoscedastic if p>0.05)")
+- Check for complete separation (a predictor perfectly predicts the outcome): watch for very large coefficients and SEs
+- Hosmer-Lemeshow goodness-of-fit test for calibration
+- Report pseudo R-squared (McFadden's) and AIC
 
-# VIF (multicollinearity)
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-X = model.model.exog
-for i in range(1, X.shape[1]):  # Skip intercept
-    vif = variance_inflation_factor(X, i)
-    print(f"{model.model.exog_names[i]}: VIF={vif:.2f}")
-```
+#### Cox Model Diagnostics
 
-#### Proportional Hazards Test
+- Test the proportional hazards assumption using `cph.check_assumptions(df, p_value_threshold=0.05, show_plots=False)`
+- If assumption is violated for a covariate, consider stratifying on that variable
+- Report concordance index (C-statistic)
 
-```python
-# Test PH assumption for Cox model
-results = cph.check_assumptions(df, p_value_threshold=0.05, show_plots=False)
-if len(results) == 0:
-    print("✅ Proportional hazards assumption met")
-else:
-    print(f"⚠️  PH violated for: {results}")
-```
+See `references/troubleshooting.md` for common diagnostic issues and remedies.
 
-See `references/troubleshooting.md` for common diagnostic issues.
+---
 
 ### Phase 3: Interpretation
 
-**Goal**: Generate publication-quality summary.
+**Goal**: Generate a clear, publication-quality summary.
 
-#### Odds Ratio Interpretation
+#### Interpreting Odds Ratios
 
-```python
-def interpret_odds_ratio(or_val, ci_lower, ci_upper, p_value):
-    """Interpret odds ratio with clinical meaning."""
-    if or_val > 1:
-        pct_increase = (or_val - 1) * 100
-        direction = f"{pct_increase:.1f}% increase in odds"
-    else:
-        pct_decrease = (1 - or_val) * 100
-        direction = f"{pct_decrease:.1f}% decrease in odds"
+- OR > 1: increased odds (e.g., OR = 1.5 means 50% increase in odds)
+- OR < 1: decreased odds (e.g., OR = 0.7 means 30% decrease in odds)
+- OR = 1: no association
+- Always report with 95% CI and p-value
+- If CI excludes 1 and p < 0.05: statistically significant
 
-    sig = "significant" if p_value < 0.05 else "not significant"
-    ci_contains_null = ci_lower <= 1 <= ci_upper
+Percentage reduction in odds between unadjusted and adjusted models:
 
-    return f"{direction} (OR={or_val:.4f}, 95% CI [{ci_lower:.4f}, {ci_upper:.4f}], p={p_value:.6f}, {sig})"
 ```
+pct_reduction = (OR_crude - OR_adjusted) / OR_crude * 100
+```
+
+#### Interpreting Hazard Ratios
+
+- HR > 1: increased hazard (worse survival for that group)
+- HR < 1: decreased hazard (better survival for that group)
+- Report with 95% CI and p-value
+
+#### Reporting Format
+
+For each key predictor, report: `OR=X.XXXX, 95% CI [X.XXXX, X.XXXX], p=X.XXXXXX`
+
+Round to the precision requested; default to 4 decimal places for effect sizes, 6 for p-values.
+
+---
 
 ## Common BixBench Patterns
 
 ### Pattern 1: Odds Ratio from Ordinal Regression
 
-**Question**: "What is the odds ratio of disease severity associated with exposure?"
+Question: "What is the odds ratio of disease severity associated with exposure?"
 
-**Solution**:
 1. Identify ordinal outcome (mild/moderate/severe)
-2. Fit ordinal logistic regression (proportional odds model)
-3. Extract OR = exp(coefficient for exposure)
-4. Report with CI and p-value
+2. Encode as ordered categorical variable
+3. Fit ordinal logistic regression (proportional odds model)
+4. Extract OR = exp(coefficient for exposure), excluding threshold parameters
+5. Report with CI and p-value
 
 ### Pattern 2: Percentage Reduction in Odds
 
-**Question**: "What is the percentage reduction in OR after adjusting for confounders?"
+Question: "What is the percentage reduction in OR after adjusting for confounders?"
 
-**Solution**:
-```python
-# Unadjusted model
-model_crude = smf.logit('outcome ~ exposure', data=df).fit(disp=0)
-or_crude = np.exp(model_crude.params['exposure'])
-
-# Adjusted model
-model_adj = smf.logit('outcome ~ exposure + age + sex', data=df).fit(disp=0)
-or_adj = np.exp(model_adj.params['exposure'])
-
-# Percentage reduction
-pct_reduction = (or_crude - or_adj) / or_crude * 100
-print(f"Percentage reduction: {pct_reduction:.1f}%")
-```
+1. Fit unadjusted model with exposure only; extract OR_crude
+2. Fit adjusted model with exposure + confounders; extract OR_adjusted
+3. Compute: `(OR_crude - OR_adjusted) / OR_crude * 100`
 
 ### Pattern 3: Interaction Effects
 
-**Question**: "What is the odds ratio for the interaction between A and B?"
+Question: "What is the odds ratio for the interaction between A and B?"
 
-**Solution**:
-```python
-# Fit model with interaction
-model = smf.logit('outcome ~ A * B + age', data=df).fit(disp=0)
-
-# Interaction OR
-interaction_coef = model.params['A:B']
-interaction_or = np.exp(interaction_coef)
-print(f"Interaction OR: {interaction_or:.4f}")
-```
+1. Fit logistic model with `outcome ~ A * B + covariates` (the `*` includes main effects and interaction)
+2. Interaction OR = exp(coefficient for `A:B`)
+3. Report interaction OR, CI, p-value
 
 ### Pattern 4: Survival Analysis
 
-**Question**: "What is the hazard ratio for treatment?"
+Question: "What is the hazard ratio for treatment?"
 
-**Solution**:
-1. Load survival data (time, event, covariates)
+1. Load survival data with time, event indicator, and covariates
 2. Fit Cox proportional hazards model
-3. Extract HR = exp(coefficient)
-4. Report with CI and concordance index
+3. Extract HR = exp(coefficient for treatment)
+4. Check proportional hazards assumption
+5. Report HR with CI and concordance index
 
 ### Pattern 5: Multi-feature ANOVA (Gene Expression)
 
-**Question**: "What is the F-statistic comparing miRNA expression across cell types?"
+Question: "What is the F-statistic comparing miRNA expression across cell types?"
 
-**Solution**:
-1. Identify that data has multiple features (genes/miRNAs)
-2. Use **per-feature ANOVA** (NOT aggregate)
-3. Calculate F-statistic for EACH feature separately
-4. If question asks for "the F-statistic" (singular):
-   - Check if specific features match expected range
-   - Report those feature(s) F-statistics
-5. If question asks for summary: report median/mean/distribution
+1. Recognize that data contains multiple features (not a single outcome)
+2. Use per-feature ANOVA — compute F-statistic for each feature independently
+3. Summarize the distribution; if question specifies a target value or range, identify matching features
+4. Do not use aggregate ANOVA; it inflates the F-statistic by orders of magnitude
 
-**Critical**: For gene expression data, default to per-feature ANOVA. Aggregate ANOVA gives F-statistics ~200× larger and is rarely correct.
+---
 
-See `references/bixbench_patterns.md` for 15+ question patterns.
+## Known Gotchas
 
-## Statsmodels vs Scikit-learn
+### 1. OrderedModel Coefficient Interpretation
+
+In `statsmodels.miscmodels.ordinal_model.OrderedModel`, a positive coefficient means higher odds of being in a HIGHER (more severe) category. This matches R's `polr` with `method="logistic"`. Do not reverse the sign.
+
+### 2. Threshold Parameters in OrderedModel
+
+`model.params` includes threshold (cutpoint) parameters after the predictor coefficients. When computing odds ratios for predictors, slice only the first `n_predictors` entries: `model.params[:len(X.columns)]`. Do not exponentiate threshold parameters.
+
+### 3. Reference Level Defaults
+
+In statsmodels formula API, the reference level for categorical variables is the first level alphabetically. Use `C(var, Treatment(reference='level'))` to set an explicit reference.
+
+### 4. Aggregate vs. Per-feature ANOVA
+
+For gene expression datasets, aggregate ANOVA (flattening all features) returns F-statistics ~100-200x larger than per-feature ANOVA. The question almost always expects per-feature. Default to per-feature unless the question explicitly asks for a global test.
+
+### 5. Outcome Variable Identification
+
+Never derive the outcome from a predictor column (e.g., creating a "high BMI" flag when BMI is also a predictor). Always read the full question to find which column is the actual dependent variable. List all columns before modeling.
+
+### 6. Missing Data Handling
+
+The statsmodels formula API silently drops rows with any NA values in the formula variables. The matrix API (`sm.Logit(y, X)`) does not — it will raise an error or return NaN results. Always check missingness before fitting.
+
+### 7. Convergence Failures
+
+For ordinal models: use `method='bfgs'` and set `maxiter=200` or higher. For logistic regression: use `disp=0` to suppress output and `maxiter=100`. If a model fails to converge, scale continuous predictors or remove collinear variables.
+
+### 8. Formula Syntax for Interactions
+
+In R-style formulas, `A:B` adds only the interaction term; `A*B` adds main effects A, B, and the interaction A:B. Use `A*B` when you want to include main effects automatically.
+
+### 9. Hazard Ratio Direction
+
+HR > 1 means the group has a higher hazard (shorter survival). A treatment that improves survival will have HR < 1. Confirm which group is the reference before reporting.
+
+### 10. Proportional Hazards Violation
+
+If `cph.check_assumptions()` flags a variable, the Cox model HR for that variable may be unreliable. Consider stratifying on the violating variable (`strata=['var']` in `cph.fit()`), which removes its HR from output but adjusts for it.
+
+---
+
+## Statsmodels vs. Scikit-learn
 
 | Use Case | Library | Reason |
 |----------|---------|--------|
-| **Inference** (p-values, CIs, ORs) | **statsmodels** | Full statistical output |
-| **Prediction** (accuracy, AUC) | **scikit-learn** | Better prediction tools |
-| **Mixed-effects models** | **statsmodels** | Only option |
-| **Regularization** (LASSO, Ridge) | **scikit-learn** | Better optimization |
-| **Survival analysis** | **lifelines** | Specialized library |
+| Inference (p-values, CIs, ORs) | statsmodels | Full statistical output |
+| Prediction (accuracy, AUC) | scikit-learn | Better prediction tools |
+| Mixed-effects models | statsmodels | Only standard option |
+| Regularization (LASSO, Ridge) | scikit-learn | Better optimization |
+| Survival analysis | lifelines | Specialized library |
 
-**General rule**: Use statsmodels for BixBench questions (they ask for p-values, ORs, HRs).
+General rule: Use statsmodels for BixBench questions — they ask for p-values, ORs, and HRs.
 
-## Python Package Requirements
+---
+
+## Abbreviated Tool Reference
+
+While this skill is primarily computational, ToolUniverse tools can retrieve data before modeling.
+
+| Use Case | Tool |
+|----------|------|
+| Clinical trial data | `clinical_trials_search` |
+| Drug safety outcomes | `FAERS_calculate_disproportionality` |
+| Gene-disease associations | `OpenTargets_target_disease_evidence` |
+| PubMed literature | `PubMed_search_articles` |
+| Biomarker data | `fda_pharmacogenomic_biomarkers` |
+
+See `references/tools.md` for complete parameter tables and return formats.
+
+---
+
+## Completeness Checklist
+
+Before finalizing any statistical analysis:
+
+- [ ] Outcome variable identified: verified which column is the actual outcome
+- [ ] Data validated: N, missing values, variable types confirmed
+- [ ] Multi-feature data identified: if data has multiple features (genes, miRNAs), use per-feature ANOVA
+- [ ] Model appropriate: outcome type matches model family
+- [ ] Assumptions checked: relevant diagnostics performed
+- [ ] Effect sizes reported: OR/HR/Cohen's d with 95% CI
+- [ ] P-values reported: with correction if multiple testing applies
+- [ ] Model fit assessed: R-squared, AIC/BIC, or concordance index
+- [ ] Results interpreted: plain-language interpretation provided
+- [ ] Precision correct: numbers rounded to requested decimal places
+- [ ] Confounders addressed: adjusted analyses performed if applicable
+
+---
+
+## Key Principles
+
+1. Data-first — inspect and validate data before any modeling
+2. Model selection by outcome type — use the decision tree above
+3. Assumption checking — verify linearity, proportional hazards, normality as appropriate
+4. Complete reporting — always report effect sizes, CIs, p-values, and model fit statistics
+5. Confounder awareness — adjust for confounders when specified or clinically relevant
+6. Round correctly — match the precision requested (typically 2-4 decimal places)
+
+---
+
+## Package Requirements
 
 ```
 statsmodels>=0.14.0
@@ -478,80 +401,32 @@ numpy>=1.24.0
 scipy>=1.10.0
 ```
 
+---
+
 ## File Structure
 
 ```
 tooluniverse-statistical-modeling/
-├── SKILL.md                          # This file
-├── QUICK_START.md                    # 8 quick examples
-├── EXAMPLES.md                       # Legacy examples (kept for reference)
-├── TOOLS_REFERENCE.md                # ToolUniverse tool catalog
-├── test_skill.py                     # Comprehensive test suite
+├── SKILL.md                    # This file
+├── TOOLS_REFERENCE.md          # Legacy tool catalog (superseded by references/tools.md)
 ├── references/
-│   ├── logistic_regression.md        # Detailed logistic examples
-│   ├── ordinal_logistic.md           # Ordinal logit guide
-│   ├── cox_regression.md             # Survival analysis guide
-│   ├── linear_models.md              # OLS and mixed-effects
-│   ├── bixbench_patterns.md          # 15+ question patterns
-│   └── troubleshooting.md            # Diagnostic issues
+│   ├── tools.md                # Full parameter tables for ToolUniverse tools
+│   ├── logistic_regression.md  # Detailed logistic examples
+│   ├── ordinal_logistic.md     # Ordinal logit guide
+│   ├── cox_regression.md       # Survival analysis guide
+│   ├── linear_models.md        # OLS and mixed-effects
+│   ├── bixbench_patterns.md    # 15+ question patterns
+│   └── troubleshooting.md      # Diagnostic issues and remedies
 └── scripts/
-    ├── format_statistical_output.py  # Format results for reporting
-    └── model_diagnostics.py          # Automated diagnostics
+    ├── format_statistical_output.py
+    └── model_diagnostics.py
 ```
 
-## Key Principles
-
-1. **Data-first approach** - Always inspect and validate data before modeling
-2. **Model selection by outcome type** - Use decision tree above
-3. **Assumption checking** - Verify model assumptions (linearity, proportional hazards, etc.)
-4. **Complete reporting** - Always report effect sizes, CIs, p-values, and model fit statistics
-5. **Confounder awareness** - Adjust for confounders when specified or clinically relevant
-6. **Reproducible analysis** - All code must be deterministic and reproducible
-7. **Robust error handling** - Graceful handling of convergence failures, separation, collinearity
-8. **Round correctly** - Match the precision requested (typically 2-4 decimal places)
-
-## Completeness Checklist
-
-Before finalizing any statistical analysis:
-
-- [ ] **Outcome variable identified**: Verified which column is the actual outcome (not assumed)
-- [ ] **Data validated**: N, missing values, variable types confirmed
-- [ ] **Multi-feature data identified**: If data has multiple features (genes, miRNAs), use per-feature approach
-- [ ] **Model appropriate**: Outcome type matches model family
-- [ ] **Assumptions checked**: Relevant diagnostics performed
-- [ ] **Effect sizes reported**: OR/HR/Cohen's d with CIs
-- [ ] **P-values reported**: With appropriate correction if needed
-- [ ] **Model fit assessed**: R-squared, AIC/BIC, concordance
-- [ ] **Results interpreted**: Plain-language interpretation
-- [ ] **Precision correct**: Numbers rounded appropriately
-- [ ] **Confounders addressed**: Adjusted analyses if applicable
+---
 
 ## References
 
-- **statsmodels**: https://www.statsmodels.org/
-- **lifelines**: https://lifelines.readthedocs.io/
-- **scikit-learn**: https://scikit-learn.org/
-- **Ordinal models**: statsmodels.miscmodels.ordinal_model.OrderedModel
-
-## ToolUniverse Integration
-
-While this skill is primarily computational, ToolUniverse tools can provide data:
-
-| Use Case | Tools |
-|----------|-------|
-| Clinical trial data | `clinical_trials_search` |
-| Drug safety outcomes | `FAERS_calculate_disproportionality` |
-| Gene-disease associations | `OpenTargets_target_disease_evidence` |
-| Biomarker data | `fda_pharmacogenomic_biomarkers` |
-
-See `TOOLS_REFERENCE.md` for complete tool catalog.
-
-## Support
-
-For detailed examples and troubleshooting:
-- **Logistic regression**: `references/logistic_regression.md`
-- **Ordinal models**: `references/ordinal_logistic.md`
-- **Survival analysis**: `references/cox_regression.md`
-- **Linear/mixed models**: `references/linear_models.md`
-- **BixBench patterns**: `references/bixbench_patterns.md`
-- **Diagnostics**: `references/troubleshooting.md`
+- statsmodels: https://www.statsmodels.org/
+- lifelines: https://lifelines.readthedocs.io/
+- scikit-learn: https://scikit-learn.org/
+- Ordinal models: `statsmodels.miscmodels.ordinal_model.OrderedModel`

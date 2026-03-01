@@ -7,383 +7,179 @@ description: Retrieves gene expression and omics datasets from ArrayExpress and 
 
 Retrieve gene expression experiments and multi-omics datasets with proper disambiguation and quality assessment.
 
-**IMPORTANT**: Always use English terms in tool calls (gene names, tissue names, condition descriptions), even if the user writes in another language. Only try original-language terms as a fallback if English returns no results. Respond in the user's language.
+**IMPORTANT**: Always use English terms in tool calls (gene names, tissue names, condition descriptions), even if the user writes in another language. Respond in the user's language.
 
-## Workflow Overview
+## Workflow
 
 ```
-Phase 0: Clarify Query (if ambiguous)
-    ↓
-Phase 1: Disambiguate Gene/Condition
-    ↓
-Phase 2: Search & Retrieve (Internal)
-    ↓
-Phase 3: Report Dataset Profile
+Phase 0: Clarify query (if ambiguous)
+Phase 1: Resolve gene/condition identifiers
+Phase 2: Search & retrieve (silent)
+Phase 3: Report dataset profile
 ```
 
 ---
 
-## Phase 0: Clarification (When Needed)
+## Phase 0: Clarify Only When Needed
 
-Ask the user ONLY if:
-- Gene name is ambiguous (e.g., "p53" → TP53 or MDM2 studies?)
+Ask only if:
+- Gene name is ambiguous (e.g., "p53" → TP53 expression studies, or MDM2?)
 - Tissue/condition unclear for comparative studies
 - Organism not specified for non-human research
 
-Skip clarification for:
-- Specific accession numbers (E-MTAB-*, E-GEOD-*, S-BSST*)
-- Clear disease/tissue + organism combinations
-- Explicit platform requests (RNA-seq, microarray)
+Skip for: specific accession numbers (E-MTAB-*, E-GEOD-*, S-BSST*), clear disease+organism queries, explicit platform requests.
 
 ---
 
 ## Phase 1: Query Disambiguation
 
-### 1.1 Gene Name Resolution
-
-If searching by gene, first resolve official identifiers:
-
-```python
-from tooluniverse import ToolUniverse
-tu = ToolUniverse()
-tu.load_tools()
-
-# For gene-focused searches, resolve official symbol first
-# This helps construct better search queries
-# Example: "p53" → "TP53" (official HGNC symbol)
-```
-
-**Gene Disambiguation Checklist:**
-- [ ] Official gene symbol identified (HGNC for human, MGI for mouse)
-- [ ] Common aliases noted for search expansion
-- [ ] Species confirmed
-
-### 1.2 Construct Search Strategy
+If searching by gene: resolve official symbol first (HGNC for human, MGI for mouse). Include common aliases in the search keywords (e.g., search "TP53 p53" not just "TP53").
 
 | User Query Type | Search Strategy |
 |-----------------|-----------------|
 | Specific accession | Direct retrieval |
-| Gene + condition | "[gene] [condition]" + species filter |
+| Gene + condition | "[gene alias1 alias2] [condition]" + species filter |
 | Disease only | "[disease]" + species filter |
 | Technology-specific | Add platform keywords (RNA-seq, microarray) |
 
 ---
 
-## Phase 2: Data Retrieval (Internal)
+## Phase 2: Search & Retrieve (Silent — Do Not Narrate)
 
-Search silently. Do NOT narrate the process.
+**Primary search**:
+- `arrayexpress_search_experiments(keywords=<query>, species=<organism>, limit=20)` — gene expression experiments
+- `biostudies_search_studies(query=<keywords>, limit=10)` — multi-omics datasets
 
-### 2.1 Search Experiments
+**Get experiment details** for top results (top 5-10):
+- `arrayexpress_get_experiment_details(accession=<E-MTAB-*>)` — full metadata
+- `arrayexpress_get_experiment_samples(accession=<acc>)` — sample annotations
+- `arrayexpress_get_experiment_files(accession=<acc>)` — download links
 
-```python
-# ArrayExpress search
-result = tu.tools.arrayexpress_search_experiments(
-    keywords="[gene/disease] [condition]",
-    species="[species]",
-    limit=20
-)
+**BioStudies details**:
+- `biostudies_get_study_details(accession=<S-BSST*>)` — study metadata
+- `biostudies_get_study_files(accession=<acc>)` — data files
+- `biostudies_get_study_sections(accession=<acc>)` — study structure
 
-# BioStudies for multi-omics
-biostudies_result = tu.tools.biostudies_search_studies(
-    query="[keywords]",
-    limit=10
-)
-```
-
-### 2.2 Get Experiment Details
-
-For top results, retrieve full metadata:
-
-```python
-# Get details for each relevant experiment
-details = tu.tools.arrayexpress_get_experiment_details(
-    accession=accession
-)
-
-# Get sample information
-samples = tu.tools.arrayexpress_get_experiment_samples(
-    accession=accession
-)
-
-# Get available files
-files = tu.tools.arrayexpress_get_experiment_files(
-    accession=accession
-)
-```
-
-### 2.3 BioStudies Retrieval
-
-```python
-# Multi-omics study details
-study_details = tu.tools.biostudies_get_study_details(
-    accession=study_accession
-)
-
-# Study structure
-sections = tu.tools.biostudies_get_study_sections(
-    accession=study_accession
-)
-
-# Available files
-files = tu.tools.biostudies_get_study_files(
-    accession=study_accession
-)
-```
-
-### Fallback Chains
-
-| Primary | Fallback | Notes |
-|---------|----------|-------|
-| ArrayExpress search | BioStudies search | ArrayExpress empty |
-| arrayexpress_get_experiment_details | biostudies_get_study_details | E-GEOD may have BioStudies mirror |
-| arrayexpress_get_experiment_files | Note "Files unavailable" | Some studies restrict downloads |
+**Fallback chain**:
+1. ArrayExpress finds nothing → try BioStudies search
+2. `arrayexpress_get_experiment_details` fails → try `biostudies_get_study_details` (E-GEOD often mirrors)
+3. Files unavailable → note "Data files restricted by submitter"
 
 ---
 
 ## Phase 3: Report Dataset Profile
 
-### Output Structure
-
-Present as a **Dataset Search Report**. Hide search process.
+Present as **Dataset Search Report**. Do not show search process.
 
 ```markdown
 # Expression Data: [Query Topic]
 
-**Search Summary**
-- Query: [gene/disease] in [species]
-- Databases: ArrayExpress, BioStudies
-- Results: [N] relevant experiments found
-
-**Data Quality Overview**: [assessment based on criteria below]
+**Search**: [gene/disease] in [species] | Databases: ArrayExpress, BioStudies | Found: [N] experiments
 
 ---
 
 ## Top Experiments
 
-### 1. [E-MTAB-XXXX]: [Title]
+### 1. [E-MTAB-XXXX] — [Title]
 
 | Attribute | Value |
 |-----------|-------|
-| **Accession** | [accession with link] |
-| **Organism** | [species] |
-| **Experiment Type** | RNA-seq / Microarray |
-| **Platform** | [specific platform] |
-| **Samples** | [N] samples |
-| **Release Date** | [date] |
+| Accession | [accession] |
+| Organism | [species] |
+| Type | RNA-seq / Microarray |
+| Platform | [platform name] |
+| Samples | [N] |
+| Release Date | [date] |
 
-**Description**: [Brief description from metadata]
+**Description**: [Brief description]
 
 **Experimental Design**:
-- Conditions: [treatment vs control, etc.]
+- Conditions: [treatment vs control]
 - Replicates: [N biological, M technical]
 - Tissue/Cell type: [if specified]
 
 **Sample Groups**:
-| Group | Samples | Description |
-|-------|---------|-------------|
-| Control | [N] | [description] |
-| Treatment | [N] | [description] |
+| Group | N | Description |
+|-------|---|-------------|
+| Control | [N] | [desc] |
+| Treatment | [N] | [desc] |
 
-**Data Files Available**:
-| File | Type | Size |
-|------|------|------|
-| [filename] | Processed data | [size] |
-| [filename] | Raw data | [size] |
-| [filename] | Sample metadata | [size] |
+**Data Files**:
+| File | Type |
+|------|------|
+| [filename] | Processed data |
+| [filename] | Raw data |
 
-**Quality Assessment**: ●●● High / ●●○ Medium / ●○○ Low
-- Sample size: [adequate/limited]
-- Replication: [yes/no]
-- Metadata completeness: [complete/partial]
+**Quality**: ●●● High / ●●○ Medium / ●○○ Low
+- [Rationale: replicate count, metadata completeness, platform recency]
 
 ---
 
-### 2. [E-GEOD-XXXXX]: [Title]
-[Same structure as above]
+### 2. [E-GEOD-XXXXX] — [Title]
+[Same structure]
 
 ---
 
-## Multi-Omics Studies (from BioStudies)
+## Multi-Omics Studies (BioStudies)
 
-### [S-BSST-XXXXX]: [Title]
-
+### [S-BSST-XXXXX] — [Title]
 | Attribute | Value |
 |-----------|-------|
-| **Accession** | [accession] |
-| **Study Type** | [proteomics/metabolomics/integrated] |
-| **Organism** | [species] |
-| **Samples** | [N] |
+| Accession | [accession] |
+| Study Type | proteomics / metabolomics / integrated |
+| Organism | [species] |
+| Samples | [N] |
 
-**Data Types Included**:
-- [ ] Transcriptomics
-- [ ] Proteomics
-- [ ] Metabolomics
-- [ ] Other: [specify]
+Data types: Transcriptomics ☐ / Proteomics ☐ / Metabolomics ☐
 
 ---
 
-## Summary Table
+## Summary & Recommendations
 
-| Accession | Type | Samples | Platform | Quality |
-|-----------|------|---------|----------|---------|
-| [E-MTAB-X] | RNA-seq | [N] | Illumina | ●●● |
-| [E-GEOD-X] | Microarray | [N] | Affymetrix | ●●○ |
+| Accession | Type | Samples | Quality |
+|-----------|------|---------|---------|
+| [E-MTAB-X] | RNA-seq | [N] | ●●● |
 
----
+**Best for [user's purpose]**: [accession] — [reason]
 
-## Recommendations
-
-**For [specific analysis type]**:
-- Best experiment: [accession] - [reason]
-- Alternative: [accession] - [reason]
-
-**Data Integration Notes**:
-- Platform compatibility: [notes on combining datasets]
-- Batch considerations: [if applicable]
-
----
-
-## Data Access
-
-### Direct Download Links
-- [E-MTAB-XXXX processed data](link)
-- [E-MTAB-XXXX raw data](link)
-
-### Database Links
-- ArrayExpress: https://www.ebi.ac.uk/arrayexpress/experiments/[accession]
-- BioStudies: https://www.ebi.ac.uk/biostudies/studies/[accession]
-
-Retrieved: [date]
+**Data access**:
+- [E-MTAB-XXXX]: https://www.ebi.ac.uk/arrayexpress/experiments/[acc]
+- [S-BSST-XXXX]: https://www.ebi.ac.uk/biostudies/studies/[acc]
 ```
 
 ---
 
-## Data Quality Tiers
+## Quality Tiers
 
-Assessment criteria for expression experiments:
-
-| Tier | Symbol | Criteria |
-|------|--------|----------|
-| High Quality | ●●● | ≥3 bio replicates, complete metadata, processed data available |
-| Medium Quality | ●●○ | 2-3 replicates OR some metadata gaps, data accessible |
-| Low Quality | ●○○ | No replicates, sparse metadata, or data access issues |
-| Use with Caution | ○○○ | Single sample, no replication, outdated platform |
-
-Include assessment rationale:
-```markdown
-**Quality**: ●●● High
-- ✓ 4 biological replicates per condition
-- ✓ Complete sample annotations
-- ✓ Processed and raw data available
-- ✓ Recent RNA-seq platform
-```
-
----
-
-## Completeness Checklist
-
-Every dataset report MUST include:
-
-### Per Experiment (Required)
-- [ ] Accession number with database link
-- [ ] Organism
-- [ ] Experiment type (RNA-seq/microarray/etc.)
-- [ ] Sample count
-- [ ] Brief description
-- [ ] Quality assessment
-
-### Search Summary (Required)
-- [ ] Query parameters stated
-- [ ] Number of results
-- [ ] Databases searched
-
-### Recommendations (Required)
-- [ ] Best dataset for user's purpose (or "No suitable data found")
-- [ ] Data access notes
-
-### Include Even If Empty
-- [ ] Multi-omics studies section (or "No multi-omics studies found")
-- [ ] Data integration notes (or "Single-platform data, no integration needed")
-
----
-
-## Common Use Cases
-
-### Disease Gene Expression
-User: "Find breast cancer RNA-seq data"
-```python
-result = tu.tools.arrayexpress_search_experiments(
-    keywords="breast cancer RNA-seq",
-    species="Homo sapiens",
-    limit=20
-)
-```
-→ Report top experiments with quality assessment
-
-### Gene-Specific Studies
-User: "Find TP53 expression experiments in mouse"
-```python
-result = tu.tools.arrayexpress_search_experiments(
-    keywords="TP53 p53",  # Include aliases
-    species="Mus musculus",
-    limit=15
-)
-```
-→ Report experiments studying this gene
-
-### Specific Accession Lookup
-User: "Get details for E-MTAB-5214"
-→ Single experiment profile with all details and files
-
-### Multi-Omics Integration
-User: "Find proteomics and transcriptomics studies for liver disease"
-→ Search both ArrayExpress and BioStudies, note integration potential
+| Symbol | Criteria |
+|--------|----------|
+| ●●● High | ≥3 biological replicates, complete metadata, processed data available |
+| ●●○ Medium | 2-3 replicates OR some metadata gaps, data accessible |
+| ●○○ Low | No replicates, sparse metadata, or data access issues |
+| ○○○ Caution | Single sample, no replication, outdated platform |
 
 ---
 
 ## Error Handling
 
-| Error | Response |
-|-------|----------|
-| "No experiments found" | Broaden keywords, remove species filter, try synonyms |
-| "Accession not found" | Verify format (E-MTAB-*, E-GEOD-*, S-BSST*), check if withdrawn |
-| "Files not available" | Note in report: "Data files restricted by submitter" |
-| "API timeout" | Retry once, then note: "(metadata retrieval incomplete)" |
+| Error | Action |
+|-------|--------|
+| No experiments found | Broaden keywords, remove species filter, try synonyms |
+| Accession not found | Verify format (E-MTAB-*, E-GEOD-*, S-BSST*); check if withdrawn |
+| Files not available | Note: "Data files restricted by submitter" |
+| API timeout | Retry once; then note "(metadata retrieval incomplete)" |
 
 ---
 
-## Tool Reference
+## Tools
 
-**ArrayExpress (Gene Expression)**
 | Tool | Purpose |
 |------|---------|
-| `arrayexpress_search_experiments` | Keyword/species search |
-| `arrayexpress_get_experiment_details` | Full metadata |
-| `arrayexpress_get_experiment_files` | Download links |
+| `arrayexpress_search_experiments` | Keyword + species search |
+| `arrayexpress_get_experiment_details` | Full experiment metadata |
+| `arrayexpress_get_experiment_files` | Download links and file sizes |
 | `arrayexpress_get_experiment_samples` | Sample annotations |
-
-**BioStudies (Multi-Omics)**
-| Tool | Purpose |
-|------|---------|
-| `biostudies_search_studies` | Multi-omics search |
+| `biostudies_search_studies` | Multi-omics keyword search |
 | `biostudies_get_study_details` | Study metadata |
 | `biostudies_get_study_files` | Data files |
 | `biostudies_get_study_sections` | Study structure |
-
----
-
-## Search Parameters Reference
-
-**ArrayExpress**
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `keywords` | Free text search | "breast cancer RNA-seq" |
-| `species` | Scientific name | "Homo sapiens" |
-| `array` | Platform filter | "Illumina" |
-| `limit` | Max results | 20 |
-
-**BioStudies**
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `query` | Free text | "proteomics liver" |
-| `limit` | Max results | 10 |

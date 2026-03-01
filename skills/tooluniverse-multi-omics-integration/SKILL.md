@@ -5,7 +5,14 @@ description: Integrate and analyze multiple omics datasets (transcriptomics, pro
 
 # Multi-Omics Integration
 
-Coordinate and integrate multiple omics datasets for comprehensive systems biology analysis. This skill orchestrates specialized ToolUniverse skills to perform cross-omics correlation, multi-omics clustering, pathway-level integration, and unified interpretation across molecular layers.
+Coordinate and integrate multiple omics datasets for comprehensive systems biology analysis. This skill orchestrates specialized ToolUniverse skills and MCP tools to perform cross-omics correlation, multi-omics clustering, pathway-level integration, and unified interpretation across molecular layers.
+
+**Tool calls in this skill use the MCP interface**:
+```
+mcp__tooluniverse__execute_tool(tool_name="...", arguments={...})
+```
+
+---
 
 ## When to Use This Skill
 
@@ -18,7 +25,7 @@ Coordinate and integrate multiple omics datasets for comprehensive systems biolo
 - Precision medicine applications with multi-omics patient data
 - Questions about molecular mechanisms across omics types
 
-**Example Questions This Skill Solves**:
+**Example questions this skill solves**:
 1. "Integrate RNA-seq and proteomics data to find genes with concordant changes"
 2. "How does promoter methylation correlate with gene expression?"
 3. "Perform multi-omics clustering to identify patient subtypes"
@@ -35,13 +42,11 @@ Coordinate and integrate multiple omics datasets for comprehensive systems biolo
 | Capability | Description |
 |-----------|-------------|
 | **Data Integration** | Match samples across omics, handle missing data, normalize scales |
-| **Cross-Omics Correlation** | Correlate features across molecular layers (gene expression vs protein, methylation vs expression) |
+| **Cross-Omics Correlation** | Correlate features across molecular layers (expression vs protein, methylation vs expression) |
 | **Multi-Omics Clustering** | MOFA+, NMF, joint clustering to identify omics-driven subtypes |
 | **Pathway Integration** | Combine omics evidence at pathway level for unified biological interpretation |
 | **Biomarker Discovery** | Identify multi-omics signatures with improved predictive power |
 | **Skill Coordination** | Orchestrate RNA-seq, epigenomics, variant-analysis, protein-interactions, gene-enrichment skills |
-| **Visualization** | Circos plots, integrated heatmaps, network visualizations |
-| **Reporting** | Unified multi-omics reports with cross-layer insights |
 
 ---
 
@@ -52,63 +57,56 @@ Input: Multiple Omics Datasets
     |
     v
 Phase 1: Data Loading & QC
-    |-- Load RNA-seq (expression matrix)
-    |-- Load proteomics (protein abundance)
-    |-- Load methylation (beta values or M-values)
-    |-- Load variants (CNV, SNV from VCF)
-    |-- Load metabolomics (metabolite abundance)
+    |-- Load each omics type (RNA-seq, proteomics, methylation, CNV, metabolomics)
     |-- Quality control per omics type
+    |-- Normalize values to comparable scales
     |
     v
-Phase 2: Sample Matching
-    |-- Match samples across omics by ID
-    |-- Identify common samples
-    |-- Handle batch effects
-    |-- Normalize sample identifiers
+Phase 2: Sample Matching & Harmonization
+    |-- Match sample IDs across omics
+    |-- Identify common samples (intersection)
+    |-- Document sample availability matrix
     |
     v
 Phase 3: Feature Mapping
-    |-- Map features to common identifier space (genes, proteins, metabolites)
-    |-- Link CpG sites to genes (promoter, gene body)
-    |-- Map variants to genes
-    |-- Create unified feature matrix
+    |-- Map all features to gene-level identifiers
+    |-- CpG → gene (promoter/gene body annotation)
+    |-- CNV regions → overlapping genes
+    |-- Metabolites → enzyme genes
     |
     v
 Phase 4: Cross-Omics Correlation
-    |-- Gene expression vs protein abundance (translation efficiency)
+    |-- RNA vs protein (translation efficiency)
     |-- Promoter methylation vs expression (epigenetic regulation)
-    |-- CNV vs expression (dosage effect)
+    |-- CNV vs expression (gene dosage effect)
     |-- eQTL variants vs expression (genetic regulation)
     |-- Metabolite vs enzyme expression (metabolic flux)
     |
     v
 Phase 5: Multi-Omics Clustering
-    |-- MOFA+ (Multi-Omics Factor Analysis) for latent factors
-    |-- NMF (Non-negative Matrix Factorization) for patient subtypes
-    |-- Joint clustering across omics
-    |-- Identify omics-specific vs shared variation
+    |-- MOFA+ for latent factors across omics
+    |-- NMF or SNF for patient subtype discovery
+    |-- Characterize per-subtype omics profiles
     |
     v
 Phase 6: Pathway-Level Integration
-    |-- Aggregate omics to pathway level
-    |-- Score pathway dysregulation (combined evidence)
-    |-- Use ToolUniverse enrichment tools (Reactome, KEGG, GO)
-    |-- Identify driver pathways across omics
+    |-- Pool dysregulated genes from all omics layers
+    |-- Run enrichment (Reactome, KEGG, GO) via ToolUniverse tools
+    |-- Score each pathway by multi-omics evidence weight
     |
     v
 Phase 7: Biomarker Discovery
-    |-- Feature selection across omics
-    |-- Multi-omics signatures for classification
-    |-- Cross-validation and performance
-    |-- Interpretation and biological validation
+    |-- Feature selection per omics layer
+    |-- Combine and cross-validate multi-omics signatures
+    |-- Report top biomarkers with per-layer evidence
     |
     v
 Phase 8: Generate Integrated Report
     |-- Summary statistics per omics
-    |-- Cross-omics correlation results
-    |-- Multi-omics clusters and subtypes
-    |-- Top dysregulated pathways
-    |-- Multi-omics biomarkers
+    |-- Cross-omics correlation findings
+    |-- Multi-omics cluster/subtype description
+    |-- Top dysregulated pathways with evidence scores
+    |-- Multi-omics biomarkers with AUC
     |-- Biological interpretation
 ```
 
@@ -118,554 +116,312 @@ Phase 8: Generate Integrated Report
 
 ### Phase 1: Data Loading & Quality Control
 
-**Objective**: Load multiple omics datasets and perform quality control.
+**Supported omics types and formats**:
 
-**Supported omics types**:
-- **Transcriptomics**: RNA-seq count matrices, microarray
-- **Proteomics**: Protein abundance (MS-based)
-- **Epigenomics**: Methylation (450K, EPIC arrays, WGBS), ChIP-seq peaks
-- **Genomics**: CNV, SNV, structural variants
-- **Metabolomics**: Metabolite abundance (targeted, untargeted)
+| Omics | Common Formats | Key QC Steps |
+|-------|---------------|--------------|
+| Transcriptomics | CSV/TSV count matrices, HDF5, AnnData (.h5ad) | Filter low-count genes, normalize (TPM/DESeq2), log-transform |
+| Proteomics | MaxQuant, Spectronaut, DIA-NN output | Filter high-missingness proteins, impute (KNN/minimum), median-normalize |
+| Epigenomics | IDAT, beta value matrices, peak BED files | Remove failed probes, filter cross-reactive probes, batch-correct (ComBat) |
+| Genomics | VCF (SNV), SEG files (CNV) | Use variant-analysis skill for VCF QC; validate CNV segmentation |
+| Metabolomics | Peak tables, identified metabolite tables | Filter low-abundance features, log-transform, scale |
 
-**Data formats**:
-- Expression: CSV/TSV matrices, HDF5, AnnData (.h5ad)
-- Proteomics: MaxQuant output, Spectronaut, DIA-NN
-- Methylation: IDAT files, beta value matrices
-- Variants: VCF, SEG files (CNV)
-- Metabolomics: Peak tables, identified metabolites
+For RNA-seq loading and DESeq2 normalization, delegate to the `tooluniverse-rnaseq-deseq2` skill. For methylation QC and ChIP-seq peak handling, delegate to the `tooluniverse-epigenomics` skill. For CNV/SNV QC, delegate to `tooluniverse-variant-analysis`.
 
-**Quality control per omics**:
-```python
-# RNA-seq QC
-- Filter low-count genes (mean counts < threshold)
-- Normalize (TPM, FPKM, or DESeq2)
-- Log-transform for correlation
+---
 
-# Proteomics QC
-- Filter proteins with high missing values
-- Impute missing values (minimum, KNN)
-- Normalize (median, quantile)
+### Phase 2: Sample Matching & Harmonization
 
-# Methylation QC
-- Remove failed probes
-- Correct for batch effects (ComBat)
-- Filter cross-reactive probes
+**Objective**: Identify the common set of samples present across all omics datasets and harmonize sample IDs.
 
-# Variants QC
-- Use variant-analysis skill for VCF QC
-- CNV segmentation validation
-```
+Steps:
+1. Extract sample IDs from each omics matrix (columns for samples-as-columns format).
+2. Compute the intersection of sample IDs across all omics types.
+3. Subset each matrix to the common samples, sorted consistently.
+4. For missing omics in a subset of samples, document a sample-availability matrix and proceed with pairwise integration where applicable.
+5. Apply batch correction if samples come from different processing batches (e.g., run ComBat on each omics layer independently before merging).
 
-### Phase 2: Sample Matching
+Common pitfalls:
+- Sample ID format differences (e.g., `TCGA-01-A` vs `TCGA.01.A`) — normalize separators before matching.
+- Tumor vs normal mismatch in TCGA data — ensure the same sample type is used across omics.
 
-**Objective**: Identify common samples across omics datasets.
-
-**Sample ID harmonization**:
-```python
-def match_samples_across_omics(omics_data_dict):
-    """
-    Match samples across multiple omics datasets.
-
-    Parameters:
-    omics_data_dict: {
-        'rnaseq': DataFrame (genes x samples),
-        'proteomics': DataFrame (proteins x samples),
-        'methylation': DataFrame (CpGs x samples),
-        'cnv': DataFrame (genes x samples)
-    }
-
-    Returns:
-    - common_samples: List of sample IDs present in all omics
-    - matched_data: Dict of DataFrames with common samples only
-    """
-    # Extract sample IDs from each omics
-    sample_ids = {
-        omics_type: set(df.columns)
-        for omics_type, df in omics_data_dict.items()
-    }
-
-    # Find common samples (intersection)
-    common_samples = set.intersection(*sample_ids.values())
-
-    # Subset each omics to common samples
-    matched_data = {
-        omics_type: df[sorted(common_samples)]
-        for omics_type, df in omics_data_dict.items()
-    }
-
-    return sorted(common_samples), matched_data
-```
-
-**Handling missing omics**:
-- Pairwise integration if not all samples have all omics
-- Document sample availability matrix
+---
 
 ### Phase 3: Feature Mapping
 
-**Objective**: Map features from different omics to common gene-level identifiers.
+**Objective**: Map features from different omics layers to a shared gene-level namespace.
 
-**Gene-centric integration**:
-```python
-# Map all features to genes
-feature_mapping = {
-    'rnaseq': 'gene_symbol',  # Already gene-level
-    'proteomics': 'gene_symbol',  # Map protein to gene
-    'methylation': 'gene_symbol',  # Map CpG to gene (promoter)
-    'cnv': 'gene_symbol',  # CNV regions to overlapping genes
-    'metabolomics': 'enzyme_gene'  # Metabolite to enzyme gene
-}
-```
+| Source Omics | Feature Type | Mapping Strategy |
+|-------------|-------------|-----------------|
+| RNA-seq | Gene symbol / Ensembl ID | Already gene-level; convert IDs if needed |
+| Proteomics | UniProt / protein name | Map to gene symbol via UniProt API or STRING |
+| Methylation | CpG probe ID | Map to gene: promoter = TSS ± 2 kb; gene body = within gene boundaries; average beta per gene |
+| CNV | Genomic segment (chr:start-end) | Intersect segments with gene coordinates; report log2 ratio per gene |
+| Metabolomics | Metabolite name / HMDB ID | Map to enzyme gene via metabolite-reaction-enzyme databases (HMDB, KEGG) |
 
-**CpG to gene mapping**:
-- **Promoter methylation**: CpGs within TSS ± 2kb
-- **Gene body methylation**: CpGs within gene boundaries
-- Average methylation per gene (weighted by probe coverage)
+Use `mcp__tooluniverse__execute_tool` with identifier-conversion tools (e.g., Ensembl, UniProt, MyGene.info) to resolve cross-database IDs. See [references/tools.md](references/tools.md) for available ToolUniverse tools and their parameters.
 
-**CNV to gene mapping**:
-- Use variant-analysis skill to identify genes in CNV regions
-- Calculate copy number per gene (log2 ratio)
+---
 
 ### Phase 4: Cross-Omics Correlation
 
-**Objective**: Correlate features across molecular layers to understand regulation.
-
-**Example analyses**:
+**Objective**: Quantify relationships between molecular layers to reveal regulatory mechanisms.
 
 #### 4.1: Expression vs Protein (Translation Efficiency)
 
-```python
-def correlate_rna_protein(rnaseq_data, proteomics_data):
-    """
-    Correlate mRNA and protein levels for each gene.
+For each gene present in both RNA-seq and proteomics matrices (matched samples):
+- Compute Spearman correlation between mRNA and protein abundance across samples.
+- Typical expectation: r ≈ 0.4–0.6. Lower values indicate post-transcriptional regulation.
+- Flag genes with |r| < 0.2 as discordant (candidates for miRNA regulation, protein stability, etc.).
 
-    Expected: Positive correlation (r ~ 0.4-0.6 typical)
-    Discordance indicates post-transcriptional regulation
-    """
-    # Find common genes
-    common_genes = set(rnaseq_data.index) & set(proteomics_data.index)
+#### 4.2: Promoter Methylation vs Expression (Epigenetic Regulation)
 
-    correlations = {}
-    for gene in common_genes:
-        rna = rnaseq_data.loc[gene]
-        protein = proteomics_data.loc[gene]
+For each gene with mapped promoter methylation values:
+- Compute Spearman correlation between average promoter beta value and expression.
+- Typical expectation: negative correlation (methylation represses expression).
+- Flag genes with r < −0.5 and p < 0.01 as epigenetically regulated.
+- Direction label: r < 0 → "repressive", r > 0 → "activating" (gene-body context).
 
-        # Spearman correlation (robust to outliers)
-        r, p = spearmanr(rna, protein)
-        correlations[gene] = {'r': r, 'p': p}
+#### 4.3: CNV vs Expression (Gene Dosage Effect)
 
-    # Identify discordant genes (low RNA-protein correlation)
-    discordant = {g: v for g, v in correlations.items() if abs(v['r']) < 0.2}
+For each gene with both CNV (log2 ratio) and expression data:
+- Compute Pearson correlation between copy number and expression across samples.
+- Typical expectation: positive correlation (amplification drives increased expression).
+- Flag genes with r > 0.5 and p < 0.01 as dosage-sensitive.
+- Distinguish CNV-driven from expression-only changes in downstream analysis.
 
-    return correlations, discordant
-```
+#### 4.4: eQTL / Variant vs Expression
 
-#### 4.2: Methylation vs Expression (Epigenetic Regulation)
+For GWAS SNPs or candidate variants:
+- For each variant, test association with expression of cis genes (within 1 Mb).
+- If methylation data is available, test SNP → CpG methylation (meQTL) and CpG → expression chains.
+- Report variant → methylation → expression regulatory triples.
 
-```python
-def correlate_methylation_expression(methylation_data, rnaseq_data):
-    """
-    Correlate promoter methylation with gene expression.
+Use enrichment and annotation tools via `mcp__tooluniverse__execute_tool` to annotate identified regulatory genes. See [references/tools.md](references/tools.md) for enrichment tool parameters.
 
-    Expected: Negative correlation (increased methylation → decreased expression)
-    """
-    # For each gene with promoter methylation
-    results = {}
-    for gene in methylation_data.index:
-        if gene in rnaseq_data.index:
-            meth = methylation_data.loc[gene]  # Average promoter beta
-            expr = rnaseq_data.loc[gene]
-
-            r, p = spearmanr(meth, expr)
-            results[gene] = {'r': r, 'p': p, 'direction': 'repressive' if r < 0 else 'activating'}
-
-    # Identify genes with strong methylation-expression anticorrelation
-    regulated = {g: v for g, v in results.items() if v['r'] < -0.5 and v['p'] < 0.01}
-
-    return results, regulated
-```
-
-#### 4.3: CNV vs Expression (Dosage Effect)
-
-```python
-def correlate_cnv_expression(cnv_data, rnaseq_data):
-    """
-    Correlate copy number with gene expression.
-
-    Expected: Positive correlation (gene dosage effect)
-    """
-    results = {}
-    for gene in cnv_data.index:
-        if gene in rnaseq_data.index:
-            cnv = cnv_data.loc[gene]  # log2 ratio
-            expr = rnaseq_data.loc[gene]
-
-            r, p = pearsonr(cnv, expr)
-            results[gene] = {'r': r, 'p': p}
-
-    # Genes with dosage effect (CNV drives expression)
-    dosage_genes = {g: v for g, v in results.items() if v['r'] > 0.5 and v['p'] < 0.01}
-
-    return results, dosage_genes
-```
+---
 
 ### Phase 5: Multi-Omics Clustering
 
-**Objective**: Identify patient subtypes using integrated omics data.
+**Objective**: Identify patient or sample subtypes driven by integrated omics variation.
 
-**Method 1: MOFA+ (Multi-Omics Factor Analysis)**
+#### Method 1: MOFA+ (Multi-Omics Factor Analysis)
 
-MOFA+ identifies latent factors that explain variation across omics.
+MOFA+ decomposes multiple omics matrices into shared latent factors. Each factor captures a source of variation and its contribution to each omics layer.
 
-```python
-# Conceptual workflow (uses R's MOFA2 package or Python implementation)
-# 1. Prepare multi-omics data as list of matrices
-# 2. Run MOFA+ to identify factors
-# 3. Inspect factor variance explained per omics
-# 4. Cluster samples based on factor scores
+Workflow:
+1. Prepare one matrix per omics type (samples × features), normalized and scaled.
+2. Run MOFA+ (R: `MOFA2` package, or Python: `mofapy2`) with desired number of factors (start with 10–15).
+3. Inspect variance explained per factor per omics. Assign biological labels to top factors.
+4. Cluster samples using factor scores (k-means, hierarchical, or UMAP + DBSCAN).
+5. Characterize each cluster by top feature weights per factor and per omics.
 
-# Example interpretation:
-# Factor 1: Explains 40% variance in RNA-seq, 30% in proteomics → Cell proliferation
-# Factor 2: Explains 50% variance in methylation → Epigenetic subtype
-# Factor 3: Explains 20% variance in CNV → Genomic instability
-```
+Example factor interpretation:
+- Factor 1 explains 40% variance in RNA-seq and 30% in proteomics → likely cell proliferation axis.
+- Factor 2 explains 50% variance in methylation → epigenetic subtype.
+- Factor 3 explains 20% variance in CNV → genomic instability subtype.
 
-**Method 2: Joint NMF (Non-negative Matrix Factorization)**
+#### Method 2: Joint NMF (Non-negative Matrix Factorization)
 
-Decompose multi-omics matrices into shared latent components.
+Concatenate normalized omics matrices vertically (features × samples) after ensuring all values are non-negative. Run NMF to obtain sample coefficient matrix H. Cluster samples by their NMF component weights. Choose rank k by cophenetic correlation or gap statistic.
 
-```python
-def joint_nmf_clustering(omics_data_dict, n_clusters=3):
-    """
-    Perform joint NMF across omics for clustering.
+#### Method 3: Similarity Network Fusion (SNF)
 
-    Returns patient cluster assignments based on shared factors.
-    """
-    # Concatenate omics matrices (after normalization)
-    combined_matrix = np.vstack([
-        omics_data_dict['rnaseq'].values,
-        omics_data_dict['proteomics'].values,
-        omics_data_dict['methylation'].values
-    ])
+Construct a per-omics patient similarity network (Gaussian kernel on feature distances). Fuse networks iteratively using the SNF algorithm. Cluster the fused network (spectral clustering). SNF is robust to noise and missing omics per sample.
 
-    # Run NMF
-    from sklearn.decomposition import NMF
-    model = NMF(n_components=n_clusters, init='nndsvd', random_state=42)
-    W = model.fit_transform(combined_matrix)  # Feature loadings
-    H = model.components_  # Sample coefficients
+For all methods: report cluster-defining features per omics, clinical variable associations per cluster, and survival or outcome differences if available.
 
-    # Cluster samples based on H (components)
-    from sklearn.cluster import KMeans
-    clusters = KMeans(n_clusters=n_clusters).fit_predict(H.T)
-
-    return clusters, W, H
-```
-
-**Method 3: Similarity Network Fusion (SNF)**
-
-Integrate omics through patient similarity networks.
+---
 
 ### Phase 6: Pathway-Level Integration
 
-**Objective**: Aggregate multi-omics evidence at the pathway level.
+**Objective**: Aggregate multi-omics evidence at the pathway level to identify key dysregulated biological processes.
 
-**Approach**: Score pathway dysregulation using combined evidence from multiple omics.
+Steps:
+1. Pool dysregulated genes from all omics layers into a unified gene set (union of DEGs, differential proteins, methylation-regulated genes, dosage-effect genes).
+2. Run pathway enrichment using ToolUniverse tools via `mcp__tooluniverse__execute_tool`.
+3. For each returned pathway, compute a multi-omics evidence score: sum the absolute effect sizes (fold change, correlation, beta difference) for pathway genes across all omics layers, normalized by the number of layers with evidence. Prioritize pathways supported by 3+ omics layers.
+4. Report top pathways ranked by multi-omics score with per-layer supporting gene counts.
 
-```python
-def integrate_pathway_evidence(omics_results, pathway_genes):
-    """
-    Score pathway dysregulation across omics.
+Available enrichment tools (call via `mcp__tooluniverse__execute_tool`):
 
-    omics_results: {
-        'rnaseq': {'gene': fold_change},
-        'proteomics': {'gene': fold_change},
-        'methylation': {'gene': methylation_diff},
-        'cnv': {'gene': copy_number}
-    }
+| Tool Name | Database | Use When |
+|-----------|----------|---------|
+| `enrichr_enrich` | 220+ Enrichr libraries | ORA on a gene list; specify `library` (e.g., `KEGG_2021_Human`) |
+| `reactome_pathway_analysis` | Reactome | Pathway hierarchy and reaction-level detail |
+| `string_enrichment` | STRING functional enrichment | Combined PPI + pathway evidence |
+| `panther_enrichment` | PANTHER | GO enrichment with PANTHER gene function |
 
-    pathway_genes: List of genes in pathway
-    """
-    # For each gene in pathway
-    pathway_scores = []
-    for gene in pathway_genes:
-        gene_score = 0
-        evidence_count = 0
+See [references/tools.md](references/tools.md) for full parameter details on each tool.
 
-        # RNA-seq evidence
-        if gene in omics_results['rnaseq']:
-            gene_score += abs(omics_results['rnaseq'][gene])
-            evidence_count += 1
-
-        # Proteomics evidence
-        if gene in omics_results['proteomics']:
-            gene_score += abs(omics_results['proteomics'][gene])
-            evidence_count += 1
-
-        # Methylation evidence (negative correlation)
-        if gene in omics_results['methylation']:
-            gene_score += abs(omics_results['methylation'][gene])
-            evidence_count += 1
-
-        # CNV evidence
-        if gene in omics_results['cnv']:
-            gene_score += abs(omics_results['cnv'][gene])
-            evidence_count += 1
-
-        if evidence_count > 0:
-            pathway_scores.append(gene_score / evidence_count)
-
-    # Aggregate pathway score (mean of gene scores)
-    pathway_score = np.mean(pathway_scores) if pathway_scores else 0
-
-    return {
-        'pathway_score': pathway_score,
-        'n_genes_with_evidence': len(pathway_scores),
-        'n_omics_types': evidence_count
-    }
-```
-
-**Use ToolUniverse enrichment tools**:
-```python
-# Get pathways for gene set
-from tooluniverse import ToolUniverse
-tu = ToolUniverse()
-
-# Enrichment for genes dysregulated in ANY omics
-all_dysregulated_genes = set()
-all_dysregulated_genes.update(rnaseq_degs)
-all_dysregulated_genes.update(diff_proteins)
-all_dysregulated_genes.update(methylation_dmgs)
-
-# Run enrichment
-enrichment = tu.run_one_function({
-    "name": "enrichr_enrich",
-    "arguments": {
-        "gene_list": ",".join(all_dysregulated_genes),
-        "library": "KEGG_2021_Human"
-    }
-})
-
-# Score each pathway with multi-omics evidence
-for pathway in enrichment['data']['results']:
-    pathway_genes = pathway['genes']
-    pathway['multi_omics_score'] = integrate_pathway_evidence(
-        omics_results, pathway_genes
-    )
-```
+---
 
 ### Phase 7: Biomarker Discovery
 
-**Objective**: Identify multi-omics signatures for disease classification.
+**Objective**: Identify a compact multi-omics feature signature for disease classification or stratification.
 
-**Feature selection across omics**:
-```python
-def select_multiomics_features(X_dict, y, n_features=50):
-    """
-    Select top features across omics for classification.
+Steps:
+1. Per omics layer, select top candidate features using univariate association tests against the outcome label (ANOVA F-score, Mann-Whitney U, or correlation with a continuous outcome). Keep top k features per layer (e.g., k = 15–30).
+2. Concatenate selected features from all layers into a combined feature matrix.
+3. Train a classification model (Random Forest or logistic regression with elastic-net regularization) using 5-fold cross-validation. Report mean AUC ± SD.
+4. Compute per-feature importance. Report the top 10–20 multi-omics biomarkers with their omics of origin.
+5. Validate top biomarkers using ToolUniverse annotation tools (literature support, protein databases, drug targetability).
 
-    X_dict: {
-        'rnaseq': DataFrame (samples x genes),
-        'proteomics': DataFrame (samples x proteins),
-        'methylation': DataFrame (samples x CpGs)
-    }
-    y: Target labels (disease vs control)
+Minimum standards:
+- At least 10 samples per class for reliable CV performance.
+- Report both single-omics AUC baselines and multi-omics combined AUC for comparison.
+- Flag overfitting risk if n_samples < 3 × n_features.
 
-    Returns: Selected features per omics
-    """
-    from sklearn.feature_selection import SelectKBest, f_classif
-
-    selected_features = {}
-    for omics_type, X in X_dict.items():
-        selector = SelectKBest(f_classif, k=min(n_features, X.shape[1]))
-        selector.fit(X, y)
-
-        # Get selected feature names
-        selected_idx = selector.get_support()
-        selected_features[omics_type] = X.columns[selected_idx].tolist()
-
-    return selected_features
-```
-
-**Multi-omics classification**:
-```python
-def multiomics_classification(X_dict, y, selected_features):
-    """
-    Train classifier using multi-omics features.
-    """
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.model_selection import cross_val_score
-
-    # Concatenate selected features from each omics
-    X_combined = []
-    for omics_type, features in selected_features.items():
-        X_combined.append(X_dict[omics_type][features])
-
-    X_combined = pd.concat(X_combined, axis=1)
-
-    # Train classifier
-    clf = RandomForestClassifier(n_estimators=100, random_state=42)
-    scores = cross_val_score(clf, X_combined, y, cv=5, scoring='roc_auc')
-
-    return {
-        'mean_auc': scores.mean(),
-        'std_auc': scores.std(),
-        'n_features': X_combined.shape[1],
-        'features_per_omics': {k: len(v) for k, v in selected_features.items()}
-    }
-```
+---
 
 ### Phase 8: Integrated Reporting
 
-**Generate comprehensive multi-omics report**:
+Generate a structured multi-omics report covering:
 
-```markdown
-# Multi-Omics Integration Report
+**Dataset Summary**: Omics types loaded, sample counts per omics, common sample count, feature counts per layer.
 
-## Dataset Summary
-- **Omics Types**: RNA-seq, Proteomics, Methylation, CNV
-- **Common Samples**: 45 patients (30 disease, 15 control)
-- **Features**: 15,000 genes, 5,000 proteins, 450K CpGs, 20K CNV regions
+**Cross-Omics Correlations**:
+- RNA-protein: overall Spearman r, % concordant genes, n discordant candidates.
+- Methylation-expression: median anticorrelation r, n epigenetically regulated genes, examples.
+- CNV-expression: n dosage-sensitive genes, examples with amplification/expression concordance.
 
-## Cross-Omics Correlation
+**Multi-Omics Clustering**:
+- Method used, number of clusters, samples per cluster.
+- Top defining features per cluster per omics layer.
+- MOFA+ factors: % variance explained, biological annotation.
 
-### RNA-Protein Correlation
-- **Overall correlation**: r = 0.52 (expected: 0.4-0.6)
-- **Highly correlated**: 3,245 genes (45%)
-- **Discordant genes**: 890 genes (post-transcriptional regulation)
+**Pathway Integration**:
+- Top 10 pathways by multi-omics score.
+- Per-pathway: omics layers contributing, n supporting genes, adjusted p-value.
 
-### Methylation-Expression
-- **Promoter methylation**: Anticorrelation r = -0.41
-- **Epigenetically regulated genes**: 1,256 genes (p < 0.01)
-- **Example**: BRCA1 promoter hypermethylation → 3-fold reduced expression
+**Multi-Omics Biomarkers**:
+- Model AUC (multi-omics) vs per-layer AUC baselines.
+- Top biomarkers with omics origin, effect size, and biological annotation.
 
-### CNV-Expression Dosage Effect
-- **Genes with dosage effect**: 445 genes (r > 0.5, p < 0.01)
-- **Example**: MYC amplification (3 copies) → 2.8-fold increased expression
-
-## Multi-Omics Clustering
-
-### MOFA+ Analysis
-- **Factor 1** (25% variance): Cell cycle genes (RNA + protein)
-- **Factor 2** (18% variance): Immune signature (RNA + methylation)
-- **Factor 3** (15% variance): Metabolic reprogramming (RNA + metabolites)
-
-### Patient Subtypes
-- **Subtype 1** (n=18): High proliferation, MYC amplification
-- **Subtype 2** (n=15): Immune-enriched, hypomethylation
-- **Subtype 3** (n=12): Metabolic dysregulation, mitochondrial dysfunction
-
-## Pathway Integration
-
-### Top Dysregulated Pathways (Multi-Omics Score)
-1. **Cell Cycle** (score: 8.5) - RNA (↑), Protein (↑), CNV (amplification)
-2. **Immune Response** (score: 7.2) - RNA (↑), Methylation (hypo)
-3. **Glycolysis** (score: 6.8) - RNA (↑), Metabolites (↑)
-
-## Multi-Omics Biomarkers
-
-### Classification Performance
-- **AUC**: 0.92 ± 0.04 (5-fold CV)
-- **Features**: 50 total (20 RNA, 15 protein, 10 methylation, 5 CNV)
-- **Top biomarkers**:
-  - MYC expression (RNA)
-  - CDK1 protein abundance
-  - BRCA1 promoter methylation
-  - TP53 CNV status
-
-## Biological Interpretation
-
-The multi-omics analysis reveals three distinct disease subtypes driven by different molecular mechanisms:
-
-1. **Proliferative subtype**: Characterized by MYC amplification driving coordinated upregulation of cell cycle genes at both RNA and protein levels.
-
-2. **Immune subtype**: Hypomethylation of immune genes leading to increased expression and T-cell infiltration.
-
-3. **Metabolic subtype**: Shift from oxidative phosphorylation to glycolysis, with concordant changes in enzyme expression and metabolite levels.
-
-These subtypes may respond differently to targeted therapies.
-```
+**Biological Interpretation**:
+- Narrative summary of key findings.
+- Mechanistic hypotheses linking molecular layers.
+- Clinical or therapeutic implications.
 
 ---
 
 ## ToolUniverse Skills Coordination
 
-This skill orchestrates multiple specialized skills:
+This skill orchestrates multiple specialized skills. Delegate sub-tasks as follows:
 
 | Skill | Used For | Phase |
 |-------|----------|-------|
-| `tooluniverse-rnaseq-deseq2` | Load and analyze RNA-seq data | Phase 1, 4 |
-| `tooluniverse-epigenomics` | Methylation analysis, ChIP-seq peaks | Phase 1, 4 |
-| `tooluniverse-variant-analysis` | CNV and SNV processing | Phase 1, 3, 4 |
-| `tooluniverse-protein-interactions` | Protein network context | Phase 6 |
-| `tooluniverse-gene-enrichment` | Pathway enrichment | Phase 6 |
-| `tooluniverse-expression-data-retrieval` | Public omics data retrieval | Phase 1 |
-| `tooluniverse-target-research` | Gene/protein annotation | Phase 3, 8 |
+| `tooluniverse-rnaseq-deseq2` | Load and normalize RNA-seq data, identify DEGs | 1, 4 |
+| `tooluniverse-epigenomics` | Methylation QC, CpG annotation, ChIP-seq peaks | 1, 3, 4 |
+| `tooluniverse-variant-analysis` | CNV and SNV QC, gene-level copy number | 1, 3, 4 |
+| `tooluniverse-protein-interactions` | PPI network context for integration hubs | 6 |
+| `tooluniverse-gene-enrichment` | Pathway and GO enrichment | 6 |
+| `tooluniverse-expression-data-retrieval` | Retrieve public omics datasets | 1 |
+| `tooluniverse-target-research` | Gene/protein annotation, drug targetability | 3, 8 |
+| `tooluniverse-metabolomics-analysis` | Metabolite identification and pathway mapping | 1, 3 |
+
+---
+
+## Abbreviated Tool Reference
+
+Full parameter tables are in [references/tools.md](references/tools.md). Key tools used across phases:
+
+| Tool | Phase | Purpose |
+|------|-------|---------|
+| `enrichr_enrich` | 6 | Pathway ORA on pooled dysregulated genes |
+| `reactome_pathway_analysis` | 6 | Reactome hierarchy enrichment |
+| `string_enrichment` | 6 | PPI-informed functional enrichment |
+| `uniprot_search` | 3 | Protein → gene symbol mapping |
+| `mygene_query` | 3 | Gene ID conversion (Ensembl ↔ symbol ↔ Entrez) |
+| `ensembl_gene_lookup` | 3 | Genomic coordinates for CpG-to-gene mapping |
+| `opentargets_gene` | 8 | Gene–disease associations for biomarker validation |
+| `string_network` | 6, 8 | PPI context for integration hubs |
 
 ---
 
 ## Example Use Cases
 
-### Use Case 1: Cancer Multi-Omics
+### Use Case 1: Cancer Multi-Omics (TCGA)
 
 **Question**: "Integrate TCGA breast cancer RNA-seq, proteomics, methylation, and CNV data"
 
-**Workflow**:
-1. Load 4 omics types for 500 patients
-2. Match samples (450 common across all omics)
-3. Correlate RNA-protein (identify translation-regulated genes)
-4. Correlate methylation-expression (find epigenetically silenced genes)
-5. Correlate CNV-expression (identify dosage-sensitive genes)
-6. Run MOFA+ to find latent factors
-7. Identify 4 subtypes with distinct multi-omics profiles
-8. Perform pathway enrichment per subtype
-9. Select multi-omics biomarkers (AUC=0.94)
+Workflow summary:
+1. Load 4 omics layers for all available samples.
+2. Harmonize sample IDs; identify common samples across all 4 layers.
+3. Correlate RNA-protein to find translation-regulated genes.
+4. Correlate promoter methylation-expression to find epigenetically silenced genes.
+5. Correlate CNV-expression to find dosage-sensitive driver genes.
+6. Run MOFA+ to identify latent factors. Cluster into subtypes.
+7. Run pathway enrichment per subtype using `mcp__tooluniverse__execute_tool(tool_name="reactome_pathway_analysis", ...)`.
+8. Select multi-omics biomarkers and validate with OpenTargets.
 
-### Use Case 2: eQTL + Expression
+### Use Case 2: eQTL + Methylation + Expression
 
 **Question**: "How do GWAS variants affect gene expression through methylation?"
 
-**Workflow**:
-1. Load genotype data (SNPs from GWAS)
-2. Load expression data (RNA-seq)
-3. Load methylation data (450K array)
-4. For each GWAS SNP:
-   - Test association with nearby gene expression (eQTL)
-   - Test association with nearby CpG methylation (meQTL)
-   - Test CpG-gene correlation
-5. Identify SNP → methylation → expression regulatory chains
-6. Annotate with ToolUniverse (GWAS traits, gene function)
+Workflow summary:
+1. Load genotype (SNP), RNA-seq expression, and methylation data for the same samples.
+2. For each GWAS variant: test cis-eQTL (SNP → expression) and meQTL (SNP → CpG methylation).
+3. For significant meQTLs, test whether the affected CpG methylation also correlates with gene expression.
+4. Report SNP → methylation → expression regulatory chains with effect sizes.
+5. Annotate GWAS traits using `mcp__tooluniverse__execute_tool(tool_name="gwas_catalog_search", ...)`.
 
 ### Use Case 3: Drug Response Multi-Omics
 
 **Question**: "Predict drug response using multi-omics profiles"
 
-**Workflow**:
-1. Load baseline multi-omics (pre-treatment)
-2. Load drug response data (IC50 or clinical response)
-3. Correlate each omics with response
-4. Select multi-omics features predictive of response
-5. Train multi-omics classifier
-6. Identify pathways associated with resistance/sensitivity
-7. Use ToolUniverse drug-repurposing skill for alternative options
+Workflow summary:
+1. Load baseline multi-omics (pre-treatment) and drug response labels (IC50 or clinical response).
+2. Correlate each omics layer independently with response; document single-layer predictive power.
+3. Select top predictive features per layer.
+4. Combine into multi-omics classifier; compare AUC against single-layer baselines.
+5. Run pathway enrichment on response-associated features.
+6. Annotate resistance/sensitivity pathways with drug targets using ToolUniverse.
 
 ---
 
-## Advanced Analysis Patterns
+## Data Harmonization Details
 
-### Pattern 1: Omics-Driven Patient Stratification
+### Normalization Before Cross-Omics Correlation
 
-For precision medicine applications where patient stratification is goal.
+Each omics layer requires appropriate normalization before correlation or clustering:
 
-### Pattern 2: Multi-Omics Network Analysis
+- **RNA-seq**: Use log2(TPM + 1) or variance-stabilizing transform (VST from DESeq2). Do not use raw counts.
+- **Proteomics**: Median-center each sample (log-scale). Impute missing values before normalization.
+- **Methylation**: Beta values (0–1) are interpretable as-is. M-values (logit-transform of beta) are preferable for statistical tests.
+- **CNV**: Use segmented log2 ratio. Center at zero (diploid = 0). Threshold extreme values (cap at ±3).
+- **Metabolomics**: Log-transform + autoscaling (z-score per feature). Remove features with >30% missing.
 
-Build integrated networks combining PPI, co-expression, regulatory interactions.
+### Batch Effect Correction
 
-### Pattern 3: Temporal Multi-Omics
+Apply within each omics layer independently before cross-omics analysis:
+- Use ComBat (parametric or non-parametric) for known batch variables.
+- For unknown batch effects, use SVA (surrogate variable analysis) and regress out top SVs.
+- Document batch variables corrected per layer in the report.
 
-Longitudinal multi-omics data (time-series or treatment response).
+---
 
-### Pattern 4: Spatial Multi-Omics
+## Known Gotchas
 
-Spatial transcriptomics + proteomics for tissue architecture.
+1. **Sample ID format mismatch**: TCGA sample IDs differ by separator character (`-` vs `.`) across omics files. Always normalize sample ID format before computing intersection — otherwise the common set appears empty when all samples are actually present.
+
+2. **Methylation direction depends on context**: Promoter methylation anticorrelates with expression (repressive). Gene body methylation can positively correlate with expression (elongation-related). Always annotate CpGs by region type before interpreting correlations as "epigenetic regulation."
+
+3. **CNV log2 ratio is relative, not absolute**: A log2 ratio of 0 means diploid (2 copies), not absence. Amplifications are log2 > 0.6 (approx. 3+ copies), deletions are log2 < −1 (hemizygous). Do not threshold at 0.
+
+4. **MOFA+ requires pre-filtered features**: Running MOFA+ on the full feature space (e.g., all 20,000 genes) is computationally expensive and degrades factor quality. Pre-filter to high-variance features per layer (e.g., top 5,000 by median absolute deviation) before passing to MOFA+.
+
+5. **Pooled gene set for enrichment inflates results**: Combining all dysregulated genes from all omics layers into one enrichment analysis can produce high-scoring generic terms (e.g., "metabolic process"). Prefer per-layer enrichment first, then compute multi-omics overlap at the pathway level for specificity.
+
+6. **Missing omics for some samples**: When not all samples have all omics types, avoid silently dropping samples. Use pairwise integration for each omics pair on their shared samples, and document which pairs were analyzed with how many samples.
+
+7. **Protein-to-gene mapping ambiguity**: Multiple proteins can map to the same gene (isoforms, post-translational variants). When averaging per-gene, report the number of proteins aggregated and flag genes with high isoform diversity.
+
+8. **NMF requires non-negative input**: RNA-seq log-normalized values can be negative after mean-centering. Do not mean-center before NMF. Use min-max scaling or shift by the minimum value to ensure non-negativity.
+
+9. **execute_tool argument types**: ToolUniverse tools called via `mcp__tooluniverse__execute_tool` expect `arguments` as a JSON object (`{}`), not a string. Passing gene lists as comma-separated strings vs. JSON arrays depends on the specific tool — check [references/tools.md](references/tools.md) for the correct format per tool.
+
+10. **MOFA+ factor count selection**: Do not default to 10 factors without inspection. Use the elbow of the cumulative variance-explained curve to select the number of informative factors. Over-factoring fragments biological signals across redundant factors.
 
 ---
 
@@ -674,21 +430,21 @@ Spatial transcriptomics + proteomics for tissue architecture.
 | Component | Requirement |
 |-----------|-------------|
 | Omics types | At least 2 omics datasets |
-| Common samples | At least 10 samples across omics |
-| Cross-correlation | Pearson/Spearman correlation computed |
-| Clustering | At least one method (MOFA+, NMF, or SNF) |
-| Pathway integration | Enrichment with multi-omics evidence scores |
-| Report | Summary, correlations, clusters, pathways, biomarkers |
+| Common samples | At least 10 samples across all omics layers |
+| Cross-correlation | Spearman or Pearson computed with p-value and FDR correction |
+| Clustering | At least one method (MOFA+, NMF, or SNF) applied |
+| Pathway integration | Enrichment run with multi-omics evidence score computed |
+| Report | Dataset summary, correlations, clusters, pathways, biomarkers, interpretation |
 
 ---
 
 ## Limitations
 
-- **Sample size**: Multi-omics integration requires sufficient samples (n≥20 recommended)
-- **Missing data**: Some patients may not have all omics types
-- **Batch effects**: Different omics platforms/batches require careful normalization
-- **Computational**: Large multi-omics datasets may require significant memory/compute
-- **Interpretation**: Multi-omics results require domain expertise for biological validation
+- **Sample size**: Multi-omics integration requires sufficient samples (n ≥ 20 recommended for clustering; n ≥ 30 for reliable biomarker CV).
+- **Missing data**: Patients without complete omics coverage reduce effective sample sizes for integration.
+- **Batch effects**: Different omics platforms and processing batches require careful normalization; uncorrected batch effects can dominate latent factors.
+- **Computational cost**: Full MOFA+/SNF on large cohorts (n > 200, features > 10K per omics) may require significant memory and time.
+- **Interpretation**: Multi-omics results require biological domain expertise for validation and clinical translation.
 
 ---
 
@@ -699,5 +455,6 @@ Spatial transcriptomics + proteomics for tissue architecture.
 - Similarity Network Fusion: https://doi.org/10.1038/nmeth.2810
 - Multi-omics review: https://doi.org/10.1038/s41576-019-0093-7
 
-**ToolUniverse Skills**:
-- See individual skill documentation for omics-specific methods
+**ToolUniverse Tools**: See [references/tools.md](references/tools.md) for full parameter tables.
+
+**Related Skills**: See individual skill documentation for omics-specific methods (tooluniverse-rnaseq-deseq2, tooluniverse-epigenomics, tooluniverse-variant-analysis, tooluniverse-gene-enrichment).

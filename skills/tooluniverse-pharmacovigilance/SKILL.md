@@ -8,19 +8,18 @@ description: Analyze drug safety signals from FDA adverse event reports, label w
 Systematic drug safety analysis using FAERS adverse event data, FDA labeling, PharmGKB pharmacogenomics, and clinical trial safety signals.
 
 **KEY PRINCIPLES**:
-1. **Report-first approach** - Create report file FIRST, update progressively
-2. **Signal quantification** - Use disproportionality measures (PRR, ROR)
-3. **Severity stratification** - Prioritize serious/fatal events
-4. **Multi-source triangulation** - FAERS, labels, trials, literature
-5. **Pharmacogenomic context** - Include genetic risk factors
-6. **Actionable output** - Risk-benefit summary with recommendations
-7. **English-first queries** - Always use English drug names and search terms in tool calls, even if the user writes in another language. Only try original-language terms as a fallback. Respond in the user's language
+1. **Report-first approach** — Create report file FIRST, update progressively
+2. **Signal quantification** — Use disproportionality measures (PRR, ROR, IC)
+3. **Severity stratification** — Prioritize serious/fatal events
+4. **Multi-source triangulation** — FAERS, labels, trials, literature
+5. **Pharmacogenomic context** — Include genetic risk factors when available
+6. **Actionable output** — Risk-benefit summary with recommendations
+7. **English-first queries** — Always use English drug names in tool calls, even if the user writes in another language. Respond in the user's language.
 
 ---
 
 ## When to Use
 
-Apply when user asks:
 - "What are the safety concerns for [drug]?"
 - "What adverse events are associated with [drug]?"
 - "Is [drug] safe? What are the risks?"
@@ -30,63 +29,17 @@ Apply when user asks:
 
 ---
 
-## Critical Workflow Requirements
-
-### 1. Report-First Approach (MANDATORY)
-
-1. **Create the report file FIRST**:
-   - File name: `[DRUG]_safety_report.md`
-   - Initialize with all section headers
-   - Add placeholder text: `[Researching...]`
-
-2. **Progressively update** as you gather data
-
-3. **Output separate data files**:
-   - `[DRUG]_adverse_events.csv` - Ranked AEs with counts/signals
-   - `[DRUG]_pharmacogenomics.csv` - PGx variants and recommendations
-
-### 2. Citation Requirements (MANDATORY)
-
-Every safety signal MUST include source:
-
-```markdown
-### Signal: Hepatotoxicity
-- **PRR**: 3.2 (95% CI: 2.8-3.7)
-- **Cases**: 1,247 reports
-- **Serious**: 892 (71.5%)
-- **Fatal**: 23
-
-*Source: FAERS via `FAERS_count_reactions_by_drug_event` (Q1 2020 - Q4 2025)*
-```
-
----
-
-## Phase 0: Tool Verification
-
-**CRITICAL**: Verify tool parameters before calling.
-
-### Known Parameter Corrections
-
-| Tool | WRONG Parameter | CORRECT Parameter |
-|------|-----------------|-------------------|
-| `FAERS_count_reactions_by_drug_event` | `drug` | `drug_name` |
-| `DailyMed_search_spls` | `name` | `drug_name` |
-| `PharmGKB_search_drug` | `drug` | `query` |
-| `OpenFDA_get_drug_events` | `drug_name` | `search` |
-
----
-
 ## Workflow Overview
 
 ```
 Phase 1: Drug Disambiguation
 ├── Resolve drug name (brand → generic)
-├── Get identifiers (RxCUI, ChEMBL, DrugBank)
+├── Get identifiers (ChEMBL, DailyMed)
 └── Identify drug class and mechanism
     ↓
 Phase 2: Adverse Event Profiling (FAERS)
 ├── Query FAERS for drug-event pairs
-├── Calculate disproportionality (PRR, ROR)
+├── Calculate disproportionality (PRR, ROR, IC)
 ├── Stratify by seriousness
 └── OUTPUT: Ranked AE table
     ↓
@@ -99,31 +52,29 @@ Phase 3: Label Warning Extraction
 Phase 4: Pharmacogenomic Risk
 ├── PharmGKB clinical annotations
 ├── High-risk genotypes
-├── Dosing recommendations
+├── CPIC/DPWG dosing recommendations
 └── OUTPUT: PGx risk table
     ↓
 Phase 5: Clinical Trial Safety
-├── ClinicalTrials.gov safety data
-├── Phase 3/4 discontinuation rates
-├── Serious AEs in trials
+├── ClinicalTrials.gov phase 3/4 results
+├── Discontinuation rates
+├── Serious AEs vs placebo
 └── OUTPUT: Trial safety summary
     ↓
-Phase 5.5: Pathway & Mechanism Context (NEW)
+Phase 5.5: Pathway & Mechanism Context
 ├── KEGG: Drug metabolism pathways
 ├── Reactome: Mechanism-linked pathways
-├── Target pathway analysis
 └── OUTPUT: Mechanistic safety context
     ↓
-Phase 5.6: Literature Intelligence (ENHANCED)
-├── PubMed: Published safety studies
-├── BioRxiv/MedRxiv: Recent preprints
-├── OpenAlex: Citation analysis
+Phase 5.6: Literature Intelligence
+├── PubMed: Peer-reviewed safety studies
+├── EuropePMC (source='PPR'): Preprints
+├── OpenAlex/SemanticScholar: Citation analysis
 └── OUTPUT: Literature evidence
     ↓
 Phase 6: Signal Prioritization
 ├── Rank by PRR × severity × frequency
 ├── Identify actionable signals
-├── Risk-benefit assessment
 └── OUTPUT: Prioritized signal list
     ↓
 Phase 7: Report Synthesis
@@ -131,47 +82,32 @@ Phase 7: Report Synthesis
 
 ---
 
+## Phase 0: Tool Verification (CRITICAL)
+
+Before calling any tool, verify you are using the correct parameter names.
+
+| Tool | WRONG Parameter | CORRECT Parameter |
+|------|-----------------|-------------------|
+| `FAERS_count_reactions_by_drug_event` | `drug` | `drug_name` |
+| `DailyMed_search_spls` | `name` | `drug_name` |
+| `PharmGKB_search_drug` | `drug` | `query` |
+| `OpenFDA_get_drug_events` | `drug_name` | `search` (OpenFDA query string) |
+
+See [references/tools.md](references/tools.md) for complete parameter tables.
+
+---
+
 ## Phase 1: Drug Disambiguation
 
-### 1.1 Resolve Drug Identity
+**Goal**: Resolve the user's drug name to a canonical generic name and obtain cross-database identifiers.
 
-```python
-def resolve_drug(tu, drug_query):
-    """Resolve drug name to standardized identifiers."""
-    identifiers = {}
-    
-    # DailyMed for NDC and SPL
-    dailymed = tu.tools.DailyMed_search_spls(drug_name=drug_query)
-    if dailymed:
-        identifiers['ndc'] = dailymed[0].get('ndc')
-        identifiers['setid'] = dailymed[0].get('setid')
-        identifiers['generic_name'] = dailymed[0].get('generic_name')
-    
-    # ChEMBL for molecule data
-    chembl = tu.tools.ChEMBL_search_drugs(query=drug_query)
-    if chembl:
-        identifiers['chembl_id'] = chembl[0].get('molecule_chembl_id')
-        identifiers['max_phase'] = chembl[0].get('max_phase')
-    
-    return identifiers
-```
+**Steps**:
 
-### 1.2 Output for Report
+1. Call `DailyMed_search_spls` with `drug_name` set to the query. Extract the generic name, brand names, and `setid` for subsequent label retrieval.
+2. Call `ChEMBL_search_drugs` with `query` set to the generic name. Extract the `molecule_chembl_id` and maximum approval phase.
+3. Record the drug class and mechanism of action from the ChEMBL or DailyMed results.
 
-```markdown
-## 1. Drug Identification
-
-| Property | Value |
-|----------|-------|
-| **Generic Name** | Metformin |
-| **Brand Names** | Glucophage, Fortamet, Glumetza |
-| **Drug Class** | Biguanide antidiabetic |
-| **ChEMBL ID** | CHEMBL1431 |
-| **Mechanism** | AMPK activator, hepatic gluconeogenesis inhibitor |
-| **First Approved** | 1994 (US) |
-
-*Source: DailyMed via `DailyMed_search_spls`, ChEMBL*
-```
+Report section should include: generic name, brand names, drug class, ChEMBL ID, mechanism of action, first approval year. Cite both tools used.
 
 ---
 
@@ -179,467 +115,193 @@ def resolve_drug(tu, drug_query):
 
 ### 2.1 FAERS Query Strategy
 
-```python
-def get_faers_events(tu, drug_name, top_n=50):
-    """Query FAERS for adverse events."""
-    
-    # Get event counts
-    events = tu.tools.FAERS_count_reactions_by_drug_event(
-        drug_name=drug_name,
-        limit=top_n
-    )
-    
-    # For each event, get detailed breakdown
-    detailed_events = []
-    for event in events:
-        detail = tu.tools.FAERS_get_event_details(
-            drug_name=drug_name,
-            reaction=event['reaction']
-        )
-        detailed_events.append({
-            'reaction': event['reaction'],
-            'count': event['count'],
-            'serious': detail.get('serious_count', 0),
-            'fatal': detail.get('death_count', 0),
-            'hospitalization': detail.get('hospitalization_count', 0)
-        })
-    
-    return detailed_events
-```
+1. Call `FAERS_count_reactions_by_drug_event` with `drug_name` and `limit=50` to retrieve the top adverse events with counts.
+2. For events of interest, call `FAERS_get_event_details` with `drug_name` and `reaction` to get seriousness breakdown (serious count, death count, hospitalization count).
+3. If FAERS tools fail, fall back to `OpenFDA_get_drug_events` using `search="patient.drug.medicinalproduct:[DRUG_NAME]"`.
 
 ### 2.2 Disproportionality Analysis
 
+Agents must calculate or extract disproportionality metrics. The three standard measures are:
+
 **Proportional Reporting Ratio (PRR)**:
 ```
-PRR = (A/B) / (C/D)
+PRR = (A / (A+B)) / (C / (C+D))
 
-Where:
-A = Reports of drug X with event Y
-B = Reports of drug X with any event
-C = Reports of event Y with any drug (excluding X)
-D = Total reports (excluding drug X)
+A = reports of drug X with event Y
+B = reports of drug X with any other event
+C = reports of event Y with any other drug (excluding X)
+D = total reports excluding drug X
+
+95% CI: exp(ln(PRR) ± 1.96 * sqrt(1/A + 1/C - 1/(A+B) - 1/(C+D)))
+Signal threshold: PRR ≥ 2.0, lower 95% CI > 1.0, N ≥ 3
 ```
 
-**Signal Thresholds**:
-| Measure | Signal Threshold | Strong Signal |
-|---------|------------------|---------------|
+**Reporting Odds Ratio (ROR)**:
+```
+ROR = (A/B) / (C/D)
+
+Same 2×2 table as PRR.
+Signal threshold: lower 95% CI > 1.0, N ≥ 3
+ROR is more sensitive than PRR for large datasets.
+```
+
+**Information Component (IC, Bayesian)**:
+```
+IC = log2( (A * N) / ((A+B) * (A+C)) )
+
+N = total reports in database
+Positive IC (IC025 > 0) indicates a signal.
+IC025 = IC - 3.3 * sqrt(1/A + 1/N)  [lower credible interval]
+```
+
+**Signal Thresholds Summary**:
+
+| Measure | Signal | Strong Signal |
+|---------|--------|---------------|
 | PRR | >2.0 | >3.0 |
 | Chi-squared | >4.0 | >10.0 |
 | N (case count) | ≥3 | ≥10 |
+| IC025 | >0 | >1.0 |
+
+**Signal Scoring for Prioritization**:
+```
+Signal Score = PRR × Severity_Weight × log10(Case_Count + 1)
+
+Severity Weights:
+  Fatal:             10
+  Life-threatening:   8
+  Hospitalization:    5
+  Disability:         5
+  Other serious:      3
+  Non-serious:        1
+```
 
 ### 2.3 Severity Classification
 
-| Category | Definition | Priority |
-|----------|------------|----------|
-| **Fatal** | Death outcome | Highest |
-| **Life-threatening** | Immediate death risk | Very High |
-| **Hospitalization** | Required/prolonged hospitalization | High |
-| **Disability** | Persistent impairment | High |
-| **Congenital anomaly** | Birth defect | High |
-| **Other serious** | Medical intervention required | Medium |
-| **Non-serious** | No serious criteria | Low |
+| Category | Priority |
+|----------|----------|
+| Fatal (death outcome) | Highest |
+| Life-threatening (immediate death risk) | Very High |
+| Hospitalization (required or prolonged) | High |
+| Disability (persistent impairment) | High |
+| Congenital anomaly (birth defect) | High |
+| Other serious (medical intervention) | Medium |
+| Non-serious | Low |
 
-### 2.4 Output for Report
-
-```markdown
-## 2. Adverse Event Profile (FAERS)
-
-**Data Period**: Q1 2020 - Q4 2025
-**Total Reports for Drug**: 45,234
-
-### 2.1 Top Adverse Events by Frequency
-
-| Rank | Adverse Event | Reports | PRR | 95% CI | Serious (%) | Fatal |
-|------|---------------|---------|-----|--------|-------------|-------|
-| 1 | Diarrhea | 8,234 | 2.3 | 2.1-2.5 | 12% | 3 |
-| 2 | Nausea | 6,892 | 1.8 | 1.6-2.0 | 8% | 0 |
-| 3 | Lactic acidosis | 1,247 | 15.2 | 12.8-17.9 | 89% ⚠️ | 156 ⚠️ |
-| 4 | Hypoglycemia | 2,341 | 2.1 | 1.9-2.4 | 34% | 8 |
-| 5 | Vitamin B12 deficiency | 892 | 8.4 | 7.2-9.8 | 23% | 0 |
-
-### 2.2 Serious Adverse Events Only
-
-| Adverse Event | Serious Reports | Fatal | PRR | Signal |
-|---------------|-----------------|-------|-----|--------|
-| Lactic acidosis | 1,110 | 156 | 15.2 | **STRONG** ⚠️ |
-| Acute kidney injury | 678 | 34 | 4.2 | Moderate |
-| Hepatotoxicity | 234 | 12 | 3.1 | Moderate |
-
-### 2.3 Signal Interpretation
-
-**Strong Signal: Lactic Acidosis** ⚠️
-- PRR of 15.2 indicates 15x higher reporting rate than expected
-- 89% classified as serious
-- 156 fatalities (12.5% case fatality)
-- **Known class effect of biguanides**
-- Risk factors: renal impairment, hypoxia, contrast agents
-
-*Source: FAERS via `FAERS_count_reactions_by_drug_event`*
-```
+Report section must state the data period, total report count, and include two tables: (1) top AEs ranked by frequency with PRR, 95% CI, serious%, and fatal count; (2) serious AEs only with signal tier (T1-T4). Cite tool and data period.
 
 ---
 
 ## Phase 3: Label Warning Extraction
 
-### 3.1 DailyMed Query
+**Steps**:
 
-```python
-def extract_label_warnings(tu, setid):
-    """Extract safety sections from FDA label."""
-    
-    label = tu.tools.DailyMed_get_spl_by_set_id(setid=setid)
-    
-    warnings = {
-        'boxed_warning': label.get('boxed_warning'),
-        'contraindications': label.get('contraindications'),
-        'warnings_precautions': label.get('warnings_and_precautions'),
-        'adverse_reactions': label.get('adverse_reactions'),
-        'drug_interactions': label.get('drug_interactions')
-    }
-    
-    return warnings
-```
+1. If `setid` was obtained in Phase 1, call `DailyMed_get_spl_by_set_id` with `setid`. Extract: `boxed_warning`, `contraindications`, `warnings_and_precautions`, `adverse_reactions`, `drug_interactions`, `use_in_specific_populations`, `overdosage`.
+2. If no setid, search again via `DailyMed_search_spls` with the generic name and take the first result.
 
-### 3.2 Warning Severity Categories
+**Warning Severity Categories**:
 
-| Category | Symbol | Description |
-|----------|--------|-------------|
-| **Boxed Warning** | ⬛ | Most serious, life-threatening |
-| **Contraindication** | 🔴 | Must not use |
-| **Warning** | 🟠 | Significant risk |
-| **Precaution** | 🟡 | Use caution |
+| Category | Description |
+|----------|-------------|
+| Boxed Warning | Most serious; life-threatening risk |
+| Contraindication | Must not use under specified conditions |
+| Warning | Significant risk requiring monitoring |
+| Precaution | Use caution; specific populations |
 
-### 3.3 Output for Report
-
-```markdown
-## 3. FDA Label Safety Information
-
-### 3.1 Boxed Warning ⬛
-
-**LACTIC ACIDOSIS**
-> Metformin can cause lactic acidosis, a rare but serious complication. 
-> Risk increases with renal impairment, sepsis, dehydration, excessive 
-> alcohol intake, hepatic impairment, and acute heart failure.
-> 
-> **Contraindicated in patients with eGFR <30 mL/min/1.73m²**
-
-### 3.2 Contraindications 🔴
-
-| Contraindication | Rationale |
-|------------------|-----------|
-| eGFR <30 mL/min/1.73m² | Lactic acidosis risk |
-| Acute/chronic metabolic acidosis | May worsen acidosis |
-| Hypersensitivity to metformin | Allergic reaction |
-
-### 3.3 Warnings and Precautions 🟠
-
-| Warning | Clinical Action |
-|---------|-----------------|
-| Vitamin B12 deficiency | Monitor B12 levels annually |
-| Hypoglycemia with insulin | Reduce insulin dose |
-| Radiologic contrast | Hold 48h around procedure |
-| Surgical procedures | Hold day of surgery |
-
-*Source: DailyMed via `DailyMed_get_spl_by_set_id`*
-```
+Report section must include: full boxed warning text (or "None"), a contraindications table with rationale, and a warnings/precautions table with clinical actions. Cite `DailyMed_get_spl_by_set_id` and the setid.
 
 ---
 
 ## Phase 4: Pharmacogenomic Risk
 
-### 4.1 PharmGKB Query
+**Steps**:
 
-```python
-def get_pharmacogenomics(tu, drug_name):
-    """Get pharmacogenomic annotations."""
-    
-    # Search PharmGKB
-    pgx = tu.tools.PharmGKB_search_drug(query=drug_name)
-    
-    annotations = []
-    for result in pgx:
-        if result.get('clinical_annotation'):
-            annotations.append({
-                'gene': result['gene'],
-                'variant': result['variant'],
-                'phenotype': result['phenotype'],
-                'recommendation': result['recommendation'],
-                'level': result['level_of_evidence']
-            })
-    
-    return annotations
-```
+1. Call `PharmGKB_search_drug` with `query` set to the drug name. Retrieve the PharmGKB drug ID.
+2. Call `PharmGKB_get_clinical_annotations` with `drug_id` to get annotated gene-variant-phenotype triples.
+3. Call `CPIC_get_guidelines` with `drug_name` to check for CPIC/DPWG actionable guidelines.
 
-### 4.2 PGx Evidence Levels
+**PGx Evidence Levels**:
 
 | Level | Description | Clinical Action |
 |-------|-------------|-----------------|
-| **1A** | CPIC/DPWG guideline, implementable | Follow guideline |
-| **1B** | CPIC/DPWG guideline, annotation | Consider testing |
-| **2A** | VIP annotation, moderate evidence | May inform |
-| **2B** | VIP annotation, weaker evidence | Research |
-| **3** | Low-level annotation | Not actionable |
+| 1A | CPIC/DPWG guideline, implementable | Follow guideline |
+| 1B | CPIC/DPWG guideline, annotation level | Consider testing |
+| 2A | VIP annotation, moderate evidence | May inform prescribing |
+| 2B | VIP annotation, weaker evidence | Research context only |
+| 3 | Low-level annotation | Not actionable |
 
-### 4.3 Output for Report
-
-```markdown
-## 4. Pharmacogenomic Risk Factors
-
-### 4.1 Clinically Actionable Variants
-
-| Gene | Variant | Phenotype | Recommendation | Level |
-|------|---------|-----------|----------------|-------|
-| SLC22A1 | rs628031 | Reduced OCT1 | Reduced metformin response | 2A |
-| SLC22A1 | rs36056065 | Loss of function | Consider alternative | 2A |
-| ATM | rs11212617 | Increased response | Standard dosing | 3 |
-
-### 4.2 Clinical Implications
-
-**OCT1 (SLC22A1) Poor Metabolizers**:
-- ~9% of Caucasians carry two loss-of-function alleles
-- Reduced hepatic uptake of metformin
-- May have decreased efficacy
-- Consider higher doses or alternative agent
-
-**No CPIC/DPWG guidelines currently exist for metformin**
-
-*Source: PharmGKB via `PharmGKB_search_drug`*
-```
+Report section must include: a table of all level 1–2 gene-variant-phenotype triples with recommendations, and explicit statement of CPIC/DPWG guideline status ("No guideline exists" if absent). Cite both tools.
 
 ---
 
 ## Phase 5: Clinical Trial Safety
 
-### 5.1 ClinicalTrials.gov Query
+**Steps**:
 
-```python
-def get_trial_safety(tu, drug_name):
-    """Get safety data from clinical trials."""
-    
-    # Search completed phase 3/4 trials
-    trials = tu.tools.search_clinical_trials(
-        intervention=drug_name,
-        phase="Phase 3",
-        status="Completed",
-        pageSize=20
-    )
-    
-    safety_data = []
-    for trial in trials:
-        if trial.get('results_posted'):
-            results = tu.tools.get_clinical_trial_results(
-                nct_id=trial['nct_id']
-            )
-            safety_data.append(results.get('adverse_events'))
-    
-    return safety_data
-```
+1. Call `search_clinical_trials` with `intervention=[drug]`, `phase="Phase 3"`, `status="Completed"`, `pageSize=20`.
+2. For trials with posted results, call `get_clinical_trial_results` with `nct_id` to retrieve adverse event tables.
+3. Compare serious AE rates between drug and placebo/comparator arms. Note discontinuation rates.
 
-### 5.2 Output for Report
-
-```markdown
-## 5. Clinical Trial Safety Data
-
-### 5.1 Phase 3 Trial Summary
-
-| Trial | N | Duration | Serious AEs (Drug) | Serious AEs (Placebo) | Deaths |
-|-------|---|----------|-------------------|----------------------|--------|
-| UKPDS | 1,704 | 10 yr | 12.3% | 14.1% | 8.2% vs 9.1% |
-| DPP | 1,073 | 3 yr | 4.2% | 3.8% | 0.1% |
-| SPREAD | 884 | 2 yr | 5.1% | 4.9% | 0.2% |
-
-### 5.2 Common Adverse Events in Trials
-
-| Adverse Event | Drug (%) | Placebo (%) | Difference |
-|---------------|----------|-------------|------------|
-| Diarrhea | 53% | 12% | +41% ⚠️ |
-| Nausea | 26% | 8% | +18% |
-| Flatulence | 12% | 6% | +6% |
-| Asthenia | 9% | 6% | +3% |
-
-*Source: ClinicalTrials.gov via `search_clinical_trials`*
-```
+Report section must include: a trial summary table (NCT ID, N, duration, serious AE rate drug vs control, deaths) and a common AE comparison table (drug% vs placebo%). Cite `search_clinical_trials`.
 
 ---
 
-## Phase 5.5: Pathway & Mechanism Context (NEW)
+## Phase 5.5: Pathway & Mechanism Context
 
-### 5.5.1 Drug Metabolism Pathways (KEGG)
+**Steps**:
 
-```python
-def get_drug_pathway_context(tu, drug_name, drug_targets):
-    """Get pathway context for mechanistic safety understanding."""
-    
-    # KEGG drug metabolism
-    metabolism = tu.tools.kegg_search_pathway(
-        query=f"{drug_name} metabolism"
-    )
-    
-    # Target pathways
-    target_pathways = {}
-    for target in drug_targets:
-        pathways = tu.tools.kegg_get_gene_info(gene_id=f"hsa:{target}")
-        target_pathways[target] = pathways.get('pathways', [])
-    
-    return {
-        'metabolism_pathways': metabolism,
-        'target_pathways': target_pathways
-    }
-```
+1. Call `kegg_search_pathway` with `query="[drug] metabolism"` to find metabolism pathways.
+2. For key drug targets, call `kegg_get_gene_info` with `gene_id="hsa:[GENE_SYMBOL]"` to list target pathways.
+3. Call `Reactome_search_pathway` with `query=[drug mechanism]` as a cross-check or fallback.
+4. Map adverse events to pathway mechanisms (e.g., mitochondrial complex I inhibition → lactic acidosis).
 
-### 5.5.2 Output for Report
-
-```markdown
-## 5.5 Pathway & Mechanism Context
-
-### Drug Metabolism Pathways (KEGG)
-
-| Pathway | Relevance | Safety Implication |
-|---------|-----------|-------------------|
-| Drug metabolism - cytochrome P450 | Primary metabolism | CYP2C9 interactions |
-| Gluconeogenesis inhibition | MOA | Lactic acidosis mechanism |
-| Mitochondrial complex I | Off-target | Lactic acid accumulation |
-
-### Target Pathway Analysis
-
-**Primary Target: AMPK**
-- Pathway: AMPK signaling (hsa04152)
-- Downstream: mTOR inhibition, autophagy
-- Safety relevance: Explains metabolic effects
-
-**Mechanistic Basis for Key AEs**:
-| Adverse Event | Pathway Mechanism |
-|---------------|-------------------|
-| Lactic acidosis | Mitochondrial complex I inhibition |
-| GI intolerance | Serotonin release in gut |
-| B12 deficiency | Intrinsic factor interference |
-
-*Source: KEGG, Reactome*
-```
+Report section must include: a pathway-relevance-safety table and a mechanistic AE mapping table (AE → pathway mechanism). Cite KEGG and Reactome tools used.
 
 ---
 
-## Phase 5.6: Literature Intelligence (ENHANCED)
+## Phase 5.6: Literature Intelligence
 
-### 5.6.1 Published Safety Studies
+**Steps**:
 
-```python
-def comprehensive_safety_literature(tu, drug_name, key_aes):
-    """Search all literature sources for safety evidence."""
-    
-    # PubMed: Peer-reviewed
-    pubmed = tu.tools.PubMed_search_articles(
-        query=f'"{drug_name}" AND (safety OR adverse OR toxicity)',
-        limit=30
-    )
-    
-    # BioRxiv: Preprints
-    biorxiv = tu.tools.BioRxiv_search_preprints(
-        query=f"{drug_name} mechanism toxicity",
-        limit=10
-    )
-    
-    # MedRxiv: Clinical preprints
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{drug_name} safety",
-        limit=10
-    )
-    
-    # Citation analysis for key papers
-    key_papers = pubmed[:10]
-    for paper in key_papers:
-        citation = tu.tools.openalex_search_works(
-            query=paper['title'],
-            limit=1
-        )
-        paper['citations'] = citation[0].get('cited_by_count', 0) if citation else 0
-    
-    return {
-        'pubmed': pubmed,
-        'preprints': biorxiv + medrxiv,
-        'key_papers': key_papers
-    }
-```
+1. Call `PubMed_search_articles` with `query='"[drug]" AND (safety OR adverse OR toxicity)'` and `limit=30`.
+2. Call `EuropePMC_search_articles` with `query="[drug] safety"`, `source="PPR"` (preprints only), `pageSize=15`.
+3. Call `openalex_search_works` or `SemanticScholar_search` to rank key papers by citation count.
 
-### 5.6.2 Output for Report
+Note: BioRxiv and MedRxiv do not expose their own search APIs — use EuropePMC with `source="PPR"` to search preprints from both servers.
 
-```markdown
-## 5.6 Literature Evidence
-
-### Key Safety Studies
-
-| PMID | Title | Year | Citations | Finding |
-|------|-------|------|-----------|---------|
-| 29234567 | Metformin and lactic acidosis: meta-analysis | 2020 | 245 | Risk 4.3/100,000 |
-| 28765432 | Long-term cardiovascular outcomes... | 2019 | 567 | CV benefit confirmed |
-| 30123456 | B12 deficiency prevalence study | 2021 | 123 | 30% after 4 years |
-
-### Recent Preprints (Not Peer-Reviewed)
-
-| Source | Title | Posted | Relevance |
-|--------|-------|--------|-----------|
-| MedRxiv | Novel metformin safety signal in elderly | 2024-01 | Age-related risk |
-| BioRxiv | Gut microbiome and metformin GI effects | 2024-02 | Mechanistic |
-
-**⚠️ Note**: Preprints have NOT undergone peer review.
-
-### Evidence Summary
-
-| Evidence Type | Count | High-Impact |
-|---------------|-------|-------------|
-| Systematic reviews | 12 | 5 |
-| RCTs with safety data | 28 | 8 |
-| Mechanistic studies | 15 | 3 |
-| Case reports | 45 | - |
-
-*Source: PubMed, BioRxiv, MedRxiv, OpenAlex*
-```
+Report section must include: a key safety studies table (PMID, title, year, citation count, key finding) and a preprints table. Always label preprints "NOT peer-reviewed." Cite PubMed and EuropePMC tools.
 
 ---
 
 ## Phase 6: Signal Prioritization
 
-### 6.1 Signal Scoring Formula
+Rank all signals using: `Signal Score = PRR × Severity_Weight × log10(Case_Count + 1)`
 
-```
-Signal Score = PRR × Severity_Weight × log10(Case_Count + 1)
+**Evidence Tiers**:
 
-Severity Weights:
-- Fatal: 10
-- Life-threatening: 8
-- Hospitalization: 5
-- Disability: 5
-- Other serious: 3
-- Non-serious: 1
-```
+| Tier | Criteria | Example |
+|------|----------|---------|
+| T1 (Critical) | PRR >10, fatal outcomes, or boxed warning | Lactic acidosis with biguanides |
+| T2 (Moderate) | PRR 3-10, serious outcomes | Hepatotoxicity |
+| T3 (Mild) | PRR 2-3, moderate concern | Hypoglycemia |
+| T4 (Expected) | PRR <2, known/manageable | GI side effects |
 
-### 6.2 Output for Report
+Report section must include three subsections — T1 Critical (PRR, fatal count, score, action), T2 Moderate (PRR, serious count, score, action), and T3/T4 Known/Expected (PRR, frequency, management). All signals must have a score and a recommended action.
 
-```markdown
-## 6. Prioritized Safety Signals
+---
 
-### 6.1 Critical Signals (Immediate Attention)
+## Phase 7: Report Synthesis
 
-| Signal | PRR | Fatal | Score | Action |
-|--------|-----|-------|-------|--------|
-| Lactic acidosis | 15.2 | 156 | 482 | Boxed warning exists |
-| Acute kidney injury | 4.2 | 34 | 89 | Monitor renal function |
+Complete the report file with:
+- Executive summary (highest-priority signals, overall risk level)
+- Risk-benefit assessment
+- Monitoring recommendations (minimum 3)
+- Patient counseling points
+- Contraindication checklist
+- Data gaps and limitations
+- Data sources section (all tools and databases used)
 
-### 6.2 Moderate Signals (Monitor)
-
-| Signal | PRR | Serious | Score | Action |
-|--------|-----|---------|-------|--------|
-| Hepatotoxicity | 3.1 | 234 | 52 | Check LFTs if symptoms |
-| Pancreatitis | 2.8 | 178 | 41 | Monitor lipase |
-
-### 6.3 Known/Expected (Manage Clinically)
-
-| Signal | PRR | Frequency | Management |
-|--------|-----|-----------|------------|
-| Diarrhea | 2.3 | 18% | Start low, titrate slow |
-| Nausea | 1.8 | 12% | Take with food |
-| B12 deficiency | 8.4 | 2% | Annual monitoring |
-```
+Before delivery, run through [CHECKLIST.md](CHECKLIST.md).
 
 ---
 
@@ -647,147 +309,74 @@ Severity Weights:
 
 **File**: `[DRUG]_safety_report.md`
 
+Create this file BEFORE beginning research. Initialize with all 10 section headers and `[Researching...]` placeholder text. Update each section progressively as data is gathered. The 10 required sections are:
+
+1. Drug Identification
+2. Adverse Event Profile (FAERS) — subsections: Top AEs / Serious AEs / Signal Analysis
+3. FDA Label Safety Information — subsections: Boxed Warnings / Contraindications / Warnings & Precautions
+4. Pharmacogenomic Risk Factors — subsections: Actionable Variants / Testing Recommendations
+5. Clinical Trial Safety
+6. Prioritized Safety Signals — subsections: Critical (T1) / Moderate (T2) / Known/Expected (T3-T4)
+7. Risk-Benefit Assessment
+8. Clinical Recommendations — subsections: Monitoring / Patient Counseling / Contraindication Checklist
+9. Data Gaps & Limitations
+10. Data Sources (populated as research progresses)
+
+Header line: `# Pharmacovigilance Safety Report: [DRUG]` with Generated date, original query, and status.
+
+---
+
+## Citation Format (MANDATORY)
+
+Every safety signal and data point in the report MUST include a source line:
+
 ```markdown
-# Pharmacovigilance Safety Report: [DRUG]
-
-**Generated**: [Date] | **Query**: [Original query] | **Status**: In Progress
-
----
-
-## Executive Summary
-[Researching...]
-
----
-
-## 1. Drug Identification
-### 1.1 Drug Information
-[Researching...]
-
----
-
-## 2. Adverse Event Profile (FAERS)
-### 2.1 Top Adverse Events
-[Researching...]
-### 2.2 Serious Adverse Events
-[Researching...]
-### 2.3 Signal Analysis
-[Researching...]
-
----
-
-## 3. FDA Label Safety Information
-### 3.1 Boxed Warnings
-[Researching...]
-### 3.2 Contraindications
-[Researching...]
-### 3.3 Warnings and Precautions
-[Researching...]
-
----
-
-## 4. Pharmacogenomic Risk Factors
-### 4.1 Actionable Variants
-[Researching...]
-### 4.2 Testing Recommendations
-[Researching...]
-
----
-
-## 5. Clinical Trial Safety
-### 5.1 Trial Summary
-[Researching...]
-### 5.2 Adverse Events in Trials
-[Researching...]
-
----
-
-## 6. Prioritized Safety Signals
-### 6.1 Critical Signals
-[Researching...]
-### 6.2 Moderate Signals
-[Researching...]
-
----
-
-## 7. Risk-Benefit Assessment
-[Researching...]
-
----
-
-## 8. Clinical Recommendations
-### 8.1 Monitoring Recommendations
-[Researching...]
-### 8.2 Patient Counseling Points
-[Researching...]
-### 8.3 Contraindication Checklist
-[Researching...]
-
----
-
-## 9. Data Gaps & Limitations
-[Researching...]
-
----
-
-## 10. Data Sources
-[Will be populated as research progresses...]
+*Source: FAERS via `FAERS_count_reactions_by_drug_event` (Q1 2020 - Q4 2025)*
+*Source: DailyMed via `DailyMed_get_spl_by_set_id` (setid: abc123)*
+*Source: PharmGKB via `PharmGKB_search_drug` (PA450360)*
+*Source: ClinicalTrials.gov via `search_clinical_trials`*
 ```
 
 ---
 
-## Evidence Grading
+## Known Gotchas
 
-| Tier | Symbol | Criteria | Example |
-|------|--------|----------|---------|
-| **T1** | ⚠️⚠️⚠️ | PRR >10, fatal outcomes, boxed warning | Lactic acidosis |
-| **T2** | ⚠️⚠️ | PRR 3-10, serious outcomes | Hepatotoxicity |
-| **T3** | ⚠️ | PRR 2-3, moderate concern | Hypoglycemia |
-| **T4** | ℹ️ | PRR <2, known/expected | GI side effects |
+### Parameter Name Errors (Most Common)
+- `FAERS_count_reactions_by_drug_event` requires `drug_name`, not `drug`. Passing `drug` silently returns wrong results or errors.
+- `PharmGKB_search_drug` requires `query`, not `drug` or `name`.
+- `OpenFDA_get_drug_events` requires `search` as an OpenFDA query string (e.g., `"patient.drug.medicinalproduct:metformin"`), not a plain drug name.
+- `DailyMed_search_spls` requires `drug_name`, not `name`.
 
----
+### BioRxiv/MedRxiv Search
+- Neither BioRxiv nor MedRxiv expose their own search APIs. Do NOT attempt to call `BioRxiv_search_preprints` or `MedRxiv_search_preprints` directly.
+- Use `EuropePMC_search_articles` with `source="PPR"` to search preprints from both servers.
 
-## Completeness Checklist
+### PRR vs ROR Interpretation
+- PRR and ROR converge when the event is rare relative to total reports. For common events, ROR will be higher than PRR — report both when possible.
+- A high PRR alone is not sufficient for signal detection: require N ≥ 3 AND lower 95% CI > 1.0 (WHO-UMC criteria).
+- IC025 > 0 (Bayesian lower credible interval) is the EMA preferred criterion.
 
-### Phase 1: Drug Identification
-- [ ] Generic name resolved
-- [ ] Brand names listed
-- [ ] Drug class identified
-- [ ] ChEMBL/DrugBank ID obtained
-- [ ] Mechanism of action stated
+### FAERS Data Limitations
+- FAERS reports are submitted voluntarily; reporting rates vary by drug notoriety, media coverage, and drug age.
+- FAERS does not establish causality. Use language like "disproportionate reporting" rather than "causes."
+- Duplicate reports exist in FAERS (manufacturers re-submit consumer reports). Count-based PRR may overestimate signal for high-profile drugs.
 
-### Phase 2: FAERS Analysis
-- [ ] ≥20 adverse events queried
-- [ ] PRR calculated for top events
-- [ ] Serious/fatal counts included
-- [ ] Signal thresholds applied
-- [ ] Time period stated
+### DailyMed Label Retrieval
+- SPL documents can be very large. If a label call times out, try `DailyMed_search_spls` first to get `setid`, then retrieve the label using `DailyMed_get_spl_by_set_id`.
+- Combination products may have multiple SPLs. Check all entries; prefer the most recent revision date.
 
-### Phase 3: Label Warnings
-- [ ] Boxed warnings extracted (or "None")
-- [ ] Contraindications listed
-- [ ] Key warnings summarized
-- [ ] Drug interactions noted
+### PharmGKB / CPIC Coverage
+- Many drugs have no CPIC guideline. Always explicitly document "No CPIC/DPWG guideline exists" rather than leaving the section blank.
+- Evidence level 1A is rare. Most drugs will have level 2-3 annotations at most.
 
-### Phase 4: Pharmacogenomics
-- [ ] PharmGKB queried
-- [ ] Actionable variants listed (or "None")
-- [ ] Evidence levels provided
-- [ ] Testing recommendations stated
+### ClinicalTrials.gov Results
+- Not all completed trials have posted results. Check `has_results` before calling `get_clinical_trial_results`.
+- Phase 2 trials frequently lack placebo-controlled safety data; prefer Phase 3/4 for comparative AE rates.
 
-### Phase 5: Clinical Trials
-- [ ] Phase 3/4 trials searched
-- [ ] Serious AE rates compared
-- [ ] Discontinuation rates noted
-
-### Phase 6: Signal Prioritization
-- [ ] Signals ranked by score
-- [ ] Critical signals flagged
-- [ ] Actions recommended
-
-### Phase 7-8: Synthesis
-- [ ] Risk-benefit assessment provided
-- [ ] Monitoring recommendations listed
-- [ ] Patient counseling points included
+### Drug Name Disambiguation
+- Always search using generic (INN) name first, then brand name as fallback.
+- Some FAERS records use brand names; if the generic name returns low counts, try common brand names.
+- For combination products (e.g., metformin/sitagliptin), analyze each component separately in FAERS, then combine findings.
 
 ---
 
@@ -795,13 +384,37 @@ Severity Weights:
 
 | Primary Tool | Fallback 1 | Fallback 2 |
 |--------------|------------|------------|
-| `FAERS_count_reactions_by_drug_event` | `OpenFDA_get_drug_events` | Literature search |
-| `DailyMed_get_spl_by_set_id` | `FDA_drug_label_search` | DailyMed website |
-| `PharmGKB_search_drug` | `CPIC_get_guidelines` | Literature search |
-| `search_clinical_trials` | `ClinicalTrials.gov` API | PubMed for trial results |
+| `FAERS_count_reactions_by_drug_event` | `OpenFDA_get_drug_events` | PubMed safety literature |
+| `DailyMed_get_spl_by_set_id` | `OpenFDA_get_drug_labels` | DailyMed web search |
+| `PharmGKB_search_drug` | `CPIC_get_guidelines` | FDA PGx table (literature) |
+| `search_clinical_trials` | `get_clinical_trial_by_nct_id` | PubMed for trial results |
+| `kegg_search_pathway` | `Reactome_search_pathway` | Literature search |
+| `PubMed_search_articles` | `openalex_search_works` | `SemanticScholar_search` |
+| `EuropePMC_search_articles` (source='PPR') | `openalex_search_works` | Skip preprints |
 
 ---
 
-## Tool Reference
+## Abbreviated Tool Reference
 
-See [TOOLS_REFERENCE.md](TOOLS_REFERENCE.md) for complete tool documentation.
+For full parameter tables and additional tools, see [references/tools.md](references/tools.md).
+
+| Phase | Tool | Purpose | Key Parameter(s) |
+|-------|------|---------|------------------|
+| 1 | `DailyMed_search_spls` | Search drug labels | `drug_name` |
+| 1 | `DailyMed_get_spl_by_set_id` | Retrieve full SPL | `setid` |
+| 1 | `ChEMBL_search_drugs` | Drug identity/class | `query` |
+| 2 | `FAERS_count_reactions_by_drug_event` | Top AE counts | `drug_name`, `limit` |
+| 2 | `FAERS_get_event_details` | Seriousness breakdown | `drug_name`, `reaction` |
+| 2 | `OpenFDA_get_drug_events` | AE fallback | `search` |
+| 3 | `DailyMed_get_drug_interactions` | Drug interactions | `setid` |
+| 4 | `PharmGKB_search_drug` | PGx drug lookup | `query` |
+| 4 | `PharmGKB_get_clinical_annotations` | Variant annotations | `drug_id` |
+| 4 | `CPIC_get_guidelines` | CPIC/DPWG guidelines | `drug_name` |
+| 5 | `search_clinical_trials` | Trial search | `intervention`, `phase`, `status` |
+| 5 | `get_clinical_trial_results` | Posted trial results | `nct_id` |
+| 5.5 | `kegg_search_pathway` | Metabolism pathways | `query` |
+| 5.5 | `Reactome_search_pathway` | Mechanism pathways | `query`, `species` |
+| 5.6 | `PubMed_search_articles` | Safety literature | `query`, `limit` |
+| 5.6 | `EuropePMC_search_articles` | Preprints | `query`, `source='PPR'` |
+| 5.6 | `openalex_search_works` | Citation-ranked search | `query`, `limit` |
+| Any | `AdverseEventICDMapper` | Map AE text to ICD-10 | `text` |

@@ -1,5 +1,21 @@
 # Precision Medicine Stratification - Tools Reference
 
+This file contains detailed tool parameter tables and response schemas. For the workflow guide see `SKILL.md`.
+
+## Response Format Notes
+
+- **OpenTargets**: Always nested `{data: {entity: {field: ...}}}` — navigate the full path before accessing values.
+- **FDA label tools**: Return `{meta: {...}, results: [...]}`. Access data via `result['results'][0]['field_name']`.
+- **DrugBank**: ALL tools require exactly 4 params: `query`, `case_sensitive` (bool), `exact_match` (bool), `limit` (int). Omitting any one causes failure.
+- **PubMed_search_articles**: Returns a **plain list** of dicts — NOT `{articles: [...]}`.
+- **ClinVar**: May return a plain list or `{status, data: {esearchresult: {count, idlist}}}` — handle both.
+- **EnsemblVEP**: May return `[{...}]` list or `{data: {...}, metadata: {...}}` — handle both shapes.
+- **gnomAD**: May return "Service overloaded" — treat as transient, retry once or skip and note in report.
+- **fda_pharmacogenomic_biomarkers**: Default `limit=10`; use `limit=1000` to retrieve all entries.
+- **PubMed_Guidelines_Search**: Requires `limit` (NOT `max_results`). May require API key. Fall back to `PubMed_search_articles`.
+- **MyGene CYP2D6**: First hit may be LOC110740340 (pseudogene). Always filter hits by `symbol` match.
+- **gwas_get_associations_for_trait**: Prone to errors; use `gwas_search_associations` as preferred alternative.
+
 ## Tools Used by Phase
 
 ### Phase 1: Disease Disambiguation & Profile Standardization
@@ -83,16 +99,29 @@
 ### Phase 7: Clinical Evidence & Guidelines
 | Tool | Parameters | Response | Purpose |
 |------|-----------|----------|---------|
-| `PubMed_Guidelines_Search` | `query`, `max_results` | List of guideline articles | Clinical guidelines |
-| `PubMed_search_articles` | `query`, `max_results` | List of dicts | Literature evidence |
+| `PubMed_Guidelines_Search` | `query`, `limit` (NOT max_results) | List of guideline articles | Clinical guidelines |
+| `PubMed_search_articles` | `query`, `max_results` | Plain list of dicts | Literature evidence |
 | `OpenTargets_get_associated_drugs_by_disease_efoId` | `efoId`, `size` | `{data: {disease: {knownDrugs: {count, rows}}}}` | Disease drug landscape |
-| `FDA_get_indications_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | FDA-approved indications |
-| `FDA_get_mechanism_of_action_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | Drug mechanism |
-| `FDA_get_clinical_studies_info_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | Clinical study data |
+| `OpenTargets_get_drug_id_description_by_name` | `drugName` | `{data: {search: {hits: [{id, name, description}]}}}` | Drug to ChEMBL ID |
 | `OpenTargets_get_drug_mechanisms_of_action_by_chemblId` | `chemblId` | `{data: {drug: {mechanismsOfAction: {rows}}}}` | Drug MOA |
+| `OpenTargets_get_approved_indications_by_drug_chemblId` | `chemblId` | Approved indications list | Drug approval status |
+| `OpenTargets_get_drug_adverse_events_by_chemblId` | `chemblId` | `{data: {drug: {adverseEvents: {count, rows}}}}` | Drug safety signals |
+| `OpenTargets_get_associated_drugs_by_target_ensemblID` | `ensemblId`, `size` | Drug-target associations | Drugs targeting a gene |
+| `OpenTargets_get_target_safety_profile_by_ensemblID` | `ensemblId` | Safety profile | Target safety |
+| `OpenTargets_get_diseases_phenotypes_by_target_ensembl` | `ensemblId` | Disease-phenotype associations | Gene-disease links |
+| `OpenTargets_drug_pharmacogenomics_data` | `chemblId` | PGx data | Drug PGx from OpenTargets |
+| `FDA_get_indications_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | FDA-approved indications |
+| `FDA_get_clinical_studies_info_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | Clinical study data |
+| `FDA_get_contraindications_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | Contraindications |
+| `FDA_get_warnings_by_drug_name` | `drug_name`, `limit` | `{meta, results}` | Warnings |
+| `FDA_get_boxed_warning_info_by_drug_name` | `drug_name`, `limit` | May return NOT_FOUND | Boxed warnings |
 | `drugbank_get_drug_basic_info_by_drug_name_or_id` | `query`, `case_sensitive`, `exact_match`, `limit` | Drug info | Drug details |
+| `drugbank_get_targets_by_drug_name_or_drugbank_id` | `query`, `case_sensitive`, `exact_match`, `limit` | Drug targets | Drug target list |
 | `drugbank_get_pharmacology_by_drug_name_or_drugbank_id` | `query`, `case_sensitive`, `exact_match`, `limit` | Pharmacology | Drug pharmacology |
+| `drugbank_get_indications_by_drug_name_or_drugbank_id` | `query`, `case_sensitive`, `exact_match`, `limit` | Indications | Drug indications |
+| `drugbank_get_safety_by_drug_name_or_drugbank_id` | `query`, `case_sensitive`, `exact_match`, `limit` | Safety data | Drug safety |
 | `civic_search_assertions` | `therapy_name`, `disease_name` | `{data: {assertions: {nodes}}}` | Clinical assertions |
+| `HPA_get_rna_expression_by_source` | `gene_name`, `source_type`, `source_name` (ALL 3) | Expression data | Tissue/cancer expression |
 
 ### Phase 8: Clinical Trial Matching
 | Tool | Parameters | Response | Purpose |

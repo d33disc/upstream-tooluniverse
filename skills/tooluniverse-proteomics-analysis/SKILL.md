@@ -5,18 +5,29 @@ description: Analyze mass spectrometry proteomics data including protein quantif
 
 # Proteomics Analysis
 
-Comprehensive analysis of mass spectrometry-based proteomics data from protein identification through quantification, differential expression, post-translational modifications, and systems-level interpretation.
+Comprehensive analysis of mass spectrometry-based proteomics data from protein identification through quantification, differential expression, PTM characterization, and systems-level interpretation.
+
+**KEY PRINCIPLES**:
+1. **Report-first approach** - Create report file FIRST, then populate progressively
+2. **Platform-aware loading** - Detect input format (MaxQuant, Spectronaut, DIA-NN, Proteome Discoverer) before processing
+3. **DIA vs DDA awareness** - DDA (data-dependent) has more missing values; DIA (data-independent) is more complete
+4. **PTM localization filtering** - Only use phosphosites with localization probability > 0.75
+5. **Multiple testing correction** - Always apply Benjamini-Hochberg FDR; never report uncorrected p-values
+6. **Tool parameter verification** - Call `get_tool_info` before unfamiliar tools
+7. **English-first queries** - Use English in all tool calls, even if the user writes in another language. Respond in the user's language
+
+---
 
 ## When to Use This Skill
 
 **Triggers**:
-- User has proteomics data (MS output files)
-- Questions about protein abundance or expression
+- User has proteomics data (MS output files: proteinGroups.txt, report.tsv, etc.)
+- Questions about protein abundance or expression changes
 - Differential protein expression analysis requests
-- PTM analysis (phosphorylation, acetylation, ubiquitination)
-- Protein-RNA correlation analysis
+- PTM analysis (phosphorylation, acetylation, ubiquitination, methylation)
+- Protein-RNA correlation or translation efficiency analysis
 - Multi-omics integration involving proteomics
-- Protein complex or interaction analysis
+- Protein complex or interaction network analysis
 - Proteomics biomarker discovery
 
 **Example Questions This Skill Solves**:
@@ -29,6 +40,12 @@ Comprehensive analysis of mass spectrometry-based proteomics data from protein i
 7. "Find protein biomarkers for disease classification"
 8. "Compare protein and RNA levels to identify translation-regulated genes"
 
+**NOT for** (use other skills instead):
+- RNA-seq differential expression only -> Use `tooluniverse-rnaseq-deseq2`
+- Pathway enrichment only (no proteomics data) -> Use `tooluniverse-gene-enrichment`
+- Protein-protein interactions only -> Use `tooluniverse-protein-interactions`
+- Multi-omics integration -> Use `tooluniverse-multi-omics-integration`
+
 ---
 
 ## Core Capabilities
@@ -39,12 +56,12 @@ Comprehensive analysis of mass spectrometry-based proteomics data from protein i
 | **Quality Control** | Missing value analysis, intensity distributions, sample clustering |
 | **Normalization** | Median, quantile, TMM, VSN normalization methods |
 | **Imputation** | MinProb, KNN, QRILC for missing values |
-| **Differential Expression** | Limma, DEP, MSstats for statistical testing |
+| **Differential Expression** | Limma-style testing, t-test, ANOVA with BH correction |
 | **PTM Analysis** | Phospho-site localization, PTM enrichment, kinase prediction |
 | **Protein-RNA Integration** | Correlation analysis, translation efficiency |
 | **Pathway Enrichment** | Over-representation and GSEA for protein sets |
 | **PPI Analysis** | Protein complex detection, interaction networks via STRING/IntAct |
-| **Reporting** | Comprehensive reports with volcano plots, heatmaps, pathway diagrams |
+| **Reporting** | Summary statistics, volcano plots, heatmaps, pathway diagrams |
 
 ---
 
@@ -55,754 +72,386 @@ Input: MS Proteomics Data
     |
     v
 Phase 1: Data Import & QC
-    |-- Load MaxQuant/Spectronaut/DIA-NN output
+    |-- Detect format (MaxQuant / Spectronaut / DIA-NN / Proteome Discoverer)
     |-- Parse protein groups, intensities, modifications
-    |-- Quality control plots (missing values, intensity distributions)
-    |-- Sample correlation and PCA
+    |-- Quality control: missing values, intensity distributions, PCA
     |
     v
 Phase 2: Preprocessing
-    |-- Filter low-confidence proteins
-    |-- Handle missing values (imputation or filtering)
-    |-- Log-transform intensities
+    |-- Filter low-confidence proteins (2+ unique peptides, remove CON__/REV__)
+    |-- Handle missing values (imputation strategy depends on DIA vs DDA)
+    |-- Log2-transform intensities
     |-- Normalize across samples
     |
     v
 Phase 3: Differential Expression Analysis
-    |-- Statistical testing (limma, t-test, ANOVA)
-    |-- Multiple testing correction (BH, Bonferroni)
+    |-- Statistical testing (limma-style, t-test, ANOVA)
+    |-- Multiple testing correction (Benjamini-Hochberg FDR)
     |-- Fold change calculation
-    |-- Significance thresholds (p < 0.05, |log2FC| > 1)
+    |-- Default thresholds: adj. p < 0.05 AND |log2FC| > 1
     |
     v
 Phase 4: PTM Analysis (if applicable)
-    |-- Identify modified peptides
-    |-- Localization probability filtering
-    |-- PTM site quantification
-    |-- Kinase-substrate prediction
+    |-- Filter phosphosites by localization probability > 0.75
+    |-- Differential phosphorylation per site
+    |-- Kinase-substrate prediction via OmniPath
     |-- PTM enrichment analysis
     |
     v
 Phase 5: Functional Enrichment
-    |-- Gene Ontology enrichment
-    |-- KEGG/Reactome pathway enrichment
-    |-- Protein complex enrichment (CORUM)
-    |-- Tissue-specific enrichment
+    |-- GO (BP, MF, CC) enrichment via Enrichr
+    |-- KEGG and Reactome pathway enrichment
+    |-- Protein complex enrichment (STRING functional enrichment)
     |
     v
 Phase 6: Protein-Protein Interactions
     |-- Query STRING for interaction networks
-    |-- Identify protein complexes
-    |-- Network clustering and modules
+    |-- PPI enrichment test (are proteins more connected than random?)
+    |-- Network clustering for functional modules
     |-- Hub protein identification
     |
     v
 Phase 7: Multi-Omics Integration (optional)
-    |-- Correlate with RNA-seq data
-    |-- Identify translation-regulated proteins
-    |-- Compare with variant/CNV data
-    |-- Integrate with metabolomics
+    |-- Match proteins to RNA-seq data by gene symbol
+    |-- Spearman correlation: protein vs mRNA per gene
+    |-- Classify regulation: transcriptional / post-transcriptional / degradation
     |
     v
 Phase 8: Generate Report
-    |-- Summary statistics
-    |-- Volcano plots and heatmaps
-    |-- Pathway diagrams
-    |-- Protein network visualizations
-    |-- Multi-omics integration plots
+    |-- Summary statistics (proteins quantified, DE count, top hits)
+    |-- Volcano plot, heatmap, pathway diagram descriptions
+    |-- Protein network module summary
+    |-- Biomarker candidates
 ```
 
 ---
 
 ## Phase Details
 
+### Phase 0: Tool Parameter Verification
+
+Before calling any unfamiliar tool, verify its parameters using `get_tool_info`:
+
+```
+mcp__tooluniverse__execute_tool(
+    tool_name="mcp__tooluniverse__get_tool_info",
+    arguments={"tool_names": "STRING_get_network"}
+)
+```
+
+### Known Parameter Corrections
+
+| Tool | WRONG Parameter | CORRECT Parameter |
+|------|-----------------|-------------------|
+| `STRING_get_network` | `protein_list` | `identifiers` (newline-separated string) |
+| `STRING_functional_enrichment` | `proteins` | `protein_ids` (list) |
+| `OmniPath_get_enzyme_substrate` | `kinase` | `enzymes` |
+| `EBIProteins_get_proteomics_ptm` | `uniprot_id` | `accession` |
+| `enrichr_gene_enrichment_analysis` | `genes` | `gene_list` (list) |
+
+---
+
 ### Phase 1: Data Import & Quality Control
 
-**Objective**: Load proteomics data and assess data quality.
+**Objective**: Load proteomics data and assess data quality before any analysis.
 
 **Supported input formats**:
 
-**MaxQuant (most common)**:
-- `proteinGroups.txt` - Protein-level quantification
-- `evidence.txt` - Peptide-level data
-- `Phospho (STY)Sites.txt` - Phosphorylation sites
-- `modificationSpecificPeptides.txt` - Other PTMs
+| Platform | Key Files | Notes |
+|----------|-----------|-------|
+| **MaxQuant (DDA)** | `proteinGroups.txt`, `Phospho (STY)Sites.txt` | LFQ intensity columns; contaminants marked CON__ |
+| **Spectronaut (DIA)** | `*_Report.tsv` | Fewer missing values than MaxQuant |
+| **DIA-NN (DIA)** | `report.tsv`, `report.pr_matrix.tsv` | Protein groups in pr_matrix |
+| **Proteome Discoverer** | `*_Proteins.txt`, `*_PSMs.txt` | Requires Abundance column extraction |
+| **FragPipe** | `combined_protein.tsv` | Gene-level aggregation pre-done |
 
-**Spectronaut**:
-- `*_Report.tsv` - Protein/peptide quantification
-- DIA-based quantification
+**DIA vs DDA decision for imputation**:
+- DDA (MaxQuant LFQ): missing values common (15-30%); use MinProb (assumes MNAR — missing not at random)
+- DIA (Spectronaut/DIA-NN): missing values rare (<5%); KNN imputation preferred
 
-**DIA-NN**:
-- `report.tsv` - Protein groups
-- `report.pr_matrix.tsv` - Protein matrix
+**Quality control steps (in order)**:
 
-**Proteome Discoverer**:
-- `*_Proteins.txt`
-- `*_PSMs.txt`
+1. **Missing value assessment** — Calculate % missing per protein and per sample. Flag proteins with >70% missing.
+2. **Intensity distribution** — Compare log10 intensity distributions per sample. Expect similar medians and spreads.
+3. **Sample correlation** — Pearson correlation of log-transformed intensities. Expect r > 0.90 within replicates.
+4. **PCA** — PC1/PC2 plot colored by condition. Expect clear group separation.
 
-**Data loading**:
-```python
-def load_maxquant_proteins(protein_groups_file):
-    """
-    Load MaxQuant proteinGroups.txt file.
+**QC thresholds**:
+- Within-replicate correlation r < 0.85: flag as potential outlier
+- Missing per sample > 50%: flag sample for exclusion
+- PC1 explained variance < 15%: data may lack strong signal
 
-    Returns:
-    - DataFrame with proteins as rows, samples as columns
-    - Metadata (protein names, gene names, sequence coverage)
-    """
-    import pandas as pd
-
-    # Read file
-    df = pd.read_csv(protein_groups_file, sep='\t')
-
-    # Extract intensity columns (LFQ or raw)
-    intensity_cols = [col for col in df.columns if 'LFQ intensity' in col or 'Intensity ' in col]
-
-    # Create intensity matrix
-    intensity_matrix = df[intensity_cols].copy()
-    intensity_matrix.columns = [col.replace('LFQ intensity ', '').replace('Intensity ', '')
-                                 for col in intensity_cols]
-
-    # Add protein metadata
-    metadata = df[['Protein IDs', 'Gene names', 'Fasta headers',
-                   'Peptides', 'Sequence coverage [%]']].copy()
-
-    return intensity_matrix, metadata
-```
-
-**Quality Control**:
-
-1. **Missing value assessment**:
-```python
-def assess_missing_values(intensity_matrix):
-    """
-    Calculate percentage of missing values per protein and sample.
-    """
-    # Per protein
-    missing_per_protein = (intensity_matrix == 0).sum(axis=1) / intensity_matrix.shape[1]
-
-    # Per sample
-    missing_per_sample = (intensity_matrix == 0).sum(axis=0) / intensity_matrix.shape[0]
-
-    # Visualize
-    plot_missing_value_heatmap(intensity_matrix)
-
-    return missing_per_protein, missing_per_sample
-```
-
-2. **Intensity distribution**:
-```python
-def plot_intensity_distributions(intensity_matrix):
-    """
-    Plot log10 intensity distributions per sample.
-    Check for consistent distributions across samples.
-    """
-    import matplotlib.pyplot as plt
-    import numpy as np
-
-    log_intensities = np.log10(intensity_matrix.replace(0, np.nan))
-
-    # Boxplot per sample
-    log_intensities.plot(kind='box')
-    plt.ylabel('log10 Intensity')
-    plt.title('Intensity Distribution per Sample')
-
-    # Should see similar median and spread across samples
-```
-
-3. **Sample correlation**:
-```python
-def plot_sample_correlation(intensity_matrix):
-    """
-    Calculate and visualize sample-sample correlation.
-    Expect: High correlation within replicates, lower between conditions.
-    """
-    # Log-transform and remove zeros
-    log_data = np.log2(intensity_matrix.replace(0, np.nan))
-
-    # Correlation matrix
-    corr_matrix = log_data.corr(method='pearson')
-
-    # Heatmap
-    import seaborn as sns
-    sns.heatmap(corr_matrix, annot=True, cmap='RdYlBu_r', vmin=0.8, vmax=1.0)
-```
-
-4. **PCA**:
-```python
-def perform_pca(intensity_matrix, sample_groups):
-    """
-    Principal component analysis for sample clustering.
-    """
-    from sklearn.decomposition import PCA
-
-    # Prepare data (log, impute, scale)
-    log_data = np.log2(intensity_matrix.replace(0, np.nan))
-    # Simple imputation with minimum value
-    imputed = log_data.fillna(log_data.min().min())
-
-    # PCA
-    pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(imputed.T)
-
-    # Plot with group colors
-    plt.scatter(pca_result[:, 0], pca_result[:, 1], c=sample_groups)
-    plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
-    plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
-```
+---
 
 ### Phase 2: Preprocessing & Normalization
 
-**Objective**: Clean data and normalize across samples for fair comparison.
+**Objective**: Clean data and normalize for fair cross-sample comparison.
 
-**Filtering**:
-```python
-def filter_proteins(intensity_matrix, metadata, min_valid=3):
-    """
-    Filter out low-confidence proteins.
+**Filtering criteria** (apply before normalization):
+- Keep proteins with at least 2 unique peptides
+- Remove contaminants (IDs containing `CON__`) and reverse sequences (`REV__`)
+- Require detection in at least N samples per group (N >= minimum replicates per condition)
 
-    Criteria:
-    - At least 2 unique peptides (from metadata)
-    - At least min_valid samples with detected intensity
-    - Remove contaminants and reverse sequences
-    """
-    # Filter by peptide count
-    valid_proteins = metadata['Peptides'] >= 2
+**Imputation methods**:
 
-    # Filter by detection in samples
-    n_detected = (intensity_matrix > 0).sum(axis=1)
-    valid_detection = n_detected >= min_valid
+| Method | When to Use | How |
+|--------|-------------|-----|
+| **MinProb** | DDA, MNAR (missing = low abundance) | Random draw from left tail of intensity distribution; shift = 1.8 SD below minimum |
+| **KNN** | DIA, MAR (missing at random) | K-nearest neighbors on log-transformed matrix |
+| **QRILC** | Mixed patterns | Quantile regression imputation from left-censored distribution |
 
-    # Remove contaminants (from MaxQuant)
-    is_contaminant = metadata['Protein IDs'].str.contains('CON__', na=False)
-    is_reverse = metadata['Protein IDs'].str.contains('REV__', na=False)
+**Normalization methods**:
 
-    # Combined filter
-    keep = valid_proteins & valid_detection & ~is_contaminant & ~is_reverse
+| Method | When to Use |
+|--------|-------------|
+| **Median normalization** | Default for most datasets; divide by per-sample median |
+| **Quantile normalization** | When distributions are highly variable across samples |
+| **TMM** | When a few highly abundant proteins dominate intensity |
+| **VSN** | When variance scales with mean (common in label-free) |
 
-    return intensity_matrix[keep], metadata[keep]
-```
+Apply normalization AFTER log2 transformation.
 
-**Missing value imputation**:
-```python
-def impute_missing_values(intensity_matrix, method='MinProb'):
-    """
-    Impute missing protein intensities.
-
-    Methods:
-    - MinProb: Random from minimum observed + normal noise (for MNAR)
-    - KNN: K-nearest neighbors imputation
-    - QRILC: Quantile regression-based imputation
-    """
-    if method == 'MinProb':
-        # Assume missing = low abundance (MNAR assumption)
-        min_val = intensity_matrix[intensity_matrix > 0].min().min()
-        width = 0.3  # Standard deviation of noise
-        shift = 1.8  # Downshift from minimum
-
-        # Replace zeros with random low values
-        imputed = intensity_matrix.copy()
-        missing_mask = imputed == 0
-        n_missing = missing_mask.sum().sum()
-
-        random_vals = np.random.normal(
-            loc=min_val - shift,
-            scale=width,
-            size=n_missing
-        )
-        imputed.values[missing_mask.values] = random_vals
-
-        return imputed
-
-    elif method == 'KNN':
-        from sklearn.impute import KNNImputer
-        imputer = KNNImputer(n_neighbors=5)
-        imputed = pd.DataFrame(
-            imputer.fit_transform(intensity_matrix.replace(0, np.nan)),
-            index=intensity_matrix.index,
-            columns=intensity_matrix.columns
-        )
-        return imputed
-```
-
-**Normalization**:
-```python
-def normalize_intensities(intensity_matrix, method='median'):
-    """
-    Normalize protein intensities across samples.
-
-    Methods:
-    - median: Divide by median intensity per sample
-    - quantile: Quantile normalization (same distribution)
-    - TMM: Trimmed mean of M-values (from edgeR)
-    - VSN: Variance-stabilizing normalization
-    """
-    if method == 'median':
-        # Median normalization
-        medians = intensity_matrix.median(axis=0)
-        global_median = medians.median()
-        norm_factors = global_median / medians
-        normalized = intensity_matrix * norm_factors
-        return normalized
-
-    elif method == 'quantile':
-        # Quantile normalization
-        from sklearn.preprocessing import quantile_transform
-        normalized = pd.DataFrame(
-            quantile_transform(intensity_matrix, axis=1),
-            index=intensity_matrix.index,
-            columns=intensity_matrix.columns
-        )
-        return normalized
-```
+---
 
 ### Phase 3: Differential Expression Analysis
 
 **Objective**: Identify proteins with significant abundance changes between conditions.
 
-**Statistical testing with limma**:
-```python
-def differential_expression_limma(log2_intensities, group1_samples, group2_samples):
-    """
-    Perform differential expression using limma-like approach.
+**Statistical testing approach**:
+- For 2-group comparisons: Welch t-test or limma-style moderated t-test
+- For 3+ groups: one-way ANOVA followed by pairwise post-hoc tests
+- For matched samples: paired t-test
+- For MS-specific analysis: MSstats framework (handles technical replicates and runs)
 
-    Returns:
-    - log2 fold changes
-    - p-values
-    - adjusted p-values (BH)
-    """
-    from scipy import stats
+**Required outputs per protein**:
+- Mean log2 intensity in each group
+- log2 Fold Change (group2 - group1 in log space)
+- p-value (from statistical test)
+- Adjusted p-value (Benjamini-Hochberg FDR)
+- Significance classification
 
-    results = []
+**Default significance thresholds** (adjust based on user preference):
+- adj. p-value < 0.05 AND |log2FC| > 1.0
 
-    for protein in log2_intensities.index:
-        # Extract intensities for each group
-        group1 = log2_intensities.loc[protein, group1_samples]
-        group2 = log2_intensities.loc[protein, group2_samples]
+**Volcano plot description** for report:
+- X-axis: log2FC; Y-axis: -log10(p-value)
+- Red: significant up; blue: significant down; gray: not significant
+- Label top 10 hits by adjusted p-value
 
-        # Calculate statistics
-        mean1 = group1.mean()
-        mean2 = group2.mean()
-        log2fc = mean2 - mean1
-
-        # t-test
-        t_stat, p_value = stats.ttest_ind(group1, group2, equal_var=False)
-
-        results.append({
-            'protein': protein,
-            'log2FC': log2fc,
-            'mean_group1': mean1,
-            'mean_group2': mean2,
-            'p_value': p_value,
-            't_statistic': t_stat
-        })
-
-    results_df = pd.DataFrame(results)
-
-    # Multiple testing correction (Benjamini-Hochberg)
-    from statsmodels.stats.multitest import multipletests
-    results_df['adj_p_value'] = multipletests(results_df['p_value'], method='fdr_bh')[1]
-
-    # Classify significance
-    results_df['significant'] = (
-        (results_df['adj_p_value'] < 0.05) &
-        (np.abs(results_df['log2FC']) > 1.0)
-    )
-
-    return results_df
-```
-
-**Volcano plot**:
-```python
-def plot_volcano(de_results, title='Volcano Plot'):
-    """
-    Visualize differential expression results.
-    """
-    import matplotlib.pyplot as plt
-
-    plt.figure(figsize=(8, 6))
-
-    # Non-significant
-    non_sig = de_results[~de_results['significant']]
-    plt.scatter(non_sig['log2FC'], -np.log10(non_sig['p_value']),
-                c='gray', alpha=0.5, s=10)
-
-    # Significant
-    sig = de_results[de_results['significant']]
-    plt.scatter(sig['log2FC'], -np.log10(sig['p_value']),
-                c='red', alpha=0.7, s=20)
-
-    # Thresholds
-    plt.axhline(-np.log10(0.05), color='blue', linestyle='--', label='p=0.05')
-    plt.axvline(-1, color='blue', linestyle='--')
-    plt.axvline(1, color='blue', linestyle='--', label='|log2FC|=1')
-
-    plt.xlabel('log2 Fold Change')
-    plt.ylabel('-log10(p-value)')
-    plt.title(title)
-    plt.legend()
-```
+---
 
 ### Phase 4: PTM Analysis
 
-**Objective**: Analyze post-translational modifications (phosphorylation, acetylation, etc.)
+**Objective**: Analyze post-translational modification site-level changes.
+
+**Input files**:
+- MaxQuant: `Phospho (STY)Sites.txt` (phosphorylation), `modificationSpecificPeptides.txt` (others)
+- Spectronaut: PTM-enabled report with site-level quantities
+- DIA-NN: PTM localization with site annotation
 
 **Phosphoproteomics workflow**:
-```python
-def analyze_phosphosites(phospho_sites_file, intensity_matrix):
-    """
-    Analyze phosphorylation site changes.
 
-    Input: MaxQuant Phospho (STY)Sites.txt
-    Output: Differential phosphorylation per site
-    """
-    # Load phospho data
-    phospho = pd.read_csv(phospho_sites_file, sep='\t')
+1. **Load phospho file** - Extract site intensity columns
+2. **Filter by localization probability** - Keep sites with probability > 0.75 (use 0.9 for high-confidence analyses)
+3. **Construct site IDs** - Format: `GENE_S123` (gene name + amino acid + position)
+4. **Normalize and impute** - Same methods as protein-level, but applied to phosphosites
+5. **Differential phosphorylation** - Same statistical approach as Phase 3
+6. **Kinase prediction** - Query OmniPath for upstream kinases of significant phosphosites
 
-    # Filter by localization probability
-    phospho_confident = phospho[phospho['Localization prob'] > 0.75]
+**Kinase-substrate query via OmniPath** (`OmniPath_get_enzyme_substrate`):
+- Pass phosphosite gene as `substrates` parameter
+- Returns kinase -> substrate edges with residue positions and modification types
+- Cross-reference your significant sites against the returned substrate positions
 
-    # Extract site information
-    phospho_confident['site'] = (
-        phospho_confident['Gene names'] + '_' +
-        phospho_confident['Amino acid'] +
-        phospho_confident['Position'].astype(str)
-    )
+**PTM types supported by EBI Proteins** (`EBIProteins_get_proteomics_ptm`):
+- Phosphorylation, acetylation, ubiquitination, methylation, sumoylation
+- Returns: position, modification type, evidence source (PeptideAtlas, ProteomicsDB, MaxQB)
 
-    # Quantification (similar to protein-level analysis)
-    # ... perform differential analysis ...
+**Common PTM-specific considerations**:
+- Phosphoproteomics: normalize by total protein abundance (phospho-peptide intensity / protein intensity) when possible
+- Ubiquitinomics: enriched via K-GG (diglycine) remnant antibody; filter for K residues only
+- Acetylomics: check for crosstalk with histone modifications in histone-enriched samples
 
-    return phospho_results
-```
-
-**Kinase-substrate prediction**:
-```python
-def predict_kinases(phospho_sites):
-    """
-    Predict upstream kinases for phosphorylation sites.
-
-    Uses ToolUniverse PhosphoSitePlus or KEA3 tools.
-    """
-    from tooluniverse import ToolUniverse
-    tu = ToolUniverse()
-
-    # For each significant phosphosite
-    kinase_predictions = []
-    for site in phospho_sites:
-        # Query kinase-substrate databases
-        # (would use actual ToolUniverse tool here)
-        result = tu.run_one_function({
-            "name": "phosphosite_plus_query",  # hypothetical
-            "arguments": {"site": site}
-        })
-        kinase_predictions.append(result)
-
-    return kinase_predictions
-```
+---
 
 ### Phase 5: Functional Enrichment
 
 **Objective**: Interpret biological meaning of protein changes via pathway analysis.
 
-**Gene Ontology enrichment**:
-```python
-def pathway_enrichment_proteins(de_proteins, organism='human'):
-    """
-    Perform pathway enrichment for differentially expressed proteins.
+**Step-by-step approach**:
 
-    Uses ToolUniverse gene-enrichment skill.
-    """
-    from tooluniverse import ToolUniverse
-    tu = ToolUniverse()
+1. **Extract gene names** from significant DE proteins (use gene symbol, not protein accession)
+2. **Run Enrichr** via `enrichr_gene_enrichment_analysis`:
+   - Pass `gene_list` as list of gene symbols
+   - Use `libs`: `["GO_Biological_Process_2023", "KEGG_2021_Human", "Reactome_Pathways_2024", "MSigDB_Hallmark_2020"]`
+3. **Cross-validate with Reactome** via `Reactome_map_uniprot_to_pathways` for top proteins
+4. **Run STRING functional enrichment** via `STRING_functional_enrichment`:
+   - Pass `protein_ids` as gene symbol list
+   - Try categories: `"Process"`, `"KEGG"`, `"Reactome"` separately
+5. **Protein complex enrichment** - Test via `STRING_ppi_enrichment` to check if significant proteins form a network
 
-    # Extract gene names for significant proteins
-    sig_proteins = de_proteins[de_proteins['significant']]
-    gene_list = sig_proteins['gene_name'].tolist()
+Report top 10 terms per database; separate upregulated and downregulated protein enrichments.
 
-    # Run enrichment via ToolUniverse
-    enrichment = tu.run_one_function({
-        "name": "enrichr_enrich",
-        "arguments": {
-            "gene_list": ",".join(gene_list),
-            "library": "KEGG_2021_Human"
-        }
-    })
-
-    return enrichment
-```
-
-**Protein complex enrichment**:
-```python
-def protein_complex_enrichment(protein_list):
-    """
-    Test for enrichment of known protein complexes (CORUM database).
-    """
-    # Query CORUM or use ToolUniverse
-    # Identify if proteins are part of known complexes
-    pass
-```
+---
 
 ### Phase 6: Protein-Protein Interactions
 
-**Objective**: Identify interaction networks and protein complexes.
+**Objective**: Build interaction networks and identify functional modules.
 
-**STRING network analysis**:
-```python
-def build_protein_network(protein_list, confidence=0.7):
-    """
-    Build PPI network using STRING database.
+**Workflow**:
+1. `STRING_get_network` — pass `identifiers` as **newline-separated** gene symbols; `required_score`: 400 (medium), 700 (high), 900 (highest)
+2. `STRING_ppi_enrichment` — test if proteins form a denser network than random (p < 0.05 confirms real functional module)
+3. Identify hub proteins by node degree
+4. `STRING_functional_enrichment` per detected cluster to annotate modules
+5. `intact_get_interactions` — validate key edges with curated experimental data (higher specificity than STRING)
 
-    Uses ToolUniverse STRING tools.
-    """
-    from tooluniverse import ToolUniverse
-    tu = ToolUniverse()
-
-    # Get interactions
-    interactions = tu.run_one_function({
-        "name": "string_get_interactions",
-        "arguments": {
-            "proteins": ",".join(protein_list),
-            "species": 9606,  # human
-            "score_threshold": int(confidence * 1000)
-        }
-    })
-
-    # Build network graph
-    import networkx as nx
-    G = nx.Graph()
-
-    for interaction in interactions['data']:
-        G.add_edge(
-            interaction['protein1'],
-            interaction['protein2'],
-            score=interaction['score']
-        )
-
-    return G
-```
-
-**Module detection**:
-```python
-def detect_protein_modules(network_graph):
-    """
-    Identify tightly connected protein modules (complexes).
-    """
-    from networkx.algorithms import community
-
-    # Detect communities
-    communities = community.greedy_modularity_communities(network_graph)
-
-    # Annotate modules with enriched functions
-    modules = []
-    for i, comm in enumerate(communities):
-        module_proteins = list(comm)
-        # Run enrichment for this module
-        enrichment = pathway_enrichment_proteins(module_proteins)
-        modules.append({
-            'module_id': i,
-            'proteins': module_proteins,
-            'size': len(module_proteins),
-            'top_function': enrichment['top_terms'][0]
-        })
-
-    return modules
-```
+---
 
 ### Phase 7: Multi-Omics Integration
 
-**Objective**: Integrate proteomics with transcriptomics and other omics.
+**Objective**: Integrate proteomics with RNA-seq to dissect transcriptional vs post-transcriptional regulation.
 
-**Protein-RNA correlation**:
-```python
-def correlate_protein_rna(protein_data, rna_data, common_samples):
-    """
-    Correlate protein and mRNA levels for each gene.
+**Protein-RNA correlation workflow**:
+1. Match samples present in both datasets; align by gene symbol
+2. Spearman correlation per gene across matched samples
+3. Expected global correlation: r ~ 0.4–0.6 (moderate)
 
-    Expected: r ~ 0.4-0.6 (moderate correlation)
-    Discordance indicates post-transcriptional regulation
-    """
-    from scipy.stats import spearmanr
+**Regulatory classification**:
 
-    # Find common genes
-    common_genes = set(protein_data.index) & set(rna_data.index)
+| Pattern | Interpretation |
+|---------|----------------|
+| r > 0.6, both up/down | Transcriptional regulation |
+| r < 0.2, protein up / RNA down | Translational upregulation or protein stabilization |
+| r < 0.2, protein down / RNA up | Protein degradation or translational repression |
+| r > 0.6, protein changes / RNA unchanged | Likely batch effect — investigate |
 
-    correlations = {}
-    for gene in common_genes:
-        protein = protein_data.loc[gene, common_samples]
-        rna = rna_data.loc[gene, common_samples]
+Report top 20 discordant genes as post-transcriptional regulation candidates.
+Use `tooluniverse-multi-omics-integration` for MOFA or factor-level integration.
 
-        r, p = spearmanr(protein, rna)
-        correlations[gene] = {
-            'r': r,
-            'p': p,
-            'regulation': classify_regulation(r, protein.mean(), rna.mean())
-        }
-
-    return correlations
-
-def classify_regulation(r, protein_level, rna_level):
-    """
-    Classify regulatory mechanism based on correlation and levels.
-    """
-    if r > 0.6 and protein_level > 0 and rna_level > 0:
-        return 'transcriptional_upregulation'
-    elif r > 0.6 and protein_level < 0 and rna_level < 0:
-        return 'transcriptional_downregulation'
-    elif r < 0.2 and protein_level > 0 and rna_level < 0:
-        return 'translational_upregulation'
-    elif r < 0.2 and protein_level < 0 and rna_level > 0:
-        return 'protein_degradation'
-    else:
-        return 'mixed_regulation'
-```
-
-**Integration with multi-omics skill**:
-```python
-def integrate_with_multiomics(protein_data, rna_data, methylation_data):
-    """
-    Pass proteomics data to multi-omics integration skill.
-
-    Enables comprehensive analysis across all molecular layers.
-    """
-    # Prepare for multi-omics skill
-    omics_data = {
-        'proteomics': protein_data,
-        'rnaseq': rna_data,
-        'methylation': methylation_data
-    }
-
-    # Invoke multi-omics integration skill
-    from tooluniverse import ToolUniverse
-    # (Would use Skill tool to invoke tooluniverse-multi-omics-integration)
-
-    return integrated_analysis
-```
+---
 
 ### Phase 8: Report Generation
 
-**Generate comprehensive proteomics report**:
+**Report file**: `[project_name]_proteomics_report.md`
 
-```markdown
-# Proteomics Analysis Report
+Create this file FIRST with placeholder sections, then fill progressively.
 
-## Dataset Summary
-- **Samples**: 20 (10 disease, 10 control)
-- **Proteins Identified**: 5,432
-- **Proteins Quantified**: 4,987 (at least 3 samples)
-- **Platform**: Orbitrap Fusion Lumos, MaxQuant 2.0
+**Required sections** (initialize all with `[Researching...]`, then fill progressively):
 
-## Quality Control
-- **Missing Values**: 15% average per protein
-- **Sample Correlation**: 0.92-0.98 within groups
-- **PCA**: Clear separation between disease and control (PC1: 35% variance)
+1. **Dataset Summary** — platform, software version, sample counts, proteins identified and quantified, missing value rate
+2. **Quality Control** — within-group correlation range, PCA variance explained, outlier samples flagged
+3. **Differential Expression** — total significant (adj. p < 0.05, |log2FC| > 1), up/down counts, top 10 up and top 10 down with statistics
+4. **PTM Summary** (if applicable) — phosphosites quantified, differentially phosphorylated sites, top predicted kinases
+5. **Pathway Enrichment** — top 5 pathways (up and down separately), source databases
+6. **Protein Network** — node/edge counts, confidence threshold, PPI enrichment p-value, functional modules
+7. **Protein-RNA Integration** (if applicable) — global correlation, transcriptionally vs post-transcriptionally regulated counts
+8. **Biomarker Candidates** — top proteins ranked by effect size and significance
+9. **Biological Interpretation** — 1-3 paragraph narrative
 
-## Differential Expression
-- **Significant Proteins**: 432 (adj. p < 0.05, |log2FC| > 1)
-  - Upregulated: 245 proteins
-  - Downregulated: 187 proteins
-- **Top upregulated**: MYC (log2FC=3.2), EGFR (log2FC=2.8)
-- **Top downregulated**: TP53 (log2FC=-2.5), BRCA1 (log2FC=-2.1)
+---
 
-## Phosphoproteomics
-- **Phosphosites Quantified**: 8,543
-- **Differentially Phosphorylated**: 234 sites (p < 0.05)
-- **Top Predicted Kinases**: CDK1, MAPK1, AKT1
+## Known Gotchas
 
-## Pathway Enrichment
-### Top Pathways (Upregulated)
-1. **Cell Cycle** (p=1e-15) - 45 proteins, including cyclins, CDKs
-2. **DNA Replication** (p=1e-12) - 23 proteins
-3. **Glycolysis** (p=1e-10) - 18 proteins
+**Data loading**:
+- MaxQuant LFQ columns are named `LFQ intensity [sample]` — extract these, NOT `Intensity [sample]` (unnormalized)
+- MaxQuant proteinGroups.txt has multi-gene rows (semicolon-separated); take the first gene name for enrichment
+- DIA-NN `report.tsv` is peptide-level; use `report.pr_matrix.tsv` for protein-level analysis
+- Spectronaut reports vary by version; look for `PG.Quantity` or `PG.NrOfStrippedSequencesMeasured` columns
 
-### Top Pathways (Downregulated)
-1. **Apoptosis** (p=1e-14) - 32 proteins, including caspases
-2. **DNA Repair** (p=1e-11) - 28 proteins
-3. **Oxidative Phosphorylation** (p=1e-9) - 25 proteins
+**Missing value imputation**:
+- Do NOT impute before filtering — apply protein/sample filters first, then impute
+- MinProb requires log-transformed data as input; impute AFTER log2 transformation
+- Never impute more than 40% of values per protein — results become unreliable
 
-## Protein Network Analysis
-- **Network**: 432 nodes, 1,245 edges (STRING confidence > 0.7)
-- **Modules Detected**: 8 functional modules
-  - Module 1: Cell cycle (85 proteins)
-  - Module 2: Metabolism (62 proteins)
-  - Module 3: Translation (48 proteins)
+**Statistical testing**:
+- For very small sample sizes (n < 3 per group), report effect sizes with caution; flag results
+- limma borrows strength across proteins (empirical Bayes); better than plain t-test for n < 10
+- Do not use raw p-values for cutoffs — always use BH-adjusted p-values
 
-## Protein-RNA Correlation
-- **Overall Correlation**: r = 0.54 (moderate, expected)
-- **High Correlation**: 2,134 genes (r > 0.6) - transcriptional regulation
-- **Low Correlation**: 456 genes (r < 0.2) - post-transcriptional regulation
-- **Translation-Regulated**: 89 proteins (high protein, low RNA)
+**PTM-specific**:
+- Phospho (STY)Sites.txt from MaxQuant has multiplicity (e.g., a peptide with 2 phospho groups = 2 rows); aggregate by site position
+- "Class I" phosphosites = localization probability > 0.75 — required for reliable site-level analysis
+- Check for co-eluting phospho isoforms when localization probabilities are ambiguous
 
-## Biological Interpretation
-Disease state shows increased proliferation (MYC, cyclins) with concurrent
-suppression of apoptosis and DNA repair (TP53, BRCA1). Metabolic shift toward
-glycolysis evident at protein level. Post-transcriptional upregulation of
-translation machinery suggests adaptation to proliferative demands.
+**STRING tool calls**:
+- `STRING_get_network` `identifiers` must be newline-separated (`"\n".join(genes)`) not comma-separated
+- `STRING_functional_enrichment` `category` is one value at a time — run separately for GO, KEGG, Reactome
+- STRING scores are 0-1000 internally; `required_score=700` = high confidence
 
-## Potential Biomarkers
-Top 10 proteins for disease classification (Random Forest AUC=0.95):
-1. MYC (protein)
-2. EGFR (protein)
-3. CDK1 (phospho-T161)
-4. TP53 (protein)
-5. BRCA1 (protein)
-```
+**Enrichment analysis**:
+- Use gene symbols (not accessions) for Enrichr; convert with MyGene if needed
+- Background gene list matters — use all quantified proteins as background, not genome-wide
+- Separate enrichment runs for upregulated and downregulated proteins
+
+**Protein-RNA integration**:
+- Match samples by name carefully — proteomics and RNA-seq often have different naming conventions
+- Protein-RNA correlation is often sample-count-limited; report confidence intervals
+- Global correlation r < 0.3 may indicate sample swap or data quality issues — investigate before reporting
 
 ---
 
 ## Integration with ToolUniverse
 
-**Skills Coordinated**:
-| Skill | Used For | Phase |
-|-------|----------|-------|
-| `tooluniverse-gene-enrichment` | Pathway enrichment | Phase 5 |
-| `tooluniverse-protein-interactions` | PPI networks | Phase 6 |
-| `tooluniverse-rnaseq-deseq2` | RNA-seq for integration | Phase 7 |
-| `tooluniverse-multi-omics-integration` | Cross-omics analysis | Phase 7 |
-| `tooluniverse-target-research` | Protein annotation | Phase 8 |
+| Skill / Tool | Used For | Phase |
+|--------|----------|-------|
+| `enrichr_gene_enrichment_analysis` | GO, KEGG, Reactome enrichment | Phase 5 |
+| `STRING_functional_enrichment` | Network-aware pathway enrichment | Phase 5, 6 |
+| `STRING_get_network` | PPI network construction | Phase 6 |
+| `STRING_ppi_enrichment` | Test if proteins form real network | Phase 6 |
+| `OmniPath_get_enzyme_substrate` | Kinase-substrate prediction for phosphosites | Phase 4 |
+| `EBIProteins_get_proteomics_ptm` | PTM evidence from databases | Phase 4 |
+| `EBIProteins_get_proteomics_peptides` | Peptide-level MS evidence | Phase 1 |
+| `intact_get_interactions` | Curated PPI validation | Phase 6 |
+| `Reactome_map_uniprot_to_pathways` | Single-protein pathway mapping | Phase 5 |
+| `tooluniverse-gene-enrichment` | In-depth enrichment analysis | Phase 5 |
+| `tooluniverse-rnaseq-deseq2` | RNA-seq data for integration | Phase 7 |
+| `tooluniverse-multi-omics-integration` | Cross-omics factor analysis | Phase 7 |
+
+For full parameter tables, see [references/tools.md](references/tools.md).
 
 ---
 
 ## Example Use Cases
 
-### Use Case 1: Cancer Proteomics
+### Use Case 1: Cancer Proteomics (DDA, MaxQuant)
 
-**Question**: "Analyze proteomics data from breast cancer vs normal tissue"
+**Question**: "Analyze MaxQuant LFQ data from breast cancer vs normal tissue (n=10 each)"
 
-**Workflow**:
-1. Load MaxQuant proteinGroups.txt
-2. QC and filter (keep proteins with 2+ peptides, detected in 3+ samples)
-3. Impute missing, normalize by median
-4. Differential expression (limma): 432 significant proteins
-5. Pathway enrichment: Cell cycle, metabolism upregulated
-6. STRING network: Identify hub proteins (MYC, EGFR)
-7. Integrate with TCGA RNA-seq: Find translation-regulated genes
-8. Report: Comprehensive analysis with biomarkers
+**Workflow summary**:
+1. Load `proteinGroups.txt`, extract LFQ intensity columns
+2. Remove contaminants (CON__) and reverse (REV__); keep 2+ peptide proteins
+3. Replace zeros with NaN, log2 transform, MinProb impute, median normalize
+4. Welch t-test + BH correction; volcano plot
+5. `enrichr_gene_enrichment_analysis` on up/down gene lists separately
+6. `STRING_get_network` at score 700; `STRING_ppi_enrichment` to confirm module
+7. Report: ~4,500 proteins quantified, ~400 significant, cell cycle and metabolic pathways enriched
 
-### Use Case 2: Phosphoproteomics Signaling
+### Use Case 2: Phosphoproteomics Signaling (after kinase inhibitor treatment)
 
 **Question**: "What kinase signaling is activated in response to drug treatment?"
 
-**Workflow**:
-1. Load Phospho (STY)Sites.txt from MaxQuant
-2. Filter by localization probability > 0.75
-3. Differential phosphorylation analysis
-4. Kinase prediction for significant sites
-5. Identify MAPK1, CDK1, AKT1 as top kinases
-6. Pathway enrichment: MAPK, PI3K/AKT pathways
-7. Report: Drug activates growth signaling
+**Workflow summary**:
+1. Load `Phospho (STY)Sites.txt`; filter localization probability > 0.75
+2. Construct site IDs (GENE_S123 format); log2 transform, impute, normalize
+3. t-test per phosphosite + BH correction; identify significant sites
+4. For each significant site's gene, call `OmniPath_get_enzyme_substrate` with gene as `substrates`
+5. Count which kinases appear most frequently as upstream regulators
+6. `enrichr_gene_enrichment_analysis` on significant phosphosite gene list
+7. Report: top kinases predicted (e.g., CDK1, MAPK1, AKT1), signaling pathway activation
 
-### Use Case 3: Protein-RNA Integration
+### Use Case 3: DIA Proteomics with Protein-RNA Correlation
 
 **Question**: "Which proteins are regulated post-transcriptionally?"
 
-**Workflow**:
-1. Load proteomics (MaxQuant) and RNA-seq (DESeq2) data
-2. Match samples, extract common genes
-3. Correlate protein and RNA for each gene
-4. Identify low-correlation genes (r < 0.2)
-5. Classify: translation upregulation, protein degradation
-6. Enrichment: Find pathways enriched in post-transcriptional regulation
-7. Report: 89 translation-regulated proteins, RNA-binding proteins enriched
+**Workflow summary**:
+1. Load DIA-NN `report.pr_matrix.tsv`; minimal missing values expected
+2. KNN impute, quantile normalize, log2 transform
+3. Differential expression (t-test + BH)
+4. Load matched RNA-seq results (normalized counts or log-TPM)
+5. Spearman correlation per gene across matched samples
+6. Classify genes: r < 0.2 with discordant direction = post-transcriptional regulation
+7. `enrichr_gene_enrichment_analysis` on post-transcriptional gene list
+8. Report: ~90 translation-regulated proteins enriched for RNA-binding protein substrates
 
 ---
 
@@ -810,23 +459,24 @@ Top 10 proteins for disease classification (Random Forest AUC=0.95):
 
 | Component | Requirement |
 |-----------|-------------|
-| Proteins quantified | At least 500 proteins |
-| Replicates | At least 3 per condition |
-| Filtering | 2+ unique peptides per protein |
-| Statistical test | limma or t-test with multiple testing correction |
-| Pathway enrichment | At least one method (GO, KEGG, or Reactome) |
-| Report | Summary, QC, DE results, pathways, visualizations |
+| Proteins quantified | At least 500 for meaningful differential analysis |
+| Replicates | At least 3 per condition (limma requires minimum 2) |
+| Filtering | 2+ unique peptides per protein; remove CON__/REV__ |
+| Statistical test | t-test or limma with BH multiple testing correction |
+| Pathway enrichment | At least one method (GO-BP, KEGG, or Reactome) |
+| Report sections | Dataset summary, QC, DE results, pathways, interpretation |
 
 ---
 
 ## Limitations
 
-- **Platform-specific**: Optimized for MS-based proteomics (not Western blot quantification)
-- **Missing values**: High missing rate (>50% per protein) limits statistical power
-- **PTM analysis**: Requires enrichment protocols for comprehensive PTM profiling
-- **Absolute quantification**: Relative abundance only (unless TMT/SILAC used)
-- **Protein isoforms**: Typically collapsed to gene level
-- **Dynamic range**: MS has limited dynamic range vs mRNA sequencing
+- **Platform-specific**: Optimized for MS-based proteomics (not Western blot or ELISA quantification)
+- **Missing values**: High missing rate (>50% per protein) limits statistical power in DDA experiments
+- **PTM coverage**: Requires enrichment protocols for comprehensive phospho/ubiquitin/acetyl profiling
+- **Absolute quantification**: Provides relative abundance only (unless TMT, SILAC, or iBAQ used)
+- **Protein isoforms**: Typically collapsed to gene level; isoform-resolved analysis requires different tools
+- **Dynamic range**: MS has limited dynamic range (~4 orders of magnitude vs 6+ for transcriptomics)
+- **Protein-RNA correlation**: Requires matched samples and well-normalized data from both assays
 
 ---
 
@@ -836,8 +486,10 @@ Top 10 proteins for disease classification (Random Forest AUC=0.95):
 - MaxQuant: https://doi.org/10.1038/nbt.1511
 - Limma for proteomics: https://doi.org/10.1093/nar/gkv007
 - DEP workflow: https://doi.org/10.1038/nprot.2018.107
+- MSstats: https://doi.org/10.1021/pr400880y
 
 **Databases**:
 - STRING: https://string-db.org
 - PhosphoSitePlus: https://www.phosphosite.org
-- CORUM: https://mips.helmholtz-muenchen.de/corum
+- OmniPath (PTMs): https://omnipathdb.org
+- CORUM (protein complexes): https://mips.helmholtz-muenchen.de/corum

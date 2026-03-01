@@ -1,256 +1,127 @@
 ---
 name: tooluniverse-[domain-name]
-description: [Complete description of what the skill does, which databases it uses, and when to use it. Include specific trigger phrases like "analyze [domain]", "find [data type]", etc. This description is the primary way Claude determines when to use your skill.]
+description: [What this skill does and which databases/tools it uses. Include specific trigger phrases like "analyze [domain]", "find [data type] for [entity]", "research [topic]". Mention the key databases (e.g., GWAS Catalog, PubMed, ChEMBL). This description determines when the skill triggers — be comprehensive about use cases.]
 ---
 
-# [Domain Name] Analysis
+# [Domain Name]
 
-[One paragraph overview describing what this skill does, what problems it solves, and what outputs it provides.]
+[One paragraph: what the skill does, what inputs it accepts, what outputs it produces.]
 
-## When to Use This Skill
+**KEY PRINCIPLES**:
+1. **[Disambiguation first]** — resolve IDs/identifiers before running analyses
+2. **[English-first queries]** — always use English terms in tool calls
+3. **[Report-first output]** — create report file first, populate progressively
+4. **[Negative results documented]** — missing data is a result, not a failure
 
-**Triggers**:
-- "[Trigger phrase 1]"
-- "[Trigger phrase 2]"
-- "[Trigger phrase 3]"
+---
 
-**Use Cases**:
-1. **[Use Case 1]**: [Description]
-2. **[Use Case 2]**: [Description]
-3. **[Use Case 3]**: [Description]
-
-## Core Databases Integrated
-
-| Database | Coverage | Strengths |
-|----------|----------|-----------|
-| **Database 1** | [What it covers] | [What it's best for] |
-| **Database 2** | [What it covers] | [What it's best for] |
-| **Database 3** | [What it covers] | [What it's best for] |
-
-## Workflow Overview
+## Workflow
 
 ```
-Input → Phase 1: [Name] → Phase 2: [Name] → Phase 3: [Name] → Report
+Phase 0: Clarify (if needed)
+Phase 1: [Disambiguation / ID resolution]
+Phase 2: [Core data retrieval — silent]
+Phase 3: [Analysis / enrichment]
+Phase 4: Report
 ```
 
 ---
 
-## Phase 1: [Phase Name]
+## Phase 0: Clarify Only When Needed
 
-**When**: [When this phase runs - e.g., "When input_param_1 provided"]
+Ask the user ONLY if:
+- [Ambiguous entity: could be X or Y]
+- [Missing required context: organism, condition, etc.]
 
-**Objective**: [What this phase achieves]
-
-### Tools Used
-
-**TOOL_NAME_1**:
-- **Input**:
-  - `parameter1` (type, required/optional): Description
-  - `parameter2` (type, required/optional): Description
-- **Output**: Description of what the tool returns
-- **Use**: What this tool provides for the analysis
-
-**TOOL_NAME_2** (Fallback):
-- **Input**: [Parameters]
-- **Output**: [Description]
-- **Use**: [Purpose]
-
-### Workflow
-
-1. Query TOOL_NAME_1 with [input description]
-2. Extract [specific data fields] from response
-3. If no results → try TOOL_NAME_2 (fallback)
-4. Process data and add to report
-5. Continue with available data
-
-### Decision Logic
-
-- **Successful query**: Process and display top 10-15 results
-- **Empty results**: Note "[Database] returned no results"
-- **API error**: Fall back to TOOL_NAME_2
-- **Both fail**: Document unavailability and continue
+Skip for: [specific enough input types that don't need clarification].
 
 ---
 
-## Phase 2: [Phase Name]
+## Phase 1: [Disambiguation]
 
-**When**: [Conditions]
+Resolve [entity type] before searching. Use:
+- `[TOOL_NAME]([param]=<input>)` — [what it returns]
+- Fallback: `[TOOL_NAME_2]([param]=<input>)` — [what it returns]
 
-**Objective**: [Goal]
-
-### Tools Used
-
-[Similar structure to Phase 1]
-
-### Workflow
-
-[Step-by-step process]
-
-### Decision Logic
-
-[How to handle different scenarios]
+Record: [ID1], [ID2], [aliases/synonyms].
 
 ---
 
-## Phase 3: [Phase Name]
+## Phase 2: [Core Data Retrieval — Silent]
 
-[Similar structure]
+Do not narrate. Retrieve in parallel where possible:
 
----
-
-## Phase 4: [Summary/Context Phase]
-
-**When**: Always included
-
-**Objective**: Provide context even when specific phases empty
-
-[Structure similar to above phases]
-
----
-
-## Output Structure
-
-### Report Format
-
-**Progressive Markdown Report**:
-- Create report file first
-- Add sections progressively
-- Each section self-contained
-- Handles empty data gracefully
-
-**Required Sections**:
-1. **Header**: Analysis parameters and metadata
-2. **Phase 1 Results**: [Description]
-3. **Phase 2 Results**: [Description]
-4. **Phase 3 Results**: [Description]
-5. **Phase 4 Results**: [Description]
-
-**Per-Database Subsections**:
-- Database name and result count
-- Table of results with key metadata
-- Note if database returns no results
-- Links or IDs for follow-up
-
-### Data Tables
-
-**Phase 1 Results**:
-| Column 1 | Column 2 | Column 3 |
-| ... | ... | ... |
-
-**Phase 2 Results**:
-| Column 1 | Column 2 | Column 3 |
-| ... | ... | ... |
-
----
-
-## Tool Parameter Reference
-
-**Critical Parameter Notes** (from testing):
-
-| Tool | Parameter | CORRECT Name | Common Mistake |
-|------|-----------|--------------|----------------|
-| TOOL_NAME_1 | `param` | ✅ `actual_param_name` | ❌ `assumed_param_name` |
-| TOOL_NAME_2 | `param` | ✅ `correct_name` | ❌ `function_name_param` |
-
-**Response Format Notes**:
-- **TOOL_NAME_1**: Returns standard `{status: "success", data: [...]}` format
-- **TOOL_NAME_2**: Returns list directly (not wrapped in status/data)
-- **TOOL_NAME_3**: Returns dict with custom structure `{field1: ..., field2: ...}`
-
-**SOAP Tools** (if applicable):
-- **TOOL_NAME_4**: Requires `operation` parameter (e.g., `operation="method_name"`)
-- See QUICK_START.md for side-by-side Python/MCP examples
-
----
-
-## Fallback Strategies
-
-### Phase 1: [Phase Name]
-- **Primary**: TOOL_NAME_1 ([reason it's primary])
-- **Fallback**: TOOL_NAME_2 ([what it provides instead])
-- **Default**: Continue with noting data unavailable
-
-### Phase 2: [Phase Name]
-- **Primary**: TOOL_NAME_3
-- **Fallback**: [Alternative approach]
-- **Default**: [How to proceed]
-
----
-
-## Common Use Patterns
-
-### Pattern 1: [Use Case Name]
+**[Data source 1]:**
 ```
-Input: [Description of typical input]
-Workflow: Phase 1 → Phase 3 → Report
-Output: [What user gets]
+[TOOL_1](param=<value>, size=N)
+[TOOL_2](param=<value>)   # enrich top N results
 ```
 
-### Pattern 2: [Use Case Name]
+**[Data source 2]:**
 ```
-Input: [Description]
-Workflow: [Which phases run]
-Output: [Result type]
+[TOOL_3](param=<value>, limit=N)
 ```
 
-### Pattern 3: [Comprehensive Analysis]
-```
-Input: [Multiple inputs]
-Workflow: All phases
-Output: [Complete analysis]
-```
+**Fallback chain**: [Primary] → [Fallback] → document "No data available"
 
 ---
 
-## Quality Checks
+## Phase 3: [Analysis / Enrichment]
 
-### Data Completeness
-- [ ] At least one phase completed successfully
-- [ ] Each database result includes source attribution
-- [ ] Empty results explicitly noted (not silently omitted)
-- [ ] All required fields documented in tables
-- [ ] IDs provided for follow-up analysis
+For top [N] results from Phase 2:
+- [What to look up and why]
+- [Evidence grading: High/Medium/Low based on X]
 
-### Biological/Scientific Validity
-- [ ] Results consistent with known [domain] knowledge
-- [ ] Cross-database results show expected overlaps
-- [ ] Anomalies flagged for review
-- [ ] Data quality indicators included
-
-### Report Quality
-- [ ] All sections present even if "no data"
-- [ ] Tables formatted consistently
-- [ ] Source databases clearly attributed
-- [ ] Follow-up recommendations if data sparse
+**Evidence levels:**
+- **High**: [criteria]
+- **Medium**: [criteria]
+- **Low**: [criteria]
 
 ---
 
-## Limitations & Known Issues
+## Phase 4: Report
 
-### Database-Specific
-- **Database 1**: [Known limitations, coverage gaps, update frequency]
-- **Database 2**: [Limitations]
-- **Database 3**: [Limitations]
+Create `[entity]_[domain]_report.md`. Structure:
 
-### Technical
-- **Response formats**: Different tools use different structures (handled in implementation)
-- **Rate limits**: [Any rate limiting concerns]
-- **Version differences**: [Database version considerations]
+```markdown
+# [Domain] Report: [Entity]
 
-### Analysis
-- **[Domain]-specific limitation 1**: [Description]
-- **[Domain]-specific limitation 2**: [Description]
+**[Identifier]**: [value] | **Total [data]**: [N] | **[Threshold]**: [value]
 
 ---
 
-## Summary
+## [Section 1 Title]
 
-**[Domain] Analysis Skill** provides:
-1. ✅ [Capability 1 with database]
-2. ✅ [Capability 2 with databases]
-3. ✅ [Capability 3 with databases]
-4. ✅ [Capability 4]
+| [Field] | [Field] | [Field] | [Confidence] |
+|---------|---------|---------|--------------|
+| [value] | [value] | [value] | High |
 
-**Outputs**: Markdown report with [description of content]
+---
 
-**Best for**: [Primary use cases and target users]
+## [Section 2 Title]
+
+[...]
+```
+
+Always include:
+- What was searched and which IDs were used
+- Any disambiguation issues (e.g., namespace mismatches)
+- "No data found" if a source returned nothing
+
+---
+
+## Known Gotchas
+
+- **[Tool name issue]**: [e.g., "Tool X uses `query` not `name` as parameter"]
+- **[API behavior]**: [e.g., "Returns empty list, not error, when no results found"]
+- **[Data format]**: [e.g., "p_value=0.0 means floating-point underflow — treat as significant"]
+
+---
+
+## Tool Reference
+
+| Tool | Use Case |
+|------|----------|
+| `[TOOL_1]` | [Purpose] |
+| `[TOOL_2]` | [Purpose] |
+| `[TOOL_3]` | [Purpose — fallback for TOOL_1] |

@@ -47,7 +47,9 @@ Apply when user asks:
 
 ### 2. Citation Requirements (MANDATORY)
 
-```markdown
+Every data point must cite the source tool and identifier. Example:
+
+```
 ### Target: RNA-dependent RNA polymerase (RdRp)
 - **UniProt**: P0DTD1 (NSP12)
 - **Essentiality**: Required for replication
@@ -68,7 +70,8 @@ Apply when user asks:
 | `NCBI_Taxonomy_search` | `name` | `query` |
 | `UniProt_search` | `name` | `query` |
 | `ChEMBL_search_targets` | `target` | `query` |
-| `NvidiaNIM_diffdock` | `protein_file` | `protein` (content) |
+| `NvidiaNIM_diffdock` | `protein_file` | `protein` (content, not path) |
+| `NvidiaNIM_alphafold2` | `seq` | `sequence` |
 
 ---
 
@@ -99,15 +102,15 @@ Phase 4: Drug Repurposing Screen
 ├── Docking screen (NvidiaNIM_diffdock)
 └── OUTPUT: Candidate drugs
     ↓
-Phase 4.5: Pathway Analysis (NEW)
+Phase 4.5: Pathway Analysis
 ├── KEGG: Pathogen metabolism pathways
 ├── Essential metabolic targets
 ├── Host-pathogen interaction pathways
 └── OUTPUT: Pathway-based drug targets
     ↓
-Phase 5: Literature Intelligence (ENHANCED)
+Phase 5: Literature Intelligence
 ├── PubMed: Published outbreak reports
-├── BioRxiv/MedRxiv: Recent preprints (CRITICAL for outbreaks)
+├── EuropePMC (source=PPR): Preprints (CRITICAL for outbreaks)
 ├── ArXiv: Computational/ML preprints
 ├── OpenAlex: Citation tracking
 └── OUTPUT: Evidence synthesis
@@ -125,51 +128,13 @@ Phase 6: Report Synthesis
 
 ### 1.1 Taxonomic Classification
 
-```python
-def identify_pathogen(tu, pathogen_query):
-    """Classify pathogen taxonomically."""
-    
-    # NCBI Taxonomy search
-    taxonomy = tu.tools.NCBI_Taxonomy_search(query=pathogen_query)
-    
-    return {
-        'taxid': taxonomy.get('taxid'),
-        'scientific_name': taxonomy.get('scientific_name'),
-        'rank': taxonomy.get('rank'),
-        'lineage': taxonomy.get('lineage'),
-        'type': classify_type(taxonomy)  # virus, bacteria, fungus, parasite
-    }
-```
+Call `NCBI_Taxonomy_search` with `query=<pathogen_name>`. Extract `taxid`, `scientific_name`, `rank`, and `lineage`. Determine pathogen type: virus, bacteria, fungus, or parasite.
 
 ### 1.2 Related Pathogens (Knowledge Transfer)
 
-```python
-def find_related_pathogens(tu, taxid):
-    """Find related pathogens for drug knowledge transfer."""
-    
-    # Get family/genus level relatives
-    relatives = tu.tools.NCBI_Taxonomy_get_children(
-        taxid=taxid,
-        rank="genus"
-    )
-    
-    # Find relatives with approved drugs
-    related_with_drugs = []
-    for rel in relatives:
-        drugs = tu.tools.ChEMBL_search_targets(
-            query=rel['scientific_name'],
-            organism_contains=True
-        )
-        if drugs:
-            related_with_drugs.append({
-                'pathogen': rel,
-                'drugs': drugs
-            })
-    
-    return related_with_drugs
-```
+Use the TaxID to find family/genus-level relatives. For each relative, call `ChEMBL_search_targets` with the relative's scientific name to detect existing drug precedent. Relatives with approved drugs are high-value knowledge transfer sources.
 
-### 1.3 Output for Report
+### 1.3 Output Section
 
 ```markdown
 ## 1. Pathogen Profile
@@ -193,8 +158,6 @@ def find_related_pathogens(tu, taxid):
 | MERS-CoV | 50% genome | None approved | Medium |
 | HCoV-229E | 45% genome | None specific | Low |
 
-**Knowledge Transfer Opportunity**: SARS-CoV drug development data highly relevant.
-
 *Source: NCBI Taxonomy, ChEMBL*
 ```
 
@@ -204,34 +167,7 @@ def find_related_pathogens(tu, taxid):
 
 ### 2.1 Essential Protein Identification
 
-```python
-def identify_targets(tu, pathogen_name):
-    """Identify essential druggable targets."""
-    
-    # Search UniProt for pathogen proteins
-    proteins = tu.tools.UniProt_search(
-        query=f"organism:{pathogen_name}",
-        reviewed=True
-    )
-    
-    # Prioritize by essentiality and druggability
-    targets = []
-    for protein in proteins:
-        # Check for known drug interactions
-        chembl_target = tu.tools.ChEMBL_search_targets(
-            query=protein['gene_name']
-        )
-        
-        targets.append({
-            'uniprot': protein['accession'],
-            'name': protein['protein_name'],
-            'function': protein['function'],
-            'has_drug_precedent': len(chembl_target) > 0,
-            'druggability': assess_druggability(protein)
-        })
-    
-    return rank_targets(targets)
-```
+Call `UniProt_search` with `query="organism:<taxid>"` and `reviewed=True`. For each protein, check `ChEMBL_search_targets` with the gene name to find drug precedent. Rank targets by the criteria below.
 
 ### 2.2 Target Prioritization Criteria
 
@@ -242,65 +178,37 @@ def identify_targets(tu, pathogen_name):
 | **Druggability** | 25% | Structural features amenable to binding |
 | **Drug precedent** | 20% | Existing drugs for homologous targets |
 
-### 2.3 Output for Report
+### 2.3 Pathogen-Specific Essential Targets
+
+**Viruses** — Always check: RNA/DNA polymerase (replication), main protease (polyprotein cleavage), entry proteins (cell attachment/fusion), helicase (RNA unwinding).
+
+**Bacteria** — Always check: cell wall synthesis (penicillin-binding proteins), DNA gyrase/topoisomerase, ribosomal proteins (23S/16S rRNA targets), essential metabolic enzymes.
+
+**Drug-resistant pathogens** — Document resistance genes (e.g., beta-lactamases, efflux pumps). Prioritize drugs with novel mechanisms unaffected by known resistance.
+
+### 2.4 Output Section
 
 ```markdown
 ## 2. Druggable Targets
-
-### 2.1 Prioritized Target List
 
 | Rank | Target | UniProt | Function | Score | Drug Precedent |
 |------|--------|---------|----------|-------|----------------|
 | 1 | RdRp (NSP12) | P0DTD1 | RNA replication | 92 | Remdesivir |
 | 2 | Main protease (Mpro) | P0DTD1 | Polyprotein cleavage | 88 | Nirmatrelvir |
-| 3 | Papain-like protease | P0DTD1 | Polyprotein cleavage | 75 | GRL0617 (preclinical) |
-| 4 | Spike protein | P0DTC2 | Host cell entry | 70 | Antibodies |
-| 5 | Helicase (NSP13) | P0DTD1 | RNA unwinding | 65 | None approved |
+| 3 | Papain-like protease | P0DTD1 | Polyprotein cleavage | 75 | GRL0617 |
 
-### 2.2 Target Details
-
-#### Target 1: RNA-dependent RNA polymerase (RdRp/NSP12)
-
-| Property | Value |
-|----------|-------|
-| **UniProt** | P0DTD1 (polyprotein position 4393-5324) |
-| **Length** | 932 amino acids |
-| **Function** | Catalyzes RNA synthesis from RNA template |
-| **Essentiality** | Absolute (no replication without RdRp) |
-| **Conservation** | >99% across all SARS-CoV-2 variants |
-| **Binding site** | Nucleotide binding pocket |
-| **Drug precedent** | Remdesivir (FDA approved), Favipiravir |
-
-*Source: UniProt, ChEMBL*
+*Source: UniProt via `UniProt_search`, ChEMBL via `ChEMBL_search_targets`*
 ```
 
 ---
 
 ## Phase 3: Structure Prediction
 
-### 3.1 AlphaFold2 Structure Prediction (NVIDIA NIM)
+### 3.1 Choosing a Predictor
 
-```python
-def predict_target_structure(tu, sequence, target_name):
-    """Predict structure for target protein."""
-    
-    # Use AlphaFold2 for high accuracy
-    structure = tu.tools.NvidiaNIM_alphafold2(
-        sequence=sequence,
-        algorithm="mmseqs2",
-        relax_prediction=False
-    )
-    
-    # Parse pLDDT confidence
-    plddt_scores = parse_plddt(structure)
-    
-    return {
-        'structure': structure['structure'],
-        'mean_plddt': np.mean(plddt_scores),
-        'high_confidence_regions': get_high_confidence(plddt_scores),
-        'predicted_binding_site': identify_binding_site(structure)
-    }
-```
+For urgent outbreaks, start with `NvidiaNIM_esmfold` (synchronous, ~30 seconds). Switch to `NvidiaNIM_alphafold2` for production-quality structures needed for reliable docking (asynchronous, 5-15 min, may return HTTP 202 requiring polling).
+
+Pass the protein sequence as the `sequence` parameter. The response contains PDB-format structure content and a `plddt` array.
 
 ### 3.2 Structure Quality Assessment
 
@@ -308,32 +216,20 @@ def predict_target_structure(tu, sequence, target_name):
 |-------------|------------|-----------------|
 | >90 | Very High | Excellent |
 | 70-90 | High | Good |
-| 50-70 | Medium | Use caution |
+| 50-70 | Medium | Use with caution |
 | <50 | Low | Not recommended |
 
-### 3.3 Output for Report
+Require mean pLDDT >70 and active site pLDDT >80 before docking.
+
+### 3.3 Output Section
 
 ```markdown
 ## 3. Target Structures
 
-### 3.1 Structure Prediction Results
-
 | Target | Method | Length | Mean pLDDT | Docking Ready |
 |--------|--------|--------|------------|---------------|
-| RdRp (NSP12) | AlphaFold2 | 932 aa | 91.2 | ✓ Yes |
-| Mpro | AlphaFold2 | 306 aa | 93.5 | ✓ Yes |
-| PLpro | AlphaFold2 | 315 aa | 88.7 | ✓ Yes |
-
-### 3.2 RdRp Structure Quality
-
-| Region | Residues | pLDDT | Functional Role |
-|--------|----------|-------|-----------------|
-| Palm domain | 582-620 | 94.2 | Catalytic site |
-| Fingers domain | 397-581 | 91.8 | NTP entry |
-| Thumb domain | 621-815 | 89.4 | RNA binding |
-| Active site | D760, D761 | 96.1 | Catalysis |
-
-**Docking Recommendation**: Structure suitable for docking; active site highly confident.
+| RdRp (NSP12) | AlphaFold2 | 932 aa | 91.2 | Yes |
+| Mpro | AlphaFold2 | 306 aa | 93.5 | Yes |
 
 *Source: NVIDIA NIM via `NvidiaNIM_alphafold2`*
 ```
@@ -344,133 +240,49 @@ def predict_target_structure(tu, sequence, target_name):
 
 ### 4.1 Identify Repurposing Candidates
 
-```python
-def get_repurposing_candidates(tu, target_name, pathogen_family):
-    """Find approved drugs to repurpose."""
-    
-    candidates = []
-    
-    # 1. Drugs approved for related pathogens
-    related_drugs = tu.tools.ChEMBL_search_drugs(
-        query=pathogen_family,
-        max_phase=4
-    )
-    candidates.extend(related_drugs)
-    
-    # 2. Broad-spectrum antivirals
-    antivirals = tu.tools.ChEMBL_search_drugs(
-        query="broad spectrum antiviral",
-        max_phase=4
-    )
-    candidates.extend(antivirals)
-    
-    # 3. Drugs with known activity against target class
-    target_class_drugs = tu.tools.DGIdb_get_drug_gene_interactions(
-        genes=[target_name]
-    )
-    candidates.extend(target_class_drugs)
-    
-    return deduplicate(candidates)
-```
+Three parallel search strategies:
 
-### 4.2 Docking Screen (NVIDIA NIM)
+1. **Related-pathogen drugs** — Call `ChEMBL_search_drugs` with `query=<pathogen_family>` and `max_phase=4` (approved only).
+2. **Broad-spectrum agents** — Call `ChEMBL_search_drugs` with `query="broad spectrum antiviral"` (or antibiotic for bacteria), `max_phase=4`.
+3. **Target-class drugs** — Call `DGIdb_get_drug_gene_interactions` with the gene names of top targets.
 
-```python
-def dock_candidates(tu, target_structure, candidate_smiles_list):
-    """Dock candidate drugs against target."""
-    
-    results = []
-    for smiles in candidate_smiles_list:
-        docking = tu.tools.NvidiaNIM_diffdock(
-            protein=target_structure,
-            ligand=smiles,
-            num_poses=5
-        )
-        
-        results.append({
-            'smiles': smiles,
-            'top_score': docking['poses'][0]['confidence'],
-            'poses': docking['poses']
-        })
-    
-    return sorted(results, key=lambda x: x['top_score'], reverse=True)
-```
+Deduplicate results across all three sources. Aim for at least 20 candidates.
 
-### 4.3 Output for Report
+### 4.2 Docking Screen
+
+For each candidate drug SMILES, call `NvidiaNIM_diffdock` with:
+- `protein` = PDB content of predicted structure (not a file path)
+- `ligand` = SMILES string
+- `num_poses` = 5 to 10
+
+Always dock a known reference drug first to calibrate scores. Rank candidates by top pose confidence score.
+
+### 4.3 Output Section
 
 ```markdown
 ## 4. Drug Repurposing Screen
 
-### 4.1 Candidate Identification
-
-| Source | Candidates | FDA Approved |
-|--------|------------|--------------|
-| Related pathogen drugs | 12 | 8 |
-| Broad-spectrum antivirals | 15 | 11 |
-| Target class drugs | 8 | 5 |
-| **Total unique** | **28** | **19** |
-
-### 4.2 Docking Results (RdRp Target)
-
 | Rank | Drug | Indication | Docking Score | Evidence |
 |------|------|------------|---------------|----------|
-| 1 | **Remdesivir** | COVID-19 | 0.92 | ★★★ FDA approved |
-| 2 | **Favipiravir** | Influenza | 0.87 | ★★☆ Phase 3 COVID |
-| 3 | **Sofosbuvir** | HCV | 0.84 | ★★☆ In vitro active |
-| 4 | Ribavirin | RSV, HCV | 0.78 | ★☆☆ Mixed results |
-| 5 | Molnupiravir | COVID-19 | 0.76 | ★★★ FDA approved |
+| 1 | Remdesivir | COVID-19 | 0.92 | ★★★ FDA approved |
+| 2 | Favipiravir | Influenza | 0.87 | ★★☆ Phase 3 COVID |
+| 3 | Sofosbuvir | HCV | 0.84 | ★★☆ In vitro active |
 
-### 4.3 Top Candidate: Remdesivir
-
-| Property | Value |
-|----------|-------|
-| **Docking score** | 0.92 (excellent) |
-| **Mechanism** | RdRp inhibitor (nucleotide analog) |
-| **FDA status** | Approved for COVID-19 |
-| **Clinical evidence** | ACTT-1: Reduced recovery time |
-| **Binding mode** | Active site, chain termination |
-
-*Source: NVIDIA NIM via `NvidiaNIM_diffdock`, ChEMBL*
+*Source: NVIDIA NIM via `NvidiaNIM_diffdock`, ChEMBL via `ChEMBL_search_drugs`*
 ```
 
 ---
 
-## Phase 4.5: Pathway Analysis (NEW)
+## Phase 4.5: Pathway Analysis
 
 ### 4.5.1 Pathogen Metabolism Pathways
 
-```python
-def analyze_pathogen_pathways(tu, pathogen_name, pathogen_type):
-    """Identify druggable metabolic pathways in pathogen."""
-    
-    # KEGG pathogen pathways
-    pathways = tu.tools.kegg_search_pathway(
-        query=f"{pathogen_name} metabolism"
-    )
-    
-    # Essential metabolic genes
-    essential_genes = tu.tools.kegg_get_pathway_genes(
-        pathway_id=pathways[0]['pathway_id']
-    )
-    
-    # Host-pathogen interaction pathways
-    host_pathogen = tu.tools.kegg_search_pathway(
-        query=f"{pathogen_name} host interaction"
-    )
-    
-    return {
-        'metabolic_pathways': pathways,
-        'essential_genes': essential_genes,
-        'host_interaction': host_pathogen
-    }
-```
+Call `kegg_search_pathway` with `query="<pathogen_name> metabolism"` to find druggable metabolic pathways. Then call `kegg_get_pathway_genes` with the relevant pathway ID to enumerate essential gene targets. For host-pathogen interactions, search `kegg_search_pathway` with `query="<pathogen_name> host interaction"` and cross-reference using `Reactome_search_pathway` with `species="Homo sapiens"`.
 
-### 4.5.2 Output for Report
+### 4.5.2 Output Section
 
 ```markdown
 ## 4.5 Pathway Analysis
-
-### Pathogen Metabolic Pathways (KEGG)
 
 | Pathway | Essentiality | Drug Targets |
 |---------|--------------|--------------|
@@ -478,211 +290,70 @@ def analyze_pathogen_pathways(tu, pathogen_name, pathogen_type):
 | Viral protein processing | Essential | Mpro, PLpro |
 | Host membrane interaction | Essential | Spike, ACE2 |
 
-### Druggable Pathway Targets
-
-| Target | Pathway | Known Drugs | Evidence |
-|--------|---------|-------------|----------|
-| RdRp | Viral replication | Remdesivir | ★★★ |
-| 3CLpro | Protein processing | Nirmatrelvir | ★★★ |
-| PLpro | Protein processing | GRL-0617 | ★★☆ |
-
-### Host-Pathogen Interaction Points
-
-| Interaction | Host Protein | Pathway | Druggability |
-|-------------|--------------|---------|--------------|
-| Entry | ACE2 | Cell surface | ★★☆ |
-| Fusion | TMPRSS2 | Protease | ★★★ |
-| Replication | Host ribosomes | Translation | ★☆☆ |
-
-*Source: KEGG, Reactome*
+*Source: KEGG via `kegg_search_pathway`, Reactome*
 ```
 
 ---
 
-## Phase 5: Literature Intelligence (ENHANCED)
+## Phase 5: Literature Intelligence
 
-### 5.1 Comprehensive Literature Search
+### 5.1 Search Strategy
 
-```python
-def comprehensive_outbreak_literature(tu, pathogen_name):
-    """Search all literature sources for outbreak intelligence."""
-    
-    # PubMed: Peer-reviewed
-    pubmed = tu.tools.PubMed_search_articles(
-        query=f"{pathogen_name} AND (outbreak OR treatment OR drug)",
-        limit=50,
-        sort="date"
-    )
-    
-    # BioRxiv: CRITICAL for outbreaks - newest findings
-    biorxiv = tu.tools.BioRxiv_search_preprints(
-        query=f"{pathogen_name} treatment mechanism",
-        limit=20
-    )
-    
-    # MedRxiv: Clinical preprints
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{pathogen_name} clinical trial",
-        limit=20
-    )
-    
-    # ArXiv: Computational/ML papers
-    arxiv = tu.tools.ArXiv_search_papers(
-        query=f"{pathogen_name} drug discovery",
-        category="q-bio",
-        limit=10
-    )
-    
-    # Clinical trials
-    trials = tu.tools.search_clinical_trials(
-        condition=pathogen_name,
-        status="Recruiting"
-    )
-    
-    # Citation analysis
-    key_papers = pubmed[:10]
-    for paper in key_papers:
-        citation = tu.tools.openalex_search_works(
-            query=paper['title'],
-            limit=1
-        )
-        paper['citations'] = citation[0].get('cited_by_count', 0) if citation else 0
-    
-    return {
-        'pubmed': pubmed,
-        'biorxiv': biorxiv,
-        'medrxiv': medrxiv,
-        'arxiv': arxiv,
-        'trials': trials,
-        'key_papers': key_papers
-    }
-```
+Run these in parallel:
 
-### 5.2 Output for Report
+- **Peer-reviewed**: `PubMed_search_articles` with `query="<pathogen> AND (outbreak OR treatment OR drug)"`, sort by date.
+- **Preprints** (critical for emerging outbreaks): `EuropePMC_search_articles` with `source="PPR"`. Note: bioRxiv and medRxiv do not have direct search APIs — use EuropePMC as the gateway.
+- **Computational/ML**: `ArXiv_search_papers` with `category="q-bio"`.
+- **Citation ranking**: `openalex_search_works` or `SemanticScholar_search` for high-impact papers.
+- **Clinical trials**: `search_clinical_trials` with `condition=<pathogen>` and `status="Recruiting"`.
+
+Mark preprints clearly as NOT peer-reviewed.
+
+### 5.2 Output Section
 
 ```markdown
 ## 5. Literature Intelligence
 
-### 5.1 Published Literature (Peer-Reviewed)
-
-| Topic | Papers | Key Finding |
-|-------|--------|-------------|
-| Treatment | 234 | Paxlovid remains effective |
-| Resistance | 45 | Nirmatrelvir resistance mutations identified |
-| Variants | 189 | XBB variants maintain drug sensitivity |
-| Vaccines | 312 | Updated boosters protective |
-
-### 5.2 Preprints (CRITICAL for Emerging Outbreaks)
-
-**⚠️ Note**: Preprints are NOT peer-reviewed. Critical for rapid intelligence but use with caution.
+### Recent Findings
 
 | Source | Title | Posted | Key Finding |
 |--------|-------|--------|-------------|
 | BioRxiv | Novel RdRp inhibitor shows activity... | 2024-02-01 | New candidate |
 | MedRxiv | Real-world effectiveness of... | 2024-01-28 | Paxlovid 85% effective |
-| BioRxiv | Resistance mutations in... | 2024-01-25 | Monitor L50F mutation |
 
-### 5.3 Computational/ML Preprints (ArXiv)
+**Note**: Preprints are NOT peer-reviewed. Critical for rapid intelligence.
 
-| Title | Category | Relevance |
-|-------|----------|-----------|
-| Deep learning for antiviral discovery | q-bio.BM | Drug design |
-| Structure prediction for novel... | q-bio.BM | Target modeling |
-
-### 5.4 Active Clinical Trials
+### Active Clinical Trials
 
 | NCT ID | Phase | Drug | Status |
 |--------|-------|------|--------|
 | NCT05012345 | 3 | Ensitrelvir | Recruiting |
-| NCT05023456 | 2 | VV116 | Recruiting |
-| NCT05034567 | 2 | S-217622 | Active |
 
-### 5.5 Citation Analysis (High-Impact Papers)
-
-| PMID | Title | Citations | Year |
-|------|-------|-----------|------|
-| 33123456 | Remdesivir for COVID-19 | 5,234 | 2020 |
-| 34234567 | Paxlovid Phase 3 results | 2,876 | 2022 |
-
-*Source: PubMed, BioRxiv, MedRxiv, ArXiv, OpenAlex, ClinicalTrials.gov*
+*Source: PubMed, EuropePMC (PPR), ArXiv, OpenAlex, ClinicalTrials.gov*
 ```
+
+---
+
+## Phase 6: Report Synthesis
+
+Once all phases complete, update the report:
+
+1. **Executive Summary** — Top 3 drug candidates with evidence tier, key discovery, recommended immediate action.
+2. **Recommendations** — At least 3 immediate actions (e.g., stockpile specific drug, prepare supply chain, initiate surveillance).
+3. **Clinical Trial Opportunities** — Drugs in Phase 2-3 with open slots.
+4. **Research Priorities** — Targets lacking structural data, resistance surveillance needs.
+5. **Data Gaps** — List what could not be determined and why.
+6. **Data Sources** — Enumerate all tools and identifiers used.
+
+Replace all `[Analyzing...]` placeholders before delivering the report.
 
 ---
 
 ## Report Template
 
-```markdown
-# Outbreak Intelligence Report: [PATHOGEN]
+File: `[PATHOGEN]_outbreak_intelligence.md`. Sections: Executive Summary, Pathogen Profile (1.1 Classification, 1.2 Related Pathogens), Druggable Targets (2.1 Prioritized, 2.2 Details), Target Structures (3.1 Predictions, 3.2 Binding Sites), Drug Repurposing Screen (4.1 Candidates, 4.2 Docking), Literature Intelligence (5.1 Findings, 5.2 Trials), Recommendations (6.1 Immediate Actions, 6.2 Trial Opportunities, 6.3 Research Priorities), Data Gaps, Data Sources.
 
-**Generated**: [Date] | **Query**: [Original query] | **Status**: In Progress
-
----
-
-## Executive Summary
-[Analyzing...]
-
----
-
-## 1. Pathogen Profile
-### 1.1 Classification
-[Analyzing...]
-### 1.2 Related Pathogens
-[Analyzing...]
-
----
-
-## 2. Druggable Targets
-### 2.1 Prioritized Targets
-[Analyzing...]
-### 2.2 Target Details
-[Analyzing...]
-
----
-
-## 3. Target Structures
-### 3.1 Prediction Results
-[Analyzing...]
-### 3.2 Binding Sites
-[Analyzing...]
-
----
-
-## 4. Drug Repurposing Screen
-### 4.1 Candidate Drugs
-[Analyzing...]
-### 4.2 Docking Results
-[Analyzing...]
-### 4.3 Top Candidates
-[Analyzing...]
-
----
-
-## 5. Literature Intelligence
-### 5.1 Recent Findings
-[Analyzing...]
-### 5.2 Clinical Trials
-[Analyzing...]
-
----
-
-## 6. Recommendations
-### 6.1 Immediate Actions
-[Analyzing...]
-### 6.2 Clinical Trial Opportunities
-[Analyzing...]
-### 6.3 Research Priorities
-[Analyzing...]
-
----
-
-## 7. Data Gaps & Limitations
-[Analyzing...]
-
----
-
-## 8. Data Sources
-[Will be populated...]
-```
+Initialize each section with `[Analyzing...]` and replace before delivery. See [`references/tools.md`](references/tools.md) for the full skeleton template.
 
 ---
 
@@ -697,39 +368,34 @@ def comprehensive_outbreak_literature(tu, pathogen_name):
 
 ---
 
-## Completeness Checklist
+## Known Gotchas
 
-### Phase 1: Pathogen ID
-- [ ] Taxonomic classification complete
-- [ ] Related pathogens identified
-- [ ] Genome/proteome availability noted
+### Tool Parameters
+- `NCBI_Taxonomy_search`, `UniProt_search`, `ChEMBL_search_targets` all use `query=`, not `name=`.
+- `NvidiaNIM_diffdock` expects `protein=<PDB content string>`, not a file path.
+- `NvidiaNIM_alphafold2` uses `sequence=`, not `seq=`.
+- bioRxiv and medRxiv have no direct search APIs — use `EuropePMC_search_articles` with `source="PPR"`.
 
-### Phase 2: Targets
-- [ ] ≥5 targets identified
-- [ ] Essentiality documented
-- [ ] Conservation assessed
-- [ ] Drug precedent checked
+### NVIDIA NIM
+- Requires `NVIDIA_API_KEY` environment variable. If absent, fall back to `alphafold_get_prediction` or `NvidiaNIM_esmfold`.
+- AlphaFold2 is asynchronous and may return HTTP 202. Poll until complete. ESMFold is synchronous and faster for triage.
+- Respect rate limits (~40 RPM); allow ~1.5 seconds between calls.
 
-### Phase 3: Structures
-- [ ] Structures predicted for top 3 targets
-- [ ] pLDDT confidence reported
-- [ ] Binding sites identified
+### Drug Search
+- `ChEMBL_search_drugs` with `max_phase=4` returns approved drugs only. Use `max_phase=3` to include late-stage candidates.
+- SMILES strings for docking must come from a validated source (ChEMBL, PubChem). Malformed SMILES will fail silently.
 
-### Phase 4: Drug Screen
-- [ ] ≥20 candidates screened
-- [ ] FDA-approved drugs prioritized
-- [ ] Docking scores reported
-- [ ] Top 5 candidates detailed
+### Preprints
+- Preprints are not peer-reviewed. Always flag them explicitly in the report.
+- EuropePMC returns preprints under `source="PPR"`. If a result has a `10.1101/` DOI, you can retrieve full metadata via `BioRxiv_get_preprint` or `MedRxiv_get_preprint`.
 
-### Phase 5: Literature
-- [ ] Recent papers summarized
-- [ ] Active trials listed
-- [ ] Resistance data noted
+### Structure Quality
+- Do not dock against structures with mean pLDDT <70. Use a fallback predictor or locate an existing PDB entry instead.
+- Always dock a known reference drug first to establish a score baseline.
 
-### Phase 6: Recommendations
-- [ ] ≥3 immediate actions
-- [ ] Clinical trial opportunities
-- [ ] Research priorities
+### Novel Pathogens
+- For pathogens with no UniProt reviewed entries, also search with `reviewed=False` and filter manually.
+- For fully novel pathogens with no relatives, broaden the drug search to "broad spectrum antiviral" or mechanism class (e.g., "nucleoside analog").
 
 ---
 
@@ -738,12 +404,32 @@ def comprehensive_outbreak_literature(tu, pathogen_name):
 | Primary Tool | Fallback 1 | Fallback 2 |
 |--------------|------------|------------|
 | `NvidiaNIM_alphafold2` | `alphafold_get_prediction` | `NvidiaNIM_esmfold` |
-| `NvidiaNIM_diffdock` | `NvidiaNIM_boltz2` | Manual docking |
+| `NvidiaNIM_diffdock` | `NvidiaNIM_boltz2` | Literature docking data |
 | `NCBI_Taxonomy_search` | `UniProt_taxonomy` | Manual classification |
 | `ChEMBL_search_drugs` | `DrugBank_search` | PubChem bioassays |
+| `kegg_search_pathway` | `Reactome_search_pathway` | WikiPathways |
+| `PubMed_search_articles` | `openalex_search_works` | `SemanticScholar_search` |
+| `EuropePMC_search_articles` (PPR) | `web_search` (site:biorxiv.org) | ArXiv q-bio |
 
 ---
 
 ## Tool Reference
 
-See [TOOLS_REFERENCE.md](TOOLS_REFERENCE.md) for complete tool documentation.
+See [`references/tools.md`](references/tools.md) for the full tool table organized by phase (taxonomy, protein annotation, structure prediction, drug search, docking, pathway analysis, literature, clinical trials).
+
+---
+
+## Completeness Checklist
+
+See [CHECKLIST.md](CHECKLIST.md) for the pre-delivery verification checklist.
+
+Quick summary of minimums:
+
+| Section | Minimum |
+|---------|---------|
+| Related pathogens | ≥3 with drug precedent |
+| Druggable targets | ≥5 ranked targets |
+| Structure predictions | ≥3 targets |
+| Drug candidates screened | ≥20 |
+| Docking results | Top 10 docked |
+| Recommendations | ≥3 immediate actions |

@@ -56,16 +56,15 @@ Phase 2: Variant Interpretation
 ├── COSMIC → Somatic mutation frequency
 ├── GDC/TCGA → Real tumor data
 ├── DepMap → Target essentiality
-├── OncoKB → FDA actionability levels (NEW)
-├── cBioPortal → Cross-study mutation data (NEW)
-├── Human Protein Atlas → Expression validation (NEW)
+├── OncoKB → FDA actionability levels
+├── cBioPortal → Cross-study mutation data
+├── Human Protein Atlas → Expression validation
 ├── OpenTargets → Target-disease evidence
 └── OUTPUT: Variant significance table + target validation + expression
 
-Phase 2.5: Tumor Expression Context (NEW)
+Phase 2.5: Tumor Expression Context
 ├── CELLxGENE → Cell-type specific expression in tumor
 ├── ChIPAtlas → Regulatory context
-├── Cancer-specific expression patterns
 └── OUTPUT: Expression validation
 
 Phase 3: Treatment Options
@@ -74,7 +73,7 @@ Phase 3: Treatment Options
 ├── Off-label with evidence
 └── OUTPUT: Prioritized treatment list
 
-Phase 3.5: Pathway & Network Analysis (NEW)
+Phase 3.5: Pathway & Network Analysis
 ├── KEGG/Reactome → Pathway context
 ├── IntAct → Protein interactions
 ├── Drug combination rationale
@@ -91,7 +90,7 @@ Phase 5: Clinical Trial Matching
 ├── Eligibility filtering
 └── OUTPUT: Matched trials
 
-Phase 5.5: Literature Evidence (NEW)
+Phase 5.5: Literature Evidence
 ├── PubMed → Published evidence
 ├── BioRxiv/MedRxiv → Recent preprints
 ├── OpenAlex → Citation analysis
@@ -109,470 +108,65 @@ Phase 6: Report Synthesis
 
 ### 1.1 Resolve Gene Identifiers
 
-```python
-def resolve_gene(tu, gene_symbol):
-    """Resolve gene to all needed IDs."""
-    ids = {}
-    
-    # Ensembl ID (for OpenTargets)
-    gene_info = tu.tools.MyGene_query_genes(q=gene_symbol, species="human")
-    ids['ensembl'] = gene_info.get('ensembl', {}).get('gene')
-    
-    # UniProt (for structure)
-    uniprot = tu.tools.UniProt_search(query=gene_symbol, organism="human")
-    ids['uniprot'] = uniprot[0].get('primaryAccession') if uniprot else None
-    
-    # ChEMBL target
-    target = tu.tools.ChEMBL_search_targets(query=gene_symbol, organism="Homo sapiens")
-    ids['chembl_target'] = target[0].get('target_chembl_id') if target else None
-    
-    return ids
-```
+For each gene in the molecular profile, collect all identifiers needed downstream:
+- Call `MyGene_query_genes` with `q=<gene_symbol>` and `species="human"` to get the Ensembl ID (required by OpenTargets tools).
+- Call `UniProt_search` with `query=<gene_symbol>` and `organism="human"` to get the UniProt primary accession (required for structure prediction).
+- Call `ChEMBL_search_targets` with `query=<gene_symbol>` and `organism="Homo sapiens"` to get the ChEMBL target ID (required for bioactivity queries).
+
+Store all three IDs before proceeding to Phase 2.
 
 ### 1.2 Validate Variant Nomenclature
 
-- **HGVS protein**: p.L858R, p.V600E
-- **cDNA**: c.2573T>G
-- **Common names**: T790M, G12C
+Accept any of these formats; normalize to HGVS protein notation internally:
+- HGVS protein: `p.L858R`, `p.V600E`
+- cDNA: `c.2573T>G`
+- Common shorthand: `T790M`, `G12C`
 
 ---
 
 ## Phase 2: Variant Interpretation
 
-### 2.1 CIViC Evidence Query
+### 2.1 CIViC Evidence
 
-```python
-def get_civic_evidence(tu, gene_symbol, variant_name):
-    """Get CIViC evidence for variant."""
-    # Search for variant
-    variants = tu.tools.civic_search_variants(query=f"{gene_symbol} {variant_name}")
-    
-    evidence_items = []
-    for var in variants:
-        # Get evidence items for this variant
-        evi = tu.tools.civic_get_variant(id=var['id'])
-        evidence_items.extend(evi.get('evidence_items', []))
-    
-    # Categorize by evidence type
-    return {
-        'predictive': [e for e in evidence_items if e['evidence_type'] == 'Predictive'],
-        'prognostic': [e for e in evidence_items if e['evidence_type'] == 'Prognostic'],
-        'diagnostic': [e for e in evidence_items if e['evidence_type'] == 'Diagnostic']
-    }
-```
+Call `civic_search_variants` with `query="<GENE> <VARIANT>"` to find variant records. For each result, call `civic_get_variant` with the numeric `id` to retrieve evidence items. Categorize evidence by `evidence_type`: Predictive (drug response), Prognostic, or Diagnostic.
 
-### 2.2 COSMIC Somatic Mutation Analysis (NEW)
+### 2.2 COSMIC Somatic Mutation Analysis
 
-```python
-def get_cosmic_mutations(tu, gene_symbol, variant_name=None):
-    """Get somatic mutation data from COSMIC database."""
-    
-    # Get all mutations for gene
-    gene_mutations = tu.tools.COSMIC_get_mutations_by_gene(
-        operation="get_by_gene",
-        gene=gene_symbol,
-        max_results=100,
-        genome_build=38
-    )
-    
-    # If specific variant, search for it
-    if variant_name:
-        specific = tu.tools.COSMIC_search_mutations(
-            operation="search",
-            terms=f"{gene_symbol} {variant_name}",
-            max_results=20
-        )
-        return {
-            'specific_variant': specific.get('results', []),
-            'all_gene_mutations': gene_mutations.get('results', [])
-        }
-    
-    return gene_mutations
+Call `COSMIC_search_mutations` with `operation="search"` and `terms="<GENE> <VARIANT>"` to find frequency and cancer type distribution. For hotspot analysis, call `COSMIC_get_mutations_by_gene` with `operation="get_by_gene"` and `gene=<GENE>`. Use `genome_build=38` (GRCh38) unless the patient report specifies GRCh37.
 
-def get_cosmic_hotspots(tu, gene_symbol):
-    """Identify mutation hotspots in COSMIC."""
-    mutations = tu.tools.COSMIC_get_mutations_by_gene(
-        operation="get_by_gene",
-        gene=gene_symbol,
-        max_results=500
-    )
-    
-    # Count by position
-    position_counts = Counter(m['MutationAA'] for m in mutations.get('results', []))
-    hotspots = position_counts.most_common(10)
-    
-    return hotspots
-```
+COSMIC provides: cancer type distribution, recurrence count, FATHMM pathogenicity prediction.
 
-**Why COSMIC matters**:
-- **Gold standard** for somatic cancer mutations
-- Provides cancer type distribution (which cancers have this mutation)
-- FATHMM pathogenicity prediction for novel variants
-- Identifies hotspots vs. rare mutations
+### 2.3 GDC/TCGA Pan-Cancer Analysis
 
-### 2.3 GDC/TCGA Pan-Cancer Analysis (NEW)
+Call `GDC_get_mutation_frequency` with `gene_symbol=<GENE>` for pan-cancer mutation statistics. For cancer-specific data, call `GDC_get_ssm_by_gene` with `gene_symbol=<GENE>` and `project_id="TCGA-<TYPE>"` (e.g., `TCGA-LUAD`). Use `GDC_list_projects` with `program="TCGA"` to find valid project IDs. For copy number status, call `GDC_get_cnv_data` with `project_id` and `gene_symbol`.
 
-Access real patient tumor data from The Cancer Genome Atlas:
+Common TCGA project IDs: `TCGA-LUAD` (lung adeno), `TCGA-BRCA` (breast), `TCGA-COAD` (colorectal), `TCGA-SKCM` (melanoma), `TCGA-GBM` (glioblastoma), `TCGA-PAAD` (pancreatic).
 
-```python
-def get_tcga_mutation_data(tu, gene_symbol, cancer_type=None):
-    """
-    Get somatic mutations from TCGA via GDC.
-    
-    Answers: "How often is this mutation seen in real tumors?"
-    """
-    
-    # Get mutation frequency across all TCGA
-    frequency = tu.tools.GDC_get_mutation_frequency(
-        gene_symbol=gene_symbol
-    )
-    
-    # Get specific mutations
-    mutations = tu.tools.GDC_get_ssm_by_gene(
-        gene_symbol=gene_symbol,
-        project_id=f"TCGA-{cancer_type}" if cancer_type else None,
-        size=50
-    )
-    
-    return {
-        'frequency': frequency.get('data', {}),
-        'mutations': mutations.get('data', {}),
-        'note': 'Real patient tumor data from TCGA'
-    }
+### 2.4 DepMap Target Essentiality
 
-def get_tcga_expression_profile(tu, gene_symbol, cancer_type):
-    """Get gene expression data from TCGA."""
-    
-    # Map cancer type to TCGA project
-    project_map = {
-        'lung': 'TCGA-LUAD',
-        'breast': 'TCGA-BRCA', 
-        'colorectal': 'TCGA-COAD',
-        'melanoma': 'TCGA-SKCM',
-        'glioblastoma': 'TCGA-GBM'
-    }
-    project_id = project_map.get(cancer_type.lower(), f'TCGA-{cancer_type.upper()}')
-    
-    expression = tu.tools.GDC_get_gene_expression(
-        project_id=project_id,
-        size=20
-    )
-    
-    return expression.get('data', {})
+Call `DepMap_get_gene_dependencies` with `gene_symbol=<GENE>` to retrieve CRISPR knockout effect scores. Scores below -0.5 indicate the gene is essential for cell survival; below -1.0 is strongly essential. For cancer-type context, call `DepMap_get_cell_lines` with `tissue=<TISSUE>` or `cancer_type=<TYPE>` to identify relevant cell lines.
 
-def get_tcga_cnv_status(tu, gene_symbol, cancer_type):
-    """Get copy number status from TCGA."""
-    
-    project_map = {
-        'lung': 'TCGA-LUAD',
-        'breast': 'TCGA-BRCA'
-    }
-    project_id = project_map.get(cancer_type.lower(), f'TCGA-{cancer_type.upper()}')
-    
-    cnv = tu.tools.GDC_get_cnv_data(
-        project_id=project_id,
-        gene_symbol=gene_symbol,
-        size=20
-    )
-    
-    return cnv.get('data', {})
-```
+Essential in cancer but not normal cells = selective target. Pan-essential genes (e.g., MYC) are harder to target safely.
 
-**GDC Tools Summary**:
-| Tool | Purpose | Key Parameters |
-|------|---------|----------------|
-| `GDC_get_mutation_frequency` | Pan-cancer mutation stats | `gene_symbol` |
-| `GDC_get_ssm_by_gene` | Specific mutations | `gene_symbol`, `project_id` |
-| `GDC_get_gene_expression` | RNA-seq data | `project_id` |
-| `GDC_get_cnv_data` | Copy number | `project_id`, `gene_symbol` |
-| `GDC_list_projects` | Find TCGA projects | `program="TCGA"` |
+### 2.5 OncoKB Actionability
 
-**Why TCGA/GDC matters**:
-- **Real patient data** - Not cell line or curated, actual tumor sequencing
-- **Pan-cancer view** - Same gene across 33 cancer types
-- **Multi-omic** - Mutations, expression, CNV together
-- **Clinical correlation** - Survival data available
+Call `OncoKB_annotate_variant` with `gene=<GENE>`, `variant=<VARIANT>` (e.g., `"V600E"`), and `tumor_type=<ONCOTREE_CODE>` (e.g., `"MEL"`, `"LUAD"`). Returns `oncogenic` status, `mutationEffect`, `highestSensitiveLevel`, and applicable treatments. Also call `OncoKB_get_gene_info` with `gene=<GENE>` to confirm oncogene vs. tumor suppressor status.
 
-### 2.4 DepMap Target Validation (NEW)
+For copy number alterations, use `OncoKB_annotate_copy_number` with `copy_number_type="AMPLIFICATION"` or `"DELETION"`.
 
-Assess gene essentiality using CRISPR knockout data from cancer cell lines:
+OncoKB level mapping: Level 1/2 = FDA-approved or standard care (★★★); Level 3A/3B = clinical evidence (★★☆); Level 4 = biological (★☆☆); R1/R2 = resistance markers.
 
-```python
-def assess_target_essentiality(tu, gene_symbol, cancer_type=None):
-    """
-    Is this gene essential in cancer cell lines?
-    
-    Essential genes have negative dependency scores.
-    Answers: "If we target this gene, will cancer cells die?"
-    """
-    
-    # Get gene dependency data
-    dependencies = tu.tools.DepMap_get_gene_dependencies(
-        gene_symbol=gene_symbol
-    )
-    
-    # Get cell lines for specific cancer type
-    if cancer_type:
-        cell_lines = tu.tools.DepMap_get_cell_lines(
-            cancer_type=cancer_type,
-            page_size=20
-        )
-        return {
-            'gene': gene_symbol,
-            'dependencies': dependencies.get('data', {}),
-            'cell_lines': cell_lines.get('data', {}),
-            'interpretation': 'Negative scores = gene is essential for cell survival'
-        }
-    
-    return dependencies
+### 2.6 cBioPortal Cross-Study Analysis
 
-def get_depmap_drug_sensitivity(tu, drug_name, cancer_type=None):
-    """Get drug sensitivity data from DepMap."""
-    
-    drugs = tu.tools.DepMap_get_drug_response(
-        drug_name=drug_name
-    )
-    
-    return drugs.get('data', {})
-```
+Call `cBioPortal_get_mutations` with `study_id=<STUDY>` and `gene_list="<GENE1>,<GENE2>"` to retrieve mutation types and co-mutation patterns. Use `cBioPortal_get_cancer_studies` to find study IDs. For multi-omic context, call `cBioPortal_get_molecular_profiles` with `study_id`.
 
-**DepMap Tools Summary**:
-| Tool | Purpose | Key Parameters |
-|------|---------|----------------|
-| `DepMap_get_gene_dependencies` | CRISPR essentiality | `gene_symbol` |
-| `DepMap_get_cell_lines` | Cell line metadata | `cancer_type`, `tissue` |
-| `DepMap_search_cell_lines` | Search by name | `query` |
-| `DepMap_get_drug_response` | Drug sensitivity | `drug_name` |
+Common study IDs: `luad_tcga`, `brca_tcga`, `coadread_tcga`, `skcm_tcga`, `genie_public`.
 
-**Why DepMap matters for Precision Oncology**:
-- **Target validation** - Proves gene is essential for cancer survival
-- **Cancer selectivity** - Essential in cancer but not normal cells?
-- **Resistance prediction** - What other genes become essential when you knockout target?
-- **Combination rationale** - Identify synthetic lethal partners
+### 2.7 Human Protein Atlas Expression Validation
 
-**Example Clinical Application**:
-```markdown
-### Target Essentiality Assessment (DepMap)
+Call `HPA_search_genes_by_query` with `search_query=<GENE>` to find the gene entry, then call `HPA_get_comparative_expression_by_gene_and_cellline` with `gene_name=<GENE>` and `cell_line=<LINE>` to compare tumor vs. normal expression.
 
-**KRAS dependency in pancreatic cancer cell lines**:
-| Cell Line | KRAS Effect Score | Interpretation |
-|-----------|-------------------|----------------|
-| PANC-1 | -0.82 | Strongly essential |
-| MIA PaCa-2 | -0.75 | Essential |
-| BxPC-3 | -0.21 | Less dependent (KRAS WT) |
-
-*Interpretation: KRAS-mutant pancreatic cancer lines are highly dependent on KRAS - validates targeting strategy.*
-
-*Source: DepMap via `DepMap_get_gene_dependencies`*
-```
-
-### 2.5 OncoKB Actionability Assessment (NEW)
-
-OncoKB provides FDA-approved therapeutic actionability annotations:
-
-```python
-def get_oncokb_annotations(tu, gene_symbol, variant_name, tumor_type=None):
-    """
-    Get OncoKB actionability annotations.
-    
-    OncoKB Level of Evidence:
-    - Level 1: FDA-approved
-    - Level 2: Standard care
-    - Level 3A: Compelling clinical evidence
-    - Level 3B: Standard care in different tumor type
-    - Level 4: Biological evidence
-    - R1/R2: Resistance evidence
-    """
-    
-    # Annotate the specific variant
-    annotation = tu.tools.OncoKB_annotate_variant(
-        operation="annotate_variant",
-        gene=gene_symbol,
-        variant=variant_name,  # e.g., "V600E"
-        tumor_type=tumor_type  # OncoTree code e.g., "MEL", "LUAD"
-    )
-    
-    result = {
-        'oncogenic': annotation.get('data', {}).get('oncogenic'),
-        'mutation_effect': annotation.get('data', {}).get('mutationEffect'),
-        'highest_sensitive_level': annotation.get('data', {}).get('highestSensitiveLevel'),
-        'treatments': annotation.get('data', {}).get('treatments', [])
-    }
-    
-    # Get gene-level info
-    gene_info = tu.tools.OncoKB_get_gene_info(
-        operation="get_gene_info",
-        gene=gene_symbol
-    )
-    
-    result['is_oncogene'] = gene_info.get('data', {}).get('oncogene', False)
-    result['is_tumor_suppressor'] = gene_info.get('data', {}).get('tsg', False)
-    
-    return result
-
-def get_oncokb_cnv_annotation(tu, gene_symbol, alteration_type, tumor_type=None):
-    """Get OncoKB annotation for copy number alterations."""
-    
-    annotation = tu.tools.OncoKB_annotate_copy_number(
-        operation="annotate_copy_number",
-        gene=gene_symbol,
-        copy_number_type=alteration_type,  # "AMPLIFICATION" or "DELETION"
-        tumor_type=tumor_type
-    )
-    
-    return {
-        'oncogenic': annotation.get('data', {}).get('oncogenic'),
-        'treatments': annotation.get('data', {}).get('treatments', [])
-    }
-```
-
-**OncoKB Level Mapping**:
-| OncoKB Level | Our Tier | Description |
-|--------------|----------|-------------|
-| LEVEL_1 | ★★★ | FDA-recognized biomarker |
-| LEVEL_2 | ★★★ | Standard care |
-| LEVEL_3A | ★★☆ | Compelling clinical evidence |
-| LEVEL_3B | ★★☆ | Different tumor type |
-| LEVEL_4 | ★☆☆ | Biological evidence |
-| LEVEL_R1 | Resistance | FDA-approved resistance marker |
-| LEVEL_R2 | Resistance | Compelling resistance evidence |
-
-### 2.6 cBioPortal Cross-Study Analysis (NEW)
-
-Aggregate mutation data across multiple cancer studies:
-
-```python
-def get_cbioportal_mutations(tu, gene_symbols, study_id="brca_tcga"):
-    """
-    Get mutation data from cBioPortal across cancer studies.
-    
-    Provides: Mutation types, protein changes, co-mutations.
-    """
-    
-    # Get mutations for genes in study
-    mutations = tu.tools.cBioPortal_get_mutations(
-        study_id=study_id,
-        gene_list=",".join(gene_symbols)  # e.g., "EGFR,KRAS"
-    )
-    
-    # Parse results
-    results = []
-    for mut in mutations or []:
-        results.append({
-            'gene': mut.get('gene', {}).get('hugoGeneSymbol'),
-            'protein_change': mut.get('proteinChange'),
-            'mutation_type': mut.get('mutationType'),
-            'sample_id': mut.get('sampleId'),
-            'validation_status': mut.get('validationStatus')
-        })
-    
-    return results
-
-def get_cbioportal_cancer_studies(tu, cancer_type=None):
-    """Get available cancer studies from cBioPortal."""
-    
-    studies = tu.tools.cBioPortal_get_cancer_studies(limit=50)
-    
-    if cancer_type:
-        studies = [s for s in studies if cancer_type.lower() in s.get('cancerTypeId', '').lower()]
-    
-    return studies
-
-def analyze_co_mutations(tu, gene_symbol, study_id):
-    """Find frequently co-mutated genes."""
-    
-    # Get molecular profiles
-    profiles = tu.tools.cBioPortal_get_molecular_profiles(study_id=study_id)
-    
-    # Get mutation data
-    mutations = tu.tools.cBioPortal_get_mutations(
-        study_id=study_id,
-        gene_list=gene_symbol
-    )
-    
-    return {
-        'profiles': profiles,
-        'mutations': mutations,
-        'study_id': study_id
-    }
-```
-
-**cBioPortal Use Cases**:
-| Use Case | Tool | Parameters |
-|----------|------|------------|
-| Find mutation frequency | `cBioPortal_get_mutations` | `study_id`, `gene_list` |
-| List available studies | `cBioPortal_get_cancer_studies` | `limit` |
-| Get molecular profiles | `cBioPortal_get_molecular_profiles` | `study_id` |
-| Analyze co-mutations | Multiple tools | Combined analysis |
-
-### 2.7 Human Protein Atlas Expression (NEW)
-
-Validate target expression in tumor vs normal tissues:
-
-```python
-def get_hpa_expression(tu, gene_symbol):
-    """
-    Get protein expression data from Human Protein Atlas.
-    
-    Critical for validating:
-    - Target is expressed in tumor tissue
-    - Target has differential tumor vs normal expression
-    """
-    
-    # Search for gene
-    gene_info = tu.tools.HPA_search_genes_by_query(search_query=gene_symbol)
-    
-    if not gene_info:
-        return None
-    
-    # Get tissue expression data
-    ensembl_id = gene_info[0].get('Ensembl') if gene_info else None
-    
-    # Comparative expression in cancer cell lines
-    cell_line_data = tu.tools.HPA_get_comparative_expression_by_gene_and_cellline(
-        gene_name=gene_symbol,
-        cell_line="a549"  # Lung cancer cell line
-    )
-    
-    return {
-        'gene_info': gene_info,
-        'cell_line_expression': cell_line_data
-    }
-
-def check_tumor_specific_expression(tu, gene_symbol, cancer_type):
-    """Check if target has tumor-specific expression pattern."""
-    
-    # Map cancer type to cell line
-    cancer_to_cellline = {
-        'lung': 'a549',
-        'breast': 'mcf7',
-        'liver': 'hepg2',
-        'cervical': 'hela',
-        'prostate': 'pc3'
-    }
-    
-    cell_line = cancer_to_cellline.get(cancer_type.lower(), 'a549')
-    
-    expression = tu.tools.HPA_get_comparative_expression_by_gene_and_cellline(
-        gene_name=gene_symbol,
-        cell_line=cell_line
-    )
-    
-    return expression
-```
-
-**HPA Expression Validation Output**:
-```markdown
-### Expression Validation (Human Protein Atlas)
-
-| Gene | Tumor Cell Line | Expression | Normal Tissue | Differential |
-|------|-----------------|------------|---------------|--------------|
-| EGFR | A549 (lung) | High | Low-Medium | Tumor-elevated |
-| ALK | H3122 (lung) | High | Not detected | Tumor-specific |
-| HER2 | MCF7 (breast) | Medium | Low | Elevated |
-
-*Source: Human Protein Atlas via `HPA_get_comparative_expression_by_gene_and_cellline`*
-```
+Cancer-to-cell-line mapping: lung → `a549`, breast → `mcf7`, liver → `hepg2`, cervical → `hela`, prostate → `pc3`.
 
 ### 2.8 Evidence Level Mapping
 
@@ -584,7 +178,7 @@ def check_tumor_specific_expression(tu, gene_symbol, cancer_type):
 | D | ★☆☆ | Preclinical |
 | E | ☆☆☆ | Inferential |
 
-### 2.4 Output Table
+### 2.9 Output Table
 
 ```markdown
 ## Variant Interpretation
@@ -595,96 +189,26 @@ def check_tumor_specific_expression(tu, gene_symbol, cancer_type):
 | T790M | EGFR | Resistance | ★★★ (Level A) | Resistant to 1st/2nd gen TKIs |
 
 ### COSMIC Mutation Frequency
+| Gene | Mutation | COSMIC Count | Primary Cancer Types | FATHMM |
+|------|----------|--------------|---------------------|--------|
+| EGFR | L858R | 15,234 | Lung (85%), CRC (5%) | Pathogenic |
 
-| Gene | Mutation | COSMIC Count | Primary Cancer Types | FATHMM Prediction |
-|------|----------|--------------|---------------------|-------------------|
-| EGFR | L858R | 15,234 | Lung (85%), Colorectal (5%) | Pathogenic |
-| EGFR | T790M | 8,567 | Lung (95%) | Pathogenic |
-| BRAF | V600E | 45,678 | Melanoma (50%), Colorectal (15%) | Pathogenic |
+### TCGA/GDC Patient Tumor Data
+| Gene | TCGA Project | SSM Cases | CNV Amp | % Samples |
+|------|-------------|-----------|---------|-----------|
+| EGFR | TCGA-LUAD | 156 | 89 | 28% |
 
-### TCGA/GDC Patient Tumor Data (NEW)
-
-| Gene | TCGA Project | SSM Cases | CNV Amp | CNV Del | % Samples |
-|------|-------------|-----------|---------|---------|-----------|
-| EGFR | TCGA-LUAD | 156 | 89 | 5 | 28% |
-| EGFR | TCGA-GBM | 45 | 312 | 2 | 57% |
-| KRAS | TCGA-PAAD | 134 | 8 | 1 | 92% |
-
-*Source: GDC via `GDC_get_mutation_frequency`, `GDC_get_cnv_data`*
-
-### DepMap Target Essentiality (NEW)
-
-| Gene | Mean Effect (All) | Mean Effect (Cancer Type) | Selectivity | Interpretation |
-|------|-------------------|---------------------------|-------------|----------------|
-| EGFR | -0.15 | -0.45 (lung) | Cancer-selective | Good target |
-| KRAS | -0.82 | -0.91 (pancreatic) | Essential | Hard to target |
-| MYC | -0.95 | -0.93 | Pan-essential | Challenging target |
-
-*Effect score <-0.5 = strongly essential for cell survival*
-*Source: DepMap via `DepMap_get_gene_dependencies`*
-
-*Combined Sources: CIViC, ClinVar, COSMIC, GDC/TCGA, DepMap*
+### DepMap Target Essentiality
+| Gene | Mean Effect (All) | Mean Effect (Cancer Type) | Interpretation |
+|------|-------------------|---------------------------|----------------|
+| EGFR | -0.15 | -0.45 (lung) | Cancer-selective target |
 ```
 
 ---
 
-## Phase 2.5: Tumor Expression Context (NEW)
+## Phase 2.5: Tumor Expression Context
 
-### 2.5.1 Cell-Type Expression in Tumor (CELLxGENE)
-
-```python
-def get_tumor_expression_context(tu, gene_symbol, cancer_type):
-    """Get cell-type specific expression in tumor microenvironment."""
-    
-    # Get expression in tumor and normal cells
-    expression = tu.tools.CELLxGENE_get_expression_data(
-        gene=gene_symbol,
-        tissue=cancer_type  # e.g., "lung", "breast"
-    )
-    
-    # Cell metadata for context
-    cell_metadata = tu.tools.CELLxGENE_get_cell_metadata(
-        gene=gene_symbol
-    )
-    
-    # Identify tumor vs normal expression
-    tumor_expression = [c for c in expression if 'tumor' in c.get('cell_type', '').lower()]
-    normal_expression = [c for c in expression if 'normal' in c.get('cell_type', '').lower()]
-    
-    return {
-        'tumor_expression': tumor_expression,
-        'normal_expression': normal_expression,
-        'ratio': calculate_tumor_normal_ratio(tumor_expression, normal_expression)
-    }
-```
-
-**Why it matters**: 
-- Confirms target is expressed in tumor cells (not just stroma)
-- Identifies potential resistance from tumor heterogeneity
-- Supports drug selection based on expression patterns
-
-### 2.5.2 Output for Report
-
-```markdown
-## 2.5 Tumor Expression Context
-
-### Target Expression in Tumor Microenvironment (CELLxGENE)
-
-| Gene | Tumor Cells | Normal Cells | Tumor/Normal Ratio | Interpretation |
-|------|-------------|--------------|-------------------|----------------|
-| EGFR | High (TPM=85) | Medium (TPM=25) | 3.4x | Good target |
-| MET | Medium (TPM=35) | Low (TPM=8) | 4.4x | Potential bypass |
-| AXL | High (TPM=120) | Low (TPM=15) | 8.0x | Resistance marker |
-
-### Cell Type Distribution
-
-- **EGFR-high cells**: Tumor epithelial (85%), CAFs (10%), immune (5%)
-- **MET-high cells**: Tumor epithelial (70%), endothelial (20%), immune (10%)
-
-**Clinical Relevance**: EGFR highly expressed in tumor epithelial cells. AXL overexpression in tumor suggests potential resistance mechanism.
-
-*Source: CELLxGENE Census*
-```
+Call `CELLxGENE_get_expression_data` with `gene=<GENE>` and `tissue=<TISSUE>` to get cell-type-specific expression in the tumor microenvironment. Compare tumor epithelial, CAF, and immune compartments. High tumor/normal expression ratio confirms the target is expressed where therapy needs to act and supports selectivity.
 
 ---
 
@@ -692,10 +216,10 @@ def get_tumor_expression_context(tu, gene_symbol, cancer_type):
 
 ### 3.1 Approved Therapies
 
-Query order:
-1. `OpenTargets_get_associated_drugs_by_target_ensemblId` → Approved drugs
-2. `DailyMed_search_spls` → FDA label details
-3. `ChEMBL_get_drug_mechanisms_of_action_by_chemblId` → Mechanism
+Query in this order:
+1. `OpenTargets_get_associated_drugs_by_target_ensemblId` with `ensemblId=<ID>` — approved drugs for the target
+2. `DailyMed_search_spls` with `drug_name=<DRUG>` — FDA label details and approved indications
+3. `ChEMBL_get_drug_mechanisms_of_action_by_chemblId` with `chemblId=<ID>` — mechanism of action
 
 ### 3.2 Treatment Prioritization
 
@@ -724,132 +248,55 @@ Query order:
 
 ---
 
-## Phase 3.5: Pathway & Network Analysis (NEW)
+## Phase 3.5: Pathway & Network Analysis
 
-### 3.5.1 Pathway Context (KEGG/Reactome)
+### 3.5.1 Pathway Context
 
-```python
-def get_pathway_context(tu, gene_symbols, cancer_type):
-    """Get pathway context for drug combinations and resistance."""
-    
-    pathway_map = {}
-    for gene in gene_symbols:
-        # KEGG pathways
-        kegg_gene = tu.tools.kegg_find_genes(query=f"hsa:{gene}")
-        if kegg_gene:
-            pathways = tu.tools.kegg_get_gene_info(gene_id=kegg_gene[0]['id'])
-            pathway_map[gene] = pathways.get('pathways', [])
-        
-        # Reactome disease score
-        reactome = tu.tools.reactome_disease_target_score(
-            disease=cancer_type,
-            target=gene
-        )
-        pathway_map[f"{gene}_reactome"] = reactome
-    
-    return pathway_map
-```
+Call `kegg_search_pathway` with `query=<GENE>` or `kegg_get_gene_info` with the KEGG gene ID (format: `hsa:<ENTREZ_ID>`) to identify relevant signaling pathways. Call `reactome_disease_target_score` with `disease=<CANCER_TYPE>` and `target=<GENE>` for Reactome disease relevance scores.
 
-### 3.5.2 Protein Interaction Network (IntAct)
+Identify: primary activated pathway, downstream effectors, and potential bypass pathways that may mediate resistance.
 
-```python
-def get_resistance_network(tu, drug_target, bypass_candidates):
-    """Find protein interactions that may mediate resistance."""
-    
-    # Get interaction network for drug target
-    network = tu.tools.intact_get_interaction_network(
-        gene=drug_target,
-        depth=2  # Include 2nd degree connections
-    )
-    
-    # Find bypass pathway candidates in network
-    bypass_in_network = [
-        node for node in network['nodes']
-        if node['gene'] in bypass_candidates
-    ]
-    
-    return {
-        'network': network,
-        'bypass_connections': bypass_in_network,
-        'total_interactors': len(network['nodes'])
-    }
-```
+### 3.5.2 Protein Interaction Network
 
-### 3.5.3 Output for Report
+Call `intact_get_interaction_network` with `gene=<GENE>` and `depth=1` for direct interactors (use `depth=2` for second-degree bypass candidates). Known EGFR bypass pathways to check: MET, ERBB2, ERBB3, AXL, IGF1R.
+
+Document direct interactions with MI-score as biological rationale for combination therapies.
+
+### 3.5.3 Output
 
 ```markdown
-## 3.5 Pathway & Network Analysis
+## Pathway & Network Analysis
 
-### Signaling Pathway Context (KEGG)
-
-| Pathway | Genes Involved | Relevance | Drug Targets |
-|---------|---------------|-----------|--------------|
-| EGFR signaling (hsa04012) | EGFR, MET, ERBB3 | Primary pathway | Osimertinib, Capmatinib |
+| Pathway | Genes | Relevance | Drug Targets |
+|---------|-------|-----------|--------------|
+| EGFR signaling (hsa04012) | EGFR, MET, ERBB3 | Primary | Osimertinib, Capmatinib |
 | PI3K-AKT (hsa04151) | PIK3CA, AKT1 | Downstream | Alpelisib |
-| RAS-MAPK (hsa04010) | KRAS, BRAF, MEK | Bypass potential | Sotorasib, Trametinib |
+| RAS-MAPK (hsa04010) | KRAS, BRAF, MEK | Bypass | Sotorasib, Trametinib |
 
-### Drug Combination Rationale
-
-**Biological basis for combinations**:
-- EGFR inhibition → compensatory MET activation (60% of cases)
-- **Rationale for EGFR + MET inhibition**: Block primary and bypass pathways
-- Network shows direct EGFR-MET interaction (IntAct: MI-score 0.75)
-
-### Protein Interaction Network (IntAct)
-
-| Target | Direct Interactors | Key Partners | Relevance |
-|--------|-------------------|--------------|-----------|
-| EGFR | 156 | MET, ERBB2, ERBB3, GRB2 | Bypass pathways |
-| MET | 89 | EGFR, HGF, GAB1 | Resistance mediator |
-
-*Source: KEGG, Reactome, IntAct*
+**Combination rationale**: EGFR inhibition → compensatory MET activation (60% of cases).
+Network confirms direct EGFR-MET interaction (IntAct MI-score 0.75).
 ```
 
 ---
 
 ## Phase 4: Resistance Analysis
 
-### 4.1 Known Mechanisms (Literature + CIViC)
+### 4.1 Known Mechanisms
 
-```python
-def analyze_resistance(tu, drug_name, gene_symbol):
-    """Find known resistance mechanisms."""
-    # CIViC resistance evidence
-    resistance = tu.tools.civic_search_evidence_items(
-        drug=drug_name,
-        evidence_type="Predictive",
-        clinical_significance="Resistance"
-    )
-    
-    # Literature search
-    papers = tu.tools.PubMed_search_articles(
-        query=f'"{drug_name}" AND "{gene_symbol}" AND resistance',
-        limit=20
-    )
-    
-    return {'civic': resistance, 'literature': papers}
-```
+Call `civic_search_evidence_items` with `drug=<DRUG>`, `evidence_type="Predictive"`, and `clinical_significance="Resistance"` to retrieve CIViC resistance evidence. Then call `PubMed_search_articles` with `query='"<DRUG>" AND "<GENE>" AND resistance'` for published mechanisms.
 
-### 4.2 Structure-Based Analysis (NvidiaNIM)
+Key resistance patterns to check:
+- **EGFR TKIs**: T790M (1st/2nd gen), C797S (osimertinib), MET amplification, SCLC transformation
+- **BRAF inhibitors**: NRAS mutation, MEK bypass, BRAF splice variants
+- **ALK inhibitors**: ALK secondary mutations (L1196M, G1269A), bypass via EGFR, KRAS
 
-When mutation affects drug binding:
+### 4.2 Structure-Based Analysis
 
-```python
-def model_resistance_mechanism(tu, gene_ids, mutation, drug_smiles):
-    """Model structural impact of resistance mutation."""
-    # Get/predict structure
-    structure = tu.tools.NvidiaNIM_alphafold2(sequence=wild_type_sequence)
-    
-    # Dock drug to wild-type
-    wt_docking = tu.tools.NvidiaNIM_diffdock(
-        protein=structure['structure'],
-        ligand=drug_smiles,
-        num_poses=5
-    )
-    
-    # Compare binding site changes
-    # Report: "T790M introduces bulky methionine, steric clash with erlotinib"
-```
+When the resistance mutation affects the drug binding site, use `NvidiaNIM_alphafold2` with `sequence=<WT_SEQUENCE>` to predict the wild-type structure, then `NvidiaNIM_diffdock` with `protein=<STRUCTURE>` and `ligand=<DRUG_SMILES>` and `num_poses=5` to model drug binding. Repeat with mutant sequence to compare binding site geometry.
+
+Report the structural basis: e.g., "T790M introduces a bulky methionine that creates steric clash with erlotinib's aniline group."
+
+Retrieve protein sequences via `UniProt_get_protein_sequence` with `accession=<UNIPROT_ID>`.
 
 ---
 
@@ -857,23 +304,9 @@ def model_resistance_mechanism(tu, gene_ids, mutation, drug_smiles):
 
 ### 5.1 Search Strategy
 
-```python
-def find_trials(tu, condition, biomarker, location=None):
-    """Find matching clinical trials."""
-    # Search with biomarker
-    trials = tu.tools.search_clinical_trials(
-        condition=condition,
-        intervention=biomarker,  # e.g., "EGFR"
-        status="Recruiting",
-        pageSize=50
-    )
-    
-    # Get eligibility for top matches
-    nct_ids = [t['nct_id'] for t in trials[:20]]
-    eligibility = tu.tools.get_clinical_trial_eligibility_criteria(nct_ids=nct_ids)
-    
-    return trials, eligibility
-```
+Call `search_clinical_trials` with `condition=<CANCER_TYPE>`, `intervention=<BIOMARKER_OR_DRUG>`, `status="Recruiting"`, and `pageSize=50`. For the top 20 results, call `get_clinical_trial_eligibility_criteria` with `nct_ids=[<LIST>]` to retrieve inclusion/exclusion criteria.
+
+Filter for biomarker-required trials that match the patient's molecular profile.
 
 ### 5.2 Output Format
 
@@ -890,110 +323,31 @@ def find_trials(tu, condition, biomarker, location=None):
 
 ---
 
-## Phase 5.5: Literature Evidence (NEW)
+## Phase 5.5: Literature Evidence
 
-### 5.5.1 Published Literature (PubMed)
+### 5.5.1 Published Literature
 
-```python
-def search_treatment_literature(tu, cancer_type, biomarker, drug_name):
-    """Search for treatment evidence in literature."""
-    
-    # Drug + biomarker combination
-    drug_papers = tu.tools.PubMed_search_articles(
-        query=f'"{drug_name}" AND "{biomarker}" AND "{cancer_type}"',
-        limit=20
-    )
-    
-    # Resistance mechanisms
-    resistance_papers = tu.tools.PubMed_search_articles(
-        query=f'"{drug_name}" AND resistance AND mechanism',
-        limit=15
-    )
-    
-    return {
-        'treatment_evidence': drug_papers,
-        'resistance_literature': resistance_papers
-    }
-```
+Call `PubMed_search_articles` with `query='"<DRUG>" AND "<BIOMARKER>" AND "<CANCER_TYPE>"'` (limit 20) for treatment efficacy evidence. For resistance, search `'"<DRUG>" AND resistance AND mechanism'`.
 
-### 5.5.2 Preprints (BioRxiv/MedRxiv)
+### 5.5.2 Preprints
 
-```python
-def search_preprints(tu, cancer_type, biomarker):
-    """Search preprints for cutting-edge findings."""
-    
-    # BioRxiv cancer research
-    biorxiv = tu.tools.BioRxiv_search_preprints(
-        query=f"{cancer_type} {biomarker} treatment",
-        limit=10
-    )
-    
-    # MedRxiv clinical studies
-    medrxiv = tu.tools.MedRxiv_search_preprints(
-        query=f"{cancer_type} {biomarker}",
-        limit=10
-    )
-    
-    return {
-        'biorxiv': biorxiv,
-        'medrxiv': medrxiv
-    }
-```
+Use `EuropePMC_search_articles` with `source="PPR"` to search preprints across bioRxiv and medRxiv (these servers lack their own search APIs). Mark all preprint findings as NOT peer-reviewed in the report.
 
-### 5.5.3 Citation Analysis (OpenAlex)
+### 5.5.3 Citation Context
 
-```python
-def analyze_key_papers(tu, key_papers):
-    """Get citation metrics for key evidence papers."""
-    
-    analyzed = []
-    for paper in key_papers[:10]:
-        work = tu.tools.openalex_search_works(
-            query=paper['title'],
-            limit=1
-        )
-        if work:
-            analyzed.append({
-                'title': paper['title'],
-                'citations': work[0].get('cited_by_count', 0),
-                'year': work[0].get('publication_year'),
-                'open_access': work[0].get('is_oa', False)
-            })
-    
-    return analyzed
-```
+Call `openalex_search_works` with `query=<PAPER_TITLE>` to retrieve citation counts for key evidence papers. High citation count (>100) from a Phase 3 trial strengthens evidence tier.
 
-### 5.5.4 Output for Report
+### 5.5.4 Output
 
 ```markdown
-## 5.5 Literature Evidence
+## Literature Evidence
 
-### Key Clinical Studies
-
-| PMID | Title | Year | Citations | Evidence Type |
-|------|-------|------|-----------|---------------|
-| 27959700 | AURA3: Osimertinib vs chemotherapy... | 2017 | 2,450 | Phase 3 trial |
+| PMID | Title | Year | Citations | Type |
+|------|-------|------|-----------|------|
+| 27959700 | AURA3: Osimertinib vs chemotherapy... | 2017 | 2,450 | Phase 3 |
 | 30867819 | Mechanisms of osimertinib resistance... | 2019 | 680 | Review |
-| 34125020 | Amivantamab + lazertinib Phase 1... | 2021 | 320 | Phase 1 trial |
 
-### Recent Preprints (Not Peer-Reviewed)
-
-| Source | Title | Posted | Key Finding |
-|--------|-------|--------|-------------|
-| MedRxiv | Novel C797S resistance strategy... | 2024-01 | Fourth-gen TKI |
-| BioRxiv | scRNA-seq reveals resistance... | 2024-02 | Cell state switch |
-
-**⚠️ Note**: Preprints have NOT undergone peer review. Interpret with caution.
-
-### Evidence Summary
-
-| Category | Papers Found | High-Impact (>100 citations) |
-|----------|--------------|------------------------------|
-| Treatment efficacy | 25 | 8 |
-| Resistance mechanisms | 18 | 5 |
-| Combinations | 12 | 3 |
-
-*Source: PubMed, BioRxiv, MedRxiv, OpenAlex*
+**Note**: Preprints have NOT undergone peer review — interpret with caution.
 ```
 
 ---
@@ -1053,8 +407,9 @@ def analyze_key_papers(tu, key_papers):
 
 ## Completeness Checklist
 
-Before finalizing report:
+See [CHECKLIST.md](CHECKLIST.md) for the full pre-delivery checklist.
 
+Quick summary before finalizing:
 - [ ] All variants interpreted with evidence levels
 - [ ] ≥1 first-line recommendation with ★★★ evidence (or explain why none)
 - [ ] Resistance mechanism addressed (if prior therapy failed)
@@ -1064,14 +419,39 @@ Before finalizing report:
 
 ---
 
+## Known Gotchas
+
+**Parameter naming traps**:
+- `OpenTargets_*` tools require `ensemblId` (camelCase i, lowercase d). `ensemblID` (capital D) will silently fail.
+- `civic_get_variant` takes a numeric `id`, not `variant_name` or gene symbol. Always search first to get the numeric ID.
+- `search_clinical_trials` uses `condition` not `disease`. Using `disease` returns no results without error.
+- `OncoKB_annotate_variant` requires the `operation="annotate_variant"` parameter even though it is the only operation; omitting it causes failure.
+- `COSMIC_*` tools require the `operation` parameter (`"search"` or `"get_by_gene"`).
+
+**Data interpretation traps**:
+- CIViC evidence items use `evidence_type="Predictive"` for drug sensitivity/resistance — do NOT filter for `"Therapeutic"` (that field does not exist).
+- DepMap effect scores are negative for essential genes. A score of 0 means NOT essential. Do not misread -0.8 as "80% expressed."
+- cBioPortal study IDs are lowercase with underscores (e.g., `luad_tcga`), not the TCGA-format used by GDC (e.g., `TCGA-LUAD`). Use the correct format per tool.
+- OncoKB `tumor_type` takes OncoTree codes (e.g., `"LUAD"`, `"MEL"`), not free-text cancer names.
+- EuropePMC preprint search uses `source="PPR"`, not `source="preprint"` or `source="biorxiv"`.
+
+**Workflow traps**:
+- If CIViC returns no results for a variant, it does NOT mean the variant is benign — fall back to OncoKB and COSMIC before concluding.
+- GDC expression tools (`GDC_get_gene_expression`) return file metadata, not expression values directly. Use TCGA data for mutation/CNV; use Human Protein Atlas or CELLxGENE for expression levels.
+- NvidiaNIM structure prediction requires the full amino acid sequence, not just the gene name. Retrieve the sequence first via `UniProt_get_protein_sequence`.
+- TMB (tumor mutational burden) and MSI status are biomarkers for immunotherapy eligibility (pembrolizumab). If the patient profile includes TMB-High (≥10 mut/Mb) or MSI-High, always check pembrolizumab FDA approval regardless of the primary driver mutation.
+
+---
+
 ## Fallback Chains
 
 | Primary | Fallback | Use When |
 |---------|----------|----------|
-| CIViC variant | OncoKB (literature) | Variant not in CIViC |
+| CIViC variant | OncoKB, then COSMIC | Variant not in CIViC |
 | OpenTargets drugs | ChEMBL activities | No approved drugs found |
 | ClinicalTrials.gov | WHO ICTRP | US trials insufficient |
-| NvidiaNIM_alphafold2 | AlphaFold DB | API unavailable |
+| NvidiaNIM_alphafold2 | AlphaFold DB precomputed | API unavailable |
+| GDC expression | Human Protein Atlas | RNA-seq data absent |
 
 ---
 
@@ -1086,6 +466,33 @@ Before finalizing report:
 
 ---
 
-## Tool Reference
+## Abbreviated Tool Reference
 
-See [TOOLS_REFERENCE.md](TOOLS_REFERENCE.md) for complete tool documentation.
+| Phase | Tool | Purpose |
+|-------|------|---------|
+| 1 | `MyGene_query_genes` | Resolve gene → Ensembl/Entrez IDs |
+| 1 | `UniProt_search` | Resolve gene → UniProt accession |
+| 2 | `civic_search_variants` | Find CIViC variant records |
+| 2 | `civic_get_variant` | Get evidence items (requires numeric id) |
+| 2 | `COSMIC_search_mutations` | Mutation frequency + cancer types |
+| 2 | `GDC_get_mutation_frequency` | Pan-cancer TCGA mutation stats |
+| 2 | `GDC_get_ssm_by_gene` | Per-project somatic mutations |
+| 2 | `DepMap_get_gene_dependencies` | CRISPR essentiality scores |
+| 2 | `OncoKB_annotate_variant` | FDA actionability level |
+| 2 | `cBioPortal_get_mutations` | Cross-study mutation data |
+| 2 | `HPA_get_comparative_expression_by_gene_and_cellline` | Tumor vs normal expression |
+| 2.5 | `CELLxGENE_get_expression_data` | Cell-type expression in tumor |
+| 3 | `OpenTargets_get_associated_drugs_by_target_ensemblId` | Approved drugs |
+| 3 | `DailyMed_search_spls` | FDA label details |
+| 3.5 | `kegg_get_gene_info` | Pathway membership |
+| 3.5 | `intact_get_interaction_network` | Protein interaction partners |
+| 4 | `civic_search_evidence_items` | Resistance evidence |
+| 4 | `NvidiaNIM_alphafold2` | Protein structure prediction |
+| 4 | `NvidiaNIM_diffdock` | Drug-protein docking |
+| 5 | `search_clinical_trials` | Find active trials |
+| 5 | `get_clinical_trial_eligibility_criteria` | Eligibility criteria |
+| 5.5 | `PubMed_search_articles` | Published evidence |
+| 5.5 | `EuropePMC_search_articles` | Preprints (source="PPR") |
+| 5.5 | `openalex_search_works` | Citation counts |
+
+For complete parameter tables and usage examples, see [references/tools.md](references/tools.md).

@@ -13,16 +13,13 @@ Comprehensive chemical safety and toxicology analysis integrating predictive AI 
 - "Is this chemical toxic?" / "What are the toxicity endpoints for [compound]?"
 - "Assess the safety profile of [drug/chemical]"
 - "What are the ADMET properties of [SMILES]?"
-- "What genes does [chemical] interact with?"
-- "What diseases are linked to [chemical] exposure?"
-- "Predict toxicity for these molecules"
-- "Drug safety assessment for [drug name]"
-- "Environmental health risk of [chemical]"
-- "Chemical hazard profiling"
-- "Toxicogenomic analysis of [compound]"
+- "What genes does [chemical] interact with?" / "What diseases are linked to [chemical] exposure?"
+- "Predict toxicity for these molecules" / "Batch toxicity screening"
+- "Drug safety assessment for [drug name]" / "Environmental health risk of [chemical]"
+- "Chemical hazard profiling" / "Toxicogenomic analysis of [compound]"
 
 **Use Cases**:
-1. **Predictive Toxicology**: AI-predicted toxicity endpoints (AMES mutagenicity, DILI, LD50, carcinogenicity, skin reactions) for novel compounds via SMILES
+1. **Predictive Toxicology**: AI-predicted endpoints (AMES, DILI, LD50, carcinogenicity, skin reactions) for novel compounds via SMILES
 2. **ADMET Profiling**: Full absorption, distribution, metabolism, excretion, toxicity characterization
 3. **Toxicogenomics**: Chemical-gene interaction mapping, gene-disease associations from CTD
 4. **Regulatory Safety**: FDA label warnings, boxed warnings, contraindications, adverse reactions
@@ -32,43 +29,35 @@ Comprehensive chemical safety and toxicology analysis integrating predictive AI 
 
 ---
 
-## KEY PRINCIPLES
+## Key Principles
 
 1. **Report-first approach** - Create report file FIRST, then populate progressively
-2. **Tool parameter verification** - Verify params via `get_tool_info` before calling unfamiliar tools
+2. **Disambiguation first** - Resolve compound identity (name -> SMILES, CID, ChEMBL ID) before analysis
 3. **Evidence grading** - Grade all safety claims by evidence strength (T1-T4)
 4. **Citation requirements** - Every toxicity finding must have inline source attribution
 5. **Mandatory completeness** - All sections must exist with data minimums or explicit "No data" notes
-6. **Disambiguation first** - Resolve compound identity (name -> SMILES, CID, ChEMBL ID) before analysis
-7. **Negative results documented** - "No toxicity signals found" is data; empty sections are failures
-8. **Conservative risk assessment** - When evidence is ambiguous, flag as "requires further investigation"
-9. **English-first queries** - Always use English chemical/drug names in tool calls
+6. **Negative results documented** - "No toxicity signals found" is valid data; empty sections are failures
+7. **Conservative risk assessment** - When evidence is ambiguous, flag as "requires further investigation"
+8. **English-first queries** - Always use English chemical/drug names in tool calls
 
 ---
 
 ## Evidence Grading System (MANDATORY)
 
-Grade every toxicity claim by evidence strength:
+Grade every toxicity claim with one of these tiers:
 
 | Tier | Symbol | Criteria | Examples |
-|------|--------|----------|----------|
-| **T1** | [T1] | Direct human evidence, regulatory finding | FDA boxed warning, clinical trial toxicity, human case reports |
-| **T2** | [T2] | Animal studies, validated in vitro | Nonclinical toxicology, AMES positive, animal LD50 |
-| **T3** | [T3] | Computational prediction, association data | ADMET-AI prediction, CTD association, QSAR model |
-| **T4** | [T4] | Database annotation, text-mined | Literature mention, database entry without validation |
+|------|--------|----------|---------|
+| T1 | [T1] | Direct human evidence, regulatory finding | FDA boxed warning, clinical trial toxicity |
+| T2 | [T2] | Animal studies, validated in vitro | Nonclinical toxicology, AMES positive, animal LD50 |
+| T3 | [T3] | Computational prediction, association data | ADMET-AI prediction, CTD inferred association |
+| T4 | [T4] | Database annotation, text-mined | Literature mention without validation |
 
-### Required Evidence Grading Locations
-
-Evidence grades MUST appear in:
-1. **Executive Summary** - Key toxicity findings graded
-2. **Toxicity Predictions** - Every ADMET-AI endpoint with confidence note
-3. **Regulatory Safety** - FDA findings marked [T1]
-4. **Chemical-Gene Interactions** - CTD data marked by curation status
-5. **Risk Assessment** - Final risk classification with supporting evidence tiers
+Evidence grades MUST appear in: Executive Summary, Toxicity Predictions, Regulatory Safety section, CTD results, and the final Risk Assessment.
 
 ---
 
-## Core Strategy: 8 Research Dimensions
+## Research Workflow: 8 Phases
 
 ```
 Chemical/Drug Query
@@ -78,13 +67,9 @@ Chemical/Drug Query
 |   +-- Get molecular formula, weight, canonical structure
 |
 +-- PHASE 1: Predictive Toxicology (ADMET-AI)
-|   +-- Mutagenicity (AMES)
-|   +-- Hepatotoxicity (DILI, ClinTox)
-|   +-- Carcinogenicity
-|   +-- Acute toxicity (LD50)
-|   +-- Skin reactions
-|   +-- Stress response pathways
-|   +-- Nuclear receptor activity
+|   +-- Mutagenicity (AMES), Hepatotoxicity (DILI, ClinTox)
+|   +-- Carcinogenicity, Acute toxicity (LD50), Skin reactions
+|   +-- Stress response pathways, Nuclear receptor activity
 |
 +-- PHASE 2: ADMET Properties
 |   +-- Absorption: BBB penetrance, bioavailability
@@ -98,25 +83,19 @@ Chemical/Drug Query
 |   +-- Affected biological pathways
 |
 +-- PHASE 4: Regulatory Safety (FDA Labels)
-|   +-- Boxed warnings (Black Box)
-|   +-- Contraindications
-|   +-- Adverse reactions
-|   +-- Warnings and precautions
-|   +-- Nonclinical toxicology
+|   +-- Boxed warnings, Contraindications, Adverse reactions
+|   +-- Warnings and precautions, Nonclinical toxicology
 |
 +-- PHASE 5: Drug Safety Profile (DrugBank)
-|   +-- Toxicity data
-|   +-- Contraindications
+|   +-- Toxicity data, Contraindications
 |   +-- Drug interactions affecting safety
 |
 +-- PHASE 6: Chemical-Protein Interactions (STITCH)
 |   +-- Direct chemical-protein binding
-|   +-- Interaction confidence scores
-|   +-- Off-target effects
+|   +-- Interaction confidence scores, Off-target effects
 |
 +-- PHASE 7: Structural Alerts (ChEMBL)
 |   +-- Known toxic substructures (PAINS, Brenk)
-|   +-- Structural alert flags
 |
 +-- SYNTHESIS: Integrated Risk Assessment
     +-- Aggregate all evidence tiers
@@ -128,381 +107,234 @@ Chemical/Drug Query
 
 ## Phase 0: Compound Disambiguation (ALWAYS FIRST)
 
-**CRITICAL**: Resolve compound identity before any analysis.
+Resolve compound identity before any analysis. Determine input type then apply the appropriate strategy:
 
-### Input Types Handled
+| Input Format | Detection | Resolution Strategy |
+|-------------|-----------|---------------------|
+| Drug/chemical name | Default if not SMILES/CID/ChEMBL | `PubChem_get_CID_by_compound_name` -> `PubChem_get_compound_properties_by_CID` |
+| SMILES string | Contains `=`, `#`, `[`, `]`, `(`, `)` or lowercase `c`, `n`, `o` | Use directly for ADMET-AI; resolve to CID via PubChem |
+| PubChem CID | Numeric only | `PubChem_get_compound_properties_by_CID` directly |
+| ChEMBL ID | Starts with "CHEMBL" | `ChEMBL_get_molecule` -> get SMILES + properties |
 
-| Input Format | Resolution Strategy |
-|-------------|---------------------|
-| Drug name (e.g., "Aspirin") | PubChem_get_CID_by_compound_name -> get SMILES from properties |
-| SMILES string | Use directly for ADMET-AI; resolve to CID for other tools |
-| PubChem CID | PubChem_get_compound_properties_by_CID -> get SMILES + name |
-| ChEMBL ID | ChEMBL_get_molecule -> get SMILES + properties |
+After resolution, store: `name`, `smiles`, `cid`, `formula`, `weight`, `inchi`. Extract SMILES from PubChem response field `ConnectivitySMILES`, `CanonicalSMILES`, or `IsomericSMILES`.
 
-### Resolution Steps
-
-1. **Input detection**: Determine if input is name, SMILES, CID, or ChEMBL ID
-   - SMILES: contains typical SMILES characters (=, #, [, ], (, ), c, n, o and no spaces in middle)
-   - CID: numeric only
-   - ChEMBL: starts with "CHEMBL"
-   - Otherwise: treat as compound name
-2. **Name to CID**: `PubChem_get_CID_by_compound_name(name=<compound_name>)`
-3. **CID to properties**: `PubChem_get_compound_properties_by_CID(cid=<cid>)`
-4. **Extract SMILES**: Get SMILES from PubChem properties (field: `ConnectivitySMILES`, `CanonicalSMILES`, or `IsomericSMILES` depending on response format)
-5. **Store resolved IDs**: Maintain dict with `name`, `smiles`, `cid`, `formula`, `weight`, `inchi`
-
-### Disambiguation Output
-
+**Output template:**
 ```markdown
 ## Compound Identity
-
 | Property | Value |
 |----------|-------|
-| **Name** | Acetaminophen |
-| **PubChem CID** | 1983 |
-| **SMILES** | CC(=O)Nc1ccc(O)cc1 |
-| **Formula** | C8H9NO2 |
-| **Molecular Weight** | 151.16 |
-| **InChI** | InChI=1S/C8H9NO2/... |
+| Name | Acetaminophen |
+| PubChem CID | 1983 |
+| SMILES | CC(=O)Nc1ccc(O)cc1 |
+| Formula | C8H9NO2 |
+| Molecular Weight | 151.16 |
 ```
 
 ---
 
 ## Phase 1: Predictive Toxicology (ADMET-AI)
 
-**When**: SMILES is available (from Phase 0 or provided directly)
+Run when SMILES is available. Call all three tools; they are independent and can run in parallel.
 
-**Objective**: Run comprehensive AI-predicted toxicity endpoints
+| Tool | Endpoints Predicted |
+|------|---------------------|
+| `ADMETAI_predict_toxicity` | AMES mutagenicity, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, hERG |
+| `ADMETAI_predict_stress_response` | ARE, ATAD5, HSE, MMP, p53 pathway activation |
+| `ADMETAI_predict_nuclear_receptor_activity` | AhR, AR, ER, PPARg, Aromatase activity |
 
-### Tools Used
+All three tools accept `smiles` as a list of strings. Batch up to ~10 SMILES in a single call. All predictions are graded [T3] (computational).
 
-All ADMET-AI tools take the same parameter format:
+**Interpretation rules:**
+- Classification endpoints: Active (1) = toxic signal; Inactive (0) = no signal
+- Regression endpoint (LD50): Report the numerical value with context (log mg/kg)
+- If ADMET-AI fails for a compound, note "prediction unavailable" and continue
+- **hERG Active** -> flag prominently as cardiac safety risk
+- **AMES Active** -> flag prominently as mutagenicity concern
+- **DILI Active** -> flag prominently as liver toxicity concern
 
-| Tool | Predicted Endpoints | Parameter |
-|------|---------------------|-----------|
-| `ADMETAI_predict_toxicity` | AMES, Carcinogens_Lagunin, ClinTox, DILI, LD50_Zhu, Skin_Reaction, hERG | `smiles`: list[str] |
-| `ADMETAI_predict_stress_response` | Stress response pathway activation (ARE, ATAD5, HSE, MMP, p53) | `smiles`: list[str] |
-| `ADMETAI_predict_nuclear_receptor_activity` | AhR, AR, ER, PPARg, Aromatase nuclear receptor activity | `smiles`: list[str] |
-
-### Workflow
-
-1. Call `ADMETAI_predict_toxicity(smiles=[resolved_smiles])`
-2. Call `ADMETAI_predict_stress_response(smiles=[resolved_smiles])`
-3. Call `ADMETAI_predict_nuclear_receptor_activity(smiles=[resolved_smiles])`
-4. For each endpoint, interpret prediction:
-   - Classification endpoints: Active (1) = toxic signal, Inactive (0) = no signal
-   - Regression endpoints (LD50): Report numerical value with context
-   - All predictions graded [T3] (computational prediction)
-
-### Decision Logic
-
-- **Multiple SMILES**: Can batch up to ~10 SMILES in single call
-- **Failed prediction**: If ADMET-AI fails, note "prediction unavailable" (don't fail entire report)
-- **Confidence**: Note that AI predictions are [T3] evidence, not definitive
-- **hERG flag**: If hERG = Active, flag prominently (cardiac safety risk)
-- **AMES flag**: If AMES = Active, flag prominently (mutagenicity concern)
-- **DILI flag**: If DILI = Active, flag prominently (liver toxicity concern)
-
-### Output Table
-
+**Output template:**
 ```markdown
 ### Toxicity Predictions [T3]
-
-| Endpoint | Prediction | Interpretation | Concern Level |
-|----------|-----------|---------------|---------------|
-| AMES Mutagenicity | Inactive | No mutagenic signal | Low |
-| Carcinogenicity | Inactive | No carcinogenic signal | Low |
-| ClinTox | Active | Clinical toxicity signal | HIGH |
-| DILI | Active | Drug-induced liver injury risk | HIGH |
-| LD50 (Zhu) | 2.45 log(mg/kg) | ~282 mg/kg (moderate) | Medium |
-| Skin Reaction | Inactive | No skin sensitization signal | Low |
-| hERG Inhibition | Active | Cardiac arrhythmia risk | HIGH |
-
-*All predictions from ADMET-AI. Evidence tier: [T3] (computational prediction)*
+| Endpoint | Prediction | Concern Level |
+|----------|-----------|---------------|
+| AMES Mutagenicity | Inactive | Low |
+| DILI | Active | HIGH |
+| LD50 (Zhu) | 2.45 log(mg/kg) (~282 mg/kg) | Medium |
+| hERG Inhibition | Active | HIGH |
+| Skin Reaction | Inactive | Low |
+*Evidence tier: [T3] (ADMET-AI computational prediction)*
 ```
 
 ---
 
 ## Phase 2: ADMET Properties
 
-**When**: SMILES is available
+Run when SMILES is available. All six tools are independent; call in parallel.
 
-**Objective**: Full ADMET characterization beyond toxicity
+| Tool | Properties |
+|------|-----------|
+| `ADMETAI_predict_BBB_penetrance` | Blood-brain barrier crossing probability |
+| `ADMETAI_predict_bioavailability` | Oral bioavailability (F20%, F30%) |
+| `ADMETAI_predict_clearance_distribution` | Clearance, VDss, half-life, PPB |
+| `ADMETAI_predict_CYP_interactions` | CYP1A2/2C9/2C19/2D6/3A4 inhibition and substrate status |
+| `ADMETAI_predict_physicochemical_properties` | LogP, LogD, LogS, MW, pKa, Lipinski compliance |
+| `ADMETAI_predict_solubility_lipophilicity_hydration` | Aqueous solubility, lipophilicity, hydration free energy |
 
-### Tools Used
+**Decision logic:**
+- BBB penetrant + any CNS toxicity endpoint active -> flag as neurotoxicity risk
+- F20% = Low -> note oral absorption concern
+- CYP3A4 inhibitor = Yes -> flag high drug-drug interaction (DDI) risk
+- Count Lipinski violations and report drug-likeness assessment
 
-| Tool | Properties Predicted | Parameter |
-|------|---------------------|-----------|
-| `ADMETAI_predict_BBB_penetrance` | Blood-brain barrier crossing probability | `smiles`: list[str] |
-| `ADMETAI_predict_bioavailability` | Oral bioavailability (F20%, F30%) | `smiles`: list[str] |
-| `ADMETAI_predict_clearance_distribution` | Clearance, VDss, half-life, PPB | `smiles`: list[str] |
-| `ADMETAI_predict_CYP_interactions` | CYP1A2, 2C9, 2C19, 2D6, 3A4 inhibition/substrate | `smiles`: list[str] |
-| `ADMETAI_predict_physicochemical_properties` | LogP, LogD, LogS, MW, pKa | `smiles`: list[str] |
-| `ADMETAI_predict_solubility_lipophilicity_hydration` | Aqueous solubility, lipophilicity, hydration free energy | `smiles`: list[str] |
-
-### Workflow
-
-1. Call all 6 ADMET tools in parallel (independent calls)
-2. Compile results into Absorption / Distribution / Metabolism / Excretion sections
-3. Assess Lipinski Rule of 5 compliance from physicochemical properties
-4. Flag drug-drug interaction risks from CYP inhibition profiles
-
-### Decision Logic
-
-- **BBB penetrant + toxicity**: If BBB = Yes and any CNS toxicity endpoint active, flag as neurotoxicity risk
-- **Low bioavailability**: If F20% = Low, note absorption concerns
-- **CYP inhibitor**: If CYP3A4 inhibitor = Yes, flag high DDI risk
-- **Lipinski violations**: Count violations and report drug-likeness assessment
-
-### Output Format
-
+**Output template:**
 ```markdown
 ### ADMET Profile [T3]
-
 #### Absorption
 | Property | Value | Interpretation |
 |----------|-------|----------------|
 | BBB Penetrance | Yes | Crosses blood-brain barrier |
 | Bioavailability (F20%) | 85% | Good oral absorption |
 
-#### Distribution
-| Property | Value | Interpretation |
-|----------|-------|----------------|
-| VDss | 1.2 L/kg | Moderate tissue distribution |
-| PPB | 92% | Highly protein bound |
-
-#### Metabolism
+#### Metabolism (CYP Interactions)
 | CYP Enzyme | Substrate | Inhibitor |
 |------------|-----------|-----------|
-| CYP1A2 | No | No |
-| CYP2C9 | Yes | No |
-| CYP2C19 | No | No |
-| CYP2D6 | No | No |
 | CYP3A4 | Yes | Yes (DDI risk) |
-
-#### Excretion
-| Property | Value | Interpretation |
-|----------|-------|----------------|
-| Clearance | 8.5 mL/min/kg | Moderate clearance |
-| Half-life | 6.2 h | Moderate half-life |
+| CYP2D6 | No | No |
 ```
 
 ---
 
 ## Phase 3: Toxicogenomics (CTD)
 
-**When**: Compound name is resolved
+Run when compound name is resolved. Requires the chemical name (not SMILES or CID).
 
-**Objective**: Map chemical-gene-disease relationships from curated CTD data
+Call `CTD_get_chemical_gene_interactions(input_terms=compound_name)` and `CTD_get_chemical_diseases(input_terms=compound_name)`. Both accept a string: common chemical name, MeSH name, CAS RN, or MeSH ID. If the common name returns no results, try the MeSH name.
 
-### Tools Used
+**Grading:**
+- Direct curated CTD evidence from literature -> [T2]
+- Computationally inferred associations -> [T3]
 
-| Tool | Function | Parameter |
-|------|----------|-----------|
-| `CTD_get_chemical_gene_interactions` | Genes affected by chemical | `input_terms`: str (chemical name) |
-| `CTD_get_chemical_diseases` | Diseases linked to chemical exposure | `input_terms`: str (chemical name) |
+**Interpretation rules:**
+- Distinguish therapeutic disease associations (drug treats disease) from adverse (chemical causes disease)
+- Prioritize "marker/mechanism" evidence over simple "association" — stronger causal signal
+- Gene interaction types: expression changes, binding, and activity modulation carry different weight
+- Report top 20 gene interactions and top 10 disease associations; note total count
 
-### Workflow
-
-1. Call `CTD_get_chemical_gene_interactions(input_terms=compound_name)`
-2. Call `CTD_get_chemical_diseases(input_terms=compound_name)`
-3. Parse gene interactions: extract gene symbols, interaction types (increases/decreases expression, binding, etc.)
-4. Parse disease associations: extract disease names, evidence types (marker/mechanism/therapeutic)
-5. Identify most affected biological processes from gene list
-
-### Decision Logic
-
-- **Direct evidence vs inferred**: CTD separates curated direct evidence from inferred associations
-- **Therapeutic vs toxic**: Disease associations can be therapeutic (drug treats disease) or adverse (chemical causes disease)
-- **Gene interaction types**: Distinguish between expression changes, binding, and activity modulation
-- **Prioritize marker/mechanism**: These indicate stronger causal evidence than simple associations
-- **Grade curated as [T2]**: Direct curated CTD evidence from literature
-- **Grade inferred as [T3]**: Computationally inferred associations
-
-### Output Format
-
+**Output template:**
 ```markdown
 ### Toxicogenomics (CTD) [T2/T3]
-
-#### Chemical-Gene Interactions (Top 20)
-| Gene | Interaction | Type | Evidence |
-|------|------------|------|----------|
-| CYP1A2 | increases expression | mRNA | [T2] curated |
-| TP53 | affects activity | protein | [T2] curated |
-| ...  | ... | ... | ... |
-
-**Total interactions found**: 156
-**Top affected pathways**: Xenobiotic metabolism, Apoptosis, DNA damage response
+#### Chemical-Gene Interactions (Top 20 of N total)
+| Gene | Interaction | Evidence |
+|------|------------|---------|
+| CYP1A2 | increases expression | [T2] curated |
+| TP53 | affects activity | [T2] curated |
 
 #### Chemical-Disease Associations (Top 10)
 | Disease | Association Type | Evidence |
-|---------|-----------------|----------|
+|---------|-----------------|---------|
 | Liver Neoplasms | marker/mechanism | [T2] curated |
-| Contact Dermatitis | therapeutic | [T2] curated |
-| ... | ... | ... |
+
+**Top affected pathways**: Xenobiotic metabolism, Apoptosis, DNA damage response
 ```
 
 ---
 
 ## Phase 4: Regulatory Safety (FDA Labels)
 
-**When**: Compound has an approved drug name
+Run when the compound has an approved drug name. All six tools are independent; call in parallel.
 
-**Objective**: Extract regulatory safety information from FDA drug labels
+| Tool | Information Retrieved |
+|------|----------------------|
+| `FDA_get_boxed_warning_info_by_drug_name` | Black box warnings (most serious) |
+| `FDA_get_contraindications_by_drug_name` | Absolute contraindications |
+| `FDA_get_adverse_reactions_by_drug_name` | Known adverse reactions |
+| `FDA_get_warnings_by_drug_name` | Warnings and precautions |
+| `FDA_get_nonclinical_toxicology_info_by_drug_name` | Animal toxicology data [T2] |
+| `FDA_get_carcinogenic_mutagenic_fertility_by_drug_name` | Carcinogenicity/mutagenicity/fertility data [T2] |
 
-### Tools Used
+All tools accept `drug_name` as a string (brand or generic name).
 
-| Tool | Information Retrieved | Parameter |
-|------|---------------------|-----------|
-| `FDA_get_boxed_warning_info_by_drug_name` | Black box warnings (most serious) | `drug_name`: str |
-| `FDA_get_contraindications_by_drug_name` | Absolute contraindications | `drug_name`: str |
-| `FDA_get_adverse_reactions_by_drug_name` | Known adverse reactions | `drug_name`: str |
-| `FDA_get_warnings_by_drug_name` | Warnings and precautions | `drug_name`: str |
-| `FDA_get_nonclinical_toxicology_info_by_drug_name` | Animal toxicology data | `drug_name`: str |
-| `FDA_get_carcinogenic_mutagenic_fertility_by_drug_name` | Carcinogenicity/mutagenicity/fertility data | `drug_name`: str |
+**Decision logic:**
+- Boxed warning present -> flag as CRITICAL in executive summary [T1]
+- No FDA data returned -> note "Not an FDA-approved drug" and continue with other phases
+- If first name fails, retry with alternative name (brand vs. generic)
+- Nonclinical toxicology data is [T2]; all other FDA label data is [T1]
+- Categorize warnings by organ system (hepatic, cardiac, renal, CNS, etc.)
 
-### Workflow
-
-1. Call all 6 FDA tools in parallel (independent queries by drug name)
-2. Parse and structure each response
-3. Prioritize: Boxed Warnings > Contraindications > Warnings > Adverse Reactions
-4. All FDA label data is [T1] evidence (regulatory finding based on human/animal data)
-
-### Decision Logic
-
-- **Boxed warning present**: Flag as CRITICAL safety concern in executive summary
-- **No FDA data**: Chemical may not be an approved drug; note "Not an FDA-approved drug" and continue with other phases
-- **Multiple warnings**: Categorize by organ system (hepatic, cardiac, renal, CNS, etc.)
-- **Nonclinical toxicology**: Grade as [T2] (animal data supporting human risk)
-
-### Output Format
-
+**Output template:**
 ```markdown
 ### Regulatory Safety (FDA) [T1]
-
 #### Boxed Warning
-**PRESENT** - Hepatotoxicity risk with doses >4g/day. Liver failure reported. [T1]
+**PRESENT** — Hepatotoxicity risk with doses >4g/day. Liver failure reported. [T1]
 
 #### Contraindications
 - Severe hepatic impairment [T1]
-- Known hypersensitivity [T1]
-
-#### Adverse Reactions (by frequency)
-| Reaction | Frequency | Severity |
-|----------|-----------|----------|
-| Nausea | Common (>1%) | Mild |
-| Hepatotoxicity | Rare (<0.1%) | Severe |
-| ... | ... | ... |
 
 #### Nonclinical Toxicology [T2]
-- **Carcinogenicity**: No carcinogenic potential in 2-year rat/mouse studies
-- **Mutagenicity**: Negative in Ames assay and in vivo micronucleus test
-- **Fertility**: No effects on fertility at doses up to 10x human dose
+- Carcinogenicity: No carcinogenic potential in 2-year rat/mouse studies
+- Mutagenicity: Negative in Ames assay and in vivo micronucleus test
 ```
 
 ---
 
 ## Phase 5: Drug Safety Profile (DrugBank)
 
-**When**: Compound is a known drug
+Run when compound is a known drug.
 
-**Objective**: Retrieve curated drug safety data from DrugBank
+Call `drugbank_get_safety_by_drug_name_or_drugbank_id` with `query=drug_name`, `case_sensitive=False`, `exact_match=False`, `limit=5`.
 
-### Tools Used
-
-| Tool | Information | Parameters |
-|------|------------|------------|
-| `drugbank_get_safety_by_drug_name_or_drugbank_id` | Toxicity, contraindications | `query`: str, `case_sensitive`: bool, `exact_match`: bool, `limit`: int |
-
-### Workflow
-
-1. Call `drugbank_get_safety_by_drug_name_or_drugbank_id(query=drug_name, case_sensitive=False, exact_match=False, limit=5)`
-2. Parse toxicity information, overdose data, contraindications
-3. Cross-reference with FDA data from Phase 4
-
-### Decision Logic
-
-- **Toxicity field**: Contains LD50 values, overdose symptoms, organ toxicity data
-- **DrugBank ID**: Note if found for cross-referencing
-- **Conflict with FDA**: If DrugBank and FDA disagree, note discrepancy and defer to FDA [T1]
-- **Not found**: Chemical may not be in DrugBank; continue with other phases
+Parse toxicity (LD50 values, overdose symptoms, organ toxicity), contraindications, and any DrugBank ID for cross-referencing. If DrugBank and FDA disagree on a finding, note the discrepancy and defer to FDA [T1]. If not found, note "not found in DrugBank" and continue.
 
 ---
 
 ## Phase 6: Chemical-Protein Interactions (STITCH)
 
-**When**: Compound can be identified by name or SMILES
+Run when the compound can be identified by name or SMILES.
 
-**Objective**: Map chemical-protein interaction network for off-target assessment
-
-### Tools Used
-
-| Tool | Function | Parameters |
-|------|----------|------------|
-| `STITCH_resolve_identifier` | Resolve chemical name to STITCH ID | `identifier`: str, `species`: int (9606=human) |
-| `STITCH_get_chemical_protein_interactions` | Get chemical-protein interactions | `identifiers`: list[str], `species`: int, `required_score`: int |
-| `STITCH_get_interaction_partners` | Get interaction network | `identifiers`: list[str], `species`: int, `limit`: int |
-
-### Workflow
-
-1. Resolve compound: `STITCH_resolve_identifier(identifier=compound_name, species=9606)`
-2. Get interactions: `STITCH_get_chemical_protein_interactions(identifiers=[stitch_id], species=9606, required_score=700)`
-3. Identify off-target proteins (not the intended drug target)
+1. Resolve compound: call `STITCH_resolve_identifier` with `identifier=compound_name` and `species=9606` (human)
+2. Get interactions: call `STITCH_get_chemical_protein_interactions` with the resolved STITCH ID, `species=9606`, `required_score=700`
+3. Identify off-target proteins not intended as the drug target
 4. Flag safety-relevant targets: hERG (cardiac), CYP enzymes (metabolism), nuclear receptors (endocrine)
 
-### Decision Logic
+**Confidence grading:**
+- Score > 900 -> well-established interaction [T2]
+- Score 700-900 -> probable interaction [T3]
+- Score 400-700 -> possible interaction, needs validation [T4]
 
-- **High confidence (>900)**: Well-established interaction [T2]
-- **Medium confidence (700-900)**: Probable interaction [T3]
-- **Low confidence (400-700)**: Possible interaction, needs validation [T4]
-- **Safety-relevant targets**: Flag interactions with known safety targets
-- **No STITCH data**: Chemical may be too novel; note and continue
+If STITCH returns no data, note "no STITCH data available" and continue.
 
 ---
 
 ## Phase 7: Structural Alerts (ChEMBL)
 
-**When**: ChEMBL molecule ID is available (from Phase 0)
+Run when a ChEMBL ID was obtained in Phase 0. If no ChEMBL ID is available, skip and note "structural alert analysis not available."
 
-**Objective**: Check for known toxic substructures
+Call `ChEMBL_search_compound_structural_alerts` with `molecule_chembl_id=chembl_id` and `limit=20`.
 
-### Tools Used
+Parse alert types:
+- **PAINS** (pan-assay interference) — may cause false positives in screening; informational for medicinal chemistry
+- **Brenk** — known problematic substructures; flag if present as [T3] concern
+- **Glaxo/GSK** — additional structural alert set
 
-| Tool | Function | Parameters |
-|------|----------|------------|
-| `ChEMBL_search_compound_structural_alerts` | Find structural alert matches | `molecule_chembl_id`: str, `limit`: int |
-
-### Workflow
-
-1. If ChEMBL ID available: `ChEMBL_search_compound_structural_alerts(molecule_chembl_id=chembl_id, limit=20)`
-2. Parse alert types: PAINS (pan-assay interference), Brenk (medicinal chemistry), Glaxo (GSK structural alerts)
-3. Categorize severity: Some alerts are informational, others indicate likely toxicity
-
-### Decision Logic
-
-- **PAINS alerts**: May cause false positives in screening; note for medicinal chemistry
-- **Brenk alerts**: Known problematic substructures; flag if present
-- **No alerts**: Good sign but not definitive proof of safety
-- **No ChEMBL ID**: Skip this phase gracefully; note "structural alert analysis not available"
+No alerts does not definitively confirm safety; absence of ChEMBL ID is not a failure.
 
 ---
 
 ## Synthesis: Integrated Risk Assessment (MANDATORY)
 
-**Always the final section**. Integrates all evidence into actionable risk classification.
+Always the final section. Aggregate all phase results into a risk classification.
 
 ### Risk Classification Matrix
 
 | Risk Level | Criteria |
-|-----------|----------|
-| **CRITICAL** | FDA boxed warning present OR multiple [T1] toxicity findings OR active DILI + active hERG |
-| **HIGH** | FDA warnings present OR [T2] animal toxicity OR multiple active ADMET endpoints |
-| **MEDIUM** | Some [T3] predictions positive OR CTD disease associations OR structural alerts |
-| **LOW** | All ADMET endpoints negative AND no FDA/DrugBank safety flags AND no CTD concerns |
-| **INSUFFICIENT DATA** | Fewer than 3 phases returned data; cannot make confident assessment |
+|-----------|---------|
+| CRITICAL | FDA boxed warning present OR multiple [T1] toxicity findings OR active DILI + active hERG |
+| HIGH | FDA warnings present OR [T2] animal toxicity OR multiple active ADMET endpoints |
+| MEDIUM | Some [T3] predictions positive OR CTD disease associations OR structural alerts |
+| LOW | All ADMET endpoints negative AND no FDA/DrugBank safety flags AND no CTD concerns |
+| INSUFFICIENT DATA | Fewer than 3 phases returned data; cannot make confident assessment |
 
-### Synthesis Template
-
+**Output template:**
 ```markdown
 ## Integrated Risk Assessment
 
@@ -519,27 +351,25 @@ All ADMET-AI tools take the same parameter format:
 | Structural Alerts | 2 Brenk alerts | [T3] | MEDIUM |
 
 ### Key Safety Concerns
-1. **Hepatotoxicity** [T1]: FDA boxed warning + ADMET-AI DILI prediction + CTD liver disease associations
+1. **Hepatotoxicity** [T1]: FDA boxed warning + ADMET-AI DILI + CTD liver disease associations
 2. **Cardiac Risk** [T3]: ADMET-AI hERG prediction + STITCH hERG interaction
-3. **Drug Interactions** [T3]: CYP3A4 substrate/inhibitor, potential DDI risk
+3. **Drug Interactions** [T3]: CYP3A4 substrate/inhibitor — DDI risk
 
 ### Data Gaps
 - [ ] No in vivo genotoxicity data available
 - [ ] STITCH interaction scores moderate (700-900)
-- [ ] No environmental exposure data
 
 ### Recommendations
 1. Avoid doses >4g/day (hepatotoxicity threshold) [T1]
 2. Monitor liver function in chronic use [T1]
 3. Screen for CYP3A4 interactions before co-administration [T3]
-4. Consider cardiac monitoring for at-risk patients [T3]
 ```
 
 ---
 
 ## Mandatory Completeness Checklist
 
-Before finalizing any report, verify:
+Before finalizing any report, verify all phases are accounted for:
 
 - [ ] **Phase 0**: Compound fully disambiguated (SMILES + CID at minimum)
 - [ ] **Phase 1**: At least 5 toxicity endpoints reported or "prediction unavailable" noted
@@ -549,185 +379,116 @@ Before finalizing any report, verify:
 - [ ] **Phase 5**: DrugBank queried; results or "not found in DrugBank" noted
 - [ ] **Phase 6**: STITCH queried; results or "no STITCH data available" noted
 - [ ] **Phase 7**: Structural alerts checked or "ChEMBL ID not available" noted
-- [ ] **Synthesis**: Risk classification provided with evidence summary
-- [ ] **Evidence Grading**: All findings have [T1]-[T4] annotations
-- [ ] **Data Gaps**: Explicitly listed in synthesis section
-
----
-
-## Tool Parameter Reference
-
-**Critical Parameter Notes** (verified from source code):
-
-| Tool | Parameter Name | Type | Notes |
-|------|---------------|------|-------|
-| All ADMETAI tools | `smiles` | `list[str]` | Always a list, even for single compound |
-| All CTD tools | `input_terms` | `str` | Chemical name, MeSH name, CAS RN, or MeSH ID |
-| All FDA tools | `drug_name` | `str` | Brand or generic drug name |
-| drugbank_get_safety_* | `query`, `case_sensitive`, `exact_match`, `limit` | str, bool, bool, int | All 4 required |
-| STITCH_resolve_identifier | `identifier`, `species` | str, int | species=9606 for human |
-| STITCH_get_chemical_protein_interactions | `identifiers`, `species`, `required_score` | list[str], int, int | required_score=400 default |
-| PubChem_get_CID_by_compound_name | `name` | `str` | Compound name (not SMILES) |
-| PubChem_get_compound_properties_by_CID | `cid` | `int` | Numeric CID |
-| ChEMBL_search_compound_structural_alerts | `molecule_chembl_id` | `str` | ChEMBL ID (e.g., "CHEMBL112") |
-
-### Response Format Notes
-
-- **ADMET-AI**: Returns `{status: "success", data: {...}}` with prediction values
-- **CTD**: Returns list of interaction/association objects
-- **FDA**: Returns `{status, data}` with label text
-- **DrugBank**: Returns `{data: [...]}` with drug records
-- **STITCH**: Returns list of interaction objects with scores
-- **PubChem CID lookup**: Returns `{IdentifierList: {CID: [...]}}` (may or may not have `data` wrapper)
-- **PubChem properties**: Returns dict with `CID`, `MolecularWeight`, `ConnectivitySMILES`, `IUPACName`
-
----
-
-## Fallback Strategies
-
-### Compound Resolution
-- **Primary**: PubChem by name -> CID -> properties -> SMILES
-- **Fallback 1**: ChEMBL search by name -> molecule -> SMILES
-- **Fallback 2**: If SMILES provided directly, skip name resolution
-
-### Toxicity Prediction
-- **Primary**: All 9 ADMET-AI endpoints
-- **Fallback**: If ADMET-AI fails for a compound, note "prediction failed" and continue with database evidence
-- **Note**: ADMET-AI may fail for very large or unusual SMILES
-
-### Regulatory Data
-- **Primary**: FDA labels by drug name
-- **Fallback**: If FDA returns no data, try alternative drug names (brand vs generic)
-- **Note**: Non-drug chemicals (pesticides, industrial) will not have FDA labels
-
-### CTD Data
-- **Primary**: Search by common chemical name
-- **Fallback**: Try MeSH name if common name fails
-- **Note**: Novel compounds may not be in CTD
+- [ ] **Synthesis**: Risk classification provided with evidence summary and data gaps
+- [ ] **Evidence Grading**: All findings annotated with [T1]-[T4]
 
 ---
 
 ## Common Use Patterns
 
-### Pattern 1: Novel Compound Assessment
-```
-Input: SMILES string for new molecule
-Workflow: Phase 0 (SMILES->CID) -> Phase 1 (toxicity) -> Phase 2 (ADMET) -> Phase 7 (structural alerts) -> Synthesis
-Output: Predictive safety profile for novel compound
-```
+**Pattern 1 — Novel compound (SMILES input):**
+Phase 0 (SMILES -> CID) -> Phase 1 -> Phase 2 -> Phase 7 (structural alerts) -> Synthesis. FDA/DrugBank phases will be empty for novel compounds; note this explicitly.
 
-### Pattern 2: Approved Drug Safety Review
-```
-Input: Drug name (e.g., "Acetaminophen")
-Workflow: All phases (0-7 + Synthesis)
-Output: Complete safety dossier with regulatory + predictive + database evidence
-```
+**Pattern 2 — Approved drug safety review:**
+All phases 0-7 + Synthesis. Most complete dossier; combines regulatory [T1], experimental [T2], and predictive [T3] evidence.
 
-### Pattern 3: Environmental Chemical Risk
-```
-Input: Chemical name (e.g., "Bisphenol A")
-Workflow: Phase 0 -> Phase 1 -> Phase 2 -> Phase 3 (CTD, key for env chemicals) -> Phase 6 -> Synthesis
-Output: Environmental health risk assessment focused on gene-disease associations
-```
+**Pattern 3 — Environmental chemical risk:**
+Phase 0 -> Phase 1 -> Phase 2 -> Phase 3 (CTD is central for environmental chemicals) -> Phase 6 -> Synthesis. FDA/DrugBank will typically be empty.
 
-### Pattern 4: Batch Toxicity Screening
-```
-Input: Multiple SMILES strings
-Workflow: Phase 0 -> Phase 1 (batch) -> Phase 2 (batch) -> Comparative table -> Synthesis
-Output: Comparative toxicity table ranking compounds by safety
-```
+**Pattern 4 — Batch toxicity screening:**
+Phase 0 -> Phase 1 (batch all SMILES) -> Phase 2 (batch) -> Comparative ranking table -> Synthesis. ADMET-AI accepts up to ~10 SMILES per call.
 
-### Pattern 5: Toxicogenomic Deep-Dive
-```
-Input: Chemical name + specific gene or disease interest
-Workflow: Phase 0 -> Phase 3 (CTD expanded) -> Literature search -> Synthesis
-Output: Detailed chemical-gene-disease mechanistic analysis
-```
+**Pattern 5 — Toxicogenomic deep-dive:**
+Phase 0 -> Phase 3 (CTD expanded, top 50 interactions) -> targeted literature follow-up -> Synthesis focused on gene-disease mechanisms.
 
 ---
 
 ## Output Report Structure
 
-All analyses generate a structured markdown report with progressive sections:
-
 ```markdown
 # Chemical Safety & Toxicology Report: [Compound Name]
-
-**Generated**: YYYY-MM-DD HH:MM
-**Compound**: [Name] | SMILES: [SMILES] | CID: [CID]
+**Generated**: YYYY-MM-DD | **Compound**: [Name] | SMILES: [...] | CID: [...]
 
 ## Executive Summary
-[2-3 sentence overview with risk classification and key findings, all graded]
+[2-3 sentence overview with overall risk classification and key findings graded by tier]
 
-## 1. Compound Identity
-[Phase 0 results - disambiguation table]
-
-## 2. Predictive Toxicology
-[Phase 1 results - ADMET-AI toxicity endpoints]
-
-## 3. ADMET Profile
-[Phase 2 results - absorption, distribution, metabolism, excretion]
-
-## 4. Toxicogenomics
-[Phase 3 results - CTD chemical-gene-disease relationships]
-
-## 5. Regulatory Safety
-[Phase 4 results - FDA label information]
-
-## 6. Drug Safety Profile
-[Phase 5 results - DrugBank data]
-
-## 7. Chemical-Protein Interactions
-[Phase 6 results - STITCH network]
-
-## 8. Structural Alerts
-[Phase 7 results - ChEMBL alerts]
-
-## 9. Integrated Risk Assessment
-[Synthesis - risk classification, evidence summary, data gaps, recommendations]
-
+## 1. Compound Identity            [Phase 0]
+## 2. Predictive Toxicology        [Phase 1 — ADMET-AI toxicity endpoints]
+## 3. ADMET Profile                [Phase 2 — Absorption/Distribution/Metabolism/Excretion]
+## 4. Toxicogenomics               [Phase 3 — CTD chemical-gene-disease]
+## 5. Regulatory Safety            [Phase 4 — FDA label information]
+## 6. Drug Safety Profile          [Phase 5 — DrugBank]
+## 7. Chemical-Protein Interactions [Phase 6 — STITCH network]
+## 8. Structural Alerts            [Phase 7 — ChEMBL alerts]
+## 9. Integrated Risk Assessment   [Synthesis]
 ## Appendix: Methods and Data Sources
-[Tool versions, databases queried, date of access]
 ```
 
 ---
 
-## Limitations & Known Issues
+## Known Gotchas
 
-### Tool-Specific
-- **ADMET-AI**: Predictions are computational [T3]; should not replace experimental testing
+**Compound disambiguation:**
+- PubChem CID lookup returns `{IdentifierList: {CID: [...]}}` — the CID is inside a list; extract `[0]`
+- PubChem properties response fields are `ConnectivitySMILES`, `CanonicalSMILES`, or `IsomericSMILES` depending on the query; check all three
+- SMILES strings passed to ADMET-AI must always be wrapped in a list even for a single compound: `smiles=["CC(=O)Nc1ccc(O)cc1"]`
+
+**FDA tools:**
+- FDA returns no data for non-approved drugs, supplements, and environmental chemicals — this is expected, not an error
+- Try both brand name and generic name if first query fails
+- Nonclinical toxicology data is [T2], not [T1], even though it comes from an FDA label
+
+**CTD tools:**
+- `input_terms` accepts common name, MeSH name, CAS RN, or MeSH ID — try MeSH name as fallback if common name returns nothing
+- CTD separates curated direct evidence (literature-backed, [T2]) from inferred associations (computational, [T3]) — do not flatten these into the same tier
+- Novel or industrial chemicals may have zero CTD entries; this is data, not a failure
+
+**DrugBank:**
+- `drugbank_get_safety_by_drug_name_or_drugbank_id` requires all four params: `query`, `case_sensitive`, `exact_match`, `limit`
+- When DrugBank and FDA disagree, document the discrepancy and defer to FDA [T1]
+
+**STITCH:**
+- `STITCH_resolve_identifier` must precede `STITCH_get_chemical_protein_interactions` — do not guess STITCH IDs
+- `required_score=700` is recommended as baseline; lower scores significantly increase false positives
+- `species=9606` for human interactions throughout
+
+**ADMET-AI batch:**
+- Very large or unusual SMILES (e.g., macrocycles, polymers) may cause prediction failures; handle per-compound, not as batch failures
+- LD50 is reported as log(mg/kg); convert to mg/kg for the report (10^value)
+
+**Risk classification:**
+- "INSUFFICIENT DATA" is a valid classification when fewer than 3 phases return results; do not inflate to LOW
+- Active hERG alone does not trigger CRITICAL — it triggers HIGH; CRITICAL requires FDA boxed warning or [T1] evidence
+
+---
+
+## Abbreviated Tool Reference
+
+For full parameter details, see [`references/tools.md`](references/tools.md).
+
+| Phase | Tool | Key Parameter(s) |
+|-------|------|-----------------|
+| 0 | `PubChem_get_CID_by_compound_name` | `name`: str |
+| 0 | `PubChem_get_compound_properties_by_CID` | `cid`: int |
+| 0 | `ChEMBL_get_molecule` | `molecule_chembl_id`: str |
+| 1-2 | All `ADMETAI_predict_*` tools | `smiles`: list[str] |
+| 3 | `CTD_get_chemical_gene_interactions` | `input_terms`: str |
+| 3 | `CTD_get_chemical_diseases` | `input_terms`: str |
+| 4 | All `FDA_get_*_by_drug_name` tools | `drug_name`: str |
+| 5 | `drugbank_get_safety_by_drug_name_or_drugbank_id` | `query`: str, `case_sensitive`: bool, `exact_match`: bool, `limit`: int |
+| 6 | `STITCH_resolve_identifier` | `identifier`: str, `species`: int (9606) |
+| 6 | `STITCH_get_chemical_protein_interactions` | `identifiers`: list[str], `species`: int, `required_score`: int |
+| 7 | `ChEMBL_search_compound_structural_alerts` | `molecule_chembl_id`: str, `limit`: int |
+
+---
+
+## Limitations
+
+- **ADMET-AI**: Predictions are [T3]; should not replace experimental testing
 - **CTD**: Curated but may lag behind latest literature by 6-12 months
 - **FDA**: Only covers FDA-approved drugs; not applicable to environmental chemicals or supplements
 - **DrugBank**: Primarily drugs; limited coverage of industrial chemicals
 - **STITCH**: Score thresholds affect sensitivity; lower scores increase false positives
-- **ChEMBL**: Structural alerts require ChEMBL ID; not all compounds have one
-
-### Analysis
-- **Novel compounds**: May only have ADMET-AI predictions (no database evidence)
-- **Environmental chemicals**: FDA/DrugBank phases will be empty; rely on CTD and ADMET-AI
-- **Batch mode**: ADMET-AI can handle batches; other tools require individual queries
-- **Species specificity**: Most data is human-centric; animal data noted where applicable
-
-### Technical
-- **SMILES validity**: Invalid SMILES will cause ADMET-AI failures
-- **Name ambiguity**: Chemical names can be ambiguous; always verify with CID
-- **Rate limits**: Some FDA endpoints may rate-limit for rapid queries
-
----
-
-## Summary
-
-**Chemical Safety & Toxicology Assessment Skill** provides comprehensive safety evaluation by integrating:
-
-1. **Predictive toxicology** (ADMET-AI) - 9 tools covering toxicity, ADMET, physicochemical properties
-2. **Toxicogenomics** (CTD) - Chemical-gene-disease relationship mapping
-3. **Regulatory safety** (FDA) - 6 tools for label-based safety extraction
-4. **Drug safety** (DrugBank) - Curated toxicity and contraindication data
-5. **Chemical interactions** (STITCH) - Chemical-protein interaction networks
-6. **Structural alerts** (ChEMBL) - Known toxic substructure detection
-
-**Outputs**: Structured markdown report with risk classification, evidence grading, and actionable recommendations
-
-**Best for**: Drug safety assessment, chemical hazard profiling, environmental toxicology, ADMET characterization, toxicogenomic analysis
-
-**Total tools integrated**: 25+ tools across 6 databases
+- **Batch mode**: ADMET-AI supports batching; FDA, DrugBank, and CTD require individual queries
+- **Novel compounds**: May only have ADMET-AI predictions; all database phases will be empty
+- **SMILES validity**: Invalid SMILES will cause ADMET-AI failures — validate before calling

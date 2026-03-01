@@ -11,580 +11,278 @@ Systematically identify and evaluate drug repurposing candidates using multiple 
 
 ## Core Strategies
 
-### 1. Target-Based Repurposing
-Start with disease targets → Find drugs that modulate those targets
-
-### 2. Compound-Based Repurposing  
-Start with approved drugs → Find new disease indications
-
-### 3. Disease-Driven Repurposing
-Start with disease → Find targets → Match to existing drugs
-
-## Quick Start
-
-```python
-from tooluniverse import ToolUniverse
-
-tu = ToolUniverse(use_cache=True)
-tu.load_tools()
-
-# Example: Find repurposing candidates for a disease
-disease_name = "rheumatoid arthritis"
-
-# Step 1: Get disease information
-disease_info = tu.tools.OpenTargets_get_disease_id_description_by_name(
-    diseaseName=disease_name
-)
-
-# Step 2: Get associated targets
-disease_id = disease_info['data']['id']
-targets = tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(
-    efoId=disease_id,
-    limit=10
-)
-
-# Step 3: Find drugs for each target
-for target in targets['data'][:5]:
-    drugs = tu.tools.DGIdb_get_drug_gene_interactions(
-        gene_name=target['gene_symbol']
-    )
-    # Evaluate each drug candidate...
-```
-
-## Complete Workflow
-
-### Phase 1: Disease & Target Analysis
-
-```python
-# 1.1 Get disease information
-disease_info = tu.tools.OpenTargets_get_disease_id_description_by_name(
-    diseaseName="[disease_name]"
-)
-
-# 1.2 Find associated targets
-targets = tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(
-    efoId=disease_info['data']['id'],
-    limit=20
-)
-
-# 1.3 Get target details for top candidates
-target_details = []
-for target in targets['data'][:10]:
-    details = tu.tools.UniProt_get_entry_by_accession(
-        accession=target['uniprot_id']
-    )
-    target_details.append(details)
-```
-
-### Phase 2: Drug Discovery
-
-```python
-# 2.1 Find drugs targeting disease-associated targets
-drug_candidates = []
-
-for target in targets['data'][:10]:
-    # Search DrugBank
-    drugbank_results = tu.tools.drugbank_get_drug_name_and_description_by_target_name(
-        target_name=target['gene_symbol']
-    )
-    
-    # Search DGIdb
-    dgidb_results = tu.tools.DGIdb_get_drug_gene_interactions(
-        gene_name=target['gene_symbol']
-    )
-    
-    # Search ChEMBL
-    chembl_results = tu.tools.ChEMBL_search_drugs(
-        query=target['gene_symbol'],
-        limit=10
-    )
-    
-    drug_candidates.extend([drugbank_results, dgidb_results, chembl_results])
-
-# 2.2 Get drug details
-for drug_name in unique_drugs:
-    # Get DrugBank info
-    drug_info = tu.tools.drugbank_get_drug_basic_info_by_drug_name_or_id(
-        drug_name_or_drugbank_id=drug_name
-    )
-    
-    # Get current indications
-    indications = tu.tools.drugbank_get_indications_by_drug_name_or_drugbank_id(
-        drug_name_or_drugbank_id=drug_name
-    )
-    
-    # Get pharmacology
-    pharmacology = tu.tools.drugbank_get_pharmacology_by_drug_name_or_drugbank_id(
-        drug_name_or_drugbank_id=drug_name
-    )
-```
-
-### Phase 3: Safety & Feasibility Assessment
-
-```python
-# 3.1 Check FDA safety data
-for drug in top_candidates:
-    # Get warnings and precautions
-    warnings = tu.tools.FDA_get_warnings_and_cautions_by_drug_name(
-        drug_name=drug['name']
-    )
-    
-    # Get adverse event reports
-    adverse_events = tu.tools.FAERS_search_reports_by_drug_and_reaction(
-        drug_name=drug['name'],
-        limit=100
-    )
-    
-    # Get drug interactions
-    interactions = tu.tools.drugbank_get_drug_interactions_by_drug_name_or_id(
-        drug_name_or_id=drug['name']
-    )
-
-# 3.2 Assess ADMET properties (for novel formulations)
-for drug in top_candidates:
-    if 'smiles' in drug:
-        admet = tu.tools.ADMETAI_predict_admet(
-            smiles=drug['smiles'],
-            use_cache=True
-        )
-```
-
-### Phase 4: Literature Evidence
-
-```python
-# 4.1 Search for existing evidence
-for drug in top_candidates:
-    # PubMed search
-    query = f"{drug['name']} AND {disease_name}"
-    pubmed_results = tu.tools.PubMed_search_articles(
-        query=query,
-        max_results=50
-    )
-    
-    # Europe PMC search
-    pmc_results = tu.tools.EuropePMC_search_articles(
-        query=query,
-        limit=50
-    )
-    
-    # Clinical trials
-    trials = tu.tools.ClinicalTrials_search(
-        condition=disease_name,
-        intervention=drug['name']
-    )
-```
-
-### Phase 5: Scoring & Ranking
-
-Create a scoring function to rank candidates:
-
-```python
-def score_repurposing_candidate(drug, target_score, safety_data, literature_count):
-    """Score drug repurposing candidate (0-100)."""
-    score = 0
-    
-    # Target association strength (0-40 points)
-    score += min(target_score * 40, 40)
-    
-    # Safety profile (0-30 points)
-    if drug['approval_status'] == 'approved':
-        score += 20
-    elif drug['approval_status'] == 'clinical':
-        score += 10
-    
-    if not safety_data.get('black_box_warning'):
-        score += 10
-    
-    # Literature evidence (0-20 points)
-    score += min(literature_count / 5 * 20, 20)
-    
-    # Drug-likeness (0-10 points)
-    if drug.get('bioavailability') == 'high':
-        score += 10
-    
-    return score
-
-# Score all candidates
-scored_candidates = []
-for drug in drug_candidates:
-    score = score_repurposing_candidate(
-        drug=drug,
-        target_score=drug['target_association_score'],
-        safety_data=drug['safety_profile'],
-        literature_count=drug['supporting_papers']
-    )
-    drug['repurposing_score'] = score
-    scored_candidates.append(drug)
-
-# Sort by score
-ranked_candidates = sorted(
-    scored_candidates,
-    key=lambda x: x['repurposing_score'],
-    reverse=True
-)
-```
-
-## Alternative Strategies
-
-### Strategy A: Mechanism-Based Repurposing
-
-```python
-# Find drugs with similar mechanism of action
-known_drug = "metformin"
-
-# Get mechanism
-moa = tu.tools.drugbank_get_drug_desc_pharmacology_by_moa(
-    mechanism_of_action="[moa_term]"
-)
-
-# Get similar drugs
-similar = tu.tools.ChEMBL_search_similar_molecules(
-    query=known_drug,
-    similarity_threshold=70
-)
-```
-
-### Strategy B: Network-Based Repurposing
-
-```python
-# Use pathway analysis
-pathways = tu.tools.drugbank_get_pathways_reactions_by_drug_or_id(
-    drug_name_or_drugbank_id="[drug_name]"
-)
-
-# Find drugs affecting same pathways
-pathway_drugs = tu.tools.drugbank_get_drug_name_and_description_by_pathway_name(
-    pathway_name=pathways['data'][0]['pathway_name']
-)
-```
-
-### Strategy C: Phenotype-Based Repurposing
-
-```python
-# Search by indication/phenotype
-indication_drugs = tu.tools.drugbank_get_drug_name_and_description_by_indication(
-    indication="[related_indication]"
-)
-
-# Analyze adverse events as therapeutic effects
-# Example: minoxidil (hypertension) → hair growth
-adverse_as_therapeutic = tu.tools.FAERS_search_reports_by_drug_and_reaction(
-    drug_name="[drug_name]",
-    limit=1000
-)
-```
-
-## Key ToolUniverse Tools
-
-**Disease & Target Tools**:
-- `OpenTargets_get_disease_id_description_by_name` - Disease lookup
-- `OpenTargets_get_associated_targets_by_disease_efoId` - Disease targets
-- `UniProt_get_entry_by_accession` - Protein details
-
-**Drug Discovery Tools**:
-- `drugbank_get_drug_name_and_description_by_target_name` - Drugs by target
-- `drugbank_get_drug_name_and_description_by_indication` - Drugs by indication
-- `DGIdb_get_drug_gene_interactions` - Drug-gene interactions
-- `ChEMBL_search_drugs` - Drug search
-- `ChEMBL_get_drug_mechanisms` - Mechanism of action
-
-**Drug Information Tools**:
-- `drugbank_get_drug_basic_info_by_drug_name_or_id` - Basic drug info
-- `drugbank_get_indications_by_drug_name_or_drugbank_id` - Approved indications
-- `drugbank_get_pharmacology_by_drug_name_or_drugbank_id` - Pharmacology
-- `drugbank_get_targets_by_drug_name_or_drugbank_id` - Drug targets
-
-**Safety Assessment Tools**:
-- `FDA_get_warnings_and_cautions_by_drug_name` - FDA warnings
-- `FAERS_search_reports_by_drug_and_reaction` - Adverse events
-- `FAERS_count_death_related_by_drug` - Serious outcomes
-- `drugbank_get_drug_interactions_by_drug_name_or_id` - Interactions
-
-**Property Prediction Tools**:
-- `ADMETAI_predict_admet` - ADMET properties
-- `ADMETAI_predict_toxicity` - Toxicity prediction
-
-**Literature Tools**:
-- `PubMed_search_articles` - PubMed search
-- `EuropePMC_search_articles` - Europe PMC search
-- `ClinicalTrials_search` - Clinical trials
-
-## Output Format
-
-Present results as ranked candidates:
-
-```markdown
-## Drug Repurposing Analysis: [Disease Name]
-
-### Top 10 Repurposing Candidates
-
-#### 1. [Drug Name] (Score: 87/100)
-
-**Current Indications**: [list approved uses]
-**Proposed Indication**: [new disease/condition]
-**Repurposing Rationale**: Targets [gene/protein] with high association to disease
-
-**Evidence Summary**:
-- Target association score: 0.85
-- Approval status: FDA approved (safer profile)
-- Literature support: 23 papers, 4 clinical trials
-- Safety profile: No black box warnings
-
-**Mechanism**: [Brief mechanism description]
-
-**Next Steps**: 
-- Phase II trial feasibility assessment
-- Patient population identification
-- Dosing optimization study
-
-**Key Papers**:
-1. Smith et al. 2024 - Clinical efficacy in similar condition
-2. Jones et al. 2023 - Mechanism validation
+| Strategy | Starting Point | Direction |
+|----------|---------------|-----------|
+| Target-based | Disease targets | Find drugs that modulate those targets |
+| Compound-based | Approved drugs | Find new disease indications |
+| Disease-driven | Disease phenotype | Find targets, then match to existing drugs |
+| Mechanism-based | Known MoA | Find drugs with similar mechanism |
+| Network-based | Pathway membership | Find drugs affecting shared pathways |
+| Phenotype-based | Indication similarity | Find drugs approved for related conditions |
 
 ---
 
-#### 2. [Drug Name] (Score: 79/100)
-[Similar structure...]
+## Workflow Overview
 
-### Supporting Analysis
-
-**Target Network**: [visualization or description]
-**Pathway Overlap**: [affected pathways]
-**Safety Considerations**: [major concerns]
-**Development Timeline**: [estimated phases]
+```
+Phase 1: Disease & Target Analysis
+├── Get disease EFO ID (OpenTargets)
+├── Retrieve associated targets with scores
+└── Assess target druggability (DGIdb)
+    ↓
+Phase 2: Drug Discovery
+├── Search DrugBank by target name
+├── Search DGIdb drug-gene interactions
+├── Search ChEMBL drugs
+├── Search OpenTargets approved drugs for disease
+└── Deduplicate across sources
+    ↓
+Phase 3: Drug Detail Enrichment
+├── Basic drug info + approval status (DrugBank)
+├── Current indications (DrugBank / OpenTargets)
+├── Pharmacology + mechanism of action (DrugBank / FDA)
+└── Drug-target profile (DrugBank)
+    ↓
+Phase 4: Safety Assessment
+├── Boxed warnings + contraindications (FDA)
+├── Adverse event profile (FAERS)
+├── Drug-drug interaction risk (DrugBank / FDA)
+└── ADMET predictions for novel structures
+    ↓
+Phase 5: Literature Evidence
+├── PubMed search: "[drug] AND [disease]"
+├── Europe PMC search (includes preprints)
+└── ClinicalTrials.gov: existing/completed trials
+    ↓
+Phase 6: Scoring & Ranking
+└── Score on target association, safety, evidence, properties
 ```
 
-## Scoring Criteria
+---
 
-**Target Association (0-40 points)**:
-- Strong genetic evidence: 40
-- Moderate association: 25
-- Pathway-level evidence: 15
-- Weak/predicted: 5
+## Phase 1: Disease & Target Analysis
 
-**Safety Profile (0-30 points)**:
-- FDA approved: 20
-- Phase III: 15
-- Phase II: 10
-- Phase I: 5
-- No black box warning: +10
-- Known serious AE: -10
+Call `OpenTargets_get_dise_id_desc_by_name` with `diseaseName` to retrieve the EFO ID and description for the target disease.
 
-**Literature Evidence (0-20 points)**:
-- Clinical trials: 5 points each (max 15)
-- Preclinical studies: 1 point each (max 10)
-- Case reports: 0.5 points each (max 5)
+Call `OpenTargets_get_asso_targ_by_dise_efoI` with `efoId` and `limit` (20–50 recommended) to get associated targets ranked by association score. Each target has `gene_symbol`, `ensembl_id`, `uniprot_id`, and `score`.
 
-**Drug Properties (0-10 points)**:
-- High bioavailability: 5
-- Good BBB penetration (if CNS): 5
-- Low toxicity predictions: 5
+For each top target (top 10), call `DGIdb_get_gene_druggability` with `gene_name` (HUGO symbol) to check if it is a known druggable class (kinase, GPCR, ion channel, etc.). Skip non-druggable targets before spending API calls on drug searches.
 
-## Best Practices
+Optionally call `UniProt_get_function_by_accession` for a concise functional summary of each target protein.
 
-1. **Start Broad**: Query multiple databases (DrugBank, ChEMBL, DGIdb)
-2. **Validate Targets**: Confirm target-disease associations in OpenTargets
-3. **Check Safety First**: Prioritize approved drugs with known safety profiles
-4. **Literature Mining**: Always search for existing clinical/preclinical evidence
-5. **Use Caching**: Enable `use_cache=True` for expensive predictions
-6. **Batch Operations**: Use `tu.run_batch()` for parallel queries
-7. **Consider Mechanism**: Evaluate biological plausibility
-8. **Patent Landscape**: Check if indication is already protected
-9. **Market Analysis**: Consider unmet medical need and commercial viability
-10. **Regulatory Path**: FDA approved drugs have faster repurposing path
+---
 
-## Common Patterns
+## Phase 2: Drug Discovery
 
-### Pattern 1: Rapid Screening
-```python
-# Quick screening of 100+ drugs against disease targets
-targets = get_disease_targets(disease_id)[:10]
-all_drugs = []
+For each druggable target, search three sources in parallel:
 
-for target in targets:
-    drugs = tu.tools.DGIdb_get_drug_gene_interactions(
-        gene_name=target['gene_symbol']
-    )
-    all_drugs.extend(drugs)
+1. Call `drugbank_get_drug_name_and_desc_by_targ_name` with `target_name` (gene symbol).
+2. Call `DGIdb_get_drug_gene_interactions` with `gene_name`. Returns interaction types and evidence sources.
+3. Call `ChEMBL_search_drugs` with `query` set to the gene symbol, `limit` 10–20.
 
-# Filter to FDA approved only
-approved_drugs = [d for d in all_drugs if d.get('approved')]
+Also call `OpenTargets_get_asso_drug_by_dise_efoI` with `efoId` to get drugs directly linked to the disease in OpenTargets (clinical evidence).
+
+Deduplicate results by normalized generic drug name. For compound-based repurposing (starting from a known drug), call `drugbank_get_targ_by_drug_name_or_drug_id` to enumerate all targets, then reverse-map each target to diseases using `OpenTargets_get_dise_phen_by_targ_ense` with the `ensemblId`.
+
+For mechanism-based repurposing, call `drugbank_get_drug_desc_pharmacology_by_moa` with `mechanism_of_action` as a keyword phrase to find drugs sharing the same MoA.
+
+For pathway-based repurposing, call `drugbank_get_pathways_reactions_by_drug_or_id` to get affected pathways, then `drugbank_get_drug_name_and_desc_by_path_name` to find other drugs in those pathways.
+
+---
+
+## Phase 3: Drug Detail Enrichment
+
+For each candidate drug (prioritize FDA-approved or clinical-stage), gather:
+
+- **Basic info + approval status**: `drugbank_get_dru_bas_inf_by_dru_nam_or_id` with `drug_name_or_drugbank_id`
+- **Current indications**: `drugbank_get_indi_by_drug_name_or_drug_id` with `drug_name_or_drugbank_id`
+- **Pharmacology + MoA**: `drugbank_get_phar_by_drug_name_or_drug_id` with `drug_name_or_drugbank_id`
+- **All known targets**: `drugbank_get_targ_by_drug_name_or_drug_id` (useful for polypharmacology analysis)
+
+For structure-based repurposing, call `PubChem_get_CID_by_compound_name` first to get the CID, then `PubChem_get_compound_properties_by_CID` for MW, LogP, TPSA, and drug-likeness metrics.
+
+---
+
+## Phase 4: Safety Assessment
+
+For each shortlisted candidate:
+
+1. **Boxed warnings**: Call `FDA_get_boxed_warning_info_by_drug_name` with `drug_name`. A black-box warning does not disqualify but must be disclosed.
+2. **Contraindications**: Call `FDA_get_contraindications_by_drug_name`.
+3. **Adverse event profile**: Call `FAERS_count_reactions_by_drug_event` with `medicinalproduct` (UPPERCASE). Returns top MedDRA PTs with counts.
+4. **Serious events**: Call `FAERS_filter_serious_events` or `FAERS_count_death_related_by_drug`.
+5. **Drug interactions**: Call `drugbank_get_drug_inte_by_drug_name_or_id` — important if the new indication has a different co-medication landscape.
+
+For novel structures or compounds not yet approved, call ADMET-AI tools using SMILES:
+- `ADMETAI_predict_toxicity` (hERG, DILI, AMES, ClinTox, LD50)
+- `ADMETAI_predict_bioavailability` (HIA, Caco2, Pgp)
+- `ADMETAI_predict_BBB_penetrance` (for CNS indications)
+
+All ADMET-AI tools accept `smiles` as a **list** of SMILES strings, not a single string.
+
+---
+
+## Phase 5: Literature Evidence
+
+For each top candidate, search:
+
+1. `PubMed_search_articles` with `query` = `"[drug_name] AND [disease_name]"`, `max_results` 50–100.
+2. `EuropePMC_search_articles` with `query` = same string, `limit` 50. Captures preprints.
+3. `ClinicalTrials_search_by_intervention` with `intervention` = drug name to find all trials. Then scan for the target disease in returned conditions.
+
+Score evidence: clinical trials > RCTs > systematic reviews > preclinical studies > case reports.
+
+---
+
+## Phase 6: Scoring & Ranking
+
+Score each candidate 0–100 across four dimensions:
+
+| Dimension | Max Points | Criteria |
+|-----------|-----------|---------|
+| Target association | 40 | OpenTargets score × 40; pathway-only evidence = 15 |
+| Safety profile | 30 | FDA approved = +20; Phase III = +15; no black-box warning = +10; serious AE signal = −10 |
+| Literature evidence | 20 | Clinical trial = 10 pts each (cap 15); RCT = 5; review = 3; paper = 1 (cap 10) |
+| Drug properties | 10 | High bioavailability = +5; BBB penetration for CNS = +5 |
+
+Present the ranked list with top 10 candidates. For each, include: current indications, proposed indication, repurposing rationale, evidence summary, key papers, and suggested next steps.
+
+---
+
+## Alternative Strategies
+
+### Adverse-Effect-as-Therapeutic
+
+Search FAERS for drugs with unexpected beneficial adverse effects. Call `FAERS_count_reactions_by_drug_event` and look for AEs that are therapeutic in the target indication context (e.g., weight loss, hair growth, immunosuppression). Historical example: minoxidil (hypertension) → hair loss treatment.
+
+### Polypharmacology
+
+For each candidate, call `drugbank_get_targ_by_drug_name_or_drug_id` and count how many disease targets from Phase 1 the drug hits. A drug hitting 3+ disease targets is a stronger polypharmacology candidate. Use `BindingDB_get_ligands_by_uniprot` to find quantitative binding data (Ki, IC50) for target proteins.
+
+### Structure-Based Analog Search
+
+Call `PubChem_get_CID_by_compound_name` to get CID, then `PubChem_search_compounds_by_similarity` with SMILES and `threshold` (0–100). Cross-reference returned CIDs against DrugBank to identify which analogs are already approved drugs.
+
+---
+
+## Known Gotchas
+
+**Tool name truncation**: Many tool names are shortened in the registry. Do not invent or guess names. Use the exact names in the Tool Reference table below.
+
+**`ADMETAI_predict_admet` does not exist**: Use specific sub-tools: `ADMETAI_predict_toxicity`, `ADMETAI_predict_bioavailability`, `ADMETAI_predict_BBB_penetrance`, etc. All accept `smiles` as a list.
+
+**`FDA_get_warnings_and_cautions_by_drug_name` does not exist**: Use `FDA_get_boxed_warning_info_by_drug_name`, `FDA_get_contraindications_by_drug_name`, or `FDA_get_general_precautions_by_drug_name` separately.
+
+**`ClinicalTrials_search` does not exist**: Use `ClinicalTrials_search_studies` (broad) or `ClinicalTrials_search_by_intervention` (drug-centric).
+
+**`OpenTargets_get_associated_targets_by_disease_efoId` does not exist**: Use `OpenTargets_get_asso_targ_by_dise_efoI`.
+
+**FAERS drug names must be UPPERCASE**: `medicinalproduct="METFORMIN"`, not `"metformin"`. Mixed-case often returns zero results.
+
+**DrugBank `drug_name` parameter is case-insensitive but prefers generic names**: Use `"metformin"` not `"Glucophage"`. If no result, try the DrugBank ID from `drugbank_vocab_search`.
+
+**`UniProt_get_entry_by_accession` returns huge payloads**: Use `UniProt_get_function_by_accession` or `UniProt_get_recommended_name_by_accession` instead.
+
+**OpenTargets EFO IDs**: If `OpenTargets_get_dise_id_desc_by_name` returns no match, try disease synonyms or broader categories. EFO IDs use underscore format: `EFO_0000249`.
+
+**DGIdb gene names**: Use HUGO approved symbol (e.g., `APP`, `BACE1`, `PSEN1`). Full protein names are not accepted.
+
+**ChEMBL `pref_name__contains` filter often returns zero results**: Use `ChEMBL_search_drugs` with `query` instead, or look up the ChEMBL ID first then use `ChEMBL_get_drug`.
+
+**PubChem similarity search returns max 10 CIDs**: `PubChem_search_compounds_by_similarity` is capped at `MaxRecords=10`.
+
+---
+
+## Abbreviated Tool Reference
+
+For full parameter details, see [references/tools.md](references/tools.md).
+
+### Disease & Target
+
+| Tool | Key Parameters | Notes |
+|------|---------------|-------|
+| `OpenTargets_get_dise_id_desc_by_name` | `diseaseName` | Returns EFO ID |
+| `OpenTargets_get_asso_targ_by_dise_efoI` | `efoId`, `limit` | Returns targets with association scores |
+| `OpenTargets_get_dise_phen_by_targ_ense` | `ensemblId` | Reverse: target → diseases |
+| `OpenTargets_get_asso_drug_by_dise_efoI` | `efoId` | Drugs with clinical evidence for disease |
+| `DGIdb_get_gene_druggability` | `gene_name` | HUGO symbol; returns druggability tier |
+
+### Drug Discovery
+
+| Tool | Key Parameters | Notes |
+|------|---------------|-------|
+| `drugbank_get_drug_name_and_desc_by_targ_name` | `target_name` | Gene symbol |
+| `drugbank_get_drug_name_and_desc_by_indi` | `indication` | Indication keyword |
+| `DGIdb_get_drug_gene_interactions` | `gene_name` | Returns interaction types |
+| `ChEMBL_search_drugs` | `query`, `limit` | Broad drug search |
+| `ChEMBL_get_drug_mechanisms` | `chembl_id` | Mechanism of action |
+
+### Drug Information
+
+| Tool | Key Parameters | Notes |
+|------|---------------|-------|
+| `drugbank_get_dru_bas_inf_by_dru_nam_or_id` | `drug_name_or_drugbank_id` | Approval status, groups |
+| `drugbank_get_indi_by_drug_name_or_drug_id` | `drug_name_or_drugbank_id` | Current indications |
+| `drugbank_get_phar_by_drug_name_or_drug_id` | `drug_name_or_drugbank_id` | MoA, pharmacodynamics, PK |
+| `drugbank_get_targ_by_drug_name_or_drug_id` | `drug_name_or_drugbank_id` | All targets |
+| `drugbank_get_drug_inte_by_drug_name_or_id` | `drug_name_or_id` | Drug-drug interactions |
+| `drugbank_get_pathways_reactions_by_drug_or_id` | `drug_name_or_drugbank_id` | Affected pathways |
+| `drugbank_get_drug_name_and_desc_by_path_name` | `pathway_name` | Drugs in pathway |
+| `drugbank_get_drug_desc_pharmacology_by_moa` | `mechanism_of_action` | MoA-based search |
+
+### Safety
+
+| Tool | Key Parameters | Notes |
+|------|---------------|-------|
+| `FDA_get_boxed_warning_info_by_drug_name` | `drug_name` | Black-box warnings |
+| `FDA_get_contraindications_by_drug_name` | `drug_name` | Contraindications |
+| `FDA_get_adverse_reactions_by_drug_name` | `drug_name` | Labeled AEs |
+| `FAERS_count_reactions_by_drug_event` | `medicinalproduct` (UPPERCASE) | All AE counts |
+| `FAERS_count_death_related_by_drug` | `medicinalproduct` (UPPERCASE) | Fatal outcomes |
+| `FAERS_filter_serious_events` | `medicinalproduct` | Serious/fatal events |
+| `FAERS_calculate_disproportionality` | `medicinalproduct`, `reaction` | ROR, PRR, IC |
+
+### ADMET (requires SMILES list)
+
+| Tool | Key Output |
+|------|-----------|
+| `ADMETAI_predict_toxicity` | hERG, DILI, AMES, ClinTox, LD50 |
+| `ADMETAI_predict_bioavailability` | HIA, Caco2, Pgp, PAMPA |
+| `ADMETAI_predict_BBB_penetrance` | BBB_Martins probability |
+| `ADMETAI_predict_physicochemical_properties` | MW, LogP, TPSA, Lipinski, QED |
+
+### Literature
+
+| Tool | Key Parameters | Notes |
+|------|---------------|-------|
+| `PubMed_search_articles` | `query`, `max_results` | Primary literature |
+| `EuropePMC_search_articles` | `query`, `limit` | Includes preprints |
+| `ClinicalTrials_search_by_intervention` | `intervention` | All trials for drug |
+| `ClinicalTrials_search_studies` | `condition`, `intervention` | Combined filter |
+
+---
+
+## Output Format
+
+Present a ranked candidate report:
+
+```
+## Drug Repurposing Analysis: [Disease Name]
+
+### Top Candidates
+
+#### 1. [Drug Name] — Score: [X]/100
+- Current indications: [list]
+- Proposed indication: [disease/condition]
+- Repurposing rationale: targets [gene] with association score [X]
+- Approval status: FDA approved / Phase [X]
+- Safety flags: [boxed warning yes/no; major AEs]
+- Literature: [N papers, N clinical trials]
+- Mechanism fit: [brief]
+- Next steps: [Phase II feasibility / dosing optimization / etc.]
 ```
 
-### Pattern 2: Deep Dive Single Drug
-```python
-# Comprehensive analysis of one drug candidate
-drug_name = "metformin"
-
-# Get everything
-info = tu.tools.drugbank_get_drug_basic_info_by_drug_name_or_id(drug_name_or_drugbank_id=drug_name)
-targets = tu.tools.drugbank_get_targets_by_drug_name_or_drugbank_id(drug_name_or_drugbank_id=drug_name)
-indications = tu.tools.drugbank_get_indications_by_drug_name_or_drugbank_id(drug_name_or_drugbank_id=drug_name)
-pharmacology = tu.tools.drugbank_get_pharmacology_by_drug_name_or_drugbank_id(drug_name_or_drugbank_id=drug_name)
-interactions = tu.tools.drugbank_get_drug_interactions_by_drug_name_or_id(drug_name_or_id=drug_name)
-warnings = tu.tools.FDA_get_warnings_and_cautions_by_drug_name(drug_name=drug_name)
-papers = tu.tools.PubMed_search_articles(query=f"{drug_name} AND [new_disease]", max_results=100)
-```
-
-### Pattern 3: Comparative Analysis
-```python
-# Compare multiple candidates side-by-side
-candidates = ["drug_a", "drug_b", "drug_c"]
-
-comparison = []
-for drug in candidates:
-    data = {
-        'name': drug,
-        'info': tu.tools.drugbank_get_drug_basic_info_by_drug_name_or_id(drug_name_or_drugbank_id=drug),
-        'safety': tu.tools.FDA_get_warnings_and_cautions_by_drug_name(drug_name=drug),
-        'evidence': tu.tools.PubMed_search_articles(query=drug, max_results=10)
-    }
-    comparison.append(data)
-```
-
-## Troubleshooting
-
-**"Disease not found"**: 
-- Try disease synonyms or EFO ID lookup
-- Use broader disease categories
-
-**"No drugs found for target"**:
-- Check target name/symbol (HUGO nomenclature)
-- Expand to pathway-level drugs
-- Consider similar targets (protein family)
-
-**"Insufficient literature evidence"**:
-- Search for drug class rather than specific drug
-- Check preclinical/animal studies
-- Look for mechanism papers
-
-**"Safety data unavailable"**:
-- Drug may not be FDA approved in US
-- Check EMA or other regulatory databases
-- Review clinical trial safety data
-
-## Example Use Cases
-
-**Use Case 1: Find repurposing candidates for rare disease**
-```python
-# Rare disease often lack approved drugs
-# Strategy: Find drugs targeting same pathways as related common diseases
-
-rare_disease = "Niemann-Pick disease"
-related_disease = "Alzheimer's disease"  # Similar pathology
-
-# Get pathways affected in related disease
-targets = tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(
-    efoId=related_disease_id
-)
-
-# Find drugs for those targets
-# Evaluate for rare disease applicability
-```
-
-**Use Case 2: Repurpose based on adverse effects**
-```python
-# Adverse effect in one context = therapeutic in another
-# Example: Thalidomide (teratogenic) → cancer treatment
-
-drug = "drug_name"
-adverse_events = tu.tools.FAERS_search_reports_by_drug_and_reaction(
-    drug_name=drug,
-    limit=1000
-)
-
-# Analyze if adverse effects beneficial in other contexts
-# Example: weight loss AE → obesity treatment potential
-```
-
-**Use Case 3: Combination therapy discovery**
-```python
-# Find drugs that complement existing therapy
-primary_drug = "existing_therapy"
-disease = "disease_name"
-
-# Get targets not covered by primary drug
-disease_targets = tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(
-    efoId=disease_id
-)
-
-primary_targets = tu.tools.drugbank_get_targets_by_drug_name_or_drugbank_id(
-    drug_name_or_drugbank_id=primary_drug
-)
-
-# Find drugs for uncovered targets
-uncovered_targets = [t for t in disease_targets if t not in primary_targets]
-```
-
-## Advanced Techniques
-
-### Technique 1: Polypharmacology-Based Repurposing
-```python
-# Find drugs with multi-target activity matching disease network
-
-# Get disease network
-targets = tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(
-    efoId=disease_id,
-    limit=50
-)
-
-# For each drug, count how many disease targets it hits
-for drug in candidate_drugs:
-    drug_targets = tu.tools.drugbank_get_targets_by_drug_name_or_drugbank_id(
-        drug_name_or_drugbank_id=drug
-    )
-    
-    overlap = len(set(drug_targets) & set(disease_targets))
-    if overlap >= 3:  # Multi-target match
-        print(f"{drug}: hits {overlap} disease targets")
-```
-
-### Technique 2: Structure-Based Repurposing
-```python
-# Find structurally similar approved drugs
-
-known_active = "known_active_compound"
-
-# Get structure
-cid = tu.tools.PubChem_get_CID_by_compound_name(
-    compound_name=known_active
-)
-
-# Find similar
-similar = tu.tools.PubChem_search_compounds_by_similarity(
-    cid=cid['data']['cid'],
-    threshold=85
-)
-
-# Check which are approved drugs
-for compound in similar['data']:
-    drug_info = tu.tools.PubChem_get_drug_label_info_by_CID(
-        cid=compound['cid']
-    )
-```
-
-### Technique 3: AI-Powered Candidate Selection
-```python
-# Use ML predictions to filter candidates
-
-candidates_with_smiles = get_candidates_with_structures()
-
-# Predict ADMET for all
-admet_results = []
-for drug in candidates_with_smiles:
-    admet = tu.tools.ADMETAI_predict_admet(
-        smiles=drug['smiles'],
-        use_cache=True
-    )
-    admet_results.append({
-        'drug': drug['name'],
-        'admet': admet,
-        'pass': evaluate_admet_criteria(admet)
-    })
-
-# Keep only drugs passing ADMET criteria
-viable_candidates = [r for r in admet_results if r['pass']]
-```
+---
 
 ## Resources
 
@@ -592,4 +290,4 @@ For comprehensive disease analysis, see [disease-intelligence-gatherer skill](..
 
 For compound property analysis, see [chemical-compound-retrieval skill](../chemical-compound-retrieval/SKILL.md).
 
-For detailed ToolUniverse SDK usage, see [tooluniverse-sdk skill](../tooluniverse-sdk/SKILL.md).
+For detailed parameter tables and data structure patterns, see [references/tools.md](references/tools.md).

@@ -7,6 +7,10 @@ description: Analyze metabolomics data including metabolite identification, quan
 
 Comprehensive analysis of metabolomics data from metabolite identification through quantification, statistical analysis, pathway interpretation, and integration with other omics layers.
 
+**IMPORTANT**: This skill targets LLM agents in MCP clients. All tool calls use `mcp__tooluniverse__execute_tool(tool_name="...", arguments={...})`. No Python SDK code is required.
+
+---
+
 ## When to Use This Skill
 
 **Triggers**:
@@ -19,7 +23,7 @@ Comprehensive analysis of metabolomics data from metabolite identification throu
 - Flux balance analysis or metabolic modeling
 - Metabolite-enzyme correlation
 
-**Example Questions This Skill Solves**:
+**Example Questions**:
 1. "Analyze this LC-MS metabolomics data for differential metabolites"
 2. "Which metabolic pathways are dysregulated between conditions?"
 3. "Identify metabolite biomarkers for disease classification"
@@ -27,7 +31,10 @@ Comprehensive analysis of metabolomics data from metabolite identification throu
 5. "Perform pathway enrichment for differential metabolites"
 6. "Integrate metabolomics with transcriptomics data"
 7. "Characterize the metabolic phenotype of this cell line"
-8. "Identify metabolites associated with drug response"
+
+**NOT for**:
+- Pure chemical property lookup only → use `tooluniverse-chemical-compound-retrieval`
+- Gene enrichment only (no metabolomics data) → use `tooluniverse-gene-enrichment`
 
 ---
 
@@ -35,16 +42,14 @@ Comprehensive analysis of metabolomics data from metabolite identification throu
 
 | Capability | Description |
 |-----------|-------------|
-| **Data Import** | LC-MS, GC-MS, NMR, targeted/untargeted platforms |
-| **Metabolite Identification** | Match to HMDB, KEGG, PubChem, spectral libraries |
+| **Metabolite Identification** | Match to HMDB, KEGG, PubChem, MetaboLights via m/z, exact mass, or name |
 | **Quality Control** | Peak quality, blank subtraction, internal standard normalization |
-| **Normalization** | Probabilistic quotient, total ion current, internal standards |
+| **Normalization** | Probabilistic quotient (PQN), total ion current (TIC), internal standards |
 | **Statistical Analysis** | Univariate and multivariate (PCA, PLS-DA, OPLS-DA) |
-| **Differential Analysis** | Identify significant metabolite changes |
-| **Pathway Enrichment** | KEGG, Reactome, BioCyc metabolic pathway analysis |
-| **Metabolite-Enzyme Integration** | Correlate with expression data |
-| **Flux Analysis** | Metabolic flux balance analysis (FBA) |
-| **Biomarker Discovery** | Multi-metabolite signatures |
+| **Differential Analysis** | Identify significant metabolite changes with FDR correction |
+| **Pathway Enrichment** | KEGG, MetaboAnalyst, Reactome metabolic pathway analysis |
+| **Metabolite-Enzyme Integration** | Correlate with expression data from transcriptomics/proteomics |
+| **Biomarker Discovery** | Multi-metabolite signatures using random forest or LASSO |
 
 ---
 
@@ -54,676 +59,365 @@ Comprehensive analysis of metabolomics data from metabolite identification throu
 Input: Metabolomics Data (Peak Table or Spectra)
     |
     v
-Phase 1: Data Import & Metabolite Identification
-    |-- Load peak table or process raw spectra
-    |-- Match features to metabolite databases (HMDB, KEGG)
-    |-- Annotate with chemical IDs, formulas, pathways
-    |-- Confidence scoring for IDs
+Phase 1: Metabolite Identification
+    |-- Match features by m/z, exact mass, or name
+    |-- Query HMDB, MetaboWorkbench, KEGG
+    |-- Standardize IDs via MetaboAnalyst_name_to_id
+    |-- Assign confidence levels (1-4)
     |
     v
 Phase 2: Quality Control & Filtering
-    |-- Assess peak quality (CV, blank ratios)
-    |-- Remove background peaks
-    |-- Filter low-quality metabolites
-    |-- Internal standard check
+    |-- Assess CV in QC samples (threshold: <30%)
+    |-- Blank subtraction (sample/blank ratio >3)
+    |-- Filter missing values (>50% threshold)
     |
     v
 Phase 3: Normalization
-    |-- Sample-wise normalization (TIC, PQN, internal standards)
-    |-- Batch effect correction
-    |-- Log-transform or scaling
+    |-- TIC, PQN, or internal standard normalization
+    |-- Batch effect correction (if multi-batch)
+    |-- Log2 transform or Pareto scaling
     |
     v
 Phase 4: Exploratory Analysis
-    |-- PCA for sample clustering
-    |-- Quality assessment plots
-    |-- Outlier detection
-    |-- Sample correlation
+    |-- PCA for sample clustering and outlier detection
+    |-- PLS-DA for supervised discrimination
+    |-- Sample correlation heatmaps
     |
     v
 Phase 5: Differential Analysis
-    |-- Statistical testing (t-test, ANOVA, Wilcoxon)
-    |-- Fold change calculation
-    |-- Multiple testing correction
-    |-- Volcano plots, heatmaps
+    |-- t-test/Wilcoxon + FDR correction (BH)
+    |-- Fold change calculation (log2FC)
+    |-- Thresholds: adj. p < 0.05, |log2FC| > 1
     |
     v
-Phase 6: Pathway Analysis
-    |-- Metabolite set enrichment (MSEA)
-    |-- Pathway topology analysis
-    |-- KEGG/Reactome pathway mapping
-    |-- Identify dysregulated pathways
+Phase 6: Pathway Enrichment
+    |-- MetaboAnalyst_pathway_enrichment (KEGG ORA)
+    |-- MetaboAnalyst_biomarker_enrichment (SMPDB/HMDB sets)
+    |-- Reactome or KEGG pathway topology (optional)
     |
     v
 Phase 7: Multi-Omics Integration
-    |-- Correlate with enzyme expression (RNA/protein)
-    |-- Metabolite-gene associations
-    |-- Pathway-level integration
+    |-- Correlate metabolites with enzyme expression
+    |-- Pathway-level integration (metabolite + gene FC)
     |-- Metabolic flux inference
     |
     v
-Phase 8: Generate Report
-    |-- Summary statistics
-    |-- Differential metabolites
-    |-- Pathway diagrams
-    |-- Multi-omics integration plots
-    |-- Biomarker panel
+Phase 8: Report
+    |-- QC summary, differential metabolites table
+    |-- Pathway enrichment results
+    |-- Biological interpretation, biomarker panel
 ```
 
 ---
 
 ## Phase Details
 
-### Phase 1: Data Import & Metabolite Identification
+### Phase 1: Metabolite Identification
 
-**Objective**: Load data and identify metabolites from features.
+**Objective**: Identify metabolites from LC-MS/GC-MS features or metabolite name lists.
 
-**Supported data types**:
-- **Peak tables**: Pre-processed metabolite abundance
-- **Raw spectra**: LC-MS (.mzML, .mzXML), GC-MS
-- **NMR spectra**: 1D/2D NMR data
+**Input types**:
+- **Peak tables**: Pre-processed metabolite abundances (rows = samples, columns = metabolites)
+- **Feature lists**: m/z + RT pairs from untargeted MS
+- **Named metabolite lists**: Common names from targeted panels
 
-**Peak table format** (typical):
-```
-Sample_ID | Glucose | Lactate | Glutamine | ... | Cholesterol
-----------|---------|---------|-----------|-----|------------
-Control_1 | 125000  | 45000   | 78000     | ... | 23000
-Control_2 | 130000  | 43000   | 82000     | ... | 25000
-Disease_1 | 85000   | 92000   | 45000     | ... | 45000
-```
+**Identification strategy by data type**:
 
-**Data loading**:
-```python
-def load_metabolomics_data(file_path, file_type='peak_table'):
-    """
-    Load metabolomics data.
+| Data Available | Primary Tool | Fallback |
+|----------------|--------------|----------|
+| m/z value (MS) | `MetabolomicsWorkbench_search_by_mz` | `MetabolomicsWorkbench_search_by_exact_mass` |
+| Metabolite name | `MetaboAnalyst_name_to_id` | `HMDB_search` |
+| HMDB ID | `HMDB_get_metabolite` | — |
+| PubChem CID | `MetabolomicsWorkbench_get_comp_by_pubc_cid` | — |
+| Study-level | `metabolights_get_study` | `MetabolomicsWorkbench_get_study` |
 
-    file_type options:
-    - 'peak_table': CSV/TSV with metabolites as columns
-    - 'mzml': Raw LC-MS data (requires processing)
-    - 'nmr': NMR spectra
-    """
-    import pandas as pd
-
-    if file_type == 'peak_table':
-        # Load peak table
-        data = pd.read_csv(file_path, index_col=0)
-        # Rows = samples, Columns = metabolites
-        return data
-
-    elif file_type == 'mzml':
-        # Process raw MS data (requires pymzml or similar)
-        # Peak detection, alignment, quantification
-        pass
-```
-
-**Metabolite identification**:
-```python
-def identify_metabolites(feature_data, mass_list, rt_list=None):
-    """
-    Match features to metabolite databases.
-
-    Uses accurate mass and retention time (if available).
-    Queries: HMDB, KEGG Compound, PubChem
-    """
-    from tooluniverse import ToolUniverse
-    tu = ToolUniverse()
-
-    identified_metabolites = []
-
-    for i, mass in enumerate(mass_list):
-        # Query HMDB by mass (±5 ppm tolerance)
-        hmdb_result = tu.run_one_function({
-            "name": "hmdb_search_by_mass",
-            "arguments": {
-                "mass": mass,
-                "mass_tolerance": 0.005  # 5 ppm
-            }
-        })
-
-        if hmdb_result and 'data' in hmdb_result:
-            matches = hmdb_result['data']
-            # Rank by confidence
-            # (exact mass match, pathway context, etc.)
-            identified_metabolites.append({
-                'feature_id': i,
-                'metabolite_name': matches[0]['name'],
-                'hmdb_id': matches[0]['accession'],
-                'formula': matches[0]['chemical_formula'],
-                'confidence': calculate_confidence(matches[0])
-            })
-
-    return identified_metabolites
-```
-
-**Confidence scoring**:
+**Identification confidence levels**:
 ```
 Level 1: Confirmed with authentic standard (MS + RT match)
 Level 2: Probable structure (accurate mass + MS/MS)
-Level 3: Tentative match (accurate mass only)
-Level 4: Unknown metabolite
+Level 3: Tentative match (accurate mass only, ≤5 ppm)
+Level 4: Unknown metabolite (feature only)
 ```
+
+**Workflow**:
+
+1. For each feature or metabolite name, call `MetaboAnalyst_name_to_id` with the metabolite name list. This resolves to KEGG, HMDB, PubChem, and ChEBI IDs simultaneously.
+
+2. For unresolved features with m/z, call `MetabolomicsWorkbench_search_by_mz` with the m/z value and ion mode. Use a mass tolerance appropriate to your instrument (5 ppm for high-resolution Orbitrap, 0.5 Da for low-resolution).
+
+3. For features resolved to HMDB IDs, call `HMDB_get_metabolite` to retrieve pathways, chemical formula, and biological roles. Call `HMDB_get_diseases` to capture biomarker associations.
+
+4. Retrieve RefMet-standardized names via `MetabolomicsWorkbench_get_refmet_info` for cross-study harmonization.
+
+**Key gotchas**:
+- `MetabolomicsWorkbench_search_by_mz` searches against RefMet, which prioritizes small molecules with biological relevance. Lipids may require separate lipidomics databases.
+- Pass metabolite names exactly as reported; abbreviations (e.g., "alpha-KG" vs "alpha-ketoglutarate") may not resolve — try both.
+
+---
 
 ### Phase 2: Quality Control & Filtering
 
-**Objective**: Remove low-quality features and background noise.
+**Objective**: Remove low-quality features and background noise before statistical analysis.
 
-**Quality control metrics**:
-```python
-def metabolomics_qc(data, sample_metadata):
-    """
-    Quality control for metabolomics data.
+**QC criteria**:
 
-    QC metrics:
-    - Coefficient of variation (CV) in QC samples
-    - Blank ratios (signal in samples vs blanks)
-    - Missing values per metabolite
-    - Total ion current per sample
-    """
-    # 1. CV in QC samples (should be < 30%)
-    qc_samples = sample_metadata['sample_type'] == 'QC'
-    qc_data = data[qc_samples]
+| Metric | Acceptable Threshold | Action if Failed |
+|--------|---------------------|------------------|
+| CV in QC samples | <30% | Remove metabolite |
+| Sample/blank ratio | >3x | Remove metabolite (contaminant) |
+| Missing values | <50% | Remove metabolite; impute if 20-50% |
+| Internal standard recovery | 80-120% | Flag sample; exclude if <70% |
+| Total ion current | Within 2 SD of median | Flag as outlier sample |
 
-    cv_per_metabolite = qc_data.std() / qc_data.mean()
-    high_cv = cv_per_metabolite > 0.3
+**Steps**:
+1. Separate samples by type: biological samples, QC pooled samples, blanks
+2. Compute per-metabolite CV across QC samples; remove those exceeding threshold
+3. Compute sample/blank ratios; remove metabolites dominated by background
+4. Assess missing value pattern; impute remaining missing values using half-minimum or KNN
+5. Flag samples with anomalous total signal for potential exclusion
 
-    print(f"Metabolites with CV > 30%: {high_cv.sum()}")
+No ToolUniverse tool is required for these steps — they are computed from the peak table directly. Document removed counts in the QC section of the final report.
 
-    # 2. Blank subtraction
-    blank_samples = sample_metadata['sample_type'] == 'Blank'
-    blank_data = data[blank_samples]
-
-    # Calculate blank ratios
-    blank_means = blank_data.mean()
-    sample_means = data[~blank_samples & ~qc_samples].mean()
-    blank_ratio = sample_means / blank_means
-
-    # Filter: keep metabolites with sample/blank > 3
-    keep_metabolites = blank_ratio > 3
-
-    # 3. Missing values (remove if >50% missing)
-    missing_per_metabolite = (data == 0).sum() / data.shape[0]
-    keep_metabolites &= (missing_per_metabolite < 0.5)
-
-    # Filter data
-    filtered_data = data.loc[:, keep_metabolites]
-
-    return filtered_data
-```
+---
 
 ### Phase 3: Normalization
 
-**Objective**: Account for technical variation and enable fair comparison.
+**Objective**: Account for technical variation and enable fair cross-sample comparison.
 
-**Normalization methods**:
+**Choose normalization method based on biology**:
 
-**1. Total Ion Current (TIC)**:
-```python
-def normalize_tic(data):
-    """
-    Normalize by total ion current.
-    Assumes total metabolite abundance is similar across samples.
-    """
-    tic = data.sum(axis=1)
-    median_tic = tic.median()
-    norm_factors = median_tic / tic
-    normalized = data.multiply(norm_factors, axis=0)
-    return normalized
-```
+| Method | When to Use | Notes |
+|--------|------------|-------|
+| **TIC** | Global abundance expected similar | Sensitive to large metabolite changes |
+| **PQN** | Some metabolites expected to be highly changed | More robust than TIC |
+| **Internal standard** | IS was spiked before extraction | Most accurate; requires IS metabolite column |
+| **LOESS** | Large batch effects, reference samples available | Corrects run-order drift |
 
-**2. Probabilistic Quotient Normalization (PQN)**:
-```python
-def normalize_pqn(data, reference_sample=None):
-    """
-    Probabilistic quotient normalization.
-    More robust than TIC to large metabolite changes.
-    """
-    import numpy as np
+After normalization, apply **log2 transformation** to stabilize variance. Use **Pareto scaling** (divide by square root of std) rather than auto-scaling for metabolomics, as auto-scaling over-emphasizes low-abundance noisy features.
 
-    # Use median sample as reference
-    if reference_sample is None:
-        reference = data.median(axis=0)
-    else:
-        reference = data.loc[reference_sample]
+No ToolUniverse tool required — normalization is performed computationally on the peak table.
 
-    # Calculate quotients
-    quotients = data.div(reference, axis=1)
-
-    # Median quotient per sample
-    norm_factors = quotients.median(axis=1)
-
-    # Normalize
-    normalized = data.div(norm_factors, axis=0)
-
-    return normalized
-```
-
-**3. Internal Standard Normalization**:
-```python
-def normalize_internal_standard(data, is_metabolite):
-    """
-    Normalize by spiked-in internal standard.
-    Most accurate if added before sample processing.
-    """
-    is_abundance = data[is_metabolite]
-    norm_factors = is_abundance.median() / is_abundance
-    normalized = data.multiply(norm_factors, axis=0)
-
-    # Remove internal standard from data
-    normalized = normalized.drop(columns=[is_metabolite])
-
-    return normalized
-```
-
-**Transformation**:
-```python
-def transform_data(data, method='log'):
-    """
-    Transform metabolite abundances.
-
-    Methods:
-    - 'log': log2 transform (stabilize variance)
-    - 'pareto': Pareto scaling (mean-center, divide by sqrt(std))
-    - 'auto': Auto-scaling (mean-center, divide by std)
-    """
-    import numpy as np
-
-    if method == 'log':
-        # Add small constant to avoid log(0)
-        transformed = np.log2(data + 1)
-
-    elif method == 'pareto':
-        # Pareto scaling (common in metabolomics)
-        mean = data.mean(axis=0)
-        std = data.std(axis=0)
-        transformed = (data - mean) / np.sqrt(std)
-
-    elif method == 'auto':
-        # Auto-scaling (z-score)
-        mean = data.mean(axis=0)
-        std = data.std(axis=0)
-        transformed = (data - mean) / std
-
-    return transformed
-```
+---
 
 ### Phase 4: Exploratory Analysis
 
-**Objective**: Visualize data structure and detect outliers.
+**Objective**: Visualize sample structure, detect outliers, and validate group separation.
 
-**PCA**:
-```python
-def perform_pca_metabolomics(data, sample_groups):
-    """
-    Principal component analysis for sample clustering.
-    """
-    from sklearn.decomposition import PCA
-    import matplotlib.pyplot as plt
+**Steps**:
+1. Perform **PCA** on normalized, log2-transformed data. Report variance explained by PC1/PC2. Samples that cluster separately from their group are outlier candidates.
+2. Perform **PLS-DA** for supervised discrimination (requires group labels). Report R2X, R2Y, Q2 via cross-validation. Q2 > 0.5 indicates good predictive separation; Q2 < 0 indicates overfitting.
+3. Generate **sample correlation heatmap** to identify batch structure or sample swaps.
 
-    # PCA
-    pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(data)
+**Acceptable outcomes before proceeding**:
+- PCA shows reasonable group separation
+- No obvious batch structure confounding group separation
+- Outlier samples identified and decision made (exclude or flag)
 
-    # Plot
-    plt.figure(figsize=(8, 6))
-    for group in sample_groups.unique():
-        mask = sample_groups == group
-        plt.scatter(pca_result[mask, 0], pca_result[mask, 1], label=group)
+No ToolUniverse tool required for this phase.
 
-    plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
-    plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
-    plt.legend()
-    plt.title('PCA - Metabolomics Data')
-```
-
-**PLS-DA** (Partial Least Squares Discriminant Analysis):
-```python
-def plsda_analysis(X, y, n_components=2):
-    """
-    PLS-DA for supervised dimensionality reduction.
-    Better separation than PCA for classification tasks.
-    """
-    from sklearn.cross_decomposition import PLSRegression
-    from sklearn.preprocessing import LabelEncoder
-
-    # Encode labels
-    le = LabelEncoder()
-    y_encoded = le.fit_transform(y)
-
-    # PLS
-    pls = PLSRegression(n_components=n_components)
-    X_pls = pls.fit_transform(X, y_encoded)[0]
-
-    # Plot
-    plt.scatter(X_pls[:, 0], X_pls[:, 1], c=y_encoded)
-    plt.xlabel('PLS Component 1')
-    plt.ylabel('PLS Component 2')
-    plt.title('PLS-DA')
-
-    return X_pls
-```
+---
 
 ### Phase 5: Differential Metabolite Analysis
 
-**Objective**: Identify metabolites with significant abundance changes.
+**Objective**: Identify metabolites with statistically significant abundance changes between conditions.
 
-**Statistical testing**:
-```python
-def differential_metabolites(data, group1_samples, group2_samples):
-    """
-    Identify differential metabolites between two groups.
-    """
-    from scipy import stats
-    import numpy as np
+**Statistical workflow**:
 
-    results = []
+1. For two-group comparison: Welch's t-test (unequal variances) or Wilcoxon rank-sum test (non-parametric)
+2. For multi-group: one-way ANOVA with Tukey post-hoc
+3. Compute fold change: log2(mean_group2 / mean_group1)
+4. Apply Benjamini-Hochberg FDR correction to all p-values
+5. Apply significance thresholds: adj. p < 0.05 AND |log2FC| > 1.0
 
-    for metabolite in data.columns:
-        # Extract abundances
-        group1 = data.loc[group1_samples, metabolite]
-        group2 = data.loc[group2_samples, metabolite]
+**Output**: Table of significant metabolites with columns: metabolite, log2FC, p_value, adj_p_value, mean_group1, mean_group2, direction (up/down).
 
-        # Statistics
-        mean1 = group1.mean()
-        mean2 = group2.mean()
-        fold_change = mean2 / mean1
-        log2fc = np.log2(fold_change)
+No ToolUniverse tool required for core statistics — all computed from the peak table. ToolUniverse tools are used in Phase 1 to obtain IDs and in Phase 6 for pathway analysis.
 
-        # t-test
-        t_stat, p_value = stats.ttest_ind(group1, group2, equal_var=False)
+---
 
-        results.append({
-            'metabolite': metabolite,
-            'fold_change': fold_change,
-            'log2FC': log2fc,
-            'mean_group1': mean1,
-            'mean_group2': mean2,
-            'p_value': p_value,
-            't_statistic': t_stat
-        })
+### Phase 6: Metabolic Pathway Enrichment
 
-    results_df = pd.DataFrame(results)
+**Objective**: Interpret differential metabolites at the pathway level to identify dysregulated metabolic processes.
 
-    # Multiple testing correction
-    from statsmodels.stats.multitest import multipletests
-    results_df['adj_p_value'] = multipletests(results_df['p_value'], method='fdr_bh')[1]
+**Primary approach — Over-Representation Analysis (ORA)**:
 
-    # Significance
-    results_df['significant'] = (
-        (results_df['adj_p_value'] < 0.05) &
-        (np.abs(results_df['log2FC']) > 1.0)
-    )
+Call `MetaboAnalyst_pathway_enrichment` with the list of significant differential metabolite names and the organism code. This tool:
+- Maps metabolite names to KEGG compound IDs internally
+- Tests pathway enrichment using hypergeometric test
+- Returns pathways with p-value, FDR, fold enrichment, and hit metabolite list
 
-    return results_df
-```
+**Secondary approach — Biomarker set enrichment**:
 
-**Volcano plot**:
-```python
-def plot_metabolite_volcano(de_results):
-    """Visualize differential metabolite results."""
-    plt.figure(figsize=(8, 6))
+Call `MetaboAnalyst_biomarker_enrichment` with the same metabolite list. This tests against curated metabolite sets from SMPDB and HMDB (glycolysis, TCA cycle, amino acid pathways, etc.) and is complementary to KEGG ORA.
 
-    # Non-significant
-    non_sig = de_results[~de_results['significant']]
-    plt.scatter(non_sig['log2FC'], -np.log10(non_sig['p_value']),
-                c='gray', alpha=0.5, s=20)
+**Pathway details retrieval**:
+- For a specific KEGG pathway, call `kegg_get_pathway_info` with the pathway ID (e.g., `hsa00010` for Glycolysis)
+- To get all compounds in a KEGG pathway, call `KEGG_get_compound` for individual compound details
+- For Reactome pathway context, call `ReactomeContent_search` with pathway keywords, then `Reactome_get_pathway` for details
 
-    # Significant
-    sig = de_results[de_results['significant']]
-    plt.scatter(sig['log2FC'], -np.log10(sig['p_value']),
-                c='red', alpha=0.7, s=30)
+**Pathway topology considerations**:
+- Metabolites at pathway hubs (many connections) have higher impact on pathway score
+- Metabolites at pathway bottlenecks (connecting two major branches) are particularly informative
+- KEGG pathway topology is not automatically computed by `MetaboAnalyst_pathway_enrichment` — report ORA results and manually assess centrality based on metabolic knowledge
 
-    plt.axhline(-np.log10(0.05), color='blue', linestyle='--')
-    plt.axvline(-1, color='blue', linestyle='--')
-    plt.axvline(1, color='blue', linestyle='--')
+**Key gotchas**:
+- `MetaboAnalyst_pathway_enrichment` requires metabolite common names matching KEGG nomenclature. Use `MetaboAnalyst_name_to_id` first to check which names resolve correctly. Submit only the names that map successfully.
+- ORA requires a background set. The default background is all KEGG metabolites for the organism. Results are only meaningful if your identified metabolite list is a reasonable coverage of the metabolome.
+- Very short metabolite lists (<10 metabolites) produce unreliable enrichment p-values.
 
-    plt.xlabel('log2 Fold Change')
-    plt.ylabel('-log10(p-value)')
-    plt.title('Differential Metabolites')
-```
-
-### Phase 6: Metabolic Pathway Analysis
-
-**Objective**: Interpret metabolite changes at pathway level.
-
-**Metabolite Set Enrichment Analysis (MSEA)**:
-```python
-def pathway_enrichment_metabolites(metabolite_list, organism='human'):
-    """
-    Perform pathway enrichment for differential metabolites.
-
-    Uses KEGG metabolic pathways.
-    """
-    from tooluniverse import ToolUniverse
-    tu = ToolUniverse()
-
-    # Get KEGG compound IDs for metabolites
-    kegg_ids = []
-    for metabolite in metabolite_list:
-        # Convert HMDB ID to KEGG Compound ID
-        result = tu.run_one_function({
-            "name": "kegg_find_compound",
-            "arguments": {"query": metabolite}
-        })
-        if result and 'data' in result:
-            kegg_ids.append(result['data'][0]['entry_id'])
-
-    # Pathway enrichment
-    enrichment = tu.run_one_function({
-        "name": "kegg_enrich_pathway",
-        "arguments": {
-            "compound_list": ",".join(kegg_ids),
-            "organism": organism
-        }
-    })
-
-    return enrichment
-```
-
-**Pathway topology analysis**:
-```python
-def pathway_topology_analysis(metabolites, pathway_id):
-    """
-    Analyze pathway dysregulation considering topology.
-
-    Metabolites at key pathway positions (hubs, bottlenecks)
-    have more impact than peripheral metabolites.
-    """
-    # Load pathway structure from KEGG
-    # Calculate impact score based on:
-    # - Betweenness centrality (bottleneck metabolites)
-    # - Degree centrality (hub metabolites)
-    # - Pathway position (early vs late)
-
-    pass
-```
+---
 
 ### Phase 7: Multi-Omics Integration
 
-**Objective**: Integrate metabolomics with transcriptomics/proteomics.
+**Objective**: Integrate metabolomics with transcriptomics or proteomics to link metabolite changes to enzyme activity.
 
-**Metabolite-enzyme correlation**:
-```python
-def correlate_metabolite_enzyme(metabolite_data, enzyme_expression):
-    """
-    Correlate metabolite levels with enzyme expression.
+**Metabolite-enzyme linking**:
 
-    Expected correlations:
-    - Substrate + enzyme → negative correlation (consumption)
-    - Product + enzyme → positive correlation (production)
-    """
-    from scipy.stats import spearmanr
+1. For each significant metabolite, retrieve its associated enzymes (reactions) from KEGG:
+   - Call `KEGG_get_compound` with the KEGG compound ID. The response includes linked enzymes (EC numbers) and reactions.
+   - Call `kegg_get_pathway_info` for the relevant pathway to see which enzymes catalyze reactions producing or consuming this metabolite.
 
-    # For each metabolite-enzyme pair
-    correlations = {}
+2. Cross-reference enzyme gene symbols with transcriptomics DE results:
+   - Substrate metabolite increased + producing enzyme decreased → accumulation (enzyme bottleneck)
+   - Product metabolite increased + catalyzing enzyme increased → pathway activation (flux increase)
+   - Opposite direction changes suggest regulation or feedback
 
-    for metabolite in metabolite_data.columns:
-        # Find enzymes that produce/consume this metabolite
-        enzymes = find_metabolite_enzymes(metabolite)
+3. For pathway-level integration, score each pathway by combining:
+   - Fraction of metabolites significantly changed
+   - Fraction of pathway enzymes significantly changed
+   - Directional concordance (metabolite and enzyme changes in expected relationship)
 
-        for enzyme in enzymes:
-            if enzyme in enzyme_expression.index:
-                met_levels = metabolite_data[metabolite]
-                enz_expr = enzyme_expression.loc[enzyme]
+**Enzyme lookup tools**:
 
-                r, p = spearmanr(met_levels, enz_expr)
+| Goal | Tool | Key Arguments |
+|------|------|---------------|
+| Get metabolite-linked reactions | `KEGG_get_compound` | `compound_id` |
+| Get genes in metabolic pathway | `KEGG_get_pathway_genes` | `pathway_id` |
+| Get pathway with reactions | `kegg_get_pathway_info` | `pathway_id` |
 
-                correlations[f'{metabolite}_{enzyme}'] = {
-                    'r': r,
-                    'p': p,
-                    'relationship': 'product' if r > 0 else 'substrate'
-                }
-
-    return correlations
-```
-
-**Pathway-level integration**:
-```python
-def integrate_omics_pathway(metabolite_fc, gene_fc, pathway_id):
-    """
-    Integrate metabolite and gene fold changes at pathway level.
-
-    For each reaction:
-    - Check if metabolites are changed
-    - Check if enzymes are changed
-    - Score pathway dysregulation (combined evidence)
-    """
-    # Load pathway reactions
-    # For each reaction:
-    #   - Metabolite substrate/product changes
-    #   - Enzyme expression changes
-    #   - Concordance score
-
-    pathway_score = calculate_pathway_dysregulation(
-        metabolite_fc, gene_fc, pathway_id
-    )
-
-    return pathway_score
-```
+---
 
 ### Phase 8: Report Generation
 
-**Generate comprehensive metabolomics report**:
+**Structure of the metabolomics analysis report**:
 
 ```markdown
-# Metabolomics Analysis Report
-
 ## Dataset Summary
-- **Platform**: LC-MS/MS (Orbitrap)
-- **Method**: Untargeted metabolomics
-- **Samples**: 40 (20 disease, 20 control)
-- **Metabolites Identified**: 324 (Level 1/2 confidence)
-- **Metabolites Quantified**: 298 (after QC)
+- Platform, method (targeted/untargeted), instrument
+- Sample counts per group
+- Metabolites identified (by confidence level)
+- Metabolites passing QC
 
 ## Quality Control
-- **CV in QC samples**: 18% median (acceptable: <30%)
-- **Blank ratios**: All metabolites > 3x blank signal
-- **Missing values**: 8% average per metabolite
-- **Internal standard**: Recovery 95-105% across samples
+- CV in QC samples (median, range)
+- Blank subtraction results
+- Missing value rate
+- Internal standard recovery (if applicable)
+- Sample outliers identified/excluded
 
 ## Normalization
-- **Method**: Probabilistic Quotient Normalization (PQN)
-- **Transformation**: log2
-- **Batch correction**: Not required (single batch)
+- Method applied
+- Transformation applied
+- Batch correction (if applicable)
 
 ## Exploratory Analysis
-- **PCA**: Clear separation between groups (PC1: 28%, PC2: 18%)
-- **PLS-DA**: Excellent discrimination (R2=0.89, Q2=0.75)
-- **Outliers**: 1 sample removed (technical failure)
+- PCA: variance explained, group separation observed
+- PLS-DA: R2Y, Q2, model quality
+- Outliers: any excluded samples
 
 ## Differential Metabolites
-- **Significant metabolites**: 87 (adj. p < 0.05, |log2FC| > 1)
-  - Increased: 52 metabolites
-  - Decreased: 35 metabolites
-
-### Top Increased Metabolites
-1. **Lactate** (log2FC=3.2, p=1e-12) - Glycolysis
-2. **Glutamine** (log2FC=2.8, p=1e-10) - Amino acid metabolism
-3. **Palmitate** (log2FC=2.5, p=1e-9) - Fatty acid synthesis
-
-### Top Decreased Metabolites
-1. **Citrate** (log2FC=-2.9, p=1e-11) - TCA cycle
-2. **ATP** (log2FC=-2.3, p=1e-9) - Energy metabolism
-3. **NAD+** (log2FC=-2.1, p=1e-8) - Redox balance
+- Total significant: N (adj. p < 0.05, |log2FC| > 1)
+- Increased: N, Decreased: N
+- Top 5 increased (metabolite, log2FC, adj. p)
+- Top 5 decreased (metabolite, log2FC, adj. p)
 
 ## Pathway Enrichment
-### Top Dysregulated Pathways
-1. **Glycolysis/Gluconeogenesis** (p=1e-15)
-   - 12 metabolites: glucose, pyruvate, lactate, etc.
-   - Direction: Increased flux to lactate (Warburg effect)
-2. **TCA Cycle** (p=1e-12)
-   - 8 metabolites: citrate, succinate, malate, etc.
-   - Direction: Decreased activity
-3. **Glutaminolysis** (p=1e-10)
-   - 6 metabolites: glutamine, glutamate, α-KG, etc.
-   - Direction: Increased glutamine consumption
+- Top enriched pathways (pathway name, p-value, FDR, hit metabolites)
+- Biological interpretation per pathway
 
-## Multi-Omics Integration
-### Metabolite-Enzyme Correlations
-- **LDHA (lactate dehydrogenase)**
-  - Expression: 3.5-fold increased (RNA + protein)
-  - Lactate: 3.2-fold increased
-  - Correlation: r=0.85 (p<0.001) - Concordant upregulation
-- **IDH1 (isocitrate dehydrogenase)**
-  - Expression: 2.1-fold decreased
-  - Citrate: 2.9-fold decreased
-  - Correlation: r=0.78 (p<0.001) - TCA cycle suppression
+## Multi-Omics Integration (if applicable)
+- Key metabolite-enzyme pairs with concordant changes
+- Metabolic phenotype summary
 
-### Metabolic Phenotype
-Integration with RNA-seq and proteomics reveals:
-- **Warburg effect**: Shift from oxidative to glycolytic metabolism
-- **Glutamine addiction**: Increased glutaminolysis for anaplerosis
-- **Redox imbalance**: Decreased NAD+/NADH ratio, oxidative stress
-
-## Biomarker Discovery
-### Top 10 Metabolites for Classification
-Random Forest model (10-fold CV):
-- **AUC**: 0.96 ± 0.03
-- **Accuracy**: 92%
-
-**Biomarker Panel**:
-1. Lactate
-2. Glutamine
-3. Citrate
-4. ATP
-5. Palmitate
-6. Pyruvate
-7. Succinate
-8. NAD+
-9. α-ketoglutarate
-10. Glucose-6-phosphate
+## Biomarker Panel (if requested)
+- Classification performance metrics
+- Top biomarker metabolites ranked by importance
 
 ## Biological Interpretation
-Metabolomics reveals fundamental metabolic reprogramming in disease state:
-
-1. **Glycolytic switch**: Increased glycolysis with lactate accumulation despite oxygen availability (Warburg effect), driven by LDHA upregulation.
-
-2. **TCA cycle suppression**: Decreased citrate and TCA intermediates, consistent with IDH1 downregulation. Shunts carbon to biosynthesis.
-
-3. **Glutamine dependence**: Elevated glutamine consumption and glutaminolysis provides alternative carbon source for anaplerosis and NADPH for biosynthesis.
-
-4. **Biosynthetic activation**: Increased palmitate indicates active fatty acid synthesis, supporting membrane production for proliferation.
-
-5. **Energy stress**: Despite active glycolysis, ATP levels are decreased, suggesting high energy demand outpacing production.
-
-This metabolic signature is characteristic of proliferative, biosynthetically active cells typical of cancer or activated immune cells.
-
-## Clinical Relevance
-- **Therapeutic targets**: LDHA inhibitors, glutaminase inhibitors to disrupt metabolic dependencies
-- **Biomarkers**: Lactate/citrate ratio as metabolic activity marker
-- **Drug response**: Metabolic phenotype may predict sensitivity to metabolic inhibitors
+- Summary of metabolic reprogramming
+- Mechanistic hypotheses
+- Clinical/biological relevance
 ```
 
 ---
 
-## Integration with ToolUniverse
+## Integration with Other Skills
 
 | Skill | Used For | Phase |
 |-------|----------|-------|
-| `tooluniverse-gene-enrichment` | Pathway enrichment | Phase 6 |
+| `tooluniverse-gene-enrichment` | Enzyme/gene enrichment for integration | Phase 7 |
 | `tooluniverse-rnaseq-deseq2` | Enzyme expression for integration | Phase 7 |
-| `tooluniverse-proteomics-analysis` | Protein levels for integration | Phase 7 |
-| `tooluniverse-multi-omics-integration` | Comprehensive integration | Phase 7 |
+| `tooluniverse-proteomics-analysis` | Protein-level enzyme data | Phase 7 |
+| `tooluniverse-multi-omics-integration` | Comprehensive omics integration | Phase 7 |
+| `tooluniverse-metabolomics` | Database lookup, study retrieval | Phase 1 |
+
+---
+
+## Abbreviated Tool Reference
+
+| Tool | Phase | Purpose |
+|------|-------|---------|
+| `MetaboAnalyst_name_to_id` | 1 | Map metabolite names → KEGG/HMDB/PubChem/ChEBI IDs |
+| `MetabolomicsWorkbench_search_by_mz` | 1 | Identify metabolites by m/z (MS data) |
+| `MetabolomicsWorkbench_search_by_exact_mass` | 1 | Identify by exact mass (high-res MS) |
+| `MetabolomicsWorkbench_search_compound_by_name` | 1 | Search compound by name (RefMet) |
+| `MetabolomicsWorkbench_get_refmet_info` | 1 | Get RefMet standardized name |
+| `HMDB_search` | 1 | Search HMDB by name, formula, or mass |
+| `HMDB_get_metabolite` | 1 | Get pathways, formula, bio roles for HMDB ID |
+| `HMDB_get_diseases` | 1 | Get disease/biomarker associations |
+| `MetabolomicsWorkbench_get_comp_by_pubc_cid` | 1 | Get compound info by PubChem CID |
+| `metabolights_get_study` | 1 | Retrieve MetaboLights study metadata |
+| `metabolights_search_studies` | 1 | Search MetaboLights studies |
+| `MetabolomicsWorkbench_get_study` | 1 | Retrieve MetaboWorkbench study |
+| `MetaboAnalyst_pathway_enrichment` | 6 | KEGG ORA for differential metabolites |
+| `MetaboAnalyst_biomarker_enrichment` | 6 | SMPDB/HMDB metabolite set enrichment |
+| `MetaboAnalyst_get_pathway_library` | 6 | List KEGG pathways for organism |
+| `kegg_search_pathway` | 6 | Search KEGG pathways by keyword |
+| `kegg_get_pathway_info` | 6, 7 | Get pathway details, genes, compounds |
+| `KEGG_get_compound` | 6, 7 | Get compound details, linked reactions/enzymes |
+| `KEGG_get_pathway_genes` | 7 | Get all genes in a KEGG pathway |
+| `ReactomeContent_search` | 6 | Search Reactome by keyword |
+| `Reactome_get_pathway` | 6 | Get Reactome pathway details |
+
+Full parameter tables: see `references/tools.md`.
+
+---
+
+## Known Gotchas
+
+### Metabolite Identification
+- **Name ambiguity**: Common names like "vitamin B6" map to multiple compounds. Prefer IUPAC names or specific synonyms. Use `MetaboAnalyst_name_to_id` to validate before enrichment.
+- **Isobar confusion**: LC-MS cannot distinguish isobaric compounds (same nominal mass). If two metabolites share m/z, annotate both and report the ambiguity.
+- **Adduct forms**: LC-MS features appear as `[M+H]+`, `[M+Na]+`, `[M-H]-` etc. Search `MetabolomicsWorkbench_search_by_mz` using the neutral mass (subtract adduct mass) or specify ion mode.
+- **GC-MS fragmentation**: GC-MS features are fragmented; match against NIST or specific GC-MS libraries, not high-resolution tools.
+
+### Pathway Enrichment
+- **Name mismatch in MetaboAnalyst**: `MetaboAnalyst_pathway_enrichment` uses KEGG nomenclature. Call `MetaboAnalyst_name_to_id` first and use only names that resolve. Pass resolved names (not HMDB or PubChem IDs) to the enrichment tool.
+- **Small metabolite lists fail ORA**: With fewer than 10 input metabolites, hypergeometric test p-values are unreliable. Report pathway coverage instead.
+- **Organism code**: Default organism is `hsa` (human). For mouse use `mmu`, rat `rno`, yeast `sce`. Call `MetaboAnalyst_get_pathway_library` to confirm available pathways for non-human organisms.
+
+### Normalization
+- **TIC vs PQN**: TIC assumes total metabolite abundance is constant across samples — invalid for studies where disease dramatically alters global metabolism (e.g., cancer vs normal). Use PQN in those cases.
+- **Log of zero**: When applying log2 transformation, add a small pseudocount (e.g., half the minimum non-zero value). Do not simply add 1, as this can distort abundances of low-intensity metabolites.
+- **Order of operations**: Always normalize before transformation; transform before scaling.
+
+### Statistical Analysis
+- **Multiple testing burden**: Untargeted metabolomics with hundreds of metabolites requires FDR correction. BH correction is standard. Do not use Bonferroni — it is overly conservative for correlated metabolites.
+- **Paired vs unpaired**: Use paired t-test or Wilcoxon signed-rank test for matched sample designs (e.g., before/after treatment in same subject).
+
+### Multi-Omics Integration
+- **Direction of metabolite-enzyme relationships**: A substrate accumulates when its consuming enzyme is downregulated OR when the upstream enzyme is upregulated. Do not assume a simple positive correlation between enzyme expression and product metabolite level without checking the full reaction context.
+- **Spearman vs Pearson**: Use Spearman rank correlation for metabolomics-transcriptomics correlation — metabolite distributions are rarely normal.
 
 ---
 
@@ -731,34 +425,36 @@ This metabolic signature is characteristic of proliferative, biosynthetically ac
 
 | Component | Requirement |
 |-----------|-------------|
-| Metabolites | At least 50 identified metabolites |
-| Replicates | At least 3 per condition |
-| QC | CV < 30% in QC samples, blank subtraction |
-| Statistical test | t-test or Wilcoxon with FDR correction |
-| Pathway analysis | MSEA with KEGG or Reactome |
-| Report | QC, differential metabolites, pathways, visualizations |
+| Metabolites | At least 50 identified metabolites for meaningful analysis |
+| Replicates | At least 3 per condition (5+ recommended) |
+| QC | CV < 30% in QC samples; blank subtraction performed |
+| Statistical test | t-test or Wilcoxon with BH-FDR correction |
+| Pathway analysis | ORA with KEGG or SMPDB metabolite sets |
+| Report | QC summary, differential metabolite table, pathway results |
 
 ---
 
 ## Limitations
 
-- **Identification**: Many features remain unidentified (Level 4)
-- **Coverage**: Cannot detect all metabolites (depends on method)
-- **Quantification**: Relative abundance (not absolute concentration without standards)
-- **Isomers**: Difficult to distinguish structural isomers
-- **Ion suppression**: Matrix effects can affect quantification
-- **Dynamic range**: Limited compared to targeted methods
+- **Identification coverage**: Many features remain unidentified (Level 4); this is normal for untargeted metabolomics
+- **Relative vs absolute**: Peak table values are relative abundances unless stable-isotope internal standards were used for absolute quantification
+- **Isomers**: Structural isomers (e.g., leucine vs isoleucine) cannot be distinguished without MS/MS or retention time matching to authentic standards
+- **Ion suppression**: Matrix effects reduce quantitative accuracy; internal standards partially correct for this
+- **Dynamic range**: Typically 3-4 orders of magnitude; low-abundance metabolites may be below detection
 
 ---
 
 ## References
 
 **Methods**:
-- MetaboAnalyst: https://doi.org/10.1093/nar/gkab382
-- XCMS: https://doi.org/10.1021/ac051437y
+- MetaboAnalyst 5.0: https://doi.org/10.1093/nar/gkab382
+- XCMS (peak detection): https://doi.org/10.1021/ac051437y
+- PQN normalization: https://doi.org/10.1007/s11306-006-0026-4
 - MSEA: https://doi.org/10.1186/1471-2105-11-395
 
 **Databases**:
 - HMDB: https://hmdb.ca
 - KEGG Compound: https://www.genome.jp/kegg/compound/
-- Reactome: https://reactome.org
+- MetaboLights: https://www.ebi.ac.uk/metabolights/
+- Metabolomics Workbench: https://www.metabolomicsworkbench.org/
+- RefMet: https://www.metabolomicsworkbench.org/databases/refmet/

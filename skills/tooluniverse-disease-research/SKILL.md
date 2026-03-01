@@ -17,41 +17,62 @@ Apply when the user:
 - Wants a detailed research report with citations
 - Asks "what do we know about [disease]?"
 
+---
+
 ## Core Workflow: Report-First Approach
 
-**DO NOT** show the search process to the user. Instead:
-
-1. **Create report file first** - Initialize `{disease_name}_research_report.md`
-2. **Research each dimension** - Use all relevant tools
-3. **Update report progressively** - Write findings to file after each dimension
-4. **Include citations** - Every fact must reference its source tool
+Do not narrate the search process to the user. Work silently through all phases and deliver the completed report.
 
 ```
 User: "Research Parkinson's disease"
 
-Agent Actions (internal, not shown to user):
-1. Create "parkinsons_disease_research_report.md" with template
-2. Research DIM 1 → Update Identity section
-3. Research DIM 2 → Update Clinical section
-4. ... continue for all 10 dimensions
-5. Present final report to user
+Agent (internal):
+Phase 1 → Disambiguate: get EFO/UMLS/ICD identifiers
+Phase 2 → Create report file with template
+Phase 3 → Research each of the 10 dimensions, update file after each
+Phase 4 → Write Executive Summary, verify checklist
+Phase 5 → Present report path and summary to user
 ```
 
-## Report Template
+---
 
-Create this file structure at the start:
+## Phase 1: Disambiguation
+
+Resolve canonical identifiers before starting any section. These are reused across all tool calls.
+
+**Primary EFO lookup.** Call `OSL_get_efo_id_by_disease_name` with the English disease name. Store the `efo_id` (e.g. `EFO_0000249`). This is the key identifier for OpenTargets calls.
+
+**Cross-reference ontologies** (call in parallel):
+- `OpenTargets_get_disease_id_description_by_name` — confirm EFO ID and get description
+- `umls_search_concepts` — get UMLS CUI
+- `icd_search_codes` with `version="ICD10CM"` — get ICD-10 codes
+- `snomed_search_concepts` — get SNOMED CT code
+- `ols_get_efo_term` — get synonyms and hierarchy (colon format: `EFO:0000249`)
+- `ols_get_efo_term_children` — get disease subtypes
+
+**Handle ambiguity.** If the disease name matches multiple EFO entries, pick the most specific term. If no EFO entry exists, fall back to UMLS CUI or MONDO ID.
+
+**ID Format Note**: OpenTargets expects underscore format (`EFO_0000249`). OLS expects colon format (`EFO:0000249`). Convert between formats as needed.
+
+---
+
+## Phase 2: Initialize Report File
+
+Create `{disease_slug}_research_report.md` (e.g. `parkinsons_disease_research_report.md`). Populate the header with resolved identifiers and fill section placeholders with `*Researching...*`.
+
+### Report Template
 
 ```markdown
 # Disease Research Report: {Disease Name}
 
 **Report Generated**: {date}
-**Disease Identifiers**: (to be filled)
+**Disease Identifiers**: EFO: {efo_id} | ICD-10: {icd} | UMLS: {cui}
 
 ---
 
 ## Executive Summary
 
-(Brief 3-5 sentence overview - fill after all research complete)
+*To be written after all sections complete.*
 
 ---
 
@@ -69,7 +90,7 @@ Create this file structure at the start:
 - (list with source)
 
 ### Disease Hierarchy
-- Parent: 
+- Parent:
 - Subtypes:
 
 **Sources**: (list tools used)
@@ -153,10 +174,6 @@ Create this file structure at the start:
 | Factor | Evidence | Source |
 |--------|----------|--------|
 
-### GWAS Studies
-| Study | Sample Size | Findings | Source |
-|-------|-------------|----------|--------|
-
 **Sources**: (list tools used)
 
 ---
@@ -164,9 +181,9 @@ Create this file structure at the start:
 ## 7. Literature & Research Activity
 
 ### Publication Trends
-- Total publications (5 years): 
-- Current year: 
-- Trend: 
+- Total publications (5 years):
+- Current year:
+- Trend:
 
 ### Key Publications
 | PMID | Title | Year | Citations | Source |
@@ -185,9 +202,6 @@ Create this file structure at the start:
 | Disease | Similarity Score | Shared Genes | Source |
 |---------|-----------------|--------------|--------|
 
-### Comorbidities
-- (from literature/clinical data)
-
 **Sources**: (list tools used)
 
 ---
@@ -197,9 +211,6 @@ Create this file structure at the start:
 ### CIViC Variants
 | Gene | Variant | Evidence Level | Clinical Significance | Source |
 |------|---------|----------------|----------------------|--------|
-
-### Molecular Profiles
-- (biomarkers)
 
 ### Targeted Therapies
 | Therapy | Target | Evidence | Source |
@@ -219,412 +230,182 @@ Create this file structure at the start:
 | Trial | Drug | Adverse Event | Frequency | Source |
 |-------|------|---------------|-----------|--------|
 
-### FAERS Reports
-- (FDA adverse event data)
-
 **Sources**: (list tools used)
 
 ---
 
 ## References
 
-### Data Sources Used
-| Tool | Query | Section |
-|------|-------|---------|
+### Tools Used
+| # | Tool | Parameters | Section | Items Retrieved |
+|---|------|------------|---------|-----------------|
 
-### Database Versions
-- OpenTargets: (version/date)
-- ClinVar: (version/date)
-- GWAS Catalog: (version/date)
+### Data Retrieved Summary
+- Total tools used:
+- Sections completed:
 ```
 
 ---
 
-## Research Protocol
+## Phase 3: Research Each Dimension
 
-### Step 1: Initialize Report
+After each dimension completes, write results to the report file before starting the next.
 
-```python
-from datetime import datetime
+**Dim 1 — Identity**: Fill from Phase 1 results directly.
 
-def create_report_file(disease_name):
-    """Create initial report file with template"""
-    filename = f"{disease_name.lower().replace(' ', '_')}_research_report.md"
-    
-    template = f"""# Disease Research Report: {disease_name}
+**Dim 2 — Clinical**: `OpenTargets_get_associated_phenotypes_by_disease_efoId`, `MedlinePlus_search_topics_by_keyword`, `MedlinePlus_get_genetics_condition_by_name`, `MedlinePlus_connect_lookup_by_code`, then `get_HPO_ID_by_phenotype` and `get_phenotype_by_HPO_ID` for key symptoms.
 
-**Report Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
-**Disease Identifiers**: Pending research...
+**Dim 3 — Genetics**: `OpenTargets_get_associated_targets_by_disease_efoId`, `clinvar_search_variants`, `gwas_search_associations`, `gwas_get_studies_for_trait`. For top 5 genes: `OpenTargets_target_disease_evidence`, `GWAS_search_associations_by_gene`. For key variants: `clinvar_get_variant_details`, `clinvar_get_clinical_significance`, `gnomad_get_variant_frequency`.
 
----
+**Dim 4 — Treatment**: `OpenTargets_get_associated_drugs_by_disease_efoId`, `search_clinical_trials`, `GtoPdb_list_diseases`. For top drugs: `OpenTargets_get_drug_mechanisms_of_action_by_chemblId`. For top trials (as list): `get_clinical_trial_descriptions`, `get_clinical_trial_conditions_and_interventions`, `get_clinical_trial_outcome_measures`.
 
-## Executive Summary
+**Dim 5 — Pathways**: `Reactome_get_diseases`, `humanbase_ppi_analysis` (top genes, relevant tissue), `gtex_get_expression_by_gene`, `HPA_get_protein_expression`, `geo_search_datasets`. For top pathway IDs: `Reactome_get_pathway`, `Reactome_map_uniprot_to_pathways`.
 
-*Research in progress...*
+**Dim 6 — Epidemiology**: `PubMed_search_articles` with queries `"{disease}" AND epidemiology`, `"{disease}" AND incidence OR prevalence`, `"{disease}" AND risk factors`. Also `gwas_get_associations_for_trait` for genetic risk.
 
----
+**Dim 7 — Literature**: `PubMed_search_articles` (limit=100), `openalex_search_works`, `europe_pmc_search_abstracts`, `semantic_scholar_search_papers`, `OpenTargets_get_publications_by_disease_efoId`. Then `PubMed_get_article` for top 10 PMIDs.
 
-## 1. Disease Identity & Classification
-*Researching...*
+**Dim 8 — Similar**: `OpenTargets_get_similar_entities_by_disease_efoId` (threshold=0.3, size=30).
 
-## 2. Clinical Presentation
-*Pending...*
+**Dim 9 — Cancer** (skip if not a cancer): `civic_search_diseases`, `civic_search_genes`, `civic_get_variants_by_gene`, `civic_get_evidence_item`, `civic_search_therapies`, `civic_search_molecular_profiles`.
 
-[... rest of template ...]
-"""
-    
-    with open(filename, 'w') as f:
-        f.write(template)
-    
-    return filename
-```
-
-### Step 2: Research Each Dimension with Citations
-
-For EACH piece of information, track:
-- **Tool name** that provided the data
-- **Parameters** used in the query
-- **Timestamp** of the query
-
-```python
-def research_with_citations(tu, disease_name, report_file):
-    """Research and update report with full citations"""
-    
-    references = []  # Track all sources
-    
-    # === DIMENSION 1: Identity ===
-    
-    # Get EFO ID
-    efo_result = tu.tools.OSL_get_efo_id_by_disease_name(disease=disease_name)
-    efo_id = efo_result.get('efo_id')
-    references.append({
-        'tool': 'OSL_get_efo_id_by_disease_name',
-        'params': {'disease': disease_name},
-        'section': 'Identity'
-    })
-    
-    # Get ICD codes
-    icd_result = tu.tools.icd_search_codes(query=disease_name, version="ICD10CM")
-    references.append({
-        'tool': 'icd_search_codes',
-        'params': {'query': disease_name, 'version': 'ICD10CM'},
-        'section': 'Identity'
-    })
-    
-    # Get UMLS
-    umls_result = tu.tools.umls_search_concepts(query=disease_name)
-    references.append({
-        'tool': 'umls_search_concepts',
-        'params': {'query': disease_name},
-        'section': 'Identity'
-    })
-    
-    # Get synonyms from EFO
-    if efo_id:
-        efo_term = tu.tools.ols_get_efo_term(obo_id=efo_id.replace('_', ':'))
-        references.append({
-            'tool': 'ols_get_efo_term',
-            'params': {'obo_id': efo_id},
-            'section': 'Identity'
-        })
-        
-        # Get subtypes
-        children = tu.tools.ols_get_efo_term_children(obo_id=efo_id.replace('_', ':'), size=20)
-        references.append({
-            'tool': 'ols_get_efo_term_children',
-            'params': {'obo_id': efo_id, 'size': 20},
-            'section': 'Identity'
-        })
-    
-    # UPDATE REPORT FILE with Identity section
-    update_report_section(report_file, 'Identity', {
-        'efo_id': efo_id,
-        'icd_codes': icd_result,
-        'umls': umls_result,
-        'synonyms': efo_term.get('synonyms', []) if efo_term else [],
-        'subtypes': children
-    }, references[-5:])  # Last 5 references for this section
-    
-    # === DIMENSION 2: Clinical ===
-    # ... continue for all dimensions
-```
-
-### Step 3: Update Report File After Each Dimension
-
-```python
-def update_report_section(filename, section_name, data, sources):
-    """Update a specific section in the report file"""
-    
-    # Read current file
-    with open(filename, 'r') as f:
-        content = f.read()
-    
-    # Format section content with citations
-    if section_name == 'Identity':
-        section_content = format_identity_section(data, sources)
-    elif section_name == 'Clinical':
-        section_content = format_clinical_section(data, sources)
-    # ... etc
-    
-    # Replace placeholder with actual content
-    placeholder = f"## {section_number}. {section_name}\n*Researching...*"
-    content = content.replace(placeholder, section_content)
-    
-    # Write back
-    with open(filename, 'w') as f:
-        f.write(content)
-
-
-def format_identity_section(data, sources):
-    """Format Identity section with proper citations"""
-    
-    source_list = ', '.join([s['tool'] for s in sources])
-    
-    return f"""## 1. Disease Identity & Classification
-
-### Ontology Identifiers
-| System | ID | Source |
-|--------|-----|--------|
-| EFO | {data['efo_id']} | OSL_get_efo_id_by_disease_name |
-| ICD-10 | {data['icd_codes']} | icd_search_codes |
-| UMLS CUI | {data['umls']} | umls_search_concepts |
-
-### Synonyms & Alternative Names
-{format_list_with_source(data['synonyms'], 'ols_get_efo_term')}
-
-### Disease Subtypes
-{format_list_with_source(data['subtypes'], 'ols_get_efo_term_children')}
-
-**Sources**: {source_list}
-"""
-```
+**Dim 10 — Safety**: For each drug: `OpenTargets_get_drug_warnings_by_chemblId`, `OpenTargets_get_drug_blackbox_status_by_chembl_ID`, `FAERS_count_reactions_by_drug_event`. For top trials: `extract_clinical_trial_adverse_events`. Optionally: `AdverseEventPredictionQuestionGenerator`.
 
 ---
 
-## Complete Tool Usage by Section
+## Phase 4: Finalize Report
 
-### Section 1: Identity (use ALL of these)
-```python
-# Required tools - use all
-tu.tools.OSL_get_efo_id_by_disease_name(disease=disease_name)
-tu.tools.OpenTargets_get_disease_id_description_by_name(diseaseName=disease_name)
-tu.tools.ols_search_efo_terms(query=disease_name)
-tu.tools.ols_get_efo_term(obo_id=efo_id)
-tu.tools.ols_get_efo_term_children(obo_id=efo_id, size=30)
-tu.tools.umls_search_concepts(query=disease_name)
-tu.tools.umls_get_concept_details(cui=cui)
-tu.tools.icd_search_codes(query=disease_name, version="ICD10CM")
-tu.tools.snomed_search_concepts(query=disease_name)
-```
+1. Write the Executive Summary (3-5 sentences: top genes, drugs, trial count, epidemiology).
+2. Append the complete References table listing every tool call, parameters, section, and item count.
+3. Run the quality checklist.
 
-### Section 2: Clinical Presentation (use ALL of these)
-```python
-tu.tools.OpenTargets_get_associated_phenotypes_by_disease_efoId(efoId=efo_id)
-tu.tools.get_HPO_ID_by_phenotype(query=symptom)  # for each key symptom
-tu.tools.get_phenotype_by_HPO_ID(id=hpo_id)  # for top phenotypes
-tu.tools.MedlinePlus_search_topics_by_keyword(term=disease_name, db="healthTopics")
-tu.tools.MedlinePlus_get_genetics_condition_by_name(condition=disease_slug)
-tu.tools.MedlinePlus_connect_lookup_by_code(cs=icd_oid, c=icd_code)
-```
+### Quality Checklist
 
-### Section 3: Genetics (use ALL of these)
-```python
-tu.tools.OpenTargets_get_associated_targets_by_disease_efoId(efoId=efo_id)
-tu.tools.OpenTargets_target_disease_evidence(efoId=efo_id, ensemblId=gene_id)  # for top genes
-tu.tools.clinvar_search_variants(condition=disease_name, max_results=50)
-tu.tools.clinvar_get_variant_details(variant_id=vid)  # for top variants
-tu.tools.clinvar_get_clinical_significance(variant_id=vid)
-tu.tools.gwas_search_associations(disease_trait=disease_name, size=50)
-tu.tools.gwas_get_variants_for_trait(disease_trait=disease_name, size=50)
-tu.tools.gwas_get_associations_for_trait(disease_trait=disease_name, size=50)
-tu.tools.gwas_get_studies_for_trait(disease_trait=disease_name, size=30)
-tu.tools.GWAS_search_associations_by_gene(gene_name=gene)  # for top genes
-tu.tools.gnomad_get_variant_frequency(variant=variant)  # for key variants
-```
-
-### Section 4: Treatment (use ALL of these)
-```python
-tu.tools.OpenTargets_get_associated_drugs_by_disease_efoId(efoId=efo_id, size=100)
-tu.tools.OpenTargets_get_drug_chembId_by_generic_name(drugName=drug)  # for each drug
-tu.tools.OpenTargets_get_drug_mechanisms_of_action_by_chemblId(chemblId=chembl_id)
-tu.tools.search_clinical_trials(condition=disease_name, pageSize=50)
-tu.tools.get_clinical_trial_descriptions(nct_ids=nct_list)
-tu.tools.get_clinical_trial_conditions_and_interventions(nct_ids=nct_list)
-tu.tools.get_clinical_trial_eligibility_criteria(nct_ids=nct_list)
-tu.tools.get_clinical_trial_outcome_measures(nct_ids=nct_list)
-tu.tools.extract_clinical_trial_outcomes(nct_ids=nct_list)
-tu.tools.GtoPdb_list_diseases(name=disease_name)
-tu.tools.GtoPdb_get_disease(disease_id=gtopdb_id)
-```
-
-### Section 5: Pathways (use ALL of these)
-```python
-tu.tools.Reactome_get_diseases()
-tu.tools.Reactome_map_uniprot_to_pathways(id=uniprot_id)  # for top genes
-tu.tools.Reactome_get_pathway(stId=pathway_id)  # for key pathways
-tu.tools.Reactome_get_pathway_reactions(stId=pathway_id)
-tu.tools.humanbase_ppi_analysis(gene_list=top_genes, tissue=relevant_tissue)
-tu.tools.gtex_get_expression_by_gene(gene=gene)  # for top genes
-tu.tools.HPA_get_protein_expression(gene=gene)
-tu.tools.geo_search_datasets(query=disease_name)
-```
-
-### Section 6: Literature (use ALL of these)
-```python
-tu.tools.PubMed_search_articles(query=f'"{disease_name}"', limit=100)
-tu.tools.PubMed_search_articles(query=f'"{disease_name}" AND epidemiology', limit=50)
-tu.tools.PubMed_search_articles(query=f'"{disease_name}" AND mechanism', limit=50)
-tu.tools.PubMed_search_articles(query=f'"{disease_name}" AND treatment', limit=50)
-tu.tools.PubMed_get_article(pmid=pmid)  # for top 10 articles
-tu.tools.PubMed_get_related(pmid=key_pmid)
-tu.tools.PubMed_get_cited_by(pmid=key_pmid)
-tu.tools.OpenTargets_get_publications_by_disease_efoId(efoId=efo_id)
-tu.tools.openalex_search_works(query=disease_name, limit=50)
-tu.tools.europe_pmc_search_abstracts(query=disease_name, limit=50)
-tu.tools.semantic_scholar_search_papers(query=disease_name, limit=50)
-```
-
-### Section 7: Similar Diseases
-```python
-tu.tools.OpenTargets_get_similar_entities_by_disease_efoId(efoId=efo_id, threshold=0.3, size=30)
-```
-
-### Section 8: Cancer-Specific (if cancer)
-```python
-tu.tools.civic_search_diseases(limit=100)
-tu.tools.civic_search_genes(query=gene, limit=20)  # for cancer genes
-tu.tools.civic_get_variants_by_gene(gene_id=civic_gene_id, limit=50)
-tu.tools.civic_get_variant(variant_id=vid)
-tu.tools.civic_get_evidence_item(evidence_id=eid)
-tu.tools.civic_search_therapies(limit=100)
-tu.tools.civic_search_molecular_profiles(limit=50)
-```
-
-### Section 9: Pharmacology
-```python
-tu.tools.GtoPdb_get_targets(target_type=type, limit=50)  # GPCR, ion channel, etc
-tu.tools.GtoPdb_get_target(target_id=tid)  # for disease-relevant targets
-tu.tools.GtoPdb_get_target_interactions(target_id=tid)
-tu.tools.GtoPdb_search_interactions(approved_only=True)
-tu.tools.GtoPdb_list_ligands(ligand_type="Approved")
-```
-
-### Section 10: Safety (use ALL of these)
-```python
-tu.tools.OpenTargets_get_drug_warnings_by_chemblId(chemblId=cid)  # for each drug
-tu.tools.OpenTargets_get_drug_blackbox_status_by_chembl_ID(chemblId=cid)
-tu.tools.extract_clinical_trial_adverse_events(nct_ids=nct_list)
-tu.tools.FAERS_count_reactions_by_drug_event(drug=drug_name, event=event)
-tu.tools.AdverseEventPredictionQuestionGenerator(disease_name=disease, drug_name=drug)
-```
+- All 10 sections have content (or explicitly marked "No data available")
+- Every data point has a source citation
+- Executive Summary reflects key findings
+- References section lists all tool calls
+- Tables are properly formatted markdown
+- No placeholder text (`*Researching...*`) remains
 
 ---
 
 ## Citation Format
 
-Every piece of data MUST include its source. Use this format:
-
-### In Tables
-```markdown
+**In tables** — add a `Source` column:
+```
 | Gene | Score | Source |
 |------|-------|--------|
-| APOE | 0.92 | OpenTargets_get_associated_targets_by_disease_efoId |
-| APP | 0.88 | OpenTargets_get_associated_targets_by_disease_efoId |
+| APOE | 0.92  | OpenTargets_get_associated_targets_by_disease_efoId |
 ```
 
-### In Lists
-```markdown
+**In lists** — append inline:
+```
 - Memory loss [Source: OpenTargets_get_associated_phenotypes_by_disease_efoId]
-- Cognitive decline [Source: MedlinePlus_get_genetics_condition_by_name]
 ```
 
-### In Prose
-```markdown
-The disease affects approximately 6.5 million Americans (Source: PubMed_search_articles, 
-query: "Alzheimer disease epidemiology").
+**In prose**:
 ```
-
-### References Section
-At the end of the report, include complete tool usage log:
-
-```markdown
-## References
-
-### Tools Used
-| # | Tool | Parameters | Section | Items Retrieved |
-|---|------|------------|---------|-----------------|
-| 1 | OSL_get_efo_id_by_disease_name | disease="Alzheimer disease" | Identity | 1 |
-| 2 | ols_get_efo_term | obo_id="EFO:0000249" | Identity | 1 |
-| 3 | OpenTargets_get_associated_targets_by_disease_efoId | efoId="EFO_0000249" | Genetics | 245 |
-| ... | ... | ... | ... | ... |
-
-### Data Retrieved Summary
-- Total tools used: 45
-- Total API calls: 78
-- Sections completed: 10/10
+The disease affects ~6.5 million Americans
+(Source: PubMed_search_articles, query: "Alzheimer disease epidemiology").
 ```
 
 ---
 
-## Progressive Update Pattern
+## Abbreviated Tool Reference
 
-After researching EACH dimension, immediately update the report file:
+Full parameter details: [references/tools.md](references/tools.md)
 
-```python
-# After each dimension's research completes:
+| Section | Key Tools |
+|---------|-----------|
+| Identity | `OSL_get_efo_id_by_disease_name`, `OpenTargets_get_disease_id_description_by_name`, `ols_search_efo_terms`, `ols_get_efo_term`, `ols_get_efo_term_children`, `umls_search_concepts`, `umls_get_concept_details`, `icd_search_codes`, `snomed_search_concepts` |
+| Clinical | `OpenTargets_get_associated_phenotypes_by_disease_efoId`, `get_HPO_ID_by_phenotype`, `get_phenotype_by_HPO_ID`, `get_joint_associated_diseases_by_HPO_ID_list`, `MedlinePlus_search_topics_by_keyword`, `MedlinePlus_get_genetics_condition_by_name`, `MedlinePlus_connect_lookup_by_code` |
+| Genetics | `OpenTargets_get_associated_targets_by_disease_efoId`, `OpenTargets_target_disease_evidence`, `clinvar_search_variants`, `clinvar_get_variant_details`, `clinvar_get_clinical_significance`, `gwas_search_associations`, `gwas_get_variants_for_trait`, `gwas_get_associations_for_trait`, `gwas_get_studies_for_trait`, `GWAS_search_associations_by_gene`, `gnomad_get_variant_frequency` |
+| Treatment | `OpenTargets_get_associated_drugs_by_disease_efoId`, `OpenTargets_get_drug_chembId_by_generic_name`, `OpenTargets_get_drug_mechanisms_of_action_by_chemblId`, `search_clinical_trials`, `get_clinical_trial_descriptions`, `get_clinical_trial_conditions_and_interventions`, `get_clinical_trial_eligibility_criteria`, `get_clinical_trial_outcome_measures`, `extract_clinical_trial_outcomes`, `GtoPdb_list_diseases`, `GtoPdb_get_disease` |
+| Pathways | `Reactome_get_diseases`, `Reactome_get_pathway`, `Reactome_get_pathway_reactions`, `Reactome_map_uniprot_to_pathways`, `humanbase_ppi_analysis`, `gtex_get_expression_by_gene`, `HPA_get_protein_expression`, `geo_search_datasets` |
+| Literature | `PubMed_search_articles`, `PubMed_get_article`, `PubMed_get_related`, `PubMed_get_cited_by`, `OpenTargets_get_publications_by_disease_efoId`, `openalex_search_works`, `europe_pmc_search_abstracts`, `semantic_scholar_search_papers` |
+| Similar | `OpenTargets_get_similar_entities_by_disease_efoId` |
+| Cancer | `civic_search_diseases`, `civic_search_genes`, `civic_get_variants_by_gene`, `civic_get_variant`, `civic_get_evidence_item`, `civic_search_therapies`, `civic_search_molecular_profiles` |
+| Pharmacology | `GtoPdb_get_targets`, `GtoPdb_get_target`, `GtoPdb_get_target_interactions`, `GtoPdb_search_interactions`, `GtoPdb_list_ligands` |
+| Safety | `OpenTargets_get_drug_warnings_by_chemblId`, `OpenTargets_get_drug_blackbox_status_by_chembl_ID`, `extract_clinical_trial_adverse_events`, `FAERS_count_reactions_by_drug_event`, `AdverseEventPredictionQuestionGenerator` |
 
-# 1. Read current report
-with open(report_file, 'r') as f:
-    report = f.read()
+---
 
-# 2. Replace placeholder with formatted content
-report = report.replace(
-    "## 3. Genetic & Molecular Basis\n*Pending...*",
-    formatted_genetics_section
-)
+## Known Gotchas
 
-# 3. Write back immediately
-with open(report_file, 'w') as f:
-    f.write(report)
+**EFO ID format mismatch.** OpenTargets tools expect underscore format (`EFO_0000249`). OLS tools expect colon format (`EFO:0000249`). Always convert before passing to a tool.
 
-# 4. Continue to next dimension
+**`OSL_get_efo_id_by_disease_name` may return no result.** Fall back to `ols_search_efo_terms` or `OpenTargets_get_disease_id_description_by_name` and pick the best match manually.
+
+**UMLS requires an API key.** If `UMLS_API_KEY` is not set, skip UMLS calls gracefully and note the gap in the References section.
+
+**OpenTargets returns sparse data for rare diseases.** If the disease maps to an Orphanet or MONDO ID rather than an EFO ID, some OpenTargets endpoints may return empty results. Try the EFO mapping first; use Orphanet/MONDO directly as fallback.
+
+**`MedlinePlus_get_genetics_condition_by_name` expects a URL slug**, not a plain name. Convert "Alzheimer disease" to `alzheimer-disease` before calling.
+
+**`MedlinePlus_connect_lookup_by_code` needs the ICD-10-CM OID** (`2.16.840.1.113883.6.90`) as `cs` and the code (e.g. `E11.9`) as `c` — two separate parameters.
+
+**Clinical trial tools accept a list of NCT IDs**, not a single string. Pass `nct_ids` as a JSON array even when fetching a single trial.
+
+**`humanbase_ppi_analysis` is slow for large gene lists.** Limit `gene_list` to the top 10 genes and choose a tissue relevant to the disease (e.g. `"brain"` for neurological conditions).
+
+**`Reactome_get_diseases` returns all diseases.** Filter the response locally by DOID or disease name after the call.
+
+**CIViC tools use internal numeric IDs**, not standard identifiers. Always call `civic_search_diseases` or `civic_search_genes` first to retrieve the CIViC-specific ID before calling detail endpoints.
+
+**`gwas_search_associations` uses free-text trait matching.** Try both the exact disease name and common synonyms if results are sparse.
+
+**`gnomad_get_variant_frequency` requires chr-pos-ref-alt format** (e.g. `1-55505647-G-T`), not rsID. Convert from ClinVar or GWAS data before calling.
+
+**Empty results are not errors.** If a tool returns an empty list or `{}`, record "No data available" in the report section and continue.
+
+**PubMed query quoting.** Wrap multi-word disease names in double quotes inside the query string (e.g. `'"Parkinson disease" AND treatment'`).
+
+---
+
+## Evidence Grading
+
+When reporting findings, grade the strength of evidence:
+
+| Grade | Criteria |
+|-------|----------|
+| A — Strong | Replicated GWAS (p<5×10⁻⁸), FDA-approved drug, Cochrane review |
+| B — Moderate | Single GWAS, Phase 3 trial, systematic review |
+| C — Limited | Candidate gene study, Phase 1-2 trial, case series |
+| D — Preliminary | Animal model, in vitro only, preprint |
+
+Include the grade in summary statements about gene associations or treatment efficacy.
+
+---
+
+## Data Gaps
+
+When a section cannot be populated, add an explicit note rather than leaving it blank:
+
+```
+**Data Gap**: UMLS data unavailable — UMLS_API_KEY not configured.
+**Data Gap**: No ClinVar variants found for this disease name; try gene-based search.
+**Data Gap**: GEO returned no expression datasets matching "{disease_name}".
 ```
 
 ---
 
-## Final Report Quality Checklist
+## Expected Report Scale
 
-Before presenting to user, verify:
+For a well-studied disease (e.g. Alzheimer's), the completed report should contain 500+ individual data points, each with a source citation:
 
-- [ ] All 10 sections have content (or marked as "No data available")
-- [ ] Every data point has a source citation
-- [ ] Executive summary reflects key findings
-- [ ] References section lists all tools used
-- [ ] Tables are properly formatted
-- [ ] No placeholder text remains
-
----
-
-## Example Output Structure
-
-For "Alzheimer's Disease" research, the final report should be 2000+ lines with:
-
-- **Section 1**: 5+ ontology IDs, 10+ synonyms, disease hierarchy
-- **Section 2**: 20+ phenotypes with HPO IDs, symptoms list
-- **Section 3**: 50+ genes with scores, 30+ GWAS associations, 100+ ClinVar variants
-- **Section 4**: 20+ drugs, 50+ clinical trials with details
-- **Section 5**: 10+ pathways, PPI network, expression data
-- **Section 6**: 100+ publications, citation analysis, institution list
-- **Section 7**: 15+ similar diseases with similarity scores
-- **Section 8**: (if cancer) variants, evidence items
-- **Section 9**: Pharmacological targets and interactions
-- **Section 10**: Drug warnings, adverse events
-
-Total: Detailed report with 500+ individual data points, each with source citation.
+- Sec 1: 5+ ontology IDs, 10+ synonyms, disease hierarchy
+- Sec 2: 20+ HPO phenotypes, symptoms list, diagnostic criteria
+- Sec 3: 50+ genes with scores, 30+ GWAS associations, 100+ ClinVar variants
+- Sec 4: 20+ drugs, 50+ clinical trials with phase/status/intervention
+- Sec 5: 10+ pathways, PPI network, tissue expression data
+- Sec 6: Epidemiology stats, 10+ risk factors with evidence
+- Sec 7: 100+ publications, citation counts, institution list
+- Sec 8: 15+ similar diseases with similarity scores
+- Sec 9: (if cancer) variants, evidence items, targeted therapies
+- Sec 10: Drug warnings and blackbox status, adverse events per drug
 
 ---
 
-## Tool Reference
-
-See [TOOLS_REFERENCE.md](TOOLS_REFERENCE.md) for complete tool documentation.
+See [references/tools.md](references/tools.md) for full parameter reference by tool.
 See [EXAMPLES.md](EXAMPLES.md) for sample reports.

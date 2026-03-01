@@ -36,7 +36,7 @@ Apply when user asks:
 
 1. **Create the report file FIRST**:
    - File name: `[TARGET]_protein_design_report.md`
-   - Initialize with section headers
+   - Initialize with all section headers
    - Add placeholder: `[Designing...]`
 
 2. **Progressively update** as designs are generated
@@ -55,7 +55,7 @@ Every design MUST include:
 **Sequence**: MVLSPADKTN...
 **Length**: 85 amino acids
 **Target**: PD-L1 (UniProt: Q9NZQ7)
-**Method**: RFdiffusion → ProteinMPNN → ESMFold validation
+**Method**: RFdiffusion -> ProteinMPNN -> ESMFold validation
 
 **Quality Metrics**:
 | Metric | Value | Interpretation |
@@ -72,23 +72,17 @@ Every design MUST include:
 
 ## Phase 0: Tool Verification
 
-### NVIDIA NIM Tools Required
+Confirm NVIDIA NIM tools are available before starting. All five tools require `NVIDIA_API_KEY`.
 
-| Tool | Purpose | API Key Required |
-|------|---------|------------------|
-| `NvidiaNIM_rfdiffusion` | Backbone generation | Yes |
-| `NvidiaNIM_proteinmpnn` | Sequence design | Yes |
-| `NvidiaNIM_esmfold` | Fast structure validation | Yes |
-| `NvidiaNIM_alphafold2` | High-accuracy validation | Yes |
-| `NvidiaNIM_esm2_650m` | Sequence embeddings | Yes |
+| Tool | Purpose |
+|------|---------|
+| `NvidiaNIM_rfdiffusion` | Backbone generation |
+| `NvidiaNIM_proteinmpnn` | Sequence design |
+| `NvidiaNIM_esmfold` | Fast structure validation |
+| `NvidiaNIM_alphafold2` | High-accuracy validation |
+| `NvidiaNIM_esm2_650m` | Sequence embeddings |
 
-### Parameter Verification
-
-| Tool | WRONG Parameter | CORRECT Parameter |
-|------|-----------------|-------------------|
-| `NvidiaNIM_rfdiffusion` | `num_steps` | `diffusion_steps` |
-| `NvidiaNIM_proteinmpnn` | `pdb` | `pdb_string` |
-| `NvidiaNIM_esmfold` | `seq` | `sequence` |
+If `NVIDIA_API_KEY` is absent, stop and inform the user that NVIDIA NIM access is required.
 
 ---
 
@@ -99,38 +93,32 @@ Phase 1: Target Characterization
 ├── Get target structure (PDB, EMDB cryo-EM, or AlphaFold)
 ├── Identify binding epitope
 ├── Analyze existing binders
-├── Check EMDB for membrane protein structures (NEW)
 └── OUTPUT: Target profile
-    ↓
+    |
 Phase 2: Backbone Generation (RFdiffusion)
 ├── Define design constraints
-├── Generate multiple backbones
+├── Generate >=5 backbones (diffusion_steps=50)
 ├── Filter by geometry quality
 └── OUTPUT: Candidate backbones
-    ↓
+    |
 Phase 3: Sequence Design (ProteinMPNN)
-├── Design sequences for each backbone
-├── Sample multiple sequences per backbone
+├── Design >=8 sequences per backbone (temperature=0.1)
 ├── Score by ProteinMPNN likelihood
 └── OUTPUT: Designed sequences
-    ↓
+    |
 Phase 4: Structure Validation
-├── Predict structure (ESMFold/AlphaFold2)
-├── Compare to designed backbone
-├── Assess fold quality (pLDDT, pTM)
+├── Predict structure (ESMFold fast; AlphaFold2 for top hits)
+├── Check pLDDT >70 and pTM >0.7
 └── OUTPUT: Validated designs
-    ↓
+    |
 Phase 5: Developability Assessment
-├── Aggregation propensity
-├── Expression likelihood
-├── Immunogenicity prediction
+├── Aggregation propensity, pI, cysteine count, MW
 └── OUTPUT: Developability scores
-    ↓
+    |
 Phase 6: Report Synthesis
 ├── Ranked candidate list
 ├── Experimental recommendations
-├── Next steps
-└── OUTPUT: Final report
+└── OUTPUT: Final report + FASTA + CSV
 ```
 
 ---
@@ -139,129 +127,34 @@ Phase 6: Report Synthesis
 
 ### 1.1 Get Target Structure
 
-```python
-def get_target_structure(tu, target_id):
-    """Get target structure from PDB, EMDB, or predict."""
-    
-    # Try PDB first (X-ray/NMR)
-    pdb_results = tu.tools.PDB_search_by_uniprot(uniprot_id=target_id)
-    
-    if pdb_results:
-        # Get highest resolution structure
-        best_pdb = sorted(pdb_results, key=lambda x: x['resolution'])[0]
-        structure = tu.tools.PDB_get_structure(pdb_id=best_pdb['pdb_id'])
-        return {'source': 'PDB', 'pdb_id': best_pdb['pdb_id'], 
-                'resolution': best_pdb['resolution'], 'structure': structure}
-    
-    # Try EMDB for cryo-EM structures (valuable for membrane proteins)
-    protein_info = tu.tools.UniProt_get_protein_by_accession(accession=target_id)
-    emdb_results = tu.tools.emdb_search(
-        query=protein_info['proteinDescription']['recommendedName']['fullName']['value']
-    )
-    
-    if emdb_results and len(emdb_results) > 0:
-        # Get highest resolution cryo-EM entry
-        best_emdb = sorted(emdb_results, key=lambda x: x.get('resolution', 99))[0]
-        # Get associated PDB model if available
-        emdb_details = tu.tools.emdb_get_entry(entry_id=best_emdb['emdb_id'])
-        if emdb_details.get('pdb_ids'):
-            structure = tu.tools.PDB_get_structure(pdb_id=emdb_details['pdb_ids'][0])
-            return {'source': 'EMDB cryo-EM', 'emdb_id': best_emdb['emdb_id'],
-                    'pdb_id': emdb_details['pdb_ids'][0], 
-                    'resolution': best_emdb.get('resolution'), 'structure': structure}
-    
-    # Fallback to AlphaFold prediction
-    sequence = tu.tools.UniProt_get_protein_sequence(accession=target_id)
-    structure = tu.tools.NvidiaNIM_alphafold2(
-        sequence=sequence['sequence'],
-        algorithm="mmseqs2"
-    )
-    return {'source': 'AlphaFold2 (predicted)', 'structure': structure}
-```
+Try sources in priority order:
 
-### 1.1b EMDB for Membrane Proteins (NEW)
+1. **PDB (X-ray/NMR)** - Call `PDB_search_by_uniprot` with the UniProt accession. If results are returned, retrieve the highest-resolution entry with `PDB_get_structure`.
 
-**When to prioritize EMDB**: Membrane proteins, large complexes, and targets where conformational states matter.
+2. **EMDB cryo-EM** - Preferred for membrane proteins, GPCRs, ion channels, and large complexes. Call `emdb_search` with the target name. For each result call `emdb_get_entry` to find associated PDB model IDs, then fetch the atomic model with `PDB_get_structure`. Prioritize entries with resolution <3 Å; accept up to 5 Å with caution.
 
-```python
-def get_cryoem_structures(tu, target_name):
-    """Get cryo-EM structures for membrane proteins/complexes."""
-    
-    # Search EMDB
-    emdb_results = tu.tools.emdb_search(
-        query=f"{target_name} membrane OR receptor"
-    )
-    
-    structures = []
-    for entry in emdb_results[:5]:
-        details = tu.tools.emdb_get_entry(entry_id=entry['emdb_id'])
-        structures.append({
-            'emdb_id': entry['emdb_id'],
-            'resolution': entry.get('resolution', 'N/A'),
-            'title': entry.get('title', 'N/A'),
-            'conformational_state': details.get('state', 'Unknown'),
-            'pdb_models': details.get('pdb_ids', [])
-        })
-    
-    return structures
-```
-
-**Output for Report**:
-
-```markdown
-### 1.1b Cryo-EM Structures (EMDB)
-
-| EMDB ID | Resolution | PDB Model | Conformation |
-|---------|------------|-----------|--------------|
-| EMD-12345 | 2.8 Å | 7ABC | Active state |
-| EMD-23456 | 3.1 Å | 8DEF | Inactive state |
-
-**Note**: Cryo-EM structures capture physiologically relevant conformations for membrane protein targets.
-
-*Source: EMDB*
-```
+3. **AlphaFold2 prediction (fallback)** - Retrieve the sequence via `UniProt_get_protein_sequence`, then call `NvidiaNIM_alphafold2` with `algorithm="mmseqs2"`. Label the result clearly as a predicted structure.
 
 ### 1.2 Identify Binding Epitope
 
-```python
-def identify_epitope(tu, target_structure, epitope_residues=None):
-    """Identify or validate binding epitope."""
-    
-    if epitope_residues:
-        # User-specified epitope
-        return {'residues': epitope_residues, 'source': 'user-defined'}
-    
-    # Find surface-exposed regions
-    # Use structural analysis to identify potential epitopes
-    return analyze_surface(target_structure)
-```
+- If the user specifies hotspot residues, use them directly.
+- Otherwise, identify surface-exposed loops and known functional sites using `InterPro_get_protein_domains` and literature context.
+- Document the selected epitope residue range in the report.
 
-### 1.3 Output for Report
+### 1.3 Report Output for Phase 1
 
 ```markdown
 ## 1. Target Characterization
-
-### 1.1 Target Information
 
 | Property | Value |
 |----------|-------|
 | **Target** | PD-L1 (Programmed death-ligand 1) |
 | **UniProt** | Q9NZQ7 |
-| **Structure source** | PDB: 4ZQK (2.0 Å resolution) |
-| **Binding epitope** | IgV domain, residues 19-127 |
+| **Structure source** | PDB: 4ZQK (2.0 A resolution) |
+| **Binding epitope** | IgV domain, residues 54-68 |
 | **Known binders** | Atezolizumab, durvalumab, avelumab |
 
-### 1.2 Epitope Analysis
-
-| Residue Range | Type | Surface Area | Druggability |
-|---------------|------|--------------|--------------|
-| 54-68 | Loop | 850 Å² | High |
-| 115-125 | Beta strand | 420 Å² | Medium |
-| 19-30 | N-terminus | 380 Å² | Medium |
-
-**Selected Epitope**: Residues 54-68 (PD-1 binding interface)
-
-*Source: PDB 4ZQK, surface analysis*
+*Source: PDB via `PDB_search_by_uniprot`, `PDB_get_structure`*
 ```
 
 ---
@@ -270,51 +163,35 @@ def identify_epitope(tu, target_structure, epitope_residues=None):
 
 ### 2.1 RFdiffusion Design
 
-```python
-def generate_backbones(tu, design_params):
-    """Generate de novo backbones using RFdiffusion."""
-    
-    backbones = tu.tools.NvidiaNIM_rfdiffusion(
-        diffusion_steps=design_params.get('steps', 50),
-        # Additional parameters depending on design type
-    )
-    
-    return backbones
-```
+Call `NvidiaNIM_rfdiffusion` to generate de novo backbones. Generate at least 5 backbones; select 3-5 for sequence design based on topology diversity and geometric quality.
 
-### 2.2 Design Modes
+Key parameter: `diffusion_steps` (default 50; use 75-100 for higher quality at the cost of speed).
 
-| Mode | Use Case | Key Parameters |
-|------|----------|----------------|
-| **Unconditional** | De novo scaffold | `diffusion_steps` only |
-| **Binder design** | Target-guided binder | `target_structure`, `hotspot_residues` |
-| **Motif scaffolding** | Functional motif embedding | `motif_sequence`, `motif_structure` |
+Design modes:
+| Mode | Use Case |
+|------|----------|
+| Unconditional | De novo scaffold, no target constraint |
+| Binder design | Provide `target_structure` and `hotspot_residues` |
+| Motif scaffolding | Provide `motif_sequence` and `motif_structure` |
 
-### 2.3 Output for Report
+See [references/tools.md](references/tools.md) for full parameter details.
+
+### 2.2 Report Output for Phase 2
 
 ```markdown
 ## 2. Backbone Generation
 
-### 2.1 Design Parameters
-
 | Parameter | Value |
 |-----------|-------|
-| **Method** | RFdiffusion via NVIDIA NIM |
-| **Design mode** | Unconditional scaffold generation |
-| **Diffusion steps** | 50 |
-| **Number generated** | 10 backbones |
-
-### 2.2 Generated Backbones
+| Method | RFdiffusion via NVIDIA NIM |
+| Diffusion steps | 50 |
+| Backbones generated | 10 |
+| Selected for design | BB_001, BB_002, BB_003, BB_005 |
 
 | Backbone | Length | Topology | Quality |
 |----------|--------|----------|---------|
 | BB_001 | 85 aa | 3-helix bundle | Good |
 | BB_002 | 92 aa | Beta sandwich | Good |
-| BB_003 | 78 aa | Alpha-beta | Good |
-| BB_004 | 88 aa | All-alpha | Moderate |
-| BB_005 | 95 aa | Mixed | Good |
-
-**Selected for sequence design**: BB_001, BB_002, BB_003, BB_005 (top 4)
 
 *Source: NVIDIA NIM via `NvidiaNIM_rfdiffusion`*
 ```
@@ -325,58 +202,22 @@ def generate_backbones(tu, design_params):
 
 ### 3.1 ProteinMPNN Design
 
-```python
-def design_sequences(tu, backbone_pdb, num_sequences=8):
-    """Design sequences for backbone using ProteinMPNN."""
-    
-    sequences = tu.tools.NvidiaNIM_proteinmpnn(
-        pdb_string=backbone_pdb,
-        num_sequences=num_sequences,
-        temperature=0.1  # Lower = more conservative
-    )
-    
-    return sequences
-```
+For each selected backbone, call `NvidiaNIM_proteinmpnn` with:
+- `pdb_string`: the backbone PDB content (not a file path)
+- `num_sequences`: 8 per backbone (minimum)
+- `temperature`: 0.1 for conservative design; increase to 0.2-0.5 for more diversity
 
-### 3.2 Sampling Parameters
+Rank all sequences by MPNN score (more negative = better). Report the top 10.
 
-| Parameter | Conservative | Moderate | Diverse |
-|-----------|--------------|----------|---------|
-| Temperature | 0.1 | 0.2 | 0.5 |
-| Sequences per backbone | 4 | 8 | 16 |
-| Use case | Validated scaffold | Exploration | Diversity |
-
-### 3.3 Output for Report
+### 3.2 Report Output for Phase 3
 
 ```markdown
 ## 3. Sequence Design
 
-### 3.1 Design Parameters
-
-| Parameter | Value |
-|-----------|-------|
-| **Method** | ProteinMPNN via NVIDIA NIM |
-| **Temperature** | 0.1 (conservative) |
-| **Sequences per backbone** | 8 |
-| **Total sequences** | 32 |
-
-### 3.2 Designed Sequences (Top 10 by Score)
-
-| Rank | Backbone | Sequence ID | Length | MPNN Score | Predicted pI |
-|------|----------|-------------|--------|------------|--------------|
-| 1 | BB_001 | Seq_001_A | 85 | -1.89 | 6.2 |
-| 2 | BB_002 | Seq_002_C | 92 | -1.95 | 5.8 |
-| 3 | BB_001 | Seq_001_B | 85 | -2.01 | 7.1 |
-| 4 | BB_003 | Seq_003_A | 78 | -2.08 | 6.5 |
-| 5 | BB_005 | Seq_005_B | 95 | -2.12 | 5.4 |
-
-### 3.3 Top Sequence: Seq_001_A
-
-```
->Seq_001_A (85 aa, MPNN score: -1.89)
-MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
-GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKL
-```
+| Rank | Backbone | Sequence ID | Length | MPNN Score |
+|------|----------|-------------|--------|------------|
+| 1 | BB_001 | Seq_001_A | 85 | -1.89 |
+| 2 | BB_002 | Seq_002_C | 92 | -1.95 |
 
 *Source: NVIDIA NIM via `NvidiaNIM_proteinmpnn`*
 ```
@@ -385,61 +226,28 @@ GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKL
 
 ## Phase 4: Structure Validation
 
-### 4.1 ESMFold Validation
+### 4.1 ESMFold Fast Validation
 
-```python
-def validate_structure(tu, sequence):
-    """Validate designed sequence by structure prediction."""
-    
-    # Fast validation with ESMFold
-    predicted = tu.tools.NvidiaNIM_esmfold(sequence=sequence)
-    
-    # Extract quality metrics
-    plddt = extract_plddt(predicted)
-    ptm = extract_ptm(predicted)
-    
-    return {
-        'structure': predicted,
-        'mean_plddt': np.mean(plddt),
-        'ptm': ptm,
-        'passes': np.mean(plddt) > 70 and ptm > 0.7
-    }
-```
+Call `NvidiaNIM_esmfold` with `sequence` for each designed sequence. Extract mean pLDDT and pTM from the response.
 
-### 4.2 Validation Criteria
+Pass criteria: mean pLDDT >70 AND pTM >0.7.
 
-| Metric | Threshold | Interpretation |
-|--------|-----------|----------------|
-| Mean pLDDT | >70 | Confident fold |
-| pTM | >0.7 | Good global topology |
-| RMSD to backbone | <2 Å | Design recapitulated |
+Sequences that fail are excluded from further analysis. At least 3 designs must pass; if fewer pass, return to Phase 2 and regenerate backbones with more diffusion steps.
 
-### 4.3 Output for Report
+### 4.2 AlphaFold2 High-Accuracy Validation
+
+For the top 3-5 designs by pLDDT, run `NvidiaNIM_alphafold2` with `algorithm="mmseqs2"` for higher-confidence structure assessment. Note that AlphaFold2 may return HTTP 202 (accepted) and require polling.
+
+### 4.3 Report Output for Phase 4
 
 ```markdown
 ## 4. Structure Validation
 
-### 4.1 Validation Results
-
-| Sequence | pLDDT | pTM | RMSD to Design | Status |
-|----------|-------|-----|----------------|--------|
-| Seq_001_A | 88.5 | 0.85 | 1.2 Å | ✓ PASS |
-| Seq_002_C | 82.3 | 0.79 | 1.5 Å | ✓ PASS |
-| Seq_001_B | 85.1 | 0.82 | 1.3 Å | ✓ PASS |
-| Seq_003_A | 79.8 | 0.76 | 1.8 Å | ✓ PASS |
-| Seq_005_B | 68.2 | 0.65 | 2.8 Å | ✗ FAIL |
-
-### 4.2 Top Validated Design: Seq_001_A
-
-| Region | Residues | pLDDT | Interpretation |
-|--------|----------|-------|----------------|
-| Helix 1 | 1-28 | 92.3 | Very high confidence |
-| Loop 1 | 29-35 | 78.4 | Moderate confidence |
-| Helix 2 | 36-58 | 91.8 | Very high confidence |
-| Loop 2 | 59-65 | 75.2 | Moderate confidence |
-| Helix 3 | 66-85 | 90.1 | Very high confidence |
-
-**Overall**: Well-folded 3-helix bundle with high confidence core
+| Sequence | pLDDT | pTM | Status |
+|----------|-------|-----|--------|
+| Seq_001_A | 88.5 | 0.85 | PASS |
+| Seq_002_C | 82.3 | 0.79 | PASS |
+| Seq_005_B | 68.2 | 0.65 | FAIL |
 
 *Source: NVIDIA NIM via `NvidiaNIM_esmfold`*
 ```
@@ -448,53 +256,26 @@ def validate_structure(tu, sequence):
 
 ## Phase 5: Developability Assessment
 
-### 5.1 Aggregation Propensity
-
-```python
-def assess_aggregation(sequence):
-    """Assess aggregation propensity."""
-    
-    # Calculate hydrophobic patches
-    # Calculate isoelectric point
-    # Identify aggregation-prone motifs
-    
-    return {
-        'aggregation_score': score,
-        'hydrophobic_patches': patches,
-        'risk_level': 'Low' if score < 0.5 else 'Medium' if score < 0.7 else 'High'
-    }
-```
-
-### 5.2 Developability Metrics
+Evaluate each passing design on the following criteria without requiring external tool calls (compute from sequence):
 
 | Metric | Favorable | Marginal | Unfavorable |
 |--------|-----------|----------|-------------|
 | Aggregation score | <0.5 | 0.5-0.7 | >0.7 |
 | Isoelectric point | 5-9 | 4-5 or 9-10 | <4 or >10 |
-| Hydrophobic patches | <3 | 3-5 | >5 |
-| Cysteine count | 0 or even | Odd | Multiple unpaired |
+| Molecular weight | <50 kDa | 50-100 kDa | >100 kDa |
+| Cysteine count | 0 or even (paired) | Odd | Multiple unpaired |
 
-### 5.3 Output for Report
+Assign each design a tier (see Evidence Grading below) and recommend an expression system.
+
+### 5.1 Report Output for Phase 5
 
 ```markdown
 ## 5. Developability Assessment
 
-### 5.1 Developability Scores
-
-| Design | Aggregation | pI | Cysteines | Expression | Overall |
-|--------|-------------|-----|-----------|------------|---------|
-| Seq_001_A | 0.32 (Low) | 6.2 | 0 | High | ★★★ |
-| Seq_002_C | 0.45 (Low) | 5.8 | 2 (paired) | Medium | ★★☆ |
-| Seq_001_B | 0.38 (Low) | 7.1 | 0 | High | ★★★ |
-| Seq_003_A | 0.58 (Med) | 6.5 | 0 | Medium | ★★☆ |
-
-### 5.2 Recommendations
-
-**Best candidate for expression**: Seq_001_A
-- Low aggregation propensity
-- Neutral pI (easy purification)
-- No cysteines (no misfolding risk)
-- Predicted high E. coli expression
+| Design | Aggregation | pI | Cysteines | Expression | Tier |
+|--------|-------------|-----|-----------|------------|------|
+| Seq_001_A | 0.32 (Low) | 6.2 | 0 | High (E. coli) | T1 |
+| Seq_002_C | 0.45 (Low) | 5.8 | 2 (paired) | Medium | T2 |
 
 *Source: Sequence analysis*
 ```
@@ -578,46 +359,49 @@ def assess_aggregation(sequence):
 
 | Tier | Symbol | Criteria |
 |------|--------|----------|
-| **T1** | ★★★ | pLDDT >85, pTM >0.8, low aggregation, neutral pI |
-| **T2** | ★★☆ | pLDDT >75, pTM >0.7, acceptable developability |
-| **T3** | ★☆☆ | pLDDT >70, pTM >0.65, developability concerns |
-| **T4** | ☆☆☆ | Failed validation or major developability issues |
+| **T1** | 3 stars | pLDDT >85, pTM >0.8, aggregation <0.5, neutral pI |
+| **T2** | 2 stars | pLDDT >75, pTM >0.7, acceptable developability |
+| **T3** | 1 star | pLDDT >70, pTM >0.65, developability concerns |
+| **T4** | 0 stars | Failed validation or major developability issues |
 
 ---
 
-## Completeness Checklist
+## Known Gotchas
 
-### Phase 1: Target
-- [ ] Target structure obtained (PDB or predicted)
-- [ ] Binding epitope identified
-- [ ] Existing binders noted
+### Parameter Name Traps
 
-### Phase 2: Backbones
-- [ ] ≥5 backbones generated
-- [ ] Top 3-5 selected for sequence design
-- [ ] Selection criteria documented
+| Tool | WRONG Parameter | CORRECT Parameter |
+|------|-----------------|-------------------|
+| `NvidiaNIM_rfdiffusion` | `num_steps` | `diffusion_steps` |
+| `NvidiaNIM_proteinmpnn` | `pdb` | `pdb_string` |
+| `NvidiaNIM_esmfold` | `seq` | `sequence` |
+| `NvidiaNIM_alphafold2` | `seq` | `sequence` |
 
-### Phase 3: Sequences
-- [ ] ≥8 sequences per backbone designed
-- [ ] MPNN scores reported
-- [ ] Top 10 sequences listed
+### NVIDIA NIM Operational Issues
 
-### Phase 4: Validation
-- [ ] All sequences validated by ESMFold
-- [ ] pLDDT and pTM reported
-- [ ] Pass/fail criteria applied
-- [ ] ≥3 passing designs
+- **Rate limit**: 40 RPM maximum. Wait at least 1.5 seconds between consecutive NIM calls. If validating many sequences, pause 5 seconds between batches of 5.
+- **AlphaFold2 async**: The tool may return HTTP 202 (accepted, not done). Poll until a 200 response is received before reading results.
+- **ESMFold length cap**: Maximum 1024 amino acids. For longer sequences use `NvidiaNIM_alphafold2`.
+- **RFdiffusion output**: Returns a backbone with only Gly residues. This PDB is the input to `NvidiaNIM_proteinmpnn`, not a final design.
+- **pdb_string vs file path**: `NvidiaNIM_proteinmpnn` expects the full PDB file *content* as a string, not a filesystem path.
 
-### Phase 5: Developability
-- [ ] Aggregation assessed
-- [ ] pI calculated
-- [ ] Expression prediction
-- [ ] Final ranking
+### Structural Data Gotchas
 
-### Phase 6: Deliverables
-- [ ] Ranked candidate list
-- [ ] FASTA file with sequences
-- [ ] Experimental recommendations
+- **EMDB vs PDB**: EMDB entries describe density maps; the atomic model (needed for design) is a separate PDB entry referenced in `emdb_get_entry` response under `pdb_ids`. Always fetch that linked PDB.
+- **AlphaFold predictions for design**: Label predicted structures clearly in the report. Design quality depends on target structure accuracy; a low-confidence AlphaFold model (pLDDT <70 in binding region) undermines binder design.
+- **Resolution cutoff**: Cryo-EM structures >5 Å are unsuitable as direct design templates; prefer `NvidiaNIM_alphafold2` fallback.
+
+### Validation Gotchas
+
+- **Minimum passing designs**: If fewer than 3 designs pass (pLDDT >70, pTM >0.7), do not deliver the report. Increase `diffusion_steps` to 75-100, regenerate backbones, and repeat.
+- **Self-consistency check**: After ESMFold validation, the predicted structure should resemble the RFdiffusion backbone (RMSD <2 Å for core regions). Large deviations indicate sequence-structure mismatch; discard that design.
+- **MPNN score alone is insufficient**: A good MPNN score does not guarantee foldability. Always validate by structure prediction.
+
+### Developability Gotchas
+
+- **Odd cysteine count**: An odd number of cysteines almost always leads to misfolding due to an unpaired disulfide. Flag these designs explicitly.
+- **Extreme pI**: Proteins with pI <4 or >10 are difficult to purify and prone to aggregation at physiological pH.
+- **Membrane expression**: Designs with high hydrophobicity (GRAVY > 0.5) may require detergent or specialized expression systems; flag explicitly.
 
 ---
 
@@ -625,13 +409,32 @@ def assess_aggregation(sequence):
 
 | Primary Tool | Fallback 1 | Fallback 2 |
 |--------------|------------|------------|
-| `NvidiaNIM_rfdiffusion` | Manual backbone design | Scaffold from PDB |
-| `NvidiaNIM_proteinmpnn` | Rosetta ProteinMPNN | Manual sequence design |
-| `NvidiaNIM_esmfold` | `NvidiaNIM_alphafold2` | AlphaFold DB |
-| PDB structure | `NvidiaNIM_alphafold2` | AlphaFold DB |
+| `NvidiaNIM_rfdiffusion` | Increase diffusion steps and retry | Scaffold from PDB |
+| `NvidiaNIM_proteinmpnn` | Lower temperature and retry | Manual sequence analysis |
+| `NvidiaNIM_esmfold` | `NvidiaNIM_alphafold2` | AlphaFold DB lookup |
+| `NvidiaNIM_alphafold2` | `alphafold_get_prediction` | AlphaFold DB homolog |
+| PDB experimental structure | EMDB cryo-EM + PDB model | `NvidiaNIM_alphafold2` |
+| EMDB cryo-EM | `PDB_search_by_uniprot` | `NvidiaNIM_alphafold2` |
 
 ---
 
-## Tool Reference
+## Tool Reference (Abbreviated)
 
-See [TOOLS_REFERENCE.md](TOOLS_REFERENCE.md) for complete tool documentation.
+| Tool | Call | Key Arguments |
+|------|------|---------------|
+| `NvidiaNIM_rfdiffusion` | Backbone generation | `diffusion_steps` (int, default 50) |
+| `NvidiaNIM_proteinmpnn` | Sequence design | `pdb_string` (str), `num_sequences` (int), `temperature` (float) |
+| `NvidiaNIM_esmfold` | Fast structure prediction | `sequence` (str, max 1024 aa) |
+| `NvidiaNIM_alphafold2` | High-accuracy prediction | `sequence` (str), `algorithm` ("mmseqs2") |
+| `NvidiaNIM_esm2_650m` | Sequence embeddings | `sequences` (list), `format` ("npz") |
+| `PDB_search_by_uniprot` | Find PDB entries | `uniprot_id` (str) |
+| `PDB_get_structure` | Download PDB file | `pdb_id` (str) |
+| `alphafold_get_prediction` | AlphaFold DB lookup | `accession` (str) |
+| `emdb_search` | Search cryo-EM maps | `query` (str) |
+| `emdb_get_entry` | Get EMDB entry details | `entry_id` (str) |
+| `UniProt_get_protein_sequence` | Get amino acid sequence | `accession` (str) |
+| `InterPro_get_protein_domains` | Domain annotation | `accession` (str) |
+
+Full parameter tables and quality thresholds: [references/tools.md](references/tools.md)
+
+Pre-delivery verification: [CHECKLIST.md](CHECKLIST.md)
