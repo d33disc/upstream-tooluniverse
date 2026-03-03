@@ -290,7 +290,8 @@ class CIViCTool(BaseTool):
                 return {
                     "error": f"Unsupported parameter(s) for civic_search_evidence_items: {', '.join(legacy_unsupported)}. "
                     "Supported filters: molecular_profile (string, e.g. 'BRAF V600E'), "
-                    "therapy, disease, status." + profile_hint,
+                    "therapy, disease, status, evidence_type (PREDICTIVE, DIAGNOSTIC, "
+                    "PROGNOSTIC, PREDISPOSING, ONCOGENIC, FUNCTIONAL)." + profile_hint,
                 }
             if other_unknown:
                 return {

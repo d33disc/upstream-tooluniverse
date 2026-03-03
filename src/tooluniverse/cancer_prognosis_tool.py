@@ -309,6 +309,31 @@ class CancerPrognosisTool(BaseTool):
     def _get_survival_data(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Retrieve OS and DFS survival clinical data for a study."""
+        # BUG-62B-001: warn on unrecognized parameters that will be silently ignored.
+        # CancerPrognosis_get_survival_data only supports cancer/cancer_type/study_id and limits.
+        # Gene and subtype filtering is not supported — explicitly warn the user.
+        _known_survival_params = {
+            "cancer",
+            "cancer_type",
+            "study_id",
+            "limit",
+            "max_patients",
+            "operation",
+        }
+        _unknown_survival = [k for k in arguments if k not in _known_survival_params]
+        if _unknown_survival:
+            return {
+                "status": "error",
+                "error": (
+                    f"Unrecognized parameter(s) for get_survival_data: {', '.join(_unknown_survival)}. "
+                    "Supported parameters: cancer (TCGA abbreviation or cBioPortal study ID), "
+                    "cancer_type (alias), study_id (alias), max_patients (output limit). "
+                    "Note: gene-stratified survival (high vs low expressors) and subtype filtering "
+                    "are not supported by this tool — use CancerPrognosis_get_gene_expression "
+                    "to get expression values per sample, then stratify externally."
+                ),
+            }
+
         cancer = (
             arguments.get("cancer")
             or arguments.get("cancer_type")

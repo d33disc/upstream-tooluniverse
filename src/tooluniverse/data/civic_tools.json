@@ -168,8 +168,13 @@
                             "type": "object",
                             "description": "Parent gene feature",
                             "properties": {
-                              "id": {"type": "integer"},
-                              "name": {"type": "string", "description": "Gene name"}
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "Gene name"
+                              }
                             }
                           }
                         }
@@ -404,7 +409,7 @@
         },
         "therapy": {
           "type": "string",
-          "description": "Filter by therapy/drug name (e.g., 'imatinib', 'pembrolizumab'). Alias: therapy_name. Note: matches any evidence item where the therapy appears, including combination regimens — results may include multi-drug combinations."
+          "description": "Filter by therapy/drug name (e.g., 'imatinib', 'pembrolizumab'). Alias: therapy_name. Note: matches any evidence item where the therapy appears, including combination regimens \u2014 results may include multi-drug combinations."
         },
         "therapy_name": {
           "type": "string",
@@ -420,20 +425,21 @@
         },
         "molecular_profile": {
           "type": "string",
-          "description": "Filter by molecular profile name (e.g., 'BRAF V600E', 'EGFR T790M', 'KRAS G12C'). Uses substring matching — 'FLT3 ITD' will also match 'FLT3 ITD AND FLT3 D835Y'. For gene fusions, CIViC uses double-colon notation: 'GENE::PARTNER Fusion' (e.g., 'FGFR2::BICC1 Fusion', 'ALK::EML4 Fusion'). Use civic_search_molecular_profiles to discover exact profile names."
+          "description": "Filter by molecular profile name (e.g., 'BRAF V600E', 'EGFR T790M', 'KRAS G12C'). Uses substring matching \u2014 'FLT3 ITD' will also match 'FLT3 ITD AND FLT3 D835Y'. For gene fusions, CIViC uses double-colon notation: 'GENE::PARTNER Fusion' (e.g., 'FGFR2::BICC1 Fusion', 'ALK::EML4 Fusion'). Use civic_search_molecular_profiles to discover exact profile names."
         }
       },
       "required": []
     },
     "fields": {
-      "query": "query SearchEvidenceItems($limit: Int, $status: EvidenceStatusFilter, $therapyName: String, $diseaseName: String, $molecularProfileName: String) { evidenceItems(first: $limit, status: $status, therapyName: $therapyName, diseaseName: $diseaseName, molecularProfileName: $molecularProfileName) { nodes { id description evidenceLevel evidenceType evidenceDirection significance status disease { name } therapies { name } molecularProfile { id name } source { citation } } } }",
+      "query": "query SearchEvidenceItems($limit: Int, $status: EvidenceStatusFilter, $therapyName: String, $diseaseName: String, $molecularProfileName: String, $evidenceType: EvidenceType) { evidenceItems(first: $limit, status: $status, therapyName: $therapyName, diseaseName: $diseaseName, molecularProfileName: $molecularProfileName, evidenceType: $evidenceType) { nodes { id description evidenceLevel evidenceType evidenceDirection significance status disease { name } therapies { name } molecularProfile { id name } source { citation } } } }",
       "operation_name": "SearchEvidenceItems",
       "param_map": {
         "therapy": "therapyName",
         "therapy_name": "therapyName",
         "disease": "diseaseName",
         "disease_name": "diseaseName",
-        "molecular_profile": "molecularProfileName"
+        "molecular_profile": "molecularProfileName",
+        "evidence_type": "evidenceType"
       },
       "variable_defaults": {
         "status": "ACCEPTED"

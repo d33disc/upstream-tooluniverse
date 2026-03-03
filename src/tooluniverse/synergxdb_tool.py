@@ -394,8 +394,7 @@ class SYNERGxDBTool(BaseTool):
                         "represented in SYNERGxDB's 9 screening studies, which focus on pairwise "
                         "in vitro cytotoxicity rather than clinically-validated regimens."
                     )
-                # BUG-61B-002: add irinotecan→SN-38 hint when irinotecan is one of the drugs
-                # in the two-drug failure path (previously only in the single-drug path).
+                # BUG-61B-002: irinotecan→SN-38 hint for the two-drug failure path.
                 _irinotecan_names = {
                     "irinotecan",
                     "camptosar",
@@ -413,14 +412,59 @@ class SYNERGxDBTool(BaseTool):
                         "datasets: STANFORD, YALE-TNBC, MERCK, NCI-ALMANAC, YALE-PDAC). "
                         "Try replacing irinotecan with drug_name='SN 38 Lactone' in your query."
                     )
-                msg = (
-                    f"No combination data found: drug IDs {drug_id_1} and {drug_id_2} were both "
-                    "found in SYNERGxDB but this specific combination was not tested together in "
-                    "any of the 9 integrated datasets (NCI-ALMANAC, MERCK, MIT-MELANOMA, VISAGE, "
-                    "DECREASE, YALE-TNBC, YALE-PDAC, STANFORD, CLOUD). "
-                    "Try SYNERGxDB_search_combos with only one drug_id to see what combinations "
-                    "each drug has been tested in." + folfox_hint + _sn38_hint
-                )
+                # BUG-62A-005: when a tissue/dataset filter is active, probe whether the combo
+                # exists without the filter — "not tested in any dataset" is false if the combo
+                # exists in other tissues. Show actual available tissues for the two-drug combo.
+                if sample or dataset:
+                    combo_probe = self._make_request(
+                        "combos/",
+                        {
+                            "drugId1": drug_id_1,
+                            "drugId2": drug_id_2,
+                            "page": 1,
+                            "perPage": 100,
+                        },
+                    )
+                    if combo_probe.get("ok") and combo_probe.get("data"):
+                        probe_data = combo_probe["data"]
+                        tissues = sorted(
+                            {x.get("tissue", "") for x in probe_data if x.get("tissue")}
+                        )
+                        filter_desc = (
+                            f" for tissue='{sample}'"
+                            if sample
+                            else f" for dataset={dataset!r}"
+                        )
+                        tissue_str = (
+                            ", ".join(f"'{t}'" for t in tissues)
+                            if tissues
+                            else "unknown"
+                        )
+                        msg = (
+                            f"No combination data found for drug IDs {drug_id_1} and {drug_id_2}"
+                            f"{filter_desc}. This combination IS tested in SYNERGxDB but not in "
+                            f"the requested tissue/dataset. Available tissues for this combo: "
+                            f"{tissue_str}. Remove the tissue filter to see all data."
+                            + folfox_hint
+                        )
+                    else:
+                        msg = (
+                            f"No combination data found: drug IDs {drug_id_1} and {drug_id_2} were both "
+                            "found in SYNERGxDB but this specific combination was not tested together in "
+                            "any of the 9 integrated datasets (NCI-ALMANAC, MERCK, MIT-MELANOMA, VISAGE, "
+                            "DECREASE, YALE-TNBC, YALE-PDAC, STANFORD, CLOUD). "
+                            "Try SYNERGxDB_search_combos with only one drug_id to see what combinations "
+                            "each drug has been tested in." + folfox_hint + _sn38_hint
+                        )
+                else:
+                    msg = (
+                        f"No combination data found: drug IDs {drug_id_1} and {drug_id_2} were both "
+                        "found in SYNERGxDB but this specific combination was not tested together in "
+                        "any of the 9 integrated datasets (NCI-ALMANAC, MERCK, MIT-MELANOMA, VISAGE, "
+                        "DECREASE, YALE-TNBC, YALE-PDAC, STANFORD, CLOUD). "
+                        "Try SYNERGxDB_search_combos with only one drug_id to see what combinations "
+                        "each drug has been tested in." + folfox_hint + _sn38_hint
+                    )
             elif drug_id_1 or drug_id_2:
                 found_id = drug_id_1 or drug_id_2
                 id_param = "drugId1" if drug_id_1 else "drugId2"

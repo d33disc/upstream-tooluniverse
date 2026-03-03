@@ -203,6 +203,15 @@ class GtoPdbRESTTool(BaseTool):
             arguments = dict(arguments)
             arguments["species"] = str(arguments["species"]).strip().title()
 
+        # BUG-62B-003: GtoPdb API does not honor approved=true/false on /targets or /ligands
+        # endpoints — it returns the same full set regardless. Remove approved_only from
+        # the arguments so it is NOT forwarded to the API (where it is silently ignored).
+        # We apply client-side filtering on interaction results where approvedDrug exists.
+        _approved_only_requested = arguments.get("approved_only")
+        if _approved_only_requested is not None:
+            arguments = dict(arguments)
+            arguments.pop("approved_only", None)
+
         # BUG-46A-04: gene_symbol convenience parameter for GtoPdb_get_interactions.
         # Auto-resolve gene symbol → targetId so users don't need a separate
         # GtoPdb_search_targets call before querying interactions.
@@ -428,12 +437,33 @@ class GtoPdbRESTTool(BaseTool):
             if isinstance(data, list) and len(data) > limit:
                 data = data[:limit]
 
+            # BUG-62B-003: apply approved_only filter client-side on interaction results.
+            # GtoPdb interaction records have an 'approvedDrug' boolean field.
+            # For non-interaction endpoints (/targets, /ligands), warn that this filter is
+            # unsupported (GtoPdb API ignores approved= on those endpoints).
+            if _approved_only_requested and isinstance(data, list):
+                if "/interactions" in url:
+                    # Client-side filter: keep only interactions with approvedDrug=True
+                    data = [x for x in data if x.get("approvedDrug")]
+                else:
+                    pass  # warning added to result below
+
             result: Dict[str, Any] = {
                 "status": "success",
                 "data": data,
                 "url": url,
                 "count": len(data) if isinstance(data, list) else 1,
             }
+
+            # BUG-62B-003: for non-interaction endpoints, warn that approved_only is unsupported
+            if _approved_only_requested and "/interactions" not in url:
+                result["approved_only_note"] = (
+                    "Note: GtoPdb does not support server-side filtering by approval status "
+                    "on target or ligand search endpoints — all results are returned. "
+                    "For interaction queries (GtoPdb_get_interactions), approved_only=true "
+                    "filters results client-side using the 'approvedDrug' field."
+                )
+
             # BUG-60A-003: disclose truncation so users know data was cut off
             if total_available is not None and total_available > len(data):
                 result["total_available"] = total_available
