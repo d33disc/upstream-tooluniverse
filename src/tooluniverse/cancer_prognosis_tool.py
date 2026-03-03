@@ -338,44 +338,14 @@ class CancerPrognosisTool(BaseTool):
             timeout=60,
         )
         if data is None:
-            # BUG-59A-004: provide same guidance as _get_gene_expression for non-TCGA cancers.
-            upper = cancer.upper()
-            _known_non_tcga = {
-                "CLL": "CLL (chronic lymphocytic leukemia) is not a TCGA cancer type. "
-                "Most CLL studies in cBioPortal contain only mutation data (WES), not survival endpoints. "
-                "Use CancerPrognosis_search_studies with keyword='CLL' to see what studies are available.",
-                "CHRONIC LYMPHOCYTIC LEUKEMIA": "CLL is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='leukemia' to find available studies.",
-                "MM": "Multiple myeloma (MM) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='myeloma' to find available studies.",
-                "MULTIPLE MYELOMA": "Multiple myeloma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='myeloma' to find available studies.",
-                "FL": "Follicular lymphoma (FL) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='follicular' to find studies.",
-                "MCL": "Mantle cell lymphoma (MCL) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='mantle' to find studies.",
-                "OSTEOSARCOMA": "Osteosarcoma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='osteosarcoma' to find available studies.",
-                "EWING SARCOMA": "Ewing sarcoma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='sarcoma' to find available studies.",
-                "NEUROBLASTOMA": "Neuroblastoma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='neuroblastoma' to find available studies.",
-                "MEDULLOBLASTOMA": "Medulloblastoma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='medulloblastoma' to find available studies.",
-            }
-            specific_msg = _known_non_tcga.get(upper) or _known_non_tcga.get(
-                " ".join(cancer.upper().split())
-            )
-            if specific_msg:
-                return {"status": "error", "error": specific_msg}
             tcga_types = sorted(TCGA_STUDY_MAP.keys())
             return {
                 "status": "error",
                 "error": (
                     "Study '{}' not found or no clinical data available (resolved to study_id='{}')."
                     " If this is a TCGA cancer type, use one of the 33 supported codes: {}."
-                    " For non-TCGA studies, use CancerPrognosis_search_studies to find"
-                    " the correct study_id (e.g., CancerPrognosis_search_studies(keyword='{}'))."
+                    " For non-TCGA cancers, use CancerPrognosis_search_studies(keyword='{}') to find"
+                    " available studies and confirm they include survival data."
                 ).format(cancer, study_id, ", ".join(tcga_types), cancer.lower()),
             }
 
@@ -531,38 +501,15 @@ class CancerPrognosisTool(BaseTool):
         if not profile_result:
             # BUG-58B-007: distinguish "not a TCGA type" from "study exists but no expression data".
             # Provide actionable guidance rather than a terse error.
-            upper = cancer.upper()
-            _known_non_tcga = {
-                "CLL": "CLL (chronic lymphocytic leukemia) is not a TCGA cancer type. "
-                "Most CLL studies in cBioPortal contain only mutation data (WES), not mRNA expression. "
-                "Use CancerPrognosis_search_studies with keyword='CLL' to see what studies are available.",
-                "CHRONIC LYMPHOCYTIC LEUKEMIA": "CLL is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='leukemia' to find available studies.",
-                "SLL": "SLL/CLL is not a TCGA cancer type. Most available studies are WES-only (no expression).",
-                "MM": "Multiple myeloma (MM) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='myeloma' to find expression studies.",
-                "MULTIPLE MYELOMA": "Multiple myeloma is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='myeloma' to find expression studies.",
-                "FL": "Follicular lymphoma (FL) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='follicular' to find studies.",
-                "MCL": "Mantle cell lymphoma (MCL) is not a TCGA cancer type. "
-                "Use CancerPrognosis_search_studies with keyword='mantle' to find studies.",
-            }
-            specific_msg = _known_non_tcga.get(upper) or _known_non_tcga.get(
-                " ".join(cancer.upper().split())
-            )
-            if specific_msg:
-                return {"status": "error", "error": specific_msg}
-            # Generic case: not in TCGA and no specific guidance
             tcga_types = sorted(TCGA_STUDY_MAP.keys())
             return {
                 "status": "error",
                 "error": (
                     "No mRNA expression profile found for '{}' (resolved to study_id='{}')."
                     " If this is a TCGA cancer type, use one of the 33 supported codes: {}."
-                    " For non-TCGA studies, use CancerPrognosis_search_studies to find"
-                    " the correct study_id and confirm it has an mRNA expression profile."
-                ).format(cancer, study_id, ", ".join(tcga_types)),
+                    " For non-TCGA cancers, use CancerPrognosis_search_studies(keyword='{}') to find"
+                    " available studies and confirm they include an mRNA expression profile."
+                ).format(cancer, study_id, ", ".join(tcga_types), cancer.lower()),
             }
         profile_id, profile_name = profile_result
 
