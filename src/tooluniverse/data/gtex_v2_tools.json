@@ -14,7 +14,7 @@
         "gencode_id": {
           "type": ["string", "array"],
           "items": {"type": "string"},
-          "description": "Versioned GENCODE ID(s), e.g. 'ENSG00000141510.16' for TP53. Can be single string or array of up to 60000 IDs"
+          "description": "Versioned GENCODE ID(s), e.g. 'ENSG00000141510.18' for TP53. Can be single string or array of up to 60000 IDs"
         },
         "tissue_site_detail_id": {
           "type": "array",
@@ -59,7 +59,7 @@
     "test_examples": [
       {
         "operation": "get_median_gene_expression",
-        "gencode_id": "ENSG00000141510.16"
+        "gencode_id": "ENSG00000141510.18"
       }
     ]
   },
@@ -243,7 +243,7 @@
     "test_examples": [
       {
         "operation": "get_single_tissue_eqtls",
-        "gencode_id": ["ENSG00000141510.16"],
+        "gencode_id": ["ENSG00000141510.18"],
         "tissue_site_detail_id": ["Whole_Blood"]
       }
     ]
@@ -262,7 +262,7 @@
         },
         "gencode_id": {
           "type": "string",
-          "description": "Required: Versioned GENCODE ID (e.g. ENSG00000141510.16)"
+          "description": "Required: Versioned GENCODE ID (e.g. ENSG00000141510.18)"
         },
         "variant_id": {
           "type": "string",
@@ -473,7 +473,7 @@
     "test_examples": [
       {
         "operation": "get_gene_expression",
-        "gencode_id": "ENSG00000141510.16",
+        "gencode_id": "ENSG00000141510.18",
         "tissue_site_detail_id": ["Liver"],
         "attribute_subset": "sex"
       }
@@ -629,7 +629,7 @@
     "test_examples": [
       {
         "operation": "get_multi_tissue_eqtls",
-        "gencode_id": "ENSG00000141510.16"
+        "gencode_id": "ENSG00000141510.18"
       }
     ]
   }
