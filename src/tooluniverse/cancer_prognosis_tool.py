@@ -495,11 +495,40 @@ class CancerPrognosisTool(BaseTool):
         # BUG-54A-002: _get_mrna_profile now returns (profile_id, profile_name) tuple
         profile_result = self._get_mrna_profile(study_id)
         if not profile_result:
+            # BUG-58B-007: distinguish "not a TCGA type" from "study exists but no expression data".
+            # Provide actionable guidance rather than a terse error.
+            upper = cancer.upper()
+            _known_non_tcga = {
+                "CLL": "CLL (chronic lymphocytic leukemia) is not a TCGA cancer type. "
+                "Most CLL studies in cBioPortal contain only mutation data (WES), not mRNA expression. "
+                "Use CancerPrognosis_search_studies with keyword='CLL' to see what studies are available.",
+                "CHRONIC LYMPHOCYTIC LEUKEMIA": "CLL is not a TCGA cancer type. "
+                "Use CancerPrognosis_search_studies with keyword='leukemia' to find available studies.",
+                "SLL": "SLL/CLL is not a TCGA cancer type. Most available studies are WES-only (no expression).",
+                "MM": "Multiple myeloma (MM) is not a TCGA cancer type. "
+                "Use CancerPrognosis_search_studies with keyword='myeloma' to find expression studies.",
+                "MULTIPLE MYELOMA": "Multiple myeloma is not a TCGA cancer type. "
+                "Use CancerPrognosis_search_studies with keyword='myeloma' to find expression studies.",
+                "FL": "Follicular lymphoma (FL) is not a TCGA cancer type. "
+                "Use CancerPrognosis_search_studies with keyword='follicular' to find studies.",
+                "MCL": "Mantle cell lymphoma (MCL) is not a TCGA cancer type. "
+                "Use CancerPrognosis_search_studies with keyword='mantle' to find studies.",
+            }
+            specific_msg = _known_non_tcga.get(upper) or _known_non_tcga.get(
+                " ".join(cancer.upper().split())
+            )
+            if specific_msg:
+                return {"status": "error", "error": specific_msg}
+            # Generic case: not in TCGA and no specific guidance
+            tcga_types = sorted(TCGA_STUDY_MAP.keys())
             return {
                 "status": "error",
-                "error": "No mRNA expression profile found for {} ({})".format(
-                    cancer, study_id
-                ),
+                "error": (
+                    "No mRNA expression profile found for '{}' (resolved to study_id='{}')."
+                    " If this is a TCGA cancer type, use one of the 33 supported codes: {}."
+                    " For non-TCGA studies, use CancerPrognosis_search_studies to find"
+                    " the correct study_id and confirm it has an mRNA expression profile."
+                ).format(cancer, study_id, ", ".join(tcga_types)),
             }
         profile_id, profile_name = profile_result
 
