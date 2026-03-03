@@ -83,15 +83,16 @@ class CancerPrognosisTool(BaseTool):
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         operation = arguments.get("operation")
-        # Infer operation from context when not provided
+        # Infer operation from tool config enum (each CancerPrognosis tool has
+        # a single fixed const value in the schema, e.g., "get_survival_data")
         if not operation:
-            if (
-                "keyword" in arguments
-                or "cancer_type" in arguments
-                or "cancer" in arguments
-                and "gene" not in arguments
-            ):
-                operation = "search_studies"
+            schema_op = (
+                self.parameter.get("properties", {})
+                .get("operation", {})
+                .get("enum", [None])[0]
+            )
+            if schema_op:
+                operation = schema_op
             else:
                 return {
                     "status": "error",

@@ -9,9 +9,9 @@ from ._shared_client import get_shared_client
 
 
 def search_clinical_trials(
-    query_term: str,
     condition: Optional[str] = None,
     intervention: Optional[str] = None,
+    query_term: Optional[str] = None,
     pageSize: Optional[int] = None,
     pageToken: Optional[str] = None,
     *,

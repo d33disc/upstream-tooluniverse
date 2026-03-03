@@ -149,6 +149,8 @@ class ClinicalTrialsTool(RESTfulTool):
             # Natural aliases
             "condition": "query.cond",
             "status": "filter.overallStatus",
+            "query": "query.term",
+            "max_results": "pageSize",
         }
 
         params = {"format": "json", "countTotal": "true"}

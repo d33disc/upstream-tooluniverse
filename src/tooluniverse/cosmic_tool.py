@@ -37,7 +37,14 @@ class COSMICTool(BaseTool):
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the COSMIC API call based on operation type."""
-        operation = arguments.get("operation", "search")
+        operation = arguments.get("operation")
+        if not operation:
+            # Infer operation from tool config const value (each COSMIC tool
+            # has a fixed const in the schema, e.g., "search" or "get_by_gene")
+            schema_op = (
+                self.parameter.get("properties", {}).get("operation", {}).get("const")
+            )
+            operation = schema_op or "search"
 
         if operation == "search":
             return self._search_mutations(arguments)

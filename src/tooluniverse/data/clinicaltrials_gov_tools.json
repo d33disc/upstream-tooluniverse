@@ -26,9 +26,7 @@
                     "description": "Token to retrieve the next page of results, obtained from the 'nextPageToken' field of the previous response. Do not specify it for first page. When you make an initial request to the API which supports pagination, the response will include a nextPageToken. This token can then be used as a parameter in the subsequent API request to retrieve the next set of data."
                 }
             },
-            "required": [
-                "query_term"
-            ]
+            "required": []
         },
         "query_schema": {
             "pageSize": 10

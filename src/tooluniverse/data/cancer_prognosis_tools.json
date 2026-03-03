@@ -26,7 +26,6 @@
         }
       },
       "required": [
-        "operation",
         "cancer"
       ]
     },
@@ -148,7 +147,6 @@
         }
       },
       "required": [
-        "operation",
         "cancer",
         "gene"
       ]
@@ -357,7 +355,6 @@
         }
       },
       "required": [
-        "operation",
         "cancer"
       ]
     },

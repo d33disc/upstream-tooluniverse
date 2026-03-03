@@ -76,8 +76,93 @@ class CIViCTool(BaseTool):
 
         return payload
 
+    def _lookup_gene_id(self, gene_name: str) -> Optional[int]:
+        """Look up CIViC gene ID by gene symbol via GraphQL."""
+        payload = {
+            "query": "query GetGenes($entrezSymbols: [String!]) { genes(entrezSymbols: $entrezSymbols) { nodes { id name } } }",
+            "variables": {"entrezSymbols": [gene_name.upper()]},
+        }
+        try:
+            resp = requests.post(
+                CIVIC_GRAPHQL_URL,
+                json=payload,
+                timeout=10,
+                headers={
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+            )
+            data = resp.json().get("data", {})
+            nodes = data.get("genes", {}).get("nodes", [])
+            if nodes:
+                return nodes[0]["id"]
+        except Exception:
+            pass
+        return None
+
+    def _get_variants_for_gene_id(
+        self, gene_id: int, limit: int = 50
+    ) -> Dict[str, Any]:
+        """Fetch variants for a given CIViC gene_id via GraphQL."""
+        payload = {
+            "query": "query GetVariantsByGene($gene_id: Int!, $limit: Int) { gene(id: $gene_id) { id name variants(first: $limit) { nodes { id name } } } }",
+            "operationName": "GetVariantsByGene",
+            "variables": {"gene_id": gene_id, "limit": limit},
+        }
+        try:
+            resp = requests.post(
+                CIVIC_GRAPHQL_URL,
+                json=payload,
+                timeout=30,
+                headers={
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+            )
+            data = resp.json().get("data", {})
+            return {
+                "data": data,
+                "metadata": {"source": "CIViC", "format": "GraphQL"},
+            }
+        except Exception as e:
+            return {"error": f"CIViC API request failed: {str(e)}"}
+
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the CIViC GraphQL API call."""
+        tool_name = self.tool_config.get("name", "")
+
+        # civic_get_variants_by_gene: resolve gene_name → gene_id if needed
+        if tool_name == "civic_get_variants_by_gene":
+            if not arguments.get("gene_id"):
+                gene_name = (
+                    arguments.get("gene_name")
+                    or arguments.get("gene")
+                    or arguments.get("query")
+                )
+                if not gene_name:
+                    return {
+                        "error": "gene_id or gene_name is required for civic_get_variants_by_gene"
+                    }
+                gene_id = self._lookup_gene_id(gene_name)
+                if gene_id is None:
+                    return {"error": f"Gene '{gene_name}' not found in CIViC database"}
+                arguments = dict(arguments)
+                arguments["gene_id"] = gene_id
+            return self._get_variants_for_gene_id(
+                arguments["gene_id"], arguments.get("limit", 50)
+            )
+
+        # civic_search_variants: if gene/gene_name provided, look up gene_id then get variants
+        if tool_name == "civic_search_variants":
+            gene_name = arguments.get("gene") or arguments.get("gene_name")
+            if gene_name and not arguments.get("query"):
+                gene_id = self._lookup_gene_id(gene_name)
+                if gene_id is None:
+                    return {"error": f"Gene '{gene_name}' not found in CIViC database"}
+                return self._get_variants_for_gene_id(
+                    gene_id, arguments.get("limit", 50)
+                )
+
         try:
             # Build GraphQL query
             payload = self._build_graphql_query(arguments)

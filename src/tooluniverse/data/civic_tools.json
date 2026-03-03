@@ -100,14 +100,22 @@
   },
   {
     "name": "civic_get_variants_by_gene",
-    "description": "Get all variants associated with a specific gene in CIViC database. Returns variant information including names, coordinates, and associated evidence. Use this after finding a gene ID with civic_search_genes to explore all cancer variants for that gene.",
+    "description": "Get all variants associated with a specific gene in CIViC database. Returns variant information including names, coordinates, and associated evidence. Use gene_name (e.g., 'EGFR', 'BRAF') for convenience, or gene_id if already known.",
     "type": "CIViCTool",
     "parameter": {
       "type": "object",
       "properties": {
         "gene_id": {
           "type": "integer",
-          "description": "CIViC gene ID (e.g., 4244 for ABCB1). Find gene IDs using civic_search_genes."
+          "description": "CIViC gene ID (e.g., 19 for EGFR, 12 for BRAF). Find gene IDs using civic_search_genes."
+        },
+        "gene_name": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'EGFR', 'BRAF', 'TP53'). Will be looked up automatically. Alias: gene or query."
+        },
+        "gene": {
+          "type": "string",
+          "description": "Alias for gene_name. Gene symbol (e.g., 'EGFR', 'KRAS')."
         },
         "limit": {
           "type": "integer",
@@ -115,9 +123,7 @@
           "default": 50
         }
       },
-      "required": [
-        "gene_id"
-      ]
+      "required": []
     },
     "fields": {
       "query": "query GetVariantsByGene($gene_id: Int!, $limit: Int) { gene(id: $gene_id) { id name variants(first: $limit) { nodes { id name } } } }",
@@ -200,7 +206,7 @@
       ]
     },
     "fields": {
-      "query": "query GetVariant($variant_id: Int!) { variant(id: $variant_id) { id name } }",
+      "query": "query GetVariant($variant_id: Int!) { variant(id: $variant_id) { id name variantAliases clinvarIds hgvsDescriptions variantTypes { id name soid } molecularProfiles(first: 5) { nodes { id name molecularProfileScore } } } }",
       "operation_name": "GetVariant"
     },
     "return_schema": {
@@ -234,7 +240,7 @@
   },
   {
     "name": "civic_search_variants",
-    "description": "Search for variants in CIViC database. Returns a list of variants with their IDs and names. Variants represent specific genetic alterations with clinical significance in cancer.",
+    "description": "Search for variants in CIViC database. Returns a list of variants with their IDs and names. Use 'query' to search by variant name (e.g., 'V600E'), or 'gene'/'gene_name' to get all variants for a specific gene (e.g., 'EGFR').",
     "type": "CIViCTool",
     "parameter": {
       "type": "object",
@@ -246,7 +252,15 @@
         },
         "query": {
           "type": "string",
-          "description": "Variant name to search for (e.g., \"T790M\", \"V600E\"). Returns exact name matches. If not provided, returns all variants in alphabetical order up to the limit."
+          "description": "Variant name to search for (e.g., \"T790M\", \"V600E\", \"exon 19 deletion\"). Returns name-matching variants."
+        },
+        "gene": {
+          "type": "string",
+          "description": "Gene symbol to filter variants by (e.g., 'EGFR', 'BRAF', 'KRAS'). Returns all variants for that gene."
+        },
+        "gene_name": {
+          "type": "string",
+          "description": "Alias for gene. Gene symbol (e.g., 'TP53', 'BRCA1')."
         }
       },
       "required": []

@@ -1264,11 +1264,13 @@
         "drug_chembl_id": {
           "type": "string",
           "description": "ChEMBL drug/molecule ID (e.g., \"CHEMBL1201581\" for adalimumab, \"CHEMBL4535757\" for sotorasib). To find a drug ID, use ChEMBL_search_drugs with a drug name."
+        },
+        "molecule_chembl_id": {
+          "type": "string",
+          "description": "Alias for drug_chembl_id. ChEMBL molecule ID (e.g., \"CHEMBL25\" for aspirin)."
         }
       },
-      "required": [
-        "drug_chembl_id"
-      ]
+      "required": []
     },
     "return_schema": {
       "type": "object",

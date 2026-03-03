@@ -138,8 +138,10 @@ class ChEMBLRESTTool(BaseTool):
 
         # BUG-30B-05: Map `drug_chembl_id` to `molecule_chembl_id__exact` so
         # ChEMBL_get_drug_mechanisms accepts the same ID param as ChEMBL_get_drug.
-        if "drug_chembl_id" in args and args["drug_chembl_id"] is not None:
-            params["molecule_chembl_id__exact"] = args["drug_chembl_id"]
+        # BUG-32B-07: Also accept `molecule_chembl_id` as an alias.
+        drug_id = args.get("drug_chembl_id") or args.get("molecule_chembl_id")
+        if drug_id is not None:
+            params["molecule_chembl_id__exact"] = drug_id
 
         # Add any filter parameters (ChEMBL uses field__filter syntax)
         # e.g., molecule_chembl_id__exact, pref_name__icontains
@@ -162,6 +164,7 @@ class ChEMBLRESTTool(BaseTool):
                     "assay_chembl_id",
                     "activity_id",
                     "drug_chembl_id",  # handled above: mapped to molecule_chembl_id__exact
+                    "molecule_chembl_id",  # handled above: alias for drug_chembl_id
                 ]
                 and value is not None
             ):
