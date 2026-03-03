@@ -368,7 +368,7 @@ class SYNERGxDBTool(BaseTool):
                 # in any tissue. Show available tissues so the user knows the real situation.
                 if sample or dataset:
                     probe = self._make_request(
-                        "combos/", {id_param: found_id, "page": 1, "perPage": 20}
+                        "combos/", {id_param: found_id, "page": 1, "perPage": 200}
                     )
                     if probe.get("ok") and probe.get("data"):
                         probe_data = probe["data"]
@@ -392,7 +392,7 @@ class SYNERGxDBTool(BaseTool):
                         tissue_str = (
                             ", ".join(f"'{t}'" for t in tissues)
                             if tissues
-                            else "none in first 20 records"
+                            else "none in first 200 records"
                         )
                         source_str = ", ".join(sources) if sources else "unknown"
                         # BUG-52B-004/006: for irinotecan specifically, hint that its
@@ -422,7 +422,7 @@ class SYNERGxDBTool(BaseTool):
                         msg = (
                             f"No combination data found for drug ID {found_id}{filter_desc}. "
                             f"This drug has no data for the requested filter. "
-                            f"Available tissues in the first 20 records: {tissue_str} "
+                            f"Available tissues in the first 200 records: {tissue_str} "
                             f"(sources: {source_str}). "
                             f"Run SYNERGxDB_search_combos with only {id_param}={found_id} "
                             f"(no tissue/dataset filter) to see all available combinations."
@@ -441,10 +441,40 @@ class SYNERGxDBTool(BaseTool):
                         "Use SYNERGxDB_list_datasets to see available data."
                     )
             else:
+                # BUG-57A-003: add BCL2 inhibitor hint when relevant drug names are queried
+                _drug_q = " ".join(
+                    str(arguments.get(k, ""))
+                    for k in (
+                        "drug_name_1",
+                        "drug1",
+                        "drug_name_2",
+                        "drug2",
+                        "drug_name",
+                    )
+                ).lower()
+                _bcl2_hint = ""
+                if any(
+                    kw in _drug_q
+                    for kw in (
+                        "venetoclax",
+                        "navitoclax",
+                        "bcl-2",
+                        "bcl2",
+                        "abt-199",
+                        "abt-263",
+                    )
+                ):
+                    _bcl2_hint = (
+                        " Note: BCL2 inhibitors such as venetoclax (ABT-199) and navitoclax "
+                        "(ABT-263) are not in the NCI-ALMANAC cytotoxic screen. "
+                        "SYNERGxDB does not cover targeted agent combinations unless they appear "
+                        "in one of the 9 integrated studies. Use CIViC or PharmacoDB for "
+                        "clinical evidence on BCL2 inhibitor combinations."
+                    )
                 msg = (
                     "No combination data found for the given parameters. "
                     "SYNERGxDB covers cytotoxic chemotherapy combinations from 9 studies; "
-                    "use SYNERGxDB_list_drugs to verify drug availability."
+                    "use SYNERGxDB_list_drugs to verify drug availability." + _bcl2_hint
                 )
             return {
                 "status": "success",

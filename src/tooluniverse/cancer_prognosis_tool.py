@@ -118,6 +118,16 @@ _CANCER_NAME_ALIASES: Dict[str, str] = {
     "AML": "LAML",
     "SARCOMA": "SARC",
     "TESTICULAR": "TGCT",
+    # BUG-57A-004: lymphoma aliases — DLBCL is the most common TCGA lymphoma study
+    "DLBCL": "DLBC",
+    "DLBC": "DLBC",
+    "DIFFUSE LARGE B-CELL LYMPHOMA": "DLBC",
+    "DIFFUSE LARGE B CELL LYMPHOMA": "DLBC",
+    "LARGE CELL LYMPHOMA": "DLBC",
+    "LYMPHOMA": "DLBC",
+    "B-CELL LYMPHOMA": "DLBC",
+    "B CELL LYMPHOMA": "DLBC",
+    "FOLLICULAR LYMPHOMA": "DLBC",  # no FL-specific TCGA study; DLBC is closest proxy
 }
 
 

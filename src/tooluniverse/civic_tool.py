@@ -515,13 +515,15 @@ class CIViCTool(BaseTool):
             if tool_name == "civic_search_evidence_items":
                 mol_profile = arguments.get("molecular_profile")
                 disease = arguments.get("disease") or arguments.get("disease_name")
-                if mol_profile and disease:
+                # BUG-57A-005: fire when ANY disease filter is set (not just mol_profile+disease)
+                if disease:
                     evidence_nodes = (
                         result.get("data", {}).get("evidenceItems", {}).get("nodes", [])
                     )
                     if len(evidence_nodes) == 0:
                         # Auto-probe: re-run without disease filter to find actual disease names
                         actual_diseases: list = []
+                        probe_nodes: list = []
                         try:
                             probe_args = {
                                 k: v
@@ -555,20 +557,29 @@ class CIViCTool(BaseTool):
                         except Exception:
                             pass
 
+                        # Build context string for hint message
+                        therapy = arguments.get("therapy")
+                        if mol_profile:
+                            _ctx = f"molecular_profile='{mol_profile}'"
+                        elif therapy:
+                            _ctx = f"therapy='{therapy}'"
+                        else:
+                            _ctx = "the specified filter"
+
                         if actual_diseases:
                             disease_hint = (
                                 f" CIViC has {len(probe_nodes)} evidence items for "
-                                f"'{mol_profile}' across these diseases: "
+                                f"{_ctx} across these diseases: "
                                 + ", ".join(f"'{d}'" for d in actual_diseases[:10])
                                 + ". Use one of these exact disease names."
                             )
                         else:
                             disease_hint = (
-                                f" Try retrying with only molecular_profile='{mol_profile}' "
+                                f" Try retrying with {_ctx} "
                                 "(remove the disease filter) to see all evidence."
                             )
                         result["warning"] = (
-                            f"No evidence items found for molecular_profile='{mol_profile}' "
+                            f"No evidence items found for {_ctx} "
                             f"AND disease='{disease}'. CIViC applies AND logic across all "
                             "filters, and disease names must match CIViC's exact taxonomy "
                             "(e.g., 'Lung Non-small Cell Carcinoma' not 'NSCLC' or "
