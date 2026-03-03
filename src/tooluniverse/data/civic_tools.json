@@ -380,7 +380,7 @@
             "string",
             "null"
           ],
-          "description": "Filter by curation status. Default: ACCEPTED (peer-reviewed). Options: ACCEPTED, SUBMITTED, REJECTED."
+          "description": "Filter by curation status. Default: ACCEPTED (peer-reviewed). Options: ACCEPTED, SUBMITTED, REJECTED, ALL (returns all statuses combined)."
         },
         "therapy": {
           "type": "string",

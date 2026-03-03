@@ -161,10 +161,14 @@ class GtoPdbRESTTool(BaseTool):
             if ligand_id_filter is not None and result["count"] == 0:
                 result["message"] = (
                     f"No interactions found for ligandId={ligand_id_filter} in the GtoPdb "
-                    "interactions database. Note: GtoPdb's /interactions endpoint covers "
-                    "receptor pharmacology (GPCR, ion channel, enzyme, transporter) data. "
-                    "Kinase inhibitors and other mechanism-based drugs may not appear here. "
-                    "To find targets, search GtoPdb using the ligand name on guidetopharmacology.org."
+                    "interactions database. Possible reasons: (1) The drug may be stored under "
+                    "a related compound entry — some approved drugs (e.g., vemurafenib ID=5893) "
+                    "have pharmacological data under their research compound record (e.g., ID=8548). "
+                    "Check the ligand details from GtoPdb_search_ligands for 'activeDrugIds' or "
+                    "'prodrugIds' fields and try those IDs. (2) The drug may not be in the GtoPdb "
+                    "interactions database. GtoPdb covers GPCR, ion channel, enzyme, and transporter "
+                    "interactions; some targets may be absent. Search by target_id instead if you "
+                    "know the GtoPdb target ID."
                 )
 
             # BUG-35A-02: add top-level queried_target summary for interactions endpoint

@@ -170,6 +170,27 @@ class CIViCTool(BaseTool):
                 arguments["gene_id"], arguments.get("limit", 50)
             )
 
+        # BUG-40B-01: civic_search_evidence_items — warn on unsupported gene/variant params.
+        # These are not in the GraphQL schema and are silently ignored, misleading callers.
+        if tool_name == "civic_search_evidence_items":
+            unsupported = [
+                p for p in ("gene", "variant", "gene_name") if arguments.get(p)
+            ]
+            if unsupported:
+                gene = arguments.get("gene") or arguments.get("gene_name")
+                variant = arguments.get("variant")
+                profile_hint = ""
+                if gene and variant:
+                    profile_hint = f' Try: molecular_profile="{gene} {variant}"'
+                elif gene:
+                    profile_hint = f' Try: molecular_profile="{gene}"'
+                return {
+                    "error": f"Unsupported parameter(s) for civic_search_evidence_items: {', '.join(unsupported)}. "
+                    "Use molecular_profile to filter by variant (e.g., 'BRAF V600E'), "
+                    "therapy to filter by drug name, disease to filter by disease name."
+                    + profile_hint,
+                }
+
         # civic_search_variants: if gene/gene_name provided, look up gene_id then get variants
         if tool_name == "civic_search_variants":
             gene_name = arguments.get("gene") or arguments.get("gene_name")

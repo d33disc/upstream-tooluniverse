@@ -207,11 +207,16 @@ class CancerPrognosisTool(BaseTool):
     def _get_survival_data(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Retrieve OS and DFS survival clinical data for a study."""
-        cancer = arguments.get("cancer") or arguments.get("cancer_type")
+        cancer = (
+            arguments.get("cancer")
+            or arguments.get("cancer_type")
+            or arguments.get("study_id")  # BUG-40A-05: study_id alias
+        )
         if not cancer:
             return {
                 "status": "error",
-                "error": "cancer is required (TCGA abbreviation like 'BRCA' or cBioPortal study ID)",
+                "error": "cancer is required (TCGA abbreviation like 'BRCA' or cBioPortal study ID). "
+                "Also accepted: cancer_type, study_id.",
             }
 
         study_id = self._resolve_study(cancer)
@@ -331,7 +336,11 @@ class CancerPrognosisTool(BaseTool):
     def _get_gene_expression(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Fetch gene expression values across samples in a study."""
-        cancer = arguments.get("cancer") or arguments.get("cancer_type")
+        cancer = (
+            arguments.get("cancer")
+            or arguments.get("cancer_type")
+            or arguments.get("study_id")  # BUG-40A-05
+        )
         gene = arguments.get("gene")
 
         if not cancer:
@@ -453,11 +462,12 @@ class CancerPrognosisTool(BaseTool):
             arguments.get("keyword")
             or arguments.get("cancer_type")
             or arguments.get("cancer")
+            or arguments.get("query")  # BUG-40A-07
         )
         if not keyword:
             return {
                 "status": "error",
-                "error": "keyword is required (e.g., 'breast', 'lung', 'TCGA'). Also accepted: cancer_type or cancer.",
+                "error": "keyword is required (e.g., 'breast', 'lung', 'TCGA'). Also accepted: cancer_type, cancer, query.",
             }
 
         limit = min(int(arguments.get("limit", 20)), 100)
@@ -514,11 +524,15 @@ class CancerPrognosisTool(BaseTool):
     def _get_study_summary(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Get summary statistics for a cancer study."""
-        cancer = arguments.get("cancer") or arguments.get("cancer_type")
+        cancer = (
+            arguments.get("cancer")
+            or arguments.get("cancer_type")
+            or arguments.get("study_id")  # BUG-40A-05
+        )
         if not cancer:
             return {
                 "status": "error",
-                "error": "cancer is required (e.g., 'BRCA', 'LUAD')",
+                "error": "cancer is required (e.g., 'BRCA', 'LUAD'). Also accepted: cancer_type, study_id.",
             }
 
         study_id = self._resolve_study(cancer)

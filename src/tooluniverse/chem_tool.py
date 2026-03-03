@@ -140,13 +140,23 @@ class ChEMBLRESTTool(BaseTool):
         # ChEMBL_get_drug_mechanisms accepts the same ID param as ChEMBL_get_drug.
         # BUG-32B-07: Also accept `molecule_chembl_id` as an alias.
         # BUG-39A-01: Also accept `chembl_id` as a common alias.
+        # BUG-40B-02: For mechanism endpoints, use `parent_molecule_chembl_id` — the
+        # /mechanism.json endpoint indexes records by the parent/active molecule, not
+        # individual salt/prodrug forms. molecule_chembl_id__exact returns 0 results.
         drug_id = (
             args.get("drug_chembl_id")
             or args.get("molecule_chembl_id")
             or args.get("chembl_id")
         )
+        tool_name_local = self.tool_config.get("name", "")
         if drug_id is not None:
-            params["molecule_chembl_id__exact"] = drug_id
+            if tool_name_local in (
+                "ChEMBL_get_drug_mechanisms",
+                "ChEMBL_search_mechanisms",
+            ):
+                params["parent_molecule_chembl_id"] = drug_id
+            else:
+                params["molecule_chembl_id__exact"] = drug_id
 
         # Add any filter parameters (ChEMBL uses field__filter syntax)
         # e.g., molecule_chembl_id__exact, pref_name__icontains
@@ -168,8 +178,9 @@ class ChEMBLRESTTool(BaseTool):
                     "target_chembl_id",
                     "assay_chembl_id",
                     "activity_id",
-                    "drug_chembl_id",  # handled above: mapped to molecule_chembl_id__exact
+                    "drug_chembl_id",  # handled above: mapped to molecule_chembl_id__exact / parent_molecule_chembl_id
                     "molecule_chembl_id",  # handled above: alias for drug_chembl_id
+                    "drug_name",  # BUG-40B-03: not a valid ChEMBL API param; caught in run() with error
                 ]
                 and value is not None
             ):
@@ -193,6 +204,7 @@ class ChEMBLRESTTool(BaseTool):
                     or arguments.get("molecule_chembl_id")
                     or arguments.get("chembl_id")
                     or arguments.get("molecule_chembl_id__exact")
+                    or arguments.get("drug_chembl_id__exact")  # BUG-40A-01
                 )
                 if not mol_id:
                     return {
@@ -201,6 +213,19 @@ class ChEMBLRESTTool(BaseTool):
                         "Provide the ChEMBL ID of the drug (e.g., 'CHEMBL25' for aspirin). "
                         "Use ChEMBL_search_drugs or ChEMBL_search_molecules to find the ID first. "
                         "Aliases accepted: drug_chembl_id, molecule_chembl_id, chembl_id.",
+                    }
+
+            # BUG-40B-03: ChEMBL_search_mechanisms — drug_name is not a valid ChEMBL
+            # API parameter; it is silently ignored, returning unrelated mechanisms.
+            if tool_name == "ChEMBL_search_mechanisms":
+                drug_name = arguments.get("drug_name")
+                if drug_name:
+                    return {
+                        "status": "error",
+                        "error": f"drug_name ('{drug_name}') is not a valid parameter for "
+                        "ChEMBL_search_mechanisms. To search by drug name, first find the "
+                        "ChEMBL ID using ChEMBL_search_molecules or ChEMBL_search_drugs, "
+                        "then use drug_chembl_id (e.g., 'CHEMBL2028663' for dabrafenib).",
                     }
 
             # BUG-36A-01: ChEMBL_get_molecule_targets — the /target.json endpoint
