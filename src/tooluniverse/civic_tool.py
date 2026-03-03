@@ -578,6 +578,16 @@ class CIViCTool(BaseTool):
                                 f" Try retrying with {_ctx} "
                                 "(remove the disease filter) to see all evidence."
                             )
+                        # BUG-59A-001: disclose ACCEPTED filter that may be hiding evidence
+                        _status_used = arguments.get(
+                            "status", self.variable_defaults.get("status", "ACCEPTED")
+                        )
+                        _status_note = ""
+                        if str(_status_used).upper() == "ACCEPTED":
+                            _status_note = (
+                                " CIViC defaults to ACCEPTED evidence only — "
+                                "add status='SUBMITTED' to include pre-review evidence."
+                            )
                         result["warning"] = (
                             f"No evidence items found for {_ctx} "
                             f"AND disease='{disease}'. CIViC applies AND logic across all "
@@ -587,6 +597,7 @@ class CIViCTool(BaseTool):
                             "'Chronic Myelogenous Leukemia, BCR-ABL1+' not 'CML', "
                             "'Pancreatic Ductal Carcinoma' not 'Pancreatic Adenocarcinoma')."
                             + disease_hint
+                            + _status_note
                         )
 
                 # BUG-56A-002: when molecular_profile alone returns 0 results (no disease,
@@ -599,6 +610,18 @@ class CIViCTool(BaseTool):
                     )
                     if len(evidence_nodes) == 0:
                         mp_warn = f"No evidence items found for molecular_profile='{mol_profile}'."
+                        # BUG-59A-001: ACCEPTED filter may be hiding evidence. Disclose the active
+                        # status filter so users know to try status='SUBMITTED' if evidence exists
+                        # only in pre-review form (common for rare cancers and newer variants).
+                        _status_used = arguments.get(
+                            "status", self.variable_defaults.get("status", "ACCEPTED")
+                        )
+                        if str(_status_used).upper() == "ACCEPTED":
+                            mp_warn += (
+                                " CIViC defaults to ACCEPTED (peer-reviewed) evidence only. "
+                                "If this variant has recent or emerging evidence it may be "
+                                "SUBMITTED (pre-review) — add status='SUBMITTED' to include it."
+                            )
                         if _mp_normalized_from:
                             mp_warn += (
                                 f" Note: your input '{_mp_normalized_from}' was auto-normalized"
