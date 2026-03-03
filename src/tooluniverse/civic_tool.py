@@ -355,11 +355,30 @@ class CIViCTool(BaseTool):
                         fusion_hint = ""
                         alt_hint = ""
                         if "fusion" in q_lower:
+                            # BUG-56A-006: BICC1 was hardcoded as an example but it's only a
+                            # real partner for FGFR2, not other genes. Use a validated lookup table.
+                            _FUSION_EXAMPLES = {
+                                "ALK": "EML4",
+                                "ROS1": "CD74",
+                                "RET": "KIF5B",
+                                "NTRK1": "TPM3",
+                                "FGFR2": "BICC1",
+                                "FGFR3": "TACC3",
+                                "PDGFRA": "FIP1L1",
+                                "BCR": "ABL1",
+                                "ABL1": "BCR",
+                            }
+                            _partner = _FUSION_EXAMPLES.get(gene_name, "PARTNER")
+                            _example = (
+                                f"'{_partner}::{gene_name} Fusion'"
+                                if _partner != "PARTNER"
+                                else f"'{gene_name}::GENE2 Fusion'"
+                            )
                             fusion_hint = (
                                 f" CIViC stores fusion events as molecular profiles "
                                 f"rather than gene variants. Try civic_search_evidence_items "
                                 f"with molecular_profile='{gene_name}::PARTNER Fusion' "
-                                f"(e.g., '{gene_name}::BICC1 Fusion')."
+                                f"(e.g., {_example})."
                             )
                         # Provide alternative query suggestions for common terms CIViC names differently
                         _alt_suggestions: Dict[str, str] = {
@@ -408,15 +427,27 @@ class CIViCTool(BaseTool):
         # BUG-55B-005: CIViC uses double-colon notation for fusion molecular profiles
         # (e.g., "BCR::ABL1 Fusion", "EML4::ALK Fusion"). Users often write hyphenated
         # fusions (e.g., "BCR-ABL1 Fusion") which silently returns 0 results.
-        # Auto-normalize GENE1-GENE2 patterns to GENE1::GENE2 in molecular_profile.
+        # BUG-56A-001: the original regex matched mutation notation too (e.g., EGFR-T790M,
+        # BRAF-V600E, KRAS-G12C) because T790M/V600E/G12C start with an uppercase letter.
+        # Fix: skip normalization when the second part matches HGVS protein-change format
+        # (single uppercase letter + digits + uppercase letter/asterisk, e.g. T790M, G12C).
         if tool_name in ("civic_search_evidence_items", "civic_search_variants"):
             import re as _re
 
             mol_profile = arguments.get("molecular_profile")
             if mol_profile and isinstance(mol_profile, str):
+
+                def _maybe_fuse(m: "_re.Match") -> str:
+                    """Replace GENE1-GENE2 with GENE1::GENE2, but not GENE-MutationNotation."""
+                    second = m.group(2)
+                    # Protein-change notation: single letter + digits + letter/asterisk (e.g. T790M)
+                    if _re.match(r"^[A-Z]\d+[A-Z*]?$", second):
+                        return m.group(0)  # leave unchanged
+                    return m.group(1) + "::" + second
+
                 normalized_mp = _re.sub(
                     r"\b([A-Z][A-Z0-9]*)-([A-Z][A-Z0-9]+)\b",
-                    r"\1::\2",
+                    _maybe_fuse,
                     mol_profile,
                 )
                 if normalized_mp != mol_profile:
@@ -547,10 +578,40 @@ class CIViCTool(BaseTool):
                             + disease_hint
                         )
 
+                # BUG-56A-002: when molecular_profile alone returns 0 results (no disease,
+                # no therapy filter), warn — especially if input was auto-normalized (fusion fix
+                # may have converted a mutation like EGFR-T790M to EGFR::T790M incorrectly).
+                therapy = arguments.get("therapy")
+                if mol_profile and not disease and not therapy:
+                    evidence_nodes = (
+                        result.get("data", {}).get("evidenceItems", {}).get("nodes", [])
+                    )
+                    if len(evidence_nodes) == 0:
+                        mp_warn = f"No evidence items found for molecular_profile='{mol_profile}'."
+                        if _mp_normalized_from:
+                            mp_warn += (
+                                f" Note: your input '{_mp_normalized_from}' was auto-normalized"
+                                f" to '{mol_profile}' as a gene fusion. If this is a point"
+                                " mutation (e.g., EGFR T790M), use space-separated notation"
+                                " instead (CIViC does not use hyphens for mutations)."
+                            )
+                        elif _re.search(
+                            r"\b[A-Z][A-Z0-9]*-[A-Z]\d+[A-Z*]?\b", mol_profile
+                        ):
+                            # Input looks like GENE-Mutation (e.g., EGFR-T790M) — not normalized
+                            # because we correctly identified it as a mutation, not a fusion.
+                            # Suggest space-separated notation which CIViC actually uses.
+                            space_form = mol_profile.replace("-", " ", 1)
+                            mp_warn += (
+                                f" If '{mol_profile}' is a point mutation, try"
+                                f" molecular_profile='{space_form}' (CIViC uses"
+                                " 'GENE Mutation' with a space, not a hyphen)."
+                            )
+                        result["warning"] = mp_warn
+
                 # BUG-53B-002: warn when molecular_profile+therapy returns 0 results.
                 # BUG-54A-001: auto-probe available therapies for the molecular profile
                 # so users can identify the correct exact therapy name from CIViC.
-                therapy = arguments.get("therapy")
                 if mol_profile and therapy and not disease:
                     evidence_nodes = (
                         result.get("data", {}).get("evidenceItems", {}).get("nodes", [])

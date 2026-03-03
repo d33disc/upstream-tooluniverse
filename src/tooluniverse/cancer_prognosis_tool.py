@@ -612,18 +612,9 @@ class CancerPrognosisTool(BaseTool):
                 "Deduplicate by keeping only the primary tumor sample (-01 suffix) before merging.",
             }
 
-        # BUG-53A-015: warn explicitly when returned sample count is less than total samples
-        # with expression data. Previously both n_samples_with_expression_data and
-        # n_samples_returned were returned as metadata fields but no warning was emitted,
-        # so users didn't realize they were getting a truncated dataset.
-        truncation_warning = ""
-        if len(values) > max_samples:
-            truncation_warning = (
-                " TRUNCATED: Returning {returned} of {total} samples with expression data. "
-                "Set max_samples={total} (up to 2000) to retrieve the full dataset.".format(
-                    returned=max_samples, total=len(values)
-                )
-            )
+        # BUG-53A-015 / BUG-56A-005: truncation is now surfaced at the top-level response via
+        # `truncated` and `truncation_note` fields (see bottom of function). Do not embed it
+        # in the note string to avoid duplicate information in two places.
 
         result_data: Dict[str, Any] = {
             "study_id": study_id,
@@ -650,8 +641,8 @@ class CancerPrognosisTool(BaseTool):
                 "max": round(sorted_vals[-1], 4),
             },
             "samples": values[:max_samples],
-            "note": "Values are from {} profile ({}). Use with Survival tools for expression-survival analysis.{}{}".format(
-                profile_id, expression_units, truncation_warning, multi_sample_note
+            "note": "Values are from {} profile ({}). Use with Survival tools for expression-survival analysis.{}".format(
+                profile_id, expression_units, multi_sample_note
             ),
         }
         if duplicate_aliquot_warning is not None:
