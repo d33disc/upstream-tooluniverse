@@ -657,7 +657,18 @@ class CancerPrognosisTool(BaseTool):
         if duplicate_aliquot_warning is not None:
             result_data["duplicate_aliquot_warning"] = duplicate_aliquot_warning
 
-        return {"status": "success", "data": result_data}
+        # BUG-55A-006: add top-level truncated flag so callers immediately see the dataset
+        # is incomplete without parsing the note string.
+        response: Dict[str, Any] = {"status": "success", "data": result_data}
+        if len(values) > max_samples:
+            response["truncated"] = True
+            response["truncation_note"] = (
+                "Returning {ret} of {total} samples. Pass max_samples={total} "
+                "(up to 2000) to retrieve the full dataset.".format(
+                    ret=len(values[:max_samples]), total=len(values)
+                )
+            )
+        return response
 
     def _search_studies(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
