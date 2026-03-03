@@ -96,6 +96,39 @@ class GtoPdbRESTTool(BaseTool):
 
         return url
 
+    def _search_targets_by_abbreviation_variants(self, query: str, limit: int) -> list:
+        """BUG-44A-04: When name search returns results whose names don't contain the query
+        (e.g., 'PARP' → tankyrase via PARP5 synonym), also search for numbered variants
+        like PARP1, PARP2, PARP3 and merge results.
+
+        GtoPdb stores PARPs under full names ('poly(ADP-ribose) polymerase 1') but
+        the abbreviation field has 'PARP1'. The API name= parameter matches abbreviations,
+        so name=PARP1 finds the right target.
+        """
+        results = []
+        seen_ids: set = set()
+        from urllib.parse import urlencode
+
+        # Try numbered variants: PARP1, PARP2, ..., PARP9
+        for suffix in ("1", "2", "3", "4", "5", "6", "7", "8", "9"):
+            if len(results) >= limit:
+                break
+            candidate = f"{query}{suffix}"
+            try:
+                url = f"{self.base_url}/targets?{urlencode({'name': candidate})}"
+                response = request_with_retry(
+                    self.session, "GET", url, timeout=self.timeout, max_attempts=1
+                )
+                if response.status_code == 200:
+                    for t in response.json():
+                        tid = t.get("targetId")
+                        if tid and tid not in seen_ids:
+                            seen_ids.add(tid)
+                            results.append(t)
+            except Exception:
+                pass
+        return results[:limit]
+
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         url = None
         self._pending_ligand_id_filter = None  # BUG-38B-02: reset per call
@@ -170,6 +203,41 @@ class GtoPdbRESTTool(BaseTool):
                     "interactions; some targets may be absent. Search by target_id instead if you "
                     "know the GtoPdb target ID."
                 )
+
+            # BUG-44A-04: for target name searches, detect when returned target names
+            # don't contain the query string (meaning the match was via abbreviation/synonym,
+            # e.g. name=PARP matches tankyrase via its PARP5 synonym). In that case,
+            # also search for numbered variants (PARP1, PARP2, ...) and merge results.
+            query = arguments.get("query")
+            if (
+                query
+                and "/targets" in url
+                and "/targets/" not in url
+                and isinstance(data, list)
+            ):
+                q_lower = query.lower()
+                # Check if the query appears in any returned target name
+                names_contain_query = any(
+                    q_lower in t.get("name", "").lower() for t in data
+                )
+                if not names_contain_query and data:
+                    # The match was via synonym/abbreviation; try numbered variants
+                    extra = self._search_targets_by_abbreviation_variants(query, limit)
+                    if extra:
+                        existing_ids = {t.get("targetId") for t in data}
+                        new_targets = [
+                            t for t in extra if t.get("targetId") not in existing_ids
+                        ]
+                        if new_targets:
+                            data = new_targets + data  # put canonical matches first
+                            result["data"] = data
+                            result["count"] = len(data)
+                            result["note"] = (
+                                f"Searched for '{query}'. Results include targets with abbreviation "
+                                f"matching '{query}' (e.g., {data[0].get('name', '')}) as well as "
+                                f"targets matched via synonym. For kinase/enzyme families, try "
+                                f"searching with full gene symbols like '{query}1', '{query}2'."
+                            )
 
             # BUG-35A-02: add top-level queried_target summary for interactions endpoint
             # so users can immediately verify they're getting the right target's data

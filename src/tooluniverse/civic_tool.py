@@ -231,9 +231,12 @@ class CIViCTool(BaseTool):
                         filtered = filtered[:user_limit]
                     gene_data.get("variants", {})["nodes"] = filtered
                     # BUG-43A-04: when gene+query filter returns empty, add a helpful note.
-                    # CIViC stores fusions as molecular profiles (not gene variants).
+                    # BUG-44A-01: also provide gene-specific alternative query terms for
+                    # common oncology terms that CIViC names differently (e.g., "truncating"
+                    # → use "LOSS" or "Loss-of-function" for BRCA1/BRCA2 in CIViC).
                     if not filtered:
                         fusion_hint = ""
+                        alt_hint = ""
                         if "fusion" in q_lower:
                             fusion_hint = (
                                 f" CIViC stores fusion events as molecular profiles "
@@ -241,9 +244,32 @@ class CIViCTool(BaseTool):
                                 f"with molecular_profile='{gene_name}::PARTNER Fusion' "
                                 f"(e.g., '{gene_name}::BICC1 Fusion')."
                             )
+                        # Provide alternative query suggestions for common terms CIViC names differently
+                        _alt_suggestions: Dict[str, str] = {
+                            "truncat": "Try query='LOSS' or query='Loss-of-function' — CIViC uses these terms for truncating/LOF variants.",
+                            "loss of function": "Try query='LOSS' or query='Loss-of-function'.",
+                            "lof": "Try query='LOSS' or query='Loss-of-function'.",
+                            "amplif": "Try query='AMPLIFICATION'.",
+                            "delet": "Try query='DELETION' or query='LOSS'.",
+                            "overexpress": "Try query='OVEREXPRESSION'.",
+                            "missense": "Try query='V600E' or another specific amino acid change — CIViC indexes by specific variant names.",
+                        }
+                        for term, suggestion in _alt_suggestions.items():
+                            if term in q_lower:
+                                alt_hint = f" {suggestion}"
+                                break
+                        # Show available variant names to guide the user
+                        available_names = [v.get("name", "") for v in nodes[:10]]
+                        available_str = (
+                            f" Available {gene_name} variant names include: {', '.join(available_names[:8])}."
+                            if available_names
+                            else ""
+                        )
                         result["note"] = (
                             f"No variants found matching '{query_term}' in {gene_name}."
                             + fusion_hint
+                            + alt_hint
+                            + available_str
                         )
                 return result
 

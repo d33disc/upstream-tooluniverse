@@ -225,11 +225,33 @@ class SYNERGxDBTool(BaseTool):
 
         data = result["data"]
         if result.get("no_data") or not data:
+            # BUG-44A-03: distinguish "drug not in DB" vs "combo not tested" in the message
+            if drug_id_1 and drug_id_2:
+                msg = (
+                    f"No combination data found: drug IDs {drug_id_1} and {drug_id_2} were both "
+                    "found in SYNERGxDB but this specific combination was not tested together in "
+                    "any of the 9 integrated datasets (NCI-ALMANAC, MERCK, AstraZeneca, etc.). "
+                    "Try SYNERGxDB_search_combos with only one drug_id to see what combinations "
+                    "each drug has been tested in."
+                )
+            elif drug_id_1 or drug_id_2:
+                found_id = drug_id_1 or drug_id_2
+                msg = (
+                    f"No combination data found for drug ID {found_id} matching the specified "
+                    "filters. Try removing tissue/dataset filters or use SYNERGxDB_list_datasets "
+                    "to see available datasets for this drug."
+                )
+            else:
+                msg = (
+                    "No combination data found for the given parameters. "
+                    "SYNERGxDB covers cytotoxic chemotherapy combinations from 9 studies; "
+                    "use SYNERGxDB_list_drugs to verify drug availability."
+                )
             return {
                 "status": "success",
                 "data": [],
                 "count": 0,
-                "message": "No combination data found for the given parameters in SYNERGxDB.",
+                "message": msg,
             }
         return {
             "status": "success",

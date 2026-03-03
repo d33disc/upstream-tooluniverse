@@ -372,10 +372,15 @@ class CancerPrognosisTool(BaseTool):
             }
 
         # Get samples
+        # BUG-44A-02: max_samples is the desired *output* count, not the fetch limit.
+        # Not every sample has expression data for every gene (especially low-expressed genes
+        # or genes absent from array studies). Fetch up to 5x more samples than requested
+        # so we have enough raw data to fill the requested output size.
         max_samples = min(int(arguments.get("max_samples", 500)), 2000)
+        fetch_size = min(max(max_samples * 5, 500), 10000)
         samples = self._api_get(
             "/studies/{}/samples".format(study_id),
-            params={"projection": "ID", "pageSize": max_samples},
+            params={"projection": "ID", "pageSize": fetch_size},
         )
         if not samples:
             return {
