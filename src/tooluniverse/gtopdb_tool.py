@@ -206,11 +206,17 @@ class GtoPdbRESTTool(BaseTool):
         # BUG-62B-003: GtoPdb API does not honor approved=true/false on /targets or /ligands
         # endpoints — it returns the same full set regardless. Remove approved_only from
         # the arguments so it is NOT forwarded to the API (where it is silently ignored).
-        # We apply client-side filtering on interaction results where approvedDrug exists.
+        # We apply client-side filtering on interaction results by cross-referencing
+        # the approved ligands endpoint (/services/ligands?approved=true).
         _approved_only_requested = arguments.get("approved_only")
         if _approved_only_requested is not None:
             arguments = dict(arguments)
             arguments.pop("approved_only", None)
+
+        # BUG-63B-001: GtoPdb API silently ignores ligand_type= when combined with name=
+        # (e.g., ligand_type='Approved' + name='vemurafenib' returns all name matches,
+        # including non-approved compounds). Capture early for client-side post-filtering.
+        _ligand_type_requested = arguments.get("ligand_type")
 
         # BUG-46A-04: gene_symbol convenience parameter for GtoPdb_get_interactions.
         # Auto-resolve gene symbol → targetId so users don't need a separate
@@ -429,6 +435,47 @@ class GtoPdbRESTTool(BaseTool):
             if ligand_id_filter is not None and isinstance(data, list):
                 data = [x for x in data if x.get("ligandId") == ligand_id_filter]
 
+            # BUG-63A-001: approved_only for interactions must cross-reference the approved
+            # ligands endpoint. Interaction records do NOT have an 'approvedDrug' field;
+            # approval status lives on /services/ligands objects as the 'approved' boolean.
+            # BUG-63B-001: ligand_type= is silently ignored by GtoPdb API when name= is also
+            # present. Apply both filters client-side BEFORE computing total_available/limit.
+            _pre_approved_filter_count = len(data) if isinstance(data, list) else 0
+            if (
+                _approved_only_requested
+                and isinstance(data, list)
+                and "/interactions" in url
+            ):
+                try:
+                    approved_url = f"{self.base_url}/ligands?approved=true"
+                    approved_resp = request_with_retry(
+                        self.session,
+                        "GET",
+                        approved_url,
+                        timeout=self.timeout,
+                        max_attempts=2,
+                    )
+                    if approved_resp.status_code == 200:
+                        approved_ids = {
+                            lig.get("ligandId")
+                            for lig in approved_resp.json()
+                            if isinstance(lig, dict) and lig.get("approved")
+                        }
+                        data = [x for x in data if x.get("ligandId") in approved_ids]
+                except Exception:
+                    pass  # on API failure, keep all data unfiltered
+
+            if _ligand_type_requested and isinstance(data, list) and "/ligands" in url:
+                lt_lower = _ligand_type_requested.lower()
+                if lt_lower == "approved":
+                    # 'approved' is a boolean field on GtoPdb ligand records
+                    data = [x for x in data if x.get("approved") is True]
+                else:
+                    # Match structural type field (case-insensitive)
+                    data = [
+                        x for x in data if (x.get("type") or "").lower() == lt_lower
+                    ]
+
             # Apply limit if specified (max_results is an alias for limit)
             # BUG-47A-04: increased default from 20 to 50 — interaction-rich targets
             # like EGFR (90 interactions) would only show 22% of data at limit=20.
@@ -437,17 +484,6 @@ class GtoPdbRESTTool(BaseTool):
             if isinstance(data, list) and len(data) > limit:
                 data = data[:limit]
 
-            # BUG-62B-003: apply approved_only filter client-side on interaction results.
-            # GtoPdb interaction records have an 'approvedDrug' boolean field.
-            # For non-interaction endpoints (/targets, /ligands), warn that this filter is
-            # unsupported (GtoPdb API ignores approved= on those endpoints).
-            if _approved_only_requested and isinstance(data, list):
-                if "/interactions" in url:
-                    # Client-side filter: keep only interactions with approvedDrug=True
-                    data = [x for x in data if x.get("approvedDrug")]
-                else:
-                    pass  # warning added to result below
-
             result: Dict[str, Any] = {
                 "status": "success",
                 "data": data,
@@ -455,13 +491,13 @@ class GtoPdbRESTTool(BaseTool):
                 "count": len(data) if isinstance(data, list) else 1,
             }
 
-            # BUG-62B-003: for non-interaction endpoints, warn that approved_only is unsupported
+            # BUG-62B-003 / BUG-63B-001: for non-interaction endpoints, approved_only is not
+            # applicable. For ligand searches, use ligand_type='Approved' instead.
             if _approved_only_requested and "/interactions" not in url:
                 result["approved_only_note"] = (
-                    "Note: GtoPdb does not support server-side filtering by approval status "
-                    "on target or ligand search endpoints — all results are returned. "
-                    "For interaction queries (GtoPdb_get_interactions), approved_only=true "
-                    "filters results client-side using the 'approvedDrug' field."
+                    "Note: approved_only applies only to GtoPdb_get_interactions (filters by "
+                    "cross-referencing the GtoPdb approved ligands registry). For ligand "
+                    "searches, use ligand_type='Approved' instead to filter by approval status."
                 )
 
             # BUG-60A-003: disclose truncation so users know data was cut off
@@ -545,14 +581,26 @@ class GtoPdbRESTTool(BaseTool):
 
             _tid_match = _re_gtopdb.search(r"/targets/(\d+)/interactions", url)
             if _tid_match and isinstance(data, list) and len(data) == 0:
-                result["warning"] = (
-                    f"No interactions found for target_id={_tid_match.group(1)}. "
-                    "This may mean (a) the target has no pharmacological data in GtoPdb, "
-                    "OR (b) the target ID is invalid (GtoPdb returns an empty list for "
-                    "non-existent target IDs without an error). "
-                    "Verify the target exists using GtoPdb_search_targets(name='...') "
-                    "and confirm the returned targetId before calling get_interactions."
-                )
+                # BUG-63A-001: if approved_only filter cleared all results, give a specific
+                # explanation instead of the misleading "target may be invalid" warning.
+                if _approved_only_requested and _pre_approved_filter_count > 0:
+                    result["approved_only_info"] = (
+                        f"approved_only=True filtered all {_pre_approved_filter_count} "
+                        f"interaction(s) for this target. GtoPdb interaction data focuses on "
+                        "pharmacological research compounds with measured affinity — approved "
+                        "drugs are rarely listed here. For approved drug-target interactions, "
+                        "use ChEMBL_get_drug_mechanisms or ChEMBL_search_compounds with the "
+                        "target gene name."
+                    )
+                else:
+                    result["warning"] = (
+                        f"No interactions found for target_id={_tid_match.group(1)}. "
+                        "This may mean (a) the target has no pharmacological data in GtoPdb, "
+                        "OR (b) the target ID is invalid (GtoPdb returns an empty list for "
+                        "non-existent target IDs without an error). "
+                        "Verify the target exists using GtoPdb_search_targets(name='...') "
+                        "and confirm the returned targetId before calling get_interactions."
+                    )
 
             # BUG-35A-02: add top-level queried_target summary for interactions endpoint
             # so users can immediately verify they're getting the right target's data

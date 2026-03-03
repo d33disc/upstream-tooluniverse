@@ -453,6 +453,9 @@ class CIViCTool(BaseTool):
         # BUG-53B-002: CIViC therapy names are case-sensitive (stored as Title Case, e.g.,
         # "Erdafitinib" not "erdafitinib"). Auto-normalize to Title Case when the input is
         # entirely lowercase or uppercase, to avoid silent empty results from case mismatches.
+        # BUG-63B-002: CIViC status uses a strict GraphQL enum (ACCEPTED, SUBMITTED, etc.)
+        # that requires uppercase. Normalize status to uppercase to prevent enum validation
+        # errors when users pass lowercase/mixed-case values like "accepted".
         if tool_name == "civic_search_evidence_items":
             therapy = arguments.get("therapy")
             if therapy and isinstance(therapy, str):
@@ -460,6 +463,14 @@ class CIViCTool(BaseTool):
                     _therapy_normalized_from = therapy
                     arguments = dict(arguments)
                     arguments["therapy"] = therapy.title()
+            status_val = arguments.get("status")
+            if (
+                status_val
+                and isinstance(status_val, str)
+                and status_val != status_val.upper()
+            ):
+                arguments = dict(arguments)
+                arguments["status"] = status_val.upper()
 
         # BUG-55B-005: CIViC uses double-colon notation for fusion molecular profiles
         # (e.g., "BCR::ABL1 Fusion", "EML4::ALK Fusion"). Users often write hyphenated
@@ -552,6 +563,36 @@ class CIViCTool(BaseTool):
             if tool_name == "civic_search_evidence_items":
                 mol_profile = arguments.get("molecular_profile")
                 disease = arguments.get("disease") or arguments.get("disease_name")
+
+                # BUG-63B-002: CIViC GraphQL uses substring/contains matching for
+                # molecularProfileName — compound profiles like "BRAF V600E OR KIAA1549::BRAF
+                # Fusion" are returned when filtering for "BRAF V600E" because the substring
+                # matches. Disclose non-exact matches so users can confirm relevance.
+                if mol_profile:
+                    _ev_nodes_exact_check = (
+                        result.get("data", {}).get("evidenceItems", {}).get("nodes", [])
+                    )
+                    if _ev_nodes_exact_check:
+                        _mp_lower = mol_profile.lower()
+                        _non_exact_profiles = [
+                            node.get("molecularProfile", {}).get("name", "")
+                            for node in _ev_nodes_exact_check
+                            if node.get("molecularProfile", {}).get("name", "").lower()
+                            != _mp_lower
+                            and node.get("molecularProfile", {}).get("name", "")
+                        ]
+                        if _non_exact_profiles:
+                            _unique_non_exact = sorted(set(_non_exact_profiles))[:3]
+                            result["molecular_profile_match_note"] = (
+                                f"CIViC uses substring/contains matching for molecular_profile "
+                                f"— results include any profile whose name contains "
+                                f"'{mol_profile}' as a substring, not only exact matches. "
+                                f"Non-exact profiles in these results: "
+                                + ", ".join(f"'{p}'" for p in _unique_non_exact)
+                                + ". Review the molecularProfile.name field in each result to "
+                                "confirm clinical relevance."
+                            )
+
                 # BUG-57A-005: fire when ANY disease filter is set (not just mol_profile+disease)
                 if disease:
                     evidence_nodes = (
