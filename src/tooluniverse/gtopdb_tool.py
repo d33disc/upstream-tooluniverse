@@ -521,8 +521,8 @@ class GtoPdbRESTTool(BaseTool):
                     )
                     result["coverage_note"] = (
                         "GtoPdb interactions list pharmacological research compounds — approved "
-                        "drugs for this target may not be represented. For approved drugs and "
-                        "clinical compounds, use ChEMBL_get_drug_mechanisms or "
+                        "drugs for this target are not represented in these results. For approved "
+                        "drugs and clinical compounds, use ChEMBL_get_drug_mechanisms or "
                         f"ChEMBL_search_compounds with target_name='{_chembl_target}'."
                     )
 
