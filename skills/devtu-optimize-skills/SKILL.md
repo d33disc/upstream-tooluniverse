@@ -16,6 +16,22 @@ Apply when:
 - Skill produces process-heavy instead of content-heavy output
 - Tools are failing silently or returning empty results
 
+## Tool Quality Standards
+
+These principles apply when evaluating or improving the underlying tool implementations (not just the skill layer):
+
+1. **Error messages must be actionable** — tell the user *what* went wrong AND *what to do*. Not "Not found" but "Cancer type 'CLL' is not a TCGA type. Use one of: [BRCA, LUAD, ...]. For CLL data, try `CancerPrognosis_search_studies(keyword='CLL')`."
+
+2. **Schema must match API reality** — `return_schema` field names must match actual API response fields. Run `python3 -m tooluniverse.cli run <Tool> '<json>'` and compare field names against the schema before publishing.
+
+3. **Coverage transparency** — descriptions must state what data is NOT included, not just what is. If a tool only covers TCGA cancer types, say so explicitly in the description.
+
+4. **Input validation before API calls** — validate cancer names, gene symbols, drug names at input. Don't silently send invalid values to the API and return empty results.
+
+5. **Cross-tool routing** — when a query is out-of-scope, the error message should name the correct tool to use instead.
+
+6. **No silent parameter dropping** — if a parameter is ignored or unsupported, the response must say so. Never silently discard a user-supplied filter.
+
 ## Core Optimization Principles
 
 ### 1. Tool Interface Verification (Pre-flight Check)

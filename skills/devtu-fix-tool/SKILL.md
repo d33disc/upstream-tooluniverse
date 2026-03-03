@@ -7,6 +7,32 @@ description: Fix failing ToolUniverse tools by diagnosing test failures, identif
 
 Diagnose and fix failing ToolUniverse tools through systematic error identification, targeted fixes, and validation.
 
+## First Principles for Bug Fixes
+
+Before writing any fix, ask: **why does the user reach this failure state?**
+
+1. **Prevent, don't recover** — fix the root cause so the failure can't happen, rather than adding hint text after it does
+2. **Validate at input, not at output** — wrong parameters, unknown disease names, unsupported drugs should be caught and rejected early with clear guidance, not discovered after a silent API call
+3. **Don't mask silent mutations** — if input is auto-normalized (fusion notation, Title Case), either accept both forms natively OR reject with explicit guidance; never silently transform and hide it
+4. **Distinguish "no data" from "bad query"** — zero results because the filter is wrong is different from zero results because the data doesn't exist; the response must distinguish these clearly
+5. **Fix the abstraction, not the instance** — if a parameter name is inconsistent, fix the interface; don't add an alias list that grows forever
+
+**Anti-patterns to avoid:**
+- Adding hint text to zero-result messages instead of validating upfront
+- Adding parameter aliases instead of fixing naming consistency
+- Post-hoc probing to rescue a failed query instead of pre-validating
+
+## Bug Verification (CRITICAL)
+
+Before implementing any bug report, **verify it via CLI first**:
+```bash
+python3 -m tooluniverse.cli run <ToolName> '<json_args>'
+```
+
+Many agent-reported bugs are false positives caused by MCP interface confusion. Always confirm the bug is reproducible before implementing a fix.
+
+---
+
 ## Instructions
 
 When fixing a failing tool:
