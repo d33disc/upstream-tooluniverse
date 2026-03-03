@@ -1062,13 +1062,14 @@ class TestRun:
 
     @pytest.mark.unit
     def test_run_nonexistent_tool_returns_error_json(self, monkeypatch, tu, capsys):
-        """Running a nonexistent tool prints JSON with error and exits 1."""
+        """Running a nonexistent tool prints JSON with error and exits 1 (--json mode)."""
         import tooluniverse.cli as m
         from tooluniverse.cli import cmd_run
 
         monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        # BUG-23B-02: human mode now routes errors to stderr; use --json for machine JSON
         with pytest.raises(SystemExit) as exc_info:
-            cmd_run(_args(tool_name="ZZZNOMATCH_TOOL_99999", arguments=["{}"] ))
+            cmd_run(_args(tool_name="ZZZNOMATCH_TOOL_99999", arguments=["{}"], json=True))
         assert exc_info.value.code == 1
         out = capsys.readouterr().out
         d = _j(out)
@@ -1095,13 +1096,14 @@ class TestRun:
 
     @pytest.mark.unit
     def test_run_json_array_returns_error(self, monkeypatch, tu, capsys):
-        """JSON array as arguments is rejected by execute_tool: prints error JSON, exits 1."""
+        """JSON array as arguments is rejected; in --json mode, error JSON goes to stdout."""
         import tooluniverse.cli as m
         from tooluniverse.cli import cmd_run
 
         monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        # BUG-23B-02: human mode routes errors to stderr; use --json for machine JSON
         with pytest.raises(SystemExit) as exc_info:
-            cmd_run(_args(tool_name="list_tools", arguments=["[1, 2, 3]"]))
+            cmd_run(_args(tool_name="list_tools", arguments=["[1, 2, 3]"], json=True))
         assert exc_info.value.code == 1
         out = capsys.readouterr().out
         d = _j(out)
@@ -4804,3 +4806,158 @@ class TestRound23BFixes:
         # Should explain --categories requires names and fall back
         assert "--categories" in err
         assert "category" in err.lower()
+
+
+class TestRound23BRemainingFixes:
+    """Tests for BUG-23B-02, 23B-06, 23B-08, 23B-10 fixes."""
+
+    # BUG-23B-02: tu run validation error should be human-friendly (not 77-line JSON)
+
+    @pytest.mark.unit
+    def test_render_run_error_is_short(self):
+        """BUG-23B-02: _render_run shows a short error summary, not full nested JSON."""
+        from tooluniverse.cli import _render_run
+
+        result = {
+            "status": "error",
+            "error": "Parameter validation failed for 'root': 'compound_id' is a required property",
+            "error_details": {
+                "type": "ToolValidationError",
+                "message": "...",
+                "retriable": False,
+                "next_steps": ["Check parameter types", "Review documentation"],
+                "details": {
+                    "validation_error": "'compound_id' is a required property\n\nFailed validating 'required' in schema:\n    {'type': 'object', ...}",
+                },
+            },
+        }
+        rendered = _render_run(result)
+        # Should NOT include the jsonschema dump
+        assert "Failed validating" not in rendered
+        assert "schema:" not in rendered
+        # Should include the key error message
+        assert "compound_id" in rendered
+        # Should be short (under 300 chars)
+        assert len(rendered) < 300
+
+    @pytest.mark.unit
+    def test_render_run_success_returns_json(self):
+        """BUG-23B-02: _render_run passes through success results as JSON."""
+        from tooluniverse.cli import _render_run
+        import json
+
+        result = {"status": "success", "data": {"foo": "bar"}}
+        rendered = _render_run(result)
+        # Should be valid JSON
+        parsed = json.loads(rendered)
+        assert parsed["status"] == "success"
+
+    @pytest.mark.unit
+    def test_render_run_shows_next_steps(self):
+        """BUG-23B-02: _render_run includes next_steps as Tips when present."""
+        from tooluniverse.cli import _render_run
+
+        result = {
+            "status": "error",
+            "error": "Missing required param",
+            "error_details": {
+                "next_steps": ["Check param types", "Review docs"],
+            },
+        }
+        rendered = _render_run(result)
+        assert "Tips:" in rendered
+        assert "Check param types" in rendered
+
+    # BUG-23B-06: circuit plugin warning should not appear on every invocation
+
+    @pytest.mark.unit
+    def test_plugin_missing_env_is_debug_not_warning(self, caplog):
+        """BUG-23B-06: _read_profile_yaml logs missing plugin env at DEBUG, not WARNING."""
+        import logging
+        from tooluniverse.tool_registry import _read_profile_yaml
+        import tempfile, yaml, os
+
+        # Create a temp plugin dir with a profile.yaml requiring a fake env var
+        with tempfile.TemporaryDirectory() as tmp:
+            profile = {"required_env": ["FAKE_NONEXISTENT_TOOLUNIVERSE_VAR_XYZ123"]}
+            with open(os.path.join(tmp, "profile.yaml"), "w") as f:
+                yaml.dump(profile, f)
+
+            with caplog.at_level(logging.DEBUG, logger="ToolRegistry"):
+                _read_profile_yaml(tmp, context="test plugin")
+
+        # Check that no WARNING (or higher) was emitted about the missing env var
+        warning_records = [
+            r for r in caplog.records
+            if r.levelno >= logging.WARNING and "FAKE_NONEXISTENT" in r.message
+        ]
+        assert not warning_records, (
+            f"Expected DEBUG for missing env, got WARNING: {warning_records}"
+        )
+
+    # BUG-23B-08: no next-step hints after tu list
+
+    @pytest.mark.unit
+    def test_render_list_categories_shows_next_steps(self, tu):
+        """BUG-23B-08: categories view includes actionable next-step hint."""
+        from tooluniverse.cli import _render_list
+
+        d = {
+            "categories": {"uniprot": 10, "kegg": 5},
+            "total_categories": 2,
+            "total_tools": 15,
+        }
+        rendered = _render_list(d)
+        assert "tu grep" in rendered
+        assert "tu list --categories" in rendered
+
+    # BUG-23B-10: multi-word grep without quotes should suggest quoting
+
+    @pytest.mark.unit
+    def test_cmd_grep_multiword_joins_and_warns(self, tu, capsys):
+        """BUG-23B-10: passing multiple words to grep joins them and prints quoting hint."""
+        import argparse
+        from tooluniverse.cli import cmd_grep
+        import unittest.mock as mock
+
+        args = argparse.Namespace(
+            pattern=["chip", "seq"],  # multi-word from nargs="+"
+            field="name",
+            search_mode="text",
+            limit=5,
+            offset=0,
+            categories=None,
+            raw=False,
+            json=False,
+        )
+        with mock.patch("tooluniverse.cli._get_tu", return_value=tu):
+            cmd_grep(args)
+        _out, err = capsys.readouterr()
+        # The hint about quoting should appear
+        assert "quote" in err.lower() or "quotes" in err.lower() or "tu grep" in err
+        # The joined pattern should be used
+        assert "chip seq" in err or "chip_seq" in _out or "chip" in _out + err
+
+    @pytest.mark.unit
+    def test_cmd_grep_singleword_no_join_warning(self, tu, capsys):
+        """BUG-23B-10: single-word grep (list with one item) shows no quoting warning."""
+        import argparse
+        from tooluniverse.cli import cmd_grep
+        import unittest.mock as mock
+
+        args = argparse.Namespace(
+            pattern=["protein"],  # single item list from nargs="+"
+            field="name",
+            search_mode="text",
+            limit=5,
+            offset=0,
+            categories=None,
+            raw=False,
+            json=False,
+        )
+        with mock.patch("tooluniverse.cli._get_tu", return_value=tu):
+            cmd_grep(args)
+        _out, err = capsys.readouterr()
+        # No quoting hint for single word
+        assert "multi-word" not in err
+        assert "quotes" not in err.lower()

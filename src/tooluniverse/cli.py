@@ -125,6 +125,11 @@ def _render_list(d: dict) -> str:
             lines.append(f"{cat:<{col1}}  {cnt:>5}")
         total = sum(cats.values())
         lines.append(f"\n{len(cats)} categories · {total} tools")
+        # BUG-23B-08: add actionable next-step hints after the categories overview
+        lines.append(
+            "Next: `tu grep <term>` to search, `tu list --categories <name>` to filter, "
+            "`tu find '<query>'` for natural-language search"
+        )
         return "\n".join(lines)
 
     # by_category mode: section per category with indented tool names
@@ -435,6 +440,29 @@ def _render_info(d: dict) -> str:
         if ret_desc:
             lines.append(f"\n  Returns: {ret_desc}")
 
+    return "\n".join(lines)
+
+
+def _render_run(d: dict) -> str:
+    """BUG-23B-02: human-friendly renderer for `tu run` errors.
+
+    For error results, emits a short summary instead of the full 77-line JSON
+    dump (which buries the actionable message in jsonschema noise).
+    For success, falls back to pretty JSON (tool data has no fixed schema).
+    """
+    if not isinstance(d, dict):
+        return str(d)
+    if d.get("status") != "error" and "error" not in d:
+        return json.dumps(d, indent=2, ensure_ascii=False)
+    # Short, actionable error summary
+    short_err = d.get("error", "unknown error")
+    lines = [f"Error: {short_err}"]
+    details = d.get("error_details") or {}
+    next_steps = details.get("next_steps") or []
+    if next_steps:
+        lines.append("Tips:")
+        for step in next_steps:
+            lines.append(f"  • {step}")
     return "\n".join(lines)
 
 
@@ -782,6 +810,17 @@ def cmd_list(args: argparse.Namespace) -> None:
 
 
 def cmd_grep(args: argparse.Namespace) -> None:
+    # BUG-23B-10: pattern is now nargs="+" so it may be a list of words.
+    # Join them and warn the user so they learn the quoting idiom.
+    if isinstance(args.pattern, list):
+        if len(args.pattern) > 1:
+            joined = " ".join(args.pattern)
+            print(
+                f"Note: multi-word grep — treating as '{joined}'. "
+                f"Use quotes to avoid this message: tu grep '{joined}'",
+                file=sys.stderr,
+            )
+        args.pattern = " ".join(args.pattern)
     # BUG-R10A-04: validate non-empty pattern before hitting the internal API
     if not args.pattern or not args.pattern.strip():
         if args.json or args.raw:
@@ -1024,8 +1063,9 @@ def cmd_run(args: argparse.Namespace) -> None:
                 ),
             }
         )
-    # cmd_run: always JSON output (result is tool-specific data, no render_fn)
-    _print_result(result, args, render_fn=None)
+    # BUG-23B-02: use _render_run so human mode gets a concise error summary;
+    # --json / --raw still get the full JSON blob.
+    _print_result(result, args, render_fn=_render_run)
     # Exit non-zero when the tool reported an error (check both status field and
     # the presence of an "error" key to catch tool-layer errors that lack "status")
     if isinstance(result, dict) and (
@@ -1525,7 +1565,13 @@ def main() -> None:
             "  tu grep drug --field description --limit 20\n"
         ),
     )
-    p.add_argument("pattern", help="Search pattern")
+    # BUG-23B-10: nargs="+" captures multi-word input (e.g. `tu grep chip seq`).
+    # cmd_grep joins the words and shows a quoting hint so the user learns the idiom.
+    p.add_argument(
+        "pattern",
+        nargs="+",
+        help="Search pattern (quote multi-word: tu grep 'chip seq')",
+    )
     p.add_argument(
         "--field",
         default="name",

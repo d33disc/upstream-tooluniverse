@@ -65,7 +65,7 @@ def register_tool(tool_type_name=None, config=None):
         name = tool_type_name or cls.__name__
         _tool_registry[name] = cls
 
-        if config:
+        if config is not None:
             # Add MCP annotations to config if it's a dict
             if isinstance(config, dict):
                 from .tool_defaults import add_annotations_to_tool_config
@@ -161,7 +161,9 @@ def clear_lazy_cache():
         tu.refresh_tools()
     """
     _lazy_cache.clear()
-    logger.debug("Lazy import cache cleared; built-in tool modules will be re-imported on next access.")
+    logger.debug(
+        "Lazy import cache cleared; built-in tool modules will be re-imported on next access."
+    )
 
 
 def lazy_import_tool(tool_name):
@@ -316,15 +318,20 @@ def _discover_from_ast():
                                         continue
                                     func = decorator.func
                                     is_register_tool = (
-                                        (isinstance(func, ast.Name) and func.id == "register_tool")
-                                        or (isinstance(func, ast.Attribute) and func.attr == "register_tool")
+                                        isinstance(func, ast.Name)
+                                        and func.id == "register_tool"
+                                    ) or (
+                                        isinstance(func, ast.Attribute)
+                                        and func.attr == "register_tool"
                                     )
                                     if not is_register_tool:
                                         continue
                                     has_registered_alias = True
                                     if decorator.args:
                                         arg = decorator.args[0]
-                                        if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                                        if isinstance(arg, ast.Constant) and isinstance(
+                                            arg.value, str
+                                        ):
                                             mapping[arg.value] = module_name
 
                                 if has_registered_alias or is_explicit_tool_file:
@@ -432,15 +439,13 @@ def _read_profile_yaml(directory, context: str = "") -> dict:
     if label:
         logger.info(f"Tool pack loaded: {label} ({context})")
 
-    missing = [
-        var
-        for var in config.get("required_env", [])
-        if not os.environ.get(var)
-    ]
+    missing = [var for var in config.get("required_env", []) if not os.environ.get(var)]
     if missing:
-        logger.warning(
-            f"{context} requires env var(s) not set: {', '.join(missing)}"
-        )
+        # BUG-23B-06: downgrade to DEBUG so the circuit/plugin env-var notice
+        # does not spam every `tu` invocation (including `tu --help`).
+        # The tools affected are already excluded from the loaded registry;
+        # a summary INFO-level message is emitted by execute_function.py.
+        logger.debug(f"{context} requires env var(s) not set: {', '.join(missing)}")
 
     return config
 
@@ -453,7 +458,9 @@ def reset_plugin_discovery():
     ``_discover_entry_point_plugins()`` to pick it up without restarting.
     """
     _discovered_plugin_names.clear()
-    logger.debug("Plugin discovery cache cleared; next scan will re-discover all plugins.")
+    logger.debug(
+        "Plugin discovery cache cleared; next scan will re-discover all plugins."
+    )
 
 
 def _discover_entry_point_plugins(force: bool = False):
