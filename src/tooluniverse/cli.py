@@ -242,7 +242,14 @@ def _render_grep(d: dict) -> str:
     for t in tools:
         lines.append(f"{t.get('name', ''):<{col1}}  {_trunc(t.get('description', ''))}")
     has_more = d.get("has_more", False)
-    more_hint = "  (use --offset to page)" if has_more else ""
+    offset = d.get("offset", 0)
+    if has_more:
+        more_hint = "  (use --offset to page)"
+    elif offset and tools:
+        # BUG-R17B-07: signal "end of results" when paging lands on the last page
+        more_hint = "  (end of results)"
+    else:
+        more_hint = ""
     lines.append(f"\n{len(tools)} of {total} matches{more_hint}")
     return "\n".join(lines)
 
@@ -284,7 +291,14 @@ def _render_find(d: dict) -> str:
         )
     total = d.get("total_matches", len(tools))
     has_more = d.get("has_more", total > len(tools))
-    more_hint = "  (use --offset to page)" if has_more else ""
+    offset = d.get("offset", 0)
+    if has_more:
+        more_hint = "  (use --offset to page)"
+    elif offset and tools:
+        # BUG-R17B-07: signal "end of results" when paging lands on the last page
+        more_hint = "  (end of results)"
+    else:
+        more_hint = ""
     lines.append(f"\n{len(tools)} of {total} results{more_hint}")
     return "\n".join(lines)
 
@@ -764,12 +778,14 @@ def cmd_info(args: argparse.Namespace) -> None:
         tu = _get_tu()
         # BUG-R11B-01: always pass as list so JSON response is always {"tools": [...]}
         # rather than a flat dict for single-tool requests.
+        # BUG-R17B-02: "brief" is the user-facing alias for the API's "description" level.
+        detail_level = "description" if args.detail == "brief" else args.detail
         result = tu.run_one_function(
             {
                 "name": "get_tool_info",
                 "arguments": {
                     "tool_names": args.tool_names,
-                    "detail_level": args.detail,
+                    "detail_level": detail_level,
                 },
             }
         )
@@ -1428,7 +1444,7 @@ def main() -> None:
         epilog=(
             "Examples:\n"
             "  tu info UniProt_get_entry_by_accession\n"
-            "  tu info UniProt_get_entry_by_accession --detail description\n"
+            "  tu info UniProt_get_entry_by_accession --detail brief\n"
             "  tu info UniProt_get_entry_by_accession ChEMBL_get_molecule\n"
         ),
     )
@@ -1436,8 +1452,14 @@ def main() -> None:
     p.add_argument(
         "--detail",
         default="full",
-        choices=["description", "full"],
-        help="'description' for summary only; 'full' for complete schema (default: full)",
+        choices=["brief", "description", "full"],
+        # BUG-R17B-02: 'description' is confusingly named — it means "description only"
+        # (strips parameters/examples). 'brief' is an alias added as the clearer name.
+        # 'full' (default) returns everything: description, parameters, examples.
+        help=(
+            "'full' (default) shows all info: description, parameters, examples; "
+            "'brief' (or 'description') shows description text only — no parameters"
+        ),
     )
     p.set_defaults(func=cmd_info)
 

@@ -3825,3 +3825,95 @@ class TestRound16Fixes:
         # total_matches may be 0 or some number depending on tokenization —
         # the key assertion is that we got a valid JSON response with exit 0
         assert "total_matches" in d
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Round 17 bug fixes
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestRound17Fixes:
+    """Tests covering bug fixes from Round 17 simulation agents."""
+
+    # R17B-02: --detail brief alias works (synonym for description)
+    @pytest.mark.unit
+    def test_info_brief_detail_is_alias_for_description(self, monkeypatch, tu, capsys):
+        """R17B-02: --detail brief is an alias for --detail description (description-only mode)."""
+        from tooluniverse.cli import cmd_info
+
+        out_brief, _ = _run(monkeypatch, cmd_info,
+                            _args(tool_names=["list_tools"], detail="brief", json=True),
+                            tu, capsys)
+        out_desc, _ = _run(monkeypatch, cmd_info,
+                           _args(tool_names=["list_tools"], detail="description", json=True),
+                           tu, capsys)
+        d_brief = _j(out_brief)
+        d_desc = _j(out_desc)
+        # Both modes return description-only (no parameters)
+        assert "parameter" not in d_brief["tools"][0]
+        assert "parameter" not in d_desc["tools"][0]
+        assert d_brief["tools"][0]["description"] == d_desc["tools"][0]["description"]
+
+    @pytest.mark.unit
+    def test_info_brief_detail_no_parameter_key(self, monkeypatch, tu, capsys):
+        """R17B-02: --detail brief shows description only, no parameters."""
+        from tooluniverse.cli import cmd_info
+
+        out, _ = _run(monkeypatch, cmd_info,
+                      _args(tool_names=["list_tools"], detail="brief", json=True),
+                      tu, capsys)
+        d = _j(out)
+        tool = d["tools"][0]
+        assert tool["name"] == "list_tools"
+        assert "description" in tool
+        assert "parameter" not in tool
+        assert "parameters" not in tool
+
+    # R17B-07: last page shows "end of results" in plain-text render
+    @pytest.mark.unit
+    def test_render_find_last_page_shows_end_of_results(self):
+        """R17B-07: _render_find shows 'end of results' on last non-empty paginated page."""
+        from tooluniverse.cli import _render_find
+
+        d = {
+            "tools": [{"name": "T1", "description": "d1", "relevance_score": 0.9}],
+            "total_matches": 57,
+            "limit": 3,
+            "offset": 54,
+            "has_more": False,
+        }
+        result = _render_find(d)
+        assert "end of results" in result
+        assert "use --offset" not in result
+
+    @pytest.mark.unit
+    def test_render_find_first_page_no_end_of_results(self):
+        """R17B-07: _render_find does NOT show 'end of results' on page 1 (no offset)."""
+        from tooluniverse.cli import _render_find
+
+        d = {
+            "tools": [{"name": "T1", "description": "d1", "relevance_score": 0.9}],
+            "total_matches": 57,
+            "limit": 3,
+            "offset": 0,
+            "has_more": True,
+        }
+        result = _render_find(d)
+        assert "end of results" not in result
+        assert "use --offset" in result
+
+    @pytest.mark.unit
+    def test_render_grep_last_page_shows_end_of_results(self):
+        """R17B-07: _render_grep shows 'end of results' on last non-empty paginated page."""
+        from tooluniverse.cli import _render_grep
+
+        d = {
+            "tools": [{"name": "ToolA", "description": "desc A"}],
+            "total_matches": 10,
+            "limit": 5,
+            "offset": 5,
+            "has_more": False,
+        }
+        result = _render_grep(d)
+        assert "end of results" in result
+        assert "use --offset" not in result
