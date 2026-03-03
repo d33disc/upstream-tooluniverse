@@ -417,6 +417,32 @@ class CancerPrognosisTool(BaseTool):
             }
             dfs_records.append(rec)
 
+        # BUG-60A-005: detect when study uses non-standard survival attribute names.
+        # Consortium studies (CPTAC, ICGC, etc.) often store survival data under
+        # different field names — the tool silently returns 0 patients in that case.
+        nonstandard_warning = ""
+        if len(all_patients) == 0 and data:
+            present_attrs = {rec.get("clinicalAttributeId", "") for rec in data}
+            _survival_indicators = {
+                "VITAL_STATUS",
+                "OVERALL_SURVIVAL",
+                "SURVIVAL_STATUS",
+                "PATH_DIAG_TO_DEATH_DAYS",
+                "PATH_DIAG_TO_LAST_CONTACT_DAYS",
+                "DAYS_TO_DEATH",
+                "DAYS_TO_LAST_FOLLOWUP",
+                "DAYS_TO_LAST_CONTACT",
+            }
+            found = sorted(_survival_indicators & present_attrs)
+            if found:
+                nonstandard_warning = (
+                    " WARNING: This study has {} clinical records but no standard"
+                    " OS_MONTHS/OS_STATUS fields. It uses non-standard survival"
+                    " attributes ({}) that this tool does not currently support."
+                    " Use CancerPrognosis_search_studies to verify study content,"
+                    " or query the cBioPortal API directly for this study."
+                ).format(len(data), ", ".join(found))
+
         # BUG-47B-01: detect possible truncation — clinical data API returns a single page.
         # If we retrieved exactly 10,000 records total, there may be more data in the study.
         truncation_warning = (
@@ -448,7 +474,8 @@ class CancerPrognosisTool(BaseTool):
                     "patients": dfs_records,
                 },
                 "note": "Use Survival_kaplan_meier or Survival_log_rank_test tools for analysis of this data."
-                + truncation_warning,
+                + truncation_warning
+                + nonstandard_warning,
             },
         }
 
