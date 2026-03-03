@@ -152,6 +152,14 @@
           "type": "string",
           "description": "Gene symbol (e.g., 'TP53', 'BRCA1', 'EGFR', 'CD8A')"
         },
+        "gene_symbol": {
+          "type": "string",
+          "description": "Alias for gene. Gene symbol (e.g., 'TP53', 'BRCA1', 'EGFR')."
+        },
+        "gene_name": {
+          "type": "string",
+          "description": "Alias for gene. Gene symbol or name (e.g., 'TP53', 'BRCA1')."
+        },
         "max_samples": {
           "type": [
             "integer",
@@ -160,9 +168,7 @@
           "description": "Upper bound on sample records to return (default 500, max 2000). Actual count may be lower if some samples lack expression data for the requested gene."
         }
       },
-      "required": [
-        "gene"
-      ]
+      "required": []
     },
     "return_schema": {
       "oneOf": [

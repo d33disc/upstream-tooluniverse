@@ -163,6 +163,27 @@ class GtoPdbRESTTool(BaseTool):
                             if (t.get("abbreviation") or "").upper() == gene_upper:
                                 target_id = t["targetId"]
                                 break
+                        # BUG-48A-05: before falling back to targets[0], try prefix match.
+                        # e.g., gene_symbol="ABL1", abbreviation="Abl" →
+                        # "abl1".startswith("abl") with rest "1" being a digit → ABL1 selected.
+                        # This prevents "ABL1" from silently returning ABL2 (abbr "Arg").
+                        if target_id is None:
+                            gene_lower = gene_symbol.lower()
+                            best_match = None
+                            best_len = 0
+                            for t in targets:
+                                abbr = (t.get("abbreviation") or "").lower()
+                                if (
+                                    abbr
+                                    and gene_lower.startswith(abbr)
+                                    and len(abbr) > best_len
+                                ):
+                                    rest = gene_lower[len(abbr) :]
+                                    if rest == "" or rest.isdigit():
+                                        best_match = t["targetId"]
+                                        best_len = len(abbr)
+                            if best_match is not None:
+                                target_id = best_match
                         if target_id is None:
                             target_id = targets[0]["targetId"]
                         arguments = dict(arguments)

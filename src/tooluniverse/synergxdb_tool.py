@@ -137,8 +137,9 @@ class SYNERGxDBTool(BaseTool):
 
     # BUG-46B-05: Map common tissue aliases to SYNERGxDB tissue column values.
     # Valid SYNERGxDB tissue names: "colorectal", "blood", "breast", "lung", "ovary",
-    # "skin", "CNS", "prostate", "kidney", "pancreas", "gastric", "melanoma".
+    # "skin", "CNS", "prostate", "kidney", "pancreas", "gastric".
     # "colon" silently returns 0 results — must be "colorectal".
+    # "melanoma" silently returns 0 results — must be "skin" (BUG-48B-07).
     _TISSUE_ALIASES: Dict[str, str] = {
         "colon": "colorectal",
         "rectal": "colorectal",
@@ -150,6 +151,10 @@ class SYNERGxDBTool(BaseTool):
         "nsclc": "lung",
         "luad": "lung",
         "brca": "breast",
+        "melanoma": "skin",  # BUG-48B-07: SYNERGxDB uses "skin" not "melanoma"
+        "gbm": "CNS",
+        "glioblastoma": "CNS",
+        "glioma": "CNS",
     }
 
     # BUG-45A-03: SYNERGxDB stores some drugs under IUPAC/chemical names instead of

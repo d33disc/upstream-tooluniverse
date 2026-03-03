@@ -299,6 +299,25 @@ class CIViCTool(BaseTool):
                     if user_limit:
                         filtered = filtered[:user_limit]
                     gene_data.get("variants", {})["nodes"] = filtered
+                    # BUG-48B-02: recompute duplicate names among filtered results only.
+                    # The metadata.note from _get_variants_for_gene_id cites duplicates from ALL
+                    # gene variants; after filtering, only filtered duplicates are relevant.
+                    if "metadata" in result:
+                        filtered_name_count: Dict[str, int] = {}
+                        for v in filtered:
+                            n = v.get("name", "")
+                            filtered_name_count[n] = filtered_name_count.get(n, 0) + 1
+                        filtered_dups = [
+                            n for n, c in filtered_name_count.items() if c > 1
+                        ]
+                        if filtered_dups:
+                            result["metadata"]["note"] = (
+                                f"Multiple distinct CIViC variant records share the same name(s): "
+                                f"{', '.join(filtered_dups[:5])}. These are separate entries — "
+                                f"use the variant ID to distinguish them."
+                            )
+                        else:
+                            result["metadata"].pop("note", None)
                     # BUG-43A-04: when gene+query filter returns empty, add a helpful note.
                     # BUG-44A-01: also provide gene-specific alternative query terms for
                     # common oncology terms that CIViC names differently (e.g., "truncating"
