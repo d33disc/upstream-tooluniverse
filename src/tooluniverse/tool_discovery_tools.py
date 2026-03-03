@@ -299,6 +299,11 @@ class ListToolsTool(BaseTool):
 
                     # BUG-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(names) for names in tools_by_category.values())
+                    # BUG-22A-07: has_more is True when limit truncates at least one category.
+                    _by_cat_has_more = limit is not None and any(
+                        len(names) > offset + limit
+                        for names in tools_by_category.values()
+                    )
 
                     # Apply pagination to each category if needed
                     if limit is not None or offset > 0:
@@ -319,7 +324,7 @@ class ListToolsTool(BaseTool):
                         "total_tools": true_total,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": False,  # Pagination per category is complex, set to False for now
+                        "has_more": _by_cat_has_more,
                     }
                 else:
                     # Apply pagination
@@ -390,6 +395,11 @@ class ListToolsTool(BaseTool):
 
                     # BUG-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(infos) for infos in tools_by_category.values())
+                    # BUG-22A-07: reflect per-category truncation in has_more.
+                    _by_cat_has_more = limit is not None and any(
+                        len(infos) > offset + limit
+                        for infos in tools_by_category.values()
+                    )
 
                     # Apply pagination to each category if needed
                     if limit is not None or offset > 0:
@@ -410,7 +420,7 @@ class ListToolsTool(BaseTool):
                         "total_tools": true_total,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": False,  # Pagination per category is complex, set to False for now
+                        "has_more": _by_cat_has_more,
                     }
                 else:
                     # Apply pagination
@@ -469,6 +479,10 @@ class ListToolsTool(BaseTool):
 
                 # BUG-R10A-02: capture true total BEFORE per-category pagination
                 true_total = sum(len(names) for names in tools_by_category.values())
+                # BUG-22A-07: has_more is True when limit truncates at least one category.
+                _by_cat_has_more = limit is not None and any(
+                    len(names) > offset + limit for names in tools_by_category.values()
+                )
 
                 # Apply pagination to each category if needed
                 if limit is not None or offset > 0:
@@ -492,7 +506,7 @@ class ListToolsTool(BaseTool):
                     "per_category_offset": offset,
                     "limit": limit,
                     "offset": offset,
-                    "has_more": False,  # has_more tracks inter-category pagination (unsupported)
+                    "has_more": _by_cat_has_more,
                 }
 
             elif mode == "summary":
@@ -533,6 +547,11 @@ class ListToolsTool(BaseTool):
 
                     # BUG-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(infos) for infos in tools_by_category.values())
+                    # BUG-22A-07: reflect per-category truncation in has_more.
+                    _by_cat_has_more = limit is not None and any(
+                        len(infos) > offset + limit
+                        for infos in tools_by_category.values()
+                    )
 
                     # Apply pagination to each category if needed
                     if limit is not None or offset > 0:
@@ -553,7 +572,7 @@ class ListToolsTool(BaseTool):
                         "total_tools": true_total,
                         "limit": limit,
                         "offset": offset,
-                        "has_more": False,  # Pagination per category is complex, set to False for now
+                        "has_more": _by_cat_has_more,
                     }
                 else:
                     # Apply pagination
