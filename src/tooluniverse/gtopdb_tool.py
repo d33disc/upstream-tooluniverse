@@ -507,20 +507,23 @@ class GtoPdbRESTTool(BaseTool):
                         "id": first.get("ligandId"),
                         "name": first.get("ligandName"),
                     }
-                # BUG-49B-002: when no approved drugs are in the returned interactions,
-                # add a coverage note. GtoPdb's kinase inhibitor and enzyme inhibitor
-                # coverage is incomplete — approved drugs like imatinib (ABL1), olaparib
-                # (PARP1), and erlotinib (EGFR) may be absent. Suggest ChEMBL for approved drugs.
-                has_approved = any(
-                    item.get("approved") for item in data if isinstance(item, dict)
-                )
-                if not has_approved and isinstance(data, list) and len(data) > 0:
+                # BUG-49B-002 / BUG-55A-002 / BUG-55A-003 / BUG-55B-001:
+                # GtoPdb interactions list pharmacological research compounds — approved drugs
+                # may be absent for any target class (kinases, GPCRs, ion channels, etc.).
+                # The previous code checked item.get("approved") which is only present on
+                # /ligands objects, not /interactions objects, so has_approved was always False.
+                # Fix: always emit the note as factual guidance (not conditional on an
+                # always-false check). Use neutral target-class-agnostic wording. Embed the
+                # queried gene_symbol so the ChEMBL suggestion is immediately actionable.
+                if isinstance(data, list) and len(data) > 0:
+                    _chembl_target = gene_symbol or (
+                        result.get("queried_target", {}).get("name", "the target")
+                    )
                     result["coverage_note"] = (
-                        "None of the returned interactions are for approved drugs. GtoPdb's "
-                        "kinase inhibitor and enzyme inhibitor coverage may be incomplete — "
-                        "approved drugs for this target may not be represented. For a complete "
-                        "list of approved drugs and clinical compounds, use ChEMBL_get_drug_mechanisms "
-                        "or ChEMBL_search_compounds with the target name."
+                        "GtoPdb interactions list pharmacological research compounds — approved "
+                        "drugs for this target may not be represented. For approved drugs and "
+                        "clinical compounds, use ChEMBL_get_drug_mechanisms or "
+                        f"ChEMBL_search_compounds with target_name='{_chembl_target}'."
                     )
 
             # BUG-49A-M5: for ligand search results, add a hint about getting interaction data.

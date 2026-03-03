@@ -224,10 +224,12 @@ class SYNERGxDBTool(BaseTool):
         drug_id_1 = arguments.get("drug_id_1")
         drug_id_2 = arguments.get("drug_id_2")
         # BUG-45B-02: accept tissue_name and tissue as intuitive aliases for sample
+        # BUG-55A-011: also accept cancer_type as alias (silently ignored before)
         sample = (
             arguments.get("sample")
             or arguments.get("tissue_name")
             or arguments.get("tissue")
+            or arguments.get("cancer_type")
         )
         # BUG-46B-05: normalize common tissue aliases to SYNERGxDB column values
         if sample:

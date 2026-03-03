@@ -390,6 +390,10 @@ class CIViCTool(BaseTool):
                         )
                 return result
 
+        # Track input normalizations to disclose them in the result (BUG-55A-008).
+        _therapy_normalized_from = None
+        _mp_normalized_from = None
+
         # BUG-53B-002: CIViC therapy names are case-sensitive (stored as Title Case, e.g.,
         # "Erdafitinib" not "erdafitinib"). Auto-normalize to Title Case when the input is
         # entirely lowercase or uppercase, to avoid silent empty results from case mismatches.
@@ -397,8 +401,28 @@ class CIViCTool(BaseTool):
             therapy = arguments.get("therapy")
             if therapy and isinstance(therapy, str):
                 if therapy == therapy.lower() or therapy == therapy.upper():
+                    _therapy_normalized_from = therapy
                     arguments = dict(arguments)
                     arguments["therapy"] = therapy.title()
+
+        # BUG-55B-005: CIViC uses double-colon notation for fusion molecular profiles
+        # (e.g., "BCR::ABL1 Fusion", "EML4::ALK Fusion"). Users often write hyphenated
+        # fusions (e.g., "BCR-ABL1 Fusion") which silently returns 0 results.
+        # Auto-normalize GENE1-GENE2 patterns to GENE1::GENE2 in molecular_profile.
+        if tool_name in ("civic_search_evidence_items", "civic_search_variants"):
+            import re as _re
+
+            mol_profile = arguments.get("molecular_profile")
+            if mol_profile and isinstance(mol_profile, str):
+                normalized_mp = _re.sub(
+                    r"\b([A-Z][A-Z0-9]*)-([A-Z][A-Z0-9]+)\b",
+                    r"\1::\2",
+                    mol_profile,
+                )
+                if normalized_mp != mol_profile:
+                    _mp_normalized_from = mol_profile
+                    arguments = dict(arguments)
+                    arguments["molecular_profile"] = normalized_mp
 
         try:
             # Build GraphQL query
@@ -436,6 +460,22 @@ class CIViCTool(BaseTool):
                     "endpoint": CIVIC_GRAPHQL_URL,
                 },
             }
+
+            # BUG-55A-008 / BUG-55B-005: disclose any input normalizations applied.
+            _norm_parts = []
+            if _therapy_normalized_from:
+                _norm_parts.append(
+                    f"therapy '{_therapy_normalized_from}' → '{arguments.get('therapy')}' (CIViC uses Title Case)"
+                )
+            if _mp_normalized_from:
+                _norm_parts.append(
+                    f"molecular_profile '{_mp_normalized_from}' → '{arguments.get('molecular_profile')}'"
+                    " (CIViC uses double-colon '::' for fusion gene pairs)"
+                )
+            if _norm_parts:
+                result["normalization_note"] = (
+                    "Input auto-normalized: " + "; ".join(_norm_parts) + "."
+                )
 
             # BUG-50A-001: warn when civic_search_evidence_items combined
             # molecular_profile+disease filter returns 0 results.
