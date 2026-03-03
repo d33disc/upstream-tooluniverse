@@ -607,7 +607,7 @@
   },
   {
     "name": "get_mutation_annotations_by_pdb_id",
-    "description": "Retrieve mutation annotations for a given PDB structure.",
+    "description": "Retrieve mutation annotations for a given PDB structure. Returns mutation count, the pdbx_mutation flag (YES/NO), the details field (contains mutation identity like \"T790M\"), fragment description, and protein description.",
     "label": [
       "Mutation",
       "Annotation",
@@ -634,13 +634,16 @@
         ]
       },
       "return_fields": [
-        "entity_poly.rcsb_mutation_count",
-        "rcsb_polymer_entity.pdbx_mutation"
+        "polymer_entities.entity_poly.rcsb_mutation_count",
+        "polymer_entities.rcsb_polymer_entity.pdbx_mutation",
+        "polymer_entities.rcsb_polymer_entity.details",
+        "polymer_entities.rcsb_polymer_entity.pdbx_fragment",
+        "polymer_entities.rcsb_polymer_entity.pdbx_description"
       ]
     },
     "test_examples": [
       {
-        "pdb_id": "1CRN"
+        "pdb_id": "2JIV"
       }
     ],
     "return_schema": {

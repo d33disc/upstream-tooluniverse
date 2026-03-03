@@ -38,6 +38,9 @@ class CIViCTool(BaseTool):
         self.query_template: str = fields.get("query", "")
         self.operation_name: Optional[str] = fields.get("operation_name")
         self.timeout: int = tool_config.get("timeout", 30)
+        # array_wrap: maps argument name -> GraphQL variable name, wrapping string in a list
+        # e.g. {"gene_symbol": "entrezSymbols"} means arguments["gene_symbol"] -> variables["entrezSymbols"] = [value]
+        self.array_wrap: Dict[str, str] = fields.get("array_wrap", {})
 
     def _build_graphql_query(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Build GraphQL query from template and arguments."""
@@ -56,6 +59,12 @@ class CIViCTool(BaseTool):
             # Check if argument exists (variable name matches argument name)
             if var_name in arguments:
                 variables[var_name] = arguments[var_name]
+
+        # Handle array_wrap: convert string arguments to lists for array-typed GraphQL variables
+        for arg_name, var_name in self.array_wrap.items():
+            if arg_name in arguments and arguments[arg_name] is not None:
+                val = arguments[arg_name]
+                variables[var_name] = [val] if not isinstance(val, list) else val
 
         payload = {"query": query}
 

@@ -277,7 +277,8 @@ def _render_grep(d: dict) -> str:
                     f"— try `tu grep '{pattern}' --field description`)"
                 )
             return (
-                "0 matches  (tip: use --field description to search tool descriptions)"
+                "0 matches in tool names.\n"
+                "  → Try: tu grep '" + pattern + "' --field description"
             )
         # BUG-23B-05: show the stored hint for non-name-field 0-match results too
         hint = d.get("hint")

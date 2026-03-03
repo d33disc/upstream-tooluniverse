@@ -124,7 +124,9 @@ class ClinVarSearchVariants(ClinVarRESTTool):
             query_parts.append(f"{arguments['gene']}[gene]")
 
         if "condition" in arguments:
-            query_parts.append(f"{arguments['condition']}[condition]")
+            # ClinVar eSearch uses [disease/phenotype] field; quote multi-word terms
+            condition = arguments["condition"]
+            query_parts.append(f'"{condition}"[disease/phenotype]')
 
         if "variant_id" in arguments:
             query_parts.append(f"{arguments['variant_id']}[variant_id]")
