@@ -279,11 +279,20 @@ class CIViCTool(BaseTool):
             # BUG-53B-004: variant_name parameter was silently ignored — only "query" was
             # checked. Users naturally pass variant_name='S249C' expecting it to filter
             # variants client-side, just like query='S249C' does.
-            query_term = (
-                arguments.get("query")
-                or arguments.get("variant_name")
-                or arguments.get("variant")
+            # BUG-54A-005: when BOTH query and variant_name are provided and differ,
+            # silently dropping one is confusing. Apply AND logic and add a note.
+            raw_query = arguments.get("query")
+            raw_variant_name = arguments.get("variant_name") or arguments.get("variant")
+            _both_provided = (
+                raw_query and raw_variant_name and raw_query != raw_variant_name
             )
+            if _both_provided:
+                # AND logic: we'll filter on both below
+                query_term = raw_query
+                _secondary_term = raw_variant_name
+            else:
+                query_term = raw_query or raw_variant_name
+                _secondary_term = None
             if gene_name:
                 gene_id = self._lookup_gene_id(gene_name)
                 if gene_id is None:
@@ -303,6 +312,18 @@ class CIViCTool(BaseTool):
                     filtered = [
                         v for v in nodes if q_lower in v.get("name", "").lower()
                     ]
+                    # BUG-54A-005: AND logic when both query and variant_name provided
+                    if _secondary_term:
+                        sec_lower = _secondary_term.lower()
+                        filtered = [
+                            v
+                            for v in filtered
+                            if sec_lower in v.get("name", "").lower()
+                        ]
+                        result["filter_note"] = (
+                            f"Both query='{raw_query}' and variant_name='{raw_variant_name}' "
+                            f"were provided; applied AND logic (variants matching both terms)."
+                        )
                     # Truncate to user-requested limit AFTER filtering
                     if user_limit:
                         filtered = filtered[:user_limit]
@@ -487,24 +508,69 @@ class CIViCTool(BaseTool):
                         )
 
                 # BUG-53B-002: warn when molecular_profile+therapy returns 0 results.
-                # CIViC therapy names are case-sensitive AND exact-match. Even with
-                # auto-normalization to Title Case, the therapy name may not match
-                # (e.g., "Neratinib" vs "neratinib+capecitabine" combo entry).
+                # BUG-54A-001: auto-probe available therapies for the molecular profile
+                # so users can identify the correct exact therapy name from CIViC.
                 therapy = arguments.get("therapy")
                 if mol_profile and therapy and not disease:
                     evidence_nodes = (
                         result.get("data", {}).get("evidenceItems", {}).get("nodes", [])
                     )
                     if len(evidence_nodes) == 0:
+                        # Auto-probe: re-run without therapy filter to find actual therapy names
+                        available_therapies: list = []
+                        try:
+                            probe_args = {
+                                k: v
+                                for k, v in arguments.items()
+                                if k not in ("therapy",)
+                            }
+                            probe_args["limit"] = 50
+                            probe_payload = self._build_graphql_query(probe_args)
+                            probe_resp = requests.post(
+                                CIVIC_GRAPHQL_URL,
+                                json=probe_payload,
+                                timeout=self.timeout,
+                                headers={
+                                    "Content-Type": "application/json",
+                                    "Accept": "application/json",
+                                },
+                            )
+                            probe_nodes = (
+                                probe_resp.json()
+                                .get("data", {})
+                                .get("evidenceItems", {})
+                                .get("nodes", [])
+                            )
+                            available_therapies = sorted(
+                                {
+                                    t.get("name", "")
+                                    for node in probe_nodes
+                                    for t in node.get("therapies", [])
+                                    if t.get("name")
+                                }
+                            )
+                        except Exception:
+                            pass
+
+                        if available_therapies:
+                            therapy_hint = (
+                                f" CIViC has evidence for '{mol_profile}' with these "
+                                f"therapies: "
+                                + ", ".join(f"'{t}'" for t in available_therapies[:10])
+                                + ". Use one of these exact therapy names."
+                            )
+                        else:
+                            therapy_hint = (
+                                f" Try removing the therapy filter and searching only by "
+                                f"molecular_profile='{mol_profile}' to see all available evidence."
+                            )
                         result["therapy_warning"] = (
                             f"No evidence items found for molecular_profile='{mol_profile}' "
                             f"AND therapy='{therapy}'. CIViC therapy names are exact-match "
                             "and case-sensitive (stored as Title Case, e.g., 'Erdafitinib', "
                             "'Trastuzumab', 'Lapatinib'). The therapy name was auto-normalized "
-                            "to Title Case, but may still not match CIViC's exact entry. "
-                            f"Try removing the therapy filter and searching only by "
-                            f"molecular_profile='{mol_profile}' to see all available evidence, "
-                            "then identify the exact therapy name from the results."
+                            "to Title Case, but may still not match CIViC's exact entry."
+                            + therapy_hint
                         )
 
             return result

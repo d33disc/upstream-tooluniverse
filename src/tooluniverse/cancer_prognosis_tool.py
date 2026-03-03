@@ -235,9 +235,15 @@ class CancerPrognosisTool(BaseTool):
                 time.sleep(2**attempt)
         return None
 
-    def _get_expression_units(self, profile_id):
-        # type: (str) -> str
-        """BUG-49A-M1: Infer expression data type/units from the cBioPortal profile ID string."""
+    def _get_expression_units(self, profile_id, profile_name=None):
+        # type: (str, Optional[str]) -> str
+        """BUG-49A-M1: Infer expression data type/units from the cBioPortal profile.
+        BUG-54A-002: Prefer the actual profile name from the API (e.g., 'mRNA expression
+        (log2 RNA Seq RPKM)') over ID-based inference, since some studies use misleading
+        ID suffixes (e.g., aml_ohsu_2022 uses _rna_seq_v2_mrna but stores log2 RPKM).
+        """
+        if profile_name:
+            return profile_name
         pid = profile_id.lower()
         if "rna_seq_v2_mrna" in pid:
             return "RSEM (RNA Seq V2 normalized expected read counts)"
@@ -252,8 +258,12 @@ class CancerPrognosisTool(BaseTool):
         return "expression values"
 
     def _get_mrna_profile(self, study_id):
-        # type: (str) -> Optional[str]
-        """Find the best mRNA expression profile for a study."""
+        # type: (str) -> Optional[Tuple[str, str]]
+        """Find the best mRNA expression profile for a study.
+        Returns (profile_id, profile_name) tuple, or None if not found.
+        BUG-54A-002: also return the human-readable profile name so _get_expression_units
+        can use the actual description instead of inferring from the profile ID string.
+        """
         profiles = self._api_get(
             "/studies/{}/molecular-profiles".format(study_id),
             params={"projection": "SUMMARY"},
@@ -269,7 +279,7 @@ class CancerPrognosisTool(BaseTool):
                     and pid.endswith(suffix)
                     and not pid.endswith("_Zscores")
                 ):
-                    return pid
+                    return (pid, p.get("name", ""))
         return None
 
     def _get_gene_entrez_id(self, symbol):
@@ -467,15 +477,21 @@ class CancerPrognosisTool(BaseTool):
                 "error": "gene is required (e.g., 'TP53', 'BRCA1')",
             }
 
+        # BUG-53A-013: explicit study_id tracking for study_note message (BUG-54A-004)
+        study_was_explicit = (
+            cancer == study_id_arg and study_id_arg and "_" in str(study_id_arg)
+        )
         study_id = self._resolve_study(cancer)
-        profile_id = self._get_mrna_profile(study_id)
-        if not profile_id:
+        # BUG-54A-002: _get_mrna_profile now returns (profile_id, profile_name) tuple
+        profile_result = self._get_mrna_profile(study_id)
+        if not profile_result:
             return {
                 "status": "error",
                 "error": "No mRNA expression profile found for {} ({})".format(
                     cancer, study_id
                 ),
             }
+        profile_id, profile_name = profile_result
 
         entrez_id = self._get_gene_entrez_id(gene)
         if not entrez_id:
@@ -553,7 +569,8 @@ class CancerPrognosisTool(BaseTool):
         )
 
         # BUG-49A-M1: derive expression units from profile_id so users know the scale
-        expression_units = self._get_expression_units(profile_id)
+        # BUG-54A-002: pass profile_name so actual API description is used instead of inference
+        expression_units = self._get_expression_units(profile_id, profile_name)
 
         # BUG-49A-M3: detect patients with multiple samples (primary vs. recurrent aliquots).
         # TCGA samples are suffixed -01 (primary), -02 (recurrence), etc. Joining on patient_id
@@ -613,8 +630,13 @@ class CancerPrognosisTool(BaseTool):
             # BUG-51A-011: disclose auto-selected study so users know which of multiple
             # available studies was used. "OV" auto-resolves to ov_tcga (Firehose Legacy),
             # but ov_tcga_pan_can_atlas_2018 or hgsoc_tcga_gdc may be preferable.
-            "study_note": "Auto-selected study_id='{}'. Use CancerPrognosis_search_studies "
-            "to find alternative cohorts for this cancer type.".format(study_id),
+            # BUG-54A-004: don't say "Auto-selected" when user explicitly specified study_id
+            "study_note": (
+                "Using explicitly specified study_id='{}'.".format(study_id)
+                if study_was_explicit
+                else "Auto-selected study_id='{}'. Use CancerPrognosis_search_studies "
+                "to find alternative cohorts for this cancer type.".format(study_id)
+            ),
             "gene": gene,
             "entrez_gene_id": entrez_id,
             "profile_id": profile_id,

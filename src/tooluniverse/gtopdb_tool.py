@@ -208,111 +208,146 @@ class GtoPdbRESTTool(BaseTool):
         ):
             from urllib.parse import urlencode
 
-            lookup_url = f"{self.base_url}/targets?{urlencode({'name': gene_symbol})}"
+            # BUG-54B-001: the previous approach used ?name=gene_symbol which does a
+            # substring search on target names/abbreviations. For short symbols like "AR",
+            # this returns all targets containing "AR" (adrenoceptors, etc.) and falls back
+            # to targets[0] which is wrong. Fix: use ?geneSymbol= first — this is the
+            # GtoPdb API parameter for unambiguous HGNC gene symbol lookup and returns
+            # exactly the target associated with that gene. Fall back to ?name= only if
+            # ?geneSymbol= returns nothing (for gene symbols not in GtoPdb's gene index).
+            target_id = None
             try:
-                resp = request_with_retry(
-                    self.session,
-                    "GET",
-                    lookup_url,
-                    timeout=self.timeout,
-                    max_attempts=2,
+                gs_url = (
+                    f"{self.base_url}/targets?{urlencode({'geneSymbol': gene_symbol})}"
                 )
-                # BUG-52B-002: GtoPdb returns HTTP 404 (not 200) when a gene_symbol
-                # doesn't match any target name. Previously, resp.status_code != 200
-                # caused the entire lookup block to be skipped silently, leaving
-                # gene_symbol in arguments → _build_url adds it as an unknown query
-                # param → API ignores it → returns ALL interactions (e.g., 5-HT1A
-                # receptor data for gene_symbol="MAP2K1"). Fix: handle 404 by returning
-                # early with a helpful message, and validate list type on 200.
-                if resp.status_code == 404 or (
-                    resp.status_code == 200 and not isinstance(resp.json(), list)
-                ):
-                    # BUG-53A-005: some HGNC gene symbols map to GtoPdb pharmacological
-                    # receptor names (e.g., ESR1 → "ERα", DRD2 → "D2 receptor").
-                    # Try a fallback lookup using the known pharmacological name.
-                    fallback_resolved = False
-                    gtopdb_name = _HGNC_TO_GTOPDB_NAME.get(gene_symbol.upper())
-                    if gtopdb_name:
-                        try:
-                            from urllib.parse import urlencode as _urlencode
-
-                            fb_url = f"{self.base_url}/targets?{_urlencode({'name': gtopdb_name})}"
-                            fb_resp = request_with_retry(
-                                self.session,
-                                "GET",
-                                fb_url,
-                                timeout=self.timeout,
-                                max_attempts=2,
-                            )
-                            if fb_resp.status_code == 200:
-                                fb_targets = fb_resp.json()
-                                if isinstance(fb_targets, list) and fb_targets:
-                                    target_id = fb_targets[0]["targetId"]
-                                    arguments = dict(arguments)
-                                    arguments["targetId"] = target_id
-                                    arguments.pop("gene_symbol", None)
-                                    fallback_resolved = True
-                        except Exception:
-                            pass
-                    if not fallback_resolved:
-                        return {
-                            "status": "success",
-                            "data": [],
-                            "count": 0,
-                            "message": (
-                                f"No GtoPdb target found for gene_symbol='{gene_symbol}'. "
-                                "GtoPdb targets are indexed by pharmacological receptor/enzyme "
-                                "names and may not recognize all HGNC gene symbols. "
-                                f"Try GtoPdb_search_targets with a descriptive name "
-                                f"(e.g., query='MEK1' or 'MAP2K1' or 'MEK' for MAP2K1). "
-                                "Nuclear receptors use Greek-letter names (ESR1→'ERα', "
-                                "AR→'androgen receptor', PPARG→'PPARγ'). "
-                                "Note: many kinases and signaling enzymes (MAP2K1/MEK1, "
-                                "MAP2K2/MEK2, MAPK1/ERK2, MAPK3/ERK1, etc.) have limited "
-                                "or no interaction data in GtoPdb — use "
-                                "ChEMBL_get_drug_mechanisms or ChEMBL_search_compounds "
-                                "for approved inhibitors of MAP kinase pathway proteins."
-                            ),
-                        }
-                if resp.status_code == 200:
-                    targets = resp.json()
-                    if isinstance(targets, list) and targets:
-                        # Prefer exact abbreviation match (e.g., "KRAS" → KRAS entry)
+                gs_resp = request_with_retry(
+                    self.session, "GET", gs_url, timeout=self.timeout, max_attempts=2
+                )
+                if gs_resp.status_code == 200:
+                    gs_targets = gs_resp.json()
+                    if isinstance(gs_targets, list) and gs_targets:
+                        # geneSymbol lookup returns exact matches — prefer the one
+                        # whose abbreviation matches the gene symbol, else use first
                         gene_upper = gene_symbol.upper()
-                        target_id = None
-                        for t in targets:
+                        for t in gs_targets:
                             if (t.get("abbreviation") or "").upper() == gene_upper:
                                 target_id = t["targetId"]
                                 break
-                        # BUG-48A-05: before falling back to targets[0], try prefix match.
-                        # e.g., gene_symbol="ABL1", abbreviation="Abl" →
-                        # "abl1".startswith("abl") with rest "1" being a digit → ABL1 selected.
-                        # This prevents "ABL1" from silently returning ABL2 (abbr "Arg").
                         if target_id is None:
-                            gene_lower = gene_symbol.lower()
-                            best_match = None
-                            best_len = 0
-                            for t in targets:
-                                abbr = (t.get("abbreviation") or "").lower()
-                                if (
-                                    abbr
-                                    and gene_lower.startswith(abbr)
-                                    and len(abbr) > best_len
-                                ):
-                                    rest = gene_lower[len(abbr) :]
-                                    if rest == "" or rest.isdigit():
-                                        best_match = t["targetId"]
-                                        best_len = len(abbr)
-                            if best_match is not None:
-                                target_id = best_match
-                        if target_id is None:
-                            target_id = targets[0]["targetId"]
-                        arguments = dict(arguments)
-                        arguments["targetId"] = target_id
-                        # BUG-47A-05: remove gene_symbol so it doesn't leak into the API URL
-                        arguments.pop("gene_symbol", None)
+                            target_id = gs_targets[0]["targetId"]
             except Exception:
                 pass
+
+            if target_id is not None:
+                arguments = dict(arguments)
+                arguments["targetId"] = target_id
+                arguments.pop("gene_symbol", None)
+            else:
+                # ?geneSymbol= returned nothing — try ?name= as fallback
+                lookup_url = (
+                    f"{self.base_url}/targets?{urlencode({'name': gene_symbol})}"
+                )
+                try:
+                    resp = request_with_retry(
+                        self.session,
+                        "GET",
+                        lookup_url,
+                        timeout=self.timeout,
+                        max_attempts=2,
+                    )
+                    # BUG-52B-002: GtoPdb returns HTTP 404 (not 200) when a gene_symbol
+                    # doesn't match any target name. Previously, resp.status_code != 200
+                    # caused the entire lookup block to be skipped silently, leaving
+                    # gene_symbol in arguments → _build_url adds it as an unknown query
+                    # param → API ignores it → returns ALL interactions.
+                    if resp.status_code == 404 or (
+                        resp.status_code == 200 and not isinstance(resp.json(), list)
+                    ):
+                        # BUG-53A-005: try HGNC→GtoPdb pharmacological name mapping
+                        # (e.g., ESR1 → "ERα", DRD2 → "D2 receptor") as a final fallback.
+                        fallback_resolved = False
+                        gtopdb_name = _HGNC_TO_GTOPDB_NAME.get(gene_symbol.upper())
+                        if gtopdb_name:
+                            try:
+                                from urllib.parse import urlencode as _urlencode
+
+                                fb_url = f"{self.base_url}/targets?{_urlencode({'name': gtopdb_name})}"
+                                fb_resp = request_with_retry(
+                                    self.session,
+                                    "GET",
+                                    fb_url,
+                                    timeout=self.timeout,
+                                    max_attempts=2,
+                                )
+                                if fb_resp.status_code == 200:
+                                    fb_targets = fb_resp.json()
+                                    if isinstance(fb_targets, list) and fb_targets:
+                                        target_id = fb_targets[0]["targetId"]
+                                        arguments = dict(arguments)
+                                        arguments["targetId"] = target_id
+                                        arguments.pop("gene_symbol", None)
+                                        fallback_resolved = True
+                            except Exception:
+                                pass
+                        if not fallback_resolved:
+                            return {
+                                "status": "success",
+                                "data": [],
+                                "count": 0,
+                                "message": (
+                                    f"No GtoPdb target found for gene_symbol='{gene_symbol}'. "
+                                    "GtoPdb targets are indexed by pharmacological receptor/enzyme "
+                                    "names and may not recognize all HGNC gene symbols. "
+                                    f"Try GtoPdb_search_targets with a descriptive name "
+                                    f"(e.g., query='MEK1' or 'MAP2K1' or 'MEK' for MAP2K1). "
+                                    "Nuclear receptors use Greek-letter names (ESR1→'ERα', "
+                                    "AR→'androgen receptor', PPARG→'PPARγ'). "
+                                    "Note: many kinases and signaling enzymes (MAP2K1/MEK1, "
+                                    "MAP2K2/MEK2, MAPK1/ERK2, MAPK3/ERK1, etc.) have limited "
+                                    "or no interaction data in GtoPdb — use "
+                                    "ChEMBL_get_drug_mechanisms or ChEMBL_search_compounds "
+                                    "for approved inhibitors of MAP kinase pathway proteins."
+                                ),
+                            }
+                    if resp.status_code == 200:
+                        targets = resp.json()
+                        if isinstance(targets, list) and targets:
+                            # Prefer exact abbreviation match (e.g., "KRAS" → KRAS entry)
+                            gene_upper = gene_symbol.upper()
+                            target_id = None
+                            for t in targets:
+                                if (t.get("abbreviation") or "").upper() == gene_upper:
+                                    target_id = t["targetId"]
+                                    break
+                            # BUG-48A-05: before falling back to targets[0], try prefix match.
+                            # e.g., gene_symbol="ABL1", abbreviation="Abl" →
+                            # "abl1".startswith("abl") with rest "1" being a digit → ABL1 selected.
+                            # This prevents "ABL1" from silently returning ABL2 (abbr "Arg").
+                            if target_id is None:
+                                gene_lower = gene_symbol.lower()
+                                best_match = None
+                                best_len = 0
+                                for t in targets:
+                                    abbr = (t.get("abbreviation") or "").lower()
+                                    if (
+                                        abbr
+                                        and gene_lower.startswith(abbr)
+                                        and len(abbr) > best_len
+                                    ):
+                                        rest = gene_lower[len(abbr) :]
+                                        if rest == "" or rest.isdigit():
+                                            best_match = t["targetId"]
+                                            best_len = len(abbr)
+                                if best_match is not None:
+                                    target_id = best_match
+                            if target_id is None:
+                                target_id = targets[0]["targetId"]
+                            arguments = dict(arguments)
+                            arguments["targetId"] = target_id
+                            # BUG-47A-05: remove gene_symbol so it doesn't leak into the API URL
+                            arguments.pop("gene_symbol", None)
+                except Exception:
+                    pass
 
         try:
             url = self._build_url(arguments)
@@ -327,6 +362,14 @@ class GtoPdbRESTTool(BaseTool):
                     hint = " If searching for a drug/ligand name, use GtoPdb_search_ligands instead."
                 elif "/ligands" in url:
                     hint = " If searching for a target name, use GtoPdb_search_targets instead."
+                # BUG-54B-002: multi-word name searches often fail silently
+                name_q = arguments.get("name") or arguments.get("query")
+                if name_q and " " in str(name_q):
+                    first_word = str(name_q).split()[0]
+                    hint += (
+                        f" GtoPdb text search may not match multi-word phrases. "
+                        f"Try a single keyword instead, e.g., name='{first_word}'."
+                    )
                 return {
                     "status": "success",
                     "data": [],
@@ -384,6 +427,21 @@ class GtoPdbRESTTool(BaseTool):
                 "url": url,
                 "count": len(data) if isinstance(data, list) else 1,
             }
+
+            # BUG-54B-002: multi-word name search hint when results empty
+            name_q = arguments.get("name") or arguments.get("query")
+            if (
+                result["count"] == 0
+                and ("/targets" in url or "/ligands" in url)
+                and "?" in url
+                and name_q
+                and " " in str(name_q)
+            ):
+                first_word = str(name_q).split()[0]
+                result["multi_word_hint"] = (
+                    f"GtoPdb text search may not match multi-word phrases like '{name_q}'. "
+                    f"Try a single keyword: name='{first_word}'."
+                )
 
             # BUG-38B-02: if ligandId filter returned nothing, add informative hint
             ligand_id_filter = getattr(self, "_pending_ligand_id_filter", None)

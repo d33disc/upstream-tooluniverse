@@ -2710,7 +2710,7 @@ class TestRenderInfoDynamicColumns:
         result = _render_info(d)
         lines = result.splitlines()
         # Find the parameter table lines
-        param_lines = [l for l in lines if "application_manufacturer" in l or "limit" in l]
+        param_lines = [ln for ln in lines if "application_manufacturer" in ln or "limit" in ln]
         assert len(param_lines) == 2
         # Both lines should have their type column at approximately the same position
         # (within 5 chars of each other) — dynamic column width should handle this
@@ -2888,7 +2888,9 @@ class TestRunJsonErrorToStdout:
         args = argparse.Namespace(
             tool_name="list_tools", arguments=["{not json}"], raw=False, json=True
         )
-        import sys as _sys, io as _io
+        import io as _io
+        import sys as _sys
+
         # Capture stdout
         old_stdout = _sys.stdout
         _sys.stdout = buf = _io.StringIO()
@@ -3128,7 +3130,9 @@ class TestRound10Fixes:
         args = argparse.Namespace(
             tool_name="list_tools", arguments=["{invalid json}"], raw=False, json=True
         )
-        import sys as _sys, io as _io
+        import io as _io
+        import sys as _sys
+
         old_stdout = _sys.stdout
         _sys.stdout = buf = _io.StringIO()
         try:
@@ -4478,7 +4482,6 @@ class TestRound22Fixes:
         import importlib
         import tooluniverse.cli as cli_module
         # Access the parser by creating it
-        parser = argparse.ArgumentParser()
         # Find the --mode action in the list subcommand by scanning the help string
         # we added to the parser definition
         import inspect
@@ -4885,7 +4888,10 @@ class TestRound23BRemainingFixes:
         """BUG-23B-06: _read_profile_yaml logs missing plugin env at DEBUG, not WARNING."""
         import logging
         from tooluniverse.tool_registry import _read_profile_yaml
-        import tempfile, yaml, os
+        import os
+        import tempfile
+
+        import yaml
 
         # Create a temp plugin dir with a profile.yaml requiring a fake env var
         with tempfile.TemporaryDirectory() as tmp:
