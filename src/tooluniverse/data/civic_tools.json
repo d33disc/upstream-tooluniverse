@@ -11,9 +11,9 @@
           "description": "Maximum number of genes to return (default: 10, recommended max: 100)",
           "default": 10
         },
-        "gene_symbol": {
+        "name": {
           "type": "string",
-          "description": "Gene symbol to search for (e.g., \"EGFR\", \"BRAF\", \"BRCA1\"). If not provided, returns genes in alphabetical order up to the limit."
+          "description": "Gene symbol/name to search for (e.g., \"EGFR\", \"BRAF\", \"BRCA1\"). If not provided, returns genes in alphabetical order up to the limit."
         }
       },
       "required": []
@@ -22,7 +22,7 @@
       "query": "query GetGenes($limit: Int, $entrezSymbols: [String!]) { genes(first: $limit, entrezSymbols: $entrezSymbols) { nodes { id name description entrezId } } }",
       "operation_name": "GetGenes",
       "array_wrap": {
-        "gene_symbol": "entrezSymbols"
+        "name": "entrezSymbols"
       }
     },
     "return_schema": {
@@ -83,7 +83,7 @@
         "limit": 5
       },
       {
-        "gene_symbol": "BRCA1",
+        "name": "BRCA1",
         "limit": 10
       }
     ]
@@ -509,7 +509,7 @@
   },
   {
     "name": "civic_get_molecular_profile",
-    "description": "Get detailed information about a specific molecular profile in CIViC database by molecular profile ID. Molecular profiles represent combinations of variants or features (e.g., 'BRAF V600E') that serve as biomarkers for clinical interpretation. Returns profile name, description, and associated variants.",
+    "description": "Get detailed information about a specific molecular profile in CIViC database by molecular profile ID. Molecular profiles represent combinations of variants or features (e.g., 'BRAF V600E') that serve as biomarkers for clinical interpretation. Returns profile name, description, clinical significance score, and associated evidence items with diseases, therapies, and evidence levels.",
     "type": "CIViCTool",
     "parameter": {
       "type": "object",
@@ -517,6 +517,11 @@
         "molecular_profile_id": {
           "type": "integer",
           "description": "CIViC molecular profile ID (e.g., 12 for BRAF V600E)"
+        },
+        "evidence_limit": {
+          "type": "integer",
+          "description": "Maximum number of evidence items to return (default: 10)",
+          "default": 10
         }
       },
       "required": [
@@ -524,7 +529,7 @@
       ]
     },
     "fields": {
-      "query": "query GetMolecularProfile($molecular_profile_id: Int!) { molecularProfile(id: $molecular_profile_id) { id name } }",
+      "query": "query GetMolecularProfile($molecular_profile_id: Int!, $evidence_limit: Int) { molecularProfile(id: $molecular_profile_id) { id name molecularProfileScore description evidenceItems(first: $evidence_limit) { nodes { id name evidenceLevel evidenceDirection significance status disease { name } therapies { name } } } } }",
       "operation_name": "GetMolecularProfile"
     },
     "return_schema": {
@@ -541,6 +546,35 @@
                 },
                 "name": {
                   "type": "string"
+                },
+                "molecularProfileScore": {
+                  "type": "number",
+                  "description": "CIViC clinical actionability score"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Clinical description of the molecular profile"
+                },
+                "evidenceItems": {
+                  "type": "object",
+                  "properties": {
+                    "nodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "name": {"type": "string"},
+                          "evidenceLevel": {"type": "string", "description": "A-E evidence level"},
+                          "evidenceDirection": {"type": "string"},
+                          "significance": {"type": "string"},
+                          "status": {"type": "string"},
+                          "disease": {"type": "object", "properties": {"name": {"type": "string"}}},
+                          "therapies": {"type": "array", "items": {"type": "object", "properties": {"name": {"type": "string"}}}}
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -550,13 +584,14 @@
     },
     "test_examples": [
       {
-        "molecular_profile_id": 12
+        "molecular_profile_id": 12,
+        "evidence_limit": 5
       }
     ]
   },
   {
     "name": "civic_search_molecular_profiles",
-    "description": "Search for molecular profiles in CIViC database. Molecular profiles represent combinations of variants or features (e.g., 'BRAF V600E', 'EGFR T790M') that serve as biomarkers for clinical interpretation. Returns a list of molecular profiles with IDs, names, and descriptions.",
+    "description": "Search for molecular profiles in CIViC database. Molecular profiles represent combinations of variants or features (e.g., 'BRAF V600E', 'EGFR T790M') that serve as biomarkers for clinical interpretation. Returns a list of molecular profiles with IDs and names. Use the name parameter to filter by profile name.",
     "type": "CIViCTool",
     "parameter": {
       "type": "object",
@@ -565,12 +600,16 @@
           "type": "integer",
           "description": "Maximum number of molecular profiles to return (default: 20, recommended max: 100)",
           "default": 20
+        },
+        "name": {
+          "type": "string",
+          "description": "Filter by molecular profile name (e.g., 'BRAF V600E', 'EGFR T790M'). Returns profiles whose name contains this string."
         }
       },
       "required": []
     },
     "fields": {
-      "query": "query SearchMolecularProfiles($limit: Int) { molecularProfiles(first: $limit) { nodes { id name } } }",
+      "query": "query SearchMolecularProfiles($limit: Int, $name: String) { molecularProfiles(first: $limit, name: $name) { nodes { id name } } }",
       "operation_name": "SearchMolecularProfiles"
     },
     "return_schema": {

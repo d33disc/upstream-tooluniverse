@@ -437,25 +437,40 @@ class CancerPrognosisTool(BaseTool):
             }
 
         limit = min(int(arguments.get("limit", 20)), 100)
+        # cBioPortal /api/studies does not support keyword filtering — fetch all and filter locally
         data = self._api_get(
             "/studies",
-            params={"keyword": keyword, "projection": "SUMMARY", "pageSize": limit},
+            params={"projection": "SUMMARY", "pageSize": 1000},
         )
         if data is None:
             return {"status": "error", "error": "Failed to search cBioPortal studies"}
 
+        keyword_lower = keyword.lower()
         studies = []
         for s in data:
-            studies.append(
-                {
-                    "study_id": s.get("studyId"),
-                    "name": s.get("name"),
-                    "description": (s.get("description", "") or "")[:200],
-                    "cancer_type_id": s.get("cancerTypeId"),
-                    "sample_count": s.get("allSampleCount"),
-                    "reference_pmid": s.get("pmid"),
-                }
-            )
+            name = s.get("name", "") or ""
+            description = s.get("description", "") or ""
+            study_id = s.get("studyId", "") or ""
+            cancer_type_id = s.get("cancerTypeId", "") or ""
+            # Filter: keyword must appear in name, description, studyId, or cancerTypeId
+            if (
+                keyword_lower in name.lower()
+                or keyword_lower in description.lower()
+                or keyword_lower in study_id.lower()
+                or keyword_lower in cancer_type_id.lower()
+            ):
+                studies.append(
+                    {
+                        "study_id": study_id,
+                        "name": name,
+                        "description": description[:200],
+                        "cancer_type_id": cancer_type_id,
+                        "sample_count": s.get("allSampleCount"),
+                        "reference_pmid": s.get("pmid"),
+                    }
+                )
+            if len(studies) >= limit:
+                break
 
         return {
             "status": "success",

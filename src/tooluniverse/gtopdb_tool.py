@@ -17,6 +17,27 @@ class GtoPdbRESTTool(BaseTool):
     def _build_url(self, args: Dict[str, Any]) -> str:
         """Build URL with path parameters and query parameters."""
         url = self.tool_config["fields"]["endpoint"]
+
+        # BUG-29A-07 fix: interactions endpoint requires path params, not query params
+        # /services/interactions?targetId=X is ignored; must use /targets/{id}/interactions
+        if (
+            url.endswith("/interactions")
+            and "{targetId}" not in url
+            and "{ligandId}" not in url
+        ):
+            target_id = args.get("targetId")
+            ligand_id = args.get("ligandId")
+            if target_id is not None:
+                url = f"{self.base_url}/targets/{target_id}/interactions"
+                args = {
+                    k: v for k, v in args.items() if k not in ("targetId", "ligandId")
+                }
+            elif ligand_id is not None:
+                url = f"{self.base_url}/ligands/{ligand_id}/interactions"
+                args = {
+                    k: v for k, v in args.items() if k not in ("targetId", "ligandId")
+                }
+
         query_params = {}
 
         # Separate path params from query params

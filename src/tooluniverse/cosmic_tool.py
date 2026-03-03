@@ -90,21 +90,53 @@ class COSMICTool(BaseTool):
             if isinstance(data, list) and len(data) >= 4:
                 total_count = data[0]
                 codes = data[1] if data[1] else []
+                # extra_data is a dict of field_name -> list (indexed by position)
                 extra_data = data[2] if data[2] else {}
-                display_strings = data[3] if data[3] else []
 
-                # Parse results
+                # Parse and deduplicate results by mutation_id+mutation_aa
                 results = []
+                seen = set()
                 for i, code in enumerate(codes):
+                    gene = (
+                        extra_data.get("GeneName", [])[i]
+                        if i < len(extra_data.get("GeneName", []))
+                        else None
+                    )
+                    mutation_cds = (
+                        extra_data.get("MutationCDS", [])[i]
+                        if i < len(extra_data.get("MutationCDS", []))
+                        else None
+                    )
+                    mutation_aa = (
+                        extra_data.get("MutationAA", [])[i]
+                        if i < len(extra_data.get("MutationAA", []))
+                        else None
+                    )
+                    prim_site = (
+                        extra_data.get("PrimarySite", [])[i]
+                        if i < len(extra_data.get("PrimarySite", []))
+                        else None
+                    )
+                    prim_hist = (
+                        extra_data.get("PrimaryHistology", [])[i]
+                        if i < len(extra_data.get("PrimaryHistology", []))
+                        else None
+                    )
+
+                    # Deduplicate: keep first occurrence of each mutation_id+aa pair
+                    key = (code, mutation_aa)
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
                     result = {
                         "mutation_id": code,
-                        "display": display_strings[i]
-                        if i < len(display_strings)
-                        else None,
+                        "gene": gene,
+                        "mutation_cds": mutation_cds,
+                        "mutation_aa": mutation_aa,
+                        "primary_site": prim_site,
+                        "primary_histology": prim_hist,
                     }
-                    # Add extra fields if available
-                    if extra_data and code in extra_data:
-                        result.update(extra_data[code])
                     results.append(result)
 
                 return {
@@ -174,19 +206,65 @@ class COSMICTool(BaseTool):
             if isinstance(data, list) and len(data) >= 4:
                 total_count = data[0]
                 codes = data[1] if data[1] else []
+                # extra_data is a dict of field_name -> list (indexed by position)
                 extra_data = data[2] if data[2] else {}
-                display_strings = data[3] if data[3] else []
 
+                # Parse and deduplicate results by mutation_id+mutation_aa
                 results = []
+                seen = set()
                 for i, code in enumerate(codes):
+                    gene_name = (
+                        extra_data.get("GeneName", [])[i]
+                        if i < len(extra_data.get("GeneName", []))
+                        else gene
+                    )
+                    mutation_cds = (
+                        extra_data.get("MutationCDS", [])[i]
+                        if i < len(extra_data.get("MutationCDS", []))
+                        else None
+                    )
+                    mutation_aa = (
+                        extra_data.get("MutationAA", [])[i]
+                        if i < len(extra_data.get("MutationAA", []))
+                        else None
+                    )
+                    prim_site = (
+                        extra_data.get("PrimarySite", [])[i]
+                        if i < len(extra_data.get("PrimarySite", []))
+                        else None
+                    )
+                    prim_hist = (
+                        extra_data.get("PrimaryHistology", [])[i]
+                        if i < len(extra_data.get("PrimaryHistology", []))
+                        else None
+                    )
+                    genome_pos = (
+                        extra_data.get("MutationGenomePosition", [])[i]
+                        if i < len(extra_data.get("MutationGenomePosition", []))
+                        else None
+                    )
+                    fathmm = (
+                        extra_data.get("Fathmm", [])[i]
+                        if i < len(extra_data.get("Fathmm", []))
+                        else None
+                    )
+
+                    # Deduplicate: keep first occurrence of each mutation_id+aa pair
+                    key = (code, mutation_aa)
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
                     result = {
                         "mutation_id": code,
-                        "display": display_strings[i]
-                        if i < len(display_strings)
-                        else None,
+                        "gene": gene_name,
+                        "mutation_cds": mutation_cds,
+                        "mutation_aa": mutation_aa,
+                        "primary_site": prim_site,
+                        "primary_histology": prim_hist,
+                        "genome_position": genome_pos,
+                        "fathmm_prediction": fathmm,
                     }
-                    if extra_data and code in extra_data:
-                        result.update(extra_data[code])
                     results.append(result)
 
                 return {
