@@ -166,17 +166,17 @@
     },
     {
         "name": "PharmGKB_get_clinical_annotations",
-        "description": "Get clinical annotations showing gene-drug-phenotype relationships. Returns variant-level clinical significance data. Provide a specific 'annotation_id' if known.",
+        "description": "Get clinical annotations showing gene-drug-phenotype relationships. Returns variant-level clinical significance data. Always provide a specific 'annotation_id' — filtering by gene_id is unreliable and may return empty results.",
         "parameter": {
             "type": "object",
             "properties": {
                 "annotation_id": {
                     "type": "string",
-                    "description": "PharmGKB clinical annotation ID (e.g., '1449309855')."
+                    "description": "PharmGKB clinical annotation ID (e.g., '1449309855'). Required for reliable results."
                 },
                 "gene_id": {
                     "type": "string",
-                    "description": "PharmGKB Gene Accession ID (e.g., 'PA128')."
+                    "description": "PharmGKB Gene Accession ID (e.g., 'PA128'). NOTE: Filtering by gene_id is unreliable and may return empty results silently. Use annotation_id instead."
                 }
             },
             "required": []
@@ -261,6 +261,10 @@
                 "guideline_id": {
                     "type": "string",
                     "description": "PharmGKB ClinPGx guideline ID from CPIC_list_guidelines 'clinpgxid' field (e.g., 'PA166251465' for warfarin, 'PA166251454' for opioids/codeine, 'PA166251458' for tamoxifen). Use clinpgxid, NOT pharmgkbid."
+                },
+                "gene": {
+                    "type": "string",
+                    "description": "Gene symbol (e.g., 'CYP2D6'). NOTE: Filtering by gene symbol is unreliable and may return a generic prompt instead of actual guidelines. Use guideline_id instead."
                 }
             },
             "required": ["guideline_id"]
