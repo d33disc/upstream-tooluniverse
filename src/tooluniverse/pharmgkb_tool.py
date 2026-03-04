@@ -218,23 +218,17 @@ class PharmGKBTool(BaseTool):
             result = api_response.get("data", api_response)
             return {"status": "success", "data": result}
 
-        # Fallback to listing by gene if provided
+        # BUG-67A-003: relatedGenes.symbol filter returns HTTP 400 from PharmGKB API.
+        # Return an error directing users to look up the guideline_id first.
         gene_symbol = arguments.get("gene") or arguments.get("gene_id")
         if gene_symbol:
-            try:
-                # Some guidelines are indexed by related genes
-                status_code, api_response, error = self._request_json(
-                    f"{PHARMGKB_BASE_URL}/data/guideline",
-                    {"relatedGenes.symbol": gene_symbol, "view": "base"},
-                )
-                if status_code == 200 and not error:
-                    # PharmGKB API returns {"data": {...}, "status": "success"}
-                    result = api_response.get("data", api_response)
-                    return {"status": "success", "data": result}
-            except Exception:
-                pass
+            return self._error(
+                f"PharmGKB does not support gene-based guideline lookup. "
+                f"Use PharmGKB_search_genes to find gene '{gene_symbol}', then use the "
+                f"returned guideline IDs with guideline_id parameter."
+            )
 
-        result = {
-            "message": "Please provide a specific 'guideline_id'. Search for the gene first to find associated guidelines."
-        }
-        return {"status": "success", "data": result}
+        return self._error(
+            "guideline_id is required. Use PharmGKB_search_genes or PharmGKB_search_drugs "
+            "to find relevant guideline IDs."
+        )
