@@ -2,7 +2,7 @@
   {
     "type": "MetaboLightsRESTTool",
     "name": "metabolights_list_studies",
-    "description": "List all MetaboLights studies with pagination. Returns a list of study IDs (e.g., 'MTBLS1', 'MTBLS2'). Use metabolights_get_study to get detailed information for a specific study ID.",
+    "description": "List MetaboLights studies. Returns a list of study IDs (e.g., 'MTBLS1', 'MTBLS2'). Note: the MetaboLights API always returns all ~2700 public study IDs; pagination (size, page) is applied client-side. Use metabolights_get_study to get detailed information for a specific study ID.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -42,7 +42,7 @@
   {
     "type": "MetaboLightsRESTTool",
     "name": "metabolights_search_studies",
-    "description": "Search MetaboLights studies by query string. Returns a list of matching study IDs. Use metabolights_get_study with a study ID to get detailed metadata including titles, descriptions, and organism information.",
+    "description": "Search MetaboLights studies. Note: the MetaboLights API does not support keyword filtering on the /ws/studies endpoint — the query parameter has no filtering effect and all ~2700 study IDs are returned. Use size/page for client-side pagination. To filter studies by organism or topic, call metabolights_get_study on promising study IDs.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -125,7 +125,7 @@
   {
     "type": "MetaboLightsRESTTool",
     "name": "metabolights_get_study_assays",
-    "description": "Get all assays associated with a MetaboLights study. Returns assay metadata including assay types, protocols, and measurement details.",
+    "description": "Get assay file names for a MetaboLights study. Returns a list of assay filenames only (e.g., 'a_MTBLS1_metabolite_profiling_NMR_spectroscopy.txt'). Note: the MetaboLights API only returns filenames; detailed assay metadata (types, protocols, measurements) is only available by downloading the assay TSV files directly from MetaboLights.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -142,9 +142,12 @@
     },
     "return_schema": {
       "type": "array",
-      "description": "List of assays with metadata",
+      "description": "List of assay file entries (filename only)",
       "items": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "filename": {"type": "string", "description": "Assay TSV filename"}
+        }
       }
     },
     "test_examples": [

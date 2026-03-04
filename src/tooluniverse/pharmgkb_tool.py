@@ -199,7 +199,7 @@ class PharmGKBTool(BaseTool):
                     return {"status": "success", "data": result}
 
             result = {
-                "message": "Please provide a specific clinical 'annotation_id'. You can find these IDs by searching for drugs or genes first."
+                "message": "Please provide a specific clinical 'annotation_id'. The gene_id filter (relatedGenes.id) is not supported by the PharmGKB API. Workflow: 1) Use PharmGKB_search_genes to find the gene, 2) Use PharmGKB_get_gene_details to get details, 3) Search for annotation IDs in the literature or PharmGKB website, then call this tool with annotation_id."
             }
             return {"status": "success", "data": result}
         except Exception as e:
@@ -235,6 +235,6 @@ class PharmGKBTool(BaseTool):
                 pass
 
         result = {
-            "message": "Please provide a specific 'guideline_id'. Search for the gene first to find associated guidelines."
+            "message": "Please provide a specific 'guideline_id'. Gene-based filtering (relatedGenes.symbol) is not reliably supported by the API. Search the PharmGKB website for CPIC/DPWG guidelines by gene, then use the guideline_id from the URL."
         }
         return {"status": "success", "data": result}
