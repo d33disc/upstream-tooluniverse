@@ -236,13 +236,13 @@
     },
     {
         "name": "PharmGKB_get_dosing_guidelines",
-        "description": "Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB by guideline_id. Use PharmGKB_search_genes to find the gene first and obtain guideline IDs.",
+        "description": "Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB by guideline_id. IMPORTANT: use the 'clinpgxid' field from CPIC_list_guidelines (e.g., 'PA166251454'), NOT the 'pharmgkbid' field — old-format pharmgkbid values (e.g., 'PA166104996') return HTTP 404. The test example PA166251465 is for the warfarin guideline.",
         "parameter": {
             "type": "object",
             "properties": {
                 "guideline_id": {
                     "type": "string",
-                    "description": "PharmGKB guideline ID (e.g., 'PA166124584')."
+                    "description": "PharmGKB ClinPGx guideline ID from CPIC_list_guidelines 'clinpgxid' field (e.g., 'PA166251465' for warfarin, 'PA166251454' for opioids/codeine, 'PA166251458' for tamoxifen). Use clinpgxid, NOT pharmgkbid."
                 }
             },
             "required": ["guideline_id"]
