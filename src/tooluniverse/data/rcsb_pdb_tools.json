@@ -744,7 +744,7 @@
     },
     "test_examples": [
       {
-        "pdb_id": "1CRN"
+        "pdb_id": "7BV2"
       }
     ],
     "return_schema": {
@@ -1559,7 +1559,7 @@
     },
     "test_examples": [
       {
-        "entity_id": "1"
+        "entity_id": "1IEP_1"
       }
     ],
     "return_schema": {

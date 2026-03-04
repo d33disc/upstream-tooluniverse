@@ -61,7 +61,7 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract affinities from response (API uses typo 'Linds' not 'Ligands')
+            # Extract affinities from response
             affinities = data.get("getLindsByUniprotResponse", {}).get(
                 "bdb.affinities", []
             )
@@ -119,7 +119,7 @@ class BindingDBTool(BaseTool):
 
             # Extract affinities from response
             affinities = data.get("getLindsByUniprotsResponse", {}).get(
-                "bdb.affinities", []
+                "affinities", []
             )
 
             if not affinities:
@@ -175,10 +175,8 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract affinities from response (API uses typo 'Linds' not 'Ligands')
-            affinities = data.get("getLindsByPDBsResponse", {}).get(
-                "bdb.affinities", []
-            )
+            # Extract affinities from response
+            affinities = data.get("getLindsByPDBsResponse", {}).get("affinities", [])
 
             if not affinities:
                 return {
@@ -215,11 +213,6 @@ class BindingDBTool(BaseTool):
         similarity_cutoff = arguments.get("similarity_cutoff", 0.85)
 
         try:
-            # URL encode the SMILES
-            import urllib.parse
-
-            urllib.parse.quote(smiles, safe="")
-
             response = requests.get(
                 f"{self.BASE_URL}/getTargetByCompound",
                 params={
@@ -233,7 +226,7 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract targets from response (API uses 'getLindsByUniprotResponse' key)
+            # Extract targets from response
             targets = data.get("getLindsByUniprotResponse", {}).get(
                 "bdb.affinities", []
             )
