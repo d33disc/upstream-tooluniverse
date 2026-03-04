@@ -170,6 +170,16 @@ class GxATool(BaseTool):
         profiles = data.get("profiles", {})
         rows = profiles.get("rows", [])
 
+        # Apply client-side gene_id filter (API ignores geneId parameter)
+        if gene_id:
+            gene_id_lower = gene_id.lower()
+            rows = [
+                r
+                for r in rows
+                if gene_id_lower in str(r.get("id", "")).lower()
+                or gene_id_lower in str(r.get("name", "")).lower()
+            ]
+
         gene_profiles = []
         for row in rows[:50]:  # Limit to first 50 genes
             # Client-side gene_id filter: skip rows that don't match

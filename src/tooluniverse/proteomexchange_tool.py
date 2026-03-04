@@ -93,9 +93,9 @@ class ProteomeXchangeTool(BaseTool):
         response.raise_for_status()
         raw = response.json()
 
-        # Extract title
-        title_terms = raw.get("title", {}).get("terms", [])
-        title = self._extract_cv_value(title_terms, name_match="dataset title") or ""
+        # Extract title (API returns plain string, not dict with terms)
+        raw_title = raw.get("title", "")
+        title = raw_title if isinstance(raw_title, str) else ""
 
         # Extract species
         species_groups = raw.get("species", [])
@@ -116,14 +116,13 @@ class ProteomeXchangeTool(BaseTool):
                 if val:
                     identifiers.append({"name": name, "value": val})
 
-        # Extract instruments
+        # Extract instruments (API returns flat dicts with 'name'+'accession', not 'terms')
         instruments = []
-        for inst_group in raw.get("instruments", []):
-            if isinstance(inst_group, dict):
-                terms = inst_group.get("terms", [])
-                inst = self._extract_cv_value(terms, name_match="instrument model")
-                if inst and inst != "null":
-                    instruments.append(inst)
+        for inst in raw.get("instruments", []):
+            if isinstance(inst, dict):
+                inst_name = inst.get("name", "")
+                if inst_name and inst_name != "null":
+                    instruments.append(inst_name)
 
         # Extract publications
         publications = []

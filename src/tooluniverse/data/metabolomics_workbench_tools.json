@@ -265,6 +265,12 @@
                     "type": "number",
                     "description": "Mass tolerance in Daltons for the search.",
                     "default": 0.1
+                },
+                "database": {
+                    "type": "string",
+                    "description": "Database to search: 'MB' (Metabolomics Workbench, default), 'LIPIDS', or 'REFMET'.",
+                    "enum": ["MB", "LIPIDS", "REFMET"],
+                    "default": "MB"
                 }
             },
             "required": [
