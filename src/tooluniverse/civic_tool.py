@@ -323,6 +323,11 @@ class CIViCTool(BaseTool):
             # silently dropping one is confusing. Apply AND logic and add a note.
             raw_query = arguments.get("query")
             raw_variant_name = arguments.get("variant_name") or arguments.get("variant")
+            # BUG-66A-002: strip leading/trailing whitespace from query/variant inputs
+            if raw_query and isinstance(raw_query, str):
+                raw_query = raw_query.strip()
+            if raw_variant_name and isinstance(raw_variant_name, str):
+                raw_variant_name = raw_variant_name.strip()
             _both_provided = (
                 raw_query and raw_variant_name and raw_query != raw_variant_name
             )
@@ -333,6 +338,12 @@ class CIViCTool(BaseTool):
             else:
                 query_term = raw_query or raw_variant_name
                 _secondary_term = None
+            # BUG-66A-001: variant_name was silently ignored on the no-gene GraphQL path
+            # because _build_graphql_query only reads arguments["query"]. Forward query_term
+            # into arguments["query"] so the no-gene path correctly filters by variant name.
+            if query_term and not arguments.get("query"):
+                arguments = dict(arguments)
+                arguments["query"] = query_term
             if gene_name:
                 gene_id = self._lookup_gene_id(gene_name)
                 if gene_id is None:

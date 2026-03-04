@@ -251,7 +251,10 @@
       ]
     },
     "fields": {
-      "endpoint": "https://api.cpicpgx.org/v1/pair?genesymbol=eq.{genesymbol}"
+      "endpoint": "https://api.cpicpgx.org/v1/pair?genesymbol=eq.{genesymbol}",
+      "params": {
+        "select": "*,drug(name)"
+      }
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -305,6 +308,16 @@
                   "null"
                 ],
                 "description": "PGx testing recommendation"
+              },
+              "drug": {
+                "type": ["object", "null"],
+                "description": "Embedded drug info from CPIC drug table",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Human-readable drug name (e.g., 'codeine', 'warfarin')"
+                  }
+                }
               }
             }
           }
