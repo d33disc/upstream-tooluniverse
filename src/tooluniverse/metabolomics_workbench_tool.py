@@ -137,16 +137,14 @@ class MetabolomicsWorkbenchTool(BaseTool):
         return self._make_request(f"refmet/{input_item}/{input_value}/{output_item}")
 
     def _search_moverz(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        """Search by m/z value."""
+        """Search by m/z value. Requires database as first URL path segment."""
         mz_value = arguments.get("mz_value")
         adduct = arguments.get("adduct", "M+H")
         tolerance = arguments.get("tolerance", 0.1)
-        output_item = arguments.get("output_item", "all")
+        database = arguments.get("database", "MB")  # MB, LIPIDS, or REFMET
         if mz_value is None:
             return {"error": "mz_value parameter is required"}
-        return self._make_request(
-            f"moverz/{mz_value}/{adduct}/{tolerance}/{output_item}"
-        )
+        return self._make_request(f"moverz/{database}/{mz_value}/{adduct}/{tolerance}")
 
     def _search_exactmass(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Search by exact mass."""

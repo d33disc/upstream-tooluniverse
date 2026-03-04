@@ -91,7 +91,7 @@ class HMDBTool(BaseTool):
                     cid = compounds[0].get("id", {}).get("id", {}).get("cid")
                     # Get full compound properties
                     props_response = requests.get(
-                        f"{PUBCHEM_API_URL}/compound/cid/{cid}/property/MolecularFormula,MolecularWeight,CanonicalSMILES,InChIKey,IUPACName/JSON",
+                        f"{PUBCHEM_API_URL}/compound/cid/{cid}/property/MolecularFormula,MolecularWeight,ConnectivitySMILES,InChIKey,IUPACName/JSON",
                         timeout=self.timeout,
                     )
                     if props_response.status_code == 200:
@@ -108,7 +108,7 @@ class HMDBTool(BaseTool):
                                 "name": props.get("IUPACName"),
                                 "chemical_formula": props.get("MolecularFormula"),
                                 "molecular_weight": props.get("MolecularWeight"),
-                                "smiles": props.get("CanonicalSMILES"),
+                                "smiles": props.get("ConnectivitySMILES"),
                                 "inchikey": props.get("InChIKey"),
                             },
                             "metadata": {
@@ -156,7 +156,7 @@ class HMDBTool(BaseTool):
         try:
             # Use PubChem to search for compounds
             response = requests.get(
-                f"{PUBCHEM_API_URL}/compound/name/{query}/property/MolecularFormula,MolecularWeight,CanonicalSMILES,IUPACName/JSON",
+                f"{PUBCHEM_API_URL}/compound/name/{query}/property/MolecularFormula,MolecularWeight,ConnectivitySMILES,IUPACName/JSON",
                 timeout=self.timeout,
                 headers={"User-Agent": "ToolUniverse/HMDB"},
             )
@@ -172,7 +172,7 @@ class HMDBTool(BaseTool):
                             "name": props.get("IUPACName"),
                             "formula": props.get("MolecularFormula"),
                             "mw": props.get("MolecularWeight"),
-                            "smiles": props.get("CanonicalSMILES"),
+                            "smiles": props.get("ConnectivitySMILES"),
                         }
                     )
 

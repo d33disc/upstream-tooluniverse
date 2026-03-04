@@ -61,9 +61,9 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract affinities from response
-            affinities = data.get("getLigandsByUniprotResponse", {}).get(
-                "affinities", []
+            # Extract affinities from response (API uses typo 'Linds' not 'Ligands')
+            affinities = data.get("getLindsByUniprotResponse", {}).get(
+                "bdb.affinities", []
             )
 
             if not affinities:
@@ -119,7 +119,7 @@ class BindingDBTool(BaseTool):
 
             # Extract affinities from response
             affinities = data.get("getLindsByUniprotsResponse", {}).get(
-                "affinities", []
+                "bdb.affinities", []
             )
 
             if not affinities:
@@ -175,8 +175,10 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract affinities from response
-            affinities = data.get("getLigandsByPDBsResponse", {}).get("affinities", [])
+            # Extract affinities from response (API uses typo 'Linds' not 'Ligands')
+            affinities = data.get("getLindsByPDBsResponse", {}).get(
+                "bdb.affinities", []
+            )
 
             if not affinities:
                 return {
@@ -231,8 +233,10 @@ class BindingDBTool(BaseTool):
 
             data = response.json()
 
-            # Extract targets from response
-            targets = data.get("getTargetByCompoundResponse", {}).get("affinities", [])
+            # Extract targets from response (API uses 'getLindsByUniprotResponse' key)
+            targets = data.get("getLindsByUniprotResponse", {}).get(
+                "bdb.affinities", []
+            )
 
             if not targets:
                 return {
