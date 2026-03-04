@@ -24,16 +24,22 @@
             }
         ],
         "return_schema": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "objCls": {"type": "string"},
-                    "id": {"type": "string"},
-                    "name": {"type": "string"},
-                    "inChi": {"type": "string"},
-                    "smiles": {"type": "string"},
-                    "types": {"type": "array", "items": {"type": "string"}}
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "objCls": {"type": "string"},
+                            "id": {"type": "string"},
+                            "name": {"type": "string"},
+                            "inChi": {"type": "string"},
+                            "smiles": {"type": "string"},
+                            "types": {"type": "array", "items": {"type": "string"}}
+                        }
+                    }
                 }
             }
         }
@@ -99,17 +105,23 @@
             }
         ],
         "return_schema": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "objCls": {"type": "string"},
-                    "id": {"type": "string"},
-                    "symbol": {"type": "string"},
-                    "name": {"type": "string"},
-                    "chr": {"type": "object", "additionalProperties": true}
-                },
-                "additionalProperties": true
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "objCls": {"type": "string"},
+                            "id": {"type": "string"},
+                            "symbol": {"type": "string"},
+                            "name": {"type": "string"},
+                            "chr": {"type": "object", "additionalProperties": true}
+                        },
+                        "additionalProperties": true
+                    }
+                }
             }
         }
     },
@@ -220,17 +232,23 @@
             }
         ],
         "return_schema": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "objCls": {"type": "string"},
-                    "id": {"type": "string"},
-                    "name": {"type": "string"},
-                    "location": {"type": "object"},
-                    "gene": {"type": "object"}
-                },
-                "additionalProperties": true
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "objCls": {"type": "string"},
+                            "id": {"type": "string"},
+                            "name": {"type": "string"},
+                            "location": {"type": "object"},
+                            "gene": {"type": "object"}
+                        },
+                        "additionalProperties": true
+                    }
+                }
             }
         }
     },

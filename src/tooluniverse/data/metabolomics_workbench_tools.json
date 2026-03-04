@@ -219,7 +219,7 @@
         "return_schema": {
             "type": "object",
             "properties": {
-                "refmet_name": {
+                "name": {
                     "type": "string",
                     "description": "Standardized RefMet name"
                 },
