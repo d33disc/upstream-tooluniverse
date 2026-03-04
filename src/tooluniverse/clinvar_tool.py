@@ -125,12 +125,15 @@ class ClinVarSearchVariants(ClinVarRESTTool):
             query_parts.append(f"{arguments['gene']}[gene]")
 
         if "condition" in arguments:
-            # ClinVar eSearch uses [disease/phenotype] field; quote multi-word terms
+            # BUG-70B-005: [disease/phenotype] is not a valid ClinVar eSearch field.
+            # Use bare condition text; ClinVar matches against all fields by default.
             condition = arguments["condition"]
-            query_parts.append(f'"{condition}"[disease/phenotype]')
+            query_parts.append(condition)
 
         if "variant_id" in arguments:
-            query_parts.append(f"{arguments['variant_id']}[variant_id]")
+            # BUG-70B-004: [variant_id] is not recognized by ClinVar eSearch.
+            # Use [uid] to look up by numeric variation ID.
+            query_parts.append(f"{arguments['variant_id']}[uid]")
 
         if not query_parts:
             return {
