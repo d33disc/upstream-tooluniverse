@@ -192,6 +192,14 @@ class ClinVarGetVariantDetails(ClinVarRESTTool):
             if "result" in data and variant_id in data["result"]:
                 variant_data = data["result"][variant_id]
 
+                # Check for NCBI inline error (HTTP 200 but variant not found)
+                if variant_data.get("error"):
+                    return {
+                        "status": "error",
+                        "error": f"Variant {variant_id} not found in ClinVar: {variant_data['error']}",
+                        "url": result.get("url"),
+                    }
+
                 # Extract key information
                 formatted_data = {
                     "variant_id": variant_id,
@@ -248,6 +256,14 @@ class ClinVarGetClinicalSignificance(ClinVarRESTTool):
             data = result.get("data", {})
             if "result" in data and variant_id in data["result"]:
                 variant_data = data["result"][variant_id]
+
+                # Check for NCBI inline error (HTTP 200 but variant not found)
+                if variant_data.get("error"):
+                    return {
+                        "status": "error",
+                        "error": f"Variant {variant_id} not found in ClinVar: {variant_data['error']}",
+                        "url": result.get("url"),
+                    }
 
                 # Extract clinical significance information
                 germline_class = variant_data.get("germline_classification", {})

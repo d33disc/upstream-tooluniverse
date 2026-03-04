@@ -144,9 +144,9 @@
           "type": "object",
           "description": "Detailed variant information from ClinVar",
           "properties": {
-            "variation": {
+            "result": {
               "type": "object",
-              "description": "Variant data structure"
+              "description": "Variant data structure keyed by variant ID"
             }
           }
         },
