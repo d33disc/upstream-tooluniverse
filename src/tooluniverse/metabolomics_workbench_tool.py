@@ -11,6 +11,7 @@ API Documentation: https://www.metabolomicsworkbench.org/tools/mw_rest.php
 
 import requests
 from typing import Dict, Any
+from urllib.parse import quote
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
@@ -129,7 +130,7 @@ class MetabolomicsWorkbenchTool(BaseTool):
 
     def _query_refmet(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Query RefMet nomenclature."""
-        input_item = arguments.get("input_item", "name")
+        input_item = self.tool_config.get("fields", {}).get("input_item", "name")
         input_value = arguments.get("input_value", "")
         output_item = arguments.get("output_item", "all")
         if not input_value:
@@ -144,7 +145,11 @@ class MetabolomicsWorkbenchTool(BaseTool):
         database = arguments.get("database", "MB")  # MB, LIPIDS, or REFMET
         if mz_value is None:
             return {"error": "mz_value parameter is required"}
-        return self._make_request(f"moverz/{database}/{mz_value}/{adduct}/{tolerance}")
+        # URL-encode adduct: '+' in 'M+H' must be %2B or the server drops the connection
+        encoded_adduct = quote(str(adduct), safe="")
+        return self._make_request(
+            f"moverz/{database}/{mz_value}/{encoded_adduct}/{tolerance}"
+        )
 
     def _search_exactmass(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Search by exact mass using moverz endpoint with neutral adduct."""
