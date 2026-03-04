@@ -1,30 +1,27 @@
 """
-DNA_reverse_complement
+ToolUniverse_get_usage_tips
 
-Generate the reverse complement of a DNA sequence. Complements each base (A↔T, G↔C) then reverses...
+Return concise usage tips for the ToolUniverse SDK. Use topic='all' (default) to get all tips, or...
 """
 
 from typing import Any, Optional, Callable
 from ._shared_client import get_shared_client
 
 
-def DNA_reverse_complement(
-    operation: str,
-    sequence: str,
+def ToolUniverse_get_usage_tips(
+    topic: Optional[str] = "all",
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Generate the reverse complement of a DNA sequence. Complements each base (A↔T, G↔C) then reverses...
+    Return concise usage tips for the ToolUniverse SDK. Use topic='all' (default) to get all tips, or...
 
     Parameters
     ----------
-    operation : str
-        Operation type
-    sequence : str
-        DNA sequence (A, T, G, C, N only). Case insensitive.
+    topic : str
+        Topic to filter tips. One of: 'loading', 'running', 'searching', 'workspace',...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -39,14 +36,10 @@ def DNA_reverse_complement(
     # Handle mutable defaults to avoid B006 linting error
 
     # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"operation": operation, "sequence": sequence}.items()
-        if v is not None
-    }
+    _args = {k: v for k, v in {"topic": topic}.items() if v is not None}
     return get_shared_client().run_one_function(
         {
-            "name": "DNA_reverse_complement",
+            "name": "ToolUniverse_get_usage_tips",
             "arguments": _args,
         },
         stream_callback=stream_callback,
@@ -55,4 +48,4 @@ def DNA_reverse_complement(
     )
 
 
-__all__ = ["DNA_reverse_complement"]
+__all__ = ["ToolUniverse_get_usage_tips"]

@@ -34,7 +34,7 @@
                     "properties": {
                         "gene": {"type": "string"},
                         "species": {"type": "string"},
-                        "experiments": {"type": "array"},
+                        "baseline_experiments": {"type": "array"},
                         "experiment_count": {"type": "integer"}
                     }
                 },
