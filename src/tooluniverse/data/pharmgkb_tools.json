@@ -154,17 +154,17 @@
     },
     {
         "name": "PharmGKB_get_clinical_annotations",
-        "description": "Get clinical annotations showing gene-drug-phenotype relationships. Returns variant-level clinical significance data. Provide a specific 'annotation_id' if known.",
+        "description": "Get clinical annotations showing gene-drug-phenotype relationships. Returns variant-level clinical significance data. Always provide a specific 'annotation_id' — filtering by gene_id is unreliable and may return empty results.",
         "parameter": {
             "type": "object",
             "properties": {
                 "annotation_id": {
                     "type": "string",
-                    "description": "PharmGKB clinical annotation ID (e.g., '1449309855')."
+                    "description": "PharmGKB clinical annotation ID (e.g., '1449309855'). Required for reliable results."
                 },
                 "gene_id": {
                     "type": "string",
-                    "description": "PharmGKB Gene Accession ID (e.g., 'PA128')."
+                    "description": "PharmGKB Gene Accession ID (e.g., 'PA128'). NOTE: Filtering by gene_id is unreliable and may return empty results silently. Use annotation_id instead."
                 }
             },
             "required": []
@@ -236,17 +236,17 @@
     },
     {
         "name": "PharmGKB_get_dosing_guidelines",
-        "description": "Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB. Provide a specific 'guideline_id' if known.",
+        "description": "Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB. Always provide a specific 'guideline_id' — filtering by gene symbol is unreliable and may return a generic message instead of results.",
         "parameter": {
             "type": "object",
             "properties": {
                 "guideline_id": {
                     "type": "string",
-                    "description": "PharmGKB guideline ID (e.g., 'PA166124584')."
+                    "description": "PharmGKB guideline ID (e.g., 'PA166124584'). Required for reliable results."
                 },
                 "gene": {
                     "type": "string",
-                    "description": "Gene symbol (e.g., 'CYP2D6')."
+                    "description": "Gene symbol (e.g., 'CYP2D6'). NOTE: Filtering by gene symbol is unreliable and may return a generic prompt instead of actual guidelines. Use guideline_id instead."
                 }
             },
             "required": []

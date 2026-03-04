@@ -137,7 +137,7 @@
       "properties": {
         "species": {
           "type": "string",
-          "description": "Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). To find available species and their taxonomy IDs, use Reactome_list_species."
+          "description": "Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). IMPORTANT: Common names like 'human' or 'mouse' will return HTTP 404. Use exact scientific name (e.g., 'Homo sapiens', 'Mus musculus') or NCBI taxonomy ID. To find available species, use Reactome_list_species."
         }
       },
       "required": ["species"]
@@ -336,7 +336,7 @@
         },
         "species": {
           "type": "string",
-          "description": "Optional: Filter by species (e.g., 'Homo sapiens')"
+          "description": "Optional: Filter by species using exact scientific name (e.g., 'Homo sapiens') or taxonomy ID. Common names like 'human' are not supported."
         },
         "types": {
           "type": "array",

@@ -417,7 +417,7 @@
       "properties": {
         "guideline_id": {
           "type": "integer",
-          "description": "CPIC guideline numeric ID (e.g., 100421 for HLA-B/abacavir, 100414 for CYP2D6/codeine). Obtain IDs from CPIC_list_guidelines."
+          "description": "CPIC guideline numeric ID (e.g., 100421 for HLA-B/abacavir, 100416 for CYP2D6/opioids (codeine), 100414 for CYP2D6+CYP2C19/amitriptyline (tricyclic antidepressants)). Obtain IDs from CPIC_list_guidelines."
         },
         "limit": {
           "type": [
