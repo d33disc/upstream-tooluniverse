@@ -11,7 +11,7 @@
       "required": ["rsid"]
     },
     "fields": {
-      "endpoint": "https://regulomedb.org/regulome-search/?regions={rsid}&assembly=hg19",
+      "endpoint": "https://regulomedb.org/regulome-search/?regions={rsid}&genome=GRCh38",
       "return_format": "JSON"
     },
     "return_schema": {

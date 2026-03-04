@@ -128,6 +128,7 @@ class GTExEQTLTool:
 
         query: Dict[str, Any] = {
             "gencodeId": arguments.get("ensembl_gene_id"),
+            "datasetId": arguments.get("dataset_id", "gtex_v10"),
         }
         if "page" in arguments:
             query["page"] = int(arguments["page"])
