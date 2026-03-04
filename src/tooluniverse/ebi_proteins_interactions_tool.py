@@ -147,7 +147,8 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         # Extract protein metadata from first entry
         first_entry = data[0]
-        protein_name = first_entry.get("accession", accession)
+        # BUG-66B-008a: "accession" returns the accession again; use "name" for protein name
+        protein_name = first_entry.get("name", accession)
         protein_existence = first_entry.get("proteinExistence")
         organism = None
         taxonomy = first_entry.get("taxonomy")
@@ -156,6 +157,8 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         # Collect all interactions across entries
         all_interactions = []
+        # BUG-66B-008c: diseases/locations are properties of the query protein only (data[0]),
+        # not of all interaction partners — iterating all entries mixes partner data in.
         diseases = set()
         locations = set()
 
@@ -175,24 +178,25 @@ class EBIProteinsInteractionsTool(BaseTool):
                     }
                 )
 
-            # Extract diseases
-            for disease in entry.get("diseases", []):
-                disease_name = (
-                    disease.get("diseaseId")
-                    or disease.get("acronym")
-                    or disease.get("type")
-                )
-                if disease_name:
-                    diseases.add(str(disease_name))
+        # Extract diseases and locations from the query protein entry only
+        for disease in first_entry.get("diseases", []):
+            disease_name = (
+                disease.get("diseaseId")
+                or disease.get("acronym")
+                or disease.get("type")
+            )
+            if disease_name:
+                diseases.add(str(disease_name))
 
-            # Extract subcellular locations
-            for loc in entry.get("subcellularLocations", []):
-                for subloc in loc.get("locations", [loc]):
-                    loc_name = (
-                        subloc.get("value") if isinstance(subloc, dict) else str(subloc)
-                    )
-                    if loc_name:
-                        locations.add(str(loc_name))
+        for loc in first_entry.get("subcellularLocations", []):
+            for subloc in loc.get("locations", [loc]):
+                # BUG-66B-008b: subloc["value"] is wrong; the value is nested under "location"
+                if isinstance(subloc, dict):
+                    loc_name = subloc.get("location", {}).get("value")
+                else:
+                    loc_name = str(subloc)
+                if loc_name:
+                    locations.add(str(loc_name))
 
         # Deduplicate and sort
         seen = {}

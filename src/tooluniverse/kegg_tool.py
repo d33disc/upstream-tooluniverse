@@ -125,7 +125,8 @@ class KEGGGetPathwayInfo(KEGGRESTTool):
             pathway_info = {
                 "pathway_id": pathway_id,
                 "raw_data": result["data"],
-                "lines": len(lines),
+                # BUG-66A-007: renamed from "lines" (misleading int) to "line_count"
+                "line_count": len(lines),
             }
             result["data"] = pathway_info
 
@@ -190,7 +191,7 @@ class KEGGGetGeneInfo(KEGGRESTTool):
             gene_info = {
                 "gene_id": gene_id,
                 "raw_data": result["data"],
-                "lines": len(lines),
+                "line_count": len(lines),
             }
             result["data"] = gene_info
 
