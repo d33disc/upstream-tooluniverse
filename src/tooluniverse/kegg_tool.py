@@ -147,9 +147,14 @@ class KEGGFindGenes(KEGGRESTTool):
         if not keyword:
             return {"status": "error", "error": "keyword is required"}
 
-        # KEGG API requires the search term in the URL path
-        # For gene search, we don't need organism prefix in the URL
-        endpoint = f"{self.endpoint}/{keyword}"
+        # BUG-68B-001: when organism is provided, use /find/{organism}/{keyword}
+        # to restrict results to that organism (e.g., 'hsa' for human).
+        # Without organism, falls back to /find/genes/{keyword} (all organisms).
+        organism = arguments.get("organism", "")
+        if organism:
+            endpoint = f"/find/{organism}/{keyword}"
+        else:
+            endpoint = f"{self.endpoint}/{keyword}"
         result = self._make_request(endpoint)
 
         # Parse gene results
