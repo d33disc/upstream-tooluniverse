@@ -99,7 +99,7 @@
               "type": "string",
               "description": "Raw pathway data from KEGG"
             },
-            "lines": {
+            "line_count": {
               "type": "integer",
               "description": "Number of data lines"
             }
@@ -240,7 +240,7 @@
               "type": "string",
               "description": "Raw gene data from KEGG"
             },
-            "lines": {
+            "line_count": {
               "type": "integer",
               "description": "Number of data lines"
             }

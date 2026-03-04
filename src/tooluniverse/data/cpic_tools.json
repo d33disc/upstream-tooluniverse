@@ -424,13 +424,13 @@
   },
   {
     "name": "CPIC_get_recommendations",
-    "description": "Get drug dosing recommendations from a specific CPIC pharmacogenomic guideline. Returns clinically actionable recommendations that link genotype/phenotype to drug prescribing actions. Each recommendation includes the classification strength (Strong, Moderate, Optional, No recommendation), the drug recommendation text, allele status context, and clinical implications. Use CPIC_list_guidelines first to obtain valid guideline IDs. Key guideline IDs: 100421 (HLA-B/abacavir), 100414 (CYP2D6/codeine), 100412 (CYP2C9,VKORC1/warfarin), 100416 (CYP2D6/amitriptyline).",
+    "description": "Get drug dosing recommendations from a specific CPIC pharmacogenomic guideline. Returns clinically actionable recommendations that link genotype/phenotype to drug prescribing actions. Each recommendation includes the classification strength (Strong, Moderate, Optional, No recommendation), the drug recommendation text, allele status context, and clinical implications. Use CPIC_list_guidelines first to obtain valid guideline IDs. Key guideline IDs: 100421 (HLA-B/abacavir), 100416 (CYP2D6,OPRM1,COMT/opioids-codeine), 100414 (CYP2D6,CYP2C19/tricyclic-antidepressants), 100415 (CYP2D6/tamoxifen), 100412 (CYP2C9,HLA-B/phenytoin).",
     "parameter": {
       "type": "object",
       "properties": {
         "guideline_id": {
           "type": "integer",
-          "description": "CPIC guideline numeric ID (e.g., 100421 for HLA-B/abacavir, 100414 for CYP2D6/codeine). Obtain IDs from CPIC_list_guidelines."
+          "description": "CPIC guideline numeric ID (e.g., 100421 for HLA-B/abacavir, 100416 for CYP2D6/opioids-codeine, 100414 for CYP2D6/tricyclic-antidepressants). Obtain IDs from CPIC_list_guidelines."
         },
         "limit": {
           "type": [
@@ -452,7 +452,7 @@
       ]
     },
     "fields": {
-      "endpoint": "https://api.cpicpgx.org/v1/recommendation?select=*&guidelineid=eq.{guideline_id}&limit={limit}&offset={offset}"
+      "endpoint": "https://api.cpicpgx.org/v1/recommendation?select=*&guidelineid=eq.{guideline_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
