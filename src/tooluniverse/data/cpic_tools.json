@@ -452,7 +452,7 @@
       ]
     },
     "fields": {
-      "endpoint": "https://api.cpicpgx.org/v1/recommendation?select=*&guidelineid=eq.{guideline_id}"
+      "endpoint": "https://api.cpicpgx.org/v1/recommendation?select=*,drug(name)&guidelineid=eq.{guideline_id}"
     },
     "type": "BaseRESTTool",
     "test_examples": [
@@ -558,14 +558,14 @@
             "string",
             "null"
           ],
-          "description": "PostgREST filter for gene symbol, prefix with 'eq.' (e.g., 'eq.CYP2D6', 'eq.DPYD', 'eq.TPMT'). Omit to search all genes."
+          "description": "Gene symbol to filter by (e.g., 'CYP2D6', 'DPYD', 'TPMT'). Omit to search all genes."
         },
         "cpiclevel": {
           "type": [
             "string",
             "null"
           ],
-          "description": "PostgREST filter for CPIC evidence level, prefix with 'eq.' (e.g., 'eq.A', 'eq.B', 'eq.B/C', 'eq.C', 'eq.D'). Omit to include all levels."
+          "description": "CPIC evidence level to filter by (e.g., 'A', 'B', 'B/C', 'C', 'D'). Omit to include all levels."
         },
         "limit": {
           "type": [
@@ -580,14 +580,14 @@
     "fields": {
       "endpoint": "https://api.cpicpgx.org/v1/pair?select=genesymbol,drugid,cpiclevel,guidelineid,usedforrecommendation,pgkbcalevel"
     },
-    "type": "BaseRESTTool",
+    "type": "CPICSearchPairsTool",
     "test_examples": [
       {
-        "genesymbol": "eq.CYP2D6",
+        "genesymbol": "CYP2D6",
         "limit": 10
       },
       {
-        "cpiclevel": "eq.A",
+        "cpiclevel": "A",
         "limit": 20
       }
     ],

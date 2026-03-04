@@ -114,7 +114,8 @@ class ClinVarSearchVariants(ClinVarRESTTool):
         params = {
             "db": "clinvar",
             "retmode": "json",
-            "retmax": arguments.get("max_results", 20),
+            # BUG-68A-009: accept 'limit' as alias for 'max_results'
+            "retmax": arguments.get("max_results") or arguments.get("limit", 20),
         }
 
         # Build search query
