@@ -142,10 +142,13 @@ class MetabolomicsWorkbenchTool(BaseTool):
         adduct = arguments.get("adduct", "M+H")
         tolerance = arguments.get("tolerance", 0.1)
         output_item = arguments.get("output_item", "all")
+        # BUG-71A-001: MW REST API requires database selector as first path segment.
+        # Valid values: MB (all metabolites), LIPIDS (LIPID MAPS), REFMET (RefMet).
+        database = arguments.get("database", "MB")
         if mz_value is None:
             return {"error": "mz_value parameter is required"}
         return self._make_request(
-            f"moverz/{mz_value}/{adduct}/{tolerance}/{output_item}"
+            f"moverz/{database}/{mz_value}/{adduct}/{tolerance}/{output_item}"
         )
 
     def _search_exactmass(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
