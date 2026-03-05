@@ -94,7 +94,7 @@ class ProteinsAPIRESTTool(BaseTool):
                 params["size"] = args["size"]
             if "offset" in args:
                 params["offset"] = args["offset"]
-            # BUG-69A-007: Default to human (taxId 9606) to avoid non-human proteins
+            # Feature-69A-007: Default to human (taxId 9606) to avoid non-human proteins
             # appearing before human proteins. User can override with organism param.
             if "organism" in args:
                 params["organism"] = args["organism"]

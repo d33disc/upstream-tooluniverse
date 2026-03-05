@@ -181,12 +181,12 @@ class GrepToolsTool(BaseTool):
             "total_matches": total_matches,
             "limit": limit,
             "offset": offset,
-            # BUG-R18A-10: limit=0 is a count-probe; has_more should reflect whether
+            # Feature-R18A-10: limit=0 is a count-probe; has_more should reflect whether
             # there ARE more results (consistent with find_tools behavior).
             # has_more: true at limit=0 correctly signals "there is data if you raise limit".
             "has_more": has_more,
-            # BUG-R19A-02: include next_offset so pipelines don't have to recompute
-            # offset+len(tools). BUG-23A-02: when limit=0 (count probe) and has_more=True,
+            # Feature-R19A-02: include next_offset so pipelines don't have to recompute
+            # offset+len(tools). Feature-23A-02: when limit=0 (count probe) and has_more=True,
             # set next_offset=0 so callers can pass it directly as --offset.
             "next_offset": (offset + len(matching_tools))
             if (has_more and limit != 0)
@@ -297,9 +297,9 @@ class ListToolsTool(BaseTool):
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_name)
 
-                    # BUG-R10A-02: capture true total BEFORE per-category pagination
+                    # Feature-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(names) for names in tools_by_category.values())
-                    # BUG-22A-07: has_more is True when limit truncates at least one category.
+                    # Feature-22A-07: has_more is True when limit truncates at least one category.
                     _by_cat_has_more = limit is not None and any(
                         len(names) > offset + limit
                         for names in tools_by_category.values()
@@ -349,11 +349,11 @@ class ListToolsTool(BaseTool):
                         "total_tools": total_count,
                         "limit": limit,
                         "offset": offset,
-                        # BUG-R19B-05: limit=0 is a count-probe; has_more should reflect
+                        # Feature-R19B-05: limit=0 is a count-probe; has_more should reflect
                         # whether data exists (consistent with grep/find behavior).
                         "has_more": _has_more_names,
-                        # BUG-R19A-02: include next_offset for pipeline convenience.
-                        # BUG-23A-02: when limit=0 (count probe) and has_more=True,
+                        # Feature-R19A-02: include next_offset for pipeline convenience.
+                        # Feature-23A-02: when limit=0 (count probe) and has_more=True,
                         # set next_offset=0 so callers can pass it as --offset.
                         "next_offset": (offset + len(tool_names))
                         if (_has_more_names and limit != 0)
@@ -394,9 +394,9 @@ class ListToolsTool(BaseTool):
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_info)
 
-                    # BUG-R10A-02: capture true total BEFORE per-category pagination
+                    # Feature-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(infos) for infos in tools_by_category.values())
-                    # BUG-22A-07: reflect per-category truncation in has_more.
+                    # Feature-22A-07: reflect per-category truncation in has_more.
                     _by_cat_has_more = limit is not None and any(
                         len(infos) > offset + limit
                         for infos in tools_by_category.values()
@@ -459,7 +459,7 @@ class ListToolsTool(BaseTool):
                 for tool_name, tool in tools:
                     category = _get_tool_category(tool, tool_name, self.tooluniverse)
                     category_counts[category] = category_counts.get(category, 0) + 1
-                # BUG-R12A-09/R12B-04: include summary metadata for machine consumers
+                # Feature-R12A-09/R12B-04: include summary metadata for machine consumers
                 return {
                     "total_categories": len(category_counts),
                     "total_tools": sum(category_counts.values()),
@@ -478,9 +478,9 @@ class ListToolsTool(BaseTool):
                             tools_by_category[category] = []
                         tools_by_category[category].append(tool_name)
 
-                # BUG-R10A-02: capture true total BEFORE per-category pagination
+                # Feature-R10A-02: capture true total BEFORE per-category pagination
                 true_total = sum(len(names) for names in tools_by_category.values())
-                # BUG-22A-07: has_more is True when limit truncates at least one category.
+                # Feature-22A-07: has_more is True when limit truncates at least one category.
                 _by_cat_has_more = limit is not None and any(
                     len(names) > offset + limit for names in tools_by_category.values()
                 )
@@ -502,7 +502,7 @@ class ListToolsTool(BaseTool):
                 return {
                     "tools_by_category": tools_by_category,
                     "total_tools": true_total,
-                    # BUG-R12A-02: clarify that limit/offset apply per-category
+                    # Feature-R12A-02: clarify that limit/offset apply per-category
                     "per_category_limit": limit,
                     "per_category_offset": offset,
                     "limit": limit,
@@ -546,9 +546,9 @@ class ListToolsTool(BaseTool):
                                 tools_by_category[category] = []
                             tools_by_category[category].append(tool_info)
 
-                    # BUG-R10A-02: capture true total BEFORE per-category pagination
+                    # Feature-R10A-02: capture true total BEFORE per-category pagination
                     true_total = sum(len(infos) for infos in tools_by_category.values())
-                    # BUG-22A-07: reflect per-category truncation in has_more.
+                    # Feature-22A-07: reflect per-category truncation in has_more.
                     _by_cat_has_more = limit is not None and any(
                         len(infos) > offset + limit
                         for infos in tools_by_category.values()
@@ -608,7 +608,7 @@ class ListToolsTool(BaseTool):
             elif mode == "custom":
                 # Return user-specified fields
                 fields = arguments.get("fields", [])
-                # BUG-R12A-01: normalize comma-separated strings like "name,type" → ["name", "type"]
+                # Feature-R12A-01: normalize comma-separated strings like "name,type" → ["name", "type"]
                 if isinstance(fields, str):
                     fields = [f.strip() for f in fields.split(",") if f.strip()]
                 elif isinstance(fields, list):
@@ -625,7 +625,7 @@ class ListToolsTool(BaseTool):
                     return {"error": ("fields parameter is required for mode='custom'")}
 
                 tools_info = []
-                # BUG-22A-09: track which fields are actually found in at least one tool
+                # Feature-22A-09: track which fields are actually found in at least one tool
                 _field_found_count = {
                     field: 0 for field in fields if field != "category"
                 }
@@ -642,7 +642,7 @@ class ListToolsTool(BaseTool):
                                 tool_info[field] = tool[field]
                                 _field_found_count[field] += 1
                         tools_info.append(tool_info)
-                # BUG-22A-09: fields with zero occurrences across all tools are unknown
+                # Feature-22A-09: fields with zero occurrences across all tools are unknown
                 _unknown_fields = [
                     f for f, cnt in _field_found_count.items() if cnt == 0
                 ]
@@ -673,7 +673,7 @@ class ListToolsTool(BaseTool):
                     if (_has_more_custom and limit != 0)
                     else None,
                     "tools": tools_info,
-                    # BUG-22A-09: fields that matched no tool attribute at all
+                    # Feature-22A-09: fields that matched no tool attribute at all
                     "unknown_fields": _unknown_fields if _unknown_fields else None,
                 }
 

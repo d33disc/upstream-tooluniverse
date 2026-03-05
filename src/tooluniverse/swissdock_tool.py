@@ -71,7 +71,7 @@ class SwissDockTool(AsyncPollingTool):
 
         response = requests.get(url, params=params, timeout=self.timeout)
         if response.status_code != 200:
-            # BUG-25A-02: add format guidance so users know what to fix
+            # Feature-25A-02: add format guidance so users know what to fix
             raise RuntimeError(
                 f"Ligand preparation failed: HTTP {response.status_code}. "
                 "Ensure ligand_smiles is a valid SMILES string "
@@ -212,7 +212,7 @@ class SwissDockTool(AsyncPollingTool):
         if not pdb_id:
             raise ValueError("pdb_id parameter is required")
 
-        # BUG-25A-02: basic SMILES sanity check before making the network call
+        # Feature-25A-02: basic SMILES sanity check before making the network call
         _smiles = str(ligand_smiles).strip()
         if not _smiles or not any(c.isalpha() for c in _smiles):
             raise ValueError(

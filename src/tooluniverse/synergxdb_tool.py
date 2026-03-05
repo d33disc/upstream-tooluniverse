@@ -102,7 +102,7 @@ class SYNERGxDBTool(BaseTool):
         if response.status_code == 200:
             return {"ok": True, "data": response.json()}
         elif response.status_code == 404:
-            # BUG-36A-04: 404 means no data for these params (a normal research outcome),
+            # Feature-36A-04: 404 means no data for these params (a normal research outcome),
             # not a real error. Return ok=True with empty data so callers can handle it
             # as empty results (exit code 0) rather than a failure (exit code 1).
             return {"ok": True, "data": [], "no_data": True}
@@ -122,7 +122,7 @@ class SYNERGxDBTool(BaseTool):
                 "detail": response.text[:500],
             }
 
-    # BUG-37A-05: dataset name → ID mapping (from /api/datasets/)
+    # Feature-37A-05: dataset name → ID mapping (from /api/datasets/)
     _DATASET_NAME_TO_ID = {
         "NCI-ALMANAC": 2,
         "MERCK": 1,
@@ -135,13 +135,13 @@ class SYNERGxDBTool(BaseTool):
         "CLOUD": 6,
     }
 
-    # BUG-46B-05: Map common tissue aliases to SYNERGxDB tissue column values.
+    # Feature-46B-05: Map common tissue aliases to SYNERGxDB tissue column values.
     # Valid SYNERGxDB tissue names (from /api/cell_lines/): "blood", "bone", "brain",
     # "breast", "cervix", "colorectal", "kidney", "liver", "lung", "mesothelioma",
     # "ovary", "pancreas", "prostate", "skin", "upper digestive tract", "gastric".
     # "colon" silently returns 0 results — must be "colorectal".
-    # "melanoma" silently returns 0 results — must be "skin" (BUG-48B-07).
-    # BUG-60B-002: API uses "brain" not "CNS" — CNS/glioma aliases must map to "brain".
+    # "melanoma" silently returns 0 results — must be "skin" (Feature-48B-07).
+    # Feature-60B-002: API uses "brain" not "CNS" — CNS/glioma aliases must map to "brain".
     _TISSUE_ALIASES: Dict[str, str] = {
         "colon": "colorectal",
         "rectal": "colorectal",
@@ -153,8 +153,8 @@ class SYNERGxDBTool(BaseTool):
         "nsclc": "lung",
         "luad": "lung",
         "brca": "breast",
-        "melanoma": "skin",  # BUG-48B-07: SYNERGxDB uses "skin" not "melanoma"
-        "cns": "brain",  # BUG-60B-002: API column value is "brain" not "CNS"
+        "melanoma": "skin",  # Feature-48B-07: SYNERGxDB uses "skin" not "melanoma"
+        "cns": "brain",  # Feature-60B-002: API column value is "brain" not "CNS"
         "gbm": "brain",
         "glioblastoma": "brain",
         "glioma": "brain",
@@ -162,9 +162,9 @@ class SYNERGxDBTool(BaseTool):
         "gastroesophageal": "upper digestive tract",
     }
 
-    # BUG-45A-03: SYNERGxDB stores some drugs under IUPAC/chemical names instead of
+    # Feature-45A-03: SYNERGxDB stores some drugs under IUPAC/chemical names instead of
     # common drug names. Map common synonyms to SYNERGxDB stored names.
-    # BUG-52B-005: add common "5-FU" aliases for fluorouracil.
+    # Feature-52B-005: add common "5-FU" aliases for fluorouracil.
     _DRUG_SYNONYMS: Dict[str, str] = {
         "cisplatin": "diamminedichloroplatinum",
         "cis-platinum": "diamminedichloroplatinum",
@@ -180,7 +180,7 @@ class SYNERGxDBTool(BaseTool):
         "herceptin": "trastuzumab",
         "avastin": "bevacizumab",
         "rituxan": "rituximab",
-        # BUG-52B-005: "5-FU" is the universal clinical shorthand for fluorouracil
+        # Feature-52B-005: "5-FU" is the universal clinical shorthand for fluorouracil
         "5-fu": "fluorouracil",
         "5fu": "fluorouracil",
         "5-fluorouracil": "fluorouracil",
@@ -199,9 +199,9 @@ class SYNERGxDBTool(BaseTool):
         if not isinstance(drugs, list):
             return None
         name_lower = name.lower().strip()
-        # BUG-45A-03: check synonym mapping first (e.g., "cisplatin" → "diamminedichloroplatinum")
+        # Feature-45A-03: check synonym mapping first (e.g., "cisplatin" → "diamminedichloroplatinum")
         effective_name = self._DRUG_SYNONYMS.get(name_lower, name_lower)
-        # BUG-47A-02: prefer exact match over substring match to avoid "Desmethyl Erlotinib"
+        # Feature-47A-02: prefer exact match over substring match to avoid "Desmethyl Erlotinib"
         # matching before "Erlotinib" when drug_name_1="erlotinib" is requested.
         # Two-pass: pass 1 = exact, pass 2 = substring fallback.
         for drug in drugs:
@@ -228,20 +228,20 @@ class SYNERGxDBTool(BaseTool):
         """Search drug combination synergy scores."""
         drug_id_1 = arguments.get("drug_id_1")
         drug_id_2 = arguments.get("drug_id_2")
-        # BUG-45B-02: accept tissue_name and tissue as intuitive aliases for sample
-        # BUG-55A-011: also accept cancer_type as alias (silently ignored before)
+        # Feature-45B-02: accept tissue_name and tissue as intuitive aliases for sample
+        # Feature-55A-011: also accept cancer_type as alias (silently ignored before)
         sample = (
             arguments.get("sample")
             or arguments.get("tissue_name")
             or arguments.get("tissue")
             or arguments.get("cancer_type")
         )
-        # BUG-46B-05: normalize common tissue aliases to SYNERGxDB column values
+        # Feature-46B-05: normalize common tissue aliases to SYNERGxDB column values
         if sample:
             sample = self._TISSUE_ALIASES.get(sample.lower(), sample)
-            # BUG-59A-009: validate tissue at input — unrecognized tissue silently returns 0
+            # Feature-59A-009: validate tissue at input — unrecognized tissue silently returns 0
             # results when both drugs are found, giving a misleading "not tested together" message.
-            # BUG-60B-002/003: use actual API tissue values from /api/cell_lines/
+            # Feature-60B-002/003: use actual API tissue values from /api/cell_lines/
             _valid_tissues = set(self._TISSUE_ALIASES.values())
             _valid_tissues.update(
                 {
@@ -276,10 +276,10 @@ class SYNERGxDBTool(BaseTool):
                 }
         dataset = arguments.get("dataset")
         page = arguments.get("page", 1)
-        # BUG-59A-008/59B-005: accept "limit" (ToolUniverse convention) as alias for "per_page"
+        # Feature-59A-008/59B-005: accept "limit" (ToolUniverse convention) as alias for "per_page"
         per_page = arguments.get("limit") or arguments.get("per_page", 20)
 
-        # BUG-43A-01/02: accept drug_name_1/drug_name_2 (and intuitive drug1/drug2 aliases)
+        # Feature-43A-01/02: accept drug_name_1/drug_name_2 (and intuitive drug1/drug2 aliases)
         # that auto-resolve to integer drug IDs via the /drugs/ endpoint.
         for id_key, name_key in (
             ("drug_id_1", "drug_name_1"),
@@ -304,7 +304,7 @@ class SYNERGxDBTool(BaseTool):
                 else:
                     drug_id_2 = resolved
 
-        # BUG-37A-05: accept dataset as string name and convert to integer ID
+        # Feature-37A-05: accept dataset as string name and convert to integer ID
         if dataset is not None and isinstance(dataset, str) and not dataset.isdigit():
             mapped = self._DATASET_NAME_TO_ID.get(dataset.upper())
             if mapped is not None:
@@ -342,7 +342,7 @@ class SYNERGxDBTool(BaseTool):
 
         data = result["data"]
 
-        # BUG-50A-003: filter self-combination entries (drugA==drugB) when only one
+        # Feature-50A-003: filter self-combination entries (drugA==drugB) when only one
         # drug is specified. These occur when the same drug appears as both partners.
         if (drug_id_1 or drug_id_2) and not (drug_id_1 and drug_id_2):
             if isinstance(data, list):
@@ -356,9 +356,9 @@ class SYNERGxDBTool(BaseTool):
                 ]
 
         if result.get("no_data") or not data:
-            # BUG-44A-03: distinguish "drug not in DB" vs "combo not tested" in the message
+            # Feature-44A-03: distinguish "drug not in DB" vs "combo not tested" in the message
             if drug_id_1 and drug_id_2:
-                # BUG-46B-04: note standard-of-care regimens that are absent from SYNERGxDB
+                # Feature-46B-04: note standard-of-care regimens that are absent from SYNERGxDB
                 folfox_hint = ""
                 # Oxaliplatin ID=80, Fluorouracil ID=41, Irinotecan ID=54 (approximate)
                 # Rather than hardcoding IDs, check the drug names that were resolved
@@ -394,7 +394,7 @@ class SYNERGxDBTool(BaseTool):
                         "represented in SYNERGxDB's 9 screening studies, which focus on pairwise "
                         "in vitro cytotoxicity rather than clinically-validated regimens."
                     )
-                # BUG-61B-002: irinotecan→SN-38 hint for the two-drug failure path.
+                # Feature-61B-002: irinotecan→SN-38 hint for the two-drug failure path.
                 _irinotecan_names = {
                     "irinotecan",
                     "camptosar",
@@ -412,7 +412,7 @@ class SYNERGxDBTool(BaseTool):
                         "datasets: STANFORD, YALE-TNBC, MERCK, NCI-ALMANAC, YALE-PDAC). "
                         "Try replacing irinotecan with drug_name='SN 38 Lactone' in your query."
                     )
-                # BUG-62A-005: when a tissue/dataset filter is active, probe whether the combo
+                # Feature-62A-005: when a tissue/dataset filter is active, probe whether the combo
                 # exists without the filter — "not tested in any dataset" is false if the combo
                 # exists in other tissues. Show actual available tissues for the two-drug combo.
                 if sample or dataset:
@@ -468,7 +468,7 @@ class SYNERGxDBTool(BaseTool):
             elif drug_id_1 or drug_id_2:
                 found_id = drug_id_1 or drug_id_2
                 id_param = "drugId1" if drug_id_1 else "drugId2"
-                # BUG-49A-H2: if a tissue/dataset filter was active, probe what data the drug
+                # Feature-49A-H2: if a tissue/dataset filter was active, probe what data the drug
                 # actually has — "try removing filters" is misleading if the drug has no data
                 # in any tissue. Show available tissues so the user knows the real situation.
                 if sample or dataset:
@@ -477,7 +477,7 @@ class SYNERGxDBTool(BaseTool):
                     )
                     if probe.get("ok") and probe.get("data"):
                         probe_data = probe["data"]
-                        # BUG-51A-006: SYNERGxDB combo records use field "tissue" for
+                        # Feature-51A-006: SYNERGxDB combo records use field "tissue" for
                         # tissue type (e.g., "breast"), NOT "sample" (which is absent).
                         tissues = sorted(
                             {x.get("tissue", "") for x in probe_data if x.get("tissue")}
@@ -500,7 +500,7 @@ class SYNERGxDBTool(BaseTool):
                             else "none in first 1000 records"
                         )
                         source_str = ", ".join(sources) if sources else "unknown"
-                        # BUG-52B-004/006: for irinotecan specifically, hint that its
+                        # Feature-52B-004/006: for irinotecan specifically, hint that its
                         # active metabolite SN-38 (stored as "SN 38 Lactone") may have
                         # data in tissues where irinotecan itself is absent.
                         drug_name_requested = str(
@@ -547,7 +547,7 @@ class SYNERGxDBTool(BaseTool):
                         "Use SYNERGxDB_list_datasets to see available data."
                     )
             else:
-                # BUG-57A-003: add BCL2 inhibitor hint when relevant drug names are queried
+                # Feature-57A-003: add BCL2 inhibitor hint when relevant drug names are queried
                 _drug_q = " ".join(
                     str(arguments.get(k, ""))
                     for k in (
@@ -630,14 +630,14 @@ class SYNERGxDBTool(BaseTool):
 
         data = result["data"]
 
-        # BUG-35A-08: client-side name filtering if query/name/search is provided
+        # Feature-35A-08: client-side name filtering if query/name/search is provided
         name_filter = (
             arguments.get("query") or arguments.get("name") or arguments.get("search")
         )
         synonym_used = None
         if name_filter and isinstance(data, list):
             name_lower = name_filter.lower()
-            # BUG-53B-007: apply synonym expansion in list_drugs — _DRUG_SYNONYMS maps
+            # Feature-53B-007: apply synonym expansion in list_drugs — _DRUG_SYNONYMS maps
             # common names to SYNERGxDB stored names (e.g., "cisplatin" →
             # "diamminedichloroplatinum"). Without this, list_drugs(query="cisplatin")
             # returned empty because the client-side filter ran against
@@ -670,7 +670,7 @@ class SYNERGxDBTool(BaseTool):
             out["synonym_expanded"] = (
                 f"Searched for '{synonym_used}' (SYNERGxDB stored name for '{name_filter}')."
             )
-        # BUG-43A-06: when drug name search returns empty, add a helpful note about
+        # Feature-43A-06: when drug name search returns empty, add a helpful note about
         # database coverage so users understand why their targeted therapy is missing.
         if result_count == 0 and name_filter:
             out["note"] = (

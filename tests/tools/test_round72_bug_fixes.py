@@ -2,13 +2,13 @@
 Tests for Round 72 bug fixes in proteomics/structural biology tools.
 
 Covers:
-- BUG-72A-001: alphafold_get_annotations invalid test_example "F1"
-- BUG-72A-003: BLAST wrong BioPython attribute names (hit_length, hit_start, hit_end)
-- BUG-72A-004: MobiDB dead base URL (mobidb.bio.unipd.it -> mobidb.org)
-- BUG-72A-005: EVE protein_change always None (hgvsp -> amino_acids)
-- BUG-72A-006: pdbe_get_entry_quality broken endpoint
-- BUG-72A-007: PROSITE signature_name always None (signature_id -> removed)
-- BUG-72A-010: DisProt wrong base URL (missing www.)
+- Feature-72A-001: alphafold_get_annotations invalid test_example "F1"
+- Feature-72A-003: BLAST wrong BioPython attribute names (hit_length, hit_start, hit_end)
+- Feature-72A-004: MobiDB dead base URL (mobidb.bio.unipd.it -> mobidb.org)
+- Feature-72A-005: EVE protein_change always None (hgvsp -> amino_acids)
+- Feature-72A-006: pdbe_get_entry_quality broken endpoint
+- Feature-72A-007: PROSITE signature_name always None (signature_id -> removed)
+- Feature-72A-010: DisProt wrong base URL (missing www.)
 """
 
 import json
@@ -35,10 +35,10 @@ _ensure_registry_stub()
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-001: alphafold_get_annotations invalid test_example
+# Feature-72A-001: alphafold_get_annotations invalid test_example
 # ---------------------------------------------------------------------------
 class TestAlphafoldAnnotationsTestExample(unittest.TestCase):
-    """BUG-72A-001: alphafold_get_annotations had 'F1' as test_example (invalid accession)."""
+    """Feature-72A-001: alphafold_get_annotations had 'F1' as test_example (invalid accession)."""
 
     def test_annotations_test_example_is_valid_uniprot_accession(self):
         """test_examples must use a valid UniProt accession, not 'F1'."""
@@ -62,10 +62,10 @@ class TestAlphafoldAnnotationsTestExample(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-003: BLAST wrong BioPython attribute names
+# Feature-72A-003: BLAST wrong BioPython attribute names
 # ---------------------------------------------------------------------------
 class TestBlastBioPythonAttributes(unittest.TestCase):
-    """BUG-72A-003: BLAST _parse_blast_results used wrong attribute names."""
+    """Feature-72A-003: BLAST _parse_blast_results used wrong attribute names."""
 
     def test_blast_uses_alignment_length_not_hit_length(self):
         """hit_length should use alignment.length (BioPython), not alignment.hit_length."""
@@ -157,10 +157,10 @@ class TestBlastBioPythonAttributes(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-004: MobiDB dead base URL
+# Feature-72A-004: MobiDB dead base URL
 # ---------------------------------------------------------------------------
 class TestMobiDBBaseURL(unittest.TestCase):
-    """BUG-72A-004: MobiDB used dead URL mobidb.bio.unipd.it instead of mobidb.org."""
+    """Feature-72A-004: MobiDB used dead URL mobidb.bio.unipd.it instead of mobidb.org."""
 
     def test_mobidb_base_url_is_correct(self):
         """MOBIDB_BASE_URL must point to mobidb.org, not the dead mobidb.bio.unipd.it."""
@@ -186,10 +186,10 @@ class TestMobiDBBaseURL(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-005: EVE protein_change always None (hgvsp does not exist in VEP)
+# Feature-72A-005: EVE protein_change always None (hgvsp does not exist in VEP)
 # ---------------------------------------------------------------------------
 class TestEVEProteinChange(unittest.TestCase):
-    """BUG-72A-005: EVE used tc.get('hgvsp') which VEP never returns."""
+    """Feature-72A-005: EVE used tc.get('hgvsp') which VEP never returns."""
 
     def test_eve_no_longer_uses_hgvsp(self):
         """eve_tool.py must not reference 'hgvsp' field (not in VEP response)."""
@@ -265,10 +265,10 @@ class TestEVEProteinChange(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-006: pdbe_get_entry_quality broken endpoint
+# Feature-72A-006: pdbe_get_entry_quality broken endpoint
 # ---------------------------------------------------------------------------
 class TestPDBeQualityEndpoint(unittest.TestCase):
-    """BUG-72A-006: pdbe_get_entry_quality used /pdb/entry/quality/ which always returns 404."""
+    """Feature-72A-006: pdbe_get_entry_quality used /pdb/entry/quality/ which always returns 404."""
 
     def test_pdbe_quality_endpoint_in_json_is_correct(self):
         """JSON config must use the validation/summary_quality_scores/entry endpoint."""
@@ -301,10 +301,10 @@ class TestPDBeQualityEndpoint(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-007: PROSITE signature_name always None
+# Feature-72A-007: PROSITE signature_name always None
 # ---------------------------------------------------------------------------
 class TestPROSITESignatureName(unittest.TestCase):
-    """BUG-72A-007: PROSITE _scan_sequence used m.get('signature_id') which ScanProsite never returns."""
+    """Feature-72A-007: PROSITE _scan_sequence used m.get('signature_id') which ScanProsite never returns."""
 
     def test_prosite_no_longer_uses_signature_id(self):
         """prosite_tool.py must not use 'signature_id' (not in ScanProsite API response)."""
@@ -364,10 +364,10 @@ class TestPROSITESignatureName(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
-# BUG-72A-010: DisProt wrong base URL (missing www.)
+# Feature-72A-010: DisProt wrong base URL (missing www.)
 # ---------------------------------------------------------------------------
 class TestDisProtBaseURL(unittest.TestCase):
-    """BUG-72A-010: DisProt used disprot.org (no www.) which is unreachable."""
+    """Feature-72A-010: DisProt used disprot.org (no www.) which is unreachable."""
 
     def test_disprot_base_url_has_www(self):
         """DISPROT_BASE_URL must include www. prefix."""

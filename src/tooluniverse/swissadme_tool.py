@@ -343,7 +343,7 @@ class SwissADMETool(BaseTool):
                 "error": "Failed to parse SwissADME results.",
             }
 
-        # BUG-26B-10: if SwissADME accepted an invalid SMILES, canonical_smiles
+        # Feature-26B-10: if SwissADME accepted an invalid SMILES, canonical_smiles
         # is null in the returned CSV. Treat this as a failure so users get a
         # clear error rather than a "success" response full of null values.
         if not properties.get("canonical_smiles"):
@@ -460,7 +460,7 @@ class SwissADMETool(BaseTool):
                 "error": "Failed to parse SwissADME results.",
             }
 
-        # BUG-26B-10: check for null canonical_smiles (invalid input)
+        # Feature-26B-10: check for null canonical_smiles (invalid input)
         if not properties.get("canonical_smiles"):
             return {
                 "status": "error",

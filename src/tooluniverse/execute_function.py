@@ -875,6 +875,7 @@ class ToolUniverse:
         include_tool_types=None,
         exclude_tool_types=None,
         python_files=None,
+        quiet=True,
     ):
         """
         Load tools into the instance, with optional filtering.
@@ -900,6 +901,9 @@ class ToolUniverse:
                 in this list (e.g. ``["RESTTool", "GraphQLTool"]``).
             exclude_tool_types (list, optional): Skip tools whose ``type`` field is in
                 this list.
+            quiet (bool, optional): Suppress missing-API-key warnings and
+                ``.env.template`` generation. Default ``True``. Pass ``False``
+                to see which keys are missing.
 
         Examples:
             # Load everything (default)
@@ -1115,6 +1119,7 @@ class ToolUniverse:
             include_tool_types_set,
             exclude_tool_types_set,
             existing_tool_names,
+            quiet=quiet,
         )
 
         # Process MCP Auto Loader tools
@@ -1161,6 +1166,7 @@ class ToolUniverse:
         include_tool_types_set=None,
         exclude_tool_types_set=None,
         existing_tool_names=None,
+        quiet=True,
     ):
         """
         Filter tools based on inclusion/exclusion criteria and remove duplicates.
@@ -1305,16 +1311,16 @@ class ToolUniverse:
 
         # Generate template for missing API keys
         if len(all_missing_keys) > 0:
-            # BUG-24B-02: allow suppression via TOOLUNIVERSE_QUIET=1 so repeated
-            # invocations of the CLI don't spam the terminal with key warnings.
+            # Feature-24B-02: allow suppression via TOOLUNIVERSE_QUIET=1 or quiet param
+            # so repeated invocations don't spam the terminal with key warnings.
             import os as _os
 
-            if not _os.environ.get("TOOLUNIVERSE_QUIET", ""):
+            _env_quiet = _os.environ.get("TOOLUNIVERSE_QUIET", "")
+            if not quiet and not _env_quiet:
                 warning(
                     f"Some tools will not be loaded due to missing API keys: {', '.join(all_missing_keys)}"
                 )
-            # info("Generating .env.template file with missing API keys...")
-            self.generate_env_template(all_missing_keys)
+                self.generate_env_template(all_missing_keys)
 
     def _get_user_tool_files(self):
         """

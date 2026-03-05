@@ -125,7 +125,7 @@ def _render_list(d: dict) -> str:
             lines.append(f"{cat:<{col1}}  {cnt:>5}")
         total = sum(cats.values())
         lines.append(f"\n{len(cats)} categories · {total} tools")
-        # BUG-23B-08: add actionable next-step hints after the categories overview
+        # Feature-23B-08: add actionable next-step hints after the categories overview
         lines.append(
             "Next: `tu grep <term>` to search, `tu list --categories <name>` to filter, "
             "`tu find '<query>'` for natural-language search"
@@ -182,7 +182,7 @@ def _render_list(d: dict) -> str:
         elif offset and count:
             more_hint = "  (end of results)"
         elif count == total and total > 50:
-            # BUG-24B-11: large unfiltered list — suggest paginating with --limit
+            # Feature-24B-11: large unfiltered list — suggest paginating with --limit
             more_hint = (
                 "  (tip: use --limit N to paginate, or --categories <name> to filter)"
             )
@@ -258,7 +258,7 @@ def _render_grep(d: dict) -> str:
             if d.get("limit") == 0:
                 return f"0 of {total} matches (limit=0, no results shown)"
             return f"0 of {total} matches (offset past end — use --offset < {total})"
-        # BUG-R13A-01 / R21B-03: context-sensitive hints for 0 name-field matches.
+        # Feature-R13A-01 / R21B-03: context-sensitive hints for 0 name-field matches.
         if d.get("field") == "name":
             pattern = d.get("pattern", "")
             if " " in pattern:
@@ -269,7 +269,7 @@ def _render_grep(d: dict) -> str:
                     f"'{underscore_hint}', or use --field description)"
                 )
             if "-" in pattern:
-                # BUG-23B-01/BUG-25B-01: tool names don't use hyphens, but descriptions
+                # Feature-23B-01/Feature-25B-01: tool names don't use hyphens, but descriptions
                 # do. Point directly to --field description rather than the unhyphenated
                 # name variant (which often also returns 0 matches in the name field).
                 return (
@@ -280,7 +280,7 @@ def _render_grep(d: dict) -> str:
                 "0 matches in tool names.\n"
                 "  → Try: tu grep '" + pattern + "' --field description"
             )
-        # BUG-23B-05: show the stored hint for non-name-field 0-match results too
+        # Feature-23B-05: show the stored hint for non-name-field 0-match results too
         hint = d.get("hint")
         if hint:
             return f"0 matches  (tip: {hint})"
@@ -292,16 +292,16 @@ def _render_grep(d: dict) -> str:
         lines.append(f"{t.get('name', ''):<{col1}}  {_trunc(t.get('description', ''))}")
     has_more = d.get("has_more", False)
     offset = d.get("offset", 0)
-    # BUG-R18B-08/R17B-08: show range (e.g. "11–20 of 59") when paginating.
+    # Feature-R18B-08/R17B-08: show range (e.g. "11–20 of 59") when paginating.
     first = offset + 1
     last = offset + len(tools)
-    # BUG-20A-07: show range on page 1 too when results span multiple pages.
+    # Feature-20A-07: show range on page 1 too when results span multiple pages.
     range_str = f"  [{first}–{last}]" if (offset or has_more) else ""
     if has_more:
         next_offset = offset + len(tools)
         more_hint = f"  (more — next: --offset {next_offset})"
     elif offset and tools:
-        # BUG-R17B-07: signal "end of results" when paging lands on the last page
+        # Feature-R17B-07: signal "end of results" when paging lands on the last page
         more_hint = "  (end of results)"
     else:
         more_hint = ""
@@ -332,7 +332,7 @@ def _render_find(d: dict) -> str:
                 return (
                     f"0 of {total} results (offset past end — use --offset < {total})"
                 )
-        # BUG-R13B-01: "no meaningful terms" now uses standard schema with warning in processing_info.
+        # Feature-R13B-01: "no meaningful terms" now uses standard schema with warning in processing_info.
         warning = (d.get("processing_info") or {}).get("warning", "")
         if warning:
             return f"0 results  (note: {warning})"
@@ -356,16 +356,16 @@ def _render_find(d: dict) -> str:
     total = d.get("total_matches", len(tools))
     has_more = d.get("has_more", total > len(tools))
     offset = d.get("offset", 0)
-    # BUG-R18B-08/R17B-08: show range (e.g. "11–20 of 285") when paginating.
+    # Feature-R18B-08/R17B-08: show range (e.g. "11–20 of 285") when paginating.
     first = offset + 1
     last = offset + len(tools)
-    # BUG-20A-07: show range on page 1 too when results span multiple pages.
+    # Feature-20A-07: show range on page 1 too when results span multiple pages.
     range_str = f"  [{first}–{last}]" if (offset or has_more) else ""
     if has_more:
         next_offset = offset + len(tools)
         more_hint = f"  (more — next: --offset {next_offset})"
     elif offset and tools:
-        # BUG-R17B-07: signal "end of results" when paging lands on the last page
+        # Feature-R17B-07: signal "end of results" when paging lands on the last page
         more_hint = "  (end of results)"
     else:
         more_hint = ""
@@ -384,7 +384,7 @@ def _render_info(d: dict) -> str:
             if suggestions:
                 hint = f"\n  Did you mean: {', '.join(suggestions)}?"
             else:
-                # BUG-24B-05: use full name (not truncated) so suggestion is useful.
+                # Feature-24B-05: use full name (not truncated) so suggestion is useful.
                 # Split on underscore and take the first meaningful segment so that
                 # e.g. 'AlphaFold' → 'tu grep AlphaFold' (finds alphafold_* tools).
                 hint = f"\n  Run `tu grep {name}` to search for similar tools."
@@ -454,7 +454,7 @@ def _render_info(d: dict) -> str:
 
 
 def _render_run(d: dict) -> str:
-    """BUG-23B-02: human-friendly renderer for `tu run` errors.
+    """Feature-23B-02: human-friendly renderer for `tu run` errors.
 
     For error results, emits a short summary instead of the full 77-line JSON
     dump (which buries the actionable message in jsonschema noise).
@@ -469,7 +469,7 @@ def _render_run(d: dict) -> str:
     lines = [f"Error: {short_err}"]
     details = d.get("error_details") or {}
 
-    # BUG-25B-02: for "tool not found" errors, replace generic network tips
+    # Feature-25B-02: for "tool not found" errors, replace generic network tips
     # with tool-discovery tips and include fuzzy suggestions when available.
     is_not_found = "not found" in short_err.lower()
     suggestions = d.get("suggestions") or details.get("suggestions") or []
@@ -478,12 +478,12 @@ def _render_run(d: dict) -> str:
             lines.append(f"  Did you mean: {', '.join(suggestions[:3])}?")
         lines.append("Tips:")
         lines.append("  • Check tool name spelling (names are case-sensitive)")
-        # BUG-27B-09: tu find is always available; list it first
+        # Feature-27B-09: tu find is always available; list it first
         lines.append("  • Run `tu find '<description>'` for natural-language search")
         lines.append("  • Run `tu grep <name>` to search by pattern")
     else:
         next_steps = details.get("next_steps") or []
-        # BUG-25B-07: filter out Python SDK-specific tips not relevant to CLI users
+        # Feature-25B-07: filter out Python SDK-specific tips not relevant to CLI users
         cli_steps = [s for s in next_steps if "tu.tools.refresh()" not in s]
         if cli_steps:
             lines.append("Tips:")
@@ -562,7 +562,7 @@ def _resolve_categories(tu, names: list) -> tuple:
     category_dicts = tu.tool_category_dicts or {}
     actual = set(category_dicts.keys())
 
-    # BUG-R12A-11: tool_category_dicts uses loader keys (e.g. "cellmarker"), but some
+    # Feature-R12A-11: tool_category_dicts uses loader keys (e.g. "cellmarker"), but some
     # tool configs declare a different "category" field (e.g. "Genomics & Transcriptomics").
     # Build a supplemental map of those raw categories so prefix matching can find them.
     raw_cats: dict = {}  # cat_name -> [tool_names]
@@ -574,7 +574,7 @@ def _resolve_categories(tu, names: list) -> tuple:
         if cat and cat not in actual:
             raw_cats.setdefault(cat, []).append(tool_name)
     # Merge raw_cats into the searchable universe (don't mutate actual category_dicts).
-    # BUG-20A-08: "unknown" is an internal sentinel returned by _get_tool_category for
+    # Feature-20A-08: "unknown" is an internal sentinel returned by _get_tool_category for
     # tools without any category assignment.  It is never stored in category_dicts or
     # raw_cats, so add it explicitly so `--categories unknown` resolves silently.
     full_actual = actual | set(raw_cats.keys()) | {"unknown"}
@@ -594,7 +594,7 @@ def _resolve_categories(tu, names: list) -> tuple:
         # 1. Exact case-insensitive match.
         if name_lower in lower_map:
             exact_key = lower_map[name_lower]
-            # BUG-R18B-10: If there is an exact (case-insensitive) match, use it
+            # Feature-R18B-10: If there is an exact (case-insensitive) match, use it
             # silently.  Do NOT warn about categories that merely share this as a
             # prefix (e.g. user typed "uniprot" → use "uniprot", ignore "uniprot_ref").
             # The spurious warning was confusing and caused users to doubt their input.
@@ -606,7 +606,7 @@ def _resolve_categories(tu, names: list) -> tuple:
 
         if not prefix_matches:
             # 3. No match at all — warn with suggestions.
-            # BUG-R13B-06: set had_unknown so callers can exit 1.
+            # Feature-R13B-06: set had_unknown so callers can exit 1.
             suggestions = [k for k in full_actual if name_lower[:4] in k.lower()][:3]
             hint = (
                 f" Did you mean: {', '.join(suggestions[:3])!r}?" if suggestions else ""
@@ -648,7 +648,7 @@ def _infer_type(s: str):
     '[...]'→list, '{...}'→dict (JSON arrays/objects only).
     'null' is left as the string 'null'; to pass a JSON null use JSON format.
 
-    BUG-27A-02: Numeric-looking strings (e.g. species_id=9606, orpha_code=558)
+    Feature-27A-02: Numeric-looking strings (e.g. species_id=9606, orpha_code=558)
     are NOT coerced to int/float. Many tool schemas declare these as 'type: string'
     and auto-coercion caused schema validation failures. ToolUniverse's validation
     layer accepts string values for integer schema fields, so this is safe.
@@ -727,7 +727,7 @@ def cmd_list(args: argparse.Namespace) -> None:
     # so the output always has a "tools" key and is pipeable.
     # For interactive use without any flags, default to "categories" overview.
     mode = args.mode
-    # BUG-23B-03: bare --categories (no args) → show the categories overview as-is
+    # Feature-23B-03: bare --categories (no args) → show the categories overview as-is
     if args.categories is not None and len(args.categories) == 0:
         print(
             "Note: --categories requires category names to filter "
@@ -764,7 +764,7 @@ def cmd_list(args: argparse.Namespace) -> None:
         else:
             mode = "categories"
 
-    # BUG-R10A-01: --group-by-category with an explicit non-by_category mode is
+    # Feature-R10A-01: --group-by-category with an explicit non-by_category mode is
     # contradictory — warn and ignore the flag so the output matches the stated mode.
     if args.group_by_category and mode != "by_category" and args.mode is not None:
         print(
@@ -805,7 +805,7 @@ def cmd_list(args: argparse.Namespace) -> None:
                 ),
             }
         )
-    # BUG-22A-09: warn when custom mode fields didn't match any tool attribute
+    # Feature-22A-09: warn when custom mode fields didn't match any tool attribute
     if (
         isinstance(result, dict)
         and result.get("unknown_fields")
@@ -821,12 +821,12 @@ def cmd_list(args: argparse.Namespace) -> None:
             f"  Valid fields include: {valid}",
             file=sys.stderr,
         )
-    # BUG-23A-06: inject categories_filtered so list JSON schema is consistent
+    # Feature-23A-06: inject categories_filtered so list JSON schema is consistent
     # with grep and find (which always emit "categories_filtered").
     if isinstance(result, dict) and "error" not in result:
         result["categories_filtered"] = args.categories or None
     _print_result(result, args, _render_list)
-    # BUG-R13B-06: exit 1 when an unknown category was passed.
+    # Feature-R13B-06: exit 1 when an unknown category was passed.
     if _cat_unknown:
         sys.exit(1)
     if isinstance(result, dict):
@@ -834,11 +834,11 @@ def cmd_list(args: argparse.Namespace) -> None:
             sys.exit(1)
         # R21A-06: do NOT exit 1 when offset is past end of results. An empty
         # page at a high offset is normal pagination termination, not an error.
-        # This is consistent with `find` (BUG-R14B-02) and `grep` behavior.
+        # This is consistent with `find` (Feature-R14B-02) and `grep` behavior.
 
 
 def cmd_grep(args: argparse.Namespace) -> None:
-    # BUG-23B-10: pattern is now nargs="+" so it may be a list of words.
+    # Feature-23B-10: pattern is now nargs="+" so it may be a list of words.
     # Join them and warn the user so they learn the quoting idiom.
     if isinstance(args.pattern, list):
         if len(args.pattern) > 1:
@@ -849,14 +849,14 @@ def cmd_grep(args: argparse.Namespace) -> None:
                 file=sys.stderr,
             )
         args.pattern = " ".join(args.pattern)
-    # BUG-R10A-04: validate non-empty pattern before hitting the internal API
+    # Feature-R10A-04: validate non-empty pattern before hitting the internal API
     if not args.pattern or not args.pattern.strip():
         if args.json or args.raw:
             print(json.dumps({"error": "pattern cannot be empty"}))
         else:
             print("Error: pattern cannot be empty", file=sys.stderr)
         sys.exit(1)
-    # BUG-22A-08: warn when a regex pattern contains \| — in Python re, \| is a literal
+    # Feature-22A-08: warn when a regex pattern contains \| — in Python re, \| is a literal
     # pipe character, not alternation.  Users familiar with grep -E syntax often expect
     # \| to mean OR, but in Python re the unescaped | is the alternation operator.
     if getattr(args, "search_mode", None) == "regex" and r"\|" in args.pattern:
@@ -885,11 +885,11 @@ def cmd_grep(args: argparse.Namespace) -> None:
                 ),
             }
         )
-    # BUG-R14A-05/R15A-03: always inject categories_filtered so grep JSON schema
+    # Feature-R14A-05/R15A-03: always inject categories_filtered so grep JSON schema
     # matches find (which always emits "categories_filtered": null when not filtered).
     if isinstance(result, dict) and "error" not in result:
         result["categories_filtered"] = args.categories or None
-    # BUG-R14A-04/R15B-04: always include "hint" key in grep JSON (null when no hint).
+    # Feature-R14A-04/R15B-04: always include "hint" key in grep JSON (null when no hint).
     # When 0 matches and field is "name", adapt hint to the actual field being searched.
     if isinstance(result, dict) and "error" not in result:
         field = result.get("field", "name")
@@ -911,7 +911,7 @@ def cmd_grep(args: argparse.Namespace) -> None:
             and result.get("total_matches", 0) == 0
             and field == "category"
         ):
-            # BUG-24A-06: add hint for --field category 0 matches (consistency with other fields)
+            # Feature-24A-06: add hint for --field category 0 matches (consistency with other fields)
             result["hint"] = (
                 "try `tu list --mode categories` to browse available categories"
             )
@@ -923,7 +923,7 @@ def cmd_grep(args: argparse.Namespace) -> None:
     if isinstance(result, dict):
         if "error" in result:
             sys.exit(1)
-        # BUG-R14B-01: exit 0 on zero matches — the command ran successfully.
+        # Feature-R14B-01: exit 0 on zero matches — the command ran successfully.
         # 0 matches is a valid, non-error outcome for a search command.
         # (Previous behaviour exited 1 like Unix grep, but that breaks scripting pipelines
         # that treat any non-zero exit as a failure rather than "no results".)
@@ -931,7 +931,7 @@ def cmd_grep(args: argparse.Namespace) -> None:
 
 
 def cmd_info(args: argparse.Namespace) -> None:
-    # BUG-R11A-09: pre-validate tool names (empty / whitespace-only)
+    # Feature-R11A-09: pre-validate tool names (empty / whitespace-only)
     valid_names = [n for n in args.tool_names if n and n.strip()]
     if not valid_names:
         msg = "tool name cannot be empty"
@@ -944,9 +944,9 @@ def cmd_info(args: argparse.Namespace) -> None:
 
     with _status_to_stderr():
         tu = _get_tu()
-        # BUG-R11B-01: always pass as list so JSON response is always {"tools": [...]}
+        # Feature-R11B-01: always pass as list so JSON response is always {"tools": [...]}
         # rather than a flat dict for single-tool requests.
-        # BUG-R17B-02: "brief" is the user-facing alias for the API's "description" level.
+        # Feature-R17B-02: "brief" is the user-facing alias for the API's "description" level.
         detail_level = "description" if args.detail == "brief" else args.detail
         result = tu.run_one_function(
             {
@@ -965,13 +965,13 @@ def cmd_info(args: argparse.Namespace) -> None:
             if isinstance(tool, dict) and "error" in tool:
                 name = tool.get("name", "")
                 if name:
-                    # BUG-23B-04: raised cutoff from 0.5 → 0.62 to avoid spurious
+                    # Feature-23B-04: raised cutoff from 0.5 → 0.62 to avoid spurious
                     # suggestions when difflib matches by coincidence (e.g.
                     # "NonExistentTool123" → "list_tools" both contain "tool").
                     tool["suggestions"] = difflib.get_close_matches(
                         name, all_names, n=3, cutoff=0.62
                     )
-    # BUG-R14A-01/R14B-04: normalize "parameter" (singular, raw tool config format) to
+    # Feature-R14A-01/R14B-04: normalize "parameter" (singular, raw tool config format) to
     # "parameters" (plural, consistent with find output) in each tool entry.
     # Human-readable mode uses _render_info which reads "parameter" directly; only rename
     # for JSON/raw consumers that compare find and info results programmatically.
@@ -998,7 +998,7 @@ def cmd_info(args: argparse.Namespace) -> None:
             else:
                 print(_render_info(tool))
                 has_good = True
-        # BUG-R13B-02: exit 1 only when ALL tools were missing (total failure).
+        # Feature-R13B-02: exit 1 only when ALL tools were missing (total failure).
         if not has_good:
             sys.exit(1)
         return
@@ -1006,7 +1006,7 @@ def cmd_info(args: argparse.Namespace) -> None:
     if isinstance(result, dict):
         if "error" in result:
             sys.exit(1)
-        # BUG-R13B-02: exit 1 only when ALL requested tools were not found.
+        # Feature-R13B-02: exit 1 only when ALL requested tools were not found.
         # Partial success (some found, some missing) exits 0 so callers can
         # distinguish "nothing found" from "some found" without parsing JSON.
         tools_in_result = result.get("tools", [])
@@ -1016,7 +1016,7 @@ def cmd_info(args: argparse.Namespace) -> None:
 
 def cmd_find(args: argparse.Namespace) -> None:
     """Find tools with keyword-based search (no LLM/API keys required)."""
-    # BUG-R10A-03: validate non-empty query before hitting the internal API
+    # Feature-R10A-03: validate non-empty query before hitting the internal API
     if not args.query or not args.query.strip():
         if args.json or args.raw:
             print(json.dumps({"error": "query cannot be empty"}))
@@ -1055,9 +1055,9 @@ def cmd_find(args: argparse.Namespace) -> None:
             result.get("tools") if isinstance(result.get("tools"), list) else []
         )
         result.get("total_matches", len(tools_list))
-        # BUG-R16A-07/R16B-09: exit 0 on zero matches — consistent with grep.
+        # Feature-R16A-07/R16B-09: exit 0 on zero matches — consistent with grep.
         # 0 results is a valid non-error outcome; the command ran successfully.
-        # BUG-R14B-02: do NOT exit 1 when offset is past end. An empty page with
+        # Feature-R14B-02: do NOT exit 1 when offset is past end. An empty page with
         # total_matches > 0 is normal pagination completion, not an error.
 
 
@@ -1080,7 +1080,7 @@ def cmd_run(args: argparse.Namespace) -> None:
                 "type": "argument_parse_error",
             },
         }
-        # BUG-24B-07: human mode shows a friendly hint; --json/--raw gets JSON on stdout.
+        # Feature-24B-07: human mode shows a friendly hint; --json/--raw gets JSON on stdout.
         if getattr(args, "json", False) or getattr(args, "raw", False):
             print(json.dumps(err_payload))
         else:
@@ -1103,7 +1103,7 @@ def cmd_run(args: argparse.Namespace) -> None:
                 ),
             }
         )
-    # BUG-23B-02: use _render_run so human mode gets a concise error summary;
+    # Feature-23B-02: use _render_run so human mode gets a concise error summary;
     # --json / --raw still get the full JSON blob.
     _print_result(result, args, render_fn=_render_run)
     # Exit non-zero when the tool reported an error (check both status field and
@@ -1385,7 +1385,7 @@ def cmd_test(args: argparse.Namespace) -> None:
                         f"return_schema mismatch: {exc.message} (at {list(exc.absolute_path)})"
                     )
 
-        # BUG-25B-01: warn when data is empty on success — test example may be stale
+        # Feature-25B-01: warn when data is empty on success — test example may be stale
         warnings = []
         if (
             not failures
@@ -1553,12 +1553,20 @@ def main() -> None:
         action="version",
         version=f"%(prog)s {_TU_VERSION}",
     )
-    # BUG-24B-02: --quiet suppresses the missing-API-key warning that fires on every command.
+    # Feature-24B-02: quiet mode suppresses the missing-API-key warning.
+    # Now quiet is the default; kept for backwards compatibility.
     parser.add_argument(
         "--quiet",
         "-q",
         action="store_true",
-        help="Suppress informational warnings (e.g. missing API key notices)",
+        default=True,
+        help="Suppress informational warnings (default: on, kept for backwards compat)",
+    )
+    parser.add_argument(
+        "--verbose",
+        "-v",
+        action="store_true",
+        help="Show informational warnings (e.g. missing API key notices)",
     )
     sub = parser.add_subparsers(dest="command", metavar="COMMAND")
     sub.required = True
@@ -1589,9 +1597,9 @@ def main() -> None:
         ),
     )
     p.add_argument(
-        # BUG-23B-03: nargs="*" so bare --categories (no args) is parseable;
+        # Feature-23B-03: nargs="*" so bare --categories (no args) is parseable;
         # cmd_list treats the empty-list case as a redirect to the categories overview.
-        # BUG-25B-08: --category (singular) accepted as alias for --categories.
+        # Feature-25B-08: --category (singular) accepted as alias for --categories.
         "--categories",
         "--category",
         nargs="*",
@@ -1640,7 +1648,7 @@ def main() -> None:
             "  tu grep drug --field description --limit 20\n"
         ),
     )
-    # BUG-23B-10: nargs="+" captures multi-word input (e.g. `tu grep chip seq`).
+    # Feature-23B-10: nargs="+" captures multi-word input (e.g. `tu grep chip seq`).
     # cmd_grep joins the words and shows a quoting hint so the user learns the idiom.
     p.add_argument(
         "pattern",
@@ -1693,7 +1701,7 @@ def main() -> None:
         "--detail",
         default="full",
         choices=["brief", "description", "full"],
-        # BUG-R17B-02: 'description' is confusingly named — it means "description only"
+        # Feature-R17B-02: 'description' is confusingly named — it means "description only"
         # (strips parameters/examples). 'brief' is an alias added as the clearer name.
         # 'full' (default) returns everything: description, parameters, examples.
         help=(
@@ -1822,11 +1830,13 @@ def main() -> None:
     )
     p.set_defaults(func=cmd_serve)
 
-    # BUG-24B-02: set TOOLUNIVERSE_QUIET before parse so load_tools() respects it.
+    # Quiet is now the default. --verbose/-v opts back in to warnings.
     # We check argv directly because argparse hasn't run yet.
-    if "--quiet" in sys.argv or "-q" in sys.argv:
+    if "--verbose" in sys.argv or "-v" in sys.argv:
+        os.environ.pop("TOOLUNIVERSE_QUIET", None)
+    else:
         os.environ["TOOLUNIVERSE_QUIET"] = "1"
-        # BUG-26A-03: logger singleton may already exist; raise its level to WARNING
+        # Feature-26A-03: logger singleton may already exist; raise its level to WARNING
         # so that ℹ️ info lines (e.g. "Number of tools", "Auto-loaded workspace
         # profile.yaml") are suppressed.
         try:
@@ -1836,7 +1846,7 @@ def main() -> None:
         except Exception:
             pass
 
-    # BUG-R20B: argparse exits with code 2 and empty stdout on bad args (e.g. --limit -1).
+    # Feature-R20B: argparse exits with code 2 and empty stdout on bad args (e.g. --limit -1).
     # Callers that do json.loads(stdout) crash on empty string.
     # Override: if --json or --raw is in argv, emit a JSON error before exiting.
     _json_mode = "--json" in sys.argv or "--raw" in sys.argv
@@ -1851,7 +1861,7 @@ def main() -> None:
                 )
             )
         raise
-    # BUG-R12A-12: --json and --raw are mutually exclusive; --raw is a strict subset
+    # Feature-R12A-12: --json and --raw are mutually exclusive; --raw is a strict subset
     if getattr(args, "json", False) and getattr(args, "raw", False):
         parser.error("--json and --raw are mutually exclusive; use one or the other")
     args.func(args)

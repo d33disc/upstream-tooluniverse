@@ -42,7 +42,7 @@ class CPICSearchPairsTool(BaseRESTTool):
     _FILTER_PARAMS = ("genesymbol", "cpiclevel")
 
     def _build_params(self, args: Dict[str, Any]) -> Dict[str, Any]:
-        # BUG-68A-004: auto-prepend 'eq.' to PostgREST filter params if user
+        # Feature-68A-004: auto-prepend 'eq.' to PostgREST filter params if user
         # provides a plain value like 'CYP2D6' instead of 'eq.CYP2D6'.
         normalized = dict(args)
         for key in self._FILTER_PARAMS:

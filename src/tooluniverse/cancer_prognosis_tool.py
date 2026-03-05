@@ -28,7 +28,7 @@ TCGA_STUDY_MAP = {
     "CESC": "cesc_tcga",
     "CHOL": "chol_tcga",
     "COAD": "coadread_tcga",
-    "COADREAD": "coadread_tcga",  # BUG-38B-04: combined colon+rectal TCGA cohort alias
+    "COADREAD": "coadread_tcga",  # Feature-38B-04: combined colon+rectal TCGA cohort alias
     "DLBC": "dlbc_tcga",
     "ESCA": "esca_tcga",
     "GBM": "gbm_tcga",
@@ -58,7 +58,7 @@ TCGA_STUDY_MAP = {
     "UVM": "uvm_tcga",
 }
 
-# BUG-53A-014: common cancer name aliases → TCGA abbreviation.
+# Feature-53A-014: common cancer name aliases → TCGA abbreviation.
 # Users often pass natural-language names like 'breast', 'colon', 'lung' instead of
 # TCGA codes like 'BRCA', 'COAD', 'LUAD'. Map these to the most common TCGA study.
 _CANCER_NAME_ALIASES: Dict[str, str] = {
@@ -118,7 +118,7 @@ _CANCER_NAME_ALIASES: Dict[str, str] = {
     "AML": "LAML",
     "SARCOMA": "SARC",
     "TESTICULAR": "TGCT",
-    # BUG-57A-004: lymphoma aliases — DLBCL is the most common TCGA lymphoma study
+    # Feature-57A-004: lymphoma aliases — DLBCL is the most common TCGA lymphoma study
     "DLBCL": "DLBC",
     "DLBC": "DLBC",
     "DIFFUSE LARGE B-CELL LYMPHOMA": "DLBC",
@@ -204,7 +204,7 @@ class CancerPrognosisTool(BaseTool):
         upper = cancer_or_study.upper()
         if upper in TCGA_STUDY_MAP:
             return TCGA_STUDY_MAP[upper]
-        # BUG-53A-014: try common cancer name aliases (e.g., 'breast' → 'BRCA' → 'brca_tcga')
+        # Feature-53A-014: try common cancer name aliases (e.g., 'breast' → 'BRCA' → 'brca_tcga')
         tcga_code = _CANCER_NAME_ALIASES.get(upper)
         if tcga_code and tcga_code in TCGA_STUDY_MAP:
             return TCGA_STUDY_MAP[tcga_code]
@@ -247,8 +247,8 @@ class CancerPrognosisTool(BaseTool):
 
     def _get_expression_units(self, profile_id, profile_name=None):
         # type: (str, Optional[str]) -> str
-        """BUG-49A-M1: Infer expression data type/units from the cBioPortal profile.
-        BUG-54A-002: Prefer the actual profile name from the API (e.g., 'mRNA expression
+        """Feature-49A-M1: Infer expression data type/units from the cBioPortal profile.
+        Feature-54A-002: Prefer the actual profile name from the API (e.g., 'mRNA expression
         (log2 RNA Seq RPKM)') over ID-based inference, since some studies use misleading
         ID suffixes (e.g., aml_ohsu_2022 uses _rna_seq_v2_mrna but stores log2 RPKM).
         """
@@ -271,7 +271,7 @@ class CancerPrognosisTool(BaseTool):
         # type: (str) -> Optional[Tuple[str, str]]
         """Find the best mRNA expression profile for a study.
         Returns (profile_id, profile_name) tuple, or None if not found.
-        BUG-54A-002: also return the human-readable profile name so _get_expression_units
+        Feature-54A-002: also return the human-readable profile name so _get_expression_units
         can use the actual description instead of inferring from the profile ID string.
         """
         profiles = self._api_get(
@@ -309,7 +309,7 @@ class CancerPrognosisTool(BaseTool):
     def _get_survival_data(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Retrieve OS and DFS survival clinical data for a study."""
-        # BUG-62B-001: warn on unrecognized parameters that will be silently ignored.
+        # Feature-62B-001: warn on unrecognized parameters that will be silently ignored.
         # CancerPrognosis_get_survival_data only supports cancer/cancer_type/study_id and limits.
         # Gene and subtype filtering is not supported — explicitly warn the user.
         _known_survival_params = {
@@ -337,7 +337,7 @@ class CancerPrognosisTool(BaseTool):
         cancer = (
             arguments.get("cancer")
             or arguments.get("cancer_type")
-            or arguments.get("study_id")  # BUG-40A-05: study_id alias
+            or arguments.get("study_id")  # Feature-40A-05: study_id alias
         )
         if not cancer:
             return {
@@ -347,7 +347,7 @@ class CancerPrognosisTool(BaseTool):
             }
 
         study_id = self._resolve_study(cancer)
-        # BUG-61A-002: `limit` used to be passed directly as the cBioPortal API pageSize,
+        # Feature-61A-002: `limit` used to be passed directly as the cBioPortal API pageSize,
         # causing severely truncated results when users passed limit=10 expecting max 10
         # patients returned (not 10 raw clinical records fetched). Now: pageSize is always
         # 10000 (enough to cover any study); `limit` is treated as alias for `max_patients`
@@ -359,7 +359,7 @@ class CancerPrognosisTool(BaseTool):
                 arguments = dict(arguments)
                 arguments["max_patients"] = arguments["limit"]
 
-        # BUG-47B-01: cBioPortal clinical-data endpoint does not paginate automatically.
+        # Feature-47B-01: cBioPortal clinical-data endpoint does not paginate automatically.
         # Large studies (e.g., BRCA with 50,926 clinical records) may have OS data for only a
         # fraction of the pageSize=10000 chunk. We set pageSize conservatively; callers
         # should be aware that n_patients_with_os_data may undercount the full cohort.
@@ -452,7 +452,7 @@ class CancerPrognosisTool(BaseTool):
             }
             dfs_records.append(rec)
 
-        # BUG-60A-005: detect when study uses non-standard survival attribute names.
+        # Feature-60A-005: detect when study uses non-standard survival attribute names.
         # Consortium studies (CPTAC, ICGC, etc.) often store survival data under
         # different field names — the tool silently returns 0 patients in that case.
         nonstandard_warning = ""
@@ -478,7 +478,7 @@ class CancerPrognosisTool(BaseTool):
                     " or query the cBioPortal API directly for this study."
                 ).format(len(data), ", ".join(found))
 
-        # BUG-47B-01: detect possible truncation — clinical data API returns a single page.
+        # Feature-47B-01: detect possible truncation — clinical data API returns a single page.
         # If we retrieved exactly 10,000 records total, there may be more data in the study.
         truncation_warning = (
             " WARNING: This study may have more clinical data than retrieved. "
@@ -519,7 +519,7 @@ class CancerPrognosisTool(BaseTool):
     def _get_gene_expression(self, arguments):
         # type: (Dict[str, Any]) -> Dict[str, Any]
         """Fetch gene expression values across samples in a study."""
-        # BUG-53A-013: give explicit study_id priority when it looks like a full cBioPortal
+        # Feature-53A-013: give explicit study_id priority when it looks like a full cBioPortal
         # study ID (contains underscores and is not a TCGA abbreviation). Previously,
         # 'cancer' or 'cancer_type' could silently override study_id because they appear
         # first in the or-chain — e.g., cancer='brca' + study_id='brca_mapk_hp_msk_2021'
@@ -535,10 +535,10 @@ class CancerPrognosisTool(BaseTool):
             # Explicit full cBioPortal study ID (e.g., 'brca_mapk_hp_msk_2021') — use directly
             cancer = study_id_arg
         else:
-            cancer = cancer_arg or study_id_arg  # BUG-40A-05
+            cancer = cancer_arg or study_id_arg  # Feature-40A-05
         gene = (
             arguments.get("gene")
-            or arguments.get("gene_symbol")  # BUG-47A-03
+            or arguments.get("gene_symbol")  # Feature-47A-03
             or arguments.get("gene_name")
         )
 
@@ -553,15 +553,15 @@ class CancerPrognosisTool(BaseTool):
                 "error": "gene is required (e.g., 'TP53', 'BRCA1')",
             }
 
-        # BUG-53A-013: explicit study_id tracking for study_note message (BUG-54A-004)
+        # Feature-53A-013: explicit study_id tracking for study_note message (Feature-54A-004)
         study_was_explicit = (
             cancer == study_id_arg and study_id_arg and "_" in str(study_id_arg)
         )
         study_id = self._resolve_study(cancer)
-        # BUG-54A-002: _get_mrna_profile now returns (profile_id, profile_name) tuple
+        # Feature-54A-002: _get_mrna_profile now returns (profile_id, profile_name) tuple
         profile_result = self._get_mrna_profile(study_id)
         if not profile_result:
-            # BUG-58B-007: distinguish "not a TCGA type" from "study exists but no expression data".
+            # Feature-58B-007: distinguish "not a TCGA type" from "study exists but no expression data".
             # Provide actionable guidance rather than a terse error.
             tcga_types = sorted(TCGA_STUDY_MAP.keys())
             return {
@@ -583,11 +583,11 @@ class CancerPrognosisTool(BaseTool):
             }
 
         # Get samples
-        # BUG-44A-02: max_samples is the desired *output* count, not the fetch limit.
+        # Feature-44A-02: max_samples is the desired *output* count, not the fetch limit.
         # Not every sample has expression data for every gene (especially low-expressed genes
         # or genes absent from array studies). Fetch up to 5x more samples than requested
         # so we have enough raw data to fill the requested output size.
-        # BUG-61A-003: accept max_patients as alias for max_samples (consistent with
+        # Feature-61A-003: accept max_patients as alias for max_samples (consistent with
         # get_survival_data which uses max_patients as its output-size parameter).
         max_samples = min(
             int(arguments.get("max_samples") or arguments.get("max_patients") or 500),
@@ -655,11 +655,11 @@ class CancerPrognosisTool(BaseTool):
             else (sorted_vals[n // 2 - 1] + sorted_vals[n // 2]) / 2
         )
 
-        # BUG-49A-M1: derive expression units from profile_id so users know the scale
-        # BUG-54A-002: pass profile_name so actual API description is used instead of inference
+        # Feature-49A-M1: derive expression units from profile_id so users know the scale
+        # Feature-54A-002: pass profile_name so actual API description is used instead of inference
         expression_units = self._get_expression_units(profile_id, profile_name)
 
-        # BUG-49A-M3: detect patients with multiple samples (primary vs. recurrent aliquots).
+        # Feature-49A-M3: detect patients with multiple samples (primary vs. recurrent aliquots).
         # TCGA samples are suffixed -01 (primary), -02 (recurrence), etc. Joining on patient_id
         # downstream will silently double-count these patients in survival analysis.
         patient_sample_counts: Dict[str, int] = {}
@@ -671,8 +671,8 @@ class CancerPrognosisTool(BaseTool):
             p for p, c in patient_sample_counts.items() if c > 1
         )
         multi_sample_note = ""
-        # BUG-50B-001: structured duplicate_aliquot_warning field (in addition to note)
-        # BUG-51A-004: clarify that detection covers ALL fetched samples, not just the
+        # Feature-50B-001: structured duplicate_aliquot_warning field (in addition to note)
+        # Feature-51A-004: clarify that detection covers ALL fetched samples, not just the
         # max_samples slice returned. This prevents confusion when the user sees the warning
         # but doesn't find the affected patients in the returned sample slice.
         duplicate_aliquot_warning = None
@@ -699,16 +699,16 @@ class CancerPrognosisTool(BaseTool):
                 "Deduplicate by keeping only the primary tumor sample (-01 suffix) before merging.",
             }
 
-        # BUG-53A-015 / BUG-56A-005: truncation is now surfaced at the top-level response via
+        # Feature-53A-015 / Feature-56A-005: truncation is now surfaced at the top-level response via
         # `truncated` and `truncation_note` fields (see bottom of function). Do not embed it
         # in the note string to avoid duplicate information in two places.
 
         result_data: Dict[str, Any] = {
             "study_id": study_id,
-            # BUG-51A-011: disclose auto-selected study so users know which of multiple
+            # Feature-51A-011: disclose auto-selected study so users know which of multiple
             # available studies was used. "OV" auto-resolves to ov_tcga (Firehose Legacy),
             # but ov_tcga_pan_can_atlas_2018 or hgsoc_tcga_gdc may be preferable.
-            # BUG-54A-004: don't say "Auto-selected" when user explicitly specified study_id
+            # Feature-54A-004: don't say "Auto-selected" when user explicitly specified study_id
             "study_note": (
                 "Using explicitly specified study_id='{}'.".format(study_id)
                 if study_was_explicit
@@ -735,7 +735,7 @@ class CancerPrognosisTool(BaseTool):
         if duplicate_aliquot_warning is not None:
             result_data["duplicate_aliquot_warning"] = duplicate_aliquot_warning
 
-        # BUG-55A-006: add top-level truncated flag so callers immediately see the dataset
+        # Feature-55A-006: add top-level truncated flag so callers immediately see the dataset
         # is incomplete without parsing the note string.
         response: Dict[str, Any] = {"status": "success", "data": result_data}
         if len(values) > max_samples:
@@ -755,7 +755,7 @@ class CancerPrognosisTool(BaseTool):
             arguments.get("keyword")
             or arguments.get("cancer_type")
             or arguments.get("cancer")
-            or arguments.get("query")  # BUG-40A-07
+            or arguments.get("query")  # Feature-40A-07
         )
         if not keyword:
             return {
@@ -820,7 +820,7 @@ class CancerPrognosisTool(BaseTool):
         cancer = (
             arguments.get("cancer")
             or arguments.get("cancer_type")
-            or arguments.get("study_id")  # BUG-40A-05
+            or arguments.get("study_id")  # Feature-40A-05
         )
         if not cancer:
             return {

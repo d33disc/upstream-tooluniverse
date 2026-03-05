@@ -311,7 +311,7 @@ class MetaboAnalystTool(BaseTool):
             for syn in synonyms:
                 if syn == norm:
                     return (cid, parts[1].split(";")[0].strip())
-        # BUG-71A-003: No blind fallback to first result — only return exact match or None
+        # Feature-71A-003: No blind fallback to first result — only return exact match or None
         return None
 
     def _kegg_get_compound_info(self, compound_id: str) -> Dict[str, Any]:
