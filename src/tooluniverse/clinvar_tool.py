@@ -114,7 +114,7 @@ class ClinVarSearchVariants(ClinVarRESTTool):
         params = {
             "db": "clinvar",
             "retmode": "json",
-            # BUG-68A-009: accept 'limit' as alias for 'max_results'
+            # Feature-68A-009: accept 'limit' as alias for 'max_results'
             "retmax": arguments.get("max_results") or arguments.get("limit", 20),
         }
 
@@ -125,13 +125,13 @@ class ClinVarSearchVariants(ClinVarRESTTool):
             query_parts.append(f"{arguments['gene']}[gene]")
 
         if "condition" in arguments:
-            # BUG-70B-005: [disease/phenotype] is not a valid ClinVar eSearch field.
+            # Feature-70B-005: [disease/phenotype] is not a valid ClinVar eSearch field.
             # Use bare condition text; ClinVar matches against all fields by default.
             condition = arguments["condition"]
             query_parts.append(condition)
 
         if "variant_id" in arguments:
-            # BUG-70B-004: [variant_id] is not recognized by ClinVar eSearch.
+            # Feature-70B-004: [variant_id] is not recognized by ClinVar eSearch.
             # Use [uid] to look up by numeric variation ID.
             query_parts.append(f"{arguments['variant_id']}[uid]")
 

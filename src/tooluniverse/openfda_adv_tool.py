@@ -237,7 +237,7 @@ class FDADrugAdverseEventTool(BaseTool):
         if param_name in seriousness_fields:
             if value == "No":
                 return None, None  # Signal to skip this field
-            # BUG-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
+            # Feature-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
             if value in ("Yes", 1, "1"):
                 return None, "1"
             # If not Yes/No/1, error
@@ -670,7 +670,7 @@ class FDADrugAdverseEventDetailTool(BaseTool):
         if param_name in seriousness_fields:
             if value == "No":
                 return None, None  # Signal to skip this field
-            # BUG-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
+            # Feature-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
             if value in ("Yes", 1, "1"):
                 return None, "1"
             # If not Yes/No/1, error
@@ -1010,7 +1010,7 @@ class FDADrugInteractionDetailTool(BaseTool):
         if param_name in seriousness_fields:
             if value == "No":
                 return None, None  # Signal to skip this field
-            # BUG-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
+            # Feature-66B-005: also accept native openFDA integer 1 or string "1" as "Yes"
             if value in ("Yes", 1, "1"):
                 return None, "1"
             # If not Yes/No/1, error

@@ -650,12 +650,12 @@ class ToolFinderKeyword(BaseTool):
                     indent=2,
                 )
 
-            # BUG-R13A-08: queries that look like exact tool names (e.g.
+            # Feature-R13A-08: queries that look like exact tool names (e.g.
             # "BioGRID_get_chemical_interactions") tokenize to nothing because
             # underscores are treated as separators that produce stop-word-only
             # tokens.  Replacing underscores with spaces lets the NLP pipeline
             # extract the meaningful words ("BioGRID", "chemical", "interactions").
-            # BUG-R15B-02: preserve original query for transparency in processing_info.
+            # Feature-R15B-02: preserve original query for transparency in processing_info.
             query_submitted = query
             if "_" in query:
                 query = query.replace("_", " ")
@@ -710,7 +710,7 @@ class ToolFinderKeyword(BaseTool):
             query_phrases = self._extract_phrases(query_tokens)
 
             if not query_tokens and not query_phrases:
-                # BUG-R13B-01: return standard schema so programmatic consumers
+                # Feature-R13B-01: return standard schema so programmatic consumers
                 # can always read total_matches without branching on "error" key.
                 return json.dumps(
                     {
@@ -778,7 +778,7 @@ class ToolFinderKeyword(BaseTool):
                         "type": tool.get("type", ""),
                         "category": tool_category,
                         "parameters": tool.get("parameter", {}),
-                        # BUG-R12B-03/R13B-04: removed top-level "required" field —
+                        # Feature-R12B-03/R13B-04: removed top-level "required" field —
                         # it was always [] (the real list lives inside parameters.required).
                         "relevance_score": round(total_score, 4),
                         "tfidf_score": round(tfidf_score, 4),
@@ -811,8 +811,8 @@ class ToolFinderKeyword(BaseTool):
                     "limit": limit,
                     "offset": offset,
                     "has_more": has_more,
-                    # BUG-R19A-02: include next_offset so pipelines don't recompute
-                    # offset + len(tools). BUG-23A-02: when limit=0 and has_more=True,
+                    # Feature-R19A-02: include next_offset so pipelines don't recompute
+                    # offset + len(tools). Feature-23A-02: when limit=0 and has_more=True,
                     # set next_offset=0 so callers can pass it directly as --offset.
                     "next_offset": (offset + len(matching_tools))
                     if (has_more and limit != 0)
@@ -822,7 +822,7 @@ class ToolFinderKeyword(BaseTool):
                         "query_tokens": len(query_tokens),
                         "query_phrases": len(query_phrases),
                         "indexed_tools": self._total_documents,
-                        # BUG-R15B-02: expose original vs normalized query when underscore
+                        # Feature-R15B-02: expose original vs normalized query when underscore
                         # normalization was applied, so callers can detect the transformation.
                         **(
                             {

@@ -120,7 +120,7 @@ class EpigenomicsTool(BaseTool):
         limit = arguments.get("limit", 25)
         params["limit"] = min(int(limit), 100)
 
-        # BUG-70A-003: ambiguous/non-leaf biosample terms (e.g. "heart") combined with
+        # Feature-70A-003: ambiguous/non-leaf biosample terms (e.g. "heart") combined with
         # the organism filter can produce HTTP 404 from ENCODE. Fall back without
         # the organism filter in that case.
         try:
@@ -401,7 +401,7 @@ class EpigenomicsTool(BaseTool):
         organism = arguments.get("organism", "Homo sapiens")
         limit = arguments.get("limit", 20)
 
-        # BUG-70A-008: avoid double-adding "methylation" if query already contains it
+        # Feature-70A-008: avoid double-adding "methylation" if query already contains it
         term_parts = [query]
         if "methylation" not in query.lower():
             term_parts.append("methylation")

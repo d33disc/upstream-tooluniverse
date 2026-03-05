@@ -211,7 +211,7 @@ class BaseTool:
             if e.validator == "enum":
                 error_msg += f". Allowed values: {e.validator_value}."
 
-            # BUG-25A-03: when a required property is missing, check if the user
+            # Feature-25A-03: when a required property is missing, check if the user
             # provided a case-variant of it (e.g. kinase_id instead of kinase_ID).
             # If so, surface a "Did you mean?" hint to help them fix the typo.
             if e.validator == "required" and isinstance(filtered_arguments, dict):
@@ -293,7 +293,7 @@ class BaseTool:
         if isinstance(exception, ValueError):
             return ToolValidationError(f"Validation error: {exception}")
 
-        # BUG-25A-01: for HTTP errors, include the response body so callers see
+        # Feature-25A-01: for HTTP errors, include the response body so callers see
         # the upstream API's actual message rather than a generic "Base API error".
         response = getattr(exception, "response", None)
         response_detail = ""

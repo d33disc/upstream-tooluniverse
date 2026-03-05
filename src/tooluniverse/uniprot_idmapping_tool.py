@@ -125,7 +125,7 @@ class UniProtIDMappingTool(BaseTool):
         results_resp.raise_for_status()
         results_data = results_resp.json()
 
-        # BUG-68B-003: extract failedIds so callers can detect unmapped input IDs
+        # Feature-68B-003: extract failedIds so callers can detect unmapped input IDs
         return {
             "results": results_data.get("results", []),
             "job_id": job_id,

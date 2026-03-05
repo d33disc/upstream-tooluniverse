@@ -1022,7 +1022,7 @@ class HPAGetProteinInteractionsTool(HPASearchApiTool):
         if not gene_name:
             return {"error": "Parameter 'gene_name' is required"}
 
-        # BUG-68B-002: HPA 'ppi' column has been deprecated and returns no data.
+        # Feature-68B-002: HPA 'ppi' column has been deprecated and returns no data.
         # Direct users to EBIProteinsInteractionsTool or STRING tools instead.
         return {
             "status": "error",

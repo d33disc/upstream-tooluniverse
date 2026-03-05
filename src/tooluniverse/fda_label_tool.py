@@ -99,7 +99,7 @@ class FDALabelTool(BaseTool):
             return {"error": "Provide drug_name or indication"}
 
         if drug_name:
-            # BUG-66B-004: "+" in openFDA means AND — both fields can't match simultaneously.
+            # Feature-66B-004: "+" in openFDA means AND — both fields can't match simultaneously.
             # Try generic_name first; fall back to brand_name if no results.
             for field in ("openfda.generic_name", "openfda.brand_name"):
                 q = f'{field}:"{drug_name}"'
@@ -136,8 +136,8 @@ class FDALabelTool(BaseTool):
 
         dn_upper = drug_name.upper()
 
-        # BUG-66B-004: "+" in openFDA means AND — try generic_name then brand_name.
-        # BUG-67B-005B: fetch multiple results and prefer exact brand/generic name match
+        # Feature-66B-004: "+" in openFDA means AND — try generic_name then brand_name.
+        # Feature-67B-005B: fetch multiple results and prefer exact brand/generic name match
         # (e.g., "OPDIVO" should match canonical OPDIVO IV, not newer OPDIVO QVANTIG).
         for field in ("openfda.generic_name", "openfda.brand_name"):
             q = f'{field}:"{drug_name}"'

@@ -138,7 +138,7 @@ class GxATool(BaseTool):
         gene_id = arguments.get("gene_id", "")
 
         url = f"{GXA_BASE_URL}/experiments/{accession}"
-        # BUG-69A-003: the GxA /experiments/{accession} endpoint does NOT support
+        # Feature-69A-003: the GxA /experiments/{accession} endpoint does NOT support
         # geneId filtering — the parameter is silently ignored. Apply client-side filter.
         response = requests.get(url, timeout=self.timeout)
         response.raise_for_status()

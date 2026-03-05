@@ -323,7 +323,7 @@ class UniProtRESTTool(BaseTool):
                     raw_results = results_resp.json().get("results", [])
                     break
                 elif "results" in status_data:
-                    # BUG-26A-13: UniProt status endpoint redirected (303) to
+                    # Feature-26A-13: UniProt status endpoint redirected (303) to
                     # results page; results are embedded directly in status_data.
                     raw_results = status_data["results"]
                     break

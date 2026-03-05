@@ -178,7 +178,7 @@ class PharmGKBTool(BaseTool):
             result = api_response.get("data", api_response)
             return {"status": "success", "data": result}
 
-        # BUG-68A-003: relatedGenes.id filter returns HTTP 400 from PharmGKB API.
+        # Feature-68A-003: relatedGenes.id filter returns HTTP 400 from PharmGKB API.
         # Return a clear error rather than false success.
         gene_id = arguments.get("gene_id")
         if gene_id:
@@ -206,7 +206,7 @@ class PharmGKBTool(BaseTool):
             result = api_response.get("data", api_response)
             return {"status": "success", "data": result}
 
-        # BUG-67A-003: relatedGenes.symbol filter returns HTTP 400 from PharmGKB API.
+        # Feature-67A-003: relatedGenes.symbol filter returns HTTP 400 from PharmGKB API.
         # Return an error directing users to look up the guideline_id first.
         gene_symbol = arguments.get("gene") or arguments.get("gene_id")
         if gene_symbol:

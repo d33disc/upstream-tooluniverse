@@ -57,7 +57,7 @@ class NCBISRATool(NCBIEUtilsTool):
             if arguments.get(key)
         ]
 
-        # BUG-28B-15 fix: always include free-text query alongside structured filters
+        # Feature-28B-15 fix: always include free-text query alongside structured filters
         if arguments.get("query"):
             terms.append(arguments["query"])
 

@@ -123,10 +123,10 @@ class CIViCTool(BaseTool):
     ) -> Dict[str, Any]:
         """Fetch variants for a given CIViC gene_id via GraphQL.
 
-        BUG-45A-01: CIViC API caps variants(first:) at 100 server-side.
+        Feature-45A-01: CIViC API caps variants(first:) at 100 server-side.
         Use cursor-based pagination to fetch all variants up to `limit`.
         """
-        # BUG-41A-02: include feature { id name } so callers can distinguish
+        # Feature-41A-02: include feature { id name } so callers can distinguish
         # e.g. KRAS G12C (ID 78) from NRAS G12C (ID 897).
         PAGINATED_QUERY = (
             "query GetVariantsByGene($gene_id: Int!, $page_size: Int, $after: String) { "
@@ -176,7 +176,7 @@ class CIViCTool(BaseTool):
                 cursor = page_info.get("endCursor")
                 if not cursor:
                     break
-            # BUG-46B-01: deduplicate by variant ID (prevents pagination overlap artifacts)
+            # Feature-46B-01: deduplicate by variant ID (prevents pagination overlap artifacts)
             seen_ids: set = set()
             deduped: list = []
             name_count: Dict[str, int] = {}
@@ -226,7 +226,7 @@ class CIViCTool(BaseTool):
                 gene_name = (
                     arguments.get("gene_name")
                     or arguments.get("gene")
-                    or arguments.get("gene_symbol")  # BUG-47A-01
+                    or arguments.get("gene_symbol")  # Feature-47A-01
                     or arguments.get("query")
                 )
                 if not gene_name:
@@ -242,9 +242,9 @@ class CIViCTool(BaseTool):
                 arguments["gene_id"], arguments.get("limit", 500)
             )
 
-        # BUG-40B-01: civic_search_evidence_items — warn on unsupported gene/variant params.
-        # BUG-41A-03: also catch molecular_profile_id (integer) — no GraphQL binding.
-        # BUG-61A-001: extend to catch ANY unrecognized parameter that would be silently
+        # Feature-40B-01: civic_search_evidence_items — warn on unsupported gene/variant params.
+        # Feature-41A-03: also catch molecular_profile_id (integer) — no GraphQL binding.
+        # Feature-61A-001: extend to catch ANY unrecognized parameter that would be silently
         # ignored, causing unfiltered evidence dumps (e.g. description="ESR1", gene_id=38).
         if tool_name == "civic_search_evidence_items":
             _known_params = {
@@ -309,21 +309,21 @@ class CIViCTool(BaseTool):
                 }
 
         # civic_search_variants: if gene/gene_name provided, look up gene_id then get variants.
-        # BUG-41A-01: also handle combined gene+query — get gene variants, filter client-side.
+        # Feature-41A-01: also handle combined gene+query — get gene variants, filter client-side.
         if tool_name == "civic_search_variants":
             gene_name = (
                 arguments.get("gene")
                 or arguments.get("gene_name")
-                or arguments.get("gene_symbol")  # BUG-47A-01
+                or arguments.get("gene_symbol")  # Feature-47A-01
             )
-            # BUG-53B-004: variant_name parameter was silently ignored — only "query" was
+            # Feature-53B-004: variant_name parameter was silently ignored — only "query" was
             # checked. Users naturally pass variant_name='S249C' expecting it to filter
             # variants client-side, just like query='S249C' does.
-            # BUG-54A-005: when BOTH query and variant_name are provided and differ,
+            # Feature-54A-005: when BOTH query and variant_name are provided and differ,
             # silently dropping one is confusing. Apply AND logic and add a note.
             raw_query = arguments.get("query")
             raw_variant_name = arguments.get("variant_name") or arguments.get("variant")
-            # BUG-66A-002: strip leading/trailing whitespace from query/variant inputs
+            # Feature-66A-002: strip leading/trailing whitespace from query/variant inputs
             if raw_query and isinstance(raw_query, str):
                 raw_query = raw_query.strip()
             if raw_variant_name and isinstance(raw_variant_name, str):
@@ -338,7 +338,7 @@ class CIViCTool(BaseTool):
             else:
                 query_term = raw_query or raw_variant_name
                 _secondary_term = None
-            # BUG-66A-001: variant_name was silently ignored on the no-gene GraphQL path
+            # Feature-66A-001: variant_name was silently ignored on the no-gene GraphQL path
             # because _build_graphql_query only reads arguments["query"]. Forward query_term
             # into arguments["query"] so the no-gene path correctly filters by variant name.
             if query_term and not arguments.get("query"):
@@ -348,7 +348,7 @@ class CIViCTool(BaseTool):
                 gene_id = self._lookup_gene_id(gene_name)
                 if gene_id is None:
                     return {"error": f"Gene '{gene_name}' not found in CIViC database"}
-                # BUG-43B-01: when gene+query combined, always fetch up to 200 variants
+                # Feature-43B-01: when gene+query combined, always fetch up to 200 variants
                 # before client-side filtering; the user's limit applies to the OUTPUT,
                 # not the pre-filter fetch — otherwise alphabetically early variants may
                 # block clinically important ones (e.g. FLT3 ITD at position >10).
@@ -363,7 +363,7 @@ class CIViCTool(BaseTool):
                     filtered = [
                         v for v in nodes if q_lower in v.get("name", "").lower()
                     ]
-                    # BUG-54A-005: AND logic when both query and variant_name provided
+                    # Feature-54A-005: AND logic when both query and variant_name provided
                     if _secondary_term:
                         sec_lower = _secondary_term.lower()
                         filtered = [
@@ -379,7 +379,7 @@ class CIViCTool(BaseTool):
                     if user_limit:
                         filtered = filtered[:user_limit]
                     gene_data.get("variants", {})["nodes"] = filtered
-                    # BUG-48B-02: recompute duplicate names among filtered results only.
+                    # Feature-48B-02: recompute duplicate names among filtered results only.
                     # The metadata.note from _get_variants_for_gene_id cites duplicates from ALL
                     # gene variants; after filtering, only filtered duplicates are relevant.
                     if "metadata" in result:
@@ -398,15 +398,15 @@ class CIViCTool(BaseTool):
                             )
                         else:
                             result["metadata"].pop("note", None)
-                    # BUG-43A-04: when gene+query filter returns empty, add a helpful note.
-                    # BUG-44A-01: also provide gene-specific alternative query terms for
+                    # Feature-43A-04: when gene+query filter returns empty, add a helpful note.
+                    # Feature-44A-01: also provide gene-specific alternative query terms for
                     # common oncology terms that CIViC names differently (e.g., "truncating"
                     # → use "LOSS" or "Loss-of-function" for BRCA1/BRCA2 in CIViC).
                     if not filtered:
                         fusion_hint = ""
                         alt_hint = ""
                         if "fusion" in q_lower:
-                            # BUG-56A-006: BICC1 was hardcoded as an example but it's only a
+                            # Feature-56A-006: BICC1 was hardcoded as an example but it's only a
                             # real partner for FGFR2, not other genes. Use a validated lookup table.
                             _FUSION_EXAMPLES = {
                                 "ALK": "EML4",
@@ -460,14 +460,14 @@ class CIViCTool(BaseTool):
                         )
                 return result
 
-        # Track input normalizations to disclose them in the result (BUG-55A-008).
+        # Track input normalizations to disclose them in the result (Feature-55A-008).
         _therapy_normalized_from = None
         _mp_normalized_from = None
 
-        # BUG-53B-002: CIViC therapy names are case-sensitive (stored as Title Case, e.g.,
+        # Feature-53B-002: CIViC therapy names are case-sensitive (stored as Title Case, e.g.,
         # "Erdafitinib" not "erdafitinib"). Auto-normalize to Title Case when the input is
         # entirely lowercase or uppercase, to avoid silent empty results from case mismatches.
-        # BUG-63B-002: CIViC status uses a strict GraphQL enum (ACCEPTED, SUBMITTED, etc.)
+        # Feature-63B-002: CIViC status uses a strict GraphQL enum (ACCEPTED, SUBMITTED, etc.)
         # that requires uppercase. Normalize status to uppercase to prevent enum validation
         # errors when users pass lowercase/mixed-case values like "accepted".
         if tool_name == "civic_search_evidence_items":
@@ -486,10 +486,10 @@ class CIViCTool(BaseTool):
                 arguments = dict(arguments)
                 arguments["status"] = status_val.upper()
 
-        # BUG-55B-005: CIViC uses double-colon notation for fusion molecular profiles
+        # Feature-55B-005: CIViC uses double-colon notation for fusion molecular profiles
         # (e.g., "BCR::ABL1 Fusion", "EML4::ALK Fusion"). Users often write hyphenated
         # fusions (e.g., "BCR-ABL1 Fusion") which silently returns 0 results.
-        # BUG-56A-001: the original regex matched mutation notation too (e.g., EGFR-T790M,
+        # Feature-56A-001: the original regex matched mutation notation too (e.g., EGFR-T790M,
         # BRAF-V600E, KRAS-G12C) because T790M/V600E/G12C start with an uppercase letter.
         # Fix: skip normalization when the second part matches HGVS protein-change format
         # (single uppercase letter + digits + uppercase letter/asterisk, e.g. T790M, G12C).
@@ -554,7 +554,7 @@ class CIViCTool(BaseTool):
                 },
             }
 
-            # BUG-55A-008 / BUG-55B-005: disclose any input normalizations applied.
+            # Feature-55A-008 / Feature-55B-005: disclose any input normalizations applied.
             _norm_parts = []
             if _therapy_normalized_from:
                 _norm_parts.append(
@@ -570,15 +570,15 @@ class CIViCTool(BaseTool):
                     "Input auto-normalized: " + "; ".join(_norm_parts) + "."
                 )
 
-            # BUG-50A-001: warn when civic_search_evidence_items combined
+            # Feature-50A-001: warn when civic_search_evidence_items combined
             # molecular_profile+disease filter returns 0 results.
-            # BUG-52A-004: auto-probe with molecular_profile only to surface the actual
+            # Feature-52A-004: auto-probe with molecular_profile only to surface the actual
             # CIViC disease names that have evidence, so users can correct the disease name.
             if tool_name == "civic_search_evidence_items":
                 mol_profile = arguments.get("molecular_profile")
                 disease = arguments.get("disease") or arguments.get("disease_name")
 
-                # BUG-63B-002: CIViC GraphQL uses substring/contains matching for
+                # Feature-63B-002: CIViC GraphQL uses substring/contains matching for
                 # molecularProfileName — compound profiles like "BRAF V600E OR KIAA1549::BRAF
                 # Fusion" are returned when filtering for "BRAF V600E" because the substring
                 # matches. Disclose non-exact matches so users can confirm relevance.
@@ -607,7 +607,7 @@ class CIViCTool(BaseTool):
                                 "confirm clinical relevance."
                             )
 
-                # BUG-57A-005: fire when ANY disease filter is set (not just mol_profile+disease)
+                # Feature-57A-005: fire when ANY disease filter is set (not just mol_profile+disease)
                 if disease:
                     evidence_nodes = (
                         result.get("data", {}).get("evidenceItems", {}).get("nodes", [])
@@ -670,7 +670,7 @@ class CIViCTool(BaseTool):
                                 f" Try retrying with {_ctx} "
                                 "(remove the disease filter) to see all evidence."
                             )
-                        # BUG-59A-001: disclose ACCEPTED filter that may be hiding evidence
+                        # Feature-59A-001: disclose ACCEPTED filter that may be hiding evidence
                         _status_used = arguments.get(
                             "status", self.variable_defaults.get("status", "ACCEPTED")
                         )
@@ -692,7 +692,7 @@ class CIViCTool(BaseTool):
                             + _status_note
                         )
 
-                # BUG-56A-002: when molecular_profile alone returns 0 results (no disease,
+                # Feature-56A-002: when molecular_profile alone returns 0 results (no disease,
                 # no therapy filter), warn — especially if input was auto-normalized (fusion fix
                 # may have converted a mutation like EGFR-T790M to EGFR::T790M incorrectly).
                 therapy = arguments.get("therapy")
@@ -702,7 +702,7 @@ class CIViCTool(BaseTool):
                     )
                     if len(evidence_nodes) == 0:
                         mp_warn = f"No evidence items found for molecular_profile='{mol_profile}'."
-                        # BUG-59A-001: ACCEPTED filter may be hiding evidence. Disclose the active
+                        # Feature-59A-001: ACCEPTED filter may be hiding evidence. Disclose the active
                         # status filter so users know to try status='SUBMITTED' if evidence exists
                         # only in pre-review form (common for rare cancers and newer variants).
                         _status_used = arguments.get(
@@ -735,8 +735,8 @@ class CIViCTool(BaseTool):
                             )
                         result["warning"] = mp_warn
 
-                # BUG-53B-002: warn when molecular_profile+therapy returns 0 results.
-                # BUG-54A-001: auto-probe available therapies for the molecular profile
+                # Feature-53B-002: warn when molecular_profile+therapy returns 0 results.
+                # Feature-54A-001: auto-probe available therapies for the molecular profile
                 # so users can identify the correct exact therapy name from CIViC.
                 if mol_profile and therapy and not disease:
                     evidence_nodes = (
@@ -800,7 +800,7 @@ class CIViCTool(BaseTool):
                             + therapy_hint
                         )
 
-            # BUG-67B-002: detect "GENE VARIANT" combined input in variant_name returning
+            # Feature-67B-002: detect "GENE VARIANT" combined input in variant_name returning
             # empty — CIViC stores variants without gene prefix (e.g., "L858R" not "EGFR L858R").
             if tool_name == "civic_search_variants":
                 _variant_nodes = (
@@ -823,7 +823,7 @@ class CIViCTool(BaseTool):
                             f"with variant_name='{_vn_parts[1]}'."
                         )
 
-            # BUG-60A-001: when evidence items ARE returned under ACCEPTED-only filter,
+            # Feature-60A-001: when evidence items ARE returned under ACCEPTED-only filter,
             # disclose the filter so users know SUBMITTED items may also exist.
             if tool_name == "civic_search_evidence_items":
                 evidence_nodes = (

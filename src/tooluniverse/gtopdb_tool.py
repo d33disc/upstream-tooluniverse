@@ -9,8 +9,8 @@ from .tool_registry import register_tool
 def _strip_html(text: Any) -> Any:
     """Strip HTML tags and decode HTML entities from a string.
 
-    BUG-49A-H3: GtoPdb returns raw HTML tags in some fields (e.g., <sup>, <i>).
-    BUG-51B-002: GtoPdb also returns HTML entities (e.g., &ouml; → ö, &alpha; → α).
+    Feature-49A-H3: GtoPdb returns raw HTML tags in some fields (e.g., <sup>, <i>).
+    Feature-51B-002: GtoPdb also returns HTML entities (e.g., &ouml; → ö, &alpha; → α).
     """
     if not isinstance(text, str):
         return text
@@ -22,7 +22,7 @@ def _strip_html(text: Any) -> Any:
     return html.unescape(stripped)
 
 
-# BUG-53A-005: HGNC gene symbols → GtoPdb pharmacological receptor/enzyme names.
+# Feature-53A-005: HGNC gene symbols → GtoPdb pharmacological receptor/enzyme names.
 # GtoPdb indexes nuclear receptors and GPCRs by pharmacological names (ERα, D2 receptor)
 # not HGNC gene symbols (ESR1, DRD2). When gene_symbol lookup returns 404, fall back to
 # searching by the pharmacological name from this mapping.
@@ -74,7 +74,7 @@ class GtoPdbRESTTool(BaseTool):
         """Build URL with path parameters and query parameters."""
         url = self.tool_config["fields"]["endpoint"]
 
-        # BUG-29A-07 fix: interactions endpoint requires path params, not query params
+        # Feature-29A-07 fix: interactions endpoint requires path params, not query params
         # /services/interactions?targetId=X is ignored; must use /targets/{id}/interactions
         if (
             url.endswith("/interactions")
@@ -86,7 +86,7 @@ class GtoPdbRESTTool(BaseTool):
             ligand_id = args.get("ligandId") or args.get("ligand_id")
             if target_id is not None:
                 url = f"{self.base_url}/targets/{target_id}/interactions"
-                # BUG-53A-002: when BOTH targetId AND ligandId are provided, the original code
+                # Feature-53A-002: when BOTH targetId AND ligandId are provided, the original code
                 # only used targetId (correct for URL construction) but also silently removed
                 # ligandId from args without setting _pending_ligand_id_filter. This meant the
                 # client-side ligandId filter (set up in the elif branch) never ran, so the
@@ -100,7 +100,7 @@ class GtoPdbRESTTool(BaseTool):
                     if k not in ("targetId", "target_id", "ligandId", "ligand_id")
                 }
             elif ligand_id is not None:
-                # BUG-38B-02: /ligands/{id}/interactions always returns [] per GtoPdb REST API.
+                # Feature-38B-02: /ligands/{id}/interactions always returns [] per GtoPdb REST API.
                 # GtoPdb interactions are indexed by TARGET. Store ligand_id on self for use in run().
                 self._pending_ligand_id_filter = ligand_id
                 # Fall back to main interactions endpoint; run() will filter client-side
@@ -161,7 +161,7 @@ class GtoPdbRESTTool(BaseTool):
         return url
 
     def _search_targets_by_abbreviation_variants(self, query: str, limit: int) -> list:
-        """BUG-44A-04: When name search returns results whose names don't contain the query
+        """Feature-44A-04: When name search returns results whose names don't contain the query
         (e.g., 'PARP' → tankyrase via PARP5 synonym), also search for numbered variants
         like PARP1, PARP2, PARP3 and merge results.
 
@@ -195,15 +195,15 @@ class GtoPdbRESTTool(BaseTool):
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         url = None
-        self._pending_ligand_id_filter = None  # BUG-38B-02: reset per call
+        self._pending_ligand_id_filter = None  # Feature-38B-02: reset per call
 
-        # BUG-61B-001: GtoPdb species filter is case-sensitive ("Human" not "human").
+        # Feature-61B-001: GtoPdb species filter is case-sensitive ("Human" not "human").
         # Normalize species to Title Case so users can pass any case variant.
         if arguments.get("species"):
             arguments = dict(arguments)
             arguments["species"] = str(arguments["species"]).strip().title()
 
-        # BUG-62B-003: GtoPdb API does not honor approved=true/false on /targets or /ligands
+        # Feature-62B-003: GtoPdb API does not honor approved=true/false on /targets or /ligands
         # endpoints — it returns the same full set regardless. Remove approved_only from
         # the arguments so it is NOT forwarded to the API (where it is silently ignored).
         # We apply client-side filtering on interaction results by cross-referencing
@@ -213,12 +213,12 @@ class GtoPdbRESTTool(BaseTool):
             arguments = dict(arguments)
             arguments.pop("approved_only", None)
 
-        # BUG-63B-001: GtoPdb API silently ignores ligand_type= when combined with name=
+        # Feature-63B-001: GtoPdb API silently ignores ligand_type= when combined with name=
         # (e.g., ligand_type='Approved' + name='vemurafenib' returns all name matches,
         # including non-approved compounds). Capture early for client-side post-filtering.
         _ligand_type_requested = arguments.get("ligand_type")
 
-        # BUG-46A-04: gene_symbol convenience parameter for GtoPdb_get_interactions.
+        # Feature-46A-04: gene_symbol convenience parameter for GtoPdb_get_interactions.
         # Auto-resolve gene symbol → targetId so users don't need a separate
         # GtoPdb_search_targets call before querying interactions.
         gene_symbol = arguments.get("gene_symbol")
@@ -229,7 +229,7 @@ class GtoPdbRESTTool(BaseTool):
         ):
             from urllib.parse import urlencode
 
-            # BUG-54B-001: the previous approach used ?name=gene_symbol which does a
+            # Feature-54B-001: the previous approach used ?name=gene_symbol which does a
             # substring search on target names/abbreviations. For short symbols like "AR",
             # this returns all targets containing "AR" (adrenoceptors, etc.) and falls back
             # to targets[0] which is wrong. Fix: use ?geneSymbol= first — this is the
@@ -276,7 +276,7 @@ class GtoPdbRESTTool(BaseTool):
                         timeout=self.timeout,
                         max_attempts=2,
                     )
-                    # BUG-52B-002: GtoPdb returns HTTP 404 (not 200) when a gene_symbol
+                    # Feature-52B-002: GtoPdb returns HTTP 404 (not 200) when a gene_symbol
                     # doesn't match any target name. Previously, resp.status_code != 200
                     # caused the entire lookup block to be skipped silently, leaving
                     # gene_symbol in arguments → _build_url adds it as an unknown query
@@ -284,7 +284,7 @@ class GtoPdbRESTTool(BaseTool):
                     if resp.status_code == 404 or (
                         resp.status_code == 200 and not isinstance(resp.json(), list)
                     ):
-                        # BUG-53A-005: try HGNC→GtoPdb pharmacological name mapping
+                        # Feature-53A-005: try HGNC→GtoPdb pharmacological name mapping
                         # (e.g., ESR1 → "ERα", DRD2 → "D2 receptor") as a final fallback.
                         fallback_resolved = False
                         gtopdb_name = _HGNC_TO_GTOPDB_NAME.get(gene_symbol.upper())
@@ -340,7 +340,7 @@ class GtoPdbRESTTool(BaseTool):
                                 if (t.get("abbreviation") or "").upper() == gene_upper:
                                     target_id = t["targetId"]
                                     break
-                            # BUG-48A-05: before falling back to targets[0], try prefix match.
+                            # Feature-48A-05: before falling back to targets[0], try prefix match.
                             # e.g., gene_symbol="ABL1", abbreviation="Abl" →
                             # "abl1".startswith("abl") with rest "1" being a digit → ABL1 selected.
                             # This prevents "ABL1" from silently returning ABL2 (abbr "Arg").
@@ -365,7 +365,7 @@ class GtoPdbRESTTool(BaseTool):
                                 target_id = targets[0]["targetId"]
                             arguments = dict(arguments)
                             arguments["targetId"] = target_id
-                            # BUG-47A-05: remove gene_symbol so it doesn't leak into the API URL
+                            # Feature-47A-05: remove gene_symbol so it doesn't leak into the API URL
                             arguments.pop("gene_symbol", None)
                 except Exception:
                     pass
@@ -376,14 +376,14 @@ class GtoPdbRESTTool(BaseTool):
                 self.session, "GET", url, timeout=self.timeout, max_attempts=3
             )
             if response.status_code == 404 and "?" in url:
-                # BUG-37A-02: on search endpoints (URL has query params), 404 means no results
+                # Feature-37A-02: on search endpoints (URL has query params), 404 means no results
                 # not a real error. Provide helpful guidance.
                 hint = ""
                 if "/targets" in url:
                     hint = " If searching for a drug/ligand name, use GtoPdb_search_ligands instead."
                 elif "/ligands" in url:
                     hint = " If searching for a target name, use GtoPdb_search_targets instead."
-                # BUG-54B-002: multi-word name searches often fail silently
+                # Feature-54B-002: multi-word name searches often fail silently
                 name_q = arguments.get("name") or arguments.get("query")
                 if name_q and " " in str(name_q):
                     first_word = str(name_q).split()[0]
@@ -400,7 +400,7 @@ class GtoPdbRESTTool(BaseTool):
                 }
             if response.status_code != 200:
                 raw_detail = (response.text or "")[:500]
-                # BUG-35A-01: extract human-readable API error from JSON detail
+                # Feature-35A-01: extract human-readable API error from JSON detail
                 try:
                     import json as _json
 
@@ -417,7 +417,7 @@ class GtoPdbRESTTool(BaseTool):
                 }
             data = response.json()
 
-            # BUG-49A-H3: strip raw HTML tags from GtoPdb API fields.
+            # Feature-49A-H3: strip raw HTML tags from GtoPdb API fields.
             # GtoPdb returns HTML-formatted display values in some fields
             # (e.g., originalAffinity="6.3x10<sup>-6</sup>", ligandName="compound 5 [Smith <i>et al</i>., 2020]").
             # Strip tags so LLMs and downstream code receive plain text.
@@ -429,16 +429,16 @@ class GtoPdbRESTTool(BaseTool):
                             if field in item:
                                 item[field] = _strip_html(item[field])
 
-            # BUG-38B-02: client-side filter by ligandId when requested
+            # Feature-38B-02: client-side filter by ligandId when requested
             # (/ligands/{id}/interactions always returns [], so we fetch all and filter)
             ligand_id_filter = getattr(self, "_pending_ligand_id_filter", None)
             if ligand_id_filter is not None and isinstance(data, list):
                 data = [x for x in data if x.get("ligandId") == ligand_id_filter]
 
-            # BUG-63A-001: approved_only for interactions must cross-reference the approved
+            # Feature-63A-001: approved_only for interactions must cross-reference the approved
             # ligands endpoint. Interaction records do NOT have an 'approvedDrug' field;
             # approval status lives on /services/ligands objects as the 'approved' boolean.
-            # BUG-63B-001: ligand_type= is silently ignored by GtoPdb API when name= is also
+            # Feature-63B-001: ligand_type= is silently ignored by GtoPdb API when name= is also
             # present. Apply both filters client-side BEFORE computing total_available/limit.
             _pre_approved_filter_count = len(data) if isinstance(data, list) else 0
             if (
@@ -477,7 +477,7 @@ class GtoPdbRESTTool(BaseTool):
                     ]
 
             # Apply limit if specified (max_results is an alias for limit)
-            # BUG-47A-04: increased default from 20 to 50 — interaction-rich targets
+            # Feature-47A-04: increased default from 20 to 50 — interaction-rich targets
             # like EGFR (90 interactions) would only show 22% of data at limit=20.
             limit = arguments.get("limit", arguments.get("max_results", 50))
             total_available = len(data) if isinstance(data, list) else None
@@ -491,7 +491,7 @@ class GtoPdbRESTTool(BaseTool):
                 "count": len(data) if isinstance(data, list) else 1,
             }
 
-            # BUG-62B-003 / BUG-63B-001: for non-interaction endpoints, approved_only is not
+            # Feature-62B-003 / Feature-63B-001: for non-interaction endpoints, approved_only is not
             # applicable. For ligand searches, use ligand_type='Approved' instead.
             if _approved_only_requested and "/interactions" not in url:
                 result["approved_only_note"] = (
@@ -500,7 +500,7 @@ class GtoPdbRESTTool(BaseTool):
                     "searches, use ligand_type='Approved' instead to filter by approval status."
                 )
 
-            # BUG-60A-003: disclose truncation so users know data was cut off
+            # Feature-60A-003: disclose truncation so users know data was cut off
             if total_available is not None and total_available > len(data):
                 result["total_available"] = total_available
                 result["returned"] = len(data)
@@ -509,7 +509,7 @@ class GtoPdbRESTTool(BaseTool):
                     f" Increase limit (e.g., limit={total_available}) to retrieve all."
                 )
 
-            # BUG-54B-002: multi-word name search hint when results empty
+            # Feature-54B-002: multi-word name search hint when results empty
             name_q = arguments.get("name") or arguments.get("query")
             if (
                 result["count"] == 0
@@ -524,7 +524,7 @@ class GtoPdbRESTTool(BaseTool):
                     f"Try a single keyword: name='{first_word}'."
                 )
 
-            # BUG-38B-02: if ligandId filter returned nothing, add informative hint
+            # Feature-38B-02: if ligandId filter returned nothing, add informative hint
             ligand_id_filter = getattr(self, "_pending_ligand_id_filter", None)
             if ligand_id_filter is not None and result["count"] == 0:
                 result["message"] = (
@@ -539,7 +539,7 @@ class GtoPdbRESTTool(BaseTool):
                     "know the GtoPdb target ID."
                 )
 
-            # BUG-44A-04: for target name searches, detect when returned target names
+            # Feature-44A-04: for target name searches, detect when returned target names
             # don't contain the query string (meaning the match was via abbreviation/synonym,
             # e.g. name=PARP matches tankyrase via its PARP5 synonym). In that case,
             # also search for numbered variants (PARP1, PARP2, ...) and merge results.
@@ -574,14 +574,14 @@ class GtoPdbRESTTool(BaseTool):
                                 f"searching with full gene symbols like '{query}1', '{query}2'."
                             )
 
-            # BUG-59B-002: when an explicit target_id was provided and interactions is empty,
+            # Feature-59B-002: when an explicit target_id was provided and interactions is empty,
             # warn the user — the target ID may not exist in GtoPdb (the API returns HTTP 200
             # with [] for non-existent targets, indistinguishable from "target has no data").
             import re as _re_gtopdb
 
             _tid_match = _re_gtopdb.search(r"/targets/(\d+)/interactions", url)
             if _tid_match and isinstance(data, list) and len(data) == 0:
-                # BUG-63A-001: if approved_only filter cleared all results, give a specific
+                # Feature-63A-001: if approved_only filter cleared all results, give a specific
                 # explanation instead of the misleading "target may be invalid" warning.
                 if _approved_only_requested and _pre_approved_filter_count > 0:
                     result["approved_only_info"] = (
@@ -602,7 +602,7 @@ class GtoPdbRESTTool(BaseTool):
                         "and confirm the returned targetId before calling get_interactions."
                     )
 
-            # BUG-35A-02: add top-level queried_target summary for interactions endpoint
+            # Feature-35A-02: add top-level queried_target summary for interactions endpoint
             # so users can immediately verify they're getting the right target's data
             if isinstance(data, list) and data and "/interactions" in url:
                 first = data[0]
@@ -616,7 +616,7 @@ class GtoPdbRESTTool(BaseTool):
                         "id": first.get("ligandId"),
                         "name": first.get("ligandName"),
                     }
-                # BUG-49B-002 / BUG-55A-002 / BUG-55A-003 / BUG-55B-001:
+                # Feature-49B-002 / Feature-55A-002 / Feature-55A-003 / Feature-55B-001:
                 # GtoPdb interactions list pharmacological research compounds — approved drugs
                 # may be absent for any target class (kinases, GPCRs, ion channels, etc.).
                 # The previous code checked item.get("approved") which is only present on
@@ -635,8 +635,8 @@ class GtoPdbRESTTool(BaseTool):
                         f"ChEMBL_search_compounds with target_name='{_chembl_target}'."
                     )
 
-            # BUG-49A-M5: for ligand search results, add a hint about getting interaction data.
-            # BUG-51A-001: warn that ligandId-based lookups often fail for enzyme/kinase
+            # Feature-49A-M5: for ligand search results, add a hint about getting interaction data.
+            # Feature-51A-001: warn that ligandId-based lookups often fail for enzyme/kinase
             # inhibitors (PARP, HDAC, CDK, etc.) because GtoPdb indexes interactions by TARGET.
             # In those cases, querying by gene_symbol or targetId is more reliable.
             if isinstance(data, list) and data and "/ligands" in url and "?" in url:

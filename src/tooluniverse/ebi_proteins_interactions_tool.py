@@ -147,7 +147,7 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         # Extract protein metadata from first entry
         first_entry = data[0]
-        # BUG-66B-008a: "accession" returns the accession again; use "name" for protein name
+        # Feature-66B-008a: "accession" returns the accession again; use "name" for protein name
         protein_name = first_entry.get("name", accession)
         protein_existence = first_entry.get("proteinExistence")
         organism = None
@@ -157,7 +157,7 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         # Collect all interactions across entries
         all_interactions = []
-        # BUG-66B-008c: diseases/locations are properties of the query protein only (data[0]),
+        # Feature-66B-008c: diseases/locations are properties of the query protein only (data[0]),
         # not of all interaction partners — iterating all entries mixes partner data in.
         diseases = set()
         locations = set()
@@ -180,7 +180,7 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         # Extract diseases and locations from the query protein entry only
         for disease in first_entry.get("diseases", []):
-            # BUG-67B-003A: disease.get("type") returns the UniProt type discriminator
+            # Feature-67B-003A: disease.get("type") returns the UniProt type discriminator
             # string "DISEASE" (not a disease name) — omit it from the fallback chain.
             disease_name = disease.get("diseaseId") or disease.get("acronym")
             if disease_name:
@@ -188,7 +188,7 @@ class EBIProteinsInteractionsTool(BaseTool):
 
         for loc in first_entry.get("subcellularLocations", []):
             for subloc in loc.get("locations", [loc]):
-                # BUG-66B-008b: subloc["value"] is wrong; the value is nested under "location"
+                # Feature-66B-008b: subloc["value"] is wrong; the value is nested under "location"
                 if isinstance(subloc, dict):
                     loc_name = subloc.get("location", {}).get("value")
                 else:

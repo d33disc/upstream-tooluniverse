@@ -49,7 +49,7 @@ class GTExExpressionTool:
         )
         timeout = int(self.tool_config.get("settings", {}).get("timeout", 30))
 
-        # BUG-69A-001: /expression/geneExpression with gtex_v10 returns empty.
+        # Feature-69A-001: /expression/geneExpression with gtex_v10 returns empty.
         # Use /expression/medianGeneExpression with gtex_v8 for reliable results.
         query = {
             "gencodeId": arguments.get("ensembl_gene_id"),

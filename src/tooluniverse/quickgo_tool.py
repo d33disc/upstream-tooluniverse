@@ -72,7 +72,7 @@ class QuickGOTool(BaseTool):
         if not gene_product_id:
             return {"error": "gene_product_id parameter is required"}
 
-        # BUG-25B-05: detect bare gene symbols (e.g. "TP53") and explain the correct format.
+        # Feature-25B-05: detect bare gene symbols (e.g. "TP53") and explain the correct format.
         # QuickGO requires "DB:Accession" format such as "UniProtKB:P04637".
         if ":" not in gene_product_id:
             return {
@@ -127,7 +127,7 @@ class QuickGOTool(BaseTool):
                 }
             )
 
-        # BUG-25B-04: the annotation endpoint returns goName=null for many records.
+        # Feature-25B-04: the annotation endpoint returns goName=null for many records.
         # Batch-resolve the missing names from the GO terms endpoint.
         null_ids = list(
             {a["go_id"] for a in annotations if a["go_id"] and a["go_name"] is None}

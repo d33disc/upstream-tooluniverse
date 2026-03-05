@@ -447,7 +447,7 @@ def _read_profile_yaml(directory, context: str = "") -> dict:
 
     missing = [var for var in config.get("required_env", []) if not os.environ.get(var)]
     if missing:
-        # BUG-23B-06: downgrade to DEBUG so the circuit/plugin env-var notice
+        # Feature-23B-06: downgrade to DEBUG so the circuit/plugin env-var notice
         # does not spam every `tu` invocation (including `tu --help`).
         # The tools affected are already excluded from the loaded registry;
         # a summary INFO-level message is emitted by execute_function.py.
