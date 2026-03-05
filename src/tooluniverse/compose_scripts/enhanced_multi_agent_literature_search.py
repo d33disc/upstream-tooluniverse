@@ -277,7 +277,15 @@ def _parse_result(result):
         except Exception:
             return {"result": result}
     elif isinstance(result, dict):
-        # 如果已经是字典，直接返回
+        # Unwrap nested JSON string in the "result" key (e.g. from agent tools)
+        inner = result.get("result")
+        if isinstance(inner, str):
+            try:
+                parsed = json.loads(inner)
+                if isinstance(parsed, dict):
+                    return parsed
+            except Exception:
+                pass
         return result
     else:
         return {"result": str(result)}
