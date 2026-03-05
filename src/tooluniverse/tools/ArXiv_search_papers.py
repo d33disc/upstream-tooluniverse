@@ -17,7 +17,7 @@ def ArXiv_search_papers(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search arXiv for papers by keyword using the public arXiv API. Returns papers with title, abstrac...
 
@@ -40,7 +40,7 @@ def ArXiv_search_papers(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 

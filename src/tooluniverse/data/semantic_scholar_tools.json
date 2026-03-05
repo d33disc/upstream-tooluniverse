@@ -22,6 +22,10 @@
           "type": "string",
           "description": "Filter results by publication year. Use a single year (e.g., '2024') or a range (e.g., '2020-2024')."
         },
+        "sort": {
+          "type": "string",
+          "description": "Sort results. Options: 'citationCount:desc', 'citationCount:asc', 'publicationDate:desc', 'publicationDate:asc'."
+        },
         "include_abstract": {
           "type": "boolean",
           "description": "If true, best-effort fetches missing abstracts via the paper detail endpoint (only when abstract is missing in search results).",

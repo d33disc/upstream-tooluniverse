@@ -60,12 +60,21 @@ class BaseRESTTool(BaseTool):
         """
         url = self.tool_config["fields"]["endpoint"]
 
-        # Replace all path parameters
+        # Replace all path parameters from user args
         for key, value in args.items():
             placeholder = f"{{{key}}}"
             if placeholder in url:
                 # URL encode to handle special characters (e.g., DOIs with slashes)
                 encoded_value = urllib.parse.quote(str(value), safe="")
+                url = url.replace(placeholder, encoded_value)
+
+        # Apply schema defaults for any remaining {param} placeholders
+        for key, prop in (
+            self.tool_config.get("parameter", {}).get("properties", {}).items()
+        ):
+            placeholder = f"{{{key}}}"
+            if placeholder in url and "default" in prop and prop["default"] is not None:
+                encoded_value = urllib.parse.quote(str(prop["default"]), safe="")
                 url = url.replace(placeholder, encoded_value)
 
         return url
