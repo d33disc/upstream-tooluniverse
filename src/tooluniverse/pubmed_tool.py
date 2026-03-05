@@ -636,6 +636,14 @@ class PubMedRESTTool(BaseRESTTool):
                                 "data": linkset.get("idurllist", {}),
                                 "url": response.url,
                             }
+                        else:
+                            # Linkset exists but no linksetdbs or idurllist = no results
+                            return {
+                                "status": "success",
+                                "data": [],
+                                "count": 0,
+                                "url": response.url,
+                            }
 
                 # For elink responses with LinkOut URLs (llinks returns direct idurllist)
                 if "idurllist" in data:

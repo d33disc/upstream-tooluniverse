@@ -50,9 +50,43 @@ class ArXivTool(BaseTool):
 
         return self._search(query, limit, sort_by, sort_order)
 
+    _VALID_SORT_BY = {"relevance", "lastUpdatedDate", "submittedDate"}
+
+    def _build_search_query(self, query):
+        """Build arXiv search_query, joining multi-word queries with AND.
+
+        If the query already contains arXiv field prefixes (au:, ti:, cat:, abs:, etc.)
+        or boolean operators (AND, OR, ANDNOT), pass it through as-is.
+        Otherwise, join words with AND so all terms must match.
+        """
+        arxiv_prefixes = (
+            "au:",
+            "ti:",
+            "abs:",
+            "cat:",
+            "co:",
+            "jr:",
+            "rn:",
+            "id:",
+            "all:",
+        )
+        has_prefix = any(p in query.lower() for p in arxiv_prefixes)
+        has_boolean = any(f" {op} " in query for op in ("AND", "OR", "ANDNOT"))
+        if has_prefix or has_boolean:
+            return query
+        words = query.split()
+        if len(words) <= 1:
+            return f"all:{query}"
+        return " AND ".join(f"all:{w}" for w in words)
+
     def _search(self, query, limit, sort_by, sort_order):
+        if sort_by not in self._VALID_SORT_BY:
+            return {
+                "error": f"Invalid sort_by: '{sort_by}'. Valid options: {', '.join(sorted(self._VALID_SORT_BY))}",
+            }
+
         params = {
-            "search_query": f"all:{query}",
+            "search_query": self._build_search_query(query),
             "start": 0,
             "max_results": max(1, min(limit, 200)),
             "sortBy": sort_by,
