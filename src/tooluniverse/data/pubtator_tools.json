@@ -66,17 +66,17 @@
         },
         "page": {
           "type": "integer",
-          "description": "Zero-based results page (optional; default = 0)."
+          "description": "Zero-based results page (optional; default = 0).",
+          "default": 0
         },
         "page_size": {
           "type": "integer",
-          "description": "How many PMIDs to return per page (optional; default = 20, maximum = 200)."
+          "description": "How many PMIDs to return per page (optional; default = 20, maximum = 200).",
+          "default": 20
         }
       },
       "required": [
-        "query",
-        "page",
-        "page_size"
+        "query"
       ]
     },
     "fields": {

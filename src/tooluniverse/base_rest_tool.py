@@ -35,7 +35,9 @@ class BaseRESTTool(BaseTool):
         super().__init__(tool_config)
         self.session = requests.Session()
         self.timeout = 30
-        self.api_name = self.__class__.__name__.replace("RESTTool", "")
+        self.api_name = tool_config.get(
+            "name", self.__class__.__name__.replace("RESTTool", "")
+        )
 
     def _get_param_mapping(self) -> Dict[str, str]:
         """
