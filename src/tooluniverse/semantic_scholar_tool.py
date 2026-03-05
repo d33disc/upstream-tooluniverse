@@ -210,7 +210,9 @@ class SemanticScholarTool(BaseTool):
             )
             open_access_pdf_url = (
                 open_access_pdf.get("url")
-                if open_access_pdf and isinstance(open_access_pdf.get("url"), str)
+                if open_access_pdf
+                and isinstance(open_access_pdf.get("url"), str)
+                and open_access_pdf.get("url", "").strip()
                 else None
             )
 
@@ -310,6 +312,7 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
 
         # Get PDF URL
         pdf_url = None
+        lookup_error = None
         if isinstance(open_access_pdf_url, str) and open_access_pdf_url.strip():
             pdf_url = open_access_pdf_url.strip()
         elif isinstance(paper_id, str) and paper_id.strip():
@@ -332,14 +335,18 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
                         data.get("openAccessPdf"), dict
                     ):
                         pdf_url = data["openAccessPdf"].get("url")
-            except Exception:
-                pass
+            except Exception as e:
+                lookup_error = str(e)
 
         if not pdf_url:
+            msg = "Could not determine PDF URL. Provide `open_access_pdf_url` or a valid `paper_id` with available open access PDF."
+            if lookup_error:
+                msg += f" (API lookup failed: {lookup_error})"
             return {
                 "status": "error",
-                "error": "Could not determine PDF URL. Provide `open_access_pdf_url` or a valid `paper_id` with available open access PDF.",
-                "retryable": False,
+                "error": msg,
+                "retryable": "429" in (lookup_error or "")
+                or "timeout" in (lookup_error or "").lower(),
             }
 
         # Check if markitdown is available

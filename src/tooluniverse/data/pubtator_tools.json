@@ -27,9 +27,7 @@
         }
       },
       "required": [
-        "text",
-        "entity_type",
-        "max_results"
+        "text"
       ]
     },
     "fields": {
