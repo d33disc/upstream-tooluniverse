@@ -47,12 +47,10 @@ Route user questions to specialized skills. If no skill matches, use general str
 
 | Keywords | Action |
 |----------|--------|
-| "**drug safety**", "adverse events", "side effects", "pharmacovigilance", "pharmacogenomics", "FAERS", "black box warning" | `Skill(skill="tooluniverse-pharmacovigilance")` |
+| "**drug safety**", "adverse events", "side effects", "pharmacovigilance", "pharmacogenomics", "FAERS", "black box warning", "drug safety profile", "drug safety assessment", "comprehensive safety" | `Skill(skill="tooluniverse-pharmacovigilance")` |
 | "**adverse event signal**", "safety signal detection", "disproportionality", "PRR", "ROR" | `Skill(skill="tooluniverse-adverse-event-detection")` |
-| "**drug safety profile**", "drug safety assessment", "comprehensive safety" | `Skill(skill="tooluniverse-drug-safety-profiling")` |
 | "**chemical safety**", "ADMET", "chemical toxicity", "environmental toxicity", "toxic effects" | `Skill(skill="tooluniverse-chemical-safety")` |
-| "**cancer treatment**", "precision oncology", "tumor mutation", "targeted therapy", "EGFR", "KRAS", "BRAF" | `Skill(skill="tooluniverse-precision-oncology")` |
-| "**cancer driver**", "driver gene", "driver mutation", "IntOGen", "cBioPortal" | `Skill(skill="tooluniverse-cancer-driver-analysis")` |
+| "**cancer treatment**", "precision oncology", "tumor mutation", "targeted therapy", "EGFR", "KRAS", "BRAF", "cancer driver", "driver gene", "driver mutation", "IntOGen", "cBioPortal" | `Skill(skill="tooluniverse-precision-oncology")` |
 | "**somatic mutation interpretation**", "cancer variant", "oncogenic variant", "tumor variant" | `Skill(skill="tooluniverse-cancer-variant-interpretation")` |
 | "**immunotherapy response**", "checkpoint inhibitor response", "TMB", "MSI", "PD-L1", "ICI response" | `Skill(skill="tooluniverse-immunotherapy-response-prediction")` |
 | "**rare disease diagnosis**", "differential diagnosis", "phenotype matching", "HPO", "patient with [symptoms]" | `Skill(skill="tooluniverse-rare-disease-diagnosis")` |
@@ -110,6 +108,7 @@ Route user questions to specialized skills. If no skill matches, use general str
 | "**phylogenetics**", "phylogenetic tree", "sequence alignment", "evolutionary analysis" | `Skill(skill="tooluniverse-phylogenetics")` |
 | "**statistical modeling**", "regression analysis", "logistic regression", "survival analysis", "Cox" | `Skill(skill="tooluniverse-statistical-modeling")` |
 | "**metabolomics analysis**", "LC-MS analysis", "metabolite quantification", "metabolic flux" | `Skill(skill="tooluniverse-metabolomics-analysis")` |
+| "**single-cell**", "scRNA-seq", "cell clustering", "cell type annotation", "scanpy", "10X Genomics", "cell-cell communication" | `Skill(skill="tooluniverse-single-cell")` |
 
 ### 8. Clinical Trials & Study Design
 
@@ -132,6 +131,7 @@ Route user questions to specialized skills. If no skill matches, use general str
 | "**setup**", "install", "configure", "API keys", "upgrade", "**how to use**", "**get started**", "**CLI**", "**tu command**", "MCP vs CLI vs SDK", "**what is ToolUniverse**", "**what can this do**", "**what databases**", "**demo**", "**tutorial**", "**quickstart**", "**I'm new**" | `Skill(skill="setup-tooluniverse")` |
 | "**SDK**", "Python SDK", "build AI scientist", "programmatic access", "**import tooluniverse**", "**coding API**", "**tu build**", "**typed wrappers**" | `Skill(skill="tooluniverse-sdk")` |
 | "**install skills**", "missing skills", "skill not found", "add skills" | `Skill(skill="tooluniverse-install-skills")` |
+| "**custom tool**", "create tool", "add my own tool", "private API", "local tool" | `Skill(skill="tooluniverse-custom-tool")` |
 
 ---
 
