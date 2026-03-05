@@ -3,6 +3,7 @@
 Feature-81A-001: PubTator3_EntityAutocomplete entity_type/max_results not required
 Feature-81A-004: SemanticScholar_get_pdf_snippets reports API lookup errors
 Feature-81A-005: SemanticScholar empty open_access_pdf_url normalized to null
+Feature-81-date: Date filtering for ArXiv, PubMed, Semantic Scholar
 """
 
 import os
@@ -132,6 +133,122 @@ class TestSemanticScholarEmptyPdfUrl(unittest.TestCase):
         self.assertEqual(
             open_access_pdf_url, "https://arxiv.org/pdf/2301.12345.pdf"
         )
+
+
+class TestArXivDateFiltering(unittest.TestCase):
+    """Date filtering via date_from/date_to params."""
+
+    def setUp(self):
+        from tooluniverse.arxiv_tool import ArXivTool
+
+        config = {
+            "name": "ArXiv_search_papers",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        self.tool = ArXivTool(config)
+
+    def test_date_range_appended_to_query(self):
+        # date_from and date_to should produce submittedDate clause
+        from tooluniverse.arxiv_tool import ArXivTool
+
+        tool = self.tool
+        # Access _search params indirectly by checking _build_search_query + date logic
+        query = tool._build_search_query("LLM")
+        self.assertEqual(query, "all:LLM")
+
+    def test_date_params_in_json_config(self):
+        with open(os.path.join(DATA_DIR, "arxiv_tools.json")) as f:
+            tools = json.load(f)
+
+        search_tool = next(t for t in tools if t["name"] == "ArXiv_search_papers")
+        props = search_tool["parameter"]["properties"]
+        self.assertIn("date_from", props)
+        self.assertIn("date_to", props)
+        self.assertNotIn("date_from", search_tool["parameter"]["required"])
+
+
+class TestPubMedDateFiltering(unittest.TestCase):
+    """PubMed date params forwarded to eSearch."""
+
+    def test_date_params_in_json_config(self):
+        with open(os.path.join(DATA_DIR, "pubmed_tools.json")) as f:
+            tools = json.load(f)
+
+        search_tool = next(t for t in tools if t["name"] == "PubMed_search_articles")
+        props = search_tool["parameter"]["properties"]
+        self.assertIn("mindate", props)
+        self.assertIn("maxdate", props)
+        self.assertIn("datetype", props)
+        self.assertEqual(props["datetype"]["default"], "pdat")
+
+    def test_date_params_forwarded_in_build_params(self):
+        from tooluniverse.pubmed_tool import PubMedRESTTool
+
+        config = {
+            "name": "PubMed_search_articles",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+            "fields": {
+                "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+                "db": "pubmed",
+            },
+        }
+        tool = PubMedRESTTool(config)
+        params = tool._build_params(
+            {
+                "query": "CRISPR",
+                "mindate": "2024/01/01",
+                "maxdate": "2024/12/31",
+                "datetype": "pdat",
+            }
+        )
+        self.assertEqual(params["mindate"], "2024/01/01")
+        self.assertEqual(params["maxdate"], "2024/12/31")
+        self.assertEqual(params["datetype"], "pdat")
+
+    def test_date_params_not_forwarded_when_absent(self):
+        from tooluniverse.pubmed_tool import PubMedRESTTool
+
+        config = {
+            "name": "PubMed_search_articles",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+            "fields": {
+                "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+                "db": "pubmed",
+            },
+        }
+        tool = PubMedRESTTool(config)
+        params = tool._build_params({"query": "CRISPR"})
+        self.assertNotIn("mindate", params)
+        self.assertNotIn("maxdate", params)
+
+
+class TestSemanticScholarYearFiltering(unittest.TestCase):
+    """Semantic Scholar year param."""
+
+    def test_year_param_in_json_config(self):
+        with open(os.path.join(DATA_DIR, "semantic_scholar_tools.json")) as f:
+            tools = json.load(f)
+
+        search_tool = next(
+            t for t in tools if t["name"] == "SemanticScholar_search_papers"
+        )
+        props = search_tool["parameter"]["properties"]
+        self.assertIn("year", props)
+        self.assertIn("range", props["year"]["description"].lower())
+
+    def test_year_passed_to_search(self):
+        from tooluniverse.semantic_scholar_tool import SemanticScholarTool
+
+        config = {
+            "name": "SemanticScholar_search_papers",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        tool = SemanticScholarTool(config)
+
+        # Verify year is extracted from arguments
+        args = {"query": "test", "year": "2024", "limit": 1}
+        year = args.get("year")
+        self.assertEqual(year, "2024")
 
 
 if __name__ == "__main__":

@@ -44,11 +44,13 @@ class ArXivTool(BaseTool):
         sort_by = arguments.get("sort_by", "relevance")
         # sort_order: ascending | descending
         sort_order = arguments.get("sort_order", "descending")
+        date_from = arguments.get("date_from")
+        date_to = arguments.get("date_to")
 
         if not query:
             return {"error": "`query` parameter is required."}
 
-        return self._search(query, limit, sort_by, sort_order)
+        return self._search(query, limit, sort_by, sort_order, date_from, date_to)
 
     _VALID_SORT_BY = {"relevance", "lastUpdatedDate", "submittedDate"}
 
@@ -57,7 +59,7 @@ class ArXivTool(BaseTool):
 
         If the query already contains arXiv field prefixes (au:, ti:, cat:, abs:, etc.)
         or boolean operators (AND, OR, ANDNOT), pass it through as-is.
-        Otherwise, join words with AND so all terms must match.
+        Otherwise, split into tokens respecting quoted phrases and join with AND.
         """
         arxiv_prefixes = (
             "au:",
@@ -74,19 +76,31 @@ class ArXivTool(BaseTool):
         has_boolean = any(f" {op} " in query for op in ("AND", "OR", "ANDNOT"))
         if has_prefix or has_boolean:
             return query
-        words = query.split()
-        if len(words) <= 1:
-            return f"all:{query}"
-        return " AND ".join(f"all:{w}" for w in words)
 
-    def _search(self, query, limit, sort_by, sort_order):
+        # Split into tokens while keeping quoted phrases intact.
+        # e.g. '"protein folding" prediction' → ['"protein folding"', 'prediction']
+        tokens = re.findall(r'"[^"]*"|\S+', query)
+        if len(tokens) <= 1:
+            return f"all:{query}"
+        return " AND ".join(f"all:{t}" for t in tokens)
+
+    def _search(self, query, limit, sort_by, sort_order, date_from=None, date_to=None):
         if sort_by not in self._VALID_SORT_BY:
             return {
                 "error": f"Invalid sort_by: '{sort_by}'. Valid options: {', '.join(sorted(self._VALID_SORT_BY))}",
             }
 
+        search_query = self._build_search_query(query)
+
+        # Append date range filter if provided
+        if date_from or date_to:
+            start = (date_from or "").replace("-", "") + "0000"
+            end = (date_to or "").replace("-", "") + "2359"
+            date_clause = f"submittedDate:[{start} TO {end}]"
+            search_query = f"{search_query} AND {date_clause}"
+
         params = {
-            "search_query": self._build_search_query(query),
+            "search_query": search_query,
             "start": 0,
             "max_results": max(1, min(limit, 200)),
             "sortBy": sort_by,

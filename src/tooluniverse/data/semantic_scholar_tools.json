@@ -18,6 +18,10 @@
           "description": "Maximum number of papers to return from Semantic Scholar.",
           "default": 5
         },
+        "year": {
+          "type": "string",
+          "description": "Filter results by publication year. Use a single year (e.g., '2024') or a range (e.g., '2020-2024')."
+        },
         "include_abstract": {
           "type": "boolean",
           "description": "If true, best-effort fetches missing abstracts via the paper detail endpoint (only when abstract is missing in search results).",

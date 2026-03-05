@@ -48,6 +48,7 @@ class SemanticScholarTool(BaseTool):
     def run(self, arguments):
         query = arguments.get("query")
         limit = arguments.get("limit", 5)
+        year = arguments.get("year")
         include_abstract = bool(arguments.get("include_abstract", False))
         if not query:
             return [
@@ -61,7 +62,7 @@ class SemanticScholarTool(BaseTool):
                     "retryable": False,
                 }
             ]
-        return self._search(query, limit, include_abstract=include_abstract)
+        return self._search(query, limit, year=year, include_abstract=include_abstract)
 
     def _enforce_rate_limit(self, has_api_key: bool) -> None:
         # Keep anonymous usage below 1 req/sec to reduce 429s.
@@ -99,7 +100,7 @@ class SemanticScholarTool(BaseTool):
             return None
         return payload if isinstance(payload, dict) else None
 
-    def _search(self, query, limit, *, include_abstract: bool = False):
+    def _search(self, query, limit, *, year=None, include_abstract: bool = False):
         params = {
             "query": query,
             "limit": limit,
@@ -121,6 +122,8 @@ class SemanticScholarTool(BaseTool):
                 ]
             ),
         }
+        if year:
+            params["year"] = str(year)
         headers = {"x-api-key": self.default_api_key} if self.default_api_key else {}
         self._enforce_rate_limit(bool(self.default_api_key))
         response = request_with_retry(

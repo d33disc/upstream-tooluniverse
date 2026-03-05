@@ -18,6 +18,19 @@
           "description": "Number of articles to return. This sets the maximum number of articles retrieved from PubMed (max: 200).",
           "default": 10
         },
+        "mindate": {
+          "type": "string",
+          "description": "Minimum date for results (format: YYYY/MM/DD or YYYY). Requires datetype to be set."
+        },
+        "maxdate": {
+          "type": "string",
+          "description": "Maximum date for results (format: YYYY/MM/DD or YYYY). Requires datetype to be set."
+        },
+        "datetype": {
+          "type": "string",
+          "description": "Type of date to filter on: 'pdat' (publication date), 'edat' (Entrez date), or 'mdat' (modification date). Required when using mindate/maxdate.",
+          "default": "pdat"
+        },
         "include_abstract": {
           "type": "boolean",
           "description": "If true, best-effort fetches abstracts via efetch (adds abstract/abstract_source fields).",

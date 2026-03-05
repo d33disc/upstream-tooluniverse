@@ -24,6 +24,14 @@
           "type": "string",
           "description": "Sort direction. Options: 'ascending', 'descending'",
           "default": "descending"
+        },
+        "date_from": {
+          "type": "string",
+          "description": "Filter results from this date (format: YYYY-MM-DD). Uses submittedDate range."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Filter results up to this date (format: YYYY-MM-DD). Uses submittedDate range."
         }
       },
       "required": [
@@ -31,44 +39,59 @@
       ]
     },
     "return_schema": {
-      "type": "array",
-      "description": "List of arXiv papers matching the search query",
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "Title of the paper"
-          },
-          "abstract": {
-            "type": "string",
-            "description": "Abstract of the paper"
-          },
-          "authors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "List of author names"
-          },
-          "published": {
-            "type": "string",
-            "description": "Publication date in ISO format"
-          },
-          "updated": {
-            "type": "string",
-            "description": "Last updated date in ISO format"
-          },
-          "category": {
-            "type": "string",
-            "description": "arXiv category (e.g., cs.LG, math.CO)"
-          },
-          "url": {
-            "type": "string",
-            "description": "URL to the paper on arXiv"
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of arXiv papers matching the search query",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Title of the paper"
+              },
+              "abstract": {
+                "type": "string",
+                "description": "Abstract of the paper"
+              },
+              "authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of author names"
+              },
+              "published": {
+                "type": "string",
+                "description": "Publication date in ISO format"
+              },
+              "updated": {
+                "type": "string",
+                "description": "Last updated date in ISO format"
+              },
+              "category": {
+                "type": "string",
+                "description": "arXiv category (e.g., cs.LG, math.CO)"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL to the paper on arXiv"
+              }
+            }
           }
+        },
+        {
+          "type": "object",
+          "description": "Error response",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error message"
+            }
+          },
+          "required": ["error"]
         }
-      }
+      ]
     },
     "test_examples": [
       {
