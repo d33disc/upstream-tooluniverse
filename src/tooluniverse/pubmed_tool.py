@@ -601,7 +601,7 @@ class PubMedRESTTool(BaseRESTTool):
                                     links = links[:limit]
 
                                 # Enrich with article metadata
-                                pmid_list = [
+                                pmids = [
                                     str(lk["id"] if isinstance(lk, dict) else lk)
                                     for lk in links
                                 ]
@@ -610,23 +610,19 @@ class PubMedRESTTool(BaseRESTTool):
                                     for lk in links
                                     if isinstance(lk, dict)
                                 }
-                                summary = self._fetch_summaries(pmid_list)
+                                summary = self._fetch_summaries(pmids)
                                 if summary.get("status") == "success" and summary.get(
                                     "data"
                                 ):
                                     for item in summary["data"]:
-                                        if isinstance(item, dict) and scores.get(
-                                            str(item.get("pmid", ""))
-                                        ):
-                                            item["relevance_score"] = scores[
-                                                str(item["pmid"])
-                                            ]
-                                    return {
-                                        "status": "success",
-                                        "data": summary["data"],
-                                        "count": len(summary["data"]),
-                                        "url": response.url,
-                                    }
+                                        score = (
+                                            scores.get(str(item.get("pmid", "")))
+                                            if isinstance(item, dict)
+                                            else None
+                                        )
+                                        if score is not None:
+                                            item["relevance_score"] = score
+                                    links = summary["data"]
                                 return {
                                     "status": "success",
                                     "data": links,

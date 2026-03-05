@@ -88,29 +88,34 @@ class BaseRESTTool(BaseTool):
         # Get param mapping for this API
         param_mapping = self._get_param_mapping()
 
-        # Params handled client-side (not sent to API)
-        client_only = set()
-        if self.tool_config.get("fields", {}).get("client_side_limit"):
-            client_only.add("limit")
+        # Params handled client-side only (not sent to API)
+        client_only = (
+            {"limit"}
+            if self.tool_config.get("fields", {}).get("client_side_limit")
+            else set()
+        )
 
-        # Only add arguments that aren't path parameters or client-only
         for key, value in args.items():
-            if key in client_only:
-                continue
-            if f"{{{key}}}" not in url_template and value is not None:
-                param_name = param_mapping.get(key, key)
-                params[param_name] = value
+            if (
+                key not in client_only
+                and f"{{{key}}}" not in url_template
+                and value is not None
+            ):
+                params[param_mapping.get(key, key)] = value
 
         # Apply schema defaults for optional params not provided by the caller
-        properties = self.tool_config.get("parameter", {}).get("properties", {})
-        for key, prop in properties.items():
-            if key in client_only or key in params or key in args:
-                continue
-            if f"{{{key}}}" in url_template:
+        for key, prop in (
+            self.tool_config.get("parameter", {}).get("properties", {}).items()
+        ):
+            if (
+                key in client_only
+                or key in params
+                or key in args
+                or f"{{{key}}}" in url_template
+            ):
                 continue
             if "default" in prop and prop["default"] is not None:
-                param_name = param_mapping.get(key, key)
-                params[param_name] = prop["default"]
+                params[param_mapping.get(key, key)] = prop["default"]
 
         return params
 
@@ -220,23 +225,17 @@ class BaseRESTTool(BaseTool):
 
             # Client-side limit for APIs that return unbounded lists
             if self.tool_config.get("fields", {}).get("client_side_limit"):
-                limit = arguments.get("limit")
-                if limit is None:
-                    limit = (
-                        self.tool_config.get("parameter", {})
-                        .get("properties", {})
-                        .get("limit", {})
-                        .get("default")
-                    )
-                if limit is not None and isinstance(result.get("data"), list):
-                    try:
-                        limit = int(limit)
-                        if len(result["data"]) > limit:
-                            result["total_before_limit"] = len(result["data"])
-                            result["data"] = result["data"][:limit]
-                            result["count"] = limit
-                    except (TypeError, ValueError):
-                        pass
+                props = self.tool_config.get("parameter", {}).get("properties", {})
+                limit = arguments.get("limit", props.get("limit", {}).get("default"))
+                data = result.get("data")
+                if (
+                    limit is not None
+                    and isinstance(data, list)
+                    and len(data) > int(limit)
+                ):
+                    result["total_before_limit"] = len(data)
+                    result["data"] = data[: int(limit)]
+                    result["count"] = int(limit)
 
             return result
 
