@@ -325,10 +325,9 @@ class TestBaseRESTToolClientSideLimit(unittest.TestCase):
                 "required": [],
             },
         }
-        tool = BaseRESTTool(config)
+        BaseRESTTool(config)  # verify config is valid
 
         # Simulate run() post-processing with a large list result
-        # We test the limit logic directly by calling run's limit block
         result = {"status": "success", "data": list(range(100)), "count": 100}
         limit = None  # not in user args
         if limit is None:
