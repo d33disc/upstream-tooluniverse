@@ -95,7 +95,7 @@ class TestPubMedCitedByEmptyResult(unittest.TestCase):
             self.skipTest("ToolUniverse not available")
 
         try:
-            result = tu.execute_tool("PubMed_get_cited_by", {"pmid": "37461722", "limit": 3})
+            result = tu.run_one_function({"name": "PubMed_get_cited_by", "arguments": {"pmid": "37461722", "limit": 3}})
         except Exception as e:
             self.skipTest(f"API call failed: {e}")
 
@@ -123,14 +123,16 @@ class TestArXivMultiWordLive(unittest.TestCase):
             self.skipTest("ToolUniverse not available")
 
         try:
-            result = tu.execute_tool(
-                "ArXiv_search_papers",
+            result = tu.run_one_function(
                 {
-                    "query": "large language model biomedical",
-                    "sort_by": "submittedDate",
-                    "sort_order": "descending",
-                    "limit": 3,
-                },
+                    "name": "ArXiv_search_papers",
+                    "arguments": {
+                        "query": "large language model biomedical",
+                        "sort_by": "submittedDate",
+                        "sort_order": "descending",
+                        "limit": 3,
+                    },
+                }
             )
         except Exception as e:
             self.skipTest(f"API call failed: {e}")
