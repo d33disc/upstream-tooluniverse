@@ -94,6 +94,7 @@ class OrphanetTool(BaseTool):
         Args:
             arguments: Dict containing:
                 - query: Search query (disease name, keyword)
+                - limit: Maximum results to return (default: 20)
                 - lang: Language code (en, fr, de, etc.). Default: en
         """
         query = arguments.get("query", "")
@@ -101,6 +102,11 @@ class OrphanetTool(BaseTool):
             return {"status": "error", "error": "Missing required parameter: query"}
 
         lang = normalize_lang(arguments.get("lang", "en"))
+        try:
+            limit = int(arguments.get("limit", 20))
+        except (TypeError, ValueError):
+            limit = 20
+        limit = max(1, min(limit, 200))
 
         try:
             # Use RDcode API for approximate name search
@@ -122,16 +128,22 @@ class OrphanetTool(BaseTool):
                 # API returns a dict with entities
                 results = data.get("entities", data.get("results", [data]))
 
+            total_count = len(results)
+            results = results[:limit]
+
             return {
                 "status": "success",
                 "data": {
                     "results": results,
+                    "count": len(results),
+                    "total_count": total_count,
                     "query": query,
                     "language": lang,
                 },
                 "metadata": {
                     "source": "Orphanet RDcode API",
                     "query": query,
+                    "truncated": total_count > limit,
                 },
             }
 

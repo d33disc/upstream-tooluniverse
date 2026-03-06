@@ -1248,5 +1248,82 @@ class TestOrphanetGetGenesDirectLookup(unittest.TestCase):
         self.assertIn("orpha_code", result["error"])
 
 
+# ---------------------------------------------------------------------------
+# Feature-86B-001: Orphanet_search_diseases result limit
+# ---------------------------------------------------------------------------
+class TestOrphanetSearchDiseasesLimit(unittest.TestCase):
+    """Orphanet_search_diseases should limit results to avoid flooding."""
+
+    def setUp(self):
+        from tooluniverse.orphanet_tool import OrphanetTool
+
+        self.tool = OrphanetTool({"name": "Orphanet_search_diseases"})
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_default_limit_truncates(self, mock_get):
+        """Default limit=20 should truncate large result sets."""
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.raise_for_status = MagicMock()
+        resp.json.return_value = [{"ORPHAcode": i, "Preferred term": f"Disease {i}"} for i in range(100)]
+        mock_get.return_value = resp
+
+        result = self.tool._search_diseases({"query": "test"})
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"]["count"], 20)
+        self.assertEqual(result["data"]["total_count"], 100)
+        self.assertTrue(result["metadata"]["truncated"])
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_custom_limit(self, mock_get):
+        """Custom limit should be respected."""
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.raise_for_status = MagicMock()
+        resp.json.return_value = [{"ORPHAcode": i} for i in range(50)]
+        mock_get.return_value = resp
+
+        result = self.tool._search_diseases({"query": "test", "limit": 5})
+        self.assertEqual(result["data"]["count"], 5)
+        self.assertEqual(result["data"]["total_count"], 50)
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_small_result_not_truncated(self, mock_get):
+        """Small result sets should not be marked as truncated."""
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.raise_for_status = MagicMock()
+        resp.json.return_value = [{"ORPHAcode": 1}, {"ORPHAcode": 2}]
+        mock_get.return_value = resp
+
+        result = self.tool._search_diseases({"query": "test"})
+        self.assertEqual(result["data"]["count"], 2)
+        self.assertFalse(result["metadata"]["truncated"])
+
+
+# ---------------------------------------------------------------------------
+# Feature-86B-008: EuropePMC HTML in abstracts
+# ---------------------------------------------------------------------------
+class TestEuropePMCAbstractHTMLStripping(unittest.TestCase):
+    """EuropePMC abstracts with HTML should be cleaned."""
+
+    def test_html_stripped_from_abstract(self):
+        from tooluniverse.europe_pmc_tool import _extract_text_from_html
+
+        html = "<h4>Objectives</h4>To test <i>in vivo</i> effects."
+        result = _extract_text_from_html(html)
+        self.assertNotIn("<h4>", result)
+        self.assertNotIn("<i>", result)
+        self.assertIn("Objectives", result)
+        self.assertIn("in vivo", result)
+
+    def test_plain_text_unchanged(self):
+        from tooluniverse.europe_pmc_tool import _extract_text_from_html
+
+        text = "This is a plain abstract with no HTML."
+        result = _extract_text_from_html(text)
+        self.assertEqual(result, text)
+
+
 if __name__ == "__main__":
     unittest.main()
