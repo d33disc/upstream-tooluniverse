@@ -3,6 +3,8 @@
 Detailed code-level fix patterns discovered through role-play debug rounds.
 
 ## Table of Contents
+
+**Rounds 52–57 (core patterns)**
 - [Regex Overmatch: Mutation vs Fusion](#regex-overmatch)
 - [Silent Parameter Alias](#silent-parameter-alias)
 - [Always-Fires Conditional](#always-fires-conditional)
@@ -15,6 +17,33 @@ Detailed code-level fix patterns discovered through role-play debug rounds.
 - [Expression Units Inference](#expression-units)
 - [Auto-Selected vs Explicit Study](#auto-selected-study)
 - [CIViC Therapy + AND Logic](#civic-therapy-and)
+
+**Rounds 68–78 (API-specific patterns)**
+- [DGIdb Client-Side Filtering](#dgidb-client-side)
+- [CPIC PostgREST Filter Prefix](#cpic-postgrest)
+- [CPIC Recommendation Join](#cpic-join)
+- [KEGG Organism-Specific Gene Search](#kegg-organism)
+- [HPA Deprecated Column](#hpa-deprecated)
+- [PDBePISA Operation from Config](#pdbepisa-operation)
+- [GTEx Dataset Selection](#gtex-dataset)
+- [GxA Silent geneId Ignore](#gxa-geneid)
+- [ExpressionAtlas Schema Key Mismatch](#expressionatlas-schema)
+- [Proteins API Human Priority](#proteins-api-human)
+- [RCSB Null Type in Schema](#rcsb-null)
+- [ClinVar Search Field Tags](#clinvar-fields)
+- [ENCODE Tissue+Organism Filter](#encode-filter)
+- [GEO Double-Adding Search Terms](#geo-double)
+- [CPIC Warfarin Algorithm Guideline](#cpic-warfarin)
+- [PharmGKB clinpgxid vs pharmgkbid](#pharmgkb-id)
+- [ENCODE ChIP-seq Assay Title](#encode-assay)
+- [RegulomeDB Parameter Names](#regulomedb)
+- [BindingDB API Typo](#bindingdb)
+- [ProteomeXchange Title and Instruments](#proteomexchange)
+- [MetabolomicsWorkbench moverz URL](#metworkbench)
+- [MetaboLights Pagination Ignored](#metalights)
+- [ChEBI Search Nulls and HTML](#chebi)
+- [HMDB No Open API](#hmdb)
+- [PharmGKB relatedGenes Filter](#pharmgkb-related)
 
 ---
 
@@ -318,3 +347,285 @@ if mol_profile and therapy and not disease and len(evidence_nodes) == 0:
         f"Available therapies: {available_therapies[:10]}"
     )
 ```
+
+---
+
+## DGIdb Client-Side Filtering (Feature-68A-001/002)
+
+**Tools**: DGIdb_get_interactions
+**Pattern**: API ignores `interaction_types` and `sources` filters server-side → returns everything.
+
+**Fix**: Fetch all, filter client-side:
+```python
+if interaction_types:
+    results = [r for r in results if r.get("interactionTypes") and
+               any(it in interaction_types for it in r["interactionTypes"])]
+if sources:
+    results = [r for r in results if r.get("source") in sources]
+# Always wrap with status
+return {"status": "success", "count": len(results), "data": results}
+```
+
+---
+
+## CPIC PostgREST Filter Prefix (Feature-68A-004)
+
+**Tools**: CPICSearchPairsTool
+**Pattern**: PostgREST requires equality filter as `eq.VALUE`, not bare `VALUE`.
+
+**Fix**: Auto-prepend `eq.` if not already present:
+```python
+def _postgrest_eq(value):
+    v = str(value)
+    return v if v.startswith("eq.") else f"eq.{v}"
+params["genesymbol"] = _postgrest_eq(gene_symbol)
+```
+
+---
+
+## CPIC Recommendation Join (Feature-68A-006)
+
+**Tools**: CPIC_get_recommendations
+**Pattern**: `/recommendation` endpoint doesn't include drug name — need to join `/drug` table.
+
+**Fix**: Use `?select=*,drug(name)` in the URL query string for PostgREST joins.
+
+---
+
+## KEGG Organism-Specific Gene Search (Feature-68B-001)
+
+**Tools**: KEGG_find_genes
+**Pattern**: `/find/genes/{keyword}` ignores organism param → returns all organisms.
+
+**Fix**: Use `/find/{organism}/{keyword}`:
+```python
+url = f"https://rest.kegg.jp/find/{organism}/{keyword}" if organism else f"https://rest.kegg.jp/find/genes/{keyword}"
+```
+
+---
+
+## HPA Deprecated Column (Feature-68B-002)
+
+**Tools**: HPA_get_protein_expression
+**Pattern**: `ppi` column was deprecated; API returns error listing alternatives (`enhanced`, `supported`, `approved`, `uncertain`).
+
+**Fix**: Remove `ppi` from select list; return error message with alternatives when API responds with column-not-found error.
+
+---
+
+## PDBePISA Operation from Config (Feature-68B-006)
+
+**Tools**: PDBePISA tools
+**Pattern**: `operation` param exposed as public parameter → users pass wrong values.
+
+**Fix**: Read `operation` from the tool's JSON `fields` config, never expose as public argument.
+
+---
+
+## GTEx Dataset Selection (Feature-69A-001/002)
+
+**Tools**: GTEx_get_median_gene_expression
+**Pattern**: `gtex_v10` returns empty for `medianGeneExpression` endpoint; only `gtex_v8` works reliably.
+
+**Fix**: Always default to `gtex_v8`. Add note in result:
+```python
+dataset = arguments.get("dataset", "gtex_v8")
+if dataset == "gtex_v10":
+    result["dataset_note"] = "gtex_v10 may return empty for this endpoint; gtex_v8 is recommended."
+```
+
+---
+
+## GxA Silent geneId Ignore (Feature-69A-003)
+
+**Tools**: ExpressionAtlas_get_experiment
+**Pattern**: `/experiments/{accession}` API ignores `geneId` parameter silently.
+
+**Fix**: Apply `geneId` filter client-side on the returned data.
+
+---
+
+## ExpressionAtlas Schema Key Mismatch (Feature-69A-004)
+
+**Tools**: ExpressionAtlas tools
+**Pattern**: `return_schema` key `experiments` but code returns `baseline_experiments`.
+
+**Fix**: Make key in `return_schema` match exactly what the code produces. Use `baseline_experiments`.
+
+---
+
+## Proteins API Human Priority (Feature-69A-007)
+
+**Tools**: proteins_api_search
+**Pattern**: Gene/name searches return non-human results first.
+
+**Fix**: Add `taxid=9606` default for gene and name searches to prioritize human entries.
+
+---
+
+## RCSB Null Type in Schema (Feature-69B-002/010)
+
+**Tools**: RCSB tools
+**Pattern**: `return_schema` has `type: null` which is invalid JSON Schema.
+
+**Fix**: Use `["array", "null"]` or `["string", "null"]` for nullable types. Also avoid using protein-only PDB IDs as test examples — use IDs that represent the tested operation.
+
+---
+
+## ClinVar Search Field Tags (Feature-70B-004/005)
+
+**Tools**: ClinVar tools
+**Pattern**: `[variant_id]` is not a valid eSearch field → use `[uid]`. `[disease/phenotype]` not valid → use bare condition text (no brackets).
+
+**Fix**:
+```python
+# Wrong:
+query = f"{variant_id}[variant_id]"
+query = f"{condition}[disease/phenotype]"
+
+# Right:
+query = f"{variant_id}[uid]"
+query = condition  # bare text, NCBI searches all fields
+```
+
+---
+
+## ENCODE Tissue+Organism Filter (Feature-70A-003)
+
+**Tools**: ENCODE_search_experiments
+**Pattern**: Combining tissue + organism filter → HTTP 404.
+
+**Fix**: Fall back without organism filter when 404 occurs:
+```python
+try:
+    resp = requests.get(url_with_organism)
+    if resp.status_code == 404:
+        resp = requests.get(url_without_organism)
+except Exception:
+    ...
+```
+
+---
+
+## GEO Double-Adding Search Terms (Feature-70A-008)
+
+**Tools**: GEO_search_datasets
+**Pattern**: Code adds "methylation" to query even when it's already present.
+
+**Fix**: Check before appending:
+```python
+if "methylation" not in query.lower():
+    query += " methylation"
+```
+
+---
+
+## CPIC Warfarin Algorithm Guideline (Feature-70B-001)
+
+**Tools**: CPIC_get_recommendations
+**Pattern**: Warfarin guideline (ID 100425) uses `algorithm` endpoint, not `/recommendation`. Returns 0 rows from recommendation endpoint.
+
+**Fix**: Detect warfarin (or any guideline that uses algorithm-based dosing) and redirect to `/algorithm` endpoint or explain in the response.
+
+---
+
+## PharmGKB clinpgxid vs pharmgkbid (Feature-70B-002/011)
+
+**Tools**: PharmGKB tools
+**Pattern**: CPIC `list_guidelines` returns `clinpgxid`, but code uses `pharmgkbid` → 404 from PharmGKB.
+
+**Fix**: Use `clinpgxid` from CPIC response when building PharmGKB URLs.
+
+---
+
+## ENCODE ChIP-seq Assay Title (Feature-73B)
+
+**Tools**: ENCODE_search_experiments
+**Pattern**: Querying `assay_title=ChIP-seq` returns 0; correct value is `TF ChIP-seq`.
+Also: organism filter uses wrong nested field name.
+
+**Fix**: Map user-friendly aliases to ENCODE-specific values:
+```python
+ASSAY_ALIASES = {"ChIP-seq": "TF ChIP-seq", "CHIP": "TF ChIP-seq"}
+assay_title = ASSAY_ALIASES.get(assay_title, assay_title)
+```
+
+---
+
+## RegulomeDB Parameter Names (Feature-73B)
+
+**Tools**: RegulomeDB tools
+**Pattern**: `assembly=hg19` is wrong → use `genome=GRCh38`. Test example `rs123456` doesn't exist → use `rs4994`.
+
+**Fix**: Update parameter names and test examples to match actual API.
+
+---
+
+## BindingDB API Typo (Feature-73A)
+
+**Tools**: BindingDB tools
+**Pattern**: API endpoint has typo: `getLindsByXxx` (not `getLigandsByXxx`). Also response key is `bdb.affinities` not `affinities`.
+
+**Fix**: Use exact typo as in the real API URL. Access `response["bdb.affinities"]`.
+
+---
+
+## ProteomeXchange Title and Instruments (Feature-73A)
+
+**Tools**: ProteomeXchange tools
+**Pattern**: `title` field is plain string not dict. `instruments` use `{name, accession}` not nested `terms`.
+
+**Fix**: Access `dataset.get("title")` directly. For instruments: `inst.get("name")` not `inst["terms"][0]["name"]`.
+
+---
+
+## MetabolomicsWorkbench moverz URL (Feature-73A/74A)
+
+**Tools**: MetabolomicsWorkbench tools
+**Pattern**: `moverz` endpoint needs database prefix: `/moverz/{database}/{mz}/{adduct}/{tolerance}`. Also `exactmass` endpoint is broken → use `moverz/REFMET/{mass}/M/{tolerance}`.
+
+**Fix**:
+```python
+url = f"https://www.metabolomicsworkbench.org/rest/moverz/REFMET/{mz}/M+H/{tolerance}"
+```
+
+---
+
+## MetaboLights Pagination Ignored (Feature-74A)
+
+**Tools**: MetaboLights tools
+**Pattern**: `/ws/studies` API silently ignores `size` and `page` params → always returns full list.
+
+**Fix**: Apply pagination client-side after fetching all results:
+```python
+all_studies = resp.json()
+start = page * size
+return all_studies[start:start + size]
+```
+
+---
+
+## ChEBI Search Nulls and HTML (Feature-74A)
+
+**Tools**: ChEBI_search_compounds
+**Pattern**: `smiles` and `inchikey` always null from search API. Names contain HTML entities (`&amp;`, `&lt;`).
+
+**Fix**: Strip HTML from names using `re.sub(r"<[^>]+>", "", name)` and `html.unescape(name)`. Don't return null smiles/inchikey — omit them or fetch from detail endpoint.
+
+---
+
+## HMDB No Open API (Feature-74A)
+
+**Tools**: HMDB tools
+**Pattern**: HMDB has no open REST API; tools were returning stub success responses.
+
+**Fix**: Return `{"status": "error", "message": "HMDB does not provide a public REST API. Use MetabolomicsWorkbench or ChEBI instead."}`.
+
+---
+
+## PharmGKB relatedGenes Filter (Feature-74B)
+
+**Tools**: PharmGKB tools
+**Pattern**: `relatedGenes.id` and `relatedGenes.symbol` filters not supported by API — silently returns all results.
+
+**Fix**: Return informative message: `"relatedGenes filter is not supported by PharmGKB API. Filter results client-side or use gene-specific endpoints instead."`
