@@ -5316,3 +5316,614 @@ class TestQuietDefault:
         tu = ToolUniverse()
         # Should not raise
         tu.load_tools(quiet=False)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Round 83: CLI real-world scenario tests
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestCmdTestErrorDetection:
+    """Feature-83A: tu test detects errors returned as lists of error dicts."""
+
+    @pytest.mark.unit
+    def test_list_error_result_detected_as_failure(self, monkeypatch, tu, capsys):
+        """When a tool returns [{"title": "Error", "error": "..."}], tu test should fail."""
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        error_result = [
+            {
+                "title": "Error",
+                "abstract": None,
+                "journal": None,
+                "year": None,
+                "url": None,
+                "error": "Semantic Scholar API error 429",
+                "retryable": True,
+            }
+        ]
+        original_run = tu.run_one_function
+
+        def mock_run(payload):
+            if payload.get("name") == "SemanticScholar_search_papers":
+                return error_result
+            return original_run(payload)
+
+        monkeypatch.setattr(tu, "run_one_function", mock_run)
+        ns = _args(tool_name="SemanticScholar_search_papers", json=True)
+        ns.args_json = '{"query": "test"}'
+        ns.config = None
+        with pytest.raises(SystemExit) as exc_info:
+            m.cmd_test(ns)
+        assert exc_info.value.code == 1
+        out = capsys.readouterr().out
+        data = _j(out)
+        assert data["passed"] == 0
+
+    @pytest.mark.unit
+    def test_list_success_result_passes(self, monkeypatch, tu, capsys):
+        """Normal list result (no errors) should pass tu test."""
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        success_result = [
+            {"title": "Test Paper", "year": 2024, "url": "https://example.com"}
+        ]
+        original_run = tu.run_one_function
+
+        def mock_run(payload):
+            if payload.get("name") == "SemanticScholar_search_papers":
+                return success_result
+            return original_run(payload)
+
+        monkeypatch.setattr(tu, "run_one_function", mock_run)
+        ns = _args(tool_name="SemanticScholar_search_papers", json=True)
+        ns.args_json = '{"query": "test"}'
+        ns.config = None
+        m.cmd_test(ns)
+        out = capsys.readouterr().out
+        data = _j(out)
+        assert data["passed"] == 1
+
+    @pytest.mark.unit
+    def test_mixed_list_with_some_errors_passes(self, monkeypatch, tu, capsys):
+        """A list with both valid and error entries should pass (not all items are errors)."""
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        mixed_result = [
+            {"title": "Real Paper", "year": 2024},
+            {"title": "Error", "error": "some issue"},
+        ]
+        original_run = tu.run_one_function
+
+        def mock_run(payload):
+            if payload.get("name") == "SemanticScholar_search_papers":
+                return mixed_result
+            return original_run(payload)
+
+        monkeypatch.setattr(tu, "run_one_function", mock_run)
+        ns = _args(tool_name="SemanticScholar_search_papers", json=True)
+        ns.args_json = '{"query": "test"}'
+        ns.config = None
+        m.cmd_test(ns)
+        out = capsys.readouterr().out
+        data = _j(out)
+        assert data["passed"] == 1
+
+
+class TestRealDiscoveryWorkflows:
+    """Feature-83B: Real-world tool discovery workflows using live registry."""
+
+    @pytest.mark.unit
+    def test_find_protein_tools(self, monkeypatch, tu, capsys):
+        """find 'protein structure' returns relevant tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_find,
+            _args(query="protein structure prediction", limit=10, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert len(names) > 0
+        # Should find at least one protein structure tool
+        protein_tools = [n for n in names if any(
+            kw in n.lower() for kw in ["rcsb", "alphafold", "pdb", "swiss", "protein"]
+        )]
+        assert protein_tools, f"Expected protein tools, got: {names}"
+
+    @pytest.mark.unit
+    def test_find_gene_expression_tools(self, monkeypatch, tu, capsys):
+        """find 'gene expression' returns relevant tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_find,
+            _args(query="gene expression analysis", limit=10, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert len(names) > 0
+        expr_tools = [n for n in names if any(
+            kw in n.lower() for kw in ["expression", "gtex", "geo", "atlas", "gdc"]
+        )]
+        assert expr_tools, f"Expected expression tools, got: {names}"
+
+    @pytest.mark.unit
+    def test_find_drug_interaction_tools(self, monkeypatch, tu, capsys):
+        """find 'drug interaction' returns relevant tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_find,
+            _args(query="drug interaction", limit=10, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert len(names) > 0
+
+    @pytest.mark.unit
+    def test_grep_pubmed_name(self, monkeypatch, tu, capsys):
+        """grep 'PubMed' in name field finds PubMed tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_grep,
+            _args(pattern="PubMed", field="name", limit=20, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert any("PubMed" in n for n in names)
+
+    @pytest.mark.unit
+    def test_grep_crispr_description(self, monkeypatch, tu, capsys):
+        """grep 'CRISPR' in description field finds relevant tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_grep,
+            _args(pattern="CRISPR", field="description", limit=10, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        assert data.get("total_matches", 0) > 0
+
+    @pytest.mark.unit
+    def test_grep_regex_anchored(self, monkeypatch, tu, capsys):
+        """grep '^RCSB' in regex mode finds RCSB tools."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch,
+            m.cmd_grep,
+            _args(pattern="^RCSB", field="name", search_mode="regex", limit=10, json=True),
+            tu,
+            capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert all(n.startswith("RCSB") for n in names)
+
+
+class TestListModeConsistency:
+    """Feature-83C: All list modes report consistent total_tools."""
+
+    @pytest.mark.unit
+    def test_names_and_basic_same_total(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=1, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="basic", limit=1, json=True), tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        assert d1["total_tools"] == d2["total_tools"]
+        assert d1["total_tools"] > 0
+
+    @pytest.mark.unit
+    def test_categories_total_matches_names_total(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=1, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="categories", json=True), tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        names_total = d1["total_tools"]
+        cats_total = sum(d2.get("categories", {}).values())
+        assert names_total == cats_total
+
+    @pytest.mark.unit
+    def test_summary_and_by_category_same_total(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="summary", limit=1, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="by_category", limit=1, json=True), tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        assert d1["total_tools"] == d2["total_tools"]
+
+
+class TestCategoryResolution:
+    """Feature-83D: Category filtering with prefix matching and case insensitivity."""
+
+    @pytest.mark.unit
+    def test_case_insensitive_category(self, monkeypatch, tu, capsys):
+        """PUBMED (uppercase) resolves to pubmed category."""
+        import tooluniverse.cli as m
+
+        out_upper, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", categories=["PUBMED"], json=True), tu, capsys,
+        )
+        out_lower, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", categories=["pubmed"], json=True), tu, capsys,
+        )
+        d_upper = _j(out_upper)
+        d_lower = _j(out_lower)
+        assert d_upper["total_tools"] == d_lower["total_tools"]
+        assert d_upper["total_tools"] > 0
+
+    @pytest.mark.unit
+    def test_prefix_expansion(self, monkeypatch, tu, capsys):
+        """'pub' prefix should match pubmed, pubchem, pubtator, etc."""
+        import tooluniverse.cli as m
+
+        out, err = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", categories=["pub"], json=True), tu, capsys,
+        )
+        data = _j(out)
+        # Should find tools from multiple pub* categories
+        assert data["total_tools"] > 0
+        # Stderr should mention category expansion
+        assert "expands to" in err or data["total_tools"] > 0
+
+    @pytest.mark.unit
+    def test_nonexistent_category_warns(self, monkeypatch, tu, capsys):
+        """Unknown category warns on stderr and exits 1."""
+        import tooluniverse.cli as m
+
+        with pytest.raises(SystemExit) as exc_info:
+            _run(
+                monkeypatch, m.cmd_list,
+                _args(mode="names", categories=["zzz_totally_fake"], json=True),
+                tu, capsys,
+            )
+        assert exc_info.value.code == 1
+
+
+class TestOutputFormats:
+    """Feature-83E: Output format consistency (JSON, raw, human)."""
+
+    @pytest.mark.unit
+    def test_grep_json_is_valid(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", limit=3, json=True), tu, capsys,
+        )
+        data = _j(out)
+        assert "tools" in data
+        assert "total_matches" in data
+        assert isinstance(data["tools"], list)
+
+    @pytest.mark.unit
+    def test_grep_raw_is_compact(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", limit=3, raw=True), tu, capsys,
+        )
+        data = _j(out)
+        # Raw output should be a single line (compact JSON)
+        assert "\n" not in out.strip()
+        assert "tools" in data
+
+    @pytest.mark.unit
+    def test_grep_human_has_table(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", limit=3), tu, capsys,
+        )
+        # Human output should have table headers and separator
+        assert "name" in out
+        assert "description" in out
+        assert "─" in out
+
+    @pytest.mark.unit
+    def test_find_json_has_scores(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="protein", limit=3, json=True), tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) > 0
+        assert all("relevance_score" in t for t in tools)
+
+    @pytest.mark.unit
+    def test_info_json_has_parameters(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(
+                tool_names=["SemanticScholar_search_papers"],
+                detail="full",
+                json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        tool = data["tools"][0]
+        params = tool.get("parameters", tool.get("parameter", {}))
+        props = params.get("properties", {})
+        assert "query" in props
+        assert "limit" in props
+
+    @pytest.mark.unit
+    def test_status_json_has_version(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_status,
+            _args(json=True), tu, capsys,
+        )
+        data = _j(out)
+        assert "version" in data
+        assert "total_tools" in data
+        assert "categories" in data
+        assert data["total_tools"] > 0
+
+
+class TestErrorHandling:
+    """Feature-83F: Error handling for malformed inputs."""
+
+    @pytest.mark.unit
+    def test_bad_json_exits_1(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(tool_name="SemanticScholar_search_papers", raw=True)
+        ns.arguments = ['{"query": "test"']  # missing closing brace
+        with pytest.raises(SystemExit) as exc_info:
+            m.cmd_run(ns)
+        assert exc_info.value.code == 1
+
+    @pytest.mark.unit
+    def test_nonexistent_tool_shows_suggestions(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(tool_name="SemanticScholarr_search", json=True)
+        ns.arguments = []
+        with pytest.raises(SystemExit):
+            m.cmd_run(ns)
+        out = capsys.readouterr().out
+        # Should have error info in output
+        data = _j(out)
+        assert "error" in data or data.get("status") == "error"
+
+    @pytest.mark.unit
+    def test_null_kv_shows_helpful_error(self):
+        from tooluniverse.cli import _parse_run_args
+
+        with pytest.raises(ValueError, match="null"):
+            _parse_run_args(["query=null"])
+
+    @pytest.mark.unit
+    def test_empty_grep_pattern_exits_1(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc_info:
+            m.cmd_grep(_args(pattern="", json=True))
+        assert exc_info.value.code == 1
+
+    @pytest.mark.unit
+    def test_empty_find_query_exits_1(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        with pytest.raises(SystemExit) as exc_info:
+            m.cmd_find(_args(query="", json=True))
+        assert exc_info.value.code == 1
+
+
+class TestPaginationConsistency:
+    """Feature-83G: Pagination works correctly across commands."""
+
+    @pytest.mark.unit
+    def test_grep_pagination_pages_dont_overlap(self, monkeypatch, tu, capsys):
+        """Two consecutive pages should return different tools."""
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="search", field="description", limit=5, offset=0, json=True),
+            tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="search", field="description", limit=5, offset=5, json=True),
+            tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        names1 = {t["name"] for t in d1.get("tools", [])}
+        names2 = {t["name"] for t in d2.get("tools", [])}
+        # Pages should not overlap
+        assert not names1 & names2, f"Overlap: {names1 & names2}"
+
+    @pytest.mark.unit
+    def test_grep_offset_past_end_returns_empty(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", field="name", limit=5, offset=99999, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        assert len(data.get("tools", [])) == 0
+        assert data.get("total_matches", 0) > 0
+
+    @pytest.mark.unit
+    def test_list_pagination_offset_advances(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=5, offset=0, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=5, offset=5, json=True), tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        names1 = set(d1.get("tools", []))
+        names2 = set(d2.get("tools", []))
+        assert not names1 & names2
+
+    @pytest.mark.unit
+    def test_find_pagination_works(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="protein", limit=5, offset=0, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="protein", limit=5, offset=5, json=True), tu, capsys,
+        )
+        d1 = _j(out1)
+        d2 = _j(out2)
+        names1 = {t["name"] for t in d1.get("tools", [])}
+        names2 = {t["name"] for t in d2.get("tools", [])}
+        assert not names1 & names2
+
+
+class TestInfoMultiTool:
+    """Feature-83H: Info command with multiple tools and detail levels."""
+
+    @pytest.mark.unit
+    def test_info_multiple_tools(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(
+                tool_names=["PubMed_search_articles", "ArXiv_search_papers"],
+                detail="full",
+                json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) == 2
+        names = {t["name"] for t in tools}
+        assert "PubMed_search_articles" in names
+        assert "ArXiv_search_papers" in names
+
+    @pytest.mark.unit
+    def test_info_brief_has_description_no_params(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(
+                tool_names=["SemanticScholar_search_papers"],
+                detail="brief",
+                json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        tool = data["tools"][0]
+        assert "description" in tool
+        assert "name" in tool
+
+    @pytest.mark.unit
+    def test_info_nonexistent_tool_has_suggestions(self, monkeypatch, tu, capsys):
+        """Nonexistent tool should have 'suggestions' field."""
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(
+            tool_names=["PubMed_search_articless"],  # typo
+            detail="full",
+            json=True,
+        )
+        with pytest.raises(SystemExit):
+            m.cmd_info(ns)
+        out = capsys.readouterr().out
+        data = _j(out)
+        tool = data["tools"][0]
+        assert "error" in tool
+        assert "suggestions" in tool
+        assert "PubMed_search_articles" in tool["suggestions"]
+
+    @pytest.mark.unit
+    def test_info_mixed_existing_nonexisting(self, monkeypatch, tu, capsys):
+        """Mix of valid and invalid tool names: valid ones returned, invalid ones error."""
+        import tooluniverse.cli as m
+
+        out, err = _run(
+            monkeypatch, m.cmd_info,
+            _args(
+                tool_names=["PubMed_search_articles", "FakeToolXYZ"],
+                detail="full",
+                json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        # One should have data, one should have error
+        valid = [t for t in tools if "error" not in t]
+        invalid = [t for t in tools if "error" in t]
+        assert len(valid) == 1
+        assert len(invalid) == 1

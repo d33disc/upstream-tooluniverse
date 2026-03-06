@@ -1354,6 +1354,19 @@ def cmd_test(args: argparse.Namespace) -> None:
             # Implicit failure: tool returned an error without explicit expect_status check
             err_msg = result.get("error", "")
             failures.append(f"tool returned error: {str(err_msg)[:200]}")
+        elif isinstance(result, list):
+            # Some tools return errors as a list of dicts, e.g. [{"error": "..."}]
+            # Detect this pattern and flag as failure.
+            error_items = [
+                item
+                for item in result
+                if isinstance(item, dict)
+                and "error" in item
+                and item.get("title", "").lower() == "error"
+            ]
+            if error_items and len(error_items) == len(result):
+                err_msg = error_items[0].get("error", "")
+                failures.append(f"tool returned error: {str(err_msg)[:200]}")
 
         for key in t["expect_keys"]:
             if isinstance(result, dict) and key not in result:
