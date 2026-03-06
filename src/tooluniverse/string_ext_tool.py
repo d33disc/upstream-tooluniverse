@@ -85,9 +85,7 @@ class STRINGExtTool(BaseTool):
         by_category = {}
         for ann in data:
             cat = ann.get("category", "Unknown")
-            if cat not in by_category:
-                by_category[cat] = []
-            by_category[cat].append(
+            by_category.setdefault(cat, []).append(
                 {
                     "term": ann.get("term"),
                     "description": ann.get("description"),
@@ -96,13 +94,8 @@ class STRINGExtTool(BaseTool):
                 }
             )
 
-        # Summary of categories
         category_summary = {cat: len(items) for cat, items in by_category.items()}
-
-        # Return top annotations per category (limit to avoid huge responses)
-        top_annotations = {}
-        for cat, items in by_category.items():
-            top_annotations[cat] = items[:15]
+        top_annotations = {cat: items[:15] for cat, items in by_category.items()}
 
         return {
             "data": {

@@ -192,7 +192,7 @@ class ChEMBLRESTTool(BaseTool):
                     "q",  # handled above: mapped to pref_name__icontains
                     "query",  # handled above: alias for q
                     "pref_name__contains",  # handled above: alias for pref_name__icontains
-                    "mechanism_of_action__contains",  # handled below: mapped to __icontains
+                    "mechanism_of_action__contains",  # handled above: mapped to __icontains
                     "max_results",  # handled above: alias for limit
                     "chembl_id",
                     "target_chembl_id",  # handled above: mapped to target_chembl_id__exact
