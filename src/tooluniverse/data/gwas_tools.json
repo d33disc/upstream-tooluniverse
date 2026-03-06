@@ -408,7 +408,7 @@
   {
     "type": "GWASSNPSearch",
     "name": "gwas_search_snps",
-    "description": "Search for GWAS single nucleotide polymorphisms (SNPs) by rs ID or mapped gene.",
+    "description": "Search the GWAS Catalog for single nucleotide polymorphisms (SNPs) by rs ID (e.g., 'rs7903146') or mapped gene name (e.g., 'TCF7L2'). Returns SNP details including chromosomal location, mapped genes, and functional class. Use this to look up specific variants or find all GWAS-catalogued SNPs for a gene.",
     "parameter": {
       "type": "object",
       "properties": {
@@ -1656,7 +1656,7 @@
   {
     "type": "GWASSNPsForGene",
     "name": "gwas_get_snps_for_gene",
-    "description": "Get all SNPs mapped to a specific gene.",
+    "description": "Get all GWAS Catalog SNPs mapped to a specific gene by gene name (e.g., 'BRCA1', 'TP53'). Returns variant details including rs IDs, chromosomal positions, and functional annotations. Use this when you want to find all catalogued variants within or near a specific gene.",
     "parameter": {
       "type": "object",
       "properties": {
