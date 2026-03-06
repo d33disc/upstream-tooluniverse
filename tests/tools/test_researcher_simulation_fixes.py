@@ -521,5 +521,41 @@ class TestPharmGKBExampleID(unittest.TestCase):
             break
 
 
+# ---------------------------------------------------------------------------
+# ChEMBL target_chembl_id maps to __exact API param
+# ---------------------------------------------------------------------------
+class TestChEMBLTargetFilter(unittest.TestCase):
+    """ChEMBL_search_mechanisms should map target_chembl_id to __exact."""
+
+    def _make_tool(self):
+        from tooluniverse.chem_tool import ChEMBLRESTTool
+
+        config = {
+            "name": "ChEMBL_search_mechanisms",
+            "type": "ChEMBLRESTTool",
+            "fields": {"endpoint": "mechanism"},
+            "parameter": {"required": []},
+        }
+        return ChEMBLRESTTool(config)
+
+    def test_target_chembl_id_mapped_to_exact(self):
+        """target_chembl_id should be mapped to target_chembl_id__exact in params."""
+        tool = self._make_tool()
+        params = tool._build_params({"target_chembl_id": "CHEMBL4096", "limit": 5})
+
+        self.assertIn("target_chembl_id__exact", params)
+        self.assertEqual(params["target_chembl_id__exact"], "CHEMBL4096")
+        # Should NOT have bare target_chembl_id (it's in the exclusion list)
+        self.assertNotIn("target_chembl_id", params)
+
+    def test_assay_chembl_id_mapped_to_exact(self):
+        """assay_chembl_id should be mapped to assay_chembl_id__exact in params."""
+        tool = self._make_tool()
+        params = tool._build_params({"assay_chembl_id": "CHEMBL1000001", "limit": 5})
+
+        self.assertIn("assay_chembl_id__exact", params)
+        self.assertEqual(params["assay_chembl_id__exact"], "CHEMBL1000001")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -160,6 +160,18 @@ class ChEMBLRESTTool(BaseTool):
             else:
                 params["molecule_chembl_id__exact"] = drug_id
 
+        # Map target_chembl_id and assay_chembl_id to __exact API params
+        # when used as query filters (not as URL path components)
+        target_id = args.get("target_chembl_id")
+        if target_id is not None and not tool_name_local.startswith(
+            "ChEMBL_get_target"
+        ):
+            params["target_chembl_id__exact"] = target_id
+
+        assay_id = args.get("assay_chembl_id")
+        if assay_id is not None and not tool_name_local.startswith("ChEMBL_get_assay"):
+            params["assay_chembl_id__exact"] = assay_id
+
         # Add any filter parameters (ChEMBL uses field__filter syntax)
         # e.g., molecule_chembl_id__exact, pref_name__icontains
         for key, value in args.items():
@@ -177,8 +189,8 @@ class ChEMBLRESTTool(BaseTool):
                     "pref_name__contains",  # handled above: alias for pref_name__icontains
                     "max_results",  # handled above: alias for limit
                     "chembl_id",
-                    "target_chembl_id",
-                    "assay_chembl_id",
+                    "target_chembl_id",  # handled above: mapped to target_chembl_id__exact
+                    "assay_chembl_id",  # handled above: mapped to assay_chembl_id__exact
                     "activity_id",
                     "drug_chembl_id",  # handled above: mapped to molecule_chembl_id__exact / parent_molecule_chembl_id
                     "molecule_chembl_id",  # handled above: alias for drug_chembl_id
