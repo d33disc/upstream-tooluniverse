@@ -50,6 +50,9 @@ class ArXivTool(BaseTool):
         if not query:
             return {"error": "`query` parameter is required."}
 
+        if limit <= 0:
+            return []
+
         return self._search(query, limit, sort_by, sort_order, date_from, date_to)
 
     _VALID_SORT_BY = {"relevance", "lastUpdatedDate", "submittedDate"}
@@ -60,6 +63,10 @@ class ArXivTool(BaseTool):
         If the query already contains arXiv field prefixes (au:, ti:, cat:, abs:, etc.)
         or boolean operators (AND, OR, ANDNOT), pass it through as-is.
         Otherwise, split into tokens respecting quoted phrases and join with AND.
+
+        Special handling: single-prefix queries with multi-word unquoted values
+        (e.g. 'au:Shanghua Gao') get auto-quoted ('au:"Shanghua Gao"') so the
+        arXiv API treats the full name as the author field value.
         """
         arxiv_prefixes = (
             "au:",
@@ -75,6 +82,19 @@ class ArXivTool(BaseTool):
         has_prefix = any(p in query.lower() for p in arxiv_prefixes)
         has_boolean = any(f" {op} " in query for op in ("AND", "OR", "ANDNOT"))
         if has_prefix or has_boolean:
+            # Auto-quote multi-word values for single-prefix queries without
+            # boolean operators (e.g. 'au:Shanghua Gao' → 'au:"Shanghua Gao"')
+            if not has_boolean:
+                # Count how many prefixes appear in the query; only auto-quote
+                # when there is exactly one prefix (e.g., 'au:Shanghua Gao').
+                prefix_count = sum(1 for p in arxiv_prefixes if p in query.lower())
+                if prefix_count == 1:
+                    for prefix in arxiv_prefixes:
+                        if query.lower().startswith(prefix):
+                            value = query[len(prefix) :]
+                            if " " in value and not value.startswith('"'):
+                                return f'{prefix}"{value}"'
+                            break
             return query
 
         # Split into tokens while keeping quoted phrases intact.
@@ -94,8 +114,12 @@ class ArXivTool(BaseTool):
 
         # Append date range filter if provided
         if date_from or date_to:
-            start = (date_from or "").replace("-", "") + "0000"
-            end = (date_to or "").replace("-", "") + "2359"
+            # Use sensible defaults when only one bound is specified:
+            # missing date_from defaults to 19910101 (arXiv launch),
+            # missing date_to defaults to 29991231 (far future).
+            # arXiv submittedDate expects YYYYMMDDHHMMSS (14-char) timestamps
+            start = (date_from or "1991-01-01").replace("-", "") + "000000"
+            end = (date_to or "2999-12-31").replace("-", "") + "235959"
             date_clause = f"submittedDate:[{start} TO {end}]"
             search_query = f"{search_query} AND {date_clause}"
 

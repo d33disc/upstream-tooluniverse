@@ -36,6 +36,19 @@ class TestArXivQueryBuilder(unittest.TestCase):
         result = self.tool._build_search_query("au:Hinton")
         self.assertEqual(result, "au:Hinton")
 
+    def test_author_multiword_auto_quoted(self):
+        """Feature-82C: au:FirstName LastName auto-quoted for arXiv API."""
+        result = self.tool._build_search_query("au:Shanghua Gao")
+        self.assertEqual(result, 'au:"Shanghua Gao"')
+
+    def test_author_already_quoted_unchanged(self):
+        result = self.tool._build_search_query('au:"Geoffrey Hinton"')
+        self.assertEqual(result, 'au:"Geoffrey Hinton"')
+
+    def test_title_multiword_auto_quoted(self):
+        result = self.tool._build_search_query("ti:protein folding")
+        self.assertEqual(result, 'ti:"protein folding"')
+
     def test_category_query_passes_through(self):
         result = self.tool._build_search_query("cat:cs.AI AND ti:transformer")
         self.assertEqual(result, "cat:cs.AI AND ti:transformer")
