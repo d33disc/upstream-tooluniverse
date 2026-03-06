@@ -151,6 +151,7 @@ class ClinicalTrialsTool(RESTfulTool):
             "status": "filter.overallStatus",
             "query": "query.term",
             "max_results": "pageSize",
+            "limit": "pageSize",
         }
 
         params = {"format": "json", "countTotal": "true"}

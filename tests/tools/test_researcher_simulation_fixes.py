@@ -1217,5 +1217,249 @@ class TestMyVariantQueryFieldPath(unittest.TestCase):
             self.fail("MyVariant_query_variants not found")
 
 
+# ---------------------------------------------------------------------------
+# ClinicalTrials limit param maps to pageSize
+# ---------------------------------------------------------------------------
+class TestClinicalTrialsLimitMapping(unittest.TestCase):
+    """ClinicalTrials_search_studies should map 'limit' to 'pageSize'."""
+
+    def test_limit_in_search_param_map(self):
+        """The _run_search method should map 'limit' to 'pageSize'."""
+        from tooluniverse.ctg_tool import ClinicalTrialsTool
+
+        config = {
+            "name": "ClinicalTrials_search_studies",
+            "type": "ClinicalTrialsTool",
+            "fields": {"operation": "search"},
+            "parameter": {"required": [], "properties": {}},
+            "query_schema": {},
+        }
+        tool = ClinicalTrialsTool(config)
+
+        # Verify _run_search maps limit to pageSize
+        import inspect
+
+        source = inspect.getsource(tool._run_search)
+        self.assertIn('"limit": "pageSize"', source)
+
+    @patch("requests.get")
+    def test_limit_applied_as_pagesize(self, mock_get):
+        """Passing limit=5 should result in pageSize=5 in API request."""
+        from tooluniverse.ctg_tool import ClinicalTrialsTool
+
+        config = {
+            "name": "ClinicalTrials_search_studies",
+            "type": "ClinicalTrialsTool",
+            "fields": {"operation": "search"},
+            "parameter": {"required": [], "properties": {}},
+            "query_schema": {},
+        }
+        tool = ClinicalTrialsTool(config)
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.json.return_value = {"studies": [], "totalCount": 0}
+        mock_get.return_value = mock_resp
+
+        tool.run({"query": "cancer", "limit": 5})
+
+        call_params = mock_get.call_args[1].get("params", {})
+        self.assertEqual(call_params.get("pageSize"), 5)
+        self.assertNotIn("limit", call_params)
+
+
+# ---------------------------------------------------------------------------
+# GEO methylation/ChIP-seq search filters out GPL platform records
+# ---------------------------------------------------------------------------
+class TestGEOMethylationGPLFilter(unittest.TestCase):
+    """GEO methylation search should filter out GPL platform records."""
+
+    def _make_tool(self, endpoint):
+        from tooluniverse.epigenomics_tool import EpigenomicsTool
+
+        config = {
+            "name": "GEO_search_methylation_datasets",
+            "type": "EpigenomicsTool",
+            "fields": {"endpoint": endpoint},
+        }
+        return EpigenomicsTool(config)
+
+    @patch("tooluniverse.epigenomics_tool.requests.get")
+    def test_gpl_records_filtered_out_methylation(self, mock_get):
+        """GPL (platform) accessions should be excluded from methylation results."""
+        tool = self._make_tool("geo_methylation_search")
+
+        # Mock esearch response
+        search_resp = MagicMock()
+        search_resp.status_code = 200
+        search_resp.raise_for_status = MagicMock()
+        search_resp.json.return_value = {
+            "esearchresult": {"count": "3", "idlist": ["1", "2", "3"]}
+        }
+
+        # Mock esummary with mix of GSE and GPL records
+        summary_resp = MagicMock()
+        summary_resp.status_code = 200
+        summary_resp.raise_for_status = MagicMock()
+        summary_resp.json.return_value = {
+            "result": {
+                "1": {
+                    "accession": "GSE12345",
+                    "title": "Methylation study",
+                    "summary": "Real dataset",
+                    "taxon": "Homo sapiens",
+                    "n_samples": 50,
+                },
+                "2": {
+                    "accession": "GPL6244",
+                    "title": "Affymetrix Platform",
+                    "summary": "Platform record",
+                    "taxon": "Homo sapiens",
+                    "n_samples": 0,
+                },
+                "3": {
+                    "accession": "GSE67890",
+                    "title": "Another study",
+                    "summary": "Another dataset",
+                    "taxon": "Homo sapiens",
+                    "n_samples": 30,
+                },
+            }
+        }
+
+        mock_get.side_effect = [search_resp, summary_resp]
+
+        result = tool.run({"query": "arsenic methylation"})
+
+        datasets = result["data"]["datasets"]
+        # GPL record should be filtered out
+        self.assertEqual(len(datasets), 2)
+        accessions = [d["accession"] for d in datasets]
+        self.assertIn("GSE12345", accessions)
+        self.assertIn("GSE67890", accessions)
+        self.assertNotIn("GPL6244", accessions)
+
+    @patch("tooluniverse.epigenomics_tool.requests.get")
+    def test_gpl_records_filtered_out_chipseq(self, mock_get):
+        """GPL records should also be filtered from ChIP-seq results."""
+        tool = self._make_tool("geo_chipseq_search")
+
+        search_resp = MagicMock()
+        search_resp.status_code = 200
+        search_resp.raise_for_status = MagicMock()
+        search_resp.json.return_value = {
+            "esearchresult": {"count": "2", "idlist": ["1", "2"]}
+        }
+
+        summary_resp = MagicMock()
+        summary_resp.status_code = 200
+        summary_resp.raise_for_status = MagicMock()
+        summary_resp.json.return_value = {
+            "result": {
+                "1": {
+                    "accession": "GPL570",
+                    "title": "Platform",
+                    "summary": "Platform record",
+                    "taxon": "Homo sapiens",
+                    "n_samples": 0,
+                },
+                "2": {
+                    "accession": "GSE99999",
+                    "title": "ChIP-seq study",
+                    "summary": "Real dataset",
+                    "taxon": "Homo sapiens",
+                    "n_samples": 20,
+                },
+            }
+        }
+
+        mock_get.side_effect = [search_resp, summary_resp]
+
+        result = tool.run({"query": "ESR1 ChIP-seq"})
+
+        datasets = result["data"]["datasets"]
+        self.assertEqual(len(datasets), 1)
+        self.assertEqual(datasets[0]["accession"], "GSE99999")
+
+
+# ---------------------------------------------------------------------------
+# GTEx expression summary provides helpful note on empty results
+# ---------------------------------------------------------------------------
+class TestGTExExpressionSummaryNote(unittest.TestCase):
+    """GTEx expression summary should provide hints when results are empty."""
+
+    def _make_tool(self):
+        from tooluniverse.gtex_tool import GTExExpressionTool
+
+        config = {
+            "name": "GTEx_get_expression_summary",
+            "type": "GTExExpressionTool",
+            "settings": {"base_url": "https://gtexportal.org/api/v2", "timeout": 30},
+        }
+        return GTExExpressionTool(config)
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    @patch("tooluniverse.gtex_tool._resolve_gene_id")
+    def test_note_when_resolution_fails(self, mock_resolve, mock_http):
+        """When gene ID resolution fails, include helpful note."""
+        tool = self._make_tool()
+
+        # Resolution fails - returns input as-is
+        mock_resolve.return_value = "COL5A1"
+
+        # Expression API returns empty
+        mock_http.return_value = {"data": []}
+
+        result = tool.run({"gene_symbol": "COL5A1"})
+
+        self.assertTrue(result["success"])
+        self.assertEqual(result["data"]["geneExpression"], [])
+        self.assertIn("note", result)
+        self.assertIn("Could not resolve", result["note"])
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    @patch("tooluniverse.gtex_tool._resolve_gene_id")
+    def test_note_when_version_mismatch(self, mock_resolve, mock_http):
+        """When resolved but empty, suggest version mismatch."""
+        tool = self._make_tool()
+
+        # Resolution succeeds but returns wrong version
+        mock_resolve.return_value = "ENSG00000130635.18"
+
+        # Expression API returns empty (version mismatch)
+        mock_http.return_value = {"data": []}
+
+        result = tool.run({"ensembl_gene_id": "ENSG00000130635"})
+
+        self.assertTrue(result["success"])
+        self.assertIn("note", result)
+        self.assertIn("GENCODE version", result["note"])
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    @patch("tooluniverse.gtex_tool._resolve_gene_id")
+    def test_no_note_when_data_found(self, mock_resolve, mock_http):
+        """When expression data is found, no note is needed."""
+        tool = self._make_tool()
+
+        mock_resolve.return_value = "ENSG00000141510.16"
+        mock_http.return_value = {
+            "data": [{"gencodeId": "ENSG00000141510.16", "median": 15.0}]
+        }
+
+        result = tool.run({"gene_symbol": "TP53"})
+
+        self.assertTrue(result["success"])
+        self.assertEqual(len(result["data"]["geneExpression"]), 1)
+        self.assertNotIn("note", result)
+
+    def test_error_when_no_gene_input(self):
+        """Should return error when neither gene_symbol nor ensembl_gene_id provided."""
+        tool = self._make_tool()
+        result = tool.run({})
+        self.assertFalse(result["success"])
+        self.assertIn("error", result)
+
+
 if __name__ == "__main__":
     unittest.main()

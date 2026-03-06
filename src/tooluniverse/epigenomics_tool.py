@@ -420,18 +420,23 @@ class EpigenomicsTool(BaseTool):
             result = summary_result.get("result", {})
             for uid in ids:
                 uid_data = result.get(str(uid), {})
-                if isinstance(uid_data, dict) and "accession" in uid_data:
-                    datasets.append(
-                        {
-                            "accession": uid_data.get("accession", ""),
-                            "title": uid_data.get("title", ""),
-                            "summary": uid_data.get("summary", "")[:500],
-                            "platform": uid_data.get("gpl"),
-                            "organism": uid_data.get("taxon", ""),
-                            "n_samples": uid_data.get("n_samples", 0),
-                            "date_published": uid_data.get("pdat"),
-                        }
-                    )
+                if not isinstance(uid_data, dict) or "accession" not in uid_data:
+                    continue
+                # Filter out platform records (GPL) — only return dataset series (GSE)
+                acc = uid_data.get("accession", "")
+                if acc.startswith("GPL"):
+                    continue
+                datasets.append(
+                    {
+                        "accession": acc,
+                        "title": uid_data.get("title", ""),
+                        "summary": uid_data.get("summary", "")[:500],
+                        "platform": uid_data.get("gpl"),
+                        "organism": uid_data.get("taxon", ""),
+                        "n_samples": uid_data.get("n_samples", 0),
+                        "date_published": uid_data.get("pdat"),
+                    }
+                )
 
         return {
             "data": {
@@ -469,17 +474,22 @@ class EpigenomicsTool(BaseTool):
             result = summary_result.get("result", {})
             for uid in ids:
                 uid_data = result.get(str(uid), {})
-                if isinstance(uid_data, dict) and "accession" in uid_data:
-                    datasets.append(
-                        {
-                            "accession": uid_data.get("accession", ""),
-                            "title": uid_data.get("title", ""),
-                            "summary": uid_data.get("summary", "")[:500],
-                            "organism": uid_data.get("taxon", ""),
-                            "n_samples": uid_data.get("n_samples", 0),
-                            "date_published": uid_data.get("pdat"),
-                        }
-                    )
+                if not isinstance(uid_data, dict) or "accession" not in uid_data:
+                    continue
+                # Filter out platform records (GPL) — only return dataset series (GSE)
+                acc = uid_data.get("accession", "")
+                if acc.startswith("GPL"):
+                    continue
+                datasets.append(
+                    {
+                        "accession": acc,
+                        "title": uid_data.get("title", ""),
+                        "summary": uid_data.get("summary", "")[:500],
+                        "organism": uid_data.get("taxon", ""),
+                        "n_samples": uid_data.get("n_samples", 0),
+                        "date_published": uid_data.get("pdat"),
+                    }
+                )
 
         return {
             "data": {

@@ -76,6 +76,11 @@ class GTExExpressionTool:
         gene_input = arguments.get("gene_symbol") or arguments.get(
             "ensembl_gene_id", ""
         )
+        if not gene_input:
+            return {
+                "error": "Provide gene_symbol (e.g., 'TP53') or ensembl_gene_id (e.g., 'ENSG00000141510').",
+                "success": False,
+            }
         gencode_id = _resolve_gene_id(gene_input, base, timeout)
 
         # Feature-69A-001: /expression/geneExpression with gtex_v10 returns empty.
@@ -93,22 +98,32 @@ class GTExExpressionTool:
             # API returns {"data": [...], "paging_info": {...}}
             # Schema expects {"data": {"geneExpression": [...]}}
             if isinstance(api_response, dict) and "data" in api_response:
-                wrapped_data = {"geneExpression": api_response.get("data", [])}
+                expression_data = api_response.get("data", [])
             else:
-                # Fallback if response format is unexpected
-                wrapped_data = {
-                    "geneExpression": (
-                        api_response if isinstance(api_response, list) else []
-                    )
-                }
+                expression_data = api_response if isinstance(api_response, list) else []
 
-            return {
+            result = {
                 "source": "GTEx",
                 "endpoint": "expression/medianGeneExpression",
                 "query": query,
-                "data": wrapped_data,
+                "data": {"geneExpression": expression_data},
                 "success": True,
             }
+            # Provide hint when results are empty due to GENCODE version mismatch
+            if not expression_data and gencode_id == gene_input:
+                result["note"] = (
+                    f"No expression data found. Could not resolve '{gene_input}' to a "
+                    "versioned GENCODE ID. Try providing an Ensembl gene ID "
+                    "(e.g., 'ENSG00000141510') or use GTEx_get_median_gene_expression "
+                    "with a versioned ID (e.g., 'ENSG00000141510.16')."
+                )
+            elif not expression_data:
+                result["note"] = (
+                    f"No expression data found for '{gencode_id}'. The GENCODE version "
+                    "may not match gtex_v8 (GENCODE v26). Try GTEx_get_median_gene_expression "
+                    "with a different version suffix."
+                )
+            return result
         except Exception as e:
             return {
                 "error": str(e),
