@@ -250,7 +250,8 @@ class GTExV2Tool(BaseTool):
     def _get_eqtl_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get eQTL genes (eGenes) with significant cis-eQTLs."""
         tissue_ids = arguments.get("tissue_site_detail_id", [])
-        dataset_id = arguments.get("dataset_id", "gtex_v10")
+        # Feature-69A-002: gtex_v10 returns empty for eQTL endpoints; use gtex_v8
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
 
         if isinstance(tissue_ids, str):
             tissue_ids = [tissue_ids]
@@ -287,7 +288,8 @@ class GTExV2Tool(BaseTool):
         gencode_ids = arguments.get("gencode_id", [])
         variant_ids = arguments.get("variant_id", [])
         tissue_ids = arguments.get("tissue_site_detail_id", [])
-        dataset_id = arguments.get("dataset_id", "gtex_v10")
+        # Feature-69A-002: gtex_v10 returns empty for eQTL endpoints; use gtex_v8
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
 
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
@@ -421,7 +423,8 @@ class GTExV2Tool(BaseTool):
 
     def _get_sample_info(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get sample information and metadata."""
-        dataset_id = arguments.get("dataset_id", "gtex_v10")
+        # Feature-69A-002: gtex_v10 returns empty; use gtex_v8
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
         sample_ids = arguments.get("sample_id", [])
         subject_ids = arguments.get("subject_id", [])
         tissue_ids = arguments.get("tissue_site_detail_id", [])
@@ -475,7 +478,8 @@ class GTExV2Tool(BaseTool):
     def _get_top_expressed_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get top expressed genes for a tissue."""
         tissue_id = arguments.get("tissue_site_detail_id")
-        dataset_id = arguments.get("dataset_id", "gtex_v10")
+        # Feature-69A-002: gtex_v10 returns empty; use gtex_v8
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
         filter_mt = arguments.get("filter_mt_genes", True)
 
         if not tissue_id:
