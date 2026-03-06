@@ -997,5 +997,256 @@ class TestEuropePMCReturnSchema(unittest.TestCase):
             )
 
 
+# ---------------------------------------------------------------------------
+# Feature-86A-001: ChEMBL_search_drugs pref_name__contains redirect
+# ---------------------------------------------------------------------------
+class TestChEMBLDrugSearchRedirect(unittest.TestCase):
+    """ChEMBL_search_drugs should redirect /drug.json to /molecule.json for pref_name__contains."""
+
+    def setUp(self):
+        from tooluniverse.chem_tool import ChEMBLRESTTool
+
+        self.tool = ChEMBLRESTTool(
+            {
+                "name": "ChEMBL_search_drugs",
+                "fields": {"endpoint": "/drug.json"},
+                "parameter": {"type": "object", "properties": {}, "required": []},
+            }
+        )
+
+    def test_query_redirects_to_molecule(self):
+        url = self.tool._build_url({"query": "ruxolitinib"})
+        self.assertIn("/molecule.json", url)
+        self.assertNotIn("/drug.json", url)
+
+    def test_q_redirects_to_molecule(self):
+        url = self.tool._build_url({"q": "imatinib"})
+        self.assertIn("/molecule.json", url)
+        self.assertNotIn("/drug.json", url)
+
+    def test_pref_name_contains_redirects_to_molecule(self):
+        url = self.tool._build_url({"pref_name__contains": "RUXOLITINIB"})
+        self.assertIn("/molecule.json", url)
+        self.assertNotIn("/drug.json", url)
+
+    def test_no_query_stays_on_drug(self):
+        url = self.tool._build_url({"limit": 10})
+        self.assertIn("/drug.json", url)
+
+
+# ---------------------------------------------------------------------------
+# Feature-86B-002: Orphanet_get_genes subtype fallback
+# ---------------------------------------------------------------------------
+class TestOrphanetGetGenesDirectLookup(unittest.TestCase):
+    """Orphanet_get_genes should try direct orphacode lookup, then subtypes."""
+
+    def setUp(self):
+        from tooluniverse.orphanet_tool import OrphanetTool
+
+        self.tool = OrphanetTool({"name": "Orphanet_get_genes"})
+
+    def test_extract_genes_from_associations(self):
+        associations = [
+            {
+                "Gene": {
+                    "Symbol": "FBN1",
+                    "name": "fibrillin 1",
+                    "GeneType": "gene with protein product",
+                    "Locus": [{"GeneLocus": "15q21.1", "LocusKey": 1}],
+                },
+                "DisorderGeneAssociationType": "Disease-causing germline mutation(s) in",
+                "DisorderGeneAssociationStatus": "Assessed",
+                "SourceOfValidation": "PMID:12345",
+            }
+        ]
+        genes = self.tool._extract_genes_from_associations(associations)
+        self.assertEqual(len(genes), 1)
+        self.assertEqual(genes[0]["Symbol"], "FBN1")
+        self.assertEqual(genes[0]["Name"], "fibrillin 1")
+        self.assertEqual(
+            genes[0]["AssociationType"], "Disease-causing germline mutation(s) in"
+        )
+
+    def test_extract_genes_empty_list(self):
+        genes = self.tool._extract_genes_from_associations([])
+        self.assertEqual(genes, [])
+
+    def test_extract_genes_non_list(self):
+        genes = self.tool._extract_genes_from_associations(None)
+        self.assertEqual(genes, [])
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_direct_orphacode_success(self, mock_get):
+        """When direct orphacode endpoint returns genes, use them without subtype search."""
+        name_resp = MagicMock()
+        name_resp.status_code = 200
+        name_resp.json.return_value = {
+            "ORPHAcode": 93,
+            "Preferred term": "Aspartylglucosaminuria",
+        }
+        name_resp.raise_for_status = MagicMock()
+
+        gene_resp = MagicMock()
+        gene_resp.status_code = 200
+        gene_resp.json.return_value = {
+            "data": {
+                "results": {
+                    "DisorderGeneAssociation": [
+                        {
+                            "Gene": {
+                                "Symbol": "AGA",
+                                "name": "aspartylglucosaminidase",
+                                "GeneType": "gene with protein product",
+                                "Locus": [],
+                            },
+                            "DisorderGeneAssociationType": "Disease-causing",
+                            "DisorderGeneAssociationStatus": "Assessed",
+                            "SourceOfValidation": "",
+                        }
+                    ]
+                }
+            }
+        }
+
+        mock_get.side_effect = [name_resp, gene_resp]
+
+        result = self.tool._get_genes({"orpha_code": "93"})
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(len(result["data"]["genes"]), 1)
+        self.assertEqual(result["data"]["genes"][0]["Symbol"], "AGA")
+        self.assertNotIn("subtype_sources", result["data"])
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_subtype_fallback_for_parent_code(self, mock_get):
+        """When direct orphacode returns 404, search subtypes by disease name."""
+        name_resp = MagicMock()
+        name_resp.status_code = 200
+        name_resp.json.return_value = {
+            "ORPHAcode": 558,
+            "Preferred term": "Marfan syndrome",
+        }
+        name_resp.raise_for_status = MagicMock()
+
+        direct_resp = MagicMock()
+        direct_resp.status_code = 404
+
+        list_resp = MagicMock()
+        list_resp.status_code = 200
+        list_resp.json.return_value = {
+            "data": {
+                "results": [
+                    {"ORPHAcode": 284963, "Preferred term": "Marfan syndrome type 1"},
+                    {"ORPHAcode": 284973, "Preferred term": "Marfan syndrome type 2"},
+                    {"ORPHAcode": 999, "Preferred term": "Unrelated disease"},
+                ]
+            }
+        }
+
+        sub1_resp = MagicMock()
+        sub1_resp.status_code = 200
+        sub1_resp.json.return_value = {
+            "data": {
+                "results": {
+                    "DisorderGeneAssociation": [
+                        {
+                            "Gene": {
+                                "Symbol": "FBN1",
+                                "name": "fibrillin 1",
+                                "GeneType": "gene with protein product",
+                                "Locus": [],
+                            },
+                            "DisorderGeneAssociationType": "Disease-causing",
+                            "DisorderGeneAssociationStatus": "Assessed",
+                            "SourceOfValidation": "",
+                        }
+                    ]
+                }
+            }
+        }
+
+        sub2_resp = MagicMock()
+        sub2_resp.status_code = 200
+        sub2_resp.json.return_value = {
+            "data": {
+                "results": {
+                    "DisorderGeneAssociation": [
+                        {
+                            "Gene": {
+                                "Symbol": "TGFBR2",
+                                "name": "transforming growth factor beta receptor 2",
+                                "GeneType": "gene with protein product",
+                                "Locus": [],
+                            },
+                            "DisorderGeneAssociationType": "Disease-causing",
+                            "DisorderGeneAssociationStatus": "Assessed",
+                            "SourceOfValidation": "",
+                        }
+                    ]
+                }
+            }
+        }
+
+        mock_get.side_effect = [name_resp, direct_resp, list_resp, sub1_resp, sub2_resp]
+
+        result = self.tool._get_genes({"orpha_code": "558"})
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(len(result["data"]["genes"]), 2)
+        symbols = {g["Symbol"] for g in result["data"]["genes"]}
+        self.assertIn("FBN1", symbols)
+        self.assertIn("TGFBR2", symbols)
+        self.assertIn("subtype_sources", result["data"])
+        self.assertEqual(len(result["data"]["subtype_sources"]), 2)
+
+    @patch("tooluniverse.orphanet_tool.requests.get")
+    def test_deduplicates_genes_across_subtypes(self, mock_get):
+        """Genes shared across subtypes should not be duplicated."""
+        name_resp = MagicMock()
+        name_resp.status_code = 200
+        name_resp.json.return_value = {"Preferred term": "Test disease"}
+        name_resp.raise_for_status = MagicMock()
+
+        direct_resp = MagicMock()
+        direct_resp.status_code = 404
+
+        list_resp = MagicMock()
+        list_resp.status_code = 200
+        list_resp.json.return_value = {
+            "data": {
+                "results": [
+                    {"ORPHAcode": 1, "Preferred term": "Test disease type 1"},
+                    {"ORPHAcode": 2, "Preferred term": "Test disease type 2"},
+                ]
+            }
+        }
+
+        gene_entry = {
+            "Gene": {
+                "Symbol": "GENE1",
+                "name": "gene one",
+                "GeneType": "",
+                "Locus": [],
+            },
+            "DisorderGeneAssociationType": "",
+            "DisorderGeneAssociationStatus": "",
+            "SourceOfValidation": "",
+        }
+
+        sub_resp = MagicMock()
+        sub_resp.status_code = 200
+        sub_resp.json.return_value = {
+            "data": {"results": {"DisorderGeneAssociation": [gene_entry]}}
+        }
+
+        mock_get.side_effect = [name_resp, direct_resp, list_resp, sub_resp, sub_resp]
+
+        result = self.tool._get_genes({"orpha_code": "999"})
+        self.assertEqual(len(result["data"]["genes"]), 1)
+
+    def test_missing_orpha_code(self):
+        result = self.tool._get_genes({})
+        self.assertEqual(result["status"], "error")
+        self.assertIn("orpha_code", result["error"])
+
+
 if __name__ == "__main__":
     unittest.main()

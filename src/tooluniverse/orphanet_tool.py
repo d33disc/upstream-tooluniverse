@@ -242,13 +242,35 @@ class OrphanetTool(BaseTool):
             },
         }
 
+    def _extract_genes_from_associations(self, associations):
+        """Extract gene info dicts from DisorderGeneAssociation list."""
+        genes = []
+        if not isinstance(associations, list):
+            return genes
+        for assoc in associations:
+            gene_info = assoc.get("Gene", {})
+            genes.append(
+                {
+                    "Symbol": gene_info.get("Symbol", ""),
+                    "Name": gene_info.get("name", ""),
+                    "GeneType": gene_info.get("GeneType", ""),
+                    "Locus": gene_info.get("Locus", []),
+                    "AssociationType": assoc.get("DisorderGeneAssociationType", ""),
+                    "AssociationStatus": assoc.get("DisorderGeneAssociationStatus", ""),
+                    "SourceOfValidation": assoc.get("SourceOfValidation", ""),
+                }
+            )
+        return genes
+
     def _get_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
         Get genes associated with a rare disease.
 
-        Uses Orphadata rd-associated-genes gene name search, since the
-        per-orphacode gene endpoint is not reliably available.
-        Falls back to RDcode OMIM cross-references to identify associated genes.
+        Strategy:
+        1. Try direct Orphadata orphacode lookup for gene associations
+        2. If not found (parent codes often lack direct entries), search for
+           subtype entries whose name matches the disease name
+        3. Fall back to gene name search as last resort
 
         Args:
             arguments: Dict containing:
@@ -266,81 +288,113 @@ class OrphanetTool(BaseTool):
         )
 
         try:
-            # First get the disease name from RDcode API
-            name_response = requests.get(
-                f"{RDCODE_API_URL}/EN/ClinicalEntity/orphacode/{orpha_code}/Name",
-                timeout=self.timeout,
-                headers=get_rdcode_headers(),
-            )
-            name_response.raise_for_status()
-            name_data = name_response.json()
+            # Get disease name from RDcode API
             disease_name = ""
-            if isinstance(name_data, dict):
-                disease_name = name_data.get(
-                    "Preferred term", name_data.get("Name", "")
+            try:
+                name_response = requests.get(
+                    f"{RDCODE_API_URL}/EN/ClinicalEntity/orphacode/{orpha_code}/Name",
+                    timeout=self.timeout,
+                    headers=get_rdcode_headers(),
                 )
+                name_response.raise_for_status()
+                name_data = name_response.json()
+                if isinstance(name_data, dict):
+                    disease_name = name_data.get(
+                        "Preferred term", name_data.get("Name", "")
+                    )
+            except Exception:
+                pass
 
-            # Search Orphadata gene associations using disease name keywords
             genes = []
-            if disease_name:
-                # Use first significant word of the disease name to search
-                search_term = disease_name.split()[0].lower() if disease_name else ""
-                if len(search_term) < 4:
-                    # Use longer terms if first word is too short
-                    words = [
-                        w
-                        for w in disease_name.split()
-                        if len(w) >= 4
-                        and w.lower() not in ("syndrome", "disease", "disorder", "type")
-                    ]
-                    search_term = (
-                        words[0].lower() if words else disease_name.split()[0].lower()
-                    )
+            subtype_sources = []
+            orphadata_headers = {
+                "Accept": "application/json",
+                "User-Agent": "ToolUniverse/Orphanet",
+            }
 
+            # Strategy 1: Direct orphacode lookup via Orphadata
+            try:
+                gene_response = requests.get(
+                    f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes/{orpha_code}",
+                    timeout=self.timeout,
+                    headers=orphadata_headers,
+                )
+                if gene_response.status_code == 200:
+                    gene_data = gene_response.json()
+                    results = gene_data.get("data", {}).get("results", {})
+                    associations = results.get("DisorderGeneAssociation", [])
+                    genes = self._extract_genes_from_associations(associations)
+            except Exception:
+                pass
+
+            # Strategy 2: If no genes found and we have a disease name, search
+            # for subtypes in the Orphadata orphacodes list (parent codes like
+            # "Marfan syndrome" 558 lack direct gene entries, but subtypes like
+            # "Marfan syndrome type 1" 284963 have them)
+            if not genes and disease_name:
                 try:
-                    gene_response = requests.get(
-                        f"{ORPHADATA_API_URL}/rd-associated-genes/genes/names/{urllib.parse.quote(search_term, safe='')}",
+                    list_response = requests.get(
+                        f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes",
                         timeout=self.timeout,
-                        headers={
-                            "Accept": "application/json",
-                            "User-Agent": "ToolUniverse/Orphanet",
-                        },
+                        headers=orphadata_headers,
                     )
-                    if gene_response.status_code == 200:
-                        gene_data = gene_response.json()
-                        results = gene_data.get("data", {}).get("results", [])
-                        # Filter results for our specific ORPHA code
-                        for result in results:
-                            if str(result.get("ORPHAcode", "")) == str(orpha_code):
-                                for assoc in result.get("DisorderGeneAssociation", []):
-                                    gene_info = assoc.get("Gene", {})
-                                    genes.append(
-                                        {
-                                            "Symbol": gene_info.get("Symbol", ""),
-                                            "Name": gene_info.get("name", ""),
-                                            "GeneType": gene_info.get("GeneType", ""),
-                                            "Locus": gene_info.get("Locus", []),
-                                            "AssociationType": assoc.get(
-                                                "DisorderGeneAssociationType", ""
-                                            ),
-                                            "AssociationStatus": assoc.get(
-                                                "DisorderGeneAssociationStatus", ""
-                                            ),
-                                            "SourceOfValidation": assoc.get(
-                                                "SourceOfValidation", ""
-                                            ),
-                                        }
+                    if list_response.status_code == 200:
+                        list_data = list_response.json()
+                        all_entries = list_data.get("data", {}).get("results", [])
+                        # Find entries whose name contains our disease name
+                        disease_lower = disease_name.lower()
+                        matching_codes = [
+                            entry
+                            for entry in all_entries
+                            if disease_lower in entry.get("Preferred term", "").lower()
+                            and str(entry.get("ORPHAcode", "")) != str(orpha_code)
+                        ]
+                        # Fetch genes from matching subtypes
+                        for entry in matching_codes[:5]:
+                            sub_code = entry.get("ORPHAcode")
+                            try:
+                                sub_response = requests.get(
+                                    f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes/{sub_code}",
+                                    timeout=self.timeout,
+                                    headers=orphadata_headers,
+                                )
+                                if sub_response.status_code == 200:
+                                    sub_data = sub_response.json()
+                                    sub_results = sub_data.get("data", {}).get(
+                                        "results", {}
                                     )
+                                    sub_genes = self._extract_genes_from_associations(
+                                        sub_results.get("DisorderGeneAssociation", [])
+                                    )
+                                    if sub_genes:
+                                        subtype_sources.append(
+                                            {
+                                                "orpha_code": str(sub_code),
+                                                "name": entry.get("Preferred term", ""),
+                                            }
+                                        )
+                                        # Add genes, avoiding duplicates by symbol
+                                        existing_symbols = {g["Symbol"] for g in genes}
+                                        for g in sub_genes:
+                                            if g["Symbol"] not in existing_symbols:
+                                                genes.append(g)
+                                                existing_symbols.add(g["Symbol"])
+                            except Exception:
+                                continue
                 except Exception:
                     pass
 
+            result_data = {
+                "orpha_code": orpha_code,
+                "disease_name": disease_name,
+                "genes": genes,
+            }
+            if subtype_sources:
+                result_data["subtype_sources"] = subtype_sources
+
             return {
                 "status": "success",
-                "data": {
-                    "orpha_code": orpha_code,
-                    "disease_name": disease_name,
-                    "genes": genes,
-                },
+                "data": result_data,
                 "metadata": {
                     "source": "Orphanet Orphadata API",
                     "orpha_code": orpha_code,
