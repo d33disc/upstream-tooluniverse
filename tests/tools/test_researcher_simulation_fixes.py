@@ -6,6 +6,10 @@ Covers:
 - SemanticScholar: error responses are proper dicts, not fake paper results
 - BioGRID chemical interactions: rejects chemical-only queries
 - ChEMBL_search_mechanisms: test example uses correct parameter name
+- ClinVar condition search: uses [dis] field tag
+- Enrichr: output size limited to prevent combinatorial explosion
+- PMC: include_abstract warns when no PMIDs available
+- PharmGKB: example annotation ID is valid
 """
 
 import json
@@ -343,6 +347,132 @@ class TestClinVarConditionFieldTag(unittest.TestCase):
         params = call_args[0][1] if len(call_args[0]) > 1 else call_args[1].get("params", {})
         self.assertIn("[dis]", params["term"])
         self.assertIn('"Breast cancer"', params["term"])
+
+
+# ---------------------------------------------------------------------------
+# Enrichr output size limit
+# ---------------------------------------------------------------------------
+class TestEnrichrOutputLimit(unittest.TestCase):
+    """Enrichr should limit path output to prevent combinatorial explosion."""
+
+    def _make_tool(self):
+        from tooluniverse.enrichr_tool import EnrichrTool
+
+        config = {
+            "name": "enrichr_gene_enrichment_analysis",
+            "type": "EnrichrTool",
+        }
+        return EnrichrTool(config)
+
+    @patch("tooluniverse.enrichr_tool.EnrichrTool.get_official_gene_name",
+           side_effect=lambda g: g)
+    @patch("tooluniverse.enrichr_tool.EnrichrTool.submit_gene_list",
+           return_value="12345")
+    @patch("tooluniverse.enrichr_tool.EnrichrTool.get_enrichment_results")
+    def test_paths_limited_to_prevent_explosion(self, mock_enrich, mock_submit, mock_gene):
+        """ranked_paths and connections should be truncated."""
+        # Mock enrichment results with many terms to create many paths
+        mock_enrich.return_value = {
+            "TestLib": [
+                # [rank, term_name, p-value, z-score, combined_score, genes, ...]
+                [1, f"Term_{i}", 0.001, -2.0, 10.0 - i * 0.1, ["GENE1", "GENE2"], 0, 0, 0]
+                for i in range(30)
+            ]
+        }
+        tool = self._make_tool()
+        connected_path, connections = tool.enrichr_api(
+            ["GENE1", "GENE2"], ["TestLib"]
+        )
+
+        # connected_path limited to 20
+        self.assertLessEqual(len(connected_path), 20)
+
+        # Each connection limited to 5 paths
+        for key, paths in connections.items():
+            self.assertLessEqual(len(paths), 5)
+
+
+# ---------------------------------------------------------------------------
+# PMC include_abstract warning
+# ---------------------------------------------------------------------------
+class TestPMCAbstractWarning(unittest.TestCase):
+    """PMC should warn when include_abstract fails due to missing PMIDs."""
+
+    def _make_tool(self):
+        from tooluniverse.pmc_tool import PMCTool
+
+        config = {"name": "PMC_search_papers", "type": "PMCTool"}
+        return PMCTool(config)
+
+    @patch("tooluniverse.pmc_tool.request_with_retry")
+    def test_abstract_note_when_no_pmids(self, mock_request):
+        """When no PMIDs available, results should have abstract_note."""
+        tool = self._make_tool()
+
+        # Mock search response
+        search_resp = MagicMock()
+        search_resp.status_code = 200
+        search_resp.raise_for_status = MagicMock()
+        search_resp.json.return_value = {
+            "esearchresult": {"idlist": ["123456"]}
+        }
+
+        # Mock summary response (XML with no PMID in ArticleIds)
+        summary_resp = MagicMock()
+        summary_resp.status_code = 200
+        summary_resp.raise_for_status = MagicMock()
+        summary_resp.text = """<?xml version="1.0"?>
+<eSummaryResult>
+  <DocSum>
+    <Id>123456</Id>
+    <Item Name="Title" Type="String">Test Article</Item>
+    <Item Name="ArticleIds" Type="List">
+      <Item Name="pmc" Type="String">PMC123456</Item>
+    </Item>
+  </DocSum>
+</eSummaryResult>"""
+
+        mock_request.side_effect = [search_resp, summary_resp]
+
+        results = tool._search("test query", limit=5, include_abstract=True)
+
+        self.assertEqual(len(results), 1)
+        self.assertIn("abstract_note", results[0])
+        self.assertIn("PubMed_search_articles", results[0]["abstract_note"])
+
+
+# ---------------------------------------------------------------------------
+# PharmGKB example annotation ID validity
+# ---------------------------------------------------------------------------
+class TestPharmGKBExampleID(unittest.TestCase):
+    """PharmGKB description example IDs should match test_examples."""
+
+    def test_description_example_id_matches_test_examples(self):
+        """The example ID in the description should be a valid one."""
+        import os
+
+        json_path = os.path.join(
+            os.path.dirname(__file__),
+            "..",
+            "..",
+            "src",
+            "tooluniverse",
+            "data",
+            "pharmgkb_tools.json",
+        )
+        with open(json_path) as f:
+            tools = json.load(f)
+
+        for tool in tools:
+            if tool["name"] != "PharmGKB_get_clinical_annotations":
+                continue
+            # Check the annotation_id description example matches a known-good ID
+            ann_param = tool["parameter"]["properties"].get("annotation_id", {})
+            desc = ann_param.get("description", "")
+            # The example ID 1449309855 was broken; should now be 1447954390
+            self.assertNotIn("1449309855", desc)
+            self.assertIn("1447954390", desc)
+            break
 
 
 if __name__ == "__main__":
