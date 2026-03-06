@@ -44,11 +44,7 @@
         }
       },
       "required": [
-        "gene_list",
-        "tissue",
-        "max_node",
-        "interaction",
-        "string_mode"
+        "gene_list"
       ]
     },
     "test_examples": [

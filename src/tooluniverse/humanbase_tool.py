@@ -163,7 +163,16 @@ class HumanBaseTool(BaseTool):
         Returns
             tuple: (NetworkX Graph of interactions, list of biological processes)
         """
-        genes = self.get_entrez_ids(genes)
+        entrez_result = self.get_entrez_ids(genes)
+
+        # get_entrez_ids may return a string error message instead of a list
+        if isinstance(entrez_result, str):
+            return nx.Graph(), None
+
+        # Filter out None values (genes that could not be resolved)
+        genes = [g for g in entrez_result if g is not None]
+        if not genes:
+            return nx.Graph(), None
 
         tissue = tissue.replace(" ", "-").replace("_", "-").lower()
         interaction_types = [

@@ -1692,5 +1692,344 @@ class TestOncoKBDemoNote(unittest.TestCase):
         self.assertIn("ONCOKB_API_TOKEN", result["metadata"]["note"])
 
 
+# ---------------------------------------------------------------------------
+# HumanBase PPI: handle None/error from get_entrez_ids
+# ---------------------------------------------------------------------------
+class TestHumanBaseEntrezIdHandling(unittest.TestCase):
+    """HumanBase should handle None and error returns from get_entrez_ids."""
+
+    def _make_tool(self):
+        from tooluniverse.humanbase_tool import HumanBaseTool
+
+        config = {
+            "name": "humanbase_ppi_analysis",
+            "type": "HumanBaseTool",
+            "parameter": {},
+        }
+        return HumanBaseTool(config)
+
+    @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
+    def test_error_string_from_get_entrez_ids(self, mock_ids):
+        """When get_entrez_ids returns an error string, return empty graph."""
+        tool = self._make_tool()
+        mock_ids.return_value = "Error fetching data for gene: INVALID"
+
+        result = tool.run({"gene_list": ["INVALID"], "tissue": "brain"})
+
+        self.assertEqual(result["status"], "success")
+        # Should return empty network without crashing
+        self.assertIn("Total Proteins: 0", result["data"])
+
+    @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
+    def test_none_values_filtered_from_entrez_ids(self, mock_ids):
+        """When get_entrez_ids returns [None, '7157'], filter out None."""
+        tool = self._make_tool()
+        mock_ids.return_value = [None, "7157"]
+
+        # Mock the network and BP API calls
+        with patch("tooluniverse.humanbase_tool.requests.get") as mock_get:
+            # Network API response (empty)
+            network_resp = MagicMock()
+            network_resp.status_code = 200
+            network_resp.json.return_value = {"genes": [], "edges": []}
+            network_resp.raise_for_status.return_value = None
+            # BP API response
+            bp_resp = MagicMock()
+            bp_resp.status_code = 200
+            bp_resp.json.return_value = []
+            bp_resp.raise_for_status.return_value = None
+
+            mock_get.side_effect = [network_resp, bp_resp]
+            result = tool.run({"gene_list": ["INVALID", "TP53"], "tissue": "brain"})
+
+        self.assertEqual(result["status"], "success")
+        # Should not crash — None filtered out, only '7157' used
+        self.assertIn("Total Proteins: 0", result["data"])
+
+    @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
+    def test_all_none_returns_empty(self, mock_ids):
+        """When all genes resolve to None, return empty graph."""
+        tool = self._make_tool()
+        mock_ids.return_value = [None, None]
+
+        result = tool.run({"gene_list": ["FAKE1", "FAKE2"], "tissue": "brain"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertIn("Total Proteins: 0", result["data"])
+
+
+# ---------------------------------------------------------------------------
+# HumanBase JSON schema: interaction and string_mode not required
+# ---------------------------------------------------------------------------
+class TestHumanBaseSchemaOptionalParams(unittest.TestCase):
+    """HumanBase schema should not require interaction or string_mode."""
+
+    def test_required_only_gene_list(self):
+        import json
+
+        with open(
+            "src/tooluniverse/data/humanbase_tools.json"
+        ) as f:
+            tools = json.load(f)
+
+        tool = tools[0]
+        required = tool["parameter"]["required"]
+        self.assertIn("gene_list", required)
+        self.assertNotIn("interaction", required)
+        self.assertNotIn("string_mode", required)
+        self.assertNotIn("tissue", required)
+        self.assertNotIn("max_node", required)
+
+
+# ---------------------------------------------------------------------------
+# GxA: versioned Ensembl ID matching in client-side gene filter
+# ---------------------------------------------------------------------------
+class TestGxAVersionedEnsemblFilter(unittest.TestCase):
+    """GxA should match versioned Ensembl IDs (ENSG00000142192.15 vs ENSG00000142192)."""
+
+    def _make_tool(self):
+        from tooluniverse.gxa_tool import GxATool
+
+        config = {
+            "name": "GxA_get_experiment_expression",
+            "type": "GxATool",
+            "parameter": {},
+            "fields": {"endpoint": "get_experiment_expression"},
+        }
+        return GxATool(config)
+
+    @patch("tooluniverse.gxa_tool.requests.get")
+    def test_versioned_ensembl_id_match(self, mock_get):
+        """Querying ENSG00000142192 should match row with id ENSG00000142192.15."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "experiment": {"description": "Brain expression"},
+            "columnHeaders": [
+                {"assayGroupId": "g1", "factorValue": "brain", "assayGroupSummary": {}}
+            ],
+            "profiles": {
+                "rows": [
+                    {
+                        "id": "ENSG00000142192.15",
+                        "name": "APP",
+                        "expressions": [{"value": 42.5}],
+                    },
+                    {
+                        "id": "ENSG00000099999.3",
+                        "name": "OTHER",
+                        "expressions": [{"value": 10.0}],
+                    },
+                ]
+            },
+        }
+        mock_resp.raise_for_status.return_value = None
+        mock_get.return_value = mock_resp
+
+        result = tool.run(
+            {"experiment_accession": "E-MTAB-2836", "gene_id": "ENSG00000142192"}
+        )
+
+        profiles = result["data"]["gene_profiles"]
+        self.assertEqual(len(profiles), 1)
+        self.assertEqual(profiles[0]["gene_name"], "APP")
+
+    @patch("tooluniverse.gxa_tool.requests.get")
+    def test_gene_name_match(self, mock_get):
+        """Querying by gene name should also work."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "experiment": {"description": "Test"},
+            "columnHeaders": [
+                {"assayGroupId": "g1", "factorValue": "brain", "assayGroupSummary": {}}
+            ],
+            "profiles": {
+                "rows": [
+                    {
+                        "id": "ENSG00000142192",
+                        "name": "APP",
+                        "expressions": [{"value": 42.5}],
+                    },
+                    {
+                        "id": "ENSG00000099999",
+                        "name": "OTHER",
+                        "expressions": [{"value": 10.0}],
+                    },
+                ]
+            },
+        }
+        mock_resp.raise_for_status.return_value = None
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"experiment_accession": "E-MTAB-2836", "gene_id": "APP"})
+
+        profiles = result["data"]["gene_profiles"]
+        self.assertEqual(len(profiles), 1)
+        self.assertEqual(profiles[0]["gene_name"], "APP")
+
+
+# ---------------------------------------------------------------------------
+# Monarch_get_gene_diseases: deprecated category enum
+# ---------------------------------------------------------------------------
+class TestMonarchGeneDiseaseCategory(unittest.TestCase):
+    """Monarch_get_gene_diseases should use CausalGeneToDiseaseAssociation."""
+
+    def test_category_updated(self):
+        import json
+
+        with open("src/tooluniverse/data/monarch_tools.json") as f:
+            tools = json.load(f)
+
+        gene_disease_tool = None
+        for t in tools:
+            if t["name"] == "Monarch_get_gene_diseases":
+                gene_disease_tool = t
+                break
+
+        self.assertIsNotNone(gene_disease_tool, "Monarch_get_gene_diseases not found")
+        category = gene_disease_tool["query_schema"]["category"]
+        self.assertNotIn(
+            "biolink:GeneToDiseaseAssociation",
+            category,
+            "Deprecated category still used",
+        )
+        self.assertIn("biolink:CausalGeneToDiseaseAssociation", category)
+
+
+# ---------------------------------------------------------------------------
+# GTEx: versioned GENCODE ID resolution
+# ---------------------------------------------------------------------------
+class TestGTExVersionedGencodeId(unittest.TestCase):
+    """GTEx should strip version from user-provided versioned Ensembl IDs and re-resolve."""
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    def test_versioned_id_stripped_and_resolved(self, mock_get):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        mock_get.return_value = {
+            "data": [{"gencodeId": "ENSG00000142192.16", "geneSymbol": "APP"}]
+        }
+
+        result = _resolve_gene_id("ENSG00000142192.21", "https://gtexportal.org/api/v2", 30)
+
+        # Should strip .21 and query with base ID, getting correct .16 version
+        self.assertEqual(result, "ENSG00000142192.16")
+        call_url = mock_get.call_args[0][0]
+        self.assertIn("geneId=ENSG00000142192", call_url)
+        self.assertNotIn(".21", call_url)
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    def test_unversioned_id_resolved(self, mock_get):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        mock_get.return_value = {
+            "data": [{"gencodeId": "ENSG00000142192.16"}]
+        }
+
+        result = _resolve_gene_id("ENSG00000142192", "https://gtexportal.org/api/v2", 30)
+        self.assertEqual(result, "ENSG00000142192.16")
+
+    @patch("tooluniverse.gtex_tool._http_get")
+    def test_gene_symbol_resolved(self, mock_get):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        mock_get.return_value = {
+            "data": [{"gencodeId": "ENSG00000141510.18"}]
+        }
+
+        result = _resolve_gene_id("TP53", "https://gtexportal.org/api/v2", 30)
+        self.assertEqual(result, "ENSG00000141510.18")
+
+
+# ---------------------------------------------------------------------------
+# ClinicalTrials: v2 API fields parameter removed
+# ---------------------------------------------------------------------------
+class TestClinicalTrialsV2Fields(unittest.TestCase):
+    """ClinicalTrials _run_search should not send v1-style fields parameter."""
+
+    def test_run_search_no_fields_param(self):
+        """Verify _run_search does not include a 'fields' key in API params."""
+        from tooluniverse.ctg_tool import ClinicalTrialsTool
+
+        config = {
+            "name": "ClinicalTrials_search_studies",
+            "type": "ClinicalTrialsTool",
+            "parameter": {"properties": {}},
+            "query_schema": {},
+            "fields": {"operation": "search"},
+        }
+        tool = ClinicalTrialsTool(config)
+
+        with patch("requests.get") as mock_get:
+            mock_resp = MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.json.return_value = {
+                "studies": [
+                    {
+                        "protocolSection": {
+                            "identificationModule": {"nctId": "NCT12345678", "briefTitle": "Test"},
+                            "statusModule": {"overallStatus": "RECRUITING"},
+                            "designModule": {
+                                "studyType": "INTERVENTIONAL",
+                                "enrollmentInfo": {"count": 500},
+                            },
+                            "conditionsModule": {"conditions": ["Diabetes"]},
+                            "armsInterventionsModule": {
+                                "interventions": [{"name": "Drug A"}]
+                            },
+                            "sponsorCollaboratorsModule": {
+                                "leadSponsor": {"name": "Pharma Corp"}
+                            },
+                        }
+                    }
+                ],
+                "totalCount": 1,
+            }
+            mock_resp.raise_for_status.return_value = None
+            mock_get.return_value = mock_resp
+
+            result = tool.run({"query_cond": "diabetes", "page_size": 1})
+
+        study = result["data"]["studies"][0]
+        self.assertEqual(study["enrollment"], 500)
+        self.assertEqual(study["sponsor"], "Pharma Corp")
+        self.assertEqual(study["interventions"], ["Drug A"])
+
+        # Verify 'fields' not in the API request params
+        call_params = mock_get.call_args[1].get("params", {})
+        self.assertNotIn("fields", call_params)
+
+
+# ---------------------------------------------------------------------------
+# ChEMBL_search_mechanisms: target_chembl_id filter blocked
+# ---------------------------------------------------------------------------
+class TestChEMBLMechanismsTargetFilter(unittest.TestCase):
+    """ChEMBL_search_mechanisms should reject target_chembl_id (silently ignored by API)."""
+
+    def _make_tool(self):
+        from tooluniverse.chem_tool import ChEMBLRESTTool
+
+        config = {
+            "name": "ChEMBL_search_mechanisms",
+            "type": "ChEMBLRESTTool",
+            "parameter": {},
+            "fields": {"endpoint": "mechanism"},
+        }
+        return ChEMBLRESTTool(config)
+
+    def test_target_chembl_id_rejected(self):
+        tool = self._make_tool()
+        result = tool.run({"target_chembl_id": "CHEMBL284", "limit": 10})
+
+        self.assertEqual(result["status"], "error")
+        self.assertIn("target_chembl_id", result["error"])
+        self.assertIn("not supported", result["error"])
+
+
 if __name__ == "__main__":
     unittest.main()

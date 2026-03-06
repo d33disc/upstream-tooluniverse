@@ -294,6 +294,20 @@ class ChEMBLRESTTool(BaseTool):
             # Feature-41B-01: query/pref_name__icontains is also silently ignored by
             # /mechanism.json endpoint — catch it here and return a helpful error.
             if tool_name == "ChEMBL_search_mechanisms":
+                # target_chembl_id is silently ignored by /mechanism.json
+                target_id = arguments.get("target_chembl_id")
+                if target_id:
+                    return {
+                        "status": "error",
+                        "error": f"target_chembl_id='{target_id}' is not supported for "
+                        "ChEMBL_search_mechanisms. The /mechanism.json endpoint ignores "
+                        "target-based filters. To find mechanisms for a target: "
+                        "(1) use ChEMBL_search_activities with target_chembl_id to find "
+                        "drugs acting on the target, then (2) use ChEMBL_get_drug_mechanisms "
+                        "with the drug_chembl_id. Alternatively, filter by "
+                        "mechanism_of_action__icontains (e.g., 'DPP4 inhibitor').",
+                    }
+
                 drug_name = arguments.get("drug_name")
                 query_name = arguments.get("query") or arguments.get("q")
                 if drug_name or query_name:

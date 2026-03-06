@@ -23,12 +23,13 @@ def _http_get(
 def _resolve_gene_id(gene_input: str, base_url: str, timeout: int) -> str:
     """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
 
-    If already a versioned Ensembl ID (contains '.'), returns as-is.
-    Otherwise queries GTEx /reference/gene to resolve.
+    Queries GTEx /reference/gene to resolve to the correct GENCODE v26 version.
+    If a user-provided versioned ID (e.g., ENSG00000142192.21) doesn't match
+    GENCODE v26, strip the version and re-resolve.
     """
-    if "." in gene_input:
-        return gene_input
-    url = f"{base_url}/reference/gene?geneId={gene_input}&gencodeVersion=v26"
+    # Try resolving the input (versioned or not) via the reference API
+    query_id = gene_input.split(".")[0] if gene_input.startswith("ENS") else gene_input
+    url = f"{base_url}/reference/gene?geneId={query_id}&gencodeVersion=v26"
     try:
         data = _http_get(url, headers={"Accept": "application/json"}, timeout=timeout)
         genes = data.get("data", [])

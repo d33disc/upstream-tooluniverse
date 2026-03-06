@@ -173,12 +173,7 @@ class GxATool(BaseTool):
         # Apply client-side gene_id filter (API ignores geneId parameter)
         if gene_id:
             gene_id_upper = gene_id.upper()
-            rows = [
-                r
-                for r in rows
-                if str(r.get("id", "")).upper() == gene_id_upper
-                or str(r.get("name", "")).upper() == gene_id_upper
-            ]
+            rows = [r for r in rows if self._gene_id_matches(r, gene_id_upper)]
 
         gene_profiles = []
         for row in rows[:50]:  # Limit to first 50 genes
@@ -258,3 +253,17 @@ class GxATool(BaseTool):
                 "experiment": accession,
             },
         }
+
+    @staticmethod
+    def _gene_id_matches(row: dict, gene_id_upper: str) -> bool:
+        """Check if a row matches the gene_id, handling versioned Ensembl IDs."""
+        row_id = str(row.get("id", "")).upper()
+        row_name = str(row.get("name", "")).upper()
+        if row_id == gene_id_upper or row_name == gene_id_upper:
+            return True
+        # Handle versioned Ensembl IDs: ENSG00000142192.15 matches ENSG00000142192
+        if gene_id_upper.startswith("ENS") and "." in row_id:
+            return row_id.split(".")[0] == gene_id_upper
+        if row_id.startswith("ENS") and "." not in gene_id_upper:
+            return row_id.split(".")[0] == gene_id_upper
+        return False
