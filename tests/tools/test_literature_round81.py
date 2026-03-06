@@ -87,7 +87,7 @@ class TestSemanticScholarEmptyPdfUrl(unittest.TestCase):
             "name": "SemanticScholar_search_papers",
             "parameter": {"type": "object", "properties": {}, "required": []},
         }
-        tool = SemanticScholarTool(config)
+        SemanticScholarTool(config)  # verify instantiation succeeds
 
         # Simulate a paper dict with empty openAccessPdf url
         paper = {
@@ -243,7 +243,7 @@ class TestSemanticScholarYearFiltering(unittest.TestCase):
             "name": "SemanticScholar_search_papers",
             "parameter": {"type": "object", "properties": {}, "required": []},
         }
-        tool = SemanticScholarTool(config)
+        SemanticScholarTool(config)  # verify instantiation succeeds
 
         # Verify year is extracted from arguments
         args = {"query": "test", "year": "2024", "limit": 1}
