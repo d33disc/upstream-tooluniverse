@@ -33,11 +33,7 @@ class FAERSAnalyticsTool(BaseTool):
         operation = arguments.get("operation")
         # Auto-fill operation from tool config const if not provided by user
         if not operation:
-            operation = (
-                self.parameter.get("properties", {})
-                .get("operation", {})
-                .get("const", "")
-            )
+            operation = self.get_schema_const_operation()
 
         if not operation:
             return {"status": "error", "error": "Missing required parameter: operation"}
