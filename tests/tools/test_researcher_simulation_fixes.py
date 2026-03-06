@@ -2195,5 +2195,113 @@ class TestOpenTargetsEvidenceDescription(unittest.TestCase):
         self.assertIn("openTargets_get_evidence_by_datasource".lower(), desc)
 
 
+# ---------------------------------------------------------------------------
+# GWAS disease_trait auto-resolution to efo_id
+# ---------------------------------------------------------------------------
+class TestGWASTraitResolution(unittest.TestCase):
+    """GWAS /v2/associations ignores disease_trait param; must auto-resolve to efo_id."""
+
+    def _make_associations_tool(self):
+        from tooluniverse.gwas_tool import GWASAssociationsForTrait
+
+        config = {
+            "name": "gwas_get_associations_for_trait",
+            "parameter": {},
+        }
+        return GWASAssociationsForTrait(config)
+
+    def _make_variants_tool(self):
+        from tooluniverse.gwas_tool import GWASVariantsForTrait
+
+        config = {
+            "name": "gwas_get_variants_for_trait",
+            "parameter": {},
+        }
+        return GWASVariantsForTrait(config)
+
+    @patch("tooluniverse.gwas_tool.requests.get")
+    def test_disease_trait_resolved_to_efo_id(self, mock_get):
+        """When disease_trait is provided, it should be resolved to efo_id via efoTraits search."""
+        tool = self._make_associations_tool()
+
+        # Mock: first call resolves trait, second call fetches associations
+        efo_response = MagicMock()
+        efo_response.status_code = 200
+        efo_response.json.return_value = {
+            "_embedded": {
+                "efoTraits": [{"shortForm": "EFO_0001360", "trait": "Type 2 diabetes"}]
+            }
+        }
+        efo_response.raise_for_status.return_value = None
+
+        assoc_response = MagicMock()
+        assoc_response.status_code = 200
+        assoc_response.json.return_value = {
+            "_embedded": {"associations": [{"id": 1, "pvalue": 1e-10}]},
+            "page": {"totalElements": 1},
+        }
+        assoc_response.raise_for_status.return_value = None
+
+        mock_get.side_effect = [efo_response, assoc_response]
+
+        result = tool.run({"disease_trait": "type 2 diabetes", "size": 5})
+
+        # Verify efo_id was resolved and used
+        self.assertIn("resolved_efo_id", result)
+        self.assertEqual(result["resolved_efo_id"], "EFO_0001360")
+
+        # Verify the associations request used efo_id, not disease_trait
+        assoc_call = mock_get.call_args_list[1]
+        params = assoc_call.kwargs.get("params") or assoc_call[1].get("params", {})
+        self.assertIn("efo_id", params)
+        self.assertNotIn("disease_trait", params)
+
+    @patch("tooluniverse.gwas_tool.requests.get")
+    def test_efo_id_takes_precedence_over_disease_trait(self, mock_get):
+        """When efo_id is already provided, don't resolve disease_trait."""
+        tool = self._make_associations_tool()
+
+        assoc_response = MagicMock()
+        assoc_response.status_code = 200
+        assoc_response.json.return_value = {
+            "_embedded": {"associations": [{"id": 2}]},
+            "page": {"totalElements": 1},
+        }
+        assoc_response.raise_for_status.return_value = None
+        mock_get.return_value = assoc_response
+
+        result = tool.run({"disease_trait": "diabetes", "efo_id": "EFO_0001360"})
+
+        # Only one request made (no trait resolution needed)
+        self.assertEqual(mock_get.call_count, 1)
+
+    @patch("tooluniverse.gwas_tool.requests.get")
+    def test_variants_tool_also_resolves_trait(self, mock_get):
+        """GWASVariantsForTrait should also auto-resolve disease_trait."""
+        tool = self._make_variants_tool()
+
+        efo_response = MagicMock()
+        efo_response.status_code = 200
+        efo_response.json.return_value = {
+            "_embedded": {
+                "efoTraits": [{"shortForm": "EFO_0001360", "trait": "Type 2 diabetes"}]
+            }
+        }
+        efo_response.raise_for_status.return_value = None
+
+        assoc_response = MagicMock()
+        assoc_response.status_code = 200
+        assoc_response.json.return_value = {
+            "_embedded": {"associations": []},
+            "page": {"totalElements": 0},
+        }
+        assoc_response.raise_for_status.return_value = None
+
+        mock_get.side_effect = [efo_response, assoc_response]
+
+        result = tool.run({"disease_trait": "type 2 diabetes"})
+        self.assertIn("resolved_efo_id", result)
+
+
 if __name__ == "__main__":
     unittest.main()
