@@ -16,6 +16,31 @@ from .tool_registry import register_tool
 GTEX_BASE_URL = "https://gtexportal.org/api/v2"
 
 
+def _resolve_gencode_id(gene_input: str, timeout: int = 30) -> str:
+    """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
+
+    GTEx API requires versioned GENCODE IDs (e.g. ENSG00000141510.18 for TP53).
+    If already versioned (contains '.'), returns as-is.
+    Otherwise queries /reference/gene with gencodeVersion=v26 (used by gtex_v8).
+    """
+    if not gene_input or "." in gene_input:
+        return gene_input
+    url = f"{GTEX_BASE_URL}/reference/gene"
+    try:
+        resp = requests.get(
+            url,
+            params={"geneId": gene_input, "gencodeVersion": "v26"},
+            timeout=timeout,
+        )
+        if resp.status_code == 200:
+            genes = resp.json().get("data", [])
+            if isinstance(genes, list) and genes:
+                return genes[0].get("gencodeId", gene_input)
+    except Exception:
+        pass
+    return gene_input
+
+
 @register_tool("GTExV2Tool")
 class GTExV2Tool(BaseTool):
     """
@@ -83,6 +108,8 @@ class GTExV2Tool(BaseTool):
         gencode_ids = arguments.get("gencode_id")
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
+        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
+        gencode_ids = [_resolve_gencode_id(gid) for gid in (gencode_ids or [])]
 
         # Feature-69A-002: gtex_v10 returns empty results for medianGeneExpression.
         # Default to gtex_v8 which is stable and returns correct tissue expression.
@@ -125,8 +152,11 @@ class GTExV2Tool(BaseTool):
         gencode_ids = arguments.get("gencode_id")
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
+        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
+        gencode_ids = [_resolve_gencode_id(gid) for gid in (gencode_ids or [])]
 
-        dataset_id = arguments.get("dataset_id", "gtex_v10")
+        # Feature-69A-002: gtex_v10 returns empty for geneExpression; use gtex_v8
+        dataset_id = arguments.get("dataset_id", "gtex_v8")
         tissue_ids = arguments.get("tissue_site_detail_id", [])
         attribute_subset = arguments.get("attribute_subset")
 
@@ -261,6 +291,8 @@ class GTExV2Tool(BaseTool):
 
         if isinstance(gencode_ids, str):
             gencode_ids = [gencode_ids]
+        # Resolve gene symbols/unversioned IDs to versioned GENCODE IDs
+        gencode_ids = [_resolve_gencode_id(gid) for gid in gencode_ids]
         if isinstance(variant_ids, str):
             variant_ids = [variant_ids]
         if isinstance(tissue_ids, str):
@@ -307,6 +339,8 @@ class GTExV2Tool(BaseTool):
     def _get_multi_tissue_eqtls(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get multi-tissue eQTL Metasoft results."""
         gencode_id = arguments.get("gencode_id")
+        if gencode_id:
+            gencode_id = _resolve_gencode_id(gencode_id)
         variant_id = arguments.get("variant_id")
         dataset_id = arguments.get("dataset_id", "gtex_v8")
 
@@ -347,6 +381,8 @@ class GTExV2Tool(BaseTool):
     def _calculate_eqtl(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Calculate dynamic eQTL for gene-variant pair."""
         gencode_id = arguments.get("gencode_id")
+        if gencode_id:
+            gencode_id = _resolve_gencode_id(gencode_id)
         variant_id = arguments.get("variant_id")
         tissue_id = arguments.get("tissue_site_detail_id")
         dataset_id = arguments.get("dataset_id", "gtex_v8")

@@ -557,5 +557,123 @@ class TestChEMBLTargetFilter(unittest.TestCase):
         self.assertEqual(params["assay_chembl_id__exact"], "CHEMBL1000001")
 
 
+# ---------------------------------------------------------------------------
+# GTEx gene ID resolution and dataset defaults
+# ---------------------------------------------------------------------------
+class TestGTExGeneIdResolution(unittest.TestCase):
+    """GTEx V2 should resolve gene symbols to versioned GENCODE IDs."""
+
+    def _make_tool(self):
+        from tooluniverse.gtex_v2_tool import GTExV2Tool
+
+        config = {
+            "name": "GTEx_get_median_gene_expression",
+            "type": "GTExV2Tool",
+            "parameter": {"required": ["operation"]},
+        }
+        return GTExV2Tool(config)
+
+    @patch("tooluniverse.gtex_v2_tool.requests.get")
+    def test_gene_symbol_resolved_to_versioned_id(self, mock_get):
+        """Gene symbols like TP53 should be resolved to versioned GENCODE IDs."""
+        tool = self._make_tool()
+
+        # First call: /reference/gene resolves TP53 -> ENSG00000141510.18
+        resolve_resp = MagicMock()
+        resolve_resp.status_code = 200
+        resolve_resp.json.return_value = {
+            "data": [{"gencodeId": "ENSG00000141510.18", "geneSymbol": "TP53"}]
+        }
+
+        # Second call: /expression/medianGeneExpression with resolved ID
+        expr_resp = MagicMock()
+        expr_resp.status_code = 200
+        expr_resp.json.return_value = {
+            "data": [
+                {
+                    "gencodeId": "ENSG00000141510.18",
+                    "tissueSiteDetailId": "Liver",
+                    "median": 15.2,
+                }
+            ],
+            "paging_info": {"numberOfPages": 1},
+        }
+
+        mock_get.side_effect = [resolve_resp, expr_resp]
+
+        result = tool.run({
+            "operation": "get_median_gene_expression",
+            "gencode_id": "TP53",
+        })
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["num_results"], 1)
+        # Verify the resolution call was made
+        first_call_url = mock_get.call_args_list[0][0][0]
+        self.assertIn("/reference/gene", first_call_url)
+
+    @patch("tooluniverse.gtex_v2_tool.requests.get")
+    def test_versioned_id_not_re_resolved(self, mock_get):
+        """Already versioned IDs (containing '.') should not trigger resolution."""
+        tool = self._make_tool()
+
+        expr_resp = MagicMock()
+        expr_resp.status_code = 200
+        expr_resp.json.return_value = {
+            "data": [{"gencodeId": "ENSG00000141510.18", "median": 10.0}],
+            "paging_info": {},
+        }
+        mock_get.return_value = expr_resp
+
+        result = tool.run({
+            "operation": "get_median_gene_expression",
+            "gencode_id": "ENSG00000141510.18",
+        })
+
+        self.assertEqual(result["status"], "success")
+        # Only 1 call (expression), no resolution call
+        self.assertEqual(mock_get.call_count, 1)
+        self.assertIn("medianGeneExpression", mock_get.call_args[0][0])
+
+    def test_gene_expression_defaults_to_gtex_v8(self):
+        """_get_gene_expression should default to gtex_v8 not gtex_v10."""
+        tool = self._make_tool()
+        # Check via the handler directly — dataset_id default
+        import inspect
+        source = inspect.getsource(tool._get_gene_expression)
+        self.assertIn("gtex_v8", source)
+
+    def test_median_expression_defaults_to_gtex_v8(self):
+        """_get_median_gene_expression should default to gtex_v8."""
+        tool = self._make_tool()
+        import inspect
+        source = inspect.getsource(tool._get_median_gene_expression)
+        self.assertIn("gtex_v8", source)
+
+
+class TestGTExWrapperDefaults(unittest.TestCase):
+    """GTEx wrapper functions should default to gtex_v8."""
+
+    def test_median_wrapper_defaults_v8(self):
+        """GTEx_get_median_gene_expression wrapper should default to gtex_v8."""
+        import inspect
+        from tooluniverse.tools.GTEx_get_median_gene_expression import (
+            GTEx_get_median_gene_expression,
+        )
+        sig = inspect.signature(GTEx_get_median_gene_expression)
+        default = sig.parameters["dataset_id"].default
+        self.assertEqual(default, "gtex_v8")
+
+    def test_gene_expression_wrapper_defaults_v8(self):
+        """GTEx_get_gene_expression wrapper should default to gtex_v8."""
+        import inspect
+        from tooluniverse.tools.GTEx_get_gene_expression import (
+            GTEx_get_gene_expression,
+        )
+        sig = inspect.signature(GTEx_get_gene_expression)
+        default = sig.parameters["dataset_id"].default
+        self.assertEqual(default, "gtex_v8")
+
+
 if __name__ == "__main__":
     unittest.main()
