@@ -27,7 +27,7 @@ The primary command-line interface for discovering, inspecting, running, and tes
    * - ``tu list``
      - List available tools (filter with ``--categories``)
    * - ``tu grep PATTERN``
-     - Search tools by text or regex (``--field name|description|all``)
+     - Search tools by text or regex (``--field name|description|type|category``)
    * - ``tu find QUERY``
      - Natural-language tool search (``--limit N``)
    * - ``tu info TOOL``
@@ -86,10 +86,10 @@ Start the Scientific Model Context Protocol (SMCP) server with HTTP/SSE transpor
      - Default
      - Description
    * - ``--host``
-     - 127.0.0.1
+     - 0.0.0.0
      - Server host address
    * - ``--port``
-     - 8000
+     - 7000
      - Server port
    * - ``--compact-mode``
      - False
@@ -106,7 +106,7 @@ Start the Scientific Model Context Protocol (SMCP) server with HTTP/SSE transpor
 
 **Examples**::
 
-   # Start server with all tools (default: localhost:8000)
+   # Start server with all tools (default: 0.0.0.0:7000)
    tooluniverse-smcp
    
    # Start with compact mode (recommended for AI assistants)
@@ -151,24 +151,24 @@ Start SMCP server with STDIO transport for desktop AI applications (Claude Deskt
 tooluniverse-mcp
 ~~~~~~~~~~~~~~~~
 
-Alias for ``tooluniverse-smcp`` - starts the MCP HTTP/SSE server.
+Alias for ``tooluniverse-smcp-server`` — starts the MCP HTTP server.
 
 **Usage**::
 
    tooluniverse-mcp [OPTIONS]
 
-This command is identical to ``tooluniverse-smcp`` and provided for compatibility with MCP-first workflows.
+This command is identical to ``tooluniverse-smcp-server`` and provided for compatibility with MCP-first workflows.
 
 tooluniverse-smcp-server
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Alias for ``tooluniverse-smcp`` - starts HTTP/SSE server.
+Starts the HTTP/SSE server (same function as ``tooluniverse-mcp``).
 
 **Usage**::
 
    tooluniverse-smcp-server [OPTIONS]
 
-This command is identical to ``tooluniverse-smcp`` and provided for compatibility.
+Unlike ``tooluniverse-smcp`` (which supports ``--transport stdio``), this command always uses HTTP transport.
 
 tooluniverse-http-api
 ~~~~~~~~~~~~~~~~~~~~~
@@ -195,7 +195,7 @@ Start HTTP API server for ToolUniverse class methods.
      - 8080
      - Server port
    * - ``--workers``
-     - 4
+     - 1
      - Number of worker processes
 
 **See also**: :doc:`../guide/http_api`
@@ -210,30 +210,13 @@ Health check tool that diagnoses ToolUniverse installation and tool availability
 
 **Usage**::
 
-   tooluniverse-doctor [OPTIONS]
-
-**Options**:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 15 60
-
-   * - Option
-     - Default
-     - Description
-   * - ``--verbose``
-     - False
-     - Show detailed diagnostic information
-   * - ``--check-keys``
-     - False
-     - Verify API key configuration
+   tooluniverse-doctor
 
 **What it checks**:
 
 - ToolUniverse installation and imports
 - Tool loading status (available vs unavailable)
 - Missing dependencies for specific tools
-- API key configuration (with ``--check-keys``)
 
 **Example Output**::
 
@@ -508,7 +491,7 @@ Server won't start
 
 1. Check if port is already in use::
 
-      lsof -i :8000  # Check if port 8000 is busy
+      lsof -i :7000  # Check if port 7000 is busy
       
 2. Run health check::
 

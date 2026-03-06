@@ -20,13 +20,13 @@ Quick Start
      categories: [literature, drug]
    EOF
 
-   tu serve   # profile.yaml loads automatically
+   tooluniverse   # profile.yaml loads automatically
 
 Load a profile on the fly:
 
 .. code-block:: bash
 
-   tu serve --load ./life-science.yaml
+   tooluniverse --load ./life-science.yaml
 
 ---
 
@@ -86,9 +86,9 @@ Workspace
 
 .. code-block:: bash
 
-   tu serve                          # local:  ./.tooluniverse/
-   tu serve --global                 # global: ~/.tooluniverse/
-   tu serve --workspace /path/to/ws  # explicit path
+   tooluniverse                          # local:  ./.tooluniverse/
+   tooluniverse --global                 # global: ~/.tooluniverse/
+   tooluniverse --workspace /path/to/ws  # explicit path
 
 Priority: ``--workspace`` → ``TOOLUNIVERSE_HOME`` → ``--global`` → ``./.tooluniverse/``
 

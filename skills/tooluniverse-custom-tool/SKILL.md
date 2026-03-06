@@ -210,7 +210,7 @@ sources:
 
 Then start with:
 ```bash
-tu serve --load .tooluniverse/profile.yaml
+tooluniverse --load .tooluniverse/profile.yaml
 ```
 
 ---

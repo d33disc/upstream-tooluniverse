@@ -72,8 +72,8 @@ First run takes ~30s (downloads package), then instant. **Shortcut**: `uv tool i
 | Command | What it does | Example |
 |---------|-------------|---------|
 | `tu status` | Show tool count and top categories | `tu status` |
-| `tu list` | List tools (modes: names, categories, basic, by_category, summary) | `tu list --mode basic --limit 20` |
-| `tu find` | AI-powered search by natural language | `tu find 'protein structure analysis'` |
+| `tu list` | List tools (modes: names, categories, basic, by_category, summary, custom) | `tu list --mode basic --limit 20` |
+| `tu find` | Search by natural language (keyword scoring, no API key needed) | `tu find 'protein structure analysis'` |
 | `tu grep` | Text/regex pattern search | `tu grep '^UniProt' --mode regex` |
 | `tu info` | Show tool parameters and schema | `tu info PubMed_search_articles` |
 | `tu run` | Execute a tool | `tu run PubMed_search_articles '{"query": "CRISPR"}'` |
@@ -81,7 +81,7 @@ First run takes ~30s (downloads package), then instant. **Shortcut**: `uv tool i
 | `tu build` | Generate typed Python wrappers for Coding API | `tu build --output ./my_tools` |
 | `tu serve` | Start MCP stdio server (same as `uvx tooluniverse`) | `tu serve` |
 
-**Output flags** (work with all commands): `--json` (pretty) or `--raw` (compact, pipe-friendly).
+**Output flags** (most commands except `build`/`serve`): `--json` (pretty) or `--raw` (compact, pipe-friendly).
 
 Continue to **Step 3** (API Keys).
 
