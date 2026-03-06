@@ -981,5 +981,241 @@ class TestOperationAutoFill(unittest.TestCase):
                     )
 
 
+# ---------------------------------------------------------------------------
+# Monarch remove_empty_values preserves 0 and empty lists
+# ---------------------------------------------------------------------------
+class TestMonarchRemoveEmptyValues(unittest.TestCase):
+    """Monarch tool should preserve 0 and [] in API responses."""
+
+    def test_zero_total_preserved(self):
+        """total: 0 should NOT be stripped from response."""
+        from tooluniverse.restful_tool import MonarchTool
+
+        config = {
+            "name": "get_HPO_ID_by_phenotype",
+            "type": "Monarch",
+            "tool_url": "/search",
+            "query_schema": {
+                "query": None,
+                "category": ["biolink:PhenotypicFeature"],
+                "limit": 20,
+                "offset": 0,
+            },
+            "parameter": {"properties": {}},
+        }
+        tool = MonarchTool(config)
+
+        # Simulate Monarch API returning 0 results
+        mock_response = {"total": 0, "items": [], "limit": 20, "offset": 0}
+
+        with patch("tooluniverse.restful_tool.execute_RESTful_query",
+                    return_value=mock_response):
+            result = tool.run({"query": "nonexistent phenotype"})
+
+        self.assertEqual(result["total"], 0)
+        self.assertEqual(result["items"], [])
+        self.assertIn("limit", result)
+
+    def test_zero_descendant_count_preserved(self):
+        """descendant_count: 0 should NOT be stripped."""
+        from tooluniverse.restful_tool import MonarchTool
+
+        config = {
+            "name": "get_HPO_ID_by_phenotype",
+            "type": "Monarch",
+            "tool_url": "/search",
+            "query_schema": {"query": None, "limit": 5},
+            "parameter": {"properties": {}},
+        }
+        tool = MonarchTool(config)
+
+        mock_response = {
+            "total": 1,
+            "items": [
+                {
+                    "id": "HP:0001250",
+                    "name": "Seizure",
+                    "has_descendant_count": 0,
+                    "description": None,
+                }
+            ],
+            "limit": 5,
+        }
+
+        with patch("tooluniverse.restful_tool.execute_RESTful_query",
+                    return_value=mock_response):
+            result = tool.run({"query": "seizure"})
+
+        item = result["items"][0]
+        self.assertEqual(item["has_descendant_count"], 0)
+        # None values should still be stripped
+        self.assertNotIn("description", item)
+
+
+# ---------------------------------------------------------------------------
+# CTD mitochondrial gene name normalization
+# ---------------------------------------------------------------------------
+class TestCTDMitoGeneNormalization(unittest.TestCase):
+    """CTD tool should strip MT- prefix for mitochondrial gene queries."""
+
+    def _make_tool(self, input_type="gene"):
+        from tooluniverse.ctd_tool import CTDTool
+
+        config = {
+            "name": "CTD_get_gene_diseases",
+            "type": "CTDTool",
+            "fields": {"input_type": input_type, "report_type": "diseases_curated"},
+        }
+        return CTDTool(config)
+
+    @patch("tooluniverse.ctd_tool.requests.get")
+    def test_mt_prefix_stripped(self, mock_get):
+        """MT-ND5 should be normalized to ND5 for CTD queries."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.text = '[{"GeneSymbol": "ND5", "DiseaseName": "MELAS"}]'
+        mock_resp.json.return_value = [
+            {"GeneSymbol": "ND5", "DiseaseName": "MELAS"}
+        ]
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"input_terms": "MT-ND5"})
+
+        # Verify API was called with ND5, not MT-ND5
+        call_params = mock_get.call_args[1].get("params", {})
+        self.assertEqual(call_params["inputTerms"], "ND5")
+
+        # Verify metadata includes normalization note
+        self.assertIn("normalized_query", result["metadata"])
+        self.assertEqual(result["metadata"]["normalized_query"], "ND5")
+
+    @patch("tooluniverse.ctd_tool.requests.get")
+    def test_non_mito_gene_unchanged(self, mock_get):
+        """Non-mitochondrial genes should NOT be modified."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.text = '[{"GeneSymbol": "BRCA1"}]'
+        mock_resp.json.return_value = [{"GeneSymbol": "BRCA1"}]
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"input_terms": "BRCA1"})
+
+        call_params = mock_get.call_args[1].get("params", {})
+        self.assertEqual(call_params["inputTerms"], "BRCA1")
+        self.assertNotIn("normalized_query", result["metadata"])
+
+    @patch("tooluniverse.ctd_tool.requests.get")
+    def test_mt_prefix_only_for_gene_type(self, mock_get):
+        """MT- prefix stripping should only apply to gene input_type."""
+        tool = self._make_tool(input_type="chem")
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.text = "[]"
+        mock_resp.json.return_value = []
+        mock_get.return_value = mock_resp
+
+        tool.run({"input_terms": "MT-ND5"})
+
+        call_params = mock_get.call_args[1].get("params", {})
+        # Chemical queries should NOT strip MT-
+        self.assertEqual(call_params["inputTerms"], "MT-ND5")
+
+
+# ---------------------------------------------------------------------------
+# ClinGen variant classifications coverage note
+# ---------------------------------------------------------------------------
+class TestClinGenVariantClassificationNote(unittest.TestCase):
+    """ClinGen should add helpful note when no variant classifications found."""
+
+    def _make_tool(self):
+        from tooluniverse.clingen_tool import ClinGenTool
+
+        config = {
+            "name": "ClinGen_get_variant_classifications",
+            "type": "ClinGenTool",
+            "fields": {"operation": "get_variant_classifications", "timeout": 30},
+            "parameter": {"required": []},
+        }
+        return ClinGenTool(config)
+
+    @patch("tooluniverse.clingen_tool.requests.get")
+    def test_empty_results_include_note(self, mock_get):
+        """When no classifications found for a gene, include helpful note."""
+        tool = self._make_tool()
+
+        # Mock TSV response with only header (no data for the gene)
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.text = (
+            "#Variation\tClinVar Variation Id\tHGNC Gene Symbol\n"
+            "NM_000277.2:c.1A>G\t586\tPAH\n"
+        )
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"gene": "LRRK2"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["total"], 0)
+        self.assertIn("note", result)
+        self.assertIn("VCEP", result["note"])
+        self.assertIn("LRRK2", result["note"])
+
+    @patch("tooluniverse.clingen_tool.requests.get")
+    def test_results_found_no_note(self, mock_get):
+        """When classifications are found, no note is needed."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.text = (
+            "#Variation\tClinVar Variation Id\tHGNC Gene Symbol\tDisease\n"
+            "NM_000277.2:c.1A>G\t586\tPAH\tphenylketonuria\n"
+        )
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"gene": "PAH"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertGreater(result["total"], 0)
+        self.assertNotIn("note", result)
+
+
+# ---------------------------------------------------------------------------
+# MyVariant query field path in description
+# ---------------------------------------------------------------------------
+class TestMyVariantQueryFieldPath(unittest.TestCase):
+    """MyVariant tool description should use correct field paths."""
+
+    def test_description_uses_gene_symbol_field(self):
+        """The query description should use clinvar.gene.symbol, not clinvar.gene."""
+        import os
+
+        json_path = os.path.join(
+            os.path.dirname(__file__),
+            "../../src/tooluniverse/data/biothings_tools.json",
+        )
+        with open(json_path) as f:
+            tools = json.load(f)
+
+        for t in tools:
+            if t["name"] == "MyVariant_query_variants":
+                desc = t["parameter"]["properties"]["query"]["description"]
+                self.assertIn("clinvar.gene.symbol", desc)
+                self.assertNotIn("clinvar.gene:BRCA1", desc)
+                break
+        else:
+            self.fail("MyVariant_query_variants not found")
+
+
 if __name__ == "__main__":
     unittest.main()

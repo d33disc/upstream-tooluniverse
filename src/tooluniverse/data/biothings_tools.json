@@ -297,7 +297,7 @@
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Search query. Examples: 'rs58991260' (rsID), 'chr7:g.55249071G>A' (HGVS), 'clinvar.gene:BRCA1' (gene in ClinVar), 'cadd.phred:>30' (high CADD score)."
+                    "description": "Search query. Examples: 'rs58991260' (rsID), 'chr7:g.55249071G>A' (HGVS), 'clinvar.gene.symbol:BRCA1' (gene in ClinVar), 'cadd.phred:>30' (high CADD score)."
                 },
                 "fields": {
                     "type": "string",
