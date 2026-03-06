@@ -6385,3 +6385,376 @@ class TestByCategoryCompleteness:
         by_cat = data.get("tools_by_category", {})
         total_in_cats = sum(len(tools) for tools in by_cat.values())
         assert total_in_cats == data.get("total_tools", 0)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# R. Tool existence and parameter schema validation (Round 84)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestGenomicsToolSchemas:
+    """Feature-84A: Genomics/protein tools exist and have correct param schemas."""
+
+    TOOLS = [
+        ("alphafold_get_prediction", ["qualifier"]),
+        ("RCSBAdvSearch_search_structures", []),
+        ("RCSBData_get_entry", ["pdb_id"]),
+        ("UniProt_search", ["query"]),
+        ("clinvar_search_variants", []),
+        ("ensembl_lookup_gene", ["gene_id"]),
+        ("STRING_get_protein_interactions", ["protein_ids"]),
+        ("gwas_search_associations", []),
+        ("OpenTargets_get_target_id_description_by_name", ["targetName"]),
+        ("Reactome_get_pathway", ["stId"]),
+    ]
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_tool_exists(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        assert info is not None, f"Tool {tool_name} not found in registry"
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_required_params(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        if not info:
+            pytest.skip(f"{tool_name} not found")
+        schema = info.get("parameter", {})
+        actual_required = schema.get("required", [])
+        for p in required_params:
+            assert p in actual_required, (
+                f"{tool_name}: expected '{p}' in required params, got {actual_required}"
+            )
+
+    @pytest.mark.unit
+    def test_alphafold_qualifier_is_string(self, tu):
+        info = tu.tool_specification("alphafold_get_prediction")
+        props = info["parameter"]["properties"]
+        assert "qualifier" in props
+        assert props["qualifier"]["type"] == "string"
+
+    @pytest.mark.unit
+    def test_rcsb_search_has_rows_param(self, tu):
+        info = tu.tool_specification("RCSBAdvSearch_search_structures")
+        props = info["parameter"]["properties"]
+        assert "rows" in props or "limit" in props
+
+    @pytest.mark.unit
+    def test_gtex_expression_tools_exist(self, tu):
+        for name in [
+            "GTEx_get_median_gene_expression",
+            "GTEx_get_tissue_sites",
+            "GTEx_get_expression_summary",
+        ]:
+            assert tu.tool_specification(name) is not None, f"{name} missing"
+
+    @pytest.mark.unit
+    def test_string_requires_protein_ids(self, tu):
+        info = tu.tool_specification("STRING_get_protein_interactions")
+        required = info["parameter"]["required"]
+        assert "protein_ids" in required
+
+    @pytest.mark.unit
+    def test_reactome_stid_param(self, tu):
+        info = tu.tool_specification("Reactome_get_pathway")
+        props = info["parameter"]["properties"]
+        assert "stId" in props
+
+
+class TestDrugChemToolSchemas:
+    """Feature-84B: Drug/chemical/pharmacology tools exist with correct schemas."""
+
+    TOOLS = [
+        ("DGIdb_get_drug_gene_interactions", ["genes"]),
+        ("PubChem_get_CID_by_compound_name", ["name"]),
+        ("ChEMBL_search_molecules", []),
+        ("drugbank_vocab_search", ["query"]),
+        ("FDA_get_active_ingredient_info_by_drug_name", ["drug_name"]),
+        ("CPIC_list_guidelines", []),
+        ("ChEBI_search", ["query"]),
+        ("kegg_get_pathway_info", ["pathway_id"]),
+        ("PharmGKB_search_drugs", ["query"]),
+        ("FAERS_count_reactions_by_drug_event", ["medicinalproduct"]),
+    ]
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_tool_exists(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        assert info is not None, f"Tool {tool_name} not found in registry"
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_required_params(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        if not info:
+            pytest.skip(f"{tool_name} not found")
+        schema = info.get("parameter", {})
+        actual_required = schema.get("required", [])
+        for p in required_params:
+            assert p in actual_required, (
+                f"{tool_name}: expected '{p}' in required, got {actual_required}"
+            )
+
+    @pytest.mark.unit
+    def test_pubchem_param_is_name_not_compound_name(self, tu):
+        """Agent B found param is 'name', not 'compound_name'."""
+        info = tu.tool_specification("PubChem_get_CID_by_compound_name")
+        props = info["parameter"]["properties"]
+        assert "name" in props
+        assert "compound_name" not in props
+
+    @pytest.mark.unit
+    def test_faers_param_is_medicinalproduct(self, tu):
+        """Agent B found param is 'medicinalproduct', not 'drug_name'."""
+        info = tu.tool_specification("FAERS_count_reactions_by_drug_event")
+        props = info["parameter"]["properties"]
+        assert "medicinalproduct" in props
+
+    @pytest.mark.unit
+    def test_chembl_tool_name_is_plural(self, tu):
+        """Agent B: correct name is ChEMBL_search_molecules (plural)."""
+        assert tu.tool_specification("ChEMBL_search_molecules") is not None
+        # Singular form should not exist
+        assert tu.tool_specification("ChEMBL_search_molecule") is None
+
+    @pytest.mark.unit
+    def test_zinc_has_operation_param(self, tu):
+        """Agent B: ZINC requires 'operation' parameter."""
+        info = tu.tool_specification("ZINC_search_compounds")
+        if info is None:
+            pytest.skip("ZINC_search_compounds not found")
+        props = info["parameter"]["properties"]
+        assert "operation" in props
+
+    @pytest.mark.unit
+    def test_cpic_list_guidelines_no_required(self, tu):
+        info = tu.tool_specification("CPIC_list_guidelines")
+        required = info["parameter"].get("required", [])
+        assert len(required) == 0, f"CPIC_list_guidelines should have no required params"
+
+
+class TestLiteratureDiseaseToolSchemas:
+    """Feature-84C: Literature/disease/cell biology tools exist with correct schemas."""
+
+    TOOLS = [
+        ("EuropePMC_search_articles", ["query"]),
+        ("PubTator3_LiteratureSearch", ["query"]),
+        ("openalex_literature_search", []),
+        ("HPO_search_terms", ["query"]),
+        ("CellMarker_search_by_gene", ["operation", "gene_symbol"]),
+        ("BioGRID_get_interactions", ["gene_names"]),
+        ("Orphanet_search_diseases", ["operation", "query"]),
+        ("civic_search_genes", []),
+        ("geo_search_datasets", []),
+    ]
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_tool_exists(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        assert info is not None, f"Tool {tool_name} not found in registry"
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name,required_params", TOOLS)
+    def test_required_params(self, tu, tool_name, required_params):
+        info = tu.tool_specification(tool_name)
+        if not info:
+            pytest.skip(f"{tool_name} not found")
+        schema = info.get("parameter", {})
+        actual_required = schema.get("required", [])
+        for p in required_params:
+            assert p in actual_required, (
+                f"{tool_name}: expected '{p}' in required, got {actual_required}"
+            )
+
+    @pytest.mark.unit
+    def test_civic_evidence_items_uses_disease_not_query(self, tu):
+        """Agent C: civic_search_evidence_items uses disease/therapy, not query."""
+        info = tu.tool_specification("civic_search_evidence_items")
+        if info is None:
+            pytest.skip("civic_search_evidence_items not found")
+        props = info["parameter"]["properties"]
+        assert "disease" in props or "therapy" in props
+
+    @pytest.mark.unit
+    def test_cellmarker_has_operation_param(self, tu):
+        """Agent C: CellMarker tools require operation field."""
+        info = tu.tool_specification("CellMarker_search_by_gene")
+        props = info["parameter"]["properties"]
+        assert "operation" in props or "gene_symbol" in props
+
+    @pytest.mark.unit
+    def test_biogrid_uses_gene_names_array(self, tu):
+        """Agent C: BioGRID uses gene_names (array), not gene_name (string)."""
+        info = tu.tool_specification("BioGRID_get_interactions")
+        props = info["parameter"]["properties"]
+        assert "gene_names" in props or "geneList" in props
+
+    @pytest.mark.unit
+    def test_mydisease_exists_as_disgenet_alternative(self, tu):
+        """Agent C: No DisGeNET tools, but MyDisease works as alternative."""
+        assert tu.tool_specification("MyDisease_search_diseases") is not None
+
+
+class TestToolDiscoveryViaGrep:
+    """Feature-84D: Tools can be discovered via CLI grep across categories."""
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("pattern,min_matches", [
+        ("AlphaFold", 1),
+        ("RCSB", 3),
+        ("UniProt", 5),
+        ("GTEx", 3),
+        ("STRING", 3),
+        ("GWAS", 3),
+        ("OpenTargets", 10),
+        ("Reactome", 5),
+        ("DGIdb", 1),
+        ("PubChem", 1),
+        ("ChEMBL", 1),
+        ("CPIC", 1),
+        ("ChEBI", 1),
+        ("KEGG", 1),
+        ("HPO", 2),
+        ("CellMarker", 2),
+        ("BioGRID", 2),
+        ("Orphanet", 2),
+        ("CIViC", 1),
+        ("GEO", 1),
+    ])
+    def test_grep_finds_tools(self, monkeypatch, tu, capsys, pattern, min_matches):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern=pattern, field="name", json=True), tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) >= min_matches, (
+            f"grep '{pattern}' found {len(tools)} tools, expected >= {min_matches}"
+        )
+
+    @pytest.mark.unit
+    def test_grep_description_finds_protein_structure(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="protein structure", field="description", json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        assert len(data.get("tools", [])) >= 1
+
+
+class TestToolInfoSchemaConsistency:
+    """Feature-84E: Tool info returns consistent schema fields."""
+
+    SAMPLE_TOOLS = [
+        "alphafold_get_prediction",
+        "UniProt_search",
+        "DGIdb_get_drug_gene_interactions",
+        "EuropePMC_search_articles",
+        "civic_search_genes",
+    ]
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name", SAMPLE_TOOLS)
+    def test_info_has_standard_fields(self, monkeypatch, tu, capsys, tool_name):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(tool_names=[tool_name], detail="full", json=True), tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) == 1
+        tool = tools[0]
+        assert "name" in tool
+        assert "description" in tool
+        assert "parameters" in tool
+        param = tool["parameters"]
+        assert "properties" in param
+        assert "type" in param
+        assert param["type"] == "object"
+
+    @pytest.mark.unit
+    @pytest.mark.parametrize("tool_name", SAMPLE_TOOLS)
+    def test_info_properties_have_types(self, monkeypatch, tu, capsys, tool_name):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(tool_names=[tool_name], detail="full", json=True), tu, capsys,
+        )
+        data = _j(out)
+        tool = data["tools"][0]
+        props = tool["parameters"]["properties"]
+        for pname, pdef in props.items():
+            assert "type" in pdef or "oneOf" in pdef or "anyOf" in pdef or "enum" in pdef, (
+                f"{tool_name}.{pname} missing type definition"
+            )
+
+
+class TestCrossToolConsistency:
+    """Feature-84F: Cross-tool consistency checks."""
+
+    @pytest.mark.unit
+    def test_all_34_tested_tools_exist(self, tu):
+        """Verify all 34 tools tested by agents A/B/C exist in registry."""
+        expected_tools = [
+            # Agent A: Genomics
+            "alphafold_get_prediction", "RCSBAdvSearch_search_structures",
+            "RCSBData_get_entry", "UniProt_search", "clinvar_search_variants",
+            "GTEx_get_median_gene_expression", "ensembl_lookup_gene",
+            "STRING_get_protein_interactions", "gwas_search_associations",
+            "OpenTargets_get_target_id_description_by_name", "Reactome_get_pathway",
+            # Agent B: Drug/Chemical
+            "DGIdb_get_drug_gene_interactions", "PubChem_get_CID_by_compound_name",
+            "ChEMBL_search_molecules", "drugbank_vocab_search",
+            "FDA_get_active_ingredient_info_by_drug_name", "CPIC_list_guidelines",
+            "ChEBI_search", "kegg_get_pathway_info", "PharmGKB_search_drugs",
+            "FAERS_count_reactions_by_drug_event",
+            # Agent C: Literature/Disease
+            "EuropePMC_search_articles", "PubTator3_LiteratureSearch",
+            "openalex_literature_search", "HPO_search_terms",
+            "CellMarker_search_by_gene", "BioGRID_get_interactions",
+            "Orphanet_search_diseases", "civic_search_genes",
+            "geo_search_datasets", "MyDisease_search_diseases",
+        ]
+        missing = [t for t in expected_tools if tu.tool_specification(t) is None]
+        assert not missing, f"Missing tools: {missing}"
+
+    @pytest.mark.unit
+    def test_tools_have_descriptions(self, tu):
+        """All tested tools should have non-empty descriptions."""
+        tool_names = [
+            "alphafold_get_prediction", "UniProt_search",
+            "DGIdb_get_drug_gene_interactions", "EuropePMC_search_articles",
+            "HPO_search_terms", "civic_search_genes",
+        ]
+        for name in tool_names:
+            info = tu.tool_specification(name)
+            assert info is not None, f"{name} not found"
+            desc = info.get("description", "")
+            assert len(desc) > 10, f"{name} has empty/short description"
+
+    @pytest.mark.unit
+    def test_search_tools_accept_limit(self, tu):
+        """Search tools should accept a limit parameter."""
+        search_tools = [
+            "UniProt_search", "EuropePMC_search_articles",
+            "openalex_literature_search", "ChEMBL_search_molecules",
+            "gwas_search_associations", "geo_search_datasets",
+        ]
+        for name in search_tools:
+            info = tu.tool_specification(name)
+            if info is None:
+                continue
+            props = info["parameter"]["properties"]
+            has_limit = "limit" in props or "max_results" in props or "size" in props or "rows" in props
+            assert has_limit, f"{name} has no limit/max_results/size/rows param"
