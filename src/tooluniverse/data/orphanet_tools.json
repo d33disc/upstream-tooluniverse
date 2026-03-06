@@ -501,7 +501,7 @@
   },
   {
     "name": "Orphanet_get_gene_diseases",
-    "description": "Get rare diseases associated with a gene from Orphanet. Search by gene name keyword (e.g., 'fibrillin', 'huntingtin', 'dystrophin') to find all rare diseases linked to genes matching that name. Returns disease ORPHA codes, gene symbols, association types, and genomic locus information.",
+    "description": "Get rare diseases associated with a gene from Orphanet. Accepts gene symbols (e.g., 'FBN1', 'BRCA1', 'HTT') or gene name keywords (e.g., 'fibrillin', 'huntingtin', 'dystrophin'). Gene symbols are auto-resolved to full names. Returns disease ORPHA codes, gene symbols, association types, and genomic locus information.",
     "type": "OrphanetTool",
     "parameter": {
       "type": "object",
@@ -513,7 +513,7 @@
         },
         "gene_name": {
           "type": "string",
-          "description": "Gene name keyword to search (e.g., 'fibrillin', 'huntingtin', 'collagen', 'dystrophin')"
+          "description": "Gene symbol (e.g., 'FBN1', 'BRCA1', 'HTT') or gene name keyword (e.g., 'fibrillin', 'huntingtin'). Symbols are auto-resolved."
         }
       },
       "required": ["operation", "gene_name"]
@@ -561,6 +561,10 @@
       }
     },
     "test_examples": [
+      {
+        "operation": "get_gene_diseases",
+        "gene_name": "FBN1"
+      },
       {
         "operation": "get_gene_diseases",
         "gene_name": "fibrillin"

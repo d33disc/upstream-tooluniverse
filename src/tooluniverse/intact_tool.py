@@ -95,10 +95,7 @@ class IntActRESTTool(BaseTool):
 
         # For network
         elif tool_name == "intact_get_interaction_network":
-            if "format" in args:
-                params["format"] = args["format"]
-            else:
-                params["format"] = "json"
+            params["format"] = args.get("format", "json")
             if "depth" in args:
                 params["depth"] = args["depth"]
 
@@ -121,6 +118,7 @@ class IntActRESTTool(BaseTool):
             "intact_search_interactions",
             "intact_get_interactor",
             "intact_get_interactions_by_organism",
+            "intact_get_interaction_network",
         ]:
             return self._use_ebi_search(arguments, tool_name)
 
@@ -179,39 +177,25 @@ class IntActRESTTool(BaseTool):
             ebi_search_url = "https://www.ebi.ac.uk/ebisearch/ws/rest/intact"
             params = {"format": "json"}
 
-            if tool_name == "intact_get_interactions":
-                identifier = arguments.get("identifier", "")
-                if identifier:
-                    params["query"] = identifier
-                    params["size"] = arguments.get("size", 25)
-            elif tool_name == "intact_search_interactions":
-                query = arguments.get("query", "*")
-                params["query"] = query
+            # Map tool names to their query parameter key and default size
+            tool_query_config = {
+                "intact_get_interactions": ("identifier", 25),
+                "intact_get_interactor": ("identifier", 10),
+                "intact_get_interactions_by_publication": ("pubmed_id", 25),
+                "intact_get_interactions_by_experiment": ("experiment_id", 25),
+                "intact_get_interaction_network": ("identifier", 50),
+                "intact_get_interactions_by_organism": ("taxid", 25),
+            }
+
+            if tool_name == "intact_search_interactions":
+                params["query"] = arguments.get("query", "*")
                 params["size"] = arguments.get("max", 25)
-            elif tool_name == "intact_get_interactor":
-                identifier = arguments.get("identifier", "")
-                if identifier:
-                    # Search for the interactor by ID
-                    params["query"] = identifier
-                    params["size"] = 10
-            elif tool_name == "intact_get_interactions_by_publication":
-                pubmed_id = arguments.get("pubmed_id", "")
-                if pubmed_id:
-                    # Search for interactions by PubMed ID
-                    params["query"] = pubmed_id
-                    params["size"] = arguments.get("size", 25)
-            elif tool_name == "intact_get_interactions_by_experiment":
-                experiment_id = arguments.get("experiment_id", "")
-                if experiment_id:
-                    # Search for interactions by experiment ID
-                    params["query"] = experiment_id
-                    params["size"] = arguments.get("size", 25)
-            elif tool_name == "intact_get_interactions_by_organism":
-                taxid = arguments.get("taxid", "")
-                if taxid:
-                    # Search for interactions by organism taxonomy ID
-                    params["query"] = taxid
-                    params["size"] = arguments.get("size", 25)
+            elif tool_name in tool_query_config:
+                query_key, default_size = tool_query_config[tool_name]
+                query_value = arguments.get(query_key, "")
+                if query_value:
+                    params["query"] = query_value
+                    params["size"] = arguments.get("size", default_size)
 
             response = self.session.get(
                 ebi_search_url, params=params, timeout=self.timeout
@@ -223,11 +207,9 @@ class IntActRESTTool(BaseTool):
             entries = data.get("entries", [])
 
             # Extract interaction IDs for easy access
-            interaction_ids = []
-            for entry in entries:
-                interaction_id = entry.get("id", "")
-                if interaction_id:
-                    interaction_ids.append(interaction_id)
+            interaction_ids = [
+                entry.get("id", "") for entry in entries if entry.get("id")
+            ]
 
             # For interactor lookup, try to get more details if possible
             if tool_name == "intact_get_interactor" and entries:
