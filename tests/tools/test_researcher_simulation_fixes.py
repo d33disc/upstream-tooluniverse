@@ -286,5 +286,64 @@ class TestChEMBLMechanismsTestExample(unittest.TestCase):
             )
 
 
+# ---------------------------------------------------------------------------
+# ClinVar condition search uses [dis] field tag
+# ---------------------------------------------------------------------------
+class TestClinVarConditionFieldTag(unittest.TestCase):
+    """ClinVar condition searches must use [dis] field tag for eSearch."""
+
+    def _make_tool(self):
+        from tooluniverse.clinvar_tool import ClinVarSearchVariants
+
+        config = {
+            "name": "ClinVarSearchVariants",
+            "type": "ClinVarSearchVariants",
+            "fields": {},
+        }
+        return ClinVarSearchVariants(config)
+
+    @patch("tooluniverse.clinvar_tool.ClinVarRESTTool._make_request")
+    def test_condition_uses_dis_field_tag(self, mock_request):
+        """Condition searches should append [dis] field tag."""
+        mock_request.return_value = {
+            "status": "success",
+            "data": {
+                "esearchresult": {
+                    "count": "5",
+                    "idlist": ["1", "2", "3", "4", "5"],
+                    "querytranslation": "",
+                }
+            },
+        }
+        tool = self._make_tool()
+        tool.run({"gene": "TP53", "condition": "Li-Fraumeni syndrome"})
+
+        call_args = mock_request.call_args
+        term = call_args[1]["params"]["term"] if "params" in (call_args[1] or {}) else call_args[0][1]["term"]
+        self.assertIn("[dis]", term)
+        self.assertIn("[gene]", term)
+
+    @patch("tooluniverse.clinvar_tool.ClinVarRESTTool._make_request")
+    def test_condition_only_uses_dis_field_tag(self, mock_request):
+        """Condition-only search should use [dis] field tag."""
+        mock_request.return_value = {
+            "status": "success",
+            "data": {
+                "esearchresult": {
+                    "count": "10",
+                    "idlist": [],
+                    "querytranslation": "",
+                }
+            },
+        }
+        tool = self._make_tool()
+        tool.run({"condition": "Breast cancer"})
+
+        call_args = mock_request.call_args
+        params = call_args[0][1] if len(call_args[0]) > 1 else call_args[1].get("params", {})
+        self.assertIn("[dis]", params["term"])
+        self.assertIn('"Breast cancer"', params["term"])
+
+
 if __name__ == "__main__":
     unittest.main()
