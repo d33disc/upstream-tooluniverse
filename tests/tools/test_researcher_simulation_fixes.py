@@ -2303,5 +2303,171 @@ class TestGWASTraitResolution(unittest.TestCase):
         self.assertIn("resolved_efo_id", result)
 
 
+# ---------------------------------------------------------------------------
+# GTEx eQTL dataset default (Feature-69A-001)
+# ---------------------------------------------------------------------------
+class TestGTExEQTLDatasetDefault(unittest.TestCase):
+    """GTEx_query_eqtl should default to gtex_v8, not gtex_v10 (which returns empty)."""
+
+    def test_eqtl_defaults_to_v8(self):
+        """Verify the eQTL tool uses gtex_v8 as default dataset."""
+        from tooluniverse.gtex_tool import GTExEQTLTool
+
+        config = {
+            "name": "GTEx_query_eqtl",
+            "description": "Query eQTL data",
+            "fields": {},
+            "parameter": {"required": []},
+        }
+        tool = GTExEQTLTool(config)
+
+        with patch("tooluniverse.gtex_tool._resolve_gene_id", return_value="ENSG00000000001.1"):
+            with patch("tooluniverse.gtex_tool._http_get") as mock_get:
+                mock_get.return_value = {"data": [], "paging_info": {}}
+                tool.run({"gene_symbol": "TP53"})
+                called_url = mock_get.call_args[0][0]
+                self.assertIn("gtex_v8", called_url)
+                self.assertNotIn("gtex_v10", called_url)
+
+    def test_eqtl_respects_explicit_dataset(self):
+        """If user explicitly passes dataset_id, it should be used."""
+        from tooluniverse.gtex_tool import GTExEQTLTool
+
+        config = {
+            "name": "GTEx_query_eqtl",
+            "description": "Query eQTL data",
+            "fields": {},
+            "parameter": {"required": []},
+        }
+        tool = GTExEQTLTool(config)
+
+        with patch("tooluniverse.gtex_tool._resolve_gene_id", return_value="ENSG00000000001.1"):
+            with patch("tooluniverse.gtex_tool._http_get") as mock_get:
+                mock_get.return_value = {"data": [], "paging_info": {}}
+                tool.run({"gene_symbol": "TP53", "dataset_id": "gtex_v10"})
+                called_url = mock_get.call_args[0][0]
+                self.assertIn("gtex_v10", called_url)
+
+
+# ---------------------------------------------------------------------------
+# FDA drug label generic name salt form fallback (Feature-79D)
+# ---------------------------------------------------------------------------
+class TestFDALabelGenericNameFallback(unittest.TestCase):
+    """FDA_get_drug_label should find drugs even when generic name includes salt form."""
+
+    def _make_tool(self, query_type="get"):
+        from tooluniverse.fda_label_tool import FDALabelTool
+
+        config = {
+            "name": "FDA_get_drug_label",
+            "description": "Get FDA label",
+            "fields": {"query_type": query_type},
+            "parameter": {"required": ["drug_name"]},
+        }
+        return FDALabelTool(config)
+
+    @patch("tooluniverse.fda_label_tool.requests.get")
+    def test_get_label_falls_back_to_unquoted(self, mock_get):
+        """When exact quoted search fails, unquoted search should match salt forms."""
+        tool = self._make_tool("get")
+
+        not_found = MagicMock()
+        not_found.status_code = 404
+
+        found = MagicMock()
+        found.status_code = 200
+        found.raise_for_status.return_value = None
+        found.json.return_value = {
+            "results": [
+                {
+                    "openfda": {
+                        "brand_name": ["XELJANZ"],
+                        "generic_name": ["TOFACITINIB CITRATE"],
+                        "manufacturer_name": ["Pfizer"],
+                        "route": ["ORAL"],
+                        "pharm_class_epc": [],
+                        "rxcui": [],
+                    },
+                    "indications_and_usage": ["Rheumatoid arthritis"],
+                }
+            ]
+        }
+
+        # Exact quoted generic fails (404), unquoted generic succeeds
+        mock_get.side_effect = [not_found, found]
+
+        result = tool.run({"drug_name": "tofacitinib"})
+        self.assertNotIn("error", result)
+        self.assertEqual(result["generic_name"], "TOFACITINIB CITRATE")
+
+        # Verify: first call was exact quoted, second was unquoted
+        calls = mock_get.call_args_list
+        self.assertIn('"tofacitinib"', calls[0][1]["params"]["search"])
+        self.assertNotIn('"', calls[1][1]["params"]["search"].split(":")[-1])
+
+    @patch("tooluniverse.fda_label_tool.requests.get")
+    def test_search_falls_back_to_unquoted(self, mock_get):
+        """Search method should also fall back to unquoted for salt forms."""
+        tool = self._make_tool("search")
+
+        not_found = MagicMock()
+        not_found.status_code = 404
+
+        found = MagicMock()
+        found.status_code = 200
+        found.raise_for_status.return_value = None
+        found.json.return_value = {
+            "results": [
+                {
+                    "openfda": {
+                        "brand_name": ["XELJANZ"],
+                        "generic_name": ["TOFACITINIB CITRATE"],
+                        "manufacturer_name": [],
+                        "route": [],
+                        "pharm_class_epc": [],
+                        "rxcui": [],
+                    }
+                }
+            ]
+        }
+
+        # All exact quoted searches fail, first unquoted succeeds
+        mock_get.side_effect = [not_found, found]
+
+        result = tool.run({"drug_name": "tofacitinib"})
+        self.assertIsInstance(result, list)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["generic_name"], "TOFACITINIB CITRATE")
+
+    @patch("tooluniverse.fda_label_tool.requests.get")
+    def test_exact_match_preferred(self, mock_get):
+        """When exact quoted search succeeds, it should not try unquoted."""
+        tool = self._make_tool("get")
+
+        found = MagicMock()
+        found.status_code = 200
+        found.raise_for_status.return_value = None
+        found.json.return_value = {
+            "results": [
+                {
+                    "openfda": {
+                        "brand_name": ["XELJANZ"],
+                        "generic_name": ["TOFACITINIB"],
+                        "manufacturer_name": [],
+                        "route": [],
+                        "pharm_class_epc": [],
+                        "rxcui": [],
+                    }
+                }
+            ]
+        }
+
+        mock_get.return_value = found
+        result = tool.run({"drug_name": "tofacitinib"})
+        self.assertNotIn("error", result)
+        # Only one call should be made (exact match succeeded)
+        self.assertEqual(mock_get.call_count, 1)
+
+
 if __name__ == "__main__":
     unittest.main()

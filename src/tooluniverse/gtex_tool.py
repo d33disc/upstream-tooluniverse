@@ -20,6 +20,17 @@ def _http_get(
             return {"raw": data.decode("utf-8", errors="ignore")}
 
 
+def _extract_data_list(api_response: Any) -> list:
+    """Extract the data list from a GTEx API response.
+
+    API returns {"data": [...], "paging_info": {...}}.
+    Falls back to the response itself if it is a list, or empty list otherwise.
+    """
+    if isinstance(api_response, dict) and "data" in api_response:
+        return api_response.get("data", [])
+    return api_response if isinstance(api_response, list) else []
+
+
 def _resolve_gene_id(gene_input: str, base_url: str, timeout: int) -> str:
     """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
 
@@ -95,13 +106,7 @@ class GTExExpressionTool:
             api_response = _http_get(
                 url, headers={"Accept": "application/json"}, timeout=timeout
             )
-            # Wrap API response to match schema: data.geneExpression should be array
-            # API returns {"data": [...], "paging_info": {...}}
-            # Schema expects {"data": {"geneExpression": [...]}}
-            if isinstance(api_response, dict) and "data" in api_response:
-                expression_data = api_response.get("data", [])
-            else:
-                expression_data = api_response if isinstance(api_response, list) else []
+            expression_data = _extract_data_list(api_response)
 
             result = {
                 "source": "GTEx",
@@ -188,7 +193,7 @@ class GTExEQTLTool:
 
         query: Dict[str, Any] = {
             "gencodeId": gencode_id,
-            "datasetId": arguments.get("dataset_id", "gtex_v10"),
+            "datasetId": arguments.get("dataset_id", "gtex_v8"),
         }
         if "page" in arguments:
             query["page"] = int(arguments["page"])
@@ -200,24 +205,13 @@ class GTExEQTLTool:
             api_response = _http_get(
                 url, headers={"Accept": "application/json"}, timeout=timeout
             )
-            # Wrap API response to match schema: data.singleTissueEqtl should be array
-            # API returns {"data": [...], "paging_info": {...}}
-            # Schema expects {"data": {"singleTissueEqtl": [...]}}
-            if isinstance(api_response, dict) and "data" in api_response:
-                wrapped_data = {"singleTissueEqtl": api_response.get("data", [])}
-            else:
-                # Fallback if response format is unexpected
-                wrapped_data = {
-                    "singleTissueEqtl": (
-                        api_response if isinstance(api_response, list) else []
-                    )
-                }
+            eqtl_data = _extract_data_list(api_response)
 
             return {
                 "source": "GTEx",
                 "endpoint": "association/singleTissueEqtl",
                 "query": query,
-                "data": wrapped_data,
+                "data": {"singleTissueEqtl": eqtl_data},
                 "success": True,
             }
         except Exception as e:
