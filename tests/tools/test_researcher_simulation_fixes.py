@@ -784,6 +784,78 @@ class TestResponseTruncation(unittest.TestCase):
         self.assertIsNotNone(parsed)
 
 
+# ---------------------------------------------------------------------------
+# ClinicalTrials search returns null fields
+# ---------------------------------------------------------------------------
+class TestClinicalTrialsSearchFields(unittest.TestCase):
+    """ClinicalTrials_search_studies should return populated metadata fields."""
+
+    def _make_tool(self):
+        from tooluniverse.clinicaltrials_tool import CTGovAPITool
+
+        config = {
+            "name": "ClinicalTrials_search_studies",
+            "type": "CTGovAPITool",
+        }
+        return CTGovAPITool(config)
+
+    @patch("tooluniverse.clinicaltrials_tool.requests.get")
+    def test_search_does_not_use_fields_param(self, mock_get):
+        """Search should NOT pass 'fields' param (it breaks nested response format)."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.json.return_value = {
+            "totalCount": 1,
+            "studies": [
+                {
+                    "protocolSection": {
+                        "identificationModule": {
+                            "nctId": "NCT00000001",
+                            "briefTitle": "Test Study",
+                        },
+                        "statusModule": {
+                            "overallStatus": "RECRUITING",
+                            "startDateStruct": {"date": "2025-01-01"},
+                            "completionDateStruct": {"date": "2026-12-31"},
+                        },
+                        "designModule": {
+                            "studyType": "INTERVENTIONAL",
+                            "phases": ["PHASE3"],
+                            "enrollmentInfo": {"count": 500},
+                        },
+                        "conditionsModule": {"conditions": ["NSCLC"]},
+                        "armsInterventionsModule": {
+                            "interventions": [
+                                {"name": "Pembrolizumab", "type": "DRUG"}
+                            ]
+                        },
+                        "sponsorCollaboratorsModule": {
+                            "leadSponsor": {"name": "NCI"}
+                        },
+                    }
+                }
+            ],
+        }
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"operation": "search", "query_cond": "NSCLC"})
+
+        # Verify 'fields' param was NOT sent
+        call_params = mock_get.call_args[1].get("params", {})
+        self.assertNotIn("fields", call_params)
+
+        # Verify nested data was extracted correctly
+        study = result["data"]["studies"][0]
+        self.assertEqual(study["nct_id"], "NCT00000001")
+        self.assertEqual(study["start_date"], "2025-01-01")
+        self.assertEqual(study["enrollment"], 500)
+        self.assertEqual(study["sponsor"], "NCI")
+        self.assertEqual(study["interventions"], ["Pembrolizumab"])
+
+
 class TestGTExWrapperDefaults(unittest.TestCase):
     """GTEx wrapper functions should default to gtex_v8."""
 
