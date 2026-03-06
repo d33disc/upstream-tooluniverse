@@ -282,7 +282,7 @@
   {
     "name": "GDC_get_mutation_frequency",
     "type": "GDCMutationFrequencyTool",
-    "description": "Get mutation frequency statistics for a gene across all TCGA cancers. Returns SSM case count, CNV gain/loss cases. Answers 'How often is this gene mutated?'",
+    "description": "Get mutation frequency statistics for a gene across all TCGA/GDC cancer projects. Returns total SSM occurrence count and per-project case counts via /ssm_occurrences faceting. Also returns gene metadata (biotype, cancer gene census status). Answers 'How often is this gene mutated across cancers?'",
     "parameter": {
       "type": "object",
       "properties": {

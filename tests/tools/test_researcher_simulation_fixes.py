@@ -1461,5 +1461,236 @@ class TestGTExExpressionSummaryNote(unittest.TestCase):
         self.assertIn("error", result)
 
 
+# ---------------------------------------------------------------------------
+# GDC mutation frequency now queries /ssm_occurrences
+# ---------------------------------------------------------------------------
+class TestGDCMutationFrequency(unittest.TestCase):
+    """GDC_get_mutation_frequency should return real SSM occurrence data."""
+
+    def _make_tool(self):
+        from tooluniverse.gdc_tool import GDCMutationFrequencyTool
+
+        config = {
+            "name": "GDC_get_mutation_frequency",
+            "type": "GDCMutationFrequencyTool",
+            "settings": {"base_url": "https://api.gdc.cancer.gov", "timeout": 30},
+        }
+        return GDCMutationFrequencyTool(config)
+
+    @patch("tooluniverse.gdc_tool._http_get")
+    def test_returns_ssm_occurrence_counts(self, mock_http):
+        """Should return total_ssm_occurrences and per-project counts."""
+        tool = self._make_tool()
+
+        # First call: /genes for gene info
+        gene_resp = {
+            "data": {
+                "hits": [
+                    {
+                        "symbol": "TP53",
+                        "name": "tumor protein p53",
+                        "is_cancer_gene_census": True,
+                    }
+                ]
+            }
+        }
+        # Second call: /ssm_occurrences with facets
+        ssm_resp = {
+            "data": {
+                "pagination": {"total": 15000},
+                "aggregations": {
+                    "cases.project.project_id": {
+                        "buckets": [
+                            {"key": "TCGA-OV", "doc_count": 1200},
+                            {"key": "TCGA-BRCA", "doc_count": 950},
+                            {"key": "TCGA-LUAD", "doc_count": 800},
+                        ]
+                    }
+                },
+            }
+        }
+        mock_http.side_effect = [gene_resp, ssm_resp]
+
+        result = tool.run({"gene_symbol": "TP53"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"]["total_ssm_occurrences"], 15000)
+        self.assertEqual(len(result["data"]["project_mutation_counts"]), 3)
+        self.assertEqual(
+            result["data"]["project_mutation_counts"][0]["project_id"], "TCGA-OV"
+        )
+        self.assertTrue(result["data"]["is_cancer_gene_census"])
+
+    def test_missing_gene_symbol_returns_error(self):
+        """Should return error when gene_symbol not provided."""
+        tool = self._make_tool()
+        result = tool.run({})
+        self.assertEqual(result["status"], "error")
+        self.assertIn("gene_symbol", result["error"])
+
+    @patch("tooluniverse.gdc_tool._http_get")
+    def test_gene_info_failure_still_returns_ssm_data(self, mock_http):
+        """Should still return SSM data even if gene info call fails."""
+        tool = self._make_tool()
+
+        # Gene info call fails
+        def side_effect(url, **kwargs):
+            if "/genes?" in url:
+                raise Exception("Gene endpoint down")
+            return {
+                "data": {
+                    "pagination": {"total": 500},
+                    "aggregations": {
+                        "cases.project.project_id": {
+                            "buckets": [{"key": "TCGA-GBM", "doc_count": 300}]
+                        }
+                    },
+                }
+            }
+
+        mock_http.side_effect = side_effect
+
+        result = tool.run({"gene_symbol": "KRAS"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"]["total_ssm_occurrences"], 500)
+
+
+# ---------------------------------------------------------------------------
+# COSMIC dedup and placeholder filtering
+# ---------------------------------------------------------------------------
+class TestCOSMICDedup(unittest.TestCase):
+    """COSMIC search should skip placeholder entries and deduplicate properly."""
+
+    def _make_tool(self):
+        from tooluniverse.cosmic_tool import COSMICTool
+
+        config = {
+            "name": "COSMIC_search_mutations",
+            "type": "COSMICTool",
+            "parameter": {
+                "properties": {
+                    "operation": {"const": "search"},
+                },
+            },
+        }
+        return COSMICTool(config)
+
+    @patch("tooluniverse.cosmic_tool.requests.get")
+    def test_placeholder_entries_skipped(self, mock_get):
+        """Entries with c.? and p.? should be skipped."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.json.return_value = [
+            5,  # total_count
+            ["COSM1", "COSM2", "COSM3", "COSM4", "COSM5"],  # codes
+            {
+                "GeneName": ["KRAS", "KRAS", "KRAS", "KRAS", "KRAS"],
+                "MutationCDS": ["c.34G>T", "c.?", "c.35G>A", "c.?", "c.34G>C"],
+                "MutationAA": ["p.G12C", "p.?", "p.G12D", "p.?", "p.G12R"],
+                "PrimarySite": ["lung", "lung", "lung", "lung", "pancreas"],
+                "PrimaryHistology": [
+                    "carcinoma", "carcinoma", "carcinoma", "carcinoma", "carcinoma"
+                ],
+            },
+            [],  # display_strings
+        ]
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"terms": "KRAS"})
+
+        mutations = result["data"]["results"]
+        # Entries 2 and 4 (c.?/p.?) should be skipped
+        self.assertEqual(len(mutations), 3)
+        aa_changes = [m["mutation_aa"] for m in mutations]
+        self.assertNotIn("p.?", aa_changes)
+        self.assertIn("p.G12C", aa_changes)
+        self.assertIn("p.G12D", aa_changes)
+        self.assertIn("p.G12R", aa_changes)
+
+    @patch("tooluniverse.cosmic_tool.requests.get")
+    def test_dedup_uses_full_key(self, mock_get):
+        """Dedup key should include gene, CDS, and AA (not just mutation_id+AA)."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        # Same mutation_id and AA but different CDS → keep both
+        mock_resp.json.return_value = [
+            3,
+            ["COSM1", "COSM1", "COSM1"],
+            {
+                "GeneName": ["BRAF", "BRAF", "BRAF"],
+                "MutationCDS": ["c.1799T>A", "c.1799T>A", "c.1798_1799GT>AA"],
+                "MutationAA": ["p.V600E", "p.V600E", "p.V600E"],
+                "PrimarySite": ["skin", "thyroid", "skin"],
+                "PrimaryHistology": ["melanoma", "carcinoma", "melanoma"],
+            },
+            [],
+        ]
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"terms": "BRAF V600E"})
+
+        mutations = result["data"]["results"]
+        # First two are exact same key (COSM1, BRAF, c.1799T>A, p.V600E) → deduplicated
+        # Third has different CDS → kept
+        self.assertEqual(len(mutations), 2)
+        cds_changes = [m["mutation_cds"] for m in mutations]
+        self.assertIn("c.1799T>A", cds_changes)
+        self.assertIn("c.1798_1799GT>AA", cds_changes)
+
+
+# ---------------------------------------------------------------------------
+# OncoKB demo mode note
+# ---------------------------------------------------------------------------
+class TestOncoKBDemoNote(unittest.TestCase):
+    """OncoKB should clearly indicate demo mode limitations."""
+
+    def _make_tool(self):
+        from tooluniverse.oncokb_tool import OncoKBTool
+
+        config = {
+            "name": "OncoKB_get_cancer_genes",
+            "type": "OncoKBTool",
+            "parameter": {
+                "properties": {"operation": {"const": "get_cancer_genes"}},
+            },
+        }
+        return OncoKBTool(config)
+
+    @patch("tooluniverse.oncokb_tool.requests.get")
+    @patch.dict("os.environ", {}, clear=True)
+    def test_demo_mode_includes_note(self, mock_get):
+        """Demo mode response should include a note about limited results."""
+        tool = self._make_tool()
+        # Force demo mode
+        tool.api_token = ""
+        tool.use_demo = True
+        tool.base_url = "https://demo.oncokb.org/api/v1"
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.json.return_value = [
+            {"hugoSymbol": "BRAF", "oncogene": True, "tsg": False},
+            {"hugoSymbol": "TP53", "oncogene": False, "tsg": True},
+            {"hugoSymbol": "ROS1", "oncogene": True, "tsg": False},
+        ]
+        mock_get.return_value = mock_resp
+
+        result = tool.run({})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"]["cancer_genes_count"], 3)
+        self.assertIn("note", result["metadata"])
+        self.assertIn("Demo mode", result["metadata"]["note"])
+        self.assertIn("ONCOKB_API_TOKEN", result["metadata"]["note"])
+
+
 if __name__ == "__main__":
     unittest.main()
