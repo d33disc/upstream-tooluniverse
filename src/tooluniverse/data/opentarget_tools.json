@@ -176,7 +176,7 @@
   },
   {
     "name": "OpenTargets_target_disease_evidence",
-    "description": "Explore evidence that supports a specific target-disease association. Input is disease efoId and target ensemblID.",
+    "description": "Explore IntOGen somatic driver evidence for a target-disease association (cancer mutation data only). For broader evidence across all data sources (genetics, literature, pathways, etc.), use OpenTargets_get_evidence_by_datasource instead. Input is disease efoId and target ensemblID.",
     "label": [
       "Target",
       "Disease",

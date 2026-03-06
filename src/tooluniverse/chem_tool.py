@@ -172,6 +172,11 @@ class ChEMBLRESTTool(BaseTool):
         if assay_id is not None and not tool_name_local.startswith("ChEMBL_get_assay"):
             params["assay_chembl_id__exact"] = assay_id
 
+        # Feature-79A: mechanism_of_action__contains → __icontains for case-insensitive search
+        moa_filter = args.get("mechanism_of_action__contains")
+        if moa_filter is not None:
+            params["mechanism_of_action__icontains"] = moa_filter
+
         # Add any filter parameters (ChEMBL uses field__filter syntax)
         # e.g., molecule_chembl_id__exact, pref_name__icontains
         for key, value in args.items():
@@ -187,6 +192,7 @@ class ChEMBLRESTTool(BaseTool):
                     "q",  # handled above: mapped to pref_name__icontains
                     "query",  # handled above: alias for q
                     "pref_name__contains",  # handled above: alias for pref_name__icontains
+                    "mechanism_of_action__contains",  # handled below: mapped to __icontains
                     "max_results",  # handled above: alias for limit
                     "chembl_id",
                     "target_chembl_id",  # handled above: mapped to target_chembl_id__exact

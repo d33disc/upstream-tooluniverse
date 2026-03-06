@@ -73,12 +73,13 @@ class STRINGExtTool(BaseTool):
             "identifiers": identifiers,
             "species": species,
         }
-        if category:
-            params["category"] = category
-
         response = requests.get(url, params=params, timeout=self.timeout)
         response.raise_for_status()
         data = response.json()
+
+        # Feature-79B: STRING API ignores category param server-side; filter client-side
+        if category:
+            data = [ann for ann in data if ann.get("category") == category]
 
         # Organize by category
         by_category = {}

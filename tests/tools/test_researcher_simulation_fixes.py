@@ -2031,5 +2031,169 @@ class TestChEMBLMechanismsTargetFilter(unittest.TestCase):
         self.assertIn("not supported", result["error"])
 
 
+# ---------------------------------------------------------------------------
+# ChEMBL mechanism_of_action__contains → __icontains mapping
+# ---------------------------------------------------------------------------
+class TestChEMBLMechanismContainsCaseSensitivity(unittest.TestCase):
+    """mechanism_of_action__contains should be mapped to __icontains for case-insensitive search."""
+
+    def _make_tool(self):
+        from tooluniverse.chem_tool import ChEMBLRESTTool
+
+        config = {
+            "name": "ChEMBL_search_mechanisms",
+            "parameter": {},
+            "fields": {"endpoint": "mechanism"},
+        }
+        return ChEMBLRESTTool(config)
+
+    def test_mechanism_of_action_contains_mapped_to_icontains(self):
+        tool = self._make_tool()
+        params = tool._build_params(
+            {"mechanism_of_action__contains": "Tyrosine kinase inhibitor", "limit": 5}
+        )
+        # Should use case-insensitive __icontains, not case-sensitive __contains
+        self.assertIn("mechanism_of_action__icontains", params)
+        self.assertEqual(params["mechanism_of_action__icontains"], "Tyrosine kinase inhibitor")
+        # The original __contains should NOT be passed through
+        self.assertNotIn("mechanism_of_action__contains", params)
+
+
+# ---------------------------------------------------------------------------
+# STRING enrichment/annotation category client-side filtering
+# ---------------------------------------------------------------------------
+class TestSTRINGEnrichmentCategoryFilter(unittest.TestCase):
+    """STRING /json/enrichment ignores category param server-side; verify client-side filter."""
+
+    def test_enrichment_category_filter_applied(self):
+        from tooluniverse.string_tool import STRINGRESTTool
+
+        config = {
+            "name": "STRING_functional_enrichment",
+            "parameter": {"required": ["protein_ids"]},
+            "fields": {"endpoint": "/json/enrichment", "return_format": "JSON"},
+        }
+        tool = STRINGRESTTool(config)
+
+        # Mock API response with mixed categories
+        mock_api_response = [
+            {"category": "KEGG", "term": "hsa04010", "description": "MAPK signaling"},
+            {"category": "Process", "term": "GO:0006915", "description": "apoptotic process"},
+            {"category": "KEGG", "term": "hsa04115", "description": "p53 signaling"},
+            {"category": "COMPARTMENTS", "term": "GOCC:0005634", "description": "nucleus"},
+        ]
+
+        with patch.object(tool, "_make_request", return_value=mock_api_response):
+            result = tool.run({"protein_ids": ["TP53", "BRCA1", "EGFR"], "category": "KEGG"})
+
+        self.assertEqual(result["status"], "success")
+        # Should only contain KEGG entries
+        data = result["data"]
+        self.assertTrue(isinstance(data, list))
+        self.assertEqual(len(data), 2)
+        for item in data:
+            self.assertEqual(item["category"], "KEGG")
+
+    def test_enrichment_no_category_returns_all(self):
+        from tooluniverse.string_tool import STRINGRESTTool
+
+        config = {
+            "name": "STRING_functional_enrichment",
+            "parameter": {"required": ["protein_ids"]},
+            "fields": {"endpoint": "/json/enrichment", "return_format": "JSON"},
+        }
+        tool = STRINGRESTTool(config)
+
+        mock_api_response = [
+            {"category": "KEGG", "term": "hsa04010"},
+            {"category": "Process", "term": "GO:0006915"},
+        ]
+
+        with patch.object(tool, "_make_request", return_value=mock_api_response):
+            result = tool.run({"protein_ids": ["TP53", "BRCA1", "EGFR"]})
+
+        self.assertEqual(result["status"], "success")
+        data = result["data"]
+        self.assertEqual(len(data), 2)
+
+
+class TestSTRINGExtAnnotationCategoryFilter(unittest.TestCase):
+    """STRING_get_functional_annotations should filter by category client-side."""
+
+    def test_annotation_category_filter_applied(self):
+        from tooluniverse.string_ext_tool import STRINGExtTool
+
+        config = {
+            "name": "STRING_get_functional_annotations",
+            "fields": {"endpoint": "functional_annotation"},
+        }
+        tool = STRINGExtTool(config)
+
+        mock_api_data = [
+            {"category": "Process", "term": "GO:0006915", "description": "apoptosis", "number_of_genes": 5, "inputGenes": ["TP53"]},
+            {"category": "KEGG", "term": "hsa04115", "description": "p53 signaling", "number_of_genes": 3, "inputGenes": ["TP53"]},
+            {"category": "Process", "term": "GO:0008283", "description": "cell proliferation", "number_of_genes": 4, "inputGenes": ["TP53"]},
+            {"category": "DISEASES", "term": "DOID:1612", "description": "breast cancer", "number_of_genes": 2, "inputGenes": ["TP53"]},
+        ]
+
+        mock_resp = MagicMock()
+        mock_resp.json.return_value = mock_api_data
+        mock_resp.raise_for_status.return_value = None
+
+        with patch("tooluniverse.string_ext_tool.requests.get", return_value=mock_resp):
+            result = tool.run({"identifiers": "TP53", "category": "Process"})
+
+        # Should only contain Process annotations
+        annotations = result["data"]["annotations"]
+        self.assertIn("Process", annotations)
+        self.assertNotIn("KEGG", annotations)
+        self.assertNotIn("DISEASES", annotations)
+        self.assertEqual(len(annotations["Process"]), 2)
+
+    def test_annotation_no_category_returns_all(self):
+        from tooluniverse.string_ext_tool import STRINGExtTool
+
+        config = {
+            "name": "STRING_get_functional_annotations",
+            "fields": {"endpoint": "functional_annotation"},
+        }
+        tool = STRINGExtTool(config)
+
+        mock_api_data = [
+            {"category": "Process", "term": "GO:0006915", "description": "apoptosis", "number_of_genes": 5, "inputGenes": ["TP53"]},
+            {"category": "KEGG", "term": "hsa04115", "description": "p53 signaling", "number_of_genes": 3, "inputGenes": ["TP53"]},
+        ]
+
+        mock_resp = MagicMock()
+        mock_resp.json.return_value = mock_api_data
+        mock_resp.raise_for_status.return_value = None
+
+        with patch("tooluniverse.string_ext_tool.requests.get", return_value=mock_resp):
+            result = tool.run({"identifiers": "TP53"})
+
+        annotations = result["data"]["annotations"]
+        self.assertIn("Process", annotations)
+        self.assertIn("KEGG", annotations)
+
+
+# ---------------------------------------------------------------------------
+# OpenTargets_target_disease_evidence description accuracy
+# ---------------------------------------------------------------------------
+class TestOpenTargetsEvidenceDescription(unittest.TestCase):
+    """OpenTargets_target_disease_evidence should clearly indicate IntOGen-only scope."""
+
+    def test_description_mentions_intogen(self):
+        with open("src/tooluniverse/data/opentarget_tools.json") as f:
+            tools = json.load(f)
+
+        evidence_tool = next(
+            (t for t in tools if t["name"] == "OpenTargets_target_disease_evidence"), None
+        )
+        self.assertIsNotNone(evidence_tool)
+        desc = evidence_tool["description"].lower()
+        self.assertIn("intogen", desc)
+        self.assertIn("openTargets_get_evidence_by_datasource".lower(), desc)
+
+
 if __name__ == "__main__":
     unittest.main()
