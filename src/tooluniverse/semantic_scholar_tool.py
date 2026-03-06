@@ -135,10 +135,15 @@ class SemanticScholarTool(BaseTool):
             params["sort"] = sort
         headers = {"x-api-key": self.default_api_key} if self.default_api_key else {}
         self._enforce_rate_limit(bool(self.default_api_key))
+        # Use /paper/search/bulk when sorting, as /paper/search silently
+        # ignores the sort parameter and always returns relevance-ranked results.
+        url = self.base_url
+        if sort:
+            url = url.replace("/paper/search", "/paper/search/bulk")
         response = request_with_retry(
             self.session,
             "GET",
-            self.base_url,
+            url,
             params=params,
             headers=headers,
             timeout=20,
