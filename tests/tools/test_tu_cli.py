@@ -1161,13 +1161,13 @@ class TestRun:
         assert "categories" in d
 
     @pytest.mark.unit
-    def test_run_key_value_int_coercion(self, monkeypatch, tu, capsys):
-        """key=value: numeric strings are coerced to int."""
+    def test_run_key_value_int_not_coerced(self, monkeypatch, tu, capsys):
+        """key=value: numeric strings stay as strings (Feature-27A-02)."""
         from tooluniverse.cli import _parse_run_args
 
         result = _parse_run_args(["limit=5", "offset=0"])
-        assert result == {"limit": 5, "offset": 0}
-        assert isinstance(result["limit"], int)
+        assert result == {"limit": "5", "offset": "0"}
+        assert isinstance(result["limit"], str)
 
     @pytest.mark.unit
     def test_run_key_value_bool_coercion(self):
@@ -2064,33 +2064,40 @@ class TestStatusToStderr:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-class TestInferTypeFloat:
-    """_infer_type float coercion path — not covered by existing TestRun tests."""
+class TestInferTypeNumericStrings:
+    """_infer_type does NOT coerce numeric strings (Feature-27A-02).
+
+    Many tool schemas declare IDs as 'type: string' and auto-coercion
+    caused schema validation failures. Numeric strings stay as strings.
+    """
 
     @pytest.mark.unit
-    def test_float_decimal(self):
+    def test_float_string_stays_string(self):
         from tooluniverse.cli import _infer_type
+
         result = _infer_type("3.14")
-        assert result == 3.14
-        assert isinstance(result, float)
+        assert result == "3.14"
+        assert isinstance(result, str)
 
     @pytest.mark.unit
-    def test_float_scientific_notation(self):
+    def test_scientific_notation_stays_string(self):
         from tooluniverse.cli import _infer_type
-        assert _infer_type("1e5") == 100000.0
+
+        assert _infer_type("1e5") == "1e5"
 
     @pytest.mark.unit
-    def test_float_negative(self):
+    def test_negative_stays_string(self):
         from tooluniverse.cli import _infer_type
-        assert _infer_type("-2.5") == -2.5
+
+        assert _infer_type("-2.5") == "-2.5"
 
     @pytest.mark.unit
-    def test_float_not_returned_for_int_string(self):
-        """Integers must stay int, not become float."""
+    def test_integer_string_stays_string(self):
         from tooluniverse.cli import _infer_type
+
         result = _infer_type("42")
-        assert result == 42
-        assert isinstance(result, int)
+        assert result == "42"
+        assert isinstance(result, str)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -4555,7 +4562,7 @@ class TestRound22Fixes:
             "has_more": False,
         }
         result = _render_grep(d)
-        assert "use --field description" in result
+        assert "--field description" in result
         assert "add --field description" not in result
 
     # R22A-08: regex \| escape warning
