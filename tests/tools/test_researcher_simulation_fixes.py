@@ -350,6 +350,52 @@ class TestClinVarConditionFieldTag(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+# GxA gene_id client-side filter uses exact match
+# ---------------------------------------------------------------------------
+class TestGxAGeneFilter(unittest.TestCase):
+    """GxA_get_experiment_expression should filter genes by exact ID match."""
+
+    def _make_tool(self):
+        from tooluniverse.gxa_tool import GxATool
+
+        config = {
+            "name": "GxA_get_experiment_expression",
+            "type": "GxATool",
+            "fields": {"endpoint": "get_experiment_expression"},
+        }
+        return GxATool(config)
+
+    @patch("tooluniverse.gxa_tool.requests.get")
+    def test_gene_id_filters_exactly(self, mock_get):
+        """gene_id filter should match only the exact gene, not substrings."""
+        tool = self._make_tool()
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.raise_for_status = MagicMock()
+        mock_resp.json.return_value = {
+            "experiment": {"description": "Test experiment"},
+            "columnHeaders": [
+                {"assayGroupId": "g1", "factorValue": "brain", "factorValueOntologyTermId": "", "assayGroupSummary": {"replicates": 3}},
+            ],
+            "profiles": {
+                "rows": [
+                    {"id": "ENSG00000130234", "name": "ACE2", "expressions": [{"value": 5.0}]},
+                    {"id": "ENSG00000999999", "name": "OTHER", "expressions": [{"value": 3.0}]},
+                    {"id": "ENSG00000130234X", "name": "NOTACE2", "expressions": [{"value": 1.0}]},
+                ]
+            },
+        }
+        mock_get.return_value = mock_resp
+
+        result = tool.run({"experiment_accession": "E-MTAB-2836", "gene_id": "ENSG00000130234"})
+
+        profiles = result["data"]["gene_profiles"]
+        self.assertEqual(len(profiles), 1)
+        self.assertEqual(profiles[0]["gene_id"], "ENSG00000130234")
+
+
+# ---------------------------------------------------------------------------
 # Enrichr output size limit
 # ---------------------------------------------------------------------------
 class TestEnrichrOutputLimit(unittest.TestCase):
