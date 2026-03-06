@@ -5927,3 +5927,461 @@ class TestInfoMultiTool:
         invalid = [t for t in tools if "error" in t]
         assert len(valid) == 1
         assert len(invalid) == 1
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Round 83 Part 2: Additional CLI coverage
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+class TestGroupByCategory:
+    """Feature-83I: --group-by-category mode."""
+
+    @pytest.mark.unit
+    def test_group_by_category_respects_limit(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="by_category", group_by_category=True, limit=2, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        by_cat = data.get("tools_by_category", {})
+        assert len(by_cat) > 0
+        for cat, tools in by_cat.items():
+            assert len(tools) <= 2, f"{cat} has {len(tools)} tools, expected <= 2"
+
+    @pytest.mark.unit
+    def test_group_by_category_with_filter(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(
+                mode="by_category", group_by_category=True,
+                categories=["pubmed"], limit=10, json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        by_cat = data.get("tools_by_category", {})
+        assert "pubmed" in by_cat
+
+    @pytest.mark.unit
+    def test_group_by_category_limit_zero_suppresses_names(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="by_category", group_by_category=True, limit=0),
+            tu, capsys,
+        )
+        # Human output should mention "limit=0, tool names suppressed"
+        assert "suppressed" in out or "limit=0" in out
+
+
+class TestCustomFields:
+    """Feature-83J: Custom mode with --fields."""
+
+    @pytest.mark.unit
+    def test_custom_name_category(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="custom", fields=["name", "category"], limit=5, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) == 5
+        for t in tools:
+            assert "name" in t
+            assert "category" in t
+
+    @pytest.mark.unit
+    def test_custom_unknown_field_flagged(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="custom", fields=["name", "bogus_field"], limit=3, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        assert "unknown_fields" in data
+        assert "bogus_field" in data["unknown_fields"]
+
+    @pytest.mark.unit
+    def test_custom_name_type_description(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="custom", fields=["name", "type", "description"], limit=3, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        tools = data.get("tools", [])
+        assert len(tools) > 0
+        for t in tools:
+            assert "name" in t
+            assert "description" in t
+
+
+class TestGrepAdvanced:
+    """Feature-83K: Advanced grep patterns."""
+
+    @pytest.mark.unit
+    def test_regex_alternation(self, monkeypatch, tu, capsys):
+        """Regex with | returns matches from both sides."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed|ArXiv", field="name", search_mode="regex", limit=20, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        has_pubmed = any("PubMed" in n for n in names)
+        has_arxiv = any("ArXiv" in n or "arxiv" in n.lower() for n in names)
+        assert has_pubmed and has_arxiv, f"Expected both PubMed and ArXiv, got: {names}"
+
+    @pytest.mark.unit
+    def test_grep_with_category_filter(self, monkeypatch, tu, capsys):
+        """Grep within a specific category returns only tools from that category."""
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(
+                pattern="search", field="description",
+                categories=["pubmed"], limit=10, json=True,
+            ),
+            tu, capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert len(names) > 0
+        # All results should be PubMed-related
+        assert all("PubMed" in n or "pubmed" in n.lower() for n in names), \
+            f"Expected only PubMed tools, got: {names}"
+
+    @pytest.mark.unit
+    def test_multiword_grep_joins_with_warning(self, monkeypatch, tu, capsys):
+        """Multi-word grep pattern is joined and a note is emitted."""
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(
+            pattern=["protein", "structure"],
+            field="description", limit=5, json=True,
+        )
+        m.cmd_grep(ns)
+        cap = capsys.readouterr()
+        # Note about multi-word should appear on stderr
+        assert "multi-word" in cap.err.lower() or "Note:" in cap.err
+
+
+class TestFindWithCategories:
+    """Feature-83L: Find with category filtering."""
+
+    @pytest.mark.unit
+    def test_find_within_category(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="search papers", categories=["semantic_scholar"], limit=5, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert any("SemanticScholar" in n for n in names)
+
+    @pytest.mark.unit
+    def test_find_within_gtex(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="gene expression", categories=["gtex"], limit=5, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        names = [t["name"] for t in data.get("tools", [])]
+        assert len(names) > 0
+
+
+class TestDetailLevelComparison:
+    """Feature-83M: Brief vs full detail levels return different amounts of data."""
+
+    @pytest.mark.unit
+    def test_brief_has_fewer_keys_than_full(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out_brief, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(tool_names=["PubMed_search_articles"], detail="brief", json=True),
+            tu, capsys,
+        )
+        out_full, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(tool_names=["PubMed_search_articles"], detail="full", json=True),
+            tu, capsys,
+        )
+        d_brief = _j(out_brief)
+        d_full = _j(out_full)
+        brief_keys = set(d_brief["tools"][0].keys())
+        full_keys = set(d_full["tools"][0].keys())
+        assert len(full_keys) > len(brief_keys)
+        # Full should have parameters and test_examples
+        assert "parameters" in full_keys or "parameter" in full_keys
+
+    @pytest.mark.unit
+    def test_full_has_test_examples(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_info,
+            _args(tool_names=["SemanticScholar_search_papers"], detail="full", json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        tool = data["tools"][0]
+        assert "test_examples" in tool
+        assert isinstance(tool["test_examples"], list)
+        assert len(tool["test_examples"]) > 0
+
+
+class TestStatusCrossValidation:
+    """Feature-83N: Status totals match list totals."""
+
+    @pytest.mark.unit
+    def test_status_total_matches_list(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out_status, _ = _run(
+            monkeypatch, m.cmd_status, _args(json=True), tu, capsys,
+        )
+        out_list, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=1, json=True), tu, capsys,
+        )
+        d_status = _j(out_status)
+        d_list = _j(out_list)
+        assert d_status["total_tools"] == d_list["total_tools"]
+
+    @pytest.mark.unit
+    def test_status_categories_matches_list(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out_status, _ = _run(
+            monkeypatch, m.cmd_status, _args(json=True), tu, capsys,
+        )
+        out_list, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="categories", json=True), tu, capsys,
+        )
+        d_status = _j(out_status)
+        d_list = _j(out_list)
+        assert d_status["categories"] == len(d_list.get("categories", {}))
+
+    @pytest.mark.unit
+    def test_status_has_gated_tools_count(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_status, _args(json=True), tu, capsys,
+        )
+        data = _j(out)
+        assert "gated_tools_count" in data
+        assert isinstance(data["gated_tools_count"], int)
+
+    @pytest.mark.unit
+    def test_status_has_top_categories(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_status, _args(json=True), tu, capsys,
+        )
+        data = _j(out)
+        assert "top_categories" in data
+        assert isinstance(data["top_categories"], dict)
+        assert len(data["top_categories"]) <= 10
+
+
+class TestRunViaInternalTools:
+    """Feature-83O: tu run can call internal tools (list_tools, grep_tools)."""
+
+    @pytest.mark.unit
+    def test_run_list_tools(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(tool_name="list_tools", json=True)
+        ns.arguments = ["mode=names", "limit=3"]
+        m.cmd_run(ns)
+        out = capsys.readouterr().out
+        data = _j(out)
+        assert "tools" in data
+        assert len(data["tools"]) == 3
+
+    @pytest.mark.unit
+    def test_run_grep_tools(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        monkeypatch.setattr(m, "_get_tu", lambda: tu)
+        ns = _args(tool_name="grep_tools", json=True)
+        ns.arguments = ["pattern=PubMed", "limit=3"]
+        m.cmd_run(ns)
+        out = capsys.readouterr().out
+        data = _j(out)
+        assert "tools" in data
+        assert len(data["tools"]) == 3
+
+
+class TestSubprocessExitCodes:
+    """Feature-83P: Subprocess exit codes for success and error cases."""
+
+    @pytest.mark.unit
+    def test_list_success_exit_0(self):
+        rc, _, _ = _cli("list", "--mode", "names", "--limit", "3", "--json")
+        assert rc == 0
+
+    @pytest.mark.unit
+    def test_grep_match_exit_0(self):
+        rc, _, _ = _cli("grep", "PubMed", "--json")
+        assert rc == 0
+
+    @pytest.mark.unit
+    def test_grep_no_match_exit_0(self):
+        rc, _, _ = _cli("grep", "zzzzznonexistent", "--json")
+        assert rc == 0
+
+    @pytest.mark.unit
+    def test_find_exit_0(self):
+        rc, _, _ = _cli("find", "protein", "--json")
+        assert rc == 0
+
+    @pytest.mark.unit
+    def test_status_exit_0(self):
+        rc, _, _ = _cli("status", "--json")
+        assert rc == 0
+
+    @pytest.mark.unit
+    def test_info_missing_exit_1(self):
+        rc, _, _ = _cli("info", "NonExistentTool999", "--json")
+        assert rc == 1
+
+    @pytest.mark.unit
+    def test_run_missing_exit_1(self):
+        rc, _, _ = _cli("run", "FakeToolXYZ", "--json")
+        assert rc == 1
+
+    @pytest.mark.unit
+    def test_grep_empty_exit_1(self):
+        rc, _, _ = _cli("grep", "", "--json")
+        assert rc == 1
+
+    @pytest.mark.unit
+    def test_find_empty_exit_1(self):
+        rc, _, _ = _cli("find", "", "--json")
+        assert rc == 1
+
+    @pytest.mark.unit
+    def test_list_bad_category_exit_1(self):
+        rc, _, _ = _cli("list", "--categories", "zzz_fake", "--json")
+        assert rc == 1
+
+
+class TestSubprocessOutputSeparation:
+    """Feature-83Q: JSON on stdout, messages on stderr."""
+
+    @pytest.mark.unit
+    def test_json_mode_stdout_is_valid_json(self):
+        """--json mode: stdout is valid JSON, stderr has no JSON."""
+        for cmd in [
+            ("list", "--mode", "names", "--limit", "3", "--json"),
+            ("grep", "PubMed", "--limit", "3", "--json"),
+            ("find", "protein", "--limit", "3", "--json"),
+            ("status", "--json"),
+        ]:
+            rc, out, err = _cli(*cmd)
+            assert rc == 0, f"cmd {cmd} failed"
+            _j(out)  # valid JSON on stdout
+            # stderr should not contain JSON
+            for line in err.strip().split("\n"):
+                line = line.strip()
+                if line and (line.startswith("{") or line.startswith("[")):
+                    try:
+                        json.loads(line)
+                        raise AssertionError(f"JSON on stderr for {cmd}: {line[:100]}")
+                    except json.JSONDecodeError:
+                        pass  # not JSON, just a message starting with { or [
+
+
+class TestIdempotency:
+    """Feature-83R: Same command gives same results."""
+
+    @pytest.mark.unit
+    def test_grep_idempotent(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", limit=5, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_grep,
+            _args(pattern="PubMed", limit=5, json=True), tu, capsys,
+        )
+        assert _j(out1) == _j(out2)
+
+    @pytest.mark.unit
+    def test_list_idempotent(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=10, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="names", limit=10, json=True), tu, capsys,
+        )
+        assert _j(out1) == _j(out2)
+
+    @pytest.mark.unit
+    def test_find_idempotent(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out1, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="gene expression", limit=5, json=True), tu, capsys,
+        )
+        out2, _ = _run(
+            monkeypatch, m.cmd_find,
+            _args(query="gene expression", limit=5, json=True), tu, capsys,
+        )
+        assert _j(out1) == _j(out2)
+
+
+class TestByCategoryCompleteness:
+    """Feature-83S: by_category mode with large limit includes all tools."""
+
+    @pytest.mark.unit
+    def test_all_tools_in_by_category(self, monkeypatch, tu, capsys):
+        import tooluniverse.cli as m
+
+        out, _ = _run(
+            monkeypatch, m.cmd_list,
+            _args(mode="by_category", group_by_category=True, limit=999, json=True),
+            tu, capsys,
+        )
+        data = _j(out)
+        by_cat = data.get("tools_by_category", {})
+        total_in_cats = sum(len(tools) for tools in by_cat.values())
+        assert total_in_cats == data.get("total_tools", 0)
