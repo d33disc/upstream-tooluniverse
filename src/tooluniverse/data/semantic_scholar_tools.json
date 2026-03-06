@@ -37,101 +37,133 @@
       ]
     },
     "return_schema": {
-      "type": "array",
-      "description": "List of papers from Semantic Scholar matching the search query",
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "Title of the paper"
-          },
-          "abstract": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Abstract of the paper"
-          },
-          "journal": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Journal or venue name"
-          },
-          "year": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "description": "Publication year"
-          },
-          "url": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "URL to the paper on Semantic Scholar"
-          },
-          "paper_id": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Semantic Scholar paperId"
-          },
-          "doi": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "DOI (if available in externalIds)"
-          },
-          "doi_url": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "DOI resolver URL"
-          },
-          "authors": {
-            "type": "array",
-            "items": {
-              "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "List of papers from Semantic Scholar matching the search query",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Title of the paper"
+              },
+              "abstract": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Abstract of the paper"
+              },
+              "journal": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Journal or venue name"
+              },
+              "year": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Publication year"
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "URL to the paper on Semantic Scholar"
+              },
+              "paper_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Semantic Scholar paperId"
+              },
+              "doi": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "DOI (if available in externalIds)"
+              },
+              "doi_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "DOI resolver URL"
+              },
+              "authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of author names"
+              },
+              "citation_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Citation count (if provided)"
+              },
+              "reference_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Reference count (if provided)"
+              },
+              "open_access": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Open access flag (if provided)"
+              },
+              "open_access_pdf_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Open access PDF URL (if provided)"
+              }
+            }
+          }
+        },
+        {
+          "type": "array",
+          "description": "Error response (single-element array with error details)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Always \"Error\" for error responses"
+              },
+              "error": {
+                "type": "string",
+                "description": "Error message"
+              },
+              "retryable": {
+                "type": "boolean",
+                "description": "Whether the request can be retried"
+              },
+              "suggestion": {
+                "type": "string",
+                "description": "Suggested next step"
+              }
             },
-            "description": "List of author names"
-          },
-          "citation_count": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "description": "Citation count (if provided)"
-          },
-          "reference_count": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "description": "Reference count (if provided)"
-          },
-          "open_access": {
-            "type": [
-              "boolean",
-              "null"
-            ],
-            "description": "Open access flag (if provided)"
-          },
-          "open_access_pdf_url": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Open access PDF URL (if provided)"
+            "required": [
+              "error"
+            ]
           }
         }
-      }
+      ]
     },
     "test_examples": [
       {

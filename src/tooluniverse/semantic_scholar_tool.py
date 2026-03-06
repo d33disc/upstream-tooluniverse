@@ -63,6 +63,8 @@ class SemanticScholarTool(BaseTool):
                     "retryable": False,
                 }
             ]
+        if limit <= 0:
+            return []
         return self._search(
             query, limit, year=year, sort=sort, include_abstract=include_abstract
         )

@@ -97,6 +97,11 @@ class PubMedRESTTool(BaseRESTTool):
             if date_key in args and args[date_key]:
                 params[date_key] = args[date_key]
 
+        # Forward sort parameter for esearch
+        # Valid values: pub_date, Author, JournalName, relevance
+        if "sort" in args and args["sort"]:
+            params["sort"] = args["sort"]
+
         # Set retmode to json for elink and esearch (easier parsing)
         endpoint = self.tool_config["fields"]["endpoint"]
         if "retmode" not in params and ("elink" in endpoint or "esearch" in endpoint):

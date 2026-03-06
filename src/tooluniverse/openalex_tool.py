@@ -346,8 +346,20 @@ class OpenAlexRESTTool(BaseTool):
         arguments.pop("query", None)
         arguments.pop("limit", None)
 
-        # Drop empty-string search to avoid querying the entire OpenAlex corpus.
+        # Reject empty-string search to avoid querying the entire OpenAlex corpus.
         if "search" in arguments and not str(arguments["search"]).strip():
+            # If no filter is provided either, an empty search would return
+            # arbitrary results from the entire corpus -- return an error instead.
+            has_filter = bool(
+                arguments.get("filter")
+                or arguments.get("require_has_fulltext")
+                or arguments.get("fulltext_terms")
+            )
+            if not has_filter:
+                raise ValueError(
+                    "`search` (or `query`) parameter is required and must be non-empty "
+                    "unless a `filter` is also provided."
+                )
             arguments.pop("search", None)
 
         fields = self.tool_config.get("fields", {}) or {}

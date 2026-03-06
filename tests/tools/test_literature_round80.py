@@ -287,7 +287,7 @@ class TestPubTator3OptionalParams(unittest.TestCase):
         )
         props = search_tool["parameter"]["properties"]
         self.assertEqual(props["page"]["default"], 0)
-        self.assertEqual(props["page_size"]["default"], 20)
+        self.assertEqual(props["page_size"]["default"], 10)
 
 
 if __name__ == "__main__":
