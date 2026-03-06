@@ -6,25 +6,6 @@ from urllib.request import Request, urlopen
 from tooluniverse.tool_registry import register_tool
 
 
-def _resolve_gene_id(gene_input: str, base_url: str, timeout: int) -> str:
-    """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
-
-    If already a versioned Ensembl ID (contains '.'), returns as-is.
-    Otherwise queries GTEx /reference/gene to resolve.
-    """
-    if "." in gene_input:
-        return gene_input
-    url = f"{base_url}/reference/gene?geneId={gene_input}&gencodeVersion=v26"
-    try:
-        data = _http_get(url, headers={"Accept": "application/json"}, timeout=timeout)
-        genes = data.get("data", [])
-        if genes and isinstance(genes, list):
-            return genes[0].get("gencodeId", gene_input)
-    except Exception:
-        pass
-    return gene_input
-
-
 def _http_get(
     url: str,
     headers: Dict[str, str] | None = None,
@@ -37,6 +18,25 @@ def _http_get(
             return json.loads(data.decode("utf-8", errors="ignore"))
         except Exception:
             return {"raw": data.decode("utf-8", errors="ignore")}
+
+
+def _resolve_gene_id(gene_input: str, base_url: str, timeout: int) -> str:
+    """Resolve a gene symbol or unversioned Ensembl ID to a versioned GENCODE ID.
+
+    If already a versioned Ensembl ID (contains '.'), returns as-is.
+    Otherwise queries GTEx /reference/gene to resolve.
+    """
+    if "." in gene_input:
+        return gene_input
+    url = f"{base_url}/reference/gene?geneId={gene_input}&gencodeVersion=v26"
+    try:
+        data = _http_get(url, headers={"Accept": "application/json"}, timeout=timeout)
+        genes = data.get("data", [])
+        if isinstance(genes, list) and genes:
+            return genes[0].get("gencodeId", gene_input)
+    except Exception:
+        pass
+    return gene_input
 
 
 @register_tool(
