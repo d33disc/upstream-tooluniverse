@@ -146,6 +146,14 @@ class OLSTool(BaseTool):
 
         arguments = arguments or {}
         operation = arguments.get("operation")
+        # Auto-fill operation from tool config const if not provided by user
+        if not operation:
+            operation = (
+                self.tool_config.get("parameter", {})
+                .get("properties", {})
+                .get("operation", {})
+                .get("const", "")
+            )
         if not operation:
             return {
                 "error": "`operation` argument is required.",

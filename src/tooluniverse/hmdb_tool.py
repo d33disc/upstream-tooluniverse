@@ -45,6 +45,13 @@ class HMDBTool(BaseTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute HMDB query based on operation type."""
         operation = arguments.get("operation", "")
+        # Auto-fill operation from tool config const if not provided by user
+        if not operation:
+            operation = (
+                self.parameter.get("properties", {})
+                .get("operation", {})
+                .get("const", "")
+            )
 
         if operation == "get_metabolite":
             return self._get_metabolite(arguments)

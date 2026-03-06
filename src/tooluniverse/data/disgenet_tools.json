@@ -3,7 +3,9 @@
     "name": "DisGeNET_search_gene",
     "description": "Search DisGeNET for diseases associated with a gene. DisGeNET is the largest public database of gene-disease associations. Returns diseases, association scores, and evidence counts. Requires DISGENET_API_KEY env var (register free at disgenet.org).",
     "type": "DisGeNETTool",
-    "required_api_keys": ["DISGENET_API_KEY"],
+    "required_api_keys": [
+      "DISGENET_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -22,7 +24,9 @@
           "default": 10
         }
       },
-      "required": ["operation", "gene"]
+      "required": [
+        "gene"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -49,7 +53,6 @@
     },
     "test_examples": [
       {
-        "operation": "search_gene",
         "gene": "BRCA1",
         "limit": 10
       }
@@ -59,7 +62,9 @@
     "name": "DisGeNET_search_disease",
     "description": "Search DisGeNET for genes associated with a disease. Query by disease name or UMLS CUI (e.g., C0006142 for breast cancer). Returns associated genes with scores and evidence. Requires DISGENET_API_KEY.",
     "type": "DisGeNETTool",
-    "required_api_keys": ["DISGENET_API_KEY"],
+    "required_api_keys": [
+      "DISGENET_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -78,7 +83,9 @@
           "default": 10
         }
       },
-      "required": ["operation", "disease"]
+      "required": [
+        "disease"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -104,7 +111,6 @@
     },
     "test_examples": [
       {
-        "operation": "search_disease",
         "disease": "C0006142",
         "limit": 10
       }
@@ -114,7 +120,9 @@
     "name": "DisGeNET_get_gda",
     "description": "Get gene-disease associations with filtering. Filter by data source (CURATED, LITERATURE, ANIMAL_MODELS) and minimum score. Returns comprehensive GDA data with evidence levels. Requires DISGENET_API_KEY.",
     "type": "DisGeNETTool",
-    "required_api_keys": ["DISGENET_API_KEY"],
+    "required_api_keys": [
+      "DISGENET_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -134,7 +142,12 @@
         "source": {
           "type": "string",
           "description": "Data source filter: CURATED, ANIMAL_MODELS, LITERATURE, etc.",
-          "enum": ["CURATED", "ANIMAL_MODELS", "LITERATURE", "ALL"]
+          "enum": [
+            "CURATED",
+            "ANIMAL_MODELS",
+            "LITERATURE",
+            "ALL"
+          ]
         },
         "min_score": {
           "type": "number",
@@ -148,7 +161,7 @@
           "default": 25
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -171,7 +184,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_gda",
         "gene": "TP53",
         "min_score": 0.3,
         "limit": 20
@@ -182,7 +194,9 @@
     "name": "DisGeNET_get_vda",
     "description": "Get variant-disease associations from DisGeNET. Query by rsID or gene symbol to find disease-associated variants. Returns variant IDs, diseases, and evidence scores. Useful for pharmacogenomics and variant interpretation.",
     "type": "DisGeNETTool",
-    "required_api_keys": ["DISGENET_API_KEY"],
+    "required_api_keys": [
+      "DISGENET_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -205,7 +219,7 @@
           "default": 25
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -228,7 +242,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_vda",
         "gene": "BRCA1",
         "limit": 20
       }
@@ -238,7 +251,9 @@
     "name": "DisGeNET_get_disease_genes",
     "description": "Get all genes associated with a disease from DisGeNET. Returns ranked gene list with association scores and evidence counts. Filter by minimum score to get high-confidence associations. Useful for disease gene prioritization.",
     "type": "DisGeNETTool",
-    "required_api_keys": ["DISGENET_API_KEY"],
+    "required_api_keys": [
+      "DISGENET_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -263,7 +278,9 @@
           "default": 50
         }
       },
-      "required": ["operation", "disease"]
+      "required": [
+        "disease"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -303,7 +320,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_disease_genes",
         "disease": "C0006142",
         "min_score": 0.3,
         "limit": 30

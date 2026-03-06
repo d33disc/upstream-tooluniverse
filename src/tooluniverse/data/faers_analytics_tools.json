@@ -5,7 +5,10 @@
     "description": "Calculate statistical disproportionality measures (ROR, PRR, IC) with 95% CI for drug-event pairs. Returns signal strength classification. Example: drug='ibuprofen', event='hepatotoxicity' → ROR=2.3 [1.8-2.9]. Use for pharmacovigilance signal detection.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug_name", "adverse_event"],
+      "required": [
+        "drug_name",
+        "adverse_event"
+      ],
       "properties": {
         "operation": {
           "const": "calculate_disproportionality",
@@ -24,20 +27,41 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "drug_name": {"type": "string"},
-        "adverse_event": {"type": "string"},
-        "contingency_table": {"type": "object"},
-        "metrics": {"type": "object"},
-        "signal_detection": {"type": "object"},
-        "note": {"type": "string"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "adverse_event": {
+          "type": "string"
+        },
+        "contingency_table": {
+          "type": "object"
+        },
+        "metrics": {
+          "type": "object"
+        },
+        "signal_detection": {
+          "type": "object"
+        },
+        "note": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "calculate_disproportionality",
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage"
       }
@@ -49,7 +73,10 @@
     "description": "Stratify adverse event reports by demographics (sex, age group, country). Returns counts and percentages by demographic group. Example: ibuprofen + GI bleeding stratified by sex → Female: 60%, Male: 40%. Use for subpopulation risk assessment.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug_name", "adverse_event"],
+      "required": [
+        "drug_name",
+        "adverse_event"
+      ],
       "properties": {
         "operation": {
           "const": "stratify_by_demographics",
@@ -65,7 +92,11 @@
         },
         "stratify_by": {
           "type": "string",
-          "enum": ["sex", "age", "country"],
+          "enum": [
+            "sex",
+            "age",
+            "country"
+          ],
           "default": "sex",
           "description": "Demographic dimension to stratify by"
         }
@@ -74,19 +105,38 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "drug_name": {"type": "string"},
-        "adverse_event": {"type": "string"},
-        "stratified_by": {"type": "string"},
-        "total_reports": {"type": "integer"},
-        "stratification": {"type": "array"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "adverse_event": {
+          "type": "string"
+        },
+        "stratified_by": {
+          "type": "string"
+        },
+        "total_reports": {
+          "type": "integer"
+        },
+        "stratification": {
+          "type": "array"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "stratify_by_demographics",
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage",
         "stratify_by": "sex"
@@ -99,7 +149,9 @@
     "description": "Filter for serious adverse events (death, hospitalization, disability, life-threatening). Returns top reactions meeting seriousness criteria. Example: fulvestrant serious events → Death: 150 cases, Hospitalization: 500 cases. Use for risk-benefit assessment.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug_name"],
+      "required": [
+        "drug_name"
+      ],
       "properties": {
         "operation": {
           "const": "filter_serious_events",
@@ -111,7 +163,13 @@
         },
         "seriousness_type": {
           "type": "string",
-          "enum": ["all", "death", "hospitalization", "disability", "life_threatening"],
+          "enum": [
+            "all",
+            "death",
+            "hospitalization",
+            "disability",
+            "life_threatening"
+          ],
           "default": "all",
           "description": "Type of serious event to filter"
         }
@@ -120,19 +178,38 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "drug_name": {"type": "string"},
-        "seriousness_type": {"type": "string"},
-        "total_serious_events": {"type": "integer"},
-        "top_serious_reactions": {"type": "array"},
-        "note": {"type": "string"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "seriousness_type": {
+          "type": "string"
+        },
+        "total_serious_events": {
+          "type": "integer"
+        },
+        "top_serious_reactions": {
+          "type": "array"
+        },
+        "note": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "filter_serious_events",
         "drug_name": "IBUPROFEN",
         "seriousness_type": "all"
       }
@@ -144,7 +221,11 @@
     "description": "Compare safety signals for two drugs with the same adverse event. Returns ROR/PRR/IC for both drugs with comparative analysis. Example: compare fulvestrant vs tamoxifen for hepatotoxicity. Use for safety benchmarking.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug1", "drug2", "adverse_event"],
+      "required": [
+        "drug1",
+        "drug2",
+        "adverse_event"
+      ],
       "properties": {
         "operation": {
           "const": "compare_drugs",
@@ -167,19 +248,38 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "adverse_event": {"type": "string"},
-        "drug1": {"type": "object"},
-        "drug2": {"type": "object"},
-        "comparison": {"type": "string"},
-        "note": {"type": "string"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "adverse_event": {
+          "type": "string"
+        },
+        "drug1": {
+          "type": "object"
+        },
+        "drug2": {
+          "type": "object"
+        },
+        "comparison": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "compare_drugs",
         "drug1": "IBUPROFEN",
         "drug2": "NAPROXEN",
         "adverse_event": "Gastrointestinal haemorrhage"
@@ -192,7 +292,9 @@
     "description": "Analyze temporal trends in adverse event reporting by year. Returns yearly counts and trend direction (increasing/decreasing/stable). Example: ibuprofen GI bleeding reports 2015-2025 → +25% increase. Use for signal evolution monitoring.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug_name"],
+      "required": [
+        "drug_name"
+      ],
       "properties": {
         "operation": {
           "const": "analyze_temporal_trends",
@@ -211,19 +313,38 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "drug_name": {"type": "string"},
-        "adverse_event": {"type": "string"},
-        "temporal_data": {"type": "array"},
-        "trend_analysis": {"type": "object"},
-        "note": {"type": "string"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "adverse_event": {
+          "type": "string"
+        },
+        "temporal_data": {
+          "type": "array"
+        },
+        "trend_analysis": {
+          "type": "object"
+        },
+        "note": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "analyze_temporal_trends",
         "drug_name": "IBUPROFEN",
         "adverse_event": "Gastrointestinal haemorrhage"
       }
@@ -235,7 +356,9 @@
     "description": "Aggregate adverse events by MedDRA hierarchy (Preferred Term level). Returns top 50 PTs with counts. Note: Full HLT/SOC hierarchy requires MedDRA license. Use for adverse event profile overview.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "drug_name"],
+      "required": [
+        "drug_name"
+      ],
       "properties": {
         "operation": {
           "const": "rollup_meddra_hierarchy",
@@ -250,18 +373,35 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string", "enum": ["success", "error"]},
-        "drug_name": {"type": "string"},
-        "meddra_hierarchy": {"type": "object"},
-        "note": {"type": "string"},
-        "recommendation": {"type": "string"},
-        "error": {"type": "string"}
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "drug_name": {
+          "type": "string"
+        },
+        "meddra_hierarchy": {
+          "type": "object"
+        },
+        "note": {
+          "type": "string"
+        },
+        "recommendation": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "test_examples": [
       {
-        "operation": "rollup_meddra_hierarchy",
         "drug_name": "IBUPROFEN"
       }
     ]

@@ -24,14 +24,20 @@
           "description": "Optional OncoTree tumor type code (e.g., MEL for melanoma, LUAD for lung adenocarcinoma)"
         }
       },
-      "required": ["operation", "gene", "variant"]
+      "required": [
+        "gene",
+        "variant"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
@@ -61,12 +67,10 @@
     },
     "test_examples": [
       {
-        "operation": "annotate_variant",
         "gene": "BRAF",
         "variant": "V600E"
       },
       {
-        "operation": "annotate_variant",
         "gene": "BRAF",
         "variant": "V600E",
         "tumor_type": "MEL"
@@ -90,7 +94,9 @@
           "description": "Gene symbol (e.g., BRAF, TP53, EGFR, KRAS)"
         }
       },
-      "required": ["operation", "gene"]
+      "required": [
+        "gene"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -123,11 +129,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_gene_info",
         "gene": "BRAF"
       },
       {
-        "operation": "get_gene_info",
         "gene": "TP53"
       }
     ]
@@ -145,7 +149,7 @@
           "description": "Operation type (fixed: get_cancer_genes)"
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -173,9 +177,7 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "get_cancer_genes"
-      }
+      {}
     ]
   },
   {
@@ -191,7 +193,7 @@
           "description": "Operation type (fixed: get_levels)"
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -218,9 +220,7 @@
       }
     },
     "test_examples": [
-      {
-        "operation": "get_levels"
-      }
+      {}
     ]
   },
   {
@@ -241,7 +241,10 @@
         },
         "copy_number_type": {
           "type": "string",
-          "enum": ["AMPLIFICATION", "DELETION"],
+          "enum": [
+            "AMPLIFICATION",
+            "DELETION"
+          ],
           "description": "Type of copy number alteration"
         },
         "tumor_type": {
@@ -249,7 +252,10 @@
           "description": "Optional OncoTree tumor type code"
         }
       },
-      "required": ["operation", "gene", "copy_number_type"]
+      "required": [
+        "gene",
+        "copy_number_type"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -275,7 +281,6 @@
     },
     "test_examples": [
       {
-        "operation": "annotate_copy_number",
         "gene": "ERBB2",
         "copy_number_type": "AMPLIFICATION"
       }

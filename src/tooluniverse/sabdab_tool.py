@@ -38,6 +38,13 @@ class SAbDabTool(BaseTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute SAbDab query based on operation type."""
         operation = arguments.get("operation", "")
+        # Auto-fill operation from tool config const if not provided by user
+        if not operation:
+            operation = (
+                self.parameter.get("properties", {})
+                .get("operation", {})
+                .get("const", "")
+            )
 
         if operation == "search_structures":
             return self._search_structures(arguments)

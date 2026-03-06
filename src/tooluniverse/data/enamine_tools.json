@@ -6,7 +6,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search_catalog"},
+        "operation": {
+          "type": "string",
+          "const": "search_catalog"
+        },
         "query": {
           "type": "string",
           "description": "Search query - compound name or keyword"
@@ -17,17 +20,25 @@
           "default": "all"
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_catalog", "query": "pyridine"}
+      {
+        "query": "pyridine"
+      }
     ]
   },
   {
@@ -37,23 +48,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_compound"},
+        "operation": {
+          "type": "string",
+          "const": "get_compound"
+        },
         "enamine_id": {
           "type": "string",
           "description": "Enamine compound ID (e.g., Z1234567890)"
         }
       },
-      "required": ["operation", "enamine_id"]
+      "required": [
+        "enamine_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_compound", "enamine_id": "Z1234567890"}
+      {
+        "enamine_id": "Z1234567890"
+      }
     ]
   },
   {
@@ -63,7 +85,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search_smiles"},
+        "operation": {
+          "type": "string",
+          "const": "search_smiles"
+        },
         "smiles": {
           "type": "string",
           "description": "SMILES string for the query compound"
@@ -74,17 +99,25 @@
           "default": "similarity"
         }
       },
-      "required": ["operation", "smiles"]
+      "required": [
+        "smiles"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_smiles", "smiles": "c1cccnc1"}
+      {
+        "smiles": "c1cccnc1"
+      }
     ]
   },
   {
@@ -94,19 +127,26 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_libraries"}
+        "operation": {
+          "type": "string",
+          "const": "get_libraries"
+        }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_libraries"}
+      {}
     ]
   }
 ]

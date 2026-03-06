@@ -16,26 +16,42 @@
           "description": "Protein entry name (e.g., adrb2_human for beta-2 adrenergic receptor) or UniProt accession"
         }
       },
-      "required": ["operation", "protein"]
+      "required": [
+        "protein"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "properties": {
-            "entry_name": {"type": "string"},
-            "name": {"type": "string"},
-            "family": {"type": "string"},
-            "species": {"type": "string"},
-            "accession": {"type": "string"}
+            "entry_name": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "family": {
+              "type": "string"
+            },
+            "species": {
+              "type": "string"
+            },
+            "accession": {
+              "type": "string"
+            }
           }
         }
       }
     },
     "test_examples": [
-      {"operation": "get_protein", "protein": "adrb2_human"}
+      {
+        "protein": "adrb2_human"
+      }
     ]
   },
   {
@@ -55,23 +71,29 @@
           "description": "GPCR family code (e.g., '001' for Class A Rhodopsin, '002' for Class B). If not provided, lists all protein families."
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "properties": {
-            "proteins": {"type": "array"},
-            "count": {"type": "integer"}
+            "proteins": {
+              "type": "array"
+            },
+            "count": {
+              "type": "integer"
+            }
           }
         }
       }
     },
     "test_examples": [
-      {"operation": "list_proteins"}
+      {}
     ]
   },
   {
@@ -93,27 +115,41 @@
         "state": {
           "type": "string",
           "description": "Receptor state filter: active, inactive, intermediate",
-          "enum": ["active", "inactive", "intermediate"]
+          "enum": [
+            "active",
+            "inactive",
+            "intermediate"
+          ]
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "properties": {
-            "structures": {"type": "array"},
-            "count": {"type": "integer"}
+            "structures": {
+              "type": "array"
+            },
+            "count": {
+              "type": "integer"
+            }
           }
         }
       }
     },
     "test_examples": [
-      {"operation": "get_structures", "protein": "adrb2_human"},
-      {"operation": "get_structures", "state": "active"}
+      {
+        "protein": "adrb2_human"
+      },
+      {
+        "state": "active"
+      }
     ]
   },
   {
@@ -133,24 +169,36 @@
           "description": "Protein entry name (e.g., adrb2_human)"
         }
       },
-      "required": ["operation", "protein"]
+      "required": [
+        "protein"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "properties": {
-            "protein": {"type": "string"},
-            "ligands": {"type": "array"},
-            "count": {"type": "integer"}
+            "protein": {
+              "type": "string"
+            },
+            "ligands": {
+              "type": "array"
+            },
+            "count": {
+              "type": "integer"
+            }
           }
         }
       }
     },
     "test_examples": [
-      {"operation": "get_ligands", "protein": "adrb2_human"}
+      {
+        "protein": "adrb2_human"
+      }
     ]
   },
   {
@@ -170,24 +218,36 @@
           "description": "Protein entry name (e.g., adrb2_human)"
         }
       },
-      "required": ["operation", "protein"]
+      "required": [
+        "protein"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
+        "status": {
+          "type": "string"
+        },
         "data": {
           "type": "object",
           "properties": {
-            "protein": {"type": "string"},
-            "mutations": {"type": "array"},
-            "count": {"type": "integer"}
+            "protein": {
+              "type": "string"
+            },
+            "mutations": {
+              "type": "array"
+            },
+            "count": {
+              "type": "integer"
+            }
           }
         }
       }
     },
     "test_examples": [
-      {"operation": "get_mutations", "protein": "adrb2_human"}
+      {
+        "protein": "adrb2_human"
+      }
     ]
   }
 ]

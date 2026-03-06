@@ -25,6 +25,14 @@ class NCBINucleotideSearchTool(NCBIEUtilsTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the nucleotide search with given arguments."""
         operation = arguments.get("operation")
+        # Auto-fill operation from tool config const if not provided by user
+        if not operation:
+            operation = (
+                self.tool_config.get("parameter", {})
+                .get("properties", {})
+                .get("operation", {})
+                .get("const", "")
+            )
 
         if not operation:
             return {"status": "error", "error": "Missing required parameter: operation"}

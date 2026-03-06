@@ -36,7 +36,6 @@
         }
       },
       "required": [
-        "operation",
         "query"
       ]
     },
@@ -69,7 +68,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "search_terms",
         "query": "gene:TP53",
         "rows": 10,
         "ontology": "efo",
@@ -189,7 +187,6 @@
         }
       },
       "required": [
-        "operation",
         "ontology_id"
       ]
     },
@@ -212,7 +209,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "get_ontology_info",
         "ontology_id": "efo"
       }
     ],
@@ -279,9 +275,7 @@
           "default": 20
         }
       },
-      "required": [
-        "operation"
-      ]
+      "required": []
     },
     "examples": [
       {
@@ -309,7 +303,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "search_ontologies",
         "search": "cancer",
         "page": 0,
         "size": 20
@@ -366,7 +359,6 @@
         }
       },
       "required": [
-        "operation",
         "id"
       ]
     },
@@ -390,7 +382,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "get_term_info",
         "id": "1"
       }
     ],
@@ -456,7 +447,6 @@
         }
       },
       "required": [
-        "operation",
         "term_iri",
         "ontology"
       ]
@@ -483,7 +473,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "get_term_children",
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
         "include_obsolete": false,
@@ -557,7 +546,6 @@
         }
       },
       "required": [
-        "operation",
         "term_iri",
         "ontology"
       ]
@@ -583,7 +571,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "get_term_ancestors",
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
         "include_obsolete": false,
@@ -652,7 +639,6 @@
         }
       },
       "required": [
-        "operation",
         "term_iri",
         "ontology"
       ]
@@ -679,7 +665,6 @@
     "version": "1.0.0",
     "test_examples": [
       {
-        "operation": "find_similar_terms",
         "term_iri": "http://www.ebi.ac.uk/efo/EFO_0000384",
         "ontology": "efo",
         "size": 10

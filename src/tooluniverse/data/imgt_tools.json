@@ -6,7 +6,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_sequence"},
+        "operation": {
+          "type": "string",
+          "const": "get_sequence"
+        },
         "accession": {
           "type": "string",
           "description": "IMGT/LIGM-DB accession or EMBL/GenBank accession"
@@ -14,21 +17,33 @@
         "format": {
           "type": "string",
           "description": "Output format: fasta or embl (default: fasta)",
-          "enum": ["fasta", "embl"],
+          "enum": [
+            "fasta",
+            "embl"
+          ],
           "default": "fasta"
         }
       },
-      "required": ["operation", "accession"]
+      "required": [
+        "accession"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_sequence", "accession": "M12950", "format": "fasta"}
+      {
+        "accession": "M12950",
+        "format": "fasta"
+      }
     ]
   },
   {
@@ -38,7 +53,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search_genes"},
+        "operation": {
+          "type": "string",
+          "const": "search_genes"
+        },
         "query": {
           "type": "string",
           "description": "Search query (gene name)"
@@ -53,17 +71,24 @@
           "default": "Homo sapiens"
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_genes", "gene_type": "IGHV", "species": "Homo sapiens"}
+      {
+        "gene_type": "IGHV",
+        "species": "Homo sapiens"
+      }
     ]
   },
   {
@@ -73,19 +98,26 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_gene_info"}
+        "operation": {
+          "type": "string",
+          "const": "get_gene_info"
+        }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_gene_info"}
+      {}
     ]
   }
 ]

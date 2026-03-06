@@ -880,5 +880,106 @@ class TestGTExWrapperDefaults(unittest.TestCase):
         self.assertEqual(default, "gtex_v8")
 
 
+# ---------------------------------------------------------------------------
+# Operation auto-fill tests (redundant operation parameter removed from required)
+# ---------------------------------------------------------------------------
+class TestOperationAutoFill(unittest.TestCase):
+    """Test that tools auto-fill 'operation' from config const when not provided."""
+
+    def _load_config(self, json_file, tool_name):
+        import os
+        path = os.path.join(
+            os.path.dirname(__file__),
+            "../../src/tooluniverse/data",
+            json_file,
+        )
+        with open(path) as f:
+            tools = json.load(f)
+        return [t for t in tools if t["name"] == tool_name][0]
+
+    def test_orphanet_operation_not_required(self):
+        """Orphanet tools should NOT require 'operation' in parameter schema."""
+        config = self._load_config("orphanet_tools.json", "Orphanet_search_diseases")
+        self.assertNotIn("operation", config["parameter"]["required"])
+
+    def test_orphanet_auto_fills_operation(self):
+        """Orphanet tool should auto-fill operation from config const."""
+        from tooluniverse.orphanet_tool import OrphanetTool
+        config = self._load_config("orphanet_tools.json", "Orphanet_search_diseases")
+        tool = OrphanetTool(config)
+        # Mock the _search_diseases method to verify routing works
+        tool._search_diseases = MagicMock(return_value={"status": "success"})
+        tool.run({"query": "Marfan"})  # No operation param
+        tool._search_diseases.assert_called_once()
+
+    def test_gencc_auto_fills_operation(self):
+        """GenCC tool should auto-fill operation from config const."""
+        from tooluniverse.gencc_tool import GenCCTool
+        config = self._load_config("gencc_tools.json", "GenCC_search_disease")
+        tool = GenCCTool(config)
+        tool._search_disease = MagicMock(return_value={"status": "success"})
+        tool.run({"disease": "Marfan"})  # No operation param
+        tool._search_disease.assert_called_once()
+
+    def test_gpcrdb_auto_fills_operation(self):
+        """GPCRdb tool should auto-fill operation from config const."""
+        from tooluniverse.gpcrdb_tool import GPCRdbTool
+        config = self._load_config("gpcrdb_tools.json", "GPCRdb_get_protein")
+        tool = GPCRdbTool(config)
+        tool._get_protein = MagicMock(return_value={"status": "success"})
+        tool.run({"protein": "adrb2_human"})  # No operation param
+        tool._get_protein.assert_called_once()
+
+    def test_omim_auto_fills_operation(self):
+        """OMIM tool should auto-fill operation from config const."""
+        from tooluniverse.omim_tool import OMIMTool
+        config = self._load_config("omim_tools.json", "OMIM_search")
+        tool = OMIMTool(config)
+        tool.api_key = "fake_key"  # bypass API key check
+        tool._search = MagicMock(return_value={"status": "success"})
+        tool.run({"query": "Marfan"})  # No operation param
+        tool._search.assert_called_once()
+
+    def test_disgenet_auto_fills_operation(self):
+        """DisGeNET tool should auto-fill operation from config const."""
+        from tooluniverse.disgenet_tool import DisGeNETTool
+        config = self._load_config("disgenet_tools.json", "DisGeNET_search_gene")
+        tool = DisGeNETTool(config)
+        tool.api_key = "fake_key"  # bypass API key check
+        tool._search_gene = MagicMock(return_value={"status": "success"})
+        tool.run({"gene_symbol": "FBN1"})  # No operation param
+        tool._search_gene.assert_called_once()
+
+    def test_all_fixed_jsons_no_operation_required(self):
+        """All fixed JSON files should NOT have 'operation' in required."""
+        fixed_jsons = [
+            "orphanet_tools.json", "gencc_tools.json", "brenda_tools.json",
+            "dailymed_tools.json", "disgenet_tools.json", "emolecules_tools.json",
+            "enamine_tools.json", "faers_analytics_tools.json",
+            "fda_orange_book_tools.json", "gpcrdb_tools.json", "hmdb_tools.json",
+            "imgt_tools.json", "metacyc_tools.json", "ncbi_nucleotide_tools.json",
+            "ols_tools.json", "omim_tools.json", "oncokb_tools.json",
+            "sabdab_tools.json",
+        ]
+        import os
+        data_dir = os.path.join(
+            os.path.dirname(__file__), "../../src/tooluniverse/data"
+        )
+        for jf in fixed_jsons:
+            path = os.path.join(data_dir, jf)
+            if not os.path.exists(path):
+                continue
+            with open(path) as f:
+                tools = json.load(f)
+            for t in tools:
+                req = t.get("parameter", {}).get("required", [])
+                props = t.get("parameter", {}).get("properties", {})
+                if props.get("operation", {}).get("const"):
+                    self.assertNotIn(
+                        "operation", req,
+                        f"{t['name']} in {jf} still has operation in required"
+                    )
+
+
 if __name__ == "__main__":
     unittest.main()

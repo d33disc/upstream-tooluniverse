@@ -57,6 +57,13 @@ class OncoKBTool(BaseTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute OncoKB API call based on operation type."""
         operation = arguments.get("operation", "")
+        # Auto-fill operation from tool config const if not provided by user
+        if not operation:
+            operation = (
+                self.parameter.get("properties", {})
+                .get("operation", {})
+                .get("const", "")
+            )
 
         if operation == "annotate_variant":
             return self._annotate_variant(arguments)
