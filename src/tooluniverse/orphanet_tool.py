@@ -274,6 +274,46 @@ class OrphanetTool(BaseTool):
             )
         return genes
 
+    def _fetch_genes_for_code(self, orpha_code, headers) -> List[Dict]:
+        """Fetch gene associations for a single ORPHA code. Returns [] on failure."""
+        try:
+            response = requests.get(
+                f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes/{orpha_code}",
+                timeout=self.timeout,
+                headers=headers,
+            )
+            if response.status_code != 200:
+                return []
+            results = response.json().get("data", {}).get("results", {})
+            return self._extract_genes_from_associations(
+                results.get("DisorderGeneAssociation", [])
+            )
+        except Exception:
+            return []
+
+    def _find_subtype_codes(
+        self, disease_name: str, exclude_code: str, headers
+    ) -> List[Dict]:
+        """Find orphacodes whose name contains disease_name, excluding exclude_code."""
+        try:
+            response = requests.get(
+                f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes",
+                timeout=self.timeout,
+                headers=headers,
+            )
+            if response.status_code != 200:
+                return []
+            all_entries = response.json().get("data", {}).get("results", [])
+            disease_lower = disease_name.lower()
+            return [
+                entry
+                for entry in all_entries
+                if disease_lower in entry.get("Preferred term", "").lower()
+                and str(entry.get("ORPHAcode", "")) != str(exclude_code)
+            ]
+        except Exception:
+            return []
+
     def _get_genes(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """
         Get genes associated with a rare disease.
@@ -317,7 +357,6 @@ class OrphanetTool(BaseTool):
             except Exception:
                 pass
 
-            genes = []
             subtype_sources = []
             orphadata_headers = {
                 "Accept": "application/json",
@@ -325,76 +364,33 @@ class OrphanetTool(BaseTool):
             }
 
             # Strategy 1: Direct orphacode lookup via Orphadata
-            try:
-                gene_response = requests.get(
-                    f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes/{orpha_code}",
-                    timeout=self.timeout,
-                    headers=orphadata_headers,
-                )
-                if gene_response.status_code == 200:
-                    gene_data = gene_response.json()
-                    results = gene_data.get("data", {}).get("results", {})
-                    associations = results.get("DisorderGeneAssociation", [])
-                    genes = self._extract_genes_from_associations(associations)
-            except Exception:
-                pass
+            genes = self._fetch_genes_for_code(orpha_code, orphadata_headers)
 
             # Strategy 2: If no genes found and we have a disease name, search
             # for subtypes in the Orphadata orphacodes list (parent codes like
             # "Marfan syndrome" 558 lack direct gene entries, but subtypes like
             # "Marfan syndrome type 1" 284963 have them)
             if not genes and disease_name:
-                try:
-                    list_response = requests.get(
-                        f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes",
-                        timeout=self.timeout,
-                        headers=orphadata_headers,
+                matching_codes = self._find_subtype_codes(
+                    disease_name, orpha_code, orphadata_headers
+                )
+                existing_symbols = set()
+                for entry in matching_codes[:5]:
+                    sub_genes = self._fetch_genes_for_code(
+                        entry.get("ORPHAcode"), orphadata_headers
                     )
-                    if list_response.status_code == 200:
-                        list_data = list_response.json()
-                        all_entries = list_data.get("data", {}).get("results", [])
-                        # Find entries whose name contains our disease name
-                        disease_lower = disease_name.lower()
-                        matching_codes = [
-                            entry
-                            for entry in all_entries
-                            if disease_lower in entry.get("Preferred term", "").lower()
-                            and str(entry.get("ORPHAcode", "")) != str(orpha_code)
-                        ]
-                        # Fetch genes from matching subtypes
-                        for entry in matching_codes[:5]:
-                            sub_code = entry.get("ORPHAcode")
-                            try:
-                                sub_response = requests.get(
-                                    f"{ORPHADATA_API_URL}/rd-associated-genes/orphacodes/{sub_code}",
-                                    timeout=self.timeout,
-                                    headers=orphadata_headers,
-                                )
-                                if sub_response.status_code == 200:
-                                    sub_data = sub_response.json()
-                                    sub_results = sub_data.get("data", {}).get(
-                                        "results", {}
-                                    )
-                                    sub_genes = self._extract_genes_from_associations(
-                                        sub_results.get("DisorderGeneAssociation", [])
-                                    )
-                                    if sub_genes:
-                                        subtype_sources.append(
-                                            {
-                                                "orpha_code": str(sub_code),
-                                                "name": entry.get("Preferred term", ""),
-                                            }
-                                        )
-                                        # Add genes, avoiding duplicates by symbol
-                                        existing_symbols = {g["Symbol"] for g in genes}
-                                        for g in sub_genes:
-                                            if g["Symbol"] not in existing_symbols:
-                                                genes.append(g)
-                                                existing_symbols.add(g["Symbol"])
-                            except Exception:
-                                continue
-                except Exception:
-                    pass
+                    if not sub_genes:
+                        continue
+                    subtype_sources.append(
+                        {
+                            "orpha_code": str(entry.get("ORPHAcode")),
+                            "name": entry.get("Preferred term", ""),
+                        }
+                    )
+                    for g in sub_genes:
+                        if g["Symbol"] not in existing_symbols:
+                            genes.append(g)
+                            existing_symbols.add(g["Symbol"])
 
             result_data = {
                 "orpha_code": orpha_code,
