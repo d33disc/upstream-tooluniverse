@@ -429,34 +429,35 @@ class TestToolComposition:
         assert isinstance(available_required, list)
         assert len(available_required) <= len(required_tools)
 
+    @pytest.mark.timeout(180)
     def test_compose_tool_workflow_execution_real(self):
         """Test real workflow execution with compose tools."""
         # Test a simple workflow
         workflow_results = {}
-        
+
         try:
             # Step 1: Search for papers
             search_result = self.tu.run({
                 "name": "ArXiv_search_papers",
-                "arguments": {"query": "machine learning", "limit": 3}
+                "arguments": {"query": "machine learning", "limit": 2}
             })
-            
+
             if search_result and isinstance(search_result, dict):
                 workflow_results["search"] = search_result
-                
+
                 # Step 2: Get protein info (if search succeeded)
                 protein_result = self.tu.run({
                     "name": "UniProt_get_entry_by_accession",
                     "arguments": {"accession": "P05067"}
                 })
-                
+
                 if protein_result and isinstance(protein_result, dict):
                     workflow_results["protein"] = protein_result
-                
+
                 # Verify workflow results
                 assert "search" in workflow_results
         except Exception:
-            # Expected if API keys not configured
+            # Expected if API keys not configured or network timeout
             pass
 
     def test_compose_tool_caching_real(self):

@@ -2,16 +2,20 @@
   {
     "name": "GTEx_get_expression_summary",
     "type": "GTExExpressionTool",
-    "description": "Summarize tissue-specific expression (e.g., median TPM) for a gene across GTEx tissues. Use to profile baseline expression patterns for targets/biomarkers.",
+    "description": "Summarize tissue-specific expression (e.g., median TPM) for a gene across GTEx tissues. Accepts gene symbols (TP53, BRCA1) or Ensembl IDs. Use to profile baseline expression patterns for targets/biomarkers.",
     "parameter": {
       "type": "object",
       "properties": {
+        "gene_symbol": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'TP53', 'BRCA1', 'FBN1'). Auto-resolved to versioned GENCODE ID."
+        },
         "ensembl_gene_id": {
           "type": "string",
-          "description": "Ensembl gene identifier (e.g., 'ENSG00000141510' for TP53)."
+          "description": "Ensembl gene identifier (e.g., 'ENSG00000141510' or 'ENSG00000141510.11'). Use gene_symbol instead if you have a gene name."
         }
       },
-      "required": ["ensembl_gene_id"]
+      "required": []
     },
     "fields": {
       "endpoint": "https://gtexportal.org/api/v2/expression/geneExpression",
@@ -41,6 +45,7 @@
       }
     },
     "test_examples": [
+      {"gene_symbol": "TP53"},
       {"ensembl_gene_id": "ENSG00000141510"}
     ],
     "label": ["GTEx", "Expression", "Summary"],
@@ -52,13 +57,17 @@
   {
     "name": "GTEx_query_eqtl",
     "type": "GTExEQTLTool",
-    "description": "Query GTEx single-tissue eQTL associations for a gene. Use to identify regulatory variants (variantId, pValue, slope) relevant to expression regulation.",
+    "description": "Query GTEx single-tissue eQTL associations for a gene. Accepts gene symbols (TP53, BRCA1) or Ensembl IDs. Use to identify regulatory variants (variantId, pValue, slope) relevant to expression regulation.",
     "parameter": {
       "type": "object",
       "properties": {
+        "gene_symbol": {
+          "type": "string",
+          "description": "Gene symbol (e.g., 'TP53', 'BRCA1'). Auto-resolved to versioned GENCODE ID."
+        },
         "ensembl_gene_id": {
           "type": "string",
-          "description": "Ensembl gene identifier (e.g., 'ENSG00000141510')."
+          "description": "Ensembl gene identifier (e.g., 'ENSG00000141510'). Use gene_symbol instead if you have a gene name."
         },
         "page": {
           "type": "integer",
@@ -74,7 +83,7 @@
           "description": "Number of records per page (1–100)."
         }
       },
-      "required": ["ensembl_gene_id"]
+      "required": []
     },
     "fields": {
       "endpoint": "https://gtexportal.org/api/v2/association/singleTissueEqtl",
@@ -105,6 +114,7 @@
       }
     },
     "test_examples": [
+      {"gene_symbol": "TP53", "page": 1, "size": 5},
       {"ensembl_gene_id": "ENSG00000141510", "page": 1, "size": 5}
     ],
     "label": ["GTEx", "eQTL", "Association"],

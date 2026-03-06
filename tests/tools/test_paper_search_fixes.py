@@ -1325,5 +1325,172 @@ class TestEuropePMCAbstractHTMLStripping(unittest.TestCase):
         self.assertEqual(result, text)
 
 
+# ---------------------------------------------------------------------------
+# GTEx gene symbol resolution
+# ---------------------------------------------------------------------------
+class TestGTExGeneSymbolResolution(unittest.TestCase):
+    """Test GTEx auto-resolution of gene symbols to versioned GENCODE IDs."""
+
+    def test_resolve_gene_symbol(self):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        with patch("tooluniverse.gtex_tool._http_get") as mock_get:
+            mock_get.return_value = {
+                "data": [{"gencodeId": "ENSG00000166147.13", "geneSymbol": "FBN1"}]
+            }
+            result = _resolve_gene_id("FBN1", "https://gtexportal.org/api/v2", 30)
+            self.assertEqual(result, "ENSG00000166147.13")
+            mock_get.assert_called_once()
+
+    def test_versioned_id_passes_through(self):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        result = _resolve_gene_id(
+            "ENSG00000141510.11", "https://gtexportal.org/api/v2", 30
+        )
+        self.assertEqual(result, "ENSG00000141510.11")
+
+    def test_unversioned_ensembl_resolved(self):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        with patch("tooluniverse.gtex_tool._http_get") as mock_get:
+            mock_get.return_value = {
+                "data": [{"gencodeId": "ENSG00000141510.16"}]
+            }
+            result = _resolve_gene_id(
+                "ENSG00000141510", "https://gtexportal.org/api/v2", 30
+            )
+            self.assertEqual(result, "ENSG00000141510.16")
+
+    def test_resolution_failure_returns_input(self):
+        from tooluniverse.gtex_tool import _resolve_gene_id
+
+        with patch("tooluniverse.gtex_tool._http_get") as mock_get:
+            mock_get.side_effect = Exception("network error")
+            result = _resolve_gene_id("FBN1", "https://gtexportal.org/api/v2", 30)
+            self.assertEqual(result, "FBN1")
+
+    def test_expression_tool_uses_gene_symbol(self):
+        from tooluniverse.gtex_tool import GTExExpressionTool
+
+        tool = GTExExpressionTool(
+            tool_config={
+                "settings": {
+                    "base_url": "https://gtexportal.org/api/v2",
+                    "timeout": 30,
+                }
+            }
+        )
+        with patch("tooluniverse.gtex_tool._resolve_gene_id") as mock_resolve, patch(
+            "tooluniverse.gtex_tool._http_get"
+        ) as mock_get:
+            mock_resolve.return_value = "ENSG00000166147.13"
+            mock_get.return_value = {"data": [{"tissueSiteDetailId": "Brain", "median": 5.2}]}
+            result = tool.run({"gene_symbol": "FBN1"})
+            mock_resolve.assert_called_once_with(
+                "FBN1", "https://gtexportal.org/api/v2", 30
+            )
+            self.assertTrue(result["success"])
+
+    def test_eqtl_tool_uses_gene_symbol(self):
+        from tooluniverse.gtex_tool import GTExEQTLTool
+
+        tool = GTExEQTLTool(
+            tool_config={
+                "settings": {
+                    "base_url": "https://gtexportal.org/api/v2",
+                    "timeout": 30,
+                }
+            }
+        )
+        with patch("tooluniverse.gtex_tool._resolve_gene_id") as mock_resolve, patch(
+            "tooluniverse.gtex_tool._http_get"
+        ) as mock_get:
+            mock_resolve.return_value = "ENSG00000141510.16"
+            mock_get.return_value = {"data": [{"variantId": "chr17_1234_A_G", "pValue": 0.001}]}
+            result = tool.run({"gene_symbol": "TP53"})
+            mock_resolve.assert_called_once_with(
+                "TP53", "https://gtexportal.org/api/v2", 30
+            )
+            self.assertTrue(result["success"])
+
+
+# ---------------------------------------------------------------------------
+# ClinVar condition quoting
+# ---------------------------------------------------------------------------
+class TestClinVarConditionQuoting(unittest.TestCase):
+    """Test ClinVar multi-word condition quoting."""
+
+    def _make_tool(self):
+        from tooluniverse.clinvar_tool import ClinVarSearchVariants
+
+        config = {
+            "name": "ClinVar_search_variants",
+            "type": "ClinVarSearchVariants",
+            "fields": {
+                "endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+                "format": "json",
+            },
+        }
+        return ClinVarSearchVariants(config)
+
+    @patch("tooluniverse.clinvar_tool.ClinVarRESTTool._make_request")
+    def test_multi_word_condition_quoted(self, mock_request):
+        mock_request.return_value = {
+            "status": "success",
+            "data": {
+                "esearchresult": {
+                    "count": "100",
+                    "idlist": ["12345"],
+                    "querytranslation": "",
+                }
+            },
+        }
+        tool = self._make_tool()
+        tool.run({"gene": "FBN1", "condition": "Marfan syndrome"})
+        call_args = mock_request.call_args
+        term = call_args[0][1]["term"]
+        self.assertIn('"Marfan syndrome"', term)
+
+    @patch("tooluniverse.clinvar_tool.ClinVarRESTTool._make_request")
+    def test_single_word_condition_not_quoted(self, mock_request):
+        mock_request.return_value = {
+            "status": "success",
+            "data": {
+                "esearchresult": {
+                    "count": "50",
+                    "idlist": ["67890"],
+                    "querytranslation": "",
+                }
+            },
+        }
+        tool = self._make_tool()
+        tool.run({"gene": "BRCA1", "condition": "cancer"})
+        call_args = mock_request.call_args
+        term = call_args[0][1]["term"]
+        self.assertIn("cancer", term)
+        self.assertNotIn('"cancer"', term)
+
+    @patch("tooluniverse.clinvar_tool.ClinVarRESTTool._make_request")
+    def test_already_quoted_condition_not_double_quoted(self, mock_request):
+        mock_request.return_value = {
+            "status": "success",
+            "data": {
+                "esearchresult": {
+                    "count": "10",
+                    "idlist": ["111"],
+                    "querytranslation": "",
+                }
+            },
+        }
+        tool = self._make_tool()
+        tool.run({"condition": '"Marfan syndrome"'})
+        call_args = mock_request.call_args
+        term = call_args[0][1]["term"]
+        # Should not be double-quoted
+        self.assertNotIn('""Marfan syndrome""', term)
+        self.assertIn('"Marfan syndrome"', term)
+
+
 if __name__ == "__main__":
     unittest.main()
