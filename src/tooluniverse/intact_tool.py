@@ -43,7 +43,7 @@ class IntActRESTTool(BaseTool):
         if tool_name == "intact_get_interactor":
             identifier = args.get("identifier", "")
             if identifier:
-                return f"{self.base_url}/interactor/details/{identifier}"
+                return f"{self.base_url}/interactor/findInteractor/{identifier}"
 
         elif tool_name == "intact_get_interactions":
             identifier = args.get("identifier", "")
@@ -61,7 +61,7 @@ class IntActRESTTool(BaseTool):
         elif tool_name == "intact_get_interaction_network":
             identifier = args.get("identifier", "")
             if identifier:
-                return f"{self.base_url}/interaction/network/{identifier}"
+                return f"{self.base_url}/interaction/findInteractions/{identifier}"
 
         return self.base_url
 
@@ -85,19 +85,19 @@ class IntActRESTTool(BaseTool):
                 params["query"] = identifier
             params["format"] = args.get("format", "json")
 
-        # For interactor retrieval
+        # For interactor retrieval (paginated)
         elif tool_name == "intact_get_interactor":
-            params["format"] = args.get("format", "json")
+            params["page"] = args.get("page", 0)
+            params["pageSize"] = args.get("pageSize", 10)
 
         # For interaction details
         elif tool_name == "intact_get_interaction_details":
             params["format"] = args.get("format", "json")
 
-        # For network
+        # For network/interactions (paginated)
         elif tool_name == "intact_get_interaction_network":
-            params["format"] = args.get("format", "json")
-            if "depth" in args:
-                params["depth"] = args["depth"]
+            params["page"] = args.get("page", 0)
+            params["pageSize"] = args.get("pageSize", 20)
 
         return params
 
@@ -116,9 +116,7 @@ class IntActRESTTool(BaseTool):
         if tool_name in [
             "intact_get_interactions",
             "intact_search_interactions",
-            "intact_get_interactor",
             "intact_get_interactions_by_organism",
-            "intact_get_interaction_network",
         ]:
             return self._use_ebi_search(arguments, tool_name)
 
@@ -142,6 +140,24 @@ class IntActRESTTool(BaseTool):
 
             # Parse JSON response
             data = response.json()
+
+            # Handle paginated responses from findInteractor/findInteractions
+            if isinstance(data, dict) and "content" in data:
+                content = data["content"]
+                total = data.get("totalElements", len(content))
+                response_data = {
+                    "status": "success",
+                    "data": content,
+                    "url": response.url,
+                    "count": len(content),
+                    "totalElements": total,
+                }
+                if total > len(content):
+                    response_data["note"] = (
+                        f"Showing {len(content)} of {total} results. "
+                        "Use page/pageSize params for more."
+                    )
+                return response_data
 
             # Build response
             response_data = {

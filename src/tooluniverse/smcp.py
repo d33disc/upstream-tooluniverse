@@ -108,6 +108,65 @@ from .logging_config import (
 )
 
 
+def _truncate_response(result: Any, serialized: str, max_chars: int) -> str:
+    """Truncate oversized tool responses to fit LLM context windows.
+
+    Tries to intelligently truncate lists within the result before falling
+    back to raw string truncation.
+    """
+    # If result is a list, truncate to fewer items
+    if isinstance(result, list) and len(result) > 1:
+        total = len(result)
+        # Binary search for the right number of items
+        lo, hi = 1, total
+        while lo < hi:
+            mid = (lo + hi + 1) // 2
+            trial = json.dumps(result[:mid], ensure_ascii=False, default=str)
+            if len(trial) <= max_chars - 200:  # leave room for metadata
+                lo = mid
+            else:
+                hi = mid - 1
+        truncated = result[:lo]
+        return json.dumps(
+            {
+                "data": truncated,
+                "_truncated": True,
+                "_showing": lo,
+                "_total": total,
+                "_note": f"Response truncated: showing {lo} of {total} items.",
+            },
+            ensure_ascii=False,
+            default=str,
+        )
+
+    # If result is a dict, try to truncate the largest list value
+    if isinstance(result, dict):
+        largest_key = None
+        largest_len = 0
+        for k, v in result.items():
+            if isinstance(v, list) and len(v) > largest_len:
+                largest_key = k
+                largest_len = len(v)
+        if largest_key and largest_len > 2:
+            total = largest_len
+            keep = max(1, total // 4)
+            while keep >= 1:
+                trimmed = dict(result)
+                trimmed[largest_key] = result[largest_key][:keep]
+                trimmed["_truncated"] = True
+                trimmed[f"_{largest_key}_showing"] = keep
+                trimmed[f"_{largest_key}_total"] = total
+                trial = json.dumps(trimmed, ensure_ascii=False, default=str)
+                if len(trial) <= max_chars:
+                    return trial
+                keep = keep // 2
+
+    # Fallback: raw string truncation
+    return (
+        serialized[:max_chars] + f"\n... [TRUNCATED: {len(serialized):,} chars total]"
+    )
+
+
 class SMCP(FastMCP):
     """
     Scientific Model Context Protocol (SMCP) Server
@@ -801,22 +860,25 @@ class SMCP(FastMCP):
             # All search tools now return JSON format directly
             # Ensure result is properly serialized to JSON
             if isinstance(result, str):
-                # Try to parse as JSON to validate, if fails wrap it
                 try:
                     json.loads(result)
-                    return result
+                    serialized = result
                 except (json.JSONDecodeError, ValueError):
-                    # Not valid JSON, wrap it
-                    return json.dumps(
+                    serialized = json.dumps(
                         {"tools": [], "result": result}, ensure_ascii=False
                     )
             elif isinstance(result, dict) or isinstance(result, list):
-                return json.dumps(result, ensure_ascii=False, default=str)
+                serialized = json.dumps(result, ensure_ascii=False, default=str)
             else:
-                # For other types, convert to JSON
-                return json.dumps(
+                serialized = json.dumps(
                     {"tools": [], "result": str(result)}, ensure_ascii=False
                 )
+
+            # Guard against oversized responses
+            max_chars = 100_000
+            if len(serialized) > max_chars:
+                serialized = _truncate_response(result, serialized, max_chars)
+            return serialized
 
         except Exception as e:
             error_msg = f"Search error: {str(e)}"
@@ -1785,15 +1847,25 @@ class SMCP(FastMCP):
                         # Try to parse as JSON to validate, if fails wrap it
                         try:
                             json.loads(result)
-                            return result
+                            serialized = result
                         except (json.JSONDecodeError, ValueError):
                             # Not valid JSON, wrap it
-                            return json.dumps({"result": result}, ensure_ascii=False)
+                            serialized = json.dumps(
+                                {"result": result}, ensure_ascii=False
+                            )
                     elif isinstance(result, (dict, list)):
-                        return json.dumps(result, ensure_ascii=False, default=str)
+                        serialized = json.dumps(result, ensure_ascii=False, default=str)
                     else:
                         # For other types, convert to JSON
-                        return json.dumps({"result": str(result)}, ensure_ascii=False)
+                        serialized = json.dumps(
+                            {"result": str(result)}, ensure_ascii=False
+                        )
+
+                    # Guard against oversized responses that overflow LLM context
+                    max_chars = 100_000
+                    if len(serialized) > max_chars:
+                        serialized = _truncate_response(result, serialized, max_chars)
+                    return serialized
 
                 except Exception as e:
                     error_msg = f"Error executing {tool_name}: {str(e)}"

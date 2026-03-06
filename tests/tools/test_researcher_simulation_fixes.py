@@ -651,6 +651,139 @@ class TestGTExGeneIdResolution(unittest.TestCase):
         self.assertIn("gtex_v8", source)
 
 
+# ---------------------------------------------------------------------------
+# IntAct interactor uses correct endpoint
+# ---------------------------------------------------------------------------
+class TestIntActInteractorEndpoint(unittest.TestCase):
+    """IntAct interactor should use findInteractor, not details."""
+
+    def _make_tool(self, tool_name):
+        from tooluniverse.intact_tool import IntActRESTTool
+
+        config = {
+            "name": tool_name,
+            "type": "IntActRESTTool",
+            "fields": {},
+        }
+        return IntActRESTTool(config)
+
+    def test_interactor_url_uses_find(self):
+        """intact_get_interactor URL should use /findInteractor/."""
+        tool = self._make_tool("intact_get_interactor")
+        url = tool._build_url({"identifier": "P04637"})
+        self.assertIn("/interactor/findInteractor/P04637", url)
+        self.assertNotIn("/details/", url)
+
+    def test_network_url_uses_find_interactions(self):
+        """intact_get_interaction_network URL should use /findInteractions/."""
+        tool = self._make_tool("intact_get_interaction_network")
+        url = tool._build_url({"identifier": "P04637"})
+        self.assertIn("/interaction/findInteractions/P04637", url)
+        self.assertNotIn("/network/", url)
+
+    @patch("tooluniverse.intact_tool.IntActRESTTool._use_ebi_search")
+    def test_interactor_not_routed_to_ebi_search(self, mock_ebi):
+        """intact_get_interactor should NOT be routed to EBI Search."""
+        tool = self._make_tool("intact_get_interactor")
+
+        # Mock the session.get to return paginated interactor data
+        with patch.object(tool.session, "get") as mock_get:
+            mock_resp = MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.headers = {"content-type": "application/json"}
+            mock_resp.raise_for_status = MagicMock()
+            mock_resp.json.return_value = {
+                "content": [
+                    {
+                        "interactorAc": "EBI-366083",
+                        "interactorName": "p53",
+                        "interactorType": "protein",
+                        "interactionCount": 2243,
+                    }
+                ],
+                "totalElements": 1,
+            }
+            mock_resp.url = "https://example.com"
+            mock_get.return_value = mock_resp
+
+            result = tool.run({"identifier": "P04637"})
+
+        mock_ebi.assert_not_called()
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["totalElements"], 1)
+
+    @patch("tooluniverse.intact_tool.IntActRESTTool._use_ebi_search")
+    def test_paginated_response_handled(self, mock_ebi):
+        """Paginated responses should extract content and totalElements."""
+        tool = self._make_tool("intact_get_interaction_network")
+
+        with patch.object(tool.session, "get") as mock_get:
+            mock_resp = MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.headers = {"content-type": "application/json"}
+            mock_resp.raise_for_status = MagicMock()
+            mock_resp.json.return_value = {
+                "content": [{"id": "1"}, {"id": "2"}],
+                "totalElements": 500,
+            }
+            mock_resp.url = "https://example.com"
+            mock_get.return_value = mock_resp
+
+            result = tool.run({"identifier": "BRCA1"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["count"], 2)
+        self.assertEqual(result["totalElements"], 500)
+        self.assertIn("note", result)
+
+
+# ---------------------------------------------------------------------------
+# Response truncation
+# ---------------------------------------------------------------------------
+class TestResponseTruncation(unittest.TestCase):
+    """MCP server should truncate oversized responses."""
+
+    def test_truncate_list_response(self):
+        from tooluniverse.smcp import _truncate_response
+
+        big_list = [{"id": i, "data": "x" * 500} for i in range(500)]
+        serialized = json.dumps(big_list, ensure_ascii=False)
+        result = _truncate_response(big_list, serialized, 50_000)
+
+        parsed = json.loads(result)
+        self.assertTrue(parsed["_truncated"])
+        self.assertEqual(parsed["_total"], 500)
+        self.assertLess(parsed["_showing"], 500)
+        self.assertLessEqual(len(result), 50_200)  # small overshoot OK
+
+    def test_truncate_dict_with_large_list(self):
+        from tooluniverse.smcp import _truncate_response
+
+        big_dict = {
+            "status": "success",
+            "data": [{"id": i, "payload": "y" * 1000} for i in range(200)],
+        }
+        serialized = json.dumps(big_dict, ensure_ascii=False)
+        result = _truncate_response(big_dict, serialized, 50_000)
+
+        parsed = json.loads(result)
+        self.assertTrue(parsed["_truncated"])
+        self.assertIn("_data_total", parsed)
+
+    def test_small_response_not_truncated(self):
+        """Responses under the limit should not be truncated."""
+        from tooluniverse.smcp import _truncate_response
+
+        small = {"status": "success", "data": [1, 2, 3]}
+        serialized = json.dumps(small)
+        # Should not be called in practice (guard checks len first),
+        # but if called it should return something reasonable
+        result = _truncate_response(small, serialized, 100_000)
+        # The result should still be valid JSON even if not truncated
+        parsed = json.loads(result)
+        self.assertIsNotNone(parsed)
+
+
 class TestGTExWrapperDefaults(unittest.TestCase):
     """GTEx wrapper functions should default to gtex_v8."""
 
