@@ -8,8 +8,10 @@ data from 54 non-diseased tissue sites across nearly 1,000 individuals.
 Latest release: Adult GTEx V11 (January 2026)
 """
 
+from typing import Any, Dict
+
 import requests
-from typing import Dict, Any, List
+
 from .base_tool import BaseTool
 from .tool_registry import register_tool
 
@@ -126,19 +128,24 @@ class GTExV2Tool(BaseTool):
             "itemsPerPage": arguments.get("items_per_page", 250),
         }
 
+        # Feature-80A: /medianGeneExpression now requires tissueSiteDetailId.
+        # When no tissue specified, use /clusteredMedianGeneExpression for all tissues.
         if tissue_ids:
             params["tissueSiteDetailId"] = tissue_ids
-
-        url = f"{GTEX_BASE_URL}/expression/medianGeneExpression"
+            url = f"{GTEX_BASE_URL}/expression/medianGeneExpression"
+        else:
+            url = f"{GTEX_BASE_URL}/expression/clusteredMedianGeneExpression"
         response = requests.get(url, params=params, timeout=30)
 
         if response.status_code == 200:
             data = response.json()
+            # clusteredMedianGeneExpression returns data under 'medianGeneExpression' key
+            results = data.get("data", data.get("medianGeneExpression", []))
             return {
                 "status": "success",
-                "data": data.get("data", []),
+                "data": results,
                 "paging_info": data.get("paging_info", {}),
-                "num_results": len(data.get("data", [])),
+                "num_results": len(results),
             }
         else:
             return {

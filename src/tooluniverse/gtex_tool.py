@@ -95,22 +95,26 @@ class GTExExpressionTool:
             }
         gencode_id = _resolve_gene_id(gene_input, base, timeout)
 
-        # Feature-69A-001: /expression/geneExpression with gtex_v10 returns empty.
-        # Use /expression/medianGeneExpression with gtex_v8 for reliable results.
+        # Feature-80A: /expression/medianGeneExpression now requires tissueSiteDetailId.
+        # Use /expression/clusteredMedianGeneExpression which returns all tissues.
         query = {
             "gencodeId": gencode_id,
             "datasetId": "gtex_v8",
         }
-        url = f"{base}/expression/medianGeneExpression?{urlencode(query)}"
+        url = f"{base}/expression/clusteredMedianGeneExpression?{urlencode(query)}"
         try:
             api_response = _http_get(
                 url, headers={"Accept": "application/json"}, timeout=timeout
             )
-            expression_data = _extract_data_list(api_response)
+            # clusteredMedianGeneExpression returns data under 'medianGeneExpression' key
+            if isinstance(api_response, dict):
+                expression_data = api_response.get("medianGeneExpression", [])
+            else:
+                expression_data = _extract_data_list(api_response)
 
             result = {
                 "source": "GTEx",
-                "endpoint": "expression/medianGeneExpression",
+                "endpoint": "expression/clusteredMedianGeneExpression",
                 "query": query,
                 "data": {"geneExpression": expression_data},
                 "success": True,
@@ -134,7 +138,7 @@ class GTExExpressionTool:
             return {
                 "error": str(e),
                 "source": "GTEx",
-                "endpoint": "expression/medianGeneExpression",
+                "endpoint": "expression/clusteredMedianGeneExpression",
                 "success": False,
             }
 

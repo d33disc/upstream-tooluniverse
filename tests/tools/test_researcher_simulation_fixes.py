@@ -633,7 +633,8 @@ class TestGTExGeneIdResolution(unittest.TestCase):
         self.assertEqual(result["status"], "success")
         # Only 1 call (expression), no resolution call
         self.assertEqual(mock_get.call_count, 1)
-        self.assertIn("medianGeneExpression", mock_get.call_args[0][0])
+        # Feature-80A: without tissue, uses clusteredMedianGeneExpression
+        self.assertIn("GeneExpression", mock_get.call_args[0][0])
 
     def test_gene_expression_defaults_to_gtex_v8(self):
         """_get_gene_expression should default to gtex_v8 not gtex_v10."""
@@ -1408,8 +1409,8 @@ class TestGTExExpressionSummaryNote(unittest.TestCase):
         # Resolution fails - returns input as-is
         mock_resolve.return_value = "COL5A1"
 
-        # Expression API returns empty
-        mock_http.return_value = {"data": []}
+        # Feature-80A: clusteredMedianGeneExpression returns under 'medianGeneExpression' key
+        mock_http.return_value = {"medianGeneExpression": []}
 
         result = tool.run({"gene_symbol": "COL5A1"})
 
@@ -1427,8 +1428,8 @@ class TestGTExExpressionSummaryNote(unittest.TestCase):
         # Resolution succeeds but returns wrong version
         mock_resolve.return_value = "ENSG00000130635.18"
 
-        # Expression API returns empty (version mismatch)
-        mock_http.return_value = {"data": []}
+        # Feature-80A: clusteredMedianGeneExpression returns under 'medianGeneExpression' key
+        mock_http.return_value = {"medianGeneExpression": []}
 
         result = tool.run({"ensembl_gene_id": "ENSG00000130635"})
 
@@ -1443,8 +1444,9 @@ class TestGTExExpressionSummaryNote(unittest.TestCase):
         tool = self._make_tool()
 
         mock_resolve.return_value = "ENSG00000141510.16"
+        # Feature-80A: clusteredMedianGeneExpression returns under 'medianGeneExpression' key
         mock_http.return_value = {
-            "data": [{"gencodeId": "ENSG00000141510.16", "median": 15.0}]
+            "medianGeneExpression": [{"gencodeId": "ENSG00000141510.16", "median": 15.0}]
         }
 
         result = tool.run({"gene_symbol": "TP53"})
@@ -2570,6 +2572,191 @@ class TestGTExV2DatasetDefaults(unittest.TestCase):
             call_kwargs = mock_get.call_args[1]
             params = call_kwargs.get("params", {})
             self.assertEqual(params.get("datasetId"), "gtex_v8")
+
+
+# ---------------------------------------------------------------------------
+# GTEx expression summary uses clusteredMedianGeneExpression (Feature-80A)
+# ---------------------------------------------------------------------------
+class TestGTExExpressionSummaryEndpoint(unittest.TestCase):
+    """GTEx_get_expression_summary uses clusteredMedianGeneExpression for all-tissue results."""
+
+    def _make_tool(self):
+        from tooluniverse.gtex_tool import GTExExpressionTool
+
+        config = {
+            "name": "GTEx_get_expression_summary",
+            "type": "GTExExpressionTool",
+            "settings": {"base_url": "https://gtexportal.org/api/v2", "timeout": 30},
+            "parameter": {},
+        }
+        return GTExExpressionTool(config)
+
+    @patch("tooluniverse.gtex_tool.urlopen")
+    def test_uses_clustered_endpoint(self, mock_urlopen):
+        """Should call clusteredMedianGeneExpression, not medianGeneExpression."""
+        import json
+        from urllib.request import Request
+
+        gene_data = json.dumps({"data": [{"gencodeId": "ENSG00000012048.20"}]}).encode()
+        expr_data = json.dumps({
+            "medianGeneExpression": [
+                {"tissueSiteDetailId": "Brain_Cortex", "median": 1.5}
+            ]
+        }).encode()
+
+        # urlopen is called with Request objects; mock __enter__ to return readable responses
+        call_count = {"n": 0}
+        responses = [gene_data, expr_data]
+
+        def fake_urlopen(req, **kwargs):
+            idx = min(call_count["n"], len(responses) - 1)
+            call_count["n"] += 1
+            ctx = MagicMock()
+            ctx.__enter__ = MagicMock(return_value=MagicMock(read=MagicMock(return_value=responses[idx])))
+            ctx.__exit__ = MagicMock(return_value=False)
+            return ctx
+
+        mock_urlopen.side_effect = fake_urlopen
+
+        tool = self._make_tool()
+        result = tool.run({"gene_symbol": "BRCA1"})
+
+        # Verify the second URL call used clusteredMedianGeneExpression
+        calls = mock_urlopen.call_args_list
+        self.assertTrue(len(calls) >= 2)
+        second_req = calls[1][0][0]
+        url = second_req.full_url if isinstance(second_req, Request) else str(second_req)
+        self.assertIn("clusteredMedianGeneExpression", url)
+
+    @patch("tooluniverse.gtex_tool.urlopen")
+    def test_extracts_from_medianGeneExpression_key(self, mock_urlopen):
+        """Should extract data from the 'medianGeneExpression' key in response."""
+        import json
+        from urllib.request import Request
+
+        gene_data = json.dumps({"data": [{"gencodeId": "ENSG00000012048.20"}]}).encode()
+        expr_data = json.dumps({
+            "medianGeneExpression": [
+                {"tissueSiteDetailId": "Brain_Cortex", "median": 1.5},
+                {"tissueSiteDetailId": "Liver", "median": 0.8},
+            ],
+            "clusters": {"gene": "", "tissue": ""},
+        }).encode()
+
+        call_count = {"n": 0}
+        responses = [gene_data, expr_data]
+
+        def fake_urlopen(req, **kwargs):
+            idx = min(call_count["n"], len(responses) - 1)
+            call_count["n"] += 1
+            ctx = MagicMock()
+            ctx.__enter__ = MagicMock(return_value=MagicMock(read=MagicMock(return_value=responses[idx])))
+            ctx.__exit__ = MagicMock(return_value=False)
+            return ctx
+
+        mock_urlopen.side_effect = fake_urlopen
+
+        tool = self._make_tool()
+        result = tool.run({"gene_symbol": "BRCA1"})
+
+        self.assertTrue(result.get("success"))
+        expr = result.get("data", {}).get("geneExpression", [])
+        self.assertEqual(len(expr), 2)
+        self.assertEqual(expr[0]["tissueSiteDetailId"], "Brain_Cortex")
+
+
+# ---------------------------------------------------------------------------
+# GTEx v2 median gene expression uses clustered endpoint when no tissue (Feature-80A)
+# ---------------------------------------------------------------------------
+class TestGTExV2MedianExpressionEndpoint(unittest.TestCase):
+    """GTEx_get_median_gene_expression falls back to clusteredMedianGeneExpression."""
+
+    def _make_tool(self):
+        from tooluniverse.gtex_v2_tool import GTExV2Tool
+
+        config = {
+            "name": "GTEx_get_median_gene_expression",
+            "type": "GTExV2Tool",
+            "parameter": {"required": ["operation"]},
+            "fields": {},
+        }
+        return GTExV2Tool(config)
+
+    @patch("tooluniverse.gtex_v2_tool.requests.get")
+    def test_no_tissue_uses_clustered(self, mock_get):
+        """Without tissue, should use clusteredMedianGeneExpression endpoint."""
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "medianGeneExpression": [
+                {"tissueSiteDetailId": "Brain_Cortex", "median": 1.5}
+            ]
+        }
+        mock_get.return_value = mock_resp
+
+        tool = self._make_tool()
+        result = tool._get_median_gene_expression({
+            "gencode_id": "ENSG00000012048.20",
+            "dataset_id": "gtex_v8",
+        })
+
+        called_url = mock_get.call_args[0][0]
+        self.assertIn("clusteredMedianGeneExpression", called_url)
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(len(result["data"]), 1)
+
+    @patch("tooluniverse.gtex_v2_tool.requests.get")
+    def test_with_tissue_uses_median(self, mock_get):
+        """With specific tissue, should use medianGeneExpression endpoint."""
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {
+            "data": [{"tissueSiteDetailId": "Breast_Mammary_Tissue", "median": 1.3}],
+            "paging_info": {},
+        }
+        mock_get.return_value = mock_resp
+
+        tool = self._make_tool()
+        result = tool._get_median_gene_expression({
+            "gencode_id": "ENSG00000012048.20",
+            "dataset_id": "gtex_v8",
+            "tissue_site_detail_id": "Breast_Mammary_Tissue",
+        })
+
+        called_url = mock_get.call_args[0][0]
+        self.assertIn("medianGeneExpression", called_url)
+        self.assertNotIn("clustered", called_url)
+        self.assertEqual(result["status"], "success")
+
+
+# ---------------------------------------------------------------------------
+# LiteratureSearchTool PubTator uses 'query' not 'text' (Feature-80A)
+# ---------------------------------------------------------------------------
+class TestLiteratureToolPubTatorParam(unittest.TestCase):
+    """LiteratureSearchTool should pass 'query' not 'text' to PubTator."""
+
+    def test_pubtator_uses_query_param(self):
+        """literature_tool.py should call PubTator3_LiteratureSearch with query=, not text=."""
+        import ast
+
+        with open("src/tooluniverse/compose_scripts/literature_tool.py") as f:
+            source = f.read()
+
+        tree = ast.parse(source)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Call):
+                # Look for call_tool("PubTator3_LiteratureSearch", {...})
+                if (isinstance(node.func, ast.Name) and node.func.id == "call_tool"
+                        and len(node.args) >= 2):
+                    first_arg = node.args[0]
+                    if isinstance(first_arg, ast.Constant) and first_arg.value == "PubTator3_LiteratureSearch":
+                        dict_arg = node.args[1]
+                        if isinstance(dict_arg, ast.Dict):
+                            keys = [k.value if isinstance(k, ast.Constant) else str(k) for k in dict_arg.keys]
+                            self.assertIn("query", keys, "PubTator call should use 'query' param")
+                            self.assertNotIn("text", keys, "PubTator call should NOT use 'text' param")
+                            return
+        self.fail("Could not find PubTator3_LiteratureSearch call in literature_tool.py")
 
 
 if __name__ == "__main__":
