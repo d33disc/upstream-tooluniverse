@@ -1742,28 +1742,32 @@ class TestHumanBaseEntrezIdHandling(unittest.TestCase):
 
     @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
     def test_error_string_from_get_entrez_ids(self, mock_ids):
-        """When get_entrez_ids returns an error string, return empty graph."""
+        """When get_entrez_ids returns an error string, return error."""
         tool = self._make_tool()
         mock_ids.return_value = "Error fetching data for gene: INVALID"
 
         result = tool.run({"gene_list": ["INVALID"], "tissue": "brain"})
 
-        self.assertEqual(result["status"], "success")
-        # Should return empty network without crashing
-        self.assertIn("Total Proteins: 0", result["data"])
+        self.assertEqual(result["status"], "error")
+        self.assertIn("STRING_get_interaction_partners", result["error"])
 
     @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
     def test_none_values_filtered_from_entrez_ids(self, mock_ids):
-        """When get_entrez_ids returns [None, '7157'], filter out None."""
+        """When get_entrez_ids returns [None, '7157'], filter out None and use '7157'."""
         tool = self._make_tool()
         mock_ids.return_value = [None, "7157"]
 
         # Mock the network and BP API calls
         with patch("tooluniverse.humanbase_tool.requests.get") as mock_get:
-            # Network API response (empty)
+            # Network API response with one gene
             network_resp = MagicMock()
             network_resp.status_code = 200
-            network_resp.json.return_value = {"genes": [], "edges": []}
+            network_resp.json.return_value = {
+                "genes": [
+                    {"standard_name": "TP53", "entrez": "7157", "description": "tumor protein p53"}
+                ],
+                "edges": [],
+            }
             network_resp.raise_for_status.return_value = None
             # BP API response
             bp_resp = MagicMock()
@@ -1776,18 +1780,18 @@ class TestHumanBaseEntrezIdHandling(unittest.TestCase):
 
         self.assertEqual(result["status"], "success")
         # Should not crash — None filtered out, only '7157' used
-        self.assertIn("Total Proteins: 0", result["data"])
+        self.assertIn("Total Proteins: 1", result["data"])
 
     @patch("tooluniverse.humanbase_tool.HumanBaseTool.get_entrez_ids")
-    def test_all_none_returns_empty(self, mock_ids):
-        """When all genes resolve to None, return empty graph."""
+    def test_all_none_returns_error(self, mock_ids):
+        """When all genes resolve to None, return error with alternative suggestion."""
         tool = self._make_tool()
         mock_ids.return_value = [None, None]
 
         result = tool.run({"gene_list": ["FAKE1", "FAKE2"], "tissue": "brain"})
 
-        self.assertEqual(result["status"], "success")
-        self.assertIn("Total Proteins: 0", result["data"])
+        self.assertEqual(result["status"], "error")
+        self.assertIn("STRING_get_interaction_partners", result["error"])
 
 
 # ---------------------------------------------------------------------------
@@ -2870,6 +2874,101 @@ class TestBaseRESTToolHTMLDetection(unittest.TestCase):
         result = tool._process_response(mock_resp, "https://example.com/api")
         self.assertEqual(result["status"], "success")
         self.assertEqual(result["data"], "@article{foo, title={Bar}}")
+
+
+# ---------------------------------------------------------------------------
+# PMC: PMID extraction uses "pmid" key (not "pubmed")
+# ---------------------------------------------------------------------------
+class TestPMCPmidExtraction(unittest.TestCase):
+    """PMC tool should extract PMIDs using the 'pmid' key from esummary XML."""
+
+    def test_pmid_extracted_from_article_ids(self):
+        from tooluniverse.pmc_tool import PMCTool
+
+        tool = PMCTool({"name": "PMC_search_papers", "type": "PMCTool"})
+        items = {
+            "Title": "Test paper",
+            "ArticleIds": {
+                "pmid": "12345678",
+                "doi": "10.1234/test",
+                "pmcid": "PMC9999999",
+            },
+            "AuthorList": ["Smith J"],
+            "PubDate": "2024 Jan 01",
+            "Source": "Nature",
+        }
+        paper = tool._build_paper_from_summary("9999999", items)
+        self.assertEqual(paper["pmid"], "12345678")
+        self.assertEqual(paper["pmc_id"], "PMC9999999")
+        self.assertEqual(paper["doi"], "10.1234/test")
+
+    def test_pmid_fallback_to_pubmed_key(self):
+        """Backwards compatible: also accept 'pubmed' key."""
+        from tooluniverse.pmc_tool import PMCTool
+
+        tool = PMCTool({"name": "PMC_search_papers", "type": "PMCTool"})
+        items = {
+            "Title": "Old format paper",
+            "ArticleIds": {"pubmed": "87654321", "pmc": "PMC1111111"},
+        }
+        paper = tool._build_paper_from_summary("1111111", items)
+        self.assertEqual(paper["pmid"], "87654321")
+        self.assertEqual(paper["pmc_id"], "PMC1111111")
+
+
+# ---------------------------------------------------------------------------
+# HumanBase: returns error when network API is down
+# ---------------------------------------------------------------------------
+class TestHumanBaseErrorHandling(unittest.TestCase):
+    """HumanBase should return error status when network API fails."""
+
+    def test_empty_graph_returns_error(self):
+        from tooluniverse.humanbase_tool import HumanBaseTool
+
+        config = {
+            "name": "humanbase_ppi_analysis",
+            "type": "HumanBaseTool",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        tool = HumanBaseTool(config)
+
+        # Mock humanbase_ppi_retrieve to return empty graph
+        import networkx as nx
+
+        with patch.object(
+            tool, "humanbase_ppi_retrieve", return_value=(nx.Graph(), None)
+        ):
+            result = tool.run(
+                {"gene_list": ["EGFR", "ERBB2"], "tissue": "lung"}
+            )
+        self.assertEqual(result["status"], "error")
+        self.assertIn("STRING_get_interaction_partners", result["error"])
+
+    def test_empty_graph_with_bp_still_returns_error(self):
+        """Even if biological processes are found, empty network is an error."""
+        from tooluniverse.humanbase_tool import HumanBaseTool
+
+        config = {
+            "name": "humanbase_ppi_analysis",
+            "type": "HumanBaseTool",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        tool = HumanBaseTool(config)
+
+        import networkx as nx
+
+        with patch.object(
+            tool,
+            "humanbase_ppi_retrieve",
+            return_value=(nx.Graph(), ["regulation of cell growth"]),
+        ):
+            result = tool.run(
+                {"gene_list": ["EGFR", "ERBB2"], "tissue": "lung"}
+            )
+        self.assertEqual(result["status"], "error")
+        self.assertEqual(
+            result["biological_processes"], ["regulation of cell growth"]
+        )
 
 
 if __name__ == "__main__":

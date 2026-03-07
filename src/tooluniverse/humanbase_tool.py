@@ -26,6 +26,19 @@ class HumanBaseTool(BaseTool):
             gene_list, tissue, max_node, interaction
         )
 
+        if graph.number_of_nodes() == 0:
+            return {
+                "status": "error",
+                "error": (
+                    "HumanBase network API returned no interaction data. "
+                    "The API may be temporarily unavailable or the tissue "
+                    f"'{tissue}' may not be supported. Try "
+                    "STRING_get_interaction_partners as an alternative."
+                ),
+                "query": {"genes": gene_list, "tissue": tissue},
+                "biological_processes": bp_collection,
+            }
+
         if string_mode:
             result = self._convert_to_string(graph, bp_collection, gene_list, tissue)
             return {"status": "success", "data": result}
@@ -195,7 +208,9 @@ class HumanBaseTool(BaseTool):
 
         # Retrieve tissue-specific PPI
         try:
-            response = requests.get(network_url)
+            response = requests.get(network_url, timeout=15)
+            if response.status_code == 404:
+                return nx.Graph(), None
             response.raise_for_status()
             data = response.json()
 

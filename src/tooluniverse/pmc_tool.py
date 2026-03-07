@@ -88,12 +88,12 @@ class PMCTool(BaseTool):
         if not isinstance(article_ids, dict):
             article_ids = {}
 
-        pmcid = self._normalize_pmcid(article_ids.get("pmc") or pmc_numeric_id)
-        pmid = (
-            article_ids.get("pubmed")
-            if isinstance(article_ids.get("pubmed"), str)
-            else None
+        pmcid = self._normalize_pmcid(
+            article_ids.get("pmcid") or article_ids.get("pmc") or pmc_numeric_id
         )
+        # NCBI esummary XML uses "pmid" as the key (not "pubmed")
+        raw_pmid = article_ids.get("pmid") or article_ids.get("pubmed")
+        pmid = raw_pmid if isinstance(raw_pmid, str) else None
         doi = (
             article_ids.get("doi") if isinstance(article_ids.get("doi"), str) else None
         )
