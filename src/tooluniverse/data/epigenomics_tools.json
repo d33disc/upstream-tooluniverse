@@ -18,7 +18,7 @@
             "string",
             "null"
           ],
-          "description": "Biosample name filter (e.g., 'K562', 'HepG2', 'GM12878', 'liver', 'brain'). Leave empty to search all biosamples."
+          "description": "Biosample name from ENCODE ontology (cell lines or tissues, NOT disease names). Examples: 'K562', 'HepG2', 'GM12878', 'liver', 'brain'. For disease-specific data, search by relevant cell lines (e.g., K562/MOLM-13 for AML). Leave empty to search all."
         },
         "organism": {
           "type": "string",

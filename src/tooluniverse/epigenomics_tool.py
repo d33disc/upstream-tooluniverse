@@ -123,6 +123,8 @@ class EpigenomicsTool(BaseTool):
         # Feature-70A-003: ambiguous/non-leaf biosample terms (e.g. "heart") combined with
         # the organism filter can produce HTTP 404 from ENCODE. Fall back without
         # the organism filter in that case.
+        # Feature-79E: if biosample_term_name is not a valid ENCODE ontology term
+        # (e.g. disease names like "AML"), both attempts 404; return empty with hint.
         try:
             raw = self._encode_search(params)
         except Exception:
@@ -131,7 +133,20 @@ class EpigenomicsTool(BaseTool):
                 for k, v in params.items()
                 if k != "replicates.library.biosample.organism.scientific_name"
             }
-            raw = self._encode_search(fallback_params)
+            try:
+                raw = self._encode_search(fallback_params)
+            except Exception:
+                return {
+                    "data": [],
+                    "metadata": {
+                        "source": "ENCODE",
+                        "total": 0,
+                        "note": f"No results for biosample_term_name='{biosample}'. "
+                        "ENCODE requires ontology cell line/tissue names (e.g., 'K562', "
+                        "'HepG2', 'liver'), not disease names. Use GEO_search_chipseq_datasets "
+                        "for disease-based searches.",
+                    },
+                }
 
         experiments = []
         for exp in raw.get("@graph", []):

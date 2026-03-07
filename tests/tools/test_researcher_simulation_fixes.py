@@ -2469,5 +2469,108 @@ class TestFDALabelGenericNameFallback(unittest.TestCase):
         self.assertEqual(mock_get.call_count, 1)
 
 
+# ---------------------------------------------------------------------------
+# ENCODE histone search graceful 404 fallback (Feature-79E)
+# ---------------------------------------------------------------------------
+class TestENCODEHistoneSearchGracefulFallback(unittest.TestCase):
+    """ENCODE histone search should return empty result with hint on invalid biosample terms."""
+
+    def _make_tool(self):
+        from tooluniverse.epigenomics_tool import EpigenomicsTool
+
+        config = {
+            "name": "ENCODE_search_histone_experiments",
+            "description": "Search ENCODE histone ChIP-seq",
+            "fields": {"endpoint": "histone_chipseq"},
+            "parameter": {"required": []},
+        }
+        return EpigenomicsTool(config)
+
+    @patch("tooluniverse.epigenomics_tool.requests.get")
+    def test_disease_name_returns_empty_with_hint(self, mock_get):
+        """Disease names (not ENCODE ontology terms) should return empty with helpful note."""
+        from requests.exceptions import HTTPError
+
+        resp_404 = MagicMock()
+        resp_404.status_code = 404
+        resp_404.raise_for_status.side_effect = HTTPError(response=resp_404)
+
+        mock_get.return_value = resp_404
+
+        tool = self._make_tool()
+        result = tool.run({"biosample_term_name": "acute myeloid leukemia"})
+
+        self.assertEqual(result["data"], [])
+        self.assertIn("note", result["metadata"])
+        self.assertIn("ENCODE requires ontology", result["metadata"]["note"])
+
+    @patch("tooluniverse.epigenomics_tool.requests.get")
+    def test_valid_biosample_works(self, mock_get):
+        """Valid cell line names should return results normally."""
+        resp_ok = MagicMock()
+        resp_ok.status_code = 200
+        resp_ok.raise_for_status.return_value = None
+        resp_ok.json.return_value = {
+            "@graph": [
+                {
+                    "accession": "ENCSR000AAA",
+                    "assay_title": "Histone ChIP-seq",
+                    "biosample_summary": "K562",
+                    "target": {"label": "H3K27ac"},
+                    "lab": {"title": "Test Lab"},
+                    "status": "released",
+                    "date_released": "2024-01-01",
+                }
+            ],
+            "total": 1,
+        }
+
+        mock_get.return_value = resp_ok
+
+        tool = self._make_tool()
+        result = tool.run({"biosample_term_name": "K562", "histone_mark": "H3K27ac"})
+
+        self.assertGreater(len(result["data"]["experiments"]), 0)
+
+
+# ---------------------------------------------------------------------------
+# GTEx v2 dataset defaults (Feature-69A-002)
+# ---------------------------------------------------------------------------
+class TestGTExV2DatasetDefaults(unittest.TestCase):
+    """All GTEx v2 tool methods should default to gtex_v8."""
+
+    def _make_tool(self):
+        from tooluniverse.gtex_v2_tool import GTExV2Tool
+
+        config = {
+            "name": "GTEx_v2_test",
+            "description": "GTEx v2 test",
+            "fields": {"operation": "get_eqtl_genes"},
+            "parameter": {"required": []},
+        }
+        return GTExV2Tool(config)
+
+    @patch("tooluniverse.gtex_v2_tool.requests.get")
+    def test_eqtl_genes_defaults_v8(self, mock_get):
+        """_get_eqtl_genes should default to gtex_v8."""
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.json.return_value = {"data": [], "paging_info": {}}
+        mock_get.return_value = resp
+
+        tool = self._make_tool()
+        tool._get_eqtl_genes({})
+
+        called_params = mock_get.call_args[1].get("params", mock_get.call_args[0][0] if mock_get.call_args[0] else {})
+        # Check the params dict passed to requests.get
+        if isinstance(called_params, dict):
+            self.assertEqual(called_params.get("datasetId"), "gtex_v8")
+        else:
+            # params may be in kwargs
+            call_kwargs = mock_get.call_args[1]
+            params = call_kwargs.get("params", {})
+            self.assertEqual(params.get("datasetId"), "gtex_v8")
+
+
 if __name__ == "__main__":
     unittest.main()
