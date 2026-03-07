@@ -2971,5 +2971,104 @@ class TestHumanBaseErrorHandling(unittest.TestCase):
         )
 
 
+class TestHumanBaseGiantVersion(unittest.TestCase):
+    """HumanBase API requires giant_version parameter (v1 or v3)."""
+
+    def _make_tool(self):
+        from tooluniverse.humanbase_tool import HumanBaseTool
+
+        config = {
+            "name": "humanbase_ppi_analysis",
+            "type": "HumanBaseTool",
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        return HumanBaseTool(config)
+
+    @patch("tooluniverse.humanbase_tool.requests.get")
+    def test_network_url_includes_giant_version_v1(self, mock_get):
+        """Plain tissue slugs (e.g., 'brain') should use giant_version=v1."""
+        tool = self._make_tool()
+        # Mock get_entrez_ids to skip API calls
+        with patch.object(tool, "get_entrez_ids", return_value=["7157", "672"]):
+            # Mock network request to return empty to short-circuit
+            mock_resp = MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.json.return_value = {"genes": [], "edges": []}
+            mock_resp.raise_for_status = MagicMock()
+            # BP request
+            mock_bp_resp = MagicMock()
+            mock_bp_resp.status_code = 200
+            mock_bp_resp.json.return_value = []
+            mock_bp_resp.raise_for_status = MagicMock()
+            mock_get.side_effect = [mock_resp, mock_bp_resp]
+
+            tool.humanbase_ppi_retrieve(["TP53", "BRCA1"], "brain", max_node=5)
+
+        # Check the network URL used giant_version=v1
+        network_call_url = mock_get.call_args_list[0][0][0]
+        self.assertIn("giant_version=v1", network_call_url)
+        self.assertIn("/brain/network/", network_call_url)
+
+    @patch("tooluniverse.humanbase_tool.requests.get")
+    def test_network_url_includes_giant_version_v3(self, mock_get):
+        """Tissue slugs ending in '-v3' should use giant_version=v3."""
+        tool = self._make_tool()
+        with patch.object(tool, "get_entrez_ids", return_value=["7157", "672"]):
+            mock_resp = MagicMock()
+            mock_resp.status_code = 200
+            mock_resp.json.return_value = {"genes": [], "edges": []}
+            mock_resp.raise_for_status = MagicMock()
+            mock_bp_resp = MagicMock()
+            mock_bp_resp.status_code = 200
+            mock_bp_resp.json.return_value = []
+            mock_bp_resp.raise_for_status = MagicMock()
+            mock_get.side_effect = [mock_resp, mock_bp_resp]
+
+            tool.humanbase_ppi_retrieve(
+                ["TP53", "BRCA1"], "brain-v3", max_node=5
+            )
+
+        network_call_url = mock_get.call_args_list[0][0][0]
+        self.assertIn("giant_version=v3", network_call_url)
+        self.assertIn("/brain-v3/network/", network_call_url)
+
+    @patch("tooluniverse.humanbase_tool.requests.get")
+    def test_evidence_url_includes_giant_version(self, mock_get):
+        """Edge evidence URL should also include giant_version."""
+        tool = self._make_tool()
+        with patch.object(tool, "get_entrez_ids", return_value=["7157", "672"]):
+            # Network response with genes and edges
+            mock_net_resp = MagicMock()
+            mock_net_resp.status_code = 200
+            mock_net_resp.json.return_value = {
+                "genes": [
+                    {"standard_name": "TP53", "entrez": "7157", "description": "tumor protein p53"},
+                    {"standard_name": "BRCA1", "entrez": "672", "description": "BRCA1 DNA repair"},
+                ],
+                "edges": [{"source": 0, "target": 1, "weight": 0.9}],
+            }
+            mock_net_resp.raise_for_status = MagicMock()
+            # Evidence response
+            mock_ev_resp = MagicMock()
+            mock_ev_resp.status_code = 200
+            mock_ev_resp.json.return_value = {
+                "datatypes": [{"title": "co-expression", "weight": 0.8}]
+            }
+            mock_ev_resp.raise_for_status = MagicMock()
+            # BP response
+            mock_bp_resp = MagicMock()
+            mock_bp_resp.status_code = 200
+            mock_bp_resp.json.return_value = []
+            mock_bp_resp.raise_for_status = MagicMock()
+            mock_get.side_effect = [mock_net_resp, mock_ev_resp, mock_bp_resp]
+
+            tool.humanbase_ppi_retrieve(["TP53", "BRCA1"], "brain", max_node=2)
+
+        # The second call should be the evidence URL
+        evidence_call_url = mock_get.call_args_list[1][0][0]
+        self.assertIn("giant_version=v1", evidence_call_url)
+        self.assertIn("/brain/evidence/", evidence_call_url)
+
+
 if __name__ == "__main__":
     unittest.main()

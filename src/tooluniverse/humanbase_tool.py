@@ -188,6 +188,11 @@ class HumanBaseTool(BaseTool):
             return nx.Graph(), None
 
         tissue = tissue.replace(" ", "-").replace("_", "-").lower()
+
+        # HumanBase API requires giant_version parameter.
+        # Slugs ending in "-v3" use giant_version=v3; others use v1.
+        giant_version = "v3" if tissue.endswith("-v3") else "v1"
+
         interaction_types = [
             "co-expression",
             "interaction",
@@ -203,8 +208,8 @@ class HumanBaseTool(BaseTool):
         G = nx.Graph()
         bp_collection = None
 
-        network_url = f"https://hb.flatironinstitute.org/api/integrations/{tissue}/network/?datatypes={interaction}&entrez={gene_id}&node_size={max_node}"
-        edge_type_url = "https://hb.flatironinstitute.org/api/integrations/{tissue}/evidence/?limit=20&source={source}&target={target}"
+        network_url = f"https://hb.flatironinstitute.org/api/integrations/{tissue}/network/?giant_version={giant_version}&datatypes={interaction}&entrez={gene_id}&node_size={max_node}"
+        edge_type_url = "https://hb.flatironinstitute.org/api/integrations/{tissue}/evidence/?giant_version={giant_version}&limit=20&source={source}&target={target}"
 
         # Retrieve tissue-specific PPI
         try:
@@ -234,6 +239,7 @@ class HumanBaseTool(BaseTool):
                     edge_response = requests.get(
                         edge_type_url.format(
                             tissue=tissue,
+                            giant_version=giant_version,
                             source=G.nodes[source]["entrez"],
                             target=G.nodes[target]["entrez"],
                         )
