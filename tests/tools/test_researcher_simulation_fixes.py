@@ -3070,5 +3070,156 @@ class TestHumanBaseGiantVersion(unittest.TestCase):
         self.assertIn("/brain/evidence/", evidence_call_url)
 
 
+# ---------------------------------------------------------------------------
+# iCite search publications: must use PubMed eSearch first, not raw iCite API
+# ---------------------------------------------------------------------------
+class TestICiteSearchPublications(unittest.TestCase):
+    """iCite API has no keyword search — must search PubMed first for PMIDs."""
+
+    def _make_tool(self):
+        from tooluniverse.icite_tool import ICiteSearchPublicationsTool
+
+        config = {
+            "name": "iCite_search_publications",
+            "fields": {"endpoint": "https://icite.od.nih.gov/api/pubs"},
+            "parameter": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "limit": {"type": ["integer", "null"]},
+                    "offset": {"type": ["integer", "null"]},
+                },
+            },
+        }
+        return ICiteSearchPublicationsTool(config)
+
+    def test_import_tool_class(self):
+        from tooluniverse.icite_tool import ICiteSearchPublicationsTool
+
+        self.assertTrue(callable(ICiteSearchPublicationsTool))
+
+    @patch("tooluniverse.icite_tool.request_with_retry")
+    def test_searches_pubmed_then_icite(self, mock_request):
+        """Tool should call PubMed eSearch first, then iCite with returned PMIDs."""
+        tool = self._make_tool()
+
+        # Mock PubMed eSearch response
+        pubmed_resp = MagicMock()
+        pubmed_resp.status_code = 200
+        pubmed_resp.json.return_value = {
+            "esearchresult": {"idlist": ["12345", "67890"]}
+        }
+
+        # Mock iCite response
+        icite_resp = MagicMock()
+        icite_resp.status_code = 200
+        icite_resp.json.return_value = {
+            "data": [
+                {"pmid": 12345, "title": "Paper A", "citation_count": 50},
+                {"pmid": 67890, "title": "Paper B", "citation_count": 100},
+            ]
+        }
+
+        mock_request.side_effect = [pubmed_resp, icite_resp]
+        result = tool.run({"query": "CRISPR", "limit": 2})
+
+        self.assertIn("data", result)
+        self.assertEqual(len(result["data"]), 2)
+        # Should be sorted by citation_count descending
+        self.assertEqual(result["data"][0]["pmid"], 67890)
+        self.assertEqual(result["data"][1]["pmid"], 12345)
+
+        # Verify PubMed was called first
+        first_call = mock_request.call_args_list[0]
+        self.assertIn("eutils.ncbi.nlm.nih.gov", first_call.args[2])
+
+        # Verify iCite was called with PMIDs
+        second_call = mock_request.call_args_list[1]
+        self.assertIn("icite.od.nih.gov", second_call.args[2])
+        self.assertIn("12345", second_call.kwargs["params"]["pmids"])
+
+    @patch("tooluniverse.icite_tool.request_with_retry")
+    def test_empty_query_returns_error(self, mock_request):
+        tool = self._make_tool()
+        result = tool.run({"query": ""})
+        self.assertIn("error", result)
+
+    @patch("tooluniverse.icite_tool.request_with_retry")
+    def test_no_pubmed_results(self, mock_request):
+        tool = self._make_tool()
+        pubmed_resp = MagicMock()
+        pubmed_resp.status_code = 200
+        pubmed_resp.json.return_value = {"esearchresult": {"idlist": []}}
+        mock_request.return_value = pubmed_resp
+
+        result = tool.run({"query": "xyznonexistent123"})
+        self.assertEqual(result["data"], [])
+        self.assertIn("message", result)
+
+    @patch("tooluniverse.icite_tool.request_with_retry")
+    def test_offset_applied(self, mock_request):
+        """Offset should skip PMIDs from PubMed results."""
+        tool = self._make_tool()
+
+        pubmed_resp = MagicMock()
+        pubmed_resp.status_code = 200
+        pubmed_resp.json.return_value = {
+            "esearchresult": {"idlist": ["111", "222", "333"]}
+        }
+
+        icite_resp = MagicMock()
+        icite_resp.status_code = 200
+        icite_resp.json.return_value = {
+            "data": [
+                {"pmid": 222, "title": "Paper 2", "citation_count": 10},
+                {"pmid": 333, "title": "Paper 3", "citation_count": 20},
+            ]
+        }
+
+        mock_request.side_effect = [pubmed_resp, icite_resp]
+        result = tool.run({"query": "test", "limit": 2, "offset": 1})
+
+        # iCite should be called with PMIDs 222, 333 (skipping 111)
+        icite_call = mock_request.call_args_list[1]
+        pmids_param = icite_call.kwargs["params"]["pmids"]
+        self.assertNotIn("111", pmids_param)
+        self.assertIn("222", pmids_param)
+
+    def test_json_config_uses_custom_type(self):
+        """icite_tools.json must specify ICiteSearchPublicationsTool type."""
+        config_path = os.path.join(
+            os.path.dirname(__file__),
+            "../../src/tooluniverse/data/icite_tools.json",
+        )
+        with open(config_path) as f:
+            tools = json.load(f)
+        search_tool = next(t for t in tools if t["name"] == "iCite_search_publications")
+        self.assertEqual(search_tool["type"], "ICiteSearchPublicationsTool")
+
+    @patch("tooluniverse.icite_tool.request_with_retry")
+    def test_default_limit_is_10(self, mock_request):
+        """Without explicit limit, should default to 10."""
+        tool = self._make_tool()
+
+        pubmed_resp = MagicMock()
+        pubmed_resp.status_code = 200
+        pubmed_resp.json.return_value = {
+            "esearchresult": {"idlist": [str(i) for i in range(20)]}
+        }
+
+        icite_resp = MagicMock()
+        icite_resp.status_code = 200
+        icite_resp.json.return_value = {
+            "data": [
+                {"pmid": i, "title": f"Paper {i}", "citation_count": i}
+                for i in range(20)
+            ]
+        }
+
+        mock_request.side_effect = [pubmed_resp, icite_resp]
+        result = tool.run({"query": "test"})
+        self.assertEqual(len(result["data"]), 10)
+
+
 if __name__ == "__main__":
     unittest.main()

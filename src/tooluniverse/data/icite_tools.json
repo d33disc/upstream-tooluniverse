@@ -194,7 +194,7 @@
     "fields": {
       "endpoint": "https://icite.od.nih.gov/api/pubs"
     },
-    "type": "BaseRESTTool",
+    "type": "ICiteSearchPublicationsTool",
     "test_examples": [
       {
         "query": "BRCA1 breast cancer",
