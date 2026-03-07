@@ -94,6 +94,7 @@ AI Agent Interface:
 import asyncio
 import functools
 import json
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Union, Callable, Literal
@@ -108,32 +109,60 @@ from .logging_config import (
 )
 
 
+def _save_full_response(serialized: str) -> str:
+    """Save full response to a temp file and return the file path."""
+    import tempfile
+
+    fd, path = tempfile.mkstemp(suffix=".json", prefix="tooluniverse_result_")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(serialized)
+    except Exception:
+        os.close(fd)
+        raise
+    return path
+
+
 def _truncate_response(result: Any, serialized: str, max_chars: int) -> str:
     """Truncate oversized tool responses to fit LLM context windows.
 
-    Tries to intelligently truncate lists within the result before falling
-    back to raw string truncation.
+    Saves the full response to a temp file, then tries to intelligently
+    truncate lists within the result before falling back to raw string
+    truncation. The temp file path is included in the truncated response.
     """
-    # If result is a list, truncate to fewer items
+    try:
+        full_path = _save_full_response(serialized)
+    except Exception:
+        full_path = None
+
+    truncation_meta = (
+        {
+            "_full_result_file": full_path,
+            "_full_result_note": f"Full response ({len(serialized):,} chars) saved to: {full_path}",
+        }
+        if full_path
+        else {}
+    )
+
+    # If result is a list, binary-search for the max number of items that fit
     if isinstance(result, list) and len(result) > 1:
         total = len(result)
-        # Binary search for the right number of items
         lo, hi = 1, total
         while lo < hi:
             mid = (lo + hi + 1) // 2
             trial = json.dumps(result[:mid], ensure_ascii=False, default=str)
-            if len(trial) <= max_chars - 200:  # leave room for metadata
+            if len(trial) <= max_chars - 500:  # leave room for metadata
                 lo = mid
             else:
                 hi = mid - 1
-        truncated = result[:lo]
         return json.dumps(
             {
-                "data": truncated,
+                "data": result[:lo],
                 "_truncated": True,
                 "_showing": lo,
                 "_total": total,
                 "_note": f"Response truncated: showing {lo} of {total} items.",
+                **truncation_meta,
             },
             ensure_ascii=False,
             default=str,
@@ -141,30 +170,33 @@ def _truncate_response(result: Any, serialized: str, max_chars: int) -> str:
 
     # If result is a dict, try to truncate the largest list value
     if isinstance(result, dict):
-        largest_key = None
-        largest_len = 0
-        for k, v in result.items():
-            if isinstance(v, list) and len(v) > largest_len:
-                largest_key = k
-                largest_len = len(v)
-        if largest_key and largest_len > 2:
-            total = largest_len
+        largest_key = max(
+            (k for k, v in result.items() if isinstance(v, list)),
+            key=lambda k: len(result[k]),
+            default=None,
+        )
+        if largest_key and len(result[largest_key]) > 2:
+            total = len(result[largest_key])
             keep = max(1, total // 4)
             while keep >= 1:
-                trimmed = dict(result)
-                trimmed[largest_key] = result[largest_key][:keep]
-                trimmed["_truncated"] = True
-                trimmed[f"_{largest_key}_showing"] = keep
-                trimmed[f"_{largest_key}_total"] = total
+                trimmed = {
+                    **result,
+                    largest_key: result[largest_key][:keep],
+                    "_truncated": True,
+                    f"_{largest_key}_showing": keep,
+                    f"_{largest_key}_total": total,
+                    **truncation_meta,
+                }
                 trial = json.dumps(trimmed, ensure_ascii=False, default=str)
                 if len(trial) <= max_chars:
                     return trial
                 keep = keep // 2
 
     # Fallback: raw string truncation
-    return (
-        serialized[:max_chars] + f"\n... [TRUNCATED: {len(serialized):,} chars total]"
-    )
+    suffix = f"\n... [TRUNCATED: {len(serialized):,} chars total]"
+    if full_path:
+        suffix += f"\nFull response saved to: {full_path}"
+    return serialized[:max_chars] + suffix
 
 
 class SMCP(FastMCP):

@@ -13,6 +13,7 @@ Covers:
 """
 
 import json
+import os
 import unittest
 from unittest.mock import MagicMock, patch, PropertyMock
 
@@ -744,44 +745,73 @@ class TestIntActInteractorEndpoint(unittest.TestCase):
 class TestResponseTruncation(unittest.TestCase):
     """MCP server should truncate oversized responses."""
 
-    def test_truncate_list_response(self):
+    def setUp(self):
         from tooluniverse.smcp import _truncate_response
 
-        big_list = [{"id": i, "data": "x" * 500} for i in range(500)]
-        serialized = json.dumps(big_list, ensure_ascii=False)
-        result = _truncate_response(big_list, serialized, 50_000)
+        self._truncate_response = _truncate_response
+        self._temp_files = []
 
+    def tearDown(self):
+        for path in self._temp_files:
+            if os.path.isfile(path):
+                os.unlink(path)
+
+    def _truncate_and_parse(self, data, max_chars=50_000):
+        """Helper: serialize, truncate, parse result, and track temp files."""
+        serialized = json.dumps(data, ensure_ascii=False)
+        result = self._truncate_response(data, serialized, max_chars)
         parsed = json.loads(result)
+        if "_full_result_file" in parsed:
+            self._temp_files.append(parsed["_full_result_file"])
+        return parsed
+
+    def test_truncate_list_response(self):
+        big_list = [{"id": i, "data": "x" * 500} for i in range(500)]
+        parsed = self._truncate_and_parse(big_list)
+
         self.assertTrue(parsed["_truncated"])
         self.assertEqual(parsed["_total"], 500)
         self.assertLess(parsed["_showing"], 500)
-        self.assertLessEqual(len(result), 50_200)  # small overshoot OK
+
+        # Full result file should be saved with all original data
+        full_path = parsed["_full_result_file"]
+        self.assertTrue(os.path.isfile(full_path))
+        with open(full_path) as f:
+            full_data = json.load(f)
+        self.assertEqual(len(full_data), 500)
 
     def test_truncate_dict_with_large_list(self):
-        from tooluniverse.smcp import _truncate_response
-
         big_dict = {
             "status": "success",
             "data": [{"id": i, "payload": "y" * 1000} for i in range(200)],
         }
-        serialized = json.dumps(big_dict, ensure_ascii=False)
-        result = _truncate_response(big_dict, serialized, 50_000)
+        parsed = self._truncate_and_parse(big_dict)
 
-        parsed = json.loads(result)
         self.assertTrue(parsed["_truncated"])
         self.assertIn("_data_total", parsed)
+        self.assertIn("_full_result_file", parsed)
+        self.assertTrue(os.path.isfile(parsed["_full_result_file"]))
+
+    def test_truncate_saves_full_result_to_file(self):
+        """Full response file contains complete original data with metadata note."""
+        big_list = [{"id": i, "value": "z" * 300} for i in range(400)]
+        parsed = self._truncate_and_parse(big_list)
+
+        full_path = parsed["_full_result_file"]
+        self.assertTrue(full_path.endswith(".json"))
+
+        with open(full_path) as f:
+            restored = json.load(f)
+        self.assertEqual(len(restored), 400)
+        self.assertEqual(restored[0]["id"], 0)
+        self.assertEqual(restored[399]["id"], 399)
+
+        self.assertIn(full_path, parsed["_full_result_note"])
 
     def test_small_response_not_truncated(self):
-        """Responses under the limit should not be truncated."""
-        from tooluniverse.smcp import _truncate_response
-
+        """Responses under the limit should still return valid JSON."""
         small = {"status": "success", "data": [1, 2, 3]}
-        serialized = json.dumps(small)
-        # Should not be called in practice (guard checks len first),
-        # but if called it should return something reasonable
-        result = _truncate_response(small, serialized, 100_000)
-        # The result should still be valid JSON even if not truncated
-        parsed = json.loads(result)
+        parsed = self._truncate_and_parse(small, max_chars=100_000)
         self.assertIsNotNone(parsed)
 
 
@@ -2757,6 +2787,89 @@ class TestLiteratureToolPubTatorParam(unittest.TestCase):
                             self.assertNotIn("text", keys, "PubTator call should NOT use 'text' param")
                             return
         self.fail("Could not find PubTator3_LiteratureSearch call in literature_tool.py")
+
+
+# ---------------------------------------------------------------------------
+# BaseRESTTool: HTML error pages should return error, not success
+# ---------------------------------------------------------------------------
+class TestBaseRESTToolHTMLDetection(unittest.TestCase):
+    """BaseRESTTool should detect HTML error pages and return status=error."""
+
+    def test_html_response_returns_error(self):
+        """When a REST API returns HTML instead of JSON, treat it as an error."""
+        from tooluniverse.base_rest_tool import BaseRESTTool
+
+        config = {
+            "name": "MSigDB_get_geneset",
+            "type": "BaseRESTTool",
+            "fields": {
+                "endpoint": "https://example.com/api/{geneSetName}",
+            },
+            "parameter": {
+                "type": "object",
+                "properties": {
+                    "geneSetName": {"type": "string"},
+                },
+                "required": ["geneSetName"],
+            },
+        }
+        tool = BaseRESTTool(config)
+
+        # Mock response with HTML error page
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.side_effect = ValueError("No JSON")
+        mock_resp.text = "<html><body><h1>Gene Set Not Found</h1></body></html>"
+        mock_resp.headers = {"content-type": "text/html; charset=utf-8"}
+
+        result = tool._process_response(
+            mock_resp, "https://example.com/api/NONEXISTENT_GENESET"
+        )
+        self.assertEqual(result["status"], "error")
+        self.assertIn("HTML page", result["error"])
+
+    def test_json_response_returns_success(self):
+        """Normal JSON responses should still return success."""
+        from tooluniverse.base_rest_tool import BaseRESTTool
+
+        config = {
+            "name": "test_tool",
+            "type": "BaseRESTTool",
+            "fields": {"endpoint": "https://example.com/api"},
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        tool = BaseRESTTool(config)
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {"data": [1, 2, 3]}
+        mock_resp.headers = {"content-type": "application/json"}
+
+        result = tool._process_response(mock_resp, "https://example.com/api")
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"], {"data": [1, 2, 3]})
+
+    def test_plain_text_response_returns_success(self):
+        """Non-HTML text responses (e.g., BibTeX) should still return success."""
+        from tooluniverse.base_rest_tool import BaseRESTTool
+
+        config = {
+            "name": "test_tool",
+            "type": "BaseRESTTool",
+            "fields": {"endpoint": "https://example.com/api"},
+            "parameter": {"type": "object", "properties": {}, "required": []},
+        }
+        tool = BaseRESTTool(config)
+
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.side_effect = ValueError("No JSON")
+        mock_resp.text = "@article{foo, title={Bar}}"
+        mock_resp.headers = {"content-type": "text/plain"}
+
+        result = tool._process_response(mock_resp, "https://example.com/api")
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"], "@article{foo, title={Bar}}")
 
 
 if __name__ == "__main__":
