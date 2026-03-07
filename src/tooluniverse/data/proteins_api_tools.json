@@ -213,7 +213,7 @@
   {
     "type": "ProteinsAPIRESTTool",
     "name": "proteins_api_search",
-    "description": "Search proteins in Proteins API by gene name, protein name, or accession. The search intelligently maps your query: gene names (e.g., 'BRCA1') search by gene parameter, accessions (e.g., 'P05067') search by accession parameter, and longer queries (e.g., 'insulin') search by protein parameter. Returns list of matching proteins with full annotations. For broader search capabilities, consider using ebi_search_domain with domain='uniprot'.",
+    "description": "Search proteins in Proteins API by gene name, protein name, or accession. Defaults to human proteins (taxid=9606) for gene/name searches; use organism param to override. Gene names (e.g., 'BRCA1') search by gene parameter, accessions (e.g., 'P05067') search by accession parameter, and longer queries (e.g., 'insulin') search by protein parameter. Returns list of matching proteins with full annotations.",
     "parameter": {
       "type": "object",
       "properties": {
