@@ -92,9 +92,9 @@ class HMDBTool(BaseTool):
                 compounds = data.get("PC_Compounds", [])
                 if compounds:
                     cid = compounds[0].get("id", {}).get("id", {}).get("cid")
-                    # Get full compound properties
+                    # Get full compound properties (Title = common name, IUPACName = systematic name)
                     props_response = requests.get(
-                        f"{PUBCHEM_API_URL}/compound/cid/{cid}/property/MolecularFormula,MolecularWeight,ConnectivitySMILES,InChIKey,IUPACName/JSON",
+                        f"{PUBCHEM_API_URL}/compound/cid/{cid}/property/Title,MolecularFormula,MolecularWeight,ConnectivitySMILES,InChIKey,IUPACName/JSON",
                         timeout=self.timeout,
                     )
                     if props_response.status_code == 200:
@@ -103,12 +103,16 @@ class HMDBTool(BaseTool):
                             .get("PropertyTable", {})
                             .get("Properties", [{}])[0]
                         )
+                        # Feature-79A-006: Use common name (Title) as primary name,
+                        # fall back to IUPACName if Title is unavailable
+                        common_name = props.get("Title") or props.get("IUPACName")
                         return {
                             "status": "success",
                             "data": {
                                 "hmdb_id": hmdb_id,
                                 "pubchem_cid": cid,
-                                "name": props.get("IUPACName"),
+                                "name": common_name,
+                                "iupac_name": props.get("IUPACName"),
                                 "chemical_formula": props.get("MolecularFormula"),
                                 "molecular_weight": props.get("MolecularWeight"),
                                 "smiles": props.get("ConnectivitySMILES"),

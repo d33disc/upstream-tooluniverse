@@ -3221,5 +3221,264 @@ class TestICiteSearchPublications(unittest.TestCase):
         self.assertEqual(len(result["data"]), 10)
 
 
+# ---------------------------------------------------------------------------
+# Round 79A/B: ChEMBL drug name lookup, STITCH SSL, HMDB common name,
+# MetabolomicsWorkbench empty result guidance, PDB text search metadata
+# ---------------------------------------------------------------------------
+
+
+class TestChEMBLDrugNameLookupIcontainsFirst(unittest.TestCase):
+    """Feature-79B-001: ChEMBL_get_drug_mechanisms should find drugs by name
+    using icontains (reliable) before iexact (often times out)."""
+
+    def _make_tool(self):
+        from tooluniverse.chem_tool import ChEMBLRESTTool
+
+        config = {
+            "name": "ChEMBL_get_drug_mechanisms",
+            "base_url": "https://www.ebi.ac.uk/chembl/api/data",
+            "fields": {"endpoint": "mechanism"},
+        }
+        return ChEMBLRESTTool(config)
+
+    @patch("tooluniverse.chem_tool.requests.get")
+    def test_icontains_finds_sotorasib(self, mock_get):
+        """icontains lookup should find sotorasib and return parent ChEMBL ID."""
+        tool = self._make_tool()
+
+        # Mock icontains response
+        icontains_resp = MagicMock()
+        icontains_resp.status_code = 200
+        icontains_resp.json.return_value = {
+            "molecules": [
+                {
+                    "pref_name": "SOTORASIB",
+                    "molecule_chembl_id": "CHEMBL4535757",
+                    "molecule_hierarchy": {"parent_chembl_id": "CHEMBL4535757"},
+                }
+            ]
+        }
+        icontains_resp.raise_for_status = MagicMock()
+
+        mock_get.return_value = icontains_resp
+
+        result = tool._lookup_chembl_id_by_name("sotorasib")
+        self.assertEqual(result, "CHEMBL4535757")
+
+        # Verify icontains was tried (first param set)
+        call_args = mock_get.call_args_list[0]
+        self.assertIn("pref_name__icontains", call_args.kwargs.get("params", call_args[1].get("params", {})))
+
+    @patch("tooluniverse.chem_tool.requests.get")
+    def test_parent_compound_preferred(self, mock_get):
+        """Should return parent compound ID for salt forms."""
+        tool = self._make_tool()
+
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.json.return_value = {
+            "molecules": [
+                {
+                    "pref_name": "DASATINIB MONOHYDRATE",
+                    "molecule_chembl_id": "CHEMBL5416410",
+                    "molecule_hierarchy": {"parent_chembl_id": "CHEMBL1421"},
+                }
+            ]
+        }
+        resp.raise_for_status = MagicMock()
+        mock_get.return_value = resp
+
+        result = tool._lookup_chembl_id_by_name("dasatinib")
+        self.assertEqual(result, "CHEMBL1421")
+
+
+class TestSTITCHSSLWarning(unittest.TestCase):
+    """Feature-79B-006: STITCH should not crash with formatwarning error."""
+
+    def _make_tool(self):
+        from tooluniverse.stitch_tool import STITCHTool
+
+        config = {
+            "name": "STITCH_get_chemical_protein_interactions",
+            "fields": {"operation": "get_interactions"},
+        }
+        return STITCHTool(config)
+
+    @patch("tooluniverse.stitch_tool.requests.get")
+    def test_404_returns_actionable_error(self, mock_get):
+        """404 response should return helpful error, not crash."""
+        tool = self._make_tool()
+
+        resp = MagicMock()
+        resp.status_code = 404
+        mock_get.return_value = resp
+
+        result = tool._get_interactions({"identifiers": ["sotorasib"]})
+        self.assertIn("error", result)
+        self.assertIn("No interactions found", result["error"])
+        self.assertIn("CID", result["error"])
+
+    @patch("tooluniverse.stitch_tool.requests.get")
+    def test_success_returns_interactions(self, mock_get):
+        """Successful response should return interactions."""
+        tool = self._make_tool()
+
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.json.return_value = [{"stringId_A": "CID1", "stringId_B": "ENSP001", "score": 900}]
+        resp.raise_for_status = MagicMock()
+        mock_get.return_value = resp
+
+        result = tool._get_interactions({"identifiers": ["aspirin"]})
+        self.assertIn("interactions", result)
+        self.assertEqual(len(result["interactions"]), 1)
+
+
+class TestHMDBCommonName(unittest.TestCase):
+    """Feature-79A-006: HMDB should return common name, not just IUPAC."""
+
+    def _make_tool(self):
+        from tooluniverse.hmdb_tool import HMDBTool
+
+        config = {"name": "HMDB_get_metabolite"}
+        return HMDBTool(config)
+
+    @patch("tooluniverse.hmdb_tool.requests.get")
+    def test_common_name_returned(self, mock_get):
+        """Should return Title (common name) as primary name field."""
+        tool = self._make_tool()
+
+        # Mock PubChem xref response
+        xref_resp = MagicMock()
+        xref_resp.status_code = 200
+        xref_resp.json.return_value = {
+            "PC_Compounds": [{"id": {"id": {"cid": 305}}}]
+        }
+
+        # Mock PubChem property response with Title
+        props_resp = MagicMock()
+        props_resp.status_code = 200
+        props_resp.json.return_value = {
+            "PropertyTable": {
+                "Properties": [
+                    {
+                        "CID": 305,
+                        "Title": "Choline",
+                        "IUPACName": "2-hydroxyethyl(trimethyl)azanium",
+                        "MolecularFormula": "C5H14NO+",
+                        "MolecularWeight": "104.17",
+                    }
+                ]
+            }
+        }
+
+        mock_get.side_effect = [xref_resp, props_resp]
+        result = tool._get_metabolite({"hmdb_id": "HMDB0000097"})
+
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"]["name"], "Choline")
+        self.assertEqual(result["data"]["iupac_name"], "2-hydroxyethyl(trimethyl)azanium")
+
+
+class TestMetabolomicsWorkbenchEmptyGuidance(unittest.TestCase):
+    """Feature-79A-001: MW should give guidance when RefMet returns empty results."""
+
+    def _make_tool(self):
+        from tooluniverse.metabolomics_workbench_tool import MetabolomicsWorkbenchTool
+
+        config = {
+            "name": "MetabolomicsWorkbench_search_compound_by_name",
+            "fields": {"context": "refmet", "input_item": "name"},
+        }
+        return MetabolomicsWorkbenchTool(config)
+
+    @patch("tooluniverse.metabolomics_workbench_tool.requests.get")
+    def test_empty_array_includes_guidance(self, mock_get):
+        """Empty array response should include guidance about exact names."""
+        tool = self._make_tool()
+
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.text = "[]"
+        resp.json.return_value = []
+        resp.raise_for_status = MagicMock()
+        mock_get.return_value = resp
+
+        result = tool._make_request("refmet/name/bile acid/all")
+        self.assertEqual(result["status"], "success")
+        self.assertEqual(result["data"], [])
+        self.assertIn("message", result)
+        self.assertIn("exact metabolite names", result["message"])
+        self.assertIn("ChEBI_search", result["message"])
+
+
+class TestPDBTextSearchMetadata(unittest.TestCase):
+    """Feature-79B-003: PDB text search should include title and resolution."""
+
+    def _make_tool(self):
+        from tooluniverse.rcsb_search_tool import RCSBSearchTool
+
+        config = {"name": "PDB_search_similar_structures"}
+        return RCSBSearchTool(config)
+
+    @patch("tooluniverse.rcsb_search_tool.requests.post")
+    @patch("tooluniverse.rcsb_search_tool.requests.get")
+    def test_text_results_enriched_with_metadata(self, mock_get, mock_post):
+        """Text search results should have title, resolution, method."""
+        tool = self._make_tool()
+
+        # Patch _enrich via the post/get mocks
+        # First: search API response
+        search_resp = MagicMock()
+        search_resp.status_code = 200
+        search_resp.json.return_value = {
+            "result_set": [
+                {"identifier": "5V9O", "score": 1.0},
+                {"identifier": "6GOG", "score": 0.9},
+            ],
+            "total_count": 2,
+        }
+        search_resp.raise_for_status = MagicMock()
+        search_resp.content = b"data"
+
+        mock_post.return_value = search_resp
+
+        # Second: GraphQL metadata response
+        graphql_resp = MagicMock()
+        graphql_resp.status_code = 200
+        graphql_resp.json.return_value = {
+            "data": {
+                "entries": [
+                    {
+                        "rcsb_id": "5V9O",
+                        "struct": {"title": "KRAS G12C inhibitor"},
+                        "rcsb_entry_info": {
+                            "resolution_combined": [1.56],
+                            "experimental_method": "X-ray",
+                        },
+                    },
+                    {
+                        "rcsb_id": "6GOG",
+                        "struct": {"title": "KRAS-169 Q61H"},
+                        "rcsb_entry_info": {
+                            "resolution_combined": [2.05],
+                            "experimental_method": "X-ray",
+                        },
+                    },
+                ]
+            }
+        }
+
+        # requests.post is used for search, requests.get is not used here
+        # but _enrich uses requests.post for GraphQL
+        mock_post.side_effect = [search_resp, graphql_resp]
+
+        result = tool.run({"query": "KRAS", "search_type": "text", "max_results": 2})
+        self.assertEqual(len(result["results"]), 2)
+        self.assertEqual(result["results"][0]["title"], "KRAS G12C inhibitor")
+        self.assertEqual(result["results"][0]["resolution"], 1.56)
+        self.assertEqual(result["results"][0]["method"], "X-ray")
+
+
 if __name__ == "__main__":
     unittest.main()

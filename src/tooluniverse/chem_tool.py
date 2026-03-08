@@ -208,37 +208,42 @@ class ChEMBLRESTTool(BaseTool):
 
         return params
 
+    def _extract_parent_chembl_id(self, mol: dict) -> Optional[str]:
+        """Extract the parent ChEMBL ID from a molecule record."""
+        mol_id = mol.get("molecule_chembl_id")
+        # Feature-45B-07: prefer the parent compound over salt/formulation entries.
+        hierarchy = mol.get("molecule_hierarchy") or {}
+        parent_id = hierarchy.get("parent_chembl_id")
+        if parent_id and parent_id != mol_id:
+            return parent_id
+        return mol_id
+
     def _lookup_chembl_id_by_name(self, drug_name: str) -> Optional[str]:
         """Look up a ChEMBL molecule ID by preferred name (case-insensitive).
 
-        Tries exact match first, then falls back to contains match.
+        Feature-79B-001: Uses icontains first (most reliable), then iexact as
+        fallback. The iexact and search endpoints frequently timeout for newer drugs.
         Returns the ChEMBL ID of the first matching molecule, or None.
         """
         base = f"{self.base_url}/molecule.json"
         headers = {"Accept": "application/json", "User-Agent": "ToolUniverse/1.0"}
+        # Try icontains first (faster/more reliable than iexact on ChEMBL API)
         for lookup_params in (
-            {"pref_name__iexact": drug_name, "format": "json", "limit": 5},
             {"pref_name__icontains": drug_name, "format": "json", "limit": 5},
+            {"pref_name__iexact": drug_name, "format": "json", "limit": 5},
         ):
             try:
                 resp = requests.get(
-                    base, params=lookup_params, headers=headers, timeout=10
+                    base, params=lookup_params, headers=headers, timeout=20
                 )
                 resp.raise_for_status()
                 molecules = resp.json().get("molecules", [])
                 if molecules:
-                    mol = molecules[0]
-                    mol_id = mol.get("molecule_chembl_id")
-                    # Feature-45B-07: prefer the parent compound over salt/formulation entries.
-                    # e.g., "dasatinib" resolves to CHEMBL5416410 (salt form) whose
-                    # molecule_hierarchy.parent_chembl_id = CHEMBL1421 (the parent with
-                    # full mechanism records). Always use the parent to ensure mechanism
-                    # and activity data is found.
-                    hierarchy = mol.get("molecule_hierarchy") or {}
-                    parent_id = hierarchy.get("parent_chembl_id")
-                    if parent_id and parent_id != mol_id:
-                        return parent_id
-                    return mol_id
+                    # Prefer exact name match when icontains returns multiple
+                    for mol in molecules:
+                        if (mol.get("pref_name") or "").lower() == drug_name.lower():
+                            return self._extract_parent_chembl_id(mol)
+                    return self._extract_parent_chembl_id(molecules[0])
             except Exception:
                 pass
         return None
