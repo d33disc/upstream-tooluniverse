@@ -530,7 +530,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Disease ontology IDs (e.g., ['MONDO_0005148'] for type 2 diabetes, ['EFO_0000249'] for Alzheimer disease)"
+          "description": "Disease ontology IDs (e.g., ['MONDO_0005148'] for type 2 diabetes, ['MONDO_0004975'] for Alzheimer disease)"
         },
         "enableIndirect": {
           "type": "boolean",

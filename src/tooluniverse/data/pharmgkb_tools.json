@@ -172,7 +172,7 @@
             "properties": {
                 "annotation_id": {
                     "type": "string",
-                    "description": "PharmGKB clinical annotation ID (e.g., '1449309855'). Required for reliable results."
+                    "description": "PharmGKB clinical annotation ID (e.g., '1447954390'). Required for reliable results."
                 },
                 "gene_id": {
                     "type": "string",

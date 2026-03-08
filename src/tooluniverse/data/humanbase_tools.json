@@ -16,7 +16,7 @@
         },
         "tissue": {
           "type": "string",
-          "description": "Tissue type for tissue-specific interactions. Examples: 'brain', 'heart', 'liver', 'kidney', etc.",
+          "description": "Tissue type for tissue-specific interactions. Use simple names like 'brain', 'heart', 'liver', 'kidney', 'lung', 'blood'. For v3 networks with more cell-type specificity, append '-v3' (e.g., 'brain-v3', 'liver-v3').",
           "default": "brain"
         },
         "max_node": {
@@ -44,18 +44,14 @@
         }
       },
       "required": [
-        "gene_list",
-        "tissue",
-        "max_node",
-        "interaction",
-        "string_mode"
+        "gene_list"
       ]
     },
     "test_examples": [
       {
-        "gene_list": ["TP53"],
+        "gene_list": ["TP53", "BRCA1"],
         "tissue": "brain",
-        "max_node": 1,
+        "max_node": 3,
         "interaction": "co-expression",
         "string_mode": true
       }

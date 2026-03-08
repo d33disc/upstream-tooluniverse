@@ -101,12 +101,15 @@ Anti-patterns: hint text instead of validation, parameter aliases instead of fix
 
 ## Phase 4: Fix & Commit
 
-1. Implement verified fixes
-2. Lint: `ruff check src/tooluniverse/<file>.py`
-3. Verify syntax: `python -c "from tooluniverse.<module> import <Class>"`
-4. Test: `python -m tooluniverse.cli run <Tool> '<json>'`
-5. Pre-commit hook pattern: stage → commit (fails, reformats) → re-stage → commit
-6. Push: `git push origin <branch>`
+1. Implement verified fixes (see [references/bug-patterns.md](references/bug-patterns.md) for code-level patterns)
+2. **Run code-simplifier**: `Skill(skill="simplify")` — always after writing or modifying code
+3. Lint: `ruff check src/tooluniverse/<file>.py`
+4. Verify syntax: `python -c "from tooluniverse.<module> import <Class>"`
+5. Test: `python -m tooluniverse.cli run <Tool> '<json>'`
+6. Pre-commit hook pattern: stage → commit (fails, reformats) → re-stage → commit
+7. Push: `git push origin <branch>`
+
+> Also see `Skill(skill="devtu-code-optimization")` for reusable fix patterns and anti-patterns.
 
 ## Phase 5: Optimize (optional)
 
@@ -118,9 +121,12 @@ After fixes are stable:
 ## Phase 6: Ship
 
 Invoke `Skill(skill="devtu-github")` or manually:
-1. Rebase onto `origin/main` before pushing
+1. Rebase: `git fetch origin && git stash && git rebase origin/main && git stash pop`
 2. `git push --force-with-lease origin <branch>`
-3. Create or update PR: `gh pr create` / verify with `gh pr view`
+3. Create or update PR: `gh pr create` / verify with `gh pr view <N> --json mergeable`
+4. Verify `"mergeable": "MERGEABLE"` before reporting done
+
+**GitHub repo**: `mims-harvard/ToolUniverse` — always verify with `git remote -v` before pushing.
 
 ---
 
@@ -145,8 +151,3 @@ Invoke `Skill(skill="devtu-github")` or manually:
 
 Full patterns → [references/bug-patterns.md](references/bug-patterns.md)
 
-## Round Tracking
-
-After each round: advance counter, update patterns file, keep this SKILL.md under 150 lines.
-
-**Current round: 79** (rounds completed: 52-78)

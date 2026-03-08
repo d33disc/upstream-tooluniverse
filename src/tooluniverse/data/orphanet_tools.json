@@ -26,14 +26,19 @@
           "default": "en"
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
@@ -59,11 +64,9 @@
     },
     "test_examples": [
       {
-        "operation": "search_diseases",
         "query": "Marfan syndrome"
       },
       {
-        "operation": "search_diseases",
         "query": "muscular dystrophy",
         "lang": "en",
         "limit": 10
@@ -92,7 +95,9 @@
           "default": "en"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -125,11 +130,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_disease",
         "orpha_code": "558"
       },
       {
-        "operation": "get_disease",
         "orpha_code": "ORPHA:166024"
       }
     ]
@@ -151,7 +154,9 @@
           "description": "Orphanet ORPHA code for the disease"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -191,7 +196,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_genes",
         "orpha_code": "558"
       }
     ]
@@ -218,7 +222,9 @@
           "default": "en"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -242,7 +248,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_classification",
         "orpha_code": "558"
       }
     ]
@@ -274,7 +279,9 @@
           "default": "en"
         }
       },
-      "required": ["operation", "name"]
+      "required": [
+        "name"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -300,7 +307,6 @@
     },
     "test_examples": [
       {
-        "operation": "search_by_name",
         "name": "Marfan syndrome",
         "exact": true
       }
@@ -323,7 +329,9 @@
           "description": "Orphanet ORPHA code (e.g., 558 for Marfan, 586 for Cystic Fibrosis)"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -345,10 +353,21 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "hpo_id": {"type": "string"},
-                  "hpo_term": {"type": "string"},
-                  "frequency": {"type": "string"},
-                  "diagnostic_criteria": {"type": ["string", "null"]}
+                  "hpo_id": {
+                    "type": "string"
+                  },
+                  "hpo_term": {
+                    "type": "string"
+                  },
+                  "frequency": {
+                    "type": "string"
+                  },
+                  "diagnostic_criteria": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
                 }
               }
             },
@@ -361,11 +380,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_phenotypes",
         "orpha_code": "558"
       },
       {
-        "operation": "get_phenotypes",
         "orpha_code": "586"
       }
     ]
@@ -387,7 +404,9 @@
           "description": "Orphanet ORPHA code (e.g., 558 for Marfan, 586 for Cystic Fibrosis)"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -409,12 +428,24 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "type": {"type": "string"},
-                  "class": {"type": "string"},
-                  "geographic": {"type": "string"},
-                  "mean_value": {"type": "string"},
-                  "source": {"type": "string"},
-                  "validation_status": {"type": "string"}
+                  "type": {
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  },
+                  "geographic": {
+                    "type": "string"
+                  },
+                  "mean_value": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "validation_status": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -427,11 +458,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_epidemiology",
         "orpha_code": "558"
       },
       {
-        "operation": "get_epidemiology",
         "orpha_code": "586"
       }
     ]
@@ -453,7 +482,9 @@
           "description": "Orphanet ORPHA code (e.g., 558 for Marfan, 399 for Huntington)"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -472,11 +503,15 @@
             },
             "average_age_of_onset": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": {
+                "type": "string"
+              }
             },
             "type_of_inheritance": {
               "type": "array",
-              "items": {"type": "string"}
+              "items": {
+                "type": "string"
+              }
             },
             "disorder_group": {
               "type": "string"
@@ -490,18 +525,16 @@
     },
     "test_examples": [
       {
-        "operation": "get_natural_history",
         "orpha_code": "558"
       },
       {
-        "operation": "get_natural_history",
         "orpha_code": "399"
       }
     ]
   },
   {
     "name": "Orphanet_get_gene_diseases",
-    "description": "Get rare diseases associated with a gene from Orphanet. Search by gene name keyword (e.g., 'fibrillin', 'huntingtin', 'dystrophin') to find all rare diseases linked to genes matching that name. Returns disease ORPHA codes, gene symbols, association types, and genomic locus information.",
+    "description": "Get rare diseases associated with a gene from Orphanet. Accepts gene symbols (e.g., 'FBN1', 'BRCA1', 'HTT') or gene name keywords (e.g., 'fibrillin', 'huntingtin', 'dystrophin'). Gene symbols are auto-resolved to full names. Returns disease ORPHA codes, gene symbols, association types, and genomic locus information.",
     "type": "OrphanetTool",
     "parameter": {
       "type": "object",
@@ -513,10 +546,12 @@
         },
         "gene_name": {
           "type": "string",
-          "description": "Gene name keyword to search (e.g., 'fibrillin', 'huntingtin', 'collagen', 'dystrophin')"
+          "description": "Gene symbol (e.g., 'FBN1', 'BRCA1', 'HTT') or gene name keyword (e.g., 'fibrillin', 'huntingtin'). Symbols are auto-resolved."
         }
       },
-      "required": ["operation", "gene_name"]
+      "required": [
+        "gene_name"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -535,18 +570,35 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "orpha_code": {"type": ["string", "integer"]},
-                  "preferred_term": {"type": "string"},
-                  "disorder_group": {"type": "string"},
-                  "typology": {"type": "string"},
+                  "orpha_code": {
+                    "type": [
+                      "string",
+                      "integer"
+                    ]
+                  },
+                  "preferred_term": {
+                    "type": "string"
+                  },
+                  "disorder_group": {
+                    "type": "string"
+                  },
+                  "typology": {
+                    "type": "string"
+                  },
                   "genes": {
                     "type": "array",
                     "items": {
                       "type": "object",
                       "properties": {
-                        "symbol": {"type": "string"},
-                        "name": {"type": "string"},
-                        "association_type": {"type": "string"}
+                        "symbol": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "association_type": {
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -562,11 +614,12 @@
     },
     "test_examples": [
       {
-        "operation": "get_gene_diseases",
+        "gene_name": "FBN1"
+      },
+      {
         "gene_name": "fibrillin"
       },
       {
-        "operation": "get_gene_diseases",
         "gene_name": "dystrophin"
       }
     ]
@@ -598,7 +651,9 @@
           "default": "en"
         }
       },
-      "required": ["operation", "orpha_code"]
+      "required": [
+        "orpha_code"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -622,11 +677,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_icd_mapping",
         "orpha_code": "558"
       },
       {
-        "operation": "get_icd_mapping",
         "orpha_code": "586",
         "coding_system": "omim"
       }

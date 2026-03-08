@@ -20,17 +20,25 @@
           "default": 50
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_structures", "query": "anti-CD20"}
+      {
+        "query": "anti-CD20"
+      }
     ]
   },
   {
@@ -49,17 +57,25 @@
           "description": "4-character PDB ID (e.g., 1IGT, 6W41)"
         }
       },
-      "required": ["operation", "pdb_id"]
+      "required": [
+        "pdb_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_structure", "pdb_id": "1AHW"}
+      {
+        "pdb_id": "1AHW"
+      }
     ]
   },
   {
@@ -74,17 +90,21 @@
           "const": "get_summary"
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_summary"}
+      {}
     ]
   }
 ]

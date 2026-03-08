@@ -178,7 +178,7 @@
   {
     "type": "IntActRESTTool",
     "name": "intact_get_interaction_network",
-    "description": "Get interaction network centered on a specific interactor. Returns network of interactions with configurable depth (direct interactions or extended network). Accepts IntAct identifiers (e.g., 'EBI-1004115'), UniProt IDs (e.g., 'P04637'), or gene names. Note: For interaction-specific networks, use interaction IDs from intact_get_interactions or intact_search_interactions results.",
+    "description": "Get interaction network centered on a specific interactor. Uses EBI Search API (IntAct domain) for reliable access. Accepts IntAct identifiers (e.g., 'EBI-1004115'), UniProt IDs (e.g., 'P04637'), or gene names (e.g., 'BRCA1'). Returns interactions with interaction IDs in the 'interaction_ids' field. These IDs can be used with intact_get_interaction_details for detailed information.",
     "parameter": {
       "type": "object",
       "properties": {

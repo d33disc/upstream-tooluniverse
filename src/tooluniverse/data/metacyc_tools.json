@@ -6,23 +6,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search_pathways"},
+        "operation": {
+          "type": "string",
+          "const": "search_pathways"
+        },
         "query": {
           "type": "string",
           "description": "Search query - pathway name or keyword (e.g., 'glycolysis', 'TCA cycle')"
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_pathways", "query": "glycolysis"}
+      {
+        "query": "glycolysis"
+      }
     ]
   },
   {
@@ -32,23 +43,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_pathway"},
+        "operation": {
+          "type": "string",
+          "const": "get_pathway"
+        },
         "pathway_id": {
           "type": "string",
           "description": "MetaCyc pathway ID (e.g., PWY-5177, GLYCOLYSIS)"
         }
       },
-      "required": ["operation", "pathway_id"]
+      "required": [
+        "pathway_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_pathway", "pathway_id": "GLYCOLYSIS"}
+      {
+        "pathway_id": "GLYCOLYSIS"
+      }
     ]
   },
   {
@@ -58,23 +80,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_compound"},
+        "operation": {
+          "type": "string",
+          "const": "get_compound"
+        },
         "compound_id": {
           "type": "string",
           "description": "MetaCyc compound ID (e.g., CPD-1, PYRUVATE)"
         }
       },
-      "required": ["operation", "compound_id"]
+      "required": [
+        "compound_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_compound", "compound_id": "PYRUVATE"}
+      {
+        "compound_id": "PYRUVATE"
+      }
     ]
   },
   {
@@ -84,23 +117,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_reaction"},
+        "operation": {
+          "type": "string",
+          "const": "get_reaction"
+        },
         "reaction_id": {
           "type": "string",
           "description": "MetaCyc reaction ID (e.g., RXN-14500)"
         }
       },
-      "required": ["operation", "reaction_id"]
+      "required": [
+        "reaction_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_reaction", "reaction_id": "PEPDEPHOS-RXN"}
+      {
+        "reaction_id": "PEPDEPHOS-RXN"
+      }
     ]
   }
 ]

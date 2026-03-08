@@ -3,7 +3,9 @@
     "name": "OMIM_search",
     "description": "Search OMIM database for Mendelian diseases and genes. OMIM is the authoritative source for human genetic disorders. Search by gene name, disease name, or phenotype keywords. Returns MIM numbers, titles, and entry types. Requires OMIM_API_KEY env var (register at omim.org/api).",
     "type": "OMIMTool",
-    "required_api_keys": ["OMIM_API_KEY"],
+    "required_api_keys": [
+      "OMIM_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -29,14 +31,19 @@
           "default": 0
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
@@ -58,12 +65,10 @@
     },
     "test_examples": [
       {
-        "operation": "search",
         "query": "BRCA1",
         "limit": 5
       },
       {
-        "operation": "search",
         "query": "cystic fibrosis",
         "limit": 10
       }
@@ -73,7 +78,9 @@
     "name": "OMIM_get_entry",
     "description": "Get detailed OMIM entry by MIM number. Returns comprehensive information including text description, clinical features, inheritance, molecular genetics, and references. MIM numbers are 6-digit identifiers (e.g., 164730 for BRAF gene). Requires OMIM_API_KEY.",
     "type": "OMIMTool",
-    "required_api_keys": ["OMIM_API_KEY"],
+    "required_api_keys": [
+      "OMIM_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -92,7 +99,9 @@
           "default": "text,clinicalSynopsis,geneMap"
         }
       },
-      "required": ["operation", "mim_number"]
+      "required": [
+        "mim_number"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -121,11 +130,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_entry",
         "mim_number": "164730"
       },
       {
-        "operation": "get_entry",
         "mim_number": "219700"
       }
     ]
@@ -134,7 +141,9 @@
     "name": "OMIM_get_gene_map",
     "description": "Get OMIM gene-disease mapping information. Returns genes mapped to chromosomal locations with associated phenotypes and inheritance patterns. Query by MIM number or chromosome. Useful for finding all disease genes on a chromosome.",
     "type": "OMIMTool",
-    "required_api_keys": ["OMIM_API_KEY"],
+    "required_api_keys": [
+      "OMIM_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -157,7 +166,7 @@
           "default": 50
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -181,11 +190,9 @@
     },
     "test_examples": [
       {
-        "operation": "get_gene_map",
         "mim_number": "164730"
       },
       {
-        "operation": "get_gene_map",
         "chromosome": "7",
         "limit": 20
       }
@@ -195,7 +202,9 @@
     "name": "OMIM_get_clinical_synopsis",
     "description": "Get clinical synopsis (phenotype features) for an OMIM phenotype entry. Returns structured clinical features organized by body system (e.g., neurologic, cardiovascular). Essential for phenotype-based disease matching. Requires OMIM_API_KEY.",
     "type": "OMIMTool",
-    "required_api_keys": ["OMIM_API_KEY"],
+    "required_api_keys": [
+      "OMIM_API_KEY"
+    ],
     "parameter": {
       "type": "object",
       "properties": {
@@ -209,7 +218,9 @@
           "description": "OMIM MIM number for phenotype (e.g., 219700 for cystic fibrosis)"
         }
       },
-      "required": ["operation", "mim_number"]
+      "required": [
+        "mim_number"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -242,7 +253,6 @@
     },
     "test_examples": [
       {
-        "operation": "get_clinical_synopsis",
         "mim_number": "219700"
       }
     ]

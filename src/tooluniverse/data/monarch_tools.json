@@ -280,7 +280,7 @@
     },
     "query_schema": {
       "subject": null,
-      "category": ["biolink:GeneToDiseaseAssociation"],
+      "category": ["biolink:CausalGeneToDiseaseAssociation"],
       "limit": 100,
       "offset": 0
     },

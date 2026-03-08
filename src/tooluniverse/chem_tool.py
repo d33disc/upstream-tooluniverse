@@ -160,6 +160,23 @@ class ChEMBLRESTTool(BaseTool):
             else:
                 params["molecule_chembl_id__exact"] = drug_id
 
+        # Map target_chembl_id and assay_chembl_id to __exact API params
+        # when used as query filters (not as URL path components)
+        target_id = args.get("target_chembl_id")
+        if target_id is not None and not tool_name_local.startswith(
+            "ChEMBL_get_target"
+        ):
+            params["target_chembl_id__exact"] = target_id
+
+        assay_id = args.get("assay_chembl_id")
+        if assay_id is not None and not tool_name_local.startswith("ChEMBL_get_assay"):
+            params["assay_chembl_id__exact"] = assay_id
+
+        # Feature-79A: mechanism_of_action__contains → __icontains for case-insensitive search
+        moa_filter = args.get("mechanism_of_action__contains")
+        if moa_filter is not None:
+            params["mechanism_of_action__icontains"] = moa_filter
+
         # Add any filter parameters (ChEMBL uses field__filter syntax)
         # e.g., molecule_chembl_id__exact, pref_name__icontains
         for key, value in args.items():
@@ -175,10 +192,11 @@ class ChEMBLRESTTool(BaseTool):
                     "q",  # handled above: mapped to pref_name__icontains
                     "query",  # handled above: alias for q
                     "pref_name__contains",  # handled above: alias for pref_name__icontains
+                    "mechanism_of_action__contains",  # handled above: mapped to __icontains
                     "max_results",  # handled above: alias for limit
                     "chembl_id",
-                    "target_chembl_id",
-                    "assay_chembl_id",
+                    "target_chembl_id",  # handled above: mapped to target_chembl_id__exact
+                    "assay_chembl_id",  # handled above: mapped to assay_chembl_id__exact
                     "activity_id",
                     "drug_chembl_id",  # handled above: mapped to molecule_chembl_id__exact / parent_molecule_chembl_id
                     "molecule_chembl_id",  # handled above: alias for drug_chembl_id
@@ -282,6 +300,20 @@ class ChEMBLRESTTool(BaseTool):
             # Feature-41B-01: query/pref_name__icontains is also silently ignored by
             # /mechanism.json endpoint — catch it here and return a helpful error.
             if tool_name == "ChEMBL_search_mechanisms":
+                # target_chembl_id is silently ignored by /mechanism.json
+                target_id = arguments.get("target_chembl_id")
+                if target_id:
+                    return {
+                        "status": "error",
+                        "error": f"target_chembl_id='{target_id}' is not supported for "
+                        "ChEMBL_search_mechanisms. The /mechanism.json endpoint ignores "
+                        "target-based filters. To find mechanisms for a target: "
+                        "(1) use ChEMBL_search_activities with target_chembl_id to find "
+                        "drugs acting on the target, then (2) use ChEMBL_get_drug_mechanisms "
+                        "with the drug_chembl_id. Alternatively, filter by "
+                        "mechanism_of_action__icontains (e.g., 'DPP4 inhibitor').",
+                    }
+
                 drug_name = arguments.get("drug_name")
                 query_name = arguments.get("query") or arguments.get("q")
                 if drug_name or query_name:

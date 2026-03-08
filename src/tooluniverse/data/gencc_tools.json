@@ -21,7 +21,9 @@
           "default": ""
         }
       },
-      "required": ["operation", "gene_symbol"]
+      "required": [
+        "gene_symbol"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -40,14 +42,30 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "gene_symbol": {"type": "string"},
-                  "gene_curie": {"type": "string"},
-                  "disease_title": {"type": "string"},
-                  "disease_curie": {"type": "string"},
-                  "classification": {"type": "string"},
-                  "mode_of_inheritance": {"type": "string"},
-                  "submitter": {"type": "string"},
-                  "submitted_date": {"type": "string"}
+                  "gene_symbol": {
+                    "type": "string"
+                  },
+                  "gene_curie": {
+                    "type": "string"
+                  },
+                  "disease_title": {
+                    "type": "string"
+                  },
+                  "disease_curie": {
+                    "type": "string"
+                  },
+                  "classification": {
+                    "type": "string"
+                  },
+                  "mode_of_inheritance": {
+                    "type": "string"
+                  },
+                  "submitter": {
+                    "type": "string"
+                  },
+                  "submitted_date": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -63,11 +81,9 @@
     },
     "test_examples": [
       {
-        "operation": "search_gene",
         "gene_symbol": "BRCA2"
       },
       {
-        "operation": "search_gene",
         "gene_symbol": "FBN1",
         "classification": "Definitive"
       }
@@ -95,7 +111,9 @@
           "default": ""
         }
       },
-      "required": ["operation", "disease"]
+      "required": [
+        "disease"
+      ]
     },
     "return_schema": {
       "type": "object",
@@ -114,14 +132,30 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "gene_symbol": {"type": "string"},
-                  "gene_curie": {"type": "string"},
-                  "disease_title": {"type": "string"},
-                  "disease_curie": {"type": "string"},
-                  "classification": {"type": "string"},
-                  "mode_of_inheritance": {"type": "string"},
-                  "submitter": {"type": "string"},
-                  "submitted_date": {"type": "string"}
+                  "gene_symbol": {
+                    "type": "string"
+                  },
+                  "gene_curie": {
+                    "type": "string"
+                  },
+                  "disease_title": {
+                    "type": "string"
+                  },
+                  "disease_curie": {
+                    "type": "string"
+                  },
+                  "classification": {
+                    "type": "string"
+                  },
+                  "mode_of_inheritance": {
+                    "type": "string"
+                  },
+                  "submitter": {
+                    "type": "string"
+                  },
+                  "submitted_date": {
+                    "type": "string"
+                  }
                 }
               }
             },
@@ -137,11 +171,9 @@
     },
     "test_examples": [
       {
-        "operation": "search_disease",
         "disease": "Marfan syndrome"
       },
       {
-        "operation": "search_disease",
         "disease": "Huntington disease",
         "classification": "Definitive"
       }
@@ -165,7 +197,7 @@
           "default": ""
         }
       },
-      "required": ["operation"]
+      "required": []
     },
     "return_schema": {
       "type": "object",
@@ -181,9 +213,15 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "classification": {"type": "string"},
-                  "count": {"type": "integer"},
-                  "rank": {"type": "integer"}
+                  "classification": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer"
+                  },
+                  "rank": {
+                    "type": "integer"
+                  }
                 }
               }
             },
@@ -201,8 +239,12 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "name": {"type": "string"},
-                  "count": {"type": "integer"}
+                  "name": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer"
+                  }
                 }
               }
             }
@@ -211,11 +253,8 @@
       }
     },
     "test_examples": [
+      {},
       {
-        "operation": "get_classifications"
-      },
-      {
-        "operation": "get_classifications",
         "submitter": "ClinGen"
       }
     ]

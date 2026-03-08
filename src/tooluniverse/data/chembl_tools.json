@@ -1371,7 +1371,7 @@
     },
     "test_examples": [
       {
-        "drug_chembl_id__exact": "CHEMBL1201581",
+        "drug_chembl_id": "CHEMBL1201581",
         "limit": 10
       }
     ]

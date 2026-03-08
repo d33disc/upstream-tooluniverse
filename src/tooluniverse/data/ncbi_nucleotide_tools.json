@@ -5,7 +5,7 @@
     "description": "Search NCBI Nucleotide database (GenBank/EMBL/RefSeq) by organism, gene name, or keywords. Returns GenBank UIDs which can be used to fetch accession numbers. Supports filtering by organism, gene, strain, sequence type (complete genome, mRNA, RefSeq). Use this to discover DNA/RNA sequences for specific organisms or genes. Returns both EMBL/GenBank accessions (U00096, M15390) and RefSeq accessions (NC_*, NM_*). Follow up with NCBI_fetch_accessions to get actual accession numbers.",
     "parameter": {
       "type": "object",
-      "required": ["operation"],
+      "required": [],
       "properties": {
         "operation": {
           "const": "search",
@@ -29,7 +29,11 @@
         },
         "seq_type": {
           "type": "string",
-          "enum": ["complete_genome", "mrna", "refseq"],
+          "enum": [
+            "complete_genome",
+            "mrna",
+            "refseq"
+          ],
           "description": "Sequence type filter: 'complete_genome' for complete genomes, 'mrna' for mRNA sequences, 'refseq' for RefSeq curated sequences"
         },
         "query": {
@@ -45,7 +49,11 @@
         },
         "sort": {
           "type": "string",
-          "enum": ["relevance", "pub_date", "title"],
+          "enum": [
+            "relevance",
+            "pub_date",
+            "title"
+          ],
           "description": "Sort order for results (default: relevance)",
           "default": "relevance"
         }
@@ -56,14 +64,19 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "object",
           "properties": {
             "uids": {
               "type": "array",
-              "items": {"type": "string"},
+              "items": {
+                "type": "string"
+              },
               "description": "List of GenBank UIDs (internal IDs)"
             },
             "count": {
@@ -87,14 +100,18 @@
           "type": "string"
         }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
         "uids": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "List of GenBank UIDs (internal IDs)"
         },
         "count": {
@@ -113,20 +130,17 @@
     },
     "test_examples": [
       {
-        "operation": "search",
         "organism": "Escherichia coli",
         "strain": "K-12",
         "keywords": "complete genome",
         "limit": 5
       },
       {
-        "operation": "search",
         "organism": "Homo sapiens",
         "gene": "BRCA1",
         "limit": 10
       },
       {
-        "operation": "search",
         "organism": "SARS-CoV-2",
         "seq_type": "complete_genome",
         "limit": 5
@@ -139,7 +153,9 @@
     "description": "Convert GenBank UIDs to accession numbers (U00096, NC_045512, etc.). Takes UIDs from NCBI_search_nucleotide and returns actual accession numbers that can be used with database tools. Returns both EMBL/GenBank accessions (U*, M*, AJ*) that work with ENA Browser tools, and RefSeq accessions (NC_*, NM_*) for NCBI tools. Use this as second step after NCBI_search_nucleotide to get usable accession numbers.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "uids"],
+      "required": [
+        "uids"
+      ],
       "properties": {
         "operation": {
           "const": "fetch_accession",
@@ -149,7 +165,9 @@
           "oneOf": [
             {
               "type": "array",
-              "items": {"type": "string"}
+              "items": {
+                "type": "string"
+              }
             },
             {
               "type": "string"
@@ -164,11 +182,16 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "description": "List of accession numbers (e.g., ['U00096', 'NC_000913'])"
         },
         "count": {
@@ -179,21 +202,28 @@
           "type": "string"
         }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "return_schema": {
       "type": "array",
-      "items": {"type": "string"},
+      "items": {
+        "type": "string"
+      },
       "description": "List of accession numbers"
     },
     "test_examples": [
       {
-        "operation": "fetch_accession",
-        "uids": ["545778205"]
+        "uids": [
+          "545778205"
+        ]
       },
       {
-        "operation": "fetch_accession",
-        "uids": ["545778205", "545778204"]
+        "uids": [
+          "545778205",
+          "545778204"
+        ]
       }
     ]
   },
@@ -203,7 +233,9 @@
     "description": "Retrieve DNA/RNA sequence data from NCBI by accession number. Returns sequences in specified format (fasta, gb, embl). Works with both EMBL/GenBank accessions (U00096, M15390) and RefSeq accessions (NC_045512, NM_000546). Use this to get actual sequence data after finding accessions with NCBI_search_nucleotide. Returns full sequence with annotations depending on format.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "accession"],
+      "required": [
+        "accession"
+      ],
       "properties": {
         "operation": {
           "const": "fetch_sequence",
@@ -215,7 +247,12 @@
         },
         "format": {
           "type": "string",
-          "enum": ["fasta", "gb", "embl", "gp"],
+          "enum": [
+            "fasta",
+            "gb",
+            "embl",
+            "gp"
+          ],
           "description": "Sequence format: 'fasta' for FASTA, 'gb' for GenBank, 'embl' for EMBL, 'gp' for GenPept protein. Default: fasta",
           "default": "fasta"
         }
@@ -226,7 +263,10 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["success", "error"]
+          "enum": [
+            "success",
+            "error"
+          ]
         },
         "data": {
           "type": "string",
@@ -246,7 +286,9 @@
           "type": "string"
         }
       },
-      "required": ["status"]
+      "required": [
+        "status"
+      ]
     },
     "return_schema": {
       "type": "string",
@@ -254,17 +296,14 @@
     },
     "test_examples": [
       {
-        "operation": "fetch_sequence",
         "accession": "U00096",
         "format": "fasta"
       },
       {
-        "operation": "fetch_sequence",
         "accession": "NC_045512",
         "format": "gb"
       },
       {
-        "operation": "fetch_sequence",
         "accession": "NM_000546",
         "format": "fasta"
       }

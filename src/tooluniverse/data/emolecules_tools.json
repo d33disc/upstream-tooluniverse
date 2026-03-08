@@ -6,7 +6,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search"},
+        "operation": {
+          "type": "string",
+          "const": "search"
+        },
         "query": {
           "type": "string",
           "description": "Search query - compound name or keyword"
@@ -17,17 +20,25 @@
           "default": 20
         }
       },
-      "required": ["operation", "query"]
+      "required": [
+        "query"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search", "query": "caffeine"}
+      {
+        "query": "caffeine"
+      }
     ]
   },
   {
@@ -37,7 +48,10 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "search_smiles"},
+        "operation": {
+          "type": "string",
+          "const": "search_smiles"
+        },
         "smiles": {
           "type": "string",
           "description": "SMILES string for the query compound"
@@ -53,17 +67,26 @@
           "default": 20
         }
       },
-      "required": ["operation", "smiles"]
+      "required": [
+        "smiles"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "search_smiles", "smiles": "Cn1cnc2c1c(=O)n(c(=O)n2C)C", "search_type": "exact"}
+      {
+        "smiles": "Cn1cnc2c1c(=O)n(c(=O)n2C)C",
+        "search_type": "exact"
+      }
     ]
   },
   {
@@ -73,23 +96,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_vendors"},
+        "operation": {
+          "type": "string",
+          "const": "get_vendors"
+        },
         "smiles": {
           "type": "string",
           "description": "SMILES string for the compound"
         }
       },
-      "required": ["operation", "smiles"]
+      "required": [
+        "smiles"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_vendors", "smiles": "CC(=O)Oc1ccccc1C(=O)O"}
+      {
+        "smiles": "CC(=O)Oc1ccccc1C(=O)O"
+      }
     ]
   },
   {
@@ -99,23 +133,34 @@
     "parameter": {
       "type": "object",
       "properties": {
-        "operation": {"type": "string", "const": "get_compound"},
+        "operation": {
+          "type": "string",
+          "const": "get_compound"
+        },
         "emol_id": {
           "type": "string",
           "description": "eMolecules compound/vendor ID"
         }
       },
-      "required": ["operation", "emol_id"]
+      "required": [
+        "emol_id"
+      ]
     },
     "return_schema": {
       "type": "object",
       "properties": {
-        "status": {"type": "string"},
-        "data": {"type": "object"}
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
       }
     },
     "test_examples": [
-      {"operation": "get_compound", "emol_id": "1234567"}
+      {
+        "emol_id": "1234567"
+      }
     ]
   }
 ]

@@ -208,7 +208,7 @@
       "properties": {
         "search": {
           "type": "string",
-          "description": "Lucene query for adverse event reports (e.g., 'patient.drug.medicinalproduct:aspirin', 'patient.reaction.reactionmeddrapt:\"myocardial infarction\"', 'serious:1 AND patient.drug.medicinalproduct:warfarin')"
+          "description": "Lucene query for adverse event reports. Use AND/OR with spaces (not +AND+). Examples: 'patient.drug.medicinalproduct:aspirin', 'patient.reaction.reactionmeddrapt:\"myocardial infarction\"', 'serious:1 AND patient.drug.medicinalproduct:warfarin'. Combine drugs: 'patient.drug.medicinalproduct:metformin AND patient.drug.medicinalproduct:atorvastatin'."
         },
         "limit": {
           "type": [

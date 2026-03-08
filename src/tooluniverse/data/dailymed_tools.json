@@ -239,7 +239,9 @@
     "description": "Parse adverse reactions section from SPL XML into structured table format. Returns AE frequencies, severity, and descriptions. Example: setid='030d9bca-a934-6ef9-e063-6394a90a8277' extracts headache 10%, GI upset 5%.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "setid"],
+      "required": [
+        "setid"
+      ],
       "properties": {
         "operation": {
           "const": "parse_adverse_reactions",
@@ -255,14 +257,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "adverse_reactions": {"type": "array"},
-        "count": {"type": "integer"},
-        "note": {"type": "string"}
+        "adverse_reactions": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     },
     "test_examples": [
       {
-        "operation": "parse_adverse_reactions",
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
       }
     ]
@@ -273,7 +280,9 @@
     "description": "Parse dosage and administration section from SPL XML. Returns structured dosing instructions, dose modifications, and administration guidelines. Example: standard dose, dose adjustments for renal/hepatic impairment.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "setid"],
+      "required": [
+        "setid"
+      ],
       "properties": {
         "operation": {
           "const": "parse_dosing",
@@ -289,14 +298,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "dosing_info": {"type": "array"},
-        "count": {"type": "integer"},
-        "note": {"type": "string"}
+        "dosing_info": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     },
     "test_examples": [
       {
-        "operation": "parse_dosing",
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
       }
     ]
@@ -307,7 +321,9 @@
     "description": "Parse contraindications section from SPL XML into structured list. Returns conditions, populations, or situations where drug should not be used. Example: pregnancy, hypersensitivity, severe renal impairment.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "setid"],
+      "required": [
+        "setid"
+      ],
       "properties": {
         "operation": {
           "const": "parse_contraindications",
@@ -323,14 +339,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "contraindications": {"type": "array"},
-        "count": {"type": "integer"},
-        "note": {"type": "string"}
+        "contraindications": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     },
     "test_examples": [
       {
-        "operation": "parse_contraindications",
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
       }
     ]
@@ -341,7 +362,9 @@
     "description": "Parse drug interactions section from SPL XML into structured format. Returns CYP substrates/inhibitors/inducers, P-gp interactions, and specific drug-drug interactions. Example: avoid with strong CYP3A4 inhibitors.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "setid"],
+      "required": [
+        "setid"
+      ],
       "properties": {
         "operation": {
           "const": "parse_drug_interactions",
@@ -357,14 +380,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "interactions": {"type": "array"},
-        "count": {"type": "integer"},
-        "note": {"type": "string"}
+        "interactions": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     },
     "test_examples": [
       {
-        "operation": "parse_drug_interactions",
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
       }
     ]
@@ -375,7 +403,9 @@
     "description": "Parse clinical pharmacology section from SPL XML. Returns PK parameters (Cmax, Tmax, t1/2, AUC), PD effects, metabolism pathways, and elimination. Example: absorption, distribution, metabolism tables.",
     "parameter": {
       "type": "object",
-      "required": ["operation", "setid"],
+      "required": [
+        "setid"
+      ],
       "properties": {
         "operation": {
           "const": "parse_clinical_pharmacology",
@@ -391,14 +421,19 @@
     "return_schema": {
       "type": "object",
       "properties": {
-        "pharmacology": {"type": "array"},
-        "count": {"type": "integer"},
-        "note": {"type": "string"}
+        "pharmacology": {
+          "type": "array"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     },
     "test_examples": [
       {
-        "operation": "parse_clinical_pharmacology",
         "setid": "030d9bca-a934-6ef9-e063-6394a90a8277"
       }
     ]
