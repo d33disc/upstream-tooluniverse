@@ -1,4 +1,4 @@
-# Literature Deep Research - Examples (Enhanced v5.0)
+# Literature Deep Research - Examples
 
 Examples demonstrating target disambiguation, evidence grading, and biological model synthesis.
 
@@ -399,7 +399,7 @@ directly demonstrated [no ★★★ mechanistic studies identified].
   "metadata": {
     "generated": "2026-02-04T15:30:00Z",
     "query": "ATP6V1A",
-    "target_identifiers": {
+    "identifiers": {
       "symbol": "ATP6V1A",
       "uniprot": "P38606",
       "ensembl": "ENSG00000114573"
@@ -420,7 +420,7 @@ directly demonstrated [no ★★★ mechanistic studies identified].
       "evidence_tier": "T1",
       "evidence_tier_rationale": "Mechanistic study with biochemistry and genetics",
       "themes": ["mtorc1_signaling", "lysosomal_function"],
-      "is_core_seed": true,
+      "in_core_set": true,
       "citation_count": 1847,
       "oa_status": "bronze",
       "oa_url": null
@@ -435,7 +435,7 @@ directly demonstrated [no ★★★ mechanistic studies identified].
       "source_databases": ["PubMed", "EuropePMC"],
       "evidence_tier": "T1",
       "themes": ["lysosomal_function", "metabolism"],
-      "is_core_seed": true,
+      "in_core_set": true,
       "citation_count": 612,
       "oa_status": "gold",
       "oa_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5704954/"
@@ -454,12 +454,288 @@ directly demonstrated [no ★★★ mechanistic studies identified].
 
 ---
 
+## Example 6: Drug-Centric Workflow (Metformin Cancer Repurposing)
+
+### User Query
+"What evidence supports metformin for cancer treatment or prevention?"
+
+### Phase 1: Drug Disambiguation
+
+```markdown
+## Drug Identity
+
+| Identifier | Value | Source |
+|------------|-------|--------|
+| Generic Name | Metformin | User query |
+| ChEMBL ID | CHEMBL1431 | OpenTargets_get_drug_chembId_by_generic_name |
+| DrugBank ID | DB00331 | drugbank_get_drug_basic_info_by_drug_name_or_id |
+| PubChem CID | 4091 | PubChem_get_CID_by_compound_name |
+| ATC Code | A10BA02 | ChEMBL_get_drug |
+
+**Class**: Biguanide antidiabetic
+**Approval Status**: Approved (FDA 1994)
+**Primary Indication**: Type 2 diabetes mellitus
+**Known Targets**: AMPK (indirect activation), Complex I (mitochondrial)
+```
+
+### Phase 1b: Known Mechanisms & Safety
+
+```markdown
+### Mechanism of Action
+- Inhibits mitochondrial Complex I → ↑AMP/ATP ratio → activates AMPK
+- Reduces hepatic glucose production [★★★: PMID:24851903]
+- Targets: SLC22A1 (OCT1, primary uptake transporter)
+
+*Source: ChEMBL_get_drug_mechanisms, drugbank_get_pharmacology_by_drug_name_or_drugbank_id*
+
+### Safety Profile
+- Well-tolerated with >60 years of clinical use
+- Adverse events: GI disturbance (common), lactic acidosis (rare)
+- No black box warnings for cancer indication
+
+*Source: OpenTargets_get_drug_adverse_events_by_chemblId*
+```
+
+### Phase 2: Literature Search Strategy
+
+```
+1. High-precision: "metformin"[Title] AND (cancer OR neoplasm) → 1,847 papers
+2. Focused queries:
+   - "metformin" AND "AMPK" AND cancer → 312 papers
+   - "metformin" AND (clinical trial) AND cancer → 187 papers
+   - "metformin" AND ("breast cancer" OR "colorectal cancer") → 445 papers
+3. Citation expansion from top 20 most-cited → 234 additional unique
+```
+
+### Phase 3: Report Excerpt with Evidence Grading
+
+```markdown
+## Core Evidence for Anti-Cancer Activity
+
+### Epidemiological Evidence
+Retrospective studies consistently show reduced cancer incidence in metformin-treated
+diabetic patients vs other antidiabetics [★☆☆ Association: PMID:16168273, large cohort].
+A meta-analysis of 265 studies confirms ~30% risk reduction [★☆☆: PMID:24925038].
+
+### Mechanistic Evidence
+Metformin activates AMPK, inhibiting mTORC1 and reducing cell proliferation
+[★★★ Mechanistic: PMID:16489903, direct biochemical evidence].
+It also reduces insulin/IGF-1 levels systemically [★★☆ Functional: PMID:22893504].
+
+### Clinical Trial Evidence
+Multiple ongoing trials (NCT01101438, NCT02581137) testing metformin as adjuvant
+in breast, colorectal, and pancreatic cancer [★★☆: active clinical data].
+No phase III RCT has yet demonstrated overall survival benefit as primary endpoint
+[gap identified].
+
+**Summary**:
+- Epidemiological: MODERATE (consistent association, confounding risk)
+- Mechanistic: STRONG (AMPK/mTOR pathway well-characterized)
+- Clinical: EMERGING (trials ongoing, no definitive phase III result)
+```
+
+---
+
+## Example 7: General Academic Topic (CS/ML - No Bio Tools)
+
+### User Query
+"What does the literature say about retrieval-augmented generation (RAG)?"
+
+### Phase 0: Clarification
+
+```
+Agent: I'll conduct a deep literature review on RAG. Quick clarification:
+
+1. **Scope**: Comprehensive overview, or focused on a specific aspect
+   (architectures, evaluation, domain-specific applications)?
+2. **Date range**: Include foundational work, or focus on recent (2023+)?
+
+User: Comprehensive overview including foundational work.
+```
+
+### Phase 1: Subject Disambiguation (General Academic)
+
+**No bio tools used.** Proceed with literature-only disambiguation.
+
+```markdown
+## Subject Identity & Scope
+
+| Attribute | Value |
+|-----------|-------|
+| Full Name | Retrieval-Augmented Generation |
+| Abbreviation | RAG |
+| Domain | Natural Language Processing / Information Retrieval |
+| Foundational Paper | Lewis et al. (2020), "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" |
+
+**Related but distinct**:
+- RAG (biology): Recombination Activating Gene (immunology)
+- Collision filter applied: NOT "recombination activating" NOT "V(D)J" NOT "immunoglobulin"
+
+**Key sub-topics**: dense retrieval, knowledge grounding, hallucination reduction,
+chunking strategies, vector databases, evaluation frameworks
+```
+
+### Phase 2: Literature Search Strategy
+
+```
+Tools used (no bio tools):
+- ArXiv_search_papers(query="retrieval augmented generation", sort_by="submittedDate")
+- SemanticScholar_search_papers(query="RAG retrieval augmented generation", sort="citationCount:desc")
+- DBLP_search_publications(query="retrieval augmented generation")
+- openalex_literature_search(search_keywords="retrieval augmented generation")
+
+Collision filter: NOT "recombination activating" NOT "V(D)J"
+
+1. High-precision: "retrieval-augmented generation"[Title] → 342 papers
+2. Citation expansion from Lewis et al. 2020 (3,800+ citations) → top 100
+3. Broader: "RAG" AND ("language model" OR "knowledge grounding") NOT "V(D)J" → 189 papers
+```
+
+### Phase 3: Report Excerpt
+
+```markdown
+## 6. Core Mechanisms
+
+### 6.1 Architecture
+RAG combines a parametric language model with a non-parametric retrieval component.
+The original architecture uses DPR for retrieval and BART for generation
+[★★★: arXiv:2005.11401, Lewis et al. 2020].
+
+### 6.2 Retrieval Strategies
+- Dense Passage Retrieval (DPR) [★★★: arXiv:2004.04906, Karpukhin et al.]
+- ColBERT late interaction [★★★: arXiv:2004.12832, Khattab & Zaharia]
+- Hybrid sparse+dense retrieval [★★☆: multiple studies]
+
+### 6.3 Key Finding
+RAG reduces hallucination by grounding generation in retrieved evidence
+[★★☆: arXiv:2305.14627, multiple evaluation studies]. However, retrieval
+noise can propagate errors [★★☆: arXiv:2401.15391].
+
+## 12. Research Themes
+
+### 12.1 Architectures & Training (87 papers)
+**Evidence Quality**: Strong
+[Dense retrieval, cross-encoders, late interaction, end-to-end training...]
+
+### 12.2 Evaluation & Benchmarks (45 papers)
+**Evidence Quality**: Moderate
+[RAGAS, faithfulness metrics, attribution, citation generation...]
+
+### 12.3 Domain-Specific RAG (62 papers)
+**Evidence Quality**: Moderate
+[Medical QA, legal, code generation, scientific literature...]
+
+### 12.4 Chunking & Indexing (28 papers)
+**Evidence Quality**: Limited (emerging area)
+[Semantic chunking, hierarchical retrieval, multi-vector...]
+
+## 14. Integrated Model & Hypotheses
+
+| # | Hypothesis | Test | Readout | Expected | Priority |
+|---|------------|------|---------|----------|----------|
+| 1 | Iterative RAG outperforms single-pass | Multi-hop QA benchmark | Accuracy, faithfulness | 10-15% improvement | HIGH |
+| 2 | Semantic chunking > fixed-size | Domain-specific QA | Answer quality, retrieval precision | Semantic chunking wins on complex docs | HIGH |
+| 3 | RAG + fine-tuning > RAG alone | Specialized domain (medical) | F1, hallucination rate | Combined approach optimal | MEDIUM |
+```
+
+---
+
+## Example 8: Cross-Domain Query (GNN for Drug Discovery)
+
+### User Query
+"What does the literature say about graph neural networks for drug discovery?"
+
+### Phase 1: Interdisciplinary Disambiguation
+
+**Identify domain components**:
+- CS/ML: Graph Neural Networks (GNN, GCN, GAT, MPNN)
+- Bio/Drug: Drug discovery (molecular property prediction, virtual screening, ADMET)
+
+**CS component** (no bio tools):
+```markdown
+| Attribute | Value |
+|-----------|-------|
+| Full Name | Graph Neural Networks |
+| Abbreviation | GNN |
+| Sub-architectures | GCN, GAT, MPNN, SchNet, DimeNet |
+| Foundational Paper | Kipf & Welling (2017), "Semi-Supervised Classification with GCNs" |
+```
+
+**Bio component** (resolve drug discovery entities):
+```
+OpenTargets_get_drug_chembId_by_generic_name → Not applicable (method, not drug)
+Skip drug/target disambiguation — this is about a method applied to the domain
+```
+
+**Collision check**: "GNN" has low collision risk (not overloaded across domains).
+No negative filter needed.
+
+### Phase 2: Hybrid Literature Search
+
+```
+CS tools:
+- ArXiv_search_papers(query='graph neural network drug discovery', sort_by='submittedDate')
+- SemanticScholar_search_papers(query='GNN molecular property prediction', sort='citationCount:desc')
+- DBLP_search_publications(query='graph neural network drug')
+
+Bio tools:
+- PubMed_search_articles(query='"graph neural network" AND ("drug discovery" OR "molecular property")')
+- EuropePMC_search_articles(query='"GNN" AND "drug discovery"')
+
+Bridging:
+- openalex_literature_search(search_keywords='graph neural network drug discovery')
+```
+
+### Phase 3: Report Excerpt
+
+```markdown
+## 6. Core Mechanisms
+
+### 6.1 Molecular Graph Representations
+Molecules are naturally represented as graphs where atoms are nodes and bonds
+are edges. GNNs learn molecular representations through message-passing
+[★★★: arXiv:1704.01212, Gilmer et al. 2017, MPNN framework].
+
+### 6.2 Key Architectures
+- **MPNN** (Message Passing Neural Network): Unified framework [★★★: arXiv:1704.01212]
+- **SchNet**: Continuous-filter convolutions for 3D [★★★: arXiv:1706.08566]
+- **AttentiveFP**: Graph attention for molecular properties [★★☆: PMID:31408336]
+
+## 12. Research Themes
+
+### 12.1 Molecular Property Prediction (89 papers)
+**Evidence Quality**: Strong
+ADMET, solubility, toxicity prediction using GNN encoders...
+
+### 12.2 Virtual Screening & Drug-Target Interaction (52 papers)
+**Evidence Quality**: Moderate
+DTI prediction, binding affinity estimation...
+
+### 12.3 De Novo Molecular Generation (38 papers)
+**Evidence Quality**: Moderate
+Generative models (VAE, flow-based) on molecular graphs...
+
+### 12.4 Retrosynthesis & Reaction Prediction (21 papers)
+**Evidence Quality**: Limited (emerging)
+
+## 14. Integrated Model & Hypotheses
+
+| # | Hypothesis | Test | Readout | Expected | Priority |
+|---|------------|------|---------|----------|----------|
+| 1 | 3D-aware GNNs outperform 2D for binding affinity | PDBbind benchmark | RMSE, Pearson r | 3D models win by 10-15% | HIGH |
+| 2 | Pre-training on large molecular datasets improves low-data ADMET | Fine-tune on ToxCast | AUC, F1 | Pre-trained > random init | HIGH |
+| 3 | GNN + physics-based scoring > either alone | CASF-2016 docking | Success rate, enrichment | Hybrid approach optimal | MEDIUM |
+```
+
+---
+
 ## Key Principles Demonstrated
 
-1. **Disambiguation first** - Resolve IDs, check collisions before searching
+1. **Disambiguation first** - Resolve IDs/scope, check collisions before searching
 2. **Evidence grading everywhere** - T1-T4 labels on all claims
 3. **Citation-first for sparse targets** - Expand from seeds when keywords fail
 4. **Collision-aware queries** - Apply NOT filters for ambiguous names
 5. **Mandatory sections** - Include all 15 sections, even if "limited evidence"
-6. **Biological model** - Synthesize evidence into testable hypotheses
+6. **Integrated model** - Synthesize evidence into testable hypotheses
 7. **Scalable bibliography** - Narrative in report, full data in JSON
+8. **Domain adaptation** - Bio tools for bio queries, CS tools for CS queries, general tools for everything else

@@ -2306,7 +2306,7 @@ class TestGWASTraitResolution(unittest.TestCase):
         assoc_response.raise_for_status.return_value = None
         mock_get.return_value = assoc_response
 
-        result = tool.run({"disease_trait": "diabetes", "efo_id": "EFO_0001360"})
+        tool.run({"disease_trait": "diabetes", "efo_id": "EFO_0001360"})
 
         # Only one request made (no trait resolution needed)
         self.assertEqual(mock_get.call_count, 1)
@@ -2653,7 +2653,7 @@ class TestGTExExpressionSummaryEndpoint(unittest.TestCase):
         mock_urlopen.side_effect = fake_urlopen
 
         tool = self._make_tool()
-        result = tool.run({"gene_symbol": "BRCA1"})
+        tool.run({"gene_symbol": "BRCA1"})
 
         # Verify the second URL call used clusteredMedianGeneExpression
         calls = mock_urlopen.call_args_list
