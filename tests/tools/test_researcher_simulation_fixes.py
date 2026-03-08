@@ -3177,7 +3177,7 @@ class TestICiteSearchPublications(unittest.TestCase):
         }
 
         mock_request.side_effect = [pubmed_resp, icite_resp]
-        result = tool.run({"query": "test", "limit": 2, "offset": 1})
+        tool.run({"query": "test", "limit": 2, "offset": 1})
 
         # iCite should be called with PMIDs 222, 333 (skipping 111)
         icite_call = mock_request.call_args_list[1]
