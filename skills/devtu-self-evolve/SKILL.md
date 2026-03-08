@@ -151,8 +151,3 @@ Invoke `Skill(skill="devtu-github")` or manually:
 
 Full patterns → [references/bug-patterns.md](references/bug-patterns.md)
 
-## Round Tracking
-
-After each round: advance counter, update patterns file, keep this SKILL.md under 150 lines.
-
-**Current round: 79** (rounds completed: 52-78)
