@@ -53,24 +53,18 @@ def euhealthinfo_search_deaths(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "limit": limit,
-            "country": country,
-            "language": language,
-            "term_override": term_override,
-            "method": method,
-            "alpha": alpha,
-            "top_k": top_k,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "euhealthinfo_search_deaths",
-            "arguments": _args,
+            "arguments": {
+                "limit": limit,
+                "country": country,
+                "language": language,
+                "term_override": term_override,
+                "method": method,
+                "alpha": alpha,
+                "top_k": top_k,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

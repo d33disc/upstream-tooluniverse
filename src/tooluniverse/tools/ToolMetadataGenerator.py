@@ -38,19 +38,13 @@ def ToolMetadataGenerator(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "tool_config": tool_config,
-            "tool_type_mappings": tool_type_mappings,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ToolMetadataGenerator",
-            "arguments": _args,
+            "arguments": {
+                "tool_config": tool_config,
+                "tool_type_mappings": tool_type_mappings,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

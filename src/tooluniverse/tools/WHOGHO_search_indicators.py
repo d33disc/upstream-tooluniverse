@@ -38,12 +38,10 @@ def WHOGHO_search_indicators(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"filter": filter, "top": top}.items() if v is not None}
     return get_shared_client().run_one_function(
         {
             "name": "WHOGHO_search_indicators",
-            "arguments": _args,
+            "arguments": {"filter": filter, "top": top},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

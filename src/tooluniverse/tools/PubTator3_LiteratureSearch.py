@@ -10,8 +10,8 @@ from ._shared_client import get_shared_client
 
 def PubTator3_LiteratureSearch(
     query: str,
-    page: Optional[int] = 0,
-    page_size: Optional[int] = 20,
+    page: int,
+    page_size: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -41,16 +41,10 @@ def PubTator3_LiteratureSearch(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"query": query, "page": page, "page_size": page_size}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "PubTator3_LiteratureSearch",
-            "arguments": _args,
+            "arguments": {"query": query, "page": page, "page_size": page_size},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

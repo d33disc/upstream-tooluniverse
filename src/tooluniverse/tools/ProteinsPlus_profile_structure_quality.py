@@ -38,14 +38,10 @@ def ProteinsPlus_profile_structure_quality(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v for k, v in {"pdb_id": pdb_id, "setting": setting}.items() if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ProteinsPlus_profile_structure_quality",
-            "arguments": _args,
+            "arguments": {"pdb_id": pdb_id, "setting": setting},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

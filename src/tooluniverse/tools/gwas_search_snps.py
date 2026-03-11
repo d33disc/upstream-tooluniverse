@@ -44,21 +44,15 @@ def gwas_search_snps(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "rs_id": rs_id,
-            "mapped_gene": mapped_gene,
-            "size": size,
-            "page": page,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "gwas_search_snps",
-            "arguments": _args,
+            "arguments": {
+                "rs_id": rs_id,
+                "mapped_gene": mapped_gene,
+                "size": size,
+                "page": page,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

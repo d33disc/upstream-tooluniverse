@@ -54,24 +54,18 @@ def embedding_database_create(
     # Handle mutable defaults to avoid B006 linting error
     if metadata is None:
         metadata = []
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "action": action,
-            "database_name": database_name,
-            "documents": documents,
-            "metadata": metadata,
-            "provider": provider,
-            "model": model,
-            "description": description,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "embedding_database_create",
-            "arguments": _args,
+            "arguments": {
+                "action": action,
+                "database_name": database_name,
+                "documents": documents,
+                "metadata": metadata,
+                "provider": provider,
+                "model": model,
+                "description": description,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

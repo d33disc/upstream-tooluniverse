@@ -24,11 +24,11 @@ def clinvar_search_variants(
     Parameters
     ----------
     gene : str
-        Gene name or symbol (e.g., 'BRCA1', 'BRCA2') At least one of gene, condition,...
+        Gene name or symbol (e.g., 'BRCA1', 'BRCA2')
     condition : str
-        Disease or condition name (e.g., 'breast cancer', 'diabetes') At least one of...
+        Disease or condition name (e.g., 'breast cancer', 'diabetes')
     variant_id : str
-        ClinVar variant ID (e.g., '12345') At least one of gene, condition, or varian...
+        ClinVar variant ID (e.g., '12345')
     max_results : int
         Maximum number of results to return
     stream_callback : Callable, optional
@@ -44,21 +44,15 @@ def clinvar_search_variants(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "gene": gene,
-            "condition": condition,
-            "variant_id": variant_id,
-            "max_results": max_results,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "clinvar_search_variants",
-            "arguments": _args,
+            "arguments": {
+                "gene": gene,
+                "condition": condition,
+                "variant_id": variant_id,
+                "max_results": max_results,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

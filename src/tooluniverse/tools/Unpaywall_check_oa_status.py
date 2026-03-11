@@ -38,12 +38,10 @@ def Unpaywall_check_oa_status(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"doi": doi, "email": email}.items() if v is not None}
     return get_shared_client().run_one_function(
         {
             "name": "Unpaywall_check_oa_status",
-            "arguments": _args,
+            "arguments": {"doi": doi, "email": email},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

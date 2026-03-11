@@ -35,12 +35,10 @@ def GenomeNexus_get_canonical_transcript(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"gene_symbol": gene_symbol}.items() if v is not None}
     return get_shared_client().run_one_function(
         {
             "name": "GenomeNexus_get_canonical_transcript",
-            "arguments": _args,
+            "arguments": {"gene_symbol": gene_symbol},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

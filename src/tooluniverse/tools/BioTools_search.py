@@ -44,16 +44,10 @@ def BioTools_search(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"q": q, "page": page, "size": size, "format": format}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "BioTools_search",
-            "arguments": _args,
+            "arguments": {"q": q, "page": page, "size": size, "format": format},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -35,13 +35,8 @@ def PanelApp_search_panels(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"search": search}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "PanelApp_search_panels",
-            "arguments": _args,
-        },
+        {"name": "PanelApp_search_panels", "arguments": {"search": search}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

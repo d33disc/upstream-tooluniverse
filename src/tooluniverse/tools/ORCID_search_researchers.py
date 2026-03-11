@@ -1,7 +1,7 @@
 """
 ORCID_search_researchers
 
-Search ORCID registry for researchers by keyword query. Returns ORCID iDs matching the search. Su...
+Search the ORCID registry for researchers by name, affiliation, or keyword. ORCID provides persis...
 """
 
 from typing import Any, Optional, Callable
@@ -9,28 +9,22 @@ from ._shared_client import get_shared_client
 
 
 def ORCID_search_researchers(
-    operation: str,
-    query: str,
-    start: Optional[int] = 0,
+    q: str,
     rows: Optional[int] = 10,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
-    Search ORCID registry for researchers by keyword query. Returns ORCID iDs matching the search. Su...
+    Search the ORCID registry for researchers by name, affiliation, or keyword. ORCID provides persis...
 
     Parameters
     ----------
-    operation : str
-        Operation type
-    query : str
-        Search query (e.g., 'BRCA1 cancer genetics', 'Harvard genomics')
-    start : int
-        Pagination offset (0-based)
+    q : str
+        Search query using Lucene syntax. Examples: 'family-name:doudna AND given-nam...
     rows : int
-        Number of results to return
+        Number of results to return (default 10, max 200)
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -40,26 +34,12 @@ def ORCID_search_researchers(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "query": query,
-            "start": start,
-            "rows": rows,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
-        {
-            "name": "ORCID_search_researchers",
-            "arguments": _args,
-        },
+        {"name": "ORCID_search_researchers", "arguments": {"q": q, "rows": rows}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

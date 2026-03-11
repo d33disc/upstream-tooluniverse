@@ -1,7 +1,7 @@
 """
 CPIC_list_guidelines
 
-List all CPIC pharmacogenomic guidelines. Returns ~29 evidence-based guidelines (count may vary a...
+List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
 """
 
 from typing import Any, Optional, Callable
@@ -15,7 +15,7 @@ def CPIC_list_guidelines(
     validate: bool = True,
 ) -> Any:
     """
-    List all CPIC pharmacogenomic guidelines. Returns ~29 evidence-based guidelines (count may vary a...
+    List all CPIC pharmacogenomic guidelines. Returns 31 evidence-based guidelines for using pharmaco...
 
     Parameters
     ----------
@@ -33,13 +33,8 @@ def CPIC_list_guidelines(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "CPIC_list_guidelines",
-            "arguments": _args,
-        },
+        {"name": "CPIC_list_guidelines", "arguments": {}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

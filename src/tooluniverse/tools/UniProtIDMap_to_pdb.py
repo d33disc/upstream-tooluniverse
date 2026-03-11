@@ -35,13 +35,8 @@ def UniProtIDMap_to_pdb(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"uniprot_ids": uniprot_ids}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "UniProtIDMap_to_pdb",
-            "arguments": _args,
-        },
+        {"name": "UniProtIDMap_to_pdb", "arguments": {"uniprot_ids": uniprot_ids}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

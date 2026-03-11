@@ -21,7 +21,7 @@ def ENCODE_get_file(
     Parameters
     ----------
     accession : str
-        ENCODE file accession identifier (format: ENCFF######, e.g., 'ENCFF001JXO'). ...
+        ENCODE file accession identifier (format: ENCFF######, e.g., 'ENCFF001JXO', '...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -35,13 +35,8 @@ def ENCODE_get_file(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"accession": accession}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "ENCODE_get_file",
-            "arguments": _args,
-        },
+        {"name": "ENCODE_get_file", "arguments": {"accession": accession}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

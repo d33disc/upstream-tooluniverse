@@ -41,20 +41,14 @@ def DescriptionQualityEvaluator(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "tool_description": tool_description,
-            "parameter_descriptions": parameter_descriptions,
-            "test_results": test_results,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "DescriptionQualityEvaluator",
-            "arguments": _args,
+            "arguments": {
+                "tool_description": tool_description,
+                "parameter_descriptions": parameter_descriptions,
+                "test_results": test_results,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

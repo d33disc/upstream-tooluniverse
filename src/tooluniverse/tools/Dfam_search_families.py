@@ -44,21 +44,15 @@ def Dfam_search_families(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "name_prefix": name_prefix,
-            "clade": clade,
-            "repeat_type": repeat_type,
-            "limit": limit,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "Dfam_search_families",
-            "arguments": _args,
+            "arguments": {
+                "name_prefix": name_prefix,
+                "clade": clade,
+                "repeat_type": repeat_type,
+                "limit": limit,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

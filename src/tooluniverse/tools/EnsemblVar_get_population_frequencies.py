@@ -38,16 +38,10 @@ def EnsemblVar_get_population_frequencies(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"variant_id": variant_id, "species": species}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "EnsemblVar_get_population_frequencies",
-            "arguments": _args,
+            "arguments": {"variant_id": variant_id, "species": species},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

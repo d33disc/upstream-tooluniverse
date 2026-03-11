@@ -44,21 +44,15 @@ def CELLxGENE_download_h5ad(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "dataset_id": dataset_id,
-            "output_path": output_path,
-            "census_version": census_version,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "CELLxGENE_download_h5ad",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "dataset_id": dataset_id,
+                "output_path": output_path,
+                "census_version": census_version,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

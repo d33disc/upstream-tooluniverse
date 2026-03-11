@@ -38,16 +38,10 @@ def AlphaMissense_get_residue_scores(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"uniprot_id": uniprot_id, "position": position}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "AlphaMissense_get_residue_scores",
-            "arguments": _args,
+            "arguments": {"uniprot_id": uniprot_id, "position": position},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

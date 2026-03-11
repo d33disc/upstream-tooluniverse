@@ -41,16 +41,10 @@ def MGnify_search_studies(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"biome": biome, "search": search, "size": size}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "MGnify_search_studies",
-            "arguments": _args,
+            "arguments": {"biome": biome, "search": search, "size": size},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

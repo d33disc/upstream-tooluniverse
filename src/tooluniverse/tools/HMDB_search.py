@@ -1,7 +1,7 @@
 """
 HMDB_search
 
-Search for metabolites by name or formula using PubChem. Returns PubChem CIDs (not HMDB IDs) with...
+Search HMDB for metabolites by name, formula, or mass. Returns matching metabolites with HMDB IDs...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def HMDB_search(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Search for metabolites by name or formula using PubChem. Returns PubChem CIDs (not HMDB IDs) with...
+    Search HMDB for metabolites by name, formula, or mass. Returns matching metabolites with HMDB IDs...
 
     Parameters
     ----------
@@ -41,20 +41,14 @@ def HMDB_search(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "query": query,
-            "search_type": search_type,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "HMDB_search",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "query": query,
+                "search_type": search_type,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

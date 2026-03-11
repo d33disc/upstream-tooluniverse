@@ -41,20 +41,14 @@ def HPA_get_rna_expression_by_source(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "gene_name": gene_name,
-            "source_type": source_type,
-            "source_name": source_name,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "HPA_get_rna_expression_by_source",
-            "arguments": _args,
+            "arguments": {
+                "gene_name": gene_name,
+                "source_type": source_type,
+                "source_name": source_name,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

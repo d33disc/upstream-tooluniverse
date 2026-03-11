@@ -41,20 +41,14 @@ def FAERS_filter_serious_events(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "drug_name": drug_name,
-            "seriousness_type": seriousness_type,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "FAERS_filter_serious_events",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "drug_name": drug_name,
+                "seriousness_type": seriousness_type,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

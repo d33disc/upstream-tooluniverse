@@ -41,14 +41,10 @@ def dbfetch_fetch_entry(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v for k, v in {"db": db, "id": id, "format": format}.items() if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "dbfetch_fetch_entry",
-            "arguments": _args,
+            "arguments": {"db": db, "id": id, "format": format},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

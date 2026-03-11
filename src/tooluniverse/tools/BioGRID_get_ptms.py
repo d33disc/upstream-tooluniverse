@@ -20,7 +20,7 @@ def BioGRID_get_ptms(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Retrieve post-translational modifications (PTM = Protein modifications after translation) for pro...
 
@@ -49,28 +49,22 @@ def BioGRID_get_ptms(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "gene_names": gene_names,
-            "organism": organism,
-            "ptm_type": ptm_type,
-            "residue": residue,
-            "include_enzymes": include_enzymes,
-            "include_evidence": include_evidence,
-            "limit": limit,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "BioGRID_get_ptms",
-            "arguments": _args,
+            "arguments": {
+                "gene_names": gene_names,
+                "organism": organism,
+                "ptm_type": ptm_type,
+                "residue": residue,
+                "include_enzymes": include_enzymes,
+                "include_evidence": include_evidence,
+                "limit": limit,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

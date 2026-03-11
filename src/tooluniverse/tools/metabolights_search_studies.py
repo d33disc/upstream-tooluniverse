@@ -1,7 +1,7 @@
 """
 metabolights_search_studies
 
-List MetaboLights study IDs. NOTE: The MetaboLights API does not support keyword filtering — the ...
+Search MetaboLights studies by query string. Returns a list of matching study IDs. Use metaboligh...
 """
 
 from typing import Any, Optional, Callable
@@ -18,7 +18,7 @@ def metabolights_search_studies(
     validate: bool = True,
 ) -> list[Any]:
     """
-    List MetaboLights study IDs. NOTE: The MetaboLights API does not support keyword filtering — the ...
+    Search MetaboLights studies by query string. Returns a list of matching study IDs. Use metaboligh...
 
     Parameters
     ----------
@@ -41,16 +41,10 @@ def metabolights_search_studies(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"query": query, "size": size, "page": page}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "metabolights_search_studies",
-            "arguments": _args,
+            "arguments": {"query": query, "size": size, "page": page},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

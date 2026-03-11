@@ -22,9 +22,9 @@ def PharmGKB_get_clinical_annotations(
     Parameters
     ----------
     annotation_id : str
-        PharmGKB clinical annotation ID (e.g., '1449309855'). Required for reliable r...
+        PharmGKB clinical annotation ID (e.g., '1449309855').
     gene_id : str
-        PharmGKB Gene Accession ID (e.g., 'PA128'). NOTE: Filtering by gene_id is unr...
+        PharmGKB Gene Accession ID (e.g., 'PA128').
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -38,16 +38,10 @@ def PharmGKB_get_clinical_annotations(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"annotation_id": annotation_id, "gene_id": gene_id}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "PharmGKB_get_clinical_annotations",
-            "arguments": _args,
+            "arguments": {"annotation_id": annotation_id, "gene_id": gene_id},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

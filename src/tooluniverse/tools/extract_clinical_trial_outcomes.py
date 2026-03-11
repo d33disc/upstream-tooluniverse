@@ -15,7 +15,7 @@ def extract_clinical_trial_outcomes(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> str:
     """
     Extracts detailed trial outcome results (e.g., overall survival months, p-values, etc.) from clin...
 
@@ -34,20 +34,14 @@ def extract_clinical_trial_outcomes(
 
     Returns
     -------
-    Any
+    str
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"nct_ids": nct_ids, "outcome_measure": outcome_measure}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "extract_clinical_trial_outcomes",
-            "arguments": _args,
+            "arguments": {"nct_ids": nct_ids, "outcome_measure": outcome_measure},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

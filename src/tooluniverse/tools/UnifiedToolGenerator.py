@@ -41,20 +41,14 @@ def UnifiedToolGenerator(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "tool_description": tool_description,
-            "reference_info": reference_info,
-            "xml_template": xml_template,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "UnifiedToolGenerator",
-            "arguments": _args,
+            "arguments": {
+                "tool_description": tool_description,
+                "reference_info": reference_info,
+                "xml_template": xml_template,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

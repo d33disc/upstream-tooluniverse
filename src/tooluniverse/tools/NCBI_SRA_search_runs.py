@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def NCBI_SRA_search_runs(
-    operation: Optional[str] = None,
+    operation: str,
     study: Optional[str] = None,
     organism: Optional[str] = None,
     strategy: Optional[str] = None,
@@ -22,7 +22,7 @@ def NCBI_SRA_search_runs(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> dict[str, Any]:
+) -> Any:
     """
     Search NCBI Sequence Read Archive (SRA) for NGS/RNA-seq sequencing runs by study accession, organ...
 
@@ -55,30 +55,24 @@ def NCBI_SRA_search_runs(
 
     Returns
     -------
-    dict[str, Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "study": study,
-            "organism": organism,
-            "strategy": strategy,
-            "platform": platform,
-            "source": source,
-            "query": query,
-            "limit": limit,
-            "sort": sort,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "NCBI_SRA_search_runs",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "study": study,
+                "organism": organism,
+                "strategy": strategy,
+                "platform": platform,
+                "source": source,
+                "query": query,
+                "limit": limit,
+                "sort": sort,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

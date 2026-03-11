@@ -1,7 +1,7 @@
 """
 PharmGKB_get_dosing_guidelines
 
-Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB by guideline_id. IMPORTANT: use t...
+Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB. Provide a specific 'guideline_id...
 """
 
 from typing import Any, Optional, Callable
@@ -9,7 +9,7 @@ from ._shared_client import get_shared_client
 
 
 def PharmGKB_get_dosing_guidelines(
-    guideline_id: str,
+    guideline_id: Optional[str] = None,
     gene: Optional[str] = None,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
@@ -17,14 +17,14 @@ def PharmGKB_get_dosing_guidelines(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB by guideline_id. IMPORTANT: use t...
+    Get pharmacogenetic dosing guidelines (CPIC/DPWG) from PharmGKB. Provide a specific 'guideline_id...
 
     Parameters
     ----------
     guideline_id : str
-        PharmGKB ClinPGx guideline ID from CPIC_list_guidelines 'clinpgxid' field (e....
+        PharmGKB guideline ID (e.g., 'PA166124584').
     gene : str
-        Gene symbol (e.g., 'CYP2D6'). NOTE: Filtering by gene symbol is unreliable an...
+        Gene symbol (e.g., 'CYP2D6').
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -38,16 +38,10 @@ def PharmGKB_get_dosing_guidelines(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"guideline_id": guideline_id, "gene": gene}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "PharmGKB_get_dosing_guidelines",
-            "arguments": _args,
+            "arguments": {"guideline_id": guideline_id, "gene": gene},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

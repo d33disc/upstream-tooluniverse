@@ -41,20 +41,14 @@ def GDC_get_cnv_data(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "project_id": project_id,
-            "gene_symbol": gene_symbol,
-            "size": size,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "GDC_get_cnv_data",
-            "arguments": _args,
+            "arguments": {
+                "project_id": project_id,
+                "gene_symbol": gene_symbol,
+                "size": size,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

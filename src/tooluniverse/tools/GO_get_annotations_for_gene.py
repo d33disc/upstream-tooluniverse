@@ -10,7 +10,6 @@ from ._shared_client import get_shared_client
 
 def GO_get_annotations_for_gene(
     gene_id: str,
-    rows: Optional[int] = 100,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -23,8 +22,6 @@ def GO_get_annotations_for_gene(
     ----------
     gene_id : str
         A gene identifier such as gene symbol (e.g., 'TP53') or database ID.
-    rows : int
-        Maximum number of annotations to return. Default: 100. Use a lower value (e.g...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -38,15 +35,8 @@ def GO_get_annotations_for_gene(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v for k, v in {"gene_id": gene_id, "rows": rows}.items() if v is not None
-    }
     return get_shared_client().run_one_function(
-        {
-            "name": "GO_get_annotations_for_gene",
-            "arguments": _args,
-        },
+        {"name": "GO_get_annotations_for_gene", "arguments": {"gene_id": gene_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

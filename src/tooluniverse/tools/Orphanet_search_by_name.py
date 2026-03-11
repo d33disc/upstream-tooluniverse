@@ -44,21 +44,15 @@ def Orphanet_search_by_name(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "name": name,
-            "exact": exact,
-            "lang": lang,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "Orphanet_search_by_name",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "name": name,
+                "exact": exact,
+                "lang": lang,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

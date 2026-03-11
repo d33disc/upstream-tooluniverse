@@ -44,21 +44,10 @@ def UCSC_get_cpg_islands(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "genome": genome,
-            "chrom": chrom,
-            "start": start,
-            "end": end,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "UCSC_get_cpg_islands",
-            "arguments": _args,
+            "arguments": {"genome": genome, "chrom": chrom, "start": start, "end": end},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

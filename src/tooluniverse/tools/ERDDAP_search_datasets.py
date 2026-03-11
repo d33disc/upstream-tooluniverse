@@ -41,20 +41,14 @@ def ERDDAP_search_datasets(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "searchFor": searchFor,
-            "itemsPerPage": itemsPerPage,
-            "page": page,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ERDDAP_search_datasets",
-            "arguments": _args,
+            "arguments": {
+                "searchFor": searchFor,
+                "itemsPerPage": itemsPerPage,
+                "page": page,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

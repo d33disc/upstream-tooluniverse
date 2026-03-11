@@ -41,16 +41,10 @@ def Wikidata_get_entity(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"ids": ids, "languages": languages, "props": props}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "Wikidata_get_entity",
-            "arguments": _args,
+            "arguments": {"ids": ids, "languages": languages, "props": props},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

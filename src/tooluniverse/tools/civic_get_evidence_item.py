@@ -35,13 +35,8 @@ def civic_get_evidence_item(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"evidence_id": evidence_id}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "civic_get_evidence_item",
-            "arguments": _args,
-        },
+        {"name": "civic_get_evidence_item", "arguments": {"evidence_id": evidence_id}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

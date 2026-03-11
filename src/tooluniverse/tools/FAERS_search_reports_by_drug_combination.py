@@ -50,23 +50,17 @@ def FAERS_search_reports_by_drug_combination(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "medicinalproducts": medicinalproducts,
-            "limit": limit,
-            "skip": skip,
-            "patientsex": patientsex,
-            "patientagegroup": patientagegroup,
-            "serious": serious,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "FAERS_search_reports_by_drug_combination",
-            "arguments": _args,
+            "arguments": {
+                "medicinalproducts": medicinalproducts,
+                "limit": limit,
+                "skip": skip,
+                "patientsex": patientsex,
+                "patientagegroup": patientagegroup,
+                "serious": serious,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

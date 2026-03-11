@@ -41,16 +41,10 @@ def MedlinePlus_search_topics_by_keyword(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"term": term, "db": db, "rettype": rettype}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "MedlinePlus_search_topics_by_keyword",
-            "arguments": _args,
+            "arguments": {"term": term, "db": db, "rettype": rettype},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

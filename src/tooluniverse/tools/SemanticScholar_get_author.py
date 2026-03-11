@@ -40,16 +40,10 @@ def SemanticScholar_get_author(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"author_id": author_id, "fields": fields}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "SemanticScholar_get_author",
-            "arguments": _args,
+            "arguments": {"author_id": author_id, "fields": fields},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

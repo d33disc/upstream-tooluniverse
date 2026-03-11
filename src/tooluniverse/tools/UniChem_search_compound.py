@@ -41,16 +41,10 @@ def UniChem_search_compound(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"compound": compound, "type": type_, "sourceID": sourceID}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "UniChem_search_compound",
-            "arguments": _args,
+            "arguments": {"compound": compound, "type": type_, "sourceID": sourceID},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

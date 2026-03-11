@@ -38,12 +38,10 @@ def ensembl_get_ontology_term(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"id": id, "relation": relation}.items() if v is not None}
     return get_shared_client().run_one_function(
         {
             "name": "ensembl_get_ontology_term",
-            "arguments": _args,
+            "arguments": {"id": id, "relation": relation},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

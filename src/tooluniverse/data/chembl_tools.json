@@ -40,7 +40,10 @@
         "type": "object",
         "properties": {
           "chembl_id": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "ChEMBL molecule ID"
           },
           "pref_name": {
@@ -60,7 +63,10 @@
               "type": "object",
               "properties": {
                 "chembl_id": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "pref_name": {
                   "type": [
@@ -613,7 +619,7 @@
   {
     "type": "ChEMBLRESTTool",
     "name": "ChEMBL_get_target_activities",
-    "description": "Get all activity data for a target by ChEMBL target ID. Returns bioactivity measurements (IC50, Ki, etc.) for molecules tested against this target. Note: activity values may be in different units (nM or uM) depending on the assay — check the 'standard_units' field in each result. To find a target ID, use ChEMBL_search_targets with a target name or gene symbol.",
+    "description": "Get all activity data for a target by ChEMBL target ID. Returns bioactivity measurements (IC50, Ki, etc.) for molecules tested against this target. Note: activity values may be in different units (nM or uM) depending on the assay \u2014 check the 'standard_units' field in each result. To find a target ID, use ChEMBL_search_targets with a target name or gene symbol.",
     "fields": {
       "endpoint": "/activity.json"
     },
@@ -1244,7 +1250,7 @@
   {
     "type": "ChEMBLRESTTool",
     "name": "ChEMBL_get_drug_mechanisms",
-    "description": "Get mechanisms of action for a drug by ChEMBL drug ID or drug name. Accepts drug_chembl_id (e.g., 'CHEMBL1201581') or drug_name (e.g., 'trastuzumab') — drug_name triggers automatic ChEMBL ID lookup.",
+    "description": "Get mechanisms of action for a drug by ChEMBL drug ID or drug name. Accepts drug_chembl_id (e.g., 'CHEMBL1201581') or drug_name (e.g., 'trastuzumab') \u2014 drug_name triggers automatic ChEMBL ID lookup.",
     "fields": {
       "endpoint": "/mechanism.json"
     },
@@ -1266,7 +1272,7 @@
         },
         "drug_name": {
           "type": "string",
-          "description": "Drug name for automatic ChEMBL ID lookup (e.g., \"trastuzumab\", \"lapatinib\", \"aspirin\"). Case-insensitive. Triggers internal ChEMBL molecule search — use drug_chembl_id if you already know the ID."
+          "description": "Drug name for automatic ChEMBL ID lookup (e.g., \"trastuzumab\", \"lapatinib\", \"aspirin\"). Case-insensitive. Triggers internal ChEMBL molecule search \u2014 use drug_chembl_id if you already know the ID."
         },
         "molecule_chembl_id": {
           "type": "string",
@@ -1812,7 +1818,7 @@
     },
     "test_examples": [
       {
-        "level4": "L01XC",
+        "level4": "L01AA",
         "limit": 5
       }
     ]

@@ -10,8 +10,8 @@ from ._shared_client import get_shared_client
 
 def PubTator3_EntityAutocomplete(
     text: str,
-    entity_type: Optional[str] = None,
-    max_results: Optional[int] = None,
+    entity_type: str,
+    max_results: int,
     *,
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
@@ -41,20 +41,14 @@ def PubTator3_EntityAutocomplete(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "text": text,
-            "entity_type": entity_type,
-            "max_results": max_results,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "PubTator3_EntityAutocomplete",
-            "arguments": _args,
+            "arguments": {
+                "text": text,
+                "entity_type": entity_type,
+                "max_results": max_results,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

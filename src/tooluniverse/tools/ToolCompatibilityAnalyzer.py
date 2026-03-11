@@ -41,20 +41,14 @@ def ToolCompatibilityAnalyzer(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "source_tool": source_tool,
-            "target_tool": target_tool,
-            "analysis_depth": analysis_depth,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ToolCompatibilityAnalyzer",
-            "arguments": _args,
+            "arguments": {
+                "source_tool": source_tool,
+                "target_tool": target_tool,
+                "analysis_depth": analysis_depth,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

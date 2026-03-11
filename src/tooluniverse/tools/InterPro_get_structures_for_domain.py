@@ -38,19 +38,10 @@ def InterPro_get_structures_for_domain(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "pfam_accession": pfam_accession,
-            "max_results": max_results,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "InterPro_get_structures_for_domain",
-            "arguments": _args,
+            "arguments": {"pfam_accession": pfam_accession, "max_results": max_results},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

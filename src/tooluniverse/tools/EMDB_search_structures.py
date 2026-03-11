@@ -15,7 +15,7 @@ def EMDB_search_structures(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> list[Any]:
+) -> Any:
     """
     Search the Electron Microscopy Data Bank (EMDB) for cryo-EM structures using keywords. Returns a ...
 
@@ -34,17 +34,12 @@ def EMDB_search_structures(
 
     Returns
     -------
-    list[Any]
+    Any
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"query": query, "rows": rows}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "EMDB_search_structures",
-            "arguments": _args,
-        },
+        {"name": "EMDB_search_structures", "arguments": {"query": query, "rows": rows}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

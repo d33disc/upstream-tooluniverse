@@ -36,7 +36,7 @@ def FAERS_count_additive_adverse_reactions(
     serious : str
         Optional: Filter by event seriousness. Omit this parameter if you don't want ...
     seriousnessdeath : str
-        Optional: Pass 'Yes' to filter for reports where death was an outcome. Omit t...
+        Optional: Filter for fatal outcomes. Omit this parameter if you don't want to...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -50,23 +50,17 @@ def FAERS_count_additive_adverse_reactions(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "medicinalproducts": medicinalproducts,
-            "patientsex": patientsex,
-            "patientagegroup": patientagegroup,
-            "occurcountry": occurcountry,
-            "serious": serious,
-            "seriousnessdeath": seriousnessdeath,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "FAERS_count_additive_adverse_reactions",
-            "arguments": _args,
+            "arguments": {
+                "medicinalproducts": medicinalproducts,
+                "patientsex": patientsex,
+                "patientagegroup": patientagegroup,
+                "occurcountry": occurcountry,
+                "serious": serious,
+                "seriousnessdeath": seriousnessdeath,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

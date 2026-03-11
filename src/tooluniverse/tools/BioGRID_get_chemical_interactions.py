@@ -19,7 +19,7 @@ def BioGRID_get_chemical_interactions(
     stream_callback: Optional[Callable[[str], None]] = None,
     use_cache: bool = False,
     validate: bool = True,
-) -> Any:
+) -> dict[str, Any]:
     """
     Find proteins that interact with chemical compounds (drugs, metabolites, small molecules) from Bi...
 
@@ -46,27 +46,21 @@ def BioGRID_get_chemical_interactions(
 
     Returns
     -------
-    Any
+    dict[str, Any]
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "gene_names": gene_names,
-            "chemical_names": chemical_names,
-            "organism": organism,
-            "interaction_action": interaction_action,
-            "limit": limit,
-            "include_evidence": include_evidence,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "BioGRID_get_chemical_interactions",
-            "arguments": _args,
+            "arguments": {
+                "gene_names": gene_names,
+                "chemical_names": chemical_names,
+                "organism": organism,
+                "interaction_action": interaction_action,
+                "limit": limit,
+                "include_evidence": include_evidence,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -35,14 +35,10 @@ def SASBDB_search_entries(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v for k, v in {"molecular_type": molecular_type}.items() if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "SASBDB_search_entries",
-            "arguments": _args,
+            "arguments": {"molecular_type": molecular_type},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

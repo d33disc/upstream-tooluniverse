@@ -41,20 +41,10 @@ def Wikipedia_get_summary(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "title": title,
-            "language": language,
-            "max_chars": max_chars,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "Wikipedia_get_summary",
-            "arguments": _args,
+            "arguments": {"title": title, "language": language, "max_chars": max_chars},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

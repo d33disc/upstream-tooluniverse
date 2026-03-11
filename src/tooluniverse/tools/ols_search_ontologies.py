@@ -44,21 +44,15 @@ def ols_search_ontologies(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "operation": operation,
-            "search": search,
-            "page": page,
-            "size": size,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ols_search_ontologies",
-            "arguments": _args,
+            "arguments": {
+                "operation": operation,
+                "search": search,
+                "page": page,
+                "size": size,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

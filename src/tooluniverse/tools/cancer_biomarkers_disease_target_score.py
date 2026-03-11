@@ -38,14 +38,10 @@ def cancer_biomarkers_disease_target_score(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v for k, v in {"efoId": efoId, "pageSize": pageSize}.items() if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "cancer_biomarkers_disease_target_score",
-            "arguments": _args,
+            "arguments": {"efoId": efoId, "pageSize": pageSize},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -41,16 +41,10 @@ def IDR_get_study_datasets(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"project_id": project_id, "limit": limit, "offset": offset}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "IDR_get_study_datasets",
-            "arguments": _args,
+            "arguments": {"project_id": project_id, "limit": limit, "offset": offset},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

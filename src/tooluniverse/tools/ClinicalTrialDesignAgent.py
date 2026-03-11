@@ -44,21 +44,15 @@ def ClinicalTrialDesignAgent(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "drug_name": drug_name,
-            "indication": indication,
-            "preclinical_data": preclinical_data,
-            "target_population": target_population,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ClinicalTrialDesignAgent",
-            "arguments": _args,
+            "arguments": {
+                "drug_name": drug_name,
+                "indication": indication,
+                "preclinical_data": preclinical_data,
+                "target_population": target_population,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

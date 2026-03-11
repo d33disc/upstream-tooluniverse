@@ -44,21 +44,15 @@ def MyGene_query_genes(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "query": query,
-            "species": species,
-            "fields": fields,
-            "size": size,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "MyGene_query_genes",
-            "arguments": _args,
+            "arguments": {
+                "query": query,
+                "species": species,
+                "fields": fields,
+                "size": size,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

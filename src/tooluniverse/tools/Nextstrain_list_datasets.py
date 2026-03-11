@@ -35,13 +35,8 @@ def Nextstrain_list_datasets(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {k: v for k, v in {"pathogen": pathogen}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {
-            "name": "Nextstrain_list_datasets",
-            "arguments": _args,
-        },
+        {"name": "Nextstrain_list_datasets", "arguments": {"pathogen": pathogen}},
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,

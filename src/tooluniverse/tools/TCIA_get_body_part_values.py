@@ -38,16 +38,10 @@ def TCIA_get_body_part_values(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {"Collection": Collection, "Modality": Modality}.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "TCIA_get_body_part_values",
-            "arguments": _args,
+            "arguments": {"Collection": Collection, "Modality": Modality},
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

@@ -25,11 +25,11 @@ def ENCODE_search_experiments(
     Parameters
     ----------
     assay_title : str
-        Assay name filter (e.g., 'TF ChIP-seq', 'Histone ChIP-seq', 'ATAC-seq', 'RNA-...
+        Assay name filter (e.g., 'ChIP-seq', 'ATAC-seq', 'RNA-seq', 'Hi-C'). Leave em...
     target : str
-        Target protein/factor filter (e.g., 'CTCF', 'H3K4me3', 'POLR2A'). Use for TF ...
+        Target protein/factor filter (e.g., 'CTCF', 'H3K4me3', 'POLR2A'). Use for ChI...
     organism : str
-        Organism filter — maps to ENCODE's organism scientific name field (e.g., 'Hom...
+        Organism filter (e.g., 'Homo sapiens', 'Mus musculus', 'Drosophila melanogast...
     status : str
         Record status filter. Use 'released' for public data (default), 'archived' fo...
     limit : int
@@ -47,22 +47,16 @@ def ENCODE_search_experiments(
     """
     # Handle mutable defaults to avoid B006 linting error
 
-    # Strip None values so optional parameters don't trigger schema validation errors
-    _args = {
-        k: v
-        for k, v in {
-            "assay_title": assay_title,
-            "target": target,
-            "organism": organism,
-            "status": status,
-            "limit": limit,
-        }.items()
-        if v is not None
-    }
     return get_shared_client().run_one_function(
         {
             "name": "ENCODE_search_experiments",
-            "arguments": _args,
+            "arguments": {
+                "assay_title": assay_title,
+                "target": target,
+                "organism": organism,
+                "status": status,
+                "limit": limit,
+            },
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

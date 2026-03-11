@@ -163,7 +163,10 @@
               "warning": {
                 "type": "string"
               }
-            }
+            },
+            "required": [
+              "partial"
+            ]
           }
         }
       ]
