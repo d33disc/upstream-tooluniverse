@@ -23,7 +23,7 @@ def ENAPortal_search_studies(
     Parameters
     ----------
     query : str
-        ENA search query. Examples: 'description="cancer"', 'tax_tree(9606)' (human),...
+        ENA search query. IMPORTANT: Plain text keywords (e.g., 'cancer') will cause ...
     limit : int | Any
         Maximum results to return (1-100, default 10).
     fields : str | Any
@@ -41,10 +41,16 @@ def ENAPortal_search_studies(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {
+        k: v
+        for k, v in {"query": query, "limit": limit, "fields": fields}.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "ENAPortal_search_studies",
-            "arguments": {"query": query, "limit": limit, "fields": fields},
+            "arguments": _args,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

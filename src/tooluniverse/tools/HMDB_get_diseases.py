@@ -1,7 +1,7 @@
 """
 HMDB_get_diseases
 
-Get disease and pathway associations for a metabolite from HMDB. Returns diseases linked to abnor...
+Attempts to get disease associations for a metabolite from HMDB. Note: HMDB does not provide an o...
 """
 
 from typing import Any, Optional, Callable
@@ -17,7 +17,7 @@ def HMDB_get_diseases(
     validate: bool = True,
 ) -> dict[str, Any]:
     """
-    Get disease and pathway associations for a metabolite from HMDB. Returns diseases linked to abnor...
+    Attempts to get disease associations for a metabolite from HMDB. Note: HMDB does not provide an o...
 
     Parameters
     ----------
@@ -38,10 +38,16 @@ def HMDB_get_diseases(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {
+        k: v
+        for k, v in {"operation": operation, "hmdb_id": hmdb_id}.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "HMDB_get_diseases",
-            "arguments": {"operation": operation, "hmdb_id": hmdb_id},
+            "arguments": _args,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

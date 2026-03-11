@@ -24,7 +24,7 @@ def STRING_get_network(
     Parameters
     ----------
     identifiers : str
-        Protein identifier(s). For multiple proteins, separate with '%0d' (URL-encode...
+        Protein identifier(s). For multiple proteins, separate with '\\r' (carriage r...
     species : int
         NCBI taxonomy ID. Examples: 9606 (human), 10090 (mouse), 7227 (Drosophila), 6...
     limit : int
@@ -44,15 +44,21 @@ def STRING_get_network(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {
+        k: v
+        for k, v in {
+            "identifiers": identifiers,
+            "species": species,
+            "limit": limit,
+            "required_score": required_score,
+        }.items()
+        if v is not None
+    }
     return get_shared_client().run_one_function(
         {
             "name": "STRING_get_network",
-            "arguments": {
-                "identifiers": identifiers,
-                "species": species,
-                "limit": limit,
-                "required_score": required_score,
-            },
+            "arguments": _args,
         },
         stream_callback=stream_callback,
         use_cache=use_cache,

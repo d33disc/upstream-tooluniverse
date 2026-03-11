@@ -21,7 +21,7 @@ def Reactome_list_top_pathways(
     Parameters
     ----------
     species : str
-        Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). To find availab...
+        Species name or taxonomy ID (e.g., 'Homo sapiens' or '9606'). IMPORTANT: Comm...
     stream_callback : Callable, optional
         Callback for streaming output
     use_cache : bool, default False
@@ -35,8 +35,13 @@ def Reactome_list_top_pathways(
     """
     # Handle mutable defaults to avoid B006 linting error
 
+    # Strip None values so optional parameters don't trigger schema validation errors
+    _args = {k: v for k, v in {"species": species}.items() if v is not None}
     return get_shared_client().run_one_function(
-        {"name": "Reactome_list_top_pathways", "arguments": {"species": species}},
+        {
+            "name": "Reactome_list_top_pathways",
+            "arguments": _args,
+        },
         stream_callback=stream_callback,
         use_cache=use_cache,
         validate=validate,
