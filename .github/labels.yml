@@ -1,0 +1,36 @@
+# GitHub Labels
+# Consumed by the label-pr and sync-upstream workflows.
+# Apply with: gh label create --force ...  (or via a labels-sync action)
+
+labels:
+  - name: upstream-sync
+    color: "0075ca"
+    description: "Automated PR syncing changes from mims-harvard/ToolUniverse"
+
+  - name: tools
+    color: "e4e669"
+    description: "Changes to one or more tools"
+
+  - name: documentation
+    color: "0052cc"
+    description: "Documentation improvements"
+
+  - name: conflicts
+    color: "e11d48"
+    description: "Sync PR has merge conflicts that must be resolved manually"
+
+  - name: github-actions
+    color: "f9d0c4"
+    description: "Changes to GitHub Actions workflows or configuration"
+
+  - name: claude-config
+    color: "a371f7"
+    description: "Changes to the claude/ directory (rules, commands, hooks)"
+
+  - name: core
+    color: "1d76db"
+    description: "Changes to the src/ core library"
+
+  - name: tests
+    color: "0e8a16"
+    description: "Changes to tests"
