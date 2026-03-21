@@ -20,6 +20,7 @@ export TOOLUNIVERSE_STDIO_MODE=1
 
 exec uvx --from tooluniverse tooluniverse-smcp-stdio \
   --compact-mode \
+  --exclude-tool-types ToolFinderLLM \
   --hook-config-file "$HOME/.claude/tooluniverse-hooks.json" \
   --verbose \
   "$@"
