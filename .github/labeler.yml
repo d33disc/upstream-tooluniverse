@@ -1,0 +1,28 @@
+# Path-based label configuration for actions/labeler@v6
+# https://github.com/actions/labeler
+
+"tools":
+  - changed-files:
+      - any-glob-to-any-file: "skills/**"
+
+"core":
+  - changed-files:
+      - any-glob-to-any-file: "src/**"
+
+"claude-config":
+  - changed-files:
+      - any-glob-to-any-file: "claude/**"
+
+"tests":
+  - changed-files:
+      - any-glob-to-any-file: "tests/**"
+
+"documentation":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.md"
+          - "**/*.md"
+
+"github-actions":
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"

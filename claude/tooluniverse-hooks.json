@@ -1,0 +1,39 @@
+{
+  "exclude_tools": [
+    "Tool_RAG",
+    "ToolFinderEmbedding",
+    "ToolFinderLLM",
+    "ToolOutputSummarizer",
+    "OutputSummarizationComposer"
+  ],
+  "hooks": [
+    {
+      "name": "summarization_hook",
+      "type": "SummarizationHook",
+      "enabled": true,
+      "conditions": {
+        "output_length": { "operator": ">", "threshold": 5000 }
+      },
+      "hook_config": {
+        "chunk_size": 30000,
+        "focus_areas": "key_findings_and_results",
+        "max_summary_length": 3000
+      }
+    },
+    {
+      "name": "file_save_hook",
+      "type": "FileSaveHook",
+      "enabled": true,
+      "conditions": {
+        "output_length": { "operator": ">", "threshold": 50000 }
+      },
+      "hook_config": {
+        "temp_dir": "/tmp/tooluniverse_outputs",
+        "file_prefix": "tu_result",
+        "include_metadata": true,
+        "auto_cleanup": true,
+        "cleanup_age_hours": 24
+      }
+    }
+  ]
+}
