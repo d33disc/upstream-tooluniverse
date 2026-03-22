@@ -1,0 +1,106 @@
+[
+  {
+    "type": "SECEdgarRESTTool",
+    "name": "SEC_EDGAR_search_filings",
+    "description": "Search SEC EDGAR full-text search index for company filings by keyword. Returns filing metadata including company name, CIK, form type, filing date, and accession number. Supports filtering by form type (10-K, 10-Q, 8-K, S-1, etc.) and date range. No API key required. Use this to find SEC filings for public companies, discover CIK numbers, or track recent regulatory filings.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query for SEC filings (e.g., 'Moderna 10-K', 'CRISPR Therapeutics')"
+        },
+        "forms": {
+          "type": "string",
+          "description": "Comma-separated form types to filter (e.g., '10-K', '10-K,8-K', '10-Q,S-1'). Common forms: 10-K (annual), 10-Q (quarterly), 8-K (current events), S-1 (IPO registration)."
+        },
+        "startdt": {
+          "type": "string",
+          "description": "Start date filter in YYYY-MM-DD format (e.g., '2024-01-01')"
+        },
+        "enddt": {
+          "type": "string",
+          "description": "End date filter in YYYY-MM-DD format (e.g., '2025-12-31')"
+        }
+      },
+      "required": ["query"]
+    },
+    "return_schema": {
+      "type": "array",
+      "description": "Array of SEC filing records",
+      "items": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "description": "Company display name with ticker and CIK"
+          },
+          "cik": {
+            "type": "string",
+            "description": "Central Index Key (10-digit zero-padded)"
+          },
+          "form": {
+            "type": "string",
+            "description": "Filing form type (10-K, 8-K, etc.)"
+          },
+          "file_date": {
+            "type": "string",
+            "description": "Filing date (YYYY-MM-DD)"
+          },
+          "accession": {
+            "type": "string",
+            "description": "Accession number for the filing"
+          }
+        }
+      }
+    },
+    "test_examples": [
+      { "query": "Moderna 10-K", "forms": "10-K" },
+      { "query": "Recursion Pharmaceuticals", "forms": "10-K,8-K" }
+    ],
+    "fields": {
+      "endpoint": "https://efts.sec.gov/LATEST/search-index",
+      "method": "GET",
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (research@tooluniverse.org)"
+      }
+    }
+  },
+  {
+    "type": "SECEdgarRESTTool",
+    "name": "SEC_EDGAR_get_company_submissions",
+    "description": "Get company profile and recent filing history from SEC EDGAR by CIK number. Returns company name, tickers, exchanges, SIC code, state of incorporation, addresses, and up to 1000 recent filings with form types, dates, and accession numbers. No API key required. Use this after finding a CIK via SEC_EDGAR_search_filings to get a complete filing history.",
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "cik": {
+          "type": "string",
+          "description": "SEC Central Index Key, 10-digit zero-padded string (e.g., '0001682852' for Moderna). Find CIKs using SEC_EDGAR_search_filings."
+        }
+      },
+      "required": ["cik"]
+    },
+    "return_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string" },
+        "cik": { "type": "string" },
+        "tickers": { "type": "array", "items": { "type": "string" } },
+        "exchanges": { "type": "array", "items": { "type": "string" } },
+        "sic": { "type": "string" },
+        "sicDescription": { "type": "string" },
+        "stateOfIncorporation": { "type": "string" },
+        "filings": { "type": "object" }
+      }
+    },
+    "test_examples": [{ "cik": "0001682852" }, { "cik": "0001601830" }],
+    "fields": {
+      "endpoint": "https://data.sec.gov/submissions/CIK{cik}.json",
+      "method": "GET",
+      "headers": {
+        "User-Agent": "ToolUniverse/1.0 (research@tooluniverse.org)"
+      }
+    }
+  }
+]
