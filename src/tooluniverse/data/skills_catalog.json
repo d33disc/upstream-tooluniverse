@@ -1,0 +1,830 @@
+[
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:create-tooluniverse-skill",
+    "description": "Create high-quality ToolUniverse skills following test-driven, implementation-agnostic methodology. Integrates tools from ToolUniverse's 1,264+ tool library, creates missing tools when needed, tests thoroughly, and produces skills with Python SDK + MCP support. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='create-tooluniverse-skill')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='create-tooluniverse-skill')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-auto-discover-apis",
+    "description": "Automatically discover life science APIs online, create ToolUniverse tools, validate them, and prepare integration PRs. Performs gap analysis to identify missing tool categories, web searches for APIs, automated tool creation using devtu-create-tool patterns, validation with devtu-fix-tool, and git workflow management. Use when expanding ToolUniverse coverage, adding new API integrations, or systematically discovering scientific resources. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-auto-discover-apis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-auto-discover-apis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-code-optimization",
+    "description": "Code quality patterns and guidelines for ToolUniverse tool development. Apply when writing, fixing, or refactoring tool Python code in the ToolUniverse project. Encodes lessons from 80+ debug rounds. Use alongside devtu-fix-tool and devtu-self-evolve. Triggers: implementing tool fixes, writing new tool classes, reviewing tool code quality, checking schema correctness, looking up API-specific bug fixes. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-code-optimization')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-code-optimization')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-create-tool",
+    "description": "Create new scientific tools for ToolUniverse framework with proper structure, validation, and testing. Use when users need to add tools to ToolUniverse, implement new API integrations, create tool wrappers for scientific databases/services, expand ToolUniverse capabilities, or follow ToolUniverse contribution guidelines. Supports creating tool classes, JSON configurations, validation, error handling, and test examples. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-create-tool')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-create-tool')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-docs-quality",
+    "description": "TOP PRIORITY skill — find and immediately fix or remove every piece of wrong, outdated, or redundant information in ToolUniverse docs. Wrong code, broken links, incorrect counts, and overlapping instructions must be fixed or removed — never left in place. Runs five phases: (D) static method scan, (C) live code execution, (A) automated validation, (B) ToolUniverse audit, (E) less-is-more simplification. Core philosophy: each concept appears exactly once; remove don't add; no emojis; single setup entry point. Use when reviewing docs, before releases, after API changes, or when asked to audit, fix, or simplify documentation. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-docs-quality')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-docs-quality')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-fix-tool",
+    "description": "Fix failing ToolUniverse tools by diagnosing test failures, identifying root causes, implementing fixes, and validating solutions. Use when ToolUniverse tools fail tests, return errors, have schema validation issues, or when asked to debug or fix tools in the ToolUniverse framework. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-fix-tool')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-fix-tool')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-github",
+    "description": "GitHub workflow for ToolUniverse - push code safely by moving temp files, activating pre-commit hooks, running tests, and cleaning staged files. Use when pushing to GitHub, fixing CI failures, or cleaning up before commits. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-github')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-github')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-optimize-descriptions",
+    "description": "Optimize tool descriptions in ToolUniverse JSON configs for clarity and usability. Reviews descriptions for missing prerequisites, unexpanded abbreviations, unclear parameters, and missing usage guidance. Use when reviewing tool descriptions, improving API documentation, or when user asks to check if tools are easy to understand. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-optimize-descriptions')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-optimize-descriptions')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-optimize-skills",
+    "description": "Optimize ToolUniverse skills for better report quality, evidence handling, and user experience. Apply patterns like tool verification, foundation data layers, disambiguation-first, evidence grading, quantified completeness, and report-only output. Use when reviewing skills, improving existing skills, or creating new ToolUniverse research skills. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-optimize-skills')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-optimize-skills')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:devtu-self-evolve",
+    "description": "Orchestrate the full ToolUniverse self-improvement cycle: discover APIs, create tools, test with researcher personas, fix issues, optimize skills, and push via git. References and dispatches to all other devtu skills. Use when asked to: run the self-improvement loop, do a debug/test round, expand tool coverage, improve tool quality, or evolve ToolUniverse. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='devtu-self-evolve')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='devtu-self-evolve')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:setup-tooluniverse",
+    "description": "Install and configure ToolUniverse for any use case — MCP server (chat-based), CLI (command line with 9 subcommands), or Python SDK (Coding API with 3 calling patterns). Covers uv/uvx setup, MCP configuration for 12+ AI clients (Cursor, Claude Desktop, Windsurf, VS Code, Codex, Gemini CLI, Trae, Cline, etc.), full CLI reference (tu list/grep/find/info/run/test/status/build/serve), Coding API quickstart, agentic tools, code executor, API key walkthrough, skill installation, and upgrading. Use when user asks how to set up ToolUniverse, which access mode to use (MCP vs CLI vs SDK), configuring MCP servers, using the CLI, troubleshooting installation, upgrading, or mentions installing ToolUniverse or setting up scientific tools. Also triggers for \"how do I use ToolUniverse\", \"what's the best way to access tools\", \"command line\", \"tu command\", \"coding API\", \"tu build\". [SKILL — not executable via execute_tool. Invoke with: Skill(skill='setup-tooluniverse')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='setup-tooluniverse')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse",
+    "description": "Router skill for ToolUniverse tasks. First checks if specialized tooluniverse skills (58+ skills covering disease/drug/target research, clinical decision support, genomics, epigenomics, chemical safety, systems biology, and more) can solve the problem, then falls back to general strategies for using 1400+ scientific tools. Covers tool discovery, multi-hop queries, comprehensive research workflows, disambiguation, evidence grading, and report generation. Use when users need to research any scientific topic, find biological data, or explore drug/target/disease relationships. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-adverse-event-detection",
+    "description": "Detect and analyze adverse drug event signals using FDA FAERS data, drug labels, disproportionality analysis (PRR, ROR, IC), and biomedical evidence. Generates quantitative safety signal scores (0-100) with evidence grading. Use for post-market surveillance, pharmacovigilance, drug safety assessment, adverse event investigation, and regulatory decision support. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-adverse-event-detection')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-adverse-event-detection')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-antibody-engineering",
+    "description": "Comprehensive antibody engineering and optimization for therapeutic development. Covers humanization, affinity maturation, developability assessment, and immunogenicity prediction. Use when asked to optimize antibodies, humanize sequences, or engineer therapeutic antibodies from lead to clinical candidate. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-antibody-engineering')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-antibody-engineering')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-binder-discovery",
+    "description": "Discover novel small molecule binders for protein targets using structure-based and ligand-based approaches. Creates actionable reports with candidate compounds, ADMET profiles, and synthesis feasibility. Use when users ask to find small molecules for a target, identify novel binders, perform virtual screening, or need hit-to-lead compound identification. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-binder-discovery')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-binder-discovery')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-cancer-variant-interpretation",
+    "description": "Provide comprehensive clinical interpretation of somatic mutations in cancer. Given a gene symbol + variant (e.g., EGFR L858R, BRAF V600E) and optional cancer type, performs multi-database analysis covering clinical evidence (CIViC), mutation prevalence (cBioPortal), therapeutic associations (OpenTargets, ChEMBL, FDA), resistance mechanisms, clinical trials, prognostic impact, and pathway context. Generates an evidence-graded markdown report with actionable recommendations for precision oncology. Use when oncologists, molecular tumor boards, or researchers ask about treatment options for specific cancer mutations, resistance mechanisms, or clinical trial matching. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-cancer-variant-interpretation')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-cancer-variant-interpretation')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-chemical-compound-retrieval",
+    "description": "Retrieves chemical compound information from PubChem and ChEMBL with disambiguation, cross-referencing, and quality assessment. Creates comprehensive compound profiles with identifiers, properties, bioactivity, and drug information. Use when users need chemical data, drug information, or mention PubChem CID, ChEMBL ID, SMILES, InChI, or compound names. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-chemical-compound-retrieval')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-chemical-compound-retrieval')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-chemical-safety",
+    "description": "Comprehensive chemical safety and toxicology assessment integrating ADMET-AI predictions, CTD toxicogenomics, FDA label safety data, DrugBank safety profiles, and STITCH chemical-protein interactions. Performs predictive toxicology (AMES, DILI, LD50, carcinogenicity), organ/system toxicity profiling, chemical-gene-disease relationship mapping, regulatory safety extraction, and environmental hazard assessment. Use when asked about chemical toxicity, drug safety profiling, ADMET properties, environmental health risks, chemical hazard assessment, or toxicogenomic analysis. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-chemical-safety')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-chemical-safety')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-clinical-guidelines",
+    "description": "Search and retrieve clinical practice guidelines across 12+ authoritative sources including NICE, WHO, ADA, AHA/ACC, NCCN, SIGN, CPIC, CMA, CTFPHC, GIN, MAGICapp, PubMed, EuropePMC, TRIP, and OpenAlex. Covers disease management, cardiology, oncology, diabetes, pharmacogenomics, and more. Use when users ask about clinical guidelines, treatment recommendations, standard of care, evidence-based medicine, or drug-gene dosing recommendations. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-clinical-guidelines')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-clinical-guidelines')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-clinical-trial-design",
+    "description": "Strategic clinical trial design feasibility assessment using ToolUniverse. Evaluates patient population sizing, biomarker prevalence, endpoint selection, comparator analysis, safety monitoring, and regulatory pathways. Creates comprehensive feasibility reports with evidence grading, enrollment projections, and trial design recommendations. Use when planning Phase 1/2 trials, assessing trial feasibility, or designing biomarker-driven studies. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-clinical-trial-design')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-clinical-trial-design')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-clinical-trial-matching",
+    "description": "AI-driven patient-to-trial matching for precision medicine and oncology. Given a patient profile (disease, molecular alterations, stage, prior treatments), discovers and ranks clinical trials from ClinicalTrials.gov using multi-dimensional matching across molecular eligibility, clinical criteria, drug-biomarker alignment, evidence strength, and geographic feasibility. Produces a quantitative Trial Match Score (0-100) per trial with tiered recommendations and a comprehensive markdown report. Use when oncologists, molecular tumor boards, or patients ask about clinical trial options for specific cancer types, biomarker profiles, or post-progression scenarios. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-clinical-trial-matching')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-clinical-trial-matching')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-crispr-screen-analysis",
+    "description": "Comprehensive CRISPR screen analysis for functional genomics. Analyze pooled or arrayed CRISPR screens (knockout, activation, interference) to identify essential genes, synthetic lethal interactions, and drug targets. Perform sgRNA count processing, gene-level scoring (MAGeCK, BAGEL), quality control, pathway enrichment, and drug target prioritization. Use for CRISPR screen analysis, gene essentiality studies, synthetic lethality detection, functional genomics, drug target validation, or identifying genetic vulnerabilities. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-crispr-screen-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-crispr-screen-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-custom-tool",
+    "description": "Add custom local tools to ToolUniverse and use them alongside the 1000+ built-in tools. Use this skill when a user wants to: create their own tool for a private or custom API, add a local tool to their workspace, integrate an internal service with ToolUniverse, or use a custom tool via the MCP server or Python API. Covers both the JSON config approach (easiest, no Python needed) and the Python class approach (full control). Also covers how to verify tools loaded correctly and how to call them. Also covers the plugin package approach for reusable, shareable, pip-installable tool sets. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-custom-tool')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-custom-tool')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-disease-research",
+    "description": "Generate comprehensive disease research reports using 100+ ToolUniverse tools. Creates a detailed markdown report file and progressively updates it with findings from 10 research dimensions. All information includes source references. Use when users ask about diseases, syndromes, or need systematic disease analysis. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-disease-research')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-disease-research')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-drug-drug-interaction",
+    "description": "Comprehensive drug-drug interaction (DDI) prediction and risk assessment. Analyzes interaction mechanisms (CYP450, transporters, pharmacodynamic), severity classification, clinical evidence grading, and provides management strategies. Supports single drug pairs, polypharmacy analysis (3+ drugs), and alternative drug recommendations. Use when users ask about drug interactions, medication safety, polypharmacy risks, or need DDI assessment for clinical decision support. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-drug-drug-interaction')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-drug-drug-interaction')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-drug-repurposing",
+    "description": "Identify drug repurposing candidates using ToolUniverse for target-based, compound-based, and disease-driven strategies. Searches existing drugs for new therapeutic indications by analyzing targets, bioactivity, safety profiles, and literature evidence. Use when exploring drug repurposing opportunities, finding new indications for approved drugs, or when users mention drug repositioning, off-label uses, or therapeutic alternatives. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-drug-repurposing')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-drug-repurposing')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-drug-research",
+    "description": "Generates comprehensive drug research reports with compound disambiguation, evidence grading, and mandatory completeness sections. Covers identity, chemistry, pharmacology, targets, clinical trials, safety, pharmacogenomics, and ADMET properties. Use when users ask about drugs, medications, therapeutics, or need drug profiling, safety assessment, or clinical development research. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-drug-research')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-drug-research')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-drug-target-validation",
+    "description": "Comprehensive computational validation of drug targets for early-stage drug discovery. Evaluates targets across 10 dimensions (disambiguation, disease association, druggability, chemical matter, clinical precedent, safety, pathway context, validation evidence, structural insights, validation roadmap) using 60+ ToolUniverse tools. Produces a quantitative Target Validation Score (0-100) with GO/NO-GO recommendation. Use when users ask about target validation, druggability assessment, target prioritization, or \"is X a good drug target for Y?\" [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-drug-target-validation')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-drug-target-validation')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-epigenomics",
+    "description": "Production-ready genomics and epigenomics data processing for BixBench questions. Handles methylation array analysis (CpG filtering, differential methylation, age-related CpG detection, chromosome-level density), ChIP-seq peak analysis (peak calling, motif enrichment, coverage stats), ATAC-seq chromatin accessibility, multi-omics integration (expression + methylation correlation), and genome-wide statistics. Pure Python computation (pandas, scipy, numpy, pysam, statsmodels) plus ToolUniverse annotation tools (Ensembl, ENCODE, SCREEN, JASPAR, ReMap, RegulomeDB, ChIPAtlas). Supports BED, BigWig, methylation beta-value matrices, Illumina manifest files, and multi-sample clinical data. Use when processing methylation data, ChIP-seq peaks, ATAC-seq signals, or answering questions about CpG sites, differential methylation, chromatin accessibility, histone marks, or epigenomic statistics. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-epigenomics')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-epigenomics')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-expression-data-retrieval",
+    "description": "Retrieves gene expression and omics datasets from ArrayExpress and BioStudies with gene disambiguation, experiment quality assessment, and structured reports. Creates comprehensive dataset profiles with metadata, sample information, and download links. Use when users need expression data, omics datasets, or mention ArrayExpress (E-MTAB, E-GEOD) or BioStudies (S-BSST) accessions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-expression-data-retrieval')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-expression-data-retrieval')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gene-enrichment",
+    "description": "Perform comprehensive gene enrichment and pathway analysis using gseapy (ORA and GSEA), PANTHER, STRING, Reactome, and 40+ ToolUniverse tools. Supports GO enrichment (BP, MF, CC), KEGG, Reactome, WikiPathways, MSigDB Hallmark, and 220+ Enrichr libraries. Handles multiple ID types (gene symbols, Ensembl, Entrez, UniProt), multiple organisms (human, mouse, rat, fly, worm, yeast), customizable backgrounds, and multiple testing correction (BH, Bonferroni). Use when users ask about gene enrichment, pathway analysis, GO term enrichment, KEGG pathway analysis, GSEA, over-representation analysis, functional annotation, or gene set analysis. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gene-enrichment')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gene-enrichment')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gwas-drug-discovery",
+    "description": "Transform GWAS signals into actionable drug targets and repurposing opportunities. Performs locus-to-gene mapping, target druggability assessment, existing drug identification, safety profile evaluation, and clinical trial matching. Use when discovering drug targets from GWAS data, finding drug repurposing opportunities from genetic associations, or translating GWAS findings into therapeutic leads. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gwas-drug-discovery')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gwas-drug-discovery')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gwas-finemapping",
+    "description": "Identify and prioritize causal variants at GWAS loci using statistical fine-mapping and locus-to-gene predictions. Computes posterior probabilities for causal variants, links variants to genes via L2G predictions, annotates functional consequences, and suggests validation strategies. Use when asked to fine-map GWAS loci, prioritize causal variants, identify credible sets, or link GWAS signals to causal genes. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gwas-finemapping')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gwas-finemapping')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gwas-snp-interpretation",
+    "description": "Interpret genetic variants (SNPs) from GWAS studies by aggregating evidence from multiple databases (GWAS Catalog, Open Targets Genetics, ClinVar). Retrieves variant annotations, GWAS trait associations, fine-mapping evidence, locus-to-gene predictions, and clinical significance. Use when asked to interpret a SNP by rsID, find disease associations for a variant, assess clinical significance, or answer questions like \"What diseases is rs429358 associated with?\" or \"Interpret rs7903146\". [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gwas-snp-interpretation')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gwas-snp-interpretation')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gwas-study-explorer",
+    "description": "Compare GWAS studies, perform meta-analyses, and assess replication across cohorts. Integrates NHGRI-EBI GWAS Catalog and Open Targets Genetics to compare study designs, effect sizes, ancestry diversity, and heterogeneity statistics. Use when comparing GWAS studies for a trait, performing meta-analysis of genetic loci, assessing replication across cohorts, or exploring the genetic architecture of complex diseases. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gwas-study-explorer')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gwas-study-explorer')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-gwas-trait-to-gene",
+    "description": "Discover genes associated with diseases and traits using GWAS data from the GWAS Catalog (500,000+ associations) and Open Targets Genetics (L2G predictions). Identifies genetic risk factors, prioritizes causal genes via locus-to-gene scoring, and assesses druggability. Use when asked to find genes associated with a disease or trait, discover genetic risk factors, translate GWAS signals to gene targets, or answer questions like \"What genes are associated with type 2 diabetes?\" [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-gwas-trait-to-gene')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-gwas-trait-to-gene')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-image-analysis",
+    "description": "Production-ready microscopy image analysis and quantitative imaging data skill for colony morphometry, cell counting, fluorescence quantification, and statistical analysis of imaging-derived measurements. Processes ImageJ/CellProfiler output (area, circularity, intensity, cell counts), performs Dunnett's test, Cohen's d effect size, power analysis, Shapiro-Wilk normality tests, two-way ANOVA, polynomial regression, natural spline regression with confidence intervals, and comparative morphometry. Supports CSV/TSV measurement tables, multi-channel fluorescence data, colony swarming assays, and neuron counting datasets. Use when analyzing microscopy measurement data, colony area/circularity, cell count statistics, swarming assays, co-culture ratio optimization, or answering questions about imaging-derived quantitative data. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-image-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-image-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-immune-repertoire-analysis",
+    "description": "Comprehensive immune repertoire analysis for T-cell and B-cell receptor sequencing data. Analyze TCR/BCR repertoires to assess clonality, diversity, V(D)J gene usage, CDR3 characteristics, convergence, and predict epitope specificity. Integrate with single-cell data for clonotype-phenotype associations. Use for adaptive immune response profiling, cancer immunotherapy research, vaccine response assessment, autoimmune disease studies, or repertoire diversity analysis in immunology research. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-immune-repertoire-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-immune-repertoire-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-immunotherapy-response-prediction",
+    "description": "Predict patient response to immune checkpoint inhibitors (ICIs) using multi-biomarker integration. Given a cancer type, somatic mutations, and optional biomarkers (TMB, PD-L1, MSI status), performs systematic analysis across 11 phases covering TMB classification, neoantigen burden estimation, MSI/MMR assessment, PD-L1 evaluation, immune microenvironment profiling, mutation-based resistance/sensitivity prediction, clinical evidence retrieval, and multi-biomarker score integration. Generates a quantitative ICI Response Score (0-100), response likelihood tier, specific ICI drug recommendations with evidence, resistance risk factors, and a monitoring plan. Use when oncologists ask about immunotherapy eligibility, checkpoint inhibitor selection, or biomarker-guided ICI treatment decisions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-immunotherapy-response-prediction')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-immunotherapy-response-prediction')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-infectious-disease",
+    "description": "Rapid pathogen characterization and drug repurposing analysis for infectious disease outbreaks. Identifies pathogen taxonomy, essential proteins, predicts structures, and screens existing drugs via docking. Use when facing novel pathogens, emerging infections, or needing rapid therapeutic options during outbreaks. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-infectious-disease')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-infectious-disease')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-install-skills",
+    "description": "Detect and auto-install missing ToolUniverse research skills by checking common client skill directories and cloning from GitHub if absent. Use when ToolUniverse specialized skills are not installed, when setting up a new project, or when the tooluniverse router skill needs to bootstrap its sub-skills before routing. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-install-skills')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-install-skills')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-literature-deep-research",
+    "description": "Comprehensive literature deep research across any academic domain using 120+ ToolUniverse tools. Conducts subject disambiguation, systematic literature search with citation network expansion, evidence grading (T1-T4), and structured theme extraction. Produces detailed reports with mandatory completeness checklists, integrated models, and testable hypotheses. Use when users need thorough literature reviews, target/drug/disease profiles, topic deep-dives, claim verification, or systematic evidence synthesis. Supports biomedical (genes, proteins, drugs, diseases), computer science, social science, and general academic topics. For single factoid questions, uses a fast verification mode with inline answer. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-literature-deep-research')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-literature-deep-research')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-metabolomics",
+    "description": "Comprehensive metabolomics research skill for identifying metabolites, analyzing studies, and searching metabolomics databases. Integrates HMDB (220k+ metabolites), MetaboLights, Metabolomics Workbench, and PubChem. Use when asked to identify or annotate metabolites (HMDB IDs, chemical properties, pathways), retrieve metabolomics study information from MetaboLights (MTBLS*) or Metabolomics Workbench (ST*), search for studies by keywords or disease, or generate comprehensive metabolomics research reports. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-metabolomics')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-metabolomics')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-metabolomics-analysis",
+    "description": "Analyze metabolomics data including metabolite identification, quantification, pathway analysis, and metabolic flux. Processes LC-MS, GC-MS, NMR data from targeted and untargeted experiments. Performs normalization, statistical analysis, pathway enrichment, metabolite-enzyme integration, and biomarker discovery. Use when analyzing metabolomics datasets, identifying differential metabolites, studying metabolic pathways, integrating with transcriptomics/proteomics, discovering metabolic biomarkers, performing flux balance analysis, or characterizing metabolic phenotypes in disease, drug response, or physiological conditions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-metabolomics-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-metabolomics-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-multi-omics-integration",
+    "description": "Integrate and analyze multiple omics datasets (transcriptomics, proteomics, epigenomics, genomics, metabolomics) for systems biology and precision medicine. Performs cross-omics correlation, multi-omics clustering (MOFA+, NMF), pathway-level integration, and sample matching. Coordinates ToolUniverse skills for expression data (RNA-seq), epigenomics (methylation, ChIP-seq), variants (SNVs, CNVs), protein interactions, and pathway enrichment. Use when analyzing multi-omics datasets, performing integrative analysis, discovering multi-omics biomarkers, studying disease mechanisms across molecular layers, or conducting systems biology research that requires coordinated analysis of transcriptome, genome, epigenome, proteome, and metabolome data. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-multi-omics-integration')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-multi-omics-integration')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-multiomic-disease-characterization",
+    "description": "Comprehensive multi-omics disease characterization integrating genomics, transcriptomics, proteomics, pathway, and therapeutic layers for systems-level understanding. Produces a detailed multi-omics report with quantitative confidence scoring (0-100), cross-layer gene concordance analysis, biomarker candidates, therapeutic opportunities, and mechanistic hypotheses. Uses 80+ ToolUniverse tools across 8 analysis layers. Use when users ask about disease mechanisms, multi-omics analysis, systems biology of disease, biomarker discovery, or therapeutic target identification from a disease perspective. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-multiomic-disease-characterization')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-multiomic-disease-characterization')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-network-pharmacology",
+    "description": "Construct and analyze compound-target-disease networks for drug repurposing, polypharmacology discovery, and systems pharmacology. Builds multi-layer networks from ChEMBL, OpenTargets, STRING, DrugBank, Reactome, FAERS, and 60+ other ToolUniverse tools. Calculates Network Pharmacology Scores (0-100), identifies repurposing candidates, predicts mechanisms, and analyzes polypharmacology. Use when users ask about drug repurposing via network analysis, multi-target drug effects, compound-target-disease networks, systems pharmacology, or polypharmacology. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-network-pharmacology')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-network-pharmacology')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-pharmacovigilance",
+    "description": "Analyze drug safety signals from FDA adverse event reports, label warnings, and pharmacogenomic data. Calculates disproportionality measures (PRR, ROR), identifies serious adverse events, assesses pharmacogenomic risk variants. Use when asked about drug safety, adverse events, post-market surveillance, or risk-benefit assessment. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-pharmacovigilance')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-pharmacovigilance')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-phylogenetics",
+    "description": "Production-ready phylogenetics and sequence analysis skill for alignment processing, tree analysis, and evolutionary metrics. Computes treeness, RCV, treeness/RCV, parsimony informative sites, evolutionary rate, DVMC, tree length, alignment gap statistics, GC content, and bootstrap support using PhyKIT, Biopython, and DendroPy. Performs NJ/UPGMA/parsimony tree construction, Robinson-Foulds distance, Mann-Whitney U tests, and batch analysis across gene families. Integrates with ToolUniverse for sequence retrieval (NCBI, UniProt, Ensembl) and tree annotation. Use when processing FASTA/PHYLIP/Nexus/Newick files, computing phylogenetic metrics, comparing taxa groups, or answering questions about alignments, trees, parsimony, or molecular evolution. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-phylogenetics')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-phylogenetics')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-polygenic-risk-score",
+    "description": "Build and interpret polygenic risk scores (PRS) for complex diseases using GWAS summary statistics. Calculates genetic risk profiles, interprets PRS percentiles, and assesses disease predisposition across conditions including type 2 diabetes, coronary artery disease, and Alzheimer's disease. Use when asked to calculate polygenic risk scores, interpret genetic risk for complex diseases, build custom PRS from GWAS data, or answer questions like \"What is my genetic predisposition to breast cancer?\" [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-polygenic-risk-score')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-polygenic-risk-score')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-precision-medicine-stratification",
+    "description": "Comprehensive patient stratification for precision medicine by integrating genomic, clinical, and therapeutic data. Given a disease/condition, genomic data (germline variants, somatic mutations, expression), and optional clinical parameters, performs multi-phase analysis covering disease disambiguation, genetic risk assessment, disease-specific molecular stratification, pharmacogenomic profiling, comorbidity/DDI risk, pathway analysis, clinical evidence and guideline mapping, clinical trial matching, and integrated outcome prediction. Generates a quantitative Precision Medicine Risk Score (0-100) with risk tier assignment, treatment algorithm, pharmacogenomic guidance, clinical trial matches, and monitoring plan. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-precision-medicine-stratification')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-precision-medicine-stratification')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-precision-oncology",
+    "description": "Provide actionable treatment recommendations for cancer patients based on molecular profile. Interprets tumor mutations, identifies FDA-approved therapies, finds resistance mechanisms, matches clinical trials. Use when oncologist asks about treatment options for specific mutations (EGFR, KRAS, BRAF, etc.), therapy resistance, or clinical trial eligibility. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-precision-oncology')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-precision-oncology')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:Protein Interaction Network Analysis",
+    "description": "Analyze protein-protein interaction networks using STRING, BioGRID, and SASBDB databases. Maps protein identifiers, retrieves interaction networks with confidence scores, performs functional enrichment analysis (GO/KEGG/Reactome), and optionally includes structural data. No API key required for core functionality (STRING). Use when analyzing protein networks, discovering interaction partners, identifying functional modules, or studying protein complexes. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='Protein Interaction Network Analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='Protein Interaction Network Analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-protein-structure-retrieval",
+    "description": "Retrieves protein structure data from RCSB PDB, PDBe, and AlphaFold with protein disambiguation, quality assessment, and comprehensive structural profiles. Creates detailed structure reports with experimental metadata, ligand information, and download links. Use when users need protein structures, 3D models, crystallography data, or mention PDB IDs (4-character codes like 1ABC) or UniProt accessions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-protein-structure-retrieval')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-protein-structure-retrieval')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-protein-therapeutic-design",
+    "description": "Design novel protein therapeutics (binders, enzymes, scaffolds) using AI-guided de novo design. Uses RFdiffusion for backbone generation, ProteinMPNN for sequence design, ESMFold/AlphaFold2 for validation. Use when asked to design protein binders, therapeutic proteins, or engineer protein function. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-protein-therapeutic-design')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-protein-therapeutic-design')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-proteomics-analysis",
+    "description": "Analyze mass spectrometry proteomics data including protein quantification, differential expression, post-translational modifications (PTMs), and protein-protein interactions. Processes MaxQuant, Spectronaut, DIA-NN, and other MS platform outputs. Performs normalization, statistical analysis, pathway enrichment, and integration with transcriptomics. Use when analyzing proteomics data, comparing protein abundance between conditions, identifying PTM changes, studying protein complexes, integrating protein and RNA data, discovering protein biomarkers, or conducting quantitative proteomics experiments. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-proteomics-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-proteomics-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-rare-disease-diagnosis",
+    "description": "Provide differential diagnosis for patients with suspected rare diseases based on phenotype and genetic data. Matches symptoms to HPO terms, identifies candidate diseases from Orphanet/OMIM, prioritizes genes for testing, interprets variants of uncertain significance. Use when clinician asks about rare disease diagnosis, unexplained phenotypes, or genetic testing interpretation. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-rare-disease-diagnosis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-rare-disease-diagnosis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-rnaseq-deseq2",
+    "description": "Production-ready RNA-seq differential expression analysis using PyDESeq2. Performs DESeq2 normalization, dispersion estimation, Wald testing, LFC shrinkage, and result filtering. Handles multi-factor designs, multiple contrasts, batch effects, and integrates with gene enrichment (gseapy) and ToolUniverse annotation tools (UniProt, Ensembl, OpenTargets). Supports CSV/TSV/H5AD input formats and any organism. Use when analyzing RNA-seq count matrices, identifying DEGs, performing differential expression with statistical rigor, or answering questions about gene expression changes. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-rnaseq-deseq2')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-rnaseq-deseq2')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-sdk",
+    "description": "Build AI scientist systems using ToolUniverse Python SDK for scientific research. Use when users need to access 1000++ scientific tools through Python code, create scientific workflows, perform drug discovery, protein analysis, genomics analysis, literature research, or any computational biology task. Triggers include requests to use scientific tools programmatically, build research pipelines, analyze biological data, search literature, predict drug properties, or create AI-powered scientific workflows. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-sdk')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-sdk')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-sequence-retrieval",
+    "description": "Retrieves biological sequences (DNA, RNA, protein) from NCBI and ENA with gene disambiguation, accession type handling, and comprehensive sequence profiles. Creates detailed reports with sequence metadata, cross-database references, and download options. Use when users need nucleotide sequences, protein sequences, genome data, or mention GenBank, RefSeq, EMBL accessions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-sequence-retrieval')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-sequence-retrieval')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-single-cell",
+    "description": "\"Production-ready single-cell and expression matrix analysis using scanpy, anndata, and scipy. Performs scRNA-seq QC, normalization, PCA, UMAP, Leiden/Louvain clustering, differential expression (Wilcoxon, t-test, DESeq2), cell type annotation, per-cell-type statistical analysis, gene-expression correlation, batch correction (Harmony), trajectory inference, and cell-cell communication analysis. NEW: Analyzes ligand-receptor interactions between cell types using OmniPath (CellPhoneDB, CellChatDB), scores communication strength, identifies signaling cascades, and handles multi-subunit receptor complexes. Integrates with ToolUniverse gene annotation tools (HPA, Ensembl, MyGene, UniProt) and enrichment tools (gseapy, PANTHER, STRING). Supports h5ad, 10X, CSV/TSV count matrices, and pre-annotated datasets. Use when analyzing single-cell RNA-seq data, studying cell-cell interactions, performing cell type differential expression, computing gene-expression correlations by cell type, analyzing tumor-immune communication, or answering questions about scRNA-seq datasets.\" [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-single-cell')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-single-cell')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-spatial-omics-analysis",
+    "description": "Computational analysis framework for spatial multi-omics data integration. Given spatially variable genes (SVGs), spatial domain annotations, tissue type, and disease context from spatial transcriptomics/proteomics experiments (10x Visium, MERFISH, DBiTplus, SLIDE-seq, etc.), performs comprehensive biological interpretation including pathway enrichment, cell-cell interaction inference, druggable target identification, immune microenvironment characterization, and multi-modal integration. Produces a detailed markdown report with Spatial Omics Integration Score (0-100), domain-by-domain characterization, and validation recommendations. Uses 70+ ToolUniverse tools across 9 analysis phases. Use when users ask about spatial transcriptomics analysis, spatial omics interpretation, tissue heterogeneity, spatial gene expression patterns, tumor microenvironment mapping, tissue zonation, or cell-cell communication from spatial data. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-spatial-omics-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-spatial-omics-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-spatial-transcriptomics",
+    "description": "Analyze spatial transcriptomics data to map gene expression in tissue architecture. Supports 10x Visium, MERFISH, seqFISH, Slide-seq, and imaging-based platforms. Performs spatial clustering, domain identification, cell-cell proximity analysis, spatial gene expression patterns, tissue architecture mapping, and integration with single-cell data. Use when analyzing spatial transcriptomics datasets, studying tissue organization, identifying spatial expression patterns, mapping cell-cell interactions in tissue context, characterizing tumor microenvironment spatial structure, or integrating spatial and single-cell RNA-seq data for comprehensive tissue analysis. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-spatial-transcriptomics')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-spatial-transcriptomics')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-statistical-modeling",
+    "description": "Perform statistical modeling and regression analysis on biomedical datasets. Supports linear regression, logistic regression (binary/ordinal/multinomial), mixed-effects models, Cox proportional hazards survival analysis, Kaplan-Meier estimation, and comprehensive model diagnostics. Extracts odds ratios, hazard ratios, confidence intervals, p-values, and effect sizes. Designed to solve BixBench statistical reasoning questions involving clinical/experimental data. Use when asked to fit regression models, compute odds ratios, perform survival analysis, run statistical tests, or interpret model coefficients from provided data. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-statistical-modeling')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-statistical-modeling')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-structural-variant-analysis",
+    "description": "Comprehensive structural variant (SV) analysis skill for clinical genomics. Classifies SVs (deletions, duplications, inversions, translocations), assesses pathogenicity using ACMG-adapted criteria, evaluates gene disruption and dosage sensitivity, and provides clinical interpretation with evidence grading. Use when analyzing CNVs, large deletions/duplications, chromosomal rearrangements, or any structural variants requiring clinical interpretation. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-structural-variant-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-structural-variant-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-systems-biology",
+    "description": "Comprehensive systems biology and pathway analysis using multiple pathway databases (Reactome, KEGG, WikiPathways, Pathway Commons, BioModels). Performs pathway enrichment, protein-pathway mapping, keyword searches, and systems-level analysis. Use when analyzing gene sets, exploring biological pathways, or investigating systems-level biology. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-systems-biology')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-systems-biology')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-target-research",
+    "description": "Gather comprehensive biological target intelligence from 9 parallel research paths covering protein info, structure, interactions, pathways, expression, variants, drug interactions, and literature. Features collision-aware searches, evidence grading (T1-T4), explicit Open Targets coverage, and mandatory completeness auditing. Use when users ask about drug targets, proteins, genes, or need target validation, druggability assessment, or comprehensive target profiling. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-target-research')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-target-research')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-variant-analysis",
+    "description": "Production-ready VCF processing, variant annotation, mutation analysis, and structural variant (SV/CNV) interpretation for bioinformatics questions. Parses VCF files (streaming, large files), classifies mutation types (missense, nonsense, synonymous, frameshift, splice, intronic, intergenic) and structural variants (deletions, duplications, inversions, translocations), applies VAF/depth/quality/consequence filters, annotates with ClinVar/dbSNP/gnomAD/CADD via ToolUniverse, interprets SV/CNV clinical significance using ClinGen dosage sensitivity scores, computes variant statistics, and generates reports. Solves questions like \"What fraction of variants with VAF < 0.3 are missense?\", \"How many non-reference variants remain after filtering intronic/intergenic?\", \"What is the pathogenicity of this deletion affecting BRCA1?\", or \"Which dosage-sensitive genes overlap this CNV?\". Use when processing VCF files, annotating variants, filtering by VAF/depth/consequence, classifying mutations, interpreting structural variants, assessing CNV pathogenicity, comparing cohorts, or answering variant analysis questions. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-variant-analysis')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-variant-analysis')"
+  },
+  {
+    "type": "ClaudeCodeSkill",
+    "name": "skill:tooluniverse-variant-interpretation",
+    "description": "Systematic clinical variant interpretation from raw variant calls to ACMG-classified recommendations with structural impact analysis. Aggregates evidence from ClinVar, gnomAD, CIViC, UniProt, and PDB across ACMG criteria. Produces pathogenicity scores (0-100), clinical recommendations, and treatment implications. Use when interpreting genetic variants, classifying variants of uncertain significance (VUS), performing ACMG variant classification, or translating variant calls to clinical actionability. [SKILL — not executable via execute_tool. Invoke with: Skill(skill='tooluniverse-variant-interpretation')]",
+    "category": "claude_code_skills",
+    "parameter": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "invocation": "Skill(skill='tooluniverse-variant-interpretation')"
+  }
+]
