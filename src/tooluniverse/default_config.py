@@ -91,6 +91,7 @@ default_tool_files = {
     "adverse_event": os.path.join(current_dir, "data", "adverse_event_tools.json"),
     "dailymed": os.path.join(current_dir, "data", "dailymed_tools.json"),
     "fda_orange_book": os.path.join(current_dir, "data", "fda_orange_book_tools.json"),
+    "sec_edgar": os.path.join(current_dir, "data", "sec_edgar_tools.json"),
     "faers_analytics": os.path.join(current_dir, "data", "faers_analytics_tools.json"),
     "cdc": os.path.join(current_dir, "data", "cdc_tools.json"),
     "nhanes": os.path.join(current_dir, "data", "nhanes_tools.json"),
