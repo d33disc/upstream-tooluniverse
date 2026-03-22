@@ -1,84 +1,70 @@
 #!/usr/bin/env python3
-"""Company Research -- biotech/pharma intelligence briefs via ToolUniverse SDK."""
+"""Company Research v2 -- structured data collector via ToolUniverse SDK.
+
+Outputs JSON (not markdown). Claude Code consumes this JSON and layers on
+MCP tools + analytical reasoning to produce the final intelligence brief.
+"""
 
 from __future__ import annotations
 
+import json
+import logging
 import re
+import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Any
 
 from tooluniverse import ToolUniverse
+
+log = logging.getLogger(__name__)
 
 
 def company_research(
     company_name: str,
-    output_file: str | None = None,
+    output_dir: str | None = None,
 ) -> str:
-    """Generate a dated intelligence brief for a biotech/pharma company.
+    """Collect structured intelligence data for a company.
 
-    Args:
-        company_name: Company name (e.g., "Moderna", "Recursion Pharmaceuticals").
-        output_file: Output markdown path. Auto-generated if None.
-
-    Returns:
-        Path to the generated report file.
+    Returns path to the generated JSON artifact.
     """
     tu = ToolUniverse()
     tu.load_tools()
 
-    if output_file is None:
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        slug = company_name.lower().replace(" ", "_")[:30]
-        output_file = f"company_brief_{slug}_{ts}.md"
+    out = Path(output_dir) if output_dir else Path(".")
+    out.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    slug = re.sub(r"[^a-z0-9]+", "_", company_name.lower())[:30]
+    json_path = out / f"company_data_{slug}_{ts}.json"
 
-    report: list[str] = []
-    sources: list[dict[str, str]] = []
-    today = datetime.now().strftime("%Y-%m-%d")
+    sources: list[dict[str, Any]] = []
+    gaps: list[str] = []
 
-    # ------------------------------------------------------------------
-    # Phase 0: Disambiguation
-    # ------------------------------------------------------------------
-    identity = _disambiguate(tu, company_name, report, sources)
+    identity = _disambiguate(tu, company_name, sources)
+    is_public = bool(identity.get("cik"))
 
-    # ------------------------------------------------------------------
-    # Report header
-    # ------------------------------------------------------------------
-    ticker = identity.get("ticker", "N/A")
-    cik = identity.get("cik", "N/A")
-    sector = identity.get("sector", "Biotechnology / Pharmaceuticals")
-    report.insert(
-        0,
-        (
-            f"# Company Brief: {identity.get('name', company_name)}\n\n"
-            f"Generated: {today} | Ticker: {ticker} | CIK: {cik} | Sector: {sector}\n\n"
-            "---\n"
-        ),
-    )
+    results = _collect_parallel(tu, company_name, identity, sources, gaps)
 
-    # ------------------------------------------------------------------
-    # Phase 1: Fresh Signals (0-30 days)
-    # ------------------------------------------------------------------
-    _fresh_signals(tu, company_name, identity, report, sources)
+    artifact: dict[str, Any] = {
+        "meta": {
+            "company": company_name,
+            "timestamp": datetime.now().isoformat(),
+            "is_public": is_public,
+            "version": "2.0",
+        },
+        "identity": identity,
+        "financials": results.get("financials", {}),
+        "pipeline": results.get("pipeline", {}),
+        "regulatory": results.get("regulatory", {}),
+        "foundation": results.get("foundation", {}),
+        "sources": sources,
+        "data_gaps": gaps,
+    }
 
-    # ------------------------------------------------------------------
-    # Phase 2: Pipeline & Science (1-12 months)
-    # ------------------------------------------------------------------
-    _pipeline_science(tu, company_name, identity, report, sources)
-
-    # ------------------------------------------------------------------
-    # Phase 3: Foundation (1+ years)
-    # ------------------------------------------------------------------
-    _foundation(tu, company_name, identity, report, sources)
-
-    # ------------------------------------------------------------------
-    # Phase 4: Synthesis
-    # ------------------------------------------------------------------
-    _append_sources(report, sources)
-
-    content = "\n".join(report)
-    Path(output_file).write_text(content)
-    print(f"Report generated: {output_file} ({len(content)} chars)")
-    return output_file
+    json_path.write_text(json.dumps(artifact, indent=2, default=str))
+    print(f"Data collected: {json_path} ({json_path.stat().st_size} bytes)")
+    return str(json_path)
 
 
 # ======================================================================
@@ -89,51 +75,63 @@ def company_research(
 def _disambiguate(
     tu: ToolUniverse,
     name: str,
-    report: list[str],
-    sources: list[dict[str, str]],
-) -> dict[str, str]:
+    sources: list[dict[str, Any]],
+) -> dict[str, Any]:
     """Resolve company identity: name, ticker, CIK, sector."""
-    identity: dict[str, str] = {"name": name}
+    identity: dict[str, Any] = {"name": name, "is_public": False}
 
-    # Wikipedia
+    _wiki_identity(tu, name, identity, sources)
+    _sec_identity(tu, name, identity, sources)
+    _wikidata_identity(tu, name, identity, sources)
+
+    identity["is_public"] = bool(identity.get("cik"))
+    return identity
+
+
+def _wiki_identity(
+    tu: ToolUniverse,
+    name: str,
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+) -> None:
     try:
         result = tu.tools.Wikipedia_search(
             query=f"{name} company biotechnology", limit=3
         )
         if isinstance(result, dict):
-            results = result.get("results", [])
-            if results:
-                identity["name"] = results[0].get("title", name)
-                sources.append(
-                    {
-                        "tool": "Wikipedia_search",
-                        "query": name,
-                        "items": str(len(results)),
-                    }
-                )
+            hits = result.get("results", [])
+            if hits:
+                identity["name"] = hits[0].get("title", name)
+                _log_source(sources, "Wikipedia_search", name, len(hits), "T3")
     except Exception:
-        pass
+        log.debug("Wikipedia search failed", exc_info=True)
 
-    # SEC EDGAR -- find CIK
+
+def _sec_identity(
+    tu: ToolUniverse,
+    name: str,
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+) -> None:
     try:
         result = tu.tools.SEC_EDGAR_search_filings(query=name, forms="10-K")
         data = _extract_data(result)
         if isinstance(data, list) and data:
             identity["cik"] = data[0].get("cik", "")
-            company_str = data[0].get("company", "")
-            if "(" in company_str:
-                identity["ticker"] = company_str.split("(")[1].split(")")[0]
-            sources.append(
-                {
-                    "tool": "SEC_EDGAR_search_filings",
-                    "query": name,
-                    "items": str(len(data)),
-                }
-            )
+            co = data[0].get("company", "")
+            if "(" in co:
+                identity["ticker"] = co.split("(")[1].split(")")[0]
+            _log_source(sources, "SEC_EDGAR_search_filings", name, len(data), "T1")
     except Exception:
-        pass
+        log.debug("SEC identity lookup failed", exc_info=True)
 
-    # Wikidata for structured facts
+
+def _wikidata_identity(
+    tu: ToolUniverse,
+    name: str,
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+) -> None:
     try:
         result = tu.tools.Wikidata_search_entities(search=name, limit=3)
         if isinstance(result, dict):
@@ -142,124 +140,118 @@ def _disambiguate(
                 desc = entities[0].get("description", "")
                 if desc:
                     identity.setdefault("sector", desc)
-                sources.append(
-                    {
-                        "tool": "Wikidata_search_entities",
-                        "query": name,
-                        "items": str(len(entities)),
-                    }
+                identity["wikidata_id"] = entities[0].get("id", "")
+                _log_source(
+                    sources, "Wikidata_search_entities", name, len(entities), "T3"
                 )
     except Exception:
-        pass
-
-    return identity
+        log.debug("Wikidata lookup failed", exc_info=True)
 
 
 # ======================================================================
-# Phase 1: Fresh Signals
+# Parallel Data Collection (Phases 1-3)
 # ======================================================================
 
 
-def _fresh_signals(
+def _collect_parallel(
     tu: ToolUniverse,
     name: str,
-    identity: dict[str, str],
-    report: list[str],
-    sources: list[dict[str, str]],
-) -> None:
-    report.append("\n## What They're Doing NOW (0-30 days)\n")
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    """Run all data collection phases concurrently."""
+    tasks = {
+        "financials": lambda: _financials(tu, name, identity, sources, gaps),
+        "pipeline": lambda: _pipeline(tu, name, sources, gaps),
+        "regulatory": lambda: _regulatory(tu, name, sources, gaps),
+        "foundation": lambda: _foundation(tu, name, identity, sources, gaps),
+    }
+    results: dict[str, Any] = {}
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        futures = {pool.submit(fn): key for key, fn in tasks.items()}
+        for future in as_completed(futures):
+            key = futures[future]
+            try:
+                results[key] = future.result()
+            except Exception as exc:
+                log.warning("Phase %s failed: %s", key, exc)
+                results[key] = {}
+                gaps.append(f"Phase '{key}' failed: {exc}")
+    return results
 
-    # News via web search
-    report.append("\n### Recent News\n")
-    try:
-        result = tu.tools.web_search(query=f"{name} biotech news 2026", max_results=10)
-        data = _extract_data(result)
-        items = _as_list(data)
-        if items:
-            for item in items[:7]:
-                title = _strip_html(item.get("title", "Untitled"))
-                href = item.get("href", item.get("url", item.get("link", "")))
-                body = _strip_html(item.get("body", item.get("snippet", ""))[:200])
-                report.append(f"- **{title}** {f'[link]({href})' if href else ''}\n")
-                if body:
-                    report.append(f"  {body}\n")
-            sources.append(
-                {
-                    "tool": "web_search",
-                    "query": f"{name} news",
-                    "items": str(len(items)),
-                }
-            )
-        else:
-            report.append("*No recent news found.*\n")
-    except Exception:
-        report.append("*News search unavailable.*\n")
 
-    # SEC filings (recent)
+# ======================================================================
+# Phase 1: Financial Intelligence
+# ======================================================================
+
+
+def _financials(
+    tu: ToolUniverse,
+    name: str,
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    data: dict[str, Any] = {
+        "recent_filings": [],
+        "full_submissions": {},
+    }
     cik = identity.get("cik")
-    if cik:
-        report.append("\n### Recent SEC Filings [T1]\n")
-        try:
-            ninety_days_ago = (datetime.now() - timedelta(days=90)).strftime("%Y-%m-%d")
-            result = tu.tools.SEC_EDGAR_search_filings(
-                query=name, startdt=ninety_days_ago
-            )
-            data = _extract_data(result)
-            filings = data if isinstance(data, list) else []
-            if filings:
-                report.append(
-                    "| Form | Date | Accession |\n|------|------|-----------|\n"
-                )
-                seen: set[str] = set()
-                for f in filings[:15]:
-                    key = f"{f.get('form')}-{f.get('accession')}"
-                    if key in seen:
-                        continue
-                    seen.add(key)
-                    report.append(
-                        f"| {f.get('form', '')} | {f.get('file_date', '')} "
-                        f"| {f.get('accession', '')} |\n"
-                    )
-                sources.append(
-                    {
-                        "tool": "SEC_EDGAR_search_filings",
-                        "query": f"{name} recent",
-                        "items": str(len(filings)),
-                    }
-                )
-            else:
-                report.append("*No recent filings found.*\n")
-        except Exception:
-            report.append("*SEC filing search unavailable.*\n")
-    else:
-        report.append(
-            "\n### SEC Filings\n\n*Company appears to be private -- no SEC filings.*\n"
-        )
+    if not cik:
+        gaps.append("No CIK found — skipping SEC financial data (private company)")
+        return data
 
-    # Job postings
-    report.append("\n### Job Postings & Hiring Signals\n")
+    data["recent_filings"] = _fetch_recent_filings(tu, name, sources, gaps)
+    data["full_submissions"] = _fetch_submissions(tu, cik, sources, gaps)
+    return data
+
+
+def _fetch_recent_filings(
+    tu: ToolUniverse,
+    name: str,
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> list[dict[str, Any]]:
     try:
-        result = tu.tools.web_search(
-            query=f"{name} careers hiring biotech jobs", max_results=5
+        cutoff = (datetime.now() - timedelta(days=180)).strftime("%Y-%m-%d")
+        result = tu.tools.SEC_EDGAR_search_filings(query=name, startdt=cutoff)
+        filings = _extract_list(result)
+        seen: set[str] = set()
+        deduped = []
+        for f in filings[:20]:
+            key = f"{f.get('form')}-{f.get('accession')}"
+            if key not in seen:
+                seen.add(key)
+                deduped.append(f)
+        _log_source(
+            sources, "SEC_EDGAR_search_filings", f"{name} recent", len(deduped), "T1"
         )
-        data = _extract_data(result)
-        items = _as_list(data)
-        if items:
-            for item in items[:5]:
-                title = _strip_html(item.get("title", "Untitled"))
-                href = item.get("href", item.get("url", item.get("link", "")))
-                report.append(f"- {title} {f'[link]({href})' if href else ''}\n")
-            sources.append(
-                {
-                    "tool": "web_search",
-                    "query": f"{name} careers",
-                    "items": str(len(items)),
-                }
-            )
-        else:
-            report.append("*No job postings found.*\n")
+        return deduped
     except Exception:
-        report.append("*Job search unavailable.*\n")
+        log.debug("SEC recent filings failed", exc_info=True)
+        gaps.append("SEC recent filings search failed")
+        return []
+
+
+def _fetch_submissions(
+    tu: ToolUniverse,
+    cik: str,
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    try:
+        padded = cik.zfill(10)
+        result = tu.tools.SEC_EDGAR_get_company_submissions(cik=padded)
+        data = _extract_data(result)
+        if isinstance(data, dict):
+            _log_source(sources, "SEC_EDGAR_get_company_submissions", padded, 1, "T1")
+            return data
+        return {}
+    except Exception:
+        log.debug("SEC submissions lookup failed", exc_info=True)
+        gaps.append("SEC company submissions lookup failed")
+        return {}
 
 
 # ======================================================================
@@ -267,181 +259,262 @@ def _fresh_signals(
 # ======================================================================
 
 
-def _pipeline_science(
+def _pipeline(
     tu: ToolUniverse,
     name: str,
-    identity: dict[str, str],
-    report: list[str],
-    sources: list[dict[str, str]],
-) -> None:
-    report.append("\n## Pipeline & Science (1-12 months)\n")
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    """Collect pipeline data — sub-tasks run in parallel."""
+    sub_tasks = {
+        "clinical_trials": lambda: _fetch_trials(tu, name, sources, gaps),
+        "preprints": lambda: _fetch_preprints(tu, name, sources, gaps),
+        "publications": lambda: _fetch_publications(tu, name, sources, gaps),
+        "fda_approved": lambda: _fetch_fda_products(tu, name, sources, gaps),
+        "fda_approvals_history": lambda: _fetch_fda_approvals(tu, name, sources, gaps),
+        "adverse_events": lambda: _fetch_faers(tu, name, sources, gaps),
+        "research_output": lambda: _fetch_openalex(tu, name, sources, gaps),
+    }
+    results: dict[str, Any] = {}
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        futures = {pool.submit(fn): key for key, fn in sub_tasks.items()}
+        for future in as_completed(futures):
+            key = futures[future]
+            try:
+                results[key] = future.result()
+            except Exception:
+                log.debug("Pipeline sub-task %s failed", key, exc_info=True)
+                results[key] = []
+    return results
 
-    # Clinical trials
-    report.append("\n### Clinical Trials\n")
-    try:
-        result = tu.tools.ClinicalTrials_search_studies(query_term=name, page_size=10)
-        data = _extract_data(result)
-        studies = _as_list(data)
-        if studies:
-            report.append("| NCT ID | Title | Phase | Status |\n")
-            report.append("|--------|-------|-------|--------|\n")
-            for s in studies[:10]:
-                nct = s.get("nct_id", s.get("nctId", ""))
-                title = s.get("brief_title", s.get("briefTitle", s.get("title", "")))[
-                    :80
-                ]
-                phases = s.get("phases", s.get("phase", []))
-                phase = ", ".join(phases) if isinstance(phases, list) else str(phases)
-                status = s.get("status", s.get("overallStatus", ""))
-                report.append(f"| {nct} | {title} | {phase} | {status} |\n")
-            sources.append(
-                {
-                    "tool": "ClinicalTrials_search_studies",
-                    "query": name,
-                    "items": str(len(studies)),
-                }
-            )
-        else:
-            report.append("*No clinical trials found.*\n")
-    except Exception:
-        report.append("*Clinical trials search unavailable.*\n")
 
-    # Preprints via EuropePMC (SRC:PPR)
-    report.append("\n### Preprints [T3]\n")
+def _fetch_trials(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
     try:
-        result = tu.tools.EuropePMC_search_articles(query=f"{name} SRC:PPR", limit=5)
-        data = _extract_data(result)
-        articles = _as_list(data)
-        if articles:
-            for a in articles[:5]:
-                title = _strip_html(a.get("title", "Untitled"))
-                doi = a.get("doi", "")
-                date = a.get("firstPublicationDate", a.get("pubYear", ""))
-                link = f"https://doi.org/{doi}" if doi else ""
-                report.append(
-                    f"- {title} ({date}) {f'[doi]({link})' if link else ''} [T3]\n"
-                )
-            sources.append(
-                {
-                    "tool": "EuropePMC_search_articles",
-                    "query": f"{name} SRC:PPR",
-                    "items": str(len(articles)),
-                }
-            )
-        else:
-            report.append("*No preprints found.*\n")
+        result = tu.tools.ClinicalTrials_search_studies(query_term=name, page_size=15)
+        studies = _extract_list(result)
+        _log_source(sources, "ClinicalTrials_search_studies", name, len(studies), "T1")
+        return studies[:15]
     except Exception:
-        report.append("*Preprint search unavailable.*\n")
+        log.debug("Clinical trials search failed", exc_info=True)
+        gaps.append("Clinical trials search failed")
+        return []
 
-    # Peer-reviewed publications
-    report.append("\n### Publications [T2]\n")
-    try:
-        result = tu.tools.PubMed_search_articles(query=name, limit=5, sort="pub_date")
-        data = _extract_data(result)
-        articles = _as_list(data)
-        if articles:
-            for a in articles[:5]:
-                title = _strip_html(a.get("title", "Untitled"))
-                pub_date = a.get("pub_date", a.get("pubdate", a.get("pub_year", "")))
-                journal = a.get(
-                    "journal", a.get("fulljournalname", a.get("source", ""))
-                )
-                report.append(f"- {title} *{journal}* ({pub_date}) [T2]\n")
-            sources.append(
-                {
-                    "tool": "PubMed_search_articles",
-                    "query": name,
-                    "items": str(len(articles)),
-                }
-            )
-        else:
-            report.append("*No publications found.*\n")
-    except Exception:
-        report.append("*PubMed search unavailable.*\n")
 
-    # FDA Orange Book
-    report.append("\n### FDA Approved Products [T1]\n")
+def _fetch_preprints(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
     try:
-        result = tu.tools.FDA_OrangeBook_search_drug(brand_name=name, limit=5)
-        data = _extract_data(result)
-        products = _as_list(data)
-        if products:
-            for p in products[:5]:
-                brand = p.get("brand_name", p.get("trade_name", ""))
-                ingredient = p.get("active_ingredient", p.get("ingredient", ""))
-                app_no = p.get("application_number", p.get("appl_no", ""))
-                report.append(f"- **{brand}** ({ingredient}) -- {app_no} [T1]\n")
-            sources.append(
-                {
-                    "tool": "FDA_OrangeBook_search_drug",
-                    "query": name,
-                    "items": str(len(products)),
-                }
-            )
-        else:
-            report.append("*No FDA-approved products found under this name.*\n")
+        result = tu.tools.EuropePMC_search_articles(query=f"{name} SRC:PPR", limit=8)
+        articles = _extract_list(result)
+        _log_source(
+            sources, "EuropePMC_search_articles", f"{name} SRC:PPR", len(articles), "T3"
+        )
+        return articles[:8]
     except Exception:
-        report.append("*FDA search unavailable.*\n")
+        log.debug("Preprint search failed", exc_info=True)
+        gaps.append("Preprint search failed")
+        return []
+
+
+def _fetch_publications(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.PubMed_search_articles(query=name, limit=8, sort="pub_date")
+        articles = _extract_list(result)
+        _log_source(sources, "PubMed_search_articles", name, len(articles), "T2")
+        return articles[:8]
+    except Exception:
+        log.debug("PubMed search failed", exc_info=True)
+        gaps.append("PubMed search failed")
+        return []
+
+
+def _fetch_fda_products(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.FDA_OrangeBook_search_drug(brand_name=name, limit=10)
+        products = _extract_list(result)
+        _log_source(sources, "FDA_OrangeBook_search_drug", name, len(products), "T1")
+        return products[:10]
+    except Exception:
+        log.debug("FDA Orange Book search failed", exc_info=True)
+        gaps.append("FDA Orange Book search failed")
+        return []
+
+
+def _fetch_fda_approvals(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.OpenFDA_search_drug_approvals(
+            search=f'sponsor_name:"{name}"', limit=10
+        )
+        approvals = _extract_list(result)
+        _log_source(
+            sources, "OpenFDA_search_drug_approvals", name, len(approvals), "T1"
+        )
+        return approvals[:10]
+    except Exception:
+        log.debug("OpenFDA drug approvals search failed", exc_info=True)
+        gaps.append("OpenFDA drug approvals search failed")
+        return []
+
+
+def _fetch_faers(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.FAERS_count_reactions_by_drug_event(medicinalproduct=name)
+        data = _extract_data(result)
+        items = _as_list(data)
+        _log_source(
+            sources, "FAERS_count_reactions_by_drug_event", name, len(items), "T1"
+        )
+        return items[:20]
+    except Exception:
+        log.debug("FAERS adverse event search failed", exc_info=True)
+        gaps.append("FAERS adverse event search failed")
+        return []
+
+
+def _fetch_openalex(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.openalex_literature_search(
+            search_keywords=name, max_results=8
+        )
+        papers = _extract_list(result)
+        _log_source(sources, "openalex_literature_search", name, len(papers), "T2")
+        return papers[:8]
+    except Exception:
+        log.debug("OpenAlex search failed", exc_info=True)
+        gaps.append("OpenAlex search failed")
+        return []
 
 
 # ======================================================================
-# Phase 3: Foundation
+# Phase 3: Regulatory Intelligence
+# ======================================================================
+
+
+def _regulatory(
+    tu: ToolUniverse,
+    name: str,
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    return {
+        "device_510k": _fetch_510k(tu, name, sources, gaps),
+        "enforcement_actions": _fetch_enforcement(tu, name, sources, gaps),
+        "drug_labels": _fetch_drug_labels(tu, name, sources, gaps),
+    }
+
+
+def _fetch_510k(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.OpenFDA_search_device_510k(
+            search=f'applicant:"{name}"', limit=10
+        )
+        items = _extract_list(result)
+        _log_source(sources, "OpenFDA_search_device_510k", name, len(items), "T1")
+        return items[:10]
+    except Exception:
+        log.debug("OpenFDA 510(k) search failed", exc_info=True)
+        gaps.append("OpenFDA 510(k) device search failed")
+        return []
+
+
+def _fetch_enforcement(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.OpenFDA_search_drug_enforcement(
+            search=f'recalling_firm:"{name}"', limit=10
+        )
+        items = _extract_list(result)
+        _log_source(sources, "OpenFDA_search_drug_enforcement", name, len(items), "T1")
+        return items[:10]
+    except Exception:
+        log.debug("OpenFDA enforcement search failed", exc_info=True)
+        gaps.append("OpenFDA enforcement search failed")
+        return []
+
+
+def _fetch_drug_labels(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
+    try:
+        result = tu.tools.OpenFDA_search_drug_labels(
+            search=f'openfda.manufacturer_name:"{name}"', limit=10
+        )
+        items = _extract_list(result)
+        _log_source(sources, "OpenFDA_search_drug_labels", name, len(items), "T1")
+        return items[:10]
+    except Exception:
+        log.debug("OpenFDA drug labels search failed", exc_info=True)
+        gaps.append("OpenFDA drug labels search failed")
+        return []
+
+
+# ======================================================================
+# Phase 4: Foundation
 # ======================================================================
 
 
 def _foundation(
     tu: ToolUniverse,
     name: str,
-    identity: dict[str, str],
-    report: list[str],
-    sources: list[dict[str, str]],
-) -> None:
-    report.append("\n## Foundation (1+ years)\n")
+    identity: dict[str, Any],
+    sources: list[dict[str, Any]],
+    gaps: list[str],
+) -> dict[str, Any]:
+    return {
+        "wikipedia_summary": _fetch_wiki_profile(tu, identity, sources, gaps),
+        "crossref_works": _fetch_crossref(tu, name, sources, gaps),
+    }
 
-    # Wikipedia company profile
-    wiki_title = identity.get("name", name)
-    report.append("\n### Company Profile\n")
+
+def _fetch_wiki_profile(
+    tu: ToolUniverse,
+    identity: dict[str, Any],
+    sources: list,
+    gaps: list,
+) -> str:
+    title = identity.get("name", "")
     try:
         result = tu.tools.Wikipedia_get_content(
-            title=wiki_title, extract_type="summary", max_chars=3000
+            title=title, extract_type="summary", max_chars=4000
         )
         if isinstance(result, dict) and result.get("content"):
-            report.append(f"{result['content']}\n")
-            sources.append(
-                {"tool": "Wikipedia_get_content", "query": wiki_title, "items": "1"}
-            )
-        elif isinstance(result, str) and len(result) > 50:
-            report.append(f"{result[:3000]}\n")
-        else:
-            report.append("*No Wikipedia article found.*\n")
+            _log_source(sources, "Wikipedia_get_content", title, 1, "T3")
+            return result["content"]
+        if isinstance(result, str) and len(result) > 50:
+            return result[:4000]
     except Exception:
-        report.append("*Wikipedia content unavailable.*\n")
+        log.debug("Wikipedia content fetch failed", exc_info=True)
+        gaps.append("Wikipedia content fetch failed")
+    return ""
 
-    # Research output via OpenAlex
-    report.append("\n### Research Output [T2]\n")
+
+def _fetch_crossref(
+    tu: ToolUniverse, name: str, sources: list, gaps: list
+) -> list[dict[str, Any]]:
     try:
-        result = tu.tools.openalex_literature_search(
-            search_keywords=name, max_results=5
-        )
-        data = _extract_data(result)
-        papers = _as_list(data)
-        if papers:
-            for p in papers[:5]:
-                title = p.get("title", "Untitled")
-                year = p.get("publication_year", p.get("year", ""))
-                cited = p.get("cited_by_count", p.get("citations", ""))
-                report.append(f"- {title} ({year}, cited: {cited}) [T2]\n")
-            sources.append(
-                {
-                    "tool": "openalex_literature_search",
-                    "query": name,
-                    "items": str(len(papers)),
-                }
-            )
-        else:
-            report.append("*No research output found in OpenAlex.*\n")
+        result = tu.tools.Crossref_search_works(query=name, limit=5)
+        works = _extract_list(result)
+        _log_source(sources, "Crossref_search_works", name, len(works), "T2")
+        return works[:5]
     except Exception:
-        report.append("*OpenAlex search unavailable.*\n")
+        log.debug("Crossref search failed", exc_info=True)
+        gaps.append("Crossref search failed")
+        return []
 
 
 # ======================================================================
@@ -450,7 +523,7 @@ def _foundation(
 
 
 def _extract_data(result: object) -> object:
-    """Unwrap ToolUniverse response -- handles up to 3 levels of nesting."""
+    """Unwrap ToolUniverse response — up to 3 nesting levels."""
     cur = result
     for _ in range(3):
         if not isinstance(cur, dict):
@@ -464,38 +537,43 @@ def _extract_data(result: object) -> object:
     return cur
 
 
-def _as_list(data: object) -> list:
-    """Coerce response data to a list."""
+def _extract_list(result: object) -> list[dict[str, Any]]:
+    """Extract data and coerce to list."""
+    return _as_list(_extract_data(result))
+
+
+def _as_list(data: object) -> list[dict[str, Any]]:
+    """Coerce response data to a list of dicts."""
     if isinstance(data, list):
         return data
     if isinstance(data, dict):
-        for key in ("studies", "results", "items", "articles", "data"):
+        for key in ("studies", "results", "items", "articles", "data", "works"):
             if isinstance(data.get(key), list):
                 return data[key]
         return [data] if data else []
     return []
 
 
-def _strip_html(text: str) -> str:
-    """Remove HTML tags from text."""
-    return re.sub(r"<[^>]+>", "", text)
+def _log_source(
+    sources: list[dict[str, Any]],
+    tool: str,
+    query: str,
+    items: int,
+    tier: str,
+) -> None:
+    """Record a data source for provenance tracking."""
+    sources.append({"tool": tool, "query": query, "items": items, "tier": tier})
 
 
-def _append_sources(report: list[str], sources: list[dict[str, str]]) -> None:
-    """Append sources table to report."""
-    report.append("\n## Data Gaps\n")
-    report.append("*Review sections marked 'unavailable' or 'No ... found' above.*\n")
-
-    report.append("\n## Sources\n")
-    report.append("| Tool | Query | Items |\n|------|-------|-------|\n")
-    for s in sources:
-        report.append(
-            f"| {s['tool']} | {s.get('query', '')} | {s.get('items', '')} |\n"
-        )
-
+# ======================================================================
+# CLI
+# ======================================================================
 
 if __name__ == "__main__":
-    import sys
+    import argparse
 
-    target = sys.argv[1] if len(sys.argv) > 1 else "Moderna"
-    company_research(target)
+    parser = argparse.ArgumentParser(description="Company Research v2 data collector")
+    parser.add_argument("company", help="Company name")
+    parser.add_argument("--output-dir", "-o", default=".", help="Output directory")
+    args = parser.parse_args()
+    company_research(args.company, args.output_dir)
