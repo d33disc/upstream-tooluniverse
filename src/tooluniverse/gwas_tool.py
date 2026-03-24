@@ -1,10 +1,7 @@
-import re
 import requests
 from typing import Dict, Any, Optional
 from .base_tool import BaseTool
 from .tool_registry import register_tool
-
-_EFO_ID_RE = re.compile(r"^[A-Z]+[_:]\d+")
 
 
 class GWASRESTTool(BaseTool):
@@ -25,7 +22,7 @@ class GWASRESTTool(BaseTool):
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
-            return {"status": "error", "error": f"Request failed: {str(e)}"}
+            return {"error": f"Request failed: {str(e)}"}
 
     def _coerce_str(self, value: Any) -> Optional[str]:
         """Return a stripped string, or None."""
@@ -67,104 +64,48 @@ class GWASRESTTool(BaseTool):
         s = s.strip()
         return s or None
 
-    def _resolve_trait_to_efo_id(self, disease_trait: str) -> Optional[str]:
-        """Resolve a disease trait name to an EFO ID.
+    @staticmethod
+    def _label_overlaps(query: str, label: str) -> float:
+        """Return token overlap ratio between query and trait label."""
+        q_tokens = set(query.lower().split())
+        l_tokens = set(label.lower().split())
+        if not q_tokens:
+            return 0.0
+        return len(q_tokens & l_tokens) / len(q_tokens)
 
-        Tries the GWAS Catalog efoTraits endpoint first, then falls back to
-        a study-based resolution. The /v2/associations endpoint ignores the
-        disease_trait query parameter, so we must resolve to an EFO ID.
+    def _resolve_trait_to_efo_id(self, disease_trait: str) -> Optional[str]:
+        """Resolve a disease trait name to an EFO ID via the efoTraits search endpoint.
+
+        The /v2/associations endpoint ignores the disease_trait query parameter,
+        so we must first resolve the trait name to an EFO ID for reliable filtering.
+
+        Only accepts an EFO trait whose label shares at least 40% of query tokens,
+        preventing spurious mappings (e.g. "emotion regulation" → ulcerative colitis).
         """
-        # Primary: GWAS Catalog efoTraits endpoint (v1)
+        url = f"{self.base_url}/v2/efoTraits/search/findByTrait"
         try:
-            resp = requests.get(
-                f"{self.base_url}/efoTraits/search/findByEfoTrait",
-                params={"trait": disease_trait},
-                timeout=15,
-            )
-            if resp.status_code == 200:
-                traits = resp.json().get("_embedded", {}).get("efoTraits", [])
-                if traits:
-                    short_name = traits[0].get("shortForm")
+            resp = requests.get(url, params={"trait": disease_trait}, timeout=30)
+            resp.raise_for_status()
+            data = resp.json()
+            traits = data.get("_embedded", {}).get("efoTraits", [])
+            for trait in traits:
+                label = trait.get("trait", "")
+                if self._label_overlaps(disease_trait, label) >= 0.4:
+                    short_name = trait.get("shortForm")
                     if short_name:
                         return short_name
         except Exception:
             pass
-
-        # Fallback: search studies by disease_trait, extract efo_id from first result
-        try:
-            resp = requests.get(
-                f"{self.base_url}/v2/studies",
-                params={"disease_trait": disease_trait, "size": 1},
-                timeout=15,
-            )
-            if resp.status_code == 200:
-                studies = resp.json().get("_embedded", {}).get("studies", [])
-                if studies:
-                    efo_traits = studies[0].get("efo_traits", [])
-                    if efo_traits:
-                        efo_id = efo_traits[0].get("efo_id")
-                        if efo_id:
-                            return efo_id
-        except Exception:
-            pass
-
         return None
-
-    def _resolve_trait_or_error(
-        self, disease_trait: Optional[str], efo_id: Optional[str]
-    ) -> Dict[str, Any]:
-        """Resolve disease_trait to efo_id if needed.
-
-        Returns {"efo_id": <str>} on success, or {"error": <dict>} when
-        resolution fails and would produce an unfiltered query.
-        Callers check ``"error" in result`` and return ``result["error"]``.
-        """
-        if disease_trait and not efo_id:
-            resolved = self._resolve_trait_to_efo_id(disease_trait)
-            if resolved:
-                return {"efo_id": resolved}
-            return {
-                "error": {
-                    "status": "error",
-                    "error": (
-                        f"Could not resolve trait '{disease_trait}' to an EFO ID. "
-                        "GWAS Catalog uses specific EFO/MONDO terms. "
-                        "For drug response traits, use the underlying disease instead "
-                        "(e.g., 'depression' or 'major depressive disorder' instead of "
-                        "'antidepressant response'). Or provide efo_id directly "
-                        "(e.g., 'MONDO_0002009' for major depressive disorder, "
-                        "'EFO_0000305' for breast carcinoma)."
-                    ),
-                },
-            }
-        return {"efo_id": efo_id}
-
-    @staticmethod
-    def _empty_result_note(efo_id: str) -> str:
-        """Return a suggestion note when no associations are found for an EFO ID."""
-        return (
-            f"No associations found for EFO ID '{efo_id}'. "
-            "GWAS Catalog may use a broader parent term — try disease_trait "
-            "with a text query (e.g., 'colorectal cancer') to find related associations."
-        )
-
-    def _add_empty_result_note(
-        self, result: Dict[str, Any], efo_id: Optional[str]
-    ) -> None:
-        """Add a suggestion note to result if the data list is empty."""
-        if efo_id and isinstance(result.get("data"), list) and not result["data"]:
-            result["note"] = self._empty_result_note(efo_id)
 
     def _extract_embedded_data(
         self, data: Dict[str, Any], data_type: str
     ) -> Dict[str, Any]:
         """Extract data from the _embedded structure and add metadata."""
         if "error" in data:
-            if "status" not in data:
-                return {"status": "error", **data}
             return data
 
-        result: Dict[str, Any] = {"status": "success", "data": [], "metadata": {}}
+        result: Dict[str, Any] = {"data": [], "metadata": {}}
         metadata: Dict[str, Any] = {}
 
         # Extract the main data from _embedded
@@ -205,44 +146,19 @@ class GWASAssociationSearch(GWASRESTTool):
         params = {}
 
         # Handle various search parameters
-        # accept 'query' and 'trait' as aliases for 'disease_trait'
-        disease_trait = self._coerce_str(
-            arguments.get("disease_trait")
-            or arguments.get("query")
-            or arguments.get("trait")
-        )
+        disease_trait = self._coerce_str(arguments.get("disease_trait"))
 
         # Prefer efo_id filtering. If user provided efo_uri, normalize to efo_id.
         efo_id = self._efo_id_from_uri_or_id(arguments.get("efo_id"))
         if not efo_id:
             efo_id = self._efo_id_from_uri_or_id(arguments.get("efo_uri"))
 
-        # Feature-111A-004: if disease_trait looks like an EFO/OBA/HP ID, treat as efo_id
-        if disease_trait and not efo_id and _EFO_ID_RE.match(disease_trait):
-            efo_id = self._efo_id_from_uri_or_id(disease_trait)
-            disease_trait = None
-
         # Feature-79C: /v2/associations ignores disease_trait param server-side.
         # Auto-resolve trait name to efo_id for reliable filtering.
-        # Feature-81B-008: if resolution fails, return error instead of silently
-        # running an unfiltered search that returns 1M+ unrelated associations.
         if disease_trait and not efo_id:
             resolved = self._resolve_trait_to_efo_id(disease_trait)
             if resolved:
                 efo_id = resolved
-            else:
-                return {
-                    "status": "error",
-                    "error": (
-                        f"Could not resolve trait '{disease_trait}' to an EFO ID. "
-                        "GWAS Catalog uses specific EFO/MONDO disease terms. "
-                        "For drug response traits, use the underlying disease "
-                        "(e.g., 'depression' instead of 'antidepressant response', "
-                        "'coronary artery disease' instead of 'statin response'). "
-                        "Or provide efo_id directly (e.g., 'MONDO_0002009' for "
-                        "major depressive disorder, 'EFO_0001645' for myocardial infarction)."
-                    ),
-                }
 
         if efo_id:
             params["efo_id"] = efo_id
@@ -267,7 +183,7 @@ class GWASAssociationSearch(GWASRESTTool):
         if direction:
             params["direction"] = direction
 
-        size = self._coerce_int(arguments.get("size") or arguments.get("limit"))
+        size = self._coerce_int(arguments.get("size"))
         if size is not None:
             params["size"] = size
 
@@ -275,42 +191,8 @@ class GWASAssociationSearch(GWASRESTTool):
         if page is not None:
             params["page"] = page
 
-        # Feature-81B-008: require at least one filter to prevent returning 1M+ results
-        filter_keys = {"efo_id", "efo_trait", "rs_id", "accession_id"}
-        if not filter_keys.intersection(params):
-            return {
-                "status": "error",
-                "error": (
-                    "At least one filter is required: disease_trait, efo_id, "
-                    "efo_trait, rs_id, or accession_id."
-                ),
-            }
-
         data = self._make_request(self.endpoint, params)
-        result = self._extract_embedded_data(data, "associations")
-
-        # Client-side p_value filter (GWAS Catalog API does not support server-side p-value filtering)
-        p_threshold = arguments.get("p_value") or arguments.get("p_value_threshold")
-        if p_threshold is not None and result.get("status") == "success":
-            try:
-                p_threshold = float(p_threshold)
-                assocs = result.get("data", [])
-                if isinstance(assocs, list):
-                    filtered = [
-                        a
-                        for a in assocs
-                        if a.get("p_value") is not None
-                        and float(a["p_value"]) <= p_threshold
-                    ]
-                    result["data"] = filtered
-                    result.setdefault("metadata", {})["p_value_filter"] = p_threshold
-                    result["metadata"]["filtered_count"] = len(filtered)
-                    result["metadata"]["total_before_filter"] = len(assocs)
-            except (ValueError, TypeError):
-                pass
-
-        self._add_empty_result_note(result, efo_id)
-        return result
+        return self._extract_embedded_data(data, "associations")
 
 
 @register_tool("GWASStudySearch")
@@ -326,12 +208,20 @@ class GWASStudySearch(GWASRESTTool):
         params = {}
 
         disease_trait = self._coerce_str(arguments.get("disease_trait"))
-        if disease_trait:
-            params["disease_trait"] = disease_trait
 
         efo_id = self._efo_id_from_uri_or_id(arguments.get("efo_id"))
         if not efo_id:
             efo_id = self._efo_id_from_uri_or_id(arguments.get("efo_uri"))
+
+        # /v2/studies disease_trait is a literal match against stored labels.
+        # Auto-resolve to efo_id for broader matching when no efo_id given.
+        if disease_trait and not efo_id:
+            resolved = self._resolve_trait_to_efo_id(disease_trait)
+            if resolved:
+                efo_id = resolved
+
+        if disease_trait:
+            params["disease_trait"] = disease_trait
         if efo_id:
             params["efo_id"] = efo_id
 
@@ -371,9 +261,8 @@ class GWASSNPSearch(GWASRESTTool):
         """Search for SNPs with optional filters."""
         params = {}
 
-        rs_id = arguments.get("rs_id") or arguments.get("rsid")
-        if rs_id:
-            params["rs_id"] = rs_id
+        if "rs_id" in arguments:
+            params["rs_id"] = arguments["rs_id"]
         if "mapped_gene" in arguments:
             params["mapped_gene"] = arguments["mapped_gene"]
         if "size" in arguments:
@@ -397,7 +286,7 @@ class GWASAssociationByID(GWASRESTTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get association by ID."""
         if "association_id" not in arguments:
-            return {"status": "error", "error": "association_id is required"}
+            return {"error": "association_id is required"}
 
         association_id = arguments["association_id"]
         return self._make_request(f"{self.endpoint}/{association_id}")
@@ -414,7 +303,7 @@ class GWASStudyByID(GWASRESTTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get study by ID."""
         if "study_id" not in arguments:
-            return {"status": "error", "error": "study_id is required"}
+            return {"error": "study_id is required"}
 
         study_id = arguments["study_id"]
         return self._make_request(f"{self.endpoint}/{study_id}")
@@ -431,7 +320,7 @@ class GWASSNPByID(GWASRESTTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get SNP by rs ID."""
         if "rs_id" not in arguments:
-            return {"status": "error", "error": "rs_id is required"}
+            return {"error": "rs_id is required"}
 
         rs_id = arguments["rs_id"]
         return self._make_request(f"{self.endpoint}/{rs_id}")
@@ -448,37 +337,29 @@ class GWASVariantsForTrait(GWASRESTTool):
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get variants for a trait with pagination support."""
-        disease_trait = self._coerce_str(
-            arguments.get("disease_trait") or arguments.get("trait")
-        )
+        disease_trait = self._coerce_str(arguments.get("disease_trait"))
         efo_id = self._efo_id_from_uri_or_id(
             arguments.get("efo_id")
         ) or self._efo_id_from_uri_or_id(arguments.get("efo_uri"))
         efo_trait = self._coerce_str(arguments.get("efo_trait"))
 
-        if disease_trait and not efo_id and _EFO_ID_RE.match(disease_trait):
-            efo_id = self._efo_id_from_uri_or_id(disease_trait)
-            disease_trait = None
-
-        # /v2/associations ignores disease_trait — resolve to efo_id
-        resolution = self._resolve_trait_or_error(disease_trait, efo_id)
-        if "error" in resolution:
-            return resolution["error"]
-        efo_id = resolution["efo_id"]
+        # Feature-79C: /v2/associations ignores disease_trait param server-side.
+        # Auto-resolve trait name to efo_id for reliable filtering.
+        if disease_trait and not efo_id:
+            resolved = self._resolve_trait_to_efo_id(disease_trait)
+            if resolved:
+                efo_id = resolved
 
         if not disease_trait and not efo_id and not efo_trait:
             return {
-                "status": "error",
-                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait.",
+                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait."
             }
 
-        page_size = (
-            self._coerce_int(arguments.get("size") or arguments.get("limit")) or 200
-        )
-        params: Dict[str, Any] = {
-            "size": page_size,
-            "page": self._coerce_int(arguments.get("page")) or 0,
+        params = {
+            "size": arguments.get("size", 200),
+            "page": arguments.get("page", 0),
         }
+
         if efo_id:
             params["efo_id"] = efo_id
         elif efo_trait:
@@ -488,7 +369,6 @@ class GWASVariantsForTrait(GWASRESTTool):
         result = self._extract_embedded_data(data, "associations")
         if efo_id and disease_trait:
             result["resolved_efo_id"] = efo_id
-        self._add_empty_result_note(result, efo_id)
         return result
 
 
@@ -502,36 +382,31 @@ class GWASAssociationsForTrait(GWASRESTTool):
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get associations for a trait, sorted by significance."""
-        disease_trait = self._coerce_str(
-            arguments.get("disease_trait") or arguments.get("trait")
-        )
+        disease_trait = self._coerce_str(arguments.get("disease_trait"))
         efo_id = self._efo_id_from_uri_or_id(
             arguments.get("efo_id")
         ) or self._efo_id_from_uri_or_id(arguments.get("efo_uri"))
         efo_trait = self._coerce_str(arguments.get("efo_trait"))
 
-        if disease_trait and not efo_id and _EFO_ID_RE.match(disease_trait):
-            efo_id = self._efo_id_from_uri_or_id(disease_trait)
-            disease_trait = None
-
-        # /v2/associations ignores disease_trait — resolve to efo_id
-        resolution = self._resolve_trait_or_error(disease_trait, efo_id)
-        if "error" in resolution:
-            return resolution["error"]
-        efo_id = resolution["efo_id"]
+        # Feature-79C: /v2/associations ignores disease_trait param server-side.
+        # Auto-resolve trait name to efo_id for reliable filtering.
+        if disease_trait and not efo_id:
+            resolved = self._resolve_trait_to_efo_id(disease_trait)
+            if resolved:
+                efo_id = resolved
 
         if not disease_trait and not efo_id and not efo_trait:
             return {
-                "status": "error",
-                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait.",
+                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait."
             }
 
-        params: Dict[str, Any] = {
+        params = {
             "sort": "p_value",
             "direction": "asc",
             "size": arguments.get("size", 40),
             "page": arguments.get("page", 0),
         }
+
         if efo_id:
             params["efo_id"] = efo_id
         elif efo_trait:
@@ -541,7 +416,6 @@ class GWASAssociationsForTrait(GWASRESTTool):
         result = self._extract_embedded_data(data, "associations")
         if efo_id and disease_trait:
             result["resolved_efo_id"] = efo_id
-        self._add_empty_result_note(result, efo_id)
         return result
 
 
@@ -557,7 +431,7 @@ class GWASAssociationsForSNP(GWASRESTTool):
         """Get associations for a SNP."""
         rs_id = self._coerce_str(arguments.get("rs_id"))
         if not rs_id:
-            return {"status": "error", "error": "rs_id is required"}
+            return {"error": "rs_id is required"}
 
         params = {
             "rs_id": rs_id,
@@ -593,8 +467,7 @@ class GWASStudiesForTrait(GWASRESTTool):
         efo_trait = self._coerce_str(arguments.get("efo_trait"))
         if not disease_trait and not efo_id and not efo_trait:
             return {
-                "status": "error",
-                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait.",
+                "error": "Provide at least one of: disease_trait, efo_id (or efo_uri), efo_trait."
             }
 
         params = {
@@ -627,30 +500,21 @@ class GWASSNPsForGene(GWASRESTTool):
 
     def __init__(self, tool_config):
         super().__init__(tool_config)
-        # Feature-83B-001: v2 /single-nucleotide-polymorphisms?mapped_gene= returns
-        # HTTP 500 for all gene queries. The v1 endpoint
-        # /singleNucleotidePolymorphisms/search/findByGene?geneName= works correctly.
-        self.endpoint = "/singleNucleotidePolymorphisms/search/findByGene"
+        self.endpoint = "/v2/single-nucleotide-polymorphisms"
 
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get SNPs for a gene."""
-        gene = (
-            arguments.get("gene_symbol")
-            or arguments.get("mapped_gene")
-            or arguments.get("gene")
-        )
-        if not gene:
-            return {"status": "error", "error": "gene_symbol is required"}
+        if "mapped_gene" not in arguments:
+            return {"error": "mapped_gene is required"}
 
         params = {
-            "geneName": gene,
-            "size": arguments.get("size", 50),
+            "mapped_gene": arguments["mapped_gene"],
+            "size": arguments.get("size", 10000),
             "page": arguments.get("page", 0),
         }
 
         data = self._make_request(self.endpoint, params)
-        # v1 endpoint returns key "singleNucleotidePolymorphisms", not "snps"
-        return self._extract_embedded_data(data, "singleNucleotidePolymorphisms")
+        return self._extract_embedded_data(data, "snps")
 
 
 @register_tool("GWASAssociationsForStudy")
@@ -664,7 +528,7 @@ class GWASAssociationsForStudy(GWASRESTTool):
     def run(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Get associations for a study."""
         if "accession_id" not in arguments:
-            return {"status": "error", "error": "accession_id is required"}
+            return {"error": "accession_id is required"}
 
         params = {
             "accession_id": arguments["accession_id"],
