@@ -3,6 +3,7 @@ import re
 import tempfile
 import threading
 import time
+from typing import Any
 
 import requests
 from .base_tool import BaseTool
@@ -35,9 +36,9 @@ class SemanticScholarTool(BaseTool):
 
     def __init__(
         self,
-        tool_config,
-        base_url="https://api.semanticscholar.org/graph/v1/paper/search",
-    ):
+        tool_config: dict[str, Any],
+        base_url: str = "https://api.semanticscholar.org/graph/v1/paper/search",
+    ) -> None:
         super().__init__(tool_config)
         self.base_url = base_url
         # Get API key from environment as fallback
@@ -45,7 +46,7 @@ class SemanticScholarTool(BaseTool):
         self.session = requests.Session()
         self.session.headers.update({"Accept": "application/json"})
 
-    def run(self, arguments):
+    def run(self, arguments: dict[str, Any]) -> list[dict[str, Any]]:
         query = arguments.get("query")
         limit = arguments.get("limit", 5)
         year = arguments.get("year")
@@ -109,8 +110,14 @@ class SemanticScholarTool(BaseTool):
         return payload if isinstance(payload, dict) else None
 
     def _search(
-        self, query, limit, *, year=None, sort=None, include_abstract: bool = False
-    ):
+        self,
+        query: Any,
+        limit: Any,
+        *,
+        year: Any = None,
+        sort: Any = None,
+        include_abstract: bool = False,
+    ) -> list[dict[str, Any]]:
         params = {
             "query": query,
             "limit": limit,
@@ -256,10 +263,9 @@ class SemanticScholarTool(BaseTool):
             if include_abstract and not abstract and paper_id:
                 details = self._fetch_missing_abstract(paper_id)
                 if details:
-                    details_external = (
-                        details.get("externalIds")
-                        if isinstance(details.get("externalIds"), dict)
-                        else {}
+                    raw_ext = details.get("externalIds")
+                    details_external: dict[str, Any] = (
+                        raw_ext if isinstance(raw_ext, dict) else {}
                     )
                     details_doi = (
                         details_external.get("DOI")
@@ -323,16 +329,16 @@ class SemanticScholarPDFSnippetsTool(BaseTool):
     around user-provided terms. Uses markitdown to convert PDF to markdown text.
     """
 
-    def __init__(self, tool_config):
+    def __init__(self, tool_config: dict[str, Any]) -> None:
         super().__init__(tool_config)
         self.session = requests.Session()
         self.session.headers.update({"Accept": "application/pdf, */*;q=0.8"})
         if MARKITDOWN_AVAILABLE:
-            self.md_converter = MarkItDown()
+            self.md_converter: Any = MarkItDown()
         else:
             self.md_converter = None
 
-    def run(self, arguments):
+    def run(self, arguments: dict[str, Any]) -> dict[str, Any]:
         paper_id = arguments.get("paper_id")
         open_access_pdf_url = arguments.get("open_access_pdf_url")
         terms = arguments.get("terms")
