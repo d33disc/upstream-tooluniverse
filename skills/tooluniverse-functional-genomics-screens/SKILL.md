@@ -167,6 +167,7 @@ If the user provides a ranked list (e.g., by MAGeCK score or BAGEL BF), preserve
    - **Approved drug exists**: direct translational potential
    - **Druggable category, no approved drug**: compounds may exist in development
    - **Not in druggable category**: may need novel modalities (PROTAC, antisense, etc.)
+5. **DGIdb may lag clinical reality** — for high-priority hits where DGIdb shows few/no drugs, also search `search_clinical_trials(query_term="<gene_symbol> inhibitor")` and `PubMed_search_articles(query="<gene_symbol> inhibitor clinical trial")`. Novel allosteric inhibitors (e.g., SHP2, SOS1, KRAS G12D) may be in Phase I/II trials but not yet in DGIdb.
 
 ### Phase 4: Clinical Evidence
 

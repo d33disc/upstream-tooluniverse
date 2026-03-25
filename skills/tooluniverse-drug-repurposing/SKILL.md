@@ -95,9 +95,9 @@ for target in rows[:5]:
 - `ADMETAI_predict_physicochemical_properties` / `ADMETAI_predict_toxicity` - ADMET and toxicity
 
 **Pathway & Network Analysis**:
-- `ReactomeAnalysis_pathway_enrichment` - Pathway enrichment for target gene sets
-- `STRING_get_network` - Protein interaction networks for target validation
-- `CTD_get_gene_diseases` - Curated gene-disease associations
+- `ReactomeAnalysis_pathway_enrichment` - Pathway enrichment. **Param: `identifiers="SOD1\nTARDBP\nFUS"` (newline-separated string, NOT array)**
+- `STRING_get_network` - Protein interaction networks. **Param: `identifiers="SOD1\rTARDBP\rFUS"` (CR-separated string), `species=9606`**
+- `CTD_get_gene_diseases` - Curated gene-disease associations. **Param: `input_terms="gene_symbol"` (NOT `gene_symbol=`)**
 
 **Literature & Clinical Trials**:
 - `PubMed_search_articles` / `EuropePMC_search_articles` - Literature search
