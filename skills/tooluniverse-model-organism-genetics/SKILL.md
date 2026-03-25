@@ -306,6 +306,46 @@ Based on the synthesis, recommend which organism(s) to use for further study, co
 
 ---
 
+## Phase 8: Conserved Regulatory Elements (Optional)
+
+For developmental biology questions, conserved regulatory elements (enhancers, promoters) are often as important as the coding sequence.
+
+**Tools**:
+- `EnsemblReg_get_regulatory_elements(species="homo_sapiens", region="<chr:start-end>")` — find regulatory features near the gene
+- `ENCODE_search_experiments(query="<gene_symbol> ChIP-seq")` — ChIP-seq and ATAC-seq data
+- `UCSC_get_encode_cCREs(genome="hg38", chrom="<chr>", start=<start>, end=<end>)` — candidate cis-regulatory elements
+- `JASPAR_search_motifs(query="<TF_name>")` — transcription factor binding motifs
+- `UCSC_get_track(genome="hg38", track="phastCons100way", chrom="<chr>", start=<start>, end=<end>)` — conservation scores for non-coding regions
+
+**Workflow**:
+1. Get the genomic coordinates of the human gene (from Phase 0)
+2. Extend the region (±100kb for nearby enhancers)
+3. Query ENCODE for regulatory elements and UCSC for conservation
+4. Look for deeply conserved non-coding elements (CNEs) — these often control developmental expression
+5. Cross-reference with expression patterns from Phases 2-4
+
+**When to use**: Always for developmental biology questions. Deeply conserved enhancers (e.g., FOXP2 intron 8 enhancer) can be more functionally important than the protein sequence itself.
+
+---
+
+## Phase 9: Human Disease Connection (Optional)
+
+Link model organism findings back to human disease.
+
+**Tools**:
+- `OMIM_search(query="<gene_symbol>")` — Mendelian disease associations
+- `ClinVar_search_variants(query="<gene_symbol>")` — pathogenic variants
+- `ClinGen_search_gene_validity(gene="<gene_symbol>")` — gene-disease validity assessment
+- `HPO_search_terms(query="<disease_name>")` — human phenotype terms for cross-species comparison
+
+**Workflow**:
+1. Search OMIM for known disease associations
+2. Get ClinGen validity level (Definitive, Strong, Moderate, Limited)
+3. Search HPO for relevant phenotype terms
+4. Map HPO terms back to model organism phenotypes (Phase 7) to assess model fidelity
+
+---
+
 ## Organism Selection Guide
 
 | Question Type | Best Organism(s) | Rationale |

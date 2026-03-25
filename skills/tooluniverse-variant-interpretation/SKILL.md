@@ -136,6 +136,44 @@ This is one of the most challenging scenarios in variant interpretation. When a 
 3. **Hypomorphic variants**: Some variants genuinely reduce protein function (detectable in sensitive assays) but not enough to cause disease. This is biologically real and does not make them pathogenic.
 4. **Document the conflict explicitly** in the report. State: "Biochemical assay X shows [result], but case-control study Y with N cases found no significant disease association. Per ACMG guidelines, the epidemiological evidence is weighted more heavily for clinical classification."
 
+### Bayesian ACMG Point System (Tavtigian et al. 2018)
+
+Modern clinical labs use a point-based system instead of the original rule-counting approach:
+
+| Evidence Level | Pathogenic Points | Benign Points |
+|---|---|---|
+| Very Strong (PVS1) | +8 | -- |
+| Strong (PS1-PS4) | +4 each | -4 each (BS1-BS4) |
+| Moderate (PM1-PM6) | +2 each | -- |
+| Supporting (PP1-PP5) | +1 each | -1 each (BP1-BP7) |
+| Stand-alone (BA1) | -- | -8 |
+
+**Classification by total points**:
+- Pathogenic: >= 10 points
+- Likely Pathogenic: 6-9 points
+- VUS: -5 to 5 points
+- Likely Benign: -6 to -9 points
+- Benign: <= -10 points
+
+This system handles conflicting evidence naturally — a variant with PS3 (+4) and BS1 (-4) and BP4 (-1) nets -1, which is VUS. The original rule-based approach struggles with this scenario.
+
+### Gene-Specific VCEP Criteria
+
+ClinGen Variant Curation Expert Panels (VCEPs) publish gene-specific ACMG modifications. Before classifying, check if a VCEP exists:
+- `ClinGen_search_gene_validity(gene="<gene_symbol>")` — if validity is "Definitive" or "Strong", a VCEP likely exists
+- Common VCEPs: BRCA1/2 (Enigma), TP53, PTEN, CDH1, PALB2, RASopathies, Lynch syndrome genes
+- VCEP criteria override generic ACMG criteria (e.g., PALB2 VCEP has specific PM1 hotspot regions)
+
+### Predictor Weighting
+
+Not all computational predictors are equal. For missense variants:
+- **REVEL** (AUC ~0.95) — best single meta-predictor; weight highest
+- **AlphaMissense** (AUC ~0.94) — strong, structure-aware
+- **CADD** (AUC ~0.85) — good for all variant types, but less specific for missense
+- **SIFT/PolyPhen** (AUC ~0.80) — legacy tools; useful for consensus but not individually decisive
+
+When predictors disagree: if REVEL says tolerated but SIFT/PolyPhen say damaging, lean toward REVEL. If REVEL is unavailable, require 3+ concordant predictions for PP3/BP4.
+
 ### Tool Failure Fallbacks
 
 If a primary tool fails, use these alternatives:

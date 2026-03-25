@@ -185,26 +185,36 @@ CellMarker_search_by_gene(operation="search_by_gene", gene_symbol="EGFR", specie
 
 ## Phase 3: Gene Dependencies (CRISPR Screens)
 
-**Goal**: Determine which genes are essential in candidate cell lines using DepMap CRISPR data.
+**Goal**: Determine which genes are essential in candidate cell lines.
 
-1. **Validate gene in DepMap**:
+**IMPORTANT LIMITATION**: The `DepMap_get_gene_dependencies` tool queries the Sanger Cell Model Passports API, which returns gene metadata (HGNC ID, Ensembl ID, symbol) but NOT per-cell-line CRISPR gene effect scores. Full CRISPR dependency data (Chronos scores) is available at depmap.org but not through this API.
+
+**What you CAN do with current tools**:
+
+1. **Validate gene exists in DepMap**:
    ```
    DepMap_search_genes(query="EGFR")
    ```
+   This confirms the gene is tracked and returns identifiers.
 
-2. **Get dependency scores**:
+2. **Get gene metadata**:
    ```
    DepMap_get_gene_dependencies(gene_symbol="EGFR")
    ```
-   Interpretation of gene effect scores:
-   - Score < -0.5: gene is likely essential (cell death upon knockout)
-   - Score ~ 0: gene is not essential
-   - Score near -1.0: comparable to common essential genes
-   - **Selective dependency**: essential in some lineages but not others (indicates therapeutic window)
+   Returns: gene symbol, HGNC ID, Ensembl ID. Note: the tool returns metadata only, not per-line scores.
 
-3. **Compare across candidate cell lines**: If multiple candidates, compare dependency scores to identify lines where the gene of interest is most essential.
+3. **Alternative approaches for essentiality data**:
+   - **cBioPortal CCLE**: `cBioPortal_get_mutations(study_id="ccle_broad_2019", gene_list="EGFR")` — check if the gene is mutated (mutated oncogenes are often dependencies)
+   - **Literature**: `PubMed_search_articles(query="EGFR dependency CRISPR screen [cell_line]")` — find published screen results
+   - **Recommend DepMap portal**: For actual CRISPR scores, direct the user to depmap.org/portal where they can download gene effect data
 
-**OUTPUT**: Dependency score table per cell line + essentiality interpretation.
+**Interpreting dependency scores** (when obtained from DepMap portal):
+- Score < -0.5: gene is likely essential (cell death upon knockout)
+- Score ~ 0: gene is not essential
+- Score near -1.0: comparable to common essential genes
+- **Selective dependency**: essential in some lineages but not others (indicates therapeutic window)
+
+**OUTPUT**: Gene validation + mutation status per cell line. Note DepMap portal as source for full dependency data.
 
 ---
 
@@ -388,6 +398,28 @@ Example: "What drug combinations show synergy in MCF7?"
 | Leukemia | K562 (CML, BCR-ABL), Jurkat (T-ALL), HL-60 (AML), THP-1 (AML, monocytic) | BCR-ABL, FLT3, NPM1 |
 | Glioblastoma | U251 (TP53 mut), U87MG (PTEN-null), T98G (TP53/PTEN mut), LN229 (TP53 mut, PTEN WT) | TP53, PTEN, EGFR, IDH1 |
 | Liver | HepG2 (hepatoblastoma, WT TP53), Hep3B (HBV+, TP53-null), Huh7 (HCC, TP53 Y220C) | TP53, CTNNB1, AXIN1 |
+
+---
+
+## Cross-Referencing Cell Line IDs
+
+Different databases use different identifiers for the same cell line. To join results across tools:
+
+| Database | ID Format | Example | How to Find |
+|----------|-----------|---------|-------------|
+| **DepMap** | SIDM model_id | SIDM00001 | `DepMap_search_cell_lines(query="A549")` |
+| **Cellosaurus** | CVCL accession | CVCL_0023 | `cellosaurus_search_cell_lines(q="id:A549")` |
+| **cBioPortal** | Sample ID | A549_LUNG | `cBioPortal_get_mutations(study_id="ccle_broad_2019")` |
+| **PharmacoDB** | Cell name string | "A549" | `PharmacoDB_search(operation="search", query="A549")` |
+| **SYNERGxDB** | Cell line name | A549 | `SYNERGxDB_list_cell_lines()` |
+
+**Joining strategy**: Use the cell line NAME as the common key (most databases accept human-readable names). When names differ (e.g., "HCT 116" vs "HCT116" vs "HCT-116"), search Cellosaurus for synonyms first.
+
+**Mutation-based filtering**: To find cell lines with a SPECIFIC mutation (e.g., KRAS G12D):
+1. `cBioPortal_get_mutations(study_id="ccle_broad_2019", gene_list="KRAS")` — get ALL KRAS mutations in CCLE
+2. Filter results by `amino_acid_change` containing "G12D"
+3. Extract cell line names from matching records
+4. Use these names to query other databases
 
 ---
 
