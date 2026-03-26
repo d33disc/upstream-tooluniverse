@@ -83,7 +83,7 @@ Phase 3.5: Docking Validation (get_diffdock_info/boltz2)
     |
 Phase 4: Compound Expansion
     |- 4.1-4.3 Similarity/substructure search
-    +- 4.4 De novo generation (ESMFold_predict_structure/molmim)
+    +- 4.4 De novo generation (NvidiaNIM_genmol/NvidiaNIM_molmim)
     |
 Phase 5: ADMET Filtering
     |- Physicochemical properties (Lipinski, QED)
@@ -124,7 +124,7 @@ tool_info = tu.tools.get_tool_info(tool_name="ChEMBL_get_target_activities")
 | `alphafold_get_prediction` | `uniprot` | `qualifier` |
 | `ADMETAI_*` | `smiles="..."` | `smiles=["..."]` (must be list) |
 | `NvidiaNIM_alphafold2` | `seq` | `sequence` |
-| `ESMFold_predict_structure` | `smiles="C..."` | `smiles="C...[*{1-3}]..."` (must have mask) |
+| `NvidiaNIM_genmol` | `smiles="C..."` | `smiles="C...[*{1-3}]..."` (must have mask) |
 | `NvidiaNIM_boltz2` | `sequence="..."` | `polymers=[{"molecule_type": "protein", "sequence": "..."}]` |
 
 ---
@@ -228,13 +228,13 @@ Use 3-5 diverse actives as seeds, similarity threshold 70-85%:
 
 **GenMol** - scaffold hopping with masked regions:
 ```
-ESMFold_predict_structure(smiles="...core...[*{3-8}]...tail...[*{1-3}]...", num_molecules=100, temperature=2.0, scoring="QED")
+NvidiaNIM_genmol(smiles="...core...[*{3-8}]...tail...[*{1-3}]...", num_molecules=100, temperature=2.0, scoring="QED")
 ```
 Mask syntax: `[*{min-max}]` specifies atom count range.
 
 **MolMIM** - controlled analog generation:
 ```
-ESMFold_predict_structure(smi=reference_smiles, num_molecules=50, algorithm="CMA-ES")
+NvidiaNIM_molmim(smi=reference_smiles, num_molecules=50, algorithm="CMA-ES")
 ```
 
 ---
@@ -295,10 +295,10 @@ Deliver top 20 candidates with: Rank, ID, SMILES, Docking score, ADMET score, ov
 Target ID:     ChEMBL_search_targets -> GtoPdb_get_targets -> "Not in databases"
 Druggability:  OpenTargets tractability -> DGIdb druggability -> target class proxy
 Bioactivity:   ChEMBL -> BindingDB -> GtoPdb -> PubChem BioAssay -> "No data"
-Structure:     PDB -> EMDB (membrane) -> NvidiaNIM_alphafold2 -> ESMFold_predict_structure -> AlphaFold DB -> "None"
+Structure:     PDB -> EMDB (membrane) -> NvidiaNIM_alphafold2 -> NvidiaNIM_esmfold -> AlphaFold DB -> "None"
 Similarity:    ChEMBL similar -> PubChem similar -> "Search failed"
 Docking:       get_diffdock_info -> NvidiaNIM_boltz2 -> similarity-based scoring
-Generation:    ESMFold_predict_structure -> ESMFold_predict_structure -> similarity search only
+Generation:    NvidiaNIM_genmol -> NvidiaNIM_molmim -> similarity search only
 Literature:    PubMed -> EuropePMC (preprints) -> OpenAlex
 GPCR data:     GPCRdb_get_protein -> GtoPdb_get_targets
 ```
@@ -313,8 +313,8 @@ GPCR data:     GPCRdb_get_protein -> GtoPdb_get_targets
 | `ESMFold_predict_structure` | ~30 sec | Max 1024 AA |
 | `get_diffdock_info` | ~1-2 min | Per ligand |
 | `NvidiaNIM_boltz2` | ~2-5 min | End-to-end complex |
-| `ESMFold_predict_structure` | ~1-3 min | Depends on num_molecules |
-| `ESMFold_predict_structure` | ~1-2 min | Close analog generation |
+| `NvidiaNIM_genmol` | ~1-3 min | Depends on num_molecules |
+| `NvidiaNIM_molmim` | ~1-2 min | Close analog generation |
 
 Always check: `import os; nvidia_available = bool(os.environ.get("NVIDIA_API_KEY"))`
 

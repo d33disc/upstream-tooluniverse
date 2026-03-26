@@ -68,8 +68,8 @@ Every design MUST include: Sequence, Length, Target, Method, and Quality Metrics
 
 | Tool | Purpose | Key Parameter |
 |------|---------|---------------|
-| `ESMFold_predict_structure` | Backbone generation | `diffusion_steps` (NOT `num_steps`) |
-| `ESMFold_predict_structure` | Sequence design | `pdb_string` (NOT `pdb`) |
+| `NvidiaNIM_rfdiffusion` | Backbone generation | `diffusion_steps` (NOT `num_steps`) |
+| `NvidiaNIM_proteinmpnn` | Sequence design | `pdb_string` (NOT `pdb`) |
 | `ESMFold_predict_structure` | Fast validation | `sequence` (NOT `seq`) |
 | `NvidiaNIM_alphafold2` | High-accuracy validation | `sequence`, `algorithm` |
 | `NvidiaNIM_esm2_650m` | Sequence embeddings | `sequences`, `format` |
@@ -78,8 +78,8 @@ Every design MUST include: Sequence, Length, Target, Method, and Quality Metrics
 
 | Tool | Wrong | Correct |
 |------|-------|---------|
-| `ESMFold_predict_structure` | `num_steps=50` | `diffusion_steps=50` |
-| `ESMFold_predict_structure` | `pdb=content` | `pdb_string=content` |
+| `NvidiaNIM_rfdiffusion` | `num_steps=50` | `diffusion_steps=50` |
+| `NvidiaNIM_proteinmpnn` | `pdb=content` | `pdb_string=content` |
 | `ESMFold_predict_structure` | `seq="MVLS..."` | `sequence="MVLS..."` |
 | `NvidiaNIM_alphafold2` | `seq="MVLS..."` | `sequence="MVLS..."` |
 
