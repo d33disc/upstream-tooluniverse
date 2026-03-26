@@ -101,7 +101,7 @@ When automated ortholog mapping misses a hit (common for distant orthologs like 
 1. Search the organism database directly by human gene symbol (e.g., `FlyBase_get_gene` with the expected fly gene name)
 2. Fly gene names often follow the pattern: human FOXP2 → fly FoxP (capitalization differs)
 3. If the gene family is known (e.g., forkhead), search by family name
-4. Use `FlyMine_search` or `WormMine_search` for text-based discovery
+4. Use `FlyMine_search` or `WormBase_get_gene` for text-based discovery
 
 **Output per ortholog**: Species, gene symbol, gene ID, homology type (1:1, 1:many, many:many), percent identity, confidence.
 

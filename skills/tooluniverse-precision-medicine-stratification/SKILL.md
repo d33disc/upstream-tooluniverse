@@ -106,7 +106,7 @@ Phase 9: Integrated Scoring & Recommendations
 
 ## Phase 2: Genetic Risk Assessment
 
-1. **Germline variant pathogenicity**: `clinvar_search_variants`, `EnsemblVEP_annotate_rsid`/`_hgvs`
+1. **Germline variant pathogenicity**: `ClinVar_search_variants`, `EnsemblVEP_annotate_rsid`/`_hgvs`
 2. **Gene-disease association**: `OpenTargets_target_disease_evidence`
 3. **GWAS polygenic risk**: `gwas_get_associations_for_trait`, `OpenTargets_search_gwas_studies_by_disease`
 4. **Population frequency**: `gnomad_get_variant`
@@ -126,11 +126,11 @@ Scoring: See `SCORING_REFERENCE.md` for genetic risk score component (0-35 point
 2. **Complication risk**: Based on HbA1c, duration, existing complications
 
 ### CVD PATH
-1. **FH gene check**: `clinvar_search_variants` for LDLR, APOB, PCSK9
+1. **FH gene check**: `ClinVar_search_variants` for LDLR, APOB, PCSK9
 2. **Statin PGx**: `PharmGKB_get_clinical_annotations` for SLCO1B1
 
 ### RARE DISEASE PATH
-1. **Causal variant identification**: `clinvar_search_variants`
+1. **Causal variant identification**: `ClinVar_search_variants`
 2. **Genotype-phenotype**: `UniProt_get_disease_variants_by_accession`
 
 Scoring: See `SCORING_REFERENCE.md` for disease-specific tables.

@@ -106,7 +106,7 @@ result = tu.tools.ADMETAI_predict_admet(
 calls = [
     {"name": "UniProt_get_entry_by_accession", "arguments": {"accession": "P05067"}},
     {"name": "UniProt_get_entry_by_accession", "arguments": {"accession": "P12345"}},
-    {"name": "RCSB_PDB_get_structure_by_id", "arguments": {"pdb_id": "1ABC"}}
+    {"name": "RCSB_RCSBData_get_entry_by_id", "arguments": {"pdb_id": "1ABC"}}
 ]
 
 # Execute in parallel

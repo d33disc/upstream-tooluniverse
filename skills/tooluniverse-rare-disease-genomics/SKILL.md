@@ -81,13 +81,13 @@ Phase 9: Report (integrated evidence summary with confidence grading)
 
 Resolve user input to canonical Orphanet identifiers.
 
-**Orphanet_search_by_name**: `name` (string REQUIRED, e.g., "Marfan syndrome"), `exact` (bool, default False), `lang` (string, default "en"). Returns `{status, data: {results: [{ORPHAcode, "Preferred term", Date}]}}`.
+**Orphanet_Orphanet_search_diseases**: `name` (string REQUIRED, e.g., "Marfan syndrome"), `exact` (bool, default False), `lang` (string, default "en"). Returns `{status, data: {results: [{ORPHAcode, "Preferred term", Date}]}}`.
 - Primary tool for name-to-ORPHA-code resolution. Parameter is `name` (NOT `query`).
 - Returns multiple matches; select the exact match (not subtypes or syndromes containing the name).
 - Set `exact=True` for precise matching; leave False for fuzzy/keyword matching.
 - Example: "Marfan syndrome" -> ORPHAcode 558 (not 284993 "Marfan syndrome and Marfan-related disorders").
 
-**Orphanet_search_diseases**: `query` (string REQUIRED). Returns similar results; use as fallback if `search_by_name` returns no results.
+**Orphanet_search_diseases**: `query` (string REQUIRED). Returns similar results; use as fallback if `Orphanet_search_diseases` returns no results.
 
 **Orphanet_get_gene_diseases**: `gene_symbol` (string REQUIRED, e.g., "FBN1"). Returns `{status, data: {gene_name, diseases: [{orpha_code, preferred_term, disorder_group, typology, genes: [{symbol, association_type, association_status}]}]}}`.
 - Use when starting from a gene symbol instead of a disease name.
@@ -373,8 +373,8 @@ For rare diseases, prioritize:
 
 | Tool | Key Params | Return Format |
 |------|-----------|---------------|
-| Orphanet_search_by_name | `name` (REQUIRED), `exact`, `lang` | `{status, data: {results: [{ORPHAcode, "Preferred term"}]}}` |
-| Orphanet_search_diseases | `query` | Same as search_by_name |
+| Orphanet_Orphanet_search_diseases | `name` (REQUIRED), `exact`, `lang` | `{status, data: {results: [{ORPHAcode, "Preferred term"}]}}` |
+| Orphanet_search_diseases | `query` | Same as Orphanet_search_diseases |
 | Orphanet_get_disease | `orpha_code` (string) | `{status, data: {ORPHAcode, "Preferred term", Definition, Synonyms}}` |
 | Orphanet_get_phenotypes | `orpha_code` (string) | `{status, data: {phenotypes: [{hpo_id, hpo_term, frequency, diagnostic_criteria}]}}` |
 | Orphanet_get_genes | `orpha_code` (string, alias: `disease_id`) | `{status, data: {genes: [{Symbol, Name, AssociationType, Locus}]}}` |
@@ -407,7 +407,7 @@ For rare diseases, prioritize:
 | Mistake | Correction |
 |---------|-----------|
 | Using `disease_title` in GenCC_search_disease | Use `disease` (e.g., `disease="Marfan syndrome"`) |
-| Using `query` in Orphanet_search_by_name | Primary param is `name` (e.g., `name="Marfan syndrome"`) |
+| Using `query` in Orphanet_Orphanet_search_diseases | Primary param is `name` (e.g., `name="Marfan syndrome"`) |
 | Using `query` in ClinVar_search_variants | Params are `gene`, `condition`, and/or `variant_id` (no `query` param) |
 | Passing integer to Orphanet tools | `orpha_code` accepts string or int but use string (e.g., "558") |
 | Assuming first Orphanet search result is correct | Filter for exact match; subtypes and related syndromes also appear |
@@ -422,7 +422,7 @@ For rare diseases, prioritize:
 
 | Phase | Primary Tool | Fallback |
 |-------|-------------|----------|
-| Disease lookup | Orphanet_search_by_name | Orphanet_search_diseases |
+| Disease lookup | Orphanet_Orphanet_search_diseases | Orphanet_search_diseases |
 | Gene -> diseases | Orphanet_get_gene_diseases | GenCC_search_gene (broader coverage) |
 | Disease -> genes | Orphanet_get_genes | GenCC_search_disease |
 | Gene-disease validity | GenCC_search_gene | Orphanet AssociationType + SourceOfValidation PMIDs |
@@ -437,7 +437,7 @@ For rare diseases, prioritize:
 ### Workflow 1: Full Rare Disease Investigation (disease name input)
 
 ```
-Step 1: Orphanet_search_by_name(name="Marfan syndrome")
+Step 1: Orphanet_Orphanet_search_diseases(name="Marfan syndrome")
   -> ORPHAcode 558
 
 Step 2: Orphanet_get_disease(orpha_code="558")
@@ -485,7 +485,7 @@ Step 4: ClinVar_search_variants(gene="FBN1", clinical_significance="Pathogenic")
 ### Workflow 3: Phenotype-Focused (clinical features query)
 
 ```
-Step 1: Orphanet_search_by_name(name="disease name")
+Step 1: Orphanet_Orphanet_search_diseases(name="disease name")
   -> Get ORPHAcode
 
 Step 2: Orphanet_get_phenotypes(orpha_code="XXX")
@@ -503,7 +503,7 @@ Step 4: Orphanet_get_natural_history(orpha_code="XXX")
 ### Workflow 4: Treatment and Trial Search
 
 ```
-Step 1: Orphanet_search_by_name(name="Gaucher disease")
+Step 1: Orphanet_Orphanet_search_diseases(name="Gaucher disease")
   -> ORPHAcode 355
 
 Step 2: search_clinical_trials(query_term="Gaucher disease", pageSize=20)

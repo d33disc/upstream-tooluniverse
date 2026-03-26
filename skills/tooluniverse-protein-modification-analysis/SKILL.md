@@ -74,7 +74,7 @@ Phase 5: Synthesis & Report
 - `max_results`: integer (default 10)
 - Returns: list of matching proteins with UniProt IDs, names, organism
 
-**UniProt_get_entry** (alternative disambiguation):
+**UniProt_get_entry_by_accession** (alternative disambiguation):
 - `accession`: UniProt accession
 - Returns: full protein entry with cross-references, function, domains
 
@@ -119,7 +119,7 @@ For each modification type, table of:
 ### Decision Logic
 
 - **Empty results**: protein may not be in iPTMnet; note that and proceed with UniProt PTM annotations
-- **Fallback**: `UniProt_get_entry` returns PTM/processing section with experimentally annotated sites
+- **Fallback**: `UniProt_get_entry_by_accession` returns PTM/processing section with experimentally annotated sites
 
 ---
 
@@ -262,7 +262,7 @@ For each modification type, table of:
 - `species`: NCBI taxonomy ID (e.g., `"9606"` for human)
 - Returns: Dataset list with accessions, titles, summaries, instruments, keywords
 
-**MassIVE_get_dataset**:
+**MassIVE_Dataverse_get_dataset**:
 - `accession`: Dataset accession (MSV or PXD format)
 - Returns: Full metadata including contacts, publications, modifications
 
@@ -270,7 +270,7 @@ For each modification type, table of:
 
 1. Search MassIVE for datasets related to the protein or PTM type: `MassIVE_search_datasets(species="9606")`
 2. Review titles/summaries for relevance to the protein or PTM type under study
-3. Get detailed metadata for relevant datasets: `MassIVE_get_dataset(accession="MSV...")`
+3. Get detailed metadata for relevant datasets: `MassIVE_Dataverse_get_dataset(accession="MSV...")`
 4. Report dataset accessions, publications, and instrument types for experimental context
 
 ### Decision Logic
@@ -320,7 +320,7 @@ Generate a comprehensive PTM analysis report covering:
 | `ELM_list_classes` | `operation` | `"list_classes"` (required, SOAP-style) |
 | `MassIVE_search_datasets` | `page_size` | Integer (max 100) |
 | `MassIVE_search_datasets` | `species` | NCBI taxonomy ID string (e.g., `"9606"`) |
-| `MassIVE_get_dataset` | `accession` | MSV or PXD format string |
+| `MassIVE_Dataverse_get_dataset` | `accession` | MSV or PXD format string |
 
 **Critical**: All iPTMnet and ELM tools require `operation` as the first parameter — these are SOAP-style tools.
 
@@ -330,9 +330,9 @@ Generate a comprehensive PTM analysis report covering:
 
 | Situation | Fallback |
 |-----------|----------|
-| Protein not in iPTMnet | Use `UniProt_get_entry` PTM/processing annotations |
+| Protein not in iPTMnet | Use `UniProt_get_entry_by_accession` PTM/processing annotations |
 | No PTM-PPI data | Use `STRING_get_interaction_partners` for general PPI context |
-| No ProtVar function data | Use `UniProt_get_entry` domain/active-site annotations |
+| No ProtVar function data | Use `UniProt_get_entry_by_accession` domain/active-site annotations |
 | Ambiguous protein name | Use `iPTMnet_search` with `role="Substrate"` to find all matching entries |
 | No ELM motif data | Note ELM coverage gap; rely on iPTMnet and UniProt for PTM site context |
 | No proteomics datasets | Note no public MS data available; report iPTMnet evidence only |

@@ -40,7 +40,7 @@ Systematic application of the 28 ACMG/AMP criteria to classify germline variants
 | `gnomad_get_variant` | `variant_id` | Per-ancestry population frequencies |
 | `gnomad_get_gene_constraints` | `gene_symbol` | pLI, LOEUF, mis_z |
 | `ClinVar_search_variants` | `query` | Variable response format: list OR `{status, data}` |
-| `clinvar_get_variant_details` | `variant_id` | ClinVar numeric ID |
+| `ClinVar_get_variant_details` | `variant_id` | ClinVar numeric ID |
 | `civic_get_variants_by_gene` | `gene_id` | CIViC numeric gene ID (NOT symbol). Known: BRAF=5, BRCA2=19 |
 | `UniProt_get_function_by_accession` | `accession` | Returns list of strings |
 | `InterPro_get_entries_for_protein` | `accession` | Domain architecture by UniProt accession |
@@ -116,7 +116,7 @@ Systematic application of the 28 ACMG/AMP criteria to classify germline variants
 
 ### Criteria: PS1, PM5, PP5, BP6
 
-1. **ClinVar**: `ClinVar_search_variants(query="BRCA2 c.5946delT")` then `clinvar_get_variant_details(variant_id=...)`.
+1. **ClinVar**: `ClinVar_search_variants(query="BRCA2 c.5946delT")` then `ClinVar_get_variant_details(variant_id=...)`.
 2. **CIViC**: `civic_get_variants_by_gene(gene_id=19)` -- check same variant and same-residue variants.
 
 | Criterion | Condition |
@@ -268,13 +268,13 @@ Applied rule: [e.g., "PVS1 + PM2_Supporting = Likely Pathogenic (LP rule 1)"]
 | **PM5** | `ClinVar_search_variants` + `civic_get_variants_by_gene` | Same-residue search |
 | **PP2** | `gnomad_get_gene_constraints` | Literature |
 | **PP3** | `MyVariant_query_variants` (REVEL/CADD/SIFT/PolyPhen) | `EnsemblVEP_annotate_hgvs` |
-| **PP5** | `ClinVar_search_variants` | `clinvar_get_variant_details` |
+| **PP5** | `ClinVar_search_variants` | `ClinVar_get_variant_details` |
 | **BA1** | `gnomad_get_variant` (AF >= 5%) | `MyVariant_query_variants` |
 | **BS1** | `gnomad_get_variant` | `MyVariant_query_variants` |
 | **BS3** | `PubMed_search_articles` | Manual review |
 | **BP1** | Gene mechanism + `gnomad_get_gene_constraints` | Literature |
 | **BP4** | `MyVariant_query_variants` (all benign) | `EnsemblVEP_annotate_hgvs` |
-| **BP6** | `ClinVar_search_variants` | `clinvar_get_variant_details` |
+| **BP6** | `ClinVar_search_variants` | `ClinVar_get_variant_details` |
 | **BP7** | SpliceAI (< 0.1) + synonymous | `EnsemblVEP_annotate_hgvs` |
 
 ---

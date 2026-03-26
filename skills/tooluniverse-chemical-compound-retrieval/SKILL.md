@@ -94,10 +94,10 @@ Retrieve all data silently. Do NOT narrate the search process.
 props = tu.tools.PubChem_get_compound_properties_by_CID(cid=cid)
 
 # Bioactivity summary
-bio = tu.tools.PubChem_get_bioactivity_summary_by_CID(cid=cid)
+bio = tu.tools.PubChemBioAssay_get_assay_summary(cid=cid)
 
 # Drug label (if approved drug)
-drug = tu.tools.PubChem_get_drug_label_info_by_CID(cid=cid)
+drug = tu.tools.PubChemTox_get_acute_effects(cid=cid)
 
 # Structure image
 image = tu.tools.PubChem_get_compound_2D_image_by_CID(cid=cid)
@@ -305,8 +305,8 @@ User: "What proteins does gefitinib target?"
 | `PubChem_get_CID_by_SMILES` | Structure → CID |
 | `PubChem_get_compound_properties_by_CID` | Molecular properties |
 | `PubChem_get_compound_2D_image_by_CID` | Structure visualization |
-| `PubChem_get_bioactivity_summary_by_CID` | Activity overview |
-| `PubChem_get_drug_label_info_by_CID` | FDA drug labels |
+| `PubChemBioAssay_get_assay_summary` | Activity overview |
+| `PubChemTox_get_acute_effects` | FDA drug labels |
 | `PubChem_get_associated_patents_by_CID` | IP information |
 | `PubChem_search_compounds_by_similarity` | Find analogs |
 | `PubChem_search_compounds_by_substructure` | Substructure search |

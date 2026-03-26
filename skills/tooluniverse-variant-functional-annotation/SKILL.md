@@ -88,8 +88,8 @@ Variant Input (HGVS / genomic / rsID / gene+protein_change)
 |   (ClinVar, gnomAD, SIFT, PolyPhen-2, REVEL, AlphaMissense, SpliceAI, etc.)
 |
 +-- PHASE 4: Clinical Classification (ClinVar)
-|   clinvar_search_variants -> pathogenicity, review status, submitter count
-|   clinvar_get_variant_details -> full submission breakdown
+|   ClinVar_search_variants -> pathogenicity, review status, submitter count
+|   ClinVar_get_variant_details -> full submission breakdown
 |
 +-- PHASE 5: Gene-Disease Validity (ClinGen)
 |   ClinGen_search_gene_validity -> evidence classification for gene-disease pair
@@ -263,11 +263,11 @@ OpenCRAVAT results can **supplement or validate** findings from individual tools
 
 ### Tools
 
-**clinvar_search_variants**:
+**ClinVar_search_variants**:
 - **Input**: `query` (str) — use gene + protein change, e.g., `"TP53 R175H"` or HGVS
 - **Output**: Variant list with clinical significance, review status, submission count
 
-**clinvar_get_variant_details**:
+**ClinVar_get_variant_details**:
 - **Input**: `variant_id` (str) — ClinVar variation ID from search result
 - **Output**: Full submission breakdown, evidence types, date of last review
 
@@ -370,7 +370,7 @@ If gene-disease pair is Disputed or Refuted, note this prominently — pathogeni
 | `gnomad_get_variant` | `gnomad_search_variants` by gene | `OpenCRAVAT_annotate_variant` with `gnomad3` annotator |
 | `CADD_get_variant_score` | `OpenCRAVAT_annotate_variant` with `cadd_exome` annotator | Note CADD unavailable |
 | `OpenCRAVAT_annotate_variant` | Individual tool calls (Phases 2-5) | Note OpenCRAVAT unavailable |
-| `clinvar_search_variants` | `OpenCRAVAT_annotate_variant` with `clinvar` annotator | Note no ClinVar entry |
+| `ClinVar_search_variants` | `OpenCRAVAT_annotate_variant` with `clinvar` annotator | Note no ClinVar entry |
 | `ClinGen_search_gene_validity` | Search by disease label | Note gene-disease not curated |
 
 ---
@@ -384,7 +384,7 @@ If gene-disease pair is Disputed or Refuted, note this prominently — pathogeni
 | `ProtVar_get_population` | Same as get_function inputs |
 | `gnomad_get_variant` | `variant_id` format: `chrom-pos-ref-alt` (hg38, no "chr" prefix) |
 | `CADD_get_variant_score` | `chrom` without "chr" prefix; `genome` default is GRCh38 |
-| `clinvar_search_variants` | Use gene + protein change as plain text query |
+| `ClinVar_search_variants` | Use gene + protein change as plain text query |
 | `OpenCRAVAT_annotate_variant` | `chrom` (auto-adds "chr" prefix), `pos` (1-based GRCh38), `ref_base`, `alt_base`; `annotators` is comma-separated string |
 | `OpenCRAVAT_list_annotators` | Optional `category` filter; returns 182+ annotator definitions |
 

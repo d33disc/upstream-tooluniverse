@@ -128,15 +128,15 @@ Populates baseline data for Sections 5, 6, 8, 9, 10, 11 before specialized queri
 
 | Endpoint | Report Section | Data Type |
 |----------|---------------|-----------|
-| `OpenTargets_get_diseases_phenotypes_by_target_ensemblId` | 8 | Diseases/phenotypes |
-| `OpenTargets_get_target_tractability_by_ensemblId` | 9 | Druggability assessment |
-| `OpenTargets_get_target_safety_profile_by_ensemblId` | 10 | Safety liabilities |
-| `OpenTargets_get_target_interactions_by_ensemblId` | 6 | PPI network |
-| `OpenTargets_get_target_gene_ontology_by_ensemblId` | 5 | GO annotations |
-| `OpenTargets_get_publications_by_target_ensemblId` | 11 | Literature |
-| `OpenTargets_get_biological_mouse_models_by_ensemblId` | 8/10 | Mouse KO phenotypes |
-| `OpenTargets_get_chemical_probes_by_target_ensemblId` | 9 | Chemical probes |
-| `OpenTargets_get_associated_drugs_by_target_ensemblId` | 9 | Known drugs |
+| `OpenTargets_get_diseases_phenotypes_by_target_ensembl` | 8 | Diseases/phenotypes |
+| `OpenTargets_get_target_tractability_by_ensemblID` | 9 | Druggability assessment |
+| `OpenTargets_get_target_safety_profile_by_ensemblID` | 10 | Safety liabilities |
+| `OpenTargets_get_target_interactions_by_ensemblID` | 6 | PPI network |
+| `OpenTargets_get_target_gene_ontology_by_ensemblID` | 5 | GO annotations |
+| `OpenTargets_get_publications_by_target_ensemblID` | 11 | Literature |
+| `OpenTargets_get_biological_mouse_models_by_ensemblID` | 8/10 | Mouse KO phenotypes |
+| `OpenTargets_get_chemical_probes_by_target_ensemblID` | 9 | Chemical probes |
+| `OpenTargets_get_associated_drugs_by_target_ensemblID` | 9 | Known drugs |
 
 ---
 
@@ -200,7 +200,7 @@ See [IMPLEMENTATION.md](IMPLEMENTATION.md) for GTEx fallback and HPA extended ex
 
 Separate SNVs from CNVs in ClinVar results. Integrate DisGeNET for curated gene-disease association scores.
 
-**Tools**: `gnomad_get_gene_constraints`, `clinvar_search_variants`, `OpenTargets_get_diseases_phenotypes_by_target_ensembl`, `DisGeNET_search_gene`, `civic_get_variants_by_gene`, `cBioPortal_get_mutations`
+**Tools**: `gnomad_get_gene_constraints`, `ClinVar_search_variants`, `OpenTargets_get_diseases_phenotypes_by_target_ensembl`, `DisGeNET_search_gene`, `civic_get_variants_by_gene`, `cBioPortal_get_mutations`
 
 **Required**: All 4 constraint scores (pLI, LOEUF, missense Z, pRec).
 

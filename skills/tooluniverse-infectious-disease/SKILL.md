@@ -59,7 +59,7 @@ Every finding must have inline source attribution:
 | `NCBIDatasets_get_taxonomy` | `name` | `tax_id` (integer) or use `BVBRC_search_taxonomy` for keyword search |
 | `UniProt_search` | `name` | `query` |
 | `ChEMBL_search_targets` | `query`, `target` | `pref_name__contains` (substring match) |
-| `NvidiaNIM_diffdock` | `protein_file` | `protein` (content) |
+| `get_diffdock_info` | `protein_file` | `protein` (content) |
 | `drugbank_full_search` | _(may fail)_ | Use `drugbank_vocab_search` as primary DrugBank lookup |
 
 > **PubMed tip**: Use `sort="relevance"` (default) not `sort="pub_date"` — date-sorted queries can return empty for narrow topics. Tool name: `PubMed_search_articles`.
@@ -91,7 +91,7 @@ Phase 3: Structure Prediction (NvidiaNIM)
 Phase 4: Drug Repurposing Screen
 ├── Approved drugs for related pathogens (ChEMBL)
 ├── Broad-spectrum antivirals/antibiotics
-├── Docking screen (NvidiaNIM_diffdock)
+├── Docking screen (get_diffdock_info)
 └── OUTPUT: Ranked candidate drugs
     |
 Phase 4.5: Pathway Analysis
@@ -140,10 +140,10 @@ Classify via NCBI Taxonomy (query param). Identify related pathogens with existi
 Search UniProt for pathogen proteins (reviewed). Check ChEMBL for drug precedent. Score targets by: Essentiality (30%), Conservation (25%), Druggability (25%), Drug precedent (20%). Aim for 5+ targets.
 
 ### Phase 3: Structure Prediction
-Use NvidiaNIM AlphaFold2 for top 3 targets. Assess pLDDT confidence. Only dock structures with pLDDT > 70 (active site > 90 preferred). Fallback: alphafold_get_prediction or NvidiaNIM_esmfold.
+Use NvidiaNIM AlphaFold2 for top 3 targets. Assess pLDDT confidence. Only dock structures with pLDDT > 70 (active site > 90 preferred). Fallback: alphafold_get_prediction or ESMFold_predict_structure.
 
 ### Phase 4: Drug Repurposing Screen
-Source candidates from: related pathogen drugs, broad-spectrum antivirals, target class drugs (DGIdb). Dock top 20+ candidates via NvidiaNIM_diffdock. Rank by docking score and evidence tier.
+Source candidates from: related pathogen drugs, broad-spectrum antivirals, target class drugs (DGIdb). Dock top 20+ candidates via get_diffdock_info. Rank by docking score and evidence tier.
 
 ### Phase 4.5: Pathway Analysis
 Use KEGG to identify essential metabolic pathways. Map host-pathogen interaction points. Identify pathway-based drug targets beyond direct protein inhibition.
@@ -207,9 +207,9 @@ Aggregate all findings into final report. Grade every candidate. Provide 3+ imme
 
 | Primary Tool | Fallback 1 | Fallback 2 |
 |--------------|------------|------------|
-| `NvidiaNIM_alphafold2` | `alphafold_get_prediction` | `NvidiaNIM_esmfold` |
-| `NvidiaNIM_diffdock` | `NvidiaNIM_boltz2` | Manual docking |
-| `NCBIDatasets_suggest_taxonomy` | `UniProt_taxonomy` | Manual classification |
+| `NvidiaNIM_alphafold2` | `alphafold_get_prediction` | `ESMFold_predict_structure` |
+| `get_diffdock_info` | `NvidiaNIM_boltz2` | Manual docking |
+| `NCBIDatasets_suggest_taxonomy` | `UniProtTaxonomy_get_taxon` | Manual classification |
 | `ChEMBL_search_drugs` | `drugbank_vocab_search` | PubChem bioassays |
 
 ---

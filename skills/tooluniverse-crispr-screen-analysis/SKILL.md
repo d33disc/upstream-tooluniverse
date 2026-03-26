@@ -105,7 +105,7 @@ Generate markdown report with:
 
 **Expression & Variant Integration**:
 - `GEO_search_rnaseq_datasets` / `geo_search_datasets` - Expression datasets
-- `clinvar_search_variants` - Known pathogenic variants
+- `ClinVar_search_variants` - Known pathogenic variants
 - `gnomad_get_gene_constraints` - Gene constraint metrics (pLI, oe_lof)
 - `UniProt_get_function_by_accession` - Protein function for hit validation
 

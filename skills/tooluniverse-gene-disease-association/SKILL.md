@@ -313,7 +313,7 @@ vda_result = tu.tools.DisGeNET_get_vda(
 # Returns variant rsIDs, associated diseases, evidence scores
 
 # --- ClinVar pathogenic variants ---
-# Both ClinVar_search_variants and clinvar_search_variants work (same tool)
+# Both ClinVar_search_variants and ClinVar_search_variants work (same tool)
 clinvar_result = tu.tools.ClinVar_search_variants(
     gene=gene_symbol,
     max_results=20
@@ -321,7 +321,7 @@ clinvar_result = tu.tools.ClinVar_search_variants(
 # Returns variant IDs and basic classification info
 
 # For detailed info on a specific variant:
-clinvar_detail = tu.tools.clinvar_get_variant_details(
+clinvar_detail = tu.tools.ClinVar_get_variant_details(
     variant_id="12345"  # ClinVar variant ID from search results
 )
 # Returns accession, title, genes, clinical significance, review status
@@ -453,8 +453,8 @@ Note: Other tools may not handle renames; always verify with MyGene_query_genes
 | `GenCC_search_disease` | `disease` (name or MONDO ID), `classification` | Word-tokenized matching: "breast cancer" matches "hereditary breast-ovarian cancer" |
 | `GenCC_get_classifications` | `gene_symbol`, `disease` (both optional) | Combined gene+disease filter with same matching logic |
 | `Orphanet_get_gene_diseases` | `gene_name` (symbol or keyword) | Also accepts `gene_symbol` |
-| `ClinVar_search_variants` | `gene`, `condition`, `variant_id`, `max_results` | Also available as `clinvar_search_variants` (same tool) |
-| `clinvar_get_variant_details` | `variant_id` (ClinVar ID) | Detailed variant info: accession, clinical significance, review status |
+| `ClinVar_search_variants` | `gene`, `condition`, `variant_id`, `max_results` | Also available as `ClinVar_search_variants` (same tool) |
+| `ClinVar_get_variant_details` | `variant_id` (ClinVar ID) | Detailed variant info: accession, clinical significance, review status |
 | `Harmonizome_get_gene` | `gene_symbol` | Gene summary from 100+ datasets |
 
 ---

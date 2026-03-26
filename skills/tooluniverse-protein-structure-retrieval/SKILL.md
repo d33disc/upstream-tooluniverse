@@ -61,7 +61,7 @@ elif user_provided_uniprot:
     
 elif user_provided_protein_name:
     # Search by name
-    result = tu.tools.search_structures_by_protein_name(
+    result = tu.tools.PDBeSearch_search_structures(
         protein_name=protein_name
     )
 ```
@@ -94,7 +94,7 @@ Retrieve all data silently. Do NOT narrate the search process.
 
 ```python
 # Search by protein name
-result = tu.tools.search_structures_by_protein_name(
+result = tu.tools.PDBeSearch_search_structures(
     protein_name=protein_name
 )
 
@@ -116,18 +116,18 @@ pdb_id = "4INS"
 metadata = tu.tools.get_protein_metadata_by_pdb_id(pdb_id=pdb_id)
 
 # Experimental details
-exp_details = tu.tools.get_protein_experimental_details_by_pdb_id(
+exp_details = tu.tools.RCSBData_get_entry(
     pdb_id=pdb_id
 )
 
 # Resolution (if X-ray)
-resolution = tu.tools.get_protein_resolution_by_pdb_id(pdb_id=pdb_id)
+resolution = tu.tools.PDBeValidation_get_quality_scores(pdb_id=pdb_id)
 
 # Bound ligands
-ligands = tu.tools.get_protein_ligands_by_pdb_id(pdb_id=pdb_id)
+ligands = tu.tools.PDBe_KB_get_ligand_sites(pdb_id=pdb_id)
 
 # Similar structures
-similar = tu.tools.get_similar_structures_by_pdb_id(
+similar = tu.tools.PDBeSIFTS_get_all_structures(
     pdb_id=pdb_id,
     cutoff=2.0
 )
@@ -393,13 +393,13 @@ User: "Structure of protein with UniProt P12345"
 **RCSB PDB (Experimental Structures)**
 | Tool | Purpose |
 |------|---------|
-| `search_structures_by_protein_name` | Name-based search |
+| `PDBeSearch_search_structures` | Name-based search |
 | `get_protein_metadata_by_pdb_id` | Basic info |
-| `get_protein_experimental_details_by_pdb_id` | Method details |
-| `get_protein_resolution_by_pdb_id` | Quality metric |
-| `get_protein_ligands_by_pdb_id` | Bound molecules |
+| `RCSBData_get_entry` | Method details |
+| `PDBeValidation_get_quality_scores` | Quality metric |
+| `PDBe_KB_get_ligand_sites` | Bound molecules |
 | `download_pdb_structure_file` | Coordinate files |
-| `get_similar_structures_by_pdb_id` | Homologs |
+| `PDBeSIFTS_get_all_structures` | Homologs |
 
 **PDBe (European PDB)**
 | Tool | Purpose |

@@ -124,7 +124,7 @@ Use HuBMAP tools to find published spatial biology reference datasets for compar
 |------|---------|----------------|
 | `HuBMAP_search_datasets` | Search published spatial datasets by organ/assay/keyword | `organ` (code: "LK"=Kidney, "BR"=Brain, "LU"=Lung, etc.), `dataset_type` ("RNAseq", "CODEX", "MALDI"), `query`, `limit` |
 | `HuBMAP_list_organs` | List all available organs with codes and UBERON IDs | (no required params) |
-| `HuBMAP_get_dataset` | Get detailed metadata for a specific HuBMAP dataset | `hubmap_id` (e.g. "HBM626.FHJD.938") |
+| `HuBMAP_Dataverse_get_dataset` | Get detailed metadata for a specific HuBMAP dataset | `hubmap_id` (e.g. "HBM626.FHJD.938") |
 
 **When to use**: Phase 0 (find reference datasets for the tissue), Phase 8 (cross-reference findings with published HuBMAP atlas data).
 

@@ -145,8 +145,8 @@ For approved drugs, retrieve these DailyMed sections early (after getting set_id
 |--------------|----------|----------|
 | `PubChem_get_CID_by_compound_name` | `ChEMBL_search_drugs` | Name not in PubChem |
 | `ChEMBL_get_molecule_targets` | **Use `ChEMBL_search_activities` instead** | Always avoid this tool |
-| `ChEMBL_get_activity` | `PubChem_get_bioactivity_summary_by_CID` | No ChEMBL ID |
-| `DailyMed_search_spls` | `PubChem_get_drug_label_info_by_CID` | DailyMed timeout |
+| `ChEMBL_get_activity` | `PubChemBioAssay_get_assay_summary` | No ChEMBL ID |
+| `DailyMed_search_spls` | `PubChemTox_get_acute_effects` | DailyMed timeout |
 | `PharmGKB_search_drugs` | DailyMed PGx sections + PubMed | PharmGKB unavailable |
 | `PharmGKB_get_dosing_guidelines` | DailyMed pharmacogenomics section | PharmGKB API error |
 | `FAERS_count_reactions_by_drug_event` | Document "FAERS unavailable" + use label AEs | API error |
@@ -168,7 +168,7 @@ For approved drugs, retrieve these DailyMed sections early (after getting set_id
 | FAERS | `FAERS_count_reactions_by_drug_event` | Label adverse_reactions | T1 |
 | Dose mods | `DailyMed_parse_clinical_pharmacology` (dosage, warnings) | - | T1 |
 | PGx | `PharmGKB_search_drugs` | DailyMed PGx + PubMed | T2/T1 |
-| Label | `DailyMed_search_spls` | `PubChem_get_drug_label_info_by_CID` | T1 |
+| Label | `DailyMed_search_spls` | `PubChemTox_get_acute_effects` | T1 |
 | Literature | `PubMed_search_articles` | `EuropePMC_search_articles` | Varies |
 | Regulatory | `FDA_OrangeBook_*` tools | DailyMed label data | T1 |
 

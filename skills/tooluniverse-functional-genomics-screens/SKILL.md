@@ -260,7 +260,7 @@ else:
 - `DGIdb_get_gene_druggability` -- assess druggable gene categories
   - Input: `genes` (list of gene names)
   - Output: `{data: {genes: {nodes: [{name, geneCategories}]}}}`
-- `DepMap_get_drug_response` -- get drug sensitivity data
+- `PharmacoDB_get_experiments` -- get drug sensitivity data
   - Input: `drug_name` or `gene_name`
   - Output: drug response (IC50, AUC) across cell lines
 

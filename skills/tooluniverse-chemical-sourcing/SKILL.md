@@ -105,7 +105,7 @@ Phase 5: Order Summary
 - `ZINC_get_compound` -- get detailed compound info from ZINC
   - Input: `zinc_id` (ZINC identifier)
   - Output: vendors, catalogs, pricing, SMILES
-- `Enamine_search_compounds` -- search Enamine catalog
+- `Enamine_search_catalog` -- search Enamine catalog
   - Input: `query` (name or SMILES), optional `catalog_type`, `limit`
   - Output: catalog numbers, availability, pricing
 - `Enamine_get_compound` -- get Enamine compound details
@@ -117,7 +117,7 @@ Phase 5: Order Summary
 - `eMolecules_get_compound` -- get eMolecules compound details
   - Input: `compound_id` (eMolecules ID)
   - Output: vendors, pricing tiers, purity
-- `Mcule_search_compounds` -- search Mcule database
+- `Mcule_get_compound` -- search Mcule database
   - Input: `query` (name or SMILES), optional `limit`
   - Output: Mcule IDs, availability, pricing
 - `Mcule_get_compound` -- get Mcule compound details

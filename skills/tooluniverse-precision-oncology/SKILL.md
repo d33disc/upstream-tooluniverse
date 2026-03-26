@@ -70,7 +70,7 @@ Phase 6: Report Synthesis -> Executive summary + prioritized recommendations
 - `GDC_get_survival` - Kaplan-Meier survival data by project and optional gene mutation filter
 - `GDC_get_clinical_data` - TCGA clinical metadata (stage, vital status, treatment, demographics)
 - `Progenetix_cnv_search` - Copy number variation biosamples by genomic region and cancer type (NCIt code)
-- `DepMap_get_gene_dependencies` / `DepMap_get_drug_response` - Target essentiality
+- `DepMap_get_gene_dependencies` / `PharmacoDB_get_experiments` - Target essentiality
 - `OncoKB_annotate_variant` / `OncoKB_get_gene_info` - Actionability
 - `cBioPortal_get_mutations` / `cBioPortal_get_cancer_studies` - Cross-study data
 - `HPA_search_genes_by_query` / `HPA_get_comparative_expression_by_gene_and_cellline` - Expression
@@ -82,7 +82,7 @@ Phase 6: Report Synthesis -> Executive summary + prioritized recommendations
 - `OpenTargets_get_associated_drugs_by_target_ensemblID` - Approved drugs (param: `ensemblId`, camelCase)
 - `DGIdb_get_drug_gene_interactions` - Drug-gene interactions (param: `genes` as array, e.g., `["EGFR"]`). Comprehensive; covers inhibitors, antibodies, and investigational agents.
 - `DailyMed_search_spls` - FDA label details
-- `ChEMBL_get_drug_mechanisms_of_action_by_chemblId` - Drug mechanism
+- `ChEMBL_get_drug_mechanisms` - Drug mechanism
 
 ### Phase 3.5: Pathway & Network
 - `kegg_find_genes` / `kegg_get_gene_info` - KEGG pathways
@@ -92,7 +92,7 @@ Phase 6: Report Synthesis -> Executive summary + prioritized recommendations
 ### Phase 4: Resistance Analysis
 - `civic_search_evidence_items` - Search by known resistance mutations individually (e.g., `molecular_profile="EGFR C797S"`, `molecular_profile="MET Amplification"`). The `significance` field in results indicates Resistance/Sensitivity — filter on it after retrieval.
 - `PubMed_search_articles` - Resistance literature (e.g., "osimertinib resistance C797S combination therapy")
-- `NvidiaNIM_alphafold2` / `NvidiaNIM_diffdock` - Structure-based analysis
+- `NvidiaNIM_alphafold2` / `get_diffdock_info` - Structure-based analysis
 
 ### Phase 5: Clinical Trials
 - `search_clinical_trials` - Find trials (param: `condition`, NOT `disease`)

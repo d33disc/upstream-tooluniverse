@@ -12,7 +12,7 @@ Comprehensive microbiome analysis using MGnify (EBI metagenomics), GTDB (genome 
 | Tool | Purpose | Auth |
 |------|---------|------|
 | **MGnify_search_studies** | Find metagenomics studies by biome/keyword | None |
-| **MGnify_get_study_detail** | Study metadata, abstract, sample counts | None |
+| **MGnify_search_studies_detail** | Study metadata, abstract, sample counts | None |
 | **MGnify_list_analyses** | List taxonomic/functional analysis outputs for a study | None |
 | **MGnify_get_taxonomy** | Taxonomic composition from an analysis | None |
 | **MGnify_get_go_terms** | GO functional annotations from an analysis | None |
@@ -55,7 +55,7 @@ studies = tu.run_one_function({
 
 # 2. Get study details
 detail = tu.run_one_function({
-    'name': 'MGnify_get_study_detail',
+    'name': 'MGnify_search_studies_detail',
     'arguments': {'study_accession': 'MGYS00006860'}
 })
 
@@ -203,7 +203,7 @@ Key biome lineages for common research areas:
 
 | ID Type | Example | Used By |
 |---------|---------|---------|
-| MGnify study | MGYS00006860 | MGnify_search_studies, MGnify_get_study_detail |
+| MGnify study | MGYS00006860 | MGnify_search_studies, MGnify_search_studies_detail |
 | MGnify analysis | MGYA00612683 | MGnify_get_taxonomy, MGnify_get_go_terms |
 | MGnify genome | MGYG000000001 | MGnify_get_genome |
 | ENA study | PRJEB41867 | ENAPortal_search_studies |

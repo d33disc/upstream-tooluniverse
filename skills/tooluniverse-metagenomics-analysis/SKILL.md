@@ -97,7 +97,7 @@ If the query is ambiguous, clarify before proceeding. A species name might match
 - `MGnify_search_studies` -- search by keyword, biome, or lineage
   - Input: `query` (search term), optional `biome`, `lineage`
   - Output: list of studies with accession, name, biome, sample count
-- `MGnify_get_study` -- get full details for a known study accession
+- `MGnify_search_studies` -- get full details for a known study accession
   - Input: `accession` (MGnify study ID)
   - Output: study metadata, associated analyses, biome hierarchy
 - `MGnify_list_biomes` -- browse available biome categories
@@ -169,7 +169,7 @@ If the query is ambiguous, clarify before proceeding. A species name might match
 **Objective**: Extract functional annotations and map them to biological pathways for interpretation.
 
 **Tools**:
-- `MGnify_search_analyses` -- find analysis results for studies
+- `MGnify_get_go_terms` -- find analysis results for studies
   - Input: `study_accession` or `query`, optional `experiment_type`
   - Output: analysis accessions, pipeline version, experiment type
 - `MGnify_get_taxonomy` -- get taxonomic profile from an analysis
@@ -189,7 +189,7 @@ If the query is ambiguous, clarify before proceeding. A species name might match
   - Output: pathway name, description, linked modules
 
 **Workflow**:
-1. For studies from Phase 1, retrieve their analyses via `MGnify_search_analyses`
+1. For studies from Phase 1, retrieve their analyses via `MGnify_get_go_terms`
 2. Get GO terms and taxonomic profiles from analyses
 3. **Interpret GO terms**: Group by biological process (metabolism, transport, virulence, stress response). Identify which functions are enriched in the study context.
 4. **Map to KEGG pathways**: For key functional categories, search KEGG pathways. For example:
