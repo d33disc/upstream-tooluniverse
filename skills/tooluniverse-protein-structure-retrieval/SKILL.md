@@ -55,7 +55,7 @@ elif user_provided_uniprot:
     # Get UniProt info, then search structures
     uniprot_id = user_provided_uniprot
     # Can also get AlphaFold structure
-    af_structure = tu.tools.alphafold_get_structure_by_uniprot(
+    af_structure = tu.tools.alphafold_get_prediction(
         uniprot_id=uniprot_id
     )
     
@@ -151,7 +151,7 @@ binding_sites = tu.tools.pdbe_get_binding_sites(pdb_id=pdb_id)
 ```python
 # When no experimental structure exists, or for comparison
 if uniprot_id:
-    af_structure = tu.tools.alphafold_get_structure_by_uniprot(
+    af_structure = tu.tools.alphafold_get_prediction(
         uniprot_id=uniprot_id
     )
 ```
@@ -412,5 +412,5 @@ User: "Structure of protein with UniProt P12345"
 **AlphaFold (Predictions)**
 | Tool | Purpose |
 |------|---------|
-| `alphafold_get_structure_by_uniprot` | Get prediction |
-| `alphafold_search_structures` | Search predictions |
+| `alphafold_get_prediction` | Get prediction |
+| `alphafold_get_summary` | Search predictions |
