@@ -987,7 +987,7 @@
         "chemblId"
       ]
     },
-    "query_schema": "\n  query drugWithdrawnWarningData($chemblId: String!) {\n    drug(chemblId: $chemblId) {\n      name\n      id\n      blackBoxWarning\n    }\n  }\n  ",
+    "query_schema": "\n  query drugWithdrawnWarningData($chemblId: String!) {\n    drug(chemblId: $chemblId) {\n      name\n      id\n      drugWarnings {\n        warningType\n        year\n        country\n        description\n        toxicityClass\n      }\n    }\n  }\n  ",
     "label": [
       "Drug",
       "SafetyWarnings",
