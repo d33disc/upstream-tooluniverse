@@ -156,7 +156,7 @@ Use 3-step structure search chain (do NOT rely solely on PDB text search):
 3. **Domain-based search** (for multi-domain proteins)
 4. **AlphaFold** (always check)
 
-**Tools**: `UniProt_get_entry_by_accession` (PDB xrefs), `get_protein_metadata_by_pdb_id`, `PDB_search_similar_structures`, `alphafold_get_prediction`, `InterPro_get_protein_domains`, `UniProt_get_ptm_processing_by_accession`
+**Tools**: `UniProt_get_entry_by_accession` (PDB xrefs), `RCSBData_get_entry`, `PDB_search_similar_structures`, `alphafold_get_prediction`, `InterPro_get_protein_domains`, `UniProt_get_ptm_processing_by_accession`
 
 **GPCR targets**: Also query `GPCRdb_get_structures` for active/inactive state data.
 
@@ -257,7 +257,7 @@ See [IMPLEMENTATION.md](IMPLEMENTATION.md) for collision-aware search code.
 | `GO_get_annotations_for_gene` | `OpenTargets GO` | `MyGene GO` |
 | `GTEx_get_median_gene_expression` | `HPA_get_rna_expression_by_source` | Document as unavailable |
 | `gnomad_get_gene_constraints` | `OpenTargets constraint` | - |
-| `DGIdb_get_drug_gene_interactions` | `OpenTargets drugs` | `GtoPdb` |
+| `DGIdb_get_drug_gene_interactions` | `OpenTargets drugs` | `GtoPdb_search_ligands` |
 
 **NEVER silently skip failed tools.** Always document failures and fallbacks in the report.
 
@@ -288,6 +288,32 @@ Initial file structure:
 ## 7. Expression Profile         ## 15. Data Gaps & Limitations
 ## 8. Genetic Variation & Disease
 ```
+
+---
+
+## Synthesis: Target Assessment Framework
+
+After completing all 9 PATHs, synthesize findings into a GO/NO-GO recommendation in the Executive Summary:
+
+### Target Validation Scorecard
+
+| Dimension | Strong (3) | Moderate (2) | Weak (1) | None (0) |
+|-----------|-----------|-------------|---------|---------|
+| **Genetic evidence** | GWAS + rare variant + functional | GWAS only or rare variant only | Expression change only | No genetic link |
+| **Disease association** | OpenTargets score > 0.7 | Score 0.3-0.7 | Score < 0.3 | Not in OpenTargets |
+| **Druggability** | Approved drug exists for this target | Tractable (known binding site, chemical probes) | Predicted tractable (structural pocket) | Undruggable (no known approach) |
+| **Safety** | Mouse KO viable, no safety flags | Mouse KO viable with phenotype | Essential gene (lethal KO) | Known toxicity target |
+| **Selectivity** | Disease-specific expression/mutation | Enriched in disease tissue | Ubiquitous expression | Expressed in critical organs |
+| **Structural data** | High-res crystal structure with ligand | AlphaFold confident (pLDDT > 80) | Low-res or homology model | No structural info |
+
+**Total score** (max 18): **15-18** = strong target, **10-14** = promising (needs validation), **5-9** = speculative, **<5** = deprioritize.
+
+### Key Interpretation Rules
+
+- **Genetic evidence is the strongest predictor** of successful drug development (Nelson et al. 2015: 2x higher success rate with genetic support)
+- **Essential genes make poor drug targets** — if mouse KO is lethal, the therapeutic window is narrow
+- **Expression specificity matters** — ubiquitous targets cause off-target toxicity
+- **Existing chemical matter de-risks** — if ChEMBL/BindingDB has compounds with IC50 < 1μM, the target is tractable
 
 ---
 

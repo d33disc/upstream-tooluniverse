@@ -1,7 +1,7 @@
 """
 ToolUniverse Tools
 
-Type-safe Python interface to 2228 scientific tools.
+Type-safe Python interface to 2234 scientific tools.
 Each tool is in its own module for minimal import overhead.
 
 Usage:
@@ -1828,6 +1828,10 @@ from .RCSBGraphQL_get_structure_summary import RCSBGraphQL_get_structure_summary
 from .RCSB_get_chemical_component import RCSB_get_chemical_component
 from .RDKit_matched_molecular_pair import RDKit_matched_molecular_pair
 from .RDKit_pharmacophore_features import RDKit_pharmacophore_features
+from .RGD_get_annotations import RGD_get_annotations
+from .RGD_get_gene import RGD_get_gene
+from .RGD_get_orthologs import RGD_get_orthologs
+from .RGD_search_genes import RGD_search_genes
 from .RNAcentral_get_by_accession import RNAcentral_get_by_accession
 from .RNAcentral_search import RNAcentral_search
 from .ROR_get_organization import ROR_get_organization
@@ -1972,6 +1976,8 @@ from .SwissTargetPrediction_predict import SwissTargetPrediction_predict
 from .SynBioHub_get_collections import SynBioHub_get_collections
 from .SynBioHub_get_part import SynBioHub_get_part
 from .SynBioHub_search_parts import SynBioHub_search_parts
+from .T3DB_get_toxin import T3DB_get_toxin
+from .T3DB_search_toxins import T3DB_search_toxins
 from .TCDB_get_transporter import TCDB_get_transporter
 from .TCDB_search_by_substrate import TCDB_search_by_substrate
 from .TCDB_search_family import TCDB_search_family
@@ -4160,6 +4166,10 @@ __all__ = [
     "RCSB_get_chemical_component",
     "RDKit_matched_molecular_pair",
     "RDKit_pharmacophore_features",
+    "RGD_get_annotations",
+    "RGD_get_gene",
+    "RGD_get_orthologs",
+    "RGD_search_genes",
     "RNAcentral_get_by_accession",
     "RNAcentral_search",
     "ROR_get_organization",
@@ -4294,6 +4304,8 @@ __all__ = [
     "SynBioHub_get_collections",
     "SynBioHub_get_part",
     "SynBioHub_search_parts",
+    "T3DB_get_toxin",
+    "T3DB_search_toxins",
     "TCDB_get_transporter",
     "TCDB_search_by_substrate",
     "TCDB_search_family",
