@@ -830,5 +830,64 @@
     "status": "schema_mismatch",
     "fixed": false,
     "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WorldBank_get_indicator",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "WormBase_get_expression",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WormBase_get_gene",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WormBase_get_phenotypes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ZFIN_get_allele",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_alleles",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_expression",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_orthologs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
   }
 ]
