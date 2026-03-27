@@ -541,5 +541,118 @@
     "tool": "DisGeNET_search_disease",
     "status": "auth",
     "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_search_gene",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY"
+  },
+  {
+    "tool": "DisProt_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DisProt_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DrugCentral_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DrugProps_calculate_qed",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DrugProps_lipinski_filter",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DrugProps_pains_filter",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DynaMut2_predict_stability",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>30s)"
+  },
+  {
+    "tool": "ebi_search_domain",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>30s)"
+  },
+  {
+    "tool": "ebi_search_with_facets",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "EBIProteins_get_antigen",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_coordinate_mapping",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_coordinates",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_domains_sites",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_epitopes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_features",
+    "status": "schema_mismatch",
+    "detail": "data wrapper + sequence_length type int vs string mismatch",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_interaction_details",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_molecule_processing",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_mutagenesis",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
   }
 ]
