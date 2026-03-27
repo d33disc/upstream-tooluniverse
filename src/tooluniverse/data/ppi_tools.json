@@ -53,23 +53,80 @@
       "return_format": "TSV"
     },
     "return_schema": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "Array of interaction records parsed from TSV"
-        },
-        "header": {
-          "type": "array",
-          "items": {
+      "type": "array",
+      "description": "Array of protein-protein interaction records",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stringId_A": {
             "type": "string"
           },
-          "description": "Column headers from the TSV response"
+          "stringId_B": {
+            "type": "string"
+          },
+          "preferredName_A": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "preferredName_B": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ncbiTaxonId": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ]
+          },
+          "score": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "nscore": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "fscore": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "escore": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "dscore": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "tscore": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          }
         },
-        "error": {
-          "type": "string",
-          "description": "Error message if request failed"
-        }
+        "additionalProperties": true
       }
     },
     "implementation": {
@@ -158,10 +215,18 @@
             "type": "integer"
           },
           "inputGenes": {
-            "type": ["string", "array", "null"]
+            "type": [
+              "string",
+              "array",
+              "null"
+            ]
           },
           "preferredNames": {
-            "type": ["string", "array", "null"]
+            "type": [
+              "string",
+              "array",
+              "null"
+            ]
           },
           "p_value": {
             "type": "number"
@@ -317,12 +382,24 @@
         {
           "type": "object",
           "properties": {
-            "number_of_nodes": {"type": "integer"},
-            "number_of_edges": {"type": "integer"},
-            "expected_number_of_edges": {"type": "number"},
-            "p_value": {"type": "number"},
-            "avg_node_degree": {"type": "number"},
-            "local_clustering_coefficient": {"type": "number"}
+            "number_of_nodes": {
+              "type": "integer"
+            },
+            "number_of_edges": {
+              "type": "integer"
+            },
+            "expected_number_of_edges": {
+              "type": "number"
+            },
+            "p_value": {
+              "type": "number"
+            },
+            "avg_node_degree": {
+              "type": "number"
+            },
+            "local_clustering_coefficient": {
+              "type": "number"
+            }
           }
         },
         {
@@ -330,12 +407,24 @@
           "items": {
             "type": "object",
             "properties": {
-              "number_of_nodes": {"type": "integer"},
-              "number_of_edges": {"type": "integer"},
-              "expected_number_of_edges": {"type": "number"},
-              "p_value": {"type": "number"},
-              "avg_node_degree": {"type": "number"},
-              "local_clustering_coefficient": {"type": "number"}
+              "number_of_nodes": {
+                "type": "integer"
+              },
+              "number_of_edges": {
+                "type": "integer"
+              },
+              "expected_number_of_edges": {
+                "type": "number"
+              },
+              "p_value": {
+                "type": "number"
+              },
+              "avg_node_degree": {
+                "type": "number"
+              },
+              "local_clustering_coefficient": {
+                "type": "number"
+              }
             }
           }
         }

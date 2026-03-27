@@ -39,66 +39,15 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "identifiers": {
-                  "type": "string",
-                  "description": "Queried protein identifier"
-                },
-                "species": {
-                  "type": "integer",
-                  "description": "NCBI taxonomy ID"
-                },
-                "total_annotations": {
-                  "type": "integer",
-                  "description": "Total number of annotations across all categories"
-                },
-                "category_summary": {
-                  "type": "object",
-                  "description": "Number of annotations per category"
-                },
-                "annotations": {
-                  "type": "object",
-                  "description": "Annotations grouped by category, each with term, description, number_of_genes, input_genes (max 15 per category)"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "identifiers": {
-                  "type": "string"
-                },
-                "species": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
-        }
-      ]
+      "type": "object",
+      "properties": {
+        "identifiers": {"type": "string", "description": "Queried protein identifier"},
+        "species": {"type": "integer", "description": "NCBI taxonomy ID"},
+        "total_annotations": {"type": "integer", "description": "Total number of annotations across all categories"},
+        "category_summary": {"type": "object", "description": "Number of annotations per category"},
+        "annotations": {"type": "object", "description": "Annotations grouped by category"}
+      },
+      "additionalProperties": true
     }
   },
   {
@@ -132,48 +81,31 @@
       {"identifiers": "EGFR\nERBB2\nKRAS\nBRAF\nPIK3CA", "species": 9606}
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "description": "Enrichment analysis results",
-              "properties": {
-                "identifiers": {"type": "string"},
-                "species": {"type": "integer"},
-                "enrichments": {
-                  "type": "array",
-                  "description": "List of enriched functional terms sorted by FDR",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "category": {"type": "string", "description": "Annotation category: Process (GO BP), Function (GO MF), Component (GO CC), KEGG, RCTM, WikiPathways, InterPro, Pfam, HPO, DISEASES, TISSUES, COMPARTMENTS"},
-                      "term": {"type": "string", "description": "Term identifier"},
-                      "description": {"type": "string", "description": "Term description"},
-                      "number_of_genes": {"type": "integer", "description": "Number of input genes with this annotation"},
-                      "number_of_genes_in_background": {"type": "integer", "description": "Total genes with this annotation in background"},
-                      "p_value": {"type": "number", "description": "Raw p-value"},
-                      "fdr": {"type": "number", "description": "FDR-corrected q-value"},
-                      "inputGenes": {"type": "array", "description": "Input genes matching this term", "items": {"type": "string"}},
-                      "preferredNames": {"type": "array", "items": {"type": "string"}}
-                    }
-                  }
-                }
-              }
+      "type": "object",
+      "properties": {
+        "identifiers": {"type": "string"},
+        "species": {"type": "integer"},
+        "enrichments": {
+          "type": "array",
+          "description": "Enriched functional terms sorted by FDR",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {"type": "string"},
+              "term": {"type": "string"},
+              "description": {"type": ["string", "null"]},
+              "number_of_genes": {"type": "integer"},
+              "number_of_genes_in_background": {"type": "integer"},
+              "p_value": {"type": "number"},
+              "fdr": {"type": "number"},
+              "inputGenes": {"type": "array", "items": {"type": "string"}},
+              "preferredNames": {"type": "array", "items": {"type": "string"}}
             },
-            "metadata": {"type": "object"}
-          },
-          "required": ["data"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {"type": "string"}
-          },
-          "required": ["error"]
+            "additionalProperties": true
+          }
         }
-      ]
+      },
+      "additionalProperties": true
     }
   }
 ]

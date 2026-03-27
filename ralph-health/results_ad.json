@@ -473,5 +473,124 @@
     "status": "pass",
     "fixed": true,
     "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_go_annotations",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_interactions",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_phenotypes",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_search",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SIDER_get_drug_indications",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_get_drug_side_effects",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_get_drugs_for_side_effect",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_search_drug",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_search_side_effect",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIMBAD_query_object",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "STRING_get_enrichment",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "STRING_get_functional_annotations",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "STRING_get_protein_interactions",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "wrapper schema wraps array, fixed to direct array"
+  },
+  {
+    "tool": "SwissDock_check_job_status",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissDock_dock_ligand",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissDock_retrieve_results",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissModel_get_models",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SwissModel_get_summary",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SwissTargetPrediction_predict",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Failed to extract job URL from prediction response"
+  },
+  {
+    "tool": "SynBioHub_get_collections",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
   }
 ]
