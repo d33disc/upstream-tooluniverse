@@ -1,0 +1,23 @@
+[
+  {"tool": "EnsemblMap_convert_coordinates", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper; cli validates result['data'] directly. All Ensembl tools share this pattern."},
+  {"tool": "EnsemblMap_translate_coordinates", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper; same pattern as EnsemblMap_convert_coordinates"},
+  {"tool": "EnsemblPheno_get_by_gene", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblPheno_get_by_region", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblPheno_get_by_variant", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblReg_get_binding_matrix", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblReg_get_constrained_elements", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblReg_get_motif_features", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblReg_get_regulatory_elements", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblSeq_get_id_sequence", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblSeq_get_region_sequence", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblVar_get_population_frequencies", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblVar_get_variant_consequences", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblVEP_annotate_hgvs", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblVEP_annotate_rsid", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EnsemblVEP_variant_recoder", "status": "schema_mismatch", "detail": "return_schema has extra data/metadata wrapper"},
+  {"tool": "EOL_get_collection", "status": "schema_mismatch", "detail": "return_schema had extra data/metadata wrapper", "fixed": true},
+  {"tool": "EOL_get_hierarchy_entry", "status": "schema_mismatch", "detail": "return_schema had extra data/metadata wrapper", "fixed": true},
+  {"tool": "EOL_get_page", "status": "schema_mismatch", "detail": "return_schema had extra data/metadata wrapper", "fixed": true},
+  {"tool": "EOL_search_species", "status": "schema_mismatch", "detail": "return_schema had extra data/metadata wrapper", "fixed": true},
+  {"tool": "discovery", "status": "discovery", "detail": "PATTERN: cli.py:1387 validates result.get('data') against return_schema. Many tool configs incorrectly wrap content in {data: {...}, metadata: {...}} inside oneOf. The schema should describe the DATA VALUE directly, not the outer wrapper. Fix: extract oneOf[0].properties.data and use as return_schema. Affects all Ensembl tools (16+), EOL (4, fixed), likely many more."}
+]
