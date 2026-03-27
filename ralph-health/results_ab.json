@@ -776,5 +776,66 @@
     "status": "schema_mismatch",
     "detail": "return_schema had extra data/metadata wrapper",
     "fixed": true
+  },
+  {
+    "tool": "NCA_compute_parameters",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCA_fit_one_compartment",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCBI_search_nucleotide",
+    "status": "pass",
+    "detail": "All tests passed"
+  },
+  {
+    "tool": "NCBIDatasets_get_gene",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_gene_by_symbol",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_orthologs",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCBIDatasets_get_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCBIDatasets_suggest_taxonomy",
+    "status": "rate_limited",
+    "detail": "429 rate limited; schema fixed (oneOf wrapper removed)"
+  },
+  {
+    "tool": "NCICACTUS_resolve",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCIThesaurus_get_children",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
+  },
+  {
+    "tool": "NCIThesaurus_get_concept",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true
   }
 ]
