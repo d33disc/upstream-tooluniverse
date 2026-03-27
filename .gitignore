@@ -174,3 +174,10 @@ DEVTU_*.md
 # Claude Code configuration
 .claude/
 .tooluniverse/
+
+# Ralph loop operational files
+progress.txt
+ralph.log
+
+# Ralph loop tracked files (override IMPLEMENTATION_*.md exclusion above)
+!IMPLEMENTATION_PLAN.md
