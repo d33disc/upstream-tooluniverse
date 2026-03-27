@@ -592,5 +592,124 @@
     "status": "server_error",
     "fixed": false,
     "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "SynBioHub_get_part",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "SynBioHub_search_parts",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "T3DB_get_toxin",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "T3DB_search_toxins",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "TCDB_search_by_substrate",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "ThreeDBeacons_get_structure_summary",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ThreeDBeacons_get_structures",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "TIMEOUT",
+    "status": "not_found",
+    "fixed": false,
+    "detail": "Tool not in registry"
+  },
+  {
+    "tool": "Tool_Finder",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "hangs after start, never returns"
+  },
+  {
+    "tool": "Tool_RAG",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "hangs after start, never returns"
+  },
+  {
+    "tool": "ToolDiscover",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Error in ComposeTool 'ToolDiscover': 'result'"
+  },
+  {
+    "tool": "UCSC_get_cpg_islands",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_encode_cCREs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_sequence",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_tf_binding_clusters",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_track",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_search",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniChem_list_sources",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniChem_search_compound",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniParc_get_entry",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
   }
 ]
