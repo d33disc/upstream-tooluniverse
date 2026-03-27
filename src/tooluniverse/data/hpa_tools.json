@@ -160,8 +160,8 @@
     "test_examples": [
       {
         "gene_name": "TP53",
-        "tissue_type": "liver",
-        "disease_name": "Diabetes Mellitus"
+        "tissue_type": "colon",
+        "disease_name": "colon_cancer"
       }
     ],
     "return_schema": {
@@ -611,8 +611,11 @@
     "output_description": "Returns a dictionary mapping queried tissue names to their expression data, including matched tissue name, expression value in nTPM, and categorized expression level (Very high/High/Medium/Low/Very low). Also provides a sample of available tissues for reference.",
     "test_examples": [
       {
-        "ensembl_id": "ENSG00000141510",
-        "tissue_names": []
+        "ensembl_id": "ENSG00000111640",
+        "tissue_names": [
+          "liver",
+          "brain"
+        ]
       }
     ],
     "return_schema": {
@@ -655,7 +658,7 @@
     "test_examples": [
       {
         "gene_name": "TP53",
-        "context_name": "The quick brown fox jumps over the lazy dog."
+        "context_name": "liver"
       }
     ],
     "return_schema": {

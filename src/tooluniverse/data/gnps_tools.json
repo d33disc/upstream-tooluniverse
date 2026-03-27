@@ -27,96 +27,59 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "usi": {
-                  "type": "string"
-                },
-                "precursor_mz": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "precursor_charge": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "n_peaks": {
-                  "type": "integer"
-                },
-                "mz_range": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                },
-                "top_20_peaks": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "mz": {
-                        "type": "number"
-                      },
-                      "intensity": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                },
-                "spectrum_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "splash": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
+      "type": "object",
+      "properties": {
+        "usi": {
+          "type": "string"
+        },
+        "precursor_mz": {
+          "type": [
+            "number",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "precursor_charge": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "n_peaks": {
+          "type": "integer"
+        },
+        "mz_range": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "top_20_peaks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mz": {
+                "type": "number"
+              },
+              "intensity": {
+                "type": "number"
+              }
             }
-          },
-          "required": [
-            "error"
+          }
+        },
+        "spectrum_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "splash": {
+          "type": [
+            "string",
+            "null"
           ]
         }
-      ]
+      }
     }
   },
   {
@@ -150,86 +113,52 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
+      "type": "object",
+      "properties": {
+        "spectrum_1": {
           "type": "object",
           "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "spectrum_1": {
-                  "type": "object",
-                  "properties": {
-                    "usi": {
-                      "type": "string"
-                    },
-                    "precursor_mz": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "n_peaks": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "spectrum_2": {
-                  "type": "object",
-                  "properties": {
-                    "usi": {
-                      "type": "string"
-                    },
-                    "precursor_mz": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
-                    },
-                    "n_peaks": {
-                      "type": [
-                        "integer",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "mirror_plot_url": {
-                  "type": "string"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
+            "usi": {
               "type": "string"
+            },
+            "precursor_mz": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "n_peaks": {
+              "type": [
+                "integer",
+                "null"
+              ]
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
+        },
+        "spectrum_2": {
+          "type": "object",
+          "properties": {
+            "usi": {
+              "type": "string"
+            },
+            "precursor_mz": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "n_peaks": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "mirror_plot_url": {
+          "type": "string"
         }
-      ]
+      }
     }
   }
 ]

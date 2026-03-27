@@ -1,43 +1,50 @@
 [
   {
-    "tool": "EnsemblMap_convert_coordinates",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblMap_convert_coordinates"
   },
   {
-    "tool": "EnsemblMap_translate_coordinates",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblMap_translate_coordinates"
   },
   {
-    "tool": "EnsemblPheno_get_by_gene",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblPheno_get_by_gene"
   },
   {
-    "tool": "EnsemblPheno_get_by_region",
-    "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "status": "timeout",
+    "detail": "Ensembl phenotype API unresponsive >35s; schema fixed (oneOf wrapper removed)",
+    "tool": "EnsemblPheno_get_by_region"
   },
   {
-    "tool": "EnsemblPheno_get_by_variant",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblPheno_get_by_variant"
   },
   {
-    "tool": "EnsemblReg_get_binding_matrix",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_binding_matrix"
   },
   {
-    "tool": "EnsemblReg_get_constrained_elements",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_constrained_elements"
   },
   {
-    "tool": "EnsemblReg_get_motif_features",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblReg_get_motif_features"
   },
   {
     "tool": "EnsemblReg_get_regulatory_elements",
@@ -46,39 +53,46 @@
     "fixed": true
   },
   {
-    "tool": "EnsemblSeq_get_id_sequence",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblSeq_get_id_sequence"
   },
   {
-    "tool": "EnsemblSeq_get_region_sequence",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblSeq_get_region_sequence"
   },
   {
-    "tool": "EnsemblVar_get_population_frequencies",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVar_get_population_frequencies"
   },
   {
-    "tool": "EnsemblVar_get_variant_consequences",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVar_get_variant_consequences"
   },
   {
-    "tool": "EnsemblVEP_annotate_hgvs",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_annotate_hgvs"
   },
   {
-    "tool": "EnsemblVEP_annotate_rsid",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_annotate_rsid"
   },
   {
-    "tool": "EnsemblVEP_variant_recoder",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "EnsemblVEP_variant_recoder"
   },
   {
     "tool": "EOL_get_collection",
@@ -120,9 +134,10 @@
     "detail": "passes"
   },
   {
-    "tool": "ExpressionAtlas_get_experiment",
     "status": "schema_mismatch",
-    "detail": "assay_count field returns null but schema requires integer"
+    "detail": "assay_count was non-nullable integer; API returns null; made nullable",
+    "fixed": true,
+    "tool": "ExpressionAtlas_get_experiment"
   },
   {
     "tool": "FAERS_count_additive_administration_routes",
@@ -165,19 +180,19 @@
     "detail": "passes"
   },
   {
-    "tool": "FDAGSRS_get_structure",
-    "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_get_structure"
   },
   {
-    "tool": "FDAGSRS_get_substance",
-    "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_get_substance"
   },
   {
-    "tool": "FDAGSRS_search_substances",
-    "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "status": "server_error",
+    "detail": "FDA GSRS API returns HTTP 500; schema fixed (oneOf wrapper removed)",
+    "tool": "FDAGSRS_search_substances"
   },
   {
     "tool": "FlyBase_get_gene",
@@ -215,24 +230,28 @@
     "detail": "passes"
   },
   {
-    "tool": "GenomeNexus_annotate_mutation",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_annotate_mutation"
   },
   {
-    "tool": "GenomeNexus_annotate_variant",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_annotate_variant"
   },
   {
-    "tool": "GenomeNexus_get_cancer_hotspots",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_get_cancer_hotspots"
   },
   {
-    "tool": "GenomeNexus_get_canonical_transcript",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GenomeNexus_get_canonical_transcript"
   },
   {
     "tool": "GEO_get_dataset_details",
@@ -275,24 +294,28 @@
     "detail": "passes"
   },
   {
-    "tool": "GlyGen_get_glycan",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_get_glycan"
   },
   {
-    "tool": "GlyGen_get_glycoprotein",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_get_glycoprotein"
   },
   {
-    "tool": "GlyGen_search_glycans",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_search_glycans"
   },
   {
-    "tool": "GlyGen_search_glycoproteins",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GlyGen_search_glycoproteins"
   },
   {
     "tool": "GMrepo_get_phenotypes",
@@ -305,14 +328,16 @@
     "detail": "no response within 25s"
   },
   {
-    "tool": "GNPS_compare_spectra",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GNPS_compare_spectra"
   },
   {
-    "tool": "GNPS_get_spectrum",
     "status": "schema_mismatch",
-    "detail": "return_schema has extra data/metadata wrapper"
+    "detail": "return_schema had extra data/metadata wrapper",
+    "fixed": true,
+    "tool": "GNPS_get_spectrum"
   },
   {
     "tool": "GOAPI_get_gene_functions",
@@ -339,9 +364,10 @@
     "fixed": true
   },
   {
-    "tool": "GTEx_get_gene_expression",
     "status": "schema_mismatch",
-    "detail": "None is not of type 'string' at [0, 'subsetGroup'] - nullable string needed"
+    "detail": "subsetGroup was non-nullable string; API returns null; made nullable",
+    "fixed": true,
+    "tool": "GTEx_get_gene_expression"
   },
   {
     "tool": "GTEx_query_eqtl",
@@ -397,14 +423,16 @@
     "detail": "server returns invalid JSON"
   },
   {
-    "tool": "HPA_get_contextual_biological_process_analysis",
     "status": "schema_mismatch",
-    "detail": "stale test example - invalid context_name"
+    "detail": "bad test example (context_name was invalid); fixed to use valid tissue name",
+    "fixed": true,
+    "tool": "HPA_get_contextual_biological_process_analysis"
   },
   {
-    "tool": "HPA_get_disease_expression_by_gene_tissue_disease",
     "status": "schema_mismatch",
-    "detail": "API changed supported disease list"
+    "detail": "bad test example (disease_name needs underscore format); fixed to colon_cancer",
+    "fixed": true,
+    "tool": "HPA_get_disease_expression_by_gene_tissue_disease"
   },
   {
     "tool": "HPA_get_protein_interactions_by_gene",
@@ -412,9 +440,10 @@
     "detail": "ppi column removed from HPA"
   },
   {
-    "tool": "HPA_get_rna_expression_in_specific_tissues",
     "status": "schema_mismatch",
-    "detail": "stale test example - tissue_names must be a list"
+    "detail": "bad test example (empty tissue list, wrong gene); fixed to GAPDH+valid tissues",
+    "fixed": true,
+    "tool": "HPA_get_rna_expression_in_specific_tissues"
   },
   {
     "tool": "HPO_get_term",
@@ -625,9 +654,10 @@
     "detail": "server returns invalid JSON"
   },
   {
-    "tool": "MetabolomicsWorkbench_search_by_exact_mass",
     "status": "schema_mismatch",
-    "detail": "returns TSV text string, not JSON object - schema expects object"
+    "detail": "API returns TSV string but schema expected object/array; added string to accepted types",
+    "fixed": true,
+    "tool": "MetabolomicsWorkbench_search_by_exact_mass"
   },
   {
     "tool": "MetaCyc_search_pathways",
