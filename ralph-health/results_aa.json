@@ -433,5 +433,113 @@
     "tool": "CPIC_get_recommendations",
     "status": "schema_mismatch",
     "detail": "return_schema expects array but result['data'] is object with 'recommendations' key"
+  },
+  {
+    "tool": "CTD_get_chemical_diseases",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_chemical_gene_interactions",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_disease_chemicals",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_gene_chemicals",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_gene_diseases",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CxGDisc_get_collection",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CxGDisc_list_collections",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CxGDisc_search_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DailyMed_get_spl_by_setid",
+    "status": "schema_mismatch",
+    "detail": "result returns 'xml' key not 'data' key; schema expects error object"
+  },
+  {
+    "tool": "DailyMed_search_spls",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in object with 'data'+'metadata' properties"
+  },
+  {
+    "tool": "DBpedia_SPARQL_query",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "Dfam_get_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Dfam_get_family",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Dfam_search_families",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DiseaseOntology_get_parents",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DiseaseOntology_get_term",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DisGeNET_get_disease_genes",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_get_gda",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_get_vda",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_search_disease",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
   }
 ]
