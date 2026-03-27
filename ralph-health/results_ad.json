@@ -1,23 +1,244 @@
 [
-  {"tool": "PDBeSIFTS_get_all_structures", "status": "schema_mismatch", "detail": "return_schema uses oneOf wrapper {data:..., metadata:...} but validator checks result['data']; also field name total_structures vs total_pdb_entries/total_chain_mappings", "fixed": false},
-  {"tool": "PDBeSIFTS_get_best_structures", "status": "schema_mismatch", "detail": "return_schema uses oneOf wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PDBeSIFTS_get_pdb_to_uniprot", "status": "schema_mismatch", "detail": "return_schema uses oneOf wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PDBeValidation_get_outlier_residues", "status": "schema_mismatch", "detail": "return_schema uses oneOf wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PDBeValidation_get_quality_scores", "status": "schema_mismatch", "detail": "return_schema uses oneOf wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_get_family_detail", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_get_family_proteins", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_get_family_proteomes", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_get_protein_annotations", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_search_clans", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "Pfam_search_families", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PharmGKB_search_drugs", "status": "schema_mismatch", "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.", "fixed": true},
-  {"tool": "PharmGKB_search_genes", "status": "schema_mismatch", "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.", "fixed": true},
-  {"tool": "PharmGKB_search_variants", "status": "schema_mismatch", "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.", "fixed": true},
-  {"tool": "Pharos_search_targets", "status": "pass", "detail": "all 2 tests passed"},
-  {"tool": "PlantReactome_get_pathway", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PlantReactome_list_species", "status": "schema_mismatch", "detail": "return_schema {status,data} wrapper, data is array (species list)", "fixed": false},
-  {"tool": "PlantReactome_search_pathways", "status": "schema_mismatch", "detail": "return_schema {status,data} wrapper, data is array", "fixed": false},
-  {"tool": "PomBase_get_gene", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"tool": "PomBase_get_gene_phenotypes", "status": "schema_mismatch", "detail": "return_schema uses {status,data} wrapper but validator checks result['data']", "fixed": false},
-  {"discovery": "PATTERN: All tools with return_schema wrapping {status,data} fail because jsonschema.validate(result.get('data'), return_schema) validates just the data value. Fix: unwrap return_schema to describe data content directly. Affects at least: PDBeSIFTS, PDBeValidation, Pfam, PlantReactome, PomBase series."}
+  {
+    "tool": "PDBeSIFTS_get_all_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper {data:..., metadata:...} but validator checks result['data']; also field name total_structures vs total_pdb_entries/total_chain_mappings",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeSIFTS_get_best_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeSIFTS_get_pdb_to_uniprot",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeValidation_get_outlier_residues",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeValidation_get_quality_scores",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_detail",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_proteins",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_proteomes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_protein_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_search_clans",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_search_families",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PharmGKB_search_drugs",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "PharmGKB_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "PharmGKB_search_variants",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "Pharos_search_targets",
+    "status": "pass",
+    "detail": "all 2 tests passed"
+  },
+  {
+    "tool": "PlantReactome_get_pathway",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PlantReactome_list_species",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array (species list)",
+    "fixed": false
+  },
+  {
+    "tool": "PlantReactome_search_pathways",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_get_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper, data is array",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result[data]",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_scan_sequence",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_analyze_binding_site_similarity",
+    "status": "schema_mismatch",
+    "detail": "example1: schema_mismatch; example2: bad request 400 (missing params)",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_generate_interaction_diagram",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_predict_binding_sites",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_predict_binding_sites_v3",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_profile_structure_quality",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteomeXchange_get_dataset",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteomeXchange_search_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper; example2 slow ~26s but not timeout",
+    "fixed": false
+  },
+  {
+    "tool": "PubChem_get_compound_xrefs_by_CID",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf/wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_get_assay",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_get_assay_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_search_by_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemTox_get_acute_effects",
+    "status": "schema_mismatch",
+    "detail": "return_schema oneOf wrapper. Fixed: unwrapped all 6 PubChemTox tools",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_carcinogen_classification",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_ghs_classification",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_target_organs",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_toxicity_summary",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "discovery": "PATTERN: All tools with return_schema wrapping {status,data} or {data,metadata} fail because jsonschema.validate(result[\"data\"], return_schema) validates just the data value. Fix: unwrap return_schema to describe data content directly with additionalProperties:true. Widespread across: PDBeSIFTS, PDBeValidation, Pfam, PlantReactome, PomBase, PROSITE, ProteinsPlus, ProteomeXchange, PubChemBioAssay, PubChemTox (6 fixed this batch), PharmGKB (3 fixed prev batch)."
+  }
 ]
