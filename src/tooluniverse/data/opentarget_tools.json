@@ -3116,7 +3116,7 @@
         "chemblId"
       ]
     },
-    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          approvedIndications\n          }\n      }\n    ",
+    "query_schema": "\n      query retrieveMultipleDrugsInfo($chemblId: String!) {\n        drug(chemblId: $chemblId) {\n          id\n          name\n          indications {\n            count\n            rows {\n              disease { id name }\n            }\n          }\n          }\n      }\n    ",
     "label": [
       "OpenTarget",
       "Drug",
@@ -3144,10 +3144,31 @@
                 "name": {
                   "type": "string"
                 },
-                "approvedIndications": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
+                "indications": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "disease": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
