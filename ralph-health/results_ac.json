@@ -358,7 +358,8 @@
     "tool": "OpenTargets_get_gene_ontology_terms_by_goID",
     "status": "schema_mismatch",
     "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API",
-    "fixable": true
+    "fixable": true,
+    "fixed": true
   },
   {
     "tool": "OpenTargets_get_gwas_study",
@@ -431,7 +432,8 @@
     "tool": "OpenTargets_get_target_gene_ontology_by_ensemblID",
     "status": "schema_mismatch",
     "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API \u2014 same issue as OpenTargets_get_gene_ontology_terms_by_goID",
-    "fixable": true
+    "fixable": true,
+    "fixed": true
   },
   {
     "tool": "OpenTargets_get_target_genomic_location_by_ensemblID",
@@ -562,6 +564,106 @@
   },
   {
     "tool": "Orphanet_get_disease",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_epidemiology",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_gene_diseases",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_natural_history",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_phenotypes",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_search_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_search_diseases",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OrthoDB_get_group_details",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns go_terms/kegg_pathways/interpro_domains (some null) but schema does not match"
+  },
+  {
+    "tool": "OrthoDB_get_orthologs",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns orthologs array with group_id/group_name/level_taxid/organism fields"
+  },
+  {
+    "tool": "OrthoDB_search_groups",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns groups array (some missing name/level_taxid) with total_groups"
+  },
+  {
+    "tool": "OSF_search_preprints",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OxO_get_ontology_mappings",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns query_label null, source_type null in mappings"
+  },
+  {
+    "tool": "OxO_search_ontology_mappings",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns queries count + results array with query_id/mappings_count/mappings"
+  },
+  {
+    "tool": "Paleobiology_get_fossils",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_get_panel",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_search_genes",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_search_panels",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PANTHER_enrichment",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns enriched_terms array with term_id/term_label/fold_enrichment/pvalue/fdr/direction"
+  },
+  {
+    "tool": "PANTHER_gene_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns annotations array with category/terms objects"
+  },
+  {
+    "tool": "PANTHER_ortholog",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns mapping object with source_gene/target_gene/ortholog_type/persistent_id"
+  },
+  {
+    "tool": "PathwayCommons_get_neighborhood",
     "status": "pass_on_retry",
     "detail": "passes now"
   }
