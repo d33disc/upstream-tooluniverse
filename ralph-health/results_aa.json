@@ -769,5 +769,60 @@
     "status": "schema_mismatch",
     "detail": "return_schema had extra data wrapper layer",
     "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_gene_overlapping_features",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_get_region_features",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_get_species_info",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_lookup_gene_by_symbol",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblArchive_batch_lookup",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblArchive_get_id_history",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_gene_tree",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_orthologues",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_paralogues",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblLD_get_ld_pairwise",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblLD_get_ld_variants",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
   }
 ]
