@@ -863,112 +863,86 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "studies": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "nct_id": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "brief_title": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "status": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "study_type": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "phases": {
-                        "type": "array"
-                      },
-                      "enrollment": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      },
-                      "conditions": {
-                        "type": "array"
-                      },
-                      "interventions": {
-                        "type": "array"
-                      },
-                      "sponsor": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "start_date": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "completion_date": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "total_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "next_page_token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
+      "type": "object",
+      "properties": {
+        "studies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nct_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "brief_title": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "study_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "phases": {
+                "type": "array"
+              },
+              "enrollment": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "conditions": {
+                "type": "array"
+              },
+              "interventions": {
+                "type": "array"
+              },
+              "sponsor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "start_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "completion_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
               }
-            },
-            "metadata": {
-              "type": "object"
             }
-          },
-          "required": [
-            "data"
+          }
+        },
+        "total_count": {
+          "type": [
+            "integer",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
+        "next_page_token": {
+          "type": [
+            "string",
+            "null"
           ]
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1003,107 +977,81 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "nct_id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "brief_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "official_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "status": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "study_type": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "phases": {
-                  "type": "array"
-                },
-                "enrollment": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "brief_summary": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "conditions": {
-                  "type": "array"
-                },
-                "interventions": {
-                  "type": "array"
-                },
-                "primary_outcomes": {
-                  "type": "array"
-                },
-                "eligibility_criteria": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "sponsor": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "locations": {
-                  "type": "array"
-                },
-                "references": {
-                  "type": "array"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
+      "type": "object",
+      "properties": {
+        "nct_id": {
+          "type": [
+            "string",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
+        "brief_title": {
+          "type": [
+            "string",
+            "null"
           ]
+        },
+        "official_title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "study_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phases": {
+          "type": "array"
+        },
+        "enrollment": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "brief_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conditions": {
+          "type": "array"
+        },
+        "interventions": {
+          "type": "array"
+        },
+        "primary_outcomes": {
+          "type": "array"
+        },
+        "eligibility_criteria": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sponsor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "locations": {
+          "type": "array"
+        },
+        "references": {
+          "type": "array"
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1174,50 +1122,24 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "studies": {
-                  "type": "array"
-                },
-                "total_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "next_page_token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
+      "type": "object",
+      "properties": {
+        "studies": {
+          "type": "array"
+        },
+        "total_count": {
+          "type": [
+            "integer",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
+        "next_page_token": {
+          "type": [
+            "string",
+            "null"
           ]
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1282,50 +1204,24 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "studies": {
-                  "type": "array"
-                },
-                "total_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "next_page_token": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
+      "type": "object",
+      "properties": {
+        "studies": {
+          "type": "array"
+        },
+        "total_count": {
+          "type": [
+            "integer",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
+        "next_page_token": {
+          "type": [
+            "string",
+            "null"
           ]
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1351,53 +1247,27 @@
       {}
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "total_studies": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                },
-                "average_byte_size": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
-                },
-                "largest_studies": {
-                  "type": [
-                    "array",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
+      "type": "object",
+      "properties": {
+        "total_studies": {
+          "type": [
+            "integer",
+            "null"
           ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
+        "average_byte_size": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "largest_studies": {
+          "type": [
+            "array",
+            "null"
           ]
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",
@@ -1444,64 +1314,38 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "field": {
-                  "type": "string"
-                },
-                "values": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "value": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "studies_count": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "total_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "metadata": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "studies_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
             }
-          },
-          "required": [
-            "error"
+          }
+        },
+        "total_count": {
+          "type": [
+            "integer",
+            "null"
           ]
         }
-      ]
+      }
     },
     "label": [
       "ClinicalTrials.gov",

@@ -1,0 +1,828 @@
+[
+  {
+    "tool": "ADMETAI_predict_BBB_penetrance",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_bioavailability",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_clearance_distribution",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_CYP_interactions",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_nuclear_receptor_activity",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_physicochemical_properties",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_solubility_lipophilicity_hydration",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_stress_response",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_toxicity",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "Alliance_get_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_disease_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Anaconda_search_packages",
+    "status": "pass",
+    "detail": "all 3 tests passed"
+  },
+  {
+    "tool": "Bgee_get_gene_expression",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools); optional fields cell_type_id/cell_type_name also present"
+  },
+  {
+    "tool": "Bgee_list_species",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"
+  },
+  {
+    "tool": "Bgee_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_pdb",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_uniprot",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"
+  },
+  {
+    "status": "discovery",
+    "detail": "CRITICAL: python -m tooluniverse.cli loads from editable install at /Users/davis/code/ToolUniverse/src, NOT from worktree /tmp/tu-health-aa/src. All test and fix commands must use PYTHONPATH=/tmp/tu-health-aa/src prefix. Pattern: all schema_mismatch tools with 'data wrapper' pattern affect the same JSON schemas."
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_uniprots",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; same pattern as other BindingDB tools"
+  },
+  {
+    "tool": "BindingDB_get_targets_by_compound",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; same pattern as other BindingDB tools"
+  },
+  {
+    "tool": "BioImageArchive_get_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioImageArchive_search_bioimages",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioImageArchive_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioPortal_annotate_text",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_get_concept",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_get_hierarchy",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_search_ontology_terms",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioRxiv_get_preprint",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "tool": "BioRxiv_list_recent_preprints",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "tool": "BioSamples_get_sample",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioSamples_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioSamples_search_by_filter",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BLAST_nucleotide_search",
+    "status": "missing_dep",
+    "detail": "biopython not installed; pip install biopython required"
+  },
+  {
+    "tool": "BLAST_protein_search",
+    "status": "missing_dep",
+    "detail": "biopython not installed; pip install biopython required"
+  },
+  {
+    "tool": "BVBRC_get_genome",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_get_protein_structure",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_get_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_search_amr",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_search_epitopes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_genome_features",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_genomes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_pathways",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_protein_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_specialty_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_subsystems",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_surveillance",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CATH_get_domain_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CATH_get_superfamily",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "cdc_data_search_datasets",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_list_cell_types",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_search_by_cell_type",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_search_cancer_markers",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CELLxGENE_download_h5ad",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_cell_metadata",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_census_versions",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_embeddings",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_expression_data",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_gene_metadata",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package"
+  },
+  {
+    "tool": "CELLxGENE_get_presence_matrix",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package"
+  },
+  {
+    "tool": "ChEBI_get_compound",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ChEBI_get_ontology_children",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ChEBI_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Chem_sa_score",
+    "status": "missing_dep",
+    "detail": "requires RDKit (No module named 'rdkit')"
+  },
+  {
+    "tool": "ClinGen_get_actionability_adult",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ClinGen_get_variant_classifications",
+    "status": "timeout",
+    "detail": "test hangs indefinitely, no output"
+  },
+  {
+    "tool": "ClinGen_search_actionability",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ClinGenAR_get_external_records",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinGenAR_lookup_allele",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_database_stats",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_field_values",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_by_intervention",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_by_sponsor",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "COD_get_structure",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>20s), likely slow API or connection issue"
+  },
+  {
+    "tool": "COD_search_structures",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>20s), likely slow API or connection issue"
+  },
+  {
+    "tool": "CPIC_get_recommendations",
+    "status": "schema_mismatch",
+    "detail": "return_schema expects array but result['data'] is object with 'recommendations' key"
+  },
+  {
+    "tool": "CTD_get_chemical_diseases",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_chemical_gene_interactions",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_disease_chemicals",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_gene_chemicals",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CTD_get_gene_diseases",
+    "status": "dead_api",
+    "detail": "CTD API returns HTML instead of JSON - endpoint broken or changed"
+  },
+  {
+    "tool": "CxGDisc_get_collection",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CxGDisc_list_collections",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CxGDisc_search_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DailyMed_get_spl_by_setid",
+    "status": "schema_mismatch",
+    "detail": "result returns 'xml' key not 'data' key; schema expects error object"
+  },
+  {
+    "tool": "DailyMed_search_spls",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in object with 'data'+'metadata' properties"
+  },
+  {
+    "tool": "DBpedia_SPARQL_query",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "Dfam_get_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Dfam_get_family",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Dfam_search_families",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DiseaseOntology_get_parents",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DiseaseOntology_get_term",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DisGeNET_get_disease_genes",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_get_gda",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_get_vda",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_search_disease",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY (register at disgenet.org)"
+  },
+  {
+    "tool": "DisGeNET_search_gene",
+    "status": "auth",
+    "detail": "needs DISGENET_API_KEY"
+  },
+  {
+    "tool": "DisProt_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DisProt_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DrugCentral_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "DrugProps_calculate_qed",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DrugProps_lipinski_filter",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DrugProps_pains_filter",
+    "status": "missing_dep",
+    "detail": "requires RDKit (pip install rdkit)"
+  },
+  {
+    "tool": "DynaMut2_predict_stability",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>30s)"
+  },
+  {
+    "tool": "ebi_search_domain",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>30s)"
+  },
+  {
+    "tool": "ebi_search_with_facets",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "EBIProteins_get_antigen",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_coordinate_mapping",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_coordinates",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_domains_sites",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_epitopes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_features",
+    "status": "schema_mismatch",
+    "detail": "data wrapper + sequence_length type int vs string mismatch",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_interaction_details",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_molecule_processing",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_mutagenesis",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_proteomics_peptides",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_proteomics_ptm",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_structural_features",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_variation",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBITaxonomy_get_by_id",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_get_by_scientific_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_search_by_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_suggest",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ELM_list_classes",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ENAPortal_count_records",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENAPortal_search_samples",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENAPortal_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_get_chromatin_state",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_chromatin_accessibility",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_histone_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_methylation_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_rnaseq_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_assembly_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_cross_references",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_gene_overlapping_features",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_get_region_features",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_get_species_info",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "Ensembl_lookup_gene_by_symbol",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblArchive_batch_lookup",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblArchive_get_id_history",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_gene_tree",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_orthologues",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblCompara_get_paralogues",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblLD_get_ld_pairwise",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  },
+  {
+    "tool": "EnsemblLD_get_ld_variants",
+    "status": "pass",
+    "detail": "pass_on_retry (fixed in batch 7 JSON)"
+  }
+]

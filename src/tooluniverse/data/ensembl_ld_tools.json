@@ -49,78 +49,41 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "query_variant": {
-                  "type": "string"
-                },
-                "population": {
-                  "type": "string"
-                },
-                "ld_count": {
-                  "type": "integer"
-                },
-                "ld_variants": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "variant1": {
-                        "type": "string"
-                      },
-                      "variant2": {
-                        "type": "string"
-                      },
-                      "r2": {
-                        "type": "number"
-                      },
-                      "d_prime": {
-                        "type": "number"
-                      },
-                      "population_name": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "query_variant": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "population": {
+          "type": "string"
+        },
+        "ld_count": {
+          "type": "integer"
+        },
+        "ld_variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "variant1": {
+                "type": "string"
+              },
+              "variant2": {
+                "type": "string"
+              },
+              "r2": {
+                "type": "number"
+              },
+              "d_prime": {
+                "type": "number"
+              },
+              "population_name": {
+                "type": "string"
+              }
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -158,72 +121,35 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "variant1": {
-                  "type": "string"
-                },
-                "variant2": {
-                  "type": "string"
-                },
-                "population_count": {
-                  "type": "integer"
-                },
-                "ld_by_population": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "population_name": {
-                        "type": "string"
-                      },
-                      "r2": {
-                        "type": "number"
-                      },
-                      "d_prime": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "variant1": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "variant2": {
+          "type": "string"
+        },
+        "population_count": {
+          "type": "integer"
+        },
+        "ld_by_population": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "population_name": {
+                "type": "string"
+              },
+              "r2": {
+                "type": "number"
+              },
+              "d_prime": {
+                "type": "number"
+              }
             }
-          },
-          "required": [
-            "error"
-          ]
+          }
         }
-      ]
+      }
     }
   }
 ]

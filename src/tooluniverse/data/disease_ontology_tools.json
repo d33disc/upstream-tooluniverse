@@ -27,98 +27,67 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Disease Ontology ID (DOID:XXXX)"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Disease name"
-                },
-                "definition": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Disease definition"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Disease synonyms with relationship type (EXACT, RELATED)"
-                },
-                "parents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "relationship": {
-                        "type": "string",
-                        "description": "Relationship type (is_a)"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "description": "Parent terms in DO hierarchy"
-                },
-                "cross_references": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Cross-references to ICD10CM, ICD9CM, MeSH, NCI, SNOMEDCT, UMLS, OMIM, ICDO"
-                },
-                "subsets": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "DO subsets this disease belongs to (e.g. DO_cancer_slim, DO_AGR_slim)"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Disease Ontology ID (DOID:XXXX)"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Disease name"
+        },
+        "definition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Disease definition"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Disease synonyms with relationship type (EXACT, RELATED)"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "relationship": {
+                "type": "string",
+                "description": "Relationship type (is_a)"
+              },
+              "name": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              }
             }
           },
-          "required": [
-            "error"
-          ]
+          "description": "Parent terms in DO hierarchy"
+        },
+        "cross_references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cross-references to ICD10CM, ICD9CM, MeSH, NCI, SNOMEDCT, UMLS, OMIM, ICDO"
+        },
+        "subsets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "DO subsets this disease belongs to (e.g. DO_cancer_slim, DO_AGR_slim)"
         }
-      ]
+      }
     }
   },
   {
@@ -149,96 +118,65 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Queried Disease Ontology ID"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Disease name"
-                },
-                "parents": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Parent DOID"
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Parent disease name"
-                      },
-                      "definition": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "Parent disease definition"
-                      },
-                      "grandparents": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "name": {
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            }
-                          }
-                        },
-                        "description": "Parent's parent terms"
-                      }
-                    }
-                  },
-                  "description": "Direct parent disease terms with their parents"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Queried Disease Ontology ID"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Disease name"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Parent DOID"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Parent disease name"
+              },
+              "definition": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Parent disease definition"
+              },
+              "grandparents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                },
+                "description": "Parent's parent terms"
+              }
             }
           },
-          "required": [
-            "error"
-          ]
+          "description": "Direct parent disease terms with their parents"
         }
-      ]
+      }
     }
   }
 ]
