@@ -27,83 +27,49 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "allele_id": {
-                  "type": "string",
-                  "description": "ClinGen canonical allele ID (e.g., CA000387)"
-                },
-                "allele_url": {
-                  "type": "string",
-                  "description": "Full URL to allele record"
-                },
-                "community_standard_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Standardized HGVS title"
-                },
-                "external_records": {
-                  "type": "object",
-                  "description": "Cross-references to external databases (dbSNP, ClinVar, COSMIC, gnomAD, ExAC)"
-                },
-                "genomic_alleles": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "hgvs": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "reference_genome": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      }
-                    }
-                  },
-                  "description": "Genomic coordinates in different assemblies"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query_hgvs": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "allele_id": {
+          "type": "string",
+          "description": "ClinGen canonical allele ID (e.g., CA000387)"
         },
-        {
+        "allele_url": {
+          "type": "string",
+          "description": "Full URL to allele record"
+        },
+        "community_standard_title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Standardized HGVS title"
+        },
+        "external_records": {
           "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+          "description": "Cross-references to external databases (dbSNP, ClinVar, COSMIC, gnomAD, ExAC)"
+        },
+        "genomic_alleles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hgvs": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reference_genome": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             }
           },
-          "required": [
-            "error"
-          ]
+          "description": "Genomic coordinates in different assemblies"
         }
-      ]
+      }
     }
   },
   {
@@ -131,62 +97,28 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "allele_id": {
-                  "type": "string",
-                  "description": "ClinGen canonical allele ID"
-                },
-                "community_standard_title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Standardized variant title"
-                },
-                "databases": {
-                  "type": "object",
-                  "description": "External database records keyed by database name (ClinVarAlleles, ClinVarVariations, dbSNP, COSMIC, gnomAD_2, gnomAD_3, gnomAD_4, ExAC, MyVariantInfo_hg19, MyVariantInfo_hg38)"
-                },
-                "database_count": {
-                  "type": "integer",
-                  "description": "Number of external databases with records"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query_allele_id": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "allele_id": {
+          "type": "string",
+          "description": "ClinGen canonical allele ID"
         },
-        {
+        "community_standard_title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Standardized variant title"
+        },
+        "databases": {
           "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+          "description": "External database records keyed by database name (ClinVarAlleles, ClinVarVariations, dbSNP, COSMIC, gnomAD_2, gnomAD_3, gnomAD_4, ExAC, MyVariantInfo_hg19, MyVariantInfo_hg38)"
+        },
+        "database_count": {
+          "type": "integer",
+          "description": "Number of external databases with records"
         }
-      ]
+      }
     }
   }
 ]
