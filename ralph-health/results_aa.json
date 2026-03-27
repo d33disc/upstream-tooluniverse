@@ -1,23 +1,215 @@
 [
-  {"tool": "ADMETAI_predict_BBB_penetrance", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_bioavailability", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_clearance_distribution", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_CYP_interactions", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_nuclear_receptor_activity", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_physicochemical_properties", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_solubility_lipophilicity_hydration", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_stress_response", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "ADMETAI_predict_toxicity", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
-  {"tool": "Alliance_get_disease", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
-  {"tool": "Alliance_get_disease_genes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
-  {"tool": "Alliance_get_gene", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
-  {"tool": "Alliance_get_gene_phenotypes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
-  {"tool": "Alliance_search_genes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
-  {"tool": "Anaconda_search_packages", "status": "pass", "detail": "all 3 tests passed"},
-  {"tool": "Bgee_get_gene_expression", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools); optional fields cell_type_id/cell_type_name also present"},
-  {"tool": "Bgee_list_species", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"},
-  {"tool": "Bgee_search_genes", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"},
-  {"tool": "BindingDB_get_ligands_by_pdb", "status": "dead_api", "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"},
-  {"tool": "BindingDB_get_ligands_by_uniprot", "status": "dead_api", "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"},
-  {"status": "discovery", "detail": "CRITICAL: python -m tooluniverse.cli loads from editable install at /Users/davis/code/ToolUniverse/src, NOT from worktree /tmp/tu-health-aa/src. All test and fix commands must use PYTHONPATH=/tmp/tu-health-aa/src prefix. Pattern: all schema_mismatch tools with 'data wrapper' pattern affect the same JSON schemas."}
+  {
+    "tool": "ADMETAI_predict_BBB_penetrance",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_bioavailability",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_clearance_distribution",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_CYP_interactions",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_nuclear_receptor_activity",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_physicochemical_properties",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_solubility_lipophilicity_hydration",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_stress_response",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "ADMETAI_predict_toxicity",
+    "status": "missing_dep",
+    "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"
+  },
+  {
+    "tool": "Alliance_get_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_disease_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Alliance_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly",
+    "fixed": true
+  },
+  {
+    "tool": "Anaconda_search_packages",
+    "status": "pass",
+    "detail": "all 3 tests passed"
+  },
+  {
+    "tool": "Bgee_get_gene_expression",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools); optional fields cell_type_id/cell_type_name also present"
+  },
+  {
+    "tool": "Bgee_list_species",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"
+  },
+  {
+    "tool": "Bgee_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_pdb",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_uniprot",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"
+  },
+  {
+    "status": "discovery",
+    "detail": "CRITICAL: python -m tooluniverse.cli loads from editable install at /Users/davis/code/ToolUniverse/src, NOT from worktree /tmp/tu-health-aa/src. All test and fix commands must use PYTHONPATH=/tmp/tu-health-aa/src prefix. Pattern: all schema_mismatch tools with 'data wrapper' pattern affect the same JSON schemas."
+  },
+  {
+    "tool": "BindingDB_get_ligands_by_uniprots",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; same pattern as other BindingDB tools"
+  },
+  {
+    "tool": "BindingDB_get_targets_by_compound",
+    "status": "dead_api",
+    "detail": "BindingDB REST API hardcoded as unavailable; same pattern as other BindingDB tools"
+  },
+  {
+    "tool": "BioImageArchive_get_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioImageArchive_search_bioimages",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioImageArchive_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioPortal_annotate_text",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_get_concept",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_get_hierarchy",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioPortal_search_ontology_terms",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present",
+    "fixed": true
+  },
+  {
+    "tool": "BioRxiv_get_preprint",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "tool": "BioRxiv_list_recent_preprints",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "tool": "BioSamples_get_sample",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioSamples_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BioSamples_search_by_filter",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BLAST_nucleotide_search",
+    "status": "missing_dep",
+    "detail": "biopython not installed; pip install biopython required"
+  },
+  {
+    "tool": "BLAST_protein_search",
+    "status": "missing_dep",
+    "detail": "biopython not installed; pip install biopython required"
+  },
+  {
+    "tool": "BVBRC_get_genome",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_get_protein_structure",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_get_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_search_amr",
+    "status": "schema_mismatch",
+    "detail": "return_schema does not match actual response; data wrapper layer present"
+  }
 ]
