@@ -1,0 +1,306 @@
+[
+  {
+    "tool": "NCIThesaurus_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in {type:object,data:array} but validator validates result['data'] directly \u2014 needs array schema at root",
+    "fixed": true
+  },
+  {
+    "tool": "NDEx_get_network",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NDEx_get_network_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NDEx_search_networks",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_field_values",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_morphometry",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_neuron",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_search_neurons",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "Nextstrain_get_dataset",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "Nextstrain_list_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NICE_Clinical_Guidelines_Search",
+    "status": "no_data",
+    "detail": "returns error 'No NICE guidelines found' for test query \u2014 possible scraping issue or NICE site change"
+  },
+  {
+    "tool": "OMA_get_group",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_hog",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_orthologs",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_protein",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMIM_get_clinical_synopsis",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_get_entry",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_get_gene_map",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_search",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OmniPath_get_cell_communication_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "OmniPath_get_complexes",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, same pattern as NCIThesaurus \u2014 needs direct schema for result['data']"
+  },
+  {
+    "tool": "OmniPath_get_dorothea_regulon",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_enzyme_substrate",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_intercell_roles",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_ligand_receptor_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_signaling_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_tf_target_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_get_type",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_list_tissues",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OpenCitations_get_citation_count",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenFoodFacts_search_products",
+    "status": "server_error",
+    "detail": "HTTP 503 from openfoodfacts.org \u2014 intermittent; example 2 passed"
+  },
+  {
+    "tool": "OpenML_get_dataset",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenML_search_datasets",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_get_dataset",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_get_dataset_snapshots",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_list_datasets",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_search_by_modality",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_drug_pharmacogenomics_data",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OpenTargets_get_approved_indications_by_drug_chemblId",
+    "status": "schema_mismatch",
+    "detail": "GraphQL field 'approvedIndications' renamed to 'indications' in current API \u2014 HTTP 400: Cannot query field 'approvedIndications' on type 'Drug'. Did you mean 'indications'?",
+    "fixable": true
+  },
+  {
+    "tool": "OpenTargets_get_associated_diseases_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_drugs_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_drugs_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_phenotypes_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_targets_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_targets_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_biological_mouse_models_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_chemical_probes_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_credible_set_detail",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 response data structure does not match any schema variant (all[] empty). API data returns fine, schema is stale.",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_disease_ancestors_parents_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_descendants_children_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_description_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_locations_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now - returns empty locations (field not populated for Crohn disease)"
+  },
+  {
+    "tool": "OpenTargets_get_disease_synonyms_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_therapeutic_areas_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_diseases_phenotypes_by_target_ensembl",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_adverse_events_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_approval_status_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_blackbox_status_by_chembl_ID",
+    "status": "schema_mismatch",
+    "detail": "GraphQL field blackBoxWarning removed from Drug type; replaced with drugWarnings { warningType, year, country, description, toxicityClass }",
+    "fixed": true
+  }
+]
