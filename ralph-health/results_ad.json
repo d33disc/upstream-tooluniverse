@@ -356,5 +356,122 @@
     "status": "schema_mismatch",
     "detail": "return_schema uses oneOf wrapper",
     "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper, validator checks result[\"data\"]"
+  },
+  {
+    "tool": "ReactomeInteractors_get_entity_pathways",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ReactomeInteractors_get_protein_interactors",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ReactomeInteractors_search_entity",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RGD_get_annotations",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_get_gene",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_get_orthologs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_search_genes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "Rhea_search_by_chebi",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "Rhea_search_by_ec",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "Rhea_search_reactions",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "RNAcentral_get_by_accession",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "RNAcentral_search",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "RxClass_find_classes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RxClass_get_class_members",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RxClass_get_drug_classes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SCXA_search_gene",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "SCXA API request timed out after 60s"
+  },
+  {
+    "tool": "SemanticScholar_get_paper",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "SemanticScholar_search_papers",
+    "status": "rate_limited",
+    "fixed": false,
+    "detail": "429 Too Many Requests"
+  },
+  {
+    "tool": "SGD_get_gene",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
   }
 ]
