@@ -302,5 +302,160 @@
     "status": "schema_mismatch",
     "detail": "GraphQL field blackBoxWarning removed from Drug type; replaced with drugWarnings { warningType, year, country, description, toxicityClass }",
     "fixed": true
+  },
+  {
+    "tool": "OpenTargets_get_drug_chembId_by_generic_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_description_by_chemblId",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: yearOfFirstApproval field removed from Drug type in current OpenTargets API",
+    "fixable": true
+  },
+  {
+    "tool": "OpenTargets_get_drug_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_indications_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_mechanisms_of_action_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_names_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_synonyms_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_trade_names_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_warnings_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_evidence_by_datasource",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_gene_ontology_terms_by_goID",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API",
+    "fixable": true
+  },
+  {
+    "tool": "OpenTargets_get_gwas_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 API returns correctly but return_schema does not match actual structure (stale schema definition)",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_known_drugs_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_parent_child_molecules_by_chembl_ID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_study_credible_sets",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 API returns correctly but return_schema stale, contains l2GPredictions.rows.target fields not in schema",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_target_classes_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_constraint_info_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_enabling_packages_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_gene_ontology_by_ensemblID",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API \u2014 same issue as OpenTargets_get_gene_ontology_terms_by_goID",
+    "fixable": true
+  },
+  {
+    "tool": "OpenTargets_get_target_genomic_location_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_homologues_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_interactions_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_safety_profile_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
   }
 ]
