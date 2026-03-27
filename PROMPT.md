@@ -8,8 +8,8 @@ You are Ralph. Test tools via CLI, fix verified bugs, exit.
 python -m tooluniverse.cli run <Tool> '<json>'   # test (ground truth)
 python -m tooluniverse.cli grep <keyword>         # find tools
 python -m tooluniverse.cli info <Tool>            # get schema
-ruff check --fix src/tooluniverse/<file>.py       # lint after fix
-ruff format src/tooluniverse/<file>.py            # format after fix
+ruff check --fix --config pyproject.toml src/tooluniverse/<file>.py   # lint after fix
+ruff format --config pyproject.toml src/tooluniverse/<file>.py        # format after fix
 ```
 
 ## Workflow
@@ -31,6 +31,15 @@ ruff format src/tooluniverse/<file>.py            # format after fix
 - Validate at input, reject bad params early
 - Distinguish "no data" from "bad query"
 - Check `skills/devtu-self-evolve/references/bug-patterns.md` before reporting new issues
+
+## Formatting
+
+This repo is a fork of mims-harvard/ToolUniverse. Use the PROJECT config, not your global ~/.ruff.toml.
+
+- Always pass `--config pyproject.toml` to ruff commands
+- Project uses: line-length 88, ignores E203/E402/E501/F401/F541, default ruff format settings
+- Your global config (line-length 100, extra lint rules) will create formatting noise that conflicts on upstream merges
+- Only lint/format files you actually changed — never run `ruff check .` or `ruff format .` repo-wide
 
 ## Rules
 
