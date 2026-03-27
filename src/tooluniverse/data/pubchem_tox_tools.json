@@ -29,45 +29,29 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer", "description": "PubChem Compound ID"},
-                                "compound_name": {"type": "string", "description": "Compound name from PubChem record"},
-                                "ghs_classification": {
-                                    "type": "array",
-                                    "description": "GHS hazard classification entries",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {"type": "string", "description": "Classification field name (Pictogram, Signal, GHS Hazard Statements, etc.)"},
-                                            "value": {"type": "string", "description": "Classification value"},
-                                            "pictogram_labels": {
-                                                "type": "array",
-                                                "description": "Pictogram labels if applicable",
-                                                "items": {"type": "string"}
-                                            }
-                                        }
-                                    }
-                                }
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer", "description": "PubChem Compound ID"},
+                "compound_name": {"type": "string", "description": "Compound name from PubChem record"},
+                "ghs_classification": {
+                    "type": "array",
+                    "description": "GHS hazard classification entries",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string", "description": "Classification field name (Pictogram, Signal, GHS Hazard Statements, etc.)"},
+                            "value": {"type": "string", "description": "Classification value"},
+                            "pictogram_labels": {
+                                "type": "array",
+                                "description": "Pictogram labels if applicable",
+                                "items": {"type": "string"}
                             }
                         },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+                        "additionalProperties": true
+                    }
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -100,35 +84,18 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer"},
-                                "compound_name": {"type": "string"},
-                                "toxicity_values_count": {"type": "integer", "description": "Number of toxicity values found"},
-                                "toxicity_values": {
-                                    "type": "array",
-                                    "description": "LD50/LC50 values and other toxicity measurements",
-                                    "items": {"type": "string"}
-                                }
-                            }
-                        },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer"},
+                "compound_name": {"type": "string"},
+                "toxicity_values_count": {"type": "integer", "description": "Number of toxicity values found"},
+                "toxicity_values": {
+                    "type": "array",
+                    "description": "LD50/LC50 values and other toxicity measurements",
+                    "items": {"type": "string"}
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -161,41 +128,25 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer"},
-                                "compound_name": {"type": "string"},
-                                "classification_count": {"type": "integer", "description": "Number of classification entries"},
-                                "classifications": {
-                                    "type": "array",
-                                    "description": "Carcinogen classification entries from various sources",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "source": {"type": ["string", "null"], "description": "Source organization (e.g., IARC, NTP)"},
-                                            "classification": {"type": "string", "description": "Classification text"}
-                                        }
-                                    }
-                                }
-                            }
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer"},
+                "compound_name": {"type": "string"},
+                "classification_count": {"type": "integer", "description": "Number of classification entries"},
+                "classifications": {
+                    "type": "array",
+                    "description": "Carcinogen classification entries from various sources",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "source": {"type": ["string", "null"], "description": "Source organization (e.g., IARC, NTP)"},
+                            "classification": {"type": "string", "description": "Classification text"}
                         },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+                        "additionalProperties": true
+                    }
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -228,35 +179,18 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer"},
-                                "compound_name": {"type": "string"},
-                                "target_organs_count": {"type": "integer"},
-                                "target_organs": {
-                                    "type": "array",
-                                    "description": "Affected organs and body systems",
-                                    "items": {"type": "string"}
-                                }
-                            }
-                        },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer"},
+                "compound_name": {"type": "string"},
+                "target_organs_count": {"type": "integer"},
+                "target_organs": {
+                    "type": "array",
+                    "description": "Affected organs and body systems",
+                    "items": {"type": "string"}
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -289,41 +223,25 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer"},
-                                "compound_name": {"type": "string"},
-                                "effects_count": {"type": "integer"},
-                                "acute_effects": {
-                                    "type": "array",
-                                    "description": "Acute toxicity effects",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "source": {"type": ["string", "null"]},
-                                            "effect": {"type": "string", "description": "Description of the acute effect"}
-                                        }
-                                    }
-                                }
-                            }
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer"},
+                "compound_name": {"type": "string"},
+                "effects_count": {"type": "integer"},
+                "acute_effects": {
+                    "type": "array",
+                    "description": "Acute toxicity effects",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "source": {"type": ["string", "null"]},
+                            "effect": {"type": "string", "description": "Description of the acute effect"}
                         },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+                        "additionalProperties": true
+                    }
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     },
     {
@@ -356,50 +274,35 @@
             }
         ],
         "return_schema": {
-            "oneOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "data": {
-                            "type": "object",
-                            "properties": {
-                                "cid": {"type": "integer"},
-                                "compound_name": {"type": "string"},
-                                "toxicity_sections": {
-                                    "type": "array",
-                                    "description": "Toxicity data sections with subsection details",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "section": {"type": "string", "description": "Main section name"},
-                                            "topics": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "heading": {"type": "string"},
-                                                        "info_count": {"type": "integer", "description": "Number of data entries in this topic"},
-                                                        "preview": {"type": ["string", "null"], "description": "Preview of first data entry"}
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+            "type": "object",
+            "properties": {
+                "cid": {"type": "integer"},
+                "compound_name": {"type": "string"},
+                "toxicity_sections": {
+                    "type": "array",
+                    "description": "Toxicity data sections with subsection details",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "section": {"type": "string", "description": "Main section name"},
+                            "topics": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "heading": {"type": "string"},
+                                        "info_count": {"type": "integer", "description": "Number of data entries in this topic"},
+                                        "preview": {"type": ["string", "null"], "description": "Preview of first data entry"}
+                                    },
+                                    "additionalProperties": true
                                 }
                             }
                         },
-                        "metadata": {"type": "object"}
-                    },
-                    "required": ["data"]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "error": {"type": "string"}
-                    },
-                    "required": ["error"]
+                        "additionalProperties": true
+                    }
                 }
-            ]
+            },
+            "additionalProperties": true
         }
     }
 ]

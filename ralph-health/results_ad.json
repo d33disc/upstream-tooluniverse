@@ -1,0 +1,893 @@
+[
+  {
+    "tool": "PDBeSIFTS_get_all_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper {data:..., metadata:...} but validator checks result['data']; also field name total_structures vs total_pdb_entries/total_chain_mappings",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeSIFTS_get_best_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeSIFTS_get_pdb_to_uniprot",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeValidation_get_outlier_residues",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PDBeValidation_get_quality_scores",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_detail",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_proteins",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_family_proteomes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_get_protein_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_search_clans",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "Pfam_search_families",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PharmGKB_search_drugs",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "PharmGKB_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "PharmGKB_search_variants",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "Pharos_search_targets",
+    "status": "pass",
+    "detail": "all 2 tests passed"
+  },
+  {
+    "tool": "PlantReactome_get_pathway",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PlantReactome_list_species",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array (species list)",
+    "fixed": false
+  },
+  {
+    "tool": "PlantReactome_search_pathways",
+    "status": "schema_mismatch",
+    "detail": "return_schema {status,data} wrapper, data is array",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_get_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses {status,data} wrapper but validator checks result['data']",
+    "fixed": false
+  },
+  {
+    "tool": "PomBase_search_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper, data is array",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper but validator checks result[data]",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_scan_sequence",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PROSITE_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_analyze_binding_site_similarity",
+    "status": "schema_mismatch",
+    "detail": "example1: schema_mismatch; example2: bad request 400 (missing params)",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_generate_interaction_diagram",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_predict_binding_sites",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_predict_binding_sites_v3",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteinsPlus_profile_structure_quality",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteomeXchange_get_dataset",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ProteomeXchange_search_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper; example2 slow ~26s but not timeout",
+    "fixed": false
+  },
+  {
+    "tool": "PubChem_get_compound_xrefs_by_CID",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf/wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_get_assay",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_get_assay_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemBioAssay_search_by_gene",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "PubChemTox_get_acute_effects",
+    "status": "schema_mismatch",
+    "detail": "return_schema oneOf wrapper. Fixed: unwrapped all 6 PubChemTox tools",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_carcinogen_classification",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_ghs_classification",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_target_organs",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "tool": "PubChemTox_get_toxicity_summary",
+    "status": "schema_mismatch",
+    "detail": "Fixed: unwrapped return_schema",
+    "fixed": true
+  },
+  {
+    "discovery": "PATTERN: All tools with return_schema wrapping {status,data} or {data,metadata} fail because jsonschema.validate(result[\"data\"], return_schema) validates just the data value. Fix: unwrap return_schema to describe data content directly with additionalProperties:true. Widespread across: PDBeSIFTS, PDBeValidation, Pfam, PlantReactome, PomBase, PROSITE, ProteinsPlus, ProteomeXchange, PubChemBioAssay, PubChemTox (6 fixed this batch), PharmGKB (3 fixed prev batch)."
+  },
+  {
+    "tool": "PubChemTox_get_toxicity_values",
+    "status": "pass",
+    "detail": "fixed in batch 2, now passes"
+  },
+  {
+    "tool": "PubTator3_LiteratureSearch",
+    "status": "schema_mismatch",
+    "detail": "Tool returns {status, results: [...]} not {status, data: [...]}; result.get(\"data\") = None; needs different key handling or schema fix"
+  },
+  {
+    "tool": "QuickGO_annotations_by_gene",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_annotations_by_goterm",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_get_term_children",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_get_term_detail",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:object.",
+    "fixed": true
+  },
+  {
+    "tool": "RCSBAdvSearch_search_by_motif",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBAdvSearch_search_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_assembly",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_nonpolymer_entity",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_ligand_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_polymer_entity",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_structure_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RDKit_matched_molecular_pair",
+    "status": "missing_dep",
+    "detail": "RDKit is required. Install with: pip install rdkit"
+  },
+  {
+    "tool": "RDKit_pharmacophore_features",
+    "status": "missing_dep",
+    "detail": "RDKit is required. Install with: pip install rdkit"
+  },
+  {
+    "tool": "ReactomeAnalysis_pathway_enrichment",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeAnalysis_species_comparison",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_get_contained_events",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_get_enhanced_pathway",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper, validator checks result[\"data\"]"
+  },
+  {
+    "tool": "ReactomeInteractors_get_entity_pathways",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ReactomeInteractors_get_protein_interactors",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ReactomeInteractors_search_entity",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RGD_get_annotations",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_get_gene",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_get_orthologs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "RGD_search_genes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "Rhea_search_by_chebi",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "Rhea_search_by_ec",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "Rhea_search_reactions",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "RNAcentral_get_by_accession",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "RNAcentral_search",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "RxClass_find_classes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RxClass_get_class_members",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "RxClass_get_drug_classes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SCXA_search_gene",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "SCXA API request timed out after 60s"
+  },
+  {
+    "tool": "SemanticScholar_get_paper",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "SemanticScholar_search_papers",
+    "status": "rate_limited",
+    "fixed": false,
+    "detail": "429 Too Many Requests"
+  },
+  {
+    "tool": "SGD_get_gene",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_go_annotations",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_interactions",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_get_phenotypes",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SGD_search",
+    "status": "pass",
+    "fixed": true,
+    "detail": "fixed in batch 4"
+  },
+  {
+    "tool": "SIDER_get_drug_indications",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_get_drug_side_effects",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_get_drugs_for_side_effect",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_search_drug",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIDER_search_side_effect",
+    "status": "dead_api",
+    "fixed": false,
+    "detail": "Failed to connect to SIDER"
+  },
+  {
+    "tool": "SIMBAD_query_object",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "STRING_get_enrichment",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "STRING_get_functional_annotations",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "STRING_get_protein_interactions",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "wrapper schema wraps array, fixed to direct array"
+  },
+  {
+    "tool": "SwissDock_check_job_status",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissDock_dock_ligand",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissDock_retrieve_results",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Docking job failed: Unknown error"
+  },
+  {
+    "tool": "SwissModel_get_models",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SwissModel_get_summary",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "SwissTargetPrediction_predict",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Failed to extract job URL from prediction response"
+  },
+  {
+    "tool": "SynBioHub_get_collections",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "SynBioHub_get_part",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "SynBioHub_search_parts",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 403 Forbidden"
+  },
+  {
+    "tool": "T3DB_get_toxin",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "T3DB_search_toxins",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "TCDB_search_by_substrate",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "ThreeDBeacons_get_structure_summary",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ThreeDBeacons_get_structures",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "TIMEOUT",
+    "status": "not_found",
+    "fixed": false,
+    "detail": "Tool not in registry"
+  },
+  {
+    "tool": "Tool_Finder",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "hangs after start, never returns"
+  },
+  {
+    "tool": "Tool_RAG",
+    "status": "timeout",
+    "fixed": false,
+    "detail": "hangs after start, never returns"
+  },
+  {
+    "tool": "ToolDiscover",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "Error in ComposeTool 'ToolDiscover': 'result'"
+  },
+  {
+    "tool": "UCSC_get_cpg_islands",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_encode_cCREs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_sequence",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_tf_binding_clusters",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_get_track",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UCSC_search",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniChem_list_sources",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniChem_search_compound",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniParc_get_entry",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniParc_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_convert_ids",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_gene_to_uniprot",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_list_databases",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_to_pdb",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtLocations_get_location",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtRef_get_disease",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_get_keyword",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_get_proteome",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_diseases",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_keywords",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_proteomes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtTaxonomy_get_taxon",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtTaxonomy_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniRef_get_cluster",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniRef_search_clusters",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "Unpaywall_check_oa_status",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 422 Unprocessable Entity"
+  },
+  {
+    "tool": "VariantValidator_gene2transcripts",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "WikiPathways_find_pathways_by_gene",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WikiPathways_get_pathway_genes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WorldBank_get_indicator",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "WormBase_get_expression",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WormBase_get_gene",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WormBase_get_phenotypes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "ZFIN_get_allele",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_alleles",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_expression",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_orthologs",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "ZFIN_get_gene_phenotypes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  }
+]
