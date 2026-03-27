@@ -176,7 +176,7 @@
   },
   {
     "name": "OpenTargets_target_disease_evidence",
-    "description": "Explore IntOGen somatic driver evidence for a target-disease association. IMPORTANT: IntOGen only covers somatic tumor driver mutations — this tool returns empty data ({}) for non-cancer diseases (e.g., type 2 diabetes, hypertension). Empty results are expected and normal when querying non-oncology phenotypes. For non-cancer diseases or to query other data sources, use OpenTargets_get_evidence_by_datasource instead. Accepts gene_symbol (e.g. 'TP53') and disease_name (e.g. 'Crohn disease') as alternatives to ensemblId/efoId — IDs are auto-resolved via OpenTargets search.",
+    "description": "Explore IntOGen somatic driver evidence for a target-disease association. IMPORTANT: IntOGen only covers somatic tumor driver mutations \u2014 this tool returns empty data ({}) for non-cancer diseases (e.g., type 2 diabetes, hypertension). Empty results are expected and normal when querying non-oncology phenotypes. For non-cancer diseases or to query other data sources, use OpenTargets_get_evidence_by_datasource instead. Accepts gene_symbol (e.g. 'TP53') and disease_name (e.g. 'Crohn disease') as alternatives to ensemblId/efoId \u2014 IDs are auto-resolved via OpenTargets search.",
     "label": [
       "Target",
       "Disease",
@@ -1438,7 +1438,7 @@
         "ensemblId"
       ]
     },
-    "query_schema": "\n      query targetGeneOntology($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneOntology {\n            aspect\n            evidence\n            geneProduct\n            source\n            term {\n              id\n              name\n            }\n          }\n        }\n      }\n    ",
+    "query_schema": "\n      query targetGeneOntology($ensemblId: String!) {\n        target(ensemblId: $ensemblId) {\n          id\n          approvedSymbol\n          geneOntology {\n            aspect\n            evidence\n            geneProduct\n            source\n            term {\n              id\n            }\n          }\n        }\n      }\n    ",
     "label": [
       "Target",
       "GeneOntology",
@@ -1487,9 +1487,6 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
-                          },
-                          "name": {
                             "type": "string"
                           }
                         }
@@ -4143,7 +4140,7 @@
         "goIds"
       ]
     },
-    "query_schema": "\n      query fetchGeneOntologyTerms($goIds: [String!]!) {\n        geneOntologyTerms(goIds: $goIds) {\n          id\n          name\n        }\n      }\n    ",
+    "query_schema": "\n      query fetchGeneOntologyTerms($goIds: [String!]!) {\n        geneOntologyTerms(goIds: $goIds) {\n          id\n        }\n      }\n    ",
     "label": [
       "GeneOntology",
       "Data Retrieval and Aggregation",
