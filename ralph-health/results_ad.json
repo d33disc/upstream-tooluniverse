@@ -240,5 +240,121 @@
   },
   {
     "discovery": "PATTERN: All tools with return_schema wrapping {status,data} or {data,metadata} fail because jsonschema.validate(result[\"data\"], return_schema) validates just the data value. Fix: unwrap return_schema to describe data content directly with additionalProperties:true. Widespread across: PDBeSIFTS, PDBeValidation, Pfam, PlantReactome, PomBase, PROSITE, ProteinsPlus, ProteomeXchange, PubChemBioAssay, PubChemTox (6 fixed this batch), PharmGKB (3 fixed prev batch)."
+  },
+  {
+    "tool": "PubChemTox_get_toxicity_values",
+    "status": "pass",
+    "detail": "fixed in batch 2, now passes"
+  },
+  {
+    "tool": "PubTator3_LiteratureSearch",
+    "status": "schema_mismatch",
+    "detail": "Tool returns {status, results: [...]} not {status, data: [...]}; result.get(\"data\") = None; needs different key handling or schema fix"
+  },
+  {
+    "tool": "QuickGO_annotations_by_gene",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array directly.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_annotations_by_goterm",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_get_term_children",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:array.",
+    "fixed": true
+  },
+  {
+    "tool": "QuickGO_get_term_detail",
+    "status": "schema_mismatch",
+    "detail": "oneOf wrapper. Fixed: unwrapped to type:object.",
+    "fixed": true
+  },
+  {
+    "tool": "RCSBAdvSearch_search_by_motif",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBAdvSearch_search_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_assembly",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_entry",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBData_get_nonpolymer_entity",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_ligand_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_polymer_entity",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RCSBGraphQL_get_structure_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "RDKit_matched_molecular_pair",
+    "status": "missing_dep",
+    "detail": "RDKit is required. Install with: pip install rdkit"
+  },
+  {
+    "tool": "RDKit_pharmacophore_features",
+    "status": "missing_dep",
+    "detail": "RDKit is required. Install with: pip install rdkit"
+  },
+  {
+    "tool": "ReactomeAnalysis_pathway_enrichment",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeAnalysis_species_comparison",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_get_contained_events",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
+  },
+  {
+    "tool": "ReactomeContent_get_enhanced_pathway",
+    "status": "schema_mismatch",
+    "detail": "return_schema uses oneOf wrapper",
+    "fixed": false
   }
 ]
