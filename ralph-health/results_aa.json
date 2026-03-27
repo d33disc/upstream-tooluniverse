@@ -211,5 +211,116 @@
     "tool": "BVBRC_search_amr",
     "status": "schema_mismatch",
     "detail": "return_schema does not match actual response; data wrapper layer present"
+  },
+  {
+    "tool": "BVBRC_search_epitopes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_genome_features",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_genomes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_pathways",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_protein_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_specialty_genes",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_subsystems",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_surveillance",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "BVBRC_search_taxonomy",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CATH_get_domain_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "CATH_get_superfamily",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "cdc_data_search_datasets",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_list_cell_types",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_search_by_cell_type",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CellMarker_search_cancer_markers",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "CELLxGENE_download_h5ad",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_cell_metadata",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_census_versions",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_embeddings",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_expression_data",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package (pip install cellxgene-census)"
   }
 ]
