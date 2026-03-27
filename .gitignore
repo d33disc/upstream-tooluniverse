@@ -178,6 +178,8 @@ DEVTU_*.md
 # Ralph loop operational files
 progress.txt
 ralph.log
+ralph-health/logs/
+ralph-health/results_*.json
 
-# Ralph loop tracked files (override IMPLEMENTATION_*.md exclusion above)
+# Ralph loop tracked files (override IMPLEMENTATION_*.md exclusion)
 !IMPLEMENTATION_PLAN.md
