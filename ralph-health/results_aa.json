@@ -322,5 +322,116 @@
     "tool": "CELLxGENE_get_expression_data",
     "status": "missing_dep",
     "detail": "requires cellxgene-census package (pip install cellxgene-census)"
+  },
+  {
+    "tool": "CELLxGENE_get_gene_metadata",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package"
+  },
+  {
+    "tool": "CELLxGENE_get_presence_matrix",
+    "status": "missing_dep",
+    "detail": "requires cellxgene-census package"
+  },
+  {
+    "tool": "ChEBI_get_compound",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ChEBI_get_ontology_children",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ChEBI_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Chem_sa_score",
+    "status": "missing_dep",
+    "detail": "requires RDKit (No module named 'rdkit')"
+  },
+  {
+    "tool": "ClinGen_get_actionability_adult",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ClinGen_get_variant_classifications",
+    "status": "timeout",
+    "detail": "test hangs indefinitely, no output"
+  },
+  {
+    "tool": "ClinGen_search_actionability",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ClinGenAR_get_external_records",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinGenAR_lookup_allele",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_database_stats",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_field_values",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_get_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_by_intervention",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_by_sponsor",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ClinicalTrials_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "COD_get_structure",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>20s), likely slow API or connection issue"
+  },
+  {
+    "tool": "COD_search_structures",
+    "status": "timeout",
+    "detail": "test hangs indefinitely (>20s), likely slow API or connection issue"
+  },
+  {
+    "tool": "CPIC_get_recommendations",
+    "status": "schema_mismatch",
+    "detail": "return_schema expects array but result['data'] is object with 'recommendations' key"
   }
 ]
