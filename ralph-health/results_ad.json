@@ -711,5 +711,124 @@
     "status": "schema_mismatch",
     "fixed": false,
     "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniParc_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_convert_ids",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_gene_to_uniprot",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_list_databases",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtIDMap_to_pdb",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtLocations_get_location",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtRef_get_disease",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_get_keyword",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_get_proteome",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_diseases",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_keywords",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtRef_search_proteomes",
+    "status": "schema_mismatch",
+    "fixed": true,
+    "detail": "oneOf wrapper fixed"
+  },
+  {
+    "tool": "UniProtTaxonomy_get_taxon",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniProtTaxonomy_search",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniRef_get_cluster",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "UniRef_search_clusters",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "Unpaywall_check_oa_status",
+    "status": "server_error",
+    "fixed": false,
+    "detail": "HTTP 422 Unprocessable Entity"
+  },
+  {
+    "tool": "VariantValidator_gene2transcripts",
+    "status": "pass",
+    "fixed": false
+  },
+  {
+    "tool": "WikiPathways_find_pathways_by_gene",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
+  },
+  {
+    "tool": "WikiPathways_get_pathway_genes",
+    "status": "schema_mismatch",
+    "fixed": false,
+    "detail": "oneOf wrapper"
   }
 ]
