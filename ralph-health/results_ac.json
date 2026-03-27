@@ -457,5 +457,112 @@
     "tool": "OpenTargets_get_target_safety_profile_by_ensemblID",
     "status": "pass_on_retry",
     "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_subcell_locations_by_ensembl_ID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_synonyms_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_tractability_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_variant_credible_sets",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns correct l2GPredictions.rows.target data but schema stale; same pattern as OpenTargets_get_study_credible_sets",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_variant_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns variant data (alleleFrequencies, mostSevereConsequence etc.) but schema does not match actual structure",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_multi_entity_search_by_query_string",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_search_category_counts_by_query_string",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_search_gwas_studies_by_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns studies with nSamples and studyType fields, schema stale; same pattern as OpenTargets_get_gwas_study",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_target_disease_evidence",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTopoData_get_elevation",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTree_get_induced_subtree",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (newick + supporting_studies object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_get_mrca",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (mrca_name, mrca_ott_id, mrca_rank, mrca_node_id, num_tips object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_get_taxon",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (ott_id, name, rank, synonyms, flags object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_match_names",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (array of match objects)",
+    "fixed": true
+  },
+  {
+    "tool": "ORCID_get_employments",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_get_profile",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_get_works",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_search_researchers",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_classification",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_disease",
+    "status": "pass_on_retry",
+    "detail": "passes now"
   }
 ]
