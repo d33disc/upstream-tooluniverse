@@ -1,0 +1,23 @@
+[
+  {"tool": "ADMETAI_predict_BBB_penetrance", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_bioavailability", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_clearance_distribution", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_CYP_interactions", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_nuclear_receptor_activity", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_physicochemical_properties", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_solubility_lipophilicity_hydration", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_stress_response", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "ADMETAI_predict_toxicity", "status": "missing_dep", "detail": "requires 'admet-ai' package (pip install tooluniverse[ml])"},
+  {"tool": "Alliance_get_disease", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
+  {"tool": "Alliance_get_disease_genes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
+  {"tool": "Alliance_get_gene", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
+  {"tool": "Alliance_get_gene_phenotypes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
+  {"tool": "Alliance_search_genes", "status": "schema_mismatch", "detail": "return_schema had extra data wrapper layer; test framework validates result['data'] directly", "fixed": true},
+  {"tool": "Anaconda_search_packages", "status": "pass", "detail": "all 3 tests passed"},
+  {"tool": "Bgee_get_gene_expression", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools); optional fields cell_type_id/cell_type_name also present"},
+  {"tool": "Bgee_list_species", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"},
+  {"tool": "Bgee_search_genes", "status": "schema_mismatch", "detail": "return_schema has extra data wrapper layer (same pattern as Alliance tools)"},
+  {"tool": "BindingDB_get_ligands_by_pdb", "status": "dead_api", "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"},
+  {"tool": "BindingDB_get_ligands_by_uniprot", "status": "dead_api", "detail": "BindingDB REST API hardcoded as unavailable; tool returns error suggesting ChEMBL instead"},
+  {"status": "discovery", "detail": "CRITICAL: python -m tooluniverse.cli loads from editable install at /Users/davis/code/ToolUniverse/src, NOT from worktree /tmp/tu-health-aa/src. All test and fix commands must use PYTHONPATH=/tmp/tu-health-aa/src prefix. Pattern: all schema_mismatch tools with 'data wrapper' pattern affect the same JSON schemas."}
+]
