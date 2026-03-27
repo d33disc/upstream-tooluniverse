@@ -136,7 +136,7 @@ class ToolUniverseClient:
                     raise Exception(f"[{error_type}] {error_msg}")
 
                 return result.get("result")
-            
+
             except requests.exceptions.ReadTimeout:
                 print(method_name, kwargs, "timed out")
                 return f"Error: Tool execution timed out after 30 seconds"

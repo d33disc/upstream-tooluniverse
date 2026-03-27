@@ -84,7 +84,9 @@ def _clean_desc(text: str) -> str:
 
 def _is_valid_tool_name(name: str) -> bool:
     """Return True only for names that are safe Python identifiers."""
-    return name.isidentifier() and not name.startswith("_") and not keyword.iskeyword(name)
+    return (
+        name.isidentifier() and not name.startswith("_") and not keyword.iskeyword(name)
+    )
 
 
 def _safe_param(name: str) -> str:

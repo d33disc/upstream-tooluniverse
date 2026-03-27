@@ -76,9 +76,7 @@ class CryoETTool(BaseTool):
             if tissue:
                 where_parts.append(f'tissueName: {{_ilike: "%{tissue}%"}}')
 
-            where_clause = (
-                "{" + ", ".join(where_parts) + "}" if where_parts else "null"
-            )
+            where_clause = "{" + ", ".join(where_parts) + "}" if where_parts else "null"
             where_arg = f"where: {where_clause}, " if where_parts else ""
 
             query = f"""
