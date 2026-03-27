@@ -654,5 +654,120 @@
     "status": "schema_mismatch",
     "detail": "return_schema had extra data wrapper layer",
     "fixed": true
+  },
+  {
+    "tool": "EBIProteins_get_proteomics_peptides",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_proteomics_ptm",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_structural_features",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBIProteins_get_variation",
+    "status": "pass",
+    "detail": "pass_on_retry (was fixed in batch 6 JSON)"
+  },
+  {
+    "tool": "EBITaxonomy_get_by_id",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_get_by_scientific_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_search_by_name",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "EBITaxonomy_suggest",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ELM_list_classes",
+    "status": "pass",
+    "detail": "all tests passed"
+  },
+  {
+    "tool": "ENAPortal_count_records",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENAPortal_search_samples",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENAPortal_search_studies",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_get_chromatin_state",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_chromatin_accessibility",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_histone_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_methylation_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "ENCODE_search_rnaseq_experiments",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_assembly_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
+  },
+  {
+    "tool": "Ensembl_get_cross_references",
+    "status": "schema_mismatch",
+    "detail": "return_schema had extra data wrapper layer",
+    "fixed": true
   }
 ]
