@@ -27,99 +27,65 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "HPO term ID (e.g., HP:0001250)"
-                },
-                "name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Term name"
-                },
-                "definition": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Full term definition"
-                },
-                "comment": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "description": "Additional comments or notes"
-                },
-                "synonyms": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Alternative names for the term"
-                },
-                "descendant_count": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "description": "Number of more specific child terms"
-                },
-                "xrefs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Cross-references (UMLS, SNOMED-CT, etc.)"
-                },
-                "translations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  },
-                  "description": "Translations in other languages"
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "term_id": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "required": [
-            "data"
-          ]
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "HPO term ID (e.g., HP:0001250)"
         },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Term name"
+        },
+        "definition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Full term definition"
+        },
+        "comment": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Additional comments or notes"
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "required": [
-            "error"
-          ]
+          "description": "Alternative names for the term"
+        },
+        "descendant_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Number of more specific child terms"
+        },
+        "xrefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cross-references (UMLS, SNOMED-CT, etc.)"
+        },
+        "translations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Translations in other languages"
         }
-      ]
+      }
     }
   },
   {
@@ -158,84 +124,47 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "HPO term ID"
-                  },
-                  "name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Term name"
-                  },
-                  "definition": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Term definition"
-                  },
-                  "descendant_count": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "description": "Number of child terms"
-                  },
-                  "synonyms": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "First 5 synonyms"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "query": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                }
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "HPO term ID"
           },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Term name"
+          },
+          "definition": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Term definition"
+          },
+          "descendant_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of child terms"
+          },
+          "synonyms": {
+            "type": "array",
+            "items": {
               "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+            },
+            "description": "First 5 synonyms"
+          }
         }
-      ]
+      }
     }
   },
   {
@@ -275,66 +204,26 @@
       }
     ],
     "return_schema": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "HPO term ID"
-                  },
-                  "name": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Term name"
-                  }
-                }
-              }
-            },
-            "metadata": {
-              "type": "object",
-              "properties": {
-                "source": {
-                  "type": "string"
-                },
-                "term_id": {
-                  "type": "string"
-                },
-                "direction": {
-                  "type": "string"
-                },
-                "total_results": {
-                  "type": "integer"
-                }
-              }
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "HPO term ID"
           },
-          "required": [
-            "data"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "error"
-          ]
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Term name"
+          }
         }
-      ]
+      }
     }
   }
 ]
