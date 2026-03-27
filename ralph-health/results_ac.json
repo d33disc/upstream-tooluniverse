@@ -1,0 +1,776 @@
+[
+  {
+    "tool": "NCIThesaurus_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in {type:object,data:array} but validator validates result['data'] directly \u2014 needs array schema at root",
+    "fixed": true
+  },
+  {
+    "tool": "NDEx_get_network",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NDEx_get_network_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NDEx_search_networks",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_field_values",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_morphometry",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_get_neuron",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NeuroMorpho_search_neurons",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "Nextstrain_get_dataset",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "Nextstrain_list_datasets",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "NICE_Clinical_Guidelines_Search",
+    "status": "no_data",
+    "detail": "returns error 'No NICE guidelines found' for test query \u2014 possible scraping issue or NICE site change"
+  },
+  {
+    "tool": "OMA_get_group",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_hog",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_orthologs",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMA_get_protein",
+    "status": "auth",
+    "detail": "HTTP 403 \u2014 OMA API requires authentication token"
+  },
+  {
+    "tool": "OMIM_get_clinical_synopsis",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_get_entry",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_get_gene_map",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OMIM_search",
+    "status": "auth",
+    "detail": "needs OMIM_API_KEY (register at omim.org/api)"
+  },
+  {
+    "tool": "OmniPath_get_cell_communication_annotations",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, needs direct schema for result['data']"
+  },
+  {
+    "tool": "OmniPath_get_complexes",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object, same pattern as NCIThesaurus \u2014 needs direct schema for result['data']"
+  },
+  {
+    "tool": "OmniPath_get_dorothea_regulon",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_enzyme_substrate",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_intercell_roles",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_ligand_receptor_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_signaling_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OmniPath_get_tf_target_interactions",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_get_type",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_list_tissues",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OncoTree_search",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OpenCitations_get_citation_count",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenFoodFacts_search_products",
+    "status": "server_error",
+    "detail": "HTTP 503 from openfoodfacts.org \u2014 intermittent; example 2 passed"
+  },
+  {
+    "tool": "OpenML_get_dataset",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenML_search_datasets",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_get_dataset",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_get_dataset_snapshots",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_list_datasets",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenNeuro_search_by_modality",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_drug_pharmacogenomics_data",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object"
+  },
+  {
+    "tool": "OpenTargets_get_approved_indications_by_drug_chemblId",
+    "status": "schema_mismatch",
+    "detail": "GraphQL field 'approvedIndications' renamed to 'indications' in current API \u2014 HTTP 400: Cannot query field 'approvedIndications' on type 'Drug'. Did you mean 'indications'?",
+    "fixable": true,
+    "fixed": true
+  },
+  {
+    "tool": "OpenTargets_get_associated_diseases_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_drugs_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_drugs_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_phenotypes_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_targets_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_associated_targets_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_biological_mouse_models_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_chemical_probes_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_credible_set_detail",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 response data structure does not match any schema variant (all[] empty). API data returns fine, schema is stale.",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_disease_ancestors_parents_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_descendants_children_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_description_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_locations_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now - returns empty locations (field not populated for Crohn disease)"
+  },
+  {
+    "tool": "OpenTargets_get_disease_synonyms_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_disease_therapeutic_areas_by_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_diseases_phenotypes_by_target_ensembl",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_adverse_events_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_approval_status_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_blackbox_status_by_chembl_ID",
+    "status": "schema_mismatch",
+    "detail": "GraphQL field blackBoxWarning removed from Drug type; replaced with drugWarnings { warningType, year, country, description, toxicityClass }",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTargets_get_drug_chembId_by_generic_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_description_by_chemblId",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: yearOfFirstApproval field removed from Drug type in current OpenTargets API",
+    "fixable": true
+  },
+  {
+    "tool": "OpenTargets_get_drug_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_indications_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_mechanisms_of_action_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_names_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_synonyms_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_trade_names_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_drug_warnings_by_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_evidence_by_datasource",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_gene_ontology_terms_by_goID",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API",
+    "fixable": true,
+    "fixed": true
+  },
+  {
+    "tool": "OpenTargets_get_gwas_study",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 API returns correctly but return_schema does not match actual structure (stale schema definition)",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_known_drugs_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_parent_child_molecules_by_chembl_ID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_publications_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_disease_efoId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_drug_chemblId",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_similar_entities_by_target_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_study_credible_sets",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails \u2014 API returns correctly but return_schema stale, contains l2GPredictions.rows.target fields not in schema",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_target_classes_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_constraint_info_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_enabling_packages_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_gene_ontology_by_ensemblID",
+    "status": "schema_mismatch",
+    "detail": "HTTP 400: GeneOntologyTerm.name field removed from OpenTargets API \u2014 same issue as OpenTargets_get_gene_ontology_terms_by_goID",
+    "fixable": true,
+    "fixed": true
+  },
+  {
+    "tool": "OpenTargets_get_target_genomic_location_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_homologues_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_id_description_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_interactions_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_safety_profile_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_subcell_locations_by_ensembl_ID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_synonyms_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_target_tractability_by_ensemblID",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_get_variant_credible_sets",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns correct l2GPredictions.rows.target data but schema stale; same pattern as OpenTargets_get_study_credible_sets",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_get_variant_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns variant data (alleleFrequencies, mostSevereConsequence etc.) but schema does not match actual structure",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_multi_entity_search_by_query_string",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_search_category_counts_by_query_string",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTargets_search_gwas_studies_by_disease",
+    "status": "schema_mismatch",
+    "detail": "return_schema validation fails — API returns studies with nSamples and studyType fields, schema stale; same pattern as OpenTargets_get_gwas_study",
+    "fixable": false
+  },
+  {
+    "tool": "OpenTargets_target_disease_evidence",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTopoData_get_elevation",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OpenTree_get_induced_subtree",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (newick + supporting_studies object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_get_mrca",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (mrca_name, mrca_ott_id, mrca_rank, mrca_node_id, num_tips object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_get_taxon",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (ott_id, name, rank, synonyms, flags object)",
+    "fixed": true
+  },
+  {
+    "tool": "OpenTree_match_names",
+    "status": "schema_mismatch",
+    "detail": "return_schema wrapped data in outer object; fixed by describing result['data'] content directly (array of match objects)",
+    "fixed": true
+  },
+  {
+    "tool": "ORCID_get_employments",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_get_profile",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_get_works",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "ORCID_search_researchers",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_classification",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_disease",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_epidemiology",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_gene_diseases",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_natural_history",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_get_phenotypes",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_search_by_name",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "Orphanet_search_diseases",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OrthoDB_get_group_details",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns go_terms/kegg_pathways/interpro_domains (some null) but schema does not match"
+  },
+  {
+    "tool": "OrthoDB_get_orthologs",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns orthologs array with group_id/group_name/level_taxid/organism fields"
+  },
+  {
+    "tool": "OrthoDB_search_groups",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns groups array (some missing name/level_taxid) with total_groups"
+  },
+  {
+    "tool": "OSF_search_preprints",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "OxO_get_ontology_mappings",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns query_label null, source_type null in mappings"
+  },
+  {
+    "tool": "OxO_search_ontology_mappings",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns queries count + results array with query_id/mappings_count/mappings"
+  },
+  {
+    "tool": "Paleobiology_get_fossils",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_get_panel",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_search_genes",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PanelApp_search_panels",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PANTHER_enrichment",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns enriched_terms array with term_id/term_label/fold_enrichment/pvalue/fdr/direction"
+  },
+  {
+    "tool": "PANTHER_gene_info",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns annotations array with category/terms objects"
+  },
+  {
+    "tool": "PANTHER_ortholog",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns mapping object with source_gene/target_gene/ortholog_type/persistent_id"
+  },
+  {
+    "tool": "PathwayCommons_get_neighborhood",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PathwayCommons_get_pathway",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PathwayCommons_search",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDB_REDO_get_structure_quality",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBe_get_bound_molecules",
+    "status": "no_data",
+    "detail": "example 1 (4hhb) returns 404 — no bound molecules for that PDB ID; example 2 (1cbs) passes. Test data issue, not a tool bug."
+  },
+  {
+    "tool": "PDBe_get_compound_details",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBe_get_compound_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {comp_id, name, formula, weight, first_observed_in, pdb_entries}"
+  },
+  {
+    "tool": "PDBe_get_compound_summary",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns rich compound object with inchi/smiles/systematic_names/cross_references"
+  },
+  {
+    "tool": "PDBe_get_funpdbe_annotations",
+    "status": "no_data",
+    "detail": "example 1 (4hhb) returns 404 — no funpdbe annotations for that PDB ID; example 2 (1cbs) passes. Test data issue, not a tool bug."
+  },
+  {
+    "tool": "PDBe_get_residue_listing",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {pdb_id, molecules: [{entity_id, chains: [{chain_id, struct_asym_id, total_residues, residues: [...]}]}], total_molecules}"
+  },
+  {
+    "tool": "PDBe_get_structure_ligands",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {pdb_id, ligands: [{chem_comp_id, chem_comp_name, weight, chain_id, entity_id, author_residue_number, carbohydrate_polymer, annotations}], total_ligands}"
+  },
+  {
+    "tool": "PDBe_get_uniprot_mappings",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBe_get_uniprot_structure_coverage",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBe_KB_get_interface_residues",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {uniprot_accession, protein_length, interaction_partners: [{partner_name, partner_accession, interface_residues: [{start, end, pdb_entries}]}]}"
+  },
+  {
+    "tool": "PDBe_KB_get_ligand_sites",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {uniprot_accession, protein_length, ligands: [{name, accession, binding_residues, is_cofactor, is_solvent, chembl_id, drugbank_id}]}"
+  },
+  {
+    "tool": "PDBe_KB_get_summary_stats",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns simple flat object {uniprot_accession, pdbs, ligands, interaction_partners, annotations, similar_proteins}"
+  },
+  {
+    "tool": "PDBe_KB_get_superposition_clusters",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns {uniprot_accession, segments: [{segment_start, segment_end, num_clusters, clusters: [{representative, total_members, members}]}], total_segments}"
+  },
+  {
+    "tool": "PDBePISA_get_interfaces",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBePISA_get_monomer_analysis",
+    "status": "pass_on_retry",
+    "detail": "passes now"
+  },
+  {
+    "tool": "PDBeSearch_get_compound",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns flat compound object {name, formula, weight, compound_type, inchi, inchi_key, smiles, systematic_name, compound_id}"
+  },
+  {
+    "tool": "PDBeSearch_search_by_organism",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns list of {pdb_id, title, resolution, experimental_method, deposition_date, organism}"
+  },
+  {
+    "tool": "PDBeSearch_search_structures",
+    "status": "schema_mismatch",
+    "detail": "return_schema wraps data in outer object; API returns list of {pdb_id, title, resolution, experimental_method, deposition_date, number_of_entities (null), organism}"
+  }
+]
